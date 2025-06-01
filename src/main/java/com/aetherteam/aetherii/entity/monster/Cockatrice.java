@@ -58,7 +58,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
         this.goalSelector.addGoal(2, new RestrictSunGoal(this));
         this.goalSelector.addGoal(3, new FleeSunGoal(this, 1.5));
         this.goalSelector.addGoal(4, new Cockatrice.CockatriceMeleeAttackGoal(this, 1.15F, true, 6.0F));
-        this.goalSelector.addGoal(5, new Cockatrice.CockatriceRangedAttackGoal(this, 0.8F, 200, 300, 15.0F));
+        this.goalSelector.addGoal(5, new Cockatrice.CockatriceRangedAttackGoal(this, 1.15F, 200, 300, 15.0F, 6.0F));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.6));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
@@ -189,12 +189,10 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
     protected static class CockatriceMeleeAttackGoal extends MeleeAttackGoal {
         private int ticksUntilNextAttack;
         private boolean attack;
-        private final float attackThreshold;
         private final float attackThresholdSqr;
 
         public CockatriceMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen, float attackThreshold) {
             super(mob, speedModifier, followingTargetEvenIfNotSeen);
-            this.attackThreshold = attackThreshold;
             this.attackThresholdSqr = attackThreshold * attackThreshold;
         }
 
@@ -264,8 +262,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
     }
 
     protected static class CockatriceRangedAttackGoal extends Goal {
-        private final Mob mob;
-        private final RangedAttackMob rangedAttackMob;
+        private final Cockatrice cockatrice;
         private int attackTime = -1;
         private final double speedModifier;
         private int seeTime;
@@ -273,43 +270,47 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
         private final int attackIntervalMax;
         private final float attackRadius;
         private final float attackRadiusSqr;
+        private final float attackThresholdSqr;
+        private LivingEntity trackedTarget;
 
-        public CockatriceRangedAttackGoal(RangedAttackMob rangedAttackMob, double speedModifier, int attackInterval, float attackRadius) {
-            this(rangedAttackMob, speedModifier, attackInterval, attackInterval, attackRadius);
-        }
-
-        public CockatriceRangedAttackGoal(RangedAttackMob rangedAttackMob, double speedModifier, int attackIntervalMin, int attackIntervalMax, float attackRadius) {
-            if (!(rangedAttackMob instanceof LivingEntity)) {
-                throw new IllegalArgumentException("CockatriceRangedAttackGoal requires Mob implements RangedAttackMob");
-            } else {
-                this.rangedAttackMob = rangedAttackMob;
-                this.mob = (Mob) rangedAttackMob;
-                this.speedModifier = speedModifier;
-                this.attackIntervalMin = attackIntervalMin;
-                this.attackIntervalMax = attackIntervalMax;
-                this.attackRadius = attackRadius;
-                this.attackRadiusSqr = attackRadius * attackRadius;
-                this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
-            }
+        public CockatriceRangedAttackGoal(Cockatrice cockatrice, double speedModifier, int attackIntervalMin, int attackIntervalMax, float attackRadius, float attackThreshold) {
+            this.cockatrice = cockatrice;
+            this.speedModifier = speedModifier;
+            this.attackIntervalMin = attackIntervalMin;
+            this.attackIntervalMax = attackIntervalMax;
+            this.attackRadius = attackRadius;
+            this.attackRadiusSqr = attackRadius * attackRadius;
+            this.attackThresholdSqr = attackThreshold * attackThreshold;
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
         }
 
         @Override
         public boolean canUse() {
-            return this.mob.getTarget() != null && this.mob.distanceToSqr(this.mob.getTarget()) >= 6 * 6;
+            return this.cockatrice.getTarget() != null && this.cockatrice.getTarget().isAlive() && this.cockatrice.distanceToSqr(this.cockatrice.getTarget()) >= this.attackThresholdSqr;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.trackedTarget != null;
+        }
+
+        @Override
+        public void start() {
+            this.trackedTarget = this.cockatrice.getTarget();
         }
 
         @Override
         public void stop() {
             this.seeTime = 0;
             this.attackTime = -1;
+            this.trackedTarget = null;
         }
 
         @Override
         public void tick() {
-            LivingEntity target = this.mob.getTarget();
-            if (target != null) {
-                double distance = this.mob.distanceToSqr(target.getX(), target.getY(), target.getZ());
-                boolean canSee = this.mob.getSensing().hasLineOfSight(target);
+            if (this.trackedTarget != null) {
+                double distance = this.cockatrice.distanceToSqr(this.trackedTarget);
+                boolean canSee = this.cockatrice.getSensing().hasLineOfSight(this.trackedTarget);
 
                 if (canSee) {
                     ++this.seeTime;
@@ -317,26 +318,27 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
                     this.seeTime = 0;
                 }
                 if (distance <= (double) this.attackRadiusSqr && this.seeTime >= 5) {
-                    this.mob.getNavigation().stop();
+                    this.cockatrice.getNavigation().stop();
                 }
                 if (distance > (double) this.attackRadiusSqr || this.seeTime < 5 || !this.isTimeToAttack()) {
-                    this.mob.getNavigation().moveTo(target, this.speedModifier);
+                    this.cockatrice.getNavigation().moveTo(this.trackedTarget, this.speedModifier);
                 }
-                this.mob.getLookControl().setLookAt(target, 30.0F, 30.0F);
+                this.cockatrice.getLookControl().setLookAt(this.trackedTarget, 30.0F, 30.0F);
 
-                if (canSee) {
-                    float f = (float) Math.sqrt(distance) / this.attackRadius;
-                    float f1 = Mth.clamp(f, 0.1F, 1.0F);
-                    if (++this.attackTime >= 0) {
-                        if (this.attackTime == 0) {
-                            this.mob.level().broadcastEntityEvent(this.mob, (byte) DART_ATTACK_EVENT);
-                        }
-                        if (this.isTimeToAttack()) {
-                            this.rangedAttackMob.performRangedAttack(target, f1);
-                        }
-                        if (this.attackTime == 20 * Mth.floor(3.375)) {
-                            this.attackTime = -Mth.floor(f * (float) (this.attackIntervalMax - this.attackIntervalMin) + (float) this.attackIntervalMin);
-                        }
+                float f = (float) Math.sqrt(distance) / this.attackRadius;
+                float f1 = Mth.clamp(f, 0.1F, 1.0F);
+                if (++this.attackTime >= 0) {
+                    if (this.attackTime == 0) {
+                        this.cockatrice.level().broadcastEntityEvent(this.cockatrice, (byte) DART_ATTACK_EVENT);
+                    }
+                    if (this.isTimeToAttack()) {
+                        this.cockatrice.performRangedAttack(this.trackedTarget, f1);
+                    }
+                    if (this.attackTime == 20 * Mth.floor(3.375)) {
+                        this.attackTime = -Mth.floor(f * (float) (this.attackIntervalMax - this.attackIntervalMin) + (float) this.attackIntervalMin);
+                    }
+                    if (!canSee || this.cockatrice.getTarget() == null || !this.cockatrice.getTarget().isAlive() || this.cockatrice.distanceToSqr(this.trackedTarget) < this.attackThresholdSqr) {
+                        this.trackedTarget = null;
                     }
                 }
             }

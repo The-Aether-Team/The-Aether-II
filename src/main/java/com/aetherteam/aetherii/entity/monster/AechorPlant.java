@@ -247,10 +247,10 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
 
     public static class ShootDartGoal extends Goal {
         private final AechorPlant aechorPlant;
-        private LivingEntity target;
         private int attackTime = -1;
         private final int attackInterval;
         private final float attackRadius;
+        private LivingEntity trackedTarget;
 
         public ShootDartGoal(AechorPlant aechorPlant, int attackInterval, float attackRadius) {
             this.aechorPlant = aechorPlant;
@@ -260,47 +260,52 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
 
         @Override
         public boolean canUse() {
-            LivingEntity livingentity = this.aechorPlant.getTarget();
-            if (livingentity != null && livingentity.isAlive()) {
-                this.target = livingentity;
-                return true;
-            } else {
-                return false;
-            }
+            return this.aechorPlant.getTarget() != null && this.aechorPlant.getTarget().isAlive();
         }
 
         @Override
         public boolean canContinueToUse() {
-            return this.canUse() || this.target.isAlive() && !this.aechorPlant.getNavigation().isDone();
+            return this.trackedTarget != null;
+        }
+
+        @Override
+        public void start() {
+            this.trackedTarget = this.aechorPlant.getTarget();
         }
 
         @Override
         public void stop() {
-            this.target = null;
             this.attackTime = -1;
+            this.trackedTarget = null;
+        }
+
+        @Override
+        public void tick() {
+            if (this.trackedTarget != null) {
+                double distance = this.aechorPlant.distanceToSqr(this.trackedTarget);
+                boolean canSee = this.aechorPlant.getSensing().hasLineOfSight(this.trackedTarget);
+
+                if (this.attackTime == this.attackInterval - 10) {
+                    this.aechorPlant.level().broadcastEntityEvent(this.aechorPlant, (byte) DART_ATTACK_EVENT);
+                }
+
+                if (--this.attackTime == 0) {
+                    float f = (float) Math.sqrt(distance) / this.attackRadius;
+                    float f1 = Mth.clamp(f, 0.1F, 1.0F);
+                    this.aechorPlant.performRangedAttack(this.trackedTarget, f1);
+                    this.attackTime = this.attackInterval;
+                    if (!canSee || this.aechorPlant.getTarget() == null || !this.aechorPlant.getTarget().isAlive()) {
+                        this.trackedTarget = null;
+                    }
+                } else if (this.attackTime < 0) {
+                    this.attackTime = this.attackInterval;
+                }
+            }
         }
 
         @Override
         public boolean requiresUpdateEveryTick() {
             return true;
-        }
-
-        @Override
-        public void tick() {
-            double d0 = this.aechorPlant.distanceToSqr(this.target.getX(), this.target.getY(), this.target.getZ());
-
-            if (this.attackTime == this.attackInterval - 10) {
-                this.aechorPlant.level().broadcastEntityEvent(this.aechorPlant, (byte) DART_ATTACK_EVENT);
-            }
-
-            if (--this.attackTime == 0) {
-                float f = (float) Math.sqrt(d0) / this.attackRadius;
-                float f1 = Mth.clamp(f, 0.1F, 1.0F);
-                this.aechorPlant.performRangedAttack(this.target, f1);
-                this.attackTime = this.attackInterval;
-            } else if (this.attackTime < 0) {
-                this.attackTime = this.attackInterval;
-            }
         }
     }
 }
