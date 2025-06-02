@@ -3,13 +3,14 @@ package com.aetherteam.aetherii.entity.monster;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.entity.ai.controller.FlyingMoveControl;
+import com.aetherteam.aetherii.entity.ai.goal.FlyingLookGoal;
 import com.aetherteam.aetherii.entity.projectile.ZephyrWebbingBall;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
@@ -23,7 +24,6 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
@@ -33,23 +33,24 @@ public class Zephyr extends FlyingMob implements Enemy {
     public static int BLOW_ATTACK_EVENT = 100;
     public static int SHOOT_ATTACK_EVENT = 101;
 
-    private static final EntityDataAccessor<Integer> DATA_CHARGE_TIME_ID = SynchedEntityData.defineId(Zephyr.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> DATA_BLOW_ID = SynchedEntityData.defineId(Zephyr.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> DATA_PROJECTILE_CHARGE_ID = SynchedEntityData.defineId(Zephyr.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_BLOW_CHARGE_ID = SynchedEntityData.defineId(Zephyr.class, EntityDataSerializers.INT);
 
     public AnimationState blowAnimationState = new AnimationState();
     public AnimationState webAnimationState = new AnimationState();
 
     public Zephyr(EntityType<? extends Zephyr> type, Level level) {
         super(type, level);
-        this.moveControl = new ZephyrMoveControl(this);
+        this.moveControl = new FlyingMoveControl(this);
         this.xpReward = 5;
     }
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(5, new ZephyrShootSnowballGoal(this));
-        this.goalSelector.addGoal(7, new RandomFloatAroundGoal(this));
-        this.goalSelector.addGoal(7, new ZephyrLookGoal(this));
+        this.goalSelector.addGoal(4, new ZephyrBlowAwayGoal(this, 12));
+        this.goalSelector.addGoal(5, new ZephyrShootSnowballGoal(this, 12));
+        this.goalSelector.addGoal(6, new RandomFloatAroundGoal(this));
+        this.goalSelector.addGoal(7, new FlyingLookGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, false));
     }
 
@@ -61,8 +62,8 @@ public class Zephyr extends FlyingMob implements Enemy {
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(DATA_CHARGE_TIME_ID, 0);
-        builder.define(DATA_BLOW_ID, false);
+        builder.define(DATA_PROJECTILE_CHARGE_ID, -40);
+        builder.define(DATA_BLOW_CHARGE_ID, -40);
     }
 
     /**
@@ -99,23 +100,18 @@ public class Zephyr extends FlyingMob implements Enemy {
     @Override
     public void aiStep() {
         super.aiStep();
-        if (this.getY() < this.level().getMinY() - 2 || this.getY() > this.level().getMaxY()) {
-            this.discard();
-        }
-        if (this.level().isClientSide()) {
-            if (this.isBlow()) {
-                Vec3 look = this.getViewVector(1.0F);
+        if (this.getBlowChargeTime() >= 25 && this.getBlowChargeTime() < 50) {
+            Vec3 look = this.getViewVector(1.0F);
+            List<Entity> list = this.level().getEntities(this, this.getBoundingBox().inflate(5, 0, 5).expandTowards(0, -2, 0).move(look.scale(10.5F)), entity -> entity != this);
+            list.forEach(entity -> entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(0.2F).add(0, 0.05F, 0))));
+
+            if (this.level().isClientSide()) {
                 this.level().addParticle(AetherIIParticleTypes.ZEPHYR_SNOWFLAKE.get(),
-                        this.getX(), this.getY() + 0.35F, this.getZ(),
+                        this.getX(), this.getY(0.45F), this.getZ(),
                         look.x * 1.5F + this.getRandom().nextFloat() * 0.1F,
                         look.y * 1.5F + this.getRandom().nextFloat() * 0.1F,
                         look.z * 1.5F + this.getRandom().nextFloat() * 0.1F);
             }
-        }
-        if (this.isBlow()) {
-            Vec3 look = this.getViewVector(1.0F);
-            List<Entity> list = this.level().getEntities(this, this.getBoundingBox().inflate(5, 0, 5).expandTowards(0, -2, 0).move(look.scale(6.5F)), entity -> entity != this);
-            list.forEach(entity -> entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(0.2F).add(0, 0.05F, 0))));
         }
     }
 
@@ -124,20 +120,35 @@ public class Zephyr extends FlyingMob implements Enemy {
         return 1;
     }
 
-    public int getChargeTime() {
-        return this.getEntityData().get(DATA_CHARGE_TIME_ID);
+    @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return true;
     }
 
-    public void setChargeTime(int chargeTime) {
-        this.getEntityData().set(DATA_CHARGE_TIME_ID, chargeTime);
+    @Override
+    protected boolean shouldDespawnInPeaceful() {
+        return true;
     }
 
-    public boolean isBlow() {
-        return this.getEntityData().get(DATA_BLOW_ID);
+    public int getProjectileChargeTime() {
+        return this.getEntityData().get(DATA_PROJECTILE_CHARGE_ID);
     }
 
-    public void setBlow(boolean blow) {
-        this.getEntityData().set(DATA_BLOW_ID, blow);
+    public void setProjectileChargeTime(int chargeTime) {
+        this.getEntityData().set(DATA_PROJECTILE_CHARGE_ID, chargeTime);
+    }
+
+    public int getBlowChargeTime() {
+        return this.getEntityData().get(DATA_BLOW_CHARGE_ID);
+    }
+
+    public void setBlowChargeTime(int chargeTime) {
+        this.getEntityData().set(DATA_BLOW_CHARGE_ID, chargeTime);
+    }
+
+    @Override
+    protected float getSoundVolume() {
+        return 3.0F;
     }
 
     @Override
@@ -155,146 +166,141 @@ public class Zephyr extends FlyingMob implements Enemy {
         return AetherIISoundEvents.ENTITY_ZEPHYR_DEATH.get();
     }
 
-    @Override
-    protected float getSoundVolume() {
-        return 3.0F;
-    }
-
-    @Override
-    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
-        return true;
-    }
-
-    @Override
-    protected boolean shouldDespawnInPeaceful() {
-        return true;
-    }
-
-    /**
-     * [CODE COPY] - {@link net.minecraft.world.entity.monster.Ghast.GhastMoveControl}.
-     */
-    protected static class ZephyrMoveControl extends MoveControl {
+    protected static class ZephyrBlowAwayGoal extends Goal {
         private final Zephyr zephyr;
-        private int floatDuration;
+        private final float attackThreshold;
+        private final float attackThresholdSqr;
+        private LivingEntity trackedTarget;
 
-        public ZephyrMoveControl(Zephyr zephyr) {
-            super(zephyr);
+        public ZephyrBlowAwayGoal(Zephyr zephyr, float attackThreshold) {
             this.zephyr = zephyr;
-        }
-
-        @Override
-        public void tick() {
-            if (this.operation == Operation.MOVE_TO) {
-                if (this.floatDuration-- <= 0) {
-                    this.floatDuration += this.zephyr.getRandom().nextInt(5) + 2;
-                    Vec3 vec3d = new Vec3(this.wantedX - this.zephyr.getX(), this.wantedY - this.zephyr.getY(), this.wantedZ - this.zephyr.getZ());
-                    double d0 = vec3d.length();
-                    vec3d = vec3d.normalize();
-                    if (this.canReach(vec3d, Mth.ceil(d0))) {
-                        this.zephyr.setDeltaMovement(this.zephyr.getDeltaMovement().add(vec3d.scale(0.1)));
-                    } else {
-                        this.operation = Operation.WAIT;
-                    }
-                }
-            }
-        }
-
-        private boolean canReach(Vec3 pos, int distance) {
-            AABB aabb = this.zephyr.getBoundingBox();
-            for (int i = 1; i < distance; ++i) {
-                aabb = aabb.move(pos);
-                if (!this.zephyr.level().noCollision(this.zephyr, aabb)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-    }
-
-    /**
-     * [CODE COPY] - {@link net.minecraft.world.entity.monster.Ghast.GhastShootFireballGoal}.
-     */
-    protected static class ZephyrShootSnowballGoal extends Goal {
-        private final Zephyr zephyr;
-
-        public ZephyrShootSnowballGoal(Zephyr zephyr) {
-            this.zephyr = zephyr;
+            this.attackThreshold = attackThreshold;
+            this.attackThresholdSqr = attackThreshold * attackThreshold;
         }
 
         @Override
         public boolean canUse() {
-            return zephyr.getTarget() != null;
+            return this.zephyr.getTarget() != null && this.zephyr.getTarget().isAlive() && this.zephyr.distanceToSqr(this.zephyr.getTarget()) < this.attackThresholdSqr && this.zephyr.getProjectileChargeTime() == -40;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.trackedTarget != null && this.zephyr.getProjectileChargeTime() == -40;
         }
 
         @Override
         public void start() {
-            this.zephyr.setChargeTime(0);
+            this.zephyr.setBlowChargeTime(-40);
+            this.trackedTarget = this.zephyr.getTarget();
         }
 
         @Override
         public void stop() {
-            this.zephyr.setChargeTime(0);
-            this.zephyr.setBlow(false);
+            this.zephyr.setBlowChargeTime(-40);
+            this.trackedTarget = null;
         }
 
         @Override
         public void tick() {
-            LivingEntity target = this.zephyr.getTarget();
-            if (target != null) {
-                if (target.hasEffect(AetherIIEffects.WEBBED) && target.distanceToSqr(this.zephyr) < 76 && this.zephyr.hasLineOfSight(target) && !this.zephyr.isBlow()) {
-                    this.blowAttack();
-                } else if (!target.hasEffect(AetherIIEffects.WEBBED)) {
-                    this.shootAttack(target);
-                } else {
-                    if (this.zephyr.getChargeTime() > 0) {
-                        this.zephyr.setChargeTime(this.zephyr.getChargeTime() - 1);
-                    } else if (this.zephyr.getChargeTime() <= 0) {
-                        this.zephyr.setBlow(false);
-                    }
-                }
-            }
-        }
+            if (this.trackedTarget != null) {
+                boolean canSee = this.zephyr.hasLineOfSight(this.trackedTarget);
 
-        //if slow down applied. star blow
-        private void blowAttack() {
-            Level level = this.zephyr.level();
-            this.zephyr.setChargeTime(this.zephyr.getChargeTime() + 1);
-            if (this.zephyr.getChargeTime() == 10) {
-                if (this.zephyr.getAmbientSound() != null) {
-                    this.zephyr.playSound(this.zephyr.getAmbientSound(), this.zephyr.getSoundVolume(), (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
-                }
-            } else if (this.zephyr.getChargeTime() == 1) {
-                this.zephyr.level().broadcastEntityEvent(this.zephyr, (byte) BLOW_ATTACK_EVENT);
-            } else if (this.zephyr.getChargeTime() == 25) {
-                this.zephyr.setBlow(true);
-            }
-        }
+                this.zephyr.setBlowChargeTime(this.zephyr.getBlowChargeTime() + 1);
 
-        //if not slow. shooting snowball
-        private void shootAttack(LivingEntity target) {
-            this.zephyr.setBlow(false);
-            if (target.distanceToSqr(this.zephyr) < 1600.0 && this.zephyr.hasLineOfSight(target)) {
-                Level level = this.zephyr.level();
-                this.zephyr.setChargeTime(this.zephyr.getChargeTime() + 1);
-                if (this.zephyr.getChargeTime() == 10) {
+                if (this.zephyr.distanceTo(this.trackedTarget) < this.attackThreshold) {
+                    double d0 = this.zephyr.getX() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 4.0F;
+                    double d2 = this.zephyr.getZ() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 4.0F;
+                    this.zephyr.getMoveControl().setWantedPosition(d0, this.trackedTarget.getY(), d2, 0.1);
+                }
+
+                if (this.zephyr.getBlowChargeTime() == 1) {
+                    this.zephyr.level().broadcastEntityEvent(this.zephyr, (byte) BLOW_ATTACK_EVENT);
+
+                } else if (this.zephyr.getBlowChargeTime() == 10) {
                     if (this.zephyr.getAmbientSound() != null) {
-                        this.zephyr.playSound(this.zephyr.getAmbientSound(), this.zephyr.getSoundVolume(), (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
+                        this.zephyr.playSound(this.zephyr.getAmbientSound(), this.zephyr.getSoundVolume(), (this.zephyr.getRandom().nextFloat() - this.zephyr.getRandom().nextFloat()) * 0.2F + 1.0F);
                     }
-                } else if (this.zephyr.getChargeTime() == 13) {
-                    this.zephyr.level().broadcastEntityEvent(this.zephyr, (byte) SHOOT_ATTACK_EVENT);
-                } else if (this.zephyr.getChargeTime() == 20) {
-                    Vec3 look = this.zephyr.getViewVector(1.0F);
-                    double accelX = target.getX() - (this.zephyr.getX() + look.x() * 1.5);
-                    double accelY = target.getY() - (this.zephyr.getY() + 0.35);
-                    double accelZ = target.getZ() - (this.zephyr.getZ() + look.z() * 1.5);
-                    this.zephyr.playSound(AetherIISoundEvents.ENTITY_ZEPHYR_SHOOT.get(), this.zephyr.getSoundVolume(), (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
-                    ZephyrWebbingBall snowball = new ZephyrWebbingBall(level, this.zephyr, accelX, accelY, accelZ);
-                    snowball.setPos(this.zephyr.getX() + look.x() * 1.55, this.zephyr.getY() + 0.35, this.zephyr.getZ() + look.z() * 1.55);
-                    level.addFreshEntity(snowball);
-                    this.zephyr.setChargeTime(-40);
+                }  else if (this.zephyr.getBlowChargeTime() == 60) {
+                    this.zephyr.setBlowChargeTime(-40);
+
+                    if (!canSee || this.zephyr.getTarget() == null || !this.zephyr.getTarget().isAlive() || this.zephyr.distanceToSqr(this.trackedTarget) >= this.attackThresholdSqr) {
+                        this.trackedTarget = null;
+                    }
                 }
-            } else if (this.zephyr.getChargeTime() > 0) {
-                this.zephyr.setChargeTime(this.zephyr.getChargeTime() - 1);
+            }
+        }
+    }
+
+    protected static class ZephyrShootSnowballGoal extends Goal {
+        private final Zephyr zephyr;
+        private final float attackThreshold;
+        private final float attackThresholdSqr;
+        private LivingEntity trackedTarget;
+
+        public ZephyrShootSnowballGoal(Zephyr zephyr, float attackThreshold) {
+            this.zephyr = zephyr;
+            this.attackThreshold = attackThreshold;
+            this.attackThresholdSqr = attackThreshold * attackThreshold;
+        }
+
+        @Override
+        public boolean canUse() {
+            return this.zephyr.getTarget() != null && this.zephyr.getTarget().isAlive() && this.zephyr.distanceToSqr(this.zephyr.getTarget()) >= this.attackThresholdSqr && this.zephyr.getBlowChargeTime() == -40 && !this.zephyr.getTarget().hasEffect(AetherIIEffects.WEBBED);
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.trackedTarget != null && this.zephyr.getBlowChargeTime() == -40;
+        }
+
+        @Override
+        public void start() {
+            this.zephyr.setProjectileChargeTime(-40);
+            this.trackedTarget = this.zephyr.getTarget();
+        }
+
+        @Override
+        public void stop() {
+            this.zephyr.setProjectileChargeTime(-40);
+            this.trackedTarget = null;
+        }
+
+        @Override
+        public void tick() {
+            if (this.trackedTarget != null) {
+                boolean canSee = this.zephyr.hasLineOfSight(this.trackedTarget);
+
+                this.zephyr.setProjectileChargeTime(this.zephyr.getProjectileChargeTime() + 1);
+
+                if (this.zephyr.distanceTo(this.trackedTarget) < this.attackThreshold) {
+                    double d0 = this.zephyr.getX() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
+                    double d1 = this.zephyr.getY() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
+                    double d2 = this.zephyr.getZ() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
+                    this.zephyr.getMoveControl().setWantedPosition(d0, d1, d2, 1.0);
+                }
+
+                if (this.zephyr.getProjectileChargeTime() == 10) {
+                    if (this.zephyr.getAmbientSound() != null) {
+                        this.zephyr.playSound(this.zephyr.getAmbientSound(), this.zephyr.getSoundVolume(), (this.zephyr.getRandom().nextFloat() - this.zephyr.getRandom().nextFloat()) * 0.2F + 1.0F);
+                    }
+                } else if (this.zephyr.getProjectileChargeTime() == 13) {
+                    this.zephyr.level().broadcastEntityEvent(this.zephyr, (byte) SHOOT_ATTACK_EVENT);
+
+                } else if (this.zephyr.getProjectileChargeTime() == 20) {
+                    Vec3 look = this.zephyr.getViewVector(1.0F);
+                    double accelX = this.trackedTarget.getX() - (this.zephyr.getX() + look.x() * 1.5);
+                    double accelY = this.trackedTarget.getY() - (this.zephyr.getY() + 0.35);
+                    double accelZ = this.trackedTarget.getZ() - (this.zephyr.getZ() + look.z() * 1.5);
+                    this.zephyr.playSound(AetherIISoundEvents.ENTITY_ZEPHYR_SHOOT.get(), this.zephyr.getSoundVolume(), (this.zephyr.getRandom().nextFloat() - this.zephyr.getRandom().nextFloat()) * 0.2F + 1.0F);
+                    ZephyrWebbingBall snowball = new ZephyrWebbingBall(this.zephyr.level(), this.zephyr, accelX, accelY, accelZ);
+                    snowball.setPos(this.zephyr.getX() + look.x() * 1.55, this.zephyr.getY() + 0.35, this.zephyr.getZ() + look.z() * 1.55);
+                    this.zephyr.level().addFreshEntity(snowball);
+                    this.zephyr.setProjectileChargeTime(-40);
+
+                    if (!canSee || this.zephyr.getTarget() == null || !this.zephyr.getTarget().isAlive() || this.zephyr.distanceToSqr(this.trackedTarget) < this.attackThresholdSqr) {
+                        this.trackedTarget = null;
+                    }
+                }
             }
         }
     }
@@ -332,53 +338,24 @@ public class Zephyr extends FlyingMob implements Enemy {
         @Override
         public void start() {
             LivingEntity target = this.zephyr.getTarget();
-            if (target != null && target.hasEffect(AetherIIEffects.WEBBED)) {
-                RandomSource random = this.zephyr.getRandom();
-                double d0 = target.getX() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F;
-                double d1 = target.getY() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
-                double d2 = target.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F;
-                this.zephyr.getMoveControl().setWantedPosition(d0, d1, d2, 1.2);
-            } else {
-                RandomSource random = this.zephyr.getRandom();
+            RandomSource random = this.zephyr.getRandom();
+            if (target == null) {
                 double d0 = this.zephyr.getX() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
                 double d1 = this.zephyr.getY() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
                 double d2 = this.zephyr.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
                 this.zephyr.getMoveControl().setWantedPosition(d0, d1, d2, 1.0);
+            } else if ((this.zephyr.getProjectileChargeTime() == -40 && this.zephyr.getRandom().nextInt(4) != 0) || target.hasEffect(AetherIIEffects.WEBBED)) {
+                Vec3 goal = target.position().offsetRandom(random, 12.0F);
+                this.zephyr.getMoveControl().setWantedPosition(goal.x(), target.getY() + (random.nextFloat() * 2.0F - 1.0F), goal.z(), 1.0);
+            } else if (this.zephyr.getBlowChargeTime() == -40 && !target.hasEffect(AetherIIEffects.WEBBED)) {
+                Vec3 goal = target.position().offsetRandom(random, 24.0F);
+                this.zephyr.getMoveControl().setWantedPosition(goal.x(), target.getY() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F, goal.z(), 1.0);
             }
-        }
-    }
-
-    /**
-     * [CODE COPY] - {@link net.minecraft.world.entity.monster.Ghast.GhastLookGoal}.
-     */
-    protected static class ZephyrLookGoal extends Goal {
-        private final Zephyr zephyr;
-
-        public ZephyrLookGoal(Zephyr zephyr) {
-            this.zephyr = zephyr;
-            this.setFlags(EnumSet.of(Flag.LOOK));
         }
 
         @Override
-        public boolean canUse() {
+        public boolean requiresUpdateEveryTick() {
             return true;
-        }
-
-        @Override
-        public void tick() {
-            if (this.zephyr.getTarget() == null) {
-                Vec3 vec3d = this.zephyr.getDeltaMovement();
-                this.zephyr.setYRot(-((float) Mth.atan2(vec3d.x(), vec3d.z())) * Mth.RAD_TO_DEG);
-                this.zephyr.yBodyRot = this.zephyr.getYRot();
-            } else {
-                LivingEntity livingEntity = this.zephyr.getTarget();
-                if (livingEntity.distanceToSqr(this.zephyr) < 4096.0) {
-                    double x = livingEntity.getX() - this.zephyr.getX();
-                    double z = livingEntity.getZ() - this.zephyr.getZ();
-                    this.zephyr.setYRot(-((float) Mth.atan2(x, z)) * Mth.RAD_TO_DEG);
-                    this.zephyr.setYBodyRot(this.zephyr.getYRot());
-                }
-            }
         }
     }
 }
