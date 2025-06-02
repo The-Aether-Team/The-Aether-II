@@ -73,7 +73,7 @@ public class SwetModel<T extends SwetRenderState> extends EntityModel<T> {
             this.squish.visible = true;
 
             float scale = entity.swetScale;
-            if (scale < 0.55F) {
+            if (scale < 0.6F) {
                 scale = 0.0F;
             }
             this.gel.xScale = scale;

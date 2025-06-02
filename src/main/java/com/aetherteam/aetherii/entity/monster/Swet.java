@@ -138,7 +138,12 @@ public class Swet extends Monster {
                     this.setSwetScale(Math.max(0.0F, this.getSwetScale() - 0.05F));
                 }
             }
+        } else if (this.isWaterDamaged()) {
+            this.setWaterDamage(this.getWaterDamage() - 0.001F);
+        } else if (!this.isWaterDamaged() && this.getSwetScale() < 0.95F) {
+            this.setSwetScale(Math.min(this.getSwetScale() + 0.001F, 0.95F));
         }
+
         super.tick();
 
         if (this.onGround() && !this.wasOnGround) {
@@ -174,6 +179,7 @@ public class Swet extends Monster {
                 && player.getFoodData().getFoodLevel() > 0
                 && this.getFoodSaturation() <= 3
                 && !this.isWaterDamaged()
+                && this.getSwetScale() >= 0.95F
                 && player.getData(AetherIIDataAttachments.SWET_LATCH).canLatchOn();
     }
 
@@ -208,7 +214,7 @@ public class Swet extends Monster {
     }
 
     public boolean isWaterDamaged() {
-        return this.getWaterDamage() > 0.25F;
+        return this.getWaterDamage() > 0.0F;
     }
 
     @Override
