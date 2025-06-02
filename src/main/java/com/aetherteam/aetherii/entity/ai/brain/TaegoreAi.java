@@ -105,7 +105,7 @@ public class TaegoreAi {
 
     private static void initIdleActivity(EntityType<? extends Taegore> entityType, Brain<Taegore> brain) {
         brain.addActivity(Activity.IDLE, ImmutableList.of(
-                Pair.of(0, SetWalkTargetAwayFrom.entity(MemoryModuleType.AVOID_TARGET, 2.0F, 24, true)),
+                Pair.of(0, SetWalkTargetAwayFrom.entity(MemoryModuleType.AVOID_TARGET, 1.7F, 24, true)),
                 Pair.of(1, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0F, UniformInt.of(30, 60))),
                 Pair.of(2, new AnimalMakeLove(entityType)),
                 Pair.of(3, new FollowTemptation(livingEntity -> 1.2F)),
