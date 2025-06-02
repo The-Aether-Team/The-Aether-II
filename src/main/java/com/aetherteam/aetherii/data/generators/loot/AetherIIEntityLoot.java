@@ -12,6 +12,7 @@ import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import com.aetherteam.aetherii.loot.functions.GelDropsFunction;
+import com.aetherteam.aetherii.loot.functions.SugarDropsFunction;
 import net.minecraft.advancements.critereon.DamageSourcePredicate;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
@@ -299,7 +300,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIItems.SWET_SUGAR)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0F, 1.0F)))
-                                .apply(GelDropsFunction.extra(ConstantValue.exactly(1.0F)))
+                                .apply(SugarDropsFunction.extra(ConstantValue.exactly(1.0F)))
                         )
                 ).withPool(LootPool.lootPool().add(builder));
     }
