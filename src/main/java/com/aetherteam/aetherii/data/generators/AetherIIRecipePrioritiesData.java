@@ -25,6 +25,7 @@ public class AetherIIRecipePrioritiesData extends RecipePrioritiesProvider {
         this.add("skyroot_crafting_table", 5);
         this.add("skyroot_chest", 5);
         this.add("skyroot_ladder", 5);
+        this.add("skyroot_bucket", 5);
 
         this.add("beast_pelt_helmet", 5);
         this.add("beast_pelt_chestplate", 5);
