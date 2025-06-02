@@ -47,8 +47,8 @@ public class Zephyr extends FlyingMob implements Enemy {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(4, new ZephyrBlowAwayGoal(this, 12));
-        this.goalSelector.addGoal(5, new ZephyrShootSnowballGoal(this, 12));
+        this.goalSelector.addGoal(4, new ZephyrBlowAwayGoal(this, 8));
+        this.goalSelector.addGoal(5, new ZephyrShootSnowballGoal(this, 8));
         this.goalSelector.addGoal(6, new RandomFloatAroundGoal(this));
         this.goalSelector.addGoal(7, new FlyingLookGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, false));
@@ -112,6 +112,7 @@ public class Zephyr extends FlyingMob implements Enemy {
                         look.y * 1.5F + this.getRandom().nextFloat() * 0.1F,
                         look.z * 1.5F + this.getRandom().nextFloat() * 0.1F);
             }
+            this.setDeltaMovement(Vec3.ZERO);
         }
     }
 
@@ -344,7 +345,7 @@ public class Zephyr extends FlyingMob implements Enemy {
                 double d1 = this.zephyr.getY() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
                 double d2 = this.zephyr.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
                 this.zephyr.getMoveControl().setWantedPosition(d0, d1, d2, 1.0);
-            } else if ((this.zephyr.getProjectileChargeTime() == -40 && this.zephyr.getRandom().nextInt(4) != 0) || target.hasEffect(AetherIIEffects.WEBBED)) {
+            } else if ((this.zephyr.getProjectileChargeTime() == -40 && this.zephyr.getRandom().nextInt(6) != 0) || target.hasEffect(AetherIIEffects.WEBBED)) {
                 Vec3 goal = target.position().offsetRandom(random, 12.0F);
                 this.zephyr.getMoveControl().setWantedPosition(goal.x(), target.getY() + (random.nextFloat() * 2.0F - 1.0F), goal.z(), 1.0);
             } else if (this.zephyr.getBlowChargeTime() == -40 && !target.hasEffect(AetherIIEffects.WEBBED)) {
