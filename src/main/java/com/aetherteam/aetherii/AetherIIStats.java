@@ -128,7 +128,7 @@ public class AetherIIStats {
             .put(AetherIIAttributes.PIERCE_RESISTANCE, 0.0)
             .build();
     public static final ImmutableMap<Holder<Attribute>, Double> ZEPHYR = ImmutableMap.<Holder<Attribute>, Double>builder()
-            .put(Attributes.MAX_HEALTH, 5.0)
+            .put(Attributes.MAX_HEALTH, 10.0)
             .put(AetherIIAttributes.SLASH_RESISTANCE, -2.0)
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 2.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, 0.0)
@@ -154,9 +154,9 @@ public class AetherIIStats {
             .build();
     public static final ImmutableMap<Holder<Attribute>, Double> SKEPHID = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 10.0)
-            .put(AetherIIAttributes.SLASH_RESISTANCE, -2.0)
+            .put(AetherIIAttributes.SLASH_RESISTANCE, 2.0)
             .put(AetherIIAttributes.IMPACT_RESISTANCE, -2.0)
-            .put(AetherIIAttributes.PIERCE_RESISTANCE, -2.0)
+            .put(AetherIIAttributes.PIERCE_RESISTANCE, 2.0)
             .build();
     public static final ImmutableMap<Holder<Attribute>, Double> ARKENIUM_TALUTON = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 30.0)
