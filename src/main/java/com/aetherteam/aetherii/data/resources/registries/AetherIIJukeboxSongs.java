@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;

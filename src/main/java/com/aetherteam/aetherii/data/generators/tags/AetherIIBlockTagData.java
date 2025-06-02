@@ -22,6 +22,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
     public void addTags(HolderLookup.Provider provider) {
         // Aether II
         this.tag(AetherIITags.Blocks.AETHER_PORTAL_BLOCKS).add(
+                Blocks.GLOWSTONE,
                 Blocks.QUARTZ_BLOCK,
                 Blocks.SMOOTH_QUARTZ,
                 Blocks.QUARTZ_BRICKS,
@@ -33,7 +34,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.FERROSITE_SAND.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get(),
                 AetherIIBlocks.UNSTABLE_HOLYSTONE.get(),
-                AetherIIBlocks.UNSTABLE_UNDERSHALE.get()
+                AetherIIBlocks.UNSTABLE_UNDERSHALE.get(),
+                AetherIIBlocks.MOSSY_HOLYSTONE.get(),
+                AetherIIBlocks.COARSE_AETHER_DIRT.get(),
+                AetherIIBlocks.ACID.get(),
+                AetherIIBlocks.GAS.get()
         ).addTags(
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS,
                 AetherIITags.Blocks.AERCLOUDS,
@@ -55,7 +60,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS).add(
                 AetherIIBlocks.HOLYSTONE.get(),
                 AetherIIBlocks.UNDERSHALE.get(),
-                AetherIIBlocks.ICHORITE.get()
+                AetherIIBlocks.ICHORITE.get(),
+                AetherIIBlocks.AGIOSITE.get()
         );
         this.tag(AetherIITags.Blocks.AETHER_CARVER_REPLACEABLES)
                 .add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
@@ -382,6 +388,16 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.AECHOR_PLANT_SPAWNABLE_ON).add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.tag(AetherIITags.Blocks.CARRION_SPROUT_SPAWNABLE_ON).add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.tag(AetherIITags.Blocks.SKEPHID_SPAWNABLE_ON).addTags(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS);
+        this.tag(AetherIITags.Blocks.TAEGORE_DIGGABLE_BLOCK).add(
+                AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
+                AetherIIBlocks.AETHER_DIRT.get(),
+                AetherIIBlocks.COARSE_AETHER_DIRT.get(),
+                AetherIIBlocks.SHIMMERING_SILT.get(),
+                AetherIIBlocks.FERROSITE_MUD.get(),
+                AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(),
+                AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(),
+                AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()
+        );
         this.tag(AetherIITags.Blocks.MOA_HATCH_BLOCK).add(
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()
         );

@@ -25,17 +25,18 @@ public class AetherIIRecipePrioritiesData extends RecipePrioritiesProvider {
         this.add("skyroot_crafting_table", 5);
         this.add("skyroot_chest", 5);
         this.add("skyroot_ladder", 5);
+        this.add("skyroot_bucket", 5);
 
-        this.add("taegore_hide_helmet", 5);
-        this.add("taegore_hide_chestplate", 5);
-        this.add("taegore_hide_leggings", 5);
-        this.add("taegore_hide_boots", 5);
-        this.add("taegore_hide_gloves", 5);
-        this.add("burrukai_pelt_helmet", 5);
-        this.add("burrukai_pelt_chestplate", 5);
-        this.add("burrukai_pelt_leggings", 5);
-        this.add("burrukai_pelt_boots", 5);
-        this.add("burrukai_pelt_gloves", 5);
+        this.add("beast_pelt_helmet", 5);
+        this.add("beast_pelt_chestplate", 5);
+        this.add("beast_pelt_leggings", 5);
+        this.add("beast_pelt_boots", 5);
+        this.add("beast_pelt_gloves", 5);
+        this.add("burrukai_plate_helmet", 5);
+        this.add("burrukai_plate_chestplate", 5);
+        this.add("burrukai_plate_leggings", 5);
+        this.add("burrukai_plate_boots", 5);
+        this.add("burrukai_plate_gloves", 5);
         this.add("hide_bundle", 5);
 
         this.add("cloudwool", 5);

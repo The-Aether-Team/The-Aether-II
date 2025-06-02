@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -58,18 +59,24 @@ public class CarrionSprout extends PathfinderMob {
     }
 
     private void handleTrigger(Entity entity) {
+        boolean previouslyTriggered = this.isTrapTrigger();
+
         if (this.isTrapState()) {
             this.noTouchTick = 30;
             this.setTrapTrigger(true);
         }
 
         if (this.isTrapTrigger()) {
-            entity.makeStuckInBlock(Blocks.COBWEB.defaultBlockState(), new Vec3(0.3D, (double) 0.05F, 0.3D));
+            entity.makeStuckInBlock(Blocks.COBWEB.defaultBlockState(), new Vec3(0.3F, 0.05F, 0.3F));
 
             if (this.trapTriggerTick <= 0) {
                 if (this.level() instanceof ServerLevel serverLevel) {
                     entity.hurtServer(serverLevel, this.damageSources().sweetBerryBush(), 1.0F);
                 }
+            }
+
+            if (!previouslyTriggered) {
+                this.playSound(AetherIISoundEvents.ENTITY_CARRION_SPROUT_TRAP.get(), 2.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
             }
         }
     }

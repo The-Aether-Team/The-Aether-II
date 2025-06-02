@@ -49,50 +49,23 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     public float portalIntensity;
     public float oPortalIntensity;
 
-    @Nullable
-    private Aerbunny mountedAerbunny;
-    private Optional<CompoundTag> mountedAerbunnyTag = Optional.empty();
-
-    private boolean canRefuelGlide;
-    private int glidingTimer;
-    private Map<Holder<Item>, Boolean> canRefuelAbilities = new HashMap<>(Map.of(
-            AetherIIItems.BLUE_AERCLOUD_GLIDER, false,
-            AetherIIItems.PURPLE_AERCLOUD_GLIDER, false
-    ));
-
-    private boolean gravititeHoldingFloatingBlock = false;
-    private boolean gravititeJumpUsed = true;
-
     private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
             Map.entry("setMoving", Triple.of(Type.BOOLEAN, (object) -> this.setMoving((boolean) object), this::isMoving)),
             Map.entry("setJumping", Triple.of(Type.BOOLEAN, (object) -> this.setJumping((boolean) object), this::isJumping)),
-            Map.entry("setGlidingTimer", Triple.of(Type.INT, (object) -> this.setGlidingTimer((int) object), this::getGlidingTimer)),
-            Map.entry("setGravititeJumpUsed", Triple.of(Type.BOOLEAN, (object) -> this.setGravititeJumpUsed((boolean) object), this::isGravititeJumpUsed))
+            Map.entry("setShouldSyncBetweenClients", Triple.of(Type.BOOLEAN, (object) -> this.setShouldSyncBetweenClients((boolean) object), this::shouldSyncBetweenClients))
     );
 
     public static final Codec<AetherIIPlayerAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.BOOL.fieldOf("can_get_portal").forGetter(AetherIIPlayerAttachment::canGetPortal),
-            Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(AetherIIPlayerAttachment::canSpawnInAether),
-            CompoundTag.CODEC.optionalFieldOf("mounted_aerbunny").forGetter(AetherIIPlayerAttachment::getMountedAerbunnyTag),
-            Codec.BOOL.fieldOf("can_refuel_glide").forGetter(AetherIIPlayerAttachment::getCanRefuelGlide),
-            Codec.INT.fieldOf("gliding_timer").forGetter(AetherIIPlayerAttachment::getGlidingTimer),
-            ExtraCodecs.strictUnboundedMap(BuiltInRegistries.ITEM.holderByNameCodec(), Codec.BOOL).fieldOf("can_refuel_abilities").forGetter(AetherIIPlayerAttachment::getCanRefuelAbilities),
-            Codec.BOOL.fieldOf("gravitite_holding_floating_block").forGetter(AetherIIPlayerAttachment::isGravititeHoldingFloatingBlock),
-            Codec.BOOL.fieldOf("gravitite_jump_used").forGetter(AetherIIPlayerAttachment::isGravititeJumpUsed)
+            Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(AetherIIPlayerAttachment::canSpawnInAether)
     ).apply(instance, AetherIIPlayerAttachment::new));
 
     private boolean shouldSyncAfterJoin;
     private boolean shouldSyncBetweenClients;
 
-    protected AetherIIPlayerAttachment(boolean canGetPortal, boolean canSpawnInAether, Optional<CompoundTag> mountedAerbunnyTag, boolean canRefuelGlide, int glidingTimer, Map<Holder<Item>, Boolean> canRefuelAbilities, boolean gravititeHoldingFloatingBlock, boolean gravititeJumpUsed) {
+    protected AetherIIPlayerAttachment(boolean canGetPortal, boolean canSpawnInAether) {
         this.canGetPortal = canGetPortal;
         this.canSpawnInAether = canSpawnInAether;
-        this.mountedAerbunnyTag = mountedAerbunnyTag;
-        this.canRefuelGlide = canRefuelGlide;
-        this.glidingTimer = glidingTimer;
-        this.canRefuelAbilities =  new HashMap<>(canRefuelAbilities);
-        this.gravititeHoldingFloatingBlock = gravititeHoldingFloatingBlock;
-        this.gravititeJumpUsed = gravititeJumpUsed;
     }
 
     public AetherIIPlayerAttachment() { }
@@ -113,8 +86,13 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
      */
     public void login(Player player) {
         this.startInAether(player);
-        this.remountAerbunny(player);
         this.shouldSyncAfterJoin = true;
+    }
+
+    public void onJoinLevel(Player player) {
+        if (player.level().isClientSide() && player.isLocalPlayer()) {
+            this.setSynched(player.getId(), Direction.SERVER, "setShouldSyncBetweenClients", true);
+        }
     }
 
     public void changeDimension(Player player) {
@@ -128,9 +106,6 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
         this.syncAfterJoin(player);
         this.syncClients(player);
         this.handleAetherPortal(player);
-        this.handleHealingStoneHealth(player);
-        this.checkToRemoveAerbunny(player);
-        this.resetGlideCheck(player);
     }
 
     private void syncAfterJoin(Player player) {
@@ -164,71 +139,6 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     private void handleAetherPortal(Player player) {
         if (player.level().isClientSide()) {
             PortalClientUtil.handleAetherPortal(player, this);
-        }
-    }
-
-    private void handleHealingStoneHealth(Player player) {
-        if (player.getAttribute(Attributes.MAX_ABSORPTION).hasModifier(HealingStoneItem.BONUS_ABSORPTION)) {
-            double maxHealthWithAbsorption = player.getMaxHealth() + player.getMaxAbsorption();
-            double maxHealthWithoutBonus = maxHealthWithAbsorption - player.getAttribute(Attributes.MAX_ABSORPTION).getModifier(HealingStoneItem.BONUS_ABSORPTION).amount();
-            if (player.getHealth() < maxHealthWithoutBonus) {
-                player.getAttribute(Attributes.MAX_ABSORPTION).removeModifier(HealingStoneItem.BONUS_ABSORPTION);
-            }
-        }
-    }
-
-    /**
-     * Removes an Aerbunny from the world and stores it to NBT for the capability. This is used when a player logs out with an Aerbunny.
-     */
-    public void removeAerbunny() {
-        if (this.getMountedAerbunny() != null) { //todo
-            Aerbunny aerbunny = this.getMountedAerbunny();
-            CompoundTag nbt = new CompoundTag();
-            aerbunny.save(nbt);
-            this.setMountedAerbunnyTag(Optional.of(nbt));
-            aerbunny.stopRiding();
-            aerbunny.setRemoved(Entity.RemovalReason.UNLOADED_WITH_PLAYER);
-        }
-    }
-
-    /**
-     * Remounts an Aerbunny to the player if there exists stored NBT when joining the world.
-     */
-    private void remountAerbunny(Player player) {
-        if (this.getMountedAerbunnyTag().isPresent()) {
-            if (!player.level().isClientSide()) {
-                Aerbunny aerbunny = new Aerbunny(AetherIIEntityTypes.AERBUNNY.get(), player.level());
-                aerbunny.load(this.getMountedAerbunnyTag().get());
-                player.level().addFreshEntity(aerbunny);
-                aerbunny.startRiding(player);
-                this.setMountedAerbunny(aerbunny);
-                if (player instanceof ServerPlayer serverPlayer) {
-                    PacketDistributor.sendToPlayer(serverPlayer, new RemountAerbunnyPacket(player.getId(), aerbunny.getId()));
-                }
-            }
-            this.setMountedAerbunnyTag(Optional.empty());
-        }
-    }
-
-    /**
-     * Checks whether the capability should stop tracking a mounted Aerbunny.
-     */
-    private void checkToRemoveAerbunny(Player player) {
-        if (this.getMountedAerbunny() != null && (!this.getMountedAerbunny().isAlive() || !player.isAlive())) {
-            this.setMountedAerbunny(null);
-        }
-    }
-
-    private void resetGlideCheck(Player player) {
-        if (player.onGround()) {
-            if (!this.getCanRefuelGlide()) {
-                this.setGlidingTimer(AercloudGliderItem.GLIDING_MAX);
-                this.setCanRefuelGlide(true);
-                for (Iterator<Map.Entry<Holder<Item>, Boolean>> iterator = this.getCanRefuelAbilities().entrySet().iterator(); iterator.hasNext(); ) {
-                    Map.Entry<Holder<Item>, Boolean> entry = iterator.next();
-                    this.getCanRefuelAbilities().put(entry.getKey(), true);
-                }
-            }
         }
     }
 
@@ -337,65 +247,6 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
 
     public float getOldPortalIntensity() {
         return this.oPortalIntensity;
-    }
-
-    public void setMountedAerbunny(@Nullable Aerbunny mountedAerbunny) {
-        this.mountedAerbunny = mountedAerbunny;
-    }
-
-    /**
-     * @return The {@link Aerbunny} currently mounted to the player
-     */
-    @Nullable
-    public Aerbunny getMountedAerbunny() {
-        return this.mountedAerbunny;
-    }
-
-    public void setMountedAerbunnyTag(Optional<CompoundTag> mountedAerbunnyTag) {
-        this.mountedAerbunnyTag = mountedAerbunnyTag;
-    }
-
-    /**
-     * @return The {@link CompoundTag} data for the Aerbunny currently mounted to the player.
-     */
-    public Optional<CompoundTag> getMountedAerbunnyTag() {
-        return this.mountedAerbunnyTag;
-    }
-
-    public void setCanRefuelGlide(boolean canRefuelGlide) {
-        this.canRefuelGlide = canRefuelGlide;
-    }
-
-    public boolean getCanRefuelGlide() {
-        return this.canRefuelGlide;
-    }
-
-    public void setGlidingTimer(int glidingTimer) {
-        this.glidingTimer = glidingTimer;
-    }
-
-    public int getGlidingTimer() {
-        return this.glidingTimer;
-    }
-
-    public Map<Holder<Item>, Boolean> getCanRefuelAbilities() {
-        return this.canRefuelAbilities;
-    }
-
-    public void setGravititeHoldingFloatingBlock(boolean gravititeHoldingFloatingBlock) {
-        this.gravititeHoldingFloatingBlock = gravititeHoldingFloatingBlock;
-    }
-
-    public boolean isGravititeHoldingFloatingBlock() {
-        return this.gravititeHoldingFloatingBlock;
-    }
-
-    public void setGravititeJumpUsed(boolean gravititeJumpUsed) {
-        this.gravititeJumpUsed = gravititeJumpUsed;
-    }
-
-    public boolean isGravititeJumpUsed() {
-        return this.gravititeJumpUsed;
     }
 
     /**

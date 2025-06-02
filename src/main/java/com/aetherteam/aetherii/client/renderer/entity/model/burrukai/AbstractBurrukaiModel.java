@@ -68,7 +68,7 @@ public abstract class AbstractBurrukaiModel extends EntityModel<BurrukaiRenderSt
         super.setupAnim(burrukai);
         this.head_main.yRot = burrukai.yRot * (float) (Math.PI / 180.0);
         this.head_main.xRot = burrukai.xRot * (float) (Math.PI / 180.0);
-        this.animate(burrukai.ramAnimationState, BurrukaiAnimation.RUSH_START, burrukai.ageInTicks, 1.0F);
+        this.animate(burrukai.ramAnimationState, BurrukaiAnimation.RAM, burrukai.ageInTicks, 1.0F);
         this.animateWalk(BurrukaiAnimation.WALK, burrukai.walkAnimationPos, burrukai.walkAnimationSpeed, 2.0F, 2.0F);
     }
 }

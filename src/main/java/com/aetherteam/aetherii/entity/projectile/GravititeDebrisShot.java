@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.mixin.mixins.common.accessor.PlayerAccessor;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -111,13 +112,8 @@ public class GravititeDebrisShot extends AbstractHurtingProjectile {
         super.onHitEntity(result);
         Entity entity = result.getEntity();
         if (entity instanceof LivingEntity livingEntity) {
-            if (livingEntity.isBlocking()) {
-                if (entity instanceof Player player && player.isBlocking()) {
-                    PlayerAccessor playerAccessor = (PlayerAccessor) player;
-                    playerAccessor.callHurtCurrentlyUsedShield(3.0F);
-                }
-            } else {
-                entity.hurt(this.damageSources().indirectMagic(this, this.getOwner()), 4.0F);
+            if (livingEntity.level() instanceof ServerLevel serverLevel) {
+                entity.hurtServer(serverLevel, this.damageSources().mobProjectile(this, this.getOwner() instanceof LivingEntity owner ? owner : null), 4.0F);
             }
         }
     }

@@ -2,7 +2,7 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.zephyr",
   "effect_resistances": [],
   "entity_type": "aether_ii:zephyr",
-  "health": 5,
+  "health": 10,
   "icon": "aether_ii:guidebook/bestiary/zephyr",
   "id": "aether_ii:zephyr",
   "impact_defense": 2,
@@ -14,11 +14,19 @@
         "max_count": 2,
         "min_count": 0
       }
+    },
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:zephyr_husk",
+        "max_count": 1,
+        "min_count": 0
+      }
     }
   ],
   "name": "entity.aether_ii.zephyr",
   "pierce_defense": 0,
-  "scale_multiplier": 1.65,
+  "scale_multiplier": 1.0,
   "slash_defense": -2,
   "slot_name": "entity.aether_ii.zephyr"
 }

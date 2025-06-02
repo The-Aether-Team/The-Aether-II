@@ -100,5 +100,8 @@ public class AetherIIParticleFactories {
         event.registerSpriteSet(AetherIIParticleTypes.IMPACT_ATTACK.get(), DamageTypeParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.PIERCE_ATTACK.get(), DamageTypeParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.ZEPHYR_SNOWFLAKE.get(), SnowflakeParticle.Provider::new);
+
+        event.registerSpriteSet(AetherIIParticleTypes.TEMPEST_SMOKE.get(), TempestSmokeParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.MOA_HUNGRY.get(), HeartParticle.Provider::new);
     }
 }

@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.block.portal;
 
 import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.DeathScreen;
 import net.minecraft.client.gui.screens.ReceivingLevelScreen;

@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
@@ -21,6 +21,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -39,24 +40,27 @@ import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
+import java.util.Optional;
 import java.util.UUID;
 
 public class Aerbunny extends AetherTamableAnimal {
+    public static int PUFF_PARTICLE_EVENT = 100;
+
     private static final EntityDataAccessor<Integer> DATA_PUFFINESS_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_PUFF_COOLDOWN_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_AFRAID_TIME_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_FAST_FALLING_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DATA_COLLAR_COLOR = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Optional<UUID>> DATA_VEHICLE_UUID_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.OPTIONAL_UUID);
 
     private static final int MAXIMUM_PUFFS = 11;
 
@@ -89,9 +93,20 @@ public class Aerbunny extends AetherTamableAnimal {
     public void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(DATA_PUFFINESS_ID, 0);
+        builder.define(DATA_PUFF_COOLDOWN_ID, 0);
         builder.define(DATA_AFRAID_TIME_ID, 0);
         builder.define(DATA_FAST_FALLING_ID, false);
         builder.define(DATA_COLLAR_COLOR, DyeColor.BLUE.getId());
+        builder.define(DATA_VEHICLE_UUID_ID, Optional.empty());
+    }
+
+    @Override
+    public void handleEntityEvent(byte id) {
+        if (id == PUFF_PARTICLE_EVENT) {
+            this.spawnPuffParticles();
+        } else {
+            super.handleEntityEvent(id);
+        }
     }
 
     /**
@@ -139,6 +154,12 @@ public class Aerbunny extends AetherTamableAnimal {
         if (this.getVehicle() != null && (this.getVehicle().onGround() || this.getVehicle().isInFluidType() || blockIntersection)) { // Reset the last tracked fall position if the Aerbunny touches a surface.
             this.lastPos = null;
         }
+
+        if (this.getVehicle() == null) {
+            this.setPuffCooldown(0);
+        } else if (this.getPuffCooldown() > 0) {
+            this.setPuffCooldown(this.getPuffCooldown() - 1);
+        }
     }
 
     /**
@@ -158,7 +179,7 @@ public class Aerbunny extends AetherTamableAnimal {
     private void handleFallSpeed() {
         AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
         if (gravity != null) {
-            double fallSpeed = Math.max(gravity.getValue() * -1.25, -0.1); // Entity isn't allowed to fall too slowly from gravity.
+            double fallSpeed = Math.min(gravity.getValue() * -1.25, -0.1); // Entity isn't allowed to fall too slowly from gravity.
             if (this.getDeltaMovement().y() < fallSpeed) {
                 this.setDeltaMovement(this.getDeltaMovement().x(), fallSpeed, this.getDeltaMovement().z());
             }
@@ -181,7 +202,9 @@ public class Aerbunny extends AetherTamableAnimal {
                 AttributeInstance playerGravity = player.getAttribute(Attributes.GRAVITY);
                 if (playerGravity != null) {
                     if (!player.getAbilities().flying && !player.isInFluidType() && playerGravity.getValue() > 0.02) {  // Entity isn't allowed to fall too slowly from gravity.
-                        player.setDeltaMovement(player.getDeltaMovement().add(0.0, 0.05, 0.0));
+                        if (!player.getUseItem().is(AetherIITags.Items.TOOLS_GLIDERS)) {
+                            player.setDeltaMovement(player.getDeltaMovement().add(0.0, 0.05, 0.0));
+                        }
                     }
                 }
 
@@ -193,10 +216,13 @@ public class Aerbunny extends AetherTamableAnimal {
                         }
                         // The player is only able to jump if the Aerbunny's position is below the last tracked falling position, to avoid infinite jump exploits.
                         if (!player.onGround() && data.isJumping() && player.getDeltaMovement().y() <= 0.0 && this.position().y() < this.lastPos.y() - 1.1) {
-                            player.setDeltaMovement(player.getDeltaMovement().x(), 0.125, player.getDeltaMovement().z());
-                            PacketDistributor.sendToServer(new AerbunnyPuffPacket(this.getId())); // Calls Aerbunny#puff() on the server.
-                            this.spawnExplosionParticle();
-                            this.lastPos = null;
+                            if (this.getPuffCooldown() <= 0) { // Also check cooldown timer.
+                                player.setDeltaMovement(player.getDeltaMovement().x(), 0.125, player.getDeltaMovement().z());
+                                PacketDistributor.sendToServer(new AerbunnyPuffPacket(this.getId())); // Calls Aerbunny#puff() on the server.
+                                this.spawnPuffParticles();
+                                this.lastPos = null;
+                                this.setPuffCooldown(20);
+                            }
                         }
                     }
                 }
@@ -215,10 +241,29 @@ public class Aerbunny extends AetherTamableAnimal {
      */
     @Override
     public void baseTick() {
+        if (this.getVehicle() instanceof Player vehicle) {
+            if (!vehicle.isCrouching() && this.getBoundingBox().getYsize() != 0.03F) {
+                this.refreshDimensions();
+            } else if (vehicle.isCrouching() && this.getBoundingBox().getYsize() == 0.03F) {
+                this.refreshDimensions();
+            }
+        }
         super.baseTick();
-        if (this.isAlive() && this.isPassenger() && this.getVehicle() != null && this.getVehicle().isEyeInFluidType(NeoForgeMod.WATER_TYPE.value())
-                && !this.level().getBlockState(BlockPos.containing(this.getVehicle().getX(), this.getVehicle().getEyeY(), this.getVehicle().getZ())).is(Blocks.BUBBLE_COLUMN)) {
-            this.stopRiding();
+        if (this.isAlive() && this.isPassenger() && this.getVehicle() != null) {
+            if (this.isInWater() && this.getFluidHeight(FluidTags.WATER) > this.getFluidJumpThreshold()
+                    || this.isInLava()
+                    || this.isInFluidType((fluidType, height) -> this.canSwimInFluidType(fluidType) && height > this.getFluidJumpThreshold())) {
+                float f = this.getJumpPower();
+                if (!this.getVehicle().isShiftKeyDown()) {
+                    if (!(f <= 1.0E-5F)) {
+                        Vec3 vec3 = this.getVehicle().getDeltaMovement();
+                        this.getVehicle().setDeltaMovement(vec3.x, Math.max(0.025, vec3.y), vec3.z);
+                        if (this.getVehicle() instanceof Player player && player.getData(AetherIIDataAttachments.PLAYER).isJumping()) {
+                            player.setDeltaMovement(player.getDeltaMovement().add(0.0, 0.015, 0.0));
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -234,10 +279,7 @@ public class Aerbunny extends AetherTamableAnimal {
         ItemStack itemStack = player.getItemInHand(hand);
         Item item = itemStack.getItem();
 
-
         InteractionResult result = super.mobInteract(player, hand);
-
-
 
         if (this.isTame()) {
             if (this.isOwnedBy(player)) {
@@ -261,7 +303,7 @@ public class Aerbunny extends AetherTamableAnimal {
                     return InteractionResult.SUCCESS;
                 }
 
-                if (!result.consumesAction() && !player.isShiftKeyDown()) {
+                if (!result.consumesAction() && player.isShiftKeyDown()) {
                     this.setOrderedToSit(!this.isOrderedToSit());
                     result = InteractionResult.SUCCESS;
                 }
@@ -283,13 +325,33 @@ public class Aerbunny extends AetherTamableAnimal {
         }
 
         if (!(this.getVehicle() instanceof Player vehicle) || vehicle.equals(player)) { // Interacting player has to be the one wearing the Aerbunny.
-            // Aerbunny can be mounted/dismounted if the shift key is held or no other interaction actions succeed, but only if the Aerbunny is not inside a block.
-            if ((this.getVehicle() != null || player.isShiftKeyDown() || result == InteractionResult.PASS || result == InteractionResult.FAIL) && !super.isInWall()) {
+            // Aerbunny can be mounted/dismounted if the shift key is held and no other interaction actions succeed, but only if the Aerbunny is not inside a block.
+            if ((this.getVehicle() != null || result == InteractionResult.PASS || result == InteractionResult.FAIL) && !super.isInWall()) {
                 result = this.ridePlayer(player);
             }
         }
 
         return result;
+    }
+
+    @Override
+    protected EntityDimensions getDefaultDimensions(Pose pose) {
+        if (this.getVehicle() instanceof Player vehicle) {
+            if (!vehicle.isShiftKeyDown()) {
+                return EntityDimensions.scalable(0.03F, 0.03F);
+            }
+        }
+        return super.getDefaultDimensions(pose);
+    }
+
+    @Override
+    public boolean shouldRenderAtSqrDistance(double distance) {
+        double d0 = this.getType().getDimensions().makeBoundingBox(this.position()).getSize();
+        if (Double.isNaN(d0)) {
+            d0 = 1.0F;
+        }
+        d0 *= 64.0 * getViewScale();
+        return distance < d0 * d0;
     }
 
     /**
@@ -309,11 +371,12 @@ public class Aerbunny extends AetherTamableAnimal {
                 this.setFastFalling(true); // Aerbunny will fall fast when dismounted.
                 Vec3 playerMovement = player.getDeltaMovement();
                 this.setDeltaMovement(playerMovement.x() * 5, playerMovement.y() * 0.5 + 0.5, playerMovement.z() * 5);
+                this.level().playSound(player, this, AetherIISoundEvents.ENTITY_AERBUNNY_LAND.get(), SoundSource.NEUTRAL, 1.0F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F);
             } else if (this.startRiding(player)) { // Mount segment.
                 if (this.isTame()) {
                     this.setOrderedToSit(false);
                 }
-                player.getData(AetherIIDataAttachments.PLAYER).setMountedAerbunny(this);
+                player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(this);
                 this.level().playSound(player, this, AetherIISoundEvents.ENTITY_AERBUNNY_LIFT.get(), SoundSource.NEUTRAL, 1.0F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F);
             }
             return InteractionResult.SUCCESS;
@@ -345,6 +408,9 @@ public class Aerbunny extends AetherTamableAnimal {
                 ((EntityAccessor) this).aether_ii$setVehicle(vehicle);
                 ((EntityAccessor) this.getVehicle()).callAddPassenger(this);
                 ((EntityAccessor) vehicle).callGetIndirectPassengersStream().filter((entity) -> entity instanceof ServerPlayer).forEach((player) -> CriteriaTriggers.START_RIDING_TRIGGER.trigger((ServerPlayer) player));
+                if (this.getVehicle() instanceof Player player) {
+                    this.setVehicleUUID(Optional.of(player.getUUID()));
+                }
                 return true;
             } else {
                 return false;
@@ -353,12 +419,16 @@ public class Aerbunny extends AetherTamableAnimal {
     }
 
     /**
-     * Stop tracking mounted Aerbunny with {@link AerbunnyMountAttachment}.
+     * Stop tracking mounted Aerbunny with {@link com.aetherteam.aetherii.attachment.player.AerbunnyMountAttachment}.
      */
     @Override
     public void stopRiding() {
+        this.refreshDimensions();
         if (this.getVehicle() instanceof Player player) {
-            player.getData(AetherIIDataAttachments.PLAYER).setMountedAerbunny(null);
+            player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(null);
+        }
+        if (this.getVehicleUUID().isPresent()) {
+            this.setVehicleUUID(Optional.empty());
         }
         super.stopRiding();
     }
@@ -386,7 +456,7 @@ public class Aerbunny extends AetherTamableAnimal {
         Vec3 motion = this.getDeltaMovement();
         if (motion.y() < 0) {
             this.puff();
-            this.level().broadcastEntityEvent(this, (byte) 70);
+            this.level().broadcastEntityEvent(this, (byte) PUFF_PARTICLE_EVENT);
         }
         this.setDeltaMovement(new Vec3(motion.x(), 0.25, motion.z()));
     }
@@ -398,9 +468,10 @@ public class Aerbunny extends AetherTamableAnimal {
         if (this.level() instanceof ServerLevel) {
             this.setPuffiness(MAXIMUM_PUFFS);
         }
+        this.level().playSound(null, this, AetherIISoundEvents.ENTITY_AERBUNNY_HOP.get(), SoundSource.NEUTRAL, 2.0F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F);
     }
 
-    private void spawnExplosionParticle() {
+    private void spawnPuffParticles() {
         for (int i = 0; i < 5; i++) {
             EntityUtil.spawnMovementExplosionParticles(this);
         }
@@ -420,6 +491,14 @@ public class Aerbunny extends AetherTamableAnimal {
      */
     public void setPuffiness(int puffiness) {
         this.entityData.set(DATA_PUFFINESS_ID, puffiness);
+    }
+
+    public int getPuffCooldown() {
+        return this.entityData.get(DATA_PUFF_COOLDOWN_ID);
+    }
+
+    public void setPuffCooldown(int cooldown) {
+        this.entityData.set(DATA_PUFF_COOLDOWN_ID, cooldown);
     }
 
     /**
@@ -469,6 +548,19 @@ public class Aerbunny extends AetherTamableAnimal {
         this.entityData.set(DATA_COLLAR_COLOR, pCollarColor.getId());
     }
 
+    public Optional<UUID> getVehicleUUID() {
+        return this.entityData.get(DATA_VEHICLE_UUID_ID);
+    }
+
+    public void setVehicleUUID(Optional<UUID> uuid) {
+        this.entityData.set(DATA_VEHICLE_UUID_ID, uuid);
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return AetherIISoundEvents.ENTITY_AERBUNNY_AMBIENT.get();
+    }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
@@ -518,7 +610,7 @@ public class Aerbunny extends AetherTamableAnimal {
      */
     @Override
     public boolean isInvulnerableTo(ServerLevel serverLevel, DamageSource damageSource) {
-        return (this.getVehicle() != null && this.getVehicle() == damageSource.getEntity()) || super.isInvulnerableTo(serverLevel, damageSource);
+        return this.getVehicle() != null || super.isInvulnerableTo(serverLevel, damageSource);
     }
 
     /**
@@ -546,19 +638,13 @@ public class Aerbunny extends AetherTamableAnimal {
     }
 
     @Override
-    public void handleEntityEvent(byte id) {
-        if (id == 70) {
-            this.spawnExplosionParticle();
-        } else {
-            super.handleEntityEvent(id);
-        }
-    }
-
-    @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putInt("AfraidTime", this.getAfraidTime());
         tag.putByte("CollarColor", (byte) this.getCollarColor().getId());
+        if (this.getVehicleUUID().isPresent()) {
+            tag.putUUID("VehicleUUID", this.getVehicleUUID().get());
+        }
     }
 
     @Override
@@ -569,6 +655,9 @@ public class Aerbunny extends AetherTamableAnimal {
         }
         if (tag.contains("CollarColor", 99)) {
             this.setCollarColor(DyeColor.byId(tag.getInt("CollarColor")));
+        }
+        if (tag.contains("VehicleUUID")) {
+            this.setVehicleUUID(Optional.of(tag.getUUID("VehicleUUID")));
         }
     }
 

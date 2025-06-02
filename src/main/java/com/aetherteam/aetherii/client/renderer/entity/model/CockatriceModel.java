@@ -1,14 +1,23 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
-import com.aetherteam.aetherii.client.renderer.entity.animation.CockatriceAnimation;
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.state.CockatriceRenderState;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class CockatriceModel extends EntityModel<CockatriceRenderState> {
+    public static final AnimationHolder RUN_START_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/run_start")); //todo
+    public static final AnimationHolder RUN_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/run"));
+    public static final AnimationHolder DART_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/dart_attack"));
+    public static final AnimationHolder CLAW_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/claw_attack"));
+    public static final AnimationHolder DIG_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/dig"));
+
     private final ModelPart body;
     private final ModelPart body_front;
     private final ModelPart neck;
@@ -189,8 +198,9 @@ public class CockatriceModel extends EntityModel<CockatriceRenderState> {
         float f1 = entity.walkAnimationPos;
         this.head.xRot = (entity.xRot * Mth.DEG_TO_RAD) + 0.0873F;
         this.head.yRot = entity.yRot * Mth.DEG_TO_RAD;
-        this.animateWalk(CockatriceAnimation.RUN, f1, f, 1.0F, 1.5F);
-        this.animate(entity.attackAnimationState, CockatriceAnimation.CLAW_ATTACK, entity.ageInTicks, 2.0F);
-        this.animate(entity.shootAnimationState, CockatriceAnimation.ATTACK, entity.ageInTicks, 1.0F);
+        this.animateWalk(RUN_ANIMATION, f1, f, 1.0F, 1.5F);
+        this.animate(entity.clawAttackAnimationState, CLAW_ATTACK_ANIMATION, entity.ageInTicks, 2.0F);
+        this.animate(entity.dartAttackAnimationState, DART_ATTACK_ANIMATION, entity.ageInTicks, 1.0F);
+        this.animate(entity.digAnimationState, DIG_ANIMATION, entity.ageInTicks, 1.0F);
     }
 }

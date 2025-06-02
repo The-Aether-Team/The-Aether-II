@@ -1,6 +1,16 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_aechor_petal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:aechor_petal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_skyroot_pinecone": {
       "conditions": {
         "items": [
@@ -21,7 +31,8 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_skyroot_pinecone"
+      "has_skyroot_pinecone",
+      "has_aechor_petal"
     ]
   ],
   "rewards": {

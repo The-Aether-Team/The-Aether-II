@@ -24,13 +24,14 @@ public class SheepuffRenderer extends MobRenderer<Sheepuff, SheepuffRenderState,
     }
 
     @Override
-    public void extractRenderState(Sheepuff sheepuff, SheepuffRenderState renderState, float p_361157_) {
-        super.extractRenderState(sheepuff, renderState, p_361157_);
-        renderState.headEatAngleScale = sheepuff.getHeadEatAngleScale(p_361157_);
-        renderState.headEatPositionScale = sheepuff.getHeadEatPositionScale(p_361157_);
+    public void extractRenderState(Sheepuff sheepuff, SheepuffRenderState renderState, float partialTick) {
+        super.extractRenderState(sheepuff, renderState, partialTick);
+        renderState.headEatAngleScale = sheepuff.getHeadEatAngleScale(partialTick);
+        renderState.headEatPositionScale = sheepuff.getHeadEatPositionScale(partialTick);
         renderState.isSheared = sheepuff.isSheared();
         renderState.woolColor = sheepuff.getColor();
         renderState.id = sheepuff.getId();
+        renderState.onGround = sheepuff.onGround();
         renderState.puff = sheepuff.getPuffed();
     }
 

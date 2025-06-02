@@ -87,10 +87,15 @@ public class CurrencyAttachment implements INBTSynchable {
                     ItemStack itemStack = new ItemStack(AetherIIItems.GLINT_COIN.get(), 64);
                     ItemEntity itemEntity = ((ServerPlayerAccessor) serverPlayer).callCreateItemStackToDrop(itemStack, true, false);
                     newStacks.add(itemEntity);
+                    if (itemEntity != null) {
+                        newStacks.add(itemEntity);
+                    }
                 }
                 ItemStack itemStack = new ItemStack(AetherIIItems.GLINT_COIN.get(), leftoverStack);
                 ItemEntity itemEntity = ((ServerPlayerAccessor) serverPlayer).callCreateItemStackToDrop(itemStack, true, false);
-                newStacks.add(itemEntity);
+                if (itemEntity != null) {
+                    newStacks.add(itemEntity);
+                }
                 drops.addAll(newStacks);
             }
         }

@@ -22,9 +22,9 @@
       "palette_key": "aether_ii:armor_styles/color_palettes/style_palette",
       "permutations": {
         "arkenium": "aether_ii:armor_styles/color_palettes/arkenium",
-        "burrukai_pelt": "aether_ii:armor_styles/color_palettes/burrukai_pelt",
+        "burrukai_plate": "aether_ii:armor_styles/color_palettes/burrukai_plate",
         "gravitite": "aether_ii:armor_styles/color_palettes/gravitite",
-        "taegore_hide": "aether_ii:armor_styles/color_palettes/taegore_hide",
+        "beast_pelt": "aether_ii:armor_styles/color_palettes/beast_pelt",
         "zanite": "aether_ii:armor_styles/color_palettes/zanite"
       }
     }

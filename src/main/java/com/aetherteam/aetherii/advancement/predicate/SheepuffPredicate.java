@@ -13,11 +13,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 public record SheepuffPredicate(Optional<Boolean> puffed, Optional<Boolean> sheared, Optional<Sheepuff.SheepuffColor> color) implements EntitySubPredicate {
-    public static final MapCodec<SheepuffPredicate> CODEC = RecordCodecBuilder.mapCodec((p_368666_) -> p_368666_.group(
+    public static final MapCodec<SheepuffPredicate> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
             Codec.BOOL.optionalFieldOf("puffed").forGetter(SheepuffPredicate::puffed),
             Codec.BOOL.optionalFieldOf("sheared").forGetter(SheepuffPredicate::sheared),
             Sheepuff.SheepuffColor.CODEC.optionalFieldOf("color").forGetter(SheepuffPredicate::color)
-    ).apply(p_368666_, SheepuffPredicate::new));
+    ).apply(instance, SheepuffPredicate::new));
 
     @Override
     public MapCodec<? extends EntitySubPredicate> codec() {

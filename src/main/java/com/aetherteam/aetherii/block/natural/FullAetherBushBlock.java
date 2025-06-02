@@ -1,9 +1,9 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -82,7 +82,7 @@ public class FullAetherBushBlock extends AetherBushBlock implements SimpleWaterl
             entity.makeStuckInBlock(state, new Vec3(0.8F, 0.75F, 0.8F));
             if (entity.getX() != entity.xOld && entity.getZ() != entity.zOld) {
                 if (level.getRandom().nextInt(10) == 0) {
-                    level.playSound(null, pos, SoundEvents.CAVE_VINES_STEP, SoundSource.BLOCKS, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.4F);
+                    level.playSound(null, pos, AetherIISoundEvents.BLOCK_BUSH_RUSTLE.get(), SoundSource.BLOCKS, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.4F);
                 }
                 int count = entity.isCrouching() ? 5 : 15;
                 this.spawnParticles(level, pos, count);

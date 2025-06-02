@@ -7,7 +7,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
 import com.aetherteam.aetherii.block.natural.Snowable;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.passive.FlyingCow;
 import com.aetherteam.aetherii.entity.passive.MountableAnimal;

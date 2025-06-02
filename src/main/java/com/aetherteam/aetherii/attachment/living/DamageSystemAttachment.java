@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.attachment.living;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
@@ -66,9 +66,9 @@ public class DamageSystemAttachment implements INBTSynchable {
         }
     }
 
-    public void buildUpShieldStun(LivingEntity entity, DamageSource source) {
+    public void buildUpShieldStun(LivingEntity entity, Entity source) {
         if (entity instanceof Player player && player.getUseItem().is(Tags.Items.TOOLS_SHIELD)) {
-            if (source.getEntity() != null && source.getEntity().getType().is(AetherIITags.Entities.AETHER_MOBS)) {
+            if (source != null && source.getType().is(AetherIITags.Entities.AETHER_MOBS)) {
                 int rate = DamageSystemAttachment.MAX_SHIELD_STAMINA / 2;
                 int cooldown;
                 if (entity.getUseItem().getItem() instanceof TieredShieldItem) {

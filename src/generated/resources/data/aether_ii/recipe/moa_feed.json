@@ -2,7 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "aether_ii:skyroot_pinecone"
+    "aether_ii:skyroot_pinecone",
+    "aether_ii:aechor_petal"
   ],
   "result": {
     "count": 3,

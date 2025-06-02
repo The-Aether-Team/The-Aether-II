@@ -31,11 +31,13 @@
     "common.accessor.MobEffectInstanceAccessor",
     "common.accessor.PerlinNoiseAccessor",
     "common.accessor.PlayerAccessor",
-    "common.accessor.RangedAttackGoalAccessor",
     "common.accessor.RecipeManagerAccessor",
     "common.accessor.SaplingBlockAccessor",
     "common.accessor.ServerGamePacketListenerImplAccessor",
-    "common.accessor.ServerPlayerAccessor"
+    "common.accessor.ServerPlayerAccessor",
+    "debug.DebugPacketsMixin",
+    "debug.PathFinderMixin",
+    "debug.accessor.PathAccessor"
   ],
   "client": [
     "client.BlockModelWrapperMixin",
@@ -55,7 +57,8 @@
     "client.accessor.LevelRendererAccessor",
     "client.accessor.ParticleAccessor",
     "client.accessor.PlayerModelAccessor",
-    "client.accessor.RenderChunkRegionAccessor"
+    "client.accessor.RenderChunkRegionAccessor",
+    "debug.DebugRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

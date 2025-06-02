@@ -24,6 +24,10 @@
               },
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
+            },
+            {
+              "count": 1.0,
+              "function": "aether_ii:sugar_drops"
             }
           ],
           "name": "aether_ii:swet_sugar"
@@ -69,6 +73,10 @@
                   },
                   "enchantment": "minecraft:looting",
                   "function": "minecraft:enchanted_count_increase"
+                },
+                {
+                  "count": 1.0,
+                  "function": "aether_ii:gel_drops"
                 }
               ],
               "name": "aether_ii:blue_swet_gel"
@@ -105,6 +113,10 @@
                   },
                   "enchantment": "minecraft:looting",
                   "function": "minecraft:enchanted_count_increase"
+                },
+                {
+                  "count": 1.0,
+                  "function": "aether_ii:gel_drops"
                 }
               ],
               "name": "aether_ii:golden_swet_gel"
@@ -141,6 +153,10 @@
                   },
                   "enchantment": "minecraft:looting",
                   "function": "minecraft:enchanted_count_increase"
+                },
+                {
+                  "count": 1.0,
+                  "function": "aether_ii:gel_drops"
                 }
               ],
               "name": "aether_ii:green_swet_gel"
@@ -177,6 +193,10 @@
                   },
                   "enchantment": "minecraft:looting",
                   "function": "minecraft:enchanted_count_increase"
+                },
+                {
+                  "count": 1.0,
+                  "function": "aether_ii:gel_drops"
                 }
               ],
               "name": "aether_ii:purple_swet_gel"

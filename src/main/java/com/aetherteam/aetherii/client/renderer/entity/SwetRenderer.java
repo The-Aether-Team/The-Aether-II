@@ -5,13 +5,15 @@ import com.aetherteam.aetherii.client.renderer.entity.layers.SwetGelLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.SwetModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
 import com.aetherteam.aetherii.entity.monster.Swet;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 public class SwetRenderer extends MobRenderer<Swet, SwetRenderState, SwetModel<SwetRenderState>> {
     public SwetRenderer(EntityRendererProvider.Context context) {
-        super(context, new SwetModel<>(context.bakeLayer(AetherIIModelLayers.SWET)), 0.3F);
+        super(context, new SwetModel<>(context.bakeLayer(AetherIIModelLayers.SWET), false), 0.3F);
         this.addLayer(new SwetGelLayer(this, context.getModelSet()));
     }
 
@@ -21,18 +23,29 @@ public class SwetRenderer extends MobRenderer<Swet, SwetRenderState, SwetModel<S
     }
 
     @Override
-    public void extractRenderState(Swet p_362733_, SwetRenderState p_360515_, float p_361157_) {
-        super.extractRenderState(p_362733_, p_360515_, p_361157_);
-        p_360515_.waterDamageScale = p_362733_.getWaterDamageScale();
-        p_360515_.foodSaturation = p_362733_.getFoodSaturation();
-        p_360515_.texture = p_362733_.getVariant().value().texture();
-        p_360515_.groundAnimationState.copyFrom(p_362733_.groundAnimationState);
-        p_360515_.jumpAnimationState.copyFrom(p_362733_.jumpAnimationState);
+    public void extractRenderState(Swet entity, SwetRenderState renderState, float partialTick) {
+        super.extractRenderState(entity, renderState, partialTick);
+        renderState.jumpAnimationState.copyFrom(entity.jumpAnimationState);
+        renderState.groundAnimationState.copyFrom(entity.groundAnimationState);
+        renderState.texture = entity.getVariant().value().texture();
+        renderState.swetScale = entity.getSwetScale();
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SwetRenderState swet) {
-        return swet.texture;
+    protected void scale(SwetRenderState renderState, PoseStack poseStack) {
+        float minScale = 0.6F;
+        float defaultScale = 0.95F;
+        float currentScale = renderState.swetScale;
+        float scaleRange = defaultScale - minScale;
+        float scaleDiff = defaultScale - currentScale;
+
+        poseStack.translate(0.0F, Mth.clamp((scaleDiff / scaleRange), 0.0F, 0.2F), 0.0F);
+
+        super.scale(renderState, poseStack);
     }
 
+    @Override
+    public ResourceLocation getTextureLocation(SwetRenderState renderState) {
+        return renderState.texture;
+    }
 }

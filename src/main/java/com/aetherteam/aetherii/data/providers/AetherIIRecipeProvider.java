@@ -186,6 +186,20 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .unlockedBy(has, has(material));
     }
 
+    protected ShapedRecipeBuilder makeShieldWithItem(Supplier<? extends Item> shield, Item material, String has) {
+        return this.makeShieldWithTag(shield, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)), has);
+    }
+
+    protected ShapedRecipeBuilder makeShieldWithTag(Supplier<? extends Item> shield, Item material, Ingredient sticks, String has) {
+        return ShapedRecipeBuilder.shaped(this.getter, RecipeCategory.COMBAT, shield.get())
+                .define('W', material)
+                .define('o', sticks)
+                .pattern("WoW")
+                .pattern("WWW")
+                .pattern(" W ")
+                .unlockedBy(has, has(material));
+    }
+
     protected ShapedRecipeBuilder makeShieldWithTag(Supplier<? extends Item> shield, TagKey<Item> material, String has) {
         return this.makeShieldWithTag(shield, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)), has);
     }

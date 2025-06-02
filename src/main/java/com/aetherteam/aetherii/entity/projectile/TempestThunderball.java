@@ -1,12 +1,13 @@
 package com.aetherteam.aetherii.entity.projectile;
 
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ElectricField;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -105,7 +106,7 @@ public class TempestThunderball extends AbstractHurtingProjectile {
         electricCircle.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10, 1, false, false, false));
 
         this.level().addFreshEntity(electricCircle);
-        electricCircle.playSound(SoundEvents.AMETHYST_BLOCK_CHIME);
+        electricCircle.playSound(AetherIISoundEvents.ENTITY_ELECTRIC_FIELD_CREATE.get());
     }
 
     @Override
@@ -113,9 +114,10 @@ public class TempestThunderball extends AbstractHurtingProjectile {
         super.onHitEntity(result);
         if (!this.level().isClientSide) {
             Entity entity = result.getEntity();
-            Entity entity1 = this.getOwner();
-            if (entity1 instanceof LivingEntity) {
-                entity.hurt(this.damageSources().indirectMagic(this, entity1), 2.0F);
+            if (entity instanceof LivingEntity livingEntity) {
+                if (livingEntity.level() instanceof ServerLevel serverLevel) {
+                    entity.hurtServer(serverLevel, this.damageSources().mobProjectile(this, livingEntity), 3.0F);
+                }
             }
         }
     }

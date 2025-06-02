@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.world.entity.AnimationState;
 
 public class CockatriceRenderState extends LivingEntityRenderState {
-    public AnimationState attackAnimationState = new AnimationState();
-    public AnimationState shootAnimationState = new AnimationState();
-
+    public AnimationState clawAttackAnimationState = new AnimationState();
+    public AnimationState dartAttackAnimationState = new AnimationState();
+    public AnimationState digAnimationState = new AnimationState();
 }
