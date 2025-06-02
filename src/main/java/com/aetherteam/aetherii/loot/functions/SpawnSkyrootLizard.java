@@ -64,7 +64,7 @@ public class SpawnSkyrootLizard extends LootItemConditionalFunction {
     }
 
     @Override
-    public LootItemFunctionType getType() {
+    public LootItemFunctionType<SpawnSkyrootLizard> getType() {
         return AetherIILootFunctions.SPAWN_SKYROOT_LIZARD.get();
     }
 }

@@ -11,6 +11,7 @@ import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.AetherIILoot;
+import com.aetherteam.aetherii.loot.functions.GelDropsFunction;
 import net.minecraft.advancements.critereon.DamageSourcePredicate;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
@@ -290,13 +291,15 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
             builder = builder.otherwise(LootItem.lootTableItem(swetVariant.value().gelItem().value())
                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                     .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0F, 1.0F)))
-                    .when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(new SwetVariantPredicate(swetVariant)))));
+                    .apply(GelDropsFunction.extra(ConstantValue.exactly(1.0F)))
+                    .when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(new SwetVariantPredicate(swetVariant))))
+            );
         }
         return LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIItems.SWET_SUGAR)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0F, 1.0F))
-                                )
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0F, 1.0F)))
+                                .apply(GelDropsFunction.extra(ConstantValue.exactly(1.0F)))
                         )
                 ).withPool(LootPool.lootPool().add(builder));
     }
