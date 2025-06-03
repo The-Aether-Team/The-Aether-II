@@ -1,7 +1,10 @@
 package com.aetherteam.aetherii.entity.monster;
 
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -15,8 +18,13 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+
+import javax.annotation.Nullable;
 
 public class ArkeniumTaluton extends Monster {
+    public static int ATTACK_EVENT = 4;
+
     private int attackAnimationTick;
 
     public ArkeniumTaluton(EntityType<? extends ArkeniumTaluton> entityType, Level level) {
@@ -43,6 +51,15 @@ public class ArkeniumTaluton extends Monster {
     }
 
     @Override
+    public void handleEntityEvent(byte id) {
+        if (id == ATTACK_EVENT) {
+            this.attackAnimationTick = 10;
+        } else {
+            super.handleEntityEvent(id);
+        }
+    }
+
+    @Override
     public void aiStep() {
         super.aiStep();
         if (this.attackAnimationTick > 0) {
@@ -53,19 +70,35 @@ public class ArkeniumTaluton extends Monster {
     @Override
     public boolean doHurtTarget(ServerLevel serverLevel, Entity entity) {
         this.attackAnimationTick = 10;
-        serverLevel.broadcastEntityEvent(this, (byte) 4);
+        serverLevel.broadcastEntityEvent(this, (byte) ATTACK_EVENT);
+        this.playSound(AetherIISoundEvents.ENTITY_ARKENIUM_TALUTON_ATTACK.get(), 1.0F, 1.0F);
         return super.doHurtTarget(serverLevel, entity);
-    }
-
-    @Override
-    public void handleEntityEvent(byte id) {
-        if (id == 4) {
-            this.attackAnimationTick = 10;
-            this.playSound(SoundEvents.IRON_GOLEM_ATTACK, 1.0F, 1.0F);
-        }
     }
 
     public int getAttackAnimationTick() {
         return this.attackAnimationTick;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return AetherIISoundEvents.ENTITY_ARKENIUM_TALUTON_AMBIENT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return AetherIISoundEvents.ENTITY_ARKENIUM_TALUTON_HURT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return AetherIISoundEvents.ENTITY_ARKENIUM_TALUTON_DEATH.get();
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, BlockState state) {
+        this.playSound(AetherIISoundEvents.ENTITY_ARKENIUM_TALUTON_STEP.get(), 0.15F, 1.0F);
     }
 }

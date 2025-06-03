@@ -1,0 +1,221 @@
+{
+  "length": 2.16,
+  "animations": [
+    {
+      "bone": "leg_left",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 1.68,
+          "target": [
+            -70,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 1.96,
+          "target": [
+            -70,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 2.08,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        }
+      ]
+    },
+    {
+      "bone": "leg_right",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 1.68,
+          "target": [
+            -70,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 1.96,
+          "target": [
+            -70,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 2.08,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        }
+      ]
+    },
+    {
+      "bone": "leg_rear",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 1.68,
+          "target": [
+            -70,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 1.96,
+          "target": [
+            -70,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 2.08,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        }
+      ]
+    },
+    {
+      "bone": "debris_node",
+      "target": "position",
+      "keyframes": [
+        {
+          "timestamp": 1.96,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 2.16,
+          "target": [
+            0,
+            0,
+            -18
+          ],
+          "interpolation": "linear"
+        }
+      ]
+    },
+    {
+      "bone": "debris_node",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 1.2,
+          "target": [
+            -90,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        }
+      ]
+    },
+    {
+      "bone": "debris_node",
+      "target": "scale",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            1,
+            1,
+            1
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 1.2,
+          "target": [
+            1,
+            1,
+            1
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 1.96,
+          "target": [
+            0.8,
+            0.8,
+            0.8
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 2.16,
+          "target": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "interpolation": "linear"
+        }
+      ]
+    }
+  ]
+}

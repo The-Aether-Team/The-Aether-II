@@ -31,7 +31,9 @@ import net.minecraft.world.level.portal.TeleportTransition;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityMountEvent;
+import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.level.AlterGroundEvent;
@@ -49,6 +51,7 @@ public class AetherIIEventListeners {
         // Player
         bus.addListener(AetherIIEventListeners::onPlayerLogin);
         bus.addListener(AetherIIEventListeners::onPlayerLogout);
+        bus.addListener(AetherIIEventListeners::onPlayerJoinLevel);
         bus.addListener(AetherIIEventListeners::onPlayerRespawn);
         bus.addListener(AetherIIEventListeners::onPlayerPositionRespawn);
         bus.addListener(AetherIIEventListeners::onPlayerClone);
@@ -65,6 +68,7 @@ public class AetherIIEventListeners {
 
         // Entity
         bus.addListener(AetherIIEventListeners::onEntityPostTick);
+        bus.addListener(AetherIIEventListeners::onEntityTravelToDimension);
 
         // Living
         bus.addListener(AetherIIEventListeners::onLivingPreDamaged);
@@ -85,6 +89,8 @@ public class AetherIIEventListeners {
         Player player = event.getEntity();
 
         player.getData(AetherIIDataAttachments.PLAYER).login(player);
+        player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).login(player);
+        player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).login(player);
         player.getData(AetherIIDataAttachments.CURRENCY).login(player); //todo verify
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).login(player);
         player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).login(player); //todo verify
@@ -95,6 +101,15 @@ public class AetherIIEventListeners {
         Player player = event.getEntity();
 
         player.getData(AetherIIDataAttachments.PLAYER).logout(player);
+    }
+
+    public static void onPlayerJoinLevel(EntityJoinLevelEvent event) {
+        Entity entity = event.getEntity();
+
+        if (entity instanceof Player player) {
+            player.getData(AetherIIDataAttachments.PLAYER).onJoinLevel(player);
+            player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).onJoinLevel(player);
+        }
     }
 
     public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
@@ -127,16 +142,20 @@ public class AetherIIEventListeners {
         Player player = event.getEntity();
 
         player.getData(AetherIIDataAttachments.PLAYER).changeDimension(player);
+        player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).changeDimension(player);
+        player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT.get()).remountAerbunny(player);
     }
 
     public static void onPlayerPostTick(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
 
         player.getData(AetherIIDataAttachments.PLAYER).postTickUpdate(player);
+        player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).postTickUpdate(player);
+        player.getData(AetherIIDataAttachments.SWET_LATCH).postTickUpdate();
+        player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.CURRENCY).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).postTickUpdate(player);
-        player.getData(AetherIIDataAttachments.SWET).postTickUpdate(player);
         PlayerHooks.forceSpecialLoadingCrouch(player);
     }
 
@@ -232,6 +251,14 @@ public class AetherIIEventListeners {
         }
     }
 
+    public static void onEntityTravelToDimension(EntityTravelToDimensionEvent event) {
+        Entity entity = event.getEntity();
+
+        if (entity instanceof Player player) {
+            player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT.get()).removeAerbunny();
+        }
+    }
+
     public static void onLivingPreDamaged(LivingDamageEvent.Pre event) {
         LivingEntity target = event.getEntity();
         DamageSource source = event.getContainer().getSource();
@@ -246,7 +273,7 @@ public class AetherIIEventListeners {
         LivingEntity livingEntity = event.getEntity();
         DamageSource source = event.getDamageSource();
 
-        livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, source);
+        livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, source.getEntity());
     }
 
     public static void onLivingItemUsed(LivingEntityUseItemEvent.Finish event) {

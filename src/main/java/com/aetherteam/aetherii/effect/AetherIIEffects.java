@@ -27,7 +27,10 @@ public class AetherIIEffects {
     public static final DeferredHolder<MobEffect, MobEffect> FRACTURE = EFFECTS.register("fracture", () -> new FractureEffect()
             .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.fracture.slowness"), -0.3F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
             .addAttributeModifier(Attributes.JUMP_STRENGTH, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.fracture.jump_hinder"), -0.2F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
-            .addAttributeModifier(Attributes.SAFE_FALL_DISTANCE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.fracture.fall_increase"), -2.0F, AttributeModifier.Operation.ADD_VALUE));
+            .addAttributeModifier(Attributes.SAFE_FALL_DISTANCE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.fracture.fall_increase"), -2.0F, AttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(AetherIIAttributes.SLASH_RESISTANCE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.fracture.slash_weakness"), 0.5F, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)
+            .addAttributeModifier(AetherIIAttributes.IMPACT_RESISTANCE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.fracture.impact_weakness"), 0.5F, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)
+            .addAttributeModifier(AetherIIAttributes.PIERCE_RESISTANCE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.fracture.pierce_weakness"), 0.5F, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
     public static final DeferredHolder<MobEffect, MobEffect> AMBROSIUM_POISONING = EFFECTS.register("ambrosium_poisoning", AmbrosiumPoisoningEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> TOXIN = EFFECTS.register("toxin", ToxinEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> VENOM = EFFECTS.register("venom", VenomEffect::new);
@@ -51,8 +54,6 @@ public class AetherIIEffects {
         bus.addListener(StunEffect::disableRightClickBlock);
         bus.addListener(StunEffect::disableRightClickItem);
         bus.addListener(StunEffect::disableLeftClickBlock);
-
-        bus.addListener(FractureEffect::onEffectRemoval);
 
         bus.addListener(AmbrosiumPoisoningEffect::preventHealing);
 

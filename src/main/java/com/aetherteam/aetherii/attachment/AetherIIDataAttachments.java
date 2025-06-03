@@ -24,8 +24,10 @@ public class AetherIIDataAttachments {
 
     // Player
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<AetherIIPlayerAttachment>> PLAYER = ATTACHMENTS.register("player", () -> AttachmentType.builder(AetherIIPlayerAttachment::new).serialize(AetherIIPlayerAttachment.CODEC).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<SwetLatchAttachment>> SWET_LATCH = ATTACHMENTS.register("swet_latch", () -> AttachmentType.serializable((entity) -> new SwetLatchAttachment((Player) entity)).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AerbunnyMountAttachment>> AERBUNNY_MOUNT = ATTACHMENTS.register("aerbunny_mount", () -> AttachmentType.builder(AerbunnyMountAttachment::new).serialize(AerbunnyMountAttachment.CODEC).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AbilityBehaviorAttachment>> ABILITY_BEHAVIOR = ATTACHMENTS.register("ability_behavior", () -> AttachmentType.builder(AbilityBehaviorAttachment::new).serialize(AbilityBehaviorAttachment.CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<CurrencyAttachment>> CURRENCY = ATTACHMENTS.register("currency", () -> AttachmentType.builder(CurrencyAttachment::new).serialize(CurrencyAttachment.CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<GuidebookDiscoveryAttachment>> GUIDEBOOK_DISCOVERY = ATTACHMENTS.register("guidebook_discovery", () -> AttachmentType.builder(GuidebookDiscoveryAttachment::new).serialize(GuidebookDiscoveryAttachment.CODEC).copyOnDeath().build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<OutpostTrackerAttachment>> OUTPOST_TRACKER = ATTACHMENTS.register("outpost_tracker", () -> AttachmentType.builder(OutpostTrackerAttachment::new).serialize(OutpostTrackerAttachment.CODEC).copyOnDeath().build());
-    public static final DeferredHolder<AttachmentType<?>, AttachmentType<SwetAttachment>> SWET = ATTACHMENTS.register("swet", () -> AttachmentType.serializable((entity) -> new SwetAttachment((Player) entity)).build());
 }

@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.network.packet.clientbound;
 import com.aetherteam.aetherii.AetherII;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
@@ -12,20 +13,12 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 public record SetVehiclePacket(int passengerID, int vehicleID) implements CustomPacketPayload {
     public static final Type<SetVehiclePacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "set_mount"));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, SetVehiclePacket> STREAM_CODEC = CustomPacketPayload.codec(
-            SetVehiclePacket::write,
-            SetVehiclePacket::decode);
-
-    public void write(RegistryFriendlyByteBuf buf) {
-        buf.writeInt(this.passengerID());
-        buf.writeInt(this.vehicleID());
-    }
-
-    public static SetVehiclePacket decode(RegistryFriendlyByteBuf buf) {
-        int passengerID = buf.readInt();
-        int vehicleID = buf.readInt();
-        return new SetVehiclePacket(passengerID, vehicleID);
-    }
+    public static final StreamCodec<RegistryFriendlyByteBuf, SetVehiclePacket> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.INT,
+            SetVehiclePacket::passengerID,
+            ByteBufCodecs.INT,
+            SetVehiclePacket::vehicleID,
+            SetVehiclePacket::new);
 
     @Override
     public Type<SetVehiclePacket> type() {

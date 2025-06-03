@@ -32,13 +32,13 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Vector4f;
 
 public class AetherIIClientExtensions {
-    public static final IClientItemExtensions TAEGORE_HIDE = new IClientItemExtensions() {
+    public static final IClientItemExtensions BEAST_PELT = new IClientItemExtensions() {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
             return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0xCFEEF9) : -1;
         }
     };
-    public static final IClientItemExtensions BURRUKAI_PELT = new IClientItemExtensions() {
+    public static final IClientItemExtensions BURRUKAI_PLATE = new IClientItemExtensions() {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
             return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0x619CC0) : -1;
@@ -147,8 +147,8 @@ public class AetherIIClientExtensions {
     };
 
     public static void registerClientItemExtensions(RegisterClientExtensionsEvent event) {
-        event.registerItem(TAEGORE_HIDE, AetherIIItems.TAEGORE_HIDE_HELMET.get(), AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), AetherIIItems.TAEGORE_HIDE_BOOTS.get(), AetherIIItems.TAEGORE_HIDE_GLOVES.get());
-        event.registerItem(BURRUKAI_PELT, AetherIIItems.BURRUKAI_PELT_HELMET.get(), AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), AetherIIItems.BURRUKAI_PELT_BOOTS.get(), AetherIIItems.BURRUKAI_PELT_GLOVES.get());
+        event.registerItem(BEAST_PELT, AetherIIItems.BEAST_PELT_HELMET.get(), AetherIIItems.BEAST_PELT_CHESTPLATE.get(), AetherIIItems.BEAST_PELT_LEGGINGS.get(), AetherIIItems.BEAST_PELT_BOOTS.get(), AetherIIItems.BEAST_PELT_GLOVES.get());
+        event.registerItem(BURRUKAI_PLATE, AetherIIItems.BURRUKAI_PLATE_HELMET.get(), AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(), AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(), AetherIIItems.BURRUKAI_PLATE_BOOTS.get(), AetherIIItems.BURRUKAI_PLATE_GLOVES.get());
         event.registerItem(THROWABLE, AetherIIBlocks.HOLYSTONE_ROCK.asItem(), AetherIIItems.SKYROOT_PINECONE.get(), AetherIIItems.ARCTIC_SNOWBALL.get());
         event.registerItem(GLIDER, AetherIIItems.COLD_AERCLOUD_GLIDER, AetherIIItems.GOLDEN_AERCLOUD_GLIDER, AetherIIItems.BLUE_AERCLOUD_GLIDER, AetherIIItems.PURPLE_AERCLOUD_GLIDER);
 

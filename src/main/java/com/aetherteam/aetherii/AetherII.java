@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.advancement.predicate.AetherIIEntitySubPredicates;
+import com.aetherteam.aetherii.api.SkyrootLizardVariant;
 import com.aetherteam.aetherii.api.SwetVariant;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
@@ -12,17 +13,18 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.*;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.AetherIIClient;
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.data.ReloadListeners;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.*;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.entity.ai.brain.sensor.AetherIISensorTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
+import com.aetherteam.aetherii.entity.ai.brain.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.inventory.AetherIIAccessorySlots;
 import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
@@ -32,10 +34,7 @@ import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.consumeeffect.AetherIIConsumeEffectTypes;
 import com.aetherteam.aetherii.loot.functions.AetherIILootFunctions;
 import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
-import com.aetherteam.aetherii.network.packet.AetherIIPlayerSyncPacket;
-import com.aetherteam.aetherii.network.packet.CurrencySyncPacket;
-import com.aetherteam.aetherii.network.packet.DamageSystemSyncPacket;
-import com.aetherteam.aetherii.network.packet.OutpostTrackerSyncPacket;
+import com.aetherteam.aetherii.network.packet.*;
 import com.aetherteam.aetherii.network.packet.clientbound.*;
 import com.aetherteam.aetherii.network.packet.serverbound.*;
 import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
@@ -77,6 +76,7 @@ import org.slf4j.Logger;
 public class AetherII {
     public static final String MODID = "aether_ii";
     public static final Logger LOGGER = LogUtils.getLogger();
+    public static final boolean DEBUG_MODE = false;
 
     public AetherII(ModContainer mod, IEventBus bus, Dist dist) {
         bus.addListener(AetherIIData::data);
@@ -89,6 +89,7 @@ public class AetherII {
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIStyleDesigns.STYLE_DESIGN_REGISTRY_KEY, StyleDesign.DIRECT_CODEC, StyleDesign.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIStyleMaterials.STYLE_MATERIAL_REGISTRY_KEY, StyleMaterial.DIRECT_CODEC, StyleMaterial.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY, SwetVariant.DIRECT_CODEC, SwetVariant.DIRECT_CODEC));
+        bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY, SkyrootLizardVariant.DIRECT_CODEC, SkyrootLizardVariant.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIRewardWrappers.REWARD_WRAPPER_REGISTRY_KEY, RewardWrapper.DIRECT_CODEC, RewardWrapper.DIRECT_CODEC));
 
         DeferredRegister<?>[] registers = {
@@ -100,6 +101,7 @@ public class AetherII {
                 AetherIIBlockEntityTypes.BLOCK_ENTITY_TYPES,
                 AetherIIAttributes.ATTRIBUTES,
                 AetherIIMemoryModuleTypes.MEMORY_MODULE_TYPES,
+                AetherIISensorTypes.SENSOR_TYPES,
                 AetherIIEffects.EFFECTS,
                 AetherIIConsumeEffectTypes.CONSUME_EFFECT_TYPE,
                 AetherIIDataSerializers.ENTITY_DATA_SERIALIZERS,
@@ -217,6 +219,7 @@ public class AetherII {
         registrar.playToServer(StepHeightPacket.TYPE, StepHeightPacket.STREAM_CODEC, StepHeightPacket::execute);
 
         // BOTH
+        registrar.playBidirectional(AbilityBehaviorSyncPacket.TYPE, AbilityBehaviorSyncPacket.STREAM_CODEC, AbilityBehaviorSyncPacket::execute);
         registrar.playBidirectional(AetherIIPlayerSyncPacket.TYPE, AetherIIPlayerSyncPacket.STREAM_CODEC, AetherIIPlayerSyncPacket::execute);
         registrar.playBidirectional(CurrencySyncPacket.TYPE, CurrencySyncPacket.STREAM_CODEC, CurrencySyncPacket::execute);
         registrar.playBidirectional(DamageSystemSyncPacket.TYPE, DamageSystemSyncPacket.STREAM_CODEC, DamageSystemSyncPacket::execute);

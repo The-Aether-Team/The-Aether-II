@@ -49,12 +49,14 @@ import java.util.*;
 
 public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEntry.Mutable> {
     private static final List<Holder<EntityType<?>>> ENTRY_ORDER = List.of(
-            AetherIIEntityTypes.PHYG, AetherIIEntityTypes.SHEEPUFF, AetherIIEntityTypes.FLYING_COW, AetherIIEntityTypes.AERBUNNY,
             AetherIIEntityTypes.HIGHFIELDS_TAEGORE, AetherIIEntityTypes.MAGNETIC_TAEGORE, AetherIIEntityTypes.ARCTIC_TAEGORE,
             AetherIIEntityTypes.HIGHFIELDS_KIRRID, AetherIIEntityTypes.MAGNETIC_KIRRID, AetherIIEntityTypes.ARCTIC_KIRRID,
             AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, AetherIIEntityTypes.MAGNETIC_BURRUKAI, AetherIIEntityTypes.ARCTIC_BURRUKAI,
-            AetherIIEntityTypes.MOA, AetherIIEntityTypes.SKYROOT_LIZARD,
-            AetherIIEntityTypes.ZEPHYR, AetherIIEntityTypes.SKEPHID, AetherIIEntityTypes.TEMPEST, AetherIIEntityTypes.COCKATRICE, AetherIIEntityTypes.AECHOR_PLANT,
+            AetherIIEntityTypes.PHYG, AetherIIEntityTypes.SHEEPUFF, AetherIIEntityTypes.FLYING_COW,
+            AetherIIEntityTypes.AERBUNNY, AetherIIEntityTypes.SKYROOT_LIZARD,AetherIIEntityTypes.MOA,
+            AetherIIEntityTypes.SWET, AetherIIEntityTypes.AECHOR_PLANT, AetherIIEntityTypes.CARRION_SPROUT,
+            AetherIIEntityTypes.SKEPHID, AetherIIEntityTypes.ZEPHYR,
+            AetherIIEntityTypes.TEMPEST, AetherIIEntityTypes.COCKATRICE,
             AetherIIEntityTypes.ARKENIUM_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON
     );
     private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_BESTIARY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_bestiary.png");

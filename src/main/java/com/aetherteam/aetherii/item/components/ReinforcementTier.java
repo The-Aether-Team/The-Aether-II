@@ -85,8 +85,8 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
     }
 
     public record Cost(Predicate<ItemStack> stackCondition, ItemLike primaryMaterial, int primaryCount, ItemLike secondaryMaterial, int secondaryCount) {
-        public static final Predicate<ItemStack> TAEGORE_HIDE = isTier(AetherIITags.Items.TAEGORE_HIDE_ARMOR);
-        public static final Predicate<ItemStack> BURRUKAI_PELT = isTier(AetherIITags.Items.BURRUKAI_PELT_ARMOR);
+        public static final Predicate<ItemStack> BEAST_PELT = isTier(AetherIITags.Items.BEAST_PELT_ARMOR);
+        public static final Predicate<ItemStack> BURRUKAI_PLATE = isTier(AetherIITags.Items.BURRUKAI_PLATE_ARMOR);
         public static final Predicate<ItemStack> SKYROOT = isTier(AetherIITags.Items.SKYROOT_TOOL);
         public static final Predicate<ItemStack> HOLYSTONE = isTier(AetherIITags.Items.HOLYSTONE_TOOL);
         public static final Predicate<ItemStack> ZANITE = isTier(AetherIITags.Items.ZANITE_TOOL).or(isTier(AetherIITags.Items.ZANITE_ARMOR));
@@ -94,8 +94,8 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
         public static final Predicate<ItemStack> GRAVITITE = isTier(AetherIITags.Items.GRAVITITE_TOOL).or(isTier(AetherIITags.Items.GRAVITITE_ARMOR));
 
         public static final Set<Cost> TIER_1 = Set.of(
-                new Cost(TAEGORE_HIDE, AetherIIItems.ARKENIUM_PLATES, 1, Items.AIR, 0),
-                new Cost(BURRUKAI_PELT, AetherIIItems.ARKENIUM_PLATES, 1, Items.AIR, 0),
+                new Cost(BEAST_PELT, AetherIIItems.ARKENIUM_PLATES, 1, Items.AIR, 0),
+                new Cost(BURRUKAI_PLATE, AetherIIItems.ARKENIUM_PLATES, 1, Items.AIR, 0),
                 new Cost(SKYROOT, AetherIIItems.ARKENIUM_PLATES, 1, Items.AIR, 0),
                 new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATES, 1, Items.AIR, 0),
                 new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATES, 2, Items.AIR, 0),
@@ -103,8 +103,8 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                 new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATES, 3, Items.AIR, 0)
         );
         public static final Set<Cost> TIER_2 = Set.of(
-                new Cost(TAEGORE_HIDE, AetherIIItems.ARKENIUM_PLATES, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
-                new Cost(BURRUKAI_PELT, AetherIIItems.ARKENIUM_PLATES, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
+                new Cost(BEAST_PELT, AetherIIItems.ARKENIUM_PLATES, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
+                new Cost(BURRUKAI_PLATE, AetherIIItems.ARKENIUM_PLATES, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
                 new Cost(SKYROOT, AetherIIItems.ARKENIUM_PLATES, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
                 new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATES, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
                 new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATES, 3, AetherIIItems.CORROBONITE_CRYSTAL, 1),
@@ -112,8 +112,8 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                 new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATES, 4, AetherIIItems.CORROBONITE_CRYSTAL, 1)
         );
         public static final Set<Cost> TIER_3 = Set.of(
-                new Cost(TAEGORE_HIDE, AetherIIItems.ARKENIUM_PLATES, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
-                new Cost(BURRUKAI_PELT, AetherIIItems.ARKENIUM_PLATES, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
+                new Cost(BEAST_PELT, AetherIIItems.ARKENIUM_PLATES, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
+                new Cost(BURRUKAI_PLATE, AetherIIItems.ARKENIUM_PLATES, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
                 new Cost(SKYROOT, AetherIIItems.ARKENIUM_PLATES, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
                 new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATES, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
                 new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATES, 5, AetherIIItems.CORROBONITE_CRYSTAL, 3),

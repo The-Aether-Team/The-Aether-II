@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.entity.model.taegore;
 
+import com.aetherteam.aetherii.client.renderer.entity.state.TaegoreRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -7,8 +8,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.util.Mth;
 
-public class TaegoreBabyModel extends EntityModel<LivingEntityRenderState> {
-    ;
+public class TaegoreBabyModel extends EntityModel<TaegoreRenderState> {
 	private final ModelPart body_main;
 	private final ModelPart tail;
 	private final ModelPart plate_f_l;
@@ -74,7 +74,7 @@ public class TaegoreBabyModel extends EntityModel<LivingEntityRenderState> {
 	}
 
 	@Override
-    public void setupAnim(LivingEntityRenderState entity) {
+    public void setupAnim(TaegoreRenderState entity) {
         super.setupAnim(entity);
         this.head.xRot = entity.xRot * Mth.DEG_TO_RAD;
         this.head.yRot = entity.yRot * Mth.DEG_TO_RAD;

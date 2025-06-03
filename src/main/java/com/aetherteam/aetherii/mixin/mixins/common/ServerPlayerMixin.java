@@ -12,6 +12,6 @@ public class ServerPlayerMixin {
     @Inject(at = @At(value = "HEAD"), method = "disconnect()V")
     private void disconnect(CallbackInfo ci) {
         ServerPlayer serverPlayer = (ServerPlayer) (Object) this;
-        serverPlayer.getData(AetherIIDataAttachments.PLAYER.get()).removeAerbunny();
+        serverPlayer.getData(AetherIIDataAttachments.AERBUNNY_MOUNT.get()).removeAerbunny();
     }
 }

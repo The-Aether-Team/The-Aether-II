@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "aether_ii:ambrosium_shard",
+    "@": "minecraft:quartz"
+  },
+  "pattern": [
+    "#@",
+    "@#"
+  ],
+  "result": {
+    "count": 4,
+    "id": "minecraft:glowstone_dust"
+  }
+}

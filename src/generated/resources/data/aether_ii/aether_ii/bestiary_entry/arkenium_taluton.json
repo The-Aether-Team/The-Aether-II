@@ -2,10 +2,10 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.arkenium_taluton",
   "effect_resistances": [],
   "entity_type": "aether_ii:arkenium_taluton",
-  "health": 0,
+  "health": 30,
   "icon": "aether_ii:guidebook/bestiary/arkenium_taluton",
   "id": "aether_ii:arkenium_taluton",
-  "impact_defense": 0,
+  "impact_defense": -2,
   "loot_slots": [
     {
       "loot": {
@@ -25,7 +25,7 @@
     }
   ],
   "name": "entity.aether_ii.arkenium_taluton",
-  "pierce_defense": 0,
-  "slash_defense": 0,
+  "pierce_defense": 2,
+  "slash_defense": 2,
   "slot_name": "entity.aether_ii.arkenium_taluton"
 }

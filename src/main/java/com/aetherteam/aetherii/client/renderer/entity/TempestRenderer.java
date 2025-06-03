@@ -32,15 +32,15 @@ public class TempestRenderer extends MobRenderer<Tempest, TempestRenderState, Te
     }
 
     @Override
-    public void extractRenderState(Tempest p_362733_, TempestRenderState p_360515_, float p_361157_) {
-        super.extractRenderState(p_362733_, p_360515_, p_361157_);
-        p_360515_.attackAnimationState.copyFrom(p_362733_.attackAnimationState);
-        p_360515_.hideAnimationState.copyFrom(p_362733_.hideAnimationState);
+    public TempestRenderState createRenderState() {
+        return new TempestRenderState();
     }
 
     @Override
-    public TempestRenderState createRenderState() {
-        return new TempestRenderState();
+    public void extractRenderState(Tempest entity, TempestRenderState renderState, float partialTick) {
+        super.extractRenderState(entity, renderState, partialTick);
+        renderState.attackAnimationState.copyFrom(entity.attackAnimationState);
+        renderState.hideAnimationState.copyFrom(entity.hideAnimationState);
     }
 
     @Override

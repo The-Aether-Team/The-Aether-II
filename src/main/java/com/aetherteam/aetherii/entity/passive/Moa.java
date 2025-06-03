@@ -1,7 +1,8 @@
 package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
@@ -10,11 +11,9 @@ import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.MoaEggType;
-import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -72,34 +71,6 @@ public class Moa extends MountableAnimal {
     private static final EntityDataAccessor<Boolean> DATA_SITTING_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Optional<UUID>> DATA_FOLLOWING_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
 
-    protected static final ImmutableList<SensorType<? extends Sensor<? super Moa>>> SENSOR_TYPES = ImmutableList.of(
-            SensorType.NEAREST_LIVING_ENTITIES,
-            SensorType.NEAREST_PLAYERS,
-            SensorType.NEAREST_ITEMS,
-            SensorType.NEAREST_ADULT,
-            SensorType.HURT_BY
-    );
-    protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
-            MemoryModuleType.LOOK_TARGET,
-            MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES,
-            MemoryModuleType.WALK_TARGET,
-            MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE,
-            MemoryModuleType.PATH,
-            MemoryModuleType.ATE_RECENTLY,
-            MemoryModuleType.BREED_TARGET,
-            MemoryModuleType.TEMPTING_PLAYER,
-            MemoryModuleType.NEAREST_VISIBLE_ADULT,
-            MemoryModuleType.TEMPTATION_COOLDOWN_TICKS,
-            MemoryModuleType.IS_TEMPTED,
-            MemoryModuleType.IS_PANICKING,
-            MemoryModuleType.ATTACK_TARGET,
-            MemoryModuleType.ATTACK_COOLING_DOWN,
-            MemoryModuleType.ANGRY_AT,
-            MemoryModuleType.HURT_BY,
-            MemoryModuleType.HURT_BY_ENTITY,
-            MemoryModuleType.HOME
-    );
-
     private int jumpCooldown;
     private int flapCooldown;
 
@@ -119,75 +90,12 @@ public class Moa extends MountableAnimal {
         this.setPathfindingMalus(PathType.LAVA, -1.0F);
     }
 
-
-    @Override
-    protected PathNavigation createNavigation(Level level) {
-        return new FallPathNavigation(this, level);
-    }
-
     public static AttributeSupplier.Builder createMobAttributes() {
         return Animal.createAnimalAttributes()
-                .add(Attributes.MOVEMENT_SPEED, 1.0)
-                .add(Attributes.FOLLOW_RANGE, 16.0)
-                .add(Attributes.ATTACK_DAMAGE, 5.0);
-    }
-
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        super.defineSynchedData(builder);
-        builder.define(DATA_MOA_UUID_ID, Optional.empty());
-        builder.define(DATA_FEATHER_SHAPE_ID, FeatherShape.CURVED.getSerializedName());
-        builder.define(DATA_KERATIN_COLOR, KeratinColor.GRAY.getSerializedName());
-        builder.define(DATA_EYE_COLOR, EyeColor.BLUE.getSerializedName());
-        builder.define(DATA_FEATHER_COLOR, FeatherColor.LIGHT_BLUE.getSerializedName());
-        builder.define(DATA_RIDER_UUID, Optional.empty());
-        builder.define(DATA_LAST_RIDER_UUID, Optional.empty());
-        builder.define(DATA_REMAINING_JUMPS_ID, 0);
-        builder.define(DATA_HUNGRY_ID, false);
-        builder.define(DATA_AMOUNT_FED_ID, 0);
-        builder.define(DATA_PLAYER_GROWN_ID, false);
-        builder.define(DATA_SITTING_ID, false);
-        builder.define(DATA_FOLLOWING_ID, Optional.empty());
-    }
-
-    @Override
-    protected Brain.Provider<Moa> brainProvider() {
-        return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
-    }
-
-    @Override
-    protected Brain<?> makeBrain(Dynamic<?> pDynamic) {
-        return MoaAi.makeBrain(this, this.brainProvider().makeBrain(pDynamic));
-    }
-
-    @Override
-    public Brain<Moa> getBrain() {
-        return (Brain<Moa>) super.getBrain();
-    }
-
-    @Override
-    protected void customServerAiStep(ServerLevel serverLevel) {
-        ProfilerFiller profiler = Profiler.get();
-        profiler.push("kirridBrain");
-        this.getBrain().tick(serverLevel, this);
-        profiler.pop();
-        profiler.push("kirridActivityUpdate");
-        MoaAi.updateActivity(this);
-        profiler.pop();
-    }
-
-    @Override
-    public boolean hurtServer(ServerLevel serverLevel, DamageSource pSource, float pAmount) {
-        boolean flag = super.hurtServer(serverLevel, pSource, pAmount);
-        if (this.level().isClientSide) {
-            return false;
-        } else {
-            if (flag && pSource.getEntity() instanceof LivingEntity) {
-                MoaAi.maybeRetaliate(serverLevel, this, (LivingEntity) pSource.getEntity());
-            }
-
-            return flag;
-        }
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.FOLLOW_RANGE, 6.0)
+                .add(Attributes.ATTACK_DAMAGE, 2.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 2.0);
     }
 
     /**
@@ -223,6 +131,24 @@ public class Moa extends MountableAnimal {
         return super.finalizeSpawn(level, difficulty, reason, spawnData);
     }
 
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_MOA_UUID_ID, Optional.empty());
+        builder.define(DATA_FEATHER_SHAPE_ID, FeatherShape.CURVED.getSerializedName());
+        builder.define(DATA_KERATIN_COLOR, KeratinColor.GRAY.getSerializedName());
+        builder.define(DATA_EYE_COLOR, EyeColor.BLUE.getSerializedName());
+        builder.define(DATA_FEATHER_COLOR, FeatherColor.LIGHT_BLUE.getSerializedName());
+        builder.define(DATA_RIDER_UUID, Optional.empty());
+        builder.define(DATA_LAST_RIDER_UUID, Optional.empty());
+        builder.define(DATA_REMAINING_JUMPS_ID, 0);
+        builder.define(DATA_HUNGRY_ID, false);
+        builder.define(DATA_AMOUNT_FED_ID, 0);
+        builder.define(DATA_PLAYER_GROWN_ID, false);
+        builder.define(DATA_SITTING_ID, false);
+        builder.define(DATA_FOLLOWING_ID, Optional.empty());
+    }
+
     /**
      * Refreshes the Moa's bounding box dimensions.
      *
@@ -234,6 +160,51 @@ public class Moa extends MountableAnimal {
             this.refreshDimensions();
         }
         super.onSyncedDataUpdated(dataAccessor);
+    }
+
+    @Override
+    protected Brain.Provider<Moa> brainProvider() {
+        return Brain.provider(MoaAi.MEMORY_TYPES, MoaAi.SENSOR_TYPES);
+    }
+
+    @Override
+    protected Brain<?> makeBrain(Dynamic<?> pDynamic) {
+        return MoaAi.makeBrain(this, this.brainProvider().makeBrain(pDynamic));
+    }
+
+    @Override
+    public Brain<Moa> getBrain() {
+        return (Brain<Moa>) super.getBrain();
+    }
+
+    @Override
+    protected PathNavigation createNavigation(Level level) {
+        return new FallPathNavigation(this, level);
+    }
+
+    @Override
+    protected void customServerAiStep(ServerLevel serverLevel) {
+        ProfilerFiller profiler = Profiler.get();
+        profiler.push("kirridBrain");
+        this.getBrain().tick(serverLevel, this);
+        profiler.pop();
+        profiler.push("kirridActivityUpdate");
+        MoaAi.updateActivity(this);
+        profiler.pop();
+    }
+
+    @Override
+    public boolean hurtServer(ServerLevel serverLevel, DamageSource pSource, float pAmount) {
+        boolean flag = super.hurtServer(serverLevel, pSource, pAmount);
+        if (this.level().isClientSide) {
+            return false;
+        } else {
+            if (flag && pSource.getEntity() instanceof LivingEntity) {
+                MoaAi.maybeRetaliate(serverLevel, this, (LivingEntity) pSource.getEntity());
+            }
+
+            return flag;
+        }
     }
 
     /**
@@ -253,8 +224,8 @@ public class Moa extends MountableAnimal {
         super.tick();
         AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
         if (gravity != null) {
-            double max = this.isVehicle() ? -0.5 : -0.1;
-            double fallSpeed = Math.max(gravity.getValue() * -1.25, max); // Entity isn't allowed to fall too slowly from gravity.
+            double max = this.isVehicle() ? -0.04 : -0.1;
+            double fallSpeed = Math.min(gravity.getValue() * -0.5, max); // Entity isn't allowed to fall too slowly from gravity.
             if (this.getDeltaMovement().y() < fallSpeed && !this.playerTriedToCrouch()) {
                 this.setDeltaMovement(this.getDeltaMovement().x(), fallSpeed, this.getDeltaMovement().z());
                 this.hasImpulse = true;
@@ -276,7 +247,7 @@ public class Moa extends MountableAnimal {
             if (this.getRandom().nextInt(900) == 0 && this.deathTime == 0) {
                 this.heal(1.0F);
             }
-            if (!this.isBaby() && this.getRandom().nextInt(5000) == 0) {
+            if (!this.isBaby() && this.getRandom().nextInt(2500) == 0) {
                 if (this.level() instanceof ServerLevel serverLevel) {
                     ItemStack featherStack = new ItemStack(AetherIIItems.MOA_FEATHER.get());
                     featherStack.set(AetherIIDataComponents.FEATHER_COLOR, FeatherColor.valueOf(this.getFeatherColor().toUpperCase(Locale.ROOT)));
@@ -313,7 +284,7 @@ public class Moa extends MountableAnimal {
                 }
             } else {
                 if (this.getRandom().nextInt(10) == 0) {
-                    this.level().addParticle(ParticleTypes.ANGRY_VILLAGER, this.getX() + (this.getRandom().nextDouble() - 0.5) * this.getBbWidth(), this.getY() + 1, this.getZ() + (this.getRandom().nextDouble() - 0.5) * this.getBbWidth(), 0.0, 0.0, 0.0);
+                    this.level().addParticle(AetherIIParticleTypes.MOA_HUNGRY.get(), this.getX() + (this.getRandom().nextDouble() - 0.5) * this.getBbWidth(), this.getY() + 1, this.getZ() + (this.getRandom().nextDouble() - 0.5) * this.getBbWidth(), 0.0, 0.0, 0.0);
                 }
             }
         } else {
@@ -785,7 +756,7 @@ public class Moa extends MountableAnimal {
      */
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
-        return (effect.getEffect() != AetherIIEffects.TOXIN.get() || !this.isPlayerGrown()) && super.canBeAffected(effect);
+        return (effect.getEffect().value() != AetherIIEffects.TOXIN.get() || !this.isPlayerGrown()) && super.canBeAffected(effect);
     }
 
     /**
@@ -888,7 +859,7 @@ public class Moa extends MountableAnimal {
             dimensions = dimensions.scale(1.0F, 0.5F);
         }
         if (this.isBaby()) {
-            dimensions = dimensions.scale(1.0F, 0.5F);
+            dimensions = dimensions.scale(0.5F, 0.5F);
         }
         return dimensions;
     }

@@ -45,10 +45,9 @@ public class BurrukaiRenderer extends MultiBabyModelRenderer<Burrukai, BurrukaiR
     }
 
     @Override
-    public void extractRenderState(Burrukai p_362733_, BurrukaiRenderState p_360515_, float p_361157_) {
-        super.extractRenderState(p_362733_, p_360515_, p_361157_);
-        p_360515_.ramAnimationState.copyFrom(p_362733_.ramAnimationState);
-        p_360515_.rushAnimationState.copyFrom(p_362733_.rushAnimationState);
+    public void extractRenderState(Burrukai burrukai, BurrukaiRenderState renderState, float partialTick) {
+        super.extractRenderState(burrukai, renderState, partialTick);
+        renderState.ramAnimationState.copyFrom(burrukai.ramAnimationState);
     }
 
     @Override

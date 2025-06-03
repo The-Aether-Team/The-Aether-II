@@ -29,11 +29,11 @@ public class AercloudGliderItem extends Item {
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (!player.onGround() && player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer() > 0) {
+        if (!player.onGround() && player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getGlidingTimer() > 0) {
             player.startUsingItem(hand);
             this.onParachuteOpen(level, player, hand, stack);
-            if (player.getData(AetherIIDataAttachments.PLAYER).getCanRefuelGlide()) {
-                player.getData(AetherIIDataAttachments.PLAYER).setCanRefuelGlide(false);
+            if (player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelGlide()) {
+                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setCanRefuelGlide(false);
             }
             return super.use(level, player, hand);
         } else {
@@ -44,7 +44,7 @@ public class AercloudGliderItem extends Item {
     @Override
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingTicks) {
         if (entity instanceof Player player) {
-            int timer = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
+            int timer = player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getGlidingTimer();
             if (level.isClientSide()) {
                 float x = entity.xxa * 0.5F; // Side-to-side movement is slowed.
                 float z = entity.zza; // Forward movement is normal.
@@ -75,7 +75,7 @@ public class AercloudGliderItem extends Item {
             if (entity.onGround() || timer <= 0) {
                 entity.stopUsingItem();
             } else {
-                player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(Math.max(timer - 1, 0));
+                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(Math.max(timer - 1, 0));
             }
         }
         super.onUseTick(level, entity, stack, remainingTicks);
@@ -95,7 +95,7 @@ public class AercloudGliderItem extends Item {
         }
         if (entity instanceof Player player) {
             boolean reset = false;
-            if (player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer() <= 0) {
+            if (player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getGlidingTimer() <= 0) {
                 this.setCooldowns(player, 80);
                 reset = true;
             } else {
@@ -105,9 +105,9 @@ public class AercloudGliderItem extends Item {
                 }
             }
             if (reset) {
-                player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(GLIDING_MAX);
-                if (player.getData(AetherIIDataAttachments.PLAYER).getCanRefuelAbilities().containsKey(stack.getItemHolder()) && !player.getData(AetherIIDataAttachments.PLAYER).getCanRefuelAbilities().get(stack.getItemHolder())) {
-                    player.getData(AetherIIDataAttachments.PLAYER).getCanRefuelAbilities().put(stack.getItemHolder(), true);
+                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(GLIDING_MAX);
+                if (player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().containsKey(stack.getItemHolder()) && !player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().get(stack.getItemHolder())) {
+                    player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().put(stack.getItemHolder(), true);
                 }
             }
         }
@@ -137,7 +137,7 @@ public class AercloudGliderItem extends Item {
     @Override
     public int getBarWidth(ItemStack stack) {
         if (this.isGliding()) {
-            return Math.round((float) Minecraft.getInstance().player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer() * 13.0F / (float) AercloudGliderItem.GLIDING_MAX);
+            return Math.round((float) Minecraft.getInstance().player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getGlidingTimer() * 13.0F / (float) AercloudGliderItem.GLIDING_MAX);
         }
         return super.getBarWidth(stack);
     }
@@ -155,7 +155,7 @@ public class AercloudGliderItem extends Item {
     private boolean isGliding() {
         Player player = Minecraft.getInstance().player;
         if (player != null && player.getUseItem().getItem() instanceof AercloudGliderItem) {
-            int progress = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
+            int progress = player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getGlidingTimer();
             return progress > 0 && progress < AercloudGliderItem.GLIDING_MAX;
         }
         return false;

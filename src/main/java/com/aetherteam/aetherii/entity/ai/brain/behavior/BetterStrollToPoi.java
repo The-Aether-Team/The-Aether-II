@@ -9,22 +9,21 @@ import net.minecraft.world.entity.ai.memory.WalkTarget;
 import org.apache.commons.lang3.mutable.MutableLong;
 
 public class BetterStrollToPoi {
-    public static OneShot<PathfinderMob> create(MemoryModuleType<GlobalPos> pPoiPosMemory, float pSpeedModifier, int pCloseEnoughDist, int pMaxDistFromPoi) {
+    public static OneShot<PathfinderMob> create(MemoryModuleType<GlobalPos> globalPosMemory, float speedModifier, int closeEnoughDist, int maxDistFromPOI) {
         MutableLong mutablelong = new MutableLong(0L);
-        return BehaviorBuilder.create(
-                p_258859_ -> p_258859_.group(p_258859_.registered(MemoryModuleType.WALK_TARGET), p_258859_.present(pPoiPosMemory))
-                        .apply(p_258859_, (p_258842_, p_258843_) -> (p_258851_, p_258852_, p_258853_) -> {
-                            GlobalPos globalpos = p_258859_.get(p_258843_);
-                            if (p_258851_.dimension() != globalpos.dimension() || !globalpos.pos().closerToCenterThan(p_258852_.position(), (double) pMaxDistFromPoi)) {
-                                return false;
-                            } else if (p_258853_ <= mutablelong.getValue()) {
-                                return true;
-                            } else {
-                                p_258842_.set(new WalkTarget(globalpos.pos(), pSpeedModifier, pCloseEnoughDist));
-                                mutablelong.setValue(p_258853_ + 80L);
-                                return true;
-                            }
-                        })
+        return BehaviorBuilder.create(instance -> instance.group(instance.registered(MemoryModuleType.WALK_TARGET), instance.present(globalPosMemory))
+                .apply(instance, (walkTarget, globalPos) -> (serverLevel, owner, gameTime) -> {
+                    GlobalPos globalpos = instance.get(globalPos);
+                    if (serverLevel.dimension() != globalpos.dimension() || !globalpos.pos().closerToCenterThan(owner.position(), maxDistFromPOI)) {
+                        return false;
+                    } else if (gameTime <= mutablelong.getValue()) {
+                        return true;
+                    } else {
+                        walkTarget.set(new WalkTarget(globalpos.pos(), speedModifier, closeEnoughDist));
+                        mutablelong.setValue(gameTime + 80L);
+                        return true;
+                    }
+                })
         );
     }
 }

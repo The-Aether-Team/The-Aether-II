@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.controller.FallingMoveControl;
@@ -101,7 +101,6 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Animal.createAnimalAttributes()
-                .add(Attributes.MAX_HEALTH, 8.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.23);
     }
 
@@ -117,6 +116,15 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData spawnData) {
         this.setColor(getRandomSheepuffColor(this, level, level.getRandom()));
         return super.finalizeSpawn(level, difficulty, reason, spawnData);
+    }
+
+    @Override
+    public void handleEntityEvent(byte id) {
+        if (id == EatAetherGrassGoal.EAT_START_EVENT) {
+            this.eatAnimationTick = 40;
+        } else {
+            super.handleEntityEvent(id);
+        }
     }
 
     @Override
@@ -186,8 +194,8 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
 
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
-        ItemStack itemstack = player.getItemInHand(hand);
-        if (itemstack.getItem() instanceof DyeItem dyeItem) {
+        ItemStack itemStack = player.getItemInHand(hand);
+        if (itemStack.getItem() instanceof DyeItem dyeItem) {
             DyeColor dyeColor = dyeItem.getDyeColor();
             SheepuffColor sheepuffColor = SheepuffColor.SHEEPUFF_COLOR_BY_DYE.get(dyeColor);
             if (this.getColor() != sheepuffColor) {
@@ -195,7 +203,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
                 if (!player.level().isClientSide()) {
                     this.setColor(sheepuffColor);
                     if (!player.getAbilities().instabuild) {
-                        itemstack.shrink(1);
+                        itemStack.shrink(1);
                     }
                 }
             }
@@ -423,15 +431,6 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
             return (Mth.PI / 5.0F) + 0.21991149F * Mth.sin(f * 28.7F);
         } else {
             return this.eatAnimationTick > 0 ? (Mth.PI / 5.0F) : this.getXRot() * Mth.DEG_TO_RAD;
-        }
-    }
-
-    @Override
-    public void handleEntityEvent(byte id) {
-        if (id == 10) {
-            this.eatAnimationTick = 40;
-        } else {
-            super.handleEntityEvent(id);
         }
     }
 

@@ -19,6 +19,7 @@ import java.util.function.Predicate;
  * Changed checks for Grass Blocks to Aether Grass Blocks.
  */
 public class EatAetherGrassGoal extends Goal {
+    public static int EAT_START_EVENT = 10;
     private static final Predicate<BlockState> IS_TALL_GRASS = BlockStatePredicate.forBlock(Blocks.SHORT_GRASS);
     private final Mob mob;
     private int eatAnimationTick;
@@ -45,7 +46,7 @@ public class EatAetherGrassGoal extends Goal {
     @Override
     public void start() {
         this.eatAnimationTick = this.adjustedTickDelay(40);
-        this.mob.level().broadcastEntityEvent(this.mob, (byte) 10);
+        this.mob.level().broadcastEntityEvent(this.mob, (byte) EAT_START_EVENT);
         this.mob.getNavigation().stop();
     }
 
@@ -74,11 +75,11 @@ public class EatAetherGrassGoal extends Goal {
                 }
                 this.mob.ate();
             } else {
-                BlockPos blockPos1 = blockPos.below();
-                if (this.mob.level().getBlockState(blockPos1).is(AetherIIBlocks.AETHER_GRASS_BLOCK.get())) {
+                BlockPos belowPos = blockPos.below();
+                if (this.mob.level().getBlockState(belowPos).is(AetherIIBlocks.AETHER_GRASS_BLOCK.get())) {
                     if (EventHooks.canEntityGrief((ServerLevel) this.mob.level(), this.mob)) {
-                        this.mob.level().levelEvent(2001, blockPos1, Block.getId(AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState()));
-                        this.mob.level().setBlock(blockPos1, AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(), 2);
+                        this.mob.level().levelEvent(2001, belowPos, Block.getId(AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState()));
+                        this.mob.level().setBlock(belowPos, AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(), 2);
                     }
                     this.mob.ate();
                 }

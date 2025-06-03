@@ -1,149 +1,130 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
-import com.aetherteam.aetherii.client.renderer.entity.animation.AechorPlantAnimation;
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.state.AechorPlantRenderState;
-import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.util.Mth;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class AechorPlantModel extends EntityModel<AechorPlantRenderState> {
-    public final ModelPart stem;
-    public final ModelPart head;
-    public final ModelPart thorn1;
-    public final ModelPart thorn2;
-    public final ModelPart thorn3;
-    public final ModelPart thorn4;
-    public final ModelPart stamenStem1;
-    public final ModelPart stamenStem2;
-    public final ModelPart stamenStem3;
-    public final ModelPart stamenTip1;
-    public final ModelPart stamenTip2;
-    public final ModelPart stamenTip3;
-    public final ModelPart leaf1;
-    public final ModelPart leaf2;
-    public final ModelPart leaf3;
-    public final ModelPart leaf4;
-    public final ModelPart leaf5;
-    public final ModelPart leaf6;
-    public final ModelPart leaf7;
-    public final ModelPart leaf8;
-    public final ModelPart leaf9;
-    public final ModelPart leaf10;
-    public final ModelPart upperPetal1;
-    public final ModelPart upperPetal2;
-    public final ModelPart upperPetal3;
-    public final ModelPart upperPetal4;
-    public final ModelPart upperPetal5;
-    public final ModelPart lowerPetal1;
-    public final ModelPart lowerPetal2;
-    public final ModelPart lowerPetal3;
-    public final ModelPart lowerPetal4;
-    public final ModelPart lowerPetal5;
+    public static final AnimationHolder PASSIVE_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aechor_plant/passive"));
+    public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aechor_plant/attack"));
+
+    private final ModelPart main;
+    private final ModelPart body;
+    private final ModelPart petal;
+    private final ModelPart petal2;
+    private final ModelPart petal3;
+    private final ModelPart petal4;
+    private final ModelPart petal5;
+    private final ModelPart petal6;
+    private final ModelPart underPetal;
+    private final ModelPart dart;
+    private final ModelPart outerDart;
 
     public AechorPlantModel(ModelPart root) {
         super(root);
-        this.stem = root.getChild("stem");
-        this.head = root.getChild("head");
-        this.thorn1 = this.stem.getChild("thorn_1");
-        this.thorn2 = this.stem.getChild("thorn_2");
-        this.thorn3 = this.stem.getChild("thorn_3");
-        this.thorn4 = this.stem.getChild("thorn_4");
-        this.stamenStem1 = this.stem.getChild("stamen_stem_1");
-        this.stamenStem2 = this.stem.getChild("stamen_stem_2");
-        this.stamenStem3 = this.stem.getChild("stamen_stem_3");
-        this.stamenTip1 = this.stamenStem1.getChild("stamen_tip_1");
-        this.stamenTip2 = this.stamenStem2.getChild("stamen_tip_2");
-        this.stamenTip3 = this.stamenStem3.getChild("stamen_tip_3");
-        this.leaf1 = this.stem.getChild("leaf_1");
-        this.leaf2 = this.stem.getChild("leaf_2");
-        this.leaf3 = this.stem.getChild("leaf_3");
-        this.leaf4 = this.stem.getChild("leaf_4");
-        this.leaf5 = this.stem.getChild("leaf_5");
-        this.leaf6 = this.stem.getChild("leaf_6");
-        this.leaf7 = this.stem.getChild("leaf_7");
-        this.leaf8 = this.stem.getChild("leaf_8");
-        this.leaf9 = this.stem.getChild("leaf_9");
-        this.leaf10 = this.stem.getChild("leaf_10");
-        this.upperPetal1 = this.stem.getChild("upper_petal_1");
-        this.upperPetal2 = this.stem.getChild("upper_petal_2");
-        this.upperPetal3 = this.stem.getChild("upper_petal_3");
-        this.upperPetal4 = this.stem.getChild("upper_petal_4");
-        this.upperPetal5 = this.stem.getChild("upper_petal_5");
-        this.lowerPetal1 = this.stem.getChild("lower_petal_1");
-        this.lowerPetal2 = this.stem.getChild("lower_petal_2");
-        this.lowerPetal3 = this.stem.getChild("lower_petal_3");
-        this.lowerPetal4 = this.stem.getChild("lower_petal_4");
-        this.lowerPetal5 = this.stem.getChild("lower_petal_5");
+        this.main = root.getChild("main");
+        this.body = this.main.getChild("body");
+        this.petal = this.main.getChild("petal");
+        this.petal2 = this.petal.getChild("petal2");
+        this.petal3 = this.petal.getChild("petal3");
+        this.petal4 = this.petal.getChild("petal4");
+        this.petal5 = this.petal.getChild("petal5");
+        this.petal6 = this.petal.getChild("petal6");
+        this.underPetal = this.main.getChild("under_petal");
+        this.dart = this.main.getChild("dart");
+        this.outerDart = this.main.getChild("outer_dart");
     }
 
     public static LayerDefinition createBodyLayer() {
         MeshDefinition meshDefinition = new MeshDefinition();
         PartDefinition partDefinition = meshDefinition.getRoot();
-        PartDefinition stem = partDefinition.addOrReplaceChild("stem", CubeListBuilder.create().texOffs(24, 13).addBox(-1.0F, 0.0F, -1.0F, 2, 6, 2), PartPose.offset(0.0F, 1.0F, 0.0F));
-        partDefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 12).addBox(-3.0F, -3.0F, -3.0F, 6, 2, 6, new CubeDeformation(0.75F)), PartPose.offset(0.0F, 1.0F, 0.0F));
-        stem.addOrReplaceChild("thorn_1", CubeListBuilder.create().texOffs(32, 13).addBox(-1.75F, 1.25F, -1.0F, 1, 1, 1, new CubeDeformation(-0.25F)), PartPose.ZERO);
-        stem.addOrReplaceChild("thorn_2", CubeListBuilder.create().texOffs(32, 13).addBox(-1.0F, 2.25F, 0.75F, 1, 1, 1, new CubeDeformation(-0.25F)), PartPose.ZERO);
-        stem.addOrReplaceChild("thorn_3", CubeListBuilder.create().texOffs(32, 13).addBox(0.75F, 1.25F, 0.0F, 1, 1, 1, new CubeDeformation(-0.25F)), PartPose.ZERO);
-        stem.addOrReplaceChild("thorn_4", CubeListBuilder.create().texOffs(32, 13).addBox(0.0F, 2.25F, -1.75F, 1, 1, 1, new CubeDeformation(-0.25F)), PartPose.ZERO);
-        PartDefinition stamenStem1 = stem.addOrReplaceChild("stamen_stem_1", CubeListBuilder.create().texOffs(36, 13).addBox(0.0F, -9.0F, -1.5F, 1, 6, 1, new CubeDeformation(-0.25F)), PartPose.ZERO);
-        PartDefinition stamenStem2 = stem.addOrReplaceChild("stamen_stem_2", CubeListBuilder.create().texOffs(36, 13).addBox(0.0F, -9.0F, -1.5F, 1, 6, 1, new CubeDeformation(-0.25F)), PartPose.ZERO);
-        PartDefinition stamenStem3 = stem.addOrReplaceChild("stamen_stem_3", CubeListBuilder.create().texOffs(36, 13).addBox(0.0F, -9.0F, -1.5F, 1, 6, 1, new CubeDeformation(-0.25F)), PartPose.ZERO);
-        stamenStem1.addOrReplaceChild("stamen_tip_1", CubeListBuilder.create().texOffs(32, 15).addBox(0.0F, -9.0F, -1.5F, 1, 1, 1, new CubeDeformation(0.125F)), PartPose.ZERO);
-        stamenStem2.addOrReplaceChild("stamen_tip_2", CubeListBuilder.create().texOffs(32, 15).addBox(0.0F, -9.0F, -1.5F, 1, 1, 1, new CubeDeformation(0.125F)), PartPose.ZERO);
-        stamenStem3.addOrReplaceChild("stamen_tip_3", CubeListBuilder.create().texOffs(32, 15).addBox(0.0F, -9.0F, -1.5F, 1, 1, 1, new CubeDeformation(0.125F)), PartPose.ZERO);
-        for (int i = 1; i <= 10; i++) {
-            stem.addOrReplaceChild("leaf_" + i, CubeListBuilder.create().texOffs(38, 13).addBox(-2.0F, -1.0F, -9.5F, 4, 1, 8, new CubeDeformation(-0.15F)), PartPose.ZERO);
-        }
-        for (int i = 1; i <= 5; i++) {
-            stem.addOrReplaceChild("upper_petal_" + i, CubeListBuilder.create().texOffs(28, 2).addBox(-4.0F, -1.0F, -12.0F, 8, 1, 10, new CubeDeformation(-0.25F)), PartPose.ZERO);
-        }
-        for (int i = 1; i <= 5; i++) {
-            stem.addOrReplaceChild("lower_petal_" + i, CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -1.0F, -12.0F, 8, 1, 10, new CubeDeformation(-0.25F)), PartPose.offset(0.0F, -1.0F, 0.0F));
-        }
-        return LayerDefinition.create(meshDefinition, 64, 32);
-    }
 
-    public Iterable<ModelPart> stamenStemParts() {
-        return ImmutableList.of(this.stamenStem1, this.stamenStem2, this.stamenStem3);
-    }
+        PartDefinition main = partDefinition.addOrReplaceChild("main", CubeListBuilder.create().texOffs(3, 16).addBox(-2.0F, -2.0F, -2.0F, 4.0F, 1.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-    public Iterable<ModelPart> leafParts() {
-        return ImmutableList.of(this.leaf1, this.leaf2, this.leaf3, this.leaf4, this.leaf5, this.leaf6, this.leaf7, this.leaf8, this.leaf9, this.leaf10);
-    }
+        PartDefinition stem_r1 = main.addOrReplaceChild("stem_r1", CubeListBuilder.create().texOffs(28, 6).addBox(0.0F, -1.0F, -1.0F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.7854F, 0.0F));
 
-    public Iterable<ModelPart> petalParts() {
-        return ImmutableList.of(this.upperPetal1, this.lowerPetal1, this.upperPetal2, this.lowerPetal2, this.upperPetal3, this.lowerPetal3, this.upperPetal4, this.lowerPetal4, this.upperPetal5, this.lowerPetal5);
+        PartDefinition stem_r2 = main.addOrReplaceChild("stem_r2", CubeListBuilder.create().texOffs(28, 6).addBox(0.0F, -1.0F, -1.0F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.7854F, 0.0F));
+
+        PartDefinition body = main.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 8).addBox(-3.0F, -5.0F, -3.0F, 6.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 1.0F, 0.0F));
+
+        PartDefinition petal = main.addOrReplaceChild("petal", CubeListBuilder.create(), PartPose.offset(0.0F, -3.0F, 0.0F));
+
+        PartDefinition petal2 = petal.addOrReplaceChild("petal2", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, -2.0F));
+
+        PartDefinition petal_r1 = petal2.addOrReplaceChild("petal_r1", CubeListBuilder.create().texOffs(-8, 0).addBox(-3.0F, 0.0F, -10.0F, 6.0F, 0.0F, 8.0F, new CubeDeformation(0.0F))
+                .texOffs(4, 0).addBox(-3.0F, 0.01F, -10.0F, 6.0F, 0.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 2.0F, -0.1309F, 0.0F, 0.0F));
+
+        PartDefinition petal3 = petal.addOrReplaceChild("petal3", CubeListBuilder.create(), PartPose.offsetAndRotation(1.9487F, 0.0F, -0.4499F, 0.0F, -1.2566F, 0.0F));
+
+        PartDefinition petal_r2 = petal3.addOrReplaceChild("petal_r2", CubeListBuilder.create().texOffs(-8, 0).mirror().addBox(-3.0F, 0.0F, -10.0F, 6.0F, 0.0F, 8.0F, new CubeDeformation(0.0F)).mirror(false)
+                .texOffs(4, 0).mirror().addBox(-3.0F, 0.01F, -10.0F, 6.0F, 0.0F, 8.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 2.0F, -0.1309F, 0.0F, 0.0F));
+
+        PartDefinition petal4 = petal.addOrReplaceChild("petal4", CubeListBuilder.create(), PartPose.offsetAndRotation(1.1756F, 0.0F, 1.618F, 0.0F, -2.5133F, 0.0F));
+
+        PartDefinition petal_r3 = petal4.addOrReplaceChild("petal_r3", CubeListBuilder.create().texOffs(-8, 0).addBox(-3.0F, 0.0F, -10.0F, 6.0F, 0.0F, 8.0F, new CubeDeformation(0.0F))
+                .texOffs(4, 0).addBox(-3.0F, 0.01F, -10.0F, 6.0F, 0.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 2.0F, -0.1309F, 0.0F, 0.0F));
+
+        PartDefinition petal5 = petal.addOrReplaceChild("petal5", CubeListBuilder.create(), PartPose.offsetAndRotation(-1.1756F, 0.0F, 1.618F, 0.0F, 2.5133F, 0.0F));
+
+        PartDefinition petal_r4 = petal5.addOrReplaceChild("petal_r4", CubeListBuilder.create().texOffs(-8, 0).mirror().addBox(-3.0F, 0.0F, -10.0F, 6.0F, 0.0F, 8.0F, new CubeDeformation(0.0F)).mirror(false)
+                .texOffs(4, 0).mirror().addBox(-3.0F, 0.01F, -10.0F, 6.0F, 0.0F, 8.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 2.0F, -0.1309F, 0.0F, 0.0F));
+
+        PartDefinition petal6 = petal.addOrReplaceChild("petal6", CubeListBuilder.create(), PartPose.offsetAndRotation(-1.9487F, 0.0F, -0.4499F, 0.0F, 1.2566F, 0.0F));
+
+        PartDefinition petal_r5 = petal6.addOrReplaceChild("petal_r5", CubeListBuilder.create().texOffs(-8, 0).mirror().addBox(-3.0F, 0.0F, -10.0F, 6.0F, 0.0F, 8.0F, new CubeDeformation(0.0F)).mirror(false)
+                .texOffs(4, 0).mirror().addBox(-3.0F, 0.01F, -10.0F, 6.0F, 0.0F, 8.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 2.0F, -0.1309F, 0.0F, 0.0F));
+
+        PartDefinition under_petal = main.addOrReplaceChild("under_petal", CubeListBuilder.create(), PartPose.offset(0.0F, -1.5F, 0.0F));
+
+        PartDefinition under_petal_r1 = under_petal.addOrReplaceChild("under_petal_r1", CubeListBuilder.create().texOffs(19, 0).mirror().addBox(-2.0F, 0.0F, -6.0F, 4.0F, 0.0F, 5.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 3.0543F, 0.7854F, 3.1416F));
+
+        PartDefinition under_petal_r2 = under_petal.addOrReplaceChild("under_petal_r2", CubeListBuilder.create().texOffs(19, 0).mirror().addBox(-2.0F, 0.0F, -6.0F, 4.0F, 0.0F, 5.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.0873F, 0.7854F, 0.0F));
+
+        PartDefinition under_petal_r3 = under_petal.addOrReplaceChild("under_petal_r3", CubeListBuilder.create().texOffs(19, 0).addBox(-2.0F, 0.0F, -6.0F, 4.0F, 0.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 3.0543F, -0.7854F, 3.1416F));
+
+        PartDefinition under_petal_r4 = under_petal.addOrReplaceChild("under_petal_r4", CubeListBuilder.create().texOffs(19, 0).addBox(-2.0F, 0.0F, -6.0F, 4.0F, 0.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.0873F, -0.7854F, 0.0F));
+
+        PartDefinition dart = main.addOrReplaceChild("dart", CubeListBuilder.create(), PartPose.offset(0.0F, -4.0F, 0.0F));
+
+        PartDefinition dart_r1 = dart.addOrReplaceChild("dart_r1", CubeListBuilder.create().texOffs(24, 5).addBox(-0.25F, -4.25F, -2.0F, 1.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -2.8362F, -1.309F, 3.1416F));
+
+        PartDefinition dart_r2 = dart.addOrReplaceChild("dart_r2", CubeListBuilder.create().texOffs(24, 5).addBox(-0.5F, -5.0F, -2.0F, 1.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -2.8362F, -0.2182F, 3.1416F));
+
+        PartDefinition dart_r3 = dart.addOrReplaceChild("dart_r3", CubeListBuilder.create().texOffs(24, 5).addBox(-0.25F, -4.5F, -2.25F, 1.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -2.8362F, 0.8727F, 3.1416F));
+
+        PartDefinition dart_r4 = dart.addOrReplaceChild("dart_r4", CubeListBuilder.create().texOffs(24, 5).addBox(0.0F, -4.5F, -2.5F, 1.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, 0.0F, 0.75F, 0.3054F, 1.0472F, 0.0F));
+
+        PartDefinition dart_r5 = dart.addOrReplaceChild("dart_r5", CubeListBuilder.create().texOffs(24, 5).addBox(-0.5F, -5.0F, -2.0F, 1.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.3054F, 0.0F, 0.0F));
+
+        PartDefinition dart_r6 = dart.addOrReplaceChild("dart_r6", CubeListBuilder.create().texOffs(24, 5).addBox(-0.5F, -4.75F, -2.0F, 1.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.3054F, -1.0036F, 0.0F));
+
+        PartDefinition outer_dart = main.addOrReplaceChild("outer_dart", CubeListBuilder.create(), PartPose.offset(0.0F, -4.0F, 0.0F));
+
+        PartDefinition outer_dart_r1 = outer_dart.addOrReplaceChild("outer_dart_r1", CubeListBuilder.create().texOffs(26, 5).addBox(-0.5F, -4.75F, -2.0F, 1.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.7854F, -0.48F, 0.0F));
+
+        PartDefinition outer_dart_r2 = outer_dart.addOrReplaceChild("outer_dart_r2", CubeListBuilder.create().texOffs(26, 5).addBox(-0.25F, -4.25F, -2.0F, 1.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.7854F, -1.309F, 0.0F));
+
+        PartDefinition outer_dart_r3 = outer_dart.addOrReplaceChild("outer_dart_r3", CubeListBuilder.create().texOffs(26, 5).addBox(-0.5F, -5.0F, -2.0F, 1.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -2.3562F, -0.7418F, 3.1416F));
+
+        PartDefinition outer_dart_r4 = outer_dart.addOrReplaceChild("outer_dart_r4", CubeListBuilder.create().texOffs(26, 5).addBox(-0.25F, -4.5F, -2.25F, 1.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -2.3562F, 0.3491F, 3.1416F));
+
+        PartDefinition outer_dart_r5 = outer_dart.addOrReplaceChild("outer_dart_r5", CubeListBuilder.create().texOffs(26, 5).addBox(0.0F, -4.5F, -2.5F, 1.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, 0.0F, 0.75F, 0.48F, 1.5708F, -0.3054F));
+
+        PartDefinition outer_dart_r6 = outer_dart.addOrReplaceChild("outer_dart_r6", CubeListBuilder.create().texOffs(26, 5).addBox(-0.5F, -5.0F, -2.0F, 1.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.7854F, 0.5236F, 0.0F));
+
+        return LayerDefinition.create(meshDefinition, 32, 32);
     }
 
     @Override
     public void setupAnim(AechorPlantRenderState aechorPlant) {
         super.setupAnim(aechorPlant);
-
-        int i = 0;
-        for (ModelPart modelPart : this.stamenStemParts()) {
-            modelPart.xRot = 0.2F + (i / 15.0F);
-            modelPart.yRot = 0.1F;
-            modelPart.yRot += (Mth.TWO_PI / 3.0F) * i;
-            i++;
-        }
-
-        i = 0;
-        for (ModelPart modelPart : this.leafParts()) {
-            modelPart.xRot = ((i % 2 == 0) ? 0.1F : 0.2F);
-            modelPart.yRot = (Mth.TWO_PI / 10.0F / 2.0F);
-            modelPart.yRot += (Mth.TWO_PI / 10.0F) * i;
-            i++;
-        }
-
-        i = 0;
-        for (ModelPart modelPart : this.petalParts()) {
-            modelPart.yRot += (Mth.TWO_PI / 10.0F) * i;
-            i++;
-        }
-
-        this.animate(aechorPlant.attackAnimationState, AechorPlantAnimation.ATTACK, aechorPlant.ageInTicks, 1.0F);
+        this.animateWalk(PASSIVE_ANIMATION, aechorPlant.ageInTicks, aechorPlant.ageInTicks, 1.0F, 1.0F);
+        this.animate(aechorPlant.attackAnimationState, ATTACK_ANIMATION, aechorPlant.ageInTicks, 1.0F);
     }
 }

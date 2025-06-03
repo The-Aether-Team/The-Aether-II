@@ -13,10 +13,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 public record KirridPredicate(Optional<Boolean> sheared, Optional<Kirrid.KirridColor> color) implements EntitySubPredicate {
-    public static final MapCodec<KirridPredicate> CODEC = RecordCodecBuilder.mapCodec((p_368666_) -> p_368666_.group(
+    public static final MapCodec<KirridPredicate> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
             Codec.BOOL.optionalFieldOf("sheared").forGetter(KirridPredicate::sheared),
             Kirrid.KirridColor.CODEC.optionalFieldOf("color").forGetter(KirridPredicate::color)
-    ).apply(p_368666_, KirridPredicate::new));
+    ).apply(instance, KirridPredicate::new));
 
     @Override
     public MapCodec<KirridPredicate> codec() {

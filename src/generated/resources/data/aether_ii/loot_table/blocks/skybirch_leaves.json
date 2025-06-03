@@ -124,6 +124,10 @@
             },
             {
               "function": "minecraft:explosion_decay"
+            },
+            {
+              "function": "aether_ii:spawn_skyroot_lizard",
+              "leaf_block": "aether_ii:skybirch_leaves"
             }
           ],
           "name": "aether_ii:skyroot_stick"

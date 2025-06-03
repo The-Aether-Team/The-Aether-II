@@ -14,53 +14,53 @@ public class FallPathNavigation extends GroundPathNavigation {
         super(mob, level);
     }
 
-    //fixing falling pathfinding
+    // Fixes falling pathfinding
+    @Override
     protected void followThePath() {
-        Vec3 vec3 = this.getTempMobPos();
+        Vec3 vecPos = this.getTempMobPos();
         this.maxDistanceToWaypoint = this.mob.getBbWidth() > 0.75F ? this.mob.getBbWidth() / 2.0F : 0.75F - this.mob.getBbWidth() / 2.0F;
-        Vec3i vec3i = this.path.getNextNodePos();
-        double d0 = Math.abs(this.mob.getX() - ((double) vec3i.getX() + (this.mob.getBbWidth() + 1) / 2D)); //Forge: Fix MC-94054
-        double d1 = Math.abs(this.mob.getY() - (double) vec3i.getY());
-        double d2 = Math.abs(this.mob.getZ() - ((double) vec3i.getZ() + (this.mob.getBbWidth() + 1) / 2D)); //Forge: Fix MC-94054
+        Vec3i posNext = this.path.getNextNodePos();
+        double xDist = Math.abs(this.mob.getX() - ((double) posNext.getX() + (this.mob.getBbWidth() + 1) / 2D)); // Forge: Fix MC-94054
+        double yDist = Math.abs(this.mob.getY() - (double) posNext.getY());
+        double zDist = Math.abs(this.mob.getZ() - ((double) posNext.getZ() + (this.mob.getBbWidth() + 1) / 2D)); // Forge: Fix MC-94054
 
-        //This make No need to rotate around a point when following a path.
+        // This makes there be no need to rotate around a point when following a path.
         float fallDistance = this.mob.getMaxFallDistance();
-        boolean flag = d0 <= (double) this.maxDistanceToWaypoint && d2 <= (double) this.maxDistanceToWaypoint && d1 < fallDistance; //Forge: Fix MC-94054
-        if (flag || this.canCutCorner(this.path.getNextNode().type) && this.shouldTargetNextNodeInDirection(vec3)) {
+        boolean isClose = xDist <= (double) this.maxDistanceToWaypoint && zDist <= (double) this.maxDistanceToWaypoint && yDist < fallDistance;
+        if (isClose || this.canCutCorner(this.path.getNextNode().type) && this.shouldTargetNextNodeInDirection(vecPos)) {
             this.path.advance();
         }
 
-        this.doStuckDetection(vec3);
+        this.doStuckDetection(vecPos);
     }
 
-    private boolean shouldTargetNextNodeInDirection(Vec3 pVec) {
+    private boolean shouldTargetNextNodeInDirection(Vec3 vecPos) {
         if (this.path.getNextNodeIndex() + 1 >= this.path.getNodeCount()) {
             return false;
         } else {
-            Vec3 vec3 = Vec3.atBottomCenterOf(this.path.getNextNodePos());
-            if (!pVec.closerThan(vec3, 2.0)) {
+            Vec3 nextPos = Vec3.atBottomCenterOf(this.path.getNextNodePos());
+            if (!vecPos.closerThan(nextPos, 2.0)) {
                 return false;
-            } else if (this.canMoveDirectly(pVec, this.path.getNextEntityPos(this.mob))) {
+            } else if (this.canMoveDirectly(vecPos, this.path.getNextEntityPos(this.mob))) {
                 return true;
             } else {
-                Vec3 vec31 = Vec3.atBottomCenterOf(this.path.getNodePos(this.path.getNextNodeIndex() + 1));
-                Vec3 vec32 = vec3.subtract(pVec);
-                Vec3 vec33 = vec31.subtract(pVec);
-                double d0 = vec32.lengthSqr();
-                double d1 = vec33.lengthSqr();
-                boolean flag = d1 < d0;
-                boolean flag1 = d0 < 0.5;
-                if (!flag && !flag1) {
+                Vec3 nextPosExtra = Vec3.atBottomCenterOf(this.path.getNodePos(this.path.getNextNodeIndex() + 1));
+                Vec3 distToNextPos = nextPos.subtract(vecPos);
+                Vec3 distToNextPosExtra = nextPosExtra.subtract(vecPos);
+                double distLen = distToNextPos.lengthSqr();
+                double distLenExtra = distToNextPosExtra.lengthSqr();
+                boolean distTooFar = distLenExtra < distLen;
+                boolean distTooSmall = distLen < 0.5;
+                if (!distTooFar && !distTooSmall) {
                     return false;
                 } else {
-                    Vec3 vec34 = vec32.normalize();
-                    Vec3 vec35 = vec33.normalize();
-                    return vec35.dot(vec34) < 0.0;
+                    Vec3 nextPosNormalize = distToNextPos.normalize();
+                    Vec3 nextPosExtraNormalize = distToNextPosExtra.normalize();
+                    return nextPosExtraNormalize.dot(nextPosNormalize) < 0.0;
                 }
             }
         }
     }
-
 
     @Override
     protected boolean canUpdatePath() {

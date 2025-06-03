@@ -1,13 +1,20 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
-import com.aetherteam.aetherii.client.renderer.entity.animation.ZephyrAnimation;
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.state.ZephyrRenderState;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class ZephyrModel extends EntityModel<ZephyrRenderState> {
+    public static final AnimationHolder FLY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zephyr/fly"));
+    public static final AnimationHolder BLOW_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zephyr/blow_attack"));
+    public static final AnimationHolder WEB_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zephyr/web_attack"));
+
     public final ModelPart body;
     public final ModelPart mouth;
     public final ModelPart bottom;
@@ -69,9 +76,9 @@ public class ZephyrModel extends EntityModel<ZephyrRenderState> {
     @Override
     public void setupAnim(ZephyrRenderState zephyr) {
         super.setupAnim(zephyr);
-        this.animateWalk(ZephyrAnimation.FLY, zephyr.walkAnimationPos, zephyr.walkAnimationSpeed, 2.0F, 2.0F);
-        this.animate(zephyr.blowAnimationState, ZephyrAnimation.BLOW_ATTACK, zephyr.ageInTicks, 1.0F);
-        this.animate(zephyr.webAnimationState, ZephyrAnimation.WEB_ATTACK, zephyr.ageInTicks, 1.0F);
+        this.animateWalk(FLY_ANIMATION, zephyr.walkAnimationPos, zephyr.walkAnimationSpeed, 2.0F, 2.0F);
+        this.animate(zephyr.blowAnimationState, BLOW_ATTACK_ANIMATION, zephyr.ageInTicks, 1.0F);
+        this.animate(zephyr.webAnimationState, WEB_ATTACK_ANIMATION, zephyr.ageInTicks, 1.0F);
 
 
 //        float motion = Mth.sin((limbSwing * 20.0F) / Mth.RAD_TO_DEG) * limbSwingAmount * 0.5F;

@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.item.equipment.armor.abilities;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.player.AbilityBehaviorAttachment;
 import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.LivingEntityAccessor;
@@ -26,7 +27,7 @@ public interface GravititeArmor {
     static void playerUpdate(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
         LivingEntityAccessor accessor = (LivingEntityAccessor) player;
-        AetherIIPlayerAttachment attachment = player.getData(AetherIIDataAttachments.PLAYER);
+        AbilityBehaviorAttachment attachment = player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR);
         boolean isFluid = player.isInWater() || player.isInFluidType();
         if (isFluid) {
             accessor.aether$setNoJumpDelay(6);

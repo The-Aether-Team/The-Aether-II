@@ -30,11 +30,11 @@ public class FallingRandomStrollGoal extends RandomStrollGoal {
     @Override
     protected Vec3 getPosition() {
         if (this.mob.isInWaterOrBubble()) {
-            Vec3 vec3 = LandRandomPos.getPos(this.mob, 15, this.mob.getMaxFallDistance());
-            return vec3 == null ? super.getPosition() : vec3;
+            Vec3 pos = LandRandomPos.getPos(this.mob, 15, this.mob.getMaxFallDistance());
+            return pos == null ? super.getPosition() : pos;
         } else if (!this.mob.onGround()) {
-            Vec3 vec3 = LandRandomPos.getPos(this.mob, 12, this.mob.getMaxFallDistance());
-            return vec3 != null ? vec3 : super.getPosition();
+            Vec3 pos = LandRandomPos.getPos(this.mob, 12, this.mob.getMaxFallDistance());
+            return pos != null ? pos : super.getPosition();
         } else {
             return this.mob.getRandom().nextFloat() >= this.probability ? LandRandomPos.getPos(this.mob, 10, this.mob.getMaxFallDistance()) : super.getPosition();
         }

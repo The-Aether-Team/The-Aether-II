@@ -702,46 +702,47 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SKYROOT_HAMMER, "Skyroot Hammer");
         this.addItem(AetherIIItems.SKYROOT_SPEAR, "Skyroot Spear");
         this.addItem(AetherIIItems.SKYROOT_CROSSBOW, "Skyroot Crossbow");
-        this.addItem(AetherIIItems.SKYROOT_SHIELD, "Skyroot Shield");
 
         this.addItem(AetherIIItems.HOLYSTONE_SHORTSWORD, "Holystone Shortsword");
         this.addItem(AetherIIItems.HOLYSTONE_HAMMER, "Holystone Hammer");
         this.addItem(AetherIIItems.HOLYSTONE_SPEAR, "Holystone Spear");
         this.addItem(AetherIIItems.HOLYSTONE_CROSSBOW, "Holystone Crossbow");
-        this.addItem(AetherIIItems.HOLYSTONE_SHIELD, "Holystone Shield");
 
         this.addItem(AetherIIItems.ZANITE_SHORTSWORD, "Zanite Shortsword");
         this.addItem(AetherIIItems.ZANITE_HAMMER, "Zanite Hammer");
         this.addItem(AetherIIItems.ZANITE_SPEAR, "Zanite Spear");
         this.addItem(AetherIIItems.ZANITE_CROSSBOW, "Zanite Crossbow");
-        this.addItem(AetherIIItems.ZANITE_SHIELD, "Zanite Shield");
 
         this.addItem(AetherIIItems.ARKENIUM_SHORTSWORD, "Arkenium Shortsword");
         this.addItem(AetherIIItems.ARKENIUM_HAMMER, "Arkenium Hammer");
         this.addItem(AetherIIItems.ARKENIUM_SPEAR, "Arkenium Spear");
         this.addItem(AetherIIItems.ARKENIUM_CROSSBOW, "Arkenium Crossbow");
-        this.addItem(AetherIIItems.ARKENIUM_SHIELD, "Arkenium Shield");
 
         this.addItem(AetherIIItems.GRAVITITE_SHORTSWORD, "Gravitite Shortsword");
         this.addItem(AetherIIItems.GRAVITITE_HAMMER, "Gravitite Hammer");
         this.addItem(AetherIIItems.GRAVITITE_SPEAR, "Gravitite Spear");
         this.addItem(AetherIIItems.GRAVITITE_CROSSBOW, "Gravitite Crossbow");
+
+        this.addItem(AetherIIItems.SKYROOT_SHIELD, "Skyroot Shield");
+        this.addItem(AetherIIItems.BURRUKAI_PLATE_SHIELD, "Burrukai Plate Shield");
+        this.addItem(AetherIIItems.ZANITE_SHIELD, "Zanite Shield");
+        this.addItem(AetherIIItems.ARKENIUM_SHIELD, "Arkenium Shield");
         this.addItem(AetherIIItems.GRAVITITE_SHIELD, "Gravitite Shield");
 
         this.addItem(AetherIIItems.SCATTERGLASS_BOLT, "Scatterglass Bolt");
 
         // Armor
-        this.addItem(AetherIIItems.TAEGORE_HIDE_HELMET, "Taegore Hide Cap");
-        this.addItem(AetherIIItems.TAEGORE_HIDE_CHESTPLATE, "Taegore Hide Tunic");
-        this.addItem(AetherIIItems.TAEGORE_HIDE_LEGGINGS, "Taegore Hide Pants");
-        this.addItem(AetherIIItems.TAEGORE_HIDE_BOOTS, "Taegore Hide Boots");
-        this.addItem(AetherIIItems.TAEGORE_HIDE_GLOVES, "Taegore Hide Gloves");
+        this.addItem(AetherIIItems.BEAST_PELT_HELMET, "Beast Pelt Cap");
+        this.addItem(AetherIIItems.BEAST_PELT_CHESTPLATE, "Beast Pelt Tunic");
+        this.addItem(AetherIIItems.BEAST_PELT_LEGGINGS, "Beast Pelt Pants");
+        this.addItem(AetherIIItems.BEAST_PELT_BOOTS, "Beast Pelt Boots");
+        this.addItem(AetherIIItems.BEAST_PELT_GLOVES, "Beast Pelt Gloves");
 
-        this.addItem(AetherIIItems.BURRUKAI_PELT_HELMET, "Burrukai Pelt Cap");
-        this.addItem(AetherIIItems.BURRUKAI_PELT_CHESTPLATE, "Burrukai Pelt Tunic");
-        this.addItem(AetherIIItems.BURRUKAI_PELT_LEGGINGS, "Burrukai Pelt Pants");
-        this.addItem(AetherIIItems.BURRUKAI_PELT_BOOTS, "Burrukai Pelt Boots");
-        this.addItem(AetherIIItems.BURRUKAI_PELT_GLOVES, "Burrukai Pelt Gloves");
+        this.addItem(AetherIIItems.BURRUKAI_PLATE_HELMET, "Burrukai Plate Cap");
+        this.addItem(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE, "Burrukai Plate Tunic");
+        this.addItem(AetherIIItems.BURRUKAI_PLATE_LEGGINGS, "Burrukai Plate Pants");
+        this.addItem(AetherIIItems.BURRUKAI_PLATE_BOOTS, "Burrukai Plate Boots");
+        this.addItem(AetherIIItems.BURRUKAI_PLATE_GLOVES, "Burrukai Plate Gloves");
 
         this.addItem(AetherIIItems.ZANITE_HELMET, "Zanite Helmet");
         this.addItem(AetherIIItems.ZANITE_CHESTPLATE, "Zanite Chestplate");
@@ -774,8 +775,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GLINT_GEMSTONE, "Glint Gemstone");
         this.addItem(AetherIIItems.GOLDEN_AMBER, "Golden Amber");
         this.addItem(AetherIIItems.CLOUDTWINE, "Cloudtwine");
-        this.addItem(AetherIIItems.TAEGORE_HIDE, "Taegore Hide");
-        this.addItem(AetherIIItems.BURRUKAI_PELT, "Burrukai Pelt");
+        this.addItem(AetherIIItems.BEAST_PELT, "Beast Pelt");
+        this.addItem(AetherIIItems.BURRUKAI_PLATE, "Burrukai Plate");
+        this.addItem(AetherIIItems.KIRRID_PLATE, "Kirrid Plate");
         this.addItem(AetherIIItems.SKYROOT_PINECONE, "Skyroot Pinecone");
         this.addItem(AetherIIItems.VALKYRIE_WINGS, "Valkyrie Wings");
         this.addItem(AetherIIItems.BRETTL_CANE, "Brettl Cane");
@@ -793,7 +795,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.MOA_FEATHER, "Moa Feather");
         this.addItem(AetherIIItems.COCKATRICE_FEATHER, "Cockatrice Feather");
         this.addItem(AetherIIItems.SCATTERGLASS_VIAL, "Scatterglass Vial");
-        this.addItem(AetherIIItems.CHARGE_CORE, "Charge Core");
+        this.addItem(AetherIIItems.ZEPHYR_HUSK, "Zephyr Husk");
+        this.addItem(AetherIIItems.CHARGE_CATALYST, "Charge Catalyst");
         this.addItem(AetherIIItems.ARKENIUM_CORE, "Arkenium Core");
         this.addItem(AetherIIItems.GRAVITITE_CORE, "Gravitite Core");
 
@@ -956,27 +959,27 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 1, "§9Ability:§r Straight Shot");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 2, "§3Use:§r Crouch-Use");
 
-        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_BOOTS.get(), 1, "§9Ability:§r Calms Animals");
-        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_BOOTS.get(), 2, "§9Set Pieces:§r %s");
-        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), 1, "§9Ability:§r Calms Animals");
-        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
-        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), 1, "§9Ability:§r Calms Animals");
-        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
-        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_HELMET.get(), 1, "§9Ability:§r Calms Animals");
-        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_HELMET.get(), 2, "§9Set Pieces:§r %s");
-        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), 1, "§9Ability:§r Calms Animals");
-        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_BOOTS.get(), 1, "§9Ability:§r Calms Animals");
+        this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_BOOTS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_LEGGINGS.get(), 1, "§9Ability:§r Calms Animals");
+        this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_CHESTPLATE.get(), 1, "§9Ability:§r Calms Animals");
+        this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_HELMET.get(), 1, "§9Ability:§r Calms Animals");
+        this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_HELMET.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_GLOVES.get(), 1, "§9Ability:§r Calms Animals");
+        this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), 1, "§9Ability:§r Stun Resistance");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), 2, "§9Set Pieces:§r %s");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), 1, "§9Ability:§r Stun Resistance");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), 1, "§9Ability:§r Stun Resistance");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_HELMET.get(), 1, "§9Ability:§r Stun Resistance");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_HELMET.get(), 2, "§9Set Pieces:§r %s");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), 1, "§9Ability:§r Stun Resistance");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_BOOTS.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_BOOTS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_HELMET.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_HELMET.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_GLOVES.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_BOOTS.get(), 1, "§9Ability:§r Speed Boost");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_BOOTS.get(), 2, "§9Set Pieces:§r %s");
@@ -1312,6 +1315,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.SWET.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.SKEPHID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
@@ -1356,7 +1360,46 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Blocks
         this.addSubtitle("block", "aether_portal.ambient", "Aether Portal whooshes");
         this.addSubtitle("block", "aether_portal.trigger", "Aether Portal noise intensifies");
+
         this.addSubtitle("block", "aercloud.blue_aercloud_bounce", "Blue Aercloud bounces");
+
+        this.addSubtitle("block", "moa_egg.crack", "Moa Egg cracks");
+        this.addSubtitle("block", "moa_egg.hatch", "Moa Egg hatches");
+
+        this.addSubtitle("block", "bush.rustle", "Bush rustles");
+
+        this.addSubtitle("block", "gas.ignite", "Gas ignites");
+
+        this.addSubtitle("block", "holystone_furnace.fire_crackle", "Holystone Furnace crackles");
+
+        this.addSubtitle("block", "arkenium_forge.use", "Arkenium Forge used");
+
+        // Items
+        this.addSubtitle("item", "ambrosium_shard.use", "Ambrosium Shard used");
+        this.addSubtitle("item", "swet_gel.use", "Swet Gel used");
+
+        this.addSubtitle("item", "scaterglass_vial.fill", "Scatterglass Vial fills");
+        this.addSubtitle("item", "scaterglass_vial.empty", "Scatterglass Vial empties");
+
+        this.addSubtitle("item", "arkenium_canister.fill", "Arkenium Canister fills");
+        this.addSubtitle("item", "arkenium_canister.empty", "Arkenium Canister empties");
+
+        this.addSubtitle("item", "armor.equip_beast_pelt", "Beast Pelt armor rustles");
+        this.addSubtitle("item", "armor.equip_burrukai_plate", "Burrukai Plate armor rustles");
+        this.addSubtitle("item", "armor.equip_zanite", "Zanite armor clangs");
+        this.addSubtitle("item", "armor.equip_arkenium", "Arkenium armor clanks");
+        this.addSubtitle("item", "armor.equip_gravitite", "Gravitite armor clinks");
+
+        // Player
+        this.addSubtitle("entity", "player.damage.slash.correct", "Strong slashing attack");
+        this.addSubtitle("entity", "player.damage.impact.correct", "Strong impacting attack");
+        this.addSubtitle("entity", "player.damage.pierce.correct", "Strong piercing attack");
+        this.addSubtitle("entity", "player.damage.slash.incorrect", "Weak slashing attack");
+        this.addSubtitle("entity", "player.damage.impact.incorrect", "Weak impacting attack");
+        this.addSubtitle("entity", "player.damage.pierce.incorrect", "Weak piercing attack");
+        this.addSubtitle("entity", "player.attack.sweep", "Sweeping attack");
+        this.addSubtitle("entity", "player.attack.shock", "Shocking attack");
+        this.addSubtitle("entity", "player.attack.stab", "Stabbing attack");
 
         // Entities
         this.addSubtitle("entity", "phyg.ambient", "Phyg oinks");
@@ -1377,6 +1420,36 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "sheepuff.hurt", "Sheepuff hurts");
         this.addSubtitle("entity", "sheepuff.step", "Footsteps");
 
+        this.addSubtitle("entity", "aerbunny.ambient", "Aerbunny squeaks");
+        this.addSubtitle("entity", "aerbunny.death", "Aerbunny dies");
+        this.addSubtitle("entity", "aerbunny.hurt", "Aerbunny hurts");
+        this.addSubtitle("entity", "aerbunny.hop", "Aerbunny puffs");
+        this.addSubtitle("entity", "aerbunny.lift", "Aerbunny squeals");
+        this.addSubtitle("entity", "aerbunny.land", "Aerbunny squeals");
+
+        this.addSubtitle("entity", "taegore.ambient", "Taegore snorts");
+        this.addSubtitle("entity", "taegore.death", "Taegore dies");
+        this.addSubtitle("entity", "taegore.hurt", "Taegore hurts");
+        this.addSubtitle("entity", "taegore.searching", "Taegore searches");
+        this.addSubtitle("entity", "taegore.digging", "Taegore digs");
+        this.addSubtitle("entity", "taegore.digging_stop", "Taegore stops digging");
+        this.addSubtitle("entity", "taegore.drop_seed", "Taegore drops seed");
+
+        this.addSubtitle("entity", "burrukai.ambient", "Burrukai grunts");
+        this.addSubtitle("entity", "burrukai.death", "Burrukai dies");
+        this.addSubtitle("entity", "burrukai.hurt", "Burrukai hurts");
+        this.addSubtitle("entity", "burrukai.ram_impact", "Burrukai rams");
+
+        this.addSubtitle("entity", "kirrid.ambient", "Kirrid bleats");
+        this.addSubtitle("entity", "kirrid.death", "Kirrid dies");
+        this.addSubtitle("entity", "kirrid.hurt", "Kirrid hurts");
+        this.addSubtitle("entity", "kirrid.jump", "Kirrid leaps");
+        this.addSubtitle("entity", "kirrid.ram_impact", "Kirrid rams");
+
+        this.addSubtitle("entity", "skyroot_lizard.ambient", "Skyroot Lizard hisses");
+        this.addSubtitle("entity", "skyroot_lizard.death", "Skyroot Lizard dies");
+        this.addSubtitle("entity", "skyroot_lizard.hurt", "Skyroot Lizard hurts");
+
         this.addSubtitle("entity", "moa.ambient", "Moa calls");
         this.addSubtitle("entity", "moa.death", "Moa dies");
         this.addSubtitle("entity", "moa.hurt", "Moa hurts");
@@ -1385,16 +1458,28 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "moa.flap", "Moa flaps");
         this.addSubtitle("entity", "moa.egg", "Moa plops");
 
-        this.addSubtitle("entity", "aerbunny.death", "Aerbunny dies");
-        this.addSubtitle("entity", "aerbunny.hurt", "Aerbunny squeals");
-        this.addSubtitle("entity", "aerbunny.lift", "Aerbunny squeaks");
+        this.addSubtitle("entity", "aechor_plant.shoot", "Aechor Plant shoots");
+        this.addSubtitle("entity", "aechor_plant.hurt", "Aechor Plant hurts");
+        this.addSubtitle("entity", "aechor_plant.death", "Aechor Plant dies");
+
+        this.addSubtitle("entity", "carrion_sprout.trap", "Carrion Sprout closes");
+        this.addSubtitle("entity", "carrion_sprout.hurt", "Carrion Sprout hurts");
+        this.addSubtitle("entity", "carrion_sprout.death", "Carrion Sprout dies");
 
         this.addSubtitle("entity", "zephyr.shoot", "Zephyr spits");
         this.addSubtitle("entity", "zephyr.ambient", "Zephyr blows");
         this.addSubtitle("entity", "zephyr.death", "Zephyr dies");
         this.addSubtitle("entity", "zephyr.hurt", "Zephyr hurts");
 
+        this.addSubtitle("entity", "tempest.shoot", "Tempest spits");
+        this.addSubtitle("entity", "tempest.ambient", "Tempest sparks");
+        this.addSubtitle("entity", "tempest.death", "Tempest dies");
+        this.addSubtitle("entity", "tempest.hurt", "Tempest hurts");
+
         this.addSubtitle("entity", "cockatrice.shoot", "Cockatrice shoots");
+        this.addSubtitle("entity", "cockatrice.ambient", "Cockatrice calls");
+        this.addSubtitle("entity", "cockatrice.death", "Cockatrice dies");
+        this.addSubtitle("entity", "cockatrice.hurt", "Cockatrice hurts");
 
         this.addSubtitle("entity", "swet.attack", "Swet attacks");
         this.addSubtitle("entity", "swet.death", "Swet dies");
@@ -1402,7 +1487,35 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "swet.jump", "Swet squishes");
         this.addSubtitle("entity", "swet.squish", "Swet squishes");
 
+        this.addSubtitle("entity", "skephid.shoot", "Skephid shoots");
+        this.addSubtitle("entity", "skephid.ambient", "Skephid chitters");
+        this.addSubtitle("entity", "skephid.death", "Skephid dies");
+        this.addSubtitle("entity", "skephid.hurt", "Skephid hurts");
 
+        this.addSubtitle("entity", "arkenium_taluton.attack", "Arkenium Taluton attacks");
+        this.addSubtitle("entity", "arkenium_taluton.ambient", "Arkenium Taluton drones");
+        this.addSubtitle("entity", "arkenium_taluton.death", "Arkenium Taluton dies");
+        this.addSubtitle("entity", "arkenium_taluton.hurt", "Arkenium Taluton hurts");
+
+        this.addSubtitle("entity", "gravitite_taluton.shoot", "Gravitite Taluton shoots");
+        this.addSubtitle("entity", "gravitite_taluton.ambient", "Gravitite Taluton drones");
+        this.addSubtitle("entity", "gravitite_taluton.death", "Gravitite Taluton dies");
+        this.addSubtitle("entity", "gravitite_taluton.hurt", "Gravitite Taluton hurts");
+
+        this.addSubtitle("entity", "blighted.burn", "Something burns");
+
+        // Projectiles
+        this.addSubtitle("entity", "arctic_snowball.throw", "Arctic Snowball flies");
+        this.addSubtitle("entity", "rock.throw", "Rock flies");
+        this.addSubtitle("entity", "skyroot_pinecone.throw", "Skyroot Pinecone flies");
+
+        // Miscellaneous
+        this.addSubtitle("entity", "electric_field.create", "Electricity booms");
+
+        // UI
+        this.addSubtitle("ui", "artisans_bench.take_result", "Artisan's Bench used");
+
+        // Deaths
         this.addDeath("effect.wound", "%1$s was fatally wounded");
         this.addDeath("effect.fracture", "Oof, owie, %1$s's bones");
         this.addDeath("effect.toxin", "%1$s succumbed to toxin");

@@ -48,7 +48,12 @@ public class AetherIISwetVariants {
     }
 
     private static void register(BootstrapContext<SwetVariant> context, ResourceKey<SwetVariant> key, String name, Holder<Item> gelItem, HolderSet<Biome> spawnBiomes) {
-        context.register(key, new SwetVariant(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/swet/" + name + ".png"), gelItem, spawnBiomes));
+        context.register(key, new SwetVariant(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/swet/" + name + ".png"), gelItem, spawnBiomes,
+                ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_left_1"),
+                ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_left_2"),
+                ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_right_1"),
+                ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_right_2")
+        ));
     }
 
     public static Holder<SwetVariant> getSpawnVariant(RandomSource random, RegistryAccess registryAccess, Holder<Biome> biome) {

@@ -100,6 +100,7 @@ public class ZephyrWebbingBall extends Fireball implements ItemSupplier {
         Entity entity = result.getEntity();
         if (entity instanceof LivingEntity livingEntity) {
             if (livingEntity.isBlocking()) {
+                livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, this.getOwner());
                 if (entity instanceof Player player && player.isBlocking()) {
                     PlayerAccessor playerAccessor = (PlayerAccessor) player;
                     playerAccessor.callHurtCurrentlyUsedShield(3.0F);

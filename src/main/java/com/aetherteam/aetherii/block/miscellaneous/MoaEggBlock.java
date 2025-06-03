@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.block.miscellaneous;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.MoaEggBlockEntity;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
@@ -11,7 +12,6 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -86,10 +86,10 @@ public class MoaEggBlock extends BaseEntityBlock {
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!this.isReadyToHatch(state)) {
-            level.playSound(null, pos, SoundEvents.SNIFFER_EGG_CRACK, SoundSource.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
+            level.playSound(null, pos, AetherIISoundEvents.BLOCK_MOA_EGG_CRACK.get(), SoundSource.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
             level.setBlock(pos, state.setValue(HATCH, this.getHatchLevel(state) + 1), 2);
         } else {
-            level.playSound(null, pos, SoundEvents.SNIFFER_EGG_HATCH, SoundSource.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
+            level.playSound(null, pos, AetherIISoundEvents.BLOCK_MOA_EGG_HATCH.get(), SoundSource.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
             level.destroyBlock(pos, false);
             Moa moa = AetherIIEntityTypes.MOA.get().create(level, EntitySpawnReason.BREEDING);
             if (moa != null) {

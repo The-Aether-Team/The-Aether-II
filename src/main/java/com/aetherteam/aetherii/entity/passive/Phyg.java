@@ -1,13 +1,14 @@
 package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
-import com.aetherteam.aetherii.entity.ai.goal.PhygPanicGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -36,7 +37,7 @@ public class Phyg extends WingedAnimal {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new PhygPanicGoal(this, 1.25));
+        this.goalSelector.addGoal(1, new Phyg.PhygPanicGoal(this, 1.25));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.2, item -> item.is(AetherIITags.Items.PHYG_FOOD), false));
         this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1));
@@ -47,17 +48,44 @@ public class Phyg extends WingedAnimal {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Animal.createAnimalAttributes()
-                .add(Attributes.MAX_HEALTH, 10.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.25);
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        if (player.isHolding(itemstack -> itemstack.is(AetherIITags.Items.PHYG_CALM_ITEMS))) {
+            if (!this.isVehicle() && !player.isSecondaryUseActive()) {
+                if (!this.level().isClientSide()) {
+                    player.startRiding(this);
+                }
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return super.mobInteract(player, hand);
     }
 
     @Nullable
     @Override
     public LivingEntity getControllingPassenger() {
         if (this.getFirstPassenger() instanceof LivingEntity livingEntity && livingEntity.isHolding(itemstack -> itemstack.is(AetherIITags.Items.PHYG_CALM_ITEMS))) {
-            return super.getControllingPassenger();
+            return livingEntity;
         }
         return null;
+    }
+
+    @Override
+    public float getSteeringSpeed() {
+        return super.getSteeringSpeed() * 0.8F;
+    }
+
+    @Override
+    public double getMountJumpStrength() {
+        return 0.85F;
+    }
+
+    @Override
+    public boolean canJump() {
+        return this.onGround();
     }
 
     @Override
@@ -83,12 +111,6 @@ public class Phyg extends WingedAnimal {
         return AetherIISoundEvents.ENTITY_PHYG_DEATH.get();
     }
 
-    @Nullable
-    @Override
-    protected SoundEvent getSaddledSound() {
-        return AetherIISoundEvents.ENTITY_PHYG_SADDLE.get();
-    }
-
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(AetherIISoundEvents.ENTITY_PHYG_STEP.get(), 0.15F, 1.0F);
@@ -111,5 +133,29 @@ public class Phyg extends WingedAnimal {
     @OnlyIn(Dist.CLIENT)
     public Vec3 getLeashOffset() {
         return new Vec3(0.0, 0.6F * this.getEyeHeight(), this.getBbWidth() * 0.4F);
+    }
+
+    @Override
+    protected void updateWalkAnimation(float partialTick) {
+        float multiplier = 4.0F;
+        if (this.getControllingPassenger() != null) {
+            multiplier = 1.75F;
+            if (!this.onGround()) {
+                multiplier = 1.25F;
+            }
+        }
+        float f = Math.min(partialTick * multiplier, 1.0F);
+        this.walkAnimation.update(f, 0.4F, this.isBaby() ? 3.0F : 1.0F);
+    }
+
+    protected static class PhygPanicGoal extends PanicGoal {
+        public PhygPanicGoal(Phyg phyg, double speed) {
+            super(phyg, speed);
+        }
+
+        @Override
+        protected boolean shouldPanic() {
+            return super.shouldPanic() || this.mob.getFirstPassenger() instanceof LivingEntity livingEntity && !livingEntity.isHolding(stack -> stack.is(AetherIITags.Items.PHYG_CALM_ITEMS));
+        }
     }
 }

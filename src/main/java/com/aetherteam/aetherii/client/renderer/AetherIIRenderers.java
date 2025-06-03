@@ -14,7 +14,7 @@ import com.aetherteam.aetherii.client.renderer.blockentity.MoaEggRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.*;
-import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLayer;
+import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLatchLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.ArcticBurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiBabyModel;
@@ -34,6 +34,8 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
@@ -45,20 +47,21 @@ import java.util.List;
 import java.util.Map;
 
 public class AetherIIRenderers {
+    public static ContextKey<List<Swet>> SWET_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet"));
+
     public static void registerAddLayer(EntityRenderersEvent.AddLayers event) {
         event.getSkins().forEach(model -> {
             if (event.getSkin(model) instanceof LivingEntityRenderer<?, ?, ?> livingEntityRenderer) {
-                livingEntityRenderer.addLayer(new SwetLayer(event.getContext(), livingEntityRenderer));
+                livingEntityRenderer.addLayer(new SwetLatchLayer(event.getContext(), livingEntityRenderer));
             }
         });
     }
 
     public static void registerRenderStateModifier(RegisterRenderStateModifiersEvent event) {
         event.registerEntityModifier(PlayerRenderer.class, (abstractClientPlayer, playerRenderState) -> {
-            List<Swet> swets = abstractClientPlayer.getData(AetherIIDataAttachments.SWET).getLatchedSwets();
+            List<Swet> swets = abstractClientPlayer.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwets();
             if (swets != null) {
-                playerRenderState.setRenderData(SwetLayer.SWET_KEY, swets);
-                playerRenderState.setRenderData(SwetLayer.SWET_ID_KEY, abstractClientPlayer.getId());
+                playerRenderState.setRenderData(SWET_KEY, swets);
             }
         });
     }
@@ -182,8 +185,8 @@ public class AetherIIRenderers {
     }
 
     public static void registerAccessoryRenderers() {
-        AccessoriesRendererRegistry.registerRenderer(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), GlovesRenderer::new);
-        AccessoriesRendererRegistry.registerRenderer(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), GlovesRenderer::new);
+        AccessoriesRendererRegistry.registerRenderer(AetherIIItems.BEAST_PELT_GLOVES.get(), GlovesRenderer::new);
+        AccessoriesRendererRegistry.registerRenderer(AetherIIItems.BURRUKAI_PLATE_GLOVES.get(), GlovesRenderer::new);
         AccessoriesRendererRegistry.registerRenderer(AetherIIItems.ZANITE_GLOVES.get(), GlovesRenderer::new);
         AccessoriesRendererRegistry.registerRenderer(AetherIIItems.ARKENIUM_GLOVES.get(), GlovesRenderer::new);
         AccessoriesRendererRegistry.registerRenderer(AetherIIItems.GRAVITITE_GLOVES.get(), GlovesRenderer::new);

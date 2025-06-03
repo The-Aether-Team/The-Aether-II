@@ -46,7 +46,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.UNDERSHALE.get());
         this.dropWhenSilkTouch(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
         this.dropSelf(AetherIIBlocks.AGIOSITE.get());
-        this.add(AetherIIBlocks.CRUDE_SCATTERGLASS.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIItems.SCATTERGLASS_SHARD, UniformGenerator.between(1.0F, 3.0F)));
+        this.add(AetherIIBlocks.CRUDE_SCATTERGLASS.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIItems.SCATTERGLASS_SHARD, UniformGenerator.between(1.0F, 2.0F)));
         this.add(AetherIIBlocks.SKY_ROOTS.get(), this::createSkyRootsDrops);
         this.dropSelf(AetherIIBlocks.ICHORITE.get());
         this.dropSelf(AetherIIBlocks.POINTED_HOLYSTONE.get());
@@ -167,16 +167,16 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get()));
 
         // Leaves
-        this.add(AetherIIBlocks.SKYROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
-        this.add(AetherIIBlocks.SKYPLANE_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYPLANE_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
-        this.add(AetherIIBlocks.SKYBIRCH_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYBIRCH_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
-        this.add(AetherIIBlocks.SKYPINE_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYPINE_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
-        this.add(AetherIIBlocks.WISPROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.WISPROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
-        this.add(AetherIIBlocks.WISPTOP_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.WISPTOP_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
-        this.add(AetherIIBlocks.GREATROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.GREATROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
-        this.add(AetherIIBlocks.GREATOAK_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.GREATOAK_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
-        this.add(AetherIIBlocks.GREATBOA_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.GREATBOA_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
-        this.add(AetherIIBlocks.AMBEROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.AMBEROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.SKYROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.SKYROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.SKYPLANE_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.SKYPLANE_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.SKYBIRCH_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.SKYBIRCH_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.SKYPINE_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.SKYPINE_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.WISPROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.WISPROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.WISPTOP_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.WISPTOP_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.GREATROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.GREATROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.GREATOAK_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.GREATOAK_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.GREATBOA_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.GREATBOA_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.AMBEROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticksWithLizard(leaves, AetherIIBlocks.AMBEROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
         this.add(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances())); //TODO
         this.add(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYPLANE_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
         this.add(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get(), (leaves) -> this.droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYBIRCH_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));

@@ -1,7 +1,4 @@
-package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockbench 4.10.3
-// Exported for Minecraft version 1.17 or later with Mojang mappings
-// Paste this class into your mod and generate all required imports
-
+package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.SwetAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
@@ -19,8 +16,9 @@ public class SwetModel<T extends SwetRenderState> extends EntityModel<T> {
     private final ModelPart wisp_top_right;
     private final ModelPart wisp_bottom_left;
     private final ModelPart wisp_bottom_right;
+    private final boolean isGel;
 
-    public SwetModel(ModelPart root) {
+    public SwetModel(ModelPart root, boolean isGel) {
         super(root);
         this.body = root.getChild("body");
         this.gel = this.body.getChild("gel");
@@ -30,6 +28,7 @@ public class SwetModel<T extends SwetRenderState> extends EntityModel<T> {
         this.wisp_top_right = this.head.getChild("wisp_top_right");
         this.wisp_bottom_left = this.head.getChild("wisp_bottom_left");
         this.wisp_bottom_right = this.head.getChild("wisp_bottom_right");
+        this.isGel = isGel;
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -68,15 +67,23 @@ public class SwetModel<T extends SwetRenderState> extends EntityModel<T> {
     @Override
     public void setupAnim(T entity) {
         super.setupAnim(entity);
-        this.gel.visible = false;
-        this.squish.visible = false;
-        this.animate(entity.groundAnimationState, SwetAnimation.ground, entity.ageInTicks);
-        this.animate(entity.jumpAnimationState, SwetAnimation.jump, entity.ageInTicks);
-        this.gel.xScale *= 1 + 0.1F * entity.foodSaturation;
-        this.gel.yScale *= 1 + 0.1F * entity.foodSaturation;
-        this.gel.zScale *= 1 + 0.1F * entity.foodSaturation;
-        this.gel.xScale *= (1.0F - entity.waterDamageScale);
-        this.gel.yScale *= (1.0F - entity.waterDamageScale);
-        this.gel.zScale *= (1.0F - entity.waterDamageScale);
+        if (this.isGel) {
+            this.head.visible = false;
+            this.gel.visible = true;
+            this.squish.visible = true;
+
+            float scale = entity.swetScale;
+            if (scale < 0.6F) {
+                scale = 0.0F;
+            }
+            this.gel.xScale = scale;
+            this.gel.yScale = scale;
+            this.gel.zScale = scale;
+        } else {
+            this.gel.visible = false;
+            this.squish.visible = false;
+        }
+        this.animate(entity.groundAnimationState, SwetAnimation.GROUND, entity.ageInTicks);
+        this.animate(entity.jumpAnimationState, SwetAnimation.JUMP, entity.ageInTicks);
     }
 }

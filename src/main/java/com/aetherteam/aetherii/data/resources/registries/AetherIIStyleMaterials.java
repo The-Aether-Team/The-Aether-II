@@ -15,8 +15,8 @@ import net.minecraft.world.item.Item;
 public class AetherIIStyleMaterials {
     public static final ResourceKey<Registry<StyleMaterial>> STYLE_MATERIAL_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "style_material"));
 
-    public static final ResourceKey<StyleMaterial> TAEGORE_HIDE = createKey("taegore_hide");
-    public static final ResourceKey<StyleMaterial> BURRUKAI_PELT = createKey("burrukai_pelt");
+    public static final ResourceKey<StyleMaterial> BEAST_PELT = createKey("beast_pelt");
+    public static final ResourceKey<StyleMaterial> BURRUKAI_PLATE = createKey("burrukai_plate");
     public static final ResourceKey<StyleMaterial> ZANITE = createKey("zanite");
     public static final ResourceKey<StyleMaterial> ARKENIUM = createKey("arkenium");
     public static final ResourceKey<StyleMaterial> GRAVITITE = createKey("gravitite");
@@ -26,8 +26,8 @@ public class AetherIIStyleMaterials {
     }
 
     public static void bootstrap(BootstrapContext<StyleMaterial> context) {
-        register(context, AetherIIItems.TAEGORE_HIDE.get(), TAEGORE_HIDE);
-        register(context, AetherIIItems.BURRUKAI_PELT.get(), BURRUKAI_PELT);
+        register(context, AetherIIItems.BEAST_PELT.get(), BEAST_PELT);
+        register(context, AetherIIItems.BURRUKAI_PLATE.get(), BURRUKAI_PLATE);
         register(context, AetherIIItems.ZANITE_GEMSTONE.get(), ZANITE);
         register(context, AetherIIItems.ARKENIUM_PLATES.get(), ARKENIUM);
         register(context, AetherIIItems.GRAVITITE_PLATE.get(), GRAVITITE);

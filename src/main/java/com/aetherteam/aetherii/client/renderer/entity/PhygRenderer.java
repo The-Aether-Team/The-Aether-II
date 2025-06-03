@@ -17,7 +17,6 @@ public class PhygRenderer extends MobRenderer<Phyg, WingEntityRenderState, PhygM
         super(context, new PhygModel<>(context.bakeLayer(AetherIIModelLayers.PHYG)), 0.7F);
     }
 
-
     @Override
     public WingEntityRenderState createRenderState() {
         return new WingEntityRenderState();

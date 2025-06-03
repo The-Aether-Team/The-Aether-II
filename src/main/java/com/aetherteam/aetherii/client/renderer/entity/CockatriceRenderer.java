@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class CockatriceRenderer extends MobRenderer<Cockatrice, CockatriceRenderState, CockatriceModel> {
-    private static final ResourceLocation COCKATRICE_PLANT_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/cockatrice/cockatrice.png");
+    private static final ResourceLocation COCKATRICE_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/cockatrice/cockatrice.png");
 
     public CockatriceRenderer(EntityRendererProvider.Context context) {
         super(context, new CockatriceModel(context.bakeLayer(AetherIIModelLayers.COCKATRICE)), 0.3F);
@@ -24,14 +24,15 @@ public class CockatriceRenderer extends MobRenderer<Cockatrice, CockatriceRender
     }
 
     @Override
-    public void extractRenderState(Cockatrice p_362733_, CockatriceRenderState p_360515_, float p_361157_) {
-        super.extractRenderState(p_362733_, p_360515_, p_361157_);
-        p_360515_.attackAnimationState.copyFrom(p_362733_.attackAnimationState);
-        p_360515_.shootAnimationState.copyFrom(p_362733_.shootAnimationState);
+    public void extractRenderState(Cockatrice cockatrice, CockatriceRenderState renderState, float partialTick) {
+        super.extractRenderState(cockatrice, renderState, partialTick);
+        renderState.clawAttackAnimationState.copyFrom(cockatrice.clawAttackAnimationState);
+        renderState.dartAttackAnimationState.copyFrom(cockatrice.dartAttackAnimationState);
+        renderState.digAnimationState.copyFrom(cockatrice.digAnimationState);
     }
 
     @Override
     public ResourceLocation getTextureLocation(CockatriceRenderState p_368654_) {
-        return COCKATRICE_PLANT_TEXTURE;
+        return COCKATRICE_TEXTURE;
     }
 }

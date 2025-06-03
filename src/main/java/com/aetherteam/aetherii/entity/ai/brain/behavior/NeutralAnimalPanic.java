@@ -5,17 +5,17 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.behavior.AnimalPanic;
 
 public class NeutralAnimalPanic<T extends AetherAnimal> extends AnimalPanic<T> {
-    public NeutralAnimalPanic(float p_249921_) {
-        super(p_249921_);
+    public NeutralAnimalPanic(float speedModifier) {
+        super(speedModifier);
     }
 
     @Override
-    protected boolean checkExtraStartConditions(ServerLevel level, T owner) {
-        return owner.isBaby() && super.checkExtraStartConditions(level, owner);
+    protected boolean checkExtraStartConditions(ServerLevel serverLevel, T owner) {
+        return owner.isBaby() && super.checkExtraStartConditions(serverLevel, owner);
     }
 
     @Override
-    protected boolean canStillUse(ServerLevel level, T entity, long gameTime) {
-        return entity.isBaby() && super.canStillUse(level, entity, gameTime);
+    protected boolean canStillUse(ServerLevel serverLevel, T owner, long gameTime) {
+        return owner.isBaby() && super.canStillUse(serverLevel, owner, gameTime);
     }
 }

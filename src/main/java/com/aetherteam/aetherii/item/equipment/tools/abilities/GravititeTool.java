@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.item.equipment.tools.abilities;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.player.AbilityBehaviorAttachment;
 import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -31,7 +32,7 @@ public interface GravititeTool {
                         && (!blockState.hasProperty(BlockStateProperties.CHEST_TYPE) || blockState.getValue(BlockStateProperties.CHEST_TYPE) == ChestType.SINGLE)
                         && (!blockState.hasProperty(BlockStateProperties.EXTENDED) || !blockState.getValue(BlockStateProperties.EXTENDED))
                         && !blockState.is(AetherIITags.Blocks.GRAVITITE_ABILITY_BLACKLIST)) {
-                    AetherIIPlayerAttachment attachment = player.getData(AetherIIDataAttachments.PLAYER);
+                    AbilityBehaviorAttachment attachment = player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR);
                     if (!attachment.isGravititeHoldingFloatingBlock()) {
                         attachment.setGravititeHoldingFloatingBlock(true);
                         if (!level.isClientSide()) {
