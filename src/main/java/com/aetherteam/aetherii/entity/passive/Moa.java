@@ -56,7 +56,7 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
-public class Moa extends MountableAnimal {
+public class Moa extends MountableAnimal { //todo inventory for saddle, saddlebags, etc.
     private static final EntityDataAccessor<Optional<UUID>> DATA_MOA_UUID_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
     private static final EntityDataAccessor<String> DATA_FEATHER_SHAPE_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<String> DATA_KERATIN_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
@@ -834,7 +834,11 @@ public class Moa extends MountableAnimal {
 
     @Override
     public Vec3 getPassengerRidingPosition(Entity entity) {
-        return this.isSitting() ? super.getPassengerRidingPosition(entity).add(0, -0.575, 0) : super.getPassengerRidingPosition(entity).add(0, -0.65, 0);
+        double base = -0.8;
+        double back = 0.5;
+        return this.isSitting()
+                ? super.getPassengerRidingPosition(entity).add(back * Mth.cos((entity.getYRot() - 90) * Mth.DEG_TO_RAD), base + 0.75, back * Mth.sin((entity.getYRot() - 90) * Mth.DEG_TO_RAD))
+                : super.getPassengerRidingPosition(entity).add(back * Mth.cos((entity.getYRot() - 90) * Mth.DEG_TO_RAD), base, back * Mth.sin((entity.getYRot() - 90) * Mth.DEG_TO_RAD));
     }
 
     /**

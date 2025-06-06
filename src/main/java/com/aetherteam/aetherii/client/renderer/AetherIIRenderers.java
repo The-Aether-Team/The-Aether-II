@@ -158,6 +158,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.ARCTIC_KIRRID_BABY, ArcticKirridBabyModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA, MoaModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA_BABY, MoaBabyModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.MOA_SADDLE, MoaSaddleModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_LIZARD, SkyrootLizardModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.CARRION_SPROUT, CarrionSproutModel::createBodyLayer);
 

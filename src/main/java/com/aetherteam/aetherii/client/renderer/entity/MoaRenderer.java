@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.layers.MoaEyesLayer;
 import com.aetherteam.aetherii.client.renderer.entity.layers.MoaFeathersLayer;
 import com.aetherteam.aetherii.client.renderer.entity.layers.MoaKeratinLayer;
+import com.aetherteam.aetherii.client.renderer.entity.layers.MoaSaddleLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
@@ -26,6 +27,8 @@ public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, Ent
         this.addLayer(new MoaKeratinLayer(this, context.getModelManager()));
         this.addLayer(new MoaFeathersLayer(this, context.getModelManager()));
         this.addLayer(new MoaEyesLayer(this, context.getModelManager()));
+        this.addLayer(new MoaEyesLayer(this, context.getModelManager()));
+        this.addLayer(new MoaSaddleLayer(this, context.getModelSet()));
     }
 
     @Override

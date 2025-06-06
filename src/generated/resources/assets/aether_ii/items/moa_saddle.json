@@ -1,6 +1,12 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "aether_ii:item/moa_saddle"
+    "model": "aether_ii:item/moa_saddle",
+    "tints": [
+      {
+        "type": "minecraft:dye",
+        "default": -3350785
+      }
+    ]
   }
 }
