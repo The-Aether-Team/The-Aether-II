@@ -834,8 +834,8 @@ public class Moa extends MountableAnimal { //todo inventory for saddle, saddleba
 
     @Override
     public Vec3 getPassengerRidingPosition(Entity entity) {
-        double base = -0.8;
-        double back = 0.5;
+        double base = -0.925;
+        double back = 0.25;
         return this.isSitting()
                 ? super.getPassengerRidingPosition(entity).add(back * Mth.cos((entity.getYRot() - 90) * Mth.DEG_TO_RAD), base + 0.75, back * Mth.sin((entity.getYRot() - 90) * Mth.DEG_TO_RAD))
                 : super.getPassengerRidingPosition(entity).add(back * Mth.cos((entity.getYRot() - 90) * Mth.DEG_TO_RAD), base, back * Mth.sin((entity.getYRot() - 90) * Mth.DEG_TO_RAD));
