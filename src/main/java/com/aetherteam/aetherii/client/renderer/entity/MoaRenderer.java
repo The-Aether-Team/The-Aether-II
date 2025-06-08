@@ -2,10 +2,7 @@ package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
-import com.aetherteam.aetherii.client.renderer.entity.layers.MoaEyesLayer;
-import com.aetherteam.aetherii.client.renderer.entity.layers.MoaFeathersLayer;
-import com.aetherteam.aetherii.client.renderer.entity.layers.MoaKeratinLayer;
-import com.aetherteam.aetherii.client.renderer.entity.layers.MoaSaddleLayer;
+import com.aetherteam.aetherii.client.renderer.entity.layers.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
@@ -14,21 +11,22 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
-public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, EntityModel<MoaRenderState>, MoaModel<MoaRenderState>, MoaBabyModel<MoaRenderState>> {
+public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, EntityModel<MoaRenderState>, MoaModel, MoaBabyModel> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_base.png");
     private static final ResourceLocation BABY_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_baby_base.png");
-    private final MoaModel<MoaRenderState> defaultModel;
-    private final MoaBabyModel<MoaRenderState> babyModel;
+    private final MoaModel defaultModel;
+    private final MoaBabyModel babyModel;
 
     public MoaRenderer(EntityRendererProvider.Context context) {
-        super(context, new MoaModel<>(context.bakeLayer(AetherIIModelLayers.MOA)), 0.5F);
-        this.defaultModel = new MoaModel<>(context.bakeLayer(AetherIIModelLayers.MOA));
-        this.babyModel = new MoaBabyModel<>(context.bakeLayer(AetherIIModelLayers.MOA_BABY));
+        super(context, new MoaModel(context.bakeLayer(AetherIIModelLayers.MOA)), 0.5F);
+        this.defaultModel = new MoaModel(context.bakeLayer(AetherIIModelLayers.MOA));
+        this.babyModel = new MoaBabyModel(context.bakeLayer(AetherIIModelLayers.MOA_BABY));
         this.addLayer(new MoaKeratinLayer(this, context.getModelManager()));
         this.addLayer(new MoaFeathersLayer(this, context.getModelManager()));
         this.addLayer(new MoaEyesLayer(this, context.getModelManager()));
         this.addLayer(new MoaEyesLayer(this, context.getModelManager()));
         this.addLayer(new MoaSaddleLayer(this, context.getModelSet()));
+        this.addLayer(new MoaSaddlebagLayer(this, context.getModelSet()));
     }
 
     @Override
@@ -37,11 +35,12 @@ public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, Ent
     }
 
     @Override
-    public void extractRenderState(Moa moa, MoaRenderState renderState, float p_361157_) {
-        super.extractRenderState(moa, renderState, p_361157_);
+    public void extractRenderState(Moa moa, MoaRenderState renderState, float partialTick) {
+        super.extractRenderState(moa, renderState, partialTick);
         renderState.sitting = moa.isSitting();
-        renderState.saddle = moa.isSaddled();
-        renderState.flyAmount = moa.getFlyAmount(p_361157_);
+        renderState.saddle = moa.getSaddleStack();
+        renderState.saddlebag = moa.getSaddlebagStack();
+        renderState.flyAmount = moa.getFlyAmount(partialTick);
         renderState.featherColor = moa.getFeatherColor();
         renderState.keratinColor = moa.getKeratinColor();
         renderState.eyeColor = moa.getEyeColor();
@@ -49,12 +48,12 @@ public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, Ent
     }
 
     @Override
-    public MoaModel<MoaRenderState> getDefaultModel() {
+    public MoaModel getDefaultModel() {
         return this.defaultModel;
     }
 
     @Override
-    public MoaBabyModel<MoaRenderState> getBabyModel() {
+    public MoaBabyModel getBabyModel() {
         return this.babyModel;
     }
 

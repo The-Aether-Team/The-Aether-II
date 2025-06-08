@@ -165,7 +165,7 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
         ResourceLocation texture = TextureMapping.getItemTexture(item);
         ResourceLocation overlay = TextureMapping.getItemTexture(item, "_overlay");
         ModelTemplates.TWO_LAYERED_ITEM.create(location, TextureMapping.layered(texture, overlay), this.modelOutput);
-        ItemModel.Unbaked model = ItemModelUtils.tintedModel(location, new Dye(-3350785));
+        ItemModel.Unbaked model = ItemModelUtils.tintedModel(location, new Dye(0xFFCCDEFF));
         this.itemModelOutput.accept(AetherIIItems.MOA_SADDLE.asItem(), model);
     }
 

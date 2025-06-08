@@ -8,13 +8,17 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.ai.brain.MoaAi;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
+import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.MoaEggType;
+import com.aetherteam.aetherii.item.miscellaneous.MoaFeedItem;
+import com.aetherteam.aetherii.item.miscellaneous.MoaSaddlebagItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -28,9 +32,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
@@ -38,13 +40,12 @@ import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.ai.sensing.Sensor;
-import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -56,20 +57,27 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
-public class Moa extends MountableAnimal { //todo inventory for saddle, saddlebags, etc.
+public class Moa extends MountableAnimal implements ContainerListener {
     private static final EntityDataAccessor<Optional<UUID>> DATA_MOA_UUID_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
     private static final EntityDataAccessor<String> DATA_FEATHER_SHAPE_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<String> DATA_KERATIN_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<String> DATA_EYE_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<String> DATA_FEATHER_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
-    private static final EntityDataAccessor<Optional<UUID>> DATA_RIDER_UUID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
-    private static final EntityDataAccessor<Optional<UUID>> DATA_LAST_RIDER_UUID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
-    private static final EntityDataAccessor<Integer> DATA_REMAINING_JUMPS_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
+
     private static final EntityDataAccessor<Boolean> DATA_HUNGRY_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DATA_AMOUNT_FED_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_PLAYER_GROWN_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
+
+    private static final EntityDataAccessor<Optional<UUID>> DATA_RIDER_UUID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
+    private static final EntityDataAccessor<Optional<UUID>> DATA_LAST_RIDER_UUID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
+    private static final EntityDataAccessor<Integer> DATA_REMAINING_JUMPS_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_SITTING_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Optional<UUID>> DATA_FOLLOWING_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
+
+    private static final EntityDataAccessor<ItemStack> DATA_SADDLE_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
+    private static final EntityDataAccessor<ItemStack> DATA_SADDLEBAG_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
+
+    private SimpleContainer inventory;
 
     private int jumpCooldown;
     private int flapCooldown;
@@ -88,6 +96,7 @@ public class Moa extends MountableAnimal { //todo inventory for saddle, saddleba
         this.setPathfindingMalus(PathType.DANGER_OTHER, -1.0F);
         this.setPathfindingMalus(PathType.DAMAGE_OTHER, -1.0F);
         this.setPathfindingMalus(PathType.LAVA, -1.0F);
+        this.createInventory();
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
@@ -147,6 +156,8 @@ public class Moa extends MountableAnimal { //todo inventory for saddle, saddleba
         builder.define(DATA_PLAYER_GROWN_ID, false);
         builder.define(DATA_SITTING_ID, false);
         builder.define(DATA_FOLLOWING_ID, Optional.empty());
+        builder.define(DATA_SADDLE_ID, ItemStack.EMPTY);
+        builder.define(DATA_SADDLEBAG_ID, ItemStack.EMPTY);
     }
 
     /**
@@ -180,6 +191,36 @@ public class Moa extends MountableAnimal { //todo inventory for saddle, saddleba
     @Override
     protected PathNavigation createNavigation(Level level) {
         return new FallPathNavigation(this, level);
+    }
+
+    public void createInventory() {
+        SimpleContainer simplecontainer = this.inventory;
+        this.inventory = new SimpleContainer(this.getInventorySize());
+        if (simplecontainer != null) {
+            simplecontainer.removeListener(this);
+            int i = Math.min(simplecontainer.getContainerSize(), this.inventory.getContainerSize());
+
+            for (int j = 0; j < i; ++j) {
+                ItemStack itemstack = simplecontainer.getItem(j);
+                if (!itemstack.isEmpty()) {
+                    this.inventory.setItem(j, itemstack.copy());
+                }
+            }
+        }
+
+        this.inventory.addListener(this);
+        this.syncToClients();
+    }
+
+    @Override
+    public void containerChanged(Container container) {
+        boolean isSaddled = this.isSaddled();
+        this.syncToClients();
+        if (this.tickCount > 20) {
+            if (!isSaddled && this.isSaddled()) {
+                this.playSound(this.getSaddleSoundEvent(), 0.5F, 1.0F);
+            }
+        }
     }
 
     @Override
@@ -477,6 +518,34 @@ public class Moa extends MountableAnimal { //todo inventory for saddle, saddleba
         return super.mobInteract(player, hand);
     }
 
+    @Override
+    protected void dropEquipment(ServerLevel serverLevel) {
+        super.dropEquipment(serverLevel);
+        if (this.getInventory() != null) {
+            for (int i = 1; i < this.getInventory().getContainerSize(); i++) {
+                ItemStack itemstack = this.inventory.getItem(i);
+                if (!itemstack.isEmpty() && !EnchantmentHelper.has(itemstack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
+                    this.spawnAtLocation(serverLevel, itemstack);
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void dropSaddle(ServerLevel serverLevel) {
+        this.spawnAtLocation(serverLevel, AetherIIItems.MOA_SADDLE.get());
+    }
+
+    @Override
+    public void remove(RemovalReason reason) {
+        if (this.getFirstPassenger() instanceof Player player) {
+            if (player.containerMenu instanceof GuidebookEquipmentMenu) {
+                player.closeContainer();
+            }
+        }
+        super.remove(reason);
+    }
+
     public void spawnExplosionParticle() {
         for (int i = 0; i < 20; ++i) {
             EntityUtil.spawnMovementExplosionParticles(this);
@@ -672,6 +741,26 @@ public class Moa extends MountableAnimal { //todo inventory for saddle, saddleba
         this.getEntityData().set(DATA_FOLLOWING_ID, Optional.ofNullable(uuid));
     }
 
+    public ItemStack getSaddleStack() {
+        return this.getEntityData().get(DATA_SADDLE_ID);
+    }
+
+    public void setSaddleStack(ItemStack itemStack) {
+        this.getEntityData().set(DATA_SADDLE_ID, itemStack);
+    }
+
+    public ItemStack getSaddlebagStack() {
+        return this.getEntityData().get(DATA_SADDLEBAG_ID);
+    }
+
+    public void setSaddlebagStack(ItemStack itemStack) {
+        this.getEntityData().set(DATA_SADDLEBAG_ID, itemStack);
+    }
+
+    public int getSaddlebagRowSize() {
+        return this.getSaddlebagStack().getItem() instanceof MoaSaddlebagItem saddlebagItem ? saddlebagItem.getRowSize() : 0;
+    }
+
     /**
      * @return The {@link Integer} value for how long until the Moa can jump again.
      */
@@ -779,9 +868,21 @@ public class Moa extends MountableAnimal { //todo inventory for saddle, saddleba
         return this.getRemainingJumps() > 0 && this.getJumpCooldown() == 0;
     }
 
+    public void equipSaddle(ItemStack stack) {
+        this.getInventory().setItem(0, stack);
+    }
+
     @Override
     public boolean isSaddleable() {
         return super.isSaddleable() && this.isPlayerGrown();
+    }
+
+    protected void syncToClients() {
+        if (!this.level().isClientSide()) {
+            this.setSaddled(!this.inventory.getItem(0).isEmpty());
+            this.setSaddleStack(this.inventory.getItem(0));
+            this.setSaddlebagStack(this.inventory.getItem(1));
+        }
     }
 
     /**
@@ -834,8 +935,8 @@ public class Moa extends MountableAnimal { //todo inventory for saddle, saddleba
 
     @Override
     public Vec3 getPassengerRidingPosition(Entity entity) {
-        double base = -0.925;
-        double back = 0.25;
+        double base = -0.90;
+        double back = 0.3;
         return this.isSitting()
                 ? super.getPassengerRidingPosition(entity).add(back * Mth.cos((entity.getYRot() - 90) * Mth.DEG_TO_RAD), base + 0.75, back * Mth.sin((entity.getYRot() - 90) * Mth.DEG_TO_RAD))
                 : super.getPassengerRidingPosition(entity).add(back * Mth.cos((entity.getYRot() - 90) * Mth.DEG_TO_RAD), base, back * Mth.sin((entity.getYRot() - 90) * Mth.DEG_TO_RAD));
@@ -891,6 +992,14 @@ public class Moa extends MountableAnimal { //todo inventory for saddle, saddleba
         }
     }
 
+    public SimpleContainer getInventory() {
+        return this.inventory;
+    }
+
+    public int getInventorySize() {
+        return 30;
+    }
+
     @Override
     public ItemStack getPickResult() {
         ItemStack moaEggItem = new ItemStack(AetherIIItems.MOA_EGG.get());
@@ -927,6 +1036,24 @@ public class Moa extends MountableAnimal { //todo inventory for saddle, saddleba
         if (this.getFollowing() != null) {
             tag.putUUID("Following", this.getFollowing());
         }
+
+        tag.put("SaddleItem", this.getSaddleStack().saveOptional(this.registryAccess()));
+        tag.put("SaddlebagsItem", this.getSaddlebagStack().saveOptional(this.registryAccess()));
+
+        if (!this.getInventory().getItem(2).isEmpty()) {
+            tag.put("FeedItem", this.inventory.getItem(2).save(this.registryAccess(), new CompoundTag()));
+        }
+
+        ListTag list = new ListTag();
+        for (int i = 6; i < this.inventory.getContainerSize(); ++i) {
+            ItemStack itemstack = this.inventory.getItem(i);
+            if (!itemstack.isEmpty()) {
+                CompoundTag slotTag = new CompoundTag();
+                slotTag.putByte("Slot", (byte) i);
+                list.add(itemstack.save(this.registryAccess(), slotTag));
+            }
+        }
+        tag.put("SaddlebagItems", list);
     }
 
     @Override
@@ -973,6 +1100,34 @@ public class Moa extends MountableAnimal { //todo inventory for saddle, saddleba
         }
         if (tag.contains("Following")) {
             this.setFollowing(tag.getUUID("Following"));
+        }
+
+        if (tag.contains("SaddleItem", 10)) {
+            ItemStack itemStack = ItemStack.parseOptional(this.registryAccess(), tag.getCompound("SaddleItem"));
+            if (itemStack.is(AetherIIItems.MOA_SADDLE.get())) {
+                this.getInventory().setItem(0, itemStack);
+            }
+        }
+        if (tag.contains("SaddlebagsItem", 10)) {
+            ItemStack itemStack = ItemStack.parseOptional(this.registryAccess(), tag.getCompound("SaddlebagsItem"));
+            if (itemStack.getItem() instanceof MoaSaddlebagItem) {
+                this.getInventory().setItem(1, itemStack);
+            }
+        }
+        if (tag.contains("FeedItem", 10)) {
+            ItemStack itemStack = ItemStack.parseOptional(this.registryAccess(), tag.getCompound("FeedItem"));
+            if (itemStack.getItem() instanceof MoaFeedItem) {
+                this.getInventory().setItem(2, itemStack);
+            }
+        }
+
+        ListTag list = tag.getList("SaddlebagItems", 10);
+        for (int i = 0; i < list.size(); ++i) {
+            CompoundTag compoundtag = list.getCompound(i);
+            int j = compoundtag.getByte("Slot") & 255;
+            if (j >= 6 && j < this.inventory.getContainerSize()) {
+                this.inventory.setItem(j, ItemStack.parseOptional(this.registryAccess(), compoundtag));
+            }
         }
     }
 

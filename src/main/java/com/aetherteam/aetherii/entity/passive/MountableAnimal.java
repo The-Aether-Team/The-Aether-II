@@ -143,8 +143,12 @@ public abstract class MountableAnimal extends AetherAnimal implements MountableM
     protected void dropEquipment(ServerLevel serverLevel) {
         super.dropEquipment(serverLevel);
         if (this.isSaddled()) {
-            this.spawnAtLocation(serverLevel, Items.SADDLE);
+            this.dropSaddle(serverLevel);
         }
+    }
+
+    protected void dropSaddle(ServerLevel serverLevel) {
+        this.spawnAtLocation(serverLevel, Items.SADDLE);
     }
 
     @Nullable

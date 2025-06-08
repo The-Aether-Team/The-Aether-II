@@ -15,10 +15,10 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 public class MoaSaddleLayer extends RenderLayer<MoaRenderState, EntityModel<MoaRenderState>> {
-    //todo item context
-    //todo when player is on saddle their pose rotations need to change
     private static final ResourceLocation SADDLE_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/saddle/moa_saddle.png");
     private static final ResourceLocation SADDLE_OVERLAY_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/saddle/moa_saddle_overlay.png");
     private final MoaSaddleModel saddle;
@@ -31,8 +31,11 @@ public class MoaSaddleLayer extends RenderLayer<MoaRenderState, EntityModel<MoaR
     @Override
     public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, MoaRenderState moa, float netHeadYaw, float headPitch) {
         if (!moa.isInvisible && moa.isSaddled()) {
+            ItemStack saddle = moa.saddle;
+            int color = IClientItemExtensions.of(saddle).getDefaultDyeColor(saddle);
+
             this.saddle.setupAnim(moa);
-            this.saddle.renderToBuffer(poseStack, ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(SADDLE_TEXTURE), false), packedLight, OverlayTexture.NO_OVERLAY, -1);
+            this.saddle.renderToBuffer(poseStack, ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(SADDLE_TEXTURE), false), packedLight, OverlayTexture.NO_OVERLAY, color);
             this.saddle.renderToBuffer(poseStack, ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(SADDLE_OVERLAY_TEXTURE), false), packedLight, OverlayTexture.NO_OVERLAY, -1);
         }
     }

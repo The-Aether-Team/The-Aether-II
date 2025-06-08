@@ -25,9 +25,9 @@ public class MoaSaddleModel extends EntityModel<MoaRenderState> {
         PartDefinition partDefinition = meshDefinition.getRoot();
 
         PartDefinition moa_saddle = partDefinition.addOrReplaceChild("moa_saddle", CubeListBuilder.create().texOffs(11, 13).addBox(-5.0F, -1.5F, -4.0F, 10.0F, 4.0F, 10.0F, new CubeDeformation(0.0F))
-                .texOffs(18, 5).addBox(-5.5F, -3.5F, -6.0F, 11.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 1.0F, 0.0F));
+                .texOffs(18, 5).addBox(-5.5F, -3.5F, -6.0F, 11.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 1.0F, 1.1F));
 
-        PartDefinition rear_r1 = moa_saddle.addOrReplaceChild("rear_r1", CubeListBuilder.create().texOffs(17, 27).addBox(-1.0F, -1.0F, -4.0F, 7.0F, 4.0F, 7.0F, new CubeDeformation(-0.01F)), PartPose.offsetAndRotation(-2.1F, -0.5F, 4.6F, 0.0F, -0.7854F, 0.0F));
+        PartDefinition rear_r1 = moa_saddle.addOrReplaceChild("rear_r1", CubeListBuilder.create().texOffs(17, 27).addBox(-3.5F, -2.0F, -3.5F, 7.0F, 4.0F, 7.0F, new CubeDeformation(-0.01F)), PartPose.offsetAndRotation(0.0F, 0.5F, 6.0F, 0.0F, -0.7854F, 0.0F));
 
         PartDefinition handle = moa_saddle.addOrReplaceChild("handle", CubeListBuilder.create().texOffs(21, 0).addBox(-4.5F, -3.8F, -0.5F, 9.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -3.0F, -4.5F, -0.5236F, 0.0F, 0.0F));
 
@@ -41,5 +41,8 @@ public class MoaSaddleModel extends EntityModel<MoaRenderState> {
     @Override
     public void setupAnim(MoaRenderState renderState) {
         super.setupAnim(renderState);
+        if (renderState.sitting) {
+            this.root.y = 4.0F;
+        }
     }
 }

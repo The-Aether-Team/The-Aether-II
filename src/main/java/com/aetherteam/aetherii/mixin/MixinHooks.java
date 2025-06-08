@@ -162,11 +162,16 @@ public class MixinHooks {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static <T extends HumanoidRenderState> void positionMoaRider(T renderState, ModelPart head, ModelPart body, ModelPart rightArm, ModelPart leftArm, ModelPart rightLeg, ModelPart leftLeg) {
-        rightArm.xRot -= 15.0F * Mth.DEG_TO_RAD;
-        rightArm.yRot -= 15.0F * Mth.DEG_TO_RAD;
-        leftArm.xRot -= 15.0F * Mth.DEG_TO_RAD;
-        leftArm.yRot += 15.0F * Mth.DEG_TO_RAD;
+    public static <T extends HumanoidRenderState> void positionMoaRider(T renderState, ModelPart head, ModelPart body, ModelPart rightArm, ModelPart leftArm, ModelPart rightLeg, ModelPart leftLeg) { //todo
+        rightArm.xRot += -10.0F * Mth.DEG_TO_RAD;
+        rightArm.zRot += -30.0F * Mth.DEG_TO_RAD;
+        leftArm.xRot += -10.0F * Mth.DEG_TO_RAD;
+        leftArm.zRot += 30.0F * Mth.DEG_TO_RAD;
+
+//        rightLeg.xRot = -30.0F * Mth.DEG_TO_RAD;
+//        rightLeg.zRot = 32.5F * Mth.DEG_TO_RAD;
+//        leftLeg.xRot = -30.0F * Mth.DEG_TO_RAD;
+//        leftLeg.zRot = -32.5F * Mth.DEG_TO_RAD;
 
         rightLeg.x -= 1;
         rightLeg.y -= 1;

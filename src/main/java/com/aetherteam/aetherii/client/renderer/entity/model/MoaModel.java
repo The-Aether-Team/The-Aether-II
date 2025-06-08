@@ -8,7 +8,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class MoaModel<T extends MoaRenderState> extends EntityModel<T> {
+public class MoaModel extends EntityModel<MoaRenderState> {
     private final ModelPart body_main;
     private final ModelPart body_front;
     private final ModelPart neck;
@@ -218,15 +218,15 @@ public class MoaModel<T extends MoaRenderState> extends EntityModel<T> {
     }
 
     @Override
-    public void setupAnim(T entity) {
-        super.setupAnim(entity);
-        this.head_main.xRot = (entity.xRot * Mth.DEG_TO_RAD) + 0.1886F;
-        this.head_main.yRot = entity.yRot * Mth.DEG_TO_RAD;
-        float flyAmount = entity.flyAmount;
-        this.animateWalk(MoaAnimation.walk, entity.walkAnimationPos, Mth.clamp(entity.walkAnimationSpeed - flyAmount, 0, 1F), 2.0F, 2.5F);
-        if (entity.sitting) {
+    public void setupAnim(MoaRenderState renderState) {
+        super.setupAnim(renderState);
+        this.head_main.xRot = (renderState.xRot * Mth.DEG_TO_RAD) + 0.1886F;
+        this.head_main.yRot = renderState.yRot * Mth.DEG_TO_RAD;
+        float flyAmount = renderState.flyAmount;
+        this.animateWalk(MoaAnimation.walk, renderState.walkAnimationPos, Mth.clamp(renderState.walkAnimationSpeed - flyAmount, 0, 1F), 2.0F, 2.5F);
+        if (renderState.sitting) {
             this.applyStatic(MoaAnimation.sit);
         }
-        this.animateWalk(MoaAnimation.fly, entity.ageInTicks, flyAmount, 0.5F, 1.0F);
+        this.animateWalk(MoaAnimation.fly, renderState.ageInTicks, flyAmount, 0.5F, 1.0F);
     }
 }
