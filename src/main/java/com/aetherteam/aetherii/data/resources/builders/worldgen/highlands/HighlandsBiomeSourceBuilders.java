@@ -27,9 +27,9 @@ public class HighlandsBiomeSourceBuilders {
         Climate.Parameter erosionDefault = Climate.Parameter.span(0.0F, 0.55F);
         Climate.Parameter erosionMagnetic = Climate.Parameter.span(0.55F, 1.5F);
 
-        Climate.Parameter depthArcticLayer1 = Climate.Parameter.span(-1.5F, -0.15F);
-        Climate.Parameter depthArcticLayer2 = Climate.Parameter.span(-0.15F, 0.15F);
-        Climate.Parameter depthArcticLayer3 = Climate.Parameter.span(0.15F, 1.5F);
+        Climate.Parameter depthArcticLayer1 = Climate.Parameter.span(-0.75F, 0.3F);
+        Climate.Parameter depthArcticLayer2 = Climate.Parameter.span(0.3F, 0.65F);
+        Climate.Parameter depthArcticLayer3 = Climate.Parameter.span(0.65F, 1.5F);
 
         Climate.Parameter ridgeLand = Climate.Parameter.span(-1.0F, 0.3F);
         Climate.Parameter ridgeLake = Climate.Parameter.span(0.3F, 1.0F);
