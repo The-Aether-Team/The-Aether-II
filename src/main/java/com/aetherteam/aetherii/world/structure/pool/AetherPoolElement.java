@@ -163,7 +163,7 @@ public class AetherPoolElement extends StructurePoolElement {
         settings.setKnownShape(true);
         settings.setIgnoreEntities(false);
         settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
-        if (replaceAir) { // Vanilla uses two separate Pool Element Types to achieve this, it has been turned into a boolean for code simplification purposes
+        if (replaceAir) { // Vanilla uses two separate Pool Element Types to achieve this, it has been turned into a boolean for code efficiency purposes
             settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_AND_AIR);
         }
         settings.setLiquidSettings(this.overrideLiquidSettings.orElse(liquidSettings));
