@@ -336,10 +336,12 @@ public class AetherIIItems {
     // Misc
     public static final DeferredItem<Item> HIDE_BUNDLE = register("hide_bundle", BundleItem::new, () -> new Item.Properties().stacksTo(1).component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY));
     public static final DeferredItem<Item> MOA_EGG = register("moa_egg", MoaEggItem::new, () -> new Item.Properties().stacksTo(1).component(AetherIIDataComponents.MOA_EGG_TYPE.get(), MoaEggType.defaultType()));
-    public static final DeferredItem<Item> MOA_FEED = register("moa_feed");
-    public static final DeferredItem<Item> BLUEBERRY_MOA_FEED = register("blueberry_moa_feed");
-    public static final DeferredItem<Item> ENCHANTED_MOA_FEED = register("enchanted_moa_feed");
+    public static final DeferredItem<Item> MOA_FEED = register("moa_feed", MoaFeedItem::new);
+    public static final DeferredItem<Item> BLUEBERRY_MOA_FEED = register("blueberry_moa_feed", MoaFeedItem::new);
+    public static final DeferredItem<Item> ENCHANTED_MOA_FEED = register("enchanted_moa_feed", MoaFeedItem::new);
     public static final DeferredItem<Item> MOA_SADDLE = register("moa_saddle", MoaSaddleItem::new, () -> new Item.Properties().stacksTo(1));
+    public static final DeferredItem<Item> MOA_SADDLEBAG = register("moa_saddlebag", (properties) -> new MoaSaddlebagItem(15, properties.stacksTo(1)));
+    public static final DeferredItem<Item> LARGE_MOA_SADDLEBAG = register("large_moa_saddlebag", (properties) -> new MoaSaddlebagItem(24, properties.stacksTo(1)));
     public static final DeferredItem<Item> GLINT_COIN = register("glint_coin", (properties) -> new CurrencyItem(1, properties));
     public static final DeferredItem<Item> GUIDEBOOK_PAGE = register("guidebook_page", GuidebookPageItem::new, () -> new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> AETHER_PORTAL_FRAME = register("aether_portal_frame", AetherPortalItem::new, () -> new Item.Properties().stacksTo(1));
