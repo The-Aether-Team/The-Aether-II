@@ -47,7 +47,7 @@ public class AetherIIClientExtensions {
     public static final IClientItemExtensions MOA_SADDLE = new IClientItemExtensions() {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
-            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0xCCDEFF) : -1;
+            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0x7D8BA3) : -1;
         }
     };
 
