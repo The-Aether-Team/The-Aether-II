@@ -15,15 +15,12 @@ import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.aetherteam.aetherii.item.miscellaneous.MoaFeedItem;
 import com.aetherteam.aetherii.item.miscellaneous.MoaSaddlebagItem;
-import com.aetherteam.aetherii.network.packet.clientbound.ClientGrabItemPacket;
-import com.aetherteam.aetherii.network.packet.serverbound.OpenGuidebookPacket;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -31,7 +28,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -49,9 +45,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -60,8 +54,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.network.PacketDistributor;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Locale;
@@ -113,6 +105,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     public static AttributeSupplier.Builder createMobAttributes() {
         return Animal.createAnimalAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.STEP_HEIGHT, 1)
                 .add(Attributes.FOLLOW_RANGE, 6.0)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 2.0);
