@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
@@ -17,6 +18,7 @@ import com.aetherteam.aetherii.item.miscellaneous.MoaFeedItem;
 import com.aetherteam.aetherii.item.miscellaneous.MoaSaddlebagItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Dynamic;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -24,6 +26,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.game.ServerboundPlayerCommandPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -52,13 +55,11 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public class Moa extends MountableAnimal implements ContainerListener, HasCustomInventoryScreen {
     private static final EntityDataAccessor<Optional<UUID>> DATA_MOA_UUID_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
@@ -259,6 +260,45 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     public void aiStep() {
         super.aiStep();
         //this.animateWings();
+
+        if (this.getControllingPassenger() instanceof Player player) {
+            if (player.getData(AetherIIDataAttachments.PLAYER).isJumping() && !this.onClimbable() && this.tryToStartFallFlying()) {
+            }
+//            else if (player.getData(AetherIIDataAttachments.PLAYER).isJumping() && !this.tryToStartFallFlying()) {
+//                this.stopFallFlying();
+//            }
+        }
+    }
+
+    @Override
+    protected void updateFallFlying() {
+        this.checkSlowFallDistance();
+        if (!this.canGlide()) {
+            this.setSharedFlag(7, false);
+        }
+    }
+
+    public boolean tryToStartFallFlying() {
+        if (!this.isFallFlying() && this.canGlide() && !this.isInWater()) {
+            this.startFallFlying();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void startFallFlying() {
+        this.setSharedFlag(7, true);
+    }
+
+    public void stopFallFlying() {
+        this.setSharedFlag(7, true);
+        this.setSharedFlag(7, false);
+    }
+
+    @Override
+    protected boolean canGlide() {
+        return !this.onGround() && this.isPlayerGrown() && this.getControllingPassenger() instanceof Player;
     }
 
     /**
@@ -269,12 +309,14 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         super.tick();
         AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
         if (gravity != null) {
-            double max = this.isVehicle() ? -0.04 : -0.1;
-            double fallSpeed = Math.min(gravity.getValue() * -0.5, max); // Entity isn't allowed to fall too slowly from gravity.
-            if (this.getDeltaMovement().y() < fallSpeed && !this.playerTriedToCrouch()) {
-                this.setDeltaMovement(this.getDeltaMovement().x(), fallSpeed, this.getDeltaMovement().z());
-                this.hasImpulse = true;
-                this.setEntityOnGround(false);
+            if (!this.isFallFlying()) {
+                double max = this.isVehicle() ? -0.04 : -0.1;
+                double fallSpeed = Math.min(gravity.getValue() * -0.5, max); // Entity isn't allowed to fall too slowly from gravity.
+                if (this.getDeltaMovement().y() < fallSpeed && !this.playerTriedToCrouch()) {
+                    this.setDeltaMovement(this.getDeltaMovement().x(), fallSpeed, this.getDeltaMovement().z());
+                    this.hasImpulse = true;
+                    this.setEntityOnGround(false);
+                }
             }
         }
         if (this.onGround()) { // Reset jumps when the Moa is on the ground.
@@ -918,7 +960,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      */
     @Override
     public float getSteeringSpeed() {
-        return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.15F;
+        return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.35F;
     }
 
     @Override
@@ -929,8 +971,6 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         } else {
             super.updateWalkAnimation(pPartialTick);
         }
-
-
     }
 
     /**
