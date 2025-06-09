@@ -11,13 +11,14 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class AetherIIMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(BuiltInRegistries.MENU, AetherII.MODID);
 
-    public static final DeferredHolder<MenuType<?>, MenuType<GuidebookEquipmentMenu>> GUIDEBOOK = register("guidebook", GuidebookEquipmentMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<GuidebookEquipmentMenu>> GUIDEBOOK = MENU_TYPES.register("guidebook", () -> IMenuTypeExtension.create(GuidebookEquipmentMenu::new));
     public static final DeferredHolder<MenuType<?>, MenuType<HolystoneFurnaceMenu>> HOLYSTONE_FURNACE = register("holystone_furnace", HolystoneFurnaceMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<ArtisansBenchMenu>> ARTISANS_BENCH = register("artisans_bench", ArtisansBenchMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<AltarMenu>> ALTAR = register("altar", AltarMenu::new);

@@ -10,15 +10,20 @@ import com.aetherteam.aetherii.item.miscellaneous.MoaFeedItem;
 import com.aetherteam.aetherii.item.miscellaneous.MoaSaddlebagItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.CraftingMenuAccessor;
 import io.wispforest.accessories.api.menu.AccessoriesSlotGenerator;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
@@ -40,10 +45,33 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
     private final CraftingContainer craftSlots = new TransientCraftingContainer(this, 2, 2);
     private final ResultContainer resultSlots = new ResultContainer();
     private final Player owner;
+    @Nullable
+    private final Moa moa;
 
     public GuidebookEquipmentMenu(int containerId, Inventory playerInventory) {
-        super(AetherIIMenuTypes.GUIDEBOOK.get(), containerId);
+        this(AetherIIMenuTypes.GUIDEBOOK.get(), containerId, playerInventory, -1);
+    }
+
+    public GuidebookEquipmentMenu(int containerId, Inventory playerInventory, Entity entity) {
+        this(AetherIIMenuTypes.GUIDEBOOK.get(), containerId, playerInventory, entity.getId());
+    }
+
+    public GuidebookEquipmentMenu(int containerId, Inventory playerInventory, RegistryFriendlyByteBuf extraData) {
+        this(AetherIIMenuTypes.GUIDEBOOK.get(), containerId, playerInventory, ByteBufCodecs.INT.decode(extraData));
+    }
+
+    public GuidebookEquipmentMenu(MenuType<GuidebookEquipmentMenu> menuType, int containerId, Inventory playerInventory, int entityId) {
+        super(menuType, containerId);
         this.owner = playerInventory.player;
+        if (this.owner.getVehicle() instanceof Moa vehicle) {
+            this.moa = vehicle;
+        } else {
+            if (playerInventory.player.level().getEntity(entityId) instanceof Moa moaEntity) {
+                this.moa = moaEntity;
+            } else {
+                this.moa = null;
+            }
+        }
 
         this.createLeftPage(playerInventory);
         this.createRightPage(playerInventory);
@@ -72,13 +100,18 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
     }
 
     private void createLeftPage(Inventory playerInventory) {
-        if (this.useMoaInventory() && this.owner.getVehicle() instanceof Moa moa) {
-            SimpleContainer moaInventory = moa.getInventory(); //todo improve all these slots
+        if (this.moa != null) {
+            SimpleContainer moaInventory = this.moa.getInventory(); //todo improve all these slots
 
             this.addSlot(new Slot(moaInventory, 0, -64, 38) {
                 @Override
                 public boolean mayPlace(ItemStack stack) {
                     return stack.is(AetherIIItems.MOA_SADDLE);
+                }
+
+                @Override
+                public boolean mayPickup(Player player) {
+                    return GuidebookEquipmentMenu.this.getItems().get(1).isEmpty() && super.mayPickup(player);
                 }
 
                 @Override
@@ -105,7 +138,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
                 @Override
                 public void set(ItemStack stack) {
                     super.set(stack);
-                    moa.setSaddlebagStack(stack);
+                    GuidebookEquipmentMenu.this.moa.setSaddlebagStack(stack);
                     GuidebookEquipmentMenu.this.recalculateSaddlebagSlots();
                 }
 
@@ -153,7 +186,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
             for (int l = 0; l < 3; l++) {
                 for (int j1 = 0; j1 < 8; j1++) {
                     int slotId = j1 + l * 8;
-                    this.addSlot(new SaddlebagSlot(moaInventory, 6 + slotId, -63 + j1 * 18, 114 + l * 18, slotId % 8 >= moa.getSaddlebagRowSize()));
+                    this.addSlot(new SaddlebagSlot(moaInventory, 6 + slotId, -63 + j1 * 18, 114 + l * 18, slotId % 8 >= this.moa.getSaddlebagRowSize()));
                 }
             }
         } else {
@@ -184,13 +217,13 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
     }
 
     private void recalculateSaddlebagSlots() {
-        if (this.useMoaInventory() && this.owner.getVehicle() instanceof Moa moa) {
+        if (this.moa != null) {
             for (int l = 0; l < 3; l++) {
                 for (int j1 = 0; j1 < 8; j1++) {
                     int slotId = j1 + l * 8;
                     Slot slot = this.slots.get(6 + slotId);
                     if (slot instanceof SaddlebagSlot saddlebagSlot) {
-                        saddlebagSlot.setHidden(slotId % 8 >= moa.getSaddlebagRowSize());
+                        saddlebagSlot.setHidden(slotId % 8 >= this.moa.getSaddlebagRowSize());
                     }
                 }
             }
@@ -238,7 +271,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
      */
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
-        if (this.useMoaInventory() && this.owner.getVehicle() instanceof Moa) {
+        if (this.moa != null) {
             ItemStack itemstack = ItemStack.EMPTY;
             Slot slot = this.slots.get(index);
             if (slot.hasItem()) {
@@ -389,7 +422,8 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
         return slot.container != this.resultSlots && super.canTakeItemForPickAll(stack, slot);
     }
 
-    public boolean useMoaInventory() {
-        return this.owner.getVehicle() instanceof Moa;
+    @Nullable
+    public Moa getMoa() {
+        return this.moa;
     }
 }

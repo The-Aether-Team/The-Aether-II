@@ -9,22 +9,29 @@ import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.ai.brain.MoaAi;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
+import com.aetherteam.aetherii.inventory.menu.provider.ExtraDataMenuProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.aetherteam.aetherii.item.miscellaneous.MoaFeedItem;
 import com.aetherteam.aetherii.item.miscellaneous.MoaSaddlebagItem;
+import com.aetherteam.aetherii.network.packet.clientbound.ClientGrabItemPacket;
+import com.aetherteam.aetherii.network.packet.serverbound.OpenGuidebookPacket;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -42,7 +49,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -51,13 +60,15 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
-public class Moa extends MountableAnimal implements ContainerListener {
+public class Moa extends MountableAnimal implements ContainerListener, HasCustomInventoryScreen {
     private static final EntityDataAccessor<Optional<UUID>> DATA_MOA_UUID_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
     private static final EntityDataAccessor<String> DATA_FEATHER_SHAPE_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<String> DATA_KERATIN_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
@@ -487,8 +498,10 @@ public class Moa extends MountableAnimal implements ContainerListener {
             }
         } else {
             if (this.isPlayerGrown() && player.isShiftKeyDown()) {
-                this.setSitting(!this.isSitting());
-
+//                this.setSitting(!this.isSitting()); //todo
+                if (!this.level().isClientSide()) {
+                    this.openMenu(player);
+                }
                 return InteractionResult.SUCCESS;
             } else if (!this.level().isClientSide() && this.isPlayerGrown() && this.isBaby() && this.isHungry() && this.getAmountFed() < 3 && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Feeds a hungry baby Moa.
                 if (!player.getAbilities().instabuild) {
@@ -519,6 +532,20 @@ public class Moa extends MountableAnimal implements ContainerListener {
     }
 
     @Override
+    public void openCustomInventoryScreen(Player player) {
+        if (!this.level().isClientSide() && (!this.isVehicle() || this.hasPassenger(player)) && this.isPlayerGrown()) {
+            this.openMenu(player);
+        }
+    }
+
+    private void openMenu(Player player) {
+        player.openMenu(new ExtraDataMenuProvider(
+                (id, inventory, user) -> new GuidebookEquipmentMenu(id, inventory, this),
+                (menu, buffer) -> ByteBufCodecs.INT.encode(buffer, this.getId()),
+                Component.translatable("gui.aether_ii.guidebook.equipment.title")));
+    }
+
+    @Override
     protected void dropEquipment(ServerLevel serverLevel) {
         super.dropEquipment(serverLevel);
         if (this.getInventory() != null) {
@@ -533,7 +560,7 @@ public class Moa extends MountableAnimal implements ContainerListener {
 
     @Override
     protected void dropSaddle(ServerLevel serverLevel) {
-        this.spawnAtLocation(serverLevel, AetherIIItems.MOA_SADDLE.get());
+        this.spawnAtLocation(serverLevel, this.getInventory().getItem(0));
     }
 
     @Override

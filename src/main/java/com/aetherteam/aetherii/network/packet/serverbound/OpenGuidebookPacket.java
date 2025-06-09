@@ -2,9 +2,11 @@ package com.aetherteam.aetherii.network.packet.serverbound;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
+import com.aetherteam.aetherii.inventory.menu.provider.ExtraDataMenuProvider;
 import com.aetherteam.aetherii.network.packet.clientbound.ClientGrabItemPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
@@ -33,7 +35,10 @@ public record OpenGuidebookPacket(ItemStack carryStack) implements CustomPacketP
         if (playerEntity != null && playerEntity.getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
             ItemStack itemStack = serverPlayer.isCreative() ? payload.carryStack() : serverPlayer.containerMenu.getCarried();
             serverPlayer.containerMenu.setCarried(ItemStack.EMPTY);
-            serverPlayer.openMenu(new SimpleMenuProvider((id, inventory, user) -> new GuidebookEquipmentMenu(id, inventory), Component.translatable("gui.aether_ii.guidebook.equipment.title")));
+            serverPlayer.openMenu(new ExtraDataMenuProvider(
+                    (id, inventory, user) -> new GuidebookEquipmentMenu(id, inventory),
+                    (menu, buffer) -> ByteBufCodecs.INT.encode(buffer, -1),
+                    Component.translatable("gui.aether_ii.guidebook.equipment.title")));
             if (!itemStack.isEmpty()) {
                 serverPlayer.containerMenu.setCarried(itemStack);
                 PacketDistributor.sendToPlayer(serverPlayer, new ClientGrabItemPacket(itemStack));

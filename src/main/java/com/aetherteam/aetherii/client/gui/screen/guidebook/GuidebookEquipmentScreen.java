@@ -104,12 +104,12 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
             guiGraphics.renderTooltip(this.font, Component.translatable("inventory.binSlot"), mouseX, mouseY);
         }
 
-        if (this.currencySlot == null && !this.getMenu().useMoaInventory()) {
+        if (this.currencySlot == null && this.getMenu().getMoa() == null) {
             this.currencySlot = new Slot(CURRENCY_CONTAINER, 0, 64, 112);
             this.getMenu().slots.add(this.currencySlot);
         }
         if (this.currencySlot != null) {
-            if (!this.getMenu().useMoaInventory()) {
+            if (this.getMenu().getMoa() == null) {
                 if (Minecraft.getInstance().player != null) {
                     var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
                     if (this.isHovering(this.currencySlot.x, this.currencySlot.y, 16, 16, mouseX, mouseY)) {
@@ -173,10 +173,9 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     private int calculateSlotOffset() {
-        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.getVehicle() instanceof Moa moa) {
-            int rowSize = moa.getSaddlebagRowSize();
-            int offset = (8 - rowSize) * 9;
-            return offset;
+        if (this.getMenu().getMoa() != null) {
+            int rowSize = this.getMenu().getMoa().getSaddlebagRowSize();
+            return (8 - rowSize) * 9;
         }
         return 0;
     }
@@ -196,15 +195,15 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     private void renderStats(GuiGraphics guiGraphics) {
-        if (this.getMenu().useMoaInventory() && this.minecraft.player != null && this.minecraft.player.getVehicle() instanceof LivingEntity livingEntity) {
+        if (this.getMenu().getMoa() != null) {
             int x = 49;
             int y = 94;
 
             guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
-            guiGraphics.drawString(this.font, Component.literal((int) (livingEntity.getHealth()) + "/" + (int) (livingEntity.getMaxHealth())), x + 18, y + 4, 16777215, true);
+            guiGraphics.drawString(this.font, Component.literal((int) (this.getMenu().getMoa().getHealth()) + "/" + (int) (this.getMenu().getMoa().getMaxHealth())), x + 18, y + 4, 16777215, true);
 
             guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
-            guiGraphics.drawString(this.font, Component.literal(livingEntity.getArmorValue() + "/20"), x + 72, y + 4, 16777215, true);
+            guiGraphics.drawString(this.font, Component.literal(this.getMenu().getMoa().getArmorValue() + "/20"), x + 72, y + 4, 16777215, true);
         } else {
             Player player = Minecraft.getInstance().player;
             int x = 49;
@@ -222,10 +221,10 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         int scale = 30;
         float yOffset = 0.0625F;
         LivingEntity entity = this.minecraft.player;
-        if (this.getMenu().useMoaInventory() && this.minecraft.player != null && this.minecraft.player.getVehicle() instanceof Moa moa) {
-            entity = moa;
+        if (this.getMenu().getMoa() != null) {
+            entity = this.getMenu().getMoa();
             scale = 16;
-            yOffset = moa.isSitting() ? 0.05F : -0.4F;
+            yOffset = this.getMenu().getMoa().isSitting() ? 0.05F : -0.4F;
         }
         float f = (float) (pos.x + pos.x + size.x) / 2.0F;
         float g = (float) (pos.y + pos.y + size.y) / 2.0F;
@@ -340,7 +339,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
 
     @Override
     public ResourceLocation getLeftPageTexture() {
-        if (this.getMenu().useMoaInventory() && this.minecraft.player != null && this.minecraft.player.getVehicle() instanceof Moa) {
+        if (this.getMenu().getMoa() != null) {
             return GUIDEBOOK_EQUIPMENT_LEFT_PAGE_MOA_LOCATION;
         } else {
             return GUIDEBOOK_EQUIPMENT_LEFT_PAGE_PLAYER_LOCATION;
