@@ -225,7 +225,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNSTABLE_HOLYSTONE = createKey("unstable_holystone");
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNSTABLE_UNDERSHALE = createKey("unstable_undershale");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ACID_POOL = createKey("acid_pool");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ALKAHEST_POOL = createKey("alkahest_pool");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SCATTERGLASS = createKey("ore_scatterglass");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ICESTONE = createKey("ore_icestone");
@@ -242,8 +242,8 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GRAVITITE = createKey("ore_gravitite");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_CORROBONITE = createKey("ore_corrobonite");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GAS_OPEN = createKey("ore_gas_open");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GAS_BURIED = createKey("ore_gas_buried");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_HESTVEIL_OPEN = createKey("ore_hestveil_open");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_HESTVEIL_BURIED = createKey("ore_hestveil_buried");
     
     
     // Worldgen
@@ -1668,8 +1668,8 @@ public class HighlandsConfiguredFeatures {
                 )
         );
 
-        register(context, ACID_POOL, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
-                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(AetherIIFeatures.ACID_POOL.get(), new AcidPoolConfiguration(UniformInt.of(1, 4), UniformInt.of(4, 6), UniformInt.of(-4, 2)),
+        register(context, ALKAHEST_POOL, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(AetherIIFeatures.ALKAHEST_POOL.get(), new AcidPoolConfiguration(UniformInt.of(1, 4), UniformInt.of(4, 6), UniformInt.of(-4, 2)),
                         EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), BlockPredicate.ONLY_IN_AIR_PREDICATE, 16),
                         BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.UP, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 8)),
                         BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
@@ -1695,8 +1695,8 @@ public class HighlandsConfiguredFeatures {
         register(context, ORE_GRAVITITE, Feature.ORE, new OreConfiguration(gravitite, 4));
         register(context, ORE_CORROBONITE, AetherIIFeatures.CORROBONITE_ORE.get(), new OreConfiguration(UNDERSHALE_TEST, AetherIIBlocks.CORROBONITE_ORE.get().defaultBlockState(), 4));
 
-        register(context, ORE_GAS_OPEN, AetherIIFeatures.GAS.get());
-        register(context, ORE_GAS_BURIED, Feature.ORE, new OreConfiguration(UNDERGROUND_TEST, AetherIIBlocks.GAS.get().defaultBlockState(), 16, 1.0F));
+        register(context, ORE_HESTVEIL_OPEN, AetherIIFeatures.HESTVEIL.get());
+        register(context, ORE_HESTVEIL_BURIED, Feature.ORE, new OreConfiguration(UNDERGROUND_TEST, AetherIIBlocks.HESTVEIL.get().defaultBlockState(), 16, 1.0F));
     }
 
     private static void bootstrapWorldgen(BootstrapContext<ConfiguredFeature<?, ?>> context) {

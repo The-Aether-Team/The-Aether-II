@@ -1,22 +1,19 @@
 {
-  "feature": "aether_ii:ore_gas_buried",
+  "feature": "aether_ii:alkahest_pool",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 4
-    },
-    {
-      "type": "minecraft:in_square"
+      "count": 16
     },
     {
       "type": "minecraft:height_range",
       "height": {
         "type": "minecraft:trapezoid",
         "max_inclusive": {
-          "above_bottom": 128
+          "above_bottom": 64
         },
         "min_inclusive": {
-          "above_bottom": -96
+          "above_bottom": -64
         }
       }
     },

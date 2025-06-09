@@ -17,8 +17,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class GasFeature extends Feature<NoneFeatureConfiguration> {
-    public GasFeature(Codec<NoneFeatureConfiguration> codec) {
+public class HestveilFeature extends Feature<NoneFeatureConfiguration> {
+    public HestveilFeature(Codec<NoneFeatureConfiguration> codec) {
         super(codec);
     }
 
@@ -52,7 +52,7 @@ public class GasFeature extends Feature<NoneFeatureConfiguration> {
                 }
             }
             if (level.getBlockState(storedPos).isAir()) {
-                level.setBlock(storedPos, AetherIIBlocks.GAS.get().defaultBlockState(), 3);
+                level.setBlock(storedPos, AetherIIBlocks.HESTVEIL.get().defaultBlockState(), 3);
             }
             visited.add(storedPos);
         }

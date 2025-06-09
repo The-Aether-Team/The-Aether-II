@@ -41,7 +41,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
         this.createTrivialCube(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
         this.createSnowyCross(AetherIIBlocks.SKY_ROOTS.get());
-        this.createTranslucentCubeInnerFaces(AetherIIBlocks.GAS.get());
+        this.createTranslucentCubeInnerFaces(AetherIIBlocks.HESTVEIL.get());
         this.createPointedStone(AetherIIBlocks.POINTED_HOLYSTONE.get());
         this.createPointedStone(AetherIIBlocks.POINTED_ICHORITE.get());
 

@@ -1166,7 +1166,7 @@
     ],
     "subtitle": "subtitles.aether_ii.item.arkenium_canister.empty"
   },
-  "item.arkenium_canister.empty_acid": {
+  "item.arkenium_canister.empty_alkahest": {
     "sounds": [
       {
         "name": "item/bucket/empty1",
@@ -1177,7 +1177,7 @@
     ],
     "subtitle": "subtitles.aether_ii.item.arkenium_canister.empty"
   },
-  "item.arkenium_canister.empty_gas": {
+  "item.arkenium_canister.empty_hestveil": {
     "sounds": [
       {
         "name": "item/bucket/empty1",
@@ -1196,7 +1196,7 @@
     ],
     "subtitle": "subtitles.aether_ii.item.arkenium_canister.fill"
   },
-  "item.arkenium_canister.fill_acid": {
+  "item.arkenium_canister.fill_alkahest": {
     "sounds": [
       "item/bucket/fill1",
       "item/bucket/fill2",
@@ -1204,7 +1204,7 @@
     ],
     "subtitle": "subtitles.aether_ii.item.arkenium_canister.fill"
   },
-  "item.arkenium_canister.fill_gas": {
+  "item.arkenium_canister.fill_hestveil": {
     "sounds": [
       "item/bucket/fill1",
       "item/bucket/fill2",

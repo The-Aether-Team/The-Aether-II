@@ -118,7 +118,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> UNSTABLE_HOLYSTONE = createKey("unstable_holystone");
     public static final ResourceKey<PlacedFeature> UNSTABLE_UNDERSHALE = createKey("unstable_undershale");
 
-    public static final ResourceKey<PlacedFeature> ACID_POOL = createKey("acid_pool");
+    public static final ResourceKey<PlacedFeature> ALKAHEST_POOL = createKey("alkahest_pool");
 
     public static final ResourceKey<PlacedFeature> ORE_SCATTERGLASS = createKey("ore_scatterglass");
     public static final ResourceKey<PlacedFeature> ORE_ICESTONE = createKey("ore_icestone");
@@ -135,8 +135,8 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ORE_GRAVITITE = createKey("ore_gravitite");
     public static final ResourceKey<PlacedFeature> ORE_CORROBONITE = createKey("ore_corrobonite");
 
-    public static final ResourceKey<PlacedFeature> ORE_GAS_OPEN = createKey("ore_gas_open");
-    public static final ResourceKey<PlacedFeature> ORE_GAS_BURIED = createKey("ore_gas_buried");
+    public static final ResourceKey<PlacedFeature> ORE_HESTVEIL_OPEN = createKey("ore_hestveil_open");
+    public static final ResourceKey<PlacedFeature> ORE_HESTVEIL_BURIED = createKey("ore_hestveil_buried");
 
 
     // Worldgen
@@ -612,7 +612,7 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome()
         );
 
-        register(context, ACID_POOL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ACID_POOL),
+        register(context, ALKAHEST_POOL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ALKAHEST_POOL),
                 CountPlacement.of(16),
                 HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(-64), VerticalAnchor.aboveBottom(64))),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
@@ -647,7 +647,7 @@ public class HighlandsPlacedFeatures {
         register(context, ORE_CORROBONITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_CORROBONITE),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(3, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(60), 25))));
 
-        register(context, ORE_GAS_OPEN, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_GAS_OPEN),
+        register(context, ORE_HESTVEIL_OPEN, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_HESTVEIL_OPEN),
                 CountPlacement.of(16),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(-64), VerticalAnchor.aboveBottom(96))),
@@ -657,7 +657,7 @@ public class HighlandsPlacedFeatures {
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
                 BiomeFilter.biome()
         );
-        register(context, ORE_GAS_BURIED, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_GAS_BURIED),
+        register(context, ORE_HESTVEIL_BURIED, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_HESTVEIL_BURIED),
                 CountPlacement.of(4),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(-96), VerticalAnchor.aboveBottom(128))),
