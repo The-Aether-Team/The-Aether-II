@@ -20,7 +20,7 @@
   "noise_router": {
     "barrier": 0.0,
     "continents": 0.0,
-    "depth": "aether_ii:highlands/depth",
+    "depth": "aether_ii:highlands/cave_biomes_rarity_mapper",
     "erosion": "aether_ii:highlands/erosion",
     "final_density": "aether_ii:highlands/terrain/final_islands",
     "fluid_level_floodedness": 0.0,

@@ -37,6 +37,9 @@ public class HighlandsBiomes {
     // Aercloud Sea
     public static final ResourceKey<Biome> EXPANSE = createKey("expanse");
 
+    // Caves
+    public static final ResourceKey<Biome> HESTVEIL_CAVERNS = createKey("hestveil_caverns");
+
     private static ResourceKey<Biome> createKey(String name) {
         return ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
