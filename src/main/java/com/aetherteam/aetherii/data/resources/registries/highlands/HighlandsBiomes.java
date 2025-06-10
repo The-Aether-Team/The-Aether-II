@@ -67,5 +67,7 @@ public class HighlandsBiomes {
         context.register(BATTLEGROUND_WASTES, HighlandsBiomeBuilders.battlegroundWastesBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
 
         context.register(EXPANSE, HighlandsBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
+
+        context.register(HESTVEIL_CAVERNS, HighlandsBiomeBuilders.makeHeastveilCavernsBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
     }
 }
