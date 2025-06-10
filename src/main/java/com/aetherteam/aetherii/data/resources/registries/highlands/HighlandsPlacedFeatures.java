@@ -118,6 +118,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> UNSTABLE_HOLYSTONE = createKey("unstable_holystone");
     public static final ResourceKey<PlacedFeature> UNSTABLE_UNDERSHALE = createKey("unstable_undershale");
 
+    public static final ResourceKey<PlacedFeature> ALKAHEST_POOL_RARE = createKey("alkahest_pool_rare");
     public static final ResourceKey<PlacedFeature> ALKAHEST_POOL = createKey("alkahest_pool");
 
     public static final ResourceKey<PlacedFeature> ORE_SCATTERGLASS = createKey("ore_scatterglass");
@@ -612,9 +613,15 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome()
         );
 
-        register(context, ALKAHEST_POOL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ALKAHEST_POOL),
-                CountPlacement.of(16),
+        register(context, ALKAHEST_POOL_RARE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ALKAHEST_POOL),
+                CountPlacement.of(8),
                 HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(-64), VerticalAnchor.aboveBottom(64))),
+                SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
+                BiomeFilter.biome()
+        );
+        register(context, ALKAHEST_POOL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ALKAHEST_POOL),
+                CountPlacement.of(24),
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(64))),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
                 BiomeFilter.biome()
         );
