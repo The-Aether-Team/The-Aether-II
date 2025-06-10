@@ -96,6 +96,7 @@ public class AetherIIDensityFunctionBuilders {
         DensityFunction density = depth;
         density = DensityFunctions.rangeChoice(getFunction(function, CAVE_BIOMES), -1.5, 0.6, density, DensityFunctions.constant(-2.0));
         density = DensityFunctions.rangeChoice(depth, -1.5, -0.4, density, depth);
+        density = DensityFunctions.rangeChoice(getFunction(function, RIDGES), 0.0, 0.275, density, depth);
         return density;
     }
 

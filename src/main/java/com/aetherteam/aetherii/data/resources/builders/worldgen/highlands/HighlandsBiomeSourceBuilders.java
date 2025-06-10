@@ -52,7 +52,7 @@ public class HighlandsBiomeSourceBuilders {
                 Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, fullRange, erosionDefault, depthArcticLayer3, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.FRIGID_SIERRA)),
 
                 // Highfields
-                Pair.of(new Climate.ParameterPoint(tempHighfields, Climate.Parameter.span(-1.5F, 2.0F), fullRange, erosionDefault, depthDefault, ridgeLake, 0), biomes.getOrThrow(HighlandsBiomes.SHIMMERING_BASIN)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields, Climate.Parameter.span(-1.5F, 2.0F), fullRange, erosionDefault, fullRange, ridgeLake, 0), biomes.getOrThrow(HighlandsBiomes.SHIMMERING_BASIN)),
 
                 Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-1.0F, -0.1F), fullRange, erosionDefault, depthDefault, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.FLOURISHING_FIELD)),
                 Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-0.1F, 0.2F), fullRange, erosionDefault, depthDefault, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.VERDANT_WOODS)),
@@ -69,7 +69,7 @@ public class HighlandsBiomeSourceBuilders {
                 Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.25F, 1.0F), fullRange, erosionDefault, depthDefault, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.VERDANT_WOODS)),
 
                 // Magnetic
-                Pair.of(new Climate.ParameterPoint(Climate.Parameter.span(-1.5F, 0.6F), fullRange, fullRange, erosionMagnetic, depthDefault, ridgeLake, 0), biomes.getOrThrow(HighlandsBiomes.GLISTENING_SWAMP)),
+                Pair.of(new Climate.ParameterPoint(Climate.Parameter.span(-1.5F, 0.6F), fullRange, fullRange, erosionMagnetic, fullRange, ridgeLake, 0), biomes.getOrThrow(HighlandsBiomes.GLISTENING_SWAMP)),
 
                 Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-1.0F, -0.1F), fullRange, erosionMagnetic, depthDefault, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.VIOLET_HIGHWOODS)),
                 Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-0.1F, 1.0F), fullRange, erosionMagnetic, depthDefault, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.MAGNETIC_SCAR)),
@@ -90,7 +90,7 @@ public class HighlandsBiomeSourceBuilders {
                 Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(0.2F, 1.0F), fullRange, erosionDefault, depthDefault, fullRange, 0), biomes.getOrThrow(HighlandsBiomes.BATTLEGROUND_WASTES)),
 
                 //Caves
-                Pair.of(new Climate.ParameterPoint(fullRange, fullRange, fullRange, fullRange, depthHestveilCaverns, fullRange, 0), biomes.getOrThrow(HighlandsBiomes.HESTVEIL_CAVERNS))
+                Pair.of(new Climate.ParameterPoint(fullRange, fullRange, fullRange, fullRange, depthHestveilCaverns, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.HESTVEIL_CAVERNS))
         )));
     }
 }
