@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
@@ -18,7 +17,6 @@ import com.aetherteam.aetherii.item.miscellaneous.MoaFeedItem;
 import com.aetherteam.aetherii.item.miscellaneous.MoaSaddlebagItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Dynamic;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -26,7 +24,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.game.ServerboundPlayerCommandPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -55,11 +52,13 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.UUID;
 
 public class Moa extends MountableAnimal implements ContainerListener, HasCustomInventoryScreen {
     private static final EntityDataAccessor<Optional<UUID>> DATA_MOA_UUID_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
@@ -261,13 +260,13 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         super.aiStep();
         //this.animateWings();
 
-        if (this.getControllingPassenger() instanceof Player player) {
+        /*if (this.getControllingPassenger() instanceof Player player) {
             if (player.getData(AetherIIDataAttachments.PLAYER).isJumping() && !this.onClimbable() && this.tryToStartFallFlying()) {
             }
 //            else if (player.getData(AetherIIDataAttachments.PLAYER).isJumping() && !this.tryToStartFallFlying()) {
 //                this.stopFallFlying();
 //            }
-        }
+        }*/
     }
 
     @Override
@@ -285,6 +284,15 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         } else {
             return false;
         }
+    }
+
+    public void changeFlyMode() {
+        if (!this.isFallFlying()) {
+            this.tryToStartFallFlying();
+        } else {
+            this.stopFallFlying();
+        }
+        this.playSound(AetherIISoundEvents.ENTITY_MOA_FLAP.get());
     }
 
     public void startFallFlying() {
