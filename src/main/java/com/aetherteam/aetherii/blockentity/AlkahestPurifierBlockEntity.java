@@ -1,0 +1,259 @@
+package com.aetherteam.aetherii.blockentity;
+
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
+import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
+import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
+import com.aetherteam.aetherii.recipe.recipes.item.IrradiationCleansingRecipe;
+import com.google.common.collect.Lists;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
+import net.minecraft.world.Container;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.StackedItemContents;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.RecipeCraftingHolder;
+import net.minecraft.world.inventory.StackedContentsCompatible;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.LidBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+
+public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeCraftingHolder, StackedContentsCompatible, LidBlockEntity {
+    protected NonNullList<ItemStack> items = NonNullList.withSize(7, ItemStack.EMPTY);
+    int processingProgress;
+    int processingTotalTime;
+    int alkahestCount;
+    protected final ContainerData dataAccess = new ContainerData() {
+        @Override
+        public int get(int id) {
+            return switch (id) {
+                case 0 -> AlkahestPurifierBlockEntity.this.processingProgress;
+                case 1 -> AlkahestPurifierBlockEntity.this.processingTotalTime;
+                case 2 -> AlkahestPurifierBlockEntity.this.alkahestCount;
+                default -> 0;
+            };
+        }
+
+        @Override
+        public void set(int id, int value) {
+            switch (id) {
+                case 0:
+                    AlkahestPurifierBlockEntity.this.processingProgress = value;
+                    break;
+                case 1:
+                    AlkahestPurifierBlockEntity.this.processingTotalTime = value;
+                    break;
+                case 2:
+                    AlkahestPurifierBlockEntity.this.alkahestCount = value;
+                    break;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+    };
+
+    private final Object2IntOpenHashMap<ResourceKey<Recipe<?>>> recipesUsed = new Object2IntOpenHashMap<>();
+    private final RecipeManager.CachedCheck<SingleRecipeInputWithRandom, IrradiationCleansingRecipe> quickCheck;
+
+    public AlkahestPurifierBlockEntity() {
+        this(AetherIIBlockEntityTypes.ALKAHEST_PURIFIER.get(), BlockPos.ZERO, AetherIIBlocks.ALKAHEST_PURIFIER.get().defaultBlockState());
+    }
+
+    public AlkahestPurifierBlockEntity(BlockPos pos, BlockState state) {
+        this(AetherIIBlockEntityTypes.ALKAHEST_PURIFIER.get(), pos, state);
+    }
+
+    public AlkahestPurifierBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
+        this.quickCheck = RecipeManager.createCheck(AetherIIRecipeTypes.IRRADIATION_CLEANSING.get());
+    }
+
+    @Override
+    protected Component getDefaultName() {
+        return Component.translatable("menu." + AetherII.MODID + ".alkahest_purifier");
+    }
+
+    @Override
+    protected AbstractContainerMenu createMenu(int i, Inventory inventory) {
+        return null;
+    }
+
+    @Override
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registry) {
+        super.loadAdditional(tag, registry);
+        this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        ContainerHelper.loadAllItems(tag, this.items, registry);
+        this.processingProgress = tag.getInt("ProcessingTime");
+        this.processingTotalTime = tag.getInt("ProcessingTimeTotal");
+        CompoundTag recipesUsedTag = tag.getCompound("RecipesUsed");
+        for (String key : recipesUsedTag.getAllKeys()) {
+            this.recipesUsed.put(ResourceKey.create(Registries.RECIPE, ResourceLocation.parse(key)), recipesUsedTag.getInt(key));
+        }
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registry) {
+        super.saveAdditional(tag, registry);
+        tag.putInt("ProcessingTime", this.processingProgress);
+        tag.putInt("ProcessingTimeTotal", this.processingTotalTime);
+        ContainerHelper.saveAllItems(tag, this.items, registry);
+        CompoundTag recipesUsedTag = new CompoundTag();
+        this.recipesUsed.forEach((location, integer) -> recipesUsedTag.putInt(location.toString(), integer));
+        tag.put("RecipesUsed", recipesUsedTag);
+    }
+
+    public static void serverTick(ServerLevel level, BlockPos pos, BlockState state, AlkahestPurifierBlockEntity blockEntity) {
+
+    }
+
+    @Override
+    public int[] getSlotsForFace(Direction direction) {
+        return new int[0];
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int i, ItemStack itemStack, @Nullable Direction direction) {
+        return false;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int i, ItemStack itemStack, Direction direction) {
+        return false;
+    }
+
+    @Override
+    protected NonNullList<ItemStack> getItems() {
+        return this.items;
+    }
+
+    @Override
+    protected void setItems(NonNullList<ItemStack> pItems) {
+        this.items = pItems;
+    }
+
+    @Override
+    public int getContainerSize() {
+        return this.items.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        for (ItemStack itemstack : this.items) {
+            if (!itemstack.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public ItemStack getItem(int index) {
+        return this.items.get(index);
+    }
+
+    @Override
+    public ItemStack removeItem(int index, int count) {
+        return ContainerHelper.removeItem(this.items, index, count);
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int index) {
+        return ContainerHelper.takeItem(this.items, index);
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return Container.stillValidBlockEntity(this, player);
+    }
+
+    @Override
+    public void clearContent() {
+        this.items.clear();
+    }
+
+    @Override
+    public void setRecipeUsed(@Nullable RecipeHolder<?> recipeHolder) {
+
+    }
+
+    @Override
+    public @Nullable RecipeHolder<?> getRecipeUsed() {
+        return null;
+    }
+
+//    @Override
+//    public void awardUsedRecipes(Player player, List<ItemStack> items) {
+//    }
+
+    public void awardUsedRecipesAndPopExperience(ServerPlayer player) {
+        List<RecipeHolder<?>> list = this.getRecipesToAwardAndPopExperience(player.serverLevel(), player.position());
+        player.awardRecipes(list);
+        for (RecipeHolder<?> recipeholder : list) {
+            if (recipeholder != null) {
+                player.triggerRecipeCrafted(recipeholder, this.items);
+            }
+        }
+        this.recipesUsed.clear();
+    }
+
+    public List<RecipeHolder<?>> getRecipesToAwardAndPopExperience(ServerLevel level, Vec3 popVec) {
+        List<RecipeHolder<?>> list = Lists.newArrayList();
+        for (Object2IntMap.Entry<ResourceKey<Recipe<?>>> entry : this.recipesUsed.object2IntEntrySet()) {
+            level.recipeAccess().byKey(entry.getKey()).ifPresent(recipeHolder -> {
+                list.add(recipeHolder);
+                createExperience(level, popVec, entry.getIntValue(), ((AltarEnchantingRecipe) recipeHolder.value()).getExperience());
+            });
+        }
+        return list;
+    }
+
+    private static void createExperience(ServerLevel level, Vec3 popVec, int recipeIndex, float experience) {
+        int i = Mth.floor((float) recipeIndex * experience);
+        float f = Mth.frac((float) recipeIndex * experience);
+        if (f != 0.0F && Math.random() < (double) f) {
+            ++i;
+        }
+        ExperienceOrb.award(level, popVec, i);
+    }
+
+    @Override
+    public void fillStackedContents(StackedItemContents stackedItemContents) {
+
+    }
+
+    @Override
+    public float getOpenNess(float v) {
+        return 0;
+    }
+}

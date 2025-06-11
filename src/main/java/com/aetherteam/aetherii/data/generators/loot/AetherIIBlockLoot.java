@@ -650,6 +650,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.ALTAR.get());
         this.dropSelf(AetherIIBlocks.ARKENIUM_FORGE.get());
         this.dropSelf(AetherIIBlocks.ARTISANS_BENCH.get());
+        this.dropSelf(AetherIIBlocks.ALKAHEST_PURIFIER.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_CHEST.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_LADDER.get());
         this.add(AetherIIBlocks.SKYROOT_BED.get(), (bed) -> createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));

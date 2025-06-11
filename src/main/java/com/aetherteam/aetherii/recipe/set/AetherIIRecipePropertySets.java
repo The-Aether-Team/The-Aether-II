@@ -21,7 +21,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class AetherIIRecipePropertySets {
-    public static final ResourceKey<RecipePropertySet> ALTAR_INPUT = register("altar_input");
+    public static final ResourceKey<RecipePropertySet> ALTAR_INPUT = register("altar_input"); //todo whats this even for
     public static final ResourceKey<RecipePropertySet> AMBROSIUM_ENCHANTING_STATES = register("ambrosium_enchanting_states");
     public static final ResourceKey<RecipePropertySet> SWET_GEL_CONVERSION_STATES = register("swet_gel_conversion_states");
     public static final ResourceKey<RecipePropertySet> DUST_IRRADIATION_STATES = register("dust_irradiation_states");
