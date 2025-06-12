@@ -18,7 +18,7 @@ public class HighlandsSurfaceBuilders {
     private static final SurfaceRules.RuleSource FERROSITE = new NoisePalette3DPlacementRule(AetherIIBlocks.FERROSITE.get().defaultBlockState(), AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 9, 20, 0.05);
 //    private static final SurfaceRules.RuleSource RUSTED_FERROSITE = new NoisePalette3DPlacementRule(AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(), AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 1, 9, 0.03);
     private static final SurfaceRules.RuleSource IRRADIATED_HOLYSTONE = new NoisePalette3DPlacementRule(AetherIIBlocks.IRRADIATED_HOLYSTONE.get().defaultBlockState(), AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 3, 10, 0.045);
-    private static final SurfaceRules.RuleSource ICHORITE = new NoisePalette3DPlacementRule(AetherIIBlocks.ICHORITE.get().defaultBlockState(), AetherIIBlocks.UNDERSHALE.get().defaultBlockState(), 6, 12, 0.08);
+    private static final SurfaceRules.RuleSource ICHORITE = new NoisePalette3DPlacementRule(AetherIIBlocks.ICHORITE.get().defaultBlockState(), AetherIIBlocks.UNDERSHALE.get().defaultBlockState(), 16, 12, 0.075);
 
     public static SurfaceRules.RuleSource surfaceRules() {
         SurfaceRules.RuleSource surface = SurfaceRules.sequence(

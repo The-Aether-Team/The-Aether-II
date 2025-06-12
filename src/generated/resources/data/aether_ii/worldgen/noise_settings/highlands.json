@@ -245,11 +245,11 @@
             "Name": "aether_ii:undershale"
           },
           "backing_ratio": 12,
-          "noise_frequency": 0.08,
+          "noise_frequency": 0.075,
           "spot_blockstate": {
             "Name": "aether_ii:ichorite"
           },
-          "spot_ratio": 6
+          "spot_ratio": 16
         }
       },
       {

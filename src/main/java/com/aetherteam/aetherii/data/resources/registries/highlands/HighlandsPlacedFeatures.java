@@ -627,7 +627,7 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome()
         );
         register(context, ALKAHEST_POOL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ALKAHEST_POOL),
-                CountPlacement.of(64),
+                CountPlacement.of(96),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(64))),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), BlockPredicate.ONLY_IN_AIR_PREDICATE, 16),
