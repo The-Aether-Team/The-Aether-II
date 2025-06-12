@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -77,7 +78,7 @@ public class AlkahestPurifierBlock extends BaseEntityBlock {
         if (level instanceof ServerLevel serverLevel) {
             return createTickerHelper(serverType, clientType, (tickerLevel, pos, state, blockEntity) -> AlkahestPurifierBlockEntity.serverTick(serverLevel, pos, state, blockEntity));
         } else {
-            return null;
+            return createTickerHelper(serverType, clientType, AlkahestPurifierBlockEntity::lidAnimateTick);
         }
     }
 
@@ -95,6 +96,14 @@ public class AlkahestPurifierBlock extends BaseEntityBlock {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof AlkahestPurifierBlockEntity alkahestPurifierBlockEntity) {
             player.openMenu(alkahestPurifierBlockEntity);
+        }
+    }
+
+    @Override
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        BlockEntity blockentity = level.getBlockEntity(pos);
+        if (blockentity instanceof AlkahestPurifierBlockEntity alkahestPurifierBlockEntity) {
+            alkahestPurifierBlockEntity.recheckOpen();
         }
     }
 

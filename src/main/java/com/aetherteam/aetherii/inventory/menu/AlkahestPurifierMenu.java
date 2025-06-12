@@ -40,6 +40,7 @@ public class AlkahestPurifierMenu extends RecipeBookMenu {
         this.data = data;
         this.level = playerInventory.player.level();
         this.acceptedInputs = this.level.recipeAccess().propertySet(AetherIIRecipePropertySets.ALKAHEST_PURIFIER_INPUT);
+        container.startOpen(playerInventory.player);
 
         // Alkahest Purifier //todo
         this.addSlot(new Slot(container, 0, 80, 20)); // Input
@@ -109,6 +110,10 @@ public class AlkahestPurifierMenu extends RecipeBookMenu {
 //    public int getFuelCount() {
 //        return this.data.get(2);
 //    }
+
+    public Container getContainer() {
+        return this.container;
+    }
 
     @Override
     public RecipeBookMenu.PostPlaceAction handlePlacement(boolean p_361547_, boolean p_363944_, RecipeHolder<?> recipeHolder, final ServerLevel level, Inventory container) { //todo no idea what some of these values do yet

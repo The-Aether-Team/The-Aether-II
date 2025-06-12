@@ -22,7 +22,9 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.world.CompoundContainer;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
@@ -30,17 +32,15 @@ import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedItemContents;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.RecipeCraftingHolder;
-import net.minecraft.world.inventory.StackedContentsCompatible;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.LidBlockEntity;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -52,6 +52,8 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
     int processingProgress;
     int processingTotalTime;
     int alkahestCount;
+    private final ContainerOpenersCounter openersCounter;
+    private final ChestLidController chestLidController;
     protected final ContainerData dataAccess = new ContainerData() {
         @Override
         public int get(int id) {
@@ -97,7 +99,49 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
 
     public AlkahestPurifierBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+        this.openersCounter = new ContainerOpenersCounter() {
+            protected void onOpen(Level level, BlockPos pos, BlockState state) {
+//                ChestBlockEntity.playSound(level, pos, state, SoundEvents.CHEST_OPEN);
+            }
+
+            protected void onClose(Level level, BlockPos pos, BlockState state) {
+//                ChestBlockEntity.playSound(level, pos, state, SoundEvents.CHEST_CLOSE);
+            }
+
+            protected void openerCountChanged(Level level, BlockPos pos, BlockState state, int p_155364_, int p_155365_) {
+                AlkahestPurifierBlockEntity.this.signalOpenCount(level, pos, state, p_155364_, p_155365_);
+            }
+
+            protected boolean isOwnContainer(Player player) {
+                if (!(player.containerMenu instanceof AlkahestPurifierMenu alkahestPurifierMenu)) {
+                    return false;
+                } else {
+                    Container container = alkahestPurifierMenu.getContainer();
+                    return container == AlkahestPurifierBlockEntity.this || container instanceof CompoundContainer compoundContainer && compoundContainer.contains(AlkahestPurifierBlockEntity.this);
+                }
+            }
+        };
+        this.chestLidController = new ChestLidController();
         this.quickCheck = RecipeManager.createCheck(AetherIIRecipeTypes.ALKAHEST_PURIFICATION.get());
+    }
+
+    public static void lidAnimateTick(Level level, BlockPos pos, BlockState state, AlkahestPurifierBlockEntity blockEntity) {
+        blockEntity.chestLidController.tickLid();
+    }
+
+    @Override
+    public boolean triggerEvent(int id, int type) {
+        if (id == 1) {
+            this.chestLidController.shouldBeOpen(type > 0);
+            return true;
+        } else {
+            return super.triggerEvent(id, type);
+        }
+    }
+
+    protected void signalOpenCount(Level level, BlockPos pos, BlockState state, int eventId, int eventParam) {
+        Block block = state.getBlock();
+        level.blockEvent(pos, block, 1, eventParam);
     }
 
     @Override
@@ -151,6 +195,41 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
     @Override
     public boolean canTakeItemThroughFace(int i, ItemStack itemStack, Direction direction) {
         return false;
+    }
+
+    @Override
+    public void startOpen(Player player) {
+        if (!this.remove && !player.isSpectator()) {
+            this.openersCounter.incrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
+        }
+    }
+
+    @Override
+    public void stopOpen(Player player) {
+        if (!this.remove && !player.isSpectator()) {
+            this.openersCounter.decrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
+        }
+    }
+
+    public float getOpenNess(float partialTicks) {
+        return this.chestLidController.getOpenness(partialTicks);
+    }
+
+//    public static int getOpenCount(BlockGetter level, BlockPos pos) {
+//        BlockState blockstate = level.getBlockState(pos);
+//        if (blockstate.hasBlockEntity()) {
+//            BlockEntity blockentity = level.getBlockEntity(pos);
+//            if (blockentity instanceof AlkahestPurifierBlockEntity alkahestPurifierBlockEntity) {
+//                return alkahestPurifierBlockEntity.openersCounter.getOpenerCount();
+//            }
+//        }
+//        return 0;
+//    }
+
+    public void recheckOpen() {
+        if (!this.remove) {
+            this.openersCounter.recheckOpeners(this.getLevel(), this.getBlockPos(), this.getBlockState());
+        }
     }
 
     @Override
@@ -251,10 +330,5 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
     @Override
     public void fillStackedContents(StackedItemContents stackedItemContents) {
 
-    }
-
-    @Override
-    public float getOpenNess(float v) {
-        return 0;
     }
 }
