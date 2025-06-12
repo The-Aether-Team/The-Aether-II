@@ -667,6 +667,7 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1, 1))
                         .build(),
                 generationSettingsBuilder
+                        .addCarver(AetherIICarvers.HESTVEIL_CAVE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HighlandsPlacedFeatures.CLOUDBED)
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.ALKAHEST_POOL)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HighlandsPlacedFeatures.ORE_SCATTERGLASS)

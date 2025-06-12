@@ -46,7 +46,7 @@ public class HighlandsNoiseBuilders extends AetherIIDensityFunctionBuilders {
                 DensityFunctions.zero(), // lava
                 temperature, // temperature
                 vegetation, // vegetation
-                getFunction(function, AetherIIDensityFunctions.CAVE_BIOMES), // continentalness
+                DensityFunctions.zero(), // continentalness
                 erosion, // erosion
                 depth, // depth
                 ridges, // ridges
