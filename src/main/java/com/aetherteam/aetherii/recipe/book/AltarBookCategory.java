@@ -11,8 +11,8 @@ public enum AltarBookCategory implements StringRepresentable {
     public static final StringRepresentable.EnumCodec<AltarBookCategory> CODEC = StringRepresentable.fromEnum(AltarBookCategory::values);
     private final String name;
 
-    AltarBookCategory(String pName) {
-        this.name = pName;
+    AltarBookCategory(String name) {
+        this.name = name;
     }
 
     @Override

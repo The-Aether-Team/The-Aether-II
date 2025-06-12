@@ -16,7 +16,7 @@ import com.aetherteam.aetherii.network.packet.serverbound.AcidBreakBlockPacket;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.block.AcidCorrosionRecipe;
-import com.aetherteam.aetherii.recipe.recipes.item.IrradiationCleansingRecipe;
+import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
 import io.wispforest.accessories.api.AccessoriesAPI;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.slot.SlotEntryReference;
@@ -189,7 +189,7 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
                     }
                 }
                 if (itemEntity.lifespan <= 500) {
-                    for (RecipeHolder<IrradiationCleansingRecipe> recipe : level.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.IRRADIATION_CLEANSING.get())) {
+                    for (RecipeHolder<AlkahestPurificationRecipe> recipe : level.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.ALKAHEST_PURIFICATION.get())) {
                         if (recipe != null) {
                             SingleRecipeInputWithRandom input = new SingleRecipeInputWithRandom(itemStack, level.getRandom());
                             if (recipe.value().matches(input, level)) {

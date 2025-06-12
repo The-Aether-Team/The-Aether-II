@@ -33,15 +33,15 @@ public class AltarEnchantingRecipe extends SingleItemRecipe {
         this.processingTime = processingTime;
     }
 
-    public float getExperience() {
+    public float experience() {
         return this.experience;
     }
 
-    public int getFuelCount() {
+    public int fuelCount() {
         return this.fuelCount;
     }
 
-    public int getProcessingTime() {
+    public int processingTime() {
         return this.processingTime;
     }
 
@@ -61,7 +61,15 @@ public class AltarEnchantingRecipe extends SingleItemRecipe {
 
     @Override
     public List<RecipeDisplay> display() {
-        return List.of(new AltarRecipeDisplay(this.input().display(), new SlotDisplay.TagSlotDisplay(AetherIITags.Items.ALTAR_FUEL), new SlotDisplay.ItemStackSlotDisplay(this.result()), new SlotDisplay.ItemSlotDisplay(AetherIIBlocks.ALTAR.asItem()), this.fuelCount, this.processingTime, this.experience));
+        return List.of(new AltarRecipeDisplay(
+                this.input().display(),
+                new SlotDisplay.TagSlotDisplay(AetherIITags.Items.ALTAR_FUEL),
+                new SlotDisplay.ItemStackSlotDisplay(this.result()),
+                new SlotDisplay.ItemSlotDisplay(AetherIIBlocks.ALTAR.asItem()),
+                this.fuelCount,
+                this.processingTime,
+                this.experience
+        ));
     }
 
     @Override
@@ -71,7 +79,6 @@ public class AltarEnchantingRecipe extends SingleItemRecipe {
             case FOOD -> AetherIIRecipeBookCategories.ALTAR_FOOD.get();
             case REPAIRING -> AetherIIRecipeBookCategories.ALTAR_REPAIRING.get();
             case MISC -> AetherIIRecipeBookCategories.ALTAR_MISC.get();
-            default -> throw new MatchException(null, null);
         };
     }
 
@@ -81,13 +88,13 @@ public class AltarEnchantingRecipe extends SingleItemRecipe {
 
         public Serializer() {
             this.codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                    Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group()),
-                    AltarBookCategory.CODEC.fieldOf("category").orElse(AltarBookCategory.MISC).forGetter(p_300828_ -> p_300828_.category),
-                    Ingredient.CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.input()),
-                    ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result()),
-                    Codec.FLOAT.fieldOf("experience").orElse(0.0F).forGetter(recipe -> recipe.experience),
-                    Codec.INT.fieldOf("fuel_count").orElse(1).forGetter(recipe -> recipe.fuelCount),
-                    Codec.INT.fieldOf("processing_time").orElse(200).forGetter(recipe -> recipe.processingTime)
+                    Codec.STRING.optionalFieldOf("group", "").forGetter(SingleItemRecipe::group),
+                    AltarBookCategory.CODEC.fieldOf("category").orElse(AltarBookCategory.MISC).forGetter(AltarEnchantingRecipe::category),
+                    Ingredient.CODEC.fieldOf("ingredient").forGetter(SingleItemRecipe::input),
+                    ItemStack.CODEC.fieldOf("result").forGetter(AltarEnchantingRecipe::result),
+                    Codec.FLOAT.fieldOf("experience").orElse(0.0F).forGetter(AltarEnchantingRecipe::experience),
+                    Codec.INT.fieldOf("fuel_count").orElse(1).forGetter(AltarEnchantingRecipe::fuelCount),
+                    Codec.INT.fieldOf("processing_time").orElse(200).forGetter(AltarEnchantingRecipe::processingTime)
             ).apply(instance, AltarEnchantingRecipe::new));
             this.streamCodec = StreamCodec.of(this::toNetwork, this::fromNetwork);
         }
@@ -108,9 +115,9 @@ public class AltarEnchantingRecipe extends SingleItemRecipe {
             Ingredient ingredient = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
             ItemStack result = ItemStack.STREAM_CODEC.decode(buffer);
             float experience = buffer.readFloat();
-            int inputCount = buffer.readVarInt();
+            int fuelCount = buffer.readVarInt();
             int processingTime = buffer.readVarInt();
-            return new AltarEnchantingRecipe(group, category, ingredient, result, experience, inputCount, processingTime);
+            return new AltarEnchantingRecipe(group, category, ingredient, result, experience, fuelCount, processingTime);
         }
 
         public void toNetwork(RegistryFriendlyByteBuf buffer, AltarEnchantingRecipe recipe) {

@@ -1353,97 +1353,97 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider { //todo fix some
 
         this.acidCorrosion(AetherIIBlocks.ICHORITE.get(), AetherIIBlocks.UNDERSHALE.get()).save(this.output, "corrode_undershale_to_ichorite");
 
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.HOLYSTONE.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE, this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.HOLYSTONE_STAIRS.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS, this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.HOLYSTONE_SLAB.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE_SLAB, this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.HOLYSTONE_WALL.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE_WALL, this.output);
-
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.SKYROOT_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE, "irradiated_leaf_pile", this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.SKYPLANE_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE, "irradiated_leaf_pile", this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.SKYBIRCH_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE, "irradiated_leaf_pile", this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.SKYPINE_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_PILE, "irradiated_leaf_pile", this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.WISPROOT_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_PILE, "irradiated_leaf_pile", this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.WISPTOP_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_PILE, "irradiated_leaf_pile", this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.GREATROOT_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE, "irradiated_leaf_pile", this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.GREATOAK_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE, "irradiated_leaf_pile", this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.GREATBOA_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE, "irradiated_leaf_pile", this.output);
-
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.SKYROOT_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES, "irradiated_leaves", this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.SKYPLANE_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES, "irradiated_leaves", this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.SKYBIRCH_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES, "irradiated_leaves", this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.SKYPINE_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES, "irradiated_leaves", this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.WISPROOT_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES, "irradiated_leaves", this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.WISPTOP_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES, "irradiated_leaves", this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.GREATROOT_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES, "irradiated_leaves", this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.GREATOAK_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES, "irradiated_leaves", this.output);
-        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.GREATBOA_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES, "irradiated_leaves", this.output);
-
-        this.irradiationCleansing(RecipeCategory.COMBAT, SimpleWeightedRandomList.<ItemStack>builder()
-                .add(AetherIIItems.BEAST_PELT_HELMET.toStack(), 1)
-                .add(AetherIIItems.BURRUKAI_PLATE_HELMET.toStack(), 1)
-                .add(AetherIIItems.ZANITE_HELMET.toStack(), 1)
-                .add(AetherIIItems.ARKENIUM_HELMET.toStack(), 1)
-                .add(AetherIIItems.GRAVITITE_HELMET.toStack(), 1)
-                .add(AetherIIItems.BEAST_PELT_CHESTPLATE.toStack(), 1)
-                .add(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.toStack(), 1)
-                .add(AetherIIItems.ZANITE_CHESTPLATE.toStack(), 1)
-                .add(AetherIIItems.ARKENIUM_CHESTPLATE.toStack(), 1)
-                .add(AetherIIItems.GRAVITITE_CHESTPLATE.toStack(), 1)
-                .add(AetherIIItems.BEAST_PELT_LEGGINGS.toStack(), 1)
-                .add(AetherIIItems.BURRUKAI_PLATE_LEGGINGS.toStack(), 1)
-                .add(AetherIIItems.ZANITE_LEGGINGS.toStack(), 1)
-                .add(AetherIIItems.ARKENIUM_LEGGINGS.toStack(), 1)
-                .add(AetherIIItems.GRAVITITE_LEGGINGS.toStack(), 1)
-                .add(AetherIIItems.BEAST_PELT_BOOTS.toStack(), 1)
-                .add(AetherIIItems.BURRUKAI_PLATE_BOOTS.toStack(), 1)
-                .add(AetherIIItems.ZANITE_BOOTS.toStack(), 1)
-                .add(AetherIIItems.ARKENIUM_BOOTS.toStack(), 1)
-                .add(AetherIIItems.GRAVITITE_BOOTS.toStack(), 1)
-                .add(AetherIIItems.BEAST_PELT_GLOVES.toStack(), 1)
-                .add(AetherIIItems.BURRUKAI_PLATE_GLOVES.toStack(), 1)
-                .add(AetherIIItems.ZANITE_GLOVES.toStack(), 1)
-                .add(AetherIIItems.ARKENIUM_GLOVES.toStack(), 1)
-                .add(AetherIIItems.GRAVITITE_GLOVES.toStack(), 1)
-                .build(), AetherIIItems.IRRADIATED_ARMOR, this.output);
-        this.irradiationCleansing(RecipeCategory.COMBAT, SimpleWeightedRandomList.<ItemStack>builder()
-                .add(AetherIIItems.SKYROOT_SHORTSWORD.toStack(), 1)
-                .add(AetherIIItems.HOLYSTONE_SHORTSWORD.toStack(), 1)
-                .add(AetherIIItems.ZANITE_SHORTSWORD.toStack(), 1)
-                .add(AetherIIItems.ARKENIUM_SHORTSWORD.toStack(), 1)
-                .add(AetherIIItems.GRAVITITE_SHORTSWORD.toStack(), 1)
-                .add(AetherIIItems.SKYROOT_SPEAR.toStack(), 1)
-                .add(AetherIIItems.HOLYSTONE_SPEAR.toStack(), 1)
-                .add(AetherIIItems.ZANITE_SPEAR.toStack(), 1)
-                .add(AetherIIItems.ARKENIUM_SPEAR.toStack(), 1)
-                .add(AetherIIItems.GRAVITITE_SPEAR.toStack(), 1)
-                .add(AetherIIItems.SKYROOT_HAMMER.toStack(), 1)
-                .add(AetherIIItems.HOLYSTONE_HAMMER.toStack(), 1)
-                .add(AetherIIItems.ZANITE_HAMMER.toStack(), 1)
-                .add(AetherIIItems.ARKENIUM_HAMMER.toStack(), 1)
-                .add(AetherIIItems.GRAVITITE_HAMMER.toStack(), 1)
-                .build(), AetherIIItems.IRRADIATED_WEAPON, this.output);
-        this.irradiationCleansing(RecipeCategory.COMBAT, SimpleWeightedRandomList.<ItemStack>builder()
-                .add(AetherIIItems.SKYROOT_AXE.toStack(), 1)
-                .add(AetherIIItems.HOLYSTONE_AXE.toStack(), 1)
-                .add(AetherIIItems.ZANITE_AXE.toStack(), 1)
-                .add(AetherIIItems.ARKENIUM_AXE.toStack(), 1)
-                .add(AetherIIItems.GRAVITITE_AXE.toStack(), 1)
-                .add(AetherIIItems.SKYROOT_PICKAXE.toStack(), 1)
-                .add(AetherIIItems.HOLYSTONE_PICKAXE.toStack(), 1)
-                .add(AetherIIItems.ZANITE_PICKAXE.toStack(), 1)
-                .add(AetherIIItems.ARKENIUM_PICKAXE.toStack(), 1)
-                .add(AetherIIItems.GRAVITITE_PICKAXE.toStack(), 1)
-                .add(AetherIIItems.SKYROOT_SHOVEL.toStack(), 1)
-                .add(AetherIIItems.HOLYSTONE_SHOVEL.toStack(), 1)
-                .add(AetherIIItems.ZANITE_SHOVEL.toStack(), 1)
-                .add(AetherIIItems.ARKENIUM_SHOVEL.toStack(), 1)
-                .add(AetherIIItems.GRAVITITE_SHOVEL.toStack(), 1)
-                .add(AetherIIItems.SKYROOT_TROWEL.toStack(), 1)
-                .add(AetherIIItems.HOLYSTONE_TROWEL.toStack(), 1)
-                .add(AetherIIItems.ZANITE_TROWEL.toStack(), 1)
-                .add(AetherIIItems.ARKENIUM_TROWEL.toStack(), 1)
-                .add(AetherIIItems.GRAVITITE_TROWEL.toStack(), 1)
-                .build(), AetherIIItems.IRRADIATED_TOOL, this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.HOLYSTONE.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE, this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.HOLYSTONE_STAIRS.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS, this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.HOLYSTONE_SLAB.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE_SLAB, this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.HOLYSTONE_WALL.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE_WALL, this.output);
+//
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.SKYROOT_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE, "irradiated_leaf_pile", this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.SKYPLANE_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE, "irradiated_leaf_pile", this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.SKYBIRCH_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE, "irradiated_leaf_pile", this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.SKYPINE_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_PILE, "irradiated_leaf_pile", this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.WISPROOT_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_PILE, "irradiated_leaf_pile", this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.WISPTOP_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_PILE, "irradiated_leaf_pile", this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.GREATROOT_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE, "irradiated_leaf_pile", this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.GREATOAK_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE, "irradiated_leaf_pile", this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.GREATBOA_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE, "irradiated_leaf_pile", this.output);
+//
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.SKYROOT_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES, "irradiated_leaves", this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.SKYPLANE_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES, "irradiated_leaves", this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.SKYBIRCH_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES, "irradiated_leaves", this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.SKYPINE_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES, "irradiated_leaves", this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.WISPROOT_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES, "irradiated_leaves", this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.WISPTOP_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES, "irradiated_leaves", this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.GREATROOT_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES, "irradiated_leaves", this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.GREATOAK_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES, "irradiated_leaves", this.output);
+//        this.irradiationCleansing(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.GREATBOA_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES, "irradiated_leaves", this.output);
+//
+//        this.irradiationCleansing(RecipeCategory.COMBAT, SimpleWeightedRandomList.<ItemStack>builder()
+//                .add(AetherIIItems.BEAST_PELT_HELMET.toStack(), 1)
+//                .add(AetherIIItems.BURRUKAI_PLATE_HELMET.toStack(), 1)
+//                .add(AetherIIItems.ZANITE_HELMET.toStack(), 1)
+//                .add(AetherIIItems.ARKENIUM_HELMET.toStack(), 1)
+//                .add(AetherIIItems.GRAVITITE_HELMET.toStack(), 1)
+//                .add(AetherIIItems.BEAST_PELT_CHESTPLATE.toStack(), 1)
+//                .add(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.toStack(), 1)
+//                .add(AetherIIItems.ZANITE_CHESTPLATE.toStack(), 1)
+//                .add(AetherIIItems.ARKENIUM_CHESTPLATE.toStack(), 1)
+//                .add(AetherIIItems.GRAVITITE_CHESTPLATE.toStack(), 1)
+//                .add(AetherIIItems.BEAST_PELT_LEGGINGS.toStack(), 1)
+//                .add(AetherIIItems.BURRUKAI_PLATE_LEGGINGS.toStack(), 1)
+//                .add(AetherIIItems.ZANITE_LEGGINGS.toStack(), 1)
+//                .add(AetherIIItems.ARKENIUM_LEGGINGS.toStack(), 1)
+//                .add(AetherIIItems.GRAVITITE_LEGGINGS.toStack(), 1)
+//                .add(AetherIIItems.BEAST_PELT_BOOTS.toStack(), 1)
+//                .add(AetherIIItems.BURRUKAI_PLATE_BOOTS.toStack(), 1)
+//                .add(AetherIIItems.ZANITE_BOOTS.toStack(), 1)
+//                .add(AetherIIItems.ARKENIUM_BOOTS.toStack(), 1)
+//                .add(AetherIIItems.GRAVITITE_BOOTS.toStack(), 1)
+//                .add(AetherIIItems.BEAST_PELT_GLOVES.toStack(), 1)
+//                .add(AetherIIItems.BURRUKAI_PLATE_GLOVES.toStack(), 1)
+//                .add(AetherIIItems.ZANITE_GLOVES.toStack(), 1)
+//                .add(AetherIIItems.ARKENIUM_GLOVES.toStack(), 1)
+//                .add(AetherIIItems.GRAVITITE_GLOVES.toStack(), 1)
+//                .build(), AetherIIItems.IRRADIATED_ARMOR, this.output);
+//        this.irradiationCleansing(RecipeCategory.COMBAT, SimpleWeightedRandomList.<ItemStack>builder()
+//                .add(AetherIIItems.SKYROOT_SHORTSWORD.toStack(), 1)
+//                .add(AetherIIItems.HOLYSTONE_SHORTSWORD.toStack(), 1)
+//                .add(AetherIIItems.ZANITE_SHORTSWORD.toStack(), 1)
+//                .add(AetherIIItems.ARKENIUM_SHORTSWORD.toStack(), 1)
+//                .add(AetherIIItems.GRAVITITE_SHORTSWORD.toStack(), 1)
+//                .add(AetherIIItems.SKYROOT_SPEAR.toStack(), 1)
+//                .add(AetherIIItems.HOLYSTONE_SPEAR.toStack(), 1)
+//                .add(AetherIIItems.ZANITE_SPEAR.toStack(), 1)
+//                .add(AetherIIItems.ARKENIUM_SPEAR.toStack(), 1)
+//                .add(AetherIIItems.GRAVITITE_SPEAR.toStack(), 1)
+//                .add(AetherIIItems.SKYROOT_HAMMER.toStack(), 1)
+//                .add(AetherIIItems.HOLYSTONE_HAMMER.toStack(), 1)
+//                .add(AetherIIItems.ZANITE_HAMMER.toStack(), 1)
+//                .add(AetherIIItems.ARKENIUM_HAMMER.toStack(), 1)
+//                .add(AetherIIItems.GRAVITITE_HAMMER.toStack(), 1)
+//                .build(), AetherIIItems.IRRADIATED_WEAPON, this.output);
+//        this.irradiationCleansing(RecipeCategory.COMBAT, SimpleWeightedRandomList.<ItemStack>builder()
+//                .add(AetherIIItems.SKYROOT_AXE.toStack(), 1)
+//                .add(AetherIIItems.HOLYSTONE_AXE.toStack(), 1)
+//                .add(AetherIIItems.ZANITE_AXE.toStack(), 1)
+//                .add(AetherIIItems.ARKENIUM_AXE.toStack(), 1)
+//                .add(AetherIIItems.GRAVITITE_AXE.toStack(), 1)
+//                .add(AetherIIItems.SKYROOT_PICKAXE.toStack(), 1)
+//                .add(AetherIIItems.HOLYSTONE_PICKAXE.toStack(), 1)
+//                .add(AetherIIItems.ZANITE_PICKAXE.toStack(), 1)
+//                .add(AetherIIItems.ARKENIUM_PICKAXE.toStack(), 1)
+//                .add(AetherIIItems.GRAVITITE_PICKAXE.toStack(), 1)
+//                .add(AetherIIItems.SKYROOT_SHOVEL.toStack(), 1)
+//                .add(AetherIIItems.HOLYSTONE_SHOVEL.toStack(), 1)
+//                .add(AetherIIItems.ZANITE_SHOVEL.toStack(), 1)
+//                .add(AetherIIItems.ARKENIUM_SHOVEL.toStack(), 1)
+//                .add(AetherIIItems.GRAVITITE_SHOVEL.toStack(), 1)
+//                .add(AetherIIItems.SKYROOT_TROWEL.toStack(), 1)
+//                .add(AetherIIItems.HOLYSTONE_TROWEL.toStack(), 1)
+//                .add(AetherIIItems.ZANITE_TROWEL.toStack(), 1)
+//                .add(AetherIIItems.ARKENIUM_TROWEL.toStack(), 1)
+//                .add(AetherIIItems.GRAVITITE_TROWEL.toStack(), 1)
+//                .build(), AetherIIItems.IRRADIATED_TOOL, this.output);
 
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE, 1).requires(AetherIIBlocks.SKYROOT_LEAF_PILE.get()).requires(AetherIIItems.IRRADIATED_DUST.get())
                 .group("irradiated_leaf_pile").unlockedBy(getHasName(AetherIIItems.IRRADIATED_DUST), has(AetherIIItems.IRRADIATED_DUST)).save(this.output, this.name("skyroot_leaf_pile_irradiation_crafting"));

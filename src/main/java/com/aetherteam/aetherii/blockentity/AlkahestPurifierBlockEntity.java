@@ -2,10 +2,12 @@ package com.aetherteam.aetherii.blockentity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.inventory.menu.AlkahestPurifierMenu;
+import com.aetherteam.aetherii.inventory.menu.AltarMenu;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
-import com.aetherteam.aetherii.recipe.recipes.item.IrradiationCleansingRecipe;
+import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
@@ -36,7 +38,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.LidBlockEntity;
@@ -84,7 +85,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
     };
 
     private final Object2IntOpenHashMap<ResourceKey<Recipe<?>>> recipesUsed = new Object2IntOpenHashMap<>();
-    private final RecipeManager.CachedCheck<SingleRecipeInputWithRandom, IrradiationCleansingRecipe> quickCheck;
+    private final RecipeManager.CachedCheck<SingleRecipeInputWithRandom, AlkahestPurificationRecipe> quickCheck;
 
     public AlkahestPurifierBlockEntity() {
         this(AetherIIBlockEntityTypes.ALKAHEST_PURIFIER.get(), BlockPos.ZERO, AetherIIBlocks.ALKAHEST_PURIFIER.get().defaultBlockState());
@@ -96,7 +97,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
 
     public AlkahestPurifierBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        this.quickCheck = RecipeManager.createCheck(AetherIIRecipeTypes.IRRADIATION_CLEANSING.get());
+        this.quickCheck = RecipeManager.createCheck(AetherIIRecipeTypes.ALKAHEST_PURIFICATION.get());
     }
 
     @Override
@@ -105,8 +106,8 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
     }
 
     @Override
-    protected AbstractContainerMenu createMenu(int i, Inventory inventory) {
-        return null;
+    protected AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
+        return new AlkahestPurifierMenu(containerId, inventory, this, this.dataAccess);
     }
 
     @Override
@@ -232,7 +233,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
         for (Object2IntMap.Entry<ResourceKey<Recipe<?>>> entry : this.recipesUsed.object2IntEntrySet()) {
             level.recipeAccess().byKey(entry.getKey()).ifPresent(recipeHolder -> {
                 list.add(recipeHolder);
-                createExperience(level, popVec, entry.getIntValue(), ((AltarEnchantingRecipe) recipeHolder.value()).getExperience());
+                createExperience(level, popVec, entry.getIntValue(), ((AltarEnchantingRecipe) recipeHolder.value()).experience());
             });
         }
         return list;

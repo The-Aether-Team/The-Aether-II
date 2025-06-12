@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.recipe.builder.AltarEnchantingRecipeBuilder;
 import com.aetherteam.aetherii.recipe.builder.BiomeParameterRecipeBuilder;
-import com.aetherteam.aetherii.recipe.builder.IrradiationCleansingRecipeBuilder;
+import com.aetherteam.aetherii.recipe.builder.AlkahestPurificationRecipeBuilder;
 import com.aetherteam.aetherii.recipe.recipes.block.*;
 import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
 import com.aetherteam.nitrogen.recipe.BlockPropertyPair;
@@ -267,13 +267,13 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, AcidCorrosionRecipe::new);
     }
 
-    protected void irradiationCleansing(RecipeCategory recipeCategory, SimpleWeightedRandomList<ItemStack> results, ItemLike ingredient, RecipeOutput consumer) {
-        IrradiationCleansingRecipeBuilder.recipe(recipeCategory, Ingredient.of(ingredient), results).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, "cleanse_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath());
-    }
-
-    protected void irradiationCleansing(RecipeCategory recipeCategory, SimpleWeightedRandomList<ItemStack> results, ItemLike ingredient, String group, RecipeOutput consumer) {
-        IrradiationCleansingRecipeBuilder.recipe(recipeCategory, Ingredient.of(ingredient), results).group(group).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, "cleanse_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath());
-    }
+//    protected void irradiationCleansing(RecipeCategory recipeCategory, SimpleWeightedRandomList<ItemStack> results, ItemLike ingredient, RecipeOutput consumer) {
+//        AlkahestPurificationRecipeBuilder.recipe(recipeCategory, Ingredient.of(ingredient), results).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, "cleanse_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath());
+//    }
+//
+//    protected void irradiationCleansing(RecipeCategory recipeCategory, SimpleWeightedRandomList<ItemStack> results, ItemLike ingredient, String group, RecipeOutput consumer) {
+//        AlkahestPurificationRecipeBuilder.recipe(recipeCategory, Ingredient.of(ingredient), results).group(group).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, "cleanse_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath());
+//    }
 
     protected BlockStateRecipeBuilder dustIrradiation(Block result, Block ingredient) {
         return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, IrradiationRecipe::new);

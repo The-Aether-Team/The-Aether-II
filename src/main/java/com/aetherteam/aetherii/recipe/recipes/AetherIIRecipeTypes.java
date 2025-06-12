@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.recipe.recipes;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.recipe.recipes.block.*;
 import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
-import com.aetherteam.aetherii.recipe.recipes.item.IrradiationCleansingRecipe;
+import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -20,5 +20,5 @@ public class AetherIIRecipeTypes {
     public static final DeferredHolder<RecipeType<?>, RecipeType<IcestoneFreezableRecipe>> ICESTONE_FREEZABLE = RECIPE_TYPES.register("icestone_freezable", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "icestone_freezable")));
 
     public static final DeferredHolder<RecipeType<?>, RecipeType<AltarEnchantingRecipe>> ALTAR_ENCHANTING = RECIPE_TYPES.register("altar_enchanting", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "altar_enchanting")));
-    public static final DeferredHolder<RecipeType<?>, RecipeType<IrradiationCleansingRecipe>> IRRADIATION_CLEANSING = RECIPE_TYPES.register("irradiation_cleansing", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "irradiation_cleansing")));
+    public static final DeferredHolder<RecipeType<?>, RecipeType<AlkahestPurificationRecipe>> ALKAHEST_PURIFICATION = RECIPE_TYPES.register("alkahest_purification", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purification")));
 }
