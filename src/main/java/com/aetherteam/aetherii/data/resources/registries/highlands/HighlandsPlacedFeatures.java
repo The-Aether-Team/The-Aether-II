@@ -28,7 +28,6 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.heightproviders.TrapezoidHeight;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraft.world.level.material.Fluids;
 
 import java.util.List;
 
@@ -111,6 +110,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_OVERHANG = createKey("coarse_aether_dirt_overhang");
     public static final ResourceKey<PlacedFeature> ICE_OVERHANG = createKey("ice_overhang");
     public static final ResourceKey<PlacedFeature> POINTED_HOLYSTONE = createKey("pointed_holystone");
+    public static final ResourceKey<PlacedFeature> POINTED_ICHORITE = createKey("pointed_ichorite");
     public static final ResourceKey<PlacedFeature> EXPOSED_BRYALINN_MOSS_COVER = createKey("exposed_bryalinn_moss_cover");
     public static final ResourceKey<PlacedFeature> SWAMP_BRYALINN_MOSS_COVER = createKey("swamp_bryalinn_moss_cover");
     public static final ResourceKey<PlacedFeature> EXPOSED_SHAYELINN_MOSS_COVER = createKey("exposed_shayelinn_moss_cover");
@@ -564,6 +564,16 @@ public class HighlandsPlacedFeatures {
                 CountPlacement.of(UniformInt.of(64, 104)),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(176))),
+                RarityFilter.onAverageOnceEvery(75),
+                CountPlacement.of(UniformInt.of(3, 15)),
+                RandomOffsetPlacement.of(ClampedNormalInt.of(0.0F, 3.0F, -10, 10), ClampedNormalInt.of(0.0F, 0.6F, -2, 2)),
+                SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
+                BiomeFilter.biome()
+        );
+        register(context, POINTED_ICHORITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.POINTED_ICHORITE),
+                CountPlacement.of(UniformInt.of(96, 128)),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(64))),
                 RarityFilter.onAverageOnceEvery(75),
                 CountPlacement.of(UniformInt.of(3, 15)),
                 RandomOffsetPlacement.of(ClampedNormalInt.of(0.0F, 3.0F, -10, 10), ClampedNormalInt.of(0.0F, 0.6F, -2, 2)),

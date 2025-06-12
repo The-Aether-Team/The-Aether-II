@@ -202,6 +202,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICE = createKey("ice");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_CRYSTALS = createKey("ice_crystals");
     public static final ResourceKey<ConfiguredFeature<?, ?>> POINTED_HOLYSTONE = createKey("pointed_holystone");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> POINTED_ICHORITE = createKey("pointed_ichorite");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_BLOCKS = createKey("grass_blocks");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ENCHANTED_GRASS_BLOCKS = createKey("enchanted_grass_blocks");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_AND_DIRT_FLOOR = createKey("grass_and_dirt_floor");
@@ -1336,27 +1337,35 @@ public class HighlandsConfiguredFeatures {
                         ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
-        register(
-                context,
-                POINTED_HOLYSTONE,
-                Feature.SIMPLE_RANDOM_SELECTOR,
-                new SimpleRandomFeatureConfiguration(
-                        HolderSet.direct(
-                                PlacementUtils.inlinePlaced(
-                                        AetherIIFeatures.POINTED_STONE.get(),
-                                        new PointedStoneConfiguration(BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get()), BlockStateProvider.simple(AetherIIBlocks.POINTED_HOLYSTONE.get()), 0.2F, 0.7F, 0.5F, 0.5F),
-                                        EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12),
-                                        RandomOffsetPlacement.vertical(ConstantInt.of(1))
-                                ),
-                                PlacementUtils.inlinePlaced(
-                                        AetherIIFeatures.POINTED_STONE.get(),
-                                        new PointedStoneConfiguration(BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get()), BlockStateProvider.simple(AetherIIBlocks.POINTED_HOLYSTONE.get()), 0.2F, 0.7F, 0.5F, 0.5F),
-                                        EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12),
-                                        RandomOffsetPlacement.vertical(ConstantInt.of(-1))
-                                )
-                        )
-                )
-        );
+        register(context, POINTED_HOLYSTONE, Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(
+                HolderSet.direct(
+                        PlacementUtils.inlinePlaced(
+                                AetherIIFeatures.POINTED_STONE.get(),
+                                new PointedStoneConfiguration(BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get()), BlockStateProvider.simple(AetherIIBlocks.POINTED_HOLYSTONE.get()), 0.2F, 0.7F, 0.5F, 0.5F),
+                                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12),
+                                RandomOffsetPlacement.vertical(ConstantInt.of(1))
+                        ),
+                        PlacementUtils.inlinePlaced(
+                                AetherIIFeatures.POINTED_STONE.get(),
+                                new PointedStoneConfiguration(BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get()), BlockStateProvider.simple(AetherIIBlocks.POINTED_HOLYSTONE.get()), 0.2F, 0.7F, 0.5F, 0.5F),
+                                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12),
+                                RandomOffsetPlacement.vertical(ConstantInt.of(-1))
+                        ))));
+        register(context, POINTED_ICHORITE, Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(
+                HolderSet.direct(
+                        PlacementUtils.inlinePlaced(
+                                AetherIIFeatures.POINTED_STONE.get(),
+                                new PointedStoneConfiguration(BlockStateProvider.simple(AetherIIBlocks.ICHORITE.get()), BlockStateProvider.simple(AetherIIBlocks.POINTED_ICHORITE.get()), 0.2F, 0.7F, 0.5F, 0.5F),
+                                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12),
+                                RandomOffsetPlacement.vertical(ConstantInt.of(1))
+                        ),
+                        PlacementUtils.inlinePlaced(
+                                AetherIIFeatures.POINTED_STONE.get(),
+                                new PointedStoneConfiguration(BlockStateProvider.simple(AetherIIBlocks.ICHORITE.get()), BlockStateProvider.simple(AetherIIBlocks.POINTED_ICHORITE.get()), 0.2F, 0.7F, 0.5F, 0.5F),
+                                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12),
+                                RandomOffsetPlacement.vertical(ConstantInt.of(-1))
+                        ))));
+
         register(context,
                 GRASS_BLOCKS,
                 Feature.RANDOM_PATCH,
