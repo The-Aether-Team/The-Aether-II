@@ -60,13 +60,21 @@ public class AlkahestPurifierScreen extends AbstractRecipeBookScreen<AlkahestPur
         int j = this.topPos;
         guiGraphics.blit(RenderType::guiTextured, ALKAHEST_PURIFIER_TEXTURE, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
 
-//        guiGraphics.blitSprite(RenderType::guiTextured, ACID_1_SPRITE, i + 60, j + 78, 56, 16); //todo
-//        guiGraphics.blitSprite(RenderType::guiTextured, ACID_2_SPRITE, i + 60, j + 65, 56, 15);
-//        guiGraphics.blitSprite(RenderType::guiTextured, ACID_3_SPRITE, i + 60, j + 52, 56, 15);
-//        guiGraphics.blitSprite(RenderType::guiTextured, ACID_4_SPRITE, i + 60, j + 41, 56, 13);
+        int alkahestRenderLevels = Mth.floor(this.menu.getAlkahestLevels() / 3.0);
+        if (alkahestRenderLevels >= 1) {
+            guiGraphics.blitSprite(RenderType::guiTextured, ACID_1_SPRITE, i + 60, j + 78, 56, 16);
+        }
+        if (alkahestRenderLevels >= 2) {
+            guiGraphics.blitSprite(RenderType::guiTextured, ACID_2_SPRITE, i + 60, j + 65, 56, 15);
+        }
+        if (alkahestRenderLevels >= 3) {
+            guiGraphics.blitSprite(RenderType::guiTextured, ACID_3_SPRITE, i + 60, j + 52, 56, 15);
+        }
+        if (alkahestRenderLevels >= 4) {
+            guiGraphics.blitSprite(RenderType::guiTextured, ACID_4_SPRITE, i + 60, j + 41, 56, 13);
+        }
 
         int j1 = Mth.ceil(this.menu.getProcessingProgress() * 15.0F);
-//        j1 = 15; //todo
         guiGraphics.blitSprite(RenderType::guiTextured, OUTPUT_PROGRESS_SPRITE, 15, 10, 0, 0, i + 121, j + 48, j1, 10);
     }
 }

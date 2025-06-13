@@ -267,12 +267,12 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, AcidCorrosionRecipe::new);
     }
 
-//    protected void irradiationCleansing(RecipeCategory recipeCategory, SimpleWeightedRandomList<ItemStack> results, ItemLike ingredient, RecipeOutput consumer) {
-//        AlkahestPurificationRecipeBuilder.recipe(recipeCategory, Ingredient.of(ingredient), results).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, "cleanse_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath());
+//    protected void alkahestPurification(RecipeCategory recipeCategory, SimpleWeightedRandomList<ItemStack> results, ItemLike ingredient, ItemStack byproduct, float experience, int alkahestUsage, int processingTime, RecipeOutput consumer) {
+//        AlkahestPurificationRecipeBuilder.recipe(Ingredient.of(ingredient), recipeCategory, results, byproduct, experience, alkahestUsage, processingTime).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, "cleanse_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath());
 //    }
 //
-//    protected void irradiationCleansing(RecipeCategory recipeCategory, SimpleWeightedRandomList<ItemStack> results, ItemLike ingredient, String group, RecipeOutput consumer) {
-//        AlkahestPurificationRecipeBuilder.recipe(recipeCategory, Ingredient.of(ingredient), results).group(group).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, "cleanse_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath());
+//    protected void alkahestPurification(RecipeCategory recipeCategory, SimpleWeightedRandomList<ItemStack> results, ItemLike ingredient, ItemStack byproduct, float experience, int alkahestUsage, int processingTime, String group, RecipeOutput consumer) {
+//        AlkahestPurificationRecipeBuilder.recipe(Ingredient.of(ingredient), recipeCategory, results, byproduct, experience, alkahestUsage, processingTime).group(group).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, "cleanse_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath());
 //    }
 
     protected BlockStateRecipeBuilder dustIrradiation(Block result, Block ingredient) {

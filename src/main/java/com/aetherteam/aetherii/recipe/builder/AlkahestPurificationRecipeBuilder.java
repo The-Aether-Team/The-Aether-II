@@ -50,6 +50,8 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
         this.processingTime = processingTime;
     }
 
+    //todo i need the byproduct to be randomized too...
+
     public static AlkahestPurificationRecipeBuilder recipe(Ingredient ingredient, RecipeCategory category, SimpleWeightedRandomList<ItemStack> results, ItemStack byproduct, float experience, int alkahestUsage, int processingTime) {
         return new AlkahestPurificationRecipeBuilder(category, determineRecipeCategory(new ItemStack(results.unwrap().getFirst().data().getItem())), results, ingredient, byproduct, experience, alkahestUsage, processingTime);
     }

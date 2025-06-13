@@ -9,7 +9,6 @@ import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifie
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -20,7 +19,6 @@ import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class AlkahestPurifierRenderer implements BlockEntityRenderer<AlkahestPurifierBlockEntity> {
@@ -46,11 +44,10 @@ public class AlkahestPurifierRenderer implements BlockEntityRenderer<AlkahestPur
         BlockState blockstate = levelExists ? blockEntity.getBlockState() : AetherIIBlocks.ALKAHEST_PURIFIER.get().defaultBlockState().setValue(AlkahestPurifierBlock.FACING, Direction.SOUTH);
         float yRot = blockstate.getValue(AlkahestPurifierBlock.FACING).toYRot();
         int alkahestLevel = blockstate.getValue(AlkahestPurifierBlock.LEVEL);
-        float f1 = blockEntity.getOpenNess(partialTick);
-        f1 = 1.0F - f1;
-        f1 = 1.0F - f1 * f1 * f1;
-//        AetherII.LOGGER.info(String.valueOf(f1));
-        this.render(poseStack, buffer, packedLight, packedOverlay, yRot, alkahestLevel, f1);
+        float openNess = blockEntity.getOpenNess(partialTick);
+        openNess = 1.0F - openNess;
+        openNess = 1.0F - openNess * openNess * openNess;
+        this.render(poseStack, buffer, packedLight, packedOverlay, yRot, alkahestLevel, openNess);
     }
 
     public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, float yRot, int alkahestLevel, float openness) {

@@ -1,9 +1,12 @@
 package com.aetherteam.aetherii.blockentity;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.utility.AlkahestPurifierBlock;
+import com.aetherteam.aetherii.block.utility.AltarBlock;
 import com.aetherteam.aetherii.inventory.menu.AlkahestPurifierMenu;
-import com.aetherteam.aetherii.inventory.menu.AltarMenu;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
@@ -22,7 +25,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.CompoundContainer;
 import net.minecraft.world.Container;
@@ -37,7 +39,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.*;
@@ -48,10 +49,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeCraftingHolder, StackedContentsCompatible, LidBlockEntity {
-    protected NonNullList<ItemStack> items = NonNullList.withSize(7, ItemStack.EMPTY);
-    int processingProgress;
-    int processingTotalTime;
-    int alkahestCount;
+    private static final int[] SLOTS_FOR_UP = new int[]{0};
+    private static final int[] SLOTS_FOR_DOWN = new int[]{5, 6};
+    private static final int[] SLOTS_FOR_SIDES = new int[]{1, 2, 3, 4};
+    protected static final int MAX_LEVELS = 12;
     private final ContainerOpenersCounter openersCounter;
     private final ChestLidController chestLidController;
     protected final ContainerData dataAccess = new ContainerData() {
@@ -60,7 +61,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
             return switch (id) {
                 case 0 -> AlkahestPurifierBlockEntity.this.processingProgress;
                 case 1 -> AlkahestPurifierBlockEntity.this.processingTotalTime;
-                case 2 -> AlkahestPurifierBlockEntity.this.alkahestCount;
+                case 2 -> AlkahestPurifierBlockEntity.this.alkahestLevels;
                 default -> 0;
             };
         }
@@ -75,7 +76,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
                     AlkahestPurifierBlockEntity.this.processingTotalTime = value;
                     break;
                 case 2:
-                    AlkahestPurifierBlockEntity.this.alkahestCount = value;
+                    AlkahestPurifierBlockEntity.this.alkahestLevels = value;
                     break;
             }
         }
@@ -85,9 +86,13 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
             return 3;
         }
     };
-
     private final Object2IntOpenHashMap<ResourceKey<Recipe<?>>> recipesUsed = new Object2IntOpenHashMap<>();
     private final RecipeManager.CachedCheck<SingleRecipeInputWithRandom, AlkahestPurificationRecipe> quickCheck;
+
+    protected NonNullList<ItemStack> items = NonNullList.withSize(7, ItemStack.EMPTY);
+    protected int alkahestLevels;
+    protected int processingProgress;
+    protected int processingTotalTime;
 
     public AlkahestPurifierBlockEntity() {
         this(AetherIIBlockEntityTypes.ALKAHEST_PURIFIER.get(), BlockPos.ZERO, AetherIIBlocks.ALKAHEST_PURIFIER.get().defaultBlockState());
@@ -125,25 +130,6 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
         this.quickCheck = RecipeManager.createCheck(AetherIIRecipeTypes.ALKAHEST_PURIFICATION.get());
     }
 
-    public static void lidAnimateTick(Level level, BlockPos pos, BlockState state, AlkahestPurifierBlockEntity blockEntity) {
-        blockEntity.chestLidController.tickLid();
-    }
-
-    @Override
-    public boolean triggerEvent(int id, int type) {
-        if (id == 1) {
-            this.chestLidController.shouldBeOpen(type > 0);
-            return true;
-        } else {
-            return super.triggerEvent(id, type);
-        }
-    }
-
-    protected void signalOpenCount(Level level, BlockPos pos, BlockState state, int eventId, int eventParam) {
-        Block block = state.getBlock();
-        level.blockEvent(pos, block, 1, eventParam);
-    }
-
     @Override
     protected Component getDefaultName() {
         return Component.translatable("menu." + AetherII.MODID + ".alkahest_purifier");
@@ -161,6 +147,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
         ContainerHelper.loadAllItems(tag, this.items, registry);
         this.processingProgress = tag.getInt("ProcessingTime");
         this.processingTotalTime = tag.getInt("ProcessingTimeTotal");
+        this.alkahestLevels = tag.getInt("AlkahestLevels");
         CompoundTag recipesUsedTag = tag.getCompound("RecipesUsed");
         for (String key : recipesUsedTag.getAllKeys()) {
             this.recipesUsed.put(ResourceKey.create(Registries.RECIPE, ResourceLocation.parse(key)), recipesUsedTag.getInt(key));
@@ -172,17 +159,63 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
         super.saveAdditional(tag, registry);
         tag.putInt("ProcessingTime", this.processingProgress);
         tag.putInt("ProcessingTimeTotal", this.processingTotalTime);
+        tag.putInt("AlkahestLevels", this.alkahestLevels);
         ContainerHelper.saveAllItems(tag, this.items, registry);
         CompoundTag recipesUsedTag = new CompoundTag();
         this.recipesUsed.forEach((location, integer) -> recipesUsedTag.putInt(location.toString(), integer));
         tag.put("RecipesUsed", recipesUsedTag);
     }
 
-    public static void serverTick(ServerLevel level, BlockPos pos, BlockState state, AlkahestPurifierBlockEntity blockEntity) {
-
+    @Override
+    public boolean triggerEvent(int id, int type) {
+        if (id == 1) {
+            this.chestLidController.shouldBeOpen(type > 0);
+            return true;
+        } else {
+            return super.triggerEvent(id, type);
+        }
     }
 
-    @Override
+    public static void serverTick(ServerLevel level, BlockPos pos, BlockState state, AlkahestPurifierBlockEntity blockEntity) {
+        boolean changed = false;
+
+        RecipeHolder<AlkahestPurificationRecipe> recipeHolder = blockEntity.quickCheck.getRecipeFor(new SingleRecipeInputWithRandom(blockEntity.getItem(0), level.getRandom()), level).orElse(null);
+
+        int levels = blockEntity.alkahestLevels;
+        if (levels < MAX_LEVELS) {
+            for (int i = 1; i < 5; i++) {
+                ItemStack stack = blockEntity.getItem(i);
+                if (blockEntity.isFuel(stack)) {
+                    blockEntity.alkahestLevels += 3;
+                    stack.shrink(1);
+                    blockEntity.setItem(i, stack.getCraftingRemainder());
+                }
+            }
+        }
+
+
+
+        int roundedLevels = Mth.floor(levels / 3.0);
+        if (state.getValue(AlkahestPurifierBlock.LEVEL) != roundedLevels) {
+            changed = true;
+            state = state.setValue(AlkahestPurifierBlock.LEVEL, roundedLevels);
+            level.setBlock(pos, state, 1 | 2);
+        }
+
+        if (changed) {
+            setChanged(level, pos, state);
+        }
+    }
+
+    public static void lidAnimateTick(Level level, BlockPos pos, BlockState state, AlkahestPurifierBlockEntity blockEntity) {
+        blockEntity.chestLidController.tickLid();
+    }
+
+    private boolean isFuel(ItemStack stack) {
+        return stack.is(AetherIIItems.ARKENIUM_ACID_CANISTER.get());
+    }
+
+    @Override //todo
     public int[] getSlotsForFace(Direction direction) {
         return new int[0];
     }
@@ -215,21 +248,15 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
         return this.chestLidController.getOpenness(partialTicks);
     }
 
-//    public static int getOpenCount(BlockGetter level, BlockPos pos) {
-//        BlockState blockstate = level.getBlockState(pos);
-//        if (blockstate.hasBlockEntity()) {
-//            BlockEntity blockentity = level.getBlockEntity(pos);
-//            if (blockentity instanceof AlkahestPurifierBlockEntity alkahestPurifierBlockEntity) {
-//                return alkahestPurifierBlockEntity.openersCounter.getOpenerCount();
-//            }
-//        }
-//        return 0;
-//    }
-
     public void recheckOpen() {
         if (!this.remove) {
             this.openersCounter.recheckOpeners(this.getLevel(), this.getBlockPos(), this.getBlockState());
         }
+    }
+
+    protected void signalOpenCount(Level level, BlockPos pos, BlockState state, int eventId, int eventParam) {
+        Block block = state.getBlock();
+        level.blockEvent(pos, block, 1, eventParam);
     }
 
     @Override

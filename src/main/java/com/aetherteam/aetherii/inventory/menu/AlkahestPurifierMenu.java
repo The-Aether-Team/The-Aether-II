@@ -2,6 +2,8 @@ package com.aetherteam.aetherii.inventory.menu;
 
 import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.slot.CanisterSlot;
+import com.aetherteam.aetherii.inventory.menu.slot.PurifierByproductSlot;
+import com.aetherteam.aetherii.inventory.menu.slot.PurifierResultSlot;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
@@ -42,7 +44,7 @@ public class AlkahestPurifierMenu extends RecipeBookMenu {
         this.acceptedInputs = this.level.recipeAccess().propertySet(AetherIIRecipePropertySets.ALKAHEST_PURIFIER_INPUT);
         container.startOpen(playerInventory.player);
 
-        // Alkahest Purifier //todo
+        // Alkahest Purifier
         this.addSlot(new Slot(container, 0, 80, 20)); // Input
 
         this.addSlot(new CanisterSlot(this, container, 1, 16, 20)); // Canister
@@ -50,9 +52,9 @@ public class AlkahestPurifierMenu extends RecipeBookMenu {
         this.addSlot(new CanisterSlot(this, container, 3, 16, 75)); // Canister
         this.addSlot(new CanisterSlot(this, container, 4, 38, 75)); // Canister
 
-        this.addSlot(new Slot(container, 5, 144, 45)); // Output
+        this.addSlot(new PurifierResultSlot(playerInventory.player, container, 5, 144, 45)); // Output
 
-        this.addSlot(new Slot(container, 6, 144, 75)); // Byproduct
+        this.addSlot(new PurifierByproductSlot(container, 6, 144, 75)); // Byproduct
 
         // Inventory
         for (int i = 0; i < 3; ++i) {
@@ -107,9 +109,9 @@ public class AlkahestPurifierMenu extends RecipeBookMenu {
         return j != 0 && i != 0 ? Mth.clamp((float) i / (float) j, 0.0F, 1.0F) : 0.0F;
     }
 
-//    public int getFuelCount() {
-//        return this.data.get(2);
-//    }
+    public int getAlkahestLevels() {
+        return this.data.get(2);
+    }
 
     public Container getContainer() {
         return this.container;
