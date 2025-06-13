@@ -10,4 +10,5 @@ public class AetherIIRecipeDisplays {
     public static final DeferredRegister<RecipeDisplay.Type<?>> RECIPE_DISPLAYS = DeferredRegister.create(BuiltInRegistries.RECIPE_DISPLAY, AetherII.MODID);
 
     public static final DeferredHolder<RecipeDisplay.Type<?>, RecipeDisplay.Type<AltarRecipeDisplay>> ALTAR = RECIPE_DISPLAYS.register("altar", () -> AltarRecipeDisplay.TYPE);
+    public static final DeferredHolder<RecipeDisplay.Type<?>, RecipeDisplay.Type<AlkahestPurifierRecipeDisplay>> ALKAHEST_PURIFIER = RECIPE_DISPLAYS.register("alkahest_purifier", () -> AlkahestPurifierRecipeDisplay.TYPE);
 }

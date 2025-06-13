@@ -1236,6 +1236,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // GUIs
         this.addGuiText("arkenium_forge.forge_button.tooltip", "Forge Item");
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
+        this.addGuiText("recipebook.toggleRecipes.purifiable", "Showing Purifiable");
         this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");
         this.addGuiText("guidebook.button.open", "Guidebook");
         this.addGuiText("guidebook.button.close", "Inventory");

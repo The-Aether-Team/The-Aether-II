@@ -23,7 +23,7 @@ public class AlkahestPurifierRecipeBookComponent extends RecipeBookComponent<Alk
             ResourceLocation.withDefaultNamespace("recipe_book/furnace_filter_disabled_highlighted")
     );
 
-    private static final Component FILTER_NAME = Component.translatable("gui.aether.recipebook.toggleRecipes.enchantable"); //todo
+    private static final Component FILTER_NAME = Component.translatable("gui.aether.recipebook.toggleRecipes.purifiable");
 
     public AlkahestPurifierRecipeBookComponent(AlkahestPurifierMenu menu, List<TabInfo> tabs) {
         super(menu, tabs);
@@ -36,21 +36,16 @@ public class AlkahestPurifierRecipeBookComponent extends RecipeBookComponent<Alk
 
     @Override
     protected boolean isCraftingSlot(Slot slot) {
-        return slot.index == 9;
-    } //todo
+        return slot.index == 5;
+    }
 
     @Override
     public void fillGhostRecipe(GhostSlots ghostSlots, RecipeDisplay recipeDisplay, ContextMap contextMap) {
-//        ghostSlots.setResult(this.menu.getSlot(9), contextMap, recipeDisplay.result());
-//        if (recipeDisplay instanceof AltarRecipeDisplay altarRecipeDisplay) {
-//            ghostSlots.setInput(this.menu.getSlot(0), contextMap, altarRecipeDisplay.ingredient());
-//            for (int i = 1; i <= altarRecipeDisplay.fuelCount(); i++) {
-//                Slot fuelSlot = this.menu.getSlot(i);
-//                if (fuelSlot.getItem().isEmpty()) {
-//                    ghostSlots.setInput(fuelSlot, contextMap, altarRecipeDisplay.fuel());
-//                }
-//            }
-//        }
+        ghostSlots.setResult(this.menu.getSlot(5), contextMap, recipeDisplay.result());
+        if (recipeDisplay instanceof AlkahestPurifierRecipeDisplay altarRecipeDisplay) {
+            ghostSlots.setInput(this.menu.getSlot(0), contextMap, altarRecipeDisplay.ingredient());
+            ghostSlots.setInput(this.menu.getSlot(6), contextMap, altarRecipeDisplay.byproduct());
+        }
     }
 
     @Override

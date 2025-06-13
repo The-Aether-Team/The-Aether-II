@@ -1,14 +1,12 @@
 package com.aetherteam.aetherii.recipe.builder;
 
 import com.aetherteam.aetherii.recipe.book.AlkahestPurifierBookCategory;
-import com.aetherteam.aetherii.recipe.book.AltarBookCategory;
 import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -30,8 +28,8 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
     private final RecipeCategory category;
     private final AlkahestPurifierBookCategory bookCategory;
     private final SimpleWeightedRandomList<ItemStack> results;
+    private final SimpleWeightedRandomList<ItemStack> byproducts;
     private final Ingredient ingredient;
-    private final ItemStack byproduct;
     private final float experience;
     private final int alkahestUsage;
     private final int processingTime;
@@ -39,21 +37,19 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
     @Nullable
     private String group;
 
-    public AlkahestPurificationRecipeBuilder(RecipeCategory category, AlkahestPurifierBookCategory bookCategory, SimpleWeightedRandomList<ItemStack> results, Ingredient ingredient, ItemStack byproduct, float experience, int alkahestUsage, int processingTime) {
+    public AlkahestPurificationRecipeBuilder(RecipeCategory category, AlkahestPurifierBookCategory bookCategory, SimpleWeightedRandomList<ItemStack> results, SimpleWeightedRandomList<ItemStack> byproducts, Ingredient ingredient, float experience, int alkahestUsage, int processingTime) {
         this.category = category;
         this.bookCategory = bookCategory;
         this.results = results;
+        this.byproducts = byproducts;
         this.ingredient = ingredient;
-        this.byproduct = byproduct;
         this.experience = experience;
         this.alkahestUsage = alkahestUsage;
         this.processingTime = processingTime;
     }
 
-    //todo i need the byproduct to be randomized too...
-
-    public static AlkahestPurificationRecipeBuilder recipe(Ingredient ingredient, RecipeCategory category, SimpleWeightedRandomList<ItemStack> results, ItemStack byproduct, float experience, int alkahestUsage, int processingTime) {
-        return new AlkahestPurificationRecipeBuilder(category, determineRecipeCategory(new ItemStack(results.unwrap().getFirst().data().getItem())), results, ingredient, byproduct, experience, alkahestUsage, processingTime);
+    public static AlkahestPurificationRecipeBuilder recipe(Ingredient ingredient, RecipeCategory category, SimpleWeightedRandomList<ItemStack> results, SimpleWeightedRandomList<ItemStack> byproducts, float experience, int alkahestUsage, int processingTime) {
+        return new AlkahestPurificationRecipeBuilder(category, determineRecipeCategory(new ItemStack(results.unwrap().getFirst().data().getItem())), results, byproducts, ingredient, experience, alkahestUsage, processingTime);
     }
 
     @Override
@@ -78,7 +74,7 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
         this.ensureValid(id);
         Advancement.Builder builder = output.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(builder::addCriterion);
-        AlkahestPurificationRecipe recipe = new AlkahestPurificationRecipe(Objects.requireNonNullElse(this.group, ""), this.bookCategory, this.ingredient, this.results, this.byproduct, this.experience, this.alkahestUsage, this.processingTime);
+        AlkahestPurificationRecipe recipe = new AlkahestPurificationRecipe(Objects.requireNonNullElse(this.group, ""), this.bookCategory, this.ingredient, this.results, this.byproducts, this.experience, this.alkahestUsage, this.processingTime);
         output.accept(id, recipe, builder.build(id.location().withPrefix("recipes/" + this.category.getFolderName() + "/")));
     }
 

@@ -5,6 +5,8 @@ import com.aetherteam.aetherii.mixin.mixins.common.accessor.RecipeManagerAccesso
 import com.aetherteam.aetherii.recipe.recipes.block.AmbrosiumRecipe;
 import com.aetherteam.aetherii.recipe.recipes.block.IrradiationRecipe;
 import com.aetherteam.aetherii.recipe.recipes.block.SwetGelRecipe;
+import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
+import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
 import com.aetherteam.nitrogen.recipe.BlockPropertyPair;
 import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
 import com.google.common.collect.ImmutableMap;
@@ -21,8 +23,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class AetherIIRecipePropertySets {
-    public static final ResourceKey<RecipePropertySet> ALTAR_INPUT = register("altar_input"); //todo whats this even for
-    public static final ResourceKey<RecipePropertySet> ALKAHEST_PURIFIER_INPUT = register("alkahest_purifier_input"); //todo whats this even for
+    public static final ResourceKey<RecipePropertySet> ALTAR_INPUT = register("altar_input");
+    public static final ResourceKey<RecipePropertySet> ALKAHEST_PURIFIER_INPUT = register("alkahest_purifier_input");
     public static final ResourceKey<RecipePropertySet> AMBROSIUM_ENCHANTING_STATES = register("ambrosium_enchanting_states");
     public static final ResourceKey<RecipePropertySet> SWET_GEL_CONVERSION_STATES = register("swet_gel_conversion_states");
     public static final ResourceKey<RecipePropertySet> DUST_IRRADIATION_STATES = register("dust_irradiation_states");
@@ -33,6 +35,8 @@ public class AetherIIRecipePropertySets {
 
     public static void addToMap() {
         ImmutableMap.Builder<ResourceKey<RecipePropertySet>, RecipeManager.IngredientExtractor> propertySets = ImmutableMap.<ResourceKey<RecipePropertySet>, RecipeManager.IngredientExtractor>builder()
+                .put(AetherIIRecipePropertySets.ALTAR_INPUT, (recipe) -> recipe instanceof AltarEnchantingRecipe altarEnchantingRecipe ? Optional.of(altarEnchantingRecipe.input()) : Optional.empty())
+                .put(AetherIIRecipePropertySets.ALKAHEST_PURIFIER_INPUT, (recipe) -> recipe instanceof AlkahestPurificationRecipe alkahestPurificationRecipe ? Optional.of(alkahestPurificationRecipe.ingredient()) : Optional.empty())
                 .put(AetherIIRecipePropertySets.AMBROSIUM_ENCHANTING_STATES, (recipe) -> recipe instanceof AmbrosiumRecipe blockStateRecipe ? Optional.of(fromBlockStateIngredient(blockStateRecipe.getIngredient())) : Optional.empty())
                 .put(AetherIIRecipePropertySets.SWET_GEL_CONVERSION_STATES, (recipe) -> recipe instanceof SwetGelRecipe blockStateRecipe ? Optional.of(fromBlockStateIngredient(blockStateRecipe.getIngredient())) : Optional.empty())
                 .put(AetherIIRecipePropertySets.DUST_IRRADIATION_STATES, (recipe) -> recipe instanceof IrradiationRecipe blockStateRecipe ? Optional.of(fromBlockStateIngredient(blockStateRecipe.getIngredient())) : Optional.empty())

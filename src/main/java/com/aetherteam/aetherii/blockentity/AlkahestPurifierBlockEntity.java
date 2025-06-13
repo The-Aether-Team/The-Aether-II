@@ -179,8 +179,6 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
     public static void serverTick(ServerLevel level, BlockPos pos, BlockState state, AlkahestPurifierBlockEntity blockEntity) {
         boolean changed = false;
 
-        RecipeHolder<AlkahestPurificationRecipe> recipeHolder = blockEntity.quickCheck.getRecipeFor(new SingleRecipeInputWithRandom(blockEntity.getItem(0), level.getRandom()), level).orElse(null);
-
         int levels = blockEntity.alkahestLevels;
         if (levels < MAX_LEVELS) {
             for (int i = 1; i < 5; i++) {
@@ -192,6 +190,9 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
                 }
             }
         }
+
+        RecipeHolder<AlkahestPurificationRecipe> recipeHolder = blockEntity.quickCheck.getRecipeFor(new SingleRecipeInputWithRandom(blockEntity.getItem(0), level.getRandom()), level).orElse(null);
+
 
 
 
