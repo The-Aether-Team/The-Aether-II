@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.data.resources.builders.worldgen.highlands.Highla
 import com.aetherteam.aetherii.world.feature.modifier.filter.ElevationFilter;
 import com.aetherteam.aetherii.world.feature.modifier.filter.ImprovedLayerPlacementModifier;
 import com.aetherteam.aetherii.world.feature.modifier.filter.LakePlacementModifier;
+import com.aetherteam.aetherii.world.feature.modifier.filter.StructureBlacklistFilter;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.MossyPredicate;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.ScanPredicate;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.SearchPredicate;
@@ -172,6 +173,16 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> CRATER = createKey("crater");
 
     public static final ResourceKey<PlacedFeature> CLOUDBED = createKey("cloudbed");
+
+
+    // Dungeon
+    public static final ResourceKey<PlacedFeature> LARGE_SHELF_ROTSHROOM = createKey("large_shelf_rotshroom");
+    public static final ResourceKey<PlacedFeature> LARGE_SHELF_ROTSHROOM_UNDERGROUND = createKey("large_shelf_rotshroom_underground");
+    public static final ResourceKey<PlacedFeature> ROTSHROOM_PATCH = createKey("rotshroom_patch");
+    public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_DUNGEON = createKey("coarse_aether_dirt_dungeon");
+    public static final ResourceKey<PlacedFeature> INFECTED_PATCH = createKey("infected_patch");
+    public static final ResourceKey<PlacedFeature> UNDERGROWTH_PATCH = createKey("undergrowth_patch");
+    public static final ResourceKey<PlacedFeature> ROTTEN_UNDERGROWTH_PATCH = createKey("rotten_undergrowth_patch");
 
 
     // Air
@@ -645,6 +656,7 @@ public class HighlandsPlacedFeatures {
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().east(3), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().south(3), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().west(3), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
+                new StructureBlacklistFilter(AetherIITags.Structures.ACID_POOL_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
 
@@ -829,6 +841,14 @@ public class HighlandsPlacedFeatures {
         );
 
         register(context, CLOUDBED, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.CLOUDBED), BiomeFilter.biome());
+
+        register(context, LARGE_SHELF_ROTSHROOM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.LARGE_SHELF_ROTSHROOM));
+        register(context, LARGE_SHELF_ROTSHROOM_UNDERGROUND, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.LARGE_SHELF_ROTSHROOM_UNDERGROUND));
+        register(context, ROTSHROOM_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ROTSHROOM_PATCH));
+        register(context, COARSE_AETHER_DIRT_DUNGEON, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COARSE_AETHER_DIRT_DUNGEON));
+        register(context, INFECTED_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.INFECTED_PATCH));
+        register(context, UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.UNDERGROWTH_PATCH));
+        register(context, ROTTEN_UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ROTTEN_UNDERGROWTH_PATCH));
     }
 
     public static void bootstrapAir(BootstrapContext<PlacedFeature> context) {

@@ -133,6 +133,10 @@
       }
     },
     {
+      "type": "aether_ii:structure_blacklist_filter",
+      "tag": "aether_ii:acid_pool_blacklist_filter"
+    },
+    {
       "type": "minecraft:biome"
     }
   ]
