@@ -403,8 +403,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_BOOTS.get(),
                 AetherIIItems.ARKENIUM_GLOVES.get(),
                 AetherIIItems.ARKENIUM_CANISTER.get(),
-                AetherIIItems.ARKENIUM_ACID_CANISTER.get(),
-                AetherIIItems.ARKENIUM_GAS_CANISTER.get(),
+                AetherIIItems.ARKENIUM_ALKAHEST_CANISTER.get(),
+                AetherIIItems.ARKENIUM_HESTVEIL_CANISTER.get(),
                 AetherIIItems.ARKENIUM_PLATES.get());
 
         // Vanilla

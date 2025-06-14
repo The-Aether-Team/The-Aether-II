@@ -29,7 +29,7 @@
     [
       "aether_ii:water_pond",
       "aether_ii:water_pond_underground",
-      "aether_ii:acid_pool"
+      "aether_ii:alkahest_pool_rare"
     ],
     [
       "aether_ii:skyroot_twigs",
@@ -53,8 +53,8 @@
       "aether_ii:ore_glint",
       "aether_ii:disk_bryalinn_moss",
       "aether_ii:lake_disk_bryalinn_moss",
-      "aether_ii:ore_gas_open",
-      "aether_ii:ore_gas_buried",
+      "aether_ii:ore_hestveil_open",
+      "aether_ii:ore_hestveil_buried",
       "aether_ii:unstable_holystone",
       "aether_ii:unstable_undershale"
     ],

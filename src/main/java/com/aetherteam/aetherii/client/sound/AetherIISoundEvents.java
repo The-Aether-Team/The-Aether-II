@@ -43,10 +43,10 @@ public class AetherIISoundEvents {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_FILL = register("item.arkenium_canister.fill");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_EMPTY = register("item.arkenium_canister.empty");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_FILL_ACID = register("item.arkenium_canister.fill_acid");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_EMPTY_ACID = register("item.arkenium_canister.empty_acid");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_FILL_GAS = register("item.arkenium_canister.fill_gas");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_EMPTY_GAS = register("item.arkenium_canister.empty_gas");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_FILL_ALKAHEST = register("item.arkenium_canister.fill_alkahest");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_EMPTY_ALKAHEST = register("item.arkenium_canister.empty_alkahest");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_FILL_HESTVEIL = register("item.arkenium_canister.fill_hestveil");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_EMPTY_HESTVEIL = register("item.arkenium_canister.empty_hestveil");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_MUSIC_DISC_AETHER_TUNE = register("item.music_disc.aether_tune");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_MUSIC_DISC_ASCENDING_DAWN = register("item.music_disc.ascending_dawn");

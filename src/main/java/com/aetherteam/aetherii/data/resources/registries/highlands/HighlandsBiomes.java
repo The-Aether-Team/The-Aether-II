@@ -37,6 +37,9 @@ public class HighlandsBiomes {
     // Aercloud Sea
     public static final ResourceKey<Biome> EXPANSE = createKey("expanse");
 
+    // Caves
+    public static final ResourceKey<Biome> HESTVEIL_CAVERNS = createKey("hestveil_caverns");
+
     private static ResourceKey<Biome> createKey(String name) {
         return ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
@@ -64,5 +67,7 @@ public class HighlandsBiomes {
         context.register(BATTLEGROUND_WASTES, HighlandsBiomeBuilders.battlegroundWastesBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
 
         context.register(EXPANSE, HighlandsBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
+
+        context.register(HESTVEIL_CAVERNS, HighlandsBiomeBuilders.makeHeastveilCavernsBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
     }
 }

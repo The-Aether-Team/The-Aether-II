@@ -203,8 +203,8 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
 
         // Arkenium Canisters
         this.generateFlatItem(AetherIIItems.ARKENIUM_CANISTER.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.ARKENIUM_ACID_CANISTER.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.ARKENIUM_GAS_CANISTER.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.ARKENIUM_HESTVEIL_CANISTER.get(), ModelTemplates.FLAT_ITEM);
 
         // Music Discs
         this.generateFlatItem(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get(), ModelTemplates.MUSIC_DISC);

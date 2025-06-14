@@ -14,22 +14,22 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record AcidFizzPacket(BlockPos pos, Direction face) implements CustomPacketPayload {
-    public static final Type<AcidFizzPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "acid_fizz"));
+public record AlkahestFizzPacket(BlockPos pos, Direction face) implements CustomPacketPayload {
+    public static final Type<AlkahestFizzPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_fizz"));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, AcidFizzPacket> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, AlkahestFizzPacket> STREAM_CODEC = StreamCodec.composite(
             BlockPos.STREAM_CODEC,
-            AcidFizzPacket::pos,
+            AlkahestFizzPacket::pos,
             Direction.STREAM_CODEC,
-            AcidFizzPacket::face,
-            AcidFizzPacket::new);
+            AlkahestFizzPacket::face,
+            AlkahestFizzPacket::new);
 
     @Override
-    public Type<AcidFizzPacket> type() {
+    public Type<AlkahestFizzPacket> type() {
         return TYPE;
     }
 
-    public static void execute(AcidFizzPacket payload, IPayloadContext context) {
+    public static void execute(AlkahestFizzPacket payload, IPayloadContext context) {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             ParticleUtils.spawnParticlesOnBlockFace(context.player().level(), payload.pos().offset(payload.face().getOpposite().getUnitVec3i()), ParticleTypes.WHITE_SMOKE, UniformInt.of(10, 20), payload.face(), () -> Vec3.ZERO, 0.5);
         }

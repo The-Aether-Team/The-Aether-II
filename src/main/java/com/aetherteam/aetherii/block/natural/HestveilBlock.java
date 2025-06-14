@@ -1,13 +1,5 @@
 package com.aetherteam.aetherii.block.natural;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
-import java.util.function.BiConsumer;
-
-import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3i;
-
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
@@ -15,7 +7,6 @@ import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.network.packet.clientbound.GasExplosionEffectsPacket;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -39,18 +30,25 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3i;
 
-public class GasBlock extends Block implements CanisterPickup {
+import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.function.BiConsumer;
+
+public class HestveilBlock extends Block implements CanisterPickup {
     public static final int MAX_HORIZONTAL_DISTANCE = 2;
     public static final int MAX_VERTICAL_DISTANCE = 3;
-    public static final IntegerProperty HORIZONTAL_DISTANCE = IntegerProperty.create("gas_horizontal_distance", 0, MAX_HORIZONTAL_DISTANCE);
-    public static final IntegerProperty VERTICAL_DISTANCE = IntegerProperty.create("gas_vertical_distance", 0, MAX_VERTICAL_DISTANCE);
+    public static final IntegerProperty HORIZONTAL_DISTANCE = IntegerProperty.create("hestveil_horizontal_distance", 0, MAX_HORIZONTAL_DISTANCE);
+    public static final IntegerProperty VERTICAL_DISTANCE = IntegerProperty.create("hestveil_vertical_distance", 0, MAX_VERTICAL_DISTANCE);
 
     public static final List<BlockPos> PLACEMENT_OFFSETS = BlockPos.betweenClosedStream(-1, 0, -1, 1, 1, 1).map(BlockPos::immutable).filter((e) -> Vector3i.length(e.getX(), e.getY(), e.getZ()) != 0).toList();
     public static final List<BlockPos> AROUND_OFFSETS = BlockPos.betweenClosedStream(-1, -1, -1, 1, 1, 1).map(BlockPos::immutable).filter((e) -> Vector3i.length(e.getX(), e.getY(), e.getZ()) != 0).toList();
     public static final List<BlockPos> INDIRECT_NEIGHBOR_OFFSETS = BlockPos.betweenClosedStream(-1, -1, -1, 1, 1, 1).map(BlockPos::immutable).filter((e) -> Vector3i.length(e.getX(), e.getY(), e.getZ()) > 1).toList();
 
-    public GasBlock(Properties properties) {
+    public HestveilBlock(Properties properties) {
         super(properties);
     }
 
@@ -70,7 +68,7 @@ public class GasBlock extends Block implements CanisterPickup {
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (random.nextInt(200) == 0) {
-            level.addParticle(AetherIIParticleTypes.GAS.get(), pos.getX() + random.nextDouble(), pos.getY() + random.nextDouble(), pos.getZ() + random.nextDouble(), 0, 0, 0);
+            level.addParticle(AetherIIParticleTypes.HESTVEIL.get(), pos.getX() + random.nextDouble(), pos.getY() + random.nextDouble(), pos.getZ() + random.nextDouble(), 0, 0, 0);
         }
     }
 
@@ -142,7 +140,7 @@ public class GasBlock extends Block implements CanisterPickup {
             }
             for (Direction direction : Direction.values()) {
                 BlockPos offsetPos = pos.relative(direction);
-                if (level.getBlockState(offsetPos).getBlock() instanceof GasBlock gasBlock) {
+                if (level.getBlockState(offsetPos).getBlock() instanceof HestveilBlock gasBlock) {
                     gasBlock.explode(level, offsetPos, level.getRandom().nextInt(20) == 0);
                 } else if (this.shouldExplode(level.getBlockState(offsetPos))) {
                     level.destroyBlock(offsetPos, true);
@@ -195,7 +193,7 @@ public class GasBlock extends Block implements CanisterPickup {
     }
 
     public static OptionalInt getOptionalDistanceAt(BlockState state, IntegerProperty property) {
-        if (state.is(AetherIIBlocks.ACID)) {
+        if (state.is(AetherIIBlocks.ALKAHEST)) {
             return OptionalInt.of(0);
         } else {
             return state.hasProperty(property) ? OptionalInt.of(state.getValue(property)) : OptionalInt.empty();
@@ -204,7 +202,7 @@ public class GasBlock extends Block implements CanisterPickup {
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return (context.isHoldingItem(AetherIIItems.ARKENIUM_CANISTER.get()) || context.isHoldingItem(AetherIIItems.ARKENIUM_GAS_CANISTER.get())) ? Shapes.block() : Shapes.empty();
+        return (context.isHoldingItem(AetherIIItems.ARKENIUM_CANISTER.get()) || context.isHoldingItem(AetherIIItems.ARKENIUM_HESTVEIL_CANISTER.get())) ? Shapes.block() : Shapes.empty();
     }
 
     @Override
@@ -238,7 +236,7 @@ public class GasBlock extends Block implements CanisterPickup {
         if (!levelAccessor.isClientSide()) {
             levelAccessor.levelEvent(2001, blockPos, Block.getId(blockState));
         }
-        return new ItemStack(AetherIIItems.ARKENIUM_GAS_CANISTER.get());
+        return new ItemStack(AetherIIItems.ARKENIUM_HESTVEIL_CANISTER.get());
     }
 
     @Override

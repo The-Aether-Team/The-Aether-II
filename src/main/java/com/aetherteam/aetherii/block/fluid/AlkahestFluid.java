@@ -3,16 +3,16 @@ package com.aetherteam.aetherii.block.fluid;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluids;
-import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.LevelRendererAccessor;
-import com.aetherteam.aetherii.network.packet.clientbound.AcidDamageBlockPacket;
-import com.aetherteam.aetherii.network.packet.clientbound.AcidFizzPacket;
-import com.aetherteam.aetherii.network.packet.serverbound.AcidBreakBlockPacket;
+import com.aetherteam.aetherii.network.packet.clientbound.AlkahestDamageBlockPacket;
+import com.aetherteam.aetherii.network.packet.clientbound.AlkahestFizzPacket;
+import com.aetherteam.aetherii.network.packet.serverbound.AlkahestBreakBlockPacket;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.block.AcidCorrosionRecipe;
@@ -62,8 +62,8 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFluid {
-    public AcidFluid(Properties properties) {
+public abstract class AlkahestFluid extends BaseFlowingFluid implements CanisterFluid {
+    public AlkahestFluid(Properties properties) {
         super(properties);
     }
 
@@ -105,7 +105,7 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
                     BlockState newState = recipe.value().getResultState(offsetState);
                     if (recipe.value().matches(null, level, offsetPos, null, offsetState, newState, AetherIIRecipeTypes.ACID_CORROSION.get())) {
                         if (recipe.value().convert(level, offsetPos, newState, recipe.value().getFunction())) {
-                            PacketDistributor.sendToPlayersInDimension(level, new AcidFizzPacket(pos, direction.getOpposite()));
+                            PacketDistributor.sendToPlayersInDimension(level, new AlkahestFizzPacket(pos, direction.getOpposite()));
                         }
                     }
                 }
@@ -127,7 +127,7 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
                     destroySpeed = 1;
                 }
                 if (destroySpeed != 0) {
-                    PacketDistributor.sendToPlayersInDimension((ServerLevel) level, new AcidDamageBlockPacket(belowPos, destroySpeed, false));
+                    PacketDistributor.sendToPlayersInDimension((ServerLevel) level, new AlkahestDamageBlockPacket(belowPos, destroySpeed, false));
                     level.scheduleTick(pos, this, this.getTickDelay(level) + 10);
                 }
             }
@@ -142,7 +142,7 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
             int destroyProgress = progress.getProgress();
             level.destroyBlockProgress(belowPos.hashCode(), belowPos, destroyProgress + speed);
             if (destroyProgress >= 9) {
-                PacketDistributor.sendToServer(new AcidBreakBlockPacket(belowPos, drop));
+                PacketDistributor.sendToServer(new AlkahestBreakBlockPacket(belowPos, drop));
             }
         } else {
             level.destroyBlockProgress(belowPos.hashCode(), belowPos,  speed);
@@ -157,7 +157,7 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
 
     @Override
     public void animateTick(Level level, BlockPos pos, FluidState fluidState, RandomSource random) {
-        level.addParticle(AetherIIParticleTypes.ACID.get(), (double) pos.getX() + random.nextDouble(), (double) pos.getY() + random.nextDouble(), (double) pos.getZ() + random.nextDouble(), 0.0, 0.15, 0.0);
+        level.addParticle(AetherIIParticleTypes.ALKAHEST.get(), (double) pos.getX() + random.nextDouble(), (double) pos.getY() + random.nextDouble(), (double) pos.getZ() + random.nextDouble(), 0.0, 0.15, 0.0);
         if (random.nextInt(50) == 0) {
             BlockPos belowPos = pos.below();
             BlockState belowState = level.getBlockState(belowPos);
@@ -170,7 +170,7 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
     public void createGas(Level level, BlockPos pos) {
         BlockPos above = pos.above();
         if (level.getBlockState(above).isEmpty()) {
-            level.setBlock(above, AetherIIBlocks.GAS.get().defaultBlockState(), 3);
+            level.setBlock(above, AetherIIBlocks.HESTVEIL.get().defaultBlockState(), 3);
         }
     }
 
@@ -248,22 +248,22 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
 
     @Override
     public BlockState createLegacyBlock(FluidState fluidState) {
-        return AetherIIBlocks.ACID.get().defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(fluidState));
+        return AetherIIBlocks.ALKAHEST.get().defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(fluidState));
     }
 
     @Override
     public boolean isSame(Fluid fluid) {
-        return fluid == AetherIIFluids.ACID.get() || fluid == AetherIIFluids.FLOWING_ACID.get();
+        return fluid == AetherIIFluids.ALKAHEST.get() || fluid == AetherIIFluids.FLOWING_ALKAHEST.get();
     }
 
     @Override
     public Fluid getFlowing() {
-        return AetherIIFluids.FLOWING_ACID.get();
+        return AetherIIFluids.FLOWING_ALKAHEST.get();
     }
 
     @Override
     public Fluid getSource() {
-        return AetherIIFluids.ACID.get();
+        return AetherIIFluids.ALKAHEST.get();
     }
 
     @Override
@@ -273,18 +273,18 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
 
     @Override
     public Item getCanister() {
-        return AetherIIItems.ARKENIUM_ACID_CANISTER.get();
+        return AetherIIItems.ARKENIUM_ALKAHEST_CANISTER.get();
     }
 
     @Nullable
     @Override
     public ParticleOptions getDripParticle() {
-        return AetherIIParticleTypes.DRIPPING_ACID.get();
+        return AetherIIParticleTypes.DRIPPING_ALKAHEST.get();
     }
 
     @Override
     public Optional<SoundEvent> getPickupSound() {
-        return Optional.of(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_FILL_ACID.get());
+        return Optional.of(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_FILL_ALKAHEST.get());
     }
 
     @Override
@@ -317,7 +317,7 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
         return true;
     }
 
-    public static class Source extends AcidFluid {
+    public static class Source extends AlkahestFluid {
         public Source(Properties properties) {
             super(properties);
         }
@@ -331,7 +331,7 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
         }
     }
 
-    public static class Flowing extends AcidFluid {
+    public static class Flowing extends AlkahestFluid {
         public Flowing(Properties properties) {
             super(properties);
         }

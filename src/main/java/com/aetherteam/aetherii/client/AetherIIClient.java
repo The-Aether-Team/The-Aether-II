@@ -43,8 +43,8 @@ public class AetherIIClient {
             AetherIIAtlases.registerSkyrootChestAtlases();
             registerTooltipOverrides();
 
-            ItemBlockRenderTypes.setRenderLayer(AetherIIFluids.FLOWING_ACID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(AetherIIFluids.ACID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(AetherIIFluids.FLOWING_ALKAHEST.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(AetherIIFluids.ALKAHEST.get(), RenderType.translucent());
         });
 
         AetherIIRenderers.registerAccessoryRenderers();
