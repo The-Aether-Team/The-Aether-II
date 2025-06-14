@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.client.particle;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIFluids;
-import com.aetherteam.aetherii.block.fluid.AcidFluid;
+import com.aetherteam.aetherii.block.fluid.AlkahestFluid;
 import com.aetherteam.aetherii.client.AetherIIClient;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.BlockPos;
@@ -50,31 +50,31 @@ public class AetherIIParticleFactories {
             return splashParticle;
         });
         event.registerSpriteSet(AetherIIParticleTypes.AMBROSIUM.get(), AmbrosiumParticle.Provider::new);
-        event.registerSpriteSet(AetherIIParticleTypes.ACID.get(), AcidParticle.Provider::new);
-        event.registerSpriteSet(AetherIIParticleTypes.GAS.get(), GasParticle.Provider::new);
-        event.registerSprite(AetherIIParticleTypes.DRIPPING_ACID.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
-            DripParticle particle = new DripParticle.DripHangParticle(level, x, y, z, AetherIIFluids.ACID.get(), AetherIIParticleTypes.FALLING_ACID.get());
+        event.registerSpriteSet(AetherIIParticleTypes.ALKAHEST.get(), AcidParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.HESTVEIL.get(), GasParticle.Provider::new);
+        event.registerSprite(AetherIIParticleTypes.DRIPPING_ALKAHEST.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
+            DripParticle particle = new DripParticle.DripHangParticle(level, x, y, z, AetherIIFluids.ALKAHEST.get(), AetherIIParticleTypes.FALLING_ALKAHEST.get());
             particle.setColor(0.65F, 0.9F, 0.6F);
             return particle;
         });
-        event.registerSprite(AetherIIParticleTypes.FALLING_ACID.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
-            DripParticle particle = new DripParticle.FallAndLandParticle(level, x, y, z, AetherIIFluids.ACID.get(), ParticleTypes.WHITE_SMOKE);
+        event.registerSprite(AetherIIParticleTypes.FALLING_ALKAHEST.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
+            DripParticle particle = new DripParticle.FallAndLandParticle(level, x, y, z, AetherIIFluids.ALKAHEST.get(), ParticleTypes.WHITE_SMOKE);
             particle.setColor(0.65F, 0.9F, 0.6F);
             return particle;
         });
-        event.registerSprite(AetherIIParticleTypes.DRIPPING_DRIPSTONE_ACID.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
-            DripParticle particle = new DripParticle.DripHangParticle(level, x, y, z, AetherIIFluids.ACID.get(), AetherIIParticleTypes.FALLING_DRIPSTONE_ACID.get());
+        event.registerSprite(AetherIIParticleTypes.DRIPPING_DRIPSTONE_ALKAHEST.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
+            DripParticle particle = new DripParticle.DripHangParticle(level, x, y, z, AetherIIFluids.ALKAHEST.get(), AetherIIParticleTypes.FALLING_DRIPSTONE_ALKAHEST.get());
             particle.setColor(0.65F, 0.9F, 0.6F);
             return particle;
         });
-        event.registerSprite(AetherIIParticleTypes.FALLING_DRIPSTONE_ACID.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
-            DripParticle particle = new DripParticle.DripstoneFallAndLandParticle(level, x, y, z, AetherIIFluids.ACID.get(), ParticleTypes.WHITE_SMOKE) {
+        event.registerSprite(AetherIIParticleTypes.FALLING_DRIPSTONE_ALKAHEST.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
+            DripParticle particle = new DripParticle.DripstoneFallAndLandParticle(level, x, y, z, AetherIIFluids.ALKAHEST.get(), ParticleTypes.WHITE_SMOKE) {
                 @Override
                 protected void postMoveUpdate() {
                     if (this.onGround) {
                         BlockPos pos = BlockPos.containing(this.getPos()).below();
                         if (this.level.getBlockState(pos).isSolid() && !this.level.getBlockState(pos).is(AetherIITags.Blocks.ACID_RESISTANT)) {
-                            AcidFluid.progressivelyDestroyBlock(this.level, pos, 3, true);
+                            AlkahestFluid.progressivelyDestroyBlock(this.level, pos, 3, true);
                         }
                     }
                     super.postMoveUpdate();

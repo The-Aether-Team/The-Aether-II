@@ -172,12 +172,12 @@
   ],
   "render_type": "minecraft:translucent",
   "textures": {
-    "down": "aether_ii:block/gas",
-    "east": "aether_ii:block/gas",
-    "north": "aether_ii:block/gas",
-    "particle": "aether_ii:block/gas",
-    "south": "aether_ii:block/gas",
-    "up": "aether_ii:block/gas",
-    "west": "aether_ii:block/gas"
+    "down": "aether_ii:block/hestveil",
+    "east": "aether_ii:block/hestveil",
+    "north": "aether_ii:block/hestveil",
+    "particle": "aether_ii:block/hestveil",
+    "south": "aether_ii:block/hestveil",
+    "up": "aether_ii:block/hestveil",
+    "west": "aether_ii:block/hestveil"
   }
 }

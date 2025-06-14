@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.block.natural;
 
-import com.aetherteam.aetherii.block.fluid.AcidFluid;
+import com.aetherteam.aetherii.block.fluid.AlkahestFluid;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -8,8 +8,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 
-public class AcidLiquidBlock extends VolatileLiquidBlock {
-    public AcidLiquidBlock(FlowingFluid fluid, Properties properties) {
+public class AlkahestLiquidBlock extends VolatileLiquidBlock {
+    public AlkahestLiquidBlock(FlowingFluid fluid, Properties properties) {
         super(fluid, properties);
     }
 
@@ -20,7 +20,7 @@ public class AcidLiquidBlock extends VolatileLiquidBlock {
 
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (this.fluid instanceof AcidFluid acidFluid && level instanceof ServerLevel serverLevel) {
+        if (this.fluid instanceof AlkahestFluid acidFluid && level instanceof ServerLevel serverLevel) {
             acidFluid.entityInside(state, serverLevel, pos, entity);
         }
         super.entityInside(state, level, pos, entity);

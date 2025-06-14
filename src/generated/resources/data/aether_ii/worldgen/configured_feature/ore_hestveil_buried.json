@@ -6,10 +6,10 @@
     "targets": [
       {
         "state": {
-          "Name": "aether_ii:gas",
+          "Name": "aether_ii:hestveil",
           "Properties": {
-            "gas_horizontal_distance": "0",
-            "gas_vertical_distance": "0"
+            "hestveil_horizontal_distance": "0",
+            "hestveil_vertical_distance": "0"
           }
         },
         "target": {

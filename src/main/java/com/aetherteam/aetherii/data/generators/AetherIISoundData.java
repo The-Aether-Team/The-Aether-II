@@ -216,28 +216,28 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:item/bucket/empty3")
                 ).subtitle("subtitles.aether_ii.item.arkenium_canister.empty")
         );
-        this.add(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_FILL_ACID,
+        this.add(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_FILL_ALKAHEST,
                 definition().with(
                         sound("minecraft:item/bucket/fill1"),
                         sound("minecraft:item/bucket/fill2"),
                         sound("minecraft:item/bucket/fill3")
                 ).subtitle("subtitles.aether_ii.item.arkenium_canister.fill")
         );
-        this.add(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_EMPTY_ACID,
+        this.add(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_EMPTY_ALKAHEST,
                 definition().with(
                         sound("minecraft:item/bucket/empty1").pitch(0.9F),
                         sound("minecraft:item/bucket/empty2"),
                         sound("minecraft:item/bucket/empty3")
                 ).subtitle("subtitles.aether_ii.item.arkenium_canister.empty")
         );
-        this.add(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_FILL_GAS,
+        this.add(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_FILL_HESTVEIL,
                 definition().with(
                         sound("minecraft:item/bucket/fill1"),
                         sound("minecraft:item/bucket/fill2"),
                         sound("minecraft:item/bucket/fill3")
                 ).subtitle("subtitles.aether_ii.item.arkenium_canister.fill")
         );
-        this.add(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_EMPTY_GAS,
+        this.add(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_EMPTY_HESTVEIL,
                 definition().with(
                         sound("minecraft:item/bucket/empty1").pitch(0.9F),
                         sound("minecraft:item/bucket/empty2"),

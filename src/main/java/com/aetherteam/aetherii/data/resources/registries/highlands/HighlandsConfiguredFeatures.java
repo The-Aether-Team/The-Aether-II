@@ -202,6 +202,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICE = createKey("ice");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_CRYSTALS = createKey("ice_crystals");
     public static final ResourceKey<ConfiguredFeature<?, ?>> POINTED_HOLYSTONE = createKey("pointed_holystone");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> POINTED_ICHORITE = createKey("pointed_ichorite");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_BLOCKS = createKey("grass_blocks");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ENCHANTED_GRASS_BLOCKS = createKey("enchanted_grass_blocks");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_AND_DIRT_FLOOR = createKey("grass_and_dirt_floor");
@@ -225,7 +226,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNSTABLE_HOLYSTONE = createKey("unstable_holystone");
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNSTABLE_UNDERSHALE = createKey("unstable_undershale");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ACID_POOL = createKey("acid_pool");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ALKAHEST_POOL = createKey("alkahest_pool");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SCATTERGLASS = createKey("ore_scatterglass");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ICESTONE = createKey("ore_icestone");
@@ -242,8 +243,8 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GRAVITITE = createKey("ore_gravitite");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_CORROBONITE = createKey("ore_corrobonite");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GAS_OPEN = createKey("ore_gas_open");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GAS_BURIED = createKey("ore_gas_buried");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_HESTVEIL_OPEN = createKey("ore_hestveil_open");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_HESTVEIL_BURIED = createKey("ore_hestveil_buried");
     
     
     // Worldgen
@@ -1336,27 +1337,35 @@ public class HighlandsConfiguredFeatures {
                         ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
-        register(
-                context,
-                POINTED_HOLYSTONE,
-                Feature.SIMPLE_RANDOM_SELECTOR,
-                new SimpleRandomFeatureConfiguration(
-                        HolderSet.direct(
-                                PlacementUtils.inlinePlaced(
-                                        AetherIIFeatures.POINTED_STONE.get(),
-                                        new PointedStoneConfiguration(BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get()), BlockStateProvider.simple(AetherIIBlocks.POINTED_HOLYSTONE.get()), 0.2F, 0.7F, 0.5F, 0.5F),
-                                        EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12),
-                                        RandomOffsetPlacement.vertical(ConstantInt.of(1))
-                                ),
-                                PlacementUtils.inlinePlaced(
-                                        AetherIIFeatures.POINTED_STONE.get(),
-                                        new PointedStoneConfiguration(BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get()), BlockStateProvider.simple(AetherIIBlocks.POINTED_HOLYSTONE.get()), 0.2F, 0.7F, 0.5F, 0.5F),
-                                        EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12),
-                                        RandomOffsetPlacement.vertical(ConstantInt.of(-1))
-                                )
-                        )
-                )
-        );
+        register(context, POINTED_HOLYSTONE, Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(
+                HolderSet.direct(
+                        PlacementUtils.inlinePlaced(
+                                AetherIIFeatures.POINTED_STONE.get(),
+                                new PointedStoneConfiguration(BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get()), BlockStateProvider.simple(AetherIIBlocks.POINTED_HOLYSTONE.get()), 0.2F, 0.7F, 0.5F, 0.5F),
+                                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12),
+                                RandomOffsetPlacement.vertical(ConstantInt.of(1))
+                        ),
+                        PlacementUtils.inlinePlaced(
+                                AetherIIFeatures.POINTED_STONE.get(),
+                                new PointedStoneConfiguration(BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get()), BlockStateProvider.simple(AetherIIBlocks.POINTED_HOLYSTONE.get()), 0.2F, 0.7F, 0.5F, 0.5F),
+                                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12),
+                                RandomOffsetPlacement.vertical(ConstantInt.of(-1))
+                        ))));
+        register(context, POINTED_ICHORITE, Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(
+                HolderSet.direct(
+                        PlacementUtils.inlinePlaced(
+                                AetherIIFeatures.POINTED_STONE.get(),
+                                new PointedStoneConfiguration(BlockStateProvider.simple(AetherIIBlocks.ICHORITE.get()), BlockStateProvider.simple(AetherIIBlocks.POINTED_ICHORITE.get()), 0.2F, 0.7F, 0.5F, 0.5F),
+                                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12),
+                                RandomOffsetPlacement.vertical(ConstantInt.of(1))
+                        ),
+                        PlacementUtils.inlinePlaced(
+                                AetherIIFeatures.POINTED_STONE.get(),
+                                new PointedStoneConfiguration(BlockStateProvider.simple(AetherIIBlocks.ICHORITE.get()), BlockStateProvider.simple(AetherIIBlocks.POINTED_ICHORITE.get()), 0.2F, 0.7F, 0.5F, 0.5F),
+                                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12),
+                                RandomOffsetPlacement.vertical(ConstantInt.of(-1))
+                        ))));
+
         register(context,
                 GRASS_BLOCKS,
                 Feature.RANDOM_PATCH,
@@ -1668,17 +1677,7 @@ public class HighlandsConfiguredFeatures {
                 )
         );
 
-        register(context, ACID_POOL, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
-                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(AetherIIFeatures.ACID_POOL.get(), new AcidPoolConfiguration(UniformInt.of(1, 4), UniformInt.of(4, 6), UniformInt.of(-4, 2)),
-                        EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), BlockPredicate.ONLY_IN_AIR_PREDICATE, 16),
-                        BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.UP, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 8)),
-                        BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
-                        BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().north(6), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
-                        BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().east(6), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
-                        BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().south(6), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
-                        BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().west(6), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2))), 0.8F)),
-                PlacementUtils.inlinePlaced(Feature.ORE, new OreConfiguration(UNDERSHALE_TEST, AetherIIBlocks.ICHORITE.get().defaultBlockState(), 64), CountPlacement.of(4))
-        ));
+        register(context, ALKAHEST_POOL, AetherIIFeatures.ALKAHEST_POOL.get(), new AcidPoolConfiguration(UniformInt.of(1, 4), UniformInt.of(4, 6), UniformInt.of(-4, 2)));
 
         register(context, ORE_SCATTERGLASS, Feature.ORE, new OreConfiguration(UNDERGROUND_TEST, AetherIIBlocks.CRUDE_SCATTERGLASS.get().defaultBlockState(), 24));
         register(context, ORE_ICESTONE, Feature.ORE, new OreConfiguration(HOLYSTONE_TEST, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 32));
@@ -1695,8 +1694,8 @@ public class HighlandsConfiguredFeatures {
         register(context, ORE_GRAVITITE, Feature.ORE, new OreConfiguration(gravitite, 4));
         register(context, ORE_CORROBONITE, AetherIIFeatures.CORROBONITE_ORE.get(), new OreConfiguration(UNDERSHALE_TEST, AetherIIBlocks.CORROBONITE_ORE.get().defaultBlockState(), 4));
 
-        register(context, ORE_GAS_OPEN, AetherIIFeatures.GAS.get());
-        register(context, ORE_GAS_BURIED, Feature.ORE, new OreConfiguration(UNDERGROUND_TEST, AetherIIBlocks.GAS.get().defaultBlockState(), 16, 1.0F));
+        register(context, ORE_HESTVEIL_OPEN, AetherIIFeatures.HESTVEIL.get());
+        register(context, ORE_HESTVEIL_BURIED, Feature.ORE, new OreConfiguration(UNDERGROUND_TEST, AetherIIBlocks.HESTVEIL.get().defaultBlockState(), 16, 1.0F));
     }
 
     private static void bootstrapWorldgen(BootstrapContext<ConfiguredFeature<?, ?>> context) {

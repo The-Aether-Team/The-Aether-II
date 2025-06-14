@@ -21,6 +21,8 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> VEGETATION_RARITY_MAPPER = createKey("highlands/vegetation_rarity_mapper");
     public static final ResourceKey<DensityFunction> EROSION = createKey("highlands/erosion");
     public static final ResourceKey<DensityFunction> DEPTH = createKey("highlands/depth");
+    public static final ResourceKey<DensityFunction> CAVE_BIOMES = createKey("highlands/cave_biomes");
+    public static final ResourceKey<DensityFunction> CAVE_BIOMES_RARITY_MAPPER = createKey("highlands/cave_biomes_rarity_mapper");
     public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("highlands/amplification");
     public static final ResourceKey<DensityFunction> RIDGES = createKey("highlands/ridges");
     public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("highlands/base_3d_noise");
@@ -86,6 +88,15 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.rangeChoice(getFunction(function, VEGETATION_RARE), -1.5, 0.45, density, DensityFunctions.constant(2.0));
         density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -0.4, 0.3, density, vegetation);
         density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, 0.55, density, vegetation);
+        return density;
+    }
+
+    public static DensityFunction makeCaveBiomesRarityMapper(HolderGetter<DensityFunction> function) {
+        DensityFunction depth = getFunction(function, DEPTH);
+        DensityFunction density = depth;
+        density = DensityFunctions.rangeChoice(getFunction(function, CAVE_BIOMES), -1.5, 0.325, density, DensityFunctions.constant(-2.0));
+        density = DensityFunctions.rangeChoice(depth, -1.5, -0.35, density, depth);
+        density = DensityFunctions.rangeChoice(getFunction(function, RIDGES), -1.5, 0.2, density, depth);
         return density;
     }
 

@@ -109,25 +109,25 @@ public class AetherIIClientExtensions {
         }
     };
 
-    public static final IClientFluidTypeExtensions ACID_FLUID = new IClientFluidTypeExtensions() {
+    public static final IClientFluidTypeExtensions ALKAHEST_FLUID = new IClientFluidTypeExtensions() {
         @Override
         public ResourceLocation getStillTexture() {
-            return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "fluid/acid_still");
+            return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_still");
         }
 
         @Override
         public ResourceLocation getFlowingTexture() {
-            return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "fluid/acid_flow");
+            return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_flow");
         }
 
         @Override
         public ResourceLocation getOverlayTexture() {
-            return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "fluid/acid_overlay");
+            return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_overlay");
         }
 
         @Override
         public ResourceLocation getRenderOverlayTexture(Minecraft mc) {
-            return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/misc/acid.png");
+            return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/misc/alkahest.png");
         }
 
         @Override
@@ -154,6 +154,6 @@ public class AetherIIClientExtensions {
 
         event.registerBlock(UNSTABLE_BLOCK, AetherIIBlocks.UNSTABLE_HOLYSTONE.get(),AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
 
-        event.registerFluidType(ACID_FLUID, AetherIIFluidTypes.ACID_TYPE.get());
+        event.registerFluidType(ALKAHEST_FLUID, AetherIIFluidTypes.ALKAHEST_TYPE.get());
     }
 }
