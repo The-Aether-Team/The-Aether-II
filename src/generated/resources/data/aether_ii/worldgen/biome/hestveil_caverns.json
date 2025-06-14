@@ -1,7 +1,6 @@
 {
-  "carvers": "aether_ii:highlands_cave",
-  "creature_spawn_probability": 0.2,
-  "downfall": 0.4,
+  "carvers": "aether_ii:hestveil_cave",
+  "downfall": 0.5,
   "effects": {
     "fog_color": 15526908,
     "music": [
@@ -22,25 +21,17 @@
   },
   "features": [
     [
-      "aether_ii:coast_quicksoil",
-      "aether_ii:noise_lake",
       "aether_ii:cloudbed"
     ],
     [
-      "aether_ii:water_pond",
-      "aether_ii:water_pond_underground",
-      "aether_ii:alkahest_pool_rare"
+      "aether_ii:alkahest_pool"
     ],
-    [
-      "aether_ii:holystone_rocks"
-    ],
+    [],
     [],
     [],
     [],
     [
       "aether_ii:ore_scatterglass",
-      "aether_ii:ore_agiosite",
-      "aether_ii:ore_icestone_small",
       "aether_ii:ore_ambrosium",
       "aether_ii:ore_zanite",
       "aether_ii:ore_arkenium",
@@ -49,38 +40,16 @@
       "aether_ii:ore_holystone_quartz",
       "aether_ii:ore_corrobonite",
       "aether_ii:ore_glint",
-      "aether_ii:disk_bryalinn_moss",
-      "aether_ii:lake_disk_bryalinn_moss",
       "aether_ii:ore_hestveil_open",
       "aether_ii:ore_hestveil_buried",
       "aether_ii:unstable_holystone",
       "aether_ii:unstable_undershale"
     ],
     [
-      "aether_ii:pointed_holystone"
+      "aether_ii:pointed_ichorite"
     ],
-    [
-      "aether_ii:water_spring"
-    ],
-    [
-      "aether_ii:moa_nest",
-      "aether_ii:grass_field",
-      "aether_ii:valkyrie_sprout_patch",
-      "aether_ii:highlands_bush_patch_field",
-      "aether_ii:grass_and_dirt_floor",
-      "aether_ii:coarse_aether_dirt_floor",
-      "aether_ii:coarse_aether_dirt_ceiling",
-      "aether_ii:coarse_aether_dirt_overhang",
-      "aether_ii:exposed_bryalinn_moss_cover",
-      "aether_ii:highlands_flower_patch",
-      "aether_ii:highfields_flower_patch",
-      "aether_ii:blueberry_bush_patch",
-      "aether_ii:short_arilum",
-      "aether_ii:arilum",
-      "aether_ii:blooming_arilum",
-      "aether_ii:pond_arilum",
-      "aether_ii:flourishing_field_trees"
-    ],
+    [],
+    [],
     [
       "aether_ii:high_storm_aercloud",
       "aether_ii:high_green_aercloud",
@@ -98,16 +67,8 @@
       "aether_ii:lower_purple_aercloud"
     ]
   ],
-  "has_precipitation": true,
+  "has_precipitation": false,
   "spawn_costs": {
-    "aether_ii:aechor_plant": {
-      "charge": 0.4,
-      "energy_budget": 0.12
-    },
-    "aether_ii:carrion_sprout": {
-      "charge": 0.4,
-      "energy_budget": 0.12
-    },
     "aether_ii:tempest": {
       "charge": 0.6,
       "energy_budget": 0.16
@@ -134,66 +95,10 @@
         "weight": 1
       }
     ],
-    "aether_ii:aether_surface_monster": [
-      {
-        "type": "aether_ii:aechor_plant",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
-        "type": "aether_ii:carrion_sprout",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      }
-    ],
+    "aether_ii:aether_surface_monster": [],
     "ambient": [],
     "axolotls": [],
-    "creature": [
-      {
-        "type": "aether_ii:highfields_taegore",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 4
-      },
-      {
-        "type": "aether_ii:highfields_burrukai",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 4
-      },
-      {
-        "type": "aether_ii:highfields_kirrid",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 6
-      },
-      {
-        "type": "aether_ii:phyg",
-        "maxCount": 4,
-        "minCount": 2,
-        "weight": 6
-      },
-      {
-        "type": "aether_ii:flying_cow",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 6
-      },
-      {
-        "type": "aether_ii:sheepuff",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 8
-      },
-      {
-        "type": "aether_ii:aerbunny",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 10
-      }
-    ],
+    "creature": [],
     "misc": [],
     "monster": [
       {
@@ -201,12 +106,6 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 1
-      },
-      {
-        "type": "aether_ii:swet",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 2
       },
       {
         "type": "aether_ii:cockatrice",
@@ -231,5 +130,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.8
+  "temperature": 0.5
 }

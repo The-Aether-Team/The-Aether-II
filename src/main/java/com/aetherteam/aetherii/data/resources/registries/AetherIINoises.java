@@ -13,6 +13,7 @@ public class AetherIINoises {
     public static final ResourceKey<NormalNoise.NoiseParameters> VEGETATION_RARE = createKey("vegetation_rare");
     public static final ResourceKey<NormalNoise.NoiseParameters> CONTINENTALNESS = createKey("continentalness");
     public static final ResourceKey<NormalNoise.NoiseParameters> EROSION = createKey("erosion");
+    public static final ResourceKey<NormalNoise.NoiseParameters> CAVE_BIOMES = createKey("cave_biomes");
     public static final ResourceKey<NormalNoise.NoiseParameters> AMPLIFICATION = createKey("amplification");
     public static final ResourceKey<NormalNoise.NoiseParameters> RIDGES = createKey("ridges");
     public static final ResourceKey<NormalNoise.NoiseParameters> ELEVATION = createKey("elevation");
@@ -31,6 +32,7 @@ public class AetherIINoises {
         register(context, VEGETATION_RARE, -8, 1.5D, 0.0D, 0.0D, 0.0D);
         register(context, CONTINENTALNESS, -9, 1.5D, 0.0D, 1.0D, 0.0D, 0.0D, 0.0D);
         register(context, EROSION, -9, 1.5D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
+        register(context, CAVE_BIOMES, -8, 1.5D, 0.0D, 1.0D, 0.0D, 0.0D);
         register(context, AMPLIFICATION, -7, 1.0D, 2.0D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D);
         register(context, RIDGES, -9, 1.5D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
         register(context, ELEVATION, -8, 1.0D, 0.2D, 0.0D, 0.0D, 0.0D);

@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.natural.GasBlock;
+import com.aetherteam.aetherii.block.natural.HestveilBlock;
 import com.aetherteam.aetherii.world.feature.configuration.AcidPoolConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -18,8 +18,8 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 import java.util.function.Consumer;
 
-public class AcidPoolFeature extends Feature<AcidPoolConfiguration> {
-    public AcidPoolFeature(Codec<AcidPoolConfiguration> codec) {
+public class AlkahestPoolFeature extends Feature<AcidPoolConfiguration> {
+    public AlkahestPoolFeature(Codec<AcidPoolConfiguration> codec) {
         super(codec);
     }
 
@@ -50,7 +50,7 @@ public class AcidPoolFeature extends Feature<AcidPoolConfiguration> {
                         BlockPos offsetPos = pos.offset(x, y, z);
                         if (y < 0) {
                             if (volume >= radiusSquared) {
-                                if (!level.getBlockState(offsetPos).is(AetherIIBlocks.ACID)) {
+                                if (!level.getBlockState(offsetPos).is(AetherIIBlocks.ALKAHEST)) {
                                     level.setBlock(offsetPos, AetherIIBlocks.ICHORITE.get().defaultBlockState(), 3);
                                     int limit = 1 + random.nextInt(2) + random.nextInt(5);
                                     for (int i = 1; i < limit; i++) {
@@ -63,22 +63,22 @@ public class AcidPoolFeature extends Feature<AcidPoolConfiguration> {
                                     }
                                 }
                             } else {
-                                level.setBlock(offsetPos, AetherIIBlocks.ACID.get().defaultBlockState(), 3);
+                                level.setBlock(offsetPos, AetherIIBlocks.ALKAHEST.get().defaultBlockState(), 3);
                             }
                         } else {
                             level.setBlock(offsetPos, Blocks.CAVE_AIR.defaultBlockState(), 3);
                         }
                     }
                 }
-                for (int y = 0; y < GasBlock.MAX_VERTICAL_DISTANCE; y++) {
+                for (int y = 0; y < HestveilBlock.MAX_VERTICAL_DISTANCE; y++) {
                     BlockPos offsetPos = pos.offset(x, y, z);
                     if (level.getBlockState(offsetPos).isAir()) {
-                        BlockState gasState = GasBlock.updateDistance(AetherIIBlocks.GAS.get().defaultBlockState(), level, offsetPos);
-                        if (gasState.getValue(GasBlock.HORIZONTAL_DISTANCE) < GasBlock.MAX_HORIZONTAL_DISTANCE && gasState.getValue(GasBlock.VERTICAL_DISTANCE) < GasBlock.MAX_VERTICAL_DISTANCE) {
-                            level.setBlock(offsetPos, GasBlock.updateDistance(gasState, level, offsetPos), 3);
+                        BlockState gasState = HestveilBlock.updateDistance(AetherIIBlocks.HESTVEIL.get().defaultBlockState(), level, offsetPos);
+                        if (gasState.getValue(HestveilBlock.HORIZONTAL_DISTANCE) < HestveilBlock.MAX_HORIZONTAL_DISTANCE && gasState.getValue(HestveilBlock.VERTICAL_DISTANCE) < HestveilBlock.MAX_VERTICAL_DISTANCE) {
+                            level.setBlock(offsetPos, HestveilBlock.updateDistance(gasState, level, offsetPos), 3);
                         }
                         if (!level.getBlockState(offsetPos.above()).isAir()) {
-                            level.scheduleTick(offsetPos, AetherIIBlocks.GAS.get(), 1);
+                            level.scheduleTick(offsetPos, AetherIIBlocks.HESTVEIL.get(), 1);
                         }
                     } else {
                         break;

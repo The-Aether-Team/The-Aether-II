@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.AetherIIGameEvents;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.FreezingBlock;
-import com.aetherteam.aetherii.block.natural.GasBlock;
+import com.aetherteam.aetherii.block.natural.HestveilBlock;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
 import com.aetherteam.aetherii.blockentity.IcestoneBlockEntity;
 import com.aetherteam.aetherii.loot.AetherIILoot;
@@ -132,6 +132,6 @@ public class BlockHooks {
     }
 
     public static boolean canBreathe(LivingEntity livingEntity) {
-        return !(livingEntity.level().getBlockState(BlockPos.containing(livingEntity.getEyePosition())).getBlock() instanceof GasBlock gasBlock);
+        return !(livingEntity.level().getBlockState(BlockPos.containing(livingEntity.getEyePosition())).getBlock() instanceof HestveilBlock);
     }
 }

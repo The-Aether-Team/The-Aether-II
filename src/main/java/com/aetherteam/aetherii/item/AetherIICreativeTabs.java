@@ -610,8 +610,8 @@ public class  AetherIICreativeTabs {
                 output.accept(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_MILK_BUCKET.get());
                 output.accept(AetherIIItems.ARKENIUM_CANISTER.get());
-                output.accept(AetherIIItems.ARKENIUM_ACID_CANISTER.get());
-                output.accept(AetherIIItems.ARKENIUM_GAS_CANISTER.get());
+                output.accept(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER.get());
+                output.accept(AetherIIItems.ARKENIUM_HESTVEIL_CANISTER.get());
                 output.accept(AetherIIItems.COLD_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.BLUE_AERCLOUD_GLIDER.get());

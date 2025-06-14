@@ -18,8 +18,8 @@ public class AetherIIFluidTagData extends FluidTagsProvider {
     @Override
     public void addTags(HolderLookup.Provider provider) {
         this.tag(AetherIITags.Fluids.ACID).add(
-                AetherIIFluids.ACID.get(),
-                AetherIIFluids.FLOWING_ACID.get());
+                AetherIIFluids.ALKAHEST.get(),
+                AetherIIFluids.FLOWING_ALKAHEST.get());
         this.tag(AetherIITags.Fluids.ALLOWED_BUCKET_PICKUP).add(
                 Fluids.WATER,
                 Fluids.FLOWING_WATER);
