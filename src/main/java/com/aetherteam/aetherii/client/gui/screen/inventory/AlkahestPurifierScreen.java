@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.gui.screen.inventory.recipebook.AlkahestPurifierRecipeBookComponent;
 import com.aetherteam.aetherii.inventory.menu.AlkahestPurifierMenu;
-import com.aetherteam.aetherii.inventory.menu.AltarMenu;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
 import net.minecraft.client.gui.GuiGraphics;
@@ -13,7 +12,6 @@ import net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -60,7 +58,7 @@ public class AlkahestPurifierScreen extends AbstractRecipeBookScreen<AlkahestPur
         int j = this.topPos;
         guiGraphics.blit(RenderType::guiTextured, ALKAHEST_PURIFIER_TEXTURE, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
 
-        int alkahestRenderLevels = Mth.floor(this.menu.getAlkahestLevels() / 3.0);
+        int alkahestRenderLevels = Mth.ceil(this.menu.getAlkahestLevels() / 3.0);
         if (alkahestRenderLevels >= 1) {
             guiGraphics.blitSprite(RenderType::guiTextured, ACID_1_SPRITE, i + 60, j + 78, 56, 16);
         }
@@ -73,6 +71,23 @@ public class AlkahestPurifierScreen extends AbstractRecipeBookScreen<AlkahestPur
         if (alkahestRenderLevels >= 4) {
             guiGraphics.blitSprite(RenderType::guiTextured, ACID_4_SPRITE, i + 60, j + 41, 56, 13);
         }
+
+        /*
+        int alkahestRenderLevelsCeil = Mth.ceil(this.menu.getAlkahestLevels() / 3.0F);
+        float alkahestRenderLevelsTrue = this.menu.getAlkahestLevels() / 3.0F;
+        if (alkahestRenderLevelsCeil >= 1) {
+            guiGraphics.blitSprite(RenderType::guiTextured, ACID_1_SPRITE, i + 60, j + 78, 56, 16, ARGB.colorFromFloat(1.0F - Math.max(0, 1 - alkahestRenderLevelsTrue), 1.0F, 1.0F, 1.0F));
+        }
+        if (alkahestRenderLevelsCeil >= 2) {
+            guiGraphics.blitSprite(RenderType::guiTextured, ACID_2_SPRITE, i + 60, j + 65, 56, 15, ARGB.colorFromFloat(1.0F - Math.max(0, 2 - alkahestRenderLevelsTrue), 1.0F, 1.0F, 1.0F));
+        }
+        if (alkahestRenderLevelsCeil >= 3) {
+            guiGraphics.blitSprite(RenderType::guiTextured, ACID_3_SPRITE, i + 60, j + 52, 56, 15, ARGB.colorFromFloat(1.0F - Math.max(0, 3 - alkahestRenderLevelsTrue), 1.0F, 1.0F, 1.0F));
+        }
+        if (alkahestRenderLevelsCeil >= 4) {
+            guiGraphics.blitSprite(RenderType::guiTextured, ACID_4_SPRITE, i + 60, j + 41, 56, 13, ARGB.colorFromFloat(1.0F - Math.max(0, 4 - alkahestRenderLevelsTrue), 1.0F, 1.0F, 1.0F));
+        }
+         */
 
         int j1 = Mth.ceil(this.menu.getProcessingProgress() * 15.0F);
         guiGraphics.blitSprite(RenderType::guiTextured, OUTPUT_PROGRESS_SPRITE, 15, 10, 0, 0, i + 121, j + 48, j1, 10);

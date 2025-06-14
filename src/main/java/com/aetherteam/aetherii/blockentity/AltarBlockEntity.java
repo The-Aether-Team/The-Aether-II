@@ -133,7 +133,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         tag.putInt("ProcessingTimeTotal", this.processingTotalTime);
         ContainerHelper.saveAllItems(tag, this.items, registry);
         CompoundTag recipesUsedTag = new CompoundTag();
-        this.recipesUsed.forEach((location, integer) -> recipesUsedTag.putInt(location.toString(), integer));
+        this.recipesUsed.forEach((key, integer) -> recipesUsedTag.putInt(key.location().toString(), integer));
         tag.put("RecipesUsed", recipesUsedTag);
     }
 
@@ -143,6 +143,8 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         RecipeHolder<AltarEnchantingRecipe> recipeHolder = blockEntity.quickCheck.getRecipeFor(new SingleRecipeInput(blockEntity.getItem(0)), level).orElse(null);
         if (recipeHolder != null) {
             blockEntity.fuelCount = recipeHolder.value().fuelCount();
+        } else {
+            blockEntity.fuelCount = 0;
         }
         boolean hasFuel = hasFuel(level, blockEntity);
         int i = blockEntity.getMaxStackSize();

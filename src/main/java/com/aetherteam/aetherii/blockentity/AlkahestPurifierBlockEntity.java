@@ -1,10 +1,8 @@
 package com.aetherteam.aetherii.blockentity;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.utility.AlkahestPurifierBlock;
-import com.aetherteam.aetherii.block.utility.AltarBlock;
 import com.aetherteam.aetherii.inventory.menu.AlkahestPurifierMenu;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
@@ -14,10 +12,7 @@ import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
+import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -36,9 +31,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.*;
@@ -49,10 +43,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeCraftingHolder, StackedContentsCompatible, LidBlockEntity {
+    public static final int MAX_LEVELS = 12;
     private static final int[] SLOTS_FOR_UP = new int[]{0};
-    private static final int[] SLOTS_FOR_DOWN = new int[]{5, 6};
+    private static final int[] SLOTS_FOR_DOWN = new int[]{1, 2, 3, 4, 5, 6};
     private static final int[] SLOTS_FOR_SIDES = new int[]{1, 2, 3, 4};
-    protected static final int MAX_LEVELS = 12;
     private final ContainerOpenersCounter openersCounter;
     private final ChestLidController chestLidController;
     protected final ContainerData dataAccess = new ContainerData() {
@@ -106,7 +100,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
         super(type, pos, state);
         this.openersCounter = new ContainerOpenersCounter() {
             protected void onOpen(Level level, BlockPos pos, BlockState state) {
-//                ChestBlockEntity.playSound(level, pos, state, SoundEvents.CHEST_OPEN);
+//                ChestBlockEntity.playSound(level, pos, state, SoundEvents.CHEST_OPEN); //todo
             }
 
             protected void onClose(Level level, BlockPos pos, BlockState state) {
@@ -162,7 +156,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
         tag.putInt("AlkahestLevels", this.alkahestLevels);
         ContainerHelper.saveAllItems(tag, this.items, registry);
         CompoundTag recipesUsedTag = new CompoundTag();
-        this.recipesUsed.forEach((location, integer) -> recipesUsedTag.putInt(location.toString(), integer));
+        this.recipesUsed.forEach((key, integer) -> recipesUsedTag.putInt(key.location().toString(), integer));
         tag.put("RecipesUsed", recipesUsedTag);
     }
 
@@ -185,18 +179,39 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
                 ItemStack stack = blockEntity.getItem(i);
                 if (blockEntity.isFuel(stack)) {
                     blockEntity.alkahestLevels += 3;
-                    stack.shrink(1);
                     blockEntity.setItem(i, stack.getCraftingRemainder());
                 }
             }
         }
 
         RecipeHolder<AlkahestPurificationRecipe> recipeHolder = blockEntity.quickCheck.getRecipeFor(new SingleRecipeInputWithRandom(blockEntity.getItem(0), level.getRandom()), level).orElse(null);
+        int alkahestUsage = 1;
+        if (recipeHolder != null) {
+            alkahestUsage = recipeHolder.value().alkahestUsage();
+        }
+        boolean hasFuel = blockEntity.alkahestLevels >= alkahestUsage;
+        int i = blockEntity.getMaxStackSize();
 
+        if (hasFuel) {
+            if (blockEntity.canProcess(level.registryAccess(), recipeHolder, blockEntity.items, i)) {
+                changed = true;
+                ++blockEntity.processingProgress;
+                if (blockEntity.processingProgress == blockEntity.processingTotalTime) {
+                    blockEntity.processingProgress = 0;
+                    blockEntity.processingTotalTime = getTotalProcessingTime(level, blockEntity);
+                    if (blockEntity.process(level.registryAccess(), recipeHolder, blockEntity.items, i)) {
+                        blockEntity.setRecipeUsed(recipeHolder);
+                        blockEntity.alkahestLevels -= alkahestUsage;
+                    }
+                }
+            } else {
+                blockEntity.processingProgress = 0;
+            }
+        } else if (blockEntity.processingProgress > 0) {
+            blockEntity.processingProgress = Mth.clamp(blockEntity.processingProgress - 2, 0, blockEntity.processingProgress);
+        }
 
-
-
-        int roundedLevels = Mth.floor(levels / 3.0);
+        int roundedLevels = Mth.ceil(levels / 3.0);
         if (state.getValue(AlkahestPurifierBlock.LEVEL) != roundedLevels) {
             changed = true;
             state = state.setValue(AlkahestPurifierBlock.LEVEL, roundedLevels);
@@ -212,23 +227,87 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
         blockEntity.chestLidController.tickLid();
     }
 
+    private boolean canProcess(RegistryAccess registryAccess, @Nullable RecipeHolder<AlkahestPurificationRecipe> recipeHolder, NonNullList<ItemStack> stacks, int maxStackSize) {
+        ItemStack input = stacks.get(0);
+        if (!input.isEmpty() && recipeHolder != null) {
+            ItemStack result = recipeHolder.value().assemble(new SingleRecipeInputWithRandom(this.getItem(0), this.getLevel().getRandom()), registryAccess);
+            if (result.isEmpty()) {
+                return false;
+            } else {
+                ItemStack inResultSlot = stacks.get(5);
+                if (inResultSlot.isEmpty()) {
+                    return true;
+                } else if (!ItemStack.isSameItemSameComponents(inResultSlot, result)) {
+                    return false;
+                } else {
+                    return inResultSlot.getCount() + result.getCount() <= maxStackSize && inResultSlot.getCount() + result.getCount() <= inResultSlot.getMaxStackSize() || inResultSlot.getCount() + result.getCount() <= result.getMaxStackSize();
+                }
+            }
+        } else {
+            return false;
+        }
+    }
+
+    private boolean process(RegistryAccess registryAccess, @Nullable RecipeHolder<AlkahestPurificationRecipe> recipeHolder, NonNullList<ItemStack> stacks, int maxStackSize) {
+        if (recipeHolder != null && this.canProcess(registryAccess, recipeHolder, stacks, maxStackSize)) {
+            ItemStack inputSlot = stacks.get(0);
+            ItemStack result = recipeHolder.value().assemble(new SingleRecipeInputWithRandom(this.getItem(0), this.getLevel().getRandom()), registryAccess);
+            ItemStack outputSlot = stacks.get(5);
+            if (outputSlot.isEmpty()) {
+                stacks.set(5, result.copy());
+            } else if (ItemStack.isSameItemSameComponents(outputSlot, result)) {
+                outputSlot.grow(result.getCount());
+            }
+            ItemStack byproducts = recipeHolder.value().byproducts().getRandomValue(this.getLevel().getRandom()).orElse(ItemStack.EMPTY);
+            ItemStack byproductSlot = stacks.get(6);
+            if (byproductSlot.isEmpty()) {
+                stacks.set(6, byproducts.copy());
+            } else if (ItemStack.isSameItemSameComponents(byproductSlot, byproducts)) {
+                byproductSlot.grow(byproducts.getCount());
+            }
+
+            inputSlot.shrink(1);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private static int getTotalProcessingTime(ServerLevel level, AlkahestPurifierBlockEntity blockEntity) {
+        return blockEntity.quickCheck.getRecipeFor(new SingleRecipeInputWithRandom(blockEntity.getItem(0), blockEntity.getLevel().getRandom()), level).map(recipeHolder -> recipeHolder.value().processingTime()).orElse(200);
+    }
+
     private boolean isFuel(ItemStack stack) {
         return stack.is(AetherIIItems.ARKENIUM_ACID_CANISTER.get());
     }
 
-    @Override //todo
+    @Override
     public int[] getSlotsForFace(Direction direction) {
-        return new int[0];
+        if (direction == Direction.DOWN) {
+            return SLOTS_FOR_DOWN;
+        } else {
+            return direction == Direction.UP ? SLOTS_FOR_UP : SLOTS_FOR_SIDES;
+        }
     }
 
     @Override
-    public boolean canPlaceItemThroughFace(int i, ItemStack itemStack, @Nullable Direction direction) {
-        return false;
+    public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, @Nullable Direction direction) {
+        return this.canPlaceItem(index, itemStack);
+    }
+
+    public boolean canPlaceItem(int index, ItemStack stack) {
+        if (index == 5 || index == 6) {
+            return false;
+        } else if (index == 0) {
+            return true;
+        } else {
+            return this.isFuel(stack);
+        }
     }
 
     @Override
-    public boolean canTakeItemThroughFace(int i, ItemStack itemStack, Direction direction) {
-        return false;
+    public boolean canTakeItemThroughFace(int index, ItemStack itemStack, Direction direction) {
+        return direction != Direction.DOWN || (index != 1 && index != 2 && index != 3 && index != 4) || !this.isFuel(itemStack);
     }
 
     @Override
@@ -266,8 +345,8 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
     }
 
     @Override
-    protected void setItems(NonNullList<ItemStack> pItems) {
-        this.items = pItems;
+    protected void setItems(NonNullList<ItemStack> items) {
+        this.items = items;
     }
 
     @Override
@@ -301,6 +380,22 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
     }
 
     @Override
+    public void setItem(int index, ItemStack stack) {
+        ItemStack itemstack = this.items.get(index);
+        boolean flag = !stack.isEmpty() && ItemStack.isSameItemSameComponents(itemstack, stack);
+        this.items.set(index, stack);
+        stack.limitSize(this.getMaxStackSize(stack));
+
+        if (index == 0 && !flag) {
+            if (this.level instanceof ServerLevel serverLevel) {
+                this.processingTotalTime = getTotalProcessingTime(serverLevel, this);
+                this.processingProgress = 0;
+                this.setChanged();
+            }
+        }
+    }
+
+    @Override
     public boolean stillValid(Player player) {
         return Container.stillValidBlockEntity(this, player);
     }
@@ -312,7 +407,10 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
 
     @Override
     public void setRecipeUsed(@Nullable RecipeHolder<?> recipeHolder) {
-
+        if (recipeHolder != null) {
+            ResourceKey<Recipe<?>> location = recipeHolder.id();
+            this.recipesUsed.addTo(location, 1);
+        }
     }
 
     @Override
@@ -320,9 +418,9 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
         return null;
     }
 
-//    @Override
-//    public void awardUsedRecipes(Player player, List<ItemStack> items) {
-//    }
+    @Override
+    public void awardUsedRecipes(Player player, List<ItemStack> items) {
+    }
 
     public void awardUsedRecipesAndPopExperience(ServerPlayer player) {
         List<RecipeHolder<?>> list = this.getRecipesToAwardAndPopExperience(player.serverLevel(), player.position());
@@ -340,7 +438,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
         for (Object2IntMap.Entry<ResourceKey<Recipe<?>>> entry : this.recipesUsed.object2IntEntrySet()) {
             level.recipeAccess().byKey(entry.getKey()).ifPresent(recipeHolder -> {
                 list.add(recipeHolder);
-                createExperience(level, popVec, entry.getIntValue(), ((AltarEnchantingRecipe) recipeHolder.value()).experience());
+                createExperience(level, popVec, entry.getIntValue(), ((AlkahestPurificationRecipe) recipeHolder.value()).experience());
             });
         }
         return list;
@@ -356,7 +454,9 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
     }
 
     @Override
-    public void fillStackedContents(StackedItemContents stackedItemContents) {
-
+    public void fillStackedContents(StackedItemContents stackedContents) {
+        for (ItemStack itemstack : this.items) {
+            stackedContents.accountStack(itemstack);
+        }
     }
 }
