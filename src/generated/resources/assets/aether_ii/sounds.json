@@ -89,11 +89,11 @@
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },
-  "block.gas.ignite": {
+  "block.hestveil.ignite": {
     "sounds": [
       "mob/ghast/fireball4"
     ],
-    "subtitle": "subtitles.aether_ii.block.gas.ignite"
+    "subtitle": "subtitles.aether_ii.block.hestveil.ignite"
   },
   "block.holystone_furnace.crackle": {
     "sounds": [

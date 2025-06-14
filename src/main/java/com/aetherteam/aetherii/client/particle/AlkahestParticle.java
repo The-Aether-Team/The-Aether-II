@@ -6,10 +6,10 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-public class AcidParticle extends TextureSheetParticle {
+public class AlkahestParticle extends TextureSheetParticle {
     private final SpriteSet sprites;
 
-    protected AcidParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, SpriteSet sprites) {
+    protected AlkahestParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, SpriteSet sprites) {
         super(level, x, y, z);
         this.setSize(0.02F, 0.02F);
         this.quadSize *= this.random.nextFloat() * 0.6F + 0.2F;
@@ -47,7 +47,7 @@ public class AcidParticle extends TextureSheetParticle {
     public record Provider(SpriteSet sprites) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            return new AcidParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, this.sprites());
+            return new AlkahestParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, this.sprites());
         }
     }
 }

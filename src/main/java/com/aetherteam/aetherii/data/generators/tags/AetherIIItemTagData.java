@@ -9,7 +9,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -383,7 +382,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.IRRADIATED_TOOL.get(),
                 AetherIIItems.IRRADIATED_CHUNK.get(),
                 AetherIIItems.IRRADIATED_DUST.get());
-        this.tag(AetherIITags.Items.ACID_RESISTANT_ITEM).add(
+        this.tag(AetherIITags.Items.ALKAHEST_RESISTANT_ITEM).add(
                 AetherIIBlocks.ARKENIUM_BLOCK.asItem(),
                 AetherIIBlocks.ARKENIUM_DOOR.asItem(),
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.asItem(),

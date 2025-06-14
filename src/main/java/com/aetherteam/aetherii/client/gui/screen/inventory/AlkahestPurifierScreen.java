@@ -23,10 +23,10 @@ import java.util.List;
 public class AlkahestPurifierScreen extends AbstractRecipeBookScreen<AlkahestPurifierMenu> implements RecipeUpdateListener {
     private static final ResourceLocation ALKAHEST_PURIFIER_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/alkahest_purifier.png");
     private static final ResourceLocation OUTPUT_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/output_progress");
-    private static final ResourceLocation ACID_1_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/acid_1");
-    private static final ResourceLocation ACID_2_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/acid_2");
-    private static final ResourceLocation ACID_3_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/acid_3");
-    private static final ResourceLocation ACID_4_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/acid_4");
+    private static final ResourceLocation ALKAHEST_1_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/alkahest_1");
+    private static final ResourceLocation ALKAHEST_2_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/alkahest_2");
+    private static final ResourceLocation ALKAHEST_3_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/alkahest_3");
+    private static final ResourceLocation ALKAHEST_4_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/alkahest_4");
     private static final List<RecipeBookComponent.TabInfo> TABS = List.of(
             new RecipeBookComponent.TabInfo(Items.COMPASS, AetherIIRecipeBookCategories.ALKAHEST_PURIFIER_SEARCH),
             new RecipeBookComponent.TabInfo(AetherIIItems.IRRADIATED_CHUNK.get(), AetherIIRecipeBookCategories.ALKAHEST_PURIFIER_ITEMS.get()),
@@ -60,16 +60,16 @@ public class AlkahestPurifierScreen extends AbstractRecipeBookScreen<AlkahestPur
 
         int alkahestRenderLevels = Mth.ceil(this.menu.getAlkahestLevels() / 3.0);
         if (alkahestRenderLevels >= 1) {
-            guiGraphics.blitSprite(RenderType::guiTextured, ACID_1_SPRITE, i + 60, j + 78, 56, 16);
+            guiGraphics.blitSprite(RenderType::guiTextured, ALKAHEST_1_SPRITE, i + 60, j + 78, 56, 16);
         }
         if (alkahestRenderLevels >= 2) {
-            guiGraphics.blitSprite(RenderType::guiTextured, ACID_2_SPRITE, i + 60, j + 65, 56, 15);
+            guiGraphics.blitSprite(RenderType::guiTextured, ALKAHEST_2_SPRITE, i + 60, j + 65, 56, 15);
         }
         if (alkahestRenderLevels >= 3) {
-            guiGraphics.blitSprite(RenderType::guiTextured, ACID_3_SPRITE, i + 60, j + 52, 56, 15);
+            guiGraphics.blitSprite(RenderType::guiTextured, ALKAHEST_3_SPRITE, i + 60, j + 52, 56, 15);
         }
         if (alkahestRenderLevels >= 4) {
-            guiGraphics.blitSprite(RenderType::guiTextured, ACID_4_SPRITE, i + 60, j + 41, 56, 13);
+            guiGraphics.blitSprite(RenderType::guiTextured, ALKAHEST_4_SPRITE, i + 60, j + 41, 56, 13);
         }
 
         /*

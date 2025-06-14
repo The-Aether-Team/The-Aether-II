@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.HestveilBlock;
-import com.aetherteam.aetherii.world.feature.configuration.AcidPoolConfiguration;
+import com.aetherteam.aetherii.world.feature.configuration.AlkahestPoolConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,17 +18,17 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 import java.util.function.Consumer;
 
-public class AlkahestPoolFeature extends Feature<AcidPoolConfiguration> {
-    public AlkahestPoolFeature(Codec<AcidPoolConfiguration> codec) {
+public class AlkahestPoolFeature extends Feature<AlkahestPoolConfiguration> {
+    public AlkahestPoolFeature(Codec<AlkahestPoolConfiguration> codec) {
         super(codec);
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<AcidPoolConfiguration> context) {
+    public boolean place(FeaturePlaceContext<AlkahestPoolConfiguration> context) {
         BlockPos pos = context.origin();
         WorldGenLevel level = context.level();
         RandomSource random = context.random();
-        AcidPoolConfiguration config = context.config();
+        AlkahestPoolConfiguration config = context.config();
 
         int count = config.count().sample(random);
         for (int i = 0; i < count; i++) {
@@ -38,7 +38,7 @@ public class AlkahestPoolFeature extends Feature<AcidPoolConfiguration> {
         return true;
     }
 
-    private void placePool(BlockPos pos, WorldGenLevel level, RandomSource random, AcidPoolConfiguration config) {
+    private void placePool(BlockPos pos, WorldGenLevel level, RandomSource random, AlkahestPoolConfiguration config) {
         int radius = config.radius().sample(random);
         for (int x = -radius; x < radius; x++) {
             for (int z = -radius; z < radius; z++) {
@@ -73,9 +73,9 @@ public class AlkahestPoolFeature extends Feature<AcidPoolConfiguration> {
                 for (int y = 0; y < HestveilBlock.MAX_VERTICAL_DISTANCE; y++) {
                     BlockPos offsetPos = pos.offset(x, y, z);
                     if (level.getBlockState(offsetPos).isAir()) {
-                        BlockState gasState = HestveilBlock.updateDistance(AetherIIBlocks.HESTVEIL.get().defaultBlockState(), level, offsetPos);
-                        if (gasState.getValue(HestveilBlock.HORIZONTAL_DISTANCE) < HestveilBlock.MAX_HORIZONTAL_DISTANCE && gasState.getValue(HestveilBlock.VERTICAL_DISTANCE) < HestveilBlock.MAX_VERTICAL_DISTANCE) {
-                            level.setBlock(offsetPos, HestveilBlock.updateDistance(gasState, level, offsetPos), 3);
+                        BlockState hestveilState = HestveilBlock.updateDistance(AetherIIBlocks.HESTVEIL.get().defaultBlockState(), level, offsetPos);
+                        if (hestveilState.getValue(HestveilBlock.HORIZONTAL_DISTANCE) < HestveilBlock.MAX_HORIZONTAL_DISTANCE && hestveilState.getValue(HestveilBlock.VERTICAL_DISTANCE) < HestveilBlock.MAX_VERTICAL_DISTANCE) {
+                            level.setBlock(offsetPos, HestveilBlock.updateDistance(hestveilState, level, offsetPos), 3);
                         }
                         if (!level.getBlockState(offsetPos.above()).isAir()) {
                             level.scheduleTick(offsetPos, AetherIIBlocks.HESTVEIL.get(), 1);

@@ -1365,7 +1365,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addSubtitle("block", "bush.rustle", "Bush rustles");
 
-        this.addSubtitle("block", "gas.ignite", "Gas ignites");
+        this.addSubtitle("block", "hestveil.ignite", "Hestveil ignites");
 
         this.addSubtitle("block", "holystone_furnace.fire_crackle", "Holystone Furnace crackles");
 

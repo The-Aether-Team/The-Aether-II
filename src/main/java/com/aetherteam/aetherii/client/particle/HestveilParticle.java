@@ -6,10 +6,10 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-public class GasParticle extends TextureSheetParticle {
+public class HestveilParticle extends TextureSheetParticle {
     private final float maxQuadSize;
 
-    protected GasParticle(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
+    protected HestveilParticle(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
         super(level, x, y, z);
         this.setSprite(spriteSet.get(level.getRandom()));
         this.setSize(0.25F, 0.25F);
@@ -44,7 +44,7 @@ public class GasParticle extends TextureSheetParticle {
     public record Provider(SpriteSet sprites) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            return new GasParticle(level, x, y, z, this.sprites());
+            return new HestveilParticle(level, x, y, z, this.sprites());
         }
     }
 }

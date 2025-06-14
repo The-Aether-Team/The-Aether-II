@@ -263,8 +263,8 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         return BiomeParameterRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, tagKey, IcestoneFreezableRecipe::new);
     }
 
-    protected BlockStateRecipeBuilder acidCorrosion(Block result, Block ingredient) {
-        return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, AcidCorrosionRecipe::new);
+    protected BlockStateRecipeBuilder alkahestCorrosion(Block result, Block ingredient) {
+        return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, AlkahestCorrosionRecipe::new);
     }
 
     protected void alkahestPurification(RecipeCategory recipeCategory, SimpleWeightedRandomList<ItemStack> results, ItemLike ingredient, SimpleWeightedRandomList<ItemStack> byproducts, int alkahestUsage, RecipeOutput consumer) {

@@ -18,29 +18,29 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record GasExplosionEffectsPacket(BlockPos pos, boolean playSound) implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<GasExplosionEffectsPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gas_explosion_effects"));
+public record HestveilExplosionEffectsPacket(BlockPos pos, boolean playSound) implements CustomPacketPayload {
+    public static final CustomPacketPayload.Type<HestveilExplosionEffectsPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hestveil_explosion_effects"));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, GasExplosionEffectsPacket> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, HestveilExplosionEffectsPacket> STREAM_CODEC = StreamCodec.composite(
             BlockPos.STREAM_CODEC,
-            GasExplosionEffectsPacket::pos,
+            HestveilExplosionEffectsPacket::pos,
             ByteBufCodecs.BOOL,
-            GasExplosionEffectsPacket::playSound,
-            GasExplosionEffectsPacket::new);
+            HestveilExplosionEffectsPacket::playSound,
+            HestveilExplosionEffectsPacket::new);
 
     @Override
-    public CustomPacketPayload.Type<GasExplosionEffectsPacket> type() {
+    public CustomPacketPayload.Type<HestveilExplosionEffectsPacket> type() {
         return TYPE;
     }
 
-    public static void execute(GasExplosionEffectsPacket payload, IPayloadContext context) {
+    public static void execute(HestveilExplosionEffectsPacket payload, IPayloadContext context) {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             if (payload.playSound()) {
                 Minecraft.getInstance().level.playLocalSound(
                         payload.pos().getX(),
                         payload.pos().getY(),
                         payload.pos().getZ(),
-                        AetherIISoundEvents.BLOCK_GAS_IGNITE.get(),
+                        AetherIISoundEvents.BLOCK_HESTVEIL_IGNITE.get(),
                         SoundSource.BLOCKS,
                         10.0F,
                         (1.0F + (Minecraft.getInstance().level.getRandom().nextFloat() - Minecraft.getInstance().level.getRandom().nextFloat()) * 0.2F) * 0.7F,

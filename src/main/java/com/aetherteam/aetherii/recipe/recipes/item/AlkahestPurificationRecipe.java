@@ -115,7 +115,7 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
     public List<RecipeDisplay> display() {
         return List.of(new AlkahestPurifierRecipeDisplay(
                 this.ingredient().display(),
-                new SlotDisplay.ItemSlotDisplay(AetherIIItems.ARKENIUM_ACID_CANISTER),
+                new SlotDisplay.ItemSlotDisplay(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER),
                 new SlotDisplay.Composite(this.results().unwrap().stream().map((wrapper) -> new SlotDisplay.ItemStackSlotDisplay(wrapper.data())).collect(Collectors.toUnmodifiableList())),
                 new SlotDisplay.Composite(this.byproducts().unwrap().stream().map((wrapper) -> new SlotDisplay.ItemStackSlotDisplay(wrapper.data())).collect(Collectors.toUnmodifiableList())),
                 new SlotDisplay.ItemSlotDisplay(AetherIIBlocks.ALKAHEST_PURIFIER.asItem()),

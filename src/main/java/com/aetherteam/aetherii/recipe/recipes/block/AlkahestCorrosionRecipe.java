@@ -18,9 +18,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class AcidCorrosionRecipe extends AbstractBlockStateRecipe implements MatchEventRecipe {
-    public AcidCorrosionRecipe(BlockStateIngredient ingredient, BlockPropertyPair result, Optional<ResourceLocation> function) {
-        super(AetherIIRecipeTypes.ACID_CORROSION.get(), ingredient, result, function);
+public class AlkahestCorrosionRecipe extends AbstractBlockStateRecipe implements MatchEventRecipe {
+    public AlkahestCorrosionRecipe(BlockStateIngredient ingredient, BlockPropertyPair result, Optional<ResourceLocation> function) {
+        super(AetherIIRecipeTypes.ALKAHEST_CORROSION.get(), ingredient, result, function);
     }
 
     @Override
@@ -29,13 +29,13 @@ public class AcidCorrosionRecipe extends AbstractBlockStateRecipe implements Mat
     }
 
     @Override
-    public RecipeSerializer<AcidCorrosionRecipe> getSerializer() {
-        return AetherIIRecipeSerializers.ACID_CORROSION.get();
+    public RecipeSerializer<AlkahestCorrosionRecipe> getSerializer() {
+        return AetherIIRecipeSerializers.ALKAHEST_CORROSION.get();
     }
 
-    public static class Serializer extends BlockStateRecipeSerializer<AcidCorrosionRecipe> {
+    public static class Serializer extends BlockStateRecipeSerializer<AlkahestCorrosionRecipe> {
         public Serializer() {
-            super(AcidCorrosionRecipe::new);
+            super(AlkahestCorrosionRecipe::new);
         }
     }
 }

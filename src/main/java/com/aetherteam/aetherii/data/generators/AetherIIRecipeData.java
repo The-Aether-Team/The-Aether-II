@@ -1351,7 +1351,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider { //todo fix some
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_BOOTS, 8).group("repair_gravitite").save(this.output, "repair_gravitite_boots");
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_GLOVES, 8).group("repair_gravitite").save(this.output, "repair_gravitite_gloves");
 
-        this.acidCorrosion(AetherIIBlocks.ICHORITE.get(), AetherIIBlocks.UNDERSHALE.get()).save(this.output, "corrode_undershale_to_ichorite");
+        this.alkahestCorrosion(AetherIIBlocks.ICHORITE.get(), AetherIIBlocks.UNDERSHALE.get()).save(this.output, "corrode_undershale_to_ichorite");
 
         this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.HOLYSTONE.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
         this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, SimpleWeightedRandomList.single(AetherIIBlocks.HOLYSTONE_STAIRS.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);

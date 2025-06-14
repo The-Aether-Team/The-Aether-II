@@ -100,10 +100,10 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.aether_ii.block.bush.rustle")
         );
 
-        this.add(AetherIISoundEvents.BLOCK_GAS_IGNITE,
+        this.add(AetherIISoundEvents.BLOCK_HESTVEIL_IGNITE,
                 definition().with(
                         sound("minecraft:mob/ghast/fireball4")
-                ).subtitle("subtitles.aether_ii.block.gas.ignite")
+                ).subtitle("subtitles.aether_ii.block.hestveil.ignite")
         );
 
         this.add(AetherIISoundEvents.BLOCK_HOLYSTONE_FURNACE_CRACKLE,

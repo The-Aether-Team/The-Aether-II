@@ -15,7 +15,7 @@ public class AetherIIRecipeTypes {
 
     public static final DeferredHolder<RecipeType<?>, RecipeType<AmbrosiumRecipe>> AMBROSIUM_ENCHANTING = RECIPE_TYPES.register("ambrosium_enchanting", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "ambrosium_enchanting")));
     public static final DeferredHolder<RecipeType<?>, RecipeType<IrradiationRecipe>> DUST_IRRADIATION = RECIPE_TYPES.register("dust_irradiation", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "dust_irradiation")));
-    public static final DeferredHolder<RecipeType<?>, RecipeType<AcidCorrosionRecipe>> ACID_CORROSION = RECIPE_TYPES.register("acid_corrosion", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "acid_corrosion")));
+    public static final DeferredHolder<RecipeType<?>, RecipeType<AlkahestCorrosionRecipe>> ALKAHEST_CORROSION = RECIPE_TYPES.register("alkahest_corrosion", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_corrosion")));
     public static final DeferredHolder<RecipeType<?>, RecipeType<SwetGelRecipe>> SWET_GEL_CONVERSION = RECIPE_TYPES.register("swet_gel_conversion", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet_gel_conversion")));
     public static final DeferredHolder<RecipeType<?>, RecipeType<IcestoneFreezableRecipe>> ICESTONE_FREEZABLE = RECIPE_TYPES.register("icestone_freezable", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "icestone_freezable")));
 

@@ -8,7 +8,6 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunction
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.feature.configuration.*;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.MossyPredicate;
-import com.aetherteam.aetherii.world.feature.modifier.predicate.SearchPredicate;
 import com.aetherteam.aetherii.world.tree.decorator.*;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.AmberootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.LargeAmberootFoliagePlacer;
@@ -1677,7 +1676,7 @@ public class HighlandsConfiguredFeatures {
                 )
         );
 
-        register(context, ALKAHEST_POOL, AetherIIFeatures.ALKAHEST_POOL.get(), new AcidPoolConfiguration(UniformInt.of(1, 4), UniformInt.of(4, 6), UniformInt.of(-4, 2)));
+        register(context, ALKAHEST_POOL, AetherIIFeatures.ALKAHEST_POOL.get(), new AlkahestPoolConfiguration(UniformInt.of(1, 4), UniformInt.of(4, 6), UniformInt.of(-4, 2)));
 
         register(context, ORE_SCATTERGLASS, Feature.ORE, new OreConfiguration(UNDERGROUND_TEST, AetherIIBlocks.CRUDE_SCATTERGLASS.get().defaultBlockState(), 24));
         register(context, ORE_ICESTONE, Feature.ORE, new OreConfiguration(HOLYSTONE_TEST, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 32));

@@ -278,7 +278,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
     }
 
     private boolean isFuel(ItemStack stack) {
-        return stack.is(AetherIIItems.ARKENIUM_ACID_CANISTER.get());
+        return stack.is(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER.get());
     }
 
     @Override
