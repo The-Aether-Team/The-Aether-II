@@ -81,8 +81,47 @@ public class AlkahestPurifierMenu extends RecipeBookMenu {
     }
 
     @Override
-    public ItemStack quickMoveStack(Player player, int slotIndex) { //todo
+    public ItemStack quickMoveStack(Player player, int slotIndex) {
         ItemStack itemStack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(slotIndex);
+        if (slot != null && slot.hasItem()) {
+            ItemStack slotStack = slot.getItem();
+            itemStack = slotStack.copy();
+            if (slotIndex == 5 || slotIndex == 6) {
+                if (!this.moveItemStackTo(slotStack, 7, 43, true)) {
+                    return ItemStack.EMPTY;
+                }
+                slot.onQuickCraft(slotStack, itemStack);
+            } else if (slotIndex > 6) {
+                if (this.canProcess(slotStack)) {
+                    if (!this.moveItemStackTo(slotStack, 0, 1, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (this.isFuel(slotStack)) {
+                    if (!this.moveItemStackTo(slotStack, 1, 5, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (slotIndex >= 7 && slotIndex < 34) {
+                    if (!this.moveItemStackTo(slotStack, 34, 43, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (slotIndex >= 34 && slotIndex < 43 && !this.moveItemStackTo(slotStack, 7, 34, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!this.moveItemStackTo(slotStack, 7, 43, false)) {
+                return ItemStack.EMPTY;
+            }
+            if (slotStack.isEmpty()) {
+                slot.setByPlayer(ItemStack.EMPTY);
+            } else {
+                slot.setChanged();
+            }
+            if (slotStack.getCount() == itemStack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+            slot.onTake(player, slotStack);
+        }
+
         return itemStack;
     }
 
@@ -99,10 +138,6 @@ public class AlkahestPurifierMenu extends RecipeBookMenu {
         return stack.is(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER);
     }
 
-//    public ItemStack getInputStack() {
-//        return this.getItems().get(0);
-//    }
-
     public float getProcessingProgress() {
         int i = this.data.get(0);
         int j = this.data.get(1);
@@ -118,8 +153,8 @@ public class AlkahestPurifierMenu extends RecipeBookMenu {
     }
 
     @Override
-    public RecipeBookMenu.PostPlaceAction handlePlacement(boolean p_361547_, boolean p_363944_, RecipeHolder<?> recipeHolder, final ServerLevel level, Inventory container) { //todo no idea what some of these values do yet
-        final List<Slot> list = List.of(this.getSlot(0), this.getSlot(9));
+    public RecipeBookMenu.PostPlaceAction handlePlacement(boolean useMaxItems, boolean isCreative, RecipeHolder<?> recipeHolder, final ServerLevel level, Inventory container) {
+        final List<Slot> list = List.of(this.getSlot(0), this.getSlot(5), this.getSlot(6));
 
         return ServerPlaceRecipe.placeRecipe(new ServerPlaceRecipe.CraftingMenuAccess<>() {
             public void fillCraftSlotsStackedContents(StackedItemContents container) {
@@ -133,6 +168,6 @@ public class AlkahestPurifierMenu extends RecipeBookMenu {
             public boolean recipeMatches(RecipeHolder<AlkahestPurificationRecipe> holder) {
                 return holder.value().matches(new SingleRecipeInputWithRandom(AlkahestPurifierMenu.this.container.getItem(0), AlkahestPurifierMenu.this.level.getRandom()), level);
             }
-        }, 1, 1, List.of(this.getSlot(0)), list, container, (RecipeHolder<AlkahestPurificationRecipe>) recipeHolder, p_361547_, p_363944_);
+        }, 1, 1, List.of(this.getSlot(0)), list, container, (RecipeHolder<AlkahestPurificationRecipe>) recipeHolder, useMaxItems, isCreative);
     }
 }
