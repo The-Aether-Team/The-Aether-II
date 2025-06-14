@@ -41,13 +41,11 @@ public class AltarScreen extends AbstractRecipeBookScreen<AltarMenu> implements 
 
     @Override
     protected void init() {
-        super.init();
         this.imageWidth = 176;
         this.imageHeight = 214;
-        this.leftPos = (this.width - this.imageWidth) / 2;
-        this.topPos = (this.height - this.imageHeight) / 2;
         this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2;
         this.inventoryLabelY = this.imageHeight - 94;
+        super.init();
     }
 
     @Override
