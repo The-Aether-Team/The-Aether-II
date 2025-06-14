@@ -36,6 +36,36 @@
           }
         },
         {
+          "biome": "aether_ii:frozen_lakes",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -2.0,
+              -1.0
+            ],
+            "erosion": [
+              0.0,
+              0.55
+            ],
+            "humidity": [
+              -1.5,
+              1.5
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.5,
+              -0.4
+            ],
+            "weirdness": [
+              0.2,
+              0.3
+            ]
+          }
+        },
+        {
           "biome": "aether_ii:enduring_woodland",
           "parameters": {
             "continentalness": [
@@ -272,6 +302,36 @@
             "weirdness": [
               0.3,
               1.0
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:shimmering_basin",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -2.0,
+              -1.0
+            ],
+            "erosion": [
+              0.0,
+              0.55
+            ],
+            "humidity": [
+              -1.5,
+              1.5
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.4,
+              0.65
+            ],
+            "weirdness": [
+              0.2,
+              0.3
             ]
           }
         },
@@ -632,6 +692,36 @@
             "weirdness": [
               0.3,
               1.0
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:glistening_swamp",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -2.0,
+              -1.0
+            ],
+            "erosion": [
+              0.55,
+              1.5
+            ],
+            "humidity": [
+              -1.5,
+              1.5
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.5,
+              0.6
+            ],
+            "weirdness": [
+              0.2,
+              0.3
             ]
           }
         },
@@ -1021,7 +1111,7 @@
             ],
             "weirdness": [
               -1.0,
-              0.3
+              0.2
             ]
           }
         }

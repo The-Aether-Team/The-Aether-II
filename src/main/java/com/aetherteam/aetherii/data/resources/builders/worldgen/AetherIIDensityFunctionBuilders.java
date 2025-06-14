@@ -94,9 +94,9 @@ public class AetherIIDensityFunctionBuilders {
     public static DensityFunction makeCaveBiomesRarityMapper(HolderGetter<DensityFunction> function) {
         DensityFunction depth = getFunction(function, DEPTH);
         DensityFunction density = depth;
-        density = DensityFunctions.rangeChoice(getFunction(function, CAVE_BIOMES), -1.5, 0.275, density, DensityFunctions.constant(-2.0));
+        density = DensityFunctions.rangeChoice(getFunction(function, CAVE_BIOMES), -1.5, 0.325, density, DensityFunctions.constant(-2.0));
         density = DensityFunctions.rangeChoice(depth, -1.5, -0.35, density, depth);
-        density = DensityFunctions.rangeChoice(getFunction(function, RIDGES), -1.5, 0.1, density, depth);
+        density = DensityFunctions.rangeChoice(getFunction(function, RIDGES), -1.5, 0.2, density, depth);
         return density;
     }
 

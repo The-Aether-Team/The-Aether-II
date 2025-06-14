@@ -29,7 +29,7 @@
         "blocks": "minecraft:air"
       },
       "direction_of_search": "down",
-      "max_steps": 16,
+      "max_steps": 8,
       "target_condition": {
         "type": "minecraft:matching_block_tag",
         "tag": "aether_ii:aether_underground_blocks"
@@ -40,7 +40,7 @@
       "predicate": {
         "type": "aether_ii:search",
         "direction_of_search": "up",
-        "max_steps": 8,
+        "max_steps": 4,
         "target_condition": {
           "type": "minecraft:matching_block_tag",
           "tag": "aether_ii:aether_underground_blocks"
@@ -75,7 +75,7 @@
           "offset": [
             0,
             -1,
-            -6
+            -3
           ],
           "tag": "aether_ii:aether_underground_blocks"
         }
@@ -90,7 +90,7 @@
         "target_condition": {
           "type": "minecraft:matching_block_tag",
           "offset": [
-            6,
+            3,
             -1,
             0
           ],
@@ -109,7 +109,7 @@
           "offset": [
             0,
             -1,
-            6
+            3
           ],
           "tag": "aether_ii:aether_underground_blocks"
         }
@@ -124,7 +124,7 @@
         "target_condition": {
           "type": "minecraft:matching_block_tag",
           "offset": [
-            -6,
+            -3,
             -1,
             0
           ],
