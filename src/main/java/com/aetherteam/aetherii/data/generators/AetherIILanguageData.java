@@ -1375,6 +1375,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addSubtitle("block", "arkenium_forge.use", "Arkenium Forge used");
 
+        this.addSubtitle("block", "alkahest_purifier.open", "Alkahest Purifier opens");
+        this.addSubtitle("block", "alkahest_purifier.close", "Alkahest Purifier closes");
+
         // Items
         this.addSubtitle("item", "ambrosium_shard.use", "Ambrosium Shard used");
         this.addSubtitle("item", "swet_gel.use", "Swet Gel used");

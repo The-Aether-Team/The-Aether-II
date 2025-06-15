@@ -1075,6 +1075,8 @@
   "subtitles.aether_ii.block.aercloud.blue_aercloud_bounce": "Blue Aercloud bounces",
   "subtitles.aether_ii.block.aether_portal.ambient": "Aether Portal whooshes",
   "subtitles.aether_ii.block.aether_portal.trigger": "Aether Portal noise intensifies",
+  "subtitles.aether_ii.block.alkahest_purifier.close": "Alkahest Purifier closes",
+  "subtitles.aether_ii.block.alkahest_purifier.open": "Alkahest Purifier opens",
   "subtitles.aether_ii.block.arkenium_forge.use": "Arkenium Forge used",
   "subtitles.aether_ii.block.bush.rustle": "Bush rustles",
   "subtitles.aether_ii.block.hestveil.ignite": "Hestveil ignites",

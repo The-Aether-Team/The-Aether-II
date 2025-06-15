@@ -19,6 +19,20 @@
     ],
     "subtitle": "subtitles.aether_ii.block.aether_portal.trigger"
   },
+  "block.alkahest_purifier.close": {
+    "sounds": [
+      "block/chest/close1",
+      "block/chest/close2",
+      "block/chest/close3"
+    ],
+    "subtitle": "subtitles.aether_ii.block.alkahest_purifier.close"
+  },
+  "block.alkahest_purifier.open": {
+    "sounds": [
+      "block/chest/open"
+    ],
+    "subtitle": "subtitles.aether_ii.block.alkahest_purifier.open"
+  },
   "block.arkenium_forge.use": {
     "sounds": [
       "random/anvil_use"

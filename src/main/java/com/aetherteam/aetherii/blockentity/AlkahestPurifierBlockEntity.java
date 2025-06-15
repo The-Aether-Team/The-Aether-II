@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.blockentity;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.utility.AlkahestPurifierBlock;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.inventory.menu.AlkahestPurifierMenu;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
@@ -20,6 +21,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.CompoundContainer;
 import net.minecraft.world.Container;
@@ -100,11 +102,11 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
         super(type, pos, state);
         this.openersCounter = new ContainerOpenersCounter() {
             protected void onOpen(Level level, BlockPos pos, BlockState state) {
-//                ChestBlockEntity.playSound(level, pos, state, SoundEvents.CHEST_OPEN); //todo
+                level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), AetherIISoundEvents.BLOCK_ALKAHEST_PURIFIER_OPEN, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
             }
 
             protected void onClose(Level level, BlockPos pos, BlockState state) {
-//                ChestBlockEntity.playSound(level, pos, state, SoundEvents.CHEST_CLOSE);
+                level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), AetherIISoundEvents.BLOCK_ALKAHEST_PURIFIER_CLOSE, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
             }
 
             protected void openerCountChanged(Level level, BlockPos pos, BlockState state, int p_155364_, int p_155365_) {

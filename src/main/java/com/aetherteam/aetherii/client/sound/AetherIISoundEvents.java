@@ -34,6 +34,9 @@ public class AetherIISoundEvents {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_ARKENIUM_FORGE_USE = register("block.arkenium_forge.use");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_ALKAHEST_PURIFIER_OPEN = register("block.alkahest_purifier.open");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_ALKAHEST_PURIFIER_CLOSE = register("block.alkahest_purifier.close");
+
     // Items
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_AMBROSIUM_SHARD = register("item.ambrosium_shard.use");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_SWET_GEL_USE = register("item.swet_ball.use");
