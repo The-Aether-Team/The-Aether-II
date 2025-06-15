@@ -62,6 +62,11 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.FERROSITE.get());
         this.createTrivialCube(AetherIIBlocks.RUSTED_FERROSITE.get());
         this.createPlantWithDefaultItem(AetherIIBlocks.MAGNETIC_SHROOM.get(), AetherIIBlocks.POTTED_MAGNETIC_SHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        this.createMagneticShroomBlock(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get());
+        this.createMagneticShroomBlock(AetherIIBlocks.LUCENT_MAGNETIC_SHROOM_BLOCK.get());
+        this.createMagneticShroomBlock(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get());
+        this.createMagneticShroomBlocksInside();
+
 
         // Arctic
         this.createArcticSnowBlocks();

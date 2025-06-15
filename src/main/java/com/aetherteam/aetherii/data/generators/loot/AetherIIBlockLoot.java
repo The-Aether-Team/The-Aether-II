@@ -12,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -67,6 +68,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.FERROSITE.get());
         this.dropSelf(AetherIIBlocks.RUSTED_FERROSITE.get());
         this.dropSelf(AetherIIBlocks.MAGNETIC_SHROOM.get());
+        this.add(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(), block -> this.createMushroomBlockDrop(block, AetherIIBlocks.MAGNETIC_SHROOM.get()));
+        this.add(AetherIIBlocks.LUCENT_MAGNETIC_SHROOM_BLOCK.get(), block -> this.createMushroomBlockDrop(block, AetherIIBlocks.MAGNETIC_SHROOM.get()));
+        this.add(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get(), block -> this.createMushroomBlockDrop(block, AetherIIBlocks.MAGNETIC_SHROOM.get()));
 
         // Arctic
         this.add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIItems.ARCTIC_SNOWBALL, ConstantValue.exactly(4.0F)));

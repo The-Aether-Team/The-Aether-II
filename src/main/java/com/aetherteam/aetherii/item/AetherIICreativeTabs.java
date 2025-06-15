@@ -489,6 +489,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ARILUM.get());
                 output.accept(AetherIIBlocks.BLOOMING_ARILUM.get());
                 output.accept(AetherIIBlocks.MAGNETIC_SHROOM.get());
+                output.accept(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get());
+                output.accept(AetherIIBlocks.LUCENT_MAGNETIC_SHROOM_BLOCK.get());
+                output.accept(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_VINES.get());

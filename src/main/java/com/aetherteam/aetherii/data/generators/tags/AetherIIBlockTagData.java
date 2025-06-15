@@ -1021,7 +1021,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.TOP_INFECTED_CORTEX_WOOD.get(),
                 AetherIIBlocks.BASE_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get(),
                 AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get(),
-                AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get()
+                AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get(),
+                AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(),
+                AetherIIBlocks.LUCENT_MAGNETIC_SHROOM_BLOCK.get(),
+                AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
