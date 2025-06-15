@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.recipe.recipes.item;
 
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
@@ -11,12 +13,20 @@ import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.Util;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.random.WeightedEntry;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
@@ -113,10 +123,21 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
 
     @Override
     public List<RecipeDisplay> display() {
+        SlotDisplay resultDisplay = new SlotDisplay.Composite(this.results().unwrap().stream().map((wrapper) -> new SlotDisplay.ItemStackSlotDisplay(wrapper.data())).collect(Collectors.toUnmodifiableList()));
+        HolderSet<Item> ingredients = this.ingredient().getValues();
+        Holder<Item> item = ingredients.get(0);
+        if (item.is(AetherIITags.Items.IRRADIATED_ITEM)) {
+            ResourceLocation location = item.getKey().location().withSuffix("_result");
+            resultDisplay = new SlotDisplay.ItemStackSlotDisplay(new ItemStack(item, 1, DataComponentPatch.builder()
+                    .set(DataComponents.ITEM_MODEL, location)
+                    .set(DataComponents.ITEM_NAME, Component.translatable(Util.makeDescriptionId("item", location)))
+                    .build()
+            ));
+        }
         return List.of(new AlkahestPurifierRecipeDisplay(
                 this.ingredient().display(),
                 new SlotDisplay.ItemSlotDisplay(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER),
-                new SlotDisplay.Composite(this.results().unwrap().stream().map((wrapper) -> new SlotDisplay.ItemStackSlotDisplay(wrapper.data())).collect(Collectors.toUnmodifiableList())),
+                resultDisplay,
                 new SlotDisplay.Composite(this.byproducts().unwrap().stream().map((wrapper) -> new SlotDisplay.ItemStackSlotDisplay(wrapper.data())).collect(Collectors.toUnmodifiableList())),
                 new SlotDisplay.ItemSlotDisplay(AetherIIBlocks.ALKAHEST_PURIFIER.asItem()),
                 this.alkahestUsage,

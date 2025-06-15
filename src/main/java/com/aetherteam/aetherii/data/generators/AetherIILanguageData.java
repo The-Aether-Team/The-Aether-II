@@ -801,6 +801,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.IRRADIATED_TOOL, "Irradiated Tool");
         this.addItem(AetherIIItems.IRRADIATED_CHUNK, "Irradiated Chunk");
         this.addItem(AetherIIItems.IRRADIATED_DUST, "Irradiated Dust");
+        this.add("item.aether_ii.irradiated_armor_result", "Random Armor");
+        this.add("item.aether_ii.irradiated_weapon_result", "Random Weapon");
+        this.add("item.aether_ii.irradiated_tool_result", "Random Tool");
+        this.add("item.aether_ii.irradiated_chunk_result", "Random Item");
 
         // Food
         this.addItem(AetherIIItems.BLUEBERRY, "Blueberry");
