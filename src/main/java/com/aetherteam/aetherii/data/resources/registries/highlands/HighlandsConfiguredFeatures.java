@@ -1289,10 +1289,10 @@ public class HighlandsConfiguredFeatures {
         register(context, HUGE_MAGNETIC_SHROOM, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()),
-                        new StraightTrunkPlacer(6, 3, 0),
+                        new UpwardsBranchingTrunkPlacer(5, 1, 4, UniformInt.of(1, 1), 0.5F, UniformInt.of(0, 1), HolderSet.direct(Block::builtInRegistryHolder, List.of())),
                         new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get().defaultBlockState(), 2).add(AetherIIBlocks.LUCENT_MAGNETIC_SHROOM_BLOCK.get().defaultBlockState(), 1).build()),
-                        new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
-                        Optional.of(new MangroveRootPlacer(UniformInt.of(1, 3), BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()), Optional.empty(), new MangroveRootPlacement(HolderSet.direct(Block::builtInRegistryHolder, List.of()), HolderSet.direct(Block::builtInRegistryHolder, List.of()), BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()), 6, 10, 0.2F))),
+                        new AcaciaFoliagePlacer(UniformInt.of(2, 3), ConstantInt.of(0)),
+                        Optional.of(new MangroveRootPlacer(UniformInt.of(1, 3), BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()), Optional.empty(), new MangroveRootPlacement(HolderSet.direct(Block::builtInRegistryHolder, List.of()), HolderSet.direct(Block::builtInRegistryHolder, List.of()), BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()), 3, 8, 0.2F))),
                         new TwoLayersFeatureSize(1, 0, 2))
                         .dirt(BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get())).ignoreVines().build());
     }

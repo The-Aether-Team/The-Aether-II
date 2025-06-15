@@ -19,7 +19,11 @@
     "foliage_placer": {
       "type": "minecraft:acacia_foliage_placer",
       "offset": 0,
-      "radius": 2
+      "radius": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 3,
+        "min_inclusive": 2
+      }
     },
     "foliage_provider": {
       "type": "minecraft:weighted_state_provider",
@@ -66,8 +70,8 @@
       "type": "minecraft:mangrove_root_placer",
       "mangrove_root_placement": {
         "can_grow_through": [],
-        "max_root_length": 10,
-        "max_root_width": 6,
+        "max_root_length": 8,
+        "max_root_width": 3,
         "muddy_roots_in": [],
         "muddy_roots_provider": {
           "type": "minecraft:simple_state_provider",
@@ -106,10 +110,22 @@
       }
     },
     "trunk_placer": {
-      "type": "minecraft:straight_trunk_placer",
-      "base_height": 6,
-      "height_rand_a": 3,
-      "height_rand_b": 0
+      "type": "minecraft:upwards_branching_trunk_placer",
+      "base_height": 5,
+      "can_grow_through": [],
+      "extra_branch_length": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 1,
+        "min_inclusive": 0
+      },
+      "extra_branch_steps": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 1,
+        "min_inclusive": 1
+      },
+      "height_rand_a": 1,
+      "height_rand_b": 4,
+      "place_branch_per_log_probability": 0.5
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
