@@ -6,7 +6,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.network.packet.clientbound.GasExplosionEffectsPacket;
+import com.aetherteam.aetherii.network.packet.clientbound.HestveilExplosionEffectsPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -118,7 +118,7 @@ public class HestveilBlock extends Block implements CanisterPickup {
     }
 
     public boolean shouldExplode(BlockState state) {
-        if (!state.is(AetherIITags.Blocks.TRIGGERS_GAS))
+        if (!state.is(AetherIITags.Blocks.TRIGGERS_HESTVEIL))
             return false;
 
         if (state.hasProperty(BlockStateProperties.LIT)) {
@@ -131,7 +131,7 @@ public class HestveilBlock extends Block implements CanisterPickup {
     public void explode(LevelAccessor level, BlockPos pos, boolean playSound) {
         if (level.removeBlock(pos, false)) {
             if (level instanceof ServerLevel serverLevel) {
-                PacketDistributor.sendToPlayersInDimension(serverLevel, new GasExplosionEffectsPacket(pos, playSound));
+                PacketDistributor.sendToPlayersInDimension(serverLevel, new HestveilExplosionEffectsPacket(pos, playSound));
             }
             for (Entity entity : level.getEntities(null, AABB.encapsulatingFullBlocks(pos, pos))) {
                 if (entity instanceof LivingEntity livingEntity) {
@@ -140,8 +140,8 @@ public class HestveilBlock extends Block implements CanisterPickup {
             }
             for (Direction direction : Direction.values()) {
                 BlockPos offsetPos = pos.relative(direction);
-                if (level.getBlockState(offsetPos).getBlock() instanceof HestveilBlock gasBlock) {
-                    gasBlock.explode(level, offsetPos, level.getRandom().nextInt(20) == 0);
+                if (level.getBlockState(offsetPos).getBlock() instanceof HestveilBlock hestveilBlock) {
+                    hestveilBlock.explode(level, offsetPos, level.getRandom().nextInt(20) == 0);
                 } else if (this.shouldExplode(level.getBlockState(offsetPos))) {
                     level.destroyBlock(offsetPos, true);
                 }

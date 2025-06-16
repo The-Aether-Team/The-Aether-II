@@ -82,11 +82,6 @@ public class AltarMenu extends RecipeBookMenu {
         return AetherIIRecipeBookTypes.ALTAR;
     }
 
-//    @Override
-//    public boolean shouldMoveToInventory(int slotIndex) { //todo
-//        return slotIndex < 1 || slotIndex > 8;
-//    }
-
     @Override
     public ItemStack quickMoveStack(Player player, int slotIndex) {
         ItemStack itemStack = ItemStack.EMPTY;
@@ -159,7 +154,7 @@ public class AltarMenu extends RecipeBookMenu {
     }
 
     @Override
-    public RecipeBookMenu.PostPlaceAction handlePlacement(boolean p_361547_, boolean p_363944_, RecipeHolder<?> recipeHolder, final ServerLevel level, Inventory container) { //todo no idea what some of these values do yet
+    public RecipeBookMenu.PostPlaceAction handlePlacement(boolean useMaxItems, boolean isCreative, RecipeHolder<?> recipeHolder, final ServerLevel level, Inventory container) {
         final List<Slot> list = List.of(this.getSlot(0), this.getSlot(9));
 
         return ServerPlaceRecipe.placeRecipe(new ServerPlaceRecipe.CraftingMenuAccess<>() {
@@ -174,6 +169,6 @@ public class AltarMenu extends RecipeBookMenu {
             public boolean recipeMatches(RecipeHolder<AltarEnchantingRecipe> holder) {
                 return holder.value().matches(new SingleRecipeInput(AltarMenu.this.container.getItem(0)), level);
             }
-        }, 1, 1, List.of(this.getSlot(0)), list, container, (RecipeHolder<AltarEnchantingRecipe>) recipeHolder, p_361547_, p_363944_);
+        }, 1, 1, List.of(this.getSlot(0)), list, container, (RecipeHolder<AltarEnchantingRecipe>) recipeHolder, useMaxItems, isCreative);
     }
 }

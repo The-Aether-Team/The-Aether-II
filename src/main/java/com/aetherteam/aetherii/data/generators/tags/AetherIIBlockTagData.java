@@ -286,7 +286,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.ALLOWED_BUCKET_PICKUP).add(
                 Blocks.POWDER_SNOW);
-        this.tag(AetherIITags.Blocks.ACID_RESISTANT).add(
+        this.tag(AetherIITags.Blocks.ALKAHEST_RESISTANT).add(
                 AetherIIBlocks.UNDERSHALE.get(),
                 AetherIIBlocks.ICHORITE.get(),
                 AetherIIBlocks.SMOOTH_ICHORITE.get(),
@@ -296,10 +296,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARKENIUM_BLOCK.get(),
                 AetherIIBlocks.ARKENIUM_DOOR.get(),
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.get()).addTags(AetherIITags.Blocks.ICHORITE_DECORATIVE_BLOCKS, AetherIITags.Blocks.MARBLED_ICHORITE_DECORATIVE_BLOCKS);
-        this.tag(AetherIITags.Blocks.ACID_INSTANTLY_DESTROYS).addTags(BlockTags.LEAVES, AetherIITags.Blocks.AERCLOUDS);
-        this.tag(AetherIITags.Blocks.ACID_QUICKLY_DESTROYS).addTags(BlockTags.DIRT, BlockTags.LOGS, BlockTags.PLANKS);
-        this.tag(AetherIITags.Blocks.ACID_SLOWLY_DESTROYS).addTags(AetherIITags.Blocks.HOLYSTONE, Tags.Blocks.STONES);
-        this.tag(AetherIITags.Blocks.TRIGGERS_GAS).addTags(
+        this.tag(AetherIITags.Blocks.ALKAHEST_INSTANTLY_DESTROYS).addTags(BlockTags.LEAVES, AetherIITags.Blocks.AERCLOUDS);
+        this.tag(AetherIITags.Blocks.ALKAHEST_QUICKLY_DESTROYS).addTags(BlockTags.DIRT, BlockTags.LOGS, BlockTags.PLANKS);
+        this.tag(AetherIITags.Blocks.ALKAHEST_SLOWLY_DESTROYS).addTags(AetherIITags.Blocks.HOLYSTONE, Tags.Blocks.STONES);
+        this.tag(AetherIITags.Blocks.TRIGGERS_HESTVEIL).addTags(
                 BlockTags.FIRE,
                 BlockTags.CANDLES,
                 BlockTags.CANDLE_CAKES,
@@ -865,6 +865,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ALTAR.get(),
                 AetherIIBlocks.ARKENIUM_FORGE.get(),
                 AetherIIBlocks.ARTISANS_BENCH.get(),
+                AetherIIBlocks.ALKAHEST_PURIFIER.get(),
                 AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(),
                 AetherIIBlocks.ARKENIUM_DOOR.get(),
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.get()

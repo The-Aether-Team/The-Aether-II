@@ -100,10 +100,10 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.aether_ii.block.bush.rustle")
         );
 
-        this.add(AetherIISoundEvents.BLOCK_GAS_IGNITE,
+        this.add(AetherIISoundEvents.BLOCK_HESTVEIL_IGNITE,
                 definition().with(
                         sound("minecraft:mob/ghast/fireball4")
-                ).subtitle("subtitles.aether_ii.block.gas.ignite")
+                ).subtitle("subtitles.aether_ii.block.hestveil.ignite")
         );
 
         this.add(AetherIISoundEvents.BLOCK_HOLYSTONE_FURNACE_CRACKLE,
@@ -120,6 +120,19 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 definition().with(
                         sound("minecraft:random/anvil_use")
                 ).subtitle("subtitles.aether_ii.block.arkenium_forge.use")
+        );
+
+        this.add(AetherIISoundEvents.BLOCK_ALKAHEST_PURIFIER_OPEN,
+                definition().with(
+                        sound("minecraft:block/chest/open")
+                ).subtitle("subtitles.aether_ii.block.alkahest_purifier.open")
+        );
+        this.add(AetherIISoundEvents.BLOCK_ALKAHEST_PURIFIER_CLOSE,
+                definition().with(
+                        sound("minecraft:block/chest/close1"),
+                        sound("minecraft:block/chest/close2"),
+                        sound("minecraft:block/chest/close3")
+                ).subtitle("subtitles.aether_ii.block.alkahest_purifier.close")
         );
 
         // Items

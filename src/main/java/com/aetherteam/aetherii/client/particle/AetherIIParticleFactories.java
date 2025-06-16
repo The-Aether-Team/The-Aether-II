@@ -50,8 +50,8 @@ public class AetherIIParticleFactories {
             return splashParticle;
         });
         event.registerSpriteSet(AetherIIParticleTypes.AMBROSIUM.get(), AmbrosiumParticle.Provider::new);
-        event.registerSpriteSet(AetherIIParticleTypes.ALKAHEST.get(), AcidParticle.Provider::new);
-        event.registerSpriteSet(AetherIIParticleTypes.HESTVEIL.get(), GasParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.ALKAHEST.get(), AlkahestParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.HESTVEIL.get(), HestveilParticle.Provider::new);
         event.registerSprite(AetherIIParticleTypes.DRIPPING_ALKAHEST.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
             DripParticle particle = new DripParticle.DripHangParticle(level, x, y, z, AetherIIFluids.ALKAHEST.get(), AetherIIParticleTypes.FALLING_ALKAHEST.get());
             particle.setColor(0.65F, 0.9F, 0.6F);
@@ -73,7 +73,7 @@ public class AetherIIParticleFactories {
                 protected void postMoveUpdate() {
                     if (this.onGround) {
                         BlockPos pos = BlockPos.containing(this.getPos()).below();
-                        if (this.level.getBlockState(pos).isSolid() && !this.level.getBlockState(pos).is(AetherIITags.Blocks.ACID_RESISTANT)) {
+                        if (this.level.getBlockState(pos).isSolid() && !this.level.getBlockState(pos).is(AetherIITags.Blocks.ALKAHEST_RESISTANT)) {
                             AlkahestFluid.progressivelyDestroyBlock(this.level, pos, 3, true);
                         }
                     }

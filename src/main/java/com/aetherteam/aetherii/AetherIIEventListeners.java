@@ -225,7 +225,7 @@ public class AetherIIEventListeners {
         LivingEntity livingEntity = event.getEntity();
         Map<EquipmentSlot, ArmorHurtEvent.ArmorEntry> armorEntries = event.getArmorMap();
 
-        if (livingEntity.getLastDamageSource() != null && livingEntity.getLastDamageSource().is(AetherIIDamageTypes.ACID)) {
+        if (livingEntity.getLastDamageSource() != null && livingEntity.getLastDamageSource().is(AetherIIDamageTypes.ALKAHEST)) {
             for (Map.Entry<EquipmentSlot, ArmorHurtEvent.ArmorEntry> entry : armorEntries.entrySet()) {
                 ArmorHurtEvent.ArmorEntry armor = entry.getValue();
                 if (armor.armorItemStack.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
