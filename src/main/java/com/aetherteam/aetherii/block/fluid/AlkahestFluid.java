@@ -15,8 +15,8 @@ import com.aetherteam.aetherii.network.packet.clientbound.AlkahestFizzPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.AlkahestBreakBlockPacket;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
-import com.aetherteam.aetherii.recipe.recipes.block.AcidCorrosionRecipe;
-import com.aetherteam.aetherii.recipe.recipes.item.IrradiationCleansingRecipe;
+import com.aetherteam.aetherii.recipe.recipes.block.AlkahestCorrosionRecipe;
+import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
 import io.wispforest.accessories.api.AccessoriesAPI;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.slot.SlotEntryReference;
@@ -71,7 +71,7 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
     protected void randomTick(ServerLevel level, BlockPos pos, FluidState state, RandomSource random) {
         super.randomTick(level, pos, state, random);
         if (level.getBlockState(pos.above()).isEmpty() && state.isSource()) {
-            this.createGas(level, pos);
+            this.createHestveil(level, pos);
         }
     }
 
@@ -100,10 +100,10 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
         for (Direction direction : Direction.values()) {
             BlockPos offsetPos = pos.offset(direction.getUnitVec3i());
             BlockState offsetState = level.getBlockState(offsetPos);
-            for (RecipeHolder<AcidCorrosionRecipe> recipe : level.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.ACID_CORROSION.get())) {
+            for (RecipeHolder<AlkahestCorrosionRecipe> recipe : level.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.ALKAHEST_CORROSION.get())) {
                 if (recipe != null) {
                     BlockState newState = recipe.value().getResultState(offsetState);
-                    if (recipe.value().matches(null, level, offsetPos, null, offsetState, newState, AetherIIRecipeTypes.ACID_CORROSION.get())) {
+                    if (recipe.value().matches(null, level, offsetPos, null, offsetState, newState, AetherIIRecipeTypes.ALKAHEST_CORROSION.get())) {
                         if (recipe.value().convert(level, offsetPos, newState, recipe.value().getFunction())) {
                             PacketDistributor.sendToPlayersInDimension(level, new AlkahestFizzPacket(pos, direction.getOpposite()));
                         }
@@ -117,13 +117,13 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
         if (fluidState.isSource()) {
             BlockPos belowPos = pos.below();
             BlockState belowState = level.getBlockState(belowPos);
-            if (!belowState.isAir() && !belowState.is(this.createLegacyBlock(fluidState).getBlock()) && !belowState.is(AetherIITags.Blocks.ACID_RESISTANT)) {
+            if (!belowState.isAir() && !belowState.is(this.createLegacyBlock(fluidState).getBlock()) && !belowState.is(AetherIITags.Blocks.ALKAHEST_RESISTANT)) {
                 int destroySpeed = 0;
-                if (belowState.is(AetherIITags.Blocks.ACID_INSTANTLY_DESTROYS)) {
+                if (belowState.is(AetherIITags.Blocks.ALKAHEST_INSTANTLY_DESTROYS)) {
                     destroySpeed = 9;
-                } else if (belowState.is(AetherIITags.Blocks.ACID_QUICKLY_DESTROYS)) {
+                } else if (belowState.is(AetherIITags.Blocks.ALKAHEST_QUICKLY_DESTROYS)) {
                     destroySpeed = 3;
-                } else if (belowState.is(AetherIITags.Blocks.ACID_SLOWLY_DESTROYS)) {
+                } else if (belowState.is(AetherIITags.Blocks.ALKAHEST_SLOWLY_DESTROYS)) {
                     destroySpeed = 1;
                 }
                 if (destroySpeed != 0) {
@@ -167,7 +167,7 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
         }
     }
 
-    public void createGas(Level level, BlockPos pos) {
+    public void createHestveil(Level level, BlockPos pos) {
         BlockPos above = pos.above();
         if (level.getBlockState(above).isEmpty()) {
             level.setBlock(above, AetherIIBlocks.HESTVEIL.get().defaultBlockState(), 3);
@@ -178,7 +178,7 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
         RandomSource random = level.getRandom();
         if (entity instanceof ItemEntity itemEntity) {
             ItemStack itemStack = itemEntity.getItem().copy();
-            if (!itemStack.is(AetherIITags.Items.ACID_RESISTANT_ITEM) && !itemStack.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
+            if (!itemStack.is(AetherIITags.Items.ALKAHEST_RESISTANT_ITEM) && !itemStack.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
                 itemEntity.lifespan -= 15;
                 if (entity.level().isClientSide()) {
                     for (int i = 0; i < 2; ++i) {
@@ -189,7 +189,7 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
                     }
                 }
                 if (itemEntity.lifespan <= 500) {
-                    for (RecipeHolder<IrradiationCleansingRecipe> recipe : level.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.IRRADIATION_CLEANSING.get())) {
+                    for (RecipeHolder<AlkahestPurificationRecipe> recipe : level.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.ALKAHEST_PURIFICATION.get())) {
                         if (recipe != null) {
                             SingleRecipeInputWithRandom input = new SingleRecipeInputWithRandom(itemStack, level.getRandom());
                             if (recipe.value().matches(input, level)) {
@@ -205,16 +205,16 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
             }
         } else if (entity instanceof LivingEntity livingEntity) {
             if (entity.tickCount % 20 == 0) {
-                livingEntity.hurt(AetherIIDamageTypes.damageSource(level, AetherIIDamageTypes.ACID), 3.0F);
+                livingEntity.hurt(AetherIIDamageTypes.damageSource(level, AetherIIDamageTypes.ALKAHEST), 3.0F);
 
                 if (!livingEntity.level().isClientSide() && livingEntity.level() instanceof ServerLevel serverLevel) {
                     ItemStack mainhandItem = livingEntity.getMainHandItem();
-                    if (!mainhandItem.is(AetherIITags.Items.ACID_RESISTANT_ITEM) && !mainhandItem.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
+                    if (!mainhandItem.is(AetherIITags.Items.ALKAHEST_RESISTANT_ITEM) && !mainhandItem.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
                         mainhandItem.hurtAndBreak(1, livingEntity, EquipmentSlot.MAINHAND);
                     }
 
                     ItemStack offhandItem = livingEntity.getOffhandItem();
-                    if (!offhandItem.is(AetherIITags.Items.ACID_RESISTANT_ITEM) && !offhandItem.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
+                    if (!offhandItem.is(AetherIITags.Items.ALKAHEST_RESISTANT_ITEM) && !offhandItem.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
                         offhandItem.hurtAndBreak(1, livingEntity, EquipmentSlot.OFFHAND);
                     }
 
@@ -223,7 +223,7 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
                         SlotEntryReference slotEntryReference = accessories.getFirstEquipped((itemStack) -> itemStack.getItem() instanceof GlovesItem);
                         if (slotEntryReference != null && slotEntryReference.stack().getItem() instanceof GlovesItem) {
                             ItemStack gloves = slotEntryReference.stack();
-                            if (!gloves.is(AetherIITags.Items.ACID_RESISTANT_ITEM) && !gloves.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
+                            if (!gloves.is(AetherIITags.Items.ALKAHEST_RESISTANT_ITEM) && !gloves.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
                                 if (livingEntity instanceof ServerPlayer serverPlayer) {
                                     gloves.hurtAndBreak(1, serverLevel, serverPlayer, (item) -> AccessoriesAPI.breakStack(slotEntryReference.reference()));
                                 }
@@ -237,7 +237,7 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
 
     @Override
     public boolean canBeReplacedWith(FluidState fluidState, BlockGetter level, BlockPos pos, Fluid fluid, Direction direction) {
-        return direction == Direction.DOWN && !fluid.is(AetherIITags.Fluids.ACID) && !fluid.is(FluidTags.WATER); //todo water interaction
+        return direction == Direction.DOWN && !fluid.is(AetherIITags.Fluids.ALKAHEST) && !fluid.is(FluidTags.WATER); //todo water interaction
     }
 
     @Override

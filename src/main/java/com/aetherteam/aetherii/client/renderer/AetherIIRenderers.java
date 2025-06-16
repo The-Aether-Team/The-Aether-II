@@ -9,10 +9,8 @@ import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
 import com.aetherteam.aetherii.client.renderer.block.model.baked.AmbientOcclusionLightModel;
 import com.aetherteam.aetherii.client.renderer.block.model.baked.FastModel;
 import com.aetherteam.aetherii.client.renderer.block.model.unbaked.UnbakedTrunkModelLoader;
-import com.aetherteam.aetherii.client.renderer.blockentity.ArkeniumForgeRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.MoaEggRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
+import com.aetherteam.aetherii.client.renderer.blockentity.*;
+import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
 import com.aetherteam.aetherii.client.renderer.entity.*;
 import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLatchLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.*;
@@ -22,6 +20,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiMod
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
+import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -39,6 +38,7 @@ import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
@@ -73,6 +73,7 @@ public class AetherIIRenderers {
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SKYROOT_BED.get(), SkyrootBedRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.MOA_EGG.get(), MoaEggRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ARKENIUM_FORGE.get(), ArkeniumForgeRenderer::new);
+        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ALKAHEST_PURIFIER.get(), AlkahestPurifierRenderer::new);
 
         // Entities
         // Passive
@@ -130,6 +131,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_BED_FOOT, BedRenderer::createFootLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_BED_HEAD, BedRenderer::createHeadLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA_EGG, MoaEggModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.ALKAHEST_PURIFIER, AlkahestPurifierModel::createBodyLayer);
 
         // Entities
         // Passive
@@ -238,5 +240,9 @@ public class AetherIIRenderers {
 
     public static void registerModelLoaders(ModelEvent.RegisterLoaders event) {
         event.register(UnbakedTrunkModelLoader.ID , UnbakedTrunkModelLoader.INSTANCE);
+    }
+
+    public static void registerSpecialModelRenderers(RegisterSpecialModelRendererEvent event) {
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier"), AlkahestPurifierSpecialRenderer.Unbaked.MAP_CODEC);
     }
 }

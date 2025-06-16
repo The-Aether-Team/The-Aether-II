@@ -16,25 +16,18 @@ public record AltarRecipeDisplay(SlotDisplay ingredient, SlotDisplay fuel, SlotD
                     SlotDisplay.CODEC.fieldOf("fuel").forGetter(AltarRecipeDisplay::fuel),
                     SlotDisplay.CODEC.fieldOf("result").forGetter(AltarRecipeDisplay::result),
                     SlotDisplay.CODEC.fieldOf("crafting_station").forGetter(AltarRecipeDisplay::craftingStation),
-                    Codec.INT.fieldOf("duration").forGetter(AltarRecipeDisplay::fuelCount),
-                    Codec.INT.fieldOf("fuel_count").forGetter(AltarRecipeDisplay::duration),
+                    Codec.INT.fieldOf("fuel_count").forGetter(AltarRecipeDisplay::fuelCount),
+                    Codec.INT.fieldOf("duration").forGetter(AltarRecipeDisplay::duration),
                     Codec.FLOAT.fieldOf("experience").forGetter(AltarRecipeDisplay::experience))
             .apply(instance, AltarRecipeDisplay::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, AltarRecipeDisplay> STREAM_CODEC = StreamCodec.composite(
-            SlotDisplay.STREAM_CODEC,
-            AltarRecipeDisplay::ingredient,
-            SlotDisplay.STREAM_CODEC,
-            AltarRecipeDisplay::fuel,
-            SlotDisplay.STREAM_CODEC,
-            AltarRecipeDisplay::result,
-            SlotDisplay.STREAM_CODEC,
-            AltarRecipeDisplay::craftingStation,
-            ByteBufCodecs.VAR_INT,
-            AltarRecipeDisplay::fuelCount,
-            ByteBufCodecs.VAR_INT,
-            AltarRecipeDisplay::duration,
-            ByteBufCodecs.FLOAT,
-            AltarRecipeDisplay::experience,
+            SlotDisplay.STREAM_CODEC, AltarRecipeDisplay::ingredient,
+            SlotDisplay.STREAM_CODEC, AltarRecipeDisplay::fuel,
+            SlotDisplay.STREAM_CODEC, AltarRecipeDisplay::result,
+            SlotDisplay.STREAM_CODEC, AltarRecipeDisplay::craftingStation,
+            ByteBufCodecs.VAR_INT, AltarRecipeDisplay::fuelCount,
+            ByteBufCodecs.VAR_INT, AltarRecipeDisplay::duration,
+            ByteBufCodecs.FLOAT, AltarRecipeDisplay::experience,
             AltarRecipeDisplay::new);
     public static final RecipeDisplay.Type<AltarRecipeDisplay> TYPE = new RecipeDisplay.Type<>(MAP_CODEC, STREAM_CODEC);
 

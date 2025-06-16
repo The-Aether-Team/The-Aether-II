@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "#aether_ii:plates/arkenium",
+    "S": "aether_ii:scatterglass"
+  },
+  "pattern": [
+    "ASA",
+    "ASA",
+    "AAA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:alkahest_purifier"
+  }
+}

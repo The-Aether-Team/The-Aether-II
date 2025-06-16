@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.client.AetherIIColorResolvers;
 import com.aetherteam.aetherii.client.renderer.block.model.builder.TrunkModelBuilder;
 import com.aetherteam.aetherii.client.renderer.block.model.unbaked.UnbakedTrunkModelLoader;
 import com.aetherteam.aetherii.client.renderer.item.color.AetherGrassColorSource;
+import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITexturedModels;
@@ -19,6 +20,7 @@ import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.blockstates.*;
 import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.special.BedSpecialRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -832,6 +834,14 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, location))
                 .with(BlockModelGenerators.createHorizontalFacingDispatch())
                 .with(BlockModelGenerators.createBooleanModelDispatch(ArkeniumForgeBlock.CHARGED, chargedLocation, location)));
+    }
+
+    public void createAlkahestPurifier(Block block, Block particle) {
+        this.createParticleOnlyBlock(block, particle);
+        Item item = block.asItem();
+        ResourceLocation resourcelocation = AetherIIModelTemplates.ALKAHEST_PURIFIER_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
+        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourcelocation, new AlkahestPurifierSpecialRenderer.Unbaked());
+        this.itemModelOutput.accept(item, unbaked);
     }
 
     public void createLadder(Block block) {

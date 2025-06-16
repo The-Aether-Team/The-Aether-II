@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "aether_ii:item/alkahest_purifier",
+    "model": {
+      "type": "aether_ii:alkahest_purifier"
+    }
+  }
+}

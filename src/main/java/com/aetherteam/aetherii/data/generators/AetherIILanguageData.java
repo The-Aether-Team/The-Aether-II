@@ -647,6 +647,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ALTAR, "Altar");
         this.addBlock(AetherIIBlocks.ARTISANS_BENCH, "Artisan's Bench");
         this.addBlock(AetherIIBlocks.ARKENIUM_FORGE, "Arkenium Forge");
+        this.addBlock(AetherIIBlocks.ALKAHEST_PURIFIER, "Alkahest Purifier");
         this.addBlock(AetherIIBlocks.SKYROOT_CHEST, "Skyroot Chest");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
         this.addBlock(AetherIIBlocks.SKYROOT_BED, "Skyroot Bed");
@@ -806,6 +807,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.IRRADIATED_TOOL, "Irradiated Tool");
         this.addItem(AetherIIItems.IRRADIATED_CHUNK, "Irradiated Chunk");
         this.addItem(AetherIIItems.IRRADIATED_DUST, "Irradiated Dust");
+        this.add("item.aether_ii.irradiated_armor_result", "Random Armor");
+        this.add("item.aether_ii.irradiated_weapon_result", "Random Weapon");
+        this.add("item.aether_ii.irradiated_tool_result", "Random Tool");
+        this.add("item.aether_ii.irradiated_chunk_result", "Random Item");
 
         // Food
         this.addItem(AetherIIItems.BLUEBERRY, "Blueberry");
@@ -1235,11 +1240,13 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addContainerType(AetherIIMenuTypes.ARTISANS_BENCH, "Artisan's Bench");
         this.addContainerType(AetherIIMenuTypes.ALTAR, "Altar");
         this.addContainerType(AetherIIMenuTypes.ARKENIUM_FORGE, "Arkenium Forge");
+        this.addContainerType(AetherIIMenuTypes.ALKAHEST_PURIFIER, "Alkahest Purifier");
 
 
         // GUIs
         this.addGuiText("arkenium_forge.forge_button.tooltip", "Forge Item");
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
+        this.addGuiText("recipebook.toggleRecipes.purifiable", "Showing Purifiable");
         this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");
         this.addGuiText("guidebook.button.open", "Guidebook");
         this.addGuiText("guidebook.button.close", "Inventory");
@@ -1368,11 +1375,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addSubtitle("block", "bush.rustle", "Bush rustles");
 
-        this.addSubtitle("block", "gas.ignite", "Gas ignites");
+        this.addSubtitle("block", "hestveil.ignite", "Hestveil ignites");
 
         this.addSubtitle("block", "holystone_furnace.fire_crackle", "Holystone Furnace crackles");
 
         this.addSubtitle("block", "arkenium_forge.use", "Arkenium Forge used");
+
+        this.addSubtitle("block", "alkahest_purifier.open", "Alkahest Purifier opens");
+        this.addSubtitle("block", "alkahest_purifier.close", "Alkahest Purifier closes");
 
         // Items
         this.addSubtitle("item", "ambrosium_shard.use", "Ambrosium Shard used");

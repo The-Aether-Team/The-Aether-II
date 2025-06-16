@@ -46,11 +46,11 @@ public class AetherIITags {
         public static final TagKey<Block> CRUDE_SCATTERGLASS_PANE = tag("crude_scatterglass_pane");
         public static final TagKey<Block> SCATTERGLASS_PANE = tag("scatterglass_pane");
         public static final TagKey<Block> ALLOWED_BUCKET_PICKUP = tag("allowed_bucket_pickup");
-        public static final TagKey<Block> ACID_RESISTANT = tag("acid_resistant");
-        public static final TagKey<Block> ACID_INSTANTLY_DESTROYS = tag("acid_instantly_destroys");
-        public static final TagKey<Block> ACID_QUICKLY_DESTROYS = tag("acid_quickly_destroys");
-        public static final TagKey<Block> ACID_SLOWLY_DESTROYS = tag("acid_slowly_destroys");
-        public static final TagKey<Block> TRIGGERS_GAS = tag("triggers_gas");
+        public static final TagKey<Block> ALKAHEST_RESISTANT = tag("alkahest_resistant");
+        public static final TagKey<Block> ALKAHEST_INSTANTLY_DESTROYS = tag("alkahest_instantly_destroys");
+        public static final TagKey<Block> ALKAHEST_QUICKLY_DESTROYS = tag("alkahest_quickly_destroys");
+        public static final TagKey<Block> ALKAHEST_SLOWLY_DESTROYS = tag("alkahest_slowly_destroys");
+        public static final TagKey<Block> TRIGGERS_HESTVEIL = tag("triggers_hestveil");
 
         public static final TagKey<Block> AETHER_PLANT_SURVIVES_ON = tag("aether_plant_survives_on");
         public static final TagKey<Block> SKYROOT_TWIG_SURVIVES_ON = tag("skyroot_twig_survives_on");
@@ -185,7 +185,7 @@ public class AetherIITags {
         public static final TagKey<Item> GOLDEN_AMBER_HARVESTERS = tag("golden_amber_harvesters");
         public static final TagKey<Item> DOUBLE_DROPS = tag("double_drops");
         public static final TagKey<Item> IRRADIATED_ITEM = tag("irradiated_item");
-        public static final TagKey<Item> ACID_RESISTANT_ITEM = tag("acid_resistant_item");
+        public static final TagKey<Item> ALKAHEST_RESISTANT_ITEM = tag("alkahest_resistant_item");
 
         private static TagKey<Item> tag(String name) {
             return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -211,7 +211,7 @@ public class AetherIITags {
     }
 
     public static class Fluids {
-        public static final TagKey<Fluid> ACID = tag("acid");
+        public static final TagKey<Fluid> ALKAHEST = tag("alkahest");
 
         public static final TagKey<Fluid> ALLOWED_BUCKET_PICKUP = tag("allowed_bucket_pickup");
 

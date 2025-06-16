@@ -25,6 +25,12 @@
       "parameters": [ ]
     },
     {
+      "enum": "net/minecraft/world/inventory/RecipeBookType",
+      "name": "AETHER_II_ALKAHEST_PURIFIER",
+      "constructor": "()V",
+      "parameters": [ ]
+    },
+    {
       "enum": "net/minecraft/world/entity/MobCategory",
       "name": "AETHER_II_AETHER_SURFACE_MONSTER",
       "constructor": "(Ljava/lang/String;IZZI)V",
@@ -55,51 +61,6 @@
       "parameters": {
         "class": "com/aetherteam/aetherii/AetherIIEnumExtensions$Client",
         "field": "AETHER_II_GLIDING_ARM_POSE_PROXY"
-      }
-    },
-    {
-      "enum": "net/minecraft/client/RecipeBookCategories",
-      "name": "AETHER_II_ALTAR_SEARCH",
-      "constructor": "(Ljava/util/function/Supplier;)V",
-      "parameters": {
-        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
-        "method": "altarSearchIcon"
-      }
-    },
-    {
-      "enum": "net/minecraft/client/RecipeBookCategories",
-      "name": "AETHER_II_ALTAR_FOOD",
-      "constructor": "(Ljava/util/function/Supplier;)V",
-      "parameters": {
-        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
-        "method": "altarFoodIcon"
-      }
-    },
-    {
-      "enum": "net/minecraft/client/RecipeBookCategories",
-      "name": "AETHER_II_ALTAR_BLOCKS",
-      "constructor": "(Ljava/util/function/Supplier;)V",
-      "parameters": {
-        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
-        "method": "altarBlocksIcon"
-      }
-    },
-    {
-      "enum": "net/minecraft/client/RecipeBookCategories",
-      "name": "AETHER_II_ALTAR_REPAIR",
-      "constructor": "(Ljava/util/function/Supplier;)V",
-      "parameters": {
-        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
-        "method": "altarRepairIcon"
-      }
-    },
-    {
-      "enum": "net/minecraft/client/RecipeBookCategories",
-      "name": "AETHER_II_ALTAR_MISC",
-      "constructor": "(Ljava/util/function/Supplier;)V",
-      "parameters": {
-        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
-        "method": "altarMiscIcon"
       }
     }
   ]
