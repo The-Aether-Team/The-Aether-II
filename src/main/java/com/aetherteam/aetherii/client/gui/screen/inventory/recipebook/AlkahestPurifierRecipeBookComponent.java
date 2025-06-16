@@ -23,7 +23,7 @@ public class AlkahestPurifierRecipeBookComponent extends RecipeBookComponent<Alk
             ResourceLocation.withDefaultNamespace("recipe_book/furnace_filter_disabled_highlighted")
     );
 
-    private static final Component FILTER_NAME = Component.translatable("gui.aether.recipebook.toggleRecipes.purifiable");
+    private static final Component FILTER_NAME = Component.translatable("gui.aether_ii.recipebook.toggleRecipes.purifiable");
 
     public AlkahestPurifierRecipeBookComponent(AlkahestPurifierMenu menu, List<TabInfo> tabs) {
         super(menu, tabs);

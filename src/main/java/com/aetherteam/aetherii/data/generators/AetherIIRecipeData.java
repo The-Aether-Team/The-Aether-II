@@ -901,6 +901,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider { //todo fix some
                 .pattern("HHH")
                 .unlockedBy(getHasName(AetherIIBlocks.ARKENIUM_FORGE.get()), has(AetherIITags.Items.PLATES_ARKENIUM))
                 .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ALKAHEST_PURIFIER.get())
+                .define('A', AetherIITags.Items.PLATES_ARKENIUM)
+                .define('S', AetherIIBlocks.SCATTERGLASS.get())
+                .pattern("ASA")
+                .pattern("ASA")
+                .pattern("AAA")
+                .unlockedBy(getHasName(AetherIIBlocks.ALKAHEST_PURIFIER.get()), has(AetherIITags.Items.PLATES_ARKENIUM))
+                .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_CHEST.get())
                 .define('#', AetherIITags.Items.PLANKS_CRAFTING)
                 .pattern("###")
@@ -1081,7 +1089,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider { //todo fix some
                 .pattern(" # ")
                 .unlockedBy("has_planks", has(AetherIITags.Items.CRAFTS_SKYROOT_TOOLS))
                 .save(this.output);
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.ARKENIUM_CANISTER.get(), 1)
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.ARKENIUM_CANISTER.get(), 2)
                 .define('#', AetherIITags.Items.PLATES_ARKENIUM)
                 .define('S', AetherIIBlocks.SCATTERGLASS.get())
                 .pattern("#S#")
@@ -1404,7 +1412,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider { //todo fix some
                 .add(AetherIIItems.ZANITE_GLOVES.toStack(), 1)
                 .add(AetherIIItems.ARKENIUM_GLOVES.toStack(), 1)
                 .add(AetherIIItems.GRAVITITE_GLOVES.toStack(), 1)
-                .build(), AetherIIItems.IRRADIATED_ARMOR, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 3, this.output);
+                .build(), AetherIIItems.IRRADIATED_ARMOR, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 1, this.output);
         this.alkahestPurification(RecipeCategory.COMBAT, SimpleWeightedRandomList.<ItemStack>builder()
                 .add(AetherIIItems.SKYROOT_SHORTSWORD.toStack(), 1)
                 .add(AetherIIItems.HOLYSTONE_SHORTSWORD.toStack(), 1)
@@ -1421,7 +1429,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider { //todo fix some
                 .add(AetherIIItems.ZANITE_HAMMER.toStack(), 1)
                 .add(AetherIIItems.ARKENIUM_HAMMER.toStack(), 1)
                 .add(AetherIIItems.GRAVITITE_HAMMER.toStack(), 1)
-                .build(), AetherIIItems.IRRADIATED_WEAPON, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 3, this.output);
+                .build(), AetherIIItems.IRRADIATED_WEAPON, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 1, this.output);
         this.alkahestPurification(RecipeCategory.COMBAT, SimpleWeightedRandomList.<ItemStack>builder()
                 .add(AetherIIItems.SKYROOT_AXE.toStack(), 1)
                 .add(AetherIIItems.HOLYSTONE_AXE.toStack(), 1)
@@ -1443,7 +1451,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider { //todo fix some
                 .add(AetherIIItems.ZANITE_TROWEL.toStack(), 1)
                 .add(AetherIIItems.ARKENIUM_TROWEL.toStack(), 1)
                 .add(AetherIIItems.GRAVITITE_TROWEL.toStack(), 1)
-                .build(), AetherIIItems.IRRADIATED_TOOL, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 3, this.output);
+                .build(), AetherIIItems.IRRADIATED_TOOL, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 1, this.output);
 
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE, 1).requires(AetherIIBlocks.SKYROOT_LEAF_PILE.get()).requires(AetherIIItems.IRRADIATED_DUST.get())
                 .group("irradiated_leaf_pile").unlockedBy(getHasName(AetherIIItems.IRRADIATED_DUST), has(AetherIIItems.IRRADIATED_DUST)).save(this.output, this.name("skyroot_leaf_pile_irradiation_crafting"));
