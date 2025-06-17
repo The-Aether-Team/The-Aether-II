@@ -69,7 +69,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.RUSTED_FERROSITE.get());
         this.dropSelf(AetherIIBlocks.MAGNETIC_SHROOM.get());
         this.add(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(), block -> this.createMushroomBlockDrop(block, AetherIIBlocks.MAGNETIC_SHROOM.get()));
-        this.add(AetherIIBlocks.LUCENT_MAGNETIC_SHROOM_BLOCK.get(), block -> this.createMushroomBlockDrop(block, AetherIIBlocks.MAGNETIC_SHROOM.get()));
+        this.add(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get(), block -> this.createMushroomBlockDrop(block, AetherIIBlocks.MAGNETIC_SHROOM.get()));
         this.add(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get(), block -> this.createMushroomBlockDrop(block, AetherIIBlocks.MAGNETIC_SHROOM.get()));
 
         // Arctic

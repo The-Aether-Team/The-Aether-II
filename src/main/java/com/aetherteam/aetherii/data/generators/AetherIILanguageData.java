@@ -62,7 +62,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.RUSTED_FERROSITE, "Rusted Ferrosite");
         this.addBlock(AetherIIBlocks.MAGNETIC_SHROOM, "Magnetic Shroom");
         this.addBlock(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK, "Magnetic Shroom Block");
-        this.addBlock(AetherIIBlocks.LUCENT_MAGNETIC_SHROOM_BLOCK, "Lucent Magnetic Shroom Block");
+        this.addBlock(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK, "Spotted Magnetic Shroom Block");
         this.addBlock(AetherIIBlocks.MAGNETIC_SHROOM_STEM, "Magnetic Shroom Stem");
 
         // Arctic

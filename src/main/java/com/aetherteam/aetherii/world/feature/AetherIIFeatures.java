@@ -38,4 +38,5 @@ public class AetherIIFeatures {
     public static DeferredHolder<Feature<?>, Feature<PointedStoneConfiguration>> POINTED_STONE = FEATURES.register("pointed_stone", () -> new PointedStoneFeature(PointedStoneConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> CRATER = FEATURES.register("crater", () -> new CraterFeature(NoneFeatureConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> TREE_MOSS_COVER = FEATURES.register("tree_moss_cover", () -> new TreeMossCoverFeature(NoneFeatureConfiguration.CODEC));
+    public static DeferredHolder<Feature<?>, Feature<HugeMagneticShroomConfiguration>> HUGE_MAGNETIC_SHROOM = FEATURES.register("huge_magnetic_shroom", () -> new HugeMagneticShroomFeature(HugeMagneticShroomConfiguration.CODEC));
 }

@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "aether_ii:block/lucent_magnetic_shroom_block"
+        "model": "aether_ii:block/spotted_magnetic_shroom_block"
       },
       "when": {
         "north": "true"
@@ -10,7 +10,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/lucent_magnetic_shroom_block",
+        "model": "aether_ii:block/spotted_magnetic_shroom_block",
         "uvlock": true,
         "y": 90
       },
@@ -20,7 +20,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/lucent_magnetic_shroom_block",
+        "model": "aether_ii:block/spotted_magnetic_shroom_block",
         "uvlock": true,
         "y": 180
       },
@@ -30,7 +30,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/lucent_magnetic_shroom_block",
+        "model": "aether_ii:block/spotted_magnetic_shroom_block",
         "uvlock": true,
         "y": 270
       },
@@ -40,7 +40,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/lucent_magnetic_shroom_block",
+        "model": "aether_ii:block/spotted_magnetic_shroom_block",
         "uvlock": true,
         "x": 270
       },
@@ -50,7 +50,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/lucent_magnetic_shroom_block",
+        "model": "aether_ii:block/spotted_magnetic_shroom_block",
         "uvlock": true,
         "x": 90
       },

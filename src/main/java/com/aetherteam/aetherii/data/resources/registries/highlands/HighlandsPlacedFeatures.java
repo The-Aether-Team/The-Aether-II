@@ -64,6 +64,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MAGNETIC_SHROOM_PATCH = createKey("magnetic_shroom_patch");
     public static final ResourceKey<PlacedFeature> BONUS_MAGNETIC_SHROOM_PATCH = createKey("bonus_magnetic_shroom_patch");
     public static final ResourceKey<PlacedFeature> BRYALINN_FLOWER_PATCH = createKey("bryalinn_flower_patch");
+//    public static final ResourceKey<PlacedFeature> HUGE_MAGNETIC_SHROOM = createKey("huge_magnetic_shroom");
 
     public static final ResourceKey<PlacedFeature> SHORT_ARILUM = createKey("short_arilum");
     public static final ResourceKey<PlacedFeature> ARILUM = createKey("arilum");

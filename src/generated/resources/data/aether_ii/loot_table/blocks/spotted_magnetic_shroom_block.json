@@ -26,7 +26,7 @@
                   }
                 }
               ],
-              "name": "aether_ii:lucent_magnetic_shroom_block"
+              "name": "aether_ii:spotted_magnetic_shroom_block"
             },
             {
               "type": "minecraft:item",
@@ -58,5 +58,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "aether_ii:blocks/lucent_magnetic_shroom_block"
+  "random_sequence": "aether_ii:blocks/spotted_magnetic_shroom_block"
 }

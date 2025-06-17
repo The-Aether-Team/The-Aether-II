@@ -8,7 +8,6 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunction
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.feature.configuration.*;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.MossyPredicate;
-import com.aetherteam.aetherii.world.feature.modifier.predicate.SearchPredicate;
 import com.aetherteam.aetherii.world.tree.decorator.*;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.AmberootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.LargeAmberootFoliagePlacer;
@@ -25,11 +24,9 @@ import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
-import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.InclusiveRange;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -37,7 +34,7 @@ import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.MangrovePropaguleBlock;
+import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.DensityFunctions;
@@ -48,18 +45,10 @@ import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.ThreeLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.AcaciaFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.RandomSpreadFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.rootplacers.AboveRootPlacement;
-import net.minecraft.world.level.levelgen.feature.rootplacers.MangroveRootPlacement;
-import net.minecraft.world.level.levelgen.feature.rootplacers.MangroveRootPlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.*;
-import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLeavesDecorator;
-import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.UpwardsBranchingTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
@@ -154,6 +143,8 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATROOT = createKey("greatroot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SWAMP_GREATROOT = createKey("swamp_greatroot");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_MAGNETIC_SHROOM = createKey("huge_magnetic_shroom");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_BIOME_MAGNETIC_SCAR = createKey("trees_biome_magnetic_scar");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_BIOME_TURQUOISE_FOREST = createKey("trees_biome_turquoise_forest");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_BIOME_GLISTENING_SWAMP = createKey("trees_glistening_swamp");
@@ -205,7 +196,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATBOA_SAPLING = createKey("greatboa_sapling");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATBOA_IRRADIATED_SAPLING = createKey("greatboa_irradiated_sapling");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBEROOT_SAPLING = createKey("amberoot_sapling");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_MAGNETIC_SHROOM = createKey("huge_magnetic_shroom");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_MAGNETIC_SHROOM_GROWN = createKey("huge_magnetic_shroom_grown");
 
 
     // Underground
@@ -969,6 +960,26 @@ public class HighlandsConfiguredFeatures {
                         new TwoLayersFeatureSize(1, 0, 2))
                         .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get())).decorators(ImmutableList.of(new IrradiationTreeDecorator(), new MossDecorator(SimpleStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()), SimpleStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_CARPET.get()), SimpleStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_VINES.get()), Optional.of(new WeightedStateProvider(bryallinMossFlowers))))).dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState())).build());
 
+        register(context, HUGE_MAGNETIC_SHROOM, AetherIIFeatures.HUGE_MAGNETIC_SHROOM.get(), new HugeMagneticShroomConfiguration(
+                new NoiseThresholdProvider(
+                        2345L,
+                        new NormalNoise.NoiseParameters(0, 1.0),
+                        1.0F,
+                        -0.15F,
+                        1.0F,
+                        AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get().defaultBlockState(),
+                        List.of(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get().defaultBlockState()),
+                        List.of(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get().defaultBlockState())
+                ), BlockStateProvider.simple(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get().defaultBlockState()
+                        .setValue(HugeMushroomBlock.NORTH, false)
+                        .setValue(HugeMushroomBlock.EAST, false)
+                        .setValue(HugeMushroomBlock.SOUTH, false)
+                        .setValue(HugeMushroomBlock.WEST, false)
+                        .setValue(HugeMushroomBlock.UP, false)
+                        .setValue(HugeMushroomBlock.DOWN, false)
+                ), BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get())
+        ));
+
         register(context, TREES_BIOME_MAGNETIC_SCAR, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(WISPTOP), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.WISPROOT_SAPLING.get())), 0.35F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATROOT_SAPLING.get())), 0.01F),
@@ -1286,15 +1297,25 @@ public class HighlandsConfiguredFeatures {
                         new TwoLayersFeatureSize(1, 0, 1))
                         .ignoreVines().build());
 
-        register(context, HUGE_MAGNETIC_SHROOM, Feature.TREE,
-                new TreeConfiguration.TreeConfigurationBuilder(
-                        BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()),
-                        new UpwardsBranchingTrunkPlacer(5, 1, 4, UniformInt.of(1, 1), 0.5F, UniformInt.of(0, 1), HolderSet.direct(Block::builtInRegistryHolder, List.of())),
-                        new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get().defaultBlockState(), 2).add(AetherIIBlocks.LUCENT_MAGNETIC_SHROOM_BLOCK.get().defaultBlockState(), 1).build()),
-                        new AcaciaFoliagePlacer(UniformInt.of(2, 3), ConstantInt.of(0)),
-                        Optional.of(new MangroveRootPlacer(UniformInt.of(1, 3), BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()), Optional.empty(), new MangroveRootPlacement(HolderSet.direct(Block::builtInRegistryHolder, List.of()), HolderSet.direct(Block::builtInRegistryHolder, List.of()), BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()), 3, 8, 0.2F))),
-                        new TwoLayersFeatureSize(1, 0, 2))
-                        .dirt(BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get())).ignoreVines().build());
+        register(context, HUGE_MAGNETIC_SHROOM_GROWN, AetherIIFeatures.HUGE_MAGNETIC_SHROOM.get(), new HugeMagneticShroomConfiguration(
+                new NoiseThresholdProvider(
+                        2345L,
+                        new NormalNoise.NoiseParameters(0, 1.0),
+                        1.0F,
+                        -0.15F,
+                        1.0F,
+                        AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get().defaultBlockState(),
+                        List.of(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get().defaultBlockState()),
+                        List.of(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get().defaultBlockState())
+                ), BlockStateProvider.simple(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get().defaultBlockState()
+                        .setValue(HugeMushroomBlock.NORTH, false)
+                        .setValue(HugeMushroomBlock.EAST, false)
+                        .setValue(HugeMushroomBlock.SOUTH, false)
+                        .setValue(HugeMushroomBlock.WEST, false)
+                        .setValue(HugeMushroomBlock.UP, false)
+                        .setValue(HugeMushroomBlock.DOWN, false)
+                ), BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get())
+        ));
     }
 
     private static void bootstrapUnderground(BootstrapContext<ConfiguredFeature<?, ?>> context) {

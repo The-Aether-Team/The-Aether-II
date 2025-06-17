@@ -194,7 +194,7 @@ public class AetherIIRenderers {
 
     public static void registerBakedModels(ModelEvent.ModifyBakingResult event) {
         List<DeferredBlock<? extends Block>> fastBlocks = List.of(AetherIIBlocks.HIGHLANDS_BUSH, AetherIIBlocks.BLUEBERRY_BUSH, AetherIIBlocks.POTTED_HIGHLANDS_BUSH, AetherIIBlocks.POTTED_BLUEBERRY_BUSH);
-        List<DeferredBlock<? extends Block>> aoBlocks = List.of(AetherIIBlocks.AMBROSIUM_ORE, AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE, AetherIIBlocks.BLOOMING_ARILUM, AetherIIBlocks.BLOOMING_ARILUM_PLANT, AetherIIBlocks.LUCENT_MAGNETIC_SHROOM_BLOCK);
+        List<DeferredBlock<? extends Block>> aoBlocks = List.of(AetherIIBlocks.AMBROSIUM_ORE, AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE, AetherIIBlocks.BLOOMING_ARILUM, AetherIIBlocks.BLOOMING_ARILUM_PLANT, AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK);
 
 
         getModels(event.getBakingResult().blockStateModels(), fastBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new FastModel(entry.getValue())));
