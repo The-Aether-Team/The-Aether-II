@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.data.resources.builders.worldgen.highlands.Highla
 import com.aetherteam.aetherii.world.feature.modifier.filter.ElevationFilter;
 import com.aetherteam.aetherii.world.feature.modifier.filter.ImprovedLayerPlacementModifier;
 import com.aetherteam.aetherii.world.feature.modifier.filter.LakePlacementModifier;
+import com.aetherteam.aetherii.world.feature.modifier.filter.StructureBlacklistFilter;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.MossyPredicate;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.ScanPredicate;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.SearchPredicate;
@@ -64,7 +65,6 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MAGNETIC_SHROOM_PATCH = createKey("magnetic_shroom_patch");
     public static final ResourceKey<PlacedFeature> BONUS_MAGNETIC_SHROOM_PATCH = createKey("bonus_magnetic_shroom_patch");
     public static final ResourceKey<PlacedFeature> BRYALINN_FLOWER_PATCH = createKey("bryalinn_flower_patch");
-//    public static final ResourceKey<PlacedFeature> HUGE_MAGNETIC_SHROOM = createKey("huge_magnetic_shroom");
 
     public static final ResourceKey<PlacedFeature> SHORT_ARILUM = createKey("short_arilum");
     public static final ResourceKey<PlacedFeature> ARILUM = createKey("arilum");
@@ -91,6 +91,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> GLISTENING_SWAMP_TREES = createKey("glistening_swamp_trees");
     public static final ResourceKey<PlacedFeature> GLISTENING_SWAMP_TREES_SUNKEN = createKey("glistening_swamp_trees_sunken");
     public static final ResourceKey<PlacedFeature> VIOLET_HIGHWOODS_TREES = createKey("violet_highwoods_trees");
+    public static final ResourceKey<PlacedFeature> HUGE_MAGNETIC_SHROOMS = createKey("huge_magnetic_shrooms");
 
     // Arctic
     public static final ResourceKey<PlacedFeature> FRIGID_SIERRA_TREES = createKey("frigid_sierra_trees");
@@ -479,6 +480,16 @@ public class HighlandsPlacedFeatures {
                 BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(AetherIIBlocks.GREATROOT_SAPLING.get().defaultBlockState(), BlockPos.ZERO)));
         register(context, VIOLET_HIGHWOODS_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_VIOLET_HIGHWOODS),
                 HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
+        register(context, HUGE_MAGNETIC_SHROOMS, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HUGE_MAGNETIC_SHROOM),
+                CountPlacement.of(100),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(96), VerticalAnchor.top(), 240)),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 16),
+                SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, -64, -8),
+                BiomeFilter.biome(),
+                new StructureBlacklistFilter()
+//                BlockPredicateFilter.forPredicate(new ScanPredicate(Direction.UP, BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 8))
+                );
 
         // Arctic
         register(context, FRIGID_SIERRA_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_FRIGID_SIERRA),

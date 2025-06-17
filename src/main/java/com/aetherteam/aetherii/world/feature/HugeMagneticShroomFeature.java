@@ -5,10 +5,16 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class HugeMagneticShroomFeature extends Feature<HugeMagneticShroomConfiguration> {
     public HugeMagneticShroomFeature(Codec<HugeMagneticShroomConfiguration> codec) {
@@ -22,26 +28,48 @@ public class HugeMagneticShroomFeature extends Feature<HugeMagneticShroomConfigu
         RandomSource random = context.random();
         HugeMagneticShroomConfiguration config = context.config();
 
-        this.generateShroom(level, random, pos, config); //todo branching
-
+        if (random.nextBoolean()) {
+            this.generateSmallShroom(level, random, pos, config);
+        } else {
+            BlockPos.MutableBlockPos mutableBlockPos = pos.mutable();
+            if (random.nextBoolean()) {
+                this.generateStem(level, random, mutableBlockPos, config, Direction.UP, UniformInt.of(1, 2));
+                List<Direction> directions = new ArrayList<>(Direction.Plane.HORIZONTAL.stream().toList());
+                Collections.shuffle(directions);
+                for (Direction direction : Direction.Plane.HORIZONTAL) {
+                    if (random.nextBoolean()) {
+                        this.generateStem(level, random, mutableBlockPos, config, Direction.UP, UniformInt.of(1, 3));
+                        this.generateBranch(level, random, new BlockPos(mutableBlockPos).mutable(), direction, config);
+                    }
+                }
+                this.generateStem(level, random, mutableBlockPos, config, Direction.UP, UniformInt.of(1, 2));
+            }
+            this.generateLargeShroom(level, random, mutableBlockPos, config);
+        }
         return true;
     }
 
-    public void generateShroom(WorldGenLevel level, RandomSource random, BlockPos pos, HugeMagneticShroomConfiguration config) {
-        BlockPos.MutableBlockPos mutablePos = pos.mutable();
-        this.generateStem(level, random, mutablePos, config);
-        boolean small = true;
-        if (small) {
-            this.generateSmallCap(level, random, mutablePos, config);
-        } else {
-            this.generateLargeCap(level, random, mutablePos, config);
-        }
+    public void generateBranch(WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos pos, Direction direction, HugeMagneticShroomConfiguration config) {
+        this.generateStem(level, random, pos, config, direction, UniformInt.of(3, 4));
+        this.generateSmallShroom(level, random, pos, config);
     }
 
-    public void generateStem(WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos pos, HugeMagneticShroomConfiguration config) {
-        int max = 3; //todo random
+    public void generateLargeShroom(WorldGenLevel level, RandomSource random, BlockPos pos, HugeMagneticShroomConfiguration config) {
+        BlockPos.MutableBlockPos mutablePos = pos.mutable();
+        this.generateStem(level, random, mutablePos, config, Direction.UP, UniformInt.of(3, 5));
+        this.generateLargeCap(level, random, mutablePos, config);
+    }
+
+    public void generateSmallShroom(WorldGenLevel level, RandomSource random, BlockPos pos, HugeMagneticShroomConfiguration config) {
+        BlockPos.MutableBlockPos mutablePos = pos.mutable();
+        this.generateStem(level, random, mutablePos, config, Direction.UP, UniformInt.of(2, 3));
+        this.generateSmallCap(level, random, mutablePos, config);
+    }
+
+    public void generateStem(WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos pos, HugeMagneticShroomConfiguration config, Direction direction, IntProvider length) {
+        int max = length.sample(random);
         for (int i = 1; i <= max; i++) {
-            pos.setWithOffset(pos, Direction.UP);
+            pos.setWithOffset(pos, direction);
             this.setBlock(level, pos, config.stemProvider().getState(random, pos));
         }
     }
