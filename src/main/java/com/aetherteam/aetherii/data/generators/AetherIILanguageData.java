@@ -34,6 +34,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.COARSE_AETHER_DIRT, "Coarse Aether Dirt");
         this.addBlock(AetherIIBlocks.AETHER_FARMLAND, "Aether Farmland");
         this.addBlock(AetherIIBlocks.SHIMMERING_SILT, "Shimmering Silt");
+        this.addBlock(AetherIIBlocks.MYCELIUM_ROOTS, "Mycelium Roots");
 
         // Underground
         this.addBlock(AetherIIBlocks.HOLYSTONE, "Holystone");

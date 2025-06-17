@@ -49,7 +49,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
-                AetherIIBlocks.FERROSITE_MUD.get()
+                AetherIIBlocks.FERROSITE_MUD.get(),
+                AetherIIBlocks.MYCELIUM_ROOTS.get()
         );
         this.tag(AetherIITags.Blocks.HOLYSTONE).add(
                 AetherIIBlocks.HOLYSTONE.get(),
@@ -1034,6 +1035,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
                 AetherIIBlocks.AETHER_FARMLAND.get(),
                 AetherIIBlocks.SHIMMERING_SILT.get(),
+                AetherIIBlocks.MYCELIUM_ROOTS.get(),
                 AetherIIBlocks.QUICKSOIL.get(),
                 AetherIIBlocks.FERROSITE_SAND.get(),
                 AetherIIBlocks.FERROSITE_MUD.get(),

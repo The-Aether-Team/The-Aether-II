@@ -40,6 +40,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.COARSE_AETHER_DIRT.get());
         this.dropOther(AetherIIBlocks.AETHER_FARMLAND.get(), AetherIIBlocks.AETHER_DIRT.get());
         this.dropSelf(AetherIIBlocks.SHIMMERING_SILT.get());
+        this.dropSelf(AetherIIBlocks.MYCELIUM_ROOTS.get());
 
         // Underground
         this.dropSelf(AetherIIBlocks.HOLYSTONE.get());

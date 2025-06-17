@@ -14,6 +14,7 @@ import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -36,6 +37,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.COARSE_AETHER_DIRT.get());
         this.createAetherFarmland();
         this.createTrivialCube(AetherIIBlocks.SHIMMERING_SILT.get());
+        this.createRotatedVariantBlock(AetherIIBlocks.MYCELIUM_ROOTS.get());
 
         // Underground
         this.createTrivialCube(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());

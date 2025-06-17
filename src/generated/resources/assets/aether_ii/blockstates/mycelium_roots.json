@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "aether_ii:block/mycelium_roots"
+      },
+      {
+        "model": "aether_ii:block/mycelium_roots",
+        "y": 90
+      },
+      {
+        "model": "aether_ii:block/mycelium_roots",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/mycelium_roots",
+        "y": 270
+      }
+    ]
+  }
+}
