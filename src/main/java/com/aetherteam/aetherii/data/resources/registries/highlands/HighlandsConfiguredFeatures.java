@@ -969,15 +969,18 @@ public class HighlandsConfiguredFeatures {
                         1.0F,
                         AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get().defaultBlockState(),
                         List.of(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get().defaultBlockState()),
-                        List.of(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get().defaultBlockState())
-                ), BlockStateProvider.simple(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get().defaultBlockState()
+                        List.of(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get().defaultBlockState())),
+                BlockStateProvider.simple(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get().defaultBlockState()
                         .setValue(HugeMushroomBlock.NORTH, false)
                         .setValue(HugeMushroomBlock.EAST, false)
                         .setValue(HugeMushroomBlock.SOUTH, false)
                         .setValue(HugeMushroomBlock.WEST, false)
                         .setValue(HugeMushroomBlock.UP, false)
-                        .setValue(HugeMushroomBlock.DOWN, false)
-                ), BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get())
+                        .setValue(HugeMushroomBlock.DOWN, false)),
+                BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()),
+                Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(COARSE_AETHER_DIRT_FLOOR))),
+                new TwoLayersFeatureSize(1, 0, 1),
+                false
         ));
 
         register(context, TREES_BIOME_MAGNETIC_SCAR, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
@@ -1306,15 +1309,18 @@ public class HighlandsConfiguredFeatures {
                         1.0F,
                         AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get().defaultBlockState(),
                         List.of(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get().defaultBlockState()),
-                        List.of(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get().defaultBlockState())
-                ), BlockStateProvider.simple(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get().defaultBlockState()
+                        List.of(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get().defaultBlockState())),
+                BlockStateProvider.simple(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get().defaultBlockState()
                         .setValue(HugeMushroomBlock.NORTH, false)
                         .setValue(HugeMushroomBlock.EAST, false)
                         .setValue(HugeMushroomBlock.SOUTH, false)
                         .setValue(HugeMushroomBlock.WEST, false)
                         .setValue(HugeMushroomBlock.UP, false)
-                        .setValue(HugeMushroomBlock.DOWN, false)
-                ), BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get())
+                        .setValue(HugeMushroomBlock.DOWN, false)),
+                BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()),
+                Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(COARSE_AETHER_DIRT_FLOOR))),
+                new TwoLayersFeatureSize(1, 0, 1),
+                false
         ));
     }
 
