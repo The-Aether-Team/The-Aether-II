@@ -2007,7 +2007,7 @@ public class HighlandsConfiguredFeatures {
         register(context, FREEZE_TOP_LAYER_ARCTIC, AetherIIFeatures.FREEZE_TOP_LAYER_ARCTIC.get());
         register(context, FREEZE_TOP_LAYER_TUNDRA, AetherIIFeatures.FREEZE_TOP_LAYER_TUNDRA.get());
 
-        register(context, CRATER, AetherIIFeatures.CRATER.get());
+        register(context, CRATER, AetherIIFeatures.CRATER.get(), new CraterConfiguration(UniformInt.of(4, 5)));
 
         register(context, CLOUDBED, AetherIIFeatures.CLOUDBED.get(),
                 new CloudbedConfiguration(

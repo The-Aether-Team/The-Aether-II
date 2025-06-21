@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:abs",
+  "argument": {
+    "type": "minecraft:noise",
+    "noise": "aether_ii:crater",
+    "xz_scale": 1.0,
+    "y_scale": 0.0
+  }
+}

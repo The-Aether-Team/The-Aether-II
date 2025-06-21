@@ -22,7 +22,7 @@ public class AetherIINoises {
     public static final ResourceKey<NormalNoise.NoiseParameters> CAVE_THICKNESS = createKey("cave_thickness");
     public static final ResourceKey<NormalNoise.NoiseParameters> ARCTIC_SNOW = createKey("arctic_snow");
     public static final ResourceKey<NormalNoise.NoiseParameters> QUICKSOIL_IRRADIATED = createKey("quicksoil_irradiated");
-    public static final ResourceKey<NormalNoise.NoiseParameters> QUICKSOIL_IRRADIATED_DEPTH = createKey("quicksoil_irradiated_depth");
+    public static final ResourceKey<NormalNoise.NoiseParameters> CRATER = createKey("crater");
 
     private static ResourceKey<NormalNoise.NoiseParameters> createKey(String name) {
         return ResourceKey.create(Registries.NOISE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -43,7 +43,7 @@ public class AetherIINoises {
         register(context, CAVE_THICKNESS, -7, 0.3, 0.0, 0.0);
         register(context, ARCTIC_SNOW, -5, 1.0, 0.0, 0.5, 0.5, 0.0, 0.0);
         register(context, QUICKSOIL_IRRADIATED, -4, 1.0, 0.5, 0.0, 0.0, 0.0);
-        register(context, QUICKSOIL_IRRADIATED_DEPTH, -3, 1.0, 0.5, 0.5, 0.0, 0.0);
+        register(context, CRATER, -3, 3.0, 0.0, 2.0, 0.0, 0.0, 0.0);
     }
 
     public static void register(BootstrapContext<NormalNoise.NoiseParameters> context, ResourceKey<NormalNoise.NoiseParameters> key, int firstOctave, double firstAmplitude, double... amplitudes) {

@@ -1,4 +1,9 @@
 {
   "type": "aether_ii:crater",
-  "config": {}
+  "config": {
+    "radius": {
+      "max_inclusive": 5,
+      "min_inclusive": 4
+    }
+  }
 }

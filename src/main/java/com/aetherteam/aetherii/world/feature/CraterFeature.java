@@ -1,29 +1,29 @@
 package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.world.feature.configuration.CraterConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public class CraterFeature extends Feature<NoneFeatureConfiguration> {
-    public CraterFeature(Codec<NoneFeatureConfiguration> codec) {
+public class CraterFeature extends Feature<CraterConfiguration> {
+    public CraterFeature(Codec<CraterConfiguration> codec) {
         super(codec);
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+    public boolean place(FeaturePlaceContext<CraterConfiguration> context) {
         BlockPos pos = context.origin();
         WorldGenLevel level = context.level();
         RandomSource random = context.random();
+        CraterConfiguration config = context.config();
 
-        int radius = UniformInt.of(4, 5).sample(random);
+        int radius = config.radius().sample(random);
         for (int x = -radius; x < radius; x++) {
             for (int z = -radius; z < radius; z++) {
                 for (int y = -radius; y < radius; y++) {
