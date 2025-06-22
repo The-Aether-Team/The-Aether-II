@@ -77,9 +77,9 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
                 DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 0.75F, 0.5F, 0.25F, 1.0F), 0.05D, 0.0D, 42), DensityFunctions.constant(1.0D)),
                 DensityFunctions.constant(0.1D)));
         context.register(ENVIRONMENTAL_TREE_MOSS, DensityFunctions.add(
-                DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 0.75F, 0.5F, 0.25F, 1.0F), 0.05D, 0.0D, 42), DensityFunctions.constant(1.0D)),
+                DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 0.75F, 0.5F, 0.25F, 1.0F), 0.05D, 0.0D, 53), DensityFunctions.constant(1.0D)),
                 DensityFunctions.constant(0.1D)));
-        context.register(ENVIRONMENTAL_CRATER, DensityFunctions.noise(noise.getOrThrow(AetherIINoises.CRATER), 1.0D, 0.0D).abs());
+        context.register(ENVIRONMENTAL_CRATER, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-2, 4.0, 0.0, 3.0, 0.0, 0.0, 0.0), 1.0D, 0.0D, 53).square());
 
         context.register(CLOUDBED_NOISE, DensityFunctions.add(DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1, 1, 1, 1, 1), 0.005D, 0.0D, 42), DensityFunctions.constant(1.5D)), DensityFunctions.constant(0.1D)));
         context.register(CLOUDBED_Y_OFFSET, DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1), 0.001D, 0.0D, 95), DensityFunctions.constant(1.5D)));
