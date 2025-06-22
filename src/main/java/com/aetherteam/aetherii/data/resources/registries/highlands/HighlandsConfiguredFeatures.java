@@ -2007,7 +2007,13 @@ public class HighlandsConfiguredFeatures {
         register(context, FREEZE_TOP_LAYER_ARCTIC, AetherIIFeatures.FREEZE_TOP_LAYER_ARCTIC.get());
         register(context, FREEZE_TOP_LAYER_TUNDRA, AetherIIFeatures.FREEZE_TOP_LAYER_TUNDRA.get());
 
-        register(context, CRATER, AetherIIFeatures.CRATER.get(), new CraterConfiguration(UniformInt.of(4, 5)));
+        register(context, CRATER, AetherIIFeatures.CRATER.get(), new CraterConfiguration(
+                UniformInt.of(4, 5),
+                AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_CRATER),
+                new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.IRRADIATED_HOLYSTONE.get().defaultBlockState(), 1).add(AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(), 5).build()),
+                BlockStateProvider.simple(Blocks.WATER),
+                BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_DUST_BLOCK.get())
+        ));
 
         register(context, CLOUDBED, AetherIIFeatures.CLOUDBED.get(),
                 new CloudbedConfiguration(

@@ -34,18 +34,17 @@ public class CraterFeature extends Feature<CraterConfiguration> {
                         BlockPos offsetPos = pos.offset(x, y, z);
                         if (y < 0) {
                             if (volume >= radiusSquared) {
-                                if (!level.getBlockState(offsetPos).is(Blocks.WATER)) {
-                                    BlockState state = random.nextInt(4) == 0 ? AetherIIBlocks.IRRADIATED_HOLYSTONE.get().defaultBlockState() : AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState();
-                                    level.setBlock(offsetPos, state, 3);
+                                if (!level.getBlockState(offsetPos).is(config.interiorBlock().getState(random, offsetPos).getBlock())) {
+                                    level.setBlock(offsetPos, config.exteriorBlock().getState(random, offsetPos), 3);
                                 }
                             } else {
-                                level.setBlock(offsetPos, Blocks.WATER.defaultBlockState(), 3);
+                                level.setBlock(offsetPos, config.interiorBlock().getState(random, offsetPos), 3);
                             }
                         } else {
                             level.setBlock(offsetPos, Blocks.AIR.defaultBlockState(), 3);
                         }
                         if (x == 0 && z == 0 && y == -radius + 2) {
-                            level.setBlock(offsetPos, AetherIIBlocks.IRRADIATED_DUST_BLOCK.get().defaultBlockState(), 3);
+                            level.setBlock(offsetPos, config.craterBlock().getState(random, offsetPos), 3);
                         }
                     }
                 }
