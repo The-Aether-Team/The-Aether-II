@@ -1996,7 +1996,7 @@ public class HighlandsConfiguredFeatures {
                 ),
                 6.25F,
                 3,
-                3.5F,
+                4.5F,
                 2,
                 AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON
         ));
