@@ -63,7 +63,7 @@ public class HighlandsConfiguredFeatures {
     public static final RuleTest HOLYSTONE_TEST = new TagMatchTest(AetherIITags.Blocks.HOLYSTONE);
     public static final RuleTest UNDERSHALE_TEST = new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get());
     public static final RuleTest UNDERGROUND_TEST = new TagMatchTest(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS);
-    
+
     // Surface
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT_TWIGS = createKey("skyroot_twigs");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HOLYSTONE_ROCKS = createKey("holystone_rocks");
@@ -110,7 +110,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBEROOT = createKey("amberoot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_AMBEROOT = createKey("large_amberoot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SINGULAR_AMBEROOT = createKey("singular_amberoot");
-    
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AMBEROOT_SPARSE = createKey("trees_amberoot_sparse");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AMBEROOT_DENSE = createKey("trees_amberoot_dense");
 
@@ -168,7 +168,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATROOT_IRRADIATED = createKey("greatroot_irradiated");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATOAK_IRRADIATED = createKey("greatoak_irradiated");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATBOA_IRRADIATED = createKey("greatboa_irradiated");
-    
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_IRRADIATED = createKey("trees_irradiated");
 
     // Saplings
@@ -244,8 +244,8 @@ public class HighlandsConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_HESTVEIL_OPEN = createKey("ore_hestveil_open");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_HESTVEIL_BURIED = createKey("ore_hestveil_buried");
-    
-    
+
+
     // Worldgen
     public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_SURFACE = createKey("coarse_aether_dirt_surface");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DISK_BRYALINN_MOSS = createKey("disk_bryalinn_moss");
@@ -277,8 +277,8 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> CRATER = createKey("crater");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUDBED = createKey("cloudbed");
-    
-    
+
+
     // Air
     public static final ResourceKey<ConfiguredFeature<?, ?>> COLD_AERCLOUD = createKey("cold_aercloud");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GOLDEN_AERCLOUD = createKey("golden_aercloud");
@@ -574,7 +574,7 @@ public class HighlandsConfiguredFeatures {
                                         .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.WEST), 1)
                                         .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 4))),
                                 BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
-        ));
+                ));
         register(
                 context,
                 HIGHFIELDS_FLOWER_PATCH,
@@ -695,15 +695,15 @@ public class HighlandsConfiguredFeatures {
                 .add(AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState(), 1)
         )));
         register(context, ARILUM_BONEMEAL, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
-                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(
-                        AetherIIFeatures.ARILUM.get(),
-                        new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.ARILUM_PLANT.get()), UniformInt.of(1, 8), ConstantInt.of(0)),
-                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER)))
-                ), 0.5F)),
-                PlacementUtils.inlinePlaced(
-                        AetherIIFeatures.ARILUM.get(),
-                        new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.BLOOMING_ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.BLOOMING_ARILUM_PLANT.get()), UniformInt.of(1, 3), UniformInt.of(4, 6)),
-                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))))
+                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(
+                                AetherIIFeatures.ARILUM.get(),
+                                new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.ARILUM_PLANT.get()), UniformInt.of(1, 8), ConstantInt.of(0)),
+                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER)))
+                        ), 0.5F)),
+                        PlacementUtils.inlinePlaced(
+                                AetherIIFeatures.ARILUM.get(),
+                                new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.BLOOMING_ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.BLOOMING_ARILUM_PLANT.get()), UniformInt.of(1, 3), UniformInt.of(4, 6)),
+                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))))
                 )
         );
 
@@ -1804,7 +1804,7 @@ public class HighlandsConfiguredFeatures {
 
         register(context, WATER_POND_TUNDRA, AetherIIFeatures.LAKE.get(),
                 new AetherLakeConfiguration(UniformInt.of(2, 5), BlockStateProvider.simple(Blocks.WATER), SimpleStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get())));
-     register(context, WATER_SPRING, Feature.SPRING,
+        register(context, WATER_SPRING, Feature.SPRING,
                 new SpringConfiguration(Fluids.WATER.defaultFluidState(), true, 4, 1, HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.UNDERSHALE.get(), AetherIIBlocks.HOLYSTONE.get(), AetherIIBlocks.AETHER_DIRT.get())));
 
         register(context, NOISE_LAKE, AetherIIFeatures.NOISE_LAKE.get(),
@@ -2048,13 +2048,13 @@ public class HighlandsConfiguredFeatures {
                         15D
                 ));
     }
-    
+
     private static void bootstrapAir(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         SimpleWeightedRandomList.Builder<BlockState> purpleAerclouds = new SimpleWeightedRandomList.Builder<>();
         for (Direction direction : PurpleAercloudBlock.DIRECTIONS) {
             purpleAerclouds.add(AetherIIBlocks.PURPLE_AERCLOUD.get().defaultBlockState().setValue(PurpleAercloudBlock.FACING, direction), 1);
         }
-        
+
         register(context, COLD_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(32, BlockStateProvider.simple(AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState())));
         register(context, GOLDEN_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(16, BlockStateProvider.simple(AetherIIBlocks.GOLDEN_AERCLOUD.get().defaultBlockState())));
         register(context, BLUE_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(24, BlockStateProvider.simple(AetherIIBlocks.BLUE_AERCLOUD.get().defaultBlockState())));
