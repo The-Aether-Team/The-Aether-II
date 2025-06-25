@@ -30,7 +30,7 @@ public class TundraSnowAndFreezeFeature extends Feature<NoneFeatureConfiguration
         WorldGenLevel level = context.level();
 
         HolderGetter<DensityFunction> function = context.level().holderLookup(Registries.DENSITY_FUNCTION);
-        DensityFunction noise =  AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.SNOW_NOISE);
+        DensityFunction noise =  AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_SNOW);
         DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(level.getSeed());
         noise.mapAll(visitor);
 

@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiom
 import com.aetherteam.aetherii.world.surfacerule.NoisePalette3DPlacementRule;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.placement.CaveSurface;
 
 public class HighlandsSurfaceBuilders {
     private static final SurfaceRules.RuleSource AETHER_GRASS_BLOCK = SurfaceRules.state(AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState());
@@ -19,6 +20,7 @@ public class HighlandsSurfaceBuilders {
 //    private static final SurfaceRules.RuleSource RUSTED_FERROSITE = new NoisePalette3DPlacementRule(AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState(), AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 1, 9, 0.03);
     private static final SurfaceRules.RuleSource IRRADIATED_HOLYSTONE = new NoisePalette3DPlacementRule(AetherIIBlocks.IRRADIATED_HOLYSTONE.get().defaultBlockState(), AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 3, 10, 0.045);
     private static final SurfaceRules.RuleSource ICHORITE = new NoisePalette3DPlacementRule(AetherIIBlocks.ICHORITE.get().defaultBlockState(), AetherIIBlocks.UNDERSHALE.get().defaultBlockState(), 16, 12, 0.075);
+    private static final SurfaceRules.RuleSource QUICKSOIL = SurfaceRules.state(AetherIIBlocks.QUICKSOIL.get().defaultBlockState());
 
     public static SurfaceRules.RuleSource surfaceRules() {
         SurfaceRules.RuleSource surface = SurfaceRules.sequence(
@@ -37,12 +39,16 @@ public class HighlandsSurfaceBuilders {
                         SurfaceRules.ifTrue(SurfaceRules.noiseCondition(AetherIINoises.ARCTIC_SNOW, -0.5D, 0.35D),
                                 SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, ARCTIC_SNOW_BLOCK))),
 
-                SurfaceRules.ifTrue(SurfaceRules.not(
-                        SurfaceRules.verticalGradient("aether_grass_block", VerticalAnchor.belowTop(276), VerticalAnchor.belowTop(272))),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.BATTLEGROUND_WASTES, HighlandsBiomes.CONTAMINATED_JUNGLE),
+                        SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.verticalGradient("aether_grass_block", VerticalAnchor.belowTop(276), VerticalAnchor.belowTop(272))),
+                                SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.noiseCondition(AetherIINoises.QUICKSOIL_IRRADIATED, -0.5D, 0.5D)),
+                                        SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.steep()),
+                                                SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, false, 2, CaveSurface.FLOOR), QUICKSOIL))))),
+
+                SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.verticalGradient("aether_grass_block", VerticalAnchor.belowTop(276), VerticalAnchor.belowTop(272))),
                         SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, surface)),
 
-                SurfaceRules.ifTrue(SurfaceRules.not(
-                        SurfaceRules.verticalGradient("aether_dirt", VerticalAnchor.belowTop(272), VerticalAnchor.belowTop(272))),
+                SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.verticalGradient("aether_dirt", VerticalAnchor.belowTop(272), VerticalAnchor.belowTop(272))),
                         SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, AETHER_DIRT)),
 
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.HESTVEIL_CAVERNS), ICHORITE),

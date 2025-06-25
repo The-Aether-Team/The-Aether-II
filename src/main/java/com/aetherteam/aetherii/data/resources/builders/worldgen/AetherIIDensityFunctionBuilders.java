@@ -63,8 +63,9 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> COASTS_FERROSITE_PILLAR = createKey("highlands/coasts/ferrosite_pillar");
     public static final ResourceKey<DensityFunction> COASTS_ARCTIC = createKey("highlands/coasts/arctic");
 
-    public static final ResourceKey<DensityFunction> SNOW_NOISE = createKey("highlands/snow/noise");
-    public static final ResourceKey<DensityFunction> TREE_MOSS = createKey("highlands/tree_moss/noise");
+    public static final ResourceKey<DensityFunction> ENVIRONMENTAL_SNOW = createKey("highlands/environmental/snow");
+    public static final ResourceKey<DensityFunction> ENVIRONMENTAL_TREE_MOSS = createKey("highlands/environmental/tree_moss");
+    public static final ResourceKey<DensityFunction> ENVIRONMENTAL_CRATER = createKey("highlands/environmental/crater");
 
     public static final ResourceKey<DensityFunction> CLOUDBED_NOISE = createKey("highlands/cloudbed/noise");
     public static final ResourceKey<DensityFunction> CLOUDBED_Y_OFFSET = createKey("highlands/cloudbed/y_offset");
