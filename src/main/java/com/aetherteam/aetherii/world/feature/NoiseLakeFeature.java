@@ -92,7 +92,10 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                             && !level.isEmptyBlock(pos.below(2))
                             && !level.getBlockState(pos.above()).isSolid()
                     ) {
-                        this.setBlock(level, pos, Blocks.WATER.defaultBlockState());
+                        if (pos.getY() == config.height().getValue() - 1 && config.frozen()) {
+                            this.setBlock(level, pos, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState());
+                        }
+                        else this.setBlock(level, pos, Blocks.WATER.defaultBlockState());
                         this.setBlock(level, pos.below(), config.underwaterBlock().getState(context.random(), pos.below()));
                         if (level.isEmptyBlock(pos.below(2))) {
                             this.setBlock(level, pos.below(2), AetherIIBlocks.HOLYSTONE.get().defaultBlockState());
@@ -154,11 +157,6 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                         }
                     }
                 }
-            }
-
-            // Freezes Top if "frozen" is true
-            if (pos.getY() == config.height().getMinValue() - 1 && level.getBlockState(pos.below()).is(Blocks.WATER) && config.frozen()) {
-                this.setBlock(level, pos.below(), AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState());
             }
         }
     }

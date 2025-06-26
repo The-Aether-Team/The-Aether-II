@@ -67,6 +67,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 .add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
                 .add(AetherIIBlocks.MOSSY_HOLYSTONE.get())
                 .add(AetherIIBlocks.IRRADIATED_HOLYSTONE.get())
+                .add(AetherIIBlocks.QUICKSOIL.get())
                 .add(AetherIIBlocks.FERROSITE.get())
                 .add(AetherIIBlocks.ARCTIC_PACKED_ICE.get())
                 .addTags(

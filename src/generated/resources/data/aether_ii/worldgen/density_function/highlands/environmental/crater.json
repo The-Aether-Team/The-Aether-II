@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:square",
+  "argument": {
+    "type": "aether_ii:perlin_noise",
+    "noise": {
+      "amplitudes": [
+        4.0,
+        0.0,
+        3.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "firstOctave": -2
+    },
+    "seed": 53,
+    "xz_scale": 1.0,
+    "y_scale": 0.0
+  }
+}

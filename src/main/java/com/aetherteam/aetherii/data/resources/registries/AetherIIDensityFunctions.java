@@ -73,12 +73,13 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(COASTS_ARCTIC, buildCoastNoise(function,3.0D));
         context.register(COASTS_FERROSITE_PILLAR, buildCoastNoise(function,7.0D));
 
-        context.register(ENVIRONMENTAL_SNOW, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 0.75F, 0.5F, 0.25F, 1.0F), 0.05D, 0.0D, 56), DensityFunctions.constant(0.1D)));
-        context.register(ENVIRONMENTAL_TREE_MOSS, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 0.75F, 0.5F, 0.25F, 1.0F), 0.05D, 0.0D, 64), DensityFunctions.constant(0.1D)));
-
-        context.register(DUNGEON_DENSE_GUARDIAN_WOOD, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-4, 0.75F, 1.0, 0.75, 0.0, 0.0), 1.0D, 1.0D, 1000), DensityFunctions.constant(-0.1D)));
-        context.register(DUNGEON_STRIPPED_GUARDIAN_WOOD, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-3, 1.0, 0.5, 0.0, 0.0), 1.0D, 1.0D, 1100), DensityFunctions.constant(-0.125D)));
-        context.register(DUNGEON_GUARDIAN_ROOTS, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-4, 0.75F, 1.0, 0.75, 0.0, 0.0), 1.25D, 1.25D, 1200), DensityFunctions.constant(-0.075D)));
+        context.register(ENVIRONMENTAL_SNOW, DensityFunctions.add( //TODO: clean-up
+                DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 0.75F, 0.5F, 0.25F, 1.0F), 0.05D, 0.0D, 42), DensityFunctions.constant(1.0D)),
+                DensityFunctions.constant(0.1D)));
+        context.register(ENVIRONMENTAL_TREE_MOSS, DensityFunctions.add(
+                DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 0.75F, 0.5F, 0.25F, 1.0F), 0.05D, 0.0D, 53), DensityFunctions.constant(1.0D)),
+                DensityFunctions.constant(0.1D)));
+        context.register(ENVIRONMENTAL_CRATER, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-2, 4.0, 0.0, 3.0, 0.0, 0.0, 0.0), 1.0D, 0.0D, 53).square());
 
         context.register(CLOUDBED_NOISE, DensityFunctions.add(DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1, 1, 1, 1, 1), 0.005D, 0.0D, 42), DensityFunctions.constant(1.5D)), DensityFunctions.constant(0.1D)));
         context.register(CLOUDBED_Y_OFFSET, DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1), 0.001D, 0.0D, 95), DensityFunctions.constant(1.5D)));

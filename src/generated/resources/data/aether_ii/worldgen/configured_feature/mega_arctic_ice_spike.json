@@ -4,7 +4,7 @@
     "additional_radius": 3,
     "additional_slope_intensity": 2,
     "base_radius": 6.25,
-    "base_slope_intensity": 3.5,
+    "base_slope_intensity": 4.5,
     "block": {
       "type": "minecraft:noise_provider",
       "noise": {
