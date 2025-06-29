@@ -19,7 +19,7 @@ import java.util.Optional;
 public class AetherIIStructureSets {
     public static final ResourceKey<StructureSet> OUTPOSTS = createKey("outposts");
     public static final ResourceKey<StructureSet> CAMPS = createKey("camps");
-    public static final ResourceKey<StructureSet> SURFACE_DUNGEONS = createKey("surface_dungeons");
+   // public static final ResourceKey<StructureSet> SURFACE_DUNGEONS = createKey("surface_dungeons");
 
     private static ResourceKey<StructureSet> createKey(String name) {
         return ResourceKey.create(Registries.STRUCTURE_SET, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -32,8 +32,10 @@ public class AetherIIStructureSets {
     public static void bootstrap(BootstrapContext<StructureSet> context) {
         HolderGetter<Structure> structures = context.lookup(Registries.STRUCTURE);
 
-        context.register(SURFACE_DUNGEONS, new StructureSet(structures.getOrThrow(AetherIIStructures.INFECTED_GUARDIAN_TREE),
+       /* context.register(SURFACE_DUNGEONS, new StructureSet(structures.getOrThrow(AetherIIStructures.INFECTED_GUARDIAN_TREE),
                 new RandomSpreadStructurePlacement(26, 12, RandomSpreadType.LINEAR, 897773)));
+
+        */
 
         Holder.Reference<StructureSet> outposts = context.register(OUTPOSTS, new StructureSet(structures.getOrThrow(AetherIIStructures.OUTPOST),
                 new RandomSpreadStructurePlacement(26, 16, RandomSpreadType.LINEAR, 2738116)));
