@@ -8,16 +8,11 @@ import com.aetherteam.aetherii.client.renderer.entity.state.AerbunnyRenderState;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
 
 public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState, AerbunnyModel> {
     private static final ResourceLocation AERBUNNY_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/aerbunny/aerbunny.png");
@@ -35,6 +30,7 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState,
     @Override
     public void extractRenderState(Aerbunny aerbunny, AerbunnyRenderState renderState, float partialTick) {
         super.extractRenderState(aerbunny, renderState, partialTick);
+        renderState.bodyRot = aerbunny.getVehicle() instanceof Player player ? player.yHeadRot : aerbunny.yBodyRot;
         renderState.puffiness = Mth.lerp(partialTick, aerbunny.getPuffiness(), aerbunny.getPuffiness() - aerbunny.getPuffSubtract()) / 20.0F;
         renderState.collarColor = aerbunny.getCollarColor();
         renderState.isSitting = aerbunny.isInSittingPose();
@@ -42,6 +38,7 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState,
         renderState.deltaMovement = aerbunny.getDeltaMovement();
         renderState.tame = aerbunny.isTame();
         renderState.vehicleUUID = aerbunny.getVehicleUUID();
+        renderState.vehicleLookAngle = aerbunny.getVehicle() instanceof Player player ? player.getLookAngle() : null;
     }
 
     /**
@@ -67,51 +64,24 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState,
     @Override
     protected void setupRotations(AerbunnyRenderState aerbunny, PoseStack poseStack, float rotationYaw, float scale) {
         super.setupRotations(aerbunny, poseStack, rotationYaw, scale);
-        if (!aerbunny.onGround) {
-            if (aerbunny.deltaMovement.y() > 0.5) {
-                poseStack.mulPose(Axis.XN.rotationDegrees(Mth.rotLerp(aerbunny.partialTick, 0.0F, 15.0F)));
-            } else if (aerbunny.deltaMovement.y() < -0.5) {
-                poseStack.mulPose(Axis.XN.rotationDegrees(Mth.rotLerp(aerbunny.partialTick, 0.0F, -15.0F)));
-            } else {
-                poseStack.mulPose(Axis.XN.rotationDegrees((float) (aerbunny.deltaMovement.y() * 30.0)));
+        if (aerbunny.vehicleLookAngle != null) {
+            double lookY = aerbunny.vehicleLookAngle.y();
+            poseStack.mulPose(Axis.XP.rotationDegrees(((float) lookY * Mth.RAD_TO_DEG) * 0.75F));
+        } else {
+            if (!aerbunny.onGround) {
+                if (aerbunny.deltaMovement.y() > 0.5) {
+                    poseStack.mulPose(Axis.XN.rotationDegrees(Mth.rotLerp(aerbunny.partialTick, 0.0F, 15.0F)));
+                } else if (aerbunny.deltaMovement.y() < -0.5) {
+                    poseStack.mulPose(Axis.XN.rotationDegrees(Mth.rotLerp(aerbunny.partialTick, 0.0F, -15.0F)));
+                } else {
+                    poseStack.mulPose(Axis.XN.rotationDegrees((float) (aerbunny.deltaMovement.y() * 30.0)));
+                }
             }
         }
-    }
-
-    @Override
-    protected int getModelTint(AerbunnyRenderState renderState) {
-        float opacity = this.calculateOpacity(renderState);
-        if (opacity < 1.0F) {
-            AetherII.LOGGER.info(String.valueOf(opacity));
-            return ARGB.colorFromFloat(Math.max(opacity, 0.05F), 1.0F, 1.0F, 1.0F);
-        }
-        return super.getModelTint(renderState);
-    }
-
-    @Nullable
-    @Override
-    protected RenderType getRenderType(AerbunnyRenderState renderState, boolean isVisible, boolean renderTranslucent, boolean appearsGlowing) {
-        ResourceLocation resourcelocation = this.getTextureLocation(renderState);
-        float opacity = this.calculateOpacity(renderState);
-        if (opacity < 1.0F) {
-            return RenderType.entityTranslucent(resourcelocation);
-        }
-        return super.getRenderType(renderState, isVisible, renderTranslucent, appearsGlowing);
     }
 
     @Override
     public ResourceLocation getTextureLocation(AerbunnyRenderState renderState) {
         return AERBUNNY_TEXTURE;
-    }
-
-    private float calculateOpacity(AerbunnyRenderState renderState) {
-        if (Minecraft.getInstance().getCameraEntity() instanceof Player player) {
-            if (renderState.vehicleUUID.isPresent() && renderState.vehicleUUID.get().equals(player.getUUID())) {
-                Vec3 lookAngle = player.getLookAngle();
-                float calc = (float) Math.min((Math.max(lookAngle.y(), 0.45) - 0.45) * 2.5F, 1.0F);
-                return 1.0F - calc;
-            }
-        }
-        return 1.0F;
     }
 }

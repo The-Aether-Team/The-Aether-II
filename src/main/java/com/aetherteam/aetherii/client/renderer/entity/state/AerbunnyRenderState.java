@@ -13,4 +13,5 @@ public class AerbunnyRenderState extends TamableRenderState {
     public boolean onGround;
     public Vec3 deltaMovement;
     public Optional<UUID> vehicleUUID;
+    public Vec3 vehicleLookAngle;
 }

@@ -195,7 +195,7 @@ public class Aerbunny extends AetherTamableAnimal {
                 this.stopRiding();
             }
 
-            EntityUtil.copyRotations(this, player);
+            this.setYBodyRot((float) Mth.rotLerp(1.0 / 3.0, player.getYRot(), player.yRotO));
 
             player.resetFallDistance();
             if (!player.onGround() && !player.isFallFlying()) {
@@ -588,6 +588,26 @@ public class Aerbunny extends AetherTamableAnimal {
     @Override
     public boolean canRiderInteract() {
         return true;
+    }
+
+    @Override
+    public Vec3 getVehicleAttachmentPoint(Entity entity) {
+        Vec3 attachmentPoint = super.getVehicleAttachmentPoint(entity);
+        if (entity instanceof Player player) {
+            float viewXRot = player.getViewXRot(1.0F);
+            if (viewXRot < 0) {
+                double back = -Math.abs(viewXRot / 335);
+                Vec3 offset = new Vec3(back * Mth.cos((entity.getYRot() - 90) * Mth.DEG_TO_RAD), 0, back * Mth.sin((entity.getYRot() - 90) * Mth.DEG_TO_RAD));
+                attachmentPoint = attachmentPoint.add(offset);
+            }
+        }
+        Entity vehicle = entity.getVehicle();
+        if (entity.getPose() != Pose.CROUCHING) {
+            attachmentPoint = attachmentPoint.subtract(0.0F, 0.05F, 0.0F);
+        } else if (vehicle != null) {
+            attachmentPoint = attachmentPoint.subtract(0.0F, 0.35F, 0.0F);
+        }
+        return attachmentPoint;
     }
 
     /**
