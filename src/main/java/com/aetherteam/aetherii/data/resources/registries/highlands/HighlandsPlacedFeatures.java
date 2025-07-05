@@ -779,7 +779,6 @@ public class HighlandsPlacedFeatures {
 
         register(context, FERROSITE_PILLAR, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.FERROSITE_PILLAR),
                 CountPlacement.of(1),
-                InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(128), VerticalAnchor.absolute(200)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.AETHER_DIRT)), //todo
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
@@ -788,7 +787,6 @@ public class HighlandsPlacedFeatures {
 
         register(context, FERROSITE_SPIKE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.FERROSITE_SPIKE),
                 CountPlacement.of(2),
-                InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(256)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), AetherIIBlocks.AETHER_GRASS_BLOCK.get())), //todo
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
@@ -796,7 +794,6 @@ public class HighlandsPlacedFeatures {
         );
         register(context, COASTAL_ARCTIC_ICE_SPIKE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ARCTIC_ICE_SPIKE),
                 CountPlacement.of(2),
-                InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(136)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())), //todo
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
@@ -804,7 +801,6 @@ public class HighlandsPlacedFeatures {
         );
         register(context, ARCTIC_ICE_SPIKE_CLUSTER, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ARCTIC_ICE_SPIKE_VARIANTS),
                 NoiseBasedCountPlacement.of(10, 200.0, 0.0),
-                InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(128), VerticalAnchor.absolute(224)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())), //todo
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
