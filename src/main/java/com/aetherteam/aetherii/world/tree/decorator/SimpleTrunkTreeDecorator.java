@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.world.tree.decorator;
 
 import com.aetherteam.aetherii.block.natural.TrunkBlock;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -16,13 +17,16 @@ import org.jetbrains.annotations.NotNull;
 public class SimpleTrunkTreeDecorator extends TreeDecorator {
     public static final MapCodec<SimpleTrunkTreeDecorator> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
-                    BlockStateProvider.CODEC.fieldOf("trunk_block_provider").forGetter(decorator -> decorator.trunkState)
+                    BlockStateProvider.CODEC.fieldOf("trunk_block_provider").forGetter(decorator -> decorator.trunkState),
+                    Codec.FLOAT.fieldOf("placement_chance").forGetter(decorator -> decorator.placementChance)
             ).apply(instance, SimpleTrunkTreeDecorator::new));
 
     private final BlockStateProvider trunkState;
+    private final float placementChance;
 
-    public SimpleTrunkTreeDecorator(BlockStateProvider trunkState) {
+    public SimpleTrunkTreeDecorator(BlockStateProvider trunkState, float placementChance) {
         this.trunkState = trunkState;
+        this.placementChance = placementChance;
     }
 
     public void place(Context context) {
@@ -36,7 +40,7 @@ public class SimpleTrunkTreeDecorator extends TreeDecorator {
     }
 
     private void placeBlockAt(Context context, BlockPos pos, BlockState state, RandomSource random) {
-        if (TreeFeature.validTreePos(context.level(), pos) && !TreeFeature.validTreePos(context.level(), pos.below()) && random.nextInt(3) == 1) {
+        if (TreeFeature.validTreePos(context.level(), pos) && !TreeFeature.validTreePos(context.level(), pos.below()) && placementChance > 0.0F && random.nextFloat() < placementChance) {
             context.setBlock(pos, state);
         }
     }
