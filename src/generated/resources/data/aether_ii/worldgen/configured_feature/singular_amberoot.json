@@ -1,7 +1,46 @@
 {
   "type": "minecraft:tree",
   "config": {
-    "decorators": [],
+    "decorators": [
+      {
+        "type": "aether_ii:simple_trunk",
+        "above_placement_chance": 0.2,
+        "placement_chance": 0.2,
+        "trunk_block_provider": {
+          "type": "minecraft:weighted_state_provider",
+          "entries": [
+            {
+              "data": {
+                "Name": "aether_ii:amberoot_trunk",
+                "Properties": {
+                  "east_connection": "none",
+                  "north_connection": "none",
+                  "south_connection": "none",
+                  "tall": "false",
+                  "waterlogged": "false",
+                  "west_connection": "none"
+                }
+              },
+              "weight": 3
+            },
+            {
+              "data": {
+                "Name": "aether_ii:skyroot_trunk",
+                "Properties": {
+                  "east_connection": "none",
+                  "north_connection": "none",
+                  "south_connection": "none",
+                  "tall": "false",
+                  "waterlogged": "false",
+                  "west_connection": "none"
+                }
+              },
+              "weight": 2
+            }
+          ]
+        }
+      }
+    ],
     "dirt_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
