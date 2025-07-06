@@ -214,6 +214,24 @@
             }
           }
         }
+      },
+      {
+        "type": "aether_ii:simple_trunk",
+        "placement_chance": 0.25,
+        "trunk_block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:skyroot_trunk",
+            "Properties": {
+              "east_connection": "none",
+              "north_connection": "none",
+              "south_connection": "none",
+              "tall": "false",
+              "waterlogged": "false",
+              "west_connection": "none"
+            }
+          }
+        }
       }
     ],
     "dirt_provider": {
