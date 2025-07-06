@@ -960,7 +960,8 @@ public class HighlandsConfiguredFeatures {
                         new GiantTrunkPlacer(7, 2, 6), BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LEAVES.get().defaultBlockState()),
                         new GreatrootFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(1, 0, 2))
-                        .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get())).decorators(ImmutableList.of(new IrradiationTreeDecorator(), new MossDecorator(SimpleStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()), SimpleStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_CARPET.get()), SimpleStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_VINES.get()), Optional.of(new WeightedStateProvider(bryallinMossFlowers))))).dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState())).build());
+                        .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
+                        .decorators(ImmutableList.of(new MossDecorator(SimpleStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()), SimpleStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_CARPET.get()), SimpleStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_VINES.get()), Optional.of(new WeightedStateProvider(bryallinMossFlowers))))).dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState())).build());
 
         register(context, TREES_BIOME_MAGNETIC_SCAR, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(WISPTOP), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.WISPROOT_SAPLING.get())), 0.35F),
