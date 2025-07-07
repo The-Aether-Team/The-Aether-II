@@ -1915,8 +1915,23 @@ public class HighlandsConfiguredFeatures {
                                 )
                         ),
                         0.31,
-                        BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
-                        DensityFunctions.zero(),
+                        new DualNoiseProvider(
+                                new InclusiveRange<>(1, 4),
+                                new NormalNoise.NoiseParameters(-6, 1.0),
+                                2.0F,
+                                2345L,
+                                new NormalNoise.NoiseParameters(-2, 1.0),
+                                2.0F,
+                                List.of(
+                                        AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(),
+                                        AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(),
+                                        AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(),
+                                        AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState(),
+                                        AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
+                                )
+                        ),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_SHORE),
                         true
                 ));
 
