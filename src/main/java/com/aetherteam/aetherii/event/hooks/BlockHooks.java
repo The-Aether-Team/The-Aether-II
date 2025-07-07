@@ -71,7 +71,7 @@ public class BlockHooks {
         if (action == ItemAbilities.AXE_STRIP) {
             if (state.is(AetherIIBlocks.MOSSY_WISPROOT_LOG) || state.is(AetherIIBlocks.MOSSY_WISPROOT_WOOD)) {
                 stripLog(accessor, stack, context, AetherIILoot.STRIP_MOSSY_WISPROOT);
-            } else if (state.is(AetherIIBlocks.MOSSY_WISPROOT_LOG_END)) {
+            } else if (state.is(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE)) {
                 stripLog(accessor, stack, context, AetherIILoot.STRIP_MOSSY_WISPROOT_END);
             }
         }
