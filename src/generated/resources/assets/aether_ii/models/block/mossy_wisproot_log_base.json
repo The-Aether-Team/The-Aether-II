@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "aether_ii:block/mossy_wisproot_log_top",
+    "side": "aether_ii:block/mossy_wisproot_log_base",
+    "top": "aether_ii:block/wisproot_log_top"
+  }
+}
