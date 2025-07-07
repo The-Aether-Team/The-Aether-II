@@ -15,6 +15,14 @@
     {
       "structure": "aether_ii:camp_highfields",
       "weight": 1
+    },
+    {
+      "structure": "aether_ii:camp_magnetic",
+      "weight": 1
+    },
+    {
+      "structure": "aether_ii:camp_arctic",
+      "weight": 1
     }
   ]
 }

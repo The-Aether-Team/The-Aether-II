@@ -228,6 +228,8 @@ public class AetherIITags {
 
         public static final TagKey<Biome> HAS_STRUCTURE_OUTPOST = tag("has_structure/outpost");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_HIGHFIELDS = tag("has_structure/camp_highfields");
+        public static final TagKey<Biome> HAS_STRUCTURE_CAMP_MAGNETIC = tag("has_structure/camp_magnetic");
+        public static final TagKey<Biome> HAS_STRUCTURE_CAMP_ARCTIC = tag("has_structure/camp_arctic");
 
         public static final TagKey<Biome> MYCELIUM_CONVERSION = tag("mycelium_conversion");
         public static final TagKey<Biome> PODZOL_CONVERSION = tag("podzol_conversion");
@@ -251,6 +253,7 @@ public class AetherIITags {
 
     public static class Structures {
         public static final TagKey<Structure> STRUCTURE_BLACKLIST_FILTER = tag("structure_blacklist_filter");
+        public static final TagKey<Structure> CAMPS = tag("camps");
 
         private static TagKey<Structure> tag(String name) {
             return TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
