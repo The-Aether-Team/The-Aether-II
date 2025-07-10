@@ -6,9 +6,6 @@
       "count": 1
     },
     {
-      "type": "minecraft:in_square"
-    },
-    {
       "type": "minecraft:height_range",
       "height": {
         "type": "minecraft:uniform",
@@ -29,7 +26,7 @@
           -1,
           0
         ],
-        "tag": "aether_ii:aether_dirt"
+        "tag": "aether_ii:ferrosite_pillar_generates_on"
       }
     },
     {

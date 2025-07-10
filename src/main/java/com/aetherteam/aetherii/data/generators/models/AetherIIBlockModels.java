@@ -123,7 +123,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.woodProvider(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get()).wood(AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get());
         this.woodProviderColumn(AetherIIBlocks.AMBEROOT_LOG.get(), AetherIIBlocks.SKYROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.AMBEROOT_LOG.get()).wood(AetherIIBlocks.AMBEROOT_WOOD.get());
         this.woodProvider(AetherIIBlocks.MOSSY_WISPROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.MOSSY_WISPROOT_LOG.get()).wood(AetherIIBlocks.MOSSY_WISPROOT_WOOD.get());
-        this.createFacingTopBottomColumnWithHorizontalVariant(AetherIIBlocks.MOSSY_WISPROOT_LOG_END.get(), AetherIIBlocks.WISPROOT_LOG.get(), AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
+        this.createFacingTopBottomColumnWithHorizontalVariant(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get(), AetherIIBlocks.WISPROOT_LOG.get(), AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
 
         // Trunks
         this.createTrunk(AetherIIBlocks.SKYROOT_TRUNK.get(), AetherIIBlocks.SKYROOT_LOG.get());

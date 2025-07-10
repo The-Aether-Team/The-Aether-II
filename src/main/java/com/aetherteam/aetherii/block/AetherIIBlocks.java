@@ -154,7 +154,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<RotatedPillarBlock> STRIPPED_GREATROOT_WOOD = register("stripped_greatroot_wood", RotatedPillarBlock::new, logProperties(MapColor.TERRACOTTA_BROWN, MapColor.COLOR_BROWN));
     public static final DeferredBlock<RotatedPillarBlock> WISPROOT_LOG = register("wisproot_log", RotatedPillarBlock::new, logProperties(MapColor.QUARTZ, MapColor.QUARTZ));
     public static final DeferredBlock<RotatedPillarBlock> MOSSY_WISPROOT_LOG = register("mossy_wisproot_log", RotatedPillarBlock::new, logProperties(MapColor.QUARTZ, MapColor.QUARTZ));
-    public static final DeferredBlock<FacingPillarBlock> MOSSY_WISPROOT_LOG_END = register("mossy_wisproot_log_end", FacingPillarBlock::new, (() -> Block.Properties.of().mapColor(MapColor.QUARTZ).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final DeferredBlock<FacingPillarBlock> MOSSY_WISPROOT_LOG_BASE = register("mossy_wisproot_log_base", FacingPillarBlock::new, (() -> Block.Properties.of().mapColor(MapColor.QUARTZ).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
     public static final DeferredBlock<RotatedPillarBlock> WISPROOT_WOOD = register("wisproot_wood", RotatedPillarBlock::new, logProperties(MapColor.QUARTZ, MapColor.QUARTZ));
     public static final DeferredBlock<RotatedPillarBlock> MOSSY_WISPROOT_WOOD = register("mossy_wisproot_wood", RotatedPillarBlock::new, logProperties(MapColor.QUARTZ, MapColor.QUARTZ));
     public static final DeferredBlock<RotatedPillarBlock> STRIPPED_WISPROOT_LOG = register("stripped_wisproot_log", RotatedPillarBlock::new, logProperties(MapColor.QUARTZ, MapColor.QUARTZ));
@@ -920,7 +920,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
             .put(() -> AetherIIBlocks.MOSSY_WISPROOT_LOG, () -> AetherIIBlocks.WISPROOT_LOG)
             .put(() -> AetherIIBlocks.MOSSY_WISPROOT_WOOD, () -> AetherIIBlocks.WISPROOT_WOOD)
             .put(() -> AetherIIBlocks.MOSSY_WISPROOT_TRUNK, () -> AetherIIBlocks.WISPROOT_TRUNK)
-            .put(() -> AetherIIBlocks.MOSSY_WISPROOT_LOG_END, () -> AetherIIBlocks.WISPROOT_LOG)
+            .put(() -> AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE, () -> AetherIIBlocks.WISPROOT_LOG)
             .put(() -> AetherIIBlocks.AMBEROOT_LOG, () -> AetherIIBlocks.STRIPPED_SKYROOT_LOG)
             .put(() -> AetherIIBlocks.AMBEROOT_WOOD, () -> AetherIIBlocks.STRIPPED_SKYROOT_WOOD)
             .put(() -> AetherIIBlocks.AMBEROOT_TRUNK, () -> AetherIIBlocks.STRIPPED_SKYROOT_TRUNK)

@@ -14,9 +14,18 @@ public class AetherIIStructureTagData extends StructureTagsProvider {
         super(output, registries, AetherII.MODID);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void addTags(HolderLookup.Provider provider) {
-        this.tag(AetherIITags.Structures.TREE_BLACKLIST_FILTER).add(AetherIIStructures.CAMP_HIGHFIELDS);
-        this.tag(AetherIITags.Structures.ACID_POOL_BLACKLIST_FILTER).add(AetherIIStructures.INFECTED_GUARDIAN_TREE);
+        this.tag(AetherIITags.Structures.STRUCTURE_BLACKLIST_FILTER).add(
+                AetherIIStructures.CAMP_HIGHFIELDS,
+                AetherIIStructures.CAMP_MAGNETIC,
+                AetherIIStructures.CAMP_ARCTIC
+        );
+        this.tag(AetherIITags.Structures.CAMPS).add(
+                AetherIIStructures.CAMP_HIGHFIELDS,
+                AetherIIStructures.CAMP_MAGNETIC,
+                AetherIIStructures.CAMP_ARCTIC
+        );
     }
 }

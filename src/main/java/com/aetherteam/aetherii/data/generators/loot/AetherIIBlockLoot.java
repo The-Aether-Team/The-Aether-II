@@ -124,7 +124,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.WISPROOT_LOG.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
         this.add(AetherIIBlocks.MOSSY_WISPROOT_LOG.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIBlocks.WISPROOT_LOG.get()));
-        this.add(AetherIIBlocks.MOSSY_WISPROOT_LOG_END.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIBlocks.WISPROOT_LOG.get()));
+        this.add(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIBlocks.WISPROOT_LOG.get()));
         this.add(AetherIIBlocks.MOSSY_WISPROOT_WOOD.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIBlocks.WISPROOT_WOOD.get()));
         this.add(AetherIIBlocks.AMBEROOT_LOG.get(), (wood) -> this.droppingAmberoot(getter, wood, AetherIIBlocks.SKYROOT_LOG.get(), AetherIIItems.GOLDEN_AMBER.get()));
         this.dropSelf(AetherIIBlocks.SKYROOT_WOOD.get());
