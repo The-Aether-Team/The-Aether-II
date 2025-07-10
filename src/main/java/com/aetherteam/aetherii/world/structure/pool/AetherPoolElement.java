@@ -34,8 +34,7 @@ import java.util.function.Function;
 
 /**
  * Based on {@link net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement}
- * Used primarily for deleting Structure Templates that end up in generating in some rare circumstances
- * Also used for Datagen
+ * Used primarily for deleting Structure Templates that ended up generating in the void in rare edge-case scenarios
  */
 public class AetherPoolElement extends StructurePoolElement {
     private static final Comparator<StructureTemplate.JigsawBlockInfo> HIGHEST_SELECTION_PRIORITY_FIRST = Comparator.comparingInt(StructureTemplate.JigsawBlockInfo::selectionPriority).reversed();
@@ -43,17 +42,28 @@ public class AetherPoolElement extends StructurePoolElement {
             AetherPoolElement::encodeTemplate, ResourceLocation.CODEC.map(Either::left)
     );
     public static final MapCodec<AetherPoolElement> CODEC = RecordCodecBuilder.mapCodec(
-            instance -> instance.group(templateCodec(), processorsCodec(), projectionCodec(), overrideLiquidSettingsCodec()).apply(instance, AetherPoolElement::new)
+            instance -> instance.group(
+                    templateCodec(),
+                    processorsCodec(),
+                    projectionCodec(),
+                    overrideLiquidSettingsCodec(),
+                    Codec.INT.fieldOf("discard_below_y").forGetter(structure -> structure.discardBelowY),
+                    Codec.INT.fieldOf("discard_above_y").forGetter(structure -> structure.discardAboveY),
+                    Codec.BOOL.fieldOf("replace_air").forGetter(structure -> structure.replaceAir)
+            ).apply(instance, AetherPoolElement::new)
     );
     protected final Either<ResourceLocation, StructureTemplate> template;
     protected final Holder<StructureProcessorList> processors;
     protected final Optional<LiquidSettings> overrideLiquidSettings;
+    protected final int discardBelowY;
+    protected final int discardAboveY;
+    protected final boolean replaceAir;
 
-    private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> p_210425_, DynamicOps<T> p_210426_, T p_210427_) {
-        Optional<ResourceLocation> optional = p_210425_.left();
+    private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> template, DynamicOps<T> ops, T prefix) {
+        Optional<ResourceLocation> optional = template.left();
         return optional.isEmpty()
                 ? DataResult.error(() -> "Can not serialize a runtime pool element")
-                : ResourceLocation.CODEC.encode(optional.get(), p_210426_, p_210427_);
+                : ResourceLocation.CODEC.encode(optional.get(), ops, prefix);
     }
 
     protected static <E extends AetherPoolElement> RecordCodecBuilder<E, Holder<StructureProcessorList>> processorsCodec() {
@@ -68,11 +78,14 @@ public class AetherPoolElement extends StructurePoolElement {
         return TEMPLATE_CODEC.fieldOf("location").forGetter(codec -> codec.template);
     }
 
-    public AetherPoolElement(Either<ResourceLocation, StructureTemplate> template, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, Optional<LiquidSettings> overrideLiquidSettings) {
+    public AetherPoolElement(Either<ResourceLocation, StructureTemplate> template, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, Optional<LiquidSettings> overrideLiquidSettings, int discardBelowY, int discardAboveY, boolean replaceAir) {
         super(projection);
         this.template = template;
         this.processors = processors;
         this.overrideLiquidSettings = overrideLiquidSettings;
+        this.discardBelowY = discardBelowY;
+        this.discardAboveY = discardAboveY;
+        this.replaceAir = replaceAir;
     }
 
     @Override
@@ -106,8 +119,8 @@ public class AetherPoolElement extends StructurePoolElement {
     }
 
     @Override
-    public List<StructureTemplate.JigsawBlockInfo> getShuffledJigsawBlocks(StructureTemplateManager structureTemplateManager, BlockPos pos, Rotation rotation, RandomSource random) {
-        List<StructureTemplate.JigsawBlockInfo> list = this.getTemplate(structureTemplateManager).getJigsaws(pos, rotation);
+    public List<StructureTemplate.JigsawBlockInfo> getShuffledJigsawBlocks(StructureTemplateManager templateManager, BlockPos pos, Rotation rotation, RandomSource random) {
+        List<StructureTemplate.JigsawBlockInfo> list = this.getTemplate(templateManager).getJigsaws(pos, rotation);
         Util.shuffle(list, random);
         sortBySelectionPriority(list);
         return list;
@@ -120,21 +133,20 @@ public class AetherPoolElement extends StructurePoolElement {
 
     @Override
     public BoundingBox getBoundingBox(StructureTemplateManager templateManager, BlockPos pos, Rotation rotation) {
-        StructureTemplate structuretemplate = this.getTemplate(templateManager);
-        return structuretemplate.getBoundingBox(new StructurePlaceSettings().setRotation(rotation), pos);
+        StructureTemplate template = this.getTemplate(templateManager);
+        return template.getBoundingBox(new StructurePlaceSettings().setRotation(rotation), pos);
     }
 
     @Override
     public boolean place(StructureTemplateManager templateManager, WorldGenLevel level, StructureManager structureManager, ChunkGenerator generator, BlockPos offset, BlockPos pos, Rotation rotation, BoundingBox box, RandomSource random, LiquidSettings liquidSettings, boolean keepJigsaws) {
         StructureTemplate template = this.getTemplate(templateManager);
         StructurePlaceSettings settings = this.getSettings(rotation, box, liquidSettings, keepJigsaws);
-        if (pos.getY() > 96) { // Deletes templates that generated below the cloudbed
+        if (offset.getY() > this.discardBelowY && offset.getY() < this.discardAboveY) { // Discards a template above/below a certain y level
             if (!template.placeInWorld(level, offset, pos, settings, random, 18)) {
                 return false;
             } else {
                 for (StructureTemplate.StructureBlockInfo structureBlockInfo : StructureTemplate.processBlockInfos(
-                        level, offset, pos, settings, this.getDataMarkers(templateManager, offset, rotation, false)
-                )) {
+                        level, offset, pos, settings, this.getDataMarkers(templateManager, offset, rotation, false))) {
                     this.handleDataMarker(level, structureBlockInfo, offset, rotation, random, box);
                 }
 
@@ -144,10 +156,6 @@ public class AetherPoolElement extends StructurePoolElement {
         return false;
     }
 
-    /**
-     * Uses processors of {@link net.minecraft.world.level.levelgen.structure.pools.LegacySinglePoolElement}
-     * Might have a coded to determine if it should use processors of Single or Legacy Pool Elements in the future
-     * */
     protected StructurePlaceSettings getSettings(Rotation rotation, BoundingBox boundingBox, LiquidSettings liquidSettings, boolean offset) {
         StructurePlaceSettings settings = new StructurePlaceSettings();
         settings.setBoundingBox(boundingBox);
@@ -155,7 +163,9 @@ public class AetherPoolElement extends StructurePoolElement {
         settings.setKnownShape(true);
         settings.setIgnoreEntities(false);
         settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
-        settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_AND_AIR);
+        if (replaceAir) { // Vanilla uses two separate Pool Element Types to achieve this, it has been turned into a boolean for code efficiency purposes
+            settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_AND_AIR);
+        }
         settings.setLiquidSettings(this.overrideLiquidSettings.orElse(liquidSettings));
         settings.setFinalizeEntities(true);
         if (!offset) {

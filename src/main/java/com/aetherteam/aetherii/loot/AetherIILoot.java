@@ -49,6 +49,11 @@ public class AetherIILoot {
     public static final ResourceKey<LootTable> CHESTS_CAMP_HIGHFIELDS_HUNTER = register("chests/camp_highfields_hunter");
     public static final ResourceKey<LootTable> CHESTS_CAMP_HIGHFIELDS_FLETCHER = register("chests/camp_highfields_fletcher");
 
+    public static final ResourceKey<LootTable> CHESTS_DUNGEONS_IRRADIATED_ITEMS = register("chests/dungeons/irradiated_items");
+    public static final ResourceKey<LootTable> CHESTS_DUNGEONS_MUSIC_DISCS = register("chests/dungeons/music_discs");
+
+    public static final ResourceKey<LootTable> CHESTS_DUNGEONS_INFECTED_GUARDIAN_TREE = register("chests/dungeons/infected_guardian_tree");
+
     // Gift
     public static final ResourceKey<LootTable> TAEGORE_DIGGING = register("gameplay/taegore_digging");
 

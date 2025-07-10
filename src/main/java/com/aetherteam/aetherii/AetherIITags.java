@@ -74,6 +74,8 @@ public class AetherIITags {
         public static final TagKey<Block> FERROSITE_PILLAR_GENERATES_ON = tag("ferrosite_pillar_generates_on");
         public static final TagKey<Block> FERROSITE_SPIKE_GENERATES_ON = tag("ferrosite_spike_generates_on");
         public static final TagKey<Block> ARCTIC_ICE_SPIKE_GENERATES_ON = tag("ferrosite_spike_generates_on");
+        public static final TagKey<Block> INFECTED_PATCH_GENERATES_ON = tag("infected_patch_generates_on");
+        public static final TagKey<Block> UNDERGROWTH_PATCH_GENERATES_ON = tag("undergrowth_patch_generates_on");
 
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
         public static final TagKey<Block> AECHOR_PLANT_SPAWNABLE_ON = tag("aechor_plant_spawnable_on");
@@ -230,6 +232,7 @@ public class AetherIITags {
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_HIGHFIELDS = tag("has_structure/camp_highfields");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_MAGNETIC = tag("has_structure/camp_magnetic");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_ARCTIC = tag("has_structure/camp_arctic");
+        public static final TagKey<Biome> HAS_STRUCTURE_INFECTED_GUARDIAN_TREE = tag("has_structure/infected_guardian_tree");
 
         public static final TagKey<Biome> MYCELIUM_CONVERSION = tag("mycelium_conversion");
         public static final TagKey<Biome> PODZOL_CONVERSION = tag("podzol_conversion");
@@ -252,7 +255,8 @@ public class AetherIITags {
     }
 
     public static class Structures {
-        public static final TagKey<Structure> STRUCTURE_BLACKLIST_FILTER = tag("structure_blacklist_filter");
+        public static final TagKey<Structure> TREE_BLACKLIST_FILTER = tag("tree_blacklist_filter");
+        public static final TagKey<Structure> ACID_POOL_BLACKLIST_FILTER = tag("acid_pool_blacklist_filter");
         public static final TagKey<Structure> CAMPS = tag("camps");
 
         private static TagKey<Structure> tag(String name) {

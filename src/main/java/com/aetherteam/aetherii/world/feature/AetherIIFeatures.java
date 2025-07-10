@@ -38,4 +38,6 @@ public class AetherIIFeatures {
     public static DeferredHolder<Feature<?>, Feature<PointedStoneConfiguration>> POINTED_STONE = FEATURES.register("pointed_stone", () -> new PointedStoneFeature(PointedStoneConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<CraterConfiguration>> CRATER = FEATURES.register("crater", () -> new CraterFeature(CraterConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> TREE_MOSS_COVER = FEATURES.register("tree_moss_cover", () -> new TreeMossCoverFeature(NoneFeatureConfiguration.CODEC));
+    public static DeferredHolder<Feature<?>, Feature<LargeShelfMushroomConfiguration>> LARGE_SHELF_MUSHROOM = FEATURES.register("large_shelf_mushroom", () -> new LargeShelfMushroom(LargeShelfMushroomConfiguration.CODEC));
+    public static DeferredHolder<Feature<?>, Feature<InfectedPatchConfiguration>> INFECTED_PATCH = FEATURES.register("infected_patch", () -> new InfectedPatchFeature(InfectedPatchConfiguration.CODEC));
 }

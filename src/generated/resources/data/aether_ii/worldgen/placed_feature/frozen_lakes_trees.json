@@ -20,7 +20,8 @@
       "type": "minecraft:biome"
     },
     {
-      "type": "aether_ii:structure_blacklist_filter"
+      "type": "aether_ii:structure_blacklist_filter",
+      "tag": "aether_ii:tree_blacklist_filter"
     }
   ]
 }

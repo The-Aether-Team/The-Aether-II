@@ -2,7 +2,9 @@ package com.aetherteam.aetherii.data.resources.registries.highlands;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.dungeon.RotshroomToadstoolClusterBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
@@ -29,9 +31,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.InclusiveRange;
 import net.minecraft.util.random.SimpleWeightedRandomList;
-import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.util.valueproviders.UniformFloat;
-import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.util.valueproviders.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -277,6 +277,21 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> CRATER = createKey("crater");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUDBED = createKey("cloudbed");
+
+
+    // Dungeon
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SHELF_ROTSHROOM = createKey("large_shelf_rotshroom");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SHELF_ROTSHROOM_UNDERGROUND = createKey("large_shelf_rotshroom_underground");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ROTSHROOM_PATCH = createKey("rotshroom_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ROTSHROOM_PATCH_INFECTED = createKey("rotshroom_patch_infected");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_DUNGEON = createKey("coarse_aether_dirt_dungeon");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> INFECTED_PATCH = createKey("infected_patch");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERGROWTH_VINE = createKey("undergrowth_vine");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ROTTEN_UNDERGROWTH_VINE = createKey("rotten_undergrowth_vine");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERGROWTH_PATCH = createKey("undergrowth_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ROTTEN_UNDERGROWTH_PATCH = createKey("rotten_undergrowth_patch");
 
 
     // Air
@@ -2120,6 +2135,115 @@ public class HighlandsConfiguredFeatures {
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.CLOUDBED_Y_OFFSET),
                         15D
                 ));
+
+        register(context, LARGE_SHELF_ROTSHROOM, AetherIIFeatures.LARGE_SHELF_MUSHROOM.get(), new LargeShelfMushroomConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get()), 1, 2, 96));
+        register(context, LARGE_SHELF_ROTSHROOM_UNDERGROUND, AetherIIFeatures.LARGE_SHELF_MUSHROOM.get(), new LargeShelfMushroomConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get()), 1, 2, 0));
+        register(context, ROTSHROOM_PATCH, Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        32,
+                        4,
+                        3,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                                .add(AetherIIBlocks.ROTSHROOM_CLUSTER.get().defaultBlockState(), 3)
+                                .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get().defaultBlockState(), 1)
+                                .build())
+                        ), BlockPredicate.ONLY_IN_AIR_PREDICATE)));
+        register(context, ROTSHROOM_PATCH_INFECTED, Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        4,
+                        3,
+                        3,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                                .add(AetherIIBlocks.ROTSHROOM_CLUSTER.get().defaultBlockState(), 6)
+                                .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get().defaultBlockState(), 2)
+                                .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get().defaultBlockState(), 1)
+                                .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get().defaultBlockState().setValue(RotshroomToadstoolClusterBlock.FACING, Direction.EAST), 1)
+                                .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get().defaultBlockState().setValue(RotshroomToadstoolClusterBlock.FACING, Direction.SOUTH), 1)
+                                .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get().defaultBlockState().setValue(RotshroomToadstoolClusterBlock.FACING, Direction.WEST), 1)
+                                .build())
+                        ), BlockPredicate.ONLY_IN_AIR_PREDICATE)));
+
+        FeatureUtils.register(context, COARSE_AETHER_DIRT_DUNGEON, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.AETHER_DIRT,
+                        BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ROTSHROOM_PATCH_INFECTED)),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(2),
+                        0.4F,
+                        6,
+                        0.65F,
+                        UniformInt.of(2, 4),
+                        0.375F));
+        FeatureUtils.register(context, INFECTED_PATCH, AetherIIFeatures.INFECTED_PATCH.get(),
+                new InfectedPatchConfiguration(
+                        AetherIITags.Blocks.INFECTED_PATCH_GENERATES_ON,
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ROTSHROOM_PATCH_INFECTED)),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(3),
+                        0.375F,
+                        3,
+                        1.0F,
+                        UniformInt.of(3, 4),
+                        0.25F));
+
+        register(context, UNDERGROWTH_VINE, Feature.BLOCK_COLUMN,
+                new BlockColumnConfiguration(
+                        List.of(
+                                BlockColumnConfiguration.layer(
+                                        new WeightedListInt(
+                                                SimpleWeightedRandomList.<IntProvider>builder()
+                                                        .add(UniformInt.of(1, 5), 1)
+                                                        .add(UniformInt.of(0, 2), 3)
+                                                        .build()
+                                        ),
+                                        BlockStateProvider.simple(AetherIIBlocks.UNDERGROWTH_VINES_PLANT.get())
+                                ),
+                                BlockColumnConfiguration.layer(ConstantInt.of(1), BlockStateProvider.simple(AetherIIBlocks.UNDERGROWTH_VINES.get()))
+                        ),
+                        Direction.DOWN,
+                        BlockPredicate.ONLY_IN_AIR_PREDICATE,
+                        true));
+        register(context, ROTTEN_UNDERGROWTH_VINE, Feature.BLOCK_COLUMN,
+                new BlockColumnConfiguration(
+                        List.of(
+                                BlockColumnConfiguration.layer(
+                                        new WeightedListInt(
+                                                SimpleWeightedRandomList.<IntProvider>builder()
+                                                        .add(UniformInt.of(1, 4), 1)
+                                                        .add(UniformInt.of(0, 2), 4)
+                                                        .build()
+                                        ),
+                                        BlockStateProvider.simple(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES_PLANT.get())
+                                ),
+                                BlockColumnConfiguration.layer(ConstantInt.of(1), BlockStateProvider.simple(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get()))
+                        ),
+                        Direction.DOWN,
+                        BlockPredicate.ONLY_IN_AIR_PREDICATE,
+                        true));
+        FeatureUtils.register(context, UNDERGROWTH_PATCH, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON,
+                        BlockStateProvider.simple(AetherIIBlocks.TOP_ROOTED_UNDERGROWTH_LEAVES.get().defaultBlockState().setValue(AetherIIBlockStateProperties.REINFORCED, true)),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(UNDERGROWTH_VINE)),
+                        CaveSurface.CEILING, ConstantInt.of(1),
+                        0.6F,
+                        2,
+                        1.0F,
+                        UniformInt.of(2, 3),
+                        0.6F));
+        FeatureUtils.register(context, ROTTEN_UNDERGROWTH_PATCH, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON,
+                        BlockStateProvider.simple(AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get().defaultBlockState().setValue(AetherIIBlockStateProperties.REINFORCED, true)),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ROTTEN_UNDERGROWTH_VINE)),
+                        CaveSurface.CEILING,
+                        ConstantInt.of(1),
+                        0.6F,
+                        2,
+                        1.0F,
+                        UniformInt.of(2, 3),
+                        0.6F));
     }
 
     private static void bootstrapAir(BootstrapContext<ConfiguredFeature<?, ?>> context) {
