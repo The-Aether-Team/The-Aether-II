@@ -26,7 +26,7 @@
                   }
                 }
               ],
-              "name": "aether_ii:mossy_wisproot_log_end"
+              "name": "aether_ii:mossy_wisproot_log_base"
             },
             {
               "type": "minecraft:item",
@@ -43,5 +43,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "aether_ii:blocks/mossy_wisproot_log_end"
+  "random_sequence": "aether_ii:blocks/mossy_wisproot_log_base"
 }

@@ -116,7 +116,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.STRIPPED_GREATROOT_LOG, "Stripped Greatroot Log");
         this.addBlock(AetherIIBlocks.WISPROOT_LOG, "Wisproot Log");
         this.addBlock(AetherIIBlocks.MOSSY_WISPROOT_LOG, "Mossy Wisproot Log");
-        this.addBlock(AetherIIBlocks.MOSSY_WISPROOT_LOG_END, "Mossy Wisproot Log End");
+        this.addBlock(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE, "Mossy Wisproot Log Base");
         this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_LOG, "Stripped Wisproot Log");
         this.addBlock(AetherIIBlocks.AMBEROOT_LOG, "Amberoot Log");
         this.addBlock(AetherIIBlocks.SKYROOT_WOOD, "Skyroot Wood");

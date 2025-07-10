@@ -190,7 +190,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider { //todo fix some
         woodFromLogs(AetherIIBlocks.WISPROOT_WOOD.get(), AetherIIBlocks.WISPROOT_LOG.get());
         woodFromLogs(AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get(), AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
         woodFromLogs(AetherIIBlocks.AMBEROOT_WOOD.get(), AetherIIBlocks.AMBEROOT_LOG.get());
-        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIBlocks.MOSSY_WISPROOT_LOG_END.get(), 1)
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get(), 1)
                 .requires(AetherIIBlocks.WISPROOT_LOG)
                 .requires(AetherIIBlocks.BRYALINN_MOSS_VINES)
                 .unlockedBy("has_vines", has(AetherIIBlocks.BRYALINN_MOSS_VINES))

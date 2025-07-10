@@ -57,6 +57,6 @@ public class WisprootTreeDecorator extends TreeDecorator {
     }
 
     protected @NotNull TreeDecoratorType<?> type() {
-        return AetherIITreeDecoratorTypes.WISPROOT_DECORATOR.get();
+        return AetherIITreeDecoratorTypes.WISPROOT.get();
     }
 }

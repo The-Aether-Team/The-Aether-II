@@ -74,7 +74,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATROOT_BEAM.get());
                 output.accept(AetherIIBlocks.WISPROOT_LOG.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
-                output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG_END.get());
+                output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get());
                 output.accept(AetherIIBlocks.WISPROOT_WOOD.get());
                 output.accept(AetherIIBlocks.WISPROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_WOOD.get());
@@ -416,7 +416,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_TRUNK.get());
-                output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG_END.get());
+                output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
                 output.accept(AetherIIBlocks.AMBEROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.SKYROOT_LEAVES.get());
