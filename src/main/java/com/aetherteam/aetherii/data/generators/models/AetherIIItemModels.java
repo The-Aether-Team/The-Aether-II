@@ -225,9 +225,9 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
-        this.generateSpawnEgg(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get(), 0xADA896, 0xFFD787);
-        this.generateSpawnEgg(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get(), 0x8788AF, 0xB1E0DC);
-        this.generateSpawnEgg(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get(), 0xC3C1BE, 0xAD9078);
+        this.generateFlatItem(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateSpawnEgg(AetherIIItems.MOA_SPAWN_EGG.get(), 0x91B2DB, 0xE8FCFF);
         this.generateSpawnEgg(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get(), 0x595844, 0xD1F79E);
         this.generateFlatItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
