@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -1509377
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -10503
-      }
-    ]
+    "model": "aether_ii:item/aerbunny_spawn_egg"
   }
 }

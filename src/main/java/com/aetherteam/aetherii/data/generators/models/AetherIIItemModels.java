@@ -215,10 +215,10 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.RECORDING_892.get(), ModelTemplates.MUSIC_DISC);
 
         // Spawn Eggs
-        this.generateSpawnEgg(AetherIIItems.FLYING_COW_SPAWN_EGG.get(), 0xC2C2C2, 0xFFDD61);
-        this.generateSpawnEgg(AetherIIItems.SHEEPUFF_SPAWN_EGG.get(), 0xE8F0F8, 0xA6D4FF);
-        this.generateSpawnEgg(AetherIIItems.PHYG_SPAWN_EGG.get(), 0xF7A6B1, 0xFFDD61);
-        this.generateSpawnEgg(AetherIIItems.AERBUNNY_SPAWN_EGG.get(), 0xE8F7FF, 0xFFD6F9);
+        this.generateFlatItem(AetherIIItems.FLYING_COW_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.SHEEPUFF_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.PHYG_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.AERBUNNY_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateSpawnEgg(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG.get(), 0xB2CCF2, 0xFFDE96);
         this.generateSpawnEgg(AetherIIItems.MAGNETIC_TAEGORE_SPAWN_EGG.get(), 0x9DC2BE, 0xDBAD88);
         this.generateSpawnEgg(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG.get(), 0x797D97, 0xDEDEDE);

@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -4013374
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -8863
-      }
-    ]
+    "model": "aether_ii:item/flying_cow_spawn_egg"
   }
 }
