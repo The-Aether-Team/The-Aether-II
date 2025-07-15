@@ -237,7 +237,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateSpawnEgg(AetherIIItems.COCKATRICE_SPAWN_EGG.get(), 0x8363A6, 0xB8FFC3);
         this.generateSpawnEgg(AetherIIItems.SWET_SPAWN_EGG.get(), 0xC3E3EF, 0xA2D0CC);
         this.generateFlatItem(AetherIIItems.SKEPHID_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
-        this.generateSpawnEgg(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG.get(), 0xC3C3C3, 0x363636);
+        this.generateFlatItem(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateSpawnEgg(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG.get(), 0xC3C3C3, 0xCB69AD);
 
         // Misc
