@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -2169113
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -3870721
-      }
-    ]
+    "model": "aether_ii:item/zephyr_spawn_egg"
   }
 }
