@@ -1078,6 +1078,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
                 AetherIIBlocks.HIGHLANDS_BUSH.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH.get(),
+                AetherIIBlocks.BRETTL_GRASS_BUNDLE.get(),
                 AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(),
                 AetherIIBlocks.BRYALINN_MOSS_CARPET.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(),

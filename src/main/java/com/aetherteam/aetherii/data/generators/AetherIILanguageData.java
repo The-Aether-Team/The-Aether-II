@@ -250,6 +250,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.BRETTL_PLANT, "Brettl Plant");
         this.addBlock(AetherIIBlocks.BRETTL_PLANT_TIP, "Brettl Plant Tip");
         this.addBlock(AetherIIBlocks.BRETTL_FLOWER, "Brettl Flower");
+        this.addBlock(AetherIIBlocks.BRETTL_GRASS_BUNDLE, "Brettl Grass Bundle");
 
         // Lake
         this.addBlock(AetherIIBlocks.ARILUM_SHOOT, "Arilum");

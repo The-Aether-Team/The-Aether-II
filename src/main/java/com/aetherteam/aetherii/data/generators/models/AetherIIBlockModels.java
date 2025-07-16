@@ -206,6 +206,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createBrettlPlant(AetherIIBlocks.BRETTL_PLANT.get());
         this.createBrettlPlant(AetherIIBlocks.BRETTL_PLANT_TIP.get());
         this.createCrossWithDefaultItem(AetherIIBlocks.BRETTL_FLOWER.get(), PlantType.NOT_TINTED);
+        this.createRotatedPillarWithHorizontalVariant(AetherIIBlocks.BRETTL_GRASS_BUNDLE.get(), TexturedModel.COLUMN, TexturedModel.COLUMN_HORIZONTAL);
 
         // Lake
         this.createCrossBlock(AetherIIBlocks.ARILUM_SHOOT.get(), PlantType.NOT_TINTED);
