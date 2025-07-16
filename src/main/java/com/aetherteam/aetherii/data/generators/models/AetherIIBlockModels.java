@@ -205,6 +205,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createValkyrieSprout();
         this.createBrettlPlant(AetherIIBlocks.BRETTL_PLANT.get());
         this.createBrettlPlant(AetherIIBlocks.BRETTL_PLANT_TIP.get());
+        this.createCrossWithDefaultItem(AetherIIBlocks.BRETTL_FLOWER.get(), PlantType.NOT_TINTED);
 
         // Lake
         this.createCrossBlock(AetherIIBlocks.ARILUM_SHOOT.get(), PlantType.NOT_TINTED);
