@@ -274,6 +274,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ZANITE_BLOCK.get());
                 output.accept(AetherIIBlocks.ARKENIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.GRAVITITE_BLOCK.get());
+                output.accept(AetherIIBlocks.CORROBONITE_BLOCK.get());
                 output.accept(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());
                 output.accept(AetherIIBlocks.BLUE_ARILUM_LANTERN.get());
                 output.accept(AetherIIBlocks.PURPLE_ARILUM_LANTERN.get());

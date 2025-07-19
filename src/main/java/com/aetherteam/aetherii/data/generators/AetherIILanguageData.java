@@ -629,6 +629,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ZANITE_BLOCK, "Block of Zanite");
         this.addBlock(AetherIIBlocks.ARKENIUM_BLOCK, "Block of Arkenium");
         this.addBlock(AetherIIBlocks.GRAVITITE_BLOCK, "Block of Gravitite");
+        this.addBlock(AetherIIBlocks.CORROBONITE_BLOCK, "Block of Corrobonite");
 
         // Arilum Lantern
         this.addBlock(AetherIIBlocks.GREEN_ARILUM_LANTERN, "Green Arilum Lantern");

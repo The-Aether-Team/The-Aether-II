@@ -699,8 +699,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.BEACON_BASE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
+                AetherIIBlocks.ARKENIUM_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
-                AetherIIBlocks.ARKENIUM_BLOCK.get()
+                AetherIIBlocks.CORROBONITE_BLOCK.get()
         );
         this.tag(BlockTags.WALL_POST_OVERRIDE).add(AetherIIBlocks.AMBROSIUM_TORCH.get());
         this.tag(BlockTags.CLIMBABLE).add(
@@ -860,8 +861,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get(),
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
-                AetherIIBlocks.GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.ARKENIUM_BLOCK.get(),
+                AetherIIBlocks.GRAVITITE_BLOCK.get(),
+                AetherIIBlocks.CORROBONITE_BLOCK.get(),
                 AetherIIBlocks.HOLYSTONE_FURNACE.get(),
                 AetherIIBlocks.ALTAR.get(),
                 AetherIIBlocks.ARKENIUM_FORGE.get(),
@@ -1113,7 +1115,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(),
                 AetherIIBlocks.ARKENIUM_BLOCK.get(),
-                AetherIIBlocks.GRAVITITE_BLOCK.get()
+                AetherIIBlocks.GRAVITITE_BLOCK.get(),
+                AetherIIBlocks.CORROBONITE_BLOCK.get()
         );
         this.tag(BlockTags.CONVERTABLE_TO_MUD).add(AetherIIBlocks.AETHER_DIRT.get());
         this.tag(BlockTags.SCULK_REPLACEABLE).addTag(AetherIITags.Blocks.HOLYSTONE).add(
@@ -1214,8 +1217,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(Tags.Blocks.STORAGE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
+                AetherIIBlocks.ARKENIUM_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
-                AetherIIBlocks.ARKENIUM_BLOCK.get()
+                AetherIIBlocks.CORROBONITE_BLOCK.get()
         );
         this.tag(Tags.Blocks.CHESTS_WOODEN).add(
                 AetherIIBlocks.SKYROOT_CHEST.get()

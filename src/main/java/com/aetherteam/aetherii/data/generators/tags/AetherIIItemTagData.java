@@ -601,7 +601,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(ItemTags.BEACON_PAYMENT_ITEMS).add(
                 AetherIIItems.ZANITE_GEMSTONE.get(),
                 AetherIIItems.ARKENIUM_PLATES.get(),
-                AetherIIItems.GRAVITITE_PLATE.get()
+                AetherIIItems.GRAVITITE_PLATE.get(),
+                AetherIIItems.CORROBONITE_CRYSTAL.get()
         );
         this.tag(ItemTags.CLUSTER_MAX_HARVESTABLES).add(
                 AetherIIItems.SKYROOT_PICKAXE.get(),
@@ -762,7 +763,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(Tags.Items.STORAGE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.asItem(),
                 AetherIIBlocks.ZANITE_BLOCK.asItem(),
-                AetherIIBlocks.GRAVITITE_BLOCK.asItem()
+                AetherIIBlocks.GRAVITITE_BLOCK.asItem(),
+                AetherIIBlocks.CORROBONITE_BLOCK.asItem()
         );
         this.tag(Tags.Items.TOOLS_SHIELD).add(
                 AetherIIItems.SKYROOT_SHIELD.get(),

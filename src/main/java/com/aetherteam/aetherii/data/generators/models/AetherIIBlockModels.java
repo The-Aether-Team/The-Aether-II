@@ -421,6 +421,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.ZANITE_BLOCK.get());
         this.createTrivialCube(AetherIIBlocks.ARKENIUM_BLOCK.get());
         this.createTrivialCube(AetherIIBlocks.GRAVITITE_BLOCK.get());
+        this.createTrivialCube(AetherIIBlocks.CORROBONITE_BLOCK.get());
 
         // Arilum Lantern
         this.createArilumLantern(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());
