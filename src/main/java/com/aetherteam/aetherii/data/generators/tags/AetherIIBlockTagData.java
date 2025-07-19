@@ -1115,7 +1115,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(),
                 AetherIIBlocks.ARKENIUM_BLOCK.get(),
-                AetherIIBlocks.GRAVITITE_BLOCK.get(),
+                AetherIIBlocks.GRAVITITE_BLOCK.get()
+        );
+        this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
+                AetherIIBlocks.CORROBONITE_ORE.get(),
                 AetherIIBlocks.CORROBONITE_BLOCK.get()
         );
         this.tag(BlockTags.CONVERTABLE_TO_MUD).add(AetherIIBlocks.AETHER_DIRT.get());
