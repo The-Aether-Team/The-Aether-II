@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class AetherIICreativeTabs {
+public class  AetherIICreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, AetherII.MODID);
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_BUILDING_BLOCKS = CREATIVE_MODE_TABS.register("building_blocks", () -> CreativeModeTab.builder()
@@ -318,6 +318,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get());
                 output.accept(AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get());
                 output.accept(AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get());
+                output.accept(AetherIIBlocks.LOCKED_DIM_GUARDIAN_ROOTS.get());
+                output.accept(AetherIIBlocks.LOCKED_LUCENT_GUARDIAN_ROOTS.get());
+                output.accept(AetherIIBlocks.LOCKED_GUARDIAN_LAMP.get());
                 output.accept(AetherIIBlocks.INFECTED_LOG.get());
                 output.accept(AetherIIBlocks.INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.INFECTED_TRUNK.get());
@@ -349,6 +352,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.LOCKED_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.LOCKED_INFECTED_ROOTS.get());
+                output.accept(AetherIIBlocks.LOCKED_DIM_INFECTED_ROOTS.get());
+                output.accept(AetherIIBlocks.LOCKED_LUCENT_INFECTED_ROOTS.get());
+                output.accept(AetherIIBlocks.LOCKED_INFECTED_LAMP.get());
                 output.accept(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
                 output.accept(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
                 output.accept(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get());

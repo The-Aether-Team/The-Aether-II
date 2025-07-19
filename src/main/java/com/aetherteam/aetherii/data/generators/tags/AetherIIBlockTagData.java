@@ -699,9 +699,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.BEACON_BASE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
-                AetherIIBlocks.ARKENIUM_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
-                AetherIIBlocks.CORROBONITE_BLOCK.get()
+                AetherIIBlocks.ARKENIUM_BLOCK.get()
         );
         this.tag(BlockTags.WALL_POST_OVERRIDE).add(AetherIIBlocks.AMBROSIUM_TORCH.get());
         this.tag(BlockTags.CLIMBABLE).add(
@@ -861,9 +860,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get(),
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
-                AetherIIBlocks.ARKENIUM_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
-                AetherIIBlocks.CORROBONITE_BLOCK.get(),
+                AetherIIBlocks.ARKENIUM_BLOCK.get(),
                 AetherIIBlocks.HOLYSTONE_FURNACE.get(),
                 AetherIIBlocks.ALTAR.get(),
                 AetherIIBlocks.ARKENIUM_FORGE.get(),
@@ -1080,7 +1078,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
                 AetherIIBlocks.HIGHLANDS_BUSH.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH.get(),
-                AetherIIBlocks.BRETTL_GRASS_BUNDLE.get(),
                 AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(),
                 AetherIIBlocks.BRYALINN_MOSS_CARPET.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(),
@@ -1121,6 +1118,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.CORROBONITE_ORE.get(),
                 AetherIIBlocks.CORROBONITE_BLOCK.get()
         );
+        this.tag(BlockTags.FEATURES_CANNOT_REPLACE).addTag(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS);
         this.tag(BlockTags.CONVERTABLE_TO_MUD).add(AetherIIBlocks.AETHER_DIRT.get());
         this.tag(BlockTags.SCULK_REPLACEABLE).addTag(AetherIITags.Blocks.HOLYSTONE).add(
                 AetherIIBlocks.AETHER_DIRT.get(),
@@ -1220,9 +1218,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(Tags.Blocks.STORAGE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
-                AetherIIBlocks.ARKENIUM_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
-                AetherIIBlocks.CORROBONITE_BLOCK.get()
+                AetherIIBlocks.ARKENIUM_BLOCK.get()
         );
         this.tag(Tags.Blocks.CHESTS_WOODEN).add(
                 AetherIIBlocks.SKYROOT_CHEST.get()

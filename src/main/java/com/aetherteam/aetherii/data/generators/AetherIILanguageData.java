@@ -536,6 +536,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.LOCKED_GUARDIAN_WOOD, "Locked Guardian Wood");
         this.addBlock(AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD, "Locked Dense Guardian Wood");
         this.addBlock(AetherIIBlocks.LOCKED_GUARDIAN_ROOTS, "Locked Guardian Roots");
+        this.addBlock(AetherIIBlocks.LOCKED_DIM_GUARDIAN_ROOTS, "Locked Dim Guardian Roots");
+        this.addBlock(AetherIIBlocks.LOCKED_LUCENT_GUARDIAN_ROOTS, "Locked Lucent Guardian Roots");
+        this.addBlock(AetherIIBlocks.LOCKED_GUARDIAN_LAMP, "Locked Guardian Lamp");
         this.addBlock(AetherIIBlocks.GUARDIAN_TRUNK, "Guardian Trunk");
         this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_TRUNK, "Dense Guardian Trunk");
         this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK, "Stripped Guardian Trunk");
@@ -570,6 +573,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.LOCKED_INFECTED_WOOD, "Locked Infected Wood");
         this.addBlock(AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD, "Locked Dense Infected Wood");
         this.addBlock(AetherIIBlocks.LOCKED_INFECTED_ROOTS, "Locked Infected Roots");
+        this.addBlock(AetherIIBlocks.LOCKED_DIM_INFECTED_ROOTS, "Locked Dim Infected Roots");
+        this.addBlock(AetherIIBlocks.LOCKED_LUCENT_INFECTED_ROOTS, "Locked Lucent Infected Roots");
+        this.addBlock(AetherIIBlocks.LOCKED_INFECTED_LAMP, "Locked Infected Lamp");
         this.addBlock(AetherIIBlocks.INFECTED_TRUNK, "Infected Trunk");
         this.addBlock(AetherIIBlocks.DENSE_INFECTED_TRUNK, "Dense Infected Trunk");
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_TRUNK, "Stripped Infected Trunk");
