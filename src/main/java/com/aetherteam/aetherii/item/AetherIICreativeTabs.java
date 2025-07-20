@@ -274,6 +274,7 @@ public class  AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ZANITE_BLOCK.get());
                 output.accept(AetherIIBlocks.ARKENIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.GRAVITITE_BLOCK.get());
+                output.accept(AetherIIBlocks.CORROBONITE_BLOCK.get());
                 output.accept(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());
                 output.accept(AetherIIBlocks.BLUE_ARILUM_LANTERN.get());
                 output.accept(AetherIIBlocks.PURPLE_ARILUM_LANTERN.get());
@@ -485,6 +486,7 @@ public class  AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.LILICHIME.get());
                 output.accept(AetherIIBlocks.PLURACIAN.get());
                 output.accept(AetherIIBlocks.SATIVAL_SHOOT.get());
+                output.accept(AetherIIBlocks.BRETTL_FLOWER.get());
                 output.accept(AetherIIBlocks.HOLPUPEA.get());
                 output.accept(AetherIIBlocks.AECHOR_CUTTING.get());
                 output.accept(AetherIIBlocks.HIGHLANDS_BUSH.get());
@@ -495,6 +497,7 @@ public class  AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ARILUM.get());
                 output.accept(AetherIIBlocks.BLOOMING_ARILUM.get());
                 output.accept(AetherIIBlocks.MAGNETIC_SHROOM.get());
+                output.accept(AetherIIBlocks.BRETTL_GRASS_BUNDLE.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_VINES.get());
@@ -726,7 +729,6 @@ public class  AetherIICreativeTabs {
                 output.accept(AetherIIItems.BRETTL_CANE.get());
                 output.accept(AetherIIItems.BRETTL_GRASS.get());
                 output.accept(AetherIIItems.BRETTL_ROPE.get());
-                output.accept(AetherIIItems.BRETTL_FLOWER.get());
                 output.accept(AetherIIItems.ARILUM_BULBS.get());
                 output.accept(AetherIIItems.SKYROOT_PINECONE.get());
                 output.accept(AetherIIItems.MOA_FEED.get());

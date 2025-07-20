@@ -249,6 +249,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Brettl
         this.addBlock(AetherIIBlocks.BRETTL_PLANT, "Brettl Plant");
         this.addBlock(AetherIIBlocks.BRETTL_PLANT_TIP, "Brettl Plant Tip");
+        this.addBlock(AetherIIBlocks.BRETTL_FLOWER, "Brettl Flower");
+        this.addBlock(AetherIIBlocks.BRETTL_GRASS_BUNDLE, "Brettl Grass Bundle");
 
         // Lake
         this.addBlock(AetherIIBlocks.ARILUM_SHOOT, "Arilum");
@@ -633,6 +635,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ZANITE_BLOCK, "Block of Zanite");
         this.addBlock(AetherIIBlocks.ARKENIUM_BLOCK, "Block of Arkenium");
         this.addBlock(AetherIIBlocks.GRAVITITE_BLOCK, "Block of Gravitite");
+        this.addBlock(AetherIIBlocks.CORROBONITE_BLOCK, "Block of Corrobonite");
 
         // Arilum Lantern
         this.addBlock(AetherIIBlocks.GREEN_ARILUM_LANTERN, "Green Arilum Lantern");
@@ -784,7 +787,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.BRETTL_CANE, "Brettl Cane");
         this.addItem(AetherIIItems.BRETTL_GRASS, "Brettl Grass");
         this.addItem(AetherIIItems.BRETTL_ROPE, "Brettl Rope");
-        this.addItem(AetherIIItems.BRETTL_FLOWER, "Brettl Flower");
         this.addItem(AetherIIItems.AECHOR_PETAL, "Aechor Petal");
         this.addItem(AetherIIItems.ARILUM_BULBS, "Arilum Bulbs");
         this.addItem(AetherIIItems.ARCTIC_SNOWBALL, "Arctic Snowball");

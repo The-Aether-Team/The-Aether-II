@@ -376,32 +376,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
-        this.tag(AetherIITags.Blocks.INFECTED_PATCH_GENERATES_ON).add(
-                AetherIIBlocks.GUARDIAN_LOG.get(),
-                AetherIIBlocks.GUARDIAN_WOOD.get(),
-                AetherIIBlocks.DENSE_GUARDIAN_LOG.get(),
-                AetherIIBlocks.DENSE_GUARDIAN_WOOD.get(),
-                AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get(),
-                AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get(),
-                AetherIIBlocks.GUARDIAN_ROOTS.get(),
-                AetherIIBlocks.DIM_GUARDIAN_ROOTS.get(),
-                AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get(),
-                AetherIIBlocks.GUARDIAN_LAMP.get(),
-                AetherIIBlocks.GUARDIAN_CORTEX.get(),
-                AetherIIBlocks.BASE_GUARDIAN_CORTEX_WOOD.get(),
-                AetherIIBlocks.TOP_GUARDIAN_CORTEX_WOOD.get(),
-                AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get(),
-                AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get(),
-                AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get(),
-                AetherIIBlocks.LOCKED_DIM_GUARDIAN_ROOTS.get(),
-                AetherIIBlocks.LOCKED_LUCENT_GUARDIAN_ROOTS.get(),
-                AetherIIBlocks.LOCKED_GUARDIAN_LAMP.get());
-        this.tag(AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON).add(
-                AetherIIBlocks.GUARDIAN_LOG.get(),
-                AetherIIBlocks.GUARDIAN_WOOD.get(),
-                AetherIIBlocks.DENSE_GUARDIAN_LOG.get(),
-                AetherIIBlocks.DENSE_GUARDIAN_WOOD.get(),
-                AetherIIBlocks.GUARDIAN_ROOTS.get());
         this.tag(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON).addTag(AetherIITags.Blocks.LEAVES).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(),
@@ -439,15 +413,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get(),
                 AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get(),
                 AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get(),
-                AetherIIBlocks.LOCKED_DIM_GUARDIAN_ROOTS.get(),
-                AetherIIBlocks.LOCKED_LUCENT_GUARDIAN_ROOTS.get(),
-                AetherIIBlocks.LOCKED_GUARDIAN_LAMP.get(),
                 AetherIIBlocks.LOCKED_INFECTED_WOOD.get(),
                 AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD.get(),
-                AetherIIBlocks.LOCKED_INFECTED_ROOTS.get(),
-                AetherIIBlocks.LOCKED_DIM_INFECTED_ROOTS.get(),
-                AetherIIBlocks.LOCKED_LUCENT_INFECTED_ROOTS.get(),
-                AetherIIBlocks.LOCKED_INFECTED_LAMP.get()
+                AetherIIBlocks.LOCKED_INFECTED_ROOTS.get()
         );
 
         // Vanilla
@@ -727,8 +695,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get(),
                 AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get()
         );
-        this.tag(BlockTags.DRAGON_IMMUNE).addTag(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS);
-        this.tag(BlockTags.WITHER_IMMUNE).addTag(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS);
         this.tag(BlockTags.PORTALS).add(AetherIIBlocks.AETHER_PORTAL.get());
         this.tag(BlockTags.BEACON_BASE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
@@ -1147,6 +1113,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(),
                 AetherIIBlocks.ARKENIUM_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get()
+        );
+        this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
+                AetherIIBlocks.CORROBONITE_ORE.get(),
+                AetherIIBlocks.CORROBONITE_BLOCK.get()
         );
         this.tag(BlockTags.FEATURES_CANNOT_REPLACE).addTag(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS);
         this.tag(BlockTags.CONVERTABLE_TO_MUD).add(AetherIIBlocks.AETHER_DIRT.get());

@@ -33,6 +33,12 @@
     "aether_ii:blueberry_bush_stem": {
       "chance": 0.5
     },
+    "aether_ii:brettl_flower": {
+      "chance": 0.3
+    },
+    "aether_ii:brettl_grass_bundle": {
+      "chance": 0.85
+    },
     "aether_ii:enchanted_blueberry": {
       "chance": 0.5
     },

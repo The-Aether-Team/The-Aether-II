@@ -263,7 +263,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Brettl
         this.add(AetherIIBlocks.BRETTL_PLANT.get(), (brettl) -> this.droppingBrettlPlant(brettl, AetherIIItems.BRETTL_CANE.get(), AetherIIItems.BRETTL_GRASS.get()));
-        this.add(AetherIIBlocks.BRETTL_PLANT_TIP.get(), (brettl) -> this.droppingBrettlPlantTip(brettl, AetherIIItems.BRETTL_CANE.get(), AetherIIItems.BRETTL_FLOWER.get()));
+        this.add(AetherIIBlocks.BRETTL_PLANT_TIP.get(), (brettl) -> this.droppingBrettlPlantTip(brettl, AetherIIItems.BRETTL_CANE.get(), AetherIIBlocks.BRETTL_FLOWER.get()));
+        this.dropSelf(AetherIIBlocks.BRETTL_FLOWER.get());
+        this.dropSelf(AetherIIBlocks.BRETTL_GRASS_BUNDLE.get());
 
         // Lake
         this.dropOther(AetherIIBlocks.ARILUM_SHOOT.get(), AetherIIItems.ARILUM_BULBS.get());
@@ -636,6 +638,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.ZANITE_BLOCK.get());
         this.dropSelf(AetherIIBlocks.ARKENIUM_BLOCK.get());
         this.dropSelf(AetherIIBlocks.GRAVITITE_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.CORROBONITE_BLOCK.get());
 
         // Arilum Lantern
         this.dropSelf(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());

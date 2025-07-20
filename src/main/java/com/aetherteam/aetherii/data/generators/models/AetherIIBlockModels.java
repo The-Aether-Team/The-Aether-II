@@ -205,6 +205,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createValkyrieSprout();
         this.createBrettlPlant(AetherIIBlocks.BRETTL_PLANT.get());
         this.createBrettlPlant(AetherIIBlocks.BRETTL_PLANT_TIP.get());
+        this.createCrossWithDefaultItem(AetherIIBlocks.BRETTL_FLOWER.get(), PlantType.NOT_TINTED);
+        this.createRotatedPillarWithHorizontalVariant(AetherIIBlocks.BRETTL_GRASS_BUNDLE.get(), TexturedModel.COLUMN, TexturedModel.COLUMN_HORIZONTAL);
 
         // Lake
         this.createCrossBlock(AetherIIBlocks.ARILUM_SHOOT.get(), PlantType.NOT_TINTED);
@@ -425,6 +427,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.ZANITE_BLOCK.get());
         this.createTrivialCube(AetherIIBlocks.ARKENIUM_BLOCK.get());
         this.createTrivialCube(AetherIIBlocks.GRAVITITE_BLOCK.get());
+        this.createTrivialCube(AetherIIBlocks.CORROBONITE_BLOCK.get());
 
         // Arilum Lantern
         this.createArilumLantern(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());
