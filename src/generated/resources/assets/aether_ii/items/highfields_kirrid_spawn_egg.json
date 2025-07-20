@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -5396330
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -10361
-      }
-    ]
+    "model": "aether_ii:item/highfields_kirrid_spawn_egg"
   }
 }

@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -3939345
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -6106932
-      }
-    ]
+    "model": "aether_ii:item/swet_spawn_egg"
   }
 }

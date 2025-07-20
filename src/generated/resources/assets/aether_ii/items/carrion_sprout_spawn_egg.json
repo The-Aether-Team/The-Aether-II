@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -3483159
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -7097903
-      }
-    ]
+    "model": "aether_ii:item/carrion_sprout_spawn_egg"
   }
 }
