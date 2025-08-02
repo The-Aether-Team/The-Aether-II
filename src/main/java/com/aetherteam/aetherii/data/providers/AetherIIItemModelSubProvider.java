@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.providers;
 import com.aetherteam.aetherii.client.renderer.item.properties.*;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.entity.passive.Moa;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.MoaEggType;
 import net.minecraft.client.color.item.Dye;
 import net.minecraft.client.data.models.ItemModelGenerators;
@@ -12,6 +13,7 @@ import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
 import net.minecraft.client.renderer.item.properties.select.Charge;
 import net.minecraft.client.renderer.item.properties.select.DisplayContext;
+import net.minecraft.client.renderer.item.properties.select.TrimMaterialProperty;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
@@ -156,6 +158,15 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
             }
         }
         this.itemModelOutput.accept(item, ItemModelUtils.select(new SelectMoaEggType(), ItemModelUtils.plainModel(modelLocation), list));
+    }
+
+    public void generateDyedSaddleItem(Item item) {
+        ResourceLocation location = ModelLocationUtils.getModelLocation(item);
+        ResourceLocation texture = TextureMapping.getItemTexture(item);
+        ResourceLocation overlay = TextureMapping.getItemTexture(item, "_overlay");
+        ModelTemplates.TWO_LAYERED_ITEM.create(location, TextureMapping.layered(texture, overlay), this.modelOutput);
+        ItemModel.Unbaked model = ItemModelUtils.tintedModel(location, new Dye(0xFF7D8BA3));
+        this.itemModelOutput.accept(AetherIIItems.MOA_SADDLE.asItem(), model);
     }
 
     public void generatePortalFrameItem(Item item) {

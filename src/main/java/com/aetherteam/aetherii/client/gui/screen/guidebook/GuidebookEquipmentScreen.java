@@ -3,9 +3,12 @@ package com.aetherteam.aetherii.client.gui.screen.guidebook;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.gui.component.guidebook.GuidebookTab;
+import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
+import com.aetherteam.aetherii.inventory.menu.slot.SaddlebagSlot;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.miscellaneous.CurrencyItem;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.SlotAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.ClearItemPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.HeldCurrencyPacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
@@ -24,6 +27,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
@@ -39,7 +44,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookEquipmentMenu> implements Guidebook {
-    private static final ResourceLocation GUIDEBOOK_EQUIPMENT_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_left.png");
+    private static final ResourceLocation GUIDEBOOK_EQUIPMENT_LEFT_PAGE_PLAYER_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_left_player.png");
+    private static final ResourceLocation GUIDEBOOK_EQUIPMENT_LEFT_PAGE_MOA_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_left_moa.png");
     private static final ResourceLocation GUIDEBOOK_EQUIPMENT_RIGHT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_right.png");
     private static final ResourceLocation GUIDEBOOK_EQUIPMENT_RIGHT_PAGE_CREATIVE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_right_creative.png");
     private static final SimpleContainer DESTROY_ITEM_CONTAINER = new SimpleContainer(1);
@@ -93,24 +99,29 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                 this.destroyItemSlot = null;
             }
         }
-        if (this.currencySlot == null) {
-            this.currencySlot = new Slot(CURRENCY_CONTAINER, 0, 64, 112);
-            this.getMenu().slots.add(this.currencySlot);
-        }
 
         if (this.destroyItemSlot != null && this.isHovering(this.destroyItemSlot.x, this.destroyItemSlot.y, 16, 16, mouseX, mouseY)) {
             guiGraphics.renderTooltip(this.font, Component.translatable("inventory.binSlot"), mouseX, mouseY);
         }
 
+        if (this.currencySlot == null && this.getMenu().getMoa() == null) {
+            this.currencySlot = new Slot(CURRENCY_CONTAINER, 0, 64, 112);
+            this.getMenu().slots.add(this.currencySlot);
+        }
         if (this.currencySlot != null) {
-            if (Minecraft.getInstance().player != null) {
-                var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
-                if (this.isHovering(this.currencySlot.x, this.currencySlot.y, 16, 16, mouseX, mouseY)) {
-                    List<Component> componentList = new ArrayList<>();
-                    componentList.add(Component.translatable("gui.aether_ii.guidebook.equipment.pouch.tooltip.title"));
-                    componentList.add(Component.translatable("gui.aether_ii.guidebook.equipment.pouch.tooltip.description", data.getAmount()).withStyle(AetherIIItems.CURRENCY_NAME_COLOR));
-                    guiGraphics.renderComponentTooltip(this.font, componentList, mouseX, mouseY);
+            if (this.getMenu().getMoa() == null) {
+                if (Minecraft.getInstance().player != null) {
+                    var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
+                    if (this.isHovering(this.currencySlot.x, this.currencySlot.y, 16, 16, mouseX, mouseY)) {
+                        List<Component> componentList = new ArrayList<>();
+                        componentList.add(Component.translatable("gui.aether_ii.guidebook.equipment.pouch.tooltip.title"));
+                        componentList.add(Component.translatable("gui.aether_ii.guidebook.equipment.pouch.tooltip.description", data.getAmount()).withStyle(AetherIIItems.CURRENCY_NAME_COLOR));
+                        guiGraphics.renderComponentTooltip(this.font, componentList, mouseX, mouseY);
+                    }
                 }
+            } else {
+                this.getMenu().slots.remove(this.currencySlot);
+                this.currencySlot = null;
             }
         }
 
@@ -149,6 +160,24 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         var size = new Vector2i((int) ((scissorEnd.x - scissorStart.x) / 1.75), scissorEnd.y - scissorStart.y);
         this.renderEntityInInventoryFollowingMouseRotated(guiGraphics, scissorStart, size, scissorStart, scissorEnd, mouseX, mouseY, 0);
         this.renderEntityInInventoryFollowingMouseRotated(guiGraphics, new Vector2i(scissorStart).add((int) (size.x / 1.5), 0), size, scissorStart, scissorEnd, mouseX, mouseY, 180);
+
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(leftPos, topPos, 0.0F);
+        for (Slot slot : this.menu.slots) {
+            if (slot instanceof SaddlebagSlot saddlebagSlot && saddlebagSlot.isActive()) {
+                ((SlotAccessor) slot).aether$setX(saddlebagSlot.originalX + calculateSlotOffset());
+                guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.SLOT_SPRITE, saddlebagSlot.x - 1, saddlebagSlot.y - 1, 18, 18);
+            }
+        }
+        guiGraphics.pose().popPose();
+    }
+
+    private int calculateSlotOffset() {
+        if (this.getMenu().getMoa() != null) {
+            int rowSize = this.getMenu().getMoa().getSaddlebagRowSize();
+            return (8 - rowSize) * 9;
+        }
+        return 0;
     }
 
     @Override
@@ -166,21 +195,37 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     private void renderStats(GuiGraphics guiGraphics) {
-        Player player = Minecraft.getInstance().player;
-        int x = 49;
-        int y = 112;
+        if (this.getMenu().getMoa() != null) {
+            int x = 49;
+            int y = 94;
 
-        guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
-        guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x + 18, y + 4, 16777215, true);
+            guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
+            guiGraphics.drawString(this.font, Component.literal((int) (this.getMenu().getMoa().getHealth()) + "/" + (int) (this.getMenu().getMoa().getMaxHealth())), x + 18, y + 4, 16777215, true);
 
-        guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
-        guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 72, y + 4, 16777215, true);
+            guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
+            guiGraphics.drawString(this.font, Component.literal(this.getMenu().getMoa().getArmorValue() + "/20"), x + 72, y + 4, 16777215, true);
+        } else {
+            Player player = Minecraft.getInstance().player;
+            int x = 49;
+            int y = 112;
+
+            guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
+            guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x + 18, y + 4, 16777215, true);
+
+            guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
+            guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 72, y + 4, 16777215, true);
+        }
     }
 
     private void renderEntityInInventoryFollowingMouseRotated(GuiGraphics guiGraphics, Vector2i pos, Vector2i size, Vector2i scissorStart, Vector2i scissorEnd, float mouseX, float mouseY, float rotation) {
         int scale = 30;
         float yOffset = 0.0625F;
-        Player entity = this.minecraft.player;
+        LivingEntity entity = this.minecraft.player;
+        if (this.getMenu().getMoa() != null) {
+            entity = this.getMenu().getMoa();
+            scale = 16;
+            yOffset = this.getMenu().getMoa().isSitting() ? 0.05F : -0.4F;
+        }
         float f = (float) (pos.x + pos.x + size.x) / 2.0F;
         float g = (float) (pos.y + pos.y + size.y) / 2.0F;
         guiGraphics.enableScissor(scissorStart.x, scissorStart.y, scissorEnd.x, scissorEnd.y);
@@ -294,7 +339,11 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
 
     @Override
     public ResourceLocation getLeftPageTexture() {
-        return GUIDEBOOK_EQUIPMENT_LEFT_PAGE_LOCATION;
+        if (this.getMenu().getMoa() != null) {
+            return GUIDEBOOK_EQUIPMENT_LEFT_PAGE_MOA_LOCATION;
+        } else {
+            return GUIDEBOOK_EQUIPMENT_LEFT_PAGE_PLAYER_LOCATION;
+        }
     }
 
     @Override

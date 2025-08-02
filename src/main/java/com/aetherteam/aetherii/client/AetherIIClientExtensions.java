@@ -44,6 +44,12 @@ public class AetherIIClientExtensions {
             return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0x619CC0) : -1;
         }
     };
+    public static final IClientItemExtensions MOA_SADDLE = new IClientItemExtensions() {
+        @Override
+        public int getDefaultDyeColor(ItemStack stack) {
+            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0x7D8BA3) : -1;
+        }
+    };
 
     public static final IClientItemExtensions THROWABLE = new IClientItemExtensions() {
         @Nullable
@@ -151,6 +157,7 @@ public class AetherIIClientExtensions {
         event.registerItem(BURRUKAI_PLATE, AetherIIItems.BURRUKAI_PLATE_HELMET.get(), AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(), AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(), AetherIIItems.BURRUKAI_PLATE_BOOTS.get(), AetherIIItems.BURRUKAI_PLATE_GLOVES.get());
         event.registerItem(THROWABLE, AetherIIBlocks.HOLYSTONE_ROCK.asItem(), AetherIIItems.SKYROOT_PINECONE.get(), AetherIIItems.ARCTIC_SNOWBALL.get());
         event.registerItem(GLIDER, AetherIIItems.COLD_AERCLOUD_GLIDER, AetherIIItems.GOLDEN_AERCLOUD_GLIDER, AetherIIItems.BLUE_AERCLOUD_GLIDER, AetherIIItems.PURPLE_AERCLOUD_GLIDER);
+        event.registerItem(MOA_SADDLE, AetherIIItems.MOA_SADDLE);
 
         event.registerBlock(UNSTABLE_BLOCK, AetherIIBlocks.UNSTABLE_HOLYSTONE.get(),AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
 

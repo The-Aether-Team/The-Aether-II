@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.mixin;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
@@ -10,9 +11,11 @@ import com.aetherteam.aetherii.mixin.mixins.client.accessor.ItemRendererAccessor
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexMultiConsumer;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -23,6 +26,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 public class MixinHooks {
     public static void shortswordSlashBehavior(Player player, Entity target, boolean canShortswordSlash) {
@@ -154,5 +159,27 @@ public class MixinHooks {
     public static void renderIrradiated(PoseStack poseStack, MultiBufferSource bufferSource, int i, int j, int[] tints, BakedModel model, RenderType renderType) {
         VertexConsumer vertexconsumer = VertexMultiConsumer.create(VertexMultiConsumer.create(bufferSource.getBuffer(AetherIIRenderTypes.irradiatedGlint())), bufferSource.getBuffer(renderType));
         ItemRendererAccessor.callRenderModelLists(model, tints, i, j, poseStack, vertexconsumer);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static <T extends HumanoidRenderState> void positionMoaRider(T renderState, ModelPart head, ModelPart body, ModelPart rightArm, ModelPart leftArm, ModelPart rightLeg, ModelPart leftLeg) { //todo
+        rightArm.xRot += -10.0F * Mth.DEG_TO_RAD;
+        rightArm.zRot += -30.0F * Mth.DEG_TO_RAD;
+        leftArm.xRot += -10.0F * Mth.DEG_TO_RAD;
+        leftArm.zRot += 30.0F * Mth.DEG_TO_RAD;
+
+//        rightLeg.xRot = -30.0F * Mth.DEG_TO_RAD;
+//        rightLeg.zRot = 32.5F * Mth.DEG_TO_RAD;
+//        leftLeg.xRot = -30.0F * Mth.DEG_TO_RAD;
+//        leftLeg.zRot = -32.5F * Mth.DEG_TO_RAD;
+
+        rightLeg.x -= 1;
+        rightLeg.y -= 1;
+        rightLeg.xRot += 40.0F * Mth.DEG_TO_RAD;
+        rightLeg.yRot += 10.0F * Mth.DEG_TO_RAD;
+        leftLeg.x += 1;
+        leftLeg.y -= 1;
+        leftLeg.xRot += 40.0F * Mth.DEG_TO_RAD;
+        leftLeg.yRot -= 10.0F * Mth.DEG_TO_RAD;
     }
 }

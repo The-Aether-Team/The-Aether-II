@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.item.equipment.weapons;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ShieldItem;
@@ -13,7 +14,7 @@ public class TieredShieldItem extends ShieldItem {
     public static final ResourceLocation BASE_SHIELD_STAMINA_REDUCTION_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_shield_stamina_reduction");
 
     public TieredShieldItem(ToolMaterial tier, Properties properties) {
-        super(properties.durability(tier.durability()).repairable(tier.repairItems()).enchantable(tier.enchantmentValue()));
+        super(properties.durability(tier.durability()).repairable(tier.repairItems()).enchantable(tier.enchantmentValue()).equippableUnswappable(EquipmentSlot.OFFHAND));
     }
 
     public static ItemAttributeModifiers createAttributes(int staminaReductionRate) {

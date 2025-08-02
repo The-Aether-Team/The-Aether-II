@@ -651,7 +651,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(),
                 AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(),
                 AetherIIItems.BURRUKAI_PLATE_BOOTS.get(),
-                AetherIIItems.BURRUKAI_PLATE_GLOVES.get()
+                AetherIIItems.BURRUKAI_PLATE_GLOVES.get(),
+                AetherIIItems.MOA_SADDLE.get()
         );
         this.tag(ItemTags.SWORD_ENCHANTABLE).addTags(
                 AetherIITags.Items.TOOLS_SPEARS,

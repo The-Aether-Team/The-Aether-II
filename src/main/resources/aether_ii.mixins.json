@@ -35,6 +35,7 @@
     "common.accessor.SaplingBlockAccessor",
     "common.accessor.ServerGamePacketListenerImplAccessor",
     "common.accessor.ServerPlayerAccessor",
+    "common.accessor.SlotAccessor",
     "debug.DebugPacketsMixin",
     "debug.PathFinderMixin",
     "debug.accessor.PathAccessor"
@@ -44,6 +45,7 @@
     "client.BlockRenderDispatcherMixin",
     "client.ClientLevelMixin",
     "client.EquipmentLayerRendererMixin",
+    "client.HumanoidModelMixin",
     "client.LayerRenderStateMixin",
     "client.LevelRendererMixin",
     "client.LiquidBlockRendererMixin",
