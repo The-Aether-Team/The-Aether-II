@@ -72,36 +72,36 @@ configurations {
 }
 
 dependencies {
-    implementation "com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}"
-    implementation "com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}"
-    implementation "io.wispforest:accessories-neoforge:${project.accessories_version}+${project.minecraft_version}"
-
-    runtimeOnly "curse.maven:worldedit-225608:6122278"
+//    implementation "com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}"
+//    implementation "com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}"
+//    implementation "io.wispforest:accessories-neoforge:${project.accessories_version}+${project.minecraft_version}"
+//
+//    runtimeOnly "curse.maven:worldedit-225608:6122278"
 
 //    compileOnly "mezz.jei:jei-${project.mc_version}-common-api:${project.jei_version}"
 //    compileOnly "mezz.jei:jei-${project.mc_version}-neoforge-api:${project.jei_version}"
 //    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
 
-    jarJar("com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}") {
-        version {
-            strictly "[${project.nitrogen_version},)"
-            prefer "${project.nitrogen_version}"
-        }
-    }
-
-    jarJar("com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}") {
-        version {
-            strictly "[${project.cumulus_version},)"
-            prefer "${project.cumulus_version}"
-        }
-    }
-
-    jarJar("io.wispforest:accessories-neoforge:${project.accessories_version}+${project.minecraft_version}") {
-        version {
-            strictly "[${project.accessories_version}+${project.minecraft_version},)"
-            prefer "${project.accessories_version}+${project.minecraft_version}"
-        }
-    }
+//    jarJar("com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}") {
+//        version {
+//            strictly "[${project.nitrogen_version},)"
+//            prefer "${project.nitrogen_version}"
+//        }
+//    }
+//
+//    jarJar("com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}") {
+//        version {
+//            strictly "[${project.cumulus_version},)"
+//            prefer "${project.cumulus_version}"
+//        }
+//    }
+//
+//    jarJar("io.wispforest:accessories-neoforge:${project.accessories_version}+${project.minecraft_version}") {
+//        version {
+//            strictly "[${project.accessories_version}+${project.minecraft_version},)"
+//            prefer "${project.accessories_version}+${project.minecraft_version}"
+//        }
+//    }
 
 //    runtimeOnly "io.github.flemmli97:debugutils:1.21-${project.debugutils_version}-neoforge"
 
@@ -139,8 +139,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
             neo_version            : neo_version,
-            neo_version_range      : neo_version_range,
-            loader_version_range   : loader_version_range
+            neo_version_range      : neo_version_range
     ]
     inputs.properties replaceProperties
     expand replaceProperties
@@ -185,46 +184,46 @@ publishing {
     }
 }
 
-curseforge {
-    project {
-        apiKey = System.getenv("CURSEFORGE_TOKEN")
-        id = "${curseforge_id}"
-        releaseType = "${version_type}"
-        changelog = file("$rootDir/docs/CHANGELOG.md")
-        changelogType = "markdown"
-        addGameVersion("${minecraft_version}")
-        addGameVersion("NeoForge")
-        mainArtifact(tasks.jarJar) {
-            displayName = "${mod_name} - ${version}"
-            relations {
-                requiredDependency "owo"
-                embeddedLibrary "accessories"
-                embeddedLibrary "cumulus"
-            }
-        }
-    }
-    options {
-        debug = true
-    }
-}
-
-modrinth {
-    token = System.getenv("MODRINTH_TOKEN")
-    projectId = "${modrinth_id}"
-    versionNumber = "${version}"
-    versionType = "${version_type}"
-    versionName = "${mod_name} - ${version}"
-    changelog = new File("$rootDir/docs/CHANGELOG.md").text
-    uploadFile = tasks.jarJar
-    gameVersions = ["${minecraft_version}"]
-    loaders = ["neoforge"]
-    dependencies {
-        required.project "owo"
-        embedded.version "accessories", "${project.accessories_version}+${project.minecraft_version}"
-        embedded.version "cumulus", "${project.cumulus_version}"
-    }
-    debugMode = true
-}
+//curseforge {
+//    project {
+//        apiKey = System.getenv("CURSEFORGE_TOKEN")
+//        id = "${curseforge_id}"
+//        releaseType = "${version_type}"
+//        changelog = file("$rootDir/docs/CHANGELOG.md")
+//        changelogType = "markdown"
+//        addGameVersion("${minecraft_version}")
+//        addGameVersion("NeoForge")
+//        mainArtifact(tasks.jarJar) {
+//            displayName = "${mod_name} - ${version}"
+//            relations {
+//                requiredDependency "owo"
+//                embeddedLibrary "accessories"
+//                embeddedLibrary "cumulus"
+//            }
+//        }
+//    }
+//    options {
+//        debug = true
+//    }
+//}
+//
+//modrinth {
+//    token = System.getenv("MODRINTH_TOKEN")
+//    projectId = "${modrinth_id}"
+//    versionNumber = "${version}"
+//    versionType = "${version_type}"
+//    versionName = "${mod_name} - ${version}"
+//    changelog = new File("$rootDir/docs/CHANGELOG.md").text
+//    uploadFile = tasks.jarJar
+//    gameVersions = ["${minecraft_version}"]
+//    loaders = ["neoforge"]
+//    dependencies {
+//        required.project "owo"
+//        embedded.version "accessories", "${project.accessories_version}+${project.minecraft_version}"
+//        embedded.version "cumulus", "${project.cumulus_version}"
+//    }
+//    debugMode = true
+//}
 
 idea {
     module {
