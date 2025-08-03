@@ -73,7 +73,7 @@ configurations {
 
 dependencies {
     implementation "com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}"
-//    implementation "com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}"
+    implementation "com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}"
 //    implementation "io.wispforest:accessories-neoforge:${project.accessories_version}+${project.minecraft_version}"
 //
 //    runtimeOnly "curse.maven:worldedit-225608:6122278"
@@ -89,12 +89,12 @@ dependencies {
         }
     }
 
-//    jarJar("com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}") {
-//        version {
-//            strictly "[${project.cumulus_version},)"
-//            prefer "${project.cumulus_version}"
-//        }
-//    }
+    jarJar("com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}") {
+        version {
+            strictly "[${project.cumulus_version},)"
+            prefer "${project.cumulus_version}"
+        }
+    }
 //
 //    jarJar("io.wispforest:accessories-neoforge:${project.accessories_version}+${project.minecraft_version}") {
 //        version {
