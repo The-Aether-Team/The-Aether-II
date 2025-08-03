@@ -72,7 +72,7 @@ configurations {
 }
 
 dependencies {
-//    implementation "com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}"
+    implementation "com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}"
 //    implementation "com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}"
 //    implementation "io.wispforest:accessories-neoforge:${project.accessories_version}+${project.minecraft_version}"
 //
@@ -82,13 +82,13 @@ dependencies {
 //    compileOnly "mezz.jei:jei-${project.mc_version}-neoforge-api:${project.jei_version}"
 //    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
 
-//    jarJar("com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}") {
-//        version {
-//            strictly "[${project.nitrogen_version},)"
-//            prefer "${project.nitrogen_version}"
-//        }
-//    }
-//
+    jarJar("com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}") {
+        version {
+            strictly "[${project.nitrogen_version},)"
+            prefer "${project.nitrogen_version}"
+        }
+    }
+
 //    jarJar("com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}") {
 //        version {
 //            strictly "[${project.cumulus_version},)"
