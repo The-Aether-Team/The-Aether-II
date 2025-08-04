@@ -9,15 +9,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class AetherBushBlock extends BushBlock {
-    public static final MapCodec<AetherBushBlock> CODEC = simpleCodec(AetherBushBlock::new);
-
     public AetherBushBlock(BlockBehaviour.Properties properties) {
         super(properties);
-    }
-
-    @Override
-    protected MapCodec<? extends BushBlock> codec() {
-        return CODEC;
     }
 
     @Override

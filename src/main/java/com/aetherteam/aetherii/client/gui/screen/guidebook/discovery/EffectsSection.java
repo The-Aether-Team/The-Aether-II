@@ -14,6 +14,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Holder;
@@ -97,9 +98,9 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
             TextureAtlasSprite effectAtlasSprite = Minecraft.getInstance().getMobEffectTextures().get(entry.getEffect());
 
             if (this.isUnlocked(entry, EffectsEntry.ICON.id())) {
-                guiGraphics.blitSprite(RenderType::guiTextured, effectAtlasSprite, slotX, slotY, 16, 16);
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, effectAtlasSprite, slotX, slotY, 16, 16);
             } else {
-                guiGraphics.blitSprite(RenderType::guiTextured, UNDISCOVERED_ENTRY_SPRITE, slotX, slotY, 16, 16);
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, UNDISCOVERED_ENTRY_SPRITE, slotX, slotY, 16, 16);
             }
             
             boolean isHovered = hoveredEntry != null && entry.getEffect() == hoveredEntry.getEffect();
@@ -110,7 +111,7 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
             }
 
             if (!this.isViewed(entry)) {
-                guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.EXCLAMATION, slotX, slotY, 3, 8);
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.EXCLAMATION, slotX, slotY, 3, 8);
             }
 
             i++;
@@ -148,7 +149,7 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
             if (this.isUnlocked(this.getSelectedEntry(), EffectsEntry.EFFECT.id())) {
                 TextureAtlasSprite effectAtlasSprite = Minecraft.getInstance().getMobEffectTextures().get(entry.getEffect());
 
-                guiGraphics.blitSprite(RenderType::guiTextured, effectAtlasSprite, 72, 30, 32, 32);
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, effectAtlasSprite, 72, 30, 32, 32);
             }
 
             List<Holder<Item>> items = entry.getItems();

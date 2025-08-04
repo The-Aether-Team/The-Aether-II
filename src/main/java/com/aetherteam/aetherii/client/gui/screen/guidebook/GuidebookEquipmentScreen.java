@@ -166,7 +166,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         for (Slot slot : this.menu.slots) {
             if (slot instanceof SaddlebagSlot saddlebagSlot && saddlebagSlot.isActive()) {
                 ((SlotAccessor) slot).aether$setX(saddlebagSlot.originalX + calculateSlotOffset());
-                guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.SLOT_SPRITE, saddlebagSlot.x - 1, saddlebagSlot.y - 1, 18, 18);
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.SLOT_SPRITE, saddlebagSlot.x - 1, saddlebagSlot.y - 1, 18, 18);
             }
         }
         guiGraphics.pose().popPose();
@@ -199,20 +199,20 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
             int x = 49;
             int y = 94;
 
-            guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
             guiGraphics.drawString(this.font, Component.literal((int) (this.getMenu().getMoa().getHealth()) + "/" + (int) (this.getMenu().getMoa().getMaxHealth())), x + 18, y + 4, 16777215, true);
 
-            guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
             guiGraphics.drawString(this.font, Component.literal(this.getMenu().getMoa().getArmorValue() + "/20"), x + 72, y + 4, 16777215, true);
         } else {
             Player player = Minecraft.getInstance().player;
             int x = 49;
             int y = 112;
 
-            guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
             guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x + 18, y + 4, 16777215, true);
 
-            guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
             guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 72, y + 4, 16777215, true);
         }
     }

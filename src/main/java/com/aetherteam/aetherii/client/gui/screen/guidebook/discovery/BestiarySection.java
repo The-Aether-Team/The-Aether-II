@@ -181,7 +181,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
             int y = i / 6;
             int slotX = leftPos + (x * 18);
             int slotY = topPos + (y * 18);
-            guiGraphics.blitSprite(RenderType::guiTextured, sprite, slotX, slotY, 16, 16);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, slotX, slotY, 16, 16);
 
             boolean isHovered = hoveredEntry != null && entry.getEntityType() == hoveredEntry.getEntityType();
             boolean isSelected = this.selectedEntry != null && entry.getEntityType() == this.selectedEntry.getEntityType();
@@ -191,7 +191,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
             }
 
             if (!this.isViewed(entry)) {
-                guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.EXCLAMATION, slotX, slotY, 3, 8);
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.EXCLAMATION, slotX, slotY, 3, 8);
             }
 
             i++;
@@ -234,14 +234,14 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                     int y = 29;
 
                     if (this.isUnlocked(entry, BestiaryEntry.HEALTH.id())) {
-                        guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
+                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
                         this.renderIconValue(guiGraphics, x, y, (int) livingEntity.getMaxHealth());
                         this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", entry.getHealth()));
                     }
 
                     y += 17;
                     if (this.isUnlocked(entry, BestiaryEntry.SLASH_DEFENSE.id())) {
-                        guiGraphics.blitSprite(RenderType::guiTextured, SLASH_SPRITE, x, y, 16, 16);
+                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SLASH_SPRITE, x, y, 16, 16);
                         int slashDefense = entry.getSlashDefense();
                         Component slashTooltip = this.getDamageTypeComponent(slashDefense, "slash");
                         this.renderDefenseIconValue(guiGraphics, x, y, -slashDefense);
@@ -250,7 +250,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
 
                     y += 17;
                     if (this.isUnlocked(entry, BestiaryEntry.IMPACT_DEFENSE.id())) {
-                        guiGraphics.blitSprite(RenderType::guiTextured, IMPACT_SPRITE, x, y, 16, 16);
+                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, IMPACT_SPRITE, x, y, 16, 16);
                         int impactDefense = entry.getImpactDefense();
                         Component impactTooltip = this.getDamageTypeComponent(impactDefense, "impact");
                         this.renderDefenseIconValue(guiGraphics, x, y, -impactDefense);
@@ -259,7 +259,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
 
                     y += 17;
                     if (this.isUnlocked(entry, BestiaryEntry.PIERCE_DEFENSE.id())) {
-                        guiGraphics.blitSprite(RenderType::guiTextured, PIERCE_SPRITE, x, y, 16, 16);
+                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, PIERCE_SPRITE, x, y, 16, 16);
                         int pierceDefense = entry.getPierceDefense();
                         Component pierceTooltip = this.getDamageTypeComponent(pierceDefense, "pierce");
                         this.renderDefenseIconValue(guiGraphics, x, y, -pierceDefense);
@@ -278,7 +278,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                                 if (entry.getClientValues().containsKey(BestiaryEntry.EFFECT_RESISTANCE.id() + "_" + i) && this.isUnlocked(entry, BestiaryEntry.EFFECT_RESISTANCE.id() + "_" + i)) {
                                     Holder<MobEffect> effectHolder = effectResistanceAttribute.getEffect();
                                     TextureAtlasSprite textureatlassprite = effectTextureManager.get(effectHolder);
-                                    guiGraphics.blitSprite(RenderType::guiTextured, textureatlassprite, x, y, 18, 18);
+                                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, textureatlassprite, x, y, 18, 18);
                                     int effectValue = effectResistanceDisplay.value();
                                     Component effectTooltip = Component.literal(effectValue * 100 + "%")
                                             .append(CommonComponents.space())
