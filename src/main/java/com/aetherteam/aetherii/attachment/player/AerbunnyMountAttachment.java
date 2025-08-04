@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -19,7 +20,7 @@ public class AerbunnyMountAttachment {
     private Aerbunny mountedAerbunny;
     private Optional<CompoundTag> mountedAerbunnyTag = Optional.empty();
 
-    public static final Codec<AerbunnyMountAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final MapCodec<AerbunnyMountAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             CompoundTag.CODEC.optionalFieldOf("mounted_aerbunny").forGetter(AerbunnyMountAttachment::getMountedAerbunnyTag)
     ).apply(instance, AerbunnyMountAttachment::new));
 

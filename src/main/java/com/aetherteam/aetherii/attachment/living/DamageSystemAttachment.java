@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractArrowAccessor;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -39,10 +40,6 @@ public class DamageSystemAttachment {
     );
 
     public DamageSystemAttachment() { }
-
-    public Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> getSynchableFunctions() {
-        return this.synchableFunctions;
-    }
 
     public void postTickUpdate(LivingEntity livingEntity) {
         if (livingEntity instanceof Player player) {
@@ -105,7 +102,7 @@ public class DamageSystemAttachment {
                 } else if (source.getDirectEntity() instanceof AbstractArrow abstractArrow && source.getEntity() instanceof LivingEntity && abstractArrow.getWeaponItem() != null && !abstractArrow.getWeaponItem().isEmpty()) {
                     ItemStack weapon = abstractArrow.getWeaponItem();
                     ItemAttributeModifiers modifiers = weapon.getAttributeModifiers();
-                    baseDamage = abstractArrow.getBaseDamage();
+                    baseDamage = ((AbstractArrowAccessor) abstractArrow).aether$getBaseDamage();
                     modifiers.forEach(EquipmentSlotGroup.HAND, (attribute, modifier) -> {
                         if (attribute.getKey() != null) {
                             if (AetherIIAttributes.SLASH_RANGED_DAMAGE.is(attribute.getKey())) {
@@ -171,10 +168,5 @@ public class DamageSystemAttachment {
 
     public int getShieldStamina() {
         return this.shieldStamina;
-    }
-
-    @Override
-    public SyncPacket getSyncPacket(int entityID, String key, Type type, Object value) {
-        return new DamageSystemSyncPacket(entityID, key, type, value);
     }
 }

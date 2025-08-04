@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.attachment.player;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.google.common.collect.Streams;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -26,7 +27,7 @@ public class OutpostTrackerAttachment {
     private boolean shouldRespawnAtOutpost;
     private boolean shouldSyncAfterJoin;
 
-    public static final Codec<OutpostTrackerAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final MapCodec<OutpostTrackerAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             CampfirePosition.CODEC.listOf().fieldOf("campfire_positions").forGetter(OutpostTrackerAttachment::getCampfirePositions),
             Codec.BOOL.fieldOf("should_respawn_at_outpost").forGetter(OutpostTrackerAttachment::shouldRespawnAtOutpost)
     ).apply(instance, OutpostTrackerAttachment::new));
