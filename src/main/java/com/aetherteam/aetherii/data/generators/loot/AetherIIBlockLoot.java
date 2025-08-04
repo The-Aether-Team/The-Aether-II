@@ -58,7 +58,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
         this.dropSelf(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
         this.add(AetherIIBlocks.BRYALINN_MOSS_VINES.get(), this::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), this.createPetalsDrops(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get()));
+        this.add(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), this.createSegmentedBlockDrops(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get()));
         this.dropSelf(AetherIIBlocks.TANGLED_BRANCHES.get());
 
         // Magnetic
@@ -87,7 +87,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get());
         this.dropSelf(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get());
         this.add(AetherIIBlocks.AMBRELINN_MOSS_VINES.get(), this::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.TARAHESP_FLOWERS.get(), this.createPetalsDrops(AetherIIBlocks.TARAHESP_FLOWERS.get()));
+        this.add(AetherIIBlocks.TARAHESP_FLOWERS.get(), this.createSegmentedBlockDrops(AetherIIBlocks.TARAHESP_FLOWERS.get()));
 
         // Ores
         this.add(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), this::createQuartzOreDrops);
@@ -225,7 +225,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.LILICHIME.get());
         this.dropSelf(AetherIIBlocks.PLURACIAN.get());
         this.add(AetherIIBlocks.SATIVAL_SHOOT.get(), (shoot) -> this.droppingSativalShoot(getter, shoot, AetherIIItems.SATIVAL_BULB.get()));
-        this.add(AetherIIBlocks.HOLPUPEA.get(), this.createPetalsDrops(AetherIIBlocks.HOLPUPEA.get()));
+        this.add(AetherIIBlocks.HOLPUPEA.get(), this.createSegmentedBlockDrops(AetherIIBlocks.HOLPUPEA.get()));
         this.add(AetherIIBlocks.BLADE_POA.get(), this::createShearsOnlyDrop);
         this.dropSelf(AetherIIBlocks.AECHOR_CUTTING.get());
 

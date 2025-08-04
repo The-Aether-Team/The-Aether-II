@@ -18,7 +18,11 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
-import net.minecraft.client.data.models.blockstates.*;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
+import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.special.BedSpecialRenderer;
@@ -26,12 +30,16 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MossyCarpetBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.state.properties.*;
 import org.apache.commons.lang3.ArrayUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -67,30 +75,30 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         ResourceLocation inventory = AetherIIModelTemplates.TRUNK_INVENTORY.create(trunk, mapping, this.modelOutput);
 
         Consumer<TrunkModelBuilder> connections = (loader) -> {
-            loader.add(new UnbakedTrunkModelLoader.Holder(NORTHWEST_CONNECTION.getName(), WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, corner).with(VariantProperties.UV_LOCK, true));
-            loader.add(new UnbakedTrunkModelLoader.Holder(NORTHEAST_CONNECTION.getName(), WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, corner).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true));
-            loader.add(new UnbakedTrunkModelLoader.Holder(SOUTHEAST_CONNECTION.getName(), WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, corner).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true));
-            loader.add(new UnbakedTrunkModelLoader.Holder(SOUTHWEST_CONNECTION.getName(), WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, corner).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
-            loader.add(new UnbakedTrunkModelLoader.Holder(NORTHWEST_CONNECTION.getName(), WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, cornerTall).with(VariantProperties.UV_LOCK, true));
-            loader.add(new UnbakedTrunkModelLoader.Holder(NORTHEAST_CONNECTION.getName(), WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, cornerTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true));
-            loader.add(new UnbakedTrunkModelLoader.Holder(SOUTHEAST_CONNECTION.getName(), WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, cornerTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true));
-            loader.add(new UnbakedTrunkModelLoader.Holder(SOUTHWEST_CONNECTION.getName(), WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, cornerTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
+            loader.add(new UnbakedTrunkModelLoader.Holder(NORTHWEST_CONNECTION.getName(), WallSide.LOW), plainVariant(corner).with(UV_LOCK));
+            loader.add(new UnbakedTrunkModelLoader.Holder(NORTHEAST_CONNECTION.getName(), WallSide.LOW), plainVariant(corner).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true));
+            loader.add(new UnbakedTrunkModelLoader.Holder(SOUTHEAST_CONNECTION.getName(), WallSide.LOW), plainVariant(corner).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true));
+            loader.add(new UnbakedTrunkModelLoader.Holder(SOUTHWEST_CONNECTION.getName(), WallSide.LOW), plainVariant(corner).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
+            loader.add(new UnbakedTrunkModelLoader.Holder(NORTHWEST_CONNECTION.getName(), WallSide.TALL), plainVariant(cornerTall).with(VariantProperties.UV_LOCK, true));
+            loader.add(new UnbakedTrunkModelLoader.Holder(NORTHEAST_CONNECTION.getName(), WallSide.TALL), plainVariant(cornerTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true));
+            loader.add(new UnbakedTrunkModelLoader.Holder(SOUTHEAST_CONNECTION.getName(), WallSide.TALL), plainVariant(cornerTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true));
+            loader.add(new UnbakedTrunkModelLoader.Holder(SOUTHWEST_CONNECTION.getName(), WallSide.TALL), plainVariant(cornerTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
         };
 
         ResourceLocation center = AetherIIModelTemplates.TRUNK_CENTER.extend().customLoader(TrunkModelBuilder::new, connections).build().create(trunk, mapping, this.modelOutput);
         ResourceLocation centerTall = AetherIIModelTemplates.TRUNK_CENTER_TALL.extend().customLoader(TrunkModelBuilder::new, connections).build().create(trunk, mapping, this.modelOutput);
 
         MultiPartGenerator model = MultiPartGenerator.multiPart(trunk)
-                .with(Condition.condition().term(TrunkBlock.TALL, false), Variant.variant().with(VariantProperties.MODEL, center))
-                .with(Condition.condition().term(TrunkBlock.TALL, true), Variant.variant().with(VariantProperties.MODEL, centerTall))
-                .with(Condition.condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, side).with(VariantProperties.UV_LOCK, true))
-                .with(Condition.condition().term(TrunkBlock.EAST_CONNECTION, WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, side).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true))
-                .with(Condition.condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, side).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true))
-                .with(Condition.condition().term(TrunkBlock.WEST_CONNECTION, WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, side).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true))
-                .with(Condition.condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, sideTall).with(VariantProperties.UV_LOCK, true))
-                .with(Condition.condition().term(TrunkBlock.EAST_CONNECTION,WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, sideTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true))
-                .with(Condition.condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, sideTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true))
-                .with(Condition.condition().term(TrunkBlock.WEST_CONNECTION, WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, sideTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
+                .with(Condition.condition().term(TrunkBlock.TALL, false), plainVariant(center))
+                .with(Condition.condition().term(TrunkBlock.TALL, true), plainVariant(centerTall))
+                .with(Condition.condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.LOW), plainVariant(side).with(UV_LOCK))
+                .with(Condition.condition().term(TrunkBlock.EAST_CONNECTION, WallSide.LOW), plainVariant(side).with(Y_ROT_90).with(UV_LOCK))
+                .with(Condition.condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.LOW), plainVariant(side).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.WEST_CONNECTION, WallSide.LOW), plainVariant(side).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.TALL), plainVariant(sideTall).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.EAST_CONNECTION,WallSide.TALL), plainVariant(sideTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.TALL), plainVariant(sideTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.WEST_CONNECTION, WallSide.TALL), plainVariant(sideTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
         this.blockStateOutput.accept(model);
         this.registerSimpleItemModel(trunk, inventory);
     }
@@ -200,12 +208,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public static BlockModelDefinitionGenerator createFacingColumnWithHorizontalVariant(Block block, ResourceLocation vertical, ResourceLocation horizontal) {
         return MultiVariantGenerator.dispatch(block).with(
                 PropertyDispatch.initial(FacingPillarBlock.FACING)
-                        .select(Direction.UP, Variant.variant().with(VariantProperties.MODEL, vertical))
-                        .select(Direction.DOWN, Variant.variant().with(VariantProperties.MODEL, vertical).with(VariantProperties.X_ROT, VariantProperties.Rotation.R180))
-                        .select(Direction.NORTH, Variant.variant().with(VariantProperties.MODEL, horizontal).with(VariantProperties.X_ROT, VariantProperties.Rotation.R90))
-                        .select(Direction.SOUTH, Variant.variant().with(VariantProperties.MODEL, horizontal).with(VariantProperties.X_ROT, VariantProperties.Rotation.R90).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
-                        .select(Direction.EAST, Variant.variant().with(VariantProperties.MODEL, horizontal).with(VariantProperties.X_ROT, VariantProperties.Rotation.R90).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
-                        .select(Direction.WEST, Variant.variant().with(VariantProperties.MODEL, horizontal).with(VariantProperties.X_ROT, VariantProperties.Rotation.R90).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+                        .select(Direction.UP, plainVariant(vertical))
+                        .select(Direction.DOWN, plainVariant(vertical).with(X_ROT_180))
+                        .select(Direction.NORTH, plainVariant(horizontal).with(X_ROT_90))
+                        .select(Direction.SOUTH, plainVariant(horizontal).with(X_ROT_90).with(Y_ROT_180))
+                        .select(Direction.EAST, plainVariant(horizontal).with(X_ROT_90).with(Y_ROT_90))
+                        .select(Direction.WEST, plainVariant(horizontal).with(X_ROT_90).with(Y_ROT_270))
         );
     }
 
@@ -214,13 +222,13 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         ResourceLocation locationEW = AetherIIModelTemplates.PORTAL_EW.create(AetherIIBlocks.AETHER_PORTAL.get(), AetherIITextureMappings.portal(AetherIIBlocks.AETHER_PORTAL.get()), this.modelOutput);
 
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.AETHER_PORTAL.get()).with(PropertyDispatch.initial(BlockStateProperties.HORIZONTAL_AXIS)
-                .select(Direction.Axis.X, Variant.variant().with(VariantProperties.MODEL, locationNS))
-                .select(Direction.Axis.Z, Variant.variant().with(VariantProperties.MODEL, locationEW))));
+                .select(Direction.Axis.X, plainVariant(locationNS))
+                .select(Direction.Axis.Z, plainVariant(locationEW))));
     }
 
     public void createAetherGrassBlocks() {
         TextureMapping snowMapping = AetherIITextureMappings.snowyGrass(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.get());
-        Variant snowVariant = Variant.variant().with(VariantProperties.MODEL, ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), "_snow", snowMapping, this.modelOutput));
+        MultiVariant snowVariant = plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), "_snow", snowMapping, this.modelOutput));
         this.createTintedGrassBlock(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), snowVariant);
 
         ResourceLocation enchantedGrassLocation = TexturedModel.CUBE_TOP_BOTTOM.get(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get())
@@ -231,13 +239,13 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(BlockModelGenerators.createRotatedVariant(AetherIIBlocks.AETHER_DIRT_PATH.get(), dirtPathLocation));
     }
 
-    public void createTintedGrassBlock(Block block, Variant snowyVariant) {
+    public void createTintedGrassBlock(Block block, MultiVariant snowyVariant) {
         ResourceLocation model = AetherIIModelTemplates.TINTED_GRASS.create(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIITextureMappings.tintedGrass(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.get()),
                 this.modelOutput
         );
-        List<Variant> list = Arrays.asList(BlockModelGenerators.createRotatedVariants(model));
+        List<MultiVariant> list = Arrays.asList(BlockModelGenerators.createRotatedVariants(model));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
                 .with(PropertyDispatch.initial(BlockStateProperties.SNOWY).select(true, snowyVariant).select(false, list))
         );
@@ -293,7 +301,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         ResourceLocation normal = template.create(block, AetherIITextureMappings.vine(TextureMapping.getBlockTexture(block)), this.modelOutput);
         ResourceLocation bottom = template.create(ModelLocationUtils.getModelLocation(block, "_bottom"), AetherIITextureMappings.vine(TextureMapping.getBlockTexture(block, "_bottom")), this.modelOutput);
         MultiPartGenerator multiPart = MultiPartGenerator.multiPart(block);
-        Condition.TerminalCondition condition = Util.make(Condition.condition(), (terminalCondition) -> MULTIFACE_GENERATOR.stream().map(Pair::getFirst).map(MultifaceBlock::getFaceProperty).forEach((bool) -> {
+        Condition.TerminalCondition condition = Util.make(Condition.condition() Blocks.VINE, (terminalCondition) -> MULTIFACE_GENERATOR.stream().map(Pair::getFirst).map(MultifaceBlock::getFaceProperty).forEach((bool) -> {
             if (block.defaultBlockState().hasProperty(bool)) {
                 terminalCondition.term(bool, false);
             }
