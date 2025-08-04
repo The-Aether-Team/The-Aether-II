@@ -25,8 +25,8 @@ public class CarrionSproutRenderer extends MobRenderer<CarrionSprout, CarrionSpr
     @Override
     public void extractRenderState(CarrionSprout aechorPlant, CarrionSproutRenderState aechorPlantRenderState, float p_361157_) {
         super.extractRenderState(aechorPlant, aechorPlantRenderState, p_361157_);
-        aechorPlantRenderState.trapActiveAnimationState.copyFrom(aechorPlant.trapActiveAnimationState);
-        aechorPlantRenderState.trapDeactiveAnimationState.copyFrom(aechorPlant.trapDeactiveAnimationState);
+        aechorPlantRenderState.trapActivateAnimationState.copyFrom(aechorPlant.trapActiveAnimationState);
+        aechorPlantRenderState.trapDeactivateAnimationState.copyFrom(aechorPlant.trapDeactiveAnimationState);
     }
 
     @Override

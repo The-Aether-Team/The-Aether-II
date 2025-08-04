@@ -2,38 +2,20 @@ package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.block.portal.PortalClientUtil;
-import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
-import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
-import com.aetherteam.aetherii.network.packet.AetherIIPlayerSyncPacket;
-import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.player.ClientInput;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
-import net.minecraft.util.ExtraCodecs;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.commons.lang3.tuple.Triple;
 
-import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 

@@ -6,8 +6,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class TreasureItem extends Item {
     public TreasureItem(Properties properties) {
@@ -15,7 +17,7 @@ public class TreasureItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(Component.translatable("aether_ii.tooltip.item.treasure.description").withStyle(ChatFormatting.GRAY));
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        tooltipComponents.accept(Component.translatable("aether_ii.tooltip.item.treasure.description").withStyle(ChatFormatting.GRAY));
     }
 }

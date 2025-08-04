@@ -8,7 +8,7 @@ import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTempl
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITexturedModels;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
-import net.minecraft.client.data.models.blockstates.BlockStateGenerator;
+import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
 import net.minecraft.client.data.models.model.ModelInstance;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TexturedModel;
@@ -19,7 +19,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
-    public AetherIIBlockModels(Consumer<BlockStateGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
+    public AetherIIBlockModels(Consumer<BlockModelDefinitionGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
         super(blockStateOutput, itemModelOutput, modelOutput);
     }
 

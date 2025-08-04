@@ -37,13 +37,13 @@ public class MoaEggItem extends BlockItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         MoaEggType moaEggType = stack.get(AetherIIDataComponents.MOA_EGG_TYPE);
         if (moaEggType != null) {
-            tooltipComponents.add(Component.translatable("aether_ii.tooltip.item.moa_egg.keratin", Component.translatable("aether_ii.tooltip.item.moa_egg.keratin_color." + moaEggType.keratinColor().getSerializedName())).withStyle(ChatFormatting.GRAY));
-            tooltipComponents.add(Component.translatable("aether_ii.tooltip.item.moa_egg.eyes", Component.translatable("aether_ii.tooltip.item.moa_egg.eye_color." + moaEggType.eyeColor().getSerializedName())).withStyle(ChatFormatting.GRAY));
-            tooltipComponents.add(Component.translatable("aether_ii.tooltip.item.moa_egg.feathers",  Component.translatable("aether_ii.tooltip.item.moa_egg.feather_shape." + moaEggType.featherShape().getSerializedName()), Component.translatable("aether_ii.tooltip.item.moa_egg.feather_color." + moaEggType.featherColor().getSerializedName())).withStyle(ChatFormatting.GRAY));
+            tooltipComponents.accept(Component.translatable("aether_ii.tooltip.item.moa_egg.keratin", Component.translatable("aether_ii.tooltip.item.moa_egg.keratin_color." + moaEggType.keratinColor().getSerializedName())).withStyle(ChatFormatting.GRAY));
+            tooltipComponents.accept(Component.translatable("aether_ii.tooltip.item.moa_egg.eyes", Component.translatable("aether_ii.tooltip.item.moa_egg.eye_color." + moaEggType.eyeColor().getSerializedName())).withStyle(ChatFormatting.GRAY));
+            tooltipComponents.accept(Component.translatable("aether_ii.tooltip.item.moa_egg.feathers",  Component.translatable("aether_ii.tooltip.item.moa_egg.feather_shape." + moaEggType.featherShape().getSerializedName()), Component.translatable("aether_ii.tooltip.item.moa_egg.feather_color." + moaEggType.featherColor().getSerializedName())).withStyle(ChatFormatting.GRAY));
         }
     }
 }

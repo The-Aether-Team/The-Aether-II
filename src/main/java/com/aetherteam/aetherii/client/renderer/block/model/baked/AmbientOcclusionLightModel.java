@@ -5,7 +5,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.DelegateBakedModel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.data.ModelData;
-import net.neoforged.neoforge.common.util.TriState;
+import net.minecraft.util.TriState;
 
 public class AmbientOcclusionLightModel extends DelegateBakedModel {
     public AmbientOcclusionLightModel(BakedModel originalModel) {

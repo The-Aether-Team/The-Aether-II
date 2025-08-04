@@ -98,7 +98,7 @@ public class GuidebookPageItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) { //todo
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) { //todo
         List<GuidebookEntryData> dataList = stack.get(AetherIIDataComponents.GUIDEBOOK_ENTRY_DATA);
         if (dataList != null) {
             for (GuidebookEntryData data : dataList) {
@@ -106,12 +106,12 @@ public class GuidebookPageItem extends Item {
                 ResourceKey resourceKey = ResourceKey.create(registryKey, ResourceLocation.parse(data.name()));
                 context.registries().lookupOrThrow(registryKey).get(resourceKey).ifPresent((object) -> {
                     if (object instanceof Holder holder && holder.value() instanceof GuidebookEntry guidebookEntry) {
-                        tooltipComponents.add(Component.translatable(guidebookEntry.getName()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
+                        tooltipComponents.accept(Component.translatable(guidebookEntry.getName()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
                     }
                 });
             }
         } else {
-            tooltipComponents.add(Component.literal("Random").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC)); //todo
+            tooltipComponents.accept(Component.literal("Random").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC)); //todo
         }
     }
 }

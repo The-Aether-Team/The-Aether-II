@@ -16,7 +16,7 @@ public class SpecialTooltipItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         this.tooltip.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 }

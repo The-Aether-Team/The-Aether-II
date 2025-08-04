@@ -8,42 +8,41 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.data.ItemTagsProvider;
 
 import java.util.concurrent.CompletableFuture;
 
 public class AetherIIItemTagData extends ItemTagsProvider {
-    public AetherIIItemTagData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, CompletableFuture<TagLookup<Block>> blockTags) {
-        super(output, registries, blockTags, AetherII.MODID);
+    public AetherIIItemTagData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries, AetherII.MODID);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public void addTags(HolderLookup.Provider provider) {
         // Aether
-        this.copy(AetherIITags.Blocks.AETHER_DIRT, AetherIITags.Items.AETHER_DIRT);
-        this.copy(AetherIITags.Blocks.HOLYSTONE, AetherIITags.Items.HOLYSTONE);
-        this.copy(AetherIITags.Blocks.FERROSITE, AetherIITags.Items.FERROSITE);
-        this.copy(AetherIITags.Blocks.AERCLOUDS, AetherIITags.Items.AERCLOUDS);
-        this.copy(AetherIITags.Blocks.CLOUDWOOL, AetherIITags.Items.CLOUDWOOL);
-        this.copy(AetherIITags.Blocks.SKYROOT_LOGS, AetherIITags.Items.SKYROOT_LOGS);
-        this.copy(AetherIITags.Blocks.WISPROOT_LOGS, AetherIITags.Items.WISPROOT_LOGS);
-        this.copy(AetherIITags.Blocks.GREATROOT_LOGS, AetherIITags.Items.GREATROOT_LOGS);
-        this.copy(AetherIITags.Blocks.AMBEROOT_LOGS, AetherIITags.Items.AMBEROOT_LOGS);
-        this.copy(AetherIITags.Blocks.SKYROOT_DECORATIVE_BLOCKS, AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS);
-        this.copy(AetherIITags.Blocks.GREATROOT_DECORATIVE_BLOCKS, AetherIITags.Items.GREATROOT_DECORATIVE_BLOCKS);
-        this.copy(AetherIITags.Blocks.WISPROOT_DECORATIVE_BLOCKS, AetherIITags.Items.WISPROOT_DECORATIVE_BLOCKS);
-        this.copy(AetherIITags.Blocks.HOLYSTONE_DECORATIVE_BLOCKS, AetherIITags.Items.HOLYSTONE_DECORATIVE_BLOCKS);
-        this.copy(AetherIITags.Blocks.FADED_HOLYSTONE_DECORATIVE_BLOCKS, AetherIITags.Items.FADED_HOLYSTONE_DECORATIVE_BLOCKS);
-        this.copy(AetherIITags.Blocks.ICHORITE_DECORATIVE_BLOCKS, AetherIITags.Items.ICHORITE_DECORATIVE_BLOCKS);
-        this.copy(AetherIITags.Blocks.MARBLED_ICHORITE_DECORATIVE_BLOCKS, AetherIITags.Items.MARBLED_ICHORITE_DECORATIVE_BLOCKS);
-        this.copy(AetherIITags.Blocks.AGIOSITE_DECORATIVE_BLOCKS, AetherIITags.Items.AGIOSITE_DECORATIVE_BLOCKS);
-        this.copy(AetherIITags.Blocks.ICESTONE_DECORATIVE_BLOCKS, AetherIITags.Items.ICESTONE_DECORATIVE_BLOCKS);
-        this.copy(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS, AetherIITags.Items.LOCKED_DUNGEON_BLOCKS);
+//        this.copy(AetherIITags.Blocks.AETHER_DIRT, AetherIITags.Items.AETHER_DIRT); //todo do we not need these anymore?
+//        this.copy(AetherIITags.Blocks.HOLYSTONE, AetherIITags.Items.HOLYSTONE);
+//        this.copy(AetherIITags.Blocks.FERROSITE, AetherIITags.Items.FERROSITE);
+//        this.copy(AetherIITags.Blocks.AERCLOUDS, AetherIITags.Items.AERCLOUDS);
+//        this.copy(AetherIITags.Blocks.CLOUDWOOL, AetherIITags.Items.CLOUDWOOL);
+//        this.copy(AetherIITags.Blocks.SKYROOT_LOGS, AetherIITags.Items.SKYROOT_LOGS);
+//        this.copy(AetherIITags.Blocks.WISPROOT_LOGS, AetherIITags.Items.WISPROOT_LOGS);
+//        this.copy(AetherIITags.Blocks.GREATROOT_LOGS, AetherIITags.Items.GREATROOT_LOGS);
+//        this.copy(AetherIITags.Blocks.AMBEROOT_LOGS, AetherIITags.Items.AMBEROOT_LOGS);
+//        this.copy(AetherIITags.Blocks.SKYROOT_DECORATIVE_BLOCKS, AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS);
+//        this.copy(AetherIITags.Blocks.GREATROOT_DECORATIVE_BLOCKS, AetherIITags.Items.GREATROOT_DECORATIVE_BLOCKS);
+//        this.copy(AetherIITags.Blocks.WISPROOT_DECORATIVE_BLOCKS, AetherIITags.Items.WISPROOT_DECORATIVE_BLOCKS);
+//        this.copy(AetherIITags.Blocks.HOLYSTONE_DECORATIVE_BLOCKS, AetherIITags.Items.HOLYSTONE_DECORATIVE_BLOCKS);
+//        this.copy(AetherIITags.Blocks.FADED_HOLYSTONE_DECORATIVE_BLOCKS, AetherIITags.Items.FADED_HOLYSTONE_DECORATIVE_BLOCKS);
+//        this.copy(AetherIITags.Blocks.ICHORITE_DECORATIVE_BLOCKS, AetherIITags.Items.ICHORITE_DECORATIVE_BLOCKS);
+//        this.copy(AetherIITags.Blocks.MARBLED_ICHORITE_DECORATIVE_BLOCKS, AetherIITags.Items.MARBLED_ICHORITE_DECORATIVE_BLOCKS);
+//        this.copy(AetherIITags.Blocks.AGIOSITE_DECORATIVE_BLOCKS, AetherIITags.Items.AGIOSITE_DECORATIVE_BLOCKS);
+//        this.copy(AetherIITags.Blocks.ICESTONE_DECORATIVE_BLOCKS, AetherIITags.Items.ICESTONE_DECORATIVE_BLOCKS);
+//        this.copy(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS, AetherIITags.Items.LOCKED_DUNGEON_BLOCKS);
         this.tag(AetherIITags.Items.RODS_SKYROOT).add(AetherIIItems.SKYROOT_STICK.get());
         this.tag(AetherIITags.Items.GEMS_ZANITE).add(AetherIIItems.ZANITE_GEMSTONE.get());
         this.tag(AetherIITags.Items.PLATES_ARKENIUM).add(AetherIIItems.ARKENIUM_PLATES.get());

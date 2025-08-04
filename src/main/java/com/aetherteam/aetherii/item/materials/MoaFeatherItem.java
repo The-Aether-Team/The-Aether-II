@@ -16,11 +16,11 @@ public class MoaFeatherItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         Moa.FeatherColor featherColor = stack.get(AetherIIDataComponents.FEATHER_COLOR);
         if (featherColor != null) {
-            tooltipComponents.add(Component.translatable("aether_ii.tooltip.item.moa_egg.feather_color." + featherColor.getSerializedName()).withStyle(ChatFormatting.GRAY));
+            tooltipComponents.accept(Component.translatable("aether_ii.tooltip.item.moa_egg.feather_color." + featherColor.getSerializedName()).withStyle(ChatFormatting.GRAY));
         }
     }
 }

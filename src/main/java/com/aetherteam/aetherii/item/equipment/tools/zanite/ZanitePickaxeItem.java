@@ -9,7 +9,7 @@ import net.minecraft.world.item.Item;
 
 public class ZanitePickaxeItem extends Item implements ZaniteTool {
     public ZanitePickaxeItem(Properties properties) {
-        super(AetherIIItemTiers.ZANITE, 1.0F, -2.8F, properties);
+        super(properties.pickaxe(AetherIIItemTiers.ZANITE, 1.0F, -2.8F));
     }
 
     @Override

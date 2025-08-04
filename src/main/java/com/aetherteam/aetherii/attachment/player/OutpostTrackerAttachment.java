@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.network.packet.OutpostTrackerSyncPacket;
 import com.google.common.collect.Streams;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

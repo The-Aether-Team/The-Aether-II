@@ -81,8 +81,8 @@ public class HealingStoneItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         Integer charges = stack.get(AetherIIDataComponents.HEALING_STONE_CHARGES);
-        tooltipComponents.add(Component.translatable("aether_ii.tooltip.item.healing_stone.charges", charges).withStyle(ChatFormatting.GRAY));
+        tooltipComponents.accept(Component.translatable("aether_ii.tooltip.item.healing_stone.charges", charges).withStyle(ChatFormatting.GRAY));
     }
 }

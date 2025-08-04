@@ -29,7 +29,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.EnumSet;
 import java.util.List;
 
-public class Zephyr extends FlyingMob implements Enemy {
+public class Zephyr extends Mob implements Enemy {
     public static int BLOW_ATTACK_EVENT = 100;
     public static int SHOOT_ATTACK_EVENT = 101;
 
@@ -55,7 +55,7 @@ public class Zephyr extends FlyingMob implements Enemy {
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
-        return FlyingMob.createMobAttributes()
+        return Mob.createMobAttributes()
                 .add(Attributes.FOLLOW_RANGE, 50.0);
     }
 
@@ -165,6 +165,11 @@ public class Zephyr extends FlyingMob implements Enemy {
     @Override
     protected SoundEvent getDeathSound() {
         return AetherIISoundEvents.ENTITY_ZEPHYR_DEATH.get();
+    }
+
+    @Override
+    public boolean onClimbable() {
+        return false;
     }
 
     protected static class ZephyrBlowAwayGoal extends Goal {

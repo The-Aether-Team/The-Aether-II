@@ -6,7 +6,6 @@ import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
-import com.aetherteam.aetherii.network.packet.DamageSystemSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.core.particles.SimpleParticleType;

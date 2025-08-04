@@ -67,7 +67,7 @@ public class TieredHammerItem extends Item {
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
+    public void hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
         return true;
     }
 

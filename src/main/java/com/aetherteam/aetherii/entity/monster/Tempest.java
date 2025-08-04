@@ -31,7 +31,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
 
-public class Tempest extends FlyingMob implements Blighted {
+public class Tempest extends Mob implements Blighted {
     public static int HIDE_ANIMATION_START = 200;
     public static int HIDE_ANIMATION_LENGTH = 95;
     public static int HIDE_PARTICLE_START = HIDE_ANIMATION_START + 35;
@@ -61,7 +61,7 @@ public class Tempest extends FlyingMob implements Blighted {
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
-        return FlyingMob.createMobAttributes()
+        return Mob.createMobAttributes()
                 .add(Attributes.FOLLOW_RANGE, 40.0);
     }
 
@@ -170,6 +170,11 @@ public class Tempest extends FlyingMob implements Blighted {
     @Override
     public SoundEvent getDeathSound() {
         return AetherIISoundEvents.ENTITY_TEMPEST_DEATH.get();
+    }
+
+    @Override
+    public boolean onClimbable() {
+        return false;
     }
 
     public static class ThunderballAttackGoal extends Goal {

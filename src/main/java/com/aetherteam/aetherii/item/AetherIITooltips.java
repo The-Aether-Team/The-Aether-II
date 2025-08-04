@@ -46,14 +46,14 @@ public class AetherIITooltips {
                 for (int i = 1; i < removeEffects.size(); i++) {
                     removeComponents = removeComponents.append(Component.literal(", ").append(Component.translatable(removeEffects.get(i).value().getDescriptionId())));
                 }
-                tooltipComponents.add(Component.translatable("aether_ii.tooltip.item.curative.removes", removeComponents.withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.GREEN));
+                tooltipComponents.accept(Component.translatable("aether_ii.tooltip.item.curative.removes", removeComponents.withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.GREEN));
             }
             if (!reduceEffects.isEmpty()) {
                 MutableComponent reduceComponents = Component.translatable(reduceEffects.getFirst().value().getDescriptionId());
                 for (int i = 1; i < reduceEffects.size(); i++) {
                     reduceComponents = reduceComponents.append(Component.literal(", ").append(Component.translatable(reduceEffects.get(i).value().getDescriptionId())));
                 }
-                tooltipComponents.add(Component.translatable("aether_ii.tooltip.item.curative.reduces", reduceComponents.withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.DARK_GREEN));
+                tooltipComponents.accept(Component.translatable("aether_ii.tooltip.item.curative.reduces", reduceComponents.withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.DARK_GREEN));
             }
         }
     };

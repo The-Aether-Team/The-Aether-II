@@ -1,10 +1,8 @@
 package com.aetherteam.aetherii.attachment.player;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerPlayerAccessor;
-import com.aetherteam.aetherii.network.packet.CurrencySyncPacket;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.server.level.ServerLevel;

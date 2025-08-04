@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.state.TempestRenderState;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
@@ -14,9 +15,15 @@ public class TempestModel extends EntityModel<TempestRenderState> {
 	public static final AnimationHolder FLY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tempest/fly"));
 	public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tempest/attack"));
 	public static final AnimationHolder DESPAWN_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tempest/despawn"));
+	private final KeyframeAnimation flyAnimation;
+	private final KeyframeAnimation attackAnimation;
+	private final KeyframeAnimation despawnAnimation;
 
 	public TempestModel(ModelPart root) {
 		super(root);
+		this.flyAnimation = FLY_ANIMATION.get().bake(root);
+		this.attackAnimation = ATTACK_ANIMATION.get().bake(root);
+		this.despawnAnimation = DESPAWN_ANIMATION.get().bake(root);
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -112,8 +119,8 @@ public class TempestModel extends EntityModel<TempestRenderState> {
 	public void setupAnim(TempestRenderState tempest) {
 		super.setupAnim(tempest);
 
-		this.animateWalk(FLY_ANIMATION, tempest.walkAnimationPos, tempest.walkAnimationSpeed, 2.0F, 2.0F);
-		this.animate(tempest.attackAnimationState, ATTACK_ANIMATION, tempest.ageInTicks);
-		this.animate(tempest.hideAnimationState, DESPAWN_ANIMATION, tempest.ageInTicks);
+		this.flyAnimation.applyWalk(tempest.walkAnimationPos, tempest.walkAnimationSpeed, 2.0F, 2.0F);
+		this.attackAnimation.apply(tempest.attackAnimationState, tempest.ageInTicks);
+		this.despawnAnimation.apply(tempest.hideAnimationState, tempest.ageInTicks);
 	}
 }

@@ -14,6 +14,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.util.TriState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -32,7 +33,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.util.TriState;
 
 import java.util.Locale;
 import java.util.function.BiConsumer;

@@ -301,7 +301,7 @@ public class TieredCrossbowItem extends CrossbowItem {
         ChargedProjectiles chargedProjectiles = stack.get(DataComponents.CHARGED_PROJECTILES);
         if (chargedProjectiles != null && !chargedProjectiles.isEmpty()) {
             ItemStack projectile = chargedProjectiles.getItems().get(0);
-            tooltipComponents.add(Component.translatable("item.minecraft.crossbow.projectile").append(CommonComponents.SPACE).append(projectile.getDisplayName()));
+            tooltipComponents.accept(Component.translatable("item.minecraft.crossbow.projectile").append(CommonComponents.SPACE).append(projectile.getDisplayName()));
         }
     }
 }

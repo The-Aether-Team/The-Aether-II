@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.attachment.player;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
-import com.aetherteam.aetherii.network.packet.AbilityBehaviorSyncPacket;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;

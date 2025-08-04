@@ -218,13 +218,6 @@ public class AetherII {
         registrar.playToServer(OpenInventoryPacket.TYPE, OpenInventoryPacket.STREAM_CODEC, OpenInventoryPacket::execute);
         registrar.playToServer(OutpostRespawnPacket.TYPE, OutpostRespawnPacket.STREAM_CODEC, OutpostRespawnPacket::execute);
         registrar.playToServer(StepHeightPacket.TYPE, StepHeightPacket.STREAM_CODEC, StepHeightPacket::execute);
-
-        // BOTH
-        registrar.playBidirectional(AbilityBehaviorSyncPacket.TYPE, AbilityBehaviorSyncPacket.STREAM_CODEC, AbilityBehaviorSyncPacket::execute);
-        registrar.playBidirectional(AetherIIPlayerSyncPacket.TYPE, AetherIIPlayerSyncPacket.STREAM_CODEC, AetherIIPlayerSyncPacket::execute);
-        registrar.playBidirectional(CurrencySyncPacket.TYPE, CurrencySyncPacket.STREAM_CODEC, CurrencySyncPacket::execute);
-        registrar.playBidirectional(DamageSystemSyncPacket.TYPE, DamageSystemSyncPacket.STREAM_CODEC, DamageSystemSyncPacket::execute);
-        registrar.playBidirectional(OutpostTrackerSyncPacket.TYPE, OutpostTrackerSyncPacket.STREAM_CODEC, OutpostTrackerSyncPacket::execute);
     }
 
     private void registerDispenserBehaviors() {

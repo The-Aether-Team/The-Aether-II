@@ -27,9 +27,9 @@ public class CurrencyItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(Component.translatable("aether_ii.tooltip.item.currency.description").withStyle(ChatFormatting.GRAY));
-        tooltipComponents.add(Component.translatable("aether_ii.tooltip.item.currency.amount", this.currencyAmount).withColor(8158399));
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        tooltipComponents.accept(Component.translatable("aether_ii.tooltip.item.currency.description").withStyle(ChatFormatting.GRAY));
+        tooltipComponents.accept(Component.translatable("aether_ii.tooltip.item.currency.amount", this.currencyAmount).withColor(8158399));
     }
 
     @Override

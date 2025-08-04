@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.MoaAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -9,6 +10,9 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
 public class MoaModel extends EntityModel<MoaRenderState> {
+    private final KeyframeAnimation walkAnimation;
+    private final KeyframeAnimation sitAnimation;
+    private final KeyframeAnimation flyAnimation;
     private final ModelPart body_main;
     private final ModelPart body_front;
     private final ModelPart neck;
@@ -61,6 +65,9 @@ public class MoaModel extends EntityModel<MoaRenderState> {
 
     public MoaModel(ModelPart root) {
         super(root);
+        this.walkAnimation = MoaAnimation.WALK.bake(root);
+        this.sitAnimation = MoaAnimation.SIT.bake(root);
+        this.flyAnimation = MoaAnimation.FLY.bake(root);
         this.body_main = root.getChild("body_main");
         this.body_front = this.body_main.getChild("body_front");
         this.neck = this.body_front.getChild("neck");
@@ -223,10 +230,10 @@ public class MoaModel extends EntityModel<MoaRenderState> {
         this.head_main.xRot = (renderState.xRot * Mth.DEG_TO_RAD) + 0.1886F;
         this.head_main.yRot = renderState.yRot * Mth.DEG_TO_RAD;
         float flyAmount = renderState.flyAmount;
-        this.animateWalk(MoaAnimation.walk, renderState.walkAnimationPos, Mth.clamp(renderState.walkAnimationSpeed - flyAmount, 0, 1F), 2.0F, 2.5F);
+        this.walkAnimation.applyWalk(renderState.walkAnimationPos, Mth.clamp(renderState.walkAnimationSpeed - flyAmount, 0, 1F), 2.0F, 2.5F);
         if (renderState.sitting) {
-            this.applyStatic(MoaAnimation.sit);
+            this.sitAnimation.applyStatic();
         }
-        this.animateWalk(MoaAnimation.fly, renderState.ageInTicks, flyAmount, 0.5F, 1.0F);
+        this.flyAnimation.applyWalk(renderState.ageInTicks, flyAmount, 0.5F, 1.0F);
     }
 }

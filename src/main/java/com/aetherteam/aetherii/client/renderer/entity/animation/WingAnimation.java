@@ -7,7 +7,7 @@ import net.minecraft.client.animation.KeyframeAnimations;
 
 
 public class WingAnimation {
-    public static final AnimationDefinition wing_open = AnimationDefinition.Builder.withLength(0.0F)
+    public static final AnimationDefinition OPEN_WINGS = AnimationDefinition.Builder.withLength(0.0F)
             .addAnimation("wing_left", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, -45.0F), AnimationChannel.Interpolations.LINEAR)
             ))

@@ -49,7 +49,7 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
     }
 
     public static AlkahestPurificationRecipeBuilder recipe(Ingredient ingredient, RecipeCategory category, WeightedList<ItemStack> results, WeightedList<ItemStack> byproducts, float experience, int alkahestUsage, int processingTime) {
-        return new AlkahestPurificationRecipeBuilder(category, determineRecipeCategory(new ItemStack(results.unwrap().getFirst().data().getItem())), results, byproducts, ingredient, experience, alkahestUsage, processingTime);
+        return new AlkahestPurificationRecipeBuilder(category, determineRecipeCategory(new ItemStack(results.unwrap().getFirst().value().getItem())), results, byproducts, ingredient, experience, alkahestUsage, processingTime);
     }
 
     @Override

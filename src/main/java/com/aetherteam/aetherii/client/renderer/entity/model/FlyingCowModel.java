@@ -106,7 +106,7 @@ public class FlyingCowModel<T extends WingEntityRenderState> extends EntityModel
         this.leg_back_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
         this.leg_front_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
         this.leg_front_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
-        this.animateWalk(WingAnimation.wing_open, 0.0F, entity.wingHold, 1.0F, 1.0F);
+        this.animateWalk(WingAnimation.OPEN_WINGS, 0.0F, entity.wingHold, 1.0F, 1.0F);
 
         if (entity.isBaby) {
             this.applyStatic(FlyingCowAnimation.BABY);

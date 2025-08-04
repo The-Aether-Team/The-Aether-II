@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.FarmlandWaterManager;
-import net.neoforged.neoforge.common.util.TriState;
+import net.minecraft.util.TriState;
 
 public class AetherFarmBlock extends FarmBlock {
     public AetherFarmBlock(Properties properties) {

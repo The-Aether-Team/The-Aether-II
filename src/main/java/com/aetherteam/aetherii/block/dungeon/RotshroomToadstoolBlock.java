@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.util.TriState;
+import net.minecraft.util.TriState;
 
 public class RotshroomToadstoolBlock extends BushBlock {
     public static final MapCodec<RotshroomToadstoolBlock> CODEC = simpleCodec(RotshroomToadstoolBlock::new);
