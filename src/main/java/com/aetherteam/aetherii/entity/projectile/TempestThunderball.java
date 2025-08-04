@@ -96,15 +96,15 @@ public class TempestThunderball extends AbstractHurtingProjectile {
         this.level().explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, false, Level.ExplosionInteraction.NONE);
         ElectricField electricCircle = new ElectricField(this.level(), x, this.getY(), z);
 
-        electricCircle.setParticle(this.getTrailParticle());
+        electricCircle.setCustomParticle(this.getTrailParticle());
         electricCircle.setOwner((LivingEntity) this.getOwner());
         electricCircle.setRadius(2.5F);
         electricCircle.setRadiusOnUse(-0.5F);
         electricCircle.setWaitTime(10);
         electricCircle.setDuration(electricCircle.getDuration() / 5);
 
-        electricCircle.addEffect(new MobEffectInstance(MobEffects.HARM, 1, 0, false, false, false));
-        electricCircle.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10, 1, false, false, false));
+        electricCircle.addEffect(new MobEffectInstance(MobEffects.INSTANT_DAMAGE, 1, 0, false, false, false));
+        electricCircle.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 1, false, false, false));
 
         this.level().addFreshEntity(electricCircle);
         electricCircle.playSound(AetherIISoundEvents.ENTITY_ELECTRIC_FIELD_CREATE.get());

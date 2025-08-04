@@ -7,7 +7,7 @@ import com.aetherteam.aetherii.client.gui.screen.guidebook.discovery.DiscoverySe
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 
 public class SectionTab extends ImageButton {
@@ -33,9 +33,9 @@ public class SectionTab extends ImageButton {
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.blitSprite(RenderType::guiTextured, this.icon, this.getX() + 10, this.getY() + 2, 22, 16);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.icon, this.getX() + 10, this.getY() + 2, 22, 16);
         if (this.section.areAnyUnchecked()) {
-            guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.EXCLAMATION, this.getX() + 5, this.getY() + 3, 3, 8);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.EXCLAMATION, this.getX() + 5, this.getY() + 3, 3, 8);
         }
     }
 

@@ -97,8 +97,8 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
     protected void renderMenuBackground(GuiGraphics partialTick) { }
 
     @Override
-    protected void renderBlurredBackground() { }
-
+    protected void renderBlurredBackground(GuiGraphics guiGraphics) {
+    }
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);

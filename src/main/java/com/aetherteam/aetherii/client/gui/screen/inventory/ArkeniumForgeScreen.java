@@ -17,6 +17,7 @@ import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -24,7 +25,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 import java.util.List;
 
@@ -76,7 +77,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                 this.onNameChanged(this.name.getValue());
                 this.onItemUpgraded();
                 this.onCharmSlotted();
-                PacketDistributor.sendToServer(new ForgeTriggerSoundPacket());
+                ClientPacketDistributor.sendToServer(new ForgeTriggerSoundPacket());
             }
         }));
         this.forgeButton.setTooltip(Tooltip.create(Component.translatable("gui.aether_ii.arkenium_forge.forge_button.tooltip")));
@@ -138,11 +139,11 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         int i = this.leftPos;
         int j = (this.height - this.imageHeight) / 2;
-        guiGraphics.blit(RenderType::guiTextured, ARKENIUM_FORGE_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, ARKENIUM_FORGE_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
 
         ItemStack input = this.menu.getInput();
 
-        guiGraphics.blitSprite(RenderType::guiTextured, !input.isEmpty() ? TEXT_FIELD_SPRITE : TEXT_FIELD_DISABLED_SPRITE, this.leftPos + 33, this.topPos + 20, 110, 16);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, !input.isEmpty() ? TEXT_FIELD_SPRITE : TEXT_FIELD_DISABLED_SPRITE, this.leftPos + 33, this.topPos + 20, 110, 16);
 
         if (!input.isEmpty()) {
             ItemStack displayStack = input.copy();
@@ -163,7 +164,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             ReinforcementTier displayTier = displayStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
 
             if (displayTier != null) {
-                guiGraphics.blitSprite(RenderType::guiTextured, TIER_LOCATIONS.get(displayTier.getTier() - 1), this.leftPos + 80, this.topPos + 91, 16, 16);
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, TIER_LOCATIONS.get(displayTier.getTier() - 1), this.leftPos + 80, this.topPos + 91, 16, 16);
             }
 
             int tierCount = this.menu.getTierCount();
@@ -176,7 +177,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                 for (int tier = 1; tier <= tierCount; tier++) {
                     int offsetX = x + ((areaWidth / (tierCount + 1)) * tier);
 
-                    guiGraphics.blitSprite(RenderType::guiTextured, TIER_LOCATIONS.get(tier - 1), offsetX - (spriteSize / 2), y, spriteSize, spriteSize);
+                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, TIER_LOCATIONS.get(tier - 1), offsetX - (spriteSize / 2), y, spriteSize, spriteSize);
 
                     ReinforcementTier.Cost cost = this.menu.getCostForTier(tier);
                     int primaryCost = this.menu.getPrimaryCostForTier(tier);
@@ -198,11 +199,11 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                                 guiGraphics.renderItemDecorations(this.font, secondary, offsetX, y + 18);
                             }
                         } else {
-                            guiGraphics.blitSprite(RenderType::guiTextured, TIER_COMPLETED_SPRITE, offsetX - (spriteSize / 2), y + 19, spriteSize, spriteSize);
+                            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, TIER_COMPLETED_SPRITE, offsetX - (spriteSize / 2), y + 19, spriteSize, spriteSize);
                         }
                     }
                     if (currentTier == tier && currentTier > this.menu.getTierForItem()) {
-                        guiGraphics.blitSprite(RenderType::guiTextured, TIER_SELECTED_SPRITE, offsetX - (9), y - 1, 18, 18);
+                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, TIER_SELECTED_SPRITE, offsetX - (9), y - 1, 18, 18);
                     }
                 }
             }
@@ -219,13 +220,13 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
 
     private void onItemUpgraded() {
         if (this.menu.upgradeItem()) {
-            PacketDistributor.sendToServer(new ForgeUpgradePacket());
+            ClientPacketDistributor.sendToServer(new ForgeUpgradePacket());
         }
     }
 
     private void onCharmSlotted() {
         if (this.menu.slotCharms()) {
-            PacketDistributor.sendToServer(new ForgeSlotCharmsPacket());
+            ClientPacketDistributor.sendToServer(new ForgeSlotCharmsPacket());
         }
     }
 
@@ -237,7 +238,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                 s = "";
             }
             if (this.menu.setItemName(s)) {
-                PacketDistributor.sendToServer(new ForgeRenamePacket(s));
+                ClientPacketDistributor.sendToServer(new ForgeRenamePacket(s));
             }
         }
     }

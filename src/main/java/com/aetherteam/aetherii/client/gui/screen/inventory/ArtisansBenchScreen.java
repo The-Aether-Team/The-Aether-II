@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.inventory.menu.ArtisansBenchMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -45,10 +45,10 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         int i = this.leftPos;
         int j = this.topPos;
-        guiGraphics.blit(RenderType::guiTextured, BG_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, BG_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
         int k = (int) (41.0F * this.scrollOffs);
         ResourceLocation resourcelocation = this.isScrollBarActive() ? SCROLLER_SPRITE : SCROLLER_DISABLED_SPRITE;
-        guiGraphics.blitSprite(RenderType::guiTextured, resourcelocation, i + 119, j + 15 + k, 12, 15);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, resourcelocation, i + 119, j + 15 + k, 12, 15);
         int l = this.leftPos + 52;
         int i1 = this.topPos + 14;
         int j1 = this.startIndex + 12;
@@ -94,7 +94,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
                 location = RECIPE_SPRITE;
             }
 
-            guiGraphics.blitSprite(RenderType::guiTextured, location, k, i1 - 1, 16, 18);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, k, i1 - 1, 16, 18);
         }
     }
 
