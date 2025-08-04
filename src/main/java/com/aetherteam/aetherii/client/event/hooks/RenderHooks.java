@@ -41,8 +41,8 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.FogType;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.commons.lang3.tuple.Triple;
 
 import javax.annotation.Nullable;
@@ -71,7 +71,7 @@ public class RenderHooks {
             }
         }
         if (newScreen instanceof GuidebookEquipmentScreen) {
-            PacketDistributor.sendToServer(new OpenGuidebookPacket(ItemStack.EMPTY));
+            ClientPacketDistributor.sendToServer(new OpenGuidebookPacket(ItemStack.EMPTY));
         }
         return newScreen;
     }
@@ -101,9 +101,9 @@ public class RenderHooks {
                         InventoryScreen inventory = new InventoryScreen(player);
                         minecraft.setScreen(inventory);
                         player.inventoryMenu.setCarried(stack);
-                        PacketDistributor.sendToServer(new OpenInventoryPacket(stack));
+                        ClientPacketDistributor.sendToServer(new OpenInventoryPacket(stack));
                     } else {
-                        PacketDistributor.sendToServer(new OpenGuidebookPacket(stack));
+                        ClientPacketDistributor.sendToServer(new OpenGuidebookPacket(stack));
                     }
                 }
             }).pos((screen.width / 2) - 50, (screen.height / 2) + 101).size(100, 22));
@@ -131,7 +131,7 @@ public class RenderHooks {
         if (screen instanceof DeathScreen deathScreen) {
             if (!Minecraft.getInstance().player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).getCampfirePositions().isEmpty()) {
                 Button outpostRespawnButton = Button.builder(Component.translatable("gui.aether_ii.deathScreen.outpost_respawn"), (button) -> {
-                    PacketDistributor.sendToServer(new OutpostRespawnPacket());
+                    ClientPacketDistributor.sendToServer(new OutpostRespawnPacket());
                     Minecraft.getInstance().player.respawn();
                     button.active = false;
                 }).bounds(deathScreen.width / 2 - 100, deathScreen.height / 4 + 96, 200, 20).build();

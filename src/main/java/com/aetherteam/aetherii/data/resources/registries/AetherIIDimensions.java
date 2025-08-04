@@ -17,6 +17,7 @@ import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 
+import java.util.Optional;
 import java.util.OptionalLong;
 
 public class AetherIIDimensions {
@@ -45,6 +46,7 @@ public class AetherIIDimensions {
                 BlockTags.INFINIBURN_OVERWORLD,
                 ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aether_highlands"),
                 0.0F,
+                Optional.of(256),
                 new DimensionType.MonsterSettings(false, false, UniformInt.of(0, 7), 0)));
     }
 

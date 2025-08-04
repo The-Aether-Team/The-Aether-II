@@ -287,7 +287,7 @@ public class Tempest extends Mob implements Blighted {
                 d0 = livingEntity.getX() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F;
                 d1 = livingEntity.getY() + random.nextFloat() * 3.0F;
                 d2 = livingEntity.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F;
-            } else if (this.tempest.level().isDay()) {
+            } else if (this.tempest.level().isBrightOutside()) {
                 for (int i = 0; i < 10; ++i) {
                     Vec3 vec3 = this.tempest.position();
                     Vec3 target = vec3.add((random.nextFloat() * 2.0F - 1.0F) * 6.0F, (random.nextFloat() * 2.0F - 1.0F) * 4.0F, (random.nextFloat() * 2.0F - 1.0F) * 6.0F);

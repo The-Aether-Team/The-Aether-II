@@ -45,7 +45,7 @@ public class ImmolationEffect extends MobEffect { //todo preventative measures
                 livingEntity.getY() + (serverLevel.getRandom().nextGaussian() / 3.0),
                 livingEntity.getZ() + (serverLevel.getRandom().nextGaussian() / 5.0),
                 2, 0.0, 0.0, 0.0, 0.0F);
-        if (livingEntity.isInWaterRainOrBubble()) {
+        if (livingEntity.isInWater()) {
             livingEntity.removeEffect(AetherIIEffects.IMMOLATION);
         }
         return true;

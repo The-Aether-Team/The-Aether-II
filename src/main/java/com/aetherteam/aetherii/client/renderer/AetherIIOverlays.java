@@ -22,7 +22,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.MobEffectTextureManager;
 import net.minecraft.core.Holder;
@@ -101,7 +101,7 @@ public class AetherIIOverlays {
 
             int i = ARGB.white(timeInPortal);
             TextureAtlasSprite textureatlassprite = minecraft.getBlockRenderer().getBlockModelShaper().getParticleIcon(AetherIIBlocks.AETHER_PORTAL.get().defaultBlockState());
-            guiGraphics.blitSprite(RenderType::guiTexturedOverlay, textureatlassprite, 0, 0, guiGraphics.guiWidth(), guiGraphics.guiHeight(), i);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTUREDOverlay, textureatlassprite, 0, 0, guiGraphics.guiWidth(), guiGraphics.guiHeight(), i);
         }
     }
 
@@ -140,10 +140,10 @@ public class AetherIIOverlays {
                 int buildupScaledValue = Math.min(buildup.getBuildup() / (buildup.getBuildupCap() / 24), 24);
 
                 guiGraphics.enableScissor(i, j + 24 - buildupScaledValue, i + 24, (j + 24 - buildupScaledValue) + buildupScaledValue);
-                guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_OVERLAY_SPRITE, i, (j + 24 - buildupScaledValue) - (24 - buildupScaledValue), 24, 24, ARGB.opaque(color.getRGB()));
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BUILDUP_BACKGROUND_OVERLAY_SPRITE, i, (j + 24 - buildupScaledValue) - (24 - buildupScaledValue), 24, 24, ARGB.opaque(color.getRGB()));
                 guiGraphics.disableScissor();
 
-                guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_SPRITE, i, j, 24, 24);
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BUILDUP_BACKGROUND_SPRITE, i, j, 24, 24);
 
                 if (buildup.isBuildupFull()) {
                     MobEffectInstance instance = player.getEffect(buildup.getType());
@@ -158,18 +158,18 @@ public class AetherIIOverlays {
                         int uWidth = 24;
                         int vHeight = durationValueScaled;
                         guiGraphics.enableScissor(x, y, x + uWidth, y + vHeight);
-                        guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_BACKING_SPRITE, x - uPosition, y - vPosition, textureWidth, textureHeight, ARGB.opaque(color.getRGB()));
+                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BUILDUP_BACKGROUND_BACKING_SPRITE, x - uPosition, y - vPosition, textureWidth, textureHeight, ARGB.opaque(color.getRGB()));
                         guiGraphics.disableScissor();
                     }
 
                     float flashInterval = (Mth.cos((0.5F * player.tickCount) - Mth.PI) / 2.0F) + 0.5F;
-                    guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_OUTLINE_SPRITE, i, j, 24, 24, ARGB.white(flashInterval));
+                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BUILDUP_BACKGROUND_OUTLINE_SPRITE, i, j, 24, 24, ARGB.white(flashInterval));
                 }
 
                 TextureAtlasSprite textureatlassprite = mobeffecttexturemanager.get(effect);
                 int i1 = j;
                 int i_f = i;
-                guiGraphics.blitSprite(RenderType::guiTextured, textureatlassprite, i_f + 3, i1 + 3, 18, 18);
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, textureatlassprite, i_f + 3, i1 + 3, 18, 18);
             }
 
             RenderSystem.disableBlend();
@@ -192,14 +192,14 @@ public class AetherIIOverlays {
                             int k = guiGraphics.guiWidth() / 2 - 19;
                             int j = guiGraphics.guiHeight() / 2 - 5;
 
-                            guiGraphics.blitSprite(RenderType::guiTextured, CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k, j, 10, 10);
+                            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k, j, 10, 10);
 
                             if (attachment.getShieldStamina() == 0) {
                                 int l = (int) (player.getCooldowns().getCooldownPercent(AetherIIItems.SKYROOT_SHIELD.toStack(), partialTicks.getGameTimeDeltaPartialTick(false)) * 10.0F);
-                                guiGraphics.blitSprite(RenderType::guiTextured, CROSSHAIR_BLOCK_INDICATOR_BROKEN_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
+                                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, CROSSHAIR_BLOCK_INDICATOR_BROKEN_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
                             } else {
                                 int l = (int) (f * 10.0F);
-                                guiGraphics.blitSprite(RenderType::guiTextured, CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
+                                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
                             }
 
                             RenderSystem.defaultBlendFunc();
@@ -215,14 +215,14 @@ public class AetherIIOverlays {
                         k2 = i + 91 + 1 + (!flag ? 31 : 3);
                     }
 
-                    guiGraphics.blitSprite(RenderType::guiTextured, HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k2, j2, 18, 18);
+                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k2, j2, 18, 18);
 
                     if (attachment.getShieldStamina() == 0) {
                         int l1 = (int) (player.getCooldowns().getCooldownPercent(AetherIIItems.SKYROOT_SHIELD.toStack(), partialTicks.getGameTimeDeltaPartialTick(false)) * 18.0F);
-                        guiGraphics.blitSprite(RenderType::guiTextured, HOTBAR_BLOCK_INDICATOR_BROKEN_SPRITE, 18, 18, 0, 18 - l1, k2, j2 + 18 - l1, 18, l1);
+                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, HOTBAR_BLOCK_INDICATOR_BROKEN_SPRITE, 18, 18, 0, 18 - l1, k2, j2 + 18 - l1, 18, l1);
                     } else {
                         int l1 = (int) (f * 18.0F);
-                        guiGraphics.blitSprite(RenderType::guiTextured, HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE, 18, 18, 0, 18 - l1, k2, j2 + 18 - l1, 18, l1);
+                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE, 18, 18, 0, 18 - l1, k2, j2 + 18 - l1, 18, l1);
                     }
                 }
             }
@@ -260,7 +260,7 @@ public class AetherIIOverlays {
 
     private static void drawSingle(GuiGraphics guiGraphics, ResourceLocation sprite, int x, int y, float alpha) {
         RenderSystem.enableBlend();
-        guiGraphics.blitSprite(RenderType::guiTextured, sprite, x, y, 128, 128, ARGB.colorFromFloat(alpha, 1.0F, 1.0F, 1.0F));
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, 128, 128, ARGB.colorFromFloat(alpha, 1.0F, 1.0F, 1.0F));
         RenderSystem.disableBlend();
     }
 }

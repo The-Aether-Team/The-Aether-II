@@ -48,7 +48,7 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     private static final ResourceLocation SNOW_STORMY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/environment/snow_stormy.png");
 
     public HighlandsSpecialEffects() {
-        super(256.0F, true, SkyType.OVERWORLD, false, false);
+        super(SkyType.OVERWORLD, false, false);
     }
 
     @Override
@@ -70,8 +70,10 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     }
 
     @Override
-    public boolean renderClouds(ClientLevel level, int ticks, float partialTick, double camX, double camY, double camZ, Matrix4f modelViewMatrix, Matrix4f projectionMatrix) {
-        Minecraft.getInstance().levelRenderer.getCloudRenderer().render(this.getCloudColor(level, partialTick), Minecraft.getInstance().options.getCloudsType(), level.effects().getCloudHeight() + 0.33F, modelViewMatrix, projectionMatrix, new Vec3(camX, camY, camZ), partialTick);
+    public boolean renderClouds(ClientLevel level, int ticks, float partialTick, double camX, double camY, double camZ, Matrix4f modelViewMatrix) {
+        if (level.dimensionType().cloudHeight().isPresent()) {
+            Minecraft.getInstance().levelRenderer.getCloudRenderer().render(this.getCloudColor(level, partialTick), Minecraft.getInstance().options.getCloudsType(), level.dimensionType().cloudHeight().get() + 0.33F, modelViewMatrix, projectionMatrix, new Vec3(camX, camY, camZ), partialTick);
+        }
         return true;
     }
 

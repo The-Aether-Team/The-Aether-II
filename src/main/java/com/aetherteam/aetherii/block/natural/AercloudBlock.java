@@ -123,8 +123,8 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
     }
 
     @Override
-    public boolean canPlaceLiquid(@Nullable Player player, BlockGetter level, BlockPos pos, BlockState state, Fluid fluid) {
-        return level.getBlockState(pos.above()).is(fluid.defaultFluidState().createLegacyBlock().getBlock());
+    public boolean canPlaceLiquid(@Nullable LivingEntity livingEntity, BlockGetter blockGetter, BlockPos blockPos, BlockState blockState, Fluid fluid) {
+        return blockGetter.getBlockState(blockPos.above()).is(fluid.defaultFluidState().createLegacyBlock().getBlock());
     }
 
     @Override

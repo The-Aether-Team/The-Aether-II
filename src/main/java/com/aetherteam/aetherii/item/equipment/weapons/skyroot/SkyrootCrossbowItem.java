@@ -11,7 +11,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 public class SkyrootCrossbowItem extends TieredCrossbowItem {
     public SkyrootCrossbowItem(Properties properties) {
-        super(AetherIIItemTiers.SKYROOT, properties.attributes(new ItemAttributeModifiers(AetherIIStats.SKYROOT_CROSSBOW, true)));
+        super(AetherIIItemTiers.SKYROOT, properties.attributes(new ItemAttributeModifiers(AetherIIStats.SKYROOT_CROSSBOW)));
     }
 
     @Override

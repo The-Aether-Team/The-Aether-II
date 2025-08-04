@@ -53,10 +53,10 @@ public interface Blighted {
     }
 
     default boolean inSunlight(Mob mob) {
-        if (mob.level().isDay() && !mob.level().isClientSide()) {
+        if (mob.level().isBrightOutside() && !mob.level().isClientSide()) {
             float f = mob.getLightLevelDependentMagicValue();
             BlockPos blockpos = BlockPos.containing(mob.getX(), mob.getEyeY(), mob.getZ());
-            boolean flag = mob.isInWaterRainOrBubble() || mob.isInPowderSnow || mob.wasInPowderSnow;
+            boolean flag = mob.isInWaterOrRain() || mob.isInPowderSnow || mob.wasInPowderSnow;
             return f > 0.5F && !flag && mob.level().canSeeSky(blockpos);
         }
         return false;

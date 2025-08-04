@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.block.natural;
 import com.aetherteam.aetherii.block.fluid.CanisterFluid;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelAccessor;
@@ -20,7 +21,7 @@ public class VolatileLiquidBlock extends LiquidBlock implements CanisterPickup {
     }
 
     @Override
-    public ItemStack pickupBlock(@Nullable Player player, LevelAccessor level, BlockPos pos, BlockState state) {
+    public ItemStack pickupBlock(@Nullable LivingEntity p_393591_, LevelAccessor p_153772_, BlockPos p_153773_, BlockState p_153774_) {
         return ItemStack.EMPTY;
     }
 

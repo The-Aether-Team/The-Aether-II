@@ -14,7 +14,6 @@ import com.google.common.collect.Maps;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -50,6 +49,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.common.IShearable;
 
 import javax.annotation.Nullable;
@@ -374,9 +375,10 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
         this.level().playSound(null, this.getX(), this.getY(), this.getZ(), AetherIISoundEvents.ENTITY_SHEEPUFF_STEP.get(), SoundSource.NEUTRAL, 0.15F, 1.0F);
     }
 
+
     @Override
-    protected int calculateFallDamage(float distance, float damageMultiplier) {
-        return this.getPuffed() ? 0 : super.calculateFallDamage(distance, damageMultiplier);
+    protected int calculateFallDamage(double fallDistance, float damageMultiplier) {
+        return this.getPuffed() ? 0 : super.calculateFallDamage(fallDistance, damageMultiplier);
     }
 
     @Override
@@ -435,7 +437,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
+    public void addAdditionalSaveData(ValueOutput tag) {
         super.addAdditionalSaveData(tag);
         tag.putBoolean("Sheared", this.isSheared());
         tag.putBoolean("Puffed", this.getPuffed());
@@ -443,16 +445,14 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
+    public void readAdditionalSaveData(ValueInput tag) {
         super.readAdditionalSaveData(tag);
-        if (tag.contains("Sheared")) {
-            this.setSheared(tag.getBoolean("Sheared"));
-        }
-        if (tag.contains("Puffed")) {
-            this.setPuffed(tag.getBoolean("Puffed"));
-        }
-        if (tag.contains("Color")) {
-            this.setColor(SheepuffColor.BY_ID.apply(tag.getInt("Color")));
+        this.setSheared(tag.getBooleanOr("Sheared", false));
+
+        this.setPuffed(tag.getBooleanOr("Puffed", false));
+
+        if (tag.getInt("Color").isPresent()) {
+            this.setColor(SheepuffColor.BY_ID.apply(tag.getInt("Color").get()));
         }
     }
 

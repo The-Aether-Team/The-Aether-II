@@ -5,6 +5,7 @@ package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockb
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.SheepuffAnimations;
 import com.aetherteam.aetherii.client.renderer.entity.state.SheepuffRenderState;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -29,6 +30,11 @@ public class SheepuffModel<T extends SheepuffRenderState> extends EntityModel<T>
     private final ModelPart wool_leg_back_right;
     private final ModelPart tail;
     private final ModelPart wool;
+    public final KeyframeAnimation walkAnimation;
+    public final KeyframeAnimation fallingAnimation;
+    public final KeyframeAnimation expandAnimation;
+    public final KeyframeAnimation babyAnimation;
+
 
     public SheepuffModel(ModelPart root) {
         super(root);
@@ -47,6 +53,10 @@ public class SheepuffModel<T extends SheepuffRenderState> extends EntityModel<T>
         this.wool_leg_back_right = this.leg_back_right.getChild("wool_leg_back_right");
         this.tail = this.body.getChild("tail");
         this.wool = this.body.getChild("wool");
+        this.walkAnimation = SheepuffAnimations.walk.bake(root);
+        this.fallingAnimation = SheepuffAnimations.falling.bake(root);
+        this.expandAnimation = SheepuffAnimations.wool_expand.bake(root);
+        this.babyAnimation = SheepuffAnimations.baby.bake(root);
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -109,15 +119,15 @@ public class SheepuffModel<T extends SheepuffRenderState> extends EntityModel<T>
         this.wool_leg_front_left.visible = !sheepuff.isSheared;
         this.wool_leg_back_right.visible = !sheepuff.isSheared;
         this.wool_leg_back_left.visible = !sheepuff.isSheared;
-        this.animateWalk(SheepuffAnimations.walk, sheepuff.walkAnimationPos, sheepuff.walkAnimationSpeed, 2.0F, 2.5F);
+        this.walkAnimation.applyWalk(sheepuff.walkAnimationPos, sheepuff.walkAnimationSpeed, 2.0F, 2.5F);
         if (sheepuff.puff) {
             if (!sheepuff.onGround) {
-                this.applyStatic(SheepuffAnimations.falling);
+                this.fallingAnimation.applyStatic();
             }
-            this.applyStatic(SheepuffAnimations.wool_expand);
+            this.expandAnimation.applyStatic();
         }
         if (sheepuff.isBaby) {
-            this.applyStatic(SheepuffAnimations.baby);
+            this.babyAnimation.applyStatic();
         }
     }
 }

@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.entity.MountableMob;
 import com.aetherteam.aetherii.entity.NotGrounded;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -21,6 +20,8 @@ import net.minecraft.world.entity.vehicle.DismountHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
@@ -30,7 +31,7 @@ import javax.annotation.Nullable;
  * [CODE COPY] - {@link net.minecraft.world.entity.animal.Pig}.<br><br>
  * Method copies with changes to make methods more abstracted through {@link MountableMob}.
  */
-public abstract class MountableAnimal extends AetherAnimal implements MountableMob, Saddleable, NotGrounded {
+public abstract class MountableAnimal extends AetherAnimal implements MountableMob, NotGrounded {
     private static final EntityDataAccessor<Boolean> DATA_SADDLE_ID = SynchedEntityData.defineId(MountableAnimal.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_PLAYER_JUMPED_ID = SynchedEntityData.defineId(MountableAnimal.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_MOUNT_JUMPING_ID = SynchedEntityData.defineId(MountableAnimal.class, EntityDataSerializers.BOOLEAN);
@@ -304,16 +305,15 @@ public abstract class MountableAnimal extends AetherAnimal implements MountableM
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
+    public void addAdditionalSaveData(ValueOutput tag) {
         super.addAdditionalSaveData(tag);
         tag.putBoolean("Saddled", this.isSaddled());
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
+    public void readAdditionalSaveData(ValueInput tag) {
         super.readAdditionalSaveData(tag);
-        if (tag.contains("Saddled")) {
-            this.setSaddled(tag.getBoolean("Saddled"));
-        }
+        this.setSaddled(tag.getBooleanOr("Saddled", false));
+
     }
 }

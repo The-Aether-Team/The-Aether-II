@@ -24,7 +24,7 @@ public class FallRandomStroll {
                 mob -> LandRandomPos.getPos(mob, 12, mob.getMaxFallDistance()),
                 mayStrollFromWater
                         ? mob -> true
-                        : mob -> !mob.isInWaterOrBubble()
+                        : mob -> !mob.isInWater()
         );
     }
 

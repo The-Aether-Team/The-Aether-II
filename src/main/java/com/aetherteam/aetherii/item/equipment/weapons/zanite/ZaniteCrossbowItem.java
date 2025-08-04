@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 
 public class ZaniteCrossbowItem extends TieredCrossbowItem implements ZaniteTool {
     public ZaniteCrossbowItem(Properties properties) {
-        super(AetherIIItemTiers.ZANITE, properties.attributes(new ItemAttributeModifiers(AetherIIStats.ZANITE_CROSSBOW, true)));
+        super(AetherIIItemTiers.ZANITE, properties.attributes(new ItemAttributeModifiers(AetherIIStats.ZANITE_CROSSBOW)));
     }
 
     @Override

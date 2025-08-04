@@ -6,6 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -33,8 +34,9 @@ public class TangledBranchBlock extends Block implements SimpleWaterloggedBlock 
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
     }
 
+
     @Override
-    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
         if (entity instanceof Player player) {
             Vec3 deltaMovement = player.getDeltaMovement();
             player.resetFallDistance();
@@ -50,7 +52,7 @@ public class TangledBranchBlock extends Block implements SimpleWaterloggedBlock 
             }
             player.setDeltaMovement(deltaMovement);
         }
-        super.entityInside(state, level, pos, entity);
+        super.entityInside(state, level, pos, entity, effectApplier);
     }
 
     @Override
