@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.ZaniteTool;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractArrowAccessor;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -20,9 +21,9 @@ public class ZaniteCrossbowItem extends TieredCrossbowItem implements ZaniteTool
     @Override
     protected Projectile createProjectile(Level level, LivingEntity shooter, ItemStack weapon, ItemStack ammo, boolean isCrit) {
         Projectile projectile = super.createProjectile(level, shooter, weapon, ammo, isCrit);
-        if (weapon.has(AetherIIDataComponents.CROSSBOW_SPECIAL) && Boolean.TRUE.equals(weapon.get(AetherIIDataComponents.CROSSBOW_SPECIAL))) {
+        if (weapon.getOrDefault(AetherIIDataComponents.CROSSBOW_SPECIAL, false)) {
             if (projectile instanceof AbstractArrow arrow) {
-                arrow.setBaseDamage(this.calculateZaniteBuff(weapon, arrow.getBaseDamage()));
+                arrow.setBaseDamage(this.calculateZaniteBuff(weapon, ((AbstractArrowAccessor) arrow).aether$getBaseDamage()));
             }
         }
         return projectile;
