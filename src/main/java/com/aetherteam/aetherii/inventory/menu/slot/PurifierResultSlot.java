@@ -43,7 +43,7 @@ public class PurifierResultSlot extends Slot {
 
     @Override
     protected void checkTakeAchievements(ItemStack stack) {
-        stack.onCraftedBy(this.player.level(), this.player, this.removeCount);
+        stack.onCraftedBy(this.player, this.removeCount);
         Player player = this.player;
         if (player instanceof ServerPlayer serverplayer) {
             Container container = this.container;

@@ -14,7 +14,6 @@ import com.aetherteam.aetherii.network.packet.clientbound.GuidebookToastPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.UpdateGuidebookDiscoveryPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -26,10 +25,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class GuidebookPageItem extends Item {
     public GuidebookPageItem(Properties properties) {
@@ -98,7 +99,7 @@ public class GuidebookPageItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) { //todo
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
         List<GuidebookEntryData> dataList = stack.get(AetherIIDataComponents.GUIDEBOOK_ENTRY_DATA);
         if (dataList != null) {
             for (GuidebookEntryData data : dataList) {
@@ -106,12 +107,12 @@ public class GuidebookPageItem extends Item {
                 ResourceKey resourceKey = ResourceKey.create(registryKey, ResourceLocation.parse(data.name()));
                 context.registries().lookupOrThrow(registryKey).get(resourceKey).ifPresent((object) -> {
                     if (object instanceof Holder holder && holder.value() instanceof GuidebookEntry guidebookEntry) {
-                        tooltipComponents.accept(Component.translatable(guidebookEntry.getName()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
+                        tooltipAdder.accept(Component.translatable(guidebookEntry.getName()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
                     }
                 });
             }
         } else {
-            tooltipComponents.accept(Component.literal("Random").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC)); //todo
+            tooltipAdder.accept(Component.literal("Random").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC)); //todo
         }
     }
 }

@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DispensibleContainerItem;
@@ -14,8 +15,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
-
-import javax.annotation.Nullable;
 
 public class SolidCanisterItem extends BlockItem implements DispensibleContainerItem {
     private final SoundEvent placeSound;
@@ -42,14 +41,14 @@ public class SolidCanisterItem extends BlockItem implements DispensibleContainer
     }
 
     @Override
-    public boolean emptyContents(@Nullable Player player, Level level, BlockPos pos, @Nullable BlockHitResult result) {
+    public boolean emptyContents(@org.jetbrains.annotations.Nullable LivingEntity livingEntity, Level level, BlockPos pos, @org.jetbrains.annotations.Nullable BlockHitResult blockHitResult) {
         if (level.isInWorldBounds(pos) && level.isEmptyBlock(pos)) {
             if (!level.isClientSide) {
                 level.setBlock(pos, this.getBlock().defaultBlockState(), 3);
             }
 
-            level.gameEvent(player, GameEvent.FLUID_PLACE, pos);
-            level.playSound(player, pos, this.placeSound, SoundSource.BLOCKS, 1.0F, 1.0F);
+            level.gameEvent(livingEntity, GameEvent.FLUID_PLACE, pos);
+            level.playSound(livingEntity, pos, this.placeSound, SoundSource.BLOCKS, 1.0F, 1.0F);
             return true;
         } else {
             return false;

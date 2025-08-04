@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.PlayerAccessor;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -15,6 +14,8 @@ import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
@@ -73,12 +74,12 @@ public class SkephidWebbingBall extends ThrowableProjectile implements ItemSuppl
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
+    public void addAdditionalSaveData(ValueOutput tag) {
         super.addAdditionalSaveData(tag);
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
+    public void readAdditionalSaveData(ValueInput tag) {
         super.readAdditionalSaveData(tag);
     }
 }

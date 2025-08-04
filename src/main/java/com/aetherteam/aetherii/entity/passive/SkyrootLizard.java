@@ -9,11 +9,8 @@ import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
@@ -26,14 +23,16 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class SkyrootLizard extends AetherAnimal {
     private static final EntityDataAccessor<Holder<SkyrootLizardVariant>> DATA_VARIANT_ID = SynchedEntityData.defineId(SkyrootLizard.class, AetherIIDataSerializers.SKYROOT_LIZARD_VARIANT.get());
@@ -133,17 +132,15 @@ public class SkyrootLizard extends AetherAnimal {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
+    public void addAdditionalSaveData(ValueOutput tag) {
         super.addAdditionalSaveData(tag);
-        this.getVariant().unwrapKey().ifPresent((key) -> tag.putString("variant", key.location().toString()));
+        VariantUtils.writeVariant(tag, this.getVariant());
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
+    public void readAdditionalSaveData(ValueInput tag) {
         super.readAdditionalSaveData(tag);
-        Optional.ofNullable(ResourceLocation.tryParse(tag.getString("variant")))
-                .map((location) -> ResourceKey.create(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY, location))
-                .flatMap((key) -> this.registryAccess().lookupOrThrow(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY).get(key))
-                .ifPresent(this::setVariant);
+        VariantUtils.readVariant(tag, AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY).ifPresent(this::setVariant);
+
     }
 }

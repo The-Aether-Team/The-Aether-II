@@ -6,7 +6,7 @@ import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
@@ -32,7 +32,7 @@ public class ClientCharmTooltip implements ClientTooltipComponent {
                     int xOffset = x + (18 * i);
                     int yOffset = y + (18 * j);
                     if (stack.isEmpty()) {
-                        guiGraphics.blitSprite(RenderType::guiTextured, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tooltip/charm"), xOffset, yOffset, 16, 16);
+                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tooltip/charm"), xOffset, yOffset, 16, 16);
                     } else {
                         guiGraphics.renderItem(stack, xOffset, yOffset);
                     }
