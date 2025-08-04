@@ -4,8 +4,6 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
 import com.aetherteam.aetherii.network.packet.AbilityBehaviorSyncPacket;
-import com.aetherteam.nitrogen.attachment.INBTSynchable;
-import com.aetherteam.nitrogen.network.packet.SyncPacket;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
@@ -25,7 +23,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class AbilityBehaviorAttachment implements INBTSynchable {
+public class AbilityBehaviorAttachment {
     private boolean canRefuelGlide;
     private int glidingTimer;
     private Map<Holder<Item>, Boolean> canRefuelAbilities = new HashMap<>(Map.of(

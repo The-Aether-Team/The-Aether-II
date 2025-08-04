@@ -260,7 +260,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
             } else if (ItemStack.isSameItemSameComponents(outputSlot, result)) {
                 outputSlot.grow(result.getCount());
             }
-            ItemStack byproducts = recipeHolder.value().byproducts().getRandomValue(this.getLevel().getRandom()).orElse(ItemStack.EMPTY);
+            ItemStack byproducts = recipeHolder.value().byproducts().getRandom(this.getLevel().getRandom()).orElse(ItemStack.EMPTY);
             ItemStack byproductSlot = stacks.get(6);
             if (byproductSlot.isEmpty()) {
                 stacks.set(6, byproducts.copy());

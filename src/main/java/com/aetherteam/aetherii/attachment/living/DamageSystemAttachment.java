@@ -8,8 +8,6 @@ import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
 import com.aetherteam.aetherii.network.packet.DamageSystemSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
-import com.aetherteam.nitrogen.attachment.INBTSynchable;
-import com.aetherteam.nitrogen.network.packet.SyncPacket;
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
@@ -32,7 +30,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class DamageSystemAttachment implements INBTSynchable {
+public class DamageSystemAttachment {
     public static final int MAX_SHIELD_STAMINA = 500;
     private float criticalDamageModifier = 1.0F;
     private int shieldStamina = MAX_SHIELD_STAMINA;

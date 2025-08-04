@@ -9,8 +9,6 @@ import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
 import com.aetherteam.aetherii.network.packet.AetherIIPlayerSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
-import com.aetherteam.nitrogen.attachment.INBTSynchable;
-import com.aetherteam.nitrogen.network.packet.SyncPacket;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.player.ClientInput;
@@ -39,7 +37,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class AetherIIPlayerAttachment implements INBTSynchable {
+public class AetherIIPlayerAttachment {
     private boolean isMoving;
     private boolean isJumping;
 

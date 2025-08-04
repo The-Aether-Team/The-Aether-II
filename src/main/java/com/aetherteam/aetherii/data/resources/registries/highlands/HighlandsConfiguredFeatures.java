@@ -30,7 +30,7 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.InclusiveRange;
-import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -316,21 +316,21 @@ public class HighlandsConfiguredFeatures {
     private static void bootstrapSurface(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        SimpleWeightedRandomList.Builder<BlockState> twigs = new SimpleWeightedRandomList.Builder<>();
+        WeightedList.Builder<BlockState> twigs = new WeightedList.Builder<>();
         for (Direction facing : TwigBlock.FACING.getPossibleValues()) {
             for (int amount : TwigBlock.AMOUNT.getPossibleValues()) {
                 twigs.add(AetherIIBlocks.SKYROOT_TWIG.get().defaultBlockState().setValue(TwigBlock.FACING, facing).setValue(TwigBlock.AMOUNT, amount), amount);
             }
         }
 
-        SimpleWeightedRandomList.Builder<BlockState> rocks = new SimpleWeightedRandomList.Builder<>();
+        WeightedList.Builder<BlockState> rocks = new WeightedList.Builder<>();
         for (Direction facing : RockBlock.FACING.getPossibleValues()) {
             for (int amount : RockBlock.AMOUNT.getPossibleValues()) {
                 rocks.add(AetherIIBlocks.HOLYSTONE_ROCK.get().defaultBlockState().setValue(RockBlock.FACING, facing).setValue(RockBlock.AMOUNT, amount), amount);
             }
         }
 
-        SimpleWeightedRandomList.Builder<BlockState> underwaterRocks = new SimpleWeightedRandomList.Builder<>();
+        WeightedList.Builder<BlockState> underwaterRocks = new WeightedList.Builder<>();
         for (Direction facing : RockBlock.FACING.getPossibleValues()) {
             for (int amount : RockBlock.AMOUNT.getPossibleValues()) {
                 underwaterRocks.add(AetherIIBlocks.HOLYSTONE_ROCK.get().defaultBlockState().setValue(RockBlock.FACING, facing).setValue(RockBlock.AMOUNT, amount).setValue(RockBlock.WATERLOGGED, true), amount);
@@ -374,7 +374,7 @@ public class HighlandsConfiguredFeatures {
                 )
         );
         register(context, MOSSY_HOLYSTONE_BOULDER, AetherIIFeatures.BOULDER.get(), new BoulderConfiguration(
-                new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                new WeightedStateProvider(WeightedList.<BlockState>builder()
                         .add(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), 4)
                         .add(AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 1)
                         .build()),
@@ -383,7 +383,7 @@ public class HighlandsConfiguredFeatures {
                 Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HOLYSTONE_ROCKS), CountPlacement.of(UniformInt.of(1, 6)))),
                 1.0F));
         register(context, UNDERWATER_MOSSY_HOLYSTONE_BOULDER, AetherIIFeatures.BOULDER.get(), new BoulderConfiguration(
-                new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                new WeightedStateProvider(WeightedList.<BlockState>builder()
                         .add(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), 5)
                         .add(AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 1)
                         .build()),
@@ -395,7 +395,7 @@ public class HighlandsConfiguredFeatures {
                 ), CountPlacement.of(UniformInt.of(1, 3)))),
                 1.0F));
         register(context, ICESTONE_BOULDER, AetherIIFeatures.BOULDER.get(), new BoulderConfiguration(
-                new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                new WeightedStateProvider(WeightedList.<BlockState>builder()
                         .add(AetherIIBlocks.ICESTONE.get().defaultBlockState(), 1)
                         .add(AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 3)
                         .build()),
@@ -421,14 +421,14 @@ public class HighlandsConfiguredFeatures {
     }
 
     private static void bootstrapVegetation(BootstrapContext<ConfiguredFeature<?, ?>> context) {
-        SimpleWeightedRandomList.Builder<BlockState> holpupea = new SimpleWeightedRandomList.Builder<>();
+        WeightedList.Builder<BlockState> holpupea = new WeightedList.Builder<>();
         for (Direction facing : MossFlowersBlock.FACING.getPossibleValues()) {
             for (int amount : MossFlowersBlock.AMOUNT.getPossibleValues()) {
                 holpupea.add(AetherIIBlocks.HOLPUPEA.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, amount).setValue(MossFlowersBlock.FACING, facing), amount);
             }
         }
 
-        SimpleWeightedRandomList.Builder<BlockState> bryallinMossFlowers = SimpleWeightedRandomList.builder();
+        WeightedList.Builder<BlockState> bryallinMossFlowers = WeightedList.builder();
         for (int i = 1; i <= 4; i++) {
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 bryallinMossFlowers.add(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, i).setValue(MossFlowersBlock.FACING, direction), 1);
@@ -466,7 +466,7 @@ public class HighlandsConfiguredFeatures {
                         4,
                         3,
                         PlacementUtils.filtered(AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(
-                                new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>()
+                                new WeightedStateProvider(new WeightedList.Builder<BlockState>()
                                         .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 2)
                                         .add(AetherIIBlocks.HIGHLAND_FERN.get().defaultBlockState(), 1)
                                         .build())
@@ -482,7 +482,7 @@ public class HighlandsConfiguredFeatures {
                         6,
                         3,
                         PlacementUtils.filtered(AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(
-                                new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>()
+                                new WeightedStateProvider(new WeightedList.Builder<BlockState>()
                                         .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 2)
                                         .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 3)
                                         .add(AetherIIBlocks.HIGHLAND_FERN.get().defaultBlockState(), 1)
@@ -499,7 +499,7 @@ public class HighlandsConfiguredFeatures {
                         8,
                         3,
                         PlacementUtils.filtered(AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(
-                                new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>()
+                                new WeightedStateProvider(new WeightedList.Builder<BlockState>()
                                         .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 2)
                                         .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 3)
                                         .add(AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState(), 4)
@@ -517,7 +517,7 @@ public class HighlandsConfiguredFeatures {
                         8,
                         4,
                         PlacementUtils.filtered(AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(
-                                new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>()
+                                new WeightedStateProvider(new WeightedList.Builder<BlockState>()
                                         .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 1)
                                         .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 2)
                                         .add(AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState(), 1)
@@ -578,7 +578,7 @@ public class HighlandsConfiguredFeatures {
                         16,
                         8,
                         3,
-                        PlacementUtils.filtered(AetherIIFeatures.AETHER_FLOWER.get(), new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                        PlacementUtils.filtered(AetherIIFeatures.AETHER_FLOWER.get(), new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
                                         .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 4)
                                         .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 4)
                                         .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 4)
@@ -704,7 +704,7 @@ public class HighlandsConfiguredFeatures {
 
         register(context, TREE_MOSS_COVER, AetherIIFeatures.TREE_MOSS_COVER.get());
 
-        register(context, AETHER_GRASS_BONEMEAL, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+        register(context, AETHER_GRASS_BONEMEAL, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
                 .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 1)
                 .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 1)
                 .add(AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState(), 1)
@@ -727,21 +727,21 @@ public class HighlandsConfiguredFeatures {
     private static void bootstrapTrees(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        SimpleWeightedRandomList.Builder<BlockState> twigs = new SimpleWeightedRandomList.Builder<>();
+        WeightedList.Builder<BlockState> twigs = new WeightedList.Builder<>();
         for (Direction facing : TwigBlock.FACING.getPossibleValues()) {
             for (int amount : TwigBlock.AMOUNT.getPossibleValues()) {
                 twigs.add(AetherIIBlocks.SKYROOT_TWIG.get().defaultBlockState().setValue(TwigBlock.FACING, facing).setValue(TwigBlock.AMOUNT, amount), amount);
             }
         }
 
-        SimpleWeightedRandomList.Builder<BlockState> bryallinMossFlowers = SimpleWeightedRandomList.builder();
+        WeightedList.Builder<BlockState> bryallinMossFlowers = WeightedList.builder();
         for (int i = 1; i <= 4; i++) {
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 bryallinMossFlowers.add(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, i).setValue(MossFlowersBlock.FACING, direction), 1);
             }
         }
 
-        SimpleWeightedRandomList.Builder<BlockState> tarahespFlowers = SimpleWeightedRandomList.builder();
+        WeightedList.Builder<BlockState> tarahespFlowers = WeightedList.builder();
         for (int i = 1; i <= 4; i++) {
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 tarahespFlowers.add(AetherIIBlocks.TARAHESP_FLOWERS.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, i).setValue(MossFlowersBlock.FACING, direction), 1);
@@ -750,28 +750,28 @@ public class HighlandsConfiguredFeatures {
 
         register(context, AMBEROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
-                        new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
                         new StraightTrunkPlacer(5, 4, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
                         new AmberootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(1, 0, 1))
                         .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
-                        .decorators(List.of(new SimpleTrunkTreeDecorator(new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState(), 2).build()), 0.5F, 0.33F))).build());
+                        .decorators(List.of(new SimpleTrunkTreeDecorator(new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState(), 2).build()), 0.5F, 0.33F))).build());
         register(context, LARGE_AMBEROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
-                        new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
                         new StraightTrunkPlacer(8, 5, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
                         new LargeAmberootFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(3)))
                         .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
-                        .decorators(List.of(new SimpleTrunkTreeDecorator(new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState(), 2).build()), 0.75F, 0.5F))).build());
+                        .decorators(List.of(new SimpleTrunkTreeDecorator(new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState(), 2).build()), 0.75F, 0.5F))).build());
         register(context, SINGULAR_AMBEROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
-                        new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
                         new StraightTrunkPlacer(6, 4, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
                         new SingularAmberootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(1, 0, 1))
                         .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
-                        .decorators(List.of(new SimpleTrunkTreeDecorator(new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState(), 2).build()), 0.2F, 0.2F))).build());
+                        .decorators(List.of(new SimpleTrunkTreeDecorator(new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState(), 2).build()), 0.2F, 0.2F))).build());
 
         register(context, TREES_AMBEROOT_SPARSE, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SINGULAR_AMBEROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.3F),
@@ -1321,7 +1321,7 @@ public class HighlandsConfiguredFeatures {
                         .ignoreVines().decorators(ImmutableList.of(new IrradiationTreeDecorator(), new MossDecorator(SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()), SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get()), SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_VINES.get()), Optional.of(new WeightedStateProvider(tarahespFlowers))))).build());
         register(context, AMBEROOT_SAPLING, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
-                        new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
                         new StraightTrunkPlacer(6, 4, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
                         new SingularAmberootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(1, 0, 1))
@@ -1348,7 +1348,7 @@ public class HighlandsConfiguredFeatures {
                 OreConfiguration.target(HOLYSTONE_TEST, AetherIIBlocks.GRAVITITE_ORE.get().defaultBlockState()),
                 OreConfiguration.target(UNDERSHALE_TEST, AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get().defaultBlockState()));
 
-        SimpleWeightedRandomList.Builder<BlockState> bryalinnFlowers = SimpleWeightedRandomList.builder();
+        WeightedList.Builder<BlockState> bryalinnFlowers = WeightedList.builder();
         for (int i = 1; i <= 4; i++) {
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 bryalinnFlowers.add(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, i).setValue(MossFlowersBlock.FACING, direction), 1);
@@ -1401,7 +1401,7 @@ public class HighlandsConfiguredFeatures {
                         20,
                         4,
                         4,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
                                 .add(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 1)
                                 .add(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 1)
                                 .add(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 1)
@@ -2098,7 +2098,7 @@ public class HighlandsConfiguredFeatures {
         register(context, CRATER, AetherIIFeatures.CRATER.get(), new CraterConfiguration(
                 UniformInt.of(4, 5),
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_CRATER),
-                new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.IRRADIATED_HOLYSTONE.get().defaultBlockState(), 1).add(AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(), 5).build()),
+                new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.IRRADIATED_HOLYSTONE.get().defaultBlockState(), 1).add(AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(), 5).build()),
                 BlockStateProvider.simple(Blocks.WATER),
                 BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_DUST_BLOCK.get())
         ));
@@ -2143,7 +2143,7 @@ public class HighlandsConfiguredFeatures {
                         32,
                         4,
                         3,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
                                 .add(AetherIIBlocks.ROTSHROOM_CLUSTER.get().defaultBlockState(), 3)
                                 .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get().defaultBlockState(), 1)
                                 .build())
@@ -2153,7 +2153,7 @@ public class HighlandsConfiguredFeatures {
                         4,
                         3,
                         3,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
                                 .add(AetherIIBlocks.ROTSHROOM_CLUSTER.get().defaultBlockState(), 6)
                                 .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get().defaultBlockState(), 2)
                                 .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get().defaultBlockState(), 1)
@@ -2192,7 +2192,7 @@ public class HighlandsConfiguredFeatures {
                         List.of(
                                 BlockColumnConfiguration.layer(
                                         new WeightedListInt(
-                                                SimpleWeightedRandomList.<IntProvider>builder()
+                                                WeightedList.<IntProvider>builder()
                                                         .add(UniformInt.of(1, 5), 1)
                                                         .add(UniformInt.of(0, 2), 3)
                                                         .build()
@@ -2209,7 +2209,7 @@ public class HighlandsConfiguredFeatures {
                         List.of(
                                 BlockColumnConfiguration.layer(
                                         new WeightedListInt(
-                                                SimpleWeightedRandomList.<IntProvider>builder()
+                                                WeightedList.<IntProvider>builder()
                                                         .add(UniformInt.of(1, 4), 1)
                                                         .add(UniformInt.of(0, 2), 4)
                                                         .build()
@@ -2247,7 +2247,7 @@ public class HighlandsConfiguredFeatures {
     }
 
     private static void bootstrapAir(BootstrapContext<ConfiguredFeature<?, ?>> context) {
-        SimpleWeightedRandomList.Builder<BlockState> purpleAerclouds = new SimpleWeightedRandomList.Builder<>();
+        WeightedList.Builder<BlockState> purpleAerclouds = new WeightedList.Builder<>();
         for (Direction direction : PurpleAercloudBlock.DIRECTIONS) {
             purpleAerclouds.add(AetherIIBlocks.PURPLE_AERCLOUD.get().defaultBlockState().setValue(PurpleAercloudBlock.FACING, direction), 1);
         }

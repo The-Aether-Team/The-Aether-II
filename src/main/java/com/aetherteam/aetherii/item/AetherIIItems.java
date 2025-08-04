@@ -107,27 +107,27 @@ public class AetherIIItems {
     public static final Rarity AETHER_II_TREASURE = Rarity.valueOf("AETHER_II_TREASURE");
 
     // Tools
-    public static final DeferredItem<PickaxeItem> SKYROOT_PICKAXE = register("skyroot_pickaxe", SkyrootPickaxeItem::new);
+    public static final DeferredItem<Item> SKYROOT_PICKAXE = register("skyroot_pickaxe", SkyrootPickaxeItem::new);
     public static final DeferredItem<AxeItem> SKYROOT_AXE = register("skyroot_axe", SkyrootAxeItem::new);
     public static final DeferredItem<ShovelItem> SKYROOT_SHOVEL = register("skyroot_shovel", SkyrootShovelItem::new);
     public static final DeferredItem<HoeItem> SKYROOT_TROWEL = register("skyroot_trowel", SkyrootTrowelItem::new);
 
-    public static final DeferredItem<PickaxeItem> HOLYSTONE_PICKAXE = register("holystone_pickaxe", HolystonePickaxeItem::new);
+    public static final DeferredItem<Item> HOLYSTONE_PICKAXE = register("holystone_pickaxe", HolystonePickaxeItem::new);
     public static final DeferredItem<AxeItem> HOLYSTONE_AXE = register("holystone_axe", HolystoneAxeItem::new);
     public static final DeferredItem<ShovelItem> HOLYSTONE_SHOVEL = register("holystone_shovel", HolystoneShovelItem::new);
     public static final DeferredItem<HoeItem> HOLYSTONE_TROWEL = register("holystone_trowel", HolystoneTrowelItem::new);
 
-    public static final DeferredItem<PickaxeItem> ZANITE_PICKAXE = register("zanite_pickaxe", ZanitePickaxeItem::new);
+    public static final DeferredItem<Item> ZANITE_PICKAXE = register("zanite_pickaxe", ZanitePickaxeItem::new);
     public static final DeferredItem<AxeItem> ZANITE_AXE = register("zanite_axe", ZaniteAxeItem::new);
     public static final DeferredItem<ShovelItem> ZANITE_SHOVEL = register("zanite_shovel", ZaniteShovelItem::new);
     public static final DeferredItem<HoeItem> ZANITE_TROWEL = register("zanite_trowel", ZaniteTrowelItem::new);
 
-    public static final DeferredItem<PickaxeItem> ARKENIUM_PICKAXE = register("arkenium_pickaxe", ArkeniumPickaxeItem::new);
+    public static final DeferredItem<Item> ARKENIUM_PICKAXE = register("arkenium_pickaxe", ArkeniumPickaxeItem::new);
     public static final DeferredItem<AxeItem> ARKENIUM_AXE = register("arkenium_axe", ArkeniumAxeItem::new);
     public static final DeferredItem<ShovelItem> ARKENIUM_SHOVEL = register("arkenium_shovel", ArkeniumShovelItem::new);
     public static final DeferredItem<HoeItem> ARKENIUM_TROWEL = register("arkenium_trowel", ArkeniumTrowelItem::new);
 
-    public static final DeferredItem<PickaxeItem> GRAVITITE_PICKAXE = register("gravitite_pickaxe", GravititePickaxeItem::new);
+    public static final DeferredItem<Item> GRAVITITE_PICKAXE = register("gravitite_pickaxe", GravititePickaxeItem::new);
     public static final DeferredItem<AxeItem> GRAVITITE_AXE = register("gravitite_axe", GravititeAxeItem::new);
     public static final DeferredItem<ShovelItem> GRAVITITE_SHOVEL = register("gravitite_shovel", GravititeShovelItem::new);
     public static final DeferredItem<HoeItem> GRAVITITE_TROWEL = register("gravitite_trowel", GravititeTrowelItem::new);
@@ -135,27 +135,27 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ARKENIUM_SHEARS = register("arkenium_shears", ShearsItem::new, () -> new Item.Properties().durability(238).component(DataComponents.TOOL, ShearsItem.createToolProperties()));
 
     // Combat
-    public static final DeferredItem<SwordItem> SKYROOT_SHORTSWORD = register("skyroot_shortsword", SkyrootShortswordItem::new);
+    public static final DeferredItem<Item> SKYROOT_SHORTSWORD = register("skyroot_shortsword", SkyrootShortswordItem::new);
     public static final DeferredItem<TieredHammerItem> SKYROOT_HAMMER = register("skyroot_hammer", SkyrootHammerItem::new);
     public static final DeferredItem<TieredSpearItem> SKYROOT_SPEAR = register("skyroot_spear", SkyrootSpearItem::new);
     public static final DeferredItem<CrossbowItem> SKYROOT_CROSSBOW = register("skyroot_crossbow", SkyrootCrossbowItem::new, () -> new Item.Properties().enchantable(1));
 
-    public static final DeferredItem<SwordItem> HOLYSTONE_SHORTSWORD = register("holystone_shortsword", HolystoneShortswordItem::new);
+    public static final DeferredItem<Item> HOLYSTONE_SHORTSWORD = register("holystone_shortsword", HolystoneShortswordItem::new);
     public static final DeferredItem<TieredHammerItem> HOLYSTONE_HAMMER = register("holystone_hammer", HolystoneHammerItem::new);
     public static final DeferredItem<TieredSpearItem> HOLYSTONE_SPEAR = register("holystone_spear", HolystoneSpearItem::new);
     public static final DeferredItem<CrossbowItem> HOLYSTONE_CROSSBOW = register("holystone_crossbow", HolystoneCrossbowItem::new, () -> new Item.Properties().enchantable(1));
 
-    public static final DeferredItem<SwordItem> ZANITE_SHORTSWORD = register("zanite_shortsword", ZaniteShortswordItem::new);
+    public static final DeferredItem<Item> ZANITE_SHORTSWORD = register("zanite_shortsword", ZaniteShortswordItem::new);
     public static final DeferredItem<TieredHammerItem> ZANITE_HAMMER = register("zanite_hammer", ZaniteHammerItem::new);
     public static final DeferredItem<TieredSpearItem> ZANITE_SPEAR = register("zanite_spear", ZaniteSpearItem::new);
     public static final DeferredItem<CrossbowItem> ZANITE_CROSSBOW = register("zanite_crossbow", ZaniteCrossbowItem::new, () -> new Item.Properties().enchantable(1));
 
-    public static final DeferredItem<SwordItem> ARKENIUM_SHORTSWORD = register("arkenium_shortsword", ArkeniumShortswordItem::new);
+    public static final DeferredItem<Item> ARKENIUM_SHORTSWORD = register("arkenium_shortsword", ArkeniumShortswordItem::new);
     public static final DeferredItem<TieredHammerItem> ARKENIUM_HAMMER = register("arkenium_hammer", ArkeniumHammerItem::new);
     public static final DeferredItem<TieredSpearItem> ARKENIUM_SPEAR = register("arkenium_spear", ArkeniumSpearItem::new);
     public static final DeferredItem<CrossbowItem> ARKENIUM_CROSSBOW = register("arkenium_crossbow", ArkeniumCrossbowItem::new, () -> new Item.Properties().enchantable(1));
 
-    public static final DeferredItem<SwordItem> GRAVITITE_SHORTSWORD = register("gravitite_shortsword", GravititeShortswordItem::new);
+    public static final DeferredItem<Item> GRAVITITE_SHORTSWORD = register("gravitite_shortsword", GravititeShortswordItem::new);
     public static final DeferredItem<TieredHammerItem> GRAVITITE_HAMMER = register("gravitite_hammer", GravititeHammerItem::new);
     public static final DeferredItem<TieredSpearItem> GRAVITITE_SPEAR = register("gravitite_spear", GravititeSpearItem::new);
     public static final DeferredItem<CrossbowItem> GRAVITITE_CROSSBOW = register("gravitite_crossbow", GravititeCrossbowItem::new, () -> new Item.Properties().enchantable(1));

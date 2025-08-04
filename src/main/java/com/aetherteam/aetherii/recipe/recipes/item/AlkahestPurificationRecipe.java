@@ -24,8 +24,8 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.random.SimpleWeightedRandomList;
-import net.minecraft.util.random.WeightedEntry;
+import net.minecraft.util.random.WeightedList;
+import net.minecraft.util.random.Weighted;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -42,15 +42,15 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
     protected final String group;
     protected final AlkahestPurifierBookCategory category;
     protected final Ingredient ingredient;
-    protected final SimpleWeightedRandomList<ItemStack> results;
-    protected final SimpleWeightedRandomList<ItemStack> byproducts;
+    protected final WeightedList<ItemStack> results;
+    protected final WeightedList<ItemStack> byproducts;
     protected final float experience;
     protected final int alkahestUsage;
     protected final int processingTime;
     @Nullable
     private PlacementInfo placementInfo;
 
-    public AlkahestPurificationRecipe(String group, AlkahestPurifierBookCategory category, Ingredient ingredient, SimpleWeightedRandomList<ItemStack> results, SimpleWeightedRandomList<ItemStack> byproducts, float experience, int alkahestUsage, int processingTime) {
+    public AlkahestPurificationRecipe(String group, AlkahestPurifierBookCategory category, Ingredient ingredient, WeightedList<ItemStack> results, WeightedList<ItemStack> byproducts, float experience, int alkahestUsage, int processingTime) {
         this.group = group;
         this.category = category;
         this.ingredient = ingredient;
@@ -70,11 +70,11 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
         return this.ingredient;
     }
 
-    public SimpleWeightedRandomList<ItemStack> results() {
+    public WeightedList<ItemStack> results() {
         return this.results;
     }
 
-    public SimpleWeightedRandomList<ItemStack> byproducts() {
+    public WeightedList<ItemStack> byproducts() {
         return this.byproducts;
     }
 
@@ -108,7 +108,7 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
 
     @Override
     public ItemStack assemble(SingleRecipeInputWithRandom singleRecipeInput, HolderLookup.Provider provider) {
-        return this.results().getRandomValue(singleRecipeInput.randomSource()).orElse(ItemStack.EMPTY);
+        return this.results().getRandom(singleRecipeInput.randomSource()).orElse(ItemStack.EMPTY);
     }
 
     @Override
@@ -163,8 +163,8 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
                     Codec.STRING.optionalFieldOf("group", "").forGetter(AlkahestPurificationRecipe::group),
                     AlkahestPurifierBookCategory.CODEC.fieldOf("category").orElse(AlkahestPurifierBookCategory.ITEMS).forGetter(AlkahestPurificationRecipe::category),
                     Ingredient.CODEC.fieldOf("ingredient").forGetter(AlkahestPurificationRecipe::ingredient),
-                    SimpleWeightedRandomList.wrappedCodec(ItemStack.CODEC).fieldOf("results").forGetter(AlkahestPurificationRecipe::results),
-                    SimpleWeightedRandomList.wrappedCodec(ItemStack.CODEC).fieldOf("byproducts").forGetter(AlkahestPurificationRecipe::byproducts),
+                    WeightedList.wrappedCodec(ItemStack.CODEC).fieldOf("results").forGetter(AlkahestPurificationRecipe::results),
+                    WeightedList.wrappedCodec(ItemStack.CODEC).fieldOf("byproducts").forGetter(AlkahestPurificationRecipe::byproducts),
                     Codec.FLOAT.fieldOf("experience").orElse(0.0F).forGetter(AlkahestPurificationRecipe::experience),
                     Codec.INT.fieldOf("alkahest_usage").orElse(1).forGetter(AlkahestPurificationRecipe::alkahestUsage),
                     Codec.INT.fieldOf("processing_time").orElse(200).forGetter(AlkahestPurificationRecipe::processingTime)
@@ -187,17 +187,17 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
             AlkahestPurifierBookCategory category = buffer.readEnum(AlkahestPurifierBookCategory.class);
             Ingredient ingredient = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
             Map<ItemStack, Integer> resultsMap = buffer.readMap((innerBuf) -> ItemStack.STREAM_CODEC.decode(buffer), FriendlyByteBuf::readInt);
-            SimpleWeightedRandomList.Builder<ItemStack> resultsBuilder = SimpleWeightedRandomList.builder();
+            WeightedList.Builder<ItemStack> resultsBuilder = WeightedList.builder();
             for (Map.Entry<ItemStack, Integer> entry : resultsMap.entrySet()) {
                 resultsBuilder.add(entry.getKey(), entry.getValue());
             }
-            SimpleWeightedRandomList<ItemStack> results = resultsBuilder.build();
+            WeightedList<ItemStack> results = resultsBuilder.build();
             Map<ItemStack, Integer> byproductsMap = buffer.readMap((innerBuf) -> ItemStack.STREAM_CODEC.decode(buffer), FriendlyByteBuf::readInt);
-            SimpleWeightedRandomList.Builder<ItemStack> byproductsBuilder = SimpleWeightedRandomList.builder();
+            WeightedList.Builder<ItemStack> byproductsBuilder = WeightedList.builder();
             for (Map.Entry<ItemStack, Integer> entry : byproductsMap.entrySet()) {
                 byproductsBuilder.add(entry.getKey(), entry.getValue());
             }
-            SimpleWeightedRandomList<ItemStack> byproducts = byproductsBuilder.build();
+            WeightedList<ItemStack> byproducts = byproductsBuilder.build();
             float experience = buffer.readFloat();
             int alkahestUsage = buffer.readVarInt();
             int processingTime = buffer.readVarInt();
@@ -208,9 +208,9 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
             buffer.writeUtf(recipe.group);
             buffer.writeEnum(recipe.category());
             Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.ingredient);
-            Map<ItemStack, Integer> resultsMap = recipe.results.unwrap().stream().collect(Collectors.toMap(WeightedEntry.Wrapper::data, (e) -> e.getWeight().asInt()));
+            Map<ItemStack, Integer> resultsMap = recipe.results.unwrap().stream().collect(Collectors.toMap(Weighted.Wrapper::data, (e) -> e.getWeight().asInt()));
             buffer.writeMap(resultsMap, (innerBuf, itemStack) -> ItemStack.STREAM_CODEC.encode(buffer, itemStack), FriendlyByteBuf::writeInt);
-            Map<ItemStack, Integer> byproductsMap = recipe.results.unwrap().stream().collect(Collectors.toMap(WeightedEntry.Wrapper::data, (e) -> e.getWeight().asInt()));
+            Map<ItemStack, Integer> byproductsMap = recipe.results.unwrap().stream().collect(Collectors.toMap(Weighted.Wrapper::data, (e) -> e.getWeight().asInt()));
             buffer.writeMap(byproductsMap, (innerBuf, itemStack) -> ItemStack.STREAM_CODEC.encode(buffer, itemStack), FriendlyByteBuf::writeInt);
             buffer.writeFloat(recipe.experience());
             buffer.writeVarInt(recipe.alkahestUsage());
