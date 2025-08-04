@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.DoubleBlockCombiner;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BedPart;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * [CODE COPY] - {@link net.minecraft.client.renderer.blockentity.BedRenderer}.<br><br>
@@ -37,7 +38,7 @@ public class SkyrootBedRenderer implements BlockEntityRenderer<SkyrootBedBlockEn
     }
 
     @Override
-    public void render(SkyrootBedBlockEntity bed, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+    public void render(SkyrootBedBlockEntity bed, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay, Vec3 cameraPos) {
         Level level = bed.getLevel();
         if (level != null) {
             BlockState blockstate = bed.getBlockState();

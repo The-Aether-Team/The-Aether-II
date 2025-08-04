@@ -11,7 +11,7 @@ import net.minecraft.client.gui.navigation.ScreenPosition;
 import net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -57,13 +57,13 @@ public class AltarScreen extends AbstractRecipeBookScreen<AltarMenu> implements 
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         int i = this.leftPos;
         int j = this.topPos;
-        guiGraphics.blit(RenderType::guiTextured, ALTAR_TEXTURE, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, ALTAR_TEXTURE, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
 
         int slotX = i + 49;
         int slotY = j + 24;
         Direction slotDirection = Direction.WEST;
         for (int index = 1; index <= this.getMenu().getFuelCount(); index++) {
-            guiGraphics.blitSprite(RenderType::guiTextured, CHARGE_SLOT_SPRITE, slotX, slotY, 20, 20);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, CHARGE_SLOT_SPRITE, slotX, slotY, 20, 20);
             if (index % 2 == 0) {
                 slotDirection = slotDirection.getCounterClockWise();
             }
@@ -76,12 +76,12 @@ public class AltarScreen extends AbstractRecipeBookScreen<AltarMenu> implements 
         Direction chargeDirection = Direction.WEST;
         for (int index = 0; index < this.getMenu().getFuelCount(); index++) {
             if (index == 0) {
-                guiGraphics.blitSprite(RenderType::guiTextured, CHARGE_SPRITE, i + 57, j + 44, 4, 7);
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, CHARGE_SPRITE, i + 57, j + 44, 4, 7);
             } else {
                 if (chargeDirection.getStepX() != 0) {
-                    guiGraphics.blitSprite(RenderType::guiTextured, CHARGE_HORIZONTAL_SPRITE, chargeX - 6, chargeY - 2, 12, 4);
+                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, CHARGE_HORIZONTAL_SPRITE, chargeX - 6, chargeY - 2, 12, 4);
                 } else {
-                    guiGraphics.blitSprite(RenderType::guiTextured, CHARGE_VERTICAL_SPRITE, chargeX - 2, chargeY - 6, 4, 12);
+                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, CHARGE_VERTICAL_SPRITE, chargeX - 2, chargeY - 6, 4, 12);
                 }
             }
             if (index % 2 == 1) {
@@ -95,6 +95,6 @@ public class AltarScreen extends AbstractRecipeBookScreen<AltarMenu> implements 
         }
 
         int j1 = Mth.ceil(this.menu.getProcessingProgress() * 26.0F);
-        guiGraphics.blitSprite(RenderType::guiTextured, OUTPUT_PROGRESS_SPRITE, 26, 16, 0, 0, i + 107, j + 58, j1, 16);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, OUTPUT_PROGRESS_SPRITE, 26, 16, 0, 0, i + 107, j + 58, j1, 16);
     }
 }
