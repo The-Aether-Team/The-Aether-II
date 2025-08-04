@@ -18,7 +18,11 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
-import net.minecraft.client.data.models.blockstates.*;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
+import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.special.BedSpecialRenderer;
@@ -26,12 +30,16 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MossyCarpetBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.state.properties.*;
 import org.apache.commons.lang3.ArrayUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -200,12 +208,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public static BlockModelDefinitionGenerator createFacingColumnWithHorizontalVariant(Block block, ResourceLocation vertical, ResourceLocation horizontal) {
         return MultiVariantGenerator.dispatch(block).with(
                 PropertyDispatch.initial(FacingPillarBlock.FACING)
-                        .select(Direction.UP, Variant.variant().with(VariantProperties.MODEL, vertical))
-                        .select(Direction.DOWN, Variant.variant().with(VariantProperties.MODEL, vertical).with(VariantProperties.X_ROT, VariantProperties.Rotation.R180))
-                        .select(Direction.NORTH, Variant.variant().with(VariantProperties.MODEL, horizontal).with(VariantProperties.X_ROT, VariantProperties.Rotation.R90))
-                        .select(Direction.SOUTH, Variant.variant().with(VariantProperties.MODEL, horizontal).with(VariantProperties.X_ROT, VariantProperties.Rotation.R90).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
-                        .select(Direction.EAST, Variant.variant().with(VariantProperties.MODEL, horizontal).with(VariantProperties.X_ROT, VariantProperties.Rotation.R90).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
-                        .select(Direction.WEST, Variant.variant().with(VariantProperties.MODEL, horizontal).with(VariantProperties.X_ROT, VariantProperties.Rotation.R90).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+                        .select(Direction.UP, plainVariant(vertical))
+                        .select(Direction.DOWN, plainVariant(vertical).with(VariantProperties.X_ROT, VariantProperties.Rotation.R180))
+                        .select(Direction.NORTH, plainVariant(horizontal).with(VariantProperties.X_ROT, VariantProperties.Rotation.R90))
+                        .select(Direction.SOUTH, plainVariant(horizontal).with(VariantProperties.X_ROT, VariantProperties.Rotation.R90).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                        .select(Direction.EAST, plainVariant(horizontal).with(VariantProperties.X_ROT, VariantProperties.Rotation.R90).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                        .select(Direction.WEST, plainVariant(horizontal).with(VariantProperties.X_ROT, VariantProperties.Rotation.R90).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
         );
     }
 
@@ -214,13 +222,13 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         ResourceLocation locationEW = AetherIIModelTemplates.PORTAL_EW.create(AetherIIBlocks.AETHER_PORTAL.get(), AetherIITextureMappings.portal(AetherIIBlocks.AETHER_PORTAL.get()), this.modelOutput);
 
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.AETHER_PORTAL.get()).with(PropertyDispatch.initial(BlockStateProperties.HORIZONTAL_AXIS)
-                .select(Direction.Axis.X, Variant.variant().with(VariantProperties.MODEL, locationNS))
-                .select(Direction.Axis.Z, Variant.variant().with(VariantProperties.MODEL, locationEW))));
+                .select(Direction.Axis.X, plainVariant(locationNS))
+                .select(Direction.Axis.Z, plainVariant(locationEW))));
     }
 
     public void createAetherGrassBlocks() {
         TextureMapping snowMapping = AetherIITextureMappings.snowyGrass(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.get());
-        Variant snowVariant = Variant.variant().with(VariantProperties.MODEL, ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), "_snow", snowMapping, this.modelOutput));
+        MultiVariant snowVariant = plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), "_snow", snowMapping, this.modelOutput));
         this.createTintedGrassBlock(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), snowVariant);
 
         ResourceLocation enchantedGrassLocation = TexturedModel.CUBE_TOP_BOTTOM.get(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get())
