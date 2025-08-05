@@ -9,10 +9,9 @@ import com.aetherteam.aetherii.inventory.menu.slot.SaddlebagSlot;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.miscellaneous.CurrencyItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.SlotAccessor;
+import com.aetherteam.aetherii.network.packet.serverbound.ClearAccessoriesPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ClearItemPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.HeldCurrencyPacket;
-import io.wispforest.accessories.networking.AccessoriesNetworking;
-import io.wispforest.accessories.networking.server.NukeAccessories;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
@@ -22,12 +21,10 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -35,7 +32,6 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Quaternionf;
 import org.joml.Vector2i;
 import org.joml.Vector3f;
@@ -264,7 +260,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                     if (slot == this.destroyItemSlot && this.destroyItemSlot != null && flag) {
                         for (int j = 0; j < this.getMinecraft().player.inventoryMenu.getItems().size(); ++j) {
                             if (this.nukeCoolDown <= 0) {
-                                AccessoriesNetworking.sendToServer(new NukeAccessories());
+                                ClientPacketDistributor.sendToServer(new ClearAccessoriesPacket());
                                 this.nukeCoolDown = 10;
                             }
                             this.getMinecraft().gameMode.handleCreativeModeItemAdd(ItemStack.EMPTY, j);

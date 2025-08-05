@@ -46,8 +46,6 @@ public class AetherIIClient {
             ItemBlockRenderTypes.setRenderLayer(AetherIIFluids.FLOWING_ALKAHEST.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(AetherIIFluids.ALKAHEST.get(), RenderType.translucent());
         });
-
-        AetherIIRenderers.registerAccessoryRenderers();
     }
 
     public static void eventSetup(IEventBus neoBus) {

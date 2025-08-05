@@ -381,5 +381,8 @@ public class AetherIIItems {
 
         // Tools
         bus.addListener(HolystoneTool::dropAmbrosium);
+
+        // Accessories
+        bus.addListener(GlovesItem::updatePlayerAttributes);
     }
 }

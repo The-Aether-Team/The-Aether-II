@@ -181,7 +181,7 @@ public class HoveringBlockEntity extends Entity {
                         BlockEntity blockEntity = this.level().getBlockEntity(newPos);
                         if (blockEntity != null) {
                             CompoundTag tag = blockEntity.saveWithoutMetadata(this.level().registryAccess());
-                            for (String string : this.getBlockEntityData().getAllKeys()) {
+                            for (String string : this.getBlockEntityData().keySet()) {
                                 Tag blockDataTag = this.getBlockEntityData().get(string);
                                 if (blockDataTag != null) {
                                     tag.put(string, blockDataTag.copy());

@@ -41,7 +41,7 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState,
         renderState.onGround = aerbunny.onGround();
         renderState.deltaMovement = aerbunny.getDeltaMovement();
         renderState.tame = aerbunny.isTame();
-        renderState.vehicleUUID = aerbunny.getVehicleReference();
+        renderState.vehicleReference = aerbunny.getVehicleReference();
     }
 
     /**
@@ -105,7 +105,7 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState,
 
     private float calculateOpacity(AerbunnyRenderState renderState) {
         if (Minecraft.getInstance().getCameraEntity() instanceof Player player) {
-            if (renderState.vehicleUUID.isPresent() && renderState.vehicleUUID.get().equals(player.getUUID())) {
+            if (renderState.vehicleReference.isPresent() && renderState.vehicleReference.get().matches(player)) {
                 Vec3 lookAngle = player.getLookAngle();
                 float calc = (float) Math.min((Math.max(lookAngle.y(), 0.65) - 0.65) * 2.5F, 1.0F);
                 return 1.0F - calc;

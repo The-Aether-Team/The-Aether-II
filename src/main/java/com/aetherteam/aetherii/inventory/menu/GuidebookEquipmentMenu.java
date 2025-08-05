@@ -2,15 +2,15 @@ package com.aetherteam.aetherii.inventory.menu;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.entity.passive.Moa;
-import com.aetherteam.aetherii.inventory.AetherIIAccessorySlots;
+import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
+import com.aetherteam.aetherii.inventory.menu.slot.AccessorySlot;
 import com.aetherteam.aetherii.inventory.menu.slot.SaddlebagSlot;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.miscellaneous.MoaFeedItem;
 import com.aetherteam.aetherii.item.miscellaneous.MoaSaddlebagItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.CraftingMenuAccessor;
-import io.wispforest.accessories.api.menu.AccessoriesSlotGenerator;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceLocation;
@@ -28,6 +28,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 
 public class GuidebookEquipmentMenu extends AbstractContainerMenu {
+    public static final ResourceLocation RELIC_SLOT_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessories/slot_relic");
+    public static final ResourceLocation HANDWEAR_SLOT_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessories/slot_handwear");
+    public static final ResourceLocation ACCESSORY_SLOT_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessories/slot_accessory");
     private static final Map<EquipmentSlot, ResourceLocation> TEXTURE_EMPTY_SLOTS = Map.of(
             EquipmentSlot.FEET,
             InventoryMenu.EMPTY_ARMOR_SLOT_BOOTS,
@@ -190,10 +193,12 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
                 }
             }
         } else {
-            AccessoriesSlotGenerator generator = AccessoriesSlotGenerator.of(this::addSlot, 64, 38, this.owner, AetherIIAccessorySlots.getRelicSlotType(), AetherIIAccessorySlots.getHandwearSlotType(), AetherIIAccessorySlots.getAccessorySlotType());
-            if (generator != null) {
-                generator.padding(0).column();
-            }
+            AccessoryContainer accessories = this.owner.getData(AetherIIDataAttachments.ACCESSORIES);
+            this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_RELICS, 0, 64, 38, RELIC_SLOT_LOCATION));
+            this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_HANDWEAR, 1, 64, 56, HANDWEAR_SLOT_LOCATION));
+            this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_ACCESSORIES, 2, 64, 74, ACCESSORY_SLOT_LOCATION));
+            this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_ACCESSORIES, 3, 64, 92, ACCESSORY_SLOT_LOCATION));
+
 
             for (int k = 0; k < 4; k++) {
                 EquipmentSlot equipmentslot = SLOT_IDS[k];
