@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client.renderer.block.model.builder;
 import com.aetherteam.aetherii.client.renderer.block.model.unbaked.UnbakedTrunkModelLoader;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.Variant;
 import net.neoforged.neoforge.client.model.generators.template.CustomLoaderBuilder;
 
@@ -10,13 +11,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TrunkModelBuilder extends CustomLoaderBuilder {
-    private Map<UnbakedTrunkModelLoader.Holder, Variant> connections = new LinkedHashMap<>();
+    private Map<UnbakedTrunkModelLoader.Holder, MultiVariant> connections = new LinkedHashMap<>();
 
     public TrunkModelBuilder() {
         super(UnbakedTrunkModelLoader.ID, false);
     }
 
-    public void add(UnbakedTrunkModelLoader.Holder condition, Variant variant) {
+    public void add(UnbakedTrunkModelLoader.Holder condition, MultiVariant variant) {
         this.connections.putIfAbsent(condition, variant);
     }
 
