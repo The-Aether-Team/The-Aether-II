@@ -13,7 +13,6 @@ import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
-import java.util.List;
 import java.util.Optional;
 
 public class MultiBlockEntity extends BlockEntity {
@@ -24,23 +23,23 @@ public class MultiBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void loadAdditional(ValueInput tag) {
-        super.loadAdditional(tag);
-        Optional<int[]> positions = tag.getIntArray("origin");
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        Optional<int[]> positions = input.getIntArray("origin");
         positions.ifPresent(ints -> this.levelOriginPos = new BlockPos(ints[0], ints[1], ints[2]));
     }
 
     @Override
-    protected void saveAdditional(ValueOutput tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
         if (this.levelOriginPos != null) {
-            tag.putIntArray("origin", new int[]{this.levelOriginPos.getX(), this.levelOriginPos.getY(), this.levelOriginPos.getZ()});
+            output.putIntArray("origin", new int[]{this.levelOriginPos.getX(), this.levelOriginPos.getY(), this.levelOriginPos.getZ()});
         }
     }
 
     @Override
-    public void handleUpdateTag(ValueInput tag) {
-        this.loadAdditional(tag);
+    public void handleUpdateTag(ValueInput input) {
+        this.loadAdditional(input);
     }
 
     @Override

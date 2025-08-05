@@ -41,7 +41,7 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState,
         renderState.onGround = aerbunny.onGround();
         renderState.deltaMovement = aerbunny.getDeltaMovement();
         renderState.tame = aerbunny.isTame();
-        renderState.vehicleUUID = aerbunny.getVehicleUUID();
+        renderState.vehicleUUID = aerbunny.getVehicleReference();
     }
 
     /**

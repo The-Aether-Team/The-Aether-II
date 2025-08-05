@@ -581,26 +581,26 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    public void addAdditionalSaveData(ValueOutput tag) {
-        super.addAdditionalSaveData(tag);
-        tag.putBoolean("HasPlate", this.hasPlate());
-        tag.putBoolean("Sheared", this.isSheared());
-        tag.putInt("PlateGrowTime", this.plateGrowTime);
-        tag.putInt("WoolGrowTime", this.woolGrowTime);
+    public void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putBoolean("HasPlate", this.hasPlate());
+        output.putBoolean("Sheared", this.isSheared());
+        output.putInt("PlateGrowTime", this.plateGrowTime);
+        output.putInt("WoolGrowTime", this.woolGrowTime);
         if (this.getColor().isPresent()) {
-            tag.putInt("Color", this.getColor().get().id());
+            output.putInt("Color", this.getColor().get().id());
         }
     }
 
     @Override
-    public void readAdditionalSaveData(ValueInput tag) {
-        super.readAdditionalSaveData(tag);
-        this.setPlate(tag.getBooleanOr("HasPlate", true));
-        this.setSheared(tag.getBooleanOr("Sheared", false));
-        this.plateGrowTime = tag.getIntOr("PlateGrowTime", 0);
-        this.woolGrowTime = tag.getIntOr("WoolGrowTime", 0);
-        if (tag.getInt("Color").isPresent()) {
-            this.setColor(Optional.of(KirridColor.BY_ID.apply(tag.getInt("Color").get())));
+    public void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        this.setPlate(input.getBooleanOr("HasPlate", true));
+        this.setSheared(input.getBooleanOr("Sheared", false));
+        this.plateGrowTime = input.getIntOr("PlateGrowTime", 0);
+        this.woolGrowTime = input.getIntOr("WoolGrowTime", 0);
+        if (input.getInt("Color").isPresent()) {
+            this.setColor(Optional.of(KirridColor.BY_ID.apply(input.getInt("Color").get())));
         }
     }
 

@@ -305,15 +305,14 @@ public abstract class MountableAnimal extends AetherAnimal implements MountableM
     }
 
     @Override
-    public void addAdditionalSaveData(ValueOutput tag) {
-        super.addAdditionalSaveData(tag);
-        tag.putBoolean("Saddled", this.isSaddled());
+    public void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putBoolean("Saddled", this.isSaddled());
     }
 
     @Override
-    public void readAdditionalSaveData(ValueInput tag) {
-        super.readAdditionalSaveData(tag);
-        this.setSaddled(tag.getBooleanOr("Saddled", false));
-
+    public void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        this.setSaddled(input.getBooleanOr("Saddled", false));
     }
 }

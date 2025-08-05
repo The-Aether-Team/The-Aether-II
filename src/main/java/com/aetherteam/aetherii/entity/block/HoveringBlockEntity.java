@@ -276,24 +276,17 @@ public class HoveringBlockEntity extends Entity {
     }
 
     @Override
-    protected void addAdditionalSaveData(ValueOutput tag) {
-        tag.put("BlockState", NbtUtils.writeBlockState(this.blockState));
+    protected void addAdditionalSaveData(ValueOutput output) {
+        output.store("BlockState", BlockState.CODEC, this.blockState);
         if (this.getBlockEntityData() != null) {
-            tag.put("TileEntityData", this.getBlockEntityData());
+            output.store("TileEntityData", CompoundTag.CODEC, this.getBlockEntityData());
         }
     }
 
     @Override
-    protected void readAdditionalSaveData(ValueInput tag) {
-        if (tag.contains("BlockState")) {
-            this.blockState = NbtUtils.readBlockState(this.level().holderLookup(Registries.BLOCK), tag.getCompound("BlockState"));
-        }
-        if (tag.contains("TileEntityData", 10)) {
-            this.setBlockEntityData(tag.getCompound("TileEntityData"));
-        }
-        if (this.blockState.isAir()) {
-            this.blockState = Blocks.SAND.defaultBlockState();
-        }
+    protected void readAdditionalSaveData(ValueInput input) {
+        this.blockState = input.read("BlockState", BlockState.CODEC).orElse(Blocks.SAND.defaultBlockState());
+        input.read("TileEntityData", CompoundTag.CODEC).ifPresent(this::setBlockEntityData);
     }
 
     @Override

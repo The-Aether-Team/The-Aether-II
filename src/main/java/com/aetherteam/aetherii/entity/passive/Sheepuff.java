@@ -437,22 +437,22 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    public void addAdditionalSaveData(ValueOutput tag) {
-        super.addAdditionalSaveData(tag);
-        tag.putBoolean("Sheared", this.isSheared());
-        tag.putBoolean("Puffed", this.getPuffed());
-        tag.putInt("Color", this.getColor().id());
+    public void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putBoolean("Sheared", this.isSheared());
+        output.putBoolean("Puffed", this.getPuffed());
+        output.putInt("Color", this.getColor().id());
     }
 
     @Override
-    public void readAdditionalSaveData(ValueInput tag) {
-        super.readAdditionalSaveData(tag);
-        this.setSheared(tag.getBooleanOr("Sheared", false));
+    public void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        this.setSheared(input.getBooleanOr("Sheared", false));
 
-        this.setPuffed(tag.getBooleanOr("Puffed", false));
+        this.setPuffed(input.getBooleanOr("Puffed", false));
 
-        if (tag.getInt("Color").isPresent()) {
-            this.setColor(SheepuffColor.BY_ID.apply(tag.getInt("Color").get()));
+        if (input.getInt("Color").isPresent()) {
+            this.setColor(SheepuffColor.BY_ID.apply(input.getInt("Color").get()));
         }
     }
 

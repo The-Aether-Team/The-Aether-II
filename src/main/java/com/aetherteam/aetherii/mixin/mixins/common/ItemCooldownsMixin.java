@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.mixin.mixins.common;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.mixin.wrappers.common.ItemCooldownsWrapper;
-import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;

@@ -49,7 +49,7 @@ public final class EntityUtil {
     @SuppressWarnings("unchecked")
     public static <T extends Entity> T clone(final T entity) {
         try (ProblemReporter.ScopedCollector problemreporter$scopedcollector = new ProblemReporter.ScopedCollector(entity.problemPath(), AetherII.LOGGER)) {
-            TagValueOutput tag = TagValueOutput.createWithContext(problemreporter$scopedcollector, entity.registryAccess());;
+            TagValueOutput output = TagValueOutput.createWithContext(problemreporter$scopedcollector, entity.registryAccess());;
             entity.save(tag);
             final Optional<T> newEnt = (Optional<T>) EntityType.create(tag, entity.level(), EntitySpawnReason.EVENT);
         }

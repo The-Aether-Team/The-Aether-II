@@ -122,16 +122,16 @@ public class Edward extends MerchantEntity {
     }
 
     @Override
-    public void addAdditionalSaveData(ValueOutput tag) {
-        super.addAdditionalSaveData(tag);
-        tag.putIntArray("HomePosition", new int[]{this.getHomePosition().getX(), this.getHomePosition().getY(), this.getHomePosition().getZ()});
+    public void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putIntArray("HomePosition", new int[]{this.getHomePosition().getX(), this.getHomePosition().getY(), this.getHomePosition().getZ()});
     }
 
     @Override
-    public void readAdditionalSaveData(ValueInput tag) {
-        super.readAdditionalSaveData(tag);
-        if (tag.getIntArray("HomePosition").isPresent()) {
-            int[] positions = tag.getIntArray("HomePosition").get();
+    public void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        if (input.getIntArray("HomePosition").isPresent()) {
+            int[] positions = input.getIntArray("HomePosition").get();
             this.setHomePosition(new BlockPos(positions[0], positions[1], positions[2]));
         }
     }

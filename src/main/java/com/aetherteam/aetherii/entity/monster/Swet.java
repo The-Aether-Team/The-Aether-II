@@ -293,20 +293,20 @@ public class Swet extends Monster {
     }
 
     @Override
-    public void addAdditionalSaveData(ValueOutput tag) {
-        super.addAdditionalSaveData(tag);
-        VariantUtils.writeVariant(tag, this.getVariant());
-        tag.putFloat("WaterDamageScale", this.getWaterDamage());
-        tag.putFloat("Saturation", this.getFoodSaturation());
+    public void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        VariantUtils.writeVariant(output, this.getVariant());
+        output.putFloat("WaterDamageScale", this.getWaterDamage());
+        output.putFloat("Saturation", this.getFoodSaturation());
     }
 
     @Override
-    public void readAdditionalSaveData(ValueInput tag) {
-        super.readAdditionalSaveData(tag);
-        VariantUtils.readVariant(tag, AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY).ifPresent(this::setVariant);
+    public void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        VariantUtils.readVariant(input, AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY).ifPresent(this::setVariant);
 
-        this.setWaterDamage(tag.getFloatOr("WaterDamageScale", 0));
-        this.setFoodSaturation(tag.getFloatOr("Saturation", 0));
+        this.setWaterDamage(input.getFloatOr("WaterDamageScale", 0));
+        this.setFoodSaturation(input.getFloatOr("Saturation", 0));
     }
 
     /**

@@ -72,14 +72,4 @@ public class SkephidWebbingBall extends ThrowableProjectile implements ItemSuppl
     public ItemStack getItem() {
         return new ItemStack(Items.SNOWBALL);
     }
-
-    @Override
-    public void addAdditionalSaveData(ValueOutput tag) {
-        super.addAdditionalSaveData(tag);
-    }
-
-    @Override
-    public void readAdditionalSaveData(ValueInput tag) {
-        super.readAdditionalSaveData(tag);
-    }
 }

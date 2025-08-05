@@ -26,7 +26,6 @@ import net.minecraft.world.level.storage.ValueOutput;
 
 public class ArkeniumForgeBlockEntity extends BaseContainerBlockEntity implements StackedContentsCompatible {
     protected NonNullList<ItemStack> items = NonNullList.withSize(11, ItemStack.EMPTY);
-    private ItemStack lastInput = ItemStack.EMPTY;
 
     public ArkeniumForgeBlockEntity(BlockPos pos, BlockState blockState) {
         super(AetherIIBlockEntityTypes.ARKENIUM_FORGE.get(), pos, blockState);
@@ -43,21 +42,21 @@ public class ArkeniumForgeBlockEntity extends BaseContainerBlockEntity implement
     }
 
     @Override
-    public void loadAdditional(ValueInput tag) {
-        super.loadAdditional(tag);
+    public void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(tag, this.items);
+        ContainerHelper.loadAllItems(input, this.items);
     }
 
     @Override
-    protected void saveAdditional(ValueOutput tag) {
-        super.saveAdditional(tag);
-        ContainerHelper.saveAllItems(tag, this.items);
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        ContainerHelper.saveAllItems(output, this.items);
     }
 
     @Override
-    public void handleUpdateTag(ValueInput tag) {
-        this.loadAdditional(tag);
+    public void handleUpdateTag(ValueInput input) {
+        this.loadAdditional(input);
     }
 
     @Override
