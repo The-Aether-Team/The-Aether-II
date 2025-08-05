@@ -4,12 +4,12 @@ import com.aetherteam.aetherii.entity.MountableMob;
 import com.aetherteam.aetherii.entity.NotGrounded;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
@@ -19,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.DismountHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -166,17 +167,16 @@ public abstract class MountableAnimal extends AetherAnimal implements MountableM
         return true;
     }
 
-    @Override
-    public void equipSaddle(ItemStack pStack, @Nullable SoundSource pSoundSource) {
-        this.setSaddled(true);
-        if (pSoundSource != null && this.getSaddledSound() != null) {
-            this.level().playSound(null, this, this.getSaddledSound(), pSoundSource, 0.5F, 1.0F);
-        }
+    public boolean canUseSlot(EquipmentSlot slot) {
+        return slot != EquipmentSlot.SADDLE ? super.canUseSlot(slot) : this.isAlive() && !this.isBaby();
     }
 
-    @Override
-    public boolean isSaddleable() {
-        return this.isAlive() && !this.isBaby();
+    protected boolean canDispenserEquipIntoSlot(EquipmentSlot slot) {
+        return slot == EquipmentSlot.SADDLE || super.canDispenserEquipIntoSlot(slot);
+    }
+
+    protected Holder<SoundEvent> getEquipSound(EquipmentSlot slot, ItemStack item, Equippable equippable) {
+        return (Holder)(slot == EquipmentSlot.SADDLE ? this.getSaddledSound() : super.getEquipSound(slot, item, equippable));
     }
 
     /**
