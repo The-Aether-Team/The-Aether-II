@@ -1115,100 +1115,40 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
             output.store("FeedItem", ItemStack.OPTIONAL_CODEC, this.inventory.getItem(2));
         }
 
-        /*
-         ValueOutput.TypedOutputList<ItemStackWithSlot> typedoutputlist = p_421539_.list("Items", ItemStackWithSlot.CODEC);
-
-            for (int i = 0; i < this.inventory.getContainerSize(); i++) {
-                ItemStack itemstack = this.inventory.getItem(i);
-                if (!itemstack.isEmpty()) {
-                    typedoutputlist.add(new ItemStackWithSlot(i, itemstack));
-                }
-            }
-         */
-
-        ListTag list = new ListTag();
-        for (int i = 6; i < this.inventory.getContainerSize(); ++i) {
-            ItemStack itemstack = this.inventory.getItem(i);
-            if (!itemstack.isEmpty()) {
-                CompoundTag slotTag = new CompoundTag();
-                slotTag.putByte("Slot", (byte) i);
-                list.add(itemstack.save(this.registryAccess(), slotTag));
+        ValueOutput.TypedOutputList<ItemStackWithSlot> list = output.list("SaddlebagItems", ItemStackWithSlot.CODEC);
+        for (int i = 0; i < this.inventory.getContainerSize(); i++) {
+            ItemStack itemStack = this.inventory.getItem(i);
+            if (!itemStack.isEmpty()) {
+                list.add(new ItemStackWithSlot(i, itemStack));
             }
         }
-        output.store("SaddlebagItems", list);
     }
 
     @Override
     public void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
-        if (input.contains("MoaUUID")) {
-            this.setMoaReference(input.getUUID("MoaUUID"));
-        }
-        if (input.contains("IsBaby")) {
-            this.setBaby(input.getBoolean("IsBaby"));
-        }
-        if (input.contains("FeatherShape") && Arrays.stream(FeatherShape.values()).map(FeatherShape::getSerializedName).anyMatch((s) -> s.equals(input.getString("FeatherShape")))) {
-            this.setFeatherShape(input.getString("FeatherShape"));
-        }
-        if (input.contains("KeratinColor") && Arrays.stream(KeratinColor.values()).map(KeratinColor::getSerializedName).anyMatch((s) -> s.equals(input.getString("KeratinColor")))) {
-            this.setKeratinColor(input.getString("KeratinColor"));
-        }
-        if (input.contains("EyeColor") && Arrays.stream(EyeColor.values()).map(EyeColor::getSerializedName).anyMatch((s) -> s.equals(input.getString("EyeColor")))) {
-            this.setEyeColor(input.getString("EyeColor"));
-        }
-        if (input.contains("FeatherColor") && Arrays.stream(FeatherColor.values()).map(FeatherColor::getSerializedName).anyMatch((s) -> s.equals(input.getString("FeatherColor")))) {
-            this.setFeatherColor(input.getString("FeatherColor"));
-        }
-        if (input.hasUUID("Rider")) {
-            this.setRider(input.getUUID("Rider"));
-        }
-        if (input.hasUUID("LastRider")) {
-            this.setLastRider(input.getUUID("LastRider"));
-        }
-        if (input.contains("RemainingJumps")) {
-            this.setRemainingJumps(input.getInt("RemainingJumps"));
-        }
-        if (input.contains("Hungry")) {
-            this.setHungry(input.getBoolean("Hungry"));
-        }
-        if (input.contains("AmountFed")) {
-            this.setAmountFed(input.getInt("AmountFed"));
-        }
-        if (input.contains("PlayerGrown")) {
-            this.setPlayerGrown(input.getBoolean("PlayerGrown"));
-        }
-        if (input.contains("Sitting")) {
-            this.setSitting(input.getBoolean("Sitting"));
-        }
-        if (input.contains("Following")) {
-            this.setFollowing(input.getUUID("Following"));
-        }
+        input.read("MoaUUID", EntityReference.<LivingEntity>codec()).ifPresent(this::setMoaReference);
+        this.setBaby(input.getBooleanOr("IsBaby", false));
+        input.getString("FeatherShape").filter((string) -> Arrays.stream(FeatherShape.values()).map(FeatherShape::getSerializedName).anyMatch((s) -> s.equals(string))).ifPresent(this::setFeatherShape);
+        input.getString("KeratinColor").filter((string) -> Arrays.stream(KeratinColor.values()).map(KeratinColor::getSerializedName).anyMatch((s) -> s.equals(string))).ifPresent(this::setFeatherShape);
+        input.getString("EyeColor").filter((string) -> Arrays.stream(EyeColor.values()).map(EyeColor::getSerializedName).anyMatch((s) -> s.equals(string))).ifPresent(this::setFeatherShape);
+        input.getString("FeatherColor").filter((string) -> Arrays.stream(FeatherColor.values()).map(FeatherColor::getSerializedName).anyMatch((s) -> s.equals(string))).ifPresent(this::setFeatherShape);
+        input.read("Rider", EntityReference.<LivingEntity>codec()).ifPresent(this::setRider);
+        input.read("LastRider", EntityReference.<LivingEntity>codec()).ifPresent(this::setLastRider);
+        input.getInt("RemainingJumps").ifPresent(this::setRemainingJumps);
+        this.setHungry(input.getBooleanOr("Hungry", false));
+        input.getInt("AmountFed").ifPresent(this::setAmountFed);
+        this.setPlayerGrown(input.getBooleanOr("PlayerGrown", false));
+        this.setSitting(input.getBooleanOr("Sitting", false));
+        input.read("Following", EntityReference.<LivingEntity>codec()).ifPresent(this::setFollowing);
 
-        if (input.contains("SaddleItem", 10)) {
-            ItemStack itemStack = ItemStack.parseOptional(this.registryAccess(), input.getCompound("SaddleItem"));
-            if (itemStack.is(AetherIIItems.MOA_SADDLE.get())) {
-                this.getInventory().setItem(0, itemStack);
-            }
-        }
-        if (input.contains("SaddlebagsItem", 10)) {
-            ItemStack itemStack = ItemStack.parseOptional(this.registryAccess(), input.getCompound("SaddlebagsItem"));
-            if (itemStack.getItem() instanceof MoaSaddlebagItem) {
-                this.getInventory().setItem(1, itemStack);
-            }
-        }
-        if (input.contains("FeedItem", 10)) {
-            ItemStack itemStack = ItemStack.parseOptional(this.registryAccess(), input.getCompound("FeedItem"));
-            if (itemStack.getItem() instanceof MoaFeedItem) {
-                this.getInventory().setItem(2, itemStack);
-            }
-        }
+        input.read("SaddleItem", ItemStack.OPTIONAL_CODEC).filter((stack) -> stack.is(AetherIIItems.MOA_SADDLE.get())).ifPresent((stack) -> this.getInventory().setItem(0, stack));
+        input.read("SaddlebagsItem", ItemStack.OPTIONAL_CODEC).filter((stack) -> stack.getItem() instanceof MoaSaddlebagItem).ifPresent((stack) -> this.getInventory().setItem(1, stack));
+        input.read("FeedItem", ItemStack.OPTIONAL_CODEC).filter((stack) -> stack.getItem() instanceof MoaFeedItem).ifPresent((stack) -> this.getInventory().setItem(2, stack));
 
-        ListTag list = input.getList("SaddlebagItems", 10);
-        for (int i = 0; i < list.size(); ++i) {
-            CompoundTag compoundtag = list.getCompound(i);
-            int j = compoundtag.getByte("Slot") & 255;
-            if (j >= 6 && j < this.inventory.getContainerSize()) {
-                this.inventory.setItem(j, ItemStack.parseOptional(this.registryAccess(), compoundtag));
+        for (ItemStackWithSlot stackWithSlot : input.listOrEmpty("SaddlebagItems", ItemStackWithSlot.CODEC)) {
+            if (stackWithSlot.isValidInContainer(this.inventory.getContainerSize())) {
+                this.inventory.setItem(stackWithSlot.slot(), stackWithSlot.stack());
             }
         }
     }
