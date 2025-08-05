@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -31,14 +32,14 @@ public class PurpleAercloudBlock extends AercloudBlock {
 
     /**
      * Launches the entity inside the block in the same direction as the block is facing and resets their fall distance when not holding the shift key.
-     * If they are holding the shift key, behavior defaults to that of {@link AercloudBlock#entityInside(BlockState, Level, BlockPos, Entity)}.
+     * If they are holding the shift key, behavior defaults to that of {@link AercloudBlock#entityInside(BlockState, Level, BlockPos, Entity, InsideBlockEffectApplier)}.
      * @param state The {@link BlockState} of the block.
      * @param level The {@link Level} the block is in.
      * @param pos The {@link BlockPos} of the block.
      * @param entity The {@link Entity} in the block.
      */
     @Override
-    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
         if (!entity.isShiftKeyDown()) {
             entity.resetFallDistance();
             switch (state.getValue(FACING)) {
@@ -48,7 +49,7 @@ public class PurpleAercloudBlock extends AercloudBlock {
                 case SOUTH -> entity.setDeltaMovement(entity.getDeltaMovement().x(), entity.getDeltaMovement().y(), 2.0);
             }
         } else {
-            super.entityInside(state, level, pos, entity);
+            super.entityInside(state, level, pos, entity, effectApplier);
         }
     }
 
