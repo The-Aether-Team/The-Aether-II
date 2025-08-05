@@ -20,6 +20,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -161,6 +162,10 @@ public class BestiaryEntry extends GuidebookEntry {
                 BestiaryEntry.REFERENCE_CODEC.fieldOf("entry").forGetter(Mutable::getEntry),
                 Codec.unboundedMap(Codec.STRING, Info.CODEC).fieldOf("values").forGetter(Mutable::getClientValues)
         ).apply(instance, Mutable::new));
+        public static final StreamCodec<RegistryFriendlyByteBuf, BestiaryEntry.Mutable> STREAM_CODEC = StreamCodec.composite(
+                BestiaryEntry.STREAM_CODEC, BestiaryEntry.Mutable::getEntry,
+                ByteBufCodecs.map(HashMap::new, ByteBufCodecs.STRING_UTF8, Info.STREAM_CODEC), BestiaryEntry.Mutable::getClientValues,
+                BestiaryEntry.Mutable::new);
 
         private final Holder<BestiaryEntry> entry;
         private final Map<String, Info> clientValues;

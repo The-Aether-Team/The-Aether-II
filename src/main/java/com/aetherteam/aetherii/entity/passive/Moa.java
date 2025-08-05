@@ -532,7 +532,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                             moa.setEyeColor(type.eyeColor().getSerializedName());
                             moa.setFeatherColor(type.featherColor().getSerializedName());
                             moa.setFeatherShape(type.featherShape().getSerializedName());
-                            moa.moveTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(this.getRandom().nextFloat() * 360.0F), 0.0F);
+                            moa.snapTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(this.getRandom().nextFloat() * 360.0F), 0.0F);
                             this.level().addFreshEntity(moa);
                             return InteractionResult.SUCCESS;
                         }

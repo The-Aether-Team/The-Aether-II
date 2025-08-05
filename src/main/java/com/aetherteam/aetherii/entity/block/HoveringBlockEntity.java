@@ -30,6 +30,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -274,7 +276,7 @@ public class HoveringBlockEntity extends Entity {
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag tag) {
+    protected void addAdditionalSaveData(ValueOutput tag) {
         tag.put("BlockState", NbtUtils.writeBlockState(this.blockState));
         if (this.getBlockEntityData() != null) {
             tag.put("TileEntityData", this.getBlockEntityData());
@@ -282,7 +284,7 @@ public class HoveringBlockEntity extends Entity {
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundTag tag) {
+    protected void readAdditionalSaveData(ValueInput tag) {
         if (tag.contains("BlockState")) {
             this.blockState = NbtUtils.readBlockState(this.level().holderLookup(Registries.BLOCK), tag.getCompound("BlockState"));
         }

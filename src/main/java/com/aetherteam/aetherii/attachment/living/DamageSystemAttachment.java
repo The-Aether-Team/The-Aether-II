@@ -11,6 +11,9 @@ import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePack
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -24,20 +27,19 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.apache.commons.lang3.tuple.Triple;
-
-import java.util.Map;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class DamageSystemAttachment {
     public static final int MAX_SHIELD_STAMINA = 500;
     private float criticalDamageModifier = 1.0F;
     private int shieldStamina = MAX_SHIELD_STAMINA;
 
-    private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
-            Map.entry("setShieldStamina", Triple.of(Type.INT, (object) -> this.setShieldStamina((int) object), this::getShieldStamina))
-    );
+    public static final StreamCodec<RegistryFriendlyByteBuf, DamageSystemAttachment> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.INT, DamageSystemAttachment::getShieldStamina,
+            DamageSystemAttachment::new);
+
+    protected DamageSystemAttachment(int shieldStamina) {
+        this.shieldStamina = shieldStamina;
+    }
 
     public DamageSystemAttachment() { }
 
@@ -53,7 +55,7 @@ public class DamageSystemAttachment {
             if (player.tickCount % 5 == 0) {
                 if (attachment.getShieldStamina() < DamageSystemAttachment.MAX_SHIELD_STAMINA && attachment.getShieldStamina() > 0) { //todo balance
                     if (!player.isBlocking()) {
-                        attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.min(500, attachment.getShieldStamina() + 2));
+                        attachment.setShieldStamina(Math.min(500, attachment.getShieldStamina() + 2));
                     }
                 }
             }
@@ -71,7 +73,7 @@ public class DamageSystemAttachment {
                 } else {
                     cooldown = 0;
                 }
-                this.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.max(0, this.getShieldStamina() - rate));
+                this.setShieldStamina(Math.max(0, this.getShieldStamina() - rate));
                 if (this.getShieldStamina() <= 0) {
                     player.level().registryAccess().lookupOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELD).forEach((item) -> player.getCooldowns().addCooldown(item.value().getDefaultInstance(), 300 - cooldown));
                     player.stopUsingItem();

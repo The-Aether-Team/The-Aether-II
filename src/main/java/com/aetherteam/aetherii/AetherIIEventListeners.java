@@ -91,8 +91,6 @@ public class AetherIIEventListeners {
         player.getData(AetherIIDataAttachments.PLAYER).login(player);
         player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).login(player);
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).login(player);
-        player.getData(AetherIIDataAttachments.CURRENCY).login(player); //todo verify
-        player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).login(player);
         player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).login(player); //todo verify
         BiomeHooks.sendColors(player);
     }
@@ -135,13 +133,11 @@ public class AetherIIEventListeners {
         boolean wasDeath = event.isWasDeath();
 
         player.getData(AetherIIDataAttachments.CURRENCY).clone(original, player, wasDeath);
-        player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).clone(player);
     }
 
     public static void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
         Player player = event.getEntity();
 
-        player.getData(AetherIIDataAttachments.PLAYER).changeDimension(player);
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).changeDimension(player);
         player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT.get()).remountAerbunny(player);
     }
@@ -153,9 +149,7 @@ public class AetherIIEventListeners {
         player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.SWET_LATCH).postTickUpdate();
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).postTickUpdate(player);
-        player.getData(AetherIIDataAttachments.CURRENCY).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).postTickUpdate(player);
-        player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).postTickUpdate(player);
         PlayerHooks.forceSpecialLoadingCrouch(player);
     }
 

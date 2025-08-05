@@ -47,8 +47,8 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
         int j = this.topPos;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, BG_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
         int k = (int) (41.0F * this.scrollOffs);
-        ResourceLocation resourcelocation = this.isScrollBarActive() ? SCROLLER_SPRITE : SCROLLER_DISABLED_SPRITE;
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, resourcelocation, i + 119, j + 15 + k, 12, 15);
+        ResourceLocation resourceLocation = this.isScrollBarActive() ? SCROLLER_SPRITE : SCROLLER_DISABLED_SPRITE;
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, resourceLocation, i + 119, j + 15 + k, 12, 15);
         int l = this.leftPos + 52;
         int i1 = this.topPos + 14;
         int j1 = this.startIndex + 12;
@@ -73,7 +73,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
                 if (x >= j1 && x < j1 + 16 && y >= k1 && y < k1 + 18) {
                     ContextMap contextMap = SlotDisplayContext.fromLevel(this.minecraft.level);
                     SlotDisplay slotDisplay = singleInputSet.entries().get(l).recipe().optionDisplay();
-                    guiGraphics.renderTooltip(this.font, slotDisplay.resolveForFirstStack(contextMap), x, y);
+                    guiGraphics.setTooltipForNextFrame(this.font, slotDisplay.resolveForFirstStack(contextMap), x, y);
                 }
             }
         }

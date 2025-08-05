@@ -197,8 +197,8 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
 
             for (int k = 0; k < 4; k++) {
                 EquipmentSlot equipmentslot = SLOT_IDS[k];
-                ResourceLocation resourcelocation = TEXTURE_EMPTY_SLOTS.get(equipmentslot);
-                this.addSlot(new ArmorSlot(playerInventory, this.owner, equipmentslot, 39 - k, -64, 38 + k * 18, resourcelocation));
+                ResourceLocation resourceLocation = TEXTURE_EMPTY_SLOTS.get(equipmentslot);
+                this.addSlot(new ArmorSlot(playerInventory, this.owner, equipmentslot, 39 - k, -64, 38 + k * 18, resourceLocation));
             }
 
             this.addSlot(new Slot(playerInventory, 40, -64, 112) {

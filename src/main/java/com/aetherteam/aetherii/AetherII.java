@@ -188,8 +188,6 @@ public class AetherII {
         registrar.playToClient(AlkahestDamageBlockPacket.TYPE, AlkahestDamageBlockPacket.STREAM_CODEC, AlkahestDamageBlockPacket::execute);
         registrar.playToClient(AlkahestFizzPacket.TYPE, AlkahestFizzPacket.STREAM_CODEC, AlkahestFizzPacket::execute);
         registrar.playToClient(ClientGrabItemPacket.TYPE, ClientGrabItemPacket.STREAM_CODEC, ClientGrabItemPacket::execute);
-        registrar.playToClient(EffectBuildupSetPacket.TYPE, EffectBuildupSetPacket.STREAM_CODEC, EffectBuildupSetPacket::execute);
-        registrar.playToClient(EffectBuildupRemovePacket.TYPE, EffectBuildupRemovePacket.STREAM_CODEC, EffectBuildupRemovePacket::execute);
         registrar.playToClient(FlushGuidebookDataPacket.TYPE, FlushGuidebookDataPacket.STREAM_CODEC, FlushGuidebookDataPacket::execute);
         registrar.playToClient(ForgeSoundPacket.TYPE, ForgeSoundPacket.STREAM_CODEC, ForgeSoundPacket::execute);
         registrar.playToClient(HestveilExplosionEffectsPacket.TYPE, HestveilExplosionEffectsPacket.STREAM_CODEC, HestveilExplosionEffectsPacket::execute);
@@ -197,7 +195,6 @@ public class AetherII {
         registrar.playToClient(DamageTypeParticlePacket.TYPE, DamageTypeParticlePacket.STREAM_CODEC, DamageTypeParticlePacket::execute);
         registrar.playToClient(PortalTravelSoundPacket.TYPE, PortalTravelSoundPacket.STREAM_CODEC, PortalTravelSoundPacket::execute);
         registrar.playToClient(RemountAerbunnyPacket.TYPE, RemountAerbunnyPacket.STREAM_CODEC, RemountAerbunnyPacket::execute);
-        registrar.playToClient(UpdateGuidebookDiscoveryPacket.TYPE, UpdateGuidebookDiscoveryPacket.STREAM_CODEC, UpdateGuidebookDiscoveryPacket::execute);
         registrar.playToClient(SetVehiclePacket.TYPE, SetVehiclePacket.STREAM_CODEC, SetVehiclePacket::execute);
         registrar.playToClient(SwetSyncPacket.TYPE, SwetSyncPacket.STREAM_CODEC, SwetSyncPacket::execute);
         registrar.playToClient(GrassTintSyncPacket.TYPE, GrassTintSyncPacket.STREAM_CODEC, GrassTintSyncPacket::execute);

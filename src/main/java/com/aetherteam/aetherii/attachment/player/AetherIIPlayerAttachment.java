@@ -54,7 +54,6 @@ public class AetherIIPlayerAttachment {
             ByteBufCodecs.BOOL, AetherIIPlayerAttachment::isJumping,
             AetherIIPlayerAttachment::new);
 
-    private boolean shouldSyncAfterJoin;
     private boolean shouldSyncBetweenClients;
 
     protected AetherIIPlayerAttachment(boolean isMoving, boolean isJumping, boolean canGetPortal, boolean canSpawnInAether) {
@@ -83,33 +82,20 @@ public class AetherIIPlayerAttachment {
      */
     public void login(Player player) {
         this.startInAether(player);
-        this.shouldSyncAfterJoin = true;
     }
 
     public void onJoinLevel(Player player) {
-        if (player.level().isClientSide() && player.isLocalPlayer()) {
-            this.setSynched(player.getId(), Direction.SERVER, "setShouldSyncBetweenClients", true);
-        }
-    }
-
-    public void changeDimension(Player player) {
-        this.shouldSyncAfterJoin = true;
+//        if (player.level().isClientSide() && player.isLocalPlayer()) {
+//            this.setSynched(player.getId(), Direction.SERVER, "setShouldSyncBetweenClients", true);
+//        }
     }
 
     /**
      * Handles functions when the player ticks from {@link net.neoforged.neoforge.event.entity.living.LivingEvent.LivingTickEvent}
      */
     public void postTickUpdate(Player player) {
-        this.syncAfterJoin(player);
         this.syncClients(player);
         this.handleAetherPortal(player);
-    }
-
-    private void syncAfterJoin(Player player) {
-        if (this.shouldSyncAfterJoin) {
-            this.forceSync(player.getId(), Direction.CLIENT);
-            this.shouldSyncAfterJoin = false;
-        }
     }
 
     private void syncClients(Player player) {
@@ -120,7 +106,7 @@ public class AetherIIPlayerAttachment {
                     PlayerList playerList = server.getPlayerList();
                     for (ServerPlayer serverPlayer : playerList.getPlayers()) {
                         if (!serverPlayer.getUUID().equals(player.getUUID())) {
-                            this.forceSync(player.getId(), Direction.CLIENT);
+//                            this.forceSync(player.getId(), Direction.CLIENT);
                         }
                     }
                 }
@@ -143,11 +129,11 @@ public class AetherIIPlayerAttachment {
     public void movementInput(Player player, ClientInput input) {
         boolean isJumping = input.keyPresses.jump();
         if (isJumping != this.isJumping()) {
-            this.setSynched(player.getId(), INBTSynchable.Direction.SERVER, "setJumping", isJumping);
+            this.setJumping(isJumping);
         }
         boolean isMoving = isJumping || input.keyPresses.forward() || input.keyPresses.backward() || input.keyPresses.left() || input.keyPresses.right() || player.isFallFlying();
         if (isMoving != this.isMoving()) {
-            this.setSynched(player.getId(), INBTSynchable.Direction.SERVER, "setMoving", isMoving);
+            this.setMoving(isMoving);
         }
     }
 

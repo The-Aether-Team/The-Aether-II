@@ -50,19 +50,6 @@ public class OutpostTrackerAttachment {
         this.shouldSyncAfterJoin = true;
     }
 
-    public void postTickUpdate(Player player) {
-        this.syncAfterJoin(player);
-    }
-
-    private void syncAfterJoin(Player player) {
-        if (this.shouldSyncAfterJoin) {
-            if (player instanceof ServerPlayer serverPlayer) {
-                PacketDistributor.sendToPlayer(serverPlayer, new OutpostTrackerSyncPacket(this.getCampfirePositions(), this.shouldRespawnAtOutpost()));
-            }
-            this.shouldSyncAfterJoin = false;
-        }
-    }
-
     public TeleportTransition findOutpostRespawnLocation(Player player) {
         if (player instanceof ServerPlayer serverPlayer) {
             if (this.shouldRespawnAtOutpost()) {
@@ -73,8 +60,8 @@ public class OutpostTrackerAttachment {
                         BlockPos.MutableBlockPos respawnPos = closest.pos().mutable();
                         Optional<BlockPos> newRespawnPos = Streams.stream(BlockPos.randomBetweenClosed(serverLevel.getRandom(), 50, respawnPos.getX() - 3, respawnPos.getY(), respawnPos.getZ() - 3, respawnPos.getX() + 3, respawnPos.getY(), respawnPos.getZ() + 3).iterator())
                                 .filter((pos) -> serverLevel.getBlockState(pos).getBlock().isPossibleToRespawnInThis(serverLevel.getBlockState(pos)) && !serverLevel.getBlockState(pos).is(AetherIIBlocks.OUTPOST_CAMPFIRE)).findFirst();
-                        if (newRespawnPos.isPresent()) {
-                            ServerPlayer.RespawnPosAngle posAngle = new ServerPlayer.RespawnPosAngle(new Vec3((double) newRespawnPos.get().getX() + 0.5, (double) newRespawnPos.get().getY() + 0.1, (double) newRespawnPos.get().getZ() + 0.5), serverPlayer.getRespawnAngle());
+                        if (newRespawnPos.isPresent() && serverPlayer.getRespawnConfig() != null) {
+                            ServerPlayer.RespawnPosAngle posAngle = new ServerPlayer.RespawnPosAngle(new Vec3((double) newRespawnPos.get().getX() + 0.5, (double) newRespawnPos.get().getY() + 0.1, (double) newRespawnPos.get().getZ() + 0.5), serverPlayer.getRespawnConfig().angle());
                             return new TeleportTransition(serverLevel, posAngle.position(), Vec3.ZERO, posAngle.yaw(), 0.0F, TeleportTransition.DO_NOTHING);
                         }
                     }

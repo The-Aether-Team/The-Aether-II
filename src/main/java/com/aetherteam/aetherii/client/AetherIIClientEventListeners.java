@@ -25,6 +25,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
+import net.neoforged.neoforge.event.AddAttributeTooltipsEvent;
 import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.ArrayList;

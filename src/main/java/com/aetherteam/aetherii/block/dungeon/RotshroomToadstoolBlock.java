@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.block.dungeon;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -14,16 +13,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.TriState;
 
 public class RotshroomToadstoolBlock extends BushBlock {
-    public static final MapCodec<RotshroomToadstoolBlock> CODEC = simpleCodec(RotshroomToadstoolBlock::new);
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 12.0, 16.0);
 
     public RotshroomToadstoolBlock(Properties properties) {
         super(properties);
-    }
-
-    @Override
-    protected MapCodec<? extends RotshroomToadstoolBlock> codec() {
-        return CODEC;
     }
 
     protected boolean mayPlaceOn(BlockState state) {
