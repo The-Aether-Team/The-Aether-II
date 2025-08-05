@@ -15,13 +15,14 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.GuiSpriteManager;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.MobEffectTextureManager;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
@@ -148,7 +149,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         livingEntity.yHeadRotO = livingEntity.getYRot();
         Vector3f vector3f = new Vector3f(0.0F, livingEntity.getBbHeight() / 2.0F + yOffset, 0.0F);
 
-        InventoryScreen.renderEntityInInventory(guiGraphics, posX, posY, scale, vector3f, xQuaternion, zQuaternion, livingEntity);
+        InventoryScreen.renderEntityInInventory(guiGraphics, startX, startY, endX, endY, scale, vector3f, xQuaternion, zQuaternion, livingEntity);
         livingEntity.setYBodyRot(yBodyRot);
         livingEntity.setYRot(yRot);
         livingEntity.setXRot(xRot);
@@ -213,7 +214,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
             if (this.isUnlocked(entry, BestiaryEntry.SLOT_SUBTITLE.id()) && entry.getSlotSubtitle().isPresent()) {
                 components.add(Component.translatable(entry.getSlotSubtitle().get()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
             }
-            guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, components, (int) (mouseX - leftPagePos), (int) (mouseY - topPos));
+            guiGraphics.setComponentTooltipForNextFrame(Minecraft.getInstance().font, components, (int) (mouseX - leftPagePos), (int) (mouseY - topPos));
         }
     }
 
@@ -269,7 +270,6 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                     x = 132;
                     y = 29;
 
-                    MobEffectTextureManager effectTextureManager = Minecraft.getInstance().getMobEffectTextures();
                     List<BestiaryEntry.EffectResistanceDisplay> effectResistances = entry.getEffectResistances();
                     if (!effectResistances.isEmpty()) {
                         for (int i = 0; i < effectResistances.size(); i++) {
@@ -277,8 +277,8 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                             if (effectResistanceDisplay.attribute().value() instanceof EffectResistanceAttribute effectResistanceAttribute) {
                                 if (entry.getClientValues().containsKey(BestiaryEntry.EFFECT_RESISTANCE.id() + "_" + i) && this.isUnlocked(entry, BestiaryEntry.EFFECT_RESISTANCE.id() + "_" + i)) {
                                     Holder<MobEffect> effectHolder = effectResistanceAttribute.getEffect();
-                                    TextureAtlasSprite textureatlassprite = effectTextureManager.get(effectHolder);
-                                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, textureatlassprite, x, y, 18, 18);
+                                    ResourceLocation location = Gui.getMobEffectSprite(effectHolder);
+                                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, x, y, 18, 18);
                                     int effectValue = effectResistanceDisplay.value();
                                     Component effectTooltip = Component.literal(effectValue * 100 + "%")
                                             .append(CommonComponents.space())
@@ -387,7 +387,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         double mouseXDiff = (mouseX - rightPagePos) - x;
         double mouseYDiff = (mouseY - topPos) - y;
         if (mouseYDiff <= 15 && mouseYDiff >= 0 && mouseXDiff <= 15 && mouseXDiff >= 0) {
-            guiGraphics.renderTooltip(font, component, (mouseX - rightPagePos) + xOffset, mouseY - topPos);
+            guiGraphics.setTooltipForNextFrame(font, component, (mouseX - rightPagePos) + xOffset, mouseY - topPos);
         }
     }
 

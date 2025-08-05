@@ -73,7 +73,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
                 if (x >= j1 && x < j1 + 16 && y >= k1 && y < k1 + 18) {
                     ContextMap contextMap = SlotDisplayContext.fromLevel(this.minecraft.level);
                     SlotDisplay slotDisplay = singleInputSet.entries().get(l).recipe().optionDisplay();
-                    guiGraphics.renderTooltip(this.font, slotDisplay.resolveForFirstStack(contextMap), x, y);
+                    guiGraphics.setTooltipForNextFrame(this.font, slotDisplay.resolveForFirstStack(contextMap), x, y);
                 }
             }
         }

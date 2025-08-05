@@ -149,7 +149,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
     public void tick() {
         super.tick();
         if (this.getPuffed()) {
-            this.checkSlowFallDistance();
+            this.checkFallDistanceAccumulation();
             AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
             if (gravity != null) {
                 double fallSpeed = Math.max(gravity.getValue() * -0.625, -0.05);

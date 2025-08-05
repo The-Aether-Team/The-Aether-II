@@ -25,27 +25,18 @@ public class ShelfRotshroomBlock extends BushBlock {
     protected static final VoxelShape SOUTH_AABB;
     protected static final VoxelShape NORTH_AABB;
 
-    public MapCodec<ShelfRotshroomBlock> codec() {
-        return CODEC;
-    }
-
     public ShelfRotshroomBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        switch (state.getValue(FACING)) {
-            case NORTH:
-                return NORTH_AABB;
-            case SOUTH:
-                return SOUTH_AABB;
-            case WEST:
-                return WEST_AABB;
-            case EAST:
-            default:
-                return EAST_AABB;
-        }
+        return switch (state.getValue(FACING)) {
+            case NORTH -> NORTH_AABB;
+            case SOUTH -> SOUTH_AABB;
+            case WEST -> WEST_AABB;
+            default -> EAST_AABB;
+        };
     }
 
     private boolean canAttachTo(BlockGetter blockReader, BlockPos pos, Direction direction) {

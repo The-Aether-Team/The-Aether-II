@@ -18,6 +18,7 @@ import net.minecraft.client.AttackIndicatorStatus;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
@@ -101,7 +102,7 @@ public class AetherIIOverlays {
 
             int i = ARGB.white(timeInPortal);
             TextureAtlasSprite textureatlassprite = minecraft.getBlockRenderer().getBlockModelShaper().getParticleIcon(AetherIIBlocks.AETHER_PORTAL.get().defaultBlockState());
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTUREDOverlay, textureatlassprite, 0, 0, guiGraphics.guiWidth(), guiGraphics.guiHeight(), i);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, textureatlassprite, 0, 0, guiGraphics.guiWidth(), guiGraphics.guiHeight(), i);
         }
     }
 
@@ -116,7 +117,6 @@ public class AetherIIOverlays {
             RenderSystem.enableBlend();
             int j1 = 0;
             int k1 = 0;
-            MobEffectTextureManager mobeffecttexturemanager = minecraft.getMobEffectTextures();
 
             for (EffectBuildupInstance buildup : Ordering.natural().reverse().sortedCopy(collection)) {
                 Holder<MobEffect> effect = buildup.getType();
@@ -166,10 +166,10 @@ public class AetherIIOverlays {
                     guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BUILDUP_BACKGROUND_OUTLINE_SPRITE, i, j, 24, 24, ARGB.white(flashInterval));
                 }
 
-                TextureAtlasSprite textureatlassprite = mobeffecttexturemanager.get(effect);
+                ResourceLocation location = Gui.getMobEffectSprite(effect);
                 int i1 = j;
                 int i_f = i;
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, textureatlassprite, i_f + 3, i1 + 3, 18, 18);
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, i_f + 3, i1 + 3, 18, 18);
             }
 
             RenderSystem.disableBlend();

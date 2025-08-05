@@ -27,6 +27,7 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.blockentity.BedRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
@@ -37,6 +38,7 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent;
@@ -229,10 +231,10 @@ public class AetherIIRenderers {
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
     }
 
-    private static List<Map.Entry<ModelResourceLocation, BakedModel>> getModels(Map<ModelResourceLocation, BakedModel> originalModels, List<DeferredBlock<? extends Block>> blocks) {
-        List<Map.Entry<ModelResourceLocation, BakedModel>> models = new ArrayList<>();
-        for (Map.Entry<ModelResourceLocation, BakedModel> model : originalModels.entrySet()) {
-            if (model.getKey().id().getNamespace().equals(AetherII.MODID)) {
+    private static List<Map.Entry<BlockState, BlockStateModel>> getModels(Map<BlockState, BlockStateModel> originalModels, List<DeferredBlock<? extends Block>> blocks) {
+        List<Map.Entry<BlockState, BlockStateModel>> models = new ArrayList<>();
+        for (Map.Entry<BlockState, BlockStateModel> model : originalModels.entrySet()) {
+            if (model.g().id().getNamespace().equals(AetherII.MODID)) {
                 String path = model.getKey().id().getPath();
                 for (DeferredBlock<? extends Block> block : blocks) {
                     if (path.equals(block.getId().getPath())) {

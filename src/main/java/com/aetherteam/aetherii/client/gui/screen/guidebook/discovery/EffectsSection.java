@@ -13,6 +13,7 @@ import com.aetherteam.aetherii.network.packet.serverbound.CheckEffectsEntryPacke
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderType;
@@ -95,10 +96,10 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
             int slotX = leftPos + (x * 18);
             int slotY = topPos + (y * 18);
 
-            TextureAtlasSprite effectAtlasSprite = Minecraft.getInstance().getMobEffectTextures().get(entry.getEffect());
+            ResourceLocation location = Gui.getMobEffectSprite(entry.getEffect());
 
             if (this.isUnlocked(entry, EffectsEntry.ICON.id())) {
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, effectAtlasSprite, slotX, slotY, 16, 16);
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, slotX, slotY, 16, 16);
             } else {
                 guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, UNDISCOVERED_ENTRY_SPRITE, slotX, slotY, 16, 16);
             }
@@ -133,7 +134,7 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
             if (this.isUnlocked(entry, EffectsEntry.SLOT_SUBTITLE.id()) && entry.getSlotSubtitle().isPresent()) {
                 components.add(Component.translatable(entry.getSlotSubtitle().get()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
             }
-            guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, components, (int) (mouseX - leftPagePos), (int) (mouseY - topPos));
+            guiGraphics.setComponentTooltipForNextFrame(Minecraft.getInstance().font, components, (int) (mouseX - leftPagePos), (int) (mouseY - topPos));
         }
     }
 
@@ -147,9 +148,9 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
             }
 
             if (this.isUnlocked(this.getSelectedEntry(), EffectsEntry.EFFECT.id())) {
-                TextureAtlasSprite effectAtlasSprite = Minecraft.getInstance().getMobEffectTextures().get(entry.getEffect());
+                ResourceLocation location = Gui.getMobEffectSprite(entry.getEffect());
 
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, effectAtlasSprite, 72, 30, 32, 32);
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, 72, 30, 32, 32);
             }
 
             List<Holder<Item>> items = entry.getItems();

@@ -56,6 +56,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -142,7 +143,7 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
             int destroyProgress = progress.getProgress();
             level.destroyBlockProgress(belowPos.hashCode(), belowPos, destroyProgress + speed);
             if (destroyProgress >= 9) {
-                PacketDistributor.sendToServer(new AlkahestBreakBlockPacket(belowPos, drop));
+                ClientPacketDistributor.sendToServer(new AlkahestBreakBlockPacket(belowPos, drop));
             }
         } else {
             level.destroyBlockProgress(belowPos.hashCode(), belowPos,  speed);

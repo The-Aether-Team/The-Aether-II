@@ -11,7 +11,6 @@ import com.aetherteam.aetherii.item.miscellaneous.CurrencyItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.SlotAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.ClearItemPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.HeldCurrencyPacket;
-import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import io.wispforest.accessories.networking.AccessoriesNetworking;
 import io.wispforest.accessories.networking.server.NukeAccessories;
 import net.minecraft.client.Minecraft;
@@ -22,6 +21,7 @@ import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -34,6 +34,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Quaternionf;
 import org.joml.Vector2i;
@@ -101,7 +102,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         }
 
         if (this.destroyItemSlot != null && this.isHovering(this.destroyItemSlot.x, this.destroyItemSlot.y, 16, 16, mouseX, mouseY)) {
-            guiGraphics.renderTooltip(this.font, Component.translatable("inventory.binSlot"), mouseX, mouseY);
+            guiGraphics.setTooltipForNextFrame(this.font, Component.translatable("inventory.binSlot"), mouseX, mouseY);
         }
 
         if (this.currencySlot == null && this.getMenu().getMoa() == null) {
@@ -116,7 +117,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                         List<Component> componentList = new ArrayList<>();
                         componentList.add(Component.translatable("gui.aether_ii.guidebook.equipment.pouch.tooltip.title"));
                         componentList.add(Component.translatable("gui.aether_ii.guidebook.equipment.pouch.tooltip.description", data.getAmount()).withStyle(AetherIIItems.CURRENCY_NAME_COLOR));
-                        guiGraphics.renderComponentTooltip(this.font, componentList, mouseX, mouseY);
+                        guiGraphics.setComponentTooltipForNextFrame(this.font, componentList, mouseX, mouseY);
                     }
                 }
             } else {
@@ -271,7 +272,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                     } else {
                         if (slot == this.destroyItemSlot && this.destroyItemSlot != null) {
                             this.getMenu().setCarried(ItemStack.EMPTY);
-                            PacketDistributor.sendToServer(new ClearItemPacket());
+                            ClientPacketDistributor.sendToServer(new ClearItemPacket());
                         }
                     }
                 }
@@ -300,7 +301,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                                     stack.setCount(amount);
                                     data.setSynched(Minecraft.getInstance().player.getId(), INBTSynchable.Direction.SERVER, "setAmount", data.getAmount() - amount);
                                     this.getMenu().setCarried(stack.copy());
-                                    PacketDistributor.sendToServer(new HeldCurrencyPacket(stack.copy()));
+                                    ClientPacketDistributor.sendToServer(new HeldCurrencyPacket(stack.copy()));
                                 }
                             }
                         } else if (this.getMenu().getCarried().getItem() instanceof CurrencyItem currencyItem) {
@@ -315,7 +316,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                                 stack.shrink(amount);
                                 data.setSynched(Minecraft.getInstance().player.getId(), INBTSynchable.Direction.SERVER, "setAmount", data.getAmount() + amount);
                                 this.getMenu().setCarried(stack);
-                                PacketDistributor.sendToServer(new HeldCurrencyPacket(stack));
+                                ClientPacketDistributor.sendToServer(new HeldCurrencyPacket(stack));
                             }
                         }
                     }

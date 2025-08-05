@@ -18,9 +18,11 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class HealingStoneItem extends Item {
     public static final ResourceLocation BONUS_ABSORPTION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "healing_stone.bonus_health");
@@ -81,7 +83,7 @@ public class HealingStoneItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag flag) {
         Integer charges = stack.get(AetherIIDataComponents.HEALING_STONE_CHARGES);
         tooltipComponents.accept(Component.translatable("aether_ii.tooltip.item.healing_stone.charges", charges).withStyle(ChatFormatting.GRAY));
     }

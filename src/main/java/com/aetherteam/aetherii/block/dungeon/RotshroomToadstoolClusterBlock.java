@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.block.dungeon;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
@@ -12,17 +11,11 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 public class RotshroomToadstoolClusterBlock extends RotshroomClusterBlock {
-    public static final MapCodec<RotshroomToadstoolClusterBlock> CODEC = simpleCodec(RotshroomToadstoolClusterBlock::new);
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;;
 
     public RotshroomToadstoolClusterBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-    }
-
-    @Override
-    protected MapCodec<? extends RotshroomToadstoolClusterBlock> codec() {
-        return CODEC;
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext context) {
