@@ -41,14 +41,14 @@ public class EffectsSystemAttachment {
     }
 
     public void postTickUpdate(LivingEntity livingEntity) {
-        this.activeBuildups.values().removeIf(instance -> !instance.tick(this.entity));
+        this.activeBuildups.values().removeIf(instance -> !instance.tick(livingEntity));
     }
 
-    public void addBuildup(EffectBuildupPresets.Preset buildup, int amount) {
+    public void addBuildup(LivingEntity livingEntity, EffectBuildupPresets.Preset buildup, int amount) {
         Holder<MobEffect> effect = buildup.type();
-        if (!this.entity.hasEffect(effect)) {
+        if (!livingEntity.hasEffect(effect)) {
             double modifiedAmount = amount;
-            for (Map.Entry<Holder<Attribute>, AttributeInstance> attributeEntries : ((AttributeMapAccessor) this.entity.getAttributes()).aether_ii$getAttributes().entrySet()) {
+            for (Map.Entry<Holder<Attribute>, AttributeInstance> attributeEntries : ((AttributeMapAccessor) livingEntity.getAttributes()).aether_ii$getAttributes().entrySet()) {
                 if (attributeEntries.getKey().value() instanceof EffectResistanceAttribute effectResistanceAttribute && effectResistanceAttribute.getEffect().is(effect)) {
                     modifiedAmount -= modifiedAmount * attributeEntries.getValue().getValue();
                 }

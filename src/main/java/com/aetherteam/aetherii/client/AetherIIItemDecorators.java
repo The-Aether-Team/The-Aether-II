@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Holder;
 import net.minecraft.util.Mth;
@@ -23,8 +24,8 @@ public class AetherIIItemDecorators {
 
             int j = xOffset + 2;
             int k = yOffset + 13;
-            guiGraphics.fill(RenderType.guiOverlay(), j, k, j + 13, k + 2, -16777216);
-            guiGraphics.fill(RenderType.guiOverlay(), j, k, j + l, k + 1, i | 0xFF000000);
+            guiGraphics.fill(RenderPipelines.GUI, j, k, j + 13, k + 2, -16777216);
+            guiGraphics.fill(RenderPipelines.GUI, j, k, j + l, k + 1, i | 0xFF000000);
         }
         guiGraphics.pose().popPose();
         return true;

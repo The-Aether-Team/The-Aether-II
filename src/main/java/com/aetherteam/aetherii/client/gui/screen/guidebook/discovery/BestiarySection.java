@@ -188,7 +188,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
             boolean isSelected = this.selectedEntry != null && entry.getEntityType() == this.selectedEntry.getEntityType();
 
             if (isHovered || isSelected) {
-                guiGraphics.fillGradient(RenderType.guiOverlay(), slotX, slotY, slotX + 16, slotY + 16, -2130706433, -2130706433, 0);
+                guiGraphics.fillGradient(slotX, slotY, slotX + 16, slotY + 16, -2130706433, -2130706433);
             }
 
             if (!this.isViewed(entry)) {

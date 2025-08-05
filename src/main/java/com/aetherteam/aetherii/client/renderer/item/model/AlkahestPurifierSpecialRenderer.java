@@ -13,6 +13,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import org.joml.Vector3f;
+
+import java.util.Set;
 
 public class AlkahestPurifierSpecialRenderer implements NoDataSpecialModelRenderer {
     private final AlkahestPurifierRenderer renderer;
@@ -25,6 +28,11 @@ public class AlkahestPurifierSpecialRenderer implements NoDataSpecialModelRender
 
     public void render(ItemDisplayContext context, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, boolean partialTick) {
         this.renderer.render(poseStack, buffer, packedLight, packedOverlay, Direction.SOUTH.toYRot(), 0, this.openness);
+    }
+
+    @Override
+    public void getExtents(Set<Vector3f> set) {
+        //todo
     }
 
     @OnlyIn(Dist.CLIENT)

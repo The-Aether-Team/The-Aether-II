@@ -53,15 +53,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
 public class Moa extends MountableAnimal implements ContainerListener, HasCustomInventoryScreen {
-    private static final EntityDataAccessor<Optional<UUID>> DATA_MOA_UUID_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
+    private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_MOA_UUID_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
     private static final EntityDataAccessor<String> DATA_FEATHER_SHAPE_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<String> DATA_KERATIN_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<String> DATA_EYE_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
@@ -71,11 +74,11 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     private static final EntityDataAccessor<Integer> DATA_AMOUNT_FED_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_PLAYER_GROWN_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
 
-    private static final EntityDataAccessor<Optional<UUID>> DATA_RIDER_UUID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
-    private static final EntityDataAccessor<Optional<UUID>> DATA_LAST_RIDER_UUID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
+    private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_RIDER_UUID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
+    private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_LAST_RIDER_UUID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
     private static final EntityDataAccessor<Integer> DATA_REMAINING_JUMPS_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_SITTING_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Optional<UUID>> DATA_FOLLOWING_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
+    private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_FOLLOWING_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
 
     private static final EntityDataAccessor<ItemStack> DATA_SADDLE_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<ItemStack> DATA_SADDLEBAG_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
@@ -271,7 +274,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
 
     @Override
     protected void updateFallFlying() {
-        this.checkSlowFallDistance();
+        this.checkFallDistanceAccumulation();
         if (!this.canGlide()) {
             this.setSharedFlag(7, false);
         }
@@ -390,7 +393,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         // Handles rider tracking.
         if (this.getControllingPassenger() instanceof Player player) {
             if (this.getRider() == null) {
-                this.setRider(player.getUUID());
+                this.setRider(new EntityReference<>(player));
             }
 //            if (!this.isEntityOnGround()) {
 //                if (!this.isFallFlying()) {
@@ -428,7 +431,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 this.flap = Mth.clamp(this.flap - 0.2F, 0, 1F);
             }
         }
-        this.checkSlowFallDistance(); // Resets the Moa's fall distance.
+        this.checkFallDistanceAccumulation(); // Resets the Moa's fall distance.
     }
 
     public float getFlyAmount(float pPartialTicks) {
@@ -444,8 +447,8 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     protected void addPassenger(Entity passenger) {
         if (passenger instanceof Player player) {
             this.generateMoaUUID();
-            if (this.getLastRider() == null || this.getLastRider() != player.getUUID()) {
-                this.setLastRider(player.getUUID());
+            if (this.getLastRider() == null || !this.getLastRider().matches(player)) {
+                this.setLastRider(new EntityReference<>(player));
             }
         }
         super.addPassenger(passenger);
@@ -627,25 +630,25 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      */
     public void generateMoaUUID() {
         if (this.getMoaUUID() == null) {
-            this.setMoaUUID(UUID.randomUUID());
+            this.setMoaUUID(new EntityReference<>(this));
         }
     }
 
     /**
      * @return The {@link UUID} for this Moa.
      */
-    @javax.annotation.Nullable
-    public UUID getMoaUUID() {
+    @Nullable
+    public EntityReference<LivingEntity> getMoaUUID() {
         return this.getEntityData().get(DATA_MOA_UUID_ID).orElse(null);
     }
 
     /**
      * Sets this Moa's {@link UUID}.
      *
-     * @param uuid THe {@link UUID}.
+     * @param reference THe {@link UUID}.
      */
-    private void setMoaUUID(@javax.annotation.Nullable UUID uuid) {
-        this.getEntityData().set(DATA_MOA_UUID_ID, Optional.ofNullable(uuid));
+    private void setMoaUUID(@Nullable EntityReference<LivingEntity> reference) {
+        this.getEntityData().set(DATA_MOA_UUID_ID, Optional.ofNullable(reference));
     }
 
     public String getFeatherShape() {
@@ -684,7 +687,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      * @return The {@link UUID} of the current rider of this Moa.
      */
     @javax.annotation.Nullable
-    public UUID getRider() {
+    public EntityReference<LivingEntity> getRider() {
         return this.getEntityData().get(DATA_RIDER_UUID).orElse(null);
     }
 
@@ -693,7 +696,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      *
      * @param uuid The {@link UUID}.
      */
-    public void setRider(@javax.annotation.Nullable UUID uuid) {
+    public void setRider(@javax.annotation.Nullable EntityReference<LivingEntity> uuid) {
         this.getEntityData().set(DATA_RIDER_UUID, Optional.ofNullable(uuid));
     }
 
@@ -701,7 +704,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      * @return The {@link UUID} of the last rider of this Moa (including the current rider).
      */
     @javax.annotation.Nullable
-    public UUID getLastRider() {
+    public EntityReference<LivingEntity> getLastRider() {
         return this.getEntityData().get(DATA_LAST_RIDER_UUID).orElse(null);
     }
 
@@ -710,7 +713,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      *
      * @param uuid The {@link UUID}.
      */
-    public void setLastRider(@javax.annotation.Nullable UUID uuid) {
+    public void setLastRider(@javax.annotation.Nullable EntityReference<LivingEntity> uuid) {
         this.getEntityData().set(DATA_LAST_RIDER_UUID, Optional.ofNullable(uuid));
     }
 
@@ -798,7 +801,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      * @return Whether this Moa is following the player, as a {@link Boolean}.
      */
     @javax.annotation.Nullable
-    public UUID getFollowing() {
+    public EntityReference<LivingEntity> getFollowing() {
         return this.getEntityData().get(DATA_FOLLOWING_ID).orElse(null);
     }
 
@@ -807,7 +810,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      *
      * @param uuid The {@link Boolean} value.
      */
-    public void setFollowing(@javax.annotation.Nullable UUID uuid) {
+    public void setFollowing(@javax.annotation.Nullable EntityReference<LivingEntity> uuid) {
         this.getEntityData().set(DATA_FOLLOWING_ID, Optional.ofNullable(uuid));
     }
 
@@ -1080,7 +1083,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
+    public void addAdditionalSaveData(ValueOutput tag) {
         super.addAdditionalSaveData(tag);
         if (this.getMoaUUID() != null) {
             tag.putUUID("MoaUUID", this.getMoaUUID());
@@ -1125,7 +1128,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
+    public void readAdditionalSaveData(ValueInput tag) {
         super.readAdditionalSaveData(tag);
         if (tag.contains("MoaUUID")) {
             this.setMoaUUID(tag.getUUID("MoaUUID"));

@@ -63,7 +63,7 @@ public class SkephidWebbingBall extends ThrowableProjectile implements ItemSuppl
                     playerAccessor.callHurtCurrentlyUsedShield(3.0F);
                 }
             } else {
-                livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.WEBBED, 350);
+                livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, EffectBuildupPresets.WEBBED, 350);
             }
         }
     }

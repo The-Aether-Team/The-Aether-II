@@ -1,13 +1,17 @@
 package com.aetherteam.aetherii.entity;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.EntityAccessor;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
+import net.minecraft.world.level.storage.TagValueOutput;
 
 import java.util.Optional;
 
@@ -44,9 +48,11 @@ public final class EntityUtil {
 
     @SuppressWarnings("unchecked")
     public static <T extends Entity> T clone(final T entity) {
-        CompoundTag compoundTag = new CompoundTag();
-        entity.save(compoundTag);
-        final Optional<T> newEnt = (Optional<T>) EntityType.create(compoundTag, entity.level(), EntitySpawnReason.EVENT);
+        try (ProblemReporter.ScopedCollector problemreporter$scopedcollector = new ProblemReporter.ScopedCollector(entity.problemPath(), AetherII.LOGGER)) {
+            TagValueOutput tag = TagValueOutput.createWithContext(problemreporter$scopedcollector, entity.registryAccess());;
+            entity.save(tag);
+            final Optional<T> newEnt = (Optional<T>) EntityType.create(tag, entity.level(), EntitySpawnReason.EVENT);
+        }
 
         return newEnt.orElse(null);
     }

@@ -80,8 +80,8 @@ public abstract class DiscoverySection<S extends GuidebookEntry, T extends Mutab
         guiGraphics.renderItem(stack, x, y);
         guiGraphics.renderItemDecorations(font, stack, x, y);
         if (mouseYDiff <= 15 && mouseYDiff >= 0 && mouseXDiff <= 15 && mouseXDiff >= 0) {
-            guiGraphics.fillGradient(RenderType.guiOverlay(), x, y, x + 16, y + 16, -2130706433, -2130706433, 0);
-            guiGraphics.renderComponentTooltip(font, tooltip, (int) (mouseX - rightPagePos), (int) (mouseY - topPos));
+            guiGraphics.fillGradient(x, y, x + 16, y + 16, -2130706433, -2130706433);
+            guiGraphics.setComponentTooltipForNextFrame( font, tooltip, (int) (mouseX - rightPagePos), (int) (mouseY - topPos));
         }
     }
 

@@ -139,11 +139,6 @@ public class FlyingCow extends WingedAnimal {
     }
 
     @Override
-    public boolean isSaddleable() {
-        return false;
-    }
-
-    @Override
     protected void updateWalkAnimation(float partialTick) {
         float multiplier = 4.0F;
         if (this.getControllingPassenger() != null) {

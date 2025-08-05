@@ -123,7 +123,7 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
 
     @Override
     public List<RecipeDisplay> display() {
-        SlotDisplay resultDisplay = new SlotDisplay.Composite(this.results().unwrap().stream().map((wrapper) -> new SlotDisplay.ItemStackSlotDisplay(wrapper.data())).collect(Collectors.toUnmodifiableList()));
+        SlotDisplay resultDisplay = new SlotDisplay.Composite(this.results().unwrap().stream().map((wrapper) -> new SlotDisplay.ItemStackSlotDisplay(wrapper.value())).collect(Collectors.toUnmodifiableList()));
         HolderSet<Item> ingredients = this.ingredient().getValues();
         Holder<Item> item = ingredients.get(0);
         if (item.is(AetherIITags.Items.IRRADIATED_ITEM)) {
@@ -138,7 +138,7 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
                 this.ingredient().display(),
                 new SlotDisplay.ItemSlotDisplay(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER),
                 resultDisplay,
-                new SlotDisplay.Composite(this.byproducts().unwrap().stream().map((wrapper) -> new SlotDisplay.ItemStackSlotDisplay(wrapper.data())).collect(Collectors.toUnmodifiableList())),
+                new SlotDisplay.Composite(this.byproducts().unwrap().stream().map((wrapper) -> new SlotDisplay.ItemStackSlotDisplay(wrapper.value())).collect(Collectors.toUnmodifiableList())),
                 new SlotDisplay.ItemSlotDisplay(AetherIIBlocks.ALKAHEST_PURIFIER.asItem()),
                 this.alkahestUsage,
                 this.processingTime,
@@ -163,8 +163,8 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
                     Codec.STRING.optionalFieldOf("group", "").forGetter(AlkahestPurificationRecipe::group),
                     AlkahestPurifierBookCategory.CODEC.fieldOf("category").orElse(AlkahestPurifierBookCategory.ITEMS).forGetter(AlkahestPurificationRecipe::category),
                     Ingredient.CODEC.fieldOf("ingredient").forGetter(AlkahestPurificationRecipe::ingredient),
-                    WeightedList.wrappedCodec(ItemStack.CODEC).fieldOf("results").forGetter(AlkahestPurificationRecipe::results),
-                    WeightedList.wrappedCodec(ItemStack.CODEC).fieldOf("byproducts").forGetter(AlkahestPurificationRecipe::byproducts),
+                    WeightedList.codec(ItemStack.CODEC).fieldOf("results").forGetter(AlkahestPurificationRecipe::results),
+                    WeightedList.codec(ItemStack.CODEC).fieldOf("byproducts").forGetter(AlkahestPurificationRecipe::byproducts),
                     Codec.FLOAT.fieldOf("experience").orElse(0.0F).forGetter(AlkahestPurificationRecipe::experience),
                     Codec.INT.fieldOf("alkahest_usage").orElse(1).forGetter(AlkahestPurificationRecipe::alkahestUsage),
                     Codec.INT.fieldOf("processing_time").orElse(200).forGetter(AlkahestPurificationRecipe::processingTime)
@@ -208,9 +208,9 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
             buffer.writeUtf(recipe.group);
             buffer.writeEnum(recipe.category());
             Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.ingredient);
-            Map<ItemStack, Integer> resultsMap = recipe.results.unwrap().stream().collect(Collectors.toMap(Weighted.Wrapper::data, (e) -> e.getWeight().asInt()));
+            Map<ItemStack, Integer> resultsMap = recipe.results.unwrap().stream().collect(Collectors.toMap(Weighted::value, Weighted::weight));
             buffer.writeMap(resultsMap, (innerBuf, itemStack) -> ItemStack.STREAM_CODEC.encode(buffer, itemStack), FriendlyByteBuf::writeInt);
-            Map<ItemStack, Integer> byproductsMap = recipe.results.unwrap().stream().collect(Collectors.toMap(Weighted.Wrapper::data, (e) -> e.getWeight().asInt()));
+            Map<ItemStack, Integer> byproductsMap = recipe.results.unwrap().stream().collect(Collectors.toMap(Weighted::value, Weighted::weight));
             buffer.writeMap(byproductsMap, (innerBuf, itemStack) -> ItemStack.STREAM_CODEC.encode(buffer, itemStack), FriendlyByteBuf::writeInt);
             buffer.writeFloat(recipe.experience());
             buffer.writeVarInt(recipe.alkahestUsage());

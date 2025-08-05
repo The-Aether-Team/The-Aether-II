@@ -122,11 +122,6 @@ public class Phyg extends WingedAnimal {
         return AetherIIEntityTypes.PHYG.get().create(level, EntitySpawnReason.BREEDING);
     }
 
-    @Override
-    public boolean isSaddleable() {
-        return false;
-    }
-
     /**
      * [CODE COPY] - {@link Pig#getLeashOffset()}.
      */

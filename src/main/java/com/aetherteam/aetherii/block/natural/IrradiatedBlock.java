@@ -22,7 +22,7 @@ public class IrradiatedBlock extends Block {
         if (level.isClientSide()) {
             ParticleUtils.spawnParticlesOnBlockFaces(level, pos, AetherIIParticleTypes.IRRADIATION.get(), UniformInt.of(50, 100));
         }
-        player.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.AMBROSIUM_POISONING, 350);
+        player.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(player, EffectBuildupPresets.AMBROSIUM_POISONING, 350);
         return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
     }
 }

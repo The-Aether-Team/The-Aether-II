@@ -195,7 +195,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                             }
                             if (!secondary.isEmpty()) {
                                 guiGraphics.renderFakeItem(secondary, offsetX, y + 18);
-                                guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), offsetX, y + 18, offsetX + 16, (y + 18) + 16, 822083583);
+//                                guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), offsetX, y + 18, offsetX + 16, (y + 18) + 16, 822083583); //todo
                                 guiGraphics.renderItemDecorations(this.font, secondary, offsetX, y + 18);
                             }
                         } else {
