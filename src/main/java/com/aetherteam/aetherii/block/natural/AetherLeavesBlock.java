@@ -5,15 +5,19 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.BushBlockAccessor;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.TriState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
@@ -29,26 +33,27 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
-import net.neoforged.neoforge.common.Tags;
-
-import java.util.Locale;
-import java.util.function.BiConsumer;
-import java.util.function.Supplier;
 
 public class AetherLeavesBlock extends LeavesBlock {
+    public static final MapCodec<AetherLeavesBlock> CODEC = RecordCodecBuilder.mapCodec((p_399854_) -> p_399854_.group(propertiesCodec(), ParticleTypes.CODEC.fieldOf("leaf_particle").forGetter((p_399817_) -> p_399817_.leavesParticle), BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("leaves_pile").forGetter(aetherLeavesBlock -> aetherLeavesBlock.leavesPile)).apply(p_399854_, AetherLeavesBlock::new));
+
     public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
     public static final EnumProperty<AetherIIBlockStateProperties.Mossy> MOSSY = AetherIIBlockStateProperties.MOSSY;
-    private final Supplier<SimpleParticleType> leavesParticle;
-    private final Supplier<Block> leavesPile;
+    private final ParticleOptions leavesParticle;
+    private final Holder<Block> leavesPile;
 
-    public AetherLeavesBlock(Properties properties, Supplier<SimpleParticleType> leavesParticle, Supplier<Block> leavesPile) {
-        super(properties);
+    public AetherLeavesBlock(Properties properties, ParticleOptions leavesParticle, Holder<Block> leavesPile) {
+        super(0.0F, properties);
         this.leavesParticle = leavesParticle;
         this.leavesPile = leavesPile;
         this.registerDefaultState(this.stateDefinition.any().setValue(DISTANCE, 7).setValue(PERSISTENT, Boolean.FALSE).setValue(WATERLOGGED, Boolean.FALSE).setValue(SNOWY, Boolean.FALSE).setValue(MOSSY, AetherIIBlockStateProperties.Mossy.NONE));
+    }
+
+    @Override
+    public MapCodec<? extends LeavesBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -67,7 +72,7 @@ public class AetherLeavesBlock extends LeavesBlock {
                     BlockState mutableState = level.getBlockState(mutablePos);
                     BlockPos abovePos = mutablePos.above();
                     BlockState aboveState = level.getBlockState(abovePos);
-                    BlockState pileState = this.leavesPile.get().defaultBlockState();
+                    BlockState pileState = this.leavesPile.value().defaultBlockState();
                     if (Block.canSupportCenter(level, mutablePos, Direction.UP) && aboveState.isAir() && pileState.canSurvive(level, abovePos)) {
                         level.setBlock(mutablePos.above(), pileState, 2);
                         break;
@@ -120,6 +125,11 @@ public class AetherLeavesBlock extends LeavesBlock {
     }
 
     @Override
+    protected void spawnFallingLeavesParticle(Level level, BlockPos blockPos, RandomSource randomSource) {
+
+    }
+
+    @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
         super.stepOn(level, pos, state, entity);
         if (!entity.isCrouching() && entity.getX() != entity.xOld && entity.getZ() != entity.zOld) {
@@ -133,7 +143,7 @@ public class AetherLeavesBlock extends LeavesBlock {
         BlockPos belowPos = pos.below();
         BlockState belowState = level.getBlockState(belowPos);
         if (!isFaceFull(belowState.getCollisionShape(level, belowPos), Direction.UP)) {
-            ParticleUtils.spawnParticleBelow(level, pos, random, this.leavesParticle.get());
+            ParticleUtils.spawnParticleBelow(level, pos, random, this.leavesParticle);
         }
     }
 
