@@ -57,12 +57,12 @@ public interface Guidebook {
         this.renderGuidebookBacking(screen, guiGraphics, mouseX, mouseY, partialTick);
 
         guiGraphics.pose().pushMatrix();
-        guiGraphics.pose().translate((float) leftPagePos, (float) topPos, 0.0F);
+        guiGraphics.pose().translate((float) leftPagePos, (float) topPos);
         this.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.pose().popMatrix();
 
         guiGraphics.pose().pushMatrix();
-        guiGraphics.pose().translate((float) rightPagePos, (float) topPos, 0.0F);
+        guiGraphics.pose().translate((float) rightPagePos, (float) topPos);
         this.renderGuidebookRightPage(screen, guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.pose().popMatrix();
     }

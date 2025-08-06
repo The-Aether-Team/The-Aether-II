@@ -9,8 +9,10 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.TagValueInput;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record SwetSyncPacket(int entityID, CompoundTag compoundTag) implements CustomPacketPayload {
@@ -32,7 +34,10 @@ public record SwetSyncPacket(int entityID, CompoundTag compoundTag) implements C
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             Level level = Minecraft.getInstance().player.level();
             if (level.getEntity(payload.entityID()) instanceof Player player) {
-                player.getData(AetherIIDataAttachments.SWET_LATCH.get()).deserializeNBT(player.level().registryAccess(), payload.compoundTag());
+                try (ProblemReporter.ScopedCollector problemreporter$scopedcollector = new ProblemReporter.ScopedCollector(player.problemPath(), AetherII.LOGGER)) {
+
+                    player.getData(AetherIIDataAttachments.SWET_LATCH.get()).deserialize(TagValueInput.create(problemreporter$scopedcollector, player.level().registryAccess(), payload.compoundTag()));
+                }
             }
         }
     }

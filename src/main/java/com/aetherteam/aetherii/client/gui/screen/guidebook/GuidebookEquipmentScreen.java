@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.client.gui.screen.guidebook;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.gui.component.guidebook.GuidebookTab;
-import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
 import com.aetherteam.aetherii.inventory.menu.slot.SaddlebagSlot;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -133,11 +132,11 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                 String text = data.getAmount() > 99 ? "99₊" : String.valueOf(data.getAmount());
                 int x = slot.x;
                 int y = slot.y;
-                guiGraphics.pose().pushPose();
-                guiGraphics.pose().translate(0.0F, 0.0F, 100.0F);
+                guiGraphics.pose().pushMatrix();
+                guiGraphics.pose().translate(0.0F, 0.0F);
                 guiGraphics.renderFakeItem(AetherIIItems.GLINT_COIN.toStack(), x, y);
                 guiGraphics.renderItemDecorations(this.font, AetherIIItems.GLINT_COIN.toStack(), x, y, text);
-                guiGraphics.pose().popPose();
+                guiGraphics.pose().popMatrix();
             }
         }
         super.renderSlot(guiGraphics, slot);
@@ -158,15 +157,15 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         this.renderEntityInInventoryFollowingMouseRotated(guiGraphics, scissorStart, size, scissorStart, scissorEnd, mouseX, mouseY, 0);
         this.renderEntityInInventoryFollowingMouseRotated(guiGraphics, new Vector2i(scissorStart).add((int) (size.x / 1.5), 0), size, scissorStart, scissorEnd, mouseX, mouseY, 180);
 
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(leftPos, topPos, 0.0F);
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(leftPos, topPos);
         for (Slot slot : this.menu.slots) {
             if (slot instanceof SaddlebagSlot saddlebagSlot && saddlebagSlot.isActive()) {
                 ((SlotAccessor) slot).aether$setX(saddlebagSlot.originalX + calculateSlotOffset());
                 guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.SLOT_SPRITE, saddlebagSlot.x - 1, saddlebagSlot.y - 1, 18, 18);
             }
         }
-        guiGraphics.pose().popPose();
+        guiGraphics.pose().popMatrix();
     }
 
     private int calculateSlotOffset() {
@@ -225,7 +224,6 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         }
         float f = (float) (pos.x + pos.x + size.x) / 2.0F;
         float g = (float) (pos.y + pos.y + size.y) / 2.0F;
-        guiGraphics.enableScissor(scissorStart.x, scissorStart.y, scissorEnd.x, scissorEnd.y);
         float h = (float) Math.atan(((scissorStart.x + scissorStart.x + size.x) / 2.0F - mouseX) / 40.0F);
         float i = (float) Math.atan(((scissorStart.y + scissorStart.y + size.y) / 2.0F - mouseY) / 40.0F);
         Quaternionf quaternionf = new Quaternionf().rotateZ(Mth.PI).rotateY(rotation * Mth.DEG_TO_RAD);
@@ -242,7 +240,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         entity.yHeadRot = entity.getYRot();
         entity.yHeadRotO = entity.getYRot();
         Vector3f vector3f = new Vector3f(0.0F, entity.getBbHeight() / 2.0F + yOffset, 0.0F);
-        InventoryScreen.renderEntityInInventory(guiGraphics, f, g, scale, vector3f, quaternionf, quaternionf2, entity);
+        InventoryScreen.renderEntityInInventory(guiGraphics, scissorStart.x, scissorStart.y, scissorEnd.x, scissorEnd.y, scale, vector3f, quaternionf, quaternionf2, entity);
         entity.yBodyRot = j;
         entity.setYRot(k);
         entity.setXRot(l);
@@ -295,7 +293,8 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                                 }
                                 if (amount > 0) {
                                     stack.setCount(amount);
-                                    data.setSynched(Minecraft.getInstance().player.getId(), INBTSynchable.Direction.SERVER, "setAmount", data.getAmount() - amount);
+                                    Minecraft.getInstance().player.syncData(AetherIIDataAttachments.CURRENCY);
+                                    //data.setSynched(Minecraft.getInstance().player.getId(), INBTSynchable.Direction.SERVER, "setAmount", data.getAmount() - amount);
                                     this.getMenu().setCarried(stack.copy());
                                     ClientPacketDistributor.sendToServer(new HeldCurrencyPacket(stack.copy()));
                                 }
@@ -310,7 +309,8 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                             }
                             if (amount > 0) {
                                 stack.shrink(amount);
-                                data.setSynched(Minecraft.getInstance().player.getId(), INBTSynchable.Direction.SERVER, "setAmount", data.getAmount() + amount);
+                                Minecraft.getInstance().player.syncData(AetherIIDataAttachments.CURRENCY);
+                                //data.setSynched(Minecraft.getInstance().player.getId(), INBTSynchable.Direction.SERVER, "setAmount", data.getAmount() + amount);
                                 this.getMenu().setCarried(stack);
                                 ClientPacketDistributor.sendToServer(new HeldCurrencyPacket(stack));
                             }

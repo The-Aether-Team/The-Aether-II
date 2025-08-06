@@ -21,7 +21,7 @@ import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
 import com.aetherteam.nitrogen.event.listeners.TooltipListeners;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -43,8 +43,8 @@ public class AetherIIClient {
             AetherIIAtlases.registerSkyrootChestAtlases();
             registerTooltipOverrides();
 
-            ItemBlockRenderTypes.setRenderLayer(AetherIIFluids.FLOWING_ALKAHEST.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(AetherIIFluids.ALKAHEST.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(AetherIIFluids.FLOWING_ALKAHEST.get(), ChunkSectionLayer.TRANSLUCENT);
+            ItemBlockRenderTypes.setRenderLayer(AetherIIFluids.ALKAHEST.get(), ChunkSectionLayer.TRANSLUCENT);
         });
     }
 
