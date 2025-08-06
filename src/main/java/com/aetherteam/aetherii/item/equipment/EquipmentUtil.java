@@ -4,6 +4,8 @@ import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -32,7 +34,12 @@ public final class EquipmentUtil {
 
     public static List<ItemStack> getEquipment(LivingEntity entity) {
         List<ItemStack> equipment = new ArrayList<>();
-        entity.getArmorSlots().forEach(equipment::add);
+        for (EquipmentSlot equipmentSlot : EquipmentSlotGroup.ARMOR) {
+            if (equipmentSlot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR) {
+                ItemStack armor = entity.getItemBySlot(equipmentSlot);
+                equipment.add(armor);
+            }
+        }
         AccessoryUtil.getFirst(entity, AccessoryContainer.SlotType.HANDWEAR).ifPresent(equipment::add);
         return equipment;
     }

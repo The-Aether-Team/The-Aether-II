@@ -55,6 +55,11 @@ public class Overlaid implements SpriteSource {
     }
 
     @Override
+    public MapCodec<? extends SpriteSource> codec() {
+        return CODEC;
+    }
+
+    @Override
     public SpriteSourceType type() {
         return AetherIISpriteSourceTypes.OVERLAID;
     }

@@ -71,7 +71,7 @@ public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity, H
             if (renderState.blockEntityDummy != null) {
                 renderState.blockEntityDummy.setLevel(floatingBlock.level());
                 if (floatingBlock.getBlockEntityData() != null) {
-                    renderState.blockEntityDummy.loadWithComponents(floatingBlock.getBlockEntityData(), floatingBlock.registryAccess());
+                    renderState.blockEntityDummy.loadWithComponents(floatingBlock.getBlockEntityData());
                 }
             }
         } else {
