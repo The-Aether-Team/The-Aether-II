@@ -48,11 +48,12 @@ public class HoveringBlockEntity extends Entity {
     protected boolean launched;
     protected int launchDuration;
     protected Vec3 targetSettlePosition;
-    protected int lerpSteps;
+
+    /*protected int lerpSteps;
     protected double lerpX;
     protected double lerpY;
     protected double lerpZ;
-
+*/
     public HoveringBlockEntity(EntityType<? extends Entity> entityType, Level level) {
         super(entityType, level);
     }
@@ -106,12 +107,12 @@ public class HoveringBlockEntity extends Entity {
             this.setDeltaMovement(this.getDeltaMovement().scale(0.98));
         }
 
-        if (!this.level().isClientSide()) {
+        /*if (!this.level().isClientSide()) {
             if (this.lerpSteps > 0) {
                 this.lerpPositionAndRotationStep(this.lerpSteps, this.lerpX, this.lerpY, this.lerpZ, this.getYRot(), this.getXRot());
                 --this.lerpSteps;
             }
-        }
+        }*/
 
         this.move(MoverType.SELF, this.getDeltaMovement());
 
@@ -251,12 +252,15 @@ public class HoveringBlockEntity extends Entity {
         return this.blockState;
     }
 
-    @Override
-    public void lerpTo(double pX, double pY, double pZ, float pYRot, float pXRot, int pSteps) {
+    /*@Override
+    public void lerpPositionAndRotationStep(int pSteps, double pX, double pY, double pZ, double pYRot, double pXRot) {
         this.lerpX = pX;
         this.lerpY = pY;
         this.lerpZ = pZ;
-        this.setRot(pYRot, pXRot);
+        double d0 = (double)1.0F / (double)pSteps;
+        float f = (float) Mth.rotLerp(d0, (double)this.getYRot(), pYRot);
+        float f1 = (float)Mth.lerp(d0, (double)this.getXRot(), pXRot);
+        this.setRot(f, f1);
         this.lerpSteps = pSteps;
     }
 
@@ -274,7 +278,7 @@ public class HoveringBlockEntity extends Entity {
     public double lerpTargetZ() {
         return this.lerpSteps > 0 ? this.lerpZ : this.getZ();
     }
-
+*/
     @Override
     protected void addAdditionalSaveData(ValueOutput output) {
         output.store("BlockState", BlockState.CODEC, this.blockState);

@@ -98,11 +98,13 @@ public class Edward extends MerchantEntity {
     }
 
     @Override
-    protected float tickHeadTurn(float yRot, float animStep) {
+    protected void tickHeadTurn(float yRot) {
         if (!this.isSitting()) {
-            return super.tickHeadTurn(yRot, animStep);
+            super.tickHeadTurn(yRot);
+        } else {
+            this.yBodyRotO = this.yRotO;
+            this.yBodyRot = this.getYRot();
         }
-        return this.yBodyRot;
     }
 
     public boolean isSitting() {
