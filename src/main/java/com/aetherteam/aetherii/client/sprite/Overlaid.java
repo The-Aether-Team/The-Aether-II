@@ -8,13 +8,13 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.renderer.texture.SpriteContents;
 import net.minecraft.client.renderer.texture.atlas.SpriteResourceLoader;
 import net.minecraft.client.renderer.texture.atlas.SpriteSource;
-import net.minecraft.client.renderer.texture.atlas.SpriteSourceType;
 import net.minecraft.client.renderer.texture.atlas.sources.LazyLoadedImage;
 import net.minecraft.client.resources.metadata.animation.FrameSize;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceMetadata;
+
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.List;
@@ -57,11 +57,6 @@ public class Overlaid implements SpriteSource {
     @Override
     public MapCodec<? extends SpriteSource> codec() {
         return CODEC;
-    }
-
-    @Override
-    public SpriteSourceType type() {
-        return AetherIISpriteSourceTypes.OVERLAID;
     }
 
     public record OverlaidSpriteSupplier(LazyLoadedImage baseImage, LazyLoadedImage overlayImage, ResourceLocation outputLocation) implements SpriteSource.SpriteSupplier {

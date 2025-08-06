@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.core.Holder;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.biome.Biome;
@@ -18,7 +17,7 @@ public class DimensionClientListener {
 
     public static void onRenderFog(ViewportEvent.RenderFog event) {
         Camera camera = event.getCamera();
-        FogRenderer.FogMode fogMode = event.getMode();
+        FogType fogMode = event.getType();
         float nearDistance = event.getNearPlaneDistance();
         float farDistance = event.getFarPlaneDistance();
 
@@ -26,7 +25,7 @@ public class DimensionClientListener {
             Holder<Biome> biome = clientLevel.getBiome(camera.getBlockPosition());
             if (clientLevel.effects() instanceof HighlandsSpecialEffects) {
                 FogType fluidState = camera.getFluidInCamera();
-                if (fogMode == FogRenderer.FogMode.FOG_TERRAIN && fluidState == FogType.NONE && (camera.getEntity().getEyeInFluidType() == NeoForgeMod.EMPTY_TYPE.value())) {
+                if (fogMode == FogType.NONE && fluidState == FogType.NONE && (camera.getEntity().getEyeInFluidType() == NeoForgeMod.EMPTY_TYPE.value())) {
                     if (modifiedNearDistance == null) {
                         modifiedNearDistance = nearDistance;
                     }
@@ -56,11 +55,8 @@ public class DimensionClientListener {
                     modifiedNearDistance = Mth.lerp(0.05F, modifiedNearDistance, nearDistanceGoal);
                     modifiedFarDistance = Mth.lerp(0.05F, modifiedFarDistance, farDistanceGoal);
 
-                    if (!event.isCanceled()) {
-                        event.setNearPlaneDistance(modifiedNearDistance);
-                        event.setFarPlaneDistance(modifiedFarDistance);
-                        event.setCanceled(true);
-                    }
+                    event.setNearPlaneDistance(modifiedNearDistance);
+                    event.setFarPlaneDistance(modifiedFarDistance);
                 }
             } else {
                 modifiedNearDistance = null;

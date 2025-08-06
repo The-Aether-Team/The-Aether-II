@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.attachment.player;
 
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
@@ -18,13 +19,10 @@ import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class AbilityBehaviorAttachment {
     private boolean canRefuelGlide;
@@ -79,7 +77,7 @@ public class AbilityBehaviorAttachment {
 
     public void onJoinLevel(Player player) {
         if (player.level().isClientSide() && player.isLocalPlayer()) {
-            this.setSynched(player.getId(), Direction.SERVER, "setShouldSyncBetweenClients", true);
+            player.syncData(AetherIIDataAttachments.ABILITY_BEHAVIOR);
         }
     }
 
@@ -96,7 +94,7 @@ public class AbilityBehaviorAttachment {
 
     private void syncAfterJoin(Player player) {
         if (this.shouldSyncAfterJoin) {
-            this.forceSync(player.getId(), Direction.CLIENT);
+            player.syncData(AetherIIDataAttachments.ABILITY_BEHAVIOR);
             this.shouldSyncAfterJoin = false;
         }
     }
@@ -109,7 +107,7 @@ public class AbilityBehaviorAttachment {
                     PlayerList playerList = server.getPlayerList();
                     for (ServerPlayer serverPlayer : playerList.getPlayers()) {
                         if (!serverPlayer.getUUID().equals(player.getUUID())) {
-                            this.forceSync(player.getId(), Direction.CLIENT);
+                            player.syncData(AetherIIDataAttachments.ABILITY_BEHAVIOR);
                         }
                     }
                 }

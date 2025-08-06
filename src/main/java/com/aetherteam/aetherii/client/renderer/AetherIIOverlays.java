@@ -12,8 +12,6 @@ import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.InventoryScreenAccessor;
 import com.google.common.collect.Ordering;
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.AttackIndicatorStatus;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -25,7 +23,6 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.MobEffectTextureManager;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ARGB;
@@ -114,7 +111,7 @@ public class AetherIIOverlays {
                 return;
             }
 
-            RenderSystem.enableBlend();
+            //RenderSystem.enableBlend();
             int j1 = 0;
             int k1 = 0;
 
@@ -172,7 +169,7 @@ public class AetherIIOverlays {
                 guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, i_f + 3, i1 + 3, 18, 18);
             }
 
-            RenderSystem.disableBlend();
+            //RenderSystem.disableBlend();
         }
     }
 
@@ -187,7 +184,7 @@ public class AetherIIOverlays {
                 if (options.attackIndicator().get() == AttackIndicatorStatus.CROSSHAIR) {
                     if (options.getCameraType().isFirstPerson()) {
                         if (!minecraft.getDebugOverlay().showDebugScreen() || player.isReducedDebugInfo() || options.reducedDebugInfo().get()) {
-                            RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+                            //RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
                             int k = guiGraphics.guiWidth() / 2 - 19;
                             int j = guiGraphics.guiHeight() / 2 - 5;
@@ -202,7 +199,7 @@ public class AetherIIOverlays {
                                 guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
                             }
 
-                            RenderSystem.defaultBlendFunc();
+                            //RenderSystem.defaultBlendFunc();
                         }
                     }
                 } else if (options.attackIndicator().get() == AttackIndicatorStatus.HOTBAR) {
@@ -259,8 +256,8 @@ public class AetherIIOverlays {
     }
 
     private static void drawSingle(GuiGraphics guiGraphics, ResourceLocation sprite, int x, int y, float alpha) {
-        RenderSystem.enableBlend();
+        //RenderSystem.enableBlend();
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, 128, 128, ARGB.colorFromFloat(alpha, 1.0F, 1.0F, 1.0F));
-        RenderSystem.disableBlend();
+        //RenderSystem.disableBlend();
     }
 }
