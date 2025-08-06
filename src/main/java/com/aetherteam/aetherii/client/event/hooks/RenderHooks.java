@@ -195,7 +195,7 @@ public class RenderHooks {
                 ClientLevel.ClientLevelData worldInfo = clientLevel.getLevelData();
                 FogType type = camera.getFluidInCamera();
 
-                double f = (camera.getPosition().y() - 64) * worldInfo.getClearColorScale();
+                double f = (camera.getPosition().y() - 64) * worldInfo.voidDarknessOnsetRange();
                 if (f < 1.0 && type != FogType.LAVA && type != FogType.POWDER_SNOW) {
                     if (f < 0.0F) {
                         f = 0.0F;
@@ -206,7 +206,7 @@ public class RenderHooks {
                     blue *= (float) Math.clamp(f * 1.25F, 0.2F * 1.25F, 1.0F);
                 }
 
-                double d0 = (camera.getPosition().y() - (double) clientLevel.getMinY()) * worldInfo.getClearColorScale();
+                double d0 = (camera.getPosition().y() - (double) clientLevel.getMinY()) * worldInfo.voidDarknessOnsetRange();
                 if (d0 < 1.0 && type != FogType.LAVA && type != FogType.POWDER_SNOW) {
                     if (d0 < 0.0) {
                         d0 = 0.0;

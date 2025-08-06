@@ -1,10 +1,9 @@
 package com.aetherteam.aetherii.mixin;
 
-import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.ItemRendererAccessor;
@@ -15,8 +14,8 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -28,6 +27,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+
+import java.util.List;
 
 public class MixinHooks {
     public static void shortswordSlashBehavior(Player player, Entity target, boolean canShortswordSlash) {
@@ -156,9 +157,9 @@ public class MixinHooks {
         return particleOptions;
     }
 
-    public static void renderIrradiated(PoseStack poseStack, MultiBufferSource bufferSource, int i, int j, int[] tints, BakedModel model, RenderType renderType) {
+    public static void renderIrradiated(PoseStack poseStack, MultiBufferSource bufferSource, int i, int j, int[] tints, List<BakedQuad> model, RenderType renderType) {
         VertexConsumer vertexconsumer = VertexMultiConsumer.create(VertexMultiConsumer.create(bufferSource.getBuffer(AetherIIRenderTypes.irradiatedGlint())), bufferSource.getBuffer(renderType));
-        ItemRendererAccessor.callRenderModelLists(model, tints, i, j, poseStack, vertexconsumer);
+        ItemRendererAccessor.callRenderModelLists(poseStack, vertexconsumer, model, tints, i, j);
     }
 
     @OnlyIn(Dist.CLIENT)

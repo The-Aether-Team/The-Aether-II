@@ -18,8 +18,7 @@ import com.aetherteam.aetherii.item.miscellaneous.MoaSaddlebagItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.core.Holder;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -49,6 +48,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -223,11 +223,11 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     public void containerChanged(Container container) {
         boolean isSaddled = this.isSaddled();
         this.syncToClients();
-        if (this.tickCount > 20) {
-            if (!isSaddled && this.isSaddled()) {
-                this.playSound(this.getSaddleSoundEvent(), 0.5F, 1.0F);
-            }
-        }
+    }
+
+    @Override
+    protected Holder<SoundEvent> getEquipSound(EquipmentSlot p_397157_, ItemStack p_397978_, Equippable p_397221_) {
+        return (Holder<SoundEvent>) (p_397157_ == EquipmentSlot.SADDLE ? AetherIISoundEvents.ENTITY_MOA_SADDLE : super.getEquipSound(p_397157_, p_397978_, p_397221_));
     }
 
     @Override
@@ -468,9 +468,9 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 LivingEntity entity = this.getControllingPassenger();
                 if (this.isVehicle() && this.isSaddled() && entity != null) {
                     EntityUtil.copyRotations(this, entity);
-                    if (this.isControlledByLocalInstance()) {
+                    if (this.isLocalInstanceAuthoritative()) {
                         this.travelWithInput(new Vec3(0, vector.y(), 0));
-                        this.lerpSteps = 0;
+                        this.lerpHeadSteps = 0;
                     } else {
                         this.calculateEntityAnimation(false);
                         this.setDeltaMovement(Vec3.ZERO);
@@ -945,9 +945,9 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         this.getInventory().setItem(0, stack);
     }
 
-    @Override
+
     public boolean isSaddleable() {
-        return super.isSaddleable() && this.isPlayerGrown();
+        return !this.isBaby() && this.isPlayerGrown();
     }
 
     protected void syncToClients() {
