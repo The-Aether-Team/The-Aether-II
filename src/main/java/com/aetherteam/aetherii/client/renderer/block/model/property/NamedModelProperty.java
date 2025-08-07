@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.client.renderer.block.model;
+package com.aetherteam.aetherii.client.renderer.block.model.property;
 
 import com.google.common.base.Predicates;
 

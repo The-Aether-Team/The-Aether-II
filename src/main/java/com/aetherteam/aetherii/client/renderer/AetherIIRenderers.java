@@ -6,9 +6,9 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
-import com.aetherteam.aetherii.client.renderer.block.model.baked.AmbientOcclusionLightModel;
-import com.aetherteam.aetherii.client.renderer.block.model.baked.FastModel;
-import com.aetherteam.aetherii.client.renderer.block.model.unbaked.UnbakedTrunkModelLoader;
+import com.aetherteam.aetherii.client.renderer.block.model.AmbientOcclusionLightModel;
+import com.aetherteam.aetherii.client.renderer.block.model.FastModel;
+import com.aetherteam.aetherii.client.renderer.block.model.TrunkModel;
 import com.aetherteam.aetherii.client.renderer.blockentity.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
 import com.aetherteam.aetherii.client.renderer.entity.*;
@@ -37,6 +37,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterBlockStateModels;
 import net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -233,8 +234,8 @@ public class AetherIIRenderers {
         return models;
     }
 
-    public static void registerModelLoaders(ModelEvent.RegisterLoaders event) {
-        event.register(UnbakedTrunkModelLoader.ID , UnbakedTrunkModelLoader.INSTANCE);
+    public static void registerBlockStateModels(RegisterBlockStateModels event) {
+        event.registerModel(TrunkModel.Unbaked.ID , TrunkModel.Unbaked.CODEC);
     }
 
     public static void registerSpecialModelRenderers(RegisterSpecialModelRendererEvent event) {
