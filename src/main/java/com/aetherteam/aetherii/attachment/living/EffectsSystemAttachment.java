@@ -41,7 +41,11 @@ public class EffectsSystemAttachment {
     }
 
     public void postTickUpdate(LivingEntity livingEntity) {
-        this.activeBuildups.values().removeIf(instance -> !instance.tick(livingEntity));
+        this.activeBuildups.forEach((holder, instance) -> {
+            if (!instance.tick(livingEntity)) {
+                this.activeBuildups.remove(holder);
+            }
+        });
     }
 
     public void addBuildup(LivingEntity livingEntity, EffectBuildupPresets.Preset buildup, int amount) {

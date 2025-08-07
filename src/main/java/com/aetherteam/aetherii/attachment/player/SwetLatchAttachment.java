@@ -9,8 +9,6 @@ import com.google.common.collect.Lists;
 import net.minecraft.CrashReport;
 import net.minecraft.CrashReportCategory;
 import net.minecraft.ReportedException;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ProblemReporter;
@@ -36,8 +34,6 @@ public class SwetLatchAttachment implements ValueIOSerializable {
 
     @Override
     public void serialize(ValueOutput valueOutput) {
-        ListTag listTag = new ListTag();
-        CompoundTag compoundTag = new CompoundTag();
         ValueOutput.ValueOutputList valueoutput$valueoutputlist = valueOutput.childrenList("swets");
         try {
 
@@ -47,8 +43,6 @@ public class SwetLatchAttachment implements ValueIOSerializable {
                 swet.addAdditionalSaveData(valueoutput1);
 
             }
-            compoundTag.put("swet_data", listTag);
-            valueOutput.childrenList("swets").addChild().store(compoundTag);
         } catch (Throwable throwable) {
             CrashReport crashreport = CrashReport.forThrowable(throwable, "Saving entity NBT");
             CrashReportCategory crashreportcategory = crashreport.addCategory("Entity being saved");
