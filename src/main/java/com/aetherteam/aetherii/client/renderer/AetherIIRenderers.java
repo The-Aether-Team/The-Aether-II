@@ -224,12 +224,9 @@ public class AetherIIRenderers {
     private static List<Map.Entry<BlockState, BlockStateModel>> getModels(Map<BlockState, BlockStateModel> originalModels, List<DeferredBlock<? extends Block>> blocks) {
         List<Map.Entry<BlockState, BlockStateModel>> models = new ArrayList<>();
         for (Map.Entry<BlockState, BlockStateModel> model : originalModels.entrySet()) {
-            if (model.g().id().getNamespace().equals(AetherII.MODID)) {
-                String path = model.getKey().id().getPath();
-                for (DeferredBlock<? extends Block> block : blocks) {
-                    if (path.equals(block.getId().getPath())) {
-                        models.add(model);
-                    }
+            for (DeferredBlock<? extends Block> block : blocks) {
+                if (model.getKey().is(block)) {
+                    models.add(model);
                 }
             }
         }
