@@ -240,13 +240,12 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         entity.yHeadRot = entity.getYRot();
         entity.yHeadRotO = entity.getYRot();
         Vector3f vector3f = new Vector3f(0.0F, entity.getBbHeight() / 2.0F + yOffset, 0.0F);
-        InventoryScreen.renderEntityInInventory(guiGraphics, scissorStart.x, scissorStart.y, scissorEnd.x, scissorEnd.y, scale, vector3f, quaternionf, quaternionf2, entity);
+        InventoryScreen.renderEntityInInventory(guiGraphics, (int) f - (size.x / 2), (int) g - (size.y / 2), (int) f + (size.x / 2), (int) g + (size.y / 2), scale, vector3f, quaternionf, quaternionf2, entity);
         entity.yBodyRot = j;
         entity.setYRot(k);
         entity.setXRot(l);
         entity.yHeadRotO = m;
         entity.yHeadRot = n;
-        guiGraphics.disableScissor();
     }
 
     @Override

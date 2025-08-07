@@ -1,18 +1,11 @@
 package com.aetherteam.aetherii.inventory.container;
 
-import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
-import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.util.ExtraCodecs;
-import net.minecraft.world.ItemStackWithSlot;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -25,10 +18,10 @@ import java.util.List;
 
 public class AccessoryContainer extends SimpleContainer {
     public static final MapCodec<AccessoryContainer> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            ItemStack.CODEC.sizeLimitedListOf(4).fieldOf("items").forGetter(container -> container.lastItems)
+            ItemStack.OPTIONAL_CODEC.sizeLimitedListOf(4).fieldOf("items").forGetter(container -> container.lastItems)
     ).apply(instance, AccessoryContainer::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, AccessoryContainer> STREAM_CODEC = StreamCodec.composite(
-            ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list(4)), (container) -> container.lastItems,
+            ItemStack.OPTIONAL_STREAM_CODEC.apply(ByteBufCodecs.list(4)), (container) -> container.lastItems,
             AccessoryContainer::new);
 
     private final NonNullList<ItemStack> lastItems;
