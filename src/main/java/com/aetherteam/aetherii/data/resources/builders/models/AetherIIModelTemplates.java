@@ -2,15 +2,15 @@ package com.aetherteam.aetherii.data.resources.builders.models;
 
 import com.aetherteam.aetherii.AetherII;
 import com.mojang.math.Quadrant;
-import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplate;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.Optional;
 
-@OnlyIn(Dist.CLIENT)
 public class AetherIIModelTemplates {
     public static final ModelTemplate TEMPLATE_CUTOUT_MIPPED_CUBE_ALL = ModelTemplates.CUBE_ALL.extend().renderType("cutout_mipped").build();
     public static final ModelTemplate TEMPLATE_TRANSLUCENT_CUBE = ModelTemplates.CUBE.extend().renderType("translucent").build();

@@ -1,13 +1,9 @@
 package com.aetherteam.aetherii.data.resources.builders.models;
 
 import net.minecraft.client.data.models.model.ModelTemplate;
-import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TexturedModel;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class AetherIITexturedModels extends TexturedModel {
     public static final Provider LEAVES = createDefault(TextureMapping::cube, AetherIIModelTemplates.TEMPLATE_CUTOUT_MIPPED_CUBE_ALL);
     public static final Provider TINTED_LEAVES = createDefault(TextureMapping::cube, AetherIIModelTemplates.LEAVES);

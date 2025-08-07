@@ -52,8 +52,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -133,7 +131,6 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static void progressivelyDestroyBlock(Level level, BlockPos belowPos, int speed, boolean drop) {
         int id = belowPos.hashCode();
         BlockDestructionProgress progress = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).aether_ii$getDestroyingBlocks().get(id);

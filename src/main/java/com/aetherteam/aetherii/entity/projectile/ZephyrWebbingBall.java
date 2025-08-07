@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.mixin.mixins.common.accessor.PlayerAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -103,8 +102,9 @@ public class ZephyrWebbingBall extends Fireball implements ItemSupplier {
             if (livingEntity.isBlocking()) {
                 livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, this.getOwner());
                 if (entity instanceof Player player && player.isBlocking()) {
-                    PlayerAccessor playerAccessor = (PlayerAccessor) player;
-                    playerAccessor.callHurtCurrentlyUsedShield(3.0F);
+                    if (!player.getUseItem().isEmpty()) {
+                        player.getUseItem().hurtAndBreak(3, player, player.getUsedItemHand());
+                    }
                 }
             } else {
                 livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, EffectBuildupPresets.WEBBED, 350);

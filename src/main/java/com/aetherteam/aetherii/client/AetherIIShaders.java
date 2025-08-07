@@ -12,6 +12,7 @@ import net.neoforged.neoforge.client.event.RegisterRenderPipelinesEvent;
 public class AetherIIShaders {
     private static final RenderPipeline CLOUD_COVER_SHADER = RenderPipeline.builder(RenderPipelines.MATRICES_FOG_SNIPPET)
             .withLocation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "pipeline/cloud_cover"))
+            .withVertexShader("core/position_color")
             .withFragmentShader(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "core/cloud_cover"))
             .withBlend(BlendFunction.TRANSLUCENT)
             .withDepthWrite(false)

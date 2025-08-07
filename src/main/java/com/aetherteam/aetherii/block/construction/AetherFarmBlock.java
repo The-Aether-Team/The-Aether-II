@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.block.construction;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.mixin.mixins.common.accessor.BushBlockAccessor;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.VegetationBlockAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -96,7 +96,7 @@ public class AetherFarmBlock extends FarmBlock {
     @Override
     public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPosition, Direction facing, BlockState plant) {
         Block plantBlock = plant.getBlock();
-        if ((plantBlock instanceof BushBlock bushBlock && ((BushBlockAccessor) bushBlock).callMayPlaceOn(Blocks.FARMLAND.defaultBlockState(), level, soilPosition))) {
+        if ((plantBlock instanceof BushBlock bushBlock && ((VegetationBlockAccessor) bushBlock).callMayPlaceOn(Blocks.FARMLAND.defaultBlockState(), level, soilPosition))) {
             return TriState.TRUE;
         } else {
             return super.canSustainPlant(state, level, soilPosition, facing, plant);

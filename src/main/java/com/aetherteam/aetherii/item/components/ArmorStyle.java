@@ -1,12 +1,11 @@
 package com.aetherteam.aetherii.item.components;
 
-import com.aetherteam.aetherii.api.styles.StyleMaterial;
 import com.aetherteam.aetherii.api.styles.StyleDesign;
+import com.aetherteam.aetherii.api.styles.StyleMaterial;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStyleDesigns;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStyleMaterials;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponentGetter;
@@ -19,8 +18,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.function.Consumer;
 
@@ -41,7 +38,6 @@ public record ArmorStyle(ResourceKey<StyleMaterial> material, ResourceKey<StyleD
 
     }
 
-    @OnlyIn(Dist.CLIENT)
     public record SpriteKey(RegistryAccess access, ArmorStyle style, String layerType) {
         private static String getColorPaletteSuffix(Holder<StyleMaterial> material) {
             return material.value().assetId().getPath();
