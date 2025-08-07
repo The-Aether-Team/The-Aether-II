@@ -1,10 +1,10 @@
 package com.aetherteam.aetherii.client.renderer.block.model.unbaked;
 
 import com.aetherteam.aetherii.client.renderer.block.model.baked.TrunkModel;
+import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.block.model.TextureSlots;
 import net.minecraft.client.renderer.block.model.Variant;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.ModelState;
 import net.minecraft.client.resources.model.UnbakedModel;
@@ -24,11 +24,11 @@ public class UnbakedTrunkModel extends DelegateUnbakedModel {
 
     @Override
     public BakedModel bake(TextureSlots textures, ModelBaker baker, ModelState modelState, boolean useAmbientOcclusion, boolean usesBlockLight, ItemTransforms itemTransforms, ContextMap additionalProperties) {
-        Map<UnbakedTrunkModelLoader.Holder, BakedModel> bakedConnections = new LinkedHashMap<>();
+        Map<UnbakedTrunkModelLoader.Holder, BlockStateModel> bakedConnections = new LinkedHashMap<>();
         for (var connection : this.connections.entrySet()) {
             bakedConnections.put(connection.getKey(), baker.bake(connection.getValue().modelLocation(), connection.getValue()));
         }
-        BakedModel base = super.bake(textures, baker, modelState, useAmbientOcclusion, usesBlockLight, itemTransforms, additionalProperties);
+        BlockStateModel base = super.bake(textures, baker, modelState, useAmbientOcclusion, usesBlockLight, itemTransforms, additionalProperties);
         return new TrunkModel(base, bakedConnections);
     }
 

@@ -5,8 +5,7 @@ import com.aetherteam.aetherii.client.renderer.block.model.NamedModelProperty;
 import com.aetherteam.aetherii.client.renderer.block.model.unbaked.UnbakedTrunkModelLoader;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.DelegateBakedModel;
+import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -14,8 +13,8 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WallSide;
 import net.neoforged.neoforge.client.model.DelegateBlockStateModel;
-import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.common.util.ConcatenatedListView;
+import net.neoforged.neoforge.model.data.ModelData;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -27,9 +26,9 @@ public class TrunkModel extends DelegateBlockStateModel {
     public static final NamedModelProperty<WallSide> SOUTHWEST_CONNECTION = new NamedModelProperty<>("southwest_connection");
     public static final List<NamedModelProperty<WallSide>> CONNECTIONS = List.of(NORTHEAST_CONNECTION, NORTHWEST_CONNECTION, SOUTHEAST_CONNECTION, SOUTHWEST_CONNECTION);
     
-    private final Map<UnbakedTrunkModelLoader.Holder, BakedModel> connections;
+    private final Map<UnbakedTrunkModelLoader.Holder, BlockStateModel> connections;
 
-    public TrunkModel(BakedModel model, Map<UnbakedTrunkModelLoader.Holder, BakedModel> connections) {
+    public TrunkModel(BlockStateModel model, Map<UnbakedTrunkModelLoader.Holder, BlockStateModel> connections) {
         super(model);
         this.connections = connections;
     }
