@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.renderer.entity.model.kirrid;
 
-import com.aetherteam.aetherii.client.renderer.entity.animation.KirridAnimations;
 import com.aetherteam.aetherii.client.renderer.entity.animation.KirridBabyAnimations;
 import com.aetherteam.aetherii.client.renderer.entity.state.KirridRenderState;
 import net.minecraft.client.animation.KeyframeAnimation;
@@ -24,9 +23,9 @@ public abstract class AbstractKirridBabyModel extends EntityModel<KirridRenderSt
 
     public AbstractKirridBabyModel(ModelPart root) {
         super(root);
-        this.jumpAnimation = KirridAnimations.JUMP.bake(root);
-        this.eatAnimation = KirridAnimations.EAT.bake(root);
-        this.walkAnimation = KirridAnimations.WALK.bake(root);
+        this.jumpAnimation = KirridBabyAnimations.JUMP.bake(root);
+        this.eatAnimation = KirridBabyAnimations.EAT.bake(root);
+        this.walkAnimation = KirridBabyAnimations.WALK.bake(root);
         this.body_main = root.getChild("body_main");
         this.wool = this.body_main.getChild("wool");
         this.head = this.body_main.getChild("head");

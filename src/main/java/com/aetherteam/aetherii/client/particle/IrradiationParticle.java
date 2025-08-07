@@ -6,8 +6,6 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 public class IrradiationParticle extends BaseAshSmokeParticle {
     protected IrradiationParticle(
@@ -28,7 +26,6 @@ public class IrradiationParticle extends BaseAshSmokeParticle {
         this.gravity = this.random.nextBoolean() ? -0.01F : 0.01F;
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static class Factory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprites;
 

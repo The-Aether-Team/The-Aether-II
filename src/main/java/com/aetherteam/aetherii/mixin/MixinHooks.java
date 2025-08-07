@@ -25,8 +25,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.List;
 
@@ -162,7 +160,6 @@ public class MixinHooks {
         ItemRendererAccessor.callRenderModelLists(poseStack, vertexconsumer, model, tints, i, j);
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static <T extends HumanoidRenderState> void positionMoaRider(T renderState, ModelPart head, ModelPart body, ModelPart rightArm, ModelPart leftArm, ModelPart rightLeg, ModelPart leftLeg) { //todo
         rightArm.xRot += -10.0F * Mth.DEG_TO_RAD;
         rightArm.zRot += -30.0F * Mth.DEG_TO_RAD;

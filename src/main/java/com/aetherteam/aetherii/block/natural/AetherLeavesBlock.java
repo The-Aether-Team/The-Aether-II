@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
-import com.aetherteam.aetherii.mixin.mixins.common.accessor.BushBlockAccessor;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.VegetationBlockAccessor;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -150,7 +150,7 @@ public class AetherLeavesBlock extends LeavesBlock {
     @Override
     public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPosition, Direction facing, BlockState plant) {
         Block plantBlock = plant.getBlock();
-        if (plantBlock instanceof BushBlock bushBlock && ((BushBlockAccessor) bushBlock).callMayPlaceOn(Blocks.GRASS_BLOCK.defaultBlockState(), level, soilPosition) && !plant.is(BlockTags.SAPLINGS)) {
+        if (plantBlock instanceof BushBlock bushBlock && ((VegetationBlockAccessor) bushBlock).callMayPlaceOn(Blocks.GRASS_BLOCK.defaultBlockState(), level, soilPosition) && !plant.is(BlockTags.SAPLINGS)) {
             return TriState.TRUE;
         } else {
             return super.canSustainPlant(state, level, soilPosition, facing, plant);

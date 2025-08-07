@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.entity.projectile;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.mixin.mixins.common.accessor.PlayerAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -14,8 +13,6 @@ import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
@@ -59,8 +56,9 @@ public class SkephidWebbingBall extends ThrowableProjectile implements ItemSuppl
             if (livingEntity.isBlocking()) {
                 livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, this.getOwner());
                 if (entity instanceof Player player && player.isBlocking()) {
-                    PlayerAccessor playerAccessor = (PlayerAccessor) player;
-                    playerAccessor.callHurtCurrentlyUsedShield(3.0F);
+                    if (!player.getUseItem().isEmpty()) {
+                        player.getUseItem().hurtAndBreak(3, player, player.getUsedItemHand());
+                    }
                 }
             } else {
                 livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, EffectBuildupPresets.WEBBED, 350);

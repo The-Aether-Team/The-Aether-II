@@ -1,19 +1,12 @@
 package com.aetherteam.aetherii;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIIArmPoseTransformers;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.Style;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.common.asm.enumextension.EnumProxy;
 
-import java.util.List;
-import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 public class AetherIIEnumExtensions {
@@ -29,7 +22,6 @@ public class AetherIIEnumExtensions {
         return AetherII.MODID + ":" + id;
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static class Client {
         public static final EnumProxy<HumanoidModel.ArmPose> AETHER_II_GLIDING_ARM_POSE_PROXY = new EnumProxy<>(
                 HumanoidModel.ArmPose.class, true, AetherIIArmPoseTransformers.GLIDING_TRANSFORMER

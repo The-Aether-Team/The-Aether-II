@@ -20,8 +20,8 @@ public abstract class AbstractBurrukaiBabyModel extends EntityModel<BurrukaiRend
 
     public AbstractBurrukaiBabyModel(ModelPart root) {
         super(root);
-        this.ramAnimation = BurrukaiAnimation.RAM.bake(root);
-        this.walkAnimation = BurrukaiAnimation.WALK.bake(root);
+        this.ramAnimation = BurrukaiAnimation.BABY_RAM.bake(root);
+        this.walkAnimation = BurrukaiAnimation.BABY_WALK.bake(root);
         this.body = root.getChild("body");
         this.tail = this.body.getChild("tail");
         this.head = this.body.getChild("head");
