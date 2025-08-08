@@ -738,16 +738,32 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.asItem()
         );
         this.tag(Tags.Items.ORE_RATES_SINGULAR).add(
+                AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.asItem(),
                 AetherIIBlocks.AMBROSIUM_ORE.asItem(),
                 AetherIIBlocks.ZANITE_ORE.asItem(),
                 AetherIIBlocks.ARKENIUM_ORE.asItem(),
-                AetherIIBlocks.GRAVITITE_ORE.asItem()
+                AetherIIBlocks.GRAVITITE_ORE.asItem(),
+                AetherIIBlocks.GLINT_ORE.asItem(),
+                AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.asItem(),
+                AetherIIBlocks.UNDERSHALE_ZANITE_ORE.asItem(),
+                AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.asItem(),
+                AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.asItem(),
+                AetherIIBlocks.UNDERSHALE_GLINT_ORE.asItem(),
+                AetherIIBlocks.CORROBONITE_ORE.asItem()
         );
         this.tag(Tags.Items.ORES).add(
+                AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.asItem(),
                 AetherIIBlocks.AMBROSIUM_ORE.asItem(),
                 AetherIIBlocks.ZANITE_ORE.asItem(),
                 AetherIIBlocks.ARKENIUM_ORE.asItem(),
-                AetherIIBlocks.GRAVITITE_ORE.asItem()
+                AetherIIBlocks.GRAVITITE_ORE.asItem(),
+                AetherIIBlocks.GLINT_ORE.asItem(),
+                AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.asItem(),
+                AetherIIBlocks.UNDERSHALE_ZANITE_ORE.asItem(),
+                AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.asItem(),
+                AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.asItem(),
+                AetherIIBlocks.UNDERSHALE_GLINT_ORE.asItem(),
+                AetherIIBlocks.CORROBONITE_ORE.asItem()
         );
         this.tag(Tags.Items.RODS_WOODEN).add(AetherIIItems.SKYROOT_STICK.get());
         this.tag(Tags.Items.STRINGS).add(AetherIIItems.CLOUDTWINE.get());
@@ -759,8 +775,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(Tags.Items.STORAGE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.asItem(),
                 AetherIIBlocks.ZANITE_BLOCK.asItem(),
+                AetherIIBlocks.ARKENIUM_BLOCK.asItem(),
                 AetherIIBlocks.GRAVITITE_BLOCK.asItem(),
-                AetherIIBlocks.CORROBONITE_BLOCK.asItem()
+                AetherIIBlocks.CORROBONITE_BLOCK.asItem(),
+                AetherIIBlocks.BRETTL_GRASS_BUNDLE.asItem()
         );
         this.tag(Tags.Items.TOOLS_SHIELD).add(
                 AetherIIItems.SKYROOT_SHIELD.get(),

@@ -918,6 +918,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
                 AetherIIBlocks.HIGHLANDS_BUSH.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH.get(),
+                AetherIIBlocks.BRETTL_GRASS_BUNDLE.get(),
                 AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(),
                 AetherIIBlocks.BRYALINN_MOSS_CARPET.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(),
@@ -1040,25 +1041,41 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get()
         );
         this.tag(Tags.Blocks.ORE_RATES_SINGULAR).add(
+                AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(),
                 AetherIIBlocks.AMBROSIUM_ORE.get(),
                 AetherIIBlocks.ZANITE_ORE.get(),
                 AetherIIBlocks.ARKENIUM_ORE.get(),
                 AetherIIBlocks.GRAVITITE_ORE.get(),
-                AetherIIBlocks.GLINT_ORE.get()
+                AetherIIBlocks.GLINT_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(),
+                AetherIIBlocks.CORROBONITE_ORE.get()
         );
         this.tag(Tags.Blocks.ORES).add(
+                AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(),
                 AetherIIBlocks.AMBROSIUM_ORE.get(),
                 AetherIIBlocks.ZANITE_ORE.get(),
                 AetherIIBlocks.ARKENIUM_ORE.get(),
                 AetherIIBlocks.GRAVITITE_ORE.get(),
-                AetherIIBlocks.GLINT_ORE.get()
+                AetherIIBlocks.GLINT_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(),
+                AetherIIBlocks.CORROBONITE_ORE.get()
         );
         this.tag(Tags.Blocks.STONES).addTag(AetherIITags.Blocks.HOLYSTONE).add(AetherIIBlocks.UNDERSHALE.get());
         this.tag(Tags.Blocks.STORAGE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
-                AetherIIBlocks.ARKENIUM_BLOCK.get()
+                AetherIIBlocks.ARKENIUM_BLOCK.get(),
+                AetherIIBlocks.CORROBONITE_BLOCK.get(),
+                AetherIIBlocks.BRETTL_GRASS_BUNDLE.get()
         );
         this.tag(Tags.Blocks.CHESTS_WOODEN).add(
                 AetherIIBlocks.SKYROOT_CHEST.get()
