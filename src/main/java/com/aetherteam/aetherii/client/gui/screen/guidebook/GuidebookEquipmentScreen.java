@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.item.miscellaneous.CurrencyItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.SlotAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.ClearAccessoriesPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ClearItemPacket;
+import com.aetherteam.aetherii.network.packet.serverbound.CurrencyAmountPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.HeldCurrencyPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -292,7 +293,8 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                                 }
                                 if (amount > 0) {
                                     stack.setCount(amount);
-                                    Minecraft.getInstance().player.syncData(AetherIIDataAttachments.CURRENCY);
+                                    ClientPacketDistributor.sendToServer(new CurrencyAmountPacket(data.getAmount() - amount));
+
                                     //data.setSynched(Minecraft.getInstance().player.getId(), INBTSynchable.Direction.SERVER, "setAmount", data.getAmount() - amount);
                                     this.getMenu().setCarried(stack.copy());
                                     ClientPacketDistributor.sendToServer(new HeldCurrencyPacket(stack.copy()));
@@ -308,7 +310,8 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                             }
                             if (amount > 0) {
                                 stack.shrink(amount);
-                                Minecraft.getInstance().player.syncData(AetherIIDataAttachments.CURRENCY);
+                                ClientPacketDistributor.sendToServer(new CurrencyAmountPacket(data.getAmount() + amount));
+
                                 //data.setSynched(Minecraft.getInstance().player.getId(), INBTSynchable.Direction.SERVER, "setAmount", data.getAmount() + amount);
                                 this.getMenu().setCarried(stack);
                                 ClientPacketDistributor.sendToServer(new HeldCurrencyPacket(stack));

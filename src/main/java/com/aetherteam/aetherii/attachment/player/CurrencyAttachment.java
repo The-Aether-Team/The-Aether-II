@@ -43,6 +43,7 @@ public class CurrencyAttachment {
                 GameRules gameRules = serverLevel.getGameRules();
                 if (gameRules.getRule(GameRules.RULE_KEEPINVENTORY).get()) {
                     player.getData(AetherIIDataAttachments.CURRENCY).setAmount(original.getData(AetherIIDataAttachments.CURRENCY).getAmount());
+                    player.syncData(AetherIIDataAttachments.CURRENCY);
                 }
             }
         }
