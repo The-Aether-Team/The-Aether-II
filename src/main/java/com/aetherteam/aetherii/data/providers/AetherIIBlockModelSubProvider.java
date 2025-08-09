@@ -92,6 +92,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 //                .with(condition().term(TrunkBlock.WEST_CONNECTION, WallSide.TALL), sideTall.with(Y_ROT_270).with(UV_LOCK));
 //        this.blockStateOutput.accept(model);
 //        this.registerSimpleItemModel(trunk, inventory);
+        this.createTrivialCube(trunk); //TODO: this is just a placeholder
     }
 
     @Override

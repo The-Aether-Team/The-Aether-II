@@ -86,7 +86,7 @@
       ]
     },
     {
-      "bone": "tailmiddle",
+      "bone": "tail_middle",
       "target": "position",
       "keyframes": [
         {
@@ -137,7 +137,7 @@
       ]
     },
     {
-      "bone": "tailmiddle",
+      "bone": "tail_middle",
       "target": "rotation",
       "keyframes": [
         {
@@ -188,7 +188,7 @@
       ]
     },
     {
-      "bone": "tailend",
+      "bone": "tail_end",
       "target": "position",
       "keyframes": [
         {
@@ -239,7 +239,7 @@
       ]
     },
     {
-      "bone": "tailend",
+      "bone": "tail_end",
       "target": "rotation",
       "keyframes": [
         {
