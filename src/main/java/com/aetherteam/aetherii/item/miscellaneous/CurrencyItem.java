@@ -38,6 +38,7 @@ public class CurrencyItem extends Item {
         ItemStack stack = player.getItemInHand(usedHand);
         CurrencyAttachment attachment = player.getData(AetherIIDataAttachments.CURRENCY);
         attachment.setAmount(attachment.getAmount() + this.currencyAmount);
+        player.syncData(AetherIIDataAttachments.CURRENCY);
         player.awardStat(Stats.ITEM_USED.get(this));
         stack.consume(1, player);
         if (level.isClientSide()) {

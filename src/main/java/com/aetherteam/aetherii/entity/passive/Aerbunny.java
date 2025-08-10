@@ -51,7 +51,6 @@ import net.neoforged.neoforge.event.EventHooks;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.Optional;
-import java.util.UUID;
 
 public class Aerbunny extends AetherTamableAnimal {
     public static int PUFF_PARTICLE_EVENT = 100;
@@ -424,7 +423,6 @@ public class Aerbunny extends AetherTamableAnimal {
      */
     @Override
     public void stopRiding() {
-        this.refreshDimensions();
         if (this.getVehicle() instanceof Player player) {
             player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(null);
         }
@@ -432,6 +430,8 @@ public class Aerbunny extends AetherTamableAnimal {
             this.setVehicleReference(Optional.empty());
         }
         super.stopRiding();
+
+        this.refreshDimensions();
     }
 
     /**
