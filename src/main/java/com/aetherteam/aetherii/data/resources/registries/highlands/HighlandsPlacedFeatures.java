@@ -212,6 +212,7 @@ public class HighlandsPlacedFeatures {
         bootstrapUnderground(context);
         bootstrapWorldgen(context);
         bootstrapAir(context);
+        bootstrapDungeon(context);
     }
 
     public static void bootstrapSurface(BootstrapContext<PlacedFeature> context) {
@@ -675,11 +676,11 @@ public class HighlandsPlacedFeatures {
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(1, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(128), VerticalAnchor.top())));
         register(context, ORE_AMBROSIUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_AMBROSIUM),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(20, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(24), VerticalAnchor.top(), 96))));
-         register(context, ORE_ZANITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ZANITE),
+        register(context, ORE_ZANITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ZANITE),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(56), VerticalAnchor.aboveBottom(170))));
         register(context, ORE_GLINT, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_GLINT),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(114))));
-         register(context, ORE_ARKENIUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ARKENIUM),
+        register(context, ORE_ARKENIUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ARKENIUM),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(8, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96), 32))));
         register(context, ORE_GRAVITITE_BURIED, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_GRAVITITE_BURIED),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(3, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(72), 20))));
@@ -838,13 +839,6 @@ public class HighlandsPlacedFeatures {
 
         register(context, CLOUDBED, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.CLOUDBED), BiomeFilter.biome());
 
-        register(context, LARGE_SHELF_ROTSHROOM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.LARGE_SHELF_ROTSHROOM));
-        register(context, LARGE_SHELF_ROTSHROOM_UNDERGROUND, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.LARGE_SHELF_ROTSHROOM_UNDERGROUND));
-        register(context, ROTSHROOM_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ROTSHROOM_PATCH));
-        register(context, COARSE_AETHER_DIRT_DUNGEON, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COARSE_AETHER_DIRT_DUNGEON));
-        register(context, INFECTED_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.INFECTED_PATCH));
-        register(context, UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.UNDERGROWTH_PATCH));
-        register(context, ROTTEN_UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ROTTEN_UNDERGROWTH_PATCH));
     }
 
     public static void bootstrapAir(BootstrapContext<PlacedFeature> context) {
@@ -908,6 +902,17 @@ public class HighlandsPlacedFeatures {
                 HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96)),
                 RarityFilter.onAverageOnceEvery(128),
                 BiomeFilter.biome());
+    }
+
+    public static void bootstrapDungeon(BootstrapContext<PlacedFeature> context) {
+        HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+        register(context, LARGE_SHELF_ROTSHROOM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.LARGE_SHELF_ROTSHROOM));
+        register(context, LARGE_SHELF_ROTSHROOM_UNDERGROUND, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.LARGE_SHELF_ROTSHROOM_UNDERGROUND));
+        register(context, ROTSHROOM_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ROTSHROOM_PATCH));
+        register(context, COARSE_AETHER_DIRT_DUNGEON, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COARSE_AETHER_DIRT_DUNGEON));
+        register(context, INFECTED_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.INFECTED_PATCH));
+        register(context, UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.UNDERGROWTH_PATCH));
+        register(context, ROTTEN_UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ROTTEN_UNDERGROWTH_PATCH));
     }
 
     private static ResourceKey<PlacedFeature> createKey(String name) {
