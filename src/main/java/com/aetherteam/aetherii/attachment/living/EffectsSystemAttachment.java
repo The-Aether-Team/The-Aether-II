@@ -41,11 +41,15 @@ public class EffectsSystemAttachment {
     }
 
     public void postTickUpdate(LivingEntity livingEntity) {
+        final Holder<MobEffect>[] removableEffect = new Holder[]{null};
         this.activeBuildups.forEach((holder, instance) -> {
             if (!instance.tick(livingEntity)) {
-                this.activeBuildups.remove(holder);
+                removableEffect[0] = holder;
             }
         });
+        if (removableEffect[0] != null) {
+            this.activeBuildups.remove(removableEffect[0]);
+        }
     }
 
     public void addBuildup(LivingEntity livingEntity, EffectBuildupPresets.Preset buildup, int amount) {
