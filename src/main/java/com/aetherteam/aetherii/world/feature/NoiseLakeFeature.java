@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -152,7 +153,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                         this.setBlock(level, pos.below(2), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
 
                         // Removes Floating Grass above the lakes
-                        if (level.getBlockState(pos.above()).getBlock() instanceof BushBlock || level.getBlockState(pos.above()).getBlock() instanceof TwigBlock || level.getBlockState(pos.above()).getBlock() instanceof RockBlock) {
+                        if (level.getBlockState(pos.above()).getBlock() instanceof VegetationBlock || level.getBlockState(pos.above()).getBlock() instanceof TwigBlock || level.getBlockState(pos.above()).getBlock() instanceof RockBlock) {
                             this.setBlock(level, pos.above(), Blocks.AIR.defaultBlockState());
                         }
                     }
