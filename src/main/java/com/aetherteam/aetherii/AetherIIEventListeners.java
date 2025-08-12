@@ -91,6 +91,7 @@ public class AetherIIEventListeners {
         player.getData(AetherIIDataAttachments.PLAYER).login(player);
         player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).login(player);
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).login(player);
+        player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).login(player);
         player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).login(player); //todo verify
         BiomeHooks.sendColors(player);
     }
@@ -133,6 +134,7 @@ public class AetherIIEventListeners {
         boolean wasDeath = event.isWasDeath();
 
         player.getData(AetherIIDataAttachments.CURRENCY).clone(original, player, wasDeath);
+        player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).clone(player);
     }
 
     public static void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {

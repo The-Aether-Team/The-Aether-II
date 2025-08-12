@@ -20,9 +20,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.GuiSpriteManager;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
@@ -112,7 +110,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     }
 
     @Override
-    public void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderFoward(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         int rightPagePos = (this.screen.width / 2);
         int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
         if (this.getSelectedEntry() != null && this.isUnlocked(this.getSelectedEntry(), BestiaryEntry.ENTITY_TYPE.id())) {
@@ -132,10 +130,13 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         }
     }
 
+    @Override
+    public void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+
+    }
+
     public void renderRotatingEntity(GuiGraphics guiGraphics, int startX, int startY, int endX, int endY, int scale, float yOffset, float angleXComponent, float angleYComponent, LivingEntity livingEntity) {
-        float posX = (float) (startX + endX) / 2.0F;
-        float posY = (float) (startY + endY) / 2.0F;
-        guiGraphics.enableScissor(startX, startY, endX, endY);
+        int scaleFactor = 30 / scale;
         Quaternionf xQuaternion = new Quaternionf().rotateZ(Mth.PI);
         Quaternionf zQuaternion = new Quaternionf().rotateX(angleYComponent * Mth.DEG_TO_RAD);
         xQuaternion.mul(zQuaternion);
@@ -149,11 +150,10 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         livingEntity.yHeadRotO = livingEntity.getYRot();
         Vector3f vector3f = new Vector3f(0.0F, livingEntity.getBbHeight() / 2.0F + yOffset, 0.0F);
 
-        InventoryScreen.renderEntityInInventory(guiGraphics, startX, startY, endX, endY, scale, vector3f, xQuaternion, zQuaternion, livingEntity);
+        InventoryScreen.renderEntityInInventory(guiGraphics, startX, startY, endX, endY, 30F, vector3f, xQuaternion, zQuaternion, livingEntity);
         livingEntity.setYBodyRot(yBodyRot);
         livingEntity.setYRot(yRot);
         livingEntity.setXRot(xRot);
-        guiGraphics.disableScissor();
     }
 
     @Override

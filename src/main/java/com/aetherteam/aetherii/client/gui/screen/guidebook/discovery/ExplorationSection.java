@@ -21,6 +21,11 @@ public class ExplorationSection extends DiscoverySection<ExplorationEntry, Explo
     }
 
     @Override
+    public void renderFoward(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+
+    }
+
+    @Override
     public void renderInformation(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 
     }

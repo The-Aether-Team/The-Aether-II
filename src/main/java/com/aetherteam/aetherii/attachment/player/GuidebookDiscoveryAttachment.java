@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIExplorationEntr
 import com.aetherteam.aetherii.data.resources.registries.AetherIIRewardWrappers;
 import com.aetherteam.aetherii.network.packet.clientbound.FlushGuidebookDataPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.GuidebookToastPacket;
+import com.aetherteam.aetherii.network.packet.clientbound.UpdateGuidebookDiscoveryPacket;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.advancements.AdvancementHolder;
@@ -26,6 +27,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class GuidebookDiscoveryAttachment {
+    private boolean shouldSyncAfterJoin = false;
+    private boolean sync = false;
     private List<BestiaryEntry.Mutable> bestiaryEntries;
     private List<EffectsEntry.Mutable> effectsEntries;
     private List<ExplorationEntry.Mutable> explorationEntries;
@@ -55,19 +58,28 @@ public class GuidebookDiscoveryAttachment {
     }
 
     public void postTickUpdate(Player player) {
-//        this.syncAfterJoin(player);
+        this.syncAfterJoin(player);
     }
 
-//    private void syncAfterJoin(Player player) {
-//        if (this.shouldSyncAfterJoin) {
-//            if (player instanceof ServerPlayer serverPlayer) {
-//                PacketDistributor.sendToPlayer(serverPlayer, new FlushGuidebookDataPacket());
-//                this.setupEntries(serverPlayer);
-//                PacketDistributor.sendToPlayer(serverPlayer, new UpdateGuidebookDiscoveryPacket(this));
-//            }
-//            this.shouldSyncAfterJoin = false;
-//        }
-//    }
+    public void login(Player player) {
+        this.shouldSyncAfterJoin = true;
+    }
+
+    public void clone(Player player) {
+        this.shouldSyncAfterJoin = true;
+    }
+
+
+    private void syncAfterJoin(Player player) {
+        if (this.shouldSyncAfterJoin) {
+            if (player instanceof ServerPlayer serverPlayer) {
+                PacketDistributor.sendToPlayer(serverPlayer, new FlushGuidebookDataPacket());
+                this.setupEntries(serverPlayer);
+                PacketDistributor.sendToPlayer(serverPlayer, new UpdateGuidebookDiscoveryPacket(this));
+            }
+            this.shouldSyncAfterJoin = false;
+        }
+    }
 
     private void setupEntries(ServerPlayer serverPlayer) {
         RegistryAccess registryAccess = serverPlayer.registryAccess();
@@ -101,10 +113,10 @@ public class GuidebookDiscoveryAttachment {
             this.trackBestiaryEntries(registryAccess, advancement, serverPlayer);
             this.trackEffectsEntries(registryAccess, advancement, serverPlayer);
             this.trackExplorationEntries(registryAccess, advancement, serverPlayer);
-//            if (this.sync) {
-//                PacketDistributor.sendToPlayer(serverPlayer, new UpdateGuidebookDiscoveryPacket(this));
-//                this.sync = false;
-//            }
+            if (this.sync) {
+                PacketDistributor.sendToPlayer(serverPlayer, new UpdateGuidebookDiscoveryPacket(this));
+                this.sync = false;
+            }
         }
     }
 
@@ -139,13 +151,13 @@ public class GuidebookDiscoveryAttachment {
                         }
                     });
                     icon = this.getIconForEntry(entry);
-//                    this.sync = true;
+                    this.sync = true;
                 }
             }
         }
-//        if (this.sync && icon != null) {
-//            PacketDistributor.sendToPlayer(serverPlayer, new GuidebookToastPacket(GuidebookToast.Type.DISCOVERY, icon));
-//        }
+        if (this.sync && icon != null) {
+            PacketDistributor.sendToPlayer(serverPlayer, new GuidebookToastPacket(GuidebookToast.Type.DISCOVERY, icon));
+        }
     }
 
     public void clearEntries() {
@@ -166,6 +178,12 @@ public class GuidebookDiscoveryAttachment {
                 return GuidebookToast.Icons.EXPLORATION;
             }
         }
+    }
+
+    public void syncAttachment(GuidebookDiscoveryAttachment other) {
+        this.bestiaryEntries = other.bestiaryEntries;
+        this.effectsEntries = other.effectsEntries;
+        this.explorationEntries = other.explorationEntries;
     }
 
     public List<BestiaryEntry.Mutable> getBestiaryEntries() {
