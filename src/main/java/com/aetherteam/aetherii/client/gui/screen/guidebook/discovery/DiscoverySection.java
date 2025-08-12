@@ -9,7 +9,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
@@ -56,6 +55,9 @@ public abstract class DiscoverySection<S extends GuidebookEntry, T extends Mutab
 
     public abstract void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick);
 
+    public abstract void renderFoward(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick);
+
+
     public void renderEntries(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         guiGraphics.drawString(this.screen.getMinecraft().font, this.getTitle(), 40, 48, 16777215, true);
     }
@@ -81,7 +83,7 @@ public abstract class DiscoverySection<S extends GuidebookEntry, T extends Mutab
         guiGraphics.renderItemDecorations(font, stack, x, y);
         if (mouseYDiff <= 15 && mouseYDiff >= 0 && mouseXDiff <= 15 && mouseXDiff >= 0) {
             guiGraphics.fillGradient(x, y, x + 16, y + 16, -2130706433, -2130706433);
-            guiGraphics.setComponentTooltipForNextFrame( font, tooltip, (int) (mouseX - rightPagePos), (int) (mouseY - topPos));
+            guiGraphics.setComponentTooltipForNextFrame(font, tooltip, (int) (mouseX), (int) (mouseY));
         }
     }
 

@@ -65,6 +65,12 @@ public interface Guidebook {
         guiGraphics.pose().translate((float) rightPagePos, (float) topPos);
         this.renderGuidebookRightPage(screen, guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.pose().popMatrix();
+
+        this.renderGuidebookFowardPage(screen, guiGraphics, mouseX, mouseY, partialTick);
+    }
+
+    default void renderGuidebookFowardPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+
     }
 
     default void renderGuidebookBacking(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
