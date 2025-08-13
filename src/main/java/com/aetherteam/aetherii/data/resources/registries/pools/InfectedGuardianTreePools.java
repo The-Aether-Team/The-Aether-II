@@ -2,6 +2,8 @@ package com.aetherteam.aetherii.data.resources.registries.pools;
 
 import com.aetherteam.aetherii.data.resources.registries.AetherIIProcessorLists;
 import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsPlacedFeatures;
+import com.aetherteam.aetherii.world.structure.pool.AetherIIPoolElementTypes;
+import com.aetherteam.aetherii.world.structure.pool.AetherPoolElement;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
@@ -16,6 +18,21 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
 public class InfectedGuardianTreePools {
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_LOBBIES_FLOOR_1 = AetherIIPools.createKey("infected_guardian_tree/layout/lobbies_floor_1");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_LOBBIES_FLOOR_2 = AetherIIPools.createKey("infected_guardian_tree/layout/lobbies_floor_2");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_LOBBIES_FLOOR_3 = AetherIIPools.createKey("infected_guardian_tree/layout/lobbies_floor_3");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_ROOMS = AetherIIPools.createKey("infected_guardian_tree/layout/rooms");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_EYE_ROOMS = AetherIIPools.createKey("infected_guardian_tree/layout/eye_rooms");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_SMALL_NO_EYES = AetherIIPools.createKey("infected_guardian_tree/layout/path/small/no_eyes");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_SMALL_1_EYE = AetherIIPools.createKey("infected_guardian_tree/layout/path/small/1_eye");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_SMALL_2_EYES = AetherIIPools.createKey("infected_guardian_tree/layout/path/small/2_eyes");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_MEDIUM_NO_EYES = AetherIIPools.createKey("infected_guardian_tree/layout/path/medium/no_eyes");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_MEDIUM_1_EYE = AetherIIPools.createKey("infected_guardian_tree/layout/path/medium/1_eye");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_MEDIUM_2_EYES = AetherIIPools.createKey("infected_guardian_tree/layout/path/medium/2_eyes");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_LARGE_NO_EYES = AetherIIPools.createKey("infected_guardian_tree/layout/path/large/no_eyes");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_LARGE_1_EYE = AetherIIPools.createKey("infected_guardian_tree/layout/path/large/1_eye");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_LARGE_2_EYES = AetherIIPools.createKey("infected_guardian_tree/layout/path/large/2_eyes");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_DEAD_END = AetherIIPools.createKey("infected_guardian_tree/layout/dead_end");
 
     public static final ResourceKey<StructureTemplatePool> DECORATION_LARGE_SHELF_ROTSHROOM = AetherIIPools.createKey("infected_guardian_tree/decoration/large_shelf_rotshroom");
     public static final ResourceKey<StructureTemplatePool> DECORATION_LARGE_SHELF_ROTSHROOM_REDUCED = AetherIIPools.createKey("infected_guardian_tree/decoration/large_shelf_rotshroom_reduced");
@@ -33,6 +50,43 @@ public class InfectedGuardianTreePools {
         Holder<StructureProcessorList> processorRoots = processors.getOrThrow(AetherIIProcessorLists.INFECTED_GUARDIAN_TREE_ROOTS);
 
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
+
+        context.register(LAYOUT_LOBBIES_FLOOR_1, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/lobbies/floor_1"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(LAYOUT_ROOMS, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(LAYOUT_EYE_ROOMS, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/eye_room"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(LAYOUT_PATH_LARGE_2_EYES, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/large/2_eyes/path_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(LAYOUT_DEAD_END, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/dead_end"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
 
         context.register(DECORATION_LARGE_SHELF_ROTSHROOM, new StructureTemplatePool(
                 fallback,
