@@ -11,6 +11,6 @@
   "start_height": {
     "absolute": -3
   },
-  "start_pool": "aether_ii:infected_guardian_tree/trunk/base",
+  "start_pool": "aether_ii:outpost/outposts",
   "step": "surface_structures"
 }
