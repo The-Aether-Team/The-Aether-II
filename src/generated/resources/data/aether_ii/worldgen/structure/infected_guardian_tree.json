@@ -9,7 +9,7 @@
   "size": 13,
   "spawn_overrides": {},
   "start_height": {
-    "absolute": 1
+    "absolute": -3
   },
   "start_pool": "aether_ii:infected_guardian_tree/layout/lobbies_floor_1",
   "step": "surface_structures"
