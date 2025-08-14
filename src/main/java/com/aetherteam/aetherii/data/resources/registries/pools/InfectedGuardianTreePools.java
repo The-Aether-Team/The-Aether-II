@@ -54,7 +54,7 @@ public class InfectedGuardianTreePools {
         context.register(LAYOUT_LOBBIES_FLOOR_1, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/lobbies/floor_1"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/lobbies/floor_1/lobby_01"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
