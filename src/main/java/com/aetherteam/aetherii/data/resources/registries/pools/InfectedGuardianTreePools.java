@@ -34,6 +34,7 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_LARGE_2_EYES = AetherIIPools.createKey("infected_guardian_tree/layout/path/large/2_eyes");
     public static final ResourceKey<StructureTemplatePool> LAYOUT_DEAD_END = AetherIIPools.createKey("infected_guardian_tree/layout/dead_end");
 
+    public static final ResourceKey<StructureTemplatePool> LOBBIES = AetherIIPools.createKey("infected_guardian_tree/lobbies");
     public static final ResourceKey<StructureTemplatePool> ROOMS = AetherIIPools.createKey("infected_guardian_tree/rooms");
     public static final ResourceKey<StructureTemplatePool> EYE_ROOMS = AetherIIPools.createKey("infected_guardian_tree/eye_rooms");
     public static final ResourceKey<StructureTemplatePool> CORRIDORS = AetherIIPools.createKey("infected_guardian_tree/corridors");
@@ -91,6 +92,13 @@ public class InfectedGuardianTreePools {
                 StructureTemplatePool.Projection.RIGID)
         );
 
+        context.register(LOBBIES, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/lobbies/lobby_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
         context.register(ROOMS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
