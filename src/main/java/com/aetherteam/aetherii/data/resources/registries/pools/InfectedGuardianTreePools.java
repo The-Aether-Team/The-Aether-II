@@ -68,8 +68,8 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room"), 3),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/eye_room"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/dead_ends/dead_end_01"), 4)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/eye_room_mixed"), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/dead_ends/dead_end_mixed"), 4)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -90,7 +90,7 @@ public class InfectedGuardianTreePools {
         context.register(LAYOUT_DEAD_END, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/dead_end"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/dead_ends/dead_end"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
