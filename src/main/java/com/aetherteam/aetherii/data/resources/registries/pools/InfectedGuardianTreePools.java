@@ -25,11 +25,8 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> LAYOUT_EYE_ROOMS = AetherIIPools.createKey("infected_guardian_tree/layout/eye_rooms");
     public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_SMALL_NO_EYES = AetherIIPools.createKey("infected_guardian_tree/layout/path/small/no_eyes");
     public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_SMALL_1_EYE = AetherIIPools.createKey("infected_guardian_tree/layout/path/small/1_eye");
-    public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_MEDIUM_NO_EYES = AetherIIPools.createKey("infected_guardian_tree/layout/path/medium/no_eyes");
     public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_MEDIUM_1_EYE = AetherIIPools.createKey("infected_guardian_tree/layout/path/medium/1_eye");
     public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_MEDIUM_2_EYES = AetherIIPools.createKey("infected_guardian_tree/layout/path/medium/2_eyes");
-    public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_LARGE_NO_EYES = AetherIIPools.createKey("infected_guardian_tree/layout/path/large/no_eyes");
-    public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_LARGE_1_EYE = AetherIIPools.createKey("infected_guardian_tree/layout/path/large/1_eye");
     public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_LARGE_2_EYES = AetherIIPools.createKey("infected_guardian_tree/layout/path/large/2_eyes");
     public static final ResourceKey<StructureTemplatePool> LAYOUT_DEAD_END = AetherIIPools.createKey("infected_guardian_tree/layout/dead_end");
 
@@ -77,6 +74,27 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/eye_room"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(LAYOUT_PATH_SMALL_NO_EYES, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/small/no_eyes/path_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(LAYOUT_PATH_SMALL_1_EYE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/small/1_eye/path_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(LAYOUT_PATH_MEDIUM_1_EYE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/1_eye/path_01"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
