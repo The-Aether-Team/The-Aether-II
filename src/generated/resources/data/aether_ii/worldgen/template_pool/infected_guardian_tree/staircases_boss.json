@@ -3,7 +3,7 @@
     {
       "element": {
         "discard_above_y": 384,
-        "discard_below_y": 0,
+        "discard_below_y": -64,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/staircases/boss/staircase_01",
         "override_liquid_settings": "ignore_waterlogging",
@@ -18,7 +18,7 @@
     {
       "element": {
         "discard_above_y": 384,
-        "discard_below_y": 0,
+        "discard_below_y": -64,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/staircases/boss/staircase_02",
         "override_liquid_settings": "ignore_waterlogging",
@@ -33,7 +33,7 @@
     {
       "element": {
         "discard_above_y": 384,
-        "discard_below_y": 0,
+        "discard_below_y": -64,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/staircases/boss/staircase_03",
         "override_liquid_settings": "ignore_waterlogging",
@@ -48,7 +48,7 @@
     {
       "element": {
         "discard_above_y": 384,
-        "discard_below_y": 0,
+        "discard_below_y": -64,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/staircases/boss/staircase_04",
         "override_liquid_settings": "ignore_waterlogging",
