@@ -30,10 +30,11 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_LARGE_2_EYES = AetherIIPools.createKey("infected_guardian_tree/layout/path/large/2_eyes");
     public static final ResourceKey<StructureTemplatePool> LAYOUT_DEAD_END = AetherIIPools.createKey("infected_guardian_tree/layout/dead_end");
 
+    public static final ResourceKey<StructureTemplatePool> ENTRANCE = AetherIIPools.createKey("infected_guardian_tree/entrance");
     public static final ResourceKey<StructureTemplatePool> STAIRCASES_FLOOR_1 = AetherIIPools.createKey("infected_guardian_tree/staircases/floor_1");
     public static final ResourceKey<StructureTemplatePool> STAIRCASES_FLOOR_2 = AetherIIPools.createKey("infected_guardian_tree/staircases/floor_2");
     public static final ResourceKey<StructureTemplatePool> STAIRCASES_FLOOR_3 = AetherIIPools.createKey("infected_guardian_tree/staircases/floor_3");
-    public static final ResourceKey<StructureTemplatePool> STAIRCASES_BOSS = AetherIIPools.createKey("infected_guardian_tree/staircases_boss");
+    public static final ResourceKey<StructureTemplatePool> STAIRCASES_BOSS = AetherIIPools.createKey("infected_guardian_tree/staircases/boss");
     public static final ResourceKey<StructureTemplatePool> LOBBIES_FLOOR_1 = AetherIIPools.createKey("infected_guardian_tree/lobbies/floor_1");
     public static final ResourceKey<StructureTemplatePool> LOBBIES_FLOOR_2 = AetherIIPools.createKey("infected_guardian_tree/lobbies/floor_2");
     public static final ResourceKey<StructureTemplatePool> LOBBIES_FLOOR_3 = AetherIIPools.createKey("infected_guardian_tree/lobbies/floor_3");
@@ -137,6 +138,13 @@ public class InfectedGuardianTreePools {
                 StructureTemplatePool.Projection.RIGID)
         );
 
+        context.register(ENTRANCE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/entrance"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
         context.register(STAIRCASES_FLOOR_1, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
@@ -209,6 +217,13 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/eye_rooms/eye_room_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(BOSS_ROOM, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/boss_room"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

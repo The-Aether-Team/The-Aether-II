@@ -11,6 +11,6 @@
   "start_height": {
     "absolute": -3
   },
-  "start_pool": "aether_ii:infected_guardian_tree/layout/lobbies/floor_1",
+  "start_pool": "aether_ii:infected_guardian_tree/entrance",
   "step": "surface_structures"
 }
