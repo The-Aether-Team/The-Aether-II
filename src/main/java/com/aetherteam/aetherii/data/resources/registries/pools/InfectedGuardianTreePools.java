@@ -105,7 +105,8 @@ public class InfectedGuardianTreePools {
         context.register(LAYOUT_PATH_SMALL_NO_EYES, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/small/no_eyes/path_01"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/small/no_eyes/path_01"), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/small/no_eyes/path_02"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -128,7 +129,8 @@ public class InfectedGuardianTreePools {
         context.register(LAYOUT_PATH_MEDIUM_2_EYES, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01_a"), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01_b"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -136,7 +138,9 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/large/2_eyes/path_01_a"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/large/2_eyes/path_02_a"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/large/2_eyes/path_01_b"), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/large/2_eyes/path_02_a"), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/large/2_eyes/path_02_b"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
