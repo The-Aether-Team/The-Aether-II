@@ -76,7 +76,7 @@ dependencies {
     implementation "com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}"
 //    implementation "io.wispforest:accessories-neoforge:${project.accessories_version}+${project.minecraft_version}"
 //
-//    runtimeOnly "curse.maven:worldedit-225608:6122278"
+    runtimeOnly "curse.maven:worldedit-225608:6786288"
 
 //    compileOnly "mezz.jei:jei-${project.mc_version}-common-api:${project.jei_version}"
 //    compileOnly "mezz.jei:jei-${project.mc_version}-neoforge-api:${project.jei_version}"
