@@ -77,7 +77,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
 
     private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_RIDER_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
     private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_LAST_RIDER_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
-    private static final EntityDataAccessor<Integer> DATA_REMAINING_JUMPS = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_REMAINING_STAMINA = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_SITTING = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_FOLLOWING_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
 
@@ -162,7 +162,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         builder.define(DATA_FEATHER_COLOR, FeatherColor.LIGHT_BLUE.getSerializedName());
         builder.define(DATA_RIDER_REFERENCE, Optional.empty());
         builder.define(DATA_LAST_RIDER_REFERENCE, Optional.empty());
-        builder.define(DATA_REMAINING_JUMPS, 0);
+        builder.define(DATA_REMAINING_STAMINA, 0);
         builder.define(DATA_HUNGRY, false);
         builder.define(DATA_AMOUNT_FED, 0);
         builder.define(DATA_PLAYER_GROWN, false);
@@ -732,7 +732,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      * @return The {@link Integer} value for the remaining stamina.
      */
     public int getRemainingStamina() {
-        return this.getEntityData().get(DATA_REMAINING_JUMPS);
+        return this.getEntityData().get(DATA_REMAINING_STAMINA);
     }
 
     /**
@@ -741,7 +741,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      * @param remainingStamina The {@link Integer} value.
      */
     public void setRemainingStamina(int remainingStamina) {
-        this.getEntityData().set(DATA_REMAINING_JUMPS, remainingStamina);
+        this.getEntityData().set(DATA_REMAINING_STAMINA, remainingStamina);
     }
 
     /**
