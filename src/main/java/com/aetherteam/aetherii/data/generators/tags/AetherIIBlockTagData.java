@@ -539,7 +539,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
-                AetherIIBlocks.ARKENIUM_BLOCK.get()
+                AetherIIBlocks.ARKENIUM_BLOCK.get(),
+                AetherIIBlocks.CORROBONITE_BLOCK.get()
         );
         this.tag(BlockTags.WALL_POST_OVERRIDE).add(AetherIIBlocks.AMBROSIUM_TORCH.get());
         this.tag(BlockTags.CLIMBABLE).add(
@@ -702,6 +703,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ZANITE_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.ARKENIUM_BLOCK.get(),
+                AetherIIBlocks.CORROBONITE_BLOCK.get(),
+                AetherIIBlocks.ARKENIUM_LANTERN.get(),
+                AetherIIBlocks.ARKENIUM_CHAIN.get(),
                 AetherIIBlocks.HOLYSTONE_FURNACE.get(),
                 AetherIIBlocks.ALTAR.get(),
                 AetherIIBlocks.ARKENIUM_FORGE.get(),

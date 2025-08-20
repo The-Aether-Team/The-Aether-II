@@ -528,6 +528,7 @@ public class  AetherIICreativeTabs {
             .displayItems((features, output) -> {
                 output.accept(AetherIIBlocks.AMBROSIUM_TORCH.get());
                 output.accept(AetherIIBlocks.ARKENIUM_LANTERN.get());
+                output.accept(AetherIIBlocks.ARKENIUM_CHAIN.get());
                 output.accept(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_FURNACE.get());
                 output.accept(AetherIIBlocks.ALTAR.get());

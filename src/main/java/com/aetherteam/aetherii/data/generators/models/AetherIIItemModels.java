@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.data.generators.models;
 
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIIItemModelSubProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.client.data.models.ItemModelOutput;
@@ -251,5 +252,8 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.GLINT_COIN.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GUIDEBOOK_PAGE.get(), ModelTemplates.FLAT_ITEM);
         this.generatePortalFrameItem(AetherIIItems.AETHER_PORTAL_FRAME.get());
+
+        // Blocks
+        this.generateFlatItem(AetherIIBlocks.ARKENIUM_CHAIN.get().asItem(), ModelTemplates.FLAT_ITEM);
     }
 }

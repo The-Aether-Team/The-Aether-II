@@ -857,7 +857,13 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider { //todo fix some
                 .pattern("#")
                 .pattern("/")
                 .pattern("#")
-                .unlockedBy(getHasName(AetherIIItems.AMBROSIUM_SHARD.get()), has(AetherIIItems.AMBROSIUM_SHARD.get()))
+                .unlockedBy(getHasName(AetherIIItems.ARKENIUM_PLATES.get()), has(AetherIIItems.ARKENIUM_PLATES.get()))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_CHAIN.get(), 2)
+                .define('#', AetherIIItems.ARKENIUM_PLATES.get())
+                .pattern("#")
+                .pattern("#")
+                .unlockedBy(getHasName(AetherIIItems.ARKENIUM_PLATES.get()), has(AetherIIItems.ARKENIUM_PLATES.get()))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get())
                 .define('#', AetherIITags.Items.PLANKS_CRAFTING)
