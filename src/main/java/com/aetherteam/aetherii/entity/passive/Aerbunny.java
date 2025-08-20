@@ -327,7 +327,11 @@ public class Aerbunny extends AetherTamableAnimal {
         if (!(this.getVehicle() instanceof Player vehicle) || vehicle.equals(player)) { // Interacting player has to be the one wearing the Aerbunny.
             // Aerbunny can be mounted/dismounted if the shift key is held and no other interaction actions succeed, but only if the Aerbunny is not inside a block.
             if ((this.getVehicle() != null || result == InteractionResult.PASS || result == InteractionResult.FAIL) && !super.isInWall()) {
-                result = this.ridePlayer(player);
+                if (!this.level().isClientSide) {
+                    result = this.ridePlayer(player);
+                } else {
+                    return result;
+                }
             }
         }
 
