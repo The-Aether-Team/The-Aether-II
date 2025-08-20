@@ -14,6 +14,7 @@ import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -437,6 +438,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
 
         // Utility
         this.createAmbrosiumTorch();
+        this.createArkeniumLantern();
         this.createCraftingTableLike(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), TextureMapping::craftingTable);
         this.createFurnace(AetherIIBlocks.HOLYSTONE_FURNACE.get(), TexturedModel.ORIENTABLE_ONLY_TOP);
         this.createAltar(AetherIIBlocks.ALTAR.get(), AetherIIBlocks.HOLYSTONE.get());

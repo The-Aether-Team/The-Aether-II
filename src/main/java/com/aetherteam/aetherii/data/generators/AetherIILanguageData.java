@@ -645,6 +645,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Utility
         this.addBlock(AetherIIBlocks.AMBROSIUM_TORCH, "Ambrosium Torch");
+        this.addBlock(AetherIIBlocks.ARKENIUM_LANTERN, "Arkenium Lantern");
         this.addBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE, "Skyroot Crafting Table");
         this.addBlock(AetherIIBlocks.HOLYSTONE_FURNACE, "Holystone Furnace");
         this.addBlock(AetherIIBlocks.ALTAR, "Altar");
