@@ -1081,6 +1081,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.CORROBONITE_BLOCK.get(),
                 AetherIIBlocks.BRETTL_GRASS_BUNDLE.get()
         );
+        this.tag(Tags.Blocks.CHAINS).add(
+                AetherIIBlocks.ARKENIUM_CHAIN.get()
+        );
         this.tag(Tags.Blocks.CHESTS_WOODEN).add(
                 AetherIIBlocks.SKYROOT_CHEST.get()
         );
