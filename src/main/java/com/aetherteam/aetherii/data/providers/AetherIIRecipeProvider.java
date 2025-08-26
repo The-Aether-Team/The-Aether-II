@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.recipe.builder.AltarEnchantingRecipeBuilder;
 import com.aetherteam.aetherii.recipe.builder.BiomeParameterRecipeBuilder;
@@ -103,7 +104,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, result, 6)
                 .group("hanging_sign")
                 .define('#', block)
-                .define('X', Items.CHAIN)
+                .define('X', AetherIIBlocks.ARKENIUM_CHAIN)
                 .pattern("X X")
                 .pattern("###")
                 .pattern("###")
