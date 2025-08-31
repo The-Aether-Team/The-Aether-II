@@ -1,7 +1,216 @@
 {
-  "variants": {
-    "": {
-      "model": "aether_ii:block/mossy_wisproot_trunk"
+  "multipart": [
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_center"
+      },
+      "when": {
+        "tall": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_center_tall"
+      },
+      "when": {
+        "tall": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_side",
+        "uvlock": true
+      },
+      "when": {
+        "north_connection": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_side",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east_connection": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_side",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south_connection": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_side",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "west_connection": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_side_tall",
+        "uvlock": true
+      },
+      "when": {
+        "north_connection": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_side_tall",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east_connection": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_side_tall",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south_connection": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_side_tall",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "west_connection": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_corner",
+        "uvlock": true
+      },
+      "when": {
+        "AND": [
+          {
+            "north_connection": "low",
+            "west_connection": "low"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_corner",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "east_connection": "low",
+            "north_connection": "low"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_corner",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "AND": [
+          {
+            "east_connection": "low",
+            "south_connection": "low"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_corner",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "AND": [
+          {
+            "south_connection": "low",
+            "west_connection": "low"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_corner_tall",
+        "uvlock": true
+      },
+      "when": {
+        "AND": [
+          {
+            "east_connection": "tall",
+            "north_connection": "tall"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_corner_tall",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "north_connection": "tall",
+            "west_connection": "tall"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_corner_tall",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "AND": [
+          {
+            "east_connection": "tall",
+            "south_connection": "tall"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/mossy_wisproot_trunk_corner_tall",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "AND": [
+          {
+            "south_connection": "tall",
+            "west_connection": "tall"
+          }
+        ]
+      }
     }
-  }
+  ]
 }

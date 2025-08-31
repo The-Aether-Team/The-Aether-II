@@ -19,6 +19,8 @@ import net.minecraft.client.data.models.blockstates.*;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.client.renderer.block.model.VariantMutator;
+import net.minecraft.client.renderer.block.model.multipart.CombinedCondition;
+import net.minecraft.client.renderer.block.model.multipart.Condition;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.special.BedSpecialRenderer;
 import net.minecraft.core.Direction;
@@ -37,6 +39,7 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public AetherIIBlockModelSubProvider(Consumer<BlockModelDefinitionGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
@@ -58,41 +61,43 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createTrunk(Block trunk, Block log) {
-//        TextureMapping mapping = TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE);
-//        MultiVariant side = plainVariant(AetherIIModelTemplates.TRUNK_SIDE.create(trunk, mapping, this.modelOutput));
-//        MultiVariant corner = plainVariant(AetherIIModelTemplates.TRUNK_CORNER.create(trunk, mapping, this.modelOutput));
-//        MultiVariant sideTall = plainVariant(AetherIIModelTemplates.TRUNK_SIDE_TALL.create(trunk, mapping, this.modelOutput));
-//        MultiVariant cornerTall = plainVariant(AetherIIModelTemplates.TRUNK_CORNER_TALL.create(trunk, mapping, this.modelOutput));
-//        ResourceLocation inventory = AetherIIModelTemplates.TRUNK_INVENTORY.create(trunk, mapping, this.modelOutput);
+        TextureMapping mapping = TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE);
+        MultiVariant side = plainVariant(AetherIIModelTemplates.TRUNK_SIDE.create(trunk, mapping, this.modelOutput));
+        MultiVariant corner = plainVariant(AetherIIModelTemplates.TRUNK_CORNER.create(trunk, mapping, this.modelOutput));
+        MultiVariant sideTall = plainVariant(AetherIIModelTemplates.TRUNK_SIDE_TALL.create(trunk, mapping, this.modelOutput));
+        MultiVariant cornerTall = plainVariant(AetherIIModelTemplates.TRUNK_CORNER_TALL.create(trunk, mapping, this.modelOutput));
+        ResourceLocation inventory = AetherIIModelTemplates.TRUNK_INVENTORY.create(trunk, mapping, this.modelOutput);
 //
-//        Consumer<OldTrunkModelBuilder> connections = (loader) -> {
-//            loader.add(new OldUnbakedTrunkModelLoader.Holder(NORTHWEST_CONNECTION.getName(), WallSide.LOW), corner.with(UV_LOCK));
-//            loader.add(new OldUnbakedTrunkModelLoader.Holder(NORTHEAST_CONNECTION.getName(), WallSide.LOW), corner.with(Y_ROT_90).with(UV_LOCK));
-//            loader.add(new OldUnbakedTrunkModelLoader.Holder(SOUTHEAST_CONNECTION.getName(), WallSide.LOW), corner.with(Y_ROT_180).with(UV_LOCK));
-//            loader.add(new OldUnbakedTrunkModelLoader.Holder(SOUTHWEST_CONNECTION.getName(), WallSide.LOW), corner.with(Y_ROT_270).with(UV_LOCK));
-//            loader.add(new OldUnbakedTrunkModelLoader.Holder(NORTHWEST_CONNECTION.getName(), WallSide.TALL), cornerTall.with(UV_LOCK));
-//            loader.add(new OldUnbakedTrunkModelLoader.Holder(NORTHEAST_CONNECTION.getName(), WallSide.TALL), cornerTall.with(Y_ROT_90).with(UV_LOCK));
-//            loader.add(new OldUnbakedTrunkModelLoader.Holder(SOUTHEAST_CONNECTION.getName(), WallSide.TALL), cornerTall.with(Y_ROT_180).with(UV_LOCK));
-//            loader.add(new OldUnbakedTrunkModelLoader.Holder(SOUTHWEST_CONNECTION.getName(), WallSide.TALL), cornerTall.with(Y_ROT_270).with(UV_LOCK));
-//        };
+        MultiVariant center = plainVariant(AetherIIModelTemplates.TRUNK_CENTER.extend().build().create(trunk, mapping, this.modelOutput));
+        MultiVariant centerTall = plainVariant(AetherIIModelTemplates.TRUNK_CENTER_TALL.extend().build().create(trunk, mapping, this.modelOutput));
 //
-//        MultiVariant center = plainVariant(AetherIIModelTemplates.TRUNK_CENTER.extend().customLoader(OldTrunkModelBuilder::new, connections).build().create(trunk, mapping, this.modelOutput));
-//        MultiVariant centerTall = plainVariant(AetherIIModelTemplates.TRUNK_CENTER_TALL.extend().customLoader(OldTrunkModelBuilder::new, connections).build().create(trunk, mapping, this.modelOutput));
-//
-//        MultiPartGenerator model = MultiPartGenerator.multiPart(trunk)
-//                .with(condition().term(TrunkBlock.TALL, false), center)
-//                .with(condition().term(TrunkBlock.TALL, true), centerTall)
-//                .with(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.LOW), side.with(UV_LOCK))
-//                .with(condition().term(TrunkBlock.EAST_CONNECTION, WallSide.LOW), side.with(Y_ROT_90).with(UV_LOCK))
-//                .with(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.LOW), side.with(Y_ROT_180).with(UV_LOCK))
-//                .with(condition().term(TrunkBlock.WEST_CONNECTION, WallSide.LOW), side.with(Y_ROT_270).with(UV_LOCK))
-//                .with(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.TALL), sideTall.with(UV_LOCK))
-//                .with(condition().term(TrunkBlock.EAST_CONNECTION,WallSide.TALL), sideTall.with(Y_ROT_90).with(UV_LOCK))
-//                .with(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.TALL), sideTall.with(Y_ROT_180).with(UV_LOCK))
-//                .with(condition().term(TrunkBlock.WEST_CONNECTION, WallSide.TALL), sideTall.with(Y_ROT_270).with(UV_LOCK));
-//        this.blockStateOutput.accept(model);
-//        this.registerSimpleItemModel(trunk, inventory);
-        this.createTrivialCube(trunk); //TODO: this is just a placeholder
+
+        MultiPartGenerator model = MultiPartGenerator.multiPart(trunk)
+                .with(condition().term(TrunkBlock.TALL, false), center)
+                .with(condition().term(TrunkBlock.TALL, true), centerTall)
+                .with(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.LOW), side.with(UV_LOCK))
+                .with(condition().term(TrunkBlock.EAST_CONNECTION, WallSide.LOW), side.with(Y_ROT_90).with(UV_LOCK))
+                .with(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.LOW), side.with(Y_ROT_180).with(UV_LOCK))
+                .with(condition().term(TrunkBlock.WEST_CONNECTION, WallSide.LOW), side.with(Y_ROT_270).with(UV_LOCK))
+                .with(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.TALL), sideTall.with(UV_LOCK))
+                .with(condition().term(TrunkBlock.EAST_CONNECTION, WallSide.TALL), sideTall.with(Y_ROT_90).with(UV_LOCK))
+                .with(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.TALL), sideTall.with(Y_ROT_180).with(UV_LOCK))
+                .with(condition().term(TrunkBlock.WEST_CONNECTION, WallSide.TALL), sideTall.with(Y_ROT_270).with(UV_LOCK))
+                //corner
+                .with(and(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.LOW).term(TrunkBlock.WEST_CONNECTION, WallSide.LOW)), corner.with(UV_LOCK))
+                .with(and(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.LOW).term(TrunkBlock.EAST_CONNECTION, WallSide.LOW)), corner.with(Y_ROT_90).with(UV_LOCK))
+                .with(and(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.LOW).term(TrunkBlock.EAST_CONNECTION, WallSide.LOW)), corner.with(Y_ROT_180).with(UV_LOCK))
+                .with(and(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.LOW).term(TrunkBlock.WEST_CONNECTION, WallSide.LOW)), corner.with(Y_ROT_270).with(UV_LOCK))
+                .with(and(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.TALL).term(TrunkBlock.EAST_CONNECTION, WallSide.TALL)), cornerTall.with(UV_LOCK))
+                .with(and(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.TALL).term(TrunkBlock.WEST_CONNECTION, WallSide.TALL)), cornerTall.with(Y_ROT_90).with(UV_LOCK))
+                .with(and(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.TALL).term(TrunkBlock.EAST_CONNECTION, WallSide.TALL)), cornerTall.with(Y_ROT_180).with(UV_LOCK))
+                .with(and(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.TALL).term(TrunkBlock.WEST_CONNECTION, WallSide.TALL)), cornerTall.with(Y_ROT_270).with(UV_LOCK));
+        this.blockStateOutput.accept(model);
+        this.registerSimpleItemModel(trunk, inventory);
+    }
+
+    public static Condition and(ConditionBuilder... condition) {
+        return new CombinedCondition(CombinedCondition.Operation.AND, Stream.of(condition).map(ConditionBuilder::build).toList());
     }
 
     @Override
