@@ -161,8 +161,8 @@
       "when": {
         "AND": [
           {
-            "east_connection": "tall",
-            "north_connection": "tall"
+            "north_connection": "tall",
+            "west_connection": "tall"
           }
         ]
       }
@@ -176,8 +176,8 @@
       "when": {
         "AND": [
           {
-            "north_connection": "tall",
-            "west_connection": "tall"
+            "east_connection": "tall",
+            "north_connection": "tall"
           }
         ]
       }
