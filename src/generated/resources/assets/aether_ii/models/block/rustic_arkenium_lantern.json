@@ -1,0 +1,6 @@
+{
+  "parent": "aether_ii:block/template_rustic_arkenium_lantern",
+  "textures": {
+    "lantern": "aether_ii:block/rustic_arkenium_lantern"
+  }
+}

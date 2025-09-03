@@ -649,6 +649,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         // Utility
         this.dropSelf(AetherIIBlocks.AMBROSIUM_TORCH.get());
         this.dropSelf(AetherIIBlocks.ARKENIUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get());
         this.dropSelf(AetherIIBlocks.ARKENIUM_CHAIN.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_FURNACE.get());
