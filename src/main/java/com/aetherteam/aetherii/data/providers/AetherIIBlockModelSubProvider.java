@@ -84,14 +84,14 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .with(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.TALL), sideTall.with(Y_ROT_180).with(UV_LOCK))
                 .with(condition().term(TrunkBlock.WEST_CONNECTION, WallSide.TALL), sideTall.with(Y_ROT_270).with(UV_LOCK))
                 //corner
-                .with(and(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.LOW).term(TrunkBlock.WEST_CONNECTION, WallSide.LOW)), corner.with(UV_LOCK))
+                /*.with(and(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.LOW).term(TrunkBlock.WEST_CONNECTION, WallSide.LOW)), corner.with(UV_LOCK))
                 .with(and(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.LOW).term(TrunkBlock.EAST_CONNECTION, WallSide.LOW)), corner.with(Y_ROT_90).with(UV_LOCK))
                 .with(and(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.LOW).term(TrunkBlock.EAST_CONNECTION, WallSide.LOW)), corner.with(Y_ROT_180).with(UV_LOCK))
                 .with(and(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.LOW).term(TrunkBlock.WEST_CONNECTION, WallSide.LOW)), corner.with(Y_ROT_270).with(UV_LOCK))
                 .with(and(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.TALL).term(TrunkBlock.WEST_CONNECTION, WallSide.TALL)), cornerTall.with(UV_LOCK))
                 .with(and(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.TALL).term(TrunkBlock.EAST_CONNECTION, WallSide.TALL)), cornerTall.with(Y_ROT_90).with(UV_LOCK))
                 .with(and(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.TALL).term(TrunkBlock.EAST_CONNECTION, WallSide.TALL)), cornerTall.with(Y_ROT_180).with(UV_LOCK))
-                .with(and(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.TALL).term(TrunkBlock.WEST_CONNECTION, WallSide.TALL)), cornerTall.with(Y_ROT_270).with(UV_LOCK));
+                .with(and(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.TALL).term(TrunkBlock.WEST_CONNECTION, WallSide.TALL)), cornerTall.with(Y_ROT_270).with(UV_LOCK))*/;
         this.blockStateOutput.accept(model);
         this.registerSimpleItemModel(trunk, inventory);
     }
