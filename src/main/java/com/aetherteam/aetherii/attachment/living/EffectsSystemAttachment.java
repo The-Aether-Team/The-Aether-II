@@ -1,10 +1,12 @@
 package com.aetherteam.aetherii.attachment.living;
 
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.attributes.EffectResistanceAttribute;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AttributeMapAccessor;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -32,8 +34,12 @@ public class EffectsSystemAttachment {
 
     private final Map<Holder<MobEffect>, EffectBuildupInstance> activeBuildups;
 
+    private boolean needSync;
+
     protected EffectsSystemAttachment(Map<Holder<MobEffect>, EffectBuildupInstance> activeBuildups) {
-        this.activeBuildups = activeBuildups;
+        Map<Holder<MobEffect>, EffectBuildupInstance> map = Maps.newHashMap();
+        map.putAll(activeBuildups);
+        this.activeBuildups = map;
     }
 
     public EffectsSystemAttachment() {
@@ -49,6 +55,11 @@ public class EffectsSystemAttachment {
         });
         if (removableEffect[0] != null) {
             this.activeBuildups.remove(removableEffect[0]);
+            needSync = true;
+        }
+        if (needSync) {
+            needSync = false;
+            livingEntity.syncData(AetherIIDataAttachments.EFFECTS_SYSTEM);
         }
     }
 
@@ -66,22 +77,26 @@ public class EffectsSystemAttachment {
             } else {
                 this.activeBuildups.get(effect).increaseBuildup((int) modifiedAmount);
             }
+            needSync = true;
         }
     }
 
     public void reduceBuildup(Holder<MobEffect> effect, int amount) {
         if (this.activeBuildups.containsKey(effect)) {
             this.activeBuildups.get(effect).decreaseBuildup(amount);
+            needSync = true;
         }
     }
 
     public void setBuildups(Map<Holder<MobEffect>, EffectBuildupInstance> activeBuildups) {
         this.activeBuildups.clear();
         this.activeBuildups.putAll(activeBuildups);
+        needSync = true;
     }
 
     public void removeBuildup(Holder<MobEffect> effect) {
         this.activeBuildups.remove(effect);
+        needSync = true;
     }
 
     public Map<Holder<MobEffect>, EffectBuildupInstance> getActiveBuildups() {
