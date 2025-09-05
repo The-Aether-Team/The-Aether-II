@@ -8,7 +8,9 @@ import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.attachment.player.SwetLatchAttachment;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.monster.Swet;
+import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.InventoryScreenAccessor;
 import com.google.common.collect.Ordering;
@@ -30,12 +32,15 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.level.GameType;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 
 import java.awt.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 public class AetherIIOverlays {
     protected static final ResourceLocation BUILDUP_BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background");
@@ -48,6 +53,9 @@ public class AetherIIOverlays {
     protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_background");
     protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_progress");
     protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_BROKEN_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_broken");
+
+    public static final ResourceLocation TEXTURE_DEFAULT_JUMPS = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/jumps");
+
 
     public static void registerOverlays(RegisterGuiLayersEvent event) {
         event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aether_portal_overlay"), (guiGraphics, partialTicks) -> {
@@ -86,6 +94,54 @@ public class AetherIIOverlays {
                 }
             }
         });
+        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_jumps"), (guiGraphics, partialTicks) -> {
+            Minecraft minecraft = Minecraft.getInstance();
+            LocalPlayer player = minecraft.player;
+            if (player != null) {
+                renderMoaJumps(guiGraphics, player);
+            }
+        });
+    }
+
+    private static void renderMoaJumps(GuiGraphics guiGraphics, LocalPlayer player) {
+        if (player.getVehicle() instanceof Moa moa && !Minecraft.getInstance().options.hideGui) {
+            for (int jumpCount = 0; jumpCount < moa.getMaxStamina(); jumpCount++) {
+                int xPos = ((guiGraphics.guiWidth() / 2) + (jumpCount * 8)) - (moa.getMaxStamina() * 8) / 2;
+                int yPos = 18;
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, appendBackground(jumpCount >= moa.getRemainingStamina(), getMoaJumpTexture(moa, jumpCount)), xPos, yPos, 9, 11);
+            }
+        }
+    }
+
+    private static ResourceLocation getMoaJumpTexture(Moa moa, double count) {
+        AttributeInstance instance = moa.getAttribute(AetherIIAttributes.MOA_STAMINA);
+        if (instance != null) {
+            if (count < instance.getBaseValue()) {
+                return TEXTURE_DEFAULT_JUMPS;
+            } else {
+                Set<AttributeModifier> modifiers = instance.getModifiers();
+                double currentCount = instance.getBaseValue();
+
+                for (AttributeModifier modifier : modifiers) {
+                    if (modifier.operation() == AttributeModifier.Operation.ADD_MULTIPLIED_BASE) {
+                        currentCount += (instance.getBaseValue() * modifier.amount());
+                    } else {
+                        currentCount += modifier.amount();
+                    }
+
+                    /*if (currentCount >= count) {
+                        return moa.getOverlayTexture(modifier.id());
+                    }*/
+                }
+            }
+        }
+        return TEXTURE_DEFAULT_JUMPS;
+    }
+
+    private static ResourceLocation appendBackground(boolean background, ResourceLocation location) {
+        if (background) {
+            return location.withSuffix("_background");
+        } else return location;
     }
 
     private static void renderAetherPortalOverlay(GuiGraphics guiGraphics, Minecraft minecraft, AetherIIPlayerAttachment handler, DeltaTracker partialTicks) {
