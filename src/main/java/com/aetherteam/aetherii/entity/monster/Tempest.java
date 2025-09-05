@@ -94,6 +94,11 @@ public class Tempest extends Mob implements Blighted {
     }
 
     @Override
+    public void travel(Vec3 p_415638_) {
+        this.travelFlying(p_415638_, 0.02F);
+    }
+
+    @Override
     public void aiStep() {
         super.aiStep();
         if (Blighted.super.inSunlight(this) || this.getHideTime() >= HIDE_ANIMATION_START) {
