@@ -94,6 +94,11 @@ public class Zephyr extends Mob implements Enemy {
         }
     }
 
+    @Override
+    public void travel(Vec3 p_415638_) {
+        this.travelFlying(p_415638_, 0.02F);
+    }
+
     /**
      * Handles values used for the Zephyr's animation and removing the Zephyr if it goes below or above the build height.
      */
