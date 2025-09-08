@@ -104,7 +104,7 @@ public class MoaEggBlock extends BaseEntityBlock {
                 moa.setFeatherShape(state.getValue(FEATHER_SHAPE).getSerializedName());
 
                 //moa.setMoaTypeByKey(this.moaType);
-                moa.snapTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(level.random.nextFloat() * 360.0F), 0.0F);
+                moa.moveTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(level.random.nextFloat() * 360.0F), 0.0F);
                 level.addFreshEntity(moa);
             }
         }

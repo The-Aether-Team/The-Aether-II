@@ -7,7 +7,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastManager;
-import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -49,7 +49,7 @@ public class GuidebookToast implements Toast {
     @Override
     public void render(GuiGraphics guiGraphics, Font font, long l) {
 
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_SPRITE, 0, 0, this.width(), this.height());
+        guiGraphics.blitSprite(RenderType::guiTextured, BACKGROUND_SPRITE, 0, 0, this.width(), this.height());
         this.type.render(guiGraphics, this.width(), this.height());
         this.icon.render(guiGraphics, 6, 8);
         guiGraphics.drawString(font, Component.translatable("gui.aether_ii.toast.guidebook.description"), 32, 18, -724497, false);
@@ -73,7 +73,7 @@ public class GuidebookToast implements Toast {
         }
 
         public void render(GuiGraphics guiGraphics, int width, int height) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.sprite, 0, 0, width, height);
+            guiGraphics.blitSprite(RenderType::guiTextured, this.sprite, 0, 0, width, height);
         }
 
         public int id() {
@@ -105,7 +105,7 @@ public class GuidebookToast implements Toast {
         }
 
         public void render(GuiGraphics guiGraphics, int x, int y) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.sprite, x, y, 22, 16);
+            guiGraphics.blitSprite(RenderType::guiTextured, this.sprite, x, y, 22, 16);
             guiGraphics.drawString(Minecraft.getInstance().font, Component.translatable(this.title), 32, 7, -13423317, false);
         }
 

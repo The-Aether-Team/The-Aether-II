@@ -8,6 +8,7 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import com.mojang.authlib.GameProfile;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemCooldowns;
@@ -32,7 +33,7 @@ public abstract class PlayerMixin { //todo sounds, particles, and stats
     protected abstract boolean wantsToStopRiding();
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void init(Level level, GameProfile gameProfile, CallbackInfo ci) {
+    private void init(Level level, BlockPos pos, float yRot, GameProfile gameProfile, CallbackInfo ci) {
         Player player = (Player) (Object) this;
         ItemCooldowns itemCooldowns = this.cooldowns;
         itemCooldowns = ((ItemCooldownsWrapper) itemCooldowns).aether_ii$setPlayer(player);

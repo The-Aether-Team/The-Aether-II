@@ -108,7 +108,7 @@ public class AetherPoolElement extends StructurePoolElement {
         for(StructureTemplate.StructureBlockInfo structureBlockInfo : listFilter) {
             CompoundTag compoundtag = structureBlockInfo.nbt();
             if (compoundtag != null) {
-                StructureMode mode = StructureMode.valueOf(compoundtag.getStringOr("mode", StructureMode.SAVE.getSerializedName()));
+                StructureMode mode = StructureMode.valueOf(compoundtag.getString("mode"));
                 if (mode == StructureMode.DATA) {
                     listInfo.add(structureBlockInfo);
                 }

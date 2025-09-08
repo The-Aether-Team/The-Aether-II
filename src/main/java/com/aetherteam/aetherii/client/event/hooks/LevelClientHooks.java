@@ -35,8 +35,8 @@ public class LevelClientHooks {
      *
      * @see com.aetherteam.aetherii.client.event.listeners.LevelClientListener#onRenderLevelLast(RenderLevelStageEvent)
      */
-    public static void renderDungeonBlockOverlays(PoseStack poseStack, Camera camera, Frustum frustum, Minecraft minecraft) {
-        if (minecraft.level != null) {
+    public static void renderDungeonBlockOverlays(RenderLevelStageEvent.Stage stage, PoseStack poseStack, Camera camera, Frustum frustum, Minecraft minecraft) {
+        if (stage == RenderLevelStageEvent.Stage.AFTER_PARTICLES && minecraft.level != null) {
             LocalPlayer player = minecraft.player;
             ClientLevel level = minecraft.level;
             RenderBuffers renderBuffers = minecraft.renderBuffers();

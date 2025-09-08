@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.world.entity.AnimationState;
 
 public class CarrionSproutRenderState extends LivingEntityRenderState {
-    public AnimationState trapActivateAnimationState = new AnimationState();
-    public AnimationState trapDeactivateAnimationState = new AnimationState();
+    public AnimationState trapActiveAnimationState = new AnimationState();
+    public AnimationState trapDeactiveAnimationState = new AnimationState();
 
 }

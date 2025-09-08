@@ -1,40 +1,55 @@
 package com.aetherteam.aetherii.attachment.player;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerPlayerAccessor;
+import com.aetherteam.aetherii.network.packet.CurrencySyncPacket;
+import com.aetherteam.nitrogen.attachment.INBTSynchable;
+import com.aetherteam.nitrogen.network.packet.SyncPacket;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
+import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
-public class CurrencyAttachment {
+public class CurrencyAttachment implements INBTSynchable {
     private int amount;
 
-    public static final MapCodec<CurrencyAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+    private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
+            Map.entry("setAmount", Triple.of(Type.INT, (object) -> this.setAmount((int) object), this::getAmount))
+    );
+    private boolean shouldSyncAfterJoin;
+
+    public static final Codec<CurrencyAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.INT.fieldOf("amount").forGetter(CurrencyAttachment::getAmount)
     ).apply(instance, CurrencyAttachment::new));
-    public static final StreamCodec<RegistryFriendlyByteBuf, CurrencyAttachment> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.INT, CurrencyAttachment::getAmount,
-            CurrencyAttachment::new);
+
+    public CurrencyAttachment() {
+        this.amount = 0;
+    }
 
     protected CurrencyAttachment(int amount) {
         this.amount = amount;
     }
 
-    public CurrencyAttachment() {
-        this.amount = 0;
+    @Override
+    public Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> getSynchableFunctions() {
+        return this.synchableFunctions;
+    }
+
+    public void login(Player player) {
+        this.shouldSyncAfterJoin = true;
     }
 
     public void clone(Player original, Player player, boolean wasDeath) {
@@ -43,9 +58,20 @@ public class CurrencyAttachment {
                 GameRules gameRules = serverLevel.getGameRules();
                 if (gameRules.getRule(GameRules.RULE_KEEPINVENTORY).get()) {
                     player.getData(AetherIIDataAttachments.CURRENCY).setAmount(original.getData(AetherIIDataAttachments.CURRENCY).getAmount());
-                    player.syncData(AetherIIDataAttachments.CURRENCY);
                 }
             }
+        }
+        this.shouldSyncAfterJoin = true;
+    }
+
+    public void postTickUpdate(Player player) {
+        this.syncAfterJoin(player);
+    }
+
+    private void syncAfterJoin(Player player) {
+        if (this.shouldSyncAfterJoin) {
+            this.forceSync(player.getId(), Direction.CLIENT);
+            this.shouldSyncAfterJoin = false;
         }
     }
 
@@ -81,5 +107,10 @@ public class CurrencyAttachment {
 
     public int getAmount() {
         return this.amount;
+    }
+
+    @Override
+    public SyncPacket getSyncPacket(int entityID, String key, Type type, Object value) {
+        return new CurrencySyncPacket(entityID, key, type, value);
     }
 }

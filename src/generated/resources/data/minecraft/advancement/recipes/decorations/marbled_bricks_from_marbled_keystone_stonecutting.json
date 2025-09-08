@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_marbled_keystone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:marbled_keystone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:marbled_bricks_from_marbled_keystone_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_marbled_keystone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:marbled_bricks_from_marbled_keystone_stonecutting"
+    ]
+  }
+}

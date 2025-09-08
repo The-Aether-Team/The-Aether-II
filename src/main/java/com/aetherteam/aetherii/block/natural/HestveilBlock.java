@@ -135,7 +135,7 @@ public class HestveilBlock extends Block implements CanisterPickup {
             }
             for (Entity entity : level.getEntities(null, AABB.encapsulatingFullBlocks(pos, pos))) {
                 if (entity instanceof LivingEntity livingEntity) {
-                    livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, EffectBuildupPresets.IMMOLATION, 100);
+                    livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.IMMOLATION, 100);
                 }
             }
             for (Direction direction : Direction.values()) {

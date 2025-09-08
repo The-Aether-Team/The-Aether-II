@@ -2,10 +2,12 @@ package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.AetherIIShaders;
-import net.minecraft.client.renderer.RenderPipelines;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.TriState;
 import net.neoforged.neoforge.client.event.RegisterRenderBuffersEvent;
 
 public class AetherIIRenderTypes {
@@ -13,18 +15,30 @@ public class AetherIIRenderTypes {
 
     private static final RenderType CLOUD_COVER = RenderType.create(
             "aether:cloud_cover",
+            DefaultVertexFormat.POSITION_COLOR,
+            VertexFormat.Mode.TRIANGLE_FAN,
             1536,
-            AetherIIShaders.getCloudCoverShader(),
+            false,
+            false,
             RenderType.CompositeState.builder()
+                    .setShaderState(new RenderStateShard.ShaderStateShard(AetherIIShaders.getCloudCoverShader()))
+                    .setTransparencyState(RenderType.TRANSLUCENT_TRANSPARENCY)
+                    .setWriteMaskState(RenderType.COLOR_WRITE)
                     .createCompositeState(false));
 
     private static final RenderType IRRADIATED_GLINT = RenderType.create(
             "aether_ii:irradiated_glint",
+            DefaultVertexFormat.POSITION_TEX,
+            VertexFormat.Mode.QUADS,
             1536,
-            RenderPipelines.GLINT,
             RenderType.CompositeState.builder()
-                    .setTextureState(new RenderStateShard.TextureStateShard(IRRADIATED_GLINT_ITEM, false))
-                    .setTexturingState(RenderStateShard.GLINT_TEXTURING)
+                    .setShaderState(RenderType.RENDERTYPE_GLINT_SHADER)
+                    .setTextureState(new RenderStateShard.TextureStateShard(IRRADIATED_GLINT_ITEM, TriState.TRUE, false))
+                    .setWriteMaskState(RenderType.COLOR_WRITE)
+                    .setCullState(RenderType.NO_CULL)
+                    .setDepthTestState(RenderType.EQUAL_DEPTH_TEST)
+                    .setTransparencyState(RenderType.GLINT_TRANSPARENCY)
+                    .setTexturingState(RenderType.GLINT_TEXTURING)
                     .createCompositeState(false)
     );
 

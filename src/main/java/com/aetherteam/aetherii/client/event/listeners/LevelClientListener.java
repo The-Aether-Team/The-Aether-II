@@ -12,11 +12,12 @@ public class LevelClientListener {
     /**
      * @see LevelClientHooks#renderDungeonBlockOverlays(RenderLevelStageEvent.Stage, PoseStack, Camera, Frustum, Minecraft)
      */
-    public static void onRenderLevelLast(RenderLevelStageEvent.AfterParticles event) {
+    public static void onRenderLevelLast(RenderLevelStageEvent event) {
+        RenderLevelStageEvent.Stage stage = event.getStage();
         PoseStack poseStack = event.getPoseStack();
         Camera camera = event.getCamera();
         Frustum frustum = event.getFrustum();
         Minecraft minecraft = Minecraft.getInstance();
-        LevelClientHooks.renderDungeonBlockOverlays(poseStack, camera, frustum, minecraft);
+        LevelClientHooks.renderDungeonBlockOverlays(stage, poseStack, camera, frustum, minecraft);
     }
 }

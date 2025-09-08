@@ -53,8 +53,8 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
     }
 
     public void generateDyedArmorItem(Item item, int defaultColor) {
-        ResourceLocation resourceLocation = this.generateLayeredItem(item, TextureMapping.getItemTexture(item), TextureMapping.getItemTexture(item).withSuffix("_dyed"));
-        this.itemModelOutput.accept(item, ItemModelUtils.tintedModel(resourceLocation, BLANK_LAYER, new Dye(defaultColor)));
+        ResourceLocation resourcelocation = this.generateLayeredItem(item, TextureMapping.getItemTexture(item), TextureMapping.getItemTexture(item).withSuffix("_dyed"));
+        this.itemModelOutput.accept(item, ItemModelUtils.tintedModel(resourcelocation, BLANK_LAYER, new Dye(defaultColor)));
     }
 
     public void generateMoaFeatherItem(Item item) {

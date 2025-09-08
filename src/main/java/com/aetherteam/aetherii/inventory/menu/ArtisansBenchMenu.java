@@ -58,7 +58,7 @@ public class ArtisansBenchMenu extends AbstractContainerMenu {
 
             @Override
             public void onTake(Player player, ItemStack stack) {
-                stack.onCraftedBy(player, stack.getCount());
+                stack.onCraftedBy(player.level(), player, stack.getCount());
                 ArtisansBenchMenu.this.resultContainer.awardUsedRecipes(player, this.getRelevantItems());
                 ItemStack itemStack = ArtisansBenchMenu.this.inputSlot.remove(1);
                 if (!itemStack.isEmpty()) {
@@ -192,7 +192,7 @@ public class ArtisansBenchMenu extends AbstractContainerMenu {
             Item item = itemStack1.getItem();
             itemStack = itemStack1.copy();
             if (index == 1) {
-                item.onCraftedBy(itemStack1, player);
+                item.onCraftedBy(itemStack1, player.level(), player);
                 if (!this.moveItemStackTo(itemStack1, 2, 38, true)) {
                     return ItemStack.EMPTY;
                 }

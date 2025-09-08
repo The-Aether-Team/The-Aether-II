@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.client.renderer.item.properties;
 
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.properties.select.SelectItemModelProperty;
@@ -24,10 +23,5 @@ public class SelectFeatherColor implements SelectItemModelProperty<Moa.FeatherCo
     @Override
     public Type<? extends SelectItemModelProperty<Moa.FeatherColor>, Moa.FeatherColor> type() {
         return TYPE;
-    }
-
-    @Override
-    public Codec<Moa.FeatherColor> valueCodec() {
-        return Moa.FeatherColor.CODEC;
     }
 }

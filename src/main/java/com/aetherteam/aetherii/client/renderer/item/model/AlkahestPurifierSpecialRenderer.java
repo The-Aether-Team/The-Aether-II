@@ -11,9 +11,8 @@ import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemDisplayContext;
-import org.joml.Vector3f;
-
-import java.util.Set;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 public class AlkahestPurifierSpecialRenderer implements NoDataSpecialModelRenderer {
     private final AlkahestPurifierRenderer renderer;
@@ -28,11 +27,7 @@ public class AlkahestPurifierSpecialRenderer implements NoDataSpecialModelRender
         this.renderer.render(poseStack, buffer, packedLight, packedOverlay, Direction.SOUTH.toYRot(), 0, this.openness);
     }
 
-    @Override
-    public void getExtents(Set<Vector3f> set) {
-        //todo
-    }
-
+    @OnlyIn(Dist.CLIENT)
     public record Unbaked(float openness) implements SpecialModelRenderer.Unbaked {
         public static final MapCodec<AlkahestPurifierSpecialRenderer.Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
                 Codec.FLOAT.optionalFieldOf("openness", 0.0F).forGetter(AlkahestPurifierSpecialRenderer.Unbaked::openness)

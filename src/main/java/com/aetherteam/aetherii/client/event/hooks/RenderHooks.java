@@ -5,7 +5,6 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.gui.component.guidebook.GuidebookButton;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookEquipmentScreen;
-import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.item.tooltip.ClientCharmTooltip;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
@@ -15,7 +14,6 @@ import com.aetherteam.aetherii.mixin.mixins.common.accessor.AttributeMapAccessor
 import com.aetherteam.aetherii.network.packet.serverbound.OpenGuidebookPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.OpenInventoryPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.OutpostRespawnPacket;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
@@ -27,15 +25,11 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -47,8 +41,8 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.FogType;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.commons.lang3.tuple.Triple;
 
 import javax.annotation.Nullable;
@@ -77,7 +71,7 @@ public class RenderHooks {
             }
         }
         if (newScreen instanceof GuidebookEquipmentScreen) {
-            ClientPacketDistributor.sendToServer(new OpenGuidebookPacket(ItemStack.EMPTY));
+            PacketDistributor.sendToServer(new OpenGuidebookPacket(ItemStack.EMPTY));
         }
         return newScreen;
     }
@@ -107,9 +101,9 @@ public class RenderHooks {
                         InventoryScreen inventory = new InventoryScreen(player);
                         minecraft.setScreen(inventory);
                         player.inventoryMenu.setCarried(stack);
-                        ClientPacketDistributor.sendToServer(new OpenInventoryPacket(stack));
+                        PacketDistributor.sendToServer(new OpenInventoryPacket(stack));
                     } else {
-                        ClientPacketDistributor.sendToServer(new OpenGuidebookPacket(stack));
+                        PacketDistributor.sendToServer(new OpenGuidebookPacket(stack));
                     }
                 }
             }).pos((screen.width / 2) - 50, (screen.height / 2) + 101).size(100, 22));
@@ -137,7 +131,7 @@ public class RenderHooks {
         if (screen instanceof DeathScreen deathScreen) {
             if (!Minecraft.getInstance().player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).getCampfirePositions().isEmpty()) {
                 Button outpostRespawnButton = Button.builder(Component.translatable("gui.aether_ii.deathScreen.outpost_respawn"), (button) -> {
-                    ClientPacketDistributor.sendToServer(new OutpostRespawnPacket());
+                    PacketDistributor.sendToServer(new OutpostRespawnPacket());
                     Minecraft.getInstance().player.respawn();
                     button.active = false;
                 }).bounds(deathScreen.width / 2 - 100, deathScreen.height / 4 + 96, 200, 20).build();
@@ -196,7 +190,7 @@ public class RenderHooks {
                 ClientLevel.ClientLevelData worldInfo = clientLevel.getLevelData();
                 FogType type = camera.getFluidInCamera();
 
-                double f = (camera.getPosition().y() - 64) * worldInfo.voidDarknessOnsetRange();
+                double f = (camera.getPosition().y() - 64) * worldInfo.getClearColorScale();
                 if (f < 1.0 && type != FogType.LAVA && type != FogType.POWDER_SNOW) {
                     if (f < 0.0F) {
                         f = 0.0F;
@@ -207,7 +201,7 @@ public class RenderHooks {
                     blue *= (float) Math.clamp(f * 1.25F, 0.2F * 1.25F, 1.0F);
                 }
 
-                double d0 = (camera.getPosition().y() - (double) clientLevel.getMinY()) * worldInfo.voidDarknessOnsetRange();
+                double d0 = (camera.getPosition().y() - (double) clientLevel.getMinY()) * worldInfo.getClearColorScale();
                 if (d0 < 1.0 && type != FogType.LAVA && type != FogType.POWDER_SNOW) {
                     if (d0 < 0.0) {
                         d0 = 0.0;
@@ -255,11 +249,5 @@ public class RenderHooks {
             }
         }
         return null;
-    }
-
-    public static void renderFirstPersonGloves(PoseStack poseStack, MultiBufferSource buffer, HumanoidArm arm, AbstractClientPlayer player, int packedLight, PlayerSkin skin) {
-        poseStack.pushPose();
-        GlovesLayer.renderOnFirstPerson(poseStack, buffer, arm, skin, packedLight);
-        poseStack.popPose();
     }
 }

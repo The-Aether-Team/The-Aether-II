@@ -1,9 +1,8 @@
 #version 150
 
-#moj_import <minecraft:dynamictransforms.glsl>
-
-
 in vec4 vertexColor;
+
+uniform vec4 ColorModulator;
 
 out vec4 fragColor;
 

@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.state.CockatriceRenderState;
-import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
@@ -18,10 +17,6 @@ public class CockatriceModel extends EntityModel<CockatriceRenderState> {
     public static final AnimationHolder DART_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/dart_attack"));
     public static final AnimationHolder CLAW_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/claw_attack"));
     public static final AnimationHolder DIG_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/dig"));
-    private final KeyframeAnimation runAnimation;
-    private final KeyframeAnimation dartAttackAnimation;
-    private final KeyframeAnimation clawAttackAnimation;
-    private final KeyframeAnimation digAnimation;
 
     private final ModelPart body;
     private final ModelPart body_front;
@@ -30,10 +25,6 @@ public class CockatriceModel extends EntityModel<CockatriceRenderState> {
 
     public CockatriceModel(ModelPart root) {
         super(root);
-        this.runAnimation = RUN_ANIMATION.get().bake(root);
-        this.dartAttackAnimation = DART_ATTACK_ANIMATION.get().bake(root);
-        this.clawAttackAnimation = CLAW_ATTACK_ANIMATION.get().bake(root);
-        this.digAnimation = DIG_ANIMATION.get().bake(root);
         this.body = root.getChild("body");
         this.body_front = this.body.getChild("body_front");
         this.neck = this.body_front.getChild("neck");
@@ -207,9 +198,9 @@ public class CockatriceModel extends EntityModel<CockatriceRenderState> {
         float f1 = entity.walkAnimationPos;
         this.head.xRot = (entity.xRot * Mth.DEG_TO_RAD) + 0.0873F;
         this.head.yRot = entity.yRot * Mth.DEG_TO_RAD;
-        this.runAnimation.applyWalk(f1, f, 1.0F, 1.5F);
-        this.clawAttackAnimation.apply(entity.clawAttackAnimationState, entity.ageInTicks, 2.0F);
-        this.dartAttackAnimation.apply(entity.dartAttackAnimationState, entity.ageInTicks, 1.0F);
-        this.digAnimation.apply(entity.digAnimationState, entity.ageInTicks, 1.0F);
+        this.animateWalk(RUN_ANIMATION, f1, f, 1.0F, 1.5F);
+        this.animate(entity.clawAttackAnimationState, CLAW_ATTACK_ANIMATION, entity.ageInTicks, 2.0F);
+        this.animate(entity.dartAttackAnimationState, DART_ATTACK_ANIMATION, entity.ageInTicks, 1.0F);
+        this.animate(entity.digAnimationState, DIG_ANIMATION, entity.ageInTicks, 1.0F);
     }
 }

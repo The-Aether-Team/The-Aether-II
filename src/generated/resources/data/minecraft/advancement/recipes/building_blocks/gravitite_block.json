@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gravitite_plate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:gravitite_plate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:gravitite_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gravitite_plate"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:gravitite_block"
+    ]
+  }
+}

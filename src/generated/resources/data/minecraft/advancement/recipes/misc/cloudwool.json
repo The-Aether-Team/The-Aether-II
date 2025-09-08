@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cloudtwine": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:cloudtwine"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cloudwool"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cloudtwine"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cloudwool"
+    ]
+  }
+}

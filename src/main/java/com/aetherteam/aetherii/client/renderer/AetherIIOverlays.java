@@ -8,23 +8,23 @@ import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.attachment.player.SwetLatchAttachment;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
-import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.monster.Swet;
-import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.InventoryScreenAccessor;
 import com.google.common.collect.Ordering;
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.AttackIndicatorStatus;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.MobEffectTextureManager;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ARGB;
@@ -32,15 +32,12 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.level.GameType;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 
 import java.awt.*;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 public class AetherIIOverlays {
     protected static final ResourceLocation BUILDUP_BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background");
@@ -53,9 +50,6 @@ public class AetherIIOverlays {
     protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_background");
     protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_progress");
     protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_BROKEN_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_broken");
-
-    public static final ResourceLocation TEXTURE_DEFAULT_JUMPS = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/jumps");
-
 
     public static void registerOverlays(RegisterGuiLayersEvent event) {
         event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aether_portal_overlay"), (guiGraphics, partialTicks) -> {
@@ -94,54 +88,6 @@ public class AetherIIOverlays {
                 }
             }
         });
-        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_jumps"), (guiGraphics, partialTicks) -> {
-            Minecraft minecraft = Minecraft.getInstance();
-            LocalPlayer player = minecraft.player;
-            if (player != null) {
-                renderMoaJumps(guiGraphics, player);
-            }
-        });
-    }
-
-    private static void renderMoaJumps(GuiGraphics guiGraphics, LocalPlayer player) {
-        if (player.getVehicle() instanceof Moa moa && !Minecraft.getInstance().options.hideGui) {
-            for (int jumpCount = 0; jumpCount < moa.getMaxStamina(); jumpCount++) {
-                int xPos = ((guiGraphics.guiWidth() / 2) + (jumpCount * 8)) - (moa.getMaxStamina() * 8) / 2;
-                int yPos = 18;
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, appendBackground(jumpCount >= moa.getRemainingStamina(), getMoaJumpTexture(moa, jumpCount)), xPos, yPos, 9, 11);
-            }
-        }
-    }
-
-    private static ResourceLocation getMoaJumpTexture(Moa moa, double count) {
-        AttributeInstance instance = moa.getAttribute(AetherIIAttributes.MOA_STAMINA);
-        if (instance != null) {
-            if (count < instance.getBaseValue()) {
-                return TEXTURE_DEFAULT_JUMPS;
-            } else {
-                Set<AttributeModifier> modifiers = instance.getModifiers();
-                double currentCount = instance.getBaseValue();
-
-                for (AttributeModifier modifier : modifiers) {
-                    if (modifier.operation() == AttributeModifier.Operation.ADD_MULTIPLIED_BASE) {
-                        currentCount += (instance.getBaseValue() * modifier.amount());
-                    } else {
-                        currentCount += modifier.amount();
-                    }
-
-                    /*if (currentCount >= count) {
-                        return moa.getOverlayTexture(modifier.id());
-                    }*/
-                }
-            }
-        }
-        return TEXTURE_DEFAULT_JUMPS;
-    }
-
-    private static ResourceLocation appendBackground(boolean background, ResourceLocation location) {
-        if (background) {
-            return location.withSuffix("_background");
-        } else return location;
     }
 
     private static void renderAetherPortalOverlay(GuiGraphics guiGraphics, Minecraft minecraft, AetherIIPlayerAttachment handler, DeltaTracker partialTicks) {
@@ -155,7 +101,7 @@ public class AetherIIOverlays {
 
             int i = ARGB.white(timeInPortal);
             TextureAtlasSprite textureatlassprite = minecraft.getBlockRenderer().getBlockModelShaper().getParticleIcon(AetherIIBlocks.AETHER_PORTAL.get().defaultBlockState());
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, textureatlassprite, 0, 0, guiGraphics.guiWidth(), guiGraphics.guiHeight(), i);
+            guiGraphics.blitSprite(RenderType::guiTexturedOverlay, textureatlassprite, 0, 0, guiGraphics.guiWidth(), guiGraphics.guiHeight(), i);
         }
     }
 
@@ -167,9 +113,10 @@ public class AetherIIOverlays {
                 return;
             }
 
-            //RenderSystem.enableBlend();
+            RenderSystem.enableBlend();
             int j1 = 0;
             int k1 = 0;
+            MobEffectTextureManager mobeffecttexturemanager = minecraft.getMobEffectTextures();
 
             for (EffectBuildupInstance buildup : Ordering.natural().reverse().sortedCopy(collection)) {
                 Holder<MobEffect> effect = buildup.getType();
@@ -193,10 +140,10 @@ public class AetherIIOverlays {
                 int buildupScaledValue = Math.min(buildup.getBuildup() / (buildup.getBuildupCap() / 24), 24);
 
                 guiGraphics.enableScissor(i, j + 24 - buildupScaledValue, i + 24, (j + 24 - buildupScaledValue) + buildupScaledValue);
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BUILDUP_BACKGROUND_OVERLAY_SPRITE, i, (j + 24 - buildupScaledValue) - (24 - buildupScaledValue), 24, 24, ARGB.opaque(color.getRGB()));
+                guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_OVERLAY_SPRITE, i, (j + 24 - buildupScaledValue) - (24 - buildupScaledValue), 24, 24, ARGB.opaque(color.getRGB()));
                 guiGraphics.disableScissor();
 
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BUILDUP_BACKGROUND_SPRITE, i, j, 24, 24);
+                guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_SPRITE, i, j, 24, 24);
 
                 if (buildup.isBuildupFull()) {
                     MobEffectInstance instance = player.getEffect(buildup.getType());
@@ -211,21 +158,21 @@ public class AetherIIOverlays {
                         int uWidth = 24;
                         int vHeight = durationValueScaled;
                         guiGraphics.enableScissor(x, y, x + uWidth, y + vHeight);
-                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BUILDUP_BACKGROUND_BACKING_SPRITE, x - uPosition, y - vPosition, textureWidth, textureHeight, ARGB.opaque(color.getRGB()));
+                        guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_BACKING_SPRITE, x - uPosition, y - vPosition, textureWidth, textureHeight, ARGB.opaque(color.getRGB()));
                         guiGraphics.disableScissor();
                     }
 
                     float flashInterval = (Mth.cos((0.5F * player.tickCount) - Mth.PI) / 2.0F) + 0.5F;
-                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BUILDUP_BACKGROUND_OUTLINE_SPRITE, i, j, 24, 24, ARGB.white(flashInterval));
+                    guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_OUTLINE_SPRITE, i, j, 24, 24, ARGB.white(flashInterval));
                 }
 
-                ResourceLocation location = Gui.getMobEffectSprite(effect);
+                TextureAtlasSprite textureatlassprite = mobeffecttexturemanager.get(effect);
                 int i1 = j;
                 int i_f = i;
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, i_f + 3, i1 + 3, 18, 18);
+                guiGraphics.blitSprite(RenderType::guiTextured, textureatlassprite, i_f + 3, i1 + 3, 18, 18);
             }
 
-            //RenderSystem.disableBlend();
+            RenderSystem.disableBlend();
         }
     }
 
@@ -240,22 +187,22 @@ public class AetherIIOverlays {
                 if (options.attackIndicator().get() == AttackIndicatorStatus.CROSSHAIR) {
                     if (options.getCameraType().isFirstPerson()) {
                         if (!minecraft.getDebugOverlay().showDebugScreen() || player.isReducedDebugInfo() || options.reducedDebugInfo().get()) {
-                            //RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+                            RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
                             int k = guiGraphics.guiWidth() / 2 - 19;
                             int j = guiGraphics.guiHeight() / 2 - 5;
 
-                            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k, j, 10, 10);
+                            guiGraphics.blitSprite(RenderType::guiTextured, CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k, j, 10, 10);
 
                             if (attachment.getShieldStamina() == 0) {
                                 int l = (int) (player.getCooldowns().getCooldownPercent(AetherIIItems.SKYROOT_SHIELD.toStack(), partialTicks.getGameTimeDeltaPartialTick(false)) * 10.0F);
-                                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, CROSSHAIR_BLOCK_INDICATOR_BROKEN_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
+                                guiGraphics.blitSprite(RenderType::guiTextured, CROSSHAIR_BLOCK_INDICATOR_BROKEN_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
                             } else {
                                 int l = (int) (f * 10.0F);
-                                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
+                                guiGraphics.blitSprite(RenderType::guiTextured, CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
                             }
 
-                            //RenderSystem.defaultBlendFunc();
+                            RenderSystem.defaultBlendFunc();
                         }
                     }
                 } else if (options.attackIndicator().get() == AttackIndicatorStatus.HOTBAR) {
@@ -268,14 +215,14 @@ public class AetherIIOverlays {
                         k2 = i + 91 + 1 + (!flag ? 31 : 3);
                     }
 
-                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k2, j2, 18, 18);
+                    guiGraphics.blitSprite(RenderType::guiTextured, HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k2, j2, 18, 18);
 
                     if (attachment.getShieldStamina() == 0) {
                         int l1 = (int) (player.getCooldowns().getCooldownPercent(AetherIIItems.SKYROOT_SHIELD.toStack(), partialTicks.getGameTimeDeltaPartialTick(false)) * 18.0F);
-                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, HOTBAR_BLOCK_INDICATOR_BROKEN_SPRITE, 18, 18, 0, 18 - l1, k2, j2 + 18 - l1, 18, l1);
+                        guiGraphics.blitSprite(RenderType::guiTextured, HOTBAR_BLOCK_INDICATOR_BROKEN_SPRITE, 18, 18, 0, 18 - l1, k2, j2 + 18 - l1, 18, l1);
                     } else {
                         int l1 = (int) (f * 18.0F);
-                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE, 18, 18, 0, 18 - l1, k2, j2 + 18 - l1, 18, l1);
+                        guiGraphics.blitSprite(RenderType::guiTextured, HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE, 18, 18, 0, 18 - l1, k2, j2 + 18 - l1, 18, l1);
                     }
                 }
             }
@@ -312,8 +259,8 @@ public class AetherIIOverlays {
     }
 
     private static void drawSingle(GuiGraphics guiGraphics, ResourceLocation sprite, int x, int y, float alpha) {
-        //RenderSystem.enableBlend();
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, 128, 128, ARGB.colorFromFloat(alpha, 1.0F, 1.0F, 1.0F));
-        //RenderSystem.disableBlend();
+        RenderSystem.enableBlend();
+        guiGraphics.blitSprite(RenderType::guiTextured, sprite, x, y, 128, 128, ARGB.colorFromFloat(alpha, 1.0F, 1.0F, 1.0F));
+        RenderSystem.disableBlend();
     }
 }

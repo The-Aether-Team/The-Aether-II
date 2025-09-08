@@ -153,9 +153,9 @@ public class CarrionSprout extends PathfinderMob {
                     this.setTrapTrigger(false);
                 }
             }
-            if (this.level().isDarkOutside() && !this.isTrapState()) {
+            if (this.level().isNight() && !this.isTrapState()) {
                 this.setTrapState(true);
-            } else if (this.level().isBrightOutside() && this.isTrapState()) {
+            } else if (this.level().isDay() && this.isTrapState()) {
                 this.setTrapState(false);
                 this.setTrapTrigger(false);
             }

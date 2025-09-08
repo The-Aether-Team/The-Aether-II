@@ -8,7 +8,6 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.ai.brain.MoaAi;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
-import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
 import com.aetherteam.aetherii.inventory.menu.provider.ExtraDataMenuProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -19,7 +18,8 @@ import com.aetherteam.aetherii.item.miscellaneous.MoaSaddlebagItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -49,46 +49,41 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 
-import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
 public class Moa extends MountableAnimal implements ContainerListener, HasCustomInventoryScreen {
-    private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_MOA_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
-    private static final EntityDataAccessor<String> DATA_FEATHER_SHAPE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<Optional<UUID>> DATA_MOA_UUID_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
+    private static final EntityDataAccessor<String> DATA_FEATHER_SHAPE_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<String> DATA_KERATIN_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<String> DATA_EYE_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<String> DATA_FEATHER_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
 
-    private static final EntityDataAccessor<Boolean> DATA_HUNGRY = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Integer> DATA_AMOUNT_FED = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> DATA_PLAYER_GROWN = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_HUNGRY_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> DATA_AMOUNT_FED_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> DATA_PLAYER_GROWN_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
 
-    private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_RIDER_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
-    private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_LAST_RIDER_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
-    private static final EntityDataAccessor<Integer> DATA_REMAINING_STAMINA = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> DATA_SITTING = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_FOLLOWING_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
+    private static final EntityDataAccessor<Optional<UUID>> DATA_RIDER_UUID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
+    private static final EntityDataAccessor<Optional<UUID>> DATA_LAST_RIDER_UUID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
+    private static final EntityDataAccessor<Integer> DATA_REMAINING_JUMPS_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> DATA_SITTING_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Optional<UUID>> DATA_FOLLOWING_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
 
-    private static final EntityDataAccessor<ItemStack> DATA_SADDLE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
-    private static final EntityDataAccessor<ItemStack> DATA_SADDLEBAG = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
+    private static final EntityDataAccessor<ItemStack> DATA_SADDLE_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
+    private static final EntityDataAccessor<ItemStack> DATA_SADDLEBAG_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
 
     private SimpleContainer inventory;
 
     private int jumpCooldown;
     private int flapCooldown;
-    private int staminaHealCooldown;
 
     private float flap;
     private float flapO;
@@ -113,10 +108,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 .add(Attributes.STEP_HEIGHT, 1)
                 .add(Attributes.FOLLOW_RANGE, 6.0)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 2.0)
-                .add(AetherIIAttributes.MOA_STRENGTH)
-                .add(AetherIIAttributes.MOA_STAMINA)
-                .add(AetherIIAttributes.MOA_SPEED);
+                .add(Attributes.ATTACK_KNOCKBACK, 2.0);
     }
 
     /**
@@ -130,7 +122,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      */
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @javax.annotation.Nullable SpawnGroupData spawnData) {
-        this.generateMoaReference(); //todo: 1.21 tag passing into this method was removed.
+        this.generateMoaUUID(); //todo: 1.21 tag passing into this method was removed.
 
         if (reason != EntitySpawnReason.NATURAL) {
             Moa.KeratinColor keratinColor = Moa.KeratinColor.getRandom(this.getRandom());
@@ -155,21 +147,21 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(DATA_MOA_REFERENCE, Optional.empty());
-        builder.define(DATA_FEATHER_SHAPE, FeatherShape.CURVED.getSerializedName());
+        builder.define(DATA_MOA_UUID_ID, Optional.empty());
+        builder.define(DATA_FEATHER_SHAPE_ID, FeatherShape.CURVED.getSerializedName());
         builder.define(DATA_KERATIN_COLOR, KeratinColor.GRAY.getSerializedName());
         builder.define(DATA_EYE_COLOR, EyeColor.BLUE.getSerializedName());
         builder.define(DATA_FEATHER_COLOR, FeatherColor.LIGHT_BLUE.getSerializedName());
-        builder.define(DATA_RIDER_REFERENCE, Optional.empty());
-        builder.define(DATA_LAST_RIDER_REFERENCE, Optional.empty());
-        builder.define(DATA_REMAINING_STAMINA, 0);
-        builder.define(DATA_HUNGRY, false);
-        builder.define(DATA_AMOUNT_FED, 0);
-        builder.define(DATA_PLAYER_GROWN, false);
-        builder.define(DATA_SITTING, false);
+        builder.define(DATA_RIDER_UUID, Optional.empty());
+        builder.define(DATA_LAST_RIDER_UUID, Optional.empty());
+        builder.define(DATA_REMAINING_JUMPS_ID, 0);
+        builder.define(DATA_HUNGRY_ID, false);
+        builder.define(DATA_AMOUNT_FED_ID, 0);
+        builder.define(DATA_PLAYER_GROWN_ID, false);
+        builder.define(DATA_SITTING_ID, false);
         builder.define(DATA_FOLLOWING_ID, Optional.empty());
-        builder.define(DATA_SADDLE, ItemStack.EMPTY);
-        builder.define(DATA_SADDLEBAG, ItemStack.EMPTY);
+        builder.define(DATA_SADDLE_ID, ItemStack.EMPTY);
+        builder.define(DATA_SADDLEBAG_ID, ItemStack.EMPTY);
     }
 
     /**
@@ -179,7 +171,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      */
     @Override
     public void onSyncedDataUpdated(EntityDataAccessor<?> dataAccessor) {
-        if (DATA_SITTING.equals(dataAccessor)) {
+        if (DATA_SITTING_ID.equals(dataAccessor)) {
             this.refreshDimensions();
         }
         super.onSyncedDataUpdated(dataAccessor);
@@ -228,11 +220,11 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     public void containerChanged(Container container) {
         boolean isSaddled = this.isSaddled();
         this.syncToClients();
-    }
-
-    @Override
-    protected Holder<SoundEvent> getEquipSound(EquipmentSlot p_397157_, ItemStack p_397978_, Equippable p_397221_) {
-        return (Holder<SoundEvent>) (p_397157_ == EquipmentSlot.SADDLE ? AetherIISoundEvents.ENTITY_MOA_SADDLE : super.getEquipSound(p_397157_, p_397978_, p_397221_));
+        if (this.tickCount > 20) {
+            if (!isSaddled && this.isSaddled()) {
+                this.playSound(this.getSaddleSoundEvent(), 0.5F, 1.0F);
+            }
+        }
     }
 
     @Override
@@ -279,7 +271,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
 
     @Override
     protected void updateFallFlying() {
-        this.checkFallDistanceAccumulation();
+        this.checkSlowFallDistance();
         if (!this.canGlide()) {
             this.setSharedFlag(7, false);
         }
@@ -335,13 +327,8 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 }
             }
         }
-        if (this.getRemainingStamina() < this.getMaxStamina()) {
-            if (this.getStaminaHealCooldown() > 0) {
-                this.setStaminaHealCooldown(this.getStaminaHealCooldown() - 1);
-            } else {
-                this.setRemainingStamina(this.getRemainingStamina() + 1);
-                this.setStaminaHealCooldown(300);
-            }
+        if (this.onGround()) { // Reset jumps when the Moa is on the ground.
+            this.setRemainingJumps(this.getMaxJumps());
         }
         if (this.getJumpCooldown() > 0) { // Handles jump reset behavior.
             this.setJumpCooldown(this.getJumpCooldown() - 1);
@@ -403,7 +390,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         // Handles rider tracking.
         if (this.getControllingPassenger() instanceof Player player) {
             if (this.getRider() == null) {
-                this.setRider(new EntityReference<>(player.getUUID()));
+                this.setRider(player.getUUID());
             }
 //            if (!this.isEntityOnGround()) {
 //                if (!this.isFallFlying()) {
@@ -441,7 +428,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 this.flap = Mth.clamp(this.flap - 0.2F, 0, 1F);
             }
         }
-        this.checkFallDistanceAccumulation(); // Resets the Moa's fall distance.
+        this.checkSlowFallDistance(); // Resets the Moa's fall distance.
     }
 
     public float getFlyAmount(float pPartialTicks) {
@@ -456,9 +443,9 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     @Override
     protected void addPassenger(Entity passenger) {
         if (passenger instanceof Player player) {
-            this.generateMoaReference();
-            if (this.getLastRider() == null || !this.getLastRider().matches(player)) {
-                this.setLastRider(new EntityReference<>(player.getUUID()));
+            this.generateMoaUUID();
+            if (this.getLastRider() == null || this.getLastRider() != player.getUUID()) {
+                this.setLastRider(player.getUUID());
             }
         }
         super.addPassenger(passenger);
@@ -478,9 +465,9 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 LivingEntity entity = this.getControllingPassenger();
                 if (this.isVehicle() && this.isSaddled() && entity != null) {
                     EntityUtil.copyRotations(this, entity);
-                    if (this.isLocalInstanceAuthoritative()) {
+                    if (this.isControlledByLocalInstance()) {
                         this.travelWithInput(new Vec3(0, vector.y(), 0));
-                        this.lerpHeadSteps = 0;
+                        this.lerpSteps = 0;
                     } else {
                         this.calculateEntityAnimation(false);
                         this.setDeltaMovement(Vec3.ZERO);
@@ -493,7 +480,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     }
 
     /**
-     * Handles cooldowns, remaining stamina, and particles when jumping.
+     * Handles cooldowns, remaining jumps, and particles when jumping.
      *
      * @param mob The jumping {@link Mob}.
      */
@@ -502,8 +489,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         super.onJump(mob);
         this.setJumpCooldown(10);
         if (!this.onGround()) {
-            this.setStaminaHealCooldown(300);
-            this.setRemainingStamina(this.getRemainingStamina() - 1);
+            this.setRemainingJumps(this.getRemainingJumps() - 1);
             this.spawnExplosionParticle();
             if (this.getControllingPassenger() instanceof Player && this.isFallFlying()) {
                 Vec3 vec31 = this.getLookAngle();
@@ -546,7 +532,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                             moa.setEyeColor(type.eyeColor().getSerializedName());
                             moa.setFeatherColor(type.featherColor().getSerializedName());
                             moa.setFeatherShape(type.featherShape().getSerializedName());
-                            moa.snapTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(this.getRandom().nextFloat() * 360.0F), 0.0F);
+                            moa.moveTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(this.getRandom().nextFloat() * 360.0F), 0.0F);
                             this.level().addFreshEntity(moa);
                             return InteractionResult.SUCCESS;
                         }
@@ -639,35 +625,35 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     /**
      * Generates a {@link UUID} for this Moa; used for Moa Skin tracking.
      */
-    public void generateMoaReference() {
-        if (this.getMoaReference() == null) {
-            this.setMoaReference(new EntityReference<>(UUID.randomUUID()));
+    public void generateMoaUUID() {
+        if (this.getMoaUUID() == null) {
+            this.setMoaUUID(UUID.randomUUID());
         }
     }
 
     /**
      * @return The {@link UUID} for this Moa.
      */
-    @Nullable
-    public EntityReference<LivingEntity> getMoaReference() {
-        return this.getEntityData().get(DATA_MOA_REFERENCE).orElse(null);
+    @javax.annotation.Nullable
+    public UUID getMoaUUID() {
+        return this.getEntityData().get(DATA_MOA_UUID_ID).orElse(null);
     }
 
     /**
      * Sets this Moa's {@link UUID}.
      *
-     * @param reference THe {@link UUID}.
+     * @param uuid THe {@link UUID}.
      */
-    private void setMoaReference(@Nullable EntityReference<LivingEntity> reference) {
-        this.getEntityData().set(DATA_MOA_REFERENCE, Optional.ofNullable(reference));
+    private void setMoaUUID(@javax.annotation.Nullable UUID uuid) {
+        this.getEntityData().set(DATA_MOA_UUID_ID, Optional.ofNullable(uuid));
     }
 
     public String getFeatherShape() {
-        return this.entityData.get(DATA_FEATHER_SHAPE);
+        return this.entityData.get(DATA_FEATHER_SHAPE_ID);
     }
 
     public void setFeatherShape(String shape) {
-        this.entityData.set(DATA_FEATHER_SHAPE, shape);
+        this.entityData.set(DATA_FEATHER_SHAPE_ID, shape);
     }
 
     public String getKeratinColor() {
@@ -698,57 +684,57 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      * @return The {@link UUID} of the current rider of this Moa.
      */
     @javax.annotation.Nullable
-    public EntityReference<LivingEntity> getRider() {
-        return this.getEntityData().get(DATA_RIDER_REFERENCE).orElse(null);
+    public UUID getRider() {
+        return this.getEntityData().get(DATA_RIDER_UUID).orElse(null);
     }
 
     /**
      * Sets the current rider of this Moa.
      *
-     * @param reference The {@link UUID}.
+     * @param uuid The {@link UUID}.
      */
-    public void setRider(@javax.annotation.Nullable EntityReference<LivingEntity> reference) {
-        this.getEntityData().set(DATA_RIDER_REFERENCE, Optional.ofNullable(reference));
+    public void setRider(@javax.annotation.Nullable UUID uuid) {
+        this.getEntityData().set(DATA_RIDER_UUID, Optional.ofNullable(uuid));
     }
 
     /**
      * @return The {@link UUID} of the last rider of this Moa (including the current rider).
      */
     @javax.annotation.Nullable
-    public EntityReference<LivingEntity> getLastRider() {
-        return this.getEntityData().get(DATA_LAST_RIDER_REFERENCE).orElse(null);
+    public UUID getLastRider() {
+        return this.getEntityData().get(DATA_LAST_RIDER_UUID).orElse(null);
     }
 
     /**
      * Sets the last rider of this Moa (including the current rider).
      *
-     * @param reference The {@link UUID}.
+     * @param uuid The {@link UUID}.
      */
-    public void setLastRider(@javax.annotation.Nullable EntityReference<LivingEntity> reference) {
-        this.getEntityData().set(DATA_LAST_RIDER_REFERENCE, Optional.ofNullable(reference));
+    public void setLastRider(@javax.annotation.Nullable UUID uuid) {
+        this.getEntityData().set(DATA_LAST_RIDER_UUID, Optional.ofNullable(uuid));
     }
 
     /**
-     * @return The {@link Integer} value for the remaining stamina.
+     * @return The {@link Integer} value for the remaining jumps.
      */
-    public int getRemainingStamina() {
-        return this.getEntityData().get(DATA_REMAINING_STAMINA);
+    public int getRemainingJumps() {
+        return this.getEntityData().get(DATA_REMAINING_JUMPS_ID);
     }
 
     /**
-     * Sets the remaining stamina.
+     * Sets the remaining jumps.
      *
-     * @param remainingStamina The {@link Integer} value.
+     * @param remainingJumps The {@link Integer} value.
      */
-    public void setRemainingStamina(int remainingStamina) {
-        this.getEntityData().set(DATA_REMAINING_STAMINA, remainingStamina);
+    public void setRemainingJumps(int remainingJumps) {
+        this.getEntityData().set(DATA_REMAINING_JUMPS_ID, remainingJumps);
     }
 
     /**
      * @return Whether this Moa is hungry, as a {@link Boolean}.
      */
     public boolean isHungry() {
-        return this.getEntityData().get(DATA_HUNGRY);
+        return this.getEntityData().get(DATA_HUNGRY_ID);
     }
 
     /**
@@ -757,14 +743,14 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      * @param hungry The {@link Boolean} value.
      */
     public void setHungry(boolean hungry) {
-        this.getEntityData().set(DATA_HUNGRY, hungry);
+        this.getEntityData().set(DATA_HUNGRY_ID, hungry);
     }
 
     /**
      * @return The {@link Integer} value for how many times this Moa has been fed.
      */
     public int getAmountFed() {
-        return this.getEntityData().get(DATA_AMOUNT_FED);
+        return this.getEntityData().get(DATA_AMOUNT_FED_ID);
     }
 
     /**
@@ -773,14 +759,14 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      * @param amountFed The {@link Integer} value.
      */
     public void setAmountFed(int amountFed) {
-        this.getEntityData().set(DATA_AMOUNT_FED, amountFed);
+        this.getEntityData().set(DATA_AMOUNT_FED_ID, amountFed);
     }
 
     /**
      * @return Whether this Moa was raised by the player, as a {@link Boolean}.
      */
     public boolean isPlayerGrown() {
-        return this.getEntityData().get(DATA_PLAYER_GROWN);
+        return this.getEntityData().get(DATA_PLAYER_GROWN_ID);
     }
 
     /**
@@ -789,14 +775,14 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      * @param playerGrown The {@link Boolean} value.
      */
     public void setPlayerGrown(boolean playerGrown) {
-        this.getEntityData().set(DATA_PLAYER_GROWN, playerGrown);
+        this.getEntityData().set(DATA_PLAYER_GROWN_ID, playerGrown);
     }
 
     /**
      * @return Whether this Moa is sitting, as a {@link Boolean}.
      */
     public boolean isSitting() {
-        return this.getEntityData().get(DATA_SITTING);
+        return this.getEntityData().get(DATA_SITTING_ID);
     }
 
     /**
@@ -805,40 +791,40 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      * @param isSitting The {@link Boolean} value.
      */
     public void setSitting(boolean isSitting) {
-        this.getEntityData().set(DATA_SITTING, isSitting);
+        this.getEntityData().set(DATA_SITTING_ID, isSitting);
     }
 
     /**
      * @return Whether this Moa is following the player, as a {@link Boolean}.
      */
     @javax.annotation.Nullable
-    public EntityReference<LivingEntity> getFollowing() {
+    public UUID getFollowing() {
         return this.getEntityData().get(DATA_FOLLOWING_ID).orElse(null);
     }
 
     /**
      * Sets whether this Moa is following the player.
      *
-     * @param reference The {@link Boolean} value.
+     * @param uuid The {@link Boolean} value.
      */
-    public void setFollowing(@javax.annotation.Nullable EntityReference<LivingEntity> reference) {
-        this.getEntityData().set(DATA_FOLLOWING_ID, Optional.ofNullable(reference));
+    public void setFollowing(@javax.annotation.Nullable UUID uuid) {
+        this.getEntityData().set(DATA_FOLLOWING_ID, Optional.ofNullable(uuid));
     }
 
     public ItemStack getSaddleStack() {
-        return this.getEntityData().get(DATA_SADDLE);
+        return this.getEntityData().get(DATA_SADDLE_ID);
     }
 
     public void setSaddleStack(ItemStack itemStack) {
-        this.getEntityData().set(DATA_SADDLE, itemStack);
+        this.getEntityData().set(DATA_SADDLE_ID, itemStack);
     }
 
     public ItemStack getSaddlebagStack() {
-        return this.getEntityData().get(DATA_SADDLEBAG);
+        return this.getEntityData().get(DATA_SADDLEBAG_ID);
     }
 
     public void setSaddlebagStack(ItemStack itemStack) {
-        this.getEntityData().set(DATA_SADDLEBAG, itemStack);
+        this.getEntityData().set(DATA_SADDLEBAG_ID, itemStack);
     }
 
     public int getSaddlebagRowSize() {
@@ -877,22 +863,6 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         this.flapCooldown = flapCooldown;
     }
 
-    /**
-     * @return The {@link Integer} value for how long until the Moa can heal stamina again.
-     */
-    public int getStaminaHealCooldown() {
-        return staminaHealCooldown;
-    }
-
-    /**
-     * Sets how long until the Moa can heal stamina again.
-     *
-     * @param staminaHealCooldown The {@link Integer} value.
-     */
-    public void setStaminaHealCooldown(int staminaHealCooldown) {
-        this.staminaHealCooldown = staminaHealCooldown;
-    }
-
     @Override
     protected SoundEvent getAmbientSound() {
         return AetherIISoundEvents.ENTITY_MOA_AMBIENT.get();
@@ -921,8 +891,8 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     /**
      * @return The {@link Integer} for the maximum amount of jumps from the {@link MoaType}.
      */
-    public int getMaxStamina() {
-        return this.getAttribute(AetherIIAttributes.MOA_STAMINA) != null ? (int) this.getAttribute(AetherIIAttributes.MOA_STAMINA).getValue() : 3;
+    public int getMaxJumps() {
+        return 3;
     }
 
     /**
@@ -960,26 +930,21 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         }
     }
 
-    @Override
-    public boolean canSprint() {
-        return true;
-    }
-
     /**
-     * @return A {@link Boolean} for whether the Moa can jump, determined by remaining stamina and jump cooldown.
+     * @return A {@link Boolean} for whether the Moa can jump, determined by remaining jumps and jump cooldown.
      */
     @Override
     public boolean canJump() {
-        return this.getRemainingStamina() > 0 && this.getJumpCooldown() == 0;
+        return this.getRemainingJumps() > 0 && this.getJumpCooldown() == 0;
     }
 
     public void equipSaddle(ItemStack stack) {
         this.getInventory().setItem(0, stack);
     }
 
-
+    @Override
     public boolean isSaddleable() {
-        return !this.isBaby() && this.isPlayerGrown();
+        return super.isSaddleable() && this.isPlayerGrown();
     }
 
     protected void syncToClients() {
@@ -995,19 +960,15 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      */
     @Override
     public double getMountJumpStrength() {
-        float f = (float) (this.getAttributeValue(AetherIIAttributes.MOA_STRENGTH) * 0.01F);
-        return this.onGround() ? 0.95 + f : 0.90 + f;
+        return this.onGround() ? 0.95 : 0.90;
     }
 
     /**
-     * @return The {@link Float} for the steering speed.
+     * @return The {@link Float} for the steering speed from the {@link MoaType}.
      */
     @Override
     public float getSteeringSpeed() {
-        Entity entity = this.getControllingPassenger();
-        float f = entity != null && entity.isSprinting() ? (float) (this.getAttributeValue(AetherIIAttributes.MOA_SPEED) * 0.1F) : 0;
-
-        return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.35F + f;
+        return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.35F;
     }
 
     @Override
@@ -1026,7 +987,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     @Override
     public float getFlyingSpeed() {
         if (this.isVehicle() && this.isSaddled()) {
-            return this.getSteeringSpeed() * 0.35F;
+            return this.getSteeringSpeed() * 0.45F;
         } else {
             return this.getSteeringSpeed() * 0.025F;
         }
@@ -1119,74 +1080,121 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     }
 
     @Override
-    public void addAdditionalSaveData(ValueOutput output) {
-        super.addAdditionalSaveData(output);
-        if (this.getMoaReference() != null) {
-            output.store("MoaUUID", EntityReference.codec(), this.getMoaReference());
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        if (this.getMoaUUID() != null) {
+            tag.putUUID("MoaUUID", this.getMoaUUID());
         }
-        output.putBoolean("IsBaby", this.isBaby());
-        output.putString("FeatherShape", this.getFeatherShape());
-        output.putString("KeratinColor", this.getKeratinColor());
-        output.putString("EyeColor", this.getEyeColor());
-        output.putString("FeatherColor", this.getFeatherColor());
+        tag.putBoolean("IsBaby", this.isBaby());
+        tag.putString("FeatherShape", this.getFeatherShape());
+        tag.putString("KeratinColor", this.getKeratinColor());
+        tag.putString("EyeColor", this.getEyeColor());
+        tag.putString("FeatherColor", this.getFeatherColor());
         if (this.getRider() != null) {
-            output.store("Rider", EntityReference.codec(), this.getRider());
+            tag.putUUID("Rider", this.getRider());
         }
         if (this.getLastRider() != null) {
-            output.store("LastRider", EntityReference.codec(), this.getLastRider());
+            tag.putUUID("LastRider", this.getLastRider());
         }
-        output.putInt("StaminaHealCooldown", this.getStaminaHealCooldown());
-        output.putInt("RemainingStamina", this.getRemainingStamina());
-        output.putBoolean("Hungry", this.isHungry());
-        output.putInt("AmountFed", this.getAmountFed());
-        output.putBoolean("PlayerGrown", this.isPlayerGrown());
-        output.putBoolean("Sitting", this.isSitting());
+        tag.putInt("RemainingJumps", this.getRemainingJumps());
+        tag.putBoolean("Hungry", this.isHungry());
+        tag.putInt("AmountFed", this.getAmountFed());
+        tag.putBoolean("PlayerGrown", this.isPlayerGrown());
+        tag.putBoolean("Sitting", this.isSitting());
         if (this.getFollowing() != null) {
-            output.store("Following", EntityReference.codec(), this.getFollowing());
+            tag.putUUID("Following", this.getFollowing());
         }
 
-        output.store("SaddleItem", ItemStack.OPTIONAL_CODEC, this.getSaddleStack());
-        output.store("SaddlebagsItem", ItemStack.OPTIONAL_CODEC, this.getSaddlebagStack());
+        tag.put("SaddleItem", this.getSaddleStack().saveOptional(this.registryAccess()));
+        tag.put("SaddlebagsItem", this.getSaddlebagStack().saveOptional(this.registryAccess()));
 
         if (!this.getInventory().getItem(2).isEmpty()) {
-            output.store("FeedItem", ItemStack.OPTIONAL_CODEC, this.inventory.getItem(2));
+            tag.put("FeedItem", this.inventory.getItem(2).save(this.registryAccess(), new CompoundTag()));
         }
 
-        ValueOutput.TypedOutputList<ItemStackWithSlot> list = output.list("SaddlebagItems", ItemStackWithSlot.CODEC);
-        for (int i = 0; i < this.inventory.getContainerSize(); i++) {
-            ItemStack itemStack = this.inventory.getItem(i);
-            if (!itemStack.isEmpty()) {
-                list.add(new ItemStackWithSlot(i, itemStack));
+        ListTag list = new ListTag();
+        for (int i = 6; i < this.inventory.getContainerSize(); ++i) {
+            ItemStack itemstack = this.inventory.getItem(i);
+            if (!itemstack.isEmpty()) {
+                CompoundTag slotTag = new CompoundTag();
+                slotTag.putByte("Slot", (byte) i);
+                list.add(itemstack.save(this.registryAccess(), slotTag));
             }
         }
+        tag.put("SaddlebagItems", list);
     }
 
     @Override
-    public void readAdditionalSaveData(ValueInput input) {
-        super.readAdditionalSaveData(input);
-        input.read("MoaUUID", EntityReference.<LivingEntity>codec()).ifPresent(this::setMoaReference);
-        this.setBaby(input.getBooleanOr("IsBaby", false));
-        input.getString("FeatherShape").filter((string) -> Arrays.stream(FeatherShape.values()).map(FeatherShape::getSerializedName).anyMatch((s) -> s.equals(string))).ifPresent(this::setFeatherShape);
-        input.getString("KeratinColor").filter((string) -> Arrays.stream(KeratinColor.values()).map(KeratinColor::getSerializedName).anyMatch((s) -> s.equals(string))).ifPresent(this::setKeratinColor);
-        input.getString("EyeColor").filter((string) -> Arrays.stream(EyeColor.values()).map(EyeColor::getSerializedName).anyMatch((s) -> s.equals(string))).ifPresent(this::setEyeColor);
-        input.getString("FeatherColor").filter((string) -> Arrays.stream(FeatherColor.values()).map(FeatherColor::getSerializedName).anyMatch((s) -> s.equals(string))).ifPresent(this::setFeatherColor);
-        input.read("Rider", EntityReference.<LivingEntity>codec()).ifPresent(this::setRider);
-        input.read("LastRider", EntityReference.<LivingEntity>codec()).ifPresent(this::setLastRider);
-        input.getInt("StaminaHealCooldown").ifPresent(this::setStaminaHealCooldown);
-        input.getInt("RemainingStamina").ifPresent(this::setRemainingStamina);
-        this.setHungry(input.getBooleanOr("Hungry", false));
-        input.getInt("AmountFed").ifPresent(this::setAmountFed);
-        this.setPlayerGrown(input.getBooleanOr("PlayerGrown", false));
-        this.setSitting(input.getBooleanOr("Sitting", false));
-        input.read("Following", EntityReference.<LivingEntity>codec()).ifPresent(this::setFollowing);
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        if (tag.contains("MoaUUID")) {
+            this.setMoaUUID(tag.getUUID("MoaUUID"));
+        }
+        if (tag.contains("IsBaby")) {
+            this.setBaby(tag.getBoolean("IsBaby"));
+        }
+        if (tag.contains("FeatherShape") && Arrays.stream(FeatherShape.values()).map(FeatherShape::getSerializedName).anyMatch((s) -> s.equals(tag.getString("FeatherShape")))) {
+            this.setFeatherShape(tag.getString("FeatherShape"));
+        }
+        if (tag.contains("KeratinColor") && Arrays.stream(KeratinColor.values()).map(KeratinColor::getSerializedName).anyMatch((s) -> s.equals(tag.getString("KeratinColor")))) {
+            this.setKeratinColor(tag.getString("KeratinColor"));
+        }
+        if (tag.contains("EyeColor") && Arrays.stream(EyeColor.values()).map(EyeColor::getSerializedName).anyMatch((s) -> s.equals(tag.getString("EyeColor")))) {
+            this.setEyeColor(tag.getString("EyeColor"));
+        }
+        if (tag.contains("FeatherColor") && Arrays.stream(FeatherColor.values()).map(FeatherColor::getSerializedName).anyMatch((s) -> s.equals(tag.getString("FeatherColor")))) {
+            this.setFeatherColor(tag.getString("FeatherColor"));
+        }
+        if (tag.hasUUID("Rider")) {
+            this.setRider(tag.getUUID("Rider"));
+        }
+        if (tag.hasUUID("LastRider")) {
+            this.setLastRider(tag.getUUID("LastRider"));
+        }
+        if (tag.contains("RemainingJumps")) {
+            this.setRemainingJumps(tag.getInt("RemainingJumps"));
+        }
+        if (tag.contains("Hungry")) {
+            this.setHungry(tag.getBoolean("Hungry"));
+        }
+        if (tag.contains("AmountFed")) {
+            this.setAmountFed(tag.getInt("AmountFed"));
+        }
+        if (tag.contains("PlayerGrown")) {
+            this.setPlayerGrown(tag.getBoolean("PlayerGrown"));
+        }
+        if (tag.contains("Sitting")) {
+            this.setSitting(tag.getBoolean("Sitting"));
+        }
+        if (tag.contains("Following")) {
+            this.setFollowing(tag.getUUID("Following"));
+        }
 
-        input.read("SaddleItem", ItemStack.OPTIONAL_CODEC).filter((stack) -> stack.is(AetherIIItems.MOA_SADDLE.get())).ifPresent((stack) -> this.getInventory().setItem(0, stack));
-        input.read("SaddlebagsItem", ItemStack.OPTIONAL_CODEC).filter((stack) -> stack.getItem() instanceof MoaSaddlebagItem).ifPresent((stack) -> this.getInventory().setItem(1, stack));
-        input.read("FeedItem", ItemStack.OPTIONAL_CODEC).filter((stack) -> stack.getItem() instanceof MoaFeedItem).ifPresent((stack) -> this.getInventory().setItem(2, stack));
+        if (tag.contains("SaddleItem", 10)) {
+            ItemStack itemStack = ItemStack.parseOptional(this.registryAccess(), tag.getCompound("SaddleItem"));
+            if (itemStack.is(AetherIIItems.MOA_SADDLE.get())) {
+                this.getInventory().setItem(0, itemStack);
+            }
+        }
+        if (tag.contains("SaddlebagsItem", 10)) {
+            ItemStack itemStack = ItemStack.parseOptional(this.registryAccess(), tag.getCompound("SaddlebagsItem"));
+            if (itemStack.getItem() instanceof MoaSaddlebagItem) {
+                this.getInventory().setItem(1, itemStack);
+            }
+        }
+        if (tag.contains("FeedItem", 10)) {
+            ItemStack itemStack = ItemStack.parseOptional(this.registryAccess(), tag.getCompound("FeedItem"));
+            if (itemStack.getItem() instanceof MoaFeedItem) {
+                this.getInventory().setItem(2, itemStack);
+            }
+        }
 
-        for (ItemStackWithSlot stackWithSlot : input.listOrEmpty("SaddlebagItems", ItemStackWithSlot.CODEC)) {
-            if (stackWithSlot.isValidInContainer(this.inventory.getContainerSize())) {
-                this.inventory.setItem(stackWithSlot.slot(), stackWithSlot.stack());
+        ListTag list = tag.getList("SaddlebagItems", 10);
+        for (int i = 0; i < list.size(); ++i) {
+            CompoundTag compoundtag = list.getCompound(i);
+            int j = compoundtag.getByte("Slot") & 255;
+            if (j >= 6 && j < this.inventory.getContainerSize()) {
+                this.inventory.setItem(j, ItemStack.parseOptional(this.registryAccess(), compoundtag));
             }
         }
     }

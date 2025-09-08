@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.attachment.entity;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -12,7 +11,7 @@ public class DroppedItemAttachment {
     @Nullable
     private Entity owner;
 
-    public static final MapCodec<DroppedItemAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+    public static final Codec<DroppedItemAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.INT.fieldOf("owner_id").forGetter(o -> o.owner.getId())
     ).apply(instance, DroppedItemAttachment::new));
 

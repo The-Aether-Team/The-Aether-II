@@ -16,8 +16,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 /**
  * This interface has several methods for handling the movement for mounted mobs.
@@ -90,8 +90,8 @@ public interface MountableMob {
             if (vehicle.getPlayerJumped() && !vehicle.isMountJumping() && vehicle.canJump()) {
                 double jumpStrength = vehicle.getMountJumpStrength() * this.jumpFactor();
                 vehicle.setDeltaMovement(vehicle.getDeltaMovement().x(), jumpStrength, vehicle.getDeltaMovement().z());
-                if (vehicle.hasEffect(MobEffects.JUMP_BOOST)) {
-                    MobEffectInstance jumpBoost = vehicle.getEffect(MobEffects.JUMP_BOOST);
+                if (vehicle.hasEffect(MobEffects.JUMP)) {
+                    MobEffectInstance jumpBoost = vehicle.getEffect(MobEffects.JUMP);
                     if (jumpBoost != null) {
                         vehicle.push(0.0, 0.1 * (jumpBoost.getAmplifier() + 1), 0.0);
                     }
@@ -109,11 +109,11 @@ public interface MountableMob {
                     stepHeight.addTransientModifier(vehicle.getMountStepHeightModifier());
                 }
                 if (vehicle.level().isClientSide()) {
-                    ClientPacketDistributor.sendToServer(new StepHeightPacket(vehicle.getId()));
+                    PacketDistributor.sendToServer(new StepHeightPacket(vehicle.getId()));
                 }
             }
             // Handles movement.
-            if (vehicle.isLocalInstanceAuthoritative()) {
+            if (vehicle.isControlledByLocalInstance()) {
                 vehicle.setSpeed(vehicle.getSteeringSpeed());
                 this.travelWithInput(new Vec3(f, motion.y, f1));
             } else if (passenger instanceof Player) {

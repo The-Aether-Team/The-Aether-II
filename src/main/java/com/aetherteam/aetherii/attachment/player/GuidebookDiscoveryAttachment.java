@@ -9,7 +9,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIRewardWrappers;
 import com.aetherteam.aetherii.network.packet.clientbound.FlushGuidebookDataPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.GuidebookToastPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.UpdateGuidebookDiscoveryPacket;
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.Holder;
@@ -27,23 +27,19 @@ import java.util.List;
 import java.util.Optional;
 
 public class GuidebookDiscoveryAttachment {
-    private boolean shouldSyncAfterJoin = false;
-    private boolean sync = false;
     private List<BestiaryEntry.Mutable> bestiaryEntries;
     private List<EffectsEntry.Mutable> effectsEntries;
     private List<ExplorationEntry.Mutable> explorationEntries;
+    private boolean shouldSyncAfterJoin = false;
+    private boolean sync = false;
 
-    public static final MapCodec<GuidebookDiscoveryAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+    public static final Codec<GuidebookDiscoveryAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             BestiaryEntry.Mutable.DIRECT_CODEC.listOf().fieldOf("bestiary_entries").forGetter(GuidebookDiscoveryAttachment::getBestiaryEntries),
             EffectsEntry.Mutable.DIRECT_CODEC.listOf().fieldOf("effects_entries").forGetter(GuidebookDiscoveryAttachment::getEffectsEntries),
             ExplorationEntry.Mutable.DIRECT_CODEC.listOf().fieldOf("exploration_entries").forGetter(GuidebookDiscoveryAttachment::getExplorationEntries)
     ).apply(instance, GuidebookDiscoveryAttachment::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, GuidebookDiscoveryAttachment> STREAM_CODEC = StreamCodec.composite(
-            BestiaryEntry.Mutable.STREAM_CODEC.apply(ByteBufCodecs.list()), GuidebookDiscoveryAttachment::getBestiaryEntries,
-            EffectsEntry.Mutable.STREAM_CODEC.apply(ByteBufCodecs.list()), GuidebookDiscoveryAttachment::getEffectsEntries,
-            ExplorationEntry.Mutable.STREAM_CODEC.apply(ByteBufCodecs.list()), GuidebookDiscoveryAttachment::getExplorationEntries,
-            GuidebookDiscoveryAttachment::new);
+    public static final StreamCodec<RegistryFriendlyByteBuf, GuidebookDiscoveryAttachment> STREAM_CODEC = ByteBufCodecs.fromCodecWithRegistries(CODEC);
 
     protected GuidebookDiscoveryAttachment(List<BestiaryEntry.Mutable> bestiaryEntries, List<EffectsEntry.Mutable> effectsEntries, List<ExplorationEntry.Mutable> explorationEntries) {
         this.bestiaryEntries = new ArrayList<>(bestiaryEntries);
@@ -57,10 +53,6 @@ public class GuidebookDiscoveryAttachment {
         this.explorationEntries = new ArrayList<>();
     }
 
-    public void postTickUpdate(Player player) {
-        this.syncAfterJoin(player);
-    }
-
     public void login(Player player) {
         this.shouldSyncAfterJoin = true;
     }
@@ -69,6 +61,9 @@ public class GuidebookDiscoveryAttachment {
         this.shouldSyncAfterJoin = true;
     }
 
+    public void postTickUpdate(Player player) {
+        this.syncAfterJoin(player);
+    }
 
     private void syncAfterJoin(Player player) {
         if (this.shouldSyncAfterJoin) {
@@ -180,12 +175,6 @@ public class GuidebookDiscoveryAttachment {
         }
     }
 
-    public void syncAttachment(GuidebookDiscoveryAttachment other) {
-        this.bestiaryEntries = other.bestiaryEntries;
-        this.effectsEntries = other.effectsEntries;
-        this.explorationEntries = other.explorationEntries;
-    }
-
     public List<BestiaryEntry.Mutable> getBestiaryEntries() {
         return this.bestiaryEntries;
     }
@@ -196,5 +185,11 @@ public class GuidebookDiscoveryAttachment {
 
     public List<ExplorationEntry.Mutable> getExplorationEntries() {
         return this.explorationEntries;
+    }
+
+    public void syncAttachment(GuidebookDiscoveryAttachment other) {
+        this.bestiaryEntries = other.bestiaryEntries;
+        this.effectsEntries = other.effectsEntries;
+        this.explorationEntries = other.explorationEntries;
     }
 }

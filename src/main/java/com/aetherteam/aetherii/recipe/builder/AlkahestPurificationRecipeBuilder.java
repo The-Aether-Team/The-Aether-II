@@ -11,7 +11,7 @@ import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.util.random.WeightedList;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -27,8 +27,8 @@ import java.util.Objects;
 public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
     private final RecipeCategory category;
     private final AlkahestPurifierBookCategory bookCategory;
-    private final WeightedList<ItemStack> results;
-    private final WeightedList<ItemStack> byproducts;
+    private final SimpleWeightedRandomList<ItemStack> results;
+    private final SimpleWeightedRandomList<ItemStack> byproducts;
     private final Ingredient ingredient;
     private final float experience;
     private final int alkahestUsage;
@@ -37,7 +37,7 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
     @Nullable
     private String group;
 
-    public AlkahestPurificationRecipeBuilder(RecipeCategory category, AlkahestPurifierBookCategory bookCategory, WeightedList<ItemStack> results, WeightedList<ItemStack> byproducts, Ingredient ingredient, float experience, int alkahestUsage, int processingTime) {
+    public AlkahestPurificationRecipeBuilder(RecipeCategory category, AlkahestPurifierBookCategory bookCategory, SimpleWeightedRandomList<ItemStack> results, SimpleWeightedRandomList<ItemStack> byproducts, Ingredient ingredient, float experience, int alkahestUsage, int processingTime) {
         this.category = category;
         this.bookCategory = bookCategory;
         this.results = results;
@@ -48,8 +48,8 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
         this.processingTime = processingTime;
     }
 
-    public static AlkahestPurificationRecipeBuilder recipe(Ingredient ingredient, RecipeCategory category, WeightedList<ItemStack> results, WeightedList<ItemStack> byproducts, float experience, int alkahestUsage, int processingTime) {
-        return new AlkahestPurificationRecipeBuilder(category, determineRecipeCategory(new ItemStack(results.unwrap().getFirst().value().getItem())), results, byproducts, ingredient, experience, alkahestUsage, processingTime);
+    public static AlkahestPurificationRecipeBuilder recipe(Ingredient ingredient, RecipeCategory category, SimpleWeightedRandomList<ItemStack> results, SimpleWeightedRandomList<ItemStack> byproducts, float experience, int alkahestUsage, int processingTime) {
+        return new AlkahestPurificationRecipeBuilder(category, determineRecipeCategory(new ItemStack(results.unwrap().getFirst().data().getItem())), results, byproducts, ingredient, experience, alkahestUsage, processingTime);
     }
 
     @Override

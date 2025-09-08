@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.entity.ai.controller.CellingMoveControl;
 import com.aetherteam.aetherii.entity.ai.navigator.CellingPathNavigation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -16,8 +17,6 @@ import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Quaternionf;
 
@@ -48,7 +47,7 @@ public class CellingMonster extends Monster {
 
     @Override
     public void travel(Vec3 p_32394_) {
-        if (this.getAttachFacing() != Direction.DOWN) {
+        if (this.isControlledByLocalInstance() && this.getAttachFacing() != Direction.DOWN) {
             this.moveRelative(0.1F, p_32394_);
             this.move(MoverType.SELF, this.getDeltaMovement());
             this.setDeltaMovement(this.getDeltaMovement().scale(0.6));
@@ -89,7 +88,7 @@ public class CellingMonster extends Monster {
         boolean flag = this.moveControl instanceof CellingMoveControl && ((CellingMoveControl) this.moveControl).isWalkableUpper();
         boolean flag2 = this.moveControl.hasWanted() && this.moveControl.getWantedY() - this.getY() > 0;
 
-        if (!flag && !flag2 && (this.onGround() || this.isInWater() || this.isInLava() || this.isInFluidType())) {
+        if (!flag && !flag2 && (this.onGround() || this.isInWaterOrBubble() || this.isInLava() || this.isInFluidType())) {
             this.entityData.set(ATTACHED_FACE, Direction.DOWN);
             this.setCellRotation(new Quaternionf());
         } else {
@@ -185,14 +184,14 @@ public class CellingMonster extends Monster {
     }
 
     @Override
-    public void readAdditionalSaveData(ValueInput p_33432_) {
+    public void readAdditionalSaveData(CompoundTag p_33432_) {
         super.readAdditionalSaveData(p_33432_);
-        this.setAttachFace(Direction.from3DDataValue(p_33432_.getByteOr("AttachFace", (byte) 0)));
+        this.setAttachFace(Direction.from3DDataValue(p_33432_.getByte("AttachFace")));
     }
 
 
     @Override
-    public void addAdditionalSaveData(ValueOutput p_33443_) {
+    public void addAdditionalSaveData(CompoundTag p_33443_) {
         super.addAdditionalSaveData(p_33443_);
         p_33443_.putByte("AttachFace", (byte) this.getAttachFacing().get3DDataValue());
     }

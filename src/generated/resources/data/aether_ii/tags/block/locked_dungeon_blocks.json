@@ -3,8 +3,14 @@
     "aether_ii:locked_guardian_wood",
     "aether_ii:locked_dense_guardian_wood",
     "aether_ii:locked_guardian_roots",
+    "aether_ii:locked_dim_guardian_roots",
+    "aether_ii:locked_lucent_guardian_roots",
+    "aether_ii:locked_guardian_lamp",
     "aether_ii:locked_infected_wood",
     "aether_ii:locked_dense_infected_wood",
-    "aether_ii:locked_infected_roots"
+    "aether_ii:locked_infected_roots",
+    "aether_ii:locked_dim_infected_roots",
+    "aether_ii:locked_lucent_infected_roots",
+    "aether_ii:locked_infected_lamp"
   ]
 }

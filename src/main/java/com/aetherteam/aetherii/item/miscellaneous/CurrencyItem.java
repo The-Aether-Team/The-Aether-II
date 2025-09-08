@@ -14,10 +14,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 public class CurrencyItem extends Item {
     private final int currencyAmount;
@@ -28,9 +27,9 @@ public class CurrencyItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        tooltipAdder.accept(Component.translatable("aether_ii.tooltip.item.currency.description").withStyle(ChatFormatting.GRAY));
-        tooltipAdder.accept(Component.translatable("aether_ii.tooltip.item.currency.amount", this.currencyAmount).withColor(8158399));
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        tooltipComponents.add(Component.translatable("aether_ii.tooltip.item.currency.description").withStyle(ChatFormatting.GRAY));
+        tooltipComponents.add(Component.translatable("aether_ii.tooltip.item.currency.amount", this.currencyAmount).withColor(8158399));
     }
 
     @Override
@@ -38,7 +37,6 @@ public class CurrencyItem extends Item {
         ItemStack stack = player.getItemInHand(usedHand);
         CurrencyAttachment attachment = player.getData(AetherIIDataAttachments.CURRENCY);
         attachment.setAmount(attachment.getAmount() + this.currencyAmount);
-        player.syncData(AetherIIDataAttachments.CURRENCY);
         player.awardStat(Stats.ITEM_USED.get(this));
         stack.consume(1, player);
         if (level.isClientSide()) {

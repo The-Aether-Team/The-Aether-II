@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -115,8 +116,20 @@ public class AltarBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean isMoving) {
-        Containers.updateNeighboursAfterDestroy(state, level, pos);
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!state.is(newState.getBlock())) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof AltarBlockEntity altarBlockEntity) {
+                if (level instanceof ServerLevel serverLevel) {
+                    Containers.dropContents(level, pos, altarBlockEntity);
+                    altarBlockEntity.getRecipesToAwardAndPopExperience(serverLevel, Vec3.atCenterOf(pos));
+                }
+                super.onRemove(state, level, pos, newState, isMoving);
+                level.updateNeighbourForOutputSignal(pos, this);
+            } else {
+                super.onRemove(state, level, pos, newState, isMoving);
+            }
+        }
     }
 
     @Override

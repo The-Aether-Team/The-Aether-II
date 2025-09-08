@@ -3,6 +3,8 @@ package com.aetherteam.aetherii.entity.projectile;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.PlayerAccessor;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -56,12 +58,11 @@ public class SkephidWebbingBall extends ThrowableProjectile implements ItemSuppl
             if (livingEntity.isBlocking()) {
                 livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, this.getOwner());
                 if (entity instanceof Player player && player.isBlocking()) {
-                    if (!player.getUseItem().isEmpty()) {
-                        player.getUseItem().hurtAndBreak(3, player, player.getUsedItemHand());
-                    }
+                    PlayerAccessor playerAccessor = (PlayerAccessor) player;
+                    playerAccessor.callHurtCurrentlyUsedShield(3.0F);
                 }
             } else {
-                livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, EffectBuildupPresets.WEBBED, 350);
+                livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.WEBBED, 350);
             }
         }
     }
@@ -69,5 +70,15 @@ public class SkephidWebbingBall extends ThrowableProjectile implements ItemSuppl
     @Override
     public ItemStack getItem() {
         return new ItemStack(Items.SNOWBALL);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
     }
 }

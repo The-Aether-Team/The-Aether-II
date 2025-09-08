@@ -6,12 +6,12 @@ import com.aetherteam.aetherii.effect.AetherIIEffects;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.KeyTagProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.effect.MobEffect;
 
 import java.util.concurrent.CompletableFuture;
 
-public class AetherIIMobEffectTagData extends KeyTagProvider<MobEffect> {
+public class AetherIIMobEffectTagData extends TagsProvider<MobEffect> {
     public AetherIIMobEffectTagData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, Registries.MOB_EFFECT, registries, AetherII.MODID);
     }

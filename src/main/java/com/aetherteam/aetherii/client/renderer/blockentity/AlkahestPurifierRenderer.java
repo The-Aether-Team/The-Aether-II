@@ -20,7 +20,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 
 public class AlkahestPurifierRenderer implements BlockEntityRenderer<AlkahestPurifierBlockEntity> {
     public static final Material ALKAHEST_PURIFIER_0 = new Material(TextureAtlas.LOCATION_BLOCKS, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entity/alkahest_purifier/alkahest_purifier_0"));
@@ -39,7 +38,7 @@ public class AlkahestPurifierRenderer implements BlockEntityRenderer<AlkahestPur
     }
 
     @Override
-    public void render(AlkahestPurifierBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, Vec3 cameraPos) {
+    public void render(AlkahestPurifierBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         Level level = blockEntity.getLevel();
         boolean levelExists = level != null;
         BlockState blockstate = levelExists ? blockEntity.getBlockState() : AetherIIBlocks.ALKAHEST_PURIFIER.get().defaultBlockState().setValue(AlkahestPurifierBlock.FACING, Direction.SOUTH);

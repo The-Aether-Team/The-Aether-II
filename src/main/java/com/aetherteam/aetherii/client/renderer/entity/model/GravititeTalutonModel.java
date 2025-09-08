@@ -1,9 +1,8 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.entity.animation.GravititeTalutonAnimation;
+import com.aetherteam.aetherii.client.renderer.entity.animation.GravititeTalotonAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.state.GravititeTalutonRenderState;
-import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
@@ -16,9 +15,7 @@ import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 public class GravititeTalutonModel extends EntityModel<GravititeTalutonRenderState> {
     public static final AnimationHolder SPIN_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite_taluton/spin"));
     public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite_taluton/attack"));
-    private final KeyframeAnimation spinAimation;
-    private final KeyframeAnimation attackAnimation;
-    private final KeyframeAnimation reloadAnimation;
+
     private final ModelPart body;
     private final ModelPart legsNode;
     private final ModelPart legLeftPosition;
@@ -33,9 +30,6 @@ public class GravititeTalutonModel extends EntityModel<GravititeTalutonRenderSta
 
     public GravititeTalutonModel(ModelPart root) {
         super(root);
-        this.spinAimation = SPIN_ANIMATION.get().bake(root);
-        this.attackAnimation = ATTACK_ANIMATION.get().bake(root);
-        this.reloadAnimation = GravititeTalutonAnimation.RELOAD.bake(root);
         this.body = root.getChild("body");
         this.legsNode = this.body.getChild("legs_node");
         this.legLeftPosition = this.legsNode.getChild("leg_left_position");
@@ -110,9 +104,9 @@ public class GravititeTalutonModel extends EntityModel<GravititeTalutonRenderSta
         this.legsNode.yRot = -this.body.yRot;
         this.debris1.yRot = -this.body.yRot;
         this.debris2.yRot = -this.body.yRot;
-        this.spinAimation.applyWalk(renderState.ageInTicks, renderState.ageInTicks, 1.0F, 1.0F);
-        this.attackAnimation.apply(renderState.attackAnimationState, renderState.ageInTicks, 2.0F);
-        this.reloadAnimation.apply(renderState.reloadAnimationState, renderState.ageInTicks, 2.0F);
+        this.animateWalk(SPIN_ANIMATION, renderState.ageInTicks, renderState.ageInTicks, 1.0F, 1.0F);
+        this.animate(renderState.attackAnimationState, ATTACK_ANIMATION, renderState.ageInTicks, 2.0F);
+        this.animate(renderState.reloadAnimationState, GravititeTalotonAnimation.RELOAD, renderState.ageInTicks, 2.0F);
         this.debrisNode.visible = renderState.debrisVisible;
     }
 }

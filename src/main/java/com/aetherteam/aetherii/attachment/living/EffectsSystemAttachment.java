@@ -1,73 +1,76 @@
 package com.aetherteam.aetherii.attachment.living;
 
-import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.attributes.EffectResistanceAttribute;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AttributeMapAccessor;
+import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupRemovePacket;
+import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupSetPacket;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.neoforged.neoforge.common.util.INBTSerializable;
+import net.neoforged.neoforge.network.PacketDistributor;
 
-import java.util.HashMap;
 import java.util.Map;
 
-public class EffectsSystemAttachment {
-    public static final MapCodec<EffectsSystemAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            Codec.unboundedMap(BuiltInRegistries.MOB_EFFECT.holderByNameCodec(), EffectBuildupInstance.CODEC).fieldOf("active_buildups").forGetter(EffectsSystemAttachment::getActiveBuildups)
-    ).apply(instance, EffectsSystemAttachment::new));
-    public static final StreamCodec<RegistryFriendlyByteBuf, EffectsSystemAttachment> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.map(HashMap::new, ByteBufCodecs.holderRegistry(Registries.MOB_EFFECT), EffectBuildupInstance.STREAM_CODEC), EffectsSystemAttachment::getActiveBuildups,
-            EffectsSystemAttachment::new);
+public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
+    private final Map<Holder<MobEffect>, EffectBuildupInstance> activeBuildups = Maps.newHashMap();
+    private final LivingEntity entity;
+    private boolean loadingSync = false;
 
-    private final Map<Holder<MobEffect>, EffectBuildupInstance> activeBuildups;
-
-    private boolean needSync;
-
-    protected EffectsSystemAttachment(Map<Holder<MobEffect>, EffectBuildupInstance> activeBuildups) {
-        Map<Holder<MobEffect>, EffectBuildupInstance> map = Maps.newHashMap();
-        map.putAll(activeBuildups);
-        this.activeBuildups = map;
+    public EffectsSystemAttachment(LivingEntity entity) {
+        this.entity = entity;
     }
 
-    public EffectsSystemAttachment() {
-        this.activeBuildups = new HashMap<>();
+    @Override
+    public CompoundTag serializeNBT(HolderLookup.Provider provider) {
+        CompoundTag compoundTag = new CompoundTag();
+        if (!this.activeBuildups.isEmpty()) {
+            ListTag listTag = new ListTag();
+            for (EffectBuildupInstance instance : this.activeBuildups.values()) {
+                listTag.add(instance.save(new CompoundTag()));
+            }
+            compoundTag.put("active_buildups", listTag);
+        }
+        return compoundTag;
+    }
+
+    @Override
+    public void deserializeNBT(HolderLookup.Provider provider, CompoundTag tag) {
+        if (tag.contains("active_buildups", 9)) {
+            ListTag listTag = tag.getList("active_buildups", 10);
+            for (int i = 0; i < listTag.size(); ++i) {
+                CompoundTag compoundTag = listTag.getCompound(i);
+                EffectBuildupInstance instance = EffectBuildupInstance.load(compoundTag);
+                this.activeBuildups.put(instance.getType(), instance);
+                this.loadingSync = true;
+            }
+        }
     }
 
     public void postTickUpdate(LivingEntity livingEntity) {
-        final Holder<MobEffect>[] removableEffect = new Holder[]{null};
-        this.activeBuildups.forEach((holder, instance) -> {
-            if (!instance.tick(livingEntity)) {
-                removableEffect[0] = holder;
+        if (this.loadingSync) {
+            if (!this.entity.level().isClientSide()) {
+                PacketDistributor.sendToAllPlayers(new EffectBuildupSetPacket(this.entity.getId(), this.activeBuildups));
             }
-        });
-        if (removableEffect[0] != null) {
-            this.activeBuildups.remove(removableEffect[0]);
-            needSync = true;
+            this.loadingSync = false;
         }
-        if (needSync) {
-            needSync = false;
-            livingEntity.syncData(AetherIIDataAttachments.EFFECTS_SYSTEM);
-        }
+        this.activeBuildups.values().removeIf(instance -> !instance.tick(this.entity));
     }
 
-    public void addBuildup(LivingEntity livingEntity, EffectBuildupPresets.Preset buildup, int amount) {
+    public void addBuildup(EffectBuildupPresets.Preset buildup, int amount) {
         Holder<MobEffect> effect = buildup.type();
-        if (!livingEntity.hasEffect(effect)) {
+        if (!this.entity.hasEffect(effect)) {
             double modifiedAmount = amount;
-            for (Map.Entry<Holder<Attribute>, AttributeInstance> attributeEntries : ((AttributeMapAccessor) livingEntity.getAttributes()).aether_ii$getAttributes().entrySet()) {
+            for (Map.Entry<Holder<Attribute>, AttributeInstance> attributeEntries : ((AttributeMapAccessor) this.entity.getAttributes()).aether_ii$getAttributes().entrySet()) {
                 if (attributeEntries.getKey().value() instanceof EffectResistanceAttribute effectResistanceAttribute && effectResistanceAttribute.getEffect().is(effect)) {
                     modifiedAmount -= modifiedAmount * attributeEntries.getValue().getValue();
                 }
@@ -77,26 +80,26 @@ public class EffectsSystemAttachment {
             } else {
                 this.activeBuildups.get(effect).increaseBuildup((int) modifiedAmount);
             }
-            needSync = true;
+            this.loadingSync = true;
         }
     }
 
     public void reduceBuildup(Holder<MobEffect> effect, int amount) {
         if (this.activeBuildups.containsKey(effect)) {
             this.activeBuildups.get(effect).decreaseBuildup(amount);
-            needSync = true;
         }
     }
 
     public void setBuildups(Map<Holder<MobEffect>, EffectBuildupInstance> activeBuildups) {
         this.activeBuildups.clear();
         this.activeBuildups.putAll(activeBuildups);
-        needSync = true;
     }
 
     public void removeBuildup(Holder<MobEffect> effect) {
+        if (!this.entity.level().isClientSide()) {
+            PacketDistributor.sendToAllPlayers(new EffectBuildupRemovePacket(this.entity.getId(), effect));
+        }
         this.activeBuildups.remove(effect);
-        needSync = true;
     }
 
     public Map<Holder<MobEffect>, EffectBuildupInstance> getActiveBuildups() {

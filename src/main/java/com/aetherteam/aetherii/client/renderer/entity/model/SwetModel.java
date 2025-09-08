@@ -2,15 +2,12 @@ package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.SwetAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
-import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
 public class SwetModel<T extends SwetRenderState> extends EntityModel<T> {
-    private final KeyframeAnimation groundAnimation;
-    private final KeyframeAnimation jumpAnimation;
     public final ModelPart body;
     public final ModelPart gel;
     public final ModelPart squish;
@@ -23,8 +20,6 @@ public class SwetModel<T extends SwetRenderState> extends EntityModel<T> {
 
     public SwetModel(ModelPart root, boolean isGel) {
         super(root);
-        this.groundAnimation = SwetAnimation.GROUND.bake(root);
-        this.jumpAnimation = SwetAnimation.JUMP.bake(root);
         this.body = root.getChild("body");
         this.gel = this.body.getChild("gel");
         this.squish = this.gel.getChild("squish");
@@ -88,7 +83,7 @@ public class SwetModel<T extends SwetRenderState> extends EntityModel<T> {
             this.gel.visible = false;
             this.squish.visible = false;
         }
-        this.groundAnimation.apply(entity.groundAnimationState, entity.ageInTicks);
-        this.jumpAnimation.apply(entity.jumpAnimationState, entity.ageInTicks);
+        this.animate(entity.groundAnimationState, SwetAnimation.GROUND, entity.ageInTicks);
+        this.animate(entity.jumpAnimationState, SwetAnimation.JUMP, entity.ageInTicks);
     }
 }

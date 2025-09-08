@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.block.natural;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -39,9 +38,8 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
      * @param pos    The {@link BlockPos} of the block.
      * @param entity The {@link Entity} in the block.
      */
-
     @Override
-    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         entity.resetFallDistance();
         if (entity.getDeltaMovement().y < -0.0784000015258789 && !(entity instanceof Projectile)) {
             entity.makeStuckInBlock(state, new Vec3(1.0, 0.25, 1.0));
@@ -51,7 +49,7 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
     }
 
     /**
-     * This block does not cause fall damage, so this method is overridden from {@link Block#fallOn(Level, BlockState, BlockPos, Entity, double)} to be empty.
+     * This block does not cause fall damage, so this method is overridden from {@link Block#fallOn(Level, BlockState, BlockPos, Entity, float)} to be empty.
      *
      * @param level        The {@link Level} the block is in.
      * @param state        The {@link BlockState} of the block.
@@ -60,7 +58,7 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
      * @param fallDistance The fall distance of the entity as a {@link Float}.
      */
     @Override
-    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
+    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
     }
 
     /**
@@ -125,8 +123,8 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
     }
 
     @Override
-    public boolean canPlaceLiquid(@Nullable LivingEntity livingEntity, BlockGetter blockGetter, BlockPos blockPos, BlockState blockState, Fluid fluid) {
-        return blockGetter.getBlockState(blockPos.above()).is(fluid.defaultFluidState().createLegacyBlock().getBlock());
+    public boolean canPlaceLiquid(@Nullable Player player, BlockGetter level, BlockPos pos, BlockState state, Fluid fluid) {
+        return level.getBlockState(pos.above()).is(fluid.defaultFluidState().createLegacyBlock().getBlock());
     }
 
     @Override

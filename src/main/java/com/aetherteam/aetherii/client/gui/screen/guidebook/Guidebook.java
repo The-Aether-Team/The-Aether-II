@@ -10,7 +10,7 @@ import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -56,37 +56,31 @@ public interface Guidebook {
         int topPos = (screen.height - PAGE_HEIGHT) / 2;
         this.renderGuidebookBacking(screen, guiGraphics, mouseX, mouseY, partialTick);
 
-        guiGraphics.pose().pushMatrix();
-        guiGraphics.pose().translate((float) leftPagePos, (float) topPos);
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate((float) leftPagePos, (float) topPos, 0.0F);
         this.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.pose().popMatrix();
+        guiGraphics.pose().popPose();
 
-        guiGraphics.pose().pushMatrix();
-        guiGraphics.pose().translate((float) rightPagePos, (float) topPos);
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate((float) rightPagePos, (float) topPos, 0.0F);
         this.renderGuidebookRightPage(screen, guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.pose().popMatrix();
-
-        this.renderGuidebookFowardPage(screen, guiGraphics, mouseX, mouseY, partialTick);
-    }
-
-    default void renderGuidebookFowardPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-
+        guiGraphics.pose().popPose();
     }
 
     default void renderGuidebookBacking(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         int leftPagePos = ((screen.width + 2) / 2) - PAGE_WIDTH;
         int rightPagePos = (screen.width / 2);
         int topPos = (screen.height - PAGE_HEIGHT) / 2;
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, GUIDEBOOK_LEFT_BACKING_LOCATION, leftPagePos, topPos, 0, 0, PAGE_WIDTH, PAGE_HEIGHT, 256, 256);
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, GUIDEBOOK_RIGHT_BACKING_LOCATION, rightPagePos, topPos, 0, 0, PAGE_WIDTH, PAGE_HEIGHT, 256, 256);
+        guiGraphics.blit(RenderType::guiTextured, GUIDEBOOK_LEFT_BACKING_LOCATION, leftPagePos, topPos, 0, 0, PAGE_WIDTH, PAGE_HEIGHT, 256, 256);
+        guiGraphics.blit(RenderType::guiTextured, GUIDEBOOK_RIGHT_BACKING_LOCATION, rightPagePos, topPos, 0, 0, PAGE_WIDTH, PAGE_HEIGHT, 256, 256);
     }
 
     default void renderGuidebookLeftPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, this.getLeftPageTexture(), 0, 0, 0, 0, PAGE_WIDTH, PAGE_HEIGHT, 256, 256);
+        guiGraphics.blit(RenderType::guiTextured, this.getLeftPageTexture(), 0, 0, 0, 0, PAGE_WIDTH, PAGE_HEIGHT, 256, 256);
     }
 
     default void renderGuidebookRightPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, this.getRightPageTexture(), 0, 0, 0, 0, PAGE_WIDTH, PAGE_HEIGHT, 256, 256);
+        guiGraphics.blit(RenderType::guiTextured, this.getRightPageTexture(), 0, 0, 0, 0, PAGE_WIDTH, PAGE_HEIGHT, 256, 256);
     }
 
     default void switchTab() {
