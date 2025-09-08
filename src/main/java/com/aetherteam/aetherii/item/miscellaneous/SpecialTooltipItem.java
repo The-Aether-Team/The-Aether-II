@@ -4,10 +4,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class SpecialTooltipItem extends Item {
     public final TooltipTemplate tooltip;
@@ -18,7 +16,7 @@ public class SpecialTooltipItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         this.tooltip.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 }

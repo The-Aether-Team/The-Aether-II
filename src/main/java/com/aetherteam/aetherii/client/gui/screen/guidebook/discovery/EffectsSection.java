@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.gui.screen.guidebook.discovery;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.api.guidebook.GuidebookEntry;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
@@ -12,9 +13,9 @@ import com.aetherteam.aetherii.network.packet.serverbound.CheckEffectsEntryPacke
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
@@ -79,11 +80,6 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
     }
 
     @Override
-    public void renderFoward(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-
-    }
-
-    @Override
     public void renderEntries(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.renderEntries(guiGraphics, mouseX, mouseY, partialTick);
         EffectsEntry.Mutable hoveredEntry = this.getEntryFromSlot(mouseX, mouseY);
@@ -98,23 +94,23 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
             int slotX = leftPos + (x * 18);
             int slotY = topPos + (y * 18);
 
-            ResourceLocation location = Gui.getMobEffectSprite(entry.getEffect());
+            TextureAtlasSprite effectAtlasSprite = Minecraft.getInstance().getMobEffectTextures().get(entry.getEffect());
 
             if (this.isUnlocked(entry, EffectsEntry.ICON.id())) {
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, slotX, slotY, 16, 16);
+                guiGraphics.blitSprite(RenderType::guiTextured, effectAtlasSprite, slotX, slotY, 16, 16);
             } else {
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, UNDISCOVERED_ENTRY_SPRITE, slotX, slotY, 16, 16);
+                guiGraphics.blitSprite(RenderType::guiTextured, UNDISCOVERED_ENTRY_SPRITE, slotX, slotY, 16, 16);
             }
             
             boolean isHovered = hoveredEntry != null && entry.getEffect() == hoveredEntry.getEffect();
             boolean isSelected = this.selectedEntry != null && entry.getEffect() == this.selectedEntry.getEffect();
 
             if (isHovered || isSelected) {
-                guiGraphics.fillGradient(slotX, slotY, slotX + 16, slotY + 16, -2130706433, -2130706433);
+                guiGraphics.fillGradient(RenderType.guiOverlay(), slotX, slotY, slotX + 16, slotY + 16, -2130706433, -2130706433, 0);
             }
 
             if (!this.isViewed(entry)) {
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.EXCLAMATION, slotX, slotY, 3, 8);
+                guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.EXCLAMATION, slotX, slotY, 3, 8);
             }
 
             i++;
@@ -136,7 +132,7 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
             if (this.isUnlocked(entry, EffectsEntry.SLOT_SUBTITLE.id()) && entry.getSlotSubtitle().isPresent()) {
                 components.add(Component.translatable(entry.getSlotSubtitle().get()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
             }
-            guiGraphics.setComponentTooltipForNextFrame(Minecraft.getInstance().font, components, (int) (mouseX - leftPagePos), (int) (mouseY - topPos));
+            guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, components, (int) (mouseX - leftPagePos), (int) (mouseY - topPos));
         }
     }
 
@@ -150,9 +146,9 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
             }
 
             if (this.isUnlocked(this.getSelectedEntry(), EffectsEntry.EFFECT.id())) {
-                ResourceLocation location = Gui.getMobEffectSprite(entry.getEffect());
+                TextureAtlasSprite effectAtlasSprite = Minecraft.getInstance().getMobEffectTextures().get(entry.getEffect());
 
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, 72, 30, 32, 32);
+                guiGraphics.blitSprite(RenderType::guiTextured, effectAtlasSprite, 72, 30, 32, 32);
             }
 
             List<Holder<Item>> items = entry.getItems();

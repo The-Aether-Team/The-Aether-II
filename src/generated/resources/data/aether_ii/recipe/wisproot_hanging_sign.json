@@ -4,7 +4,7 @@
   "group": "hanging_sign",
   "key": {
     "#": "aether_ii:stripped_wisproot_log",
-    "X": "aether_ii:arkenium_chain"
+    "X": "minecraft:chain"
   },
   "pattern": [
     "X X",

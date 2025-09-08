@@ -13,6 +13,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -40,17 +41,16 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.event.EventHooks;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.Optional;
+import java.util.UUID;
 
 public class Aerbunny extends AetherTamableAnimal {
     public static int PUFF_PARTICLE_EVENT = 100;
@@ -60,7 +60,7 @@ public class Aerbunny extends AetherTamableAnimal {
     private static final EntityDataAccessor<Integer> DATA_AFRAID_TIME_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_FAST_FALLING_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DATA_COLLAR_COLOR = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_VEHICLE_REFERENCE = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
+    private static final EntityDataAccessor<Optional<UUID>> DATA_VEHICLE_UUID_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.OPTIONAL_UUID);
 
     private static final int MAXIMUM_PUFFS = 11;
 
@@ -97,7 +97,7 @@ public class Aerbunny extends AetherTamableAnimal {
         builder.define(DATA_AFRAID_TIME_ID, 0);
         builder.define(DATA_FAST_FALLING_ID, false);
         builder.define(DATA_COLLAR_COLOR, DyeColor.BLUE.getId());
-        builder.define(DATA_VEHICLE_REFERENCE, Optional.empty());
+        builder.define(DATA_VEHICLE_UUID_ID, Optional.empty());
     }
 
     @Override
@@ -218,7 +218,7 @@ public class Aerbunny extends AetherTamableAnimal {
                         if (!player.onGround() && data.isJumping() && player.getDeltaMovement().y() <= 0.0 && this.position().y() < this.lastPos.y() - 1.1) {
                             if (this.getPuffCooldown() <= 0) { // Also check cooldown timer.
                                 player.setDeltaMovement(player.getDeltaMovement().x(), 0.125, player.getDeltaMovement().z());
-                                ClientPacketDistributor.sendToServer(new AerbunnyPuffPacket(this.getId())); // Calls Aerbunny#puff() on the server.
+                                PacketDistributor.sendToServer(new AerbunnyPuffPacket(this.getId())); // Calls Aerbunny#puff() on the server.
                                 this.spawnPuffParticles();
                                 this.lastPos = null;
                                 this.setPuffCooldown(20);
@@ -409,7 +409,7 @@ public class Aerbunny extends AetherTamableAnimal {
                 ((EntityAccessor) this.getVehicle()).callAddPassenger(this);
                 ((EntityAccessor) vehicle).callGetIndirectPassengersStream().filter((entity) -> entity instanceof ServerPlayer).forEach((player) -> CriteriaTriggers.START_RIDING_TRIGGER.trigger((ServerPlayer) player));
                 if (this.getVehicle() instanceof Player player) {
-                    this.setVehicleReference(Optional.of(new EntityReference<>(player.getUUID())));
+                    this.setVehicleUUID(Optional.of(player.getUUID()));
                 }
                 return true;
             } else {
@@ -423,15 +423,14 @@ public class Aerbunny extends AetherTamableAnimal {
      */
     @Override
     public void stopRiding() {
+        this.refreshDimensions();
         if (this.getVehicle() instanceof Player player) {
             player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(null);
         }
-        if (this.getVehicleReference().isPresent()) {
-            this.setVehicleReference(Optional.empty());
+        if (this.getVehicleUUID().isPresent()) {
+            this.setVehicleUUID(Optional.empty());
         }
         super.stopRiding();
-
-        this.refreshDimensions();
     }
 
     /**
@@ -549,12 +548,12 @@ public class Aerbunny extends AetherTamableAnimal {
         this.entityData.set(DATA_COLLAR_COLOR, pCollarColor.getId());
     }
 
-    public Optional<EntityReference<LivingEntity>> getVehicleReference() {
-        return this.entityData.get(DATA_VEHICLE_REFERENCE);
+    public Optional<UUID> getVehicleUUID() {
+        return this.entityData.get(DATA_VEHICLE_UUID_ID);
     }
 
-    public void setVehicleReference(Optional<EntityReference<LivingEntity>> reference) {
-        this.entityData.set(DATA_VEHICLE_REFERENCE, reference);
+    public void setVehicleUUID(Optional<UUID> uuid) {
+        this.entityData.set(DATA_VEHICLE_UUID_ID, uuid);
     }
 
     @Nullable
@@ -627,9 +626,9 @@ public class Aerbunny extends AetherTamableAnimal {
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob entity) {
         Aerbunny aerbunny = AetherIIEntityTypes.AERBUNNY.get().create(level, EntitySpawnReason.BREEDING);
         if (aerbunny != null) {
-            EntityReference<LivingEntity> reference = this.getOwnerReference();
-            if (reference != null) {
-                aerbunny.setOwnerReference(reference);
+            UUID uuid = this.getOwnerUUID();
+            if (uuid != null) {
+                aerbunny.setOwnerUUID(uuid);
                 aerbunny.setTame(true, false);
                 aerbunny.setOrderedToSit(true);
             }
@@ -639,21 +638,27 @@ public class Aerbunny extends AetherTamableAnimal {
     }
 
     @Override
-    public void addAdditionalSaveData(ValueOutput output) {
-        super.addAdditionalSaveData(output);
-        output.putInt("AfraidTime", this.getAfraidTime());
-        output.store("CollarColor", DyeColor.CODEC, this.getCollarColor());
-        if (this.getVehicleReference().isPresent()) {
-            output.store("VehicleUUID", EntityReference.codec(), this.getVehicleReference().get());
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putInt("AfraidTime", this.getAfraidTime());
+        tag.putByte("CollarColor", (byte) this.getCollarColor().getId());
+        if (this.getVehicleUUID().isPresent()) {
+            tag.putUUID("VehicleUUID", this.getVehicleUUID().get());
         }
     }
 
     @Override
-    public void readAdditionalSaveData(ValueInput input) {
-        super.readAdditionalSaveData(input);
-        this.setAfraidTime(input.getIntOr("AfraidTime", 0));
-        input.read("CollarColor", DyeColor.CODEC).ifPresent(this::setCollarColor);
-        this.setVehicleReference(input.read("VehicleUUID", EntityReference.codec()));
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        if (tag.contains("AfraidTime")) {
+            this.setAfraidTime(tag.getInt("AfraidTime"));
+        }
+        if (tag.contains("CollarColor", 99)) {
+            this.setCollarColor(DyeColor.byId(tag.getInt("CollarColor")));
+        }
+        if (tag.contains("VehicleUUID")) {
+            this.setVehicleUUID(Optional.of(tag.getUUID("VehicleUUID")));
+        }
     }
 
     /**

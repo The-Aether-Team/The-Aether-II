@@ -13,8 +13,8 @@ public class HolystoneShortswordItem extends TieredShortswordItem implements Hol
     }
 
     @Override
-    public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         this.dropAmbrosium(target, attacker);
-        super.hurtEnemy(stack, target, attacker);
+        return super.hurtEnemy(stack, target, attacker);
     }
 }

@@ -39,8 +39,6 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
@@ -116,29 +114,27 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     }
 
     @Override
-    public void loadAdditional(ValueInput input) {
-        super.loadAdditional(input);
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registry) {
+        super.loadAdditional(tag, registry);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(input, this.items);
-        this.processingProgress = input.getIntOr("ProcessingTime", 0);
-        this.processingTotalTime = input.getIntOr("ProcessingTimeTotal", 200);
-        Optional<CompoundTag> recipesUsedTag = input.read("RecipesUsed", CompoundTag.CODEC);
-        recipesUsedTag.ifPresent(tag -> {
-            for (String key : tag.keySet()) {
-                this.recipesUsed.put(ResourceKey.create(Registries.RECIPE, ResourceLocation.parse(key)), tag.getIntOr(key, 0));
-            }
-        });
+        ContainerHelper.loadAllItems(tag, this.items, registry);
+        this.processingProgress = tag.getInt("ProcessingTime");
+        this.processingTotalTime = tag.getInt("ProcessingTimeTotal");
+        CompoundTag recipesUsedTag = tag.getCompound("RecipesUsed");
+        for (String key : recipesUsedTag.getAllKeys()) {
+            this.recipesUsed.put(ResourceKey.create(Registries.RECIPE, ResourceLocation.parse(key)), recipesUsedTag.getInt(key));
+        }
     }
 
     @Override
-    protected void saveAdditional(ValueOutput output) {
-        super.saveAdditional(output);
-        output.putInt("ProcessingTime", this.processingProgress);
-        output.putInt("ProcessingTimeTotal", this.processingTotalTime);
-        ContainerHelper.saveAllItems(output, this.items);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registry) {
+        super.saveAdditional(tag, registry);
+        tag.putInt("ProcessingTime", this.processingProgress);
+        tag.putInt("ProcessingTimeTotal", this.processingTotalTime);
+        ContainerHelper.saveAllItems(tag, this.items, registry);
         CompoundTag recipesUsedTag = new CompoundTag();
         this.recipesUsed.forEach((key, integer) -> recipesUsedTag.putInt(key.location().toString(), integer));
-        output.store("RecipesUsed", CompoundTag.CODEC, recipesUsedTag);
+        tag.put("RecipesUsed", recipesUsedTag);
     }
 
     public static void serverTick(ServerLevel level, BlockPos pos, BlockState state, AltarBlockEntity blockEntity) {
@@ -407,7 +403,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     }
 
     public void awardUsedRecipesAndPopExperience(ServerPlayer player) {
-        List<RecipeHolder<?>> list = this.getRecipesToAwardAndPopExperience(player.level(), player.position());
+        List<RecipeHolder<?>> list = this.getRecipesToAwardAndPopExperience(player.serverLevel(), player.position());
         player.awardRecipes(list);
         for (RecipeHolder<?> recipeholder : list) {
             if (recipeholder != null) {

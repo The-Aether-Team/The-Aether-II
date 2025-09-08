@@ -9,7 +9,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.Musics;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.random.WeightedList;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.level.biome.Biome;
 
 import java.util.Optional;
@@ -36,9 +36,9 @@ public class MusicHooks {
                         return new MusicInfo(AETHER_CAVES, volume);
                     } else {
                         if (day) {
-                            Optional<WeightedList<Music>> optional = biome.value().getBackgroundMusic();
+                            Optional<SimpleWeightedRandomList<Music>> optional = biome.value().getBackgroundMusic();
                             if (optional.isPresent()) {
-                                Optional<Music> optional1 = optional.get().getRandom(Minecraft.getInstance().level.random);
+                                Optional<Music> optional1 = optional.get().getRandomValue(Minecraft.getInstance().level.random);
                                 return new MusicInfo(optional1.orElse(null), volume);
                             } else {
                                 return new MusicInfo(Musics.GAME, volume);

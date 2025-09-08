@@ -5,7 +5,9 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -15,7 +17,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerEntity;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -29,9 +30,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.TagValueInput;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -48,12 +46,11 @@ public class HoveringBlockEntity extends Entity {
     protected boolean launched;
     protected int launchDuration;
     protected Vec3 targetSettlePosition;
-
-    /*protected int lerpSteps;
+    protected int lerpSteps;
     protected double lerpX;
     protected double lerpY;
     protected double lerpZ;
-*/
+
     public HoveringBlockEntity(EntityType<? extends Entity> entityType, Level level) {
         super(entityType, level);
     }
@@ -107,12 +104,12 @@ public class HoveringBlockEntity extends Entity {
             this.setDeltaMovement(this.getDeltaMovement().scale(0.98));
         }
 
-        /*if (!this.level().isClientSide()) {
+        if (!this.level().isClientSide()) {
             if (this.lerpSteps > 0) {
                 this.lerpPositionAndRotationStep(this.lerpSteps, this.lerpX, this.lerpY, this.lerpZ, this.getYRot(), this.getXRot());
                 --this.lerpSteps;
             }
-        }*/
+        }
 
         this.move(MoverType.SELF, this.getDeltaMovement());
 
@@ -182,15 +179,15 @@ public class HoveringBlockEntity extends Entity {
                         BlockEntity blockEntity = this.level().getBlockEntity(newPos);
                         if (blockEntity != null) {
                             CompoundTag tag = blockEntity.saveWithoutMetadata(this.level().registryAccess());
-                            for (String string : this.getBlockEntityData().keySet()) {
+                            for (String string : this.getBlockEntityData().getAllKeys()) {
                                 Tag blockDataTag = this.getBlockEntityData().get(string);
                                 if (blockDataTag != null) {
                                     tag.put(string, blockDataTag.copy());
                                 }
                             }
 
-                            try (ProblemReporter.ScopedCollector problemreporter$scopedcollector = new ProblemReporter.ScopedCollector(AetherII.LOGGER)) {
-                                blockEntity.loadWithComponents(TagValueInput.create(problemreporter$scopedcollector, this.level().registryAccess(), tag));
+                            try {
+                                blockEntity.loadWithComponents(tag, this.level().registryAccess());
                             } catch (Exception exception) {
                                 AetherII.LOGGER.error("Failed to load block entity from hovering block", exception);
                             }
@@ -252,15 +249,12 @@ public class HoveringBlockEntity extends Entity {
         return this.blockState;
     }
 
-    /*@Override
-    public void lerpPositionAndRotationStep(int pSteps, double pX, double pY, double pZ, double pYRot, double pXRot) {
+    @Override
+    public void lerpTo(double pX, double pY, double pZ, float pYRot, float pXRot, int pSteps) {
         this.lerpX = pX;
         this.lerpY = pY;
         this.lerpZ = pZ;
-        double d0 = (double)1.0F / (double)pSteps;
-        float f = (float) Mth.rotLerp(d0, (double)this.getYRot(), pYRot);
-        float f1 = (float)Mth.lerp(d0, (double)this.getXRot(), pXRot);
-        this.setRot(f, f1);
+        this.setRot(pYRot, pXRot);
         this.lerpSteps = pSteps;
     }
 
@@ -278,19 +272,26 @@ public class HoveringBlockEntity extends Entity {
     public double lerpTargetZ() {
         return this.lerpSteps > 0 ? this.lerpZ : this.getZ();
     }
-*/
+
     @Override
-    protected void addAdditionalSaveData(ValueOutput output) {
-        output.store("BlockState", BlockState.CODEC, this.blockState);
+    protected void addAdditionalSaveData(CompoundTag tag) {
+        tag.put("BlockState", NbtUtils.writeBlockState(this.blockState));
         if (this.getBlockEntityData() != null) {
-            output.store("TileEntityData", CompoundTag.CODEC, this.getBlockEntityData());
+            tag.put("TileEntityData", this.getBlockEntityData());
         }
     }
 
     @Override
-    protected void readAdditionalSaveData(ValueInput input) {
-        this.blockState = input.read("BlockState", BlockState.CODEC).orElse(Blocks.SAND.defaultBlockState());
-        input.read("TileEntityData", CompoundTag.CODEC).ifPresent(this::setBlockEntityData);
+    protected void readAdditionalSaveData(CompoundTag tag) {
+        if (tag.contains("BlockState")) {
+            this.blockState = NbtUtils.readBlockState(this.level().holderLookup(Registries.BLOCK), tag.getCompound("BlockState"));
+        }
+        if (tag.contains("TileEntityData", 10)) {
+            this.setBlockEntityData(tag.getCompound("TileEntityData"));
+        }
+        if (this.blockState.isAir()) {
+            this.blockState = Blocks.SAND.defaultBlockState();
+        }
     }
 
     @Override

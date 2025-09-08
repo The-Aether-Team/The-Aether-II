@@ -1,7 +1,6 @@
 {
   "ambient_light": 0.0,
   "bed_works": true,
-  "cloud_height": 256,
   "coordinate_scale": 1.0,
   "effects": "aether_ii:aether_highlands",
   "has_ceiling": false,

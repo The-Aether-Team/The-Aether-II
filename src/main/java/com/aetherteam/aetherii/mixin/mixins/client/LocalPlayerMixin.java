@@ -8,7 +8,7 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.ClientInput;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.network.ClientPacketDistributor;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -45,7 +45,7 @@ public class LocalPlayerMixin extends AbstractClientPlayer {
     private void sendIsSprintingIfNeeded(CallbackInfo ci) {
         if (--this.the_Aether_II$sprintCooldown <= 0 && this.input.keyPresses.sprint() && this.getControlledVehicle() != null) {
             this.the_Aether_II$sprintCooldown = 14;
-            ClientPacketDistributor.sendToServer(new MoaFlyModeChangePacket(this.getControlledVehicle().getId()));
+            PacketDistributor.sendToServer(new MoaFlyModeChangePacket(this.getControlledVehicle().getId()));
         }
     }
 }

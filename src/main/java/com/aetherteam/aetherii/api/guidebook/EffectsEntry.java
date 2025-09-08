@@ -13,7 +13,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -60,10 +59,6 @@ public class EffectsEntry extends GuidebookEntry {
                 EffectsEntry.REFERENCE_CODEC.fieldOf("entry").forGetter(EffectsEntry.Mutable::getEntry),
                 Codec.unboundedMap(Codec.STRING, Info.CODEC).fieldOf("values").forGetter(EffectsEntry.Mutable::getClientValues)
         ).apply(instance, EffectsEntry.Mutable::new));
-        public static final StreamCodec<RegistryFriendlyByteBuf, EffectsEntry.Mutable> STREAM_CODEC = StreamCodec.composite(
-                EffectsEntry.STREAM_CODEC, EffectsEntry.Mutable::getEntry,
-                ByteBufCodecs.map(HashMap::new, ByteBufCodecs.STRING_UTF8, Info.STREAM_CODEC), EffectsEntry.Mutable::getClientValues,
-                EffectsEntry.Mutable::new);
 
         private final Holder<EffectsEntry> entry;
         private final Map<String, Info> clientValues;

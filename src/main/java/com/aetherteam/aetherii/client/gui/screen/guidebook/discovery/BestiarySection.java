@@ -15,12 +15,13 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.GuiSpriteManager;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
-import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.MobEffectTextureManager;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
@@ -110,7 +111,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     }
 
     @Override
-    public void renderFoward(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         int rightPagePos = (this.screen.width / 2);
         int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
         if (this.getSelectedEntry() != null && this.isUnlocked(this.getSelectedEntry(), BestiaryEntry.ENTITY_TYPE.id())) {
@@ -130,13 +131,10 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         }
     }
 
-    @Override
-    public void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-
-    }
-
     public void renderRotatingEntity(GuiGraphics guiGraphics, int startX, int startY, int endX, int endY, int scale, float yOffset, float angleXComponent, float angleYComponent, LivingEntity livingEntity) {
-        int scaleFactor = 30 / scale;
+        float posX = (float) (startX + endX) / 2.0F;
+        float posY = (float) (startY + endY) / 2.0F;
+        guiGraphics.enableScissor(startX, startY, endX, endY);
         Quaternionf xQuaternion = new Quaternionf().rotateZ(Mth.PI);
         Quaternionf zQuaternion = new Quaternionf().rotateX(angleYComponent * Mth.DEG_TO_RAD);
         xQuaternion.mul(zQuaternion);
@@ -150,10 +148,11 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         livingEntity.yHeadRotO = livingEntity.getYRot();
         Vector3f vector3f = new Vector3f(0.0F, livingEntity.getBbHeight() / 2.0F + yOffset, 0.0F);
 
-        InventoryScreen.renderEntityInInventory(guiGraphics, startX, startY, endX, endY, 30F, vector3f, xQuaternion, zQuaternion, livingEntity);
+        InventoryScreen.renderEntityInInventory(guiGraphics, posX, posY, scale, vector3f, xQuaternion, zQuaternion, livingEntity);
         livingEntity.setYBodyRot(yBodyRot);
         livingEntity.setYRot(yRot);
         livingEntity.setXRot(xRot);
+        guiGraphics.disableScissor();
     }
 
     @Override
@@ -182,17 +181,17 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
             int y = i / 6;
             int slotX = leftPos + (x * 18);
             int slotY = topPos + (y * 18);
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, slotX, slotY, 16, 16);
+            guiGraphics.blitSprite(RenderType::guiTextured, sprite, slotX, slotY, 16, 16);
 
             boolean isHovered = hoveredEntry != null && entry.getEntityType() == hoveredEntry.getEntityType();
             boolean isSelected = this.selectedEntry != null && entry.getEntityType() == this.selectedEntry.getEntityType();
 
             if (isHovered || isSelected) {
-                guiGraphics.fillGradient(slotX, slotY, slotX + 16, slotY + 16, -2130706433, -2130706433);
+                guiGraphics.fillGradient(RenderType.guiOverlay(), slotX, slotY, slotX + 16, slotY + 16, -2130706433, -2130706433, 0);
             }
 
             if (!this.isViewed(entry)) {
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.EXCLAMATION, slotX, slotY, 3, 8);
+                guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.EXCLAMATION, slotX, slotY, 3, 8);
             }
 
             i++;
@@ -214,7 +213,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
             if (this.isUnlocked(entry, BestiaryEntry.SLOT_SUBTITLE.id()) && entry.getSlotSubtitle().isPresent()) {
                 components.add(Component.translatable(entry.getSlotSubtitle().get()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
             }
-            guiGraphics.setComponentTooltipForNextFrame(Minecraft.getInstance().font, components, (int) (mouseX - leftPagePos), (int) (mouseY - topPos));
+            guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, components, (int) (mouseX - leftPagePos), (int) (mouseY - topPos));
         }
     }
 
@@ -235,14 +234,14 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                     int y = 29;
 
                     if (this.isUnlocked(entry, BestiaryEntry.HEALTH.id())) {
-                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
+                        guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
                         this.renderIconValue(guiGraphics, x, y, (int) livingEntity.getMaxHealth());
                         this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", entry.getHealth()));
                     }
 
                     y += 17;
                     if (this.isUnlocked(entry, BestiaryEntry.SLASH_DEFENSE.id())) {
-                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SLASH_SPRITE, x, y, 16, 16);
+                        guiGraphics.blitSprite(RenderType::guiTextured, SLASH_SPRITE, x, y, 16, 16);
                         int slashDefense = entry.getSlashDefense();
                         Component slashTooltip = this.getDamageTypeComponent(slashDefense, "slash");
                         this.renderDefenseIconValue(guiGraphics, x, y, -slashDefense);
@@ -251,7 +250,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
 
                     y += 17;
                     if (this.isUnlocked(entry, BestiaryEntry.IMPACT_DEFENSE.id())) {
-                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, IMPACT_SPRITE, x, y, 16, 16);
+                        guiGraphics.blitSprite(RenderType::guiTextured, IMPACT_SPRITE, x, y, 16, 16);
                         int impactDefense = entry.getImpactDefense();
                         Component impactTooltip = this.getDamageTypeComponent(impactDefense, "impact");
                         this.renderDefenseIconValue(guiGraphics, x, y, -impactDefense);
@@ -260,7 +259,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
 
                     y += 17;
                     if (this.isUnlocked(entry, BestiaryEntry.PIERCE_DEFENSE.id())) {
-                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, PIERCE_SPRITE, x, y, 16, 16);
+                        guiGraphics.blitSprite(RenderType::guiTextured, PIERCE_SPRITE, x, y, 16, 16);
                         int pierceDefense = entry.getPierceDefense();
                         Component pierceTooltip = this.getDamageTypeComponent(pierceDefense, "pierce");
                         this.renderDefenseIconValue(guiGraphics, x, y, -pierceDefense);
@@ -270,6 +269,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                     x = 132;
                     y = 29;
 
+                    MobEffectTextureManager effectTextureManager = Minecraft.getInstance().getMobEffectTextures();
                     List<BestiaryEntry.EffectResistanceDisplay> effectResistances = entry.getEffectResistances();
                     if (!effectResistances.isEmpty()) {
                         for (int i = 0; i < effectResistances.size(); i++) {
@@ -277,8 +277,8 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                             if (effectResistanceDisplay.attribute().value() instanceof EffectResistanceAttribute effectResistanceAttribute) {
                                 if (entry.getClientValues().containsKey(BestiaryEntry.EFFECT_RESISTANCE.id() + "_" + i) && this.isUnlocked(entry, BestiaryEntry.EFFECT_RESISTANCE.id() + "_" + i)) {
                                     Holder<MobEffect> effectHolder = effectResistanceAttribute.getEffect();
-                                    ResourceLocation location = Gui.getMobEffectSprite(effectHolder);
-                                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, x, y, 18, 18);
+                                    TextureAtlasSprite textureatlassprite = effectTextureManager.get(effectHolder);
+                                    guiGraphics.blitSprite(RenderType::guiTextured, textureatlassprite, x, y, 18, 18);
                                     int effectValue = effectResistanceDisplay.value();
                                     Component effectTooltip = Component.literal(effectValue * 100 + "%")
                                             .append(CommonComponents.space())
@@ -387,7 +387,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         double mouseXDiff = (mouseX - rightPagePos) - x;
         double mouseYDiff = (mouseY - topPos) - y;
         if (mouseYDiff <= 15 && mouseYDiff >= 0 && mouseXDiff <= 15 && mouseXDiff >= 0) {
-            guiGraphics.setTooltipForNextFrame(font, component, (mouseX - rightPagePos) + xOffset, mouseY - topPos);
+            guiGraphics.renderTooltip(font, component, (mouseX - rightPagePos) + xOffset, mouseY - topPos);
         }
     }
 

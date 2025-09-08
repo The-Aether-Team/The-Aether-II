@@ -2,13 +2,10 @@ package com.aetherteam.aetherii.client.renderer.entity.model.burrukai;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.BurrukaiAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.state.BurrukaiRenderState;
-import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 
 public abstract class AbstractBurrukaiModel extends EntityModel<BurrukaiRenderState> {
-    private final KeyframeAnimation ramAnimation;
-    private final KeyframeAnimation walkAnimation;
     public final ModelPart body_main;
     public final ModelPart body_front;
     public final ModelPart body_rear;
@@ -38,8 +35,6 @@ public abstract class AbstractBurrukaiModel extends EntityModel<BurrukaiRenderSt
 
     public AbstractBurrukaiModel(ModelPart root) {
         super(root);
-        this.ramAnimation = BurrukaiAnimation.RAM.bake(root);
-        this.walkAnimation = BurrukaiAnimation.WALK.bake(root);
         this.body_main = root.getChild("body_main");
         this.body_front = this.body_main.getChild("body_front");
         this.body_rear = this.body_main.getChild("body_rear");
@@ -73,7 +68,7 @@ public abstract class AbstractBurrukaiModel extends EntityModel<BurrukaiRenderSt
         super.setupAnim(burrukai);
         this.head_main.yRot = burrukai.yRot * (float) (Math.PI / 180.0);
         this.head_main.xRot = burrukai.xRot * (float) (Math.PI / 180.0);
-        this.ramAnimation.apply(burrukai.ramAnimationState, burrukai.ageInTicks, 1.0F);
-        this.walkAnimation.applyWalk(burrukai.walkAnimationPos, burrukai.walkAnimationSpeed, 2.0F, 2.0F);
+        this.animate(burrukai.ramAnimationState, BurrukaiAnimation.RAM, burrukai.ageInTicks, 1.0F);
+        this.animateWalk(BurrukaiAnimation.WALK, burrukai.walkAnimationPos, burrukai.walkAnimationSpeed, 2.0F, 2.0F);
     }
 }

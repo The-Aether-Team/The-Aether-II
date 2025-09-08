@@ -11,7 +11,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 public class HolystoneCrossbowItem extends TieredCrossbowItem {
     public HolystoneCrossbowItem(Properties properties) {
-        super(AetherIIItemTiers.HOLYSTONE, properties.attributes(new ItemAttributeModifiers(AetherIIStats.HOLYSTONE_CROSSBOW)));
+        super(AetherIIItemTiers.HOLYSTONE, properties.attributes(new ItemAttributeModifiers(AetherIIStats.HOLYSTONE_CROSSBOW, true)));
     }
 
     @Override

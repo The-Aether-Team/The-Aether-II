@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.item.equipment;
 
 import com.google.common.collect.Sets;
+import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.Set;
@@ -13,8 +14,7 @@ public class AetherIINeoItemAbilities {
     public static final ItemAbility SHORTSWORD_SLASH = ItemAbility.get("aether_ii:shortsword_slash");
     public static final ItemAbility SPEAR_STAB = ItemAbility.get("aether_ii:spear_stab");
     public static final ItemAbility HAMMER_SHOCK = ItemAbility.get("aether_ii:hammer_shock");
-    //TODO SHORT SWORD DIG
-    public static final Set<ItemAbility> DEFAULT_SHORTSWORD_ACTIONS = of(SHORTSWORD_SLASH);
+    public static final Set<ItemAbility> DEFAULT_SHORTSWORD_ACTIONS = of(ItemAbilities.SWORD_DIG, SHORTSWORD_SLASH);
     public static final Set<ItemAbility> DEFAULT_SPEAR_ACTIONS = of(SPEAR_DIG, SPEAR_STAB);
     public static final Set<ItemAbility> DEFAULT_HAMMER_ACTIONS = of(HAMMER_DIG, HAMMER_SHOCK);
 

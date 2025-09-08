@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.network.packet.serverbound.ForgeRenamePacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeSlotCharmsPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeTriggerSoundPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeUpgradePacket;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
@@ -16,15 +17,14 @@ import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.network.ClientPacketDistributor;
-import org.joml.Matrix3x2fStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
@@ -76,7 +76,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                 this.onNameChanged(this.name.getValue());
                 this.onItemUpgraded();
                 this.onCharmSlotted();
-                ClientPacketDistributor.sendToServer(new ForgeTriggerSoundPacket());
+                PacketDistributor.sendToServer(new ForgeTriggerSoundPacket());
             }
         }));
         this.forgeButton.setTooltip(Tooltip.create(Component.translatable("gui.aether_ii.arkenium_forge.forge_button.tooltip")));
@@ -138,11 +138,11 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         int i = this.leftPos;
         int j = (this.height - this.imageHeight) / 2;
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, ARKENIUM_FORGE_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
+        guiGraphics.blit(RenderType::guiTextured, ARKENIUM_FORGE_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
 
         ItemStack input = this.menu.getInput();
 
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, !input.isEmpty() ? TEXT_FIELD_SPRITE : TEXT_FIELD_DISABLED_SPRITE, this.leftPos + 33, this.topPos + 20, 110, 16);
+        guiGraphics.blitSprite(RenderType::guiTextured, !input.isEmpty() ? TEXT_FIELD_SPRITE : TEXT_FIELD_DISABLED_SPRITE, this.leftPos + 33, this.topPos + 20, 110, 16);
 
         if (!input.isEmpty()) {
             ItemStack displayStack = input.copy();
@@ -152,18 +152,18 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                 }
             }
 
-            Matrix3x2fStack poseStack = guiGraphics.pose();
-            poseStack.pushMatrix();
-            poseStack.scale(2, 2);
-            poseStack.translate((this.leftPos + 72) / 2.0F, (this.topPos + 57) / 2.0F);
+            PoseStack poseStack = guiGraphics.pose();
+            poseStack.pushPose();
+            poseStack.scale(2, 2, 1);
+            poseStack.translate((this.leftPos + 72) / 2.0, (this.topPos + 57) / 2.0, 0);
             guiGraphics.renderItem(displayStack, 0, 0);
-            poseStack.popMatrix();
+            poseStack.popPose();
 
             ReinforcementTier reinforcementTier = input.get(AetherIIDataComponents.REINFORCEMENT_TIER);
             ReinforcementTier displayTier = displayStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
 
             if (displayTier != null) {
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, TIER_LOCATIONS.get(displayTier.getTier() - 1), this.leftPos + 80, this.topPos + 91, 16, 16);
+                guiGraphics.blitSprite(RenderType::guiTextured, TIER_LOCATIONS.get(displayTier.getTier() - 1), this.leftPos + 80, this.topPos + 91, 16, 16);
             }
 
             int tierCount = this.menu.getTierCount();
@@ -176,7 +176,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                 for (int tier = 1; tier <= tierCount; tier++) {
                     int offsetX = x + ((areaWidth / (tierCount + 1)) * tier);
 
-                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, TIER_LOCATIONS.get(tier - 1), offsetX - (spriteSize / 2), y, spriteSize, spriteSize);
+                    guiGraphics.blitSprite(RenderType::guiTextured, TIER_LOCATIONS.get(tier - 1), offsetX - (spriteSize / 2), y, spriteSize, spriteSize);
 
                     ReinforcementTier.Cost cost = this.menu.getCostForTier(tier);
                     int primaryCost = this.menu.getPrimaryCostForTier(tier);
@@ -189,20 +189,20 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                             if (!primary.isEmpty()) {
                                 int secondX = secondary.isEmpty() ? 8 : 0;
                                 guiGraphics.renderFakeItem(primary, secondX + offsetX - spriteSize, y + 18);
-                                guiGraphics.fill(secondX + offsetX - spriteSize, y + 18, secondX + (offsetX - spriteSize) + 16, (y + 18) + 16, 822083583);
+                                guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), secondX + offsetX - spriteSize, y + 18, secondX + (offsetX - spriteSize) + 16, (y + 18) + 16, 822083583);
                                 guiGraphics.renderItemDecorations(this.font, primary, secondX + offsetX - spriteSize, y + 18);
                             }
                             if (!secondary.isEmpty()) {
                                 guiGraphics.renderFakeItem(secondary, offsetX, y + 18);
-                                guiGraphics.fill(offsetX, y + 18, offsetX + 16, (y + 18) + 16, 822083583); //todo
+                                guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), offsetX, y + 18, offsetX + 16, (y + 18) + 16, 822083583);
                                 guiGraphics.renderItemDecorations(this.font, secondary, offsetX, y + 18);
                             }
                         } else {
-                            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, TIER_COMPLETED_SPRITE, offsetX - (spriteSize / 2), y + 19, spriteSize, spriteSize);
+                            guiGraphics.blitSprite(RenderType::guiTextured, TIER_COMPLETED_SPRITE, offsetX - (spriteSize / 2), y + 19, spriteSize, spriteSize);
                         }
                     }
                     if (currentTier == tier && currentTier > this.menu.getTierForItem()) {
-                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, TIER_SELECTED_SPRITE, offsetX - (9), y - 1, 18, 18);
+                        guiGraphics.blitSprite(RenderType::guiTextured, TIER_SELECTED_SPRITE, offsetX - (9), y - 1, 18, 18);
                     }
                 }
             }
@@ -219,13 +219,13 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
 
     private void onItemUpgraded() {
         if (this.menu.upgradeItem()) {
-            ClientPacketDistributor.sendToServer(new ForgeUpgradePacket());
+            PacketDistributor.sendToServer(new ForgeUpgradePacket());
         }
     }
 
     private void onCharmSlotted() {
         if (this.menu.slotCharms()) {
-            ClientPacketDistributor.sendToServer(new ForgeSlotCharmsPacket());
+            PacketDistributor.sendToServer(new ForgeSlotCharmsPacket());
         }
     }
 
@@ -237,7 +237,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                 s = "";
             }
             if (this.menu.setItemName(s)) {
-                ClientPacketDistributor.sendToServer(new ForgeRenamePacket(s));
+                PacketDistributor.sendToServer(new ForgeRenamePacket(s));
             }
         }
     }

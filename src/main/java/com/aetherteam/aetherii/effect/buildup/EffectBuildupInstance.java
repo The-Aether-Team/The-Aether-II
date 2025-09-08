@@ -1,34 +1,13 @@
 package com.aetherteam.aetherii.effect.buildup;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 
 public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> {
-    public static final Codec<EffectBuildupInstance> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            BuiltInRegistries.MOB_EFFECT.holderByNameCodec().fieldOf("effect_type").forGetter(effect -> effect.type),
-            MobEffectInstance.CODEC.fieldOf("effect_instance").forGetter(effect -> effect.instance),
-            Codec.INT.fieldOf("initial_instance_duration").forGetter(effect -> effect.initialInstanceDuration),
-            Codec.INT.fieldOf("buildup_reduction_rate").forGetter(effect -> effect.buildupReductionRate),
-            Codec.INT.fieldOf("buildup").forGetter(effect -> effect.buildup)
-    ).apply(instance, EffectBuildupInstance::new));
-    public static final StreamCodec<RegistryFriendlyByteBuf, EffectBuildupInstance> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.holderRegistry(Registries.MOB_EFFECT), (effect) -> effect.type,
-            MobEffectInstance.STREAM_CODEC, (effect) -> effect.instance,
-            ByteBufCodecs.INT, (effect) -> effect.initialInstanceDuration,
-            ByteBufCodecs.INT, (effect) -> effect.buildupReductionRate,
-            ByteBufCodecs.INT, (effect) -> effect.buildup,
-            EffectBuildupInstance::new);
-
     private final int buildupCap = 1000;
 
     private final Holder<MobEffect> type;
@@ -104,6 +83,23 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
 
     public int getInitialInstanceDuration() {
         return this.initialInstanceDuration;
+    }
+
+    public CompoundTag save(CompoundTag tag) {
+        tag.put("effect_instance", this.instance.save());
+        tag.putInt("initial_instance_duration", this.initialInstanceDuration);
+        tag.putInt("buildup_reduction_rate", this.buildupReductionRate);
+        tag.putInt("buildup", this.buildup);
+        return tag;
+    }
+
+    public static EffectBuildupInstance load(CompoundTag tag) {
+        CompoundTag effectTag = (CompoundTag) tag.get("effect_instance");
+        MobEffectInstance effect = MobEffectInstance.load(effectTag);
+        int initialInstanceDuration = tag.getInt("initial_instance_duration");
+        int buildupReductionRate = tag.getInt("buildup_reduction_rate");
+        int buildup = tag.getInt("buildup");
+        return new EffectBuildupInstance(effect.getEffect(), effect, initialInstanceDuration, buildupReductionRate, buildup);
     }
 
     @Override

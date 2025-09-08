@@ -44,7 +44,7 @@ public class AetherIIData {
         // Tags
         AetherIIBlockTagData blockTags = new AetherIIBlockTagData(packOutput, registryProvider);
         generator.addProvider(true, blockTags);
-        generator.addProvider(true, new AetherIIItemTagData(packOutput, registryProvider));
+        generator.addProvider(true, new AetherIIItemTagData(packOutput, registryProvider, blockTags.contentsGetter()));
         generator.addProvider(true, new AetherIIEntityTagData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIIFluidTagData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIIBiomeTagData(packOutput, registryProvider));
@@ -54,7 +54,7 @@ public class AetherIIData {
         // pack.mcmeta
         generator.addProvider(true, new PackMetadataGenerator(packOutput).add(PackMetadataSection.TYPE, new PackMetadataSection(
                 Component.translatable("pack.aether_ii.mod.description"),
-                DetectedVersion.BUILT_IN.packVersion(PackType.CLIENT_RESOURCES),
+                DetectedVersion.BUILT_IN.getPackVersion(PackType.CLIENT_RESOURCES),
                 Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
     }
 }

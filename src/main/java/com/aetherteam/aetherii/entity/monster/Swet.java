@@ -8,9 +8,12 @@ import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
@@ -26,17 +29,15 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
+import java.util.Optional;
 
 public class Swet extends Monster {
     public static int JUMP_EVENT = 100;
@@ -293,20 +294,26 @@ public class Swet extends Monster {
     }
 
     @Override
-    public void addAdditionalSaveData(ValueOutput output) {
-        super.addAdditionalSaveData(output);
-        VariantUtils.writeVariant(output, this.getVariant());
-        output.putFloat("WaterDamageScale", this.getWaterDamage());
-        output.putFloat("Saturation", this.getFoodSaturation());
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        this.getVariant().unwrapKey().ifPresent((key) -> tag.putString("variant", key.location().toString()));
+        tag.putFloat("WaterDamageScale", this.getWaterDamage());
+        tag.putFloat("Saturation", this.getFoodSaturation());
     }
 
     @Override
-    public void readAdditionalSaveData(ValueInput input) {
-        super.readAdditionalSaveData(input);
-        VariantUtils.readVariant(input, AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY).ifPresent(this::setVariant);
-
-        this.setWaterDamage(input.getFloatOr("WaterDamageScale", 0));
-        this.setFoodSaturation(input.getFloatOr("Saturation", 0));
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        Optional.ofNullable(ResourceLocation.tryParse(tag.getString("variant")))
+                .map((location) -> ResourceKey.create(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY, location))
+                .flatMap((key) -> this.registryAccess().lookupOrThrow(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY).get(key))
+                .ifPresent(this::setVariant);
+        if (tag.contains("WaterDamageScale")) {
+            this.setWaterDamage(tag.getFloat("WaterDamageScale"));
+        }
+        if (tag.contains("Saturation")) {
+            this.setFoodSaturation(tag.getFloat("Saturation"));
+        }
     }
 
     /**

@@ -1,14 +1,13 @@
 package com.aetherteam.aetherii.block.construction;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.mixin.mixins.common.accessor.VegetationBlockAccessor;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.BushBlockAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.TriState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -21,6 +20,7 @@ import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.FarmlandWaterManager;
+import net.neoforged.neoforge.common.util.TriState;
 
 public class AetherFarmBlock extends FarmBlock {
     public AetherFarmBlock(Properties properties) {
@@ -63,10 +63,10 @@ public class AetherFarmBlock extends FarmBlock {
     }
 
     /**
-     * [CODE COPY] - {@link FarmBlock#fallOn(Level, BlockState, BlockPos, Entity, double)}.
+     * [CODE COPY] - {@link FarmBlock#fallOn(Level, BlockState, BlockPos, Entity, float)}.
      */
     @Override
-    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
+    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
         if (!level.isClientSide() && level instanceof ServerLevel serverLevel && CommonHooks.onFarmlandTrample(serverLevel, pos, AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(), fallDistance, entity)) { // Forge: Move logic to Entity#canTrample
             turnToDirt(state, level, pos);
         }
@@ -96,7 +96,7 @@ public class AetherFarmBlock extends FarmBlock {
     @Override
     public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPosition, Direction facing, BlockState plant) {
         Block plantBlock = plant.getBlock();
-        if ((plantBlock instanceof BushBlock bushBlock && ((VegetationBlockAccessor) bushBlock).callMayPlaceOn(Blocks.FARMLAND.defaultBlockState(), level, soilPosition))) {
+        if ((plantBlock instanceof BushBlock bushBlock && ((BushBlockAccessor) bushBlock).callMayPlaceOn(Blocks.FARMLAND.defaultBlockState(), level, soilPosition))) {
             return TriState.TRUE;
         } else {
             return super.canSustainPlant(state, level, soilPosition, facing, plant);

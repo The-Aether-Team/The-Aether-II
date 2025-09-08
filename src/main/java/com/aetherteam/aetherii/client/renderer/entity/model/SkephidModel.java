@@ -2,21 +2,18 @@ package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.SkephidAnimations;
 import com.aetherteam.aetherii.client.renderer.entity.state.SkephidRenderState;
-import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
 public class SkephidModel<T extends SkephidRenderState> extends EntityModel<T> {
-    private final KeyframeAnimation walkAnimation;
     private final ModelPart body;
     private final ModelPart head;
     private final ModelPart mouth;
 
     public SkephidModel(ModelPart root) {
         super(root);
-        this.walkAnimation = SkephidAnimations.WALK.bake(root);
         this.body = root.getChild("body");
         this.head = this.body.getChild("head");
         this.mouth = this.head.getChild("mouth");
@@ -109,7 +106,7 @@ public class SkephidModel<T extends SkephidRenderState> extends EntityModel<T> {
         super.setupAnim(entity);
         this.head.yRot = entity.yRot * (float) (Math.PI / 180.0);
         this.head.xRot = entity.xRot * (float) (Math.PI / 180.0);
-        this.walkAnimation.applyWalk(entity.walkAnimationPos, entity.walkAnimationSpeed, 2.0F, 4.0F);
+        this.animateWalk(SkephidAnimations.WALK, entity.walkAnimationPos, entity.walkAnimationSpeed, 2.0F, 4.0F);
     }
 
 }

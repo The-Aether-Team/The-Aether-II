@@ -10,7 +10,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.StackedItemContents;
@@ -20,12 +19,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.TagValueOutput;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 
 public class ArkeniumForgeBlockEntity extends BaseContainerBlockEntity implements StackedContentsCompatible {
     protected NonNullList<ItemStack> items = NonNullList.withSize(11, ItemStack.EMPTY);
+    private ItemStack lastInput = ItemStack.EMPTY;
 
     public ArkeniumForgeBlockEntity(BlockPos pos, BlockState blockState) {
         super(AetherIIBlockEntityTypes.ARKENIUM_FORGE.get(), pos, blockState);
@@ -42,30 +39,27 @@ public class ArkeniumForgeBlockEntity extends BaseContainerBlockEntity implement
     }
 
     @Override
-    public void loadAdditional(ValueInput input) {
-        super.loadAdditional(input);
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registry) {
+        super.loadAdditional(tag, registry);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(input, this.items);
+        ContainerHelper.loadAllItems(tag, this.items, registry);
     }
 
     @Override
-    protected void saveAdditional(ValueOutput output) {
-        super.saveAdditional(output);
-        ContainerHelper.saveAllItems(output, this.items);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registry) {
+        super.saveAdditional(tag, registry);
+        ContainerHelper.saveAllItems(tag, this.items, registry);
     }
 
     @Override
-    public void handleUpdateTag(ValueInput input) {
-        this.loadAdditional(input);
+    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider lookupProvider) {
+        this.loadAdditional(tag, lookupProvider);
     }
 
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         CompoundTag tag = super.getUpdateTag(registries);
-        try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(this.problemPath(), AetherII.LOGGER)) {
-            TagValueOutput output = TagValueOutput.createWithContext(reporter, registries);
-            this.saveAdditional(output);
-        }
+        this.saveAdditional(tag, registries);
         return tag;
     }
 

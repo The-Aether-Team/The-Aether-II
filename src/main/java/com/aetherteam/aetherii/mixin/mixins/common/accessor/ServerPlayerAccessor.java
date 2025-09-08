@@ -8,6 +8,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(ServerPlayer.class)
 public interface ServerPlayerAccessor {
-    @Invoker("drop")
-    ItemEntity callCreateItemStackToDrop(ItemStack droppedItem, boolean dropAround, boolean traceItem);
+    @Invoker
+    ItemEntity callCreateItemStackToDrop(ItemStack droppedItem, boolean dropAround, boolean includeThrowerName);
 }

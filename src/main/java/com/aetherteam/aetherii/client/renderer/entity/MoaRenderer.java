@@ -24,6 +24,7 @@ public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, Ent
         this.addLayer(new MoaKeratinLayer(this, context.getModelManager()));
         this.addLayer(new MoaFeathersLayer(this, context.getModelManager()));
         this.addLayer(new MoaEyesLayer(this, context.getModelManager()));
+        this.addLayer(new MoaEyesLayer(this, context.getModelManager()));
         this.addLayer(new MoaSaddleLayer(this, context.getModelSet()));
         this.addLayer(new MoaSaddlebagLayer(this, context.getModelSet()));
     }

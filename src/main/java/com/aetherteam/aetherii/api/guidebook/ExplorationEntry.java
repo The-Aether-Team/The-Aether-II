@@ -1,19 +1,15 @@
 package com.aetherteam.aetherii.api.guidebook;
 
-import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIExplorationEntries;
-import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -38,10 +34,6 @@ public class ExplorationEntry extends GuidebookEntry {
                 ExplorationEntry.REFERENCE_CODEC.fieldOf("entry").forGetter(ExplorationEntry.Mutable::getEntry),
                 Codec.unboundedMap(Codec.STRING, Info.CODEC).fieldOf("values").forGetter(ExplorationEntry.Mutable::getClientValues)
         ).apply(instance, ExplorationEntry.Mutable::new));
-        public static final StreamCodec<RegistryFriendlyByteBuf, ExplorationEntry.Mutable> STREAM_CODEC = StreamCodec.composite(
-                ExplorationEntry.STREAM_CODEC, ExplorationEntry.Mutable::getEntry,
-                ByteBufCodecs.map(HashMap::new, ByteBufCodecs.STRING_UTF8, Info.STREAM_CODEC), ExplorationEntry.Mutable::getClientValues,
-                ExplorationEntry.Mutable::new);
 
         private final Holder<ExplorationEntry> entry;
         private final Map<String, Info> clientValues;

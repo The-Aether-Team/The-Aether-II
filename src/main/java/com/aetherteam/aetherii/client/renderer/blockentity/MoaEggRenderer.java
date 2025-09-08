@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.block.miscellaneous.MoaEggBlock;
 import com.aetherteam.aetherii.blockentity.MoaEggBlockEntity;
 import com.aetherteam.aetherii.client.AetherIIAtlases;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
+import com.aetherteam.aetherii.client.renderer.entity.MoaRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaEggModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -17,7 +18,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.phys.Vec3;
 
 public class MoaEggRenderer implements BlockEntityRenderer<MoaEggBlockEntity> {
     private final MoaEggModel moaEggModel;
@@ -33,7 +33,7 @@ public class MoaEggRenderer implements BlockEntityRenderer<MoaEggBlockEntity> {
     }
 
     @Override
-    public void render(MoaEggBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, Vec3 cameraPos) {
+    public void render(MoaEggBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         if (blockEntity.getBlockState().getBlock() instanceof MoaEggBlock) {
             poseStack.translate(0.5F, 1.5F, 0.5F);
             poseStack.mulPose(Axis.XN.rotationDegrees(180F));

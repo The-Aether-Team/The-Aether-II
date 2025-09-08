@@ -53,8 +53,8 @@ public class GuidebookRewardsScreen extends Screen implements Guidebook {
     protected void renderMenuBackground(GuiGraphics partialTick) { }
 
     @Override
-    protected void renderBlurredBackground(GuiGraphics guiGraphics) {
-    }
+    protected void renderBlurredBackground() { }
+
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);

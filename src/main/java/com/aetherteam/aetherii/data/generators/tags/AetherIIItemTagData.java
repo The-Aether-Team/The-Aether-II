@@ -3,42 +3,47 @@ package com.aetherteam.aetherii.data.generators.tags;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.data.providers.AetherIIBlockItemTagProvider;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.TagAppender;
+import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagEntry;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ItemTagsProvider;
 
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 public class AetherIIItemTagData extends ItemTagsProvider {
-    public AetherIIItemTagData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, AetherII.MODID);
+    public AetherIIItemTagData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, CompletableFuture<TagLookup<Block>> blockTags) {
+        super(output, registries, blockTags, AetherII.MODID);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public void addTags(HolderLookup.Provider provider) {
-
-        new AetherIIBlockItemTagProvider() {
-            @Override
-            protected TagAppender<Block, Block> tag(TagKey<Block> blockKey, TagKey<Item> itemKey) {
-                return new BlockToItemConverter(AetherIIItemTagData.this.tag(itemKey));
-            }
-        }.run();
-
         // Aether
+        this.copy(AetherIITags.Blocks.AETHER_DIRT, AetherIITags.Items.AETHER_DIRT);
+        this.copy(AetherIITags.Blocks.HOLYSTONE, AetherIITags.Items.HOLYSTONE);
+        this.copy(AetherIITags.Blocks.FERROSITE, AetherIITags.Items.FERROSITE);
+        this.copy(AetherIITags.Blocks.AERCLOUDS, AetherIITags.Items.AERCLOUDS);
+        this.copy(AetherIITags.Blocks.CLOUDWOOL, AetherIITags.Items.CLOUDWOOL);
+        this.copy(AetherIITags.Blocks.SKYROOT_LOGS, AetherIITags.Items.SKYROOT_LOGS);
+        this.copy(AetherIITags.Blocks.WISPROOT_LOGS, AetherIITags.Items.WISPROOT_LOGS);
+        this.copy(AetherIITags.Blocks.GREATROOT_LOGS, AetherIITags.Items.GREATROOT_LOGS);
+        this.copy(AetherIITags.Blocks.AMBEROOT_LOGS, AetherIITags.Items.AMBEROOT_LOGS);
+        this.copy(AetherIITags.Blocks.SKYROOT_DECORATIVE_BLOCKS, AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS);
+        this.copy(AetherIITags.Blocks.GREATROOT_DECORATIVE_BLOCKS, AetherIITags.Items.GREATROOT_DECORATIVE_BLOCKS);
+        this.copy(AetherIITags.Blocks.WISPROOT_DECORATIVE_BLOCKS, AetherIITags.Items.WISPROOT_DECORATIVE_BLOCKS);
+        this.copy(AetherIITags.Blocks.HOLYSTONE_DECORATIVE_BLOCKS, AetherIITags.Items.HOLYSTONE_DECORATIVE_BLOCKS);
+        this.copy(AetherIITags.Blocks.FADED_HOLYSTONE_DECORATIVE_BLOCKS, AetherIITags.Items.FADED_HOLYSTONE_DECORATIVE_BLOCKS);
+        this.copy(AetherIITags.Blocks.ICHORITE_DECORATIVE_BLOCKS, AetherIITags.Items.ICHORITE_DECORATIVE_BLOCKS);
+        this.copy(AetherIITags.Blocks.MARBLED_ICHORITE_DECORATIVE_BLOCKS, AetherIITags.Items.MARBLED_ICHORITE_DECORATIVE_BLOCKS);
+        this.copy(AetherIITags.Blocks.AGIOSITE_DECORATIVE_BLOCKS, AetherIITags.Items.AGIOSITE_DECORATIVE_BLOCKS);
+        this.copy(AetherIITags.Blocks.ICESTONE_DECORATIVE_BLOCKS, AetherIITags.Items.ICESTONE_DECORATIVE_BLOCKS);
+        this.copy(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS, AetherIITags.Items.LOCKED_DUNGEON_BLOCKS);
         this.tag(AetherIITags.Items.RODS_SKYROOT).add(AetherIIItems.SKYROOT_STICK.get());
         this.tag(AetherIITags.Items.GEMS_ZANITE).add(AetherIIItems.ZANITE_GEMSTONE.get());
         this.tag(AetherIITags.Items.PLATES_ARKENIUM).add(AetherIIItems.ARKENIUM_PLATES.get());
@@ -696,7 +701,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.GRAVITITE_CROSSBOW.get()
         );
 
-        // NeoForge
+        // Forge
         this.tag(Tags.Items.BOOKSHELVES).add(
                 AetherIIBlocks.SKYROOT_BOOKSHELF.asItem(),
                 AetherIIBlocks.HOLYSTONE_BOOKSHELF.asItem()
@@ -738,32 +743,16 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.asItem()
         );
         this.tag(Tags.Items.ORE_RATES_SINGULAR).add(
-                AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.asItem(),
                 AetherIIBlocks.AMBROSIUM_ORE.asItem(),
                 AetherIIBlocks.ZANITE_ORE.asItem(),
                 AetherIIBlocks.ARKENIUM_ORE.asItem(),
-                AetherIIBlocks.GRAVITITE_ORE.asItem(),
-                AetherIIBlocks.GLINT_ORE.asItem(),
-                AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.asItem(),
-                AetherIIBlocks.UNDERSHALE_ZANITE_ORE.asItem(),
-                AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.asItem(),
-                AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.asItem(),
-                AetherIIBlocks.UNDERSHALE_GLINT_ORE.asItem(),
-                AetherIIBlocks.CORROBONITE_ORE.asItem()
+                AetherIIBlocks.GRAVITITE_ORE.asItem()
         );
         this.tag(Tags.Items.ORES).add(
-                AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.asItem(),
                 AetherIIBlocks.AMBROSIUM_ORE.asItem(),
                 AetherIIBlocks.ZANITE_ORE.asItem(),
                 AetherIIBlocks.ARKENIUM_ORE.asItem(),
-                AetherIIBlocks.GRAVITITE_ORE.asItem(),
-                AetherIIBlocks.GLINT_ORE.asItem(),
-                AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.asItem(),
-                AetherIIBlocks.UNDERSHALE_ZANITE_ORE.asItem(),
-                AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.asItem(),
-                AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.asItem(),
-                AetherIIBlocks.UNDERSHALE_GLINT_ORE.asItem(),
-                AetherIIBlocks.CORROBONITE_ORE.asItem()
+                AetherIIBlocks.GRAVITITE_ORE.asItem()
         );
         this.tag(Tags.Items.RODS_WOODEN).add(AetherIIItems.SKYROOT_STICK.get());
         this.tag(Tags.Items.STRINGS).add(AetherIIItems.CLOUDTWINE.get());
@@ -775,10 +764,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(Tags.Items.STORAGE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.asItem(),
                 AetherIIBlocks.ZANITE_BLOCK.asItem(),
-                AetherIIBlocks.ARKENIUM_BLOCK.asItem(),
                 AetherIIBlocks.GRAVITITE_BLOCK.asItem(),
-                AetherIIBlocks.CORROBONITE_BLOCK.asItem(),
-                AetherIIBlocks.BRETTL_GRASS_BUNDLE.asItem()
+                AetherIIBlocks.CORROBONITE_BLOCK.asItem()
         );
         this.tag(Tags.Items.TOOLS_SHIELD).add(
                 AetherIIItems.SKYROOT_SHIELD.get(),
@@ -841,63 +828,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_BOOTS.get(),
                 AetherIIItems.GRAVITITE_BOOTS.get()
         );
-        this.tag(Tags.Items.CHAINS).add(
-                AetherIIBlocks.ARKENIUM_CHAIN.get().asItem()
-        );
         this.tag(Tags.Items.CHESTS_WOODEN).add(
                 AetherIIBlocks.SKYROOT_CHEST.get().asItem()
         );
-    }
-
-    public static class BlockToItemConverter implements TagAppender<Block, Block> { //todo
-        private final TagAppender<Item, Item> itemAppender;
-
-        public BlockToItemConverter(TagAppender<Item, Item> itemAppender) {
-            this.itemAppender = itemAppender;
-        }
-
-        public TagAppender<Block, Block> add(Block block) {
-            this.itemAppender.add(Objects.requireNonNull(block.asItem()));
-            return this;
-        }
-
-        public TagAppender<Block, Block> addOptional(Block block) {
-            this.itemAppender.addOptional(Objects.requireNonNull(block.asItem()));
-            return this;
-        }
-
-        private static TagKey<Item> blockTagToItemTag(TagKey<Block> tag) {
-            return TagKey.create(Registries.ITEM, tag.location());
-        }
-
-        public TagAppender<Block, Block> addTag(TagKey<Block> blockKey) {
-            this.itemAppender.addTag(blockTagToItemTag(blockKey));
-            return this;
-        }
-
-        public TagAppender<Block, Block> addOptionalTag(TagKey<Block> blockKey) {
-            this.itemAppender.addOptionalTag(blockTagToItemTag(blockKey));
-            return this;
-        }
-
-        public TagAppender<Block, Block> add(TagEntry entry) {
-            this.itemAppender.add(entry);
-            return this;
-        }
-
-        public TagAppender<Block, Block> replace(boolean value) {
-            this.itemAppender.replace(value);
-            return this;
-        }
-
-        public TagAppender<Block, Block> remove(Block block) {
-            this.itemAppender.remove(block.asItem());
-            return this;
-        }
-
-        public TagAppender<Block, Block> remove(TagKey<Block> tag) {
-            this.itemAppender.remove(blockTagToItemTag(tag));
-            return this;
-        }
     }
 }

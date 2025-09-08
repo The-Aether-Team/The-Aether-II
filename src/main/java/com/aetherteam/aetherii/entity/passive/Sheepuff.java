@@ -14,6 +14,7 @@ import com.google.common.collect.Maps;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -49,8 +50,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.common.IShearable;
 
 import javax.annotation.Nullable;
@@ -149,7 +148,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
     public void tick() {
         super.tick();
         if (this.getPuffed()) {
-            this.checkFallDistanceAccumulation();
+            this.checkSlowFallDistance();
             AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
             if (gravity != null) {
                 double fallSpeed = Math.max(gravity.getValue() * -0.625, -0.05);
@@ -375,10 +374,9 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
         this.level().playSound(null, this.getX(), this.getY(), this.getZ(), AetherIISoundEvents.ENTITY_SHEEPUFF_STEP.get(), SoundSource.NEUTRAL, 0.15F, 1.0F);
     }
 
-
     @Override
-    protected int calculateFallDamage(double fallDistance, float damageMultiplier) {
-        return this.getPuffed() ? 0 : super.calculateFallDamage(fallDistance, damageMultiplier);
+    protected int calculateFallDamage(float distance, float damageMultiplier) {
+        return this.getPuffed() ? 0 : super.calculateFallDamage(distance, damageMultiplier);
     }
 
     @Override
@@ -437,22 +435,24 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    public void addAdditionalSaveData(ValueOutput output) {
-        super.addAdditionalSaveData(output);
-        output.putBoolean("Sheared", this.isSheared());
-        output.putBoolean("Puffed", this.getPuffed());
-        output.putInt("Color", this.getColor().id());
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putBoolean("Sheared", this.isSheared());
+        tag.putBoolean("Puffed", this.getPuffed());
+        tag.putInt("Color", this.getColor().id());
     }
 
     @Override
-    public void readAdditionalSaveData(ValueInput input) {
-        super.readAdditionalSaveData(input);
-        this.setSheared(input.getBooleanOr("Sheared", false));
-
-        this.setPuffed(input.getBooleanOr("Puffed", false));
-
-        if (input.getInt("Color").isPresent()) {
-            this.setColor(SheepuffColor.BY_ID.apply(input.getInt("Color").get()));
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        if (tag.contains("Sheared")) {
+            this.setSheared(tag.getBoolean("Sheared"));
+        }
+        if (tag.contains("Puffed")) {
+            this.setPuffed(tag.getBoolean("Puffed"));
+        }
+        if (tag.contains("Color")) {
+            this.setColor(SheepuffColor.BY_ID.apply(tag.getInt("Color")));
         }
     }
 

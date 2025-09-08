@@ -4,9 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.HashMap;
@@ -102,10 +99,6 @@ public class GuidebookEntry {
                 Codec.BOOL.fieldOf("visible").forGetter(Info::isVisible),
                 Codec.BOOL.fieldOf("viewed").forGetter(Info::isViewed)
         ).apply(instance, Info::new));
-        public static final StreamCodec<RegistryFriendlyByteBuf, Info> STREAM_CODEC = StreamCodec.composite(
-                ByteBufCodecs.BOOL, Info::isVisible,
-                ByteBufCodecs.BOOL, Info::isViewed,
-                Info::new);
 
         private boolean visible;
         private boolean viewed;

@@ -16,6 +16,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 public class AercloudGliderItem extends Item {
     public static final int GLIDING_MAX = 500;
@@ -122,6 +124,7 @@ public class AercloudGliderItem extends Item {
         return ItemUseAnimation.NONE;
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public boolean isBarVisible(ItemStack stack) {
         if (this.isGliding()) {
@@ -130,6 +133,7 @@ public class AercloudGliderItem extends Item {
         return super.isBarVisible(stack);
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public int getBarWidth(ItemStack stack) {
         if (this.isGliding()) {
@@ -138,6 +142,7 @@ public class AercloudGliderItem extends Item {
         return super.getBarWidth(stack);
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public int getBarColor(ItemStack stack) {
         if (this.isGliding()) {
@@ -146,6 +151,7 @@ public class AercloudGliderItem extends Item {
         return super.getBarColor(stack);
     }
 
+    @OnlyIn(Dist.CLIENT)
     private boolean isGliding() {
         Player player = Minecraft.getInstance().player;
         if (player != null && player.getUseItem().getItem() instanceof AercloudGliderItem) {

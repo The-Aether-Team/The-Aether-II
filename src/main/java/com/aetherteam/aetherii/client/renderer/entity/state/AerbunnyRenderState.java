@@ -1,11 +1,10 @@
 package com.aetherteam.aetherii.client.renderer.entity.state;
 
-import net.minecraft.world.entity.EntityReference;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public class AerbunnyRenderState extends TamableRenderState {
     public DyeColor collarColor = DyeColor.RED;
@@ -13,5 +12,5 @@ public class AerbunnyRenderState extends TamableRenderState {
     public float puffiness;
     public boolean onGround;
     public Vec3 deltaMovement;
-    public Optional<EntityReference<LivingEntity>> vehicleReference;
+    public Optional<UUID> vehicleUUID;
 }

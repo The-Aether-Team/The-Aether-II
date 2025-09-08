@@ -13,7 +13,7 @@ import net.minecraft.client.animation.KeyframeAnimations;
  * @author Author
  */
 public class CarrionSproutAnimations {
-    public static final AnimationDefinition TRAP_IDLE = AnimationDefinition.Builder.withLength(0.0F)
+    public static final AnimationDefinition trap_idle = AnimationDefinition.Builder.withLength(0.0F)
             .addAnimation("flower", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.0F, KeyframeAnimations.degreeVec(85.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR)
             ))
@@ -28,7 +28,7 @@ public class CarrionSproutAnimations {
             ))
             .build();
 
-    public static final AnimationDefinition TRAP_ACTIVATE = AnimationDefinition.Builder.withLength(0.25F)
+    public static final AnimationDefinition trap_active = AnimationDefinition.Builder.withLength(0.25F)
             .addAnimation("flower", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.0F, KeyframeAnimations.degreeVec(85.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
                     new Keyframe(0.25F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)
@@ -47,7 +47,7 @@ public class CarrionSproutAnimations {
             ))
             .build();
 
-    public static final AnimationDefinition TRAP_DEACTIVATE = AnimationDefinition.Builder.withLength(0.25F)
+    public static final AnimationDefinition trap_deactive = AnimationDefinition.Builder.withLength(0.25F)
             .addAnimation("flower", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
                     new Keyframe(0.25F, KeyframeAnimations.degreeVec(85.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)

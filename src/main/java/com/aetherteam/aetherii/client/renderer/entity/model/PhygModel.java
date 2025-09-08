@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.client.renderer.entity.model;
 import com.aetherteam.aetherii.client.renderer.entity.animation.PhygAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.animation.WingAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.state.WingEntityRenderState;
-import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -22,8 +21,6 @@ public class PhygModel<T extends WingEntityRenderState> extends EntityModel<T> {
     private final ModelPart leg_back_left;
     private final ModelPart leg_back_right;
     private final ModelPart tail;
-    public final KeyframeAnimation openWingAnimation;
-    public final KeyframeAnimation babyAnimation;
 
     public PhygModel(ModelPart root) {
         super(root);
@@ -38,8 +35,6 @@ public class PhygModel<T extends WingEntityRenderState> extends EntityModel<T> {
         this.leg_back_left = this.body.getChild("leg_back_left");
         this.leg_back_right = this.body.getChild("leg_back_right");
         this.tail = this.body.getChild("tail");
-        this.babyAnimation = PhygAnimation.BABY.bake(root);
-        this.openWingAnimation = WingAnimation.OPEN_WINGS.bake(root);
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -112,10 +107,10 @@ public class PhygModel<T extends WingEntityRenderState> extends EntityModel<T> {
         this.leg_front_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
         this.leg_front_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
 
-        this.openWingAnimation.applyWalk(0.0F, entity.wingHold, 1.0F, 1.0F);
+        this.animateWalk(WingAnimation.wing_open, 0.0F, entity.wingHold, 1.0F, 1.0F);
 
         if (entity.isBaby) {
-            this.babyAnimation.applyStatic();
+            this.applyStatic(PhygAnimation.BABY);
         }
     }
 }
