@@ -2,44 +2,21 @@ package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.block.portal.PortalClientUtil;
-import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
-import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
-import com.aetherteam.aetherii.network.packet.AetherIIPlayerSyncPacket;
-import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
-import com.aetherteam.nitrogen.attachment.INBTSynchable;
-import com.aetherteam.nitrogen.network.packet.SyncPacket;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.player.ClientInput;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
-import net.minecraft.util.ExtraCodecs;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.PacketDistributor;
-import org.apache.commons.lang3.tuple.Triple;
 
-import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-
-public class AetherIIPlayerAttachment implements INBTSynchable {
+public class AetherIIPlayerAttachment {
     private boolean isMoving;
     private boolean isJumping;
 
@@ -49,19 +26,31 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     public float portalIntensity;
     public float oPortalIntensity;
 
-    private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
-            Map.entry("setMoving", Triple.of(Type.BOOLEAN, (object) -> this.setMoving((boolean) object), this::isMoving)),
-            Map.entry("setJumping", Triple.of(Type.BOOLEAN, (object) -> this.setJumping((boolean) object), this::isJumping)),
-            Map.entry("setShouldSyncBetweenClients", Triple.of(Type.BOOLEAN, (object) -> this.setShouldSyncBetweenClients((boolean) object), this::shouldSyncBetweenClients))
-    );
+//    private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
+//            Map.entry("setMoving", Triple.of(Type.BOOLEAN, (object) -> this.setMoving((boolean) object), this::isMoving)),
+//            Map.entry("setJumping", Triple.of(Type.BOOLEAN, (object) -> this.setJumping((boolean) object), this::isJumping)),
+//            Map.entry("setShouldSyncBetweenClients", Triple.of(Type.BOOLEAN, (object) -> this.setShouldSyncBetweenClients((boolean) object), this::shouldSyncBetweenClients)) //todo ?
+//    );
 
-    public static final Codec<AetherIIPlayerAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final MapCodec<AetherIIPlayerAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Codec.BOOL.fieldOf("is_moving").forGetter(AetherIIPlayerAttachment::isMoving),
+            Codec.BOOL.fieldOf("is_jumping").forGetter(AetherIIPlayerAttachment::isJumping),
             Codec.BOOL.fieldOf("can_get_portal").forGetter(AetherIIPlayerAttachment::canGetPortal),
             Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(AetherIIPlayerAttachment::canSpawnInAether)
     ).apply(instance, AetherIIPlayerAttachment::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, AetherIIPlayerAttachment> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.BOOL, AetherIIPlayerAttachment::isMoving,
+            ByteBufCodecs.BOOL, AetherIIPlayerAttachment::isJumping,
+            AetherIIPlayerAttachment::new);
 
-    private boolean shouldSyncAfterJoin;
     private boolean shouldSyncBetweenClients;
+
+    protected AetherIIPlayerAttachment(boolean isMoving, boolean isJumping, boolean canGetPortal, boolean canSpawnInAether) {
+        this.isMoving = isMoving;
+        this.isJumping = isJumping;
+        this.canGetPortal = canGetPortal;
+        this.canSpawnInAether = canSpawnInAether;
+    }
 
     protected AetherIIPlayerAttachment(boolean canGetPortal, boolean canSpawnInAether) {
         this.canGetPortal = canGetPortal;
@@ -69,10 +58,6 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     }
 
     public AetherIIPlayerAttachment() { }
-
-    public Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> getSynchableFunctions() {
-        return this.synchableFunctions;
-    }
 
     /**
      * Handles functions when the player logs out of a world from {@link net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent}.
@@ -86,33 +71,20 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
      */
     public void login(Player player) {
         this.startInAether(player);
-        this.shouldSyncAfterJoin = true;
     }
 
     public void onJoinLevel(Player player) {
-        if (player.level().isClientSide() && player.isLocalPlayer()) {
-            this.setSynched(player.getId(), Direction.SERVER, "setShouldSyncBetweenClients", true);
-        }
-    }
-
-    public void changeDimension(Player player) {
-        this.shouldSyncAfterJoin = true;
+//        if (player.level().isClientSide() && player.isLocalPlayer()) {
+//            this.setSynched(player.getId(), Direction.SERVER, "setShouldSyncBetweenClients", true);
+//        }
     }
 
     /**
      * Handles functions when the player ticks from {@link net.neoforged.neoforge.event.entity.living.LivingEvent.LivingTickEvent}
      */
     public void postTickUpdate(Player player) {
-        this.syncAfterJoin(player);
         this.syncClients(player);
         this.handleAetherPortal(player);
-    }
-
-    private void syncAfterJoin(Player player) {
-        if (this.shouldSyncAfterJoin) {
-            this.forceSync(player.getId(), Direction.CLIENT);
-            this.shouldSyncAfterJoin = false;
-        }
     }
 
     private void syncClients(Player player) {
@@ -123,7 +95,7 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
                     PlayerList playerList = server.getPlayerList();
                     for (ServerPlayer serverPlayer : playerList.getPlayers()) {
                         if (!serverPlayer.getUUID().equals(player.getUUID())) {
-                            this.forceSync(player.getId(), Direction.CLIENT);
+//                            this.forceSync(player.getId(), Direction.CLIENT);
                         }
                     }
                 }
@@ -142,15 +114,14 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
     public void movementInput(Player player, ClientInput input) {
         boolean isJumping = input.keyPresses.jump();
         if (isJumping != this.isJumping()) {
-            this.setSynched(player.getId(), INBTSynchable.Direction.SERVER, "setJumping", isJumping);
+            this.setJumping(isJumping);
         }
         boolean isMoving = isJumping || input.keyPresses.forward() || input.keyPresses.backward() || input.keyPresses.left() || input.keyPresses.right() || player.isFallFlying();
         if (isMoving != this.isMoving()) {
-            this.setSynched(player.getId(), INBTSynchable.Direction.SERVER, "setMoving", isMoving);
+            this.setMoving(isMoving);
         }
     }
 
@@ -258,10 +229,5 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
 
     private void setShouldSyncBetweenClients(boolean shouldSyncBetweenClients) {
         this.shouldSyncBetweenClients = shouldSyncBetweenClients;
-    }
-
-    @Override
-    public SyncPacket getSyncPacket(int entityID, String key, Type type, Object value) {
-        return new AetherIIPlayerSyncPacket(entityID, key, type, value);
     }
 }

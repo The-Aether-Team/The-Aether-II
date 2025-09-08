@@ -6,7 +6,7 @@ import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.animation.KeyframeAnimations;
 
 public class MoaAnimation {
-    public static final AnimationDefinition walk = AnimationDefinition.Builder.withLength(1.0F).looping()
+    public static final AnimationDefinition WALK = AnimationDefinition.Builder.withLength(1.0F).looping()
             .addAnimation("leg_left_1", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.0F, KeyframeAnimations.degreeVec(20.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
                     new Keyframe(0.5F, KeyframeAnimations.degreeVec(-20.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
@@ -29,7 +29,7 @@ public class MoaAnimation {
             ))
             .build();
 
-    public static final AnimationDefinition fly = AnimationDefinition.Builder.withLength(0.5F).looping()
+    public static final AnimationDefinition FLY = AnimationDefinition.Builder.withLength(0.5F).looping()
             .addAnimation("wing_left_1", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 50.0F), AnimationChannel.Interpolations.CATMULLROM),
                     new Keyframe(0.25F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 87.5F), AnimationChannel.Interpolations.CATMULLROM),
@@ -52,7 +52,7 @@ public class MoaAnimation {
             ))
             .build();
 
-        public static final AnimationDefinition sit = AnimationDefinition.Builder.withLength(0.0F)
+        public static final AnimationDefinition SIT = AnimationDefinition.Builder.withLength(0.0F)
                 .addAnimation("body_main", new AnimationChannel(AnimationChannel.Targets.POSITION,
                         new Keyframe(0.0F, KeyframeAnimations.posVec(0.0F, -4.0F, 0.0F), AnimationChannel.Interpolations.LINEAR)
                 ))

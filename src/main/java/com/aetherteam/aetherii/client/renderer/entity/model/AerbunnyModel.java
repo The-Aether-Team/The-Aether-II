@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.AerbunnyAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.state.AerbunnyRenderState;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -9,6 +10,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
 public class AerbunnyModel extends EntityModel<AerbunnyRenderState> {
+    private final KeyframeAnimation sittingAnimation;
     private final ModelPart body;
     private final ModelPart cloudpuff;
     private final ModelPart head;
@@ -26,6 +28,7 @@ public class AerbunnyModel extends EntityModel<AerbunnyRenderState> {
 
     public AerbunnyModel(ModelPart root) {
         super(root);
+        this.sittingAnimation = AerbunnyAnimation.SITTING.bake(root);
         this.body = root.getChild("body");
         this.cloudpuff = this.body.getChild("cloudpuff");
         this.head = this.body.getChild("head");
@@ -101,7 +104,7 @@ public class AerbunnyModel extends EntityModel<AerbunnyRenderState> {
             this.leg_back_right.xRot = (Mth.cos(aerbunny.walkAnimationPos * 0.6662F + Mth.PI) * 1.2F * aerbunny.walkAnimationSpeed) - this.body.xRot;
             this.leg_back_left.xRot = (Mth.cos(aerbunny.walkAnimationPos * 0.6662F + Mth.PI) * 1.2F * aerbunny.walkAnimationSpeed) - this.body.xRot;
         } else {
-            this.applyStatic(AerbunnyAnimation.SITTING);
+            this.sittingAnimation.applyStatic();
         }
         float a = 1.0F + aerbunny.puffiness * 0.5F;
 

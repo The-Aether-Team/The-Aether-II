@@ -5,12 +5,15 @@ package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockb
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.CarrionSproutAnimations;
 import com.aetherteam.aetherii.client.renderer.entity.state.CarrionSproutRenderState;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
 public class CarrionSproutModel<T extends CarrionSproutRenderState> extends EntityModel<T> {
+    private final KeyframeAnimation trapActivateAnimation;
+    private final KeyframeAnimation trapDeactivateAnimation;
     private final ModelPart stem;
     private final ModelPart stemLeefRoot;
     private final ModelPart stemLeef;
@@ -43,6 +46,8 @@ public class CarrionSproutModel<T extends CarrionSproutRenderState> extends Enti
 
     public CarrionSproutModel(ModelPart root) {
         super(root);
+        this.trapActivateAnimation = CarrionSproutAnimations.TRAP_ACTIVATE.bake(root);
+        this.trapDeactivateAnimation = CarrionSproutAnimations.TRAP_DEACTIVATE.bake(root);
         this.stem = root.getChild("stem");
         this.stemLeefRoot = this.stem.getChild("stemLeefRoot");
         this.stemLeef = this.stemLeefRoot.getChild("stemLeef");
@@ -142,7 +147,7 @@ public class CarrionSproutModel<T extends CarrionSproutRenderState> extends Enti
     @Override
     public void setupAnim(T entity) {
         super.setupAnim(entity);
-        this.animate(entity.trapActiveAnimationState, CarrionSproutAnimations.trap_active, entity.ageInTicks);
-        this.animate(entity.trapDeactiveAnimationState, CarrionSproutAnimations.trap_deactive, entity.ageInTicks);
+        this.trapActivateAnimation.apply(entity.trapActivateAnimationState, entity.ageInTicks);
+        this.trapDeactivateAnimation.apply(entity.trapDeactivateAnimationState, entity.ageInTicks);
     }
 }

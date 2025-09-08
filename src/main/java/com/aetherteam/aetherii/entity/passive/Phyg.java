@@ -24,8 +24,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
@@ -122,15 +120,9 @@ public class Phyg extends WingedAnimal {
         return AetherIIEntityTypes.PHYG.get().create(level, EntitySpawnReason.BREEDING);
     }
 
-    @Override
-    public boolean isSaddleable() {
-        return false;
-    }
-
     /**
      * [CODE COPY] - {@link Pig#getLeashOffset()}.
      */
-    @OnlyIn(Dist.CLIENT)
     public Vec3 getLeashOffset() {
         return new Vec3(0.0, 0.6F * this.getEyeHeight(), this.getBbWidth() * 0.4F);
     }

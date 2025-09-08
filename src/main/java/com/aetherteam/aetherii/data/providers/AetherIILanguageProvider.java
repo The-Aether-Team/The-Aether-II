@@ -48,6 +48,10 @@ public abstract class AetherIILanguageProvider extends NitrogenLanguageProvider 
         this.add(attribute.getDescriptionId(), name);
     }
 
+    public void addMusic(String songName, String name) {
+        this.add(this.id + ".music." + songName, name);
+    }
+
     public void addJukeboxSong(String songName, String name) {
         this.add("jukebox_song." + this.id + "." + songName, name);
     }

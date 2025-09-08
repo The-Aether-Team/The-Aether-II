@@ -4,11 +4,11 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
-import com.aetherteam.aetherii.client.renderer.accessory.GlovesRenderer;
+import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
-import com.aetherteam.aetherii.client.renderer.block.model.baked.AmbientOcclusionLightModel;
-import com.aetherteam.aetherii.client.renderer.block.model.baked.FastModel;
-import com.aetherteam.aetherii.client.renderer.block.model.unbaked.UnbakedTrunkModelLoader;
+import com.aetherteam.aetherii.client.renderer.block.model.AmbientOcclusionLightModel;
+import com.aetherteam.aetherii.client.renderer.block.model.FastModel;
+import com.aetherteam.aetherii.client.renderer.block.model.TrunkModel;
 import com.aetherteam.aetherii.client.renderer.blockentity.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
 import com.aetherteam.aetherii.client.renderer.entity.*;
@@ -24,21 +24,20 @@ import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecia
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Moa;
-import com.aetherteam.aetherii.item.AetherIIItems;
-import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.blockentity.BedRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterBlockStateModels;
 import net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -55,6 +54,8 @@ public class AetherIIRenderers {
         event.getSkins().forEach(model -> {
             if (event.getSkin(model) instanceof LivingEntityRenderer<?, ?, ?> livingEntityRenderer) {
                 livingEntityRenderer.addLayer(new SwetLatchLayer(event.getContext(), livingEntityRenderer));
+
+                livingEntityRenderer.addLayer(new GlovesLayer(livingEntityRenderer));
             }
         });
     }
@@ -192,14 +193,6 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.GLOVES_FIRST_PERSON, () -> GlovesModel.createLayer(new CubeDeformation(0.25F), false));
     }
 
-    public static void registerAccessoryRenderers() {
-        AccessoriesRendererRegistry.registerRenderer(AetherIIItems.BEAST_PELT_GLOVES.get(), GlovesRenderer::new);
-        AccessoriesRendererRegistry.registerRenderer(AetherIIItems.BURRUKAI_PLATE_GLOVES.get(), GlovesRenderer::new);
-        AccessoriesRendererRegistry.registerRenderer(AetherIIItems.ZANITE_GLOVES.get(), GlovesRenderer::new);
-        AccessoriesRendererRegistry.registerRenderer(AetherIIItems.ARKENIUM_GLOVES.get(), GlovesRenderer::new);
-        AccessoriesRendererRegistry.registerRenderer(AetherIIItems.GRAVITITE_GLOVES.get(), GlovesRenderer::new);
-    }
-
     public static void registerBakedModels(ModelEvent.ModifyBakingResult event) {
         List<DeferredBlock<? extends Block>> fastBlocks = List.of(
                 AetherIIBlocks.HIGHLANDS_BUSH,
@@ -229,23 +222,20 @@ public class AetherIIRenderers {
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
     }
 
-    private static List<Map.Entry<ModelResourceLocation, BakedModel>> getModels(Map<ModelResourceLocation, BakedModel> originalModels, List<DeferredBlock<? extends Block>> blocks) {
-        List<Map.Entry<ModelResourceLocation, BakedModel>> models = new ArrayList<>();
-        for (Map.Entry<ModelResourceLocation, BakedModel> model : originalModels.entrySet()) {
-            if (model.getKey().id().getNamespace().equals(AetherII.MODID)) {
-                String path = model.getKey().id().getPath();
-                for (DeferredBlock<? extends Block> block : blocks) {
-                    if (path.equals(block.getId().getPath())) {
-                        models.add(model);
-                    }
+    private static List<Map.Entry<BlockState, BlockStateModel>> getModels(Map<BlockState, BlockStateModel> originalModels, List<DeferredBlock<? extends Block>> blocks) {
+        List<Map.Entry<BlockState, BlockStateModel>> models = new ArrayList<>();
+        for (Map.Entry<BlockState, BlockStateModel> model : originalModels.entrySet()) {
+            for (DeferredBlock<? extends Block> block : blocks) {
+                if (model.getKey().is(block)) {
+                    models.add(model);
                 }
             }
         }
         return models;
     }
 
-    public static void registerModelLoaders(ModelEvent.RegisterLoaders event) {
-        event.register(UnbakedTrunkModelLoader.ID , UnbakedTrunkModelLoader.INSTANCE);
+    public static void registerBlockStateModels(RegisterBlockStateModels event) {
+        event.registerModel(TrunkModel.Unbaked.ID , TrunkModel.Unbaked.CODEC);
     }
 
     public static void registerSpecialModelRenderers(RegisterSpecialModelRendererEvent event) {

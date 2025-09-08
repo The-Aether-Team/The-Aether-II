@@ -31,7 +31,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
 
-public class Tempest extends FlyingMob implements Blighted {
+public class Tempest extends Mob implements Blighted {
     public static int HIDE_ANIMATION_START = 200;
     public static int HIDE_ANIMATION_LENGTH = 95;
     public static int HIDE_PARTICLE_START = HIDE_ANIMATION_START + 35;
@@ -61,7 +61,7 @@ public class Tempest extends FlyingMob implements Blighted {
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
-        return FlyingMob.createMobAttributes()
+        return Mob.createMobAttributes()
                 .add(Attributes.FOLLOW_RANGE, 40.0);
     }
 
@@ -91,6 +91,11 @@ public class Tempest extends FlyingMob implements Blighted {
 
     private static boolean isValidSpawnBlock(LevelAccessor level, BlockPos pos){
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.AERCLOUDS) || level.getBlockState(pos.below()).is(AetherIIBlocks.AETHER_GRASS_BLOCK) || level.getBlockState(pos.below()).is(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS);
+    }
+
+    @Override
+    public void travel(Vec3 p_415638_) {
+        this.travelFlying(p_415638_, 0.02F);
     }
 
     @Override
@@ -170,6 +175,11 @@ public class Tempest extends FlyingMob implements Blighted {
     @Override
     public SoundEvent getDeathSound() {
         return AetherIISoundEvents.ENTITY_TEMPEST_DEATH.get();
+    }
+
+    @Override
+    public boolean onClimbable() {
+        return false;
     }
 
     public static class ThunderballAttackGoal extends Goal {
@@ -282,7 +292,7 @@ public class Tempest extends FlyingMob implements Blighted {
                 d0 = livingEntity.getX() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F;
                 d1 = livingEntity.getY() + random.nextFloat() * 3.0F;
                 d2 = livingEntity.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F;
-            } else if (this.tempest.level().isDay()) {
+            } else if (this.tempest.level().isBrightOutside()) {
                 for (int i = 0; i < 10; ++i) {
                     Vec3 vec3 = this.tempest.position();
                     Vec3 target = vec3.add((random.nextFloat() * 2.0F - 1.0F) * 6.0F, (random.nextFloat() * 2.0F - 1.0F) * 4.0F, (random.nextFloat() * 2.0F - 1.0F) * 6.0F);

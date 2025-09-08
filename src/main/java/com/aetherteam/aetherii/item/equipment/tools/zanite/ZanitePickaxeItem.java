@@ -5,11 +5,11 @@ import com.aetherteam.aetherii.item.equipment.tools.abilities.ZaniteTool;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.Item;
 
-public class ZanitePickaxeItem extends PickaxeItem implements ZaniteTool {
+public class ZanitePickaxeItem extends Item implements ZaniteTool {
     public ZanitePickaxeItem(Properties properties) {
-        super(AetherIIItemTiers.ZANITE, 1.0F, -2.8F, properties);
+        super(properties.pickaxe(AetherIIItemTiers.ZANITE, 1.0F, -2.8F));
     }
 
     @Override

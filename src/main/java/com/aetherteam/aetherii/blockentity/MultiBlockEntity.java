@@ -1,14 +1,19 @@
 package com.aetherteam.aetherii.blockentity;
 
+import com.aetherteam.aetherii.AetherII;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.TagValueOutput;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
-import java.util.List;
+import java.util.Optional;
 
 public class MultiBlockEntity extends BlockEntity {
     private BlockPos levelOriginPos;
@@ -18,31 +23,32 @@ public class MultiBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        if (tag.contains("origin")) {
-            int[] positions = tag.getIntArray("origin");
-            this.levelOriginPos = new BlockPos(positions[0], positions[1], positions[2]);
-        }
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        Optional<int[]> positions = input.getIntArray("origin");
+        positions.ifPresent(ints -> this.levelOriginPos = new BlockPos(ints[0], ints[1], ints[2]));
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
         if (this.levelOriginPos != null) {
-            tag.putIntArray("origin", List.of(this.levelOriginPos.getX(), this.levelOriginPos.getY(), this.levelOriginPos.getZ()));
+            output.putIntArray("origin", new int[]{this.levelOriginPos.getX(), this.levelOriginPos.getY(), this.levelOriginPos.getZ()});
         }
     }
 
     @Override
-    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider lookupProvider) {
-        this.loadAdditional(tag, lookupProvider);
+    public void handleUpdateTag(ValueInput input) {
+        this.loadAdditional(input);
     }
 
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         CompoundTag tag = super.getUpdateTag(registries);
-        this.saveAdditional(tag, registries);
+        try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(this.problemPath(), AetherII.LOGGER)) {
+            TagValueOutput output = TagValueOutput.createWithContext(reporter, registries);
+            this.saveAdditional(output);
+        }
         return tag;
     }
 

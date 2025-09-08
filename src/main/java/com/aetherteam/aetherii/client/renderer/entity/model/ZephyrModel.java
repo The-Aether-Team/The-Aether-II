@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.state.ZephyrRenderState;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
@@ -14,7 +15,9 @@ public class ZephyrModel extends EntityModel<ZephyrRenderState> {
     public static final AnimationHolder FLY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zephyr/fly"));
     public static final AnimationHolder BLOW_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zephyr/blow_attack"));
     public static final AnimationHolder WEB_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zephyr/web_attack"));
-
+    private final KeyframeAnimation flyAnimation;
+    private final KeyframeAnimation blowAttackAnimation;
+    private final KeyframeAnimation webAttackAnimation;
     public final ModelPart body;
     public final ModelPart mouth;
     public final ModelPart bottom;
@@ -30,6 +33,9 @@ public class ZephyrModel extends EntityModel<ZephyrRenderState> {
 
     public ZephyrModel(ModelPart root) {
         super(root);
+        this.flyAnimation = FLY_ANIMATION.get().bake(root);
+        this.blowAttackAnimation = BLOW_ATTACK_ANIMATION.get().bake(root);
+        this.webAttackAnimation = WEB_ATTACK_ANIMATION.get().bake(root);
         this.body = root.getChild("body");
         this.mouth = this.body.getChild("mouth");
         this.bottom = this.body.getChild("bottom");
@@ -76,35 +82,8 @@ public class ZephyrModel extends EntityModel<ZephyrRenderState> {
     @Override
     public void setupAnim(ZephyrRenderState zephyr) {
         super.setupAnim(zephyr);
-        this.animateWalk(FLY_ANIMATION, zephyr.walkAnimationPos, zephyr.walkAnimationSpeed, 2.0F, 2.0F);
-        this.animate(zephyr.blowAnimationState, BLOW_ATTACK_ANIMATION, zephyr.ageInTicks, 1.0F);
-        this.animate(zephyr.webAnimationState, WEB_ATTACK_ANIMATION, zephyr.ageInTicks, 1.0F);
-
-
-//        float motion = Mth.sin((limbSwing * 20.0F) / Mth.RAD_TO_DEG) * limbSwingAmount * 0.5F;
-//
-//        this.rightFace.y = 8 - motion;
-//        this.rightFace.x = -motion * 0.5F;
-//
-//        this.leftFace.y = motion + 8;
-//        this.leftFace.x = motion * 0.5F;
-//
-//        this.bodyRightSideFront.y = 8 - motion * 0.5F;
-//        this.bodyRightSideBack.y = 9 + motion * 0.5F;
-//
-//        this.bodyLeftSideFront.y = this.bodyRightSideFront.y;
-//        this.bodyLeftSideBack.y = this.bodyRightSideBack.y;
-//
-//        this.tailBase.x = Mth.sin((limbSwing * 20.0F) / Mth.RAD_TO_DEG) * limbSwingAmount * 0.75F;
-//        this.tailBase.y = 8 - motion;
-//        this.tailBase.yRot = Mth.sin(ageInTicks * 0.5F) * limbSwingAmount * 0.75F;
-//
-//        this.tailMiddle.x = Mth.sin((limbSwing * 15.0F) / Mth.RAD_TO_DEG) * limbSwingAmount * 0.85F;
-//        this.tailMiddle.y = motion * 1.25F;
-//        this.tailMiddle.yRot = this.tailBase.yRot + 0.25F;
-//
-//        this.tailEnd.x = Mth.sin((limbSwing * 10.0F) / Mth.RAD_TO_DEG) * limbSwingAmount * 0.95F;
-//        this.tailEnd.y = -motion;
-//        this.tailEnd.yRot = this.tailMiddle.yRot + 0.35F;
+        this.flyAnimation.applyWalk(zephyr.walkAnimationPos, zephyr.walkAnimationSpeed, 2.0F, 2.0F);
+        this.blowAttackAnimation.apply(zephyr.blowAnimationState, zephyr.ageInTicks, 1.0F);
+        this.webAttackAnimation.apply(zephyr.webAnimationState, zephyr.ageInTicks, 1.0F);
     }
 }

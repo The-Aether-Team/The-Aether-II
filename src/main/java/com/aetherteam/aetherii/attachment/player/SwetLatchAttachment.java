@@ -6,27 +6,67 @@ import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.network.packet.clientbound.SwetSyncPacket;
 import com.google.common.collect.Lists;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.CrashReport;
+import net.minecraft.CrashReportCategory;
+import net.minecraft.ReportedException;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.portal.TeleportTransition;
-import net.neoforged.neoforge.common.util.INBTSerializable;
+import net.minecraft.world.level.storage.TagValueOutput;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.common.util.ValueIOSerializable;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class SwetLatchAttachment implements INBTSerializable<CompoundTag> {
+public class SwetLatchAttachment implements ValueIOSerializable {
     public static final ResourceLocation DEBUFFED_MOVEMENT_SPEED = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "player.debuff.swet_movement_speed");
     public static final int MAX_SWET_COUNT = 3;
 
+
+    @Override
+    public void serialize(ValueOutput valueOutput) {
+        ValueOutput.ValueOutputList valueoutput$valueoutputlist = valueOutput.childrenList("swets");
+        try {
+
+            for (Swet swet : this.getLatchedSwets()) {
+                ValueOutput valueoutput1 = valueoutput$valueoutputlist.addChild();
+
+                swet.addAdditionalSaveData(valueoutput1);
+
+            }
+        } catch (Throwable throwable) {
+            CrashReport crashreport = CrashReport.forThrowable(throwable, "Saving entity NBT");
+            CrashReportCategory crashreportcategory = crashreport.addCategory("Entity being saved");
+            this.player.fillCrashReportCategory(crashreportcategory);
+            throw new ReportedException(crashreport);
+        }
+    }
+
+    @Override
+    public void deserialize(ValueInput valueInput) {
+        ValueInput.ValueInputList list = valueInput.childrenListOrEmpty("swets");
+
+        this.getLatchedSwets().clear();
+        list.stream().forEach(valueInput1 -> {
+
+                    Swet swet = AetherIIEntityTypes.SWET.get().create(this.player.level(), EntitySpawnReason.TRIGGERED);
+                    if (swet != null) {
+                        swet.readAdditionalSaveData(valueInput1);
+                        this.getLatchedSwets().add(swet);
+                        this.syncToClient = true;
+                    }
+                }
+        );
+    }
     private final Player player;
     private final List<Swet> swets = Lists.newArrayList();
     private boolean syncToClient = false;
@@ -38,7 +78,13 @@ public class SwetLatchAttachment implements INBTSerializable<CompoundTag> {
     public void postTickUpdate() {
         if (this.syncToClient) {
             if (!this.player.level().isClientSide()) {
-                PacketDistributor.sendToAllPlayers(new SwetSyncPacket(this.player.getId(), this.serializeNBT(this.player.registryAccess())));
+                try (ProblemReporter.ScopedCollector problemreporter$scopedcollector = new ProblemReporter.ScopedCollector(this.player.problemPath(), AetherII.LOGGER)) {
+                    TagValueOutput tagvalueoutput = TagValueOutput.createWithContext(problemreporter$scopedcollector, this.player.registryAccess());
+                    this.serialize(tagvalueoutput);
+                    PacketDistributor.sendToAllPlayers(new SwetSyncPacket(this.player.getId(), tagvalueoutput.buildResult()));
+                }
+
+
             }
             this.syncToClient = false;
         }
@@ -114,35 +160,4 @@ public class SwetLatchAttachment implements INBTSerializable<CompoundTag> {
         return this.swets;
     }
 
-    @Override
-    public CompoundTag serializeNBT(HolderLookup.Provider provider) {
-        ListTag listTag = new ListTag();
-        CompoundTag compoundTag = new CompoundTag();
-
-        for (Swet swet : this.getLatchedSwets()) {
-            CompoundTag swetTag = new CompoundTag();
-            swet.addAdditionalSaveData(swetTag);
-            listTag.add(swetTag);
-        }
-        compoundTag.put("swets", listTag);
-        return compoundTag;
-    }
-
-    @Override
-    public void deserializeNBT(HolderLookup.Provider provider, CompoundTag tag) {
-        ListTag list = tag.getList("swets", 10);
-
-        this.getLatchedSwets().clear();
-        for (int i = 0; i < list.size(); i++) {
-            CompoundTag compound = list.getCompound(i);
-            compound.remove("Dimension");
-
-            Swet swet = AetherIIEntityTypes.SWET.get().create(this.player.level(), EntitySpawnReason.TRIGGERED);
-            if (swet != null) {
-                swet.readAdditionalSaveData(compound);
-                this.getLatchedSwets().add(swet);
-                this.syncToClient = true;
-            }
-        }
-    }
 }

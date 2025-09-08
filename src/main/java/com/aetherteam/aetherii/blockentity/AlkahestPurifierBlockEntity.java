@@ -39,10 +39,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeCraftingHolder, StackedContentsCompatible, LidBlockEntity {
     public static final int MAX_LEVELS = 12;
@@ -137,29 +140,31 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
     }
 
     @Override
-    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registry) {
-        super.loadAdditional(tag, registry);
+    public void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(tag, this.items, registry);
-        this.processingProgress = tag.getInt("ProcessingTime");
-        this.processingTotalTime = tag.getInt("ProcessingTimeTotal");
-        this.alkahestLevels = tag.getInt("AlkahestLevels");
-        CompoundTag recipesUsedTag = tag.getCompound("RecipesUsed");
-        for (String key : recipesUsedTag.getAllKeys()) {
-            this.recipesUsed.put(ResourceKey.create(Registries.RECIPE, ResourceLocation.parse(key)), recipesUsedTag.getInt(key));
-        }
+        ContainerHelper.loadAllItems(input, this.items);
+        this.processingProgress = input.getIntOr("ProcessingTime", 0);
+        this.processingTotalTime = input.getIntOr("ProcessingTimeTotal", 200);
+        this.alkahestLevels = input.getIntOr("AlkahestLevels", 0);
+        Optional<CompoundTag> recipesUsedTag = input.read("RecipesUsed", CompoundTag.CODEC);
+        recipesUsedTag.ifPresent(tag -> {
+            for (String key : tag.keySet()) {
+                this.recipesUsed.put(ResourceKey.create(Registries.RECIPE, ResourceLocation.parse(key)), tag.getIntOr(key, 0));
+            }
+        });
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registry) {
-        super.saveAdditional(tag, registry);
-        tag.putInt("ProcessingTime", this.processingProgress);
-        tag.putInt("ProcessingTimeTotal", this.processingTotalTime);
-        tag.putInt("AlkahestLevels", this.alkahestLevels);
-        ContainerHelper.saveAllItems(tag, this.items, registry);
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        output.putInt("ProcessingTime", this.processingProgress);
+        output.putInt("ProcessingTimeTotal", this.processingTotalTime);
+        output.putInt("AlkahestLevels", this.alkahestLevels);
+        ContainerHelper.saveAllItems(output, this.items);
         CompoundTag recipesUsedTag = new CompoundTag();
         this.recipesUsed.forEach((key, integer) -> recipesUsedTag.putInt(key.location().toString(), integer));
-        tag.put("RecipesUsed", recipesUsedTag);
+        output.store("RecipesUsed", CompoundTag.CODEC, recipesUsedTag);
     }
 
     @Override
@@ -260,7 +265,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
             } else if (ItemStack.isSameItemSameComponents(outputSlot, result)) {
                 outputSlot.grow(result.getCount());
             }
-            ItemStack byproducts = recipeHolder.value().byproducts().getRandomValue(this.getLevel().getRandom()).orElse(ItemStack.EMPTY);
+            ItemStack byproducts = recipeHolder.value().byproducts().getRandom(this.getLevel().getRandom()).orElse(ItemStack.EMPTY);
             ItemStack byproductSlot = stacks.get(6);
             if (byproductSlot.isEmpty()) {
                 stacks.set(6, byproducts.copy());
@@ -425,7 +430,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
     }
 
     public void awardUsedRecipesAndPopExperience(ServerPlayer player) {
-        List<RecipeHolder<?>> list = this.getRecipesToAwardAndPopExperience(player.serverLevel(), player.position());
+        List<RecipeHolder<?>> list = this.getRecipesToAwardAndPopExperience(player.level(), player.position());
         player.awardRecipes(list);
         for (RecipeHolder<?> recipeholder : list) {
             if (recipeholder != null) {

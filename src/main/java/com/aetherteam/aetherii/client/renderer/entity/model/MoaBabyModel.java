@@ -3,8 +3,10 @@ package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockb
 // Paste this class into your mod and generate all required imports
 
 
+import com.aetherteam.aetherii.client.renderer.entity.animation.MoaAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.animation.MoaBabyAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -12,6 +14,9 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
 public class MoaBabyModel extends EntityModel<MoaRenderState> {
+    private final KeyframeAnimation walkAnimation;
+    private final KeyframeAnimation sitAnimation;
+    private final KeyframeAnimation flyAnimation;
     private final ModelPart body_main;
     private final ModelPart tail;
     private final ModelPart leg_l_1;
@@ -29,6 +34,9 @@ public class MoaBabyModel extends EntityModel<MoaRenderState> {
 
     public MoaBabyModel(ModelPart root) {
         super(root);
+        this.walkAnimation = MoaBabyAnimation.WALK.bake(root);
+        this.sitAnimation = MoaBabyAnimation.SIT.bake(root);
+        this.flyAnimation = MoaBabyAnimation.FLY.bake(root);
         this.body_main = root.getChild("body_main");
         this.tail = this.body_main.getChild("tail");
         this.leg_l_1 = this.body_main.getChild("leg_l_1");
@@ -86,11 +94,11 @@ public class MoaBabyModel extends EntityModel<MoaRenderState> {
         this.head.xRot = renderState.xRot * Mth.DEG_TO_RAD;
         this.head.yRot = renderState.yRot * Mth.DEG_TO_RAD;
         float flyAmount = renderState.flyAmount;
-        this.animateWalk(MoaBabyAnimation.walk, renderState.walkAnimationPos, Mth.clamp(renderState.walkAnimationSpeed - flyAmount, 0, 1F), 2.0F, 2.5F);
+        this.walkAnimation.applyWalk(renderState.walkAnimationPos, Mth.clamp(renderState.walkAnimationSpeed - flyAmount, 0, 1F), 2.0F, 2.5F);
         if (renderState.sitting) {
-            this.applyStatic(MoaBabyAnimation.sit);
+            this.sitAnimation.applyStatic();
         }
-        this.animateWalk(MoaBabyAnimation.flying, renderState.ageInTicks, flyAmount, 1.0F, 1.0F);
+        this.flyAnimation.applyWalk(renderState.ageInTicks, flyAmount, 1.0F, 1.0F);
 
     }
 }

@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.entity.npc.MerchantEntity;
 import com.aetherteam.aetherii.entity.npc.MerchantTrades;
 import com.aetherteam.aetherii.entity.npc.NpcEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -23,6 +22,8 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -97,11 +98,13 @@ public class Edward extends MerchantEntity {
     }
 
     @Override
-    protected float tickHeadTurn(float yRot, float animStep) {
+    protected void tickHeadTurn(float yRot) {
         if (!this.isSitting()) {
-            return super.tickHeadTurn(yRot, animStep);
+            super.tickHeadTurn(yRot);
+        } else {
+            this.yBodyRotO = this.yRotO;
+            this.yBodyRot = this.getYRot();
         }
-        return this.yBodyRot;
     }
 
     public boolean isSitting() {
@@ -121,16 +124,16 @@ public class Edward extends MerchantEntity {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
-        super.addAdditionalSaveData(tag);
-        tag.putIntArray("HomePosition", new int[]{this.getHomePosition().getX(), this.getHomePosition().getY(), this.getHomePosition().getZ()});
+    public void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putIntArray("HomePosition", new int[]{this.getHomePosition().getX(), this.getHomePosition().getY(), this.getHomePosition().getZ()});
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
-        if (tag.contains("HomePosition")) {
-            int[] positions = tag.getIntArray("HomePosition");
+    public void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        if (input.getIntArray("HomePosition").isPresent()) {
+            int[] positions = input.getIntArray("HomePosition").get();
             this.setHomePosition(new BlockPos(positions[0], positions[1], positions[2]));
         }
     }

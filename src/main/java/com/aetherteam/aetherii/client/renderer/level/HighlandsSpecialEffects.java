@@ -35,7 +35,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.joml.Matrix4f;
-import org.joml.Vector4f;
 
 import java.awt.*;
 
@@ -48,7 +47,7 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     private static final ResourceLocation SNOW_STORMY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/environment/snow_stormy.png");
 
     public HighlandsSpecialEffects() {
-        super(256.0F, true, SkyType.OVERWORLD, false, false);
+        super(SkyType.OVERWORLD, false, false);
     }
 
     @Override
@@ -70,8 +69,10 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     }
 
     @Override
-    public boolean renderClouds(ClientLevel level, int ticks, float partialTick, double camX, double camY, double camZ, Matrix4f modelViewMatrix, Matrix4f projectionMatrix) {
-        Minecraft.getInstance().levelRenderer.getCloudRenderer().render(this.getCloudColor(level, partialTick), Minecraft.getInstance().options.getCloudsType(), level.effects().getCloudHeight() + 0.33F, modelViewMatrix, projectionMatrix, new Vec3(camX, camY, camZ), partialTick);
+    public boolean renderClouds(ClientLevel level, int ticks, float partialTick, double camX, double camY, double camZ, Matrix4f modelViewMatrix) {
+        if (level.dimensionType().cloudHeight().isPresent()) {
+            Minecraft.getInstance().levelRenderer.getCloudRenderer().render(this.getCloudColor(level, partialTick), Minecraft.getInstance().options.getCloudsType(), level.dimensionType().cloudHeight().get() + 0.33F, new Vec3(camX, camY, camZ), partialTick);
+        }
         return true;
     }
 
@@ -101,17 +102,13 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     }
 
     @Override
-    public boolean renderSky(ClientLevel level, int ticks, float partialTick, Matrix4f modelViewMatrix, Camera camera, Matrix4f projectionMatrix, Runnable setupFog) {
+    public boolean renderSky(ClientLevel level, int ticks, float partialTick, Matrix4f modelViewMatrix, Camera camera, Runnable setupFog) {
         RenderBuffers renderBuffers = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).aether_ii$getRenderBuffers();
         SkyRenderer skyRenderer = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).aether_ii$getSkyRenderer();
         float renderDistance = Minecraft.getInstance().gameRenderer.getRenderDistance();
         Vec3 cameraPosition = camera.getPosition();
         double cameraX = cameraPosition.x();
         double cameraY = cameraPosition.y();
-        boolean isFoggy = Minecraft.getInstance().level.effects().isFoggyAt(Mth.floor(cameraX), Mth.floor(cameraY)) || Minecraft.getInstance().gui.getBossOverlay().shouldCreateWorldFog();
-        Vector4f fogColor = FogRenderer.computeFogColor(camera, partialTick, Minecraft.getInstance().level, Minecraft.getInstance().options.getEffectiveRenderDistance(), Minecraft.getInstance().gameRenderer.getDarkenWorldAmount(partialTick));
-        FogParameters fogParameters = FogRenderer.setupFog(camera, FogRenderer.FogMode.FOG_SKY, fogColor, renderDistance, isFoggy, partialTick);
-
         setupFog.run();
         PoseStack poseStack = new PoseStack();
         float sunAngle = level.getSunAngle(partialTick);
@@ -130,10 +127,11 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
             skyRenderer.renderSunriseAndSunset(poseStack, multiBufferSource, sunAngle, sunColor);
         }
         this.renderCloudCoverDisc(level, partialTick, poseStack, multiBufferSource, skyColor);
-        skyRenderer.renderSunMoonAndStars(poseStack, multiBufferSource, timeOfDay, moonPhase, rainLevel, starBrightness, fogParameters);
+        skyRenderer.renderSunMoonAndStars(poseStack, multiBufferSource, timeOfDay, moonPhase, rainLevel, starBrightness);
         multiBufferSource.endBatch();
         return true;
     }
+
 
     public void renderCloudCoverDisc(ClientLevel level, float partialTick, PoseStack poseStack, MultiBufferSource.BufferSource multiBufferSource, int skyColor) {
         poseStack.pushPose();
@@ -154,7 +152,8 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
         b = (Math.min(color.getBlue() + 35, 255.0F) / 255.0F) * (float) Math.pow(weatherMultiplier, bluePower);
 
         ClientLevel.ClientLevelData worldInfo = level.getLevelData();
-        double d0 = (Minecraft.getInstance().player.getEyePosition(partialTick).y - 66) * worldInfo.getClearColorScale();
+        //TODO Better Cloud system
+        double d0 = (Minecraft.getInstance().player.getEyePosition(partialTick).y - 66) * worldInfo.voidDarknessOnsetRange();
         if (d0 < 1.0) {
             if (d0 < 0.0) {
                 d0 = 0.0;

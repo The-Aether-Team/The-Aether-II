@@ -11,4 +11,7 @@ public interface AbstractArrowAccessor {
 
     @Accessor("life")
     void aether$setLife(int life);
+
+    @Accessor("baseDamage")
+    double aether$getBaseDamage();
 }

@@ -8,7 +8,7 @@ import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScr
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
@@ -18,7 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -55,6 +55,9 @@ public abstract class DiscoverySection<S extends GuidebookEntry, T extends Mutab
 
     public abstract void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick);
 
+    public abstract void renderFoward(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick);
+
+
     public void renderEntries(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         guiGraphics.drawString(this.screen.getMinecraft().font, this.getTitle(), 40, 48, 16777215, true);
     }
@@ -65,7 +68,7 @@ public abstract class DiscoverySection<S extends GuidebookEntry, T extends Mutab
         int scrollbarTop = 59;
         int scrollbarLeft = 151;
         ResourceLocation location = Guidebook.SCROLLER.get(this.isScrollActive(), this.scrolling);
-        guiGraphics.blitSprite(RenderType::guiTextured, location, scrollbarLeft, (int) (scrollbarTop + this.scrollY), 6, 9); // Render scrollbar.
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, scrollbarLeft, (int) (scrollbarTop + this.scrollY), 6, 9); // Render scrollbar.
     }
 
     protected void renderFakeSlot(GuiGraphics guiGraphics, Font font, List<Component> tooltip, ItemStack stack, double mouseX, double mouseY, int x, int y) {
@@ -73,14 +76,14 @@ public abstract class DiscoverySection<S extends GuidebookEntry, T extends Mutab
         int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
         double mouseXDiff = (mouseX - rightPagePos) - x;
         double mouseYDiff = (mouseY - topPos) - y;
-        guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.SLOT_SPRITE, x, y, 18, 18);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.SLOT_SPRITE, x, y, 18, 18);
         x += 1;
         y += 1;
         guiGraphics.renderItem(stack, x, y);
         guiGraphics.renderItemDecorations(font, stack, x, y);
         if (mouseYDiff <= 15 && mouseYDiff >= 0 && mouseXDiff <= 15 && mouseXDiff >= 0) {
-            guiGraphics.fillGradient(RenderType.guiOverlay(), x, y, x + 16, y + 16, -2130706433, -2130706433, 0);
-            guiGraphics.renderComponentTooltip(font, tooltip, (int) (mouseX - rightPagePos), (int) (mouseY - topPos));
+            guiGraphics.fillGradient(x, y, x + 16, y + 16, -2130706433, -2130706433);
+            guiGraphics.setComponentTooltipForNextFrame(font, tooltip, (int) (mouseX), (int) (mouseY));
         }
     }
 
@@ -233,7 +236,7 @@ public abstract class DiscoverySection<S extends GuidebookEntry, T extends Mutab
                 values.getValue().view();
             }
         }
-        PacketDistributor.sendToServer(this.getViewedPacket(entry));
+        ClientPacketDistributor.sendToServer(this.getViewedPacket(entry));
     }
 
     public boolean areAnyUnchecked() {

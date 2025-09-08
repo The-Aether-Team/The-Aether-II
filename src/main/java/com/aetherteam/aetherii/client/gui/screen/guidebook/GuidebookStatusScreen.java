@@ -12,7 +12,7 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -75,10 +75,10 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
 
         guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215);
 
-        guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.HEARTS_SPRITE, x, y + 22, 16, 16);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.HEARTS_SPRITE, x, y + 22, 16, 16);
         guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x + 20, y + 26, 16777215, true);
 
-        guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.ARMOR_SPRITE, x, y + 38, 16, 16);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.ARMOR_SPRITE, x, y + 38, 16, 16);
         guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 20, y + 42, 16777215, true);
 
         var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
@@ -97,8 +97,8 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
     protected void renderMenuBackground(GuiGraphics partialTick) { }
 
     @Override
-    protected void renderBlurredBackground() { }
-
+    protected void renderBlurredBackground(GuiGraphics guiGraphics) {
+    }
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);

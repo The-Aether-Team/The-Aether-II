@@ -7,6 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -109,17 +110,22 @@ public class AetherLeafPileBlock extends FallingBlock {
     }
 
     @Override
+    public int getDustColor(BlockState state, BlockGetter getter, BlockPos pos) {
+        return state.getMapColor(getter, pos).col;
+    }
+
+    @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         return !level.isEmptyBlock(pos.below());
     }
 
     @Override
-    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
         if (entity instanceof FallingBlockEntity fallingBlock && fallingBlock.getBlockState().is(this)) {
             fallingBlock.discard();
             level.setBlock(pos, level.getBlockState(pos).setValue(PILES, Math.min(16, state.getValue(PILES) + 1)), 2);
         }
-        super.entityInside(state, level, pos, entity);
+        super.entityInside(state, level, pos, entity, effectApplier);
     }
 
     @Override

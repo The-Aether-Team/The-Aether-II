@@ -12,7 +12,6 @@ import com.google.common.collect.Maps;
 import com.mojang.serialization.Dynamic;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -53,6 +52,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.Path;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.IShearable;
@@ -580,26 +581,26 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
-        super.addAdditionalSaveData(tag);
-        tag.putBoolean("HasPlate", this.hasPlate());
-        tag.putBoolean("Sheared", this.isSheared());
-        tag.putInt("PlateGrowTime", this.plateGrowTime);
-        tag.putInt("WoolGrowTime", this.woolGrowTime);
+    public void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putBoolean("HasPlate", this.hasPlate());
+        output.putBoolean("Sheared", this.isSheared());
+        output.putInt("PlateGrowTime", this.plateGrowTime);
+        output.putInt("WoolGrowTime", this.woolGrowTime);
         if (this.getColor().isPresent()) {
-            tag.putInt("Color", this.getColor().get().id());
+            output.putInt("Color", this.getColor().get().id());
         }
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
-        this.setPlate(tag.getBoolean("HasPlate"));
-        this.setSheared(tag.getBoolean("Sheared"));
-        this.plateGrowTime = tag.getInt("PlateGrowTime");
-        this.woolGrowTime = tag.getInt("WoolGrowTime");
-        if (tag.contains("Color")) {
-            this.setColor(Optional.of(KirridColor.BY_ID.apply(tag.getInt("Color"))));
+    public void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        this.setPlate(input.getBooleanOr("HasPlate", true));
+        this.setSheared(input.getBooleanOr("Sheared", false));
+        this.plateGrowTime = input.getIntOr("PlateGrowTime", 0);
+        this.woolGrowTime = input.getIntOr("WoolGrowTime", 0);
+        if (input.getInt("Color").isPresent()) {
+            this.setColor(Optional.of(KirridColor.BY_ID.apply(input.getInt("Color").get())));
         }
     }
 

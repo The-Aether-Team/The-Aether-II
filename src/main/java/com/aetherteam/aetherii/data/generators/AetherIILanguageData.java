@@ -645,6 +645,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Utility
         this.addBlock(AetherIIBlocks.AMBROSIUM_TORCH, "Ambrosium Torch");
+        this.addBlock(AetherIIBlocks.ARKENIUM_LANTERN, "Arkenium Lantern");
+        this.addBlock(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN, "Rustic Arkenium Lantern");
+        this.addBlock(AetherIIBlocks.ARKENIUM_CHAIN, "Arkenium Chain");
         this.addBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE, "Skyroot Crafting Table");
         this.addBlock(AetherIIBlocks.HOLYSTONE_FURNACE, "Holystone Furnace");
         this.addBlock(AetherIIBlocks.ALTAR, "Altar");
@@ -1345,6 +1348,20 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEffectsDescription(AetherIIEffects.FROSTBITE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addEffectsDescription(AetherIIEffects.FUNGAL_ROT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addEffectsDescription(AetherIIEffects.CRYSTALLIZED.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+
+
+        // Music
+        this.addMusic("aether1", "Emile van Krieken - Welcome to Paradise");
+        this.addMusic("aether2", "Emile van Krieken - Wings");
+        this.addMusic("aether3", "Emile van Krieken - Meadow");
+        this.addMusic("aether4", "Emile van Krieken - Moa's Song");
+        this.addMusic("aether5", "Emile van Krieken - Clouds");
+        this.addMusic("aether6", "Emile van Krieken - Brise");
+        this.addMusic("aether_night1", "Emile van Krieken - A Light in the Night");
+        this.addMusic("aether_night2", "Emile van Krieken - Crepusculum");
+        this.addMusic("aether_sunrise", "Emile van Krieken - Sunrise");
+        this.addMusic("aether_sunset", "Emile van Krieken - Sunset");
+        this.addMusic("aether_ambience1", "Emile van Krieken - Sentience");
 
 
         // Jukebox Songs

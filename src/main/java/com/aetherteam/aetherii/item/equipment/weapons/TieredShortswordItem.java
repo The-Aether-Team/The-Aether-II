@@ -13,7 +13,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
@@ -22,7 +21,7 @@ import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.List;
 
-public class TieredShortswordItem extends SwordItem {
+public class TieredShortswordItem extends Item {
     public static final ResourceLocation BASE_SWEEP_RANGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_sweep_range");
 
     public TieredShortswordItem(Item.Properties properties) {
@@ -34,7 +33,7 @@ public class TieredShortswordItem extends SwordItem {
                 .component(DataComponents.TOOL, new Tool(List.of(
                         Tool.Rule.minesAndDrops(HolderSet.direct(Blocks.COBWEB.builtInRegistryHolder()), 15.0F),
                         Tool.Rule.overrideSpeed(BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK).getOrThrow(BlockTags.SWORD_EFFICIENT), 1.5F)
-                ), 1.0F, 2))
+                ), 1.0F, 2, false))
                 .attributes(createAttributes(toolMaterial, damage, speed, specialDamage));
     }
 

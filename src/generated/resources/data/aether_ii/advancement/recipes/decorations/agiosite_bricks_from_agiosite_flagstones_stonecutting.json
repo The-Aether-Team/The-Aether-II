@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_agiosite_flagstones": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:agiosite_flagstones"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:agiosite_bricks_from_agiosite_flagstones_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_agiosite_flagstones"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:agiosite_bricks_from_agiosite_flagstones_stonecutting"
+    ]
+  }
+}

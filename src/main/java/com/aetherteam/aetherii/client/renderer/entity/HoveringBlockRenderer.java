@@ -1,25 +1,29 @@
 package com.aetherteam.aetherii.client.renderer.entity;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.state.HoveringBlockEntityRenderState;
 import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.block.model.BlockModelPart;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.data.ModelData;
+import net.minecraft.world.level.storage.TagValueInput;
+import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
 
 public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity, HoveringBlockEntityRenderState> {
     public HoveringBlockRenderer(EntityRendererProvider.Context context) {
@@ -36,10 +40,16 @@ public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity, H
             poseStack.pushPose();
             poseStack.translate(-0.5, 0.0, -0.5);
             BlockRenderDispatcher blockRenderDispatcher = Minecraft.getInstance().getBlockRenderer();
-            BakedModel model = blockRenderDispatcher.getBlockModel(blockState);
-            for (RenderType renderType : model.getRenderTypes(blockState, RandomSource.create(blockState.getSeed(floatingBlock.startBlockPos)), ModelData.EMPTY)) {
-                blockRenderDispatcher.getModelRenderer().tesselateBlock(world, model, blockState, floatingBlock.blockPos, poseStack, buffer.getBuffer(renderType), false, RandomSource.create(), blockState.getSeed(floatingBlock.startBlockPos), OverlayTexture.NO_OVERLAY, ModelData.EMPTY, renderType);
-            }
+            List<BlockModelPart> list = blockRenderDispatcher
+                    .getBlockModel(blockState)
+                    .collectParts(world, floatingBlock.blockPos, blockState, RandomSource.create(blockState.getSeed(floatingBlock.startBlockPos)));
+            blockRenderDispatcher.getModelRenderer()
+                    .tesselateBlock(
+                            world, list, blockState, floatingBlock.blockPos, poseStack,
+                            renderType -> buffer.getBuffer(net.neoforged.neoforge.client.RenderTypeHelper.getMovingBlockRenderType(renderType)),
+                            false,
+                            OverlayTexture.NO_OVERLAY
+                    );
             poseStack.popPose();
             super.render(floatingBlock, poseStack, buffer, packedLightIn);
         }
@@ -48,7 +58,7 @@ public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity, H
             if (renderer != null) {
                 poseStack.pushPose();
                 poseStack.translate(-0.5, 0.0, -0.5);
-                renderer.render(floatingBlock.blockEntityDummy, floatingBlock.partialTick, poseStack, buffer, packedLightIn, OverlayTexture.NO_OVERLAY);
+                renderer.render(floatingBlock.blockEntityDummy, floatingBlock.partialTick, poseStack, buffer, packedLightIn, OverlayTexture.NO_OVERLAY, Vec3.ZERO);
                 poseStack.popPose();
                 super.render(floatingBlock, poseStack, buffer, packedLightIn);
             }
@@ -71,7 +81,9 @@ public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity, H
             if (renderState.blockEntityDummy != null) {
                 renderState.blockEntityDummy.setLevel(floatingBlock.level());
                 if (floatingBlock.getBlockEntityData() != null) {
-                    renderState.blockEntityDummy.loadWithComponents(floatingBlock.getBlockEntityData(), floatingBlock.registryAccess());
+                    try (ProblemReporter.ScopedCollector problems = new ProblemReporter.ScopedCollector(floatingBlock.problemPath(), AetherII.LOGGER)) {
+                        renderState.blockEntityDummy.loadWithComponents(TagValueInput.create(problems, floatingBlock.level().registryAccess(), floatingBlock.getBlockEntityData()));
+                    }
                 }
             }
         } else {

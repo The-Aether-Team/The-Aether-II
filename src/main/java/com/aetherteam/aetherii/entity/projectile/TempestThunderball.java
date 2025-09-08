@@ -6,7 +6,6 @@ import com.aetherteam.aetherii.entity.ElectricField;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -16,6 +15,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -95,15 +96,15 @@ public class TempestThunderball extends AbstractHurtingProjectile {
         this.level().explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, false, Level.ExplosionInteraction.NONE);
         ElectricField electricCircle = new ElectricField(this.level(), x, this.getY(), z);
 
-        electricCircle.setParticle(this.getTrailParticle());
+        electricCircle.setCustomParticle(this.getTrailParticle());
         electricCircle.setOwner((LivingEntity) this.getOwner());
         electricCircle.setRadius(2.5F);
         electricCircle.setRadiusOnUse(-0.5F);
         electricCircle.setWaitTime(10);
         electricCircle.setDuration(electricCircle.getDuration() / 5);
 
-        electricCircle.addEffect(new MobEffectInstance(MobEffects.HARM, 1, 0, false, false, false));
-        electricCircle.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10, 1, false, false, false));
+        electricCircle.addEffect(new MobEffectInstance(MobEffects.INSTANT_DAMAGE, 1, 0, false, false, false));
+        electricCircle.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 1, false, false, false));
 
         this.level().addFreshEntity(electricCircle);
         electricCircle.playSound(AetherIISoundEvents.ENTITY_ELECTRIC_FIELD_CREATE.get());
@@ -136,16 +137,14 @@ public class TempestThunderball extends AbstractHurtingProjectile {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
-        super.addAdditionalSaveData(tag);
-        tag.putInt("TicksInAir", this.ticksInAir);
+    public void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putInt("TicksInAir", this.ticksInAir);
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
-        if (tag.contains("TicksInAir")) {
-            this.ticksInAir = tag.getInt("TicksInAir");
-        }
+    public void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        this.ticksInAir = input.getIntOr("TicksInAir", 0);
     }
 }

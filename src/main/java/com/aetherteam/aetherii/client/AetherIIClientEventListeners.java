@@ -5,12 +5,16 @@ import com.aetherteam.aetherii.client.event.hooks.BiomeHooks;
 import com.aetherteam.aetherii.client.event.hooks.MusicHooks;
 import com.aetherteam.aetherii.client.event.hooks.RenderHooks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Camera;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.ClientInput;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.client.sounds.MusicInfo;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -18,6 +22,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
@@ -25,6 +30,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
+import net.neoforged.neoforge.event.AddAttributeTooltipsEvent;
 import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.ArrayList;
@@ -52,6 +58,8 @@ public class AetherIIClientEventListeners {
         // Input
         bus.addListener(AetherIIClientEventListeners::onMovementInputUpdate);
 
+        // Entity
+        bus.addListener(AetherIIClientEventListeners::onRenderFirstPersonArm);
     }
 
     public static void onGuiOpen(ScreenEvent.Opening event) {
@@ -143,5 +151,16 @@ public class AetherIIClientEventListeners {
         ClientInput input = event.getInput();
 
         player.getData(AetherIIDataAttachments.PLAYER).movementInput(player, input);
+    }
+
+    public static void onRenderFirstPersonArm(RenderArmEvent event) {
+        PoseStack poseStack = event.getPoseStack();
+        MultiBufferSource buffer = event.getMultiBufferSource();
+        HumanoidArm arm = event.getArm();
+        AbstractClientPlayer player = event.getPlayer();
+        int packedLight = event.getPackedLight();
+        PlayerSkin skin = player.getSkin();
+
+        RenderHooks.renderFirstPersonGloves(poseStack, buffer, arm, player, packedLight, skin);
     }
 }

@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.attachment.entity.DroppedItemAttachment;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
 import com.aetherteam.aetherii.attachment.player.*;
-import net.minecraft.world.entity.LivingEntity;
+import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -20,14 +20,15 @@ public class AetherIIDataAttachments {
 
     // Living
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<DamageSystemAttachment>> DAMAGE_SYSTEM = ATTACHMENTS.register("damage_system", () -> AttachmentType.builder(DamageSystemAttachment::new).build());
-    public static final DeferredHolder<AttachmentType<?>, AttachmentType<EffectsSystemAttachment>> EFFECTS_SYSTEM = ATTACHMENTS.register("effects_system", () -> AttachmentType.serializable((entity) -> new EffectsSystemAttachment((LivingEntity) entity)).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<EffectsSystemAttachment>> EFFECTS_SYSTEM = ATTACHMENTS.register("effects_system", () -> AttachmentType.builder(EffectsSystemAttachment::new).serialize(EffectsSystemAttachment.CODEC).sync(EffectsSystemAttachment.STREAM_CODEC).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AccessoryContainer>> ACCESSORIES = ATTACHMENTS.register("accessories", () -> AttachmentType.builder(AccessoryContainer::new).serialize(AccessoryContainer.CODEC).sync(AccessoryContainer.STREAM_CODEC).copyOnDeath().build());
 
     // Player
-    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AetherIIPlayerAttachment>> PLAYER = ATTACHMENTS.register("player", () -> AttachmentType.builder(AetherIIPlayerAttachment::new).serialize(AetherIIPlayerAttachment.CODEC).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AetherIIPlayerAttachment>> PLAYER = ATTACHMENTS.register("player", () -> AttachmentType.builder(AetherIIPlayerAttachment::new).serialize(AetherIIPlayerAttachment.CODEC).sync(AetherIIPlayerAttachment.STREAM_CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<SwetLatchAttachment>> SWET_LATCH = ATTACHMENTS.register("swet_latch", () -> AttachmentType.serializable((entity) -> new SwetLatchAttachment((Player) entity)).build());
-    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AerbunnyMountAttachment>> AERBUNNY_MOUNT = ATTACHMENTS.register("aerbunny_mount", () -> AttachmentType.builder(AerbunnyMountAttachment::new).serialize(AerbunnyMountAttachment.CODEC).build());
-    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AbilityBehaviorAttachment>> ABILITY_BEHAVIOR = ATTACHMENTS.register("ability_behavior", () -> AttachmentType.builder(AbilityBehaviorAttachment::new).serialize(AbilityBehaviorAttachment.CODEC).build());
-    public static final DeferredHolder<AttachmentType<?>, AttachmentType<CurrencyAttachment>> CURRENCY = ATTACHMENTS.register("currency", () -> AttachmentType.builder(CurrencyAttachment::new).serialize(CurrencyAttachment.CODEC).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AerbunnyMountAttachment>> AERBUNNY_MOUNT = ATTACHMENTS.register("aerbunny_mount", () -> AttachmentType.serializable(AerbunnyMountAttachment::new).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AbilityBehaviorAttachment>> ABILITY_BEHAVIOR = ATTACHMENTS.register("ability_behavior", () -> AttachmentType.builder(AbilityBehaviorAttachment::new).serialize(AbilityBehaviorAttachment.CODEC).sync(AbilityBehaviorAttachment.STREAM_CODEC).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<CurrencyAttachment>> CURRENCY = ATTACHMENTS.register("currency", () -> AttachmentType.builder(CurrencyAttachment::new).serialize(CurrencyAttachment.CODEC).sync(CurrencyAttachment.STREAM_CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<GuidebookDiscoveryAttachment>> GUIDEBOOK_DISCOVERY = ATTACHMENTS.register("guidebook_discovery", () -> AttachmentType.builder(GuidebookDiscoveryAttachment::new).serialize(GuidebookDiscoveryAttachment.CODEC).copyOnDeath().build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<OutpostTrackerAttachment>> OUTPOST_TRACKER = ATTACHMENTS.register("outpost_tracker", () -> AttachmentType.builder(OutpostTrackerAttachment::new).serialize(OutpostTrackerAttachment.CODEC).copyOnDeath().build());
 }

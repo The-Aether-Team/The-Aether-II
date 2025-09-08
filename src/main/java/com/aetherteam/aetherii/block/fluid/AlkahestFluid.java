@@ -6,9 +6,10 @@ import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
+import com.aetherteam.aetherii.integration.AccessoryUtil;
+import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.LevelRendererAccessor;
 import com.aetherteam.aetherii.network.packet.clientbound.AlkahestDamageBlockPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.AlkahestFizzPacket;
@@ -17,9 +18,6 @@ import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.block.AlkahestCorrosionRecipe;
 import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
-import io.wispforest.accessories.api.AccessoriesAPI;
-import io.wispforest.accessories.api.AccessoriesCapability;
-import io.wispforest.accessories.api.slot.SlotEntryReference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -54,8 +52,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -134,7 +131,6 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static void progressivelyDestroyBlock(Level level, BlockPos belowPos, int speed, boolean drop) {
         int id = belowPos.hashCode();
         BlockDestructionProgress progress = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).aether_ii$getDestroyingBlocks().get(id);
@@ -142,7 +138,7 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
             int destroyProgress = progress.getProgress();
             level.destroyBlockProgress(belowPos.hashCode(), belowPos, destroyProgress + speed);
             if (destroyProgress >= 9) {
-                PacketDistributor.sendToServer(new AlkahestBreakBlockPacket(belowPos, drop));
+                ClientPacketDistributor.sendToServer(new AlkahestBreakBlockPacket(belowPos, drop));
             }
         } else {
             level.destroyBlockProgress(belowPos.hashCode(), belowPos,  speed);
@@ -218,18 +214,13 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
                         offhandItem.hurtAndBreak(1, livingEntity, EquipmentSlot.OFFHAND);
                     }
 
-                    AccessoriesCapability accessories = AccessoriesCapability.get(livingEntity);
-                    if (accessories != null) {
-                        SlotEntryReference slotEntryReference = accessories.getFirstEquipped((itemStack) -> itemStack.getItem() instanceof GlovesItem);
-                        if (slotEntryReference != null && slotEntryReference.stack().getItem() instanceof GlovesItem) {
-                            ItemStack gloves = slotEntryReference.stack();
-                            if (!gloves.is(AetherIITags.Items.ALKAHEST_RESISTANT_ITEM) && !gloves.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
-                                if (livingEntity instanceof ServerPlayer serverPlayer) {
-                                    gloves.hurtAndBreak(1, serverLevel, serverPlayer, (item) ->  AccessoriesAPI.breakStack(slotEntryReference.reference()));
-                                }
+                    AccessoryUtil.getFirst(livingEntity, AccessoryContainer.SlotType.HANDWEAR).ifPresent((stack) -> {
+                        if (!stack.is(AetherIITags.Items.ALKAHEST_RESISTANT_ITEM) && !stack.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
+                            if (livingEntity instanceof ServerPlayer serverPlayer) {
+                                stack.hurtAndBreak(1, serverPlayer, EquipmentSlot.BODY);
                             }
                         }
-                    }
+                    });
                 }
             }
         }

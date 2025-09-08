@@ -13,8 +13,8 @@ public class HolystoneHammerItem extends TieredHammerItem implements HolystoneWe
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         this.dropAmbrosium(target, attacker);
-        return super.hurtEnemy(stack, target, attacker);
+        super.hurtEnemy(stack, target, attacker);
     }
 }

@@ -1,16 +1,16 @@
 package com.aetherteam.aetherii.data.resources.builders.models;
 
 import com.aetherteam.aetherii.AetherII;
-import net.minecraft.client.data.models.model.*;
+import com.mojang.math.Quadrant;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplate;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.client.model.generators.template.FaceRotation;
 
 import java.util.Optional;
 
-@OnlyIn(Dist.CLIENT)
 public class AetherIIModelTemplates {
     public static final ModelTemplate TEMPLATE_CUTOUT_MIPPED_CUBE_ALL = ModelTemplates.CUBE_ALL.extend().renderType("cutout_mipped").build();
     public static final ModelTemplate TEMPLATE_TRANSLUCENT_CUBE = ModelTemplates.CUBE.extend().renderType("translucent").build();
@@ -165,32 +165,32 @@ public class AetherIIModelTemplates {
             .element((builder) -> builder
                     .from(7.0F, 0.0F, 2.0F).to(9.0F, 2.0F, 13.0F)
                     .rotation((rotationBuilder) -> rotationBuilder.angle(0).axis(Direction.Axis.X).origin(9.0F, 0.0F, 7.0F))
-                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.uvs(7, 7, 9, 9).rotation(FaceRotation.UPSIDE_DOWN).texture(TextureSlot.TOP))
-                    .face(Direction.EAST, (faceBuilder) -> faceBuilder.uvs(2, 2, 4, 13).rotation(FaceRotation.CLOCKWISE_90).texture(TextureSlot.SIDE))
+                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.uvs(7, 7, 9, 9).rotation(Quadrant.R180).texture(TextureSlot.TOP))
+                    .face(Direction.EAST, (faceBuilder) -> faceBuilder.uvs(2, 2, 4, 13).rotation(Quadrant.R90).texture(TextureSlot.SIDE))
                     .face(Direction.SOUTH, (faceBuilder) -> faceBuilder.uvs(7, 7, 9, 9).texture(TextureSlot.TOP))
-                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.uvs(6, 2, 8, 13).rotation(FaceRotation.COUNTERCLOCKWISE_90).texture(TextureSlot.SIDE))
+                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.uvs(6, 2, 8, 13).rotation(Quadrant.R270).texture(TextureSlot.SIDE))
                     .face(Direction.UP, (faceBuilder) -> faceBuilder.uvs(4, 2, 6, 13).texture(TextureSlot.SIDE))
-                    .face(Direction.DOWN, (faceBuilder) -> faceBuilder.uvs(0, 2, 2, 13).rotation(FaceRotation.UPSIDE_DOWN).texture(TextureSlot.SIDE))
+                    .face(Direction.DOWN, (faceBuilder) -> faceBuilder.uvs(0, 2, 2, 13).rotation(Quadrant.R180).texture(TextureSlot.SIDE))
             ).build();
     public static final ModelTemplate TWIG_2 = ModelTemplates.create("block", "_2", TextureSlot.TOP, TextureSlot.SIDE, TextureSlot.PARTICLE).extend()
             .element((builder) -> builder
                     .from(11.0F, 0.0F, 2.0F).to(13.0F, 2.0F, 13.0F)
                     .rotation((rotationBuilder) -> rotationBuilder.angle(0).axis(Direction.Axis.X).origin(9.0F, 0.0F, 7.0F))
-                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.uvs(7, 7, 9, 9).rotation(FaceRotation.UPSIDE_DOWN).texture(TextureSlot.TOP))
-                    .face(Direction.EAST, (faceBuilder) -> faceBuilder.uvs(2, 2, 4, 13).rotation(FaceRotation.CLOCKWISE_90).texture(TextureSlot.SIDE))
+                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.uvs(7, 7, 9, 9).rotation(Quadrant.R180).texture(TextureSlot.TOP))
+                    .face(Direction.EAST, (faceBuilder) -> faceBuilder.uvs(2, 2, 4, 13).rotation(Quadrant.R90).texture(TextureSlot.SIDE))
                     .face(Direction.SOUTH, (faceBuilder) -> faceBuilder.uvs(7, 7, 9, 9).texture(TextureSlot.TOP))
-                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.uvs(6, 2, 8, 13).rotation(FaceRotation.COUNTERCLOCKWISE_90).texture(TextureSlot.SIDE))
+                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.uvs(6, 2, 8, 13).rotation(Quadrant.R270).texture(TextureSlot.SIDE))
                     .face(Direction.UP, (faceBuilder) -> faceBuilder.uvs(4, 2, 6, 13).texture(TextureSlot.SIDE))
-                    .face(Direction.DOWN, (faceBuilder) -> faceBuilder.uvs(0, 2, 2, 13).rotation(FaceRotation.UPSIDE_DOWN).texture(TextureSlot.SIDE))
+                    .face(Direction.DOWN, (faceBuilder) -> faceBuilder.uvs(0, 2, 2, 13).rotation(Quadrant.R180).texture(TextureSlot.SIDE))
             ).element((builder) -> builder
                     .from(2.0F, -1.0F, 9.0F).to(8.0F, 1.0F, 11.0F)
                     .rotation((rotationBuilder) -> rotationBuilder.angle(0).axis(Direction.Axis.Y).origin(8.0F, 0.0F, 8.0F))
-                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.uvs(2.0F, 4.0F, 4.0F, 8.0F).rotation(FaceRotation.CLOCKWISE_90).texture(TextureSlot.SIDE))
+                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.uvs(2.0F, 4.0F, 4.0F, 8.0F).rotation(Quadrant.R90).texture(TextureSlot.SIDE))
                     .face(Direction.EAST, (faceBuilder) -> faceBuilder.uvs(7.0F, 7.0F, 9.0F, 9.0F).texture(TextureSlot.TOP))
-                    .face(Direction.SOUTH, (faceBuilder) -> faceBuilder.uvs(6.0F, 2.0F, 8.0F, 8.0F).rotation(FaceRotation.COUNTERCLOCKWISE_90).texture(TextureSlot.SIDE))
-                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.uvs(7.0F, 7.0F, 9.0F, 9.0F).rotation(FaceRotation.UPSIDE_DOWN).texture(TextureSlot.TOP))
-                    .face(Direction.UP, (faceBuilder) -> faceBuilder.uvs(4.0F, 2.0F, 6.0F, 8.0F).rotation(FaceRotation.COUNTERCLOCKWISE_90).texture(TextureSlot.SIDE))
-                    .face(Direction.DOWN, (faceBuilder) -> faceBuilder.uvs(0.0F, 2.0F, 2.0F, 8.0F).rotation(FaceRotation.COUNTERCLOCKWISE_90).texture(TextureSlot.SIDE))
+                    .face(Direction.SOUTH, (faceBuilder) -> faceBuilder.uvs(6.0F, 2.0F, 8.0F, 8.0F).rotation(Quadrant.R270).texture(TextureSlot.SIDE))
+                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.uvs(7.0F, 7.0F, 9.0F, 9.0F).rotation(Quadrant.R180).texture(TextureSlot.TOP))
+                    .face(Direction.UP, (faceBuilder) -> faceBuilder.uvs(4.0F, 2.0F, 6.0F, 8.0F).rotation(Quadrant.R270).texture(TextureSlot.SIDE))
+                    .face(Direction.DOWN, (faceBuilder) -> faceBuilder.uvs(0.0F, 2.0F, 2.0F, 8.0F).rotation(Quadrant.R270).texture(TextureSlot.SIDE))
             ).build();
     public static final ModelTemplate ROCK_1 = ModelTemplates.create("block", "_1", TextureSlot.TEXTURE, TextureSlot.PARTICLE).extend()
             .element((builder) -> builder
@@ -299,6 +299,10 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate ORIENTABLE_SECRET_TRAPDOOR_TOP = create("template_orientable_secret_trapdoor_top", "_top", TextureSlot.TEXTURE);
     public static final ModelTemplate ORIENTABLE_SECRET_TRAPDOOR_BOTTOM = create("template_orientable_secret_trapdoor_bottom", "_bottom", TextureSlot.TEXTURE);
     public static final ModelTemplate ORIENTABLE_SECRET_TRAPDOOR_OPEN = create("template_orientable_secret_trapdoor_open", "_open", TextureSlot.TEXTURE);
+    public static final ModelTemplate ARKENIUM_LANTERN = create("template_arkenium_lantern", TextureSlot.LANTERN);
+    public static final ModelTemplate HANGING_ARKENIUM_LANTERN = create("template_hanging_arkenium_lantern", "_hanging", TextureSlot.LANTERN);
+    public static final ModelTemplate RUSTIC_ARKENIUM_LANTERN = create("template_rustic_arkenium_lantern", TextureSlot.LANTERN);
+    public static final ModelTemplate HANGING_RUSTIC_ARKENIUM_LANTERN = create("template_hanging_rustic_arkenium_lantern", "_hanging", TextureSlot.LANTERN);
     public static final ModelTemplate TALL_TORCH = create("template_tall_torch", TextureSlot.TORCH);
     public static final ModelTemplate TALL_WALL_TORCH = create("template_tall_wall_torch", TextureSlot.TORCH);
     public static final ModelTemplate ALTAR = create("template_altar", TextureSlot.ALL, TextureSlot.PARTICLE);

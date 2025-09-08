@@ -81,6 +81,12 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     }
 
     @Override
+    public void renderGuidebookFowardPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        Guidebook.super.renderGuidebookFowardPage(screen, guiGraphics, mouseX, mouseY, partialTick);
+        this.currentSection.renderFoward(guiGraphics, mouseX, mouseY, partialTick);
+    }
+
+    @Override
     public void renderGuidebookLeftPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215);
@@ -97,7 +103,8 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     protected void renderMenuBackground(GuiGraphics partialTick) { }
 
     @Override
-    protected void renderBlurredBackground() { }
+    protected void renderBlurredBackground(GuiGraphics guiGraphics) {
+    }
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {

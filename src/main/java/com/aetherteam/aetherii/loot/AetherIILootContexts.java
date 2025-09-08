@@ -15,10 +15,10 @@ public class AetherIILootContexts {
         ContextKeySet.Builder lootcontextparamset$builder = new ContextKeySet.Builder();
         consumer.accept(lootcontextparamset$builder);
         ContextKeySet contextKeySet = lootcontextparamset$builder.build();
-        ResourceLocation resourcelocation = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name);
-        ContextKeySet contextKeySet1 = ContextKeySetSetsAccessor.getRegistry().put(resourcelocation, contextKeySet);
+        ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name);
+        ContextKeySet contextKeySet1 = ContextKeySetSetsAccessor.getRegistry().put(resourceLocation, contextKeySet);
         if (contextKeySet1 != null) {
-            throw new IllegalStateException("Loot table parameter set " + resourcelocation + " is already registered");
+            throw new IllegalStateException("Loot table parameter set " + resourceLocation + " is already registered");
         } else {
             return contextKeySet;
         }

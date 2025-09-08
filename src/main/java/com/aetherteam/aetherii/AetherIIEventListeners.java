@@ -91,7 +91,6 @@ public class AetherIIEventListeners {
         player.getData(AetherIIDataAttachments.PLAYER).login(player);
         player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).login(player);
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).login(player);
-        player.getData(AetherIIDataAttachments.CURRENCY).login(player); //todo verify
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).login(player);
         player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).login(player); //todo verify
         BiomeHooks.sendColors(player);
@@ -141,7 +140,6 @@ public class AetherIIEventListeners {
     public static void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
         Player player = event.getEntity();
 
-        player.getData(AetherIIDataAttachments.PLAYER).changeDimension(player);
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).changeDimension(player);
         player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT.get()).remountAerbunny(player);
     }
@@ -153,9 +151,7 @@ public class AetherIIEventListeners {
         player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.SWET_LATCH).postTickUpdate();
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).postTickUpdate(player);
-        player.getData(AetherIIDataAttachments.CURRENCY).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).postTickUpdate(player);
-        player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).postTickUpdate(player);
         PlayerHooks.forceSpecialLoadingCrouch(player);
     }
 
@@ -284,6 +280,24 @@ public class AetherIIEventListeners {
         }
     }
 
+    public static void onLivingDrops(LivingDropsEvent event) {
+        LivingEntity entity = event.getEntity();
+        Collection<ItemEntity> drops = event.getDrops();
+
+        entity.getData(AetherIIDataAttachments.ACCESSORIES).dropItems(entity, drops);
+        if (entity instanceof Player player) {
+            player.getData(AetherIIDataAttachments.CURRENCY).dropAll(player, drops);
+        }
+    }
+
+    public static void onEffectRemove(MobEffectEvent.Remove event) {
+        LivingEntity livingEntity = event.getEntity();
+        Holder<MobEffect> effect = event.getEffect();
+        if (effect.is(AetherIITags.MobEffects.MILK_DOESNT_CLEAR) && livingEntity.getUseItem().is(Tags.Items.BUCKETS_MILK)) {
+            event.setCanceled(true);
+        }
+    }
+
     public static void onBlockUpdateNeighbor(BlockEvent.NeighborNotifyEvent event) {
         LevelAccessor levelAccessor = event.getLevel();
         BlockPos blockPos = event.getPos();
@@ -343,23 +357,6 @@ public class AetherIIEventListeners {
         LivingEntity entity = event.getEntity();
         if (!BlockHooks.canBreathe(entity)) {
             event.setCanBreathe(false);
-        }
-    }
-
-    public static void onLivingDrops(LivingDropsEvent event) {
-        LivingEntity entity = event.getEntity();
-        Collection<ItemEntity> drops = event.getDrops();
-
-        if (entity instanceof Player player) {
-            player.getData(AetherIIDataAttachments.CURRENCY).dropAll(player, drops);
-        }
-    }
-
-    public static void onEffectRemove(MobEffectEvent.Remove event) {
-        LivingEntity livingEntity = event.getEntity();
-        Holder<MobEffect> effect = event.getEffect();
-        if (effect.is(AetherIITags.MobEffects.MILK_DOESNT_CLEAR) && livingEntity.getUseItem().is(Tags.Items.BUCKETS_MILK)) {
-            event.setCanceled(true);
         }
     }
 }

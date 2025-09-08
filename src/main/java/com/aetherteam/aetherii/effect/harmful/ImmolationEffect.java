@@ -29,7 +29,7 @@ public class ImmolationEffect extends MobEffect { //todo preventative measures
     public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity livingEntity, int amplifier) {
         for (Entity entity : serverLevel.getEntities(livingEntity, AABB.ofSize(livingEntity.position(), 5, 5, 5), (entity) -> entity instanceof LivingEntity living && !living.hasEffect(AetherIIEffects.IMMOLATION))) {
             if (entity instanceof LivingEntity living) {
-                living.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.IMMOLATION, 100);
+                living.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(living, EffectBuildupPresets.IMMOLATION, 100);
             }
         }
         if (livingEntity.getHealth() >= livingEntity.getMaxHealth() - DAMAGE_AMOUNT.getOrDefault(livingEntity.getType(), 10.0F)) { //todo possibly duration based.
@@ -45,7 +45,7 @@ public class ImmolationEffect extends MobEffect { //todo preventative measures
                 livingEntity.getY() + (serverLevel.getRandom().nextGaussian() / 3.0),
                 livingEntity.getZ() + (serverLevel.getRandom().nextGaussian() / 5.0),
                 2, 0.0, 0.0, 0.0, 0.0F);
-        if (livingEntity.isInWaterRainOrBubble()) {
+        if (livingEntity.isInWater()) {
             livingEntity.removeEffect(AetherIIEffects.IMMOLATION);
         }
         return true;
