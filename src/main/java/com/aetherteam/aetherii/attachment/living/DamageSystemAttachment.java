@@ -25,10 +25,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.util.ValueIOSerializable;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class DamageSystemAttachment {
+public class DamageSystemAttachment implements ValueIOSerializable {
     public static final int MAX_SHIELD_STAMINA = 500;
     private float criticalDamageModifier = 1.0F;
     private int shieldStamina = MAX_SHIELD_STAMINA;
@@ -172,5 +175,15 @@ public class DamageSystemAttachment {
 
     public int getShieldStamina() {
         return this.shieldStamina;
+    }
+
+    @Override
+    public void serialize(ValueOutput valueOutput) {
+        valueOutput.putInt("shield_stamina", this.shieldStamina);
+    }
+
+    @Override
+    public void deserialize(ValueInput valueInput) {
+        this.setShieldStamina(valueInput.getIntOr("shield_stamina", MAX_SHIELD_STAMINA));
     }
 }

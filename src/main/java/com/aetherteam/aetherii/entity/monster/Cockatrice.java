@@ -215,10 +215,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
 
         @Override
         protected void checkAndPerformAttack(LivingEntity target) {
-            if (!(this.mob.isWithinMeleeAttackRange(target) && this.mob.getSensing().hasLineOfSight(target)) && (this.attack)) {
-                this.resetAttackCooldown();
-                this.attack = false;
-            } else if (!this.attack) {
+            if ((this.mob.isWithinMeleeAttackRange(target) && this.mob.getSensing().hasLineOfSight(target)) && !this.attack) {
                 this.resetAttackCooldown();
                 this.attack = true;
             }

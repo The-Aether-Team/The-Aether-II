@@ -19,7 +19,7 @@ public class AetherIIDataAttachments {
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<DroppedItemAttachment>> DROPPED_ITEM = ATTACHMENTS.register("dropped_item", () -> AttachmentType.builder(DroppedItemAttachment::new).serialize(DroppedItemAttachment.CODEC).build());
 
     // Living
-    public static final DeferredHolder<AttachmentType<?>, AttachmentType<DamageSystemAttachment>> DAMAGE_SYSTEM = ATTACHMENTS.register("damage_system", () -> AttachmentType.builder(DamageSystemAttachment::new).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<DamageSystemAttachment>> DAMAGE_SYSTEM = ATTACHMENTS.register("damage_system", () -> AttachmentType.serializable(DamageSystemAttachment::new).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<EffectsSystemAttachment>> EFFECTS_SYSTEM = ATTACHMENTS.register("effects_system", () -> AttachmentType.builder(EffectsSystemAttachment::new).serialize(EffectsSystemAttachment.CODEC).sync(EffectsSystemAttachment.STREAM_CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<AccessoryContainer>> ACCESSORIES = ATTACHMENTS.register("accessories", () -> AttachmentType.builder(AccessoryContainer::new).serialize(AccessoryContainer.CODEC).sync(AccessoryContainer.STREAM_CODEC).copyOnDeath().build());
 
