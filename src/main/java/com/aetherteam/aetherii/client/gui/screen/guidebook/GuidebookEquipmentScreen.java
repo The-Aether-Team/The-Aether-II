@@ -188,7 +188,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     public void renderGuidebookLeftPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
         this.renderStats(guiGraphics);
-        guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215);
+        guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xffffffff);
     }
 
     private void renderStats(GuiGraphics guiGraphics) {
@@ -197,20 +197,20 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
             int y = 94;
 
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
-            guiGraphics.drawString(this.font, Component.literal((int) (this.getMenu().getMoa().getHealth()) + "/" + (int) (this.getMenu().getMoa().getMaxHealth())), x + 18, y + 4, 16777215, true);
+            guiGraphics.drawString(this.font, Component.literal((int) (this.getMenu().getMoa().getHealth()) + "/" + (int) (this.getMenu().getMoa().getMaxHealth())), x + 18, y + 4, 0xffffffff, true);
 
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
-            guiGraphics.drawString(this.font, Component.literal(this.getMenu().getMoa().getArmorValue() + "/20"), x + 72, y + 4, 16777215, true);
+            guiGraphics.drawString(this.font, Component.literal(this.getMenu().getMoa().getArmorValue() + "/20"), x + 72, y + 4, 0xffffffff, true);
         } else {
             Player player = Minecraft.getInstance().player;
             int x = 49;
             int y = 112;
 
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
-            guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x + 18, y + 4, 16777215, true);
+            guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x + 18, y + 4, 0xffffffff, true);
 
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
-            guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 72, y + 4, 16777215, true);
+            guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 72, y + 4, 0xffffffff, true);
         }
     }
 

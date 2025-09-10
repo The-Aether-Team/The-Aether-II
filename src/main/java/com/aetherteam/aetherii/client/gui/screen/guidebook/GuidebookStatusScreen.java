@@ -73,24 +73,24 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
         int x = 31;
         int y = 5;
 
-        guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215);
+        guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xffffffff);
 
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.HEARTS_SPRITE, x, y + 22, 16, 16);
-        guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x + 20, y + 26, 16777215, true);
+        guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x + 20, y + 26, 0xffffffff, true);
 
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.ARMOR_SPRITE, x, y + 38, 16, 16);
-        guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 20, y + 42, 16777215, true);
+        guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 20, y + 42, 0xffffffff, true);
 
         var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
         guiGraphics.renderItem(AetherIIItems.GLINT_COIN.toStack(), x, y + 53);
-        guiGraphics.drawString(this.font, Component.literal(String.valueOf(data.getAmount())), x + 20, y + 58, 16777215, true);
+        guiGraphics.drawString(this.font, Component.literal(String.valueOf(data.getAmount())), x + 20, y + 58, 0xffffffff, true);
     }
 
     @Override
     public void renderGuidebookRightPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         Guidebook.super.renderGuidebookRightPage(screen, guiGraphics, mouseX, mouseY, partialTick);
 
-        guiGraphics.drawCenteredString(this.font, this.rightTitle, this.titleLabelX - 12, this.titleLabelY, 16777215);
+        guiGraphics.drawCenteredString(this.font, this.rightTitle, this.titleLabelX - 12, this.titleLabelY, 0xffffffff);
     }
 
     @Override
