@@ -46,7 +46,7 @@ public class GuidebookJournalScreen extends Screen implements Guidebook {
     @Override
     public void renderGuidebookLeftPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215);
+        guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xffffffff);
     }
 
     @Override
