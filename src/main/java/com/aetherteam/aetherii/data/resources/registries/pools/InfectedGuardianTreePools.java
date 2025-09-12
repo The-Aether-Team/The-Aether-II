@@ -51,9 +51,19 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> CORRIDORS_D_E = AetherIIPools.createKey("infected_guardian_tree/corridors/d-e");
     public static final ResourceKey<StructureTemplatePool> CORRIDORS_E_E = AetherIIPools.createKey("infected_guardian_tree/corridors/e-e");
 
-    public static final ResourceKey<StructureTemplatePool> ROOMS = AetherIIPools.createKey("infected_guardian_tree/rooms");
+    public static final ResourceKey<StructureTemplatePool> ROOMS_0_0_A_B = AetherIIPools.createKey("infected_guardian_tree/rooms/0-0-a-b");
+    public static final ResourceKey<StructureTemplatePool> ROOMS_0_E_A_A = AetherIIPools.createKey("infected_guardian_tree/rooms/0-e-a-a");
+    public static final ResourceKey<StructureTemplatePool> ROOMS_B_B_D_D = AetherIIPools.createKey("infected_guardian_tree/rooms/b-b-d-d");
+    public static final ResourceKey<StructureTemplatePool> ROOMS_D_0_B_B = AetherIIPools.createKey("infected_guardian_tree/rooms/d-0-b-b");
+    public static final ResourceKey<StructureTemplatePool> ROOMS_E_B_B_0 = AetherIIPools.createKey("infected_guardian_tree/rooms/e-b-b-0");
+    public static final ResourceKey<StructureTemplatePool> ROOMS_E_C_D_A = AetherIIPools.createKey("infected_guardian_tree/rooms/e-c-d-a");
 
+    public static final ResourceKey<StructureTemplatePool> CHALLENGE_ROOMS_B_0_B_D = AetherIIPools.createKey("infected_guardian_tree/challenge_rooms/b-0-b-d");
+    public static final ResourceKey<StructureTemplatePool> CHALLENGE_ROOMS_B_B_C_A = AetherIIPools.createKey("infected_guardian_tree/challenge_rooms/b-b-c-a");
     public static final ResourceKey<StructureTemplatePool> CHALLENGE_ROOMS_B_B_C_C = AetherIIPools.createKey("infected_guardian_tree/challenge_rooms/b-b-c-c");
+    public static final ResourceKey<StructureTemplatePool> CHALLENGE_ROOMS_C_B_B_C = AetherIIPools.createKey("infected_guardian_tree/challenge_rooms/c-b-b-c");
+    public static final ResourceKey<StructureTemplatePool> CHALLENGE_ROOMS_D_B_0_C = AetherIIPools.createKey("infected_guardian_tree/challenge_rooms/d-b-0-c");
+    public static final ResourceKey<StructureTemplatePool> CHALLENGE_ROOMS_E_B_0_B = AetherIIPools.createKey("infected_guardian_tree/challenge_rooms/e-b-0-b");
 
     public static final ResourceKey<StructureTemplatePool> BOSS_ROOM = AetherIIPools.createKey("infected_guardian_tree/boss_room");
     public static final ResourceKey<StructureTemplatePool> DEAD_ENDS = AetherIIPools.createKey("infected_guardian_tree/dead_ends");
@@ -211,14 +221,63 @@ public class InfectedGuardianTreePools {
                 StructureTemplatePool.Projection.RIGID)
         );
 
-        context.register(ROOMS, new StructureTemplatePool(
+        context.register(ROOMS_0_0_A_B, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/rooms/room_01"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/rooms/0-0-a-b_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(ROOMS_0_E_A_A, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/rooms/0-e-a-a_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(ROOMS_B_B_D_D, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/rooms/b-b-d-d_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(ROOMS_D_0_B_B, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/rooms/d-0-b-b_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(ROOMS_E_B_B_0, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/rooms/e-b-b-0_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(ROOMS_E_C_D_A, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/rooms/e-c-d-a_01"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
 
+        context.register(CHALLENGE_ROOMS_B_0_B_D, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/challenge_rooms/b-0-b-d_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CHALLENGE_ROOMS_B_B_C_A, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/challenge_rooms/b-b-c-a_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
         context.register(CHALLENGE_ROOMS_B_B_C_C, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
@@ -226,6 +285,28 @@ public class InfectedGuardianTreePools {
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
+        context.register(CHALLENGE_ROOMS_C_B_B_C, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/challenge_rooms/c-b-b-c_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CHALLENGE_ROOMS_D_B_0_C, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/challenge_rooms/d-b-0-c_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CHALLENGE_ROOMS_E_B_0_B, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/challenge_rooms/e-b-0-bc_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
 
         context.register(BOSS_ROOM, new StructureTemplatePool(
                 fallback,
