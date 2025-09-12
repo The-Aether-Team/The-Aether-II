@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.item.component.Weapon;
 import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.List;
@@ -30,7 +31,8 @@ public class TieredSpearItem extends Item {
     public static Item.Properties applyWeaponProperties(Item.Properties properties, ToolMaterial toolMaterial, float damage, float speed, List<ItemAttributeModifiers.Entry> specialDamage) {
         return properties.durability(toolMaterial.durability()).repairable(toolMaterial.repairItems()).enchantable(toolMaterial.enchantmentValue())
                 .component(DataComponents.TOOL, new Tool(List.of(), 1.0F, 2, false))
-                .attributes(createAttributes(toolMaterial, damage, speed, specialDamage));
+                .attributes(createAttributes(toolMaterial, damage, speed, specialDamage))
+                .component(DataComponents.WEAPON, new Weapon(1));
     }
 
     public static ItemAttributeModifiers createAttributes(ToolMaterial toolMaterial, int attackDamage, float attackSpeed) {
