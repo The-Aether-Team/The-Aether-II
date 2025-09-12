@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.attachment.living;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractArrowAccessor;
@@ -25,10 +25,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.util.ValueIOSerializable;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class DamageSystemAttachment {
+public class DamageSystemAttachment implements ValueIOSerializable {
     public static final int MAX_SHIELD_STAMINA = 500;
     private float criticalDamageModifier = 1.0F;
     private int shieldStamina = MAX_SHIELD_STAMINA;
@@ -56,6 +59,7 @@ public class DamageSystemAttachment {
                 if (attachment.getShieldStamina() < DamageSystemAttachment.MAX_SHIELD_STAMINA && attachment.getShieldStamina() > 0) { //todo balance
                     if (!player.isBlocking()) {
                         attachment.setShieldStamina(Math.min(500, attachment.getShieldStamina() + 2));
+                        player.syncData(AetherIIDataAttachments.DAMAGE_SYSTEM);
                     }
                 }
             }
@@ -74,6 +78,7 @@ public class DamageSystemAttachment {
                     cooldown = 0;
                 }
                 this.setShieldStamina(Math.max(0, this.getShieldStamina() - rate));
+                player.syncData(AetherIIDataAttachments.DAMAGE_SYSTEM);
                 if (this.getShieldStamina() <= 0) {
                     player.level().registryAccess().lookupOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELD).forEach((item) -> player.getCooldowns().addCooldown(item.value().getDefaultInstance(), 300 - cooldown));
                     player.stopUsingItem();
@@ -170,5 +175,15 @@ public class DamageSystemAttachment {
 
     public int getShieldStamina() {
         return this.shieldStamina;
+    }
+
+    @Override
+    public void serialize(ValueOutput valueOutput) {
+        valueOutput.putInt("shield_stamina", this.shieldStamina);
+    }
+
+    @Override
+    public void deserialize(ValueInput valueInput) {
+        this.setShieldStamina(valueInput.getIntOr("shield_stamina", MAX_SHIELD_STAMINA));
     }
 }

@@ -6,11 +6,15 @@ import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
 import com.aetherteam.aetherii.attachment.player.*;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.attachment.AttachmentSyncHandler;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.attachment.IAttachmentHolder;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import org.jetbrains.annotations.Nullable;
 
 public class AetherIIDataAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, AetherII.MODID);
@@ -19,7 +23,19 @@ public class AetherIIDataAttachments {
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<DroppedItemAttachment>> DROPPED_ITEM = ATTACHMENTS.register("dropped_item", () -> AttachmentType.builder(DroppedItemAttachment::new).serialize(DroppedItemAttachment.CODEC).build());
 
     // Living
-    public static final DeferredHolder<AttachmentType<?>, AttachmentType<DamageSystemAttachment>> DAMAGE_SYSTEM = ATTACHMENTS.register("damage_system", () -> AttachmentType.builder(DamageSystemAttachment::new).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<DamageSystemAttachment>> DAMAGE_SYSTEM = ATTACHMENTS.register("damage_system", () -> AttachmentType.serializable(DamageSystemAttachment::new).sync(new AttachmentSyncHandler<>() {
+        @Override
+        public void write(RegistryFriendlyByteBuf registryFriendlyByteBuf, DamageSystemAttachment damageSystemAttachment, boolean b) {
+            registryFriendlyByteBuf.writeInt(damageSystemAttachment.getShieldStamina());
+        }
+
+        @Override
+        public @Nullable DamageSystemAttachment read(IAttachmentHolder iAttachmentHolder, RegistryFriendlyByteBuf registryFriendlyByteBuf, @Nullable DamageSystemAttachment damageSystemAttachment) {
+            DamageSystemAttachment attachment = damageSystemAttachment != null ? damageSystemAttachment : new DamageSystemAttachment();
+            attachment.setShieldStamina(registryFriendlyByteBuf.readInt());
+            return attachment;
+        }
+    }).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<EffectsSystemAttachment>> EFFECTS_SYSTEM = ATTACHMENTS.register("effects_system", () -> AttachmentType.builder(EffectsSystemAttachment::new).serialize(EffectsSystemAttachment.CODEC).sync(EffectsSystemAttachment.STREAM_CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<AccessoryContainer>> ACCESSORIES = ATTACHMENTS.register("accessories", () -> AttachmentType.builder(AccessoryContainer::new).serialize(AccessoryContainer.CODEC).sync(AccessoryContainer.STREAM_CODEC).copyOnDeath().build());
 
