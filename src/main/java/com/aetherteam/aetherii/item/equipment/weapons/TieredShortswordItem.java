@@ -16,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.item.component.Weapon;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.ItemAbility;
 
@@ -34,7 +35,8 @@ public class TieredShortswordItem extends Item {
                         Tool.Rule.minesAndDrops(HolderSet.direct(Blocks.COBWEB.builtInRegistryHolder()), 15.0F),
                         Tool.Rule.overrideSpeed(BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK).getOrThrow(BlockTags.SWORD_EFFICIENT), 1.5F)
                 ), 1.0F, 2, false))
-                .attributes(createAttributes(toolMaterial, damage, speed, specialDamage));
+                .attributes(createAttributes(toolMaterial, damage, speed, specialDamage))
+                .component(DataComponents.WEAPON, new Weapon(1));
     }
 
     public static ItemAttributeModifiers createAttributes(ToolMaterial toolMaterial, int attackDamage, float attackSpeed) {

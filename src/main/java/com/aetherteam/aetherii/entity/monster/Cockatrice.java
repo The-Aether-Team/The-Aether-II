@@ -37,7 +37,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
     public static int HIDE_ANIMATION_LENGTH = 50;
     public static int HIDE_PARTICLE_START = HIDE_ANIMATION_START + 5;
     public static int HIDE_LENGTH = HIDE_ANIMATION_START + HIDE_ANIMATION_LENGTH;
-    
+
     public static int CLAW_ATTACK_EVENT = 100;
     public static int DART_ATTACK_EVENT = 101;
     public static int DIG_EVENT = 102;
@@ -215,12 +215,11 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
 
         @Override
         protected void checkAndPerformAttack(LivingEntity target) {
-            if (!(this.mob.isWithinMeleeAttackRange(target) && this.mob.getSensing().hasLineOfSight(target)) && (!this.attack)) {
+            if ((this.mob.isWithinMeleeAttackRange(target) && this.mob.getSensing().hasLineOfSight(target)) && !this.attack) {
                 this.resetAttackCooldown();
-                this.attack = false;
-            } else {
                 this.attack = true;
             }
+
             if (this.attack && this.ticksUntilNextAttack == 30) {
                 this.mob.level().broadcastEntityEvent(this.mob, (byte) CLAW_ATTACK_EVENT);
             }

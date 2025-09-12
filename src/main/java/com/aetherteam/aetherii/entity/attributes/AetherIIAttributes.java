@@ -55,6 +55,9 @@ public class AetherIIAttributes {
     public static final DeferredHolder<Attribute, Attribute> CRYSTALLIZED_EFFECT_RESISTANCE = ATTRIBUTES.register("crystallized_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.CRYSTALLIZED, "attributes.aether_ii.crystallized_resistance", 0.0, -10.0, 10.0));
 
     public static final DeferredHolder<Attribute, Attribute> SATURATION_BOOST = ATTRIBUTES.register("saturation_boost", () -> new BaseRangedAttribute("attributes.aether_ii.saturation_boost", 1.0, 0.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> MOA_STAMINA = ATTRIBUTES.register("moa_stamina", () -> new BaseRangedAttribute("attributes.aether_ii.moa_stamina", 3.0, 3.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> MOA_STRENGTH = ATTRIBUTES.register("moa_strength", () -> new BaseRangedAttribute("attributes.aether_ii.moa_strength", 1.0, 1.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> MOA_SPEED = ATTRIBUTES.register("moa_speed", () -> new BaseRangedAttribute("attributes.aether_ii.moa_speed", 1.0, 0.0, 1024.0));
 
     public static void registerEntityAttributes(EntityAttributeModificationEvent event) {
         event.add(EntityType.PLAYER, SLASH_DAMAGE, 0.0);

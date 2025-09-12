@@ -152,7 +152,7 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
         b = (Math.min(color.getBlue() + 35, 255.0F) / 255.0F) * (float) Math.pow(weatherMultiplier, bluePower);
 
         ClientLevel.ClientLevelData worldInfo = level.getLevelData();
-        //TODO Bette Cloud system
+        //TODO Better Cloud system
         double d0 = (Minecraft.getInstance().player.getEyePosition(partialTick).y - 66) * worldInfo.voidDarknessOnsetRange();
         if (d0 < 1.0) {
             if (d0 < 0.0) {

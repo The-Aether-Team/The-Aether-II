@@ -841,12 +841,15 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_BOOTS.get(),
                 AetherIIItems.GRAVITITE_BOOTS.get()
         );
+        this.tag(Tags.Items.CHAINS).add(
+                AetherIIBlocks.ARKENIUM_CHAIN.get().asItem()
+        );
         this.tag(Tags.Items.CHESTS_WOODEN).add(
                 AetherIIBlocks.SKYROOT_CHEST.get().asItem()
         );
     }
 
-    public static class BlockToItemConverter implements TagAppender<Block, Block> {
+    public static class BlockToItemConverter implements TagAppender<Block, Block> { //todo
         private final TagAppender<Item, Item> itemAppender;
 
         public BlockToItemConverter(TagAppender<Item, Item> itemAppender) {
