@@ -18,8 +18,16 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> LAYOUT_LOBBIES_FLOOR_1 = AetherIIPools.createKey("infected_guardian_tree/layout/lobbies/floor_1");
     public static final ResourceKey<StructureTemplatePool> LAYOUT_LOBBIES_FLOOR_2 = AetherIIPools.createKey("infected_guardian_tree/layout/lobbies/floor_2");
-    public static final ResourceKey<StructureTemplatePool> LAYOUT_ROOMS = AetherIIPools.createKey("infected_guardian_tree/layout/rooms");
-    public static final ResourceKey<StructureTemplatePool> LAYOUT_CHALLENGE_ROOMS = AetherIIPools.createKey("infected_guardian_tree/layout/challenge_rooms");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_ROOMS_A = AetherIIPools.createKey("infected_guardian_tree/layout/rooms/a");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_ROOMS_B = AetherIIPools.createKey("infected_guardian_tree/layout/rooms/b");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_ROOMS_C = AetherIIPools.createKey("infected_guardian_tree/layout/rooms/c");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_ROOMS_D = AetherIIPools.createKey("infected_guardian_tree/layout/rooms/d");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_ROOMS_E = AetherIIPools.createKey("infected_guardian_tree/layout/rooms/e");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_CHALLENGE_ROOMS_A = AetherIIPools.createKey("infected_guardian_tree/layout/challenge_rooms/a");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_CHALLENGE_ROOMS_B = AetherIIPools.createKey("infected_guardian_tree/layout/challenge_rooms/b");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_CHALLENGE_ROOMS_C = AetherIIPools.createKey("infected_guardian_tree/layout/challenge_rooms/c");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_CHALLENGE_ROOMS_D = AetherIIPools.createKey("infected_guardian_tree/layout/challenge_rooms/d");
+    public static final ResourceKey<StructureTemplatePool> LAYOUT_CHALLENGE_ROOMS_E = AetherIIPools.createKey("infected_guardian_tree/layout/challenge_rooms/e");
     public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_SMALL_NO_EYES = AetherIIPools.createKey("infected_guardian_tree/layout/path/small/no_eyes");
     public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_SMALL_1_EYE = AetherIIPools.createKey("infected_guardian_tree/layout/path/small/1_eye");
     public static final ResourceKey<StructureTemplatePool> LAYOUT_PATH_MEDIUM_1_EYE = AetherIIPools.createKey("infected_guardian_tree/layout/path/medium/1_eye");
@@ -34,7 +42,6 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> LOBBIES_FLOOR_1 = AetherIIPools.createKey("infected_guardian_tree/lobbies/floor_1");
     public static final ResourceKey<StructureTemplatePool> LOBBIES_FLOOR_2 = AetherIIPools.createKey("infected_guardian_tree/lobbies/floor_2");
 
-    public static final ResourceKey<StructureTemplatePool> CORRIDORS = AetherIIPools.createKey("infected_guardian_tree/corridors"); //todo: temporary
     public static final ResourceKey<StructureTemplatePool> CORRIDORS_A_A = AetherIIPools.createKey("infected_guardian_tree/corridors/a-a");
     public static final ResourceKey<StructureTemplatePool> CORRIDORS_A_B = AetherIIPools.createKey("infected_guardian_tree/corridors/a-b");
     public static final ResourceKey<StructureTemplatePool> CORRIDORS_A_C = AetherIIPools.createKey("infected_guardian_tree/corridors/a-c");
@@ -102,7 +109,7 @@ public class InfectedGuardianTreePools {
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
-        context.register(LAYOUT_ROOMS, new StructureTemplatePool(
+        context.register(LAYOUT_ROOMS_A, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room"), 3),
@@ -111,7 +118,7 @@ public class InfectedGuardianTreePools {
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
-        context.register(LAYOUT_CHALLENGE_ROOMS, new StructureTemplatePool(
+        context.register(LAYOUT_CHALLENGE_ROOMS_A, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room"), 1)
