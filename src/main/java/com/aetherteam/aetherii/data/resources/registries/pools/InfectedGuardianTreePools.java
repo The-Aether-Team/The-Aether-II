@@ -82,7 +82,6 @@ public class InfectedGuardianTreePools {
 
     public static final ResourceKey<StructureTemplatePool> CHALLENGE_ROOMS_B_0_B_D = AetherIIPools.createKey("infected_guardian_tree/challenge_rooms/b-0-b-d");
     public static final ResourceKey<StructureTemplatePool> CHALLENGE_ROOMS_B_B_C_A = AetherIIPools.createKey("infected_guardian_tree/challenge_rooms/b-b-c-a");
-    public static final ResourceKey<StructureTemplatePool> CHALLENGE_ROOMS_B_B_C_C = AetherIIPools.createKey("infected_guardian_tree/challenge_rooms/b-b-c-c");
     public static final ResourceKey<StructureTemplatePool> CHALLENGE_ROOMS_C_B_B_C = AetherIIPools.createKey("infected_guardian_tree/challenge_rooms/c-b-b-c");
     public static final ResourceKey<StructureTemplatePool> CHALLENGE_ROOMS_D_B_0_C = AetherIIPools.createKey("infected_guardian_tree/challenge_rooms/d-b-0-c");
     public static final ResourceKey<StructureTemplatePool> CHALLENGE_ROOMS_E_B_0_B = AetherIIPools.createKey("infected_guardian_tree/challenge_rooms/e-b-0-b");
@@ -313,8 +312,7 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/challenge_rooms/b-0-b-d_01"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/challenge_rooms/b-b-c-a_01"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/challenge_rooms/b-b-c-c_01"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/challenge_rooms/b-b-c-a_01"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -351,13 +349,6 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/challenge_rooms/b-b-c-a_01"), 1)
-                ),
-                StructureTemplatePool.Projection.RIGID)
-        );
-        context.register(CHALLENGE_ROOMS_B_B_C_C, new StructureTemplatePool(
-                fallback,
-                ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/challenge_rooms/b-b-c-c_01"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
