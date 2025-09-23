@@ -15,6 +15,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
@@ -27,9 +28,7 @@ import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElementTy
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 
 /**
@@ -49,7 +48,8 @@ public class RotatablePoolElement extends StructurePoolElement {
                     overrideLiquidSettingsCodec(),
                     Codec.INT.fieldOf("discard_below_y").forGetter(structure -> structure.discardBelowY),
                     Codec.INT.fieldOf("discard_above_y").forGetter(structure -> structure.discardAboveY),
-                    Codec.BOOL.fieldOf("replace_air").forGetter(structure -> structure.replaceAir)
+                    Codec.BOOL.fieldOf("replace_air").forGetter(structure -> structure.replaceAir),
+                    PoolRotation.CODEC.fieldOf("rotation_modifier").forGetter(structure -> structure.rotationModifier)
             ).apply(instance, RotatablePoolElement::new)
     );
     protected final Either<ResourceLocation, StructureTemplate> template;
@@ -58,6 +58,7 @@ public class RotatablePoolElement extends StructurePoolElement {
     protected final int discardBelowY;
     protected final int discardAboveY;
     protected final boolean replaceAir;
+    protected final PoolRotation rotationModifier;
 
     private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> template, DynamicOps<T> ops, T prefix) {
         Optional<ResourceLocation> optional = template.left();
@@ -78,7 +79,7 @@ public class RotatablePoolElement extends StructurePoolElement {
         return TEMPLATE_CODEC.fieldOf("location").forGetter(codec -> codec.template);
     }
 
-    public RotatablePoolElement(Either<ResourceLocation, StructureTemplate> template, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, Optional<LiquidSettings> overrideLiquidSettings, int discardBelowY, int discardAboveY, boolean replaceAir) {
+    public RotatablePoolElement(Either<ResourceLocation, StructureTemplate> template, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, Optional<LiquidSettings> overrideLiquidSettings, int discardBelowY, int discardAboveY, boolean replaceAir, PoolRotation rotationModifier) {
         super(projection);
         this.template = template;
         this.processors = processors;
@@ -86,6 +87,7 @@ public class RotatablePoolElement extends StructurePoolElement {
         this.discardBelowY = discardBelowY;
         this.discardAboveY = discardAboveY;
         this.replaceAir = replaceAir;
+        this.rotationModifier = rotationModifier;
     }
 
     @Override
@@ -159,7 +161,8 @@ public class RotatablePoolElement extends StructurePoolElement {
     protected StructurePlaceSettings getSettings(Rotation rotation, BoundingBox boundingBox, LiquidSettings liquidSettings, boolean offset) {
         StructurePlaceSettings settings = new StructurePlaceSettings();
         settings.setBoundingBox(boundingBox);
-        settings.setRotation(rotation);
+        settings.setRotation(modifiedRotation(rotation, this.rotationModifier));
+        settings.setRotationPivot(new BlockPos(boundingBox.getCenter().getX(), Objects.requireNonNull(settings.getBoundingBox()).minY(), boundingBox.getCenter().getZ()));
         settings.setKnownShape(true);
         settings.setIgnoreEntities(false);
         settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
@@ -175,6 +178,56 @@ public class RotatablePoolElement extends StructurePoolElement {
         this.processors.value().list().forEach(settings::addProcessor);
         this.getProjection().getProcessors().forEach(settings::addProcessor);
         return settings;
+    }
+
+    public Rotation modifiedRotation(Rotation rotation, PoolRotation poolRotation) { //todo simplify
+        if (poolRotation == PoolRotation.ADD_90) {
+            if (rotation == Rotation.NONE) {
+                return Rotation.CLOCKWISE_90;
+            } else if (rotation == Rotation.CLOCKWISE_90) {
+                return Rotation.CLOCKWISE_180;
+            } else if (rotation == Rotation.CLOCKWISE_180) {
+                return Rotation.COUNTERCLOCKWISE_90;
+            } else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
+                return Rotation.NONE;
+            }
+        }
+        if (poolRotation == PoolRotation.ADD_180) {
+            if (rotation == Rotation.NONE) {
+                return Rotation.CLOCKWISE_180;
+            } else if (rotation == Rotation.CLOCKWISE_90) {
+                return Rotation.COUNTERCLOCKWISE_90;
+            } else if (rotation == Rotation.CLOCKWISE_180) {
+                return Rotation.NONE;
+            } else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
+                return Rotation.CLOCKWISE_90;
+            }
+        }
+        if (poolRotation == PoolRotation.ADD_270) {
+            if (rotation == Rotation.NONE) {
+                return Rotation.COUNTERCLOCKWISE_90;
+            } else if (rotation == Rotation.CLOCKWISE_90) {
+                return Rotation.NONE;
+            } else if (rotation == Rotation.CLOCKWISE_180) {
+                return Rotation.CLOCKWISE_90;
+            } else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
+                return Rotation.CLOCKWISE_180;
+            }
+        }
+        return rotation;
+    }
+
+    public enum PoolRotation implements StringRepresentable {
+        ADD_90,
+        ADD_180,
+        ADD_270;
+
+        @Override
+        public String getSerializedName() {
+            return this.name().toLowerCase(Locale.ROOT);
+        }
+
+        public static final Codec<PoolRotation> CODEC = StringRepresentable.fromEnum(PoolRotation::values);
     }
 
     @Override

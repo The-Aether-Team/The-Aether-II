@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries.pools;
 
 import com.aetherteam.aetherii.data.resources.registries.AetherIIProcessorLists;
 import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsPlacedFeatures;
+import com.aetherteam.aetherii.world.structure.pool.RotatablePoolElement;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
@@ -242,17 +243,43 @@ public class InfectedGuardianTreePools {
                 StructureTemplatePool.Projection.RIGID)
         );
 
+        context.register(ROOMS_A, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/0-0-a-b_01", RotatablePoolElement.PoolRotation.ADD_180), 1),
+                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/0-e-a-a_01", RotatablePoolElement.PoolRotation.ADD_180), 1),
+                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/0-e-a-a_01", RotatablePoolElement.PoolRotation.ADD_270), 1),
+                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/e-c-d-a_01", RotatablePoolElement.PoolRotation.ADD_270), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
         context.register(ROOMS_B, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/rooms/b-b-d-d_01"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/rooms/b-b-d-d_01"), 1),
+                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/0-0-a-b_01", RotatablePoolElement.PoolRotation.ADD_270), 1),
+                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/b-b-d-d_01", RotatablePoolElement.PoolRotation.ADD_90), 1),
+                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/d-0-b-b_01", RotatablePoolElement.PoolRotation.ADD_180), 1),
+                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/d-0-b-b_01", RotatablePoolElement.PoolRotation.ADD_270), 1),
+                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/e-b-b-0_01", RotatablePoolElement.PoolRotation.ADD_90), 1),
+                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/e-b-b-0_01", RotatablePoolElement.PoolRotation.ADD_180), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(ROOMS_C, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/e-c-d-a_01", RotatablePoolElement.PoolRotation.ADD_90), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(ROOMS_D, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/rooms/d-0-b-b_01"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/rooms/d-0-b-b_01"), 1),
+                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/b-b-d-d_01", RotatablePoolElement.PoolRotation.ADD_180), 1),
+                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/b-b-d-d_01", RotatablePoolElement.PoolRotation.ADD_270), 1),
+                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/e-c-d-a_01", RotatablePoolElement.PoolRotation.ADD_180), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
