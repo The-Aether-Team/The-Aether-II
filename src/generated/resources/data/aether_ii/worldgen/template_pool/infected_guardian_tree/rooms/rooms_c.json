@@ -1,0 +1,21 @@
+{
+  "elements": [
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -64,
+        "element_type": "aether_ii:rotatable_pool_element",
+        "location": "aether_ii:infected_guardian_tree/rooms/e-c-d-a_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": false,
+        "rotation_modifier": "add_90"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

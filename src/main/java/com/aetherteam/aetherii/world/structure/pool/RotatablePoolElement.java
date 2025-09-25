@@ -162,7 +162,7 @@ public class RotatablePoolElement extends StructurePoolElement {
         StructurePlaceSettings settings = new StructurePlaceSettings();
         settings.setBoundingBox(boundingBox);
         settings.setRotation(modifiedRotation(rotation, this.rotationModifier));
-        settings.setRotationPivot(new BlockPos(boundingBox.getCenter().getX(), Objects.requireNonNull(settings.getBoundingBox()).minY(), boundingBox.getCenter().getZ()));
+        settings.setRotationPivot(boundingBox.getCenter());
         settings.setKnownShape(true);
         settings.setIgnoreEntities(false);
         settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
