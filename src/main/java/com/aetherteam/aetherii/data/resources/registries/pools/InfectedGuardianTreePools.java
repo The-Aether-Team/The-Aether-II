@@ -127,9 +127,9 @@ public class InfectedGuardianTreePools {
         context.register(LAYOUT_ROOMS_A, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_a-a"), 1),
+                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_a-a"), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_a-b"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_a-c"), 1),
+                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_a-c"), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_a-d"), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/room_a-e"), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_mixed"), 3),
@@ -250,40 +250,42 @@ public class InfectedGuardianTreePools {
         context.register(ROOMS_A, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/0-0-a-b_01", RotatablePoolElement.PoolRotation.ADD_180), 1),
-                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/0-e-a-a_01", RotatablePoolElement.PoolRotation.ADD_180), 1),
-                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/0-e-a-a_01", RotatablePoolElement.PoolRotation.ADD_270), 1),
-                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/e-c-d-a_01", RotatablePoolElement.PoolRotation.ADD_270), 1)
+                        //Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/0-0-a-b_01", RotatablePoolElement.PoolRotation.ADD_180), 1),
+                        //Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/0-e-a-a_01", RotatablePoolElement.PoolRotation.ADD_180), 1),
+                        //Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/0-e-a-a_01", RotatablePoolElement.PoolRotation.ADD_270), 1),
+                        //Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/e-c-d-a_01", RotatablePoolElement.PoolRotation.ADD_270), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(ROOMS_B, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/rooms/b-b-d-d_01"), 1),
-                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/0-0-a-b_01", RotatablePoolElement.PoolRotation.ADD_270), 1),
-                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/b-b-d-d_01", RotatablePoolElement.PoolRotation.ADD_90), 1),
-                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/d-0-b-b_01", RotatablePoolElement.PoolRotation.ADD_180), 1),
-                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/d-0-b-b_01", RotatablePoolElement.PoolRotation.ADD_270), 1),
-                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/e-b-b-0_01", RotatablePoolElement.PoolRotation.ADD_90), 1),
-                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/e-b-b-0_01", RotatablePoolElement.PoolRotation.ADD_180), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/rooms/b-b-d-d_01"), 1)
+                        //,
+                        //Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/0-0-a-b_01", RotatablePoolElement.PoolRotation.ADD_270), 1),
+                        //Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/b-b-d-d_01", RotatablePoolElement.PoolRotation.ADD_90), 1),
+                        //Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/d-0-b-b_01", RotatablePoolElement.PoolRotation.ADD_180), 1),
+                        //Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/d-0-b-b_01", RotatablePoolElement.PoolRotation.ADD_270), 1),
+                        //Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/e-b-b-0_01", RotatablePoolElement.PoolRotation.ADD_90), 1),
+                        //Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/e-b-b-0_01", RotatablePoolElement.PoolRotation.ADD_180), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(ROOMS_C, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/e-c-d-a_01", RotatablePoolElement.PoolRotation.ADD_90), 1)
+                        //Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/e-c-d-a_01", RotatablePoolElement.PoolRotation.ADD_90), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(ROOMS_D, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/rooms/d-0-b-b_01"), 1),
-                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/b-b-d-d_01", RotatablePoolElement.PoolRotation.ADD_180), 1),
-                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/b-b-d-d_01", RotatablePoolElement.PoolRotation.ADD_270), 1),
-                        Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/e-c-d-a_01", RotatablePoolElement.PoolRotation.ADD_180), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/rooms/d-0-b-b_01"), 1)
+                        //,
+                        //Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/b-b-d-d_01", RotatablePoolElement.PoolRotation.ADD_180), 1),
+                        //Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/b-b-d-d_01", RotatablePoolElement.PoolRotation.ADD_270), 1),
+                        //Pair.of(AetherIIPools.aetherPoolRotatable("infected_guardian_tree/rooms/e-c-d-a_01", RotatablePoolElement.PoolRotation.ADD_180), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
