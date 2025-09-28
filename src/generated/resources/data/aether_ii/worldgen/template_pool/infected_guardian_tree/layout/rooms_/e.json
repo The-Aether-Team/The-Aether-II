@@ -5,7 +5,7 @@
         "discard_above_y": 384,
         "discard_below_y": -64,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:infected_guardian_tree/layouts/paths/large/2_eyes/path_01_a",
+        "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/room_e-b",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": {
           "processors": []
@@ -20,7 +20,7 @@
         "discard_above_y": 384,
         "discard_below_y": -64,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:infected_guardian_tree/layouts/paths/large/2_eyes/path_01_a_m",
+        "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/room_e-d",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": {
           "processors": []
@@ -35,7 +35,7 @@
         "discard_above_y": 384,
         "discard_below_y": -64,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:infected_guardian_tree/layouts/paths/large/2_eyes/path_02_a",
+        "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/room_e-e",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": {
           "processors": []
@@ -50,7 +50,7 @@
         "discard_above_y": 384,
         "discard_below_y": -64,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:infected_guardian_tree/layouts/paths/large/2_eyes/path_02_a_m",
+        "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/challenge_room_mixed",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": {
           "processors": []
@@ -58,7 +58,22 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 1
+      "weight": 3
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -64,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/layouts/dead_ends/dead_end_mixed",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 7
     }
   ],
   "fallback": "minecraft:empty"
