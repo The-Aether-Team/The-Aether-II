@@ -5,7 +5,7 @@
         "discard_above_y": 384,
         "discard_below_y": -64,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:infected_guardian_tree/layouts/paths/large/2_eyes/path_01_a",
+        "location": "aether_ii:infected_guardian_tree/layouts/paths/large/2_eyes/path_01_a1",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": {
           "processors": []
