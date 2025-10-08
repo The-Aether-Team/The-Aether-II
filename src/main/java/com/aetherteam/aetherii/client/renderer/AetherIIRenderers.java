@@ -2,9 +2,12 @@ package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
+import com.aetherteam.aetherii.client.renderer.block.model.AmbientOcclusionLightModel;
+import com.aetherteam.aetherii.client.renderer.block.model.FastModel;
 import com.aetherteam.aetherii.client.renderer.block.model.TrunkModel;
 import com.aetherteam.aetherii.client.renderer.blockentity.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
@@ -191,7 +194,7 @@ public class AetherIIRenderers {
     }
 
     public static void registerBakedModels(ModelEvent.ModifyBakingResult event) {
-        /*List<DeferredBlock<? extends Block>> fastBlocks = List.of(
+        List<DeferredBlock<? extends Block>> fastBlocks = List.of(
                 AetherIIBlocks.HIGHLANDS_BUSH,
                 AetherIIBlocks.BLUEBERRY_BUSH,
                 AetherIIBlocks.POTTED_HIGHLANDS_BUSH,
@@ -215,9 +218,11 @@ public class AetherIIRenderers {
                 AetherIIBlocks.LOCKED_LUCENT_INFECTED_ROOTS,
                 AetherIIBlocks.LOCKED_INFECTED_LAMP);
 
-        getModels(event.getBakingResult().blockStateModels(), fastBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new FastModel(entry.getValue())));
-        getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
- */
+        event.getBakingResult().blockStateModels().computeIfPresent(AetherIIBlocks.AMBROSIUM_ORE.get().defaultBlockState(), (location, model) -> new AmbientOcclusionLightModel(model));
+
+//        getModels(event.getBakingResult().blockStateModels(), fastBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new FastModel(entry.getValue())));
+//        getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
+
     }
 
     private static List<Map.Entry<BlockState, BlockStateModel>> getModels(Map<BlockState, BlockStateModel> originalModels, List<DeferredBlock<? extends Block>> blocks) {
