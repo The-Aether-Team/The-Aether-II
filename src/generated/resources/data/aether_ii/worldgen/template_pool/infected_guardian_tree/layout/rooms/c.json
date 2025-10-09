@@ -104,6 +104,12 @@
         "replace_air": false
       },
       "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:empty_pool_element"
+      },
+      "weight": 4
     }
   ],
   "fallback": "minecraft:empty"

@@ -131,10 +131,10 @@ public class InfectedGuardianTreePools {
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-b"), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-c"), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-d"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-e"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_a-e"), 1),
                         //,
 
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/dead_ends/dead_end_mixed"), 7)
+                        Pair.of(StructurePoolElement.empty(), 4)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -151,10 +151,10 @@ public class InfectedGuardianTreePools {
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-b"), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-c"), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-d"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-e"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_b-e"), 1),
                         //,
 
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/dead_ends/dead_end_mixed"), 7)
+                        Pair.of(StructurePoolElement.empty(), 4)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -171,10 +171,10 @@ public class InfectedGuardianTreePools {
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-b"), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-c"), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-d"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-e"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_c-e"), 1),
                         //,
 
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/dead_ends/dead_end_mixed"), 7)
+                        Pair.of(StructurePoolElement.empty(), 4)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -191,10 +191,10 @@ public class InfectedGuardianTreePools {
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-b"), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-c"), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-d"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-e"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_d-e"), 1),
                         //,
 
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/dead_ends/dead_end_mixed"), 7)
+                        Pair.of(StructurePoolElement.empty(), 4)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -211,10 +211,10 @@ public class InfectedGuardianTreePools {
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-b"), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-c"), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-d"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-e"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/additional_rooms/challenge_room_e-e"), 1),
                         //,
 
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/dead_ends/dead_end_mixed"), 7)
+                        Pair.of(StructurePoolElement.empty(), 4)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
