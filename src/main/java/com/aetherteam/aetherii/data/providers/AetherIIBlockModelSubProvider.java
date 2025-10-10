@@ -811,7 +811,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public void createAmbrosiumTorch() {
         TextureMapping mapping = TextureMapping.torch(AetherIIBlocks.AMBROSIUM_TORCH.get());
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.AMBROSIUM_TORCH.get(), plainVariant(AetherIIModelTemplates.TALL_TORCH.create(AetherIIBlocks.AMBROSIUM_TORCH.get(), mapping, this.modelOutput))));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.AMBROSIUM_WALL_TORCH.get(), plainVariant(AetherIIModelTemplates.TALL_WALL_TORCH.create(AetherIIBlocks.AMBROSIUM_WALL_TORCH.get(), mapping, this.modelOutput))).with(ROTATION_HORIZONTAL_FACING));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.AMBROSIUM_WALL_TORCH.get(), plainVariant(AetherIIModelTemplates.TALL_WALL_TORCH.create(AetherIIBlocks.AMBROSIUM_WALL_TORCH.get(), mapping, this.modelOutput))).with(ROTATION_TORCH));
         this.registerSimpleFlatItemModel(AetherIIBlocks.AMBROSIUM_TORCH.get());
     }
 
