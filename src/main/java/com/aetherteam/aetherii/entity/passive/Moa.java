@@ -355,7 +355,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
             if (this.getRandom().nextInt(900) == 0 && this.deathTime == 0) {
                 this.heal(1.0F);
             }
-            if (!this.isBaby() && this.getRandom().nextInt(2500) == 0) {
+            if (!this.isBaby() && this.getRandom().nextInt(3750) == 0) {
                 if (this.level() instanceof ServerLevel serverLevel) {
                     ItemStack featherStack = new ItemStack(AetherIIItems.MOA_FEATHER.get());
                     featherStack.set(AetherIIDataComponents.FEATHER_COLOR, FeatherColor.valueOf(this.getFeatherColor().toUpperCase(Locale.ROOT)));
