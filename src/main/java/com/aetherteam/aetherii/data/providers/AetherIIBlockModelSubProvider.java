@@ -421,24 +421,22 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createCustomFlowerBed(Block block, ResourceLocation flowerbed1, ResourceLocation flowerbed2, ResourceLocation flowerbed3, ResourceLocation flowerbed4) {
+        MultiVariant multivariant = plainVariant(flowerbed1);
+        MultiVariant multivariant1 = plainVariant(flowerbed2);
+        MultiVariant multivariant2 = plainVariant(flowerbed3);
+        MultiVariant multivariant3 = plainVariant(flowerbed4);
         this.registerSimpleFlatItemModel(block.asItem());
-        this.blockStateOutput.accept(MultiPartGenerator.multiPart(block)
-                .with(condition().term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH), plainVariant(flowerbed1))
-                .with(condition().term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST), plainVariant(flowerbed1).with(Y_ROT_90))
-                .with(condition().term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH), plainVariant(flowerbed1).with(Y_ROT_180))
-                .with(condition().term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST), plainVariant(flowerbed1).with(Y_ROT_270))
-                .with(condition().term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH), plainVariant(flowerbed2))
-                .with(condition().term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST), plainVariant(flowerbed2).with(Y_ROT_90))
-                .with(condition().term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH), plainVariant(flowerbed2).with(Y_ROT_180))
-                .with(condition().term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST), plainVariant(flowerbed2).with(Y_ROT_270))
-                .with(condition().term(BlockStateProperties.FLOWER_AMOUNT, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH), plainVariant(flowerbed3))
-                .with(condition().term(BlockStateProperties.FLOWER_AMOUNT, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST), plainVariant(flowerbed3).with(Y_ROT_90))
-                .with(condition().term(BlockStateProperties.FLOWER_AMOUNT, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH), plainVariant(flowerbed3).with(Y_ROT_180))
-                .with(condition().term(BlockStateProperties.FLOWER_AMOUNT, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST), plainVariant(flowerbed3).with(Y_ROT_270))
-                .with(condition().term(BlockStateProperties.FLOWER_AMOUNT, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH), plainVariant(flowerbed4))
-                .with(condition().term(BlockStateProperties.FLOWER_AMOUNT, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST), plainVariant(flowerbed4).with(Y_ROT_90))
-                .with(condition().term(BlockStateProperties.FLOWER_AMOUNT, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH), plainVariant(flowerbed4).with(Y_ROT_180))
-                .with(condition().term(BlockStateProperties.FLOWER_AMOUNT, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST), plainVariant(flowerbed4).with(Y_ROT_270)));
+        this.createSegmentedBlock(
+                block,
+                multivariant,
+                FLOWER_BED_MODEL_1_SEGMENT_CONDITION,
+                multivariant1,
+                FLOWER_BED_MODEL_2_SEGMENT_CONDITION,
+                multivariant2,
+                FLOWER_BED_MODEL_3_SEGMENT_CONDITION,
+                multivariant3,
+                FLOWER_BED_MODEL_4_SEGMENT_CONDITION
+        );
     }
 
     public void createWovenSticks(Block sticks) {
