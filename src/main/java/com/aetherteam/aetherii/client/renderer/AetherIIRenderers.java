@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
 import com.aetherteam.aetherii.client.renderer.block.model.AmbientOcclusionLightModel;
 import com.aetherteam.aetherii.client.renderer.block.model.FastModel;
 import com.aetherteam.aetherii.client.renderer.block.model.TrunkModel;
+import com.aetherteam.aetherii.client.renderer.block.model.TrunkModelNew;
 import com.aetherteam.aetherii.client.renderer.blockentity.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
 import com.aetherteam.aetherii.client.renderer.entity.*;
@@ -191,6 +192,10 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.GLOVES, () -> GlovesModel.createLayer(new CubeDeformation(0.6F), false));
         event.registerLayerDefinition(AetherIIModelLayers.GLOVES_SLIM, () -> GlovesModel.createLayer(new CubeDeformation(0.6F), true));
         event.registerLayerDefinition(AetherIIModelLayers.GLOVES_FIRST_PERSON, () -> GlovesModel.createLayer(new CubeDeformation(0.25F), false));
+    }
+
+    public static void registerLoaders(ModelEvent.RegisterLoaders event) {
+        event.register(TrunkModelNew.TrunkUnbakedModelLoader.ID, TrunkModelNew.TrunkUnbakedModelLoader.INSTANCE);
     }
 
     public static void registerBakedModels(ModelEvent.ModifyBakingResult event) {
