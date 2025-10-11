@@ -6,10 +6,11 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
-import com.aetherteam.aetherii.client.renderer.block.model.AmbientOcclusionLightModel;
-import com.aetherteam.aetherii.client.renderer.block.model.FastModel;
-import com.aetherteam.aetherii.client.renderer.block.model.TrunkModel;
-import com.aetherteam.aetherii.client.renderer.block.model.TrunkModelNew;
+import com.aetherteam.aetherii.client.renderer.block.model.blockstate.AmbientOcclusionLightModel;
+import com.aetherteam.aetherii.client.renderer.block.model.blockstate.FastModel;
+//import com.aetherteam.aetherii.client.renderer.block.model.TrunkModel;
+//import com.aetherteam.aetherii.client.renderer.block.model.TrunkModelNew;
+import com.aetherteam.aetherii.client.renderer.block.model.blockstate.TrunkModel;
 import com.aetherteam.aetherii.client.renderer.blockentity.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
 import com.aetherteam.aetherii.client.renderer.entity.*;
@@ -194,8 +195,8 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.GLOVES_FIRST_PERSON, () -> GlovesModel.createLayer(new CubeDeformation(0.25F), false));
     }
 
-    public static void registerLoaders(ModelEvent.RegisterLoaders event) {
-        event.register(TrunkModelNew.TrunkUnbakedModelLoader.ID, TrunkModelNew.TrunkUnbakedModelLoader.INSTANCE);
+    public static void registerBlockStateModels(RegisterBlockStateModels event) {
+        event.registerModel(TrunkModel.Unbaked.ID , TrunkModel.Unbaked.CODEC);
     }
 
     public static void registerBakedModels(ModelEvent.ModifyBakingResult event) {
@@ -265,10 +266,6 @@ public class AetherIIRenderers {
             }
         }
         return models;
-    }
-
-    public static void registerBlockStateModels(RegisterBlockStateModels event) {
-        event.registerModel(TrunkModel.Unbaked.ID , TrunkModel.Unbaked.CODEC);
     }
 
     public static void registerSpecialModelRenderers(RegisterSpecialModelRendererEvent event) {

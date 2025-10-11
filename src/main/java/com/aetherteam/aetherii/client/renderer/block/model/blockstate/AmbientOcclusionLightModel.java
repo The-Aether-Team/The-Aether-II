@@ -1,20 +1,20 @@
-package com.aetherteam.aetherii.client.renderer.block.model;
+package com.aetherteam.aetherii.client.renderer.block.model.blockstate;
 
-import net.minecraft.client.Minecraft;
+import com.aetherteam.aetherii.client.renderer.block.model.part.AOModelPart;
 import net.minecraft.client.renderer.block.model.BlockModelPart;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.block.model.SimpleModelWrapper;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.TriState;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.DelegateBlockStateModel;
 
 import java.util.List;
 
-public class FastModel extends DelegateBlockStateModel {
-    public FastModel(BlockStateModel originalModel) {
+public class AmbientOcclusionLightModel extends DelegateBlockStateModel {
+    public AmbientOcclusionLightModel(BlockStateModel originalModel) {
         super(originalModel);
     }
 
@@ -22,7 +22,7 @@ public class FastModel extends DelegateBlockStateModel {
     public void collectParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockModelPart> parts) {
         for (BlockModelPart part : this.delegate.collectParts(level, pos, state, random)) {
             if (part instanceof SimpleModelWrapper simpleModelWrapper) {
-                parts.add(new SimpleModelWrapper(simpleModelWrapper.quads(), simpleModelWrapper.useAmbientOcclusion(), simpleModelWrapper.particleIcon(), Minecraft.useFancyGraphics() ? ChunkSectionLayer.CUTOUT_MIPPED : ChunkSectionLayer.SOLID));
+                parts.add(new AOModelPart(simpleModelWrapper.quads(), TriState.TRUE, simpleModelWrapper.particleIcon(), simpleModelWrapper.getRenderType(state)));
             }
         }
     }

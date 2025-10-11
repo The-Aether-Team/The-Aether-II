@@ -2,6 +2,13 @@
   "multipart": [
     {
       "apply": {
+        "type": "aether_ii:trunk_corners",
+        "corner": "aether_ii:block/greatroot_trunk_corner",
+        "corner_tall": "aether_ii:block/greatroot_trunk_corner_tall"
+      }
+    },
+    {
+      "apply": {
         "model": "aether_ii:block/greatroot_trunk_center"
       },
       "when": {

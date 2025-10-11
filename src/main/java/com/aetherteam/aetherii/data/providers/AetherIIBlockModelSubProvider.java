@@ -7,7 +7,7 @@ import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.utility.AltarBlock;
 import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
 import com.aetherteam.aetherii.client.AetherIIColorResolvers;
-import com.aetherteam.aetherii.client.renderer.block.model.TrunkModelNew;
+import com.aetherteam.aetherii.client.renderer.block.model.builder.TrunkModelBuilder;
 import com.aetherteam.aetherii.client.renderer.item.color.AetherGrassColorSource;
 import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
@@ -63,37 +63,27 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 
     public void createTrunk(Block trunk, Block log) {
         TextureMapping mapping = TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE);
-        Variant side = plainModel(AetherIIModelTemplates.TRUNK_SIDE.create(trunk, mapping, this.modelOutput));
-        Variant corner = plainModel(AetherIIModelTemplates.TRUNK_CORNER.create(trunk, mapping, this.modelOutput));
-        Variant sideTall = plainModel(AetherIIModelTemplates.TRUNK_SIDE_TALL.create(trunk, mapping, this.modelOutput));
-        Variant cornerTall = plainModel(AetherIIModelTemplates.TRUNK_CORNER_TALL.create(trunk, mapping, this.modelOutput));
+        MultiVariant side = plainVariant(AetherIIModelTemplates.TRUNK_SIDE.create(trunk, mapping, this.modelOutput));
+        MultiVariant sideTall = plainVariant(AetherIIModelTemplates.TRUNK_SIDE_TALL.create(trunk, mapping, this.modelOutput));
+        ResourceLocation corner = AetherIIModelTemplates.TRUNK_CORNER.create(trunk, mapping, this.modelOutput);
+        ResourceLocation cornerTall = AetherIIModelTemplates.TRUNK_CORNER_TALL.create(trunk, mapping, this.modelOutput);
         ResourceLocation inventory = AetherIIModelTemplates.TRUNK_INVENTORY.create(trunk, mapping, this.modelOutput);
 
-        Consumer<TrunkModelNew.TrunkModelBuilder> connections = (loader) -> {
-            loader.add(new TrunkModelNew.Holder(TrunkModelNew.NORTHWEST_CONNECTION.getName(), WallSide.LOW), corner.with(UV_LOCK));
-            loader.add(new TrunkModelNew.Holder(TrunkModelNew.NORTHEAST_CONNECTION.getName(), WallSide.LOW), corner.with(Y_ROT_90).with(UV_LOCK));
-            loader.add(new TrunkModelNew.Holder(TrunkModelNew.SOUTHEAST_CONNECTION.getName(), WallSide.LOW), corner.with(Y_ROT_180).with(UV_LOCK));
-            loader.add(new TrunkModelNew.Holder(TrunkModelNew.SOUTHWEST_CONNECTION.getName(), WallSide.LOW), corner.with(Y_ROT_270).with(UV_LOCK));
-            loader.add(new TrunkModelNew.Holder(TrunkModelNew.NORTHWEST_CONNECTION.getName(), WallSide.TALL), cornerTall.with(UV_LOCK));
-            loader.add(new TrunkModelNew.Holder(TrunkModelNew.NORTHEAST_CONNECTION.getName(), WallSide.TALL), cornerTall.with(Y_ROT_90).with(UV_LOCK));
-            loader.add(new TrunkModelNew.Holder(TrunkModelNew.SOUTHEAST_CONNECTION.getName(), WallSide.TALL), cornerTall.with(Y_ROT_180).with(UV_LOCK));
-            loader.add(new TrunkModelNew.Holder(TrunkModelNew.SOUTHWEST_CONNECTION.getName(), WallSide.TALL), cornerTall.with(Y_ROT_270).with(UV_LOCK));
-        };
-
-        Variant center = plainModel(AetherIIModelTemplates.TRUNK_CENTER.extend().customLoader(TrunkModelNew.TrunkModelBuilder::new, connections).build().create(trunk, mapping, this.modelOutput));
-        Variant centerTall = plainModel(AetherIIModelTemplates.TRUNK_CENTER_TALL.extend().customLoader(TrunkModelNew.TrunkModelBuilder::new, connections).build().create(trunk, mapping, this.modelOutput));
+        MultiVariant center = plainVariant(AetherIIModelTemplates.TRUNK_CENTER.extend().build().create(trunk, mapping, this.modelOutput));
+        MultiVariant centerTall = plainVariant(AetherIIModelTemplates.TRUNK_CENTER_TALL.extend().build().create(trunk, mapping, this.modelOutput));
 
         MultiPartGenerator model = MultiPartGenerator.multiPart(trunk)
-                .with(condition().term(TrunkBlock.TALL, false), variant(center))
-                .with(condition().term(TrunkBlock.TALL, true), variant(centerTall))
-                .with(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.LOW), variant(side.with(UV_LOCK)))
-                .with(condition().term(TrunkBlock.EAST_CONNECTION, WallSide.LOW), variant(side.with(Y_ROT_90).with(UV_LOCK)))
-                .with(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.LOW), variant(side.with(Y_ROT_180).with(UV_LOCK)))
-                .with(condition().term(TrunkBlock.WEST_CONNECTION, WallSide.LOW), variant(side.with(Y_ROT_270).with(UV_LOCK)))
-                .with(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.TALL), variant(sideTall.with(UV_LOCK)))
-                .with(condition().term(TrunkBlock.EAST_CONNECTION, WallSide.TALL), variant(sideTall.with(Y_ROT_90).with(UV_LOCK)))
-                .with(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.TALL), variant(sideTall.with(Y_ROT_180).with(UV_LOCK)))
-                .with(condition().term(TrunkBlock.WEST_CONNECTION, WallSide.TALL), variant(sideTall.with(Y_ROT_270).with(UV_LOCK)));
+                .with(MultiVariant.of(new TrunkModelBuilder(corner, cornerTall)))
+                .with(condition().term(TrunkBlock.TALL, false), center)
+                .with(condition().term(TrunkBlock.TALL, true), centerTall)
+                .with(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.LOW), side.with(UV_LOCK))
+                .with(condition().term(TrunkBlock.EAST_CONNECTION, WallSide.LOW), side.with(Y_ROT_90).with(UV_LOCK))
+                .with(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.LOW), side.with(Y_ROT_180).with(UV_LOCK))
+                .with(condition().term(TrunkBlock.WEST_CONNECTION, WallSide.LOW), side.with(Y_ROT_270).with(UV_LOCK))
+                .with(condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.TALL), sideTall.with(UV_LOCK))
+                .with(condition().term(TrunkBlock.EAST_CONNECTION, WallSide.TALL), sideTall.with(Y_ROT_90).with(UV_LOCK))
+                .with(condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.TALL), sideTall.with(Y_ROT_180).with(UV_LOCK))
+                .with(condition().term(TrunkBlock.WEST_CONNECTION, WallSide.TALL), sideTall.with(Y_ROT_270).with(UV_LOCK));
 
         this.blockStateOutput.accept(model);
         this.registerSimpleItemModel(trunk, inventory);
@@ -118,6 +108,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.registerSimpleFlatItemModel(block.asItem());
         this.blockStateOutput.accept(createDoor(block, left, bottomLeftOpen, bottomRight, bottomRightOpen, topLeft, topLeftOpen, topRight, topRightOpen));
     }
+
     @Override
     public void createOrientableTrapdoor(Block block) {
         TextureMapping mapping = TextureMapping.defaultTexture(block);
