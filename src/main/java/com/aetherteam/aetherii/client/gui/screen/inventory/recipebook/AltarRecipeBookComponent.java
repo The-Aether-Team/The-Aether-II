@@ -22,7 +22,7 @@ public class AltarRecipeBookComponent extends RecipeBookComponent<AltarMenu> {
             ResourceLocation.withDefaultNamespace("recipe_book/furnace_filter_enabled_highlighted"),
             ResourceLocation.withDefaultNamespace("recipe_book/furnace_filter_disabled_highlighted")
     );
-    private static final Component FILTER_NAME = Component.translatable("gui.aether.recipebook.toggleRecipes.enchantable");
+    private static final Component FILTER_NAME = Component.translatable("gui.aether_ii.recipebook.toggleRecipes.enchantable");
 
     public AltarRecipeBookComponent(AltarMenu menu, List<TabInfo> tabs) {
         super(menu, tabs);
