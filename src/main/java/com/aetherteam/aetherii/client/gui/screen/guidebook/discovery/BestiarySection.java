@@ -214,7 +214,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
             if (this.isUnlocked(entry, BestiaryEntry.SLOT_SUBTITLE.id()) && entry.getSlotSubtitle().isPresent()) {
                 components.add(Component.translatable(entry.getSlotSubtitle().get()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
             }
-            guiGraphics.setComponentTooltipForNextFrame(Minecraft.getInstance().font, components, (int) (mouseX - leftPagePos), (int) (mouseY - topPos));
+            guiGraphics.setComponentTooltipForNextFrame(Minecraft.getInstance().font, components, (int) mouseX, (int) mouseY);
         }
     }
 
