@@ -1240,6 +1240,23 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider { //todo fix some
                 .pattern("#/#")
                 .unlockedBy("has_beast_pelt", has(AetherIIItems.BEAST_PELT))
                 .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.MOA_SADDLEBAG.get())
+                .define('C', AetherIIBlocks.SKYROOT_CHEST)
+                .define('#', AetherIIItems.BEAST_PELT)
+                .define('/', AetherIIItems.CLOUDTWINE)
+                .pattern("###")
+                .pattern("/C/")
+                .unlockedBy("has_beast_pelt", has(AetherIIItems.BEAST_PELT))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.LARGE_MOA_SADDLEBAG.get())
+                .define('C', AetherIIBlocks.SKYROOT_CHEST)
+                .define('#', AetherIIItems.BEAST_PELT)
+                .define('/', AetherIIItems.CLOUDTWINE)
+                .pattern("###")
+                .pattern("#C#")
+                .pattern("/#/")
+                .unlockedBy("has_beast_pelt", has(AetherIIItems.BEAST_PELT))
+                .save(this.output);
 
 
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, new ItemStack(AetherIIItems.SPLINT.get()))
