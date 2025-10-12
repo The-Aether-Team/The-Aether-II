@@ -63,13 +63,13 @@ public class AccessoryContainer extends SimpleContainer {
     }
 
     public enum SlotType {
-        RELIC(new int[] { 0 }),
-        HANDWEAR(new int[] { 1 }),
-        ACCESSORY(new int[] { 2, 3 });
+        RELIC(0),
+        HANDWEAR(1),
+        ACCESSORY(2, 3);
 
         private final int[] index;
 
-        SlotType(int[] index) {
+        SlotType(int... index) {
             this.index = index;
         }
 
