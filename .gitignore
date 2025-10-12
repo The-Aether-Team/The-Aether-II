@@ -24,3 +24,4 @@ runs
 __pycache__
 logs
 src/generated/resources/.cache
+.vscode/

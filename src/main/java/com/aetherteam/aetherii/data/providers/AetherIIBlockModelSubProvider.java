@@ -817,7 +817,8 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 
     public void createArtisansBench(Block block, Block particle) {
         MultiVariant crafter = plainVariant(AetherIIModelTemplates.ARTISANS_BENCH.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, crafter));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, crafter)
+                .with(ROTATION_HORIZONTAL_FACING));
     }
 
     public void createArkeniumForge(Block block, Block particle) {
