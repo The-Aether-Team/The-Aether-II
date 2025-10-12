@@ -25,7 +25,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
     @SuppressWarnings("unchecked")
     @Override
     public void addTags(HolderLookup.Provider provider) {
-
         new AetherIIBlockItemTagProvider() {
             @Override
             protected TagAppender<Block, Block> tag(TagKey<Block> blockKey, TagKey<Item> itemKey) {
@@ -561,10 +560,12 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 AetherIIBlocks.HOLYSTONE.get(),
+                AetherIIBlocks.UNSTABLE_HOLYSTONE.get(),
                 AetherIIBlocks.MOSSY_HOLYSTONE.get(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE.get(),
                 AetherIIBlocks.IRRADIATED_DUST_BLOCK.get(),
                 AetherIIBlocks.UNDERSHALE.get(),
+                AetherIIBlocks.UNSTABLE_UNDERSHALE.get(),
                 AetherIIBlocks.AGIOSITE.get(),
                 AetherIIBlocks.ICHORITE.get(),
                 AetherIIBlocks.POINTED_HOLYSTONE.get(),

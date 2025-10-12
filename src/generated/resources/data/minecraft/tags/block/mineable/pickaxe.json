@@ -1,10 +1,12 @@
 {
   "values": [
     "aether_ii:holystone",
+    "aether_ii:unstable_holystone",
     "aether_ii:mossy_holystone",
     "aether_ii:irradiated_holystone",
     "aether_ii:irradiated_dust_block",
     "aether_ii:undershale",
+    "aether_ii:unstable_undershale",
     "aether_ii:agiosite",
     "aether_ii:ichorite",
     "aether_ii:pointed_holystone",
