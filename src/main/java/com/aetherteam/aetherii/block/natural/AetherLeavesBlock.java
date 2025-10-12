@@ -63,23 +63,20 @@ public class AetherLeavesBlock extends LeavesBlock {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (random.nextInt(40) == 0) {
-            if (level.isRaining()) {
-                Direction direction = Direction.get(Direction.DOWN.getAxisDirection(), Direction.Axis.Y);
-                BlockPos.MutableBlockPos mutablePos = pos.mutable();
-                for (int i = 1; i < 20; ++i) {
-                    mutablePos.move(direction);
-                    BlockState mutableState = level.getBlockState(mutablePos);
-                    BlockPos abovePos = mutablePos.above();
-                    BlockState aboveState = level.getBlockState(abovePos);
-                    BlockState pileState = this.leavesPile.value().defaultBlockState();
-                    if (Block.canSupportCenter(level, mutablePos, Direction.UP) && aboveState.isAir() && pileState.canSurvive(level, abovePos)) {
-                        level.setBlock(mutablePos.above(), pileState, 2);
-                        break;
-                    }
-                    if (level.isOutsideBuildHeight(mutablePos.getY()) || mutableState.isSolidRender() || !mutableState.getFluidState().isEmpty() || Shapes.joinIsNotEmpty(Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0), mutableState.getCollisionShape(level, mutablePos), BooleanOp.AND)) {
-                        break;
-                    }
+        if (level.isRaining() && random.nextInt(40) == 0) {
+            BlockPos.MutableBlockPos mutablePos = pos.mutable();
+            for (int i = 1; i < 20; ++i) {
+                mutablePos.move(Direction.DOWN);
+                BlockState mutableState = level.getBlockState(mutablePos);
+                BlockPos abovePos = mutablePos.above();
+                BlockState aboveState = level.getBlockState(abovePos);
+                BlockState pileState = this.leavesPile.value().defaultBlockState();
+                if (Block.canSupportCenter(level, mutablePos, Direction.UP) && aboveState.isAir() && pileState.canSurvive(level, abovePos)) {
+                    level.setBlock(mutablePos.above(), pileState, 2);
+                    break;
+                }
+                if (level.isOutsideBuildHeight(mutablePos.getY()) || mutableState.isSolidRender() || !mutableState.getFluidState().isEmpty() || Shapes.joinIsNotEmpty(Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0), mutableState.getCollisionShape(level, mutablePos), BooleanOp.AND)) {
+                    break;
                 }
             }
         }
@@ -105,28 +102,36 @@ public class AetherLeavesBlock extends LeavesBlock {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        int bound = level.isRaining() ? 100 : 200;
-        if (random.nextInt(bound) == 0) {
-            this.spawnLeavesParticles(level, pos, random);
-        }
+        this.leafParticleChance = level.isRaining()? 0.01f : 0.005f;
         if (level instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HighlandsSpecialEffects) {
-            if (level.isRainingAt(pos.above())) {
-                if (random.nextInt(15) == 1) {
-                    BlockPos belowPos = pos.below();
-                    BlockState belowState = level.getBlockState(belowPos);
-                    if (!belowState.canOcclude() || !belowState.isFaceSturdy(level, belowPos, Direction.UP)) {
-                        ParticleUtils.spawnParticleBelow(level, pos, random, AetherIIParticleTypes.DRIPPING_WATER.get());
-                    }
-                }
-            }
+            BlockPos belowPos = pos.below();
+            BlockState belowState = level.getBlockState(belowPos);
+            makeAetherDrippingWaterParticles(level, pos, random, belowState, belowPos);
+            this.makeFallingLeavesParticles(clientLevel, pos, random, belowState, belowPos);
         } else {
             super.animateTick(state, level, pos, random);
         }
     }
 
     @Override
-    protected void spawnFallingLeavesParticle(Level level, BlockPos blockPos, RandomSource randomSource) {
+    protected void spawnFallingLeavesParticle(Level level, BlockPos pos, RandomSource random) {
+        BlockPos belowPos = pos.below();
+        BlockState belowState = level.getBlockState(belowPos);
+        if (!isFaceFull(belowState.getCollisionShape(level, belowPos), Direction.UP)) {
+            ParticleUtils.spawnParticleBelow(level, pos, random, this.leavesParticle);
+        }
+    }
 
+    private static void makeAetherDrippingWaterParticles(Level level, BlockPos pos, RandomSource random, BlockState blockBelow, BlockPos belowPos) {
+        if (level.isRainingAt(pos.above()) && random.nextInt(15) == 1 && (!blockBelow.canOcclude() || !blockBelow.isFaceSturdy(level, belowPos, Direction.UP))) {
+            ParticleUtils.spawnParticleBelow(level, pos, random, AetherIIParticleTypes.DRIPPING_WATER.get());
+        }
+   }
+
+    private void makeFallingLeavesParticles(Level level, BlockPos pos, RandomSource random, BlockState blockBelow, BlockPos belowPos) {
+        if (!(random.nextFloat() >= this.leafParticleChance) && !isFaceFull(blockBelow.getCollisionShape(level, belowPos), Direction.UP)) {
+            this.spawnFallingLeavesParticle(level, pos, random);
+        }
     }
 
     @Override
@@ -134,16 +139,8 @@ public class AetherLeavesBlock extends LeavesBlock {
         super.stepOn(level, pos, state, entity);
         if (!entity.isCrouching() && entity.getX() != entity.xOld && entity.getZ() != entity.zOld) {
             if (level.getRandom().nextInt(10) == 0) {
-                this.spawnLeavesParticles(level, pos, level.getRandom());
+                this.spawnFallingLeavesParticle(level, pos, level.getRandom());
             }
-        }
-    }
-
-    private void spawnLeavesParticles(Level level, BlockPos pos, RandomSource random) {
-        BlockPos belowPos = pos.below();
-        BlockState belowState = level.getBlockState(belowPos);
-        if (!isFaceFull(belowState.getCollisionShape(level, belowPos), Direction.UP)) {
-            ParticleUtils.spawnParticleBelow(level, pos, random, this.leavesParticle);
         }
     }
 
