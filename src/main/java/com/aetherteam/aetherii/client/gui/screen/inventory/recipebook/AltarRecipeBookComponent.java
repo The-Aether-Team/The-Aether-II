@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.gui.screen.inventory.recipebook;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.AltarMenu;
 import com.aetherteam.aetherii.recipe.display.AltarRecipeDisplay;
 import net.minecraft.client.gui.components.WidgetSprites;
@@ -17,11 +18,10 @@ import java.util.List;
 
 public class AltarRecipeBookComponent extends RecipeBookComponent<AltarMenu> {
     private static final WidgetSprites FILTER_SPRITES = new WidgetSprites(
-            ResourceLocation.withDefaultNamespace("recipe_book/furnace_filter_enabled"),
-            ResourceLocation.withDefaultNamespace("recipe_book/furnace_filter_disabled"),
-            ResourceLocation.withDefaultNamespace("recipe_book/furnace_filter_enabled_highlighted"),
-            ResourceLocation.withDefaultNamespace("recipe_book/furnace_filter_disabled_highlighted")
-    );
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/altar_filter_enabled"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/altar_filter_disabled"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/altar_filter_enabled_highlighted"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/altar_filter_disabled_highlighted"));
     private static final Component FILTER_NAME = Component.translatable("gui.aether_ii.recipebook.toggleRecipes.enchantable");
 
     public AltarRecipeBookComponent(AltarMenu menu, List<TabInfo> tabs) {
