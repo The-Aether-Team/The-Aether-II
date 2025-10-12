@@ -300,10 +300,6 @@ public class TieredCrossbowItem extends CrossbowItem {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        ChargedProjectiles chargedProjectiles = stack.get(DataComponents.CHARGED_PROJECTILES);
-        if (chargedProjectiles != null && !chargedProjectiles.isEmpty()) {
-            ItemStack projectile = chargedProjectiles.getItems().get(0);
-            tooltipAdder.accept(Component.translatable("item.minecraft.crossbow.projectile").append(CommonComponents.SPACE).append(projectile.getDisplayName()));
-        }
+
     }
 }
