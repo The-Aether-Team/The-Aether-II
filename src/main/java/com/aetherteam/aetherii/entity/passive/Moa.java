@@ -441,7 +441,6 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 this.flap = Mth.clamp(this.flap - 0.2F, 0, 1F);
             }
         }
-        this.checkFallDistanceAccumulation(); // Resets the Moa's fall distance.
     }
 
     public float getFlyAmount(float pPartialTicks) {
