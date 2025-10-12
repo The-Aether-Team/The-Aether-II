@@ -280,7 +280,7 @@ public class InfectedGuardianTreePools {
         context.register(LAYOUT_PATH_SMALL_1_EYE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/small/1_eye/path_01"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/small/1_eye/path_01_a"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -513,7 +513,7 @@ public class InfectedGuardianTreePools {
         context.register(CHALLENGE_ROOMS_E, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/challenge_rooms/e-b-0-bc_01"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/challenge_rooms/e-b-0-e_01"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
