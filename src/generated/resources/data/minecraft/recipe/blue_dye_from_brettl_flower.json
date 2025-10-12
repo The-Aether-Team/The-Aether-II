@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "group": "magenta_dye",
+  "group": "blue_dye",
   "ingredients": [
-    "aether_ii:holpupea"
+    "aether_ii:brettl_flower"
   ],
   "result": {
     "count": 1,
-    "id": "minecraft:magenta_dye"
+    "id": "minecraft:blue_dye"
   }
 }

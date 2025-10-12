@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_holpupea": {
+    "has_cockatrice_feather": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:holpupea"
+            "items": "aether_ii:cockatrice_feather"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:magenta_dye_from_holpupea"
+        "recipe": "minecraft:purple_dye_from_cockatrice_feather"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_holpupea"
+      "has_cockatrice_feather"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:magenta_dye_from_holpupea"
+      "minecraft:purple_dye_from_cockatrice_feather"
     ]
   }
 }

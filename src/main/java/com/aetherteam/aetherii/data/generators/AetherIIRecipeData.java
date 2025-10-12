@@ -1173,19 +1173,22 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider { //todo fix some
                     .save(this.output, getItemName(featherDye.getValue()) + "_from_" + featherDye.getKey().getSerializedName());
         }
 
+        oneToOneConversionRecipe(Items.PURPLE_DYE, AetherIIItems.COCKATRICE_FEATHER.get(), "purple_dye");
+
         oneToOneConversionRecipe(Items.YELLOW_DYE, AetherIIBlocks.BLADE_POA, "yellow_dye");
         oneToOneConversionRecipe(Items.WHITE_DYE, AetherIIBlocks.HESPEROSE, "white_dye");
         oneToOneConversionRecipe(Items.PURPLE_DYE, AetherIIBlocks.TARABLOOM, "purple_dye");
-        oneToOneConversionRecipe(Items.PURPLE_DYE, AetherIIItems.SATIVAL_BULB, "purple_dye");
+        oneToOneConversionRecipe(Items.MAGENTA_DYE, AetherIIItems.SATIVAL_BULB, "magenta_dye");
         oneToOneConversionRecipe(Items.WHITE_DYE, AetherIIBlocks.POASPROUT, "white_dye");
-        oneToOneConversionRecipe(Items.LIGHT_BLUE_DYE, AetherIIBlocks.BRETTL_FLOWER, "light_blue_dye");
+        oneToOneConversionRecipe(Items.BLUE_DYE, AetherIIBlocks.BRETTL_FLOWER, "blue_dye");
         oneToOneConversionRecipe(Items.LIGHT_BLUE_DYE, AetherIIBlocks.LILICHIME, "light_blue_dye");
         oneToOneConversionRecipe(Items.CYAN_DYE, AetherIIBlocks.PLURACIAN, "cyan_dye");
-        oneToOneConversionRecipe(Items.BLUE_DYE, AetherIIBlocks.SATIVAL_SHOOT, "blue_dye");
+        oneToOneConversionRecipe(Items.LIGHT_BLUE_DYE, AetherIIBlocks.SATIVAL_SHOOT, "light_blue_dye");
         oneToOneConversionRecipe(Items.PINK_DYE, AetherIIBlocks.BRYALINN_MOSS_FLOWERS, "pink_dye");
-        oneToOneConversionRecipe(Items.MAGENTA_DYE, AetherIIBlocks.HOLPUPEA, "magenta_dye");
+        oneToOneConversionRecipe(Items.PURPLE_DYE, AetherIIBlocks.HOLPUPEA, "purple_dye");
         oneToOneConversionRecipe(Items.MAGENTA_DYE, AetherIIBlocks.TARAHESP_FLOWERS, "magenta_dye");
         oneToOneConversionRecipe(Items.BROWN_DYE, AetherIIBlocks.SKY_ROOTS, "brown_dye");
+        oneToOneConversionRecipe(Items.PURPLE_DYE, AetherIIBlocks.AECHOR_CUTTING, "purple_dye");
 
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.GREEN_SWET_JELLY.get(), 1)
                 .requires(AetherIIItems.GREEN_SWET_GEL)

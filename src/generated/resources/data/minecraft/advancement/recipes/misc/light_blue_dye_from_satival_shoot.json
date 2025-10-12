@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_satival_bulb": {
+    "has_satival_shoot": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:satival_bulb"
+            "items": "aether_ii:satival_shoot"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:purple_dye_from_satival_bulb"
+        "recipe": "minecraft:light_blue_dye_from_satival_shoot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_satival_bulb"
+      "has_satival_shoot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:purple_dye_from_satival_bulb"
+      "minecraft:light_blue_dye_from_satival_shoot"
     ]
   }
 }

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_brettl_flower": {
+    "has_aechor_cutting": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:brettl_flower"
+            "items": "aether_ii:aechor_cutting"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:light_blue_dye_from_brettl_flower"
+        "recipe": "minecraft:purple_dye_from_aechor_cutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_brettl_flower"
+      "has_aechor_cutting"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:light_blue_dye_from_brettl_flower"
+      "minecraft:purple_dye_from_aechor_cutting"
     ]
   }
 }
