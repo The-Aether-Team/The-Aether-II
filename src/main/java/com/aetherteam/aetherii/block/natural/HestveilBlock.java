@@ -4,14 +4,18 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.network.packet.clientbound.HestveilExplosionEffectsPacket;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -131,7 +135,24 @@ public class HestveilBlock extends Block implements CanisterPickup {
     public void explode(LevelAccessor level, BlockPos pos, boolean playSound) {
         if (level.removeBlock(pos, false)) {
             if (level instanceof ServerLevel serverLevel) {
-                PacketDistributor.sendToPlayersInDimension(serverLevel, new HestveilExplosionEffectsPacket(pos, playSound));
+                if (playSound) {
+                    serverLevel.playSound(null,
+                            pos.getX(),
+                            pos.getY(),
+                            pos.getZ(),
+                            AetherIISoundEvents.BLOCK_HESTVEIL_IGNITE,
+                            SoundSource.BLOCKS,
+                            10.0F,
+                            (1.0F + (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.2F) * 0.7F);
+                }
+                for (int i = 0; i <= 5; i++) {
+                    serverLevel.sendParticles(ParticleTypes.FLAME,
+                            pos.getX() + serverLevel.getRandom().nextDouble(),
+                            pos.getY() + serverLevel.getRandom().nextDouble(),
+                            pos.getZ() + serverLevel.getRandom().nextDouble(),
+                            1, 0, 0, 0, 0);
+                }
+                PacketDistributor.sendToPlayersInDimension(serverLevel, new HestveilExplosionEffectsPacket(pos));
             }
             for (Entity entity : level.getEntities(null, AABB.encapsulatingFullBlocks(pos, pos))) {
                 if (entity instanceof LivingEntity livingEntity) {
