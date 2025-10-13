@@ -34,14 +34,14 @@ public class BladeShroomHunterRenderer<T extends BladeShroomHunter> extends MobR
         renderState.attachDir = bladeShroom.getAttachFacing();
         renderState.attachChangeProgress = bladeShroom.getAttachAmount(p_361157_);
         renderState.attackAnimationState.copyFrom(bladeShroom.axeAttackAnimationState);
-        renderState.burryAnimationState.copyFrom(bladeShroom.burryAnimationState);
-        renderState.unburryAnimationState.copyFrom(bladeShroom.unburryAnimationState);
+        renderState.buryAnimationState.copyFrom(bladeShroom.buryAnimationState);
+        renderState.unburyAnimationState.copyFrom(bladeShroom.unburyAnimationState);
         renderState.rustleAnimationState.copyFrom(bladeShroom.rustleAnimationState);
     }
 
     @Override
     protected void setupRotations(BladeShroomHunterRenderState entity, PoseStack poseStack, float rotationYaw, float p_320045_) {
-        float trans = 6.5F / 16F;
+        float trans = 8F / 16F;
         if (entity.pose != Pose.SLEEPING) {
             if (entity.attachDir == Direction.DOWN) {
                 super.setupRotations(entity, poseStack, rotationYaw, p_320045_);
@@ -51,15 +51,15 @@ public class BladeShroomHunterRenderer<T extends BladeShroomHunter> extends MobR
                 float pitch = (float) -Math.toDegrees(Mth.atan2(entity.rotations.y, Math.sqrt(entity.rotations.x * entity.rotations.x + entity.rotations.z * entity.rotations.z)));
                 float prevYaw = (float) Math.toDegrees(Mth.atan2(entity.prevRotations.x, entity.prevRotations.z));
                 float prevPitch = (float) -Math.toDegrees(Mth.atan2(entity.prevRotations.y, Math.sqrt(entity.prevRotations.x * entity.prevRotations.x + entity.prevRotations.z * entity.prevRotations.z)));
-                float realYaw = prevYaw * (1 - entity.attachChangeProgress) - yaw * entity.attachChangeProgress;
-                float realPitch = prevPitch * (1 - entity.attachChangeProgress) - pitch * entity.attachChangeProgress;
+                float realYaw = yaw;
+                float realPitch = pitch;
                 poseStack.translate(0.0F, trans, 0.0F);
 
                 poseStack.mulPose(Axis.YP.rotationDegrees(realYaw));
                 poseStack.mulPose(Axis.XP.rotationDegrees(-90 + realPitch));
                 //poseStack.mulPose(Axis.YP.rotationDegrees(realDiff * realYaw));
 
-                poseStack.translate(0.0F, -trans, 0.0F);
+                poseStack.translate(0.0F, -trans - 4 / 16F, 0.0F);
                 super.setupRotations(entity, poseStack, 0.0F, p_320045_);
             }
         } else {

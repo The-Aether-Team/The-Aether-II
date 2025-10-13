@@ -90,12 +90,9 @@ public class CellingMonster extends Monster {
         boolean flag2 = this.moveControl.hasWanted() && this.moveControl.getWantedY() - this.getY() > 0;
 
 
-        if (this.canResetCellingState()) {
-            if (this.getAttachFacing() != Direction.DOWN) {
-                this.stopCelling();
-            }
-        } else if (!flag && !flag2 && (this.onGround() && !this.canResetCellingState() || this.isInWater() || this.isInLava() || this.isInFluidType())) {
-            this.stopCelling();
+        if (!flag && !flag2 && (this.onGround() && this.isInWater() || this.isInLava() || this.isInFluidType())) {
+            this.entityData.set(ATTACHED_FACE, Direction.DOWN);
+            this.setCellRotation(new Quaternionf());
         } else {
             Direction closestDirection = null;
             Quaternionf closestRotation = new Quaternionf();
@@ -163,7 +160,8 @@ public class CellingMonster extends Monster {
                 this.entityData.set(ATTACHED_FACE, closestDirection);
                 this.setCellRotation(closestRotation);
             } else if (Direction.DOWN != this.getDirection() && closestDirection == null) {
-                this.stopCelling();
+                this.entityData.set(ATTACHED_FACE, Direction.DOWN);
+                this.setCellRotation(new Quaternionf());
             }
         }
         profilerfiller.pop();
@@ -173,10 +171,6 @@ public class CellingMonster extends Monster {
     public void stopCelling() {
         this.entityData.set(ATTACHED_FACE, Direction.DOWN);
         this.setCellRotation(new Quaternionf());
-    }
-
-    protected boolean canResetCellingState() {
-        return true;
     }
 
     @Override

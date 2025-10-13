@@ -83,7 +83,7 @@ public class AetherIIEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<GravititeTaluton>> GRAVITITE_TALUTON = ENTITY_TYPES.register("gravitite_taluton",
             () -> EntityType.Builder.of(GravititeTaluton::new, MobCategory.MONSTER).sized(0.75F, 1.9F).eyeHeight(1.4F).clientTrackingRange(10).build(AetherIIEntities.GRAVITITE_TALUTON));
     public static final DeferredHolder<EntityType<?>, EntityType<BladeShroomHunter>> BLADE_SHROOM_HUNTER = ENTITY_TYPES.register("bladeshroom_hunter",
-            () -> EntityType.Builder.of(BladeShroomHunter::new, MobCategory.MONSTER).sized(0.9F, 1.25F).eyeHeight(1.4F).clientTrackingRange(10).build(AetherIIEntities.BLADE_SHROOM_HUNTER));
+            () -> EntityType.Builder.of(BladeShroomHunter::new, MobCategory.MONSTER).sized(0.9F, 1.3F).eyeHeight(1.2F).clientTrackingRange(10).build(AetherIIEntities.BLADE_SHROOM_HUNTER));
 
     // NPCs
     public static final DeferredHolder<EntityType<?>, EntityType<Edward>> EDWARD = ENTITY_TYPES.register("edward",

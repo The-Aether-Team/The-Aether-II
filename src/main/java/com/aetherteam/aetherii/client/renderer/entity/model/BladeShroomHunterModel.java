@@ -17,8 +17,8 @@ import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class BladeShroomHunterModel<T extends BladeShroomHunterRenderState> extends EntityModel<T> {
     public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/attack"));
-    public static final AnimationHolder BURRY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/burry"));
-    public static final AnimationHolder UNBURRY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/unburry"));
+    public static final AnimationHolder BURRY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/bury"));
+    public static final AnimationHolder UNBURRY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/unbury"));
     public static final AnimationHolder RUSTLE_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/rustle"));
 
 
@@ -160,8 +160,8 @@ public class BladeShroomHunterModel<T extends BladeShroomHunterRenderState> exte
         this.head.xRot = (entity.xRot * Mth.DEG_TO_RAD) + 0.0873F;
         this.head.yRot = entity.yRot * Mth.DEG_TO_RAD;
         this.attackAnimation.apply(entity.attackAnimationState, entity.ageInTicks, 1.0F);
-        this.burryAnimation.apply(entity.burryAnimationState, entity.ageInTicks, 1.0F);
-        this.unburryAnimation.apply(entity.unburryAnimationState, entity.ageInTicks, 1.0F);
+        this.burryAnimation.apply(entity.buryAnimationState, entity.ageInTicks, 1.0F);
+        this.unburryAnimation.apply(entity.unburyAnimationState, entity.ageInTicks, 1.0F);
         this.rustleAnimation.apply(entity.rustleAnimationState, entity.ageInTicks, 1.0F);
 
         this.leg_back_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;

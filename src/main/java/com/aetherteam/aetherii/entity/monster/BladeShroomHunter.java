@@ -5,13 +5,14 @@ import com.aetherteam.aetherii.entity.ai.controller.CellingMoveControl;
 import com.aetherteam.aetherii.entity.ai.navigator.CellingPathNavigation;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.core.Direction;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.util.TimeUtil;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -33,7 +34,6 @@ import java.util.function.IntFunction;
 
 public class BladeShroomHunter extends CellingMonster {
     public static int ATTACK_EVENT = 100;
-    public static int RUSTLE_EVENT = 101;
 
     private int hideCooldownTime;
     private int burryTime;
@@ -43,13 +43,26 @@ public class BladeShroomHunter extends CellingMonster {
     public static final EntityDataAccessor<State> DATA_BURY_ID = SynchedEntityData.defineId(BladeShroomHunter.class, AetherIIDataSerializers.BLADE_SHROOM_HUNTER_STATE.get());
 
     public AnimationState axeAttackAnimationState = new AnimationState();
-    public AnimationState burryAnimationState = new AnimationState();
-    public AnimationState unburryAnimationState = new AnimationState();
+    public AnimationState buryAnimationState = new AnimationState();
+    public AnimationState unburyAnimationState = new AnimationState();
     public AnimationState rustleAnimationState = new AnimationState();
+
+    private static final EntityDimensions BURRY_DIMENSIONS = EntityDimensions.scalable(0.9F, 0.9F).withEyeHeight(0.45F);
+
 
     public BladeShroomHunter(EntityType<? extends BladeShroomHunter> p_33002_, Level p_33003_) {
         super(p_33002_, p_33003_);
         this.hideCooldownTime = this.pickNextHideCooldownTime();
+        this.refreshDimensions();
+    }
+
+    @Override
+    public void onSyncedDataUpdated(EntityDataAccessor<?> p_316145_) {
+        if (DATA_BURY_ID.equals(p_316145_)) {
+            this.refreshDimensions();
+        }
+
+        super.onSyncedDataUpdated(p_316145_);
     }
 
 
@@ -75,12 +88,10 @@ public class BladeShroomHunter extends CellingMonster {
         super.defineSynchedData(builder);
         builder.define(DATA_BURY_ID, State.IDLING);
     }
-
     @Override
-    public void onSyncedDataUpdated(EntityDataAccessor<?> p_316145_) {
-        super.onSyncedDataUpdated(p_316145_);
-
-        if (DATA_BURY_ID.equals(p_316145_)) {
+    public void tick() {
+        super.tick();
+        if (this.level().isClientSide()) {
             this.setupAnimationStates();
         }
     }
@@ -102,47 +113,76 @@ public class BladeShroomHunter extends CellingMonster {
     @Override
     public void aiStep() {
         super.aiStep();
-        if (this.getState() == State.HIDING && this.getTarget() != null) {
-            this.setState(State.UNBURRY);
-            this.hideCooldownTime = this.pickNextHideCooldownTime();
-        } else if (this.getState() == State.IDLING && this.getTarget() == null && --this.hideCooldownTime <= 0) {
-            this.setState(State.BURRY_START);
-        }
+        if (!this.level().isClientSide()) {
 
-        if (this.getState() == State.BURRY_START && this.burryTime >= 20 * 1.8F) {
-            this.setState(State.HIDING);
-        }
-        if (this.getState() == State.UNBURRY && this.burryTime >= 20 * 1.38F) {
-            this.setState(State.IDLING);
+            if (this.getState() == State.BURY_START || this.getState() == State.UNBURY) {
+                ++this.burryTime;
+            } else if (this.getState() == State.IDLING) {
+                --this.hideCooldownTime;
+            }
+            if (this.getState() == State.HIDING && this.getTarget() != null) {
+                this.setState(State.UNBURY);
+                this.burryTime = 0;
+                this.hideCooldownTime = this.pickNextHideCooldownTime();
+            } else if (this.getState() == State.IDLING && this.getTarget() == null && this.hideCooldownTime <= 0) {
+                this.setState(State.BURY_START);
+                this.burryTime = 0;
+                this.hideCooldownTime = this.pickNextHideCooldownTime();
+            }
+
+
+            if (this.getState() == State.BURY_START && this.burryTime >= 20 * 1.8F) {
+                this.setState(State.HIDING);
+            }
+            if (this.getState() == State.UNBURY && this.burryTime >= 20 * 1.38F) {
+                this.setState(State.IDLING);
+            }
         }
     }
 
+    @Override
+    public void knockback(double strength, double x, double z) {
+        if (this.getState() != State.HIDING && this.getState() != State.UNBURY) {
+            super.knockback(strength, x, z);
+        }
+    }
+
+    @Override
+    protected void customServerAiStep(ServerLevel p_376725_) {
+        if (this.getState() == State.IDLING) {
+            if (this.getAttachFacing() != Direction.DOWN) {
+                this.stopCelling();
+            }
+        } else {
+            super.customServerAiStep(p_376725_);
+        }
+    }
 
     private int pickNextHideCooldownTime() {
-        return this.random.nextInt(20 * TimeUtil.SECONDS_PER_MINUTE) + 20 * TimeUtil.SECONDS_PER_MINUTE;
+        return this.random.nextInt(20 * 30) + 20 * 30;
     }
 
     private void setupAnimationStates() {
         switch (this.getState()) {
             case IDLING:
                 this.rustleAnimationState.stop();
-                this.burryAnimationState.stop();
-                this.unburryAnimationState.stop();
+                this.buryAnimationState.stop();
+                this.unburyAnimationState.stop();
                 break;
-            case BURRY_START:
+            case BURY_START:
                 this.rustleAnimationState.stop();
-                this.burryAnimationState.stop();
-                this.unburryAnimationState.start(this.tickCount);
+                this.unburyAnimationState.stop();
+                this.buryAnimationState.startIfStopped(this.tickCount);
                 break;
-            case UNBURRY:
+            case UNBURY:
                 this.rustleAnimationState.stop();
-                this.unburryAnimationState.stop();
-                this.burryAnimationState.start(this.tickCount);
+                this.buryAnimationState.stop();
+                this.unburyAnimationState.startIfStopped(this.tickCount);
                 break;
             case HIDING:
-                this.rustleAnimationState.start(this.tickCount);
-                this.burryAnimationState.stop();
-                this.unburryAnimationState.stop();
+                this.rustleAnimationState.startIfStopped(this.tickCount);
+                this.buryAnimationState.stop();
+                this.unburyAnimationState.stop();
         }
     }
 
@@ -150,10 +190,6 @@ public class BladeShroomHunter extends CellingMonster {
     public void handleEntityEvent(byte id) {
         if (id == ATTACK_EVENT) {
             this.axeAttackAnimationState.start(this.tickCount);
-        } else if (id == RUSTLE_EVENT) {
-            this.rustleAnimationState.start(this.tickCount);
-            this.burryAnimationState.stop();
-            this.unburryAnimationState.stop();
         } else {
             super.handleEntityEvent(id);
         }
@@ -175,23 +211,17 @@ public class BladeShroomHunter extends CellingMonster {
         });
     }
 
-    @Override
-    protected boolean canResetCellingState() {
-        return !(this.getState() == State.HIDING || this.getState() == State.BURRY_START || this.getState() == State.UNBURRY);
-    }
-
     public State getState() {
         return this.getEntityData().get(DATA_BURY_ID);
     }
 
     public void setState(State state) {
         if (state != this.getState()) {
-            if (state == State.BURRY_START || state == State.HIDING) {
+            if (state == State.BURY_START || state == State.HIDING) {
                 this.cellingSetup();
             } else {
                 this.normalPathSetup();
             }
-            this.burryTime = 0;
         }
 
         this.getEntityData().set(DATA_BURY_ID, state);
@@ -200,7 +230,13 @@ public class BladeShroomHunter extends CellingMonster {
     @Override
     public void stopCelling() {
         super.stopCelling();
-        this.setState(State.UNBURRY);
+        this.setState(State.UNBURY);
+        this.burryTime = 0;
+    }
+
+    @Override
+    public EntityDimensions getDefaultDimensions(Pose p_316426_) {
+        return this.getState() == State.HIDING ? BURRY_DIMENSIONS : super.getDefaultDimensions(p_316426_);
     }
 
     protected static class ShroomHunterMeleeAttackGoal extends MeleeAttackGoal {
@@ -232,7 +268,7 @@ public class BladeShroomHunter extends CellingMonster {
 
         @Override
         protected void checkAndPerformAttack(LivingEntity target) {
-            if (this.mob instanceof BladeShroomHunter bladeShroomHunter && !bladeShroomHunter.canResetCellingState()) {
+            if (this.mob instanceof BladeShroomHunter bladeShroomHunter && bladeShroomHunter.getState() != State.IDLING) {
                 this.attack = false;
             } else {
 
@@ -293,7 +329,7 @@ public class BladeShroomHunter extends CellingMonster {
 
         @Override
         public boolean canUse() {
-            return this.bladeShroom.getState() == State.BURRY_START || this.bladeShroom.getState() == State.UNBURRY;
+            return this.bladeShroom.getState() == State.BURY_START || this.bladeShroom.getState() == State.UNBURY;
         }
 
         @Override
@@ -304,8 +340,8 @@ public class BladeShroomHunter extends CellingMonster {
 
     public static enum State implements StringRepresentable {
         IDLING("idle", 0),
-        BURRY_START("burry", 1),
-        UNBURRY("unburry", 2),
+        BURY_START("bury", 1),
+        UNBURY("unbury", 2),
         HIDING("hiding", 3);
 
         static final Codec<State> CODEC = StringRepresentable.fromEnum(State::values);

@@ -12,7 +12,7 @@ public class BladeShroomHunterRenderState extends LivingEntityRenderState {
     public Direction attachDir = Direction.DOWN;
     public float attachChangeProgress;
     public AnimationState attackAnimationState = new AnimationState();
-    public AnimationState burryAnimationState = new AnimationState();
-    public AnimationState unburryAnimationState = new AnimationState();
+    public AnimationState buryAnimationState = new AnimationState();
+    public AnimationState unburyAnimationState = new AnimationState();
     public AnimationState rustleAnimationState = new AnimationState();
 }
