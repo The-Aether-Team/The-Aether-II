@@ -21,6 +21,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.InterpolationHandler;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -42,6 +43,8 @@ public class HoveringBlockEntity extends Entity {
     private static final EntityDataAccessor<Integer> DATA_OWNER_ID = SynchedEntityData.defineId(HoveringBlockEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<BlockPos> DATA_START_POS_ID = SynchedEntityData.defineId(HoveringBlockEntity.class, EntityDataSerializers.BLOCK_POS);
     private static final EntityDataAccessor<CompoundTag> DATA_BLOCK_ENTITY_DATA_ID = SynchedEntityData.defineId(HoveringBlockEntity.class, EntityDataSerializers.COMPOUND_TAG);
+
+    private final InterpolationHandler interpolation = new InterpolationHandler(this, 3);
 
     private BlockState blockState = Blocks.SAND.defaultBlockState();
     protected boolean held = true;
@@ -107,6 +110,8 @@ public class HoveringBlockEntity extends Entity {
             this.setDeltaMovement(this.getDeltaMovement().scale(0.98));
         }
 
+        this.interpolation.interpolate();
+        
         /*if (!this.level().isClientSide()) {
             if (this.lerpSteps > 0) {
                 this.lerpPositionAndRotationStep(this.lerpSteps, this.lerpX, this.lerpY, this.lerpZ, this.getYRot(), this.getXRot());
@@ -253,32 +258,38 @@ public class HoveringBlockEntity extends Entity {
     }
 
     /*@Override
-    public void lerpPositionAndRotationStep(int pSteps, double pX, double pY, double pZ, double pYRot, double pXRot) {
-        this.lerpX = pX;
-        this.lerpY = pY;
-        this.lerpZ = pZ;
-        double d0 = (double)1.0F / (double)pSteps;
-        float f = (float) Mth.rotLerp(d0, (double)this.getYRot(), pYRot);
-        float f1 = (float)Mth.lerp(d0, (double)this.getXRot(), pXRot);
-        this.setRot(f, f1);
-        this.lerpSteps = pSteps;
-    }
+        public void lerpPositionAndRotationStep(int pSteps, double pX, double pY, double pZ, double pYRot, double pXRot) {
+            this.lerpX = pX;
+            this.lerpY = pY;
+            this.lerpZ = pZ;
+            double d0 = (double)1.0F / (double)pSteps;
+            float f = (float) Mth.rotLerp(d0, (double)this.getYRot(), pYRot);
+            float f1 = (float)Mth.lerp(d0, (double)this.getXRot(), pXRot);
+            this.setRot(f, f1);
+            this.lerpSteps = pSteps;
+        }
+
+        @Override
+        public double lerpTargetX() {
+            return this.lerpSteps > 0 ? this.lerpX : this.getX();
+        }
+
+        @Override
+        public double lerpTargetY() {
+            return this.lerpSteps > 0 ? this.lerpY : this.getY();
+        }
+
+        @Override
+        public double lerpTargetZ() {
+            return this.lerpSteps > 0 ? this.lerpZ : this.getZ();
+        }
+    */
 
     @Override
-    public double lerpTargetX() {
-        return this.lerpSteps > 0 ? this.lerpX : this.getX();
+    public InterpolationHandler getInterpolation() {
+        return this.interpolation;
     }
 
-    @Override
-    public double lerpTargetY() {
-        return this.lerpSteps > 0 ? this.lerpY : this.getY();
-    }
-
-    @Override
-    public double lerpTargetZ() {
-        return this.lerpSteps > 0 ? this.lerpZ : this.getZ();
-    }
-*/
     @Override
     protected void addAdditionalSaveData(ValueOutput output) {
         output.store("BlockState", BlockState.CODEC, this.blockState);
