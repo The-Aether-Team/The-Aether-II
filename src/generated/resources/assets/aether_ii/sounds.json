@@ -1358,27 +1358,33 @@
     "sounds": [
       {
         "name": "aether_ii:music/aether1",
-        "stream": true
+        "stream": true,
+        "volume": 0.4
       },
       {
         "name": "aether_ii:music/aether2",
-        "stream": true
+        "stream": true,
+        "volume": 0.4
       },
       {
         "name": "aether_ii:music/aether3",
-        "stream": true
+        "stream": true,
+        "volume": 0.4
       },
       {
         "name": "aether_ii:music/aether4",
-        "stream": true
+        "stream": true,
+        "volume": 0.4
       },
       {
         "name": "aether_ii:music/aether5",
-        "stream": true
+        "stream": true,
+        "volume": 0.4
       },
       {
         "name": "aether_ii:music/aether6",
-        "stream": true
+        "stream": true,
+        "volume": 0.4
       }
     ]
   },
@@ -1386,7 +1392,8 @@
     "sounds": [
       {
         "name": "aether_ii:music/aether_ambience1",
-        "stream": true
+        "stream": true,
+        "volume": 0.4
       }
     ]
   },
@@ -1394,11 +1401,13 @@
     "sounds": [
       {
         "name": "aether_ii:music/aether_night1",
-        "stream": true
+        "stream": true,
+        "volume": 0.4
       },
       {
         "name": "aether_ii:music/aether_night2",
-        "stream": true
+        "stream": true,
+        "volume": 0.4
       }
     ]
   },
@@ -1406,7 +1415,8 @@
     "sounds": [
       {
         "name": "aether_ii:music/aether_sunrise",
-        "stream": true
+        "stream": true,
+        "volume": 0.4
       }
     ]
   },
@@ -1414,7 +1424,8 @@
     "sounds": [
       {
         "name": "aether_ii:music/aether_sunset",
-        "stream": true
+        "stream": true,
+        "volume": 0.4
       }
     ]
   },
