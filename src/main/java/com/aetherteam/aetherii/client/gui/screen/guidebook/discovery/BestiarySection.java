@@ -136,7 +136,6 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     }
 
     public void renderRotatingEntity(GuiGraphics guiGraphics, int startX, int startY, int endX, int endY, int scale, float yOffset, float angleXComponent, float angleYComponent, LivingEntity livingEntity) {
-        int scaleFactor = 30 / scale;
         Quaternionf xQuaternion = new Quaternionf().rotateZ(Mth.PI);
         Quaternionf zQuaternion = new Quaternionf().rotateX(angleYComponent * Mth.DEG_TO_RAD);
         xQuaternion.mul(zQuaternion);
@@ -148,9 +147,10 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         livingEntity.setXRot(-angleYComponent);
         livingEntity.setYHeadRot(livingEntity.getYRot());
         livingEntity.yHeadRotO = livingEntity.getYRot();
-        Vector3f vector3f = new Vector3f(0.0F, livingEntity.getBbHeight() / 2.0F + yOffset, 0.0F);
+        livingEntity.tickCount = -1;
 
-        InventoryScreen.renderEntityInInventory(guiGraphics, startX, startY, endX, endY, 30F, vector3f, xQuaternion, zQuaternion, livingEntity);
+        Vector3f vector3f = new Vector3f(0.0F, livingEntity.getBbHeight() / 2.0F + yOffset, 0.0F);
+        InventoryScreen.renderEntityInInventory(guiGraphics, startX, startY, endX, endY, scale, vector3f, xQuaternion, zQuaternion, livingEntity);
         livingEntity.setYBodyRot(yBodyRot);
         livingEntity.setYRot(yRot);
         livingEntity.setXRot(xRot);

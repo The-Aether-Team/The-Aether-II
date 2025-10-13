@@ -106,10 +106,12 @@ public class GravititeTalutonModel extends EntityModel<GravititeTalutonRenderSta
     @Override
     public void setupAnim(GravititeTalutonRenderState renderState) {
         super.setupAnim(renderState);
-        this.body.yRot = (180.0F + renderState.viewYRot) * Mth.DEG_TO_RAD;
-        this.legsNode.yRot = -this.body.yRot;
-        this.debris1.yRot = -this.body.yRot;
-        this.debris2.yRot = -this.body.yRot;
+        this.body.yRot = (-180.0F + renderState.viewYRot) * Mth.DEG_TO_RAD;
+        if (renderState.ageInTicks > 0) {
+            this.legsNode.yRot = -this.body.yRot;
+            this.debris1.yRot = -this.body.yRot;
+            this.debris2.yRot = -this.body.yRot;
+        }
         this.spinAimation.applyWalk(renderState.ageInTicks, renderState.ageInTicks, 1.0F, 1.0F);
         this.attackAnimation.apply(renderState.attackAnimationState, renderState.ageInTicks, 2.0F);
         this.reloadAnimation.apply(renderState.reloadAnimationState, renderState.ageInTicks, 2.0F);
