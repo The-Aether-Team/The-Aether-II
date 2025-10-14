@@ -308,7 +308,7 @@ public class Aerbunny extends AetherTamableAnimal {
                     result = InteractionResult.SUCCESS;
                 }
             }
-        } else if (this.isFood(itemStack) && this.getAfraidTime() <= 0) {
+        } else if (itemStack.is(AetherIITags.Items.AERBUNNY_TAME_ITEMS) && this.getAfraidTime() <= 0) {
             if (!this.level().isClientSide()) {
                 this.usePlayerItem(player, hand, itemStack);
                 if (this.random.nextInt(3) == 0 && !EventHooks.onAnimalTame(this, player)) {
@@ -324,10 +324,12 @@ public class Aerbunny extends AetherTamableAnimal {
             return InteractionResult.SUCCESS;
         }
 
-        if (!(this.getVehicle() instanceof Player vehicle) || vehicle.equals(player)) { // Interacting player has to be the one wearing the Aerbunny.
-            // Aerbunny can be mounted/dismounted if the shift key is held and no other interaction actions succeed, but only if the Aerbunny is not inside a block.
-            if ((this.getVehicle() != null || result == InteractionResult.PASS || result == InteractionResult.FAIL) && !super.isInWall()) {
-                result = this.ridePlayer(player);
+        if (!this.isFood(itemStack)) {
+            if (!(this.getVehicle() instanceof Player vehicle) || vehicle.equals(player)) { // Interacting player has to be the one wearing the Aerbunny.
+                // Aerbunny can be mounted/dismounted if the shift key is held and no other interaction actions succeed, but only if the Aerbunny is not inside a block.
+                if ((this.getVehicle() != null || result == InteractionResult.PASS || result == InteractionResult.FAIL) && !super.isInWall()) {
+                    result = this.ridePlayer(player);
+                }
             }
         }
 

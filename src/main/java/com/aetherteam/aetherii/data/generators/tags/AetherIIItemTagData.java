@@ -242,6 +242,12 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.CAN_BE_REINFORCED).add(ArkeniumForgeMenu.REINFORCEABLE.stream().map(Holder::value).toArray(Item[]::new));
         this.tag(AetherIITags.Items.FORGE_PRIMARY_MATERIAL).add(AetherIIItems.ARKENIUM_PLATES.get());
         this.tag(AetherIITags.Items.FORGE_SECONDARY_MATERIAL).add(AetherIIItems.CORROBONITE_CRYSTAL.get());
+        this.tag(AetherIITags.Items.AERBUNNY_FOOD).add(
+                AetherIIItems.BRETTL_GRASS.get()
+        );
+        this.tag(AetherIITags.Items.AERBUNNY_TAME_ITEMS).add(
+                AetherIIItems.ORANGE.get()
+        );
         this.tag(AetherIITags.Items.PHYG_FOOD).add(
                 AetherIIItems.ORANGE.get(),
                 AetherIIItems.BLUEBERRY.get()
@@ -271,9 +277,6 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.KIRRID_FOOD).add(
                 AetherIIItems.ORANGE.get(),
                 AetherIIItems.BLUEBERRY.get()
-        );
-        this.tag(AetherIITags.Items.AERBUNNY_FOOD).add(
-                AetherIIItems.ORANGE.get()
         );
         this.tag(AetherIITags.Items.MOA_FOOD).add(
                 AetherIIItems.AECHOR_PETAL.get(),
