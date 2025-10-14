@@ -219,7 +219,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.WISPROOT_PLANKS.asItem()
         );
         this.tag(AetherIITags.Items.STONE_CRAFTING).add(
-                AetherIIBlocks.HOLYSTONE.asItem()
+                AetherIIBlocks.HOLYSTONE.asItem(),
+                AetherIIBlocks.UNDERSHALE.asItem()
         );
         this.tag(AetherIITags.Items.CRAFTS_SKYROOT_STICKS).add(
                 AetherIIBlocks.SKYROOT_PLANKS.asItem(),
@@ -232,7 +233,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.WISPROOT_PLANKS.asItem()
         );
         this.tag(AetherIITags.Items.CRAFTS_HOLYSTONE_TOOLS).add(
-                AetherIIBlocks.HOLYSTONE.asItem()
+                AetherIIBlocks.HOLYSTONE.asItem(),
+                AetherIIBlocks.UNDERSHALE.asItem()
         );
         this.tag(AetherIITags.Items.ALTAR_FUEL).add(
                 AetherIIItems.AMBROSIUM_SHARD.get()
