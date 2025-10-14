@@ -1,9 +1,14 @@
 package com.aetherteam.aetherii.item.miscellaneous;
 
+import java.util.function.Consumer;
+
+import org.jetbrains.annotations.Nullable;
+
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.miscellaneous.MoaEggBlock;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.MoaEggType;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
@@ -11,14 +16,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.function.Consumer;
 
 public class MoaEggItem extends BlockItem {
     public MoaEggItem(Properties properties) {
-        super(AetherIIBlocks.MOA_EGG.get(), properties);
+        this(AetherIIBlocks.MOA_EGG.get(), properties);
+    }
+
+    protected MoaEggItem(Block block, Properties properties) {
+        super(block, properties);
     }
 
     @Nullable
@@ -36,7 +43,6 @@ public class MoaEggItem extends BlockItem {
         }
         return state;
     }
-
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {

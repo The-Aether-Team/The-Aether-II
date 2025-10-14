@@ -9,13 +9,18 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.mojang.serialization.MapCodec;
+
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntityReference;
 import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -38,6 +43,9 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import java.util.Optional;
+
 import org.jetbrains.annotations.Nullable;
 
 public class MoaEggBlock extends BaseEntityBlock {
@@ -90,13 +98,18 @@ public class MoaEggBlock extends BaseEntityBlock {
             level.setBlock(pos, state.setValue(HATCH, this.getHatchLevel(state) + 1), 2);
         } else {
             level.playSound(null, pos, AetherIISoundEvents.BLOCK_MOA_EGG_HATCH.get(), SoundSource.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
+            final boolean isWild = state.getValue(WILD);
+            Optional<Player> owner = isWild? Optional.empty() : level.getBlockEntity(pos, AetherIIBlockEntityTypes.MOA_EGG.get())
+                    .flatMap(blockentity -> Optional.ofNullable(blockentity.getPlacedBy()))
+                    .map(entityreference -> entityreference.getEntity(level, Player.class));
             level.destroyBlock(pos, false);
             Moa moa = AetherIIEntityTypes.MOA.get().create(level, EntitySpawnReason.BREEDING);
             if (moa != null) {
                 Vec3 vec3 = pos.getCenter();
                 moa.setBaby(true);
-                if (!state.getValue(WILD)) {
+                if (!isWild) {
                     moa.setPlayerGrown(true);
+                    owner.ifPresent(moa::setOwner); // owner.ifPresent(moa::tame);
                 }
                 moa.setKeratinColor(state.getValue(KERATIN).getSerializedName());
                 moa.setEyeColor(state.getValue(EYES).getSerializedName());
@@ -120,6 +133,15 @@ public class MoaEggBlock extends BaseEntityBlock {
             int j = i / 3;
             level.gameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Context.of(state));
             level.scheduleTick(pos, this, j + level.random.nextInt(300));
+        }
+    }
+
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+        super.setPlacedBy(level, pos, state, placer, stack);
+
+        if (placer instanceof Player player) {
+            level.getBlockEntity(pos, AetherIIBlockEntityTypes.MOA_EGG.get()).ifPresent(blockentity -> blockentity.setPlacedBy(player));
         }
     }
 
