@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
+import com.aetherteam.aetherii.entity.MountableMob;
 import com.aetherteam.aetherii.entity.ai.brain.MoaAi;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
@@ -18,6 +19,8 @@ import com.aetherteam.aetherii.item.miscellaneous.MoaFeedItem;
 import com.aetherteam.aetherii.item.miscellaneous.MoaSaddlebagItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Dynamic;
+
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.FriendlyByteBuf;
@@ -28,6 +31,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -50,6 +54,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.equipment.Equippable;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -64,25 +69,25 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
-public class Moa extends MountableAnimal implements ContainerListener, HasCustomInventoryScreen {
-    private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_MOA_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
-    private static final EntityDataAccessor<String> DATA_FEATHER_SHAPE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
-    private static final EntityDataAccessor<String> DATA_KERATIN_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
-    private static final EntityDataAccessor<String> DATA_EYE_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
-    private static final EntityDataAccessor<String> DATA_FEATHER_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
+public class Moa extends MountableAnimal implements ContainerListener, HasCustomInventoryScreen, OwnableEntity {
+    protected static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_MOA_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
+    protected static final EntityDataAccessor<String> DATA_FEATHER_SHAPE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
+    protected static final EntityDataAccessor<String> DATA_KERATIN_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
+    protected static final EntityDataAccessor<String> DATA_EYE_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
+    protected static final EntityDataAccessor<String> DATA_FEATHER_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
 
-    private static final EntityDataAccessor<Boolean> DATA_HUNGRY = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Integer> DATA_AMOUNT_FED = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> DATA_PLAYER_GROWN = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
+    protected static final EntityDataAccessor<Boolean> DATA_HUNGRY = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
+    protected static final EntityDataAccessor<Integer> DATA_AMOUNT_FED = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
+    protected static final EntityDataAccessor<Boolean> DATA_PLAYER_GROWN = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
 
-    private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_RIDER_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
-    private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_LAST_RIDER_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
-    private static final EntityDataAccessor<Integer> DATA_REMAINING_STAMINA = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> DATA_SITTING = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_FOLLOWING_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
+    protected static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_RIDER_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
+    protected static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_LAST_RIDER_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
+    protected static final EntityDataAccessor<Integer> DATA_REMAINING_STAMINA = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
+    protected static final EntityDataAccessor<Boolean> DATA_SITTING = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
+    protected static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_FOLLOWING_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
 
-    private static final EntityDataAccessor<ItemStack> DATA_SADDLE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
-    private static final EntityDataAccessor<ItemStack> DATA_SADDLEBAG = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
+    protected static final EntityDataAccessor<ItemStack> DATA_SADDLE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
+    protected static final EntityDataAccessor<ItemStack> DATA_SADDLEBAG = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
 
     private SimpleContainer inventory;
 
@@ -129,7 +134,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      * @return The {@link SpawnGroupData} to return.
      */
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @javax.annotation.Nullable SpawnGroupData spawnData) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData spawnData) {
         this.generateMoaReference(); //todo: 1.21 tag passing into this method was removed.
 
         if (reason != EntitySpawnReason.NATURAL) {
@@ -195,6 +200,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         return MoaAi.makeBrain(this, this.brainProvider().makeBrain(pDynamic));
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Brain<Moa> getBrain() {
         return (Brain<Moa>) super.getBrain();
@@ -443,6 +449,34 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         }
         this.checkFallDistanceAccumulation(); // Resets the Moa's fall distance.
     }
+
+    @Override
+    protected boolean considersEntityAsAlly(Entity entity) {
+        if (this.isPlayerGrown()) {
+            LivingEntity rootOwner = this.getRootOwner();
+            if (entity == rootOwner) {
+                return true;
+            }
+
+            if (rootOwner != null) {
+                return rootOwner.isAlliedTo(entity);
+            }
+        }
+        return super.considersEntityAsAlly(entity);
+    }
+
+    public void die(DamageSource cause) {
+        Component deathMessage = this.getCombatTracker().getDeathMessage();
+        super.die(cause);
+        if (this.dead && this.level() instanceof ServerLevel serverlevel) {
+            if (serverlevel.getGameRules().getBoolean(GameRules.RULE_SHOWDEATHMESSAGES)) {
+                LivingEntity owner = this.getOwner();
+                if (owner instanceof ServerPlayer serverplayer) {
+                    serverplayer.sendSystemMessage(deathMessage);
+                }
+            }
+        }
+   }
 
     public float getFlyAmount(float pPartialTicks) {
         return Mth.lerp(pPartialTicks, this.flapO, this.flap);
@@ -697,7 +731,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     /**
      * @return The {@link UUID} of the current rider of this Moa.
      */
-    @javax.annotation.Nullable
+    @Nullable
     public EntityReference<LivingEntity> getRider() {
         return this.getEntityData().get(DATA_RIDER_REFERENCE).orElse(null);
     }
@@ -707,14 +741,14 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      *
      * @param reference The {@link UUID}.
      */
-    public void setRider(@javax.annotation.Nullable EntityReference<LivingEntity> reference) {
+    public void setRider(@Nullable EntityReference<LivingEntity> reference) {
         this.getEntityData().set(DATA_RIDER_REFERENCE, Optional.ofNullable(reference));
     }
 
     /**
      * @return The {@link UUID} of the last rider of this Moa (including the current rider).
      */
-    @javax.annotation.Nullable
+    @Nullable
     public EntityReference<LivingEntity> getLastRider() {
         return this.getEntityData().get(DATA_LAST_RIDER_REFERENCE).orElse(null);
     }
@@ -724,8 +758,17 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      *
      * @param reference The {@link UUID}.
      */
-    public void setLastRider(@javax.annotation.Nullable EntityReference<LivingEntity> reference) {
+    public void setLastRider(@Nullable EntityReference<LivingEntity> reference) {
         this.getEntityData().set(DATA_LAST_RIDER_REFERENCE, Optional.ofNullable(reference));
+    }
+
+    /**
+     * Sets the last rider of this Moa (including the current rider).
+     *
+     * @param reference The {@link UUID}.
+     */
+    public void setLastRider(@Nullable LivingEntity lastRider) {
+        this.getEntityData().set(DATA_LAST_RIDER_REFERENCE, Optional.ofNullable(lastRider).map(EntityReference::new));
     }
 
     /**
@@ -811,7 +854,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     /**
      * @return Whether this Moa is following the player, as a {@link Boolean}.
      */
-    @javax.annotation.Nullable
+    @Nullable
     public EntityReference<LivingEntity> getFollowing() {
         return this.getEntityData().get(DATA_FOLLOWING_ID).orElse(null);
     }
@@ -821,7 +864,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      *
      * @param reference The {@link Boolean} value.
      */
-    public void setFollowing(@javax.annotation.Nullable EntityReference<LivingEntity> reference) {
+    public void setFollowing(@Nullable EntityReference<LivingEntity> reference) {
         this.getEntityData().set(DATA_FOLLOWING_ID, Optional.ofNullable(reference));
     }
 
@@ -930,6 +973,26 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      */
     public int getEggTime() {
         return this.random.nextInt(6000) + 6000;
+    }
+
+    @Nullable
+    public EntityReference<LivingEntity> getOwnerReference() {
+        return this.getEntityData().get(DATA_RIDER_REFERENCE).orElseGet(this::getLastRider);
+    }
+
+    public void setOwner(@Nullable LivingEntity owner) {
+        setLastRider(owner);
+    }
+
+    public void setOwnerReference(@Nullable EntityReference<LivingEntity> owner) {
+        setLastRider(owner);
+    }
+
+    public void tame(Player player) {
+        this.setOwner(player);
+        if (player instanceof ServerPlayer serverplayer) {
+            CriteriaTriggers.TAME_ANIMAL.trigger(serverplayer, this);
+        }
     }
 
     @Override
@@ -1076,7 +1139,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         return dimensions;
     }
 
-    @javax.annotation.Nullable
+    @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob entity) {
         return null;
