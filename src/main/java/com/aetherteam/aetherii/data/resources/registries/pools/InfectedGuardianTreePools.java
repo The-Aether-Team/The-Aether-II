@@ -300,8 +300,8 @@ public class InfectedGuardianTreePools {
         context.register(LAYOUT_PATH_MEDIUM_2_EYES, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01_a"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01_a_m"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01_a"), 1)//,
+                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/medium/2_eyes/path_01_a_m"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
