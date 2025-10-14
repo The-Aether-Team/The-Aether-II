@@ -153,7 +153,7 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
 
         ClientLevel.ClientLevelData worldInfo = level.getLevelData();
         //TODO Better Cloud system
-        double d0 = (Minecraft.getInstance().player.getEyePosition(partialTick).y - 66) * worldInfo.voidDarknessOnsetRange();
+        double d0 = (Minecraft.getInstance().player.getEyePosition(partialTick).y - 66) * 0.03125F;
         if (d0 < 1.0) {
             if (d0 < 0.0) {
                 d0 = 0.0;
