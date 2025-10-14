@@ -126,8 +126,8 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
         if (this.isSunriseOrSunset(timeOfDay)) {
             skyRenderer.renderSunriseAndSunset(poseStack, multiBufferSource, sunAngle, sunColor);
         }
-        this.renderCloudCoverDisc(level, partialTick, poseStack, multiBufferSource, skyColor);
         skyRenderer.renderSunMoonAndStars(poseStack, multiBufferSource, timeOfDay, moonPhase, rainLevel, starBrightness);
+        this.renderCloudCoverDisc(level, partialTick, poseStack, multiBufferSource, skyColor);
         multiBufferSource.endBatch();
         return true;
     }
