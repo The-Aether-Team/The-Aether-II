@@ -34,7 +34,7 @@ public class DimensionClientListener {
                     }
 
                     float nearDistanceGoal = farDistance / 10.0F;
-                    float farDistanceGoal = farDistance / 2.0F;
+                    float farDistanceGoal = farDistance / 5.0F;
 
                     if (biome.is(AetherIITags.Biomes.ARCTIC)) {
                         nearDistanceGoal = farDistance / 20.0F;
