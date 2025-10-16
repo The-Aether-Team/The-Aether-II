@@ -142,7 +142,7 @@ public class HestveilBlock extends Block implements CanisterPickup {
                             pos.getZ(),
                             AetherIISoundEvents.BLOCK_HESTVEIL_IGNITE,
                             SoundSource.BLOCKS,
-                            10.0F,
+                            1.0F,
                             (1.0F + (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.2F) * 0.7F);
                 }
                 for (int i = 0; i <= 5; i++) {
