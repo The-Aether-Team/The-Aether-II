@@ -51,11 +51,17 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     }
 
     @Override
+    public boolean isSunriseOrSunset(float timeOfDay) {
+        float f = Mth.cos(timeOfDay * Mth.TWO_PI);
+        return f >= -0.4F && f <= 0.4F;
+    }
+
+    @Override
     public int getSunriseOrSunsetColor(float timeOfDay) {
-        float f1 = Mth.cos(timeOfDay * Mth.TWO_PI) - 0.0F;
-        float f3 = (f1 + 0.0F) / 0.4F * 0.5F + 0.5F;
-        float f4 = 1.0F - (1.0F - Mth.sin(f3 * Mth.PI)) * 0.99F;
-        return ARGB.colorFromFloat(f4 * f4, f3 * 0.3F + 0.65F, f3 * f3 * 0.7F + 0.25F, f3 * f3 * 0.0F + 0.4F);
+        float f = Mth.cos(timeOfDay * Mth.TWO_PI);
+        float f1 = f / 0.4F * 0.5F + 0.5F;
+        float f2 = Mth.square(1.0F - (1.0F - Mth.sin(f1 * Mth.PI)) * 0.99F);
+        return ARGB.colorFromFloat(f2, f1 * 0.3F + 0.65F, f1 * f1 * 0.7F + 0.25F, 0.4F);
     }
 
     @Override
@@ -105,10 +111,6 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     public boolean renderSky(ClientLevel level, int ticks, float partialTick, Matrix4f modelViewMatrix, Camera camera, Runnable setupFog) {
         RenderBuffers renderBuffers = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).aether_ii$getRenderBuffers();
         SkyRenderer skyRenderer = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).aether_ii$getSkyRenderer();
-        float renderDistance = Minecraft.getInstance().gameRenderer.getRenderDistance();
-        Vec3 cameraPosition = camera.getPosition();
-        double cameraX = cameraPosition.x();
-        double cameraY = cameraPosition.y();
         setupFog.run();
         PoseStack poseStack = new PoseStack();
         float sunAngle = level.getSunAngle(partialTick);
@@ -139,7 +141,7 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
         poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
         Matrix4f matrix4f = poseStack.last().pose();
 
-        VertexConsumer vertexconsumer = multiBufferSource.getBuffer(AetherIIRenderTypes.cloudCover());
+        VertexConsumer cloudCoverBuffer = multiBufferSource.getBuffer(AetherIIRenderTypes.cloudCover());
 
         float r = ARGB.redFloat(skyColor);
         float g = ARGB.greenFloat(skyColor);
@@ -151,22 +153,20 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
         g = (Math.min(color.getGreen() + 20, 255.0F) / 255.0F) * weatherMultiplier;
         b = (Math.min(color.getBlue() + 35, 255.0F) / 255.0F) * (float) Math.pow(weatherMultiplier, bluePower);
 
-        ClientLevel.ClientLevelData worldInfo = level.getLevelData();
-        //TODO Better Cloud system
-        double d0 = (Minecraft.getInstance().player.getEyePosition(partialTick).y - 66) * 0.03125F;
-        if (d0 < 1.0) {
-            if (d0 < 0.0) {
-                d0 = 0.0;
+        double cameraHeight = (Minecraft.getInstance().player.getEyePosition(partialTick).y - 66) * 0.03125F;
+        if (cameraHeight < 1.0) {
+            if (cameraHeight < 0.0) {
+                cameraHeight = 0.0;
             }
-            d0 *= d0;
-            r *= (float) Math.clamp(d0, 0.15F, 1.0F);
-            g *= (float) Math.clamp(d0, 0.15F, 1.0F);
-            b *= (float) Math.clamp(d0 * 1.25F, 0.15F * 1.25F, 1.0F);
+            cameraHeight *= cameraHeight;
+            r *= (float) Math.clamp(cameraHeight, 0.15F, 1.0F);
+            g *= (float) Math.clamp(cameraHeight, 0.15F, 1.0F);
+            b *= (float) Math.clamp(cameraHeight * 1.25F, 0.15F * 1.25F, 1.0F);
         }
 
-        vertexconsumer.addVertex(matrix4f, 0.0F, -16.0F, 0.0F).setColor(ARGB.colorFromFloat(1.0F, r, g, b));
+        cloudCoverBuffer.addVertex(matrix4f, 0.0F, -16.0F, 0.0F).setColor(ARGB.colorFromFloat(1.0F, r, g, b));
         for (int i = -180; i <= 180; i += 9) {
-            vertexconsumer.addVertex(matrix4f, Math.signum(-16.0F) * 512.0F * Mth.cos((float) i * (float) (Math.PI / 180.0)), -16.0F, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).setColor(ARGB.colorFromFloat(0.0F, r, g, b));
+            cloudCoverBuffer.addVertex(matrix4f, Math.signum(-16.0F) * 512.0F * Mth.cos((float) i * (float) (Math.PI / 180.0)), -16.0F, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).setColor(ARGB.colorFromFloat(0.0F, r, g, b));
         }
 
         poseStack.popPose();
