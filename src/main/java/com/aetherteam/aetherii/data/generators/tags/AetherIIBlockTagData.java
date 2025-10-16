@@ -142,7 +142,15 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.MARBLED_BRICKS.get(),
                 AetherIIBlocks.ARKENIUM_BLOCK.get(),
                 AetherIIBlocks.ARKENIUM_DOOR.get(),
-                AetherIIBlocks.ARKENIUM_TRAPDOOR.get()).addTags(AetherIITags.Blocks.ICHORITE_DECORATIVE_BLOCKS, AetherIITags.Blocks.MARBLED_ICHORITE_DECORATIVE_BLOCKS);
+                AetherIIBlocks.ARKENIUM_TRAPDOOR.get()
+        ).addTags(
+                AetherIITags.Blocks.ICHORITE_DECORATIVE_BLOCKS,
+                AetherIITags.Blocks.MARBLED_ICHORITE_DECORATIVE_BLOCKS,
+                AetherIITags.Blocks.SCATTERGLASS,
+                AetherIITags.Blocks.SCATTERGLASS_PANE,
+                AetherIITags.Blocks.CRUDE_SCATTERGLASS,
+                AetherIITags.Blocks.CRUDE_SCATTERGLASS_PANE
+        );
         this.tag(AetherIITags.Blocks.ALKAHEST_INSTANTLY_DESTROYS).addTags(BlockTags.LEAVES, AetherIITags.Blocks.AERCLOUDS);
         this.tag(AetherIITags.Blocks.ALKAHEST_QUICKLY_DESTROYS).addTags(BlockTags.DIRT, BlockTags.LOGS, BlockTags.PLANKS);
         this.tag(AetherIITags.Blocks.ALKAHEST_SLOWLY_DESTROYS).addTags(AetherIITags.Blocks.HOLYSTONE, Tags.Blocks.STONES);
