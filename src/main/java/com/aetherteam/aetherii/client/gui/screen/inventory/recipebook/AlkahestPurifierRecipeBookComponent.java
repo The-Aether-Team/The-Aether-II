@@ -41,9 +41,10 @@ public class AlkahestPurifierRecipeBookComponent extends RecipeBookComponent<Alk
     @Override
     public void fillGhostRecipe(GhostSlots ghostSlots, RecipeDisplay recipeDisplay, ContextMap contextMap) {
         ghostSlots.setResult(this.menu.getSlot(5), contextMap, recipeDisplay.result());
-        if (recipeDisplay instanceof AlkahestPurifierRecipeDisplay altarRecipeDisplay) {
-            ghostSlots.setInput(this.menu.getSlot(0), contextMap, altarRecipeDisplay.ingredient());
-            ghostSlots.setInput(this.menu.getSlot(6), contextMap, altarRecipeDisplay.byproduct());
+        if (recipeDisplay instanceof AlkahestPurifierRecipeDisplay purifierRecipeDisplay) {
+            ghostSlots.setInput(this.menu.getSlot(0), contextMap, purifierRecipeDisplay.ingredient());
+            ghostSlots.setInput(this.menu.getSlot(1), contextMap, purifierRecipeDisplay.fuel());
+            ghostSlots.setInput(this.menu.getSlot(6), contextMap, purifierRecipeDisplay.byproduct());
         }
     }
 
