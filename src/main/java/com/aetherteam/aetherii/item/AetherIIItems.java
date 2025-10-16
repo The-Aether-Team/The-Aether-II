@@ -311,6 +311,7 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> SHEEPUFF_SPAWN_EGG = register("sheepuff_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.SHEEPUFF.get(), properties));
     public static final DeferredItem<SpawnEggItem> PHYG_SPAWN_EGG = register("phyg_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.PHYG.get(), properties));
     public static final DeferredItem<SpawnEggItem> AERBUNNY_SPAWN_EGG = register("aerbunny_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.AERBUNNY.get(), properties));
+    public static final DeferredItem<SpawnEggItem> AERWHALE_SPAWN_EGG = register("aerwhale_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.AERWHALE.get(), properties));
     public static final DeferredItem<SpawnEggItem> HIGHFIELDS_TAEGORE_SPAWN_EGG = register("highfields_taegore_spawn_egg", (properties) -> new BiomeMobSpawnEggItem(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), "highfields", properties));
     public static final DeferredItem<SpawnEggItem> MAGNETIC_TAEGORE_SPAWN_EGG = register("magnetic_taegore_spawn_egg", (properties) -> new BiomeMobSpawnEggItem(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), "magnetic", properties));
     public static final DeferredItem<SpawnEggItem> ARCTIC_TAEGORE_SPAWN_EGG = register("arctic_taegore_spawn_egg", (properties) -> new BiomeMobSpawnEggItem(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), "arctic", properties));

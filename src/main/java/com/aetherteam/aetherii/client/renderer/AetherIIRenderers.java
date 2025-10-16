@@ -1,35 +1,102 @@
 package com.aetherteam.aetherii.client.renderer;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
 import com.aetherteam.aetherii.client.renderer.block.model.TrunkModel;
-import com.aetherteam.aetherii.client.renderer.blockentity.*;
+import com.aetherteam.aetherii.client.renderer.blockentity.AlkahestPurifierRenderer;
+import com.aetherteam.aetherii.client.renderer.blockentity.ArkeniumForgeRenderer;
+import com.aetherteam.aetherii.client.renderer.blockentity.MoaEggRenderer;
+import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
+import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
-import com.aetherteam.aetherii.client.renderer.entity.*;
+import com.aetherteam.aetherii.client.renderer.entity.AechorPlantRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.AerbunnyRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.AerwhaleRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.ArkeniumTalutonRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.BurrukaiRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.CarrionSproutRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.CockatriceRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.EdwardRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.FlyingCowRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.GravititeDebrisShotRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.GravititeTalutonRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.HoveringBlockRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.KirridRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.MoaRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.PhygRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.ScatterglassBoltRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.SheepuffRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.SkephidRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.SkephidWebbingBallRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.SkyrootLizardRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.SwetRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.TaegoreRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.TempestRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.TempestThunderballRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.ToxicDartRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.VenomousDartRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.ZephyrRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.ZephyrWebbingBallRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLatchLayer;
-import com.aetherteam.aetherii.client.renderer.entity.model.*;
+import com.aetherteam.aetherii.client.renderer.entity.model.AechorPlantModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.AerbunnyModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.AerwhaleModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.ArkeniumTalutonModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.CarrionSproutModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.CockatriceModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.EdwardModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.FlyingCowModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.GravititeDebrisShotModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.GravititeTalutonModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.MoaBabyModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.MoaEggModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.MoaLargeSaddlebagModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.MoaModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.MoaSaddleModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.MoaSaddlebagModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.PhygModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.SheepuffModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.SkephidModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.SkyrootLizardModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.SwetModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.TempestModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.ZephyrModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.ArcticBurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
+import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.ArcticKirridBabyModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.ArcticKirridModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.HighfieldsKirridBabyModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.HighfieldsKirridModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.MagneticKirridBabyModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.MagneticKirridModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
 import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Moa;
+
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.blockentity.BedRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.context.ContextKey;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
@@ -39,22 +106,21 @@ import net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 public class AetherIIRenderers {
-    public static ContextKey<Boolean> RIDING_MOA_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "riding_moa"));
-    public static ContextKey<List<Swet>> SWET_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet"));
+    public static final ContextKey<Boolean> RIDING_MOA_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "riding_moa"));
+    public static final ContextKey<List<Swet>> SWET_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet"));
 
     public static void registerAddLayer(EntityRenderersEvent.AddLayers event) {
         event.getSkins().forEach(model -> {
             if (event.getSkin(model) instanceof LivingEntityRenderer<?, ?, ?> livingEntityRenderer) {
-                livingEntityRenderer.addLayer(new SwetLatchLayer(event.getContext(), livingEntityRenderer));
-
-                livingEntityRenderer.addLayer(new GlovesLayer(livingEntityRenderer));
+                registerLivingEntityLayers(event.getContext(), livingEntityRenderer);
             }
         });
+    }
+
+    private static <T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>> void registerLivingEntityLayers(EntityRendererProvider.Context context, LivingEntityRenderer<T, S, M> livingEntityRenderer) {
+        livingEntityRenderer.addLayer(new SwetLatchLayer<S, M>(context, livingEntityRenderer));
+        livingEntityRenderer.addLayer(new GlovesLayer<S, M>(livingEntityRenderer));
     }
 
     public static void registerRenderStateModifier(RegisterRenderStateModifiersEvent event) {
@@ -82,6 +148,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.PHYG.get(), PhygRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.FLYING_COW.get(), FlyingCowRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SHEEPUFF.get(), SheepuffRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.AERWHALE.get(), AerwhaleRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), (context) -> new TaegoreRenderer(context, BiomeVariantPresets.HIGHFIELDS_TAEGORE));
         event.registerEntityRenderer(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), (context) -> new TaegoreRenderer(context, BiomeVariantPresets.MAGNETIC_TAEGORE));
         event.registerEntityRenderer(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), (context) -> new TaegoreRenderer(context, BiomeVariantPresets.ARCTIC_TAEGORE));
@@ -141,6 +208,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.PHYG, PhygModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.FLYING_COW, FlyingCowModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SHEEPUFF, SheepuffModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.AERWHALE, AerwhaleModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.HIGHFIELDS_TAEGORE, TaegoreModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.HIGHFIELDS_TAEGORE_BABY, TaegoreBabyModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MAGNETIC_TAEGORE, TaegoreModel::createBodyLayer);

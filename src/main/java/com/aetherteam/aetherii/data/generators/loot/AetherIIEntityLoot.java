@@ -69,6 +69,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                 )
         );
         this.add(AetherIIEntityTypes.AERBUNNY.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.AERWHALE.get(), LootTable.lootTable());
 
         Sheepuff.SheepuffColor.CLOUDWOOL_BY_SHEEPUFF_COLOR.forEach((color, itemLike) -> this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_WOOL_BY_DYE.get(color), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(itemLike)).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(SheepuffPredicate.isPuffed(false)))))
