@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.natural.CorroboniteClusterBlock;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -9,6 +8,7 @@ import net.minecraft.core.SectionPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.BulkSectionAccess;
 import net.minecraft.world.level.chunk.LevelChunkSection;
@@ -182,18 +182,25 @@ public class CorroboniteOreFeature extends Feature<OreConfiguration> { //todo co
         BlockPos blockPos = new BlockPos(x, y, z);
         levelchunksection.setBlockState(blockPos.getX(), blockPos.getY(), blockPos.getZ(), oreconfiguration$targetblockstate.state, false);
 
-
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
         for (Direction direction : Direction.values()) {
             blockpos$mutableblockpos.setWithOffset(mutablePos, direction);
-            if (adjacentStateAccessor.apply(blockpos$mutableblockpos).isAir()) {
+            BlockState newState = AetherIIBlocks.CORROBONITE_CLUSTER.get().defaultBlockState();
+            BlockState offsetState = adjacentStateAccessor.apply(blockpos$mutableblockpos);
+            if (offsetState.isAir() || offsetState.is(newState.getBlock())) {
                 LevelChunkSection offsetsection = bulksectionaccess.getSection(blockpos$mutableblockpos);
                 if (offsetsection != null) {
                     int i3 = SectionPos.sectionRelative(blockpos$mutableblockpos.getX());
                     int j3 = SectionPos.sectionRelative(blockpos$mutableblockpos.getY());
                     int k3 = SectionPos.sectionRelative(blockpos$mutableblockpos.getZ());
-                    offsetsection.setBlockState(i3, j3, k3, AetherIIBlocks.CORROBONITE_CLUSTER.get().defaultBlockState().setValue(CorroboniteClusterBlock.FACING, direction), false);
+
+                    if (offsetState.isAir()) {
+                        newState = newState.trySetValue(MultifaceBlock.getFaceProperty(direction.getOpposite()), true);
+                    } else if (offsetState.is(newState.getBlock())) {
+                        newState = offsetState.trySetValue(MultifaceBlock.getFaceProperty(direction.getOpposite()), true);
+                    }
+                    offsetsection.setBlockState(i3, j3, k3, newState, false);
                 }
             }
         }

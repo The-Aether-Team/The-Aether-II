@@ -318,6 +318,19 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.registerSimpleItemModel(block.asItem(), itemModel.create(block.asItem(), TextureMapping.layer0(block), this.modelOutput));
     }
 
+    public void createCorroboniteCluster(Block block, ModelTemplate itemModel) {
+        MultiVariant multivariant = plainVariant(AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS.create(block, TextureMapping.cross(block), this.modelOutput));
+        MultiPartGenerator multipartgenerator = MultiPartGenerator.multiPart(block)
+                .with(condition().term(BlockStateProperties.UP, true), multivariant.with(X_ROT_180))
+                .with(condition().term(BlockStateProperties.DOWN, true), multivariant.with(NOP))
+                .with(condition().term(BlockStateProperties.SOUTH, true), multivariant.with(X_ROT_90))
+                .with(condition().term(BlockStateProperties.NORTH, true), multivariant.with(X_ROT_90.then(Y_ROT_180)))
+                .with(condition().term(BlockStateProperties.EAST, true), multivariant.with(X_ROT_90.then(Y_ROT_270)))
+                .with(condition().term(BlockStateProperties.WEST, true), multivariant.with(X_ROT_90.then(Y_ROT_90)));
+        this.blockStateOutput.accept(multipartgenerator);
+        this.registerSimpleItemModel(block.asItem(), itemModel.create(block.asItem(), TextureMapping.layer0(block), this.modelOutput));
+    }
+
     protected void createArcticSnowBlocks() {
         TextureMapping mapping = TextureMapping.cube(AetherIIBlocks.ARCTIC_SNOW.get());
         ResourceLocation snowBlockLocation = ModelTemplates.CUBE_ALL.create(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(), mapping, this.modelOutput);
