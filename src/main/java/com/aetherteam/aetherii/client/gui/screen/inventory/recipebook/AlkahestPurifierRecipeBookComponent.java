@@ -35,7 +35,7 @@ public class AlkahestPurifierRecipeBookComponent extends RecipeBookComponent<Alk
 
     @Override
     protected boolean isCraftingSlot(Slot slot) {
-        return slot.index == 5;
+        return slot.index <= 6;
     }
 
     @Override

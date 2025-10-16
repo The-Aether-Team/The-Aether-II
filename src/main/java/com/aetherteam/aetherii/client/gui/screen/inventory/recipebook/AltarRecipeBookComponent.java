@@ -35,7 +35,7 @@ public class AltarRecipeBookComponent extends RecipeBookComponent<AltarMenu> {
 
     @Override
     protected boolean isCraftingSlot(Slot slot) {
-        return slot.index == 9;
+        return slot.index <= 9;
     }
 
     @Override
