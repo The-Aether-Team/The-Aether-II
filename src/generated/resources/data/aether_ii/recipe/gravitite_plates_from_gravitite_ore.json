@@ -2,7 +2,7 @@
   "type": "aether_ii:altar_enchanting",
   "category": "misc",
   "experience": 0.0,
-  "fuel_count": 8,
+  "fuel_count": 4,
   "group": "gravitite",
   "ingredient": "aether_ii:gravitite_ore",
   "processing_time": 200,
