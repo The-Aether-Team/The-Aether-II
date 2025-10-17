@@ -215,6 +215,24 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.aerbunny.lift"
   },
+  "entity.aerwhale.ambient": {
+    "sounds": [
+      "aether_ii:entity/aerwhale/call"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.aerbunny.ambient"
+  },
+  "entity.aerwhale.death": {
+    "sounds": [
+      "aether_ii:entity/aerwhale/death"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.aerwhale.death"
+  },
+  "entity.aerwhale.hurt": {
+    "sounds": [
+      "aether_ii:entity/aerwhale/death"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.aerwhale.hurt"
+  },
   "entity.arctic_snowball.throw": {
     "sounds": [
       "random/bow"
