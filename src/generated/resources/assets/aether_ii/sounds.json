@@ -219,7 +219,7 @@
     "sounds": [
       "aether_ii:entity/aerwhale/call"
     ],
-    "subtitle": "subtitles.aether_ii.entity.aerbunny.ambient"
+    "subtitle": "subtitles.aether_ii.entity.aerwhale.ambient"
   },
   "entity.aerwhale.death": {
     "sounds": [
