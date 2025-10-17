@@ -27,22 +27,22 @@ public class KirridRenderer extends MultiBabyModelRenderer<Kirrid, KirridRenderS
     }
 
     @Override
-    public AbstractKirridModel getDefaultModel() {
+    public AbstractKirridModel getDefaultModel(KirridRenderState kirrid) {
         return this.defaultModel;
     }
 
     @Override
-    public AbstractKirridBabyModel getBabyModel() {
+    public AbstractKirridBabyModel getBabyModel(KirridRenderState kirrid) {
         return this.babyModel;
     }
 
     @Override
-    public ResourceLocation getDefaultTexture() {
+    public ResourceLocation getDefaultTexture(KirridRenderState kirrid) {
         return this.defaultTexture;
     }
 
     @Override
-    public ResourceLocation getBabyTexture() {
+    public ResourceLocation getBabyTexture(KirridRenderState kirrid) {
         return this.babyTexture;
     }
 

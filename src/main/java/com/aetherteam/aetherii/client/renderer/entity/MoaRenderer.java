@@ -47,22 +47,22 @@ public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, Ent
     }
 
     @Override
-    public MoaModel getDefaultModel() {
+    public MoaModel getDefaultModel(MoaRenderState moa) {
         return this.defaultModel;
     }
 
     @Override
-    public MoaBabyModel getBabyModel() {
+    public MoaBabyModel getBabyModel(MoaRenderState moa) {
         return this.babyModel;
     }
 
     @Override
-    public ResourceLocation getDefaultTexture() {
+    public ResourceLocation getDefaultTexture(MoaRenderState moa) {
         return TEXTURE;
     }
 
     @Override
-    public ResourceLocation getBabyTexture() {
+    public ResourceLocation getBabyTexture(MoaRenderState moa) {
         return BABY_TEXTURE;
     }
 }

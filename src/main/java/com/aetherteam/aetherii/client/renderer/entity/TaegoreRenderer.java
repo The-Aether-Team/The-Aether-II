@@ -38,22 +38,22 @@ public class TaegoreRenderer extends MultiBabyModelRenderer<Taegore, TaegoreRend
     }
 
     @Override
-    public TaegoreModel getDefaultModel() {
+    public TaegoreModel getDefaultModel(TaegoreRenderState taegore) {
         return this.defaultModel;
     }
 
     @Override
-    public TaegoreBabyModel getBabyModel() {
+    public TaegoreBabyModel getBabyModel(TaegoreRenderState taegore) {
         return this.babyModel;
     }
 
     @Override
-    public ResourceLocation getDefaultTexture() {
+    public ResourceLocation getDefaultTexture(TaegoreRenderState taegore) {
         return this.defaultTexture;
     }
 
     @Override
-    public ResourceLocation getBabyTexture() {
+    public ResourceLocation getBabyTexture(TaegoreRenderState taegore) {
         return this.babyTexture;
     }
 }

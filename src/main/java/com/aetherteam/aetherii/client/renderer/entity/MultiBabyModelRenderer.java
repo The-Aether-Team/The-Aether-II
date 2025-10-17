@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 
-public abstract class MultiBabyModelRenderer<T extends Mob, S extends LivingEntityRenderState, M extends EntityModel<S>, N extends M, O extends M> extends MobRenderer<T, S, M> {
-    public MultiBabyModelRenderer(EntityRendererProvider.Context context, N defaultModel, float shadowRadius) {
+public abstract class MultiBabyModelRenderer<T extends Mob, S extends LivingEntityRenderState, M extends EntityModel<S>, MDefault extends M, MBaby extends M> extends MobRenderer<T, S, M> {
+    public MultiBabyModelRenderer(EntityRendererProvider.Context context, MDefault defaultModel, float shadowRadius) {
         super(context, defaultModel, shadowRadius);
     }
 
@@ -21,19 +21,19 @@ public abstract class MultiBabyModelRenderer<T extends Mob, S extends LivingEnti
     }
 
     public M getModel(S entity) {
-        return entity.isBaby ? this.getBabyModel() : this.getDefaultModel();
+        return entity.isBaby ? this.getBabyModel(entity) : this.getDefaultModel(entity);
     }
 
-    public abstract N getDefaultModel();
+    public abstract MDefault getDefaultModel(S entity);
 
-    public abstract O getBabyModel();
+    public abstract MBaby getBabyModel(S entity);
 
     @Override
     public ResourceLocation getTextureLocation(S entity) {
-        return entity.isBaby ? this.getBabyTexture() : this.getDefaultTexture();
+        return entity.isBaby ? this.getBabyTexture(entity) : this.getDefaultTexture(entity);
     }
 
-    public abstract ResourceLocation getDefaultTexture();
+    public abstract ResourceLocation getDefaultTexture(S entity);
 
-    public abstract ResourceLocation getBabyTexture();
+    public abstract ResourceLocation getBabyTexture(S entity);
 }
