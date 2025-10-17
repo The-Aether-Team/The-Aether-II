@@ -19,7 +19,7 @@ import net.minecraft.world.item.ItemStack;
 public class ServerGamePacketListenerImplMixin {
     @Inject(
         method = "handlePickItemFromEntity(Lnet/minecraft/network/protocol/game/ServerboundPickItemFromEntityPacket;)V",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;getPickResult()V"),
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;getPickResult()Lnet/minecraft/world/item/ItemStack;"),
         cancellable = true)
     protected void handlePickItemFromEntity(ServerboundPickItemFromEntityPacket packet, CallbackInfo callbackInfo) {
         ServerPlayer player = ((ServerGamePacketListenerImpl)(Object)this).player;
