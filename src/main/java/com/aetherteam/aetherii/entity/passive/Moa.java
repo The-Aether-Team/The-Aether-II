@@ -1,6 +1,14 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.UUID;
+
+import javax.annotation.Nullable;
+
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.api.entity.CustomPickItemEntity;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
@@ -63,13 +71,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 
-import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.UUID;
-
-public class Moa extends MountableAnimal implements ContainerListener, HasCustomInventoryScreen, OwnableEntity {
+public class Moa extends MountableAnimal implements ContainerListener, HasCustomInventoryScreen, OwnableEntity, CustomPickItemEntity {
     protected static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_MOA_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
     protected static final EntityDataAccessor<String> DATA_FEATHER_SHAPE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
     protected static final EntityDataAccessor<String> DATA_KERATIN_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
@@ -1179,6 +1181,16 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         FeatherShape featherShape = FeatherShape.valueOf(this.getFeatherShape().toUpperCase(Locale.ROOT));
         moaEggItem.set(AetherIIDataComponents.MOA_EGG_TYPE, new MoaEggType(keratinColor, eyeColor, featherColor, featherShape));
         return moaEggItem;
+    }
+
+    @Override
+    public ItemStack getPickResult(ServerPlayer player, boolean includeData) {
+        if (includeData) {
+            ItemStack itemstack = super.getPickResult();
+            return itemstack;
+        } else {
+            return this.getPickResult();
+        }
     }
 
     @Override
