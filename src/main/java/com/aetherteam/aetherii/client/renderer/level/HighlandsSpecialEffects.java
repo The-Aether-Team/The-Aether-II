@@ -37,6 +37,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.joml.Matrix4f;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     private final DimensionSpecialEffects OVERWORLD = new OverworldEffects();
@@ -231,7 +233,41 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
 
         return ARGB.colorFromFloat(1.0F, f2, f3, f4);
     }
-//
+
+    @Override
+    public boolean renderSnowAndRain(ClientLevel level, int ticks, float partialTick, double camX, double camY, double camZ) {
+        LevelRendererAccessor levelRenderer = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer);
+        WeatherEffectRendererAccessor weatherEffectRenderer = ((WeatherEffectRendererAccessor) levelRenderer.aether_ii$getWeatherEffectRenderer());
+        MultiBufferSource.BufferSource bufferSource = levelRenderer.aether_ii$getRenderBuffers().bufferSource();
+        Vec3 cameraPosition = new Vec3(camX, camY, camZ);
+        float rain = level.getRainLevel(partialTick);
+        float thunder = level.getThunderLevel(partialTick);
+
+        if (!(rain <= 0.0F)) {
+            int i = Minecraft.useFancyGraphics() ? 10 : 5;
+            java.util.List<WeatherEffectRenderer.ColumnInstance> list = new ArrayList<>();
+            List<WeatherEffectRenderer.ColumnInstance> list1 = new ArrayList<>();
+            weatherEffectRenderer.callCollectColumnInstances(level, ticks, partialTick, cameraPosition, i, list, list1);
+            if (!list.isEmpty() || !list1.isEmpty()) {
+                this.renderWeather(weatherEffectRenderer, bufferSource, cameraPosition, i, rain, thunder, list, list1);
+            }
+        }
+        return true;
+    }
+
+    private void renderWeather(WeatherEffectRendererAccessor weatherEffectRenderer, MultiBufferSource bufferSource, Vec3 cameraPosition, int radius, float rainLevel, float thunderLevel, List<WeatherEffectRenderer.ColumnInstance> rainColumnInstances, List<WeatherEffectRenderer.ColumnInstance> snowColumnInstances) {
+        boolean isThundering = thunderLevel > 0.0F;
+        if (!rainColumnInstances.isEmpty()) {
+            RenderType rainType = RenderType.weather(isThundering ? RAIN_STORMY_LOCATION : RAIN_LOCATION, Minecraft.useShaderTransparency());
+            weatherEffectRenderer.callRenderInstances(bufferSource.getBuffer(rainType), rainColumnInstances, cameraPosition, 0.75F, radius, rainLevel);
+        }
+        if (!snowColumnInstances.isEmpty()) {
+            RenderType snowType = RenderType.weather(isThundering ? SNOW_STORMY_LOCATION : SNOW_LOCATION, Minecraft.useShaderTransparency());
+            weatherEffectRenderer.callRenderInstances(bufferSource.getBuffer(snowType), snowColumnInstances, cameraPosition, 0.8F, radius, rainLevel);
+        }
+    }
+
+    //
 //    @Override
 //    public boolean renderSnowAndRain(ClientLevel level, int ticks, float partialTick, LightTexture lightTexture, double camX, double camY, double camZ) {
 //        LevelRenderer levelRenderer = Minecraft.getInstance().levelRenderer;

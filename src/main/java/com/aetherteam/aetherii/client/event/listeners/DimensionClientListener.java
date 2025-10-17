@@ -48,10 +48,10 @@ public class DimensionClientListener {
                     }
 
                     if (clientLevel.isRaining()) {
-                        nearDistanceGoal /= 1.5F;
+                        nearDistanceGoal = -15.0F;
                     }
                     if (clientLevel.isThundering()) {
-                        nearDistanceGoal /= 1.5F;
+                        nearDistanceGoal = -30.0F;
                     }
 
                     modifiedNearDistance = Mth.lerp(0.05F, modifiedNearDistance, nearDistanceGoal);
