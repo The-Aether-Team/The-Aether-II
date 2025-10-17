@@ -83,20 +83,6 @@ public class Aerwhale extends PathfinderMob {
                 .add(Attributes.STEP_HEIGHT, 0.4);
     }
 
-    @Override
-    protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {}
-
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        super.defineSynchedData(builder);
-    }
-
-    // @Nullable
-    // @Override
-    // public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
-    //     return AetherIIEntityTypes.AERWHALE.get().create(level, EntitySpawnReason.BREEDING);
-    // }
-
     /**
      * Aerwhales can spawn if {@link Mob#checkMobSpawnRules(EntityType, LevelAccessor, MobSpawnType, BlockPos, RandomSource)} is true, if they aren't spawning in fluid,
      * if they are spawning at a light level above 8, if they are spawning in view of the sky, and they spawn with a random chance of 1/40.
@@ -129,11 +115,6 @@ public class Aerwhale extends PathfinderMob {
     public void travel(Vec3 vector) {
         float speed = (float)this.getAttributeValue(Attributes.FLYING_SPEED) * 5.0f / 3.0f;
         this.travelFlying(vector, speed, speed, speed);
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
     }
 
     @Override
@@ -208,9 +189,6 @@ public class Aerwhale extends PathfinderMob {
         this.yBodyRot = this.yHeadRot = yRot;
     }
 
-    private static final UUID SerenityLowesUUID = UUID.fromString("031025bd-0a15-439b-9c55-06a20d0de76f");
-    private static final MutableComponent secretMessage = Component.literal("Serenity is the queen of W(h)ales!!");
-
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         var itemstack = player.getItemInHand(hand);
@@ -221,17 +199,9 @@ public class Aerwhale extends PathfinderMob {
             }
         }
         if (!player.isSecondaryUseActive()) {
-            boolean isSerenityLowes = player.getUUID().equals(SerenityLowesUUID);
-            if (isSerenityLowes || SharedConstants.IS_RUNNING_IN_IDE) {
+            if (SharedConstants.IS_RUNNING_IN_IDE) {
                 this.doPlayerRide(player);
                 if (!this.level().isClientSide()) {
-                    if (isSerenityLowes) {
-                        player.level().players().forEach(p -> {
-                            if (p instanceof ServerPlayer serverplayer) {
-                                serverplayer.sendSystemMessage(secretMessage);
-                            }
-                        });
-                    }
                     return InteractionResult.CONSUME;
                 }
                 return InteractionResult.SUCCESS;
@@ -606,8 +576,6 @@ public class Aerwhale extends PathfinderMob {
                     : blockstate.getCollisionShape(level, pos).isEmpty();
                 if (!this.careful) {
                     return flag1;
-                // } else if (blockstate.is(BlockTags.HAPPY_GHAST_AVOIDS)) {
-                //     return false;
                 } else {
                     FluidState fluidstate = level.getFluidState(pos);
                     if (!fluidstate.isEmpty() && (!flag || this.whale.collidedWithFluid(fluidstate, pos, from, to))) {

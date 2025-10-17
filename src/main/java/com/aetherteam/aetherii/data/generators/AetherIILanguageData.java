@@ -31,24 +31,24 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
     @Override
     protected void addTranslations() {
-        addEntityTypes();
-        addBlocks();
-        addItems();
-        addPerItemAbilityTooltips();
-        addItemTooltips();
-        addAccessorySlots();
-        addBiomes();
-        addStructures();
-        addAttributes();
-        addEffects();
-        addCreativeTabs();
-        addContainerTypes();
-        addGuiText();
-        addBestiaryEntries();
-        addEffectsDescriptions();
-        addMusic();
-        addSubtitles();
-        addDeaths();
+        this.addEntityTypes();
+        this.addBlocks();
+        this.addItems();
+        this.addPerItemAbilityTooltips();
+        this.addItemTooltips();
+        this.addAccessorySlots();
+        this.addBiomes();
+        this.addStructures();
+        this.addAttributes();
+        this.addEffects();
+        this.addCreativeTabs();
+        this.addContainerTypes();
+        this.addGuiText();
+        this.addBestiaryEntries();
+        this.addEffectsDescriptions();
+        this.addMusic();
+        this.addSubtitles();
+        this.addDeaths();
 
         // Dimensions
         this.addDimension(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, "Aether Highlands");

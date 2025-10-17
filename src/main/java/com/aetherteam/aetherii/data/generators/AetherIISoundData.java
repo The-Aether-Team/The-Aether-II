@@ -12,12 +12,12 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
 
     @Override
     public void registerSounds() {
-        registerBlockSounds();
-        registerItemSounds();
-        registerPlayerSounds();
-        registerEntitySounds();
-        registerUISounds();
-        registerMusic();
+        this.registerBlockSounds();
+        this.registerItemSounds();
+        this.registerPlayerSounds();
+        this.registerEntitySounds();
+        this.registerUISounds();
+        this.registerMusic();
     }
 
     private void registerBlockSounds() {
@@ -498,7 +498,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
 
         this.add(AetherIISoundEvents.ENTITY_AERWHALE_AMBIENT,
                 definition().with(sound("aether_ii:entity/aerwhale/call"))
-                        .subtitle("subtitles.aether_ii.entity.aerbunny.ambient")
+                        .subtitle("subtitles.aether_ii.entity.aerwhale.ambient")
         );
         this.add(AetherIISoundEvents.ENTITY_AERWHALE_HURT,
                 definition().with(sound("aether_ii:entity/aerwhale/death"))
