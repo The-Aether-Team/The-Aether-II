@@ -118,105 +118,6 @@ public class Aerwhale extends PathfinderMob {
     }
 
     @Override
-    public LivingEntity getControllingPassenger() {
-        return this.getFirstPassenger() instanceof Player player? player : super.getControllingPassenger();
-    }
-
-    /**
-     * [CODE COPY] - {@link HappyGhast#getRiddenInput}
-     */
-    @Override
-    protected Vec3 getRiddenInput(Player player, Vec3 travelVector) {
-        float x = -player.zza;
-        float z = 0.0f;
-        float y = 0.0f;
-        if (player.xxa != 0.0f) {
-            float xRot = this.getXRot();
-            z = 0.1F * Mth.cos(xRot * Mth.DEG_TO_RAD);
-            // y = -Mth.sin(xRot * Mth.DEG_TO_RAD);
-            if (player.xxa < 0.0f) {
-                z *= -1F;
-                // y *= -0.5F;
-            }
-        }
-
-        if (player.zza != 0.0f) {
-            float xRot = player.getXRot();
-            y = -Mth.sin(xRot * Mth.DEG_TO_RAD);
-            if (Math.abs(y) <= 0.5f) {
-                y = 0.0f;
-            }
-        }
-
-        if (player.isJumping()) {
-            y += 0.5F;
-        }
-
-        if (x != 0.0f || z != 0.0f || y != 0.0f) {
-            System.out.printf(
-                """
-                player.(xxa, yya, zza) = %4.2f, %4.2f, %4.2f
-                travelVector = %s
-                (x, y, z) = (%4.2f, %4.2f, %4.2f)
-                """,
-                player.xxa, player.yya, player.zza,
-                travelVector,
-                x, y, z
-            );
-        }
-
-        return new Vec3(x, y, z).scale(this.getAttributeValue(Attributes.FLYING_SPEED));
-    }
-
-    /**
-     * [CODE COPY] - {@link HappyGhast#getRiddenRotation}
-     */
-    protected Vec2 getRiddenRotation(LivingEntity entity) {
-        return new Vec2(entity.getXRot() * 0.5F, entity.getYRot() - 90.0F);
-    }
-
-    /**
-     * [CODE COPY] - {@link HappyGhast#tickRidden}
-     */
-    @Override
-    protected void tickRidden(Player player, Vec3 travelVector) {
-        super.tickRidden(player, travelVector);
-        Vec2 vec2 = this.getRiddenRotation(player);
-        float yRot = this.getYRot();
-        float diff = Mth.wrapDegrees(vec2.y - yRot);
-        yRot += diff * 0.04F;
-        this.setRot(yRot, vec2.x);
-        this.yBodyRot = this.yHeadRot = yRot;
-    }
-
-    @Override
-    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        var itemstack = player.getItemInHand(hand);
-        if (!itemstack.isEmpty()) {
-            var interactionresult = itemstack.interactLivingEntity(player, this, hand);
-            if (interactionresult.consumesAction()) {
-                return interactionresult;
-            }
-        }
-        if (!player.isSecondaryUseActive()) {
-            if (SharedConstants.IS_RUNNING_IN_IDE) {
-                this.doPlayerRide(player);
-                if (!this.level().isClientSide()) {
-                    return InteractionResult.CONSUME;
-                }
-                return InteractionResult.SUCCESS;
-            }
-        }
-        return super.mobInteract(player, hand);
-    }
-
-    private void doPlayerRide(Player player) {
-        if (!this.level().isClientSide) {
-            player.startRiding(this);
-        }
-    }
-
-    @Override
     public float getWalkTargetValue(BlockPos pos, LevelReader level) {
         if (!level.isEmptyBlock(pos)) {
             return 0.0f;
@@ -513,10 +414,6 @@ public class Aerwhale extends PathfinderMob {
 
         @Override
         public void tick() {
-            if (this.whale.isVehicle()) {
-                return;
-            }
-
             if (this.operation == MoveControl.Operation.MOVE_TO) {
                 Vec3 vec3 = new Vec3(this.wantedX - this.whale.getX(), this.wantedY - this.whale.getY(), this.wantedZ - this.whale.getZ());
                 if (this.canReach(vec3)) {
