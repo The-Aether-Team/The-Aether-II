@@ -129,13 +129,13 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
             skyRenderer.renderSunriseAndSunset(poseStack, multiBufferSource, sunAngle, sunColor);
         }
         skyRenderer.renderSunMoonAndStars(poseStack, multiBufferSource, timeOfDay, moonPhase, rainLevel, starBrightness);
-        this.renderCloudCoverDisc(level, partialTick, poseStack, multiBufferSource, skyColor);
+        this.renderCloudCoverDisc(level, partialTick, poseStack, multiBufferSource, timeOfDay, skyColor, sunColor);
         multiBufferSource.endBatch();
         return true;
     }
 
 
-    public void renderCloudCoverDisc(ClientLevel level, float partialTick, PoseStack poseStack, MultiBufferSource.BufferSource multiBufferSource, int skyColor) {
+    public void renderCloudCoverDisc(ClientLevel level, float partialTick, PoseStack poseStack, MultiBufferSource.BufferSource multiBufferSource, float timeOfDay, int skyColor, int sunColor) {
         poseStack.pushPose();
         poseStack.mulPose(Axis.XP.rotationDegrees(0.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
@@ -152,6 +152,19 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
         r = (Math.min(color.getRed() + 20, 255.0F) / 255.0F) * weatherMultiplier;
         g = (Math.min(color.getGreen() + 20, 255.0F) / 255.0F) * weatherMultiplier;
         b = (Math.min(color.getBlue() + 35, 255.0F) / 255.0F) * (float) Math.pow(weatherMultiplier, bluePower);
+
+        if (this.isSunriseOrSunset(timeOfDay)) {
+            float cosTime = Mth.cos(timeOfDay * Mth.TWO_PI);
+            float alpha;
+            if (cosTime > 0) {
+                alpha = Math.clamp(20.0F * (float) Math.pow(0.4F - Mth.abs(cosTime), 2.5F), 0.0F, 0.6F);
+            } else {
+                alpha = (1.5F * (float) Math.pow(0.4F - Mth.abs(cosTime), 1.0F));
+            }
+            r = Mth.clamp(((ARGB.redFloat(sunColor)) * alpha + r * (1.0F - alpha)), 0.0F, 1.0F);
+            g = Mth.clamp(((ARGB.greenFloat(sunColor)) * alpha + g * (1.0F - alpha)), 0.0F, 1.0F);
+            b = Mth.clamp(((ARGB.blueFloat(sunColor)) * alpha + b * (1.0F - alpha)), 0.0F, 1.0F);
+        }
 
         double cameraHeight = (Minecraft.getInstance().player.getEyePosition(partialTick).y - 66) * 0.03125F;
         if (cameraHeight < 1.0) {
