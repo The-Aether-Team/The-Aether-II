@@ -47,7 +47,6 @@ public class AerwhaleRenderer extends MobRenderer<Aerwhale, LivingEntityRenderSt
 
     @Override
     protected RenderType getRenderType(LivingEntityRenderState renderState, boolean isVisible, boolean renderTranslucent, boolean appearsGlowing) {
-        // return null;
         return super.getRenderType(renderState, isVisible, renderTranslucent, appearsGlowing);
     }
 
@@ -61,7 +60,6 @@ public class AerwhaleRenderer extends MobRenderer<Aerwhale, LivingEntityRenderSt
     @Override
     protected void setupRotations(LivingEntityRenderState state, PoseStack poseStack, float bodyRot, float scale) {
         super.setupRotations(state, poseStack, bodyRot, scale);
-        // poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot));
         poseStack.mulPose(Axis.XN.rotationDegrees(state.xRot));
     }
 }

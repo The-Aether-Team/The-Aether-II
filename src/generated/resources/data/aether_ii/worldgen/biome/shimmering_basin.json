@@ -128,7 +128,7 @@
         "type": "aether_ii:aerwhale",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 2
+        "weight": 1
       }
     ],
     "aether_ii:aether_darkness_monster": [],
