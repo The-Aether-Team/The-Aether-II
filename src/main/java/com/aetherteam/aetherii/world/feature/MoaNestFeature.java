@@ -38,10 +38,10 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
         placeNest(level, BlockStateProvider.simple(Blocks.AIR), pos.above(), radius + 1, random);
         placeNest(level, BlockStateProvider.simple(Blocks.AIR), pos.above(2), radius, random);
 
-        Moa.KeratinColor keratinColor = Moa.KeratinColor.getRandom(random);
-        Moa.EyeColor eyeColor = Moa.EyeColor.getRandom(random);
-        Moa.FeatherColor featherColor = Moa.FeatherColor.getRandom(random);
-        Moa.FeatherShape featherShape = Moa.FeatherShape.getRandom(random);
+        Moa.KeratinColor keratinColor = Moa.KeratinColor.getRandom(random, false);
+        Moa.EyeColor eyeColor = Moa.EyeColor.getRandom(random, false);
+        Moa.FeatherColor featherColor = Moa.FeatherColor.getRandom(random, false);
+        Moa.FeatherShape featherShape = Moa.FeatherShape.getRandom(random, false);
         this.setBlock(level, pos, AetherIIBlocks.MOA_EGG.get().defaultBlockState().setValue(MoaEggBlock.KERATIN, keratinColor).setValue(MoaEggBlock.EYES, eyeColor).setValue(MoaEggBlock.FEATHERS, featherColor).setValue(MoaEggBlock.FEATHER_SHAPE, featherShape).setValue(MoaEggBlock.WILD, true));
         if (config.spawnMoas()) {
             for (int i = 0; i < 2; i++) {
@@ -50,10 +50,10 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
                 moa.setPos(pos.getCenter().add(i, 0, i));
                 MoaAi.initMoaHomeMemories(moa, level.getRandom());
                 moa.setBaby(false);
-                moa.setKeratinColor(keratinColor.getSerializedName());
-                moa.setEyeColor(eyeColor.getSerializedName());
-                moa.setFeatherColor(featherColor.getSerializedName());
-                moa.setFeatherShape(featherShape.getSerializedName());
+                moa.setKeratinColor(keratinColor);
+                moa.setEyeColor(eyeColor);
+                moa.setFeatherColor(featherColor);
+                moa.setFeatherShape(featherShape);
                 level.getLevel().addFreshEntity(moa);
             }
         }

@@ -1,5 +1,9 @@
 package com.aetherteam.aetherii.block.miscellaneous;
 
+import java.util.Optional;
+
+import org.jetbrains.annotations.Nullable;
+
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.MoaEggBlockEntity;
@@ -10,15 +14,12 @@ import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.mojang.serialization.MapCodec;
 
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.EntityReference;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -43,10 +44,6 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import java.util.Optional;
-
-import org.jetbrains.annotations.Nullable;
 
 public class MoaEggBlock extends BaseEntityBlock {
     public static final MapCodec<MoaEggBlock> CODEC = simpleCodec(MoaEggBlock::new);
@@ -111,10 +108,10 @@ public class MoaEggBlock extends BaseEntityBlock {
                     moa.setPlayerGrown(true);
                     owner.ifPresent(moa::setOwner); // owner.ifPresent(moa::tame);
                 }
-                moa.setKeratinColor(state.getValue(KERATIN).getSerializedName());
-                moa.setEyeColor(state.getValue(EYES).getSerializedName());
-                moa.setFeatherColor(state.getValue(FEATHERS).getSerializedName());
-                moa.setFeatherShape(state.getValue(FEATHER_SHAPE).getSerializedName());
+                moa.setKeratinColor(state.getValue(KERATIN));
+                moa.setEyeColor(state.getValue(EYES));
+                moa.setFeatherColor(state.getValue(FEATHERS));
+                moa.setFeatherShape(state.getValue(FEATHER_SHAPE));
 
                 //moa.setMoaTypeByKey(this.moaType);
                 moa.snapTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(level.random.nextFloat() * 360.0F), 0.0F);
