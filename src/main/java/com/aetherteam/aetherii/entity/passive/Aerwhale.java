@@ -172,14 +172,6 @@ public class Aerwhale extends PathfinderMob {
     }
 
     /**
-     * @return A {@link Float} for the midair speed of this entity.
-     */
-    @Override
-    protected float getFlyingSpeed() {
-        return this.getControllingPassenger() instanceof Player ? this.getSpeed() * 0.6F : 0.02F;
-    }
-
-    /**
      * [CODE COPY] - {@link Animal#getBaseExperienceReward()}.
      */
     @Override
@@ -250,18 +242,6 @@ public class Aerwhale extends PathfinderMob {
         float yRot = mob.getYRot();
         mob.setYRot(Mth.approachDegrees(yRot, yRotTarget, 5F));
         mob.yHeadRot = mob.yBodyRot = mob.getYRot();
-    
-        if (mob.getUUID().equals(UUID.fromString("3d66f867-ee29-4d41-a288-b6cf46bc6b5c"))) {
-            System.out.printf(
-                "Aerwhale xRot old/target/new = %4.2f/%4.2f/%4.2f   yRot old/target/new = %4.2f/%4.2f/%4.2f\n",
-                xRot,
-                xRotTarget,
-                mob.getXRot(),
-                yRot,
-                yRotTarget,
-                mob.getYRot()
-            );
-        }
     }
 
     @Override
