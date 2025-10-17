@@ -101,6 +101,10 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_LIFT = register("entity.aerbunny.lift");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_LAND = register("entity.aerbunny.land");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERWHALE_AMBIENT = register("entity.aerwhale.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERWHALE_DEATH = register("entity.aerwhale.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERWHALE_HURT = register("entity.aerwhale.hurt");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_AMBIENT = register("entity.taegore.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_DEATH = register("entity.taegore.death");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_HURT = register("entity.taegore.hurt");

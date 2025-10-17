@@ -761,6 +761,7 @@ public class  AetherIICreativeTabs {
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.AECHOR_PLANT_SPAWN_EGG.get());
                 output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
+                output.accept(AetherIIItems.AERWHALE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG.get());
