@@ -1,17 +1,32 @@
 package com.aetherteam.aetherii.item;
 
+import java.util.List;
+import java.util.stream.IntStream;
+
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIEntities;
+import com.aetherteam.aetherii.entity.passive.Moa;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.component.ItemLore;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class  AetherIICreativeTabs {
+@EventBusSubscriber(modid = AetherII.MODID)
+public class AetherIICreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, AetherII.MODID);
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_BUILDING_BLOCKS = CREATIVE_MODE_TABS.register("building_blocks", () -> CreativeModeTab.builder()
@@ -784,4 +799,55 @@ public class  AetherIICreativeTabs {
                 output.accept(AetherIIItems.TEMPEST_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
             }).build());
+
+    public static ItemStack getMoaBook() {
+        final String dataMerge = "data merge entity @e[type=" + AetherIIEntities.MOA.location() + ",limit=1,sort=nearest] ";
+
+        try {
+            ItemStack book = new UtilityBookBuilder()
+                    .author("Aether II")
+                    .title("Moa Book")
+                    .section("Set Feather Color")
+                        .entries(Moa.FeatherColor.values(),
+                                (featherColor, section) -> section.translatableEntry(AetherII.MODID + ".tooltip.item.moa_egg.feather_color." + featherColor.getSerializedName())
+                                        .withNameStyle(featherColor == Moa.FeatherColor.WHITE ? Style.EMPTY : Style.EMPTY.withColor(featherColor.dyeColor.getTextColor()))
+                                        .command(dataMerge + "{FeatherColor:" + featherColor.getSerializedName() + "}"))
+                    .section("Set Keratin Color")
+                        .entries(Moa.KeratinColor.values(),
+                                (keratinColor, section) -> section.translatableEntry(AetherII.MODID + ".tooltip.item.moa_egg.keratin_color." + keratinColor.getSerializedName())
+                                        .command(dataMerge + "{KeratinColor:" + keratinColor.getSerializedName() + "}"))
+                    .section("Set Eye Color")
+                        .entries(Moa.EyeColor.values(),
+                                (eyeColor, section) -> section.translatableEntry(AetherII.MODID + ".tooltip.item.moa_egg.eye_color." + eyeColor.getSerializedName())
+                                        .command(dataMerge + "{EyeColor:" + eyeColor.getSerializedName() + "}"))
+                    .section("Set Feather Shape")
+                        .entries(Moa.FeatherShape.values(),
+                                (featherShape, section) -> section.translatableEntry(AetherII.MODID + ".tooltip.item.moa_egg.feather_shape." + featherShape.getSerializedName())
+                                        .command(dataMerge + "{FeatherShape:" + featherShape.getSerializedName() + "}"))
+                    .section("Set Special Variant")
+                        .entry("None").command(dataMerge + "{MoaVariant:0}")
+                        .entry("Disable").command(dataMerge + "{MoaVariant:1}")
+                        .entries(IntStream.range(0, 1),
+                                (i, section) -> section.entry("[" + i + "]")
+                                        .command(dataMerge + "{MoaVariant:" + (i + 2) + "}"))
+                    .build();
+            book.set(DataComponents.ITEM_NAME, Component.literal("Moa Book").withStyle(Rarity.EPIC.getStyleModifier()));
+            book.set(DataComponents.LORE, new ItemLore(List.of(
+                Component.literal("Contains buttons to modify"),
+                Component.literal("the nearest Moa's features")
+            )));
+            book.set(DataComponents.ITEM_MODEL, ResourceLocation.fromNamespaceAndPath("minecraft", "knowledge_book"));
+            book.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
+            return book;
+        } catch (CommandSyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onEvent(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey().compareTo(CreativeModeTabs.OP_BLOCKS) == 0) {
+            event.accept(getMoaBook());
+        }
+    }
 }
