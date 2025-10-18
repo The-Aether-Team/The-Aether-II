@@ -67,13 +67,13 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
             ModelTemplates.FLAT_ITEM.create(name, TextureMapping.layer0(name), this.modelOutput);
             list.add(ItemModelUtils.when(featherColor, model));
         }
-        ResourceLocation special_name_0 = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "item/special_moa_feather_0");
+        ResourceLocation special_name_0 = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "item/special_blue_moa_feather");
+        ModelTemplates.FLAT_ITEM.create(special_name_0, TextureMapping.layer0(special_name_0), this.modelOutput);
         this.itemModelOutput.accept(item,
             ItemModelUtils.conditional(
                 new CustomModelDataProperty(0),
                 ItemModelUtils.plainModel(special_name_0),
                 ItemModelUtils.select(new SelectFeatherColor(), ItemModelUtils.plainModel(modelLocation), list)));
-        ModelTemplates.FLAT_ITEM.create(special_name_0, TextureMapping.layer0(special_name_0), this.modelOutput);
     }
 
     public void generateHealingStoneItem(Item item) {
