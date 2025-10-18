@@ -44,6 +44,7 @@ public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, Ent
         renderState.keratinColor = moa.getKeratinColor();
         renderState.eyeColor = moa.getEyeColor();
         renderState.featherShape = moa.getFeatherShape();
+        renderState.specialVariant = moa.getSpecialVariant().orElse(null);
     }
 
     @Override
@@ -58,11 +59,11 @@ public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, Ent
 
     @Override
     public ResourceLocation getDefaultTexture(MoaRenderState moa) {
-        return TEXTURE;
+        return moa.getSpecialDefaultTextureOr(TEXTURE);
     }
 
     @Override
     public ResourceLocation getBabyTexture(MoaRenderState moa) {
-        return BABY_TEXTURE;
+        return moa.getSpecialBabyTextureOr(BABY_TEXTURE);
     }
 }

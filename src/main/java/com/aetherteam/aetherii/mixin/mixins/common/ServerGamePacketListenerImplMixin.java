@@ -29,7 +29,7 @@ public class ServerGamePacketListenerImplMixin {
         if (entity instanceof CustomPickItemEntity customPickItemEntity) {
             ItemStack itemstack = customPickItemEntity.getPickResult(player, packet.includeData());
             if (itemstack != null) {
-                ((ServerGamePacketListenerImplAccessor)(Object)this).tryPickItem(itemstack);
+                ((ServerGamePacketListenerImplAccessor)(Object)this).aether_ii$tryPickItem(itemstack);
                 callbackInfo.cancel();
             }
         }

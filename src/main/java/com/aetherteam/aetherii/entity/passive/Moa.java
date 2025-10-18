@@ -2,12 +2,14 @@ package com.aetherteam.aetherii.entity.passive;
 
 import java.util.*;
 import java.util.function.IntFunction;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
 import org.jetbrains.annotations.Contract;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.api.entity.CustomPickItemEntity;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
@@ -24,23 +26,30 @@ import com.aetherteam.aetherii.inventory.menu.provider.ExtraDataMenuProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.MoaEggType;
+import com.aetherteam.aetherii.item.components.MoaVariant;
 import com.aetherteam.aetherii.item.miscellaneous.MoaFeedItem;
 import com.aetherteam.aetherii.item.miscellaneous.MoaSaddlebagItem;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.Dynamic;
+import com.mojang.serialization.DynamicOps;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.Util;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -64,6 +73,8 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.component.CustomModelData;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.equipment.Equippable;
@@ -95,6 +106,8 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
 
     protected static final EntityDataAccessor<ItemStack> DATA_SADDLE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
     protected static final EntityDataAccessor<ItemStack> DATA_SADDLEBAG = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
+
+    protected static final EntityDataAccessor<OptionalInt> DATA_SPECIAL_VARIANT = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UNSIGNED_INT);
 
     private SimpleContainer inventory;
 
@@ -178,6 +191,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         builder.define(DATA_FOLLOWING_ID, Optional.empty());
         builder.define(DATA_SADDLE, ItemStack.EMPTY);
         builder.define(DATA_SADDLEBAG, ItemStack.EMPTY);
+        builder.define(DATA_SPECIAL_VARIANT, OptionalInt.empty());
     }
 
     /**
@@ -368,6 +382,12 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 if (this.level() instanceof ServerLevel serverLevel) {
                     ItemStack featherStack = new ItemStack(AetherIIItems.MOA_FEATHER.get());
                     FeatherColor featherColor = this.getFeatherColor();
+                    var specialVariantOpt = this.getSpecialVariant();
+                    if (specialVariantOpt.isPresent()) {
+                        var specialVariant = specialVariantOpt.get();
+                        featherColor = specialVariant.getFeatherColor(this);
+                        specialVariant.addDataToFeatherItem(featherStack);
+                    }
                     featherStack.set(AetherIIDataComponents.FEATHER_COLOR, featherColor);
                     this.spawnAtLocation(serverLevel, featherStack);
                 }
@@ -1174,8 +1194,30 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         return 30;
     }
 
-    public MoaEggType getEggType() {
+    public Optional<SpecialVariant> getSpecialVariant() {
+        OptionalInt optionalInt = this.entityData.get(DATA_SPECIAL_VARIANT);
+        if (!optionalInt.isEmpty()) {
+            var variant = SpecialVariant.BY_ID.apply(optionalInt.getAsInt());
+            if (variant.canApplyTo(this)) {
+                return Optional.of(variant);
+            } else {
+                this.entityData.set(DATA_SPECIAL_VARIANT, optionalInt = OptionalInt.empty());
+            }
+        }
+        for (var specialVariant : SpecialVariant.VALUES) {
+            if (specialVariant.test(this)) {
+                return Optional.of(specialVariant);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public MoaEggType getDefaultEggType() {
         return new MoaEggType(this.getKeratinColor(), this.getEyeColor(), this.getFeatherColor(), this.getFeatherShape());
+    }
+    
+    public MoaEggType getEggType() {
+        return this.getSpecialVariant().map(variant -> variant.getEggType(this)).orElseGet(this::getDefaultEggType);
     }
 
     @Override
@@ -1189,9 +1231,48 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     public ItemStack getPickResult(ServerPlayer player, boolean includeData) {
         if (includeData) {
             ItemStack itemstack = super.getPickResult();
+            if (itemstack == null) return null;
+            if (itemstack.getItem() instanceof SpawnEggItem) {
+                itemstack.copyFrom(AetherIIDataComponents.MOA_VARIANT, this);
+            }
             return itemstack;
         } else {
             return this.getPickResult();
+        }
+    }
+
+    public MoaVariant getVariant() {
+        return new MoaVariant(this.getKeratinColor(), this.getEyeColor(), this.getFeatherColor(), this.getFeatherShape(), this.getSpecialVariant());
+    }
+
+    public void setVariant(MoaVariant variant) {
+        this.setKeratinColor(variant.keratinColor());
+        this.setEyeColor(variant.eyeColor());
+        this.setFeatherColor(variant.featherColor());
+        this.setFeatherShape(variant.featherShape());
+        var specialVariant = variant.specialVariant();
+        this.entityData.set(DATA_SPECIAL_VARIANT, specialVariant.isPresent() ? OptionalInt.of(specialVariant.get().id) : OptionalInt.empty());
+    }
+
+    @Nullable
+    @Override
+    public <T> T get(DataComponentType<? extends T> component) {
+        return component == AetherIIDataComponents.MOA_VARIANT.get() ? castComponentValue(component, this.getVariant()) : super.get(component);
+    }
+
+    @Override
+    protected void applyImplicitComponents(DataComponentGetter componentGetter) {
+        this.applyImplicitComponentIfPresent(componentGetter, AetherIIDataComponents.MOA_VARIANT.get());
+        super.applyImplicitComponents(componentGetter);
+    }
+
+    @Override
+    protected <T> boolean applyImplicitComponent(DataComponentType<T> component, T value) {
+        if (component == AetherIIDataComponents.MOA_VARIANT.get()) {
+            this.setVariant(castComponentValue(AetherIIDataComponents.MOA_VARIANT.get(), value));
+            return true;
+        } else {
+            return super.applyImplicitComponent(component, value);
         }
     }
 
@@ -1206,6 +1287,16 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         output.putString("KeratinColor", this.getKeratinColor().getSerializedName());
         output.putString("EyeColor", this.getEyeColor().getSerializedName());
         output.putString("FeatherColor", this.getFeatherColor().getSerializedName());
+        this.entityData.get(DATA_SPECIAL_VARIANT).ifPresentOrElse((variantId) -> {
+            var variant = SpecialVariant.BY_ID.apply(variantId);
+            if (variant.canApplyTo(this)) {
+                output.putInt("MoaVariant", variant.id);
+            } else {
+                output.discard("MoaVariant");
+            }
+        }, () -> {
+            output.discard("MoaVariant");
+        });
         if (this.getRider() != null) {
             output.store("Rider", EntityReference.codec(), this.getRider());
         }
@@ -1266,6 +1357,17 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 this.inventory.setItem(stackWithSlot.slot(), stackWithSlot.stack());
             }
         }
+
+        input.getInt("MoaVariant").ifPresentOrElse((variantId) -> {
+            var variant = SpecialVariant.BY_ID.apply(variantId);
+            if (variant.canApplyTo(this)) {
+                this.entityData.set(DATA_SPECIAL_VARIANT, OptionalInt.of(variant.id));
+            } else {
+                this.entityData.set(DATA_SPECIAL_VARIANT, OptionalInt.empty());
+            }
+        }, () -> {
+            this.entityData.set(DATA_SPECIAL_VARIANT, OptionalInt.empty());
+        });
     }
 
     public enum KeratinColor implements StringRepresentable {
@@ -1688,6 +1790,195 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         }
 
         private int id() {
+            return this.id;
+        }
+    }
+
+    public enum SpecialVariant implements StringRepresentable, Predicate<Moa> {
+        ;
+
+        public static final StringRepresentable.EnumCodec<SpecialVariant> CODEC = StringRepresentable.fromEnum(SpecialVariant::values);
+        static final IntFunction<SpecialVariant> BY_ID = ByIdMap.continuous(SpecialVariant::id, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
+        public static final StreamCodec<ByteBuf, SpecialVariant> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, SpecialVariant::id);
+        public static final Codec<Optional<SpecialVariant>> OPTIONAL_INT_CODEC = Codec.INT.xmap(id -> Optional.of(BY_ID.apply(id)), opt -> opt.isPresent()? opt.get().id + 1 : 0);
+        public static final Codec<SpecialVariant> INT_CODEC = Codec.INT.xmap(BY_ID::apply, SpecialVariant::id);
+
+        private final String name;
+        private final int id;
+        @Nullable
+        public final ResourceLocation defaultTexture, babyTexture;
+        @Nullable
+        public final KeratinColor keratinColorOverride;
+        @Nullable
+        public final EyeColor eyeColorOverride;
+        @Nullable
+        public final FeatherColor featherColorOverride;
+        @Nullable
+        public final FeatherShape featherShapeOverride;
+        @Nullable
+        public final MoaEggType eggTypeOverride;
+
+        private static final SpecialVariant[] VALUES = values();
+
+        private SpecialVariant(String name, int id,
+                @Nullable ResourceLocation defaultTexture, @Nullable ResourceLocation babyTexture,
+                @Nullable KeratinColor keratinColorOverride, @Nullable EyeColor eyeColorOverride, @Nullable FeatherColor featherColorOverride, @Nullable FeatherShape featherShapeOverride,
+                @Nullable MoaEggType eggTypeOverride) {
+            this.name = name;
+            this.id = id;
+            this.defaultTexture = defaultTexture;
+            this.babyTexture = babyTexture;
+            this.keratinColorOverride = keratinColorOverride;
+            this.eyeColorOverride = eyeColorOverride;
+            this.featherColorOverride = featherColorOverride;
+            this.featherShapeOverride = featherShapeOverride;
+            this.eggTypeOverride = eggTypeOverride;
+        }
+
+        private SpecialVariant(String name, int id) {
+            this(name, id, null, null, null, null, null, null);
+        }
+
+        private SpecialVariant(String name, int id, String baseTextureNameNoModid) {
+            this(name, id, baseTextureNameNoModid, null, null, null, null);
+        }
+
+        private SpecialVariant(String name, int id, ResourceLocation baseTextureName) {
+            this(name, id, baseTextureName, null, null, null, null);
+        }
+        
+        private SpecialVariant(String name, int id,
+                @Nullable ResourceLocation defaultTexture, @Nullable ResourceLocation babyTexture) {
+            this(name, id, defaultTexture, babyTexture, null, null, null, null);
+        }
+
+        private SpecialVariant(String name, int id, String baseTextureNameNoModid,
+                @Nullable KeratinColor keratinColorOverride, @Nullable EyeColor eyeColorOverride, @Nullable FeatherColor featherColorOverride, @Nullable FeatherShape featherShapeOverride) {
+            this(name, id,
+                    ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/" + baseTextureNameNoModid + ".png"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/" + baseTextureNameNoModid + "_baby.png"),
+                    keratinColorOverride, eyeColorOverride, featherColorOverride, featherShapeOverride);
+        }
+
+        private SpecialVariant(String name, int id, ResourceLocation baseTextureName,
+                @Nullable KeratinColor keratinColorOverride, @Nullable EyeColor eyeColorOverride, @Nullable FeatherColor featherColorOverride, @Nullable FeatherShape featherShapeOverride) {
+            this(name, id,
+                    baseTextureName.withPath(path -> "textures/entity/mobs/moa/" + path + ".png"), baseTextureName.withPath(path -> "textures/entity/mobs/moa/" + path + "_baby.png"),
+                    keratinColorOverride, eyeColorOverride, featherColorOverride, featherShapeOverride);
+        }
+
+        private SpecialVariant(String name, int id,
+                @Nullable ResourceLocation defaultTexture, @Nullable ResourceLocation babyTexture,
+                @Nullable KeratinColor keratinColorOverride, @Nullable EyeColor eyeColorOverride, @Nullable FeatherColor featherColorOverride, @Nullable FeatherShape featherShapeOverride) {
+            this(name, id,
+                    defaultTexture, babyTexture,
+                    keratinColorOverride, eyeColorOverride, featherColorOverride, featherShapeOverride,
+                    keratinColorOverride != null && eyeColorOverride != null && featherColorOverride != null && featherShapeOverride != null ? new MoaEggType(keratinColorOverride, eyeColorOverride, featherColorOverride, featherShapeOverride) : null);
+        }
+
+        public boolean dependsOnCustomName() {
+            return false;
+        }
+
+        @Nullable
+        public ResourceLocation getDefaultTexture() {
+            return this.defaultTexture;
+        }
+
+        @Nullable
+        public ResourceLocation getBabyTexture() {
+            return this.babyTexture;
+        }
+
+        @Nullable
+        public KeratinColor getKeratinColorOverride() {
+            return keratinColorOverride;
+        }
+
+        @Nullable
+        public EyeColor getEyeColorOverride() {
+            return eyeColorOverride;
+        }
+
+        @Nullable
+        public FeatherColor getFeatherColorOverride() {
+            return featherColorOverride;
+        }
+
+        @Nullable
+        public FeatherShape getFeatherShapeOverride() {
+            return featherShapeOverride;
+        }
+
+        @Nullable
+        public MoaEggType getEggTypeOverride() {
+            return eggTypeOverride;
+        }
+
+        public boolean canApplyTo(Moa moa) {
+            return true;
+        }
+
+        @Override
+        public boolean test(Moa moa) {
+            return false;
+        }
+
+        public void addDataToFeatherItem(ItemStack feather) {}
+
+        public KeratinColor getKeratinColor(Moa moa) {
+            return keratinColorOverride != null ? keratinColorOverride : moa.getKeratinColor();
+        }
+
+        public EyeColor getEyeColor(Moa moa) {
+            return eyeColorOverride != null ? eyeColorOverride : moa.getEyeColor();
+        }
+
+        public FeatherColor getFeatherColor(Moa moa) {
+            return featherColorOverride != null ? featherColorOverride : moa.getFeatherColor();
+        }
+
+        public FeatherShape getFeatherShape(Moa moa) {
+            return featherShapeOverride != null ? featherShapeOverride : moa.getFeatherShape();
+        }
+
+        public MoaEggType getEggType(Moa moa) {
+            return eggTypeOverride != null ? eggTypeOverride : moa.getDefaultEggType();
+        }
+
+        public static Stream<SpecialVariant> stream() {
+            return Stream.of(VALUES);
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        /**
+         * @return the Variant specified by the given name or null if no such Variant exists
+         */
+        @Nullable
+        public static SpecialVariant byName(@Nullable String name) {
+            return CODEC.byName(name);
+        }
+
+        @Nullable
+        @Contract("_,!null->!null;_,null->_")
+        public static SpecialVariant byName(@Nullable String name, @Nullable SpecialVariant fallback) {
+            SpecialVariant variant = CODEC.byName(name);
+            return variant != null ? variant : fallback;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+        @Override
+        public String getSerializedName() {
+            return this.name;
+        }
+
+        public int id() {
             return this.id;
         }
     }

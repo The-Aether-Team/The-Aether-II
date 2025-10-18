@@ -1,8 +1,13 @@
 package com.aetherteam.aetherii.client.renderer.entity.state;
 
+import javax.annotation.Nullable;
+
+import org.jetbrains.annotations.Contract;
+
 import com.aetherteam.aetherii.entity.passive.Moa;
 
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 public class MoaRenderState extends LivingEntityRenderState {
@@ -14,8 +19,30 @@ public class MoaRenderState extends LivingEntityRenderState {
     public Moa.EyeColor eyeColor = Moa.EyeColor.DEFAULT;
     public Moa.FeatherColor featherColor = Moa.FeatherColor.DEFAULT;
     public Moa.FeatherShape featherShape = Moa.FeatherShape.DEFAULT;
+    @Nullable
+    public Moa.SpecialVariant specialVariant = null;
 
     public boolean isSaddled() {
         return !this.saddle.isEmpty();
+    }
+
+    public boolean hasSpecialTexture() {
+        return this.specialVariant != null && (this.isBaby ? this.specialVariant.babyTexture : this.specialVariant.defaultTexture) != null;
+    }
+
+    @Nullable
+    @Contract("!null->!null")
+    public ResourceLocation getSpecialDefaultTextureOr(@Nullable ResourceLocation fallback) {
+        if (this.specialVariant == null) return fallback;
+        ResourceLocation texture = this.specialVariant.defaultTexture;
+        return texture != null ? texture : fallback;
+    }
+
+    @Nullable
+    @Contract("!null->!null")
+    public ResourceLocation getSpecialBabyTextureOr(@Nullable ResourceLocation fallback) {
+        if (this.specialVariant == null) return fallback;
+        ResourceLocation texture = this.specialVariant.babyTexture;
+        return texture != null ? texture : fallback;
     }
 }

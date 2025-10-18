@@ -16,5 +16,5 @@ public interface ServerGamePacketListenerImplAccessor {
     void aether_ii$setAboveGroundVehicleTickCount(int aboveGroundVehicleTickCount);
 
     @Invoker("tryPickItem")
-    void tryPickItem(ItemStack stack);
+    void aether_ii$tryPickItem(ItemStack stack);
 }
