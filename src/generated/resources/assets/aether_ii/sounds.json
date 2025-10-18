@@ -1397,6 +1397,22 @@
       {
         "name": "aether_ii:music/aether6",
         "stream": true
+      },
+      {
+        "name": "aether_ii:music/polarity",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/sunbeam",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/thin_air",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/walking_dream",
+        "stream": true
       }
     ]
   },
@@ -1416,6 +1432,22 @@
       },
       {
         "name": "aether_ii:music/aether_night2",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/polarity",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/sunbeam",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/thin_air",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/walking_dream",
         "stream": true
       }
     ]

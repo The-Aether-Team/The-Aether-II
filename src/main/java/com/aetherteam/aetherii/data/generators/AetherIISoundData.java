@@ -1017,13 +1017,21 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("aether_ii:music/aether3").stream(),
                         sound("aether_ii:music/aether4").stream(),
                         sound("aether_ii:music/aether5").stream(),
-                        sound("aether_ii:music/aether6").stream()
+                        sound("aether_ii:music/aether6").stream(),
+                        sound("aether_ii:music/polarity").stream(),
+                        sound("aether_ii:music/sunbeam").stream(),
+                        sound("aether_ii:music/thin_air").stream(),
+                        sound("aether_ii:music/walking_dream").stream()
                 )
         );
         this.add(AetherIISoundEvents.MUSIC_AETHER_NIGHT,
                 definition().with(
                         sound("aether_ii:music/aether_night1").stream(),
-                        sound("aether_ii:music/aether_night2").stream()
+                        sound("aether_ii:music/aether_night2").stream(),
+                        sound("aether_ii:music/polarity").stream(),
+                        sound("aether_ii:music/sunbeam").stream(),
+                        sound("aether_ii:music/thin_air").stream(),
+                        sound("aether_ii:music/walking_dream").stream()
                 )
         );
         this.add(AetherIISoundEvents.MUSIC_AETHER_SUNRISE,
