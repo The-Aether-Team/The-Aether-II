@@ -13,7 +13,8 @@
         "brown": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_brown",
         "green": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_green",
         "gray": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_gray",
-        "red": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_red"
+        "red": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_red",
+        "bley": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_bley"
       }
     }
   ]

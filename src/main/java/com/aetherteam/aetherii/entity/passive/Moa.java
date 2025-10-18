@@ -1376,6 +1376,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         BROWN("brown", 2, false),
         GREEN("green", 3, false),
         RED("red", 4, false),
+        BLEY("bley", 5, true),
         ;
 
         public static final KeratinColor DEFAULT = GRAY;
@@ -1463,6 +1464,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         BLUE("blue", 0, false),
         GREEN("green", 1, false),
         YELLOW("yellow", 2, false),
+        GOLD("gold", 3, true),
         ;
 
         public static final EyeColor DEFAULT = BLUE;
@@ -1561,6 +1563,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         RED("red", 15, DyeColor.RED, false),
         WHITE("white", 16, DyeColor.WHITE, false),
         YELLOW("yellow", 17, DyeColor.YELLOW, false),
+        DEEP_BLUE("deep_blue", 18, DyeColor.BLUE, true),
         ;
 
         public static final FeatherColor DEFAULT = LIGHT_BLUE;
@@ -1795,6 +1798,49 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     }
 
     public enum SpecialVariant implements StringRepresentable, Predicate<Moa> {
+        RAPTOR("raptor", 0, "raptor", KeratinColor.BLEY, EyeColor.GOLD, FeatherColor.DEEP_BLUE, FeatherShape.CURVED) {
+            @Override
+            public boolean test(Moa moa) {
+                if (moa.getCustomName() == null) return false;
+                String customName = moa.getCustomName().getString(20);
+                boolean result = switch (customName.hashCode()) {
+                    case -1854343754, 387083286 ->
+                        customName.length() >= 6 && customName.length() < 20
+                        && this.canApplyTo(moa);
+                    default -> false;
+                };
+                return result;
+            }
+
+            @Override
+            public boolean canApplyTo(Moa moa) {
+                boolean result = moa.getFeatherShape() == FeatherShape.CURVED && switch (moa.getFeatherColor()) {
+                    case BLUE:
+                    case LIGHT_BLUE:
+                    case DEEP_BLUE:
+                        yield switch (moa.getEyeColor()) {
+                            case YELLOW, GOLD -> switch (moa.getKeratinColor()) {
+                                case GRAY, BLUE -> true;
+                                default -> false;
+                            };
+                            default -> false;
+                        };
+                    default:
+                        yield false;
+                };
+                return result;
+            }
+
+            @Override
+            public void addDataToFeatherItem(ItemStack feather) {
+                feather.set(DataComponents.CUSTOM_MODEL_DATA, new CustomModelData(List.of(), List.of(true), List.of(), List.of()));
+            }
+
+            @Override
+            public boolean dependsOnCustomName() {
+                return true;
+            }
+        },
         ;
 
         public static final StringRepresentable.EnumCodec<SpecialVariant> CODEC = StringRepresentable.fromEnum(SpecialVariant::values);
