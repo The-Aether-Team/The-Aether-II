@@ -105,7 +105,6 @@ public class InfectedGuardianTreePools {
 
     public static final ResourceKey<StructureTemplatePool> BOSS_ROOM = AetherIIPools.createKey("infected_guardian_tree/boss_room");
     public static final ResourceKey<StructureTemplatePool> DEAD_ENDS = AetherIIPools.createKey("infected_guardian_tree/dead_ends");
-    //public static final ResourceKey<StructureTemplatePool> DIRECT_DEAD_ENDS = AetherIIPools.createKey("infected_guardian_tree/direct_dead_ends");
 
     public static final ResourceKey<StructureTemplatePool> DECORATION_LARGE_SHELF_ROTSHROOM = AetherIIPools.createKey("infected_guardian_tree/decoration/large_shelf_rotshroom");
     public static final ResourceKey<StructureTemplatePool> DECORATION_LARGE_SHELF_ROTSHROOM_REDUCED = AetherIIPools.createKey("infected_guardian_tree/decoration/large_shelf_rotshroom_reduced");
@@ -338,8 +337,6 @@ public class InfectedGuardianTreePools {
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/large/2_eyes/path_01_c_m"), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/large/2_eyes/path_01_d_m"), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/large/2_eyes/path_01_e_m"), 1)
-                        //,Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/large/2_eyes/path_02_a"), 1),
-                        //Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/layouts/paths/large/2_eyes/path_02_a_m"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
