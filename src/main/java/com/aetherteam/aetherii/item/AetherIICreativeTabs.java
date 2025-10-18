@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.item;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
@@ -9,6 +8,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIEntities;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -810,22 +810,26 @@ public class AetherIICreativeTabs {
             ItemStack book = new UtilityBookBuilder()
                     .author("Aether II")
                     .title("Moa Book")
+                    .generation(3)
                     .section("Set Feather Color")
                         .entries(Moa.FeatherColor.values(),
                                 (featherColor, section) -> section.translatableEntry(AetherII.MODID + ".tooltip.item.moa_egg.feather_color." + featherColor.getSerializedName())
-                                        .withNameStyle(featherColor == Moa.FeatherColor.WHITE ? Style.EMPTY : Style.EMPTY.withColor(featherColor.dyeColor.getTextColor()))
+                                        .withNameStyle((featherColor == Moa.FeatherColor.WHITE ? Style.EMPTY : featherColor == Moa.FeatherColor.YELLOW ? Style.EMPTY.withColor(ChatFormatting.GOLD) : Style.EMPTY.withColor(featherColor.dyeColor.getTextColor())).withItalic(featherColor.isSpecialColor))
                                         .command(dataMerge + "{FeatherColor:" + featherColor.getSerializedName() + "}"))
                     .section("Set Keratin Color")
                         .entries(Moa.KeratinColor.values(),
                                 (keratinColor, section) -> section.translatableEntry(AetherII.MODID + ".tooltip.item.moa_egg.keratin_color." + keratinColor.getSerializedName())
+                                        .withNameStyle(Style.EMPTY.withItalic(keratinColor.isSpecialColor))
                                         .command(dataMerge + "{KeratinColor:" + keratinColor.getSerializedName() + "}"))
                     .section("Set Eye Color")
                         .entries(Moa.EyeColor.values(),
                                 (eyeColor, section) -> section.translatableEntry(AetherII.MODID + ".tooltip.item.moa_egg.eye_color." + eyeColor.getSerializedName())
+                                        .withNameStyle(Style.EMPTY.withItalic(eyeColor.isSpecialColor))
                                         .command(dataMerge + "{EyeColor:" + eyeColor.getSerializedName() + "}"))
                     .section("Set Feather Shape")
                         .entries(Moa.FeatherShape.values(),
                                 (featherShape, section) -> section.translatableEntry(AetherII.MODID + ".tooltip.item.moa_egg.feather_shape." + featherShape.getSerializedName())
+                                        .withNameStyle(Style.EMPTY.withItalic(featherShape.isSpecialShape))
                                         .command(dataMerge + "{FeatherShape:" + featherShape.getSerializedName() + "}"))
                     .section("Set Special Variant")
                         .entry("Remove MoaVariant").command(dataRemove + "MoaVariant")

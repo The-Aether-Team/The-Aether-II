@@ -139,7 +139,7 @@ public class UtilityBookBuilder {
                 var line = Component.literal("[")
                     .append(name)
                     .append("]")
-                    .withStyle(Style.EMPTY.withClickEvent(new ClickEvent.RunCommand(command.commandString)));
+                    .withStyle(Style.EMPTY.withItalic(false).withClickEvent(new ClickEvent.RunCommand(command.commandString)));
                 lineCounter.lineCount = 0;
                 line.visit(lineCounter);
                 if (lineCount == initialLineCount && lineCounter.lineCount + lineCount > 14) {
