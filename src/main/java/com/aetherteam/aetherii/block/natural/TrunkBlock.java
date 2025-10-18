@@ -332,7 +332,7 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     private static boolean isShapeSideFull(BlockGetter level, Direction facing, BlockPos facingPos, BlockState facingState) {
-        return !isTrunk(facingState) && Block.isFaceFull(facingState.getCollisionShape(level, facingPos), facing) && !Block.isExceptionForConnection(facingState);
+        return !isTrunk(facingState) && Block.isFaceFull(facingState.getCollisionShape(level, facingPos), facing) && facingState.isFaceSturdy(level, facingPos, facing) && !Block.isExceptionForConnection(facingState);
     }
 
     private static boolean isTrunk(BlockState state) {
