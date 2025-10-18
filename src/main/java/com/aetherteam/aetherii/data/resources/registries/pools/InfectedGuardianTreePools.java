@@ -60,6 +60,22 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> CORRIDORS_D_E = AetherIIPools.createKey("infected_guardian_tree/corridors/d-e");
     public static final ResourceKey<StructureTemplatePool> CORRIDORS_E_E = AetherIIPools.createKey("infected_guardian_tree/corridors/e-e");
 
+    public static final ResourceKey<StructureTemplatePool> CORRIDORS_A_A_V = AetherIIPools.createKey("infected_guardian_tree/corridors/a-a_v");
+    public static final ResourceKey<StructureTemplatePool> CORRIDORS_A_B_V = AetherIIPools.createKey("infected_guardian_tree/corridors/a-b_v");
+    public static final ResourceKey<StructureTemplatePool> CORRIDORS_A_C_V = AetherIIPools.createKey("infected_guardian_tree/corridors/a-c_v");
+    public static final ResourceKey<StructureTemplatePool> CORRIDORS_A_D_V = AetherIIPools.createKey("infected_guardian_tree/corridors/a-d_v");
+    public static final ResourceKey<StructureTemplatePool> CORRIDORS_A_E_V = AetherIIPools.createKey("infected_guardian_tree/corridors/a-e_v");
+    public static final ResourceKey<StructureTemplatePool> CORRIDORS_B_B_V = AetherIIPools.createKey("infected_guardian_tree/corridors/b-b_v");
+    public static final ResourceKey<StructureTemplatePool> CORRIDORS_B_C_V = AetherIIPools.createKey("infected_guardian_tree/corridors/b-c_v");
+    public static final ResourceKey<StructureTemplatePool> CORRIDORS_B_D_V = AetherIIPools.createKey("infected_guardian_tree/corridors/b-d_v");
+    public static final ResourceKey<StructureTemplatePool> CORRIDORS_B_E_V = AetherIIPools.createKey("infected_guardian_tree/corridors/b-e_v");
+    public static final ResourceKey<StructureTemplatePool> CORRIDORS_C_C_V = AetherIIPools.createKey("infected_guardian_tree/corridors/c-c_v");
+    public static final ResourceKey<StructureTemplatePool> CORRIDORS_C_D_V = AetherIIPools.createKey("infected_guardian_tree/corridors/c-d_v");
+    public static final ResourceKey<StructureTemplatePool> CORRIDORS_C_E_V = AetherIIPools.createKey("infected_guardian_tree/corridors/c-e_v");
+    public static final ResourceKey<StructureTemplatePool> CORRIDORS_D_D_V = AetherIIPools.createKey("infected_guardian_tree/corridors/d-d_v");
+    public static final ResourceKey<StructureTemplatePool> CORRIDORS_D_E_V = AetherIIPools.createKey("infected_guardian_tree/corridors/d-e_v");
+    public static final ResourceKey<StructureTemplatePool> CORRIDORS_E_E_V = AetherIIPools.createKey("infected_guardian_tree/corridors/e-e_v");
+
     public static final ResourceKey<StructureTemplatePool> ROOMS_A = AetherIIPools.createKey("infected_guardian_tree/rooms/rooms_a");
     public static final ResourceKey<StructureTemplatePool> ROOMS_B = AetherIIPools.createKey("infected_guardian_tree/rooms/rooms_b");
     public static final ResourceKey<StructureTemplatePool> ROOMS_C = AetherIIPools.createKey("infected_guardian_tree/rooms/rooms_c");
@@ -677,6 +693,127 @@ public class InfectedGuardianTreePools {
                 StructureTemplatePool.Projection.RIGID)
         );
 
+        context.register(CORRIDORS_A_A_V, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/a-a_v_01"), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CORRIDORS_A_B_V, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/a-b_v_01"), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CORRIDORS_A_C_V, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/a-c_v_01"), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CORRIDORS_A_D_V, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/a-d_v_01"), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CORRIDORS_A_E_V, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/a-e_v_01"), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CORRIDORS_B_B_V, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/b-b_v_01"), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CORRIDORS_B_C_V, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/b-c_v_01"), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CORRIDORS_B_D_V, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/b-d_v_01"), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CORRIDORS_B_E_V, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/b-e_v_01"), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CORRIDORS_C_C_V, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/c-c_v_01"), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CORRIDORS_C_D_V, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/c-d_v_01"), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CORRIDORS_C_E_V, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/c-e_v_01"), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CORRIDORS_D_D_V, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/d-d_v_01"), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CORRIDORS_D_E_V, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/d-e_v_01"), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(CORRIDORS_E_E_V, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/e-e_v_01"), 1),
+                        Pair.of(StructurePoolElement.empty(), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
         context.register(DEAD_ENDS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
@@ -684,16 +821,6 @@ public class InfectedGuardianTreePools {
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
-        /*
-        context.register(DIRECT_DEAD_ENDS, new StructureTemplatePool(
-                fallback,
-                ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/dead_ends/direct_dead_end_01"), 1)
-                ),
-                StructureTemplatePool.Projection.RIGID)
-        );
-
-         */
 
         context.register(DECORATION_LARGE_SHELF_ROTSHROOM, new StructureTemplatePool(
                 fallback,
