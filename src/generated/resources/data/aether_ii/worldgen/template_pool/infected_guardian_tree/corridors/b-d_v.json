@@ -13,7 +13,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 1
+      "weight": 2
     },
     {
       "element": {
