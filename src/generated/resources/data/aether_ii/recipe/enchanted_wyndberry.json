@@ -2,7 +2,7 @@
   "type": "aether_ii:altar_enchanting",
   "category": "food",
   "experience": 0.0,
-  "fuel_count": 5,
+  "fuel_count": 2,
   "ingredient": "aether_ii:wyndberry",
   "processing_time": 200,
   "result": {

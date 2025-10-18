@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 
 import java.util.List;
 
-public class SwetLatchLayer<T extends LivingEntityRenderState, M extends EntityModel<T>> extends RenderLayer<T, M> {
+public class SwetLatchLayer<T extends LivingEntityRenderState, M extends EntityModel<? super T>> extends RenderLayer<T, M> {
     private final EntityRenderDispatcher dispatcher;
 
     public SwetLatchLayer(EntityRendererProvider.Context context, RenderLayerParent<T, M> renderer) {

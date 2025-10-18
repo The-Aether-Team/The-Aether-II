@@ -12,7 +12,15 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
 
     @Override
     public void registerSounds() {
-        // Blocks
+        this.registerBlockSounds();
+        this.registerItemSounds();
+        this.registerPlayerSounds();
+        this.registerEntitySounds();
+        this.registerUISounds();
+        this.registerMusic();
+    }
+
+    private void registerBlockSounds() {
         this.add(AetherIISoundEvents.BLOCK_AETHER_PORTAL_AMBIENT,
                 definition().with(sound("aether_ii:block/portal/hum").attenuationDistance(10))
                         .subtitle("subtitles.aether_ii.block.aether_portal.ambient")
@@ -134,8 +142,9 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:block/chest/close3")
                 ).subtitle("subtitles.aether_ii.block.alkahest_purifier.close")
         );
+    }
 
-        // Items
+    private void registerItemSounds() {
         this.add(AetherIISoundEvents.ITEM_AMBROSIUM_SHARD,
                 definition().with(sound("minecraft:block/amethyst/shimmer"))
                         .subtitle("subtitles.aether_ii.item.ambrosium_shard.use")
@@ -276,8 +285,9 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         this.add(AetherIISoundEvents.ITEM_RECORDING_892,
                 definition().with(sound("aether_ii:item/records/chase").stream())
         );
+    }
 
-        // Player
+    private void registerPlayerSounds() {
         this.add(AetherIISoundEvents.PLAYER_SLASH_DAMAGE_CORRECT,
                 definition().with(
                         sound("minecraft:entity/player/attack/crit1").volume(0.7F),
@@ -352,8 +362,9 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:item/trident/pierce3")
                 ).subtitle("subtitles.aether_ii.entity.player.attack.stab")
         );
+    }
 
-        // Entities
+    private void registerEntitySounds() {
         this.add(AetherIISoundEvents.ENTITY_PHYG_AMBIENT,
                 definition().with(
                         sound("minecraft:mob/pig/say1"),
@@ -483,6 +494,19 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         this.add(AetherIISoundEvents.ENTITY_AERBUNNY_LAND,
                 definition().with(sound("aether_ii:entity/aerbunny/land"))
                         .subtitle("subtitles.aether_ii.entity.aerbunny.land")
+        );
+
+        this.add(AetherIISoundEvents.ENTITY_AERWHALE_AMBIENT,
+                definition().with(sound("aether_ii:entity/aerwhale/call"))
+                        .subtitle("subtitles.aether_ii.entity.aerwhale.ambient")
+        );
+        this.add(AetherIISoundEvents.ENTITY_AERWHALE_HURT,
+                definition().with(sound("aether_ii:entity/aerwhale/death"))
+                        .subtitle("subtitles.aether_ii.entity.aerwhale.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_AERWHALE_DEATH,
+                definition().with(sound("aether_ii:entity/aerwhale/death"))
+                        .subtitle("subtitles.aether_ii.entity.aerwhale.death")
         );
 
         this.add(AetherIISoundEvents.ENTITY_TAEGORE_AMBIENT,
@@ -961,8 +985,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:random/bow")
                 ).subtitle("subtitles.aether_ii.entity.skyroot_pinecone.throw")
         );
-
-        // Miscellaneous
+        
         this.add(AetherIISoundEvents.ENTITY_ELECTRIC_FIELD_CREATE,
                 definition().with(
                         sound("minecraft:ambient/weather/thunder1").volume(0.5F),
@@ -970,8 +993,9 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:ambient/weather/thunder3").volume(0.5F)
                 ).subtitle("subtitles.aether_ii.entity.electric_field.create")
         );
+    }
 
-        // UI
+    private void registerUISounds() {
         this.add(AetherIISoundEvents.UI_ARTISANS_BENCH_SELECT_RECIPE,
                 definition().with(
                         sound("minecraft:random/click")
@@ -983,8 +1007,9 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:ui/stonecutter/cut2").pitch(0.92F)
                 ).subtitle("subtitles.aether_ii.ui.artisans_bench.take_result")
         );
-
-        // Music
+    }
+    
+    private void registerMusic() {
         this.add(AetherIISoundEvents.MUSIC_AETHER,
                 definition().with(
                         sound("aether_ii:music/aether1").stream(),

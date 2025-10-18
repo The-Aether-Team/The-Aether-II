@@ -2,7 +2,7 @@
   "type": "aether_ii:altar_enchanting",
   "category": "repairing",
   "experience": 0.0,
-  "fuel_count": 3,
+  "fuel_count": 4,
   "group": "repair_zanite",
   "ingredient": "aether_ii:zanite_shortsword",
   "processing_time": 200,

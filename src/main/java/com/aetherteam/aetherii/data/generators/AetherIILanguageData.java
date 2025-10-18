@@ -1,5 +1,9 @@
 package com.aetherteam.aetherii.data.generators;
 
+import java.util.List;
+import java.util.TreeMap;
+import java.util.function.Supplier;
+
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
@@ -7,13 +11,18 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
 import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
-import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
+
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
+import net.neoforged.neoforge.registries.DeferredItem;
 
 public class AetherIILanguageData extends AetherIILanguageProvider {
     public AetherIILanguageData(PackOutput output) {
@@ -22,7 +31,40 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
     @Override
     protected void addTranslations() {
-        // Blocks
+        this.addEntityTypes();
+        this.addBlocks();
+        this.addItems();
+        this.addPerItemAbilityTooltips();
+        this.addItemTooltips();
+        this.addAccessorySlots();
+        this.addBiomes();
+        this.addStructures();
+        this.addAttributes();
+        this.addEffects();
+        this.addCreativeTabs();
+        this.addContainerTypes();
+        this.addGuiText();
+        this.addBestiaryEntries();
+        this.addEffectsDescriptions();
+        this.addMusic();
+        this.addSubtitles();
+        this.addDeaths();
+
+        // Dimensions
+        this.addDimension(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, "Aether Highlands");
+
+        // Misc
+        this.addGeneric("slash", "§9Slash§r");
+        this.addGeneric("impact", "§eImpact§r");
+        this.addGeneric("pierce", "§cPierce§r");
+        this.addGeneric("message.campfire_added", "Outpost campfire respawn point set");
+        this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid outpost campfire");
+
+        // Packs
+        this.addPackDescription("mod", "Aether II Resources");
+    }
+
+    private void addBlocks() {
         // Portal
         this.addBlock(AetherIIBlocks.AETHER_PORTAL, "Aether Portal");
 
@@ -673,9 +715,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Furniture
         this.addBlock(AetherIIBlocks.OUTPOST_CAMPFIRE, "Outpost Campfire");
+    }
 
-
-        // Items
+    private void addItems() {
         // Tools
         this.addItem(AetherIIItems.SKYROOT_PICKAXE, "Skyroot Pickaxe");
         this.addItem(AetherIIItems.SKYROOT_AXE, "Skyroot Axe");
@@ -878,30 +920,31 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.RECORDING_892, "Recording #892");
 
         // Spawn Eggs
-        this.addItem(AetherIIItems.AERBUNNY_SPAWN_EGG, "Aerbunny Spawn Egg");
-        this.addItem(AetherIIItems.FLYING_COW_SPAWN_EGG, "Flying Cow Spawn Egg");
-        this.addItem(AetherIIItems.SHEEPUFF_SPAWN_EGG, "Sheepuff Spawn Egg");
-        this.addItem(AetherIIItems.PHYG_SPAWN_EGG, "Phyg Spawn Egg");
-        this.addItem(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG, "Taegore Spawn Egg");
-        this.addItem(AetherIIItems.MAGNETIC_TAEGORE_SPAWN_EGG, "Taegore Spawn Egg");
-        this.addItem(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG, "Taegore Spawn Egg");
-        this.addItem(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG, "Burrukai Spawn Egg");
-        this.addItem(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG, "Burrukai Spawn Egg");
-        this.addItem(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG, "Burrukai Spawn Egg");
-        this.addItem(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
-        this.addItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
-        this.addItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
-        this.addItem(AetherIIItems.MOA_SPAWN_EGG, "Moa Spawn Egg");
-        this.addItem(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG, "Skyroot Lizard Spawn Egg");
-        this.addItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG, "Aechor Plant Spawn Egg");
-        this.addItem(AetherIIItems.CARRION_SPROUT_SPAWN_EGG, "Carrion Sprout Spawn Egg");
-        this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
-        this.addItem(AetherIIItems.TEMPEST_SPAWN_EGG, "Tempest Spawn Egg");
-        this.addItem(AetherIIItems.COCKATRICE_SPAWN_EGG, "Cockatrice Spawn Egg");
-        this.addItem(AetherIIItems.SWET_SPAWN_EGG, "Swet Spawn Egg");
-        this.addItem(AetherIIItems.SKEPHID_SPAWN_EGG, "Skephid Spawn Egg");
-        this.addItem(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG, "Arkenium Taluton Spawn Egg");
-        this.addItem(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG, "Gravitite Taluton Spawn Egg");
+        this.addSpawnEggItem(AetherIIItems.AERBUNNY_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.FLYING_COW_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.SHEEPUFF_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.PHYG_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.AERWHALE_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG, "Taegore Spawn Egg");
+        this.addSpawnEggItem(AetherIIItems.MAGNETIC_TAEGORE_SPAWN_EGG, "Taegore Spawn Egg");
+        this.addSpawnEggItem(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG, "Taegore Spawn Egg");
+        this.addSpawnEggItem(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG, "Burrukai Spawn Egg");
+        this.addSpawnEggItem(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG, "Burrukai Spawn Egg");
+        this.addSpawnEggItem(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG, "Burrukai Spawn Egg");
+        this.addSpawnEggItem(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
+        this.addSpawnEggItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
+        this.addSpawnEggItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
+        this.addSpawnEggItem(AetherIIItems.MOA_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.CARRION_SPROUT_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.ZEPHYR_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.TEMPEST_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.COCKATRICE_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.SWET_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.SKEPHID_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG);
 
         // Misc
         this.addItem(AetherIIItems.HIDE_BUNDLE, "Hide Bundle");
@@ -916,7 +959,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GUIDEBOOK_PAGE, "Guidebook Page");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
 
-        // Tooltips
+    }
+
+    private void addPerItemAbilityTooltips() {
         // Abilities
         this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_PICKAXE.get(), 1, "§9Ability:§r Increases Yield");
         this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_AXE.get(), 1, "§9Ability:§r Increases Yield");
@@ -1032,8 +1077,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.BLUE_AERCLOUD_GLIDER.get(), 2, "§3Use:§r Hold-Use");
         this.addPerItemAbilityTooltip(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get(), 1, "§9Ability:§r Forwards Boost");
         this.addPerItemAbilityTooltip(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get(), 2, "§3Use:§r Hold-Use");
+    }
 
-
+    private void addItemTooltips() {
         // Miscellaneous Item Tooltips
         this.addItemTooltip("treasure.description", "Treasure Item");
         this.addItemTooltip("currency.description", "Converts to Currency:");
@@ -1083,20 +1129,21 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addFeatherShape(Moa.FeatherShape.FLAT, "Flat");
         this.addFeatherShape(Moa.FeatherShape.POINTED, "Pointed");
 
+        // Use Action
+        this.addTooltip("item.modifiers.blocking", "When blocking:");
+    }
 
+    private void addAccessorySlots() {
         // Accessory Slots
         this.addAccessorySlot("relic_slot", "Relic");
         this.addAccessorySlot("handwear_slot", "Handwear");
         this.addAccessorySlot("accessory_slot", "Accessory");
+    }
 
-
-        // Use Action
-        this.addTooltip("item.modifiers.blocking", "When blocking:");
-
-
-        // Entities
+    private void addEntityTypes() {
         // Passive
         this.addEntityType(AetherIIEntityTypes.AERBUNNY, "Aerbunny");
+        this.addEntityType(AetherIIEntityTypes.AERWHALE, "Aerwhale");
         this.addEntityType(AetherIIEntityTypes.PHYG, "Phyg");
         this.addEntityType(AetherIIEntityTypes.FLYING_COW, "Flying Cow");
         this.addEntityType(AetherIIEntityTypes.SHEEPUFF, "Sheepuff");
@@ -1140,13 +1187,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Miscellaneous
         this.addEntityType(AetherIIEntityTypes.ELECTRIC_FIELD, "Electric Field");
+    }
 
-
-        // Dimensions
-        this.addDimension(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, "Aether Highlands");
-
-
-        // Biomes
+    private void addBiomes() {
         // Highfields
         this.addBiome(HighlandsBiomes.FLOURISHING_FIELD, "Flourishing Field");
         this.addBiome(HighlandsBiomes.VERDANT_WOODS, "Verdant Woods");
@@ -1171,12 +1214,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Aercloud Sea
         this.addBiome(HighlandsBiomes.EXPANSE, "Expanse");
+    }
 
-
+    private void addStructures() {
         // Structures
         this.addStructure(AetherIIStructures.OUTPOST, "Outpost");
+    }
 
-
+    private void addAttributes() {
         // Attributes
         this.addAttribute(AetherIIAttributes.SLASH_DAMAGE.get(), "§9Slash§r Damage");
         this.addAttribute(AetherIIAttributes.IMPACT_DAMAGE.get(), "§eImpact§r Damage");
@@ -1212,9 +1257,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAttribute(AetherIIAttributes.FUNGAL_ROT_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
         this.addAttribute(AetherIIAttributes.CRYSTALLIZED_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
         this.addAttribute(AetherIIAttributes.SATURATION_BOOST.get(), "Food Saturation");
+    }
 
-
-        // Effects
+    private void addEffects() {
         // Beneficial
         this.addEffect(AetherIIEffects.SATURATION_BOOST, "Saturation Boost");
 
@@ -1231,8 +1276,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEffect(AetherIIEffects.FROSTBITE, "Frostbite");
         this.addEffect(AetherIIEffects.FUNGAL_ROT, "Fungal Rot");
         this.addEffect(AetherIIEffects.CRYSTALLIZED, "Crystallized");
+    }
 
-
+    private void addCreativeTabs() {
         // Creative Tabs
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_BUILDING_BLOCKS.get(), "Aether II Building Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
@@ -1243,16 +1289,18 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_CONSUMABLES.get(), "Aether II Consumables");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_INGREDIENTS.get(), "Aether II Ingredients");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_SPAWN_EGGS.get(), "Aether II Spawn Eggs");
+    }
 
-
+    private void addContainerTypes() {
         // Containers
         this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
         this.addContainerType(AetherIIMenuTypes.ARTISANS_BENCH, "Artisan's Bench");
         this.addContainerType(AetherIIMenuTypes.ALTAR, "Altar");
         this.addContainerType(AetherIIMenuTypes.ARKENIUM_FORGE, "Arkenium Forge");
         this.addContainerType(AetherIIMenuTypes.ALKAHEST_PURIFIER, "Alkahest Purifier");
+    }
 
-
+    private void addGuiText() {
         // GUIs
         this.addGuiText("arkenium_forge.forge_button.tooltip", "Forge Item");
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
@@ -1282,77 +1330,68 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("toast.guidebook.effects", "New Effects Entry!");
         this.addGuiText("toast.guidebook.exploration", "New Exploration Entry!");
         this.addGuiText("toast.guidebook.description", "Check your Guidebook");
+    }
 
-        // Bestiary
-        this.addBestiaryName(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), "Highfields Taegore");
-        this.addBestiaryName(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), "Magnetic Taegore");
-        this.addBestiaryName(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), "Arctic Taegore");
-        this.addBestiaryName(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), "Highfields Burrukai");
-        this.addBestiaryName(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), "Magnetic Burrukai");
-        this.addBestiaryName(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), "Arctic Burrukai");
-        this.addBestiaryName(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), "Highfields Kirrid");
-        this.addBestiaryName(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), "Magnetic Kirrid");
-        this.addBestiaryName(AetherIIEntityTypes.ARCTIC_KIRRID.get(), "Arctic Kirrid");
+    private void addBestiaryEntries() {
+        final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        
+        final String taegore = "Taegore";
+        final String burrukai = "Burrukai";
+        final String kirrid = "Kirrid";
+        final String highfields = "Highfields";
+        final String magnetic = "Magnetic";
+        final String arctic = "Arctic";
 
-        this.addBestiarySlotName(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), "Taegore");
-        this.addBestiarySlotName(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), "Taegore");
-        this.addBestiarySlotName(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), "Taegore");
-        this.addBestiarySlotName(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), "Burrukai");
-        this.addBestiarySlotName(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), "Burrukai");
-        this.addBestiarySlotName(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), "Burrukai");
-        this.addBestiarySlotName(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), "Kirrid");
-        this.addBestiarySlotName(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), "Kirrid");
-        this.addBestiarySlotName(AetherIIEntityTypes.ARCTIC_KIRRID.get(), "Kirrid");
+        this.addGeneric("highfields", highfields);
+        this.addGeneric("magnetic", magnetic);
+        this.addGeneric("arctic", arctic);
 
-        this.addBestiarySlotSubtitle(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), "Highfields");
-        this.addBestiarySlotSubtitle(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), "Magnetic");
-        this.addBestiarySlotSubtitle(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), "Arctic");
-        this.addBestiarySlotSubtitle(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), "Highfields");
-        this.addBestiarySlotSubtitle(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), "Magnetic");
-        this.addBestiarySlotSubtitle(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), "Arctic");
-        this.addBestiarySlotSubtitle(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), "Highfields");
-        this.addBestiarySlotSubtitle(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), "Magnetic");
-        this.addBestiarySlotSubtitle(AetherIIEntityTypes.ARCTIC_KIRRID.get(), "Arctic");
+        this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), taegore, highfields, loremIpsum);
+        this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), taegore, magnetic, loremIpsum);
+        this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), taegore, arctic, loremIpsum);
+        this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), burrukai, highfields, loremIpsum);
+        this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), burrukai, magnetic, loremIpsum);
+        this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), burrukai, arctic, loremIpsum);
+        this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), kirrid, highfields, loremIpsum);
+        this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), kirrid, magnetic, loremIpsum);
+        this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_KIRRID.get(), kirrid, arctic, loremIpsum);
+    
+        this.addBestiaryDescription(AetherIIEntityTypes.FLYING_COW.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.SHEEPUFF.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.PHYG.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.AERBUNNY.get(), loremIpsum);
+    
+        this.addBestiaryDescription(AetherIIEntityTypes.MOA.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.SKYROOT_LIZARD.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.SWET.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.SKEPHID.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), loremIpsum);
+    }
 
-        this.addBestiaryDescription(AetherIIEntityTypes.FLYING_COW.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.SHEEPUFF.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.PHYG.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.AERBUNNY.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.ARCTIC_KIRRID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.MOA.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.SKYROOT_LIZARD.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.SWET.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.SKEPHID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+    private void addEffectsDescriptions() {
+        final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
-        this.addEffectsDescription(AetherIIEffects.WOUND.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addEffectsDescription(AetherIIEffects.STUN.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addEffectsDescription(AetherIIEffects.FRACTURE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addEffectsDescription(AetherIIEffects.AMBROSIUM_POISONING.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addEffectsDescription(AetherIIEffects.TOXIN.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addEffectsDescription(AetherIIEffects.VENOM.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addEffectsDescription(AetherIIEffects.CHARGED.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addEffectsDescription(AetherIIEffects.WEBBED.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addEffectsDescription(AetherIIEffects.IMMOLATION.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addEffectsDescription(AetherIIEffects.FROSTBITE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addEffectsDescription(AetherIIEffects.FUNGAL_ROT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addEffectsDescription(AetherIIEffects.CRYSTALLIZED.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addEffectsDescription(AetherIIEffects.WOUND.get(), loremIpsum);
+        this.addEffectsDescription(AetherIIEffects.STUN.get(), loremIpsum);
+        this.addEffectsDescription(AetherIIEffects.FRACTURE.get(), loremIpsum);
+        this.addEffectsDescription(AetherIIEffects.AMBROSIUM_POISONING.get(), loremIpsum);
+        this.addEffectsDescription(AetherIIEffects.TOXIN.get(), loremIpsum);
+        this.addEffectsDescription(AetherIIEffects.VENOM.get(), loremIpsum);
+        this.addEffectsDescription(AetherIIEffects.CHARGED.get(), loremIpsum);
+        this.addEffectsDescription(AetherIIEffects.WEBBED.get(), loremIpsum);
+        this.addEffectsDescription(AetherIIEffects.IMMOLATION.get(), loremIpsum);
+        this.addEffectsDescription(AetherIIEffects.FROSTBITE.get(), loremIpsum);
+        this.addEffectsDescription(AetherIIEffects.FUNGAL_ROT.get(), loremIpsum);
+        this.addEffectsDescription(AetherIIEffects.CRYSTALLIZED.get(), loremIpsum);
+    }
 
-
+    private void addMusic() {
         // Music
         this.addMusic("aether1", "Emile van Krieken - Welcome to Paradise");
         this.addMusic("aether2", "Emile van Krieken - Wings");
@@ -1366,7 +1405,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addMusic("aether_sunset", "Emile van Krieken - Sunset");
         this.addMusic("aether_ambience1", "Emile van Krieken - Sentience");
 
-
         // Jukebox Songs
         this.addJukeboxSong("aether_tune", "Noisestorm - Aether Tune");
         this.addJukeboxSong("ascending_dawn", "Emile van Krieken - Ascending Dawn");
@@ -1374,20 +1412,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addJukeboxSong("approaches", "Emile van Krieken - Approaches");
         this.addJukeboxSong("demise", "Moorziey - Demise");
         this.addJukeboxSong("recording_892", "Emile van Krieken - ???");
+    }
 
-
-        // Misc
-        this.addGeneric("slash", "§9Slash§r");
-        this.addGeneric("impact", "§eImpact§r");
-        this.addGeneric("pierce", "§cPierce§r");
-        this.addGeneric("highfields", "Highfields");
-        this.addGeneric("magnetic", "Magnetic");
-        this.addGeneric("arctic", "Arctic");
-        this.addGeneric("message.campfire_added", "Outpost campfire respawn point set");
-        this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid outpost campfire");
-
-
-        // Subtitles
+    private void addSubtitles() {
         // Blocks
         this.addSubtitle("block", "aether_portal.ambient", "Aether Portal whooshes");
         this.addSubtitle("block", "aether_portal.trigger", "Aether Portal noise intensifies");
@@ -1548,7 +1575,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // UI
         this.addSubtitle("ui", "artisans_bench.take_result", "Artisan's Bench used");
+    }
 
+    private void addDeaths() {
         // Deaths
         this.addDeath("effect.wound", "%1$s was fatally wounded");
         this.addDeath("effect.fracture", "Oof, owie, %1$s's bones");
@@ -1556,8 +1585,36 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addDeath("effect.venom", "%1$s succumbed to venom");
         this.addDeath("effect.charged", "%1$s was electrocuted");
         this.addDeath("effect.immolation", "%1$s burned to death");
+    }
 
-        // Packs
-        this.addPackDescription("mod", "Aether II Resources");
+    // Utility methods
+
+    public void addBestiaryEntry(EntityType<?> entityType, String typeName, String subspeciesName, String description) {
+        this.addBestiaryEntry(entityType, subspeciesName + ' ' + typeName, typeName, subspeciesName, description);
+    }
+
+    public void addBestiaryEntry(EntityType<?> entityType, String name, String slotName, String slotSubtitle, String description) {
+        this.addBestiaryName(entityType, name);
+        this.addBestiarySlotName(entityType, slotName);
+        this.addBestiarySlotSubtitle(entityType, slotSubtitle);
+        this.addBestiaryDescription(entityType, description);
+    }
+
+    private final TreeMap<String, String> entityTypes = new TreeMap<>();
+
+    @Override
+    public void add(EntityType<?> key, String name) {
+        super.add(key, name);
+        entityTypes.put(key.getDescriptionId(), name);
+    }
+
+    public void addSpawnEggItem(DeferredItem<? extends SpawnEggItem> key, String name) {
+        this.addItem(key, name);
+    }
+
+    public void addSpawnEggItem(DeferredItem<? extends SpawnEggItem> key) {
+        SpawnEggItem item = key.get();
+        EntityType<?> entitytype = item.getType(null, ItemStack.EMPTY);
+        this.add(item, entityTypes.get(entitytype.getDescriptionId()).concat(" Spawn Egg"));
     }
 }
