@@ -62,6 +62,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Packs
         this.addPackDescription("mod", "Aether II Resources");
+        
+        // Use Action
+        this.addTooltip("item.modifiers.blocking", "When blocking:");
     }
 
     private void addBlocks() {
@@ -1128,9 +1131,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addFeatherShape(Moa.FeatherShape.CURVED, "Curved");
         this.addFeatherShape(Moa.FeatherShape.FLAT, "Flat");
         this.addFeatherShape(Moa.FeatherShape.POINTED, "Pointed");
-
-        // Use Action
-        this.addTooltip("item.modifiers.blocking", "When blocking:");
     }
 
     private void addAccessorySlots() {
