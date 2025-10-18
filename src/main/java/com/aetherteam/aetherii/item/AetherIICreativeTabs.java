@@ -801,7 +801,9 @@ public class AetherIICreativeTabs {
             }).build());
 
     public static ItemStack getMoaBook() {
-        final String dataMerge = "data merge entity @e[type=" + AetherIIEntities.MOA.location() + ",limit=1,sort=nearest] ";
+        final String selector = "entity @e[type=" + AetherIIEntities.MOA.location() + ",limit=1,sort=nearest] ";
+        final String dataMerge = "data merge " + selector;
+        final String dataRemove = "data remove " + selector;
 
         try {
             ItemStack book = new UtilityBookBuilder()
@@ -825,11 +827,11 @@ public class AetherIICreativeTabs {
                                 (featherShape, section) -> section.translatableEntry(AetherII.MODID + ".tooltip.item.moa_egg.feather_shape." + featherShape.getSerializedName())
                                         .command(dataMerge + "{FeatherShape:" + featherShape.getSerializedName() + "}"))
                     .section("Set Special Variant")
-                        .entry("None").command(dataMerge + "{MoaVariant:0}")
-                        .entry("Disable").command(dataMerge + "{MoaVariant:1}")
-                        .entries(IntStream.range(0, 1),
-                                (i, section) -> section.entry("[" + i + "]")
-                                        .command(dataMerge + "{MoaVariant:" + (i + 2) + "}"))
+                        .entry("Remove MoaVariant").command(dataRemove + "MoaVariant")
+                        .entry("Remove CustomName").command(dataRemove + "CustomName")
+                        .entries(Moa.SpecialVariant.values(),
+                                (variant, section) -> section.entry(variant.getSerializedName())
+                                        .command(dataMerge + "{MoaVariant:" + variant.id() + "}"))
                     .build();
             book.set(DataComponents.ITEM_NAME, Component.literal("Moa Book").withStyle(Rarity.EPIC.getStyleModifier()));
             book.set(DataComponents.LORE, new ItemLore(List.of(
