@@ -1396,6 +1396,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addMusic("aether4", "Emile van Krieken - Moa's Song");
         this.addMusic("aether5", "Emile van Krieken - Clouds");
         this.addMusic("aether6", "Emile van Krieken - Brise");
+        this.addMusic("polarity", "sunsette - Polarity");
+        this.addMusic("sunbeam", "sunsette - Sunbeam");
+        this.addMusic("thin_air", "sunsette - Thin Air");
+        this.addMusic("walking_dream", "sunsette - Walking Dream");
         this.addMusic("aether_night1", "Emile van Krieken - A Light in the Night");
         this.addMusic("aether_night2", "Emile van Krieken - Crepusculum");
         this.addMusic("aether_sunrise", "Emile van Krieken - Sunrise");
