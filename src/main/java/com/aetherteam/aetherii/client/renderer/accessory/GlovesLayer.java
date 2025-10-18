@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.client.renderer.accessory;
 
+import java.util.function.Function;
+
 import com.aetherteam.aetherii.client.AetherIIAtlases;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
@@ -11,8 +13,10 @@ import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.PlayerModelAccessor;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -21,7 +25,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -33,9 +36,7 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
-import java.util.function.Function;
-
-public class GlovesLayer<S extends HumanoidRenderState, M extends HumanoidModel<S>, A extends HumanoidModel<S>> extends RenderLayer<S, M> {
+public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityModel<? super S>> extends RenderLayer<S, M> {
     private static final Function<ArmorStyle.SpriteKey, TextureAtlasSprite> ARMOR_STYLE_SPRITE_LOOKUP = Util.memoize((key) -> Minecraft.getInstance().getModelManager().getAtlas(AetherIIAtlases.ARMOR_STYLES_SHEET).getSprite(key.textureId()));
     private static final GlovesModel GLOVES_MODEL = new GlovesModel(Minecraft.getInstance().getEntityModels().bakeLayer(AetherIIModelLayers.GLOVES));
     private static final GlovesModel GLOVES_MODEL_SLIM = new GlovesModel(Minecraft.getInstance().getEntityModels().bakeLayer(AetherIIModelLayers.GLOVES_SLIM));
@@ -45,6 +46,7 @@ public class GlovesLayer<S extends HumanoidRenderState, M extends HumanoidModel<
         super(renderer);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, S state, float netHeadYaw, float headPitch) {
         if (Minecraft.getInstance().player != null) {
@@ -66,7 +68,7 @@ public class GlovesLayer<S extends HumanoidRenderState, M extends HumanoidModel<
         }
     }
 
-    public static <S extends LivingEntityRenderState> void renderOnFirstPerson(PoseStack poseStack, MultiBufferSource buffer, HumanoidArm arm, PlayerSkin skin, int packedLight) {
+    public static void renderOnFirstPerson(PoseStack poseStack, MultiBufferSource buffer, HumanoidArm arm, PlayerSkin skin, int packedLight) {
         AccessoryUtil.getFirst(Minecraft.getInstance().player, AccessoryContainer.SlotType.HANDWEAR).ifPresent((stack) -> {
             GlovesModel glovesModel = GLOVES_MODEL_FIRST_PERSON;
             glovesModel.setAllVisible(false);

@@ -50,6 +50,12 @@ public class AetherIIStats {
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 2.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, -2.0)
             .build();
+    public static final ImmutableMap<Holder<Attribute>, Double> AERWHALE = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(Attributes.MAX_HEALTH, 20.0)
+            .put(AetherIIAttributes.SLASH_RESISTANCE, 2.0)
+            .put(AetherIIAttributes.IMPACT_RESISTANCE, 2.0)
+            .put(AetherIIAttributes.PIERCE_RESISTANCE, 2.0)
+            .build();
     public static final ImmutableMap<Holder<Attribute>, Double> HIGHFIELDS_TAEGORE = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 14.0)
             .put(AetherIIAttributes.SLASH_RESISTANCE, -2.0)

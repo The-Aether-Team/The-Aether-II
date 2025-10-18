@@ -14,6 +14,7 @@ public class AetherIIEntities {
     public static final ResourceKey<EntityType<?>> SHEEPUFF = createKey("sheepuff");
 
     public static final ResourceKey<EntityType<?>> AERBUNNY = createKey("aerbunny");
+    public static final ResourceKey<EntityType<?>> AERWHALE = createKey("aerwhale");
 
     public static final ResourceKey<EntityType<?>> HIGHFIELDS_TAEGORE = createKey("highfields_taegore");
     public static final ResourceKey<EntityType<?>> MAGNETIC_TAEGORE = createKey("magnetic_taegore");
