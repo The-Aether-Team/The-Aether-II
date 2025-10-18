@@ -1820,7 +1820,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                     case DEEP_BLUE:
                         yield switch (moa.getEyeColor()) {
                             case YELLOW, GOLD -> switch (moa.getKeratinColor()) {
-                                case GRAY, BLUE -> true;
+                                case GRAY, BLUE, BLEY -> true;
                                 default -> false;
                             };
                             default -> false;
