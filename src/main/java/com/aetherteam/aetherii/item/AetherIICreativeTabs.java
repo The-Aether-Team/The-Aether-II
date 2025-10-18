@@ -834,7 +834,7 @@ public class AetherIICreativeTabs {
                                 (variant, section) -> section.entry(variant.getSerializedName())
                                         .command(dataMerge + "{MoaVariant:" + variant.id() + "}"))
                     .build();
-            book.set(DataComponents.ITEM_NAME, Component.literal("Moa Book").withStyle(Rarity.EPIC.getStyleModifier()));
+            book.set(DataComponents.CUSTOM_NAME, Component.literal("Moa Book").withStyle(Rarity.EPIC.getStyleModifier()).withStyle(style -> style.withItalic(false)));
             book.set(DataComponents.LORE, new ItemLore(List.of(
                 Component.literal("Contains buttons to modify"),
                 Component.literal("the nearest Moa's features")
