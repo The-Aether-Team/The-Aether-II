@@ -21,6 +21,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.InterpolationHandler;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -43,17 +44,14 @@ public class HoveringBlockEntity extends Entity {
     private static final EntityDataAccessor<BlockPos> DATA_START_POS_ID = SynchedEntityData.defineId(HoveringBlockEntity.class, EntityDataSerializers.BLOCK_POS);
     private static final EntityDataAccessor<CompoundTag> DATA_BLOCK_ENTITY_DATA_ID = SynchedEntityData.defineId(HoveringBlockEntity.class, EntityDataSerializers.COMPOUND_TAG);
 
+    private final InterpolationHandler interpolation = new InterpolationHandler(this, 3);
+
     private BlockState blockState = Blocks.SAND.defaultBlockState();
     protected boolean held = true;
     protected boolean launched;
     protected int launchDuration;
     protected Vec3 targetSettlePosition;
 
-    /*protected int lerpSteps;
-    protected double lerpX;
-    protected double lerpY;
-    protected double lerpZ;
-*/
     public HoveringBlockEntity(EntityType<? extends Entity> entityType, Level level) {
         super(entityType, level);
     }
@@ -107,12 +105,7 @@ public class HoveringBlockEntity extends Entity {
             this.setDeltaMovement(this.getDeltaMovement().scale(0.98));
         }
 
-        /*if (!this.level().isClientSide()) {
-            if (this.lerpSteps > 0) {
-                this.lerpPositionAndRotationStep(this.lerpSteps, this.lerpX, this.lerpY, this.lerpZ, this.getYRot(), this.getXRot());
-                --this.lerpSteps;
-            }
-        }*/
+        this.interpolation.interpolate();
 
         this.move(MoverType.SELF, this.getDeltaMovement());
 
@@ -135,13 +128,18 @@ public class HoveringBlockEntity extends Entity {
     }
 
     @Override
-    public boolean hurtServer(ServerLevel serverLevel, DamageSource pSource, float pAmount) {
+    public boolean skipAttackInteraction(Entity entity) {
         Entity holdingPlayer = this.getHoldingPlayer();
         if (holdingPlayer != null) {
             this.held = false;
             this.launched = true;
             this.push(holdingPlayer.getViewVector(1.0F).x() * 2.5, holdingPlayer.getViewVector(1.0F).y() * 2.5, holdingPlayer.getViewVector(1.0F).z() * 2.5);
         }
+        return true;
+    }
+
+    @Override
+    public boolean hurtServer(ServerLevel serverLevel, DamageSource pSource, float pAmount) {
         return false;
     }
 
@@ -252,33 +250,11 @@ public class HoveringBlockEntity extends Entity {
         return this.blockState;
     }
 
-    /*@Override
-    public void lerpPositionAndRotationStep(int pSteps, double pX, double pY, double pZ, double pYRot, double pXRot) {
-        this.lerpX = pX;
-        this.lerpY = pY;
-        this.lerpZ = pZ;
-        double d0 = (double)1.0F / (double)pSteps;
-        float f = (float) Mth.rotLerp(d0, (double)this.getYRot(), pYRot);
-        float f1 = (float)Mth.lerp(d0, (double)this.getXRot(), pXRot);
-        this.setRot(f, f1);
-        this.lerpSteps = pSteps;
+    @Override
+    public InterpolationHandler getInterpolation() {
+        return this.interpolation;
     }
 
-    @Override
-    public double lerpTargetX() {
-        return this.lerpSteps > 0 ? this.lerpX : this.getX();
-    }
-
-    @Override
-    public double lerpTargetY() {
-        return this.lerpSteps > 0 ? this.lerpY : this.getY();
-    }
-
-    @Override
-    public double lerpTargetZ() {
-        return this.lerpSteps > 0 ? this.lerpZ : this.getZ();
-    }
-*/
     @Override
     protected void addAdditionalSaveData(ValueOutput output) {
         output.store("BlockState", BlockState.CODEC, this.blockState);

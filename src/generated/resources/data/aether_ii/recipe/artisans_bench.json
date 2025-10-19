@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "A": "#aether_ii:plates/arkenium",
-    "H": "aether_ii:holystone",
+    "H": "#aether_ii:stone_crafting",
     "P": "#aether_ii:planks_crafting"
   },
   "pattern": [

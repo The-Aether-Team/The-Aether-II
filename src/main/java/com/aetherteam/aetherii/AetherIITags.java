@@ -170,6 +170,7 @@ public class AetherIITags {
         public static final TagKey<Item> GRAVITITE_REPAIRING = tag("gravitite_repairing");
 
         public static final TagKey<Item> AERBUNNY_FOOD = tag("aerbunny_food");
+        public static final TagKey<Item> AERBUNNY_TAME_ITEMS = tag("aerbunny_tame_items");
         public static final TagKey<Item> PHYG_FOOD = tag("phyg_food");
         public static final TagKey<Item> PHYG_CALM_ITEMS = tag("phyg_calm_items");
         public static final TagKey<Item> FLYING_COW_FOOD = tag("flying_food");

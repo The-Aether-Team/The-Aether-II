@@ -1,23 +1,26 @@
 package com.aetherteam.aetherii.client.gui.screen.inventory;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.gui.screen.inventory.recipebook.HolystoneFurnaceRecipeBookComponent;
 import com.aetherteam.aetherii.inventory.menu.HolystoneFurnaceMenu;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.navigation.ScreenPosition;
 import net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen;
+import net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.SearchRecipeBookCategory;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractFurnaceMenu;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeBookCategories;
 
 import java.util.List;
 
-public class HolystoneFurnaceScreen extends AbstractFurnaceScreen<HolystoneFurnaceMenu> {
-    private static final ResourceLocation FURNACE_GUI_TEXTURES = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/holystone_furnace.png");
-    private static final ResourceLocation LIT_PROGRESS_TEXTURE = ResourceLocation.withDefaultNamespace("container/furnace/lit_progress");
-    private static final ResourceLocation BURN_PROGRESS_TEXTURE = ResourceLocation.withDefaultNamespace("container/furnace/burn_progress");
-    private static final Component FILTER_NAME = Component.translatable("gui.recipebook.toggleRecipes.smeltable");
+public class HolystoneFurnaceScreen extends AbstractRecipeBookScreen<HolystoneFurnaceMenu> {
     private static final List<RecipeBookComponent.TabInfo> TABS = List.of(
             new RecipeBookComponent.TabInfo(SearchRecipeBookCategory.FURNACE),
             new RecipeBookComponent.TabInfo(Items.PORKCHOP, RecipeBookCategories.FURNACE_FOOD),
@@ -25,6 +28,28 @@ public class HolystoneFurnaceScreen extends AbstractFurnaceScreen<HolystoneFurna
             new RecipeBookComponent.TabInfo(Items.LAVA_BUCKET, Items.EMERALD, RecipeBookCategories.FURNACE_MISC));
 
     public HolystoneFurnaceScreen(HolystoneFurnaceMenu menu, Inventory inventory, Component title) {
-        super(menu, inventory, title, FILTER_NAME, FURNACE_GUI_TEXTURES, LIT_PROGRESS_TEXTURE, BURN_PROGRESS_TEXTURE, TABS);
+        super(menu, new HolystoneFurnaceRecipeBookComponent(menu, TABS), inventory, title);
+    }
+
+    public void init() {
+        super.init();
+        this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2;
+    }
+
+    protected ScreenPosition getRecipeBookButtonPosition() {
+        return new ScreenPosition(this.leftPos + 20, this.height / 2 - 49);
+    }
+
+    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+        int i = this.leftPos;
+        int j = this.topPos;
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/holystone_furnace.png"), i, j, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);
+        if (this.menu.isLit()) {
+            int l = Mth.ceil(this.menu.getLitProgress() * 13.0F) + 1;
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, ResourceLocation.withDefaultNamespace("container/furnace/lit_progress"), 14, 14, 0, 14 - l, i + 56, j + 36 + 14 - l, 14, l);
+        }
+
+        int j1 = Mth.ceil(this.menu.getBurnProgress() * 24.0F);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, ResourceLocation.withDefaultNamespace("container/furnace/burn_progress"), 24, 16, 0, 0, i + 79, j + 34, j1, 16);
     }
 }

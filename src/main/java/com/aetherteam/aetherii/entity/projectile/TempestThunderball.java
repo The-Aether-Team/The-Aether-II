@@ -101,7 +101,7 @@ public class TempestThunderball extends AbstractHurtingProjectile {
         electricCircle.setRadius(2.5F);
         electricCircle.setRadiusOnUse(-0.5F);
         electricCircle.setWaitTime(10);
-        electricCircle.setDuration(electricCircle.getDuration() / 5);
+        electricCircle.setDuration(50);
 
         electricCircle.addEffect(new MobEffectInstance(MobEffects.INSTANT_DAMAGE, 1, 0, false, false, false));
         electricCircle.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 1, false, false, false));

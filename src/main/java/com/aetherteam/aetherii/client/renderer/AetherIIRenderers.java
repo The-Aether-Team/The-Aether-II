@@ -6,11 +6,19 @@ import java.util.Map;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
-import com.aetherteam.aetherii.client.renderer.block.model.TrunkModel;
+import com.aetherteam.aetherii.client.renderer.block.model.blockstate.TrunkModel;
 import com.aetherteam.aetherii.client.renderer.blockentity.*;
+import com.aetherteam.aetherii.client.renderer.block.model.blockstate.AmbientOcclusionLightModel;
+import com.aetherteam.aetherii.client.renderer.block.model.blockstate.FastModel;
+import com.aetherteam.aetherii.client.renderer.blockentity.AlkahestPurifierRenderer;
+import com.aetherteam.aetherii.client.renderer.blockentity.ArkeniumForgeRenderer;
+import com.aetherteam.aetherii.client.renderer.blockentity.MoaEggRenderer;
+import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
+import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
 import com.aetherteam.aetherii.client.renderer.entity.AechorPlantRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.AerbunnyRenderer;
@@ -255,8 +263,41 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.GLOVES_FIRST_PERSON, () -> GlovesModel.createLayer(new CubeDeformation(0.25F), false));
     }
 
+    public static void registerBlockStateModels(RegisterBlockStateModels event) {
+        event.registerModel(TrunkModel.Unbaked.ID , TrunkModel.Unbaked.CODEC);
+    }
+
     public static void registerBakedModels(ModelEvent.ModifyBakingResult event) {
-        /*List<DeferredBlock<? extends Block>> fastBlocks = List.of(
+        List<DeferredBlock<? extends Block>> fastBlocks = List.of(
+                AetherIIBlocks.SKYROOT_LEAF_PILE,
+                AetherIIBlocks.SKYPLANE_LEAF_PILE,
+                AetherIIBlocks.SKYBIRCH_LEAF_PILE,
+                AetherIIBlocks.SKYPINE_LEAF_PILE,
+                AetherIIBlocks.WISPROOT_LEAF_PILE,
+                AetherIIBlocks.WISPTOP_LEAF_PILE,
+                AetherIIBlocks.GREATROOT_LEAF_PILE,
+                AetherIIBlocks.GREATOAK_LEAF_PILE,
+                AetherIIBlocks.GREATBOA_LEAF_PILE,
+                AetherIIBlocks.AMBEROOT_LEAF_PILE,
+                AetherIIBlocks.SKYROOT_LEAVES,
+                AetherIIBlocks.SKYPLANE_LEAVES,
+                AetherIIBlocks.SKYBIRCH_LEAVES,
+                AetherIIBlocks.SKYPINE_LEAVES,
+                AetherIIBlocks.WISPROOT_LEAVES,
+                AetherIIBlocks.WISPTOP_LEAVES,
+                AetherIIBlocks.GREATROOT_LEAVES,
+                AetherIIBlocks.GREATOAK_LEAVES,
+                AetherIIBlocks.GREATBOA_LEAVES,
+                AetherIIBlocks.AMBEROOT_LEAVES,
+                AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES,
+                AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES,
+                AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES,
+                AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES,
+                AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES,
+                AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES,
+                AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES,
+                AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES,
+                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES,
                 AetherIIBlocks.HIGHLANDS_BUSH,
                 AetherIIBlocks.BLUEBERRY_BUSH,
                 AetherIIBlocks.POTTED_HIGHLANDS_BUSH,
@@ -266,7 +307,6 @@ public class AetherIIRenderers {
                 AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE,
                 AetherIIBlocks.BLOOMING_ARILUM,
                 AetherIIBlocks.BLOOMING_ARILUM_PLANT,
-                AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE,
                 AetherIIBlocks.DIM_GUARDIAN_ROOTS,
                 AetherIIBlocks.LUCENT_GUARDIAN_ROOTS,
                 AetherIIBlocks.GUARDIAN_LAMP,
@@ -282,7 +322,6 @@ public class AetherIIRenderers {
 
         getModels(event.getBakingResult().blockStateModels(), fastBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new FastModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
- */
     }
 
     private static List<Map.Entry<BlockState, BlockStateModel>> getModels(Map<BlockState, BlockStateModel> originalModels, List<DeferredBlock<? extends Block>> blocks) {
@@ -295,10 +334,6 @@ public class AetherIIRenderers {
             }
         }
         return models;
-    }
-
-    public static void registerBlockStateModels(RegisterBlockStateModels event) {
-        event.registerModel(TrunkModel.Unbaked.ID , TrunkModel.Unbaked.CODEC);
     }
 
     public static void registerSpecialModelRenderers(RegisterSpecialModelRendererEvent event) {

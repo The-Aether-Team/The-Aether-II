@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "aether_ii:beast_pelt",
+    "/": "aether_ii:cloudtwine",
+    "C": "aether_ii:skyroot_chest"
+  },
+  "pattern": [
+    "###",
+    "#C#",
+    "/#/"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:large_moa_saddlebag"
+  }
+}

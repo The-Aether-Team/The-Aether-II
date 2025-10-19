@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -38,6 +39,15 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     public AetherIIRecipeProvider(RecipeOutput output, HolderLookup.Provider provider, String id) {
         super(provider, output, id);
         this.getter = provider.lookupOrThrow(Registries.ITEM);
+    }
+
+    @Override
+    protected void oneToOneConversionRecipe(ItemLike result, ItemLike ingredient, @Nullable String group) {
+        this.shapeless(RecipeCategory.MISC, result, 1)
+                .requires(ingredient)
+                .group(group)
+                .unlockedBy(getHasName(ingredient), this.has(ingredient))
+                .save(this.output, this.name(getConversionRecipeName(result, ingredient)));
     }
 
     protected void leafPile(HolderGetter<Item> getter, ItemLike carpet, ItemLike material) {
@@ -73,7 +83,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                     .requires(Ingredient.of(ingredients.toArray(ItemLike[]::new)))
                     .group(group)
                     .unlockedBy("has_needed_dye", has(item))
-                    .save(this.output, "dye_" + getItemName(item1));
+                    .save(this.output, this.name("dye_" + getItemName(item1)));
         }
     }
 
@@ -227,9 +237,9 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     }
 
     protected final void foodCooking(Supplier<? extends ItemLike> material, Supplier<? extends ItemLike> result, float xp, RecipeOutput consumer) {
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 200).unlockedBy("has_item", has(material.get())).save(consumer, "smelting_" + getHasName(result.get()));
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 100).unlockedBy("has_item", has(material.get())).save(consumer, "smoking_" + getHasName(result.get()));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 600).unlockedBy("has_item", has(material.get())).save(consumer, "campfire_cooking_" + getHasName(result.get()));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 200).unlockedBy("has_item", has(material.get())).save(consumer, this.name("smelting_" + getHasName(result.get())));
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 100).unlockedBy("has_item", has(material.get())).save(consumer, this.name("smoking_" + getHasName(result.get())));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 600).unlockedBy("has_item", has(material.get())).save(consumer, this.name("campfire_cooking_" + getHasName(result.get())));
     }
 
     protected AltarEnchantingRecipeBuilder altarEnchanting(RecipeCategory category, ItemLike result, ItemLike ingredient, int fuelCount, float experience) {
@@ -269,11 +279,11 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     }
 
     protected void alkahestPurification(RecipeCategory recipeCategory, WeightedList<ItemStack> results, ItemLike ingredient, WeightedList<ItemStack> byproducts, int alkahestUsage, RecipeOutput consumer) {
-        AlkahestPurificationRecipeBuilder.recipe(Ingredient.of(ingredient), recipeCategory, results, byproducts, 0.0F, alkahestUsage, 200).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, "purify_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath());
+        AlkahestPurificationRecipeBuilder.recipe(Ingredient.of(ingredient), recipeCategory, results, byproducts, 0.0F, alkahestUsage, 200).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, this.name("purify_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath()));
     }
 
     protected void alkahestPurification(RecipeCategory recipeCategory, WeightedList<ItemStack> results, ItemLike ingredient, WeightedList<ItemStack> byproducts, int alkahestUsage, String group, RecipeOutput consumer) {
-        AlkahestPurificationRecipeBuilder.recipe(Ingredient.of(ingredient), recipeCategory, results, byproducts, 0.0F, alkahestUsage, 200).group(group).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, "purify_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath());
+        AlkahestPurificationRecipeBuilder.recipe(Ingredient.of(ingredient), recipeCategory, results, byproducts, 0.0F, alkahestUsage, 200).group(group).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, this.name("purify_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath()));
     }
 
     protected BlockStateRecipeBuilder dustIrradiation(Block result, Block ingredient) {

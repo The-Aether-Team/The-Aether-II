@@ -1,30 +1,60 @@
 {
-  "variants": {
-    "facing=down": {
-      "model": "aether_ii:block/corrobonite_cluster",
-      "x": 180
+  "multipart": [
+    {
+      "apply": {
+        "model": "aether_ii:block/corrobonite_cluster",
+        "x": 180
+      },
+      "when": {
+        "up": "true"
+      }
     },
-    "facing=east": {
-      "model": "aether_ii:block/corrobonite_cluster",
-      "x": 90,
-      "y": 90
+    {
+      "apply": {
+        "model": "aether_ii:block/corrobonite_cluster"
+      },
+      "when": {
+        "down": "true"
+      }
     },
-    "facing=north": {
-      "model": "aether_ii:block/corrobonite_cluster",
-      "x": 90
+    {
+      "apply": {
+        "model": "aether_ii:block/corrobonite_cluster",
+        "x": 90
+      },
+      "when": {
+        "south": "true"
+      }
     },
-    "facing=south": {
-      "model": "aether_ii:block/corrobonite_cluster",
-      "x": 90,
-      "y": 180
+    {
+      "apply": {
+        "model": "aether_ii:block/corrobonite_cluster",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "north": "true"
+      }
     },
-    "facing=up": {
-      "model": "aether_ii:block/corrobonite_cluster"
+    {
+      "apply": {
+        "model": "aether_ii:block/corrobonite_cluster",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "east": "true"
+      }
     },
-    "facing=west": {
-      "model": "aether_ii:block/corrobonite_cluster",
-      "x": 90,
-      "y": 270
+    {
+      "apply": {
+        "model": "aether_ii:block/corrobonite_cluster",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "west": "true"
+      }
     }
-  }
+  ]
 }

@@ -54,7 +54,7 @@ public class Tempest extends Mob implements Blighted {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(3, new Tempest.ThunderballAttackGoal(this, 40.0F));
+        this.goalSelector.addGoal(3, new Tempest.ThunderballAttackGoal(this, 20.0F));
         this.goalSelector.addGoal(5, new Tempest.RandomFloatAroundGoal(this));
         this.goalSelector.addGoal(7, new FlyingLookGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, false));
@@ -62,7 +62,7 @@ public class Tempest extends Mob implements Blighted {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.FOLLOW_RANGE, 40.0);
+                .add(Attributes.FOLLOW_RANGE, 20.0);
     }
 
     @Override

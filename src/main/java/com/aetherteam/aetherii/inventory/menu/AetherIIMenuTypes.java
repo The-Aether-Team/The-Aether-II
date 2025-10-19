@@ -16,6 +16,7 @@ public class AetherIIMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(BuiltInRegistries.MENU, AetherII.MODID);
 
     public static final DeferredHolder<MenuType<?>, MenuType<GuidebookEquipmentMenu>> GUIDEBOOK = MENU_TYPES.register("guidebook", () -> IMenuTypeExtension.create(GuidebookEquipmentMenu::new));
+    public static final DeferredHolder<MenuType<?>, MenuType<SkyrootCraftingMenu>> SKYROOT_CRAFTING_TABLE = register("skyroot_crafting_table", SkyrootCraftingMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<HolystoneFurnaceMenu>> HOLYSTONE_FURNACE = register("holystone_furnace", HolystoneFurnaceMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<ArtisansBenchMenu>> ARTISANS_BENCH = register("artisans_bench", ArtisansBenchMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<AltarMenu>> ALTAR = register("altar", AltarMenu::new);
@@ -28,6 +29,7 @@ public class AetherIIMenuTypes {
 
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {
         event.register(AetherIIMenuTypes.GUIDEBOOK.get(), GuidebookEquipmentScreen::new);
+        event.register(AetherIIMenuTypes.SKYROOT_CRAFTING_TABLE.get(), SkyrootCraftingScreen::new);
         event.register(AetherIIMenuTypes.HOLYSTONE_FURNACE.get(), HolystoneFurnaceScreen::new);
         event.register(AetherIIMenuTypes.ALTAR.get(), AltarScreen::new);
         event.register(AetherIIMenuTypes.ARTISANS_BENCH.get(), ArtisansBenchScreen::new);

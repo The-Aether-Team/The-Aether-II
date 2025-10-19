@@ -22,8 +22,6 @@ import java.util.List;
 @Mixin(ItemStackRenderState.LayerRenderState.class)
 public class LayerRenderStateMixin implements LayerRenderStateWrapper {
     @Shadow
-    private ItemTransform transform;
-    @Shadow
     private int[] tintLayers;
     @Shadow
     @Final
@@ -37,9 +35,7 @@ public class LayerRenderStateMixin implements LayerRenderStateWrapper {
     @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/ItemRenderer;renderItem(Lnet/minecraft/world/item/ItemDisplayContext;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II[ILjava/util/List;Lnet/minecraft/client/renderer/RenderType;Lnet/minecraft/client/renderer/item/ItemStackRenderState$FoilType;)V"))
     private void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, CallbackInfo ci) {
         if (this.aether_ii$getIrradiated()) {
-
             MixinHooks.renderIrradiated(poseStack, bufferSource, packedLight, packedOverlay, tintLayers, quads, renderType);
-
         }
     }
 

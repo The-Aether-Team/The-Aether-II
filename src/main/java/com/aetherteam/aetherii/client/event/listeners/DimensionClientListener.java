@@ -25,7 +25,7 @@ public class DimensionClientListener {
             Holder<Biome> biome = clientLevel.getBiome(camera.getBlockPosition());
             if (clientLevel.effects() instanceof HighlandsSpecialEffects) {
                 FogType fluidState = camera.getFluidInCamera();
-                if (fogMode == FogType.NONE && fluidState == FogType.NONE && (camera.getEntity().getEyeInFluidType() == NeoForgeMod.EMPTY_TYPE.value())) {
+                if (fogMode == FogType.ATMOSPHERIC && fluidState == FogType.NONE && (camera.getEntity().getEyeInFluidType() == NeoForgeMod.EMPTY_TYPE.value())) {
                     if (modifiedNearDistance == null) {
                         modifiedNearDistance = nearDistance;
                     }
@@ -33,23 +33,25 @@ public class DimensionClientListener {
                         modifiedFarDistance = farDistance;
                     }
 
-                    float nearDistanceGoal = farDistance / 2.0F;
+                    float nearDistanceGoal = farDistance / 20.0F;
                     float farDistanceGoal = farDistance;
 
                     if (biome.is(AetherIITags.Biomes.ARCTIC)) {
-                        nearDistanceGoal = farDistance / 4.0F;
+                        nearDistanceGoal = farDistance / 20.0F;
+                        farDistanceGoal = farDistance / 5.0F;
                     } else if (biome.is(AetherIITags.Biomes.MAGNETIC_FOG)) {
-                        nearDistanceGoal = farDistance / 16.0F;
+                        nearDistanceGoal = farDistance / 80.0F;
+                        farDistanceGoal = farDistance / 5.0F;
                     } else if (biome.is(AetherIITags.Biomes.IRRADIATED)) {
-                        nearDistanceGoal = farDistance / 16.0F;
-                        farDistanceGoal = farDistance / 2.0F;
+                        nearDistanceGoal = farDistance / 80.0F;
+                        farDistanceGoal = farDistance / 10.0F;
                     }
 
                     if (clientLevel.isRaining()) {
-                        nearDistanceGoal /= 1.5F;
+                        nearDistanceGoal = -15.0F;
                     }
                     if (clientLevel.isThundering()) {
-                        nearDistanceGoal /= 1.5F;
+                        nearDistanceGoal = -30.0F;
                     }
 
                     modifiedNearDistance = Mth.lerp(0.05F, modifiedNearDistance, nearDistanceGoal);

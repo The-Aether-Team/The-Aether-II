@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.event.hooks;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.gui.component.guidebook.GuidebookButton;
@@ -196,7 +197,7 @@ public class RenderHooks {
                 ClientLevel.ClientLevelData worldInfo = clientLevel.getLevelData();
                 FogType type = camera.getFluidInCamera();
 
-                double f = (camera.getPosition().y() - 64) * worldInfo.voidDarknessOnsetRange();
+                double f = (camera.getPosition().y() - 64) * 0.03125F;
                 if (f < 1.0 && type != FogType.LAVA && type != FogType.POWDER_SNOW) {
                     if (f < 0.0F) {
                         f = 0.0F;
@@ -207,18 +208,18 @@ public class RenderHooks {
                     blue *= (float) Math.clamp(f * 1.25F, 0.2F * 1.25F, 1.0F);
                 }
 
-                double d0 = (camera.getPosition().y() - (double) clientLevel.getMinY()) * worldInfo.voidDarknessOnsetRange();
-                if (d0 < 1.0 && type != FogType.LAVA && type != FogType.POWDER_SNOW) {
-                    if (d0 < 0.0) {
-                        d0 = 0.0;
-                    }
-                    d0 *= d0;
-                    if (d0 != 0.0) {
-                        red /= (float) d0;
-                        green /= (float) d0;
-                        blue /= (float) d0;
-                    }
-                }
+//                double d0 = (camera.getPosition().y() - (double) clientLevel.getMinY()) * 0.03125F; //todo what was this used for?
+//                if (d0 < 1.0 && type != FogType.LAVA && type != FogType.POWDER_SNOW) {
+//                    if (d0 < 0.0) {
+//                        d0 = 0.0;
+//                    }
+//                    d0 *= d0;
+//                    if (d0 != 0.0) {
+//                        red /= (float) d0;
+//                        green /= (float) d0;
+//                        blue /= (float) d0;
+//                    }
+//                }
 
                 return Triple.of(red, green, blue);
             }

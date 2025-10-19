@@ -37,6 +37,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.joml.Matrix4f;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     private final DimensionSpecialEffects OVERWORLD = new OverworldEffects();
@@ -51,11 +53,17 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     }
 
     @Override
+    public boolean isSunriseOrSunset(float timeOfDay) {
+        float f = Mth.cos(timeOfDay * Mth.TWO_PI);
+        return f >= -0.4F && f <= 0.4F;
+    }
+
+    @Override
     public int getSunriseOrSunsetColor(float timeOfDay) {
-        float f1 = Mth.cos(timeOfDay * Mth.TWO_PI) - 0.0F;
-        float f3 = (f1 + 0.0F) / 0.4F * 0.5F + 0.5F;
-        float f4 = 1.0F - (1.0F - Mth.sin(f3 * Mth.PI)) * 0.99F;
-        return ARGB.colorFromFloat(f4 * f4, f3 * 0.3F + 0.65F, f3 * f3 * 0.7F + 0.25F, f3 * f3 * 0.0F + 0.4F);
+        float f = Mth.cos(timeOfDay * Mth.TWO_PI);
+        float f1 = f / 0.4F * 0.5F + 0.5F;
+        float f2 = Mth.square(1.0F - (1.0F - Mth.sin(f1 * Mth.PI)) * 0.99F);
+        return ARGB.colorFromFloat(f2, f1 * 0.3F + 0.65F, f1 * f1 * 0.7F + 0.25F, 0.4F);
     }
 
     @Override
@@ -105,10 +113,6 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     public boolean renderSky(ClientLevel level, int ticks, float partialTick, Matrix4f modelViewMatrix, Camera camera, Runnable setupFog) {
         RenderBuffers renderBuffers = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).aether_ii$getRenderBuffers();
         SkyRenderer skyRenderer = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).aether_ii$getSkyRenderer();
-        float renderDistance = Minecraft.getInstance().gameRenderer.getRenderDistance();
-        Vec3 cameraPosition = camera.getPosition();
-        double cameraX = cameraPosition.x();
-        double cameraY = cameraPosition.y();
         setupFog.run();
         PoseStack poseStack = new PoseStack();
         float sunAngle = level.getSunAngle(partialTick);
@@ -126,20 +130,20 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
         if (this.isSunriseOrSunset(timeOfDay)) {
             skyRenderer.renderSunriseAndSunset(poseStack, multiBufferSource, sunAngle, sunColor);
         }
-        this.renderCloudCoverDisc(level, partialTick, poseStack, multiBufferSource, skyColor);
         skyRenderer.renderSunMoonAndStars(poseStack, multiBufferSource, timeOfDay, moonPhase, rainLevel, starBrightness);
+        this.renderCloudCoverDisc(level, partialTick, poseStack, multiBufferSource, timeOfDay, skyColor, sunColor);
         multiBufferSource.endBatch();
         return true;
     }
 
 
-    public void renderCloudCoverDisc(ClientLevel level, float partialTick, PoseStack poseStack, MultiBufferSource.BufferSource multiBufferSource, int skyColor) {
+    public void renderCloudCoverDisc(ClientLevel level, float partialTick, PoseStack poseStack, MultiBufferSource.BufferSource multiBufferSource, float timeOfDay, int skyColor, int sunColor) {
         poseStack.pushPose();
         poseStack.mulPose(Axis.XP.rotationDegrees(0.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
         Matrix4f matrix4f = poseStack.last().pose();
 
-        VertexConsumer vertexconsumer = multiBufferSource.getBuffer(AetherIIRenderTypes.cloudCover());
+        VertexConsumer cloudCoverBuffer = multiBufferSource.getBuffer(AetherIIRenderTypes.cloudCover());
 
         float r = ARGB.redFloat(skyColor);
         float g = ARGB.greenFloat(skyColor);
@@ -151,22 +155,33 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
         g = (Math.min(color.getGreen() + 20, 255.0F) / 255.0F) * weatherMultiplier;
         b = (Math.min(color.getBlue() + 35, 255.0F) / 255.0F) * (float) Math.pow(weatherMultiplier, bluePower);
 
-        ClientLevel.ClientLevelData worldInfo = level.getLevelData();
-        //TODO Better Cloud system
-        double d0 = (Minecraft.getInstance().player.getEyePosition(partialTick).y - 66) * worldInfo.voidDarknessOnsetRange();
-        if (d0 < 1.0) {
-            if (d0 < 0.0) {
-                d0 = 0.0;
+        if (this.isSunriseOrSunset(timeOfDay)) {
+            float cosTime = Mth.cos(timeOfDay * Mth.TWO_PI);
+            float alpha;
+            if (cosTime > 0) {
+                alpha = Math.clamp(20.0F * (float) Math.pow(0.4F - Mth.abs(cosTime), 2.5F), 0.0F, 0.6F);
+            } else {
+                alpha = (1.5F * (float) Math.pow(0.4F - Mth.abs(cosTime), 1.0F));
             }
-            d0 *= d0;
-            r *= (float) Math.clamp(d0, 0.15F, 1.0F);
-            g *= (float) Math.clamp(d0, 0.15F, 1.0F);
-            b *= (float) Math.clamp(d0 * 1.25F, 0.15F * 1.25F, 1.0F);
+            r = Mth.clamp(((ARGB.redFloat(sunColor)) * alpha + r * (1.0F - alpha)), 0.0F, 1.0F);
+            g = Mth.clamp(((ARGB.greenFloat(sunColor)) * alpha + g * (1.0F - alpha)), 0.0F, 1.0F);
+            b = Mth.clamp(((ARGB.blueFloat(sunColor)) * alpha + b * (1.0F - alpha)), 0.0F, 1.0F);
         }
 
-        vertexconsumer.addVertex(matrix4f, 0.0F, -16.0F, 0.0F).setColor(ARGB.colorFromFloat(1.0F, r, g, b));
+        double cameraHeight = (Minecraft.getInstance().player.getEyePosition(partialTick).y - 66) * 0.03125F;
+        if (cameraHeight < 1.0) {
+            if (cameraHeight < 0.0) {
+                cameraHeight = 0.0;
+            }
+            cameraHeight *= cameraHeight;
+            r *= (float) Math.clamp(cameraHeight, 0.15F, 1.0F);
+            g *= (float) Math.clamp(cameraHeight, 0.15F, 1.0F);
+            b *= (float) Math.clamp(cameraHeight * 1.25F, 0.15F * 1.25F, 1.0F);
+        }
+
+        cloudCoverBuffer.addVertex(matrix4f, 0.0F, -16.0F, 0.0F).setColor(ARGB.colorFromFloat(1.0F, r, g, b));
         for (int i = -180; i <= 180; i += 9) {
-            vertexconsumer.addVertex(matrix4f, Math.signum(-16.0F) * 512.0F * Mth.cos((float) i * (float) (Math.PI / 180.0)), -16.0F, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).setColor(ARGB.colorFromFloat(0.0F, r, g, b));
+            cloudCoverBuffer.addVertex(matrix4f, Math.signum(-16.0F) * 512.0F * Mth.cos((float) i * (float) (Math.PI / 180.0)), -16.0F, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).setColor(ARGB.colorFromFloat(0.0F, r, g, b));
         }
 
         poseStack.popPose();
@@ -218,190 +233,39 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
 
         return ARGB.colorFromFloat(1.0F, f2, f3, f4);
     }
-//
-//    @Override
-//    public boolean renderSnowAndRain(ClientLevel level, int ticks, float partialTick, LightTexture lightTexture, double camX, double camY, double camZ) {
-//        LevelRenderer levelRenderer = Minecraft.getInstance().levelRenderer;
-//        float rain = level.getRainLevel(partialTick);
-//        float thunder = level.getThunderLevel(partialTick);
-//        boolean isThundering = (!(thunder <= 0.0F));
-//
-//        if (!(rain <= 0.0F)) {
-//            lightTexture.turnOnLightLayer();
-//            int i = Mth.floor(camX);
-//            int j = Mth.floor(camY);
-//            int k = Mth.floor(camZ);
-//            Tesselator tesselator = Tesselator.getInstance();
-//            BufferBuilder bufferBuilder = null;
-//            RenderSystem.disableCull();
-//            RenderSystem.enableBlend();
-//            RenderSystem.enableDepthTest();
-//            int l = 3;
-//            if (Minecraft.useFancyGraphics()) {
-//                l = 6;
-//            }
-//            if (isThundering) {
-//                 l = (int) (l * 1.25F);
-//            }
-//
-//            RenderSystem.depthMask(Minecraft.useShaderTransparency());
-//            int i1 = -1;
-//            float f1 = (float) levelRenderer.getTicks() + partialTick;
-//            RenderSystem.setShader(GameRenderer::getParticleShader);
-//            BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-//
-//            for (int j1 = k - l; j1 <= k + l; ++j1) {
-//                for (int k1 = i - l; k1 <= i + l; ++k1) {
-//                    int l1 = (j1 - k + 16) * 32 + k1 - i + 16;
-//                    double d0 = (double) ((LevelRendererAccessor) levelRenderer).aether_ii$getRainSizeX()[l1] * 0.5;
-//                    double d1 = (double) ((LevelRendererAccessor) levelRenderer).aether_ii$getRainSizeZ()[l1] * 0.5;
-//                    blockpos$mutableblockpos.set(k1, camY, j1);
-//                    Biome biome = level.getBiome(blockpos$mutableblockpos).value();
-//                    if (biome.hasPrecipitation()) {
-//                        int i2 = level.getHeight(Heightmap.Types.MOTION_BLOCKING, k1, j1);
-//                        int j2 = j - l;
-//                        int k2 = j + l;
-//                        if (j2 < i2) {
-//                            j2 = i2;
-//                        }
-//
-//                        if (k2 < i2) {
-//                            k2 = i2;
-//                        }
-//
-//                        int l2 = Math.max(i2, j);
-//
-//                        if (j2 != k2) {
-//                            RandomSource randomsource = RandomSource.create((long) k1 * k1 * 3121 + k1 * 45238971L ^ (long) j1 * j1 * 418711 + j1 * 13761L);
-//                            blockpos$mutableblockpos.set(k1, j2, j1);
-//                            Biome.Precipitation biome$precipitation = biome.getPrecipitationAt(blockpos$mutableblockpos, level.getSeaLevel());
-//
-//                            if (biome$precipitation == Biome.Precipitation.RAIN) {
-//                                if (i1 != 0) {
-//                                    if (i1 >= 0) {
-//                                        BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
-//                                    }
-//                                    bufferBuilder = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
-//                                }
-//                                i1 = this.renderRain(RAIN_LOCATION, bufferBuilder, levelRenderer, level, randomsource, partialTick, camX, camY, camZ, 1.0F, 0.85F, 0.75F, d0, d1, i1, j1, k1, blockpos$mutableblockpos, l, l2, k2, j2, rain);
-//                                i1 = this.renderRain(RAIN_STORMY_LOCATION, bufferBuilder, levelRenderer, level, randomsource, partialTick, camX, camY, camZ, 1.0F, 0.85F, 0.75F, d0, d1, i1, j1, k1, blockpos$mutableblockpos, l, l2, k2, j2, thunder);
-//                            } else if (biome$precipitation == Biome.Precipitation.SNOW) {
-//                                if (i1 != 1) {
-//                                    if (i1 == 0) {
-//                                        BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
-//                                    }
-//                                    bufferBuilder = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
-//                                }
-//                                i1 = this.renderSnow(SNOW_LOCATION, bufferBuilder, levelRenderer, level, randomsource, partialTick, camX, camY, camZ, 0.75F, 0.25F, d0, d1, f1, i1, j1, k1, blockpos$mutableblockpos, l, l2, k2, j2, rain);
-//                                i1 = this.renderSnow(SNOW_STORMY_LOCATION, bufferBuilder, levelRenderer, level, randomsource, partialTick, camX, camY, camZ, 0.75F, 0.25F, d0, d1, f1, i1, j1, k1, blockpos$mutableblockpos, l, l2, k2, j2, thunder);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//
-//            if (i1 >= 0) {
-//                BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
-//            }
-//
-//            RenderSystem.enableCull();
-//            RenderSystem.disableBlend();
-//            lightTexture.turnOffLightLayer();
-//        }
-//
-//        return true;
-//    }
-//
-//    private int renderRain(ResourceLocation location, BufferBuilder bufferBuilder, LevelRenderer levelRenderer, ClientLevel level, RandomSource randomsource,
-//                           float partialTick, double camX, double camY, double camZ, float size, float opacityStrength, float stretchStrength,
-//                           double d0, double d1, int i1, int j1, int k1, BlockPos.MutableBlockPos blockpos$mutableblockpos, int l, int l2, int k2, int j2, float rain) {
-//        d0 *= size;
-//        d1 *= size;
-//
-//        if (i1 != 0) {
-//            i1 = 0;
-//            RenderSystem.setShaderTexture(0, location);
-//        }
-//
-//        int i3 = levelRenderer.getTicks() & 131071;
-//        int j3 = k1 * k1 * 3121 + k1 * 45238971 + j1 * j1 * 418711 + j1 * 13761 & 0xFF;
-//        float f2 = 3.0F + randomsource.nextFloat();
-//        float f3 = -((float) (i3 + j3) + partialTick) / 32.0F * f2;
-//        float f4 = f3 % 32.0F;
-//        double d2 = (double) k1 + 0.5 - camX;
-//        double d3 = (double) j1 + 0.5 - camZ;
-//        float f6 = (float) Math.sqrt(d2 * d2 + d3 * d3) / (float) l;
-//        float f7 = ((1.0F - f6 * f6) * 0.5F + 0.5F) * rain * opacityStrength;
-//        blockpos$mutableblockpos.set(k1, l2, j1);
-//        int k3 = LevelRenderer.getLightColor(level, blockpos$mutableblockpos);
-//        bufferBuilder.addVertex((float) ((double) k1 - camX - d0 + 0.5), (float) ((double) k2 - camY), (float) ((double) j1 - camZ - d1 + 0.5))
-//                .setUv(0.0F, (float) j2 * stretchStrength + f4)
-//                .setColor(1.0F, 1.0F, 1.0F, f7)
-//                .setLight(k3)
-//                ;
-//        bufferBuilder.addVertex((float) ((double) k1 - camX + d0 + 0.5), (float) ((double) k2 - camY), (float) ((double) j1 - camZ + d1 + 0.5))
-//                .setUv(1.0F, (float) j2 * stretchStrength + f4)
-//                .setColor(1.0F, 1.0F, 1.0F, f7)
-//                .setLight(k3)
-//                ;
-//        bufferBuilder.addVertex((float) ((double) k1 - camX + d0 + 0.5), (float) ((double) j2 - camY), (float) ((double) j1 - camZ + d1 + 0.5))
-//                .setUv(1.0F, (float) k2 * stretchStrength + f4)
-//                .setColor(1.0F, 1.0F, 1.0F, f7)
-//                .setLight(k3)
-//                ;
-//        bufferBuilder.addVertex((float) ((double) k1 - camX - d0 + 0.5), (float) ((double) j2 - camY), (float) ((double) j1 - camZ - d1 + 0.5))
-//                .setUv(0.0F, (float) k2 * stretchStrength + f4)
-//                .setColor(1.0F, 1.0F, 1.0F, f7)
-//                .setLight(k3)
-//                ;
-//
-//        return i1;
-//    }
-//
-//    private int renderSnow(ResourceLocation location, BufferBuilder bufferBuilder, LevelRenderer levelRenderer, ClientLevel level, RandomSource randomsource,
-//                           float partialTick, double camX, double camY, double camZ, float opacityStrength, float stretchStrength,
-//                           double d0, double d1, float f1, int i1, int j1, int k1, BlockPos.MutableBlockPos blockpos$mutableblockpos, int l, int l2, int k2, int j2, float rain) {
-//        if (i1 != 1) {
-//            i1 = 1;
-//            RenderSystem.setShaderTexture(0, location);
-//        }
-//
-//        float f8 = -((float) (levelRenderer.getTicks() & 511) + partialTick) / 256.0F;
-//        float f9 = (float) (randomsource.nextDouble() + (double) f1 * 0.01 * (double) ((float) randomsource.nextGaussian()));
-//        float f10 = (float) (randomsource.nextDouble() + (double) (f1 * (float) randomsource.nextGaussian()) * 0.001);
-//        double d4 = (double) k1 + 0.5 - camX;
-//        double d5 = (double) j1 + 0.5 - camZ;
-//        float f11 = (float) Math.sqrt(d4 * d4 + d5 * d5) / (float)l;
-//        float f5 = ((1.0F - f11 * f11) * 0.3F + 0.5F) * rain * opacityStrength;
-//        blockpos$mutableblockpos.set(k1, l2, j1);
-//        int j4 = LevelRenderer.getLightColor(level, blockpos$mutableblockpos);
-//        int k4 = j4 >> 16 & 65535;
-//        int l4 = j4 & 65535;
-//        int l3 = (k4 * 3 + 240) / 4;
-//        int i4 = (l4 * 3 + 240) / 4;
-//        bufferBuilder.addVertex((float) ((double) k1 - camX - d0 + 0.5), (float) ((double) k2 - camY), (float) ((double) j1 - camZ - d1 + 0.5))
-//                .setUv(0.0F + f9, (float) j2 * stretchStrength + f8 + f10)
-//                .setColor(1.0F, 1.0F, 1.0F, f5)
-//                .setUv2(i4, l3)
-//                ;
-//        bufferBuilder.addVertex((float) ((double) k1 - camX + d0 + 0.5), (float) ((double) k2 - camY), (float) ((double) j1 - camZ + d1 + 0.5))
-//                .setUv(1.0F + f9, (float) j2 * stretchStrength + f8 + f10)
-//                .setColor(1.0F, 1.0F, 1.0F, f5)
-//                .setUv2(i4, l3)
-//                ;
-//        bufferBuilder.addVertex((float) ((double) k1 - camX + d0 + 0.5), (float) ((double) j2 - camY), (float) ((double) j1 - camZ + d1 + 0.5))
-//                .setUv(1.0F + f9, (float) k2 * stretchStrength + f8 + f10)
-//                .setColor(1.0F, 1.0F, 1.0F, f5)
-//                .setUv2(i4, l3)
-//                ;
-//        bufferBuilder.addVertex((float) ((double) k1 - camX - d0 + 0.5), (float) ((double) j2 - camY), (float) ((double) j1 - camZ - d1 + 0.5))
-//                .setUv(0.0F + f9, (float) k2 * stretchStrength + f8 + f10)
-//                .setColor(1.0F, 1.0F, 1.0F, f5)
-//                .setUv2(i4, l3)
-//                ;
-//
-//        return i1;
-//    }
+
+    @Override
+    public boolean renderSnowAndRain(ClientLevel level, int ticks, float partialTick, double camX, double camY, double camZ) {
+        LevelRendererAccessor levelRenderer = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer);
+        WeatherEffectRendererAccessor weatherEffectRenderer = ((WeatherEffectRendererAccessor) levelRenderer.aether_ii$getWeatherEffectRenderer());
+        MultiBufferSource.BufferSource bufferSource = levelRenderer.aether_ii$getRenderBuffers().bufferSource();
+        Vec3 cameraPosition = new Vec3(camX, camY, camZ);
+        float rain = level.getRainLevel(partialTick);
+        float thunder = level.getThunderLevel(partialTick);
+
+        if (!(rain <= 0.0F)) {
+            int i = Minecraft.useFancyGraphics() ? 10 : 5;
+            java.util.List<WeatherEffectRenderer.ColumnInstance> list = new ArrayList<>();
+            List<WeatherEffectRenderer.ColumnInstance> list1 = new ArrayList<>();
+            weatherEffectRenderer.callCollectColumnInstances(level, ticks, partialTick, cameraPosition, i, list, list1);
+            if (!list.isEmpty() || !list1.isEmpty()) {
+                this.renderWeather(weatherEffectRenderer, bufferSource, cameraPosition, i, rain, thunder, list, list1);
+            }
+        }
+        return true;
+    }
+
+    private void renderWeather(WeatherEffectRendererAccessor weatherEffectRenderer, MultiBufferSource bufferSource, Vec3 cameraPosition, int radius, float rainLevel, float thunderLevel, List<WeatherEffectRenderer.ColumnInstance> rainColumnInstances, List<WeatherEffectRenderer.ColumnInstance> snowColumnInstances) {
+        boolean isThundering = thunderLevel > 0.0F;
+        if (!rainColumnInstances.isEmpty()) {
+            RenderType rainType = RenderType.weather(isThundering ? RAIN_STORMY_LOCATION : RAIN_LOCATION, Minecraft.useShaderTransparency());
+            weatherEffectRenderer.callRenderInstances(bufferSource.getBuffer(rainType), rainColumnInstances, cameraPosition, 0.75F, radius, rainLevel);
+        }
+        if (!snowColumnInstances.isEmpty()) {
+            RenderType snowType = RenderType.weather(isThundering ? SNOW_STORMY_LOCATION : SNOW_LOCATION, Minecraft.useShaderTransparency());
+            weatherEffectRenderer.callRenderInstances(bufferSource.getBuffer(snowType), snowColumnInstances, cameraPosition, 0.8F, radius, rainLevel);
+        }
+    }
 
     @Override
     public boolean tickRain(ClientLevel level, int ticks, Camera camera) {

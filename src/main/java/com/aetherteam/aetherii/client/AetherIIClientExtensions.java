@@ -10,6 +10,8 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.ParticleEngine;
+import net.minecraft.client.particle.TerrainParticle;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.fog.FogData;
 import net.minecraft.client.renderer.fog.environment.FogEnvironment;
@@ -24,6 +26,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.client.extensions.common.IClientBlockExtensions;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
@@ -112,6 +115,36 @@ public class AetherIIClientExtensions {
         @Override
         public boolean playBreakSound(BlockState state, Level level, BlockPos pos) {
             return !level.getBlockState(pos.above()).isAir();
+        }
+
+        @Override
+        public boolean addDestroyEffects(BlockState state, Level level, BlockPos pos, ParticleEngine manager) {
+            VoxelShape voxelshape = state.getShape(level, pos);
+            voxelshape.forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) -> {
+                double d1 = Math.min(1.0F, maxX - minX);
+                double d2 = Math.min(1.0F, maxY - minY);
+                double d3 = Math.min(1.0F, maxZ - minZ);
+                int i = Math.max(2, Mth.ceil(d1 / (double) 0.25F));
+                int j = Math.max(2, Mth.ceil(d2 / (double) 0.25F));
+                int k = Math.max(2, Mth.ceil(d3 / (double) 0.25F));
+
+                for (int l = 0; l < i; ++l) {
+                    for (int i1 = 0; i1 < j; ++i1) {
+                        for (int j1 = 0; j1 < k; ++j1) {
+                            double d4 = ((double)l + (double)0.5F) / (double)i;
+                            double d5 = ((double)i1 + (double)0.5F) / (double)j;
+                            double d6 = ((double)j1 + (double)0.5F) / (double)k;
+                            double d7 = d4 * d1 + minX;
+                            double d8 = d5 * d2 + minY;
+                            double d9 = d6 * d3 + minZ;
+                            if (level.getRandom().nextInt(5) == 0) {
+                                manager.add((new TerrainParticle((ClientLevel) level, (double) pos.getX() + d7, (double) pos.getY() + d8, (double) pos.getZ() + d9, d4 - (double) 0.5F, d5 - (double) 0.5F, d6 - (double) 0.5F, state, pos)).updateSprite(state, pos));
+                            }
+                        }
+                    }
+                }
+            });
+            return true;
         }
     };
 

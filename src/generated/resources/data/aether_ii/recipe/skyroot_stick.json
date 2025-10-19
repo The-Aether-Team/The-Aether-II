@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "aether_ii:woven_skyroot_sticks"
+  ],
+  "result": {
+    "count": 4,
+    "id": "aether_ii:skyroot_stick"
+  }
+}
