@@ -15,11 +15,13 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
@@ -39,6 +41,7 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
@@ -128,6 +131,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
                 this.recipesUsed.put(ResourceKey.create(Registries.RECIPE, ResourceLocation.parse(key)), tag.getIntOr(key, 0));
             }
         });
+        AetherII.LOGGER.info(String.valueOf(this.items));
     }
 
     @Override
@@ -139,6 +143,21 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         CompoundTag recipesUsedTag = new CompoundTag();
         this.recipesUsed.forEach((key, integer) -> recipesUsedTag.putInt(key.location().toString(), integer));
         output.store("RecipesUsed", CompoundTag.CODEC, recipesUsedTag);
+    }
+
+    @Override
+    public void handleUpdateTag(ValueInput input) {
+        this.loadAdditional(input);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = super.getUpdateTag(registries);
+        try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(this.problemPath(), AetherII.LOGGER)) {
+            TagValueOutput output = TagValueOutput.createWithContext(reporter, registries);
+            this.saveAdditional(output);
+        }
+        return tag;
     }
 
     public static void serverTick(ServerLevel level, BlockPos pos, BlockState state, AltarBlockEntity blockEntity) {
@@ -376,6 +395,10 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
                 this.setChanged();
             }
         }
+
+        if (this.getLevel() != null) {
+            this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 1 | 2);
+        }
     }
 
     @Override
@@ -442,5 +465,10 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         for (ItemStack itemstack : this.items) {
             stackedContents.accountStack(itemstack);
         }
+    }
+
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 }

@@ -10,11 +10,7 @@ import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
 import com.aetherteam.aetherii.client.renderer.block.model.TrunkModel;
-import com.aetherteam.aetherii.client.renderer.blockentity.AlkahestPurifierRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.ArkeniumForgeRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.MoaEggRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
+import com.aetherteam.aetherii.client.renderer.blockentity.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
 import com.aetherteam.aetherii.client.renderer.entity.AechorPlantRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.AerbunnyRenderer;
@@ -139,6 +135,7 @@ public class AetherIIRenderers {
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SKYROOT_CHEST.get(), SkyrootChestRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SKYROOT_BED.get(), SkyrootBedRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.MOA_EGG.get(), MoaEggRenderer::new);
+        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ALTAR.get(), AltarRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ARKENIUM_FORGE.get(), ArkeniumForgeRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ALKAHEST_PURIFIER.get(), AlkahestPurifierRenderer::new);
 
