@@ -863,9 +863,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.BLUEBERRY, "Blueberry");
         this.addItem(AetherIIItems.ENCHANTED_BLUEBERRY, "Enchanted Blueberry");
         this.addItem(AetherIIItems.ORANGE, "Orange");
-        this.addItem(AetherIIItems.SATIVAL_BULB, "Satival Bulb");
+        this.addItem(AetherIIItems.ENCHANTED_ORANGE, "Enchanted Orange");
         this.addItem(AetherIIItems.WYNDBERRY, "Wyndberry");
         this.addItem(AetherIIItems.ENCHANTED_WYNDBERRY, "Enchanted Wyndberry");
+        this.addItem(AetherIIItems.SATIVAL_BULB, "Satival Bulb");
         this.addItem(AetherIIItems.GREEN_SWET_JELLY, "Green Swet Jelly");
         this.addItem(AetherIIItems.BLUE_SWET_JELLY, "Blue Swet Jelly");
         this.addItem(AetherIIItems.PURPLE_SWET_JELLY, "Purple Swet Jelly");

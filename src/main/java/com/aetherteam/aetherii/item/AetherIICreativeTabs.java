@@ -684,9 +684,10 @@ public class  AetherIICreativeTabs {
                 output.accept(AetherIIItems.BLUEBERRY.get());
                 output.accept(AetherIIItems.ENCHANTED_BLUEBERRY.get());
                 output.accept(AetherIIItems.ORANGE.get());
-                output.accept(AetherIIItems.SATIVAL_BULB.get());
+                output.accept(AetherIIItems.ENCHANTED_ORANGE.get());
                 output.accept(AetherIIItems.WYNDBERRY.get());
                 output.accept(AetherIIItems.ENCHANTED_WYNDBERRY.get());
+                output.accept(AetherIIItems.SATIVAL_BULB.get());
                 output.accept(AetherIIItems.GREEN_SWET_JELLY.get());
                 output.accept(AetherIIItems.BLUE_SWET_JELLY.get());
                 output.accept(AetherIIItems.PURPLE_SWET_JELLY.get());
