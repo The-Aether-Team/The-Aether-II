@@ -37,9 +37,6 @@ public class AechorPlantRenderer extends MobRenderer<AechorPlant, AechorPlantRen
     }
 
     @Override
-    protected void setupRotations(AechorPlantRenderState renderState, PoseStack poseStack, float bodyRot, float scale) { }
-
-    @Override
     public ResourceLocation getTextureLocation(AechorPlantRenderState renderState) {
         return AECHOR_PLANT_TEXTURE;
     }

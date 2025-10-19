@@ -13,10 +13,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -30,33 +27,22 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
-public class MossFlowersBlock extends AetherBushBlock implements BonemealableBlock, Snowable {
+public class MossFlowersBlock extends AetherBushBlock implements BonemealableBlock, SegmentableBlock, Snowable {
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty AMOUNT = BlockStateProperties.FLOWER_AMOUNT;
     public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
-    private static final BiFunction<Direction, Integer, VoxelShape> SHAPE_BY_PROPERTIES = Util.memoize(
-            (p_296142_, p_294775_) -> {
-                VoxelShape[] avoxelshape = new VoxelShape[]{
-                        Block.box(8.0, 0.0, 8.0, 16.0, 3.0, 16.0),
-                        Block.box(8.0, 0.0, 0.0, 16.0, 3.0, 8.0),
-                        Block.box(0.0, 0.0, 0.0, 8.0, 3.0, 8.0),
-                        Block.box(0.0, 0.0, 8.0, 8.0, 3.0, 16.0)
-                };
-                VoxelShape voxelshape = Shapes.empty();
-
-                for (int i = 0; i < p_294775_; i++) {
-                    int j = Math.floorMod(i - p_296142_.get2DDataValue(), 4);
-                    voxelshape = Shapes.or(voxelshape, avoxelshape[j]);
-                }
-
-                return voxelshape.singleEncompassing();
-            }
-    );
+    private final Function<BlockState, VoxelShape> shapes;
 
     public MossFlowersBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(AMOUNT, 1).setValue(SNOWY, Boolean.FALSE));
+        this.shapes = this.makeShapes();
+    }
+
+    private Function<BlockState, VoxelShape> makeShapes() {
+        return this.getShapeForEachState(this.getShapeCalculator(FACING, AMOUNT));
     }
 
     @Override
@@ -76,36 +62,43 @@ public class MossFlowersBlock extends AetherBushBlock implements BonemealableBlo
     }
 
     @Override
-    public BlockState rotate(BlockState p_273485_, Rotation p_273021_) {
-        return p_273485_.setValue(FACING, p_273021_.rotate(p_273485_.getValue(FACING)));
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
-    public BlockState mirror(BlockState p_272961_, Mirror p_273278_) {
-        return p_272961_.rotate(p_273278_.getRotation(p_272961_.getValue(FACING)));
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
     @Override
-    public boolean canBeReplaced(BlockState p_272922_, BlockPlaceContext p_273534_) {
-        return !p_273534_.isSecondaryUseActive() && p_273534_.getItemInHand().is(this.asItem()) && p_272922_.getValue(AMOUNT) < 4 || super.canBeReplaced(p_272922_, p_273534_);
+    public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
+        return this.canBeReplaced(state, context, AMOUNT) || super.canBeReplaced(state, context);
     }
 
     @Override
-    public VoxelShape getShape(BlockState p_273399_, BlockGetter p_273568_, BlockPos p_273314_, CollisionContext p_273274_) {
-        return SHAPE_BY_PROPERTIES.apply(p_273399_.getValue(FACING), p_273399_.getValue(AMOUNT));
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return this.shapes.apply(state);
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext p_273158_) {
-        BlockState blockstate = p_273158_.getLevel().getBlockState(p_273158_.getClickedPos());
-        return blockstate.is(this)
-                ? blockstate.setValue(AMOUNT, Math.min(4, blockstate.getValue(AMOUNT) + 1))
-                : this.defaultBlockState().setValue(FACING, p_273158_.getHorizontalDirection().getOpposite());
+    public double getShapeHeight() {
+        return 3.0;
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_272634_) {
-        p_272634_.add(FACING, AMOUNT, SNOWY);
+    public IntegerProperty getSegmentAmountProperty() {
+        return AMOUNT;
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.getStateForPlacement(context, this, AMOUNT, FACING);
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING, AMOUNT, SNOWY);
     }
 
     @Override

@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "A": "aether_ii:ambrosium_shard",
-    "H": "aether_ii:holystone"
+    "H": "#aether_ii:stone_crafting"
   },
   "pattern": [
     "HAH",

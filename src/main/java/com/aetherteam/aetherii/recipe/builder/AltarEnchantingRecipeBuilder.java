@@ -67,6 +67,11 @@ public class AltarEnchantingRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
+    public void save(RecipeOutput recipeOutput, String id) {
+        RecipeBuilder.super.save(recipeOutput, id);
+    }
+
+    @Override
     public void save(RecipeOutput output, ResourceKey<Recipe<?>> id) {
         this.ensureValid(id);
         Advancement.Builder builder = output.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(AdvancementRequirements.Strategy.OR);
