@@ -5,7 +5,7 @@
         "discard_above_y": 384,
         "discard_below_y": -64,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_01",
+        "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_01_a",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": {
           "processors": []
@@ -13,7 +13,67 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 1
+      "weight": 3
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -64,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_01_b",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -64,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_01_c",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -64,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_01_d",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -64,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_01_e",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 3
     },
     {
       "element": {
@@ -28,7 +88,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 1
+      "weight": 2
     },
     {
       "element": {
@@ -43,7 +103,52 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 1
+      "weight": 2
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -64,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_02_c",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -64,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_02_d",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": -64,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_02_e",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 2
     }
   ],
   "fallback": "minecraft:empty"
