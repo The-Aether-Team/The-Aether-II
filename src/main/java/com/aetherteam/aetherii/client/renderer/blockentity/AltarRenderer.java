@@ -113,14 +113,14 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity> {
                         poseStack.scale(0.3F, 0.3F, 0.3F);
                         poseStack.translate(deltaX, y, deltaZ);
 
-                        this.ambrosiumFinalRotation += this.ambSpinningSpeed / 100.0F;
-
                         Minecraft.getInstance().getItemRenderer().renderStatic(fuelStack, ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY, poseStack, multiBufferSource, altarBlockEntity.getLevel(), 0);
 
                         poseStack.popPose();
                     }
                 }
             }
+
+            this.ambrosiumFinalRotation += this.ambSpinningSpeed / 15.0F;
         }
     }
 }
