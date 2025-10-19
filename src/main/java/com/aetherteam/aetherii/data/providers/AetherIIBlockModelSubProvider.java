@@ -843,6 +843,13 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.itemModelOutput.accept(item, unbaked);
     }
 
+    public void createCampfire(Block block) {
+        MultiVariant campfire = plainVariant(AetherIIModelTemplates.CAMPFIRE.create(block, AetherIITextureMappings.campfire(block), this.modelOutput));
+        MultiVariant campfireOff = plainVariant(AetherIIModelTemplates.CAMPFIRE_OFF.create(block, AetherIITextureMappings.campfireOff(block), this.modelOutput));
+        this.registerSimpleFlatItemModel(block.asItem());
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(createBooleanModelDispatch(BlockStateProperties.LIT, campfire, campfireOff)).with(ROTATION_HORIZONTAL_FACING_ALT));
+    }
+
     public void createLadder(Block block) {
         TextureMapping mapping = new TextureMapping().put(TextureSlot.TEXTURE, TextureMapping.getBlockTexture(block)).copySlot(TextureSlot.TEXTURE, TextureSlot.PARTICLE);
         MultiVariant ladder = plainVariant(AetherIIModelTemplates.LADDER.create(block, mapping, this.modelOutput));

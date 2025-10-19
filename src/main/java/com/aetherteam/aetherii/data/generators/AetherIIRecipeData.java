@@ -934,6 +934,16 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("AAA")
                 .unlockedBy(getHasName(AetherIIBlocks.ALKAHEST_PURIFIER.get()), has(AetherIITags.Items.PLATES_ARKENIUM))
                 .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBROSIUM_CAMPFIRE.get())
+                .define('L', ItemTags.LOGS)
+                .define('S', AetherIIItems.SKYROOT_STICK) //TODO TAG
+                .define('#', AetherIIItems.AMBROSIUM_SHARD) //TODO TAG
+                .pattern(" S ")
+                .pattern("S#S")
+                .pattern("LLL")
+                .unlockedBy("has_stick", has(AetherIIItems.SKYROOT_STICK))
+                .unlockedBy("has_ambrosium", has(AetherIIItems.AMBROSIUM_SHARD))
+                .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_CHEST.get())
                 .define('#', AetherIITags.Items.PLANKS_CRAFTING)
                 .pattern("###")

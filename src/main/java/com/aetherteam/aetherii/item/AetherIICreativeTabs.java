@@ -532,6 +532,7 @@ public class  AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ARKENIUM_CHAIN.get());
                 output.accept(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_FURNACE.get());
+                output.accept(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get());
                 output.accept(AetherIIBlocks.ALTAR.get());
                 output.accept(AetherIIBlocks.ARTISANS_BENCH.get());
                 output.accept(AetherIIBlocks.ARKENIUM_FORGE.get());
