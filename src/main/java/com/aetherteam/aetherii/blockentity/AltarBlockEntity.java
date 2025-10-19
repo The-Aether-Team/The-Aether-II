@@ -55,9 +55,9 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     private static final int[] SLOTS_FOR_SIDES = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
 
     protected NonNullList<ItemStack> items = NonNullList.withSize(10, ItemStack.EMPTY);
-    int processingProgress;
-    int processingTotalTime;
-    int fuelCount;
+    protected int processingProgress;
+    protected int processingTotalTime;
+    protected int fuelCount;
     protected final ContainerData dataAccess = new ContainerData() {
         @Override
         public int get(int id) {
@@ -159,6 +159,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
 
     public static void serverTick(ServerLevel level, BlockPos pos, BlockState state, AltarBlockEntity blockEntity) {
         boolean changed = false;
+        int oldProcessingProgress = blockEntity.processingProgress;
 
         RecipeHolder<AltarEnchantingRecipe> recipeHolder = blockEntity.quickCheck.getRecipeFor(new SingleRecipeInput(blockEntity.getItem(0)), level).orElse(null);
         if (recipeHolder != null) {
@@ -190,6 +191,12 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
 
         if (changed) {
             setChanged(level, pos, state);
+        }
+
+        if (oldProcessingProgress != blockEntity.processingProgress) {
+            if (blockEntity.getLevel() != null) {
+                blockEntity.getLevel().sendBlockUpdated(blockEntity.getBlockPos(), blockEntity.getBlockState(), blockEntity.getBlockState(), 1 | 2);
+            }
         }
     }
 
@@ -237,6 +244,9 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
                 output.grow(result.getCount());
             }
             input.shrink(1);
+            if (this.getLevel() != null) {
+                this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 1 | 2);
+            }
             return true;
         } else {
             return false;
@@ -375,6 +385,10 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         if (this.getLevel() != null) {
             this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 1 | 2);
         }
+    }
+
+    public int getProcessingProgress() {
+        return processingProgress;
     }
 
     @Override
