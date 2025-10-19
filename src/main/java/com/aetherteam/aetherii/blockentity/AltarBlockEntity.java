@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.blockentity;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.utility.AltarBlock;
 import com.aetherteam.aetherii.inventory.menu.AltarMenu;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
@@ -59,8 +58,6 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     int processingProgress;
     int processingTotalTime;
     int fuelCount;
-    boolean blasting;
-    int blastingDuration;
     protected final ContainerData dataAccess = new ContainerData() {
         @Override
         public int get(int id) {
@@ -131,7 +128,6 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
                 this.recipesUsed.put(ResourceKey.create(Registries.RECIPE, ResourceLocation.parse(key)), tag.getIntOr(key, 0));
             }
         });
-        AetherII.LOGGER.info(String.valueOf(this.items));
     }
 
     @Override
@@ -152,10 +148,11 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
 
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-        CompoundTag tag = super.getUpdateTag(registries);
+        CompoundTag tag;
         try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(this.problemPath(), AetherII.LOGGER)) {
             TagValueOutput output = TagValueOutput.createWithContext(reporter, registries);
             this.saveAdditional(output);
+            tag = output.buildResult();
         }
         return tag;
     }
@@ -171,13 +168,11 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         }
         boolean hasFuel = hasFuel(level, blockEntity);
         int i = blockEntity.getMaxStackSize();
-        boolean isCharging = false;
 
         if (hasFuel) {
             if (blockEntity.canProcess(level.registryAccess(), recipeHolder, blockEntity.items, i)) {
                 changed = true;
                 ++blockEntity.processingProgress;
-                isCharging = true;
                 if (blockEntity.processingProgress == blockEntity.processingTotalTime) {
                     useFuel(level, blockEntity);
                     blockEntity.processingProgress = 0;
@@ -185,31 +180,12 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
                     if (blockEntity.process(level.registryAccess(), recipeHolder, blockEntity.items, i)) {
                         blockEntity.setRecipeUsed(recipeHolder);
                     }
-                    isCharging = false;
-                    blockEntity.blasting = true;
-                    blockEntity.blastingDuration = 15;
                 }
             } else {
                 blockEntity.processingProgress = 0;
             }
         } else if (blockEntity.processingProgress > 0) {
             blockEntity.processingProgress = Mth.clamp(blockEntity.processingProgress - 2, 0, blockEntity.processingProgress);
-        }
-
-        if (blockEntity.blastingDuration-- <= 0) {
-            blockEntity.blasting = false;
-        }
-
-        if (state.getValue(AltarBlock.CHARGING) != isCharging) {
-            changed = true;
-            state = state.setValue(AltarBlock.CHARGING, isCharging);
-            level.setBlock(pos, state, 1 | 2);
-        }
-
-        if (state.getValue(AltarBlock.BLASTING) != blockEntity.blasting) {
-            changed = true;
-            state = state.setValue(AltarBlock.BLASTING, blockEntity.blasting);
-            level.setBlock(pos, state, 1 | 2);
         }
 
         if (changed) {

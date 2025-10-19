@@ -35,8 +35,6 @@ import javax.annotation.Nullable;
 public class AltarBlock extends BaseEntityBlock {
     public static final MapCodec<AltarBlock> CODEC = simpleCodec(AltarBlock::new);
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
-    public static final BooleanProperty CHARGING = AetherIIBlockStateProperties.ALTAR_CHARGING;
-    public static final BooleanProperty BLASTING = AetherIIBlockStateProperties.ALTAR_BLASTING;
     protected static final VoxelShape SHAPE_BASE = Block.box(2.0, 0.0, 2.0, 14.0, 2.0, 14.0);
     protected static final VoxelShape SHAPE_COLUMN = Block.box(5.0, 2.0, 5.0, 11.0, 8.0, 11.0);
     protected static final VoxelShape SHAPE_TOP = Block.box(0.0, 8.0, 0.0, 16.0, 16.0, 16.0);
@@ -44,7 +42,7 @@ public class AltarBlock extends BaseEntityBlock {
 
     public AltarBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(CHARGING, false).setValue(BLASTING, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
     @Override
@@ -91,27 +89,27 @@ public class AltarBlock extends BaseEntityBlock {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        if (state.getValue(BLASTING)) {
-            double x = (double) pos.getX() + 0.5;
-            double y = (double) pos.getY() + 0.65;
-            double z = (double) pos.getZ() + 0.5;
-
-            Direction direction = state.getValue(FACING);
-            Direction.Axis axis = direction.getAxis();
-
-            for (int i = 0; i < 5; i++) {
-                double multiplier = random.nextDouble() * 0.2 - 0.1;
-
-                double xOffset = axis == Direction.Axis.Z ? (double) direction.getStepZ() * 0.52 : multiplier;
-                double yOffset = random.nextDouble() * 4.0 / 16.0;
-                double zOffset = axis == Direction.Axis.X ? (double) direction.getStepX() * 0.52 : multiplier;
-
-                int color = random.nextBoolean() ? 14403138 : 9721330;
-
-                level.addParticle(new DustParticleOptions(color, 1.0F), x + xOffset + (i * xOffset * 0.1), y + yOffset, z + zOffset + (i * zOffset * 0.1), xOffset * 0.5, 0.0, zOffset * 0.5);
-                level.addParticle(new DustParticleOptions(color, 1.0F), x - xOffset - (i * xOffset * 0.1), y + yOffset, z - zOffset - (i * zOffset * 0.1), -xOffset * 0.5, 0.0, -zOffset * 0.5);
-            }
-        }
+//        if (state.getValue(BLASTING)) { //todo
+//            double x = (double) pos.getX() + 0.5;
+//            double y = (double) pos.getY() + 0.65;
+//            double z = (double) pos.getZ() + 0.5;
+//
+//            Direction direction = state.getValue(FACING);
+//            Direction.Axis axis = direction.getAxis();
+//
+//            for (int i = 0; i < 5; i++) {
+//                double multiplier = random.nextDouble() * 0.2 - 0.1;
+//
+//                double xOffset = axis == Direction.Axis.Z ? (double) direction.getStepZ() * 0.52 : multiplier;
+//                double yOffset = random.nextDouble() * 4.0 / 16.0;
+//                double zOffset = axis == Direction.Axis.X ? (double) direction.getStepX() * 0.52 : multiplier;
+//
+//                int color = random.nextBoolean() ? 14403138 : 9721330;
+//
+//                level.addParticle(new DustParticleOptions(color, 1.0F), x + xOffset + (i * xOffset * 0.1), y + yOffset, z + zOffset + (i * zOffset * 0.1), xOffset * 0.5, 0.0, zOffset * 0.5);
+//                level.addParticle(new DustParticleOptions(color, 1.0F), x - xOffset - (i * xOffset * 0.1), y + yOffset, z - zOffset - (i * zOffset * 0.1), -xOffset * 0.5, 0.0, -zOffset * 0.5);
+//            }
+//        }
     }
 
     @Override
@@ -136,7 +134,7 @@ public class AltarBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, CHARGING, BLASTING);
+        builder.add(FACING);
     }
 
     @Override
