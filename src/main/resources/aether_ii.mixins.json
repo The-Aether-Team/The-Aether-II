@@ -18,6 +18,7 @@
     "common.RandomStateMixin",
     "common.ServerLevelMixin",
     "common.ServerPlayerMixin",
+    "common.ServerGamePacketListenerImplMixin",
     "common.accessor.AbstractArrowAccessor",
     "common.accessor.AbstractBoatAccessor",
     "common.accessor.AttributeMapAccessor",

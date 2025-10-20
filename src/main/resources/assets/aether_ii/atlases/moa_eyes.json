@@ -11,7 +11,8 @@
       "permutations": {
         "blue": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_blue",
         "green": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_green",
-        "yellow": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_yellow"
+        "yellow": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_yellow",
+        "gold": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_gold"
       }
     }
   ]

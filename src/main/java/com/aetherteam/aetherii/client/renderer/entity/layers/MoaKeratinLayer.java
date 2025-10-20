@@ -27,7 +27,7 @@ public class MoaKeratinLayer extends RenderLayer<MoaRenderState, EntityModel<Moa
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, MoaRenderState moa, float netHeadYaw, float headPitch) {
-        if (!moa.isInvisible) {
+        if (!moa.isInvisible && !moa.hasSpecialTexture()) {
             String name = moa.isBaby ? "moa_baby_keratin" : "moa_keratin";
             ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entity/mobs/moa/" + name + "_" + moa.keratinColor);
             TextureAtlasSprite sprite = this.moaKeratinAtlas.getSprite(texture);

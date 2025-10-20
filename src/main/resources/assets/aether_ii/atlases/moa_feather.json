@@ -32,7 +32,8 @@
         "purple": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_purple",
         "red": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_red",
         "white": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_white",
-        "yellow": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_yellow"
+        "yellow": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_yellow",
+        "deep_blue": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_deep_blue"
       }
     }
   ]

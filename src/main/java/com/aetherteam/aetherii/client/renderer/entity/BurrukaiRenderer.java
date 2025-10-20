@@ -25,22 +25,22 @@ public class BurrukaiRenderer extends MultiBabyModelRenderer<Burrukai, BurrukaiR
     }
 
     @Override
-    public AbstractBurrukaiModel getDefaultModel() {
+    public AbstractBurrukaiModel getDefaultModel(BurrukaiRenderState burrukai) {
         return this.defaultModel;
     }
 
     @Override
-    public AbstractBurrukaiBabyModel getBabyModel() {
+    public AbstractBurrukaiBabyModel getBabyModel(BurrukaiRenderState burrukai) {
         return this.babyModel;
     }
 
     @Override
-    public ResourceLocation getDefaultTexture() {
+    public ResourceLocation getDefaultTexture(BurrukaiRenderState burrukai) {
         return this.defaultTexture;
     }
 
     @Override
-    public ResourceLocation getBabyTexture() {
+    public ResourceLocation getBabyTexture(BurrukaiRenderState burrukai) {
         return this.babyTexture;
     }
 

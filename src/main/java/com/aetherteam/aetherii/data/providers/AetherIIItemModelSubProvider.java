@@ -1,27 +1,28 @@
 package com.aetherteam.aetherii.data.providers;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.BiConsumer;
+
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.item.properties.*;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.item.components.MoaEggType;
+
 import net.minecraft.client.color.item.Dye;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
+import net.minecraft.client.renderer.item.properties.conditional.CustomModelDataProperty;
 import net.minecraft.client.renderer.item.properties.select.Charge;
 import net.minecraft.client.renderer.item.properties.select.DisplayContext;
-import net.minecraft.client.renderer.item.properties.select.TrimMaterialProperty;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.BiConsumer;
 
 public class AetherIIItemModelSubProvider extends ItemModelGenerators {
     public AetherIIItemModelSubProvider(ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
@@ -66,7 +67,13 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
             ModelTemplates.FLAT_ITEM.create(name, TextureMapping.layer0(name), this.modelOutput);
             list.add(ItemModelUtils.when(featherColor, model));
         }
-        this.itemModelOutput.accept(item, ItemModelUtils.select(new SelectFeatherColor(), ItemModelUtils.plainModel(modelLocation), list));
+        ResourceLocation special_name_0 = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "item/special_blue_moa_feather");
+        ModelTemplates.FLAT_ITEM.create(special_name_0, TextureMapping.layer0(special_name_0), this.modelOutput);
+        this.itemModelOutput.accept(item,
+            ItemModelUtils.conditional(
+                new CustomModelDataProperty(0),
+                ItemModelUtils.plainModel(special_name_0),
+                ItemModelUtils.select(new SelectFeatherColor(), ItemModelUtils.plainModel(modelLocation), list)));
     }
 
     public void generateHealingStoneItem(Item item) {
@@ -135,29 +142,75 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
     public void generateMoaEggItem(Item item) {
         ResourceLocation modelLocation = ModelLocationUtils.getModelLocation(item);
         ResourceLocation textureLocation = TextureMapping.getItemTexture(item);
-        List<SelectItemModel.SwitchCase<MoaEggType>> list = new ArrayList<>(Moa.KeratinColor.values().length * Moa.EyeColor.values().length * Moa.FeatherColor.values().length * Moa.FeatherShape.values().length);
-        for (Moa.KeratinColor keratinColor : Moa.KeratinColor.values()) {
-            for (Moa.EyeColor eyeColor : Moa.EyeColor.values()) {
-                for (Moa.FeatherColor featherColor : Moa.FeatherColor.values()) {
-                    for (Moa.FeatherShape featherShape : Moa.FeatherShape.values()) {
-                        MoaEggType type = new MoaEggType(keratinColor, eyeColor, featherColor, featherShape);
-                        ResourceLocation name = modelLocation.withSuffix("_"
-                                + featherShape.getSerializedName()
-                                + "_feather_" + featherColor.getSerializedName()
-                                + "_keratin_" + keratinColor.getSerializedName()
-                                + "_eyes_" + eyeColor.getSerializedName());
-                        ItemModel.Unbaked model = ItemModelUtils.plainModel(name);
-                        ModelTemplates.THREE_LAYERED_ITEM.create(name, TextureMapping.layered(
-                                textureLocation.withSuffix("_" + featherShape.getSerializedName() + "_" + featherColor.getSerializedName()),
-                                textureLocation.withSuffix("_keratin_" + keratinColor.getSerializedName()),
-                                textureLocation.withSuffix("_eyes_" + eyeColor.getSerializedName())
-                        ), this.modelOutput);
-                        list.add(ItemModelUtils.when(type, model));
-                    }
-                }
-            }
-        }
-        this.itemModelOutput.accept(item, ItemModelUtils.select(new SelectMoaEggType(), ItemModelUtils.plainModel(modelLocation), list));
+        var fallback = ItemModelUtils.plainModel(modelLocation);
+
+        var feathers = ItemModelUtils.select(
+            new SelectMoaEggType.FeatherShape(),
+            fallback,
+            Moa.FeatherShape.stream()
+                .map((featherShape) -> ItemModelUtils.when(featherShape,
+                    ItemModelUtils.select(new SelectMoaEggType.FeatherColor(), fallback,
+                        Moa.FeatherColor.stream()
+                            .map((featherColor) -> {
+                                String suffix = "_" + featherShape.getSerializedName() + "_" + featherColor.getSerializedName();
+                                ResourceLocation name = modelLocation.withSuffix(suffix);
+                                ItemModel.Unbaked model = ItemModelUtils.plainModel(name);
+                                ModelTemplates.FLAT_ITEM.create(name, TextureMapping.layer0(textureLocation.withSuffix(suffix)), this.modelOutput);
+                                return ItemModelUtils.when(featherColor, model);
+                            })
+                            .toList())))
+                .toList());
+        var eyes = ItemModelUtils.select(
+            new SelectMoaEggType.EyeColor(),
+            fallback,
+            Moa.EyeColor.stream()
+                .map((eyeColor) -> {
+                    String suffix = "_eyes_" + eyeColor.getSerializedName();
+                    ResourceLocation name = modelLocation.withSuffix(suffix);
+                    ItemModel.Unbaked model = ItemModelUtils.plainModel(name);
+                    ModelTemplates.FLAT_ITEM.create(name, TextureMapping.layer0(textureLocation.withSuffix(suffix)), this.modelOutput);
+                    return ItemModelUtils.when(eyeColor, model);
+                })
+                .toList());
+        var keratin = ItemModelUtils.select(
+            new SelectMoaEggType.KeratinColor(),
+            fallback,
+            Moa.KeratinColor.stream()
+                .map((keratinColor) -> {
+                    String suffix = "_keratin_" + keratinColor.getSerializedName();
+                    ResourceLocation name = modelLocation.withSuffix(suffix);
+                    ItemModel.Unbaked model = ItemModelUtils.plainModel(name);
+                    ModelTemplates.FLAT_ITEM.create(name, TextureMapping.layer0(textureLocation.withSuffix(suffix)), this.modelOutput);
+                    return ItemModelUtils.when(keratinColor, model);
+                })
+                .toList());
+        
+        this.itemModelOutput.accept(item, ItemModelUtils.composite(feathers, eyes, keratin));
+
+        // List<SelectItemModel.SwitchCase<MoaEggType>> list = new ArrayList<>(Moa.KeratinColor.values().length * Moa.EyeColor.values().length * Moa.FeatherColor.values().length * Moa.FeatherShape.values().length);
+
+        // for (Moa.KeratinColor keratinColor : Moa.KeratinColor.values()) {
+        //     for (Moa.EyeColor eyeColor : Moa.EyeColor.values()) {
+        //         for (Moa.FeatherColor featherColor : Moa.FeatherColor.values()) {
+        //             for (Moa.FeatherShape featherShape : Moa.FeatherShape.values()) {
+        //                 MoaEggType type = new MoaEggType(keratinColor, eyeColor, featherColor, featherShape);
+        //                 ResourceLocation name = modelLocation.withSuffix("_"
+        //                         + featherShape.getSerializedName()
+        //                         + "_feather_" + featherColor.getSerializedName()
+        //                         + "_keratin_" + keratinColor.getSerializedName()
+        //                         + "_eyes_" + eyeColor.getSerializedName());
+        //                 ItemModel.Unbaked model = ItemModelUtils.plainModel(name);
+        //                 ModelTemplates.THREE_LAYERED_ITEM.create(name, TextureMapping.layered(
+        //                         textureLocation.withSuffix("_" + featherShape.getSerializedName() + "_" + featherColor.getSerializedName()),
+        //                         textureLocation.withSuffix("_keratin_" + keratinColor.getSerializedName()),
+        //                         textureLocation.withSuffix("_eyes_" + eyeColor.getSerializedName())
+        //                 ), this.modelOutput);
+        //                 list.add(ItemModelUtils.when(type, model));
+        //             }
+        //         }
+        //     }
+        // }
+        // this.itemModelOutput.accept(item, ItemModelUtils.select(new SelectMoaEggType(), ItemModelUtils.plainModel(modelLocation), list));
     }
 
     public void generateDyedSaddleItem(Item item) {

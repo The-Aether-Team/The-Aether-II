@@ -19,7 +19,8 @@
       "permutations": {
         "blue": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_blue",
         "green": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_green",
-        "yellow": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_yellow"
+        "yellow": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_yellow",
+        "gold": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_gold"
       }
     },
     {
@@ -49,7 +50,8 @@
         "purple": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_purple",
         "red": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_red",
         "white": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_white",
-        "yellow": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_yellow"
+        "yellow": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_yellow",
+        "deep_blue": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_deep_blue"
       }
     },
     {
@@ -63,7 +65,8 @@
         "brown": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_brown",
         "green": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_green",
         "gray": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_gray",
-        "red": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_red"
+        "red": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_red",
+        "bley": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_bley"
       }
     },
     {

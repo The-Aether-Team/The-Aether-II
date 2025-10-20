@@ -27,7 +27,7 @@ public class MoaFeathersLayer extends RenderLayer<MoaRenderState, EntityModel<Mo
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, MoaRenderState moa, float netHeadYaw, float headPitch) {
-        if (!moa.isInvisible) {
+        if (!moa.isInvisible && !moa.hasSpecialTexture()) {
             String name = moa.isBaby ? "moa_baby_feather" : "moa_feather";
             ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entity/mobs/moa/" + name + "_" + moa.featherShape + "_" + moa.featherColor);
             TextureAtlasSprite sprite = this.moaFeathersAtlas.getSprite(texture);

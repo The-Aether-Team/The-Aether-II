@@ -8,7 +8,10 @@ import net.neoforged.neoforge.client.event.RegisterSelectItemModelPropertyEvent;
 public class AetherIIItemModelProperties {
     public static void registerSelectProperties(RegisterSelectItemModelPropertyEvent event) {
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "feather_color"), SelectFeatherColor.TYPE);
-        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_egg_type"), SelectMoaEggType.TYPE);
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_egg/feather_color"), SelectMoaEggType.FeatherColor.TYPE);
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_egg/feather_shape"), SelectMoaEggType.FeatherShape.TYPE);
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_egg/eye_color"), SelectMoaEggType.EyeColor.TYPE);
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_egg/keratin_color"), SelectMoaEggType.KeratinColor.TYPE);
     }
 
     public static void registerRangeSelectProperties(RegisterRangeSelectItemModelPropertyEvent event) {

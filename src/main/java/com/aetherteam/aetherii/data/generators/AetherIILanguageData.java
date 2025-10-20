@@ -62,6 +62,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Packs
         this.addPackDescription("mod", "Aether II Resources");
+        
+        // Use Action
+        this.addTooltip("item.modifiers.blocking", "When blocking:");
     }
 
     private void addBlocks() {
@@ -1098,10 +1101,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addKeratinColor(Moa.KeratinColor.GREEN, "Green");
         this.addKeratinColor(Moa.KeratinColor.GRAY, "Gray");
         this.addKeratinColor(Moa.KeratinColor.RED, "Red");
+        this.addKeratinColor(Moa.KeratinColor.BLEY, "Bluish-Gray");
 
         this.addEyeColor(Moa.EyeColor.BLUE, "Blue");
         this.addEyeColor(Moa.EyeColor.GREEN, "Green");
         this.addEyeColor(Moa.EyeColor.YELLOW, "Yellow");
+        this.addEyeColor(Moa.EyeColor.GOLD, "Gold");
 
         this.addFeatherColor(Moa.FeatherColor.BLACK, "Black");
         this.addFeatherColor(Moa.FeatherColor.BLOOMING_RED, "Blooming Red");
@@ -1121,13 +1126,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addFeatherColor(Moa.FeatherColor.RED, "Red");
         this.addFeatherColor(Moa.FeatherColor.WHITE, "White");
         this.addFeatherColor(Moa.FeatherColor.YELLOW, "Yellow");
+        this.addFeatherColor(Moa.FeatherColor.DEEP_BLUE, "Deep Blue");
 
         this.addFeatherShape(Moa.FeatherShape.CURVED, "Curved");
         this.addFeatherShape(Moa.FeatherShape.FLAT, "Flat");
         this.addFeatherShape(Moa.FeatherShape.POINTED, "Pointed");
-
-        // Use Action
-        this.addTooltip("item.modifiers.blocking", "When blocking:");
     }
 
     private void addAccessorySlots() {

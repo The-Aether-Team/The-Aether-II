@@ -99,7 +99,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
     @Override
     public void aiStep() {
         super.aiStep();
-        if (Blighted.super.inSunlight(this) || this.getHideTime() >= HIDE_ANIMATION_START) {
+        if (!this.isInvulnerable() && (Blighted.super.inSunlight(this) || this.getHideTime() >= HIDE_ANIMATION_START)) {
             if (this.getHideTime() <= HIDE_LENGTH) {
                 Blighted.super.weaken(this, this.getRandom(), this.tickCount, 0.65F);
 

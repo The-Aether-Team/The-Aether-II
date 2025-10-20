@@ -153,6 +153,12 @@ public class MoaModel extends EntityModel<MoaRenderState> {
 
         PartDefinition beak_int = head_main.addOrReplaceChild("beak_int", CubeListBuilder.create().texOffs(51, 57).mirror().addBox(-2.5F, 0.2F, -7.0F, 5.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 0.0F, 0.0F));
 
+        PartDefinition head_feather_c1 = head_main.addOrReplaceChild("head_feather_c1", CubeListBuilder.create().texOffs(85, 56).addBox(-1.0F, -10.0F, -2.0F, 1.0F, 9.0F, 14.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition head_feather_c2 = head_main.addOrReplaceChild("head_feather_c2", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition head_feather_c2_r1 = head_feather_c2.addOrReplaceChild("head_feather_c2_r1", CubeListBuilder.create().texOffs(100, 79).addBox(0.0F, -2.0F, -1.0F, 1.0F, 5.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 1.0F, 6.0F, -0.3054F, 0.0F, 0.0F));
+
         PartDefinition wing_left_1 = body_front.addOrReplaceChild("wing_left_1", CubeListBuilder.create().texOffs(118, 0).mirror().addBox(-10.5F, -2.0F, -4.0F, 12.0F, 3.0F, 6.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-3.0F, 1.5F, -4.0F, 0.0F, -0.1745F, -0.9599F));
 
         PartDefinition wing_left_feather_1 = wing_left_1.addOrReplaceChild("wing_left_feather_1", CubeListBuilder.create().texOffs(120, 19).mirror().addBox(-10.5F, 0.5F, -2.5F, 11.0F, 1.0F, 5.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-6.0F, -1.5F, 0.5F, 0.0F, 1.4835F, 0.0F));
