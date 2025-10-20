@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -19,13 +20,10 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.component.ItemLore;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-@EventBusSubscriber(modid = AetherII.MODID)
 public class AetherIICreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, AetherII.MODID);
 
@@ -851,9 +849,8 @@ public class AetherIICreativeTabs {
         }
     }
 
-    @SubscribeEvent
-    public static void onEvent(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey().compareTo(CreativeModeTabs.OP_BLOCKS) == 0) {
+    public static void addCreativeModTabContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.hasPermissions() && event.getTabKey().compareTo(CreativeModeTabs.OP_BLOCKS) == 0) {
             event.accept(getMoaBook());
         }
     }

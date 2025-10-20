@@ -174,6 +174,7 @@ public class AetherII {
         neoBus.addListener(AetherIIEntityTypes::registerSpawnPlacements);
         neoBus.addListener(AetherIIEntityTypes::registerEntityAttributes);
         neoBus.addListener(AetherIIDataMaps::registerDataMaps);
+        neoBus.addListener(AetherIICreativeTabs::addCreativeModTabContents);
     }
 
     public void registerPackets(RegisterPayloadHandlersEvent event) {
