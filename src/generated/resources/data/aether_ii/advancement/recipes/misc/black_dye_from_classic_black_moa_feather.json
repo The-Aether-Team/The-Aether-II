@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:blue_dye_from_deep_blue"
+        "recipe": "aether_ii:black_dye_from_classic_black_moa_feather"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:blue_dye_from_deep_blue"
+      "aether_ii:black_dye_from_classic_black_moa_feather"
     ]
   }
 }

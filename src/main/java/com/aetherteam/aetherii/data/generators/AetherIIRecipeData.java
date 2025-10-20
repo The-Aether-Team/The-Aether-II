@@ -1156,7 +1156,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                     requires(DataComponentIngredient.of(false, AetherIIDataComponents.FEATHER_COLOR, featherColor, AetherIIItems.MOA_FEATHER))
                     .group(getItemName(featherDye))
                     .unlockedBy(getHasName(AetherIIItems.MOA_FEATHER), has(AetherIIItems.MOA_FEATHER))
-                    .save(this.output, this.name(getItemName(featherDye.getValue()) + "_from_" + featherDye.getKey().getSerializedName()));
+                    .save(this.output, this.name(getItemName(featherDye) + "_from_" + featherColor.getSerializedName() + "_moa_feather"));
         }
 
         this.oneToOneConversionRecipe(Items.PURPLE_DYE, AetherIIItems.COCKATRICE_FEATHER.get(), "purple_dye");

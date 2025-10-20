@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:orange_dye_from_orange"
+        "recipe": "aether_ii:magenta_dye_from_magenta_moa_feather"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:orange_dye_from_orange"
+      "aether_ii:magenta_dye_from_magenta_moa_feather"
     ]
   }
 }

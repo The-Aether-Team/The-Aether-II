@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:red_dye_from_blooming_red"
+        "recipe": "aether_ii:pink_dye_from_pink_moa_feather"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:red_dye_from_blooming_red"
+      "aether_ii:pink_dye_from_pink_moa_feather"
     ]
   }
 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:light_blue_dye_from_light_blue"
+        "recipe": "aether_ii:lime_dye_from_lime_moa_feather"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:light_blue_dye_from_light_blue"
+      "aether_ii:lime_dye_from_lime_moa_feather"
     ]
   }
 }

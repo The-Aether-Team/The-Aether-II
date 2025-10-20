@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:white_dye_from_white"
+        "recipe": "aether_ii:purple_dye_from_purple_moa_feather"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:white_dye_from_white"
+      "aether_ii:purple_dye_from_purple_moa_feather"
     ]
   }
 }
