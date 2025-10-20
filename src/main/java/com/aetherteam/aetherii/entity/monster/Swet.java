@@ -204,7 +204,9 @@ public class Swet extends Monster {
     @Override
     protected float getJumpPower() {
         float jumpPower = super.getJumpPower();
-        if (this.isWaterDamaged()) {
+        if (this.isInWall()) {
+            jumpPower = 0.75F;
+        } else if (this.isWaterDamaged()) {
             jumpPower = jumpPower * 0.5F;
         } else if (this.getSwetScale() > 0.95F) {
             jumpPower = jumpPower * (1.0F - (this.getSwetScale() - 0.95F));

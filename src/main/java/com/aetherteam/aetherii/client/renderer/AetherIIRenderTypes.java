@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.AetherIIShaders;
+import com.aetherteam.aetherii.client.AetherIIRenderPipelines;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
@@ -14,7 +14,7 @@ public class AetherIIRenderTypes {
     private static final RenderType CLOUD_COVER = RenderType.create(
             "aether:cloud_cover",
             1536,
-            AetherIIShaders.getCloudCoverShader(),
+            AetherIIRenderPipelines.getCloudCoverShader(),
             RenderType.CompositeState.builder()
                     .createCompositeState(false));
 

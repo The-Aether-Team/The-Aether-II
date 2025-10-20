@@ -7,9 +7,11 @@ import com.aetherteam.aetherii.client.renderer.entity.model.GravititeTalutonMode
 import com.aetherteam.aetherii.client.renderer.entity.state.GravititeTalutonRenderState;
 import com.aetherteam.aetherii.entity.monster.GravititeTaluton;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 public class GravititeTalutonRenderer extends MobRenderer<GravititeTaluton, GravititeTalutonRenderState, GravititeTalutonModel> {
     private static final ResourceLocation GRAVITITE_TALUTON_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/gravitite_taluton/gravitite_taluton.png");
@@ -39,7 +41,20 @@ public class GravititeTalutonRenderer extends MobRenderer<GravititeTaluton, Grav
     }
 
     @Override
-    protected void setupRotations(GravititeTalutonRenderState renderState, PoseStack poseStack, float bodyRot, float scale) { }
+    protected void setupRotations(GravititeTalutonRenderState renderState, PoseStack poseStack, float bodyRot, float scale) {
+        if (renderState.deathTime > 0.0F) {
+            float f = (renderState.deathTime - 1.0F) / 20.0F * 1.6F;
+            f = Mth.sqrt(f);
+            if (f > 1.0F) {
+                f = 1.0F;
+            }
+            poseStack.translate(0.0, f * 0.3, 0.0);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(f * this.getFlipDegrees()));
+        } else if (renderState.isUpsideDown) {
+            poseStack.translate(0.0F, (renderState.boundingBoxHeight + 0.1F) / scale, 0.0F);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F));
+        }
+    }
 
     @Override
     public ResourceLocation getTextureLocation(GravititeTalutonRenderState renderState) {

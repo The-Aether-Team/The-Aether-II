@@ -39,6 +39,11 @@ public class FullAetherBushBlock extends AetherBushBlock implements SimpleWaterl
     }
 
     @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return Shapes.block();
+    }
+
+    @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         if (context.isAbove(Shapes.block(), pos, true) && !context.isDescending()) {
             return Shapes.block();

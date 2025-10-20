@@ -378,7 +378,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
             if (this.getRandom().nextInt(900) == 0 && this.deathTime == 0) {
                 this.heal(1.0F);
             }
-            if (!this.isBaby() && this.getRandom().nextInt(2500) == 0) {
+            if (!this.isBaby() && this.getRandom().nextInt(3750) == 0) {
                 if (this.level() instanceof ServerLevel serverLevel) {
                     ItemStack featherStack = new ItemStack(AetherIIItems.MOA_FEATHER.get());
                     FeatherColor featherColor = this.getFeatherColor();
@@ -471,7 +471,6 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 this.flap = Mth.clamp(this.flap - 0.2F, 0, 1F);
             }
         }
-        this.checkFallDistanceAccumulation(); // Resets the Moa's fall distance.
     }
 
     @Override

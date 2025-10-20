@@ -64,12 +64,12 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIRenderers::registerAddLayer);
         neoBus.addListener(AetherIIRenderers::registerEntityRenderers);
         neoBus.addListener(AetherIIRenderers::registerLayerDefinition);
+        neoBus.addListener(AetherIIRenderers::registerBlockStateModels);
         neoBus.addListener(AetherIIRenderers::registerBakedModels);
         neoBus.addListener(AetherIIRenderers::registerRenderStateModifier);
-        neoBus.addListener(AetherIIRenderers::registerBlockStateModels);
         neoBus.addListener(AetherIIRenderers::registerSpecialModelRenderers);
         neoBus.addListener(AetherIIRenderEffects::registerRenderEffects);
-        neoBus.addListener(AetherIIShaders::registerShaders);
+        neoBus.addListener(AetherIIRenderPipelines::registerShaders);
         neoBus.addListener(AetherIIItemDecorators::registerItemDecorators);
         neoBus.addListener(AetherIIClientTooltips::registerClientTooltipComponents);
         neoBus.addListener(AetherIIClientExtensions::registerClientItemExtensions);

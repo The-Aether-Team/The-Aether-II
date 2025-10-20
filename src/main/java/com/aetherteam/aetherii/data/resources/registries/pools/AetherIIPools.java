@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries.pools;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.world.structure.pool.AetherPoolElement;
+import com.aetherteam.aetherii.world.structure.pool.RotatablePoolElement;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.core.Holder;
@@ -56,6 +57,9 @@ public class AetherIIPools {
     // Can generate below Surface Level, primarily used for underground structures
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolUnderground(String id) {
         return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), -64, 384, false);
+    }
+    public static Function<StructureTemplatePool.Projection, RotatablePoolElement> aetherPoolRotatable(String id, RotatablePoolElement.PoolRotation rotationModifier) {
+        return pool -> new RotatablePoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), -64, 384, false, rotationModifier);
     }
 
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolUnderground(String id, Holder<StructureProcessorList> processor) {

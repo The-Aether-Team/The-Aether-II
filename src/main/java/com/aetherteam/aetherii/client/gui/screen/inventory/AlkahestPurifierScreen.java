@@ -87,7 +87,9 @@ public class AlkahestPurifierScreen extends AbstractRecipeBookScreen<AlkahestPur
         }
          */
 
-        int j1 = Mth.ceil(this.menu.getProcessingProgress() * 15.0F);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, OUTPUT_PROGRESS_SPRITE, 15, 10, 0, 0, i + 121, j + 48, j1, 10);
+        int j1 = Mth.ceil(this.menu.getProcessingProgress() * 14.0F);
+        if (j1 > 0) {
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, OUTPUT_PROGRESS_SPRITE, 15, 10, 0, 0, i + 121, j + 48, j1 + 1, 10);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.utility;
 
+import com.aetherteam.aetherii.inventory.menu.SkyrootCraftingMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
@@ -21,7 +22,7 @@ public class SkyrootCraftingTableBlock extends CraftingTableBlock {
 
 	@Override
 	public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
-		return new SimpleMenuProvider((id, inventory, playerEntity) -> new CraftingMenu(id, inventory, ContainerLevelAccess.create(level, pos)) {
+		return new SimpleMenuProvider((id, inventory, playerEntity) -> new SkyrootCraftingMenu(id, inventory, ContainerLevelAccess.create(level, pos)) {
 			@Override
 			public boolean stillValid(Player player) {
 				return true;

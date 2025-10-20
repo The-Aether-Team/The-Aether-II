@@ -10,6 +10,15 @@
             "entries": [
               {
                 "data": {
+                  "Name": "aether_ii:aechor_cutting",
+                  "Properties": {
+                    "snowy": "false"
+                  }
+                },
+                "weight": 3
+              },
+              {
+                "data": {
                   "Name": "aether_ii:hesperose",
                   "Properties": {
                     "snowy": "false"

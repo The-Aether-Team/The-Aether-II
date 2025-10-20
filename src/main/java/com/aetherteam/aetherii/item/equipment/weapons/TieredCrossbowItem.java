@@ -4,13 +4,13 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -283,7 +283,9 @@ public class TieredCrossbowItem extends CrossbowItem {
     }
 
     public int getCrossbowChargeDuration(ItemStack stack, LivingEntity shooter) {
-        return ((TieredCrossbowItem) stack.getItem()).chargeTime;
+        float f = EnchantmentHelper.modifyCrossbowChargingTime(stack, shooter, (((TieredCrossbowItem) stack.getItem()).chargeTime / 20F));
+
+        return Mth.floor(f * 20.0F);
     }
 
     /**

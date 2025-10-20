@@ -136,7 +136,6 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     }
 
     public void renderRotatingEntity(GuiGraphics guiGraphics, int startX, int startY, int endX, int endY, int scale, float yOffset, float angleXComponent, float angleYComponent, LivingEntity livingEntity) {
-        int scaleFactor = 30 / scale;
         Quaternionf xQuaternion = new Quaternionf().rotateZ(Mth.PI);
         Quaternionf zQuaternion = new Quaternionf().rotateX(angleYComponent * Mth.DEG_TO_RAD);
         xQuaternion.mul(zQuaternion);
@@ -148,9 +147,10 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         livingEntity.setXRot(-angleYComponent);
         livingEntity.setYHeadRot(livingEntity.getYRot());
         livingEntity.yHeadRotO = livingEntity.getYRot();
-        Vector3f vector3f = new Vector3f(0.0F, livingEntity.getBbHeight() / 2.0F + yOffset, 0.0F);
+        livingEntity.tickCount = -1;
 
-        InventoryScreen.renderEntityInInventory(guiGraphics, startX, startY, endX, endY, 30F, vector3f, xQuaternion, zQuaternion, livingEntity);
+        Vector3f vector3f = new Vector3f(0.0F, livingEntity.getBbHeight() / 2.0F + yOffset, 0.0F);
+        InventoryScreen.renderEntityInInventory(guiGraphics, startX, startY, endX, endY, scale, vector3f, xQuaternion, zQuaternion, livingEntity);
         livingEntity.setYBodyRot(yBodyRot);
         livingEntity.setYRot(yRot);
         livingEntity.setXRot(xRot);
@@ -204,8 +204,6 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     private void renderSlotTooltips(GuiGraphics guiGraphics, double mouseX, double mouseY) {
         BestiaryEntry.Mutable entry = this.getEntryFromSlot(mouseX, mouseY);
         if (entry != null) {
-            int leftPagePos = ((this.screen.width + 2) / 2) - Guidebook.PAGE_WIDTH;
-            int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
             Component name = Component.translatable("gui.aether_ii.guidebook.discovery.entry.unknown");
             if (this.isUnlocked(entry, BestiaryEntry.SLOT_NAME.id())) {
                 name = Component.translatable(entry.getSlotName());
@@ -237,7 +235,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                     if (this.isUnlocked(entry, BestiaryEntry.HEALTH.id())) {
                         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
                         this.renderIconValue(guiGraphics, x, y, (int) livingEntity.getMaxHealth());
-                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", entry.getHealth()));
+                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", entry.getHealth()));
                     }
 
                     y += 17;
@@ -246,7 +244,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                         int slashDefense = entry.getSlashDefense();
                         Component slashTooltip = this.getDamageTypeComponent(slashDefense, "slash");
                         this.renderDefenseIconValue(guiGraphics, x, y, -slashDefense);
-                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, slashTooltip);
+                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, slashTooltip);
                     }
 
                     y += 17;
@@ -255,7 +253,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                         int impactDefense = entry.getImpactDefense();
                         Component impactTooltip = this.getDamageTypeComponent(impactDefense, "impact");
                         this.renderDefenseIconValue(guiGraphics, x, y, -impactDefense);
-                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, impactTooltip);
+                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, impactTooltip);
                     }
 
                     y += 17;
@@ -264,7 +262,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                         int pierceDefense = entry.getPierceDefense();
                         Component pierceTooltip = this.getDamageTypeComponent(pierceDefense, "pierce");
                         this.renderDefenseIconValue(guiGraphics, x, y, -pierceDefense);
-                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, pierceTooltip);
+                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, pierceTooltip);
                     }
 
                     x = 132;
@@ -284,7 +282,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                                             .append(CommonComponents.space())
                                             .append(Component.translatable(effectResistanceAttribute.getDescriptionId(), Component.translatable(effectHolder.value().getDescriptionId()).withColor(effectHolder.value().getColor())));
                                     this.renderDefenseIconValue(guiGraphics, x, y, effectValue);
-                                    this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, -Minecraft.getInstance().font.width(effectTooltip) - 22, effectTooltip);
+                                    this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, effectTooltip);
                                     y += 17;
                                 }
                             }
@@ -381,13 +379,13 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         return component;
     }
 
-    private void renderTooltipOverIcon(Font font, GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, int xOffset, Component component) {
+    private void renderTooltipOverIcon(Font font, GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, Component component) {
         int rightPagePos = (this.screen.width / 2);
         int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
         double mouseXDiff = (mouseX - rightPagePos) - x;
         double mouseYDiff = (mouseY - topPos) - y;
         if (mouseYDiff <= 15 && mouseYDiff >= 0 && mouseXDiff <= 15 && mouseXDiff >= 0) {
-            guiGraphics.setTooltipForNextFrame(font, component, (mouseX - rightPagePos) + xOffset, mouseY - topPos);
+            guiGraphics.setTooltipForNextFrame(font, component, mouseX, mouseY);
         }
     }
 

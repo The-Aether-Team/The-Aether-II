@@ -579,6 +579,7 @@ public class HighlandsConfiguredFeatures {
                         8,
                         3,
                         PlacementUtils.filtered(AetherIIFeatures.AETHER_FLOWER.get(), new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
+                                        .add(AetherIIBlocks.AECHOR_CUTTING.get().defaultBlockState(), 3)
                                         .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 4)
                                         .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 4)
                                         .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 4)
