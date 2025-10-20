@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.google.common.collect.Streams;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -15,12 +14,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class OutpostTrackerAttachment {
     private List<CampfirePosition> campfirePositions;
@@ -53,15 +50,20 @@ public class OutpostTrackerAttachment {
     public TeleportTransition findOutpostRespawnLocation(Player player) {
         if (player instanceof ServerPlayer serverPlayer) {
             if (this.shouldRespawnAtOutpost()) {
-                OutpostTrackerAttachment.CampfirePosition closest = this.findClosestPositionTo((ServerLevel) serverPlayer.level(), player.blockPosition());
+                OutpostTrackerAttachment.CampfirePosition closest = this.findClosestPositionTo(serverPlayer.level(), player.blockPosition());
                 if (closest != null) {
                     ServerLevel serverLevel = serverPlayer.getServer().getLevel(closest.level());
                     if (serverLevel != null) {
                         BlockPos.MutableBlockPos respawnPos = closest.pos().mutable();
-                        Optional<BlockPos> newRespawnPos = Streams.stream(BlockPos.randomBetweenClosed(serverLevel.getRandom(), 50, respawnPos.getX() - 3, respawnPos.getY(), respawnPos.getZ() - 3, respawnPos.getX() + 3, respawnPos.getY(), respawnPos.getZ() + 3).iterator())
-                                .filter((pos) -> serverLevel.getBlockState(pos).getBlock().isPossibleToRespawnInThis(serverLevel.getBlockState(pos)) && !serverLevel.getBlockState(pos).is(AetherIIBlocks.OUTPOST_CAMPFIRE)).findFirst();
-                        if (newRespawnPos.isPresent() && serverPlayer.getRespawnConfig() != null) {
-                            ServerPlayer.RespawnPosAngle posAngle = new ServerPlayer.RespawnPosAngle(new Vec3((double) newRespawnPos.get().getX() + 0.5, (double) newRespawnPos.get().getY() + 0.1, (double) newRespawnPos.get().getZ() + 0.5), serverPlayer.getRespawnConfig().angle());
+                        BlockPos newRespawnPos = null;
+                        for (BlockPos pos : BlockPos.randomBetweenClosed(serverLevel.getRandom(), 50, respawnPos.getX() - 3, respawnPos.getY(), respawnPos.getZ() - 3, respawnPos.getX() + 3, respawnPos.getY(), respawnPos.getZ() + 3)) {
+                            if (serverLevel.getBlockState(pos).getBlock().isPossibleToRespawnInThis(serverLevel.getBlockState(pos)) && !serverLevel.getBlockState(pos).is(AetherIIBlocks.OUTPOST_CAMPFIRE)) {
+                                newRespawnPos = pos;
+                                break;
+                            }
+                        }
+                        if (newRespawnPos != null) {
+                            ServerPlayer.RespawnPosAngle posAngle = new ServerPlayer.RespawnPosAngle(new Vec3((double) newRespawnPos.getX() + 0.5, (double) newRespawnPos.getY() + 0.1, (double) newRespawnPos.getZ() + 0.5), 0);
                             return new TeleportTransition(serverLevel, posAngle.position(), Vec3.ZERO, posAngle.yaw(), 0.0F, TeleportTransition.DO_NOTHING);
                         }
                     }
