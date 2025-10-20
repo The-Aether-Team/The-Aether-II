@@ -1,14 +1,11 @@
 package com.aetherteam.aetherii.block.utility;
 
-import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.AltarBlockEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -22,7 +19,6 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
@@ -85,31 +81,6 @@ public class AltarBlock extends BaseEntityBlock {
         if (blockEntity instanceof AltarBlockEntity altarBlockEntity) {
             player.openMenu(altarBlockEntity);
         }
-    }
-
-    @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-//        if (state.getValue(BLASTING)) { //todo
-//            double x = (double) pos.getX() + 0.5;
-//            double y = (double) pos.getY() + 0.65;
-//            double z = (double) pos.getZ() + 0.5;
-//
-//            Direction direction = state.getValue(FACING);
-//            Direction.Axis axis = direction.getAxis();
-//
-//            for (int i = 0; i < 5; i++) {
-//                double multiplier = random.nextDouble() * 0.2 - 0.1;
-//
-//                double xOffset = axis == Direction.Axis.Z ? (double) direction.getStepZ() * 0.52 : multiplier;
-//                double yOffset = random.nextDouble() * 4.0 / 16.0;
-//                double zOffset = axis == Direction.Axis.X ? (double) direction.getStepX() * 0.52 : multiplier;
-//
-//                int color = random.nextBoolean() ? 14403138 : 9721330;
-//
-//                level.addParticle(new DustParticleOptions(color, 1.0F), x + xOffset + (i * xOffset * 0.1), y + yOffset, z + zOffset + (i * zOffset * 0.1), xOffset * 0.5, 0.0, zOffset * 0.5);
-//                level.addParticle(new DustParticleOptions(color, 1.0F), x - xOffset - (i * xOffset * 0.1), y + yOffset, z - zOffset - (i * zOffset * 0.1), -xOffset * 0.5, 0.0, -zOffset * 0.5);
-//            }
-//        }
     }
 
     @Override

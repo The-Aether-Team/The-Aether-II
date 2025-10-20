@@ -182,6 +182,7 @@ public class AetherII {
         // CLIENTBOUND
         registrar.playToClient(AlkahestDamageBlockPacket.TYPE, AlkahestDamageBlockPacket.STREAM_CODEC, AlkahestDamageBlockPacket::execute);
         registrar.playToClient(AlkahestFizzPacket.TYPE, AlkahestFizzPacket.STREAM_CODEC, AlkahestFizzPacket::execute);
+        registrar.playToClient(AltarParticlesPacket.TYPE, AltarParticlesPacket.STREAM_CODEC, AltarParticlesPacket::execute);
         registrar.playToClient(ClientGrabItemPacket.TYPE, ClientGrabItemPacket.STREAM_CODEC, ClientGrabItemPacket::execute);
         registrar.playToClient(FlushGuidebookDataPacket.TYPE, FlushGuidebookDataPacket.STREAM_CODEC, FlushGuidebookDataPacket::execute);
         registrar.playToClient(ForgeSoundPacket.TYPE, ForgeSoundPacket.STREAM_CODEC, ForgeSoundPacket::execute);

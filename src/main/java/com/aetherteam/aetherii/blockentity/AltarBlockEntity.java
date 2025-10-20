@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.inventory.menu.AltarMenu;
+import com.aetherteam.aetherii.network.packet.clientbound.AltarParticlesPacket;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
 import com.google.common.collect.Lists;
@@ -44,6 +45,7 @@ import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -180,6 +182,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
                     blockEntity.processingTotalTime = getTotalProcessingTime(level, blockEntity);
                     if (blockEntity.process(level.registryAccess(), recipeHolder, blockEntity.items, i)) {
                         blockEntity.setRecipeUsed(recipeHolder);
+                        PacketDistributor.sendToAllPlayers(new AltarParticlesPacket(pos));
                     }
                 }
             } else {
