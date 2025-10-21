@@ -23,6 +23,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity> {
     private final ItemClusterRenderState renderState = new ItemClusterRenderState();
     private final ItemModelResolver itemModelResolver;
@@ -49,16 +52,9 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity> {
             }
             if (!inputStack.isEmpty()) {
                 poseStack.pushPose();
-                float rotation;
-                switch (direction) {
-                    case NORTH -> rotation = 135.0F;
-                    case SOUTH -> rotation = -45.0F;
-                    case EAST -> rotation = 45.0F;
-                    default -> rotation = -135.0F;
-                }
                 poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
                 poseStack.translate(0.5F, 0.5F, -1.01725F);
-                poseStack.mulPose(Axis.ZN.rotationDegrees(rotation));
+                poseStack.mulPose(Axis.ZN.rotationDegrees(direction.toYRot() - 180));
 
                 if (!inputStack.isEmpty()) {
                     poseStack.scale(0.5F, 0.5F, 0.5F);
@@ -88,36 +84,32 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity> {
 
             this.ambSpinningSpeed = Math.clamp(Mth.lerp(0.025F, this.ambSpinningSpeed, altarBlockEntity.getProcessingProgress() * 0.01F) , 0.25F, 1.0F);
 
-            int amount = 0;
+            List<ItemStack> fuelStacks = new ArrayList<>();
             for (int i = 1; i <= 8; i++) {
-                if (!altarBlockEntity.getItem(i).isEmpty()) {
-                    amount++;
+                ItemStack fuelStack = altarBlockEntity.getItem(i);
+                if (fuelStack.is(AetherIITags.Items.ALTAR_FUEL)) {
+                    fuelStacks.add(fuelStack);
                 }
             }
+            for (int i = 0; i < fuelStacks.size(); i++) {
+                ItemStack fuelStack = fuelStacks.get(i);
+                poseStack.pushPose();
+                float radius = 1.25F;
+                float theta = 5.0F;
 
-            if (amount > 0) {
-                for (int i = 0; i < 9; i++) {
-                    ItemStack fuelStack = altarBlockEntity.getItem(i);
-                    if (fuelStack.is(AetherIITags.Items.ALTAR_FUEL)) {
-                        poseStack.pushPose();
-                        float radius = 1.25F;
-                        float theta = 5.0F;
+                float dist = Mth.PI * i / fuelStacks.size() * 2.0F;
+                float x = radius * Mth.cos(theta + dist);
+                float y = 0.0F;
+                float z = radius * Mth.sin(theta + dist);
+                float deltaX = z * Mth.cos(this.ambrosiumFinalRotation) - x * Mth.sin(this.ambrosiumFinalRotation);
+                float deltaZ = x * Mth.cos(this.ambrosiumFinalRotation) + z * Mth.sin(this.ambrosiumFinalRotation);
+                poseStack.translate(0.5, 1.25, 0.5);
+                poseStack.scale(0.3F, 0.3F, 0.3F);
+                poseStack.translate(deltaX, y, deltaZ);
 
-                        float dist = Mth.PI * i / amount * 2.0F;
-                        float x = radius * Mth.cos(theta + dist);
-                        float y = 0.0F;
-                        float z = radius * Mth.sin(theta + dist);
-                        float deltaX = z * Mth.cos(this.ambrosiumFinalRotation) - x * Mth.sin(this.ambrosiumFinalRotation);
-                        float deltaZ = x * Mth.cos(this.ambrosiumFinalRotation) + z * Mth.sin(this.ambrosiumFinalRotation);
-                        poseStack.translate(0.5, 1.25, 0.5);
-                        poseStack.scale(0.3F, 0.3F, 0.3F);
-                        poseStack.translate(deltaX, y, deltaZ);
+                Minecraft.getInstance().getItemRenderer().renderStatic(fuelStack, ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY, poseStack, multiBufferSource, altarBlockEntity.getLevel(), 0);
 
-                        Minecraft.getInstance().getItemRenderer().renderStatic(fuelStack, ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY, poseStack, multiBufferSource, altarBlockEntity.getLevel(), 0);
-
-                        poseStack.popPose();
-                    }
-                }
+                poseStack.popPose();
             }
 
             this.ambrosiumFinalRotation += this.ambSpinningSpeed / 15.0F;
