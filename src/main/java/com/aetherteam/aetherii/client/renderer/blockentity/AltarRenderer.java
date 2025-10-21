@@ -29,10 +29,6 @@ import java.util.List;
 public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity> {
     private final ItemClusterRenderState renderState = new ItemClusterRenderState();
     private final ItemModelResolver itemModelResolver;
-    private float ambSpinningSpeed = 0.0F;
-    private float ambrosiumFinalRotation = 0.0F;
-    private float bobOffs = -1.0F;
-    private float inputItemRotation = 0.0F;
 
     public AltarRenderer(BlockEntityRendererProvider.Context context) {
         this.itemModelResolver = context.getItemModelResolver();
@@ -47,8 +43,8 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity> {
             ItemStack inputStack = altarBlockEntity.getItem(0);
             ItemStack outputStack = altarBlockEntity.getItem(9);
 
-            if (this.bobOffs < 0) {
-                this.bobOffs = level.getRandom().nextFloat() * Mth.TWO_PI;
+            if (altarBlockEntity.getBobOffs() < 0) {
+                altarBlockEntity.setBobOffs(level.getRandom().nextFloat() * Mth.TWO_PI);
             }
             if (!inputStack.isEmpty()) {
                 poseStack.pushPose();
@@ -72,17 +68,17 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity> {
                 poseStack.translate(0.5, 1.0, 0.5);
                 AABB aabb = this.renderState.item.getModelBoundingBox();
                 float f = -((float) aabb.minY) + 0.0625F;
-                float f1 = Mth.sin(this.inputItemRotation / 10.0F + this.bobOffs) * 0.05F + 0.05F;
+                float f1 = Mth.sin(altarBlockEntity.getInputItemRotation() / 10.0F + altarBlockEntity.getBobOffs()) * 0.05F + 0.05F;
                 poseStack.translate(0.0F, f1 + f, 0.0F);
-                float f2 = ItemEntity.getSpin(this.inputItemRotation, this.bobOffs);
+                float f2 = ItemEntity.getSpin(altarBlockEntity.getInputItemRotation(), altarBlockEntity.getBobOffs());
                 poseStack.mulPose(Axis.YP.rotation(f2));
                 ItemEntityRenderer.renderMultipleFromCount(poseStack, multiBufferSource, packedLight, this.renderState, level.getRandom());
-                this.inputItemRotation += (1.0F + partialTick) / 10.0F;
+                altarBlockEntity.setInputItemRotation(altarBlockEntity.getInputItemRotation() + ((1.0F + partialTick) / 10.0F));
 
                 poseStack.popPose();
             }
 
-            this.ambSpinningSpeed = Math.clamp(Mth.lerp(0.025F, this.ambSpinningSpeed, altarBlockEntity.getProcessingProgress() * 0.01F) , 0.25F, 1.0F);
+            altarBlockEntity.setAmbSpinningSpeed(Math.clamp(Mth.lerp(0.025F, altarBlockEntity.getAmbSpinningSpeed(), altarBlockEntity.getProcessingProgress() * 0.01F) , 0.25F, 1.0F));
 
             List<ItemStack> fuelStacks = new ArrayList<>();
             for (int i = 1; i <= 8; i++) {
@@ -101,8 +97,8 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity> {
                 float x = radius * Mth.cos(theta + dist);
                 float y = 0.0F;
                 float z = radius * Mth.sin(theta + dist);
-                float deltaX = z * Mth.cos(this.ambrosiumFinalRotation) - x * Mth.sin(this.ambrosiumFinalRotation);
-                float deltaZ = x * Mth.cos(this.ambrosiumFinalRotation) + z * Mth.sin(this.ambrosiumFinalRotation);
+                float deltaX = z * Mth.cos(altarBlockEntity.getAmbrosiumFinalRotation()) - x * Mth.sin(altarBlockEntity.getAmbrosiumFinalRotation());
+                float deltaZ = x * Mth.cos(altarBlockEntity.getAmbrosiumFinalRotation()) + z * Mth.sin(altarBlockEntity.getAmbrosiumFinalRotation());
                 poseStack.translate(0.5, 1.25, 0.5);
                 poseStack.scale(0.3F, 0.3F, 0.3F);
                 poseStack.translate(deltaX, y, deltaZ);
@@ -112,7 +108,7 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity> {
                 poseStack.popPose();
             }
 
-            this.ambrosiumFinalRotation += this.ambSpinningSpeed / 15.0F;
+            altarBlockEntity.setAmbrosiumFinalRotation(altarBlockEntity.getAmbrosiumFinalRotation() + (altarBlockEntity.getAmbSpinningSpeed() / 15.0F));
         }
     }
 }

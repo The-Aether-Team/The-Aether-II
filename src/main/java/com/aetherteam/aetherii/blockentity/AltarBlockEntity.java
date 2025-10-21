@@ -93,6 +93,10 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     };
     private final Object2IntOpenHashMap<ResourceKey<Recipe<?>>> recipesUsed = new Object2IntOpenHashMap<>();
     private final RecipeManager.CachedCheck<SingleRecipeInput, AltarEnchantingRecipe> quickCheck;
+    private float ambSpinningSpeed = 0.0F;
+    private float ambrosiumFinalRotation = 0.0F;
+    private float bobOffs = -1.0F;
+    private float inputItemRotation = 0.0F;
 
     public AltarBlockEntity() {
         this(AetherIIBlockEntityTypes.ALTAR.get(), BlockPos.ZERO, AetherIIBlocks.ALTAR.get().defaultBlockState());
@@ -390,10 +394,6 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         }
     }
 
-    public int getProcessingProgress() {
-        return processingProgress;
-    }
-
     @Override
     public boolean stillValid(Player player) {
         return Container.stillValidBlockEntity(this, player);
@@ -458,6 +458,42 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         for (ItemStack itemstack : this.items) {
             stackedContents.accountStack(itemstack);
         }
+    }
+
+    public int getProcessingProgress() {
+        return processingProgress;
+    }
+
+    public float getAmbSpinningSpeed() {
+        return this.ambSpinningSpeed;
+    }
+
+    public void setAmbSpinningSpeed(float ambSpinningSpeed) {
+        this.ambSpinningSpeed = ambSpinningSpeed;
+    }
+
+    public float getAmbrosiumFinalRotation() {
+        return this.ambrosiumFinalRotation;
+    }
+
+    public void setAmbrosiumFinalRotation(float ambrosiumFinalRotation) {
+        this.ambrosiumFinalRotation = ambrosiumFinalRotation;
+    }
+
+    public float getBobOffs() {
+        return this.bobOffs;
+    }
+
+    public void setBobOffs(float bobOffs) {
+        this.bobOffs = bobOffs;
+    }
+
+    public float getInputItemRotation() {
+        return this.inputItemRotation;
+    }
+
+    public void setInputItemRotation(float inputItemRotation) {
+        this.inputItemRotation = inputItemRotation;
     }
 
     @Override
