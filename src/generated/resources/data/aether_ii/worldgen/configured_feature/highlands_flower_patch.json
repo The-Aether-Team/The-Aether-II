@@ -15,7 +15,16 @@
                     "snowy": "false"
                   }
                 },
-                "weight": 3
+                "weight": 2
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:carrion_cutting",
+                  "Properties": {
+                    "snowy": "false"
+                  }
+                },
+                "weight": 1
               },
               {
                 "data": {

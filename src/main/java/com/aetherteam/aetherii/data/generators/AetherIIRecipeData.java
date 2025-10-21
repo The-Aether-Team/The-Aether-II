@@ -1193,6 +1193,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.oneToOneConversionRecipe(Items.MAGENTA_DYE, AetherIIBlocks.TARAHESP_FLOWERS, "magenta_dye");
         this.oneToOneConversionRecipe(Items.BROWN_DYE, AetherIIBlocks.SKY_ROOTS, "brown_dye");
         this.oneToOneConversionRecipe(Items.PURPLE_DYE, AetherIIBlocks.AECHOR_CUTTING, "purple_dye");
+        this.oneToOneConversionRecipe(Items.LIGHT_BLUE_DYE, AetherIIBlocks.CARRION_CUTTING, "light_blue_dye");
 
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.GREEN_SWET_JELLY.get(), 1)
                 .requires(AetherIIItems.GREEN_SWET_GEL)

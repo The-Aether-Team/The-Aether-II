@@ -39,6 +39,9 @@
     "aether_ii:brettl_grass_bundle": {
       "chance": 0.85
     },
+    "aether_ii:carrion_cutting": {
+      "chance": 0.65
+    },
     "aether_ii:enchanted_blueberry": {
       "chance": 0.5
     },

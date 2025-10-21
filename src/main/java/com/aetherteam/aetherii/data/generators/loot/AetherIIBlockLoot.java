@@ -228,6 +228,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.HOLPUPEA.get(), this.createSegmentedBlockDrops(AetherIIBlocks.HOLPUPEA.get()));
         this.add(AetherIIBlocks.BLADE_POA.get(), this::createShearsOnlyDrop);
         this.dropSelf(AetherIIBlocks.AECHOR_CUTTING.get());
+        this.dropSelf(AetherIIBlocks.CARRION_CUTTING.get());
 
         // Potted Flowers
         this.dropPottedContents(AetherIIBlocks.POTTED_MAGNETIC_SHROOM.get());
@@ -241,6 +242,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropPottedContents(AetherIIBlocks.POTTED_PLURACIAN.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_BLADE_POA.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_AECHOR_CUTTING.get());
+        this.dropPottedContents(AetherIIBlocks.POTTED_CARRION_CUTTING.get());
 
         // Bushes
         this.dropSelf(AetherIIBlocks.HIGHLANDS_BUSH.get());

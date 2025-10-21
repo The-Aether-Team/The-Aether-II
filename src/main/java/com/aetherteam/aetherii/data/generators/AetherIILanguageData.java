@@ -263,6 +263,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.HOLPUPEA, "Holpupea");
         this.addBlock(AetherIIBlocks.BLADE_POA, "Blade Poa");
         this.addBlock(AetherIIBlocks.AECHOR_CUTTING, "Aechor Cutting");
+        this.addBlock(AetherIIBlocks.CARRION_CUTTING, "Carrion Cutting");
 
         // Potted Flowers
         this.addBlock(AetherIIBlocks.POTTED_MAGNETIC_SHROOM, "Potted Magnetic Shroom");
@@ -276,6 +277,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.POTTED_PLURACIAN, "Potted Pluracian");
         this.addBlock(AetherIIBlocks.POTTED_BLADE_POA, "Potted Blade Poa");
         this.addBlock(AetherIIBlocks.POTTED_AECHOR_CUTTING, "Potted Aechor Cutting");
+        this.addBlock(AetherIIBlocks.POTTED_CARRION_CUTTING, "Potted Carrion Cutting");
 
         // Bushes
         this.addBlock(AetherIIBlocks.HIGHLANDS_BUSH, "Highlands Bush");

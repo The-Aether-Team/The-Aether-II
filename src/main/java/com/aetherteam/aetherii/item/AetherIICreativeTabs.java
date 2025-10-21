@@ -489,6 +489,7 @@ public class  AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.BRETTL_FLOWER.get());
                 output.accept(AetherIIBlocks.HOLPUPEA.get());
                 output.accept(AetherIIBlocks.AECHOR_CUTTING.get());
+                output.accept(AetherIIBlocks.CARRION_CUTTING.get());
                 output.accept(AetherIIBlocks.HIGHLANDS_BUSH.get());
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get());
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH.get());

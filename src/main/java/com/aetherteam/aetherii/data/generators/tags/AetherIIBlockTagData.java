@@ -451,7 +451,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.LILICHIME.get(),
                 AetherIIBlocks.PLURACIAN.get(),
                 AetherIIBlocks.SATIVAL_SHOOT.get(),
-                AetherIIBlocks.AECHOR_CUTTING.get()
+                AetherIIBlocks.AECHOR_CUTTING.get(),
+                AetherIIBlocks.CARRION_CUTTING.get()
         );
         this.tag(BlockTags.BEDS).add(AetherIIBlocks.SKYROOT_BED.get());
         this.tag(BlockTags.DIRT).addTag(AetherIITags.Blocks.AETHER_DIRT).add(
@@ -483,7 +484,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.POTTED_LILICHIME.get(),
                 AetherIIBlocks.POTTED_PLURACIAN.get(),
                 AetherIIBlocks.POTTED_BLADE_POA.get(),
-                AetherIIBlocks.POTTED_AECHOR_CUTTING.get()
+                AetherIIBlocks.POTTED_AECHOR_CUTTING.get(),
+                AetherIIBlocks.POTTED_CARRION_CUTTING.get()
         );
         this.tag(BlockTags.ENDERMAN_HOLDABLE).addTag(AetherIITags.Blocks.AETHER_DIRT).add(
                 AetherIIBlocks.QUICKSOIL.get(),
