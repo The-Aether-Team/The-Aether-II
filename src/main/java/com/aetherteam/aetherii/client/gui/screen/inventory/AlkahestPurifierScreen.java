@@ -23,6 +23,7 @@ import java.util.List;
 public class AlkahestPurifierScreen extends AbstractRecipeBookScreen<AlkahestPurifierMenu> implements RecipeUpdateListener {
     private static final ResourceLocation ALKAHEST_PURIFIER_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/alkahest_purifier.png");
     private static final ResourceLocation OUTPUT_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/output_progress");
+    private static final ResourceLocation BUBBLES_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/bubbles");
     private static final ResourceLocation ALKAHEST_1_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/alkahest_1");
     private static final ResourceLocation ALKAHEST_2_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/alkahest_2");
     private static final ResourceLocation ALKAHEST_3_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/alkahest_3");
@@ -31,6 +32,7 @@ public class AlkahestPurifierScreen extends AbstractRecipeBookScreen<AlkahestPur
             new RecipeBookComponent.TabInfo(Items.COMPASS, AetherIIRecipeBookCategories.ALKAHEST_PURIFIER_SEARCH),
             new RecipeBookComponent.TabInfo(AetherIIItems.IRRADIATED_CHUNK.get(), AetherIIRecipeBookCategories.ALKAHEST_PURIFIER_ITEMS.get()),
             new RecipeBookComponent.TabInfo(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.asItem(), AetherIIRecipeBookCategories.ALKAHEST_PURIFIER_BLOCKS.get()));
+    private static final int[] BUBBLE_LENGTHS = new int[]{0, 3, 7, 12, 18};
 
     public AlkahestPurifierScreen(AlkahestPurifierMenu menu, Inventory inventory, Component title) {
         super(menu, new AlkahestPurifierRecipeBookComponent(menu, TABS), inventory, title);
@@ -70,26 +72,22 @@ public class AlkahestPurifierScreen extends AbstractRecipeBookScreen<AlkahestPur
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, ALKAHEST_4_SPRITE, i + 60, j + 41, 56, 13);
         }
 
-        /*
-        int alkahestRenderLevelsCeil = Mth.ceil(this.menu.getAlkahestLevels() / 3.0F);
-        float alkahestRenderLevelsTrue = this.menu.getAlkahestLevels() / 3.0F;
-        if (alkahestRenderLevelsCeil >= 1) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, ACID_1_SPRITE, i + 60, j + 78, 56, 16, ARGB.colorFromFloat(1.0F - Math.max(0, 1 - alkahestRenderLevelsTrue), 1.0F, 1.0F, 1.0F));
+        float alkahestRenderLevelTop = (this.menu.getAlkahestLevels() / 3.0F) % 1;
+        int maxIndex;
+        if (alkahestRenderLevelTop > 0.7 || alkahestRenderLevelTop == 0.0) {
+            maxIndex = 4;
+        } else if (alkahestRenderLevelTop > 0.4) {
+            maxIndex = 3;
+        } else {
+            maxIndex = 2;
         }
-        if (alkahestRenderLevelsCeil >= 2) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, ACID_2_SPRITE, i + 60, j + 65, 56, 15, ARGB.colorFromFloat(1.0F - Math.max(0, 2 - alkahestRenderLevelsTrue), 1.0F, 1.0F, 1.0F));
-        }
-        if (alkahestRenderLevelsCeil >= 3) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, ACID_3_SPRITE, i + 60, j + 52, 56, 15, ARGB.colorFromFloat(1.0F - Math.max(0, 3 - alkahestRenderLevelsTrue), 1.0F, 1.0F, 1.0F));
-        }
-        if (alkahestRenderLevelsCeil >= 4) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, ACID_4_SPRITE, i + 60, j + 41, 56, 13, ARGB.colorFromFloat(1.0F - Math.max(0, 4 - alkahestRenderLevelsTrue), 1.0F, 1.0F, 1.0F));
-        }
-         */
+        int width = BUBBLE_LENGTHS[Mth.ceil(this.menu.getProcessingProgress() * 64.0F) % (maxIndex + 1)];
 
-        int j1 = Mth.ceil(this.menu.getProcessingProgress() * 14.0F);
-        if (j1 > 0) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, OUTPUT_PROGRESS_SPRITE, 15, 10, 0, 0, i + 121, j + 48, j1 + 1, 10);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BUBBLES_SPRITE, 18, 10, 0, 0, i + 119, j + 43, width, 10);
+
+        int processingProgress = Mth.ceil(this.menu.getProcessingProgress() * 18.0F);
+        if (processingProgress > 0) {
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, OUTPUT_PROGRESS_SPRITE, 18, 8, 0, 0, i + 119, j + 57, processingProgress, 8);
         }
     }
 }
