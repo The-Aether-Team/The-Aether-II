@@ -83,11 +83,11 @@ public class AlkahestPurifierScreen extends AbstractRecipeBookScreen<AlkahestPur
         }
         int width = BUBBLE_LENGTHS[Mth.ceil(this.menu.getProcessingProgress() * 64.0F) % (maxIndex + 1)];
 
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BUBBLES_SPRITE, 18, 10, 0, 0, i + 119, j + 43, width, 10);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BUBBLES_SPRITE, 18, 10, 0, 0, i + 119, j + 37, width, 10);
 
         int processingProgress = Mth.ceil(this.menu.getProcessingProgress() * 18.0F);
         if (processingProgress > 0) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, OUTPUT_PROGRESS_SPRITE, 18, 8, 0, 0, i + 119, j + 57, processingProgress, 8);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, OUTPUT_PROGRESS_SPRITE, 18, 8, 0, 0, i + 119, j + 49, processingProgress, 9);
         }
     }
 }
