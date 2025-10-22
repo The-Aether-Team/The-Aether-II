@@ -20,7 +20,7 @@ public class AetherIIRenderPipelines {
 
     private static final RenderPipeline ENTITY_DITHER_NO_CULL = RenderPipeline.builder(ENTITY_DITHER_SNIPPET)
             .withLocation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "pipeline/entity_dither_no_cull"))
-            .withShaderDefine("ALPHA_CUTOUT", 0.1F) //todo
+            .withShaderDefine("ALPHA_CUTOUT", 0.1F)
             .withSampler("Sampler1")
             .withCull(false)
             .build();

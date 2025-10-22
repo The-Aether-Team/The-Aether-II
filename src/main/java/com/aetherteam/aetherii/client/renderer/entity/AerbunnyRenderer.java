@@ -87,17 +87,6 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState,
         return super.getModelTint(renderState);
     }
 
-    @Nullable
-    @Override
-    protected RenderType getRenderType(AerbunnyRenderState renderState, boolean isVisible, boolean renderTranslucent, boolean appearsGlowing) {
-        ResourceLocation resourceLocation = this.getTextureLocation(renderState);
-        float opacity = this.calculateOpacity(renderState);
-        if (opacity < 1.0F) {
-            return RenderType.entityTranslucent(resourceLocation);
-        }
-        return super.getRenderType(renderState, isVisible, renderTranslucent, appearsGlowing);
-    }
-
     @Override
     public ResourceLocation getTextureLocation(AerbunnyRenderState renderState) {
         return AERBUNNY_TEXTURE;
