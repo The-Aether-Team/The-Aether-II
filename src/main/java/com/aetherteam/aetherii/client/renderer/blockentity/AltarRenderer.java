@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
@@ -28,9 +29,11 @@ import java.util.List;
 
 public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity> {
     private final ItemClusterRenderState renderState = new ItemClusterRenderState();
+    private final BlockEntityRenderDispatcher blockEntityRenderDispatcher;
     private final ItemModelResolver itemModelResolver;
 
     public AltarRenderer(BlockEntityRendererProvider.Context context) {
+        this.blockEntityRenderDispatcher = context.getBlockEntityRenderDispatcher();
         this.itemModelResolver = context.getItemModelResolver();
     }
 
@@ -102,6 +105,7 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity> {
                 poseStack.translate(0.5, 1.25, 0.5);
                 poseStack.scale(0.3F, 0.3F, 0.3F);
                 poseStack.translate(deltaX, y, deltaZ);
+                poseStack.mulPose(Axis.YN.rotationDegrees(this.blockEntityRenderDispatcher.camera.getYRot()));
 
                 Minecraft.getInstance().getItemRenderer().renderStatic(fuelStack, ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY, poseStack, multiBufferSource, altarBlockEntity.getLevel(), 0);
 
