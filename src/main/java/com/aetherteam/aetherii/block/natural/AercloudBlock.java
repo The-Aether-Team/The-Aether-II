@@ -121,7 +121,7 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
 
     @Override
     public float getFriction(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
-        return entity instanceof CloudSkiff ? 0.9F : super.getFriction(state, level, pos, entity);
+        return entity instanceof CloudSkiff ? 0.92F : super.getFriction(state, level, pos, entity);
     }
 
     protected VoxelShape getDefaultCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
