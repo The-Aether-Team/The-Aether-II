@@ -11,5 +11,11 @@ public interface AbstractBoatAccessor {
 
     @Accessor("deltaRotation")
     void aether$setDeltaRotation(float deltaRotation);
+
+    @Accessor("inputLeft")
+    boolean aether$getInputLeft();
+
+    @Accessor("inputRight")
+    boolean aether$getInputRight();
 }
 

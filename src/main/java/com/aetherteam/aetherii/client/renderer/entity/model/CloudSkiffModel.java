@@ -5,6 +5,7 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 
 public class CloudSkiffModel extends EntityModel<CloudSkiffRenderState> {
 	private final ModelPart cloudSkiff;
@@ -52,5 +53,6 @@ public class CloudSkiffModel extends EntityModel<CloudSkiffRenderState> {
 	@Override
 	public void setupAnim(CloudSkiffRenderState renderState) {
 		super.setupAnim(renderState);
+		this.sailRudder.yRot = renderState.steering * Mth.DEG_TO_RAD;
 	}
 }

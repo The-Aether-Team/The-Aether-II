@@ -9,11 +9,13 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.phys.AABB;
 import org.joml.Quaternionf;
 
 public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRenderState> {
@@ -49,6 +51,11 @@ public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRen
     }
 
     @Override
+    protected AABB getBoundingBoxForCulling(CloudSkiff minecraft) {
+        return super.getBoundingBoxForCulling(minecraft).inflate(0.3);
+    }
+
+    @Override
     public CloudSkiffRenderState createRenderState() {
         return new CloudSkiffRenderState();
     }
@@ -64,5 +71,6 @@ public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRen
         reusedState.isUnderWater = entity.isUnderWater();
         reusedState.rowingTimeLeft = entity.getRowingTime(0, partialTick);
         reusedState.rowingTimeRight = entity.getRowingTime(1, partialTick);
+        reusedState.steering = entity.steering;
     }
 }
