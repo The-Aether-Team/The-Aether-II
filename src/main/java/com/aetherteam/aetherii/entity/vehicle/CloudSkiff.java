@@ -6,10 +6,8 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractBoatAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.vehicle.AbstractBoat;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.WaterlilyBlock;
@@ -21,7 +19,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class CloudSkiff extends AbstractBoat {
+public class CloudSkiff extends AbstractBoat implements RiderSitContext {
     public float steering;
 
     public CloudSkiff(EntityType<CloudSkiff> entityType, Level level) {
@@ -30,7 +28,7 @@ public class CloudSkiff extends AbstractBoat {
     }
 
     @Override
-    public void tick() {
+    public void tick() { //todo movement particles
         AbstractBoatAccessor accessor = (AbstractBoatAccessor) this;
         super.tick();
         if (this.level().isClientSide()) {
@@ -89,8 +87,22 @@ public class CloudSkiff extends AbstractBoat {
     @Override
     protected void positionRider(Entity entity, MoveFunction moveFunction) {
         super.positionRider(entity, moveFunction);
-//        entity.setYBodyRot(0);
-//        entity.setOldRot();
+    }
+
+    @Override
+    public void onPassengerTurned(Entity entity) {
+        super.onPassengerTurned(entity);
+    }
+
+    @Override
+    protected Vec3 getPassengerAttachmentPoint(Entity passenger, EntityDimensions dimensions, float partialTick) {
+        float z = this.getSinglePassengerXOffset();
+        int i = this.getPassengers().indexOf(passenger);
+        if (i == 0) {
+            return new Vec3(0.0F, this.rideHeight(dimensions), z - 0.125F).yRot(-this.getYRot() * Mth.DEG_TO_RAD);
+        } else {
+            return new Vec3(0.0F, dimensions.height(), z + 0.55F).yRot(-this.getYRot() * Mth.DEG_TO_RAD);
+        }
     }
 
     @Override
@@ -99,8 +111,14 @@ public class CloudSkiff extends AbstractBoat {
     }
 
     @Override
+    public boolean shouldRiderSit(Entity vehicle, LivingEntity passenger) {
+        int i = this.getPassengers().indexOf(passenger);
+        return i != 0;
+    }
+
+    @Override
     public boolean shouldRiderSit() {
-        return false;
+        return true;
     }
 
     @Override

@@ -3,13 +3,11 @@
   "category": "misc",
   "key": {
     "A": "aether_ii:cold_aercloud",
-    "S": "#aether_ii:planks_crafting",
-    "W": "#aether_ii:cloudwool"
+    "S": "#aether_ii:planks_crafting"
   },
   "pattern": [
-    "  W",
-    "SSS",
-    "ASA"
+    "A A",
+    "SSS"
   ],
   "result": {
     "count": 1,

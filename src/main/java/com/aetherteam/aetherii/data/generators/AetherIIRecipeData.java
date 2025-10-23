@@ -1241,11 +1241,9 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.CLOUD_SKIFF.get())
                 .define('A', AetherIIBlocks.COLD_AERCLOUD)
-                .define('W', AetherIITags.Items.CLOUDWOOL)
                 .define('S', AetherIITags.Items.PLANKS_CRAFTING)
-                .pattern("  W")
+                .pattern("A A")
                 .pattern("SSS")
-                .pattern("ASA")
                 .unlockedBy("in_aercloud", insideOf(AetherIIBlocks.COLD_AERCLOUD.get()))
                 .save(this.output);
 
