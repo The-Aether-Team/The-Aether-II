@@ -1,13 +1,12 @@
 package com.aetherteam.aetherii.entity.vehicle;
 
-import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractBoatAccessor;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.vehicle.AbstractBoat;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.WaterlilyBlock;
@@ -18,6 +17,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 public class CloudSkiff extends AbstractBoat implements RiderSitContext {
     public float steering;
@@ -31,8 +31,8 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
     public void tick() { //todo movement particles
         AbstractBoatAccessor accessor = (AbstractBoatAccessor) this;
         super.tick();
-        if (this.level().isClientSide()) {
-            if (this.getInBlockState().is(AetherIIBlocks.COLD_AERCLOUD.get())) {
+        if ((this.isLocalInstanceAuthoritative() && this.level().isClientSide()) || (!this.isLocalInstanceAuthoritative() && !this.level().isClientSide())) {
+            if (this.getInBlockState().is(AetherIITags.Blocks.AERCLOUDS)) {
                 this.setDeltaMovement(new Vec3(this.getDeltaMovement().x(), 0.2F, this.getDeltaMovement().z()));
             }
         }
@@ -85,16 +85,6 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
     }
 
     @Override
-    protected void positionRider(Entity entity, MoveFunction moveFunction) {
-        super.positionRider(entity, moveFunction);
-    }
-
-    @Override
-    public void onPassengerTurned(Entity entity) {
-        super.onPassengerTurned(entity);
-    }
-
-    @Override
     protected Vec3 getPassengerAttachmentPoint(Entity passenger, EntityDimensions dimensions, float partialTick) {
         float z = this.getSinglePassengerXOffset();
         int i = this.getPassengers().indexOf(passenger);
@@ -117,12 +107,17 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
     }
 
     @Override
-    public boolean shouldRiderSit() {
-        return true;
-    }
-
-    @Override
     public Vec3 getDismountLocationForPassenger(LivingEntity livingEntity) {
         return this.position().add(0, 0.25, 0);
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getPaddleSound() {
+        AbstractBoatAccessor accessor = (AbstractBoatAccessor) this;
+        if (accessor.callGetStatus() == Status.ON_LAND && !this.getBlockStateOn().is(AetherIITags.Blocks.AERCLOUDS)) {
+            return super.getPaddleSound();
+        }
+        return null;
     }
 }
