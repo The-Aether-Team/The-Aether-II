@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import org.joml.Quaternionf;
 
 public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRenderState> {
     private static final ResourceLocation CLOUD_SKIFF_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/cloud_skiff/cloud_skiff.png");
@@ -28,14 +29,18 @@ public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRen
     @Override
     public void render(CloudSkiffRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.pushPose();
-        poseStack.translate(-0.125F, 1.5F, 0.0F);
-        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - renderState.yRot));
+        poseStack.translate(0.0F, 1.5F, 0.0F);
+        poseStack.mulPose(Axis.YP.rotationDegrees(90.0F - renderState.yRot));
         float f = renderState.hurtTime;
         if (f > 0.0F) {
             poseStack.mulPose(Axis.XP.rotationDegrees(Mth.sin(f) * f * renderState.damageTime / 10.0F * (float) renderState.hurtDir));
         }
+        if (!renderState.isUnderWater && !Mth.equal(renderState.bubbleAngle, 0.0F)) {
+            poseStack.mulPose(new Quaternionf().setAngleAxis(renderState.bubbleAngle * Mth.DEG_TO_RAD, 1.0F, 0.0F, 1.0F));
+        }
         poseStack.scale(-1.0F, -1.0F, 1.0F);
-        poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
+        poseStack.mulPose(Axis.YN.rotationDegrees(90.0F));
+        poseStack.translate(0.0F, 0.0F, -0.125F);
         this.model.setupAnim(renderState);
         VertexConsumer vertexconsumer = bufferSource.getBuffer(this.model.renderType(CLOUD_SKIFF_TEXTURE));
         this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, OverlayTexture.NO_OVERLAY);
@@ -55,5 +60,9 @@ public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRen
         reusedState.hurtTime = (float) entity.getHurtTime() - partialTick;
         reusedState.hurtDir = entity.getHurtDir();
         reusedState.damageTime = Math.max(entity.getDamage() - partialTick, 0.0F);
+        reusedState.bubbleAngle = entity.getBubbleAngle(partialTick);
+        reusedState.isUnderWater = entity.isUnderWater();
+        reusedState.rowingTimeLeft = entity.getRowingTime(0, partialTick);
+        reusedState.rowingTimeRight = entity.getRowingTime(1, partialTick);
     }
 }
