@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.google.common.collect.Lists;
 import com.google.common.collect.UnmodifiableIterator;
 import net.minecraft.BlockUtil;
@@ -36,7 +37,7 @@ public class CloudSkiff extends AbstractBoat {
     }
 
     public CloudSkiff(EntityType<CloudSkiff> entityType, Level level) {
-        super(entityType, level, () -> Items.OAK_BOAT);
+        super(entityType, level, AetherIIItems.CLOUD_SKIFF);
         this.blocksBuilding = true;
     }
 

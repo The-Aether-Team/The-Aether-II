@@ -640,6 +640,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.MOA_SADDLE.get());
                 output.accept(AetherIIItems.MOA_SADDLEBAG.get());
                 output.accept(AetherIIItems.LARGE_MOA_SADDLEBAG.get());
+                output.accept(AetherIIItems.CLOUD_SKIFF.get());
                 output.accept(AetherIIItems.IRRADIATED_ARMOR.get());
                 output.accept(AetherIIItems.IRRADIATED_WEAPON.get());
                 output.accept(AetherIIItems.IRRADIATED_TOOL.get());
