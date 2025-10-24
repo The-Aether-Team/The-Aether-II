@@ -1,7 +1,9 @@
 package com.aetherteam.aetherii.client;
 
+import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import net.minecraft.client.model.AnimationUtils;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
 import net.neoforged.neoforge.client.IArmPoseTransformer;
 
 public class AetherIIArmPoseTransformers {
@@ -20,5 +22,25 @@ public class AetherIIArmPoseTransformers {
         AnimationUtils.bobModelPart(humanoidModel.leftArm, livingEntity.ageInTicks, 1.0F);
         humanoidModel.rightLeg.xRot = Mth.cos(livingEntity.walkAnimationPos * 0.1662F) * 0.3F * livingEntity.walkAnimationSpeed / livingEntity.speedValue;
         humanoidModel.leftLeg.xRot = Mth.cos(livingEntity.walkAnimationPos * 0.1662F + Mth.PI) * 0.3F * livingEntity.walkAnimationSpeed / livingEntity.speedValue;
+    };
+    public static final IArmPoseTransformer SKIFF_SAILING_TRANSFORMER = (humanoidModel, livingEntity, humanoidArm) -> {
+        Boolean riding = livingEntity.getRenderData(AetherIIRenderers.RIDING_SKIFF_KEY);
+        if (riding != null && riding) {
+            Float steering = livingEntity.getRenderData(AetherIIRenderers.SKIFF_STEERING_KEY);
+            if (steering != null) {
+                HumanoidArm arm = livingEntity.mainArm;
+                if (steering > 0) {
+                    humanoidModel.rightArm.xRot -= (float) (-Math.PI / 8);
+                } else if (steering < 0) {
+                    humanoidModel.leftArm.xRot -= (float) (-Math.PI / 8);
+                } else {
+                    if (arm == HumanoidArm.RIGHT) {
+                        humanoidModel.rightArm.xRot -= (float) (-Math.PI / 8);
+                    } else if (arm == HumanoidArm.LEFT) {
+                        humanoidModel.leftArm.xRot -= (float) (-Math.PI / 8);
+                    }
+                }
+            }
+        }
     };
 }
