@@ -11,6 +11,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -36,26 +37,32 @@ public class BlueAercloudBlock extends AercloudBlock {
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
         if (!entity.isShiftKeyDown() && (!entity.isVehicle() || !(entity.getControllingPassenger() instanceof Player))) {
             entity.resetFallDistance();
-            entity.setDeltaMovement(entity.getDeltaMovement().x(), 2.0, entity.getDeltaMovement().z());
-            if (level.isClientSide()) {
-                int amount = 50; // Default amount.
-                if (entity.getY() == entity.yOld) {
-                    amount = 10; // Alternative amount if the entity's y-position is not changing.
-                }
-                for (int count = 0; count < amount; count++) {
-                    double xOffset = pos.getX() + level.getRandom().nextDouble();
-                    double yOffset = pos.getY() + level.getRandom().nextDouble();
-                    double zOffset = pos.getZ() + level.getRandom().nextDouble();
-                    level.addParticle(ParticleTypes.SPLASH, xOffset, yOffset, zOffset, 0.0, 0.0, 0.0);
-                }
-            }
+            this.runAercloudEffect(state, level, pos, entity);
             if (!(entity instanceof Projectile)) {
                 entity.setOnGround(false);
             }
-            level.playSound((entity instanceof Player player ? player : null), pos, AetherIISoundEvents.BLOCK_BLUE_AERCLOUD_BOUNCE.get(), SoundSource.BLOCKS, 0.8F, 0.5F + (((float) (Math.pow(level.getRandom().nextDouble(), 2.5))) * 0.5F));
         } else {
             super.entityInside(state, level, pos, entity, effectApplier);
         }
+    }
+
+    @Override
+    public void runAercloudEffect(BlockState state, Level level, BlockPos pos, Entity entity) {
+//        Vec3 prevMotion = entity.getDeltaMovement();
+        entity.setDeltaMovement(entity.getDeltaMovement().x(), 2.0, entity.getDeltaMovement().z());
+//        int amount = 50; // Default amount.
+//        if (entity.getY() == entity.yOld) {
+//            amount = 10; // Alternative amount if the entity's y-position is not changing.
+//        }
+//        for (int count = 0; count < amount; count++) {
+//            double xOffset = pos.getX() + level.getRandom().nextDouble();
+//            double yOffset = pos.getY() + level.getRandom().nextDouble();
+//            double zOffset = pos.getZ() + level.getRandom().nextDouble();
+//            level.addParticle(ParticleTypes.SPLASH, xOffset, yOffset, zOffset, 0.0, 0.0, 0.0);
+//        }
+//        if (entity.getDeltaMovement().y() != prevMotion.y()) {
+//            level.playSound((entity instanceof Player player ? player : null), pos, AetherIISoundEvents.BLOCK_BLUE_AERCLOUD_BOUNCE.get(), SoundSource.BLOCKS, 0.8F, 0.5F + (((float) (Math.pow(level.getRandom().nextDouble(), 2.5))) * 0.5F));
+//        }
     }
 
     @Override

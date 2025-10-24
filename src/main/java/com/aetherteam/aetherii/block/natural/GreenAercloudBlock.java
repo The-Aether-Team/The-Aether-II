@@ -31,13 +31,18 @@ public class GreenAercloudBlock extends AercloudBlock {
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
         if (!entity.isShiftKeyDown() && (!entity.isVehicle() || !(entity.getControllingPassenger() instanceof Player))) {
             entity.resetFallDistance();
-            entity.setDeltaMovement(entity.getDeltaMovement().x(), -2.0, entity.getDeltaMovement().z());
+            this.runAercloudEffect(state, level, pos, entity);
             if (!(entity instanceof Projectile)) {
                 entity.setOnGround(false);
             }
         } else {
             super.entityInside(state, level, pos, entity, effectApplier);
         }
+    }
+
+    @Override
+    public void runAercloudEffect(BlockState state, Level level, BlockPos pos, Entity entity) {
+        entity.setDeltaMovement(entity.getDeltaMovement().x(), -2.0, entity.getDeltaMovement().z());
     }
 
     @Override

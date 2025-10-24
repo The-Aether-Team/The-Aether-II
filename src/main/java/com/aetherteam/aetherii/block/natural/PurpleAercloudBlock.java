@@ -6,6 +6,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -40,16 +41,21 @@ public class PurpleAercloudBlock extends AercloudBlock {
      */
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
-        if (!entity.isShiftKeyDown()) {
+        if (!entity.isShiftKeyDown() && (!entity.isVehicle() || !(entity.getControllingPassenger() instanceof Player))) {
             entity.resetFallDistance();
-            switch (state.getValue(FACING)) {
-                case EAST -> entity.setDeltaMovement(2.0, entity.getDeltaMovement().y(), entity.getDeltaMovement().z());
-                case WEST -> entity.setDeltaMovement(-2.0, entity.getDeltaMovement().y(), entity.getDeltaMovement().z());
-                case NORTH -> entity.setDeltaMovement(entity.getDeltaMovement().x(), entity.getDeltaMovement().y(), -2.0);
-                case SOUTH -> entity.setDeltaMovement(entity.getDeltaMovement().x(), entity.getDeltaMovement().y(), 2.0);
-            }
+            this.runAercloudEffect(state, level, pos, entity);
         } else {
             super.entityInside(state, level, pos, entity, effectApplier);
+        }
+    }
+
+    @Override
+    public void runAercloudEffect(BlockState state, Level level, BlockPos pos, Entity entity) {
+        switch (state.getValue(FACING)) {
+            case EAST -> entity.setDeltaMovement(2.0, entity.getDeltaMovement().y(), entity.getDeltaMovement().z());
+            case WEST -> entity.setDeltaMovement(-2.0, entity.getDeltaMovement().y(), entity.getDeltaMovement().z());
+            case NORTH -> entity.setDeltaMovement(entity.getDeltaMovement().x(), entity.getDeltaMovement().y(), -2.0);
+            case SOUTH -> entity.setDeltaMovement(entity.getDeltaMovement().x(), entity.getDeltaMovement().y(), 2.0);
         }
     }
 

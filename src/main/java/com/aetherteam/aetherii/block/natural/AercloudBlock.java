@@ -1,9 +1,7 @@
 package com.aetherteam.aetherii.block.natural;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.LivingEntity;
@@ -46,13 +44,15 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
         entity.resetFallDistance();
-        if (!(entity instanceof CloudSkiff)) {
-            if (entity.getDeltaMovement().y < -0.0784000015258789 && !(entity instanceof Projectile)) {
-                entity.makeStuckInBlock(state, new Vec3(1.0, 0.25, 1.0));
-            } else {
-                entity.setOnGround(entity instanceof LivingEntity livingEntity && (!(livingEntity instanceof Player player) || !player.getAbilities().flying));
-            }
+        if (entity.getDeltaMovement().y < -0.0784000015258789 && !(entity instanceof Projectile) && !(entity instanceof CloudSkiff)) {
+            entity.makeStuckInBlock(state, new Vec3(1.0, 0.25, 1.0));
+        } else {
+            entity.setOnGround(entity instanceof LivingEntity livingEntity && (!(livingEntity instanceof Player player) || !player.getAbilities().flying));
         }
+    }
+
+    public void runAercloudEffect(BlockState state, Level level, BlockPos pos, Entity entity) {
+
     }
 
     /**
@@ -78,9 +78,7 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
 
     /**
      * [CODE COPY] - {@link net.minecraft.world.level.block.AbstractGlassBlock#getShadeBrightness(BlockState, BlockGetter, BlockPos)}.<br><br>
-     * Warning for "deprecation" is suppressed because the method is fine to override.
      */
-    @SuppressWarnings("deprecation")
     @Override
     public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
         return 0.25F;
