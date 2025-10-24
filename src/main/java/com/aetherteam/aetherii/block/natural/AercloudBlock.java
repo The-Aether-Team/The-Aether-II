@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.LiquidBlockContainer;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -44,15 +43,15 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
         entity.resetFallDistance();
-        if (entity.getDeltaMovement().y < -0.0784000015258789 && !(entity instanceof Projectile) && !(entity instanceof CloudSkiff) && (!entity.isVehicle() || !(entity.getControllingPassenger() instanceof Player))) {
-            this.runAercloudEffect(state, level, pos, entity);
+        if (entity.getDeltaMovement().y < -0.0784000015258789 && !(entity instanceof Projectile) && !(entity instanceof CloudSkiff)) {
+            entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.25, 1.0));
         } else {
             entity.setOnGround(entity instanceof LivingEntity livingEntity && (!(livingEntity instanceof Player player) || !player.getAbilities().flying));
         }
     }
 
     public void runAercloudEffect(BlockState state, Level level, BlockPos pos, Entity entity) {
-        entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.25, 1.0));
+
     }
 
     /**
@@ -97,7 +96,7 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
      */
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        if (!this.getDefaultCollisionShape(state, level, pos, context).isEmpty() && level.getBlockState(pos.above()).getBlock() instanceof AercloudBlock) {
+        if (!this.getDefaultCollisionShape(state, level, pos, context).isEmpty() && level.getBlockState(pos.above()).getBlock() instanceof AercloudBlock) { // Aerclouds with other Aerclouds above them are solid.
             return Shapes.block();
         }
         if (context instanceof EntityCollisionContext entityCollisionContext) {

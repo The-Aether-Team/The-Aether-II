@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.vehicle;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.natural.AercloudBlock;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractBoatAccessor;
 import net.minecraft.core.BlockPos;
@@ -30,12 +31,14 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
     @Override
     public void tick() { //todo movement particles
         AbstractBoatAccessor accessor = (AbstractBoatAccessor) this;
-        super.tick();
         if ((this.isLocalInstanceAuthoritative() && this.level().isClientSide()) || (!this.isLocalInstanceAuthoritative() && !this.level().isClientSide())) {
-            if (this.getInBlockState().is(AetherIITags.Blocks.AERCLOUDS)) {
+            if (this.getInBlockState().getBlock().getClass() == AercloudBlock.class) {
                 this.setDeltaMovement(new Vec3(this.getDeltaMovement().x(), 0.2F, this.getDeltaMovement().z()));
+            } else if (this.getBlockStateOn().is(AetherIITags.Blocks.AERCLOUDS) && this.getBlockStateOn().getBlock() instanceof AercloudBlock aercloudBlock) {
+                aercloudBlock.runAercloudEffect(this.getBlockStateOn(), this.level(), this.getOnPos(), this);
             }
         }
+        super.tick();
         if (accessor.aether$getInputRight()) {
             this.steering = Math.clamp(this.steering - 3, -30.0F, 30.0F);
         } else if (accessor.aether$getInputLeft()) {

@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.block.natural;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
@@ -50,7 +51,11 @@ public class BlueAercloudBlock extends AercloudBlock {
     public void runAercloudEffect(BlockState state, Level level, BlockPos pos, Entity entity) {
         Vec3 prevMotion = entity.getDeltaMovement();
         entity.hasImpulse = true;
-        entity.setDeltaMovement(entity.getDeltaMovement().x(), 2.0, entity.getDeltaMovement().z());
+        if (entity instanceof CloudSkiff) {
+            entity.setDeltaMovement(entity.getDeltaMovement().x(), 0.65, entity.getDeltaMovement().z());
+        } else {
+            entity.setDeltaMovement(entity.getDeltaMovement().x(), 2.0, entity.getDeltaMovement().z());
+        }
         int amount = 50; // Default amount.
         if (entity.getY() == entity.yOld) {
             amount = 10; // Alternative amount if the entity's y-position is not changing.
