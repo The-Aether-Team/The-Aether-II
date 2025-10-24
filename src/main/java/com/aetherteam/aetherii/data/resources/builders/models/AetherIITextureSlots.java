@@ -20,4 +20,7 @@ public class AetherIITextureSlots {
     public static final TextureSlot VINE = TextureSlot.create("vine");
     public static final TextureSlot FACE = TextureSlot.create("face");
     public static final TextureSlot OVERLAY = TextureSlot.create("overlay");
+    public static final TextureSlot MAIN = TextureSlot.create("main");
+    public static final TextureSlot SIDE1 = TextureSlot.create("side1");
+    public static final TextureSlot SIDE2 = TextureSlot.create("side2");
 }
