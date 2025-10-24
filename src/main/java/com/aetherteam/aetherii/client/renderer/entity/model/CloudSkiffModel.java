@@ -45,7 +45,7 @@ public class CloudSkiffModel extends EntityModel<CloudSkiffRenderState> {
 		.texOffs(81, 12).addBox(-2.0F, -12.5F, -2.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F))
 		.texOffs(0, -32).addBox(0.0F, -30.5F, -1.0F, 0.0F, 48.0F, 32.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -5.0F, 15.0F));
 
-		rudder.addOrReplaceChild("handle", CubeListBuilder.create().texOffs(78, 0).addBox(-1.0F, -1.0F, -11.0F, 2.0F, 2.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -10.5F, 0.0F));
+		rudder.addOrReplaceChild("handle", CubeListBuilder.create().texOffs(78, 0).addBox(-1.0F, -1.0F, -9.0F, 2.0F, 2.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -10.5F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
@@ -53,7 +53,7 @@ public class CloudSkiffModel extends EntityModel<CloudSkiffRenderState> {
 	@Override
 	public void setupAnim(CloudSkiffRenderState renderState) {
 		super.setupAnim(renderState);
-		this.sailRudder.yRot = renderState.steering + (Mth.sin((10.0F * renderState.ageInTicks * Mth.DEG_TO_RAD))) / 15.0F;
+		this.sailRudder.yRot = renderState.steering + (Mth.sin((3.0F * renderState.ageInTicks * Mth.DEG_TO_RAD))) / 15.0F;
 
 		this.wingLeft.zRot = renderState.wingLift;
 		this.wingRight.zRot = -renderState.wingLift;
