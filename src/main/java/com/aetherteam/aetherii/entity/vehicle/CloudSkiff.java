@@ -134,15 +134,15 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
         float z = this.getSinglePassengerXOffset();
         int i = this.getPassengers().indexOf(passenger);
         if (i == 0) {
-            return new Vec3(0.0F, this.rideHeight(dimensions), z - 0.125F).yRot(-this.getYRot() * Mth.DEG_TO_RAD);
+            return new Vec3(0.0F, this.rideHeight(dimensions) + passenger.getVehicleAttachmentPoint(this).y(), z - 0.125F).yRot(-this.getYRot() * Mth.DEG_TO_RAD);
         } else {
-            return new Vec3(0.0F, dimensions.height(), z + 0.55F).yRot(-this.getYRot() * Mth.DEG_TO_RAD);
+            return new Vec3(0.0F, this.rideHeight(dimensions), z + 0.55F).yRot(-this.getYRot() * Mth.DEG_TO_RAD);
         }
     }
 
     @Override
     protected double rideHeight(EntityDimensions entityDimensions) {
-        return entityDimensions.height() + 0.55F;
+        return entityDimensions.height();
     }
 
     @Override
