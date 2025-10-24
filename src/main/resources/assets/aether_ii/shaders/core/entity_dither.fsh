@@ -97,9 +97,11 @@ float dither8x8(vec2 position, float brightness) {
 void main() {
     vec4 color = texture(Sampler0, texCoord0);
 
-    float ditherAlpha = dither8x8(gl_FragCoord.xy, vertexColor.a);
-    if (ditherAlpha == 0.0) {
-        discard;
+    if (vertexColor.a < 1.0) {
+        float ditherAlpha = dither8x8(gl_FragCoord.xy, vertexColor.a);
+        if (ditherAlpha == 0.0) {
+            discard;
+        }
     }
 
     #ifdef ALPHA_CUTOUT
