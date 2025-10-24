@@ -31,8 +31,8 @@ public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRen
     @Override
     public void render(CloudSkiffRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.pushPose();
-        poseStack.translate(0.0F, 1.5F, 0.0F);
-        poseStack.mulPose(Axis.YP.rotationDegrees(90.0F - renderState.yRot));
+        poseStack.translate(0.0F, 0.375F, 0.0F);
+        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - renderState.yRot));
         float f = renderState.hurtTime;
         if (f > 0.0F) {
             poseStack.mulPose(Axis.XP.rotationDegrees(Mth.sin(f) * f * renderState.damageTime / 10.0F * (float) renderState.hurtDir));
@@ -40,6 +40,8 @@ public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRen
         if (!renderState.isUnderWater && !Mth.equal(renderState.bubbleAngle, 0.0F)) {
             poseStack.mulPose(new Quaternionf().setAngleAxis(renderState.bubbleAngle * Mth.DEG_TO_RAD, 1.0F, 0.0F, 1.0F));
         }
+        poseStack.translate(0.0F, 1.125F, 0.0F);
+        poseStack.mulPose(Axis.YN.rotationDegrees(90.0F));
         poseStack.scale(-1.0F, -1.0F, 1.0F);
         poseStack.mulPose(Axis.YN.rotationDegrees(90.0F));
         poseStack.translate(0.0F, 0.0F, -0.125F);

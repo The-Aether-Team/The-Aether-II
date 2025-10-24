@@ -123,7 +123,7 @@ public class AetherIIEntityTypes {
 
     // Vehicles
     public static final DeferredHolder<EntityType<?>, EntityType<CloudSkiff>> CLOUD_SKIFF = ENTITY_TYPES.register("cloud_skiff",
-            () -> EntityType.Builder.<CloudSkiff>of(CloudSkiff::new, MobCategory.MISC).noLootTable().sized(1.75F, 0.2125F).eyeHeight(0.2125F).clientTrackingRange(10).build(AetherIIEntities.CLOUD_SKIFF));
+            () -> EntityType.Builder.<CloudSkiff>of(CloudSkiff::new, MobCategory.MISC).noLootTable().sized(1.75F, 0.2125F).eyeHeight(0.5625F).clientTrackingRange(10).build(AetherIIEntities.CLOUD_SKIFF));
 
     // Misc
     public static final DeferredHolder<EntityType<?>, EntityType<ElectricField>> ELECTRIC_FIELD = ENTITY_TYPES.register("electric_field",
