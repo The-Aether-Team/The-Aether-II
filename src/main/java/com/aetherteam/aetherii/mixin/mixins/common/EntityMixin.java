@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.block.natural.AercloudBlock;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.aetherteam.aetherii.network.packet.clientbound.SetVehiclePacket;
@@ -13,10 +14,12 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -28,6 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Mixin(Entity.class)
@@ -106,5 +110,18 @@ public class EntityMixin {
             }
         }
         return null;
+    }
+
+    @Inject(method = "move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V", at = @At(value = "TAIL"))
+    private void move(MoverType type, Vec3 movement, CallbackInfo ci) {
+        Entity entity = (Entity) (Object) this;
+        if (entity.isVehicle() && entity.getControllingPassenger() instanceof Player player && entity.isLocalInstanceAuthoritative()) {
+            Optional<BlockState> blockState = entity.level().getBlockStates(entity.getBoundingBox()).filter((state) -> state.getBlock() instanceof AercloudBlock).findAny();
+            if (blockState.isPresent()) {
+                if (player.level().isClientSide()) {
+                    ((AercloudBlock) blockState.get().getBlock()).runAercloudEffect(blockState.get(), player.level(), entity.blockPosition(), entity);
+                }
+            }
+        }
     }
 }
