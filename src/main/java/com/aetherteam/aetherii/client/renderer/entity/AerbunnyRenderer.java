@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.client.renderer.entity.state.AerbunnyRenderState;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -87,24 +88,13 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState,
         return super.getModelTint(renderState);
     }
 
-    @Nullable
-    @Override
-    protected RenderType getRenderType(AerbunnyRenderState renderState, boolean isVisible, boolean renderTranslucent, boolean appearsGlowing) {
-        ResourceLocation resourceLocation = this.getTextureLocation(renderState);
-        float opacity = this.calculateOpacity(renderState);
-        if (opacity < 1.0F) {
-            return RenderType.entityTranslucent(resourceLocation);
-        }
-        return super.getRenderType(renderState, isVisible, renderTranslucent, appearsGlowing);
-    }
-
     @Override
     public ResourceLocation getTextureLocation(AerbunnyRenderState renderState) {
         return AERBUNNY_TEXTURE;
     }
 
     private float calculateOpacity(AerbunnyRenderState renderState) {
-        if (Minecraft.getInstance().getCameraEntity() instanceof Player player) {
+        if (Minecraft.getInstance().getCameraEntity() instanceof Player player && Minecraft.getInstance().options.getCameraType() == CameraType.FIRST_PERSON) {
             if (renderState.vehicleReference.isPresent() && renderState.vehicleReference.get().matches(player)) {
                 Vec3 lookAngle = player.getLookAngle();
                 float calc = (float) Math.min((Math.max(lookAngle.y(), 0.65) - 0.65) * 2.5F, 1.0F);
