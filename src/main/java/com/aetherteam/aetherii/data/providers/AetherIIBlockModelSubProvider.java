@@ -12,6 +12,7 @@ import com.aetherteam.aetherii.client.renderer.item.color.AetherGrassColorSource
 import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
+import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureSlots;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITexturedModels;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
@@ -816,9 +817,24 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createAltar(Block block, Block particle) {
-        ResourceLocation location = AetherIIModelTemplates.ALTAR.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput);
-        ResourceLocation chargingLocation = AetherIIModelTemplates.ALTAR.create(ModelLocationUtils.getModelLocation(block, "_charging"), TextureMapping.cube(TextureMapping.getBlockTexture(block, "_charging")).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput);
-        ResourceLocation blastingLocation = AetherIIModelTemplates.ALTAR.create(ModelLocationUtils.getModelLocation(block, "_blasting"), TextureMapping.cube(TextureMapping.getBlockTexture(block, "_blasting")).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput);
+        ResourceLocation location = AetherIIModelTemplates.ALTAR.create(block, new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom"))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
+                .put(AetherIITextureSlots.BASE_TOP, TextureMapping.getBlockTexture(block, "_base_top"))
+                .put(AetherIITextureSlots.BASE_BOTTOM, TextureMapping.getBlockTexture(block, "_base_bottom")), this.modelOutput);
+        ResourceLocation chargingLocation = AetherIIModelTemplates.ALTAR.create(ModelLocationUtils.getModelLocation(block, "_charging"), new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top_charging"))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom_charging"))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side_charging"))
+                .put(AetherIITextureSlots.BASE_TOP, TextureMapping.getBlockTexture(block, "_base_top_charging"))
+                .put(AetherIITextureSlots.BASE_BOTTOM, TextureMapping.getBlockTexture(block, "_base_bottom_charging")), this.modelOutput);
+        ResourceLocation blastingLocation = AetherIIModelTemplates.ALTAR.create(ModelLocationUtils.getModelLocation(block, "_blasting"), new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top_blasting"))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom_blasting"))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side_blasting"))
+                .put(AetherIITextureSlots.BASE_TOP, TextureMapping.getBlockTexture(block, "_base_top_blasting"))
+                .put(AetherIITextureSlots.BASE_BOTTOM, TextureMapping.getBlockTexture(block, "_base_bottom_blasting")), this.modelOutput);
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(AltarBlock.BLASTING, AltarBlock.CHARGING)
                         .select(true, true, plainVariant(blastingLocation))
                         .select(true, false, plainVariant(blastingLocation))
