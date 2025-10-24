@@ -44,7 +44,7 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
         entity.resetFallDistance();
-        if (entity.getDeltaMovement().y < -0.0784000015258789 && !(entity instanceof Projectile) && !(entity instanceof CloudSkiff)) {
+        if (entity.getDeltaMovement().y < -0.0784000015258789 && !(entity instanceof Projectile) && !(entity instanceof CloudSkiff) && (!entity.isVehicle() || !(entity.getControllingPassenger() instanceof Player))) {
             this.runAercloudEffect(state, level, pos, entity);
         } else {
             entity.setOnGround(entity instanceof LivingEntity livingEntity && (!(livingEntity instanceof Player player) || !player.getAbilities().flying));
