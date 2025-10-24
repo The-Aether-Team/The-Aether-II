@@ -39,10 +39,10 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
     }
 
     @Override
-    public void tick() { //todo movement particles
+    public void tick() {
         AbstractBoatAccessor accessor = (AbstractBoatAccessor) this;
         if (this.getControllingPassenger() instanceof Player || !this.level().isClientSide()) {
-            if (this.getInBlockState().getBlock().getClass() == AercloudBlock.class) {
+            if (this.getInBlockState().is(AetherIITags.Blocks.AERCLOUDS)) {
                 this.setDeltaMovement(new Vec3(this.getDeltaMovement().x(), 0.2F, this.getDeltaMovement().z()));
             } else if (this.getBlockStateOn().is(AetherIITags.Blocks.AERCLOUDS) && this.getBlockStateOn().getBlock() instanceof AercloudBlock aercloudBlock) {
                 aercloudBlock.runAercloudEffect(this.getBlockStateOn(), this.level(), this.getOnPos(), this);
