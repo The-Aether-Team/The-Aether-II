@@ -19,6 +19,12 @@ public interface AbstractBoatAccessor {
     @Accessor("inputRight")
     boolean aether$getInputRight();
 
+    @Accessor("inputUp")
+    boolean aether$getInputUp();
+
+    @Accessor("inputDown")
+    boolean aether$getInputDown();
+
     @Invoker
     AbstractBoat.Status callGetStatus();
 }

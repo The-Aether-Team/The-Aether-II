@@ -53,6 +53,9 @@ public class CloudSkiffModel extends EntityModel<CloudSkiffRenderState> {
 	@Override
 	public void setupAnim(CloudSkiffRenderState renderState) {
 		super.setupAnim(renderState);
-		this.sailRudder.yRot = renderState.steering * Mth.DEG_TO_RAD;
+		this.sailRudder.yRot = renderState.steering + (Mth.sin((10.0F * renderState.ageInTicks * Mth.DEG_TO_RAD))) / 15.0F;
+
+		this.wingLeft.zRot = renderState.wingLift;
+		this.wingRight.zRot = -renderState.wingLift;
 	}
 }

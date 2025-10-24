@@ -71,6 +71,7 @@ public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRen
         reusedState.isUnderWater = entity.isUnderWater();
         reusedState.rowingTimeLeft = entity.getRowingTime(0, partialTick);
         reusedState.rowingTimeRight = entity.getRowingTime(1, partialTick);
-        reusedState.steering = entity.steering;
+        reusedState.steering = Mth.lerp(partialTick, entity.steeringO * Mth.DEG_TO_RAD, entity.steering * Mth.DEG_TO_RAD);
+        reusedState.wingLift = Mth.lerp(partialTick, entity.wingLiftO * Mth.DEG_TO_RAD, entity.wingLift * Mth.DEG_TO_RAD);
     }
 }

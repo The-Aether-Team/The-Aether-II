@@ -4,4 +4,5 @@ import net.minecraft.client.renderer.entity.state.BoatRenderState;
 
 public class CloudSkiffRenderState extends BoatRenderState {
     public float steering;
+    public float wingLift;
 }
