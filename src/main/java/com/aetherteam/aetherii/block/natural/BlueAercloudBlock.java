@@ -49,6 +49,7 @@ public class BlueAercloudBlock extends AercloudBlock {
     @Override
     public void runAercloudEffect(BlockState state, Level level, BlockPos pos, Entity entity) {
         Vec3 prevMotion = entity.getDeltaMovement();
+        entity.hasImpulse = true;
         entity.setDeltaMovement(entity.getDeltaMovement().x(), 2.0, entity.getDeltaMovement().z());
         int amount = 50; // Default amount.
         if (entity.getY() == entity.yOld) {

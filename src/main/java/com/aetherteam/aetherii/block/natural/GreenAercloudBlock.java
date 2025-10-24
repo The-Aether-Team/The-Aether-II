@@ -42,6 +42,7 @@ public class GreenAercloudBlock extends AercloudBlock {
 
     @Override
     public void runAercloudEffect(BlockState state, Level level, BlockPos pos, Entity entity) {
+        entity.hasImpulse = true;
         entity.setDeltaMovement(entity.getDeltaMovement().x(), -2.0, entity.getDeltaMovement().z());
     }
 

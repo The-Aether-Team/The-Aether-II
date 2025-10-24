@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -10,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public abstract class WingedAnimal extends MountableAnimal {
+    private double slowFall = 0;
     /**
      * Used for wing animations.
      */
@@ -41,9 +43,16 @@ public abstract class WingedAnimal extends MountableAnimal {
         if (gravity != null) {
             double fallSpeed = Math.min(gravity.getValue() * -2.0, -0.1); // Entity isn't allowed to fall too slowly from gravity.
             if (this.getDeltaMovement().y() < fallSpeed && !this.playerTriedToCrouch()) {
-                this.setDeltaMovement(this.getDeltaMovement().x(), fallSpeed, this.getDeltaMovement().z());
-                this.hasImpulse = true;
+                if (this.slowFall == 0 || this.hasImpulse) {
+                    this.slowFall = this.getDeltaMovement().y();
+                    this.hasImpulse = false;
+                }
+                this.slowFall = Mth.lerp(0.1, this.slowFall, fallSpeed);
+
+                this.setDeltaMovement(this.getDeltaMovement().x(), this.slowFall, this.getDeltaMovement().z());
                 this.setEntityOnGround(false);
+            } else if (this.getDeltaMovement().y() == fallSpeed) {
+                this.slowFall = 0;
             }
         }
 

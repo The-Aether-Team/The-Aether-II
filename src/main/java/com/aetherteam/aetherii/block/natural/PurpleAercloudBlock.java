@@ -51,6 +51,7 @@ public class PurpleAercloudBlock extends AercloudBlock {
 
     @Override
     public void runAercloudEffect(BlockState state, Level level, BlockPos pos, Entity entity) {
+        entity.hasImpulse = true;
         switch (state.getValue(FACING)) {
             case EAST -> entity.setDeltaMovement(2.0, entity.getDeltaMovement().y(), entity.getDeltaMovement().z());
             case WEST -> entity.setDeltaMovement(-2.0, entity.getDeltaMovement().y(), entity.getDeltaMovement().z());
