@@ -153,6 +153,7 @@ public class AetherIIEventListeners {
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).postTickUpdate(player);
         PlayerHooks.forceSpecialLoadingCrouch(player);
+        PlayerHooks.mountAercloudEffects(player);
     }
 
     public static void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event) {

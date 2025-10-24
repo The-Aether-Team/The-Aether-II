@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.mixin.mixins.client;
 
+import com.aetherteam.aetherii.client.AetherIIArmPoses;
+import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -20,6 +22,9 @@ public class PlayerRendererMixin {
         IClientItemExtensions extensions = IClientItemExtensions.of(stack);
         HumanoidModel.ArmPose armPose = extensions.getArmPose(player, hand, stack);
         if (armPose == null) {
+            if (player.getVehicle() instanceof CloudSkiff && !player.swinging && !(player.getUsedItemHand() == hand && player.getUseItemRemainingTicks() > 0)) {
+                cir.setReturnValue(AetherIIArmPoses.SKIFF_SAILING);
+            }
             if (!stack.isEmpty()) {
                 if (player.getUsedItemHand() != hand || player.getUseItemRemainingTicks() <= 0) {
                     if (!player.swinging && stack.is(Tags.Items.TOOLS_CROSSBOW) && stack.getItem() instanceof TieredCrossbowItem && TieredCrossbowItem.isCharged(stack)) {

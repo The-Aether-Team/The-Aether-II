@@ -68,6 +68,8 @@ public class AetherIIEntities {
     //Blocks
     public static final ResourceKey<EntityType<?>> HOVERING_BLOCK = createKey("hovering_block");
 
+    //Vehicles
+    public static final ResourceKey<EntityType<?>> CLOUD_SKIFF = createKey("cloud_skiff");
 
     //Misc
     public static final ResourceKey<EntityType<?>> ELECTRIC_FIELD = createKey("electric_field");

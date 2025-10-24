@@ -962,6 +962,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.MOA_SADDLE, "Moa Saddle");
         this.addItem(AetherIIItems.MOA_SADDLEBAG, "Moa Saddlebag");
         this.addItem(AetherIIItems.LARGE_MOA_SADDLEBAG, "Large Moa Saddlebag");
+        this.addItem(AetherIIItems.CLOUD_SKIFF, "Cloud Skiff");
         this.addItem(AetherIIItems.GLINT_COIN, "Glint Coin");
         this.addItem(AetherIIItems.GUIDEBOOK_PAGE, "Guidebook Page");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");

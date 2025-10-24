@@ -251,6 +251,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateDyedSaddleItem(AetherIIItems.MOA_SADDLE.get());
         this.generateFlatItem(AetherIIItems.MOA_SADDLEBAG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.LARGE_MOA_SADDLEBAG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.CLOUD_SKIFF.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GLINT_COIN.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GUIDEBOOK_PAGE.get(), ModelTemplates.FLAT_ITEM);
         this.generatePortalFrameItem(AetherIIItems.AETHER_PORTAL_FRAME.get());

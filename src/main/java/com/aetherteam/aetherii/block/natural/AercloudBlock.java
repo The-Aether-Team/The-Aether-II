@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
@@ -9,13 +10,13 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.LiquidBlockContainer;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -39,15 +40,18 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
      * @param pos    The {@link BlockPos} of the block.
      * @param entity The {@link Entity} in the block.
      */
-
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
         entity.resetFallDistance();
-        if (entity.getDeltaMovement().y < -0.0784000015258789 && !(entity instanceof Projectile)) {
-            entity.makeStuckInBlock(state, new Vec3(1.0, 0.25, 1.0));
+        if (entity.getDeltaMovement().y < -0.0784000015258789 && !(entity instanceof Projectile) && !(entity instanceof CloudSkiff)) {
+            entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.25, 1.0));
         } else {
             entity.setOnGround(entity instanceof LivingEntity livingEntity && (!(livingEntity instanceof Player player) || !player.getAbilities().flying));
         }
+    }
+
+    public void runAercloudEffect(BlockState state, Level level, BlockPos pos, Entity entity) {
+
     }
 
     /**
@@ -73,9 +77,7 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
 
     /**
      * [CODE COPY] - {@link net.minecraft.world.level.block.AbstractGlassBlock#getShadeBrightness(BlockState, BlockGetter, BlockPos)}.<br><br>
-     * Warning for "deprecation" is suppressed because the method is fine to override.
      */
-    @SuppressWarnings("deprecation")
     @Override
     public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
         return 0.25F;
@@ -85,7 +87,6 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
      * [CODE COPY] - {@link net.minecraft.world.level.block.PowderSnowBlock#getCollisionShape(BlockState, BlockGetter, BlockPos, CollisionContext)}.<br><br>
      * Resolves a quirk with fall behavior where an entity will still receive fall damage if falling fast enough into a block with a shape like {@link AercloudBlock#COLLISION_SHAPE},
      * even if the fall damage should be negated.<br><br>
-     * Warning for "deprecation" is suppressed because the method is fine to override.
      *
      * @param state   The {@link BlockState} of the block.
      * @param level   The {@link Level} the block is in.
@@ -93,21 +94,31 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
      * @param context The {@link CollisionContext} of the entity with the block.
      * @return The collision {@link VoxelShape} of the block.
      */
-    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        if (!this.getDefaultCollisionShape(state, level, pos, context).isEmpty() && level.getBlockState(pos.above()).getBlock() instanceof AercloudBlock) {
+        if (!this.getDefaultCollisionShape(state, level, pos, context).isEmpty() && level.getBlockState(pos.above()).getBlock() instanceof AercloudBlock) { // Aerclouds with other Aerclouds above them are solid.
             return Shapes.block();
         }
         if (context instanceof EntityCollisionContext entityCollisionContext) {
             Entity entity = entityCollisionContext.getEntity();
             if (entity != null) {
-                if (entity.fallDistance > 2.5F && (!(entity instanceof LivingEntity livingEntity) || !livingEntity.isFallFlying())) {
+                if (entity instanceof CloudSkiff) {
+                    if (context.isAbove(Shapes.block(), pos, true)) {
+                        return Shapes.block();
+                    } else {
+                        return Shapes.empty();
+                    }
+                } else if (entity.fallDistance > 2.5F && (!(entity instanceof LivingEntity livingEntity) || !livingEntity.isFallFlying())) {
                     return FALLING_COLLISION_SHAPE; // Alternate shape when falling fast enough.
                 }
             }
         }
         return this.getDefaultCollisionShape(state, level, pos, context); // Default shape.
+    }
+
+    @Override
+    public float getFriction(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+        return entity instanceof CloudSkiff ? 0.92F : super.getFriction(state, level, pos, entity);
     }
 
     protected VoxelShape getDefaultCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {

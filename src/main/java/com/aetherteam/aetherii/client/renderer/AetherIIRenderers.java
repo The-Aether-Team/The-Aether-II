@@ -20,58 +20,9 @@ import com.aetherteam.aetherii.client.renderer.blockentity.MoaEggRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
-import com.aetherteam.aetherii.client.renderer.entity.AechorPlantRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.AerbunnyRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.AerwhaleRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.ArkeniumTalutonRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.BurrukaiRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.CarrionSproutRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.CockatriceRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.EdwardRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.FlyingCowRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.GravititeDebrisShotRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.GravititeTalutonRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.HoveringBlockRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.KirridRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.MoaRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.PhygRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.ScatterglassBoltRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.SheepuffRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.SkephidRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.SkephidWebbingBallRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.SkyrootLizardRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.SwetRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.TaegoreRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.TempestRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.TempestThunderballRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.ToxicDartRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.VenomousDartRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.ZephyrRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.ZephyrWebbingBallRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.*;
 import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLatchLayer;
-import com.aetherteam.aetherii.client.renderer.entity.model.AechorPlantModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.AerbunnyModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.AerwhaleModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.ArkeniumTalutonModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.CarrionSproutModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.CockatriceModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.EdwardModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.FlyingCowModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.GravititeDebrisShotModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.GravititeTalutonModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.MoaBabyModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.MoaEggModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.MoaLargeSaddlebagModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.MoaModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.MoaSaddleModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.MoaSaddlebagModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.PhygModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.SheepuffModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.SkephidModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.SkyrootLizardModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.SwetModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.TempestModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.ZephyrModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.ArcticBurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiModel;
@@ -88,6 +39,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Moa;
 
+import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
@@ -113,6 +65,8 @@ import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEve
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class AetherIIRenderers {
+    public static final ContextKey<Boolean> RIDING_SKIFF_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "riding_skiff"));
+    public static final ContextKey<Float> SKIFF_STEERING_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skiff_steering"));
     public static final ContextKey<Boolean> RIDING_MOA_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "riding_moa"));
     public static final ContextKey<List<Swet>> SWET_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet"));
 
@@ -136,6 +90,10 @@ public class AetherIIRenderers {
                 playerRenderState.setRenderData(SWET_KEY, swets);
             }
             playerRenderState.setRenderData(RIDING_MOA_KEY, abstractClientPlayer.getVehicle() instanceof Moa);
+            if (abstractClientPlayer.getVehicle() instanceof CloudSkiff cloudSkiff) {
+                playerRenderState.setRenderData(RIDING_SKIFF_KEY, true);
+                playerRenderState.setRenderData(SKIFF_STEERING_KEY, cloudSkiff.steering);
+            }
         });
     }
 
@@ -198,6 +156,9 @@ public class AetherIIRenderers {
         // Blocks
         event.registerEntityRenderer(AetherIIEntityTypes.HOVERING_BLOCK.get(), HoveringBlockRenderer::new);
 
+        // Vehicles
+        event.registerEntityRenderer(AetherIIEntityTypes.CLOUD_SKIFF.get(), CloudSkiffRenderer::new);
+
         // Misc
         event.registerEntityRenderer(AetherIIEntityTypes.ELECTRIC_FIELD.get(), NoopRenderer::new);
     }
@@ -258,6 +219,9 @@ public class AetherIIRenderers {
 
         // NPCs
         event.registerLayerDefinition(AetherIIModelLayers.EDWARD, EdwardModel::createBodyLayer);
+
+        // Vehicles
+        event.registerLayerDefinition(AetherIIModelLayers.CLOUD_SKIFF, CloudSkiffModel::createLayer);
 
         // Accessories
         // Handwear

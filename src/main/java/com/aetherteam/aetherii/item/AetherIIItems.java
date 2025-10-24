@@ -343,6 +343,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> MOA_SADDLE = register("moa_saddle", MoaSaddleItem::new, () -> new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> MOA_SADDLEBAG = register("moa_saddlebag", (properties) -> new MoaSaddlebagItem(5, properties.stacksTo(1)));
     public static final DeferredItem<Item> LARGE_MOA_SADDLEBAG = register("large_moa_saddlebag", (properties) -> new MoaSaddlebagItem(8, properties.stacksTo(1)));
+    public static final DeferredItem<Item> CLOUD_SKIFF = register("cloud_skiff", (properties) -> new CloudSkiffItem(AetherIIEntityTypes.CLOUD_SKIFF.get(), properties.stacksTo(1)));
     public static final DeferredItem<Item> GLINT_COIN = register("glint_coin", (properties) -> new CurrencyItem(1, properties));
     public static final DeferredItem<Item> GUIDEBOOK_PAGE = register("guidebook_page", GuidebookPageItem::new, () -> new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> AETHER_PORTAL_FRAME = register("aether_portal_frame", AetherPortalItem::new, () -> new Item.Properties().stacksTo(1));
