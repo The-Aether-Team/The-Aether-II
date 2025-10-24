@@ -816,16 +816,9 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createAltar(Block block, Block particle) {
-        ResourceLocation location = AetherIIModelTemplates.ALTAR.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput);
-        ResourceLocation chargingLocation = AetherIIModelTemplates.ALTAR.create(ModelLocationUtils.getModelLocation(block, "_charging"), TextureMapping.cube(TextureMapping.getBlockTexture(block, "_charging")).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput);
-        ResourceLocation blastingLocation = AetherIIModelTemplates.ALTAR.create(ModelLocationUtils.getModelLocation(block, "_blasting"), TextureMapping.cube(TextureMapping.getBlockTexture(block, "_blasting")).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput);
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(AltarBlock.BLASTING, AltarBlock.CHARGING)
-                        .select(true, true, plainVariant(blastingLocation))
-                        .select(true, false, plainVariant(blastingLocation))
-                        .select(false, true, plainVariant(chargingLocation))
-                        .select(false, false, plainVariant(location))
-                ).with(ROTATION_HORIZONTAL_FACING)
-        );
+        MultiVariant location = plainVariant(AetherIIModelTemplates.ALTAR.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, location)
+                .with(ROTATION_HORIZONTAL_FACING));
     }
 
     public void createArtisansBench(Block block, Block particle) {
@@ -848,6 +841,13 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         ResourceLocation resourceLocation = AetherIIModelTemplates.ALKAHEST_PURIFIER_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
         ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourceLocation, new AlkahestPurifierSpecialRenderer.Unbaked());
         this.itemModelOutput.accept(item, unbaked);
+    }
+
+    public void createCampfire(Block block) {
+        MultiVariant campfire = plainVariant(AetherIIModelTemplates.CAMPFIRE.create(block, AetherIITextureMappings.campfire(block), this.modelOutput));
+        MultiVariant campfireOff = plainVariant(AetherIIModelTemplates.CAMPFIRE_OFF.create(block, AetherIITextureMappings.campfireOff(block), this.modelOutput));
+        this.registerSimpleFlatItemModel(block.asItem());
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(createBooleanModelDispatch(BlockStateProperties.LIT, campfire, campfireOff)).with(ROTATION_HORIZONTAL_FACING_ALT));
     }
 
     public void createLadder(Block block) {

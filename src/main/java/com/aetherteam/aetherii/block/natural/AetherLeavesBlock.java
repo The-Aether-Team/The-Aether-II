@@ -2,12 +2,11 @@ package com.aetherteam.aetherii.block.natural;
 
 import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
-import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.VegetationBlockAccessor;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -103,11 +102,11 @@ public class AetherLeavesBlock extends LeavesBlock {
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         this.leafParticleChance = level.isRaining()? 0.01f : 0.005f;
-        if (level instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HighlandsSpecialEffects) {
+        if (AetherIIClientProxy.isHighlandsSpecialEffects(level)) {
             BlockPos belowPos = pos.below();
             BlockState belowState = level.getBlockState(belowPos);
             makeAetherDrippingWaterParticles(level, pos, random, belowState, belowPos);
-            this.makeFallingLeavesParticles(clientLevel, pos, random, belowState, belowPos);
+            this.makeFallingLeavesParticles(level, pos, random, belowState, belowPos);
         } else {
             super.animateTick(state, level, pos, random);
         }

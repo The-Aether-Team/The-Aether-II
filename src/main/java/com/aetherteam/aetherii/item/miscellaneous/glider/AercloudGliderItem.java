@@ -2,6 +2,8 @@ package com.aetherteam.aetherii.item.miscellaneous.glider;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.player.AbilityBehaviorAttachment;
+import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.InteractionHand;
@@ -133,7 +135,10 @@ public class AercloudGliderItem extends Item {
     @Override
     public int getBarWidth(ItemStack stack) {
         if (this.isGliding()) {
-            return Math.round((float) Minecraft.getInstance().player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getGlidingTimer() * 13.0F / (float) AercloudGliderItem.GLIDING_MAX);
+            AbilityBehaviorAttachment data = AetherIIClientProxy.getClientPlayerData(AetherIIDataAttachments.ABILITY_BEHAVIOR);
+            if (data != null) {
+                return Math.round((float) data.getGlidingTimer() * 13.0F / (float) AercloudGliderItem.GLIDING_MAX);
+            }
         }
         return super.getBarWidth(stack);
     }
@@ -147,7 +152,7 @@ public class AercloudGliderItem extends Item {
     }
 
     private boolean isGliding() {
-        Player player = Minecraft.getInstance().player;
+        Player player = AetherIIClientProxy.getClientPlayer();
         if (player != null && player.getUseItem().getItem() instanceof AercloudGliderItem) {
             int progress = player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getGlidingTimer();
             return progress > 0 && progress < AercloudGliderItem.GLIDING_MAX;

@@ -157,15 +157,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             }
         }
 
-        for (int k = 0; k < 3; k++) {
-            for (int i1 = 0; i1 < 9; i1++) {
-                this.addSlot(new Slot(playerInventory, i1 + k * 9 + 9, 8 + i1 * 18, 169 + k * 18));
-            }
-        }
-
-        for (int l = 0; l < 9; l++) {
-            this.addSlot(new Slot(playerInventory, l, 8 + l * 18, 227));
-        }
+        this.addStandardInventorySlots(playerInventory, 8, 169);
     }
 
     public void changeInput() {

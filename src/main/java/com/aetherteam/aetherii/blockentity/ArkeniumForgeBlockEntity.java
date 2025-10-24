@@ -61,10 +61,11 @@ public class ArkeniumForgeBlockEntity extends BaseContainerBlockEntity implement
 
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-        CompoundTag tag = super.getUpdateTag(registries);
+        CompoundTag tag;
         try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(this.problemPath(), AetherII.LOGGER)) {
             TagValueOutput output = TagValueOutput.createWithContext(reporter, registries);
             this.saveAdditional(output);
+            tag = output.buildResult();
         }
         return tag;
     }

@@ -546,6 +546,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ARKENIUM_CHAIN.get());
                 output.accept(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_FURNACE.get());
+                output.accept(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get());
                 output.accept(AetherIIBlocks.ALTAR.get());
                 output.accept(AetherIIBlocks.ARTISANS_BENCH.get());
                 output.accept(AetherIIBlocks.ARKENIUM_FORGE.get());
@@ -698,9 +699,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.BLUEBERRY.get());
                 output.accept(AetherIIItems.ENCHANTED_BLUEBERRY.get());
                 output.accept(AetherIIItems.ORANGE.get());
-                output.accept(AetherIIItems.SATIVAL_BULB.get());
+                output.accept(AetherIIItems.ENCHANTED_ORANGE.get());
                 output.accept(AetherIIItems.WYNDBERRY.get());
                 output.accept(AetherIIItems.ENCHANTED_WYNDBERRY.get());
+                output.accept(AetherIIItems.SATIVAL_BULB.get());
                 output.accept(AetherIIItems.GREEN_SWET_JELLY.get());
                 output.accept(AetherIIItems.BLUE_SWET_JELLY.get());
                 output.accept(AetherIIItems.PURPLE_SWET_JELLY.get());
