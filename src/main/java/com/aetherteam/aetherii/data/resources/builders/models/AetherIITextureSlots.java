@@ -25,4 +25,8 @@ public class AetherIITextureSlots {
     public static final TextureSlot SIDE2 = TextureSlot.create("side2");
     public static final TextureSlot BASE_TOP = TextureSlot.create("base_top");
     public static final TextureSlot BASE_BOTTOM = TextureSlot.create("base_bottom");
+    public static final TextureSlot ANVIL_FRONT = TextureSlot.create("anvil_front");
+    public static final TextureSlot ANVIL_SIDE = TextureSlot.create("anvil_side");
+    public static final TextureSlot ANVIL_BOTTOM = TextureSlot.create("anvil_bottom");
+    public static final TextureSlot ANVIL_TOP = TextureSlot.create("anvil_top");
 }

@@ -851,8 +851,20 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createArkeniumForge(Block block, Block particle) {
-        MultiVariant normal = plainVariant(AetherIIModelTemplates.ARKENIUM_FORGE.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
-        MultiVariant charged = plainVariant(AetherIIModelTemplates.ARKENIUM_FORGE.create(ModelLocationUtils.getModelLocation(block, "_charged"), TextureMapping.cube(TextureMapping.getBlockTexture(block, "_charged")).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
+        MultiVariant normal = plainVariant(AetherIIModelTemplates.ARKENIUM_FORGE.create(block, new TextureMapping()
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
+                .put(AetherIITextureSlots.BASE_TOP, TextureMapping.getBlockTexture(block, "_top"))
+                .put(AetherIITextureSlots.ANVIL_FRONT, TextureMapping.getBlockTexture(block, "_anvil_front"))
+                .put(AetherIITextureSlots.ANVIL_SIDE, TextureMapping.getBlockTexture(block, "_anvil_side"))
+                .put(AetherIITextureSlots.ANVIL_BOTTOM, TextureMapping.getBlockTexture(block, "_anvil_bottom"))
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
+        MultiVariant charged = plainVariant(AetherIIModelTemplates.ARKENIUM_FORGE.create(ModelLocationUtils.getModelLocation(block, "_charged"), new TextureMapping()
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side_charged"))
+                .put(AetherIITextureSlots.BASE_TOP, TextureMapping.getBlockTexture(block, "_top_charged"))
+                .put(AetherIITextureSlots.ANVIL_FRONT, TextureMapping.getBlockTexture(block, "_anvil_front_charged"))
+                .put(AetherIITextureSlots.ANVIL_SIDE, TextureMapping.getBlockTexture(block, "_anvil_side_charged"))
+                .put(AetherIITextureSlots.ANVIL_BOTTOM, TextureMapping.getBlockTexture(block, "_anvil_bottom_charged"))
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
                 .with(BlockModelGenerators.createBooleanModelDispatch(ArkeniumForgeBlock.CHARGED, charged, normal))
                 .with(ROTATION_HORIZONTAL_FACING));

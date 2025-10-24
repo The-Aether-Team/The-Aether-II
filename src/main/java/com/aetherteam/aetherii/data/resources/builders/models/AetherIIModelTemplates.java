@@ -307,7 +307,7 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate TALL_WALL_TORCH = create("template_tall_wall_torch", TextureSlot.TORCH);
     public static final ModelTemplate ALTAR = create("template_altar", TextureSlot.TOP, TextureSlot.SIDE, TextureSlot.BOTTOM, AetherIITextureSlots.BASE_TOP, AetherIITextureSlots.BASE_BOTTOM);
     public static final ModelTemplate ARTISANS_BENCH = create("template_artisans_bench", TextureSlot.ALL, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
-    public static final ModelTemplate ARKENIUM_FORGE = create("template_arkenium_forge", TextureSlot.ALL, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate ARKENIUM_FORGE = create("template_arkenium_forge", TextureSlot.SIDE, AetherIITextureSlots.BASE_TOP, AetherIITextureSlots.ANVIL_FRONT, AetherIITextureSlots.ANVIL_SIDE, AetherIITextureSlots.ANVIL_BOTTOM, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ARILUM_LANTERN = create("template_arilum_lantern", TextureSlot.TEXTURE, TextureSlot.INSIDE);
 
     public static final ModelTemplate ALKAHEST_PURIFIER_INVENTORY = createItem("template_alkahest_purifier", TextureSlot.PARTICLE);
