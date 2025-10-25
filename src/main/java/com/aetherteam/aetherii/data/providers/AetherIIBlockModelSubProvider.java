@@ -550,12 +550,16 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createUniquePlantWithDefaultItem(Block block, TexturedModel.Provider provider, Block pot, ModelTemplate potTemplate) {
+        createUniquePlantWithDefaultItem(block, provider, pot, potTemplate, TextureMapping::plant);
+    }
+
+    public <B extends Block> void createUniquePlantWithDefaultItem(B block, TexturedModel.Provider provider, Block pot, ModelTemplate potTemplate, Function<? super B, ? extends TextureMapping> potTextureMappingCreator) {
         this.registerSimpleFlatItemModel(block.asItem());
 
         Variant normal = plainModel(provider.create(block, this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, createRotatedVariants(normal)));
 
-        MultiVariant crossPot = plainVariant(potTemplate.create(pot, TextureMapping.plant(block), this.modelOutput));
+        MultiVariant crossPot = plainVariant(potTemplate.create(pot, potTextureMappingCreator.apply(block), this.modelOutput));
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pot, crossPot));
     }
 

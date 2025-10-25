@@ -160,6 +160,21 @@ public class AetherIITextureMappings {
                 .put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem()));
     }
 
+    public static TextureMapping lilichime(Block block) {
+        return lilichime(block, false);
+    }
+
+    public static TextureMapping pottedLilichime(Block block) {
+        return lilichime(block, true);
+    }
+
+    public static TextureMapping lilichime(Block block, boolean potted) {
+        return new TextureMapping()
+            .put(TextureSlot.STEM, TextureMapping.getBlockTexture(block, potted ? "_stem_potted" : "_stem"))
+            .put(AetherIITextureSlots.PETALS, TextureMapping.getBlockTexture(block, "_petals"))
+            .put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem()));
+    }
+
     public static TextureMapping lockedBlockInventory(Block block) {
         return new TextureMapping()
                 .put(AetherIITextureSlots.FACE, TextureMapping.getBlockTexture(block))
