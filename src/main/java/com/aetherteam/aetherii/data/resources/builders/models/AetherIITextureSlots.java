@@ -33,4 +33,8 @@ public class AetherIITextureSlots {
     public static final TextureSlot ASH = TextureSlot.create("ash");
     public static final TextureSlot LOGS = TextureSlot.create("logs");
     public static final TextureSlot BRICKS = TextureSlot.create("bricks");
+    public static final TextureSlot LEAVES1 = TextureSlot.create("leaves1");
+    public static final TextureSlot LEAVES2 = TextureSlot.create("leaves2");
+    public static final TextureSlot PETAL_TOP = TextureSlot.create("petal_top");
+    public static final TextureSlot PETAL_BOTTOM = TextureSlot.create("petal_bottom");
 }

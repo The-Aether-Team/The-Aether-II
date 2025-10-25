@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -559,12 +560,16 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createFacingPlantWithDefaultItem(Block block, TexturedModel.Provider provider, Block pot, ModelTemplate potTemplate) {
+        this.createFacingPlantWithDefaultItem(block, provider, pot, potTemplate, TextureMapping::plant);
+    }
+
+    public <B extends Block> void createFacingPlantWithDefaultItem(B block, TexturedModel.Provider provider, Block pot, ModelTemplate potTemplate, Function<? super B, ? extends TextureMapping> potTextureMappingCreator) {
         this.registerSimpleFlatItemModel(block.asItem());
 
         MultiVariant normal = plainVariant(provider.create(block, this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, normal).with(ROTATION_HORIZONTAL_FACING));
 
-        MultiVariant crossPot = plainVariant(potTemplate.create(pot, TextureMapping.plant(block), this.modelOutput));
+        MultiVariant crossPot = plainVariant(potTemplate.create(pot, potTextureMappingCreator.apply(block), this.modelOutput));
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pot, crossPot));
     }
 

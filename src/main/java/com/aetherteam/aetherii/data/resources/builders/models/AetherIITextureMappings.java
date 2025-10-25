@@ -150,6 +150,16 @@ public class AetherIITextureMappings {
         return new TextureMapping().put(TextureSlot.PLANT, TextureMapping.getBlockTexture(block)).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem()));
     }
 
+    public static TextureMapping pluracian(Block block) {
+        return new TextureMapping()
+                .put(TextureSlot.STEM, TextureMapping.getBlockTexture(block, "_stem"))
+                .put(AetherIITextureSlots.LEAVES1, TextureMapping.getBlockTexture(block, "_leaves_1"))
+                .put(AetherIITextureSlots.LEAVES2, TextureMapping.getBlockTexture(block, "_leaves_2"))
+                .put(AetherIITextureSlots.PETAL_TOP, TextureMapping.getBlockTexture(block, "_petal_top"))
+                .put(AetherIITextureSlots.PETAL_BOTTOM, TextureMapping.getBlockTexture(block, "_petal_bottom"))
+                .put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem()));
+    }
+
     public static TextureMapping lockedBlockInventory(Block block) {
         return new TextureMapping()
                 .put(AetherIITextureSlots.FACE, TextureMapping.getBlockTexture(block))

@@ -1,6 +1,7 @@
 {
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
-	"texture_size": [32, 32],
 	"textures": {
 		"particle": "block/flower_pot",
 		"flowerpot": "block/flower_pot",
@@ -61,47 +62,60 @@
 		},
 		{
 			"name": "stalk",
-			"from": [8, 4, 6.9],
-			"to": [8, 16, 10.65],
+			"from": [8, 4, 0.5],
+			"to": [8, 20, 16.5],
 			"shade": false,
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 11, 7.9]},
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 11, 8.5]},
 			"faces": {
-				"east": {"uv": [2.5, 5.5, 0, 13.5], "texture": "#plant"},
-				"west": {"uv": [0, 5.5, 2.5, 13.5], "texture": "#plant"}
+				"east": {"uv": [16, 0, 0, 16], "texture": "#stem"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#stem"}
 			}
 		},
 		{
 			"name": "flower",
-			"from": [4.65, 16.125, 1.75],
-			"to": [11.4, 16.125, 10],
+			"from": [-0.5, 18, -1.5],
+			"to": [15.5, 18, 14.5],
 			"shade": false,
-			"rotation": {"angle": -45, "axis": "x", "origin": [9.15, 16.125, 10.75]},
+			"rotation": {"angle": -45, "axis": "x", "origin": [8, 18, 9.5]},
 			"faces": {
-				"up": {"uv": [4.5, 5.5, 0, 0], "texture": "#plant"},
-				"down": {"uv": [9, 0, 4.5, 5.5], "texture": "#plant"}
+				"up": {"uv": [16, 16, 0, 0], "texture": "#petal_top"},
+				"down": {"uv": [16, 0, 0, 16], "texture": "#petal_bottom"}
 			}
 		},
 		{
 			"name": "leaves_1",
-			"from": [4.5, 4, 8.25],
-			"to": [10.5, 9.25, 8.25],
+			"from": [8, 4, 0.8],
+			"to": [8, 20, 15.2],
 			"shade": false,
-			"rotation": {"angle": -45, "axis": "y", "origin": [8, 11, 8.75]},
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 12, 8], "rescale": true},
 			"faces": {
-				"north": {"uv": [2.5, 5.5, 6.5, 9], "texture": "#plant"},
-				"south": {"uv": [6.5, 5.5, 2.5, 9], "texture": "#plant"}
+				"east": {"uv": [0, 0, 14.4, 16], "texture": "#leaves1"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#leaves1"}
 			}
 		},
 		{
 			"name": "leaves_2",
-			"from": [7.75, 4, 4.5],
-			"to": [7.75, 9.25, 10.5],
+			"from": [0.8, 4, 8],
+			"to": [15.2, 20, 8],
 			"shade": false,
-			"rotation": {"angle": -45, "axis": "y", "origin": [7.25, 11, 8]},
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 12, 8], "rescale": true},
 			"faces": {
-				"east": {"uv": [6.5, 9, 2.5, 12.5], "texture": "#plant"},
-				"west": {"uv": [2.5, 9, 6.5, 12.5], "texture": "#plant"}
+				"north": {"uv": [0, 0, 16, 16], "texture": "#leaves2"},
+				"south": {"uv": [16, 0, 0, 16], "texture": "#leaves2"}
 			}
+		}
+	],
+	"groups": [
+		0,
+		1,
+		2,
+		3,
+		4,
+		{
+			"name": "flower",
+			"origin": [8, 7, 8.5],
+			"color": 0,
+			"children": [5, 6, 7, 8]
 		}
 	]
 }
