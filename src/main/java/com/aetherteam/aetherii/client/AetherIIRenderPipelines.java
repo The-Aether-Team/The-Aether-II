@@ -10,6 +10,20 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.event.RegisterRenderPipelinesEvent;
 
 public class AetherIIRenderPipelines {
+    public static final RenderPipeline.Snippet ENTITY_DITHER_SNIPPET = RenderPipeline.builder(RenderPipelines.MATRICES_FOG_LIGHT_DIR_SNIPPET)
+            .withVertexShader(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "core/entity_dither"))
+            .withFragmentShader(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "core/entity_dither"))
+            .withSampler("Sampler0")
+            .withSampler("Sampler2")
+            .withVertexFormat(DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS)
+            .buildSnippet();
+
+    private static final RenderPipeline ENTITY_DITHER_NO_CULL = RenderPipeline.builder(ENTITY_DITHER_SNIPPET)
+            .withLocation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "pipeline/entity_dither_no_cull"))
+            .withShaderDefine("ALPHA_CUTOUT", 0.1F)
+            .withSampler("Sampler1")
+            .withCull(false)
+            .build();
     private static final RenderPipeline CLOUD_COVER_SHADER = RenderPipeline.builder(RenderPipelines.MATRICES_FOG_SNIPPET)
             .withLocation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "pipeline/cloud_cover"))
             .withVertexShader("core/position_color")
@@ -20,7 +34,12 @@ public class AetherIIRenderPipelines {
             .build();
 
     public static void registerShaders(RegisterRenderPipelinesEvent event) {
+        event.registerPipeline(ENTITY_DITHER_NO_CULL);
         event.registerPipeline(CLOUD_COVER_SHADER);
+    }
+
+    public static RenderPipeline getEntityDitherNoCull() {
+        return ENTITY_DITHER_NO_CULL;
     }
 
     public static RenderPipeline getCloudCoverShader() {

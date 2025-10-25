@@ -915,6 +915,16 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("AAA")
                 .unlockedBy(getHasName(AetherIIBlocks.ALKAHEST_PURIFIER.get()), has(AetherIITags.Items.PLATES_ARKENIUM))
                 .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBROSIUM_CAMPFIRE.get())
+                .define('L', ItemTags.LOGS)
+                .define('S', AetherIIItems.SKYROOT_STICK) //TODO TAG
+                .define('#', AetherIIItems.AMBROSIUM_SHARD) //TODO TAG
+                .pattern(" S ")
+                .pattern("S#S")
+                .pattern("LLL")
+                .unlockedBy("has_stick", has(AetherIIItems.SKYROOT_STICK))
+                .unlockedBy("has_ambrosium", has(AetherIIItems.AMBROSIUM_SHARD))
+                .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_CHEST.get())
                 .define('#', AetherIITags.Items.PLANKS_CRAFTING)
                 .pattern("###")
@@ -1058,6 +1068,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         // Foods
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ENCHANTED_BLUEBERRY, AetherIIItems.BLUEBERRY, 1, 0.0F).save(this.output);
+        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ENCHANTED_ORANGE, AetherIIItems.ORANGE, 1, 0.0F).save(this.output);
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ENCHANTED_WYNDBERRY, AetherIIItems.WYNDBERRY, 2, 0.0F).save(this.output);
         this.foodCooking(AetherIIItems.BURRUKAI_RIB_CUT, AetherIIItems.BURRUKAI_RIBS, 0.35F, this.output);
         this.foodCooking(AetherIIItems.KIRRID_LOIN, AetherIIItems.KIRRID_CUTLET, 0.35F, this.output);
@@ -1239,6 +1250,13 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("#C#")
                 .pattern("/#/")
                 .unlockedBy("has_beast_pelt", has(AetherIIItems.BEAST_PELT))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.CLOUD_SKIFF.get())
+                .define('A', AetherIIBlocks.COLD_AERCLOUD)
+                .define('S', AetherIITags.Items.PLANKS_CRAFTING)
+                .pattern("A A")
+                .pattern("SSS")
+                .unlockedBy("in_aercloud", insideOf(AetherIIBlocks.COLD_AERCLOUD.get()))
                 .save(this.output);
 
 

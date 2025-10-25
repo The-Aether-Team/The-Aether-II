@@ -3,8 +3,8 @@ package com.aetherteam.aetherii.blockentity;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.utility.AltarBlock;
 import com.aetherteam.aetherii.inventory.menu.AltarMenu;
+import com.aetherteam.aetherii.network.packet.clientbound.AltarParticlesPacket;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
 import com.google.common.collect.Lists;
@@ -15,11 +15,13 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
@@ -39,9 +41,11 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -53,11 +57,9 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     private static final int[] SLOTS_FOR_SIDES = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
 
     protected NonNullList<ItemStack> items = NonNullList.withSize(10, ItemStack.EMPTY);
-    int processingProgress;
-    int processingTotalTime;
-    int fuelCount;
-    boolean blasting;
-    int blastingDuration;
+    protected int processingProgress;
+    protected int processingTotalTime;
+    protected int fuelCount;
     protected final ContainerData dataAccess = new ContainerData() {
         @Override
         public int get(int id) {
@@ -91,6 +93,10 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     };
     private final Object2IntOpenHashMap<ResourceKey<Recipe<?>>> recipesUsed = new Object2IntOpenHashMap<>();
     private final RecipeManager.CachedCheck<SingleRecipeInput, AltarEnchantingRecipe> quickCheck;
+    private float ambSpinningSpeed = 0.0F;
+    private float ambrosiumFinalRotation = 0.0F;
+    private float bobOffs = -1.0F;
+    private float inputItemRotation = 0.0F;
 
     public AltarBlockEntity() {
         this(AetherIIBlockEntityTypes.ALTAR.get(), BlockPos.ZERO, AetherIIBlocks.ALTAR.get().defaultBlockState());
@@ -141,8 +147,25 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         output.store("RecipesUsed", CompoundTag.CODEC, recipesUsedTag);
     }
 
+    @Override
+    public void handleUpdateTag(ValueInput input) {
+        this.loadAdditional(input);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag;
+        try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(this.problemPath(), AetherII.LOGGER)) {
+            TagValueOutput output = TagValueOutput.createWithContext(reporter, registries);
+            this.saveAdditional(output);
+            tag = output.buildResult();
+        }
+        return tag;
+    }
+
     public static void serverTick(ServerLevel level, BlockPos pos, BlockState state, AltarBlockEntity blockEntity) {
         boolean changed = false;
+        int oldProcessingProgress = blockEntity.processingProgress;
 
         RecipeHolder<AltarEnchantingRecipe> recipeHolder = blockEntity.quickCheck.getRecipeFor(new SingleRecipeInput(blockEntity.getItem(0)), level).orElse(null);
         if (recipeHolder != null) {
@@ -152,23 +175,19 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         }
         boolean hasFuel = hasFuel(level, blockEntity);
         int i = blockEntity.getMaxStackSize();
-        boolean isCharging = false;
 
         if (hasFuel) {
             if (blockEntity.canProcess(level.registryAccess(), recipeHolder, blockEntity.items, i)) {
                 changed = true;
                 ++blockEntity.processingProgress;
-                isCharging = true;
                 if (blockEntity.processingProgress == blockEntity.processingTotalTime) {
                     useFuel(level, blockEntity);
                     blockEntity.processingProgress = 0;
                     blockEntity.processingTotalTime = getTotalProcessingTime(level, blockEntity);
                     if (blockEntity.process(level.registryAccess(), recipeHolder, blockEntity.items, i)) {
                         blockEntity.setRecipeUsed(recipeHolder);
+                        PacketDistributor.sendToAllPlayers(new AltarParticlesPacket(pos));
                     }
-                    isCharging = false;
-                    blockEntity.blasting = true;
-                    blockEntity.blastingDuration = 15;
                 }
             } else {
                 blockEntity.processingProgress = 0;
@@ -177,24 +196,14 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
             blockEntity.processingProgress = Mth.clamp(blockEntity.processingProgress - 2, 0, blockEntity.processingProgress);
         }
 
-        if (blockEntity.blastingDuration-- <= 0) {
-            blockEntity.blasting = false;
-        }
-
-        if (state.getValue(AltarBlock.CHARGING) != isCharging) {
-            changed = true;
-            state = state.setValue(AltarBlock.CHARGING, isCharging);
-            level.setBlock(pos, state, 1 | 2);
-        }
-
-        if (state.getValue(AltarBlock.BLASTING) != blockEntity.blasting) {
-            changed = true;
-            state = state.setValue(AltarBlock.BLASTING, blockEntity.blasting);
-            level.setBlock(pos, state, 1 | 2);
-        }
-
         if (changed) {
             setChanged(level, pos, state);
+        }
+
+        if (oldProcessingProgress != blockEntity.processingProgress) {
+            if (blockEntity.getLevel() != null) {
+                blockEntity.getLevel().sendBlockUpdated(blockEntity.getBlockPos(), blockEntity.getBlockState(), blockEntity.getBlockState(), 1 | 2);
+            }
         }
     }
 
@@ -242,6 +251,9 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
                 output.grow(result.getCount());
             }
             input.shrink(1);
+            if (this.getLevel() != null) {
+                this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 1 | 2);
+            }
             return true;
         } else {
             return false;
@@ -376,6 +388,10 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
                 this.setChanged();
             }
         }
+
+        if (this.getLevel() != null) {
+            this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 1 | 2);
+        }
     }
 
     @Override
@@ -442,5 +458,46 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         for (ItemStack itemstack : this.items) {
             stackedContents.accountStack(itemstack);
         }
+    }
+
+    public int getProcessingProgress() {
+        return processingProgress;
+    }
+
+    public float getAmbSpinningSpeed() {
+        return this.ambSpinningSpeed;
+    }
+
+    public void setAmbSpinningSpeed(float ambSpinningSpeed) {
+        this.ambSpinningSpeed = ambSpinningSpeed;
+    }
+
+    public float getAmbrosiumFinalRotation() {
+        return this.ambrosiumFinalRotation;
+    }
+
+    public void setAmbrosiumFinalRotation(float ambrosiumFinalRotation) {
+        this.ambrosiumFinalRotation = ambrosiumFinalRotation;
+    }
+
+    public float getBobOffs() {
+        return this.bobOffs;
+    }
+
+    public void setBobOffs(float bobOffs) {
+        this.bobOffs = bobOffs;
+    }
+
+    public float getInputItemRotation() {
+        return this.inputItemRotation;
+    }
+
+    public void setInputItemRotation(float inputItemRotation) {
+        this.inputItemRotation = inputItemRotation;
+    }
+
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 }

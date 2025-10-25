@@ -56,15 +56,7 @@ public class AlkahestPurifierMenu extends RecipeBookMenu {
 
         this.addSlot(new PurifierByproductSlot(container, 6, 144, 75)); // Byproduct
 
-        // Inventory
-        for (int i = 0; i < 3; ++i) {
-            for(int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 111 + i * 18));
-            }
-        }
-        for (int k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 169));
-        }
+        this.addStandardInventorySlots(playerInventory, 8, 111);
         this.addDataSlots(data);
     }
 

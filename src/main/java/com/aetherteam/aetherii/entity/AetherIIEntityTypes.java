@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.entity.monster.*;
 import com.aetherteam.aetherii.entity.npc.outpost.Edward;
 import com.aetherteam.aetherii.entity.passive.*;
 import com.aetherteam.aetherii.entity.projectile.*;
+import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -119,6 +120,10 @@ public class AetherIIEntityTypes {
     // Blocks
     public static final DeferredHolder<EntityType<?>, EntityType<HoveringBlockEntity>> HOVERING_BLOCK = ENTITY_TYPES.register("hovering_block",
             () -> EntityType.Builder.<HoveringBlockEntity>of(HoveringBlockEntity::new, MobCategory.MISC).sized(0.9F, 0.9F).clientTrackingRange(10).updateInterval(20).noLootTable().build(AetherIIEntities.HOVERING_BLOCK));
+
+    // Vehicles
+    public static final DeferredHolder<EntityType<?>, EntityType<CloudSkiff>> CLOUD_SKIFF = ENTITY_TYPES.register("cloud_skiff",
+            () -> EntityType.Builder.<CloudSkiff>of(CloudSkiff::new, MobCategory.MISC).noLootTable().sized(1.75F, 0.2125F).eyeHeight(0.5625F).clientTrackingRange(10).build(AetherIIEntities.CLOUD_SKIFF));
 
     // Misc
     public static final DeferredHolder<EntityType<?>, EntityType<ElectricField>> ELECTRIC_FIELD = ENTITY_TYPES.register("electric_field",

@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
+import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
 import com.aetherteam.aetherii.client.renderer.entity.animation.AerbunnyAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.state.AerbunnyRenderState;
 import net.minecraft.client.animation.KeyframeAnimation;
@@ -27,7 +28,7 @@ public class AerbunnyModel extends EntityModel<AerbunnyRenderState> {
     private final ModelPart tail;
 
     public AerbunnyModel(ModelPart root) {
-        super(root);
+        super(root, AetherIIRenderTypes::entityDitherNoCull);
         this.sittingAnimation = AerbunnyAnimation.SITTING.bake(root);
         this.body = root.getChild("body");
         this.cloudpuff = this.body.getChild("cloudpuff");

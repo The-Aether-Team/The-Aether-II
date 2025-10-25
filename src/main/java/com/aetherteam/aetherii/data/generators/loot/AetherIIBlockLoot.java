@@ -13,6 +13,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BedPart;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
@@ -659,6 +661,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.ARKENIUM_FORGE.get());
         this.dropSelf(AetherIIBlocks.ARTISANS_BENCH.get());
         this.dropSelf(AetherIIBlocks.ALKAHEST_PURIFIER.get());
+        this.add(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get(), (block) -> this.createSilkTouchDispatchTable(block, this.applyExplosionCondition(block, LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))));
         this.dropSelf(AetherIIBlocks.SKYROOT_CHEST.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_LADDER.get());
         this.add(AetherIIBlocks.SKYROOT_BED.get(), (bed) -> createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
