@@ -1,5 +1,16 @@
 package com.aetherteam.aetherii.data.providers;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.furniture.OutpostCampfireBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
@@ -12,12 +23,16 @@ import com.aetherteam.aetherii.client.renderer.item.color.AetherGrassColorSource
 import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
-import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureSlots;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITexturedModels;
+
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.MultiVariant;
-import net.minecraft.client.data.models.blockstates.*;
+import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
+import net.minecraft.client.data.models.blockstates.ConditionBuilder;
+import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.client.renderer.block.model.VariantMutator;
@@ -31,17 +46,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.MossyCarpetBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
-import net.minecraft.world.level.block.state.properties.*;
-import org.apache.commons.lang3.ArrayUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.DripstoneThickness;
+import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.block.state.properties.WallSide;
 
 public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public AetherIIBlockModelSubProvider(Consumer<BlockModelDefinitionGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
@@ -389,23 +398,15 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant left = plainVariant(AetherIIModelTemplates.TRANSLUCENT_INNER_FACES.create(ModelLocationUtils.getModelLocation(block, "_left"), leftMapping, this.modelOutput));
         MultiVariant right = plainVariant(AetherIIModelTemplates.TRANSLUCENT_INNER_FACES.create(ModelLocationUtils.getModelLocation(block, "_right"), rightMapping, this.modelOutput));
 
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(PurpleAercloudBlock.FACING).generate((direction) -> {
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(PurpleAercloudBlock.FACING).generate((direction) -> 
             switch(direction) {
-                case NORTH -> {
-                    return left.with(X_ROT_90);
-                }
-                case SOUTH -> {
-                    return right.with(X_ROT_270);
-                }
-                case WEST -> {
-                    return left.with(X_ROT_270).with(Y_ROT_90);
-                }
-                case EAST -> {
-                    return right.with(X_ROT_90).with(Y_ROT_90);
-                }
+                case NORTH -> left.with(X_ROT_90);
+                case SOUTH -> right.with(X_ROT_270);
+                case WEST -> left.with(X_ROT_270).with(Y_ROT_90);
+                case EAST -> right.with(X_ROT_90).with(Y_ROT_90);
+                default -> left;
             }
-            return left;
-        })));
+        )));
         this.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(AetherIIModelTemplates.TEMPLATE_TRANSLUCENT_CUBE.create(block.asItem(), rightMapping, this.modelOutput)));
     }
 
@@ -817,24 +818,9 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createAltar(Block block, Block particle) {
-        ResourceLocation location = AetherIIModelTemplates.ALTAR.create(block, new TextureMapping()
-                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
-                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom"))
-                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
-                .put(AetherIITextureSlots.BASE_TOP, TextureMapping.getBlockTexture(block, "_base_top"))
-                .put(AetherIITextureSlots.BASE_BOTTOM, TextureMapping.getBlockTexture(block, "_base_bottom")), this.modelOutput);
-        ResourceLocation chargingLocation = AetherIIModelTemplates.ALTAR.create(ModelLocationUtils.getModelLocation(block, "_charging"), new TextureMapping()
-                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top_charging"))
-                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom_charging"))
-                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side_charging"))
-                .put(AetherIITextureSlots.BASE_TOP, TextureMapping.getBlockTexture(block, "_base_top_charging"))
-                .put(AetherIITextureSlots.BASE_BOTTOM, TextureMapping.getBlockTexture(block, "_base_bottom_charging")), this.modelOutput);
-        ResourceLocation blastingLocation = AetherIIModelTemplates.ALTAR.create(ModelLocationUtils.getModelLocation(block, "_blasting"), new TextureMapping()
-                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top_blasting"))
-                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom_blasting"))
-                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side_blasting"))
-                .put(AetherIITextureSlots.BASE_TOP, TextureMapping.getBlockTexture(block, "_base_top_blasting"))
-                .put(AetherIITextureSlots.BASE_BOTTOM, TextureMapping.getBlockTexture(block, "_base_bottom_blasting")), this.modelOutput);
+        ResourceLocation location = AetherIIModelTemplates.ALTAR.create(block, AetherIITextureMappings.altar(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput);
+        ResourceLocation chargingLocation = AetherIIModelTemplates.ALTAR.create(ModelLocationUtils.getModelLocation(block, "_charging"), AetherIITextureMappings.altar(block, "_charging").put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput);
+        ResourceLocation blastingLocation = AetherIIModelTemplates.ALTAR.create(ModelLocationUtils.getModelLocation(block, "_blasting"), AetherIITextureMappings.altar(block, "_blasting").put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput);
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(AltarBlock.BLASTING, AltarBlock.CHARGING)
                         .select(true, true, plainVariant(blastingLocation))
                         .select(true, false, plainVariant(blastingLocation))
@@ -845,26 +831,14 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createArtisansBench(Block block, Block particle) {
-        MultiVariant crafter = plainVariant(AetherIIModelTemplates.ARTISANS_BENCH.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
+        MultiVariant crafter = plainVariant(AetherIIModelTemplates.ARTISANS_BENCH.create(block, AetherIITextureMappings.artisansBench(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, crafter)
                 .with(ROTATION_HORIZONTAL_FACING));
     }
 
     public void createArkeniumForge(Block block, Block particle) {
-        MultiVariant normal = plainVariant(AetherIIModelTemplates.ARKENIUM_FORGE.create(block, new TextureMapping()
-                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
-                .put(AetherIITextureSlots.BASE_TOP, TextureMapping.getBlockTexture(block, "_top"))
-                .put(AetherIITextureSlots.ANVIL_FRONT, TextureMapping.getBlockTexture(block, "_anvil_front"))
-                .put(AetherIITextureSlots.ANVIL_SIDE, TextureMapping.getBlockTexture(block, "_anvil_side"))
-                .put(AetherIITextureSlots.ANVIL_BOTTOM, TextureMapping.getBlockTexture(block, "_anvil_bottom"))
-                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
-        MultiVariant charged = plainVariant(AetherIIModelTemplates.ARKENIUM_FORGE.create(ModelLocationUtils.getModelLocation(block, "_charged"), new TextureMapping()
-                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side_charged"))
-                .put(AetherIITextureSlots.BASE_TOP, TextureMapping.getBlockTexture(block, "_top_charged"))
-                .put(AetherIITextureSlots.ANVIL_FRONT, TextureMapping.getBlockTexture(block, "_anvil_front_charged"))
-                .put(AetherIITextureSlots.ANVIL_SIDE, TextureMapping.getBlockTexture(block, "_anvil_side_charged"))
-                .put(AetherIITextureSlots.ANVIL_BOTTOM, TextureMapping.getBlockTexture(block, "_anvil_bottom_charged"))
-                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
+        MultiVariant normal = plainVariant(AetherIIModelTemplates.ARKENIUM_FORGE.create(block, AetherIITextureMappings.arkeniumForge(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
+        MultiVariant charged = plainVariant(AetherIIModelTemplates.ARKENIUM_FORGE.create(ModelLocationUtils.getModelLocation(block, "_charged"), AetherIITextureMappings.arkeniumForge(block, "_charged").put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
                 .with(BlockModelGenerators.createBooleanModelDispatch(ArkeniumForgeBlock.CHARGED, charged, normal))
                 .with(ROTATION_HORIZONTAL_FACING));

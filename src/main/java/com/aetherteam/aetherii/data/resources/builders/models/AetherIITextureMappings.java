@@ -1,12 +1,35 @@
 package com.aetherteam.aetherii.data.resources.builders.models;
 
 import com.aetherteam.aetherii.AetherII;
+
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
 public class AetherIITextureMappings {
+    public static TextureMapping block(Block block) {
+        return block(TextureMapping.getBlockTexture(block));
+    }
+
+    public static TextureMapping block(Block block, String suffix) {
+        return block(TextureMapping.getBlockTexture(block), suffix);
+    }
+
+    public static TextureMapping block(ResourceLocation texture) {
+        return block(texture, "");
+    }
+
+    public static TextureMapping block(ResourceLocation texture, String suffix) {
+        return new TextureMapping()
+            .put(TextureSlot.NORTH, texture.withSuffix("_front" + suffix))
+            .put(TextureSlot.SOUTH, texture.withSuffix("_back" + suffix))
+            .put(TextureSlot.EAST, texture.withSuffix("_right" + suffix))
+            .put(TextureSlot.WEST, texture.withSuffix("_left" + suffix))
+            .put(TextureSlot.UP, texture.withSuffix("_top" + suffix))
+            .put(TextureSlot.DOWN, texture.withSuffix("_bottom" + suffix));
+    }
+
     public static TextureMapping portal(Block portal) {
         return new TextureMapping()
                 .put(AetherIITextureSlots.PORTAL, TextureMapping.getBlockTexture(portal))
@@ -135,5 +158,37 @@ public class AetherIITextureMappings {
 
     public static TextureMapping particle(TextureMapping textureMapping) {
         return textureMapping.copyForced(TextureSlot.ALL, TextureSlot.PARTICLE);
+    }
+
+    public static TextureMapping altar(Block block) {
+        return altar(block, "");
+    }
+
+    public static TextureMapping altar(Block block, String suffix) {
+        return new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top" + suffix))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom" + suffix))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side" + suffix))
+                .put(AetherIITextureSlots.BASE_TOP, TextureMapping.getBlockTexture(block, "_base_top" + suffix))
+                .put(AetherIITextureSlots.BASE_BOTTOM, TextureMapping.getBlockTexture(block, "_base_bottom" + suffix));
+    }
+
+    public static TextureMapping arkeniumForge(Block block) {
+        return arkeniumForge(block, "");
+    }
+
+    public static TextureMapping arkeniumForge(Block block, String suffix) {
+        return new TextureMapping()
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side" + suffix))
+                .put(AetherIITextureSlots.BASE_TOP, TextureMapping.getBlockTexture(block, "_top" + suffix))
+                .put(AetherIITextureSlots.ANVIL_FRONT, TextureMapping.getBlockTexture(block, "_anvil_front" + suffix))
+                .put(AetherIITextureSlots.ANVIL_SIDE, TextureMapping.getBlockTexture(block, "_anvil_side" + suffix))
+                .put(AetherIITextureSlots.ANVIL_BOTTOM, TextureMapping.getBlockTexture(block, "_anvil_bottom" + suffix));
+    }
+
+    public static TextureMapping artisansBench(Block block) {
+        return block(block)
+                .put(TextureSlot.INSIDE, TextureMapping.getBlockTexture(block, "_inside"))
+                .put(AetherIITextureSlots.SAW, TextureMapping.getBlockTexture(block, "_saw"));
     }
 }
