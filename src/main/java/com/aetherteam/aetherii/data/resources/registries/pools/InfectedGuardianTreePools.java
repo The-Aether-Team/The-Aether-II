@@ -352,10 +352,7 @@ public class InfectedGuardianTreePools {
         context.register(STAIRCASES_FLOOR_1, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/staircases/floor_1/staircase_01"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/staircases/floor_1/staircase_02"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/staircases/floor_1/staircase_03"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/staircases/floor_1/staircase_04"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/staircases/floor_1"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
