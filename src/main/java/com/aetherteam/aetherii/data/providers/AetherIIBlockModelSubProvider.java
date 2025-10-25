@@ -691,6 +691,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, dungeonBlock));
         this.registerSimpleItemModel(block.asItem(), AetherIIModelTemplates.LOCKED_BLOCK_INVENTORY.create(block.asItem(), AetherIITextureMappings.lockedBlockInventory(itemBlock), this.modelOutput));
     }
+    
     public void createCornerLog(Block baseBlock, Block block) {
         TextureMapping mapping = (new TextureMapping())
                 .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_left"))

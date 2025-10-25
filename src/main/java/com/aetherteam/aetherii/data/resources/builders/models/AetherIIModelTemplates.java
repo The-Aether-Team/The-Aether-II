@@ -346,13 +346,13 @@ public class AetherIIModelTemplates {
      * Based on {@link ModelLocationUtils#decorateBlockModelLocation(String)}
      */
     public static ResourceLocation decorateBlockModelLocation(String path) {
-        return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, path).withPrefix("block/");
+        return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/" + path);
     }
 
     /**
      * Based on {@link ModelLocationUtils#decorateItemModelLocation(String)}
      */
     public static ResourceLocation decorateItemModelLocation(String path) {
-        return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, path).withPrefix("item/");
+        return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "item/" + path);
     }
 }

@@ -1,5 +1,8 @@
 package com.aetherteam.aetherii.data.generators;
 
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
@@ -7,6 +10,7 @@ import com.aetherteam.aetherii.data.providers.AetherIIRecipeProvider;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
@@ -23,10 +27,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
-
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 
 public class AetherIIRecipeData extends AetherIIRecipeProvider {
     public AetherIIRecipeData(RecipeOutput output, HolderLookup.Provider provider) {
