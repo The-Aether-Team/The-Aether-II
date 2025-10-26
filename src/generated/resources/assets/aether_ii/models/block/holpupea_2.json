@@ -3,6 +3,7 @@
   "render_type": "minecraft:cutout",
   "textures": {
     "flowerbed": "aether_ii:block/holpupea",
-    "particle": "aether_ii:block/holpupea"
+    "particle": "aether_ii:block/holpupea",
+    "stem": "aether_ii:block/holpupea_stem"
   }
 }

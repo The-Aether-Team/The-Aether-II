@@ -116,6 +116,10 @@ public class AetherIITextureMappings {
                 .copySlot(TextureSlot.FLOWERBED, TextureSlot.PARTICLE);
     }
 
+    public static TextureMapping flowerbedAndStem(Block block) {
+        return flowerbed(block).put(TextureSlot.STEM, TextureMapping.getBlockTexture(block, "_stem"));
+    }
+
     public static TextureMapping tarahespFlowerbed(Block block) {
         return new TextureMapping()
                 .put(AetherIITextureSlots.TARAHESP_FLOWERS_WHITE, TextureMapping.getBlockTexture(block, "_white"))
