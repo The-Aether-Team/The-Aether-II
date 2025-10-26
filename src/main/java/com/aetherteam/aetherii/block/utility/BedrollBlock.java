@@ -1,9 +1,6 @@
 package com.aetherteam.aetherii.block.utility;
 
-import com.mojang.math.OctahedralGroup;
-import com.mojang.math.Quadrant;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -25,12 +22,10 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Map;
 
 public class BedrollBlock extends HorizontalDirectionalBlock {
     public static final MapCodec<BedrollBlock> CODEC = simpleCodec(BedrollBlock::new);
@@ -58,7 +53,16 @@ public class BedrollBlock extends HorizontalDirectionalBlock {
                     return InteractionResult.CONSUME;
                 }
             }
-            if (state.getValue(OCCUPIED)) {
+            if (!level.dimensionType().bedWorks()) {
+                level.removeBlock(pos, false);
+                BlockPos relativePos = pos.relative(state.getValue(FACING).getOpposite());
+                if (level.getBlockState(relativePos).is(this)) {
+                    level.removeBlock(relativePos, false);
+                }
+                Vec3 center = pos.getCenter();
+                level.explode(null, level.damageSources().badRespawnPointExplosion(center), null, center, 5.0F, true, Level.ExplosionInteraction.BLOCK);
+                return InteractionResult.SUCCESS_SERVER;
+            } else if (state.getValue(OCCUPIED)) {
                 if (!this.kickVillagerOutOfBed(level, pos)) {
                     player.displayClientMessage(Component.translatable("block.minecraft.bed.occupied"), true);
                 }
