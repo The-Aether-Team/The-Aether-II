@@ -12,6 +12,7 @@ import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -62,6 +63,8 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onMiningSpeed);
         bus.addListener(AetherIIEventListeners::onPlayerCriticalHitAttack);
         bus.addListener(AetherIIEventListeners::onPlayerAdvancementProgression);
+        bus.addListener(AetherIIEventListeners::onPlayerSetSpawn);
+        bus.addListener(AetherIIEventListeners::canPlayerSleep);
         bus.addListener(AetherIIEventListeners::onPlayersFinishSleeping);
         bus.addListener(AetherIIEventListeners::onArmorDamaged);
         bus.addListener(AetherIIEventListeners::onPlayerMount);
@@ -209,6 +212,25 @@ public class AetherIIEventListeners {
         AdvancementHolder advancementHolder = event.getAdvancement();
 
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).progressAdvancement(player, advancementHolder);
+    }
+
+    public static void onPlayerSetSpawn(PlayerSetSpawnEvent event) {
+        Player player = event.getEntity();
+        BlockPos pos = event.getNewSpawn();
+
+        if (PlayerHooks.cancelBedrollSpawn(player, pos)) {
+            event.setCanceled(true);
+        }
+    }
+
+    public static void canPlayerSleep(CanPlayerSleepEvent event) {
+        ServerPlayer player = event.getEntity();
+        Level level = event.getLevel();
+        BlockPos pos = event.getPos();
+        BlockState state = event.getState();
+        Player.BedSleepingProblem vanillaProblem = event.getVanillaProblem();
+
+        event.setProblem(PlayerHooks.handleBedrollSleeping(player, level, pos, state, vanillaProblem));
     }
 
     public static void onPlayersFinishSleeping(SleepFinishedTimeEvent event) {

@@ -561,6 +561,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATROOT_HANGING_SIGN.get());
                 output.accept(AetherIIBlocks.WISPROOT_SIGN.get());
                 output.accept(AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
+                output.accept(AetherIIBlocks.CLOUDWOOL_BEDROLL.get());
                 output.accept(AetherIIBlocks.SKYROOT_BED.get());
                 output.accept(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
                 output.accept(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());

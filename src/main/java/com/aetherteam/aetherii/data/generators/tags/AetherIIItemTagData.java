@@ -579,7 +579,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.HESPEROSE.asItem(),
                 AetherIIBlocks.TARABLOOM.asItem()
         );
-        this.tag(ItemTags.BEDS).add(AetherIIBlocks.SKYROOT_BED.asItem());
+        this.tag(ItemTags.BEDS).add(
+                AetherIIBlocks.CLOUDWOOL_BEDROLL.asItem(),
+                AetherIIBlocks.SKYROOT_BED.asItem()
+        );
         this.tag(ItemTags.SIGNS).add(
                 AetherIIBlocks.SKYROOT_SIGN.asItem(),
                 AetherIIBlocks.GREATROOT_SIGN.asItem(),
