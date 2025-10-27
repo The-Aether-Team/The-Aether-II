@@ -40,7 +40,7 @@ public record DamageTypeParticlePacket(int entityID, SimpleParticleType particle
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             Entity entity = Minecraft.getInstance().player.level().getEntity(payload.entityID());
             if (entity != null) {
-                ((ParticleEngineAccessor) Minecraft.getInstance().particleEngine).aether_ii$getTrackingEmitters().add(new ConfigurableTrackingEmitter(Minecraft.getInstance().level, entity, payload.particleType(), 1, 10));
+                ((ParticleEngineAccessor) Minecraft.getInstance().particleEngine).aether_ii$getTrackingEmitters().add(new ConfigurableTrackingEmitter(Minecraft.getInstance().level, entity, payload.particleType(), 1, 8));
             }
         }
     }
