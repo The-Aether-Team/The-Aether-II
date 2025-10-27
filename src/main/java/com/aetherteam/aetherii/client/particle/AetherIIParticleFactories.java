@@ -96,11 +96,13 @@ public class AetherIIParticleFactories {
         });
         event.registerSpriteSet(AetherIIParticleTypes.IRRADIATION.get(), IrradiationParticle.Factory::new);
 
-        event.registerSpriteSet(AetherIIParticleTypes.SLASH_ATTACK.get(), DamageTypeParticle.Provider::new);
-        event.registerSpriteSet(AetherIIParticleTypes.IMPACT_ATTACK.get(), DamageTypeParticle.Provider::new);
-        event.registerSpriteSet(AetherIIParticleTypes.PIERCE_ATTACK.get(), DamageTypeParticle.Provider::new);
-        event.registerSpriteSet(AetherIIParticleTypes.ZEPHYR_SNOWFLAKE.get(), SnowflakeParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.SLASH_DAMAGE.get(), DamageTypeParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.IMPACT_DAMAGE.get(), DamageTypeParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.PIERCE_DAMAGE.get(), DamageTypeParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.SWEEP_ATTACK.get(), BlueAttackSweepParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.SHOCK_ATTACK.get(), YellowAttackShockParticle.Provider::new);
 
+        event.registerSpriteSet(AetherIIParticleTypes.ZEPHYR_SNOWFLAKE.get(), SnowflakeParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.TEMPEST_SMOKE.get(), TempestSmokeParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.MOA_HUNGRY.get(), HeartParticle.Provider::new);
     }
