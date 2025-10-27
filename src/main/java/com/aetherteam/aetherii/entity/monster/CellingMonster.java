@@ -82,9 +82,13 @@ public class CellingMonster extends Monster {
     @Override
     protected void customServerAiStep(ServerLevel p_376725_) {
         super.customServerAiStep(p_376725_);
-
         ProfilerFiller profilerfiller = Profiler.get();
         profilerfiller.push("cellingAI");
+        this.cellingTick();
+        profilerfiller.pop();
+    }
+
+    protected void cellingTick() {
 
         boolean flag = this.moveControl instanceof CellingMoveControl && ((CellingMoveControl) this.moveControl).isWalkableUpper();
         boolean flag2 = this.moveControl.hasWanted() && this.moveControl.getWantedY() - this.getY() > 0;
@@ -164,7 +168,6 @@ public class CellingMonster extends Monster {
                 this.setCellRotation(new Quaternionf());
             }
         }
-        profilerfiller.pop();
 
     }
 

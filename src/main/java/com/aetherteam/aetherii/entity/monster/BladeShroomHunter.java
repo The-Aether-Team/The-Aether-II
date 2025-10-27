@@ -28,6 +28,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import org.joml.Quaternionf;
 
 import java.util.EnumSet;
 import java.util.function.IntFunction;
@@ -120,11 +121,15 @@ public class BladeShroomHunter extends CellingMonster {
             } else if (this.getState() == State.IDLING) {
                 --this.hideCooldownTime;
             }
-            if (this.getState() == State.HIDING && this.getTarget() != null) {
+
+            boolean changeToUnburryStateFlag = this.getTarget() != null && !this.getCellRotation().equals(new Quaternionf());
+            boolean changeToBurryStateFlag = !this.isPassenger() && this.getTarget() == null && this.onGround();
+
+            if (this.getState() == State.HIDING && changeToUnburryStateFlag) {
                 this.setState(State.UNBURY);
                 this.burryTime = 0;
                 this.hideCooldownTime = this.pickNextHideCooldownTime();
-            } else if (this.getState() == State.IDLING && this.getTarget() == null && this.hideCooldownTime <= 0) {
+            } else if (this.getState() == State.IDLING && changeToBurryStateFlag && this.hideCooldownTime <= 0) {
                 this.setState(State.BURY_START);
                 this.burryTime = 0;
                 this.hideCooldownTime = this.pickNextHideCooldownTime();
@@ -138,6 +143,15 @@ public class BladeShroomHunter extends CellingMonster {
                 this.setState(State.IDLING);
             }
         }
+    }
+
+    @Override
+    public boolean startRiding(Entity entity, boolean force) {
+        boolean flag = super.startRiding(entity, force);
+        if (flag) {
+            this.setState(State.IDLING);
+        }
+        return flag;
     }
 
     @Override
@@ -159,7 +173,7 @@ public class BladeShroomHunter extends CellingMonster {
     }
 
     private int pickNextHideCooldownTime() {
-        return this.random.nextInt(20 * 30) + 20 * 30;
+        return this.random.nextInt(20 * 10) + 20 * 10;
     }
 
     private void setupAnimationStates() {
