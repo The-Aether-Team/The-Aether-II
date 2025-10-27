@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.network.packet.clientbound;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.particle.ConfigurableTrackingEmitter;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.ParticleEngineAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -38,7 +40,7 @@ public record DamageTypeParticlePacket(int entityID, SimpleParticleType particle
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             Entity entity = Minecraft.getInstance().player.level().getEntity(payload.entityID());
             if (entity != null) {
-                Minecraft.getInstance().particleEngine.createTrackingEmitter(entity, payload.particleType(), 1);
+                ((ParticleEngineAccessor) Minecraft.getInstance().particleEngine).aether_ii$getTrackingEmitters().add(new ConfigurableTrackingEmitter(Minecraft.getInstance().level, entity, payload.particleType(), 1, 10));
             }
         }
     }
