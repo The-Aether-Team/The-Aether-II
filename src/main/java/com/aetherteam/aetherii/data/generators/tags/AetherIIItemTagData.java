@@ -304,7 +304,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_AXE.get(),
                 AetherIIItems.GRAVITITE_AXE.get()
         );
-        this.tag(AetherIITags.Items.DOUBLE_DROPS).add(
+        this.tag(AetherIITags.Items.DOUBLE_DROPS).addTag(AetherIITags.Items.CLOUDWOOL).add(
                 AetherIIItems.SKYROOT_STICK.get(),
                 AetherIIItems.SKYROOT_PINECONE.get(),
                 AetherIIItems.AMBROSIUM_SHARD.get(),
