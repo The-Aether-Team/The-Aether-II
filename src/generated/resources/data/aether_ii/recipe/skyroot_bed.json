@@ -2,12 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "C": "aether_ii:cloudtwine",
+    "P": "#aether_ii:planks_crafting",
     "W": "#minecraft:wool"
   },
   "pattern": [
     "WWW",
-    "CCC"
+    "PPP"
   ],
   "result": {
     "count": 1,
