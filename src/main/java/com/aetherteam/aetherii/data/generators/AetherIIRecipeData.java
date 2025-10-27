@@ -939,11 +939,10 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("# #")
                 .unlockedBy(getHasName(AetherIIBlocks.SKYROOT_LADDER.get()), has(AetherIITags.Items.RODS_SKYROOT))
                 .save(this.output);
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.CLOUDWOOL_BEDROLL.get(), 1)
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.CLOUDWOOL_BEDROLL.get(), 2)
                 .define('W', ItemTags.WOOL)
                 .define('C', AetherIIItems.CLOUDTWINE)
-                .pattern("WWW")
-                .pattern("CCC")
+                .pattern("WCW")
                 .unlockedBy("has_wool", has(ItemTags.WOOL))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_BED.get(), 1)

@@ -6,11 +6,10 @@
     "W": "#minecraft:wool"
   },
   "pattern": [
-    "WWW",
-    "CCC"
+    "WCW"
   ],
   "result": {
-    "count": 1,
+    "count": 2,
     "id": "aether_ii:cloudwool_bedroll"
   }
 }
