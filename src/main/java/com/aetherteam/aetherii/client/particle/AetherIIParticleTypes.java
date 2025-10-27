@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.particle;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.particle.options.AttackShockParticleOption;
+import com.aetherteam.aetherii.client.particle.options.AttackStabParticleOption;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
@@ -52,6 +53,7 @@ public class AetherIIParticleTypes {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> PIERCE_DAMAGE = PARTICLES.register("pierce_damage", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SWEEP_ATTACK = PARTICLES.register("sweep_attack", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, ParticleType<AttackShockParticleOption>> SHOCK_ATTACK = register("shock_attack", false, p -> AttackShockParticleOption.CODEC, p -> AttackShockParticleOption.STREAM_CODEC);
+    public static final DeferredHolder<ParticleType<?>, ParticleType<AttackStabParticleOption>> STAB_ATTACK = register("stab_attack", false, p -> AttackStabParticleOption.CODEC, p -> AttackStabParticleOption.STREAM_CODEC);
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> TEMPEST_SMOKE = PARTICLES.register("tempest_smoke", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MOA_HUNGRY = PARTICLES.register("moa_hungry", () -> new SimpleParticleType(false));

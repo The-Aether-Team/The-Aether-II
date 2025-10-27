@@ -46,6 +46,7 @@ public class AetherIIParticleData extends ParticleDescriptionProvider {
         this.sprite(AetherIIParticleTypes.PIERCE_DAMAGE.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "pierce_damage"));
         this.spriteSet(AetherIIParticleTypes.SWEEP_ATTACK.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sweep_attack"), 8, false);
         this.spriteSet(AetherIIParticleTypes.SHOCK_ATTACK.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "shock_attack"), 4, false);
+        this.spriteSet(AetherIIParticleTypes.STAB_ATTACK.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "stab_attack"), 10, false);
 
         this.spriteSet(AetherIIParticleTypes.TEMPEST_SMOKE.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tempest_smoke"), 12, false);
         this.sprite(AetherIIParticleTypes.MOA_HUNGRY.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_hungry"));

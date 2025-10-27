@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.mixin.mixins.client.accessor;
 
-import net.minecraft.client.gui.screens.inventory.EffectsInInventory;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.particle.TrackingEmitter;
 import org.spongepowered.asm.mixin.Mixin;

@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.mixin;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.particle.options.AttackShockParticleOption;
+import com.aetherteam.aetherii.client.particle.options.AttackStabParticleOption;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
@@ -10,6 +11,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.ItemRendererAccessor;
 import com.aetherteam.aetherii.network.packet.clientbound.AttackShockParticlePacket;
+import com.aetherteam.aetherii.network.packet.clientbound.AttackStabParticlePacket;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexMultiConsumer;
@@ -125,8 +127,8 @@ public class MixinHooks {
                     }
                 }
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.PLAYER_ATTACK_STAB.get(), player.getSoundSource(), 1.0F, 1.0F);
-                stabAttack(player);
             }
+            stabAttack(player, target);
         }
     }
 
@@ -145,11 +147,11 @@ public class MixinHooks {
         return radialDistance <= radialBounds && forwardDistance <= forwardBounds;
     }
 
-    private static void stabAttack(Player player) {
-        double d0 = -Mth.sin(player.getYRot() * (float) (Math.PI / 180.0)) * 0.5;
-        double d1 = Mth.cos(player.getYRot() * (float) (Math.PI / 180.0)) * 0.5;
-        if (player.level() instanceof ServerLevel serverLevel) {
-            serverLevel.sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + d0, player.getY(0.5), player.getZ() + d1, 0, d0, 0.0, d1, 0.0);//todo
+    private static void stabAttack(Player player, Entity target) {
+        if (player instanceof ServerPlayer serverPlayer) {
+            Vector3f playerPos = new Vector3f((float) player.position().x(), (float) player.getEyeY(), (float) player.position().z());
+            Vector3f targetPos = target.position().toVector3f();
+            PacketDistributor.sendToPlayer(serverPlayer, new AttackStabParticlePacket(playerPos, targetPos));
         }
     }
 

@@ -15,7 +15,7 @@ public class YellowAttackShockParticle extends TextureSheetParticle {
     public YellowAttackShockParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, float rotation, float shade, SpriteSet sprites) {
         super(level, x, y, z);
         this.sprites = sprites;
-        this.lifetime = 3;
+        this.lifetime = 4;
         this.rCol = shade;
         this.gCol = shade;
         this.bCol = shade;
