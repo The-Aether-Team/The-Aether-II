@@ -65,6 +65,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onPlayerAdvancementProgression);
         bus.addListener(AetherIIEventListeners::onPlayerSetSpawn);
         bus.addListener(AetherIIEventListeners::canPlayerSleep);
+        bus.addListener(AetherIIEventListeners::onPlayerWakeUp);
         bus.addListener(AetherIIEventListeners::onPlayersFinishSleeping);
         bus.addListener(AetherIIEventListeners::onArmorDamaged);
         bus.addListener(AetherIIEventListeners::onPlayerMount);
@@ -231,6 +232,12 @@ public class AetherIIEventListeners {
         Player.BedSleepingProblem vanillaProblem = event.getVanillaProblem();
 
         event.setProblem(PlayerHooks.handleBedrollSleeping(player, level, pos, state, vanillaProblem));
+    }
+
+    public static void onPlayerWakeUp(PlayerWakeUpEvent event) {
+        Player player = event.getEntity();
+
+        PlayerHooks.breakBedrollAfterSleeping(player);
     }
 
     public static void onPlayersFinishSleeping(SleepFinishedTimeEvent event) {

@@ -222,6 +222,17 @@ public class PlayerHooks {
         return vanillaProblem;
     }
 
+    public static void breakBedrollAfterSleeping(Player player) {
+        Level level = player.level();
+        BlockPos pos = player.getOnPos();
+        BlockState state = level.getBlockState(pos);
+        if (level instanceof ServerLevel) {
+            if (state.is(AetherIIBlocks.CLOUDWOOL_BEDROLL)) {
+                level.destroyBlock(pos, false);
+            }
+        }
+    }
+
     public static void resetAetherDayAndWeather(LevelAccessor level, long newTime) {
         if (level instanceof ServerLevel serverLevel) {
             if (serverLevel.dimension().location().getNamespace().equals(AetherII.MODID)) {
