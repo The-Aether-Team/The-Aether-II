@@ -28,7 +28,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import org.joml.Quaternionf;
 
 import java.util.EnumSet;
 import java.util.function.IntFunction;
@@ -122,7 +121,7 @@ public class BladeShroomHunter extends CellingMonster {
                 --this.hideCooldownTime;
             }
 
-            boolean changeToUnburryStateFlag = this.getTarget() != null && !this.getCellRotation().equals(new Quaternionf());
+            boolean changeToUnburryStateFlag = this.getTarget() != null && this.onGround();
             boolean changeToBurryStateFlag = !this.isPassenger() && this.getTarget() == null && this.onGround();
 
             if (this.getState() == State.HIDING && changeToUnburryStateFlag) {
