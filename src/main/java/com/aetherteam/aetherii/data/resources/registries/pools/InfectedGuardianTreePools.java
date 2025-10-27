@@ -359,20 +359,14 @@ public class InfectedGuardianTreePools {
         context.register(STAIRCASES_FLOOR_2, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/staircases/floor_2/staircase_01"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/staircases/floor_2/staircase_02"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/staircases/floor_2/staircase_03"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/staircases/floor_2/staircase_04"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/staircases/floor_2"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(STAIRCASES_BOSS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/staircases/boss/staircase_01"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/staircases/boss/staircase_02"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/staircases/boss/staircase_03"), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/staircases/boss/staircase_04"), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/staircases/boss"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
