@@ -164,10 +164,10 @@ public class BladeShroomHunterModel<T extends BladeShroomHunterRenderState> exte
         this.unburryAnimation.apply(entity.unburyAnimationState, entity.ageInTicks, 1.0F);
         this.rustleAnimation.apply(entity.rustleAnimationState, entity.ageInTicks, 1.0F);
 
-        this.leg_back_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
-        this.leg_back_left2.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
-        this.leg_front_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
-        this.leg_front_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
+        this.leg_back_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 0.6F * entity.walkAnimationSpeed;
+        this.leg_back_left2.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 0.6F * entity.walkAnimationSpeed;
+        this.leg_front_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 0.6F * entity.walkAnimationSpeed;
+        this.leg_front_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 0.6F * entity.walkAnimationSpeed;
 
     }
 }
