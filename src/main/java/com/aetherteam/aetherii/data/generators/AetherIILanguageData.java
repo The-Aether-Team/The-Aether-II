@@ -1174,6 +1174,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.SKEPHID, "Skephid");
         this.addEntityType(AetherIIEntityTypes.ARKENIUM_TALUTON, "Arkenium Taluton");
         this.addEntityType(AetherIIEntityTypes.GRAVITITE_TALUTON, "Gravitite Taluton");
+        this.addEntityType(AetherIIEntityTypes.BLADE_SHROOM_HUNTER, "BladeShroom Hunter");
 
         // Projectile
         this.addEntityType(AetherIIEntityTypes.HOLYSTONE_ROCK, "Holystone Rock");

@@ -137,6 +137,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.SKEPHID.get(), SkephidRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), ArkeniumTalutonRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), GravititeTalutonRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.BLADE_SHROOM_HUNTER.get(), BladeShroomHunterRenderer::new);
 
         // NPCs
         event.registerEntityRenderer(AetherIIEntityTypes.EDWARD.get(), EdwardRenderer::new);
@@ -213,6 +214,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.SKEPHID, SkephidModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.ARKENIUM_TALUTON, ArkeniumTalutonModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_TALUTON, GravititeTalutonModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.BLADE_SHROOM_HUNTER, BladeShroomHunterModel::createBodyLayer);
 
         // Projectiles
         event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_DEBRIS_SHOT, GravititeDebrisShotModel::createBodyLayer);
