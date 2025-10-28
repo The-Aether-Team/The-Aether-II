@@ -927,15 +927,15 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
             .put(() -> AetherIIBlocks.AMBEROOT_WOOD, () -> AetherIIBlocks.STRIPPED_SKYROOT_WOOD)
             .put(() -> AetherIIBlocks.AMBEROOT_TRUNK, () -> AetherIIBlocks.STRIPPED_SKYROOT_TRUNK)
             .put(() -> AetherIIBlocks.GUARDIAN_LOG, () -> AetherIIBlocks.STRIPPED_GUARDIAN_LOG)
+            .put(() -> AetherIIBlocks.GUARDIAN_LOG_SLAB, () -> AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB)
             .put(() -> AetherIIBlocks.GUARDIAN_WOOD, () -> AetherIIBlocks.STRIPPED_GUARDIAN_WOOD)
+            .put(() -> AetherIIBlocks.GUARDIAN_WOOD_SLAB, () -> AetherIIBlocks.STRIPPED_GUARDIAN_WOOD_SLAB)
             .put(() -> AetherIIBlocks.GUARDIAN_TRUNK, () -> AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK)
-            .put(() -> AetherIIBlocks.DENSE_GUARDIAN_LOG, () -> AetherIIBlocks.STRIPPED_GUARDIAN_LOG)
-            .put(() -> AetherIIBlocks.DENSE_GUARDIAN_WOOD, () -> AetherIIBlocks.STRIPPED_GUARDIAN_WOOD)
             .put(() -> AetherIIBlocks.INFECTED_LOG, () -> AetherIIBlocks.STRIPPED_INFECTED_LOG)
+            .put(() -> AetherIIBlocks.INFECTED_LOG_SLAB, () -> AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB)
             .put(() -> AetherIIBlocks.INFECTED_WOOD, () -> AetherIIBlocks.STRIPPED_INFECTED_WOOD)
+            .put(() -> AetherIIBlocks.INFECTED_WOOD_SLAB, () -> AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB)
             .put(() -> AetherIIBlocks.INFECTED_TRUNK, () -> AetherIIBlocks.STRIPPED_INFECTED_TRUNK)
-            .put(() -> AetherIIBlocks.DENSE_INFECTED_LOG, () -> AetherIIBlocks.STRIPPED_INFECTED_LOG)
-            .put(() -> AetherIIBlocks.DENSE_INFECTED_WOOD, () -> AetherIIBlocks.STRIPPED_INFECTED_WOOD)
             .build();
 
     /**
