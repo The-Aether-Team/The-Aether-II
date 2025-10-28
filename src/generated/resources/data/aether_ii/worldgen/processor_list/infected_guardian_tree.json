@@ -88,22 +88,6 @@
           "input_predicate": {
             "block": "aether_ii:guardian_roots",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
-          },
-          "location_predicate": {
-            "predicate_type": "minecraft:always_true"
-          },
-          "output_state": {
-            "Name": "aether_ii:dim_guardian_roots",
-            "Properties": {
-              "reinforced": "false"
-            }
-          }
-        },
-        {
-          "input_predicate": {
-            "block": "aether_ii:guardian_roots",
-            "predicate_type": "minecraft:random_block_match",
             "probability": 0.025
           },
           "location_predicate": {
@@ -130,19 +114,6 @@
             "Properties": {
               "reinforced": "false"
             }
-          }
-        },
-        {
-          "input_predicate": {
-            "block": "aether_ii:locked_guardian_roots",
-            "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
-          },
-          "location_predicate": {
-            "predicate_type": "minecraft:always_true"
-          },
-          "output_state": {
-            "Name": "aether_ii:locked_dim_guardian_roots"
           }
         },
         {

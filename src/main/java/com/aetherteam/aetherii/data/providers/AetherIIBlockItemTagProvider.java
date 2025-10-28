@@ -188,8 +188,7 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get(),
                 AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get(),
                 AetherIIBlocks.LOCKED_INFECTED_WOOD.get(),
-                AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD.get(),
-                AetherIIBlocks.LOCKED_INFECTED_ROOTS.get()
+                AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD.get()
         );
     }
 

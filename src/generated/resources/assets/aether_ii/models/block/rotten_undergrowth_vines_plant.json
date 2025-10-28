@@ -1,7 +1,0 @@
-{
-  "parent": "aether_ii:block/template_undergrowth_vines",
-  "textures": {
-    "particle": "aether_ii:block/rotten_undergrowth_vines_plant",
-    "vine": "aether_ii:block/rotten_undergrowth_vines_plant"
-  }
-}

@@ -48,10 +48,8 @@ public class AetherIIProcessorLists {
                 new DensityFunctionProcessor(AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.GUARDIAN_ROOTS.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEON_GUARDIAN_ROOTS)),
                 new DensityFunctionProcessor(AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEON_GUARDIAN_ROOTS)),
                 new RuleProcessor(ImmutableList.of(
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.GUARDIAN_ROOTS.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.DIM_GUARDIAN_ROOTS.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.GUARDIAN_ROOTS.get(), 0.025F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.GUARDIAN_ROOTS.get(), 0.01F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.GUARDIAN_LAMP.get().defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.LOCKED_DIM_GUARDIAN_ROOTS.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get(), 0.025F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.LOCKED_LUCENT_GUARDIAN_ROOTS.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get(), 0.01F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.LOCKED_GUARDIAN_LAMP.get().defaultBlockState()),
 
