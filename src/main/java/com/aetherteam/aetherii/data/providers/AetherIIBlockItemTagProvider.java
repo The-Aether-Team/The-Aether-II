@@ -184,11 +184,7 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.ICESTONE_PILLAR.get()
         );
         this.tag(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS, AetherIITags.Items.LOCKED_DUNGEON_BLOCKS).add(
-                AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get(),
-                AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get(),
-                AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get(),
-                AetherIIBlocks.LOCKED_INFECTED_WOOD.get(),
-                AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD.get()
+
         );
     }
 

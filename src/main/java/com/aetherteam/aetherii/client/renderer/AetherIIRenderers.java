@@ -277,9 +277,7 @@ public class AetherIIRenderers {
                 AetherIIBlocks.BLOOMING_ARILUM,
                 AetherIIBlocks.BLOOMING_ARILUM_PLANT,
                 AetherIIBlocks.LUCENT_GUARDIAN_ROOTS,
-                AetherIIBlocks.GUARDIAN_LAMP,
-                AetherIIBlocks.LOCKED_LUCENT_GUARDIAN_ROOTS,
-                AetherIIBlocks.LOCKED_GUARDIAN_LAMP);
+                AetherIIBlocks.GUARDIAN_LAMP);
 
         getModels(event.getBakingResult().blockStateModels(), fastBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new FastModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));

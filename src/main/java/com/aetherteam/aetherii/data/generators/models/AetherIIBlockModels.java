@@ -136,12 +136,6 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrunk(AetherIIBlocks.MOSSY_WISPROOT_TRUNK.get(), AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
         this.createTrunk(AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get(), AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
         this.createTrunk(AetherIIBlocks.AMBEROOT_TRUNK.get(), AetherIIBlocks.AMBEROOT_LOG.get());
-        this.createTrunk(AetherIIBlocks.GUARDIAN_TRUNK.get(), AetherIIBlocks.GUARDIAN_LOG.get());
-        this.createTrunk(AetherIIBlocks.DENSE_GUARDIAN_TRUNK.get(), AetherIIBlocks.DENSE_GUARDIAN_LOG.get());
-        this.createTrunk(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK.get(), AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get());
-        this.createTrunk(AetherIIBlocks.INFECTED_TRUNK.get(), AetherIIBlocks.INFECTED_LOG.get());
-        this.createTrunk(AetherIIBlocks.DENSE_INFECTED_TRUNK.get(), AetherIIBlocks.DENSE_INFECTED_LOG.get());
-        this.createTrunk(AetherIIBlocks.STRIPPED_INFECTED_TRUNK.get(), AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
 
         // Leaves
         this.createLeavesWithPiles(AetherIIBlocks.SKYROOT_LEAVES.get(), AetherIIBlocks.SKYROOT_LEAF_PILE.get());
@@ -330,29 +324,32 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createGlassBlocks(AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS.get(), AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get());
 
         // Infected Guardian Tree
-        // Guardian Dungeon Blocks
         this.woodProvider(AetherIIBlocks.GUARDIAN_LOG.get()).logWithHorizontal(AetherIIBlocks.GUARDIAN_LOG.get()).wood(AetherIIBlocks.GUARDIAN_WOOD.get());
-        this.woodProviderColumn(AetherIIBlocks.DENSE_GUARDIAN_LOG.get(), AetherIIBlocks.GUARDIAN_LOG.get()).logWithHorizontal(AetherIIBlocks.DENSE_GUARDIAN_LOG.get()).wood(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get());
         this.woodProvider(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get()).logWithHorizontal(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get()).wood(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get());
+        this.woodProvider(AetherIIBlocks.DENSE_GUARDIAN_LOG.get()).logWithHorizontal(AetherIIBlocks.DENSE_GUARDIAN_LOG.get()).wood(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get()); //TODO: locked creative icon
+        this.woodProvider(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_LOG.get()).logWithHorizontal(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_LOG.get()).wood(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_WOOD.get());
+
+        this.woodProvider(AetherIIBlocks.INFECTED_LOG.get()).logWithHorizontal(AetherIIBlocks.INFECTED_LOG.get()).wood(AetherIIBlocks.INFECTED_WOOD.get());
+        this.woodProvider(AetherIIBlocks.STRIPPED_INFECTED_LOG.get()).logWithHorizontal(AetherIIBlocks.STRIPPED_INFECTED_LOG.get()).wood(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
+        this.woodProvider(AetherIIBlocks.DENSE_INFECTED_LOG.get()).logWithHorizontal(AetherIIBlocks.DENSE_INFECTED_LOG.get()).wood(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
+        this.woodProvider(AetherIIBlocks.DENSE_STRIPPED_INFECTED_LOG.get()).logWithHorizontal(AetherIIBlocks.DENSE_STRIPPED_INFECTED_LOG.get()).wood(AetherIIBlocks.DENSE_STRIPPED_INFECTED_WOOD.get());
+
+        this.createTrunk(AetherIIBlocks.GUARDIAN_TRUNK.get(), AetherIIBlocks.GUARDIAN_LOG.get());
+        this.createTrunk(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK.get(), AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get());
+        this.createTrunk(AetherIIBlocks.INFECTED_TRUNK.get(), AetherIIBlocks.INFECTED_LOG.get());
+        this.createTrunk(AetherIIBlocks.STRIPPED_INFECTED_TRUNK.get(), AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
+
         this.createTrivialCube(AetherIIBlocks.GUARDIAN_ROOTS.get());
+        this.createTrivialCube(AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS.get());
+        this.createTrivialCube(AetherIIBlocks.DENSE_GUARDIAN_ROOTS.get());
         this.createTrivialCube(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get());
         this.createTrivialCube(AetherIIBlocks.GUARDIAN_LAMP.get());
+
         this.createCutoutMippedCube(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
+        this.createTrivialCube(AetherIIBlocks.DENSE_UNDERGROWTH_LEAVES.get());
         this.createUndergrowthVines(AetherIIBlocks.UNDERGROWTH_LIANA.get());
         this.createUndergrowthVines(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT.get());
         this.registerSimpleFlatItemModel(AetherIIBlocks.UNDERGROWTH_LIANA.get(), "_plant");
-        this.createLockedDungeonBlock(AetherIIBlocks.GUARDIAN_WOOD.get(), AetherIIBlocks.GUARDIAN_LOG.get(), AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get());
-        this.createLockedDungeonBlock(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get(), AetherIIBlocks.DENSE_GUARDIAN_LOG.get(), AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get());
-        this.createLockedDungeonBlock(AetherIIBlocks.GUARDIAN_ROOTS.get(), AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get());
-        this.createLockedDungeonBlock(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get(), AetherIIBlocks.LOCKED_LUCENT_GUARDIAN_ROOTS.get());
-        this.createLockedDungeonBlock(AetherIIBlocks.GUARDIAN_LAMP.get(), AetherIIBlocks.LOCKED_GUARDIAN_LAMP.get());
-
-        // Infected Dungeon Blocks
-        this.woodProvider(AetherIIBlocks.INFECTED_LOG.get()).logWithHorizontal(AetherIIBlocks.INFECTED_LOG.get()).wood(AetherIIBlocks.INFECTED_WOOD.get());
-        this.woodProviderColumn(AetherIIBlocks.DENSE_INFECTED_LOG.get(), AetherIIBlocks.INFECTED_LOG.get()).logWithHorizontal(AetherIIBlocks.DENSE_INFECTED_LOG.get()).wood(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
-        this.woodProvider(AetherIIBlocks.STRIPPED_INFECTED_LOG.get()).logWithHorizontal(AetherIIBlocks.STRIPPED_INFECTED_LOG.get()).wood(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
-        this.createLockedDungeonBlock(AetherIIBlocks.INFECTED_WOOD.get(), AetherIIBlocks.INFECTED_LOG.get(), AetherIIBlocks.LOCKED_INFECTED_WOOD.get());
-        this.createLockedDungeonBlock(AetherIIBlocks.DENSE_INFECTED_WOOD.get(), AetherIIBlocks.DENSE_INFECTED_LOG.get(), AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD.get());
 
         // Rotshroom Blocks
         this.createRotshroomCluster(AetherIIBlocks.ROTSHROOM_CLUSTER.get());

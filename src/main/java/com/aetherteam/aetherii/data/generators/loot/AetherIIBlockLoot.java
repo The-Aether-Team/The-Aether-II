@@ -529,29 +529,26 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.GUARDIAN_LOG.get());
         this.dropSelf(AetherIIBlocks.GUARDIAN_WOOD.get());
         this.dropSelf(AetherIIBlocks.GUARDIAN_TRUNK.get());
-        this.dropSelf(AetherIIBlocks.DENSE_GUARDIAN_LOG.get());
-        this.dropSelf(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get());
-        this.dropSelf(AetherIIBlocks.DENSE_GUARDIAN_TRUNK.get());
+
         this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK.get());
+
+        this.dropSelf(AetherIIBlocks.INFECTED_LOG.get());
+        this.dropSelf(AetherIIBlocks.INFECTED_WOOD.get());
+        this.dropSelf(AetherIIBlocks.INFECTED_TRUNK.get());
+
+        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_TRUNK.get());
+
         this.dropSelf(AetherIIBlocks.GUARDIAN_ROOTS.get());
+        this.dropSelf(AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS.get());
         this.dropSelf(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get());
         this.dropSelf(AetherIIBlocks.GUARDIAN_LAMP.get());
         this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
         this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_LIANA.get());
         this.otherWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT.get(), AetherIIBlocks.UNDERGROWTH_LIANA.get());
-
-        // Infected Dungeon Blocks
-        this.dropSelf(AetherIIBlocks.INFECTED_LOG.get());
-        this.dropSelf(AetherIIBlocks.INFECTED_WOOD.get());
-        this.dropSelf(AetherIIBlocks.INFECTED_TRUNK.get());
-        this.dropSelf(AetherIIBlocks.DENSE_INFECTED_LOG.get());
-        this.dropSelf(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
-        this.dropSelf(AetherIIBlocks.DENSE_INFECTED_TRUNK.get());
-        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
-        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
-        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_TRUNK.get());
 
         // Rotshroom Blocks
         this.dropSelf(AetherIIBlocks.ROTSHROOM_CLUSTER.get());

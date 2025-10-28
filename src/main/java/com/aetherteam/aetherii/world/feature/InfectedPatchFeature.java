@@ -124,7 +124,7 @@ public class InfectedPatchFeature extends Feature<InfectedPatchConfiguration> { 
         if (infection != null) {
             Block block = BuiltInRegistries.BLOCK.getValue(infection.block());
             if (block != null) {
-                return block.defaultBlockState().hasProperty(AetherIIBlockStateProperties.REINFORCED) ? block.defaultBlockState().setValue(AetherIIBlockStateProperties.REINFORCED, true) : block.defaultBlockState();
+                return block.defaultBlockState();
             }
         }
         return level.getBlockState(mutablePos);

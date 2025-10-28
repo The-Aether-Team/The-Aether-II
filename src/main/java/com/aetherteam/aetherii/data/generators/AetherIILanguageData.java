@@ -553,40 +553,44 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE, "Arkenium Framed Scatterglass Pane");
 
         // Infected Guardian Tree
-        // Guardian Dungeon Blocks
+        // Guardian Wood
         this.addBlock(AetherIIBlocks.GUARDIAN_LOG, "Guardian Log");
-        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_LOG, "Dense Guardian Log");
         this.addBlock(AetherIIBlocks.GUARDIAN_WOOD, "Guardian Wood");
-        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_WOOD, "Dense Guardian Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_LOG, "Stripped Guardian Log");
         this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD, "Stripped Guardian Wood");
-        this.addBlock(AetherIIBlocks.GUARDIAN_ROOTS, "Guardian Roots");
-        this.addBlock(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS, "Lucent Guardian Roots");
-        this.addBlock(AetherIIBlocks.GUARDIAN_LAMP, "Guardian Lamp");
-        this.addBlock(AetherIIBlocks.UNDERGROWTH_LEAVES, "Undergrowth Leaves");
-        this.addBlock(AetherIIBlocks.UNDERGROWTH_LIANA, "Undergrowth Liana");
-        this.addBlock(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT, "Undergrowth Liana Plant");
-        this.addBlock(AetherIIBlocks.LOCKED_GUARDIAN_WOOD, "Locked Guardian Wood");
-        this.addBlock(AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD, "Locked Dense Guardian Wood");
-        this.addBlock(AetherIIBlocks.LOCKED_GUARDIAN_ROOTS, "Locked Guardian Roots");
-        this.addBlock(AetherIIBlocks.LOCKED_LUCENT_GUARDIAN_ROOTS, "Locked Lucent Guardian Roots");
-        this.addBlock(AetherIIBlocks.LOCKED_GUARDIAN_LAMP, "Locked Guardian Lamp");
-        this.addBlock(AetherIIBlocks.GUARDIAN_TRUNK, "Guardian Trunk");
-        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_TRUNK, "Dense Guardian Trunk");
-        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK, "Stripped Guardian Trunk");
+        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_LOG, "Dense Guardian Log");
+        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_WOOD, "Dense Guardian Wood");
+        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_LOG, "Dense Stripped Guardian Log");
+        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_WOOD, "Dense Stripped Guardian Wood");
 
-        // Infected Dungeon Blocks
+        // Infected Wood
         this.addBlock(AetherIIBlocks.INFECTED_LOG, "Infected Log");
         this.addBlock(AetherIIBlocks.INFECTED_WOOD, "Infected Wood");
-        this.addBlock(AetherIIBlocks.DENSE_INFECTED_LOG, "Dense Infected Log");
-        this.addBlock(AetherIIBlocks.DENSE_INFECTED_WOOD, "Dense Infected Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG, "Stripped Infected Log");
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD, "Stripped Infected Wood");
-        this.addBlock(AetherIIBlocks.LOCKED_INFECTED_WOOD, "Locked Infected Wood");
-        this.addBlock(AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD, "Locked Dense Infected Wood");
+        this.addBlock(AetherIIBlocks.DENSE_INFECTED_LOG, "Dense Infected Log");
+        this.addBlock(AetherIIBlocks.DENSE_INFECTED_WOOD, "Dense Infected Wood");
+        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_INFECTED_LOG, "Dense Infected Log");
+        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_INFECTED_WOOD, "Dense Infected Wood");
+
+        // Guardian and Infected Trunks
+        this.addBlock(AetherIIBlocks.GUARDIAN_TRUNK, "Guardian Trunk");
+        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK, "Stripped Guardian Trunk");
         this.addBlock(AetherIIBlocks.INFECTED_TRUNK, "Infected Trunk");
-        this.addBlock(AetherIIBlocks.DENSE_INFECTED_TRUNK, "Dense Infected Trunk");
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_TRUNK, "Stripped Infected Trunk");
+
+        // Root Blocks
+        this.addBlock(AetherIIBlocks.GUARDIAN_ROOTS, "Guardian Roots");
+        this.addBlock(AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS, "Unstable Guardian Roots");
+        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_ROOTS, "Dense Guardian Roots");
+        this.addBlock(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS, "Lucent Guardian Roots");
+        this.addBlock(AetherIIBlocks.GUARDIAN_LAMP, "Guardian Lamp");
+
+        // Undergrowth Blocks
+        this.addBlock(AetherIIBlocks.UNDERGROWTH_LEAVES, "Undergrowth Leaves");
+        this.addBlock(AetherIIBlocks.DENSE_UNDERGROWTH_LEAVES, "Dense Undergrowth Leaves");
+        this.addBlock(AetherIIBlocks.UNDERGROWTH_LIANA, "Undergrowth Liana");
+        this.addBlock(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT, "Undergrowth Liana Plant");
 
         // Rotshroom Blocks
         this.addBlock(AetherIIBlocks.ROTSHROOM_CLUSTER, "Rotshroom Cluster");

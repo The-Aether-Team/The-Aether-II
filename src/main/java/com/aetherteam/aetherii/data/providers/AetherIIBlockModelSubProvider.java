@@ -678,6 +678,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.registerSimpleFlatItemModel(rock.asItem());
     }
 
+    public void createLockedDungeonBlock(Block block) {
+        MultiVariant dungeonBlock = plainVariant(ModelLocationUtils.getModelLocation(block));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, dungeonBlock));
+        this.registerSimpleItemModel(block.asItem(), AetherIIModelTemplates.LOCKED_BLOCK_INVENTORY.create(block.asItem(), AetherIITextureMappings.lockedBlockInventory(block), this.modelOutput));
+    }
+
     public void createLockedDungeonBlock(Block baseBlock, Block block) {
         MultiVariant dungeonBlock = plainVariant(ModelLocationUtils.getModelLocation(baseBlock));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, dungeonBlock));
@@ -688,33 +694,6 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant dungeonBlock = plainVariant(ModelLocationUtils.getModelLocation(baseBlock));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, dungeonBlock));
         this.registerSimpleItemModel(block.asItem(), AetherIIModelTemplates.LOCKED_BLOCK_INVENTORY.create(block.asItem(), AetherIITextureMappings.lockedBlockInventory(itemBlock), this.modelOutput));
-    }
-    public void createCornerLog(Block baseBlock, Block block) {
-        TextureMapping mapping = (new TextureMapping())
-                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_left"))
-                .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(baseBlock))
-                .put(TextureSlot.UP, TextureMapping.getBlockTexture(block, "_top"))
-                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(block, "_top"))
-                .put(TextureSlot.EAST, TextureMapping.getBlockTexture(block, "_left"))
-                .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(baseBlock))
-                .put(TextureSlot.WEST, TextureMapping.getBlockTexture(block, "_right"));
-        MultiVariant vertical = plainVariant(ModelTemplates.CUBE.create(block, mapping, this.modelOutput));
-        MultiVariant horizontal = plainVariant(ModelTemplates.CUBE.create(ModelLocationUtils.getModelLocation(block, "_horizontal"), mapping, this.modelOutput));
-        this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(block, vertical, horizontal));
-    }
-
-    public void createCornerLog(Block baseBlock, Block top, Block block) {
-        TextureMapping mapping = (new TextureMapping())
-                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_left"))
-                .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(baseBlock))
-                .put(TextureSlot.UP, TextureMapping.getBlockTexture(top, "_top"))
-                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(top, "_top"))
-                .put(TextureSlot.EAST, TextureMapping.getBlockTexture(block, "_left"))
-                .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(baseBlock))
-                .put(TextureSlot.WEST, TextureMapping.getBlockTexture(block, "_right"));
-        MultiVariant vertical = plainVariant(ModelTemplates.CUBE.create(block, mapping, this.modelOutput));
-        MultiVariant horizontal = plainVariant(ModelTemplates.CUBE.create(ModelLocationUtils.getModelLocation(block, "_horizontal"), mapping, this.modelOutput));
-        this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(block, vertical, horizontal));
     }
 
     public void createUndergrowthVines(Block block) {
