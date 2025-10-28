@@ -539,8 +539,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get());
         this.dropSelf(AetherIIBlocks.GUARDIAN_LAMP.get());
         this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
-        this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_VINES.get());
-        this.otherWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_VINES_PLANT.get(), AetherIIBlocks.UNDERGROWTH_VINES.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_LIANA.get());
+        this.otherWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT.get(), AetherIIBlocks.UNDERGROWTH_LIANA.get());
 
         // Infected Dungeon Blocks
         this.dropSelf(AetherIIBlocks.INFECTED_LOG.get());

@@ -564,8 +564,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS, "Lucent Guardian Roots");
         this.addBlock(AetherIIBlocks.GUARDIAN_LAMP, "Guardian Lamp");
         this.addBlock(AetherIIBlocks.UNDERGROWTH_LEAVES, "Undergrowth Leaves");
-        this.addBlock(AetherIIBlocks.UNDERGROWTH_VINES, "Undergrowth Vines");
-        this.addBlock(AetherIIBlocks.UNDERGROWTH_VINES_PLANT, "Undergrowth Vines Plant");
+        this.addBlock(AetherIIBlocks.UNDERGROWTH_LIANA, "Undergrowth Liana");
+        this.addBlock(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT, "Undergrowth Liana Plant");
         this.addBlock(AetherIIBlocks.LOCKED_GUARDIAN_WOOD, "Locked Guardian Wood");
         this.addBlock(AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD, "Locked Dense Guardian Wood");
         this.addBlock(AetherIIBlocks.LOCKED_GUARDIAN_ROOTS, "Locked Guardian Roots");

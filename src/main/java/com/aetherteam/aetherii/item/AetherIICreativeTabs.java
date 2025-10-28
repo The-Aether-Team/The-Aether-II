@@ -313,7 +313,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get());
                 output.accept(AetherIIBlocks.GUARDIAN_LAMP.get());
                 output.accept(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
-                output.accept(AetherIIBlocks.UNDERGROWTH_VINES.get());
+                output.accept(AetherIIBlocks.UNDERGROWTH_LIANA.get());
                 output.accept(AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get());
                 output.accept(AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get());
                 output.accept(AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get());

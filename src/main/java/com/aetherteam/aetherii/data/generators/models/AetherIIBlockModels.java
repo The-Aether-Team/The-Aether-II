@@ -338,9 +338,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get());
         this.createTrivialCube(AetherIIBlocks.GUARDIAN_LAMP.get());
         this.createCutoutMippedCube(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
-        this.createUndergrowthVines(AetherIIBlocks.UNDERGROWTH_VINES.get());
-        this.createUndergrowthVines(AetherIIBlocks.UNDERGROWTH_VINES_PLANT.get());
-        this.registerSimpleFlatItemModel(AetherIIBlocks.UNDERGROWTH_VINES.get(), "_plant");
+        this.createUndergrowthVines(AetherIIBlocks.UNDERGROWTH_LIANA.get());
+        this.createUndergrowthVines(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT.get());
+        this.registerSimpleFlatItemModel(AetherIIBlocks.UNDERGROWTH_LIANA.get(), "_plant");
         this.createLockedDungeonBlock(AetherIIBlocks.GUARDIAN_WOOD.get(), AetherIIBlocks.GUARDIAN_LOG.get(), AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get());
         this.createLockedDungeonBlock(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get(), AetherIIBlocks.DENSE_GUARDIAN_LOG.get(), AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get());
         this.createLockedDungeonBlock(AetherIIBlocks.GUARDIAN_ROOTS.get(), AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get());
