@@ -319,13 +319,13 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.INFECTED_WOOD_SLAB.get());
                 output.accept(AetherIIBlocks.INFECTED_TRUNK.get());
-                output.accept(AetherIIBlocks.DENSE_INFECTED_LOG.get());
-                output.accept(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
                 output.accept(AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB.get());
                 output.accept(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB.get());
                 output.accept(AetherIIBlocks.STRIPPED_INFECTED_TRUNK.get());
+                output.accept(AetherIIBlocks.DENSE_INFECTED_LOG.get());
+                output.accept(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.DENSE_STRIPPED_INFECTED_LOG.get());
                 output.accept(AetherIIBlocks.DENSE_STRIPPED_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.GUARDIAN_ROOTS.get());
