@@ -209,7 +209,10 @@ public class PlayerHooks {
     }
 
     public static boolean cancelBedrollSpawn(Player player, BlockPos pos) {
-        return player.level().getBlockState(pos).is(AetherIIBlocks.CLOUDWOOL_BEDROLL);
+        if (player != null && pos != null) {
+            return player.level().getBlockState(pos).is(AetherIIBlocks.CLOUDWOOL_BEDROLL);
+        }
+        return false;
     }
 
     public static Player.BedSleepingProblem handleBedrollSleeping(ServerPlayer player, Level level, BlockPos pos, BlockState state, Player.BedSleepingProblem vanillaProblem) {
