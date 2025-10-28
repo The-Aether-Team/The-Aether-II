@@ -562,7 +562,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
             if (this.getControllingPassenger() instanceof Player && this.isFallFlying()) {
                 Vec3 vec31 = this.getLookAngle();
                 Vec3 vec32 = this.getDeltaMovement();
-                this.setDeltaMovement(vec32.add(vec31.x * 0.1D + (vec31.x * 1.5D - vec32.x) * 0.5D, vec31.y * 0.1D + (vec31.y * 1.5D - vec32.y) * 0.5D, vec31.z * 0.1D + (vec31.z * 1.5D - vec32.z) * 0.5D).scale(1));
+                this.setDeltaMovement(vec32.add(vec31.x * 0.1D + (vec31.x * 1.5D - vec32.x) * 0.5D, vec31.y * 0.1D + (vec31.y * 1.5D - vec32.y) * 0.5D, vec31.z * 0.1D + (vec31.z * 1.5D - vec32.z) * 0.5D).scale(0.75));
             }
         }
         this.setFlapCooldown(0); // Causes the flap sound to be played in Moa#riderTick().
@@ -1088,7 +1088,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     @Override
     public float getSteeringSpeed() {
         Entity entity = this.getControllingPassenger();
-        float f = entity != null && entity.isSprinting() ? (float) (this.getAttributeValue(AetherIIAttributes.MOA_SPEED) * 0.1F) : 0;
+        float f = entity != null && entity.isSprinting() && this.onGround() ? (float) (this.getAttributeValue(AetherIIAttributes.MOA_SPEED) * 0.1F) : 0;
 
         return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.35F + f;
     }
@@ -1109,6 +1109,9 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     @Override
     public float getFlyingSpeed() {
         if (this.isVehicle() && this.isSaddled()) {
+            if (this.onGround()) {
+                return this.getSteeringSpeed() * 0.2F;
+            } else
             if (this.isFallFlying()) {
                 return this.getSteeringSpeed() * 0.25F;
             } else {
