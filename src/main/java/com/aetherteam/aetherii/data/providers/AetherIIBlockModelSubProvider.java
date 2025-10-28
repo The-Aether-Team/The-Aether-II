@@ -27,9 +27,7 @@ import net.minecraft.client.renderer.special.BedSpecialRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.MossyCarpetBlock;
-import net.minecraft.world.level.block.MultifaceBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.*;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -694,6 +692,22 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant dungeonBlock = plainVariant(ModelLocationUtils.getModelLocation(baseBlock));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, dungeonBlock));
         this.registerSimpleItemModel(block.asItem(), AetherIIModelTemplates.LOCKED_BLOCK_INVENTORY.create(block.asItem(), AetherIITextureMappings.lockedBlockInventory(itemBlock), this.modelOutput));
+    }
+
+    public void createLogSlab(SlabBlock block, Block baseBlock) {
+        this.createBaseLogSlab(block, baseBlock, baseBlock, "_top");
+    }
+
+    public void createWoodSlab(SlabBlock block, Block baseBlock, Block textureBlock) {
+        this.createBaseLogSlab(block, baseBlock, textureBlock, "");
+    }
+
+    public void createBaseLogSlab(SlabBlock block, Block baseBlock, Block textureBlock, String suffix) {
+        TextureMapping column = TextureMapping.column(TextureMapping.getBlockTexture(textureBlock), TextureMapping.getBlockTexture(textureBlock, suffix));
+        MultiVariant bottom = plainVariant(ModelTemplates.SLAB_BOTTOM.create(block, column, this.modelOutput));
+        MultiVariant top = plainVariant(ModelTemplates.SLAB_TOP.create(block, column, this.modelOutput));
+        MultiVariant full = plainVariant(ModelLocationUtils.getModelLocation(baseBlock));
+        this.blockStateOutput.accept(createSlab(block, bottom, top, full));
     }
 
     public void createUndergrowthVines(Block block) {
