@@ -43,7 +43,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.GRAVITITE_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         this.generateFlatItem(AetherIIItems.GRAVITITE_TROWEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
-        this.generateFlatItem(AetherIIItems.ARKENIUM_SHEARS.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        this.generateFlatItem(AetherIIItems.ZANITE_SHEARS.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
         // Combat
         this.generateFlatItem(AetherIIItems.SKYROOT_SHORTSWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);

@@ -395,7 +395,6 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_TROWEL.get(),
                 AetherIIItems.ARKENIUM_SHIELD.get(),
                 AetherIIItems.ARKENIUM_CROSSBOW.get(),
-                AetherIIItems.ARKENIUM_SHEARS.get(),
                 AetherIIItems.ARKENIUM_HELMET.get(),
                 AetherIIItems.ARKENIUM_CHESTPLATE.get(),
                 AetherIIItems.ARKENIUM_LEGGINGS.get(),

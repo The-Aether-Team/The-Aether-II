@@ -132,7 +132,7 @@ public class AetherIIItems {
     public static final DeferredItem<ShovelItem> GRAVITITE_SHOVEL = register("gravitite_shovel", GravititeShovelItem::new);
     public static final DeferredItem<HoeItem> GRAVITITE_TROWEL = register("gravitite_trowel", GravititeTrowelItem::new);
 
-    public static final DeferredItem<Item> ARKENIUM_SHEARS = register("arkenium_shears", ShearsItem::new, () -> new Item.Properties().durability(238).component(DataComponents.TOOL, ShearsItem.createToolProperties()));
+    public static final DeferredItem<Item> ZANITE_SHEARS = register("zanite_shears", ShearsItem::new, () -> new Item.Properties().durability(238).component(DataComponents.TOOL, ShearsItem.createToolProperties()));
 
     // Combat
     public static final DeferredItem<Item> SKYROOT_SHORTSWORD = register("skyroot_shortsword", SkyrootShortswordItem::new);

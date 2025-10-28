@@ -9,7 +9,6 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -620,7 +619,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GRAVITITE_AXE.get());
                 output.accept(AetherIIItems.GRAVITITE_TROWEL.get());
                 output.accept(AetherIIItems.GRAVITITE_SHIELD.get());
-                output.accept(AetherIIItems.ARKENIUM_SHEARS.get());
+                output.accept(AetherIIItems.ZANITE_SHEARS.get());
                 output.accept(AetherIIItems.SCATTERGLASS_BOLT.get());
                 output.accept(AetherIIItems.SKYROOT_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_WATER_BUCKET.get());

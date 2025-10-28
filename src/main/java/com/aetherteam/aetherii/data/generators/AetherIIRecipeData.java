@@ -25,7 +25,6 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class AetherIIRecipeData extends AetherIIRecipeProvider {
@@ -992,11 +991,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.makeShovelWithTag(AetherIIItems.GRAVITITE_SHOVEL, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
         this.makeHoeWithTag(AetherIIItems.GRAVITITE_TROWEL, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
 
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.ARKENIUM_SHEARS.get())
-                .define('#', AetherIITags.Items.PLATES_ARKENIUM)
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.ZANITE_SHEARS.get())
+                .define('#', AetherIITags.Items.GEMS_ZANITE)
                 .pattern(" #")
                 .pattern("# ")
-                .unlockedBy("has_arkenium", has(AetherIITags.Items.PLATES_ARKENIUM))
+                .unlockedBy("has_zanite", has(AetherIITags.Items.GEMS_ZANITE))
                 .save(this.output);
 
         // Combat

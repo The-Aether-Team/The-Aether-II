@@ -1,8 +1,6 @@
 package com.aetherteam.aetherii.data.generators;
 
-import java.util.List;
 import java.util.TreeMap;
-import java.util.function.Supplier;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
@@ -752,7 +750,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GRAVITITE_SHOVEL, "Gravitite Shovel");
         this.addItem(AetherIIItems.GRAVITITE_TROWEL, "Gravitite Trowel");
 
-        this.addItem(AetherIIItems.ARKENIUM_SHEARS, "Arkenium Shears");
+        this.addItem(AetherIIItems.ZANITE_SHEARS, "Zanite Shears");
 
         // Combat
         this.addItem(AetherIIItems.SKYROOT_SHORTSWORD, "Skyroot Shortsword");
