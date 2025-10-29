@@ -561,6 +561,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Undergrowth Blocks
         this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_VINES.get());
         this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_LIANA.get());
         this.otherWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT.get(), AetherIIBlocks.UNDERGROWTH_LIANA.get());
 

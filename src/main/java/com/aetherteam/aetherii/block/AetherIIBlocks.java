@@ -597,6 +597,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     // Undergrowth Blocks
     public static final DeferredBlock<Block> UNDERGROWTH_LEAVES = register("undergrowth_leaves", () -> Block.Properties.of().strength(0.2F).mapColor(MapColor.TERRACOTTA_LIGHT_GREEN).sound(SoundType.AZALEA_LEAVES).noOcclusion().isSuffocating(AetherIIBlockBuilders::never).isViewBlocking(AetherIIBlockBuilders::never).isRedstoneConductor(AetherIIBlockBuilders::never).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<Block> DENSE_UNDERGROWTH_LEAVES = register("dense_undergrowth_leaves", () -> Block.Properties.ofFullCopy(UNDERGROWTH_LEAVES.get()).strength(-1.0F, 3600000.0F).noLootTable());
+    public static final DeferredBlock<Block> UNDERGROWTH_VINES = register("undergrowth_vines", BottomedVineBlock::new, () -> Block.Properties.ofFullCopy(Blocks.VINE).mapColor(MapColor.TERRACOTTA_LIGHT_GREEN));
 
     public static final DeferredBlock<Block> UNDERGROWTH_LIANA = register("undergrowth_liana", UndergrowthLianaBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_LIGHT_GREEN).randomTicks().noCollission().instabreak().sound(SoundType.CAVE_VINES).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<Block> UNDERGROWTH_LIANA_PLANT = registerWithoutItem("undergrowth_liana_plant", UndergrowthLianaPlantBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERGROWTH_LIANA.get()));

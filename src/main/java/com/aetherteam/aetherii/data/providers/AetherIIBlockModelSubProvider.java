@@ -710,9 +710,9 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(createSlab(block, bottom, top, full));
     }
 
-    public void createUndergrowthVines(Block block) {
-        MultiVariant vines = plainVariant(AetherIIModelTemplates.UNDERGROWTH_VINES.create(block, AetherIITextureMappings.vine(TextureMapping.getBlockTexture(block)).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block)), this.modelOutput));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, vines));
+    public void createUndergrowthLiana(Block block) {
+        MultiVariant liana = plainVariant(AetherIIModelTemplates.UNDERGROWTH_VINES.create(block, AetherIITextureMappings.vine(TextureMapping.getBlockTexture(block)).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block)), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, liana));
     }
 
     public void createRotshroomCluster(Block block) {

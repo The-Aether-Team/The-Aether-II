@@ -599,6 +599,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Undergrowth Blocks
         this.addBlock(AetherIIBlocks.UNDERGROWTH_LEAVES, "Undergrowth Leaves");
         this.addBlock(AetherIIBlocks.DENSE_UNDERGROWTH_LEAVES, "Dense Undergrowth Leaves");
+        this.addBlock(AetherIIBlocks.UNDERGROWTH_VINES, "Undergrowth Vines");
         this.addBlock(AetherIIBlocks.UNDERGROWTH_LIANA, "Undergrowth Liana");
         this.addBlock(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT, "Undergrowth Liana Plant");
 

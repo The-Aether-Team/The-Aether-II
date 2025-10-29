@@ -362,8 +362,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Undergrowth Blocks
         this.createCutoutMippedCube(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
         this.createTrivialCube(AetherIIBlocks.DENSE_UNDERGROWTH_LEAVES.get());
-        this.createUndergrowthVines(AetherIIBlocks.UNDERGROWTH_LIANA.get());
-        this.createUndergrowthVines(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT.get());
+        this.createVine(AetherIIBlocks.UNDERGROWTH_VINES.get(), AetherIIModelTemplates.MOSS_VINE);
+        this.createUndergrowthLiana(AetherIIBlocks.UNDERGROWTH_LIANA.get());
+        this.createUndergrowthLiana(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT.get());
         this.registerSimpleFlatItemModel(AetherIIBlocks.UNDERGROWTH_LIANA.get(), "_plant");
 
         // Rotshroom Blocks
