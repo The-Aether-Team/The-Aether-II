@@ -719,9 +719,9 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(createSlab(block, bottom, top, full));
     }
 
-    public void createUndergrowthLiana(Block block) {
-        MultiVariant liana = plainVariant(AetherIIModelTemplates.UNDERGROWTH_VINES.create(block, AetherIITextureMappings.vine(TextureMapping.getBlockTexture(block)).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block)), this.modelOutput));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, liana));
+    public void createHangingUndergrowth(Block block) {
+        MultiVariant growth = plainVariant(AetherIIModelTemplates.HANGING_UNDERGROWTH.create(block, AetherIITextureMappings.vine(TextureMapping.getBlockTexture(block)).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block)), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, growth));
     }
 
     public void createRotshroomToadstool(Block block) {

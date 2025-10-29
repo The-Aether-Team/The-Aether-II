@@ -8,19 +8,19 @@ import net.minecraft.world.level.block.GrowingPlantBodyBlock;
 import net.minecraft.world.level.block.GrowingPlantHeadBlock;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class UndergrowthLianaPlantBlock extends GrowingPlantBodyBlock {
-    public static final MapCodec<UndergrowthLianaPlantBlock> CODEC = simpleCodec(UndergrowthLianaPlantBlock::new);
+public class HangingRotgrowthPlantBlock extends GrowingPlantBodyBlock {
+    public static final MapCodec<HangingRotgrowthPlantBlock> CODEC = simpleCodec(HangingRotgrowthPlantBlock::new);
     public static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
 
-    public MapCodec<UndergrowthLianaPlantBlock> codec() {
+    public MapCodec<HangingRotgrowthPlantBlock> codec() {
         return CODEC;
     }
 
-    public UndergrowthLianaPlantBlock(Properties properties) {
+    public HangingRotgrowthPlantBlock(Properties properties) {
         super(properties, Direction.DOWN, SHAPE, false);
     }
 
     protected GrowingPlantHeadBlock getHeadBlock() {
-        return (GrowingPlantHeadBlock) AetherIIBlocks.UNDERGROWTH_LIANA.get();
+        return (GrowingPlantHeadBlock) AetherIIBlocks.HANGING_ROTGROWTH.get();
     }
 }

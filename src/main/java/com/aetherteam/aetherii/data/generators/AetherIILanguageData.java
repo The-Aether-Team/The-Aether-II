@@ -610,8 +610,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.UNDERGROWTH_LEAVES, "Undergrowth Leaves");
         this.addBlock(AetherIIBlocks.DENSE_UNDERGROWTH_LEAVES, "Dense Undergrowth Leaves");
         this.addBlock(AetherIIBlocks.UNDERGROWTH_VINES, "Undergrowth Vines");
-        this.addBlock(AetherIIBlocks.UNDERGROWTH_LIANA, "Undergrowth Liana");
-        this.addBlock(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT, "Undergrowth Liana Plant");
+        this.addBlock(AetherIIBlocks.HANGING_UNDERGROWTH, "Hanging Undergrowth");
+        this.addBlock(AetherIIBlocks.HANGING_UNDERGROWTH_PLANT, "Hanging Undergrowth Plant");
 
         // Rotshroom Blocks
         this.addBlock(AetherIIBlocks.ROTSHROOM_BLOCK, "Rotshroom Block");
@@ -622,6 +622,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ROTSHROOM_CLUSTER, "Rotshroom Cluster");
         this.addBlock(AetherIIBlocks.ROTSHROOM_TOADSTOOL, "Rotshroom Toadstool");
         this.addBlock(AetherIIBlocks.SHELF_ROTSHROOM, "Shelf Rotshroom");
+        this.addBlock(AetherIIBlocks.HANGING_ROTGROWTH, "Hanging Rotgrowth");
+        this.addBlock(AetherIIBlocks.HANGING_ROTGROWTH_PLANT, "Hanging Rotgrowth Plant");
 
         // Wool
         this.addBlock(AetherIIBlocks.CLOUDWOOL, "Cloudwool");

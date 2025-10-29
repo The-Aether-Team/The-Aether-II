@@ -2211,9 +2211,9 @@ public class HighlandsConfiguredFeatures {
                                                         .add(UniformInt.of(0, 2), 3)
                                                         .build()
                                         ),
-                                        BlockStateProvider.simple(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT.get())
+                                        BlockStateProvider.simple(AetherIIBlocks.HANGING_UNDERGROWTH_PLANT.get())
                                 ),
-                                BlockColumnConfiguration.layer(ConstantInt.of(1), BlockStateProvider.simple(AetherIIBlocks.UNDERGROWTH_LIANA.get()))
+                                BlockColumnConfiguration.layer(ConstantInt.of(1), BlockStateProvider.simple(AetherIIBlocks.HANGING_UNDERGROWTH.get()))
                         ),
                         Direction.DOWN,
                         BlockPredicate.ONLY_IN_AIR_PREDICATE,

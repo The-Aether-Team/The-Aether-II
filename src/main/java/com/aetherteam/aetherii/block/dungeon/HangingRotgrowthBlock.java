@@ -9,15 +9,15 @@ import net.minecraft.world.level.block.GrowingPlantHeadBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class UndergrowthLianaBlock extends GrowingPlantHeadBlock {
-    public static final MapCodec<UndergrowthLianaBlock> CODEC = simpleCodec(UndergrowthLianaBlock::new);
+public class HangingRotgrowthBlock extends GrowingPlantHeadBlock {
+    public static final MapCodec<HangingRotgrowthBlock> CODEC = simpleCodec(HangingRotgrowthBlock::new);
     protected static final VoxelShape SHAPE = Block.box(4.0, 9.0, 4.0, 12.0, 16.0, 12.0);
 
-    public MapCodec<UndergrowthLianaBlock> codec() {
+    public MapCodec<HangingRotgrowthBlock> codec() {
         return CODEC;
     }
 
-    public UndergrowthLianaBlock(Properties properties) {
+    public HangingRotgrowthBlock(Properties properties) {
         super(properties, Direction.DOWN, SHAPE, false, 0.1);
     }
 
@@ -26,7 +26,7 @@ public class UndergrowthLianaBlock extends GrowingPlantHeadBlock {
     }
 
     protected Block getBodyBlock() {
-        return AetherIIBlocks.UNDERGROWTH_LIANA_PLANT.get();
+        return AetherIIBlocks.HANGING_ROTGROWTH_PLANT.get();
     }
 
     protected boolean canGrowInto(BlockState state) {

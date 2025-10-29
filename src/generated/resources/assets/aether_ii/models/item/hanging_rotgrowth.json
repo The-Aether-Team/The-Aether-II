@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:block/undergrowth_liana_plant"
+    "layer0": "aether_ii:block/hanging_rotgrowth_plant"
   }
 }

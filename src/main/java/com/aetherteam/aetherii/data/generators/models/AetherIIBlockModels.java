@@ -15,7 +15,6 @@ import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -373,9 +372,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createCutoutMippedCube(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
         this.createTrivialCube(AetherIIBlocks.DENSE_UNDERGROWTH_LEAVES.get());
         this.createVine(AetherIIBlocks.UNDERGROWTH_VINES.get(), AetherIIModelTemplates.MOSS_VINE);
-        this.createUndergrowthLiana(AetherIIBlocks.UNDERGROWTH_LIANA.get());
-        this.createUndergrowthLiana(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT.get());
-        this.registerSimpleFlatItemModel(AetherIIBlocks.UNDERGROWTH_LIANA.get(), "_plant");
+        this.createHangingUndergrowth(AetherIIBlocks.HANGING_UNDERGROWTH.get());
+        this.createHangingUndergrowth(AetherIIBlocks.HANGING_UNDERGROWTH_PLANT.get());
+        this.registerSimpleFlatItemModel(AetherIIBlocks.HANGING_UNDERGROWTH.get(), "_plant");
 
         // Rotshroom Blocks
         this.createCubeBottom(AetherIIBlocks.ROTSHROOM_BLOCK.get());
@@ -385,6 +384,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createRotshroomCluster(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
         this.createRotshroomToadstool(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
         this.createShelfRotshroom(AetherIIBlocks.SHELF_ROTSHROOM.get());
+        this.createHangingUndergrowth(AetherIIBlocks.HANGING_ROTGROWTH.get());
+        this.createHangingUndergrowth(AetherIIBlocks.HANGING_ROTGROWTH_PLANT.get());
+        this.registerSimpleFlatItemModel(AetherIIBlocks.HANGING_ROTGROWTH.get(), "_plant");
 
         // Wool
         this.createFullAndCarpetBlocks(AetherIIBlocks.CLOUDWOOL.get(), AetherIIBlocks.CLOUDWOOL_CARPET.get());

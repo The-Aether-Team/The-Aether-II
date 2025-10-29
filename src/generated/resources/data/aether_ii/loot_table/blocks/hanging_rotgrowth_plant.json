@@ -23,11 +23,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:undergrowth_liana"
+          "name": "aether_ii:hanging_rotgrowth"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "aether_ii:blocks/undergrowth_liana_plant"
+  "random_sequence": "aether_ii:blocks/hanging_rotgrowth_plant"
 }

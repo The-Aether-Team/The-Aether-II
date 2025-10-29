@@ -562,8 +562,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         // Undergrowth Blocks
         this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
         this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_VINES.get());
-        this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_LIANA.get());
-        this.otherWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT.get(), AetherIIBlocks.UNDERGROWTH_LIANA.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.HANGING_UNDERGROWTH.get());
+        this.otherWhenSilkTouch(AetherIIBlocks.HANGING_UNDERGROWTH_PLANT.get(), AetherIIBlocks.HANGING_UNDERGROWTH.get());
 
         // Rotshroom Blocks
         this.dropSelf(AetherIIBlocks.ROTSHROOM_BLOCK.get());
@@ -574,6 +574,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
         this.dropSelf(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
         this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.HANGING_ROTGROWTH.get());
+        this.otherWhenSilkTouch(AetherIIBlocks.HANGING_ROTGROWTH_PLANT.get(), AetherIIBlocks.HANGING_ROTGROWTH.get());
 
         // Wool
         this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());
