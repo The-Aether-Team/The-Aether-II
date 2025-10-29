@@ -567,11 +567,11 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Rotshroom Blocks
         this.dropSelf(AetherIIBlocks.ROTSHROOM_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.ROTSHROOM_STEM.get());
         this.dropSelf(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
         this.dropSelf(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
         this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM.get());
         this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get());
-        this.add(AetherIIBlocks.FUNGAL_CARPET.get(), this::createMossyCarpetBlockDrops);
 
         // Wool
         this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());

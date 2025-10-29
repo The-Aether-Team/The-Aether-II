@@ -338,11 +338,11 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.UNDERGROWTH_VINES.get());
                 output.accept(AetherIIBlocks.UNDERGROWTH_LIANA.get());
                 output.accept(AetherIIBlocks.ROTSHROOM_BLOCK.get());
+                output.accept(AetherIIBlocks.ROTSHROOM_STEM.get());
                 output.accept(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
                 output.accept(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
                 output.accept(AetherIIBlocks.SHELF_ROTSHROOM.get());
                 output.accept(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get());
-                output.accept(AetherIIBlocks.FUNGAL_CARPET.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_NATURAL_BLOCKS = CREATIVE_MODE_TABS.register("natural_blocks", () -> CreativeModeTab.builder()

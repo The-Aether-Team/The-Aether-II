@@ -605,11 +605,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Rotshroom Blocks
         this.addBlock(AetherIIBlocks.ROTSHROOM_BLOCK, "Rotshroom Block");
+        this.addBlock(AetherIIBlocks.ROTSHROOM_STEM, "Rotshroom Stem");
         this.addBlock(AetherIIBlocks.ROTSHROOM_CLUSTER, "Rotshroom Cluster");
         this.addBlock(AetherIIBlocks.ROTSHROOM_TOADSTOOL, "Rotshroom Toadstool");
         this.addBlock(AetherIIBlocks.SHELF_ROTSHROOM, "Shelf Rotshroom");
         this.addBlock(AetherIIBlocks.SHELF_ROTSHROOM_SLAB, "Shelf Rotshroom Slab");
-        this.addBlock(AetherIIBlocks.FUNGAL_CARPET, "Fungal Carpet");
 
         // Wool
         this.addBlock(AetherIIBlocks.CLOUDWOOL, "Cloudwool");

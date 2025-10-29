@@ -854,6 +854,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get(),
                 AetherIIBlocks.GUARDIAN_LAMP.get(),
                 AetherIIBlocks.ROTSHROOM_BLOCK.get(),
+                AetherIIBlocks.ROTSHROOM_STEM.get(),
                 AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
@@ -915,8 +916,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_CARPET.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(),
-                AetherIIBlocks.AMBRELINN_MOSS_CARPET.get(),
-                AetherIIBlocks.FUNGAL_CARPET.get()
+                AetherIIBlocks.AMBRELINN_MOSS_CARPET.get()
         );
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(
                 AetherIIBlocks.UNDERSHALE.get(),
