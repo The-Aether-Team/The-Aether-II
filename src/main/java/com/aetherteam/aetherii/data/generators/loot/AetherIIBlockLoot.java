@@ -12,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
@@ -566,8 +567,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.otherWhenSilkTouch(AetherIIBlocks.HANGING_UNDERGROWTH_PLANT.get(), AetherIIBlocks.HANGING_UNDERGROWTH.get());
 
         // Rotshroom Blocks
-        this.dropSelf(AetherIIBlocks.ROTSHROOM_BLOCK.get());
-        this.dropSelf(AetherIIBlocks.ROTSHROOM_STEM.get());
+        this.add(AetherIIBlocks.ROTSHROOM_BLOCK.get(), mushroom -> this.createMushroomBlockDrop(mushroom, AetherIIBlocks.ROTSHROOM.get()));
+        this.dropWhenSilkTouch(AetherIIBlocks.ROTSHROOM_STEM.get());
         this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get());
         this.dropSelf(AetherIIBlocks.ROTSHROOM.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_ROTSHROOM.get());
