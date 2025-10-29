@@ -1,6 +1,7 @@
 {
 	"format_version": "1.21.6",
 	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
 	"render_type": "minecraft:cutout",
 	"textures": {
 		"top": "aether_ii:block/rotshroom_toadstool",

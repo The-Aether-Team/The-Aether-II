@@ -2,6 +2,7 @@
 	"format_version": "1.21.6",
 	"credit": "Made with Blockbench",
 	"render_type": "minecraft:cutout",
+	"ambientocclusion": false,
 	"textures": {
 		"back": "aether_ii:block/shelf_rotshroom_back",
 		"body": "aether_ii:block/shelf_rotshroom_body",
