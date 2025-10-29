@@ -731,7 +731,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 
     public void createRotshroomCluster(Block block) {
         MultiVariant shroom = plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.ROTSHROOM_CLUSTER.get()));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom).with(ROTATION_HORIZONTAL_FACING));
     }
 
     public void createShelfRotshroom(Block block) {

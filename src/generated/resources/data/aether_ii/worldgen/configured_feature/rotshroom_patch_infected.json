@@ -10,9 +10,45 @@
             "entries": [
               {
                 "data": {
-                  "Name": "aether_ii:rotshroom_cluster"
+                  "Name": "aether_ii:rotshroom"
                 },
                 "weight": 6
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:rotshroom_cluster",
+                  "Properties": {
+                    "facing": "north"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:rotshroom_cluster",
+                  "Properties": {
+                    "facing": "east"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:rotshroom_cluster",
+                  "Properties": {
+                    "facing": "south"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:rotshroom_cluster",
+                  "Properties": {
+                    "facing": "west"
+                  }
+                },
+                "weight": 1
               },
               {
                 "data": {

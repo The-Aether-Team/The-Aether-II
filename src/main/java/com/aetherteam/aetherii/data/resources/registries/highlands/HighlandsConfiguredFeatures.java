@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.resources.registries.highlands;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.dungeon.RotshroomClusterBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
@@ -2172,7 +2173,11 @@ public class HighlandsConfiguredFeatures {
                         3,
                         3,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
-                                .add(AetherIIBlocks.ROTSHROOM_CLUSTER.get().defaultBlockState(), 6)
+                                .add(AetherIIBlocks.ROTSHROOM.get().defaultBlockState(), 6)
+                                .add(AetherIIBlocks.ROTSHROOM_CLUSTER.get().defaultBlockState(), 1)
+                                .add(AetherIIBlocks.ROTSHROOM_CLUSTER.get().defaultBlockState().setValue(RotshroomClusterBlock.FACING, Direction.EAST), 1)
+                                .add(AetherIIBlocks.ROTSHROOM_CLUSTER.get().defaultBlockState().setValue(RotshroomClusterBlock.FACING, Direction.SOUTH), 1)
+                                .add(AetherIIBlocks.ROTSHROOM_CLUSTER.get().defaultBlockState().setValue(RotshroomClusterBlock.FACING, Direction.WEST), 1)
                                 .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get().defaultBlockState(), 2)
                                 .build())
                         ), BlockPredicate.ONLY_IN_AIR_PREDICATE)));

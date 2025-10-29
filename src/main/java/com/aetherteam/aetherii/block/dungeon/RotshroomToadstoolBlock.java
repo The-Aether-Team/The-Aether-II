@@ -14,7 +14,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.TriState;
 
 public class RotshroomToadstoolBlock extends RotshroomBlock {
-    protected static final VoxelShape SHAPE = Block.column(12.0, 0.0, 11.0); //Block.box(0.2, 0.0, 0.2, 14.0, 11.0, 14.0);
+    protected static final VoxelShape SHAPE = Block.column(12.0, 0.0, 11.0);
 
     public RotshroomToadstoolBlock(Properties properties) {
         super(properties);

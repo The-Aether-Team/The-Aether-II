@@ -10,7 +10,10 @@
             "entries": [
               {
                 "data": {
-                  "Name": "aether_ii:rotshroom_cluster"
+                  "Name": "aether_ii:rotshroom_cluster",
+                  "Properties": {
+                    "facing": "north"
+                  }
                 },
                 "weight": 3
               },
