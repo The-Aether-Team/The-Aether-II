@@ -146,6 +146,15 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant variant = plainVariant(ModelTemplates.CUBE_COLUMN.create(side, mapping, this.modelOutput));
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(side, variant));
     }
+    public void createCubeBottom(Block block) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom"));
+        this.blockStateOutput.accept(createSimpleBlock(block, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(block, mapping, this.modelOutput))));
+    }
+
 
     public void createFacingColumnWithHorizontalVariant(Block side, Block top) {
         TextureMapping mapping = TextureMapping.column(TextureMapping.getBlockTexture(side), TextureMapping.getBlockTexture(top));

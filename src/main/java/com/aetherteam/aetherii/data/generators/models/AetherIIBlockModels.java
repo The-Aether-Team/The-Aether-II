@@ -323,6 +323,42 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createGlassBlocks(AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS.get(), AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE.get());
         this.createGlassBlocks(AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS.get(), AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get());
 
+        // Wool
+        this.createFullAndCarpetBlocks(AetherIIBlocks.CLOUDWOOL.get(), AetherIIBlocks.CLOUDWOOL_CARPET.get());
+        this.createFullAndCarpetBlocks(AetherIIBlocks.WHITE_CLOUDWOOL.get(), AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get());
+        this.createFullAndCarpetBlocks(AetherIIBlocks.ORANGE_CLOUDWOOL.get(), AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET.get());
+        this.createFullAndCarpetBlocks(AetherIIBlocks.MAGENTA_CLOUDWOOL.get(), AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET.get());
+        this.createFullAndCarpetBlocks(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get(), AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET.get());
+        this.createFullAndCarpetBlocks(AetherIIBlocks.YELLOW_CLOUDWOOL.get(), AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.get());
+        this.createFullAndCarpetBlocks(AetherIIBlocks.LIME_CLOUDWOOL.get(), AetherIIBlocks.LIME_CLOUDWOOL_CARPET.get());
+        this.createFullAndCarpetBlocks(AetherIIBlocks.PINK_CLOUDWOOL.get(), AetherIIBlocks.PINK_CLOUDWOOL_CARPET.get());
+        this.createFullAndCarpetBlocks(AetherIIBlocks.GRAY_CLOUDWOOL.get(), AetherIIBlocks.GRAY_CLOUDWOOL_CARPET.get());
+        this.createFullAndCarpetBlocks(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get(), AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET.get());
+        this.createFullAndCarpetBlocks(AetherIIBlocks.CYAN_CLOUDWOOL.get(), AetherIIBlocks.CYAN_CLOUDWOOL_CARPET.get());
+        this.createFullAndCarpetBlocks(AetherIIBlocks.PURPLE_CLOUDWOOL.get(), AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET.get());
+        this.createFullAndCarpetBlocks(AetherIIBlocks.BLUE_CLOUDWOOL.get(), AetherIIBlocks.BLUE_CLOUDWOOL_CARPET.get());
+        this.createFullAndCarpetBlocks(AetherIIBlocks.BROWN_CLOUDWOOL.get(), AetherIIBlocks.BROWN_CLOUDWOOL_CARPET.get());
+        this.createFullAndCarpetBlocks(AetherIIBlocks.GREEN_CLOUDWOOL.get(), AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get());
+        this.createFullAndCarpetBlocks(AetherIIBlocks.RED_CLOUDWOOL.get(), AetherIIBlocks.RED_CLOUDWOOL_CARPET.get());
+        this.createFullAndCarpetBlocks(AetherIIBlocks.BLACK_CLOUDWOOL.get(), AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get());
+
+        // Arkenium Blocks
+        this.createDoor(AetherIIBlocks.ARKENIUM_DOOR.get());
+        this.createOrientableTrapdoor(AetherIIBlocks.ARKENIUM_TRAPDOOR.get());
+
+        // Mineral Blocks
+        this.createTrivialCube(AetherIIBlocks.AMBROSIUM_BLOCK.get());
+        this.createTrivialCube(AetherIIBlocks.ZANITE_BLOCK.get());
+        this.createTrivialCube(AetherIIBlocks.ARKENIUM_BLOCK.get());
+        this.createTrivialCube(AetherIIBlocks.GRAVITITE_BLOCK.get());
+        this.createTrivialCube(AetherIIBlocks.CORROBONITE_BLOCK.get());
+
+        // Arilum Lantern
+        this.createArilumLantern(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.BLUE_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.PURPLE_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.GOLDEN_ARILUM_LANTERN.get());
+
         // Infected Guardian Tree
         // Guardian Wood
         this.woodProvider(AetherIIBlocks.GUARDIAN_LOG.get()).logWithHorizontal(AetherIIBlocks.GUARDIAN_LOG.get()).wood(AetherIIBlocks.GUARDIAN_WOOD.get());
@@ -368,47 +404,12 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.registerSimpleFlatItemModel(AetherIIBlocks.UNDERGROWTH_LIANA.get(), "_plant");
 
         // Rotshroom Blocks
+        this.createCubeBottom(AetherIIBlocks.ROTSHROOM_BLOCK.get());
         this.createRotshroomCluster(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
         this.createRotshroomToadstool(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
         this.createShelfRotshroom(AetherIIBlocks.SHELF_ROTSHROOM.get());
         this.createShelfRotshroomSlab(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get());
         this.createMossyCarpet(AetherIIBlocks.FUNGAL_CARPET.get());
-
-        // Wool
-        this.createFullAndCarpetBlocks(AetherIIBlocks.CLOUDWOOL.get(), AetherIIBlocks.CLOUDWOOL_CARPET.get());
-        this.createFullAndCarpetBlocks(AetherIIBlocks.WHITE_CLOUDWOOL.get(), AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get());
-        this.createFullAndCarpetBlocks(AetherIIBlocks.ORANGE_CLOUDWOOL.get(), AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET.get());
-        this.createFullAndCarpetBlocks(AetherIIBlocks.MAGENTA_CLOUDWOOL.get(), AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET.get());
-        this.createFullAndCarpetBlocks(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get(), AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET.get());
-        this.createFullAndCarpetBlocks(AetherIIBlocks.YELLOW_CLOUDWOOL.get(), AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.get());
-        this.createFullAndCarpetBlocks(AetherIIBlocks.LIME_CLOUDWOOL.get(), AetherIIBlocks.LIME_CLOUDWOOL_CARPET.get());
-        this.createFullAndCarpetBlocks(AetherIIBlocks.PINK_CLOUDWOOL.get(), AetherIIBlocks.PINK_CLOUDWOOL_CARPET.get());
-        this.createFullAndCarpetBlocks(AetherIIBlocks.GRAY_CLOUDWOOL.get(), AetherIIBlocks.GRAY_CLOUDWOOL_CARPET.get());
-        this.createFullAndCarpetBlocks(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get(), AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET.get());
-        this.createFullAndCarpetBlocks(AetherIIBlocks.CYAN_CLOUDWOOL.get(), AetherIIBlocks.CYAN_CLOUDWOOL_CARPET.get());
-        this.createFullAndCarpetBlocks(AetherIIBlocks.PURPLE_CLOUDWOOL.get(), AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET.get());
-        this.createFullAndCarpetBlocks(AetherIIBlocks.BLUE_CLOUDWOOL.get(), AetherIIBlocks.BLUE_CLOUDWOOL_CARPET.get());
-        this.createFullAndCarpetBlocks(AetherIIBlocks.BROWN_CLOUDWOOL.get(), AetherIIBlocks.BROWN_CLOUDWOOL_CARPET.get());
-        this.createFullAndCarpetBlocks(AetherIIBlocks.GREEN_CLOUDWOOL.get(), AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get());
-        this.createFullAndCarpetBlocks(AetherIIBlocks.RED_CLOUDWOOL.get(), AetherIIBlocks.RED_CLOUDWOOL_CARPET.get());
-        this.createFullAndCarpetBlocks(AetherIIBlocks.BLACK_CLOUDWOOL.get(), AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get());
-
-        // Arkenium Blocks
-        this.createDoor(AetherIIBlocks.ARKENIUM_DOOR.get());
-        this.createOrientableTrapdoor(AetherIIBlocks.ARKENIUM_TRAPDOOR.get());
-
-        // Mineral Blocks
-        this.createTrivialCube(AetherIIBlocks.AMBROSIUM_BLOCK.get());
-        this.createTrivialCube(AetherIIBlocks.ZANITE_BLOCK.get());
-        this.createTrivialCube(AetherIIBlocks.ARKENIUM_BLOCK.get());
-        this.createTrivialCube(AetherIIBlocks.GRAVITITE_BLOCK.get());
-        this.createTrivialCube(AetherIIBlocks.CORROBONITE_BLOCK.get());
-
-        // Arilum Lantern
-        this.createArilumLantern(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());
-        this.createArilumLantern(AetherIIBlocks.BLUE_ARILUM_LANTERN.get());
-        this.createArilumLantern(AetherIIBlocks.PURPLE_ARILUM_LANTERN.get());
-        this.createArilumLantern(AetherIIBlocks.GOLDEN_ARILUM_LANTERN.get());
 
         // Utility
         this.createAmbrosiumTorch();

@@ -337,6 +337,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.DENSE_UNDERGROWTH_LEAVES.get());
                 output.accept(AetherIIBlocks.UNDERGROWTH_VINES.get());
                 output.accept(AetherIIBlocks.UNDERGROWTH_LIANA.get());
+                output.accept(AetherIIBlocks.ROTSHROOM_BLOCK.get());
                 output.accept(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
                 output.accept(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
                 output.accept(AetherIIBlocks.SHELF_ROTSHROOM.get());

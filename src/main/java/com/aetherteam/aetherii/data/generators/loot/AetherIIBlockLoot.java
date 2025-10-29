@@ -566,6 +566,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.otherWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT.get(), AetherIIBlocks.UNDERGROWTH_LIANA.get());
 
         // Rotshroom Blocks
+        this.dropSelf(AetherIIBlocks.ROTSHROOM_BLOCK.get());
         this.dropSelf(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
         this.dropSelf(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
         this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM.get());

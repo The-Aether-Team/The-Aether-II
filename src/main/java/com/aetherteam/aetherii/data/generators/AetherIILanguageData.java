@@ -604,6 +604,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.UNDERGROWTH_LIANA_PLANT, "Undergrowth Liana Plant");
 
         // Rotshroom Blocks
+        this.addBlock(AetherIIBlocks.ROTSHROOM_BLOCK, "Rotshroom Block");
         this.addBlock(AetherIIBlocks.ROTSHROOM_CLUSTER, "Rotshroom Cluster");
         this.addBlock(AetherIIBlocks.ROTSHROOM_TOADSTOOL, "Rotshroom Toadstool");
         this.addBlock(AetherIIBlocks.SHELF_ROTSHROOM, "Shelf Rotshroom");

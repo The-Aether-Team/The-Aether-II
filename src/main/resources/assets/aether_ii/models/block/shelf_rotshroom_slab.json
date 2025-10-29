@@ -3,9 +3,9 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"slab": "aether_ii:block/shelf_rotshroom_slab",
-		"top": "aether_ii:block/rotshroom",
-		"bottom": "aether_ii:block/rotshroom_bottom",
-		"particle": "aether_ii:block/shelf_rotshroom_slab"
+		"top": "aether_ii:block/rotshroom_block",
+		"bottom": "aether_ii:block/rotshroom_block_bottom",
+		"particle": "aether_ii:block/rotshroom_block_bottom"
 	},
 	"elements": [
 		{
