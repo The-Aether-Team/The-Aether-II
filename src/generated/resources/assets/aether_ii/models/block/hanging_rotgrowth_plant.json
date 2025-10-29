@@ -1,7 +1,0 @@
-{
-  "parent": "aether_ii:block/template_hanging_undergrowth",
-  "textures": {
-    "particle": "aether_ii:block/hanging_rotgrowth_plant",
-    "vine": "aether_ii:block/hanging_rotgrowth_plant"
-  }
-}

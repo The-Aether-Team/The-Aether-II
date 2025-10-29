@@ -386,9 +386,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createRotshroomCluster(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
         this.createRotshroomToadstool(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
         this.createShelfRotshroom(AetherIIBlocks.SHELF_ROTSHROOM.get());
-        this.createHangingUndergrowth(AetherIIBlocks.HANGING_ROTGROWTH.get());
-        this.createHangingUndergrowth(AetherIIBlocks.HANGING_ROTGROWTH_PLANT.get());
-        this.registerSimpleFlatItemModel(AetherIIBlocks.HANGING_ROTGROWTH.get(), "_plant");
+        this.createVine(AetherIIBlocks.ROTGROWTH_VINES.get(), AetherIIModelTemplates.MOSS_VINE);
 
         // Wool
         this.createFullAndCarpetBlocks(AetherIIBlocks.CLOUDWOOL.get(), AetherIIBlocks.CLOUDWOOL_CARPET.get());
