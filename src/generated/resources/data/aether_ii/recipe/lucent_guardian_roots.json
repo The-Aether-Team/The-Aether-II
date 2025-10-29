@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": "aether_ii:guardian_roots",
+    "A": "aether_ii:ambrosium_shard"
+  },
+  "pattern": [
+    "#A",
+    "A#"
+  ],
+  "result": {
+    "count": 4,
+    "id": "aether_ii:lucent_guardian_roots"
+  }
+}
