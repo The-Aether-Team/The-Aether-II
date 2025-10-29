@@ -573,7 +573,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.DENSE_STRIPPED_INFECTED_LOG, "Dense Infected Log");
         this.addBlock(AetherIIBlocks.DENSE_STRIPPED_INFECTED_WOOD, "Dense Infected Wood");
 
-        // Dungeon Slabs
+        // Guardian Slabs
         this.addBlock(AetherIIBlocks.GUARDIAN_LOG_SLAB, "Guardian Log Slab");
         this.addBlock(AetherIIBlocks.GUARDIAN_WOOD_SLAB, "Guardian Wood Slab");
         this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB, "Stripped Guardian Log Slab");
@@ -583,7 +583,17 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB, "Stripped Infected Log Slab");
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB, "Stripped Infected Wood Slab");
 
-        // Dungeon Trunks
+        // Guardian Slabs
+        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_LOG_SLAB, "Dense Guardian Log Slab");
+        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_WOOD_SLAB, "Dense Guardian Wood Slab");
+        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_LOG_SLAB, "Dense Stripped Guardian Log Slab");
+        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_WOOD_SLAB, "Dense Stripped Guardian Wood Slab");
+        this.addBlock(AetherIIBlocks.DENSE_INFECTED_LOG_SLAB, "Dense Infected Log Slab");
+        this.addBlock(AetherIIBlocks.DENSE_INFECTED_WOOD_SLAB, "Dense Infected Wood Slab");
+        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_INFECTED_LOG_SLAB, "Dense Stripped Infected Log Slab");
+        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_INFECTED_WOOD_SLAB, "Dense Stripped Infected Wood Slab");
+
+        // Guardian Trunks
         this.addBlock(AetherIIBlocks.GUARDIAN_TRUNK, "Guardian Trunk");
         this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK, "Stripped Guardian Trunk");
         this.addBlock(AetherIIBlocks.INFECTED_TRUNK, "Infected Trunk");
