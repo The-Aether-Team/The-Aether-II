@@ -537,7 +537,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
 
-        // Dungeon Slabs
+        // Guardian Slabs
         this.dropSelf(AetherIIBlocks.GUARDIAN_LOG_SLAB.get());
         this.dropSelf(AetherIIBlocks.GUARDIAN_WOOD_SLAB.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB.get());
@@ -547,7 +547,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB.get());
 
-        // Dungeon Trunks
+        // Guardian Trunks
         this.dropSelf(AetherIIBlocks.GUARDIAN_TRUNK.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK.get());
         this.dropSelf(AetherIIBlocks.INFECTED_TRUNK.get());
@@ -568,10 +568,12 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         // Rotshroom Blocks
         this.dropSelf(AetherIIBlocks.ROTSHROOM_BLOCK.get());
         this.dropSelf(AetherIIBlocks.ROTSHROOM_STEM.get());
+        this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get());
+        this.dropSelf(AetherIIBlocks.ROTSHROOM.get());
+        this.dropPottedContents(AetherIIBlocks.POTTED_ROTSHROOM.get());
         this.dropSelf(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
         this.dropSelf(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
         this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM.get());
-        this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get());
 
         // Wool
         this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());
