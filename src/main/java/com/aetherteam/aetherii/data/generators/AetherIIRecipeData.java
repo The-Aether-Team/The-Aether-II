@@ -759,15 +759,12 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
 
         // Infected Guardian Tree
-        // Guardian Dungeon Blocks
         this.woodFromLogs(AetherIIBlocks.GUARDIAN_WOOD.get(), AetherIIBlocks.GUARDIAN_LOG.get());
-        this.woodFromLogs(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get(), AetherIIBlocks.DENSE_GUARDIAN_LOG.get());
         this.woodFromLogs(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get(), AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get());
-
-        // Infected Dungeon Blocks
         this.woodFromLogs(AetherIIBlocks.INFECTED_WOOD.get(), AetherIIBlocks.INFECTED_LOG.get());
-        this.woodFromLogs(AetherIIBlocks.DENSE_INFECTED_WOOD.get(), AetherIIBlocks.DENSE_INFECTED_LOG.get());
         this.woodFromLogs(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get(), AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
+
+        this.planksFromLog(AetherIIBlocks.GUARDIAN_ROOTS.get(), AetherIITags.Items.GUARDIAN_LOGS, 4);
 
 
         // Wool

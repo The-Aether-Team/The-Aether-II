@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:dense_guardian_log"
+            "items": "#aether_ii:guardian_logs"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:dense_guardian_wood"
+        "recipe": "aether_ii:guardian_roots"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:dense_guardian_wood"
+      "aether_ii:guardian_roots"
     ]
   }
 }
