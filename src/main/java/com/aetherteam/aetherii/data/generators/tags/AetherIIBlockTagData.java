@@ -996,8 +996,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.MUSHROOM_GROW_BLOCK).add(
                 AetherIIBlocks.FERROSITE_SAND.get(),
                 AetherIIBlocks.FERROSITE_MUD.get(),
-                AetherIIBlocks.GUARDIAN_ROOTS.get()
-        );
+                AetherIIBlocks.GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.DENSE_GUARDIAN_ROOTS.get()
+        ).addTags(AetherIITags.Blocks.GUARDIAN_LOGS, AetherIITags.Blocks.DENSE_GUARDIAN_LOGS);
 
         // NeoForge
         this.tag(Tags.Blocks.BOOKSHELVES).add(
