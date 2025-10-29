@@ -704,14 +704,18 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createLogSlab(SlabBlock block, Block baseBlock) {
-        this.createBaseLogSlab(block, baseBlock, baseBlock, "_top");
+        this.createBaseCustomSlab(block, baseBlock, baseBlock, "_top");
     }
 
     public void createWoodSlab(SlabBlock block, Block baseBlock, Block textureBlock) {
-        this.createBaseLogSlab(block, baseBlock, textureBlock, "");
+        this.createBaseCustomSlab(block, baseBlock, textureBlock, "");
     }
 
-    public void createBaseLogSlab(SlabBlock block, Block baseBlock, Block textureBlock, String suffix) {
+    public void createMushroomSlab(SlabBlock block, Block baseBlock) {
+        this.createBaseCustomSlab(block, baseBlock, baseBlock, "");
+    }
+
+    public void createBaseCustomSlab(SlabBlock block, Block baseBlock, Block textureBlock, String suffix) {
         TextureMapping column = TextureMapping.column(TextureMapping.getBlockTexture(textureBlock), TextureMapping.getBlockTexture(textureBlock, suffix));
         MultiVariant bottom = plainVariant(ModelTemplates.SLAB_BOTTOM.create(block, column, this.modelOutput));
         MultiVariant top = plainVariant(ModelTemplates.SLAB_TOP.create(block, column, this.modelOutput));

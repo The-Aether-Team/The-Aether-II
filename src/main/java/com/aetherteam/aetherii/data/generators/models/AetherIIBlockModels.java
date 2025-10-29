@@ -378,8 +378,10 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
 
         // Rotshroom Blocks
         this.createCubeBottom(AetherIIBlocks.ROTSHROOM_BLOCK.get());
+        this.createMushroomSlab(AetherIIBlocks.ROTSHROOM_SLAB.get(), AetherIIBlocks.ROTSHROOM_BLOCK.get());
         this.createRotatedPillarWithHorizontalVariant(AetherIIBlocks.ROTSHROOM_STEM.get(), TexturedModel.COLUMN, TexturedModel.COLUMN_HORIZONTAL);
         this.createCubeBottom(AetherIIBlocks.DENSE_ROTSHROOM_BLOCK.get());
+        this.createMushroomSlab(AetherIIBlocks.DENSE_ROTSHROOM_SLAB.get(), AetherIIBlocks.DENSE_ROTSHROOM_BLOCK.get());
         this.createRotatedPillarWithHorizontalVariant(AetherIIBlocks.DENSE_ROTSHROOM_STEM.get(), TexturedModel.COLUMN, TexturedModel.COLUMN_HORIZONTAL);
         this.createShelfRotshroomSlab(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get());
         this.createPlantWithDefaultItem(AetherIIBlocks.ROTSHROOM.get(), AetherIIBlocks.POTTED_ROTSHROOM.get(), PlantType.NOT_TINTED);

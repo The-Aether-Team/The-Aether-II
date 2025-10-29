@@ -568,6 +568,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Rotshroom Blocks
         this.add(AetherIIBlocks.ROTSHROOM_BLOCK.get(), mushroom -> this.createMushroomBlockDrop(mushroom, AetherIIBlocks.ROTSHROOM.get()));
+        this.dropSelf(AetherIIBlocks.ROTSHROOM_SLAB.get());
         this.dropWhenSilkTouch(AetherIIBlocks.ROTSHROOM_STEM.get());
         this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get());
         this.dropSelf(AetherIIBlocks.ROTSHROOM.get());

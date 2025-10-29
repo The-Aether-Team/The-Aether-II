@@ -613,8 +613,10 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     // Rotshroom Blocks
     public static final DeferredBlock<Block> ROTSHROOM_BLOCK = register("rotshroom_block", Block::new, () -> Block.Properties.of().mapColor(MapColor.DIRT).instrument(NoteBlockInstrument.BASS).strength(0.2F).sound(SoundType.WOOD));
+    public static final DeferredBlock<SlabBlock> ROTSHROOM_SLAB = register("rotshroom_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ROTSHROOM_BLOCK.get()).mapColor(MapColor.WOOD));
     public static final DeferredBlock<RotatedPillarBlock> ROTSHROOM_STEM = register("rotshroom_stem", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ROTSHROOM_BLOCK.get()).mapColor(MapColor.WOOL));
     public static final DeferredBlock<Block> DENSE_ROTSHROOM_BLOCK = register("dense_rotshroom_block", Block::new, () -> Block.Properties.ofFullCopy(ROTSHROOM_BLOCK.get()).strength(-1.0F, 3600000.0F).noLootTable());
+    public static final DeferredBlock<SlabBlock> DENSE_ROTSHROOM_SLAB = register("dense_rotshroom_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_ROTSHROOM_BLOCK.get()));
     public static final DeferredBlock<RotatedPillarBlock> DENSE_ROTSHROOM_STEM = register("dense_rotshroom_stem", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(ROTSHROOM_STEM.get()).strength(-1.0F, 3600000.0F).noLootTable());
     public static final DeferredBlock<Block> SHELF_ROTSHROOM_SLAB = register("shelf_rotshroom_slab", LargeShelfRotshroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.DIRT).instrument(NoteBlockInstrument.BASS).strength(0.2F).sound(SoundType.WOOD).ignitedByLava());
     public static final DeferredBlock<Block> ROTSHROOM = register("rotshroom", RotshroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.DIRT).noCollission().noOcclusion().randomTicks().instabreak().offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));

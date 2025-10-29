@@ -854,6 +854,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get(),
                 AetherIIBlocks.GUARDIAN_LAMP.get(),
                 AetherIIBlocks.ROTSHROOM_BLOCK.get(),
+                AetherIIBlocks.ROTSHROOM_SLAB.get(),
                 AetherIIBlocks.ROTSHROOM_STEM.get(),
                 AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get()
         );
