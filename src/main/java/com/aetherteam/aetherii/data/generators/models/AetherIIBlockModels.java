@@ -370,8 +370,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Rotshroom Blocks
         this.createRotshroomCluster(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
         this.createRotshroomToadstool(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
-        this.createShelfRotshroom(AetherIIBlocks.SHELF_ROTSHROOM.get(), AetherIIBlocks.ROTSHROOM_TOADSTOOL.asItem());
-        this.createShelfRotshroomSlab(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get(), AetherIIBlocks.ROTSHROOM_TOADSTOOL.asItem());
+        this.createShelfRotshroom(AetherIIBlocks.SHELF_ROTSHROOM.get());
+        this.createShelfRotshroomSlab(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get());
         this.createMossyCarpet(AetherIIBlocks.FUNGAL_CARPET.get());
 
         // Wool

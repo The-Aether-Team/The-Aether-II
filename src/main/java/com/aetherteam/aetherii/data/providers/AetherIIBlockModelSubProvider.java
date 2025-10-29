@@ -718,21 +718,19 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public void createRotshroomToadstool(Block block) {
         MultiVariant shroom = plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get()));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom));
-        this.registerSimpleFlatItemModel(block.asItem());
     }
 
     public void createRotshroomCluster(Block block) {
         MultiVariant shroom = plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.ROTSHROOM_CLUSTER.get()));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom));
-        this.registerSimpleFlatItemModel(block.asItem());
     }
 
-    public void createShelfRotshroom(Block block, Item particle) {
+    public void createShelfRotshroom(Block block) {
         MultiVariant shroom = plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.SHELF_ROTSHROOM.get()));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom).with(ROTATION_HORIZONTAL_FACING));
     }
 
-    public void createShelfRotshroomSlab(Block block, Item particle) {
+    public void createShelfRotshroomSlab(Block block) {
         MultiVariant shroom = plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get()));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom));
     }
