@@ -558,7 +558,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.BRYALINN_MOSS_VINES.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_VINES.get(),
-                AetherIIBlocks.TANGLED_BRANCHES.get()
+                AetherIIBlocks.TANGLED_BRANCHES.get(),
+                AetherIIBlocks.UNDERGROWTH_VINES.get()
         );
         this.tag(BlockTags.FENCE_GATES).add(
                 AetherIIBlocks.SKYROOT_FENCE_GATE.get(),
