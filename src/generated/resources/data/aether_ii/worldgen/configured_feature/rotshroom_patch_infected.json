@@ -19,42 +19,6 @@
                   "Name": "aether_ii:rotshroom_toadstool"
                 },
                 "weight": 2
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:rotshroom_toadstool_cluster",
-                  "Properties": {
-                    "facing": "north"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:rotshroom_toadstool_cluster",
-                  "Properties": {
-                    "facing": "east"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:rotshroom_toadstool_cluster",
-                  "Properties": {
-                    "facing": "south"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:rotshroom_toadstool_cluster",
-                  "Properties": {
-                    "facing": "west"
-                  }
-                },
-                "weight": 1
               }
             ]
           }

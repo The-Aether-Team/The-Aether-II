@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:shelf_rotshroom_block"
+          "name": "aether_ii:shelf_rotshroom_slab"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "aether_ii:blocks/shelf_rotshroom_block"
+  "random_sequence": "aether_ii:blocks/shelf_rotshroom_slab"
 }

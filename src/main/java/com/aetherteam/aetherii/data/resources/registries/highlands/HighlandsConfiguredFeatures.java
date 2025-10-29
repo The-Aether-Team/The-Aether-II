@@ -2156,8 +2156,8 @@ public class HighlandsConfiguredFeatures {
     private static void bootstrapDungeon(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        register(context, LARGE_SHELF_ROTSHROOM, AetherIIFeatures.LARGE_SHELF_MUSHROOM.get(), new LargeShelfMushroomConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get()), 1, 2, 96));
-        register(context, LARGE_SHELF_ROTSHROOM_UNDERGROUND, AetherIIFeatures.LARGE_SHELF_MUSHROOM.get(), new LargeShelfMushroomConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get()), 1, 2, 0));
+        register(context, LARGE_SHELF_ROTSHROOM, AetherIIFeatures.LARGE_SHELF_MUSHROOM.get(), new LargeShelfMushroomConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get()), 1, 2, 96));
+        register(context, LARGE_SHELF_ROTSHROOM_UNDERGROUND, AetherIIFeatures.LARGE_SHELF_MUSHROOM.get(), new LargeShelfMushroomConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get()), 1, 2, 0));
         register(context, ROTSHROOM_PATCH, Feature.RANDOM_PATCH,
                 new RandomPatchConfiguration(
                         32,
@@ -2176,10 +2176,6 @@ public class HighlandsConfiguredFeatures {
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
                                 .add(AetherIIBlocks.ROTSHROOM_CLUSTER.get().defaultBlockState(), 6)
                                 .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get().defaultBlockState(), 2)
-                                .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get().defaultBlockState(), 1)
-                                .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get().defaultBlockState().setValue(RotshroomToadstoolClusterBlock.FACING, Direction.EAST), 1)
-                                .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get().defaultBlockState().setValue(RotshroomToadstoolClusterBlock.FACING, Direction.SOUTH), 1)
-                                .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get().defaultBlockState().setValue(RotshroomToadstoolClusterBlock.FACING, Direction.WEST), 1)
                                 .build())
                         ), BlockPredicate.ONLY_IN_AIR_PREDICATE)));
 

@@ -853,7 +853,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS.get(),
                 AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get(),
                 AetherIIBlocks.GUARDIAN_LAMP.get(),
-                AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get()
+                AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),

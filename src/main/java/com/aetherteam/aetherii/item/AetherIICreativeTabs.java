@@ -339,9 +339,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.UNDERGROWTH_LIANA.get());
                 output.accept(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
                 output.accept(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
-                output.accept(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get());
                 output.accept(AetherIIBlocks.SHELF_ROTSHROOM.get());
-                output.accept(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get());
+                output.accept(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get());
                 output.accept(AetherIIBlocks.FUNGAL_CARPET.get());
             }).build());
 

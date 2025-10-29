@@ -715,31 +715,25 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, liana));
     }
 
-    public void createRotshroomCluster(Block block) {
-        MultiVariant shroom = plainVariant(AetherIIModelTemplates.ROTSHROOM_CLUSTER.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem())), this.modelOutput));
+    public void createRotshroomToadstool(Block block) {
+        MultiVariant shroom = plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get()));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom));
         this.registerSimpleFlatItemModel(block.asItem());
     }
 
-    public void createRotshroomToadstoolCluster(Block block) {
-        MultiVariant shroom = plainVariant(AetherIIModelTemplates.ROTSHROOM_TOADSTOOL_CLUSTER.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem())), this.modelOutput));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom).with(ROTATION_HORIZONTAL_FACING));
-        this.registerSimpleFlatItemModel(block.asItem());
-    }
-
-    public void createRotshroomToadstool(Block block) {
-        MultiVariant shroom = plainVariant(AetherIIModelTemplates.ROTSHROOM_TOADSTOOL.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem())), this.modelOutput));
+    public void createRotshroomCluster(Block block) {
+        MultiVariant shroom = plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.ROTSHROOM_CLUSTER.get()));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom));
         this.registerSimpleFlatItemModel(block.asItem());
     }
 
     public void createShelfRotshroom(Block block, Item particle) {
-        MultiVariant shroom = plainVariant(AetherIIModelTemplates.SHELF_ROTSHROOM.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(particle)), this.modelOutput));
+        MultiVariant shroom = plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.SHELF_ROTSHROOM.get()));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom).with(ROTATION_HORIZONTAL_FACING));
     }
 
-    public void createShelfRotshroomBlock(Block block, Item particle) {
-        MultiVariant shroom = plainVariant(AetherIIModelTemplates.SHELF_ROTSHROOM_BLOCK.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(particle)), this.modelOutput));
+    public void createShelfRotshroomSlab(Block block, Item particle) {
+        MultiVariant shroom = plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get()));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom));
     }
 
