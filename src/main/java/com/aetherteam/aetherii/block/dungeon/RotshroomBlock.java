@@ -8,12 +8,14 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class RotshroomBlock extends BushBlock {
+    protected static final VoxelShape SHAPE = Block.column(6.0, 0.0, 10.0);
 
     public RotshroomBlock(Properties properties) {
         super(properties);
@@ -29,5 +31,10 @@ public class RotshroomBlock extends BushBlock {
         BlockState stateBelow = level.getBlockState(posBelow);
         TriState soilDecision = stateBelow.canSustainPlant(level, posBelow, Direction.UP, state);
         return stateBelow.is(BlockTags.MUSHROOM_GROW_BLOCK) || (soilDecision.isDefault() ? level.getRawBrightness(pos, 0) < 13 && this.mayPlaceOn(stateBelow) : soilDecision.isTrue());
+    }
+
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        Vec3 vec3 = state.getOffset(pos);
+        return SHAPE.move(vec3.x, vec3.y, vec3.z);
     }
 }
