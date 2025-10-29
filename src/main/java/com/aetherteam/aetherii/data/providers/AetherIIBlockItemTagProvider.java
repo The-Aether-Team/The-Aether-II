@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.data.tags.TagAppender;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -93,6 +94,27 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.AMBEROOT_WOOD.get(),
                 AetherIIBlocks.AMBEROOT_TRUNK.get()
         );
+        this.tag(AetherIITags.Blocks.GUARDIAN_LOGS, AetherIITags.Items.GUARDIAN_LOGS).add(
+                AetherIIBlocks.GUARDIAN_LOG.get(),
+                AetherIIBlocks.GUARDIAN_WOOD.get(),
+                AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get(),
+                AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.INFECTED_LOG.get(),
+                AetherIIBlocks.INFECTED_WOOD.get(),
+                AetherIIBlocks.STRIPPED_INFECTED_LOG.get(),
+                AetherIIBlocks.STRIPPED_INFECTED_WOOD.get()
+        );
+        this.tag(AetherIITags.Blocks.DENSE_GUARDIAN_LOGS, AetherIITags.Items.DENSE_GUARDIAN_LOGS).add(
+                AetherIIBlocks.DENSE_GUARDIAN_LOG.get(),
+                AetherIIBlocks.DENSE_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_LOG.get(),
+                AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.DENSE_INFECTED_LOG.get(),
+                AetherIIBlocks.DENSE_INFECTED_WOOD.get(),
+                AetherIIBlocks.DENSE_STRIPPED_INFECTED_LOG.get(),
+                AetherIIBlocks.DENSE_STRIPPED_INFECTED_WOOD.get()
+        );
+
         this.tag(AetherIITags.Blocks.SKYROOT_DECORATIVE_BLOCKS, AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.SKYROOT_FLOORBOARDS.get(),
                 AetherIIBlocks.SKYROOT_HIGHLIGHT.get(),
