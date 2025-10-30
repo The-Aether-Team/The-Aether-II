@@ -1,9 +1,7 @@
 {
   "parent": "aether_ii:block/template_rotshroom_toadstool",
   "textures": {
-    "bottom": "aether_ii:block/rotshroom_toadstool_bottom",
-    "particle": "aether_ii:item/rotshroom_toadstool",
-    "side": "aether_ii:block/rotshroom_toadstool_side",
-    "top": "aether_ii:block/rotshroom_toadstool_top"
+    "all": "aether_ii:block/rotshroom_toadstool",
+    "particle": "aether_ii:item/rotshroom_toadstool"
   }
 }
