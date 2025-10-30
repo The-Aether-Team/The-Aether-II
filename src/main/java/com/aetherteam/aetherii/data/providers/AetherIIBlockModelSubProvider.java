@@ -760,7 +760,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createShelfRotshroomBlock(Block block, Item particle) {
-        MultiVariant shroom = plainVariant(AetherIIModelTemplates.SHELF_ROTSHROOM_BLOCK.create(block, TextureMapping.cubeBottomTop(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(particle)), this.modelOutput));
+        MultiVariant shroom = plainVariant(AetherIIModelTemplates.SHELF_ROTSHROOM_BLOCK.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(particle)), this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom));
     }
 

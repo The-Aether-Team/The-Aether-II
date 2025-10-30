@@ -285,7 +285,7 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate ROTSHROOM_TOADSTOOL_CLUSTER = create("template_rotshroom_toadstool_cluster", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE, TextureSlot.PARTICLE);
     public static final ModelTemplate ROTSHROOM_TOADSTOOL = create("template_rotshroom_toadstool", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE, TextureSlot.PARTICLE);
     public static final ModelTemplate SHELF_ROTSHROOM = create("template_shelf_rotshroom", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate SHELF_ROTSHROOM_BLOCK = create("template_shelf_rotshroom_block", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE, TextureSlot.PARTICLE);
+    public static final ModelTemplate SHELF_ROTSHROOM_BLOCK = create("template_shelf_rotshroom_block", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CARPET_CUTOUT = ModelTemplates.create("carpet", TextureSlot.WOOL).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate MOSSY_CARPET_SIDE_CUTOUT = ModelTemplates.create("mossy_carpet_side", TextureSlot.SIDE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate DOOR_BOTTOM_LEFT = create("door_bottom_left", "_bottom_left", TextureSlot.FRONT, TextureSlot.SIDE, TextureSlot.END).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
