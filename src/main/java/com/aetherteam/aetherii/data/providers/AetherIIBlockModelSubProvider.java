@@ -743,7 +743,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createRotshroomToadstoolCluster(Block block) {
-        MultiVariant shroom = plainVariant(AetherIIModelTemplates.ROTSHROOM_TOADSTOOL_CLUSTER.create(block, TextureMapping.cubeBottomTop(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem())), this.modelOutput));
+        MultiVariant shroom = plainVariant(AetherIIModelTemplates.ROTSHROOM_TOADSTOOL_CLUSTER.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem())), this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom).with(ROTATION_HORIZONTAL_FACING));
         this.registerSimpleFlatItemModel(block.asItem());
     }
