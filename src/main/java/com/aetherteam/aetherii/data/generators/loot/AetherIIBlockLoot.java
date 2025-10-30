@@ -539,14 +539,14 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
 
         // Guardian Slabs
-        this.dropSelf(AetherIIBlocks.GUARDIAN_LOG_SLAB.get());
-        this.dropSelf(AetherIIBlocks.GUARDIAN_WOOD_SLAB.get());
-        this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB.get());
-        this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD_SLAB.get());
-        this.dropSelf(AetherIIBlocks.INFECTED_LOG_SLAB.get());
-        this.dropSelf(AetherIIBlocks.INFECTED_WOOD_SLAB.get());
-        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB.get());
-        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB.get());
+        this.add(AetherIIBlocks.GUARDIAN_LOG_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.GUARDIAN_WOOD_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.INFECTED_LOG_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.INFECTED_WOOD_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB.get(), this::createSlabItemTable);
 
         // Guardian Trunks
         this.dropSelf(AetherIIBlocks.GUARDIAN_TRUNK.get());
@@ -556,7 +556,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Guardian Root Blocks
         this.dropSelf(AetherIIBlocks.GUARDIAN_ROOTS.get());
-        this.dropSelf(AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS.get());
         this.dropSelf(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get());
         this.dropSelf(AetherIIBlocks.GUARDIAN_LAMP.get());
 
@@ -567,9 +567,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.otherWhenSilkTouch(AetherIIBlocks.HANGING_UNDERGROWTH_PLANT.get(), AetherIIBlocks.HANGING_UNDERGROWTH.get());
 
         // Rotshroom Blocks
-        this.add(AetherIIBlocks.ROTSHROOM_BLOCK.get(), mushroom -> this.createMushroomBlockDrop(mushroom, AetherIIBlocks.ROTSHROOM.get()));
-        this.dropSelf(AetherIIBlocks.ROTSHROOM_SLAB.get());
-        this.dropWhenSilkTouch(AetherIIBlocks.ROTSHROOM_STEM.get());
+        this.dropSelf(AetherIIBlocks.ROTSHROOM_BLOCK.get());
+        this.add(AetherIIBlocks.ROTSHROOM_SLAB.get(), this::createSlabItemTable);
+        this.dropSelf(AetherIIBlocks.ROTSHROOM_STEM.get());
         this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get());
         this.dropSelf(AetherIIBlocks.ROTSHROOM.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_ROTSHROOM.get());
