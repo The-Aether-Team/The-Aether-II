@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.renderer.item.color.EffectBuildupColorSource;
 import com.aetherteam.aetherii.client.renderer.item.properties.*;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.client.color.item.Dye;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
@@ -17,6 +19,7 @@ import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
 import net.minecraft.client.renderer.item.properties.conditional.CustomModelDataProperty;
+import net.minecraft.client.renderer.item.properties.conditional.HasComponent;
 import net.minecraft.client.renderer.item.properties.select.Charge;
 import net.minecraft.client.renderer.item.properties.select.DisplayContext;
 import net.minecraft.resources.ResourceLocation;
@@ -51,6 +54,20 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
         ItemModel.Unbaked normal = ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(item));
         ItemModel.Unbaked blocking = ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(item, "_blocking"));
         this.generateBooleanDispatch(item, ItemModelUtils.isUsingItem(), blocking, normal);
+    }
+
+    public void generateDartShooter(Item item) {
+        ItemModel.Unbaked normal = ItemModelUtils.plainModel(this.createFlatItemModel(item, AetherIIModelTemplates.DART_SHOOTER));
+        ItemModel.Unbaked loaded0 = ItemModelUtils.tintedModel(AetherIIModelTemplates.DART_SHOOTER_TWO_LAYER.create(ModelLocationUtils.getModelLocation(item, "_0"), TextureMapping.layered(TextureMapping.getItemTexture(item, "_tip_0"), TextureMapping.getItemTexture(item, "_base")), this.modelOutput), new EffectBuildupColorSource());
+        ItemModel.Unbaked loaded1 = ItemModelUtils.tintedModel(AetherIIModelTemplates.DART_SHOOTER_TWO_LAYER.create(ModelLocationUtils.getModelLocation(item, "_1"), TextureMapping.layered(TextureMapping.getItemTexture(item, "_tip_1"), TextureMapping.getItemTexture(item, "_base")), this.modelOutput), new EffectBuildupColorSource());
+        ItemModel.Unbaked loaded2 = ItemModelUtils.tintedModel(AetherIIModelTemplates.DART_SHOOTER_TWO_LAYER.create(ModelLocationUtils.getModelLocation(item, "_2"), TextureMapping.layered(TextureMapping.getItemTexture(item, "_tip_2"), TextureMapping.getItemTexture(item, "_base")), this.modelOutput), new EffectBuildupColorSource());
+        ItemModel.Unbaked loaded3 = ItemModelUtils.tintedModel(AetherIIModelTemplates.DART_SHOOTER_TWO_LAYER.create(ModelLocationUtils.getModelLocation(item, "_3"), TextureMapping.layered(TextureMapping.getItemTexture(item, "_tip_3"), TextureMapping.getItemTexture(item, "_base")), this.modelOutput), new EffectBuildupColorSource());
+        this.itemModelOutput.accept(item, ItemModelUtils.conditional(new HasComponent(AetherIIDataComponents.DARTS_LOADED.get(), true), ItemModelUtils.rangeSelect(new DartsLoadedRange(), loaded0, ItemModelUtils.override(loaded1, 0.25F), ItemModelUtils.override(loaded2, 0.5F), ItemModelUtils.override(loaded3, 0.75F)), normal));
+    }
+
+    public void generateDarts(Item item) {
+        ResourceLocation location = this.generateLayeredItem(item, ModelLocationUtils.getModelLocation(item, "_tip"), ModelLocationUtils.getModelLocation(item, "_base"));
+        this.itemModelOutput.accept(item, ItemModelUtils.tintedModel(location, new EffectBuildupColorSource()));
     }
 
     public void generateDyedArmorItem(Item item, int defaultColor) {

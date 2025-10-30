@@ -784,6 +784,22 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ARKENIUM_SHIELD, "Arkenium Shield");
         this.addItem(AetherIIItems.GRAVITITE_SHIELD, "Gravitite Shield");
 
+        this.addItem(AetherIIItems.DART_SHOOTER, "Dart Shooter");
+        this.addItem(AetherIIItems.AMBER_DARTS, "Amber Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "vulnerability", "Amber Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "wound", "Wound Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "stun", "Stun Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "ambrosium_poisoning", "Ambrosium Poisoning Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "fracture", "Fracture Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "toxin", "Toxin Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "venom", "Venom Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "charged", "Charged Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "webbed", "Webbed Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "immolation", "Immolation Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "frostbite", "Frostbite Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "fungal_rot", "Fungal Rot Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "crystallized", "Crystallized Darts");
+
         this.addItem(AetherIIItems.SCATTERGLASS_BOLT, "Scatterglass Bolt");
 
         // Armor
@@ -1095,6 +1111,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("curative.removes", "Removes: %s");
         this.addItemTooltip("curative.reduces", "Reduces: %s");
         this.addItemTooltip("healing_stone.charges", "%s/5 Charges");
+        this.addItemTooltip("effect_buildup", "%s Buildup");
+        this.addItemTooltip("effect_buildup.inflicts", "Inflicts: %s");
 
         // Moa Egg Tooltips
         this.addItemTooltip("moa_egg.keratin", "%s Keratin");
@@ -1180,6 +1198,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.ARCTIC_SNOWBALL, "Arctic Snowball");
         this.addEntityType(AetherIIEntityTypes.SKYROOT_PINECONE, "Skyroot Pinecone");
         this.addEntityType(AetherIIEntityTypes.SCATTERGLASS_BOLT, "Scatterglass Bolt");
+        this.addEntityType(AetherIIEntityTypes.AMBER_DART, "Amber Dart");
         this.addEntityType(AetherIIEntityTypes.ZEPHYR_WEBBING_BALL, "Zephyr Webbing Ball");
         this.addEntityType(AetherIIEntityTypes.TEMPEST_THUNDERBALL, "Tempest Thunderball");
         this.addEntityType(AetherIIEntityTypes.SKEPHID_WEBBING_BALL, "Skephid Webbing Ball");
@@ -1269,6 +1288,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEffect(AetherIIEffects.SATURATION_BOOST, "Saturation Boost");
 
         // Harmful
+        this.addEffect(AetherIIEffects.VULNERABILITY, "Vulnerability");
         this.addEffect(AetherIIEffects.WOUND, "Wound");
         this.addEffect(AetherIIEffects.STUN, "Stun");
         this.addEffect(AetherIIEffects.FRACTURE, "Fracture");

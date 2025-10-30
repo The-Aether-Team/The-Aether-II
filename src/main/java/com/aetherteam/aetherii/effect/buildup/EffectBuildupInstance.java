@@ -39,7 +39,7 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
     private boolean triggerEffect = false;
 
     public EffectBuildupInstance(EffectBuildupPresets.Preset preset, int buildup) {
-        this(preset.type(), preset.instanceBuilder().get(), preset.buildupReductionRate(), buildup);
+        this(preset.type(), preset.createMobEffectInstance(), preset.buildupReductionRate(), buildup);
     }
 
     public EffectBuildupInstance(Holder<MobEffect> type, MobEffectInstance instance, int buildupReductionRate, int buildup) {

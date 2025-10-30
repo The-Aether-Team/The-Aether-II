@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "amber_darts",
+  "ingredients": [
+    "aether_ii:amber_darts",
+    "aether_ii:aechor_petal"
+  ],
+  "result": {
+    "components": {
+      "aether_ii:buildup_contents": {
+        "amount": 20,
+        "preset": {
+          "type": "aether_ii:toxin",
+          "ambient": false,
+          "amplifier": 0,
+          "buildup_reduction_rate": 2,
+          "duration": 1000,
+          "show_icon": false,
+          "visible": true
+        }
+      }
+    },
+    "count": 1,
+    "id": "aether_ii:amber_darts"
+  }
+}

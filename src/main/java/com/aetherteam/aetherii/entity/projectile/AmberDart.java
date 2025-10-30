@@ -1,0 +1,110 @@
+package com.aetherteam.aetherii.entity.projectile;
+
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.BuildupContents;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractArrowAccessor;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
+
+public class AmberDart extends AbstractArrow {
+    private static final EntityDataAccessor<Integer> ID_EFFECT_COLOR = SynchedEntityData.defineId(AmberDart.class, EntityDataSerializers.INT);
+
+    public AmberDart(EntityType<? extends AmberDart> entityType, Level level) {
+        super(entityType, level);
+    }
+
+    public AmberDart(Level level, double x, double y, double z, ItemStack pickupStack, ItemStack weaponStack) {
+        super(AetherIIEntityTypes.AMBER_DART.get(), x, y, z, level, pickupStack, weaponStack);
+        this.pickup = AbstractArrow.Pickup.DISALLOWED;
+        if (weaponStack.has(AetherIIDataComponents.BUILDUP_CONTENTS)) {
+            this.entityData.set(ID_EFFECT_COLOR, this.getColor(weaponStack));
+        }
+        this.setBaseDamage(0);
+    }
+
+    public AmberDart(Level level, LivingEntity owner, ItemStack pickupStack, ItemStack weaponStack) {
+        super(AetherIIEntityTypes.AMBER_DART.get(), owner, level, pickupStack, weaponStack);
+        this.pickup = AbstractArrow.Pickup.DISALLOWED;
+        if (weaponStack.has(AetherIIDataComponents.BUILDUP_CONTENTS)) {
+            this.entityData.set(ID_EFFECT_COLOR, this.getColor(weaponStack));
+        }
+        this.setBaseDamage(0);
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(ID_EFFECT_COLOR, -1);
+    }
+
+    @Override
+    protected void tickDespawn() {
+        ((AbstractArrowAccessor) this).aether$setLife(((AbstractArrowAccessor) this).aether$getLife() + 1);
+        if (((AbstractArrowAccessor) this).aether$getLife() >= 1) {
+            this.discard();
+        }
+    }
+
+    @Override
+    protected void onHitBlock(BlockHitResult result) {
+        super.onHitBlock(result);
+        if (this.level() instanceof ServerLevel serverLevel) {
+            BlockState blockState = serverLevel.getBlockState(result.getBlockPos());
+            Vec3 vec3 = result.getLocation();
+            serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, blockState), vec3.x, vec3.y, vec3.z, 4, result.getDirection().getStepX() * 0.1F, result.getDirection().getStepY() * 0.1F, result.getDirection().getStepZ() * 0.1F, 0.0F);
+        }
+    }
+
+    @Override
+    protected void onHitEntity(EntityHitResult result) { //todo shield checks etc.
+        super.onHitEntity(result);
+        Entity entity = result.getEntity();
+        if (entity instanceof LivingEntity livingEntity && livingEntity.level() instanceof ServerLevel) {
+            BuildupContents buildupContents = this.getWeaponItem().get(AetherIIDataComponents.BUILDUP_CONTENTS);
+            if (buildupContents != null) {
+                entity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, buildupContents.preset(), buildupContents.amount());
+            }
+        }
+        if (this.level() instanceof ServerLevel serverLevel) { //todo the item layering is messing up this particle its not using the bottom sprite
+            Vec3 vec3 = result.getLocation();
+            serverLevel.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, AetherIIItems.AMBER_DARTS.toStack()), vec3.x, vec3.y, vec3.z, 4, 0.0F, this.random.nextDouble() / 3.0, 0.0F, 0.0F);
+        }
+        this.discard();
+    }
+
+    @Override
+    protected ItemStack getDefaultPickupItem() {
+        return new ItemStack(AetherIIItems.AMBER_DARTS.get());
+    }
+
+    public int getColor() {
+        return this.entityData.get(ID_EFFECT_COLOR);
+    }
+
+    public int getColor(ItemStack stack) {
+        int defaultColor = BuildupContents.DEFAULT_COLOR;
+        BuildupContents buildupContents = stack.get(AetherIIDataComponents.BUILDUP_CONTENTS);
+        if (buildupContents != null) {
+            return buildupContents.getColor();
+        }
+        return defaultColor;
+    }
+}

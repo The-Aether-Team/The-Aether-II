@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "/": "#aether_ii:rods/skyroot",
+    "A": "aether_ii:golden_amber",
+    "S": "#aether_ii:crafts_skyroot_tools"
+  },
+  "pattern": [
+    "AA ",
+    "A/S",
+    " SA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:amber_darts"
+  }
+}

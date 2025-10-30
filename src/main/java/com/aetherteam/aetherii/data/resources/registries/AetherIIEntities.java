@@ -54,6 +54,7 @@ public class AetherIIEntities {
     public static final ResourceKey<EntityType<?>> ARCTIC_SNOWBALL = createKey("arctic_snowball");
     public static final ResourceKey<EntityType<?>> SKYROOT_PINECONE = createKey("skyroot_pinecone");
     public static final ResourceKey<EntityType<?>> SCATTERGLASS_BOLT = createKey("scatterglass_bolt");
+    public static final ResourceKey<EntityType<?>> AMBER_DART = createKey("amber_dart");
 
     public static final ResourceKey<EntityType<?>> TOXIC_DART = createKey("toxic_dart");
     public static final ResourceKey<EntityType<?>> VENOMOUS_DART = createKey("venomous_dart");

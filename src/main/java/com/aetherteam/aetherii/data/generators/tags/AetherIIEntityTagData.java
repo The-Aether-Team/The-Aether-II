@@ -63,6 +63,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.ARCTIC_SNOWBALL.get(),
                 AetherIIEntityTypes.SKYROOT_PINECONE.get(),
                 AetherIIEntityTypes.SCATTERGLASS_BOLT.get(),
+                AetherIIEntityTypes.AMBER_DART.get(),
                 AetherIIEntityTypes.TOXIC_DART.get(),
                 AetherIIEntityTypes.ZEPHYR_WEBBING_BALL.get(),
                 AetherIIEntityTypes.TEMPEST_THUNDERBALL.get()
@@ -86,7 +87,8 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.HOLYSTONE_ROCK.get(),
                 AetherIIEntityTypes.ARCTIC_SNOWBALL.get(),
                 AetherIIEntityTypes.SKYROOT_PINECONE.get(),
-                AetherIIEntityTypes.SCATTERGLASS_BOLT.get()
+                AetherIIEntityTypes.SCATTERGLASS_BOLT.get(),
+                AetherIIEntityTypes.AMBER_DART.get()
         );
         this.tag(EntityTypeTags.REDIRECTABLE_PROJECTILE).add(
                 AetherIIEntityTypes.TEMPEST_THUNDERBALL.get()

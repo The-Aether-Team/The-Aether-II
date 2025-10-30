@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIIRecipeProvider;
+import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
@@ -1030,6 +1031,28 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.makeShieldWithTag(AetherIIItems.ARKENIUM_SHIELD, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(this.output);
         this.makeShieldWithTag(AetherIIItems.GRAVITITE_SHIELD, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(this.output);
 
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.DART_SHOOTER)
+                .define('A', AetherIIItems.GOLDEN_AMBER)
+                .define('S', AetherIITags.Items.CRAFTS_SKYROOT_TOOLS)
+                .pattern("A  ")
+                .pattern(" SA")
+                .pattern("  S")
+                .unlockedBy("has_amber", has(AetherIIItems.GOLDEN_AMBER))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.AMBER_DARTS)
+                .define('A', AetherIIItems.GOLDEN_AMBER)
+                .define('/', AetherIITags.Items.RODS_SKYROOT)
+                .define('S', AetherIITags.Items.CRAFTS_SKYROOT_TOOLS)
+                .pattern("AA ")
+                .pattern("A/S")
+                .pattern(" SA")
+                .unlockedBy("has_amber", has(AetherIIItems.GOLDEN_AMBER))
+                .save(this.output);
+        this.makeDartsWithEffect(AetherIIItems.AMBER_DARTS, AetherIIItems.AECHOR_PETAL, EffectBuildupPresets.TOXIN);
+
+        this.loadDartShooter(AetherIIItems.DART_SHOOTER, AetherIIItems.AMBER_DARTS, EffectBuildupPresets.VULNERABILITY);
+        this.loadDartShooter(AetherIIItems.DART_SHOOTER, AetherIIItems.AMBER_DARTS, EffectBuildupPresets.TOXIN);
+
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.SCATTERGLASS_BOLT.get(), 4)
                 .define('S', AetherIIItems.SCATTERGLASS_SHARD)
                 .define('/', AetherIITags.Items.RODS_SKYROOT)
@@ -1039,6 +1062,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern(" F ")
                 .unlockedBy("has_scatterglass_shard", has(AetherIIItems.SCATTERGLASS_SHARD))
                 .save(this.output);
+
 
         // Armor
         this.makeHelmet(getter, AetherIIItems.BEAST_PELT_HELMET, AetherIIItems.BEAST_PELT).save(this.output);
