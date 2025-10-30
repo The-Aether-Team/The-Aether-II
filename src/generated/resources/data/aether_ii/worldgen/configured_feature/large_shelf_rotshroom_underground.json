@@ -6,7 +6,7 @@
     "block": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "aether_ii:shelf_rotshroom_block"
+        "Name": "aether_ii:shelf_rotshroom_slab"
       }
     },
     "min_y": 0

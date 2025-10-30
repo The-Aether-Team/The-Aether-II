@@ -59,7 +59,6 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onPlayerPostTick);
         bus.addListener(AetherIIEventListeners::onPlayerRightClickBlock);
         bus.addListener(AetherIIEventListeners::onPlayerEntityInteractSpecific);
-        bus.addListener(AetherIIEventListeners::onMiningSpeed);
         bus.addListener(AetherIIEventListeners::onPlayerCriticalHitAttack);
         bus.addListener(AetherIIEventListeners::onPlayerAdvancementProgression);
         bus.addListener(AetherIIEventListeners::onPlayersFinishSleeping);
@@ -187,13 +186,6 @@ public class AetherIIEventListeners {
         if (result.isPresent()) {
             event.setCancellationResult(result.get());
             event.setCanceled(true);
-        }
-    }
-
-    public static void onMiningSpeed(PlayerEvent.BreakSpeed event) {
-        BlockState state = event.getState();
-        if (!event.isCanceled()) {
-            event.setNewSpeed(PlayerHooks.handleReinforcedBlocks(state, event.getNewSpeed()));
         }
     }
 

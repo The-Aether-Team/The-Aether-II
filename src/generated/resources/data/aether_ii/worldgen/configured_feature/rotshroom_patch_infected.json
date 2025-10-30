@@ -10,19 +10,13 @@
             "entries": [
               {
                 "data": {
-                  "Name": "aether_ii:rotshroom_cluster"
+                  "Name": "aether_ii:rotshroom"
                 },
                 "weight": 6
               },
               {
                 "data": {
-                  "Name": "aether_ii:rotshroom_toadstool"
-                },
-                "weight": 2
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:rotshroom_toadstool_cluster",
+                  "Name": "aether_ii:rotshroom_cluster",
                   "Properties": {
                     "facing": "north"
                   }
@@ -31,7 +25,7 @@
               },
               {
                 "data": {
-                  "Name": "aether_ii:rotshroom_toadstool_cluster",
+                  "Name": "aether_ii:rotshroom_cluster",
                   "Properties": {
                     "facing": "east"
                   }
@@ -40,7 +34,7 @@
               },
               {
                 "data": {
-                  "Name": "aether_ii:rotshroom_toadstool_cluster",
+                  "Name": "aether_ii:rotshroom_cluster",
                   "Properties": {
                     "facing": "south"
                   }
@@ -49,12 +43,18 @@
               },
               {
                 "data": {
-                  "Name": "aether_ii:rotshroom_toadstool_cluster",
+                  "Name": "aether_ii:rotshroom_cluster",
                   "Properties": {
                     "facing": "west"
                   }
                 },
                 "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:rotshroom_toadstool"
+                },
+                "weight": 2
               }
             ]
           }

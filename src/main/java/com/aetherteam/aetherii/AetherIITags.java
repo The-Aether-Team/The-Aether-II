@@ -45,6 +45,11 @@ public class AetherIITags {
         public static final TagKey<Block> QUICKSOIL_GLASS_PANE = tag("quicksoil_glass_pane");
         public static final TagKey<Block> CRUDE_SCATTERGLASS_PANE = tag("crude_scatterglass_pane");
         public static final TagKey<Block> SCATTERGLASS_PANE = tag("scatterglass_pane");
+
+        public static final TagKey<Block> GUARDIAN_LOGS = tag("guardian_logs");
+        public static final TagKey<Block> DENSE_GUARDIAN_LOGS = tag("dense_guardian_logs");
+        public static final TagKey<Block> DENSE_GUARDIAN_BLOCKS = tag("dense_guardian_blocks");
+
         public static final TagKey<Block> ALLOWED_BUCKET_PICKUP = tag("allowed_bucket_pickup");
         public static final TagKey<Block> ALKAHEST_RESISTANT = tag("alkahest_resistant");
         public static final TagKey<Block> ALKAHEST_INSTANTLY_DESTROYS = tag("alkahest_instantly_destroys");
@@ -115,6 +120,10 @@ public class AetherIITags {
         public static final TagKey<Item> MARBLED_ICHORITE_DECORATIVE_BLOCKS = tag("marbled_ichorite_decorative_blocks");
         public static final TagKey<Item> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Item> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
+
+        public static final TagKey<Item> GUARDIAN_LOGS = tag("guardian_logs");
+        public static final TagKey<Item> DENSE_GUARDIAN_LOGS = tag("dense_guardian_logs");
+        public static final TagKey<Item> DENSE_GUARDIAN_BLOCKS = tag("dense_guardian_blocks");
 
         public static final TagKey<Item> LOCKED_DUNGEON_BLOCKS = tag("locked_dungeon_blocks");
 

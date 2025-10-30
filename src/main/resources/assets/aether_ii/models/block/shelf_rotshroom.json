@@ -1,0 +1,133 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
+	"ambientocclusion": false,
+	"textures": {
+		"back": "aether_ii:block/shelf_rotshroom_back",
+		"body": "aether_ii:block/shelf_rotshroom_body",
+		"particle": "aether_ii:block/shelf_rotshroom_back"
+	},
+	"elements": [
+		{
+			"name": "shroom_1",
+			"from": [6, 13, 12],
+			"to": [15, 14, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 13, 12]},
+			"faces": {
+				"north": {"uv": [5, 10, 14, 11], "texture": "#body"},
+				"east": {"uv": [6, 11, 10, 12], "texture": "#body"},
+				"south": {"uv": [0, 13, 9, 14], "texture": "#body"},
+				"west": {"uv": [6, 12, 10, 13], "texture": "#body"},
+				"up": {"uv": [0, 5, 9, 1], "texture": "#body"},
+				"down": {"uv": [7, 6, 16, 10], "texture": "#body"}
+			}
+		},
+		{
+			"name": "shroom_2",
+			"from": [1, 11, 11],
+			"to": [8, 12, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 11, 11]},
+			"faces": {
+				"north": {"uv": [7, 10, 14, 11], "texture": "#body"},
+				"east": {"uv": [6, 10, 11, 11], "texture": "#body"},
+				"south": {"uv": [1, 13, 8, 14], "texture": "#body"},
+				"west": {"uv": [7, 10, 12, 11], "texture": "#body"},
+				"up": {"uv": [0, 10, 7, 5], "texture": "#body"},
+				"down": {"uv": [9, 0, 16, 5], "texture": "#body"}
+			}
+		},
+		{
+			"name": "shroom_3",
+			"from": [4, 7, 11],
+			"to": [13, 8, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, 7, 11]},
+			"faces": {
+				"north": {"uv": [14, 10, 5, 11], "texture": "#body"},
+				"east": {"uv": [5, 11, 10, 12], "texture": "#body"},
+				"south": {"uv": [0, 13, 9, 14], "texture": "#body"},
+				"west": {"uv": [5, 12, 10, 13], "texture": "#body"},
+				"up": {"uv": [0, 5, 9, 0], "texture": "#body"},
+				"down": {"uv": [7, 5, 16, 10], "texture": "#body"}
+			}
+		},
+		{
+			"name": "shroom_4",
+			"from": [10, 4, 13],
+			"to": [15, 5, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [10, 4, 13]},
+			"faces": {
+				"north": {"uv": [8, 10, 13, 11], "texture": "#body"},
+				"east": {"uv": [5, 12, 8, 13], "texture": "#body"},
+				"south": {"uv": [3, 13, 8, 14], "texture": "#body"},
+				"west": {"uv": [7, 12, 10, 13], "texture": "#body"},
+				"up": {"uv": [0, 10, 5, 13], "texture": "#body"},
+				"down": {"uv": [11, 2, 16, 5], "texture": "#body"}
+			}
+		},
+		{
+			"name": "shroom_5",
+			"from": [2, 2, 11],
+			"to": [11, 3, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 2, 11]},
+			"faces": {
+				"north": {"uv": [5, 10, 14, 11], "texture": "#body"},
+				"east": {"uv": [9, 10, 14, 11], "texture": "#body"},
+				"south": {"uv": [0, 13, 9, 14], "texture": "#body"},
+				"west": {"uv": [8, 10, 13, 11], "texture": "#body"},
+				"up": {"uv": [0, 0, 9, 5], "texture": "#body"},
+				"down": {"uv": [7, 5, 16, 10], "texture": "#body"}
+			}
+		},
+		{
+			"name": "back",
+			"from": [0, 0, 15.85],
+			"to": [16, 16, 15.85],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 16]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#back"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#back"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 45, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, -135, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"gui": {
+			"rotation": [30, -135, 0],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"fixed": {
+			"translation": [0, 0, -3],
+			"scale": [0.5, 0.5, 0.5]
+		}
+	},
+	"groups": [
+		{
+			"name": "shelf_rotshroom",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1, 2, 3, 4, 5]
+		}
+	]
+}

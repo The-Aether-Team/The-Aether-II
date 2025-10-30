@@ -8,7 +8,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class LargeShelfRotshroomBlock extends Block {
-    protected static final VoxelShape SHAPE = Block.box(0.0, 6.0, 0.0, 16.0, 12.0, 16.0);
+    protected static final VoxelShape SHAPE = Block.box(0.0, 5.0, 0.0, 16.0, 11.0, 16.0);
 
     public LargeShelfRotshroomBlock(Properties properties) {
         super(properties);
