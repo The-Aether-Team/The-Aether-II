@@ -56,6 +56,7 @@ public class AetherIIBestiaryEntries {
     public static final ResourceKey<BestiaryEntry> COCKATRICE = createKey("cockatrice");
     public static final ResourceKey<BestiaryEntry> ARKENIUM_TALUTON = createKey("arkenium_taluton");
     public static final ResourceKey<BestiaryEntry> GRAVITITE_TALUTON = createKey("gravitite_taluton");
+    public static final ResourceKey<BestiaryEntry> BLADESHROOM_HUNTER = createKey("bladeshroom_hunter");
 
     public static final Map<ResourceKey<BestiaryEntry>, Holder<EntityType<?>>> ENTITIES = Map.ofEntries(
             Map.entry(FLYING_COW, AetherIIEntityTypes.FLYING_COW),
@@ -81,7 +82,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(TEMPEST, AetherIIEntityTypes.TEMPEST),
             Map.entry(COCKATRICE, AetherIIEntityTypes.COCKATRICE),
             Map.entry(ARKENIUM_TALUTON, AetherIIEntityTypes.ARKENIUM_TALUTON),
-            Map.entry(GRAVITITE_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON)
+            Map.entry(GRAVITITE_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON),
+            Map.entry(BLADESHROOM_HUNTER, AetherIIEntityTypes.BLADE_SHROOM_HUNTER)
     );
     public static final List<Holder<EntityType<?>>> NAMED = List.of(
             AetherIIEntityTypes.HIGHFIELDS_TAEGORE,
@@ -117,7 +119,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.SWET, AetherIIStats.SWET),
             Map.entry(AetherIIEntityTypes.SKEPHID, AetherIIStats.SKEPHID),
             Map.entry(AetherIIEntityTypes.ARKENIUM_TALUTON, AetherIIStats.ARKENIUM_TALUTON),
-            Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, AetherIIStats.GRAVITITE_TALUTON)
+            Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, AetherIIStats.GRAVITITE_TALUTON),
+            Map.entry(AetherIIEntityTypes.BLADE_SHROOM_HUNTER, AetherIIStats.BLADE_SHROOM_HUNTER)
     );
     public static final Map<Holder<EntityType<?>>, List<BestiaryEntry.LootDisplay>> LOOT = Map.ofEntries(
             Map.entry(AetherIIEntityTypes.FLYING_COW, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.BURRUKAI_RIB_CUT, 1.0, 1, 2))),
@@ -141,7 +144,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.TEMPEST, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.STORM_AERCLOUD, 1.0, 1, 3), BestiaryEntry.LootDisplay.item(AetherIIItems.CHARGE_CATALYST, 1.0, 0, 1))), //todo: current spawn chances are incorrect
             Map.entry(AetherIIEntityTypes.COCKATRICE, List.of(BestiaryEntry.LootDisplay.item(Items.FEATHER.builtInRegistryHolder(), 1.0, 1, 3))),
             Map.entry(AetherIIEntityTypes.ARKENIUM_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.ARKENIUM_CORE, 1.0, 0, 1))),
-            Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.GRAVITITE_CORE, 1.0, 0, 1)))
+            Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.GRAVITITE_CORE, 1.0, 0, 1))),
+            Map.entry(AetherIIEntityTypes.BLADE_SHROOM_HUNTER, List.of())
     );
     public static final Map<Holder<EntityType<?>>, TagKey<Item>> FED = Map.ofEntries(
             Map.entry(AetherIIEntityTypes.FLYING_COW, AetherIITags.Items.FLYING_COW_FOOD),

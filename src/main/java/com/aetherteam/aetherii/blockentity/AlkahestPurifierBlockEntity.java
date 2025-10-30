@@ -181,12 +181,13 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
         boolean changed = false;
 
         int levels = blockEntity.alkahestLevels;
-        if (levels < MAX_LEVELS) {
+        if (levels + 3 <= MAX_LEVELS) {
             for (int i = 1; i < 5; i++) {
                 ItemStack stack = blockEntity.getItem(i);
                 if (blockEntity.isFuel(stack)) {
-                    blockEntity.alkahestLevels += 3;
+                    blockEntity.alkahestLevels = Math.min(blockEntity.alkahestLevels + 3, MAX_LEVELS);
                     blockEntity.setItem(i, stack.getCraftingRemainder());
+                    break;
                 }
             }
         }
@@ -219,6 +220,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
         }
 
         int roundedLevels = Mth.ceil(levels / 3.0);
+        roundedLevels = Math.min(roundedLevels, 4);
         if (state.getValue(AlkahestPurifierBlock.LEVEL) != roundedLevels) {
             changed = true;
             state = state.setValue(AlkahestPurifierBlock.LEVEL, roundedLevels);

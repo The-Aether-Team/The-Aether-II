@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
@@ -7,10 +8,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 public class GreenAercloudBlock extends AercloudBlock {
     protected static final VoxelShape COLLISION_SHAPE = Shapes.empty();
@@ -31,13 +34,26 @@ public class GreenAercloudBlock extends AercloudBlock {
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
         if (!entity.isShiftKeyDown() && (!entity.isVehicle() || !(entity.getControllingPassenger() instanceof Player))) {
             entity.resetFallDistance();
-            entity.setDeltaMovement(entity.getDeltaMovement().x(), -2.0, entity.getDeltaMovement().z());
+            this.runAercloudEffect(state, level, pos, entity);
             if (!(entity instanceof Projectile)) {
                 entity.setOnGround(false);
             }
         } else {
             super.entityInside(state, level, pos, entity, effectApplier);
         }
+    }
+
+    @Override
+    public void runAercloudEffect(BlockState state, Level level, BlockPos pos, Entity entity) {
+        if (!(entity instanceof CloudSkiff)) {
+            entity.hasImpulse = true;
+            entity.setDeltaMovement(entity.getDeltaMovement().x(), -2.0, entity.getDeltaMovement().z());
+        }
+    }
+
+    @Override
+    public float getFriction(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+        return entity instanceof CloudSkiff ? 0.75F : super.getFriction(state, level, pos, entity);
     }
 
     @Override

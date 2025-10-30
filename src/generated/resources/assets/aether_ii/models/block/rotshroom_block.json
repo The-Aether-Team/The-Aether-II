@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "aether_ii:block/rotshroom_block_bottom",
+    "side": "aether_ii:block/rotshroom_block",
+    "top": "aether_ii:block/rotshroom_block"
+  }
+}

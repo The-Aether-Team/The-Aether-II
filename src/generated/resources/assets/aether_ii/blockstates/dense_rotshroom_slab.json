@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "aether_ii:block/dense_rotshroom_slab"
+    },
+    "type=double": {
+      "model": "aether_ii:block/dense_rotshroom_block"
+    },
+    "type=top": {
+      "model": "aether_ii:block/dense_rotshroom_slab_top"
+    }
+  }
+}

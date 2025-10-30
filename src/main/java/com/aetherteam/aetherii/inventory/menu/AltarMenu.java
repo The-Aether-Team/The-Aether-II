@@ -58,15 +58,7 @@ public class AltarMenu extends RecipeBookMenu {
         }
         this.addSlot(new AltarResultSlot(playerInventory.player, container, 9, 140, 58)); // Output
 
-        // Inventory
-        for (int i = 0; i < 3; ++i) {
-            for(int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 132 + i * 18));
-            }
-        }
-        for (int k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 190));
-        }
+        this.addStandardInventorySlots(playerInventory, 8, 132);
         this.addDataSlots(data);
     }
 

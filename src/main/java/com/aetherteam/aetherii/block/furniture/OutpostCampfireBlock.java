@@ -97,13 +97,20 @@ public class OutpostCampfireBlock extends MultiBlock {
             BlockPos origin = multiblock.getLevelOriginPos();
             if (origin != null) {
                 BlockState originState = level.getBlockState(origin);
-                if (originState.is(state.getBlock()) && !originState.getValue(LIT)) {
-                    Direction direction = originState.getValue(PART_FACING);
-                    BlockPos relativePos = origin;
-                    for (int i = 0; i < 4; i++) {
-                        level.setBlock(relativePos, level.getBlockState(relativePos).setValue(LIT, true), 3);
-                        relativePos = relativePos.relative(direction);
-                        direction = direction.getCounterClockWise();
+                if (originState.is(state.getBlock())) {
+                    if (!originState.getValue(LIT)) {
+                        Direction direction = originState.getValue(PART_FACING);
+                        BlockPos relativePos = origin;
+                        for (int i = 0; i < 4; i++) {
+                            level.setBlock(relativePos, level.getBlockState(relativePos).setValue(LIT, true), 3);
+                            relativePos = relativePos.relative(direction);
+                            direction = direction.getCounterClockWise();
+                        }
+
+                        Vec3 originVec = Vec3.atBottomCenterOf(origin);
+                        Direction xDir = originState.getValue(PART_FACING).getAxis() == Direction.Axis.X ? originState.getValue(PART_FACING) : originState.getValue(PART_FACING).getCounterClockWise();
+                        Direction zDir = originState.getValue(PART_FACING).getAxis() == Direction.Axis.Z ? originState.getValue(PART_FACING) : originState.getValue(PART_FACING).getCounterClockWise();
+                        this.activationParticles(level, new Vec3(originVec.x() + (xDir.getStepX() / 2.0), originVec.y(), originVec.z() + (zDir.getStepZ() / 2.0)), level.getRandom());
                     }
 
                     var data = player.getData(AetherIIDataAttachments.OUTPOST_TRACKER);
@@ -113,11 +120,6 @@ public class OutpostCampfireBlock extends MultiBlock {
                             player.displayClientMessage(Component.translatable("aether_ii.message.campfire_added"), false);
                         }
                     }
-
-                    Vec3 originVec = Vec3.atBottomCenterOf(origin);
-                    Direction xDir = originState.getValue(PART_FACING).getAxis() == Direction.Axis.X ? originState.getValue(PART_FACING) : originState.getValue(PART_FACING).getCounterClockWise();
-                    Direction zDir = originState.getValue(PART_FACING).getAxis() == Direction.Axis.Z ? originState.getValue(PART_FACING) : originState.getValue(PART_FACING).getCounterClockWise();
-                    this.activationParticles(level, new Vec3(originVec.x() + (xDir.getStepX() / 2.0), originVec.y(), originVec.z() + (zDir.getStepZ() / 2.0)), level.getRandom());
                     return InteractionResult.SUCCESS;
                 }
             }

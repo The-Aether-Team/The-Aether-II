@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.natural.AercloudBlock;
 import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
 import com.aetherteam.aetherii.block.natural.Snowable;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
@@ -222,10 +223,15 @@ public class PlayerHooks {
         return false;
     }
 
-    public static float handleReinforcedBlocks(BlockState state, float speed) {
-        if (state.hasProperty(AetherIIBlockStateProperties.REINFORCED) && state.getValue(AetherIIBlockStateProperties.REINFORCED)) {
-            return speed * 0.05F;
+    public static void mountAercloudEffects(Player player) {
+        Entity mount = player.getVehicle();
+        if (player.isPassenger() && mount != null) {
+            Optional<BlockState> blockState = mount.level().getBlockStates(mount.getBoundingBox()).filter((state) -> state.getBlock() instanceof AercloudBlock).findAny();
+            if (blockState.isPresent()) {
+                if (player.level().isClientSide()) {
+                    ((AercloudBlock) blockState.get().getBlock()).runAercloudEffect(blockState.get(), player.level(), mount.blockPosition(), mount);
+                }
+            }
         }
-        return speed;
     }
 }

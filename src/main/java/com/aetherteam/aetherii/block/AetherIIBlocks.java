@@ -44,6 +44,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
@@ -555,87 +556,80 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<IronBarsBlock> ARKENIUM_FRAMED_SCATTERGLASS_PANE = register("arkenium_framed_scatterglass_pane", ScatterglassPaneBlock::new, () -> Block.Properties.ofFullCopy(SCATTERGLASS_PANE.get()));
 
     // Infected Guardian Tree
-    // Guardian Dungeon Blocks
-    public static final DeferredBlock<RotatedPillarBlock> GUARDIAN_LOG = register("guardian_log", ReinforcedRotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
-    public static final DeferredBlock<RotatedPillarBlock> GUARDIAN_WOOD = register("guardian_wood", ReinforcedRotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
-    public static final DeferredBlock<RotatedPillarBlock> DENSE_GUARDIAN_LOG = register("dense_guardian_log", ReinforcedRotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
-    public static final DeferredBlock<RotatedPillarBlock> DENSE_GUARDIAN_WOOD = register("dense_guardian_wood", ReinforcedRotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
-    public static final DeferredBlock<FacingPillarBlock> GUARDIAN_CORNER_LOG = register("guardian_corner_log", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_LOG.get()).mapColor(MapColor.COLOR_BROWN));
-    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_GUARDIAN_LOG = register("stripped_guardian_log", ReinforcedRotatedPillarBlock::new, logProperties(MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.TERRACOTTA_LIGHT_GRAY));
-    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_GUARDIAN_WOOD = register("stripped_guardian_wood", ReinforcedRotatedPillarBlock::new, logProperties(MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.TERRACOTTA_LIGHT_GRAY));
-    public static final DeferredBlock<FacingPillarBlock> STRIPPED_GUARDIAN_CORNER_LOG = register("stripped_guardian_corner_log", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(STRIPPED_GUARDIAN_LOG.get()).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY));
-    public static final DeferredBlock<FacingPillarBlock> BASE_STRIPPED_GUARDIAN_WOOD = register("base_stripped_guardian_wood", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(STRIPPED_GUARDIAN_WOOD.get()).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY));
-    public static final DeferredBlock<FacingPillarBlock> TOP_STRIPPED_GUARDIAN_WOOD = register("top_stripped_guardian_wood", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(STRIPPED_GUARDIAN_WOOD.get()).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY));
-    public static final DeferredBlock<Block> GUARDIAN_ROOTS = register("guardian_roots", ReinforcedBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.ROOTS).ignitedByLava());
-    public static final DeferredBlock<Block> FLOWERING_GUARDIAN_ROOTS = register("flowering_guardian_roots", ReinforcedBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()));
-    public static final DeferredBlock<Block> DIM_GUARDIAN_ROOTS = register("dim_guardian_roots", ReinforcedBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()).lightLevel((state) -> 4));
-    public static final DeferredBlock<Block> LUCENT_GUARDIAN_ROOTS = register("lucent_guardian_roots", ReinforcedBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()).lightLevel((state) -> 7));
-    public static final DeferredBlock<Block> GUARDIAN_LAMP = register("guardian_lamp", ReinforcedBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()).lightLevel((state) -> 10));
-    public static final DeferredBlock<FacingPillarBlock> BASE_ROOTED_GUARDIAN_WOOD = register("base_rooted_guardian_wood", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()).sound(SoundType.WOOD));
-    public static final DeferredBlock<FacingPillarBlock> TOP_ROOTED_GUARDIAN_WOOD = register("top_rooted_guardian_wood", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(BASE_ROOTED_GUARDIAN_WOOD.get()));
-    public static final DeferredBlock<RotatedPillarBlock> GUARDIAN_CORTEX = register("guardian_cortex", ReinforcedRotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
-    public static final DeferredBlock<FacingPillarBlock> BASE_GUARDIAN_CORTEX_WOOD = register("base_guardian_cortex_wood", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_CORTEX.get()).mapColor(MapColor.COLOR_BROWN));
-    public static final DeferredBlock<FacingPillarBlock> TOP_GUARDIAN_CORTEX_WOOD = register("top_guardian_cortex_wood", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_CORTEX.get()).mapColor(MapColor.COLOR_BROWN));
-    public static final DeferredBlock<Block> UNDERGROWTH_LEAVES = register("undergrowth_leaves", () -> Block.Properties.of().strength(0.2F).mapColor(MapColor.TERRACOTTA_GREEN).sound(SoundType.AZALEA_LEAVES).noOcclusion().isSuffocating(AetherIIBlockBuilders::never).isViewBlocking(AetherIIBlockBuilders::never).isRedstoneConductor(AetherIIBlockBuilders::never).pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> FLOWERING_UNDERGROWTH_LEAVES = register("flowering_undergrowth_leaves", () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERGROWTH_LEAVES.get()));
-    public static final DeferredBlock<FacingPillarBlock> BASE_ROOTED_UNDERGROWTH_LEAVES = register("base_rooted_undergrowth_leaves", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()));
-    public static final DeferredBlock<FacingPillarBlock> TOP_ROOTED_UNDERGROWTH_LEAVES = register("top_rooted_undergrowth_leaves", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()));
-    public static final DeferredBlock<Block> UNDERGROWTH_VINES = register("undergrowth_vines", UndergrowthVinesBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_GREEN).randomTicks().noCollission().instabreak().sound(SoundType.CAVE_VINES).pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> UNDERGROWTH_VINES_PLANT = registerWithoutItem("undergrowth_vines_plant", UndergrowthVinesPlantBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERGROWTH_VINES.get()));
-    public static final DeferredBlock<RotatedPillarBlock> LOCKED_GUARDIAN_WOOD = register("locked_guardian_wood", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_WOOD.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<RotatedPillarBlock> LOCKED_DENSE_GUARDIAN_WOOD = register("locked_dense_guardian_wood", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(DENSE_GUARDIAN_WOOD.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<Block> LOCKED_GUARDIAN_ROOTS = register("locked_guardian_roots", () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<Block> LOCKED_DIM_GUARDIAN_ROOTS = register("locked_dim_guardian_roots", () -> Block.Properties.ofFullCopy(DIM_GUARDIAN_ROOTS.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<Block> LOCKED_LUCENT_GUARDIAN_ROOTS = register("locked_lucent_guardian_roots", () -> Block.Properties.ofFullCopy(LUCENT_GUARDIAN_ROOTS.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<Block> LOCKED_GUARDIAN_LAMP = register("locked_guardian_lamp", () -> Block.Properties.ofFullCopy(GUARDIAN_LAMP.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<TrunkBlock> GUARDIAN_TRUNK = register("guardian_trunk", TrunkBlock::new, trunkProperties(MapColor.COLOR_BROWN));
-    public static final DeferredBlock<TrunkBlock> DENSE_GUARDIAN_TRUNK = register("dense_guardian_trunk", TrunkBlock::new, trunkProperties(MapColor.COLOR_BROWN));
-    public static final DeferredBlock<TrunkBlock> STRIPPED_GUARDIAN_TRUNK = register("stripped_guardian_trunk", TrunkBlock::new, trunkProperties(MapColor.TERRACOTTA_LIGHT_GRAY));
+    // Guardian Wood
+    public static final DeferredBlock<RotatedPillarBlock> GUARDIAN_LOG = register("guardian_log", RotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.WOOD));
+    public static final DeferredBlock<RotatedPillarBlock> GUARDIAN_WOOD = register("guardian_wood", RotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.WOOD));
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_GUARDIAN_LOG = register("stripped_guardian_log", RotatedPillarBlock::new, logProperties(MapColor.WOOD, MapColor.WOOD));
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_GUARDIAN_WOOD = register("stripped_guardian_wood", RotatedPillarBlock::new, logProperties(MapColor.WOOD, MapColor.WOOD));
+    public static final DeferredBlock<RotatedPillarBlock> DENSE_GUARDIAN_LOG = register("dense_guardian_log", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_LOG.get()).strength(-1.0F, 3600000.0F).noLootTable());
+    public static final DeferredBlock<RotatedPillarBlock> DENSE_GUARDIAN_WOOD = register("dense_guardian_wood", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_WOOD.get()).strength(-1.0F, 3600000.0F).noLootTable());
+    public static final DeferredBlock<RotatedPillarBlock> DENSE_STRIPPED_GUARDIAN_LOG = register("dense_stripped_guardian_log", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(STRIPPED_GUARDIAN_LOG.get()).strength(-1.0F, 3600000.0F).noLootTable());
+    public static final DeferredBlock<RotatedPillarBlock> DENSE_STRIPPED_GUARDIAN_WOOD = register("dense_stripped_guardian_wood", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(STRIPPED_GUARDIAN_WOOD.get()).strength(-1.0F, 3600000.0F).noLootTable());
 
-    // Infected Dungeon Blocks
-    public static final DeferredBlock<RotatedPillarBlock> INFECTED_LOG = register("infected_log", ReinforcedRotatedPillarBlock::new, logProperties(MapColor.WOOL, MapColor.TERRACOTTA_WHITE));
-    public static final DeferredBlock<RotatedPillarBlock> INFECTED_WOOD = register("infected_wood", ReinforcedRotatedPillarBlock::new, logProperties(MapColor.WOOL, MapColor.TERRACOTTA_WHITE));
-    public static final DeferredBlock<RotatedPillarBlock> DENSE_INFECTED_LOG = register("dense_infected_log", ReinforcedRotatedPillarBlock::new, logProperties(MapColor.WOOL, MapColor.TERRACOTTA_WHITE));
-    public static final DeferredBlock<RotatedPillarBlock> DENSE_INFECTED_WOOD = register("dense_infected_wood", ReinforcedRotatedPillarBlock::new, logProperties(MapColor.WOOL, MapColor.TERRACOTTA_WHITE));
-    public static final DeferredBlock<FacingPillarBlock> INFECTED_CORNER_LOG = register("infected_corner_log", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_LOG.get()).mapColor(MapColor.TERRACOTTA_WHITE));
-    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_INFECTED_LOG = register("stripped_infected_log", ReinforcedRotatedPillarBlock::new, logProperties(MapColor.TERRACOTTA_WHITE, MapColor.TERRACOTTA_WHITE));
-    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_INFECTED_WOOD = register("stripped_infected_wood", ReinforcedRotatedPillarBlock::new, logProperties(MapColor.TERRACOTTA_WHITE, MapColor.TERRACOTTA_WHITE));
-    public static final DeferredBlock<FacingPillarBlock> STRIPPED_INFECTED_CORNER_LOG = register("stripped_infected_corner_log", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(STRIPPED_INFECTED_LOG.get()).mapColor(MapColor.TERRACOTTA_WHITE));
-    public static final DeferredBlock<FacingPillarBlock> BASE_STRIPPED_INFECTED_WOOD = register("base_stripped_infected_wood", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(STRIPPED_INFECTED_WOOD.get()).mapColor(MapColor.TERRACOTTA_WHITE));
-    public static final DeferredBlock<FacingPillarBlock> TOP_STRIPPED_INFECTED_WOOD = register("top_stripped_infected_wood", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(STRIPPED_INFECTED_WOOD.get()).mapColor(MapColor.TERRACOTTA_WHITE));
-    public static final DeferredBlock<Block> INFECTED_ROOTS = register("infected_roots", ReinforcedBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()).mapColor(MapColor.TERRACOTTA_GREEN));
-    public static final DeferredBlock<Block> FLOWERING_INFECTED_ROOTS = register("flowering_infected_roots", ReinforcedBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_ROOTS.get()));
-    public static final DeferredBlock<Block> DIM_INFECTED_ROOTS = register("dim_infected_roots", ReinforcedBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_ROOTS.get()).lightLevel((state) -> 4));
-    public static final DeferredBlock<Block> LUCENT_INFECTED_ROOTS = register("lucent_infected_roots", ReinforcedBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_ROOTS.get()).lightLevel((state) -> 7));
-    public static final DeferredBlock<Block> INFECTED_LAMP = register("infected_lamp", ReinforcedBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_ROOTS.get()).lightLevel((state) -> 10));
-    public static final DeferredBlock<FacingPillarBlock> BASE_ROOTED_INFECTED_WOOD = register("base_rooted_infected_wood", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_ROOTS.get()).sound(SoundType.WOOD));
-    public static final DeferredBlock<FacingPillarBlock> TOP_ROOTED_INFECTED_WOOD = register("top_rooted_infected_wood", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(BASE_ROOTED_INFECTED_WOOD.get()));
-    public static final DeferredBlock<RotatedPillarBlock> INFECTED_CORTEX = register("infected_cortex", ReinforcedRotatedPillarBlock::new, logProperties(MapColor.WOOL, MapColor.TERRACOTTA_LIGHT_GRAY));
-    public static final DeferredBlock<FacingPillarBlock> BASE_INFECTED_CORTEX_WOOD = register("base_infected_cortex_wood", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_CORTEX.get()).mapColor(MapColor.WOOL));
-    public static final DeferredBlock<FacingPillarBlock> TOP_INFECTED_CORTEX_WOOD = register("top_infected_cortex_wood", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_CORTEX.get()).mapColor(MapColor.WOOL));
-    public static final DeferredBlock<Block> ROTTEN_UNDERGROWTH_LEAVES = register("rotten_undergrowth_leaves", () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERGROWTH_LEAVES.get()).mapColor(MapColor.TERRACOTTA_BROWN));
-    public static final DeferredBlock<Block> FLOWERING_ROTTEN_UNDERGROWTH_LEAVES = register("flowering_rotten_undergrowth_leaves", () -> Block.Properties.ofFullCopy(AetherIIBlocks.ROTTEN_UNDERGROWTH_LEAVES.get()));
-    public static final DeferredBlock<FacingPillarBlock> BASE_ROOTED_ROTTEN_UNDERGROWTH_LEAVES = register("base_rooted_rotten_undergrowth_leaves", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_ROOTS.get()));
-    public static final DeferredBlock<FacingPillarBlock> TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES = register("top_rooted_rotten_undergrowth_leaves", ReinforcedFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_ROOTS.get()));
-    public static final DeferredBlock<Block> ROTTEN_UNDERGROWTH_VINES = register("rotten_undergrowth_vines", RottenUndergrowthVinesBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERGROWTH_VINES.get()).mapColor(MapColor.TERRACOTTA_BROWN));
-    public static final DeferredBlock<Block> ROTTEN_UNDERGROWTH_VINES_PLANT = registerWithoutItem("rotten_undergrowth_vines_plant", RottenUndergrowthVinesPlantBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get()));
-    public static final DeferredBlock<RotatedPillarBlock> LOCKED_INFECTED_WOOD = register("locked_infected_wood", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_WOOD.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<RotatedPillarBlock> LOCKED_DENSE_INFECTED_WOOD = register("locked_dense_infected_wood", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(DENSE_INFECTED_WOOD.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<Block> LOCKED_DIM_INFECTED_ROOTS = register("locked_dim_infected_roots", () -> Block.Properties.ofFullCopy(DIM_INFECTED_ROOTS.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<Block> LOCKED_LUCENT_INFECTED_ROOTS = register("locked_lucent_infected_roots", () -> Block.Properties.ofFullCopy(LUCENT_INFECTED_ROOTS.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<Block> LOCKED_INFECTED_LAMP = register("locked_infected_lamp", () -> Block.Properties.ofFullCopy(INFECTED_LAMP.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<Block> LOCKED_INFECTED_ROOTS = register("locked_infected_roots", () -> Block.Properties.ofFullCopy(INFECTED_ROOTS.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<TrunkBlock> INFECTED_TRUNK = register("infected_trunk", TrunkBlock::new, trunkProperties(MapColor.WOOL));
-    public static final DeferredBlock<TrunkBlock> DENSE_INFECTED_TRUNK = register("dense_infected_trunk", TrunkBlock::new, trunkProperties(MapColor.WOOL));
-    public static final DeferredBlock<TrunkBlock> STRIPPED_INFECTED_TRUNK = register("stripped_infected_trunk", TrunkBlock::new, trunkProperties(MapColor.TERRACOTTA_WHITE));
+    // Infected Wood
+    public static final DeferredBlock<RotatedPillarBlock> INFECTED_LOG = register("infected_log", RotatedPillarBlock::new, logProperties(MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.SAND));
+    public static final DeferredBlock<RotatedPillarBlock> INFECTED_WOOD = register("infected_wood", RotatedPillarBlock::new, logProperties(MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.SAND));
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_INFECTED_LOG = register("stripped_infected_log", RotatedPillarBlock::new, logProperties(MapColor.SAND, MapColor.SAND));
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_INFECTED_WOOD = register("stripped_infected_wood", RotatedPillarBlock::new, logProperties(MapColor.SAND, MapColor.SAND));
+    public static final DeferredBlock<RotatedPillarBlock> DENSE_INFECTED_LOG = register("dense_infected_log", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_LOG.get()).strength(-1.0F, 3600000.0F).noLootTable());
+    public static final DeferredBlock<RotatedPillarBlock> DENSE_INFECTED_WOOD = register("dense_infected_wood", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_WOOD.get()).strength(-1.0F, 3600000.0F).noLootTable());
+    public static final DeferredBlock<RotatedPillarBlock> DENSE_STRIPPED_INFECTED_LOG = register("dense_stripped_infected_log", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(STRIPPED_INFECTED_LOG.get()).strength(-1.0F, 3600000.0F).noLootTable());
+    public static final DeferredBlock<RotatedPillarBlock> DENSE_STRIPPED_INFECTED_WOOD = register("dense_stripped_infected_wood", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(STRIPPED_INFECTED_WOOD.get()).strength(-1.0F, 3600000.0F).noLootTable());
+
+    // Guardian Slabs
+    public static final DeferredBlock<SlabBlock> GUARDIAN_LOG_SLAB = register("guardian_log_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.GUARDIAN_LOG.get()).mapColor(MapColor.WOOD));
+    public static final DeferredBlock<SlabBlock> GUARDIAN_WOOD_SLAB = register("guardian_wood_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.GUARDIAN_WOOD.get()).mapColor(MapColor.COLOR_BROWN));
+    public static final DeferredBlock<SlabBlock> STRIPPED_GUARDIAN_LOG_SLAB = register("stripped_guardian_log_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get()).mapColor(MapColor.WOOD));
+    public static final DeferredBlock<SlabBlock> STRIPPED_GUARDIAN_WOOD_SLAB = register("stripped_guardian_wood_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get()).mapColor(MapColor.WOOD));
+    public static final DeferredBlock<SlabBlock> INFECTED_LOG_SLAB = register("infected_log_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.GUARDIAN_LOG.get()).mapColor(MapColor.SAND));
+    public static final DeferredBlock<SlabBlock> INFECTED_WOOD_SLAB = register("infected_wood_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.GUARDIAN_WOOD.get()).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY));
+    public static final DeferredBlock<SlabBlock> STRIPPED_INFECTED_LOG_SLAB = register("stripped_infected_log_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get()).mapColor(MapColor.SAND));
+    public static final DeferredBlock<SlabBlock> STRIPPED_INFECTED_WOOD_SLAB = register("stripped_infected_wood_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get()).mapColor(MapColor.SAND));
+
+   // Dense Guardian Slabs
+    public static final DeferredBlock<SlabBlock> DENSE_GUARDIAN_LOG_SLAB = register("dense_guardian_log_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_GUARDIAN_LOG.get()).mapColor(MapColor.WOOD));
+    public static final DeferredBlock<SlabBlock> DENSE_GUARDIAN_WOOD_SLAB = register("dense_guardian_wood_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get()).mapColor(MapColor.COLOR_BROWN));
+    public static final DeferredBlock<SlabBlock> DENSE_STRIPPED_GUARDIAN_LOG_SLAB = register("dense_stripped_guardian_log_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_LOG.get()).mapColor(MapColor.WOOD));
+    public static final DeferredBlock<SlabBlock> DENSE_STRIPPED_GUARDIAN_WOOD_SLAB = register("dense_stripped_guardian_wood_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_WOOD.get()).mapColor(MapColor.WOOD));
+    public static final DeferredBlock<SlabBlock> DENSE_INFECTED_LOG_SLAB = register("dense_infected_log_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_GUARDIAN_LOG.get()).mapColor(MapColor.SAND));
+    public static final DeferredBlock<SlabBlock> DENSE_INFECTED_WOOD_SLAB = register("dense_infected_wood_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get()).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY));
+    public static final DeferredBlock<SlabBlock> DENSE_STRIPPED_INFECTED_LOG_SLAB = register("dense_stripped_infected_log_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_LOG.get()).mapColor(MapColor.SAND));
+    public static final DeferredBlock<SlabBlock> DENSE_STRIPPED_INFECTED_WOOD_SLAB = register("dense_stripped_infected_wood_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_WOOD.get()).mapColor(MapColor.SAND));
+
+    // Guardian Trunks
+    public static final DeferredBlock<TrunkBlock> GUARDIAN_TRUNK = register("guardian_trunk", TrunkBlock::new, trunkProperties(MapColor.COLOR_BROWN));
+    public static final DeferredBlock<TrunkBlock> STRIPPED_GUARDIAN_TRUNK = register("stripped_guardian_trunk", TrunkBlock::new, trunkProperties(MapColor.WOOD));
+    public static final DeferredBlock<TrunkBlock> INFECTED_TRUNK = register("infected_trunk", TrunkBlock::new, trunkProperties(MapColor.TERRACOTTA_LIGHT_GRAY));
+    public static final DeferredBlock<TrunkBlock> STRIPPED_INFECTED_TRUNK = register("stripped_infected_trunk", TrunkBlock::new, trunkProperties(MapColor.SAND));
+
+    // Guardian Root Blocks
+    public static final DeferredBlock<Block> GUARDIAN_ROOTS = register("guardian_roots", Block::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.ROOTS).ignitedByLava());
+    public static final DeferredBlock<Block> UNSTABLE_GUARDIAN_ROOTS = register("unstable_guardian_roots", UnstableBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.ROOTS).ignitedByLava());
+    public static final DeferredBlock<Block> DENSE_GUARDIAN_ROOTS = register("dense_guardian_roots", () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()).strength(-1.0F, 3600000.0F).noLootTable());
+    public static final DeferredBlock<Block> LUCENT_GUARDIAN_ROOTS = register("lucent_guardian_roots", Block::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()).lightLevel((state) -> 7));
+    public static final DeferredBlock<Block> GUARDIAN_LAMP = register("guardian_lamp", Block::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()).lightLevel((state) -> 10));
+
+    // Undergrowth Blocks
+    public static final DeferredBlock<Block> UNDERGROWTH_LEAVES = register("undergrowth_leaves", () -> Block.Properties.of().strength(0.2F).mapColor(MapColor.TERRACOTTA_LIGHT_GREEN).sound(SoundType.AZALEA_LEAVES).noOcclusion().isSuffocating(AetherIIBlockBuilders::never).isViewBlocking(AetherIIBlockBuilders::never).isRedstoneConductor(AetherIIBlockBuilders::never).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> DENSE_UNDERGROWTH_LEAVES = register("dense_undergrowth_leaves", () -> Block.Properties.ofFullCopy(UNDERGROWTH_LEAVES.get()).strength(-1.0F, 3600000.0F).noLootTable());
+    public static final DeferredBlock<Block> UNDERGROWTH_VINES = register("undergrowth_vines", BottomedVineBlock::new, () -> Block.Properties.ofFullCopy(Blocks.VINE).mapColor(MapColor.TERRACOTTA_LIGHT_GREEN));
+    public static final DeferredBlock<Block> HANGING_UNDERGROWTH = register("hanging_undergrowth", HangingUndergrowthBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_LIGHT_GREEN).randomTicks().noCollission().instabreak().sound(SoundType.CAVE_VINES).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> HANGING_UNDERGROWTH_PLANT = registerWithoutItem("hanging_undergrowth_plant", HangingUndergrowthPlantBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.HANGING_UNDERGROWTH.get()));
 
     // Rotshroom Blocks
-    public static final DeferredBlock<Block> ROTSHROOM_CLUSTER = register("rotshroom_cluster", RotshroomClusterBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).noCollission().noOcclusion().randomTicks().instabreak().offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> ROTSHROOM_TOADSTOOL = register("rotshroom_toadstool", RotshroomToadstoolBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).strength(0.1F).noOcclusion().randomTicks().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> ROTSHROOM_TOADSTOOL_CLUSTER = register("rotshroom_toadstool_cluster", RotshroomToadstoolClusterBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).strength(0.1F).noOcclusion().randomTicks().offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> SHELF_ROTSHROOM = register("shelf_rotshroom", ShelfRotshroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).noCollission().randomTicks().instabreak().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> SHELF_ROTSHROOM_BLOCK = register("shelf_rotshroom_block", LargeShelfRotshroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).instrument(NoteBlockInstrument.BASS).strength(0.2F).sound(SoundType.WOOD).ignitedByLava());
-    public static final DeferredBlock<Block> FUNGAL_CARPET = register("fungal_carpet", FungalCarpetBlock::new, () -> BlockBehaviour.Properties.of().ignitedByLava().mapColor(MapColor.TERRACOTTA_ORANGE).strength(0.2F).sound(SoundType.FUNGUS).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> ROTSHROOM_BLOCK = register("rotshroom_block", Block::new, () -> Block.Properties.of().mapColor(MapColor.DIRT).instrument(NoteBlockInstrument.BASS).strength(0.2F).sound(SoundType.WOOD));
+    public static final DeferredBlock<SlabBlock> ROTSHROOM_SLAB = register("rotshroom_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ROTSHROOM_BLOCK.get()).mapColor(MapColor.WOOD));
+    public static final DeferredBlock<RotatedPillarBlock> ROTSHROOM_STEM = register("rotshroom_stem", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ROTSHROOM_BLOCK.get()).mapColor(MapColor.WOOL));
+    public static final DeferredBlock<Block> DENSE_ROTSHROOM_BLOCK = register("dense_rotshroom_block", Block::new, () -> Block.Properties.ofFullCopy(ROTSHROOM_BLOCK.get()).strength(-1.0F, 3600000.0F).noLootTable());
+    public static final DeferredBlock<SlabBlock> DENSE_ROTSHROOM_SLAB = register("dense_rotshroom_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_ROTSHROOM_BLOCK.get()));
+    public static final DeferredBlock<RotatedPillarBlock> DENSE_ROTSHROOM_STEM = register("dense_rotshroom_stem", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(ROTSHROOM_STEM.get()).strength(-1.0F, 3600000.0F).noLootTable());
+    public static final DeferredBlock<Block> SHELF_ROTSHROOM_SLAB = register("shelf_rotshroom_slab", LargeShelfRotshroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.DIRT).instrument(NoteBlockInstrument.BASS).strength(0.2F).sound(SoundType.WOOD).ignitedByLava());
+    public static final DeferredBlock<Block> ROTSHROOM = register("rotshroom", RotshroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.DIRT).noCollission().noOcclusion().randomTicks().instabreak().offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<FlowerPotBlock> POTTED_ROTSHROOM = registerWithoutItem("potted_rotshroom", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ROTSHROOM, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
+    public static final DeferredBlock<Block> ROTSHROOM_CLUSTER = register("rotshroom_cluster", RotshroomClusterBlock::new, () -> Block.Properties.of().mapColor(MapColor.DIRT).strength(0.1F).noOcclusion().randomTicks().instabreak().offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> ROTSHROOM_TOADSTOOL = register("rotshroom_toadstool", RotshroomToadstoolBlock::new, () -> Block.Properties.of().mapColor(MapColor.DIRT).strength(0.1F).offsetType(BlockBehaviour.OffsetType.XYZ).dynamicShape().noOcclusion().randomTicks().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> SHELF_ROTSHROOM = register("shelf_rotshroom", ShelfRotshroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.DIRT).noCollission().randomTicks().instabreak().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> ROTGROWTH_VINES = register("rotgrowth_vines", BottomedVineBlock::new, () -> Block.Properties.ofFullCopy(Blocks.VINE).sound(SoundType.HANGING_ROOTS).mapColor(MapColor.DIRT).strength(-1.0F, 3600000.0F).noLootTable());
 
     // Wool
     public static final DeferredBlock<Block> CLOUDWOOL = register("cloudwool", () -> Block.Properties.ofFullCopy(Blocks.WHITE_WOOL));
@@ -705,6 +699,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> ARTISANS_BENCH = register("artisans_bench", ArtisansBenchBlock::new, () -> Block.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion());
     public static final DeferredBlock<Block> ARKENIUM_FORGE = register("arkenium_forge", ArkeniumForgeBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ARKENIUM_BLOCK.get()).noOcclusion());
     public static final DeferredBlock<Block> ALKAHEST_PURIFIER = register("alkahest_purifier", AlkahestPurifierBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ARKENIUM_BLOCK.get()).noOcclusion());
+    public static final DeferredBlock<CampfireBlock> AMBROSIUM_CAMPFIRE = register("ambrosium_campfire", (properties) -> new AmbrosiumCampfireBlock(false, 1, properties), () -> Block.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).lightLevel((state) -> state.getValue(BlockStateProperties.LIT) ? 15 : 0).noOcclusion().ignitedByLava());
     public static final DeferredBlock<Block> SKYROOT_CHEST = register("skyroot_chest", (properties) -> new SkyrootChestBlock(properties, AetherIIBlockEntityTypes.SKYROOT_CHEST::get), () -> Block.Properties.ofFullCopy(Blocks.CHEST));
     public static final DeferredBlock<LadderBlock> SKYROOT_LADDER = register("skyroot_ladder", LadderBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LADDER).strength(0.4F).sound(SoundType.LADDER).noOcclusion());
     public static final DeferredBlock<BedBlock> SKYROOT_BED = register("skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.WHITE, properties), () -> Block.Properties.ofFullCopy(Blocks.WHITE_BED));
@@ -824,6 +819,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.BLUEBERRY_BUSH.get()), AetherIIBlocks.POTTED_BLUEBERRY_BUSH);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get()), AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.ORANGE_TREE.get()), AetherIIBlocks.POTTED_ORANGE_TREE);
+        pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.ROTSHROOM.get()), AetherIIBlocks.POTTED_ROTSHROOM);
     }
 
     public static void registerFlammability() {
@@ -954,19 +950,15 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
             .put(() -> AetherIIBlocks.AMBEROOT_WOOD, () -> AetherIIBlocks.STRIPPED_SKYROOT_WOOD)
             .put(() -> AetherIIBlocks.AMBEROOT_TRUNK, () -> AetherIIBlocks.STRIPPED_SKYROOT_TRUNK)
             .put(() -> AetherIIBlocks.GUARDIAN_LOG, () -> AetherIIBlocks.STRIPPED_GUARDIAN_LOG)
+            .put(() -> AetherIIBlocks.GUARDIAN_LOG_SLAB, () -> AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB)
             .put(() -> AetherIIBlocks.GUARDIAN_WOOD, () -> AetherIIBlocks.STRIPPED_GUARDIAN_WOOD)
+            .put(() -> AetherIIBlocks.GUARDIAN_WOOD_SLAB, () -> AetherIIBlocks.STRIPPED_GUARDIAN_WOOD_SLAB)
             .put(() -> AetherIIBlocks.GUARDIAN_TRUNK, () -> AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK)
-            .put(() -> AetherIIBlocks.DENSE_GUARDIAN_LOG, () -> AetherIIBlocks.STRIPPED_GUARDIAN_LOG)
-            .put(() -> AetherIIBlocks.DENSE_GUARDIAN_WOOD, () -> AetherIIBlocks.STRIPPED_GUARDIAN_WOOD)
-            .put(() -> AetherIIBlocks.DENSE_GUARDIAN_TRUNK, () -> AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK)
-            .put(() -> AetherIIBlocks.GUARDIAN_CORNER_LOG, () -> AetherIIBlocks.STRIPPED_GUARDIAN_CORNER_LOG)
             .put(() -> AetherIIBlocks.INFECTED_LOG, () -> AetherIIBlocks.STRIPPED_INFECTED_LOG)
+            .put(() -> AetherIIBlocks.INFECTED_LOG_SLAB, () -> AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB)
             .put(() -> AetherIIBlocks.INFECTED_WOOD, () -> AetherIIBlocks.STRIPPED_INFECTED_WOOD)
+            .put(() -> AetherIIBlocks.INFECTED_WOOD_SLAB, () -> AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB)
             .put(() -> AetherIIBlocks.INFECTED_TRUNK, () -> AetherIIBlocks.STRIPPED_INFECTED_TRUNK)
-            .put(() -> AetherIIBlocks.DENSE_INFECTED_LOG, () -> AetherIIBlocks.STRIPPED_INFECTED_LOG)
-            .put(() -> AetherIIBlocks.DENSE_INFECTED_WOOD, () -> AetherIIBlocks.STRIPPED_INFECTED_WOOD)
-            .put(() -> AetherIIBlocks.DENSE_INFECTED_TRUNK, () -> AetherIIBlocks.STRIPPED_INFECTED_TRUNK)
-            .put(() -> AetherIIBlocks.INFECTED_CORNER_LOG, () -> AetherIIBlocks.STRIPPED_INFECTED_CORNER_LOG)
             .build();
 
     /**

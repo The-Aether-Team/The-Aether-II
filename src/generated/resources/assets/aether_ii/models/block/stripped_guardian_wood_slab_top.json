@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "aether_ii:block/stripped_guardian_log",
+    "side": "aether_ii:block/stripped_guardian_log",
+    "top": "aether_ii:block/stripped_guardian_log"
+  }
+}

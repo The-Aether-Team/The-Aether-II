@@ -185,6 +185,21 @@ public class AetherIITextureMappings {
                 .put(AetherIITextureSlots.OVERLAY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/dungeon_lock"));
     }
 
+    public static TextureMapping campfire(Block block) {
+        return new TextureMapping()
+                .put(AetherIITextureSlots.LOG, TextureMapping.getBlockTexture(block, "_log"))
+                .put(TextureSlot.LIT_LOG, TextureMapping.getBlockTexture(block, "_log_lit"))
+                .put(TextureSlot.FIRE, TextureMapping.getBlockTexture(block, "_fire"))
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_log"));
+    }
+
+    public static TextureMapping campfireOff(Block block) {
+        return new TextureMapping()
+                .put(AetherIITextureSlots.LOG, TextureMapping.getBlockTexture(block, "_log"))
+                .put(TextureSlot.FIRE, TextureMapping.getBlockTexture(block, "_fire"))
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_log"));
+    }
+
     public static TextureMapping particle(TextureMapping textureMapping) {
         return textureMapping.copyForced(TextureSlot.ALL, TextureSlot.PARTICLE);
     }

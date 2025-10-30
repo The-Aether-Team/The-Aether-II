@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "aether_ii:block/stripped_guardian_log_slab"
+    },
+    "type=double": {
+      "model": "aether_ii:block/stripped_guardian_log"
+    },
+    "type=top": {
+      "model": "aether_ii:block/stripped_guardian_log_slab_top"
+    }
+  }
+}

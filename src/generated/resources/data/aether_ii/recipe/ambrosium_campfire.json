@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "aether_ii:ambrosium_shard",
+    "L": "#minecraft:logs",
+    "S": "aether_ii:skyroot_stick"
+  },
+  "pattern": [
+    " S ",
+    "S#S",
+    "LLL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:ambrosium_campfire"
+  }
+}

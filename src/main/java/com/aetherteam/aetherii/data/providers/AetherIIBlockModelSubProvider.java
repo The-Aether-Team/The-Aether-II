@@ -49,6 +49,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.MossyCarpetBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.DripstoneThickness;
@@ -161,6 +162,15 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant variant = plainVariant(ModelTemplates.CUBE_COLUMN.create(side, mapping, this.modelOutput));
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(side, variant));
     }
+    public void createCubeBottom(Block block) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom"));
+        this.blockStateOutput.accept(createSimpleBlock(block, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(block, mapping, this.modelOutput))));
+    }
+
 
     public void createFacingColumnWithHorizontalVariant(Block side, Block top) {
         TextureMapping mapping = TextureMapping.column(TextureMapping.getBlockTexture(side), TextureMapping.getBlockTexture(top));
@@ -691,6 +701,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.registerSimpleFlatItemModel(rock.asItem());
     }
 
+    public void createLockedDungeonBlock(Block block) {
+        MultiVariant dungeonBlock = plainVariant(ModelLocationUtils.getModelLocation(block));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, dungeonBlock));
+        this.registerSimpleItemModel(block.asItem(), AetherIIModelTemplates.LOCKED_BLOCK_INVENTORY.create(block.asItem(), AetherIITextureMappings.lockedBlockInventory(block), this.modelOutput));
+    }
+
     public void createLockedDungeonBlock(Block baseBlock, Block block) {
         MultiVariant dungeonBlock = plainVariant(ModelLocationUtils.getModelLocation(baseBlock));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, dungeonBlock));
@@ -702,65 +718,49 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, dungeonBlock));
         this.registerSimpleItemModel(block.asItem(), AetherIIModelTemplates.LOCKED_BLOCK_INVENTORY.create(block.asItem(), AetherIITextureMappings.lockedBlockInventory(itemBlock), this.modelOutput));
     }
-    
-    public void createCornerLog(Block baseBlock, Block block) {
-        TextureMapping mapping = (new TextureMapping())
-                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_left"))
-                .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(baseBlock))
-                .put(TextureSlot.UP, TextureMapping.getBlockTexture(block, "_top"))
-                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(block, "_top"))
-                .put(TextureSlot.EAST, TextureMapping.getBlockTexture(block, "_left"))
-                .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(baseBlock))
-                .put(TextureSlot.WEST, TextureMapping.getBlockTexture(block, "_right"));
-        MultiVariant vertical = plainVariant(ModelTemplates.CUBE.create(block, mapping, this.modelOutput));
-        MultiVariant horizontal = plainVariant(ModelTemplates.CUBE.create(ModelLocationUtils.getModelLocation(block, "_horizontal"), mapping, this.modelOutput));
-        this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(block, vertical, horizontal));
+
+    public void createLogSlab(SlabBlock block, Block baseBlock) {
+        this.createBaseCustomSlab(block, baseBlock, baseBlock, "_top");
     }
 
-    public void createCornerLog(Block baseBlock, Block top, Block block) {
-        TextureMapping mapping = (new TextureMapping())
-                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_left"))
-                .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(baseBlock))
-                .put(TextureSlot.UP, TextureMapping.getBlockTexture(top, "_top"))
-                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(top, "_top"))
-                .put(TextureSlot.EAST, TextureMapping.getBlockTexture(block, "_left"))
-                .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(baseBlock))
-                .put(TextureSlot.WEST, TextureMapping.getBlockTexture(block, "_right"));
-        MultiVariant vertical = plainVariant(ModelTemplates.CUBE.create(block, mapping, this.modelOutput));
-        MultiVariant horizontal = plainVariant(ModelTemplates.CUBE.create(ModelLocationUtils.getModelLocation(block, "_horizontal"), mapping, this.modelOutput));
-        this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(block, vertical, horizontal));
+    public void createWoodSlab(SlabBlock block, Block baseBlock, Block textureBlock) {
+        this.createBaseCustomSlab(block, baseBlock, textureBlock, "");
     }
 
-    public void createUndergrowthVines(Block block) {
-        MultiVariant vines = plainVariant(AetherIIModelTemplates.UNDERGROWTH_VINES.create(block, AetherIITextureMappings.vine(TextureMapping.getBlockTexture(block)).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block)), this.modelOutput));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, vines));
+    public void createMushroomSlab(SlabBlock block, Block baseBlock) {
+        this.createBaseCustomSlab(block, baseBlock, baseBlock, "");
     }
 
-    public void createRotshroomCluster(Block block) {
-        MultiVariant shroom = plainVariant(AetherIIModelTemplates.ROTSHROOM_CLUSTER.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem())), this.modelOutput));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom));
-        this.registerSimpleFlatItemModel(block.asItem());
+    public void createBaseCustomSlab(SlabBlock block, Block baseBlock, Block textureBlock, String suffix) {
+        TextureMapping column = TextureMapping.column(TextureMapping.getBlockTexture(textureBlock), TextureMapping.getBlockTexture(textureBlock, suffix));
+        MultiVariant bottom = plainVariant(ModelTemplates.SLAB_BOTTOM.create(block, column, this.modelOutput));
+        MultiVariant top = plainVariant(ModelTemplates.SLAB_TOP.create(block, column, this.modelOutput));
+        MultiVariant full = plainVariant(ModelLocationUtils.getModelLocation(baseBlock));
+        this.blockStateOutput.accept(createSlab(block, bottom, top, full));
     }
 
-    public void createRotshroomToadstoolCluster(Block block) {
-        MultiVariant shroom = plainVariant(AetherIIModelTemplates.ROTSHROOM_TOADSTOOL_CLUSTER.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem())), this.modelOutput));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom).with(ROTATION_HORIZONTAL_FACING));
-        this.registerSimpleFlatItemModel(block.asItem());
+    public void createHangingUndergrowth(Block block) { //todo
+        MultiVariant growth = plainVariant(AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS.create(block, TextureMapping.cross(TextureMapping.getBlockTexture(block)).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block)), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, growth));
     }
 
     public void createRotshroomToadstool(Block block) {
-        MultiVariant shroom = plainVariant(AetherIIModelTemplates.ROTSHROOM_TOADSTOOL.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem())), this.modelOutput));
+        MultiVariant shroom = plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get()));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom));
-        this.registerSimpleFlatItemModel(block.asItem());
     }
 
-    public void createShelfRotshroom(Block block, Item particle) {
-        MultiVariant shroom = plainVariant(AetherIIModelTemplates.SHELF_ROTSHROOM.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(particle)), this.modelOutput));
+    public void createRotshroomCluster(Block block) {
+        MultiVariant shroom = plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.ROTSHROOM_CLUSTER.get()));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom).with(ROTATION_HORIZONTAL_FACING));
     }
 
-    public void createShelfRotshroomBlock(Block block, Item particle) {
-        MultiVariant shroom = plainVariant(AetherIIModelTemplates.SHELF_ROTSHROOM_BLOCK.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(particle)), this.modelOutput));
+    public void createShelfRotshroom(Block block) {
+        MultiVariant shroom = plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.SHELF_ROTSHROOM.get()));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom).with(ROTATION_HORIZONTAL_FACING));
+    }
+
+    public void createShelfRotshroomSlab(Block block) {
+        MultiVariant shroom = plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get()));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, shroom));
     }
 
@@ -830,16 +830,9 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createAltar(Block block, Block particle) {
-        ResourceLocation location = AetherIIModelTemplates.ALTAR.create(block, AetherIITextureMappings.altar(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput);
-        ResourceLocation chargingLocation = AetherIIModelTemplates.ALTAR.create(ModelLocationUtils.getModelLocation(block, "_charging"), AetherIITextureMappings.altar(block, "_charging").put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput);
-        ResourceLocation blastingLocation = AetherIIModelTemplates.ALTAR.create(ModelLocationUtils.getModelLocation(block, "_blasting"), AetherIITextureMappings.altar(block, "_blasting").put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput);
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(AltarBlock.BLASTING, AltarBlock.CHARGING)
-                        .select(true, true, plainVariant(blastingLocation))
-                        .select(true, false, plainVariant(blastingLocation))
-                        .select(false, true, plainVariant(chargingLocation))
-                        .select(false, false, plainVariant(location))
-                ).with(ROTATION_HORIZONTAL_FACING)
-        );
+        MultiVariant location = plainVariant(AetherIIModelTemplates.ALTAR.create(block, AetherIITextureMappings.altar(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, location)
+                .with(ROTATION_HORIZONTAL_FACING));
     }
 
     public void createArtisansBench(Block block, Block particle) {
@@ -862,6 +855,13 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         ResourceLocation resourceLocation = AetherIIModelTemplates.ALKAHEST_PURIFIER_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
         ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourceLocation, new AlkahestPurifierSpecialRenderer.Unbaked());
         this.itemModelOutput.accept(item, unbaked);
+    }
+
+    public void createCampfire(Block block) {
+        MultiVariant campfire = plainVariant(AetherIIModelTemplates.CAMPFIRE.create(block, AetherIITextureMappings.campfire(block), this.modelOutput));
+        MultiVariant campfireOff = plainVariant(AetherIIModelTemplates.CAMPFIRE_OFF.create(block, AetherIITextureMappings.campfireOff(block), this.modelOutput));
+        this.registerSimpleFlatItemModel(block.asItem());
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(createBooleanModelDispatch(BlockStateProperties.LIT, campfire, campfireOff)).with(ROTATION_HORIZONTAL_FACING_ALT));
     }
 
     public void createLadder(Block block) {

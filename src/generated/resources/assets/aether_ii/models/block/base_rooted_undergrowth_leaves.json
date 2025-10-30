@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "aether_ii:block/guardian_roots",
-    "side": "aether_ii:block/base_rooted_undergrowth_leaves",
-    "top": "aether_ii:block/undergrowth_leaves_solid"
-  }
-}

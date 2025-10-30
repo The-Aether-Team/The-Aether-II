@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": "#aether_ii:guardian_logs",
+    "A": "aether_ii:ambrosium_shard"
+  },
+  "pattern": [
+    "#",
+    "A",
+    "#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:guardian_lamp"
+  }
+}

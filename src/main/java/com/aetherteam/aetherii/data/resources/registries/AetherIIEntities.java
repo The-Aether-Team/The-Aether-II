@@ -43,6 +43,7 @@ public class AetherIIEntities {
     public static final ResourceKey<EntityType<?>> SKEPHID = createKey("skephid");
     public static final ResourceKey<EntityType<?>> ARKENIUM_TALUTON = createKey("arkenium_taluton");
     public static final ResourceKey<EntityType<?>> GRAVITITE_TALUTON = createKey("gravitite_taluton");
+    public static final ResourceKey<EntityType<?>> BLADE_SHROOM_HUNTER = createKey("bladeshroom_hunter");
 
 
     //NPCs
@@ -68,6 +69,8 @@ public class AetherIIEntities {
     //Blocks
     public static final ResourceKey<EntityType<?>> HOVERING_BLOCK = createKey("hovering_block");
 
+    //Vehicles
+    public static final ResourceKey<EntityType<?>> CLOUD_SKIFF = createKey("cloud_skiff");
 
     //Misc
     public static final ResourceKey<EntityType<?>> ELECTRIC_FIELD = createKey("electric_field");
