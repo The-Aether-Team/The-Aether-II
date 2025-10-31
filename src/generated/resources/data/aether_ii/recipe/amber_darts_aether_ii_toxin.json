@@ -9,7 +9,7 @@
   "result": {
     "components": {
       "aether_ii:buildup_contents": {
-        "amount": 20,
+        "amount": 50,
         "preset": {
           "type": "aether_ii:toxin",
           "ambient": false,

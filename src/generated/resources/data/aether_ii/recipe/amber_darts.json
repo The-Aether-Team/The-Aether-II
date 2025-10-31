@@ -3,16 +3,15 @@
   "category": "misc",
   "key": {
     "/": "#aether_ii:rods/skyroot",
-    "A": "aether_ii:golden_amber",
-    "S": "#aether_ii:crafts_skyroot_tools"
+    "A": "aether_ii:golden_amber"
   },
   "pattern": [
-    "AA ",
-    "A/S",
-    " SA"
+    "A  ",
+    " /A",
+    " A "
   ],
   "result": {
-    "count": 1,
+    "count": 4,
     "id": "aether_ii:amber_darts"
   }
 }

@@ -35,7 +35,7 @@ public record BuildupContents(EffectBuildupPresets.Preset preset, int amount) im
     public static final int DEFAULT_COLOR = -13083194;
 
     public BuildupContents(EffectBuildupPresets.Preset preset) {
-        this(preset, 20);
+        this(preset, 55);
     }
 
     @Override

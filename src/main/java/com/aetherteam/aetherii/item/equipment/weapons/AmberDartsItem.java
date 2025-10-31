@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Consumer;
 
 public class AmberDartsItem extends ArrowItem {
-    public static final int FULL_AMOUNT = 100;
+    public static final int FULL_AMOUNT = 32;
 
     public AmberDartsItem(Properties properties) {
         super(properties);

@@ -8,7 +8,7 @@
       "neoforge:ingredient_type": "neoforge:components",
       "components": {
         "aether_ii:buildup_contents": {
-          "amount": 20,
+          "amount": 50,
           "preset": {
             "type": "aether_ii:toxin",
             "ambient": false,
@@ -27,7 +27,7 @@
           "translate": "item.aether_ii.amber_darts"
         },
         "minecraft:lore": [],
-        "minecraft:max_stack_size": 64,
+        "minecraft:max_stack_size": 16,
         "minecraft:rarity": "common",
         "minecraft:repair_cost": 0,
         "minecraft:tooltip_display": {}
@@ -38,7 +38,7 @@
   "result": {
     "components": {
       "aether_ii:buildup_contents": {
-        "amount": 20,
+        "amount": 50,
         "preset": {
           "type": "aether_ii:toxin",
           "ambient": false,
@@ -49,12 +49,12 @@
           "visible": true
         }
       },
-      "aether_ii:darts_loaded": 100,
+      "aether_ii:darts_loaded": 32,
       "minecraft:charged_projectiles": [
         {
           "components": {
             "aether_ii:buildup_contents": {
-              "amount": 20,
+              "amount": 50,
               "preset": {
                 "type": "aether_ii:toxin",
                 "ambient": false,

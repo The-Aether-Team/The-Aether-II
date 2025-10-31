@@ -1039,13 +1039,12 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("  S")
                 .unlockedBy("has_amber", has(AetherIIItems.GOLDEN_AMBER))
                 .save(this.output);
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.AMBER_DARTS)
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.AMBER_DARTS.get(), 4)
                 .define('A', AetherIIItems.GOLDEN_AMBER)
                 .define('/', AetherIITags.Items.RODS_SKYROOT)
-                .define('S', AetherIITags.Items.CRAFTS_SKYROOT_TOOLS)
-                .pattern("AA ")
-                .pattern("A/S")
-                .pattern(" SA")
+                .pattern("A  ")
+                .pattern(" /A")
+                .pattern(" A ")
                 .unlockedBy("has_amber", has(AetherIIItems.GOLDEN_AMBER))
                 .save(this.output);
         this.makeDartsWithEffect(AetherIIItems.AMBER_DARTS, AetherIIItems.AECHOR_PETAL, EffectBuildupPresets.TOXIN);
