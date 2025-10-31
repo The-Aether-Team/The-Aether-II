@@ -102,6 +102,7 @@ public class AetherIIParticleFactories {
         event.registerSpriteSet(AetherIIParticleTypes.SWEEP_ATTACK.get(), BlueAttackSweepParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.SHOCK_ATTACK.get(), YellowAttackShockParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.STAB_ATTACK.get(), RedAttackStabParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.EFFECT_BUILDUP.get(), SpellParticle.MobEffectProvider::new);
 
         event.registerSpriteSet(AetherIIParticleTypes.ZEPHYR_SNOWFLAKE.get(), SnowflakeParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.TEMPEST_SMOKE.get(), TempestSmokeParticle.Provider::new);

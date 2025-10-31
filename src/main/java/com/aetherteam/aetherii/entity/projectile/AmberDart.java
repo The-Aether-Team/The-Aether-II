@@ -1,12 +1,14 @@
 package com.aetherteam.aetherii.entity.projectile;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.BuildupContents;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractArrowAccessor;
 import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -48,7 +50,7 @@ public class AmberDart extends AbstractArrow {
             this.entityData.set(ID_EFFECT_COLOR, this.getColor(weaponStack));
         }
         this.setBaseDamage(0);
-        Vec3 offset = new Vec3(0, 0, 1.0).xRot(-owner.getViewXRot(1.0F) * Mth.DEG_TO_RAD).yRot((-owner.getViewYRot(1.0F) * Mth.DEG_TO_RAD));
+        Vec3 offset = new Vec3(0, 0, 0.5).xRot(-owner.getViewXRot(1.0F) * Mth.DEG_TO_RAD).yRot((-owner.getViewYRot(1.0F) * Mth.DEG_TO_RAD));
         double x = owner.getX();
         double y = owner.getEyeY() - (double) 0.1F;
         double z = owner.getZ();
@@ -83,15 +85,15 @@ public class AmberDart extends AbstractArrow {
     protected void onHitEntity(EntityHitResult result) { //todo shield checks etc.
         super.onHitEntity(result);
         Entity entity = result.getEntity();
-        if (entity instanceof LivingEntity livingEntity && livingEntity.level() instanceof ServerLevel) {
+        if (this.level() instanceof ServerLevel serverLevel) {
             BuildupContents buildupContents = this.getWeaponItem().get(AetherIIDataComponents.BUILDUP_CONTENTS);
             if (buildupContents != null) {
-                entity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, buildupContents.preset(), buildupContents.amount());
+                if (entity instanceof LivingEntity livingEntity) {
+                    entity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, buildupContents.preset(), buildupContents.amount());
+                }
+                Vec3 vec3 = result.getLocation();
+                serverLevel.sendParticles(ColorParticleOption.create(AetherIIParticleTypes.EFFECT_BUILDUP.get(), buildupContents.getColor()), vec3.x, vec3.y, vec3.z, 1, 0.0F, this.random.nextDouble() / 3.0, 0.0F, 0.0F);
             }
-        }
-        if (this.level() instanceof ServerLevel serverLevel) { //todo the item layering is messing up this particle its not using the bottom sprite
-            Vec3 vec3 = result.getLocation();
-            serverLevel.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, AetherIIItems.AMBER_DARTS.toStack()), vec3.x, vec3.y, vec3.z, 4, 0.0F, this.random.nextDouble() / 3.0, 0.0F, 0.0F);
         }
         this.discard();
     }

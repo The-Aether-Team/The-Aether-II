@@ -5,10 +5,7 @@ import com.aetherteam.aetherii.client.particle.options.AttackShockParticleOption
 import com.aetherteam.aetherii.client.particle.options.AttackStabParticleOption;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Registry;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.particles.ShriekParticleOption;
-import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.particles.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -54,6 +51,7 @@ public class AetherIIParticleTypes {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SWEEP_ATTACK = PARTICLES.register("sweep_attack", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, ParticleType<AttackShockParticleOption>> SHOCK_ATTACK = register("shock_attack", false, p -> AttackShockParticleOption.CODEC, p -> AttackShockParticleOption.STREAM_CODEC);
     public static final DeferredHolder<ParticleType<?>, ParticleType<AttackStabParticleOption>> STAB_ATTACK = register("stab_attack", false, p -> AttackStabParticleOption.CODEC, p -> AttackStabParticleOption.STREAM_CODEC);
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ColorParticleOption>> EFFECT_BUILDUP = register("effect_buildup", false, ColorParticleOption::codec, ColorParticleOption::streamCodec);
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> TEMPEST_SMOKE = PARTICLES.register("tempest_smoke", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MOA_HUNGRY = PARTICLES.register("moa_hungry", () -> new SimpleParticleType(false));

@@ -19,6 +19,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Predicate;
 
 public class DartShooterItem extends ProjectileWeaponItem {
+    public static final int FIRE_RATE = 4;
+
     public DartShooterItem(Properties properties) {
         super(properties);
     }
@@ -62,15 +64,17 @@ public class DartShooterItem extends ProjectileWeaponItem {
                     return;
                 }
             }
-            ChargedProjectiles projectiles = weapon.get(DataComponents.CHARGED_PROJECTILES);
-            if (projectiles != null && !projectiles.isEmpty()) {
-                this.shoot(serverlevel, shooter, hand, weapon, projectiles.getItems(), velocity, inaccuracy, false, target);
-                weapon.set(AetherIIDataComponents.DARTS_LOADED, getDartsLoaded(weapon) - 1);
-                if (!isLoaded(weapon)) {
-                    weapon.hurtAndBreak(1, shooter, LivingEntity.getSlotForHand(hand));  //todo durability
-                    weapon.remove(DataComponents.CHARGED_PROJECTILES);
-                    weapon.remove(AetherIIDataComponents.BUILDUP_CONTENTS);
-                    weapon.remove(AetherIIDataComponents.DARTS_LOADED);
+            if (shooter.tickCount % FIRE_RATE == 0) {
+                ChargedProjectiles projectiles = weapon.get(DataComponents.CHARGED_PROJECTILES);
+                if (projectiles != null && !projectiles.isEmpty()) {
+                    this.shoot(serverlevel, shooter, hand, weapon, projectiles.getItems(), velocity, inaccuracy, false, target);
+                    weapon.set(AetherIIDataComponents.DARTS_LOADED, getDartsLoaded(weapon) - 1);
+                    if (!isLoaded(weapon)) {
+                        weapon.hurtAndBreak(1, shooter, LivingEntity.getSlotForHand(hand));
+                        weapon.remove(DataComponents.CHARGED_PROJECTILES);
+                        weapon.remove(AetherIIDataComponents.BUILDUP_CONTENTS);
+                        weapon.remove(AetherIIDataComponents.DARTS_LOADED);
+                    }
                 }
             }
         }
@@ -113,7 +117,7 @@ public class DartShooterItem extends ProjectileWeaponItem {
 
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity livingEntity) {
-        return AmberDartsItem.FULL_AMOUNT;
+        return AmberDartsItem.FULL_AMOUNT * FIRE_RATE;
     }
 
     @Override
