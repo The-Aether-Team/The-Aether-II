@@ -10,6 +10,7 @@ import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import net.minecraft.world.level.block.state.properties.*;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.aetherteam.aetherii.AetherII;
@@ -51,11 +52,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.MossyCarpetBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.DripstoneThickness;
-import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.block.state.properties.WallSide;
 
 public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public AetherIIBlockModelSubProvider(Consumer<BlockModelDefinitionGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
