@@ -22,6 +22,8 @@
     }
   },
   "textures": {
-    "texture": "aether_ii:item/purple_aercloud_glider_model"
+    "main": "aether_ii:item/purple_aercloud_glider/main",
+    "side1": "aether_ii:item/purple_aercloud_glider/side1",
+    "side2": "aether_ii:item/purple_aercloud_glider/side2"
   }
 }

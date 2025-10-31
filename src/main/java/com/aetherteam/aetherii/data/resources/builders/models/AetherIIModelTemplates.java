@@ -317,8 +317,8 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate FULL_CRYSTAL = ModelTemplates.createItem("amethyst_cluster", TextureSlot.LAYER0);
     public static final ModelTemplate POINTED_STONE = ModelTemplates.createItem("pointed_dripstone", TextureSlot.LAYER0);
 
-    public static final ModelTemplate AERCLOUD_GLIDER_CLOSED = createItem("aercloud_glider_closed", "_closed", TextureSlot.TEXTURE);
-    public static final ModelTemplate AERCLOUD_GLIDER_OPEN = createItem("aercloud_glider_open", "_open", TextureSlot.TEXTURE);
+    public static final ModelTemplate AERCLOUD_GLIDER_CLOSED = createItem("aercloud_glider_closed", "_closed", AetherIITextureSlots.MAIN, AetherIITextureSlots.SIDE1, AetherIITextureSlots.SIDE2);
+    public static final ModelTemplate AERCLOUD_GLIDER_OPEN = createItem("aercloud_glider_open", "_open", AetherIITextureSlots.MAIN, AetherIITextureSlots.SIDE1, AetherIITextureSlots.SIDE2);
 
     public static ModelTemplate create(TextureSlot... textureSlot) {
         return new ModelTemplate(Optional.empty(), Optional.empty(), textureSlot);
