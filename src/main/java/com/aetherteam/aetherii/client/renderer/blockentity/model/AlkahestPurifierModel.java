@@ -35,7 +35,7 @@ public class AlkahestPurifierModel extends Model {
 
         PartDefinition lid = main.addOrReplaceChild("lid", CubeListBuilder.create().texOffs(13, 0).addBox(-5.0F, -2.0F, -9.0F, 10.0F, 2.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(-8.0F, -14.0F, 12.0F));
 
-        return LayerDefinition.create(meshDefinition, 128, 128);
+        return LayerDefinition.create(meshDefinition, 128, 64);
     }
 
     public void setupAnim(float openness) {

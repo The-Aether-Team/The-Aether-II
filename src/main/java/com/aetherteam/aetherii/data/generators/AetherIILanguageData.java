@@ -1,8 +1,6 @@
 package com.aetherteam.aetherii.data.generators;
 
-import java.util.List;
 import java.util.TreeMap;
-import java.util.function.Supplier;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;

@@ -16,6 +16,7 @@ public class AetherIIMobEffectTagData extends KeyTagProvider<MobEffect> {
         super(output, Registries.MOB_EFFECT, registries, AetherII.MODID);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         this.tag(AetherIITags.MobEffects.MILK_DOESNT_CLEAR).add(

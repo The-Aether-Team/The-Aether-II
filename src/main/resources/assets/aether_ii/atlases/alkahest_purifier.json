@@ -1,0 +1,9 @@
+{
+    "sources": [
+        {
+            "type": "directory",
+            "source": "entity/alkahest_purifier",
+            "prefix": "entity/alkahest_purifier/"
+        }
+    ]
+}

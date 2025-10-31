@@ -1,48 +1,49 @@
 {
-	"texture_size": [32, 32],
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
 	"elements": [
 		{
 			"name": "stalk",
-			"from": [8, 0, 6.5],
-			"to": [8, 16, 11.5],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 7, 7.5]},
+			"from": [8, 0, 0.5],
+			"to": [8, 16, 16.5],
 			"shade": false,
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 7, 8.5]},
 			"faces": {
-				"east": {"uv": [2.5, 5.5, 0, 13.5], "texture": "#plant"},
-				"west": {"uv": [0, 5.5, 2.5, 13.5], "texture": "#plant"}
+				"east": {"uv": [16, 0, 0, 16], "texture": "#stem"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#stem"}
 			}
 		},
 		{
 			"name": "flower",
-			"from": [3.5, 14, 0.5],
-			"to": [12.5, 14, 11.5],
-			"rotation": {"angle": -45, "axis": "x", "origin": [8, 14, 9.5]},
+			"from": [0.5, 14, -1.5],
+			"to": [15.5, 14, 14.5],
 			"shade": false,
+			"rotation": {"angle": -45, "axis": "x", "origin": [8, 14, 9.5]},
 			"faces": {
-				"up": {"uv": [4.5, 5.5, 0, 0], "texture": "#plant"},
-				"down": {"uv": [9, 0, 4.5, 5.5], "texture": "#plant"}
+				"up": {"uv": [15, 16, 0, 0], "texture": "#petal_top"},
+				"down": {"uv": [15, 0, 0, 16], "texture": "#petal_bottom"}
 			}
 		},
 		{
 			"name": "leaves_1",
-			"from": [4, 0, 8],
-			"to": [12, 7, 8],
-			"rotation": {"angle": -45, "axis": "y", "origin": [8, 7, 8]},
+			"from": [8, 0, 0.8],
+			"to": [8, 16, 15.2],
 			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
 			"faces": {
-				"north": {"uv": [2.5, 5.5, 6.5, 9], "texture": "#plant"},
-				"south": {"uv": [6.5, 5.5, 2.5, 9], "texture": "#plant"}
+				"east": {"uv": [0, 0, 16, 16], "texture": "#leaves1"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#leaves1"}
 			}
 		},
 		{
 			"name": "leaves_2",
-			"from": [8, 0, 4],
-			"to": [8, 7, 12],
-			"rotation": {"angle": -45, "axis": "y", "origin": [8, 7, 8]},
+			"from": [0.8, 0, 8],
+			"to": [15.2, 16, 8],
 			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
 			"faces": {
-				"east": {"uv": [6.5, 9, 2.5, 12.5], "texture": "#plant"},
-				"west": {"uv": [2.5, 9, 6.5, 12.5], "texture": "#plant"}
+				"north": {"uv": [0, 0, 16, 16], "texture": "#leaves2"},
+				"south": {"uv": [16, 0, 0, 16], "texture": "#leaves2"}
 			}
 		}
 	]

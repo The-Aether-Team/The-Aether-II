@@ -3,6 +3,7 @@
   "render_type": "minecraft:cutout",
   "textures": {
     "particle": "aether_ii:item/lilichime",
-    "plant": "aether_ii:block/lilichime"
+    "petals": "aether_ii:block/lilichime_petals",
+    "stem": "aether_ii:block/lilichime_stem"
   }
 }

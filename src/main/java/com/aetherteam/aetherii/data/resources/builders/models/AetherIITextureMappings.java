@@ -1,12 +1,35 @@
 package com.aetherteam.aetherii.data.resources.builders.models;
 
 import com.aetherteam.aetherii.AetherII;
+
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
 public class AetherIITextureMappings {
+    public static TextureMapping block(Block block) {
+        return block(TextureMapping.getBlockTexture(block));
+    }
+
+    public static TextureMapping block(Block block, String suffix) {
+        return block(TextureMapping.getBlockTexture(block), suffix);
+    }
+
+    public static TextureMapping block(ResourceLocation texture) {
+        return block(texture, "");
+    }
+
+    public static TextureMapping block(ResourceLocation texture, String suffix) {
+        return new TextureMapping()
+            .put(TextureSlot.NORTH, texture.withSuffix("_front" + suffix))
+            .put(TextureSlot.SOUTH, texture.withSuffix("_back" + suffix))
+            .put(TextureSlot.EAST, texture.withSuffix("_right" + suffix))
+            .put(TextureSlot.WEST, texture.withSuffix("_left" + suffix))
+            .put(TextureSlot.UP, texture.withSuffix("_top" + suffix))
+            .put(TextureSlot.DOWN, texture.withSuffix("_bottom" + suffix));
+    }
+
     public static TextureMapping portal(Block portal) {
         return new TextureMapping()
                 .put(AetherIITextureSlots.PORTAL, TextureMapping.getBlockTexture(portal))
@@ -93,6 +116,10 @@ public class AetherIITextureMappings {
                 .copySlot(TextureSlot.FLOWERBED, TextureSlot.PARTICLE);
     }
 
+    public static TextureMapping flowerbedAndStem(Block block) {
+        return flowerbed(block).put(TextureSlot.STEM, TextureMapping.getBlockTexture(block, "_stem"));
+    }
+
     public static TextureMapping tarahespFlowerbed(Block block) {
         return new TextureMapping()
                 .put(AetherIITextureSlots.TARAHESP_FLOWERS_WHITE, TextureMapping.getBlockTexture(block, "_white"))
@@ -101,11 +128,17 @@ public class AetherIITextureMappings {
     }
 
     public static TextureMapping doorTop(Block block) {
-        return new TextureMapping().put(TextureSlot.ALL, TextureMapping.getBlockTexture(block)).put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top")).copySlot(TextureSlot.TOP, TextureSlot.PARTICLE);
+        return new TextureMapping()
+                .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(block, "_top"))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
+                .put(TextureSlot.END, TextureMapping.getBlockTexture(block, "_end"));
     }
 
     public static TextureMapping doorBottom(Block block) {
-        return new TextureMapping().put(TextureSlot.ALL, TextureMapping.getBlockTexture(block)).put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom")).copySlot(TextureSlot.BOTTOM, TextureSlot.PARTICLE);
+        return new TextureMapping()
+                .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(block, "_bottom"))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
+                .put(TextureSlot.END, TextureMapping.getBlockTexture(block, "_end"));
     }
 
     public static TextureMapping asymmetricalCross(Block block) {
@@ -119,6 +152,31 @@ public class AetherIITextureMappings {
 
     public static TextureMapping itemPlant(Block block) {
         return new TextureMapping().put(TextureSlot.PLANT, TextureMapping.getBlockTexture(block)).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem()));
+    }
+
+    public static TextureMapping pluracian(Block block) {
+        return new TextureMapping()
+                .put(TextureSlot.STEM, TextureMapping.getBlockTexture(block, "_stem"))
+                .put(AetherIITextureSlots.LEAVES1, TextureMapping.getBlockTexture(block, "_leaves_1"))
+                .put(AetherIITextureSlots.LEAVES2, TextureMapping.getBlockTexture(block, "_leaves_2"))
+                .put(AetherIITextureSlots.PETAL_TOP, TextureMapping.getBlockTexture(block, "_petal_top"))
+                .put(AetherIITextureSlots.PETAL_BOTTOM, TextureMapping.getBlockTexture(block, "_petal_bottom"))
+                .put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem()));
+    }
+
+    public static TextureMapping lilichime(Block block) {
+        return lilichime(block, false);
+    }
+
+    public static TextureMapping pottedLilichime(Block block) {
+        return lilichime(block, true);
+    }
+
+    public static TextureMapping lilichime(Block block, boolean potted) {
+        return new TextureMapping()
+            .put(TextureSlot.STEM, TextureMapping.getBlockTexture(block, potted ? "_stem_potted" : "_stem"))
+            .put(AetherIITextureSlots.PETALS, TextureMapping.getBlockTexture(block, "_petals"))
+            .put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem()));
     }
 
     public static TextureMapping lockedBlockInventory(Block block) {
@@ -144,5 +202,37 @@ public class AetherIITextureMappings {
 
     public static TextureMapping particle(TextureMapping textureMapping) {
         return textureMapping.copyForced(TextureSlot.ALL, TextureSlot.PARTICLE);
+    }
+
+    public static TextureMapping altar(Block block) {
+        return altar(block, "");
+    }
+
+    public static TextureMapping altar(Block block, String suffix) {
+        return new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top" + suffix))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom" + suffix))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side" + suffix))
+                .put(AetherIITextureSlots.BASE_TOP, TextureMapping.getBlockTexture(block, "_base_top" + suffix))
+                .put(AetherIITextureSlots.BASE_BOTTOM, TextureMapping.getBlockTexture(block, "_base_bottom" + suffix));
+    }
+
+    public static TextureMapping arkeniumForge(Block block) {
+        return arkeniumForge(block, "");
+    }
+
+    public static TextureMapping arkeniumForge(Block block, String suffix) {
+        return new TextureMapping()
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side" + suffix))
+                .put(AetherIITextureSlots.BASE_TOP, TextureMapping.getBlockTexture(block, "_top" + suffix))
+                .put(AetherIITextureSlots.ANVIL_FRONT, TextureMapping.getBlockTexture(block, "_anvil_front" + suffix))
+                .put(AetherIITextureSlots.ANVIL_SIDE, TextureMapping.getBlockTexture(block, "_anvil_side" + suffix))
+                .put(AetherIITextureSlots.ANVIL_BOTTOM, TextureMapping.getBlockTexture(block, "_anvil_bottom" + suffix));
+    }
+
+    public static TextureMapping artisansBench(Block block) {
+        return block(block)
+                .put(TextureSlot.INSIDE, TextureMapping.getBlockTexture(block, "_inside"))
+                .put(AetherIITextureSlots.SAW, TextureMapping.getBlockTexture(block, "_saw"));
     }
 }

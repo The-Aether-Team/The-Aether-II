@@ -6,11 +6,6 @@
       "prefix": "fluid/"
     },
     {
-      "type": "directory",
-      "source": "entity/alkahest_purifier",
-      "prefix": "entity/alkahest_purifier/"
-    },
-    {
       "type": "paletted_permutations",
       "textures": [
         "aether_ii:item/moa_egg_eyes"
