@@ -1402,6 +1402,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addEffectsDescriptions() {
         final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
+        this.addEffectsDescription(AetherIIEffects.VULNERABILITY.get(), loremIpsum);
         this.addEffectsDescription(AetherIIEffects.WOUND.get(), loremIpsum);
         this.addEffectsDescription(AetherIIEffects.STUN.get(), loremIpsum);
         this.addEffectsDescription(AetherIIEffects.FRACTURE.get(), loremIpsum);

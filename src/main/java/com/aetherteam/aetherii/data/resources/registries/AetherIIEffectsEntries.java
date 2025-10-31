@@ -20,6 +20,7 @@ import java.util.Optional;
 public class AetherIIEffectsEntries {
     public static final ResourceKey<Registry<EffectsEntry>> EFFECTS_ENTRY_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effects_entry"));
 
+    public static final ResourceKey<EffectsEntry> VULNERABILITY = createKey("vulnerability");
     public static final ResourceKey<EffectsEntry> WOUND = createKey("wound");
     public static final ResourceKey<EffectsEntry> STUN = createKey("stun");
     public static final ResourceKey<EffectsEntry> FRACTURE = createKey("fracture");
@@ -35,6 +36,7 @@ public class AetherIIEffectsEntries {
     public static final ResourceKey<EffectsEntry> SATURATION_BOOST = createKey("saturation_boost");
 
     public static final Map<ResourceKey<EffectsEntry>, Holder<MobEffect>> EFFECTS = Map.ofEntries(
+            Map.entry(VULNERABILITY, AetherIIEffects.VULNERABILITY),
             Map.entry(WOUND, AetherIIEffects.WOUND),
             Map.entry(STUN, AetherIIEffects.STUN),
             Map.entry(FRACTURE, AetherIIEffects.FRACTURE),
@@ -51,6 +53,7 @@ public class AetherIIEffectsEntries {
     );
 
     public static final Map<Holder<MobEffect>, List<Holder<Item>>> ITEMS = Map.ofEntries(
+            Map.entry(AetherIIEffects.VULNERABILITY, List.of()),
             Map.entry(AetherIIEffects.WOUND, List.of(AetherIIItems.BANDAGE)),
             Map.entry(AetherIIEffects.STUN, List.of(AetherIIItems.BANDAGE)),
             Map.entry(AetherIIEffects.FRACTURE, List.of(AetherIIItems.BANDAGE, AetherIIItems.SPLINT)),
