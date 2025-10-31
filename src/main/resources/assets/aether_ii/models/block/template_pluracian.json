@@ -15,13 +15,13 @@
 		},
 		{
 			"name": "flower",
-			"from": [-0.5, 14, -1.5],
+			"from": [0.5, 14, -1.5],
 			"to": [15.5, 14, 14.5],
 			"shade": false,
 			"rotation": {"angle": -45, "axis": "x", "origin": [8, 14, 9.5]},
 			"faces": {
-				"up": {"uv": [16, 16, 0, 0], "texture": "#petal_top"},
-				"down": {"uv": [16, 0, 0, 16], "texture": "#petal_bottom"}
+				"up": {"uv": [15, 16, 0, 0], "texture": "#petal_top"},
+				"down": {"uv": [15, 0, 0, 16], "texture": "#petal_bottom"}
 			}
 		},
 		{
@@ -31,7 +31,7 @@
 			"shade": false,
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
 			"faces": {
-				"east": {"uv": [0, 0, 14.4, 16], "texture": "#leaves1"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#leaves1"},
 				"west": {"uv": [16, 0, 0, 16], "texture": "#leaves1"}
 			}
 		},

@@ -56,16 +56,16 @@
 			"from": [6, 0, 6],
 			"to": [10, 4, 10],
 			"faces": {
-				"down": { "uv": [ 6, 12, 10, 16 ], "texture": "#flowerpot", "cullface": "down" },
-				"up":   { "uv": [ 6, 6, 10, 10 ], "texture": "#dirt" }
+				"up": {"uv": [6, 6, 10, 10], "texture": "#dirt"},
+				"down": {"uv": [6, 12, 10, 16], "texture": "#flowerpot", "cullface": "down"}
 			}
 		},
 		{
 			"name": "stalk",
-			"from": [8, 4, 0.5],
-			"to": [8, 20, 16.5],
+			"from": [8, 4, 2],
+			"to": [8, 16, 14],
 			"shade": false,
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 11, 8.5]},
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 11, 9.9]},
 			"faces": {
 				"east": {"uv": [16, 0, 0, 16], "texture": "#stem"},
 				"west": {"uv": [0, 0, 16, 16], "texture": "#stem"}
@@ -73,49 +73,36 @@
 		},
 		{
 			"name": "flower",
-			"from": [-0.5, 18, -1.5],
-			"to": [15.5, 18, 14.5],
+			"from": [2.4, 16.125, 0.25],
+			"to": [13.65, 16.125, 12.25],
 			"shade": false,
-			"rotation": {"angle": -45, "axis": "x", "origin": [8, 18, 9.5]},
+			"rotation": {"angle": -45, "axis": "x", "origin": [9.15, 16.125, 10.75]},
 			"faces": {
-				"up": {"uv": [16, 16, 0, 0], "texture": "#petal_top"},
-				"down": {"uv": [16, 0, 0, 16], "texture": "#petal_bottom"}
+				"up": {"uv": [15, 16, 0, 0], "texture": "#petal_top"},
+				"down": {"uv": [15, 0, 0, 16], "texture": "#petal_bottom"}
 			}
 		},
 		{
 			"name": "leaves_1",
-			"from": [8, 4, 0.8],
-			"to": [8, 20, 15.2],
+			"from": [8, 4, 2.6],
+			"to": [8, 16, 13.4],
 			"shade": false,
-			"rotation": {"angle": 45, "axis": "y", "origin": [8, 12, 8], "rescale": true},
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
 			"faces": {
-				"east": {"uv": [0, 0, 14.4, 16], "texture": "#leaves1"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#leaves1"},
 				"west": {"uv": [16, 0, 0, 16], "texture": "#leaves1"}
 			}
 		},
 		{
 			"name": "leaves_2",
-			"from": [0.8, 4, 8],
-			"to": [15.2, 20, 8],
+			"from": [2.6, 4, 8],
+			"to": [13.4, 16, 8],
 			"shade": false,
-			"rotation": {"angle": 45, "axis": "y", "origin": [8, 12, 8], "rescale": true},
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
 			"faces": {
 				"north": {"uv": [0, 0, 16, 16], "texture": "#leaves2"},
 				"south": {"uv": [16, 0, 0, 16], "texture": "#leaves2"}
 			}
-		}
-	],
-	"groups": [
-		0,
-		1,
-		2,
-		3,
-		4,
-		{
-			"name": "flower",
-			"origin": [8, 7, 8.5],
-			"color": 0,
-			"children": [5, 6, 7, 8]
 		}
 	]
 }
