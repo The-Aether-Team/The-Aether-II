@@ -7,6 +7,12 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.neoforged.neoforge.client.IArmPoseTransformer;
 
 public class AetherIIArmPoseTransformers {
+    public static final IArmPoseTransformer DART_SHOOTER_TRANSFORMER = (humanoidModel, livingEntity, humanoidArm) -> {
+        humanoidModel.rightArm.yRot = -0.1F + humanoidModel.head.yRot - 0.4F;
+        humanoidModel.leftArm.yRot = 0.1F + humanoidModel.head.yRot + 0.4F;
+        humanoidModel.rightArm.xRot = -Mth.HALF_PI + humanoidModel.head.xRot;
+        humanoidModel.leftArm.xRot = -Mth.HALF_PI + humanoidModel.head.xRot;
+    };
     public static final IArmPoseTransformer GLIDING_TRANSFORMER = (humanoidModel, livingEntity, humanoidArm) -> {
         humanoidModel.rightArm.z = 0.0F;
         humanoidModel.rightArm.x = -5.0F;

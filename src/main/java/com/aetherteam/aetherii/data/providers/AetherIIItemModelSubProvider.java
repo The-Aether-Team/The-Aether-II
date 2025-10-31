@@ -20,6 +20,7 @@ import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
 import net.minecraft.client.renderer.item.properties.conditional.CustomModelDataProperty;
 import net.minecraft.client.renderer.item.properties.conditional.HasComponent;
+import net.minecraft.client.renderer.item.properties.conditional.IsUsingItem;
 import net.minecraft.client.renderer.item.properties.select.Charge;
 import net.minecraft.client.renderer.item.properties.select.DisplayContext;
 import net.minecraft.resources.ResourceLocation;
@@ -62,7 +63,16 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
         ItemModel.Unbaked loaded1 = ItemModelUtils.tintedModel(AetherIIModelTemplates.DART_SHOOTER_TWO_LAYER.create(ModelLocationUtils.getModelLocation(item, "_1"), TextureMapping.layered(TextureMapping.getItemTexture(item, "_tip_1"), TextureMapping.getItemTexture(item, "_base")), this.modelOutput), new EffectBuildupColorSource());
         ItemModel.Unbaked loaded2 = ItemModelUtils.tintedModel(AetherIIModelTemplates.DART_SHOOTER_TWO_LAYER.create(ModelLocationUtils.getModelLocation(item, "_2"), TextureMapping.layered(TextureMapping.getItemTexture(item, "_tip_2"), TextureMapping.getItemTexture(item, "_base")), this.modelOutput), new EffectBuildupColorSource());
         ItemModel.Unbaked loaded3 = ItemModelUtils.tintedModel(AetherIIModelTemplates.DART_SHOOTER_TWO_LAYER.create(ModelLocationUtils.getModelLocation(item, "_3"), TextureMapping.layered(TextureMapping.getItemTexture(item, "_tip_3"), TextureMapping.getItemTexture(item, "_base")), this.modelOutput), new EffectBuildupColorSource());
-        this.itemModelOutput.accept(item, ItemModelUtils.conditional(new HasComponent(AetherIIDataComponents.DARTS_LOADED.get(), true), ItemModelUtils.rangeSelect(new DartsLoadedRange(), loaded0, ItemModelUtils.override(loaded1, 0.25F), ItemModelUtils.override(loaded2, 0.5F), ItemModelUtils.override(loaded3, 0.75F)), normal));
+        ItemModel.Unbaked using0 = ItemModelUtils.tintedModel(AetherIIModelTemplates.USING_DART_SHOOTER_TWO_LAYER.create(ModelLocationUtils.getModelLocation(item, "_using_0"), TextureMapping.layered(TextureMapping.getItemTexture(item, "_tip_0"), TextureMapping.getItemTexture(item, "_base")), this.modelOutput), new EffectBuildupColorSource());
+        ItemModel.Unbaked using1 = ItemModelUtils.tintedModel(AetherIIModelTemplates.USING_DART_SHOOTER_TWO_LAYER.create(ModelLocationUtils.getModelLocation(item, "_using_1"), TextureMapping.layered(TextureMapping.getItemTexture(item, "_tip_1"), TextureMapping.getItemTexture(item, "_base")), this.modelOutput), new EffectBuildupColorSource());
+        ItemModel.Unbaked using2 = ItemModelUtils.tintedModel(AetherIIModelTemplates.USING_DART_SHOOTER_TWO_LAYER.create(ModelLocationUtils.getModelLocation(item, "_using_2"), TextureMapping.layered(TextureMapping.getItemTexture(item, "_tip_2"), TextureMapping.getItemTexture(item, "_base")), this.modelOutput), new EffectBuildupColorSource());
+        ItemModel.Unbaked using3 = ItemModelUtils.tintedModel(AetherIIModelTemplates.USING_DART_SHOOTER_TWO_LAYER.create(ModelLocationUtils.getModelLocation(item, "_using_3"), TextureMapping.layered(TextureMapping.getItemTexture(item, "_tip_3"), TextureMapping.getItemTexture(item, "_base")), this.modelOutput), new EffectBuildupColorSource());
+
+        this.itemModelOutput.accept(item, ItemModelUtils.conditional(
+                new HasComponent(AetherIIDataComponents.DARTS_LOADED.get(), true), ItemModelUtils.conditional(new BetterIsUsingItem(),
+                        ItemModelUtils.rangeSelect(new DartsLoadedRange(), using0, ItemModelUtils.override(using1, 0.25F), ItemModelUtils.override(using2, 0.5F), ItemModelUtils.override(using3, 0.75F)),
+                        ItemModelUtils.rangeSelect(new DartsLoadedRange(), loaded0, ItemModelUtils.override(loaded1, 0.25F), ItemModelUtils.override(loaded2, 0.5F), ItemModelUtils.override(loaded3, 0.75F))),
+                normal));
     }
 
     public void generateDarts(Item item) {

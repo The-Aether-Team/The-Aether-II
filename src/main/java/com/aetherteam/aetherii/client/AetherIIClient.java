@@ -75,6 +75,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIClientExtensions::registerClientItemExtensions);
         neoBus.addListener(AetherIIRenderTypes::registerRenderBuffers);
         neoBus.addListener(AetherIIRecipeBookCategories::registerRecipeBookSearchCategories);
+        neoBus.addListener(AetherIIItemModelProperties::registerConditionalProperties);
         neoBus.addListener(AetherIIItemModelProperties::registerSelectProperties);
         neoBus.addListener(AetherIIItemModelProperties::registerRangeSelectProperties);
         neoBus.addListener(AetherIIAtlases::registerAtlases);

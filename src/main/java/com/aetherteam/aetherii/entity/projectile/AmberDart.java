@@ -13,6 +13,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -47,6 +48,11 @@ public class AmberDart extends AbstractArrow {
             this.entityData.set(ID_EFFECT_COLOR, this.getColor(weaponStack));
         }
         this.setBaseDamage(0);
+        Vec3 offset = new Vec3(0, 0, 1.0).xRot(-owner.getViewXRot(1.0F) * Mth.DEG_TO_RAD).yRot((-owner.getViewYRot(1.0F) * Mth.DEG_TO_RAD));
+        double x = owner.getX();
+        double y = owner.getEyeY() - (double) 0.1F;
+        double z = owner.getZ();
+        this.setPos(x + offset.x(), y + offset.y(), z + offset.z());
     }
 
     @Override

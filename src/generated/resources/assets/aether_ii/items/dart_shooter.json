@@ -8,59 +8,118 @@
       "model": "aether_ii:item/dart_shooter"
     },
     "on_true": {
-      "type": "minecraft:range_dispatch",
-      "entries": [
-        {
-          "model": {
-            "type": "minecraft:model",
-            "model": "aether_ii:item/dart_shooter_1",
-            "tints": [
-              {
-                "type": "aether_ii:effect_buildup",
-                "default": -13083194
-              }
-            ]
-          },
-          "threshold": 0.25
-        },
-        {
-          "model": {
-            "type": "minecraft:model",
-            "model": "aether_ii:item/dart_shooter_2",
-            "tints": [
-              {
-                "type": "aether_ii:effect_buildup",
-                "default": -13083194
-              }
-            ]
-          },
-          "threshold": 0.5
-        },
-        {
-          "model": {
-            "type": "minecraft:model",
-            "model": "aether_ii:item/dart_shooter_3",
-            "tints": [
-              {
-                "type": "aether_ii:effect_buildup",
-                "default": -13083194
-              }
-            ]
-          },
-          "threshold": 0.75
-        }
-      ],
-      "fallback": {
-        "type": "minecraft:model",
-        "model": "aether_ii:item/dart_shooter_0",
-        "tints": [
+      "type": "minecraft:condition",
+      "on_false": {
+        "type": "minecraft:range_dispatch",
+        "entries": [
           {
-            "type": "aether_ii:effect_buildup",
-            "default": -13083194
+            "model": {
+              "type": "minecraft:model",
+              "model": "aether_ii:item/dart_shooter_1",
+              "tints": [
+                {
+                  "type": "aether_ii:effect_buildup",
+                  "default": -13083194
+                }
+              ]
+            },
+            "threshold": 0.25
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "aether_ii:item/dart_shooter_2",
+              "tints": [
+                {
+                  "type": "aether_ii:effect_buildup",
+                  "default": -13083194
+                }
+              ]
+            },
+            "threshold": 0.5
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "aether_ii:item/dart_shooter_3",
+              "tints": [
+                {
+                  "type": "aether_ii:effect_buildup",
+                  "default": -13083194
+                }
+              ]
+            },
+            "threshold": 0.75
           }
-        ]
+        ],
+        "fallback": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/dart_shooter_0",
+          "tints": [
+            {
+              "type": "aether_ii:effect_buildup",
+              "default": -13083194
+            }
+          ]
+        },
+        "property": "aether_ii:darts_loaded"
       },
-      "property": "aether_ii:darts_loaded"
+      "on_true": {
+        "type": "minecraft:range_dispatch",
+        "entries": [
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "aether_ii:item/dart_shooter_using_1",
+              "tints": [
+                {
+                  "type": "aether_ii:effect_buildup",
+                  "default": -13083194
+                }
+              ]
+            },
+            "threshold": 0.25
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "aether_ii:item/dart_shooter_using_2",
+              "tints": [
+                {
+                  "type": "aether_ii:effect_buildup",
+                  "default": -13083194
+                }
+              ]
+            },
+            "threshold": 0.5
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "aether_ii:item/dart_shooter_using_3",
+              "tints": [
+                {
+                  "type": "aether_ii:effect_buildup",
+                  "default": -13083194
+                }
+              ]
+            },
+            "threshold": 0.75
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/dart_shooter_using_0",
+          "tints": [
+            {
+              "type": "aether_ii:effect_buildup",
+              "default": -13083194
+            }
+          ]
+        },
+        "property": "aether_ii:darts_loaded"
+      },
+      "property": "aether_ii:using_item"
     },
     "property": "minecraft:has_component"
   }

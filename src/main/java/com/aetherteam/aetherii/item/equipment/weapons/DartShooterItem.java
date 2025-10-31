@@ -108,7 +108,7 @@ public class DartShooterItem extends ProjectileWeaponItem {
 
     @Override
     public ItemUseAnimation getUseAnimation(ItemStack stack) {
-        return ItemUseAnimation.BOW; //todo custom animation
+        return ItemUseAnimation.NONE;
     }
 
     @Override
