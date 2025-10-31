@@ -8,7 +8,7 @@
       "neoforge:ingredient_type": "neoforge:components",
       "components": {
         "aether_ii:buildup_contents": {
-          "amount": 50,
+          "amount": 55,
           "preset": {
             "type": "aether_ii:toxin",
             "ambient": false,
@@ -38,7 +38,7 @@
   "result": {
     "components": {
       "aether_ii:buildup_contents": {
-        "amount": 50,
+        "amount": 55,
         "preset": {
           "type": "aether_ii:toxin",
           "ambient": false,
@@ -54,7 +54,7 @@
         {
           "components": {
             "aether_ii:buildup_contents": {
-              "amount": 50,
+              "amount": 55,
               "preset": {
                 "type": "aether_ii:toxin",
                 "ambient": false,
