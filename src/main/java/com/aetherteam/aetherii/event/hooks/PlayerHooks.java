@@ -217,7 +217,7 @@ public class PlayerHooks {
 
     public static Player.BedSleepingProblem handleBedrollSleeping(ServerPlayer player, Level level, BlockPos pos, BlockState state, Player.BedSleepingProblem vanillaProblem) {
         if (state.is(AetherIIBlocks.CLOUDWOOL_BEDROLL)) {
-            if (level.getLightEngine().getRawBrightness(pos, 15) < 10) {
+            if (vanillaProblem == null && level.getLightEngine().getRawBrightness(pos, 15) < 10) {
                 player.displayClientMessage(Component.translatable("aether_ii.bedroll.too_dark"), true);
                 return Player.BedSleepingProblem.OTHER_PROBLEM;
             }
