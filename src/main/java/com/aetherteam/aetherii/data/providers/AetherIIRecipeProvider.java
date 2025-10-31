@@ -258,7 +258,6 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .requires(DataComponentIngredient.of(false, effectDarts))
                 .unlockedBy("has_darts", has(darts.value()))
                 .save(this.output, this.name("dart_shooter_" + effect));
-
     }
 
     protected void parachute(HolderGetter<Item> getter, ItemLike result, ItemLike aercloud) {
