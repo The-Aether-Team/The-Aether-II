@@ -263,11 +263,4 @@ public class PlayerHooks {
             }
         }
     }
-
-    public static float handleReinforcedBlocks(BlockState state, float speed) {
-        if (state.hasProperty(AetherIIBlockStateProperties.REINFORCED) && state.getValue(AetherIIBlockStateProperties.REINFORCED)) {
-            return speed * 0.05F;
-        }
-        return speed;
-    }
 }

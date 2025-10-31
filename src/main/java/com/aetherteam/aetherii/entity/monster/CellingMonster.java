@@ -82,14 +82,19 @@ public class CellingMonster extends Monster {
     @Override
     protected void customServerAiStep(ServerLevel p_376725_) {
         super.customServerAiStep(p_376725_);
-
         ProfilerFiller profilerfiller = Profiler.get();
         profilerfiller.push("cellingAI");
+        this.cellingTick();
+        profilerfiller.pop();
+    }
+
+    protected void cellingTick() {
 
         boolean flag = this.moveControl instanceof CellingMoveControl && ((CellingMoveControl) this.moveControl).isWalkableUpper();
         boolean flag2 = this.moveControl.hasWanted() && this.moveControl.getWantedY() - this.getY() > 0;
 
-        if (!flag && !flag2 && (this.onGround() || this.isInWater() || this.isInLava() || this.isInFluidType())) {
+
+        if (!flag && !flag2 && (this.onGround() && this.isInWater() || this.isInLava() || this.isInFluidType())) {
             this.entityData.set(ATTACHED_FACE, Direction.DOWN);
             this.setCellRotation(new Quaternionf());
         } else {
@@ -163,8 +168,12 @@ public class CellingMonster extends Monster {
                 this.setCellRotation(new Quaternionf());
             }
         }
-        profilerfiller.pop();
 
+    }
+
+    public void stopCelling() {
+        this.entityData.set(ATTACHED_FACE, Direction.DOWN);
+        this.setCellRotation(new Quaternionf());
     }
 
     @Override
@@ -197,7 +206,7 @@ public class CellingMonster extends Monster {
         p_33443_.putByte("AttachFace", (byte) this.getAttachFacing().get3DDataValue());
     }
 
-    private void setAttachFace(Direction attachFace) {
+    protected void setAttachFace(Direction attachFace) {
         this.entityData.set(ATTACHED_FACE, attachFace);
     }
 
@@ -205,7 +214,7 @@ public class CellingMonster extends Monster {
         return this.entityData.get(ATTACHED_FACE);
     }
 
-    private void setCellRotation(Quaternionf quaternionf) {
+    protected void setCellRotation(Quaternionf quaternionf) {
         this.entityData.set(CELL_ROTATION, quaternionf);
     }
 

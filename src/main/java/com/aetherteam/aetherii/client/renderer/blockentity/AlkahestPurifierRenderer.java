@@ -4,17 +4,18 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.utility.AlkahestPurifierBlock;
 import com.aetherteam.aetherii.blockentity.AlkahestPurifierBlockEntity;
+import com.aetherteam.aetherii.client.AetherIIAtlases;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -23,11 +24,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 public class AlkahestPurifierRenderer implements BlockEntityRenderer<AlkahestPurifierBlockEntity> {
-    public static final Material ALKAHEST_PURIFIER_0 = new Material(TextureAtlas.LOCATION_BLOCKS, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entity/alkahest_purifier/alkahest_purifier_0"));
-    public static final Material ALKAHEST_PURIFIER_1 = new Material(TextureAtlas.LOCATION_BLOCKS, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entity/alkahest_purifier/alkahest_purifier_1"));
-    public static final Material ALKAHEST_PURIFIER_2 = new Material(TextureAtlas.LOCATION_BLOCKS, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entity/alkahest_purifier/alkahest_purifier_2"));
-    public static final Material ALKAHEST_PURIFIER_3 = new Material(TextureAtlas.LOCATION_BLOCKS, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entity/alkahest_purifier/alkahest_purifier_3"));
-    public static final Material ALKAHEST_PURIFIER_4 = new Material(TextureAtlas.LOCATION_BLOCKS, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entity/alkahest_purifier/alkahest_purifier_4"));
+    public static final Material ALKAHEST_PURIFIER_0 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_0"));
+    public static final Material ALKAHEST_PURIFIER_1 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_1"));
+    public static final Material ALKAHEST_PURIFIER_2 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_2"));
+    public static final Material ALKAHEST_PURIFIER_3 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_3"));
+    public static final Material ALKAHEST_PURIFIER_4 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_4"));
     private final AlkahestPurifierModel model;
 
     public AlkahestPurifierRenderer(BlockEntityRendererProvider.Context context) {
@@ -37,6 +38,7 @@ public class AlkahestPurifierRenderer implements BlockEntityRenderer<AlkahestPur
     public AlkahestPurifierRenderer(EntityModelSet modelSet) {
         this.model = new AlkahestPurifierModel(modelSet.bakeLayer(AetherIIModelLayers.ALKAHEST_PURIFIER));
     }
+    
 
     @Override
     public void render(AlkahestPurifierBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, Vec3 cameraPos) {

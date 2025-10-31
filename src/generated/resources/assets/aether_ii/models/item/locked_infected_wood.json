@@ -1,8 +1,0 @@
-{
-  "parent": "aether_ii:item/locked_block_inventory",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "face": "aether_ii:block/infected_log",
-    "overlay": "aether_ii:block/dungeon_lock"
-  }
-}

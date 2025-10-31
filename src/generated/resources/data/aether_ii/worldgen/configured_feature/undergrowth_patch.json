@@ -7,11 +7,7 @@
     "ground_state": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "aether_ii:top_rooted_undergrowth_leaves",
-        "Properties": {
-          "facing": "up",
-          "reinforced": "true"
-        }
+        "Name": "aether_ii:undergrowth_leaves"
       }
     },
     "replaceable": "#aether_ii:undergrowth_patch_generates_on",

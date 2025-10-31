@@ -182,7 +182,6 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_DUNGEON = createKey("coarse_aether_dirt_dungeon");
     public static final ResourceKey<PlacedFeature> INFECTED_PATCH = createKey("infected_patch");
     public static final ResourceKey<PlacedFeature> UNDERGROWTH_PATCH = createKey("undergrowth_patch");
-    public static final ResourceKey<PlacedFeature> ROTTEN_UNDERGROWTH_PATCH = createKey("rotten_undergrowth_patch");
 
 
     // Air
@@ -912,7 +911,6 @@ public class HighlandsPlacedFeatures {
         register(context, COARSE_AETHER_DIRT_DUNGEON, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COARSE_AETHER_DIRT_DUNGEON));
         register(context, INFECTED_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.INFECTED_PATCH));
         register(context, UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.UNDERGROWTH_PATCH));
-        register(context, ROTTEN_UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ROTTEN_UNDERGROWTH_PATCH));
     }
 
     private static ResourceKey<PlacedFeature> createKey(String name) {

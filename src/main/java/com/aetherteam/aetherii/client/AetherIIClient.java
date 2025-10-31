@@ -40,7 +40,6 @@ public class AetherIIClient {
 
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            AetherIIAtlases.registerSkyrootChestAtlases();
             registerTooltipOverrides();
 
             ItemBlockRenderTypes.setRenderLayer(AetherIIFluids.FLOWING_ALKAHEST.get(), ChunkSectionLayer.TRANSLUCENT);

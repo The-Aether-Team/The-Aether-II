@@ -14,7 +14,6 @@ public class AetherIIBlockStateProperties {
     public static final IntegerProperty PILES = IntegerProperty.create("piles", 1, 16);
     public static final IntegerProperty PURIFIER_LEVEL = IntegerProperty.create("purifier_level", 0, 4);
     public static final BooleanProperty BRETTL_GROWN = BooleanProperty.create("grown");
-    public static final BooleanProperty REINFORCED =  BooleanProperty.create("reinforced");
   
     public enum Mossy implements StringRepresentable {
         BRYALINN,

@@ -2,9 +2,8 @@ package com.aetherteam.aetherii.data.resources.registries.highlands;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.dungeon.RotshroomToadstoolClusterBlock;
+import com.aetherteam.aetherii.block.dungeon.RotshroomClusterBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
@@ -288,9 +287,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> INFECTED_PATCH = createKey("infected_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERGROWTH_VINE = createKey("undergrowth_vine");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ROTTEN_UNDERGROWTH_VINE = createKey("rotten_undergrowth_vine");
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERGROWTH_PATCH = createKey("undergrowth_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ROTTEN_UNDERGROWTH_PATCH = createKey("rotten_undergrowth_patch");
 
 
     // Air
@@ -2158,8 +2155,8 @@ public class HighlandsConfiguredFeatures {
     private static void bootstrapDungeon(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        register(context, LARGE_SHELF_ROTSHROOM, AetherIIFeatures.LARGE_SHELF_MUSHROOM.get(), new LargeShelfMushroomConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get()), 1, 2, 96));
-        register(context, LARGE_SHELF_ROTSHROOM_UNDERGROUND, AetherIIFeatures.LARGE_SHELF_MUSHROOM.get(), new LargeShelfMushroomConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get()), 1, 2, 0));
+        register(context, LARGE_SHELF_ROTSHROOM, AetherIIFeatures.LARGE_SHELF_MUSHROOM.get(), new LargeShelfMushroomConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get()), 1, 2, 96));
+        register(context, LARGE_SHELF_ROTSHROOM_UNDERGROUND, AetherIIFeatures.LARGE_SHELF_MUSHROOM.get(), new LargeShelfMushroomConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get()), 1, 2, 0));
         register(context, ROTSHROOM_PATCH, Feature.RANDOM_PATCH,
                 new RandomPatchConfiguration(
                         32,
@@ -2176,12 +2173,12 @@ public class HighlandsConfiguredFeatures {
                         3,
                         3,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
-                                .add(AetherIIBlocks.ROTSHROOM_CLUSTER.get().defaultBlockState(), 6)
+                                .add(AetherIIBlocks.ROTSHROOM.get().defaultBlockState(), 6)
+                                .add(AetherIIBlocks.ROTSHROOM_CLUSTER.get().defaultBlockState(), 1)
+                                .add(AetherIIBlocks.ROTSHROOM_CLUSTER.get().defaultBlockState().setValue(RotshroomClusterBlock.FACING, Direction.EAST), 1)
+                                .add(AetherIIBlocks.ROTSHROOM_CLUSTER.get().defaultBlockState().setValue(RotshroomClusterBlock.FACING, Direction.SOUTH), 1)
+                                .add(AetherIIBlocks.ROTSHROOM_CLUSTER.get().defaultBlockState().setValue(RotshroomClusterBlock.FACING, Direction.WEST), 1)
                                 .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get().defaultBlockState(), 2)
-                                .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get().defaultBlockState(), 1)
-                                .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get().defaultBlockState().setValue(RotshroomToadstoolClusterBlock.FACING, Direction.EAST), 1)
-                                .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get().defaultBlockState().setValue(RotshroomToadstoolClusterBlock.FACING, Direction.SOUTH), 1)
-                                .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get().defaultBlockState().setValue(RotshroomToadstoolClusterBlock.FACING, Direction.WEST), 1)
                                 .build())
                         ), BlockPredicate.ONLY_IN_AIR_PREDICATE)));
 
@@ -2219,26 +2216,9 @@ public class HighlandsConfiguredFeatures {
                                                         .add(UniformInt.of(0, 2), 3)
                                                         .build()
                                         ),
-                                        BlockStateProvider.simple(AetherIIBlocks.UNDERGROWTH_VINES_PLANT.get())
+                                        BlockStateProvider.simple(AetherIIBlocks.HANGING_UNDERGROWTH_PLANT.get())
                                 ),
-                                BlockColumnConfiguration.layer(ConstantInt.of(1), BlockStateProvider.simple(AetherIIBlocks.UNDERGROWTH_VINES.get()))
-                        ),
-                        Direction.DOWN,
-                        BlockPredicate.ONLY_IN_AIR_PREDICATE,
-                        true));
-        register(context, ROTTEN_UNDERGROWTH_VINE, Feature.BLOCK_COLUMN,
-                new BlockColumnConfiguration(
-                        List.of(
-                                BlockColumnConfiguration.layer(
-                                        new WeightedListInt(
-                                                WeightedList.<IntProvider>builder()
-                                                        .add(UniformInt.of(1, 4), 1)
-                                                        .add(UniformInt.of(0, 2), 4)
-                                                        .build()
-                                        ),
-                                        BlockStateProvider.simple(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES_PLANT.get())
-                                ),
-                                BlockColumnConfiguration.layer(ConstantInt.of(1), BlockStateProvider.simple(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get()))
+                                BlockColumnConfiguration.layer(ConstantInt.of(1), BlockStateProvider.simple(AetherIIBlocks.HANGING_UNDERGROWTH.get()))
                         ),
                         Direction.DOWN,
                         BlockPredicate.ONLY_IN_AIR_PREDICATE,
@@ -2246,21 +2226,9 @@ public class HighlandsConfiguredFeatures {
         FeatureUtils.register(context, UNDERGROWTH_PATCH, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON,
-                        BlockStateProvider.simple(AetherIIBlocks.TOP_ROOTED_UNDERGROWTH_LEAVES.get().defaultBlockState().setValue(AetherIIBlockStateProperties.REINFORCED, true)),
+                        BlockStateProvider.simple(AetherIIBlocks.UNDERGROWTH_LEAVES.get().defaultBlockState()),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(UNDERGROWTH_VINE)),
                         CaveSurface.CEILING, ConstantInt.of(1),
-                        0.6F,
-                        2,
-                        1.0F,
-                        UniformInt.of(2, 3),
-                        0.6F));
-        FeatureUtils.register(context, ROTTEN_UNDERGROWTH_PATCH, Feature.VEGETATION_PATCH,
-                new VegetationPatchConfiguration(
-                        AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON,
-                        BlockStateProvider.simple(AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get().defaultBlockState().setValue(AetherIIBlockStateProperties.REINFORCED, true)),
-                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ROTTEN_UNDERGROWTH_VINE)),
-                        CaveSurface.CEILING,
-                        ConstantInt.of(1),
                         0.6F,
                         2,
                         1.0F,

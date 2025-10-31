@@ -1,11 +1,12 @@
 {
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
-	"texture_size": [32, 32],
-    "textures": {
-      "particle": "block/flower_pot",
-      "flowerpot": "block/flower_pot",
-      "dirt": "block/dirt"
-    },
+	"textures": {
+		"particle": "block/flower_pot",
+		"flowerpot": "block/flower_pot",
+		"dirt": "block/dirt"
+	},
 	"elements": [
 		{
 			"from": [5, 0, 5],
@@ -55,26 +56,26 @@
 			"from": [6, 0, 6],
 			"to": [10, 4, 10],
 			"faces": {
-				"down": { "uv": [ 6, 12, 10, 16 ], "texture": "#flowerpot", "cullface": "down" },
-				"up":   { "uv": [ 6, 6, 10, 10 ], "texture": "#dirt" }
+				"up": {"uv": [6, 6, 10, 10], "texture": "#dirt"},
+				"down": {"uv": [6, 12, 10, 16], "texture": "#flowerpot", "cullface": "down"}
 			}
 		},
 		{
-			"from": [4, 4, 8],
+			"from": [4, 7, 8],
 			"to": [12, 16, 8],
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
 			"faces": {
-				"north": {"uv": [0, 8, 5.5, 16], "texture": "#plant"},
-				"south": {"uv": [0, 8, 5.5, 16], "texture": "#plant"}
+				"north": {"uv": [2, 0, 13, 12], "texture": "#stem"},
+				"south": {"uv": [2, 0, 13, 12], "texture": "#stem"}
 			}
 		},
 		{
-			"from": [8, 4, 4],
+			"from": [8, 7, 4],
 			"to": [8, 16, 12],
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
 			"faces": {
-				"east": {"uv": [0, 8, 5.5, 16], "texture": "#plant"},
-				"west": {"uv": [0, 8, 5.5, 16], "texture": "#plant"}
+				"east": {"uv": [2, 0, 13, 12], "texture": "#stem"},
+				"west": {"uv": [2, 0, 13, 12], "texture": "#stem"}
 			}
 		},
 		{
@@ -82,8 +83,8 @@
 			"to": [9.5, 7, 9.5],
 			"rotation": {"angle": 0, "axis": "y", "origin": [6, 7, 6]},
 			"faces": {
-				"up": {"uv": [8, 4, 10, 6], "texture": "#plant"},
-				"down": {"uv": [10, 4, 12, 6], "rotation": 180, "texture": "#plant"}
+				"up": {"uv": [0, 12, 4, 16], "texture": "#petals"},
+				"down": {"uv": [4, 12, 8, 16], "rotation": 180, "texture": "#petals"}
 			}
 		},
 		{
@@ -91,9 +92,8 @@
 			"to": [9.5, 16, 9.5],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10, 8]},
 			"faces": {
-				"north": {"uv": [6, 0, 4, 6], "texture": "#plant"},
-				"south": {"uv": [4, 0, 6, 6], "texture": "#plant"},
-				"down": {"uv": [0, 0, 0, 0], "texture": "#plant"}
+				"north": {"uv": [8, 0, 12, 12], "texture": "#petals"},
+				"south": {"uv": [8, 0, 12, 12], "texture": "#petals"}
 			}
 		},
 		{
@@ -101,8 +101,8 @@
 			"to": [9.5, 16, 6.5],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10, 8]},
 			"faces": {
-				"north": {"uv": [0, 0, 2, 6], "texture": "#plant"},
-				"south": {"uv": [2, 0, 0, 6], "texture": "#plant"}
+				"north": {"uv": [0, 0, 4, 12], "texture": "#petals"},
+				"south": {"uv": [0, 0, 4, 12], "texture": "#petals"}
 			}
 		},
 		{
@@ -110,8 +110,8 @@
 			"to": [6.5, 16, 9.5],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10, 8]},
 			"faces": {
-				"east": {"uv": [4, 0, 2, 6], "texture": "#plant"},
-				"west": {"uv": [2, 0, 4, 6], "texture": "#plant"}
+				"east": {"uv": [4, 0, 8, 12], "texture": "#petals"},
+				"west": {"uv": [4, 0, 8, 12], "texture": "#petals"}
 			}
 		},
 		{
@@ -119,9 +119,28 @@
 			"to": [9.5, 16, 9.5],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10, 8]},
 			"faces": {
-				"east": {"uv": [6, 0, 8, 6], "texture": "#plant"},
-				"west": {"uv": [8, 0, 6, 6], "texture": "#plant"},
-				"down": {"uv": [0, 0, 0, 0], "rotation": 270, "texture": "#plant"}
+				"east": {"uv": [12, 0, 16, 12], "texture": "#petals"},
+				"west": {"uv": [12, 0, 16, 12], "texture": "#petals"}
+			}
+		},
+		{
+			"from": [8, 4, 2.925],
+			"to": [8, 7, 13.05],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
+			"faces": {
+				"east": {"uv": [0, 12, 15, 16], "texture": "#stem"},
+				"west": {"uv": [0, 12, 15, 16], "texture": "#stem"}
+			}
+		},
+		{
+			"from": [2.925, 4, 8],
+			"to": [13.05, 7, 8],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
+			"faces": {
+				"north": {"uv": [0, 12, 15, 16], "texture": "#stem"},
+				"south": {"uv": [0, 12, 15, 16], "texture": "#stem"}
 			}
 		}
 	]

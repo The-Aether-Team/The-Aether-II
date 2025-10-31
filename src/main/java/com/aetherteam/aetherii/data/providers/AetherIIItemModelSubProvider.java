@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.data.providers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 
@@ -8,6 +7,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.item.color.EffectBuildupColorSource;
 import com.aetherteam.aetherii.client.renderer.item.properties.*;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
+import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureSlots;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 
@@ -87,20 +87,23 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
 
     public void generateMoaFeatherItem(Item item) {
         ResourceLocation modelLocation = ModelLocationUtils.getModelLocation(item);
-        List<SelectItemModel.SwitchCase<Moa.FeatherColor>> list = new ArrayList<>(Moa.FeatherColor.values().length);
-        for (Moa.FeatherColor featherColor : Moa.FeatherColor.values()) {
+        var fallback = ItemModelUtils.plainModel(modelLocation);
+        ModelTemplates.FLAT_ITEM.create(modelLocation, TextureMapping.layer0(modelLocation), this.modelOutput);
+
+        var list = Moa.FeatherColor.stream().map((featherColor) -> {
             ResourceLocation name = modelLocation.withSuffix("_" + featherColor.getSerializedName());
             ItemModel.Unbaked model = ItemModelUtils.plainModel(name);
             ModelTemplates.FLAT_ITEM.create(name, TextureMapping.layer0(name), this.modelOutput);
-            list.add(ItemModelUtils.when(featherColor, model));
-        }
+            return ItemModelUtils.when(featherColor, model);
+        }).toList();
+
         ResourceLocation special_name_0 = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "item/special_blue_moa_feather");
         ModelTemplates.FLAT_ITEM.create(special_name_0, TextureMapping.layer0(special_name_0), this.modelOutput);
         this.itemModelOutput.accept(item,
             ItemModelUtils.conditional(
                 new CustomModelDataProperty(0),
                 ItemModelUtils.plainModel(special_name_0),
-                ItemModelUtils.select(new SelectFeatherColor(), ItemModelUtils.plainModel(modelLocation), list)));
+                ItemModelUtils.select(new SelectFeatherColor(), fallback, list)));
     }
 
     public void generateHealingStoneItem(Item item) {
@@ -127,16 +130,21 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
                 ItemModelUtils.when(ItemDisplayContext.FIXED, ItemModelUtils.plainModel(normalInventorySprite))
         );
 
+        var textures = new TextureMapping()
+            .put(AetherIITextureSlots.MAIN, TextureMapping.getItemTexture(item, "/main"))
+            .put(AetherIITextureSlots.SIDE1, TextureMapping.getItemTexture(item, "/side1"))
+            .put(AetherIITextureSlots.SIDE2, TextureMapping.getItemTexture(item, "/side2"));
+
         ItemModel.Unbaked closedGliderModelBase = ItemModelUtils.plainModel(AetherIIModelTemplates.AERCLOUD_GLIDER_CLOSED.extend()
                 .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, (builder) -> builder.rotation(-90.0F, 0.0F, -80.0F).translation(5.75F, -2.0F, 4.15F).scale(0.75F))
                 .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, (builder) -> builder.rotation(0.0F, 0.0F, -90.0F).translation(7.5F, 0.0F, 4.0F))
                 .build()
-                .create(item, new TextureMapping().put(TextureSlot.TEXTURE, TextureMapping.getItemTexture(item, "_model")), this.modelOutput));
+                .create(item, textures, this.modelOutput));
         ItemModel.Unbaked openGliderModelBase = ItemModelUtils.plainModel(AetherIIModelTemplates.AERCLOUD_GLIDER_OPEN.extend()
                 .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, (builder) -> builder.rotation(-90.0F, 0.0F, -35.0F).translation(11.55F, -2.0F, -0.1F))
                 .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, (builder) -> builder.rotation(0.0F, 0.0F, 0.0F).translation(-8.9F, 17.0F, 5.5F))
                 .build()
-                .create(item, new TextureMapping().put(TextureSlot.TEXTURE, TextureMapping.getItemTexture(item, "_model")), this.modelOutput));
+                .create(item, textures, this.modelOutput));
 
         ItemModel.Unbaked normalRangeSelect = ItemModelUtils.rangeSelect(
                 new ParachutingRange(),
@@ -168,9 +176,9 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
 
     public void generateMoaEggItem(Item item) {
         ResourceLocation modelLocation = ModelLocationUtils.getModelLocation(item);
-        ResourceLocation textureLocation = TextureMapping.getItemTexture(item);
         var fallback = ItemModelUtils.plainModel(modelLocation);
-
+        ModelTemplates.FLAT_ITEM.create(modelLocation, TextureMapping.layer0(modelLocation), this.modelOutput);
+        
         var feathers = ItemModelUtils.select(
             new SelectMoaEggType.FeatherShape(),
             fallback,
@@ -182,7 +190,7 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
                                 String suffix = "_" + featherShape.getSerializedName() + "_" + featherColor.getSerializedName();
                                 ResourceLocation name = modelLocation.withSuffix(suffix);
                                 ItemModel.Unbaked model = ItemModelUtils.plainModel(name);
-                                ModelTemplates.FLAT_ITEM.create(name, TextureMapping.layer0(textureLocation.withSuffix(suffix)), this.modelOutput);
+                                ModelTemplates.FLAT_ITEM.create(name, TextureMapping.layer0(name), this.modelOutput);
                                 return ItemModelUtils.when(featherColor, model);
                             })
                             .toList())))
@@ -195,7 +203,7 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
                     String suffix = "_eyes_" + eyeColor.getSerializedName();
                     ResourceLocation name = modelLocation.withSuffix(suffix);
                     ItemModel.Unbaked model = ItemModelUtils.plainModel(name);
-                    ModelTemplates.FLAT_ITEM.create(name, TextureMapping.layer0(textureLocation.withSuffix(suffix)), this.modelOutput);
+                    ModelTemplates.FLAT_ITEM.create(name, TextureMapping.layer0(name), this.modelOutput);
                     return ItemModelUtils.when(eyeColor, model);
                 })
                 .toList());
@@ -207,10 +215,11 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
                     String suffix = "_keratin_" + keratinColor.getSerializedName();
                     ResourceLocation name = modelLocation.withSuffix(suffix);
                     ItemModel.Unbaked model = ItemModelUtils.plainModel(name);
-                    ModelTemplates.FLAT_ITEM.create(name, TextureMapping.layer0(textureLocation.withSuffix(suffix)), this.modelOutput);
+                    ModelTemplates.FLAT_ITEM.create(name, TextureMapping.layer0(name), this.modelOutput);
                     return ItemModelUtils.when(keratinColor, model);
                 })
                 .toList());
+        
         
         this.itemModelOutput.accept(item, ItemModelUtils.composite(feathers, eyes, keratin));
 

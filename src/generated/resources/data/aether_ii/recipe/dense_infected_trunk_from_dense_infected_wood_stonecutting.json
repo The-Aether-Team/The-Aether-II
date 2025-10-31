@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "aether_ii:dense_infected_wood",
-  "result": {
-    "count": 1,
-    "id": "aether_ii:dense_infected_trunk"
-  }
-}

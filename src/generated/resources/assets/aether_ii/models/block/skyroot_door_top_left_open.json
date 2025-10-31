@@ -2,8 +2,8 @@
   "parent": "aether_ii:block/door_top_left_open",
   "render_type": "minecraft:cutout",
   "textures": {
-    "all": "aether_ii:block/skyroot_door",
-    "particle": "aether_ii:block/skyroot_door_top",
-    "top": "aether_ii:block/skyroot_door_top"
+    "end": "aether_ii:block/skyroot_door_end",
+    "front": "aether_ii:block/skyroot_door_top",
+    "side": "aether_ii:block/skyroot_door_side"
   }
 }

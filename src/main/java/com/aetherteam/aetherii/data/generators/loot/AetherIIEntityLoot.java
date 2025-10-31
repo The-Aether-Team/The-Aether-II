@@ -221,6 +221,8 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                 )
         );
 
+        this.add(AetherIIEntityTypes.BLADE_SHROOM_HUNTER.get(), LootTable.lootTable());
+
         this.add(AetherIIEntityTypes.EDWARD.get(), LootTable.lootTable());
     }
 
