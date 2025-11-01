@@ -1285,6 +1285,13 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("#")
                 .unlockedBy("has_cloudtwine", this.has(AetherIIItems.CLOUDTWINE))
                 .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.BRETTL_LASSO.get())
+                .define('#', AetherIIItems.BRETTL_ROPE)
+                .pattern(" ##")
+                .pattern(" ##")
+                .pattern("#  ")
+                .unlockedBy("has_brettl_rope", has(AetherIIItems.BRETTL_ROPE))
+                .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.MOA_SADDLE.get())
                 .define('#', AetherIIItems.BEAST_PELT)
                 .define('/', AetherIIItems.CLOUDTWINE)

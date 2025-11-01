@@ -247,6 +247,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
 
         // Misc
         this.generateBundleModels(AetherIIItems.HIDE_BUNDLE.get());
+        this.generateFlatItem(AetherIIItems.BRETTL_LASSO.get(), ModelTemplates.FLAT_ITEM);
         this.generateMoaEggItem(AetherIIItems.MOA_EGG.get());
         this.generateFlatItem(AetherIIItems.MOA_FEED.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.BLUEBERRY_MOA_FEED.get(), ModelTemplates.FLAT_ITEM);
