@@ -112,6 +112,8 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     private float flap;
     private float flapO;
 
+    private int flyTick;
+
     private int eggTime = this.getEggTime();
 
     public Moa(EntityType<? extends Moa> type, Level level) {
@@ -340,6 +342,17 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     @Override
     public void tick() {
         super.tick();
+
+        if (!this.onGround()) {
+            if (++this.flyTick > 20) {
+                if (this.getControllingPassenger() != null && this.getControllingPassenger().isSprinting()) {
+                    this.getControllingPassenger().setSprinting(false);
+                }
+            }
+        } else {
+            this.flyTick = 0;
+        }
+
         AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
         if (gravity != null) {
             if (!this.isFallFlying() && (!this.isVehicle() || this.fallDistance > 1.5)) {
@@ -541,17 +554,6 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 }
             }
         }
-    }
-
-    @Override
-    public void setOnGroundWithMovement(boolean onGround, boolean horizontalCollision, Vec3 movement) {
-        if (onGround && !this.onGround()) {
-            if (this.getControllingPassenger() != null && this.getControllingPassenger().isSprinting()) {
-                this.getControllingPassenger().setSprinting(false);
-            }
-        }
-
-        super.setOnGroundWithMovement(onGround, horizontalCollision, movement);
     }
 
 
