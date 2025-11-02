@@ -554,6 +554,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         super.setOnGroundWithMovement(onGround, horizontalCollision, movement);
     }
 
+
     /**
      * Handles cooldowns, remaining stamina, and particles when jumping.
      *
@@ -990,6 +991,10 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(AetherIISoundEvents.ENTITY_MOA_STEP.get(), 0.15F, 1.0F);
+    }
+
+    protected float nextStep() {
+        return (int) this.moveDist + 4;
     }
 
     /**
