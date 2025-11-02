@@ -342,7 +342,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         super.tick();
         AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
         if (gravity != null) {
-            if (!this.isFallFlying()) {
+            if (!this.isFallFlying() && (!this.isVehicle() || this.fallDistance > 1.5)) {
                 double max = this.isVehicle() ? -0.04 : -0.1;
                 double fallSpeed = Math.min(gravity.getValue() * -0.5, max); // Entity isn't allowed to fall too slowly from gravity.
                 if (this.getDeltaMovement().y() < fallSpeed && !this.playerTriedToCrouch()) {
