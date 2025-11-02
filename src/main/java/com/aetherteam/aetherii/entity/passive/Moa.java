@@ -344,7 +344,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         super.tick();
 
         if (!this.onGround()) {
-            if (++this.flyTick > 20) {
+            if (++this.flyTick > 40) {
                 if (this.getControllingPassenger() != null && this.getControllingPassenger().isSprinting()) {
                     this.getControllingPassenger().setSprinting(false);
                 }
