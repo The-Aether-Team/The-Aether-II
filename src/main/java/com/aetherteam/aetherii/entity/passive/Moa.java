@@ -993,6 +993,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         this.playSound(AetherIISoundEvents.ENTITY_MOA_STEP.get(), 0.15F, 1.0F);
     }
 
+    @Override
     protected float nextStep() {
         return (int) this.moveDist + 4;
     }
