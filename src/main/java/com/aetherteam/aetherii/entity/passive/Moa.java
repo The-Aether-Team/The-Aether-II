@@ -543,6 +543,17 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         }
     }
 
+    @Override
+    public void setOnGroundWithMovement(boolean onGround, boolean horizontalCollision, Vec3 movement) {
+        if (onGround && !this.onGround()) {
+            if (this.getControllingPassenger() != null && this.getControllingPassenger().isSprinting()) {
+                this.getControllingPassenger().setSprinting(false);
+            }
+        }
+
+        super.setOnGroundWithMovement(onGround, horizontalCollision, movement);
+    }
+
     /**
      * Handles cooldowns, remaining stamina, and particles when jumping.
      *
