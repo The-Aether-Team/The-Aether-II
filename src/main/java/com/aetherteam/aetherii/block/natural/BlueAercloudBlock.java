@@ -52,7 +52,7 @@ public class BlueAercloudBlock extends AercloudBlock {
         Vec3 prevMotion = entity.getDeltaMovement();
         entity.hasImpulse = true;
         if (entity instanceof CloudSkiff) {
-            entity.setDeltaMovement(entity.getDeltaMovement().x(), 0.65, entity.getDeltaMovement().z());
+            entity.setDeltaMovement(entity.getDeltaMovement().x(), 1.0, entity.getDeltaMovement().z());
         } else {
             entity.setDeltaMovement(entity.getDeltaMovement().x(), 2.0, entity.getDeltaMovement().z());
         }
