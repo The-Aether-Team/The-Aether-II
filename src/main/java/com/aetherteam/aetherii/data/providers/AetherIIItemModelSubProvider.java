@@ -5,6 +5,7 @@ import java.util.function.BiConsumer;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.item.color.EffectBuildupColorSource;
+import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.client.renderer.item.properties.*;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureSlots;
@@ -51,9 +52,20 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
                 ItemModelUtils.select(new Charge(), base, ItemModelUtils.when(CrossbowItem.ChargeType.ARROW, arrow))));
     }
 
-    public void generateModeledShield(Item item) {
-        ItemModel.Unbaked normal = ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(item));
-        ItemModel.Unbaked blocking = ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(item, "_blocking"));
+    public void generateModeledShield(Item item, ResourceLocation particle) {
+        ShieldModel.Textures textures = new ShieldModel.Textures(
+                List.of(TextureMapping.getItemTexture(item, "_front_0"),
+                        TextureMapping.getItemTexture(item, "_front_1"),
+                        TextureMapping.getItemTexture(item, "_front_2"),
+                        TextureMapping.getItemTexture(item, "_front_3")),
+                List.of(TextureMapping.getItemTexture(item, "_back_0"),
+                        TextureMapping.getItemTexture(item, "_back_1"),
+                        TextureMapping.getItemTexture(item, "_back_2"),
+                        TextureMapping.getItemTexture(item, "_back_3")),
+                TextureMapping.getItemTexture(item, "_handle"),
+                particle);
+        ItemModel.Unbaked normal = new ShieldModel.Unbaked(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "item/shield"), textures);
+        ItemModel.Unbaked blocking = new ShieldModel.Unbaked(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "item/shield_blocking"), textures);
         this.generateBooleanDispatch(item, ItemModelUtils.isUsingItem(), blocking, normal);
     }
 

@@ -5,17 +5,17 @@
       "type": "aether_ii:shield",
       "parent": "aether_ii:item/shield",
       "textures": {
-        "front": [
-          "aether_ii:item/skyroot_shield_front_0",
-          "aether_ii:item/skyroot_shield_front_1",
-          "aether_ii:item/skyroot_shield_front_2",
-          "aether_ii:item/skyroot_shield_front_3"
-        ],
         "back": [
           "aether_ii:item/skyroot_shield_back_0",
           "aether_ii:item/skyroot_shield_back_1",
           "aether_ii:item/skyroot_shield_back_2",
           "aether_ii:item/skyroot_shield_back_3"
+        ],
+        "front": [
+          "aether_ii:item/skyroot_shield_front_0",
+          "aether_ii:item/skyroot_shield_front_1",
+          "aether_ii:item/skyroot_shield_front_2",
+          "aether_ii:item/skyroot_shield_front_3"
         ],
         "handle": "aether_ii:item/skyroot_shield_handle",
         "particle": "aether_ii:block/skyroot_planks"
@@ -25,17 +25,17 @@
       "type": "aether_ii:shield",
       "parent": "aether_ii:item/shield_blocking",
       "textures": {
-        "front": [
-          "aether_ii:item/skyroot_shield_front_0",
-          "aether_ii:item/skyroot_shield_front_1",
-          "aether_ii:item/skyroot_shield_front_2",
-          "aether_ii:item/skyroot_shield_front_3"
-        ],
         "back": [
           "aether_ii:item/skyroot_shield_back_0",
           "aether_ii:item/skyroot_shield_back_1",
           "aether_ii:item/skyroot_shield_back_2",
           "aether_ii:item/skyroot_shield_back_3"
+        ],
+        "front": [
+          "aether_ii:item/skyroot_shield_front_0",
+          "aether_ii:item/skyroot_shield_front_1",
+          "aether_ii:item/skyroot_shield_front_2",
+          "aether_ii:item/skyroot_shield_front_3"
         ],
         "handle": "aether_ii:item/skyroot_shield_handle",
         "particle": "aether_ii:block/skyroot_planks"

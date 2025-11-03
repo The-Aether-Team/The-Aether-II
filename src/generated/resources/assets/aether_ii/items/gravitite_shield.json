@@ -2,12 +2,44 @@
   "model": {
     "type": "minecraft:condition",
     "on_false": {
-      "type": "minecraft:model",
-      "model": "aether_ii:item/gravitite_shield"
+      "type": "aether_ii:shield",
+      "parent": "aether_ii:item/shield",
+      "textures": {
+        "back": [
+          "aether_ii:item/gravitite_shield_back_0",
+          "aether_ii:item/gravitite_shield_back_1",
+          "aether_ii:item/gravitite_shield_back_2",
+          "aether_ii:item/gravitite_shield_back_3"
+        ],
+        "front": [
+          "aether_ii:item/gravitite_shield_front_0",
+          "aether_ii:item/gravitite_shield_front_1",
+          "aether_ii:item/gravitite_shield_front_2",
+          "aether_ii:item/gravitite_shield_front_3"
+        ],
+        "handle": "aether_ii:item/gravitite_shield_handle",
+        "particle": "aether_ii:block/skyroot_planks"
+      }
     },
     "on_true": {
-      "type": "minecraft:model",
-      "model": "aether_ii:item/gravitite_shield_blocking"
+      "type": "aether_ii:shield",
+      "parent": "aether_ii:item/shield_blocking",
+      "textures": {
+        "back": [
+          "aether_ii:item/gravitite_shield_back_0",
+          "aether_ii:item/gravitite_shield_back_1",
+          "aether_ii:item/gravitite_shield_back_2",
+          "aether_ii:item/gravitite_shield_back_3"
+        ],
+        "front": [
+          "aether_ii:item/gravitite_shield_front_0",
+          "aether_ii:item/gravitite_shield_front_1",
+          "aether_ii:item/gravitite_shield_front_2",
+          "aether_ii:item/gravitite_shield_front_3"
+        ],
+        "handle": "aether_ii:item/gravitite_shield_handle",
+        "particle": "aether_ii:block/skyroot_planks"
+      }
     },
     "property": "minecraft:using_item"
   }
