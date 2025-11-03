@@ -71,7 +71,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.GRAVITITE_SPEAR.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         this.generateCrossbow(AetherIIItems.GRAVITITE_CROSSBOW.get());
 
-        this.generateModeledShield(AetherIIItems.SKYROOT_SHIELD.get());
+//        this.generateModeledShield(AetherIIItems.SKYROOT_SHIELD.get());
         this.generateModeledShield(AetherIIItems.BURRUKAI_PLATE_SHIELD.get());
         this.generateModeledShield(AetherIIItems.ZANITE_SHIELD.get());
         this.generateModeledShield(AetherIIItems.ARKENIUM_SHIELD.get());
