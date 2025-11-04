@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.attachment.player;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.block.portal.PortalClientUtil;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.miscellaneous.ToggleItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -115,9 +116,13 @@ public class AetherIIPlayerAttachment {
         }
     }
 
-    public void mouseInput(boolean isUseItem, int action) {
+    public void mouseInput(Player player, boolean isUseItem, int action) {
         if (isUseItem && action == 1) {
-            this.useToggled = !this.useToggled;
+            if (!player.isUsingItem() && player.isHolding((stack) -> stack.getItem() instanceof ToggleItem)) {
+                this.useToggled = true;
+            } else if (player.isUsingItem() && player.getUseItem().getItem() instanceof ToggleItem) {
+                this.useToggled = false;
+            }
         }
     }
 

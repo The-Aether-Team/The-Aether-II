@@ -146,7 +146,7 @@ public class AetherIIClientEventListeners {
         boolean isUseItem = button == Minecraft.getInstance().options.keyUse.getKey().getValue();
 
         if (player != null) {
-            player.getData(AetherIIDataAttachments.PLAYER).mouseInput(isUseItem, action);
+            player.getData(AetherIIDataAttachments.PLAYER).mouseInput(player, isUseItem, action);
         }
     }
 
