@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.AbilityBehaviorAttachment;
 import com.aetherteam.aetherii.client.AetherIIClientProxy;
+import com.aetherteam.aetherii.item.miscellaneous.ToggleItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.InteractionHand;
@@ -19,7 +20,7 @@ import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-public class AercloudGliderItem extends Item {
+public class AercloudGliderItem extends Item implements ToggleItem {
     public static final int GLIDING_MAX = 500;
 
     public AercloudGliderItem(Properties properties) {

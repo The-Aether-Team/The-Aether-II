@@ -51,6 +51,7 @@
     "client.LevelRendererMixin",
     "client.LiquidBlockRendererMixin",
     "client.LocalPlayerMixin",
+    "client.MultiPlayerGameModeMixin",
     "client.PlayerRendererMixin",
     "client.accessor.DeathScreenAccessor",
     "client.accessor.EditBoxAccessor",

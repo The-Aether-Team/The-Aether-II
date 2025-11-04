@@ -1091,12 +1091,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_GLOVES.get(), 1, "§9Ability:§r Double Jump");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
-        this.addPerItemAbilityTooltip(AetherIIItems.COLD_AERCLOUD_GLIDER.get(), 1, "§3Use:§r Hold-Use");
-        this.addPerItemAbilityTooltip(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get(), 1, "§3Use:§r Hold-Use");
+        this.addPerItemAbilityTooltip(AetherIIItems.COLD_AERCLOUD_GLIDER.get(), 1, "§3Use:§r Click-Use");
+        this.addPerItemAbilityTooltip(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get(), 1, "§3Use:§r Click-Use");
         this.addPerItemAbilityTooltip(AetherIIItems.BLUE_AERCLOUD_GLIDER.get(), 1, "§9Ability:§r Upwards Boost");
-        this.addPerItemAbilityTooltip(AetherIIItems.BLUE_AERCLOUD_GLIDER.get(), 2, "§3Use:§r Hold-Use");
+        this.addPerItemAbilityTooltip(AetherIIItems.BLUE_AERCLOUD_GLIDER.get(), 2, "§3Use:§r Click-Use");
         this.addPerItemAbilityTooltip(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get(), 1, "§9Ability:§r Forwards Boost");
-        this.addPerItemAbilityTooltip(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get(), 2, "§3Use:§r Hold-Use");
+        this.addPerItemAbilityTooltip(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get(), 2, "§3Use:§r Click-Use");
     }
 
     private void addItemTooltips() {

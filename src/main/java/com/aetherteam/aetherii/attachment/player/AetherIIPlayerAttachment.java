@@ -19,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 public class AetherIIPlayerAttachment {
     private boolean isMoving;
     private boolean isJumping;
+    private boolean useToggled = false;
 
     private boolean canGetPortal = true;
     private boolean canSpawnInAether = true;
@@ -114,6 +115,12 @@ public class AetherIIPlayerAttachment {
         }
     }
 
+    public void mouseInput(boolean isUseItem, int action) {
+        if (isUseItem && action == 1) {
+            this.useToggled = !this.useToggled;
+        }
+    }
+
     public void movementInput(Player player, ClientInput input) {
         boolean isJumping = input.keyPresses.jump();
         if (isJumping != this.isJumping()) {
@@ -188,6 +195,10 @@ public class AetherIIPlayerAttachment {
      */
     public boolean isJumping() {
         return this.isJumping;
+    }
+
+    public boolean isUseToggled() {
+        return this.useToggled;
     }
 
     public void setCanGetPortal(boolean canGetPortal) {
