@@ -41,7 +41,7 @@ public class DartShooterItem extends ProjectileWeaponItem {
         if (!level.isClientSide()) {
             if (isLoaded(stack) && isCharged(stack)) {
                 float f = (float) (stack.getUseDuration(livingEntity) - count) / 5.0F;
-                this.performShooting(level, livingEntity, hand, stack, 1.0F, f, null);
+                this.performShooting(level, livingEntity, hand, stack, 1.75F, f, null);
             }
         }
     }
