@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.client.renderer.entity.layers;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaLargeSaddlebagModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.MoaSaddleModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaSaddlebagModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -17,6 +16,7 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ARGB;
 
 public class MoaSaddlebagLayer extends RenderLayer<MoaRenderState, EntityModel<MoaRenderState>> {
     private static final ResourceLocation SADDLEBAG_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/saddlebag/moa_saddlebag.png");
@@ -34,12 +34,15 @@ public class MoaSaddlebagLayer extends RenderLayer<MoaRenderState, EntityModel<M
     @Override
     public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, MoaRenderState moa, float netHeadYaw, float headPitch) {
         if (!moa.isInvisible) {
+            float opacity = moa.opacity;
+            int color = ARGB.colorFromFloat(opacity, 1.0F, 1.0F, 1.0F);
+
             if (moa.saddlebag.is(AetherIIItems.MOA_SADDLEBAG)) {
                 this.saddlebag.setupAnim(moa);
-                this.saddlebag.renderToBuffer(poseStack, ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(SADDLEBAG_TEXTURE), false), packedLight, OverlayTexture.NO_OVERLAY, -1);
+                this.saddlebag.renderToBuffer(poseStack, ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(SADDLEBAG_TEXTURE), false), packedLight, OverlayTexture.NO_OVERLAY, color);
             } else if (moa.saddlebag.is(AetherIIItems.LARGE_MOA_SADDLEBAG)) {
                 this.largeSaddlebag.setupAnim(moa);
-                this.largeSaddlebag.renderToBuffer(poseStack, ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(LARGE_SADDLEBAG_TEXTURE), false), packedLight, OverlayTexture.NO_OVERLAY, -1);
+                this.largeSaddlebag.renderToBuffer(poseStack, ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(LARGE_SADDLEBAG_TEXTURE), false), packedLight, OverlayTexture.NO_OVERLAY, color);
             }
         }
     }

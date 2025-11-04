@@ -1,14 +1,14 @@
 package com.aetherteam.aetherii.client.renderer.entity.state;
 
-import javax.annotation.Nullable;
-
-import org.jetbrains.annotations.Contract;
-
 import com.aetherteam.aetherii.entity.passive.Moa;
-
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityReference;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Contract;
+
+import javax.annotation.Nullable;
 
 public class MoaRenderState extends LivingEntityRenderState {
     public float flyAmount;
@@ -21,6 +21,9 @@ public class MoaRenderState extends LivingEntityRenderState {
     public Moa.FeatherShape featherShape = Moa.FeatherShape.DEFAULT;
     @Nullable
     public Moa.SpecialVariant specialVariant = null;
+    @Nullable
+    public EntityReference<LivingEntity> vehicleReference;
+    public float opacity;
 
     public boolean isSaddled() {
         return !this.saddle.isEmpty();
@@ -45,4 +48,5 @@ public class MoaRenderState extends LivingEntityRenderState {
         ResourceLocation texture = this.specialVariant.babyTexture;
         return texture != null ? texture : fallback;
     }
+
 }

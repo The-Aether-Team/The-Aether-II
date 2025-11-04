@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
+import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
 import com.aetherteam.aetherii.client.renderer.entity.animation.MoaAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
 import net.minecraft.client.animation.KeyframeAnimation;
@@ -64,7 +65,7 @@ public class MoaModel extends EntityModel<MoaRenderState> {
     private final ModelPart leg_right_toe_left;
 
     public MoaModel(ModelPart root) {
-        super(root);
+        super(root, AetherIIRenderTypes::entityDitherNoCull);
         this.walkAnimation = MoaAnimation.WALK.bake(root);
         this.sitAnimation = MoaAnimation.SIT.bake(root);
         this.flyAnimation = MoaAnimation.FLY.bake(root);

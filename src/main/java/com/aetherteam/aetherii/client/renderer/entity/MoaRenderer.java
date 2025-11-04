@@ -7,9 +7,13 @@ import com.aetherteam.aetherii.client.renderer.entity.model.MoaBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
 import com.aetherteam.aetherii.entity.passive.Moa;
+import net.minecraft.client.CameraType;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ARGB;
+import net.minecraft.world.entity.player.Player;
 
 public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, EntityModel<MoaRenderState>, MoaModel, MoaBabyModel> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_base.png");
@@ -45,6 +49,26 @@ public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, Ent
         renderState.eyeColor = moa.getEyeColor();
         renderState.featherShape = moa.getFeatherShape();
         renderState.specialVariant = moa.getSpecialVariant().orElse(null);
+        renderState.vehicleReference = moa.getRider();
+        renderState.opacity = calculateOpacity(renderState);
+    }
+
+    @Override
+    protected int getModelTint(MoaRenderState renderState) {
+        float opacity = renderState.opacity;
+        if (opacity < 1.0F) {
+            return ARGB.colorFromFloat(opacity, 1.0F, 1.0F, 1.0F);
+        }
+        return super.getModelTint(renderState);
+    }
+
+    protected float calculateOpacity(MoaRenderState renderState) {
+        if (Minecraft.getInstance().getCameraEntity() instanceof Player player && Minecraft.getInstance().options.getCameraType() == CameraType.FIRST_PERSON) {
+            if (renderState.vehicleReference != null && renderState.vehicleReference.matches(player)) {
+                return 0.5F;
+            }
+        }
+        return 1.0F;
     }
 
     @Override
