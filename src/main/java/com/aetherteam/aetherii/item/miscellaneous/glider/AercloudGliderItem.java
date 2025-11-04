@@ -5,7 +5,6 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.AbilityBehaviorAttachment;
 import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.item.miscellaneous.ToggleItem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -63,7 +62,8 @@ public class AercloudGliderItem extends Item implements ToggleItem {
                 }
                 y *= 0.98;
 
-                double fallSpeed = Math.max(gravityModifier * -3.125, -0.025); // Slows fall speed and slows the parachute from falling too slow and getting stuck midair.
+                double descent = !entity.isShiftKeyDown() ? -0.025 : -0.15;
+                double fallSpeed = Math.max(gravityModifier * -3.125, descent); // Slows fall speed and slows the parachute from falling too slow and getting stuck midair.
 
                 if (entity.getDeltaMovement().y() < -0.075) {
                     entity.setDeltaMovement(entity.getDeltaMovement().x(), Math.max(y, fallSpeed), entity.getDeltaMovement().z());
