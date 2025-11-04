@@ -47,14 +47,14 @@ public class ShieldModel implements ItemModel {
     private ItemModel bake(ItemDisplayContext displayContext) {
         List<BakedQuad> combinedQuads = new ArrayList<>();
 
-        combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().front().get(0)), -8.0F, -8.0F, true));
-        combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().front().get(1)), 8.0F, -8.0F, true));
-        combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().front().get(2)), -8.0F, 8.0F, true));
-        combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().front().get(3)), 8.0F, 8.0F, true));
-        combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().back().get(0)), -7.998F, -7.998F, false));
-        combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().back().get(1)), 7.998F, -7.998F, false));
-        combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().back().get(2)), -7.998F, 7.998F, false));
-        combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().back().get(3)), 7.998F, 7.998F, false));
+        combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().front().get(0)), -8.0F, 8.0F, true));
+        combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().front().get(1)), 8.0F, 8.0F, true));
+        combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().front().get(2)), -8.0F, -8.0F, true));
+        combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().front().get(3)), 8.0F, -8.0F, true));
+        combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().back().get(0)), -7.998F, 7.998F, false));
+        combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().back().get(1)), 7.998F, 7.998F, false));
+        combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().back().get(2)), -7.998F, -7.998F, false));
+        combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().back().get(3)), 7.998F, -7.998F, false));
 
         combinedQuads.addAll(UnbakedElementsHelper.bakeElements(UnbakedElementsHelper.createUnbakedItemElements(0, this.sprite(this.unbakedModel.textures().handle())), $ -> this.sprite(this.unbakedModel.textures().handle()),
                 new ComposedModelState(BlockModelRotation.X180_Y90, new Transformation(new Vector3f(0, px(0.5F), px(3.0F)), new Quaternionf(), new Vector3f(1, 1, 2), new Quaternionf()))));
@@ -70,7 +70,7 @@ public class ShieldModel implements ItemModel {
     public List<BakedQuad> faceElement(TextureAtlasSprite sprite, float xOffset, float yOffset, boolean front) {
         Vector3f scale = front ? new Vector3f(1, 1, 1) : new Vector3f(0.9999F, 0.9999F, 0.9999F);
         return UnbakedElementsHelper.bakeElements(UnbakedElementsHelper.createUnbakedItemElements(0, sprite), $ -> sprite,
-                new ComposedModelState(BlockModelRotation.X0_Y180, new Transformation(new Vector3f(px(xOffset) - px(3.0F), -px(yOffset) - px(0.5F), (0.001F * (front ? -1.0F : 1.0F)) - px(3.5F)), new Quaternionf(), scale, new Quaternionf())));
+                new ComposedModelState(BlockModelRotation.X0_Y0, new Transformation(new Vector3f(px(xOffset) + px(3.0F), px(yOffset) - px(0.5F), (0.001F * (front ? 1.0F : -1.0F)) + px(3.5F)), new Quaternionf(), scale, new Quaternionf())));
     }
 
     public static float px(float offset) {
