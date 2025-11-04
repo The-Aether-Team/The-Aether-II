@@ -1,14 +1,13 @@
 package com.aetherteam.aetherii.item.equipment.tools.zanite;
 
-import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.ZaniteTool;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShearsItem;
 
-public class ZaniteAxeItem extends AxeItem implements ZaniteTool {
-    public ZaniteAxeItem(Properties properties) {
-        super(AetherIIItemTiers.ZANITE, 6.0F, -3.1F, properties);
+public class ZaniteShearsItem extends ShearsItem implements ZaniteTool {
+    public ZaniteShearsItem(Properties properties) {
+        super(properties);
     }
 
     @Override

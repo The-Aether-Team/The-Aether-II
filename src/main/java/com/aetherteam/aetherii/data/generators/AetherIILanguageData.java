@@ -1011,6 +1011,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_CROSSBOW.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_CROSSBOW.get(), 2, "§3Use:§r Crouch-Use");
 
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SHEARS.get(), 1, "§9Ability:§r Grows Stronger");
+
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_PICKAXE.get(), 1, "§9Ability:§r Upgrades Further");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_AXE.get(), 1, "§9Ability:§r Upgrades Further");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_SHOVEL.get(), 1, "§9Ability:§r Upgrades Further");
