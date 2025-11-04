@@ -41,10 +41,10 @@ public class ShieldModel implements ItemModel {
 
     @Override
     public void update(ItemStackRenderState renderState, ItemStack stack, ItemModelResolver modelResolver, ItemDisplayContext displayContext, @Nullable ClientLevel level, @Nullable LivingEntity entity, int p_387820_) {
-        this.bake().update(renderState, stack, modelResolver, displayContext, level, entity, p_387820_);
+        this.bake(displayContext).update(renderState, stack, modelResolver, displayContext, level, entity, p_387820_);
     }
 
-    private ItemModel bake() {
+    private ItemModel bake(ItemDisplayContext displayContext) {
         List<BakedQuad> combinedQuads = new ArrayList<>();
 
         combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().front().get(0)), -8.0F, -8.0F, true));
@@ -59,7 +59,7 @@ public class ShieldModel implements ItemModel {
         combinedQuads.addAll(UnbakedElementsHelper.bakeElements(UnbakedElementsHelper.createUnbakedItemElements(0, this.sprite(this.unbakedModel.textures().handle())), $ -> this.sprite(this.unbakedModel.textures().handle()),
                 new ComposedModelState(BlockModelRotation.X180_Y90, new Transformation(new Vector3f(0, px(0.5F), px(3.0F)), new Quaternionf(), new Vector3f(1, 1, 2), new Quaternionf()))));
 
-        return new CompositeModel(List.of(new BlockModelWrapper(List.of(), combinedQuads, new ModelRenderProperties(true, this.sprite(this.unbakedModel.textures().particle()), this.itemTransforms), NeoForgeRenderTypes.ITEM_UNSORTED_UNLIT_TRANSLUCENT.get())));
+        return new CompositeModel(List.of(new BlockModelWrapper(List.of(), combinedQuads, new ModelRenderProperties(true, this.sprite(this.unbakedModel.textures().particle()), this.itemTransforms), displayContext == ItemDisplayContext.GUI ? NeoForgeRenderTypes.ITEM_UNSORTED_UNLIT_TRANSLUCENT.get() : NeoForgeRenderTypes.ITEM_UNSORTED_TRANSLUCENT.get())));
     }
 
     public TextureAtlasSprite sprite(ResourceLocation location) {
