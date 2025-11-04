@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.client.renderer.item.properties;
+package com.aetherteam.aetherii.client.renderer.item.properties.range;
 
 import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
 import com.mojang.serialization.MapCodec;

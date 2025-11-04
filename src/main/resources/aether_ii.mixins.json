@@ -13,6 +13,7 @@
     "common.HeightmapTypesMixin",
     "common.ItemCooldownsMixin",
     "common.ItemStackMixin",
+    "common.LeashableMixin",
     "common.PlayerMixin",
     "common.PointedDripstoneBlockMixin",
     "common.RandomStateMixin",

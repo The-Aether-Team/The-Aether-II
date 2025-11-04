@@ -6,7 +6,11 @@ import java.util.function.BiConsumer;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.item.color.EffectBuildupColorSource;
 import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
-import com.aetherteam.aetherii.client.renderer.item.properties.*;
+import com.aetherteam.aetherii.client.renderer.item.properties.conditional.BetterIsUsingItem;
+import com.aetherteam.aetherii.client.renderer.item.properties.conditional.LassoThrow;
+import com.aetherteam.aetherii.client.renderer.item.properties.range.*;
+import com.aetherteam.aetherii.client.renderer.item.properties.select.SelectFeatherColor;
+import com.aetherteam.aetherii.client.renderer.item.properties.select.SelectMoaEggType;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureSlots;
 import com.aetherteam.aetherii.entity.passive.Moa;
@@ -20,8 +24,8 @@ import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
 import net.minecraft.client.renderer.item.properties.conditional.CustomModelDataProperty;
+import net.minecraft.client.renderer.item.properties.conditional.FishingRodCast;
 import net.minecraft.client.renderer.item.properties.conditional.HasComponent;
-import net.minecraft.client.renderer.item.properties.conditional.IsUsingItem;
 import net.minecraft.client.renderer.item.properties.select.Charge;
 import net.minecraft.client.renderer.item.properties.select.DisplayContext;
 import net.minecraft.resources.ResourceLocation;
@@ -184,6 +188,12 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
                     ItemModelUtils.override(dullRangeSelect, 1.0F))
             );
         }
+    }
+
+    public void generateLasso(Item item) {
+        ItemModel.Unbaked normal = ItemModelUtils.plainModel(this.createFlatItemModel(item, ModelTemplates.FLAT_HANDHELD_ROD_ITEM));
+        ItemModel.Unbaked thrown = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_thrown", ModelTemplates.FLAT_HANDHELD_ROD_ITEM));
+        this.generateBooleanDispatch(item, new LassoThrow(), thrown, normal);
     }
 
     public void generateMoaEggItem(Item item) {

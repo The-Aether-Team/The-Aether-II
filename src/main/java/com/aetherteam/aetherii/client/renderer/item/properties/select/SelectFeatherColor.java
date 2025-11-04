@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.client.renderer.item.properties;
+package com.aetherteam.aetherii.client.renderer.item.properties.select;
 
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;

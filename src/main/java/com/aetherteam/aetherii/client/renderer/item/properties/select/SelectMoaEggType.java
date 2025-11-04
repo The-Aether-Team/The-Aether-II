@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.client.renderer.item.properties;
+package com.aetherteam.aetherii.client.renderer.item.properties.select;
 
 import org.jetbrains.annotations.Nullable;
 

@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.client.renderer.item.properties;
+package com.aetherteam.aetherii.client.renderer.item.properties.conditional;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.multiplayer.ClientLevel;
