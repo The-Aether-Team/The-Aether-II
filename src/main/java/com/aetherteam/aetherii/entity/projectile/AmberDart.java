@@ -9,7 +9,6 @@ import com.aetherteam.aetherii.item.components.BuildupContents;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractArrowAccessor;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ColorParticleOption;
-import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -19,6 +18,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -82,9 +82,19 @@ public class AmberDart extends AbstractArrow {
     }
 
     @Override
-    protected void onHitEntity(EntityHitResult result) { //todo shield checks etc.
-        super.onHitEntity(result);
+    protected void onHitEntity(EntityHitResult result) { //todo needs another default break particle
         Entity entity = result.getEntity();
+        if (entity instanceof LivingEntity livingEntity) {
+            if (livingEntity.isBlocking()) {
+                livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, this.getOwner());
+                if (entity instanceof Player player && player.isBlocking()) {
+                    if (!player.getUseItem().isEmpty()) {
+                        player.getUseItem().hurtAndBreak(3, player, player.getUsedItemHand());
+                    }
+                }
+                return;
+            }
+        }
         if (this.level() instanceof ServerLevel serverLevel) {
             BuildupContents buildupContents = this.getWeaponItem().get(AetherIIDataComponents.BUILDUP_CONTENTS);
             if (buildupContents != null) {
