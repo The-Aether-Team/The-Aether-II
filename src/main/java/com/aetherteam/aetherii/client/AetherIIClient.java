@@ -129,5 +129,10 @@ public class AetherIIClient {
         TooltipListeners.PREDICATES.put(AetherIIItems.GRAVITITE_LEGGINGS, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.GRAVITITE_BOOTS, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.GRAVITITE_GLOVES, setBonusPredicate);
+        TooltipListeners.PREDICATES.put(AetherIIItems.NEPTUNE_HELMET, setBonusPredicate);
+        TooltipListeners.PREDICATES.put(AetherIIItems.NEPTUNE_CHESTPLATE, setBonusPredicate);
+        TooltipListeners.PREDICATES.put(AetherIIItems.NEPTUNE_LEGGINGS, setBonusPredicate);
+        TooltipListeners.PREDICATES.put(AetherIIItems.NEPTUNE_BOOTS, setBonusPredicate);
+        TooltipListeners.PREDICATES.put(AetherIIItems.NEPTUNE_GLOVES, setBonusPredicate);
     }
 }

@@ -672,6 +672,11 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GRAVITITE_LEGGINGS.get());
                 output.accept(AetherIIItems.GRAVITITE_BOOTS.get());
                 output.accept(AetherIIItems.GRAVITITE_GLOVES.get());
+                output.accept(AetherIIItems.NEPTUNE_HELMET.get());
+                output.accept(AetherIIItems.NEPTUNE_CHESTPLATE.get());
+                output.accept(AetherIIItems.NEPTUNE_LEGGINGS.get());
+                output.accept(AetherIIItems.NEPTUNE_BOOTS.get());
+                output.accept(AetherIIItems.NEPTUNE_GLOVES.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_CONSUMABLES = CREATIVE_MODE_TABS.register("consumables", () -> CreativeModeTab.builder()

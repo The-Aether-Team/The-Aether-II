@@ -1288,6 +1288,17 @@
     ],
     "subtitle": "subtitles.aether_ii.item.armor.equip_gravitite"
   },
+  "item.armor.neptune": {
+    "sounds": [
+      "item/armor/equip_gold1",
+      "item/armor/equip_gold2",
+      "item/armor/equip_gold3",
+      "item/armor/equip_gold4",
+      "item/armor/equip_gold5",
+      "item/armor/equip_gold6"
+    ],
+    "subtitle": "subtitles.aether_ii.item.armor.equip_neptune"
+  },
   "item.armor.zanite": {
     "sounds": [
       "item/armor/equip_diamond1",

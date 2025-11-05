@@ -83,7 +83,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.BURRUKAI_PLATE_GLOVES.get(),
                 AetherIIItems.ZANITE_GLOVES.get(),
                 AetherIIItems.ARKENIUM_GLOVES.get(),
-                AetherIIItems.GRAVITITE_GLOVES.get());
+                AetherIIItems.GRAVITITE_GLOVES.get(),
+                AetherIIItems.NEPTUNE_GLOVES.get());
         this.tag(AetherIITags.Items.EQUIPMENT_ACCESSORIES);
         this.tag(AetherIITags.Items.EQUIPABLE).addTags(AetherIITags.Items.EQUIPMENT_RELICS, AetherIITags.Items.EQUIPMENT_HANDWEAR, AetherIITags.Items.EQUIPMENT_ACCESSORIES);
         this.tag(AetherIITags.Items.BEAST_PELT_ARMOR).add(
@@ -116,6 +117,12 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.GRAVITITE_LEGGINGS.get(),
                 AetherIIItems.GRAVITITE_BOOTS.get(),
                 AetherIIItems.GRAVITITE_GLOVES.get());
+        this.tag(AetherIITags.Items.NEPTUNE_ARMOR).add(
+                AetherIIItems.NEPTUNE_HELMET.get(),
+                AetherIIItems.NEPTUNE_CHESTPLATE.get(),
+                AetherIIItems.NEPTUNE_LEGGINGS.get(),
+                AetherIIItems.NEPTUNE_BOOTS.get(),
+                AetherIIItems.NEPTUNE_GLOVES.get());
         this.tag(AetherIITags.Items.SKYROOT_TOOL).add(
                 AetherIIItems.SKYROOT_PICKAXE.get(),
                 AetherIIItems.SKYROOT_AXE.get(),
@@ -292,6 +299,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.ZANITE_REPAIRING).add(AetherIIItems.ZANITE_GEMSTONE.get());
         this.tag(AetherIITags.Items.ARKENIUM_REPAIRING).add(AetherIIItems.ARKENIUM_PLATES.get());
         this.tag(AetherIITags.Items.GRAVITITE_REPAIRING).add(AetherIIItems.GRAVITITE_PLATE.get());
+        this.tag(AetherIITags.Items.NEPTUNE_REPAIRING);
         this.tag(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS);
         this.tag(AetherIITags.Items.SWET_GEL).add(
                 AetherIIItems.GREEN_SWET_GEL.get(),

@@ -30,16 +30,17 @@ public class AetherIIEquipmentAssetData extends EquipmentAssetProvider {
         consumer.accept(AetherIIEquipmentAssets.ZANITE, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite")).build());
         consumer.accept(AetherIIEquipmentAssets.ARKENIUM, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "arkenium")).build());
         consumer.accept(AetherIIEquipmentAssets.GRAVITITE, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite")).build());
+        consumer.accept(AetherIIEquipmentAssets.NEPTUNE, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "neptune")).build());
     }
 
     @Override
-    public CompletableFuture<?> run(CachedOutput p_387304_) {
+    public CompletableFuture<?> run(CachedOutput output) {
         Map<ResourceKey<EquipmentAsset>, EquipmentClientInfo> map = new HashMap<>();
         bootstrap((key, info) -> {
             if (map.putIfAbsent(key, info) != null) {
                 throw new IllegalStateException("Tried to register equipment asset twice for id: " + key);
             }
         });
-        return DataProvider.saveAll(p_387304_, EquipmentClientInfo.CODEC, this.pathProvider::json, map);
+        return DataProvider.saveAll(output, EquipmentClientInfo.CODEC, this.pathProvider::json, map);
     }
 }

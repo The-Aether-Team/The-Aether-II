@@ -35,6 +35,8 @@ public class AbilityBehaviorAttachment {
     private boolean gravititeHoldingFloatingBlock = false;
     private boolean gravititeJumpUsed = true;
 
+    private double neptuneSubmergeLength;
+
 //    private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
 //            Map.entry("setGlidingTimer", Triple.of(Type.INT, (object) -> this.setGlidingTimer((int) object), this::getGlidingTimer)),
 //            Map.entry("setGravititeJumpUsed", Triple.of(Type.BOOLEAN, (object) -> this.setGravititeJumpUsed((boolean) object), this::isGravititeJumpUsed)),
@@ -173,6 +175,17 @@ public class AbilityBehaviorAttachment {
 
     public boolean isGravititeJumpUsed() {
         return this.gravititeJumpUsed;
+    }
+
+    public void setNeptuneSubmergeLength(double length) {
+        this.neptuneSubmergeLength = length;
+    }
+
+    /**
+     * @return A {@link Double} for how long the player has been submerged in water while wearing Neptune Armor.
+     */
+    public double getNeptuneSubmergeLength() {
+        return this.neptuneSubmergeLength;
     }
 
     /**

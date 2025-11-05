@@ -808,6 +808,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GRAVITITE_BOOTS, "Gravitite Boots");
         this.addItem(AetherIIItems.GRAVITITE_GLOVES, "Gravitite Gauntlets");
 
+        this.addItem(AetherIIItems.NEPTUNE_HELMET, "Neptune Helmet");
+        this.addItem(AetherIIItems.NEPTUNE_CHESTPLATE, "Neptune Chestplate");
+        this.addItem(AetherIIItems.NEPTUNE_LEGGINGS, "Neptune Leggings");
+        this.addItem(AetherIIItems.NEPTUNE_BOOTS, "Neptune Boots");
+        this.addItem(AetherIIItems.NEPTUNE_GLOVES, "Neptune Gauntlets");
+
         // Materials
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
         this.addItem(AetherIIItems.SCATTERGLASS_SHARD, "Scatterglass Shard");
@@ -1069,6 +1075,17 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_HELMET.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_GLOVES.get(), 1, "§9Ability:§r Double Jump");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
+
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_BOOTS.get(), 1, "§9Ability:§r Walk in Water");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_BOOTS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_LEGGINGS.get(), 1, "§9Ability:§r Walk in Water");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_CHESTPLATE.get(), 1, "§9Ability:§r Walk in Water");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_HELMET.get(), 1, "§9Ability:§r Walk in Water");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_HELMET.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_GLOVES.get(), 1, "§9Ability:§r Walk in Water");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
         this.addPerItemAbilityTooltip(AetherIIItems.COLD_AERCLOUD_GLIDER.get(), 1, "§3Use:§r Hold-Use");
         this.addPerItemAbilityTooltip(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get(), 1, "§3Use:§r Hold-Use");
@@ -1451,6 +1468,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("item", "armor.equip_zanite", "Zanite armor clangs");
         this.addSubtitle("item", "armor.equip_arkenium", "Arkenium armor clanks");
         this.addSubtitle("item", "armor.equip_gravitite", "Gravitite armor clinks");
+        this.addSubtitle("item", "armor.equip_neptune", "Neptune armor clinks");
 
         // Player
         this.addSubtitle("entity", "player.damage.slash.correct", "Strong slashing attack");
