@@ -60,6 +60,7 @@
     "client.accessor.InventoryScreenAccessor",
     "client.accessor.ItemRendererAccessor",
     "client.accessor.LevelRendererAccessor",
+    "client.accessor.MouseHandlerAccessor",
     "client.accessor.ParticleAccessor",
     "client.accessor.ParticleEngineAccessor",
     "client.accessor.PlayerModelAccessor",
