@@ -54,6 +54,7 @@ import com.aetherteam.aetherii.item.equipment.weapons.holystone.HolystoneCrossbo
 import com.aetherteam.aetherii.item.equipment.weapons.holystone.HolystoneHammerItem;
 import com.aetherteam.aetherii.item.equipment.weapons.holystone.HolystoneShortswordItem;
 import com.aetherteam.aetherii.item.equipment.weapons.holystone.HolystoneSpearItem;
+import com.aetherteam.aetherii.item.equipment.weapons.loot.DemolitionHammerItem;
 import com.aetherteam.aetherii.item.equipment.weapons.skyroot.SkyrootCrossbowItem;
 import com.aetherteam.aetherii.item.equipment.weapons.skyroot.SkyrootHammerItem;
 import com.aetherteam.aetherii.item.equipment.weapons.skyroot.SkyrootShortswordItem;
@@ -165,6 +166,8 @@ public class AetherIIItems {
     public static final DeferredItem<ShieldItem> ZANITE_SHIELD = register("zanite_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.ZANITE, properties), () -> new Item.Properties().attributes(TieredShieldItem.createAttributes(60)));
     public static final DeferredItem<ShieldItem> ARKENIUM_SHIELD = register("arkenium_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.ARKENIUM, properties), () -> new Item.Properties().attributes(TieredShieldItem.createAttributes(60)));
     public static final DeferredItem<ShieldItem> GRAVITITE_SHIELD = register("gravitite_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.GRAVITITE, properties), () -> new Item.Properties().attributes(TieredShieldItem.createAttributes(40)));
+
+    public static final DeferredItem<TieredHammerItem> DEMOLITION_HAMMER = register("demolition_hammer", DemolitionHammerItem::new);
 
     public static final DeferredItem<Item> SCATTERGLASS_BOLT = register("scatterglass_bolt", ScatterglassBoltItem::new);
 

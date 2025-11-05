@@ -77,6 +77,8 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateModeledShield(AetherIIItems.ARKENIUM_SHIELD.get());
         this.generateModeledShield(AetherIIItems.GRAVITITE_SHIELD.get());
 
+        this.generateFlatItem(AetherIIItems.DEMOLITION_HAMMER.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+
         this.generateFlatItem(AetherIIItems.SCATTERGLASS_BOLT.get(), ModelTemplates.FLAT_ITEM);
 
         // Armor

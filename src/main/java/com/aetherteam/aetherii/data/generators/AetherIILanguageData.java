@@ -775,6 +775,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ARKENIUM_SHIELD, "Arkenium Shield");
         this.addItem(AetherIIItems.GRAVITITE_SHIELD, "Gravitite Shield");
 
+        this.addItem(AetherIIItems.DEMOLITION_HAMMER, "Demolition Hammer");
+
         this.addItem(AetherIIItems.SCATTERGLASS_BOLT, "Scatterglass Bolt");
 
         // Armor
@@ -1022,6 +1024,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SPEAR.get(), 1, "§9Ability:§r Shifts Gravity");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 1, "§9Ability:§r Straight Shot");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 2, "§3Use:§r Crouch-Use");
+
+        this.addPerItemAbilityTooltip(AetherIIItems.DEMOLITION_HAMMER.get(), 1, "§9Ability:§r Shoots Explosive");
+        this.addPerItemAbilityTooltip(AetherIIItems.DEMOLITION_HAMMER.get(), 2, "§3Use:§r Crouch-Use");
 
         this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_BOOTS.get(), 1, "§9Ability:§r Calms Animals");
         this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_BOOTS.get(), 2, "§9Set Pieces:§r %s");

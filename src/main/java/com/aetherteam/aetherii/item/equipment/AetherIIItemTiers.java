@@ -10,4 +10,6 @@ public class AetherIIItemTiers {
     public static final ToolMaterial ZANITE = new ToolMaterial(BlockTags.INCORRECT_FOR_IRON_TOOL, 250, 6.0F, 2.0F, 14, AetherIITags.Items.ZANITE_REPAIRING);
     public static final ToolMaterial ARKENIUM = new ToolMaterial(BlockTags.INCORRECT_FOR_IRON_TOOL, 1561, 6.0F, 2.0F, 14, AetherIITags.Items.ARKENIUM_REPAIRING);
     public static final ToolMaterial GRAVITITE = new ToolMaterial(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1561, 8.0F, 3.0F, 10, AetherIITags.Items.GRAVITITE_REPAIRING);
+
+    public static final ToolMaterial DEMOLITION = new ToolMaterial(BlockTags.INCORRECT_FOR_IRON_TOOL, 250, 6.0F, 2.0F, 14, AetherIITags.Items.DEMOLITION_REPAIRING);
 }

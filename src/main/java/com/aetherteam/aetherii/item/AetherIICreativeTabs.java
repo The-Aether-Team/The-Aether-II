@@ -601,6 +601,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GRAVITITE_AXE.get());
                 output.accept(AetherIIItems.GRAVITITE_TROWEL.get());
                 output.accept(AetherIIItems.GRAVITITE_SHIELD.get());
+                output.accept(AetherIIItems.DEMOLITION_HAMMER.get());
                 output.accept(AetherIIItems.ARKENIUM_SHEARS.get());
                 output.accept(AetherIIItems.SCATTERGLASS_BOLT.get());
                 output.accept(AetherIIItems.SKYROOT_BUCKET.get());

@@ -35,6 +35,8 @@ public class AetherIIStats {
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_SPEAR = List.of(pierceDamageModifer(6.0));
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_CROSSBOW = List.of(rangedPierceDamageModifer(5.0));
 
+    public static final List<ItemAttributeModifiers.Entry> DEMOLITION_HAMMER = List.of(impactDamageModifer(5.0));
+
     public static final ImmutableMap<Holder<Attribute>, Double> FLYING_COW = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 10.0)
             .build();
