@@ -63,9 +63,9 @@ public class AccessoryContainer extends SimpleContainer {
     }
 
     public enum SlotType {
-        RELIC(0),
-        HANDWEAR(1),
-        ACCESSORY(2, 3);
+        RELIC(0, 1),
+        HANDWEAR(2),
+        ACCESSORY(3);
 
         private final int[] index;
 
