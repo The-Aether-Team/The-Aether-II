@@ -27,8 +27,8 @@ public class AccessoryContainer extends SimpleContainer {
     private final NonNullList<ItemStack> lastItems;
 
     protected AccessoryContainer(List<ItemStack> lastItems) {
-        super(4);
-        this.lastItems = NonNullList.copyOf(lastItems);
+        super(lastItems.toArray(ItemStack[]::new));
+        this.lastItems = NonNullList.of(ItemStack.EMPTY, lastItems.toArray(ItemStack[]::new));
     }
 
     public AccessoryContainer() {
@@ -39,7 +39,6 @@ public class AccessoryContainer extends SimpleContainer {
     public void postTickUpdate(LivingEntity entity) {
         if (!entity.level().isClientSide()) {
             if (!this.lastItems.equals(this.getItems())) {
-                this.lastItems.clear();
                 for (int i = 0; i < this.getItems().size(); i++) {
                     this.lastItems.set(i, this.getItem(i));
                 }

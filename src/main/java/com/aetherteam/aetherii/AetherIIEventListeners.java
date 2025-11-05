@@ -266,6 +266,7 @@ public class AetherIIEventListeners {
         if (entity instanceof LivingEntity livingEntity) {
             livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).postTickUpdate(livingEntity);
             livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).postTickUpdate(livingEntity);
+            livingEntity.getData(AetherIIDataAttachments.ACCESSORIES).postTickUpdate(livingEntity);
         }
     }
 

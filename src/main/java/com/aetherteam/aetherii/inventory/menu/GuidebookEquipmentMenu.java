@@ -199,7 +199,6 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
             this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_HANDWEAR, 2, 64, 74, HANDWEAR_SLOT_LOCATION));
             this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_ACCESSORIES, 3, 64, 92, ACCESSORY_SLOT_LOCATION));
 
-
             for (int k = 0; k < 4; k++) {
                 EquipmentSlot equipmentslot = SLOT_IDS[k];
                 ResourceLocation resourceLocation = TEXTURE_EMPTY_SLOTS.get(equipmentslot);
