@@ -30,6 +30,7 @@ public class AetherIIEquipmentAssetData extends EquipmentAssetProvider {
         consumer.accept(AetherIIEquipmentAssets.ZANITE, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite")).build());
         consumer.accept(AetherIIEquipmentAssets.ARKENIUM, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "arkenium")).build());
         consumer.accept(AetherIIEquipmentAssets.GRAVITITE, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite")).build());
+        consumer.accept(AetherIIEquipmentAssets.SENTRY, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry")).build());
         consumer.accept(AetherIIEquipmentAssets.NEPTUNE, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "neptune")).build());
     }
 

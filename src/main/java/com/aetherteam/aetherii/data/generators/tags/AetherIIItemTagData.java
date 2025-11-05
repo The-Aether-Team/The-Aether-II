@@ -123,6 +123,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.NEPTUNE_LEGGINGS.get(),
                 AetherIIItems.NEPTUNE_BOOTS.get(),
                 AetherIIItems.NEPTUNE_GLOVES.get());
+        this.tag(AetherIITags.Items.SENTRY_ARMOR).add(
+                AetherIIItems.SENTRY_BOOTS.get());
         this.tag(AetherIITags.Items.SKYROOT_TOOL).add(
                 AetherIIItems.SKYROOT_PICKAXE.get(),
                 AetherIIItems.SKYROOT_AXE.get(),
@@ -831,28 +833,33 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.BURRUKAI_PLATE_HELMET.get(),
                 AetherIIItems.ZANITE_HELMET.get(),
                 AetherIIItems.ARKENIUM_HELMET.get(),
-                AetherIIItems.GRAVITITE_HELMET.get()
+                AetherIIItems.GRAVITITE_HELMET.get(),
+                AetherIIItems.NEPTUNE_HELMET.get()
         );
         this.tag(ItemTags.CHEST_ARMOR).add(
                 AetherIIItems.BEAST_PELT_CHESTPLATE.get(),
                 AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(),
                 AetherIIItems.ZANITE_CHESTPLATE.get(),
                 AetherIIItems.ARKENIUM_CHESTPLATE.get(),
-                AetherIIItems.GRAVITITE_CHESTPLATE.get()
+                AetherIIItems.GRAVITITE_CHESTPLATE.get(),
+                AetherIIItems.NEPTUNE_CHESTPLATE.get()
         );
         this.tag(ItemTags.LEG_ARMOR).add(
                 AetherIIItems.BEAST_PELT_LEGGINGS.get(),
                 AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(),
                 AetherIIItems.ZANITE_LEGGINGS.get(),
                 AetherIIItems.ARKENIUM_LEGGINGS.get(),
-                AetherIIItems.GRAVITITE_LEGGINGS.get()
+                AetherIIItems.GRAVITITE_LEGGINGS.get(),
+                AetherIIItems.NEPTUNE_LEGGINGS.get()
         );
         this.tag(ItemTags.FOOT_ARMOR).add(
                 AetherIIItems.BEAST_PELT_BOOTS.get(),
                 AetherIIItems.BURRUKAI_PLATE_BOOTS.get(),
                 AetherIIItems.ZANITE_BOOTS.get(),
                 AetherIIItems.ARKENIUM_BOOTS.get(),
-                AetherIIItems.GRAVITITE_BOOTS.get()
+                AetherIIItems.GRAVITITE_BOOTS.get(),
+                AetherIIItems.NEPTUNE_BOOTS.get(),
+                AetherIIItems.SENTRY_BOOTS.get()
         );
         this.tag(Tags.Items.CHAINS).add(
                 AetherIIBlocks.ARKENIUM_CHAIN.get().asItem()

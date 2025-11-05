@@ -41,6 +41,12 @@ public class AetherIIArmorMaterials { //todo sounds
         map.put(ArmorType.HELMET, 3);
     }), 10, AetherIISoundEvents.ITEM_ARMOR_EQUIP_GRAVITITE, 2.0F, 0.0F, AetherIITags.Items.GRAVITITE_REPAIRING, AetherIIEquipmentAssets.GRAVITITE);
 
+    public static final ArmorMaterial SENTRY = new ArmorMaterial(15, Util.make(new EnumMap<>(ArmorType.class), map -> {
+        map.put(ArmorType.BOOTS, 2);
+        map.put(ArmorType.LEGGINGS, 5);
+        map.put(ArmorType.CHESTPLATE, 6);
+        map.put(ArmorType.HELMET, 2);
+    }), 9, AetherIISoundEvents.ITEM_ARMOR_EQUIP_SENTRY, 0.0F, 0.0F, AetherIITags.Items.SENTRY_REPAIRING, AetherIIEquipmentAssets.SENTRY);
     public static final ArmorMaterial NEPTUNE = new ArmorMaterial(15, Util.make(new EnumMap<>(ArmorType.class), map -> {
         map.put(ArmorType.BOOTS, 2);
         map.put(ArmorType.LEGGINGS, 5);

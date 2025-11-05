@@ -64,6 +64,7 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_ZANITE = register("item.armor.zanite");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_ARKENIUM = register("item.armor.arkenium");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_GRAVITITE = register("item.armor.gravitite");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_SENTRY = register("item.armor.sentry");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_NEPTUNE = register("item.armor.neptune");
 
     // Player

@@ -148,6 +148,7 @@ public class AetherIITags {
         public static final TagKey<Item> ZANITE_ARMOR = tag("armor/zanite");
         public static final TagKey<Item> ARKENIUM_ARMOR = tag("armor/arkenium");
         public static final TagKey<Item> GRAVITITE_ARMOR = tag("armor/gravitite");
+        public static final TagKey<Item> SENTRY_ARMOR = tag("armor/sentry");
         public static final TagKey<Item> NEPTUNE_ARMOR = tag("armor/neptune");
 
         public static final TagKey<Item> SKYROOT_TOOL = tag("tool/skyroot");
@@ -178,6 +179,7 @@ public class AetherIITags {
         public static final TagKey<Item> ZANITE_REPAIRING = tag("zanite_repairing");
         public static final TagKey<Item> ARKENIUM_REPAIRING = tag("arkenium_repairing");
         public static final TagKey<Item> GRAVITITE_REPAIRING = tag("gravitite_repairing");
+        public static final TagKey<Item> SENTRY_REPAIRING = tag("sentry_repairing");
         public static final TagKey<Item> NEPTUNE_REPAIRING = tag("neptune_repairing");
 
         public static final TagKey<Item> AERBUNNY_FOOD = tag("aerbunny_food");

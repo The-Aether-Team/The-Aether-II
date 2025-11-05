@@ -808,6 +808,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GRAVITITE_BOOTS, "Gravitite Boots");
         this.addItem(AetherIIItems.GRAVITITE_GLOVES, "Gravitite Gauntlets");
 
+        this.addItem(AetherIIItems.SENTRY_BOOTS, "Sentry Boots");
+
         this.addItem(AetherIIItems.NEPTUNE_HELMET, "Neptune Helmet");
         this.addItem(AetherIIItems.NEPTUNE_CHESTPLATE, "Neptune Chestplate");
         this.addItem(AetherIIItems.NEPTUNE_LEGGINGS, "Neptune Leggings");
@@ -1468,6 +1470,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("item", "armor.equip_zanite", "Zanite armor clangs");
         this.addSubtitle("item", "armor.equip_arkenium", "Arkenium armor clanks");
         this.addSubtitle("item", "armor.equip_gravitite", "Gravitite armor clinks");
+        this.addSubtitle("item", "armor.equip_sentry", "Sentry armor clanks");
         this.addSubtitle("item", "armor.equip_neptune", "Neptune armor clinks");
 
         // Player

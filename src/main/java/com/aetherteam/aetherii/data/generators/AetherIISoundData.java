@@ -223,6 +223,14 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:item/armor/equip_gold6")
                 ).subtitle("subtitles.aether_ii.item.armor.equip_gravitite")
         );
+        this.add(AetherIISoundEvents.ITEM_ARMOR_EQUIP_SENTRY,
+                definition().with(
+                        sound("minecraft:item/armor/equip_netherite1"),
+                        sound("minecraft:item/armor/equip_netherite2"),
+                        sound("minecraft:item/armor/equip_netherite3"),
+                        sound("minecraft:item/armor/equip_netherite4")
+                ).subtitle("subtitles.aether.item.armor.equip_sentry")
+        );
         this.add(AetherIISoundEvents.ITEM_ARMOR_EQUIP_NEPTUNE,
                 definition().with(
                         sound("minecraft:item/armor/equip_gold1"),

@@ -1299,6 +1299,15 @@
     ],
     "subtitle": "subtitles.aether_ii.item.armor.equip_neptune"
   },
+  "item.armor.sentry": {
+    "sounds": [
+      "item/armor/equip_netherite1",
+      "item/armor/equip_netherite2",
+      "item/armor/equip_netherite3",
+      "item/armor/equip_netherite4"
+    ],
+    "subtitle": "subtitles.aether.item.armor.equip_sentry"
+  },
   "item.armor.zanite": {
     "sounds": [
       "item/armor/equip_diamond1",
