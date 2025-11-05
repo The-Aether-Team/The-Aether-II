@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.inventory.container;
 
+import com.aetherteam.aetherii.item.equipment.AccessoryItem;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
@@ -40,6 +41,11 @@ public class AccessoryContainer extends SimpleContainer {
         if (!entity.level().isClientSide()) {
             if (!this.lastItems.equals(this.getItems())) {
                 for (int i = 0; i < this.getItems().size(); i++) {
+                    if (!ItemStack.isSameItem(this.lastItems.get(i), this.getItem(i))) {
+                        if (!this.getItem(i).isEmpty() && this.getItem(i).getItem() instanceof AccessoryItem accessory) {
+                            accessory.onEquip(this.getItem(i), entity);
+                        }
+                    }
                     this.lastItems.set(i, this.getItem(i));
                 }
             }
