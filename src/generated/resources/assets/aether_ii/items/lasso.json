@@ -1,0 +1,14 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "aether_ii:item/lasso"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "aether_ii:item/lasso_thrown"
+    },
+    "property": "aether_ii:lasso_throw"
+  }
+}

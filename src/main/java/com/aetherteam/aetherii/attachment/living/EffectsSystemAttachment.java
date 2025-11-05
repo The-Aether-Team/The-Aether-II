@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.attachment.living;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.attributes.EffectResistanceAttribute;
@@ -10,19 +11,22 @@ import com.google.common.collect.Maps;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class EffectsSystemAttachment {
     public static final MapCodec<EffectsSystemAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -31,6 +35,7 @@ public class EffectsSystemAttachment {
     public static final StreamCodec<RegistryFriendlyByteBuf, EffectsSystemAttachment> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.map(HashMap::new, ByteBufCodecs.holderRegistry(Registries.MOB_EFFECT), EffectBuildupInstance.STREAM_CODEC), EffectsSystemAttachment::getActiveBuildups,
             EffectsSystemAttachment::new);
+    public static final int BUILDUP_CAP = 1000;
 
     private final Map<Holder<MobEffect>, EffectBuildupInstance> activeBuildups;
 
@@ -55,10 +60,24 @@ public class EffectsSystemAttachment {
         });
         if (removableEffect[0] != null) {
             this.activeBuildups.remove(removableEffect[0]);
-            needSync = true;
+            this.needSync = true;
         }
-        if (needSync) {
-            needSync = false;
+        if (livingEntity.level() instanceof ServerLevel serverLevel) {
+            List<EffectBuildupInstance> list = this.activeBuildups.values().stream().toList();
+            if (!list.isEmpty()) {
+                EffectBuildupInstance effect = Util.getRandom(list, livingEntity.getRandom());
+                int j = livingEntity.isInvisible() ? 15 : 4;
+                int i = (EffectsSystemAttachment.BUILDUP_CAP - effect.getBuildup()) / 100;
+                if (i != 0) {
+                    if (livingEntity.getRandom().nextInt(Math.max(j * i, 1)) == 0) {
+                        serverLevel.sendParticles(ColorParticleOption.create(AetherIIParticleTypes.EFFECT_BUILDUP.get(), ARGB.opaque(effect.getType().value().getColor())), livingEntity.getRandomX(0.5), livingEntity.getRandomY(), livingEntity.getRandomZ(0.5), 1, 0, 0, 0, 1.0);
+                    }
+                }
+            }
+        }
+
+        if (this.needSync) {
+            this.needSync = false;
             livingEntity.syncData(AetherIIDataAttachments.EFFECTS_SYSTEM);
         }
     }

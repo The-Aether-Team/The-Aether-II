@@ -49,18 +49,4 @@ public interface ZaniteTool {
     default double calculateZaniteBuff(ItemStack stack, double baseValue) {
         return baseValue * (2.0 * ((double) stack.getDamageValue()) / ((double) stack.getMaxDamage()) + 0.5);
     }
-
-    default float getDefaultSpeed(ItemStack stack, TagKey<Block> breakableTag) {
-        Tool tool = stack.get(DataComponents.TOOL);
-        HolderSet<Block> breakable = BuiltInRegistries.BLOCK.getOrThrow(breakableTag);
-        if (tool != null) {
-            List<Tool.Rule> rules = tool.rules();
-            for (Tool.Rule rule : rules) {
-                if (rule.blocks().equals(breakable)) {
-                    return rule.speed().orElse(-1.0F);
-                }
-            }
-        }
-        return -1.0F;
-    }
 }

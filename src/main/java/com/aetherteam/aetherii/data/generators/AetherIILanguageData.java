@@ -55,6 +55,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGeneric("slash", "§9Slash§r");
         this.addGeneric("impact", "§eImpact§r");
         this.addGeneric("pierce", "§cPierce§r");
+        this.addGeneric("bedroll.too_dark", "You may not rest now; it is too dark to sleep here");
         this.addGeneric("message.campfire_added", "Outpost campfire respawn point set");
         this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid outpost campfire");
 
@@ -695,6 +696,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBROSIUM_CAMPFIRE, "Ambrosium Campfire");
         this.addBlock(AetherIIBlocks.SKYROOT_CHEST, "Skyroot Chest");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
+        this.addBlock(AetherIIBlocks.CLOUDWOOL_BEDROLL, "Cloudwool Bedroll");
         this.addBlock(AetherIIBlocks.SKYROOT_BED, "Skyroot Bed");
 
         this.addBlock(AetherIIBlocks.SKYROOT_SIGN, "Skyroot Sign");
@@ -741,7 +743,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GRAVITITE_SHOVEL, "Gravitite Shovel");
         this.addItem(AetherIIItems.GRAVITITE_TROWEL, "Gravitite Trowel");
 
-        this.addItem(AetherIIItems.ARKENIUM_SHEARS, "Arkenium Shears");
+        this.addItem(AetherIIItems.ZANITE_SHEARS, "Zanite Shears");
 
         // Combat
         this.addItem(AetherIIItems.SKYROOT_SHORTSWORD, "Skyroot Shortsword");
@@ -774,6 +776,22 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ZANITE_SHIELD, "Zanite Shield");
         this.addItem(AetherIIItems.ARKENIUM_SHIELD, "Arkenium Shield");
         this.addItem(AetherIIItems.GRAVITITE_SHIELD, "Gravitite Shield");
+
+        this.addItem(AetherIIItems.DART_SHOOTER, "Dart Shooter");
+        this.addItem(AetherIIItems.AMBER_DARTS, "Amber Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "vulnerability", "Amber Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "wound", "Wound Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "stun", "Stun Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "ambrosium_poisoning", "Ambrosium Poisoning Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "fracture", "Fracture Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "toxin", "Toxin Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "venom", "Venom Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "charged", "Charged Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "webbed", "Webbed Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "immolation", "Immolation Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "frostbite", "Frostbite Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "fungal_rot", "Fungal Rot Darts");
+        this.addEffectDarts(AetherIIItems.AMBER_DARTS, "crystallized", "Crystallized Darts");
 
         this.addItem(AetherIIItems.SCATTERGLASS_BOLT, "Scatterglass Bolt");
 
@@ -946,6 +964,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Misc
         this.addItem(AetherIIItems.HIDE_BUNDLE, "Hide Bundle");
+        this.addItem(AetherIIItems.BRETTL_LASSO, "Brettl Lasso");
         this.addItem(AetherIIItems.MOA_EGG, "Moa Egg");
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
         this.addItem(AetherIIItems.BLUEBERRY_MOA_FEED, "Blueberry Moa Feed");
@@ -991,6 +1010,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SPEAR.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_CROSSBOW.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_CROSSBOW.get(), 2, "§3Use:§r Crouch-Use");
+
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SHEARS.get(), 1, "§9Ability:§r Grows Stronger");
 
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_PICKAXE.get(), 1, "§9Ability:§r Upgrades Further");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_AXE.get(), 1, "§9Ability:§r Upgrades Further");
@@ -1070,12 +1091,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_GLOVES.get(), 1, "§9Ability:§r Double Jump");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
-        this.addPerItemAbilityTooltip(AetherIIItems.COLD_AERCLOUD_GLIDER.get(), 1, "§3Use:§r Hold-Use");
-        this.addPerItemAbilityTooltip(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get(), 1, "§3Use:§r Hold-Use");
+        this.addPerItemAbilityTooltip(AetherIIItems.COLD_AERCLOUD_GLIDER.get(), 1, "§3Use:§r Click-Use");
+        this.addPerItemAbilityTooltip(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get(), 1, "§3Use:§r Click-Use");
         this.addPerItemAbilityTooltip(AetherIIItems.BLUE_AERCLOUD_GLIDER.get(), 1, "§9Ability:§r Upwards Boost");
-        this.addPerItemAbilityTooltip(AetherIIItems.BLUE_AERCLOUD_GLIDER.get(), 2, "§3Use:§r Hold-Use");
+        this.addPerItemAbilityTooltip(AetherIIItems.BLUE_AERCLOUD_GLIDER.get(), 2, "§3Use:§r Click-Use");
         this.addPerItemAbilityTooltip(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get(), 1, "§9Ability:§r Forwards Boost");
-        this.addPerItemAbilityTooltip(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get(), 2, "§3Use:§r Hold-Use");
+        this.addPerItemAbilityTooltip(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get(), 2, "§3Use:§r Click-Use");
     }
 
     private void addItemTooltips() {
@@ -1086,6 +1107,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("curative.removes", "Removes: %s");
         this.addItemTooltip("curative.reduces", "Reduces: %s");
         this.addItemTooltip("healing_stone.charges", "%s/5 Charges");
+        this.addItemTooltip("effect_buildup", "%s Buildup");
+        this.addItemTooltip("effect_buildup.inflicts", "Inflicts: %s");
 
         // Moa Egg Tooltips
         this.addItemTooltip("moa_egg.keratin", "%s Keratin");
@@ -1171,7 +1194,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.HOLYSTONE_ROCK, "Holystone Rock");
         this.addEntityType(AetherIIEntityTypes.ARCTIC_SNOWBALL, "Arctic Snowball");
         this.addEntityType(AetherIIEntityTypes.SKYROOT_PINECONE, "Skyroot Pinecone");
+        this.addEntityType(AetherIIEntityTypes.LASSO_LOOP, "Lasso Loop");
         this.addEntityType(AetherIIEntityTypes.SCATTERGLASS_BOLT, "Scatterglass Bolt");
+        this.addEntityType(AetherIIEntityTypes.AMBER_DART, "Amber Dart");
         this.addEntityType(AetherIIEntityTypes.ZEPHYR_WEBBING_BALL, "Zephyr Webbing Ball");
         this.addEntityType(AetherIIEntityTypes.TEMPEST_THUNDERBALL, "Tempest Thunderball");
         this.addEntityType(AetherIIEntityTypes.SKEPHID_WEBBING_BALL, "Skephid Webbing Ball");
@@ -1261,6 +1286,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEffect(AetherIIEffects.SATURATION_BOOST, "Saturation Boost");
 
         // Harmful
+        this.addEffect(AetherIIEffects.VULNERABILITY, "Vulnerability");
         this.addEffect(AetherIIEffects.WOUND, "Wound");
         this.addEffect(AetherIIEffects.STUN, "Stun");
         this.addEffect(AetherIIEffects.FRACTURE, "Fracture");
@@ -1374,6 +1400,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addEffectsDescriptions() {
         final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
+        this.addEffectsDescription(AetherIIEffects.VULNERABILITY.get(), loremIpsum);
         this.addEffectsDescription(AetherIIEffects.WOUND.get(), loremIpsum);
         this.addEffectsDescription(AetherIIEffects.STUN.get(), loremIpsum);
         this.addEffectsDescription(AetherIIEffects.FRACTURE.get(), loremIpsum);
@@ -1570,6 +1597,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "arctic_snowball.throw", "Arctic Snowball flies");
         this.addSubtitle("entity", "rock.throw", "Rock flies");
         this.addSubtitle("entity", "skyroot_pinecone.throw", "Skyroot Pinecone flies");
+        this.addSubtitle("entity", "lasso.throw", "Lasso flies");
 
         // Miscellaneous
         this.addSubtitle("entity", "electric_field.create", "Electricity booms");

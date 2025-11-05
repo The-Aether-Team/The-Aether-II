@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.neoforged.bus.api.IEventBus;
@@ -21,6 +22,10 @@ public class AetherIIEffects {
             .addAttributeModifier(AetherIIAttributes.SATURATION_BOOST, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.saturation_boost.double_saturation"), 1.0F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
     // Harmful
+    public static final DeferredHolder<MobEffect, MobEffect> VULNERABILITY = EFFECTS.register("vulnerability", () -> new VulnerabilityEffect()
+            .addAttributeModifier(AetherIIAttributes.SLASH_RESISTANCE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.vulnerability.slash_weakness"), -1.0F, AttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(AetherIIAttributes.IMPACT_RESISTANCE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.vulnerability.impact_weakness"), -1.0F, AttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(AetherIIAttributes.PIERCE_RESISTANCE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.vulnerability.pierce_weakness"), -1.0F, AttributeModifier.Operation.ADD_VALUE));
     public static final DeferredHolder<MobEffect, MobEffect> WOUND = EFFECTS.register("wound", WoundEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> STUN = EFFECTS.register("stun", () -> new StunEffect()
             .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.stun.slowness"), -0.75F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));

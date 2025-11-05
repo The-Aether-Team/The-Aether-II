@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.effect.buildup;
 
+import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
@@ -29,8 +30,6 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
             ByteBufCodecs.INT, (effect) -> effect.buildup,
             EffectBuildupInstance::new);
 
-    private final int buildupCap = 1000;
-
     private final Holder<MobEffect> type;
     private final MobEffectInstance instance;
     private final int initialInstanceDuration;
@@ -39,7 +38,7 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
     private boolean triggerEffect = false;
 
     public EffectBuildupInstance(EffectBuildupPresets.Preset preset, int buildup) {
-        this(preset.type(), preset.instanceBuilder().get(), preset.buildupReductionRate(), buildup);
+        this(preset.type(), preset.createMobEffectInstance(), preset.buildupReductionRate(), buildup);
     }
 
     public EffectBuildupInstance(Holder<MobEffect> type, MobEffectInstance instance, int buildupReductionRate, int buildup) {
@@ -76,7 +75,7 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
     }
 
     public boolean isBuildupFull() {
-        return this.buildup >= this.buildupCap;
+        return this.buildup >= EffectsSystemAttachment.BUILDUP_CAP;
     }
 
     public void increaseBuildup(int amount) {
@@ -92,10 +91,6 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
 
     public Holder<MobEffect> getType() {
         return this.type;
-    }
-
-    public int getBuildupCap() {
-        return this.buildupCap;
     }
 
     public int getBuildup() {

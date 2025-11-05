@@ -283,8 +283,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.MOA_FEED.get(),
                 AetherIIItems.BLUEBERRY_MOA_FEED.get(),
                 AetherIIItems.ENCHANTED_MOA_FEED.get()
-
-                );
+        );
         this.tag(AetherIITags.Items.BEAST_PELT_REPAIRING).add(AetherIIItems.BEAST_PELT.get());
         this.tag(AetherIITags.Items.BURRUKAI_PLATE_REPAIRING).add(AetherIIItems.BURRUKAI_PLATE.get());
         this.tag(AetherIITags.Items.SKYROOT_REPAIRING).addTag(AetherIITags.Items.CRAFTS_SKYROOT_TOOLS);
@@ -304,7 +303,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_AXE.get(),
                 AetherIIItems.GRAVITITE_AXE.get()
         );
-        this.tag(AetherIITags.Items.DOUBLE_DROPS).add(
+        this.tag(AetherIITags.Items.DOUBLE_DROPS).addTag(AetherIITags.Items.CLOUDWOOL).add(
                 AetherIIItems.SKYROOT_STICK.get(),
                 AetherIIItems.SKYROOT_PINECONE.get(),
                 AetherIIItems.AMBROSIUM_SHARD.get(),
@@ -395,7 +394,6 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_TROWEL.get(),
                 AetherIIItems.ARKENIUM_SHIELD.get(),
                 AetherIIItems.ARKENIUM_CROSSBOW.get(),
-                AetherIIItems.ARKENIUM_SHEARS.get(),
                 AetherIIItems.ARKENIUM_HELMET.get(),
                 AetherIIItems.ARKENIUM_CHESTPLATE.get(),
                 AetherIIItems.ARKENIUM_LEGGINGS.get(),
@@ -579,7 +577,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.HESPEROSE.asItem(),
                 AetherIIBlocks.TARABLOOM.asItem()
         );
-        this.tag(ItemTags.BEDS).add(AetherIIBlocks.SKYROOT_BED.asItem());
+        this.tag(ItemTags.BEDS).add(
+                AetherIIBlocks.CLOUDWOOL_BEDROLL.asItem(),
+                AetherIIBlocks.SKYROOT_BED.asItem()
+        );
         this.tag(ItemTags.SIGNS).add(
                 AetherIIBlocks.SKYROOT_SIGN.asItem(),
                 AetherIIBlocks.GREATROOT_SIGN.asItem(),

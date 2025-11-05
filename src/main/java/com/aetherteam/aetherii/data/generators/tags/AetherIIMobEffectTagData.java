@@ -20,6 +20,7 @@ public class AetherIIMobEffectTagData extends KeyTagProvider<MobEffect> {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         this.tag(AetherIITags.MobEffects.MILK_DOESNT_CLEAR).add(
+                AetherIIEffects.VULNERABILITY.getKey(),
                 AetherIIEffects.WOUND.getKey(),
                 AetherIIEffects.STUN.getKey(),
                 AetherIIEffects.FRACTURE.getKey(),

@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
 import com.aetherteam.aetherii.attachment.player.*;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
+import com.mojang.serialization.Codec;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.attachment.AttachmentSyncHandler;
@@ -20,6 +21,7 @@ public class AetherIIDataAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, AetherII.MODID);
 
     // Entity
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> LASSO_CONNECTION = ATTACHMENTS.register("lasso_connection", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL.fieldOf("lasso_connection")).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<DroppedItemAttachment>> DROPPED_ITEM = ATTACHMENTS.register("dropped_item", () -> AttachmentType.builder(DroppedItemAttachment::new).serialize(DroppedItemAttachment.CODEC).build());
 
     // Living

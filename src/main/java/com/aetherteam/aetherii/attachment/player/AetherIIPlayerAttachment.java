@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.attachment.player;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.block.portal.PortalClientUtil;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.miscellaneous.ToggleItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -19,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 public class AetherIIPlayerAttachment {
     private boolean isMoving;
     private boolean isJumping;
+    private boolean useToggled = false;
 
     private boolean canGetPortal = true;
     private boolean canSpawnInAether = true;
@@ -114,6 +116,16 @@ public class AetherIIPlayerAttachment {
         }
     }
 
+    public void mouseInput(Player player, boolean isUseItem, int action) {
+        if (isUseItem && action == 1) {
+            if (!player.isUsingItem() && player.isHolding((stack) -> stack.getItem() instanceof ToggleItem)) {
+                this.useToggled = true;
+            } else if (player.isUsingItem() && player.getUseItem().getItem() instanceof ToggleItem) {
+                this.useToggled = false;
+            }
+        }
+    }
+
     public void movementInput(Player player, ClientInput input) {
         boolean isJumping = input.keyPresses.jump();
         if (isJumping != this.isJumping()) {
@@ -188,6 +200,10 @@ public class AetherIIPlayerAttachment {
      */
     public boolean isJumping() {
         return this.isJumping;
+    }
+
+    public boolean isUseToggled() {
+        return this.useToggled;
     }
 
     public void setCanGetPortal(boolean canGetPortal) {

@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.event.hooks;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.gui.component.guidebook.GuidebookButton;
@@ -12,6 +11,8 @@ import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.DeathScreenAccessor;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.InventoryScreenAccessor;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.MouseHandlerAccessor;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AttributeMapAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.OpenGuidebookPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.OpenInventoryPacket;
@@ -29,6 +30,7 @@ import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.core.Holder;
@@ -98,15 +100,22 @@ public class RenderHooks {
             }
             return new GuidebookButton(renderItem, Button.builder(message, (button) -> {
                 Minecraft minecraft = Minecraft.getInstance();
-                Player player = minecraft.player;
+                LocalPlayer player = minecraft.player;
                 if (player != null) {
                     ItemStack stack = player.containerMenu.getCarried();
                     player.containerMenu.setCarried(ItemStack.EMPTY);
 
-                    if (containerScreen instanceof Guidebook) {
+                    if (containerScreen instanceof Guidebook guidebook) {
                         forceCloseGuidebook = true;
+                        MouseHandlerAccessor handlerAccessor = (MouseHandlerAccessor) minecraft.mouseHandler;
+                        handlerAccessor.aether_ii$setMouseGrabbed(true);
+                        player.clientSideCloseContainer();
                         InventoryScreen inventory = new InventoryScreen(player);
+                        InventoryScreenAccessor inventoryAccessor = (InventoryScreenAccessor) inventory;
+                        handlerAccessor.aether_ii$setMouseGrabbed(false);
                         minecraft.setScreen(inventory);
+                        inventoryAccessor.aether_ii$setXMouse(guidebook.getMouseX());
+                        inventoryAccessor.aether_ii$setYMouse(guidebook.getMouseY());
                         player.inventoryMenu.setCarried(stack);
                         ClientPacketDistributor.sendToServer(new OpenInventoryPacket(stack));
                     } else {

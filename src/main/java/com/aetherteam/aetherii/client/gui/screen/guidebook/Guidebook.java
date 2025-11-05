@@ -101,6 +101,10 @@ public interface Guidebook {
 
     Inventory getPlayerInventory();
 
+    float getMouseX();
+
+    float getMouseY();
+
     <T extends GuiEventListener & Renderable & NarratableEntry> T addRenderableWidget(Screen screen, T widget);
 
     enum Tab {

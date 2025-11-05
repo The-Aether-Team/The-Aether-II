@@ -146,7 +146,7 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
         if (entry != null) {
             Font font = Minecraft.getInstance().font;
             if (this.isUnlocked(entry, EffectsEntry.NAME.id())) {
-                guiGraphics.drawCenteredString(font, Component.translatable(entry.getName()), 88, 13, 16777215);
+                guiGraphics.drawCenteredString(font, Component.translatable(entry.getName()), 88, 13, 0xffffffff);
             }
 
             if (this.isUnlocked(this.getSelectedEntry(), EffectsEntry.EFFECT.id())) {

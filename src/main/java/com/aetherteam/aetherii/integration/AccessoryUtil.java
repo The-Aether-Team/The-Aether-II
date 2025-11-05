@@ -107,7 +107,7 @@ public class AccessoryUtil {
 
         // Add an empty line, then the name of the group, then the modifiers.
         tooltip.accept(Component.empty());
-        tooltip.accept(Component.translatable("item.modifiers." + group).withStyle(ChatFormatting.GRAY));
+        tooltip.accept(Component.translatable("aether_ii.tooltip.item.modifiers." + group).withStyle(ChatFormatting.GRAY));
 
         AttributeUtil.applyTextFor(stack, tooltip, modifiers, ctx);
     }

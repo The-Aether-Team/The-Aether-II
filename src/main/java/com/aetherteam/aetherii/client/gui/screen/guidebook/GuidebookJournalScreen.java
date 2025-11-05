@@ -21,6 +21,8 @@ public class GuidebookJournalScreen extends Screen implements Guidebook {
     private final Inventory playerInventory;
     protected int titleLabelX;
     protected int titleLabelY;
+    private float xMouse;
+    private float yMouse;
 
     protected GuidebookJournalScreen(GuidebookEquipmentMenu menu, Inventory playerInventory, Component title) {
         super(title);
@@ -41,6 +43,9 @@ public class GuidebookJournalScreen extends Screen implements Guidebook {
         this.renderTransparentBackground(guiGraphics);
         this.renderGuidebookSpread(this, guiGraphics, mouseX, mouseY, partialTick);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
+
+        this.xMouse = (float) mouseX;
+        this.yMouse = (float) mouseY;
     }
 
     @Override
@@ -83,6 +88,16 @@ public class GuidebookJournalScreen extends Screen implements Guidebook {
     @Override
     public Inventory getPlayerInventory() {
         return this.playerInventory;
+    }
+
+    @Override
+    public float getMouseX() {
+        return this.xMouse;
+    }
+
+    @Override
+    public float getMouseY() {
+        return this.yMouse;
     }
 
     @Override

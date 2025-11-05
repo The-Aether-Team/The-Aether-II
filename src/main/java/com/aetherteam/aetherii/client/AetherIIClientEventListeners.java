@@ -1,13 +1,12 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.client.event.hooks.BiomeHooks;
 import com.aetherteam.aetherii.client.event.hooks.MusicHooks;
 import com.aetherteam.aetherii.client.event.hooks.RenderHooks;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
@@ -16,17 +15,12 @@ import net.minecraft.client.player.ClientInput;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.client.sounds.MusicInfo;
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.biome.Biome;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
@@ -35,8 +29,6 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
 
 public class AetherIIClientEventListeners {
     public static void listen(IEventBus bus) {
@@ -56,6 +48,7 @@ public class AetherIIClientEventListeners {
         bus.addListener(AetherIIClientEventListeners::onMusicSelected);
 
         // Input
+        bus.addListener(AetherIIClientEventListeners::onMouseInputPost);
         bus.addListener(AetherIIClientEventListeners::onMovementInputUpdate);
 
         // Entity
@@ -143,6 +136,17 @@ public class AetherIIClientEventListeners {
         MusicInfo music = MusicHooks.getSituationalMusic();
         if (music != null) {
             event.setMusic(music);
+        }
+    }
+
+    public static void onMouseInputPost(InputEvent.MouseButton.Post event) {
+        Player player = Minecraft.getInstance().player;
+        int button = event.getButton();
+        int action = event.getAction();
+        boolean isUseItem = button == Minecraft.getInstance().options.keyUse.getKey().getValue();
+
+        if (player != null) {
+            player.getData(AetherIIDataAttachments.PLAYER).mouseInput(player, isUseItem, action);
         }
     }
 
