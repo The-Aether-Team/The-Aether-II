@@ -165,4 +165,14 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
         }
         return null;
     }
+
+    @Override
+    public Vec3 getLeashOffset() {
+        return new Vec3(0.0F, 0.88F * this.getBbHeight(), 0.57F * this.getBbWidth());
+    }
+
+    @Override
+    public Vec3[] getQuadLeashOffsets() {
+        return Leashable.createQuadLeashOffsets(this, 0.0F, 0.57F, 0.382, 0.88);
+    }
 }

@@ -442,6 +442,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createCampfire(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get());
         this.createChest(AetherIIBlocks.SKYROOT_CHEST.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot_chest"), true);
         this.createLadder(AetherIIBlocks.SKYROOT_LADDER.get());
+        this.createBedroll(AetherIIBlocks.CLOUDWOOL_BEDROLL.get());
         this.createBed(AetherIIBlocks.SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot_bed"));
 
         this.createHangingSign(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get(), AetherIIBlocks.SKYROOT_HANGING_SIGN.get(), AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get());

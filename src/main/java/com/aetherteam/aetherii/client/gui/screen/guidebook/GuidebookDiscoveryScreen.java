@@ -28,6 +28,8 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     private final ExplorationSection explorationSection;
     protected int titleLabelX;
     protected int titleLabelY;
+    private float xMouse;
+    private float yMouse;
     protected DiscoverySection<?, ?> currentSection;
 
     protected GuidebookDiscoveryScreen(GuidebookEquipmentMenu menu, Inventory playerInventory, Component title) {
@@ -72,6 +74,9 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
         this.renderTransparentBackground(guiGraphics);
         this.renderGuidebookSpread(this, guiGraphics, mouseX, mouseY, partialTick);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
+
+        this.xMouse = (float) mouseX;
+        this.yMouse = (float) mouseY;
     }
 
     @Override
@@ -154,6 +159,16 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     @Override
     public Inventory getPlayerInventory() {
         return this.playerInventory;
+    }
+
+    @Override
+    public float getMouseX() {
+        return this.xMouse;
+    }
+
+    @Override
+    public float getMouseY() {
+        return this.yMouse;
     }
 
     @Override

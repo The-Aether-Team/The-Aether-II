@@ -227,7 +227,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                 Entity entity = entry.getEntityType().value().create(level, EntitySpawnReason.COMMAND);
                 if (entity instanceof LivingEntity livingEntity) {
                     if (this.isUnlocked(entry, BestiaryEntry.NAME.id())) {
-                        guiGraphics.drawCenteredString(font, Component.translatable(entry.getName()), 88, 13, 16777215);
+                        guiGraphics.drawCenteredString(font, Component.translatable(entry.getName()), 88, 13, 0xffffffff);
                     }
 
                     int x = 27;
@@ -236,7 +236,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                     if (this.isUnlocked(entry, BestiaryEntry.HEALTH.id())) {
                         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
                         this.renderIconValue(guiGraphics, x, y, (int) livingEntity.getMaxHealth());
-                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", entry.getHealth()));
+                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", livingEntity.getMaxHealth()));
                     }
 
                     y += 17;
@@ -358,13 +358,13 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         } else if (value < 0) {
             name = "₋" + name;
         }
-        guiGraphics.drawString(font, name, x + 19 - 2 - font.width(name), y + 6 + 3, 16777215, true);
+        guiGraphics.drawString(font, name, x + 19 - 2 - font.width(name), y + 6 + 3, 0xffffffff, true);
     }
 
     private void renderIconValue(GuiGraphics guiGraphics, int x, int y, double value) {
         Font font = Minecraft.getInstance().font;
         String name = String.valueOf(Math.abs((int) value));
-        guiGraphics.drawString(font, name, x + 19 - 2 - font.width(name), y + 6 + 3, 16777215, true);
+        guiGraphics.drawString(font, name, x + 19 - 2 - font.width(name), y + 6 + 3, 0xffffffff, true);
     }
 
     private Component getDamageTypeComponent(int value, String type) {

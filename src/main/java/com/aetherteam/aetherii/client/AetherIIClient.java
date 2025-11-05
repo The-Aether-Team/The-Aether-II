@@ -63,6 +63,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIRenderers::registerAddLayer);
         neoBus.addListener(AetherIIRenderers::registerEntityRenderers);
         neoBus.addListener(AetherIIRenderers::registerLayerDefinition);
+        neoBus.addListener(AetherIIRenderers::registerItemModels);
         neoBus.addListener(AetherIIRenderers::registerBlockStateModels);
         neoBus.addListener(AetherIIRenderers::registerBakedModels);
         neoBus.addListener(AetherIIRenderers::registerRenderStateModifier);
@@ -74,6 +75,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIClientExtensions::registerClientItemExtensions);
         neoBus.addListener(AetherIIRenderTypes::registerRenderBuffers);
         neoBus.addListener(AetherIIRecipeBookCategories::registerRecipeBookSearchCategories);
+        neoBus.addListener(AetherIIItemModelProperties::registerConditionalProperties);
         neoBus.addListener(AetherIIItemModelProperties::registerSelectProperties);
         neoBus.addListener(AetherIIItemModelProperties::registerRangeSelectProperties);
         neoBus.addListener(AetherIIAtlases::registerAtlases);

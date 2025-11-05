@@ -52,6 +52,8 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     private final Component craftingTitle = Component.translatable("container.crafting");
     protected int craftingTitleLabelX;
     protected int craftingTitleLabelY;
+    private float xMouse;
+    private float yMouse;
     @Nullable
     private Slot destroyItemSlot;
     private Slot currencySlot;
@@ -123,6 +125,9 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         }
 
         this.renderTooltip(guiGraphics, mouseX, mouseY);
+
+        this.xMouse = (float) mouseX;
+        this.yMouse = (float) mouseY;
     }
 
     @Override
@@ -361,6 +366,16 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     @Override
     public Inventory getPlayerInventory() {
         return this.playerInventory;
+    }
+
+    @Override
+    public float getMouseX() {
+        return this.xMouse;
+    }
+
+    @Override
+    public float getMouseY() {
+        return this.yMouse;
     }
 
     @Override

@@ -7,5 +7,6 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 public class AetherIIItemTintSources {
     public static void registerTintSources(RegisterColorHandlersEvent.ItemTintSources event) {
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aether_grass"), AetherGrassColorSource.MAP_CODEC);
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect_buildup"), EffectBuildupColorSource.MAP_CODEC);
     }
 }

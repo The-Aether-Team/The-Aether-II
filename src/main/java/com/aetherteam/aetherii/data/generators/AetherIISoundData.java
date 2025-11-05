@@ -1003,6 +1003,11 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:random/bow")
                 ).subtitle("subtitles.aether_ii.entity.skyroot_pinecone.throw")
         );
+        this.add(AetherIISoundEvents.ENTITY_LASSO_THROW,
+                definition().with(
+                        sound("minecraft:random/bow")
+                ).subtitle("subtitles.aether_ii.entity.lasso.throw")
+        );
         
         this.add(AetherIISoundEvents.ENTITY_ELECTRIC_FIELD_CREATE,
                 definition().with(

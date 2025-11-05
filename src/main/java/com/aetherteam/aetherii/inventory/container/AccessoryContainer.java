@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.inventory.container;
 
+import com.aetherteam.aetherii.item.equipment.accessories.AccessoryItem;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
@@ -27,8 +28,8 @@ public class AccessoryContainer extends SimpleContainer {
     private final NonNullList<ItemStack> lastItems;
 
     protected AccessoryContainer(List<ItemStack> lastItems) {
-        super(4);
-        this.lastItems = NonNullList.copyOf(lastItems);
+        super(lastItems.toArray(ItemStack[]::new));
+        this.lastItems = NonNullList.of(ItemStack.EMPTY, lastItems.toArray(ItemStack[]::new));
     }
 
     public AccessoryContainer() {
@@ -39,8 +40,12 @@ public class AccessoryContainer extends SimpleContainer {
     public void postTickUpdate(LivingEntity entity) {
         if (!entity.level().isClientSide()) {
             if (!this.lastItems.equals(this.getItems())) {
-                this.lastItems.clear();
                 for (int i = 0; i < this.getItems().size(); i++) {
+                    if (!ItemStack.isSameItem(this.lastItems.get(i), this.getItem(i))) {
+                        if (!this.getItem(i).isEmpty() && this.getItem(i).getItem() instanceof AccessoryItem accessory) {
+                            accessory.onEquip(this.getItem(i), entity);
+                        }
+                    }
                     this.lastItems.set(i, this.getItem(i));
                 }
             }
@@ -63,9 +68,9 @@ public class AccessoryContainer extends SimpleContainer {
     }
 
     public enum SlotType {
-        RELIC(0),
-        HANDWEAR(1),
-        ACCESSORY(2, 3);
+        RELIC(0, 1),
+        HANDWEAR(2),
+        ACCESSORY(3);
 
         private final int[] index;
 

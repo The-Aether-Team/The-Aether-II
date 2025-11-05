@@ -9,8 +9,8 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public class ScatterglassBoltItem extends ArrowItem {
-    public ScatterglassBoltItem(Properties pProperties) {
-        super(pProperties);
+    public ScatterglassBoltItem(Properties properties) {
+        super(properties);
     }
 
     @Override

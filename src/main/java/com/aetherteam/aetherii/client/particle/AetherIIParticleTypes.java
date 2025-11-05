@@ -1,11 +1,18 @@
 package com.aetherteam.aetherii.client.particle;
 
 import com.aetherteam.aetherii.AetherII;
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.particles.SimpleParticleType;
+import com.aetherteam.aetherii.client.particle.options.AttackShockParticleOption;
+import com.aetherteam.aetherii.client.particle.options.AttackStabParticleOption;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.core.Registry;
+import net.minecraft.core.particles.*;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Function;
 
 public class AetherIIParticleTypes {
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, AetherII.MODID);
@@ -38,10 +45,28 @@ public class AetherIIParticleTypes {
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> ZEPHYR_SNOWFLAKE = PARTICLES.register("zephyr_snowflake", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> TEMPEST_ELECTRICITY = PARTICLES.register("tempest_electricity.json", () -> new SimpleParticleType(false));
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SLASH_ATTACK = PARTICLES.register("slash_attack", () -> new SimpleParticleType(false));
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> IMPACT_ATTACK = PARTICLES.register("impact_attack", () -> new SimpleParticleType(false));
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> PIERCE_ATTACK = PARTICLES.register("pierce_attack", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SLASH_DAMAGE = PARTICLES.register("slash_damage", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> IMPACT_DAMAGE = PARTICLES.register("impact_damage", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> PIERCE_DAMAGE = PARTICLES.register("pierce_damage", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SWEEP_ATTACK = PARTICLES.register("sweep_attack", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<AttackShockParticleOption>> SHOCK_ATTACK = register("shock_attack", false, p -> AttackShockParticleOption.CODEC, p -> AttackShockParticleOption.STREAM_CODEC);
+    public static final DeferredHolder<ParticleType<?>, ParticleType<AttackStabParticleOption>> STAB_ATTACK = register("stab_attack", false, p -> AttackStabParticleOption.CODEC, p -> AttackStabParticleOption.STREAM_CODEC);
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ColorParticleOption>> EFFECT_BUILDUP = register("effect_buildup", false, ColorParticleOption::codec, ColorParticleOption::streamCodec);
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> TEMPEST_SMOKE = PARTICLES.register("tempest_smoke", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MOA_HUNGRY = PARTICLES.register("moa_hungry", () -> new SimpleParticleType(false));
+
+    private static <T extends ParticleOptions> DeferredHolder<ParticleType<?>, ParticleType<T>> register(String name, boolean overrideLimiter, final Function<ParticleType<T>, MapCodec<T>> codecGetter, final Function<ParticleType<T>, StreamCodec<? super RegistryFriendlyByteBuf, T>> streamCodecGetter) {
+        return PARTICLES.register(name, () -> new ParticleType<T>(overrideLimiter) {
+            @Override
+            public MapCodec<T> codec() {
+                return codecGetter.apply(this);
+            }
+
+            @Override
+            public StreamCodec<? super RegistryFriendlyByteBuf, T> streamCodec() {
+                return streamCodecGetter.apply(this);
+            }
+        });
+    }
 }

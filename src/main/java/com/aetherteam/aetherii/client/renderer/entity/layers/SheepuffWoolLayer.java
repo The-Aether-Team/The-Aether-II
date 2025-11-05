@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ARGB;
 
 /**
  * [CODE COPY] - {@link net.minecraft.client.renderer.entity.layers.SheepFurLayer}.
@@ -36,7 +37,7 @@ public class SheepuffWoolLayer extends RenderLayer<SheepuffRenderState, Sheepuff
             } else {
                 int i = Sheepuff.getDecimalColor(sheepuff.woolColor);
 
-                coloredCutoutModelCopyLayerRender(entitymodel, SHEEPUFF_WOOL_TEXTURE, poseStack, buffer, packedLight, sheepuff, i);
+                coloredCutoutModelCopyLayerRender(entitymodel, SHEEPUFF_WOOL_TEXTURE, poseStack, buffer, packedLight, sheepuff, ARGB.opaque(i));
             }
         }
     }
