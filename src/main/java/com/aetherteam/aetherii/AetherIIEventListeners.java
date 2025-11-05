@@ -99,6 +99,7 @@ public class AetherIIEventListeners {
         Player player = event.getEntity();
 
         player.getData(AetherIIDataAttachments.PLAYER).logout(player);
+        player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).logout(player);
     }
 
     public static void onPlayerJoinLevel(EntityJoinLevelEvent event) {

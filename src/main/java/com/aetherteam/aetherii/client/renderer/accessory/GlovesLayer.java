@@ -9,7 +9,7 @@ import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.ArmorStyle;
-import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
+import com.aetherteam.aetherii.item.equipment.accessories.GlovesItem;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.PlayerModelAccessor;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

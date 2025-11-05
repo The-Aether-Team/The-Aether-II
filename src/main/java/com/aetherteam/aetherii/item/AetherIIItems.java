@@ -15,7 +15,7 @@ import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
-import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
+import com.aetherteam.aetherii.item.equipment.accessories.GlovesItem;
 import com.aetherteam.aetherii.item.equipment.armor.abilities.*;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.HolystoneTool;
 import com.aetherteam.aetherii.item.equipment.tools.arkenium.ArkeniumAxeItem;

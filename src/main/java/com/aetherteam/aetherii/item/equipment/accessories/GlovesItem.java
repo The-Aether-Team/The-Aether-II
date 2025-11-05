@@ -1,10 +1,9 @@
-package com.aetherteam.aetherii.item.equipment.armor;
+package com.aetherteam.aetherii.item.equipment.accessories;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
-import com.aetherteam.aetherii.item.equipment.AccessoryItem;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import net.minecraft.core.Holder;
