@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ARGB;
 
 public class KirridWoolLayer extends RenderLayer<KirridRenderState, EntityModel<KirridRenderState>> {
     private static final ResourceLocation ARCTIC_KIRRID_WOOL_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/kirrid/arctic/kirrid_arctic_wool.png");
@@ -40,7 +41,7 @@ public class KirridWoolLayer extends RenderLayer<KirridRenderState, EntityModel<
         } else {
             kirrid.woolColor.ifPresent((woolColor) -> {
                 int i = Kirrid.getDecimalColor(woolColor);
-                coloredCutoutModelCopyLayerRender(this.getParentModel(), getTexture(kirrid), poseStack, bufferSource, packedLight, kirrid, i);
+                coloredCutoutModelCopyLayerRender(this.getParentModel(), getTexture(kirrid), poseStack, bufferSource, packedLight, kirrid, ARGB.opaque(i));
             });
         }
     }
