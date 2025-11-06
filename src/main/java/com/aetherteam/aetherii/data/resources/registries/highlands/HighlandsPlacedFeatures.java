@@ -91,6 +91,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> GLISTENING_SWAMP_TREES = createKey("glistening_swamp_trees");
     public static final ResourceKey<PlacedFeature> GLISTENING_SWAMP_TREES_SUNKEN = createKey("glistening_swamp_trees_sunken");
     public static final ResourceKey<PlacedFeature> VIOLET_HIGHWOODS_TREES = createKey("violet_highwoods_trees");
+    public static final ResourceKey<PlacedFeature> HUGE_MAGNETIC_SHROOMS = createKey("huge_magnetic_shrooms");
 
     // Arctic
     public static final ResourceKey<PlacedFeature> FRIGID_SIERRA_TREES = createKey("frigid_sierra_trees");
@@ -105,6 +106,7 @@ public class HighlandsPlacedFeatures {
     // Underground
     public static final ResourceKey<PlacedFeature> GRASS_AND_DIRT_FLOOR = createKey("grass_and_dirt_floor");
     public static final ResourceKey<PlacedFeature> ENCHANTED_GRASS_AND_DIRT_FLOOR = createKey("enchanted_grass_and_dirt_floor");
+    public static final ResourceKey<PlacedFeature> MYCELIUM_FLOOR = createKey("mycelium_floor");
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_FLOOR = createKey("coarse_aether_dirt_floor");
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_CEILING = createKey("coarse_aether_dirt_ceiling");
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_FROSTED_CEILING = createKey("coarse_aether_dirt_frosted_ceiling");
@@ -489,6 +491,16 @@ public class HighlandsPlacedFeatures {
                 BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(AetherIIBlocks.GREATROOT_SAPLING.get().defaultBlockState(), BlockPos.ZERO)));
         register(context, VIOLET_HIGHWOODS_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_VIOLET_HIGHWOODS),
                 HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
+        register(context, HUGE_MAGNETIC_SHROOMS, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HUGE_MAGNETIC_SHROOM),
+                CountPlacement.of(100),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(96), VerticalAnchor.top(), 240)),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 16),
+                SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, -64, -8),
+                BiomeFilter.biome()
+//                new StructureBlacklistFilter()
+//                BlockPredicateFilter.forPredicate(new ScanPredicate(Direction.UP, BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 8))
+        );
 
         // Arctic
         register(context, FRIGID_SIERRA_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_FRIGID_SIERRA),
@@ -524,6 +536,15 @@ public class HighlandsPlacedFeatures {
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
                 RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, -32, 2),
+                BiomeFilter.biome()
+        );
+        register(context, MYCELIUM_FLOOR, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MYCELIUM_FLOOR),
+                RarityFilter.onAverageOnceEvery(3),
+                CountPlacement.of(60),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(80), VerticalAnchor.top(), 250)),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                 BiomeFilter.biome()
         );
         register(context, COARSE_AETHER_DIRT_FLOOR, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COARSE_AETHER_DIRT_FLOOR),

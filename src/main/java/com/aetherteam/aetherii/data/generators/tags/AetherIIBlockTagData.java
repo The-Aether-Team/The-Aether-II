@@ -203,9 +203,15 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.GRASS_AND_DIRT_REPLACEABLE).add(
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
-                AetherIIBlocks.HOLYSTONE.get());
+                AetherIIBlocks.HOLYSTONE.get(),
+                AetherIIBlocks.FERROSITE.get(),
+                AetherIIBlocks.RUSTED_FERROSITE.get(),
+                AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
         this.tag(AetherIITags.Blocks.COARSE_AETHER_DIRT_REPLACEABLE).add(
-                AetherIIBlocks.HOLYSTONE.get());
+                AetherIIBlocks.HOLYSTONE.get(),
+                AetherIIBlocks.FERROSITE.get(),
+                AetherIIBlocks.RUSTED_FERROSITE.get(),
+                AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
         this.tag(AetherIITags.Blocks.UNDERWATER_BRYALINN_REPLACEABLE).add(
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
@@ -859,7 +865,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ROTSHROOM_BLOCK.get(),
                 AetherIIBlocks.ROTSHROOM_SLAB.get(),
                 AetherIIBlocks.ROTSHROOM_STEM.get(),
-                AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get()
+                AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get(),
+                AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(),
+                AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get(),
+                AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
@@ -872,6 +881,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.QUICKSOIL.get(),
                 AetherIIBlocks.FERROSITE_SAND.get(),
                 AetherIIBlocks.FERROSITE_MUD.get(),
+                AetherIIBlocks.MYCELIUM_ROOTS.get(),
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(),
                 AetherIIBlocks.ARCTIC_SNOW.get()
         );
@@ -1000,6 +1010,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.MUSHROOM_GROW_BLOCK).add(
                 AetherIIBlocks.FERROSITE_SAND.get(),
                 AetherIIBlocks.FERROSITE_MUD.get(),
+                AetherIIBlocks.MYCELIUM_ROOTS.get(),
                 AetherIIBlocks.GUARDIAN_ROOTS.get(),
                 AetherIIBlocks.DENSE_GUARDIAN_ROOTS.get()
         ).addTags(AetherIITags.Blocks.GUARDIAN_LOGS, AetherIITags.Blocks.DENSE_GUARDIAN_LOGS);

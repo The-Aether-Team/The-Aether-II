@@ -18,7 +18,9 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
-                AetherIIBlocks.FERROSITE_MUD.get()
+                AetherIIBlocks.FERROSITE_MUD.get(),
+                AetherIIBlocks.FERROSITE_MUD.get(),
+                AetherIIBlocks.MYCELIUM_ROOTS.get()
         );
         this.tag(AetherIITags.Blocks.HOLYSTONE, AetherIITags.Items.HOLYSTONE).add(
                 AetherIIBlocks.HOLYSTONE.get(),

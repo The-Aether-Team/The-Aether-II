@@ -375,6 +375,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.COARSE_AETHER_DIRT.get());
                 output.accept(AetherIIBlocks.AETHER_FARMLAND.get());
                 output.accept(AetherIIBlocks.SHIMMERING_SILT.get());
+                output.accept(AetherIIBlocks.MYCELIUM_ROOTS.get());
                 output.accept(AetherIIBlocks.QUICKSOIL.get());
                 output.accept(AetherIIBlocks.FERROSITE_SAND.get());
                 output.accept(AetherIIBlocks.FERROSITE_MUD.get());
@@ -485,7 +486,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.LILICHIME.get());
                 output.accept(AetherIIBlocks.PLURACIAN.get());
                 output.accept(AetherIIBlocks.SATIVAL_SHOOT.get());
+                output.accept(AetherIIItems.BRETTL_CANE.get());
                 output.accept(AetherIIBlocks.BRETTL_FLOWER.get());
+                output.accept(AetherIIBlocks.BRETTL_GRASS_BUNDLE.get());
                 output.accept(AetherIIBlocks.HOLPUPEA.get());
                 output.accept(AetherIIBlocks.AECHOR_CUTTING.get());
                 output.accept(AetherIIBlocks.CARRION_CUTTING.get());
@@ -497,7 +500,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ARILUM.get());
                 output.accept(AetherIIBlocks.BLOOMING_ARILUM.get());
                 output.accept(AetherIIBlocks.MAGNETIC_SHROOM.get());
-                output.accept(AetherIIBlocks.BRETTL_GRASS_BUNDLE.get());
+                output.accept(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get());
+                output.accept(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get());
+                output.accept(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_VINES.get());

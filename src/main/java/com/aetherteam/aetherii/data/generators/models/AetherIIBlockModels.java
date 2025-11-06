@@ -39,6 +39,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.COARSE_AETHER_DIRT.get());
         this.createAetherFarmland();
         this.createTrivialCube(AetherIIBlocks.SHIMMERING_SILT.get());
+        this.createTrivialCube(AetherIIBlocks.MYCELIUM_ROOTS.get());
 
         // Underground
         this.createTrivialCube(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
@@ -65,6 +66,10 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.FERROSITE.get());
         this.createTrivialCube(AetherIIBlocks.RUSTED_FERROSITE.get());
         this.createPlantWithDefaultItem(AetherIIBlocks.MAGNETIC_SHROOM.get(), AetherIIBlocks.POTTED_MAGNETIC_SHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        this.createMagneticShroomBlock(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get());
+        this.createMagneticShroomBlock(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get());
+        this.createMagneticShroomBlock(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get());
+        this.createMagneticShroomBlocksInside();
 
         // Arctic
         this.createArcticSnowBlocks();

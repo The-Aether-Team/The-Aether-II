@@ -281,6 +281,7 @@ public class AetherIIRenderers {
                 AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE,
                 AetherIIBlocks.BLOOMING_ARILUM,
                 AetherIIBlocks.BLOOMING_ARILUM_PLANT,
+                AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK,
                 AetherIIBlocks.LUCENT_GUARDIAN_ROOTS,
                 AetherIIBlocks.GUARDIAN_LAMP);
 

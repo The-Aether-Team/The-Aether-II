@@ -42,6 +42,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.COARSE_AETHER_DIRT.get());
         this.dropOther(AetherIIBlocks.AETHER_FARMLAND.get(), AetherIIBlocks.AETHER_DIRT.get());
         this.dropSelf(AetherIIBlocks.SHIMMERING_SILT.get());
+        this.dropSelf(AetherIIBlocks.MYCELIUM_ROOTS.get());
 
         // Underground
         this.dropSelf(AetherIIBlocks.HOLYSTONE.get());
@@ -70,6 +71,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.FERROSITE.get());
         this.dropSelf(AetherIIBlocks.RUSTED_FERROSITE.get());
         this.dropSelf(AetherIIBlocks.MAGNETIC_SHROOM.get());
+        this.add(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(), block -> this.createMushroomBlockDrop(block, AetherIIBlocks.MAGNETIC_SHROOM.get()));
+        this.add(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get(), block -> this.createMushroomBlockDrop(block, AetherIIBlocks.MAGNETIC_SHROOM.get()));
+        this.add(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get(), block -> this.createMushroomBlockDrop(block, AetherIIBlocks.MAGNETIC_SHROOM.get()));
 
         // Arctic
         this.add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIItems.ARCTIC_SNOWBALL, ConstantValue.exactly(4.0F)));
