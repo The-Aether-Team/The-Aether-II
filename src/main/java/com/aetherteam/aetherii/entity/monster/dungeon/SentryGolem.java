@@ -77,7 +77,7 @@ public class SentryGolem extends Monster implements RangedAttackMob {
 
     @Override
     public void performRangedAttack(LivingEntity target, float distance) {
-        DetonationProjectile bomb = new DetonationProjectile(AetherIIEntityTypes.DETONATION_PROJECTILE.get(), this, this.level());
+        DetonationProjectile bomb = new DetonationProjectile(this, this.level());
         double x = target.getX() - this.getX();
         double y = target.getEyeY() - this.getY() - 1.0;
         double z = target.getZ() - this.getZ();
