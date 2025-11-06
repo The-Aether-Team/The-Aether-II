@@ -50,6 +50,11 @@ public class AccessoryContainer extends SimpleContainer {
                 }
             }
         }
+        for (ItemStack stack : this.getItems()) {
+            if (stack.getItem() instanceof AccessoryItem accessory) {
+                accessory.tick(stack, entity);
+            }
+        }
     }
 
     public void dropItems(LivingEntity entity, Collection<ItemEntity> drops) {

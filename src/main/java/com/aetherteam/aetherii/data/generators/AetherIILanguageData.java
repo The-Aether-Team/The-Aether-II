@@ -62,6 +62,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPackDescription("mod", "Aether II Resources");
         
         // Use Action
+        this.addTooltip("item.modifiers.relic", "When wearing Relic:");
+        this.addTooltip("item.modifiers.handwear", "When wearing Handwear:");
+        this.addTooltip("item.modifiers.accessory", "When wearing Accessory:");
         this.addTooltip("item.modifiers.blocking", "When blocking:");
     }
 
@@ -834,6 +837,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.NEPTUNE_LEGGINGS, "Neptune Leggings");
         this.addItem(AetherIIItems.NEPTUNE_BOOTS, "Neptune Boots");
         this.addItem(AetherIIItems.NEPTUNE_GLOVES, "Neptune Gauntlets");
+
+        this.addItem(AetherIIItems.SENTRY_BOOSTERS, "Sentry Boosters");
 
         // Materials
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");

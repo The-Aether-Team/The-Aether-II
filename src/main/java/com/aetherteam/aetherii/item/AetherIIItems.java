@@ -18,6 +18,7 @@ import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.item.equipment.accessories.GlovesItem;
+import com.aetherteam.aetherii.item.equipment.accessories.SentryBoostersItem;
 import com.aetherteam.aetherii.item.equipment.armor.abilities.*;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.HolystoneTool;
 import com.aetherteam.aetherii.item.equipment.tools.arkenium.ArkeniumAxeItem;
@@ -73,6 +74,9 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.Consumables;
@@ -201,13 +205,16 @@ public class AetherIIItems {
     public static final DeferredItem<Item> GRAVITITE_BOOTS = register("gravitite_boots", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.GRAVITITE, ArmorType.BOOTS).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.GRAVITITE_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.GRAVITITE, AetherIIStyleDesigns.WARRIOR, false))));
     public static final DeferredItem<Item> GRAVITITE_GLOVES = register("gravitite_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.GRAVITITE, 200.0, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.GRAVITITE_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.GRAVITITE, AetherIIStyleDesigns.WARRIOR, false))));
 
-    public static final DeferredItem<Item> SENTRY_BOOTS = register("sentry_boots", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.SENTRY, ArmorType.BOOTS).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.SENTRY_ARMOR)));
+    public static final DeferredItem<Item> SENTRY_BOOTS = register("sentry_boots", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.SENTRY, ArmorType.BOOTS).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.SENTRY_ARMOR).attributes(AetherIIArmorMaterials.SENTRY.createAttributes(ArmorType.BOOTS).withModifierAdded(Attributes.FALL_DAMAGE_MULTIPLIER, new AttributeModifier(SentryArmor.SENTRY_FALL_DAMAGE_SUPPRESSION, -0.75, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), EquipmentSlotGroup.FEET))));
 
     public static final DeferredItem<Item> NEPTUNE_HELMET = register("neptune_helmet", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.NEPTUNE, ArmorType.HELMET).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR)));
     public static final DeferredItem<Item> NEPTUNE_CHESTPLATE = register("neptune_chestplate", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.NEPTUNE, ArmorType.CHESTPLATE).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR)));
     public static final DeferredItem<Item> NEPTUNE_LEGGINGS = register("neptune_leggings", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.NEPTUNE, ArmorType.LEGGINGS).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR)));
     public static final DeferredItem<Item> NEPTUNE_BOOTS = register("neptune_boots", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.NEPTUNE, ArmorType.BOOTS).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR)));
     public static final DeferredItem<Item> NEPTUNE_GLOVES = register("neptune_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.NEPTUNE, 100.0, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR)));
+
+    // Accessories
+    public static final DeferredItem<Item> SENTRY_BOOSTERS = register("sentry_boosters", SentryBoostersItem::new);
 
     // Materials
     public static final DeferredItem<Item> SKYROOT_STICK = register("skyroot_stick");
@@ -390,10 +397,11 @@ public class AetherIIItems {
         bus.addListener(ZaniteArmor::updatePlayerAttributes);
         bus.addListener(ArkeniumArmor::updatePlayerAttributes);
         bus.addListener(ArkeniumArmor::modifyIncomingDamage);
+        bus.addListener(GravititeArmor::updatePlayerAttributes);
         bus.addListener(GravititeArmor::playerFall);
         bus.addListener(GravititeArmor::playerUpdate);
         bus.addListener(SentryArmor::playerFall);
-        bus.addListener(NeptuneArmor::playerUpdate);
+        bus.addListener(NeptuneArmor::updatePlayerAttributes);
 
         // Tools
         bus.addListener(HolystoneTool::dropAmbrosium);

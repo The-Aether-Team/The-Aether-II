@@ -1,0 +1,26 @@
+package com.aetherteam.aetherii.item.equipment.accessories;
+
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+
+import java.util.Set;
+
+public class SentryBoostersItem extends AccessoryItem {
+    private static final ResourceLocation MOVEMENT_SPEED = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessory.ability.sentry_boosters.movement_speed");
+    private static final ResourceLocation STEP_HEIGHT = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessory.ability.sentry_boosters.step_height");
+
+    public SentryBoostersItem(Properties properties) {
+        super(properties, AccessoryContainer.SlotType.RELIC);
+    }
+
+    @Override
+    public Set<ConditionalAttribute> gatherAttributes(Set<ConditionalAttribute> attributes) {
+        attributes = super.gatherAttributes(attributes);
+        attributes.add(new ConditionalAttribute(Attributes.MOVEMENT_SPEED, new AttributeModifier(MOVEMENT_SPEED, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), (stack, wearer) -> true));
+        attributes.add(new ConditionalAttribute(Attributes.STEP_HEIGHT, new AttributeModifier(STEP_HEIGHT, 0.5F, AttributeModifier.Operation.ADD_VALUE), (stack, wearer) -> !wearer.isShiftKeyDown()));
+        return attributes;
+    }
+}

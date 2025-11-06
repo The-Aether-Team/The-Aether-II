@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.projectile;
 
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.dungeon.SentryGolem;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
@@ -11,35 +12,34 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
 public class DetonationProjectile extends ThrowableProjectile {
-    public DetonationProjectile(EntityType<? extends ThrowableProjectile> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
+    public DetonationProjectile(EntityType<? extends DetonationProjectile> entityType, Level level) {
+        super(entityType, level);
     }
 
-    public DetonationProjectile(EntityType<? extends ThrowableProjectile> pEntityType, double pX, double pY, double pZ, Level pLevel) {
-        super(pEntityType, pX, pY, pZ, pLevel);
+    public DetonationProjectile(double x, double y, double z, Level pLevel) {
+        super(AetherIIEntityTypes.DETONATION_PROJECTILE.get(), x, y, z, pLevel);
     }
 
-    public DetonationProjectile(EntityType<? extends ThrowableProjectile> pEntityType, LivingEntity shooter, Level level) {
-        super(pEntityType, shooter.getX(), shooter.getEyeY() - 0.1F, shooter.getZ(), level);
-        this.setOwner(owner);
+    public DetonationProjectile(LivingEntity shooter, Level level) {
+        super(AetherIIEntityTypes.DETONATION_PROJECTILE.get(), shooter.getX(), shooter.getEyeY() - 0.1F, shooter.getZ(), level);
+        this.setOwner(shooter);
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-    }
+    protected void defineSynchedData(SynchedEntityData.Builder builder) { }
 
     @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
-        this.level().explode(this, this.getX(), this.getY(), this.getZ(), 0.5F, Level.ExplosionInteraction.NONE);
+        this.level().explode(this, this.getX(), this.getY(), this.getZ(), 0.75F, Level.ExplosionInteraction.NONE);
     }
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-        if (!(result.getEntity() instanceof SentryGolem)) {
+        if (!(result.getEntity() instanceof SentryGolem sentryGolem) || (this.getOwner() != null && sentryGolem.getId() != this.getOwner().getId())) {
             result.getEntity().hurt(this.level().damageSources().explosion(result.getEntity(), result.getEntity()), 3);
-            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 0.5F, Level.ExplosionInteraction.NONE);
+            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 0.75F, Level.ExplosionInteraction.NONE);
         }
     }
 
