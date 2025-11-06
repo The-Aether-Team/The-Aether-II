@@ -397,7 +397,7 @@
       "mob/slime/big3",
       "mob/slime/big4"
     ],
-    "subtitle": "subtitles.aether.entity.detonation_sentry.death"
+    "subtitle": "subtitles.aether_ii.entity.detonation_sentry.death"
   },
   "entity.detonation_sentry.hurt": {
     "sounds": [
@@ -406,7 +406,7 @@
       "mob/slime/big3",
       "mob/slime/big4"
     ],
-    "subtitle": "subtitles.aether.entity.detonation_sentry.hurt"
+    "subtitle": "subtitles.aether_ii.entity.detonation_sentry.hurt"
   },
   "entity.detonation_sentry.jump": {
     "sounds": [
@@ -415,7 +415,7 @@
       "mob/slime/big3",
       "mob/slime/big4"
     ],
-    "subtitle": "subtitles.aether.entity.detonation_sentry.jump"
+    "subtitle": "subtitles.aether_ii.entity.detonation_sentry.jump"
   },
   "entity.detonation_sentry.squish": {
     "sounds": [
@@ -424,7 +424,7 @@
       "mob/slime/big3",
       "mob/slime/big4"
     ],
-    "subtitle": "subtitles.aether.entity.detonation_sentry.squish"
+    "subtitle": "subtitles.aether_ii.entity.detonation_sentry.squish"
   },
   "entity.electric_field.ambient": {
     "sounds": [
@@ -897,29 +897,29 @@
   },
   "entity.sentry_golem.death": {
     "sounds": [
-      "aether_genesis:entity/sentry_golem/death"
+      "aether_ii:entity/sentry_golem/death"
     ],
-    "subtitle": "subtitles.aether_genesis.entity.sentry_golem.death"
+    "subtitle": "subtitles.aether_ii.entity.sentry_golem.death"
   },
   "entity.sentry_golem.hurt": {
     "sounds": [
-      "aether_genesis:entity/sentry_golem/hurt_1",
-      "aether_genesis:entity/sentry_golem/hurt_2"
+      "aether_ii:entity/sentry_golem/hurt_1",
+      "aether_ii:entity/sentry_golem/hurt_2"
     ],
-    "subtitle": "subtitles.aether_genesis.entity.sentry_golem.hurt"
+    "subtitle": "subtitles.aether_ii.entity.sentry_golem.hurt"
   },
   "entity.sentry_golem.say": {
     "sounds": [
-      "aether_genesis:entity/sentry_golem/say_1",
-      "aether_genesis:entity/sentry_golem/say_2"
+      "aether_ii:entity/sentry_golem/say_1",
+      "aether_ii:entity/sentry_golem/say_2"
     ],
-    "subtitle": "subtitles.aether_genesis.entity.sentry_golem.say"
+    "subtitle": "subtitles.aether_ii.entity.sentry_golem.say"
   },
   "entity.sentry_golem.throw_bomb": {
     "sounds": [
       "random/bow"
     ],
-    "subtitle": "subtitles.aether_genesis.entity.sentry_golem.throw_bomb"
+    "subtitle": "subtitles.aether_ii.entity.sentry_golem.throw_bomb"
   },
   "entity.sheepuff.ambient": {
     "sounds": [
