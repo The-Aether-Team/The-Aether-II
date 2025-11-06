@@ -401,7 +401,7 @@ public class AetherIIItems {
         bus.addListener(GravititeArmor::playerFall);
         bus.addListener(GravititeArmor::playerUpdate);
         bus.addListener(SentryArmor::playerFall);
-        bus.addListener(NeptuneArmor::playerUpdate);
+        bus.addListener(NeptuneArmor::updatePlayerAttributes);
 
         // Tools
         bus.addListener(HolystoneTool::dropAmbrosium);

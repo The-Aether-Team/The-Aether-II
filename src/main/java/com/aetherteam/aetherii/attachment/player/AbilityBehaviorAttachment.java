@@ -38,8 +38,6 @@ public class AbilityBehaviorAttachment {
     private boolean gravititeHoldingFloatingBlock = false;
     private boolean gravititeJumpUsed = true;
 
-    private double neptuneSubmergeLength;
-
     private List<Entity> companions = new ArrayList<>();
 
 //    private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
@@ -186,17 +184,6 @@ public class AbilityBehaviorAttachment {
 
     public boolean isGravititeJumpUsed() {
         return this.gravititeJumpUsed;
-    }
-
-    public void setNeptuneSubmergeLength(double length) {
-        this.neptuneSubmergeLength = length;
-    }
-
-    /**
-     * @return A {@link Double} for how long the player has been submerged in water while wearing Neptune Armor.
-     */
-    public double getNeptuneSubmergeLength() {
-        return this.neptuneSubmergeLength;
     }
 
     private void trackCompanions() {
