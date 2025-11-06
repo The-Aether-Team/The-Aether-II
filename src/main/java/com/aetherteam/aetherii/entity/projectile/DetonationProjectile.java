@@ -16,8 +16,8 @@ public class DetonationProjectile extends ThrowableProjectile {
         super(entityType, level);
     }
 
-    public DetonationProjectile(double pX, double pY, double pZ, Level pLevel) {
-        super(AetherIIEntityTypes.DETONATION_PROJECTILE.get(), pX, pY, pZ, pLevel);
+    public DetonationProjectile(double x, double y, double z, Level pLevel) {
+        super(AetherIIEntityTypes.DETONATION_PROJECTILE.get(), x, y, z, pLevel);
     }
 
     public DetonationProjectile(LivingEntity shooter, Level level) {
@@ -26,21 +26,20 @@ public class DetonationProjectile extends ThrowableProjectile {
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-    }
+    protected void defineSynchedData(SynchedEntityData.Builder builder) { }
 
     @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
-        this.level().explode(this, this.getX(), this.getY(), this.getZ(), 0.5F, Level.ExplosionInteraction.NONE);
+        this.level().explode(this, this.getX(), this.getY(), this.getZ(), 0.75F, Level.ExplosionInteraction.NONE);
     }
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-        if (!(result.getEntity() instanceof SentryGolem)) {
+        if (!(result.getEntity() instanceof SentryGolem sentryGolem) || (this.getOwner() != null && sentryGolem.getId() != this.getOwner().getId())) {
             result.getEntity().hurt(this.level().damageSources().explosion(result.getEntity(), result.getEntity()), 3);
-            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 0.5F, Level.ExplosionInteraction.NONE);
+            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 0.75F, Level.ExplosionInteraction.NONE);
         }
     }
 
