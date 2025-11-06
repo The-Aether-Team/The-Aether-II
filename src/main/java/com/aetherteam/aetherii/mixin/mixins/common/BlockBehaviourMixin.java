@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public class BlockBehaviourMixin {
     @ModifyVariable(method = "getDrops(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/storage/loot/LootParams$Builder;)Ljava/util/List;", at = @At(value = "HEAD"), argsOnly = true)
     private LootParams.Builder getDrops(LootParams.Builder params) {
-        if (params.getParameter(LootContextParams.TOOL).is(AetherIIItems.ARKENIUM_SHEARS)) {
+        if (params.getParameter(LootContextParams.TOOL).is(AetherIIItems.ZANITE_SHEARS)) {
             return params.withParameter(LootContextParams.TOOL, new ItemStack(Items.SHEARS));
         }
         return params;

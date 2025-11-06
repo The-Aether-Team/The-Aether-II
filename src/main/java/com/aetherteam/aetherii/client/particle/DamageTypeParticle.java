@@ -16,7 +16,7 @@ public class DamageTypeParticle extends TextureSheetParticle {
         this.xd += xSpeed * 0.2;
         this.yd += ySpeed * 0.2;
         this.zd += zSpeed * 0.2;
-        float f = (float) (Math.random() * 0.3 + 0.6);
+        float f = (float) (Math.random() * 0.15 + 0.85);
         this.rCol = f;
         this.gCol = f;
         this.bCol = f;

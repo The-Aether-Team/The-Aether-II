@@ -21,6 +21,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
 import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
+import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Moa;
@@ -42,10 +43,9 @@ import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.ModelEvent;
-import net.neoforged.neoforge.client.event.RegisterBlockStateModels;
-import net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.model.item.DynamicFluidContainerModel;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
@@ -137,7 +137,9 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.HOLYSTONE_ROCK.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.ARCTIC_SNOWBALL.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SKYROOT_PINECONE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.LASSO_LOOP.get(), LassoLoopRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SCATTERGLASS_BOLT.get(), ScatterglassBoltRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.AMBER_DART.get(), AmberDartRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.TOXIC_DART.get(), ToxicDartRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.VENOMOUS_DART.get(), VenomousDartRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.ZEPHYR_WEBBING_BALL.get(), ZephyrWebbingBallRenderer::new);
@@ -225,6 +227,10 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.GLOVES, () -> GlovesModel.createLayer(new CubeDeformation(0.6F), false));
         event.registerLayerDefinition(AetherIIModelLayers.GLOVES_SLIM, () -> GlovesModel.createLayer(new CubeDeformation(0.6F), true));
         event.registerLayerDefinition(AetherIIModelLayers.GLOVES_FIRST_PERSON, () -> GlovesModel.createLayer(new CubeDeformation(0.25F), false));
+    }
+
+    public static void registerItemModels(RegisterItemModelsEvent event) {
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "shield"), ShieldModel.Unbaked.MAP_CODEC);
     }
 
     public static void registerBlockStateModels(RegisterBlockStateModels event) {

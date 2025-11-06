@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class SkephidWebbingBallRenderer extends EntityRenderer<SkephidWebbingBall, EntityRenderState> {
     private static final ResourceLocation ZEPHYR_PROJECTILE_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/zephyr_webbing_ball.png");
-    private static final RenderType RENDER_TYPE;
+    private static final RenderType RENDER_TYPE = RenderType.entityCutoutNoCull(ZEPHYR_PROJECTILE_TEXTURE);
 
     public SkephidWebbingBallRenderer(EntityRendererProvider.Context context) {
         super(context);
@@ -46,9 +46,5 @@ public class SkephidWebbingBallRenderer extends EntityRenderer<SkephidWebbingBal
                 .setOverlay(OverlayTexture.NO_OVERLAY)
                 .setLight(packedLight)
                 .setNormal(pose, 0.0F, 1.0F, 0.0F);
-    }
-
-    static {
-        RENDER_TYPE = RenderType.entityCutoutNoCull(ZEPHYR_PROJECTILE_TEXTURE);
     }
 }

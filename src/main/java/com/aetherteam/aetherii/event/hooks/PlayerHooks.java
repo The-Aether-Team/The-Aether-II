@@ -21,6 +21,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -203,6 +204,34 @@ public class PlayerHooks {
             float bonusSaturation = (float) (originalSaturation * (saturationBoost - 1.0F));
             if (bonusSaturation > 0.0F) {
                 player.getFoodData().eat(0, bonusSaturation);
+            }
+        }
+    }
+
+    public static boolean cancelBedrollSpawn(Player player, BlockPos pos) {
+        if (player != null && pos != null) {
+            return player.level().getBlockState(pos).is(AetherIIBlocks.CLOUDWOOL_BEDROLL);
+        }
+        return false;
+    }
+
+    public static Player.BedSleepingProblem handleBedrollSleeping(ServerPlayer player, Level level, BlockPos pos, BlockState state, Player.BedSleepingProblem vanillaProblem) {
+        if (state.is(AetherIIBlocks.CLOUDWOOL_BEDROLL)) {
+            if (vanillaProblem == null && level.getLightEngine().getRawBrightness(pos, 15) < 10) {
+                player.displayClientMessage(Component.translatable("aether_ii.bedroll.too_dark"), true);
+                return Player.BedSleepingProblem.OTHER_PROBLEM;
+            }
+        }
+        return vanillaProblem;
+    }
+
+    public static void breakBedrollAfterSleeping(Player player) {
+        Level level = player.level();
+        BlockPos pos = player.getOnPos();
+        BlockState state = level.getBlockState(pos);
+        if (level instanceof ServerLevel) {
+            if (state.is(AetherIIBlocks.CLOUDWOOL_BEDROLL)) {
+                level.destroyBlock(pos, false);
             }
         }
     }

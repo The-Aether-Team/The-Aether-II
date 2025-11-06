@@ -23,7 +23,7 @@ public interface ZaniteArmor {
 
         if (EquipmentUtil.hasArmorAbility(player, AetherIITags.Items.ZANITE_ARMOR)) {
             if (attackSpeedAttribute != null && !attackSpeedAttribute.hasModifier(ZANITE_ATTACK_SPEED)) {
-                attackSpeedAttribute.addTransientModifier(new AttributeModifier(ZANITE_ATTACK_SPEED, 2, AttributeModifier.Operation.ADD_VALUE));
+                attackSpeedAttribute.addTransientModifier(new AttributeModifier(ZANITE_ATTACK_SPEED, 0.3, AttributeModifier.Operation.ADD_VALUE));
             }
             if (miningSpeedAttribute != null && !miningSpeedAttribute.hasModifier(ZANITE_MINING_SPEED)) {
                 miningSpeedAttribute.addTransientModifier(new AttributeModifier(ZANITE_MINING_SPEED, 2, AttributeModifier.Operation.ADD_VALUE));

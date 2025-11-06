@@ -37,7 +37,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class TieredCrossbowItem extends CrossbowItem {
+public class TieredCrossbowItem extends CrossbowItem { //todo improve this with mixins
     public static final Predicate<ItemStack> BOLT_ONLY = stack -> stack.is(AetherIIItems.SCATTERGLASS_BOLT);
     private final ToolMaterial tier;
     private final int chargeTime;

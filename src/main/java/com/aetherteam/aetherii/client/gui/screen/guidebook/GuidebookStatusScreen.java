@@ -130,6 +130,16 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
     }
 
     @Override
+    public float getMouseX() {
+        return this.xMouse;
+    }
+
+    @Override
+    public float getMouseY() {
+        return this.yMouse;
+    }
+
+    @Override
     public boolean isPauseScreen() {
         return false;
     }

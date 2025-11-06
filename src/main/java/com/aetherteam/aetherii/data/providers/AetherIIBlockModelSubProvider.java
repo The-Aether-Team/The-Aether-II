@@ -10,6 +10,7 @@ import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import net.minecraft.world.level.block.state.properties.*;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.aetherteam.aetherii.AetherII;
@@ -19,6 +20,7 @@ import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.utility.AltarBlock;
 import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
+import com.aetherteam.aetherii.block.utility.BedrollBlock;
 import com.aetherteam.aetherii.client.AetherIIColorResolvers;
 import com.aetherteam.aetherii.client.renderer.block.model.builder.TrunkModelBuilder;
 import com.aetherteam.aetherii.client.renderer.item.color.AetherGrassColorSource;
@@ -50,11 +52,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.MossyCarpetBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.DripstoneThickness;
-import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.block.state.properties.WallSide;
 
 public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public AetherIIBlockModelSubProvider(Consumer<BlockModelDefinitionGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
@@ -869,6 +866,17 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant ladder = plainVariant(AetherIIModelTemplates.LADDER.create(block, mapping, this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, ladder).with(ROTATION_HORIZONTAL_FACING));
         this.registerSimpleFlatItemModel(block);
+    }
+
+    public void createBedroll(Block block) {
+        MultiVariant foot = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("cloudwool_bedroll_foot"));
+        MultiVariant head = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("cloudwool_bedroll_head"));
+
+        MultiVariantGenerator generator = MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(BedrollBlock.PART).select(BedPart.FOOT, foot).select(BedPart.HEAD, head)).with(ROTATION_HORIZONTAL_FACING_ALT);
+
+        this.registerSimpleFlatItemModel(block.asItem());
+
+        this.blockStateOutput.accept(generator);
     }
 
     public void createBed(Block block, Block particle, ResourceLocation location) {

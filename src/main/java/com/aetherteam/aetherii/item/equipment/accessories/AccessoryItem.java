@@ -28,7 +28,6 @@ public class AccessoryItem extends Item {
     }
 
     public void onUnequip(ItemStack stack, LivingEntity wearer) {  //todo
-
     }
 
     public AccessoryContainer.SlotType getSlotType() {

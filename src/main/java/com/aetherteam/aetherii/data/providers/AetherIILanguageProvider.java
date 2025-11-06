@@ -6,6 +6,9 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.item.Item;
+
+import java.util.function.Supplier;
 
 public abstract class AetherIILanguageProvider extends NitrogenLanguageProvider {
     public AetherIILanguageProvider(PackOutput output, String id) {
@@ -26,6 +29,10 @@ public abstract class AetherIILanguageProvider extends NitrogenLanguageProvider 
 
     public void addFeatherShape(Moa.FeatherShape shape, String name) {
         this.addItemTooltip("moa_egg.feather_shape." + shape.getSerializedName(), name);
+    }
+
+    public void addEffectDarts(Supplier<? extends Item> key, String effect, String name) {
+        this.add(key.get().getDescriptionId() + ".effect." + effect, name);
     }
 
     public void addDamageTypeTooltip(String path, String name) {

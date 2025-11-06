@@ -123,9 +123,9 @@ public class DamageSystemAttachment implements ValueIOSerializable {
                     });
                 }
                 if (slashDamage.get() != 0 || impactDamage.get() != 0 || pierceDamage.get() != 0) {
-                    this.createSoundsAndParticles(directEntity, target, slashDamage.get(), slashDefense, AetherIIParticleTypes.SLASH_ATTACK.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_INCORRECT.get());
-                    this.createSoundsAndParticles(directEntity, target, impactDamage.get(), impactDefense, AetherIIParticleTypes.IMPACT_ATTACK.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_INCORRECT.get());
-                    this.createSoundsAndParticles(directEntity, target, pierceDamage.get(), pierceDefense, AetherIIParticleTypes.PIERCE_ATTACK.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_INCORRECT.get());
+                    this.createSoundsAndParticles(directEntity, target, slashDamage.get(), slashDefense, AetherIIParticleTypes.SLASH_DAMAGE.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_INCORRECT.get());
+                    this.createSoundsAndParticles(directEntity, target, impactDamage.get(), impactDefense, AetherIIParticleTypes.IMPACT_DAMAGE.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_INCORRECT.get());
+                    this.createSoundsAndParticles(directEntity, target, pierceDamage.get(), pierceDefense, AetherIIParticleTypes.PIERCE_DAMAGE.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_INCORRECT.get());
 
                     double slashCalculation = slashDamage.get() > 0.0 ? Math.max(slashDamage.get() - slashDefense, 0.0) : 0.0;
                     double impactCalculation = impactDamage.get() > 0.0 ? Math.max(impactDamage.get() - impactDefense, 0.0) : 0.0;

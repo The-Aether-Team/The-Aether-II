@@ -2,7 +2,11 @@ package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.BuildupContents;
+import com.aetherteam.aetherii.item.equipment.weapons.AmberDartsItem;
 import com.aetherteam.aetherii.recipe.builder.AltarEnchantingRecipeBuilder;
 import com.aetherteam.aetherii.recipe.builder.BiomeParameterRecipeBuilder;
 import com.aetherteam.aetherii.recipe.builder.AlkahestPurificationRecipeBuilder;
@@ -11,8 +15,11 @@ import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
 import com.aetherteam.nitrogen.recipe.BlockPropertyPair;
 import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
 import com.aetherteam.nitrogen.recipe.builder.BlockStateRecipeBuilder;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.*;
@@ -21,6 +28,7 @@ import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ChargedProjectiles;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
@@ -223,6 +231,33 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .pattern("WWW")
                 .pattern(" W ")
                 .unlockedBy(has, has(material));
+    }
+
+    protected void makeDartsWithEffect(Holder<Item> darts, Supplier<? extends Item> ingredient, EffectBuildupPresets.Preset preset) {
+        String effect = BuiltInRegistries.MOB_EFFECT.getKey(preset.type().value()).toString().replace(':', '_');
+        ShapelessRecipeBuilder.shapeless(this.getter, RecipeCategory.MISC, new ItemStack(darts, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(preset)).build()))
+                .group("amber_darts")
+                .requires(Ingredient.of(darts.value()))
+                .requires(Ingredient.of(ingredient.get()))
+                .unlockedBy("has_ingredient", has(ingredient.get()))
+                .save(this.output, this.name("amber_darts_" + effect));
+    }
+
+    protected void loadDartShooter(Holder<Item> dartShooter, Holder<Item> darts, EffectBuildupPresets.Preset preset) {
+        String effect = BuiltInRegistries.MOB_EFFECT.getKey(preset.type().value()).toString().replace(':', '_');
+        ItemStack effectDarts = new ItemStack(darts, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(preset)).build());
+
+        DataComponentPatch dartShooterData = DataComponentPatch.builder()
+                .set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.of(effectDarts))
+                .set(AetherIIDataComponents.DARTS_LOADED.get(), AmberDartsItem.FULL_AMOUNT)
+                .set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(preset))
+                .build();
+        ShapelessRecipeBuilder.shapeless(this.getter, RecipeCategory.MISC, new ItemStack(dartShooter, 1, dartShooterData))
+                .group("load_dart_shooter")
+                .requires(Ingredient.of(dartShooter.value()))
+                .requires(DataComponentIngredient.of(false, effectDarts))
+                .unlockedBy("has_darts", has(darts.value()))
+                .save(this.output, this.name("dart_shooter_" + effect));
     }
 
     protected void parachute(HolderGetter<Item> getter, ItemLike result, ItemLike aercloud) {

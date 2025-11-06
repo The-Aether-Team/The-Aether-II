@@ -662,6 +662,12 @@
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },
+  "entity.lasso.throw": {
+    "sounds": [
+      "random/bow"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.lasso.throw"
+  },
   "entity.moa.ambient": {
     "sounds": [
       "aether_ii:entity/moa/say"

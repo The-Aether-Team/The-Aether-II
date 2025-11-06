@@ -5,10 +5,14 @@ import java.util.List;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEntities;
+import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.passive.Moa;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.BuildupContents;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -543,6 +547,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATROOT_HANGING_SIGN.get());
                 output.accept(AetherIIBlocks.WISPROOT_SIGN.get());
                 output.accept(AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
+                output.accept(AetherIIBlocks.CLOUDWOOL_BEDROLL.get());
                 output.accept(AetherIIBlocks.SKYROOT_BED.get());
                 output.accept(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
                 output.accept(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
@@ -601,9 +606,12 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GRAVITITE_AXE.get());
                 output.accept(AetherIIItems.GRAVITITE_TROWEL.get());
                 output.accept(AetherIIItems.GRAVITITE_SHIELD.get());
-                output.accept(AetherIIItems.DEMOLITION_HAMMER.get());
-                output.accept(AetherIIItems.ARKENIUM_SHEARS.get());
+                output.accept(AetherIIItems.ZANITE_SHEARS.get());
                 output.accept(AetherIIItems.SCATTERGLASS_BOLT.get());
+                output.accept(AetherIIItems.DART_SHOOTER.get());
+                output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.VULNERABILITY)).build()));
+                output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.TOXIN)).build()));
+                output.accept(AetherIIItems.DEMOLITION_HAMMER.get());
                 output.accept(AetherIIItems.SKYROOT_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_WATER_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_PUFFERFISH_BUCKET.get());
@@ -622,6 +630,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.BLUE_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.HIDE_BUNDLE.get());
+                output.accept(AetherIIItems.BRETTL_LASSO.get());
                 output.accept(AetherIIItems.MOA_SADDLE.get());
                 output.accept(AetherIIItems.MOA_SADDLEBAG.get());
                 output.accept(AetherIIItems.LARGE_MOA_SADDLEBAG.get());

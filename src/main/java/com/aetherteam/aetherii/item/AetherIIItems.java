@@ -7,10 +7,12 @@ import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIJukeboxSongs;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStyleDesigns;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStyleMaterials;
+import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.ArmorStyle;
+import com.aetherteam.aetherii.item.components.BuildupContents;
 import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
@@ -34,14 +36,8 @@ import com.aetherteam.aetherii.item.equipment.tools.skyroot.SkyrootAxeItem;
 import com.aetherteam.aetherii.item.equipment.tools.skyroot.SkyrootPickaxeItem;
 import com.aetherteam.aetherii.item.equipment.tools.skyroot.SkyrootShovelItem;
 import com.aetherteam.aetherii.item.equipment.tools.skyroot.SkyrootTrowelItem;
-import com.aetherteam.aetherii.item.equipment.tools.zanite.ZaniteAxeItem;
-import com.aetherteam.aetherii.item.equipment.tools.zanite.ZanitePickaxeItem;
-import com.aetherteam.aetherii.item.equipment.tools.zanite.ZaniteShovelItem;
-import com.aetherteam.aetherii.item.equipment.tools.zanite.ZaniteTrowelItem;
-import com.aetherteam.aetherii.item.equipment.weapons.ScatterglassBoltItem;
-import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
-import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
-import com.aetherteam.aetherii.item.equipment.weapons.TieredSpearItem;
+import com.aetherteam.aetherii.item.equipment.tools.zanite.*;
+import com.aetherteam.aetherii.item.equipment.weapons.*;
 import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumCrossbowItem;
 import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumHammerItem;
 import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumShortswordItem;
@@ -133,7 +129,7 @@ public class AetherIIItems {
     public static final DeferredItem<ShovelItem> GRAVITITE_SHOVEL = register("gravitite_shovel", GravititeShovelItem::new);
     public static final DeferredItem<HoeItem> GRAVITITE_TROWEL = register("gravitite_trowel", GravititeTrowelItem::new);
 
-    public static final DeferredItem<Item> ARKENIUM_SHEARS = register("arkenium_shears", ShearsItem::new, () -> new Item.Properties().durability(238).component(DataComponents.TOOL, ShearsItem.createToolProperties()));
+    public static final DeferredItem<Item> ZANITE_SHEARS = register("zanite_shears", ZaniteShearsItem::new, () -> new Item.Properties().durability(238).component(DataComponents.TOOL, ShearsItem.createToolProperties()));
 
     // Combat
     public static final DeferredItem<Item> SKYROOT_SHORTSWORD = register("skyroot_shortsword", SkyrootShortswordItem::new);
@@ -167,9 +163,12 @@ public class AetherIIItems {
     public static final DeferredItem<ShieldItem> ARKENIUM_SHIELD = register("arkenium_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.ARKENIUM, properties), () -> new Item.Properties().attributes(TieredShieldItem.createAttributes(60)));
     public static final DeferredItem<ShieldItem> GRAVITITE_SHIELD = register("gravitite_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.GRAVITITE, properties), () -> new Item.Properties().attributes(TieredShieldItem.createAttributes(40)));
 
-    public static final DeferredItem<TieredHammerItem> DEMOLITION_HAMMER = register("demolition_hammer", DemolitionHammerItem::new);
+    public static final DeferredItem<Item> DART_SHOOTER = register("dart_shooter", DartShooterItem::new, () -> new Item.Properties().durability(100));
+    public static final DeferredItem<Item> AMBER_DARTS = register("amber_darts", AmberDartsItem::new, () -> new Item.Properties().component(AetherIIDataComponents.BUILDUP_CONTENTS, new BuildupContents(EffectBuildupPresets.VULNERABILITY)).stacksTo(16));
 
     public static final DeferredItem<Item> SCATTERGLASS_BOLT = register("scatterglass_bolt", ScatterglassBoltItem::new);
+
+    public static final DeferredItem<TieredHammerItem> DEMOLITION_HAMMER = register("demolition_hammer", DemolitionHammerItem::new);
 
     // Armor
     public static final DeferredItem<Item> BEAST_PELT_HELMET = register("beast_pelt_helmet", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.BEAST_PELT, ArmorType.HELMET).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.BEAST_PELT_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.BEAST_PELT, AetherIIStyleDesigns.SCOUT, false))));
@@ -347,6 +346,7 @@ public class AetherIIItems {
 
     // Misc
     public static final DeferredItem<Item> HIDE_BUNDLE = register("hide_bundle", BundleItem::new, () -> new Item.Properties().stacksTo(1).component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY));
+    public static final DeferredItem<Item> BRETTL_LASSO = register("lasso", LassoItem::new);
     public static final DeferredItem<Item> MOA_EGG = register("moa_egg", MoaEggItem::new, () -> new Item.Properties().stacksTo(1).component(AetherIIDataComponents.MOA_EGG_TYPE.get(), MoaEggType.defaultType()));
     public static final DeferredItem<Item> MOA_FEED = register("moa_feed", MoaFeedItem::new);
     public static final DeferredItem<Item> BLUEBERRY_MOA_FEED = register("blueberry_moa_feed", MoaFeedItem::new);

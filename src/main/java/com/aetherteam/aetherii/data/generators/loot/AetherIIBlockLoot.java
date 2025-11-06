@@ -646,7 +646,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get(), (block) -> this.createSilkTouchDispatchTable(block, this.applyExplosionCondition(block, LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))));
         this.dropSelf(AetherIIBlocks.SKYROOT_CHEST.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_LADDER.get());
-        this.add(AetherIIBlocks.SKYROOT_BED.get(), (bed) -> createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.CLOUDWOOL_BEDROLL.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
 
         this.dropOther(AetherIIBlocks.SKYROOT_WALL_SIGN.get(), AetherIIBlocks.SKYROOT_SIGN.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_SIGN.get());
