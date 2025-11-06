@@ -18,6 +18,7 @@ import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.item.equipment.accessories.GlovesItem;
+import com.aetherteam.aetherii.item.equipment.accessories.SentryBoostersItem;
 import com.aetherteam.aetherii.item.equipment.armor.abilities.*;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.HolystoneTool;
 import com.aetherteam.aetherii.item.equipment.tools.arkenium.ArkeniumAxeItem;
@@ -211,6 +212,9 @@ public class AetherIIItems {
     public static final DeferredItem<Item> NEPTUNE_LEGGINGS = register("neptune_leggings", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.NEPTUNE, ArmorType.LEGGINGS).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR)));
     public static final DeferredItem<Item> NEPTUNE_BOOTS = register("neptune_boots", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.NEPTUNE, ArmorType.BOOTS).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR)));
     public static final DeferredItem<Item> NEPTUNE_GLOVES = register("neptune_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.NEPTUNE, 100.0, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR)));
+
+    // Accessories
+    public static final DeferredItem<Item> SENTRY_BOOSTERS = register("sentry_boosters", SentryBoostersItem::new);
 
     // Materials
     public static final DeferredItem<Item> SKYROOT_STICK = register("skyroot_stick");
