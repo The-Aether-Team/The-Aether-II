@@ -1,23 +1,45 @@
 package com.aetherteam.aetherii.item.equipment.armor.abilities;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.AbilityBehaviorAttachment;
 import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.LivingEntityAccessor;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 public interface GravititeArmor {
-    static void playerFall(LivingFallEvent event) {
+    ResourceLocation GRAVITITE_FALL_DAMAGE_SUPPRESSION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "armor_set.ability.gravitite.fall_damage_suppression");
+
+    static void updatePlayerAttributes(PlayerTickEvent.Pre event) {
+        Player player = event.getEntity();
+        AttributeInstance fallDamageMultiplierAttribute = player.getAttribute(Attributes.FALL_DAMAGE_MULTIPLIER);
+
+        if (EquipmentUtil.hasArmorAbility(player, AetherIITags.Items.GRAVITITE_ARMOR)) {
+            if (fallDamageMultiplierAttribute != null && !fallDamageMultiplierAttribute.hasModifier(GRAVITITE_FALL_DAMAGE_SUPPRESSION)) {
+                fallDamageMultiplierAttribute.addTransientModifier(new AttributeModifier(GRAVITITE_FALL_DAMAGE_SUPPRESSION, -0.5, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+            }
+        } else {
+            if (fallDamageMultiplierAttribute != null && fallDamageMultiplierAttribute.hasModifier(GRAVITITE_FALL_DAMAGE_SUPPRESSION)) {
+                fallDamageMultiplierAttribute.removeModifier(GRAVITITE_FALL_DAMAGE_SUPPRESSION);
+            }
+        }
+    }
+
+    static void playerFall(LivingFallEvent event) { //todo
         LivingEntity livingEntity = event.getEntity();
         if (EquipmentUtil.hasArmorAbility(livingEntity, AetherIITags.Items.GRAVITITE_ARMOR)) {
-            event.setDamageMultiplier(event.getDamageMultiplier() * 0.5F);
             if (livingEntity.fallDistance < 8) {
                 event.setDistance(0);
             }
