@@ -6,8 +6,6 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.Mth;
 
 public class SentryGolemModel extends AbstractGolemModel<SentryGolemRenderState> {
-    public byte armState = 2;
-    float[] armsAngles = new float[]{1.0F, 1.0F, 0.5F, 0.5F};
 
     public SentryGolemModel(ModelPart root) {
         super(root);
@@ -21,15 +19,6 @@ public class SentryGolemModel extends AbstractGolemModel<SentryGolemRenderState>
 
         this.rightArm.resetPose();
         this.leftArm.resetPose();
-
-        this.armState = golem.armState;
-        if (golem.progress < this.armsAngles[this.armState]) {
-            golem.progress += 0.06F;
-        }
-
-        if (golem.progress > this.armsAngles[this.armState]) {
-            golem.progress -= 0.06F;
-        }
 
         this.rightArm.xRot = -3.0F * golem.progress;
         this.leftArm.xRot = -3.0F * golem.progress;

@@ -14,6 +14,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.util.LandRandomPos;
@@ -34,6 +35,9 @@ public class SentryGolem extends Monster implements RangedAttackMob {
     public int timeTilToss = 50;
     public float progress = 0.0F;
 
+    float[] armsAngles = new float[]{1.0F, 1.0F, 0.5F, 0.0F};
+
+
     public SentryGolem(EntityType<? extends SentryGolem> entityType, Level level) {
         super(entityType, level);
     }
@@ -41,8 +45,9 @@ public class SentryGolem extends Monster implements RangedAttackMob {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new WaterAvoidingRandomStrollGoal(this, 1.0));
-        this.goalSelector.addGoal(2, new ThrowExplosiveAttackGoal(this, 60, 0.08F, 49.0F, 100.0F));
+        this.goalSelector.addGoal(1, new SentryGolemMeleeAttackGoal(this, 1.15F, true, 6.0F));
+        this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0));
+        this.goalSelector.addGoal(3, new ThrowExplosiveAttackGoal(this, 60, 0.08F, 49.0F, 100.0F));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
@@ -71,6 +76,14 @@ public class SentryGolem extends Monster implements RangedAttackMob {
                 } else {
                     this.timeTilToss = 50;
                 }
+            }
+        } else {
+            if (this.progress < this.armsAngles[this.getHandState()]) {
+                this.progress += 0.06F;
+            }
+
+            if (this.progress > this.armsAngles[this.getHandState()]) {
+                this.progress -= 0.06F;
             }
         }
     }
@@ -214,6 +227,46 @@ public class SentryGolem extends Monster implements RangedAttackMob {
                 this.attackTime = this.maxRangedAttackTime;
                 this.golem.setHandState((byte) 2);
             }
+        }
+    }
+
+    protected static class SentryGolemMeleeAttackGoal extends MeleeAttackGoal {
+        private int ticksUntilNextAttack;
+        private boolean attack;
+        private final float attackThresholdSqr;
+        private final SentryGolem sentryGolem;
+
+        public SentryGolemMeleeAttackGoal(SentryGolem golem, double speedModifier, boolean followingTargetEvenIfNotSeen, float attackThreshold) {
+            super(golem, speedModifier, followingTargetEvenIfNotSeen);
+            this.attackThresholdSqr = attackThreshold * attackThreshold;
+            this.sentryGolem = golem;
+        }
+
+        @Override
+        public boolean canUse() {
+            return super.canUse() && this.mob.getTarget() != null && this.mob.distanceToSqr(this.mob.getTarget()) < this.attackThresholdSqr;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return super.canContinueToUse() && this.mob.getTarget() != null && this.mob.distanceToSqr(this.mob.getTarget()) < this.attackThresholdSqr;
+        }
+
+        @Override
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
+
+        @Override
+        public void start() {
+            super.start();
+            this.sentryGolem.setHandState((byte) 3);
+        }
+
+        @Override
+        public void stop() {
+            super.stop();
+            this.sentryGolem.setHandState((byte) 2);
         }
     }
 }

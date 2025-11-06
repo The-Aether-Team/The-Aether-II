@@ -52,6 +52,10 @@ public class SentryGolemRenderer extends MobRenderer<SentryGolem, SentryGolemRen
     public void renderBomb(SentryGolemRenderState golem, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         float progress = golem.progress;
         float scale = 1.0F;
+        if (golem.armState == 3) {
+            return;
+        }
+
         if (golem.armState == 2) {
             if (!((double) progress < 0.5)) {
                 return;
