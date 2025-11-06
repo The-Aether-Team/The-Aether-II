@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.entity.monster.dungeon;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
-import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.projectile.DetonationProjectile;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -47,7 +46,7 @@ public class SentryGolem extends Monster implements RangedAttackMob {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new SentryGolemMeleeAttackGoal(this, 1.15F, true, 6.0F));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0));
-        this.goalSelector.addGoal(3, new ThrowExplosiveAttackGoal(this, 60, 0.08F, 49.0F, 100.0F));
+        this.goalSelector.addGoal(3, new ThrowExplosiveAttackGoal(this, 60, 0.08F, 52.0F, 240.0F));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
@@ -92,10 +91,10 @@ public class SentryGolem extends Monster implements RangedAttackMob {
     public void performRangedAttack(LivingEntity target, float distance) {
         DetonationProjectile bomb = new DetonationProjectile(this, this.level());
         double x = target.getX() - this.getX();
-        double y = target.getEyeY() - this.getY() - 1.0;
+        double y = target.getEyeY() - this.getY();
         double z = target.getZ() - this.getZ();
         double length = Math.sqrt(x * x + z * z);
-        bomb.shoot(x, y + (length * 0.2F), z, 0.5F, 8.0F);
+        bomb.shoot(x, y + (length * 0.5F), z, (float) (0.5F + (length * 0.01F)), 8.0F);
         bomb.setYRot(this.yBodyRot);
         this.playSound(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_THROW_BOMB.get(), 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.level().addFreshEntity(bomb);
