@@ -186,11 +186,13 @@ public class AetherIIStats {
             .build();
 
     public static final ImmutableMap<Holder<Attribute>, Double> DETONATION_SENTRY = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(Attributes.MAX_HEALTH, 10.0)
             .put(AetherIIAttributes.SLASH_RESISTANCE, 3.0)
             .put(AetherIIAttributes.IMPACT_RESISTANCE, -2.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, 3.0)
             .build();
     public static final ImmutableMap<Holder<Attribute>, Double> SENTRY_GOLEM = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(Attributes.MAX_HEALTH, 20.0)
             .put(AetherIIAttributes.SLASH_RESISTANCE, 3.0)
             .put(AetherIIAttributes.IMPACT_RESISTANCE, -2.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, 3.0)

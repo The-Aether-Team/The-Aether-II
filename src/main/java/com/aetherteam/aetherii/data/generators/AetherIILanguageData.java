@@ -1217,6 +1217,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.ARKENIUM_TALUTON, "Arkenium Taluton");
         this.addEntityType(AetherIIEntityTypes.GRAVITITE_TALUTON, "Gravitite Taluton");
         this.addEntityType(AetherIIEntityTypes.BLADE_SHROOM_HUNTER, "BladeShroom Hunter");
+        this.addEntityType(AetherIIEntityTypes.DETONATION_SENTRY, "Detonation Sentry");
+        this.addEntityType(AetherIIEntityTypes.SENTRY_GOLEM, "Sentry Golem");
 
         // Projectile
         this.addEntityType(AetherIIEntityTypes.HOLYSTONE_ROCK, "Holystone Rock");
@@ -1423,6 +1425,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.BLADE_SHROOM_HUNTER.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.DETONATION_SENTRY.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.SENTRY_GOLEM.get(), loremIpsum);
     }
 
     private void addEffectsDescriptions() {

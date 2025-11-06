@@ -2,13 +2,13 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.sentry_golem",
   "effect_resistances": [],
   "entity_type": "aether_ii:sentry_golem",
-  "health": 0,
+  "health": 20,
   "icon": "aether_ii:guidebook/bestiary/sentry_golem",
   "id": "aether_ii:sentry_golem",
-  "impact_defense": 0,
+  "impact_defense": -2,
   "loot_slots": [],
   "name": "entity.aether_ii.sentry_golem",
-  "pierce_defense": 0,
-  "slash_defense": 0,
+  "pierce_defense": 3,
+  "slash_defense": 3,
   "slot_name": "entity.aether_ii.sentry_golem"
 }
