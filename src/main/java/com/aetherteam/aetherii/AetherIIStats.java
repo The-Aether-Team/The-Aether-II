@@ -185,6 +185,17 @@ public class AetherIIStats {
             .put(AetherIIAttributes.PIERCE_RESISTANCE, 3.0)
             .build();
 
+    public static final ImmutableMap<Holder<Attribute>, Double> DETONATION_SENTRY = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(AetherIIAttributes.SLASH_RESISTANCE, 3.0)
+            .put(AetherIIAttributes.IMPACT_RESISTANCE, -2.0)
+            .put(AetherIIAttributes.PIERCE_RESISTANCE, 3.0)
+            .build();
+    public static final ImmutableMap<Holder<Attribute>, Double> SENTRY_GOLEM = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(AetherIIAttributes.SLASH_RESISTANCE, 3.0)
+            .put(AetherIIAttributes.IMPACT_RESISTANCE, -2.0)
+            .put(AetherIIAttributes.PIERCE_RESISTANCE, 3.0)
+            .build();
+
     private static ItemAttributeModifiers.Entry slashDamageModifer(double amount) {
         return new ItemAttributeModifiers.Entry(AetherIIAttributes.SLASH_DAMAGE, new AttributeModifier(AetherIIItems.BASE_SLASH_DAMAGE_ID, amount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
     }

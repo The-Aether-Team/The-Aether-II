@@ -6,12 +6,15 @@ import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEntities;
 import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import com.aetherteam.aetherii.entity.monster.*;
+import com.aetherteam.aetherii.entity.monster.dungeon.DetonationSentry;
+import com.aetherteam.aetherii.entity.monster.dungeon.SentryGolem;
 import com.aetherteam.aetherii.entity.npc.outpost.Edward;
 import com.aetherteam.aetherii.entity.passive.*;
 import com.aetherteam.aetherii.entity.projectile.*;
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.monster.Monster;
@@ -89,6 +92,12 @@ public class AetherIIEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<BladeShroomHunter>> BLADE_SHROOM_HUNTER = ENTITY_TYPES.register("bladeshroom_hunter",
             () -> EntityType.Builder.of(BladeShroomHunter::new, MobCategory.MONSTER).sized(0.9F, 1.3F).eyeHeight(1.2F).clientTrackingRange(10).build(AetherIIEntities.BLADE_SHROOM_HUNTER));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<DetonationSentry>> DETONATION_SENTRY = ENTITY_TYPES.register("detonation_sentry",
+            () -> EntityType.Builder.of(DetonationSentry::new, MobCategory.MONSTER).sized(0.9F, 0.9F).eyeHeight(0.45F).clientTrackingRange(10).build(AetherIIEntities.DETONATION_SENTRY));
+    public static final DeferredHolder<EntityType<?>, EntityType<SentryGolem>> SENTRY_GOLEM = ENTITY_TYPES.register("sentry_golem",
+            () -> EntityType.Builder.of(SentryGolem::new, MobCategory.MONSTER).sized(0.6F, 1.95F).eyeHeight(1.8F).clientTrackingRange(8).build(AetherIIEntities.SENTRY_GOLEM));
+
+
     // NPCs
     public static final DeferredHolder<EntityType<?>, EntityType<Edward>> EDWARD = ENTITY_TYPES.register("edward",
             () -> EntityType.Builder.of(Edward::new, MobCategory.CREATURE).sized(0.6F, 1.95F).eyeHeight(1.75F).clientTrackingRange(8).build(AetherIIEntities.EDWARD));
@@ -131,6 +140,8 @@ public class AetherIIEntityTypes {
     // Misc
     public static final DeferredHolder<EntityType<?>, EntityType<ElectricField>> ELECTRIC_FIELD = ENTITY_TYPES.register("electric_field",
             () -> EntityType.Builder.<ElectricField>of(ElectricField::new, MobCategory.MISC).fireImmune().sized(6.0F, 1.5F).clientTrackingRange(10).updateInterval(Integer.MAX_VALUE).noLootTable().build(AetherIIEntities.ELECTRIC_FIELD));
+    public static final DeferredHolder<EntityType<?>, EntityType<DetonationProjectile>> DETONATION_PROJECTILE = ENTITY_TYPES.register("detonation_projectile",
+            () -> EntityType.Builder.<DetonationProjectile>of(DetonationProjectile::new, MobCategory.MISC).clientTrackingRange(4).updateInterval(10).sized(0.9F, 0.9F).noLootTable().fireImmune().build(AetherIIEntities.DETONATION_PROJECTILE));
 
 
     public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
@@ -162,6 +173,8 @@ public class AetherIIEntityTypes {
         event.register(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Taluton::checkTalutonSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Taluton::checkTalutonSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.BLADE_SHROOM_HUNTER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.DETONATION_SENTRY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.SENTRY_GOLEM.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
     }
 
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
@@ -194,6 +207,8 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), AetherIIStats.merge(ArkeniumTaluton.createMobAttributes(), AetherIIStats.ARKENIUM_TALUTON).build());
         event.put(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), AetherIIStats.merge(GravititeTaluton.createMobAttributes(), AetherIIStats.GRAVITITE_TALUTON).build());
         event.put(AetherIIEntityTypes.BLADE_SHROOM_HUNTER.get(), AetherIIStats.merge(BladeShroomHunter.createMobAttributes(), AetherIIStats.BLADE_SHROOM_HUNTER).build());
+        event.put(AetherIIEntityTypes.DETONATION_SENTRY.get(), AetherIIStats.merge(DetonationSentry.createMobAttributes(), AetherIIStats.DETONATION_SENTRY).build());
+        event.put(AetherIIEntityTypes.SENTRY_GOLEM.get(), AetherIIStats.merge(SentryGolem.createMobAttributes(), AetherIIStats.SENTRY_GOLEM).build());
 
         // NPCs
         event.put(AetherIIEntityTypes.EDWARD.get(), Edward.createMobAttributes().build());

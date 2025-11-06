@@ -390,6 +390,42 @@
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },
+  "entity.detonation_sentry.death": {
+    "sounds": [
+      "mob/slime/big1",
+      "mob/slime/big2",
+      "mob/slime/big3",
+      "mob/slime/big4"
+    ],
+    "subtitle": "subtitles.aether.entity.detonation_sentry.death"
+  },
+  "entity.detonation_sentry.hurt": {
+    "sounds": [
+      "mob/slime/big1",
+      "mob/slime/big2",
+      "mob/slime/big3",
+      "mob/slime/big4"
+    ],
+    "subtitle": "subtitles.aether.entity.detonation_sentry.hurt"
+  },
+  "entity.detonation_sentry.jump": {
+    "sounds": [
+      "mob/slime/big1",
+      "mob/slime/big2",
+      "mob/slime/big3",
+      "mob/slime/big4"
+    ],
+    "subtitle": "subtitles.aether.entity.detonation_sentry.jump"
+  },
+  "entity.detonation_sentry.squish": {
+    "sounds": [
+      "mob/slime/big1",
+      "mob/slime/big2",
+      "mob/slime/big3",
+      "mob/slime/big4"
+    ],
+    "subtitle": "subtitles.aether.entity.detonation_sentry.squish"
+  },
   "entity.electric_field.ambient": {
     "sounds": [
       {
@@ -852,6 +888,32 @@
       "random/bow"
     ],
     "subtitle": "subtitles.aether_ii.entity.rock.throw"
+  },
+  "entity.sentry_golem.death": {
+    "sounds": [
+      "aether_genesis:entity/sentry_golem/death"
+    ],
+    "subtitle": "subtitles.aether_genesis.entity.sentry_golem.death"
+  },
+  "entity.sentry_golem.hurt": {
+    "sounds": [
+      "aether_genesis:entity/sentry_golem/hurt_1",
+      "aether_genesis:entity/sentry_golem/hurt_2"
+    ],
+    "subtitle": "subtitles.aether_genesis.entity.sentry_golem.hurt"
+  },
+  "entity.sentry_golem.say": {
+    "sounds": [
+      "aether_genesis:entity/sentry_golem/say_1",
+      "aether_genesis:entity/sentry_golem/say_2"
+    ],
+    "subtitle": "subtitles.aether_genesis.entity.sentry_golem.say"
+  },
+  "entity.sentry_golem.throw_bomb": {
+    "sounds": [
+      "random/bow"
+    ],
+    "subtitle": "subtitles.aether_genesis.entity.sentry_golem.throw_bomb"
   },
   "entity.sheepuff.ambient": {
     "sounds": [

@@ -1,24 +1,15 @@
 package com.aetherteam.aetherii.client.renderer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
-import com.aetherteam.aetherii.client.renderer.block.model.blockstate.TrunkModel;
-import com.aetherteam.aetherii.client.renderer.blockentity.*;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.AmbientOcclusionLightModel;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.FastModel;
-import com.aetherteam.aetherii.client.renderer.blockentity.AlkahestPurifierRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.ArkeniumForgeRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.MoaEggRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
+import com.aetherteam.aetherii.client.renderer.block.model.blockstate.TrunkModel;
+import com.aetherteam.aetherii.client.renderer.blockentity.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
 import com.aetherteam.aetherii.client.renderer.entity.*;
 import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLatchLayer;
@@ -26,21 +17,16 @@ import com.aetherteam.aetherii.client.renderer.entity.model.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.ArcticBurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.ArcticKirridBabyModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.ArcticKirridModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.HighfieldsKirridBabyModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.HighfieldsKirridModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.MagneticKirridBabyModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.MagneticKirridModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
 import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Moa;
-
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.SlimeModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.blockentity.BedRenderer;
@@ -55,7 +41,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
@@ -63,6 +48,10 @@ import net.neoforged.neoforge.client.event.RegisterBlockStateModels;
 import net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class AetherIIRenderers {
     public static final ContextKey<Boolean> RIDING_SKIFF_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "riding_skiff"));
@@ -138,6 +127,8 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), ArkeniumTalutonRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), GravititeTalutonRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.BLADE_SHROOM_HUNTER.get(), BladeShroomHunterRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.DETONATION_SENTRY.get(), DetonationSentryRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.SENTRY_GOLEM.get(), SentryGolemRenderer::new);
 
         // NPCs
         event.registerEntityRenderer(AetherIIEntityTypes.EDWARD.get(), EdwardRenderer::new);
@@ -153,6 +144,8 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.TEMPEST_THUNDERBALL.get(), TempestThunderballRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SKEPHID_WEBBING_BALL.get(), SkephidWebbingBallRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.GRAVITITE_DEBRIS_SHOT.get(), GravititeDebrisShotRenderer::new);
+
+        event.registerEntityRenderer(AetherIIEntityTypes.DETONATION_PROJECTILE.get(), DetonationProjectileRenderer::new);
 
         // Blocks
         event.registerEntityRenderer(AetherIIEntityTypes.HOVERING_BLOCK.get(), HoveringBlockRenderer::new);
@@ -215,10 +208,12 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.ARKENIUM_TALUTON, ArkeniumTalutonModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_TALUTON, GravititeTalutonModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.BLADE_SHROOM_HUNTER, BladeShroomHunterModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.DETONATION_SENTRY, SlimeModel::createOuterBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SENTRY_GOLEM, SentryGolemModel::createBodyLayer);
 
         // Projectiles
         event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_DEBRIS_SHOT, GravititeDebrisShotModel::createBodyLayer);
-
+        event.registerLayerDefinition(AetherIIModelLayers.DETONATION_PROJECTILE, DetonationProjectileModel::createBodyLayer);
         // NPCs
         event.registerLayerDefinition(AetherIIModelLayers.EDWARD, EdwardModel::createBodyLayer);
 

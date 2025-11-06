@@ -1,7 +1,5 @@
 package com.aetherteam.aetherii.data.generators;
 
-import java.util.TreeMap;
-
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
@@ -15,12 +13,13 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
-
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
+
+import java.util.TreeMap;
 
 public class AetherIILanguageData extends AetherIILanguageProvider {
     public AetherIILanguageData(PackOutput output) {
@@ -1589,6 +1588,16 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "gravitite_taluton.ambient", "Gravitite Taluton drones");
         this.addSubtitle("entity", "gravitite_taluton.death", "Gravitite Taluton dies");
         this.addSubtitle("entity", "gravitite_taluton.hurt", "Gravitite Taluton hurts");
+
+        this.addSubtitle("entity", "detonation_sentry.death", "Sentry dies");
+        this.addSubtitle("entity", "detonation_sentry.hurt", "Sentry hurts");
+        this.addSubtitle("entity", "detonation_sentry.jump", "Sentry squishes");
+        this.addSubtitle("entity", "detonation_sentry.squish", "Sentry squishes");
+
+        this.addSubtitle("entity", "sentry_golem.death", "Sentry Golem dies");
+        this.addSubtitle("entity", "sentry_golem.hurt", "Sentry Golem hurts");
+        this.addSubtitle("entity", "sentry_golem.say", "Sentry Golem drones");
+        this.addSubtitle("entity", "sentry_golem.throw_bomb", "Sentry Golem throws explosive");
 
         this.addSubtitle("entity", "blighted.burn", "Something burns");
 

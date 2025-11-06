@@ -44,6 +44,8 @@ public class AetherIIEntities {
     public static final ResourceKey<EntityType<?>> ARKENIUM_TALUTON = createKey("arkenium_taluton");
     public static final ResourceKey<EntityType<?>> GRAVITITE_TALUTON = createKey("gravitite_taluton");
     public static final ResourceKey<EntityType<?>> BLADE_SHROOM_HUNTER = createKey("bladeshroom_hunter");
+    public static final ResourceKey<EntityType<?>> DETONATION_SENTRY = createKey("detonation_sentry");
+    public static final ResourceKey<EntityType<?>> SENTRY_GOLEM = createKey("sentry_golem");
 
 
     //NPCs
@@ -65,6 +67,8 @@ public class AetherIIEntities {
     public static final ResourceKey<EntityType<?>> TEMPEST_THUNDERBALL = createKey("skephid_thunderball");
 
     public static final ResourceKey<EntityType<?>> GRAVITITE_DEBRIS_SHOT = createKey("gravitite_debris_shot");
+
+    public static final ResourceKey<EntityType<?>> DETONATION_PROJECTILE = createKey("detonation_projectile");
 
     //Blocks
     public static final ResourceKey<EntityType<?>> HOVERING_BLOCK = createKey("hovering_block");

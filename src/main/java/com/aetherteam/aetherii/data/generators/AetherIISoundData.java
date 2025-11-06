@@ -981,6 +981,60 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.block.generic.footsteps")
         );
 
+        this.add(AetherIISoundEvents.ENTITY_DETONATION_SENTRY_DEATH,
+                definition().with(
+                        sound("minecraft:mob/slime/big1"),
+                        sound("minecraft:mob/slime/big2"),
+                        sound("minecraft:mob/slime/big3"),
+                        sound("minecraft:mob/slime/big4")
+                ).subtitle("subtitles.aether.entity.detonation_sentry.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_DETONATION_SENTRY_HURT,
+                definition().with(
+                        sound("minecraft:mob/slime/big1"),
+                        sound("minecraft:mob/slime/big2"),
+                        sound("minecraft:mob/slime/big3"),
+                        sound("minecraft:mob/slime/big4")
+                ).subtitle("subtitles.aether.entity.detonation_sentry.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_DETONATION_SENTRY_JUMP,
+                definition().with(
+                        sound("minecraft:mob/slime/big1"),
+                        sound("minecraft:mob/slime/big2"),
+                        sound("minecraft:mob/slime/big3"),
+                        sound("minecraft:mob/slime/big4")
+                ).subtitle("subtitles.aether.entity.detonation_sentry.jump")
+        );
+        this.add(AetherIISoundEvents.ENTITY_DETONATION_SENTRY_SQUISH,
+                definition().with(
+                        sound("minecraft:mob/slime/big1"),
+                        sound("minecraft:mob/slime/big2"),
+                        sound("minecraft:mob/slime/big3"),
+                        sound("minecraft:mob/slime/big4")
+                ).subtitle("subtitles.aether.entity.detonation_sentry.squish")
+        );
+
+        this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_DEATH,
+                definition().with(sound("aether_genesis:entity/sentry_golem/death"))
+                        .subtitle("subtitles.aether_genesis.entity.sentry_golem.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_HURT,
+                definition().with(
+                        sound("aether_genesis:entity/sentry_golem/hurt_1"),
+                        sound("aether_genesis:entity/sentry_golem/hurt_2")
+                ).subtitle("subtitles.aether_genesis.entity.sentry_golem.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_SAY,
+                definition().with(
+                        sound("aether_genesis:entity/sentry_golem/say_1"),
+                        sound("aether_genesis:entity/sentry_golem/say_2")
+                ).subtitle("subtitles.aether_genesis.entity.sentry_golem.say")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_THROW_BOMB,
+                definition().with(sound("minecraft:random/bow"))
+                        .subtitle("subtitles.aether_genesis.entity.sentry_golem.throw_bomb")
+        );
+
         this.add(AetherIISoundEvents.ENTITY_BLIGHTED_BURN,
                 definition().with(
                         sound("minecraft:random/fizz")

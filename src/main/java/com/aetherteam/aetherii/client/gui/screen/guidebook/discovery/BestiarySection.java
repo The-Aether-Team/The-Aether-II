@@ -57,7 +57,9 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
             AetherIIEntityTypes.SKEPHID, AetherIIEntityTypes.ZEPHYR,
             AetherIIEntityTypes.TEMPEST, AetherIIEntityTypes.COCKATRICE,
             AetherIIEntityTypes.ARKENIUM_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON,
-            AetherIIEntityTypes.BLADE_SHROOM_HUNTER
+            AetherIIEntityTypes.BLADE_SHROOM_HUNTER,
+            AetherIIEntityTypes.DETONATION_SENTRY,
+            AetherIIEntityTypes.SENTRY_GOLEM
     );
     private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_BESTIARY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_bestiary.png");
     private static final ResourceLocation SLASH_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/slash");

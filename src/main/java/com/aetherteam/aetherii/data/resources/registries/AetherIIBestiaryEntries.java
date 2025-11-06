@@ -57,6 +57,8 @@ public class AetherIIBestiaryEntries {
     public static final ResourceKey<BestiaryEntry> ARKENIUM_TALUTON = createKey("arkenium_taluton");
     public static final ResourceKey<BestiaryEntry> GRAVITITE_TALUTON = createKey("gravitite_taluton");
     public static final ResourceKey<BestiaryEntry> BLADESHROOM_HUNTER = createKey("bladeshroom_hunter");
+    public static final ResourceKey<BestiaryEntry> DETONATION_SENTRY = createKey("detonation_sentry");
+    public static final ResourceKey<BestiaryEntry> SENTRY_GOLEM = createKey("sentry_golem");
 
     public static final Map<ResourceKey<BestiaryEntry>, Holder<EntityType<?>>> ENTITIES = Map.ofEntries(
             Map.entry(FLYING_COW, AetherIIEntityTypes.FLYING_COW),
@@ -83,7 +85,9 @@ public class AetherIIBestiaryEntries {
             Map.entry(COCKATRICE, AetherIIEntityTypes.COCKATRICE),
             Map.entry(ARKENIUM_TALUTON, AetherIIEntityTypes.ARKENIUM_TALUTON),
             Map.entry(GRAVITITE_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON),
-            Map.entry(BLADESHROOM_HUNTER, AetherIIEntityTypes.BLADE_SHROOM_HUNTER)
+            Map.entry(BLADESHROOM_HUNTER, AetherIIEntityTypes.BLADE_SHROOM_HUNTER),
+            Map.entry(DETONATION_SENTRY, AetherIIEntityTypes.DETONATION_SENTRY),
+            Map.entry(SENTRY_GOLEM, AetherIIEntityTypes.SENTRY_GOLEM)
     );
     public static final List<Holder<EntityType<?>>> NAMED = List.of(
             AetherIIEntityTypes.HIGHFIELDS_TAEGORE,
