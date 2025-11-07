@@ -200,6 +200,16 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
                 AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(),
                 AetherIIBlocks.SHIMMERING_SILT.get());
+        this.tag(AetherIITags.Blocks.MAGNETIC_SHROOM_SURVIVES_ON).add(
+                AetherIIBlocks.AETHER_DIRT.get(),
+                AetherIIBlocks.COARSE_AETHER_DIRT.get(),
+                AetherIIBlocks.MYCELIUM_ROOTS.get(),
+                AetherIIBlocks.FERROSITE_SAND.get(),
+                AetherIIBlocks.FERROSITE_MUD.get(),
+                AetherIIBlocks.HOLYSTONE.get(),
+                AetherIIBlocks.FERROSITE.get(),
+                AetherIIBlocks.RUSTED_FERROSITE.get(),
+                AetherIIBlocks.UNDERSHALE.get());
         this.tag(AetherIITags.Blocks.GRASS_AND_DIRT_REPLACEABLE).add(
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),

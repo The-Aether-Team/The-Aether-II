@@ -92,6 +92,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_FLOWER_PATCH = createKey("magnetic_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_FLOWER_PATCH = createKey("arctic_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_SHROOM_PATCH = createKey("magnetic_shroom_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MYCELIUM_MAGNETIC_SHROOM_PATCH = createKey("mycelium_magnetic_shroom_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_FLOWER_PATCH = createKey("bryalinn_flower_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHORT_ARILUM = createKey("short_arilum");
@@ -692,6 +693,15 @@ public class HighlandsConfiguredFeatures {
         );
         register(context,
                 MAGNETIC_SHROOM_PATCH,
+                Feature.RANDOM_PATCH, new RandomPatchConfiguration(
+                        18,
+                        6,
+                        1,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM.get())), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.MAGNETIC_SHROOM_SURVIVES_ON), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
+                )
+        );
+        register(context,
+                MYCELIUM_MAGNETIC_SHROOM_PATCH,
                 Feature.RANDOM_PATCH, new RandomPatchConfiguration(
                         4,
                         4,
@@ -1614,7 +1624,7 @@ public class HighlandsConfiguredFeatures {
                         new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(), 10).add(AetherIIBlocks.MYCELIUM_ROOTS.get().defaultBlockState(), 15).build()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SMALL_MAGNETIC_SHROOM)), 0.2F)),
-                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MAGNETIC_SHROOM_PATCH)))),
+                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MYCELIUM_MAGNETIC_SHROOM_PATCH)))),
                         CaveSurface.FLOOR,
                         UniformInt.of(1, 3),
                         0.25F,
