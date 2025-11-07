@@ -65,7 +65,7 @@
       "seed": 2345,
       "threshold": -0.15
     },
-    "large": true,
+    "large": false,
     "minimum_size": {
       "type": "minecraft:two_layers_feature_size",
       "limit": 1,

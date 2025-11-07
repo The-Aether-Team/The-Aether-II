@@ -143,6 +143,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> SWAMP_GREATROOT = createKey("swamp_greatroot");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_MAGNETIC_SHROOM = createKey("small_magnetic_shroom");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MEDIUM_MAGNETIC_SHROOM = createKey("medium_magnetic_shroom");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_MAGNETIC_SHROOM = createKey("huge_magnetic_shroom");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_BIOME_MAGNETIC_SCAR = createKey("trees_biome_magnetic_scar");
@@ -210,7 +211,8 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ENCHANTED_GRASS_BLOCKS = createKey("enchanted_grass_blocks");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_AND_DIRT_FLOOR = createKey("grass_and_dirt_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ENCHANTED_GRASS_AND_DIRT_FLOOR = createKey("enchanted_grass_and_dirt_floor");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> MYCELIUM_FLOOR = createKey("mycelium_floor");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_MYCELIUM_FLOOR = createKey("small_mycelium_floor");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_MYCELIUM_FLOOR = createKey("big_mycelium_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_FLOOR = createKey("coarse_aether_dirt_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_CEILING = createKey("coarse_aether_dirt_ceiling");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_FROSTED_CEILING = createKey("coarse_aether_dirt_frosted_ceiling");
@@ -1031,6 +1033,28 @@ public class HighlandsConfiguredFeatures {
                 new TwoLayersFeatureSize(1, 0, 1),
                 false
         ));
+        register(context, MEDIUM_MAGNETIC_SHROOM, AetherIIFeatures.HUGE_MAGNETIC_SHROOM.get(), new BigMagneticShroomConfiguration(
+                new NoiseThresholdProvider(
+                        2345L,
+                        new NormalNoise.NoiseParameters(0, 1.0),
+                        1.0F,
+                        -0.15F,
+                        1.0F,
+                        AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get().defaultBlockState(),
+                        List.of(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get().defaultBlockState()),
+                        List.of(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get().defaultBlockState())),
+                BlockStateProvider.simple(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get().defaultBlockState()
+                        .setValue(HugeMushroomBlock.NORTH, false)
+                        .setValue(HugeMushroomBlock.EAST, false)
+                        .setValue(HugeMushroomBlock.SOUTH, false)
+                        .setValue(HugeMushroomBlock.WEST, false)
+                        .setValue(HugeMushroomBlock.UP, false)
+                        .setValue(HugeMushroomBlock.DOWN, false)),
+                BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()),
+                Optional.empty(),
+                new TwoLayersFeatureSize(1, 0, 1),
+                false
+        ));
         register(context, HUGE_MAGNETIC_SHROOM, AetherIIFeatures.HUGE_MAGNETIC_SHROOM.get(), new BigMagneticShroomConfiguration(
                 new NoiseThresholdProvider(
                         2345L,
@@ -1049,9 +1073,9 @@ public class HighlandsConfiguredFeatures {
                         .setValue(HugeMushroomBlock.UP, false)
                         .setValue(HugeMushroomBlock.DOWN, false)),
                 BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()),
-                Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(COARSE_AETHER_DIRT_FLOOR))),
+                Optional.empty(),
                 new TwoLayersFeatureSize(1, 0, 1),
-                false
+                true
         ));
 
         register(context, TREES_BIOME_MAGNETIC_SCAR, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
@@ -1617,7 +1641,7 @@ public class HighlandsConfiguredFeatures {
         );
         register(
                 context,
-                MYCELIUM_FLOOR,
+                SMALL_MYCELIUM_FLOOR,
                 Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.COARSE_AETHER_DIRT_REPLACEABLE,
@@ -1630,6 +1654,27 @@ public class HighlandsConfiguredFeatures {
                         0.25F,
                         3,
                         0.25F,
+                        UniformInt.of(2, 5),
+                        0.75F
+                )
+        );
+        register(
+                context,
+                BIG_MYCELIUM_FLOOR,
+                Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.AETHER_DIRT,
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(), 10).add(AetherIIBlocks.MYCELIUM_ROOTS.get().defaultBlockState(), 15).build()),
+                        PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
+                                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SMALL_MAGNETIC_SHROOM)), 0.2F),
+                                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_MAGNETIC_SHROOM)), 0.15F),
+                                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HUGE_MAGNETIC_SHROOM)), 0.1F)),
+                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MYCELIUM_MAGNETIC_SHROOM_PATCH)))),
+                        CaveSurface.FLOOR,
+                        UniformInt.of(1, 3),
+                        0.25F,
+                        3,
+                        0.1F,
                         UniformInt.of(2, 5),
                         0.75F
                 )

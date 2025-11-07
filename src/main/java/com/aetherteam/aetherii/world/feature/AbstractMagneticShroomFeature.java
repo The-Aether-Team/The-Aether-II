@@ -36,8 +36,8 @@ public abstract class AbstractMagneticShroomFeature extends Feature<BigMagneticS
     public void generateStem(WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos pos, BigMagneticShroomConfiguration config, Direction direction, IntProvider length) {
         int max = length.sample(random);
         for (int i = 1; i <= max; i++) {
-            pos.setWithOffset(pos, direction);
             this.setBlock(level, pos, config.stemProvider().getState(random, pos));
+            pos.setWithOffset(pos, direction);
         }
     }
 

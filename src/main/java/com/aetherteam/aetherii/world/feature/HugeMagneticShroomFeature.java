@@ -23,7 +23,7 @@ public class HugeMagneticShroomFeature extends AbstractMagneticShroomFeature {
         BigMagneticShroomConfiguration config = context.config();
 
         if (this.canPlace(level, random, pos, config)) {
-            if (config.tall()) {
+            if (!config.tall()) {
                 this.generateSmallShroom(level, random, pos, config);
             } else {
                 BlockPos.MutableBlockPos mutableBlockPos = pos.mutable();
