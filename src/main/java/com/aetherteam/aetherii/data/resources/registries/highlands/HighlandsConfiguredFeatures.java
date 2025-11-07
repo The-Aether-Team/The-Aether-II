@@ -151,6 +151,8 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_BIOME_GLISTENING_SWAMP = createKey("trees_glistening_swamp");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_BIOME_VIOLET_HIGHWOODS = createKey("trees_biome_violet_highwoods");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_SHROOMS_BIOME_GLISTENING_SWAMP = createKey("magnetic_shrooms_biome_glistening_swamp");
+
     // Arctic
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYPINE = createKey("skypine");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYPINE_DECORATED = createKey("skypine_decorated");
@@ -1098,6 +1100,10 @@ public class HighlandsConfiguredFeatures {
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATROOT_SAPLING.get())), 0.002F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(TREES_AMBEROOT_SPARSE), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.001F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(WISPTOP), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.WISPTOP_SAPLING.get()))));
+        register(context, MAGNETIC_SHROOMS_BIOME_GLISTENING_SWAMP, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HUGE_MAGNETIC_SHROOM), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AETHER_LONG_GRASS.get())), 0.15F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_MAGNETIC_SHROOM), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AETHER_LONG_GRASS.get())), 0.35F)
+        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SMALL_MAGNETIC_SHROOM), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AETHER_LONG_GRASS.get()))));
 
         // Arctic
         register(context, SKYPINE, Feature.TREE,

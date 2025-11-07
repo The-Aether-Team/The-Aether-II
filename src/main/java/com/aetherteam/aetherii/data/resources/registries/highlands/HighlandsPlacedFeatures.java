@@ -90,8 +90,8 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> TURQUOISE_FOREST_TREES = createKey("turquoise_forest_trees");
     public static final ResourceKey<PlacedFeature> GLISTENING_SWAMP_TREES = createKey("glistening_swamp_trees");
     public static final ResourceKey<PlacedFeature> GLISTENING_SWAMP_TREES_SUNKEN = createKey("glistening_swamp_trees_sunken");
+    public static final ResourceKey<PlacedFeature> GLISTENING_SWAMP_MAGNETIC_SHROOMS = createKey("glistening_swamp_magnetic_shrooms");
     public static final ResourceKey<PlacedFeature> VIOLET_HIGHWOODS_TREES = createKey("violet_highwoods_trees");
-    public static final ResourceKey<PlacedFeature> HUGE_MAGNETIC_SHROOMS = createKey("huge_magnetic_shrooms");
 
     // Arctic
     public static final ResourceKey<PlacedFeature> FRIGID_SIERRA_TREES = createKey("frigid_sierra_trees");
@@ -490,18 +490,10 @@ public class HighlandsPlacedFeatures {
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                 BiomeFilter.biome(),
                 BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(AetherIIBlocks.GREATROOT_SAPLING.get().defaultBlockState(), BlockPos.ZERO)));
+        register(context, GLISTENING_SWAMP_MAGNETIC_SHROOMS, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MAGNETIC_SHROOMS_BIOME_GLISTENING_SWAMP),
+                HighlandsPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(2)));
         register(context, VIOLET_HIGHWOODS_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_VIOLET_HIGHWOODS),
                 HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
-        register(context, HUGE_MAGNETIC_SHROOMS, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HUGE_MAGNETIC_SHROOM),
-                CountPlacement.of(100),
-                InSquarePlacement.spread(),
-                HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(96), VerticalAnchor.top(), 240)),
-                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 16),
-                SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, -64, -8),
-                BiomeFilter.biome()
-//                new StructureBlacklistFilter()
-//                BlockPredicateFilter.forPredicate(new ScanPredicate(Direction.UP, BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 8))
-        );
 
         // Arctic
         register(context, FRIGID_SIERRA_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_FRIGID_SIERRA),
