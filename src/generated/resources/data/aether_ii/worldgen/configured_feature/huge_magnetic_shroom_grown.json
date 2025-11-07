@@ -66,8 +66,21 @@
       "threshold": -0.15
     },
     "ground_feature": {
-      "feature": "aether_ii:coarse_aether_dirt_floor",
-      "placement": []
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "aether_ii:coarse_aether_dirt"
+          },
+          "weight": 10
+        },
+        {
+          "data": {
+            "Name": "aether_ii:mycelium_roots"
+          },
+          "weight": 15
+        }
+      ]
     },
     "large": false,
     "minimum_size": {

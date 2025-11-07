@@ -1461,7 +1461,7 @@ public class HighlandsConfiguredFeatures {
                         .setValue(HugeMushroomBlock.UP, false)
                         .setValue(HugeMushroomBlock.DOWN, false)),
                 BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get()),
-                Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(COARSE_AETHER_DIRT_FLOOR))),
+                Optional.of(new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(), 10).add(AetherIIBlocks.MYCELIUM_ROOTS.get().defaultBlockState(), 15).build())),
                 new TwoLayersFeatureSize(1, 0, 1),
                 false
         ));

@@ -22,23 +22,12 @@ public class HugeMagneticShroomFeature extends AbstractMagneticShroomFeature {
         RandomSource random = context.random();
         BigMagneticShroomConfiguration config = context.config();
 
+        config.groundProvider().ifPresent(provider -> this.placeGround(level, random, pos.below(), provider));
         if (this.canPlace(level, random, pos, config)) {
             if (!config.tall()) {
-                this.generateSmallShroom(level, random, pos, config);
+                this.generateMediumShroom(level, random, pos, config);
             } else {
                 BlockPos.MutableBlockPos mutableBlockPos = pos.mutable();
-//            if (random.nextBoolean()) {
-//                this.generateStem(level, random, mutableBlockPos, config, Direction.UP, UniformInt.of(1, 2));
-//                List<Direction> directions = new ArrayList<>(Direction.Plane.HORIZONTAL.stream().toList());
-//                Collections.shuffle(directions);
-//                for (Direction direction : Direction.Plane.HORIZONTAL) {
-//                    if (random.nextBoolean()) {
-//                        this.generateStem(level, random, mutableBlockPos, config, Direction.UP, UniformInt.of(1, 3));
-//                        this.generateBranch(level, random, new BlockPos(mutableBlockPos).mutable(), direction, config);
-//                    }
-//                }
-//                this.generateStem(level, random, mutableBlockPos, config, Direction.UP, UniformInt.of(1, 2));
-//            }
                 this.generateStem(level, random, mutableBlockPos, config, Direction.UP, UniformInt.of(1, 2));
                 this.generateLargeShroom(level, random, mutableBlockPos, config);
             }
@@ -48,7 +37,7 @@ public class HugeMagneticShroomFeature extends AbstractMagneticShroomFeature {
     }
 
     public boolean canPlace(WorldGenLevel level, RandomSource random, BlockPos pos, BigMagneticShroomConfiguration config) {
-        int height = 10; //todo ?
+        int height = 10;
 
         for (int y = 0; y <= height; ++y) {
             int i = config.minimumSize().getSizeAtHeight(height, y);
