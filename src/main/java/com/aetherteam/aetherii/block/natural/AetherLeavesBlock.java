@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
-import com.aetherteam.aetherii.mixin.mixins.common.accessor.VegetationBlockAccessor;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -31,10 +30,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -170,7 +166,7 @@ public class AetherLeavesBlock extends LeavesBlock {
     @Override
     public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPosition, Direction facing, BlockState plant) {
         Block plantBlock = plant.getBlock();
-        if (plantBlock instanceof BushBlock bushBlock && ((VegetationBlockAccessor) bushBlock).callMayPlaceOn(Blocks.GRASS_BLOCK.defaultBlockState(), level, soilPosition) && !plant.is(BlockTags.SAPLINGS)) {
+        if (state.getValue(MOSSY) != AetherIIBlockStateProperties.Mossy.NONE && plantBlock instanceof VegetationBlock && !plant.is(BlockTags.SAPLINGS)) {
             return TriState.TRUE;
         } else {
             return super.canSustainPlant(state, level, soilPosition, facing, plant);

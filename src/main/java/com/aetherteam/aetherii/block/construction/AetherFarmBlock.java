@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.block.construction;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.mixin.mixins.common.accessor.VegetationBlockAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
