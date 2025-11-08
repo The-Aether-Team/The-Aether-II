@@ -13,10 +13,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.FarmlandWaterManager;
@@ -95,7 +92,7 @@ public class AetherFarmBlock extends FarmBlock {
     @Override
     public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPosition, Direction facing, BlockState plant) {
         Block plantBlock = plant.getBlock();
-        if ((plantBlock instanceof BushBlock bushBlock && ((VegetationBlockAccessor) bushBlock).callMayPlaceOn(Blocks.FARMLAND.defaultBlockState(), level, soilPosition))) {
+        if (plantBlock instanceof VegetationBlock) {
             return TriState.TRUE;
         } else {
             return super.canSustainPlant(state, level, soilPosition, facing, plant);
