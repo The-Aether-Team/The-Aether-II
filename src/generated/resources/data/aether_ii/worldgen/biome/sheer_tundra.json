@@ -92,7 +92,7 @@
       "aether_ii:lower_purple_aercloud"
     ]
   ],
-  "has_precipitation": true,
+  "has_precipitation": false,
   "spawn_costs": {
     "aether_ii:aechor_plant": {
       "charge": 0.4,

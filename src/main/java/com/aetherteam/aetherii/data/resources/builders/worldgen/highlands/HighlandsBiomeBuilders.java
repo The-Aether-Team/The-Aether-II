@@ -410,7 +410,7 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
                         .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
                         .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 2)),
-                temperature, downfall);
+                temperature, downfall, true);
     }
 
     public static Biome enduringWoodlandBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
@@ -430,7 +430,7 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
                         .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
                         .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 2)),
-                temperature, downfall);
+                temperature, downfall, true);
     }
 
     public static Biome frozenLakesBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
@@ -445,7 +445,7 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
                         .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
                         .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 2)),
-                temperature, downfall);
+                temperature, downfall, true);
     }
 
     public static Biome sheerTundraBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
@@ -468,10 +468,10 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
                         .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
                         .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 2)),
-                temperature, downfall);
+                temperature, downfall, false);
     }
 
-    public static Biome makeArcticBiome(Optional<ResourceKey<PlacedFeature>> tree, BiomeGenerationSettings.Builder builder, MobSpawnSettings.Builder spawnSettingsBuilder,  float temperature, float downfall) {
+    public static Biome makeArcticBiome(Optional<ResourceKey<PlacedFeature>> tree, BiomeGenerationSettings.Builder builder, MobSpawnSettings.Builder spawnSettingsBuilder,  float temperature, float downfall, boolean precipitation) {
         builder = builder
                 .addFeature(GenerationStep.Decoration.RAW_GENERATION, HighlandsPlacedFeatures.COAST_ARCTIC_PACKED_ICE)
                 .addFeature(GenerationStep.Decoration.RAW_GENERATION, HighlandsPlacedFeatures.NOISE_LAKE_ARCTIC)
@@ -518,7 +518,7 @@ public class HighlandsBiomeBuilders {
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HighlandsPlacedFeatures.LOWER_PURPLE_AERCLOUD);
         if (tree.isPresent()) builder = builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, tree.get());
         return fullDefinition(
-                true,
+                precipitation,
                 temperature,
                 downfall,
                 ARCTIC_EFFECTS,

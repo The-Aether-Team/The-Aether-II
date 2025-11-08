@@ -36,7 +36,8 @@ public class ServerLevelMixin {
                 }
             }
 
-            if (serverLevel.isRaining()) {
+            Biome.Precipitation precipitation = biome.getPrecipitationAt(belowHeightmapPos, serverLevel.getSeaLevel());
+            if (serverLevel.isRaining() && precipitation != Biome.Precipitation.NONE) {
                 int i = serverLevel.getGameRules().getInt(GameRules.RULE_SNOW_ACCUMULATION_HEIGHT);
                 if (i > 0 && AetherGrassBlock.shouldSnow(biome, serverLevel, heightmapPos)) {
                     BlockState blockState = serverLevel.getBlockState(heightmapPos);
@@ -54,11 +55,8 @@ public class ServerLevelMixin {
                     }
                 }
 
-                Biome.Precipitation precipitation = biome.getPrecipitationAt(belowHeightmapPos, serverLevel.getSeaLevel());
-                if (precipitation != Biome.Precipitation.NONE) {
-                    BlockState blockState = serverLevel.getBlockState(belowHeightmapPos);
-                    blockState.getBlock().handlePrecipitation(blockState, serverLevel, belowHeightmapPos, precipitation);
-                }
+                BlockState blockState = serverLevel.getBlockState(belowHeightmapPos);
+                blockState.getBlock().handlePrecipitation(blockState, serverLevel, belowHeightmapPos, precipitation);
             }
             ci.cancel();
         }
