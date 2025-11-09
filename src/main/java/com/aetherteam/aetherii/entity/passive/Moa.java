@@ -1,14 +1,5 @@
 package com.aetherteam.aetherii.entity.passive;
 
-import java.util.*;
-import java.util.function.IntFunction;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-
-import javax.annotation.Nullable;
-
-import org.jetbrains.annotations.Contract;
-
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.api.entity.CustomPickItemEntity;
@@ -29,12 +20,8 @@ import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.aetherteam.aetherii.item.components.MoaVariant;
 import com.aetherteam.aetherii.item.miscellaneous.MoaFeedItem;
 import com.aetherteam.aetherii.item.miscellaneous.MoaSaddlebagItem;
-import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.DataResult;
 import com.mojang.serialization.Dynamic;
-import com.mojang.serialization.DynamicOps;
-
 import io.netty.buffer.ByteBuf;
 import net.minecraft.Util;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -86,6 +73,13 @@ import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Contract;
+
+import javax.annotation.Nullable;
+import java.util.*;
+import java.util.function.IntFunction;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class Moa extends MountableAnimal implements ContainerListener, HasCustomInventoryScreen, OwnableEntity, CustomPickItemEntity {
     protected static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_MOA_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
@@ -117,6 +111,8 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
 
     private float flap;
     private float flapO;
+
+    private int flyTick;
 
     private int eggTime = this.getEggTime();
 
@@ -346,9 +342,20 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     @Override
     public void tick() {
         super.tick();
+
+        if (!this.onGround()) {
+            if (++this.flyTick > 40) {
+                if (this.getControllingPassenger() != null && this.getControllingPassenger().isSprinting()) {
+                    this.getControllingPassenger().setSprinting(false);
+                }
+            }
+        } else {
+            this.flyTick = 0;
+        }
+
         AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
         if (gravity != null) {
-            if (!this.isFallFlying()) {
+            if (!this.isFallFlying() && (!this.isVehicle() || this.fallDistance > 3.0)) {
                 double max = this.isVehicle() ? -0.04 : -0.1;
                 double fallSpeed = Math.min(gravity.getValue() * -0.5, max); // Entity isn't allowed to fall too slowly from gravity.
                 if (this.getDeltaMovement().y() < fallSpeed && !this.playerTriedToCrouch()) {
@@ -549,6 +556,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         }
     }
 
+
     /**
      * Handles cooldowns, remaining stamina, and particles when jumping.
      *
@@ -556,16 +564,19 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      */
     @Override
     public void onJump(Mob mob) {
-        super.onJump(mob);
-        this.setJumpCooldown(10);
         if (!this.onGround()) {
             this.setStaminaHealCooldown(300);
             this.setRemainingStamina(this.getRemainingStamina() - 1);
+        }
+
+        super.onJump(mob);
+        this.setJumpCooldown(10);
+        if (!this.onGround()) {
             this.spawnExplosionParticle();
             if (this.getControllingPassenger() instanceof Player && this.isFallFlying()) {
                 Vec3 vec31 = this.getLookAngle();
                 Vec3 vec32 = this.getDeltaMovement();
-                this.setDeltaMovement(vec32.add(vec31.x * 0.1D + (vec31.x * 1.5D - vec32.x) * 0.5D, vec31.y * 0.1D + (vec31.y * 1.5D - vec32.y) * 0.5D, vec31.z * 0.1D + (vec31.z * 1.5D - vec32.z) * 0.5D).scale(1.5));
+                this.setDeltaMovement(vec32.add(vec31.x * 0.1D + (vec31.x * 1.5D - vec32.x) * 0.5D, vec31.y * 0.1D + (vec31.y * 1.5D - vec32.y) * 0.5D, vec31.z * 0.1D + (vec31.z * 1.5D - vec32.z) * 0.5D).scale(0.9));
             }
         }
         this.setFlapCooldown(0); // Causes the flap sound to be played in Moa#riderTick().
@@ -984,6 +995,11 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         this.playSound(AetherIISoundEvents.ENTITY_MOA_STEP.get(), 0.15F, 1.0F);
     }
 
+    @Override
+    protected float nextStep() {
+        return (int) this.moveDist + 4;
+    }
+
     /**
      * @return The {@link Integer} for the maximum amount of jumps from the {@link MoaType}.
      */
@@ -1056,7 +1072,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      */
     @Override
     public boolean canJump() {
-        return this.getRemainingStamina() > 0 && this.getJumpCooldown() == 0;
+        return (this.getRemainingStamina() > 0 && this.getJumpCooldown() == 0 || this.onGround());
     }
 
     public void equipSaddle(ItemStack stack) {
@@ -1091,7 +1107,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     @Override
     public float getSteeringSpeed() {
         Entity entity = this.getControllingPassenger();
-        float f = entity != null && entity.isSprinting() ? (float) (this.getAttributeValue(AetherIIAttributes.MOA_SPEED) * 0.1F) : 0;
+        float f = entity != null && entity.isSprinting() && this.onGround() ? (float) (this.getAttributeValue(AetherIIAttributes.MOA_SPEED) * 0.1F) : 0;
 
         return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.35F + f;
     }
@@ -1112,7 +1128,14 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     @Override
     public float getFlyingSpeed() {
         if (this.isVehicle() && this.isSaddled()) {
-            return this.getSteeringSpeed() * 0.35F;
+            if (this.onGround()) {
+                return this.getSteeringSpeed() * 0.2F;
+            } else
+            if (this.isFallFlying()) {
+                return this.getSteeringSpeed() * 0.25F;
+            } else {
+                return this.getSteeringSpeed() * 0.2F;
+            }
         } else {
             return this.getSteeringSpeed() * 0.025F;
         }
@@ -1326,6 +1349,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 list.add(new ItemStackWithSlot(i, itemStack));
             }
         }
+        output.putBoolean("FlyingMode", this.isFallFlying());
     }
 
     @Override
@@ -1367,6 +1391,9 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         }, () -> {
             this.entityData.set(DATA_SPECIAL_VARIANT, OptionalInt.empty());
         });
+        if (input.getBooleanOr("FlyingMode", false)) {
+            this.startFallFlying();
+        }
     }
 
     public enum KeratinColor implements StringRepresentable {

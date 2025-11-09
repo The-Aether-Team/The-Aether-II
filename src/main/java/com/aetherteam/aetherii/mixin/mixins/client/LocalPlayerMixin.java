@@ -43,9 +43,17 @@ public class LocalPlayerMixin extends AbstractClientPlayer {
 
     @Inject(method = "sendIsSprintingIfNeeded", at = @At(value = "HEAD"))
     private void sendIsSprintingIfNeeded(CallbackInfo ci) {
-        if (--this.the_Aether_II$sprintCooldown <= 0 && this.input.keyPresses.sprint() && this.getControlledVehicle() != null) {
-            this.the_Aether_II$sprintCooldown = 14;
-            ClientPacketDistributor.sendToServer(new MoaFlyModeChangePacket(this.getControlledVehicle().getId()));
+        if (this.getControlledVehicle() != null) {
+            if (this.getControlledVehicle().onGround()) {
+                this.the_Aether_II$sprintCooldown = 14;
+            } else if (!this.getControlledVehicle().onGround()) {
+                if (this.the_Aether_II$sprintCooldown <= 0 && this.input.keyPresses.sprint()) {
+                    this.the_Aether_II$sprintCooldown = 14;
+                    ClientPacketDistributor.sendToServer(new MoaFlyModeChangePacket(this.getControlledVehicle().getId()));
+                } else if (this.the_Aether_II$sprintCooldown > 0 && !this.input.keyPresses.sprint()) {
+                    --this.the_Aether_II$sprintCooldown;
+                }
+            }
         }
     }
 }

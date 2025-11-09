@@ -2,8 +2,10 @@ package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
+import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.aetherteam.aetherii.network.packet.clientbound.SetVehiclePacket;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -106,5 +108,14 @@ public class EntityMixin {
             }
         }
         return null;
+    }
+
+    @ModifyExpressionValue(
+            method = "collide",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;onGround()Z")
+    )
+    private boolean collide(boolean original) {
+        Entity entity = (Entity) (Object) this;
+        return original || entity instanceof Moa moa && moa.hasControllingPassenger();
     }
 }
