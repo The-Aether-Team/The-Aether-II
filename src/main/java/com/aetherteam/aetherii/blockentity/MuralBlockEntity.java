@@ -13,7 +13,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap.Builder;
 import net.minecraft.nbt.CompoundTag;
@@ -26,6 +25,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.model.data.ModelData;
+import net.neoforged.neoforge.model.data.ModelProperty;
 
 public class MuralBlockEntity extends BlockEntity {
     @Nullable
@@ -122,5 +123,19 @@ public class MuralBlockEntity extends BlockEntity {
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         return this.saveCustomOnly(registries);
+    }
+
+    public record MuralData(Direction facing, Holder<Mural> mural, int width, int height, int offsetX, int offsetY) {
+        public static final ModelProperty<MuralData> PROPERTY = new ModelProperty<>();
+    }
+
+    @Override
+    public ModelData getModelData() {
+        Holder<Mural> mural = this.getMural().orElse(null);
+        BlockState blockState = this.getBlockState();
+        if (mural != null) {
+            return ModelData.of(MuralData.PROPERTY, new MuralData(this.getDirection(), mural, mural.value().width(), mural.value().height(), blockState.getValue(MuralBlock.X_OFFSET), blockState.getValue(MuralBlock.Y_OFFSET)));
+        }
+        return super.getModelData();
     }
 }

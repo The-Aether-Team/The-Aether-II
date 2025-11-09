@@ -14,6 +14,7 @@ import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.AmbientOcclusionLightModel;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.FastModel;
+import com.aetherteam.aetherii.client.renderer.block.model.blockstate.MuralModel;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.TrunkModel;
 import com.aetherteam.aetherii.client.renderer.blockentity.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
@@ -102,7 +103,7 @@ public class AetherIIRenderers {
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ARKENIUM_FORGE.get(), ArkeniumForgeRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ALKAHEST_PURIFIER.get(), AlkahestPurifierRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.AMBROSIUM_CAMPFIRE.get(), CampfireRenderer::new);
-        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.MURAL.get(), MuralRenderer::new);
+//        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.MURAL.get(), MuralRenderer::new);
 
         // Entities
         // Passive
@@ -168,15 +169,15 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_BED_HEAD, BedRenderer::createHeadLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA_EGG, MoaEggModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.ALKAHEST_PURIFIER, AlkahestPurifierModel::createBodyLayer);
-        for (int width = 1; width <= Mural.MAX_SIZE; width++) {
-            for (int height = 1; height <= Mural.MAX_SIZE; height++) {
-                for (int offsetX = 0; offsetX < width; offsetX++) {
-                    for (int offsetY = 0; offsetY < height; offsetY++) {
-                        event.registerLayerDefinition(AetherIIModelLayers.getMuralFace(width, height, offsetX, offsetY), getMuralFaceLayerCreator(width, height, offsetX, offsetY));
-                    }
-                }
-            }
-        }
+//        for (int width = 1; width <= Mural.MAX_SIZE; width++) {
+//            for (int height = 1; height <= Mural.MAX_SIZE; height++) {
+//                for (int offsetX = 0; offsetX < width; offsetX++) {
+//                    for (int offsetY = 0; offsetY < height; offsetY++) {
+//                        event.registerLayerDefinition(AetherIIModelLayers.getMuralFace(width, height, offsetX, offsetY), getMuralFaceLayerCreator(width, height, offsetX, offsetY));
+//                    }
+//                }
+//            }
+//        }
 
         // Entities
         // Passive
@@ -292,6 +293,7 @@ public class AetherIIRenderers {
 
         getModels(event.getBakingResult().blockStateModels(), fastBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new FastModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
+        getModels(event.getBakingResult().blockStateModels(), List.of(AetherIIBlocks.MURAL)).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new MuralModel(entry.getValue())));
     }
 
     private static List<Map.Entry<BlockState, BlockStateModel>> getModels(Map<BlockState, BlockStateModel> originalModels, List<DeferredBlock<? extends Block>> blocks) {
@@ -308,10 +310,10 @@ public class AetherIIRenderers {
 
     public static void registerSpecialModelRenderers(RegisterSpecialModelRendererEvent event) {
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier"), AlkahestPurifierSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "mural"), MuralSpecialRenderer.Unbaked.MAP_CODEC);
+//        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "mural"), MuralSpecialRenderer.Unbaked.MAP_CODEC);
     }
 
-    private static Supplier<LayerDefinition> getMuralFaceLayerCreator(int width, int height, int offsetX, int offsetY) {
-        return () -> MuralRenderer.createFaceLayer(width, height, offsetX, offsetY);
-    }
+//    private static Supplier<LayerDefinition> getMuralFaceLayerCreator(int width, int height, int offsetX, int offsetY) {
+//        return () -> MuralRenderer.createFaceLayer(width, height, offsetX, offsetY);
+//    }
 }

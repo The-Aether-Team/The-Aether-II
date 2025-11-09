@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import com.aetherteam.aetherii.AetherII;
 import org.joml.Vector3f;
 
 import com.aetherteam.aetherii.api.Mural;
@@ -75,6 +76,7 @@ public class MuralRenderer implements BlockEntityRenderer<MuralBlockEntity> {
     
     @Override
     public void render(MuralBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, Vec3 cameraPos) {
+//        AetherII.LOGGER.info(String.valueOf(blockEntity.getBlockPos()));
         poseStack.pushPose();
         var direction = blockEntity.getDirection();
         poseStack.translate(0.5, 0.0, 0.5);
