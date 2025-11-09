@@ -486,6 +486,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.LILICHIME.get());
                 output.accept(AetherIIBlocks.PLURACIAN.get());
                 output.accept(AetherIIBlocks.SATIVAL_SHOOT.get());
+                output.accept(AetherIIBlocks.AETHER_CLOVER.get());
+                output.accept(AetherIIBlocks.AETHER_CLOVER_TALL.get());
                 output.accept(AetherIIItems.BRETTL_CANE.get());
                 output.accept(AetherIIBlocks.BRETTL_FLOWER.get());
                 output.accept(AetherIIBlocks.BRETTL_GRASS_BUNDLE.get());

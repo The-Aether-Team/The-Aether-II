@@ -467,6 +467,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.LILICHIME.get(),
                 AetherIIBlocks.PLURACIAN.get(),
                 AetherIIBlocks.SATIVAL_SHOOT.get(),
+                AetherIIBlocks.AETHER_CLOVER.get(),
+                AetherIIBlocks.AETHER_CLOVER_TALL.get(),
                 AetherIIBlocks.AECHOR_CUTTING.get(),
                 AetherIIBlocks.CARRION_CUTTING.get()
         );
@@ -515,7 +517,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.POTTED_PLURACIAN.get(),
                 AetherIIBlocks.SATIVAL_SHOOT.get(),
                 AetherIIBlocks.BLADE_POA.get(),
-                AetherIIBlocks.SHIELD_FERN.get()
+                AetherIIBlocks.SHIELD_FERN.get(),
+                AetherIIBlocks.AETHER_CLOVER.get(),
+                AetherIIBlocks.AETHER_CLOVER_TALL.get()
         );
         this.tag(BlockTags.ICE).add(
                 AetherIIBlocks.ARCTIC_ICE.get(),

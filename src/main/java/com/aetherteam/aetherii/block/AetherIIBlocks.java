@@ -31,7 +31,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ColorRGBA;
@@ -103,6 +102,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> MAGNETIC_SHROOM_BLOCK = register("magnetic_shroom_block", HugeMushroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).instrument(NoteBlockInstrument.BASS).strength(0.2F).sound(SoundType.WOOD).ignitedByLava());
     public static final DeferredBlock<Block> SPOTTED_MAGNETIC_SHROOM_BLOCK = register("spotted_magnetic_shroom_block", HugeMushroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).instrument(NoteBlockInstrument.BASS).strength(0.2F).sound(SoundType.WOOD).ignitedByLava().lightLevel((state) -> 6));
     public static final DeferredBlock<Block> MAGNETIC_SHROOM_STEM = register("magnetic_shroom_stem", HugeMushroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).instrument(NoteBlockInstrument.BASS).strength(0.2F).sound(SoundType.WOOD).ignitedByLava());
+
     // Arctic
     public static final DeferredBlock<Block> ARCTIC_SNOW_BLOCK = register("arctic_snow_block", () -> Block.Properties.of().mapColor(MapColor.SNOW).requiresCorrectToolForDrops().strength(0.2F).sound(SoundType.SNOW));
     @SuppressWarnings("deprecation")
@@ -262,6 +262,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> LILICHIME = register("lilichime", (properties) -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, properties), () -> Block.Properties.ofFullCopy(Blocks.DANDELION)); //todo mob effects
     public static final DeferredBlock<Block> PLURACIAN = register("pluracian", (properties) -> new FacingFlowerBlock(MobEffects.SLOW_FALLING, 12, properties), () -> Block.Properties.ofFullCopy(Blocks.DANDELION)); //todo mob effects
     public static final DeferredBlock<Block> SATIVAL_SHOOT = register("satival_shoot", (properties) -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, properties), () -> Block.Properties.ofFullCopy(Blocks.DANDELION)); //todo mob effects
+    public static final DeferredBlock<Block> AETHER_CLOVER = register("aether_clover", (properties) -> new CloverBlock(MobEffects.SLOW_FALLING, 12, 5, properties), () -> Block.Properties.ofFullCopy(Blocks.DANDELION)); //todo mob effects
+    public static final DeferredBlock<Block> AETHER_CLOVER_TALL = register("aether_clover_tall", (properties) -> new CloverBlock(MobEffects.SLOW_FALLING, 12, 16, properties), () -> Block.Properties.ofFullCopy(Blocks.DANDELION)); //todo mob effects
     public static final DeferredBlock<Block> HOLPUPEA = register("holpupea", MossFlowersBlock::new, () -> Block.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<Block> BLADE_POA = register("blade_poa", (properties) -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, properties), () -> Block.Properties.ofFullCopy(Blocks.DANDELION)); //todo mob effects
     public static final DeferredBlock<Block> AECHOR_CUTTING = register("aechor_cutting", (properties) -> new PlantMobCuttingBlock(AetherIIEntityTypes.AECHOR_PLANT::get, properties), () -> Block.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().instabreak().sound(SoundType.GRASS).offsetType(Block.OffsetType.XZ).pushReaction(PushReaction.DESTROY));

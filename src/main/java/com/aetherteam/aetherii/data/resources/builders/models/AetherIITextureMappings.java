@@ -97,6 +97,13 @@ public class AetherIITextureMappings {
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(path, "_side"));
     }
 
+    public static TextureMapping aetherClover(Block clover) {
+        return new TextureMapping()
+                .put(TextureSlot.FLOWERBED, TextureMapping.getBlockTexture(clover))
+                .copySlot(TextureSlot.FLOWERBED, TextureSlot.PARTICLE)
+                .put(TextureSlot.STEM, TextureMapping.getBlockTexture(clover, "_stem"));
+    }
+
     public static TextureMapping bushBlock(Block bush) {
         return new TextureMapping()
                 .put(TextureSlot.TEXTURE, TextureMapping.getBlockTexture(bush))
