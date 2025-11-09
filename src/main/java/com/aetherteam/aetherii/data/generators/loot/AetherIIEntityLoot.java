@@ -4,8 +4,8 @@ import com.aetherteam.aetherii.advancement.predicate.KirridPredicate;
 import com.aetherteam.aetherii.advancement.predicate.SheepuffPredicate;
 import com.aetherteam.aetherii.advancement.predicate.SwetVariantPredicate;
 import com.aetherteam.aetherii.api.SwetVariant;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.data.resources.registries.AetherIISwetVariants;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.aetherteam.aetherii.entity.passive.Sheepuff;
@@ -299,7 +299,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
 
     public static LootTable.Builder createSwetTable(HolderLookup.Provider registries) {
         AlternativesEntry.Builder builder = AlternativesEntry.alternatives();
-        HolderLookup.RegistryLookup<SwetVariant> registry = registries.lookupOrThrow(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY);
+        HolderLookup.RegistryLookup<SwetVariant> registry = registries.lookupOrThrow(AetherIIRegistries.SWET_VARIANT);
         List<ResourceKey<SwetVariant>> variantKeys = new ArrayList<>(registry.listElementIds().toList());
         Collections.sort(variantKeys);
         for (ResourceKey<SwetVariant> swetVariantId : variantKeys) {

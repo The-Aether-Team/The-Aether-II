@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.api.SwetVariant;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIISwetVariants;
@@ -78,7 +79,7 @@ public class Swet extends Monster {
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(DATA_VARIANT_ID, this.registryAccess().lookupOrThrow(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY).getOrThrow(AetherIISwetVariants.BLUE));
+        builder.define(DATA_VARIANT_ID, this.registryAccess().lookupOrThrow(AetherIIRegistries.SWET_VARIANT).getOrThrow(AetherIISwetVariants.BLUE));
         builder.define(DATA_MID_JUMP_ID, false);
         builder.define(DATA_WATER_DAMAGE_ID, 0.0F);
         builder.define(DATA_FOOD_SATURATION_ID, 1.0F);
@@ -305,7 +306,7 @@ public class Swet extends Monster {
     @Override
     public void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
-        VariantUtils.readVariant(input, AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY).ifPresent(this::setVariant);
+        VariantUtils.readVariant(input, AetherIIRegistries.SWET_VARIANT).ifPresent(this::setVariant);
 
         this.setWaterDamage(input.getFloatOr("WaterDamageScale", 0));
         this.setFoodSaturation(input.getFloatOr("Saturation", 0));

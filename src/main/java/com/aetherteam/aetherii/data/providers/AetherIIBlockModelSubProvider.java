@@ -10,7 +10,6 @@ import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import net.minecraft.world.level.block.state.properties.*;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.aetherteam.aetherii.AetherII;
@@ -18,13 +17,13 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.furniture.OutpostCampfireBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.natural.*;
-import com.aetherteam.aetherii.block.utility.AltarBlock;
 import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
 import com.aetherteam.aetherii.block.utility.BedrollBlock;
 import com.aetherteam.aetherii.client.AetherIIColorResolvers;
 import com.aetherteam.aetherii.client.renderer.block.model.builder.TrunkModelBuilder;
 import com.aetherteam.aetherii.client.renderer.item.color.AetherGrassColorSource;
 import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
+import com.aetherteam.aetherii.client.renderer.item.model.MuralSpecialRenderer;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureSlots;
@@ -52,6 +51,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.MossyCarpetBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.state.properties.*;
 
 public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public AetherIIBlockModelSubProvider(Consumer<BlockModelDefinitionGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
@@ -881,7 +881,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 
     public void createBed(Block block, Block particle, ResourceLocation location) {
         MultiVariant bed = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("skyroot_bed"));
-        this.blockStateOutput.accept(createSimpleBlock(block, bed));
+        this.blockStateOutput.accept( createSimpleBlock(block, bed));
         Item item = block.asItem();
         ResourceLocation inventoryLocation = ModelTemplates.BED_INVENTORY.create(ModelLocationUtils.getModelLocation(item), TextureMapping.particle(particle), this.modelOutput);
         this.itemModelOutput.accept(item, ItemModelUtils.specialModel(inventoryLocation, new BedSpecialRenderer.Unbaked(location)));
@@ -910,5 +910,16 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
             return plainVariant(model);
         })));
         this.registerSimpleFlatItemModel(AetherIIBlocks.OUTPOST_CAMPFIRE.asItem());
+    }
+
+    public void createMural() {
+        ResourceLocation modelLocation = ModelLocationUtils.getModelLocation(AetherIIBlocks.MURAL.get());
+        MultiVariant mural = plainVariant(modelLocation);
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.MURAL.get(), mural).with(ROTATION_HORIZONTAL_FACING));
+        Item item = AetherIIBlocks.MURAL.get().asItem();
+        // this.registerSimpleItemModel(item, ModelTemplates.CUBE_COLUMN.create(item, TextureMapping.column(AetherIIBlocks.MURAL.get()), this.modelOutput));
+        ItemModel.Unbaked baseModel = ItemModelUtils.plainModel(modelLocation);
+        ItemModel.Unbaked specialModel = ItemModelUtils.specialModel(modelLocation, new MuralSpecialRenderer.Unbaked());
+        this.itemModelOutput.accept(item, ItemModelUtils.composite(baseModel, specialModel));
     }
 }

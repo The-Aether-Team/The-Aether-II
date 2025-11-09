@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.api.SwetVariant;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -21,15 +22,13 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class AetherIISwetVariants {
-    public static final ResourceKey<Registry<SwetVariant>> SWET_VARIANT_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet_variant"));
-
     public static final ResourceKey<SwetVariant> BLUE = createKey("blue");
     public static final ResourceKey<SwetVariant> GREEN = createKey("green");
     public static final ResourceKey<SwetVariant> PURPLE = createKey("purple");
     public static final ResourceKey<SwetVariant> GOLDEN = createKey("golden");
 
     private static ResourceKey<SwetVariant> createKey(String name) {
-        return ResourceKey.create(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.SWET_VARIANT, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<SwetVariant> context) {
@@ -57,13 +56,13 @@ public class AetherIISwetVariants {
     }
 
     public static Holder<SwetVariant> getSpawnVariant(RandomSource random, RegistryAccess registryAccess, Holder<Biome> biome) {
-        Registry<SwetVariant> registry = registryAccess.lookupOrThrow(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY);
+        Registry<SwetVariant> registry = registryAccess.lookupOrThrow(AetherIIRegistries.SWET_VARIANT);
         Optional<Holder.Reference<SwetVariant>> optional = registry.listElements().filter((variant) -> variant.value().biomes().contains(biome)).skip(random.nextInt(registry.listElements().toList().size())).findFirst().or(() -> registry.get(BLUE));
         Objects.requireNonNull(registry);
         return optional.or(registry::getAny).orElseThrow();
     }
 
     public static Registry<SwetVariant> getRegistry(RegistryAccess registryAccess) {
-        return registryAccess.lookupOrThrow(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY);
+        return registryAccess.lookupOrThrow(AetherIIRegistries.SWET_VARIANT);
     }
 }

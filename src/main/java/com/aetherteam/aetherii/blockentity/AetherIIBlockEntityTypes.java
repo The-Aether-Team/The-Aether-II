@@ -41,6 +41,9 @@ public class AetherIIBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<OutpostCampfireBlockEntity>> OUTPOST_CAMPFIRE = BLOCK_ENTITY_TYPES.register("outpost_campfire", () ->
             new BlockEntityType<>(OutpostCampfireBlockEntity::new, AetherIIBlocks.OUTPOST_CAMPFIRE.get()));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MuralBlockEntity>> MURAL = BLOCK_ENTITY_TYPES.register("mural", () ->
+            new BlockEntityType<>(MuralBlockEntity::new, AetherIIBlocks.MURAL.get()));
+
     public static void registerValidBlockEntityTypes(BlockEntityTypeAddBlocksEvent event) {
         event.modify(BlockEntityType.SIGN, AetherIIBlocks.SKYROOT_WALL_SIGN.get(), AetherIIBlocks.SKYROOT_SIGN.get(),
                 AetherIIBlocks.GREATROOT_WALL_SIGN.get(), AetherIIBlocks.GREATROOT_SIGN.get(),

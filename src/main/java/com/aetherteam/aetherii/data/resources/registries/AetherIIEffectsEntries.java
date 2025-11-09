@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.Holder;
@@ -18,8 +19,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public class AetherIIEffectsEntries {
-    public static final ResourceKey<Registry<EffectsEntry>> EFFECTS_ENTRY_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effects_entry"));
-
     public static final ResourceKey<EffectsEntry> VULNERABILITY = createKey("vulnerability");
     public static final ResourceKey<EffectsEntry> WOUND = createKey("wound");
     public static final ResourceKey<EffectsEntry> STUN = createKey("stun");
@@ -70,7 +69,7 @@ public class AetherIIEffectsEntries {
     );
 
     private static ResourceKey<EffectsEntry> createKey(String name) {
-        return ResourceKey.create(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.EFFECTS_ENTRY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<EffectsEntry> context) {
@@ -90,6 +89,6 @@ public class AetherIIEffectsEntries {
     }
 
     public static Registry<EffectsEntry> getRegistry(RegistryAccess registryAccess) {
-        return registryAccess.lookupOrThrow(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY);
+        return registryAccess.lookupOrThrow(AetherIIRegistries.EFFECTS_ENTRY);
     }
 }

@@ -1,0 +1,9 @@
+{
+    "sources": [
+        {
+            "type": "directory",
+            "source": "entity/mural",
+            "prefix": "entity/mural/"
+        }
+    ]
+}

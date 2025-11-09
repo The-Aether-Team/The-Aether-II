@@ -18,8 +18,9 @@ import java.util.function.Consumer;
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin<E> {
     @Inject(method = "addDetailsToTooltip", at = @At(value = "FIELD", target = "Lnet/minecraft/core/component/DataComponents;STORED_ENCHANTMENTS:Lnet/minecraft/core/component/DataComponentType;", shift = At.Shift.BEFORE))
-    private void addReinforcementTooltip(Item.TooltipContext context, TooltipDisplay tooltipDisplay, Player player, TooltipFlag tooltipFlag, Consumer<Component> tooltipAdder, CallbackInfo ci, @Local Consumer<Component> consumer) {
+    private void aether$addDetailsToTooltip(Item.TooltipContext context, TooltipDisplay tooltipDisplay, Player player, TooltipFlag tooltipFlag, Consumer<Component> tooltipAdder, CallbackInfo ci, @Local Consumer<Component> consumer) {
         ItemStack itemStack = (ItemStack) (Object) this;
         itemStack.addToTooltip(AetherIIDataComponents.REINFORCEMENT_TIER, context, consumer, tooltipFlag);
+        itemStack.addToTooltip(AetherIIDataComponents.MURAL_SECTION, context, consumer, tooltipFlag);
     }
 }

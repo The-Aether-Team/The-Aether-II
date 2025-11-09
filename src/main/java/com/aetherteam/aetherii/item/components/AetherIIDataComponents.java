@@ -1,8 +1,14 @@
 package com.aetherteam.aetherii.item.components;
 
+import java.util.List;
+
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.api.Mural;
+import com.aetherteam.aetherii.blockentity.MuralSection;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.mojang.serialization.Codec;
+
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -12,8 +18,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.List;
 
 public class AetherIIDataComponents {
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPES = DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, AetherII.MODID);
@@ -30,4 +34,6 @@ public class AetherIIDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<ReinforcementTier>> REINFORCEMENT_TIER = DATA_COMPONENT_TYPES.register("reinforcement_tier", () -> DataComponentType.<ReinforcementTier>builder().persistent(ReinforcementTier.CODEC).networkSynchronized(ReinforcementTier.STREAM_CODEC).cacheEncoding().build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<ItemStack>>> CHARMS = DATA_COMPONENT_TYPES.register("charms", () -> DataComponentType.<List<ItemStack>>builder().persistent(ItemStack.OPTIONAL_CODEC.listOf()).networkSynchronized(ItemStack.OPTIONAL_STREAM_CODEC.apply(ByteBufCodecs.list())).cacheEncoding().build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<GuidebookEntryData>>> GUIDEBOOK_ENTRY_DATA = DATA_COMPONENT_TYPES.register("guidebook_entry_data", () -> DataComponentType.<List<GuidebookEntryData>>builder().persistent(GuidebookEntryData.CODEC.listOf()).networkSynchronized(GuidebookEntryData.STREAM_CODEC.apply(ByteBufCodecs.list())).cacheEncoding().build());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<MuralSection>> MURAL_SECTION = DATA_COMPONENT_TYPES.register("mural_section", () -> DataComponentType.<MuralSection>builder().persistent(MuralSection.CODEC).networkSynchronized(MuralSection.STREAM_CODEC).build());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Holder<Mural>>> MURAL = DATA_COMPONENT_TYPES.register("mural", () -> DataComponentType.<Holder<Mural>>builder().persistent(Mural.CODEC).networkSynchronized(Mural.STREAM_CODEC).build());
 }

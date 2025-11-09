@@ -3,22 +3,19 @@ package com.aetherteam.aetherii.client.renderer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.api.Mural;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
-import com.aetherteam.aetherii.client.renderer.block.model.blockstate.TrunkModel;
-import com.aetherteam.aetherii.client.renderer.blockentity.*;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.AmbientOcclusionLightModel;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.FastModel;
-import com.aetherteam.aetherii.client.renderer.blockentity.AlkahestPurifierRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.ArkeniumForgeRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.MoaEggRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
+import com.aetherteam.aetherii.client.renderer.block.model.blockstate.TrunkModel;
+import com.aetherteam.aetherii.client.renderer.blockentity.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
 import com.aetherteam.aetherii.client.renderer.entity.*;
 import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLatchLayer;
@@ -26,23 +23,20 @@ import com.aetherteam.aetherii.client.renderer.entity.model.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.ArcticBurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.ArcticKirridBabyModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.ArcticKirridModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.HighfieldsKirridBabyModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.HighfieldsKirridModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.MagneticKirridBabyModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.MagneticKirridModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
 import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
+import com.aetherteam.aetherii.client.renderer.item.model.MuralSpecialRenderer;
 import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Moa;
-
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
+
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.blockentity.BedRenderer;
 import net.minecraft.client.renderer.blockentity.CampfireRenderer;
@@ -57,9 +51,11 @@ import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.client.model.item.DynamicFluidContainerModel;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterBlockStateModels;
+import net.neoforged.neoforge.client.event.RegisterItemModelsEvent;
+import net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
@@ -106,6 +102,7 @@ public class AetherIIRenderers {
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ARKENIUM_FORGE.get(), ArkeniumForgeRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ALKAHEST_PURIFIER.get(), AlkahestPurifierRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.AMBROSIUM_CAMPFIRE.get(), CampfireRenderer::new);
+        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.MURAL.get(), MuralRenderer::new);
 
         // Entities
         // Passive
@@ -171,6 +168,15 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_BED_HEAD, BedRenderer::createHeadLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA_EGG, MoaEggModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.ALKAHEST_PURIFIER, AlkahestPurifierModel::createBodyLayer);
+        for (int width = 1; width <= Mural.MAX_SIZE; width++) {
+            for (int height = 1; height <= Mural.MAX_SIZE; height++) {
+                for (int offsetX = 0; offsetX < width; offsetX++) {
+                    for (int offsetY = 0; offsetY < height; offsetY++) {
+                        event.registerLayerDefinition(AetherIIModelLayers.getMuralFace(width, height, offsetX, offsetY), getMuralFaceLayerCreator(width, height, offsetX, offsetY));
+                    }
+                }
+            }
+        }
 
         // Entities
         // Passive
@@ -302,5 +308,10 @@ public class AetherIIRenderers {
 
     public static void registerSpecialModelRenderers(RegisterSpecialModelRendererEvent event) {
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier"), AlkahestPurifierSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "mural"), MuralSpecialRenderer.Unbaked.MAP_CODEC);
+    }
+
+    private static Supplier<LayerDefinition> getMuralFaceLayerCreator(int width, int height, int offsetX, int offsetY) {
+        return () -> MuralRenderer.createFaceLayer(width, height, offsetX, offsetY);
     }
 }

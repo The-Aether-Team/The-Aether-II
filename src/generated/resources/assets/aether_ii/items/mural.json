@@ -1,0 +1,18 @@
+{
+  "model": {
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "aether_ii:block/mural"
+      },
+      {
+        "type": "minecraft:special",
+        "base": "aether_ii:block/mural",
+        "model": {
+          "type": "aether_ii:mural"
+        }
+      }
+    ]
+  }
+}

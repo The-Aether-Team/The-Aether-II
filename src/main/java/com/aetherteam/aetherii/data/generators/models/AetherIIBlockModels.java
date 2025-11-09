@@ -458,5 +458,6 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
 
         // Furniture
         this.createOutpostCampfire();
+        this.createMural();
     }
 }

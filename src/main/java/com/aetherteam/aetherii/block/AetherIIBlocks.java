@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.block;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -17,11 +18,14 @@ import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.portal.AetherPortalBlock;
 import com.aetherteam.aetherii.block.utility.*;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
+import com.aetherteam.aetherii.blockentity.MuralSection;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundTypes;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIMurals;
 import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsConfiguredFeatures;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.materials.RockItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.FireBlockAccessor;
 import com.aetherteam.aetherii.world.tree.AetherIITreeGrowers;
@@ -312,7 +316,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     // Ground Decoration
     public static final DeferredBlock<Block> SKYROOT_TWIG = register("skyroot_twig", TwigBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).noOcclusion().noCollission().instabreak().sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> HOLYSTONE_ROCK = register("holystone_rock", RockBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).noOcclusion().noCollission().instabreak().sound(SoundType.STONE).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> HOLYSTONE_ROCK = register("holystone_rock", RockBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).noOcclusion().noCollission().instabreak().sound(SoundType.STONE).pushReaction(PushReaction.DESTROY), RockItem::new);
 
     // Skyroot Planks
     public static final DeferredBlock<Block> SKYROOT_PLANKS = register("skyroot_planks", () -> Block.Properties.ofFullCopy(Blocks.OAK_PLANKS));
@@ -688,7 +692,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
 
     // Utility
-    public static final DeferredBlock<Block> AMBROSIUM_TORCH = register("ambrosium_torch", AmbrosiumTorchBlock::new, () -> Block.Properties.ofFullCopy(Blocks.TORCH));
+    public static final DeferredBlock<Block> AMBROSIUM_TORCH = register("ambrosium_torch", AmbrosiumTorchBlock::new, () -> Block.Properties.ofFullCopy(Blocks.TORCH), torchItem(() -> AetherIIBlocks.AMBROSIUM_WALL_TORCH));
     public static final DeferredBlock<Block> AMBROSIUM_WALL_TORCH = registerWithoutItem("ambrosium_wall_torch", AmbrosiumWallTorchBlock::new, () -> Block.Properties.ofFullCopy(Blocks.WALL_TORCH));
     public static final DeferredBlock<Block> ARKENIUM_LANTERN = register("arkenium_lantern", ArkeniumLanternBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LANTERN));
     public static final DeferredBlock<Block> RUSTIC_ARKENIUM_LANTERN = register("rustic_arkenium_lantern", RusticArkeniumLanternBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LANTERN));
@@ -702,23 +706,32 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<CampfireBlock> AMBROSIUM_CAMPFIRE = register("ambrosium_campfire", (properties) -> new AmbrosiumCampfireBlock(false, 1, properties), () -> Block.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).lightLevel((state) -> state.getValue(BlockStateProperties.LIT) ? 15 : 0).noOcclusion().ignitedByLava());
     public static final DeferredBlock<Block> SKYROOT_CHEST = register("skyroot_chest", (properties) -> new SkyrootChestBlock(properties, AetherIIBlockEntityTypes.SKYROOT_CHEST::get), () -> Block.Properties.ofFullCopy(Blocks.CHEST));
     public static final DeferredBlock<LadderBlock> SKYROOT_LADDER = register("skyroot_ladder", LadderBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LADDER).strength(0.4F).sound(SoundType.LADDER).noOcclusion());
-    public static final DeferredBlock<BedrollBlock> CLOUDWOOL_BEDROLL = register("cloudwool_bedroll", BedrollBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).sound(SoundType.WOOL).strength(0.2F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<BedBlock> SKYROOT_BED = register("skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.WHITE, properties), () -> Block.Properties.ofFullCopy(Blocks.WHITE_BED));
+    public static final DeferredBlock<BedrollBlock> CLOUDWOOL_BEDROLL = register("cloudwool_bedroll", BedrollBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).sound(SoundType.WOOL).strength(0.2F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY), (block, properties) -> new BedItem(block, properties.stacksTo(4)));
+    public static final DeferredBlock<BedBlock> SKYROOT_BED = register("skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.WHITE, properties), () -> Block.Properties.ofFullCopy(Blocks.WHITE_BED), (block, properties) -> new BedItem(block, properties.stacksTo(1)));
 
-    public static final DeferredBlock<StandingSignBlock> SKYROOT_SIGN = register("skyroot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.SKYROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
-    public static final DeferredBlock<WallSignBlock> SKYROOT_WALL_SIGN = registerWithoutItem("skyroot_wall_sign", (properties) -> new WallSignBlock(AetherIIWoodTypes.SKYROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
-    public static final DeferredBlock<CeilingHangingSignBlock> SKYROOT_HANGING_SIGN = register("skyroot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.SKYROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
-    public static final DeferredBlock<WallHangingSignBlock> SKYROOT_WALL_HANGING_SIGN = registerWithoutItem("skyroot_wall_hanging_sign", (properties) -> new WallHangingSignBlock(AetherIIWoodTypes.SKYROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
+    private static Block.Properties skyrootSignProperties() { return Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD); }
+    public static final DeferredBlock<StandingSignBlock> SKYROOT_SIGN = register("skyroot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.SKYROOT, properties), AetherIIBlocks::skyrootSignProperties, signItem(() -> AetherIIBlocks.SKYROOT_WALL_SIGN));
+    public static final DeferredBlock<WallSignBlock> SKYROOT_WALL_SIGN = registerWithoutItem("skyroot_wall_sign", (properties) -> new WallSignBlock(AetherIIWoodTypes.SKYROOT, properties), AetherIIBlocks::skyrootSignProperties);
 
-    public static final DeferredBlock<StandingSignBlock> GREATROOT_SIGN = register("greatroot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.GREATROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
-    public static final DeferredBlock<WallSignBlock> GREATROOT_WALL_SIGN = registerWithoutItem("greatroot_wall_sign", (properties) -> new WallSignBlock(AetherIIWoodTypes.GREATROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
-    public static final DeferredBlock<CeilingHangingSignBlock> GREATROOT_HANGING_SIGN = register("greatroot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.GREATROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
-    public static final DeferredBlock<WallHangingSignBlock> GREATROOT_WALL_HANGING_SIGN = registerWithoutItem("greatroot_wall_hanging_sign", (properties) -> new WallHangingSignBlock(AetherIIWoodTypes.GREATROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
+    private static Block.Properties skyrootHangingSignProperties() { return Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava(); }
+    public static final DeferredBlock<CeilingHangingSignBlock> SKYROOT_HANGING_SIGN = register("skyroot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.SKYROOT, properties), AetherIIBlocks::skyrootHangingSignProperties, hangingSignItem(() -> AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN));
+    public static final DeferredBlock<WallHangingSignBlock> SKYROOT_WALL_HANGING_SIGN = registerWithoutItem("skyroot_wall_hanging_sign", (properties) -> new WallHangingSignBlock(AetherIIWoodTypes.SKYROOT, properties), AetherIIBlocks::skyrootHangingSignProperties);
 
-    public static final DeferredBlock<StandingSignBlock> WISPROOT_SIGN = register("wisproot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.WISPROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
-    public static final DeferredBlock<WallSignBlock> WISPROOT_WALL_SIGN = registerWithoutItem("wisproot_wall_sign", (properties) -> new WallSignBlock(AetherIIWoodTypes.WISPROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
-    public static final DeferredBlock<CeilingHangingSignBlock> WISPROOT_HANGING_SIGN = register("wisproot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.WISPROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
-    public static final DeferredBlock<WallHangingSignBlock> WISPROOT_WALL_HANGING_SIGN = registerWithoutItem("wisproot_wall_hanging_sign", (properties) -> new WallHangingSignBlock(AetherIIWoodTypes.WISPROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
+    private static Block.Properties greatrootSignProperties() { return skyrootSignProperties(); }
+    public static final DeferredBlock<StandingSignBlock> GREATROOT_SIGN = register("greatroot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.GREATROOT, properties), AetherIIBlocks::greatrootSignProperties, signItem(() -> AetherIIBlocks.GREATROOT_WALL_SIGN));
+    public static final DeferredBlock<WallSignBlock> GREATROOT_WALL_SIGN = registerWithoutItem("greatroot_wall_sign", (properties) -> new WallSignBlock(AetherIIWoodTypes.GREATROOT, properties), AetherIIBlocks::greatrootSignProperties);
+
+    private static Block.Properties greatrootHangingSignProperties() { return skyrootHangingSignProperties(); }
+    public static final DeferredBlock<CeilingHangingSignBlock> GREATROOT_HANGING_SIGN = register("greatroot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.GREATROOT, properties), AetherIIBlocks::greatrootHangingSignProperties, hangingSignItem(() -> AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN));
+    public static final DeferredBlock<WallHangingSignBlock> GREATROOT_WALL_HANGING_SIGN = registerWithoutItem("greatroot_wall_hanging_sign", (properties) -> new WallHangingSignBlock(AetherIIWoodTypes.GREATROOT, properties), AetherIIBlocks::greatrootHangingSignProperties);
+
+    private static Block.Properties wisprootSignProperties() { return skyrootSignProperties(); }
+    public static final DeferredBlock<StandingSignBlock> WISPROOT_SIGN = register("wisproot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.WISPROOT, properties), AetherIIBlocks::wisprootSignProperties, signItem(() -> AetherIIBlocks.WISPROOT_WALL_SIGN));
+    public static final DeferredBlock<WallSignBlock> WISPROOT_WALL_SIGN = registerWithoutItem("wisproot_wall_sign", (properties) -> new WallSignBlock(AetherIIWoodTypes.WISPROOT, properties), AetherIIBlocks::wisprootSignProperties);
+
+    private static Block.Properties wisprootHangingSignProperties() { return skyrootHangingSignProperties(); }
+    public static final DeferredBlock<CeilingHangingSignBlock> WISPROOT_HANGING_SIGN = register("wisproot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.WISPROOT, properties), AetherIIBlocks::wisprootHangingSignProperties, hangingSignItem(() -> AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN));
+    public static final DeferredBlock<WallHangingSignBlock> WISPROOT_WALL_HANGING_SIGN = registerWithoutItem("wisproot_wall_hanging_sign", (properties) -> new WallHangingSignBlock(AetherIIWoodTypes.WISPROOT, properties), AetherIIBlocks::wisprootHangingSignProperties);
 
     // Moa Egg
     public static final DeferredBlock<Block> MOA_EGG = registerWithoutItem("moa_egg", MoaEggBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BLUE).strength(0.5F).sound(SoundType.METAL).noOcclusion());
@@ -729,65 +742,54 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     // Furniture
     public static final DeferredBlock<OutpostCampfireBlock> OUTPOST_CAMPFIRE = register("outpost_campfire", OutpostCampfireBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(15.0F, 1200.0F).noOcclusion().pushReaction(PushReaction.BLOCK));
+    public static final DeferredBlock<Block> MURAL = register("mural", MuralBlock::new, () -> Block.Properties.ofFullCopy(Blocks.STONE), (block, properties) -> new BlockItem(block, properties.component(AetherIIDataComponents.MURAL_SECTION, MuralSection.DEFAULT)));
 
-    private static <T extends Block> DeferredBlock<Block> registerWithoutItem(String name, Supplier<Block.Properties> properties) {
+    private static DeferredBlock<Block> registerWithoutItem(String name, Supplier<Block.Properties> properties) {
         return registerWithoutItem(name, Block::new, properties);
     }
 
     private static <T extends Block> DeferredBlock<T> registerWithoutItem(String name, Function<Block.Properties, T> builder, Supplier<Block.Properties> properties) {
-        return registerWithoutItem(name, createKey(name), builder, properties);
-    }
-
-    private static <T extends Block> DeferredBlock<T> registerWithoutItem(String name, ResourceKey<Block> key, Function<Block.Properties, T> builder, Supplier<Block.Properties> properties) {
+        var key = ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
         return BLOCKS.register(name, () -> builder.apply(properties.get().setId(key)));
     }
 
-    private static <T extends Block> DeferredBlock<Block> register(String name, Supplier<Block.Properties> properties) {
+    private static DeferredBlock<Block> register(String name, Supplier<Block.Properties> properties) {
         return register(name, Block::new, properties);
     }
 
     private static <T extends Block> DeferredBlock<T> register(String name, Function<Block.Properties, T> builder, Supplier<Block.Properties> properties) {
-        return register(name, createKey(name), builder, properties);
+        return register(name, builder, properties, BlockItem::new);
     }
 
-    private static <T extends Block> DeferredBlock<T> register(String name, ResourceKey<Block> key, Function<Block.Properties, T> builder, Supplier<Block.Properties> properties) {
-        return baseRegister(name, key, builder, properties, (deferredBlock) -> registerBlockItem(deferredBlock, name));
+    private static <T extends Block> DeferredBlock<T> register(String name, Function<Block.Properties, T> builder, Supplier<Block.Properties> properties, BiFunction<? super T, Item.Properties, ? extends Item> itemCreator) {
+        var key = ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        DeferredBlock<T> block = BLOCKS.register(name, () -> builder.apply(properties.get().setId(key)));
+        AetherIIItems.ITEMS.register(name, id -> itemCreator.apply(
+            block.get(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name)))
+                .useBlockDescriptionPrefix()
+        ));
+        return block;
     }
 
-    private static <T extends Block> DeferredBlock<T> baseRegister(String name, ResourceKey<Block> key, Function<Block.Properties, T> builder, Supplier<Block.Properties> properties, Function<DeferredBlock<T>, Supplier<? extends Item>> item) {
-        DeferredBlock<T> registered = BLOCKS.register(name, () -> builder.apply(properties.get().setId(key)));
-        AetherIIItems.ITEMS.register(name, item.apply(registered));
-        return registered;
+    private static BiFunction<Block, Item.Properties, StandingAndWallBlockItem> torchItem(Supplier<? extends DeferredBlock<?>> wallTorch) {
+        return standingAndWallBlockItem(wallTorch, Direction.DOWN);
     }
 
-    private static <T extends Block> Supplier<BlockItem> registerBlockItem(final DeferredBlock<T> deferredBlock, String name) {
-        return () -> {
-            DeferredBlock<T> block = Objects.requireNonNull(deferredBlock);
-            Item.Properties properties = new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name))).useBlockDescriptionPrefix();
-            if (block == HOLYSTONE_ROCK) {
-                return new RockItem(HOLYSTONE_ROCK.get(), properties);
-            } else if (block == AMBROSIUM_TORCH) {
-                return new StandingAndWallBlockItem(AMBROSIUM_TORCH.get(), AMBROSIUM_WALL_TORCH.get(), Direction.DOWN, properties);
-            } else if (block == SKYROOT_SIGN) {
-                return new SignItem(SKYROOT_SIGN.get(), SKYROOT_WALL_SIGN.get(), properties.stacksTo(16));
-            } else if (block == SKYROOT_HANGING_SIGN) {
-                return new HangingSignItem(SKYROOT_HANGING_SIGN.get(), SKYROOT_WALL_HANGING_SIGN.get(), properties.stacksTo(16));
-            } else if (block == GREATROOT_SIGN) {
-                return new SignItem(GREATROOT_SIGN.get(), GREATROOT_WALL_SIGN.get(), properties.stacksTo(16));
-            } else if (block == GREATROOT_HANGING_SIGN) {
-                return new HangingSignItem(GREATROOT_HANGING_SIGN.get(), GREATROOT_WALL_HANGING_SIGN.get(), properties.stacksTo(16));
-            } else if (block == WISPROOT_SIGN) {
-                return new SignItem(WISPROOT_SIGN.get(), WISPROOT_WALL_SIGN.get(), properties.stacksTo(16));
-            } else if (block == WISPROOT_HANGING_SIGN) {
-                return new HangingSignItem(WISPROOT_HANGING_SIGN.get(), WISPROOT_WALL_HANGING_SIGN.get(), properties.stacksTo(16));
-            } else if (block == CLOUDWOOL_BEDROLL) {
-                return new BedItem(CLOUDWOOL_BEDROLL.get(), properties.stacksTo(4));
-            }else if (block == SKYROOT_BED) {
-                return new BedItem(SKYROOT_BED.get(), properties.stacksTo(1));
-            } else {
-                return new BlockItem(block.get(), properties);
-            }
-        };
+    private static BiFunction<Block, Item.Properties, StandingAndWallBlockItem> standingAndWallBlockItem(Supplier<? extends DeferredBlock<?>> wallBlock, Direction attachmentDirection) {
+        Objects.requireNonNull(wallBlock);
+        return (standingBlock, properties) -> new StandingAndWallBlockItem(standingBlock, Objects.requireNonNull(wallBlock.get().get()), attachmentDirection, properties);
+    }
+
+    private static BiFunction<StandingSignBlock, Item.Properties, SignItem> signItem(Supplier<? extends DeferredBlock<? extends WallSignBlock>> wallSignBlock) {
+        Objects.requireNonNull(wallSignBlock);
+        return (standingSignBlock, properties) -> new SignItem(standingSignBlock, Objects.requireNonNull(wallSignBlock.get().get()), properties.stacksTo(16));
+    }
+
+    private static BiFunction<CeilingHangingSignBlock, Item.Properties, HangingSignItem> hangingSignItem(Supplier<? extends DeferredBlock<? extends WallHangingSignBlock>> wallHangingSignBlock) {
+        Objects.requireNonNull(wallHangingSignBlock);
+        return (ceilingHangingSignBlock, properties) -> new HangingSignItem(ceilingHangingSignBlock, Objects.requireNonNull(wallHangingSignBlock.get().get()), properties.stacksTo(16));
     }
 
     private static ResourceKey<Block> createKey(String name) {
