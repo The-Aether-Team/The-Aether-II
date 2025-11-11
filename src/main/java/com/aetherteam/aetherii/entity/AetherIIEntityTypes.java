@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import com.aetherteam.aetherii.entity.monster.*;
 import com.aetherteam.aetherii.entity.monster.dungeon.DetonationSentry;
 import com.aetherteam.aetherii.entity.monster.dungeon.SentryGolem;
+import com.aetherteam.aetherii.entity.monster.dungeon.boss.Slider;
 import com.aetherteam.aetherii.entity.npc.outpost.Edward;
 import com.aetherteam.aetherii.entity.passive.*;
 import com.aetherteam.aetherii.entity.projectile.*;
@@ -96,6 +97,9 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.of(DetonationSentry::new, MobCategory.MONSTER).sized(0.9F, 0.9F).eyeHeight(0.45F).clientTrackingRange(10).build(AetherIIEntities.DETONATION_SENTRY));
     public static final DeferredHolder<EntityType<?>, EntityType<SentryGolem>> SENTRY_GOLEM = ENTITY_TYPES.register("sentry_golem",
             () -> EntityType.Builder.of(SentryGolem::new, MobCategory.MONSTER).sized(0.6F, 1.95F).eyeHeight(1.8F).clientTrackingRange(8).build(AetherIIEntities.SENTRY_GOLEM));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<Slider>> SLIDER = ENTITY_TYPES.register("slider",
+            () -> EntityType.Builder.of(Slider::new, MobCategory.MONSTER).sized(2.0F, 2.0F).fireImmune().clientTrackingRange(10).build(AetherIIEntities.SLIDER));
 
 
     // NPCs
@@ -213,6 +217,7 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.BLADE_SHROOM_HUNTER.get(), AetherIIStats.merge(BladeShroomHunter.createMobAttributes(), AetherIIStats.BLADE_SHROOM_HUNTER).build());
         event.put(AetherIIEntityTypes.DETONATION_SENTRY.get(), AetherIIStats.merge(DetonationSentry.createMobAttributes(), AetherIIStats.DETONATION_SENTRY).build());
         event.put(AetherIIEntityTypes.SENTRY_GOLEM.get(), AetherIIStats.merge(SentryGolem.createMobAttributes(), AetherIIStats.SENTRY_GOLEM).build());
+        event.put(AetherIIEntityTypes.SLIDER.get(), Slider.createMobAttributes().build());
 
         // NPCs
         event.put(AetherIIEntityTypes.EDWARD.get(), Edward.createMobAttributes().build());

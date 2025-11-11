@@ -95,6 +95,7 @@ public class AetherIITags {
         public static final TagKey<Block> HOVERING_BLOCK_REPLACE_BLACKLIST = tag("hovering_block_replace_blacklist");
 
         public static final TagKey<Block> LOCKED_DUNGEON_BLOCKS = tag("locked_dungeon_blocks");
+        public static final TagKey<Block> SLIDER_UNBREAKABLE = tag("slider_unbreakable");
 
         private static TagKey<Block> tag(String name) {
             return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -201,6 +202,7 @@ public class AetherIITags {
         public static final TagKey<Item> DOUBLE_DROPS = tag("double_drops");
         public static final TagKey<Item> IRRADIATED_ITEM = tag("irradiated_item");
         public static final TagKey<Item> ALKAHEST_RESISTANT_ITEM = tag("alkahest_resistant_item");
+        public static final TagKey<Item> SLIDER_DAMAGING_ITEMS = tag("slider_damaging_items");
 
         private static TagKey<Item> tag(String name) {
             return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -215,6 +217,7 @@ public class AetherIITags {
         public static final TagKey<EntityType<?>> AETHER_MOBS = tag("aether_mobs");
         public static final TagKey<EntityType<?>> NO_DOUBLE_DROPS = tag("no_double_drops");
         public static final TagKey<EntityType<?>> NO_AMBROSIUM_DROPS = tag("no_ambrosium_drops");
+        public static final TagKey<EntityType<?>> SLIDER_DAMAGING_PROJECTILES = tag("slider_damaging_projectiles");
 
         public static final TagKey<EntityType<?>> SPAWNING_ICE = tag("spawning/ice");
         public static final TagKey<EntityType<?>> SPAWNING_AERCLOUDS = tag("spawning/aerclouds");

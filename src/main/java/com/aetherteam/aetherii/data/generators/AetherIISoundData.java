@@ -142,6 +142,10 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:block/chest/close3")
                 ).subtitle("subtitles.aether_ii.block.alkahest_purifier.close")
         );
+        this.add(AetherIISoundEvents.WATER_EVAPORATE,
+                definition().with(sound("minecraft:random/fizz")
+                ).subtitle("subtitles.aether.block.water.evaporate")
+        );
     }
 
     private void registerItemSounds() {
@@ -1035,6 +1039,54 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         .subtitle("subtitles.aether_ii.entity.sentry_golem.throw_bomb")
         );
 
+        this.add(AetherIISoundEvents.ENTITY_SLIDER_AWAKEN,
+                definition().with(sound("aether:entity/slider/awaken"))
+                        .subtitle("subtitles.aether.entity.slider.awaken")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SLIDER_AMBIENT,
+                definition().with(sound("minecraft:ambient/cave/cave1"),
+                                sound("minecraft:ambient/cave/cave2"),
+                                sound("minecraft:ambient/cave/cave3"),
+                                sound("minecraft:ambient/cave/cave4"),
+                                sound("minecraft:ambient/cave/cave5"),
+                                sound("minecraft:ambient/cave/cave6"),
+                                sound("minecraft:ambient/cave/cave7"),
+                                sound("minecraft:ambient/cave/cave8"),
+                                sound("minecraft:ambient/cave/cave9"),
+                                sound("minecraft:ambient/cave/cave10"),
+                                sound("minecraft:ambient/cave/cave11"),
+                                sound("minecraft:ambient/cave/cave12"),
+                                sound("minecraft:ambient/cave/cave13"),
+                                sound("minecraft:ambient/cave/cave14"),
+                                sound("minecraft:ambient/cave/cave15"),
+                                sound("minecraft:ambient/cave/cave16"),
+                                sound("minecraft:ambient/cave/cave17"),
+                                sound("minecraft:ambient/cave/cave18"),
+                                sound("minecraft:ambient/cave/cave19"))
+                        .subtitle("subtitles.aether.entity.slider.ambient")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SLIDER_COLLIDE,
+                definition().with(sound("aether:entity/slider/collide"))
+                        .subtitle("subtitles.aether.entity.slider.collide")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SLIDER_MOVE,
+                definition().with(sound("aether:entity/slider/move"))
+                        .subtitle("subtitles.aether.entity.slider.move")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SLIDER_HURT,
+                definition().with(sound("minecraft:step/stone1"),
+                                sound("minecraft:step/stone2"),
+                                sound("minecraft:step/stone3"),
+                                sound("minecraft:step/stone4"),
+                                sound("minecraft:step/stone5"),
+                                sound("minecraft:step/stone6"))
+                        .subtitle("subtitles.aether.entity.slider.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SLIDER_DEATH,
+                definition().with(sound("aether:entity/slider/death"))
+                        .subtitle("subtitles.aether.entity.slider.death")
+        );
+
         this.add(AetherIISoundEvents.ENTITY_BLIGHTED_BURN,
                 definition().with(
                         sound("minecraft:random/fizz")
@@ -1125,6 +1177,10 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 definition().with(
                         sound("aether_ii:music/aether_ambience1").volume(0.4F).stream()
                 )
+        );
+
+        this.add(AetherIISoundEvents.MUSIC_BOSS_SLIDER,
+                definition().with(sound("aether:music/boss/slider_fight").stream())
         );
     }
 }

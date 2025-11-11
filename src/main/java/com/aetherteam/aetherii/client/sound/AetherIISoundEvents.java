@@ -37,6 +37,8 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_ALKAHEST_PURIFIER_OPEN = register("block.alkahest_purifier.open");
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_ALKAHEST_PURIFIER_CLOSE = register("block.alkahest_purifier.close");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> WATER_EVAPORATE = register("block.water.evaporate");
+
     // Items
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_AMBROSIUM_SHARD = register("item.ambrosium_shard.use");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_SWET_GEL_USE = register("item.swet_ball.use");
@@ -201,6 +203,13 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SENTRY_GOLEM_SAY = register("entity.sentry_golem.say");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SENTRY_GOLEM_THROW_BOMB = register("entity.sentry_golem.throw_bomb");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SLIDER_AWAKEN = register("entity.slider.awaken");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SLIDER_AMBIENT = register("entity.slider.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SLIDER_COLLIDE = register("entity.slider.collide");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SLIDER_MOVE = register("entity.slider.move");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SLIDER_HURT = register("entity.slider.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SLIDER_DEATH = register("entity.slider.death");
+
 
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BLIGHTED_BURN = register("entity.blighted.burn");
@@ -224,6 +233,8 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_SUNRISE = register("music.aether_sunrise");
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_SUNSET = register("music.aether_sunset");
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_AMBIENCE = register("music.aether_ambience");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_BOSS_SLIDER = register("music.boss.slider");
 
     private static DeferredHolder<SoundEvent, SoundEvent> register(String location) {
         return SOUNDS.register(location, () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, location)));

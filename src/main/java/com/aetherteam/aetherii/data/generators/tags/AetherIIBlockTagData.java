@@ -263,6 +263,21 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.HOVERING_BLOCK_REPLACE_BLACKLIST).addTags(
                 BlockTags.PORTALS
         );
+        this.tag(AetherIITags.Blocks.SLIDER_UNBREAKABLE).add(
+                Blocks.BARRIER,
+                Blocks.BEDROCK,
+                Blocks.END_PORTAL,
+                Blocks.END_PORTAL_FRAME,
+                Blocks.END_GATEWAY,
+                Blocks.COMMAND_BLOCK,
+                Blocks.REPEATING_COMMAND_BLOCK,
+                Blocks.CHAIN_COMMAND_BLOCK,
+                Blocks.STRUCTURE_BLOCK,
+                Blocks.JIGSAW,
+                Blocks.MOVING_PISTON,
+                Blocks.LIGHT,
+                Blocks.REINFORCED_DEEPSLATE
+        );
 
         // Vanilla
         this.tag(BlockTags.PLANKS).add(

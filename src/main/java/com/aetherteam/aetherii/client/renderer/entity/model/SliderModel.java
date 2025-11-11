@@ -1,0 +1,23 @@
+package com.aetherteam.aetherii.client.renderer.entity.model;
+
+import com.aetherteam.aetherii.client.renderer.entity.state.SliderRenderState;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.*;
+
+public class SliderModel extends EntityModel<SliderRenderState> {
+    public final ModelPart slider;
+
+    public SliderModel(ModelPart root) {
+        super(root);
+        this.slider = root.getChild("slider");
+    }
+
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshDefinition = new MeshDefinition();
+        PartDefinition partDefinition = meshDefinition.getRoot();
+        partDefinition.addOrReplaceChild("slider", CubeListBuilder.create().texOffs(0, 0).addBox(-16.0F, -32.0F, -16.0F, 32.0F, 32.0F, 32.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+        return LayerDefinition.create(meshDefinition, 128, 64);
+    }
+}

@@ -24,6 +24,7 @@ public class AetherIIDamageTypes {
     public static final ResourceKey<DamageType> CHARGED = createKey("shock");
     public static final ResourceKey<DamageType> IMMOLATION = createKey("immolation");
     public static final ResourceKey<DamageType> ALKAHEST = createKey("alkahest");
+    public static final ResourceKey<DamageType> CRUSH = createKey("crush");
 
     public static void bootstrap(BootstrapContext<DamageType> context) {
         context.register(PLAYER_AOE, new DamageType("player", 0.1F));
@@ -35,6 +36,7 @@ public class AetherIIDamageTypes {
         context.register(CHARGED, new DamageType("aether_ii.effect.charged", 0.1F));
         context.register(IMMOLATION, new DamageType("aether_ii.effect.immolation", 0.1F, DamageEffects.BURNING));
         context.register(ALKAHEST, new DamageType("aether_ii.alkahest", 0.1F));
+        context.register(CRUSH, new DamageType("aether_ii.crush", 0.1F));
     }
 
     private static ResourceKey<DamageType> createKey(String name) {

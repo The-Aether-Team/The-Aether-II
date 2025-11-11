@@ -1220,6 +1220,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.DETONATION_SENTRY, "Detonation Sentry");
         this.addEntityType(AetherIIEntityTypes.DETONATION_PROJECTILE, "Detonation Projectile");
         this.addEntityType(AetherIIEntityTypes.SENTRY_GOLEM, "Sentry Golem");
+        this.addEntityType(AetherIIEntityTypes.SLIDER, "Slider");
 
         // Projectile
         this.addEntityType(AetherIIEntityTypes.HOLYSTONE_ROCK, "Holystone Rock");
@@ -1384,6 +1385,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("toast.guidebook.effects", "New Effects Entry!");
         this.addGuiText("toast.guidebook.exploration", "New Exploration Entry!");
         this.addGuiText("toast.guidebook.description", "Check your Guidebook");
+        this.addGuiText("slider.message.attack.invalid", "Hmm. Perhaps I need to attack it with a Pickaxe?");
     }
 
     private void addBestiaryEntries() {

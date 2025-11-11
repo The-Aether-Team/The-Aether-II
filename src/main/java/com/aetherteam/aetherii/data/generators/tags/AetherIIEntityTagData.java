@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.neoforge.common.Tags;
@@ -62,6 +63,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.BLADE_SHROOM_HUNTER.get(),
                 AetherIIEntityTypes.DETONATION_SENTRY.get(),
                 AetherIIEntityTypes.SENTRY_GOLEM.get(),
+                AetherIIEntityTypes.SLIDER.get(),
                 AetherIIEntityTypes.DETONATION_PROJECTILE.get(),
                 AetherIIEntityTypes.HOLYSTONE_ROCK.get(),
                 AetherIIEntityTypes.ARCTIC_SNOWBALL.get(),
@@ -75,6 +77,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
         );
         this.tag(AetherIITags.Entities.NO_DOUBLE_DROPS).addTag(Tags.EntityTypes.BOSSES).add(EntityType.PLAYER);
         this.tag(AetherIITags.Entities.NO_AMBROSIUM_DROPS).add(EntityType.PLAYER);
+
         this.tag(AetherIITags.Entities.SPAWNING_ICE).add(
                 EntityType.POLAR_BEAR
         );

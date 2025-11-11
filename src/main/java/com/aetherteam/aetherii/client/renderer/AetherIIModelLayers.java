@@ -56,6 +56,8 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation DETONATION_PROJECTILE = register("detonation_projectile");
     public static final ModelLayerLocation SENTRY_GOLEM = register("sentry_golem");
 
+    public static final ModelLayerLocation SLIDER = register("slider");
+
     public static final ModelLayerLocation EDWARD = register("edward");
 
     public static final ModelLayerLocation GRAVITITE_DEBRIS_SHOT = register("gravitite_debris_shot");

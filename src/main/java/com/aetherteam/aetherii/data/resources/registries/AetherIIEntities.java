@@ -46,6 +46,7 @@ public class AetherIIEntities {
     public static final ResourceKey<EntityType<?>> BLADE_SHROOM_HUNTER = createKey("bladeshroom_hunter");
     public static final ResourceKey<EntityType<?>> DETONATION_SENTRY = createKey("detonation_sentry");
     public static final ResourceKey<EntityType<?>> SENTRY_GOLEM = createKey("sentry_golem");
+    public static final ResourceKey<EntityType<?>> SLIDER = createKey("slider");
 
 
     //NPCs

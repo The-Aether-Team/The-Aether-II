@@ -245,6 +245,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         )
                 )*/
         );
+        this.add(AetherIIEntityTypes.SLIDER.get(), LootTable.lootTable());
 
         this.add(AetherIIEntityTypes.EDWARD.get(), LootTable.lootTable());
     }

@@ -43,9 +43,7 @@ import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.client.model.item.DynamicFluidContainerModel;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
@@ -129,6 +127,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.BLADE_SHROOM_HUNTER.get(), BladeShroomHunterRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.DETONATION_SENTRY.get(), DetonationSentryRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SENTRY_GOLEM.get(), SentryGolemRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.SLIDER.get(), SliderRenderer::new);
 
         // NPCs
         event.registerEntityRenderer(AetherIIEntityTypes.EDWARD.get(), EdwardRenderer::new);
@@ -212,6 +211,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.BLADE_SHROOM_HUNTER, BladeShroomHunterModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.DETONATION_SENTRY, SlimeModel::createOuterBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SENTRY_GOLEM, SentryGolemModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SLIDER, SliderModel::createBodyLayer);
 
         // Projectiles
         event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_DEBRIS_SHOT, GravititeDebrisShotModel::createBodyLayer);

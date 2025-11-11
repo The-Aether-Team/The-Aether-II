@@ -417,6 +417,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_ALKAHEST_CANISTER.get(),
                 AetherIIItems.ARKENIUM_HESTVEIL_CANISTER.get(),
                 AetherIIItems.ARKENIUM_PLATES.get());
+        this.tag(AetherIITags.Items.SLIDER_DAMAGING_ITEMS).addTag(ItemTags.PICKAXES);
 
         // Vanilla
         this.tag(ItemTags.PLANKS).add(
