@@ -186,6 +186,8 @@ public class AetherII {
         registrar.playToClient(AltarParticlesPacket.TYPE, AltarParticlesPacket.STREAM_CODEC, AltarParticlesPacket::execute);
         registrar.playToClient(AttackShockParticlePacket.TYPE, AttackShockParticlePacket.STREAM_CODEC, AttackShockParticlePacket::execute);
         registrar.playToClient(AttackStabParticlePacket.TYPE, AttackStabParticlePacket.STREAM_CODEC, AttackStabParticlePacket::execute);
+        registrar.playToClient(BossInfoPacket.Display.TYPE, BossInfoPacket.Display.STREAM_CODEC, BossInfoPacket.Display::execute);
+        registrar.playToClient(BossInfoPacket.Remove.TYPE, BossInfoPacket.Remove.STREAM_CODEC, BossInfoPacket.Remove::execute);
         registrar.playToClient(ClientGrabItemPacket.TYPE, ClientGrabItemPacket.STREAM_CODEC, ClientGrabItemPacket::execute);
         registrar.playToClient(FlushGuidebookDataPacket.TYPE, FlushGuidebookDataPacket.STREAM_CODEC, FlushGuidebookDataPacket::execute);
         registrar.playToClient(ForgeSoundPacket.TYPE, ForgeSoundPacket.STREAM_CODEC, ForgeSoundPacket::execute);

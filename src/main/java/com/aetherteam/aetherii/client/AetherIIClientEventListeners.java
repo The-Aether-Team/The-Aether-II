@@ -7,7 +7,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -29,6 +31,7 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class AetherIIClientEventListeners {
     public static void listen(IEventBus bus) {
@@ -36,6 +39,7 @@ public class AetherIIClientEventListeners {
         bus.addListener(AetherIIClientEventListeners::onGuiOpen);
         bus.addListener(AetherIIClientEventListeners::onGuiInitializePost);
         bus.addListener(AetherIIClientEventListeners::onGuiClose);
+        bus.addListener(AetherIIClientEventListeners::onRenderBossBar);
 
         // Tooltip
         bus.addListener(AetherIIClientEventListeners::onAddAttributeTooltips);
@@ -83,6 +87,16 @@ public class AetherIIClientEventListeners {
         Screen screen = event.getScreen();
 
         RenderHooks.storeGuidebookScreen(screen);
+    }
+
+    public static void onRenderBossBar(CustomizeGuiOverlayEvent.BossEventProgress event) {
+        GuiGraphics guiGraphics = event.getGuiGraphics();
+        LerpingBossEvent bossEvent = event.getBossEvent();
+        UUID bossUUID = bossEvent.getId();
+        if (RenderHooks.isAetherBossBar(bossUUID)) {
+            RenderHooks.drawBossHealthBar(guiGraphics, event.getX(), event.getY(), bossEvent);
+            event.setIncrement(event.getIncrement() + 13);
+        }
     }
 
     public static void onAddAttributeTooltips(AddAttributeTooltipsEvent event) {

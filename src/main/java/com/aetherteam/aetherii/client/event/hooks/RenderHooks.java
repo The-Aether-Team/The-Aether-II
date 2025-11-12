@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookEquipmentScr
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.item.tooltip.ClientCharmTooltip;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
+import com.aetherteam.aetherii.entity.monster.dungeon.boss.AetherBossMob;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.DeathScreenAccessor;
@@ -22,7 +23,9 @@ import com.mojang.datafixers.util.Either;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.DeathScreen;
 import net.minecraft.client.gui.screens.Screen;
@@ -32,12 +35,14 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.BossEvent;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -50,16 +55,16 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.FogType;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import org.apache.commons.lang3.tuple.Triple;
 
 import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class RenderHooks {
+    public static final Map<UUID, Integer> BOSS_EVENTS = new HashMap<>();
     public static Screen lastGuidebookScreen = null;
     public static boolean forceCloseGuidebook = false;
 
@@ -271,5 +276,32 @@ public class RenderHooks {
         poseStack.pushPose();
         GlovesLayer.renderOnFirstPerson(poseStack, buffer, arm, skin, packedLight);
         poseStack.popPose();
+    }
+
+    public static void drawBossHealthBar(GuiGraphics guiGraphics, int x, int y, LerpingBossEvent bossEvent) {
+        int entityID = BOSS_EVENTS.get(bossEvent.getId());
+        if (Minecraft.getInstance().level != null && Minecraft.getInstance().level.getEntity(entityID) instanceof AetherBossMob<?> aetherBossMob) {
+            drawBar(guiGraphics, x + 2, y + 2, bossEvent, aetherBossMob);
+            Component component = aetherBossMob.getBossName();
+            int nameLength = Minecraft.getInstance().font.width(component);
+            int nameX = Minecraft.getInstance().getWindow().getGuiScaledWidth() / 2 - nameLength / 2;
+            int nameY = y - 9;
+            guiGraphics.drawString(Minecraft.getInstance().font, component, nameX, nameY, -1);
+        }
+    }
+
+    public static void drawBar(GuiGraphics guiGraphics, int x, int y, BossEvent bossEvent, AetherBossMob<?> aetherBossMob) {
+        if (aetherBossMob.getBossBarBackgroundTexture() != null && aetherBossMob.getBossBarTexture() != null) {
+            x -= 37; // The default boss health bar is offset by -91. We need -128.
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, aetherBossMob.getBossBarBackgroundTexture(), 256, 16, 0, 0, x, y, 256, 16);
+            int health = (int) (bossEvent.getProgress() * 256.0F);
+            if (health > 0) {
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, aetherBossMob.getBossBarTexture(), 256, 16, 0, 0, x, y, health, 16);
+            }
+        }
+    }
+
+    public static boolean isAetherBossBar(UUID uuid) {
+        return BOSS_EVENTS.containsKey(uuid);
     }
 }
