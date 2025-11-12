@@ -1180,7 +1180,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
 
         this.add(AetherIISoundEvents.MUSIC_BOSS_SLIDER,
-                definition().with(sound("aether:music/boss/slider_fight").stream())
+                definition().with(sound("aether_ii:music/boss/slider_fight").stream())
         );
     }
 }

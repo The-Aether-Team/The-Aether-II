@@ -191,7 +191,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     public boolean hurtServer(ServerLevel serverLevel, DamageSource source, float amount) {
         Optional<LivingEntity> damageResult = this.canDamageSlider(source);
         if (source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            super.hurt(source, amount);
+            super.hurtServer(serverLevel, source, amount);
             if (!this.level().isClientSide() && source.getEntity() instanceof LivingEntity living) {
                 this.mostDamageTargetGoal.addAggro(living, amount); // AI goal for being hurt.
             }

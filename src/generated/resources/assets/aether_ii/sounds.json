@@ -1635,7 +1635,7 @@
   "music.boss.slider": {
     "sounds": [
       {
-        "name": "aether:music/boss/slider_fight",
+        "name": "aether_ii:music/boss/slider_fight",
         "stream": true
       }
     ]

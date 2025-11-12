@@ -2,6 +2,7 @@ package com.aetherteam.aetherii;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
@@ -295,6 +296,15 @@ public class AetherIITags {
 
         private static TagKey<MobEffect> tag(String name) {
             return TagKey.create(Registries.MOB_EFFECT, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        }
+    }
+
+    public static class SoundEvents {
+        public static final TagKey<SoundEvent> MUSIC = tag("music");
+        public static final TagKey<SoundEvent> BOSS_MUSIC = tag("boss_music");
+
+        private static TagKey<SoundEvent> tag(String name) {
+            return TagKey.create(Registries.SOUND_EVENT, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 }
