@@ -1634,6 +1634,13 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "detonation_sentry.jump", "Sentry squishes");
         this.addSubtitle("entity", "detonation_sentry.squish", "Sentry squishes");
 
+        this.addSubtitle("entity", "slider.awaken", "Slider awakens");
+        this.addSubtitle("entity", "slider.ambient", "Slider drones");
+        this.addSubtitle("entity", "slider.collide", "Slider smashes");
+        this.addSubtitle("entity", "slider.move", "Slider slides");
+        this.addSubtitle("entity", "slider.hurt", "Slider hurts");
+        this.addSubtitle("entity", "slider.death", "Slider breaks");
+
         this.addSubtitle("entity", "sentry_golem.death", "Sentry Golem dies");
         this.addSubtitle("entity", "sentry_golem.hurt", "Sentry Golem hurts");
         this.addSubtitle("entity", "sentry_golem.say", "Sentry Golem drones");

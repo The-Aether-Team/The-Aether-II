@@ -11,7 +11,6 @@ import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -38,6 +37,12 @@ public class SliderRenderer extends MobRenderer<Slider, SliderRenderState, Slide
         super.extractRenderState(slider, sliderRenderState, partialTick);
         sliderRenderState.awake = slider.isAwake();
         sliderRenderState.critical = slider.isCritical();
+        sliderRenderState.hurtAngle = slider.getHurtAngle();
+        if (slider.getHurtAngle() > 0.0) {
+            slider.setHurtAngle(Mth.lerp(sliderRenderState.partialTick, slider.getHurtAngle(), slider.getHurtAngle() * 0.78F));
+        }
+        sliderRenderState.hurtAngleX = slider.getHurtAngleX();
+        sliderRenderState.hurtAngleZ = slider.getHurtAngleZ();
     }
 
     @Override
@@ -50,16 +55,13 @@ public class SliderRenderer extends MobRenderer<Slider, SliderRenderState, Slide
     @Override
     protected void setupRotations(SliderRenderState renderState, PoseStack poseStack, float bodyRot, float scale) {
         if (!Minecraft.getInstance().isPaused()) {
-//            if (slider.getHurtAngle() != 0) { //TODO
-//                poseStack.mulPose(Axis.of(new Vector3f(slider.getHurtAngleX(), 0.0F, -slider.getHurtAngleZ())).rotationDegrees(slider.getHurtAngle() * -15.0F));
-//            }
-//            if (slider.getHurtAngle() > 0.0) {
-//                slider.setHurtAngle(Mth.lerp(partialTick, slider.getHurtAngle(), slider.getHurtAngle() * 0.78F));
-//            }
-//            if (LivingEntityRenderer.isEntityUpsideDown(slider)) {
-//                poseStack.translate(0.0, slider.getBbHeight() + 0.1F, 0.0);
-//                poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F));
-//            }
+            if (renderState.hurtAngle != 0) {
+                poseStack.mulPose(Axis.of(new Vector3f(renderState.hurtAngleX, 0.0F, -renderState.hurtAngleZ)).rotationDegrees(renderState.hurtAngle * -15.0F));
+            }
+            if (renderState.isUpsideDown) {
+                poseStack.translate(0.0, renderState.boundingBoxHeight + 0.1F, 0.0);
+                poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F));
+            }
         }
     }
 

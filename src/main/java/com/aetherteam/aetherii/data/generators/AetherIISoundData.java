@@ -1040,8 +1040,8 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
 
         this.add(AetherIISoundEvents.ENTITY_SLIDER_AWAKEN,
-                definition().with(sound("aether:entity/slider/awaken"))
-                        .subtitle("subtitles.aether.entity.slider.awaken")
+                definition().with(sound("aether_ii:entity/slider/awaken"))
+                        .subtitle("subtitles.aether_ii.entity.slider.awaken")
         );
         this.add(AetherIISoundEvents.ENTITY_SLIDER_AMBIENT,
                 definition().with(sound("minecraft:ambient/cave/cave1"),
@@ -1063,15 +1063,15 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                                 sound("minecraft:ambient/cave/cave17"),
                                 sound("minecraft:ambient/cave/cave18"),
                                 sound("minecraft:ambient/cave/cave19"))
-                        .subtitle("subtitles.aether.entity.slider.ambient")
+                        .subtitle("subtitles.aether_ii.entity.slider.ambient")
         );
         this.add(AetherIISoundEvents.ENTITY_SLIDER_COLLIDE,
-                definition().with(sound("aether:entity/slider/collide"))
-                        .subtitle("subtitles.aether.entity.slider.collide")
+                definition().with(sound("aether_ii:entity/slider/collide"))
+                        .subtitle("subtitles.aether_ii.entity.slider.collide")
         );
         this.add(AetherIISoundEvents.ENTITY_SLIDER_MOVE,
-                definition().with(sound("aether:entity/slider/move"))
-                        .subtitle("subtitles.aether.entity.slider.move")
+                definition().with(sound("aether_ii:entity/slider/move"))
+                        .subtitle("subtitles.aether_ii.entity.slider.move")
         );
         this.add(AetherIISoundEvents.ENTITY_SLIDER_HURT,
                 definition().with(sound("minecraft:step/stone1"),
@@ -1080,11 +1080,11 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                                 sound("minecraft:step/stone4"),
                                 sound("minecraft:step/stone5"),
                                 sound("minecraft:step/stone6"))
-                        .subtitle("subtitles.aether.entity.slider.hurt")
+                        .subtitle("subtitles.aether_ii.entity.slider.hurt")
         );
         this.add(AetherIISoundEvents.ENTITY_SLIDER_DEATH,
-                definition().with(sound("aether:entity/slider/death"))
-                        .subtitle("subtitles.aether.entity.slider.death")
+                definition().with(sound("aether_ii:entity/slider/death"))
+                        .subtitle("subtitles.aether_ii.entity.slider.death")
         );
 
         this.add(AetherIISoundEvents.ENTITY_BLIGHTED_BURN,
