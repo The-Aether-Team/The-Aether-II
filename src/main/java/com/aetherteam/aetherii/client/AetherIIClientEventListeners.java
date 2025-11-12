@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.event.hooks.MusicHooks;
 import com.aetherteam.aetherii.client.event.hooks.RenderHooks;
+import com.aetherteam.aetherii.client.renderer.block.model.blockstate.MuralModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Camera;
@@ -32,6 +33,9 @@ import java.util.List;
 
 public class AetherIIClientEventListeners {
     public static void listen(IEventBus bus) {
+        // Clear cache
+        bus.addListener(MuralModel::onDatapackSync);
+
         // Screen
         bus.addListener(AetherIIClientEventListeners::onGuiOpen);
         bus.addListener(AetherIIClientEventListeners::onGuiInitializePost);
@@ -166,5 +170,9 @@ public class AetherIIClientEventListeners {
         PlayerSkin skin = player.getSkin();
 
         RenderHooks.renderFirstPersonGloves(poseStack, buffer, arm, player, packedLight, skin);
+    }
+
+    public static void registerReloadListeners(AddClientReloadListenersEvent event) {
+        MuralModel.registerReloadListener(event);
     }
 }

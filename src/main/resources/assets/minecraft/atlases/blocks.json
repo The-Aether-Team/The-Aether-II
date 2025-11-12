@@ -105,6 +105,21 @@
         "shayelinn": "aether_ii:block/shayelinn_overlay",
         "ambrelinn": "aether_ii:block/ambrelinn_overlay"
       }
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "aether_ii:entity/mural/giant_test_mural",
+      "sprite": "aether_ii:block/giant_test_mural"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "aether_ii:entity/mural/test_mural",
+      "sprite": "aether_ii:block/test_mural"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "aether_ii:entity/mural/large_test_mural",
+      "sprite": "aether_ii:block/large_test_mural"
     }
   ]
 }

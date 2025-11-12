@@ -33,7 +33,7 @@ public class AetherIIAtlases {
     public static final Material SKYROOT_CHEST_RIGHT_MATERIAL = Sheets.CHEST_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot_chest_right"));
     public static final Map<ResourceKey<Mural>, Material> MURAL_MATERIALS = AetherIIMurals.MURALS_REGISTRY
         .listElements()
-        .collect(Collectors.toMap(Holder.Reference::key, entry -> MURAL_MAPPER.apply(entry.value().assetId())));
+        .collect(Collectors.toMap(Holder.Reference::key, entry -> Sheets.BLOCKS_MAPPER.apply(entry.value().assetId())));
     public static final Material MURAL_BASE = MURAL_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "mural_base"));
     public static final Material MURAL_SIDE = MURAL_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "mural_side"));
 
