@@ -145,7 +145,9 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
         if (!this.isAwake() || (this.getTarget() instanceof Player player && (player.isCreative() || player.isSpectator()))) {
             this.setTarget(null);
         }
-        this.evaporate();
+        if (this.isAwake()) {
+            this.evaporate();
+        }
         if (this.getChatCooldown() > 0) {
             this.chatCooldown--;
         }
@@ -377,6 +379,13 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
      */
     @Override
     public void push(double x, double y, double z) {
+    }
+
+    @Override
+    public void setDeltaMovement(Vec3 deltaMovement) {
+        if (this.isAwake()) {
+            super.setDeltaMovement(deltaMovement);
+        }
     }
 
     /**
