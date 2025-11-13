@@ -10,6 +10,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -59,6 +60,15 @@ public class MuralBlock extends BaseEntityBlock {
             }
         }
         return blockState;
+    }
+
+    @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        if (level.getBlockEntity(pos) instanceof MuralBlockEntity muralBlockEntity) {
+            muralBlockEntity.requestModelDataUpdate();
+            level.sendBlockUpdated(pos, oldState, state, Block.UPDATE_ALL);
+        }
+        super.onPlace(state, level, pos, oldState, movedByPiston);
     }
 
     @Override

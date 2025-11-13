@@ -28,6 +28,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class MuralItem extends Item {
@@ -81,12 +82,15 @@ public class MuralItem extends Item {
         for (int offsetX = 0; offsetX < mural.width(); offsetX++, pos2.move(side)) {
             pos2.setY(pos.getY()).move(Direction.UP, mural.height() - 1);
             for (int offsetY = 0; offsetY < mural.height(); offsetY++, pos2.move(Direction.DOWN)) {
-                level.setBlockAndUpdate(pos2, this.muralBlock.defaultBlockState()
-                    .setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
-                    .setValue(MuralBlock.X_OFFSET, offsetX)
-                    .setValue(MuralBlock.Y_OFFSET, offsetY));
+                BlockState state = this.muralBlock.defaultBlockState()
+                        .setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
+                        .setValue(MuralBlock.X_OFFSET, offsetX)
+                        .setValue(MuralBlock.Y_OFFSET, offsetY);
+                level.setBlockAndUpdate(pos2, state);
                 if (level.getBlockEntity(pos2) instanceof MuralBlockEntity muralBlockEntity) {
                     muralBlockEntity.setMural(muralHolder);
+                    muralBlockEntity.requestModelDataUpdate();
+                    level.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
                 }
             }
         }
