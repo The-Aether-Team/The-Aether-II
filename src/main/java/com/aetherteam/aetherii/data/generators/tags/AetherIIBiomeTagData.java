@@ -115,6 +115,18 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HighlandsBiomes.ENDURING_WOODLAND,
                 HighlandsBiomes.SHEER_TUNDRA
         );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_SENTRY_WORKSHOP).add(
+                HighlandsBiomes.FLOURISHING_FIELD,
+                HighlandsBiomes.VERDANT_WOODS,
+                HighlandsBiomes.SHROUDED_FOREST,
+                HighlandsBiomes.MAGNETIC_SCAR,
+                HighlandsBiomes.TURQUOISE_FOREST,
+                HighlandsBiomes.GLISTENING_SWAMP,
+                HighlandsBiomes.VIOLET_HIGHWOODS,
+                HighlandsBiomes.FRIGID_SIERRA,
+                HighlandsBiomes.ENDURING_WOODLAND,
+                HighlandsBiomes.SHEER_TUNDRA
+        );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_INFECTED_GUARDIAN_TREE).add(
                 HighlandsBiomes.FLOURISHING_FIELD,
                 HighlandsBiomes.VERDANT_WOODS,

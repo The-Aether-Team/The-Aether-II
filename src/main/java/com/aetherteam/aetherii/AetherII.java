@@ -45,7 +45,8 @@ import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.feature.modifier.filter.AetherIIPlacementModifierTypes;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.AetherIIBlockPredicateTypes;
-import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
+import com.aetherteam.aetherii.world.structure.piece.AetherIIStructurePieceTypes;
+import com.aetherteam.aetherii.world.structure.type.AetherIIStructureTypes;
 import com.aetherteam.aetherii.world.structure.pool.AetherIIPoolElementTypes;
 import com.aetherteam.aetherii.world.structure.processor.AetherIIStructureProcessorTypes;
 import com.aetherteam.aetherii.world.surfacerule.AetherIISurfaceRules;
@@ -119,6 +120,7 @@ public class AetherII {
                 AetherIIFoliagePlacerTypes.FOLIAGE_PLACERS,
                 AetherIITrunkPlacerTypes.TRUNK_PLACERS,
                 AetherIIStructureTypes.STRUCTURE_TYPES,
+                AetherIIStructurePieceTypes.STRUCTURE_PIECE_TYPES,
                 AetherIIStructureProcessorTypes.STRUCTURE_PROCESSOR_TYPES,
                 AetherIIPoolElementTypes.POOL_ELEMENTS,
                 AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES,

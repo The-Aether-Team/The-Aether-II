@@ -1,0 +1,8 @@
+{
+  "processors": [
+    {
+      "processor_type": "minecraft:protected_blocks",
+      "value": "#aether_ii:non_tunnel_replaceable"
+    }
+  ]
+}

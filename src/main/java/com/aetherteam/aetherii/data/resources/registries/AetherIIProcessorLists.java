@@ -3,6 +3,8 @@ package com.aetherteam.aetherii.data.resources.registries;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
+import com.aetherteam.aetherii.world.structure.piece.sentry.SentryWorkshopPiece;
+import com.aetherteam.aetherii.world.structure.processor.BossRoomProcessor;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -17,6 +19,9 @@ import java.util.List;
 
 public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> CAMP_HIGHFIELDS = createKey("camp_highfields");
+    public static final ResourceKey<StructureProcessorList> SENTRY_WORKSHOP_ROOM = createKey("sentry_workshop_room");
+    public static final ResourceKey<StructureProcessorList> SENTRY_WORKSHOP_TUNNEL = createKey("sentry_workshop_tunnel");
+    public static final ResourceKey<StructureProcessorList> SENTRY_WORKSHOP_BOSS_ROOM = createKey("sentry_workshop_boss_room");
     public static final ResourceKey<StructureProcessorList> INFECTED_GUARDIAN_TREE = createKey("infected_guardian_tree");
 
     public static void bootstrap(BootstrapContext<StructureProcessorList> context) {
@@ -33,6 +38,20 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VALKYRIE_SPROUT.get(), 0.25F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 0)),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VALKYRIE_SPROUT.get(), 0.15F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 1))
                 ))
+        ));
+
+        register(context, SENTRY_WORKSHOP_ROOM, List.of(
+//                SentryWorkshopPiece.BRONZE_DUNGEON_STONE,
+//                SentryWorkshopPiece.TRAPPED_CARVED_STONE,
+                SentryWorkshopPiece.AVOID_DUNGEONS
+        ));
+        register(context, SENTRY_WORKSHOP_TUNNEL, List.of(
+                SentryWorkshopPiece.AVOID_DUNGEONS//,
+//                SentryWorkshopPiece.BRONZE_DUNGEON_STONE
+        ));
+        register(context, SENTRY_WORKSHOP_BOSS_ROOM, List.of(
+//                BronzeDungeonPiece.LOCKED_SENTRY_STONE,
+                BossRoomProcessor.INSTANCE
         ));
 
         register(context, INFECTED_GUARDIAN_TREE, ImmutableList.of(

@@ -1,0 +1,16 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "frequency": 0.5,
+    "salt": 32146754,
+    "separation": 5,
+    "spacing": 12,
+    "spread_type": "triangular"
+  },
+  "structures": [
+    {
+      "structure": "aether_ii:sentry_workshop",
+      "weight": 1
+    }
+  ]
+}

@@ -263,6 +263,15 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.HOVERING_BLOCK_REPLACE_BLACKLIST).addTags(
                 BlockTags.PORTALS
         );
+        this.tag(AetherIITags.Blocks.NON_SENTRY_WORKSHOP_SPAWNABLE).add(
+                Blocks.WATER);
+        this.tag(AetherIITags.Blocks.NON_TUNNEL_REPLACEABLE).add(
+                Blocks.AIR,
+                Blocks.WATER,
+                Blocks.CHEST,
+                AetherIIBlocks.SKYROOT_CHEST.get()
+        ).addTags(
+                AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS);
         this.tag(AetherIITags.Blocks.SLIDER_UNBREAKABLE).add(
                 Blocks.BARRIER,
                 Blocks.BEDROCK,
