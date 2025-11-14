@@ -167,6 +167,13 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_BRICK_WALL.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_FLAGSTONES.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_TILE.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_BASE_BRICKS.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_CAPSTONE_BRICKS.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_BASE_PILLAR.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_CAPSTONE_PILLAR.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_PILLAR.get());
                 output.accept(AetherIIBlocks.ICHORITE.get());
                 output.accept(AetherIIBlocks.ICHORITE_STAIRS.get());
                 output.accept(AetherIIBlocks.ICHORITE_SLAB.get());

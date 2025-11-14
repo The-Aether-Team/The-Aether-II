@@ -276,6 +276,15 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_PILLAR.get(), AetherIIBlocks.FADED_HOLYSTONE_KEYSTONE.get());
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.FADED_HOLYSTONE_PILLAR.get(), AetherIIBlocks.FADED_HOLYSTONE_KEYSTONE.get());
 
+        // Undershale Decorative Blocks
+        this.createTrivialCube(AetherIIBlocks.UNDERSHALE_FLAGSTONES.get());
+        this.createTrivialCube(AetherIIBlocks.UNDERSHALE_TILE.get());
+        this.createCubeColumn(AetherIIBlocks.UNDERSHALE_BASE_BRICKS.get(), AetherIIBlocks.UNDERSHALE_TILE.get());
+        this.createCubeColumn(AetherIIBlocks.UNDERSHALE_CAPSTONE_BRICKS.get(), AetherIIBlocks.UNDERSHALE_TILE.get());
+        this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.UNDERSHALE_BASE_PILLAR.get(), AetherIIBlocks.UNDERSHALE_TILE.get());
+        this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.UNDERSHALE_CAPSTONE_PILLAR.get(), AetherIIBlocks.UNDERSHALE_TILE.get());
+        this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.UNDERSHALE_PILLAR.get(), AetherIIBlocks.UNDERSHALE_TILE.get());
+
         // Agiosite Decorative Blocks
         this.createTrivialCube(AetherIIBlocks.AGIOSITE_FLAGSTONES.get());
         this.createTrivialCube(AetherIIBlocks.AGIOSITE_KEYSTONE.get());

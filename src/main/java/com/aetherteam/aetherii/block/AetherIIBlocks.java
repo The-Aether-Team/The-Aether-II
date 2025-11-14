@@ -446,6 +446,15 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<SlabBlock> UNDERSHALE_BRICK_SLAB = register("undershale_brick_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()));
     public static final DeferredBlock<WallBlock> UNDERSHALE_BRICK_WALL = register("undershale_brick_wall", WallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()).forceSolidOn());
 
+    // Undershale Decorative Blocks
+    public static final DeferredBlock<Block> UNDERSHALE_FLAGSTONES = register("undershale_flagstones", () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));
+    public static final DeferredBlock<Block> UNDERSHALE_TILE = register("undershale_tile", () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));
+    public static final DeferredBlock<Block> UNDERSHALE_BASE_BRICKS = register("undershale_base_bricks", () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));
+    public static final DeferredBlock<Block> UNDERSHALE_CAPSTONE_BRICKS = register("undershale_capstone_bricks", () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> UNDERSHALE_BASE_PILLAR = register("undershale_base_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> UNDERSHALE_CAPSTONE_PILLAR = register("undershale_capstone_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> UNDERSHALE_PILLAR = register("undershale_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));
+
     //Ichorite
     public static final DeferredBlock<StairBlock> ICHORITE_STAIRS = register("ichorite_stairs", (properties) -> new StairBlock(ICHORITE.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE.get()));
     public static final DeferredBlock<SlabBlock> ICHORITE_SLAB = register("ichorite_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE.get()).strength(2.0F, 6.0F));

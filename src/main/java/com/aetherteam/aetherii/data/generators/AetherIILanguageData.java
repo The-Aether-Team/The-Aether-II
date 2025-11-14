@@ -443,6 +443,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_SLAB, "Undershale Brick Slab");
         this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_WALL, "Undershale Brick Wall");
 
+        // Undershale Decorative Blocks
+        this.addBlock(AetherIIBlocks.UNDERSHALE_FLAGSTONES, "Undershale Flagstones");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_TILE, "Undershale Tile");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_BASE_BRICKS, "Undershale Base Bricks");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_CAPSTONE_BRICKS, "Undershale Capstone Bricks");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_BASE_PILLAR, "Undershale Base Pillar");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_CAPSTONE_PILLAR, "Undershale Capstone Pillar");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_PILLAR, "Undershale Pillar");
+
         // Ichorite
         this.addBlock(AetherIIBlocks.ICHORITE, "Ichorite");
         this.addBlock(AetherIIBlocks.ICHORITE_STAIRS, "Ichorite Stairs");
