@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "group": "arkenium_plate",
+  "group": "arkenium_plates",
   "ingredients": [
     "aether_ii:arkenium_block"
   ],
