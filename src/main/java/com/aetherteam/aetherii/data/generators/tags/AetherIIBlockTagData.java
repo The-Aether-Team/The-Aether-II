@@ -737,6 +737,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SCATTERGLASS_PANE.get(),
                 AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE.get(),
                 AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get(),
+                AetherIIBlocks.INERT_ARKENIUM_BLOCK.get(),
+                AetherIIBlocks.INERT_GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
@@ -971,6 +973,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(),
+                AetherIIBlocks.INERT_ARKENIUM_BLOCK.get(),
+                AetherIIBlocks.INERT_GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.ARKENIUM_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get()
         );
@@ -1089,6 +1093,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(Tags.Blocks.STONES).addTag(AetherIITags.Blocks.HOLYSTONE).add(AetherIIBlocks.UNDERSHALE.get());
         this.tag(Tags.Blocks.STORAGE_BLOCKS).add(
+                AetherIIBlocks.INERT_ARKENIUM_BLOCK.get(),
+                AetherIIBlocks.INERT_GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),

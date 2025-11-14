@@ -671,6 +671,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARKENIUM_DOOR, "Arkenium Door");
         this.addBlock(AetherIIBlocks.ARKENIUM_TRAPDOOR, "Arkenium Trapdoor");
 
+        // Inert Mineral Blocks
+        this.addBlock(AetherIIBlocks.INERT_ARKENIUM_BLOCK, "Block of Inert Arkenium");
+        this.addBlock(AetherIIBlocks.INERT_GRAVITITE_BLOCK, "Block of Inert Gravitite");
+
         // Mineral Blocks
         this.addBlock(AetherIIBlocks.AMBROSIUM_BLOCK, "Block of Ambrosium");
         this.addBlock(AetherIIBlocks.ZANITE_BLOCK, "Block of Zanite");

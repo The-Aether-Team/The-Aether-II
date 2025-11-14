@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "inert_arkenium",
+  "ingredients": [
+    "aether_ii:inert_arkenium_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "aether_ii:inert_arkenium"
+  }
+}
