@@ -63,15 +63,6 @@ public class MuralBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
-        if (level.getBlockEntity(pos) instanceof MuralBlockEntity muralBlockEntity) {
-            muralBlockEntity.requestModelDataUpdate();
-            level.sendBlockUpdated(pos, oldState, state, Block.UPDATE_ALL);
-        }
-        super.onPlace(state, level, pos, oldState, movedByPiston);
-    }
-
-    @Override
     protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
         builder.add(HORIZONTAL_FACING, CRACKED, X_OFFSET, Y_OFFSET);
     }

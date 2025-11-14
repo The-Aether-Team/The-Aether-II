@@ -29,19 +29,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MuralModel extends DelegateBlockStateModel {
-
     private static final Direction[] DIRECTIONS = Arrays.copyOfRange(Direction.values(), 0, 7);
-    private static final Map<MuralBlockEntity.MuralData, List<BlockModelPart>> CACHED_PARTS = new HashMap<>();
+    private static final Map<MuralBlockEntity.MuralData, List<BlockModelPart>> CACHED_PARTS = new ConcurrentHashMap<>();
 
-    private final Minecraft minecraft;
     private final ResourceLocation originTexture;
 
     public MuralModel(BlockStateModel delegate) {
         super(delegate);
-
-        this.minecraft = Minecraft.getInstance();
 		this.originTexture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/mural_side");
 	}
 
@@ -66,7 +63,7 @@ public class MuralModel extends DelegateBlockStateModel {
     }
 
     private @NotNull ImmutableList<BlockModelPart> rebakeModelParts(List<BlockModelPart> blockModelParts, BlockState state, MuralBlockEntity.MuralData data) {
-        TextureAtlas atlas = this.minecraft.getModelManager().getAtlas(TextureAtlas.LOCATION_BLOCKS);
+        TextureAtlas atlas = Minecraft.getInstance().getModelManager().getAtlas(TextureAtlas.LOCATION_BLOCKS);
 		TextureAtlasSprite defaultSprite = atlas.getSprite(this.originTexture);
 		TextureAtlasSprite muralSprite = AetherIIAtlases.getMuralMaterial(data.mural().getKey()).sprite();
 

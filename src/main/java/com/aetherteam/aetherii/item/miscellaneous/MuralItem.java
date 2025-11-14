@@ -78,7 +78,6 @@ public class MuralItem extends Item {
         }
         var pos2 = new MutableBlockPos(pos.getX(), pos.getY(), pos.getZ());
         var mural = muralHolder.value();
-        System.out.println("Placing mural " + muralHolder.getKey().location() + " with size " + mural.width() + "x" + mural.height());
         for (int offsetX = 0; offsetX < mural.width(); offsetX++, pos2.move(side)) {
             pos2.setY(pos.getY()).move(Direction.UP, mural.height() - 1);
             for (int offsetY = 0; offsetY < mural.height(); offsetY++, pos2.move(Direction.DOWN)) {
@@ -89,8 +88,6 @@ public class MuralItem extends Item {
                 level.setBlockAndUpdate(pos2, state);
                 if (level.getBlockEntity(pos2) instanceof MuralBlockEntity muralBlockEntity) {
                     muralBlockEntity.setMural(muralHolder);
-                    muralBlockEntity.requestModelDataUpdate();
-                    level.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
                 }
             }
         }
