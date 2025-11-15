@@ -27,6 +27,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
@@ -91,6 +92,10 @@ public class Tempest extends Mob implements Blighted {
 
     private static boolean isValidSpawnBlock(LevelAccessor level, BlockPos pos){
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.AERCLOUDS) || level.getBlockState(pos.below()).is(AetherIIBlocks.AETHER_GRASS_BLOCK) || level.getBlockState(pos.below()).is(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS);
+    }
+
+    @Override
+    public void checkFallDamage(double vec3, boolean onGround, BlockState state, BlockPos pos) {
     }
 
     @Override
