@@ -1725,7 +1725,7 @@ public class HighlandsConfiguredFeatures {
                         UniformInt.of(6, 9),
                         0.5F,
                         4,
-                        0.0F,
+                        1.0F,
                         UniformInt.of(3, 6),
                         0.5F
                 )
@@ -1742,7 +1742,7 @@ public class HighlandsConfiguredFeatures {
                         UniformInt.of(6, 9),
                         0.5F,
                         4,
-                        0.0F,
+                        0.5F,
                         UniformInt.of(3, 6),
                         0.5F
                 )
