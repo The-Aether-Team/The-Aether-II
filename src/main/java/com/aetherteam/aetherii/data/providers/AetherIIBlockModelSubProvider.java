@@ -919,7 +919,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         Item item = AetherIIBlocks.MURAL.get().asItem();
         // this.registerSimpleItemModel(item, ModelTemplates.CUBE_COLUMN.create(item, TextureMapping.column(AetherIIBlocks.MURAL.get()), this.modelOutput));
         ItemModel.Unbaked baseModel = ItemModelUtils.plainModel(modelLocation);
-        ItemModel.Unbaked specialModel = ItemModelUtils.specialModel(modelLocation, new MuralSpecialRenderer.Unbaked());
-        this.itemModelOutput.accept(item, ItemModelUtils.composite(baseModel, specialModel));
+//        ItemModel.Unbaked specialModel = ItemModelUtils.specialModel(modelLocation, new MuralSpecialRenderer.Unbaked());
+//        this.itemModelOutput.accept(item, ItemModelUtils.composite(baseModel, specialModel));
     }
 }
