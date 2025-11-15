@@ -1758,7 +1758,7 @@ public class HighlandsConfiguredFeatures {
 
         register(context, ORE_HOLYSTONE_QUARTZ, Feature.ORE, new OreConfiguration(quartz, 32));
         register(context, ORE_AMBROSIUM, Feature.ORE, new OreConfiguration(ambrosium, 16));
-        register(context, ORE_ZANITE, Feature.ORE, new OreConfiguration(zanite, 5, 0.5F));
+        register(context, ORE_ZANITE, Feature.ORE, new OreConfiguration(zanite, 6, 0.25F));
         register(context, ORE_GLINT, Feature.ORE, new OreConfiguration(glint, 4));
         register(context, ORE_ARKENIUM, Feature.ORE, new OreConfiguration(arkenium, 5, 0.5F));
         register(context, ORE_GRAVITITE_BURIED, Feature.ORE, new OreConfiguration(gravitite, 3, 0.5F));
