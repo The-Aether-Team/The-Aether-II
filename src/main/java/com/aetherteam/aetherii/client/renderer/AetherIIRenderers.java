@@ -3,10 +3,8 @@ package com.aetherteam.aetherii.client.renderer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.api.Mural;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
@@ -28,7 +26,6 @@ import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
 import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
-import com.aetherteam.aetherii.client.renderer.item.model.MuralSpecialRenderer;
 import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
@@ -37,7 +34,6 @@ import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.blockentity.BedRenderer;
 import net.minecraft.client.renderer.blockentity.CampfireRenderer;
@@ -103,7 +99,6 @@ public class AetherIIRenderers {
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ARKENIUM_FORGE.get(), ArkeniumForgeRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ALKAHEST_PURIFIER.get(), AlkahestPurifierRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.AMBROSIUM_CAMPFIRE.get(), CampfireRenderer::new);
-//        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.MURAL.get(), MuralRenderer::new);
 
         // Entities
         // Passive
@@ -310,10 +305,5 @@ public class AetherIIRenderers {
 
     public static void registerSpecialModelRenderers(RegisterSpecialModelRendererEvent event) {
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier"), AlkahestPurifierSpecialRenderer.Unbaked.MAP_CODEC);
-//        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "mural"), MuralSpecialRenderer.Unbaked.MAP_CODEC);
     }
-
-//    private static Supplier<LayerDefinition> getMuralFaceLayerCreator(int width, int height, int offsetX, int offsetY) {
-//        return () -> MuralRenderer.createFaceLayer(width, height, offsetX, offsetY);
-//    }
 }
