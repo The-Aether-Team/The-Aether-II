@@ -456,6 +456,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SENTRY_BRICKS, "Sentry Bricks");
         this.addBlock(AetherIIBlocks.SENTRY_BRICK_STAIRS, "Sentry Brick Stairs");
         this.addBlock(AetherIIBlocks.SENTRY_BRICK_SLAB, "Sentry Brick Slab");
+        this.addBlock(AetherIIBlocks.SENTRY_BRICK_WALL, "Sentry Brick Wall");
 
         // Sentry Decorative Blocks
 

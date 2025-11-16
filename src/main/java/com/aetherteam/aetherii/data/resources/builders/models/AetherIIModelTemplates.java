@@ -295,6 +295,10 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate ORIENTABLE_SECRET_TRAPDOOR_TOP = create("template_orientable_secret_trapdoor_top", "_top", TextureSlot.TEXTURE);
     public static final ModelTemplate ORIENTABLE_SECRET_TRAPDOOR_BOTTOM = create("template_orientable_secret_trapdoor_bottom", "_bottom", TextureSlot.TEXTURE);
     public static final ModelTemplate ORIENTABLE_SECRET_TRAPDOOR_OPEN = create("template_orientable_secret_trapdoor_open", "_open", TextureSlot.TEXTURE);
+    public static final ModelTemplate COLUMN_WALL_POST = create("template_column_wall_post", "_post", TextureSlot.END, TextureSlot.SIDE);
+    public static final ModelTemplate COLUMN_WALL_LOW_SIDE = create("template_column_wall_side", "_side", TextureSlot.END, TextureSlot.SIDE);
+    public static final ModelTemplate COLUMN_WALL_TALL_SIDE = create("template_column_wall_side_tall", "_side_tall", TextureSlot.END, TextureSlot.SIDE);
+    public static final ModelTemplate COLUMN_WALL_INVENTORY = create("column_wall_inventory", "_inventory", TextureSlot.END, TextureSlot.SIDE, TextureSlot.WALL);
     public static final ModelTemplate ARKENIUM_LANTERN = create("template_arkenium_lantern", TextureSlot.LANTERN);
     public static final ModelTemplate HANGING_ARKENIUM_LANTERN = create("template_hanging_arkenium_lantern", "_hanging", TextureSlot.LANTERN);
     public static final ModelTemplate RUSTIC_ARKENIUM_LANTERN = create("template_rustic_arkenium_lantern", TextureSlot.LANTERN);

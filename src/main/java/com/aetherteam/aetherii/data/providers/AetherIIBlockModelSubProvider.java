@@ -322,6 +322,43 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.registerSimpleItemModel(block, bottomLocation);
     }
 
+    public void createLitWall(Block block, Block base, Block empty) {
+        ResourceLocation offBlockLocation = TextureMapping.getBlockTexture(block, "_off");
+        ResourceLocation offLocation = TextureMapping.getBlockTexture(base, "_off");
+
+        MultiVariant post = BlockModelGenerators.plainVariant(AetherIIModelTemplates.COLUMN_WALL_POST.create(block, TextureMapping.column(TextureMapping.getBlockTexture(block), TextureMapping.getBlockTexture(empty)), this.modelOutput));
+        MultiVariant low = BlockModelGenerators.plainVariant(AetherIIModelTemplates.COLUMN_WALL_LOW_SIDE.create(block, TextureMapping.column(TextureMapping.getBlockTexture(base), TextureMapping.getBlockTexture(empty)), this.modelOutput));
+        MultiVariant tall = BlockModelGenerators.plainVariant(AetherIIModelTemplates.COLUMN_WALL_TALL_SIDE.create(block, TextureMapping.column(TextureMapping.getBlockTexture(base), TextureMapping.getBlockTexture(empty)), this.modelOutput));
+        MultiVariant postOff = BlockModelGenerators.plainVariant(AetherIIModelTemplates.COLUMN_WALL_POST.createWithSuffix(block, "_off", TextureMapping.column(offBlockLocation, TextureMapping.getBlockTexture(empty)), this.modelOutput));
+        MultiVariant lowOff = BlockModelGenerators.plainVariant(AetherIIModelTemplates.COLUMN_WALL_LOW_SIDE.createWithSuffix(block, "_off", TextureMapping.column(offLocation, TextureMapping.getBlockTexture(empty)), this.modelOutput));
+        MultiVariant tallOff = BlockModelGenerators.plainVariant(AetherIIModelTemplates.COLUMN_WALL_TALL_SIDE.createWithSuffix(block, "_off", TextureMapping.column(offLocation, TextureMapping.getBlockTexture(empty)), this.modelOutput));
+
+        MultiPartGenerator multiPartGenerator = MultiPartGenerator.multiPart(block);
+        for (boolean lit : BlockStateProperties.LIT.getPossibleValues()) {
+            post = lit ? post : postOff;
+            low = lit ? low : lowOff;
+            tall = lit ? tall : tallOff;
+            multiPartGenerator = multiPartGenerator
+                    .with(condition().term(BlockStateProperties.UP, true).term(BlockStateProperties.LIT, lit), post)
+                    .with(condition().term(BlockStateProperties.NORTH_WALL, WallSide.LOW).term(BlockStateProperties.LIT, lit), low.with(UV_LOCK))
+                    .with(condition().term(BlockStateProperties.EAST_WALL, WallSide.LOW).term(BlockStateProperties.LIT, lit), low.with(Y_ROT_90).with(UV_LOCK))
+                    .with(condition().term(BlockStateProperties.SOUTH_WALL, WallSide.LOW).term(BlockStateProperties.LIT, lit), low.with(Y_ROT_180).with(UV_LOCK))
+                    .with(condition().term(BlockStateProperties.WEST_WALL, WallSide.LOW).term(BlockStateProperties.LIT, lit), low.with(Y_ROT_270).with(UV_LOCK))
+                    .with(condition().term(BlockStateProperties.NORTH_WALL, WallSide.TALL).term(BlockStateProperties.LIT, lit), tall.with(UV_LOCK))
+                    .with(condition().term(BlockStateProperties.EAST_WALL, WallSide.TALL).term(BlockStateProperties.LIT, lit), tall.with(Y_ROT_90).with(UV_LOCK))
+                    .with(condition().term(BlockStateProperties.SOUTH_WALL, WallSide.TALL).term(BlockStateProperties.LIT, lit), tall.with(Y_ROT_180).with(UV_LOCK))
+                    .with(condition().term(BlockStateProperties.WEST_WALL, WallSide.TALL).term(BlockStateProperties.LIT, lit), tall.with(Y_ROT_270).with(UV_LOCK));
+        }
+
+        this.blockStateOutput.accept(multiPartGenerator);
+        TextureMapping inventoryMapping = new TextureMapping()
+                .put(TextureSlot.END, TextureMapping.getBlockTexture(empty))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(base))
+                .put(TextureSlot.WALL, TextureMapping.getBlockTexture(block));
+        ResourceLocation resourcelocation = AetherIIModelTemplates.COLUMN_WALL_INVENTORY.create(block, inventoryMapping, this.modelOutput);
+        this.registerSimpleItemModel(block, resourcelocation);
+    }
+
     public void createAetherPortalBlock() {
         MultiVariant locationNS = plainVariant(AetherIIModelTemplates.PORTAL_NS.create(AetherIIBlocks.AETHER_PORTAL.get(), AetherIITextureMappings.portal(AetherIIBlocks.AETHER_PORTAL.get()), this.modelOutput));
         MultiVariant locationEW = plainVariant(AetherIIModelTemplates.PORTAL_EW.create(AetherIIBlocks.AETHER_PORTAL.get(), AetherIITextureMappings.portal(AetherIIBlocks.AETHER_PORTAL.get()), this.modelOutput));

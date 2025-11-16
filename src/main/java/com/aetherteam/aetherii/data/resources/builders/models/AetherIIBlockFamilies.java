@@ -82,11 +82,6 @@ public class AetherIIBlockFamilies {
             .slab(AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get())
             .stairs(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get())
             .getFamily();
-//    public static final BlockFamily SENTRY_BRICKS = familyBuilder(AetherIIBlocks.SENTRY_BRICKS.get())
-////            .wall(AetherIIBlocks.UNDERSHALE_BRICK_WALL.get())
-//            .slab(AetherIIBlocks.SENTRY_BRICK_SLAB.get())
-//            .stairs(AetherIIBlocks.SENTRY_BRICK_STAIRS.get())
-//            .getFamily();
     public static final BlockFamily ICHORITE = familyBuilder(AetherIIBlocks.ICHORITE.get())
             .wall(AetherIIBlocks.ICHORITE_WALL.get())
             .slab(AetherIIBlocks.ICHORITE_SLAB.get())

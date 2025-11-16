@@ -317,6 +317,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createLitBlock(AetherIIBlocks.SENTRY_BRICKS.get());
         this.createLitStairs(AetherIIBlocks.SENTRY_BRICK_STAIRS.get(), AetherIIBlocks.SENTRY_BRICKS.get());
         this.createLitSlab(AetherIIBlocks.SENTRY_BRICK_SLAB.get(), AetherIIBlocks.SENTRY_BRICKS.get());
+        this.createLitWall(AetherIIBlocks.SENTRY_BRICK_WALL.get(), AetherIIBlocks.SENTRY_BRICKS.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());
 
         // Sentry Decorative Blocks
 
