@@ -23,34 +23,13 @@ public class SentryBlock extends Block implements SentryBlockUpdating {
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        BlockState newState = null;
-        for (Direction direction : Direction.values()) {
-            BlockPos neighborPos = pos.relative(direction);
-            BlockState neighborState = level.getBlockState(neighborPos);
-
-            boolean hasPowered = neighborState.is(state.getBlock()) && neighborState.getValue(POWERED);
-            boolean hasSignal = level.getSignal(neighborPos, direction) > 0;
-            if (hasSignal != state.getValue(BlockStateProperties.POWERED) || hasPowered != state.getValue(BlockStateProperties.POWERED)) {
-                BlockState blockstate = state;
-                if (!state.getValue(BlockStateProperties.POWERED)) {
-                    blockstate = state.cycle(BlockStateProperties.LIT);
-                }
-                newState = blockstate.setValue(BlockStateProperties.POWERED, hasSignal || hasPowered);
-            }
-        }
-        if (newState != null) {
-            level.setBlock(pos, newState, 1 | 2);
-        }
+        SentryBlockUpdating.super.updateStates(state, level, pos);
         super.tick(state, level, pos, random);
     }
 
     @Override
     protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
-        boolean hasPowered = neighborState.is(state.getBlock()) && neighborState.getValue(POWERED);
-        boolean hasSignal = level.getSignal(neighborPos, direction) > 0;
-        if (hasSignal != state.getValue(BlockStateProperties.POWERED) || hasPowered != state.getValue(BlockStateProperties.POWERED)) {
-            scheduledTickAccess.scheduleTick(pos, state.getBlock(), 3);
-        }
+        SentryBlockUpdating.super.scheduleChange(state, level, scheduledTickAccess, pos, direction, neighborPos, neighborState);
         return super.updateShape(state, level, scheduledTickAccess, pos, direction, neighborPos, neighborState, random);
     }
 
