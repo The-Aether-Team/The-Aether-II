@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.block.construction;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
@@ -11,8 +11,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.redstone.Orientation;
-import org.jetbrains.annotations.Nullable;
 
 public class SentryBlock extends Block implements SentryBlockUpdating {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
@@ -24,13 +22,36 @@ public class SentryBlock extends Block implements SentryBlockUpdating {
     }
 
     @Override
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, @Nullable Orientation orientation, boolean movedByPiston) {
-        SentryBlockUpdating.super.checkSignal(state, level, pos);
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        BlockState newState = null;
+        for (Direction direction : Direction.values()) {
+            BlockPos neighborPos = pos.relative(direction);
+            BlockState neighborState = level.getBlockState(neighborPos);
+
+            boolean hasPowered = neighborState.is(state.getBlock()) && neighborState.getValue(POWERED);
+            boolean hasSignal = level.getSignal(neighborPos, direction) > 0;
+            if (hasSignal != state.getValue(BlockStateProperties.POWERED) || hasPowered != state.getValue(BlockStateProperties.POWERED)) {
+                BlockState blockstate = state;
+                if (!state.getValue(BlockStateProperties.POWERED)) {
+                    blockstate = state.cycle(BlockStateProperties.LIT);
+                }
+                newState = blockstate.setValue(BlockStateProperties.POWERED, hasSignal || hasPowered);
+            }
+        }
+        if (newState != null) {
+            level.setBlock(pos, newState, 1 | 2);
+        }
+        super.tick(state, level, pos, random);
     }
 
     @Override
     protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
-        return SentryBlockUpdating.super.changeLit(super.updateShape(state, level, scheduledTickAccess, pos, direction, neighborPos, neighborState, random), neighborState);
+        boolean hasPowered = neighborState.is(state.getBlock()) && neighborState.getValue(POWERED);
+        boolean hasSignal = level.getSignal(neighborPos, direction) > 0;
+        if (hasSignal != state.getValue(BlockStateProperties.POWERED) || hasPowered != state.getValue(BlockStateProperties.POWERED)) {
+            scheduledTickAccess.scheduleTick(pos, state.getBlock(), 3);
+        }
+        return super.updateShape(state, level, scheduledTickAccess, pos, direction, neighborPos, neighborState, random);
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
