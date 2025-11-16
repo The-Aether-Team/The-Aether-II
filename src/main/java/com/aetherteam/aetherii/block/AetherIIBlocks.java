@@ -471,7 +471,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FacingPillarBlock> SENTRY_CAPSTONE_PILLAR = register("sentry_capstone_pillar", SentryFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(SENTRY_BRICKS.get()));
     public static final DeferredBlock<FacingPillarBlock> SENTRY_PILLAR = register("sentry_pillar", SentryFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(SENTRY_BRICKS.get()));
 
-    //Ichorite
+    // Ichorite
     public static final DeferredBlock<StairBlock> ICHORITE_STAIRS = register("ichorite_stairs", (properties) -> new StairBlock(ICHORITE.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE.get()));
     public static final DeferredBlock<SlabBlock> ICHORITE_SLAB = register("ichorite_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE.get()).strength(2.0F, 6.0F));
     public static final DeferredBlock<WallBlock> ICHORITE_WALL = register("ichorite_wall", WallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE.get()).forceSolidOn());

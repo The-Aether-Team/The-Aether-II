@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_smooth_ichorite": {
+    "has_sentry_bricks": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:smooth_ichorite"
+            "items": "aether_ii:sentry_bricks"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:ichorite_bricks"
+        "recipe": "aether_ii:sentry_tile_from_sentry_bricks_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_smooth_ichorite"
+      "has_sentry_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:ichorite_bricks"
+      "aether_ii:sentry_tile_from_sentry_bricks_stonecutting"
     ]
   }
 }

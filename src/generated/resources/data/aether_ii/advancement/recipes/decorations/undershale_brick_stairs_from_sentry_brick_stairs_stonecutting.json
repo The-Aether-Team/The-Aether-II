@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_smooth_ichorite": {
+    "has_sentry_brick_stairs": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:smooth_ichorite"
+            "items": "aether_ii:sentry_brick_stairs"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:ichorite_bricks"
+        "recipe": "aether_ii:undershale_brick_stairs_from_sentry_brick_stairs_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_smooth_ichorite"
+      "has_sentry_brick_stairs"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:ichorite_bricks"
+      "aether_ii:undershale_brick_stairs_from_sentry_brick_stairs_stonecutting"
     ]
   }
 }
