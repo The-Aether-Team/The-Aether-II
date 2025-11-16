@@ -140,7 +140,7 @@ public class MuralBlockEntity extends BlockEntity {
         return this.saveCustomOnly(registries);
     }
 
-    public record MuralData(Direction facing, Holder<Mural> mural, int width, int height, int offsetX, int offsetY) {
+    public record MuralData(Direction facing, Holder<Mural> mural, int offsetX, int offsetY) {
         public static final ModelProperty<MuralData> PROPERTY = new ModelProperty<>();
     }
 
@@ -149,7 +149,7 @@ public class MuralBlockEntity extends BlockEntity {
         Holder<Mural> mural = this.getMural().orElse(null);
         BlockState blockState = this.getBlockState();
         if (mural != null) {
-            return ModelData.of(MuralData.PROPERTY, new MuralData(this.getDirection(), mural, mural.value().width(), mural.value().height(), blockState.getValue(MuralBlock.X_OFFSET), blockState.getValue(MuralBlock.Y_OFFSET)));
+            return ModelData.of(MuralData.PROPERTY, new MuralData(this.getDirection(), mural, blockState.getValue(MuralBlock.X_OFFSET), blockState.getValue(MuralBlock.Y_OFFSET)));
         }
         return super.getModelData();
     }

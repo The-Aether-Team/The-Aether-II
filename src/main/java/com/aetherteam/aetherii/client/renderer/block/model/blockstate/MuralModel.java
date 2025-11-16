@@ -97,10 +97,10 @@ public class MuralModel extends DelegateBlockStateModel {
 		int[] rebakedSection = Arrays.copyOf(bakedBuffer, bakedBuffer.length);
 
         // Square limits for the given section of mural inside atlas
-        float sectionUMin = data.offsetX() / (float) data.width();
-        float sectionUMax = (data.offsetX() + 1) / (float) data.width();
-        float sectionVMin = data.offsetY() / (float) data.height();
-        float sectionVMax = (data.offsetY() + 1) / (float) data.height();
+        float sectionUMin = data.offsetX() / (float) data.mural().value().width();
+        float sectionUMax = (data.offsetX() + 1) / (float) data.mural().value().width();
+        float sectionVMin = data.offsetY() / (float) data.mural().value().height();
+        float sectionVMax = (data.offsetY() + 1) / (float) data.mural().value().height();
 
         for (int vertexIndex = 0; vertexIndex < 4; vertexIndex++) {
             int bufferOffset = vertexIndex * 8;
