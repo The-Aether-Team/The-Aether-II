@@ -159,6 +159,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant variant = plainVariant(ModelTemplates.CUBE_COLUMN.create(side, mapping, this.modelOutput));
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(side, variant));
     }
+
     public void createCubeBottom(Block block) {
         TextureMapping mapping = new TextureMapping()
                 .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block))
@@ -226,6 +227,14 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                         .select(Direction.EAST, horizontal.with(X_ROT_90).with(Y_ROT_90))
                         .select(Direction.WEST, horizontal.with(X_ROT_90).with(Y_ROT_270))
         );
+    }
+
+    public void createLitBlock(Block block) {
+        ResourceLocation offLocation = TextureMapping.getBlockTexture(block, "_off");
+        MultiVariant on = plainVariant(ModelTemplates.CUBE_ALL.create(block, TextureMapping.cube(block), this.modelOutput));
+        MultiVariant off = plainVariant(ModelTemplates.CUBE_ALL.createWithSuffix(block, "_off", TextureMapping.cube(offLocation), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(createBooleanModelDispatch(BlockStateProperties.LIT, on, off)));
+        this.registerSimpleItemModel(block, offLocation);
     }
 
     public void createAetherPortalBlock() {

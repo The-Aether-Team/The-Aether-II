@@ -313,6 +313,11 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.MARBLED_CAPSTONE_PILLAR.get(), AetherIIBlocks.MARBLED_KEYSTONE.get());
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.MARBLED_PILLAR.get(), AetherIIBlocks.MARBLED_KEYSTONE.get());
 
+        // Sentry Bricks
+        this.createLitBlock(AetherIIBlocks.SENTRY_BRICKS.get());
+
+        // Sentry Decorative Blocks
+
         // Icestone Decorative Blocks
         this.createTrivialCube(AetherIIBlocks.ICESTONE_FLAGSTONES.get());
         this.createTrivialCube(AetherIIBlocks.ICESTONE_KEYSTONE.get());

@@ -452,6 +452,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.UNDERSHALE_CAPSTONE_PILLAR, "Undershale Capstone Pillar");
         this.addBlock(AetherIIBlocks.UNDERSHALE_PILLAR, "Undershale Pillar");
 
+        // Sentry Bricks
+        this.addBlock(AetherIIBlocks.SENTRY_BRICKS, "Sentry Bricks");
+
+        // Sentry Decorative Blocks
+
         // Ichorite
         this.addBlock(AetherIIBlocks.ICHORITE, "Ichorite");
         this.addBlock(AetherIIBlocks.ICHORITE_STAIRS, "Ichorite Stairs");

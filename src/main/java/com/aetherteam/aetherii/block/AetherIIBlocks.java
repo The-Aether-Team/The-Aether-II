@@ -455,6 +455,11 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FacingPillarBlock> UNDERSHALE_CAPSTONE_PILLAR = register("undershale_capstone_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));
     public static final DeferredBlock<FacingPillarBlock> UNDERSHALE_PILLAR = register("undershale_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));
 
+    // Sentry Bricks
+    public static final DeferredBlock<Block> SENTRY_BRICKS = register("sentry_bricks", SentryBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE).requiresCorrectToolForDrops().isRedstoneConductor(AetherIIBlockBuilders::never).lightLevel(AetherIIBlockBuilders::lightLevel11));
+
+    // Sentry Decorative Blocks
+
     //Ichorite
     public static final DeferredBlock<StairBlock> ICHORITE_STAIRS = register("ichorite_stairs", (properties) -> new StairBlock(ICHORITE.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE.get()));
     public static final DeferredBlock<SlabBlock> ICHORITE_SLAB = register("ichorite_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE.get()).strength(2.0F, 6.0F));
