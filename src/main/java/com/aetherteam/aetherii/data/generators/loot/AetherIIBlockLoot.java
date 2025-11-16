@@ -682,10 +682,6 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropNone(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
         this.add(AetherIIBlocks.MURAL.get(), (mural) -> LootTable.lootTable()
             .withPool(this.applyExplosionCondition(mural, LootPool.lootPool()
-                    .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(mural)
-                        .setProperties(StatePropertiesPredicate.Builder.properties()
-                            .hasProperty(MuralBlock.CRACKED, false))
-                    )
                     .setRolls(ConstantValue.exactly(1.0F))
                     .add(LootItem.lootTableItem(mural))
                 )

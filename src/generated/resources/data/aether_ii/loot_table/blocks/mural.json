@@ -5,13 +5,6 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "aether_ii:mural",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "cracked": "false"
-          }
-        },
-        {
           "condition": "minecraft:survives_explosion"
         }
       ],

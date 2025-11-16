@@ -28,7 +28,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 public class MuralBlock extends BaseEntityBlock {
     public static final MapCodec<MuralBlock> CODEC = simpleCodec(MuralBlock::new);
     public static final EnumProperty<Direction> HORIZONTAL_FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final BooleanProperty CRACKED = BlockStateProperties.CRACKED;
     public static final IntegerProperty X_OFFSET = IntegerProperty.create("x_offset", 0, Mural.MAX_SIZE);
     public static final IntegerProperty Y_OFFSET = IntegerProperty.create("y_offset", 0, Mural.MAX_SIZE);
 
@@ -39,32 +38,17 @@ public class MuralBlock extends BaseEntityBlock {
 
     public MuralBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any()
-            .setValue(HORIZONTAL_FACING, Direction.NORTH)
-            .setValue(CRACKED, false)
-            .setValue(X_OFFSET, 0)
-            .setValue(Y_OFFSET, 0)
-        );
+        this.registerDefaultState(this.stateDefinition.any().setValue(HORIZONTAL_FACING, Direction.NORTH).setValue(X_OFFSET, 0).setValue(Y_OFFSET, 0));
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        var blockState = this.defaultBlockState()
-            .setValue(HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite())
-            .setValue(CRACKED, false);
-        if (context.getItemInHand() != null) {
-            var muralSection = context.getItemInHand().get(AetherIIDataComponents.MURAL_SECTION);
-            if (muralSection != null) {
-                blockState = blockState.setValue(X_OFFSET, muralSection.offsetX())
-                                       .setValue(Y_OFFSET, muralSection.offsetY());
-            }
+        var blockState = this.defaultBlockState().setValue(HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite());
+        var muralSection = context.getItemInHand().get(AetherIIDataComponents.MURAL_SECTION);
+        if (muralSection != null) {
+            blockState = blockState.setValue(X_OFFSET, muralSection.offsetX()).setValue(Y_OFFSET, muralSection.offsetY());
         }
         return blockState;
-    }
-
-    @Override
-    protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
-        builder.add(HORIZONTAL_FACING, CRACKED, X_OFFSET, Y_OFFSET);
     }
 
     @Override
@@ -91,5 +75,10 @@ public class MuralBlock extends BaseEntityBlock {
     @Override
     protected BlockState mirror(BlockState state, Mirror mirror) {
         return state.rotate(mirror.getRotation(state.getValue(HORIZONTAL_FACING)));
+    }
+
+    @Override
+    protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
+        builder.add(HORIZONTAL_FACING, X_OFFSET, Y_OFFSET);
     }
 }
