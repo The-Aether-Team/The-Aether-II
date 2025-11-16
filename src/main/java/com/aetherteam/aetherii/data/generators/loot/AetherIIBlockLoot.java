@@ -426,6 +426,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Sentry Bricks
         this.dropSelf(AetherIIBlocks.SENTRY_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_BRICK_STAIRS.get());
+        this.add(AetherIIBlocks.SENTRY_BRICK_SLAB.get(), this::createSlabItemTable);
 
         // Sentry Decorative Blocks
 

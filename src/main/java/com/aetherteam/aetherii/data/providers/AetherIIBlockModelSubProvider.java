@@ -18,7 +18,6 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.furniture.OutpostCampfireBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.natural.*;
-import com.aetherteam.aetherii.block.utility.AltarBlock;
 import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
 import com.aetherteam.aetherii.block.utility.BedrollBlock;
 import com.aetherteam.aetherii.client.AetherIIColorResolvers;
@@ -235,6 +234,92 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant off = plainVariant(ModelTemplates.CUBE_ALL.createWithSuffix(block, "_off", TextureMapping.cube(offLocation), this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(createBooleanModelDispatch(BlockStateProperties.LIT, on, off)));
         this.registerSimpleItemModel(block, offLocation);
+    }
+
+    public void createLitStairs(Block block, Block base) {
+        ResourceLocation offLocation = TextureMapping.getBlockTexture(base, "_off");
+
+        ResourceLocation straightLocation = ModelTemplates.STAIRS_STRAIGHT.create(block, TextureMapping.cube(base), this.modelOutput);
+        ResourceLocation straightOffLocation = ModelTemplates.STAIRS_STRAIGHT.createWithSuffix(block, "_off", TextureMapping.cube(offLocation), this.modelOutput);
+        MultiVariant inner = plainVariant(ModelTemplates.STAIRS_INNER.create(block, TextureMapping.cube(base), this.modelOutput));
+        MultiVariant straight = plainVariant(straightLocation);
+        MultiVariant outer = plainVariant(ModelTemplates.STAIRS_OUTER.create(block, TextureMapping.cube(base), this.modelOutput));
+        MultiVariant innerOff = plainVariant(ModelTemplates.STAIRS_INNER.createWithSuffix(block, "_off", TextureMapping.cube(offLocation), this.modelOutput));
+        MultiVariant straightOff = plainVariant(straightOffLocation);
+        MultiVariant outerOff = plainVariant(ModelTemplates.STAIRS_OUTER.createWithSuffix(block, "_off", TextureMapping.cube(offLocation), this.modelOutput));
+
+        PropertyDispatch.C4<MultiVariant, Direction, Half, StairsShape, Boolean> dispatch = PropertyDispatch.initial(BlockStateProperties.HORIZONTAL_FACING, BlockStateProperties.HALF, BlockStateProperties.STAIRS_SHAPE, BlockStateProperties.LIT);
+        for (boolean lit : BlockStateProperties.LIT.getPossibleValues()) {
+            inner = lit ? inner : innerOff;
+            straight = lit ? straight : straightOff;
+            outer = lit ? outer : outerOff;
+            dispatch = dispatch
+                    .select(Direction.EAST, Half.BOTTOM, StairsShape.STRAIGHT, lit, straight)
+                    .select(Direction.WEST, Half.BOTTOM, StairsShape.STRAIGHT, lit, straight.with(Y_ROT_180).with(UV_LOCK))
+                    .select(Direction.SOUTH, Half.BOTTOM, StairsShape.STRAIGHT, lit, straight.with(Y_ROT_90).with(UV_LOCK))
+                    .select(Direction.NORTH, Half.BOTTOM, StairsShape.STRAIGHT, lit, straight.with(Y_ROT_270).with(UV_LOCK))
+                    .select(Direction.EAST, Half.BOTTOM, StairsShape.OUTER_RIGHT, lit, outer)
+                    .select(Direction.WEST, Half.BOTTOM, StairsShape.OUTER_RIGHT, lit, outer.with(Y_ROT_180).with(UV_LOCK))
+                    .select(Direction.SOUTH, Half.BOTTOM, StairsShape.OUTER_RIGHT, lit, outer.with(Y_ROT_90).with(UV_LOCK))
+                    .select(Direction.NORTH, Half.BOTTOM, StairsShape.OUTER_RIGHT, lit, outer.with(Y_ROT_270).with(UV_LOCK))
+                    .select(Direction.EAST, Half.BOTTOM, StairsShape.OUTER_LEFT, lit, outer.with(Y_ROT_270).with(UV_LOCK))
+                    .select(Direction.WEST, Half.BOTTOM, StairsShape.OUTER_LEFT, lit, outer.with(Y_ROT_90).with(UV_LOCK))
+                    .select(Direction.SOUTH, Half.BOTTOM, StairsShape.OUTER_LEFT, lit, outer)
+                    .select(Direction.NORTH, Half.BOTTOM, StairsShape.OUTER_LEFT, lit, outer.with(Y_ROT_180).with(UV_LOCK))
+                    .select(Direction.EAST, Half.BOTTOM, StairsShape.INNER_RIGHT, lit, inner)
+                    .select(Direction.WEST, Half.BOTTOM, StairsShape.INNER_RIGHT, lit, inner.with(Y_ROT_180).with(UV_LOCK))
+                    .select(Direction.SOUTH, Half.BOTTOM, StairsShape.INNER_RIGHT, lit, inner.with(Y_ROT_90).with(UV_LOCK))
+                    .select(Direction.NORTH, Half.BOTTOM, StairsShape.INNER_RIGHT,lit,  inner.with(Y_ROT_270).with(UV_LOCK))
+                    .select(Direction.EAST, Half.BOTTOM, StairsShape.INNER_LEFT, lit, inner.with(Y_ROT_270).with(UV_LOCK))
+                    .select(Direction.WEST, Half.BOTTOM, StairsShape.INNER_LEFT, lit, inner.with(Y_ROT_90).with(UV_LOCK))
+                    .select(Direction.SOUTH, Half.BOTTOM, StairsShape.INNER_LEFT, lit, inner)
+                    .select(Direction.NORTH, Half.BOTTOM, StairsShape.INNER_LEFT, lit, inner.with(Y_ROT_180).with(UV_LOCK))
+                    .select(Direction.EAST, Half.TOP, StairsShape.STRAIGHT, lit, straight.with(X_ROT_180).with(UV_LOCK))
+                    .select(Direction.WEST, Half.TOP, StairsShape.STRAIGHT, lit, straight.with(X_ROT_180).with(Y_ROT_180).with(UV_LOCK))
+                    .select(Direction.SOUTH, Half.TOP, StairsShape.STRAIGHT, lit, straight.with(X_ROT_180).with(Y_ROT_90).with(UV_LOCK))
+                    .select(Direction.NORTH, Half.TOP, StairsShape.STRAIGHT, lit, straight.with(X_ROT_180).with(Y_ROT_270).with(UV_LOCK))
+                    .select(Direction.EAST, Half.TOP, StairsShape.OUTER_RIGHT, lit, outer.with(X_ROT_180).with(Y_ROT_90).with(UV_LOCK))
+                    .select(Direction.WEST, Half.TOP, StairsShape.OUTER_RIGHT, lit, outer.with(X_ROT_180).with(Y_ROT_270).with(UV_LOCK))
+                    .select(Direction.SOUTH, Half.TOP, StairsShape.OUTER_RIGHT, lit, outer.with(X_ROT_180).with(Y_ROT_180).with(UV_LOCK))
+                    .select(Direction.NORTH, Half.TOP, StairsShape.OUTER_RIGHT, lit, outer.with(X_ROT_180).with(UV_LOCK))
+                    .select(Direction.EAST, Half.TOP, StairsShape.OUTER_LEFT, lit, outer.with(X_ROT_180).with(UV_LOCK))
+                    .select(Direction.WEST, Half.TOP, StairsShape.OUTER_LEFT, lit, outer.with(X_ROT_180).with(Y_ROT_180).with(UV_LOCK))
+                    .select(Direction.SOUTH, Half.TOP, StairsShape.OUTER_LEFT, lit, outer.with(X_ROT_180).with(Y_ROT_90).with(UV_LOCK))
+                    .select(Direction.NORTH, Half.TOP, StairsShape.OUTER_LEFT, lit, outer.with(X_ROT_180).with(Y_ROT_270).with(UV_LOCK))
+                    .select(Direction.EAST, Half.TOP, StairsShape.INNER_RIGHT, lit, inner.with(X_ROT_180).with(Y_ROT_90).with(UV_LOCK))
+                    .select(Direction.WEST, Half.TOP, StairsShape.INNER_RIGHT, lit, inner.with(X_ROT_180).with(Y_ROT_270).with(UV_LOCK))
+                    .select(Direction.SOUTH, Half.TOP, StairsShape.INNER_RIGHT, lit, inner.with(X_ROT_180).with(Y_ROT_180).with(UV_LOCK))
+                    .select(Direction.NORTH, Half.TOP, StairsShape.INNER_RIGHT, lit, inner.with(X_ROT_180).with(UV_LOCK))
+                    .select(Direction.EAST, Half.TOP, StairsShape.INNER_LEFT, lit, inner.with(X_ROT_180).with(UV_LOCK))
+                    .select(Direction.WEST, Half.TOP, StairsShape.INNER_LEFT, lit, inner.with(X_ROT_180).with(Y_ROT_180).with(UV_LOCK))
+                    .select(Direction.SOUTH, Half.TOP, StairsShape.INNER_LEFT, lit, inner.with(X_ROT_180).with(Y_ROT_90).with(UV_LOCK))
+                    .select(Direction.NORTH, Half.TOP, StairsShape.INNER_LEFT, lit, inner.with(X_ROT_180).with(Y_ROT_270).with(UV_LOCK));
+        }
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(dispatch));
+        this.registerSimpleItemModel(block, straightLocation);
+    }
+
+    public void createLitSlab(Block block, Block base) {
+        ResourceLocation offLocation = TextureMapping.getBlockTexture(base, "_off");
+
+        ResourceLocation bottomLocation = ModelTemplates.SLAB_BOTTOM.create(block, TextureMapping.cube(base), this.modelOutput);
+        ResourceLocation bottomOffLocation = ModelTemplates.SLAB_BOTTOM.createWithSuffix(block, "_off", TextureMapping.cube(offLocation), this.modelOutput);
+        MultiVariant bottom = plainVariant(bottomLocation);
+        MultiVariant bottomOff = plainVariant(bottomOffLocation);
+        MultiVariant top = plainVariant(ModelTemplates.SLAB_TOP.create(block, TextureMapping.cube(base), this.modelOutput));
+        MultiVariant topOff = plainVariant(ModelTemplates.SLAB_TOP.createWithSuffix(block, "_off", TextureMapping.cube(offLocation), this.modelOutput));
+
+        PropertyDispatch.C2<MultiVariant, SlabType, Boolean> dispatch = PropertyDispatch.initial(BlockStateProperties.SLAB_TYPE, BlockStateProperties.LIT);
+        for (boolean lit : BlockStateProperties.LIT.getPossibleValues()) {
+            bottom = lit ? bottom : bottomOff;
+            top = lit ? top : topOff;
+            dispatch = dispatch
+                    .select(SlabType.BOTTOM, lit, bottom)
+                    .select(SlabType.TOP, lit, top)
+                    .select(SlabType.DOUBLE, lit, plainVariant(ModelLocationUtils.getModelLocation(block)));
+        }
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(dispatch));
+        this.registerSimpleItemModel(block, bottomLocation);
     }
 
     public void createAetherPortalBlock() {

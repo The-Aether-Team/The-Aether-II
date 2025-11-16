@@ -18,7 +18,7 @@ public class SentryBlock extends Block implements SentryBlockUpdating {
 
     public SentryBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(LIT, true).setValue(POWERED, false));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(LIT, true).setValue(POWERED, false));
     }
 
     @Override
@@ -34,6 +34,7 @@ public class SentryBlock extends Block implements SentryBlockUpdating {
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(LIT, POWERED);
     }
 }
