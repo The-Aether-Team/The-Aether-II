@@ -101,6 +101,12 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get()
         );
+        this.tag(AetherIITags.Blocks.SENTRY_BLOCKS).addTag(AetherIITags.Blocks.SENTRY_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.SENTRY_BRICKS.get(),
+                AetherIIBlocks.SENTRY_BRICK_STAIRS.get(),
+                AetherIIBlocks.SENTRY_BRICK_SLAB.get(),
+                AetherIIBlocks.SENTRY_BRICK_WALL.get()
+        );
         this.tag(AetherIITags.Blocks.QUICKSOIL_GLASS).add(
                 AetherIIBlocks.QUICKSOIL_GLASS.get(),
                 AetherIIBlocks.TILED_QUICKSOIL_GLASS.get(),

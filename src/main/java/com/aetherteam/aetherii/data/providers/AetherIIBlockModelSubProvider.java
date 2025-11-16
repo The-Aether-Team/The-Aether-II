@@ -233,7 +233,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant on = plainVariant(ModelTemplates.CUBE_ALL.create(block, TextureMapping.cube(block), this.modelOutput));
         MultiVariant off = plainVariant(ModelTemplates.CUBE_ALL.createWithSuffix(block, "_off", TextureMapping.cube(offLocation), this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(createBooleanModelDispatch(BlockStateProperties.LIT, on, off)));
-        this.registerSimpleItemModel(block, offLocation);
+        this.registerSimpleItemModel(block, ModelLocationUtils.getModelLocation(block));
     }
 
     public void createLitStairs(Block block, Block base) {
@@ -357,6 +357,40 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .put(TextureSlot.WALL, TextureMapping.getBlockTexture(block));
         ResourceLocation resourcelocation = AetherIIModelTemplates.COLUMN_WALL_INVENTORY.create(block, inventoryMapping, this.modelOutput);
         this.registerSimpleItemModel(block, resourcelocation);
+    }
+
+    public void createLitCubeColumn(Block side, Block top) {
+        TextureMapping mapping = TextureMapping.column(TextureMapping.getBlockTexture(side), TextureMapping.getBlockTexture(top));
+        TextureMapping mappingOff = TextureMapping.column(TextureMapping.getBlockTexture(side, "_off"), TextureMapping.getBlockTexture(top));
+        ResourceLocation on = ModelTemplates.CUBE_COLUMN.create(side, mapping, this.modelOutput);
+        ResourceLocation off = ModelTemplates.CUBE_COLUMN.createWithSuffix(side, "_off", mappingOff, this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(side).with(createBooleanModelDispatch(BlockStateProperties.LIT, plainVariant(on), plainVariant(off))));
+        this.registerSimpleItemModel(side, on);
+    }
+
+    public void createLitFacingColumnWithHorizontalVariant(Block side, Block top) {
+        TextureMapping mapping = TextureMapping.column(TextureMapping.getBlockTexture(side), TextureMapping.getBlockTexture(top));
+        TextureMapping mappingOff = TextureMapping.column(TextureMapping.getBlockTexture(side, "_off"), TextureMapping.getBlockTexture(top));
+
+        ResourceLocation vertical = ModelTemplates.CUBE_COLUMN.create(side, mapping, this.modelOutput);
+        ResourceLocation verticalOff = ModelTemplates.CUBE_COLUMN.createWithSuffix(side, "_off", mappingOff, this.modelOutput);
+        ResourceLocation horizontal = ModelTemplates.CUBE_COLUMN_HORIZONTAL.create(side, mapping, this.modelOutput);
+        ResourceLocation horizontalOff = ModelTemplates.CUBE_COLUMN_HORIZONTAL.createWithSuffix(side, "_off", mappingOff, this.modelOutput);
+
+        PropertyDispatch.C2<MultiVariant, Direction, Boolean> dispatch = PropertyDispatch.initial(FacingPillarBlock.FACING, BlockStateProperties.LIT);
+        for (boolean lit : BlockStateProperties.LIT.getPossibleValues()) {
+            vertical = lit ? vertical : verticalOff;
+            horizontal = lit ? horizontal : horizontalOff;
+            dispatch = dispatch
+                    .select(Direction.UP, lit, plainVariant(vertical))
+                    .select(Direction.DOWN, lit, plainVariant(vertical).with(X_ROT_180))
+                    .select(Direction.NORTH, lit, plainVariant(horizontal).with(X_ROT_90))
+                    .select(Direction.SOUTH, lit, plainVariant(horizontal).with(X_ROT_90).with(Y_ROT_180))
+                    .select(Direction.EAST, lit, plainVariant(horizontal).with(X_ROT_90).with(Y_ROT_90))
+                    .select(Direction.WEST, lit, plainVariant(horizontal).with(X_ROT_90).with(Y_ROT_270));
+        }
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(side).with(dispatch));
+        this.registerSimpleItemModel(side, ModelLocationUtils.getModelLocation(side));
     }
 
     public void createAetherPortalBlock() {

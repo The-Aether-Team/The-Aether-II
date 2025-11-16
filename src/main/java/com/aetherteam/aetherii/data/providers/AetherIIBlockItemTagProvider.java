@@ -177,6 +177,16 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.UNDERSHALE_CAPSTONE_PILLAR.get(),
                 AetherIIBlocks.UNDERSHALE_PILLAR.get()
         );
+        this.tag(AetherIITags.Blocks.SENTRY_DECORATIVE_BLOCKS, AetherIITags.Items.SENTRY_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.SENTRY_LIGHTSTONE.get(),
+                AetherIIBlocks.SENTRY_FLAGSTONES.get(),
+                AetherIIBlocks.SENTRY_TILE.get(),
+                AetherIIBlocks.SENTRY_BASE_BRICKS.get(),
+                AetherIIBlocks.SENTRY_CAPSTONE_BRICKS.get(),
+                AetherIIBlocks.SENTRY_BASE_PILLAR.get(),
+                AetherIIBlocks.SENTRY_CAPSTONE_PILLAR.get(),
+                AetherIIBlocks.SENTRY_PILLAR.get()
+        );
         this.tag(AetherIITags.Blocks.ICHORITE_DECORATIVE_BLOCKS, AetherIITags.Items.ICHORITE_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.ICHORITE_FLAGSTONES.get(),
                 AetherIIBlocks.ICHORITE_RUNESTONE.get(),

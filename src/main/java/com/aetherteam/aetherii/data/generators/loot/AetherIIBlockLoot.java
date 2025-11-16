@@ -431,6 +431,14 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.SENTRY_BRICK_WALL.get());
 
         // Sentry Decorative Blocks
+        this.dropSelf(AetherIIBlocks.SENTRY_LIGHTSTONE.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_FLAGSTONES.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_TILE.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_BASE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_CAPSTONE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_BASE_PILLAR.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_CAPSTONE_PILLAR.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_PILLAR.get());
 
         // Ichorite
         this.dropSelf(AetherIIBlocks.ICHORITE.get());

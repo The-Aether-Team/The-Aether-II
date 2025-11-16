@@ -285,6 +285,22 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.UNDERSHALE_CAPSTONE_PILLAR.get(), AetherIIBlocks.UNDERSHALE_TILE.get());
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.UNDERSHALE_PILLAR.get(), AetherIIBlocks.UNDERSHALE_TILE.get());
 
+        // Sentry Bricks
+        this.createLitBlock(AetherIIBlocks.SENTRY_BRICKS.get());
+        this.createLitStairs(AetherIIBlocks.SENTRY_BRICK_STAIRS.get(), AetherIIBlocks.SENTRY_BRICKS.get());
+        this.createLitSlab(AetherIIBlocks.SENTRY_BRICK_SLAB.get(), AetherIIBlocks.SENTRY_BRICKS.get());
+        this.createLitWall(AetherIIBlocks.SENTRY_BRICK_WALL.get(), AetherIIBlocks.SENTRY_BRICKS.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());
+
+        // Sentry Decorative Blocks
+        this.createLitBlock(AetherIIBlocks.SENTRY_LIGHTSTONE.get());
+        this.createLitBlock(AetherIIBlocks.SENTRY_FLAGSTONES.get());
+        this.createLitBlock(AetherIIBlocks.SENTRY_TILE.get());
+        this.createLitCubeColumn(AetherIIBlocks.SENTRY_BASE_BRICKS.get(), AetherIIBlocks.UNDERSHALE_TILE.get());
+        this.createLitCubeColumn(AetherIIBlocks.SENTRY_CAPSTONE_BRICKS.get(), AetherIIBlocks.UNDERSHALE_TILE.get());
+        this.createLitFacingColumnWithHorizontalVariant(AetherIIBlocks.SENTRY_BASE_PILLAR.get(), AetherIIBlocks.UNDERSHALE_TILE.get());
+        this.createLitFacingColumnWithHorizontalVariant(AetherIIBlocks.SENTRY_CAPSTONE_PILLAR.get(), AetherIIBlocks.UNDERSHALE_TILE.get());
+        this.createLitFacingColumnWithHorizontalVariant(AetherIIBlocks.SENTRY_PILLAR.get(), AetherIIBlocks.UNDERSHALE_TILE.get());
+
         // Agiosite Decorative Blocks
         this.createTrivialCube(AetherIIBlocks.AGIOSITE_FLAGSTONES.get());
         this.createTrivialCube(AetherIIBlocks.AGIOSITE_KEYSTONE.get());
@@ -312,14 +328,6 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.MARBLED_BASE_PILLAR.get(), AetherIIBlocks.MARBLED_KEYSTONE.get());
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.MARBLED_CAPSTONE_PILLAR.get(), AetherIIBlocks.MARBLED_KEYSTONE.get());
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.MARBLED_PILLAR.get(), AetherIIBlocks.MARBLED_KEYSTONE.get());
-
-        // Sentry Bricks
-        this.createLitBlock(AetherIIBlocks.SENTRY_BRICKS.get());
-        this.createLitStairs(AetherIIBlocks.SENTRY_BRICK_STAIRS.get(), AetherIIBlocks.SENTRY_BRICKS.get());
-        this.createLitSlab(AetherIIBlocks.SENTRY_BRICK_SLAB.get(), AetherIIBlocks.SENTRY_BRICKS.get());
-        this.createLitWall(AetherIIBlocks.SENTRY_BRICK_WALL.get(), AetherIIBlocks.SENTRY_BRICKS.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());
-
-        // Sentry Decorative Blocks
 
         // Icestone Decorative Blocks
         this.createTrivialCube(AetherIIBlocks.ICESTONE_FLAGSTONES.get());

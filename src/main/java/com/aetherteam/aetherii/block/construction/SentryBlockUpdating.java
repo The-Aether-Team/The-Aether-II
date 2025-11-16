@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.construction;
 
+import com.aetherteam.aetherii.AetherIITags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -15,7 +16,7 @@ public interface SentryBlockUpdating {
             BlockPos neighborPos = pos.relative(direction);
             BlockState neighborState = level.getBlockState(neighborPos);
 
-            boolean hasPowered = neighborState.is(state.getBlock()) && neighborState.getValue(BlockStateProperties.POWERED);
+            boolean hasPowered = neighborState.is(AetherIITags.Blocks.SENTRY_BLOCKS) && neighborState.getValueOrElse(BlockStateProperties.POWERED, false);
             boolean hasSignal = level.getSignal(neighborPos, direction) > 0;
             if (hasSignal != state.getValue(BlockStateProperties.POWERED) || hasPowered != state.getValue(BlockStateProperties.POWERED)) {
                 BlockState blockstate = state;
@@ -31,7 +32,7 @@ public interface SentryBlockUpdating {
     }
 
     default void scheduleChange(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState) {
-        boolean hasPowered = neighborState.is(state.getBlock()) && neighborState.getValue(BlockStateProperties.POWERED);
+        boolean hasPowered = neighborState.is(AetherIITags.Blocks.SENTRY_BLOCKS) && neighborState.getValueOrElse(BlockStateProperties.POWERED, false);
         boolean hasSignal = level.getSignal(neighborPos, direction) > 0;
         if (hasSignal != state.getValue(BlockStateProperties.POWERED) || hasPowered != state.getValue(BlockStateProperties.POWERED)) {
             scheduledTickAccess.scheduleTick(pos, state.getBlock(), 3);

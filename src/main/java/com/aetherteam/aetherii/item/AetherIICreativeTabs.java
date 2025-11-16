@@ -174,6 +174,18 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.UNDERSHALE_BASE_PILLAR.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_CAPSTONE_PILLAR.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_PILLAR.get());
+                output.accept(AetherIIBlocks.SENTRY_BRICKS.get());
+                output.accept(AetherIIBlocks.SENTRY_BRICK_STAIRS.get());
+                output.accept(AetherIIBlocks.SENTRY_BRICK_SLAB.get());
+                output.accept(AetherIIBlocks.SENTRY_BRICK_WALL.get());
+                output.accept(AetherIIBlocks.SENTRY_LIGHTSTONE.get());
+                output.accept(AetherIIBlocks.SENTRY_FLAGSTONES.get());
+                output.accept(AetherIIBlocks.SENTRY_TILE.get());
+                output.accept(AetherIIBlocks.SENTRY_BASE_BRICKS.get());
+                output.accept(AetherIIBlocks.SENTRY_CAPSTONE_BRICKS.get());
+                output.accept(AetherIIBlocks.SENTRY_BASE_PILLAR.get());
+                output.accept(AetherIIBlocks.SENTRY_CAPSTONE_PILLAR.get());
+                output.accept(AetherIIBlocks.SENTRY_PILLAR.get());
                 output.accept(AetherIIBlocks.ICHORITE.get());
                 output.accept(AetherIIBlocks.ICHORITE_STAIRS.get());
                 output.accept(AetherIIBlocks.ICHORITE_SLAB.get());

@@ -459,6 +459,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SENTRY_BRICK_WALL, "Sentry Brick Wall");
 
         // Sentry Decorative Blocks
+        this.addBlock(AetherIIBlocks.SENTRY_LIGHTSTONE, "Sentry Lightstone");
+        this.addBlock(AetherIIBlocks.SENTRY_FLAGSTONES, "Sentry Flagstones");
+        this.addBlock(AetherIIBlocks.SENTRY_TILE, "Sentry Tile");
+        this.addBlock(AetherIIBlocks.SENTRY_BASE_BRICKS, "Sentry Base Bricks");
+        this.addBlock(AetherIIBlocks.SENTRY_CAPSTONE_BRICKS, "Sentry Capstone Bricks");
+        this.addBlock(AetherIIBlocks.SENTRY_BASE_PILLAR, "Sentry Base Pillar");
+        this.addBlock(AetherIIBlocks.SENTRY_CAPSTONE_PILLAR, "Sentry Capstone Pillar");
+        this.addBlock(AetherIIBlocks.SENTRY_PILLAR, "Sentry Pillar");
 
         // Ichorite
         this.addBlock(AetherIIBlocks.ICHORITE, "Ichorite");
