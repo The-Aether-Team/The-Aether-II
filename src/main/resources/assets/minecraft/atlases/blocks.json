@@ -107,19 +107,28 @@
       }
     },
     {
-      "type": "minecraft:single",
-      "resource": "aether_ii:entity/mural/giant_test_mural",
-      "sprite": "aether_ii:block/giant_test_mural"
+      "type": "aether_ii:squares",
+      "textures": [
+        "aether_ii:entity/mural/test_mural"
+      ],
+      "width": 2,
+      "height": 2
     },
     {
-      "type": "minecraft:single",
-      "resource": "aether_ii:entity/mural/test_mural",
-      "sprite": "aether_ii:block/test_mural"
+      "type": "aether_ii:squares",
+      "textures": [
+        "aether_ii:entity/mural/large_test_mural"
+      ],
+      "width": 3,
+      "height": 2
     },
     {
-      "type": "minecraft:single",
-      "resource": "aether_ii:entity/mural/large_test_mural",
-      "sprite": "aether_ii:block/large_test_mural"
+      "type": "aether_ii:squares",
+      "textures": [
+        "aether_ii:entity/mural/giant_test_mural"
+      ],
+      "width": 4,
+      "height": 4
     }
   ]
 }

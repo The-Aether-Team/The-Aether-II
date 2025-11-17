@@ -4,12 +4,8 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.blockentity.MuralBlockEntity;
 import com.aetherteam.aetherii.client.AetherIIAtlases;
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.BlockModelPart;
-import net.minecraft.client.renderer.block.model.BlockStateModel;
-import net.minecraft.client.renderer.block.model.SimpleModelWrapper;
-import net.minecraft.client.renderer.texture.TextureAtlas;
+import com.mojang.math.Quadrant;
+import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.QuadCollection;
 import net.minecraft.core.BlockPos;
@@ -34,11 +30,8 @@ public class MuralModel extends DelegateBlockStateModel {
     private static final Direction[] DIRECTIONS = Arrays.copyOfRange(Direction.values(), 0, 7);
     private static final Map<MuralBlockEntity.MuralData, List<BlockModelPart>> CACHED_PARTS = new ConcurrentHashMap<>();
 
-    private final ResourceLocation originTexture;
-
     public MuralModel(BlockStateModel delegate) {
         super(delegate);
-		this.originTexture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/mural_side");
 	}
 
     @Override
@@ -62,16 +55,13 @@ public class MuralModel extends DelegateBlockStateModel {
     }
 
     private @NotNull ImmutableList<BlockModelPart> rebakeModelParts(List<BlockModelPart> blockModelParts, BlockState state, MuralBlockEntity.MuralData data) {
-        TextureAtlas atlas = Minecraft.getInstance().getModelManager().getAtlas(TextureAtlas.LOCATION_BLOCKS);
-		TextureAtlasSprite defaultSprite = atlas.getSprite(this.originTexture);
-		TextureAtlasSprite muralSprite = AetherIIAtlases.getMuralMaterial(data.mural().getKey()).sprite();
 
         ImmutableList.Builder<BlockModelPart> partBuilder = ImmutableList.builder();
         for (BlockModelPart part : blockModelParts) {
             QuadCollection.Builder builder = new QuadCollection.Builder();
             for (Direction side : DIRECTIONS) {
                 for (BakedQuad originalQuad : part.getQuads(side)) {
-                    BakedQuad newModelQuad = side != data.facing() ? originalQuad : this.rebakeQuad(data, originalQuad, defaultSprite, muralSprite);
+                    BakedQuad newModelQuad = side != data.facing() ? originalQuad : this.rebakeQuad(data, originalQuad);
                     if (side == null) {
                         builder.addUnculledFace(newModelQuad);
                     } else {
@@ -84,50 +74,41 @@ public class MuralModel extends DelegateBlockStateModel {
 		return partBuilder.build();
     }
 
-    private @NotNull BakedQuad rebakeQuad(MuralBlockEntity.MuralData data, BakedQuad quad, TextureAtlasSprite defaultSprite, TextureAtlasSprite muralSprite) {
-        int[] vertices = bakeMuralSection(defaultSprite, muralSprite, data, quad.vertices());
+    private @NotNull BakedQuad rebakeQuad(MuralBlockEntity.MuralData data, BakedQuad quad) {
+        int[] bakedBuffer = quad.vertices();
+        int[] rebakedSection = Arrays.copyOf(bakedBuffer, bakedBuffer.length); // Avoids mutating the original model in-memory
 
-        return new BakedQuad(vertices, quad.tintIndex(), quad.direction(), muralSprite, quad.shade(), quad.lightEmission(), quad.hasAmbientOcclusion());
-    }
-
-    private static int[] bakeMuralSection(TextureAtlasSprite originSprite, TextureAtlasSprite muralSprite, MuralBlockEntity.MuralData data, int[] bakedBuffer) {
-
-        // Avoids mutating the original model in-memory
-		int[] rebakedSection = Arrays.copyOf(bakedBuffer, bakedBuffer.length);
-
-        // Square limits for the given section of mural inside atlas
-        float sectionUMin = data.offsetX() / (float) data.mural().value().width();
-        float sectionUMax = (data.offsetX() + 1) / (float) data.mural().value().width();
-        float sectionVMin = data.offsetY() / (float) data.mural().value().height();
-        float sectionVMax = (data.offsetY() + 1) / (float) data.mural().value().height();
+        TextureAtlasSprite muralSprite = AetherIIAtlases.getMuralMaterial(new AetherIIAtlases.MuralSprite(data.mural().getKey(), data.offsetX(), data.offsetY())).sprite();
+        BlockElementFace.UVs uvs = shrinkUVs(muralSprite, new BlockElementFace.UVs(0, 0, 16, 16));
 
         for (int vertexIndex = 0; vertexIndex < 4; vertexIndex++) {
             int bufferOffset = vertexIndex * 8;
-            // UV coords from model elements
-            // Attribute offsets known from DefaultVertexFormat.BLOCK
-            float elementU = Float.intBitsToFloat(bakedBuffer[bufferOffset + 4]);
-            float elementV = Float.intBitsToFloat(bakedBuffer[bufferOffset + 5]);
 
-            float muralU = Mth.map(elementU, originSprite.getU0(), originSprite.getU1(), sectionUMin, sectionUMax);
-            float muralV = Mth.map(elementV, originSprite.getV0(), originSprite.getV1(), sectionVMin, sectionVMax);
+            float u = BlockElementFace.getU(uvs, Quadrant.R0, vertexIndex);
+            float v = BlockElementFace.getV(uvs, Quadrant.R0, vertexIndex);
 
-            float perBlockMuralU = Mth.lerp(muralU, muralSprite.getU0(), muralSprite.getU1());
-            float perBlockMuralV = Mth.lerp(muralV, muralSprite.getV0(), muralSprite.getV1());
-
-            rebakedSection[bufferOffset + 4] = Float.floatToIntBits(perBlockMuralU);
-            rebakedSection[bufferOffset + 5] = Float.floatToIntBits(perBlockMuralV);
+            rebakedSection[bufferOffset + 4] = Float.floatToRawIntBits(muralSprite.getU(u));
+            rebakedSection[bufferOffset + 5] = Float.floatToRawIntBits(muralSprite.getV(v));
         }
-
-        return rebakedSection;
+        return new BakedQuad(rebakedSection, quad.tintIndex(), quad.direction(), muralSprite, quad.shade(), quad.lightEmission(), quad.hasAmbientOcclusion());
     }
 
-    public static void registerReloadListener(AddClientReloadListenersEvent event) {
-        // Clear cache as UVs can change from resource packs
+    private static BlockElementFace.UVs shrinkUVs(TextureAtlasSprite sprite, BlockElementFace.UVs uvs) {
+        float f = uvs.minU();
+        float f1 = uvs.minV();
+        float f2 = uvs.maxU();
+        float f3 = uvs.maxV();
+        float f4 = sprite.uvShrinkRatio();
+        float f5 = (f + f + f2 + f2) / 4.0F;
+        float f6 = (f1 + f1 + f3 + f3) / 4.0F;
+        return new BlockElementFace.UVs(Mth.lerp(f4, f, f5), Mth.lerp(f4, f1, f6), Mth.lerp(f4, f2, f5), Mth.lerp(f4, f3, f6));
+    }
+
+    public static void registerReloadListener(AddClientReloadListenersEvent event) { // Clear cache as UVs can change from resource packs
         event.addListener(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "mural_cache"), (ResourceManagerReloadListener) resourceManager -> CACHED_PARTS.clear());
     }
 
-    public static void onDatapackSync(OnDatapackSyncEvent event) {
-        // Clear stale holders to prevent memory leaks
+    public static void onDatapackSync(OnDatapackSyncEvent event) { // Clear stale holders to prevent memory leaks
         CACHED_PARTS.clear();
     }
 }

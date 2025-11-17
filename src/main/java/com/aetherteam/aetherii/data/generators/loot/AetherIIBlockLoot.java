@@ -683,8 +683,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.MURAL.get(), (mural) -> LootTable.lootTable()
             .withPool(this.applyExplosionCondition(mural, LootPool.lootPool()
                     .setRolls(ConstantValue.exactly(1.0F))
-                    .add(LootItem.lootTableItem(mural))
-                )
+                    .add(LootItem.lootTableItem(mural)))
                 .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
                     .include(AetherIIDataComponents.MURAL_SECTION.get())))
         );
