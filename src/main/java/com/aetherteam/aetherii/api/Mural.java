@@ -40,33 +40,14 @@ public record Mural(int width, int height, ResourceLocation assetId, Optional<Co
             .apply(builder, Mural::new)
     );
     public static final StreamCodec<RegistryFriendlyByteBuf, Mural> DIRECT_STREAM_CODEC = StreamCodec.composite(
-        ByteBufCodecs.VAR_INT,
-        Mural::width,
-        ByteBufCodecs.VAR_INT,
-        Mural::height,
-        ResourceLocation.STREAM_CODEC,
-        Mural::assetId,
-        ComponentSerialization.TRUSTED_OPTIONAL_STREAM_CODEC,
-        Mural::title,
+        ByteBufCodecs.VAR_INT, Mural::width,
+        ByteBufCodecs.VAR_INT, Mural::height,
+        ResourceLocation.STREAM_CODEC, Mural::assetId,
+        ComponentSerialization.TRUSTED_OPTIONAL_STREAM_CODEC, Mural::title,
         Mural::new
     );
     public static final Codec<Holder<Mural>> CODEC = RegistryFixedCodec.create(AetherIIRegistries.MURAL);
     public static final StreamCodec<RegistryFriendlyByteBuf, Holder<Mural>> STREAM_CODEC = ByteBufCodecs.holder(AetherIIRegistries.MURAL, DIRECT_STREAM_CODEC);
-
-    public static void checkSize(int width, int height) {
-        if (!((1 <= width && width <= MAX_SIZE) && (1 <= height && height <= MAX_SIZE))) {
-            throw new IllegalArgumentException("Mural width/height must be between 1 and " + MAX_SIZE);
-        }
-    }
-
-    public static void checkOffset(int width, int height, int offsetX, int offsetY) {
-        if (!(0 <= offsetX && offsetX < width)) {
-            throw new IllegalArgumentException("Mural offset X must be between 0 and " + (width - 1));
-        }
-        if (!(0 <= offsetY && offsetY < height)) {
-            throw new IllegalArgumentException("Mural offset Y must be between 0 and " + (height - 1));
-        }
-    }
 
     public Mural {
         checkSize(width, height);
@@ -85,13 +66,28 @@ public record Mural(int width, int height, ResourceLocation assetId, Optional<Co
     }
 
     public void checkOffset(int offsetX, int offsetY) {
-        checkOffset(width, height, offsetX, offsetY);
+        checkOffset(this.width(), this.height(), offsetX, offsetY);
     }
 
     @Override
     public void addToTooltip(TooltipContext context, Consumer<Component> tooltipAdder, TooltipFlag flag, DataComponentGetter componentGetter) {
-        title.ifPresent(tooltipAdder);
+        this.title().ifPresent(tooltipAdder);
         tooltipAdder.accept(Component.translatable("mural.dimensions", this.width(), this.height()));
+    }
+
+    public static void checkSize(int width, int height) {
+        if (!((1 <= width && width <= MAX_SIZE) && (1 <= height && height <= MAX_SIZE))) {
+            throw new IllegalArgumentException("Mural width/height must be between 1 and " + MAX_SIZE);
+        }
+    }
+
+    public static void checkOffset(int width, int height, int offsetX, int offsetY) {
+        if (!(0 <= offsetX && offsetX < width)) {
+            throw new IllegalArgumentException("Mural offset X must be between 0 and " + (width - 1));
+        }
+        if (!(0 <= offsetY && offsetY < height)) {
+            throw new IllegalArgumentException("Mural offset Y must be between 0 and " + (height - 1));
+        }
     }
 
     public static Map<MuralSection, ResourceLocation> getPieces() {

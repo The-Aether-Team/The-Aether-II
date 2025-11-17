@@ -54,6 +54,7 @@
     "client.LocalPlayerMixin",
     "client.MultiPlayerGameModeMixin",
     "client.PlayerRendererMixin",
+    "client.accessor.BlockModelWrapperAccessor",
     "client.accessor.DeathScreenAccessor",
     "client.accessor.EditBoxAccessor",
     "client.accessor.GuiAccessor",

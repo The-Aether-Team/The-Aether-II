@@ -26,6 +26,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import net.neoforged.neoforge.event.AddAttributeTooltipsEvent;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.ArrayList;
@@ -33,9 +34,6 @@ import java.util.List;
 
 public class AetherIIClientEventListeners {
     public static void listen(IEventBus bus) {
-        // Clear cache
-        bus.addListener(MuralModel::onDatapackSync);
-
         // Screen
         bus.addListener(AetherIIClientEventListeners::onGuiOpen);
         bus.addListener(AetherIIClientEventListeners::onGuiInitializePost);
@@ -57,6 +55,9 @@ public class AetherIIClientEventListeners {
 
         // Entity
         bus.addListener(AetherIIClientEventListeners::onRenderFirstPersonArm);
+
+        // Datapacks
+        bus.addListener(AetherIIClientEventListeners::onDatapackSync);
     }
 
     public static void onGuiOpen(ScreenEvent.Opening event) {
@@ -172,7 +173,7 @@ public class AetherIIClientEventListeners {
         RenderHooks.renderFirstPersonGloves(poseStack, buffer, arm, player, packedLight, skin);
     }
 
-    public static void registerReloadListeners(AddClientReloadListenersEvent event) {
-        MuralModel.registerReloadListener(event);
+    public static void onDatapackSync(OnDatapackSyncEvent event) {
+        AetherIIClientCaches.onDatapackSync(event);
     }
 }

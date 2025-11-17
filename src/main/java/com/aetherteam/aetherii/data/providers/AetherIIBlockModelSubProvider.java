@@ -10,6 +10,7 @@ import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import com.aetherteam.aetherii.client.renderer.item.model.MuralItemModel;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.aetherteam.aetherii.AetherII;
@@ -915,10 +916,6 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         ResourceLocation modelLocation = ModelLocationUtils.getModelLocation(AetherIIBlocks.MURAL.get());
         MultiVariant mural = plainVariant(modelLocation);
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.MURAL.get(), mural).with(ROTATION_HORIZONTAL_FACING));
-        Item item = AetherIIBlocks.MURAL.get().asItem();
-        // this.registerSimpleItemModel(item, ModelTemplates.CUBE_COLUMN.create(item, TextureMapping.column(AetherIIBlocks.MURAL.get()), this.modelOutput));
-        ItemModel.Unbaked baseModel = ItemModelUtils.plainModel(modelLocation);
-//        ItemModel.Unbaked specialModel = ItemModelUtils.specialModel(modelLocation, new MuralSpecialRenderer.Unbaked());
-//        this.itemModelOutput.accept(item, ItemModelUtils.composite(baseModel, specialModel));
+        this.itemModelOutput.accept(AetherIIBlocks.MURAL.get().asItem(), new MuralItemModel.Unbaked(modelLocation));
     }
 }
