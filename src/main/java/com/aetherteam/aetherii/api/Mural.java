@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.api;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 
@@ -27,9 +29,6 @@ import net.minecraft.world.item.component.TooltipProvider;
 
 public record Mural(int width, int height, ResourceLocation assetId, Optional<Component> title) implements TooltipProvider {
     public static final int MAX_SIZE = 4;
-    
-    // public static final Codec<Mural> CODEC = AetherIIMurals.MURALS_REGISTRY.byNameCodec();
-    // public static final StreamCodec<RegistryFriendlyByteBuf, Mural> STREAM_CODEC = ByteBufCodecs.registry(AetherIIRegistries.MURAL);
     
     public static final Codec<Mural> DIRECT_CODEC = RecordCodecBuilder.create(
         builder -> builder.group(
@@ -93,5 +92,20 @@ public record Mural(int width, int height, ResourceLocation assetId, Optional<Co
     public void addToTooltip(TooltipContext context, Consumer<Component> tooltipAdder, TooltipFlag flag, DataComponentGetter componentGetter) {
         title.ifPresent(tooltipAdder);
         tooltipAdder.accept(Component.translatable("mural.dimensions", this.width(), this.height()));
+    }
+
+    public static Map<MuralSection, ResourceLocation> getPieces() {
+        Map<MuralSection, ResourceLocation> pieces = new HashMap<>();
+        AetherIIMurals.MURALS_REGISTRY.listElements().forEach(muralReference -> {
+            Mural mural = muralReference.value();
+            for (int x = 0; x < mural.width(); x++) {
+                for (int y = 0; y < mural.height(); y++) {
+                    MuralSection section = new MuralSection(muralReference, x, y);
+                    ResourceLocation location = mural.assetId().withSuffix("_" + x).withSuffix("_" + y);
+                    pieces.put(section, location);
+                }
+            }
+        });
+        return pieces;
     }
 }

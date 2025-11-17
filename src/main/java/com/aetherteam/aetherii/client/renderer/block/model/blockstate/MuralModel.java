@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.renderer.block.model.blockstate;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.blockentity.MuralBlockEntity;
+import com.aetherteam.aetherii.blockentity.MuralSection;
 import com.aetherteam.aetherii.client.AetherIIAtlases;
 import com.google.common.collect.ImmutableList;
 import com.mojang.math.Quadrant;
@@ -54,8 +55,8 @@ public class MuralModel extends DelegateBlockStateModel {
         parts.addAll(rebakedModelParts);
     }
 
-    private @NotNull ImmutableList<BlockModelPart> rebakeModelParts(List<BlockModelPart> blockModelParts, BlockState state, MuralBlockEntity.MuralData data) {
-
+    @NotNull
+    private ImmutableList<BlockModelPart> rebakeModelParts(List<BlockModelPart> blockModelParts, BlockState state, MuralBlockEntity.MuralData data) {
         ImmutableList.Builder<BlockModelPart> partBuilder = ImmutableList.builder();
         for (BlockModelPart part : blockModelParts) {
             QuadCollection.Builder builder = new QuadCollection.Builder();
@@ -74,11 +75,12 @@ public class MuralModel extends DelegateBlockStateModel {
 		return partBuilder.build();
     }
 
-    private @NotNull BakedQuad rebakeQuad(MuralBlockEntity.MuralData data, BakedQuad quad) {
+    @NotNull
+    private BakedQuad rebakeQuad(MuralBlockEntity.MuralData data, BakedQuad quad) {
         int[] bakedBuffer = quad.vertices();
         int[] rebakedSection = Arrays.copyOf(bakedBuffer, bakedBuffer.length); // Avoids mutating the original model in-memory
 
-        TextureAtlasSprite muralSprite = AetherIIAtlases.getMuralMaterial(new AetherIIAtlases.MuralSprite(data.mural().getKey(), data.offsetX(), data.offsetY())).sprite();
+        TextureAtlasSprite muralSprite = AetherIIAtlases.MURAL_MATERIALS.get(new MuralSection(data.mural(), data.offsetX(), data.offsetY())).sprite();
         BlockElementFace.UVs uvs = shrinkUVs(muralSprite, new BlockElementFace.UVs(0, 0, 16, 16));
 
         for (int vertexIndex = 0; vertexIndex < 4; vertexIndex++) {
