@@ -40,17 +40,18 @@ public class MuralItemModel extends BlockModelWrapper {
         BlockModelWrapperAccessor accessor = (BlockModelWrapperAccessor) this;
         MuralSection section = stack.get(AetherIIDataComponents.MURAL_SECTION);
         List<BakedQuad> quads = AetherIIClientCaches.CACHED_MURAL_ITEM_PARTS.get(section);
-        if (quads == null) {
-            quads = new ArrayList<>(accessor.aether_ii$getQuads());
-            if (section != null) {
+        if (section != null) {
+            if (quads == null) {
+                quads = new ArrayList<>(accessor.aether_ii$getQuads());
                 quads.replaceAll((originalQuad) -> {
                     if (originalQuad.direction() == Direction.NORTH) {
                         return MuralModel.rebakeQuad(section, originalQuad);
                     }
                     return originalQuad;
                 });
+                AetherIIClientCaches.CACHED_MURAL_ITEM_PARTS.put(section, quads);
             }
-            AetherIIClientCaches.CACHED_MURAL_ITEM_PARTS.put(section, quads);
+            renderState.appendModelIdentityElement(section);
         }
         List<BakedQuad> finalQuads = quads;
         accessor.aether_ii$setQuads(finalQuads);
