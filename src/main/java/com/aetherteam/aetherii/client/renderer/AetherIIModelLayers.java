@@ -1,6 +1,9 @@
 package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.api.Mural;
+import com.aetherteam.aetherii.blockentity.MuralSection;
+
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
 
@@ -67,6 +70,33 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation GLOVES = register("gloves");
     public static final ModelLayerLocation GLOVES_SLIM = register("gloves_slim");
     public static final ModelLayerLocation GLOVES_FIRST_PERSON = register("gloves_first_person");
+
+    static final ModelLayerLocation[][][][] MURAL_FACES;
+    static {
+        MURAL_FACES = new ModelLayerLocation[Mural.MAX_SIZE][Mural.MAX_SIZE][][];
+        for (int width = 1; width <= Mural.MAX_SIZE; width++) {
+            for (int height = 1; height <= Mural.MAX_SIZE; height++) {
+                var faces = MURAL_FACES[width - 1][height - 1] = new ModelLayerLocation[width][height];
+                for (int offsetX = 0; offsetX < width; offsetX++) {
+                    for (int offsetY = 0; offsetY < height; offsetY++) {
+                        faces[offsetX][offsetY] = register("mural_face_" + width + 'x' + height + '_' + offsetX + '_' + offsetY);
+                    }
+                }
+            }
+        }
+    }
+
+    public static ModelLayerLocation getMuralFace(MuralSection muralSection) {
+        return getMuralFace(muralSection.mural().value(), muralSection.offsetX(), muralSection.offsetY());
+    }
+
+    public static ModelLayerLocation getMuralFace(Mural mural, int offsetX, int offsetY) {
+        return getMuralFace(mural.width(), mural.height(), offsetX, offsetY);
+    }
+    
+    public static ModelLayerLocation getMuralFace(int muralWidth, int muralHeight, int offsetX, int offsetY) {
+        return MURAL_FACES[muralWidth - 1][muralHeight - 1][offsetX][offsetY];
+    }
 
     private static ModelLayerLocation register(String name) {
         return register(name, "main");

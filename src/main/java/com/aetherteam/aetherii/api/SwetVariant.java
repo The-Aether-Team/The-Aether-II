@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.api;
 
-import com.aetherteam.aetherii.data.resources.registries.AetherIISwetVariants;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
@@ -35,6 +35,6 @@ public record SwetVariant(ResourceLocation texture, Holder<Item> gelItem, Holder
             ResourceLocation.STREAM_CODEC, SwetVariant::right1,
             ResourceLocation.STREAM_CODEC, SwetVariant::right2,
             SwetVariant::new);
-    public static final Codec<Holder<SwetVariant>> CODEC = RegistryFileCodec.create(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY, DIRECT_CODEC);
-    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<SwetVariant>> STREAM_CODEC = ByteBufCodecs.holder(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY, DIRECT_STREAM_CODEC);
+    public static final Codec<Holder<SwetVariant>> CODEC = RegistryFileCodec.create(AetherIIRegistries.SWET_VARIANT, DIRECT_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<SwetVariant>> STREAM_CODEC = ByteBufCodecs.holder(AetherIIRegistries.SWET_VARIANT, DIRECT_STREAM_CODEC);
 }

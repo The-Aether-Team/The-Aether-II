@@ -4,6 +4,8 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.api.guidebook.RewardWrapper;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
+
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -19,10 +21,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public class AetherIIRewardWrappers {
-    public static final ResourceKey<Registry<RewardWrapper>> REWARD_WRAPPER_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "reward_wrapper"));
-
     private static ResourceKey<RewardWrapper> createKey(String name) {
-        return ResourceKey.create(AetherIIRewardWrappers.REWARD_WRAPPER_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.REWARD_WRAPPER, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<RewardWrapper> context) {
@@ -55,7 +55,7 @@ public class AetherIIRewardWrappers {
                     BestiaryEntry.LOOT.id() + "_1",
                     BestiaryEntry.LOOT.id() + "_2",
                     BestiaryEntry.FOOD.id()));
-            context.register(ResourceKey.create(REWARD_WRAPPER_REGISTRY_KEY, observeId), observeWrapper);
+            context.register(ResourceKey.create(AetherIIRegistries.REWARD_WRAPPER, observeId), observeWrapper);
         }
     }
 
@@ -78,12 +78,12 @@ public class AetherIIRewardWrappers {
                     EffectsEntry.ITEM.id() + "_3",
                     EffectsEntry.ITEM.id() + "_4",
                     EffectsEntry.ITEM.id() + "_5"));
-            context.register(ResourceKey.create(REWARD_WRAPPER_REGISTRY_KEY, id), observeWrapper);
+            context.register(ResourceKey.create(AetherIIRegistries.REWARD_WRAPPER, id), observeWrapper);
         }
     }
 
     public static Registry<RewardWrapper> getRegistry(RegistryAccess registryAccess) {
-        return registryAccess.lookupOrThrow(AetherIIRewardWrappers.REWARD_WRAPPER_REGISTRY_KEY);
+        return registryAccess.lookupOrThrow(AetherIIRegistries.REWARD_WRAPPER);
     }
 
     public static Optional<RewardWrapper> getWrapperForAdvancement(RegistryAccess registryAccess, ResourceLocation advancement) {

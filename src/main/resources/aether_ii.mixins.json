@@ -57,6 +57,7 @@
     "client.MusicManagerMixin",
     "client.PlayerRendererMixin",
     "client.accessor.BossHealthOverlayAccessor",
+    "client.accessor.BlockModelWrapperAccessor",
     "client.accessor.DeathScreenAccessor",
     "client.accessor.EditBoxAccessor",
     "client.accessor.GuiAccessor",

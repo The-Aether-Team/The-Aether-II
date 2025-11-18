@@ -10,7 +10,7 @@ import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import net.minecraft.world.level.block.state.properties.*;
+import com.aetherteam.aetherii.client.renderer.item.model.MuralItemModel;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.aetherteam.aetherii.AetherII;
@@ -51,6 +51,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.MossyCarpetBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.state.properties.*;
 
 public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public AetherIIBlockModelSubProvider(Consumer<BlockModelDefinitionGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
@@ -1046,7 +1047,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 
     public void createBed(Block block, Block particle, ResourceLocation location) {
         MultiVariant bed = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("skyroot_bed"));
-        this.blockStateOutput.accept(createSimpleBlock(block, bed));
+        this.blockStateOutput.accept( createSimpleBlock(block, bed));
         Item item = block.asItem();
         ResourceLocation inventoryLocation = ModelTemplates.BED_INVENTORY.create(ModelLocationUtils.getModelLocation(item), TextureMapping.particle(particle), this.modelOutput);
         this.itemModelOutput.accept(item, ItemModelUtils.specialModel(inventoryLocation, new BedSpecialRenderer.Unbaked(location)));
@@ -1075,5 +1076,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
             return plainVariant(model);
         })));
         this.registerSimpleFlatItemModel(AetherIIBlocks.OUTPOST_CAMPFIRE.asItem());
+    }
+
+    public void createMural() {
+        ResourceLocation modelLocation = ModelLocationUtils.getModelLocation(AetherIIBlocks.MURAL.get());
+        MultiVariant mural = plainVariant(modelLocation);
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.MURAL.get(), mural).with(ROTATION_HORIZONTAL_FACING));
+        this.itemModelOutput.accept(AetherIIBlocks.MURAL.get().asItem(), new MuralItemModel.Unbaked(modelLocation));
     }
 }

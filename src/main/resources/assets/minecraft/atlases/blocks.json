@@ -1,6 +1,16 @@
 {
   "sources": [
     {
+      "type": "single",
+      "resource": "aether_ii:entity/mural/mural_base",
+      "sprite": "aether_ii:block/mural_top"
+    },
+    {
+      "type": "single",
+      "resource": "aether_ii:entity/mural/mural_side",
+      "sprite": "aether_ii:block/mural_side"
+    },
+    {
       "type": "directory",
       "source": "fluid",
       "prefix": "fluid/"
@@ -95,6 +105,30 @@
         "shayelinn": "aether_ii:block/shayelinn_overlay",
         "ambrelinn": "aether_ii:block/ambrelinn_overlay"
       }
+    },
+    {
+      "type": "aether_ii:squares",
+      "textures": [
+        "aether_ii:entity/mural/test_mural"
+      ],
+      "width": 2,
+      "height": 2
+    },
+    {
+      "type": "aether_ii:squares",
+      "textures": [
+        "aether_ii:entity/mural/large_test_mural"
+      ],
+      "width": 3,
+      "height": 2
+    },
+    {
+      "type": "aether_ii:squares",
+      "textures": [
+        "aether_ii:entity/mural/giant_test_mural"
+      ],
+      "width": 4,
+      "height": 4
     }
   ]
 }

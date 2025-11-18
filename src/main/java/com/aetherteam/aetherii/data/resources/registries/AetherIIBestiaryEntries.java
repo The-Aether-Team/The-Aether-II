@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
@@ -30,8 +31,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class AetherIIBestiaryEntries {
-    public static final ResourceKey<Registry<BestiaryEntry>> BESTIARY_ENTRY_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bestiary_entry"));
-
     public static final ResourceKey<BestiaryEntry> FLYING_COW = createKey("flying_cow");
     public static final ResourceKey<BestiaryEntry> SHEEPUFF = createKey("sheepuff");
     public static final ResourceKey<BestiaryEntry> PHYG = createKey("phyg");
@@ -173,7 +172,7 @@ public class AetherIIBestiaryEntries {
     );
 
     private static ResourceKey<BestiaryEntry> createKey(String name) {
-        return ResourceKey.create(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.BESTIARY_ENTRY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<BestiaryEntry> context) {
@@ -213,7 +212,7 @@ public class AetherIIBestiaryEntries {
     }
 
     public static Registry<BestiaryEntry> getRegistry(RegistryAccess registryAccess) {
-        return registryAccess.lookupOrThrow(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY);
+        return registryAccess.lookupOrThrow(AetherIIRegistries.BESTIARY_ENTRY);
     }
 
     public static List<BestiaryEntry.EffectResistanceDisplay> getEffectResistances(Holder<EntityType<?>> holder) {

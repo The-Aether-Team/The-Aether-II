@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.api.guidebook;
 
-import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -49,8 +49,8 @@ public class BestiaryEntry extends GuidebookEntry {
                     Codec.list(BestiaryEntry.LOOT.mapCodec().codec(), 0, 3).fieldOf("loot_slots").forGetter(BestiaryEntry::getLoot),
                     BestiaryEntry.FOOD.mapCodec().forGetter(BestiaryEntry::getFood)
             ).apply(in, BestiaryEntry::new));
-    public static final Codec<Holder<BestiaryEntry>> REFERENCE_CODEC = RegistryFileCodec.create(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, DIRECT_CODEC);
-    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<BestiaryEntry>> STREAM_CODEC = ByteBufCodecs.holderRegistry(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY);
+    public static final Codec<Holder<BestiaryEntry>> REFERENCE_CODEC = RegistryFileCodec.create(AetherIIRegistries.BESTIARY_ENTRY, DIRECT_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<BestiaryEntry>> STREAM_CODEC = ByteBufCodecs.holderRegistry(AetherIIRegistries.BESTIARY_ENTRY);
 
     private final Holder<EntityType<?>> entityType;
     private final int health;

@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.item.components;
 
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.api.styles.StyleDesign;
 import com.aetherteam.aetherii.api.styles.StyleMaterial;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStyleDesigns;
@@ -23,13 +24,13 @@ import java.util.function.Consumer;
 
 public record ArmorStyle(ResourceKey<StyleMaterial> material, ResourceKey<StyleDesign> design, boolean showInTooltip) implements TooltipProvider {
     public static final Codec<ArmorStyle> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-            ResourceKey.codec(AetherIIStyleMaterials.STYLE_MATERIAL_REGISTRY_KEY).fieldOf("material").forGetter(ArmorStyle::material),
-            ResourceKey.codec(AetherIIStyleDesigns.STYLE_DESIGN_REGISTRY_KEY).fieldOf("design").forGetter(ArmorStyle::design),
+            ResourceKey.codec(AetherIIRegistries.STYLE_MATERIAL).fieldOf("material").forGetter(ArmorStyle::material),
+            ResourceKey.codec(AetherIIRegistries.STYLE_DESIGN).fieldOf("design").forGetter(ArmorStyle::design),
             Codec.BOOL.optionalFieldOf("show_in_tooltip", true).forGetter(ArmorStyle::showInTooltip)
     ).apply(instance, ArmorStyle::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, ArmorStyle> STREAM_CODEC = StreamCodec.composite(
-            ResourceKey.streamCodec(AetherIIStyleMaterials.STYLE_MATERIAL_REGISTRY_KEY), ArmorStyle::material,
-            ResourceKey.streamCodec(AetherIIStyleDesigns.STYLE_DESIGN_REGISTRY_KEY), ArmorStyle::design,
+            ResourceKey.streamCodec(AetherIIRegistries.STYLE_MATERIAL), ArmorStyle::material,
+            ResourceKey.streamCodec(AetherIIRegistries.STYLE_DESIGN), ArmorStyle::design,
             ByteBufCodecs.BOOL, ArmorStyle::showInTooltip,
             ArmorStyle::new);
 

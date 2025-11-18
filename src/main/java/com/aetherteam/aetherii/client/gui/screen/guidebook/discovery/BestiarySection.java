@@ -3,11 +3,11 @@ package com.aetherteam.aetherii.client.gui.screen.guidebook.discovery;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.GuidebookEntry;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.GuidebookDiscoveryAttachment;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.attributes.EffectResistanceAttribute;
 import com.aetherteam.aetherii.network.packet.serverbound.CheckBestiaryEntryPacket;
@@ -73,7 +73,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     private int switchFoodItemCounter = 0;
 
     public BestiarySection(RegistryAccess registryAccess, GuidebookDiscoveryScreen screen, Component title) {
-        super(registryAccess, AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, screen, title);
+        super(registryAccess, AetherIIRegistries.BESTIARY_ENTRY, screen, title);
     }
 
     @Override

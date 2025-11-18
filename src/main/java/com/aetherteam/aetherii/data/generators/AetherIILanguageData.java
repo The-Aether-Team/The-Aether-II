@@ -1,9 +1,11 @@
 package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.api.Mural;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIMurals;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
 import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
@@ -17,6 +19,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.TreeMap;
@@ -46,6 +49,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addMusic();
         this.addSubtitles();
         this.addDeaths();
+        this.addMuralTitles();
 
         // Dimensions
         this.addDimension(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, "Aether Highlands");
@@ -66,6 +70,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addTooltip("item.modifiers.handwear", "When wearing Handwear:");
         this.addTooltip("item.modifiers.accessory", "When wearing Accessory:");
         this.addTooltip("item.modifiers.blocking", "When blocking:");
+        this.add("mural.random", "Random variant");
+        this.add("mural.dimensions", "%sx%s");
+        this.add("mural.offset", "Section: (%s, %s)");
     }
 
     private void addBlocks() {
@@ -745,6 +752,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Furniture
         this.addBlock(AetherIIBlocks.OUTPOST_CAMPFIRE, "Outpost Campfire");
+        this.addBlock(AetherIIBlocks.MURAL, "Mural");
     }
 
     private void addItems() {
@@ -1019,7 +1027,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GLINT_COIN, "Glint Coin");
         this.addItem(AetherIIItems.GUIDEBOOK_PAGE, "Guidebook Page");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
-
+        this.addItem(AetherIIItems.MURAL_ITEM, "Mural");
     }
 
     private void addPerItemAbilityTooltips() {
@@ -1700,6 +1708,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addDeath("effect.immolation", "%1$s burned to death");
     }
 
+    private void addMuralTitles() {
+        this.addMuralTitle(AetherIIMurals.TEST, "Test Mural");
+    }
+
     // Utility methods
 
     public void addBestiaryEntry(EntityType<?> entityType, String typeName, String subspeciesName, String description) {
@@ -1729,5 +1741,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         SpawnEggItem item = key.get();
         EntityType<?> entitytype = item.getType(null, ItemStack.EMPTY);
         this.add(item, entityTypes.get(entitytype.getDescriptionId()).concat(" Spawn Egg"));
+    }
+
+    public void addMuralTitle(DeferredHolder<Mural, Mural> key, String title) {
+        this.add(key.getKey().location().toLanguageKey("mural", "title"), title);
     }
 }

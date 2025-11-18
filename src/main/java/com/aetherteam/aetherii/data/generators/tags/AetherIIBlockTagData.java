@@ -774,7 +774,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ALKAHEST_PURIFIER.get(),
                 AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(),
                 AetherIIBlocks.ARKENIUM_DOOR.get(),
-                AetherIIBlocks.ARKENIUM_TRAPDOOR.get()
+                AetherIIBlocks.ARKENIUM_TRAPDOOR.get(),
+                AetherIIBlocks.MURAL.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
                 AetherIIBlocks.AETHER_SHORT_GRASS.get(),

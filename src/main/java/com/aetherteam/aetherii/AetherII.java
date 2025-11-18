@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii;
 
+import org.slf4j.Logger;
+
 import com.aetherteam.aetherii.advancement.predicate.AetherIIEntitySubPredicates;
 import com.aetherteam.aetherii.api.SkyrootLizardVariant;
 import com.aetherteam.aetherii.api.SwetVariant;
@@ -7,10 +9,15 @@ import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
 import com.aetherteam.aetherii.api.guidebook.RewardWrapper;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.api.styles.StyleDesign;
 import com.aetherteam.aetherii.api.styles.StyleMaterial;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.block.*;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.AetherIICauldronInteractions;
+import com.aetherteam.aetherii.block.AetherIIDispenseBehaviors;
+import com.aetherteam.aetherii.block.AetherIIFluidTypes;
+import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.AetherIIClient;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
@@ -18,7 +25,8 @@ import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.data.ReloadListeners;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
-import com.aetherteam.aetherii.data.resources.registries.*;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIMurals;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -55,6 +63,7 @@ import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.aetherteam.aetherii.world.tree.trunk.AetherIITrunkPlacerTypes;
 import com.google.common.reflect.Reflection;
 import com.mojang.logging.LogUtils;
+
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.api.distmarker.Dist;
@@ -68,7 +77,6 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.slf4j.Logger;
 
 @Mod(AetherII.MODID)
 public class AetherII {
@@ -81,16 +89,10 @@ public class AetherII {
         bus.addListener(this::commonSetup);
         bus.addListener(this::registerPackets);
 
-        bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, BestiaryEntry.DIRECT_CODEC, BestiaryEntry.DIRECT_CODEC));
-        bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY, EffectsEntry.DIRECT_CODEC, EffectsEntry.DIRECT_CODEC));
-        bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY, ExplorationEntry.DIRECT_CODEC, ExplorationEntry.DIRECT_CODEC));
-        bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIStyleDesigns.STYLE_DESIGN_REGISTRY_KEY, StyleDesign.DIRECT_CODEC, StyleDesign.DIRECT_CODEC));
-        bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIStyleMaterials.STYLE_MATERIAL_REGISTRY_KEY, StyleMaterial.DIRECT_CODEC, StyleMaterial.DIRECT_CODEC));
-        bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY, SwetVariant.DIRECT_CODEC, SwetVariant.DIRECT_CODEC));
-        bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY, SkyrootLizardVariant.DIRECT_CODEC, SkyrootLizardVariant.DIRECT_CODEC));
-        bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIRewardWrappers.REWARD_WRAPPER_REGISTRY_KEY, RewardWrapper.DIRECT_CODEC, RewardWrapper.DIRECT_CODEC));
+        bus.addListener(DataPackRegistryEvent.NewRegistry.class, AetherII::registerDataPackRegistries);
 
         DeferredRegister<?>[] registers = {
+                AetherIIMurals.MURALS,
                 AetherIIFluidTypes.FLUID_TYPES,
                 AetherIIFluids.FLUIDS,
                 AetherIIBlocks.BLOCKS,
@@ -129,7 +131,7 @@ public class AetherII {
                 AetherIISurfaceRules.MATERIAL_RULES,
                 AetherIIBlockPredicateTypes.BLOCK_PREDICATE_TYPES,
                 AetherIIPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES,
-                AetherIIEntitySubPredicates.ENTITY_SUB_PREDICATES
+                AetherIIEntitySubPredicates.ENTITY_SUB_PREDICATES,
         };
 
         for (DeferredRegister<?> register : registers) {
@@ -146,6 +148,17 @@ public class AetherII {
         if (dist == Dist.CLIENT) {
             AetherIIClient.clientInit(bus);
         }
+    }
+
+    private static void registerDataPackRegistries(DataPackRegistryEvent.NewRegistry event) {
+        event.dataPackRegistry(AetherIIRegistries.BESTIARY_ENTRY, BestiaryEntry.DIRECT_CODEC, BestiaryEntry.DIRECT_CODEC);
+        event.dataPackRegistry(AetherIIRegistries.EFFECTS_ENTRY, EffectsEntry.DIRECT_CODEC, EffectsEntry.DIRECT_CODEC);
+        event.dataPackRegistry(AetherIIRegistries.EXPLORATION_ENTRY, ExplorationEntry.DIRECT_CODEC, ExplorationEntry.DIRECT_CODEC);
+        event.dataPackRegistry(AetherIIRegistries.STYLE_DESIGN, StyleDesign.DIRECT_CODEC, StyleDesign.DIRECT_CODEC);
+        event.dataPackRegistry(AetherIIRegistries.STYLE_MATERIAL, StyleMaterial.DIRECT_CODEC, StyleMaterial.DIRECT_CODEC);
+        event.dataPackRegistry(AetherIIRegistries.SWET_VARIANT, SwetVariant.DIRECT_CODEC, SwetVariant.DIRECT_CODEC);
+        event.dataPackRegistry(AetherIIRegistries.SKYROOT_LIZARD_VARIANT, SkyrootLizardVariant.DIRECT_CODEC, SkyrootLizardVariant.DIRECT_CODEC);
+        event.dataPackRegistry(AetherIIRegistries.REWARD_WRAPPER, RewardWrapper.DIRECT_CODEC, RewardWrapper.DIRECT_CODEC);
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {

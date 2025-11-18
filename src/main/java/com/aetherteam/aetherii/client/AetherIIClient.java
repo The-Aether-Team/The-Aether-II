@@ -81,6 +81,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIAtlases::registerAtlases);
         neoBus.addListener(AetherIISpriteSourceTypes::registerSpriteSourceTypes);
         neoBus.addListener(AetherIIItemTintSources::registerTintSources);
+        neoBus.addListener(AetherIIClientCaches::registerReloadListeners);
     }
 
     public static void registerDimensionTransitionScreens(RegisterDimensionTransitionScreenEvent event) {

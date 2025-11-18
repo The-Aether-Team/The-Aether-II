@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.event.hooks.MusicHooks;
 import com.aetherteam.aetherii.client.event.hooks.RenderHooks;
+import com.aetherteam.aetherii.client.renderer.block.model.blockstate.MuralModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Camera;
@@ -27,6 +28,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import net.neoforged.neoforge.event.AddAttributeTooltipsEvent;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.ArrayList;
@@ -57,6 +59,9 @@ public class AetherIIClientEventListeners {
 
         // Entity
         bus.addListener(AetherIIClientEventListeners::onRenderFirstPersonArm);
+
+        // Datapacks
+        bus.addListener(AetherIIClientEventListeners::onDatapackSync);
     }
 
     public static void onGuiOpen(ScreenEvent.Opening event) {
@@ -180,5 +185,9 @@ public class AetherIIClientEventListeners {
         PlayerSkin skin = player.getSkin();
 
         RenderHooks.renderFirstPersonGloves(poseStack, buffer, arm, player, packedLight, skin);
+    }
+
+    public static void onDatapackSync(OnDatapackSyncEvent event) {
+        AetherIIClientCaches.onDatapackSync(event);
     }
 }
