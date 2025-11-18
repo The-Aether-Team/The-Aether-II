@@ -5,10 +5,10 @@ import com.aetherteam.aetherii.client.AetherIIClientCaches;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.MuralModel;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.BlockModelWrapperAccessor;
+import com.google.common.base.Suppliers;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.color.item.ItemTintSource;
-import net.minecraft.client.color.item.ItemTintSources;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -37,10 +37,11 @@ public class MuralItemModel extends BlockModelWrapper {
 
     @Override
     public void update(ItemStackRenderState renderState, ItemStack stack, ItemModelResolver modelResolver, ItemDisplayContext displayContext, @Nullable ClientLevel level, @Nullable LivingEntity entity, int p_387820_) {
+        BlockModelWrapperAccessor accessor = (BlockModelWrapperAccessor) this;
         MuralSection section = stack.get(AetherIIDataComponents.MURAL_SECTION);
-        List<BakedQuad> cachedQuads = AetherIIClientCaches.CACHED_MURAL_ITEM_PARTS.get(section);
-        if (cachedQuads == null) {
-            List<BakedQuad> quads = new ArrayList<>(((BlockModelWrapperAccessor) this).aether_ii$getQuads());
+        List<BakedQuad> quads = AetherIIClientCaches.CACHED_MURAL_ITEM_PARTS.get(section);
+        if (quads == null) {
+            quads = new ArrayList<>(accessor.aether_ii$getQuads());
             if (section != null) {
                 quads.replaceAll((originalQuad) -> {
                     if (originalQuad.direction() == Direction.NORTH) {
@@ -50,10 +51,10 @@ public class MuralItemModel extends BlockModelWrapper {
                 });
             }
             AetherIIClientCaches.CACHED_MURAL_ITEM_PARTS.put(section, quads);
-            ((BlockModelWrapperAccessor) this).aether_ii$setQuads(quads);
-        } else {
-            ((BlockModelWrapperAccessor) this).aether_ii$setQuads(cachedQuads);
         }
+        List<BakedQuad> finalQuads = quads;
+        accessor.aether_ii$setQuads(finalQuads);
+        accessor.aether_ii$setExtents(Suppliers.memoize(() -> computeExtents(finalQuads)));
         super.update(renderState, stack, modelResolver, displayContext, level, entity, p_387820_);
     }
 
