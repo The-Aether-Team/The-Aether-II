@@ -28,9 +28,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
-
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.SlimeModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.blockentity.BedRenderer;
@@ -212,7 +210,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.ARKENIUM_TALUTON, ArkeniumTalutonModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_TALUTON, GravititeTalutonModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.BLADE_SHROOM_HUNTER, BladeShroomHunterModel::createBodyLayer);
-        event.registerLayerDefinition(AetherIIModelLayers.DETONATION_SENTRY, SlimeModel::createOuterBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.DETONATION_SENTRY, SentryModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SENTRY_GOLEM, SentryGolemModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SLIDER, SliderModel::createBodyLayer);
 

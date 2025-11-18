@@ -6,7 +6,6 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.neoforge.common.Tags;
@@ -113,6 +112,12 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.ZEPHYR.get(),
                 AetherIIEntityTypes.SKEPHID.get(),
                 AetherIIEntityTypes.GRAVITITE_TALUTON.get()
+        );
+
+        this.tag(EntityTypeTags.CAN_BREATHE_UNDER_WATER).add(
+                AetherIIEntityTypes.DETONATION_SENTRY.get(),
+                AetherIIEntityTypes.SENTRY_GOLEM.get(),
+                AetherIIEntityTypes.SLIDER.get()
         );
     }
 }
