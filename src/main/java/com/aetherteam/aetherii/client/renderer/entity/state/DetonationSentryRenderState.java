@@ -4,5 +4,5 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 
 public class DetonationSentryRenderState extends LivingEntityRenderState {
     public boolean awake;
-    public float swelling;
+    public float timer;
 }

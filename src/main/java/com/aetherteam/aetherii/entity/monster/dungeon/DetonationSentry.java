@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.monster.dungeon;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.ai.goal.FakeMeleeAttackGoal;
 import net.minecraft.core.particles.ParticleTypes;
@@ -23,7 +24,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
@@ -33,11 +33,13 @@ public class DetonationSentry extends Monster {
     private static final EntityDataAccessor<Boolean> DATA_AWAKE_ID = SynchedEntityData.defineId(DetonationSentry.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_IS_IGNITED = SynchedEntityData.defineId(DetonationSentry.class, EntityDataSerializers.BOOLEAN);
 
+    private static final float EXPLOSION_RADIUS = 2.5F;
+    public static final int MAX_TIMER = 60;
+    private int oldTimer;
+    private int timer;
     private float timeSpotted = 0.0F;
-    private int oldSwell;
-    private int swell;
-    private int maxSwell = 60;
-    private float explosionRadius = 1;
+    private boolean playSound;
+
     public DetonationSentry(EntityType<? extends DetonationSentry> type, Level level) {
         super(type, level);
     }
@@ -69,16 +71,12 @@ public class DetonationSentry extends Monster {
     @Override
     protected void addAdditionalSaveData(ValueOutput valueOutput) {
         super.addAdditionalSaveData(valueOutput);
-        valueOutput.putShort("Fuse", (short) this.maxSwell);
-        valueOutput.putFloat("ExplosionRadius", (byte) this.explosionRadius);
         valueOutput.putBoolean("ignited", this.isIgnited());
     }
 
     @Override
     protected void readAdditionalSaveData(ValueInput valueInput) {
         super.readAdditionalSaveData(valueInput);
-        this.maxSwell = valueInput.getShortOr("Fuse", (short) 60);
-        this.explosionRadius = valueInput.getFloatOr("ExplosionRadius", (byte) 1);
         if (valueInput.getBooleanOr("ignited", false)) {
             this.ignite();
         }
@@ -90,31 +88,25 @@ public class DetonationSentry extends Monster {
     @Override
     public void tick() {
         if (this.isAlive()) {
-            this.oldSwell = this.swell;
-            if (this.isIgnited() && this.swell == 0) {
-                this.playSound(SoundEvents.CREEPER_PRIMED, 1.0F, 0.5F);
-                this.gameEvent(GameEvent.PRIME_FUSE);
-            }
+            this.oldTimer = this.timer;
             if (this.isIgnited()) {
-                this.swell += 1;
-                boolean swellIncoming = ((float) this.swell / this.maxSwell) > 0.5F;
-                if (swellIncoming) {
-                    if (this.swell % 5 == 0) {
-                        this.playSound(SoundEvents.NOTE_BLOCK_BIT.value(), 1.0F, 1F);
+                this.timer += 1;
+                float flickerInterval = Mth.sin(Mth.square(this.timer) / 50.0F);
+                AetherII.LOGGER.info(String.valueOf(flickerInterval));
+                if (flickerInterval < 0) {
+                    if (this.playSound) {
+                        this.playSound(SoundEvents.NOTE_BLOCK_BIT.value(), 1.0F, 1.0F);
+                        this.playSound = false;
                     }
                 } else {
-                    if (this.swell % 10 == 0) {
-                        this.playSound(SoundEvents.NOTE_BLOCK_BIT.value(), 1.0F, 0.5F);
-                    }
+                    this.playSound = true;
                 }
             }
-
-            if (this.swell < 0) {
-                this.swell = 0;
+            if (this.timer < 0) {
+                this.timer = 0;
             }
-
-            if (this.swell >= this.maxSwell) {
-                this.swell = this.maxSwell;
+            if (this.timer >= MAX_TIMER) {
+                this.timer = MAX_TIMER;
                 this.explodeAt();
             }
         }
@@ -128,7 +120,6 @@ public class DetonationSentry extends Monster {
             }
 
         } else if (!this.isIgnited()) {
-            //prevent to eye glow stop when ignite
             this.setAwake(false);
         }
         super.tick();
@@ -139,7 +130,7 @@ public class DetonationSentry extends Monster {
      */
     protected void explodeAt() {
         if (this.isAwake() && this.isAlive()) {
-            this.level().explode(this, this.getX(), this.getY(), this.getZ(), this.explosionRadius, Level.ExplosionInteraction.MOB);
+            this.level().explode(this, this.getX(), this.getY(), this.getZ(), EXPLOSION_RADIUS, Level.ExplosionInteraction.NONE);
             this.playSound(SoundEvents.GENERIC_EXPLODE.value(), 1.0F, 0.2F * (this.getRandom().nextFloat() - this.getRandom().nextFloat()) + 1);
             if (this.level() instanceof ServerLevel level) {
                 level.broadcastEntityEvent(this, (byte) 70);
@@ -152,8 +143,8 @@ public class DetonationSentry extends Monster {
     /**
      * Params: (Float)Render tick. Returns the intensity of the creeper's flash when it is ignited.
      */
-    public float getSwelling(float partialTicks) {
-        return Mth.lerp(partialTicks, (float) this.oldSwell, (float) this.swell) / (this.maxSwell - 2);
+    public float getTimer(float partialTicks) {
+        return Mth.lerp(partialTicks, (float) this.oldTimer, (float) this.timer);
     }
 
     /**
@@ -215,7 +206,6 @@ public class DetonationSentry extends Monster {
         this.entityData.set(DATA_IS_IGNITED, true);
     }
 
-
     static class SentryFloatGoal extends FloatGoal {
         private final DetonationSentry detonationSentry;
 
@@ -251,7 +241,7 @@ public class DetonationSentry extends Monster {
 
         @Override
         public void start() {
-            this.detonationSentry.getNavigation().stop();
+//            this.detonationSentry.getNavigation().stop();
             this.detonationSentry.setAwake(true);
         }
 

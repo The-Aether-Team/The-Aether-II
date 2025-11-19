@@ -1,20 +1,21 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.client.renderer.entity.state.DetonationSentryRenderState;
+import com.aetherteam.aetherii.entity.monster.dungeon.DetonationSentry;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class SentryModel extends EntityModel<DetonationSentryRenderState> {
+public class DetonationSentryModel extends EntityModel<DetonationSentryRenderState> {
     private final ModelPart bone;
     private final ModelPart bone2;
     private final ModelPart bone4;
     private final ModelPart bone3;
     private final ModelPart bone5;
 
-    public SentryModel(ModelPart root) {
+    public DetonationSentryModel(ModelPart root) {
         super(root);
         this.bone = root.getChild("bone");
         this.bone2 = this.bone.getChild("bone2");
@@ -42,20 +43,32 @@ public class SentryModel extends EntityModel<DetonationSentryRenderState> {
         PartDefinition bone5 = bone.addOrReplaceChild("bone5", CubeListBuilder.create().texOffs(0, 43).addBox(-2.0F, -1.5F, -1.0F, 4.0F, 7.0F, 4.0F, new CubeDeformation(0.0F))
                 .texOffs(17, 43).addBox(-2.0F, -1.5F, -1.0F, 4.0F, 7.0F, 4.0F, new CubeDeformation(0.3F)), PartPose.offsetAndRotation(-7.0F, -4.0F, 7.0F, 0.2618F, -0.7854F, 0.0F));
 
-        return LayerDefinition.create(meshdefinition, 128, 128);
+        return LayerDefinition.create(meshdefinition, 128, 64);
     }
 
     @Override
     public void setupAnim(DetonationSentryRenderState renderState) {
         super.setupAnim(renderState);
 
-        if (renderState.awake) {
-            float f = renderState.walkAnimationSpeed;
-            float f1 = renderState.walkAnimationPos;
-            this.bone2.xRot += Mth.cos(f1 * 0.6662F) * 1.4F * f;
-            this.bone3.xRot += Mth.cos(f1 * 0.6662F + (float) Math.PI) * 1.4F * f;
-            this.bone4.xRot += Mth.cos(f1 * 0.6662F + (float) Math.PI) * 1.4F * f;
-            this.bone5.xRot += Mth.cos(f1 * 0.6662F) * 1.4F * f;
-        }
+        float f = renderState.walkAnimationSpeed;
+        float f1 = renderState.walkAnimationPos;
+        this.bone2.xRot += Mth.cos(f1 * 0.6662F + (float) Math.PI) * 0.75F * f;
+        this.bone3.xRot += Mth.cos(f1 * 0.6662F) * 0.75F * f;
+        this.bone4.xRot += Mth.cos(f1 * 0.6662F + (float) Math.PI) * 0.75F * f;
+        this.bone5.xRot += Mth.cos(f1 * 0.6662F) * 0.75F * f;
+
+//        float sentryTimer = renderState.timer;
+//        float timerIncreaseInterval = DetonationSentry.MAX_TIMER / 4.0F;
+//        if (sentryTimer >= 1) {
+//            this.bone2.visible = false;
+//            this.bone3.visible = false;
+//            this.bone4.visible = false;
+//            this.bone5.visible = false;
+//        } else {
+//            this.bone2.visible = true;
+//            this.bone3.visible = true;
+//            this.bone4.visible = true;
+//            this.bone5.visible = true;
+//        }
     }
 }

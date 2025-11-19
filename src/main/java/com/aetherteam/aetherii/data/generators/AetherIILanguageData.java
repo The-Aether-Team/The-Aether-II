@@ -1012,6 +1012,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSpawnEggItem(AetherIIItems.SKEPHID_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.DETONATION_SENTRY_SPAWN_EGG);
 
         // Misc
         this.addItem(AetherIIItems.HIDE_BUNDLE, "Hide Bundle");

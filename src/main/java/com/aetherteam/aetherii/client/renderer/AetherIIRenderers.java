@@ -210,7 +210,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.ARKENIUM_TALUTON, ArkeniumTalutonModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_TALUTON, GravititeTalutonModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.BLADE_SHROOM_HUNTER, BladeShroomHunterModel::createBodyLayer);
-        event.registerLayerDefinition(AetherIIModelLayers.DETONATION_SENTRY, SentryModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.DETONATION_SENTRY, DetonationSentryModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SENTRY_GOLEM, SentryGolemModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SLIDER, SliderModel::createBodyLayer);
 
