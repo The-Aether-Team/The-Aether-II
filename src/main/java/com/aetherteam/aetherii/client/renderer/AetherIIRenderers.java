@@ -57,9 +57,7 @@ import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.client.model.item.DynamicFluidContainerModel;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
@@ -126,6 +124,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.MOA.get(), MoaRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SKYROOT_LIZARD.get(), SkyrootLizardRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.CARRION_SPROUT.get(), CarrionSproutRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.BUTTERFLY.get(), ButterflyRenderer::new);
 
         // Hostile
         event.registerEntityRenderer(AetherIIEntityTypes.AECHOR_PLANT.get(), AechorPlantRenderer::new);
@@ -204,6 +203,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.MOA_SADDLEBAG, MoaSaddlebagModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA_LARGE_SADDLEBAG, MoaLargeSaddlebagModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_LIZARD, SkyrootLizardModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.BUTTERFLY, ButterflyModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.CARRION_SPROUT, CarrionSproutModel::createBodyLayer);
 
         // Hostile

@@ -65,6 +65,9 @@ public class AetherIIEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<SkyrootLizard>> SKYROOT_LIZARD = ENTITY_TYPES.register("skyroot_lizard",
             () -> EntityType.Builder.of(SkyrootLizard::new, MobCategory.CREATURE).sized(0.95F, 0.35F).clientTrackingRange(10).build(AetherIIEntities.SKYROOT_LIZARD));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<Butterfly>> BUTTERFLY = ENTITY_TYPES.register("butterfly",
+            () -> EntityType.Builder.<Butterfly>of(Butterfly::new, MobCategory.AMBIENT).sized(0.5F, 0.25F).eyeHeight(0.5F).clientTrackingRange(5).build(AetherIIEntities.BUTTERFLY));
+
     // Hostile
     public static final DeferredHolder<EntityType<?>, EntityType<AechorPlant>> AECHOR_PLANT = ENTITY_TYPES.register("aechor_plant",
             () -> EntityType.Builder.of(AechorPlant::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(0.9F, 0.6F).eyeHeight(0.25F).clientTrackingRange(8).build(AetherIIEntities.AECHOR_PLANT));
@@ -187,6 +190,7 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.MOA.get(), AetherIIStats.merge(Moa.createMobAttributes(), AetherIIStats.MOA).build());
         event.put(AetherIIEntityTypes.SKYROOT_LIZARD.get(), AetherIIStats.merge(SkyrootLizard.createMobAttributes(), AetherIIStats.SKYROOT_LIZARD).build());
         event.put(AetherIIEntityTypes.CARRION_SPROUT.get(), AetherIIStats.merge(CarrionSprout.createMobAttributes(), AetherIIStats.CARRION_SPROUT).build());
+        event.put(AetherIIEntityTypes.BUTTERFLY.get(), Butterfly.createMobAttributes().build());
 
         // Hostile
         event.put(AetherIIEntityTypes.AECHOR_PLANT.get(), AetherIIStats.merge(AechorPlant.createMobAttributes(), AetherIIStats.AECHOR_PLANT).build());

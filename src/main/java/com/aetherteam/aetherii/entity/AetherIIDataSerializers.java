@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.api.ButterflyVariant;
 import com.aetherteam.aetherii.api.SkyrootLizardVariant;
 import com.aetherteam.aetherii.api.SwetVariant;
 import com.aetherteam.aetherii.entity.monster.BladeShroomHunter;
@@ -22,5 +23,6 @@ public class AetherIIDataSerializers {
     public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<Optional<Kirrid.KirridColor>>> OPTIONAL_KIRRID_COLOR = ENTITY_DATA_SERIALIZERS.register("optional_kirrid_color", () -> EntityDataSerializer.forValueType(Kirrid.KirridColor.STREAM_CODEC.apply(ByteBufCodecs::optional)));
     public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<Holder<SwetVariant>>> SWET_VARIANT = ENTITY_DATA_SERIALIZERS.register("swet_variant", () -> EntityDataSerializer.forValueType(SwetVariant.STREAM_CODEC));
     public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<Holder<SkyrootLizardVariant>>> SKYROOT_LIZARD_VARIANT = ENTITY_DATA_SERIALIZERS.register("skyroot_lizard_variant", () -> EntityDataSerializer.forValueType(SkyrootLizardVariant.STREAM_CODEC));
+    public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<Holder<ButterflyVariant>>> BUTTERFLY_VARIANT = ENTITY_DATA_SERIALIZERS.register("butterfly_variant", () -> EntityDataSerializer.forValueType(ButterflyVariant.STREAM_CODEC));
     public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<BladeShroomHunter.State>> BLADE_SHROOM_HUNTER_STATE = ENTITY_DATA_SERIALIZERS.register("blade_shroom_hunter_state", () -> EntityDataSerializer.forValueType(BladeShroomHunter.State.STREAM_CODEC));
 }
