@@ -66,7 +66,7 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.of(SkyrootLizard::new, MobCategory.CREATURE).sized(0.95F, 0.35F).clientTrackingRange(10).build(AetherIIEntities.SKYROOT_LIZARD));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Butterfly>> BUTTERFLY = ENTITY_TYPES.register("butterfly",
-            () -> EntityType.Builder.<Butterfly>of(Butterfly::new, MobCategory.AMBIENT).sized(0.5F, 0.25F).eyeHeight(0.5F).clientTrackingRange(5).build(AetherIIEntities.BUTTERFLY));
+            () -> EntityType.Builder.<Butterfly>of(Butterfly::new, MobCategory.AMBIENT).sized(0.625F, 0.25F).eyeHeight(0.125F).clientTrackingRange(5).build(AetherIIEntities.BUTTERFLY));
 
     // Hostile
     public static final DeferredHolder<EntityType<?>, EntityType<AechorPlant>> AECHOR_PLANT = ENTITY_TYPES.register("aechor_plant",
