@@ -248,6 +248,22 @@ public class AetherIIModelTemplates {
             ).build();
     public static final ModelTemplate POINTED_STONE_BLOCK = ModelTemplates.create("pointed_dripstone", TextureSlot.CROSS).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
 
+    public static final ModelTemplate TEMPLATE_EMISSIVE_CUBE_ALL =  AetherIIModelTemplates.create("emissive_cube_all", TextureSlot.ALL, AetherIITextureSlots.EMISSIVE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate TEMPLATE_EMISSIVE_CUBE_COLUMN =  AetherIIModelTemplates.create("emissive_cube_column", TextureSlot.SIDE, TextureSlot.END, AetherIITextureSlots.EMISSIVE_SIDE, AetherIITextureSlots.EMISSIVE_END).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate TEMPLATE_EMISSIVE_CUBE_COLUMN_HORIZONTAL =  AetherIIModelTemplates.create("emissive_cube_column_horizontal", "_horizontal", TextureSlot.SIDE, TextureSlot.END, AetherIITextureSlots.EMISSIVE_SIDE, AetherIITextureSlots.EMISSIVE_END).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate TEMPLATE_EMISSIVE_STAIRS_STRAIGHT = create("emissive_stairs", TextureSlot.ALL, AetherIITextureSlots.EMISSIVE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate TEMPLATE_EMISSIVE_STAIRS_INNER = create("emissive_inner_stairs", "_inner", TextureSlot.ALL, AetherIITextureSlots.EMISSIVE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate TEMPLATE_EMISSIVE_STAIRS_OUTER = create("emissive_outer_stairs", "_outer", TextureSlot.ALL, AetherIITextureSlots.EMISSIVE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate TEMPLATE_EMISSIVE_SLAB_BOTTOM = create("emissive_slab", TextureSlot.ALL, AetherIITextureSlots.EMISSIVE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate TEMPLATE_EMISSIVE_SLAB_TOP = create("emissive_slab_top", "_top", TextureSlot.ALL, AetherIITextureSlots.EMISSIVE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate COLUMN_WALL_POST = create("template_column_wall_post", "_post", TextureSlot.END, TextureSlot.SIDE);
+    public static final ModelTemplate COLUMN_WALL_LOW_SIDE = create("template_column_wall_side", "_side", TextureSlot.END, TextureSlot.SIDE);
+    public static final ModelTemplate COLUMN_WALL_TALL_SIDE = create("template_column_wall_side_tall", "_side_tall", TextureSlot.END, TextureSlot.SIDE);
+    public static final ModelTemplate EMISSIVE_COLUMN_WALL_POST = create("template_emissive_column_wall_post", "_post", TextureSlot.END, TextureSlot.SIDE, AetherIITextureSlots.EMISSIVE_END, AetherIITextureSlots.EMISSIVE_SIDE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate EMISSIVE_COLUMN_WALL_LOW_SIDE = create("template_emissive_column_wall_side", "_side", TextureSlot.END, TextureSlot.SIDE, AetherIITextureSlots.EMISSIVE_END, AetherIITextureSlots.EMISSIVE_SIDE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate EMISSIVE_COLUMN_WALL_TALL_SIDE = create("template_emissive_column_wall_side_tall", "_side_tall", TextureSlot.END, TextureSlot.SIDE, AetherIITextureSlots.EMISSIVE_END, AetherIITextureSlots.EMISSIVE_SIDE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate EMISSIVE_COLUMN_WALL_INVENTORY = create("emissive_column_wall_inventory", "_inventory", TextureSlot.END, TextureSlot.SIDE, TextureSlot.WALL, AetherIITextureSlots.EMISSIVE_END, AetherIITextureSlots.EMISSIVE_SIDE, AetherIITextureSlots.EMISSIVE_WALL);
+
     public static final ModelTemplate TRUNK_CENTER = AetherIIModelTemplates.create("template_trunk_center", "_center", TextureSlot.ALL);
     public static final ModelTemplate TRUNK_SIDE = AetherIIModelTemplates.create("template_trunk_side", "_side", TextureSlot.ALL);
     public static final ModelTemplate TRUNK_CORNER = AetherIIModelTemplates.create("template_trunk_corner", "_corner", TextureSlot.ALL);
@@ -295,10 +311,6 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate ORIENTABLE_SECRET_TRAPDOOR_TOP = create("template_orientable_secret_trapdoor_top", "_top", TextureSlot.TEXTURE);
     public static final ModelTemplate ORIENTABLE_SECRET_TRAPDOOR_BOTTOM = create("template_orientable_secret_trapdoor_bottom", "_bottom", TextureSlot.TEXTURE);
     public static final ModelTemplate ORIENTABLE_SECRET_TRAPDOOR_OPEN = create("template_orientable_secret_trapdoor_open", "_open", TextureSlot.TEXTURE);
-    public static final ModelTemplate COLUMN_WALL_POST = create("template_column_wall_post", "_post", TextureSlot.END, TextureSlot.SIDE);
-    public static final ModelTemplate COLUMN_WALL_LOW_SIDE = create("template_column_wall_side", "_side", TextureSlot.END, TextureSlot.SIDE);
-    public static final ModelTemplate COLUMN_WALL_TALL_SIDE = create("template_column_wall_side_tall", "_side_tall", TextureSlot.END, TextureSlot.SIDE);
-    public static final ModelTemplate COLUMN_WALL_INVENTORY = create("column_wall_inventory", "_inventory", TextureSlot.END, TextureSlot.SIDE, TextureSlot.WALL);
     public static final ModelTemplate ARKENIUM_LANTERN = create("template_arkenium_lantern", TextureSlot.LANTERN);
     public static final ModelTemplate HANGING_ARKENIUM_LANTERN = create("template_hanging_arkenium_lantern", "_hanging", TextureSlot.LANTERN);
     public static final ModelTemplate RUSTIC_ARKENIUM_LANTERN = create("template_rustic_arkenium_lantern", TextureSlot.LANTERN);

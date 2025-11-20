@@ -3,6 +3,10 @@ package com.aetherteam.aetherii.data.resources.builders.models;
 import net.minecraft.client.data.models.model.TextureSlot;
 
 public class AetherIITextureSlots {
+    public static final TextureSlot EMISSIVE = TextureSlot.create("emissive");
+    public static final TextureSlot EMISSIVE_SIDE = TextureSlot.create("emissive_side");
+    public static final TextureSlot EMISSIVE_END = TextureSlot.create("emissive_end");
+    public static final TextureSlot EMISSIVE_WALL = TextureSlot.create("emissive_wall");
     public static final TextureSlot PORTAL = TextureSlot.create("portal");
     public static final TextureSlot TOP_1 = TextureSlot.create("top_1");
     public static final TextureSlot TOP_2 = TextureSlot.create("top_2");
