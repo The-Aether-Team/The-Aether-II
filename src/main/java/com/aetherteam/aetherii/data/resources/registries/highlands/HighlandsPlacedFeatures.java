@@ -431,7 +431,7 @@ public class HighlandsPlacedFeatures {
 
         register(context, CLOVERS, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.CLOVERS),
                 new LakePlacementModifier(),
-                RarityFilter.onAverageOnceEvery(5),
+                RarityFilter.onAverageOnceEvery(50),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.AETHER_CLOVER_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE)),
                 BiomeFilter.biome());
         register(context, SHORT_ARILUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SHORT_ARILUM),

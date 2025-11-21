@@ -26,21 +26,22 @@ public class CloverPatchFeature extends Feature<CountConfiguration> {
         int j = context.config().count().sample(random);
 
         for (int k = 0; k < j; ++k) {
-//            int xOffset = random.nextInt(8) - random.nextInt(8);
-//            int zOffset = random.nextInt(8) - random.nextInt(8);
-//            int j1 = level.getHeight(Heightmap.Types.OCEAN_FLOOR, originPos.getX() + xOffset, originPos.getZ() + zOffset);
-//            BlockPos offsetPos = new BlockPos(originPos.getX() + xOffset, j1, originPos.getZ() + zOffset);
-            BlockState state = AetherIIBlocks.AETHER_CLOVER_TALL.get().defaultBlockState();
-            if (state.canSurvive(level, originPos)) {
-                if (level.getBlockState(originPos).is(Blocks.WATER) && level.getBlockState(originPos.above()).isAir()) {
-                    level.setBlock(originPos, state.setValue(BlockStateProperties.WATERLOGGED, true), 3);
-                } else {
-                    if (random.nextBoolean()) {
-                        state = AetherIIBlocks.AETHER_CLOVER.get().defaultBlockState();
+            int xOffset = random.nextInt(4) - random.nextInt(4);
+            int zOffset = random.nextInt(4) - random.nextInt(4);
+            for (int y = 0; y <= 2; y++) {
+                BlockPos offsetPos = new BlockPos(originPos.getX() + xOffset, originPos.getY() + y, originPos.getZ() + zOffset);
+                BlockState state = AetherIIBlocks.AETHER_CLOVER_TALL.get().defaultBlockState();
+                if (state.canSurvive(level, offsetPos)) {
+                    if (level.getBlockState(offsetPos).is(Blocks.WATER) && level.getBlockState(offsetPos.above()).isAir()) {
+                        level.setBlock(offsetPos, state.setValue(BlockStateProperties.WATERLOGGED, true), 3);
+                    } else if (level.getBlockState(offsetPos).isAir()) {
+                        if (random.nextInt(10) >= 2) {
+                            state = AetherIIBlocks.AETHER_CLOVER.get().defaultBlockState();
+                        }
+                        level.setBlock(offsetPos, state, 3);
                     }
-                    level.setBlock(originPos, state, 3);
+                    ++i;
                 }
-                ++i;
             }
         }
         return i > 0;
