@@ -752,6 +752,8 @@
   "gui.aether_ii.deathScreen.outpost_respawn": "Respawn at Outpost",
   "gui.aether_ii.guidebook.button.close": "Inventory",
   "gui.aether_ii.guidebook.button.open": "Guidebook",
+  "gui.aether_ii.guidebook.description.button.close": "Go Back",
+  "gui.aether_ii.guidebook.description.button.open": "Read More",
   "gui.aether_ii.guidebook.discovery.bestiary.info.drops": "Drops:",
   "gui.aether_ii.guidebook.discovery.bestiary.info.eats": "Eats:",
   "gui.aether_ii.guidebook.discovery.bestiary.stat.damage_none": "Standard Damage from %s Attacks",

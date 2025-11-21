@@ -31,6 +31,8 @@ public interface Guidebook {
     ResourceLocation EXCLAMATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/exclamation");
     ResourceLocation HEARTS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/hearts");
     ResourceLocation ARMOR_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/armor");
+    ResourceLocation DESCRIPTION_BORDER_LEFT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/border_left");
+    ResourceLocation DESCRIPTION_BORDER_RIGHT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/border_right");
     int PAGE_WIDTH = 188;
     int PAGE_HEIGHT = 198;
 

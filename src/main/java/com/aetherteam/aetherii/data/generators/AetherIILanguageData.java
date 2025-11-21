@@ -1335,6 +1335,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");
         this.addGuiText("guidebook.button.open", "Guidebook");
         this.addGuiText("guidebook.button.close", "Inventory");
+        this.addGuiText("guidebook.description.button.open", "Read More");
+        this.addGuiText("guidebook.description.button.close", "Go Back");
         this.addGuiText("guidebook.equipment.title", "Equipment");
         this.addGuiText("guidebook.equipment.pouch.tooltip.title", "Pouch");
         this.addGuiText("guidebook.equipment.pouch.tooltip.description", "%s Glint");

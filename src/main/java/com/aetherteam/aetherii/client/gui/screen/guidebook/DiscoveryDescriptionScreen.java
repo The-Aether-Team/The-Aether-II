@@ -6,6 +6,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 
 public class DiscoveryDescriptionScreen extends Screen {
@@ -21,15 +22,21 @@ public class DiscoveryDescriptionScreen extends Screen {
     @Override
     protected void init() {
         super.init();
-        this.addRenderableWidget(new DescriptionButton(this, 10, 10, Guidebook.MAGNIFYING_GLASS));
+        this.addRenderableWidget(new DescriptionButton(this, 36, 12, Guidebook.MAGNIFYING_GLASS));
     }
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        this.renderTransparentBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.drawCenteredString(this.font, Component.translatable(this.entry.getName()).withStyle(ChatFormatting.UNDERLINE), this.width / 2, 10, 0xffffffff);
         guiGraphics.drawWordWrap(this.font, Component.translatable(this.entry.getDescriptionKey()), 85, 30, this.width - (85 * 2), 0xffffffff);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.DESCRIPTION_BORDER_LEFT_SPRITE, 35, 30, 10, 120);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.DESCRIPTION_BORDER_RIGHT_SPRITE, this.width - 35, 30, 10, 120);
     }
+
+    @Override
+    protected void renderBlurredBackground(GuiGraphics guiGraphics) { }
 
     @Override
     public boolean isPauseScreen() {
