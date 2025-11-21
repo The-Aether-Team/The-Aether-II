@@ -66,6 +66,7 @@ public class AetherIITags {
         public static final TagKey<Block> SKY_ROOTS_SURVIVES_ON = tag("sky_roots_survives_on");
         public static final TagKey<Block> ICE_CRYSTAL_SURVIVES_ON = tag("ice_crystal_survives_on");
         public static final TagKey<Block> ARCTIC_TREE_SURVIVES_ON = tag("arctic_tree_survives_on");
+        public static final TagKey<Block> AETHER_CLOVER_SURVIVES_ON = tag("aether_clover_survives_on");
         public static final TagKey<Block> ARILUM_SURVIVES_ON = tag("arilum_survives_on");
         public static final TagKey<Block> MAGNETIC_SHROOM_SURVIVES_ON = tag("arilum_survives_on");
         public static final TagKey<Block> GRASS_AND_DIRT_REPLACEABLE = tag("grass_and_dirt_replaceable");
