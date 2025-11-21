@@ -21,7 +21,8 @@ public class ButterflyRenderer extends MobRenderer<Butterfly, ButterflyRenderSta
 
     @Override
     protected void scale(ButterflyRenderState renderState, PoseStack poseStack) {
-        poseStack.translate(0.0, -0.125, 0.0);
+        poseStack.translate(0.0F, -0.125F, 0.0F);
+        poseStack.scale(0.725F, 0.725F, 0.725F);
     }
 
     @Override
