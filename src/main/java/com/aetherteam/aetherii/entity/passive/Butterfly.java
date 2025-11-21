@@ -15,6 +15,8 @@ import net.minecraft.world.entity.variant.SpawnContext;
 import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -50,5 +52,17 @@ public class Butterfly extends Insect {
 
     public void setVariant(Holder<ButterflyVariant> variant) {
         this.entityData.set(DATA_VARIANT_ID, variant);
+    }
+
+    @Override
+    protected void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        VariantUtils.writeVariant(output, this.getVariant());
+    }
+
+    @Override
+    protected void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        VariantUtils.readVariant(input, AetherIIButterflyVariants.BUTTERFLY_VARIANT_REGISTRY_KEY).ifPresent(this::setVariant);
     }
 }
