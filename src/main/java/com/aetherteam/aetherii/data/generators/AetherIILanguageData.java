@@ -1360,7 +1360,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     }
 
     private void addBestiaryEntries() {
-        final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis velit sapien. Proin sed ex ligula. Morbi odio nisi, fermentum nec consectetur rhoncus, elementum sed turpis. Nullam blandit tincidunt nisl, non vestibulum ligula ullamcorper sed. Aenean condimentum, est at tincidunt molestie, neque orci convallis sem, vel convallis magna sapien vel diam. Mauris faucibus eros nisl, at accumsan ex laoreet ut. Aliquam non risus tincidunt libero pharetra dapibus id quis turpis. Nulla dictum blandit quam, vel auctor nibh hendrerit quis. Vivamus tempor facilisis mattis. Etiam in augue ac mauris laoreet iaculis ac euismod enim.";
         
         final String taegore = "Taegore";
         final String burrukai = "Burrukai";

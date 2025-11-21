@@ -5,6 +5,8 @@ import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.GuidebookEntry;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.GuidebookDiscoveryAttachment;
+import com.aetherteam.aetherii.client.gui.component.guidebook.DescriptionButton;
+import com.aetherteam.aetherii.client.gui.screen.guidebook.DiscoveryDescriptionScreen;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
@@ -106,6 +108,8 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         }
 
         super.initSection();
+
+        this.screen.addRenderableWidget(this.screen, new DescriptionButton(this.screen, (this.screen.width / 2) + 155, (this.screen.height / 2) + 37, Guidebook.MAGNIFYING_GLASS));
 
         this.rotation = 0.0F;
     }
