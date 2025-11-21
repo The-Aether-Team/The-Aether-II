@@ -95,10 +95,6 @@ public class Tempest extends Mob implements Blighted {
     }
 
     @Override
-    public void checkFallDamage(double vec3, boolean onGround, BlockState state, BlockPos pos) {
-    }
-
-    @Override
     public void travel(Vec3 p_415638_) {
         this.travelFlying(p_415638_, 0.02F);
     }
