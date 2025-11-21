@@ -1,11 +1,13 @@
 package com.aetherteam.aetherii.entity.passive;
 
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.entity.ai.controller.FlyingMoveControl;
 import com.aetherteam.aetherii.entity.ai.goal.FlyingLookGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
@@ -16,13 +18,9 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public class Insect extends AmbientCreature {
-    @Nullable
-    private BlockPos targetPosition;
-
     public Insect(EntityType<? extends Insect> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new FlyingMoveControl(this);
@@ -101,13 +99,31 @@ public class Insect extends AmbientCreature {
 
         @Override
         public void start() {
-            LivingEntity target = this.insect.getTarget();
+            if (this.insect.isInWaterOrRain()) {
+                this.checkRainAndFly();
+            } else {
+                this.randomFly();
+            }
+        }
+
+        private void randomFly() {
             RandomSource random = this.insect.getRandom();
             double d0 = this.insect.getX() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
             double d1 = this.insect.getY() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
             double d2 = this.insect.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
             this.insect.getMoveControl().setWantedPosition(d0, d1, d2, 1.0);
+        }
 
+        private void checkRainAndFly() {
+            RandomSource random = this.insect.getRandom();
+            double d0 = this.insect.getX() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
+            double d1 = this.insect.getY() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
+            double d2 = this.insect.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
+            if (!this.insect.level().isRainingAt(BlockPos.containing(d0, d1, d2)) && this.insect.level().getFluidState(BlockPos.containing(d0, d1, d2)).isEmpty()) {
+                this.insect.getMoveControl().setWantedPosition(d0, d1, d2, 1.0);
+            } else {
+                this.randomFly();
+            }
         }
 
         @Override
