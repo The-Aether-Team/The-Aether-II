@@ -114,6 +114,11 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.GRAVITITE_BOOTS.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GRAVITITE_GLOVES.get(), ModelTemplates.FLAT_ITEM);
 
+        // Charms
+        this.generateFlatItem(AetherIIItems.SLASH_CHARM.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.IMPACT_CHARM.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.PIERCE_CHARM.get(), ModelTemplates.FLAT_ITEM);
+
         // Materials
         this.generateFlatItem(AetherIIItems.SKYROOT_STICK.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         this.generateFlatItem(AetherIIItems.SCATTERGLASS_SHARD.get(), ModelTemplates.FLAT_ITEM);
