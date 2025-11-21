@@ -163,7 +163,14 @@
         "weight": 1
       }
     ],
-    "ambient": [],
+    "ambient": [
+      {
+        "type": "aether_ii:butterfly",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 2
+      }
+    ],
     "axolotls": [],
     "creature": [
       {
