@@ -64,6 +64,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         
         // Use Action
         this.addTooltip("item.modifiers.blocking", "When blocking:");
+        this.addTooltip("item.modifiers.accepts_charms.melee", "When on melee item:");
+        this.addTooltip("item.modifiers.accepts_charms.armor", "When on armor item:");
     }
 
     private void addBlocks() {
@@ -831,9 +833,16 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GRAVITITE_GLOVES, "Gravitite Gauntlets");
 
         // Charms
-        this.addItem(AetherIIItems.SLASH_CHARM, "Slash Charm");
-        this.addItem(AetherIIItems.IMPACT_CHARM, "Impact Charm");
-        this.addItem(AetherIIItems.PIERCE_CHARM, "Pierce Charm");
+        this.addItem(AetherIIItems.CHARM_OF_SLASH, "Charm of Slash");
+        this.addItem(AetherIIItems.CHARM_OF_IMPACT, "Charm of Impact");
+        this.addItem(AetherIIItems.CHARM_OF_PIERCE, "Charm of Pierce");
+        this.addItem(AetherIIItems.CHARM_OF_DEXTERITY, "Charm of Dexterity");
+
+        this.addItem(AetherIIItems.CHARM_OF_HEALTH, "Charm of Health");
+        this.addItem(AetherIIItems.CHARM_OF_DEFENSE, "Charm of Defense");
+        this.addItem(AetherIIItems.CHARM_OF_TOUGHNESS, "Charm of Toughness");
+        this.addItem(AetherIIItems.CHARM_OF_RESISTANCE, "Charm of Resistance");
+        this.addItem(AetherIIItems.CHARM_OF_AGILITY, "Charm of Agility");
 
         // Materials
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");

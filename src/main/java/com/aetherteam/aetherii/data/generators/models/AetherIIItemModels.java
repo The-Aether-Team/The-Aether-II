@@ -115,9 +115,16 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.GRAVITITE_GLOVES.get(), ModelTemplates.FLAT_ITEM);
 
         // Charms
-        this.generateFlatItem(AetherIIItems.SLASH_CHARM.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.IMPACT_CHARM.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.PIERCE_CHARM.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.CHARM_OF_SLASH.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.CHARM_OF_IMPACT.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.CHARM_OF_PIERCE.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.CHARM_OF_DEXTERITY.get(), ModelTemplates.FLAT_ITEM);
+
+        this.generateFlatItem(AetherIIItems.CHARM_OF_HEALTH.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.CHARM_OF_DEFENSE.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.CHARM_OF_TOUGHNESS.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.CHARM_OF_RESISTANCE.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.CHARM_OF_AGILITY.get(), ModelTemplates.FLAT_ITEM);
 
         // Materials
         this.generateFlatItem(AetherIIItems.SKYROOT_STICK.get(), ModelTemplates.FLAT_HANDHELD_ITEM);

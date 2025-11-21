@@ -94,6 +94,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 Tags.Items.MINING_TOOL_TOOLS,
                 ItemTags.SHOVELS,
                 ItemTags.HOES);
+        this.tag(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR).addTags(
+                Tags.Items.ARMORS);
         this.tag(AetherIITags.Items.BEAST_PELT_ARMOR).add(
                 AetherIIItems.BEAST_PELT_HELMET.get(),
                 AetherIIItems.BEAST_PELT_CHESTPLATE.get(),

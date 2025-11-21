@@ -73,7 +73,6 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BundleContents;
@@ -82,7 +81,6 @@ import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -203,9 +201,16 @@ public class AetherIIItems {
     public static final DeferredItem<Item> GRAVITITE_GLOVES = register("gravitite_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.GRAVITITE, 200.0, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.GRAVITITE_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.GRAVITITE, AetherIIStyleDesigns.WARRIOR, false))));
 
     // Charms
-    public static final DeferredItem<Item> SLASH_CHARM = register("slash_charm", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_MELEE, AetherIIStats.CHARM_SLASH_BONUS));
-    public static final DeferredItem<Item> IMPACT_CHARM = register("impact_charm", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_MELEE, AetherIIStats.CHARM_IMPACT_BONUS));
-    public static final DeferredItem<Item> PIERCE_CHARM = register("pierce_charm", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_MELEE, AetherIIStats.CHARM_PIERCE_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_SLASH = register("charm_of_slash", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_MELEE, AetherIIStats.CHARM_SLASH_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_IMPACT = register("charm_of_impact", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_MELEE, AetherIIStats.CHARM_IMPACT_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_PIERCE = register("charm_of_pierce", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_MELEE, AetherIIStats.CHARM_PIERCE_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_DEXTERITY = register("charm_of_dexterity", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_MELEE, AetherIIStats.CHARM_ATTACK_SPEED_BONUS));
+
+    public static final DeferredItem<Item> CHARM_OF_HEALTH = register("charm_of_health", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_MAX_HEALTH_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_DEFENSE = register("charm_of_defense", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_ARMOR_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_TOUGHNESS = register("charm_of_toughness", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_ARMOR_TOUGHNESS_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_RESISTANCE = register("charm_of_resistance", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_KNOCKBACK_RESISTANCE_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_AGILITY = register("charm_of_agility", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_MOVEMENT_SPEED_BONUS));
 
     // Materials
     public static final DeferredItem<Item> SKYROOT_STICK = register("skyroot_stick");
