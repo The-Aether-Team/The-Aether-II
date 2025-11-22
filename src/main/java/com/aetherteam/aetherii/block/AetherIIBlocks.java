@@ -986,6 +986,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
             .put(() -> AetherIIBlocks.AETHER_GRASS_BLOCK, () -> AetherIIBlocks.AETHER_FARMLAND)
             .put(() -> AetherIIBlocks.AETHER_DIRT_PATH, () -> AetherIIBlocks.AETHER_FARMLAND)
             .put(() -> AetherIIBlocks.COARSE_AETHER_DIRT, () -> AetherIIBlocks.AETHER_DIRT)
+            .put(() -> AetherIIBlocks.MYCELIAL_AETHER_DIRT, () -> AetherIIBlocks.AETHER_DIRT)
             .build();
 
     public static BlockState registerBlockModifications(LevelAccessor levelAccessor, ItemAbility toolAction, BlockPos blockPos, BlockState oldState, BlockState newState) {
