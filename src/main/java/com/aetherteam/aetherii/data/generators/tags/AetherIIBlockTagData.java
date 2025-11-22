@@ -174,22 +174,27 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get());
         this.tag(AetherIITags.Blocks.SKYROOT_TWIG_SURVIVES_ON)
                 .addTag(AetherIITags.Blocks.AETHER_DIRT);
-        this.tag(AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON)
-                .addTag(AetherIITags.Blocks.AETHER_DIRT)
-                .addTag(AetherIITags.Blocks.HOLYSTONE)
-                .addTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS)
-                .add(AetherIIBlocks.ICESTONE.get(), AetherIIBlocks.SHIMMERING_SILT.get());
-        this.tag(AetherIITags.Blocks.BOULDER_SURVIVES_ON)
-                .addTag(AetherIITags.Blocks.AETHER_DIRT)
-                .addTag(AetherIITags.Blocks.HOLYSTONE)
-                .add(AetherIIBlocks.SHIMMERING_SILT.get());
-        this.tag(AetherIITags.Blocks.FALLEN_LOG_SURVIVES_ON)
-                .addTag(AetherIITags.Blocks.AETHER_DIRT)
-                .addTag(AetherIITags.Blocks.HOLYSTONE)
-                .addTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS);
+        this.tag(AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON).addTags(
+                AetherIITags.Blocks.AETHER_DIRT,
+                AetherIITags.Blocks.HOLYSTONE,
+                AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
+        ).add(
+                AetherIIBlocks.ICESTONE.get(),
+                AetherIIBlocks.SHIMMERING_SILT.get(),
+                AetherIIBlocks.UNSTABLE_HOLYSTONE.get(),
+                AetherIIBlocks.UNSTABLE_UNDERSHALE.get()
+        );
+        this.tag(AetherIITags.Blocks.BOULDER_SURVIVES_ON).addTags(AetherIITags.Blocks.AETHER_DIRT,
+                AetherIITags.Blocks.HOLYSTONE
+        ).add(AetherIIBlocks.SHIMMERING_SILT.get());
+        this.tag(AetherIITags.Blocks.FALLEN_LOG_SURVIVES_ON).addTags(
+                AetherIITags.Blocks.AETHER_DIRT,
+                AetherIITags.Blocks.HOLYSTONE,
+                AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
+        );
         this.tag(AetherIITags.Blocks.BRETTL_PLANT_SURVIVES_ON)
                 .add(AetherIIBlocks.QUICKSOIL.get())
-                .addTags(BlockTags.SAND);
+                .addTag(BlockTags.SAND);
         this.tag(AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON).addTag(AetherIITags.Blocks.AETHER_DIRT);
         this.tag(AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON).add(
                 AetherIIBlocks.ARCTIC_ICE.get(),
@@ -739,6 +744,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SCATTERGLASS_PANE.get(),
                 AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE.get(),
                 AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get(),
+                AetherIIBlocks.INERT_ARKENIUM_BLOCK.get(),
+                AetherIIBlocks.INERT_GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
@@ -977,6 +984,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(),
+                AetherIIBlocks.INERT_ARKENIUM_BLOCK.get(),
+                AetherIIBlocks.INERT_GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.ARKENIUM_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get()
         );
@@ -1096,6 +1105,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(Tags.Blocks.STONES).addTag(AetherIITags.Blocks.HOLYSTONE).add(AetherIIBlocks.UNDERSHALE.get());
         this.tag(Tags.Blocks.STORAGE_BLOCKS).add(
+                AetherIIBlocks.INERT_ARKENIUM_BLOCK.get(),
+                AetherIIBlocks.INERT_GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),

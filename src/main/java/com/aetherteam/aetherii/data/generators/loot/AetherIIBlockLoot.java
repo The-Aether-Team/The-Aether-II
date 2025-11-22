@@ -625,6 +625,10 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.ARKENIUM_DOOR.get(), createDoorTable(AetherIIBlocks.ARKENIUM_DOOR.get()));
         this.dropSelf(AetherIIBlocks.ARKENIUM_TRAPDOOR.get());
 
+        // Inert Blocks
+        this.dropSelf(AetherIIBlocks.INERT_ARKENIUM_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.INERT_GRAVITITE_BLOCK.get());
+
         // Mineral Blocks
         this.dropSelf(AetherIIBlocks.AMBROSIUM_BLOCK.get());
         this.dropSelf(AetherIIBlocks.ZANITE_BLOCK.get());

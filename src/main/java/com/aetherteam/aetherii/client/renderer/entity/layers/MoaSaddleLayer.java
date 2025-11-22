@@ -5,7 +5,6 @@ import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaSaddleModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -15,6 +14,7 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
@@ -32,11 +32,13 @@ public class MoaSaddleLayer extends RenderLayer<MoaRenderState, EntityModel<MoaR
     public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, MoaRenderState moa, float netHeadYaw, float headPitch) {
         if (!moa.isInvisible && moa.isSaddled()) {
             ItemStack saddle = moa.saddle;
-            int color = IClientItemExtensions.of(saddle).getDefaultDyeColor(saddle);
+            int colorRaw = IClientItemExtensions.of(saddle).getDefaultDyeColor(saddle);
+            float opacity = moa.opacity;
+            int color = ARGB.colorFromFloat(opacity, ARGB.redFloat(colorRaw), ARGB.greenFloat(colorRaw), ARGB.blueFloat(colorRaw));
 
             this.saddle.setupAnim(moa);
             this.saddle.renderToBuffer(poseStack, ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(SADDLE_TEXTURE), false), packedLight, OverlayTexture.NO_OVERLAY, color);
-            this.saddle.renderToBuffer(poseStack, ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(SADDLE_OVERLAY_TEXTURE), false), packedLight, OverlayTexture.NO_OVERLAY, -1);
+            this.saddle.renderToBuffer(poseStack, ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(SADDLE_OVERLAY_TEXTURE), false), packedLight, OverlayTexture.NO_OVERLAY, color);
         }
     }
 }

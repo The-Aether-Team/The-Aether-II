@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_arkenium_block": {
+    "has_inert_gravitite_block": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:arkenium_block"
+            "items": "aether_ii:inert_gravitite_block"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:arkenium_plate_from_arkenium_block"
+        "recipe": "aether_ii:inert_gravitite_from_inert_gravitite_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_arkenium_block"
+      "has_inert_gravitite_block"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:arkenium_plate_from_arkenium_block"
+      "aether_ii:inert_gravitite_from_inert_gravitite_block"
     ]
   }
 }
