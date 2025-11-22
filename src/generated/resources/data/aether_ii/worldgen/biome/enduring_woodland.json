@@ -153,7 +153,7 @@
     "ambient": [
       {
         "type": "aether_ii:butterfly",
-        "maxCount": 1,
+        "maxCount": 4,
         "minCount": 1,
         "weight": 2
       }
