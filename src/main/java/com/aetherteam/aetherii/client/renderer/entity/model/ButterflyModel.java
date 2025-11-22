@@ -41,12 +41,10 @@ public class ButterflyModel extends EntityModel<ButterflyRenderState> {
     @Override
     public void setupAnim(ButterflyRenderState renderState) {
         super.setupAnim(renderState);
-        float f = renderState.walkAnimationSpeed;
-        float f1 = renderState.walkAnimationPos;
         this.rightWing.x -= renderState.wingXOffset;
         this.leftWing.x += renderState.wingXOffset;
         this.rightWing.zRot += renderState.wingZRotation;
         this.leftWing.zRot -= renderState.wingZRotation;
-        this.flyAnimation.applyWalk(f1, f, 5.0F, 1.0F);
+        this.flyAnimation.applyWalk(renderState.ageInTicks, renderState.ageInTicks, 5.0F, 1.0F);
     }
 }
