@@ -4,7 +4,15 @@
       {
         "condition": {
           "type": "minecraft:biome",
-          "biomes": "#aether_ii:highlands"
+          "biomes": "#aether_ii:highfields"
+        },
+        "priority": 1
+      },
+      {
+        "condition": {
+          "type": "aether_ii:random",
+          "bound": 10,
+          "check": 4
         },
         "priority": 1
       }

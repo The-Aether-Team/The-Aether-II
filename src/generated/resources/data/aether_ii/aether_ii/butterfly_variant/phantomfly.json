@@ -3,8 +3,34 @@
     "spawn_conditions": [
       {
         "condition": {
+          "type": "aether_ii:light",
+          "range": {
+            "max": 8,
+            "min": 0
+          }
+        },
+        "priority": 2
+      },
+      {
+        "condition": {
+          "type": "aether_ii:random",
+          "bound": 10,
+          "check": 7
+        },
+        "priority": 2
+      },
+      {
+        "condition": {
           "type": "minecraft:biome",
           "biomes": "#aether_ii:highlands"
+        },
+        "priority": 1
+      },
+      {
+        "condition": {
+          "type": "aether_ii:random",
+          "bound": 20,
+          "check": 4
         },
         "priority": 1
       }

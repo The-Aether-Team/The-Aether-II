@@ -1,9 +1,9 @@
 package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.advancement.predicate.AetherIIEntitySubPredicates;
-import com.aetherteam.aetherii.api.ButterflyVariant;
-import com.aetherteam.aetherii.api.SkyrootLizardVariant;
-import com.aetherteam.aetherii.api.SwetVariant;
+import com.aetherteam.aetherii.entity.variant.ButterflyVariant;
+import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
+import com.aetherteam.aetherii.entity.variant.SwetVariant;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
@@ -26,6 +26,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.brain.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.ai.brain.sensor.AetherIISensorTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.variant.spawning.AetherIISpawnConditions;
 import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
@@ -129,7 +130,8 @@ public class AetherII {
                 AetherIISurfaceRules.MATERIAL_RULES,
                 AetherIIBlockPredicateTypes.BLOCK_PREDICATE_TYPES,
                 AetherIIPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES,
-                AetherIIEntitySubPredicates.ENTITY_SUB_PREDICATES
+                AetherIIEntitySubPredicates.ENTITY_SUB_PREDICATES,
+                AetherIISpawnConditions.SPAWN_CONDITION_TYPES
         };
 
         for (DeferredRegister<?> register : registers) {

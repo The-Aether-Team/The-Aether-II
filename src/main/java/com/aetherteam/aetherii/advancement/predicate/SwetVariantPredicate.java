@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.advancement.predicate;
 
-import com.aetherteam.aetherii.api.SwetVariant;
+import com.aetherteam.aetherii.entity.variant.SwetVariant;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

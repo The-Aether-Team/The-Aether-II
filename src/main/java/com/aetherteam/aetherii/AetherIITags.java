@@ -239,6 +239,9 @@ public class AetherIITags {
         public static final TagKey<Biome> IRRADIATED = tag("irradiated");
         public static final TagKey<Biome> EXPANSE = tag("expanse");
 
+        public static final TagKey<Biome> LUSH = tag("lush");
+        public static final TagKey<Biome> WET = tag("wet");
+
         public static final TagKey<Biome> HAS_STRUCTURE_OUTPOST = tag("has_structure/outpost");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_HIGHFIELDS = tag("has_structure/camp_highfields");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_MAGNETIC = tag("has_structure/camp_magnetic");

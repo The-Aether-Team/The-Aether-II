@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.entity.passive;
 
-import com.aetherteam.aetherii.api.ButterflyVariant;
+import com.aetherteam.aetherii.entity.variant.ButterflyVariant;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIButterflyVariants;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -12,8 +12,6 @@ import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnGroupData;
-import net.minecraft.world.entity.animal.wolf.Wolf;
-import net.minecraft.world.entity.animal.wolf.WolfVariant;
 import net.minecraft.world.entity.variant.SpawnContext;
 import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.level.Level;

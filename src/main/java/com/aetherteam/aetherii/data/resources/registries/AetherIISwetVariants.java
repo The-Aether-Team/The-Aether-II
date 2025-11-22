@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.api.SwetVariant;
+import com.aetherteam.aetherii.entity.variant.SwetVariant;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;

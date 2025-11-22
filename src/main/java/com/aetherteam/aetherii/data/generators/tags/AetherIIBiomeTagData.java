@@ -45,6 +45,17 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HighlandsBiomes.BATTLEGROUND_WASTES);
         this.tag(AetherIITags.Biomes.EXPANSE).add(HighlandsBiomes.EXPANSE);
 
+        this.tag(AetherIITags.Biomes.LUSH).add(
+                HighlandsBiomes.VERDANT_WOODS,
+                HighlandsBiomes.SHROUDED_FOREST,
+                HighlandsBiomes.TURQUOISE_FOREST,
+                HighlandsBiomes.VIOLET_HIGHWOODS,
+                HighlandsBiomes.ENDURING_WOODLAND);
+        this.tag(AetherIITags.Biomes.WET).add(
+                HighlandsBiomes.SHIMMERING_BASIN,
+                HighlandsBiomes.GLISTENING_SWAMP,
+                HighlandsBiomes.FROZEN_LAKES);
+
         this.tag(AetherIITags.Biomes.MYCELIUM_CONVERSION).add(Biomes.MUSHROOM_FIELDS);
         this.tag(AetherIITags.Biomes.PODZOL_CONVERSION).add(
                 Biomes.OLD_GROWTH_PINE_TAIGA,

@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.data.generators.loot;
 import com.aetherteam.aetherii.advancement.predicate.KirridPredicate;
 import com.aetherteam.aetherii.advancement.predicate.SheepuffPredicate;
 import com.aetherteam.aetherii.advancement.predicate.SwetVariantPredicate;
-import com.aetherteam.aetherii.api.SwetVariant;
+import com.aetherteam.aetherii.entity.variant.SwetVariant;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIISwetVariants;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;

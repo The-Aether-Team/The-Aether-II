@@ -776,6 +776,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG.get());
+                output.accept(AetherIIItems.BUTTERFLY_SPAWN_EGG.get());
                 output.accept(AetherIIItems.CARRION_SPROUT_SPAWN_EGG.get());
                 output.accept(AetherIIItems.COCKATRICE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());

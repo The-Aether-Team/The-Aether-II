@@ -2,7 +2,10 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.api.ButterflyVariant;
+import com.aetherteam.aetherii.entity.variant.ButterflyVariant;
+import com.aetherteam.aetherii.entity.variant.spawning.LightCheck;
+import com.aetherteam.aetherii.entity.variant.spawning.RandomCheck;
+import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
@@ -10,10 +13,10 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.variant.BiomeCheck;
-import net.minecraft.world.entity.variant.SpawnPrioritySelectors;
+import net.minecraft.world.entity.variant.*;
 import net.minecraft.world.level.biome.Biome;
 
+import java.util.List;
 import java.util.Optional;
 
 public class AetherIIButterflyVariants {
@@ -36,31 +39,42 @@ public class AetherIIButterflyVariants {
     }
 
     public static void bootstrap(BootstrapContext<ButterflyVariant> context) {
-        register(context, ORANGE_MIMIC, AetherIITags.Biomes.HIGHLANDS, 0.0F, 40.0F);
-        
-        register(context, DRAGONFLY, AetherIITags.Biomes.HIGHLANDS, 1.0F, 0.0F);
-        register(context, DRAPEWING, AetherIITags.Biomes.HIGHLANDS, 1.0F, 0.0F);
-        register(context, GLITTERWING, AetherIITags.Biomes.HIGHLANDS, 1.0F, 0.0F);
-        register(context, HIGHLAND, AetherIITags.Biomes.HIGHLANDS, 1.0F, 0.0F);
-        register(context, SUNSET_DRAGONFLY, AetherIITags.Biomes.HIGHLANDS, 1.0F, 0.0F);
+        register(context, GLITTERWING, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.HIGHLANDS, 1));
+        register(context, HIGHLAND, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.HIGHLANDS, 1));
+        register(context, AMBER_MOTH, 2.0F, 0.0F, biomes(context, AetherIITags.Biomes.HIGHLANDS, 1));
 
-        register(context, QUICKSOIL_MOTH, AetherIITags.Biomes.HIGHLANDS, 2.0F, 0.0F);
-        register(context, AMBER_MOTH, AetherIITags.Biomes.HIGHLANDS, 2.0F, 0.0F);
-        register(context, PHANTOMFLY, AetherIITags.Biomes.HIGHLANDS, 2.0F, 0.0F);
-        register(context, BLIGHTFLY, AetherIITags.Biomes.HIGHLANDS, 2.0F, 0.0F, true);
-        register(context, LEAF_INSECT, AetherIITags.Biomes.HIGHLANDS, 2.0F, 0.0F);
+        register(context, ORANGE_MIMIC, 0.0F, 40.0F, biomes(context, AetherIITags.Biomes.HIGHFIELDS, 1), random(10, 4, 1));
+
+        register(context, LEAF_INSECT, 2.0F, 0.0F, biomes(context, AetherIITags.Biomes.LUSH, 2), biomes(context, AetherIITags.Biomes.HIGHLANDS, 1), random(10, 4, 1));
+        register(context, DRAGONFLY, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.LUSH, 2), biomes(context, AetherIITags.Biomes.HIGHLANDS, 1), random(10, 4, 1));
+        register(context, DRAPEWING, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.LUSH, 2), biomes(context, AetherIITags.Biomes.HIGHLANDS, 1), random(10, 4, 1));
+
+        register(context, QUICKSOIL_MOTH, 2.0F, 0.0F, biomes(context, AetherIITags.Biomes.WET, 2), biomes(context, AetherIITags.Biomes.HIGHLANDS, 1), random(10, 4, 1));
+        register(context, SUNSET_DRAGONFLY, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.WET, 2), biomes(context, AetherIITags.Biomes.HIGHLANDS, 1), random(10, 4, 1));
+
+        register(context, PHANTOMFLY, 2.0F, 0.0F, light(0, 8, 2), random(10, 7, 2), biomes(context, AetherIITags.Biomes.HIGHLANDS, 1), random(20, 4, 1));
+        register(context, BLIGHTFLY, 2.0F, 0.0F, true, light(0, 8, 2), random(10, 7, 2), biomes(context, AetherIITags.Biomes.HIGHLANDS, 1),  random(20, 4, 1));
     }
 
-    private static void register(BootstrapContext<ButterflyVariant> context, ResourceKey<ButterflyVariant> key, TagKey<Biome> biomes, float wingXOffset, float wingZRotation, boolean emissive) {
-        register(context, key, highPrioBiome(context.lookup(Registries.BIOME).getOrThrow(biomes)), wingXOffset, wingZRotation, emissive);
+    private static PriorityProvider.Selector<SpawnContext, SpawnCondition> biomes(BootstrapContext<ButterflyVariant> context, TagKey<Biome> biomeTag, int priority) {
+        HolderSet<Biome> biomes = context.lookup(Registries.BIOME).getOrThrow(biomeTag);
+        return new PriorityProvider.Selector<>(new BiomeCheck(biomes), priority);
     }
 
-    private static void register(BootstrapContext<ButterflyVariant> context, ResourceKey<ButterflyVariant> key, TagKey<Biome> biomes, float wingXOffset, float wingZRotation) {
-        register(context, key, highPrioBiome(context.lookup(Registries.BIOME).getOrThrow(biomes)), wingXOffset, wingZRotation, false);
+    private static PriorityProvider.Selector<SpawnContext, SpawnCondition> light(int min, int max, int priority) {
+        return new PriorityProvider.Selector<>(new LightCheck(MinMaxBounds.Ints.between(min, max)), priority);
     }
 
-    private static SpawnPrioritySelectors highPrioBiome(HolderSet<Biome> biomes) {
-        return SpawnPrioritySelectors.single(new BiomeCheck(biomes), 1);
+    private static PriorityProvider.Selector<SpawnContext, SpawnCondition> random(int bound, int check, int priority) {
+        return new PriorityProvider.Selector<>(new RandomCheck(bound, check), priority);
+    }
+
+    private static void register(BootstrapContext<ButterflyVariant> context, ResourceKey<ButterflyVariant> key, float wingXOffset, float wingZRotation, boolean emissive, PriorityProvider.Selector<SpawnContext, SpawnCondition>... spawnSelectors) {
+        register(context, key, new SpawnPrioritySelectors(List.of(spawnSelectors)), wingXOffset, wingZRotation, emissive);
+    }
+
+    private static void register(BootstrapContext<ButterflyVariant> context, ResourceKey<ButterflyVariant> key, float wingXOffset, float wingZRotation, PriorityProvider.Selector<SpawnContext, SpawnCondition>... spawnSelectors) {
+        register(context, key, new SpawnPrioritySelectors(List.of(spawnSelectors)), wingXOffset, wingZRotation, false);
     }
 
     private static void register(BootstrapContext<ButterflyVariant> context, ResourceKey<ButterflyVariant> key, SpawnPrioritySelectors spawnConditions, float wingXOffset, float wingZRotation, boolean emissive) {

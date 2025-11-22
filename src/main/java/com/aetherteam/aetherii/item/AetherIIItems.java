@@ -325,6 +325,7 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> SKYROOT_LIZARD_SPAWN_EGG = register("skyroot_lizard_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.SKYROOT_LIZARD.get(), properties));
     public static final DeferredItem<SpawnEggItem> AECHOR_PLANT_SPAWN_EGG = register("aechor_plant_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.AECHOR_PLANT.get(), properties));
     public static final DeferredItem<SpawnEggItem> CARRION_SPROUT_SPAWN_EGG = register("carrion_sprout_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.CARRION_SPROUT.get(), properties));
+    public static final DeferredItem<SpawnEggItem> BUTTERFLY_SPAWN_EGG = register("butterfly_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.BUTTERFLY.get(), properties));
     public static final DeferredItem<SpawnEggItem> ZEPHYR_SPAWN_EGG = register("zephyr_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.ZEPHYR.get(), properties));
     public static final DeferredItem<SpawnEggItem> TEMPEST_SPAWN_EGG = register("tempest_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.TEMPEST.get(), properties));
     public static final DeferredItem<SpawnEggItem> COCKATRICE_SPAWN_EGG = register("cockatrice_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.COCKATRICE.get(), properties));

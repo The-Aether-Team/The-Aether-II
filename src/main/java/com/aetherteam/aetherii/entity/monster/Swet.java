@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.entity.monster;
 
-import com.aetherteam.aetherii.api.SwetVariant;
+import com.aetherteam.aetherii.entity.variant.SwetVariant;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIISwetVariants;

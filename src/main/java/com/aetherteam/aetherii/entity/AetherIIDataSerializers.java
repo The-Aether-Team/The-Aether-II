@@ -1,9 +1,9 @@
 package com.aetherteam.aetherii.entity;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.api.ButterflyVariant;
-import com.aetherteam.aetherii.api.SkyrootLizardVariant;
-import com.aetherteam.aetherii.api.SwetVariant;
+import com.aetherteam.aetherii.entity.variant.ButterflyVariant;
+import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
+import com.aetherteam.aetherii.entity.variant.SwetVariant;
 import com.aetherteam.aetherii.entity.monster.BladeShroomHunter;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.aetherteam.aetherii.entity.passive.Sheepuff;
