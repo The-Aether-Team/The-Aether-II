@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:mycelium_roots"
+          "name": "aether_ii:mycelial_aether_dirt"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "aether_ii:blocks/mycelium_roots"
+  "random_sequence": "aether_ii:blocks/mycelial_aether_dirt"
 }

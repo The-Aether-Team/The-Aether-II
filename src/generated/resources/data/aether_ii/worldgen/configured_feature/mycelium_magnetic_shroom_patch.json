@@ -21,7 +21,7 @@
             "predicates": [
               {
                 "type": "minecraft:matching_blocks",
-                "blocks": "aether_ii:mycelium_roots",
+                "blocks": "aether_ii:mycelial_aether_dirt",
                 "offset": [
                   0,
                   -1,

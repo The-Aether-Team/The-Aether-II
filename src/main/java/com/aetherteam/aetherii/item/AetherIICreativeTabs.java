@@ -373,9 +373,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AETHER_DIRT_PATH.get());
                 output.accept(AetherIIBlocks.AETHER_DIRT.get());
                 output.accept(AetherIIBlocks.COARSE_AETHER_DIRT.get());
+                output.accept(AetherIIBlocks.MYCELIAL_AETHER_DIRT.get());
                 output.accept(AetherIIBlocks.AETHER_FARMLAND.get());
                 output.accept(AetherIIBlocks.SHIMMERING_SILT.get());
-                output.accept(AetherIIBlocks.MYCELIUM_ROOTS.get());
                 output.accept(AetherIIBlocks.QUICKSOIL.get());
                 output.accept(AetherIIBlocks.FERROSITE_SAND.get());
                 output.accept(AetherIIBlocks.FERROSITE_MUD.get());

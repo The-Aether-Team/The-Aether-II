@@ -37,9 +37,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createAetherGrassBlocks();
         this.createTrivialCube(AetherIIBlocks.AETHER_DIRT.get());
         this.createTrivialCube(AetherIIBlocks.COARSE_AETHER_DIRT.get());
+        this.createTrivialCube(AetherIIBlocks.MYCELIAL_AETHER_DIRT.get());
         this.createAetherFarmland();
         this.createTrivialCube(AetherIIBlocks.SHIMMERING_SILT.get());
-        this.createTrivialCube(AetherIIBlocks.MYCELIUM_ROOTS.get());
 
         // Underground
         this.createTrivialCube(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
