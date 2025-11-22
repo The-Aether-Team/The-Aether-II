@@ -70,6 +70,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> SHORT_ARILUM = createKey("short_arilum");
     public static final ResourceKey<PlacedFeature> ARILUM = createKey("arilum");
     public static final ResourceKey<PlacedFeature> BLOOMING_ARILUM = createKey("blooming_arilum");
+    public static final ResourceKey<PlacedFeature> MIXED_ARILUM = createKey("mixed_arilum");
     public static final ResourceKey<PlacedFeature> POND_ARILUM = createKey("pond_arilum");
 
     public static final ResourceKey<PlacedFeature> TREE_MOSS_COVER = createKey("tree_moss_cover");
@@ -436,17 +437,22 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome());
         register(context, SHORT_ARILUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SHORT_ARILUM),
                 new LakePlacementModifier(),
-                RarityFilter.onAverageOnceEvery(2),
+                RarityFilter.onAverageOnceEvery(4),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))),
                 BiomeFilter.biome());
         register(context, ARILUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ARILUM),
                 new LakePlacementModifier(),
-                RarityFilter.onAverageOnceEvery(5),
+                RarityFilter.onAverageOnceEvery(36),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))),
                 BiomeFilter.biome());
         register(context, BLOOMING_ARILUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLOOMING_ARILUM),
                 new LakePlacementModifier(),
-                RarityFilter.onAverageOnceEvery(6),
+                RarityFilter.onAverageOnceEvery(12),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))),
+                BiomeFilter.biome());
+        register(context, MIXED_ARILUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MIXED_ARILUM),
+                new LakePlacementModifier(),
+                NoiseBasedCountPlacement.of(30, 40.0, 0.0),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))),
                 BiomeFilter.biome());
         register(context, POND_ARILUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.POND_ARILUM),

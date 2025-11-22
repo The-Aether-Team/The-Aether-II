@@ -1,12 +1,14 @@
 {
-  "feature": "aether_ii:blooming_arilum",
+  "feature": "aether_ii:mixed_arilum",
   "placement": [
     {
       "type": "aether_ii:lake_placement"
     },
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 12
+      "type": "minecraft:noise_based_count",
+      "noise_factor": 40.0,
+      "noise_offset": 0.0,
+      "noise_to_count_ratio": 30
     },
     {
       "type": "minecraft:block_predicate_filter",

@@ -191,6 +191,7 @@ public class HighlandsBiomeBuilders {
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.SHORT_ARILUM)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.ARILUM)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.BLOOMING_ARILUM)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.MIXED_ARILUM)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.POND_ARILUM)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, HighlandsPlacedFeatures.POINTED_HOLYSTONE)
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HighlandsPlacedFeatures.HIGH_STORM_AERCLOUD)
