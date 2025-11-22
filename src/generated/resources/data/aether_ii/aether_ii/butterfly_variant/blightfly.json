@@ -1,4 +1,5 @@
 {
+  "emissive_texture": "aether_ii:textures/entity/mobs/butterfly/blightfly_glow.png",
   "spawn_biomes": {
     "spawn_conditions": [
       {

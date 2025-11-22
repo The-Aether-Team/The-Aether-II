@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
+import com.aetherteam.aetherii.client.renderer.entity.layers.ButterflyGlowLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.ButterflyModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.ButterflyRenderState;
 import com.aetherteam.aetherii.entity.passive.Butterfly;
@@ -12,11 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 public class ButterflyRenderer extends MobRenderer<Butterfly, ButterflyRenderState, ButterflyModel> {
     public ButterflyRenderer(EntityRendererProvider.Context context) {
         super(context, new ButterflyModel(context.bakeLayer(AetherIIModelLayers.BUTTERFLY)), 0.25F);
-    }
-
-    @Override
-    protected void setupRotations(ButterflyRenderState renderState, PoseStack poseStack, float bodyRot, float scale) {
-        super.setupRotations(renderState, poseStack, bodyRot, scale);
+        this.addLayer(new ButterflyGlowLayer(this));
     }
 
     @Override
@@ -34,6 +31,7 @@ public class ButterflyRenderer extends MobRenderer<Butterfly, ButterflyRenderSta
     public void extractRenderState(Butterfly butterfly, ButterflyRenderState state, float partialTicks) {
         super.extractRenderState(butterfly, state, partialTicks);
         state.texture = butterfly.getVariant().value().texture();
+        state.emissiveTexture = butterfly.getVariant().value().emissiveTexture().orElse(null);
         state.wingXOffset = butterfly.getVariant().value().wingXOffset();
         state.wingZRotation = butterfly.getVariant().value().wingZRotation();
     }

@@ -5,4 +5,5 @@ import net.minecraft.resources.ResourceLocation;
 
 public class InsectRenderState extends LivingEntityRenderState {
     public ResourceLocation texture;
+    public ResourceLocation emissiveTexture;
 }

@@ -14,6 +14,8 @@ import net.minecraft.world.entity.variant.BiomeCheck;
 import net.minecraft.world.entity.variant.SpawnPrioritySelectors;
 import net.minecraft.world.level.biome.Biome;
 
+import java.util.Optional;
+
 public class AetherIIButterflyVariants {
     public static final ResourceKey<Registry<ButterflyVariant>> BUTTERFLY_VARIANT_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "butterfly_variant"));
 
@@ -45,23 +47,26 @@ public class AetherIIButterflyVariants {
         register(context, QUICKSOIL_MOTH, AetherIITags.Biomes.HIGHLANDS, 2.0F, 0.0F);
         register(context, AMBER_MOTH, AetherIITags.Biomes.HIGHLANDS, 2.0F, 0.0F);
         register(context, PHANTOMFLY, AetherIITags.Biomes.HIGHLANDS, 2.0F, 0.0F);
-        register(context, BLIGHTFLY, AetherIITags.Biomes.HIGHLANDS, 2.0F, 0.0F);
+        register(context, BLIGHTFLY, AetherIITags.Biomes.HIGHLANDS, 2.0F, 0.0F, true);
         register(context, LEAF_INSECT, AetherIITags.Biomes.HIGHLANDS, 2.0F, 0.0F);
     }
 
-    private static void register(BootstrapContext<ButterflyVariant> context, ResourceKey<ButterflyVariant> key, ResourceKey<Biome> biome, float wingXOffset, float wingZRotation) {
-        register(context, key, highPrioBiome(HolderSet.direct(context.lookup(Registries.BIOME).getOrThrow(biome))), wingXOffset, wingZRotation);
+    private static void register(BootstrapContext<ButterflyVariant> context, ResourceKey<ButterflyVariant> key, TagKey<Biome> biomes, float wingXOffset, float wingZRotation, boolean emissive) {
+        register(context, key, highPrioBiome(context.lookup(Registries.BIOME).getOrThrow(biomes)), wingXOffset, wingZRotation, emissive);
     }
 
     private static void register(BootstrapContext<ButterflyVariant> context, ResourceKey<ButterflyVariant> key, TagKey<Biome> biomes, float wingXOffset, float wingZRotation) {
-        register(context, key, highPrioBiome(context.lookup(Registries.BIOME).getOrThrow(biomes)), wingXOffset, wingZRotation);
+        register(context, key, highPrioBiome(context.lookup(Registries.BIOME).getOrThrow(biomes)), wingXOffset, wingZRotation, false);
     }
 
     private static SpawnPrioritySelectors highPrioBiome(HolderSet<Biome> biomes) {
         return SpawnPrioritySelectors.single(new BiomeCheck(biomes), 1);
     }
 
-    private static void register(BootstrapContext<ButterflyVariant> context, ResourceKey<ButterflyVariant> key, SpawnPrioritySelectors spawnConditions, float wingXOffset, float wingZRotation) {
-        context.register(key, new ButterflyVariant(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/butterfly/" + key.location().getPath() + ".png"), spawnConditions, wingXOffset, wingZRotation));
+    private static void register(BootstrapContext<ButterflyVariant> context, ResourceKey<ButterflyVariant> key, SpawnPrioritySelectors spawnConditions, float wingXOffset, float wingZRotation, boolean emissive) {
+        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/butterfly/" + key.location().getPath() + ".png");
+        ResourceLocation emissiveTexture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/butterfly/" + key.location().getPath() + "_glow.png");
+
+        context.register(key, new ButterflyVariant(texture, emissive ? Optional.of(emissiveTexture) : Optional.empty(), spawnConditions, wingXOffset, wingZRotation));
     }
 }
