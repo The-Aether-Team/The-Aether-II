@@ -46,9 +46,9 @@ public class AetherTallGrassBlock extends TallGrassBlock implements Snowable {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        if (state.is(AetherIIBlocks.AETHER_SHORT_GRASS)) {
+        if (state.is(AetherIIBlocks.SHORT_AETHER_GRASS)) {
             return SHORT_SHAPE;
-        } else if (state.is(AetherIIBlocks.AETHER_MEDIUM_GRASS)) {
+        } else if (state.is(AetherIIBlocks.MEDIUM_AETHER_GRASS)) {
             return MEDIUM_SHAPE;
         }
         return LONG_SHAPE;
@@ -56,10 +56,10 @@ public class AetherTallGrassBlock extends TallGrassBlock implements Snowable {
 
     @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        if (state.is(AetherIIBlocks.AETHER_SHORT_GRASS)) {
-            level.setBlock(pos, AetherIIBlocks.AETHER_MEDIUM_GRASS.get().withPropertiesOf(state), 2);
-        } else if (state.is(AetherIIBlocks.AETHER_MEDIUM_GRASS)) {
-            level.setBlock(pos, AetherIIBlocks.AETHER_LONG_GRASS.get().withPropertiesOf(state), 2);
+        if (state.is(AetherIIBlocks.SHORT_AETHER_GRASS)) {
+            level.setBlock(pos, AetherIIBlocks.MEDIUM_AETHER_GRASS.get().withPropertiesOf(state), 2);
+        } else if (state.is(AetherIIBlocks.MEDIUM_AETHER_GRASS)) {
+            level.setBlock(pos, AetherIIBlocks.TALL_AETHER_GRASS.get().withPropertiesOf(state), 2);
         }
     }
 

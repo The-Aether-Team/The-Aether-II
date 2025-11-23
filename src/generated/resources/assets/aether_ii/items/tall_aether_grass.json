@@ -1,7 +1,7 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "aether_ii:item/aether_medium_grass",
+    "model": "aether_ii:item/tall_aether_grass",
     "tints": [
       {
         "type": "aether_ii:aether_grass",
