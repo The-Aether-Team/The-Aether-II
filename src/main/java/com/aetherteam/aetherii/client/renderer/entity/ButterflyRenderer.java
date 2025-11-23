@@ -34,6 +34,7 @@ public class ButterflyRenderer extends MobRenderer<Butterfly, ButterflyRenderSta
         state.emissiveTexture = butterfly.getVariant().value().emissiveTexture().orElse(null);
         state.wingXOffset = butterfly.getVariant().value().wingXOffset();
         state.wingZRotation = butterfly.getVariant().value().wingZRotation();
+        state.restScale = butterfly.getRestAnimationScale(partialTicks);
     }
 
     @Override

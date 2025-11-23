@@ -45,6 +45,6 @@ public class ButterflyModel extends EntityModel<ButterflyRenderState> {
         this.leftWing.x += renderState.wingXOffset;
         this.rightWing.zRot += renderState.wingZRotation;
         this.leftWing.zRot -= renderState.wingZRotation;
-        this.flyAnimation.applyWalk(renderState.ageInTicks, renderState.ageInTicks, 5.0F, 1.0F);
+        this.flyAnimation.applyWalk(renderState.ageInTicks, 1F - renderState.restScale, 5.0F, 1.0F);
     }
 }
