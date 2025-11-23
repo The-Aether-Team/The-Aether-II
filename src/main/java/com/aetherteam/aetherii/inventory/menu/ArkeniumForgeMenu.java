@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.inventory.menu.slot.ForgeCharmSlot;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.ReinforcementTier;
+import com.aetherteam.aetherii.item.equipment.charms.CharmItem;
 import com.aetherteam.aetherii.network.packet.clientbound.ForgeSoundPacket;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -425,7 +426,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
     }
 
     public boolean isCharm(ItemStack itemStack) {
-        return itemStack.is(Items.BARRIER); //todo placeholder
+        return itemStack.getItem() instanceof CharmItem;
     }
 
     public boolean hasNewCharms() {

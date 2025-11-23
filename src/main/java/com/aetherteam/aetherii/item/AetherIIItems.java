@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.item;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluids;
@@ -19,6 +20,7 @@ import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
 import com.aetherteam.aetherii.item.equipment.armor.abilities.*;
+import com.aetherteam.aetherii.item.equipment.charms.CharmItem;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.HolystoneTool;
 import com.aetherteam.aetherii.item.equipment.tools.arkenium.ArkeniumAxeItem;
 import com.aetherteam.aetherii.item.equipment.tools.arkenium.ArkeniumPickaxeItem;
@@ -197,6 +199,18 @@ public class AetherIIItems {
     public static final DeferredItem<Item> GRAVITITE_LEGGINGS = register("gravitite_leggings", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.GRAVITITE, ArmorType.LEGGINGS).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.GRAVITITE_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.GRAVITITE, AetherIIStyleDesigns.WARRIOR, false))));
     public static final DeferredItem<Item> GRAVITITE_BOOTS = register("gravitite_boots", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.GRAVITITE, ArmorType.BOOTS).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.GRAVITITE_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.GRAVITITE, AetherIIStyleDesigns.WARRIOR, false))));
     public static final DeferredItem<Item> GRAVITITE_GLOVES = register("gravitite_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.GRAVITITE, 200.0, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.GRAVITITE_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.GRAVITITE, AetherIIStyleDesigns.WARRIOR, false))));
+
+    // Charms
+    public static final DeferredItem<Item> CHARM_OF_SLASH = register("charm_of_slash", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_MELEE, AetherIIStats.CHARM_SLASH_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_IMPACT = register("charm_of_impact", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_MELEE, AetherIIStats.CHARM_IMPACT_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_PIERCE = register("charm_of_pierce", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_MELEE, AetherIIStats.CHARM_PIERCE_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_DEXTERITY = register("charm_of_dexterity", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_MELEE, AetherIIStats.CHARM_ATTACK_SPEED_BONUS));
+
+    public static final DeferredItem<Item> CHARM_OF_HEALTH = register("charm_of_health", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_MAX_HEALTH_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_DEFENSE = register("charm_of_defense", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_ARMOR_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_TOUGHNESS = register("charm_of_toughness", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_ARMOR_TOUGHNESS_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_RESISTANCE = register("charm_of_resistance", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_KNOCKBACK_RESISTANCE_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_AGILITY = register("charm_of_agility", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_MOVEMENT_SPEED_BONUS));
 
     // Materials
     public static final DeferredItem<Item> SKYROOT_STICK = register("skyroot_stick");
@@ -384,6 +398,9 @@ public class AetherIIItems {
 
         // Tools
         bus.addListener(HolystoneTool::dropAmbrosium);
+
+        // Charms
+        bus.addListener(CharmItem::updateItemAttributes);
 
         // Accessories
         bus.addListener(GlovesItem::updatePlayerAttributes);
