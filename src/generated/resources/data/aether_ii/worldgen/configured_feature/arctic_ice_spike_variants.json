@@ -7,7 +7,7 @@
     },
     "features": [
       {
-        "chance": 0.1,
+        "chance": 0.25,
         "feature": {
           "feature": "aether_ii:mega_arctic_ice_spike",
           "placement": []

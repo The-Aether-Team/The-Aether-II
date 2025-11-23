@@ -1,10 +1,10 @@
 {
   "type": "aether_ii:arctic_ice_spike",
   "config": {
-    "additional_radius": 3,
-    "additional_slope_intensity": 2,
-    "base_radius": 6.25,
-    "base_slope_intensity": 4.5,
+    "additional_height": 5,
+    "additional_radius": 2,
+    "base_height": 20,
+    "base_radius": 4.25,
     "block": {
       "type": "minecraft:noise_provider",
       "noise": {
@@ -24,6 +24,7 @@
         }
       ]
     },
+    "end_radius": 6.25,
     "valid_blocks": "aether_ii:ferrosite_spike_generates_on"
   }
 }

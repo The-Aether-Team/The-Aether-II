@@ -812,8 +812,9 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome()
         );
         register(context, ARCTIC_ICE_SPIKE_CLUSTER, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ARCTIC_ICE_SPIKE_VARIANTS),
-                NoiseBasedCountPlacement.of(10, 200.0, 0.0),
-                HeightRangePlacement.uniform(VerticalAnchor.absolute(128), VerticalAnchor.absolute(224)),
+                NoiseBasedCountPlacement.of(10, 100.0, 0.0),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(128), VerticalAnchor.absolute(264)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON)),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                 BiomeFilter.biome()

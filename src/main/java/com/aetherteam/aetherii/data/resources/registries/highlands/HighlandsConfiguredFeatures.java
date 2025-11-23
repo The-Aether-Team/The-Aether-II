@@ -2066,10 +2066,11 @@ public class HighlandsConfiguredFeatures {
                                 AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()
                         )
                 ),
+                3.25F,
                 4.25F,
-                2,
-                7.5F,
-                5,
+                1,
+                13,
+                3,
                 AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON
         ));
         register(context, MEGA_ARCTIC_ICE_SPIKE, AetherIIFeatures.ARCTIC_ICE_SPIKE.get(), new ArcticIceSpikeConfiguration(
@@ -2082,14 +2083,15 @@ public class HighlandsConfiguredFeatures {
                                 AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()
                         )
                 ),
+                4.25F,
                 6.25F,
-                3,
-                4.5F,
                 2,
+                20,
+                5,
                 AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON
         ));
         register(context, ARCTIC_ICE_SPIKE_VARIANTS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
-                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEGA_ARCTIC_ICE_SPIKE)), 0.1F)
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEGA_ARCTIC_ICE_SPIKE)), 0.25F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ARCTIC_ICE_SPIKE))));
 
         register(context, FREEZE_TOP_LAYER_ARCTIC, AetherIIFeatures.FREEZE_TOP_LAYER_ARCTIC.get());
