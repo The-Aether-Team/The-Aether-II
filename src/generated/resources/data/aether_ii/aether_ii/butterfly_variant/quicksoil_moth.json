@@ -6,20 +6,17 @@
           "type": "minecraft:biome",
           "biomes": "#aether_ii:wet"
         },
-        "priority": 2
-      },
-      {
-        "condition": {
-          "type": "minecraft:biome",
-          "biomes": "#aether_ii:highlands"
-        },
         "priority": 1
       },
       {
         "condition": {
           "type": "aether_ii:random",
-          "bound": 10,
-          "check": 4
+          "bound": 100,
+          "check": 75,
+          "condition": {
+            "type": "minecraft:biome",
+            "biomes": "#aether_ii:highlands"
+          }
         },
         "priority": 1
       }

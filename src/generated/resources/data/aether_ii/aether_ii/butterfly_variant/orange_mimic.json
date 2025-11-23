@@ -3,16 +3,13 @@
     "spawn_conditions": [
       {
         "condition": {
-          "type": "minecraft:biome",
-          "biomes": "#aether_ii:highfields"
-        },
-        "priority": 1
-      },
-      {
-        "condition": {
           "type": "aether_ii:random",
-          "bound": 10,
-          "check": 4
+          "bound": 100,
+          "check": 25,
+          "condition": {
+            "type": "minecraft:biome",
+            "biomes": "#aether_ii:highfields"
+          }
         },
         "priority": 1
       }

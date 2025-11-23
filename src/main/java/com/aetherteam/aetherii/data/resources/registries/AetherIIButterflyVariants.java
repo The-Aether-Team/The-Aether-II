@@ -39,34 +39,50 @@ public class AetherIIButterflyVariants {
     }
 
     public static void bootstrap(BootstrapContext<ButterflyVariant> context) {
-        register(context, GLITTERWING, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.HIGHLANDS, 1));
-        register(context, HIGHLAND, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.HIGHLANDS, 1));
-        register(context, AMBER_MOTH, 2.0F, 0.0F, biomes(context, AetherIITags.Biomes.HIGHLANDS, 1));
+        register(context, GLITTERWING, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
+        register(context, HIGHLAND, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.HIGHLANDS));
+        register(context, AMBER_MOTH, 2.0F, 0.0F, biomes(context, AetherIITags.Biomes.HIGHLANDS));
 
-        register(context, ORANGE_MIMIC, 0.0F, 40.0F, biomes(context, AetherIITags.Biomes.HIGHFIELDS, 1), random(10, 4, 1));
+        register(context, ORANGE_MIMIC, 0.0F, 40.0F, random(biomeCheck(context, AetherIITags.Biomes.HIGHFIELDS), 100, 25));
 
-        register(context, LEAF_INSECT, 2.0F, 0.0F, biomes(context, AetherIITags.Biomes.LUSH, 2), biomes(context, AetherIITags.Biomes.HIGHLANDS, 1), random(10, 4, 1));
-        register(context, DRAGONFLY, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.LUSH, 2), biomes(context, AetherIITags.Biomes.HIGHLANDS, 1), random(10, 4, 1));
-        register(context, DRAPEWING, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.LUSH, 2), biomes(context, AetherIITags.Biomes.HIGHLANDS, 1), random(10, 4, 1));
+        register(context, LEAF_INSECT, 2.0F, 0.0F, biomes(context, AetherIITags.Biomes.LUSH), random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 50));
+        register(context, DRAGONFLY, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.LUSH), random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 50));
+        register(context, DRAPEWING, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.LUSH), random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 50));
 
-        register(context, QUICKSOIL_MOTH, 2.0F, 0.0F, biomes(context, AetherIITags.Biomes.WET, 2), biomes(context, AetherIITags.Biomes.HIGHLANDS, 1), random(10, 4, 1));
-        register(context, SUNSET_DRAGONFLY, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.WET, 2), biomes(context, AetherIITags.Biomes.HIGHLANDS, 1), random(10, 4, 1));
+        register(context, QUICKSOIL_MOTH, 2.0F, 0.0F, biomes(context, AetherIITags.Biomes.WET), random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 75));
+        register(context, SUNSET_DRAGONFLY, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.WET), random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 75));
 
-        register(context, PHANTOMFLY, 2.0F, 0.0F, light(0, 8, 2), random(10, 7, 2), biomes(context, AetherIITags.Biomes.HIGHLANDS, 1), random(20, 4, 1));
-        register(context, BLIGHTFLY, 2.0F, 0.0F, true, light(0, 8, 2), random(10, 7, 2), biomes(context, AetherIITags.Biomes.HIGHLANDS, 1),  random(20, 4, 1));
+        register(context, PHANTOMFLY, 2.0F, 0.0F, light(0, 8), random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 85));
+        register(context, BLIGHTFLY, 2.0F, 0.0F, true, light(0, 8), random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 85));
     }
 
-    private static PriorityProvider.Selector<SpawnContext, SpawnCondition> biomes(BootstrapContext<ButterflyVariant> context, TagKey<Biome> biomeTag, int priority) {
+    private static PriorityProvider.Selector<SpawnContext, SpawnCondition> random(SpawnCondition condition, int bound, int check) {
+        return new PriorityProvider.Selector<>(new RandomCheck(condition, bound, check), 1);
+    }
+
+    private static PriorityProvider.Selector<SpawnContext, SpawnCondition> biomes(BootstrapContext<ButterflyVariant> context, TagKey<Biome> biomeTag) {
+        return new PriorityProvider.Selector<>(biomeCheck(context, biomeTag), 1);
+    }
+
+    private static BiomeCheck biomeCheck(BootstrapContext<ButterflyVariant> context, TagKey<Biome> biomeTag) {
         HolderSet<Biome> biomes = context.lookup(Registries.BIOME).getOrThrow(biomeTag);
-        return new PriorityProvider.Selector<>(new BiomeCheck(biomes), priority);
+        return new BiomeCheck(biomes);
     }
 
-    private static PriorityProvider.Selector<SpawnContext, SpawnCondition> light(int min, int max, int priority) {
-        return new PriorityProvider.Selector<>(new LightCheck(MinMaxBounds.Ints.between(min, max)), priority);
+    private static PriorityProvider.Selector<SpawnContext, SpawnCondition> light(int min, int max) {
+        return new PriorityProvider.Selector<>(lightCheck(min, max), 1);
     }
 
-    private static PriorityProvider.Selector<SpawnContext, SpawnCondition> random(int bound, int check, int priority) {
-        return new PriorityProvider.Selector<>(new RandomCheck(bound, check), priority);
+    private static LightCheck lightCheck(int min, int max) {
+        return new LightCheck(MinMaxBounds.Ints.between(min, max));
+    }
+
+    private static void register(BootstrapContext<ButterflyVariant> context, ResourceKey<ButterflyVariant> key, float wingXOffset, float wingZRotation, boolean emissive, SpawnPrioritySelectors spawnSelectors) {
+        register(context, key, spawnSelectors, wingXOffset, wingZRotation, emissive);
+    }
+
+    private static void register(BootstrapContext<ButterflyVariant> context, ResourceKey<ButterflyVariant> key, float wingXOffset, float wingZRotation, SpawnPrioritySelectors spawnSelectors) {
+        register(context, key, spawnSelectors, wingXOffset, wingZRotation, false);
     }
 
     private static void register(BootstrapContext<ButterflyVariant> context, ResourceKey<ButterflyVariant> key, float wingXOffset, float wingZRotation, boolean emissive, PriorityProvider.Selector<SpawnContext, SpawnCondition>... spawnSelectors) {
