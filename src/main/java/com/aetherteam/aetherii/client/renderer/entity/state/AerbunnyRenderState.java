@@ -12,6 +12,7 @@ public class AerbunnyRenderState extends TamableRenderState {
     public boolean isSitting;
     public float puffiness;
     public boolean onGround;
+    public boolean isBaguchi;
     public Vec3 deltaMovement;
     public Optional<EntityReference<LivingEntity>> vehicleReference;
 }
