@@ -2,13 +2,16 @@ package com.aetherteam.aetherii.entity.monster.dungeon;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.projectile.DetonationProjectile;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -20,7 +23,9 @@ import net.minecraft.world.entity.ai.util.LandRandomPos;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
@@ -29,14 +34,8 @@ import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public class SentryGolem extends Monster implements RangedAttackMob {
-    public static final EntityDataAccessor<Byte> DATA_HAND_STATE_ID = SynchedEntityData.defineId(SentryGolem.class, EntityDataSerializers.BYTE);
     public static final EntityDataAccessor<Integer> DATA_FIRE_TIME_ID = SynchedEntityData.defineId(SentryGolem.class, EntityDataSerializers.INT);
     public int timeTilToss = 50;
-    public float progress = 0.0F;
-
-    float[] armsAngles = new float[]{1.0F, 1.0F, 0.5F, 0.0F};
-
-
     public SentryGolem(EntityType<? extends SentryGolem> entityType, Level level) {
         super(entityType, level);
     }
@@ -61,7 +60,6 @@ public class SentryGolem extends Monster implements RangedAttackMob {
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(DATA_HAND_STATE_ID, (byte) 2);
         builder.define(DATA_FIRE_TIME_ID, 0);
     }
 
@@ -76,16 +74,23 @@ public class SentryGolem extends Monster implements RangedAttackMob {
                     this.timeTilToss = 50;
                 }
             }
-        } else {
-            if (this.progress < this.armsAngles[this.getHandState()]) {
-                this.progress += 0.06F;
-            }
-
-            if (this.progress > this.armsAngles[this.getHandState()]) {
-                this.progress -= 0.06F;
-            }
         }
     }
+
+    @Override
+    public @org.jetbrains.annotations.Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnReason, @org.jetbrains.annotations.Nullable SpawnGroupData spawnGroupData) {
+        RandomSource randomsource = level.getRandom();
+
+        this.populateDefaultEquipmentSlots(randomsource, difficulty);
+        this.populateDefaultEquipmentEnchantments(level, randomsource, difficulty);
+        return super.finalizeSpawn(level, difficulty, spawnReason, spawnGroupData);
+    }
+
+    @Override
+    protected void populateDefaultEquipmentSlots(RandomSource random, DifficultyInstance difficulty) {
+        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(AetherIIItems.DEMOLITION_HAMMER.asItem()));
+    }
+
 
     @Override
     public void performRangedAttack(LivingEntity target, float distance) {
@@ -98,14 +103,6 @@ public class SentryGolem extends Monster implements RangedAttackMob {
         bomb.setYRot(this.yBodyRot);
         this.playSound(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_THROW_BOMB.get(), 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.level().addFreshEntity(bomb);
-    }
-
-    public byte getHandState() {
-        return this.entityData.get(DATA_HAND_STATE_ID);
-    }
-
-    public void setHandState(byte state) {
-        this.entityData.set(DATA_HAND_STATE_ID, state);
     }
 
     public int getFireTime() {
@@ -139,13 +136,11 @@ public class SentryGolem extends Monster implements RangedAttackMob {
     @Override
     public void readAdditionalSaveData(ValueInput tag) {
         super.readAdditionalSaveData(tag);
-        this.setHandState(tag.getByteOr("arm_state", (byte) 2));
     }
 
     @Override
     public void addAdditionalSaveData(ValueOutput tag) {
         super.addAdditionalSaveData(tag);
-        tag.putByte("arm_state", this.getHandState());
     }
 
     public static class ThrowExplosiveAttackGoal extends Goal {
@@ -218,13 +213,13 @@ public class SentryGolem extends Monster implements RangedAttackMob {
             this.attackTime = Math.max(this.attackTime - 1, 0);
             this.golem.setFireTime(this.attackTime);
             if (this.attackTime <= 30) {
-                this.golem.setHandState((byte) 1);
+                //this.golem.setHandState((byte) 1);
             }
 
             if (this.attackTime <= 0 && distance <= (double) this.maxAttackRange && canSee) {
                 this.golem.performRangedAttack(this.target, 1.0F);
                 this.attackTime = this.maxRangedAttackTime;
-                this.golem.setHandState((byte) 2);
+                this.golem.swing(InteractionHand.MAIN_HAND);
             }
         }
     }
@@ -259,13 +254,11 @@ public class SentryGolem extends Monster implements RangedAttackMob {
         @Override
         public void start() {
             super.start();
-            this.sentryGolem.setHandState((byte) 3);
         }
 
         @Override
         public void stop() {
             super.stop();
-            this.sentryGolem.setHandState((byte) 2);
         }
     }
 }

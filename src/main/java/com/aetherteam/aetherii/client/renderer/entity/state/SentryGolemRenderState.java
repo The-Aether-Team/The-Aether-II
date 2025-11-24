@@ -1,9 +1,8 @@
 package com.aetherteam.aetherii.client.renderer.entity.state;
 
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.entity.state.ArmedEntityRenderState;
 
-public class SentryGolemRenderState extends LivingEntityRenderState {
+public class SentryGolemRenderState extends ArmedEntityRenderState {
     public float progress;
-    public byte armState = 2;
     public int fireTime;
 }
