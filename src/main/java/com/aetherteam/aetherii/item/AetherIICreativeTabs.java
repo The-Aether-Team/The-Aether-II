@@ -711,15 +711,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.NEPTUNE_BOOTS.get());
                 output.accept(AetherIIItems.NEPTUNE_GLOVES.get());
                 output.accept(AetherIIItems.SENTRY_BOOSTERS.get());
-                output.accept(AetherIIItems.CHARM_OF_SLASH.get());
-                output.accept(AetherIIItems.CHARM_OF_IMPACT.get());
-                output.accept(AetherIIItems.CHARM_OF_PIERCE.get());
-                output.accept(AetherIIItems.CHARM_OF_DEXTERITY.get());
-                output.accept(AetherIIItems.CHARM_OF_HEALTH.get());
-                output.accept(AetherIIItems.CHARM_OF_DEFENSE.get());
-                output.accept(AetherIIItems.CHARM_OF_TOUGHNESS.get());
-                output.accept(AetherIIItems.CHARM_OF_RESISTANCE.get());
-                output.accept(AetherIIItems.CHARM_OF_AGILITY.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_CONSUMABLES = CREATIVE_MODE_TABS.register("consumables", () -> CreativeModeTab.builder()
@@ -798,6 +789,13 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.CHARGE_CATALYST.get());
                 output.accept(AetherIIItems.ARKENIUM_CORE.get());
                 output.accept(AetherIIItems.GRAVITITE_CORE.get());
+                output.accept(AetherIIItems.CHARM_OF_DAMAGE.get());
+                output.accept(AetherIIItems.CHARM_OF_DEXTERITY.get());
+                output.accept(AetherIIItems.CHARM_OF_HEALTH.get());
+                output.accept(AetherIIItems.CHARM_OF_DEFENSE.get());
+                output.accept(AetherIIItems.CHARM_OF_TOUGHNESS.get());
+                output.accept(AetherIIItems.CHARM_OF_RESISTANCE.get());
+                output.accept(AetherIIItems.CHARM_OF_AGILITY.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_SPAWN_EGGS = CREATIVE_MODE_TABS.register("spawn_eggs", () -> CreativeModeTab.builder()

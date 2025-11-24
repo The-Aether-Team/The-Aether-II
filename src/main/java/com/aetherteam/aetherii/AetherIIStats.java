@@ -37,17 +37,9 @@ public class AetherIIStats {
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_CROSSBOW = List.of(rangedPierceDamageModifer(5.0));
     public static final List<ItemAttributeModifiers.Entry> DEMOLITION_HAMMER = List.of(impactDamageModifer(5.0));
 
-    public static final ItemAttributeModifiers.Entry CHARM_SLASH_BONUS = new ItemAttributeModifiers.Entry(
-            AetherIIAttributes.SLASH_DAMAGE,
-            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.slash_damage"), 2.0, AttributeModifier.Operation.ADD_VALUE),
-            EquipmentSlotGroup.MAINHAND);
-    public static final ItemAttributeModifiers.Entry CHARM_IMPACT_BONUS = new ItemAttributeModifiers.Entry(
-            AetherIIAttributes.IMPACT_DAMAGE,
-            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.impact_damage"), 2.0, AttributeModifier.Operation.ADD_VALUE),
-            EquipmentSlotGroup.MAINHAND);
-    public static final ItemAttributeModifiers.Entry CHARM_PIERCE_BONUS = new ItemAttributeModifiers.Entry(
-            AetherIIAttributes.PIERCE_DAMAGE,
-            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.pierce_damage"), 2.0, AttributeModifier.Operation.ADD_VALUE),
+    public static final ItemAttributeModifiers.Entry CHARM_DAMAGE_BONUS = new ItemAttributeModifiers.Entry(
+            Attributes.ATTACK_DAMAGE,
+            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.attack_damage"), 1.0, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.MAINHAND);
     public static final ItemAttributeModifiers.Entry CHARM_ATTACK_SPEED_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.ATTACK_SPEED,
@@ -64,15 +56,15 @@ public class AetherIIStats {
             EquipmentSlotGroup.ARMOR);
     public static final ItemAttributeModifiers.Entry CHARM_ARMOR_TOUGHNESS_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.ARMOR_TOUGHNESS,
-            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.armor_toughness"), 2.0, AttributeModifier.Operation.ADD_VALUE),
+            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.armor_toughness"), 1.0, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.ARMOR);
     public static final ItemAttributeModifiers.Entry CHARM_KNOCKBACK_RESISTANCE_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.KNOCKBACK_RESISTANCE,
-            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.knockback_resistance"), 2.0, AttributeModifier.Operation.ADD_VALUE),
+            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.knockback_resistance"), 0.25, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.ARMOR);
     public static final ItemAttributeModifiers.Entry CHARM_MOVEMENT_SPEED_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.MOVEMENT_SPEED,
-            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.movement_speed"), 2.0, AttributeModifier.Operation.ADD_VALUE),
+            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.movement_speed"), 0.01, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.ARMOR);
 
     public static final ImmutableMap<Holder<Attribute>, Double> FLYING_COW = ImmutableMap.<Holder<Attribute>, Double>builder()

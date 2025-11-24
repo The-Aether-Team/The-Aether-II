@@ -881,9 +881,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SENTRY_BOOSTERS, "Sentry Boosters");
 
         // Charms
-        this.addItem(AetherIIItems.CHARM_OF_SLASH, "Charm of Slash");
-        this.addItem(AetherIIItems.CHARM_OF_IMPACT, "Charm of Impact");
-        this.addItem(AetherIIItems.CHARM_OF_PIERCE, "Charm of Pierce");
+        this.addItem(AetherIIItems.CHARM_OF_DAMAGE, "Charm of Damage");
         this.addItem(AetherIIItems.CHARM_OF_DEXTERITY, "Charm of Dexterity");
 
         this.addItem(AetherIIItems.CHARM_OF_HEALTH, "Charm of Health");

@@ -128,9 +128,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.SENTRY_BOOSTERS.get(), ModelTemplates.FLAT_ITEM);
 
         // Charms
-        this.generateFlatItem(AetherIIItems.CHARM_OF_SLASH.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.CHARM_OF_IMPACT.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.CHARM_OF_PIERCE.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.CHARM_OF_DAMAGE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.CHARM_OF_DEXTERITY.get(), ModelTemplates.FLAT_ITEM);
 
         this.generateFlatItem(AetherIIItems.CHARM_OF_HEALTH.get(), ModelTemplates.FLAT_ITEM);
