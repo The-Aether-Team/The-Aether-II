@@ -143,17 +143,17 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.MOA, List.of(BestiaryEntry.LootDisplay.item(Items.FEATHER.builtInRegistryHolder(), 1.0, 0, 2))),
             Map.entry(AetherIIEntityTypes.AECHOR_PLANT, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.AECHOR_PETAL, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.AECHOR_CUTTING, 1.0, 0, 1))),
             Map.entry(AetherIIEntityTypes.CARRION_SPROUT, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.WYNDBERRY, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.CARRION_CUTTING, 1.0, 0, 1))),
-            Map.entry(AetherIIEntityTypes.ZEPHYR, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.COLD_AERCLOUD, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.ZEPHYR_HUSK, 1.0, 0, 1))),
+            Map.entry(AetherIIEntityTypes.ZEPHYR, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.COLD_AERCLOUD, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.ZEPHYR_HUSK, 0.075, 1, 1))),
             Map.entry(AetherIIEntityTypes.SWET, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.SWET_SUGAR, 1.0, 0, 1))),
             Map.entry(AetherIIEntityTypes.SKEPHID, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.CLOUDTWINE, 1.0, 1, 2))),
-            Map.entry(AetherIIEntityTypes.TEMPEST, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.STORM_AERCLOUD, 1.0, 1, 3), BestiaryEntry.LootDisplay.item(AetherIIItems.CHARGE_CATALYST, 1.0, 0, 1))), //todo: current spawn chances are incorrect
+            Map.entry(AetherIIEntityTypes.TEMPEST, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.STORM_AERCLOUD, 1.0, 1, 3), BestiaryEntry.LootDisplay.item(AetherIIItems.CHARGE_CATALYST, 0.075, 1, 1))),
             Map.entry(AetherIIEntityTypes.COCKATRICE, List.of(BestiaryEntry.LootDisplay.item(Items.FEATHER.builtInRegistryHolder(), 1.0, 1, 3))),
-            Map.entry(AetherIIEntityTypes.ARKENIUM_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.ARKENIUM_CORE, 1.0, 0, 1))),
-            Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.GRAVITITE_CORE, 1.0, 0, 1))),
+            Map.entry(AetherIIEntityTypes.ARKENIUM_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.ARKENIUM_CORE, 0.075, 1, 1))),
+            Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.GRAVITITE_CORE, 0.075, 1, 1))),
             Map.entry(AetherIIEntityTypes.BLADE_SHROOM_HUNTER, List.of()),
             Map.entry(AetherIIEntityTypes.DETONATION_SENTRY, List.of()),
             Map.entry(AetherIIEntityTypes.SENTRY_GOLEM, List.of())
-    );
+            );
     public static final Map<Holder<EntityType<?>>, TagKey<Item>> FED = Map.ofEntries(
             Map.entry(AetherIIEntityTypes.FLYING_COW, AetherIITags.Items.FLYING_COW_FOOD),
             Map.entry(AetherIIEntityTypes.SHEEPUFF, AetherIITags.Items.SHEEPUFF_FOOD),
