@@ -5,7 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.entity.AnimationState;
 import org.joml.Quaternionf;
 
-public class BladeShroomHunterRenderState extends LivingEntityRenderState {
+public class BladeshroomHunterRenderState extends LivingEntityRenderState {
     public Quaternionf prevRotations = new Quaternionf();
     public Quaternionf rotations = new Quaternionf();
 
