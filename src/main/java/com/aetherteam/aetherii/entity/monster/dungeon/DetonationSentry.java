@@ -124,6 +124,11 @@ public class DetonationSentry extends Monster {
         }
         super.tick();
     }
+
+    public int getTimer() {
+        return timer;
+    }
+
     /**
      * Handles explosion behavior if the Sentry is close enough to an entity.
      *
@@ -259,6 +264,12 @@ public class DetonationSentry extends Monster {
         public void tick() {
             if (!this.detonationSentry.isIgnited()) {
                 this.detonationSentry.ignite();
+            } else {
+                if (this.detonationSentry.getTimer() > MAX_TIMER - 20) {
+                    this.detonationSentry.getNavigation().stop();
+                } else if (this.detonationSentry.getTarget() != null) {
+                    this.detonationSentry.getNavigation().moveTo(this.detonationSentry.getTarget(), 0.6F);
+                }
             }
         }
     }
