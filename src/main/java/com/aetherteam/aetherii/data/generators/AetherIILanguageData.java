@@ -1519,6 +1519,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addMusic("aether_sunrise", "Emile van Krieken - Sunrise");
         this.addMusic("aether_sunset", "Emile van Krieken - Sunset");
         this.addMusic("aether_ambience1", "Emile van Krieken - Sentience");
+        this.addMusic("boss.slider_fight", "Emile van Krieken - Labyrinth's Vengeance");
 
         // Jukebox Songs
         this.addJukeboxSong("aether_tune", "Noisestorm - Aether Tune");
