@@ -1,10 +1,8 @@
 package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.entity.companion.Companion;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
-import com.aetherteam.aetherii.item.equipment.accessories.companions.CompanionAccessory;
 import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -18,14 +16,11 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.util.ExtraCodecs;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityReference;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 public class AbilityBehaviorAttachment {
     private boolean canRefuelGlide;
@@ -37,8 +32,6 @@ public class AbilityBehaviorAttachment {
 
     private boolean gravititeHoldingFloatingBlock = false;
     private boolean gravititeJumpUsed = true;
-
-    private List<Entity> companions = new ArrayList<>();
 
 //    private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
 //            Map.entry("setGlidingTimer", Triple.of(Type.INT, (object) -> this.setGlidingTimer((int) object), this::getGlidingTimer)),
@@ -81,7 +74,7 @@ public class AbilityBehaviorAttachment {
     }
 
     public void logout(Player player) {
-        this.clearCompanions();
+
     }
 
     public void onJoinLevel(Player player) {
@@ -92,7 +85,6 @@ public class AbilityBehaviorAttachment {
 
     public void changeDimension(Player player) {
         this.shouldSyncAfterJoin = true;
-//        accessories.getEquipped((itemStack) -> itemStack.getItem() instanceof CompanionAccessory<?>).forEach((slot) -> ((CompanionAccessory<?>) slot.stack().getItem()).equip(slot.stack(), slot.reference())); //todo
     }
 
     public void postTickUpdate(Player player) {
@@ -100,7 +92,6 @@ public class AbilityBehaviorAttachment {
         this.syncClients(player);
         this.handleHealingStoneHealth(player);
         this.resetGlideCheck(player);
-        this.trackCompanions();
     }
 
     private void syncAfterJoin(Player player) {
@@ -184,40 +175,6 @@ public class AbilityBehaviorAttachment {
 
     public boolean isGravititeJumpUsed() {
         return this.gravititeJumpUsed;
-    }
-
-    private void trackCompanions() {
-        if (!this.getCompanions().isEmpty()) {
-            this.getCompanions().removeIf(Entity::isRemoved);
-        }
-    }
-
-    public void setCompanions(Player player, List<Entity> companions) {
-        companions.stream().filter((entity) -> entity instanceof Companion<?>).forEach((entity) -> ((Companion<?>) entity).setOwner(Optional.of(new EntityReference<>(player.getUUID()))));
-        this.companions = companions;
-    }
-
-    public void addCompanion(Player player, Entity companion) {
-        if (companion instanceof Companion<?> companionEntity) {
-            companionEntity.setOwner(Optional.of(new EntityReference<>(player.getUUID())));
-        }
-        this.companions.add(companion);
-    }
-
-    public void removeCompanion(Predicate<Entity> companionCheck) {
-        this.companions.removeIf(companionCheck);
-    }
-
-    public void clearCompanions() {
-        this.companions.forEach(Entity::discard);
-        this.companions.clear();
-    }
-
-    /**
-     * @return The {@link List} of companion {@link Entity Entities} that this player has active.
-     */
-    public List<Entity> getCompanions() {
-        return this.companions;
     }
 
     /**
