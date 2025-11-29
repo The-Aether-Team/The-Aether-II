@@ -17,6 +17,7 @@ import com.aetherteam.aetherii.item.components.BuildupContents;
 import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
+import com.aetherteam.aetherii.item.equipment.accessories.companions.CompanionItem;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.item.equipment.accessories.GlovesItem;
 import com.aetherteam.aetherii.item.equipment.accessories.SentryBoostersItem;
@@ -228,6 +229,8 @@ public class AetherIIItems {
     public static final DeferredItem<Item> CHARM_OF_RESISTANCE = register("charm_of_resistance", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_KNOCKBACK_RESISTANCE_BONUS));
     public static final DeferredItem<Item> CHARM_OF_AGILITY = register("charm_of_agility", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_MOVEMENT_SPEED_BONUS));
 
+    public static final DeferredItem<Item> COMPANION = register("companion", CompanionItem::new);
+
     // Materials
     public static final DeferredItem<Item> SKYROOT_STICK = register("skyroot_stick");
     public static final DeferredItem<Item> SKYROOT_PINECONE = register("skyroot_pinecone", SkyrootPineconeItem::new);
@@ -425,5 +428,9 @@ public class AetherIIItems {
 
         // Accessories
         bus.addListener(GlovesItem::updatePlayerAttributes);
+
+        // Other
+        bus.addListener(CompanionItem::entityPostTick);
+        bus.addListener(CompanionItem::entityLeaveLevel);
     }
 }

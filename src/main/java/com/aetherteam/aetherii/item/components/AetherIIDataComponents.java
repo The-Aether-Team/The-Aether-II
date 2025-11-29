@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.item.components;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.api.Mural;
@@ -9,8 +10,10 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import com.mojang.serialization.Codec;
 
 import net.minecraft.core.Holder;
+import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.ExtraCodecs;
@@ -36,4 +39,6 @@ public class AetherIIDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<GuidebookEntryData>>> GUIDEBOOK_ENTRY_DATA = DATA_COMPONENT_TYPES.register("guidebook_entry_data", () -> DataComponentType.<List<GuidebookEntryData>>builder().persistent(GuidebookEntryData.CODEC.listOf()).networkSynchronized(GuidebookEntryData.STREAM_CODEC.apply(ByteBufCodecs.list())).cacheEncoding().build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<MuralSection>> MURAL_SECTION = DATA_COMPONENT_TYPES.register("mural_section", () -> DataComponentType.<MuralSection>builder().persistent(MuralSection.CODEC).networkSynchronized(MuralSection.STREAM_CODEC).build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Holder<Mural>>> MURAL = DATA_COMPONENT_TYPES.register("mural", () -> DataComponentType.<Holder<Mural>>builder().persistent(Mural.CODEC).networkSynchronized(Mural.STREAM_CODEC).build());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<UUID>> COMPANION_UUID = DATA_COMPONENT_TYPES.register("companion_uuid", () -> DataComponentType.<UUID>builder().persistent(UUIDUtil.CODEC).networkSynchronized(UUIDUtil.STREAM_CODEC).build());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<CompoundTag>> COMPANION_NBT = DATA_COMPONENT_TYPES.register("companion_tag", () -> DataComponentType.<CompoundTag>builder().persistent(CompoundTag.CODEC).networkSynchronized(ByteBufCodecs.COMPOUND_TAG).build());
 }
