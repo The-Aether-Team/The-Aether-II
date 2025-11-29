@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.item.equipment.accessories.companions;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.network.packet.serverbound.DiscardEntityPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.storage.TagValueInput;
 import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
@@ -49,7 +51,7 @@ public class CompanionItem extends Item {
         UUID companionUUID = stack.get(AetherIIDataComponents.COMPANION_UUID);
         CompoundTag companionNBT = stack.get(AetherIIDataComponents.COMPANION_NBT);
         if (player != null && companionUUID != null && companionNBT != null) {
-            if (player.level() instanceof ServerLevel serverLevel) {
+            if (player.level() instanceof ServerLevel serverLevel && serverLevel.getEntity(companionUUID) == null) {
                 try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(player.problemPath(), AetherII.LOGGER)) {
                     ValueInput value = TagValueInput.create(reporter, player.registryAccess(), companionNBT);
                     EntityType.create(value, serverLevel, EntitySpawnReason.MOB_SUMMONED).ifPresent((entity) -> {
@@ -69,9 +71,9 @@ public class CompanionItem extends Item {
     public static void entityPostTick(EntityTickEvent.Post event) {
         Entity entity = event.getEntity();
         if (entity instanceof OwnableEntity owned && owned.getOwner() instanceof Player owner && entity.getData(AetherIIDataAttachments.COMPANION)) {
-            if (!owner.level().isClientSide()) {
+            if (owner.level().isClientSide()) {
                 if (getMatchingStack(owner, entity).isEmpty()) {
-                    entity.remove(Entity.RemovalReason.DISCARDED);
+                    ClientPacketDistributor.sendToServer(new DiscardEntityPacket(entity.getId()));
                 }
             }
         }
@@ -84,7 +86,7 @@ public class CompanionItem extends Item {
             for (ItemStack inventoryStack : menu.getItems()) {
                 UUID thisUUID = inventoryStack.get(AetherIIDataComponents.COMPANION_UUID);
                 if (thisUUID != null && player.level().getEntity(thisUUID) instanceof LivingEntity companion) {
-                    companion.remove(Entity.RemovalReason.DISCARDED);
+                    companion.discard();
                 }
             }
         } else {
@@ -120,7 +122,7 @@ public class CompanionItem extends Item {
     private static ItemStack getMatchingStack(Player player, Entity entity) {
         InventoryMenu menu = player.inventoryMenu;
         ItemStack carriedStack = menu.getCarried();
-        if (UUIDsMatch(carriedStack, entity)) { //todo this only matches on client
+        if (UUIDsMatch(carriedStack, entity)) {
             return carriedStack;
         }
         for (ItemStack inventoryStack : menu.getItems()) {
