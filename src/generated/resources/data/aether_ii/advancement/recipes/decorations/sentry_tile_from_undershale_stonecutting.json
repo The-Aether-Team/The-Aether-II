@@ -3,15 +3,15 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:sentry_brick_stairs_from_undershale_stairs_stonecutting"
+        "recipe": "aether_ii:sentry_tile_from_undershale_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_undershale_stairs": {
+    "has_undershale": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:undershale_stairs"
+            "items": "aether_ii:undershale"
           }
         ]
       },
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_undershale_stairs"
+      "has_undershale"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:sentry_brick_stairs_from_undershale_stairs_stonecutting"
+      "aether_ii:sentry_tile_from_undershale_stonecutting"
     ]
   }
 }

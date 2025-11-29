@@ -136,7 +136,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.CHARM_OF_TOUGHNESS.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.CHARM_OF_RESISTANCE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.CHARM_OF_AGILITY.get(), ModelTemplates.FLAT_ITEM);
-        
+
         this.generateFlatItem(AetherIIItems.COMPANION.get(), ModelTemplates.FLAT_ITEM);
 
         // Materials
