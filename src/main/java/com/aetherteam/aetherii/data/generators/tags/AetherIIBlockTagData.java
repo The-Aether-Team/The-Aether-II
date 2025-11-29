@@ -363,23 +363,18 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GREATROOT_BUTTON.get(),
                 AetherIIBlocks.WISPROOT_BUTTON.get()
         );
+        this.tag(BlockTags.STONE_BUTTONS).add(
+                AetherIIBlocks.HOLYSTONE_BUTTON.get(),
+                AetherIIBlocks.UNDERSHALE_BRICK_BUTTON.get()
+        );
         this.tag(BlockTags.WOODEN_PRESSURE_PLATES).add(
                 AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get(),
                 AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get(),
                 AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get()
         );
-        this.tag(BlockTags.BUTTONS).add(
-                AetherIIBlocks.SKYROOT_BUTTON.get(),
-                AetherIIBlocks.GREATROOT_BUTTON.get(),
-                AetherIIBlocks.WISPROOT_BUTTON.get(),
-                AetherIIBlocks.HOLYSTONE_BUTTON.get()
-        );
-        this.tag(BlockTags.STONE_BUTTONS).add(AetherIIBlocks.HOLYSTONE_BUTTON.get());
-        this.tag(BlockTags.PRESSURE_PLATES).add(
-                AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get(),
-                AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get(),
-                AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get(),
-                AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get()
+        this.tag(BlockTags.STONE_PRESSURE_PLATES).add(
+                AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get(),
+                AetherIIBlocks.UNDERSHALE_BRICK_PRESSURE_PLATE.get()
         );
         this.tag(BlockTags.WOOL_CARPETS).add(
                 AetherIIBlocks.CLOUDWOOL_CARPET.get(),
@@ -681,6 +676,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get(),
                 AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get(),
                 AetherIIBlocks.UNDERSHALE_BRICK_WALL.get(),
+                AetherIIBlocks.UNDERSHALE_BRICK_BUTTON.get(),
+                AetherIIBlocks.UNDERSHALE_BRICK_PRESSURE_PLATE.get(),
                 AetherIIBlocks.UNDERSHALE_FLAGSTONES.get(),
                 AetherIIBlocks.UNDERSHALE_TILE.get(),
                 AetherIIBlocks.UNDERSHALE_BASE_BRICKS.get(),

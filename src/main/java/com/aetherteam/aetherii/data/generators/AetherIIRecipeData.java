@@ -518,6 +518,9 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stairs(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS, AetherIIBlocks.UNDERSHALE_BRICKS).save(this.output);
         this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());
         this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_BRICK_WALL.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());
+        this.pressurePlateBuilder(RecipeCategory.REDSTONE, AetherIIBlocks.UNDERSHALE_BRICK_PRESSURE_PLATE.get(), Ingredient.of(AetherIIBlocks.UNDERSHALE_BRICKS.get())).unlockedBy(getHasName(AetherIIBlocks.UNDERSHALE_BRICKS.get()), has(AetherIIBlocks.UNDERSHALE_BRICKS.get())).save(this.output);
+        this.buttonBuilder(AetherIIBlocks.UNDERSHALE_BRICK_BUTTON.get(), Ingredient.of(AetherIIBlocks.UNDERSHALE_BRICKS.get())).unlockedBy(getHasName(AetherIIBlocks.UNDERSHALE_BRICKS.get()), has(AetherIIBlocks.UNDERSHALE_BRICKS.get())).save(this.output);
+
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_BRICKS.get(), AetherIIBlocks.UNDERSHALE.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get(), AetherIIBlocks.UNDERSHALE.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get(), AetherIIBlocks.UNDERSHALE.get(), 2);

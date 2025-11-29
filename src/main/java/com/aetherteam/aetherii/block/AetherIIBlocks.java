@@ -449,6 +449,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<StairBlock> UNDERSHALE_BRICK_STAIRS = register("undershale_brick_stairs", (properties) -> new StairBlock(UNDERSHALE_BRICKS.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()));
     public static final DeferredBlock<SlabBlock> UNDERSHALE_BRICK_SLAB = register("undershale_brick_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()));
     public static final DeferredBlock<WallBlock> UNDERSHALE_BRICK_WALL = register("undershale_brick_wall", WallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()).forceSolidOn());
+    public static final DeferredBlock<ButtonBlock> UNDERSHALE_BRICK_BUTTON = register("undershale_brick_button", (properties) -> new ButtonBlock(BlockSetType.STONE, 20, properties), () -> Block.Properties.ofFullCopy(Blocks.STONE_BUTTON).sound(SoundType.DEEPSLATE));
+    public static final DeferredBlock<PressurePlateBlock> UNDERSHALE_BRICK_PRESSURE_PLATE = register("undershale_brick_pressure_plate", (properties) -> new PressurePlateBlock(BlockSetType.STONE, properties), () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.DEEPSLATE).forceSolidOn().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().strength(0.5F));
 
     // Undershale Decorative Blocks
     public static final DeferredBlock<Block> UNDERSHALE_FLAGSTONES = register("undershale_flagstones", () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));

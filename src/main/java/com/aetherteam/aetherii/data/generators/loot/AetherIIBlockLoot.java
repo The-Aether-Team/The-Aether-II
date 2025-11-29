@@ -421,6 +421,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get());
         this.add(AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.UNDERSHALE_BRICK_WALL.get());
+        this.dropSelf(AetherIIBlocks.UNDERSHALE_BRICK_BUTTON.get());
+        this.dropSelf(AetherIIBlocks.UNDERSHALE_BRICK_PRESSURE_PLATE.get());
 
         // Undershale Decorative Blocks
         this.dropSelf(AetherIIBlocks.UNDERSHALE_FLAGSTONES.get());
