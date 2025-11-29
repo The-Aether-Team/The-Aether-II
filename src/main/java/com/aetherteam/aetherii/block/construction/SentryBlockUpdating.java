@@ -18,7 +18,7 @@ public interface SentryBlockUpdating {
 
             boolean hasPowered = neighborState.is(AetherIITags.Blocks.SENTRY_BLOCKS) && neighborState.getValueOrElse(BlockStateProperties.POWERED, false);
             boolean hasSignal = level.getSignal(neighborPos, direction) > 0;
-            if (hasSignal != state.getValue(BlockStateProperties.POWERED) || hasPowered != state.getValue(BlockStateProperties.POWERED)) {
+            if ((!neighborState.is(AetherIITags.Blocks.SENTRY_BLOCKS) && hasSignal != state.getValue(BlockStateProperties.POWERED)) || hasPowered != state.getValue(BlockStateProperties.POWERED)) {
                 BlockState blockstate = state;
                 if (!state.getValue(BlockStateProperties.POWERED)) {
                     blockstate = state.cycle(BlockStateProperties.LIT);
@@ -34,7 +34,7 @@ public interface SentryBlockUpdating {
     default void scheduleChange(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState) {
         boolean hasPowered = neighborState.is(AetherIITags.Blocks.SENTRY_BLOCKS) && neighborState.getValueOrElse(BlockStateProperties.POWERED, false);
         boolean hasSignal = level.getSignal(neighborPos, direction) > 0;
-        if (hasSignal != state.getValue(BlockStateProperties.POWERED) || hasPowered != state.getValue(BlockStateProperties.POWERED)) {
+        if ((!neighborState.is(AetherIITags.Blocks.SENTRY_BLOCKS) && hasSignal != state.getValue(BlockStateProperties.POWERED)) || hasPowered != state.getValue(BlockStateProperties.POWERED)) {
             scheduledTickAccess.scheduleTick(pos, state.getBlock(), 3);
         }
     }
