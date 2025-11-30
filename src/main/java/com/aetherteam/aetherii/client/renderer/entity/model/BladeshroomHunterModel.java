@@ -4,7 +4,7 @@ package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockb
 
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.entity.state.BladeShroomHunterRenderState;
+import com.aetherteam.aetherii.client.renderer.entity.state.BladeshroomHunterRenderState;
 import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.Model;
@@ -15,7 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
-public class BladeShroomHunterModel<T extends BladeShroomHunterRenderState> extends EntityModel<T> {
+public class BladeshroomHunterModel<T extends BladeshroomHunterRenderState> extends EntityModel<T> {
     public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/attack"));
     public static final AnimationHolder BURRY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/bury"));
     public static final AnimationHolder UNBURRY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/unbury"));
@@ -47,7 +47,7 @@ public class BladeShroomHunterModel<T extends BladeShroomHunterRenderState> exte
     private final KeyframeAnimation rustleAnimation;
 
 
-    public BladeShroomHunterModel(ModelPart root) {
+    public BladeshroomHunterModel(ModelPart root) {
         super(root);
         this.body = root.getChild("body");
         this.shrink_group = this.body.getChild("shrink_group");

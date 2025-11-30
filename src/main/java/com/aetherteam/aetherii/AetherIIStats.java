@@ -215,7 +215,7 @@ public class AetherIIStats {
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 2.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, -2.0)
             .build();
-    public static final ImmutableMap<Holder<Attribute>, Double> BLADE_SHROOM_HUNTER = ImmutableMap.<Holder<Attribute>, Double>builder()
+    public static final ImmutableMap<Holder<Attribute>, Double> BLADESHROOM_HUNTER = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 18.0)
             .put(AetherIIAttributes.SLASH_RESISTANCE, -2.0)
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 3.0)

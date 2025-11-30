@@ -83,7 +83,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(COCKATRICE, AetherIIEntityTypes.COCKATRICE),
             Map.entry(ARKENIUM_TALUTON, AetherIIEntityTypes.ARKENIUM_TALUTON),
             Map.entry(GRAVITITE_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON),
-            Map.entry(BLADESHROOM_HUNTER, AetherIIEntityTypes.BLADE_SHROOM_HUNTER)
+            Map.entry(BLADESHROOM_HUNTER, AetherIIEntityTypes.BLADESHROOM_HUNTER)
     );
     public static final List<Holder<EntityType<?>>> NAMED = List.of(
             AetherIIEntityTypes.HIGHFIELDS_TAEGORE,
@@ -120,7 +120,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.SKEPHID, AetherIIStats.SKEPHID),
             Map.entry(AetherIIEntityTypes.ARKENIUM_TALUTON, AetherIIStats.ARKENIUM_TALUTON),
             Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, AetherIIStats.GRAVITITE_TALUTON),
-            Map.entry(AetherIIEntityTypes.BLADE_SHROOM_HUNTER, AetherIIStats.BLADE_SHROOM_HUNTER)
+            Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, AetherIIStats.BLADESHROOM_HUNTER)
     );
     public static final Map<Holder<EntityType<?>>, List<BestiaryEntry.LootDisplay>> LOOT = Map.ofEntries(
             Map.entry(AetherIIEntityTypes.FLYING_COW, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.BURRUKAI_RIB_CUT, 1.0, 1, 2))),
@@ -145,7 +145,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.COCKATRICE, List.of(BestiaryEntry.LootDisplay.item(Items.FEATHER.builtInRegistryHolder(), 1.0, 1, 3))),
             Map.entry(AetherIIEntityTypes.ARKENIUM_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.ARKENIUM_CORE, 0.075, 1, 1))),
             Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.GRAVITITE_CORE, 0.075, 1, 1))),
-            Map.entry(AetherIIEntityTypes.BLADE_SHROOM_HUNTER, List.of())
+            Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, List.of())
     );
     public static final Map<Holder<EntityType<?>>, TagKey<Item>> FED = Map.ofEntries(
             Map.entry(AetherIIEntityTypes.FLYING_COW, AetherIITags.Items.FLYING_COW_FOOD),
