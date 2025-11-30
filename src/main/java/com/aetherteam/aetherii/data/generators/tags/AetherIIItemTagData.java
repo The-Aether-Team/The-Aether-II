@@ -796,6 +796,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.CORROBONITE_BLOCK.asItem(),
                 AetherIIBlocks.BRETTL_GRASS_BUNDLE.asItem()
         );
+        this.tag(Tags.Items.TOOLS_SHEAR).add(
+                AetherIIItems.ZANITE_SHEARS.get()
+        );
         this.tag(Tags.Items.TOOLS_SHIELD).add(
                 AetherIIItems.SKYROOT_SHIELD.get(),
                 AetherIIItems.BURRUKAI_PLATE_SHIELD.get(),

@@ -69,7 +69,7 @@ public class BlockHooks {
 
     public static void stripMossyWisproot(LevelAccessor accessor, BlockState state, ItemStack stack, ItemAbility action, UseOnContext context) {
         if (action == ItemAbilities.AXE_STRIP) {
-            if (state.is(AetherIIBlocks.MOSSY_WISPROOT_LOG) || state.is(AetherIIBlocks.MOSSY_WISPROOT_WOOD)) {
+            if (state.is(AetherIIBlocks.MOSSY_WISPROOT_LOG) || state.is(AetherIIBlocks.MOSSY_WISPROOT_WOOD) || state.is(AetherIIBlocks.MOSSY_WISPROOT_TRUNK)) {
                 stripLog(accessor, stack, context, AetherIILoot.STRIP_MOSSY_WISPROOT);
             } else if (state.is(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE)) {
                 stripLog(accessor, stack, context, AetherIILoot.STRIP_MOSSY_WISPROOT_END);

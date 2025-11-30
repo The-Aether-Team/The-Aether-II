@@ -78,6 +78,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AETHER_DIRT_PATH, "Aether Dirt Path");
         this.addBlock(AetherIIBlocks.AETHER_DIRT, "Aether Dirt");
         this.addBlock(AetherIIBlocks.COARSE_AETHER_DIRT, "Coarse Aether Dirt");
+        this.addBlock(AetherIIBlocks.MYCELIAL_AETHER_DIRT, "Mycelial Aether Dirt");
         this.addBlock(AetherIIBlocks.AETHER_FARMLAND, "Aether Farmland");
         this.addBlock(AetherIIBlocks.SHIMMERING_SILT, "Shimmering Silt");
 
@@ -107,6 +108,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.FERROSITE, "Ferrosite");
         this.addBlock(AetherIIBlocks.RUSTED_FERROSITE, "Rusted Ferrosite");
         this.addBlock(AetherIIBlocks.MAGNETIC_SHROOM, "Magnetic Shroom");
+        this.addBlock(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK, "Magnetic Shroom Block");
+        this.addBlock(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK, "Spotted Magnetic Shroom Block");
+        this.addBlock(AetherIIBlocks.MAGNETIC_SHROOM_STEM, "Magnetic Shroom Stem");
 
         // Arctic
         this.addBlock(AetherIIBlocks.ARCTIC_SNOW_BLOCK, "Arctic Snow Block");

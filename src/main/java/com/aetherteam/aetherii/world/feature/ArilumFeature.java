@@ -30,7 +30,7 @@ public class ArilumFeature extends Feature<ArilumConfiguration> {
             for (int l = 0; l <= height; l++) {
                 if (level.getBlockState(pos).is(Blocks.WATER) && bodyState.canSurvive(level, pos)) {
                     if (l == height) {
-                        level.setBlock(pos, endState.setValue(KelpBlock.AGE, random.nextInt(4) + 20), 2);
+                        level.setBlock(pos, endState.setValue(KelpBlock.AGE, random.nextInt(2) + 23), 2);
                         i++;
                     } else {
                         level.setBlock(pos, bodyState, 2);
@@ -38,7 +38,7 @@ public class ArilumFeature extends Feature<ArilumConfiguration> {
                 } else if (l > 0) {
                     BlockPos belowPos = pos.below();
                     if (endState.canSurvive(level, belowPos) && !level.getBlockState(belowPos.below()).is(endState.getBlock())) {
-                        level.setBlock(belowPos, endState.setValue(KelpBlock.AGE, random.nextInt(4) + 20), 2);
+                        level.setBlock(belowPos, endState.setValue(KelpBlock.AGE, random.nextInt(2) + 23), 2);
                         i++;
                     }
                     break;

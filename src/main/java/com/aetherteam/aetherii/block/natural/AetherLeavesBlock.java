@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
-import com.aetherteam.aetherii.mixin.mixins.common.accessor.VegetationBlockAccessor;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -14,26 +13,33 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.TriState;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
+import net.neoforged.neoforge.common.ItemAbilities;
 
 public class AetherLeavesBlock extends LeavesBlock {
     public static final MapCodec<AetherLeavesBlock> CODEC = RecordCodecBuilder.mapCodec((p_399854_) -> p_399854_.group(propertiesCodec(), ParticleTypes.CODEC.fieldOf("leaf_particle").forGetter((p_399817_) -> p_399817_.leavesParticle), BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("leaves_pile").forGetter(aetherLeavesBlock -> aetherLeavesBlock.leavesPile)).apply(p_399854_, AetherLeavesBlock::new));
@@ -58,6 +64,20 @@ public class AetherLeavesBlock extends LeavesBlock {
     @Override
     public boolean isRandomlyTicking(BlockState state) {
         return !state.getValue(PERSISTENT);
+    }
+
+    @Override
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (stack.canPerformAction(ItemAbilities.SHEARS_HARVEST) && state.getValue(MOSSY) != AetherIIBlockStateProperties.Mossy.NONE) {
+            level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.SHEARS_SNIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+            level.setBlock(pos, state.setValue(MOSSY, AetherIIBlockStateProperties.Mossy.NONE), 3);
+            stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+            if (!level.isClientSide()) {
+                player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
+            }
+            return InteractionResult.SUCCESS;
+        }
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Override
@@ -146,7 +166,7 @@ public class AetherLeavesBlock extends LeavesBlock {
     @Override
     public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPosition, Direction facing, BlockState plant) {
         Block plantBlock = plant.getBlock();
-        if (plantBlock instanceof BushBlock bushBlock && ((VegetationBlockAccessor) bushBlock).callMayPlaceOn(Blocks.GRASS_BLOCK.defaultBlockState(), level, soilPosition) && !plant.is(BlockTags.SAPLINGS)) {
+        if (state.getValue(MOSSY) != AetherIIBlockStateProperties.Mossy.NONE && plantBlock instanceof VegetationBlock && !plant.is(BlockTags.SAPLINGS)) {
             return TriState.TRUE;
         } else {
             return super.canSustainPlant(state, level, soilPosition, facing, plant);
