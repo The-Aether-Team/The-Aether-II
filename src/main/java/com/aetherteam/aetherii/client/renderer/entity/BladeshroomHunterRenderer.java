@@ -2,9 +2,9 @@ package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
-import com.aetherteam.aetherii.client.renderer.entity.model.BladeShroomHunterModel;
-import com.aetherteam.aetherii.client.renderer.entity.state.BladeShroomHunterRenderState;
-import com.aetherteam.aetherii.entity.monster.BladeShroomHunter;
+import com.aetherteam.aetherii.client.renderer.entity.model.BladeshroomHunterModel;
+import com.aetherteam.aetherii.client.renderer.entity.state.BladeshroomHunterRenderState;
+import com.aetherteam.aetherii.entity.monster.BladeshroomHunter;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -14,33 +14,33 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Pose;
 
-public class BladeShroomHunterRenderer<T extends BladeShroomHunter> extends MobRenderer<T, BladeShroomHunterRenderState, BladeShroomHunterModel<BladeShroomHunterRenderState>> {
+public class BladeshroomHunterRenderer<T extends BladeshroomHunter> extends MobRenderer<T, BladeshroomHunterRenderState, BladeshroomHunterModel<BladeshroomHunterRenderState>> {
     private static final ResourceLocation LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/bladeshroom_hunter/bladeshroom_hunter.png");
 
-    public BladeShroomHunterRenderer(EntityRendererProvider.Context context) {
-        super(context, new BladeShroomHunterModel<>(context.bakeLayer(AetherIIModelLayers.BLADE_SHROOM_HUNTER)), 0.5F);
+    public BladeshroomHunterRenderer(EntityRendererProvider.Context context) {
+        super(context, new BladeshroomHunterModel<>(context.bakeLayer(AetherIIModelLayers.BLADESHROOM_HUNTER)), 0.5F);
     }
 
     @Override
-    public BladeShroomHunterRenderState createRenderState() {
-        return new BladeShroomHunterRenderState();
+    public BladeshroomHunterRenderState createRenderState() {
+        return new BladeshroomHunterRenderState();
     }
 
     @Override
-    public void extractRenderState(T bladeShroom, BladeShroomHunterRenderState renderState, float p_361157_) {
-        super.extractRenderState(bladeShroom, renderState, p_361157_);
-        renderState.rotations = bladeShroom.getCellRotation();
-        renderState.prevRotations = bladeShroom.prevRotation;
-        renderState.attachDir = bladeShroom.getAttachFacing();
-        renderState.attachChangeProgress = bladeShroom.getAttachAmount(p_361157_);
-        renderState.attackAnimationState.copyFrom(bladeShroom.axeAttackAnimationState);
-        renderState.buryAnimationState.copyFrom(bladeShroom.buryAnimationState);
-        renderState.unburyAnimationState.copyFrom(bladeShroom.unburyAnimationState);
-        renderState.rustleAnimationState.copyFrom(bladeShroom.rustleAnimationState);
+    public void extractRenderState(T bladeshroomHunter, BladeshroomHunterRenderState renderState, float p_361157_) {
+        super.extractRenderState(bladeshroomHunter, renderState, p_361157_);
+        renderState.rotations = bladeshroomHunter.getCellRotation();
+        renderState.prevRotations = bladeshroomHunter.prevRotation;
+        renderState.attachDir = bladeshroomHunter.getAttachFacing();
+        renderState.attachChangeProgress = bladeshroomHunter.getAttachAmount(p_361157_);
+        renderState.attackAnimationState.copyFrom(bladeshroomHunter.axeAttackAnimationState);
+        renderState.buryAnimationState.copyFrom(bladeshroomHunter.buryAnimationState);
+        renderState.unburyAnimationState.copyFrom(bladeshroomHunter.unburyAnimationState);
+        renderState.rustleAnimationState.copyFrom(bladeshroomHunter.rustleAnimationState);
     }
 
     @Override
-    protected void setupRotations(BladeShroomHunterRenderState entity, PoseStack poseStack, float rotationYaw, float p_320045_) {
+    protected void setupRotations(BladeshroomHunterRenderState entity, PoseStack poseStack, float rotationYaw, float p_320045_) {
         float trans = 8F / 16F;
         if (entity.pose != Pose.SLEEPING) {
             if (entity.attachDir == Direction.DOWN) {
@@ -69,7 +69,7 @@ public class BladeShroomHunterRenderer<T extends BladeShroomHunter> extends MobR
 
 
     @Override
-    public ResourceLocation getTextureLocation(BladeShroomHunterRenderState renderState) {
+    public ResourceLocation getTextureLocation(BladeshroomHunterRenderState renderState) {
         return LOCATION;
     }
 }

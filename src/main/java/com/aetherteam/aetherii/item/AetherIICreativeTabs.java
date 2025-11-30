@@ -496,9 +496,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATOAK_SAPLING.get());
                 output.accept(AetherIIBlocks.GREATBOA_SAPLING.get());
                 output.accept(AetherIIBlocks.AMBEROOT_SAPLING.get());
-                output.accept(AetherIIBlocks.AETHER_SHORT_GRASS.get());
-                output.accept(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
-                output.accept(AetherIIBlocks.AETHER_LONG_GRASS.get());
+                output.accept(AetherIIBlocks.SHORT_AETHER_GRASS.get());
+                output.accept(AetherIIBlocks.MEDIUM_AETHER_GRASS.get());
+                output.accept(AetherIIBlocks.TALL_AETHER_GRASS.get());
                 output.accept(AetherIIBlocks.HIGHLAND_FERN.get());
                 output.accept(AetherIIBlocks.SHIELD_FERN.get());
                 output.accept(AetherIIBlocks.BLADE_POA.get());

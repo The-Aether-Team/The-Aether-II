@@ -221,7 +221,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                 )
         );
 
-        this.add(AetherIIEntityTypes.BLADE_SHROOM_HUNTER.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), LootTable.lootTable());
 
 
         //TODO CARVED STONE LOOT

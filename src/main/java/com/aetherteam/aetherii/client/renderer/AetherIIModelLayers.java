@@ -53,7 +53,7 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation CARRION_SPROUT = register("carrion_sprout");
     public static final ModelLayerLocation ARKENIUM_TALUTON = register("arkenium_taluton");
     public static final ModelLayerLocation GRAVITITE_TALUTON = register("gravitite_taluton");
-    public static final ModelLayerLocation BLADE_SHROOM_HUNTER = register("bladeshroom_hunter");
+    public static final ModelLayerLocation BLADESHROOM_HUNTER = register("bladeshroom_hunter");
 
     public static final ModelLayerLocation DETONATION_SENTRY = register("detonation_sentry");
     public static final ModelLayerLocation DETONATION_PROJECTILE = register("detonation_projectile");

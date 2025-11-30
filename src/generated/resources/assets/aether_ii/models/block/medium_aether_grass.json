@@ -274,10 +274,10 @@
   ],
   "render_type": "minecraft:cutout",
   "textures": {
-    "cross": "aether_ii:block/aether_medium_grass",
-    "overlay_1": "aether_ii:block/aether_medium_grass_1",
-    "overlay_2": "aether_ii:block/aether_medium_grass_2",
-    "overlay_3": "aether_ii:block/aether_medium_grass_3",
-    "particle": "aether_ii:block/aether_medium_grass"
+    "cross": "aether_ii:block/medium_aether_grass",
+    "overlay_1": "aether_ii:block/medium_aether_grass_1",
+    "overlay_2": "aether_ii:block/medium_aether_grass_2",
+    "overlay_3": "aether_ii:block/medium_aether_grass_3",
+    "particle": "aether_ii:block/medium_aether_grass"
   }
 }

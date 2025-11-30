@@ -14,11 +14,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:aether_short_grass"
+          "name": "aether_ii:short_aether_grass"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "aether_ii:blocks/aether_short_grass"
+  "random_sequence": "aether_ii:blocks/short_aether_grass"
 }
