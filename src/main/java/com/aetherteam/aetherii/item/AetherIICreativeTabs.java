@@ -826,6 +826,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_TAEGORE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG.get());
+                output.accept(AetherIIItems.SENTRY_GOLEM_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SWET_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SKEPHID_SPAWN_EGG.get());
