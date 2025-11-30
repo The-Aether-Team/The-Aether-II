@@ -171,6 +171,12 @@
         "maxCount": 4,
         "minCount": 1,
         "weight": 2
+      },
+      {
+        "type": "aether_ii:beetle",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
       }
     ],
     "axolotls": [],

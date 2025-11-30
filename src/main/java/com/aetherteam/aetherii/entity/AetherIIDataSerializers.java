@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.entity.variant.BeetleVariant;
 import com.aetherteam.aetherii.entity.variant.ButterflyVariant;
 import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
 import com.aetherteam.aetherii.entity.variant.SwetVariant;
@@ -24,5 +25,6 @@ public class AetherIIDataSerializers {
     public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<Holder<SwetVariant>>> SWET_VARIANT = ENTITY_DATA_SERIALIZERS.register("swet_variant", () -> EntityDataSerializer.forValueType(SwetVariant.STREAM_CODEC));
     public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<Holder<SkyrootLizardVariant>>> SKYROOT_LIZARD_VARIANT = ENTITY_DATA_SERIALIZERS.register("skyroot_lizard_variant", () -> EntityDataSerializer.forValueType(SkyrootLizardVariant.STREAM_CODEC));
     public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<Holder<ButterflyVariant>>> BUTTERFLY_VARIANT = ENTITY_DATA_SERIALIZERS.register("butterfly_variant", () -> EntityDataSerializer.forValueType(ButterflyVariant.STREAM_CODEC));
+    public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<Holder<BeetleVariant>>> BEETLE_VARIANT = ENTITY_DATA_SERIALIZERS.register("beetle_variant", () -> EntityDataSerializer.forValueType(BeetleVariant.STREAM_CODEC));
     public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<BladeshroomHunter.State>> BLADESHROOM_HUNTER_STATE = ENTITY_DATA_SERIALIZERS.register("bladeshroom_hunter_state", () -> EntityDataSerializer.forValueType(BladeshroomHunter.State.STREAM_CODEC));
 }

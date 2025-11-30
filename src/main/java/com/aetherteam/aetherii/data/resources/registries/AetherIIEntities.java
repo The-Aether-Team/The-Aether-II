@@ -33,7 +33,7 @@ public class AetherIIEntities {
     public static final ResourceKey<EntityType<?>> SKYROOT_LIZARD = createKey("skyroot_lizard");
 
     public static final ResourceKey<EntityType<?>> BUTTERFLY = createKey("butterfly");
-
+    public static final ResourceKey<EntityType<?>> BEETLE = createKey("beetle");
 
     //Hostile
     public static final ResourceKey<EntityType<?>> AECHOR_PLANT = createKey("aechor_plant");

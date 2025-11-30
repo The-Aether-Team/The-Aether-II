@@ -109,7 +109,8 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.TEMPEST.get(),
                 AetherIIEntityTypes.SKEPHID.get(),
                 AetherIIEntityTypes.GRAVITITE_TALUTON.get(),
-                AetherIIEntityTypes.BUTTERFLY.get()
+                AetherIIEntityTypes.BUTTERFLY.get(),
+                AetherIIEntityTypes.BEETLE.get()
         );
     }
 }

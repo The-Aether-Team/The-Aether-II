@@ -114,6 +114,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         this.add(AetherIIEntityTypes.SKYROOT_LIZARD.get(), LootTable.lootTable());
 
         this.add(AetherIIEntityTypes.BUTTERFLY.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.BEETLE.get(), LootTable.lootTable());
 
         this.add(AetherIIEntityTypes.AECHOR_PLANT.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
