@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.entity.passive;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.variant.ButterflyVariant;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIButterflyVariants;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
@@ -13,7 +12,6 @@ import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnGroupData;
-import net.minecraft.world.entity.variant.PriorityProvider;
 import net.minecraft.world.entity.variant.SpawnContext;
 import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.level.Level;
@@ -23,7 +21,6 @@ import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public class Butterfly extends Insect {
     private static final EntityDataAccessor<Holder<ButterflyVariant>> DATA_VARIANT_ID = SynchedEntityData.defineId(Butterfly.class, AetherIIDataSerializers.BUTTERFLY_VARIANT.get());
@@ -44,22 +41,12 @@ public class Butterfly extends Insect {
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData spawnData) {
-
-
-        Stream<Holder.Reference<ButterflyVariant>> stream = level.registryAccess().lookupOrThrow(AetherIIButterflyVariants.BUTTERFLY_VARIANT_REGISTRY_KEY).listElements();
-//        PriorityProvider.pick(stream, Holder::value, level.getRandom(), SpawnContext.create(level, this.blockPosition()));
-
-        var list = PriorityProvider.select(stream, Holder::value, SpawnContext.create(level, this.blockPosition()));
-        var e = list.map((holder) -> holder.key().location().getPath()).toList();
-        AetherII.LOGGER.info(String.valueOf(e));
-
         if (spawnData instanceof ButterflyGroupData groupData) {
             this.setVariant(groupData.type);
         } else {
             Optional<? extends Holder<ButterflyVariant>> optional = VariantUtils.selectVariantToSpawn(SpawnContext.create(level, this.blockPosition()), AetherIIButterflyVariants.BUTTERFLY_VARIANT_REGISTRY_KEY);
             optional.ifPresent(this::setVariant);
         }
-
         return super.finalizeSpawn(level, difficulty, reason, spawnData);
     }
 
