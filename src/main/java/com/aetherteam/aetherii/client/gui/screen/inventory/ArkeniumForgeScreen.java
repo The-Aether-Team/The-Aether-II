@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.gui.screen.inventory;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
+import com.aetherteam.aetherii.inventory.menu.slot.ForgeCharmSlot;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.EditBoxAccessor;
@@ -9,7 +10,9 @@ import com.aetherteam.aetherii.network.packet.serverbound.ForgeRenamePacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeSlotCharmsPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeTriggerSoundPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeUpgradePacket;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.ImageButton;
@@ -18,6 +21,7 @@ import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -26,6 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import org.joml.Matrix3x2fStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMenu> {
@@ -41,6 +46,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     private static final ResourceLocation TIER_4_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_4");
     private static final ResourceLocation TIER_SELECTED_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_selected");
     private static final ResourceLocation TIER_COMPLETED_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_completed");
+    private static final ResourceLocation SLOT_LOCKED = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_charm_locked");
     private static final ResourceLocation ARKENIUM_FORGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/arkenium_forge.png");
     private static final List<ResourceLocation> TIER_LOCATIONS = List.of(TIER_1_SPRITE, TIER_2_SPRITE, TIER_3_SPRITE, TIER_4_SPRITE);
     private EditBox name;
@@ -152,11 +158,14 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                 }
             }
 
+            float itemX = (this.leftPos + 72) / 2.0F;
+            float itemY = (this.topPos + 57) / 2.0F;
             Matrix3x2fStack poseStack = guiGraphics.pose();
             poseStack.pushMatrix();
             poseStack.scale(2, 2);
-            poseStack.translate((this.leftPos + 72) / 2.0F, (this.topPos + 57) / 2.0F);
+            poseStack.translate(itemX, itemY);
             guiGraphics.renderItem(displayStack, 0, 0);
+            this.renderItemTooltipForSpace(this.font, guiGraphics, mouseX, mouseY, (int) (itemX - 1) * 2, (int) (itemY - 1) * 2, 35, 35, displayStack);
             poseStack.popMatrix();
 
             ReinforcementTier reinforcementTier = input.get(AetherIIDataComponents.REINFORCEMENT_TIER);
@@ -174,9 +183,18 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                 int y = this.topPos + 110;
                 int currentTier = this.menu.getTierForMaterials();
                 for (int tier = 1; tier <= tierCount; tier++) {
+                    ReinforcementTier labelTier = ReinforcementTier.values()[tier - 1];
                     int offsetX = x + ((areaWidth / (tierCount + 1)) * tier);
 
                     guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, TIER_LOCATIONS.get(tier - 1), offsetX - (spriteSize / 2), y, spriteSize, spriteSize);
+
+                    List<Component> components = new ArrayList<>();
+                    components.add(ReinforcementTier.createReinforcementComponent(tier));
+                    components.add(Component.literal("+").withStyle(ChatFormatting.GRAY).append(Component.literal(String.valueOf(labelTier.getExtraDurability()))).append(CommonComponents.SPACE).append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.durability")));
+                    if (labelTier.getCharmSlots() > 0) {
+                        components.add(Component.literal("+").withStyle(ChatFormatting.GRAY).append(Component.literal(String.valueOf(labelTier.getCharmSlots()))).append(CommonComponents.SPACE).append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.charms")));
+                    }
+                    this.renderComponentTooltipsForSpace(this.font, guiGraphics, mouseX, mouseY, offsetX - (spriteSize / 2), y, spriteSize, spriteSize, components);
 
                     ReinforcementTier.Cost cost = this.menu.getCostForTier(tier);
                     int primaryCost = this.menu.getPrimaryCostForTier(tier);
@@ -206,6 +224,30 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                     }
                 }
             }
+        }
+    }
+
+    private void renderItemTooltipForSpace(Font font, GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, int xSize, int ySize, ItemStack stack) {
+        int mouseXDiff = mouseX - x;
+        int mouseYDiff = mouseY - y;
+        if (mouseXDiff >= 0 && mouseXDiff <= xSize && mouseYDiff >= 0 && mouseYDiff <= ySize) {
+            guiGraphics.setTooltipForNextFrame(font, stack, mouseX, mouseY);
+        }
+    }
+
+    private void renderComponentTooltipsForSpace(Font font, GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, int xSize, int ySize, List<Component> component) {
+        int mouseXDiff = mouseX - x;
+        int mouseYDiff = mouseY - y;
+        if (mouseXDiff >= 0 && mouseXDiff <= xSize && mouseYDiff >= 0 && mouseYDiff <= ySize) {
+            guiGraphics.setComponentTooltipForNextFrame(font, component, mouseX, mouseY);
+        }
+    }
+
+    @Override
+    protected void renderSlot(GuiGraphics guiGraphics, Slot slot) {
+        super.renderSlot(guiGraphics, slot);
+        if (slot instanceof ForgeCharmSlot charmSlot && charmSlot.isActive() && charmSlot.isLocked()) {
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SLOT_LOCKED, charmSlot.x, charmSlot.y, 16, 16);
         }
     }
 

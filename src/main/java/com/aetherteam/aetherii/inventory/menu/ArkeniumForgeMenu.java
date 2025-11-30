@@ -266,6 +266,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         List<ItemStack> charms = this.getInput().get(AetherIIDataComponents.CHARMS);
         boolean flag = false;
         if (charms != null) {
+            charms = new ArrayList<>(charms);
             for (Slot slot : this.slots) {
                 if (slot instanceof ForgeCharmSlot charmSlot && !charmSlot.isLocked() && !charmSlot.getItem().isEmpty()) {
                     charms.set(charmSlot.getCharmIndex(), charmSlot.getItem());
@@ -273,6 +274,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                     flag = true;
                 }
             }
+            this.getInput().set(AetherIIDataComponents.CHARMS, charms);
         }
         return flag;
     }
