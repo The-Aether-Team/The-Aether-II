@@ -47,6 +47,8 @@ public class ForgeCharmSlot extends Slot {
             } else {
                 return true;
             }
+        } else {
+            this.setLocked(false);
         }
         return false;
     }

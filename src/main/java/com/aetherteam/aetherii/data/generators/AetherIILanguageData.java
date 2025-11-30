@@ -1127,6 +1127,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("healing_stone.charges", "%s/5 Charges");
         this.addItemTooltip("effect_buildup", "%s Buildup");
         this.addItemTooltip("effect_buildup.inflicts", "Inflicts: %s");
+        this.addItemTooltip("reinforcement", "Reinforcement");
 
         // Moa Egg Tooltips
         this.addItemTooltip("moa_egg.keratin", "%s Keratin");
@@ -1344,6 +1345,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addGuiText() {
         // GUIs
         this.addGuiText("arkenium_forge.forge_button.tooltip", "Forge Item");
+        this.addGuiText("arkenium_forge.tooltip.durability", "Max Durability");
+        this.addGuiText("arkenium_forge.tooltip.charms", "Charm Slots");
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
         this.addGuiText("recipebook.toggleRecipes.purifiable", "Showing Purifiable");
         this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");
