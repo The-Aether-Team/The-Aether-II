@@ -8,9 +8,9 @@ import com.aetherteam.aetherii.client.renderer.entity.state.AerbunnyRenderState;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -18,10 +18,10 @@ import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
 
 public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState, AerbunnyModel> {
     private static final ResourceLocation AERBUNNY_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/aerbunny/aerbunny.png");
+    private static final ResourceLocation AERBUNNY_BAGUCHI_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/aerbunny/aerbunny_baguchi.png");
 
     public AerbunnyRenderer(EntityRendererProvider.Context context) {
         super(context, new AerbunnyModel(context.bakeLayer(AetherIIModelLayers.AERBUNNY)), 0.3F);
@@ -43,6 +43,7 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState,
         renderState.deltaMovement = aerbunny.getDeltaMovement();
         renderState.tame = aerbunny.isTame();
         renderState.vehicleReference = aerbunny.getVehicleReference();
+        renderState.isBaguchi = "Baguchi".equals(ChatFormatting.stripFormatting(aerbunny.getName().getString()));
     }
 
     /**
@@ -90,6 +91,10 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState,
 
     @Override
     public ResourceLocation getTextureLocation(AerbunnyRenderState renderState) {
+        if (renderState.isBaguchi) {
+            return AERBUNNY_BAGUCHI_TEXTURE;
+        }
+
         return AERBUNNY_TEXTURE;
     }
 

@@ -64,6 +64,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         
         // Use Action
         this.addTooltip("item.modifiers.blocking", "When blocking:");
+        this.addTooltip("item.modifiers.accepts_charms.melee", "When on melee item:");
+        this.addTooltip("item.modifiers.accepts_charms.armor", "When on armor item:");
     }
 
     private void addBlocks() {
@@ -249,9 +251,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.POTTED_AMBEROOT_SAPLING, "Potted Amberoot Sapling");
 
         // Grasses
-        this.addBlock(AetherIIBlocks.AETHER_SHORT_GRASS, "Aether Short Grass");
-        this.addBlock(AetherIIBlocks.AETHER_MEDIUM_GRASS, "Aether Medium Grass");
-        this.addBlock(AetherIIBlocks.AETHER_LONG_GRASS, "Aether Long Grass");
+        this.addBlock(AetherIIBlocks.SHORT_AETHER_GRASS, "Short Aether Grass");
+        this.addBlock(AetherIIBlocks.MEDIUM_AETHER_GRASS, "Medium Aether Grass");
+        this.addBlock(AetherIIBlocks.TALL_AETHER_GRASS, "Tall Aether Grass");
         this.addBlock(AetherIIBlocks.HIGHLAND_FERN, "Highland Fern");
         this.addBlock(AetherIIBlocks.SHIELD_FERN, "Shield Fern");
 
@@ -830,6 +832,18 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GRAVITITE_BOOTS, "Gravitite Boots");
         this.addItem(AetherIIItems.GRAVITITE_GLOVES, "Gravitite Gauntlets");
 
+        // Charms
+        this.addItem(AetherIIItems.CHARM_OF_SLASH, "Charm of Slash");
+        this.addItem(AetherIIItems.CHARM_OF_IMPACT, "Charm of Impact");
+        this.addItem(AetherIIItems.CHARM_OF_PIERCE, "Charm of Pierce");
+        this.addItem(AetherIIItems.CHARM_OF_DEXTERITY, "Charm of Dexterity");
+
+        this.addItem(AetherIIItems.CHARM_OF_HEALTH, "Charm of Health");
+        this.addItem(AetherIIItems.CHARM_OF_DEFENSE, "Charm of Defense");
+        this.addItem(AetherIIItems.CHARM_OF_TOUGHNESS, "Charm of Toughness");
+        this.addItem(AetherIIItems.CHARM_OF_RESISTANCE, "Charm of Resistance");
+        this.addItem(AetherIIItems.CHARM_OF_AGILITY, "Charm of Agility");
+
         // Materials
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
         this.addItem(AetherIIItems.SCATTERGLASS_SHARD, "Scatterglass Shard");
@@ -1192,7 +1206,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.SKEPHID, "Skephid");
         this.addEntityType(AetherIIEntityTypes.ARKENIUM_TALUTON, "Arkenium Taluton");
         this.addEntityType(AetherIIEntityTypes.GRAVITITE_TALUTON, "Gravitite Taluton");
-        this.addEntityType(AetherIIEntityTypes.BLADE_SHROOM_HUNTER, "BladeShroom Hunter");
+        this.addEntityType(AetherIIEntityTypes.BLADESHROOM_HUNTER, "Bladeshroom Hunter");
 
         // Projectile
         this.addEntityType(AetherIIEntityTypes.HOLYSTONE_ROCK, "Holystone Rock");
@@ -1409,6 +1423,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), loremIpsum);
+
+        this.addBestiaryDescription(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), loremIpsum);
     }
 
     private void addEffectsDescriptions() {

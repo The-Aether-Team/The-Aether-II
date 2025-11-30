@@ -57,10 +57,6 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE_SHIELD).setWeight(4))
                         .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_SHIELD))
                 )
-
-                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.CHARGE_CATALYST))
-                )
         );
 
         builder.accept(AetherIILoot.CHESTS_CAMP_HIGHFIELDS_FARMER, LootTable.lootTable()
