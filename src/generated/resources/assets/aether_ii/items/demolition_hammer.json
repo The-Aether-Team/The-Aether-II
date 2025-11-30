@@ -1,6 +1,33 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "aether_ii:item/demolition_hammer"
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/demolition_hammer"
+        },
+        "when": "gui"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/demolition_hammer"
+        },
+        "when": "ground"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/demolition_hammer"
+        },
+        "when": "fixed"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "aether_ii:item/demolition_hammer_held"
+    },
+    "property": "minecraft:display_context"
   }
 }

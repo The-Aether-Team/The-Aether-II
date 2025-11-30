@@ -96,6 +96,18 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
         this.itemModelOutput.accept(item, ItemModelUtils.tintedModel(location, new EffectBuildupColorSource()));
     }
 
+    public void generateDemolitionHammer(Item item) {
+        ResourceLocation inventorySprite = ModelTemplates.FLAT_HANDHELD_ITEM.create(item, TextureMapping.layer0(item), this.modelOutput);
+        ResourceLocation heldSprite = ModelTemplates.FLAT_HANDHELD_ITEM.create(ModelLocationUtils.getModelLocation(item, "_held"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held")), this.modelOutput);
+        List<SelectItemModel.SwitchCase<ItemDisplayContext>> normalList = List.of(
+                ItemModelUtils.when(ItemDisplayContext.GUI, ItemModelUtils.plainModel(inventorySprite)),
+                ItemModelUtils.when(ItemDisplayContext.GROUND, ItemModelUtils.plainModel(inventorySprite)),
+                ItemModelUtils.when(ItemDisplayContext.FIXED, ItemModelUtils.plainModel(inventorySprite))
+        );
+        ItemModel.Unbaked model = ItemModelUtils.select(new DisplayContext(), ItemModelUtils.plainModel(heldSprite), normalList);
+        this.itemModelOutput.accept(item, model);
+    }
+
     public void generateDyedArmorItem(Item item, int defaultColor) {
         ResourceLocation resourceLocation = this.generateLayeredItem(item, TextureMapping.getItemTexture(item), TextureMapping.getItemTexture(item).withSuffix("_dyed"));
         this.itemModelOutput.accept(item, ItemModelUtils.tintedModel(resourceLocation, BLANK_LAYER, new Dye(defaultColor)));

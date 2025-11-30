@@ -88,7 +88,7 @@ public class SentryGolem extends Monster implements RangedAttackMob {
 
     @Override
     protected void populateDefaultEquipmentSlots(RandomSource random, DifficultyInstance difficulty) {
-        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(AetherIIItems.DEMOLITION_HAMMER.asItem()));
+        this.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(AetherIIItems.DEMOLITION_HAMMER.asItem()));
     }
 
 
