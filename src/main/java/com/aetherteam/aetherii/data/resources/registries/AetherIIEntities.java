@@ -43,7 +43,7 @@ public class AetherIIEntities {
     public static final ResourceKey<EntityType<?>> SKEPHID = createKey("skephid");
     public static final ResourceKey<EntityType<?>> ARKENIUM_TALUTON = createKey("arkenium_taluton");
     public static final ResourceKey<EntityType<?>> GRAVITITE_TALUTON = createKey("gravitite_taluton");
-    public static final ResourceKey<EntityType<?>> BLADE_SHROOM_HUNTER = createKey("bladeshroom_hunter");
+    public static final ResourceKey<EntityType<?>> BLADESHROOM_HUNTER = createKey("bladeshroom_hunter");
 
 
     //NPCs

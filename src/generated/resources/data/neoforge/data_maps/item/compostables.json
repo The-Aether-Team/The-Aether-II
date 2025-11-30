@@ -3,15 +3,6 @@
     "aether_ii:aechor_cutting": {
       "chance": 0.65
     },
-    "aether_ii:aether_long_grass": {
-      "chance": 0.3
-    },
-    "aether_ii:aether_medium_grass": {
-      "chance": 0.3
-    },
-    "aether_ii:aether_short_grass": {
-      "chance": 0.3
-    },
     "aether_ii:amberoot_leaf_pile": {
       "chance": 0.018
     },
@@ -90,6 +81,9 @@
     "aether_ii:lilichime": {
       "chance": 0.65
     },
+    "aether_ii:medium_aether_grass": {
+      "chance": 0.3
+    },
     "aether_ii:orange": {
       "chance": 0.3
     },
@@ -107,6 +101,9 @@
     },
     "aether_ii:shield_fern": {
       "chance": 0.65
+    },
+    "aether_ii:short_aether_grass": {
+      "chance": 0.3
     },
     "aether_ii:skybirch_leaf_pile": {
       "chance": 0.018
@@ -142,6 +139,9 @@
       "chance": 0.3
     },
     "aether_ii:skyroot_sapling": {
+      "chance": 0.3
+    },
+    "aether_ii:tall_aether_grass": {
       "chance": 0.3
     },
     "aether_ii:tarabloom": {

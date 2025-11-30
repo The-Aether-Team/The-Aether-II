@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.inventory.menu.slot.ForgeCharmSlot;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.ReinforcementTier;
+import com.aetherteam.aetherii.item.equipment.charms.CharmItem;
 import com.aetherteam.aetherii.network.packet.clientbound.ForgeSoundPacket;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -265,6 +266,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         List<ItemStack> charms = this.getInput().get(AetherIIDataComponents.CHARMS);
         boolean flag = false;
         if (charms != null) {
+            charms = new ArrayList<>(charms);
             for (Slot slot : this.slots) {
                 if (slot instanceof ForgeCharmSlot charmSlot && !charmSlot.isLocked() && !charmSlot.getItem().isEmpty()) {
                     charms.set(charmSlot.getCharmIndex(), charmSlot.getItem());
@@ -272,6 +274,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                     flag = true;
                 }
             }
+            this.getInput().set(AetherIIDataComponents.CHARMS, charms);
         }
         return flag;
     }
@@ -425,7 +428,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
     }
 
     public boolean isCharm(ItemStack itemStack) {
-        return itemStack.is(Items.BARRIER); //todo placeholder
+        return itemStack.getItem() instanceof CharmItem;
     }
 
     public boolean hasNewCharms() {

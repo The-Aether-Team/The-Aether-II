@@ -219,9 +219,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropPottedContents(AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get());
 
         // Grasses
-        this.add(AetherIIBlocks.AETHER_SHORT_GRASS.get(), this::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), this::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.AETHER_LONG_GRASS.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.SHORT_AETHER_GRASS.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.TALL_AETHER_GRASS.get(), this::createShearsOnlyDrop);
         this.add(AetherIIBlocks.HIGHLAND_FERN.get(), this::createShearsOnlyDrop);
         this.add(AetherIIBlocks.SHIELD_FERN.get(), this::createShearsOnlyDrop);
 

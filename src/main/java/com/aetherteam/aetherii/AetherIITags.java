@@ -144,6 +144,9 @@ public class AetherIITags {
         public static final TagKey<Item> EQUIPMENT_ACCESSORIES = tag("equipment/accessories");
         public static final TagKey<Item> EQUIPABLE = tag("equipable");
 
+        public static final TagKey<Item> ACCEPTS_CHARMS_MELEE = tag("accepts_charms/melee");
+        public static final TagKey<Item> ACCEPTS_CHARMS_ARMOR = tag("accepts_charms/armor");
+
         public static final TagKey<Item> BEAST_PELT_ARMOR = tag("armor/beast_pelt");
         public static final TagKey<Item> BURRUKAI_PLATE_ARMOR = tag("armor/burrukai_plate");
         public static final TagKey<Item> ZANITE_ARMOR = tag("armor/zanite");

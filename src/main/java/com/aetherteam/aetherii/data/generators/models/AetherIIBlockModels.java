@@ -177,9 +177,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createPlantWithDefaultItem(AetherIIBlocks.AMBEROOT_SAPLING.get(), AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get(), PlantType.NOT_TINTED);
 
         // Grasses
-        this.createTintedTallGrass(AetherIIBlocks.AETHER_SHORT_GRASS.get());
-        this.createTintedTallGrass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
-        this.createTintedTallGrass(AetherIIBlocks.AETHER_LONG_GRASS.get());
+        this.createTintedTallGrass(AetherIIBlocks.SHORT_AETHER_GRASS.get());
+        this.createTintedTallGrass(AetherIIBlocks.MEDIUM_AETHER_GRASS.get());
+        this.createTintedTallGrass(AetherIIBlocks.TALL_AETHER_GRASS.get());
 
         // Flowers
         this.createHighlandFern();
