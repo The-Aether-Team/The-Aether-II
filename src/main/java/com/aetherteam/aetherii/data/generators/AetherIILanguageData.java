@@ -1349,6 +1349,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");
         this.addGuiText("guidebook.button.open", "Guidebook");
         this.addGuiText("guidebook.button.close", "Inventory");
+        this.addGuiText("guidebook.description.button.open", "Read More");
+        this.addGuiText("guidebook.description.button.close", "Go Back");
         this.addGuiText("guidebook.equipment.title", "Equipment");
         this.addGuiText("guidebook.equipment.pouch.tooltip.title", "Pouch");
         this.addGuiText("guidebook.equipment.pouch.tooltip.description", "%s Glint");
@@ -1374,7 +1376,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     }
 
     private void addBestiaryEntries() {
-        final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec scelerisque elit. Etiam commodo id ligula non tempus. In volutpat tempus maximus. Phasellus mattis nisi non risus facilisis semper. Pellentesque in tincidunt lorem. Maecenas malesuada augue eget purus placerat, at placerat lorem venenatis. Vestibulum eget massa in est luctus aliquam et ut quam. Ut tincidunt ipsum vel dui congue, quis consectetur elit porta. Maecenas et orci consequat, imperdiet ante eu, commodo nunc. Duis iaculis nisl in erat placerat tincidunt. Maecenas ipsum libero, ultricies eget tempor quis, eleifend eu ipsum. In lorem est, euismod at sem eu, varius convallis mauris. Aenean at erat at nisi iaculis fermentum vel non purus.\n" +
+                "\n" +
+                "Proin congue ipsum a ligula efficitur, eget pulvinar lacus elementum. Praesent eu dignissim ante. Nullam ac aliquet leo. Cras luctus odio eget malesuada euismod. Nulla metus magna, hendrerit et augue nec, fermentum hendrerit velit. Proin non pellentesque lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n" +
+                "\n" +
+                "Sed fermentum tortor auctor ex tristique malesuada. Etiam a pulvinar arcu, id pharetra metus. Mauris volutpat fermentum eros. Pellentesque non diam nec diam ultricies gravida vel at lectus. Nulla non libero eu eros ornare tempor. Phasellus ac suscipit risus. Aenean cursus, purus consectetur auctor ullamcorper, erat enim aliquam lacus, non accumsan metus turpis quis est.\n" +
+                "\n" +
+                "Nunc odio lectus, semper vel eros bibendum, mollis ornare turpis. Maecenas in nibh ut est tincidunt sollicitudin ut vel nunc. Vestibulum erat velit, sagittis et ante id, convallis consequat turpis. Cras at risus vitae ex placerat ultricies. Maecenas id augue eleifend metus luctus ornare. Proin metus leo, imperdiet in cursus viverra, aliquet vel odio. Mauris non porta justo, eget pharetra nulla. Aliquam erat volutpat. Duis rhoncus et ante id egestas. Suspendisse sodales porttitor metus quis molestie. Phasellus ante turpis, finibus sit amet metus eu, condimentum ullamcorper lorem. Nullam sollicitudin euismod enim, ac lobortis neque finibus sed. Proin iaculis dui sed odio cursus, non porta neque vulputate.\n" +
+                "\n" +
+                "Pellentesque egestas turpis non orci feugiat viverra. Morbi faucibus sollicitudin erat. Quisque commodo rhoncus neque, at ullamcorper purus ornare nec. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus vitae arcu dictum tortor mattis placerat blandit sit amet erat. Donec commodo neque sed elit eleifend condimentum. Mauris vitae rutrum augue.";
         
         final String taegore = "Taegore";
         final String burrukai = "Burrukai";
