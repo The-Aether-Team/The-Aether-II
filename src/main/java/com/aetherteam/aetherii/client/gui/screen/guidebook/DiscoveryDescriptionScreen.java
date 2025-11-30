@@ -75,6 +75,8 @@ public class DiscoveryDescriptionScreen extends Screen {
 
         this.createText(guiGraphics, this.pages.get(this.currentPageNumber), 85, 30);
 
+        guiGraphics.drawCenteredString(this.font, Component.literal(String.valueOf(this.currentPageNumber + 1)).append("/").append(String.valueOf(this.pages.size())), this.width / 2, this.height - 20, 0xffffffff);
+
         this.previousButton.active = this.currentPageNumber > 0;
         this.nextButton.active = this.currentPageNumber < this.pages.size() - 1;
     }
