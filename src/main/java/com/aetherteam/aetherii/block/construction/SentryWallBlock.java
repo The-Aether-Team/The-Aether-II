@@ -76,6 +76,11 @@ public class SentryWallBlock extends WallBlock implements SentryBlockUpdating {
     }
 
     @Override
+    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+        return state.getValue(LIT) ? super.getLightEmission(state, level, pos) : 0;
+    }
+
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(LIT, POWERED);
