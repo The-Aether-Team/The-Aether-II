@@ -32,7 +32,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 import java.util.EnumSet;
 import java.util.function.IntFunction;
 
-public class BladeShroomHunter extends CellingMonster {
+public class BladeshroomHunter extends CellingMonster {
     public static int ATTACK_EVENT = 100;
 
     private int hideCooldownTime;
@@ -40,7 +40,7 @@ public class BladeShroomHunter extends CellingMonster {
     private int rustleTime;
 
 
-    public static final EntityDataAccessor<State> DATA_BURY_ID = SynchedEntityData.defineId(BladeShroomHunter.class, AetherIIDataSerializers.BLADE_SHROOM_HUNTER_STATE.get());
+    public static final EntityDataAccessor<State> DATA_BURY_ID = SynchedEntityData.defineId(BladeshroomHunter.class, AetherIIDataSerializers.BLADESHROOM_HUNTER_STATE.get());
 
     public AnimationState axeAttackAnimationState = new AnimationState();
     public AnimationState buryAnimationState = new AnimationState();
@@ -50,7 +50,7 @@ public class BladeShroomHunter extends CellingMonster {
     private static final EntityDimensions BURRY_DIMENSIONS = EntityDimensions.scalable(0.9F, 0.9F).withEyeHeight(0.45F);
 
 
-    public BladeShroomHunter(EntityType<? extends BladeShroomHunter> p_33002_, Level p_33003_) {
+    public BladeshroomHunter(EntityType<? extends BladeshroomHunter> p_33002_, Level p_33003_) {
         super(p_33002_, p_33003_);
         this.hideCooldownTime = this.pickNextHideCooldownTime();
         this.refreshDimensions();
@@ -104,7 +104,7 @@ public class BladeShroomHunter extends CellingMonster {
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.6));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this, BladeShroomHunter.class).setAlertOthers());
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this, BladeshroomHunter.class).setAlertOthers());
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true).setUnseenMemoryTicks(300));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, false).setUnseenMemoryTicks(300));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, false).setUnseenMemoryTicks(300));
@@ -281,7 +281,7 @@ public class BladeShroomHunter extends CellingMonster {
 
         @Override
         protected void checkAndPerformAttack(LivingEntity target) {
-            if (this.mob instanceof BladeShroomHunter bladeShroomHunter && bladeShroomHunter.getState() != State.IDLING) {
+            if (this.mob instanceof BladeshroomHunter bladeShroomHunter && bladeShroomHunter.getState() != State.IDLING) {
                 this.attack = false;
             } else {
 
@@ -333,11 +333,11 @@ public class BladeShroomHunter extends CellingMonster {
 
     protected static class ChangeStateGoal extends Goal {
 
-        private final BladeShroomHunter bladeShroom;
+        private final BladeshroomHunter bladeShroom;
 
-        public ChangeStateGoal(BladeShroomHunter mob) {
+        public ChangeStateGoal(BladeshroomHunter mob) {
             this.bladeShroom = mob;
-            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.JUMP, Goal.Flag.LOOK));
+            this.setFlags(EnumSet.of(Flag.MOVE, Flag.JUMP, Flag.LOOK));
         }
 
         @Override
@@ -358,8 +358,8 @@ public class BladeShroomHunter extends CellingMonster {
         HIDING("hiding", 3);
 
         static final Codec<State> CODEC = StringRepresentable.fromEnum(State::values);
-        public static final IntFunction<BladeShroomHunter.State> BY_ID = ByIdMap.continuous(BladeShroomHunter.State::id, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
-        public static final StreamCodec<ByteBuf, BladeShroomHunter.State> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, BladeShroomHunter.State::id);
+        public static final IntFunction<BladeshroomHunter.State> BY_ID = ByIdMap.continuous(BladeshroomHunter.State::id, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
+        public static final StreamCodec<ByteBuf, BladeshroomHunter.State> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, BladeshroomHunter.State::id);
         private final String name;
         private final int id;
 

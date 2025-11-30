@@ -738,9 +738,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
-                AetherIIBlocks.AETHER_SHORT_GRASS.get(),
-                AetherIIBlocks.AETHER_MEDIUM_GRASS.get(),
-                AetherIIBlocks.AETHER_LONG_GRASS.get(),
+                AetherIIBlocks.SHORT_AETHER_GRASS.get(),
+                AetherIIBlocks.MEDIUM_AETHER_GRASS.get(),
+                AetherIIBlocks.TALL_AETHER_GRASS.get(),
                 AetherIIBlocks.BRYALINN_MOSS_VINES.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_VINES.get(),
@@ -1000,9 +1000,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get()
         );
         this.tag(BlockTags.REPLACEABLE).add(
-                AetherIIBlocks.AETHER_SHORT_GRASS.get(),
-                AetherIIBlocks.AETHER_MEDIUM_GRASS.get(),
-                AetherIIBlocks.AETHER_LONG_GRASS.get(),
+                AetherIIBlocks.SHORT_AETHER_GRASS.get(),
+                AetherIIBlocks.MEDIUM_AETHER_GRASS.get(),
+                AetherIIBlocks.TALL_AETHER_GRASS.get(),
                 AetherIIBlocks.BRYALINN_MOSS_VINES.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_VINES.get());

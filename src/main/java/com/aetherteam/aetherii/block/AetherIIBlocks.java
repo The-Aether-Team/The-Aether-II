@@ -246,9 +246,9 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FlowerPotBlock> POTTED_AMBEROOT_SAPLING = registerWithoutItem("potted_amberoot_sapling", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, AMBEROOT_SAPLING, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
 
     // Grasses
-    public static final DeferredBlock<Block> AETHER_SHORT_GRASS = register("aether_short_grass", AetherTallGrassBlock::new, () -> Block.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(Block.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
-    public static final DeferredBlock<Block> AETHER_MEDIUM_GRASS = register("aether_medium_grass", AetherTallGrassBlock::new, () -> Block.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(Block.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
-    public static final DeferredBlock<Block> AETHER_LONG_GRASS = register("aether_long_grass", AetherTallGrassBlock::new, () -> Block.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(Block.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
+    public static final DeferredBlock<Block> SHORT_AETHER_GRASS = register("short_aether_grass", AetherTallGrassBlock::new, () -> Block.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(Block.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
+    public static final DeferredBlock<Block> MEDIUM_AETHER_GRASS = register("medium_aether_grass", AetherTallGrassBlock::new, () -> Block.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(Block.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
+    public static final DeferredBlock<Block> TALL_AETHER_GRASS = register("tall_aether_grass", AetherTallGrassBlock::new, () -> Block.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(Block.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
     public static final DeferredBlock<Block> HIGHLAND_FERN = register("highland_fern", AetherTallGrassBlock::new, () -> Block.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(Block.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
     public static final DeferredBlock<Block> SHIELD_FERN = register("shield_fern", AetherTallGrassBlock::new, () -> Block.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(Block.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
 
@@ -875,9 +875,9 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.GREATOAK_LEAVES.get(), 30, 60);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.GREATBOA_LEAVES.get(), 30, 60);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_LEAVES.get(), 30, 60);
-        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AETHER_SHORT_GRASS.get(), 60, 100);
-        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), 60, 100);
-        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AETHER_LONG_GRASS.get(), 60, 100);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.SHORT_AETHER_GRASS.get(), 60, 100);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.MEDIUM_AETHER_GRASS.get(), 60, 100);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.TALL_AETHER_GRASS.get(), 60, 100);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.HIGHLAND_FERN.get(), 60, 100);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.HIGHLANDS_BUSH.get(), 30, 60);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.BLUEBERRY_BUSH.get(), 30, 60);

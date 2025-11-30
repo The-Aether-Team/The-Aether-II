@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cross",
   "render_type": "minecraft:cutout",
   "textures": {
-    "cross": "aether_ii:block/aether_medium_grass_snowy"
+    "cross": "aether_ii:block/medium_aether_grass_enchanted"
   }
 }

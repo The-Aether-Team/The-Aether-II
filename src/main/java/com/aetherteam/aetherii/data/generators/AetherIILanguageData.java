@@ -251,9 +251,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.POTTED_AMBEROOT_SAPLING, "Potted Amberoot Sapling");
 
         // Grasses
-        this.addBlock(AetherIIBlocks.AETHER_SHORT_GRASS, "Aether Short Grass");
-        this.addBlock(AetherIIBlocks.AETHER_MEDIUM_GRASS, "Aether Medium Grass");
-        this.addBlock(AetherIIBlocks.AETHER_LONG_GRASS, "Aether Long Grass");
+        this.addBlock(AetherIIBlocks.SHORT_AETHER_GRASS, "Short Aether Grass");
+        this.addBlock(AetherIIBlocks.MEDIUM_AETHER_GRASS, "Medium Aether Grass");
+        this.addBlock(AetherIIBlocks.TALL_AETHER_GRASS, "Tall Aether Grass");
         this.addBlock(AetherIIBlocks.HIGHLAND_FERN, "Highland Fern");
         this.addBlock(AetherIIBlocks.SHIELD_FERN, "Shield Fern");
 
@@ -1206,7 +1206,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.SKEPHID, "Skephid");
         this.addEntityType(AetherIIEntityTypes.ARKENIUM_TALUTON, "Arkenium Taluton");
         this.addEntityType(AetherIIEntityTypes.GRAVITITE_TALUTON, "Gravitite Taluton");
-        this.addEntityType(AetherIIEntityTypes.BLADE_SHROOM_HUNTER, "Blade Shroom Hunter");
+        this.addEntityType(AetherIIEntityTypes.BLADESHROOM_HUNTER, "Bladeshroom Hunter");
 
         // Projectile
         this.addEntityType(AetherIIEntityTypes.HOLYSTONE_ROCK, "Holystone Rock");
@@ -1414,7 +1414,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), loremIpsum);
 
-        this.addBestiaryDescription(AetherIIEntityTypes.BLADE_SHROOM_HUNTER.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), loremIpsum);
     }
 
     private void addEffectsDescriptions() {
