@@ -59,6 +59,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.COCKATRICE.get(),
                 AetherIIEntityTypes.ARKENIUM_TALUTON.get(),
                 AetherIIEntityTypes.GRAVITITE_TALUTON.get(),
+                AetherIIEntityTypes.MIMIC.get(),
                 AetherIIEntityTypes.DETONATION_SENTRY.get(),
                 AetherIIEntityTypes.SENTRY_GOLEM.get(),
                 AetherIIEntityTypes.SLIDER.get(),

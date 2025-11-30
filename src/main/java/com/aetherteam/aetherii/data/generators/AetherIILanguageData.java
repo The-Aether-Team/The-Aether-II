@@ -1270,6 +1270,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.SKEPHID, "Skephid");
         this.addEntityType(AetherIIEntityTypes.ARKENIUM_TALUTON, "Arkenium Taluton");
         this.addEntityType(AetherIIEntityTypes.GRAVITITE_TALUTON, "Gravitite Taluton");
+        this.addEntityType(AetherIIEntityTypes.MIMIC, "Mimic");
         this.addEntityType(AetherIIEntityTypes.DETONATION_SENTRY, "Detonation Sentry");
         this.addEntityType(AetherIIEntityTypes.DETONATION_PROJECTILE, "Detonation Projectile");
         this.addEntityType(AetherIIEntityTypes.SENTRY_GOLEM, "Sentry Golem");
@@ -1482,6 +1483,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.MIMIC.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.DETONATION_SENTRY.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.SENTRY_GOLEM.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), loremIpsum);
@@ -1683,6 +1685,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "gravitite_taluton.ambient", "Gravitite Taluton drones");
         this.addSubtitle("entity", "gravitite_taluton.death", "Gravitite Taluton dies");
         this.addSubtitle("entity", "gravitite_taluton.hurt", "Gravitite Taluton hurts");
+
+        this.addSubtitle("entity", "mimic.attack", "Mimic attacks");
+        this.addSubtitle("entity", "mimic.death", "Mimic dies");
+        this.addSubtitle("entity", "mimic.hurt", "Mimic hurts");
+        this.addSubtitle("entity", "mimic.kill", "Mimic burps");
 
         this.addSubtitle("entity", "detonation_sentry.death", "Sentry dies");
         this.addSubtitle("entity", "detonation_sentry.hurt", "Sentry hurts");

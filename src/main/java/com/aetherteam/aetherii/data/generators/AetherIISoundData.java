@@ -985,6 +985,34 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.block.generic.footsteps")
         );
 
+        this.add(AetherIISoundEvents.ENTITY_MIMIC_ATTACK,
+                definition().with(
+                        sound("minecraft:random/eat1"),
+                        sound("minecraft:random/eat2"),
+                        sound("minecraft:random/eat3")
+                ).subtitle("subtitles.aether_ii.entity.mimic.attack")
+        );
+        this.add(AetherIISoundEvents.ENTITY_MIMIC_DEATH,
+                definition().with(
+                        sound("minecraft:block/chest/close1"),
+                        sound("minecraft:block/chest/close2"),
+                        sound("minecraft:block/chest/close3")
+                ).subtitle("subtitles.aether_ii.entity.mimic.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_MIMIC_HURT,
+                definition().with(
+                        sound("minecraft:dig/wood1"),
+                        sound("minecraft:dig/wood2"),
+                        sound("minecraft:dig/wood3"),
+                        sound("minecraft:dig/wood4")
+                ).subtitle("subtitles.aether_ii.entity.mimic.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_MIMIC_KILL,
+                definition().with(
+                        sound("minecraft:random/burp")
+                ).subtitle("subtitles.aether_ii.entity.mimic.kill")
+        );
+
         this.add(AetherIISoundEvents.ENTITY_DETONATION_SENTRY_DEATH,
                 definition().with(
                         sound("minecraft:mob/slime/big1"),

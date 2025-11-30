@@ -56,6 +56,7 @@ public class AetherIIBestiaryEntries {
     public static final ResourceKey<BestiaryEntry> ARKENIUM_TALUTON = createKey("arkenium_taluton");
     public static final ResourceKey<BestiaryEntry> GRAVITITE_TALUTON = createKey("gravitite_taluton");
     public static final ResourceKey<BestiaryEntry> BLADESHROOM_HUNTER = createKey("bladeshroom_hunter");
+    public static final ResourceKey<BestiaryEntry> MIMIC = createKey("mimic");
     public static final ResourceKey<BestiaryEntry> DETONATION_SENTRY = createKey("detonation_sentry");
     public static final ResourceKey<BestiaryEntry> SENTRY_GOLEM = createKey("sentry_golem");
 
@@ -84,6 +85,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(COCKATRICE, AetherIIEntityTypes.COCKATRICE),
             Map.entry(ARKENIUM_TALUTON, AetherIIEntityTypes.ARKENIUM_TALUTON),
             Map.entry(GRAVITITE_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON),
+            Map.entry(MIMIC, AetherIIEntityTypes.MIMIC),
             Map.entry(DETONATION_SENTRY, AetherIIEntityTypes.DETONATION_SENTRY),
             Map.entry(SENTRY_GOLEM, AetherIIEntityTypes.SENTRY_GOLEM),
             Map.entry(BLADESHROOM_HUNTER, AetherIIEntityTypes.BLADESHROOM_HUNTER)
@@ -123,6 +125,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.SKEPHID, AetherIIStats.SKEPHID),
             Map.entry(AetherIIEntityTypes.ARKENIUM_TALUTON, AetherIIStats.ARKENIUM_TALUTON),
             Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, AetherIIStats.GRAVITITE_TALUTON),
+            Map.entry(AetherIIEntityTypes.MIMIC, AetherIIStats.MIMIC),
             Map.entry(AetherIIEntityTypes.DETONATION_SENTRY, AetherIIStats.DETONATION_SENTRY),
             Map.entry(AetherIIEntityTypes.SENTRY_GOLEM, AetherIIStats.SENTRY_GOLEM),
             Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, AetherIIStats.BLADESHROOM_HUNTER)
@@ -150,6 +153,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.COCKATRICE, List.of(BestiaryEntry.LootDisplay.item(Items.FEATHER.builtInRegistryHolder(), 1.0, 1, 3))),
             Map.entry(AetherIIEntityTypes.ARKENIUM_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.ARKENIUM_CORE, 0.075, 1, 1))),
             Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.GRAVITITE_CORE, 0.075, 1, 1))),
+            Map.entry(AetherIIEntityTypes.MIMIC, List.of()),
             Map.entry(AetherIIEntityTypes.DETONATION_SENTRY, List.of()),
             Map.entry(AetherIIEntityTypes.SENTRY_GOLEM, List.of()),
             Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, List.of())

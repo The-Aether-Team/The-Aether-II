@@ -192,6 +192,11 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_GRAVITITE_TALUTON_HURT = register("entity.gravitite_taluton.hurt");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_GRAVITITE_TALUTON_STEP = register("entity.gravitite_taluton.step");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MIMIC_ATTACK = register("entity.mimic.attack");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MIMIC_DEATH = register("entity.mimic.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MIMIC_HURT = register("entity.mimic.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MIMIC_KILL = register("entity.mimic.kill");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_DETONATION_SENTRY_DEATH = register("entity.detonation_sentry.death");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_DETONATION_SENTRY_HURT = register("entity.detonation_sentry.hurt");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_DETONATION_SENTRY_JUMP = register("entity.detonation_sentry.jump");

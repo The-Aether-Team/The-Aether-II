@@ -674,6 +674,37 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.lasso.throw"
   },
+  "entity.mimic.attack": {
+    "sounds": [
+      "random/eat1",
+      "random/eat2",
+      "random/eat3"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.mimic.attack"
+  },
+  "entity.mimic.death": {
+    "sounds": [
+      "block/chest/close1",
+      "block/chest/close2",
+      "block/chest/close3"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.mimic.death"
+  },
+  "entity.mimic.hurt": {
+    "sounds": [
+      "dig/wood1",
+      "dig/wood2",
+      "dig/wood3",
+      "dig/wood4"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.mimic.hurt"
+  },
+  "entity.mimic.kill": {
+    "sounds": [
+      "random/burp"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.mimic.kill"
+  },
   "entity.moa.ambient": {
     "sounds": [
       "aether_ii:entity/moa/say"
