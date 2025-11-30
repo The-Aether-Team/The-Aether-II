@@ -119,7 +119,7 @@ public class AetherPortalForcer {
             for (int i3 = -1; i3 < 2; ++i3) {
                 for (int j3 = 0; j3 < 2; ++j3) {
                     for (int k3 = -1; k3 < 3; ++k3) {
-                        BlockState blockState1 = k3 < 0 ? Blocks.QUARTZ_BLOCK.defaultBlockState() : Blocks.AIR.defaultBlockState();
+                        BlockState blockState1 = k3 < 0 ? Blocks.GLOWSTONE.defaultBlockState() : Blocks.AIR.defaultBlockState();
                         mutablePos.setWithOffset(blockPos, j3 * direction.getStepX() + i3 * direction1.getStepX(), k3, j3 * direction.getStepZ() + i3 * direction1.getStepZ());
                         this.level.setBlockAndUpdate(mutablePos, blockState1);
                     }
@@ -131,7 +131,7 @@ public class AetherPortalForcer {
             for (int j2 = -1; j2 < 4; ++j2) {
                 if (l1 == -1 || l1 == 2 || j2 == -1 || j2 == 3) {
                     mutablePos.setWithOffset(blockPos, l1 * direction.getStepX(), j2, l1 * direction.getStepZ());
-                    this.level.setBlock(mutablePos, Blocks.QUARTZ_BLOCK.defaultBlockState(), 1 | 2);
+                    this.level.setBlock(mutablePos, Blocks.GLOWSTONE.defaultBlockState(), 1 | 2);
                 }
             }
         }

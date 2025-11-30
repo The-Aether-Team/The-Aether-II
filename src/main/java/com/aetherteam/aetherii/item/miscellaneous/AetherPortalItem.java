@@ -64,7 +64,7 @@ public class AetherPortalItem extends Item {
         for (int h = -1; h < 3; h++) {
             for (int v = pos.getY(); v < pos.getY() + 5; v++) {
                 BlockPos truePos = axis == Direction.Axis.X ? new BlockPos(pos.getX(), v, pos.getZ() + h) : new BlockPos(pos.getX() + h, v, pos.getZ());
-                level.setBlockAndUpdate(truePos, Blocks.QUARTZ_BLOCK.defaultBlockState());
+                level.setBlockAndUpdate(truePos, Blocks.GLOWSTONE.defaultBlockState());
             }
         }
 
