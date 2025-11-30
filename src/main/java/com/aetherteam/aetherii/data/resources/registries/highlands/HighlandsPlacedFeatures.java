@@ -66,7 +66,6 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> BONUS_MAGNETIC_SHROOM_PATCH = createKey("bonus_magnetic_shroom_patch");
     public static final ResourceKey<PlacedFeature> BRYALINN_FLOWER_PATCH = createKey("bryalinn_flower_patch");
 
-    public static final ResourceKey<PlacedFeature> CLOVERS = createKey("clovers");
     public static final ResourceKey<PlacedFeature> SHORT_ARILUM = createKey("short_arilum");
     public static final ResourceKey<PlacedFeature> ARILUM = createKey("arilum");
     public static final ResourceKey<PlacedFeature> BLOOMING_ARILUM = createKey("blooming_arilum");
@@ -430,11 +429,6 @@ public class HighlandsPlacedFeatures {
                 PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome());
 
-        register(context, CLOVERS, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.CLOVERS),
-                new LakePlacementModifier(),
-                RarityFilter.onAverageOnceEvery(50),
-                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.AETHER_CLOVER_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE)),
-                BiomeFilter.biome());
         register(context, SHORT_ARILUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SHORT_ARILUM),
                 new LakePlacementModifier(),
                 RarityFilter.onAverageOnceEvery(4),

@@ -1,9 +1,0 @@
-{
-  "parent": "aether_ii:block/template_aether_clover_tall",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "flowerbed": "aether_ii:block/aether_clover",
-    "particle": "aether_ii:block/aether_clover",
-    "stem": "aether_ii:block/aether_clover_stem"
-  }
-}

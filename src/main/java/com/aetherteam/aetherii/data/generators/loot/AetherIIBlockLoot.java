@@ -234,8 +234,6 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.SATIVAL_SHOOT.get(), (shoot) -> this.droppingSativalShoot(getter, shoot, AetherIIItems.SATIVAL_BULB.get()));
         this.add(AetherIIBlocks.HOLPUPEA.get(), this.createSegmentedBlockDrops(AetherIIBlocks.HOLPUPEA.get()));
         this.add(AetherIIBlocks.BLADE_POA.get(), this::createShearsOnlyDrop);
-        this.dropSelf(AetherIIBlocks.AETHER_CLOVER.get());
-        this.dropSelf(AetherIIBlocks.AETHER_CLOVER_TALL.get());
         this.dropSelf(AetherIIBlocks.AECHOR_CUTTING.get());
         this.dropSelf(AetherIIBlocks.CARRION_CUTTING.get());
 

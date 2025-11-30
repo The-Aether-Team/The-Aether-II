@@ -618,19 +618,6 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.registerSimpleTintedItemModel(AetherIIBlocks.HIGHLAND_FERN.get(), itemLocation, new AetherGrassColorSource(1, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F));
     }
 
-    public void createAetherClovers(Block block, Block tall) {
-        MultiVariant clover = plainVariant(AetherIIModelTemplates.AETHER_CLOVER.create(block, AetherIITextureMappings.aetherClover(block), this.modelOutput));
-        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, clover));
-        MultiVariant cloverTall = plainVariant(AetherIIModelTemplates.AETHER_CLOVER_TALL.create(tall, AetherIITextureMappings.aetherClover(block), this.modelOutput));
-        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(tall, cloverTall));
-
-        this.registerSimpleFlatItemModel(block.asItem());
-        this.registerSimpleFlatItemModel(tall.asItem());
-
-//        MultiVariant bushPot = plainVariant(AetherIIModelTemplates.POTTED_BUSH_BLOCK.create(pot, AetherIITextureMappings.pottedBushBlock(pot), this.modelOutput)); //todo
-//        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pot, bushPot));
-    }
-
     public void createBush(Block block, Block pot) {
         MultiVariant bush = plainVariant(AetherIIModelTemplates.BUSH_BLOCK.create(block, AetherIITextureMappings.bushBlock(block), this.modelOutput));
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, bush));
