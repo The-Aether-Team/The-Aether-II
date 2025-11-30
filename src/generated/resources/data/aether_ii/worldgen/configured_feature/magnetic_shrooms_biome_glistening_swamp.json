@@ -9,7 +9,7 @@
           "predicate": {
             "type": "minecraft:would_survive",
             "state": {
-              "Name": "aether_ii:aether_long_grass",
+              "Name": "aether_ii:tall_aether_grass",
               "Properties": {
                 "grass_type": "default"
               }
@@ -29,7 +29,7 @@
               "predicate": {
                 "type": "minecraft:would_survive",
                 "state": {
-                  "Name": "aether_ii:aether_long_grass",
+                  "Name": "aether_ii:tall_aether_grass",
                   "Properties": {
                     "grass_type": "default"
                   }
@@ -49,7 +49,7 @@
               "predicate": {
                 "type": "minecraft:would_survive",
                 "state": {
-                  "Name": "aether_ii:aether_long_grass",
+                  "Name": "aether_ii:tall_aether_grass",
                   "Properties": {
                     "grass_type": "default"
                   }
