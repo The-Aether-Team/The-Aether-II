@@ -190,6 +190,7 @@ public class HighlandsBiomeBuilders {
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.SHORT_ARILUM)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.ARILUM)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.BLOOMING_ARILUM)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.MIXED_ARILUM)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.POND_ARILUM)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, HighlandsPlacedFeatures.POINTED_HOLYSTONE)
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HighlandsPlacedFeatures.HIGH_STORM_AERCLOUD)
@@ -281,6 +282,7 @@ public class HighlandsBiomeBuilders {
         return makeMagneticBiome(Optional.of(HighlandsPlacedFeatures.GLISTENING_SWAMP_TREES), new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addFeature(GenerationStep.Decoration.FLUID_SPRINGS, HighlandsPlacedFeatures.BONUS_WATER_SPRING)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.GLISTENING_SWAMP_TREES_SUNKEN)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.GLISTENING_SWAMP_MAGNETIC_SHROOMS)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.SMALL_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.MEDIUM_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.LARGE_GRASS_PATCH)
@@ -343,6 +345,8 @@ public class HighlandsBiomeBuilders {
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, HighlandsPlacedFeatures.UNSTABLE_UNDERSHALE)
                 .addFeature(GenerationStep.Decoration.FLUID_SPRINGS, HighlandsPlacedFeatures.WATER_SPRING)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.GRASS_AND_DIRT_FLOOR)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.SMALL_MYCELIUM_FLOOR)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.BIG_MYCELIUM_FLOOR)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.COARSE_AETHER_DIRT_FLOOR)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.COARSE_AETHER_DIRT_CEILING)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.COARSE_AETHER_DIRT_OVERHANG)
@@ -409,7 +413,7 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
                         .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
                         .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 2)),
-                temperature, downfall);
+                temperature, downfall, true);
     }
 
     public static Biome enduringWoodlandBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
@@ -429,7 +433,7 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
                         .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
                         .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 2)),
-                temperature, downfall);
+                temperature, downfall, true);
     }
 
     public static Biome frozenLakesBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
@@ -444,7 +448,7 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
                         .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
                         .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 2)),
-                temperature, downfall);
+                temperature, downfall, true);
     }
 
     public static Biome sheerTundraBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
@@ -467,10 +471,10 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
                         .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
                         .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 2)),
-                temperature, downfall);
+                temperature, downfall, false);
     }
 
-    public static Biome makeArcticBiome(Optional<ResourceKey<PlacedFeature>> tree, BiomeGenerationSettings.Builder builder, MobSpawnSettings.Builder spawnSettingsBuilder,  float temperature, float downfall) {
+    public static Biome makeArcticBiome(Optional<ResourceKey<PlacedFeature>> tree, BiomeGenerationSettings.Builder builder, MobSpawnSettings.Builder spawnSettingsBuilder,  float temperature, float downfall, boolean precipitation) {
         builder = builder
                 .addFeature(GenerationStep.Decoration.RAW_GENERATION, HighlandsPlacedFeatures.COAST_ARCTIC_PACKED_ICE)
                 .addFeature(GenerationStep.Decoration.RAW_GENERATION, HighlandsPlacedFeatures.NOISE_LAKE_ARCTIC)
@@ -517,7 +521,7 @@ public class HighlandsBiomeBuilders {
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HighlandsPlacedFeatures.LOWER_PURPLE_AERCLOUD);
         if (tree.isPresent()) builder = builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, tree.get());
         return fullDefinition(
-                true,
+                precipitation,
                 temperature,
                 downfall,
                 ARCTIC_EFFECTS,

@@ -75,7 +75,7 @@
               },
               "height": {
                 "type": "minecraft:uniform",
-                "max_inclusive": 8,
+                "max_inclusive": 7,
                 "min_inclusive": 1
               },
               "plant_provider": {

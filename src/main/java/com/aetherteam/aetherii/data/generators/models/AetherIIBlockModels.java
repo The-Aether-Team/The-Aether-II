@@ -37,6 +37,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createAetherGrassBlocks();
         this.createTrivialCube(AetherIIBlocks.AETHER_DIRT.get());
         this.createTrivialCube(AetherIIBlocks.COARSE_AETHER_DIRT.get());
+        this.createTrivialCube(AetherIIBlocks.MYCELIAL_AETHER_DIRT.get());
         this.createAetherFarmland();
         this.createTrivialCube(AetherIIBlocks.SHIMMERING_SILT.get());
 
@@ -65,6 +66,10 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.FERROSITE.get());
         this.createTrivialCube(AetherIIBlocks.RUSTED_FERROSITE.get());
         this.createPlantWithDefaultItem(AetherIIBlocks.MAGNETIC_SHROOM.get(), AetherIIBlocks.POTTED_MAGNETIC_SHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        this.createMagneticShroomBlock(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get());
+        this.createMagneticShroomBlock(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get());
+        this.createMagneticShroomBlock(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get());
+        this.createMagneticShroomBlocksInside();
 
         // Arctic
         this.createArcticSnowBlocks();
@@ -172,9 +177,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createPlantWithDefaultItem(AetherIIBlocks.AMBEROOT_SAPLING.get(), AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get(), PlantType.NOT_TINTED);
 
         // Grasses
-        this.createTintedTallGrass(AetherIIBlocks.AETHER_SHORT_GRASS.get());
-        this.createTintedTallGrass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
-        this.createTintedTallGrass(AetherIIBlocks.AETHER_LONG_GRASS.get());
+        this.createTintedTallGrass(AetherIIBlocks.SHORT_AETHER_GRASS.get());
+        this.createTintedTallGrass(AetherIIBlocks.MEDIUM_AETHER_GRASS.get());
+        this.createTintedTallGrass(AetherIIBlocks.TALL_AETHER_GRASS.get());
 
         // Flowers
         this.createHighlandFern();

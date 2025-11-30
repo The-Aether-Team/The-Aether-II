@@ -85,7 +85,17 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_GLOVES.get(),
                 AetherIIItems.GRAVITITE_GLOVES.get());
         this.tag(AetherIITags.Items.EQUIPMENT_ACCESSORIES);
-        this.tag(AetherIITags.Items.EQUIPABLE).addTags(AetherIITags.Items.EQUIPMENT_RELICS, AetherIITags.Items.EQUIPMENT_HANDWEAR, AetherIITags.Items.EQUIPMENT_ACCESSORIES);
+        this.tag(AetherIITags.Items.EQUIPABLE).addTags(
+                AetherIITags.Items.EQUIPMENT_RELICS,
+                AetherIITags.Items.EQUIPMENT_HANDWEAR,
+                AetherIITags.Items.EQUIPMENT_ACCESSORIES);
+        this.tag(AetherIITags.Items.ACCEPTS_CHARMS_MELEE).addTags(
+                Tags.Items.MELEE_WEAPON_TOOLS,
+                Tags.Items.MINING_TOOL_TOOLS,
+                ItemTags.SHOVELS,
+                ItemTags.HOES);
+        this.tag(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR).addTags(
+                Tags.Items.ARMORS);
         this.tag(AetherIITags.Items.BEAST_PELT_ARMOR).add(
                 AetherIIItems.BEAST_PELT_HELMET.get(),
                 AetherIIItems.BEAST_PELT_CHESTPLATE.get(),
@@ -786,6 +796,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.CORROBONITE_BLOCK.asItem(),
                 AetherIIBlocks.BRETTL_GRASS_BUNDLE.asItem()
         );
+        this.tag(Tags.Items.TOOLS_SHEAR).add(
+                AetherIIItems.ZANITE_SHEARS.get()
+        );
         this.tag(Tags.Items.TOOLS_SHIELD).add(
                 AetherIIItems.SKYROOT_SHIELD.get(),
                 AetherIIItems.BURRUKAI_PLATE_SHIELD.get(),
@@ -800,17 +813,24 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_CROSSBOW.get(),
                 AetherIIItems.GRAVITITE_CROSSBOW.get()
         );
+        this.tag(Tags.Items.MINING_TOOL_TOOLS).add(
+                AetherIIItems.SKYROOT_PICKAXE.get(),
+                AetherIIItems.HOLYSTONE_PICKAXE.get(),
+                AetherIIItems.ZANITE_PICKAXE.get(),
+                AetherIIItems.ARKENIUM_PICKAXE.get(),
+                AetherIIItems.GRAVITITE_PICKAXE.get()
+        );
+        this.tag(Tags.Items.MELEE_WEAPON_TOOLS).addTags(
+                AetherIITags.Items.TOOLS_SHORTSWORDS,
+                AetherIITags.Items.TOOLS_HAMMERS,
+                AetherIITags.Items.TOOLS_SPEARS
+        );
         this.tag(Tags.Items.RANGED_WEAPON_TOOLS).add(
                 AetherIIItems.SKYROOT_CROSSBOW.get(),
                 AetherIIItems.HOLYSTONE_CROSSBOW.get(),
                 AetherIIItems.ZANITE_CROSSBOW.get(),
                 AetherIIItems.ARKENIUM_CROSSBOW.get(),
                 AetherIIItems.GRAVITITE_CROSSBOW.get()
-        );
-        this.tag(Tags.Items.TOOLS).addTags(
-                AetherIITags.Items.TOOLS_SHORTSWORDS,
-                AetherIITags.Items.TOOLS_HAMMERS,
-                AetherIITags.Items.TOOLS_SPEARS
         );
         this.tag(Tags.Items.ENCHANTABLES).add(
                 AetherIIItems.SKYROOT_CROSSBOW.get(),

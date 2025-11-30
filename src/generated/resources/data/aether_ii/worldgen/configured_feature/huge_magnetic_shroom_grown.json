@@ -1,0 +1,107 @@
+{
+  "type": "aether_ii:huge_magnetic_shroom",
+  "config": {
+    "bottom_cap_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:spotted_magnetic_shroom_block",
+        "Properties": {
+          "down": "false",
+          "east": "false",
+          "north": "false",
+          "south": "false",
+          "up": "false",
+          "west": "false"
+        }
+      }
+    },
+    "cap_provider": {
+      "type": "minecraft:noise_threshold_provider",
+      "default_state": {
+        "Name": "aether_ii:magnetic_shroom_block",
+        "Properties": {
+          "down": "true",
+          "east": "true",
+          "north": "true",
+          "south": "true",
+          "up": "true",
+          "west": "true"
+        }
+      },
+      "high_chance": 1.0,
+      "high_states": [
+        {
+          "Name": "aether_ii:spotted_magnetic_shroom_block",
+          "Properties": {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        }
+      ],
+      "low_states": [
+        {
+          "Name": "aether_ii:magnetic_shroom_block",
+          "Properties": {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        }
+      ],
+      "noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": 0
+      },
+      "scale": 1.0,
+      "seed": 2345,
+      "threshold": -0.15
+    },
+    "ground_feature": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "aether_ii:coarse_aether_dirt"
+          },
+          "weight": 10
+        },
+        {
+          "data": {
+            "Name": "aether_ii:mycelial_aether_dirt"
+          },
+          "weight": 15
+        }
+      ]
+    },
+    "large": false,
+    "minimum_size": {
+      "type": "minecraft:two_layers_feature_size",
+      "limit": 1,
+      "lower_size": 0,
+      "upper_size": 1
+    },
+    "stem_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:magnetic_shroom_stem",
+        "Properties": {
+          "down": "true",
+          "east": "true",
+          "north": "true",
+          "south": "true",
+          "up": "true",
+          "west": "true"
+        }
+      }
+    }
+  }
+}

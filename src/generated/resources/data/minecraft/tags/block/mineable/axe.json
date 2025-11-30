@@ -1,8 +1,8 @@
 {
   "values": [
-    "aether_ii:aether_short_grass",
-    "aether_ii:aether_medium_grass",
-    "aether_ii:aether_long_grass",
+    "aether_ii:short_aether_grass",
+    "aether_ii:medium_aether_grass",
+    "aether_ii:tall_aether_grass",
     "aether_ii:bryalinn_moss_vines",
     "aether_ii:shayelinn_moss_vines",
     "aether_ii:ambrelinn_moss_vines",
@@ -128,6 +128,9 @@
     "aether_ii:rotshroom_block",
     "aether_ii:rotshroom_slab",
     "aether_ii:rotshroom_stem",
-    "aether_ii:shelf_rotshroom_slab"
+    "aether_ii:shelf_rotshroom_slab",
+    "aether_ii:magnetic_shroom_block",
+    "aether_ii:spotted_magnetic_shroom_block",
+    "aether_ii:magnetic_shroom_stem"
   ]
 }

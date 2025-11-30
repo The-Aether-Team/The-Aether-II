@@ -67,6 +67,7 @@ public class AetherIITags {
         public static final TagKey<Block> ICE_CRYSTAL_SURVIVES_ON = tag("ice_crystal_survives_on");
         public static final TagKey<Block> ARCTIC_TREE_SURVIVES_ON = tag("arctic_tree_survives_on");
         public static final TagKey<Block> ARILUM_SURVIVES_ON = tag("arilum_survives_on");
+        public static final TagKey<Block> MAGNETIC_SHROOM_SURVIVES_ON = tag("arilum_survives_on");
         public static final TagKey<Block> GRASS_AND_DIRT_REPLACEABLE = tag("grass_and_dirt_replaceable");
         public static final TagKey<Block> COARSE_AETHER_DIRT_REPLACEABLE = tag("coarse_aether_dirt_replaceable");
         public static final TagKey<Block> UNDERWATER_BRYALINN_REPLACEABLE = tag("underwater_bryalinn_replaceable");
@@ -142,6 +143,9 @@ public class AetherIITags {
         public static final TagKey<Item> EQUIPMENT_HANDWEAR = tag("equipment/handwear");
         public static final TagKey<Item> EQUIPMENT_ACCESSORIES = tag("equipment/accessories");
         public static final TagKey<Item> EQUIPABLE = tag("equipable");
+
+        public static final TagKey<Item> ACCEPTS_CHARMS_MELEE = tag("accepts_charms/melee");
+        public static final TagKey<Item> ACCEPTS_CHARMS_ARMOR = tag("accepts_charms/armor");
 
         public static final TagKey<Item> BEAST_PELT_ARMOR = tag("armor/beast_pelt");
         public static final TagKey<Item> BURRUKAI_PLATE_ARMOR = tag("armor/burrukai_plate");

@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.ReinforcementTier;
+import com.aetherteam.aetherii.item.equipment.charms.CharmItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
@@ -46,13 +47,15 @@ public class ForgeCharmSlot extends Slot {
             } else {
                 return true;
             }
+        } else {
+            this.setLocked(false);
         }
         return false;
     }
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return this.menu.isCharm(stack) && this.isActive();
+        return this.menu.isCharm(stack) && this.isActive() && ((CharmItem) stack.getItem()).canBeAdded(this.menu.getInput());
     }
 
     @Override

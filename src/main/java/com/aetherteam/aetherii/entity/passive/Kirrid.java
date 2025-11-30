@@ -139,7 +139,9 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
 
     @Override
     protected PathNavigation createNavigation(Level level) {
-        return new KirridPathNavigation(this, level);
+        KirridPathNavigation kirridPathNavigation = new KirridPathNavigation(this, level);
+        kirridPathNavigation.setCanFloat(true);
+        return kirridPathNavigation;
     }
 
     @Override
@@ -322,7 +324,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     @Override
     public void setJumping(boolean jumping) {
         super.setJumping(jumping);
-        if (jumping && this.getJumpSound() != null) {
+        if (jumping && this.getJumpSound() != null && !this.isInFluidType()) {
             this.playSound(this.getJumpSound(), this.getSoundVolume(), ((this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F) * 0.8F);
         }
     }
