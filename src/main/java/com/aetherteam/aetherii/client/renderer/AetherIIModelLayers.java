@@ -12,6 +12,9 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation SKYROOT_BED_HEAD = register("skyroot_bed_head");
     public static final ModelLayerLocation MOA_EGG = register("moa_egg");
     public static final ModelLayerLocation ALKAHEST_PURIFIER = register("alkahest_purifier");
+    public static final ModelLayerLocation SENTRY_CRATE = register("sentry_crate");
+    public static final ModelLayerLocation DOUBLE_SENTRY_CRATE_LEFT = register("double_sentry_crate_left");
+    public static final ModelLayerLocation DOUBLE_SENTRY_CRATE_RIGHT = register("double_sentry_crate_right");
 
     public static final ModelLayerLocation PHYG = register("phyg");
     public static final ModelLayerLocation AERBUNNY = register("aerbunny");

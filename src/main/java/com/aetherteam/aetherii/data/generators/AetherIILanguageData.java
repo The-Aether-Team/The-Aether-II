@@ -741,6 +741,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.CLOUDWOOL_BEDROLL, "Cloudwool Bedroll");
         this.addBlock(AetherIIBlocks.SKYROOT_BED, "Skyroot Bed");
 
+        this.addBlock(AetherIIBlocks.SENTRY_CRATE, "Sentry Crate");
+
         this.addBlock(AetherIIBlocks.SKYROOT_SIGN, "Skyroot Sign");
         this.addBlock(AetherIIBlocks.SKYROOT_HANGING_SIGN, "Skyroot Hanging Sign");
 
@@ -1408,6 +1410,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addContainerType(AetherIIMenuTypes.ALTAR, "Altar");
         this.addContainerType(AetherIIMenuTypes.ARKENIUM_FORGE, "Arkenium Forge");
         this.addContainerType(AetherIIMenuTypes.ALKAHEST_PURIFIER, "Alkahest Purifier");
+
+        this.addGeneric("container.sentry_crate", "Sentry Crate");
     }
 
     private void addGuiText() {

@@ -1,0 +1,9 @@
+{
+  "sources": [
+    {
+      "type": "directory",
+      "source": "entity/sentry_crate",
+      "prefix": "entity/sentry_crate/"
+    }
+  ]
+}

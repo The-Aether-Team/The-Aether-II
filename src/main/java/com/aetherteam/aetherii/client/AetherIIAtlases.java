@@ -20,8 +20,10 @@ public class AetherIIAtlases {
     public static final ResourceLocation MOA_KERATIN_SHEET = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/moa_keratin.png");
     public static final ResourceLocation ARMOR_STYLES_SHEET = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/armor_styles.png");
     public static final ResourceLocation ALKAHEST_PURIFIER_SHEET = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/alkahest_purifier.png");
+    public static final ResourceLocation SENTRY_CRATE_SHEET = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/sentry_crate.png");
 
     public static final MaterialMapper ALKAHEST_PURIFIER_MAPPER = new MaterialMapper(ALKAHEST_PURIFIER_SHEET, "entity/alkahest_purifier");
+    public static final MaterialMapper SENTRY_CRATE_MAPPER = new MaterialMapper(SENTRY_CRATE_SHEET, "entity/sentry_crate");
     public static final MaterialMapper MURAL_MAPPER = new MaterialMapper(TextureAtlas.LOCATION_BLOCKS, "entity/mural");
 
     public static final Material SKYROOT_CHEST_MATERIAL = Sheets.CHEST_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot_chest"));
@@ -35,5 +37,6 @@ public class AetherIIAtlases {
         event.register(MOA_KERATIN_SHEET, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_keratin"));
         event.register(ARMOR_STYLES_SHEET, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "armor_styles"));
         event.register(ALKAHEST_PURIFIER_SHEET, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier"));
+        event.register(SENTRY_CRATE_SHEET, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_crate"));
     }
 }

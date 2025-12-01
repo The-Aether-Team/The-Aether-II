@@ -280,7 +280,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 Blocks.AIR,
                 Blocks.WATER,
                 Blocks.CHEST,
-                AetherIIBlocks.SKYROOT_CHEST.get()
+                AetherIIBlocks.SKYROOT_CHEST.get(),
+                AetherIIBlocks.SENTRY_CRATE.get()
         ).addTags(
                 AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS);
         this.tag(AetherIITags.Blocks.SLIDER_UNBREAKABLE).add(
@@ -777,7 +778,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(),
                 AetherIIBlocks.ARKENIUM_DOOR.get(),
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.get(),
-                AetherIIBlocks.MURAL.get()
+                AetherIIBlocks.MURAL.get(),
+                AetherIIBlocks.SENTRY_CRATE.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
                 AetherIIBlocks.SHORT_AETHER_GRASS.get(),
