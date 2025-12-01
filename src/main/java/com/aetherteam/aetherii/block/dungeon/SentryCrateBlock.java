@@ -8,6 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
@@ -19,6 +20,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -238,6 +240,26 @@ public class SentryCrateBlock extends BaseEntityBlock {
     @Override
     protected boolean isPathfindable(BlockState state, PathComputationType pathType) {
         return false;
+    }
+
+    @Override
+    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+        return state.getValue(OPEN) ? super.getLightEmission(state, level, pos) : 0;
+    }
+
+    @Override
+    protected boolean isSignalSource(BlockState state) {
+        return true;
+    }
+
+    @Override
+    protected int getSignal(BlockState state, BlockGetter blockAccess, BlockPos pos, Direction side) {
+        return state.getValue(OPEN) ? 15 : 0;
+    }
+
+    @Override
+    protected int getDirectSignal(BlockState state, BlockGetter blockAccess, BlockPos pos, Direction side) {
+        return side == Direction.UP ? state.getSignal(blockAccess, pos, side) : 0;
     }
 
     @Override

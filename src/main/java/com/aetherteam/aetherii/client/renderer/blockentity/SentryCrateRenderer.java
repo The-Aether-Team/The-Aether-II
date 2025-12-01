@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.client.renderer.blockentity.model.SentryCrateMode
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -31,6 +32,9 @@ public class SentryCrateRenderer implements BlockEntityRenderer<SentryCrateBlock
     public static final Material SENTRY_CRATE_OPEN_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal_open"));
     public static final Material SENTRY_CRATE_LEFT_OPEN_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal_left_open"));
     public static final Material SENTRY_CRATE_RIGHT_OPEN_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal_right_open"));
+    public static final Material SENTRY_CRATE_OPEN_EMISSIVE_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal_open_emissive"));
+    public static final Material SENTRY_CRATE_LEFT_OPEN_EMISSIVE_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal_left_open_emissive"));
+    public static final Material SENTRY_CRATE_RIGHT_OPEN_EMISSIVE_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal_right_open_emissive"));
 
     private final SentryCrateModel singleModel;
     private final SentryCrateModel doubleLeftModel;
@@ -64,24 +68,33 @@ public class SentryCrateRenderer implements BlockEntityRenderer<SentryCrateBlock
             int i = combined.apply(new BrightnessCombiner<>()).applyAsInt(packedLight);
 
             Material material = this.getMaterial(state, type);
+            Material emissive = chooseMaterial(type, SENTRY_CRATE_OPEN_EMISSIVE_LOCATION, SENTRY_CRATE_LEFT_OPEN_EMISSIVE_LOCATION, SENTRY_CRATE_RIGHT_OPEN_EMISSIVE_LOCATION);
             VertexConsumer vertexConsumer = material.buffer(buffer, RenderType::entityCutout);
+            VertexConsumer emissiveConsumer = emissive.buffer(buffer, RenderType::entityCutout);
             if (doubleChest) {
                 if (type == ChestType.LEFT) {
-                    this.doubleLeftModel.renderToBuffer(poseStack, vertexConsumer, i, packedOverlay);
+                    this.renderModel(this.doubleLeftModel, state, poseStack, vertexConsumer, emissiveConsumer, i, packedOverlay);
                 } else {
-                    this.doubleRightModel.renderToBuffer(poseStack, vertexConsumer, i, packedOverlay);
+                    this.renderModel(this.doubleRightModel, state, poseStack, vertexConsumer, emissiveConsumer, i, packedOverlay);
                 }
             } else {
-                this.singleModel.renderToBuffer(poseStack, vertexConsumer, i, packedOverlay);
+                this.renderModel(this.singleModel, state, poseStack, vertexConsumer, emissiveConsumer, i, packedOverlay);
             }
             poseStack.popPose();
+        }
+    }
+
+    private void renderModel(SentryCrateModel model, BlockState state, PoseStack poseStack, VertexConsumer vertexConsumer, VertexConsumer emissiveConsumer, int i, int packedOverlay) {
+        model.renderToBuffer(poseStack, vertexConsumer, i, packedOverlay);
+        if (state.getValue(SentryCrateBlock.OPEN)) {
+            model.renderToBuffer(poseStack, emissiveConsumer, LightTexture.FULL_BRIGHT, packedOverlay);
         }
     }
 
     private Material getMaterial(BlockState state, ChestType chestType) {
         return state.getValue(SentryCrateBlock.OPEN)
                 ? chooseMaterial(chestType, SENTRY_CRATE_OPEN_LOCATION, SENTRY_CRATE_LEFT_OPEN_LOCATION, SENTRY_CRATE_RIGHT_OPEN_LOCATION)
-               :  chooseMaterial(chestType, SENTRY_CRATE_LOCATION, SENTRY_CRATE_LEFT_LOCATION, SENTRY_CRATE_RIGHT_LOCATION);
+                : chooseMaterial(chestType, SENTRY_CRATE_LOCATION, SENTRY_CRATE_LEFT_LOCATION, SENTRY_CRATE_RIGHT_LOCATION);
     }
 
     private static Material chooseMaterial(ChestType chestType, Material doubleMaterial, Material leftMaterial, Material rightMaterial) {
