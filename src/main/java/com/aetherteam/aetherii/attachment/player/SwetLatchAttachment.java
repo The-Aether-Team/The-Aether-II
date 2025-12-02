@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.network.packet.clientbound.SwetSyncPacket;
@@ -13,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -34,14 +34,15 @@ public class SwetLatchAttachment implements ValueIOSerializable {
 
     @Override
     public void serialize(ValueOutput valueOutput) {
-        ValueOutput.ValueOutputList valueoutput$valueoutputlist = valueOutput.childrenList("swets");
+        ValueOutput.ValueOutputList output = valueOutput.childrenList("swets");
         try {
-
             for (Swet swet : this.getLatchedSwets()) {
-                ValueOutput valueoutput1 = valueoutput$valueoutputlist.addChild();
-
-                swet.addAdditionalSaveData(valueoutput1);
-
+                String id = swet.getEncodeId();
+                if (id != null) {
+                    ValueOutput element = output.addChild();
+                    element.putString("id", id);
+                    swet.saveWithoutId(element);
+                }
             }
         } catch (Throwable throwable) {
             CrashReport crashreport = CrashReport.forThrowable(throwable, "Saving entity NBT");
@@ -56,16 +57,12 @@ public class SwetLatchAttachment implements ValueIOSerializable {
         ValueInput.ValueInputList list = valueInput.childrenListOrEmpty("swets");
 
         this.getLatchedSwets().clear();
-        list.stream().forEach(valueInput1 -> {
-
-                    Swet swet = AetherIIEntityTypes.BLUE_SWET.get().create(this.player.level(), EntitySpawnReason.TRIGGERED); //todo
-                    if (swet != null) {
-                        swet.readAdditionalSaveData(valueInput1);
-                        this.getLatchedSwets().add(swet);
-                        this.syncToClient = true;
-                    }
-                }
-        );
+        list.stream().forEach(element -> EntityType.create(element, this.player.level(), EntitySpawnReason.TRIGGERED).ifPresent((entity) -> {
+            if (entity instanceof Swet swet) {
+                this.getLatchedSwets().add(swet);
+                this.syncToClient = true;
+            }
+        }));
     }
     private final Player player;
     private final List<Swet> swets = Lists.newArrayList();
