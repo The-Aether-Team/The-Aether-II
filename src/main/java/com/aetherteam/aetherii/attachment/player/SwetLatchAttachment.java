@@ -59,6 +59,7 @@ public class SwetLatchAttachment implements ValueIOSerializable {
         this.getLatchedSwets().clear();
         list.stream().forEach(element -> EntityType.create(element, this.player.level(), EntitySpawnReason.TRIGGERED).ifPresent((entity) -> {
             if (entity instanceof Swet swet) {
+                swet.setNoAi(true);
                 this.getLatchedSwets().add(swet);
                 this.syncToClient = true;
             }
