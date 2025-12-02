@@ -79,18 +79,18 @@ public class SentryGolem extends Monster implements RangedAttackMob {
 
     @Override
     public @org.jetbrains.annotations.Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnReason, @org.jetbrains.annotations.Nullable SpawnGroupData spawnGroupData) {
+        SpawnGroupData data = super.finalizeSpawn(level, difficulty, spawnReason, spawnGroupData);
         RandomSource randomsource = level.getRandom();
-
         this.populateDefaultEquipmentSlots(randomsource, difficulty);
         this.populateDefaultEquipmentEnchantments(level, randomsource, difficulty);
-        return super.finalizeSpawn(level, difficulty, spawnReason, spawnGroupData);
+        this.setLeftHanded(true);
+        return data;
     }
 
     @Override
     protected void populateDefaultEquipmentSlots(RandomSource random, DifficultyInstance difficulty) {
-        this.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(AetherIIItems.DEMOLITION_HAMMER.asItem()));
+        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(AetherIIItems.DEMOLITION_HAMMER.asItem()));
     }
-
 
     @Override
     public void performRangedAttack(LivingEntity target, float distance) {

@@ -16,6 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class SentryGolemRenderer extends MobRenderer<SentryGolem, SentryGolemRenderState, SentryGolemModel> {
     private static final ResourceLocation SENTRY_GOLEM_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sentry_golem/sentry_golem.png");
+    private static final ResourceLocation SENTRY_GOLEM_RANGED_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sentry_golem/sentry_golem_ranged.png");
 
     public SentryGolemRenderer(EntityRendererProvider.Context context) {
         super(context, new SentryGolemModel(context.bakeLayer(AetherIIModelLayers.SENTRY_GOLEM)), 0.7F);
@@ -41,6 +42,6 @@ public class SentryGolemRenderer extends MobRenderer<SentryGolem, SentryGolemRen
     }
     @Override
     public ResourceLocation getTextureLocation(SentryGolemRenderState golem) {
-        return SENTRY_GOLEM_TEXTURE;
+        return golem.ranged ? SENTRY_GOLEM_RANGED_TEXTURE : SENTRY_GOLEM_TEXTURE;
     }
 }
