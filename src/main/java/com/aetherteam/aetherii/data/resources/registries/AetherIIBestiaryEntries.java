@@ -50,7 +50,8 @@ public class AetherIIBestiaryEntries {
     public static final ResourceKey<BestiaryEntry> AECHOR_PLANT = createKey("aechor_plant");
     public static final ResourceKey<BestiaryEntry> CARRION_SPROUT = createKey("carrion_sprout");
     public static final ResourceKey<BestiaryEntry> ZEPHYR = createKey("zephyr");
-    public static final ResourceKey<BestiaryEntry> SWET = createKey("swet");
+    public static final ResourceKey<BestiaryEntry> BLUE_SWET = createKey("blue_swet");
+    public static final ResourceKey<BestiaryEntry> GOLDEN_SWET = createKey("golden_swet");
     public static final ResourceKey<BestiaryEntry> SKEPHID = createKey("skephid");
     public static final ResourceKey<BestiaryEntry> TEMPEST = createKey("tempest");
     public static final ResourceKey<BestiaryEntry> COCKATRICE = createKey("cockatrice");
@@ -77,7 +78,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(AECHOR_PLANT, AetherIIEntityTypes.AECHOR_PLANT),
             Map.entry(CARRION_SPROUT, AetherIIEntityTypes.CARRION_SPROUT),
             Map.entry(ZEPHYR, AetherIIEntityTypes.ZEPHYR),
-            Map.entry(SWET, AetherIIEntityTypes.SWET),
+            Map.entry(BLUE_SWET, AetherIIEntityTypes.BLUE_SWET),
+            Map.entry(GOLDEN_SWET, AetherIIEntityTypes.GOLDEN_SWET),
             Map.entry(SKEPHID, AetherIIEntityTypes.SKEPHID),
             Map.entry(TEMPEST, AetherIIEntityTypes.TEMPEST),
             Map.entry(COCKATRICE, AetherIIEntityTypes.COCKATRICE),
@@ -116,7 +118,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.ZEPHYR, AetherIIStats.ZEPHYR),
             Map.entry(AetherIIEntityTypes.TEMPEST, AetherIIStats.TEMPEST),
             Map.entry(AetherIIEntityTypes.COCKATRICE, AetherIIStats.COCKATRICE),
-            Map.entry(AetherIIEntityTypes.SWET, AetherIIStats.SWET),
+            Map.entry(AetherIIEntityTypes.BLUE_SWET, AetherIIStats.SWET),
+            Map.entry(AetherIIEntityTypes.GOLDEN_SWET, AetherIIStats.SWET),
             Map.entry(AetherIIEntityTypes.SKEPHID, AetherIIStats.SKEPHID),
             Map.entry(AetherIIEntityTypes.ARKENIUM_TALUTON, AetherIIStats.ARKENIUM_TALUTON),
             Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, AetherIIStats.GRAVITITE_TALUTON),
@@ -139,7 +142,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.AECHOR_PLANT, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.AECHOR_PETAL, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.AECHOR_CUTTING, 1.0, 0, 1))),
             Map.entry(AetherIIEntityTypes.CARRION_SPROUT, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.WYNDBERRY, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.CARRION_CUTTING, 1.0, 0, 1))),
             Map.entry(AetherIIEntityTypes.ZEPHYR, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.COLD_AERCLOUD, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.ZEPHYR_HUSK, 0.075, 1, 1))),
-            Map.entry(AetherIIEntityTypes.SWET, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.SWET_SUGAR, 1.0, 0, 1))),
+            Map.entry(AetherIIEntityTypes.BLUE_SWET, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.SWET_SUGAR, 1.0, 0, 1))),
             Map.entry(AetherIIEntityTypes.SKEPHID, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.CLOUDTWINE, 1.0, 1, 2))),
             Map.entry(AetherIIEntityTypes.TEMPEST, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.STORM_AERCLOUD, 1.0, 1, 3), BestiaryEntry.LootDisplay.item(AetherIIItems.CHARGE_CATALYST, 0.075, 1, 1))),
             Map.entry(AetherIIEntityTypes.COCKATRICE, List.of(BestiaryEntry.LootDisplay.item(Items.FEATHER.builtInRegistryHolder(), 1.0, 1, 3))),

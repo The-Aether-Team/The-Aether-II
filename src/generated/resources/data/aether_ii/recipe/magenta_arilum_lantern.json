@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "arilum_lantern",
+  "key": {
+    "#": "aether_ii:swet_gel",
+    "D": "minecraft:magenta_dye",
+    "X": "aether_ii:arilum_bulbs"
+  },
+  "pattern": [
+    "#X#",
+    "XDX",
+    "#X#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:magenta_arilum_lantern"
+  }
+}

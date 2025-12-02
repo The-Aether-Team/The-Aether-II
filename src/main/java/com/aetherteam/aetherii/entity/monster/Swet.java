@@ -1,20 +1,20 @@
 package com.aetherteam.aetherii.entity.monster;
 
-import com.aetherteam.aetherii.api.SwetVariant;
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
-import com.aetherteam.aetherii.data.resources.registries.AetherIISwetVariants;
-import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
-import net.minecraft.world.DifficultyInstance;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
@@ -26,16 +26,13 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 
-import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public class Swet extends Monster {
@@ -43,11 +40,12 @@ public class Swet extends Monster {
     public static int LAND_EVENT = 101;
     public static int DISSOLVE_EVENT = 102;
 
-    private static final EntityDataAccessor<Holder<SwetVariant>> DATA_VARIANT_ID = SynchedEntityData.defineId(Swet.class, AetherIIDataSerializers.SWET_VARIANT.get());
     private static final EntityDataAccessor<Boolean> DATA_MID_JUMP_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Float> DATA_WATER_DAMAGE_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> DATA_FOOD_SATURATION_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> DATA_SWET_SCALE_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
+
+    public final Overlay overlay;
 
     public AnimationState jumpAnimationState = new AnimationState();
     public AnimationState groundAnimationState = new AnimationState();
@@ -58,6 +56,7 @@ public class Swet extends Monster {
         super(type, level);
         this.moveControl = new Swet.SwetMoveControl(this);
         this.xpReward = 5;
+        this.overlay = Overlay.create(type.toShortString());
     }
 
     @Override
@@ -78,26 +77,14 @@ public class Swet extends Monster {
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(DATA_VARIANT_ID, this.registryAccess().lookupOrThrow(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY).getOrThrow(AetherIISwetVariants.BLUE));
         builder.define(DATA_MID_JUMP_ID, false);
         builder.define(DATA_WATER_DAMAGE_ID, 0.0F);
         builder.define(DATA_FOOD_SATURATION_ID, 1.0F);
         builder.define(DATA_SWET_SCALE_ID, 0.95F);
     }
 
-    @Nullable
-    @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData spawnData) {
-        Holder<Biome> biome = level.getBiome(this.blockPosition());
-        Holder<SwetVariant> variant;
-        if (spawnData instanceof SwetGroupData groupData) {
-            variant = groupData.type;
-        } else {
-            variant = AetherIISwetVariants.getSpawnVariant(this.getRandom(), this.registryAccess(), biome);
-            spawnData = new SwetGroupData(variant);
-        }
-        this.setVariant(variant);
-        return spawnData;
+    public static boolean checkSwetSpawnRules(EntityType<Swet> entityType, ServerLevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+        return level.getBlockState(pos.below()).is(AetherIITags.Blocks.SWET_SPAWNABLE_ON) && level.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn( level, pos, random) && checkMobSpawnRules(entityType, level, reason, pos, random);
     }
 
     @Override
@@ -223,14 +210,6 @@ public class Swet extends Monster {
         return true;
     }
 
-    public Holder<SwetVariant> getVariant() {
-        return this.entityData.get(DATA_VARIANT_ID);
-    }
-
-    public void setVariant(Holder<SwetVariant> variant) {
-        this.entityData.set(DATA_VARIANT_ID, variant);
-    }
-
     /**
      * @return The {@link Float} scale of water damage the Swet has received.
      */
@@ -297,7 +276,6 @@ public class Swet extends Monster {
     @Override
     public void addAdditionalSaveData(ValueOutput output) {
         super.addAdditionalSaveData(output);
-        VariantUtils.writeVariant(output, this.getVariant());
         output.putFloat("WaterDamageScale", this.getWaterDamage());
         output.putFloat("Saturation", this.getFoodSaturation());
     }
@@ -305,7 +283,6 @@ public class Swet extends Monster {
     @Override
     public void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
-        VariantUtils.readVariant(input, AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY).ifPresent(this::setVariant);
 
         this.setWaterDamage(input.getFloatOr("WaterDamageScale", 0));
         this.setFoodSaturation(input.getFloatOr("Saturation", 0));
@@ -491,12 +468,13 @@ public class Swet extends Monster {
         }
     }
 
-    public static class SwetGroupData extends AgeableMob.AgeableMobGroupData {
-        public final Holder<SwetVariant> type;
-
-        public SwetGroupData(Holder<SwetVariant> type) {
-            super(false);
-            this.type = type;
+    public record Overlay(ResourceLocation left1, ResourceLocation left2, ResourceLocation right1, ResourceLocation right2) {
+        public static Overlay create(String name) {
+            return new Overlay(
+                    ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_left_1"),
+                    ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_left_2"),
+                    ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_right_1"),
+                    ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_right_2"));
         }
     }
 }

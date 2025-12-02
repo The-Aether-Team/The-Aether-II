@@ -130,13 +130,14 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .save(this.output);
     }
 
-    protected void arilumLantern(HolderGetter<Item> getter, ItemLike result, ItemLike gel) {
+    protected void arilumLantern(HolderGetter<Item> getter, ItemLike result, ItemLike dye) {
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, result, 1)
                 .group("arilum_lantern")
-                .define('#', gel)
+                .define('D', dye)
+                .define('#', AetherIIItems.SWET_GEL)
                 .define('X', AetherIIItems.ARILUM_BULBS)
                 .pattern("#X#")
-                .pattern("XXX")
+                .pattern("XDX")
                 .pattern("#X#")
                 .unlockedBy("has_bulbs", has(AetherIIItems.ARILUM_BULBS))
                 .save(this.output);
