@@ -28,6 +28,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 public class SentryCrateBlockEntity extends RandomizableContainerBlockEntity {
     private NonNullList<ItemStack> items;
     private final ContainerOpenersCounter openersCounter;
+    private int closeDelay = -1;
 
     public SentryCrateBlockEntity(BlockPos pos, BlockState blockState) {
         super(AetherIIBlockEntityTypes.SENTRY_CRATE.get(), pos, blockState);
@@ -37,12 +38,13 @@ public class SentryCrateBlockEntity extends RandomizableContainerBlockEntity {
             protected void onOpen(Level level, BlockPos pos, BlockState state) {
                 SentryCrateBlockEntity.this.playSound(level, pos, state, SoundEvents.CHEST_OPEN);
                 SentryCrateBlockEntity.this.updateBlockState(state, true);
+                SentryCrateBlockEntity.this.closeDelay = -1;
             }
 
             @Override
             protected void onClose(Level level, BlockPos pos, BlockState state) {
                 SentryCrateBlockEntity.this.playSound(level, pos, state, SoundEvents.CHEST_CLOSE);
-                SentryCrateBlockEntity.this.updateBlockState(state, false);
+                SentryCrateBlockEntity.this.closeDelay = 7;
             }
 
             @Override
@@ -64,6 +66,12 @@ public class SentryCrateBlockEntity extends RandomizableContainerBlockEntity {
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory player) {
         return ChestMenu.threeRows(id, player, this);
+    }
+
+    public static void serverTick(Level level, BlockPos pos, BlockState state, SentryCrateBlockEntity blockEntity) {
+        if (blockEntity.closeDelay-- == 0) {
+            blockEntity.updateBlockState(state, false);
+        }
     }
 
     @Override
