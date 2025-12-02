@@ -687,10 +687,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.CORROBONITE_BLOCK, "Block of Corrobonite");
 
         // Arilum Lantern
-        this.addBlock(AetherIIBlocks.GREEN_ARILUM_LANTERN, "Green Arilum Lantern");
-        this.addBlock(AetherIIBlocks.BLUE_ARILUM_LANTERN, "Blue Arilum Lantern");
-        this.addBlock(AetherIIBlocks.PURPLE_ARILUM_LANTERN, "Purple Arilum Lantern");
-        this.addBlock(AetherIIBlocks.GOLDEN_ARILUM_LANTERN, "Golden Arilum Lantern");
+        this.addBlock(AetherIIBlocks.LIME_ARILUM_LANTERN, "Lime Arilum Lantern");
+        this.addBlock(AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN, "Light Blue Arilum Lantern");
+        this.addBlock(AetherIIBlocks.MAGENTA_ARILUM_LANTERN, "Magenta Arilum Lantern");
+        this.addBlock(AetherIIBlocks.YELLOW_ARILUM_LANTERN, "Yellow Arilum Lantern");
 
         // Utility
         this.addBlock(AetherIIBlocks.AMBROSIUM_TORCH, "Ambrosium Torch");

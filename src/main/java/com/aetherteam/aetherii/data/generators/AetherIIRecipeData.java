@@ -858,10 +858,10 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.BRETTL_GRASS.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.BRETTL_GRASS_BUNDLE, "brettl_grass", "brettl_grass");
 
         // Arilum Lantern
-//        this.arilumLantern(getter, AetherIIBlocks.GREEN_ARILUM_LANTERN, AetherIIItems.GREEN_SWET_GEL); //TODO lantern recipes
-//        this.arilumLantern(getter, AetherIIBlocks.BLUE_ARILUM_LANTERN, AetherIIItems.BLUE_SWET_GEL);
-//        this.arilumLantern(getter, AetherIIBlocks.PURPLE_ARILUM_LANTERN, AetherIIItems.PURPLE_SWET_GEL);
-//        this.arilumLantern(getter, AetherIIBlocks.GOLDEN_ARILUM_LANTERN, AetherIIItems.GOLDEN_SWET_GEL);
+        this.arilumLantern(getter, AetherIIBlocks.LIME_ARILUM_LANTERN, Items.LIME_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN, Items.LIGHT_BLUE_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.MAGENTA_ARILUM_LANTERN, Items.MAGENTA_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.YELLOW_ARILUM_LANTERN, Items.YELLOW_DYE);
 
         // Utility
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBROSIUM_TORCH.get(), 4)

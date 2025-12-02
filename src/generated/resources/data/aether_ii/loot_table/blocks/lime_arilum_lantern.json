@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:blue_arilum_lantern"
+          "name": "aether_ii:lime_arilum_lantern"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "aether_ii:blocks/blue_arilum_lantern"
+  "random_sequence": "aether_ii:blocks/lime_arilum_lantern"
 }
