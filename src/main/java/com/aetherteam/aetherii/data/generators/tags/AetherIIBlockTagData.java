@@ -105,7 +105,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SENTRY_BRICKS.get(),
                 AetherIIBlocks.SENTRY_BRICK_STAIRS.get(),
                 AetherIIBlocks.SENTRY_BRICK_SLAB.get(),
-                AetherIIBlocks.SENTRY_BRICK_WALL.get()
+                AetherIIBlocks.SENTRY_BRICK_WALL.get(),
+                AetherIIBlocks.SENTRY_SPAWNER.get(),
+                AetherIIBlocks.SENTRY_TRAP.get()
         );
         this.tag(AetherIITags.Blocks.QUICKSOIL_GLASS).add(
                 AetherIIBlocks.QUICKSOIL_GLASS.get(),

@@ -47,6 +47,12 @@ public class AetherIIBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SentryCrateBlockEntity>> SENTRY_CRATE = BLOCK_ENTITY_TYPES.register("sentry_crate", () ->
             new BlockEntityType<>(SentryCrateBlockEntity::new, AetherIIBlocks.SENTRY_CRATE.get()));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WallSpawnerBlockEntity>> WALL_SPAWNER = BLOCK_ENTITY_TYPES.register("wall_spawner", () ->
+            new BlockEntityType<>(WallSpawnerBlockEntity::new, AetherIIBlocks.SENTRY_SPAWNER.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GroundTrapBlockEntity>> GROUND_TRAP = BLOCK_ENTITY_TYPES.register("ground_trap", () ->
+            new BlockEntityType<>(GroundTrapBlockEntity::new, AetherIIBlocks.SENTRY_TRAP.get()));
+
     public static void registerValidBlockEntityTypes(BlockEntityTypeAddBlocksEvent event) {
         event.modify(BlockEntityType.SIGN, AetherIIBlocks.SKYROOT_WALL_SIGN.get(), AetherIIBlocks.SKYROOT_SIGN.get(),
                 AetherIIBlocks.GREATROOT_WALL_SIGN.get(), AetherIIBlocks.GREATROOT_SIGN.get(),

@@ -7,6 +7,7 @@
   "refmap": "aether_ii.refmap.json",
   "mixins": [
     "common.AttributeUtilMixin",
+    "common.BaseSpawnerMixin",
     "common.BlockBehaviourMixin",
     "common.BoneMealItemMixin",
     "common.EntityMixin",
@@ -23,6 +24,7 @@
     "common.accessor.AbstractArrowAccessor",
     "common.accessor.AbstractBoatAccessor",
     "common.accessor.AttributeMapAccessor",
+    "common.accessor.BaseSpawnerAccessor",
     "common.accessor.BlockLootAccessor",
     "common.accessor.ContextKeySetSetsAccessor",
     "common.accessor.CraftingMenuAccessor",

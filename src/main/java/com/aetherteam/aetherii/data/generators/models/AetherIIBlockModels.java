@@ -475,6 +475,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createBed(AetherIIBlocks.SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot_bed"));
 
         this.createSentryCrate(AetherIIBlocks.SENTRY_CRATE.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());
+        this.createTrivialCube(AetherIIBlocks.SENTRY_SPAWNER.get());
+        this.createTrivialCube(AetherIIBlocks.SENTRY_TRAP.get());
 
         this.createHangingSign(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get(), AetherIIBlocks.SKYROOT_HANGING_SIGN.get(), AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get());
         this.createHangingSign(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get());
