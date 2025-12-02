@@ -65,6 +65,8 @@ public class AetherPortalForcer {
         BlockPos.MutableBlockPos mutablePos = pos.mutable();
 
         for (BlockPos.MutableBlockPos mutablePos1 : BlockPos.spiralAround(pos, 64, Direction.EAST, Direction.SOUTH)) {
+            boolean valid = false;
+
             int j = Math.min(i, this.level.getHeight(Heightmap.Types.MOTION_BLOCKING, mutablePos1.getX(), mutablePos1.getZ()));
             if (worldBorder.isWithinBounds(mutablePos1) && worldBorder.isWithinBounds(mutablePos1.move(direction, 1))) {
                 mutablePos1.move(direction.getOpposite(), 1);
@@ -90,11 +92,15 @@ public class AetherPortalForcer {
                                         d1 = d2;
                                         blockPos1 = mutablePos1.immutable();
                                     }
+                                    valid = true;
                                 }
                             }
                         }
                     }
                 }
+            }
+            if (valid) {
+                break;
             }
         }
 
