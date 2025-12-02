@@ -39,7 +39,8 @@ public class AetherIIEntities {
     public static final ResourceKey<EntityType<?>> ZEPHYR = createKey("zephyr");
     public static final ResourceKey<EntityType<?>> TEMPEST = createKey("tempest");
     public static final ResourceKey<EntityType<?>> COCKATRICE = createKey("cockatrice");
-    public static final ResourceKey<EntityType<?>> SWET = createKey("swet");
+    public static final ResourceKey<EntityType<?>> BLUE_SWET = createKey("blue_swet");
+    public static final ResourceKey<EntityType<?>> GOLDEN_SWET = createKey("golden_swet");
     public static final ResourceKey<EntityType<?>> SKEPHID = createKey("skephid");
     public static final ResourceKey<EntityType<?>> ARKENIUM_TALUTON = createKey("arkenium_taluton");
     public static final ResourceKey<EntityType<?>> GRAVITITE_TALUTON = createKey("gravitite_taluton");

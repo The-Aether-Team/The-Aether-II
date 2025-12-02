@@ -236,10 +236,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> BRETTL_ROPE = register("brettl_rope");
     public static final DeferredItem<Item> ARILUM_BULBS = register("arilum_bulbs", (properties) -> new BlockItem(AetherIIBlocks.ARILUM_SHOOT.get(), properties.useItemDescriptionPrefix()));
     public static final DeferredItem<Item> ARCTIC_SNOWBALL = register("arctic_snowball", ArcticSnowballItem::new);
-    public static final DeferredItem<Item> GREEN_SWET_GEL = register("green_swet_gel", SwetGelItem::new);
-    public static final DeferredItem<Item> BLUE_SWET_GEL = register("blue_swet_gel", SwetGelItem::new);
-    public static final DeferredItem<Item> PURPLE_SWET_GEL = register("purple_swet_gel", SwetGelItem::new);
-    public static final DeferredItem<Item> GOLDEN_SWET_GEL = register("golden_swet_gel", SwetGelItem::new);
+    public static final DeferredItem<Item> SWET_GEL = register("swet_gel", SwetGelItem::new);
     public static final DeferredItem<Item> SWET_SUGAR = register("swet_sugar");
     public static final DeferredItem<Item> MOA_FEATHER = register("moa_feather", MoaFeatherItem::new, () -> new Item.Properties().component(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.LIGHT_BLUE));
     public static final DeferredItem<Item> COCKATRICE_FEATHER = register("cockatrice_feather");
@@ -267,10 +264,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> WYNDBERRY = register("wyndberry", () -> new Item.Properties().food(AetherIIFoods.WYNDBERRY).component(DataComponents.CONSUMABLE, AetherIIConsumables.FAST));
     public static final DeferredItem<Item> ENCHANTED_WYNDBERRY = register("enchanted_wyndberry", () -> new Item.Properties().food(AetherIIFoods.ENCHANTED_WYNDBERRY).component(DataComponents.CONSUMABLE, AetherIIConsumables.FAST));
     public static final DeferredItem<Item> SATIVAL_BULB = register("satival_bulb", () -> new Item.Properties().food(AetherIIFoods.SATIVAL_BULB).component(DataComponents.CONSUMABLE, AetherIIConsumables.FAST));
-    public static final DeferredItem<Item> GREEN_SWET_JELLY = register("green_swet_jelly", () -> new Item.Properties().food(AetherIIFoods.SWET_JELLY));
-    public static final DeferredItem<Item> BLUE_SWET_JELLY = register("blue_swet_jelly", () -> new Item.Properties().food(AetherIIFoods.SWET_JELLY));
-    public static final DeferredItem<Item> PURPLE_SWET_JELLY = register("purple_swet_jelly", () -> new Item.Properties().food(AetherIIFoods.SWET_JELLY));
-    public static final DeferredItem<Item> GOLDEN_SWET_JELLY = register("golden_swet_jelly", () -> new Item.Properties().food(AetherIIFoods.SWET_JELLY));
+    public static final DeferredItem<Item> SWET_JELLY = register("swet_jelly", () -> new Item.Properties().food(AetherIIFoods.SWET_JELLY));
     public static final DeferredItem<Item> BURRUKAI_RIB_CUT = register("burrukai_rib_cut", () -> new Item.Properties().food(AetherIIFoods.BURRUKAI_RIB_CUT));
     public static final DeferredItem<Item> BURRUKAI_RIBS = register("burrukai_ribs", () -> new Item.Properties().food(AetherIIFoods.BURRUKAI_RIBS));
     public static final DeferredItem<Item> KIRRID_LOIN = register("kirrid_loin", () -> new Item.Properties().food(AetherIIFoods.KIRRID_LOIN));
@@ -342,7 +336,8 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> ZEPHYR_SPAWN_EGG = register("zephyr_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.ZEPHYR.get(), properties));
     public static final DeferredItem<SpawnEggItem> TEMPEST_SPAWN_EGG = register("tempest_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.TEMPEST.get(), properties));
     public static final DeferredItem<SpawnEggItem> COCKATRICE_SPAWN_EGG = register("cockatrice_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.COCKATRICE.get(), properties));
-    public static final DeferredItem<SpawnEggItem> SWET_SPAWN_EGG = register("swet_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.SWET.get(), properties));
+    public static final DeferredItem<SpawnEggItem> BLUE_SWET_SPAWN_EGG = register("blue_swet_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.BLUE_SWET.get(), properties));
+    public static final DeferredItem<SpawnEggItem> GOLDEN_SWET_SPAWN_EGG = register("golden_swet_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.GOLDEN_SWET.get(), properties));
     public static final DeferredItem<SpawnEggItem> SKEPHID_SPAWN_EGG = register("skephid_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.SKEPHID.get(), properties));
     public static final DeferredItem<SpawnEggItem> ARKENIUM_TALUTON_SPAWN_EGG = register("arkenium_taluton_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), properties));
     public static final DeferredItem<SpawnEggItem> GRAVITITE_TALUTON_SPAWN_EGG = register("gravitite_taluton_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), properties));

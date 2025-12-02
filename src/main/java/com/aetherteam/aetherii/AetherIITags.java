@@ -87,6 +87,7 @@ public class AetherIITags {
         public static final TagKey<Block> AECHOR_PLANT_SPAWNABLE_ON = tag("aechor_plant_spawnable_on");
         public static final TagKey<Block> CARRION_SPROUT_SPAWNABLE_ON = tag("carrion_sprout_spawnable_on");
         public static final TagKey<Block> SKEPHID_SPAWNABLE_ON = tag("skephid_spawnable_on");
+        public static final TagKey<Block> SWET_SPAWNABLE_ON = tag("swet_spawnable_on");
 
         public static final TagKey<Block> TAEGORE_DIGGABLE_BLOCK = tag("taegore_diggable_block");
         public static final TagKey<Block> MOA_HATCH_BLOCK = tag("moa_hatch_block");
@@ -195,7 +196,6 @@ public class AetherIITags {
         public static final TagKey<Item> MOA_FOOD = tag("moa_food");
 
         public static final TagKey<Item> AETHER_PORTAL_ACTIVATION_ITEMS = tag("aether_portal_activation_items");
-        public static final TagKey<Item> SWET_GEL = tag("swet_gel");
         public static final TagKey<Item> GOLDEN_AMBER_HARVESTERS = tag("golden_amber_harvesters");
         public static final TagKey<Item> DOUBLE_DROPS = tag("double_drops");
         public static final TagKey<Item> IRRADIATED_ITEM = tag("irradiated_item");
@@ -252,12 +252,6 @@ public class AetherIITags {
         public static final TagKey<Biome> PODZOL_CONVERSION = tag("podzol_conversion");
         public static final TagKey<Biome> CRIMSON_NYLIUM_CONVERSION = tag("crimson_nylium_conversion");
         public static final TagKey<Biome> WARPED_NYLIUM_CONVERSION = tag("warped_nylium_conversion");
-
-        public static final TagKey<Biome> BLUE_SWET_SPAWNING = tag("blue_swet_spawning");
-        public static final TagKey<Biome> GREEN_SWET_SPAWNING = tag("green_swet_spawning");
-        public static final TagKey<Biome> PURPLE_SWET_SPAWNING = tag("purple_swet_spawning");
-        public static final TagKey<Biome> GOLDEN_SWET_SPAWNING = tag("golden_swet_spawning");
-        public static final TagKey<Biome> WHITE_SWET_SPAWNING = tag("white_swet_spawning");
 
         public static final TagKey<Biome> ARCTIC_ICE = tag("arctic_ice");
 

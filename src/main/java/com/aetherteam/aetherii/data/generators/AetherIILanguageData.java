@@ -872,10 +872,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.AECHOR_PETAL, "Aechor Petal");
         this.addItem(AetherIIItems.ARILUM_BULBS, "Arilum Bulbs");
         this.addItem(AetherIIItems.ARCTIC_SNOWBALL, "Arctic Snowball");
-        this.addItem(AetherIIItems.GREEN_SWET_GEL, "Green Swet Gel");
-        this.addItem(AetherIIItems.BLUE_SWET_GEL, "Blue Swet Gel");
-        this.addItem(AetherIIItems.PURPLE_SWET_GEL, "Purple Swet Gel");
-        this.addItem(AetherIIItems.GOLDEN_SWET_GEL, "Golden Swet Gel");
+        this.addItem(AetherIIItems.SWET_GEL, "Swet Gel");
         this.addItem(AetherIIItems.SWET_SUGAR, "Swet Sugar");
         this.addItem(AetherIIItems.MOA_FEATHER, "Moa Feather");
         this.addItem(AetherIIItems.COCKATRICE_FEATHER, "Cockatrice Feather");
@@ -904,10 +901,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.WYNDBERRY, "Wyndberry");
         this.addItem(AetherIIItems.ENCHANTED_WYNDBERRY, "Enchanted Wyndberry");
         this.addItem(AetherIIItems.SATIVAL_BULB, "Satival Bulb");
-        this.addItem(AetherIIItems.GREEN_SWET_JELLY, "Green Swet Jelly");
-        this.addItem(AetherIIItems.BLUE_SWET_JELLY, "Blue Swet Jelly");
-        this.addItem(AetherIIItems.PURPLE_SWET_JELLY, "Purple Swet Jelly");
-        this.addItem(AetherIIItems.GOLDEN_SWET_JELLY, "Golden Swet Jelly");
+        this.addItem(AetherIIItems.SWET_JELLY, "Swet Jelly");
         this.addItem(AetherIIItems.BURRUKAI_RIBS, "Burrukai Ribs");
         this.addItem(AetherIIItems.BURRUKAI_RIB_CUT, "Burrukai Rib Cut");
         this.addItem(AetherIIItems.KIRRID_CUTLET, "Kirrid Cutlet");
@@ -979,7 +973,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSpawnEggItem(AetherIIItems.ZEPHYR_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.TEMPEST_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.COCKATRICE_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.SWET_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.BLUE_SWET_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.GOLDEN_SWET_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.SKEPHID_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG);
@@ -1207,7 +1202,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
         this.addEntityType(AetherIIEntityTypes.TEMPEST, "Tempest");
         this.addEntityType(AetherIIEntityTypes.COCKATRICE, "Cockatrice");
-        this.addEntityType(AetherIIEntityTypes.SWET, "Swet");
+        this.addEntityType(AetherIIEntityTypes.BLUE_SWET, "Blue Swet");
+        this.addEntityType(AetherIIEntityTypes.GOLDEN_SWET, "Golden Swet");
         this.addEntityType(AetherIIEntityTypes.SKEPHID, "Skephid");
         this.addEntityType(AetherIIEntityTypes.ARKENIUM_TALUTON, "Arkenium Taluton");
         this.addEntityType(AetherIIEntityTypes.GRAVITITE_TALUTON, "Gravitite Taluton");
@@ -1424,7 +1420,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.SWET.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.BLUE_SWET.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.GOLDEN_SWET.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.SKEPHID.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), loremIpsum);

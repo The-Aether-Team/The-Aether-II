@@ -712,10 +712,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.WYNDBERRY.get());
                 output.accept(AetherIIItems.ENCHANTED_WYNDBERRY.get());
                 output.accept(AetherIIItems.SATIVAL_BULB.get());
-                output.accept(AetherIIItems.GREEN_SWET_JELLY.get());
-                output.accept(AetherIIItems.BLUE_SWET_JELLY.get());
-                output.accept(AetherIIItems.PURPLE_SWET_JELLY.get());
-                output.accept(AetherIIItems.GOLDEN_SWET_JELLY.get());
+                output.accept(AetherIIItems.SWET_JELLY.get());
                 output.accept(AetherIIItems.BURRUKAI_RIB_CUT.get());
                 output.accept(AetherIIItems.BURRUKAI_RIBS.get());
                 output.accept(AetherIIItems.KIRRID_LOIN.get());
@@ -760,10 +757,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.KIRRID_PLATE.get());
                 output.accept(AetherIIItems.MOA_FEATHER.get());
                 output.accept(AetherIIItems.COCKATRICE_FEATHER.get());
-                output.accept(AetherIIItems.GREEN_SWET_GEL.get());
-                output.accept(AetherIIItems.BLUE_SWET_GEL.get());
-                output.accept(AetherIIItems.PURPLE_SWET_GEL.get());
-                output.accept(AetherIIItems.GOLDEN_SWET_GEL.get());
+                output.accept(AetherIIItems.SWET_GEL.get());
                 output.accept(AetherIIItems.SWET_SUGAR.get());
                 output.accept(AetherIIItems.AECHOR_PETAL.get());
                 output.accept(AetherIIItems.SKYROOT_PINECONE.get());
@@ -803,7 +797,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.MAGNETIC_TAEGORE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get());
-                output.accept(AetherIIItems.SWET_SPAWN_EGG.get());
+                output.accept(AetherIIItems.BLUE_SWET_SPAWN_EGG.get());
+                output.accept(AetherIIItems.GOLDEN_SWET_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SKEPHID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.TEMPEST_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());

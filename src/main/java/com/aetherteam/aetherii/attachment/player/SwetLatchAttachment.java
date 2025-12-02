@@ -58,7 +58,7 @@ public class SwetLatchAttachment implements ValueIOSerializable {
         this.getLatchedSwets().clear();
         list.stream().forEach(valueInput1 -> {
 
-                    Swet swet = AetherIIEntityTypes.SWET.get().create(this.player.level(), EntitySpawnReason.TRIGGERED);
+                    Swet swet = AetherIIEntityTypes.BLUE_SWET.get().create(this.player.level(), EntitySpawnReason.TRIGGERED); //todo
                     if (swet != null) {
                         swet.readAdditionalSaveData(valueInput1);
                         this.getLatchedSwets().add(swet);
