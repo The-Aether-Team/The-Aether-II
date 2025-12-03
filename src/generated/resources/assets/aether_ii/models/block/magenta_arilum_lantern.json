@@ -1,0 +1,7 @@
+{
+  "parent": "aether_ii:block/template_arilum_lantern",
+  "textures": {
+    "inside": "aether_ii:block/magenta_arilum_lantern_inside",
+    "texture": "aether_ii:block/magenta_arilum_lantern"
+  }
+}

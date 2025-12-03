@@ -316,12 +316,6 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.SENTRY_REPAIRING);
         this.tag(AetherIITags.Items.NEPTUNE_REPAIRING);
         this.tag(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS);
-        this.tag(AetherIITags.Items.SWET_GEL).add(
-                AetherIIItems.GREEN_SWET_GEL.get(),
-                AetherIIItems.BLUE_SWET_GEL.get(),
-                AetherIIItems.PURPLE_SWET_GEL.get(),
-                AetherIIItems.GOLDEN_SWET_GEL.get()
-        );
         this.tag(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS).add(
                 AetherIIItems.ZANITE_AXE.get(),
                 AetherIIItems.ARKENIUM_AXE.get(),
@@ -340,10 +334,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.BURRUKAI_PLATE.get(),
                 AetherIIItems.AECHOR_PETAL.get(),
                 AetherIIItems.ARCTIC_SNOWBALL.get(),
-                AetherIIItems.GREEN_SWET_GEL.get(),
-                AetherIIItems.BLUE_SWET_GEL.get(),
-                AetherIIItems.PURPLE_SWET_GEL.get(),
-                AetherIIItems.GOLDEN_SWET_GEL.get(),
+                AetherIIItems.SWET_GEL.get(),
+                AetherIIItems.SWET_SUGAR.get(),
                 AetherIIItems.BLUEBERRY.get(),
                 AetherIIItems.ORANGE.get(),
                 AetherIIItems.WYNDBERRY.get(),
@@ -813,6 +805,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GRAVITITE_BLOCK.asItem(),
                 AetherIIBlocks.CORROBONITE_BLOCK.asItem(),
                 AetherIIBlocks.BRETTL_GRASS_BUNDLE.asItem()
+        );
+        this.tag(Tags.Items.TOOLS_SHEAR).add(
+                AetherIIItems.ZANITE_SHEARS.get()
         );
         this.tag(Tags.Items.TOOLS_SHIELD).add(
                 AetherIIItems.SKYROOT_SHIELD.get(),

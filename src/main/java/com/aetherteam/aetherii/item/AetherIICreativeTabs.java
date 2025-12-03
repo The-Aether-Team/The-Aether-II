@@ -312,10 +312,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ARKENIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.GRAVITITE_BLOCK.get());
                 output.accept(AetherIIBlocks.CORROBONITE_BLOCK.get());
-                output.accept(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());
-                output.accept(AetherIIBlocks.BLUE_ARILUM_LANTERN.get());
-                output.accept(AetherIIBlocks.PURPLE_ARILUM_LANTERN.get());
-                output.accept(AetherIIBlocks.GOLDEN_ARILUM_LANTERN.get());
+                output.accept(AetherIIBlocks.LIME_ARILUM_LANTERN.get());
+                output.accept(AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN.get());
+                output.accept(AetherIIBlocks.MAGENTA_ARILUM_LANTERN.get());
+                output.accept(AetherIIBlocks.YELLOW_ARILUM_LANTERN.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_DUNGEON_BLOCKS = CREATIVE_MODE_TABS.register("dungeon_blocks", () -> CreativeModeTab.builder()
@@ -394,6 +394,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AETHER_DIRT_PATH.get());
                 output.accept(AetherIIBlocks.AETHER_DIRT.get());
                 output.accept(AetherIIBlocks.COARSE_AETHER_DIRT.get());
+                output.accept(AetherIIBlocks.MYCELIAL_AETHER_DIRT.get());
                 output.accept(AetherIIBlocks.AETHER_FARMLAND.get());
                 output.accept(AetherIIBlocks.SHIMMERING_SILT.get());
                 output.accept(AetherIIBlocks.QUICKSOIL.get());
@@ -520,6 +521,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ARILUM_BULBS.get());
                 output.accept(AetherIIBlocks.ARILUM.get());
                 output.accept(AetherIIBlocks.BLOOMING_ARILUM.get());
+                output.accept(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get());
+                output.accept(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get());
+                output.accept(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get());
                 output.accept(AetherIIBlocks.MAGNETIC_SHROOM.get());
                 output.accept(AetherIIItems.BRETTL_CANE.get());
                 output.accept(AetherIIBlocks.BRETTL_GRASS_BUNDLE.get());
@@ -731,10 +735,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.WYNDBERRY.get());
                 output.accept(AetherIIItems.ENCHANTED_WYNDBERRY.get());
                 output.accept(AetherIIItems.SATIVAL_BULB.get());
-                output.accept(AetherIIItems.GREEN_SWET_JELLY.get());
-                output.accept(AetherIIItems.BLUE_SWET_JELLY.get());
-                output.accept(AetherIIItems.PURPLE_SWET_JELLY.get());
-                output.accept(AetherIIItems.GOLDEN_SWET_JELLY.get());
+                output.accept(AetherIIItems.SWET_JELLY.get());
                 output.accept(AetherIIItems.BURRUKAI_RIB_CUT.get());
                 output.accept(AetherIIItems.BURRUKAI_RIBS.get());
                 output.accept(AetherIIItems.KIRRID_LOIN.get());
@@ -779,10 +780,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.KIRRID_PLATE.get());
                 output.accept(AetherIIItems.MOA_FEATHER.get());
                 output.accept(AetherIIItems.COCKATRICE_FEATHER.get());
-                output.accept(AetherIIItems.GREEN_SWET_GEL.get());
-                output.accept(AetherIIItems.BLUE_SWET_GEL.get());
-                output.accept(AetherIIItems.PURPLE_SWET_GEL.get());
-                output.accept(AetherIIItems.GOLDEN_SWET_GEL.get());
+                output.accept(AetherIIItems.SWET_GEL.get());
                 output.accept(AetherIIItems.SWET_SUGAR.get());
                 output.accept(AetherIIItems.AECHOR_PETAL.get());
                 output.accept(AetherIIItems.SKYROOT_PINECONE.get());
@@ -831,7 +829,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SENTRY_GOLEM_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get());
-                output.accept(AetherIIItems.SWET_SPAWN_EGG.get());
+                output.accept(AetherIIItems.BLUE_SWET_SPAWN_EGG.get());
+                output.accept(AetherIIItems.GOLDEN_SWET_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SKEPHID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.TEMPEST_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());

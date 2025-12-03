@@ -47,6 +47,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropOther(AetherIIBlocks.AETHER_DIRT_PATH.get(), AetherIIBlocks.AETHER_DIRT.get());
         this.dropSelf(AetherIIBlocks.AETHER_DIRT.get());
         this.dropSelf(AetherIIBlocks.COARSE_AETHER_DIRT.get());
+        this.dropSelf(AetherIIBlocks.MYCELIAL_AETHER_DIRT.get());
         this.dropOther(AetherIIBlocks.AETHER_FARMLAND.get(), AetherIIBlocks.AETHER_DIRT.get());
         this.dropSelf(AetherIIBlocks.SHIMMERING_SILT.get());
 
@@ -77,6 +78,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.FERROSITE.get());
         this.dropSelf(AetherIIBlocks.RUSTED_FERROSITE.get());
         this.dropSelf(AetherIIBlocks.MAGNETIC_SHROOM.get());
+        this.add(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(), block -> this.createMushroomBlockDrop(block, AetherIIBlocks.MAGNETIC_SHROOM.get()));
+        this.add(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get(), block -> this.createMushroomBlockDrop(block, AetherIIBlocks.MAGNETIC_SHROOM.get()));
+        this.add(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get(), block -> this.createMushroomBlockDrop(block, AetherIIBlocks.MAGNETIC_SHROOM.get()));
 
         // Arctic
         this.add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIItems.ARCTIC_SNOWBALL, ConstantValue.exactly(4.0F)));
@@ -153,7 +157,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.WISPROOT_TRUNK.get());
         this.add(AetherIIBlocks.MOSSY_WISPROOT_TRUNK.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIBlocks.WISPROOT_TRUNK.get()));
         this.dropSelf(AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get());
-        this.dropSelf(AetherIIBlocks.AMBEROOT_TRUNK.get());
+        this.add(AetherIIBlocks.AMBEROOT_TRUNK.get(), (wood) -> this.droppingAmberoot(getter, wood, AetherIIBlocks.SKYROOT_TRUNK.get(), AetherIIItems.GOLDEN_AMBER.get()));
 
         // Leaf Pile
         this.add(AetherIIBlocks.SKYROOT_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.SKYROOT_LEAVES.get()));
@@ -665,10 +669,10 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.CORROBONITE_BLOCK.get());
 
         // Arilum Lantern
-        this.dropSelf(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.BLUE_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.PURPLE_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.GOLDEN_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.LIME_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.MAGENTA_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.YELLOW_ARILUM_LANTERN.get());
 
         // Utility
         this.dropSelf(AetherIIBlocks.AMBROSIUM_TORCH.get());

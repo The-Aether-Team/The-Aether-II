@@ -2,9 +2,6 @@ package com.aetherteam.aetherii.data.generators.loot;
 
 import com.aetherteam.aetherii.advancement.predicate.KirridPredicate;
 import com.aetherteam.aetherii.advancement.predicate.SheepuffPredicate;
-import com.aetherteam.aetherii.advancement.predicate.SwetVariantPredicate;
-import com.aetherteam.aetherii.api.SwetVariant;
-import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
@@ -17,7 +14,6 @@ import net.minecraft.advancements.critereon.DamageSourcePredicate;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.TagPredicate;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.resources.ResourceKey;
@@ -186,7 +182,35 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         )
                 )
         );
-        this.add(AetherIIEntityTypes.SWET.get(), createSwetTable(this.registries));
+        this.add(AetherIIEntityTypes.BLUE_SWET.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.SWET_GEL.get())
+                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                                        .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F)))
+                                        .apply(GelDropsFunction.extra(ConstantValue.exactly(1.0F))
+                                )
+                        )
+                ).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.SWET_SUGAR)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F)))
+                                .apply(SugarDropsFunction.extra(ConstantValue.exactly(1.0F)))
+                        )
+                )
+        );
+        this.add(AetherIIEntityTypes.GOLDEN_SWET.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.SWET_GEL.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F)))
+                                .apply(GelDropsFunction.extra(ConstantValue.exactly(1.0F)))
+                        )
+                ).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.SWET_SUGAR)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F)))
+                                .apply(SugarDropsFunction.extra(ConstantValue.exactly(2.0F)))
+                        )
+                )
+        );
 
         this.add(AetherIIEntityTypes.SKEPHID.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
@@ -320,29 +344,6 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
             entry = var2.next();
         }
         return LootPool.lootPool().add(builder);
-    }
-
-    public static LootTable.Builder createSwetTable(HolderLookup.Provider registries) {
-        AlternativesEntry.Builder builder = AlternativesEntry.alternatives();
-        HolderLookup.RegistryLookup<SwetVariant> registry = registries.lookupOrThrow(AetherIIRegistries.SWET_VARIANT);
-        List<ResourceKey<SwetVariant>> variantKeys = new ArrayList<>(registry.listElementIds().toList());
-        Collections.sort(variantKeys);
-        for (ResourceKey<SwetVariant> swetVariantId : variantKeys) {
-            Holder<SwetVariant> swetVariant = registry.getOrThrow(swetVariantId);
-            builder = builder.otherwise(LootItem.lootTableItem(swetVariant.value().gelItem().value())
-                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
-                    .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0F, 1.0F)))
-                    .apply(GelDropsFunction.extra(ConstantValue.exactly(1.0F)))
-                    .when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(new SwetVariantPredicate(swetVariant))))
-            );
-        }
-        return LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherIIItems.SWET_SUGAR)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0F, 1.0F)))
-                                .apply(SugarDropsFunction.extra(ConstantValue.exactly(1.0F)))
-                        )
-                ).withPool(LootPool.lootPool().add(builder));
     }
 
     @Override

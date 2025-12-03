@@ -163,10 +163,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.ARILUM_BULBS.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.AECHOR_PETAL.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.ARCTIC_SNOWBALL.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.GREEN_SWET_GEL.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.BLUE_SWET_GEL.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.PURPLE_SWET_GEL.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.GOLDEN_SWET_GEL.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.SWET_GEL.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.SWET_SUGAR.get(), ModelTemplates.FLAT_ITEM);
         this.generateMoaFeatherItem(AetherIIItems.MOA_FEATHER.get());
         this.generateFlatItem(AetherIIItems.COCKATRICE_FEATHER.get(), ModelTemplates.FLAT_ITEM);
@@ -191,10 +188,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.WYNDBERRY.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.ENCHANTED_WYNDBERRY.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.SATIVAL_BULB.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.GREEN_SWET_JELLY.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.BLUE_SWET_JELLY.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.PURPLE_SWET_JELLY.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.GOLDEN_SWET_JELLY.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.SWET_JELLY.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.BURRUKAI_RIBS.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.BURRUKAI_RIB_CUT.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.KIRRID_CUTLET.get(), ModelTemplates.FLAT_ITEM);
@@ -266,7 +260,8 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.ZEPHYR_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.TEMPEST_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.COCKATRICE_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.SWET_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.BLUE_SWET_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.GOLDEN_SWET_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.SKEPHID_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);

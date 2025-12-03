@@ -87,6 +87,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AETHER_DIRT_PATH, "Aether Dirt Path");
         this.addBlock(AetherIIBlocks.AETHER_DIRT, "Aether Dirt");
         this.addBlock(AetherIIBlocks.COARSE_AETHER_DIRT, "Coarse Aether Dirt");
+        this.addBlock(AetherIIBlocks.MYCELIAL_AETHER_DIRT, "Mycelial Aether Dirt");
         this.addBlock(AetherIIBlocks.AETHER_FARMLAND, "Aether Farmland");
         this.addBlock(AetherIIBlocks.SHIMMERING_SILT, "Shimmering Silt");
 
@@ -116,6 +117,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.FERROSITE, "Ferrosite");
         this.addBlock(AetherIIBlocks.RUSTED_FERROSITE, "Rusted Ferrosite");
         this.addBlock(AetherIIBlocks.MAGNETIC_SHROOM, "Magnetic Shroom");
+        this.addBlock(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK, "Magnetic Shroom Block");
+        this.addBlock(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK, "Spotted Magnetic Shroom Block");
+        this.addBlock(AetherIIBlocks.MAGNETIC_SHROOM_STEM, "Magnetic Shroom Stem");
 
         // Arctic
         this.addBlock(AetherIIBlocks.ARCTIC_SNOW_BLOCK, "Arctic Snow Block");
@@ -719,10 +723,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.CORROBONITE_BLOCK, "Block of Corrobonite");
 
         // Arilum Lantern
-        this.addBlock(AetherIIBlocks.GREEN_ARILUM_LANTERN, "Green Arilum Lantern");
-        this.addBlock(AetherIIBlocks.BLUE_ARILUM_LANTERN, "Blue Arilum Lantern");
-        this.addBlock(AetherIIBlocks.PURPLE_ARILUM_LANTERN, "Purple Arilum Lantern");
-        this.addBlock(AetherIIBlocks.GOLDEN_ARILUM_LANTERN, "Golden Arilum Lantern");
+        this.addBlock(AetherIIBlocks.LIME_ARILUM_LANTERN, "Lime Arilum Lantern");
+        this.addBlock(AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN, "Light Blue Arilum Lantern");
+        this.addBlock(AetherIIBlocks.MAGENTA_ARILUM_LANTERN, "Magenta Arilum Lantern");
+        this.addBlock(AetherIIBlocks.YELLOW_ARILUM_LANTERN, "Yellow Arilum Lantern");
 
         // Utility
         this.addBlock(AetherIIBlocks.AMBROSIUM_TORCH, "Ambrosium Torch");
@@ -920,10 +924,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.AECHOR_PETAL, "Aechor Petal");
         this.addItem(AetherIIItems.ARILUM_BULBS, "Arilum Bulbs");
         this.addItem(AetherIIItems.ARCTIC_SNOWBALL, "Arctic Snowball");
-        this.addItem(AetherIIItems.GREEN_SWET_GEL, "Green Swet Gel");
-        this.addItem(AetherIIItems.BLUE_SWET_GEL, "Blue Swet Gel");
-        this.addItem(AetherIIItems.PURPLE_SWET_GEL, "Purple Swet Gel");
-        this.addItem(AetherIIItems.GOLDEN_SWET_GEL, "Golden Swet Gel");
+        this.addItem(AetherIIItems.SWET_GEL, "Swet Gel");
         this.addItem(AetherIIItems.SWET_SUGAR, "Swet Sugar");
         this.addItem(AetherIIItems.MOA_FEATHER, "Moa Feather");
         this.addItem(AetherIIItems.COCKATRICE_FEATHER, "Cockatrice Feather");
@@ -952,10 +953,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.WYNDBERRY, "Wyndberry");
         this.addItem(AetherIIItems.ENCHANTED_WYNDBERRY, "Enchanted Wyndberry");
         this.addItem(AetherIIItems.SATIVAL_BULB, "Satival Bulb");
-        this.addItem(AetherIIItems.GREEN_SWET_JELLY, "Green Swet Jelly");
-        this.addItem(AetherIIItems.BLUE_SWET_JELLY, "Blue Swet Jelly");
-        this.addItem(AetherIIItems.PURPLE_SWET_JELLY, "Purple Swet Jelly");
-        this.addItem(AetherIIItems.GOLDEN_SWET_JELLY, "Golden Swet Jelly");
+        this.addItem(AetherIIItems.SWET_JELLY, "Swet Jelly");
         this.addItem(AetherIIItems.BURRUKAI_RIBS, "Burrukai Ribs");
         this.addItem(AetherIIItems.BURRUKAI_RIB_CUT, "Burrukai Rib Cut");
         this.addItem(AetherIIItems.KIRRID_CUTLET, "Kirrid Cutlet");
@@ -1027,7 +1025,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSpawnEggItem(AetherIIItems.ZEPHYR_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.TEMPEST_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.COCKATRICE_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.SWET_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.BLUE_SWET_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.GOLDEN_SWET_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.SKEPHID_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG);
@@ -1195,6 +1194,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("healing_stone.charges", "%s/5 Charges");
         this.addItemTooltip("effect_buildup", "%s Buildup");
         this.addItemTooltip("effect_buildup.inflicts", "Inflicts: %s");
+        this.addItemTooltip("reinforcement", "Reinforcement");
 
         // Moa Egg Tooltips
         this.addItemTooltip("moa_egg.keratin", "%s Keratin");
@@ -1270,7 +1270,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
         this.addEntityType(AetherIIEntityTypes.TEMPEST, "Tempest");
         this.addEntityType(AetherIIEntityTypes.COCKATRICE, "Cockatrice");
-        this.addEntityType(AetherIIEntityTypes.SWET, "Swet");
+        this.addEntityType(AetherIIEntityTypes.BLUE_SWET, "Blue Swet");
+        this.addEntityType(AetherIIEntityTypes.GOLDEN_SWET, "Golden Swet");
         this.addEntityType(AetherIIEntityTypes.SKEPHID, "Skephid");
         this.addEntityType(AetherIIEntityTypes.ARKENIUM_TALUTON, "Arkenium Taluton");
         this.addEntityType(AetherIIEntityTypes.GRAVITITE_TALUTON, "Gravitite Taluton");
@@ -1419,11 +1420,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addGuiText() {
         // GUIs
         this.addGuiText("arkenium_forge.forge_button.tooltip", "Forge Item");
+        this.addGuiText("arkenium_forge.tooltip.durability", "Max Durability");
+        this.addGuiText("arkenium_forge.tooltip.charms", "Charm Slots");
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
         this.addGuiText("recipebook.toggleRecipes.purifiable", "Showing Purifiable");
         this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");
         this.addGuiText("guidebook.button.open", "Guidebook");
         this.addGuiText("guidebook.button.close", "Inventory");
+        this.addGuiText("guidebook.description.button.open", "Read More");
+        this.addGuiText("guidebook.description.button.close", "Go Back");
         this.addGuiText("guidebook.equipment.title", "Equipment");
         this.addGuiText("guidebook.equipment.pouch.tooltip.title", "Pouch");
         this.addGuiText("guidebook.equipment.pouch.tooltip.description", "%s Glint");
@@ -1450,7 +1455,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     }
 
     private void addBestiaryEntries() {
-        final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec scelerisque elit. Etiam commodo id ligula non tempus. In volutpat tempus maximus. Phasellus mattis nisi non risus facilisis semper. Pellentesque in tincidunt lorem. Maecenas malesuada augue eget purus placerat, at placerat lorem venenatis. Vestibulum eget massa in est luctus aliquam et ut quam. Ut tincidunt ipsum vel dui congue, quis consectetur elit porta. Maecenas et orci consequat, imperdiet ante eu, commodo nunc. Duis iaculis nisl in erat placerat tincidunt. Maecenas ipsum libero, ultricies eget tempor quis, eleifend eu ipsum. In lorem est, euismod at sem eu, varius convallis mauris. Aenean at erat at nisi iaculis fermentum vel non purus.\n" +
+                "\n" +
+                "Proin congue ipsum a ligula efficitur, eget pulvinar lacus elementum. Praesent eu dignissim ante. Nullam ac aliquet leo. Cras luctus odio eget malesuada euismod. Nulla metus magna, hendrerit et augue nec, fermentum hendrerit velit. Proin non pellentesque lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n" +
+                "\n" +
+                "Sed fermentum tortor auctor ex tristique malesuada. Etiam a pulvinar arcu, id pharetra metus. Mauris volutpat fermentum eros. Pellentesque non diam nec diam ultricies gravida vel at lectus. Nulla non libero eu eros ornare tempor. Phasellus ac suscipit risus. Aenean cursus, purus consectetur auctor ullamcorper, erat enim aliquam lacus, non accumsan metus turpis quis est.\n" +
+                "\n" +
+                "Nunc odio lectus, semper vel eros bibendum, mollis ornare turpis. Maecenas in nibh ut est tincidunt sollicitudin ut vel nunc. Vestibulum erat velit, sagittis et ante id, convallis consequat turpis. Cras at risus vitae ex placerat ultricies. Maecenas id augue eleifend metus luctus ornare. Proin metus leo, imperdiet in cursus viverra, aliquet vel odio. Mauris non porta justo, eget pharetra nulla. Aliquam erat volutpat. Duis rhoncus et ante id egestas. Suspendisse sodales porttitor metus quis molestie. Phasellus ante turpis, finibus sit amet metus eu, condimentum ullamcorper lorem. Nullam sollicitudin euismod enim, ac lobortis neque finibus sed. Proin iaculis dui sed odio cursus, non porta neque vulputate.\n" +
+                "\n" +
+                "Pellentesque egestas turpis non orci feugiat viverra. Morbi faucibus sollicitudin erat. Quisque commodo rhoncus neque, at ullamcorper purus ornare nec. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus vitae arcu dictum tortor mattis placerat blandit sit amet erat. Donec commodo neque sed elit eleifend condimentum. Mauris vitae rutrum augue.";
         
         final String taegore = "Taegore";
         final String burrukai = "Burrukai";
@@ -1483,7 +1496,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.SWET.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.BLUE_SWET.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.GOLDEN_SWET.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.SKEPHID.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), loremIpsum);

@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.renderer.entity.layers;
 
-import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.model.SwetModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -11,13 +10,14 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.resources.ResourceLocation;
 
-public class SwetGelLayer extends RenderLayer<SwetRenderState, SwetModel<SwetRenderState>> {
+public abstract class SwetGelLayer extends RenderLayer<SwetRenderState, SwetModel<SwetRenderState>> {
     private final SwetModel<SwetRenderState> model;
 
-    public SwetGelLayer(RenderLayerParent<SwetRenderState, SwetModel<SwetRenderState>> renderer, EntityModelSet modelSet) {
+    public SwetGelLayer(RenderLayerParent<SwetRenderState, SwetModel<SwetRenderState>> renderer, EntityModelSet modelSet, SwetModel<SwetRenderState> model) {
         super(renderer);
-        this.model = new SwetModel<>(modelSet.bakeLayer(AetherIIModelLayers.SWET), true);
+        this.model = model;
     }
 
     @Override
@@ -25,10 +25,12 @@ public class SwetGelLayer extends RenderLayer<SwetRenderState, SwetModel<SwetRen
         boolean flag = livingEntity.appearsGlowing && livingEntity.isInvisible;
         if (!livingEntity.isInvisible || flag) {
             VertexConsumer vertexconsumer = flag
-                    ? bufferSource.getBuffer(RenderType.outline(livingEntity.texture))
-                    : bufferSource.getBuffer(RenderType.entityTranslucent(livingEntity.texture));
+                    ? bufferSource.getBuffer(RenderType.outline(this.getTextureLocation(livingEntity)))
+                    : bufferSource.getBuffer(RenderType.entityTranslucent(this.getTextureLocation(livingEntity)));
             this.model.setupAnim(livingEntity);
             this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, LivingEntityRenderer.getOverlayCoords(livingEntity, 0.0F));
         }
     }
+
+    public abstract ResourceLocation getTextureLocation(SwetRenderState swetRenderState);
 }

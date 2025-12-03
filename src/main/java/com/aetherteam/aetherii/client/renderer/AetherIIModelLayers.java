@@ -51,7 +51,8 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation AERWHALE = register("aerwhale");
     public static final ModelLayerLocation TEMPEST = register("tempest");
     public static final ModelLayerLocation COCKATRICE = register("cockatrice");
-    public static final ModelLayerLocation SWET = register("swet");
+    public static final ModelLayerLocation BLUE_SWET = register("blue_swet");
+    public static final ModelLayerLocation GOLDEN_SWET = register("golden_swet");
     public static final ModelLayerLocation SKEPHID = register("skephid");
     public static final ModelLayerLocation CARRION_SPROUT = register("carrion_sprout");
     public static final ModelLayerLocation ARKENIUM_TALUTON = register("arkenium_taluton");

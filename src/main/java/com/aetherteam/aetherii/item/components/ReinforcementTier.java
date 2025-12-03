@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -82,7 +83,11 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
 
     @Override
     public void addToTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, DataComponentGetter dataComponentGetter) {
-        consumer.accept(Component.literal("Reinforcement ").append(Component.translatable("enchantment.level." + this.getTier())).withColor(14408667));
+        consumer.accept(createReinforcementComponent(this.getTier()));
+    }
+
+    public static Component createReinforcementComponent(int tier) {
+        return Component.translatable("aether_ii.tooltip.item.reinforcement").withColor(14408667).append(CommonComponents.SPACE).append(Component.translatable("enchantment.level." + tier));
     }
 
     public record Cost(Predicate<ItemStack> stackCondition, ItemLike primaryMaterial, int primaryCount, ItemLike secondaryMaterial, int secondaryCount) {

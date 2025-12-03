@@ -37,6 +37,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createAetherGrassBlocks();
         this.createTrivialCube(AetherIIBlocks.AETHER_DIRT.get());
         this.createTrivialCube(AetherIIBlocks.COARSE_AETHER_DIRT.get());
+        this.createTrivialCube(AetherIIBlocks.MYCELIAL_AETHER_DIRT.get());
         this.createAetherFarmland();
         this.createTrivialCube(AetherIIBlocks.SHIMMERING_SILT.get());
 
@@ -65,6 +66,10 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.FERROSITE.get());
         this.createTrivialCube(AetherIIBlocks.RUSTED_FERROSITE.get());
         this.createPlantWithDefaultItem(AetherIIBlocks.MAGNETIC_SHROOM.get(), AetherIIBlocks.POTTED_MAGNETIC_SHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        this.createMagneticShroomBlock(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get());
+        this.createMagneticShroomBlock(AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK.get());
+        this.createMagneticShroomBlock(AetherIIBlocks.MAGNETIC_SHROOM_STEM.get());
+        this.createMagneticShroomBlocksInside();
 
         // Arctic
         this.createArcticSnowBlocks();
@@ -452,10 +457,10 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.CORROBONITE_BLOCK.get());
 
         // Arilum Lantern
-        this.createArilumLantern(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());
-        this.createArilumLantern(AetherIIBlocks.BLUE_ARILUM_LANTERN.get());
-        this.createArilumLantern(AetherIIBlocks.PURPLE_ARILUM_LANTERN.get());
-        this.createArilumLantern(AetherIIBlocks.GOLDEN_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.LIME_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.MAGENTA_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.YELLOW_ARILUM_LANTERN.get());
 
         // Utility
         this.createAmbrosiumTorch();

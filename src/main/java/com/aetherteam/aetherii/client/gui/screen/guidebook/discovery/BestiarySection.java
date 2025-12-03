@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.api.guidebook.GuidebookEntry;
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.GuidebookDiscoveryAttachment;
+import com.aetherteam.aetherii.client.gui.component.guidebook.DescriptionButton;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -18,6 +19,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.GuiSpriteManager;
+import net.minecraft.client.gui.components.MultiLineLabel;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
@@ -30,7 +32,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
@@ -53,7 +54,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
             AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, AetherIIEntityTypes.MAGNETIC_BURRUKAI, AetherIIEntityTypes.ARCTIC_BURRUKAI,
             AetherIIEntityTypes.PHYG, AetherIIEntityTypes.SHEEPUFF, AetherIIEntityTypes.FLYING_COW,
             AetherIIEntityTypes.AERBUNNY, AetherIIEntityTypes.SKYROOT_LIZARD,AetherIIEntityTypes.MOA,
-            AetherIIEntityTypes.SWET, AetherIIEntityTypes.AECHOR_PLANT, AetherIIEntityTypes.CARRION_SPROUT,
+            AetherIIEntityTypes.BLUE_SWET, AetherIIEntityTypes.GOLDEN_SWET, AetherIIEntityTypes.AECHOR_PLANT, AetherIIEntityTypes.CARRION_SPROUT,
             AetherIIEntityTypes.SKEPHID, AetherIIEntityTypes.ZEPHYR,
             AetherIIEntityTypes.TEMPEST, AetherIIEntityTypes.COCKATRICE,
             AetherIIEntityTypes.ARKENIUM_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON,
@@ -108,6 +109,8 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         }
 
         super.initSection();
+
+        this.screen.addRenderableWidget(this.screen, new DescriptionButton(this.screen, (this.screen.width / 2) + 155, (this.screen.height / 2) + 40, Guidebook.MAGNIFYING_GLASS));
 
         this.rotation = 0.0F;
     }
@@ -395,11 +398,10 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     private void drawDescriptionString(GuiGraphics guiGraphics, Font font, Component component) {
         int x = 21;
         int y = 103;
-        int width = 140;
-        for (FormattedCharSequence formattedcharsequence : font.split(component, width)) {
-            guiGraphics.drawString(font, formattedcharsequence, x, y, -1, true);
-            y += 9;
-        }
+        int lineHeight = 9;
+        int color = 0xffffffff;
+        MultiLineLabel label = MultiLineLabel.create(font, 140, 5, component);
+        label.renderLeftAligned(guiGraphics, x, y, lineHeight, color);
     }
 
     @Override

@@ -843,6 +843,26 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(BlockModelGenerators.createBooleanModelDispatch(BrettlPlantBlock.GROWN, grown, normal)));
     }
 
+    public void createMagneticShroomBlock(Block mushroomBlock) {
+        MultiVariant multivariant = plainVariant(ModelTemplates.SINGLE_FACE.create(mushroomBlock, TextureMapping.defaultTexture(mushroomBlock), this.modelOutput));
+        MultiVariant multivariant1 = plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(), "_inside"));
+        this.blockStateOutput.accept(MultiPartGenerator.multiPart(mushroomBlock)
+                .with(condition().term(BlockStateProperties.NORTH, true), multivariant)
+                .with(condition().term(BlockStateProperties.EAST, true), multivariant.with(Y_ROT_90).with(UV_LOCK))
+                .with(condition().term(BlockStateProperties.SOUTH, true), multivariant.with(Y_ROT_180).with(UV_LOCK))
+                .with(condition().term(BlockStateProperties.WEST, true), multivariant.with(Y_ROT_270).with(UV_LOCK))
+                .with(condition().term(BlockStateProperties.UP, true), multivariant.with(X_ROT_270).with(UV_LOCK))
+                .with(condition().term(BlockStateProperties.DOWN, true), multivariant.with(X_ROT_90).with(UV_LOCK))
+                .with(condition().term(BlockStateProperties.NORTH, false), multivariant1).with(condition().term(BlockStateProperties.EAST, false), multivariant1.with(Y_ROT_90))
+                .with(condition().term(BlockStateProperties.SOUTH, false), multivariant1.with(Y_ROT_180)).with(condition().term(BlockStateProperties.WEST, false), multivariant1.with(Y_ROT_270))
+                .with(condition().term(BlockStateProperties.UP, false), multivariant1.with(X_ROT_270)).with(condition().term(BlockStateProperties.DOWN, false), multivariant1.with(X_ROT_90)));
+        this.registerSimpleItemModel(mushroomBlock, TexturedModel.CUBE.createWithSuffix(mushroomBlock, "_inventory", this.modelOutput));
+    }
+
+    public void createMagneticShroomBlocksInside() {
+        ModelTemplates.SINGLE_FACE.create(ModelLocationUtils.getModelLocation(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(), "_inside"), TextureMapping.defaultTexture(ModelLocationUtils.getModelLocation(AetherIIBlocks.MAGNETIC_SHROOM_BLOCK.get(), "_inside")), this.modelOutput);
+    }
+
     public void createTwig(Block twig, Block base) {
         TextureMapping mapping = TextureMapping.logColumn(base);
         MultiVariant twigs1 = plainVariant(AetherIIModelTemplates.TWIG_1.create(twig, mapping, this.modelOutput));

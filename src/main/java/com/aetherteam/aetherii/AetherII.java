@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 
 import com.aetherteam.aetherii.advancement.predicate.AetherIIEntitySubPredicates;
 import com.aetherteam.aetherii.api.SkyrootLizardVariant;
-import com.aetherteam.aetherii.api.SwetVariant;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
@@ -156,7 +155,6 @@ public class AetherII {
         event.dataPackRegistry(AetherIIRegistries.EXPLORATION_ENTRY, ExplorationEntry.DIRECT_CODEC, ExplorationEntry.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.STYLE_DESIGN, StyleDesign.DIRECT_CODEC, StyleDesign.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.STYLE_MATERIAL, StyleMaterial.DIRECT_CODEC, StyleMaterial.DIRECT_CODEC);
-        event.dataPackRegistry(AetherIIRegistries.SWET_VARIANT, SwetVariant.DIRECT_CODEC, SwetVariant.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.SKYROOT_LIZARD_VARIANT, SkyrootLizardVariant.DIRECT_CODEC, SkyrootLizardVariant.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.REWARD_WRAPPER, RewardWrapper.DIRECT_CODEC, RewardWrapper.DIRECT_CODEC);
     }

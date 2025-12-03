@@ -38,7 +38,6 @@
     "common.accessor.ServerGamePacketListenerImplAccessor",
     "common.accessor.ServerPlayerAccessor",
     "common.accessor.SlotAccessor",
-    "common.accessor.VegetationBlockAccessor",
     "debug.DebugPacketsMixin",
     "debug.PathFinderMixin",
     "debug.accessor.PathAccessor"
