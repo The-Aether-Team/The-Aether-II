@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -14,10 +15,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.util.LandRandomPos;
 import net.minecraft.world.entity.monster.Monster;
@@ -35,17 +33,23 @@ import java.util.EnumSet;
 
 public class SentryGolem extends Monster implements RangedAttackMob {
     public static final EntityDataAccessor<Integer> DATA_FIRE_TIME_ID = SynchedEntityData.defineId(SentryGolem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> DATA_RANGED_ID = SynchedEntityData.defineId(SentryGolem.class, EntityDataSerializers.BOOLEAN);
     public int timeTilToss = 50;
+    public int avoidCooldown;
+    private SentryGolemStrollGoal randomStrollGoal;
+
     public SentryGolem(EntityType<? extends SentryGolem> entityType, Level level) {
         super(entityType, level);
     }
 
     @Override
     protected void registerGoals() {
+        this.randomStrollGoal = new SentryGolemStrollGoal(this, 1.0);
+
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new SentryGolemMeleeAttackGoal(this, 1.15F, true, 6.0F));
-        this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0));
-        this.goalSelector.addGoal(3, new ThrowExplosiveAttackGoal(this, 60, 0.08F, 52.0F, 240.0F));
+        this.goalSelector.addGoal(2, this.randomStrollGoal);
+        this.goalSelector.addGoal(3, new ThrowExplosiveAttackGoal(this, 60, 0.08F, 52.0F, 255.0F));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
@@ -61,20 +65,39 @@ public class SentryGolem extends Monster implements RangedAttackMob {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(DATA_FIRE_TIME_ID, 0);
+        builder.define(DATA_RANGED_ID, false);
     }
 
     @Override
     public void tick() {
         super.tick();
         if (!this.level().isClientSide()) {
+            if (this.avoidCooldown > 0) {
+                --this.avoidCooldown;
+            }
+
             if (this.getTarget() != null) {
                 if (this.timeTilToss != 0) {
                     --this.timeTilToss;
                 } else {
                     this.timeTilToss = 50;
                 }
+                this.randomStrollGoal.setInterval(RandomStrollGoal.DEFAULT_INTERVAL * 5);
+            } else {
+                this.randomStrollGoal.setInterval(RandomStrollGoal.DEFAULT_INTERVAL);
             }
         }
+    }
+
+    @Override
+    public boolean hurtServer(ServerLevel p_376911_, DamageSource p_376689_, float p_376584_) {
+
+        if (this.randomStrollGoal != null && this.isRanged() && this.avoidCooldown <= 0) {
+            this.randomStrollGoal.trigger();
+            this.avoidCooldown = 100 + this.random.nextInt(100);
+        }
+
+        return super.hurtServer(p_376911_, p_376689_, p_376584_);
     }
 
     @Override
@@ -112,6 +135,15 @@ public class SentryGolem extends Monster implements RangedAttackMob {
     public void setFireTime(int time) {
         this.entityData.set(DATA_FIRE_TIME_ID, time);
     }
+
+    public boolean isRanged() {
+        return this.entityData.get(DATA_RANGED_ID);
+    }
+
+    public void setRanged(boolean ranged) {
+        this.entityData.set(DATA_RANGED_ID, ranged);
+    }
+
 
     @Override
     protected boolean shouldDespawnInPeaceful() {
@@ -177,9 +209,16 @@ public class SentryGolem extends Monster implements RangedAttackMob {
             return this.canUse() || this.target.isAlive() && !this.golem.getNavigation().isDone();
         }
 
+        @Override
+        public void start() {
+            super.start();
+            this.golem.setRanged(true);
+        }
+
         public void stop() {
             this.target = null;
             this.seeTime = 0;
+            this.golem.setRanged(false);
         }
 
         public boolean requiresUpdateEveryTick() {
@@ -259,6 +298,22 @@ public class SentryGolem extends Monster implements RangedAttackMob {
         @Override
         public void stop() {
             super.stop();
+        }
+    }
+
+    private class SentryGolemStrollGoal extends WaterAvoidingRandomStrollGoal {
+        public SentryGolemStrollGoal(SentryGolem sentryGolem, double speed) {
+            super(sentryGolem, speed);
+        }
+
+        @Override
+        protected @org.jetbrains.annotations.Nullable Vec3 getPosition() {
+            //should not do the Moving When Target Found
+            if (this.mob.getTarget() != null) {
+                return LandRandomPos.getPosAway(this.mob, 10, 7, this.mob.getTarget().position());
+            }
+
+            return super.getPosition();
         }
     }
 }

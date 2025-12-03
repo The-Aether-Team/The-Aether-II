@@ -34,6 +34,7 @@ public class SentryGolemRenderer extends MobRenderer<SentryGolem, SentryGolemRen
         super.extractRenderState(sentryGolem, renderState, p_361157_);
         ArmedEntityRenderState.extractArmedEntityRenderState(sentryGolem, renderState, itemModelResolver);
         renderState.fireTime = sentryGolem.getFireTime();
+        renderState.ranged = sentryGolem.isRanged();
     }
 
     @Override
