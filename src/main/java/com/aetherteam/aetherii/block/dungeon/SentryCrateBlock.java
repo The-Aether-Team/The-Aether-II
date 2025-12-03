@@ -125,7 +125,7 @@ public class SentryCrateBlock extends BaseEntityBlock implements MimicOption {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return !level.isClientSide() ? createTickerHelper(type, AetherIIBlockEntityTypes.SENTRY_CRATE.get(), SentryCrateBlockEntity::serverTick) : null;
+        return level.isClientSide() ? createTickerHelper(type, AetherIIBlockEntityTypes.SENTRY_CRATE.get(), SentryCrateBlockEntity::clientTick) : null;
     }
 
     @Override

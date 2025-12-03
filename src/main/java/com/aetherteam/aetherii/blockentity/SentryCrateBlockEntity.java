@@ -18,6 +18,7 @@ import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.entity.ChestLidController;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,41 +27,38 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
 public class SentryCrateBlockEntity extends RandomizableContainerBlockEntity {
-    private NonNullList<ItemStack> items;
-    private final ContainerOpenersCounter openersCounter;
-    private int closeDelay = -1;
+    private NonNullList<ItemStack> items = NonNullList.withSize(27, ItemStack.EMPTY);
+    private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter() {
+        @Override
+        protected void onOpen(Level level, BlockPos pos, BlockState state) {
+            SentryCrateBlockEntity.this.playSound(level, pos, state, SoundEvents.CHEST_OPEN);
+            SentryCrateBlockEntity.this.updateBlockState(state, true);
+        }
+
+        @Override
+        protected void onClose(Level level, BlockPos pos, BlockState state) {
+            SentryCrateBlockEntity.this.playSound(level, pos, state, SoundEvents.CHEST_CLOSE);
+        }
+
+        @Override
+        protected void openerCountChanged(Level level, BlockPos pos, BlockState state, int count, int openCount) {
+            level.blockEvent(pos, state.getBlock(), 1, openCount);
+        }
+
+        @Override
+        protected boolean isOwnContainer(Player player) {
+            if (!(player.containerMenu instanceof ChestMenu menu)) {
+                return false;
+            } else {
+                Container container = menu.getContainer();
+                return container == SentryCrateBlockEntity.this || container instanceof CompoundContainer compound && compound.contains(SentryCrateBlockEntity.this);
+            }
+        }
+    };
+    public final ChestLidController chestLidController = new ChestLidController();
 
     public SentryCrateBlockEntity(BlockPos pos, BlockState blockState) {
         super(AetherIIBlockEntityTypes.SENTRY_CRATE.get(), pos, blockState);
-        this.items = NonNullList.withSize(27, ItemStack.EMPTY);
-        this.openersCounter = new ContainerOpenersCounter() {
-            @Override
-            protected void onOpen(Level level, BlockPos pos, BlockState state) {
-                SentryCrateBlockEntity.this.playSound(level, pos, state, SoundEvents.CHEST_OPEN);
-                SentryCrateBlockEntity.this.updateBlockState(state, true);
-                SentryCrateBlockEntity.this.closeDelay = -1;
-            }
-
-            @Override
-            protected void onClose(Level level, BlockPos pos, BlockState state) {
-                SentryCrateBlockEntity.this.playSound(level, pos, state, SoundEvents.CHEST_CLOSE);
-                SentryCrateBlockEntity.this.closeDelay = 7;
-            }
-
-            @Override
-            protected void openerCountChanged(Level level, BlockPos pos, BlockState state, int count, int openCount) {
-            }
-
-            @Override
-            protected boolean isOwnContainer(Player player) {
-                if (!(player.containerMenu instanceof ChestMenu menu)) {
-                    return false;
-                } else {
-                    Container container = menu.getContainer();
-                    return container == SentryCrateBlockEntity.this || container instanceof CompoundContainer compound && compound.contains(SentryCrateBlockEntity.this);
-                }
-            }
-        };
     }
 
     @Override
@@ -68,8 +66,9 @@ public class SentryCrateBlockEntity extends RandomizableContainerBlockEntity {
         return ChestMenu.threeRows(id, player, this);
     }
 
-    public static void serverTick(Level level, BlockPos pos, BlockState state, SentryCrateBlockEntity blockEntity) {
-        if (blockEntity.closeDelay-- == 0) {
+    public static void clientTick(Level level, BlockPos pos, BlockState state, SentryCrateBlockEntity blockEntity) {
+        blockEntity.chestLidController.tickLid();
+        if (blockEntity.chestLidController.getOpenness(1.0F) == 0) {
             blockEntity.updateBlockState(state, false);
         }
     }
@@ -121,6 +120,16 @@ public class SentryCrateBlockEntity extends RandomizableContainerBlockEntity {
     @Override
     protected Component getDefaultName() {
         return Component.translatable("aether_ii.container.sentry_crate");
+    }
+
+    @Override
+    public boolean triggerEvent(int id, int type) {
+        if (id == 1) {
+            this.chestLidController.shouldBeOpen(type > 0);
+            return true;
+        } else {
+            return super.triggerEvent(id, type);
+        }
     }
 
     @Override

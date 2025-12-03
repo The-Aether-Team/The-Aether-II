@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.renderer.blockentity;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.dungeon.SentryCrateBlock;
 import com.aetherteam.aetherii.blockentity.SentryCrateBlockEntity;
@@ -18,24 +17,15 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BrightnessCombiner;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.phys.Vec3;
 
-public class SentryCrateRenderer implements BlockEntityRenderer<SentryCrateBlockEntity> {
-    public static final Material SENTRY_CRATE_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal"));
-    public static final Material SENTRY_CRATE_LEFT_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal_left"));
-    public static final Material SENTRY_CRATE_RIGHT_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal_right"));
-    public static final Material SENTRY_CRATE_OPEN_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal_open"));
-    public static final Material SENTRY_CRATE_LEFT_OPEN_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal_left_open"));
-    public static final Material SENTRY_CRATE_RIGHT_OPEN_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal_right_open"));
-    public static final Material SENTRY_CRATE_OPEN_EMISSIVE_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal_open_emissive"));
-    public static final Material SENTRY_CRATE_LEFT_OPEN_EMISSIVE_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal_left_open_emissive"));
-    public static final Material SENTRY_CRATE_RIGHT_OPEN_EMISSIVE_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal_right_open_emissive"));
+import java.util.ArrayList;
 
+public class SentryCrateRenderer implements BlockEntityRenderer<SentryCrateBlockEntity> {
     private final SentryCrateModel singleModel;
     private final SentryCrateModel doubleLeftModel;
     private final SentryCrateModel doubleRightModel;
@@ -67,8 +57,10 @@ public class SentryCrateRenderer implements BlockEntityRenderer<SentryCrateBlock
             }
             int i = combined.apply(new BrightnessCombiner<>()).applyAsInt(packedLight);
 
-            Material material = this.getMaterial(state, type);
-            Material emissive = chooseMaterial(type, SENTRY_CRATE_OPEN_EMISSIVE_LOCATION, SENTRY_CRATE_LEFT_OPEN_EMISSIVE_LOCATION, SENTRY_CRATE_RIGHT_OPEN_EMISSIVE_LOCATION);
+            int frame = Math.max(0, (int) Math.ceil(blockEntity.chestLidController.getOpenness(partialTick) * 4) - 1);
+            Material material = new ArrayList<>(AetherIIAtlases.SENTRY_CRATE_MATERIALS.get(type)).get(frame);
+            Material emissive = chooseMaterial(type, AetherIIAtlases.SENTRY_CRATE_SINGLE_EMISSIVE_LOCATION, AetherIIAtlases.SENTRY_CRATE_LEFT_EMISSIVE_LOCATION, AetherIIAtlases.SENTRY_CRATE_RIGHT_EMISSIVE_LOCATION);
+
             VertexConsumer vertexConsumer = material.buffer(buffer, RenderType::entityCutout);
             VertexConsumer emissiveConsumer = emissive.buffer(buffer, RenderType::entityCutout);
             if (doubleChest) {
@@ -89,12 +81,6 @@ public class SentryCrateRenderer implements BlockEntityRenderer<SentryCrateBlock
         if (state.getValue(SentryCrateBlock.OPEN)) {
             model.renderToBuffer(poseStack, emissiveConsumer, LightTexture.FULL_BRIGHT, packedOverlay);
         }
-    }
-
-    private Material getMaterial(BlockState state, ChestType chestType) {
-        return state.getValue(SentryCrateBlock.OPEN)
-                ? chooseMaterial(chestType, SENTRY_CRATE_OPEN_LOCATION, SENTRY_CRATE_LEFT_OPEN_LOCATION, SENTRY_CRATE_RIGHT_OPEN_LOCATION)
-                : chooseMaterial(chestType, SENTRY_CRATE_LOCATION, SENTRY_CRATE_LEFT_LOCATION, SENTRY_CRATE_RIGHT_LOCATION);
     }
 
     private static Material chooseMaterial(ChestType chestType, Material doubleMaterial, Material leftMaterial, Material rightMaterial) {
