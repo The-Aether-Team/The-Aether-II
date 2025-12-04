@@ -688,10 +688,23 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> CORROBONITE_BLOCK = register("corrobonite_block", () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_LIGHT_GREEN).instrument(NoteBlockInstrument.BIT).strength(5.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.METAL));
 
     // Arilum Lantern
-    public static final DeferredBlock<Block> LIME_ARILUM_LANTERN = register("lime_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_LIGHT_GREEN));
-    public static final DeferredBlock<Block> LIGHT_BLUE_ARILUM_LANTERN = register("light_blue_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_LIGHT_BLUE));
+    public static final DeferredBlock<Block> WHITE_ARILUM_LANTERN = register("white_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.SNOW));
+    public static final DeferredBlock<Block> ORANGE_ARILUM_LANTERN = register("orange_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_ORANGE));
     public static final DeferredBlock<Block> MAGENTA_ARILUM_LANTERN = register("magenta_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_MAGENTA));
+    public static final DeferredBlock<Block> LIGHT_BLUE_ARILUM_LANTERN = register("light_blue_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_LIGHT_BLUE));
+
     public static final DeferredBlock<Block> YELLOW_ARILUM_LANTERN = register("yellow_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_YELLOW));
+    public static final DeferredBlock<Block> LIME_ARILUM_LANTERN = register("lime_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_LIGHT_GREEN));
+    public static final DeferredBlock<Block> PINK_ARILUM_LANTERN = register("pink_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_PINK));
+    public static final DeferredBlock<Block> GRAY_ARILUM_LANTERN = register("gray_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_GRAY));
+    public static final DeferredBlock<Block> LIGHT_GRAY_ARILUM_LANTERN = register("light_gray_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_LIGHT_GRAY));
+    public static final DeferredBlock<Block> CYAN_ARILUM_LANTERN = register("cyan_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_CYAN));
+    public static final DeferredBlock<Block> PURPLE_ARILUM_LANTERN = register("purple_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_PURPLE));
+    public static final DeferredBlock<Block> BLUE_ARILUM_LANTERN = register("blue_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_BLUE));
+    public static final DeferredBlock<Block> BROWN_ARILUM_LANTERN = register("brown_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_BROWN));
+    public static final DeferredBlock<Block> GREEN_ARILUM_LANTERN = register("green_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_GREEN));
+    public static final DeferredBlock<Block> RED_ARILUM_LANTERN = register("red_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_RED));
+    public static final DeferredBlock<Block> BLACK_ARILUM_LANTERN = register("black_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_BLACK));
 
 
     // Utility
