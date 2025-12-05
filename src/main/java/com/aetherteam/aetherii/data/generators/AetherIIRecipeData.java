@@ -983,10 +983,22 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.BRETTL_GRASS.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.BRETTL_GRASS_BUNDLE, "brettl_grass", "brettl_grass");
 
         // Arilum Lantern
-        this.arilumLantern(getter, AetherIIBlocks.LIME_ARILUM_LANTERN, Items.LIME_DYE);
-        this.arilumLantern(getter, AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN, Items.LIGHT_BLUE_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.WHITE_ARILUM_LANTERN, Items.WHITE_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.ORANGE_ARILUM_LANTERN, Items.ORANGE_DYE);
         this.arilumLantern(getter, AetherIIBlocks.MAGENTA_ARILUM_LANTERN, Items.MAGENTA_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN, Items.LIGHT_BLUE_DYE);
         this.arilumLantern(getter, AetherIIBlocks.YELLOW_ARILUM_LANTERN, Items.YELLOW_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.LIME_ARILUM_LANTERN, Items.LIME_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.PINK_ARILUM_LANTERN, Items.PINK_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.GRAY_ARILUM_LANTERN, Items.GRAY_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.LIGHT_GRAY_ARILUM_LANTERN, Items.LIGHT_GRAY_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.CYAN_ARILUM_LANTERN, Items.CYAN_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.PURPLE_ARILUM_LANTERN, Items.PURPLE_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.BLUE_ARILUM_LANTERN, Items.BLUE_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.BROWN_ARILUM_LANTERN, Items.BROWN_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.GREEN_ARILUM_LANTERN, Items.GREEN_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.RED_ARILUM_LANTERN, Items.RED_DYE);
+        this.arilumLantern(getter, AetherIIBlocks.BLACK_ARILUM_LANTERN, Items.BLACK_DYE);
 
         // Utility
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBROSIUM_TORCH.get(), 4)
