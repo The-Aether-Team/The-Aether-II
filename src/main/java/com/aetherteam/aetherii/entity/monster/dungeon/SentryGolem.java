@@ -163,7 +163,7 @@ public class SentryGolem extends Monster implements RangedAttackMob {
                 this.attackReadyAnimationState.stop();
                 this.attackRangeReadyAnimationState.startIfStopped(this.tickCount);
             }
-        } else if (this.isAggressive() && !this.isRanged() && !this.attackAnimationState.isStarted()) {
+        } else if (this.isAggressive() && !this.attackAnimationState.isStarted()) {
             this.attackReadyAnimationState.startIfStopped(this.tickCount);
             this.attackRangeAnimationState.stop();
             this.attackRangeReadyAnimationState.stop();
@@ -276,6 +276,12 @@ public class SentryGolem extends Monster implements RangedAttackMob {
     @Override
     public void addAdditionalSaveData(ValueOutput tag) {
         super.addAdditionalSaveData(tag);
+    }
+
+    @Override
+    public boolean doHurtTarget(ServerLevel p_376642_, Entity p_21372_) {
+        p_376642_.broadcastEntityEvent(this, (byte) 4);
+        return super.doHurtTarget(p_376642_, p_21372_);
     }
 
     public static class ThrowExplosiveAttackGoal extends Goal {

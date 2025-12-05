@@ -34,6 +34,13 @@ public class SentryGolemRenderer extends MobRenderer<SentryGolem, SentryGolemRen
         super.extractRenderState(sentryGolem, renderState, p_361157_);
         ArmedEntityRenderState.extractArmedEntityRenderState(sentryGolem, renderState, itemModelResolver);
         renderState.ranged = sentryGolem.isRanged();
+        renderState.idleAnimationState.copyFrom(sentryGolem.idleAnimationState);
+        renderState.checkSelfAnimationState.copyFrom(sentryGolem.checkSelfAnimationState);
+        renderState.lookAroundAnimationState.copyFrom(sentryGolem.lookAroundAnimationState);
+        renderState.attackAnimationState.copyFrom(sentryGolem.attackAnimationState);
+        renderState.attackRangeAnimationState.copyFrom(sentryGolem.attackRangeAnimationState);
+        renderState.attackReadyAnimationState.copyFrom(sentryGolem.attackReadyAnimationState);
+        renderState.attackRangeReadyAnimationState.copyFrom(sentryGolem.attackRangeReadyAnimationState);
     }
 
     @Override
