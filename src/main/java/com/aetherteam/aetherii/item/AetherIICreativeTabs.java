@@ -1,7 +1,5 @@
 package com.aetherteam.aetherii.item;
 
-import java.util.List;
-
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEntities;
@@ -10,7 +8,6 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.BuildupContents;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
@@ -26,6 +23,8 @@ import net.minecraft.world.item.component.ItemLore;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.List;
 
 public class AetherIICreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, AetherII.MODID);
@@ -832,6 +831,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.AERWHALE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG.get());
                 output.accept(AetherIIItems.DETONATION_SENTRY_SPAWN_EGG.get());
+                output.accept(AetherIIItems.SENTRY_GOLEM_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG.get());

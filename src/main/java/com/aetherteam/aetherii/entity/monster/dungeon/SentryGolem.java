@@ -186,6 +186,7 @@ public class SentryGolem extends Monster implements RangedAttackMob {
             this.attackRangeAnimationState.start(this.tickCount);
             this.attackRangeReadyAnimationState.stop();
             this.checkSelfAnimationState.stop();
+            this.attackRangeAnimationTick = 0;
         } else {
             super.handleEntityEvent(p_21375_);
         }

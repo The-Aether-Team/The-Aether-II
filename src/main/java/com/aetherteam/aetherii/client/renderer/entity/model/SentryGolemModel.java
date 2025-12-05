@@ -131,8 +131,6 @@ public class SentryGolemModel extends EntityModel<SentryGolemRenderState> implem
     @Override
     public void setupAnim(SentryGolemRenderState golem) {
         super.setupAnim(golem);
-        this.head.yRot = golem.yRot * Mth.DEG_TO_RAD;
-
         float f = golem.walkAnimationSpeed;
         float f1 = golem.walkAnimationPos;
         this.head.xRot = (golem.xRot * Mth.DEG_TO_RAD) + 0.0873F;
