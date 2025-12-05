@@ -687,10 +687,22 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.CORROBONITE_BLOCK, "Block of Corrobonite");
 
         // Arilum Lantern
-        this.addBlock(AetherIIBlocks.LIME_ARILUM_LANTERN, "Lime Arilum Lantern");
-        this.addBlock(AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN, "Light Blue Arilum Lantern");
+        this.addBlock(AetherIIBlocks.WHITE_ARILUM_LANTERN, "White Arilum Lantern");
+        this.addBlock(AetherIIBlocks.ORANGE_ARILUM_LANTERN, "Orange Arilum Lantern");
         this.addBlock(AetherIIBlocks.MAGENTA_ARILUM_LANTERN, "Magenta Arilum Lantern");
+        this.addBlock(AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN, "Light Blue Arilum Lantern");
         this.addBlock(AetherIIBlocks.YELLOW_ARILUM_LANTERN, "Yellow Arilum Lantern");
+        this.addBlock(AetherIIBlocks.LIME_ARILUM_LANTERN, "Lime Arilum Lantern");
+        this.addBlock(AetherIIBlocks.PINK_ARILUM_LANTERN, "Pink Arilum Lantern");
+        this.addBlock(AetherIIBlocks.GRAY_ARILUM_LANTERN, "Gray Arilum Lantern");
+        this.addBlock(AetherIIBlocks.LIGHT_GRAY_ARILUM_LANTERN, "Light Gray Arilum Lantern");
+        this.addBlock(AetherIIBlocks.CYAN_ARILUM_LANTERN, "Cyan Arilum Lantern");
+        this.addBlock(AetherIIBlocks.PURPLE_ARILUM_LANTERN, "Purple Arilum Lantern");
+        this.addBlock(AetherIIBlocks.BLUE_ARILUM_LANTERN, "Blue Arilum Lantern");
+        this.addBlock(AetherIIBlocks.BROWN_ARILUM_LANTERN, "Brown Arilum Lantern");
+        this.addBlock(AetherIIBlocks.GREEN_ARILUM_LANTERN, "Green Arilum Lantern");
+        this.addBlock(AetherIIBlocks.RED_ARILUM_LANTERN, "Red Arilum Lantern");
+        this.addBlock(AetherIIBlocks.BLACK_ARILUM_LANTERN, "Black Arilum Lantern");
 
         // Utility
         this.addBlock(AetherIIBlocks.AMBROSIUM_TORCH, "Ambrosium Torch");
@@ -1323,9 +1335,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addCreativeTabs() {
         // Creative Tabs
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_BUILDING_BLOCKS.get(), "Aether II Building Blocks");
-        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_COLORED_BLOCKS.get(), "Aether II Colored Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_NATURAL_BLOCKS.get(), "Aether II Natural Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_FUNCTIONAL_BLOCKS.get(), "Aether II Functional Blocks");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_EQUIPMENT_AND_UTILITIES.get(), "Aether II Equipment & Utilities");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_ARMOR_AND_ACCESSORIES.get(), "Aether II Armor & Accessories");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_CONSUMABLES.get(), "Aether II Consumables");
