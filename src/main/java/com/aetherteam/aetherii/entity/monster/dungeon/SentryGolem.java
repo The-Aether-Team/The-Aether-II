@@ -53,7 +53,7 @@ public class SentryGolem extends Monster implements RangedAttackMob {
 
     private int idleAnimationCooldown;
     private int idleTick;
-    public final int idleLength = 60;
+    public final int idleLength = 120;
 
 
     public SentryGolem(EntityType<? extends SentryGolem> entityType, Level level) {
