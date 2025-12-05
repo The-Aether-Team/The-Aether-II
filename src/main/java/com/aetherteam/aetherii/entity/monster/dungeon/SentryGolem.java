@@ -38,8 +38,27 @@ public class SentryGolem extends Monster implements RangedAttackMob {
     public int avoidCooldown;
     private SentryGolemStrollGoal randomStrollGoal;
 
+    public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState checkSelfAnimationState = new AnimationState();
+    public final AnimationState lookAroundAnimationState = new AnimationState();
+    public final AnimationState attackAnimationState = new AnimationState();
+    public final AnimationState attackReadyAnimationState = new AnimationState();
+    public final AnimationState attackRangeReadyAnimationState = new AnimationState();
+    public final AnimationState attackRangeAnimationState = new AnimationState();
+
+    public int attackAnimationTick;
+    public final int attackAnimationLength = 20;
+    public int attackRangeAnimationTick;
+    public final int attackRangeAnimationLength = 20;
+
+    private int idleAnimationCooldown;
+    private int idleTick;
+    public final int idleLength = 60;
+
+
     public SentryGolem(EntityType<? extends SentryGolem> entityType, Level level) {
         super(entityType, level);
+        this.setupIdleAnimationCooldown();
     }
 
     @Override
@@ -86,6 +105,89 @@ public class SentryGolem extends Monster implements RangedAttackMob {
             } else {
                 this.randomStrollGoal.setInterval(RandomStrollGoal.DEFAULT_INTERVAL);
             }
+        } else {
+            this.setupAnimationStates();
+        }
+    }
+
+    private void setupIdleAnimationCooldown() {
+        this.idleAnimationCooldown = 200 + this.random.nextInt(200);
+    }
+
+    private void setupAnimationStates() {
+        if (this.isRanged() || this.isAggressive() || this.hurtTime > 0) {
+            this.checkSelfAnimationState.stop();
+            this.lookAroundAnimationState.stop();
+        } else if (--this.idleAnimationCooldown <= 0) {
+            if (this.random.nextBoolean()) {
+                this.checkSelfAnimationState.start(this.tickCount);
+            } else {
+                this.lookAroundAnimationState.start(this.tickCount);
+            }
+            this.idleTick = 0;
+            this.idleAnimationState.stop();
+            this.setupIdleAnimationCooldown();
+        }
+
+
+        if (this.idleTick < this.idleLength) {
+            this.idleTick++;
+        }
+
+        if (this.idleTick >= this.idleLength) {
+            this.checkSelfAnimationState.stop();
+            this.lookAroundAnimationState.stop();
+            this.idleAnimationState.startIfStopped(this.tickCount);
+        }
+
+        if (this.attackAnimationTick < this.attackAnimationLength) {
+            this.attackAnimationTick++;
+        }
+
+        if (this.attackAnimationTick >= this.attackAnimationLength) {
+            this.attackAnimationState.stop();
+        }
+
+        if (this.attackRangeAnimationTick < this.attackRangeAnimationLength) {
+            this.attackRangeAnimationTick++;
+        }
+
+        if (this.attackRangeAnimationTick >= this.attackRangeAnimationLength) {
+            this.attackRangeAnimationState.stop();
+        }
+
+
+        if (this.isRanged()) {
+            if (!this.attackRangeAnimationState.isStarted()) {
+                this.attackAnimationState.stop();
+                this.attackReadyAnimationState.stop();
+                this.attackRangeReadyAnimationState.startIfStopped(this.tickCount);
+            }
+        } else if (this.isAggressive() && !this.isRanged() && !this.attackAnimationState.isStarted()) {
+            this.attackReadyAnimationState.startIfStopped(this.tickCount);
+            this.attackRangeAnimationState.stop();
+            this.attackRangeReadyAnimationState.stop();
+        }
+
+    }
+
+    @Override
+    public void handleEntityEvent(byte p_21375_) {
+        if (p_21375_ == 4) {
+            this.attackAnimationState.start(this.tickCount);
+            this.attackReadyAnimationState.stop();
+            this.attackRangeAnimationState.stop();
+            this.attackRangeReadyAnimationState.stop();
+            this.checkSelfAnimationState.stop();
+            this.attackAnimationTick = 0;
+        } else if (p_21375_ == 61) {
+            this.attackAnimationState.stop();
+            this.attackReadyAnimationState.stop();
+            this.attackRangeAnimationState.start(this.tickCount);
+            this.attackRangeReadyAnimationState.stop();
+            this.checkSelfAnimationState.stop();
+        } else {
+            super.handleEntityEvent(p_21375_);
         }
     }
 
@@ -126,6 +228,7 @@ public class SentryGolem extends Monster implements RangedAttackMob {
         bomb.setYRot(this.yBodyRot);
         this.playSound(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_THROW_BOMB.get(), 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.level().addFreshEntity(bomb);
+        this.level().broadcastEntityEvent(this, (byte) 61);
     }
 
     public int getFireTime() {
