@@ -41,7 +41,25 @@ public class LockedBlockSpecialRenderer implements SpecialModelRenderer<BlockSta
 
     @Override
     public void getExtents(Set<Vector3f> set) {
-
+        PoseStack posestack = new PoseStack();
+        Vector3f[] cubeVectors = {
+                new Vector3f(16, 0, 16),
+                new Vector3f(16, 0, 0),
+                new Vector3f(16, 16, 0),
+                new Vector3f(16, 16, 16),
+                new Vector3f(0, 0, 16),
+                new Vector3f(16, 0, 16),
+                new Vector3f(16, 16, 16),
+                new Vector3f(0, 16, 16)
+        };
+        for (int i = 0; i < 8; i++) {
+            Vector3f vertex = cubeVectors[i];
+            float f = vertex.x() / 16.0F;
+            float f1 = vertex.y() / 16.0F;
+            float f2 = vertex.z() / 16.0F;
+            Vector3f vector3f = posestack.last().pose().transformPosition(f, f1, f2, new Vector3f());
+            set.add(vector3f);
+        }
     }
 
     private static void drawSurfaces(MultiBufferSource buffer, PoseStack.Pose pose, float startX, float startZ, float endX, float endZ, float botY, float topY) {
