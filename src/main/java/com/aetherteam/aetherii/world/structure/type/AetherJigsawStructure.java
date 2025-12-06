@@ -1,6 +1,5 @@
-package com.aetherteam.aetherii.world.structure;
+package com.aetherteam.aetherii.world.structure.type;
 
-import com.aetherteam.aetherii.world.structure.type.AetherIIStructureTypes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

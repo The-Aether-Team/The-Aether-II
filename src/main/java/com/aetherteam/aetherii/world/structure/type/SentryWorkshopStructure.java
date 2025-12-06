@@ -28,9 +28,9 @@ import java.util.Optional;
 public class SentryWorkshopStructure extends Structure {
     public static final MapCodec<SentryWorkshopStructure> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(
             settingsCodec(builder),
-            Codec.INT.fieldOf("maxrooms").forGetter(o -> o.maxRooms),
-            Codec.INT.fieldOf("aboveBottom").forGetter(o -> o.aboveBottom),
-            Codec.INT.fieldOf("belowTop").forGetter(o -> o.belowTop),
+            Codec.INT.fieldOf("max_rooms").forGetter(o -> o.maxRooms),
+            Codec.INT.fieldOf("above_bottom").forGetter(o -> o.aboveBottom),
+            Codec.INT.fieldOf("below_top").forGetter(o -> o.belowTop),
             SentryWorkshopProcessorSettings.CODEC.fieldOf("processor_settings").forGetter(o -> o.processors)
     ).apply(builder, SentryWorkshopStructure::new));
 
