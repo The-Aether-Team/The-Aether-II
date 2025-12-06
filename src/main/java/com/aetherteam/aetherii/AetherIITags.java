@@ -101,8 +101,8 @@ public class AetherIITags {
         public static final TagKey<Block> HOVERING_BLOCK_REPLACE_BLACKLIST = tag("hovering_block_replace_blacklist");
         public static final TagKey<Block> NON_SENTRY_WORKSHOP_SPAWNABLE = tag("non_sentry_workshop_spawnable");
         public static final TagKey<Block> NON_TUNNEL_REPLACEABLE = tag("non_tunnel_replaceable");
+        public static final TagKey<Block> LOCKABLE_BLOCKS = tag("lockable_blocks");
 
-        public static final TagKey<Block> LOCKED_DUNGEON_BLOCKS = tag("locked_dungeon_blocks");
         public static final TagKey<Block> SLIDER_UNBREAKABLE = tag("slider_unbreakable");
 
         private static TagKey<Block> tag(String name) {
@@ -135,8 +135,6 @@ public class AetherIITags {
         public static final TagKey<Item> GUARDIAN_LOGS = tag("guardian_logs");
         public static final TagKey<Item> DENSE_GUARDIAN_LOGS = tag("dense_guardian_logs");
         public static final TagKey<Item> DENSE_GUARDIAN_BLOCKS = tag("dense_guardian_blocks");
-
-        public static final TagKey<Item> LOCKED_DUNGEON_BLOCKS = tag("locked_dungeon_blocks");
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");

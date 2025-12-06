@@ -605,6 +605,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
                 output.accept(AetherIIBlocks.SHELF_ROTSHROOM.get());
                 output.accept(AetherIIBlocks.ROTGROWTH_VINES.get());
+                output.accept(AetherIIBlocks.LOCKED_BLOCK.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_EQUIPMENT_AND_UTILITIES = CREATIVE_MODE_TABS.register("equipment_and_utilities", () -> CreativeModeTab.builder()

@@ -6,10 +6,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
-import com.aetherteam.aetherii.client.renderer.block.model.blockstate.AmbientOcclusionLightModel;
-import com.aetherteam.aetherii.client.renderer.block.model.blockstate.FastModel;
-import com.aetherteam.aetherii.client.renderer.block.model.blockstate.MuralModel;
-import com.aetherteam.aetherii.client.renderer.block.model.blockstate.TrunkModel;
+import com.aetherteam.aetherii.client.renderer.block.model.blockstate.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.SentryCrateModel;
@@ -22,10 +19,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiMod
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
-import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
-import com.aetherteam.aetherii.client.renderer.item.model.MuralItemModel;
-import com.aetherteam.aetherii.client.renderer.item.model.SentryCrateSpecialRenderer;
-import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
+import com.aetherteam.aetherii.client.renderer.item.model.*;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Moa;
@@ -308,6 +302,7 @@ public class AetherIIRenderers {
         getModels(event.getBakingResult().blockStateModels(), fastBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new FastModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), List.of(AetherIIBlocks.MURAL)).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new MuralModel(entry.getValue())));
+        getModels(event.getBakingResult().blockStateModels(), List.of(AetherIIBlocks.LOCKED_BLOCK)).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new LockedBlockModel(entry.getValue())));
     }
 
     private static List<Map.Entry<BlockState, BlockStateModel>> getModels(Map<BlockState, BlockStateModel> originalModels, List<DeferredBlock<? extends Block>> blocks) {
@@ -325,5 +320,6 @@ public class AetherIIRenderers {
     public static void registerSpecialModelRenderers(RegisterSpecialModelRendererEvent event) {
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier"), AlkahestPurifierSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_crate"), SentryCrateSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "locked_block"), LockedBlockSpecialRenderer.Unbaked.MAP_CODEC);
     }
 }

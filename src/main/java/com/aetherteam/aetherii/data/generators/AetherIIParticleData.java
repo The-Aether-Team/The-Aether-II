@@ -51,5 +51,7 @@ public class AetherIIParticleData extends ParticleDescriptionProvider {
 
         this.spriteSet(AetherIIParticleTypes.TEMPEST_SMOKE.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tempest_smoke"), 12, false);
         this.sprite(AetherIIParticleTypes.MOA_HUNGRY.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_hungry"));
+
+        this.sprite(AetherIIParticleTypes.LOCKED_BLOCK.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "dungeon_lock"));
     }
 }

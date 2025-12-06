@@ -226,9 +226,6 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get(),
                 AetherIIBlocks.ICESTONE_PILLAR.get()
         );
-        this.tag(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS, AetherIITags.Items.LOCKED_DUNGEON_BLOCKS).add(
-
-        );
     }
 
     protected abstract TagAppender<Block, Block> tag(TagKey<Block> blockKey, TagKey<Item> itemKey);

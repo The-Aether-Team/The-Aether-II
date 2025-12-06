@@ -5,6 +5,6 @@
     "minecraft:chest",
     "aether_ii:skyroot_chest",
     "aether_ii:sentry_crate",
-    "#aether_ii:locked_dungeon_blocks"
+    "aether_ii:locked_block"
   ]
 }

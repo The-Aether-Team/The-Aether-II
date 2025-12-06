@@ -2,6 +2,8 @@ package com.aetherteam.aetherii.client.event.hooks;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Camera;
@@ -18,6 +20,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
@@ -75,7 +78,8 @@ public class LevelClientHooks {
             int z = playerPos.getZ() + level.getRandom().nextInt(range) - level.getRandom().nextInt(range);
             if (!depopulate) { // For checking to add overlays to the world.
                 BlockPos pos = new BlockPos(x, y, z);
-                if (stack.is(level.getBlockState(pos).getBlock().asItem())) { // Add an overlay if the corresponding dungeon block item is held.
+                BlockEntity blockEntity = level.getBlockEntity(pos);
+                if (stack.is(level.getBlockState(pos).getBlock().asItem()) && blockEntity != null && blockEntity.collectComponents().has(AetherIIDataComponents.BLOCK_STATE)) { // Add an overlay if the corresponding dungeon block item is held.
                     if (!positionsForTypes.get(type).contains(pos)) {
                         positionsForTypes.get(type).add(pos);
                     }
@@ -84,7 +88,8 @@ public class LevelClientHooks {
                 List<BlockPos> positions = positionsForTypes.get(type);
                 if (!positions.isEmpty() && level.getRandom().nextInt(100) == 0) {
                     BlockPos pos = positions.get(level.getRandom().nextInt(positions.size()));
-                    if (!stack.is(level.getBlockState(pos).getBlock().asItem())) { // Remove an overlay if the corresponding dungeon block item is not held.
+                    BlockEntity blockEntity = level.getBlockEntity(pos);
+                    if (!stack.is(level.getBlockState(pos).getBlock().asItem()) || blockEntity == null || !blockEntity.collectComponents().has(AetherIIDataComponents.BLOCK_STATE)) { // Remove an overlay if the corresponding dungeon block item is not held.
                         positions.remove(pos);
                         positionsForTypes.put(type, positions);
                     }
@@ -217,7 +222,7 @@ public class LevelClientHooks {
      * @return The corresponding {@link Integer} ID.
      */
     private static int idForItem(ItemStack stack) {
-        if (stack.is(AetherIITags.Items.LOCKED_DUNGEON_BLOCKS)) {
+        if (stack.is(AetherIIBlocks.LOCKED_BLOCK.asItem())) {
             return 0;
             //} else if (stack.is(AetherTags.Items.TRAPPED_DUNGEON_BLOCKS)) {
             //     return 1;

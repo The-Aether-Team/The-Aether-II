@@ -10,8 +10,10 @@ import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import com.aetherteam.aetherii.client.renderer.item.model.LockedBlockSpecialRenderer;
 import com.aetherteam.aetherii.client.renderer.item.model.MuralItemModel;
 import com.aetherteam.aetherii.client.renderer.item.model.SentryCrateSpecialRenderer;
+import com.aetherteam.aetherii.client.renderer.item.properties.conditional.HasBlockState;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.aetherteam.aetherii.AetherII;
@@ -1063,6 +1065,17 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         ResourceLocation model = ModelTemplates.CHEST_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
         ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(model, new SentryCrateSpecialRenderer.Unbaked(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal")));
         this.itemModelOutput.accept(item, unbaked);
+    }
+
+    public void createLockedBlock(Block block) {
+        ResourceLocation lock = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/dungeon_lock");
+        MultiVariant multivariant = plainVariant(ModelTemplates.PARTICLE_ONLY.create(block, TextureMapping.particle(lock), this.modelOutput));
+        this.blockStateOutput.accept(createSimpleBlock(block, multivariant));
+
+        LockedBlockSpecialRenderer.Unbaked unbaked = new LockedBlockSpecialRenderer.Unbaked();
+        ResourceLocation base = ModelTemplates.CHEST_INVENTORY.create(block.asItem(), TextureMapping.particle(block), this.modelOutput);
+        ResourceLocation baseFlat = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(block.asItem(), "_flat"), TextureMapping.layer0(lock), this.modelOutput);
+        this.itemModelOutput.accept(block.asItem(), ItemModelUtils.conditional(new HasBlockState(), ItemModelUtils.specialModel(base, unbaked), ItemModelUtils.plainModel(baseFlat)));
     }
 
     public void createLadder(Block block) {

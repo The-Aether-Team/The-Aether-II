@@ -761,6 +761,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SENTRY_SPAWNER, "Sentry Spawner");
         this.addBlock(AetherIIBlocks.SENTRY_TRAP, "Sentry Trap");
 
+        this.addBlock(AetherIIBlocks.LOCKED_BLOCK, "Locked Block");
+
         this.addBlock(AetherIIBlocks.SKYROOT_SIGN, "Skyroot Sign");
         this.addBlock(AetherIIBlocks.SKYROOT_HANGING_SIGN, "Skyroot Hanging Sign");
 
