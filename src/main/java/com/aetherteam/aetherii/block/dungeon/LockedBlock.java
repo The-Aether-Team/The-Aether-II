@@ -31,7 +31,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
 
-public class LockedBlock extends BaseEntityBlock { //todo LIMITS FOR WHAT CAN BE ADDED TO THIS BLOCK; maybe an item tag
+public class LockedBlock extends BaseEntityBlock {
     public static final MapCodec<LockedBlock> CODEC = simpleCodec(LockedBlock::new);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
