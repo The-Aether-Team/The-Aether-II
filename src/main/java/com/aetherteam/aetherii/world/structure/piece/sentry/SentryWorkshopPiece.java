@@ -2,7 +2,10 @@ package com.aetherteam.aetherii.world.structure.piece.sentry;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.construction.SentryBlock;
 import com.aetherteam.aetherii.world.structure.piece.AetherTemplateStructurePiece;
+import com.google.common.collect.ImmutableList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -22,17 +25,25 @@ public abstract class SentryWorkshopPiece extends AetherTemplateStructurePiece {
     // This helps Bronze Dungeons merge more cleanly when they overlap, and blends the tunnels in with the landscape.
     public static final ProtectedBlockProcessor AVOID_DUNGEONS = new ProtectedBlockProcessor(AetherIITags.Blocks.NON_TUNNEL_REPLACEABLE);
 
-//    public static final RuleProcessor LOCKED_SENTRY_STONE = new RuleProcessor(ImmutableList.of(
-//            new ProcessorRule(new RandomBlockMatchTest(AetherBlocks.LOCKED_CARVED_STONE.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherBlocks.LOCKED_SENTRY_STONE.get().defaultBlockState())
-//    ));
-//    public static final RuleProcessor BRONZE_DUNGEON_STONE = new RuleProcessor(ImmutableList.of(
-//            new ProcessorRule(new RandomBlockMatchTest(AetherBlocks.CARVED_STONE.get(), 0.1F), AlwaysTrueTest.INSTANCE, AetherBlocks.SENTRY_STONE.get().defaultBlockState()),
-//            new ProcessorRule(new RandomBlockMatchTest(AetherBlocks.HOLYSTONE.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherBlocks.MOSSY_HOLYSTONE.get().defaultBlockState())
-//    ));
-//    public static final RuleProcessor TRAPPED_CARVED_STONE = new RuleProcessor(ImmutableList.of(
-//            new ProcessorRule(new RandomBlockMatchTest(AetherBlocks.CARVED_STONE.get(), 0.13F), AlwaysTrueTest.INSTANCE, ON_FLOOR, AetherBlocks.TRAPPED_CARVED_STONE.get().defaultBlockState()),
-//            new ProcessorRule(new RandomBlockMatchTest(AetherBlocks.SENTRY_STONE.get(), 0.003F), AlwaysTrueTest.INSTANCE, ON_FLOOR, AetherBlocks.TRAPPED_SENTRY_STONE.get().defaultBlockState())
-//    ));
+    public static final RuleProcessor SENTRY_STONE = new RuleProcessor(ImmutableList.of(
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_BRICKS.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_BRICKS.get().defaultBlockState()),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_FLAGSTONES.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_FLAGSTONES.get().defaultBlockState()),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_TILE.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_TILE.get().defaultBlockState()),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_BASE_BRICKS.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_BASE_BRICKS.get().defaultBlockState()),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_CAPSTONE_BRICKS.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_CAPSTONE_BRICKS.get().defaultBlockState()),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_BASE_PILLAR.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_BASE_PILLAR.get().defaultBlockState()),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_CAPSTONE_PILLAR.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_CAPSTONE_PILLAR.get().defaultBlockState()),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_PILLAR.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_PILLAR.get().defaultBlockState()),
+
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_BRICKS.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_BRICKS.get().defaultBlockState().setValue(SentryBlock.LIT, false)),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_FLAGSTONES.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_FLAGSTONES.get().defaultBlockState().setValue(SentryBlock.LIT, false)),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_TILE.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_TILE.get().defaultBlockState().setValue(SentryBlock.LIT, false)),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_BASE_BRICKS.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_BASE_BRICKS.get().defaultBlockState().setValue(SentryBlock.LIT, false)),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_CAPSTONE_BRICKS.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_CAPSTONE_BRICKS.get().defaultBlockState().setValue(SentryBlock.LIT, false)),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_BASE_PILLAR.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_BASE_PILLAR.get().defaultBlockState().setValue(SentryBlock.LIT, false)),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_CAPSTONE_PILLAR.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_CAPSTONE_PILLAR.get().defaultBlockState().setValue(SentryBlock.LIT, false)),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_PILLAR.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_PILLAR.get().defaultBlockState().setValue(SentryBlock.LIT, false))
+    ));
 
     public SentryWorkshopPiece(StructurePieceType type, StructureTemplateManager manager, String name, StructurePlaceSettings settings, BlockPos pos, Holder<StructureProcessorList> processors) {
         this(type, manager, makeLocation(name), settings, pos, processors);
@@ -47,6 +58,6 @@ public abstract class SentryWorkshopPiece extends AetherTemplateStructurePiece {
     }
 
     protected static ResourceLocation makeLocation(String name) {
-        return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry/" + name);
+        return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/" + name);
     }
 }

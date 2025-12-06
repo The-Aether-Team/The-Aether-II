@@ -123,7 +123,7 @@ public class SentryWorkshopStructure extends Structure {
                 generator.getBaseColumn(maxX, minZ, heightAccessor, random),
                 generator.getBaseColumn(maxX, maxZ, heightAccessor, random)
         };
-        int roomHeight = checkRoomHeight(templateManager, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry/boss_room"));
+        int roomHeight = checkRoomHeight(templateManager, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/boss_room"));
         int height = heightAccessor.getMinY();
         int maxHeight = heightAccessor.getMaxY() - belowTop;
         int thickness = roomHeight + 2;
