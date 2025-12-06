@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.renderer.entity.animation.SentryGolemAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.state.SentryGolemRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.animation.KeyframeAnimation;
@@ -16,15 +17,6 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class SentryGolemModel extends EntityModel<SentryGolemRenderState> implements ArmedModel {
-    public static final AnimationHolder RUN_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_golem/run")); //todo
-    public static final AnimationHolder WALK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_golem/walk"));
-    public static final AnimationHolder IDLE_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_golem/idle"));
-    public static final AnimationHolder CHECK_SELF_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_golem/check_self"));
-    public static final AnimationHolder LOOK_AROUND_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_golem/look_around"));
-    public static final AnimationHolder RANGE_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_golem/fire_ranged_weapon"));
-    public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_golem/swing_melee_weapon"));
-    public static final AnimationHolder RANGE_ATTACK_READY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_golem/ready_ranged_weapon"));
-    public static final AnimationHolder ATTACK_READY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_golem/ready_melee_weapon"));
     private final KeyframeAnimation runAnimation;
     private final KeyframeAnimation walkAnimation;
     private final KeyframeAnimation idleAnimation;
@@ -61,15 +53,15 @@ public class SentryGolemModel extends EntityModel<SentryGolemRenderState> implem
         this.right_arm_bottom = this.right_arm.getChild("right_arm_bottom");
         this.left_leg = this.body.getChild("left_leg");
         this.right_leg = this.body.getChild("right_leg");
-        this.runAnimation = RUN_ANIMATION.get().bake(root);
-        this.walkAnimation = WALK_ANIMATION.get().bake(root);
-        this.idleAnimation = IDLE_ANIMATION.get().bake(root);
-        this.checkSelfAnimation = CHECK_SELF_ANIMATION.get().bake(root);
-        this.lookAroundAnimation = LOOK_AROUND_ANIMATION.get().bake(root);
-        this.rangeAttackAnimation = RANGE_ATTACK_ANIMATION.get().bake(root);
-        this.attackAnimation = ATTACK_ANIMATION.get().bake(root);
-        this.rangeAttackReadyAnimation = RANGE_ATTACK_READY_ANIMATION.get().bake(root);
-        this.attackReadyAnimation = ATTACK_READY_ANIMATION.get().bake(root);
+        this.runAnimation = SentryGolemAnimation.run.bake(root);
+        this.walkAnimation = SentryGolemAnimation.walk.bake(root);
+        this.idleAnimation = SentryGolemAnimation.idle.bake(root);
+        this.checkSelfAnimation = SentryGolemAnimation.check_self.bake(root);
+        this.lookAroundAnimation = SentryGolemAnimation.look_around.bake(root);
+        this.rangeAttackAnimation = SentryGolemAnimation.fire_ranged_weapon.bake(root);
+        this.attackAnimation = SentryGolemAnimation.swing_melee_weapon.bake(root);
+        this.rangeAttackReadyAnimation = SentryGolemAnimation.ready_ranged_weapon.bake(root);
+        this.attackReadyAnimation = SentryGolemAnimation.ready_melee_weapon.bake(root);
     }
 
     public static LayerDefinition createBodyLayer() {
