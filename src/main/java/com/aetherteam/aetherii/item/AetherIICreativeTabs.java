@@ -832,7 +832,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.AERWHALE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG.get());
                 output.accept(AetherIIItems.DETONATION_SENTRY_SPAWN_EGG.get());
-                output.accept(AetherIIItems.SENTRY_GOLEM_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG.get());
