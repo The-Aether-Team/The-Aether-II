@@ -98,6 +98,14 @@ public class LockedBlock extends BaseEntityBlock { //todo LIMITS FOR WHAT CAN BE
     }
 
     @Override
+    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+        if (level.getBlockEntity(pos) instanceof LockedBlockEntity lockedBlockEntity && lockedBlockEntity.getMimicState() != null) {
+            return lockedBlockEntity.getMimicState().getLightEmission(level, pos);
+        }
+        return super.getLightEmission(state, level, pos);
+    }
+
+    @Override
     public MapColor getMapColor(BlockState state, BlockGetter level, BlockPos pos, MapColor defaultColor) {
         if (level.getBlockEntity(pos) instanceof LockedBlockEntity lockedBlockEntity && lockedBlockEntity.getMimicState() != null) {
             return lockedBlockEntity.getMimicState().getMapColor(level, pos);
