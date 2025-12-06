@@ -75,10 +75,10 @@ public class SentryWorkshopBuilder {
         this.random = context.random();
         this.processors = processors;
 
-        Vec3i nodeSize = context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry/chest_room")).getSize();
+        Vec3i nodeSize = context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/chest_room")).getSize();
         this.nodeWidth = nodeSize.getX();
 
-        Vec3i edgeSize = context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry/square_tunnel")).getSize();
+        Vec3i edgeSize = context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/square_tunnel")).getSize();
         this.edgeWidth = edgeSize.getX();
         this.edgeLength = edgeSize.getZ();
 
@@ -88,7 +88,7 @@ public class SentryWorkshopBuilder {
     public void initializeDungeon(BlockPos startPos, Structure.GenerationContext genContext, StructurePiecesBuilder builder) {
         ROOM_OPTIONS = ROOM_OPTIONS_BUILDER.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, (e) -> e.getValue().build()));
 
-        StructureTemplate bossTemplate = this.context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry/boss_room"));
+        StructureTemplate bossTemplate = this.context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/boss_room"));
 
         Rotation rotation = getBossRoomRotation(startPos, startPos.offset(bossTemplate.getSize()));
         if (rotation == null) { // The space may not be big enough for multiple rooms. If so, stop trying.
@@ -297,7 +297,7 @@ public class SentryWorkshopBuilder {
      */
     @Nullable
     private Rotation getBossRoomRotation(BlockPos minPos, BlockPos maxPos) {
-        StructureTemplate template = this.context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry/chest_room"));
+        StructureTemplate template = this.context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/chest_room"));
         RandomSource random = this.context.random();
         BoundingBox bossBox = new BoundingBox(minPos.getX(), minPos.getY(), minPos.getZ(), maxPos.getX(), maxPos.getY(), maxPos.getZ());
 

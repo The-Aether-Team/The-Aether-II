@@ -47,6 +47,6 @@ public abstract class SentryWorkshopPiece extends AetherTemplateStructurePiece {
     }
 
     protected static ResourceLocation makeLocation(String name) {
-        return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry/" + name);
+        return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/" + name);
     }
 }
