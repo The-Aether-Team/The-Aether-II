@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.world.structure.type;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.world.structure.AetherJigsawStructure;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.neoforged.neoforge.registries.DeferredHolder;

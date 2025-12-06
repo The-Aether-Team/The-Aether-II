@@ -6,7 +6,7 @@ import com.aetherteam.aetherii.data.resources.builders.worldgen.AetherIIStructur
 import com.aetherteam.aetherii.data.resources.registries.pools.CampHighfieldsPools;
 import com.aetherteam.aetherii.data.resources.registries.pools.InfectedGuardianTreePools;
 import com.aetherteam.aetherii.data.resources.registries.pools.OutpostPools;
-import com.aetherteam.aetherii.world.structure.AetherJigsawStructure;
+import com.aetherteam.aetherii.world.structure.type.AetherJigsawStructure;
 import com.aetherteam.aetherii.world.structure.piece.sentry.SentryWorkshopProcessorSettings;
 import com.aetherteam.aetherii.world.structure.type.SentryWorkshopStructure;
 import net.minecraft.core.HolderGetter;

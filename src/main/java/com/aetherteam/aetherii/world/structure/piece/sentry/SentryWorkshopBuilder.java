@@ -113,8 +113,6 @@ public class SentryWorkshopBuilder {
             }
 
             this.propagateRooms(defaultRoom, chunkPos, true);
-            StructurePiece lobby = this.nodes.getLast();
-            this.buildEndTunnel(lobby, startPos);
             this.buildSurfaceTunnel(genContext.heightAccessor(), genContext.chunkGenerator(), genContext.randomState());
 
             this.populatePiecesBuilder(builder);
@@ -171,27 +169,6 @@ public class SentryWorkshopBuilder {
         return false;
     }
 
-    private void buildEndTunnel(StructurePiece lobby, BlockPos origin) {
-        Rotation rotation = lobby.getRotation();
-        List<Rotation> rotations = new ArrayList<>(3);
-        rotations.add(rotation.getRotated(Rotation.COUNTERCLOCKWISE_90));
-        rotations.add(rotation);
-        rotations.add(rotation.getRotated(Rotation.CLOCKWISE_90));
-        List<StructurePiece> longestTunnel = null;
-        for (int i = 3; i > 0; i--) {
-            List<StructurePiece> tunnel = new ArrayList<>();
-            rotation = rotations.remove(this.random.nextInt(i));
-            Direction direction = rotation.rotate(Direction.SOUTH);
-            if (buildTunnelFromRoom(lobby, tunnel, rotation, direction, origin)) {
-                longestTunnel = tunnel;
-                break;
-            } else if (longestTunnel == null || tunnel.size() > longestTunnel.size()) {
-                longestTunnel = tunnel;
-            }
-        }
-        this.nodes.addAll(longestTunnel);
-    }
-
     @Nullable
     @SuppressWarnings("SameParameterValue")
     private StructurePiece seekLastRoomNode(int minWidth) {
@@ -238,60 +215,6 @@ public class SentryWorkshopBuilder {
         this.nodes.add(new SentryWorkshopSurfaceRuins(upwardsTunnelBox));
     }
 
-    /**
-     * Builds a tunnel from a symmetrical room to make an entrance.
-     *
-     * @param connectedRoom The {@link StructurePiece} for the room that the tunnel leads to.
-     * @param list          The {@link List} of {@link StructurePiece}s to add to.
-     * @param rotation      The {@link Rotation} of the template.
-     * @param direction     The {@link Direction} to build in.
-     * @param origin        The start {@link BlockPos} of the structure.
-     * @return Whether the tunnel should stop generating, as a {@link Boolean}.
-     */
-    public boolean buildTunnelFromRoom(StructurePiece connectedRoom, List<StructurePiece> list, Rotation rotation, Direction direction, BlockPos origin) {
-        StructureTemplate template = this.manager.getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry/entrance"));
-        BlockPos startPos = BlockLogicUtil.tunnelFromEvenSquareRoom(connectedRoom.getBoundingBox(), direction, template.getSize().getX());
-        SentryWorkshopPiece entrance = this.chooseRoom("entrance", startPos, rotation, this.processors.roomSettings());
-        list.add(entrance);
-        startPos = startPos.relative(direction);
-
-        int length = template.getSize().getZ();
-        boolean noOverlap = false;
-        boolean reachedAir = false;
-        BlockPos pos;
-        int i = 0;
-        do {
-            pos = startPos.relative(direction, i);
-            SentryWorkshopPiece tunnel = this.chooseRoom("end_corridor", pos, rotation, this.processors.tunnelSettings());
-
-            // Skip the connected piece, since the tunnel will be digging into it.
-            StructurePiece col = null;
-            for (StructurePiece piece : this.nodes) {
-                if (piece != null && piece != connectedRoom && piece.getBoundingBox().intersects(tunnel.getBoundingBox())) {
-                    col = piece;
-                    break;
-                }
-            }
-            if (col != null) {
-                break;
-            } else {
-                noOverlap = true;
-                list.add(tunnel);
-                connectedRoom = tunnel;
-            }
-            i += length;
-
-            // If the tunnel doesn't find an opening, we can try making another one.
-            if (this.checkForAirAtPos(pos.getX(), pos.getY(), pos.getZ()) && this.checkForAirAtPos(pos.getX(), tunnel.getBoundingBox().maxY(), pos.getZ())) {
-                reachedAir = true;
-                break;
-            }
-
-        } while (Math.abs(origin.getX() - pos.getX()) < 100 && Math.abs(origin.getZ() - pos.getZ()) < 100); // At some point, the tunnel should cut off to avoid issues.
-
-        return noOverlap && reachedAir;
-    }
-
     public SentryWorkshopPiece chooseRoom(String name, BlockPos pos, Rotation rotation, Holder<StructureProcessorList> processors) {
         WeightedList<RoomProvider<?>> list = ROOM_OPTIONS.get(name);
         if (list != null) {
@@ -326,11 +249,6 @@ public class SentryWorkshopBuilder {
     private boolean hasConnection(StructurePiece node, Direction direction) {
         Map<Direction, Connection> map = this.edges.get(node);
         return map != null && map.containsKey(direction);
-    }
-
-    private boolean checkForAirAtPos(int x, int y, int z) {
-        NoiseColumn column = this.context.chunkGenerator().getBaseColumn(x, z, this.context.heightAccessor(), this.context.randomState());
-        return column.getBlock(y).isAir();
     }
 
     /**
