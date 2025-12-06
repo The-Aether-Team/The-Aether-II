@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.block.dungeon;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.blockentity.LockedBlockEntity;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -126,7 +127,8 @@ public class LockedBlock extends BaseEntityBlock { //todo LIMITS FOR WHAT CAN BE
         if (minecraft.gameMode != null && minecraft.gameMode.getPlayerMode() == GameType.CREATIVE && minecraft.player != null && minecraft.level != null) {
             ItemStack itemStack = minecraft.player.getMainHandItem();
             Item item = itemStack.getItem();
-            if (item instanceof BlockItem blockItem) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (item instanceof BlockItem blockItem && (blockEntity == null || !blockEntity.collectComponents().has(AetherIIDataComponents.BLOCK_STATE))) {
                 if (blockItem.getBlock() == this) {
                     minecraft.level.addParticle(AetherIIParticleTypes.LOCKED_BLOCK.get(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0.0, 0.0, 0.0);
                 }
