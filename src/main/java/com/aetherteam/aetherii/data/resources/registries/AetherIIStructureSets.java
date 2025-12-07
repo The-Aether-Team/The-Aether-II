@@ -44,6 +44,6 @@ public class AetherIIStructureSets {
         );
 
         context.register(SENTRY_WORKSHOP, new StructureSet(structures.getOrThrow(AetherIIStructures.SENTRY_WORKSHOP),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 0.5F, 32146754, Optional.empty(), 12, 5, RandomSpreadType.TRIANGULAR)));
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 0.75F, 32146754, Optional.empty(), 10, 4, RandomSpreadType.TRIANGULAR)));
     }
 }
