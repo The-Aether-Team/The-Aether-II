@@ -82,7 +82,6 @@ public class AetherIIBlockFamilies {
             .slab(AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get())
             .stairs(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get())
             .button(AetherIIBlocks.UNDERSHALE_BRICK_BUTTON.get())
-            .pressurePlate(AetherIIBlocks.UNDERSHALE_BRICK_PRESSURE_PLATE.get())
             .getFamily();
     public static final BlockFamily ICHORITE = familyBuilder(AetherIIBlocks.ICHORITE.get())
             .wall(AetherIIBlocks.ICHORITE_WALL.get())

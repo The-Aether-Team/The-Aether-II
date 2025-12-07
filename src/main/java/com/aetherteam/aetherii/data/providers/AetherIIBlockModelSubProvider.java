@@ -406,6 +406,13 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.registerSimpleItemModel(side, ModelLocationUtils.getModelLocation(side));
     }
 
+    public void pressurePlate(Block pressurePlateBlock) {
+        TextureMapping mapping = TextureMapping.cube(pressurePlateBlock);
+        MultiVariant multivariant = BlockModelGenerators.plainVariant(ModelTemplates.PRESSURE_PLATE_UP.create(pressurePlateBlock, mapping, this.modelOutput));
+        MultiVariant multivariant1 = BlockModelGenerators.plainVariant(ModelTemplates.PRESSURE_PLATE_DOWN.create(pressurePlateBlock, mapping, this.modelOutput));
+        this.blockStateOutput.accept(BlockModelGenerators.createPressurePlate(pressurePlateBlock, multivariant, multivariant1));
+    }
+
     public void createAetherPortalBlock() {
         MultiVariant locationNS = plainVariant(AetherIIModelTemplates.PORTAL_NS.create(AetherIIBlocks.AETHER_PORTAL.get(), AetherIITextureMappings.portal(AetherIIBlocks.AETHER_PORTAL.get()), this.modelOutput));
         MultiVariant locationEW = plainVariant(AetherIIModelTemplates.PORTAL_EW.create(AetherIIBlocks.AETHER_PORTAL.get(), AetherIITextureMappings.portal(AetherIIBlocks.AETHER_PORTAL.get()), this.modelOutput));
