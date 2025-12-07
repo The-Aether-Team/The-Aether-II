@@ -47,9 +47,9 @@ public class SentryWorkshopBuilder {
     );
     private static Map<String, WeightedList<RoomProvider<?>>> ROOM_OPTIONS;
     
-    static {
+    static { //todo
         ROOM_OPTIONS_BUILDER.get("boss_room").add((manager, pos, rotation, processorList) -> new SentryWorkshopBossRoom(manager, "boss_room", pos, rotation, processorList), 1);
-        ROOM_OPTIONS_BUILDER.get("chest_room").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "chest_room", pos, rotation, processorList), 1);
+        ROOM_OPTIONS_BUILDER.get("chest_room").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "rooms/lounge", pos, rotation, processorList), 1);
         ROOM_OPTIONS_BUILDER.get("end_corridor").add((manager, pos, rotation, processorList) -> new SentryWorkshopTunnel(manager, "end_corridor", pos, rotation, processorList), 1);
         ROOM_OPTIONS_BUILDER.get("entrance").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "entrance", pos, rotation, processorList), 1);
         ROOM_OPTIONS_BUILDER.get("lobby").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "lobby", pos, rotation, processorList), 1);
@@ -75,7 +75,7 @@ public class SentryWorkshopBuilder {
         this.random = context.random();
         this.processors = processors;
 
-        Vec3i nodeSize = context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/chest_room")).getSize();
+        Vec3i nodeSize = context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/rooms/lounge")).getSize();
         this.nodeWidth = nodeSize.getX();
 
         Vec3i edgeSize = context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/square_tunnel")).getSize();
@@ -100,7 +100,7 @@ public class SentryWorkshopBuilder {
             BlockPos pos = BlockLogicUtil.tunnelFromEvenSquareRoom(bossRoom.getBoundingBox().moved(0, 2, 0), direction, this.edgeWidth);
             SentryWorkshopPiece hallway = this.chooseRoom("square_tunnel", pos, bossRoom.getRotation(), this.processors.roomSettings());
             pos = BlockLogicUtil.tunnelFromEvenSquareRoom(hallway.getBoundingBox(), direction, this.nodeWidth);
-            SentryWorkshopPiece defaultRoom = this.chooseRoom("chest_room", pos, hallway.getRotation(), this.processors.roomSettings());
+            SentryWorkshopPiece defaultRoom = this.chooseRoom("rooms/lounge", pos, hallway.getRotation(), this.processors.roomSettings());
 
             this.nodes.add(bossRoom);
             this.nodes.add(defaultRoom);
@@ -133,7 +133,7 @@ public class SentryWorkshopBuilder {
         rotations.add(rotation.getRotated(Rotation.COUNTERCLOCKWISE_90));
         rotations.add(rotation);
         rotations.add(rotation.getRotated(Rotation.CLOCKWISE_90));
-        String roomName = placeLobby ? "lobby" : "chest_room";
+        String roomName = placeLobby ? "lobby" : "rooms/lounge";
 
         // Attempt to generate a room in each direction.
         for (int i = 3; i > 0; i--) {
@@ -297,7 +297,7 @@ public class SentryWorkshopBuilder {
      */
     @Nullable
     private Rotation getBossRoomRotation(BlockPos minPos, BlockPos maxPos) {
-        StructureTemplate template = this.context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/chest_room"));
+        StructureTemplate template = this.context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/rooms/lounge"));
         RandomSource random = this.context.random();
         BoundingBox bossBox = new BoundingBox(minPos.getX(), minPos.getY(), minPos.getZ(), maxPos.getX(), maxPos.getY(), maxPos.getZ());
 
