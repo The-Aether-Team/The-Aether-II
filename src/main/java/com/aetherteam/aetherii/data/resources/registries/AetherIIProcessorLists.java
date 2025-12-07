@@ -49,7 +49,7 @@ public class AetherIIProcessorLists {
 //                SentryWorkshopPiece.BRONZE_DUNGEON_STONE
         ));
         register(context, SENTRY_WORKSHOP_BOSS_ROOM, List.of(
-//                BronzeDungeonPiece.LOCKED_SENTRY_STONE,
+                SentryWorkshopPiece.SENTRY_STONE,
                 BossRoomProcessor.INSTANCE
         ));
 

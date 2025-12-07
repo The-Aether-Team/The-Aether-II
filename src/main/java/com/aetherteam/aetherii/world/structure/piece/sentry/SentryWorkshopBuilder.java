@@ -97,7 +97,7 @@ public class SentryWorkshopBuilder {
         SentryWorkshopPiece bossRoom = this.chooseRoom("boss_room", startPos, rotation, this.processors.bossSettings());
         Direction direction = bossRoom.getOrientation();
         if (direction != null) {
-            BlockPos pos = BlockLogicUtil.tunnelFromEvenSquareRoom(bossRoom.getBoundingBox().moved(0, 2, 0), direction, this.edgeWidth);
+            BlockPos pos = BlockLogicUtil.tunnelFromEvenSquareRoom(bossRoom.getBoundingBox().moved(0, 0, 0), direction, this.edgeWidth);
             SentryWorkshopPiece hallway = this.chooseRoom("square_tunnel", pos, bossRoom.getRotation(), this.processors.roomSettings());
             pos = BlockLogicUtil.tunnelFromEvenSquareRoom(hallway.getBoundingBox(), direction, this.nodeWidth);
             SentryWorkshopPiece defaultRoom = this.chooseRoom("rooms/lounge", pos, hallway.getRotation(), this.processors.roomSettings());
