@@ -413,6 +413,24 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(BlockModelGenerators.createPressurePlate(pressurePlateBlock, multivariant, multivariant1));
     }
 
+    public void button(Block buttonBlock) {
+        TextureMapping mapping = TextureMapping.cube(buttonBlock);
+        MultiVariant multivariant = BlockModelGenerators.plainVariant(ModelTemplates.BUTTON.create(buttonBlock, mapping, this.modelOutput));
+        MultiVariant multivariant1 = BlockModelGenerators.plainVariant(ModelTemplates.BUTTON_PRESSED.create(buttonBlock, mapping, this.modelOutput));
+        this.blockStateOutput.accept(BlockModelGenerators.createButton(buttonBlock, multivariant, multivariant1));
+        ResourceLocation resourcelocation = ModelTemplates.BUTTON_INVENTORY.create(buttonBlock, mapping, this.modelOutput);
+        this.registerSimpleItemModel(buttonBlock, resourcelocation);
+    }
+
+    public void litButton(Block buttonBlock) {
+        TextureMapping mapping = AetherIITextureMappings.cubeEmissive(TextureMapping.getBlockTexture(buttonBlock));
+        MultiVariant multivariant = BlockModelGenerators.plainVariant(AetherIIModelTemplates.TEMPLATE_EMISSIVE_BUTTON.create(buttonBlock, mapping, this.modelOutput));
+        MultiVariant multivariant1 = BlockModelGenerators.plainVariant(AetherIIModelTemplates.TEMPLATE_EMISSIVE_BUTTON_PRESSED.create(buttonBlock, mapping, this.modelOutput));
+        this.blockStateOutput.accept(BlockModelGenerators.createButton(buttonBlock, multivariant, multivariant1));
+        ResourceLocation resourcelocation = AetherIIModelTemplates.TEMPLATE_EMISSIVE_BUTTON_INVENTORY.create(buttonBlock, mapping, this.modelOutput);
+        this.registerSimpleItemModel(buttonBlock, resourcelocation);
+    }
+
     public void createAetherPortalBlock() {
         MultiVariant locationNS = plainVariant(AetherIIModelTemplates.PORTAL_NS.create(AetherIIBlocks.AETHER_PORTAL.get(), AetherIITextureMappings.portal(AetherIIBlocks.AETHER_PORTAL.get()), this.modelOutput));
         MultiVariant locationEW = plainVariant(AetherIIModelTemplates.PORTAL_EW.create(AetherIIBlocks.AETHER_PORTAL.get(), AetherIITextureMappings.portal(AetherIIBlocks.AETHER_PORTAL.get()), this.modelOutput));

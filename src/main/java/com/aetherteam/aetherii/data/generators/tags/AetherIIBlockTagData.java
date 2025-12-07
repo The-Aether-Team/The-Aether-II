@@ -393,7 +393,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(BlockTags.STONE_BUTTONS).add(
                 AetherIIBlocks.HOLYSTONE_BUTTON.get(),
-                AetherIIBlocks.UNDERSHALE_BRICK_BUTTON.get()
+                AetherIIBlocks.UNDERSHALE_BRICK_BUTTON.get(),
+                AetherIIBlocks.SENTRY_BUTTON.get()
         );
         this.tag(BlockTags.WOODEN_PRESSURE_PLATES).add(
                 AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get(),
@@ -717,6 +718,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SENTRY_BRICK_STAIRS.get(),
                 AetherIIBlocks.SENTRY_BRICK_SLAB.get(),
                 AetherIIBlocks.SENTRY_BRICK_WALL.get(),
+                AetherIIBlocks.SENTRY_BUTTON.get(),
                 AetherIIBlocks.SMOOTH_ICHORITE.get(),
                 AetherIIBlocks.MARBLED_ICHORITE.get(),
                 AetherIIBlocks.ICHORITE_STAIRS.get(),

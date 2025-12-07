@@ -179,6 +179,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SENTRY_BRICK_STAIRS.get());
                 output.accept(AetherIIBlocks.SENTRY_BRICK_SLAB.get());
                 output.accept(AetherIIBlocks.SENTRY_BRICK_WALL.get());
+                output.accept(AetherIIBlocks.SENTRY_BUTTON.get());
                 output.accept(AetherIIBlocks.SENTRY_LIGHTSTONE.get());
                 output.accept(AetherIIBlocks.SENTRY_FLAGSTONES.get());
                 output.accept(AetherIIBlocks.SENTRY_TILE.get());

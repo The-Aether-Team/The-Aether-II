@@ -284,6 +284,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
 
         // Undershale Bricks
         this.pressurePlate(AetherIIBlocks.UNDERSHALE_BRICK_PRESSURE_PLATE.get());
+        this.button(AetherIIBlocks.UNDERSHALE_BRICK_BUTTON.get());
 
         // Undershale Decorative Blocks
         this.createTrivialCube(AetherIIBlocks.UNDERSHALE_FLAGSTONES.get());
@@ -299,6 +300,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createLitStairs(AetherIIBlocks.SENTRY_BRICK_STAIRS.get(), AetherIIBlocks.SENTRY_BRICKS.get());
         this.createLitSlab(AetherIIBlocks.SENTRY_BRICK_SLAB.get(), AetherIIBlocks.SENTRY_BRICKS.get());
         this.createLitWall(AetherIIBlocks.SENTRY_BRICK_WALL.get(), AetherIIBlocks.SENTRY_BRICKS.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());
+        this.litButton(AetherIIBlocks.SENTRY_BUTTON.get());
 
         // Sentry Decorative Blocks
         this.createLitBlock(AetherIIBlocks.SENTRY_LIGHTSTONE.get());

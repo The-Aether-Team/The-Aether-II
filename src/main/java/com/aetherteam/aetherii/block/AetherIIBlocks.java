@@ -470,6 +470,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<StairBlock> SENTRY_BRICK_STAIRS = register("sentry_brick_stairs", (properties) -> new SentryStairBlock(SENTRY_BRICKS.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.SENTRY_BRICKS.get()));
     public static final DeferredBlock<SlabBlock> SENTRY_BRICK_SLAB = register("sentry_brick_slab", SentrySlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.SENTRY_BRICKS.get()));
     public static final DeferredBlock<WallBlock> SENTRY_BRICK_WALL = register("sentry_brick_wall", SentryWallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.SENTRY_BRICKS.get()).forceSolidOn());
+    public static final DeferredBlock<ButtonBlock> SENTRY_BUTTON = register("sentry_button", (properties) -> new ButtonBlock(BlockSetType.STONE, 20, properties), () -> Block.Properties.ofFullCopy(Blocks.STONE_BUTTON).sound(SoundType.DEEPSLATE));
 
     // Sentry Decorative Blocks
     public static final DeferredBlock<Block> SENTRY_LIGHTSTONE = register("sentry_lightstone", SentryBlock::new, () -> Block.Properties.ofFullCopy(SENTRY_BRICKS.get()));
