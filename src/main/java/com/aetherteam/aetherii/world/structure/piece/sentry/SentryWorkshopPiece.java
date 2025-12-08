@@ -26,6 +26,11 @@ public abstract class SentryWorkshopPiece extends AetherTemplateStructurePiece {
     // This helps Bronze Dungeons merge more cleanly when they overlap, and blends the tunnels in with the landscape.
     public static final ProtectedBlockProcessor AVOID_DUNGEONS = new ProtectedBlockProcessor(AetherIITags.Blocks.NON_TUNNEL_REPLACEABLE);
 
+    public static final RuleProcessor CAVE_REPLACEABLE = new RuleProcessor(ImmutableList.of(
+            new ProcessorRule(new BlockMatchTest(AetherIIBlocks.ORANGE_CLOUDWOOL.get()), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
+            new ProcessorRule(new BlockMatchTest(AetherIIBlocks.ORANGE_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE_BRICKS.get().defaultBlockState())
+    ));
+
     public static final RuleProcessor SENTRY_STONE = new RuleProcessor(ImmutableList.of(
             new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_BRICKS.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_BRICKS.get().defaultBlockState()),
             new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_FLAGSTONES.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_FLAGSTONES.get().defaultBlockState()),
