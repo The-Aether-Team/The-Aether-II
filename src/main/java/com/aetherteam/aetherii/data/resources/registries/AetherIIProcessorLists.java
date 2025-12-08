@@ -40,13 +40,12 @@ public class AetherIIProcessorLists {
                 ))
         ));
 
-        register(context, SENTRY_WORKSHOP_ROOM, List.of( //todo
+        register(context, SENTRY_WORKSHOP_ROOM, List.of(
                 SentryWorkshopPiece.SENTRY_STONE,
                 SentryWorkshopPiece.ROOM_DECORATION_RANDOMIZATION,
                 SentryWorkshopPiece.AVOID_DUNGEONS
         ));
         register(context, SENTRY_WORKSHOP_TUNNEL, List.of(
-                SentryWorkshopPiece.SENTRY_STONE,
                 SentryWorkshopPiece.AVOID_DUNGEONS
         ));
         register(context, SENTRY_WORKSHOP_BOSS_ROOM, List.of(
