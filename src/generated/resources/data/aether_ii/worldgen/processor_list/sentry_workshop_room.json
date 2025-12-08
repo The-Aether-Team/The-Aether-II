@@ -284,6 +284,41 @@
       ]
     },
     {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "input_predicate": {
+            "block": "aether_ii:sentry_trap",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.75
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_flagstones",
+            "Properties": {
+              "lit": "true",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:sentry_crate",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.8
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:air"
+          }
+        }
+      ]
+    },
+    {
       "processor_type": "minecraft:protected_blocks",
       "value": "#aether_ii:non_tunnel_replaceable"
     }

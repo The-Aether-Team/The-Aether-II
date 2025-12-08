@@ -12,6 +12,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
 
@@ -43,6 +44,11 @@ public abstract class SentryWorkshopPiece extends AetherTemplateStructurePiece {
             new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_BASE_PILLAR.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_BASE_PILLAR.get().defaultBlockState().setValue(SentryBlock.LIT, false)),
             new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_CAPSTONE_PILLAR.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_CAPSTONE_PILLAR.get().defaultBlockState().setValue(SentryBlock.LIT, false)),
             new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_PILLAR.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_PILLAR.get().defaultBlockState().setValue(SentryBlock.LIT, false))
+    ));
+
+    public static final RuleProcessor ROOM_DECORATION_RANDOMIZATION = new RuleProcessor(ImmutableList.of(
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.SENTRY_TRAP.get(), 0.75F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_FLAGSTONES.get().defaultBlockState()),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.SENTRY_CRATE.get(), 0.8F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
     ));
 
     public SentryWorkshopPiece(StructurePieceType type, StructureTemplateManager manager, String name, StructurePlaceSettings settings, BlockPos pos, Holder<StructureProcessorList> processors) {
