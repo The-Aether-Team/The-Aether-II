@@ -27,6 +27,56 @@
           "output_state": {
             "Name": "aether_ii:undershale_bricks"
           }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:lime_cloudwool",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "minecraft:air",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "minecraft:air"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:lime_cloudwool",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:undershale_flagstones"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:cyan_cloudwool",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "minecraft:air",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "minecraft:air"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:cyan_cloudwool",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:undershale_base_bricks"
+          }
         }
       ]
     },

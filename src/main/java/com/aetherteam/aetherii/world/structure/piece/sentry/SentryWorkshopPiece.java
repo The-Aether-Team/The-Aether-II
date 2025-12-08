@@ -28,7 +28,11 @@ public abstract class SentryWorkshopPiece extends AetherTemplateStructurePiece {
 
     public static final RuleProcessor CAVE_REPLACEABLE = new RuleProcessor(ImmutableList.of(
             new ProcessorRule(new BlockMatchTest(AetherIIBlocks.ORANGE_CLOUDWOOL.get()), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
-            new ProcessorRule(new BlockMatchTest(AetherIIBlocks.ORANGE_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE_BRICKS.get().defaultBlockState())
+            new ProcessorRule(new BlockMatchTest(AetherIIBlocks.ORANGE_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE_BRICKS.get().defaultBlockState()),
+            new ProcessorRule(new BlockMatchTest(AetherIIBlocks.LIME_CLOUDWOOL.get()), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
+            new ProcessorRule(new BlockMatchTest(AetherIIBlocks.LIME_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE_FLAGSTONES.get().defaultBlockState()),
+            new ProcessorRule(new BlockMatchTest(AetherIIBlocks.CYAN_CLOUDWOOL.get()), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
+            new ProcessorRule(new BlockMatchTest(AetherIIBlocks.CYAN_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE_BASE_BRICKS.get().defaultBlockState())
     ));
 
     public static final RuleProcessor SENTRY_STONE = new RuleProcessor(ImmutableList.of(
