@@ -63,7 +63,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.DETONATION_SENTRY.get(),
                 AetherIIEntityTypes.SENTRY_GOLEM.get(),
                 AetherIIEntityTypes.SLIDER.get(),
-                AetherIIEntityTypes.DETONATION_PROJECTILE.get(),
+                AetherIIEntityTypes.DEMOLITION_PROJECTILE.get(),
                 AetherIIEntityTypes.BLADESHROOM_HUNTER.get(),
                 AetherIIEntityTypes.HOLYSTONE_ROCK.get(),
                 AetherIIEntityTypes.ARCTIC_SNOWBALL.get(),

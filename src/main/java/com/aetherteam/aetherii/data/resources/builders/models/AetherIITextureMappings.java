@@ -8,6 +8,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
 public class AetherIITextureMappings {
+    public static TextureMapping emissive(ResourceLocation texture) {
+        return new TextureMapping()
+                .put(TextureSlot.TEXTURE, texture)
+                .put(AetherIITextureSlots.EMISSIVE, texture.withSuffix("_emissive"));
+    }
+
     public static TextureMapping cubeEmissive(ResourceLocation texture) {
         return new TextureMapping()
                 .put(TextureSlot.ALL, texture)

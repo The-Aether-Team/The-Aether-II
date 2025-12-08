@@ -1,8 +1,6 @@
 package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.api.Mural;
-import com.aetherteam.aetherii.blockentity.MuralSection;
 
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
@@ -61,7 +59,7 @@ public class AetherIIModelLayers {
 
     public static final ModelLayerLocation MIMIC = register("mimic");
     public static final ModelLayerLocation DETONATION_SENTRY = register("detonation_sentry");
-    public static final ModelLayerLocation DETONATION_PROJECTILE = register("detonation_projectile");
+    public static final ModelLayerLocation DEMOLITION_PROJECTILE = register("detonation_projectile");
     public static final ModelLayerLocation SENTRY_GOLEM = register("sentry_golem");
 
     public static final ModelLayerLocation SLIDER = register("slider");

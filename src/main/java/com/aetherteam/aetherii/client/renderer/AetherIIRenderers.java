@@ -146,7 +146,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.SKEPHID_WEBBING_BALL.get(), SkephidWebbingBallRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.GRAVITITE_DEBRIS_SHOT.get(), GravititeDebrisShotRenderer::new);
 
-        event.registerEntityRenderer(AetherIIEntityTypes.DETONATION_PROJECTILE.get(), DetonationProjectileRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.DEMOLITION_PROJECTILE.get(), DemolitionProjectileRenderer::new);
 
         // Blocks
         event.registerEntityRenderer(AetherIIEntityTypes.HOVERING_BLOCK.get(), HoveringBlockRenderer::new);
@@ -220,7 +220,7 @@ public class AetherIIRenderers {
 
         // Projectiles
         event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_DEBRIS_SHOT, GravititeDebrisShotModel::createBodyLayer);
-        event.registerLayerDefinition(AetherIIModelLayers.DETONATION_PROJECTILE, DetonationProjectileModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.DEMOLITION_PROJECTILE, DemolitionProjectileModel::createBodyLayer);
         // NPCs
         event.registerLayerDefinition(AetherIIModelLayers.EDWARD, EdwardModel::createBodyLayer);
 
@@ -235,6 +235,7 @@ public class AetherIIRenderers {
     }
 
     public static void registerItemModels(RegisterItemModelsEvent event) {
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "emissive"), EmissiveModel.Unbaked.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "shield"), ShieldModel.Unbaked.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "mural"), MuralItemModel.Unbaked.MAP_CODEC);
     }

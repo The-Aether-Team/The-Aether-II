@@ -1,0 +1,7 @@
+{
+  "parent": "aether_ii:item/template_demolition_hammer_head_deployed",
+  "textures": {
+    "emissive": "aether_ii:item/demolition_hammer_head_ranged_emissive",
+    "texture": "aether_ii:item/demolition_hammer_head_ranged"
+  }
+}

@@ -25,8 +25,69 @@
       }
     ],
     "fallback": {
-      "type": "minecraft:model",
-      "model": "aether_ii:item/demolition_hammer_held"
+      "type": "minecraft:range_dispatch",
+      "entries": [
+        {
+          "model": {
+            "type": "minecraft:composite",
+            "models": [
+              {
+                "type": "minecraft:model",
+                "model": "aether_ii:item/demolition_hammer_held_ranged"
+              },
+              {
+                "type": "minecraft:model",
+                "model": "aether_ii:item/demolition_hammer_head_deployed"
+              },
+              {
+                "type": "aether_ii:emissive",
+                "model": "aether_ii:item/demolition_hammer_held_ranged_emissive"
+              }
+            ]
+          },
+          "threshold": 0.01
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:condition",
+        "keybind": "key.sneak",
+        "on_false": {
+          "type": "minecraft:composite",
+          "models": [
+            {
+              "type": "minecraft:model",
+              "model": "aether_ii:item/demolition_hammer_held"
+            },
+            {
+              "type": "minecraft:model",
+              "model": "aether_ii:item/demolition_hammer_head"
+            },
+            {
+              "type": "aether_ii:emissive",
+              "model": "aether_ii:item/demolition_hammer_held_emissive"
+            }
+          ]
+        },
+        "on_true": {
+          "type": "minecraft:composite",
+          "models": [
+            {
+              "type": "minecraft:model",
+              "model": "aether_ii:item/demolition_hammer_held_ranged"
+            },
+            {
+              "type": "minecraft:model",
+              "model": "aether_ii:item/demolition_hammer_head_ready"
+            },
+            {
+              "type": "aether_ii:emissive",
+              "model": "aether_ii:item/demolition_hammer_held_ranged_emissive"
+            }
+          ]
+        },
+        "property": "minecraft:keybind_down"
+      },
+      "property": "minecraft:cooldown"
     },
     "property": "minecraft:display_context"
   }

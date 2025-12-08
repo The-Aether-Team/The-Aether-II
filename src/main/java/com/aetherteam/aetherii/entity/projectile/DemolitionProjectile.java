@@ -11,17 +11,17 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
-public class DetonationProjectile extends ThrowableProjectile {
-    public DetonationProjectile(EntityType<? extends DetonationProjectile> entityType, Level level) {
+public class DemolitionProjectile extends ThrowableProjectile {
+    public DemolitionProjectile(EntityType<? extends DemolitionProjectile> entityType, Level level) {
         super(entityType, level);
     }
 
-    public DetonationProjectile(double x, double y, double z, Level pLevel) {
-        super(AetherIIEntityTypes.DETONATION_PROJECTILE.get(), x, y, z, pLevel);
+    public DemolitionProjectile(double x, double y, double z, Level pLevel) {
+        super(AetherIIEntityTypes.DEMOLITION_PROJECTILE.get(), x, y, z, pLevel);
     }
 
-    public DetonationProjectile(LivingEntity shooter, Level level) {
-        super(AetherIIEntityTypes.DETONATION_PROJECTILE.get(), shooter.getX(), shooter.getEyeY() - 0.1F, shooter.getZ(), level);
+    public DemolitionProjectile(LivingEntity shooter, Level level) {
+        super(AetherIIEntityTypes.DEMOLITION_PROJECTILE.get(), shooter.getX(), shooter.getEyeY() - 0.1F, shooter.getZ(), level);
         this.setOwner(shooter);
     }
 

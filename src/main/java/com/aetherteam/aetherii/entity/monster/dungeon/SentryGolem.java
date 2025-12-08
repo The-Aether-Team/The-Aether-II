@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.entity.monster.dungeon;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
-import com.aetherteam.aetherii.entity.projectile.DetonationProjectile;
+import com.aetherteam.aetherii.entity.projectile.DemolitionProjectile;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -220,7 +220,7 @@ public class SentryGolem extends Monster implements RangedAttackMob {
 
     @Override
     public void performRangedAttack(LivingEntity target, float distance) {
-        DetonationProjectile bomb = new DetonationProjectile(this, this.level());
+        DemolitionProjectile bomb = new DemolitionProjectile(this, this.level());
         double x = target.getX() - this.getX();
         double y = target.getEyeY() - this.getY();
         double z = target.getZ() - this.getZ();

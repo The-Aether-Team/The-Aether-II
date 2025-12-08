@@ -1292,7 +1292,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.GRAVITITE_TALUTON, "Gravitite Taluton");
         this.addEntityType(AetherIIEntityTypes.MIMIC, "Mimic");
         this.addEntityType(AetherIIEntityTypes.DETONATION_SENTRY, "Detonation Sentry");
-        this.addEntityType(AetherIIEntityTypes.DETONATION_PROJECTILE, "Detonation Projectile");
+        this.addEntityType(AetherIIEntityTypes.DEMOLITION_PROJECTILE, "Detonation Projectile");
         this.addEntityType(AetherIIEntityTypes.SENTRY_GOLEM, "Sentry Golem");
         this.addEntityType(AetherIIEntityTypes.SLIDER, "Slider");
         this.addEntityType(AetherIIEntityTypes.BLADESHROOM_HUNTER, "Bladeshroom Hunter");

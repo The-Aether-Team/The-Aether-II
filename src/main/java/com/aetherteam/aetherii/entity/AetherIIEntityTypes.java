@@ -154,8 +154,8 @@ public class AetherIIEntityTypes {
     // Misc
     public static final DeferredHolder<EntityType<?>, EntityType<ElectricField>> ELECTRIC_FIELD = ENTITY_TYPES.register("electric_field",
             () -> EntityType.Builder.<ElectricField>of(ElectricField::new, MobCategory.MISC).fireImmune().sized(6.0F, 1.5F).clientTrackingRange(10).updateInterval(Integer.MAX_VALUE).noLootTable().build(AetherIIEntities.ELECTRIC_FIELD));
-    public static final DeferredHolder<EntityType<?>, EntityType<DetonationProjectile>> DETONATION_PROJECTILE = ENTITY_TYPES.register("detonation_projectile",
-            () -> EntityType.Builder.<DetonationProjectile>of(DetonationProjectile::new, MobCategory.MISC).clientTrackingRange(4).updateInterval(10).sized(0.9F, 0.9F).noLootTable().fireImmune().build(AetherIIEntities.DETONATION_PROJECTILE));
+    public static final DeferredHolder<EntityType<?>, EntityType<DemolitionProjectile>> DEMOLITION_PROJECTILE = ENTITY_TYPES.register("detonation_projectile",
+            () -> EntityType.Builder.<DemolitionProjectile>of(DemolitionProjectile::new, MobCategory.MISC).clientTrackingRange(4).updateInterval(10).sized(0.9F, 0.9F).noLootTable().fireImmune().build(AetherIIEntities.DETONATION_PROJECTILE));
 
 
     public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {

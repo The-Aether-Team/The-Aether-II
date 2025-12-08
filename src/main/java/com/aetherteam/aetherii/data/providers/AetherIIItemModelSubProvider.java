@@ -5,6 +5,7 @@ import java.util.function.BiConsumer;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.item.color.EffectBuildupColorSource;
+import com.aetherteam.aetherii.client.renderer.item.model.EmissiveModel;
 import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.BetterIsUsingItem;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.LassoThrow;
@@ -12,20 +13,27 @@ import com.aetherteam.aetherii.client.renderer.item.properties.range.*;
 import com.aetherteam.aetherii.client.renderer.item.properties.select.SelectFeatherColor;
 import com.aetherteam.aetherii.client.renderer.item.properties.select.SelectMoaEggType;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
+import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureSlots;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.ToggleKeyMapping;
 import net.minecraft.client.color.item.Dye;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.renderer.item.RangeSelectItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
 import net.minecraft.client.renderer.item.properties.conditional.CustomModelDataProperty;
 import net.minecraft.client.renderer.item.properties.conditional.FishingRodCast;
 import net.minecraft.client.renderer.item.properties.conditional.HasComponent;
+import net.minecraft.client.renderer.item.properties.conditional.IsKeybindDown;
+import net.minecraft.client.renderer.item.properties.numeric.Cooldown;
 import net.minecraft.client.renderer.item.properties.select.Charge;
 import net.minecraft.client.renderer.item.properties.select.DisplayContext;
 import net.minecraft.resources.ResourceLocation;
@@ -98,14 +106,30 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
 
     public void generateDemolitionHammer(Item item) {
         ResourceLocation inventorySprite = ModelTemplates.FLAT_HANDHELD_ITEM.create(item, TextureMapping.layer0(item), this.modelOutput);
-        ResourceLocation heldSprite = ModelTemplates.FLAT_HANDHELD_ITEM.create(ModelLocationUtils.getModelLocation(item, "_held"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held")), this.modelOutput);
         List<SelectItemModel.SwitchCase<ItemDisplayContext>> normalList = List.of(
                 ItemModelUtils.when(ItemDisplayContext.GUI, ItemModelUtils.plainModel(inventorySprite)),
                 ItemModelUtils.when(ItemDisplayContext.GROUND, ItemModelUtils.plainModel(inventorySprite)),
                 ItemModelUtils.when(ItemDisplayContext.FIXED, ItemModelUtils.plainModel(inventorySprite))
         );
-        ItemModel.Unbaked model = ItemModelUtils.select(new DisplayContext(), ItemModelUtils.plainModel(heldSprite), normalList);
-        this.itemModelOutput.accept(item, model);
+
+        ResourceLocation melee = ModelTemplates.FLAT_HANDHELD_ITEM.create(ModelLocationUtils.getModelLocation(item, "_held"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held")), this.modelOutput);
+        ResourceLocation meleeEmissive = ModelTemplates.FLAT_HANDHELD_ITEM.create(ModelLocationUtils.getModelLocation(item, "_held_emissive"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held_emissive")), this.modelOutput);
+        ResourceLocation ranged = ModelTemplates.FLAT_HANDHELD_ITEM.create(ModelLocationUtils.getModelLocation(item, "_held_ranged"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held_ranged")), this.modelOutput);
+        ResourceLocation rangedEmissive = ModelTemplates.FLAT_HANDHELD_ITEM.create(ModelLocationUtils.getModelLocation(item, "_held_ranged_emissive"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held_ranged_emissive")), this.modelOutput);
+
+        ResourceLocation head = AetherIIModelTemplates.DEMOLITION_HAMMER_HEAD.create(item, AetherIITextureMappings.emissive(TextureMapping.getItemTexture(item, "_head")), this.modelOutput);
+        ResourceLocation headReady = AetherIIModelTemplates.DEMOLITION_HAMMER_HEAD_READY.create(item, AetherIITextureMappings.emissive(TextureMapping.getItemTexture(item, "_head_ranged")), this.modelOutput);
+        ResourceLocation headDeployed = AetherIIModelTemplates.DEMOLITION_HAMMER_HEAD_DEPLOYED.create(item, AetherIITextureMappings.emissive(TextureMapping.getItemTexture(item, "_head_ranged")), this.modelOutput);
+
+        ItemModel.Unbaked model = ItemModelUtils.composite(ItemModelUtils.plainModel(melee), ItemModelUtils.plainModel(head), new EmissiveModel.Unbaked(meleeEmissive));
+        ItemModel.Unbaked readyModel = ItemModelUtils.composite(ItemModelUtils.plainModel(ranged), ItemModelUtils.plainModel(headReady), new EmissiveModel.Unbaked(rangedEmissive));
+        ItemModel.Unbaked deployedModel = ItemModelUtils.composite(ItemModelUtils.plainModel(ranged), ItemModelUtils.plainModel(headDeployed), new EmissiveModel.Unbaked(rangedEmissive));
+
+        ItemModel.Unbaked finalModel = ItemModelUtils.select(new DisplayContext(),
+                ItemModelUtils.rangeSelect(new Cooldown(), ItemModelUtils.conditional(new IsKeybindDown(new KeyMapping("key.sneak", 0, "")), readyModel, model), ItemModelUtils.override(deployedModel, 0.01F)),
+                normalList
+        );
+        this.itemModelOutput.accept(item, finalModel);
     }
 
     public void generateDyedArmorItem(Item item, int defaultColor) {
