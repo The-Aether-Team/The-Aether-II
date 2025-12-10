@@ -1,8 +1,6 @@
 package com.aetherteam.aetherii.item.equipment.weapons.loot;
 
 import com.aetherteam.aetherii.AetherIIStats;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
-import com.aetherteam.aetherii.entity.CooldownEntity;
 import com.aetherteam.aetherii.entity.projectile.DemolitionProjectile;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
