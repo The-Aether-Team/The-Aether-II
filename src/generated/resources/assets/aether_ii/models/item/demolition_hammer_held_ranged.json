@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "aether_ii:item/template_demolition_hammer_handle",
   "textures": {
     "layer0": "aether_ii:item/demolition_hammer_held_ranged"
   }
