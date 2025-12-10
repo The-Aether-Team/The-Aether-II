@@ -51,7 +51,8 @@ public class SentryWorkshopBuilder {
         ROOM_OPTIONS_BUILDER.get("boss_room").add((manager, pos, rotation, processorList) -> new SentryWorkshopBossRoom(manager, "boss_room", pos, rotation, processorList), 1);
         ROOM_OPTIONS_BUILDER.get("chest_room")
                 .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "rooms/lounge", pos, rotation, processorList), 1)
-                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "rooms/material_deposit", pos, rotation, processorList), 1);
+                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "rooms/material_deposit", pos, rotation, processorList), 1)
+                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "rooms/cold_storage", pos, rotation, processorList), 1);
         ROOM_OPTIONS_BUILDER.get("lobby").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "lobby", pos, rotation, processorList), 1);
         ROOM_OPTIONS_BUILDER.get("square_tunnel").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "square_tunnel", pos, rotation, processorList), 1);
     }
