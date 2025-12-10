@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.item.equipment.weapons.loot;
 
 import com.aetherteam.aetherii.AetherIIStats;
+import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.entity.CooldownEntity;
 import com.aetherteam.aetherii.entity.projectile.DemolitionProjectile;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
@@ -16,6 +18,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 
 public class DemolitionHammerItem extends TieredHammerItem implements ProjectileItem {
     public DemolitionHammerItem(Properties properties) {
@@ -45,5 +48,13 @@ public class DemolitionHammerItem extends TieredHammerItem implements Projectile
 
     public ProjectileItem.DispenseConfig createDispenseConfig() {
         return DispenseConfig.builder().uncertainty(1.0F).build();
+    }
+
+    public static void disableAttacks(AttackEntityEvent event) {
+        Player entity = event.getEntity();
+        ItemStack stack = entity.getMainHandItem();
+        if (entity instanceof Player player && player.getCooldowns().getCooldownPercent(stack, 0.0F) != 0) {
+            event.setCanceled(true);
+        }
     }
 }
