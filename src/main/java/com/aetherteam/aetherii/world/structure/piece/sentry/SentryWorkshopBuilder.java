@@ -38,21 +38,20 @@ import java.util.stream.Collectors;
  */
 public class SentryWorkshopBuilder {
     public static final Map<String, WeightedList.Builder<RoomProvider<?>>> ROOM_OPTIONS_BUILDER = Map.ofEntries(
-        Map.entry("boss_room", new WeightedList.Builder<>()),
-        Map.entry("chest_room", new WeightedList.Builder<>()),
-        Map.entry("end_corridor", new WeightedList.Builder<>()),
-        Map.entry("entrance", new WeightedList.Builder<>()),
-        Map.entry("lobby", new WeightedList.Builder<>()),
-        Map.entry("square_tunnel", new WeightedList.Builder<>())
+            Map.entry("boss_room", new WeightedList.Builder<>()),
+            Map.entry("chest_room", new WeightedList.Builder<>()),
+            Map.entry("lobby", new WeightedList.Builder<>()),
+            Map.entry("square_tunnel", new WeightedList.Builder<>()),
+            Map.entry("staircase", new WeightedList.Builder<>()),
+            Map.entry("surface_entrance", new WeightedList.Builder<>())
     );
     private static Map<String, WeightedList<RoomProvider<?>>> ROOM_OPTIONS;
     
-    static { //todo
+    static {
         ROOM_OPTIONS_BUILDER.get("boss_room").add((manager, pos, rotation, processorList) -> new SentryWorkshopBossRoom(manager, "boss_room", pos, rotation, processorList), 1);
-        ROOM_OPTIONS_BUILDER.get("chest_room").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "rooms/lounge", pos, rotation, processorList), 1);
-        ROOM_OPTIONS_BUILDER.get("chest_room").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "rooms/material_deposit", pos, rotation, processorList), 1);
-        ROOM_OPTIONS_BUILDER.get("end_corridor").add((manager, pos, rotation, processorList) -> new SentryWorkshopTunnel(manager, "end_corridor", pos, rotation, processorList), 1);
-        ROOM_OPTIONS_BUILDER.get("entrance").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "entrance", pos, rotation, processorList), 1);
+        ROOM_OPTIONS_BUILDER.get("chest_room")
+                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "rooms/lounge", pos, rotation, processorList), 1)
+                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "rooms/material_deposit", pos, rotation, processorList), 1);
         ROOM_OPTIONS_BUILDER.get("lobby").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "lobby", pos, rotation, processorList), 1);
         ROOM_OPTIONS_BUILDER.get("square_tunnel").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "square_tunnel", pos, rotation, processorList), 1);
     }
@@ -134,7 +133,7 @@ public class SentryWorkshopBuilder {
         rotations.add(rotation.getRotated(Rotation.COUNTERCLOCKWISE_90));
         rotations.add(rotation);
         rotations.add(rotation.getRotated(Rotation.CLOCKWISE_90));
-        String roomName = placeLobby ? "lobby" : "rooms/lounge"; //todo: fix lobby room generation
+        String roomName = placeLobby ? "lobby" : "chest_room";
 
         // Attempt to generate a room in each direction.
         for (int i = 3; i > 0; i--) {
