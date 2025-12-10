@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.client.renderer.item.color.EffectBuildupColorSour
 import com.aetherteam.aetherii.client.renderer.item.model.EmissiveModel;
 import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.BetterIsUsingItem;
+import com.aetherteam.aetherii.client.renderer.item.properties.conditional.HoldingShift;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.LassoThrow;
 import com.aetherteam.aetherii.client.renderer.item.properties.range.*;
 import com.aetherteam.aetherii.client.renderer.item.properties.select.SelectFeatherColor;
@@ -19,21 +20,14 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.ToggleKeyMapping;
 import net.minecraft.client.color.item.Dye;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.item.ItemModel;
-import net.minecraft.client.renderer.item.RangeSelectItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
 import net.minecraft.client.renderer.item.properties.conditional.CustomModelDataProperty;
-import net.minecraft.client.renderer.item.properties.conditional.FishingRodCast;
 import net.minecraft.client.renderer.item.properties.conditional.HasComponent;
-import net.minecraft.client.renderer.item.properties.conditional.IsKeybindDown;
-import net.minecraft.client.renderer.item.properties.numeric.Cooldown;
 import net.minecraft.client.renderer.item.properties.select.Charge;
 import net.minecraft.client.renderer.item.properties.select.DisplayContext;
 import net.minecraft.resources.ResourceLocation;
@@ -126,7 +120,7 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
         ItemModel.Unbaked deployedModel = ItemModelUtils.composite(ItemModelUtils.plainModel(ranged), ItemModelUtils.plainModel(headDeployed), new EmissiveModel.Unbaked(rangedEmissive));
 
         ItemModel.Unbaked finalModel = ItemModelUtils.select(new DisplayContext(),
-                ItemModelUtils.rangeSelect(new Cooldown(), ItemModelUtils.conditional(new IsKeybindDown(new KeyMapping("key.sneak", 0, "")), readyModel, model), ItemModelUtils.override(deployedModel, 0.01F)),
+                ItemModelUtils.rangeSelect(new BetterCooldown(), ItemModelUtils.conditional(new HoldingShift(), readyModel, model), ItemModelUtils.override(deployedModel, 0.01F)),
                 normalList
         );
         this.itemModelOutput.accept(item, finalModel);

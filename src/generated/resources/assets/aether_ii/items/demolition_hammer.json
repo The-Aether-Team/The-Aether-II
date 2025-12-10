@@ -50,7 +50,6 @@
       ],
       "fallback": {
         "type": "minecraft:condition",
-        "keybind": "key.sneak",
         "on_false": {
           "type": "minecraft:composite",
           "models": [
@@ -85,9 +84,9 @@
             }
           ]
         },
-        "property": "minecraft:keybind_down"
+        "property": "aether_ii:holding_shift"
       },
-      "property": "minecraft:cooldown"
+      "property": "aether_ii:better_cooldown"
     },
     "property": "minecraft:display_context"
   }

@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client.renderer.item.properties;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.BetterIsUsingItem;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.HasBlockState;
+import com.aetherteam.aetherii.client.renderer.item.properties.conditional.HoldingShift;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.LassoThrow;
 import com.aetherteam.aetherii.client.renderer.item.properties.range.*;
 import com.aetherteam.aetherii.client.renderer.item.properties.select.SelectFeatherColor;
@@ -16,6 +17,7 @@ public class AetherIIItemModelProperties {
     public static void registerConditionalProperties(RegisterConditionalItemModelPropertyEvent event) {
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "using_item"), BetterIsUsingItem.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "has_block_state"), HasBlockState.MAP_CODEC);
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "holding_shift"), HoldingShift.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "lasso_throw"), LassoThrow.MAP_CODEC);
     }
 
@@ -28,6 +30,7 @@ public class AetherIIItemModelProperties {
     }
 
     public static void registerRangeSelectProperties(RegisterRangeSelectItemModelPropertyEvent event) {
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "better_cooldown"), BetterCooldown.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "reinforcement_tier"), ReinforcementTierRange.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "crossbow/pull"), TieredCrossbowPullRange.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "darts_loaded"), DartsLoadedRange.MAP_CODEC);

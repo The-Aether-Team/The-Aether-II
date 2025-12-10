@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.monster.dungeon;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import com.aetherteam.aetherii.entity.CooldownEntity;
 import com.aetherteam.aetherii.entity.projectile.DemolitionProjectile;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -21,6 +22,7 @@ import net.minecraft.world.entity.ai.util.LandRandomPos;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemCooldowns;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -31,12 +33,13 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 
-public class SentryGolem extends Monster implements RangedAttackMob {
+public class SentryGolem extends Monster implements RangedAttackMob, CooldownEntity {
     public static final EntityDataAccessor<Integer> DATA_FIRE_TIME_ID = SynchedEntityData.defineId(SentryGolem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> DATA_RANGED_ID = SynchedEntityData.defineId(SentryGolem.class, EntityDataSerializers.BOOLEAN);
     public int timeTilToss = 50;
     public int avoidCooldown;
     private SentryGolemStrollGoal randomStrollGoal;
+    private final ItemCooldowns cooldowns;
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState checkSelfAnimationState = new AnimationState();
@@ -55,10 +58,10 @@ public class SentryGolem extends Monster implements RangedAttackMob {
     private int idleTick;
     public final int idleLength = 120;
 
-
     public SentryGolem(EntityType<? extends SentryGolem> entityType, Level level) {
         super(entityType, level);
         this.setupIdleAnimationCooldown();
+        this.cooldowns = new ItemCooldowns();
     }
 
     @Override
@@ -108,6 +111,7 @@ public class SentryGolem extends Monster implements RangedAttackMob {
         } else {
             this.setupAnimationStates();
         }
+        this.cooldowns.tick();
     }
 
     private void setupIdleAnimationCooldown() {
@@ -248,6 +252,9 @@ public class SentryGolem extends Monster implements RangedAttackMob {
         this.entityData.set(DATA_RANGED_ID, ranged);
     }
 
+    public ItemCooldowns getCooldowns() {
+        return this.cooldowns;
+    }
 
     @Override
     protected boolean shouldDespawnInPeaceful() {
