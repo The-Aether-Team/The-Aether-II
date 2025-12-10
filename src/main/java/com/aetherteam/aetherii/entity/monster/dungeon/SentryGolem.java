@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.entity.monster.dungeon;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.CooldownEntity;
+import com.aetherteam.aetherii.entity.FakeShiftEntity;
 import com.aetherteam.aetherii.entity.projectile.DemolitionProjectile;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -33,7 +34,7 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 
-public class SentryGolem extends Monster implements RangedAttackMob, CooldownEntity {
+public class SentryGolem extends Monster implements RangedAttackMob, CooldownEntity, FakeShiftEntity {
     public static final EntityDataAccessor<Integer> DATA_FIRE_TIME_ID = SynchedEntityData.defineId(SentryGolem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> DATA_RANGED_ID = SynchedEntityData.defineId(SentryGolem.class, EntityDataSerializers.BOOLEAN);
     public int timeTilToss = 50;
@@ -171,6 +172,9 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
             this.attackReadyAnimationState.startIfStopped(this.tickCount);
             this.attackRangeAnimationState.stop();
             this.attackRangeReadyAnimationState.stop();
+        } else {
+            this.attackRangeReadyAnimationState.stop();
+            this.attackReadyAnimationState.stop();
         }
 
     }
@@ -183,6 +187,7 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
             this.attackRangeAnimationState.stop();
             this.attackRangeReadyAnimationState.stop();
             this.checkSelfAnimationState.stop();
+            this.lookAroundAnimationState.stop();
             this.attackAnimationTick = 0;
         } else if (p_21375_ == 61) {
             this.attackAnimationState.stop();
@@ -190,7 +195,9 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
             this.attackRangeAnimationState.start(this.tickCount);
             this.attackRangeReadyAnimationState.stop();
             this.checkSelfAnimationState.stop();
+            this.lookAroundAnimationState.stop();
             this.attackRangeAnimationTick = 0;
+            this.cooldowns.addCooldown(this.getMainHandItem(), 60);
         } else {
             super.handleEntityEvent(p_21375_);
         }
@@ -233,6 +240,8 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
         bomb.setYRot(this.yBodyRot);
         this.playSound(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_THROW_BOMB.get(), 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.level().addFreshEntity(bomb);
+        this.cooldowns.addCooldown(this.getMainHandItem(), 60);
+
         this.level().broadcastEntityEvent(this, (byte) 61);
     }
 
@@ -290,6 +299,11 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
     public boolean doHurtTarget(ServerLevel p_376642_, Entity p_21372_) {
         p_376642_.broadcastEntityEvent(this, (byte) 4);
         return super.doHurtTarget(p_376642_, p_21372_);
+    }
+
+    @Override
+    public boolean isFakeShift() {
+        return this.isRanged();
     }
 
     public static class ThrowExplosiveAttackGoal extends Goal {
