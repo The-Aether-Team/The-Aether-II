@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.item.properties.conditional;
 
+import com.aetherteam.aetherii.entity.FakeShiftEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperty;
@@ -14,6 +15,10 @@ public record HoldingShift() implements ConditionalItemModelProperty {
 
     @Override
     public boolean get(ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int i, ItemDisplayContext context) {
+        if (entity instanceof FakeShiftEntity && ((FakeShiftEntity) entity).isFakeShift()) {
+            return true;
+        }
+
         return entity != null && entity.isShiftKeyDown();
     }
 
