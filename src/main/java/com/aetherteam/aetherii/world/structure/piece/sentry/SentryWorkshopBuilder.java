@@ -134,7 +134,7 @@ public class SentryWorkshopBuilder {
         rotations.add(rotation.getRotated(Rotation.COUNTERCLOCKWISE_90));
         rotations.add(rotation);
         rotations.add(rotation.getRotated(Rotation.CLOCKWISE_90));
-        String roomName = placeLobby ? "lobby" : "chest_room";
+        String roomName = placeLobby ? "lobby" : "rooms/lounge"; //todo: fix lobby room generation
 
         // Attempt to generate a room in each direction.
         for (int i = 3; i > 0; i--) {
