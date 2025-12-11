@@ -115,7 +115,7 @@ public class SentryWorkshopBuilder {
             }
 
             this.propagateRooms(defaultRoom, chunkPos, true);
-            this.buildSurfaceTunnel(genContext.heightAccessor(), genContext.chunkGenerator(), genContext.randomState());
+            //this.buildSurfaceTunnel(genContext.heightAccessor(), genContext.chunkGenerator(), genContext.randomState());
 
             this.populatePiecesBuilder(builder);
         }
