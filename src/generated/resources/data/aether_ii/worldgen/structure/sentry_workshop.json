@@ -3,7 +3,7 @@
   "above_bottom": 32,
   "below_top": 24,
   "biomes": "#aether_ii:has_structure/sentry_workshop",
-  "max_rooms": 8,
+  "max_rooms": 6,
   "processor_settings": {
     "boss_room_processors": "aether_ii:sentry_workshop_boss_room",
     "generic_room_processors": "aether_ii:sentry_workshop_room",
