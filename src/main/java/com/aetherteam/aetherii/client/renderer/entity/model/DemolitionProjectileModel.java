@@ -1,12 +1,12 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
-import com.aetherteam.aetherii.client.renderer.entity.state.DemolitionProjectileenderState;
+import com.aetherteam.aetherii.client.renderer.entity.state.DemolitionProjectileRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class DemolitionProjectileModel extends EntityModel<DemolitionProjectileenderState> {
+public class DemolitionProjectileModel extends EntityModel<DemolitionProjectileRenderState> {
     public DemolitionProjectileModel(ModelPart root) {
         super(root);
     }

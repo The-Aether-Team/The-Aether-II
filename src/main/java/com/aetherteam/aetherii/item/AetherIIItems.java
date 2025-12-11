@@ -416,6 +416,9 @@ public class AetherIIItems {
         bus.addListener(SentryArmor::playerFall);
         bus.addListener(NeptuneArmor::updatePlayerAttributes);
 
+        // Weapons
+        bus.addListener(DemolitionHammerItem::disableAttacks);
+
         // Tools
         bus.addListener(HolystoneTool::dropAmbrosium);
 
