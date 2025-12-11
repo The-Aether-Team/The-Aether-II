@@ -119,23 +119,6 @@
         },
         {
           "input_predicate": {
-            "block": "aether_ii:undershale_tile",
-            "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
-          },
-          "location_predicate": {
-            "predicate_type": "minecraft:always_true"
-          },
-          "output_state": {
-            "Name": "aether_ii:sentry_tile",
-            "Properties": {
-              "lit": "true",
-              "powered": "false"
-            }
-          }
-        },
-        {
-          "input_predicate": {
             "block": "aether_ii:undershale_base_bricks",
             "predicate_type": "minecraft:random_block_match",
             "probability": 0.05
@@ -250,23 +233,6 @@
           },
           "output_state": {
             "Name": "aether_ii:sentry_flagstones",
-            "Properties": {
-              "lit": "false",
-              "powered": "false"
-            }
-          }
-        },
-        {
-          "input_predicate": {
-            "block": "aether_ii:undershale_tile",
-            "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
-          },
-          "location_predicate": {
-            "predicate_type": "minecraft:always_true"
-          },
-          "output_state": {
-            "Name": "aether_ii:sentry_tile",
             "Properties": {
               "lit": "false",
               "powered": "false"
