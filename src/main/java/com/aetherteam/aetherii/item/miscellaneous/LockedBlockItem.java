@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.item.miscellaneous;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.dungeon.LockedBlock;
 import com.aetherteam.aetherii.blockentity.LockedBlockEntity;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.ChatFormatting;
@@ -40,7 +41,7 @@ public class LockedBlockItem extends BlockItem {
             if (stack.is(this) && stack.get(AetherIIDataComponents.BLOCK_STATE) == null) {
                 BlockState previousState = level.getBlockState(pos);
                 if (previousState.is(AetherIITags.Blocks.LOCKABLE_BLOCKS)) {
-                    level.setBlockAndUpdate(pos, AetherIIBlocks.LOCKED_BLOCK.get().defaultBlockState());
+                    level.setBlockAndUpdate(pos, AetherIIBlocks.LOCKED_BLOCK.get().defaultBlockState().setValue(LockedBlock.EMPTY, false));
                     if (level.getBlockEntity(pos) instanceof LockedBlockEntity lockedBlockEntity) {
                         lockedBlockEntity.applyComponents(DataComponentMap.EMPTY, DataComponentPatch.builder().set(AetherIIDataComponents.BLOCK_STATE.get(), previousState).build());
                     }

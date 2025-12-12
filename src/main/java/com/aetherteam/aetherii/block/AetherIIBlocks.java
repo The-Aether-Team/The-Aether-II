@@ -21,7 +21,6 @@ import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.MuralSection;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundTypes;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIMurals;
 import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsConfiguredFeatures;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -762,7 +761,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> SENTRY_SPAWNER = register("sentry_spawner", SentryWallSpawnerBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F).sound(SoundType.STONE));
     public static final DeferredBlock<Block> SENTRY_TRAP = register("sentry_trap", SentryGroundTrapBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F).sound(SoundType.STONE));
 
-    public static final DeferredBlock<Block> LOCKED_BLOCK = register("locked_block", LockedBlock::new, () -> BlockBehaviour.Properties.of().strength(-1.0F, 3600000.8F).noLootTable().noOcclusion().isValidSpawn(Blocks::always).pushReaction(PushReaction.BLOCK), LockedBlockItem::new);
+    public static final DeferredBlock<Block> LOCKED_BLOCK = register("locked_block", LockedBlock::new, () -> BlockBehaviour.Properties.of().strength(-1.0F, 3600000.8F).noLootTable().dynamicShape().isValidSpawn(Blocks::always).pushReaction(PushReaction.BLOCK), LockedBlockItem::new);
 
     private static Block.Properties skyrootSignProperties() { return Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD); }
     public static final DeferredBlock<StandingSignBlock> SKYROOT_SIGN = register("skyroot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.SKYROOT, properties), AetherIIBlocks::skyrootSignProperties, signItem(() -> AetherIIBlocks.SKYROOT_WALL_SIGN));

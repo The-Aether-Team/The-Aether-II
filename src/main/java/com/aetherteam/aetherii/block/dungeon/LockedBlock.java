@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.block.dungeon;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.blockentity.LockedBlockEntity;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
@@ -28,12 +29,16 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
 public class LockedBlock extends BaseEntityBlock {
     public static final MapCodec<LockedBlock> CODEC = simpleCodec(LockedBlock::new);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final BooleanProperty EMPTY = AetherIIBlockStateProperties.EMPTY;
 
     @Override
     protected MapCodec<LockedBlock> codec() {
@@ -42,7 +47,7 @@ public class LockedBlock extends BaseEntityBlock {
 
     public LockedBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, false).setValue(EMPTY, true));
     }
 
     @Override
@@ -67,7 +72,8 @@ public class LockedBlock extends BaseEntityBlock {
                 if (level.getBlockEntity(pos) instanceof LockedBlockEntity lockedBlockEntity) {
                     lockedBlockEntity.setMimicState(mimicState);
                     lockedBlockEntity.requestModelDataUpdate();
-                    level.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
+                    level.setBlockAndUpdate(pos, state.setValue(EMPTY, false));
+//                    level.sendBlockUpdated(pos, state, newState, Block.UPDATE_ALL);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -95,30 +101,69 @@ public class LockedBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED);
+        builder.add(WATERLOGGED, EMPTY);
+    }
+
+    @Override
+    public boolean hidesNeighborFace(BlockGetter level, BlockPos pos, BlockState state, BlockState neighborState, Direction dir) {
+        if (!state.getValue(EMPTY)) {
+            if (level.getBlockEntity(pos) instanceof LockedBlockEntity lockedBlockEntity && lockedBlockEntity.getMimicState() != null) {
+                return lockedBlockEntity.getMimicState().hidesNeighborFace(level, pos, neighborState, dir);
+            }
+        }
+        return super.hidesNeighborFace(level, pos, state, neighborState, dir);
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        if (!state.getValue(EMPTY)) {
+            if (level.getBlockEntity(pos) instanceof LockedBlockEntity lockedBlockEntity && lockedBlockEntity.getMimicState() != null) {
+                return lockedBlockEntity.getMimicState().getShape(level, pos);
+            }
+        }
+        return super.getShape(state, level, pos, context);
     }
 
     @Override
     public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
-        if (level.getBlockEntity(pos) instanceof LockedBlockEntity lockedBlockEntity && lockedBlockEntity.getMimicState() != null) {
-            return lockedBlockEntity.getMimicState().getLightEmission(level, pos);
+        if (!state.getValue(EMPTY)) {
+            if (level.getBlockEntity(pos) instanceof LockedBlockEntity lockedBlockEntity && lockedBlockEntity.getMimicState() != null) {
+                return lockedBlockEntity.getMimicState().getLightEmission(level, pos);
+            }
         }
         return super.getLightEmission(state, level, pos);
     }
 
     @Override
     public MapColor getMapColor(BlockState state, BlockGetter level, BlockPos pos, MapColor defaultColor) {
-        if (level.getBlockEntity(pos) instanceof LockedBlockEntity lockedBlockEntity && lockedBlockEntity.getMimicState() != null) {
-            return lockedBlockEntity.getMimicState().getMapColor(level, pos);
+        if (!state.getValue(EMPTY)) {
+            if (level.getBlockEntity(pos) instanceof LockedBlockEntity lockedBlockEntity && lockedBlockEntity.getMimicState() != null) {
+                return lockedBlockEntity.getMimicState().getMapColor(level, pos);
+            }
         }
         return super.getMapColor(state, level, pos, defaultColor);
     }
 
     @Override
     protected void spawnDestroyParticles(Level level, Player player, BlockPos pos, BlockState state) {
-        if (level.getBlockEntity(pos) instanceof LockedBlockEntity lockedBlockEntity && lockedBlockEntity.getMimicState() != null) {
-            super.spawnDestroyParticles(level, player, pos, state);
+        if (!state.getValue(EMPTY)) {
+            if (level.getBlockEntity(pos) instanceof LockedBlockEntity lockedBlockEntity && lockedBlockEntity.getMimicState() != null) {
+                super.spawnDestroyParticles(level, player, pos, state);
+            }
         }
+    }
+
+    @Override
+    protected VoxelShape getOcclusionShape(BlockState state) {
+        if (!state.getValue(EMPTY)) {
+            return super.getOcclusionShape(state);
+        }
+        return Shapes.empty();
+    }
+
+    @Override
+    protected boolean useShapeForLightOcclusion(BlockState state) {
+        return true;
     }
 
     @Override
