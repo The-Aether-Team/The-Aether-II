@@ -20,6 +20,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -154,11 +155,37 @@ public class LockedBlock extends BaseEntityBlock {
     }
 
     @Override
+    protected float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
+        if (!state.getValue(EMPTY)) {
+            if (level.getBlockEntity(pos) instanceof LockedBlockEntity lockedBlockEntity && lockedBlockEntity.getMimicState() != null) {
+                return lockedBlockEntity.getMimicState().getShadeBrightness(level, pos);
+            }
+        }
+        return 1.0F;
+    }
+
+    @Override
     protected VoxelShape getOcclusionShape(BlockState state) {
         if (!state.getValue(EMPTY)) {
             return super.getOcclusionShape(state);
         }
         return Shapes.empty();
+    }
+
+    @Override
+    protected boolean propagatesSkylightDown(BlockState state) {
+        if (!state.getValue(EMPTY)) {
+            return super.propagatesSkylightDown(state);
+        }
+        return true;
+    }
+
+    @Override
+    protected RenderShape getRenderShape(BlockState state) {
+        if (!state.getValue(EMPTY)) {
+            return RenderShape.MODEL;
+        }
+        return RenderShape.INVISIBLE;
     }
 
     @Override
