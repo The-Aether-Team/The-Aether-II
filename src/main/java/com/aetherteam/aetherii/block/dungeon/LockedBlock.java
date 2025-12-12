@@ -71,10 +71,11 @@ public class LockedBlock extends BaseEntityBlock {
             BlockState mimicState = blockItem.getBlock().getStateForPlacement(new BlockPlaceContext(player, hand, stack, hitResult));
             if (mimicState != null && mimicState.getBlock() != this && mimicState.is(AetherIITags.Blocks.LOCKABLE_BLOCKS)) {
                 if (level.getBlockEntity(pos) instanceof LockedBlockEntity lockedBlockEntity) {
+                    BlockState newState = state.setValue(EMPTY, false);
                     lockedBlockEntity.setMimicState(mimicState);
                     lockedBlockEntity.requestModelDataUpdate();
-                    level.setBlockAndUpdate(pos, state.setValue(EMPTY, false));
-//                    level.sendBlockUpdated(pos, state, newState, Block.UPDATE_ALL);
+                    level.setBlockAndUpdate(pos, newState);
+                    level.sendBlockUpdated(pos, state, newState, Block.UPDATE_ALL);
                     return InteractionResult.SUCCESS;
                 }
             }
