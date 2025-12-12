@@ -1,13 +1,20 @@
 package com.aetherteam.aetherii.mixin.mixins.client;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;
+import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
+
+import java.util.List;
 
 @Mixin(ModelBlockRenderer.class)
 public class ModelBlockRendererMixin {
@@ -20,6 +27,17 @@ public class ModelBlockRendererMixin {
             args.set(3, red * 0.75F);
             args.set(4, green * 0.75F);
             args.set(5, blue * 0.75F);
+        }
+    }
+
+    @WrapOperation(method = "renderModel(Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/renderer/block/model/BlockStateModel;FFFIILnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/block/ModelBlockRenderer;renderQuadList(Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lcom/mojang/blaze3d/vertex/VertexConsumer;FFFLjava/util/List;II)V"))
+    private static void renderQuadList(PoseStack.Pose pose, VertexConsumer consumer, float red, float green, float blue, List<BakedQuad> quads, int packedLight, int packedOverlay, Operation<Void> original, @Local(argsOnly = true) BlockState state) {
+        if (state.is(AetherIIBlocks.LOCKED_BLOCK)) {
+            for (BakedQuad bakedquad : quads) {
+                consumer.putBulkData(pose, bakedquad, red * 0.75F, green * 0.75F, blue * 0.75F, 1.0F, packedLight, packedOverlay);
+            }
+        } else {
+            original.call(pose, consumer, red, green, blue, quads, packedLight, packedOverlay);
         }
     }
 }

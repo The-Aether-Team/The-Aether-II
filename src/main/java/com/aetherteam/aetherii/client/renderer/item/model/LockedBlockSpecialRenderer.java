@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.renderer.item.model;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -20,7 +21,6 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.EmptyBlockAndTintGetter;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
@@ -33,7 +33,7 @@ public class LockedBlockSpecialRenderer implements SpecialModelRenderer<BlockSta
         BlockAndTintGetter world = Minecraft.getInstance().level;
         if (blockState != null && world != null) {
             poseStack.pushPose();
-            ModelBlockRenderer.renderModel(poseStack.last(), multiBufferSource, Minecraft.getInstance().getBlockRenderer().getBlockModel(blockState), 1.0F, 1.0F, 1.0F, packedLight, packedOverlay, EmptyBlockAndTintGetter.INSTANCE, BlockPos.ZERO, Blocks.AIR.defaultBlockState());
+            ModelBlockRenderer.renderModel(poseStack.last(), multiBufferSource, Minecraft.getInstance().getBlockRenderer().getBlockModel(blockState), 1.0F, 1.0F, 1.0F, packedLight, packedOverlay, EmptyBlockAndTintGetter.INSTANCE, BlockPos.ZERO, AetherIIBlocks.LOCKED_BLOCK.get().defaultBlockState());
             drawSurfaces(multiBufferSource, poseStack.last(), -0.001F, -0.001F, 1.001F, 1.001F, -0.001F, 1.001F);
             poseStack.popPose();
         }
