@@ -98,7 +98,12 @@ public class LockedBlock extends BaseEntityBlock {
 
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER);
+        ItemStack stack = context.getItemInHand();
+        BlockState placementState = this.defaultBlockState().setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER);
+        if (stack.get(AetherIIDataComponents.BLOCK_STATE) != null) {
+            placementState = placementState.setValue(EMPTY, false);
+        }
+        return placementState;
     }
 
     @Override
