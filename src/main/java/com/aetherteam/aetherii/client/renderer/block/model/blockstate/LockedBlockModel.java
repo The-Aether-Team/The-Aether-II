@@ -4,6 +4,8 @@ import com.aetherteam.aetherii.blockentity.LockedBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BlockModelPart;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
+import net.minecraft.client.renderer.block.model.SimpleModelWrapper;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -11,6 +13,7 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.DelegateBlockStateModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LockedBlockModel extends DelegateBlockStateModel {
@@ -25,7 +28,13 @@ public class LockedBlockModel extends DelegateBlockStateModel {
             return;
         }
         BlockState state = data.state();
-        Minecraft.getInstance().getModelManager().getBlockModelShaper().getBlockModel(state).collectParts(blockAndTintGetter, blockPos, state, randomSource, list);
+        List<BlockModelPart> newParts = new ArrayList<>();
+        Minecraft.getInstance().getModelManager().getBlockModelShaper().getBlockModel(state).collectParts(blockAndTintGetter, blockPos, state, randomSource, newParts);
+        for (BlockModelPart part : newParts) {
+            if (part instanceof SimpleModelWrapper simpleModelWrapper) {
+                list.add(new SimpleModelWrapper(simpleModelWrapper.quads(), simpleModelWrapper.useAmbientOcclusion(), this.particleIcon(blockAndTintGetter, blockPos, blockState), ChunkSectionLayer.SOLID));
+            }
+        }
     }
 
     @Override
