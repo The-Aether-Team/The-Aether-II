@@ -199,7 +199,7 @@ public class SentryWorkshopBuilder {
         int topSurfaceY = chunkGenerator.getFirstOccupiedHeight(entranceRoomCenter.getX(), entranceRoomCenter.getZ(), Heightmap.Types.OCEAN_FLOOR_WG, level, randomState);
 
         if (lobby != null) {
-            for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY() - 12) / 6; i++) {
+            for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY() - 8) / 6; i++) {
                 SentryWorkshopPiece staircase = this.chooseRoom("staircase", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6), lobbyRotation, this.processors.bossSettings());
                 this.nodes.add(staircase);
             }
