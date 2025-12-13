@@ -208,15 +208,15 @@ public class SentryWorkshopBuilder {
 
     public BlockPos staircasePos(BoundingBox lobbyBounds, Rotation lobbyRotation, int y) {
         if (lobbyRotation == Rotation.NONE) {
-            return new BlockPos(lobbyBounds.minX() + 10, y, lobbyBounds.minZ() + 7);
+            return new BlockPos(lobbyBounds.minX() + 9, y, lobbyBounds.minZ() + 6);
         }
         else if (lobbyRotation == Rotation.CLOCKWISE_90) {
-            return new BlockPos(lobbyBounds.minX() + 8, y, lobbyBounds.minZ() + 10);
+            return new BlockPos(lobbyBounds.minX() + 9, y, lobbyBounds.minZ() + 9);
         }
         else if (lobbyRotation == Rotation.CLOCKWISE_180) {
-            return new BlockPos(lobbyBounds.minX() + 15, y, lobbyBounds.minZ() + 8);
+            return new BlockPos(lobbyBounds.minX() + 16, y, lobbyBounds.minZ() + 9);
         }
-        return new BlockPos(lobbyBounds.minX() + 7, y, lobbyBounds.minZ() + 15);
+        return new BlockPos(lobbyBounds.minX() + 6, y, lobbyBounds.minZ() + 16);
     }
 
     public SentryWorkshopPiece chooseRoom(String name, BlockPos pos, Rotation rotation, Holder<StructureProcessorList> processors) {
