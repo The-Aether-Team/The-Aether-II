@@ -31,8 +31,10 @@ public class LockedBlockModel extends DelegateBlockStateModel {
         List<BlockModelPart> newParts = new ArrayList<>();
         Minecraft.getInstance().getModelManager().getBlockModelShaper().getBlockModel(state).collectParts(blockAndTintGetter, blockPos, state, randomSource, newParts);
         for (BlockModelPart part : newParts) {
-            if (part instanceof SimpleModelWrapper simpleModelWrapper) {
+            if (part instanceof SimpleModelWrapper simpleModelWrapper && simpleModelWrapper.getRenderType(state) != ChunkSectionLayer.SOLID) {
                 list.add(new SimpleModelWrapper(simpleModelWrapper.quads(), simpleModelWrapper.useAmbientOcclusion(), this.particleIcon(blockAndTintGetter, blockPos, blockState), ChunkSectionLayer.SOLID));
+            } else {
+                list.add(part);
             }
         }
     }
