@@ -43,7 +43,7 @@ public class SentryWorkshopBuilder {
             Map.entry("lobby", new WeightedList.Builder<>()),
             Map.entry("square_tunnel", new WeightedList.Builder<>()),
             Map.entry("staircase", new WeightedList.Builder<>()),
-            Map.entry("surface_entrance", new WeightedList.Builder<>())
+            Map.entry("surface_ruin", new WeightedList.Builder<>())
     );
     private static Map<String, WeightedList<RoomProvider<?>>> ROOM_OPTIONS;
     
@@ -58,6 +58,8 @@ public class SentryWorkshopBuilder {
                 .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "rooms/forge", pos, rotation, processorList), 1);
         ROOM_OPTIONS_BUILDER.get("lobby").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "lobby", pos, rotation, processorList), 1);
         ROOM_OPTIONS_BUILDER.get("square_tunnel").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "square_tunnel", pos, rotation, processorList), 1);
+        ROOM_OPTIONS_BUILDER.get("staircase").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "staircase", pos, rotation, processorList), 1);
+        ROOM_OPTIONS_BUILDER.get("surface_ruin").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "surface_ruins/ruin_01", pos, rotation, processorList), 1);
     }
 
     private final Structure.GenerationContext context;
@@ -117,7 +119,7 @@ public class SentryWorkshopBuilder {
             }
 
             this.propagateRooms(defaultRoom, chunkPos, true);
-            this.buildSurfaceStaircase(genContext.heightAccessor(), genContext.chunkGenerator(), genContext.randomState());
+            this.buildSurfaceStaircase(genContext.heightAccessor(), genContext.chunkGenerator(), genContext.randomState(), 2);
 
             this.populatePiecesBuilder(builder);
         }
@@ -187,7 +189,7 @@ public class SentryWorkshopBuilder {
         return null;
     }
 
-    private void buildSurfaceStaircase(LevelHeightAccessor level, ChunkGenerator chunkGenerator, RandomState randomState) {
+    private void buildSurfaceStaircase(LevelHeightAccessor level, ChunkGenerator chunkGenerator, RandomState randomState, int stopBeforeSurface) {
         final int shrink = 3;
         StructurePiece lobby = this.seekLastRoomNode(shrink * 2);
         //if (lobby == null) return; // Not likely to happen ever, but just in case for wackiness
@@ -199,24 +201,26 @@ public class SentryWorkshopBuilder {
         int topSurfaceY = chunkGenerator.getFirstOccupiedHeight(entranceRoomCenter.getX(), entranceRoomCenter.getZ(), Heightmap.Types.OCEAN_FLOOR_WG, level, randomState);
 
         if (lobby != null) {
-            for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY() - 8) / 6; i++) {
-                SentryWorkshopPiece staircase = this.chooseRoom("staircase", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6), lobbyRotation, this.processors.bossSettings());
+            for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY() - stopBeforeSurface) / 6; i++) {
+                SentryWorkshopPiece staircase = this.chooseRoom("staircase", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6, 0), lobbyRotation, this.processors.bossSettings());
                 this.nodes.add(staircase);
             }
         }
+        SentryWorkshopPiece surfaceRuin = this.chooseRoom("surface_ruin", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + topSurfaceY - lobbyBounds.maxY() - stopBeforeSurface, 1), lobbyRotation, this.processors.bossSettings());
+        this.nodes.add(surfaceRuin);
     }
 
-    public BlockPos staircasePos(BoundingBox lobbyBounds, Rotation lobbyRotation, int y) {
+    public BlockPos staircasePos(BoundingBox lobbyBounds, Rotation lobbyRotation, int y, int offset) {
         if (lobbyRotation == Rotation.NONE) {
-            return new BlockPos(lobbyBounds.minX() + 9, y, lobbyBounds.minZ() + 6);
+            return new BlockPos(lobbyBounds.minX() + 9 - offset, y, lobbyBounds.minZ() + 6 - offset);
         }
         else if (lobbyRotation == Rotation.CLOCKWISE_90) {
-            return new BlockPos(lobbyBounds.minX() + 9, y, lobbyBounds.minZ() + 9);
+            return new BlockPos(lobbyBounds.minX() + 9 + offset, y, lobbyBounds.minZ() + 9 - offset);
         }
         else if (lobbyRotation == Rotation.CLOCKWISE_180) {
-            return new BlockPos(lobbyBounds.minX() + 16, y, lobbyBounds.minZ() + 9);
+            return new BlockPos(lobbyBounds.minX() + 16 + offset, y, lobbyBounds.minZ() + 9 + offset);
         }
-        return new BlockPos(lobbyBounds.minX() + 6, y, lobbyBounds.minZ() + 16);
+        return new BlockPos(lobbyBounds.minX() + 6 - offset, y, lobbyBounds.minZ() + 16 + offset);
     }
 
     public SentryWorkshopPiece chooseRoom(String name, BlockPos pos, Rotation rotation, Holder<StructureProcessorList> processors) {
