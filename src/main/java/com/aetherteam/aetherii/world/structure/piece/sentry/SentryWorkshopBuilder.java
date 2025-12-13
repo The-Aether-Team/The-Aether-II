@@ -190,42 +190,20 @@ public class SentryWorkshopBuilder {
     private void buildSurfaceStaircase(LevelHeightAccessor level, ChunkGenerator chunkGenerator, RandomState randomState) {
         final int shrink = 3;
         StructurePiece lobby = this.seekLastRoomNode(shrink * 2);
-        if (lobby == null) return; // Not likely to happen ever, but just in case for wackiness
+        //if (lobby == null) return; // Not likely to happen ever, but just in case for wackiness
 
+        assert lobby != null;
         BoundingBox lobbyBounds = lobby.getBoundingBox();
         BlockPos entranceRoomCenter = lobbyBounds.getCenter();
         Rotation lobbyRotation = lobby.getRotation();
         int topSurfaceY = chunkGenerator.getFirstOccupiedHeight(entranceRoomCenter.getX(), entranceRoomCenter.getZ(), Heightmap.Types.OCEAN_FLOOR_WG, level, randomState);
 
-        int roomCeiling = lobbyBounds.maxY() + 1; // Right above the lobby's ceiling blocks
-
-        if (roomCeiling > topSurfaceY)
-            return; // Room somehow clips through top surface of terrain, no room for generating ruins
-
-
-
-        for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY()) / 6; i++) {
-            SentryWorkshopPiece staircase = this.chooseRoom("staircase", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6), lobbyRotation, this.processors.bossSettings());
-            this.nodes.add(staircase);
+        if (lobby != null) {
+            for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY()) / 6; i++) {
+                SentryWorkshopPiece staircase = this.chooseRoom("staircase", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6), lobbyRotation, this.processors.bossSettings());
+                this.nodes.add(staircase);
+            }
         }
-
-        int ruinsTopY = Math.max(roomCeiling, topSurfaceY + 4); // A few extra blocks above the surface centered in this box
-
-        int minX = lobbyBounds.minX() + shrink;
-        int minZ = lobbyBounds.minZ() + shrink;
-        int maxX = lobbyBounds.maxX() - shrink;
-        int maxZ = lobbyBounds.maxZ() - shrink;
-        // Corner-sorting in case any of the templates get customized out of default expectations
-        BoundingBox upwardsTunnelBox = new BoundingBox(
-            Math.min(minX, maxX),
-            roomCeiling,
-            Math.min(minZ, maxZ),
-            Math.max(minX, maxX),
-            ruinsTopY,
-            Math.max(minZ, maxZ)
-        );
-
-        //this.nodes.add(new SentryWorkshopSurfaceRuins(upwardsTunnelBox));
     }
 
     public BlockPos staircasePos(BoundingBox lobbyBounds, Rotation lobbyRotation, int y) {
