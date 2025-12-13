@@ -202,7 +202,12 @@ public class SentryWorkshopBuilder {
         if (roomCeiling > topSurfaceY)
             return; // Room somehow clips through top surface of terrain, no room for generating ruins
 
-        SentryWorkshopPiece staircase = this.chooseRoom("staircase", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1), lobbyRotation, this.processors.bossSettings());
+
+
+        for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY()) / 6; i++) {
+            SentryWorkshopPiece staircase = this.chooseRoom("staircase", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6), lobbyRotation, this.processors.bossSettings());
+            this.nodes.add(staircase);
+        }
 
         int ruinsTopY = Math.max(roomCeiling, topSurfaceY + 4); // A few extra blocks above the surface centered in this box
 
@@ -219,7 +224,7 @@ public class SentryWorkshopBuilder {
             ruinsTopY,
             Math.max(minZ, maxZ)
         );
-        this.nodes.add(staircase);
+
         //this.nodes.add(new SentryWorkshopSurfaceRuins(upwardsTunnelBox));
     }
 
