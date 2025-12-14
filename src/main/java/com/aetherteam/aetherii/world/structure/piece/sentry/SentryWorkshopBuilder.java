@@ -119,7 +119,7 @@ public class SentryWorkshopBuilder {
             }
 
             this.propagateRooms(defaultRoom, chunkPos, true);
-            this.buildSurfaceStaircase(genContext.heightAccessor(), genContext.chunkGenerator(), genContext.randomState(), 2);
+            this.buildSurfaceStaircase(genContext.heightAccessor(), genContext.chunkGenerator(), genContext.randomState(), 6);
 
             this.populatePiecesBuilder(builder);
         }
@@ -189,25 +189,28 @@ public class SentryWorkshopBuilder {
         return null;
     }
 
-    private void buildSurfaceStaircase(LevelHeightAccessor level, ChunkGenerator chunkGenerator, RandomState randomState, int stopBeforeSurface) {
+    private void buildSurfaceStaircase(LevelHeightAccessor level, ChunkGenerator chunkGenerator, RandomState randomState , int stopBeforeSurface) {
         final int shrink = 3;
         StructurePiece lobby = this.seekLastRoomNode(shrink * 2);
-        //if (lobby == null) return; // Not likely to happen ever, but just in case for wackiness
+        if (lobby == null) return; // Not likely to happen ever, but just in case for wackiness
 
-        assert lobby != null;
         BoundingBox lobbyBounds = lobby.getBoundingBox();
         BlockPos entranceRoomCenter = lobbyBounds.getCenter();
         Rotation lobbyRotation = lobby.getRotation();
         int topSurfaceY = chunkGenerator.getFirstOccupiedHeight(entranceRoomCenter.getX(), entranceRoomCenter.getZ(), Heightmap.Types.OCEAN_FLOOR_WG, level, randomState);
 
-        if (lobby != null) {
-            for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY() - stopBeforeSurface) / 6; i++) {
-                SentryWorkshopPiece staircase = this.chooseRoom("staircase", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6, 0), lobbyRotation, this.processors.bossSettings());
-                this.nodes.add(staircase);
+        for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY() - stopBeforeSurface) / 6; i++) {
+            SentryWorkshopPiece staircase = this.chooseRoom("staircase", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6, 0), lobbyRotation, this.processors.bossSettings());
+            this.nodes.add(staircase);
+
+
+        }
+        for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY() - stopBeforeSurface) / 6; i++) {
+            if (i++ >= (topSurfaceY - lobbyBounds.maxY() - stopBeforeSurface - 6) / 6) {
+                SentryWorkshopPiece surfaceRuin = this.chooseRoom("surface_ruin", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6, 1), lobbyRotation, this.processors.bossSettings());
+                this.nodes.add(surfaceRuin);
             }
         }
-        SentryWorkshopPiece surfaceRuin = this.chooseRoom("surface_ruin", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + topSurfaceY - lobbyBounds.maxY() - stopBeforeSurface, 1), lobbyRotation, this.processors.bossSettings());
-        this.nodes.add(surfaceRuin);
     }
 
     public BlockPos staircasePos(BoundingBox lobbyBounds, Rotation lobbyRotation, int y, int offset) {
