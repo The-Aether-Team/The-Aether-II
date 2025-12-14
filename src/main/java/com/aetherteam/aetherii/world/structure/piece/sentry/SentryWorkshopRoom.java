@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.world.structure.piece.sentry;
 
-import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.monster.dungeon.SentryGolem;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.world.structure.piece.AetherIIStructurePieceTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -9,6 +11,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
@@ -19,6 +23,7 @@ import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSeriali
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Objects;
 
@@ -38,7 +43,14 @@ public class SentryWorkshopRoom extends SentryWorkshopPiece {
     protected void handleDataMarker(String name, BlockPos pos, ServerLevelAccessor level, RandomSource random, BoundingBox box) {
         level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
 
-        if (random.nextInt(4) > 1) {
+        if (name.equals("Sentry Golem")) {
+            SentryGolem sentryGolem = new SentryGolem(AetherIIEntityTypes.SENTRY_GOLEM.get(), level.getLevel());
+            sentryGolem.setPos(Vec3.atBottomCenterOf(pos));
+            sentryGolem.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(AetherIIItems.DEMOLITION_HAMMER.asItem()));
+            sentryGolem.setLeftHanded(true);
+            level.addFreshEntity(sentryGolem);
+        }
+        else if (random.nextInt(4) > 1) {
             ConfiguredFeature<?, ?> feature = Objects.requireNonNull(level.registryAccess().get(ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.parse(name))).orElse(null)).value();
             feature.place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);
         }
