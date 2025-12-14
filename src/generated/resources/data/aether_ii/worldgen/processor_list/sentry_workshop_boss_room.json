@@ -73,8 +73,13 @@
         },
         {
           "input_predicate": {
-            "block": "aether_ii:undershale_base_pillar",
-            "predicate_type": "minecraft:random_block_match",
+            "block_state": {
+              "Name": "aether_ii:undershale_base_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
             "probability": 0.05
           },
           "location_predicate": {
@@ -91,8 +96,13 @@
         },
         {
           "input_predicate": {
-            "block": "aether_ii:undershale_capstone_pillar",
-            "predicate_type": "minecraft:random_block_match",
+            "block_state": {
+              "Name": "aether_ii:undershale_capstone_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
             "probability": 0.05
           },
           "location_predicate": {
@@ -109,8 +119,13 @@
         },
         {
           "input_predicate": {
-            "block": "aether_ii:undershale_pillar",
-            "predicate_type": "minecraft:random_block_match",
+            "block_state": {
+              "Name": "aether_ii:undershale_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
             "probability": 0.05
           },
           "location_predicate": {
@@ -195,8 +210,13 @@
         },
         {
           "input_predicate": {
-            "block": "aether_ii:undershale_base_pillar",
-            "predicate_type": "minecraft:random_block_match",
+            "block_state": {
+              "Name": "aether_ii:undershale_base_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
             "probability": 0.05
           },
           "location_predicate": {
@@ -213,8 +233,13 @@
         },
         {
           "input_predicate": {
-            "block": "aether_ii:undershale_capstone_pillar",
-            "predicate_type": "minecraft:random_block_match",
+            "block_state": {
+              "Name": "aether_ii:undershale_capstone_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
             "probability": 0.05
           },
           "location_predicate": {
@@ -231,8 +256,13 @@
         },
         {
           "input_predicate": {
-            "block": "aether_ii:undershale_pillar",
-            "predicate_type": "minecraft:random_block_match",
+            "block_state": {
+              "Name": "aether_ii:undershale_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
             "probability": 0.05
           },
           "location_predicate": {
