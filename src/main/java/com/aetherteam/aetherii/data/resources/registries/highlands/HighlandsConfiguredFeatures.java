@@ -290,6 +290,15 @@ public class HighlandsConfiguredFeatures {
 
 
     // Dungeon
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_HOLYSTONE = createKey("pile_holystone");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_UNDERSHALE = createKey("pile_undershale");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_AGIOSITE = createKey("pile_agiosite");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_AMBROSIUM_ORE = createKey("pile_ambrosium_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_ICESTONE = createKey("pile_icestone");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_ARCTIC_PACKED_ICE = createKey("pile_arctic_packed_ice");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PILES_MATERIAL_DEPOSIT = createKey("piles_material_deposit");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PILES_COLD_STORAGE = createKey("piles_cold_storage");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SHELF_ROTSHROOM = createKey("large_shelf_rotshroom");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SHELF_ROTSHROOM_UNDERGROUND = createKey("large_shelf_rotshroom_underground");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ROTSHROOM_PATCH = createKey("rotshroom_patch");
@@ -2348,6 +2357,23 @@ public class HighlandsConfiguredFeatures {
     private static void bootstrapDungeon(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
+        register(context, PILE_HOLYSTONE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get())));
+        register(context, PILE_UNDERSHALE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.UNDERSHALE.get())));
+        register(context, PILE_AGIOSITE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.AGIOSITE.get())));
+        register(context, PILE_AMBROSIUM_ORE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.AMBROSIUM_ORE.get())));
+        register(context, PILE_ICESTONE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.ICESTONE.get())));
+        register(context, PILE_ARCTIC_PACKED_ICE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get())));
+
+        register(context, PILES_MATERIAL_DEPOSIT, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(PILE_UNDERSHALE)), 0.4F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(PILE_AGIOSITE)), 0.2F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(PILE_AMBROSIUM_ORE)), 0.1F)
+        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(PILE_HOLYSTONE))));
+
+        register(context, PILES_COLD_STORAGE, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(PILE_ARCTIC_PACKED_ICE)), 0.25F)
+        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(PILE_ICESTONE))));
+
         register(context, LARGE_SHELF_ROTSHROOM, AetherIIFeatures.LARGE_SHELF_MUSHROOM.get(), new LargeShelfMushroomConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get()), 1, 2, 96));
         register(context, LARGE_SHELF_ROTSHROOM_UNDERGROUND, AetherIIFeatures.LARGE_SHELF_MUSHROOM.get(), new LargeShelfMushroomConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get()), 1, 2, 0));
         register(context, ROTSHROOM_PATCH, Feature.RANDOM_PATCH,
@@ -2375,7 +2401,7 @@ public class HighlandsConfiguredFeatures {
                                 .build())
                         ), BlockPredicate.ONLY_IN_AIR_PREDICATE)));
 
-        FeatureUtils.register(context, COARSE_AETHER_DIRT_DUNGEON, Feature.VEGETATION_PATCH,
+        register(context, COARSE_AETHER_DIRT_DUNGEON, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.AETHER_DIRT,
                         BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
@@ -2387,7 +2413,7 @@ public class HighlandsConfiguredFeatures {
                         0.65F,
                         UniformInt.of(2, 4),
                         0.375F));
-        FeatureUtils.register(context, INFECTED_PATCH, AetherIIFeatures.INFECTED_PATCH.get(),
+        register(context, INFECTED_PATCH, AetherIIFeatures.INFECTED_PATCH.get(),
                 new InfectedPatchConfiguration(
                         AetherIITags.Blocks.INFECTED_PATCH_GENERATES_ON,
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ROTSHROOM_PATCH_INFECTED)),
@@ -2416,7 +2442,7 @@ public class HighlandsConfiguredFeatures {
                         Direction.DOWN,
                         BlockPredicate.ONLY_IN_AIR_PREDICATE,
                         true));
-        FeatureUtils.register(context, UNDERGROWTH_PATCH, Feature.VEGETATION_PATCH,
+        register(context, UNDERGROWTH_PATCH, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON,
                         BlockStateProvider.simple(AetherIIBlocks.UNDERGROWTH_LEAVES.get().defaultBlockState()),

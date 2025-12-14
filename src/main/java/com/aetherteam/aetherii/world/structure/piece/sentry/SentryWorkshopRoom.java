@@ -1,18 +1,26 @@
 package com.aetherteam.aetherii.world.structure.piece.sentry;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.world.structure.piece.AetherIIStructurePieceTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
+
+import java.util.Objects;
 
 /**
  * A normal Bronze Dungeon room or hallway.
@@ -29,9 +37,10 @@ public class SentryWorkshopRoom extends SentryWorkshopPiece {
     @Override
     protected void handleDataMarker(String name, BlockPos pos, ServerLevelAccessor level, RandomSource random, BoundingBox box) {
         level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
-        if (name.equals("Chest")) {
-//            BlockState state = (random.nextInt(5) > 1 ? AetherIIBlocks.CHEST : AetherBlocks.CHEST_MIMIC.get()).defaultBlockState();
-//            this.createChest(level, box, random, pos, AetherLoot.BRONZE_DUNGEON, state);
+
+        if (random.nextInt(4) > 1) {
+            ConfiguredFeature<?, ?> feature = Objects.requireNonNull(level.registryAccess().get(ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.parse(name))).orElse(null)).value();
+            feature.place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);
         }
     }
 }
