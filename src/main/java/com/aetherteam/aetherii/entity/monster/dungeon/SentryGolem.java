@@ -120,10 +120,7 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
     }
 
     private void setupAnimationStates() {
-        if (this.isRanged() || this.isAggressive() || this.hurtTime > 0) {
-            this.checkSelfAnimationState.stop();
-            this.lookAroundAnimationState.stop();
-        } else if (--this.idleAnimationCooldown <= 0) {
+        if (--this.idleAnimationCooldown <= 0) {
             if (this.random.nextBoolean()) {
                 this.checkSelfAnimationState.start(this.tickCount);
             } else {
@@ -186,16 +183,12 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
             this.attackReadyAnimationState.stop();
             this.attackRangeAnimationState.stop();
             this.attackRangeReadyAnimationState.stop();
-            this.checkSelfAnimationState.stop();
-            this.lookAroundAnimationState.stop();
             this.attackAnimationTick = 0;
         } else if (p_21375_ == 61) {
             this.attackAnimationState.stop();
             this.attackReadyAnimationState.stop();
             this.attackRangeAnimationState.start(this.tickCount);
             this.attackRangeReadyAnimationState.stop();
-            this.checkSelfAnimationState.stop();
-            this.lookAroundAnimationState.stop();
             this.attackRangeAnimationTick = 0;
             this.cooldowns.addCooldown(this.getMainHandItem(), 60);
         } else {
