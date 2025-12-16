@@ -195,11 +195,6 @@ public class LockedBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected boolean useShapeForLightOcclusion(BlockState state) {
-        return true;
-    }
-
-    @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.gameMode != null && minecraft.gameMode.getPlayerMode() == GameType.CREATIVE && minecraft.player != null && minecraft.level != null) {
