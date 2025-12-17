@@ -101,7 +101,7 @@ public class AetherIITags {
         public static final TagKey<Block> HOVERING_BLOCK_REPLACE_BLACKLIST = tag("hovering_block_replace_blacklist");
         public static final TagKey<Block> NON_SENTRY_WORKSHOP_SPAWNABLE = tag("non_sentry_workshop_spawnable");
         public static final TagKey<Block> NON_TUNNEL_REPLACEABLE = tag("non_tunnel_replaceable");
-        public static final TagKey<Block> LOCKABLE_BLOCKS = tag("lockable_blocks");
+        public static final TagKey<Block> COPYABLE_DUNGEON_BLOCKS = tag("copyable_dungeon_blocks");
 
         public static final TagKey<Block> SLIDER_UNBREAKABLE = tag("slider_unbreakable");
 

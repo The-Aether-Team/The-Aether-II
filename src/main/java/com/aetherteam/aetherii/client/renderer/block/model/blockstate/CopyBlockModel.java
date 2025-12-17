@@ -16,8 +16,8 @@ import net.neoforged.neoforge.client.model.DelegateBlockStateModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LockedBlockModel extends DelegateBlockStateModel {
-    public LockedBlockModel(BlockStateModel delegate) {
+public class CopyBlockModel extends DelegateBlockStateModel {
+    public CopyBlockModel(BlockStateModel delegate) {
         super(delegate);
     }
 

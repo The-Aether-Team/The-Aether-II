@@ -302,9 +302,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 Blocks.CHEST,
                 AetherIIBlocks.SKYROOT_CHEST.get(),
                 AetherIIBlocks.SENTRY_CRATE.get(),
-                AetherIIBlocks.LOCKED_BLOCK.get()
+                AetherIIBlocks.LOCKED_BLOCK.get(),
+                AetherIIBlocks.BOSS_DOORWAY_BLOCK.get()
         );
-        this.tag(AetherIITags.Blocks.LOCKABLE_BLOCKS).addTags(
+        this.tag(AetherIITags.Blocks.COPYABLE_DUNGEON_BLOCKS).addTags(
                 AetherIITags.Blocks.UNDERSHALE_DECORATIVE_BLOCKS,
                 AetherIITags.Blocks.SENTRY_DECORATIVE_BLOCKS
         ).add(
@@ -1063,7 +1064,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.CORROBONITE_ORE.get(),
                 AetherIIBlocks.CORROBONITE_BLOCK.get()
         );
-        this.tag(BlockTags.FEATURES_CANNOT_REPLACE).add(AetherIIBlocks.LOCKED_BLOCK.get());
+        this.tag(BlockTags.FEATURES_CANNOT_REPLACE).add(AetherIIBlocks.LOCKED_BLOCK.get(), AetherIIBlocks.BOSS_DOORWAY_BLOCK.get());
         this.tag(BlockTags.CONVERTABLE_TO_MUD).add(AetherIIBlocks.AETHER_DIRT.get());
         this.tag(BlockTags.SCULK_REPLACEABLE).addTag(AetherIITags.Blocks.HOLYSTONE).add(
                 AetherIIBlocks.AETHER_DIRT.get(),

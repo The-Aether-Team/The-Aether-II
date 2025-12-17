@@ -56,6 +56,9 @@ public class AetherIIBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<LockedBlockEntity>> LOCKED_BLOCK = BLOCK_ENTITY_TYPES.register("locked_block", () ->
             new BlockEntityType<>(LockedBlockEntity::new, AetherIIBlocks.LOCKED_BLOCK.get()));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BossDoorwayBlockEntity>> BOSS_DOORWAY_BLOCK = BLOCK_ENTITY_TYPES.register("boss_doorway_block", () ->
+            new BlockEntityType<>(BossDoorwayBlockEntity::new, AetherIIBlocks.BOSS_DOORWAY_BLOCK.get()));
+
     public static void registerValidBlockEntityTypes(BlockEntityTypeAddBlocksEvent event) {
         event.modify(BlockEntityType.SIGN, AetherIIBlocks.SKYROOT_WALL_SIGN.get(), AetherIIBlocks.SKYROOT_SIGN.get(),
                 AetherIIBlocks.GREATROOT_WALL_SIGN.get(), AetherIIBlocks.GREATROOT_SIGN.get(),

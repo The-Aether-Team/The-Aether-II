@@ -26,7 +26,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.materials.RockItem;
-import com.aetherteam.aetherii.item.miscellaneous.LockedBlockItem;
+import com.aetherteam.aetherii.item.miscellaneous.CopyBlockItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.FireBlockAccessor;
 import com.aetherteam.aetherii.world.tree.AetherIITreeGrowers;
 import com.google.common.collect.ImmutableMap;
@@ -761,7 +761,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> SENTRY_SPAWNER = register("sentry_spawner", SentryWallSpawnerBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F).sound(SoundType.STONE));
     public static final DeferredBlock<Block> SENTRY_TRAP = register("sentry_trap", SentryGroundTrapBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F).sound(SoundType.STONE));
 
-    public static final DeferredBlock<Block> LOCKED_BLOCK = register("locked_block", LockedBlock::new, () -> BlockBehaviour.Properties.of().strength(-1.0F, 3600000.8F).noLootTable().dynamicShape().isValidSpawn(Blocks::always).pushReaction(PushReaction.BLOCK), LockedBlockItem::new);
+    public static final DeferredBlock<Block> LOCKED_BLOCK = register("locked_block", LockedBlock::new, () -> BlockBehaviour.Properties.of().strength(-1.0F, 3600000.8F).noLootTable().dynamicShape().isValidSpawn(Blocks::always).pushReaction(PushReaction.BLOCK), CopyBlockItem::new);
+    public static final DeferredBlock<Block> BOSS_DOORWAY_BLOCK = register("boss_doorway_block", BossDoorwayBlock::new, () -> BlockBehaviour.Properties.of().strength(-1.0F, 3600000.8F).noLootTable().dynamicShape().isValidSpawn(Blocks::always).pushReaction(PushReaction.BLOCK), CopyBlockItem::new);
 
     private static Block.Properties skyrootSignProperties() { return Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD); }
     public static final DeferredBlock<StandingSignBlock> SKYROOT_SIGN = register("skyroot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.SKYROOT, properties), AetherIIBlocks::skyrootSignProperties, signItem(() -> AetherIIBlocks.SKYROOT_WALL_SIGN));
