@@ -56,8 +56,8 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
     public int attackRangeAnimationTick;
     public final int attackRangeAnimationLength = 20;
 
-    private float dashAnimationScale;
-    private float dashOldAnimationScale;
+    private float dashScale;
+    private float dashOldScale;
 
     private int idleAnimationCooldown;
     private int idleTick;
@@ -114,23 +114,29 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
                 this.randomStrollGoal.setInterval(RandomStrollGoal.DEFAULT_INTERVAL);
             }
         } else {
-            this.dashOldAnimationScale = this.dashAnimationScale;
-            if (this.isDash()) {
-                this.dashAnimationScale = Mth.clamp(this.dashAnimationScale + 0.1F, 0.0F, 1.0F);
-            } else {
-                this.dashAnimationScale = Mth.clamp(this.dashAnimationScale - 0.1F, 0.0F, 1.0F);
-            }
+
             this.setupAnimationStates();
         }
         this.cooldowns.tick();
+        this.setupRunning();
     }
 
+    private void setupRunning() {
+        this.dashOldScale = this.dashScale;
+        if (this.isDash()) {
+            this.dashScale = Mth.clamp(this.dashScale + 0.1F, 0.0F, 1.0F);
+        } else {
+            this.dashScale = Mth.clamp(this.dashScale - 0.1F, 0.0F, 1.0F);
+        }
+    }
+
+
     public float getDashAnimationScale(float partialTick) {
-        return Mth.lerp(partialTick, this.dashOldAnimationScale, this.dashAnimationScale);
+        return Mth.lerp(partialTick, this.dashOldScale, this.dashScale);
     }
 
     private boolean isDash() {
-        return this.walkAnimation.speed() > 0.02F;
+        return this.walkAnimation.speed() > 0.015F;
     }
 
     private void setupIdleAnimationCooldown() {
@@ -196,8 +202,15 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
 
     @Override
     protected void updateWalkAnimation(float p_382793_) {
-        float f = Math.min(p_382793_ * 10.0F, 3.0F);
-        this.walkAnimation.update(f, 0.4F, 1.0F);
+        float f2 = Math.min(p_382793_ * (10.0F), 3.0F);
+        this.walkAnimation.update(f2, 0.4F, 1.0F);
+    }
+
+    //prevent weird dash when hurt
+    @Override
+    public void handleDamageEvent(DamageSource damageSource) {
+        super.handleDamageEvent(damageSource);
+        this.dashScale = 1.0F;
     }
 
     @Override
