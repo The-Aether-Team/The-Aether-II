@@ -42,7 +42,7 @@ public abstract class CopyBlockEntity extends BlockEntity {
     protected void loadAdditional(ValueInput input) {
         super.loadAdditional(input);
         this.copyState = input.read("copy_state", BlockState.CODEC).orElse(null);
-        input.read("mimic_state", BlockState.CODEC).ifPresent(state -> this.copyState = state);
+        input.read("mimic_state", BlockState.CODEC).ifPresent(state -> this.copyState = state); //todo remove
     }
 
     @Override

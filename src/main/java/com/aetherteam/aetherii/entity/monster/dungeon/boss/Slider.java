@@ -403,7 +403,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
      */
     @Nullable
     @Override
-    public BlockState convertBlock(BlockState state) {
+    public BlockState convertBlock(Level level, BlockPos pos, BlockState oldState) {
 //        return DUNGEON_BLOCK_CONVERSIONS.getOrDefault(state.getBlock(), (blockState) -> null).apply(state);
         return Blocks.AIR.defaultBlockState();
     }
