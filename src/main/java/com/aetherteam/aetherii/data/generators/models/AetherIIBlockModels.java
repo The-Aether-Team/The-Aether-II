@@ -503,6 +503,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
 
         this.createCopyBlock(AetherIIBlocks.LOCKED_BLOCK, "block/dungeon_lock");
         this.createCopyBlock(AetherIIBlocks.BOSS_DOORWAY_BLOCK, "block/dungeon_doorway");
+        this.createCopyBlock(AetherIIBlocks.TREASURE_DOORWAY_BLOCK, "block/dungeon_treasure");
 
         this.createHangingSign(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get(), AetherIIBlocks.SKYROOT_HANGING_SIGN.get(), AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get());
         this.createHangingSign(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get());

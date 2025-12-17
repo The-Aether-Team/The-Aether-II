@@ -763,6 +763,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     public static final DeferredBlock<Block> LOCKED_BLOCK = register("locked_block", LockedBlock::new, () -> BlockBehaviour.Properties.of().strength(-1.0F, 3600000.8F).noLootTable().dynamicShape().isValidSpawn(Blocks::always).pushReaction(PushReaction.BLOCK), CopyBlockItem::new);
     public static final DeferredBlock<Block> BOSS_DOORWAY_BLOCK = register("boss_doorway_block", BossDoorwayBlock::new, () -> BlockBehaviour.Properties.of().strength(-1.0F, 3600000.8F).noLootTable().dynamicShape().isValidSpawn(Blocks::always).pushReaction(PushReaction.BLOCK), CopyBlockItem::new);
+    public static final DeferredBlock<Block> TREASURE_DOORWAY_BLOCK = register("treasure_doorway_block", TreasureDoorwayBlock::new, () -> BlockBehaviour.Properties.of().strength(-1.0F, 3600000.8F).noLootTable().dynamicShape().isValidSpawn(Blocks::always).pushReaction(PushReaction.BLOCK), CopyBlockItem::new);
 
     private static Block.Properties skyrootSignProperties() { return Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD); }
     public static final DeferredBlock<StandingSignBlock> SKYROOT_SIGN = register("skyroot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.SKYROOT, properties), AetherIIBlocks::skyrootSignProperties, signItem(() -> AetherIIBlocks.SKYROOT_WALL_SIGN));

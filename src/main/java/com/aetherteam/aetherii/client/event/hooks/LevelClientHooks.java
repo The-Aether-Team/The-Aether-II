@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.client.event.hooks;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -204,12 +203,9 @@ public class LevelClientHooks {
             case 1 -> {
                 return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/dungeon_doorway"));
             }
-            //case 2 -> {
-            //    return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(ResourceLocation.fromNamespaceAndPath(Aether.MODID, "block/dungeon/door"));
-            //}
-            //case 3 -> {
-            //    return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(ResourceLocation.fromNamespaceAndPath(Aether.MODID, "block/dungeon/treasure"));
-            //}
+            case 2 -> {
+                return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/dungeon_treasure"));
+            }
             default -> {
                 return null;
             }
@@ -227,10 +223,8 @@ public class LevelClientHooks {
             return 0;
         } else if (stack.is(AetherIIBlocks.BOSS_DOORWAY_BLOCK.asItem())) {
             return 1;
-            //} else if (stack.is(AetherTags.Items.BOSS_DOORWAY_DUNGEON_BLOCKS)) {
-            //    return 2;
-            //} else if (stack.is(AetherTags.Items.TREASURE_DOORWAY_DUNGEON_BLOCKS)) {
-            //    return 3;
+        } else if (stack.is(AetherIIBlocks.TREASURE_DOORWAY_BLOCK.asItem())) {
+            return 2;
         } else {
             return -1;
         }

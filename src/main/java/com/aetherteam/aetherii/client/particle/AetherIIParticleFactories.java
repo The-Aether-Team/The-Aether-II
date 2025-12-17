@@ -110,5 +110,6 @@ public class AetherIIParticleFactories {
 
         event.registerSpriteSet(AetherIIParticleTypes.LOCKED_BLOCK.get(), CopyBlockParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.BOSS_DOORWAY_BLOCK.get(), CopyBlockParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.TREASURE_DOORWAY_BLOCK.get(), CopyBlockParticle.Provider::new);
     }
 }

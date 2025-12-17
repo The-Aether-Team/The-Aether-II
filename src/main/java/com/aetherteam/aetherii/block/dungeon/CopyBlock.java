@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.block.dungeon;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.blockentity.CopyBlockEntity;
-import com.aetherteam.aetherii.blockentity.LockedBlockEntity;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

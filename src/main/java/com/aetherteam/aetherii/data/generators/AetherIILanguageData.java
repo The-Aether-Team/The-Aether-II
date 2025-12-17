@@ -764,6 +764,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addBlock(AetherIIBlocks.LOCKED_BLOCK, "Locked Block");
         this.addBlock(AetherIIBlocks.BOSS_DOORWAY_BLOCK, "Boss Doorway Block");
+        this.addBlock(AetherIIBlocks.TREASURE_DOORWAY_BLOCK, "Treasure Doorway Block");
 
         this.addBlock(AetherIIBlocks.SKYROOT_SIGN, "Skyroot Sign");
         this.addBlock(AetherIIBlocks.SKYROOT_HANGING_SIGN, "Skyroot Hanging Sign");

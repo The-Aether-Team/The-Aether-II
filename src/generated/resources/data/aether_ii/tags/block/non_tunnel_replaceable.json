@@ -6,6 +6,7 @@
     "aether_ii:skyroot_chest",
     "aether_ii:sentry_crate",
     "aether_ii:locked_block",
-    "aether_ii:boss_doorway_block"
+    "aether_ii:boss_doorway_block",
+    "aether_ii:treasure_doorway_block"
   ]
 }
