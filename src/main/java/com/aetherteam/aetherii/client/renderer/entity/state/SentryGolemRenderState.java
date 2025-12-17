@@ -5,6 +5,7 @@ import net.minecraft.world.entity.AnimationState;
 
 public class SentryGolemRenderState extends ArmedEntityRenderState {
     public boolean ranged;
+    public float dashScale;
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState checkSelfAnimationState = new AnimationState();

@@ -7,18 +7,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class LockedBlockEntity extends CopyBlockEntity {
-    public LockedBlockEntity(BlockEntityType<LockedBlockEntity> type, BlockPos pos, BlockState blockState) {
+public class TreasureDoorwayBlockEntity extends CopyBlockEntity {
+    public TreasureDoorwayBlockEntity(BlockEntityType<TreasureDoorwayBlockEntity> type, BlockPos pos, BlockState blockState) {
         super(type, pos, blockState);
     }
 
-    public LockedBlockEntity(BlockPos pos, BlockState blockState) {
-        super(AetherIIBlockEntityTypes.LOCKED_BLOCK.get(), pos, blockState);
+    public TreasureDoorwayBlockEntity(BlockPos pos, BlockState blockState) {
+        super(AetherIIBlockEntityTypes.TREASURE_DOORWAY_BLOCK.get(), pos, blockState);
     }
 
     @Override
     public ItemStack getItem() {
-        ItemStack stack = new ItemStack(AetherIIBlocks.LOCKED_BLOCK);
+        ItemStack stack = new ItemStack(AetherIIBlocks.TREASURE_DOORWAY_BLOCK);
         stack.applyComponents(this.collectComponents());
         return stack;
     }

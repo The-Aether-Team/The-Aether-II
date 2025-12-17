@@ -10,10 +10,11 @@ import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import com.aetherteam.aetherii.client.renderer.item.model.LockedBlockSpecialRenderer;
+import com.aetherteam.aetherii.client.renderer.item.model.CopyBlockSpecialRenderer;
 import com.aetherteam.aetherii.client.renderer.item.model.MuralItemModel;
 import com.aetherteam.aetherii.client.renderer.item.model.SentryCrateSpecialRenderer;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.HasBlockState;
+import net.minecraft.core.Holder;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.aetherteam.aetherii.AetherII;
@@ -1092,15 +1093,15 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.itemModelOutput.accept(item, unbaked);
     }
 
-    public void createLockedBlock(Block block) {
-        ResourceLocation lock = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/dungeon_lock");
-        MultiVariant multivariant = plainVariant(ModelTemplates.PARTICLE_ONLY.create(block, TextureMapping.particle(lock), this.modelOutput));
-        this.blockStateOutput.accept(createSimpleBlock(block, multivariant));
+    public void createCopyBlock(Holder<Block> block, String overlay) {
+        ResourceLocation lock = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, overlay);
+        MultiVariant multivariant = plainVariant(ModelTemplates.PARTICLE_ONLY.create(block.value(), TextureMapping.particle(lock), this.modelOutput));
+        this.blockStateOutput.accept(createSimpleBlock(block.value(), multivariant));
 
-        LockedBlockSpecialRenderer.Unbaked unbaked = new LockedBlockSpecialRenderer.Unbaked();
-        ResourceLocation base = ModelTemplates.CHEST_INVENTORY.create(block.asItem(), TextureMapping.particle(block), this.modelOutput);
-        ResourceLocation baseFlat = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(block.asItem(), "_flat"), TextureMapping.layer0(lock), this.modelOutput);
-        this.itemModelOutput.accept(block.asItem(), ItemModelUtils.conditional(new HasBlockState(), ItemModelUtils.specialModel(base, unbaked), ItemModelUtils.plainModel(baseFlat)));
+        CopyBlockSpecialRenderer.Unbaked unbaked = new CopyBlockSpecialRenderer.Unbaked(block, lock);
+        ResourceLocation base = ModelTemplates.CHEST_INVENTORY.create(block.value().asItem(), TextureMapping.particle(block.value()), this.modelOutput);
+        ResourceLocation baseFlat = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(block.value().asItem(), "_flat"), TextureMapping.layer0(lock), this.modelOutput);
+        this.itemModelOutput.accept(block.value().asItem(), ItemModelUtils.conditional(new HasBlockState(), ItemModelUtils.specialModel(base, unbaked), ItemModelUtils.plainModel(baseFlat)));
     }
 
     public void createLadder(Block block) {

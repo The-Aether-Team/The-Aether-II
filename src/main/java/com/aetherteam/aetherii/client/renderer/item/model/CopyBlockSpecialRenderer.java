@@ -1,11 +1,10 @@
 package com.aetherteam.aetherii.client.renderer.item.model;
 
-import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,25 +15,36 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.EmptyBlockAndTintGetter;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
 import java.util.Set;
 
-public class LockedBlockSpecialRenderer implements SpecialModelRenderer<BlockState> {
+public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState> {
+    private final Holder<Block> block;
+    private final ResourceLocation overlay;
+
+    public CopyBlockSpecialRenderer(Holder<Block> block, ResourceLocation overlay) {
+        this.block = block;
+        this.overlay = overlay;
+    }
+
     @Override
     public void render(@Nullable BlockState blockState, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay, boolean partialTick) {
         BlockAndTintGetter world = Minecraft.getInstance().level;
         if (blockState != null && world != null) {
             poseStack.pushPose();
-            ModelBlockRenderer.renderModel(poseStack.last(), multiBufferSource, Minecraft.getInstance().getBlockRenderer().getBlockModel(blockState), 1.0F, 1.0F, 1.0F, packedLight, packedOverlay, EmptyBlockAndTintGetter.INSTANCE, BlockPos.ZERO, AetherIIBlocks.LOCKED_BLOCK.get().defaultBlockState());
-            drawSurfaces(multiBufferSource, poseStack.last(), -0.001F, -0.001F, 1.001F, 1.001F, -0.001F, 1.001F);
+            ModelBlockRenderer.renderModel(poseStack.last(), multiBufferSource, Minecraft.getInstance().getBlockRenderer().getBlockModel(blockState), 1.0F, 1.0F, 1.0F, packedLight, packedOverlay, EmptyBlockAndTintGetter.INSTANCE, BlockPos.ZERO, this.block.value().defaultBlockState());
+            this.drawSurfaces(multiBufferSource, poseStack.last(), -0.001F, -0.001F, 1.001F, 1.001F, -0.001F, 1.001F);
             poseStack.popPose();
         }
     }
@@ -62,9 +72,9 @@ public class LockedBlockSpecialRenderer implements SpecialModelRenderer<BlockSta
         }
     }
 
-    private static void drawSurfaces(MultiBufferSource buffer, PoseStack.Pose pose, float startX, float startZ, float endX, float endZ, float botY, float topY) {
+    private void drawSurfaces(MultiBufferSource buffer, PoseStack.Pose pose, float startX, float startZ, float endX, float endZ, float botY, float topY) {
         VertexConsumer builder = buffer.getBuffer(RenderType.cutout());
-        TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/dungeon_lock"));
+        TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(this.overlay);
 
         if (sprite != null) {
             float minU = sprite.getU1();
@@ -113,17 +123,20 @@ public class LockedBlockSpecialRenderer implements SpecialModelRenderer<BlockSta
         return itemStack.get(AetherIIDataComponents.BLOCK_STATE);
     }
 
-    public record Unbaked() implements SpecialModelRenderer.Unbaked {
-        public static final MapCodec<LockedBlockSpecialRenderer.Unbaked> MAP_CODEC = MapCodec.unit(Unbaked::new);
+    public record Unbaked(Holder<Block> block, ResourceLocation overlay) implements SpecialModelRenderer.Unbaked {
+        public static final MapCodec<CopyBlockSpecialRenderer.Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+                BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("block").forGetter(CopyBlockSpecialRenderer.Unbaked::block),
+                ResourceLocation.CODEC.fieldOf("overlay").forGetter(CopyBlockSpecialRenderer.Unbaked::overlay)
+        ).apply(instance, CopyBlockSpecialRenderer.Unbaked::new));
 
         @Override
-        public MapCodec<LockedBlockSpecialRenderer.Unbaked> type() {
+        public MapCodec<CopyBlockSpecialRenderer.Unbaked> type() {
             return MAP_CODEC;
         }
 
         @Override
         public SpecialModelRenderer<?> bake(EntityModelSet entityModelSet) {
-            return new LockedBlockSpecialRenderer();
+            return new CopyBlockSpecialRenderer(this.block(), this.overlay());
         }
     }
 }

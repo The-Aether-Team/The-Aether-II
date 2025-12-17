@@ -108,6 +108,8 @@ public class AetherIIParticleFactories {
         event.registerSpriteSet(AetherIIParticleTypes.TEMPEST_SMOKE.get(), TempestSmokeParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.MOA_HUNGRY.get(), HeartParticle.Provider::new);
 
-        event.registerSpriteSet(AetherIIParticleTypes.LOCKED_BLOCK.get(), SpecialDungeonBlockParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.LOCKED_BLOCK.get(), CopyBlockParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.BOSS_DOORWAY_BLOCK.get(), CopyBlockParticle.Provider::new);
+        event.registerSpriteSet(AetherIIParticleTypes.TREASURE_DOORWAY_BLOCK.get(), CopyBlockParticle.Provider::new);
     }
 }

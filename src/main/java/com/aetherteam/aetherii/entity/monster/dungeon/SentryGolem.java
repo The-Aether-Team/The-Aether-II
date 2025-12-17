@@ -10,6 +10,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -55,6 +56,9 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
     public int attackRangeAnimationTick;
     public final int attackRangeAnimationLength = 20;
 
+    private float dashScale;
+    private float dashOldScale;
+
     private int idleAnimationCooldown;
     private int idleTick;
     public final int idleLength = 120;
@@ -67,12 +71,12 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
 
     @Override
     protected void registerGoals() {
-        this.randomStrollGoal = new SentryGolemStrollGoal(this, 1.0);
+        this.randomStrollGoal = new SentryGolemStrollGoal(this, 0.75F);
 
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new SentryGolemMeleeAttackGoal(this, 1.15F, true, 6.0F));
         this.goalSelector.addGoal(2, this.randomStrollGoal);
-        this.goalSelector.addGoal(3, new ThrowExplosiveAttackGoal(this, 60, 0.08F, 52.0F, 255.0F));
+        this.goalSelector.addGoal(3, new ThrowExplosiveAttackGoal(this, 60, 0.45F, 52.0F, 255.0F));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
@@ -110,9 +114,29 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
                 this.randomStrollGoal.setInterval(RandomStrollGoal.DEFAULT_INTERVAL);
             }
         } else {
+
             this.setupAnimationStates();
         }
         this.cooldowns.tick();
+        this.setupRunning();
+    }
+
+    private void setupRunning() {
+        this.dashOldScale = this.dashScale;
+        if (this.isDash()) {
+            this.dashScale = Mth.clamp(this.dashScale + 0.1F, 0.0F, 1.0F);
+        } else {
+            this.dashScale = Mth.clamp(this.dashScale - 0.1F, 0.0F, 1.0F);
+        }
+    }
+
+
+    public float getDashAnimationScale(float partialTick) {
+        return Mth.lerp(partialTick, this.dashOldScale, this.dashScale);
+    }
+
+    private boolean isDash() {
+        return this.walkAnimation.speed() > 0.015F;
     }
 
     private void setupIdleAnimationCooldown() {
@@ -120,10 +144,7 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
     }
 
     private void setupAnimationStates() {
-        if (this.isRanged() || this.isAggressive() || this.hurtTime > 0) {
-            this.checkSelfAnimationState.stop();
-            this.lookAroundAnimationState.stop();
-        } else if (--this.idleAnimationCooldown <= 0) {
+        if (--this.idleAnimationCooldown <= 0) {
             if (this.random.nextBoolean()) {
                 this.checkSelfAnimationState.start(this.tickCount);
             } else {
@@ -180,22 +201,31 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
     }
 
     @Override
+    protected void updateWalkAnimation(float p_382793_) {
+        float f2 = Math.min(p_382793_ * (10.0F), 3.0F);
+        this.walkAnimation.update(f2, 0.4F, 1.0F);
+    }
+
+    //prevent weird dash when hurt
+    @Override
+    public void handleDamageEvent(DamageSource damageSource) {
+        super.handleDamageEvent(damageSource);
+        this.dashScale = 1.0F;
+    }
+
+    @Override
     public void handleEntityEvent(byte p_21375_) {
         if (p_21375_ == 4) {
             this.attackAnimationState.start(this.tickCount);
             this.attackReadyAnimationState.stop();
             this.attackRangeAnimationState.stop();
             this.attackRangeReadyAnimationState.stop();
-            this.checkSelfAnimationState.stop();
-            this.lookAroundAnimationState.stop();
             this.attackAnimationTick = 0;
         } else if (p_21375_ == 61) {
             this.attackAnimationState.stop();
             this.attackReadyAnimationState.stop();
             this.attackRangeAnimationState.start(this.tickCount);
             this.attackRangeReadyAnimationState.stop();
-            this.checkSelfAnimationState.stop();
-            this.lookAroundAnimationState.stop();
             this.attackRangeAnimationTick = 0;
             this.cooldowns.addCooldown(this.getMainHandItem(), 60);
         } else {

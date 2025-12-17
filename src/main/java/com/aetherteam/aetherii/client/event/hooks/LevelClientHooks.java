@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.client.event.hooks;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -15,6 +14,7 @@ import net.minecraft.client.renderer.RenderBuffers;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -198,17 +198,14 @@ public class LevelClientHooks {
     private static TextureAtlasSprite spriteForId(int id) {
         switch (id) {
             case 0 -> {
-                return Minecraft.getInstance().getTextureAtlas(ResourceLocation.withDefaultNamespace("textures/atlas/blocks.png")).apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/dungeon_lock"));
+                return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/dungeon_lock"));
             }
-            //case 1 -> {
-            //    return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(ResourceLocation.fromNamespaceAndPath(Aether.MODID, "block/dungeon/exclamation"));
-            //}
-            //case 2 -> {
-            //    return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(ResourceLocation.fromNamespaceAndPath(Aether.MODID, "block/dungeon/door"));
-            //}
-            //case 3 -> {
-            //    return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(ResourceLocation.fromNamespaceAndPath(Aether.MODID, "block/dungeon/treasure"));
-            //}
+            case 1 -> {
+                return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/dungeon_doorway"));
+            }
+            case 2 -> {
+                return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/dungeon_treasure"));
+            }
             default -> {
                 return null;
             }
@@ -224,12 +221,10 @@ public class LevelClientHooks {
     private static int idForItem(ItemStack stack) {
         if (stack.is(AetherIIBlocks.LOCKED_BLOCK.asItem())) {
             return 0;
-            //} else if (stack.is(AetherTags.Items.TRAPPED_DUNGEON_BLOCKS)) {
-            //     return 1;
-            //} else if (stack.is(AetherTags.Items.BOSS_DOORWAY_DUNGEON_BLOCKS)) {
-            //    return 2;
-            //} else if (stack.is(AetherTags.Items.TREASURE_DOORWAY_DUNGEON_BLOCKS)) {
-            //    return 3;
+        } else if (stack.is(AetherIIBlocks.BOSS_DOORWAY_BLOCK.asItem())) {
+            return 1;
+        } else if (stack.is(AetherIIBlocks.TREASURE_DOORWAY_BLOCK.asItem())) {
+            return 2;
         } else {
             return -1;
         }

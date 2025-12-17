@@ -16,14 +16,14 @@ import net.neoforged.neoforge.client.model.DelegateBlockStateModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LockedBlockModel extends DelegateBlockStateModel {
-    public LockedBlockModel(BlockStateModel delegate) {
+public class CopyBlockModel extends DelegateBlockStateModel {
+    public CopyBlockModel(BlockStateModel delegate) {
         super(delegate);
     }
 
     @Override
     public void collectParts(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos, BlockState blockState, RandomSource randomSource, List<BlockModelPart> list) {
-        LockedBlockEntity.LockedData data = blockAndTintGetter.getModelData(blockPos).get(LockedBlockEntity.LockedData.PROPERTY);
+        LockedBlockEntity.CopyData data = blockAndTintGetter.getModelData(blockPos).get(LockedBlockEntity.CopyData.PROPERTY);
         if (data == null) {
             return;
         }
@@ -41,7 +41,7 @@ public class LockedBlockModel extends DelegateBlockStateModel {
 
     @Override
     public TextureAtlasSprite particleIcon(BlockAndTintGetter level, BlockPos pos, BlockState state) {
-        LockedBlockEntity.LockedData data = level.getModelData(pos).get(LockedBlockEntity.LockedData.PROPERTY);
+        LockedBlockEntity.CopyData data = level.getModelData(pos).get(LockedBlockEntity.CopyData.PROPERTY);
         if (data == null) {
             return super.particleIcon(level, pos, state);
         }

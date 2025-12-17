@@ -1,9 +1,8 @@
 package com.aetherteam.aetherii.item.miscellaneous;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.dungeon.LockedBlock;
-import com.aetherteam.aetherii.blockentity.LockedBlockEntity;
+import com.aetherteam.aetherii.block.dungeon.CopyBlock;
+import com.aetherteam.aetherii.blockentity.CopyBlockEntity;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -26,8 +25,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.function.Consumer;
 
-public class LockedBlockItem extends BlockItem {
-    public LockedBlockItem(Block block, Properties properties) {
+public class CopyBlockItem extends BlockItem {
+    public CopyBlockItem(Block block, Properties properties) {
         super(block, properties);
     }
 
@@ -40,10 +39,10 @@ public class LockedBlockItem extends BlockItem {
         if (player != null && !player.isShiftKeyDown()) {
             if (stack.is(this) && stack.get(AetherIIDataComponents.BLOCK_STATE) == null) {
                 BlockState previousState = level.getBlockState(pos);
-                if (previousState.is(AetherIITags.Blocks.LOCKABLE_BLOCKS)) {
-                    level.setBlockAndUpdate(pos, AetherIIBlocks.LOCKED_BLOCK.get().defaultBlockState().setValue(LockedBlock.EMPTY, false));
-                    if (level.getBlockEntity(pos) instanceof LockedBlockEntity lockedBlockEntity) {
-                        lockedBlockEntity.applyComponents(DataComponentMap.EMPTY, DataComponentPatch.builder().set(AetherIIDataComponents.BLOCK_STATE.get(), previousState).build());
+                if (previousState.is(AetherIITags.Blocks.COPYABLE_DUNGEON_BLOCKS)) {
+                    level.setBlockAndUpdate(pos, this.getBlock().defaultBlockState().setValue(CopyBlock.EMPTY, false));
+                    if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity) {
+                        blockEntity.applyComponents(DataComponentMap.EMPTY, DataComponentPatch.builder().set(AetherIIDataComponents.BLOCK_STATE.get(), previousState).build());
                     }
                     return InteractionResult.SUCCESS;
                 }
@@ -54,7 +53,7 @@ public class LockedBlockItem extends BlockItem {
 
     @Override
     public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction action, Player player, SlotAccess access) {
-        if (stack.is(this) && !other.isEmpty() && other.getItem() instanceof BlockItem blockItem && blockItem.getBlock().defaultBlockState().is(AetherIITags.Blocks.LOCKABLE_BLOCKS)) {
+        if (stack.is(this) && !other.isEmpty() && other.getItem() instanceof BlockItem blockItem && blockItem.getBlock().defaultBlockState().is(AetherIITags.Blocks.COPYABLE_DUNGEON_BLOCKS)) {
             stack.set(AetherIIDataComponents.BLOCK_STATE, blockItem.getBlock().defaultBlockState());
             return true;
         }
@@ -64,7 +63,7 @@ public class LockedBlockItem extends BlockItem {
     @Override
     public boolean overrideStackedOnOther(ItemStack stack, Slot slot, ClickAction action, Player player) {
         ItemStack other = slot.getItem();
-        if (stack.is(this) && !other.isEmpty() && other.getItem() instanceof BlockItem blockItem && blockItem.getBlock().defaultBlockState().is(AetherIITags.Blocks.LOCKABLE_BLOCKS)) {
+        if (stack.is(this) && !other.isEmpty() && other.getItem() instanceof BlockItem blockItem && blockItem.getBlock().defaultBlockState().is(AetherIITags.Blocks.COPYABLE_DUNGEON_BLOCKS)) {
             stack.set(AetherIIDataComponents.BLOCK_STATE, blockItem.getBlock().defaultBlockState());
             return true;
         }
