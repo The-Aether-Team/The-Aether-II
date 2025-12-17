@@ -8,8 +8,11 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -25,6 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
@@ -46,7 +50,6 @@ public class BossDoorwayBlock extends CopyBlock {
     public BossDoorwayBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(CopyBlock.WATERLOGGED, false).setValue(CopyBlock.EMPTY, true).setValue(INVISIBLE, true));
-//        LandPathNodeTypesRegistry.register(this, this); //todo
     }
 
     @Override
@@ -77,7 +80,12 @@ public class BossDoorwayBlock extends CopyBlock {
             Level level = context.getLevel();
             BlockPos pos = context.getClickedPos();
             for (int i = 0; i < 2; i++) {
-//                EntityUtil.spawnRemovalParticles(level, pos); //todo
+                double a = pos.getX() + 0.5 + (double) (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.375;
+                double b = pos.getY() + 0.5 + (double) (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.375;
+                double c = pos.getZ() + 0.5 + (double) (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.375;
+                if (level instanceof ServerLevel serverLevel) {
+                    serverLevel.sendParticles(ParticleTypes.POOF, a, b, c, 1, 0.0, 0.0, 0.0, 0.0);
+                }
             }
         }
         return flag;
@@ -186,8 +194,11 @@ public class BossDoorwayBlock extends CopyBlock {
         }
     }
 
-//    @Override
-//    public BlockPathTypes getPathNodeType(BlockState state, boolean neighbor) {
-//        return AetherBlockPathTypes.BOSS_DOORWAY;
-//    }
+    @Override
+    public @Nullable PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
+        if (mob != null && mob.getType().is(Tags.EntityTypes.BOSSES)) {
+            return PathType.BLOCKED;
+        }
+        return super.getBlockPathType(state, level, pos, mob);
+    }
 }
