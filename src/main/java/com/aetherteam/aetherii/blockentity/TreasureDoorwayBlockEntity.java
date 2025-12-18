@@ -4,6 +4,8 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -14,6 +16,11 @@ public class TreasureDoorwayBlockEntity extends CopyBlockEntity {
 
     public TreasureDoorwayBlockEntity(BlockPos pos, BlockState blockState) {
         super(AetherIIBlockEntityTypes.TREASURE_DOORWAY_BLOCK.get(), pos, blockState);
+    }
+
+    @Override
+    public BlockState destroy(Level level, BlockPos pos) {
+        return Blocks.AIR.defaultBlockState();
     }
 
     @Override

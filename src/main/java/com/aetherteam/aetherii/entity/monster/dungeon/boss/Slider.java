@@ -3,6 +3,8 @@ package com.aetherteam.aetherii.entity.monster.dungeon.boss;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.dungeon.CopyBlock;
+import com.aetherteam.aetherii.blockentity.CopyBlockEntity;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.ai.controller.BlankMoveControl;
 import com.aetherteam.aetherii.entity.ai.goal.MostDamageTargetGoal;
@@ -41,7 +43,6 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -404,8 +405,12 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     @Nullable
     @Override
     public BlockState convertBlock(Level level, BlockPos pos, BlockState oldState) {
-//        return DUNGEON_BLOCK_CONVERSIONS.getOrDefault(state.getBlock(), (blockState) -> null).apply(state);
-        return Blocks.AIR.defaultBlockState();
+        if (oldState.getBlock() instanceof CopyBlock && !oldState.getValue(CopyBlock.EMPTY)) {
+            if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity) {
+                return blockEntity.destroy(level, pos);
+            }
+        }
+        return null;
     }
 
     /**

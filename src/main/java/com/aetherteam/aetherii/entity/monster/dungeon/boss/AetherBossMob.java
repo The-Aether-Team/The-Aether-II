@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.entity.monster.dungeon.boss;
 
+import com.aetherteam.aetherii.block.dungeon.CopyBlock;
+import com.aetherteam.aetherii.blockentity.CopyBlockEntity;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.nitrogen.entity.BossMob;
 import net.minecraft.core.BlockPos;
@@ -37,11 +39,12 @@ public interface AetherBossMob<T extends Mob & AetherBossMob<T>> extends BossMob
      */
     default void closeRoom() {
         this.getDungeon().modifyRoom(this.self(), (level, pos, oldState) -> {
-//            if (state.getBlock() instanceof DoorwayBlock) {
-//                return state.setValue(DoorwayBlock.INVISIBLE, false);
-//            } else {
-                return null;
-//            }
+            if (oldState.getBlock() instanceof CopyBlock && !oldState.getValue(CopyBlock.EMPTY)) {
+                if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity) {
+                    return blockEntity.close(level, pos);
+                }
+            }
+            return null;
         });
     }
 
@@ -50,11 +53,12 @@ public interface AetherBossMob<T extends Mob & AetherBossMob<T>> extends BossMob
      */
     default void openRoom() {
         this.getDungeon().modifyRoom(this.self(), (level, pos, oldState) -> {
-//            if (state.getBlock() instanceof DoorwayBlock) {
-//                return state.setValue(DoorwayBlock.INVISIBLE, true);
-//            } else {
-                return null;
-//            }
+            if (oldState.getBlock() instanceof CopyBlock && !oldState.getValue(CopyBlock.EMPTY)) {
+                if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity) {
+                    return blockEntity.open(level, pos);
+                }
+            }
+            return null;
         });
     }
 
