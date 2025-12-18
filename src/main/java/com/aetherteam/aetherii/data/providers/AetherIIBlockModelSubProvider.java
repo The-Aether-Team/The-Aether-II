@@ -1089,7 +1089,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.createParticleOnlyBlock(block, particle);
         Item item = block.asItem();
         ResourceLocation model = ModelTemplates.CHEST_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
-        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(model, new SentryCrateSpecialRenderer.Unbaked(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal")));
+        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(model, new SentryCrateSpecialRenderer.Unbaked(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "single/sentry_crate_0")));
         this.itemModelOutput.accept(item, unbaked);
     }
 

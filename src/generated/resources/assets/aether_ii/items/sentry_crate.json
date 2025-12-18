@@ -4,7 +4,7 @@
     "base": "aether_ii:item/sentry_crate",
     "model": {
       "type": "aether_ii:sentry_crate",
-      "texture": "aether_ii:normal"
+      "texture": "aether_ii:single/sentry_crate_0"
     }
   }
 }
