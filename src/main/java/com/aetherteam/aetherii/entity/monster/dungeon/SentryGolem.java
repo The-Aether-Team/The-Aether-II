@@ -62,6 +62,7 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
     private int idleAnimationCooldown;
     private int idleTick;
     public final int idleLength = 120;
+    private int hurtAnimationTick;
 
     public SentryGolem(EntityType<? extends SentryGolem> entityType, Level level) {
         super(entityType, level);
@@ -114,11 +115,10 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
                 this.randomStrollGoal.setInterval(RandomStrollGoal.DEFAULT_INTERVAL);
             }
         } else {
-
+            this.setupRunning();
             this.setupAnimationStates();
         }
         this.cooldowns.tick();
-        this.setupRunning();
     }
 
     private void setupRunning() {
@@ -128,13 +128,10 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
         } else {
             this.dashScale = Mth.clamp(this.dashScale - 0.1F, 0.0F, 1.0F);
         }
-    }
 
-    //prevent weird dash when hurt
-    @Override
-    public void handleDamageEvent(DamageSource damageSource) {
-        super.handleDamageEvent(damageSource);
-        this.dashScale = 1.0F;
+        if (this.hurtAnimationTick > 0) {
+            this.hurtAnimationTick--;
+        }
     }
 
     public float getDashAnimationScale(float partialTick) {
@@ -142,7 +139,17 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
     }
 
     private boolean isDash() {
-        return this.getDeltaMovement().horizontalDistanceSqr() > 0.015F;
+        //don't forget about swing after hurt
+        return this.getDeltaMovement().horizontalDistanceSqr() > 0.015F || this.hurtAnimationTick > 0;
+    }
+
+    @Override
+    public void handleDamageEvent(DamageSource p_270229_) {
+        super.handleDamageEvent(p_270229_);
+        //don't forget about swing after hurt
+        this.dashScale = 1.0F;
+        this.dashOldScale = 1.0F;
+        this.hurtAnimationTick = 40;
     }
 
     private void setupIdleAnimationCooldown() {
@@ -208,7 +215,7 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
 
     @Override
     protected void updateWalkAnimation(float p_382793_) {
-        float f2 = Math.min(p_382793_ * (10.0F), 3.0F);
+        float f2 = Math.min(p_382793_ * (8.0F), 1.0F);
         this.walkAnimation.update(f2, 0.4F, 1.0F);
     }
 
