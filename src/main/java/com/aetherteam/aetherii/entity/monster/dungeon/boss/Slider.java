@@ -102,7 +102,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnReason, @Nullable SpawnGroupData spawnData) {
         this.setBossName(Component.translatable("entity.aether_ii.slider"));
-        this.moveTowardsClosestSpace(Mth.floor(this.getX()), this.getY(), Mth.floor(this.getZ())); // Aligns the Slider with the blocks below it.
+        this.moveOrInterpolateTo(new Vec3(Mth.floor(this.getX()), this.getY(), Mth.floor(this.getZ())), 0, 0); // Aligns the Slider with the blocks below it.
         return spawnData;
     }
 
