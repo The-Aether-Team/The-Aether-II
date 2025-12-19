@@ -2,8 +2,7 @@ package com.aetherteam.aetherii.block.dungeon;
 
 import com.aetherteam.aetherii.block.construction.SentryBlockUpdating;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
-import com.aetherteam.aetherii.blockentity.GroundTrapBlockEntity;
-import com.aetherteam.aetherii.blockentity.WallSpawnerBlockEntity;
+import com.aetherteam.aetherii.blockentity.SentrySpawnerBlockEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,6 +23,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
@@ -33,6 +34,7 @@ public class SentryWallSpawnerBlock extends BaseEntityBlock implements SentryBlo
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty TRIGGERED = BlockStateProperties.TRIGGERED;
+    private static final VoxelShape SHAPE = Block.column(16.0F, 0.0F, 14.0F);
 
     public MapCodec<SentryWallSpawnerBlock> codec() {
         return CODEC;
@@ -44,13 +46,13 @@ public class SentryWallSpawnerBlock extends BaseEntityBlock implements SentryBlo
     }
 
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new WallSpawnerBlockEntity(pos, state);
+        return new SentrySpawnerBlockEntity(pos, state);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(type, AetherIIBlockEntityTypes.WALL_SPAWNER.get(), level.isClientSide() ? WallSpawnerBlockEntity::clientTick : WallSpawnerBlockEntity::serverTick);
+        return createTickerHelper(type, AetherIIBlockEntityTypes.SENTRY_SPAWNER.get(), level.isClientSide() ? SentrySpawnerBlockEntity::clientTick : SentrySpawnerBlockEntity::serverTick);
     }
 
     @Override
@@ -61,6 +63,11 @@ public class SentryWallSpawnerBlock extends BaseEntityBlock implements SentryBlo
             level.setBlock(pos, newState.setValue(TRIGGERED, true), 1 | 2);
         }
         super.tick(state, level, pos, random);
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
     }
 
     @Override

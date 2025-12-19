@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
-
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
 
@@ -11,6 +10,8 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation MOA_EGG = register("moa_egg");
     public static final ModelLayerLocation ALKAHEST_PURIFIER = register("alkahest_purifier");
     public static final ModelLayerLocation SENTRY_CRATE = register("sentry_crate");
+    public static final ModelLayerLocation SENTRY_SPAWNER = register("sentry_spawner");
+    public static final ModelLayerLocation SENTRY_SPAWNER_PISTON = register("sentry_spawner_piston");
     public static final ModelLayerLocation DOUBLE_SENTRY_CRATE_LEFT = register("double_sentry_crate_left");
     public static final ModelLayerLocation DOUBLE_SENTRY_CRATE_RIGHT = register("double_sentry_crate_right");
 

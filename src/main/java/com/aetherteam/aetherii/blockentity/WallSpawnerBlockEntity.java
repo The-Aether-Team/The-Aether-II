@@ -19,13 +19,14 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 
-public class WallSpawnerBlockEntity extends CustomSpawnerBlockEntity {
+public abstract class WallSpawnerBlockEntity extends CustomSpawnerBlockEntity {
     public boolean firstTick = true;
 
     private final ConditionalSpawner spawner = new ConditionalSpawner() {
         @Override
         public void broadcastEvent(Level level, BlockPos pos, int id) {
             level.blockEvent(pos, WallSpawnerBlockEntity.this.getBlockState().getBlock(), id, 0);
+            WallSpawnerBlockEntity.this.spawnTrigger(level, pos);
         }
 
         @Override
@@ -48,13 +49,13 @@ public class WallSpawnerBlockEntity extends CustomSpawnerBlockEntity {
         }
     };
 
-    public WallSpawnerBlockEntity(BlockPos pos, BlockState blockState) {
-        super(AetherIIBlockEntityTypes.WALL_SPAWNER.get(), pos, blockState);
-    }
-
     public WallSpawnerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
         super(type, pos, blockState);
     }
+
+
+    public abstract void spawnTrigger(Level level, BlockPos blockPos);
+
 
     public static void clientTick(Level level, BlockPos pos, BlockState state, WallSpawnerBlockEntity blockEntity) {
         blockEntity.getSpawner().clientTick(level, pos);
