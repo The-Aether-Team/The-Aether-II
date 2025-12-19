@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.blockentity;
 
+import com.aetherteam.aetherii.block.dungeon.SentryWallSpawnerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -63,7 +64,7 @@ public class SentrySpawnerBlockEntity extends WallSpawnerBlockEntity {
     public static void clientTick(Level level, BlockPos pos, BlockState state, SentrySpawnerBlockEntity blockEntity) {
         WallSpawnerBlockEntity.clientTick(level, pos, state, blockEntity);
         blockEntity.spawnerTriggerTick(level, pos);
-        blockEntity.active = blockEntity.isNearPlayer(level, pos);
+        blockEntity.active = state.getValue(SentryWallSpawnerBlock.TRIGGERED);
     }
 
     private boolean isNearPlayer(Level level, BlockPos pos) {
