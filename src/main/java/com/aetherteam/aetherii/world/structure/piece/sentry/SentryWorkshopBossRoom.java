@@ -1,18 +1,13 @@
 package com.aetherteam.aetherii.world.structure.piece.sentry;
 
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.dungeon.CopyBlock;
 import com.aetherteam.aetherii.blockentity.CopyBlockEntity;
 import com.aetherteam.aetherii.world.structure.piece.AetherIIStructurePieceTypes;
 import com.aetherteam.aetherii.world.structure.piece.AetherTemplateStructurePiece;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.commands.arguments.blocks.BlockStateParser;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
@@ -23,7 +18,6 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
@@ -32,7 +26,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlac
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
-import net.minecraft.world.level.material.FluidState;
 
 import java.util.function.Function;
 
@@ -81,9 +74,19 @@ public class SentryWorkshopBossRoom extends SentryWorkshopPiece {
     @Override
     public void postProcess(WorldGenLevel level, StructureManager manager, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox boundingBox, ChunkPos chunkPos, BlockPos blockPos) {
         super.postProcess(level, manager, chunkGenerator, random, boundingBox, chunkPos, blockPos);
-
         for (StructureTemplate.StructureBlockInfo info : this.template.filterBlocks(this.templatePosition, this.placeSettings, AetherIIBlocks.LOCKED_BLOCK.get())) {
-
+            if (level.getBlockEntity(info.pos()) instanceof CopyBlockEntity blockEntity) {
+                if (this.getMirror() != Mirror.NONE) {
+                    blockEntity.setCopyState(blockEntity.getCopyState().mirror(this.getMirror()));
+                    blockEntity.requestModelDataUpdate();
+                    blockEntity.setChanged();
+                }
+                if (this.getRotation() != Rotation.NONE) {
+                    blockEntity.setCopyState(blockEntity.getCopyState().rotate(this.getRotation()));
+                    blockEntity.requestModelDataUpdate();
+                    blockEntity.setChanged();
+                }
+            }
         }
     }
 }

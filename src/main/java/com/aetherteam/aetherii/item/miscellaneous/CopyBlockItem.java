@@ -36,7 +36,7 @@ public class CopyBlockItem extends BlockItem {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
         ItemStack stack = context.getItemInHand();
-        if (player != null && !player.isShiftKeyDown()) {
+        if (player != null && player.isCreative() && !player.isShiftKeyDown()) {
             if (stack.is(this) && stack.get(AetherIIDataComponents.BLOCK_STATE) == null) {
                 BlockState previousState = level.getBlockState(pos);
                 if (previousState.is(AetherIITags.Blocks.COPYABLE_DUNGEON_BLOCKS)) {
