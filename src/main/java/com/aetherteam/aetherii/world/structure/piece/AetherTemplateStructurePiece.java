@@ -10,6 +10,7 @@ import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.TemplateStructurePiece;
@@ -85,6 +86,7 @@ public abstract class AetherTemplateStructurePiece extends TemplateStructurePiec
         BlockPos pivot = new BlockPos(xOffset, 0, zOffset);
         settings.setRotationPivot(pivot);
         settings.setRotation(rotation);
+        settings.setMirror(Mirror.NONE);
         return settings;
     }
 
