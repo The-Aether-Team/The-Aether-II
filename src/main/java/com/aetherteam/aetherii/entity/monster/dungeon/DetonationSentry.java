@@ -107,7 +107,7 @@ public class DetonationSentry extends Monster {
             if (this.timer < 0) {
                 this.timer = 0;
             }
-            if (this.timer > MAX_TIMER - 20) {
+            if (this.timer > MAX_TIMER - 12) {
                 this.explosionAnimationState.startIfStopped(this.tickCount);
             }
 
@@ -271,7 +271,7 @@ public class DetonationSentry extends Monster {
             if (!this.detonationSentry.isIgnited()) {
                 this.detonationSentry.ignite();
             } else {
-                if (this.detonationSentry.getTimer() > MAX_TIMER - 20) {
+                if (this.detonationSentry.getTimer() > MAX_TIMER - 12) {
                     this.detonationSentry.getNavigation().stop();
                 } else if (this.detonationSentry.getTarget() != null) {
                     this.detonationSentry.getNavigation().moveTo(this.detonationSentry.getTarget(), 0.6F);
