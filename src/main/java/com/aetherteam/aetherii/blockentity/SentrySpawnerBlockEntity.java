@@ -18,31 +18,41 @@ import javax.annotation.Nullable;
 public class SentrySpawnerBlockEntity extends WallSpawnerBlockEntity {
     public boolean triggerPiston;
     private int triggerTick;
+    private int delaySyncTick;
     private float pistonScale;
     private float pistonScaleOld;
     private boolean active;
+    private boolean isDirty = true;
 
 
     public SentrySpawnerBlockEntity(BlockPos pos, BlockState blockState) {
         super(AetherIIBlockEntityTypes.SENTRY_SPAWNER.get(), pos, blockState);
     }
 
-    @Override
-    public void spawnTrigger(Level level, BlockPos blockPos) {
-        this.triggerPiston = true;
-        this.triggerTick = 20;
-        level.playSound(null, blockPos, SoundEvents.PISTON_EXTEND, SoundSource.BLOCKS, 1.25F, 1.5F);
-        this.markUpdated();
-    }
 
-    private void markUpdated() {
-        this.setChanged();
-        this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
-    }
+    public void spawnerTriggerTick(Level level, BlockPos blockPos, BlockState state, SentrySpawnerBlockEntity blockEntity) {
+        blockEntity.active = state.getValue(SentryWallSpawnerBlock.TRIGGERED);
 
-    public void spawnerTriggerTick(Level level, BlockPos blockPos) {
-        if (this.triggerPiston && --this.triggerTick <= 0) {
-            this.spawnTriggerStop(level, blockPos);
+        if (!level.isClientSide && this.isActive()) {
+            //BaseSpawner's Delay thing's client and server are different. so bring server side valve and use it
+            this.delaySyncTick = blockEntity.getSpawner().spawnDelay;
+            this.setChanged();
+        }
+
+        if (this.delaySyncTick < 30 && !this.triggerPiston && this.isActive()) {
+            this.triggerPiston = true;
+            this.triggerTick = 50;
+            level.playSound(null, blockPos, SoundEvents.PISTON_EXTEND, SoundSource.BLOCKS, 1.25F, 1.5F);
+            this.setChanged();
+            this.isDirty = true;
+        }
+
+        if (this.triggerPiston) {
+            if (this.triggerTick <= 0) {
+                this.spawnTriggerStop(level, blockPos);
+            } else {
+                --this.triggerTick;
+            }
         }
         this.pistonScaleOld = this.pistonScale;
         if (this.triggerPiston) {
@@ -50,11 +60,17 @@ public class SentrySpawnerBlockEntity extends WallSpawnerBlockEntity {
         } else {
             this.pistonScale = Mth.clamp(this.pistonScale - 0.1F, 0.0F, 1.0F);
         }
+
+        if (this.isDirty) {
+            level.sendBlockUpdated(blockPos, state, state, 2);
+        }
     }
 
     public void spawnTriggerStop(Level level, BlockPos blockPos) {
         this.triggerPiston = false;
         level.playSound(null, blockPos, SoundEvents.PISTON_CONTRACT, SoundSource.BLOCKS, 1.25F, 1.5F);
+        this.setChanged();
+        this.isDirty = true;
     }
 
     public float getPistonAnimationScale(float partialTick) {
@@ -63,18 +79,12 @@ public class SentrySpawnerBlockEntity extends WallSpawnerBlockEntity {
 
     public static void clientTick(Level level, BlockPos pos, BlockState state, SentrySpawnerBlockEntity blockEntity) {
         WallSpawnerBlockEntity.clientTick(level, pos, state, blockEntity);
-        blockEntity.spawnerTriggerTick(level, pos);
-        blockEntity.active = state.getValue(SentryWallSpawnerBlock.TRIGGERED);
-    }
-
-    private boolean isNearPlayer(Level level, BlockPos pos) {
-        int range = 16;
-        return level.hasNearbyAlivePlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, range);
+        blockEntity.spawnerTriggerTick(level, pos, state, blockEntity);
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, SentrySpawnerBlockEntity blockEntity) {
         WallSpawnerBlockEntity.serverTick(level, pos, state, blockEntity);
-        blockEntity.spawnerTriggerTick(level, pos);
+        blockEntity.spawnerTriggerTick(level, pos, state, blockEntity);
     }
 
     @Override

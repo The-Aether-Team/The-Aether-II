@@ -26,7 +26,6 @@ public abstract class WallSpawnerBlockEntity extends CustomSpawnerBlockEntity {
         @Override
         public void broadcastEvent(Level level, BlockPos pos, int id) {
             level.blockEvent(pos, WallSpawnerBlockEntity.this.getBlockState().getBlock(), id, 0);
-            WallSpawnerBlockEntity.this.spawnTrigger(level, pos);
         }
 
         @Override
@@ -52,10 +51,6 @@ public abstract class WallSpawnerBlockEntity extends CustomSpawnerBlockEntity {
     public WallSpawnerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
         super(type, pos, blockState);
     }
-
-
-    public abstract void spawnTrigger(Level level, BlockPos blockPos);
-
 
     public static void clientTick(Level level, BlockPos pos, BlockState state, WallSpawnerBlockEntity blockEntity) {
         blockEntity.getSpawner().clientTick(level, pos);
