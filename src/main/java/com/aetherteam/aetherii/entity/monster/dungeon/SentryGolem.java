@@ -257,6 +257,7 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
         this.populateDefaultEquipmentSlots(randomsource, difficulty);
         this.populateDefaultEquipmentEnchantments(level, randomsource, difficulty);
         this.setLeftHanded(true);
+        this.setPersistenceRequired();
         return data;
     }
 
@@ -299,6 +300,13 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
 
     public ItemCooldowns getCooldowns() {
         return this.cooldowns;
+    }
+
+    /**
+     * Required despite call to {@link Mob#setPersistenceRequired()} in constructor.
+     */
+    @Override
+    public void checkDespawn() {
     }
 
     @Override
