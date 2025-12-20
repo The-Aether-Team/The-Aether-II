@@ -27,6 +27,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
@@ -41,9 +42,11 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
@@ -88,7 +91,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     private int moveDelay = this.calculateMoveDelay();
     private Vec3 targetPoint = null;
     private int attackCooldown = 0;
-
+    public int sliderDeathTime = 0;
     public Slider(EntityType<? extends Slider> type, Level level) {
         super(type, level);
         this.moveControl = new BlankMoveControl(this);
@@ -338,26 +341,50 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     @Override
     public void die(DamageSource source) {
         this.setDeltaMovement(Vec3.ZERO);
-        this.explode();
         if (this.level() instanceof ServerLevel) {
             this.bossFight.setProgress(this.getHealth() / this.getMaxHealth()); // Forces an update to the boss health meter.
             if (this.getDungeon() != null) {
                 this.getDungeon().grantAdvancements(this, source);
-                this.tearDownRoom();
+                //Move TearDown method calling to tickDeath method
             }
         }
         super.die(source);
     }
 
+    @Override
+    protected void tickDeath() {
+        this.sliderDeathTime++;
+
+        if (this.level() instanceof ServerLevel serverlevel) {
+            if (this.sliderDeathTime > 100 && this.sliderDeathTime % 10 == 0 && serverlevel.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
+                int award = net.neoforged.neoforge.event.EventHooks.getExperienceDrop(this, net.minecraft.world.entity.EntityReference.get(this.lastHurtByPlayer, serverlevel, Player.class), this.xpReward / 10);
+                ExperienceOrb.award(serverlevel, this.position(), award);
+            }
+        }
+        if (this.sliderDeathTime == 150) {
+            if (this.level() instanceof ServerLevel serverLevel) {
+                if (this.getDungeon() != null) {
+                    this.tearDownRoom();
+                }
+                this.remove(Entity.RemovalReason.KILLED);
+                this.gameEvent(GameEvent.ENTITY_DIE);
+                this.explode(serverLevel);
+            }
+
+            this.playSound(SoundEvents.GENERIC_EXPLODE.value(), 2.5F, 1.0F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
+        }
+
+    }
+
     /**
      * Explosion particles for the Slider.
      */
-    private void explode() {
+    private void explode(ServerLevel serverLevel) {
         for (int i = 0; i < (this.getHealth() <= 0 ? 16 : 48); i++) {
             double x = this.position().x() + (double) (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 1.5;
             double y = this.getBoundingBox().minY + 1.75 + (double) (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 1.5;
             double z = this.position().z() + (double) (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 1.5;
-            this.level().addParticle(ParticleTypes.POOF, x, y, z, 0.0, 0.0, 0.0);
+            serverLevel.sendParticles(ParticleTypes.POOF, x, y, z, 1, 0.0, 0.0, 0.0, 0);
         }
     }
 
