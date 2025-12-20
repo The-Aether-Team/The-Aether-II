@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.common.world.AuxiliaryLightManager;
 import net.neoforged.neoforge.model.data.ModelData;
 import net.neoforged.neoforge.model.data.ModelProperty;
 
@@ -43,7 +44,36 @@ public abstract class CopyBlockEntity extends BlockEntity {
     protected void loadAdditional(ValueInput input) {
         super.loadAdditional(input);
         this.copyState = input.read("copy_state", BlockState.CODEC).orElse(null);
-        input.read("mimic_state", BlockState.CODEC).ifPresent(state -> this.copyState = state); //todo remove
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        this.setChanged();
+        this.getLevel().blockEvent(this.getBlockPos(), this.getBlockState().getBlock(), 1, 0);
+    }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
+        if (this.level != null) {
+            BlockPos pos = this.getBlockPos();
+            AuxiliaryLightManager lightManager = this.level.getAuxLightManager(pos);
+            if (lightManager != null) {
+                lightManager.setLightAt(pos, this.getCopyState() != null ? this.getCopyState().getLightEmission() : 0);
+            }
+            this.level.getLightEngine().checkBlock(pos);
+        }
+    }
+
+    @Override
+    public boolean triggerEvent(int id, int type) {
+        if (id == 1) {
+            this.setChanged();
+            return true;
+        } else {
+            return super.triggerEvent(id, type);
+        }
     }
 
     @Override

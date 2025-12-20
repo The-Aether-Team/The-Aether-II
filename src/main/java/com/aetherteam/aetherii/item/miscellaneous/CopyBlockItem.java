@@ -43,6 +43,7 @@ public class CopyBlockItem extends BlockItem {
                     level.setBlockAndUpdate(pos, this.getBlock().defaultBlockState().setValue(CopyBlock.EMPTY, false));
                     if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity) {
                         blockEntity.applyComponents(DataComponentMap.EMPTY, DataComponentPatch.builder().set(AetherIIDataComponents.BLOCK_STATE.get(), previousState).build());
+                        blockEntity.setChanged();
                     }
                     return InteractionResult.SUCCESS;
                 }

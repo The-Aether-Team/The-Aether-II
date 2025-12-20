@@ -1,23 +1,38 @@
 package com.aetherteam.aetherii.world.structure.piece.sentry;
 
 
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.dungeon.CopyBlock;
+import com.aetherteam.aetherii.blockentity.CopyBlockEntity;
 import com.aetherteam.aetherii.world.structure.piece.AetherIIStructurePieceTypes;
 import com.aetherteam.aetherii.world.structure.piece.AetherTemplateStructurePiece;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.commands.arguments.blocks.BlockStateParser;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.StructureManager;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
+import net.minecraft.world.level.material.FluidState;
 
 import java.util.function.Function;
 
@@ -60,6 +75,15 @@ public class SentryWorkshopBossRoom extends SentryWorkshopPiece {
 //            }
 //            TreasureChestBlockEntity.setDungeonType(level, chest, ResourceLocation.fromNamespaceAndPath(Aether.MODID, "bronze"));
             level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
+        }
+    }
+
+    @Override
+    public void postProcess(WorldGenLevel level, StructureManager manager, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox boundingBox, ChunkPos chunkPos, BlockPos blockPos) {
+        super.postProcess(level, manager, chunkGenerator, random, boundingBox, chunkPos, blockPos);
+
+        for (StructureTemplate.StructureBlockInfo info : this.template.filterBlocks(this.templatePosition, this.placeSettings, AetherIIBlocks.LOCKED_BLOCK.get())) {
+
         }
     }
 }

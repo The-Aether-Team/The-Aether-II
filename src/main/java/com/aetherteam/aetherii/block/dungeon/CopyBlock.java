@@ -13,10 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
@@ -30,6 +27,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.world.AuxiliaryLightManager;
 
 import javax.annotation.Nullable;
 
@@ -60,12 +58,18 @@ public abstract class CopyBlock extends BaseEntityBlock {
     protected void setCopyBlocksInfo(Level level, BlockPos pos, BlockState state, BlockState copyState, BlockState newState, CopyBlockEntity blockEntity) {
         blockEntity.setCopyState(copyState);
         blockEntity.requestModelDataUpdate();
+        blockEntity.setChanged();
         level.setBlockAndUpdate(pos, newState);
         level.sendBlockUpdated(pos, state, newState, Block.UPDATE_ALL);
     }
 
     @Override
     protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource randomSource) {
+        if (!state.getValue(EMPTY)) {
+            if (levelReader.getBlockEntity(currentPos) instanceof CopyBlockEntity blockEntity && blockEntity.getCopyState() != null) {
+                blockEntity.setChanged();
+            }
+        }
         if (state.getValue(WATERLOGGED)) {
             scheduledTickAccess.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelReader));
         }
@@ -119,8 +123,9 @@ public abstract class CopyBlock extends BaseEntityBlock {
     @Override
     public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
         if (!state.getValue(EMPTY)) {
-            if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity && blockEntity.getCopyState() != null) {
-                return blockEntity.getCopyState().getLightEmission(level, pos);
+            AuxiliaryLightManager lightManager = level.getAuxLightManager(pos);
+            if (lightManager != null) {
+                return lightManager.getLightAt(pos);
             }
         }
         return 0;
@@ -177,5 +182,10 @@ public abstract class CopyBlock extends BaseEntityBlock {
             return RenderShape.MODEL;
         }
         return RenderShape.INVISIBLE;
+    }
+
+    @Override
+    public boolean hasDynamicLightEmission(BlockState state) {
+        return true;
     }
 }
