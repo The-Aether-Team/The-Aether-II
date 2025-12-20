@@ -14,6 +14,7 @@ import com.aetherteam.nitrogen.entity.BossRoomTracker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -42,7 +43,6 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -354,12 +354,10 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     @Override
     protected void tickDeath() {
         this.sliderDeathTime++;
-
-        if (this.level() instanceof ServerLevel serverlevel) {
-            if (this.sliderDeathTime > 100 && this.sliderDeathTime % 10 == 0 && serverlevel.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
-                int award = net.neoforged.neoforge.event.EventHooks.getExperienceDrop(this, net.minecraft.world.entity.EntityReference.get(this.lastHurtByPlayer, serverlevel, Player.class), this.xpReward / 10);
-                ExperienceOrb.award(serverlevel, this.position(), award);
-            }
+        if (this.sliderDeathTime == 149) {
+            //don't make particle with remove method some tick
+            this.explode();
+            this.playSound(SoundEvents.GENERIC_EXPLODE.value(), 2.5F, 1.0F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
         }
         if (this.sliderDeathTime == 150) {
             if (this.level() instanceof ServerLevel serverLevel) {
@@ -368,10 +366,8 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
                 }
                 this.remove(Entity.RemovalReason.KILLED);
                 this.gameEvent(GameEvent.ENTITY_DIE);
-                this.explode(serverLevel);
             }
 
-            this.playSound(SoundEvents.GENERIC_EXPLODE.value(), 2.5F, 1.0F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
         }
 
     }
@@ -379,12 +375,23 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     /**
      * Explosion particles for the Slider.
      */
-    private void explode(ServerLevel serverLevel) {
-        for (int i = 0; i < (this.getHealth() <= 0 ? 16 : 48); i++) {
-            double x = this.position().x() + (double) (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 1.5;
-            double y = this.getBoundingBox().minY + 1.75 + (double) (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 1.5;
-            double z = this.position().z() + (double) (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 1.5;
-            serverLevel.sendParticles(ParticleTypes.POOF, x, y, z, 1, 0.0, 0.0, 0.0, 0);
+    private void explode() {
+        for (int i = 0; i < 16; i++) {
+            double x = this.getX() + (double) (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 1.5;
+            double y = this.getY() + 1.75 + (double) (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 1.5;
+            double z = this.getZ() + (double) (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 1.5;
+            this.level().addParticle(ParticleTypes.POOF, x, y, z, 0.0, 0.0, 0.0);
+        }
+        for (int i = 0; i < 64; i++) {
+
+            double x = this.getX() + (double) (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 1.5;
+            double y = this.getY() + 1.5 + (double) (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 1.5;
+            double z = this.getZ() + (double) (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 1.5;
+            float xMove = (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 10;
+            float yMove = (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 10;
+            float zMove = (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 10;
+
+            this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, AetherIIBlocks.SENTRY_BASE_BRICKS.get().defaultBlockState()), x, y, z, xMove, yMove, zMove);
         }
     }
 

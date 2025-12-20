@@ -56,15 +56,19 @@ public class SliderRenderer extends MobRenderer<Slider, SliderRenderState, Slide
 
     @Override
     public void render(SliderRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int partialTick) {
-        if (renderState.deathTime > 0) {
-            float f2 = renderState.deathTime / 300.0F;
-            poseStack.pushPose();
-            poseStack.translate(0.0F, 1.0F, 0.0F);
-            renderRays(poseStack, f2, bufferSource.getBuffer(RenderType.dragonRays()));
-            renderRays(poseStack, f2, bufferSource.getBuffer(RenderType.dragonRaysDepth()));
-            poseStack.popPose();
+        //don't culling particle because of slider rendering
+        if (renderState.deathTime < 150) {
+            if (renderState.deathTime > 0) {
+                float f2 = renderState.deathTime / 300.0F;
+                poseStack.pushPose();
+                poseStack.translate(0.0F, 1.0F, 0.0F);
+                renderRays(poseStack, f2, bufferSource.getBuffer(RenderType.dragonRays()));
+                renderRays(poseStack, f2, bufferSource.getBuffer(RenderType.dragonRaysDepth()));
+                poseStack.popPose();
+            }
+
+            super.render(renderState, poseStack, bufferSource, partialTick);
         }
-        super.render(renderState, poseStack, bufferSource, partialTick);
     }
 
     private static void renderRays(PoseStack poseStack, float deathCompletion, VertexConsumer buffer) {
