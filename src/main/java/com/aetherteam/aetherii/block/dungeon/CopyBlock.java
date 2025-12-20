@@ -69,24 +69,27 @@ public abstract class CopyBlock extends BaseEntityBlock {
             if (levelReader.getBlockEntity(currentPos) instanceof CopyBlockEntity blockEntity && blockEntity.getCopyState() != null) {
                 blockEntity.setChanged();
             }
-        }
-        if (state.getValue(WATERLOGGED)) {
-            scheduledTickAccess.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelReader));
+        } else {
+            if (state.getValue(WATERLOGGED)) {
+                scheduledTickAccess.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelReader));
+            }
         }
         return super.updateShape(state, levelReader, scheduledTickAccess, currentPos, facing, facingPos, facingState, randomSource);
     }
 
     @Override
     protected FluidState getFluidState(BlockState state) {
-        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+        return state.getValue(EMPTY) && state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         ItemStack stack = context.getItemInHand();
-        BlockState placementState = this.defaultBlockState().setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER);
+        BlockState placementState = this.defaultBlockState();
         if (stack.get(AetherIIDataComponents.BLOCK_STATE) != null) {
             placementState = placementState.setValue(EMPTY, false);
+        } else {
+            placementState = placementState.setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER);
         }
         return placementState;
     }
