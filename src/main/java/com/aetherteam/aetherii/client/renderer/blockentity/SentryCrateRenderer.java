@@ -62,8 +62,6 @@ public class SentryCrateRenderer implements BlockEntityRenderer<SentryCrateBlock
             Material material = new ArrayList<>(AetherIIAtlases.SENTRY_CRATE_MATERIALS.get(type)).get(frame);
             Material emissive = chooseMaterial(type, AetherIIAtlases.SENTRY_CRATE_SINGLE_EMISSIVE_LOCATION, AetherIIAtlases.SENTRY_CRATE_LEFT_EMISSIVE_LOCATION, AetherIIAtlases.SENTRY_CRATE_RIGHT_EMISSIVE_LOCATION);
 
-            AetherII.LOGGER.info(String.valueOf(material));
-
             VertexConsumer vertexConsumer = material.buffer(buffer, RenderType::entityCutout);
             VertexConsumer emissiveConsumer = emissive.buffer(buffer, RenderType::entityCutout);
             if (doubleChest) {
