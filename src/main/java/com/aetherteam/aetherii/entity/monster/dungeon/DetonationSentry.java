@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.entity.monster.dungeon;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.ai.goal.FakeMeleeAttackGoal;
 import net.minecraft.core.particles.ParticleTypes;
@@ -12,6 +11,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -39,6 +39,8 @@ public class DetonationSentry extends Monster {
     private int timer;
     private float timeSpotted = 0.0F;
     private boolean playSound;
+    public AnimationState explosionAnimationState = new AnimationState();
+
 
     public DetonationSentry(EntityType<? extends DetonationSentry> type, Level level) {
         super(type, level);
@@ -92,7 +94,7 @@ public class DetonationSentry extends Monster {
             if (this.isIgnited()) {
                 this.timer += 1;
                 float flickerInterval = Mth.sin(Mth.square(this.timer) / 50.0F);
-                AetherII.LOGGER.info(String.valueOf(flickerInterval));
+                //AetherII.LOGGER.info(String.valueOf(flickerInterval));
                 if (flickerInterval < 0) {
                     if (this.playSound) {
                         this.playSound(SoundEvents.NOTE_BLOCK_BIT.value(), 1.0F, 1.0F);
@@ -105,6 +107,10 @@ public class DetonationSentry extends Monster {
             if (this.timer < 0) {
                 this.timer = 0;
             }
+            if (this.timer > MAX_TIMER - 20) {
+                this.explosionAnimationState.startIfStopped(this.tickCount);
+            }
+
             if (this.timer >= MAX_TIMER) {
                 this.timer = MAX_TIMER;
                 this.explodeAt();

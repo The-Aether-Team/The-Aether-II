@@ -23,6 +23,7 @@ public class DetonationSentryRenderer extends MobRenderer<DetonationSentry, Deto
         super.extractRenderState(detonationSentry, renderState, partialTick);
         renderState.awake = detonationSentry.isAwake();
         renderState.timer = detonationSentry.getTimer(partialTick);
+        renderState.explosionAnimationState.copyFrom(detonationSentry.explosionAnimationState);
     }
 
     @Override
