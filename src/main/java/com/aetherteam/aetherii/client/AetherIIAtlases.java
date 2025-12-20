@@ -47,8 +47,8 @@ public class AetherIIAtlases {
                     () -> Multimaps.newMultimap(new HashMap<>(), ArrayList::new)
             ));
     public static final Material SENTRY_CRATE_SINGLE_EMISSIVE_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "single/sentry_crate_emissive"));
-    public static final Material SENTRY_CRATE_LEFT_EMISSIVE_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal_left_emissive"));
-    public static final Material SENTRY_CRATE_RIGHT_EMISSIVE_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "normal_right_emissive"));
+    public static final Material SENTRY_CRATE_LEFT_EMISSIVE_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "left/sentry_crate_emissive"));
+    public static final Material SENTRY_CRATE_RIGHT_EMISSIVE_LOCATION = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "right/sentry_crate_emissive"));
     public static final Map<MuralSection, Material> MURAL_MATERIALS = Mural.getPieces().entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, entry -> MURAL_MAPPER.apply(entry.getValue())));
     public static final Map<Integer, Material> SENTRY_SPAWNER_MATERIALS = SentrySpawnerRenderer.getPieces();
 
