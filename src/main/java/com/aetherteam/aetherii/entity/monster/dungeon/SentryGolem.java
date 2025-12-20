@@ -430,7 +430,7 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
                 //this.golem.setHandState((byte) 1);
             }
 
-            if (this.attackTime <= 0 && distance <= (double) this.maxAttackRange && canSee) {
+            if (this.attackTime <= 0 && !this.golem.cooldowns.isOnCooldown(this.golem.getMainHandItem()) && distance <= (double) this.maxAttackRange && canSee) {
                 this.golem.performRangedAttack(this.target, 1.0F);
                 this.attackTime = this.maxRangedAttackTime;
                 this.golem.swing(InteractionHand.MAIN_HAND);
