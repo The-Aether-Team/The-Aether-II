@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.blockentity;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.dungeon.SentryCrateBlock;
 import com.aetherteam.aetherii.blockentity.SentryCrateBlockEntity;
@@ -60,6 +61,8 @@ public class SentryCrateRenderer implements BlockEntityRenderer<SentryCrateBlock
             int frame = Math.max(0, (int) Math.ceil(blockEntity.chestLidController.getOpenness(partialTick) * 4) - 1);
             Material material = new ArrayList<>(AetherIIAtlases.SENTRY_CRATE_MATERIALS.get(type)).get(frame);
             Material emissive = chooseMaterial(type, AetherIIAtlases.SENTRY_CRATE_SINGLE_EMISSIVE_LOCATION, AetherIIAtlases.SENTRY_CRATE_LEFT_EMISSIVE_LOCATION, AetherIIAtlases.SENTRY_CRATE_RIGHT_EMISSIVE_LOCATION);
+
+            AetherII.LOGGER.info(String.valueOf(material));
 
             VertexConsumer vertexConsumer = material.buffer(buffer, RenderType::entityCutout);
             VertexConsumer emissiveConsumer = emissive.buffer(buffer, RenderType::entityCutout);
