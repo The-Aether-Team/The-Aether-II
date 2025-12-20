@@ -79,7 +79,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.PURPLE_AERCLOUD_GLIDER.get()
         );
         this.tag(AetherIITags.Items.EQUIPMENT_RELICS).add(
-                AetherIIItems.SENTRY_BOOSTERS.get());
+                AetherIIItems.KINETIC_THRUSTERS.get());
         this.tag(AetherIITags.Items.EQUIPMENT_HANDWEAR).add(
                 AetherIIItems.BEAST_PELT_GLOVES.get(),
                 AetherIIItems.BURRUKAI_PLATE_GLOVES.get(),

@@ -20,7 +20,7 @@ import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.accessories.companions.CompanionItem;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.item.equipment.accessories.GlovesItem;
-import com.aetherteam.aetherii.item.equipment.accessories.SentryBoostersItem;
+import com.aetherteam.aetherii.item.equipment.accessories.KineticThrustersItem;
 import com.aetherteam.aetherii.item.equipment.armor.abilities.*;
 import com.aetherteam.aetherii.item.equipment.charms.CharmItem;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.HolystoneTool;
@@ -217,7 +217,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> NEPTUNE_GLOVES = register("neptune_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.NEPTUNE, 100.0, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR)));
 
     // Relics
-    public static final DeferredItem<Item> SENTRY_BOOSTERS = register("sentry_boosters", SentryBoostersItem::new);
+    public static final DeferredItem<Item> KINETIC_THRUSTERS = register("kinetic_thrusters", KineticThrustersItem::new);
 
     // Charms
     public static final DeferredItem<Item> CHARM_OF_DAMAGE = register("charm_of_damage", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_MELEE, AetherIIStats.CHARM_DAMAGE_BONUS));

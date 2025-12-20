@@ -8,11 +8,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 
 import java.util.Set;
 
-public class SentryBoostersItem extends AccessoryItem {
-    private static final ResourceLocation MOVEMENT_SPEED = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessory.ability.sentry_boosters.movement_speed");
-    private static final ResourceLocation STEP_HEIGHT = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessory.ability.sentry_boosters.step_height");
+public class KineticThrustersItem extends AccessoryItem {
+    private static final ResourceLocation MOVEMENT_SPEED = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessory.ability.kinetic_thrusters.movement_speed");
+    private static final ResourceLocation STEP_HEIGHT = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessory.ability.kinetic_thrusters.step_height");
 
-    public SentryBoostersItem(Properties properties) {
+    public KineticThrustersItem(Properties properties) {
         super(properties, AccessoryContainer.SlotType.RELIC);
     }
 

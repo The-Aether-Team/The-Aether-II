@@ -905,7 +905,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.NEPTUNE_GLOVES, "Neptune Gauntlets");
 
         // Relics
-        this.addItem(AetherIIItems.SENTRY_BOOSTERS, "Sentry Boosters");
+        this.addItem(AetherIIItems.KINETIC_THRUSTERS, "Kinetic Thrusters");
 
         // Charms
         this.addItem(AetherIIItems.CHARM_OF_DAMAGE, "Charm of Damage");
