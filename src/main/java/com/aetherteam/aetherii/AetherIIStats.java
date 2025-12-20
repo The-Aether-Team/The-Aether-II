@@ -35,7 +35,7 @@ public class AetherIIStats {
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_HAMMER = List.of(impactDamageModifer(6.0));
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_SPEAR = List.of(pierceDamageModifer(6.0));
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_CROSSBOW = List.of(rangedPierceDamageModifer(5.0));
-    public static final List<ItemAttributeModifiers.Entry> DEMOLITION_HAMMER = List.of(impactDamageModifer(5.0));
+    public static final List<ItemAttributeModifiers.Entry> HAMMER_OF_DEMOLITION = List.of(impactDamageModifer(5.0));
 
     public static final ItemAttributeModifiers.Entry CHARM_DAMAGE_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.ATTACK_DAMAGE,

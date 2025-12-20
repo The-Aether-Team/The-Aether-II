@@ -262,7 +262,7 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
 
     @Override
     protected void populateDefaultEquipmentSlots(RandomSource random, DifficultyInstance difficulty) {
-        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(AetherIIItems.DEMOLITION_HAMMER.asItem()));
+        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(AetherIIItems.HAMMER_OF_DEMOLITION.asItem()));
     }
 
     @Override

@@ -863,7 +863,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addItem(AetherIIItems.SCATTERGLASS_BOLT, "Scatterglass Bolt");
 
-        this.addItem(AetherIIItems.DEMOLITION_HAMMER, "Demolition Hammer");
+        this.addItem(AetherIIItems.HAMMER_OF_DEMOLITION, "Hammer of Demolition");
 
         // Armor
         this.addItem(AetherIIItems.BEAST_PELT_HELMET, "Beast Pelt Cap");
@@ -1124,8 +1124,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 1, "§9Ability:§r Straight Shot");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 2, "§3Use:§r Crouch-Use");
 
-        this.addPerItemAbilityTooltip(AetherIIItems.DEMOLITION_HAMMER.get(), 1, "§9Ability:§r Shoots Explosive");
-        this.addPerItemAbilityTooltip(AetherIIItems.DEMOLITION_HAMMER.get(), 2, "§3Use:§r Crouch-Use");
+        this.addPerItemAbilityTooltip(AetherIIItems.HAMMER_OF_DEMOLITION.get(), 1, "§9Ability:§r Shoots Explosive");
+        this.addPerItemAbilityTooltip(AetherIIItems.HAMMER_OF_DEMOLITION.get(), 2, "§3Use:§r Crouch-Use");
 
         this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_BOOTS.get(), 1, "§9Ability:§r Calms Animals");
         this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_BOOTS.get(), 2, "§9Set Pieces:§r %s");

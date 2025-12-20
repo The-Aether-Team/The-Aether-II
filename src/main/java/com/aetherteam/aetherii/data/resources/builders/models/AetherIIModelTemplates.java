@@ -330,10 +330,10 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate DART_SHOOTER = createItem("handheld_dart_shooter", TextureSlot.LAYER0);
     public static final ModelTemplate DART_SHOOTER_TWO_LAYER = createItem("handheld_dart_shooter", TextureSlot.LAYER0, TextureSlot.LAYER1);
     public static final ModelTemplate USING_DART_SHOOTER_TWO_LAYER = createItem("using_dart_shooter", TextureSlot.LAYER0, TextureSlot.LAYER1);
-    public static final ModelTemplate DEMOLITION_HAMMER_HANDLE = createItem("template_demolition_hammer_handle", "_handle", TextureSlot.LAYER0);
-    public static final ModelTemplate DEMOLITION_HAMMER_HEAD = createItem("template_demolition_hammer_head", "_head", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
-    public static final ModelTemplate DEMOLITION_HAMMER_HEAD_READY = createItem("template_demolition_hammer_head_ready", "_head_ready", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
-    public static final ModelTemplate DEMOLITION_HAMMER_HEAD_DEPLOYED = createItem("template_demolition_hammer_head_deployed", "_head_deployed", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
+    public static final ModelTemplate HAMMER_OF_DEMOLITION_HANDLE = createItem("template_hammer_of_demolition_handle", "_handle", TextureSlot.LAYER0);
+    public static final ModelTemplate HAMMER_OF_DEMOLITION_HEAD = createItem("template_hammer_of_demolition_head", "_head", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
+    public static final ModelTemplate HAMMER_OF_DEMOLITION_HEAD_READY = createItem("template_hammer_of_demolition_head_ready", "_head_ready", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
+    public static final ModelTemplate HAMMER_OF_DEMOLITION_HEAD_DEPLOYED = createItem("template_hammer_of_demolition_head_deployed", "_head_deployed", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
     public static final ModelTemplate ALKAHEST_PURIFIER_INVENTORY = createItem("template_alkahest_purifier", TextureSlot.PARTICLE);
     public static final ModelTemplate SENTRY_SPAWNER_INVENTORY = createItem("template_sentry_spawner", TextureSlot.PARTICLE);
     public static final ModelTemplate LOCKED_BLOCK_INVENTORY = createItem("locked_block_inventory", AetherIITextureSlots.FACE, AetherIITextureSlots.OVERLAY).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();

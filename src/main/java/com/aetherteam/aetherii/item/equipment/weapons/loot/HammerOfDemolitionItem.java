@@ -18,9 +18,9 @@ import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 
-public class DemolitionHammerItem extends TieredHammerItem implements ProjectileItem {
-    public DemolitionHammerItem(Properties properties) {
-        super(applyWeaponProperties(properties, AetherIIItemTiers.DEMOLITION, 3, -2.4F, AetherIIStats.DEMOLITION_HAMMER));
+public class HammerOfDemolitionItem extends TieredHammerItem implements ProjectileItem {
+    public HammerOfDemolitionItem(Properties properties) {
+        super(applyWeaponProperties(properties, AetherIIItemTiers.HAMMER_OF_DEMOLITION, 3, -2.4F, AetherIIStats.HAMMER_OF_DEMOLITION));
     }
 
     public InteractionResult use(Level level, Player player, InteractionHand hand) {

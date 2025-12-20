@@ -63,7 +63,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ZANITE_HAMMER.get(),
                 AetherIIItems.ARKENIUM_HAMMER.get(),
                 AetherIIItems.GRAVITITE_HAMMER.get(),
-                AetherIIItems.DEMOLITION_HAMMER.get()
+                AetherIIItems.HAMMER_OF_DEMOLITION.get()
         );
         this.tag(AetherIITags.Items.TOOLS_SPEARS).add(
                 AetherIIItems.SKYROOT_SPEAR.get(),
@@ -223,7 +223,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ZANITE_TROWEL.get(),
                 AetherIIItems.ARKENIUM_TROWEL.get(),
                 AetherIIItems.GRAVITITE_TROWEL.get(),
-                AetherIIItems.DEMOLITION_HAMMER.get()
+                AetherIIItems.HAMMER_OF_DEMOLITION.get()
         );
         this.tag(AetherIITags.Items.CRAFTS_SKYROOT_PLANKS).addTags(
                 AetherIITags.Items.SKYROOT_LOGS,
@@ -313,7 +313,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.ZANITE_REPAIRING).add(AetherIIItems.ZANITE_GEMSTONE.get());
         this.tag(AetherIITags.Items.ARKENIUM_REPAIRING).add(AetherIIItems.ARKENIUM_PLATES.get());
         this.tag(AetherIITags.Items.GRAVITITE_REPAIRING).add(AetherIIItems.GRAVITITE_PLATE.get());
-        this.tag(AetherIITags.Items.SENTRY_REPAIRING);
+        this.tag(AetherIITags.Items.SENTRY_BOOTS_REPAIRING);
         this.tag(AetherIITags.Items.NEPTUNE_REPAIRING);
         this.tag(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS);
         this.tag(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS).add(

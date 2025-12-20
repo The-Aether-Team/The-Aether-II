@@ -1,7 +1,7 @@
 {
 	"format_version": "1.21.6",
 	"credit": "Made with Blockbench",
-	"parent": "aether_ii:item/demolition_hammer_head_base",
+	"parent": "aether_ii:item/hammer_of_demolition_head_base",
 	"textures": {
 		"particle": "#texture"
 	},

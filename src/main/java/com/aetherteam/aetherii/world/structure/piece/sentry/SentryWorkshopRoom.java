@@ -46,7 +46,7 @@ public class SentryWorkshopRoom extends SentryWorkshopPiece {
         if (name.equals("Sentry Golem")) {
             SentryGolem sentryGolem = new SentryGolem(AetherIIEntityTypes.SENTRY_GOLEM.get(), level.getLevel());
             sentryGolem.setPos(Vec3.atBottomCenterOf(pos));
-            sentryGolem.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(AetherIIItems.DEMOLITION_HAMMER.asItem()));
+            sentryGolem.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(AetherIIItems.HAMMER_OF_DEMOLITION.asItem()));
             sentryGolem.setLeftHanded(true);
             level.addFreshEntity(sentryGolem);
         }

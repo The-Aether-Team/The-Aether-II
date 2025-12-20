@@ -54,7 +54,7 @@ import com.aetherteam.aetherii.item.equipment.weapons.holystone.HolystoneCrossbo
 import com.aetherteam.aetherii.item.equipment.weapons.holystone.HolystoneHammerItem;
 import com.aetherteam.aetherii.item.equipment.weapons.holystone.HolystoneShortswordItem;
 import com.aetherteam.aetherii.item.equipment.weapons.holystone.HolystoneSpearItem;
-import com.aetherteam.aetherii.item.equipment.weapons.loot.DemolitionHammerItem;
+import com.aetherteam.aetherii.item.equipment.weapons.loot.HammerOfDemolitionItem;
 import com.aetherteam.aetherii.item.equipment.weapons.skyroot.SkyrootCrossbowItem;
 import com.aetherteam.aetherii.item.equipment.weapons.skyroot.SkyrootHammerItem;
 import com.aetherteam.aetherii.item.equipment.weapons.skyroot.SkyrootShortswordItem;
@@ -175,7 +175,7 @@ public class AetherIIItems {
 
     public static final DeferredItem<Item> SCATTERGLASS_BOLT = register("scatterglass_bolt", ScatterglassBoltItem::new);
 
-    public static final DeferredItem<TieredHammerItem> DEMOLITION_HAMMER = register("demolition_hammer", DemolitionHammerItem::new);
+    public static final DeferredItem<TieredHammerItem> HAMMER_OF_DEMOLITION = register("hammer_of_demolition", HammerOfDemolitionItem::new);
 
     // Armor
     public static final DeferredItem<Item> BEAST_PELT_HELMET = register("beast_pelt_helmet", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.BEAST_PELT, ArmorType.HELMET).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.BEAST_PELT_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.BEAST_PELT, AetherIIStyleDesigns.SCOUT, false))));
@@ -417,7 +417,7 @@ public class AetherIIItems {
         bus.addListener(NeptuneArmor::updatePlayerAttributes);
 
         // Weapons
-        bus.addListener(DemolitionHammerItem::disableAttacks);
+        bus.addListener(HammerOfDemolitionItem::disableAttacks);
 
         // Tools
         bus.addListener(HolystoneTool::dropAmbrosium);
