@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.event.hooks.BiomeHooks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
 import com.aetherteam.aetherii.event.FreezeEvent;
 import com.aetherteam.aetherii.event.hooks.BlockHooks;
 import com.aetherteam.aetherii.event.hooks.PlayerHooks;
@@ -12,22 +13,27 @@ import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.ItemAbility;
@@ -71,6 +77,7 @@ public class AetherIIEventListeners {
 
         // Entity
         bus.addListener(AetherIIEventListeners::onEntityPostTick);
+        bus.addListener(AetherIIEventListeners::onEntitySpawn);
         bus.addListener(AetherIIEventListeners::onEntityTravelToDimension);
 
         // Living
@@ -268,6 +275,24 @@ public class AetherIIEventListeners {
             livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).postTickUpdate(livingEntity);
             livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).postTickUpdate(livingEntity);
             livingEntity.getData(AetherIIDataAttachments.ACCESSORIES).postTickUpdate(livingEntity);
+        }
+    }
+
+    public static void onEntitySpawn(MobSpawnEvent.SpawnPlacementCheck event) {
+        EntityType<?> type = event.getEntityType();
+        ServerLevelAccessor level = event.getLevel();
+        BlockPos pos = event.getPos();
+        ServerLevel serverLevel = level.getLevel();
+        StructureManager structureManager = serverLevel.structureManager();
+        Registry<Structure> structureRegistry = serverLevel.registryAccess().lookupOrThrow(Registries.STRUCTURE);
+
+        if (!type.is(AetherIITags.Entities.DUNGEON_MOBS)) {
+            for (Holder<Structure> structure : structureRegistry.getTagOrEmpty(AetherIITags.Structures.DUNGEONS)) {
+                StructureStart structureStart = structureManager.getStructureAt(pos, structure.value());
+                if (structureStart.isValid() && structureManager.structureHasPieceAt(pos, structureStart)) {
+                    event.setResult(MobSpawnEvent.SpawnPlacementCheck.Result.FAIL);
+                }
+            }
         }
     }
 

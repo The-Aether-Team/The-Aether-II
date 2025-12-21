@@ -228,6 +228,7 @@ public class AetherIITags {
         public static final TagKey<EntityType<?>> NO_DOUBLE_DROPS = tag("no_double_drops");
         public static final TagKey<EntityType<?>> NO_AMBROSIUM_DROPS = tag("no_ambrosium_drops");
         public static final TagKey<EntityType<?>> SLIDER_DAMAGING_PROJECTILES = tag("slider_damaging_projectiles");
+        public static final TagKey<EntityType<?>> DUNGEON_MOBS = tag("dungeon_mobs");
 
         public static final TagKey<EntityType<?>> SPAWNING_ICE = tag("spawning/ice");
         public static final TagKey<EntityType<?>> SPAWNING_AERCLOUDS = tag("spawning/aerclouds");
@@ -281,6 +282,7 @@ public class AetherIITags {
         public static final TagKey<Structure> TREE_BLACKLIST_FILTER = tag("tree_blacklist_filter");
         public static final TagKey<Structure> ACID_POOL_BLACKLIST_FILTER = tag("acid_pool_blacklist_filter");
         public static final TagKey<Structure> CAMPS = tag("camps");
+        public static final TagKey<Structure> DUNGEONS = tag("dungeons");
 
         private static TagKey<Structure> tag(String name) {
             return TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
