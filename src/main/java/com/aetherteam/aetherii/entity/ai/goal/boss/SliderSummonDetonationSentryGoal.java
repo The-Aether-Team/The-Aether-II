@@ -3,10 +3,13 @@ package com.aetherteam.aetherii.entity.ai.goal.boss;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.dungeon.DetonationSentry;
 import com.aetherteam.aetherii.entity.monster.dungeon.boss.Slider;
-import net.minecraft.core.Position;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.util.LandRandomPos;
+import net.minecraft.world.phys.Vec3;
 
 public class SliderSummonDetonationSentryGoal extends Goal {
     private final Slider slider;
@@ -41,13 +44,33 @@ public class SliderSummonDetonationSentryGoal extends Goal {
     }
 
     public void spawnSentry() {
-        Position pos = this.slider.position();
-        DetonationSentry detonationSentry = new DetonationSentry(AetherIIEntityTypes.DETONATION_SENTRY.get(), this.slider.level());
-        detonationSentry.setPos(pos.x(), pos.y() -1, pos.z());
-        detonationSentry.setDeltaMovement(0.0, 1.0, 0.0);
-        detonationSentry.fallDistance = -100.0F;
-        detonationSentry.setTarget(this.slider.getTarget());
-        this.slider.level().addFreshEntity(detonationSentry);
-        //this.slider.level().playSound(slider, slider.blockPosition(), GenesisSoundEvents.ENTITY_SENTRY_GUARDIAN_SUMMON.get(), SoundSource.AMBIENT, 2.0F, 1.0F);
+        LivingEntity target = this.slider.getTarget();
+        if (target != null && target.isAlive()) {
+            Vec3 vec3 = caculateSpawnPos(this.slider.getTarget().position(), this.slider.position());
+            Vec3 awayFromTarget = LandRandomPos.getPosAway(this.slider, 16, 8, vec3);
+
+            if (awayFromTarget != null) {
+                DetonationSentry detonationSentry = new DetonationSentry(AetherIIEntityTypes.DETONATION_SENTRY.get(), this.slider.level());
+                detonationSentry.setPos(awayFromTarget.x(), awayFromTarget.y(), awayFromTarget.z());
+                detonationSentry.setDeltaMovement(0.0, 1.0, 0.0);
+                detonationSentry.fallDistance = -100.0F;
+                detonationSentry.setTarget(this.slider.getTarget());
+                this.slider.level().addFreshEntity(detonationSentry);
+                //TODO Spawn Sound
+                this.slider.level().playSound(slider, slider.blockPosition(), SoundEvents.EVOKER_CAST_SPELL, SoundSource.AMBIENT, 2.0F, 1.0F);
+            }
+        }
+    }
+
+    private Vec3 caculateSpawnPos(Vec3 sliderPos, Vec3 targetPos) {
+        if (targetPos == null || sliderPos == null) {
+            return null;
+        }
+        double diffX = sliderPos.x - targetPos.x;
+        double diffY = sliderPos.y - targetPos.y;
+        double diffZ = sliderPos.z - targetPos.z;
+
+
+        return this.slider.position().add(diffX, diffY, diffZ);
     }
 }
