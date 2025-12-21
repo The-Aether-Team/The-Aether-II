@@ -78,7 +78,7 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new SentryGolemMeleeAttackGoal(this, 1.15F, true, 6.0F));
         this.goalSelector.addGoal(2, this.randomStrollGoal);
-        this.goalSelector.addGoal(3, new ThrowExplosiveAttackGoal(this, 60, 0.45F, 52.0F, 255.0F));
+        this.goalSelector.addGoal(3, new ThrowExplosiveAttackGoal(this, 20, 0.45F, 52.0F, 255.0F));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
@@ -278,7 +278,7 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
         bomb.setYRot(this.yBodyRot);
         this.playSound(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_THROW_BOMB.get(), 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.level().addFreshEntity(bomb);
-        this.cooldowns.addCooldown(this.getMainHandItem(), 60);
+        this.cooldowns.addCooldown(this.getMainHandItem(), 40);
 
         this.level().broadcastEntityEvent(this, (byte) 61);
     }
