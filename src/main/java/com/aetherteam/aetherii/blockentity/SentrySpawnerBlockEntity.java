@@ -1,7 +1,9 @@
 package com.aetherteam.aetherii.blockentity;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.dungeon.SentryWallSpawnerBlock;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -9,6 +11,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -87,6 +90,12 @@ public class SentrySpawnerBlockEntity extends WallSpawnerBlockEntity {
     public static void serverTick(Level level, BlockPos pos, BlockState state, SentrySpawnerBlockEntity blockEntity) {
         WallSpawnerBlockEntity.serverTick(level, pos, state, blockEntity);
         blockEntity.spawnerTriggerTick(level, pos, state, blockEntity);
+        if (blockEntity.triggerPiston && blockEntity.triggerTick == 0) {
+            if (blockEntity.getLevel() != null) {
+                Direction randomDirection = Direction.Plane.HORIZONTAL.getRandomDirection(level.getRandom());
+                blockEntity.setPos(pos.relative(randomDirection).getBottomCenter(), blockEntity.getLevel().getRandom());
+            }
+        }
     }
 
     @Override
