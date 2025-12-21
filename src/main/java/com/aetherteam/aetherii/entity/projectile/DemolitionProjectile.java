@@ -31,15 +31,14 @@ public class DemolitionProjectile extends ThrowableProjectile {
     @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
-        this.level().explode(this, this.getX(), this.getY(), this.getZ(), 0.75F, Level.ExplosionInteraction.NONE);
+        this.level().explode(this, this.getX(), this.getY(), this.getZ(), 2.0F, Level.ExplosionInteraction.NONE);
     }
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         if (!(result.getEntity() instanceof SentryGolem sentryGolem) || (this.getOwner() != null && sentryGolem.getId() != this.getOwner().getId())) {
-            result.getEntity().hurt(this.level().damageSources().explosion(result.getEntity(), result.getEntity()), 3);
-            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 0.75F, Level.ExplosionInteraction.NONE);
+            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 1.5F, Level.ExplosionInteraction.NONE);
         }
     }
 
