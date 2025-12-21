@@ -34,6 +34,9 @@ public abstract class ConditionalSpawner extends BaseSpawner {
         this.spawnedEntity = spawnedEntity;
     }
 
+    public void markSyncDelay() {
+    }
+
     public abstract boolean canSpawn(ServerLevel serverLevel, BlockPos pos);
 
     @Override

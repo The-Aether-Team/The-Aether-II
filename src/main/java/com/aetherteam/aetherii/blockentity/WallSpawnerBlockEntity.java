@@ -38,6 +38,11 @@ public abstract class WallSpawnerBlockEntity extends CustomSpawnerBlockEntity {
         }
 
         @Override
+        public void markSyncDelay() {
+            WallSpawnerBlockEntity.this.markSyncDelay();
+        }
+
+        @Override
         public Either<BlockEntity, Entity> getOwner() {
             return Either.left(WallSpawnerBlockEntity.this);
         }
@@ -50,6 +55,10 @@ public abstract class WallSpawnerBlockEntity extends CustomSpawnerBlockEntity {
 
     public WallSpawnerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
         super(type, pos, blockState);
+    }
+
+
+    public void markSyncDelay() {
     }
 
     public static void clientTick(Level level, BlockPos pos, BlockState state, WallSpawnerBlockEntity blockEntity) {
