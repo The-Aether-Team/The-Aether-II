@@ -47,7 +47,7 @@ public class SentrySpawnerBlockEntity extends WallSpawnerBlockEntity {
             this.triggerPiston = true;
             this.triggerTick = 50 + (29 - this.delaySyncTick);
             level.playSound(null, blockPos, SoundEvents.PISTON_EXTEND, SoundSource.BLOCKS, 1.25F, 1.5F);
-            this.markUpdated();
+            this.markSyncDelay();
         }
 
         if (this.triggerPiston) {
@@ -72,7 +72,7 @@ public class SentrySpawnerBlockEntity extends WallSpawnerBlockEntity {
     public void spawnTriggerStop(Level level, BlockPos blockPos) {
         this.triggerPiston = false;
         level.playSound(null, blockPos, SoundEvents.PISTON_CONTRACT, SoundSource.BLOCKS, 1.25F, 1.5F);
-        this.markUpdated();
+        this.markSyncDelay();
     }
 
     public float getPistonAnimationScale(float partialTick) {
