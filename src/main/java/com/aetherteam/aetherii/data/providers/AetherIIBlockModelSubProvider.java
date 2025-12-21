@@ -1097,7 +1097,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block))
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(tile))
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(tile))
-                .put(AetherIITextureSlots.EMISSIVE_TOP, TextureMapping.getBlockTexture(block, "_emissive"));
+                .put(AetherIITextureSlots.EMISSIVE_TOP, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/blank"));
         TextureMapping mappingTriggered = new TextureMapping()
                 .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_triggered"))
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(tile))
