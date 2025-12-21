@@ -5,6 +5,6 @@
     "bottom": "aether_ii:block/undershale_tile",
     "emissive_top": "aether_ii:block/sentry_trap_emissive",
     "side": "aether_ii:block/undershale_tile",
-    "top": "aether_ii:block/sentry_trap"
+    "top": "aether_ii:block/sentry_trap_triggered"
   }
 }
