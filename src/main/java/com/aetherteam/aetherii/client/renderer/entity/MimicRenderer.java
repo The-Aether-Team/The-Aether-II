@@ -9,20 +9,12 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.Calendar;
-
-public class MimicRenderer extends MobRenderer<Mimic, LivingEntityRenderState, MimicModel> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/mimic/normal.png");
-    private static final ResourceLocation XMAS_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/mimic/christmas.png");
-
-    private boolean isChristmas;
+public class MimicRenderer extends MobRenderer<Mimic, LivingEntityRenderState, MimicModel<LivingEntityRenderState>> {
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sentry_crate_mimic/sentry_crate_mimic.png");
 
     public MimicRenderer(EntityRendererProvider.Context renderer) {
-        super(renderer, new MimicModel(renderer.bakeLayer(AetherIIModelLayers.MIMIC)), 1.0F);
-        Calendar calendar = Calendar.getInstance();
-        if (calendar.get(Calendar.MONTH) == Calendar.DECEMBER && calendar.get(Calendar.DAY_OF_MONTH) >= 24 && calendar.get(Calendar.DAY_OF_MONTH) <= 26) { // Time period when chests display as presents in Vanilla.
-            this.isChristmas = true;
-        }
+        super(renderer, new MimicModel<>(renderer.bakeLayer(AetherIIModelLayers.MIMIC)), 1.0F);
+
     }
 
     @Override
@@ -38,6 +30,7 @@ public class MimicRenderer extends MobRenderer<Mimic, LivingEntityRenderState, M
      */
     @Override
     public ResourceLocation getTextureLocation(LivingEntityRenderState Mimic) {
-        return this.isChristmas ? XMAS_TEXTURE : TEXTURE;
+        return TEXTURE;
     }
 }
+

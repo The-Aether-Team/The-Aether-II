@@ -218,9 +218,7 @@ public class AetherIIStats {
     public static final ImmutableMap<Holder<Attribute>, Double> MIMIC = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 40.0)
             .build();
-    public static final ImmutableMap<Holder<Attribute>, Double> SENTRY_CRATE_MIMIC = ImmutableMap.<Holder<Attribute>, Double>builder()
-            .put(Attributes.MAX_HEALTH, 40.0)
-            .build();
+
     public static final ImmutableMap<Holder<Attribute>, Double> DETONATION_SENTRY = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 10.0)
             .put(AetherIIAttributes.SLASH_RESISTANCE, 3.0)
