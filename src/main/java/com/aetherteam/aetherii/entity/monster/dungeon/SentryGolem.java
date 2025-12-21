@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.monster.dungeon;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.CooldownEntity;
 import com.aetherteam.aetherii.entity.FakeShiftEntity;
@@ -424,11 +425,13 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
 
             this.golem.getLookControl().setLookAt(this.target, 30.0F, 30.0F);
 
-            this.attackTime = Math.max(this.attackTime - 1, 0);
-            this.golem.setFireTime(this.attackTime);
-            if (this.attackTime <= 30) {
-                //this.golem.setHandState((byte) 1);
+            if (this.golem.cooldowns.isOnCooldown(this.golem.getMainHandItem())) {
+                this.attackTime = this.maxRangedAttackTime;
+            }  else {
+                this.attackTime = Math.max(this.attackTime - 1, 0);
             }
+
+            this.golem.setFireTime(this.attackTime);
 
             if (this.attackTime <= 0 && !this.golem.cooldowns.isOnCooldown(this.golem.getMainHandItem()) && distance <= (double) this.maxAttackRange && canSee) {
                 this.golem.performRangedAttack(this.target, 1.0F);
