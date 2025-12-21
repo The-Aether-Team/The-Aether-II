@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.block.construction;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -19,11 +20,13 @@ public interface SentryBlockUpdating {
             boolean hasPowered = neighborState.is(AetherIITags.Blocks.SENTRY_BLOCKS) && neighborState.getValueOrElse(BlockStateProperties.POWERED, false);
             boolean hasSignal = level.getSignal(neighborPos, direction) > 0;
             if ((!neighborState.is(AetherIITags.Blocks.SENTRY_BLOCKS) && hasSignal != state.getValue(BlockStateProperties.POWERED)) || hasPowered != state.getValue(BlockStateProperties.POWERED)) {
-                BlockState blockstate = state;
-                if (!state.getValue(BlockStateProperties.POWERED)) {
-                    blockstate = state.cycle(BlockStateProperties.LIT);
+                if (!state.getValueOrElse(BlockStateProperties.LIT, false) || !neighborState.is(AetherIIBlocks.UNDERSHALE_BRICK_PRESSURE_PLATE)) {
+                    BlockState blockstate = state;
+                    if (!state.getValue(BlockStateProperties.POWERED)) {
+                        blockstate = state.cycle(BlockStateProperties.LIT);
+                    }
+                    newState = blockstate.setValue(BlockStateProperties.POWERED, hasSignal || hasPowered);
                 }
-                newState = blockstate.setValue(BlockStateProperties.POWERED, hasSignal || hasPowered);
             }
         }
         if (newState != null) {
