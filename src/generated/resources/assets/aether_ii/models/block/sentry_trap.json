@@ -1,6 +1,10 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "aether_ii:block/template_sentry_trap",
+  "render_type": "minecraft:cutout",
   "textures": {
-    "all": "aether_ii:block/sentry_trap"
+    "bottom": "aether_ii:block/undershale_tile",
+    "emissive_top": "aether_ii:block/sentry_trap_emissive",
+    "side": "aether_ii:block/undershale_tile",
+    "top": "aether_ii:block/sentry_trap"
   }
 }

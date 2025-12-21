@@ -1092,6 +1092,22 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.itemModelOutput.accept(item, unbaked);
     }
 
+    public void createSentryTrap(Block block, Block tile) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(tile))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(tile))
+                .put(AetherIITextureSlots.EMISSIVE_TOP, TextureMapping.getBlockTexture(block, "_emissive"));
+        TextureMapping mappingTriggered = new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_triggered"))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(tile))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(tile))
+                .put(AetherIITextureSlots.EMISSIVE_TOP, TextureMapping.getBlockTexture(block, "_emissive"));
+        MultiVariant trap = plainVariant(AetherIIModelTemplates.SENTRY_TRAP.create(block, mapping, this.modelOutput));
+        MultiVariant trapTriggered = plainVariant(AetherIIModelTemplates.SENTRY_TRAP.createWithSuffix(block, "_triggered", mappingTriggered, this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(createBooleanModelDispatch(BlockStateProperties.TRIGGERED, trapTriggered, trap)));
+    }
+
     public void createCopyBlock(Holder<Block> block, String overlay) {
         ResourceLocation lock = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, overlay);
         MultiVariant multivariant = plainVariant(ModelTemplates.PARTICLE_ONLY.create(block.value(), TextureMapping.particle(lock), this.modelOutput));

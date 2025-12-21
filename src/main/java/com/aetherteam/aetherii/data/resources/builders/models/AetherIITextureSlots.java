@@ -6,6 +6,8 @@ public class AetherIITextureSlots {
     public static final TextureSlot EMISSIVE = TextureSlot.create("emissive");
     public static final TextureSlot EMISSIVE_SIDE = TextureSlot.create("emissive_side");
     public static final TextureSlot EMISSIVE_END = TextureSlot.create("emissive_end");
+    public static final TextureSlot EMISSIVE_TOP = TextureSlot.create("emissive_top");
+    public static final TextureSlot EMISSIVE_BOTTOM = TextureSlot.create("emissive_bottom");
     public static final TextureSlot EMISSIVE_WALL = TextureSlot.create("emissive_wall");
     public static final TextureSlot PORTAL = TextureSlot.create("portal");
     public static final TextureSlot TOP_1 = TextureSlot.create("top_1");

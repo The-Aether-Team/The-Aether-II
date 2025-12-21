@@ -497,7 +497,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
 
         this.createSentryCrate(AetherIIBlocks.SENTRY_CRATE.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());
         this.createSentrySpawner(AetherIIBlocks.SENTRY_SPAWNER.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());
-        this.createTrivialCube(AetherIIBlocks.SENTRY_TRAP.get());
+        this.createSentryTrap(AetherIIBlocks.SENTRY_TRAP.get(), AetherIIBlocks.UNDERSHALE_TILE.get());
 
         this.createCopyBlock(AetherIIBlocks.LOCKED_BLOCK, "block/dungeon_lock");
         this.createCopyBlock(AetherIIBlocks.BOSS_DOORWAY_BLOCK, "block/dungeon_doorway");
