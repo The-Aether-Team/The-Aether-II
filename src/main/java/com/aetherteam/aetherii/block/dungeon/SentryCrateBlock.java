@@ -3,6 +3,8 @@ package com.aetherteam.aetherii.block.dungeon;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.SentryCrateBlockEntity;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.monster.dungeon.Mimic;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -11,6 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -290,5 +293,10 @@ public class SentryCrateBlock extends BaseEntityBlock implements MimicOption {
     @Nullable
     public static Container getContainer(SentryCrateBlock block, BlockState state, Level level, BlockPos pos, boolean override) {
         return block.combine(state, level, pos, override).apply(CHEST_COMBINER).orElse(null);
+    }
+
+    @Override
+    public Optional<EntityType<? extends Mimic>> getMimicEntityType() {
+        return Optional.of(AetherIIEntityTypes.SENTRY_CRATE_MIMIC.get());
     }
 }

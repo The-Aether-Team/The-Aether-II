@@ -58,6 +58,7 @@ public class AetherIIBestiaryEntries {
     public static final ResourceKey<BestiaryEntry> GRAVITITE_TALUTON = createKey("gravitite_taluton");
     public static final ResourceKey<BestiaryEntry> BLADESHROOM_HUNTER = createKey("bladeshroom_hunter");
     public static final ResourceKey<BestiaryEntry> MIMIC = createKey("mimic");
+    public static final ResourceKey<BestiaryEntry> SENTRY_CRATE_MIMIC = createKey("sentry_crate_mimic");
     public static final ResourceKey<BestiaryEntry> DETONATION_SENTRY = createKey("detonation_sentry");
     public static final ResourceKey<BestiaryEntry> SENTRY_GOLEM = createKey("sentry_golem");
 
@@ -88,6 +89,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(ARKENIUM_TALUTON, AetherIIEntityTypes.ARKENIUM_TALUTON),
             Map.entry(GRAVITITE_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON),
             Map.entry(MIMIC, AetherIIEntityTypes.MIMIC),
+            Map.entry(SENTRY_CRATE_MIMIC, AetherIIEntityTypes.SENTRY_CRATE_MIMIC),
             Map.entry(DETONATION_SENTRY, AetherIIEntityTypes.DETONATION_SENTRY),
             Map.entry(SENTRY_GOLEM, AetherIIEntityTypes.SENTRY_GOLEM),
             Map.entry(BLADESHROOM_HUNTER, AetherIIEntityTypes.BLADESHROOM_HUNTER)
@@ -157,6 +159,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.ARKENIUM_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.ARKENIUM_CORE, 0.075, 1, 1))),
             Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.GRAVITITE_CORE, 0.075, 1, 1))),
             Map.entry(AetherIIEntityTypes.MIMIC, List.of()),
+            Map.entry(AetherIIEntityTypes.SENTRY_CRATE_MIMIC, List.of()),
             Map.entry(AetherIIEntityTypes.DETONATION_SENTRY, List.of()),
             Map.entry(AetherIIEntityTypes.SENTRY_GOLEM, List.of()),
             Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, List.of())

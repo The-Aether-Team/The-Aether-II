@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import com.aetherteam.aetherii.entity.monster.*;
 import com.aetherteam.aetherii.entity.monster.dungeon.DetonationSentry;
 import com.aetherteam.aetherii.entity.monster.dungeon.Mimic;
+import com.aetherteam.aetherii.entity.monster.dungeon.SentryCrateMimic;
 import com.aetherteam.aetherii.entity.monster.dungeon.SentryGolem;
 import com.aetherteam.aetherii.entity.monster.dungeon.boss.Slider;
 import com.aetherteam.aetherii.entity.npc.outpost.Edward;
@@ -98,6 +99,8 @@ public class AetherIIEntityTypes {
 
     public static final DeferredHolder<EntityType<?>, EntityType<Mimic>> MIMIC = ENTITY_TYPES.register("mimic",
             () -> EntityType.Builder.of(Mimic::new, MobCategory.MONSTER).sized(1.0F, 2.0F).clientTrackingRange(8).build(AetherIIEntities.MIMIC));
+    public static final DeferredHolder<EntityType<?>, EntityType<SentryCrateMimic>> SENTRY_CRATE_MIMIC = ENTITY_TYPES.register("sentry_crate_mimic",
+            () -> EntityType.Builder.of(SentryCrateMimic::new, MobCategory.MONSTER).sized(1.0F, 1.5F).clientTrackingRange(8).build(AetherIIEntities.SENTRY_CRATE_MIMIC));
 
     public static final DeferredHolder<EntityType<?>, EntityType<DetonationSentry>> DETONATION_SENTRY = ENTITY_TYPES.register("detonation_sentry",
             () -> EntityType.Builder.of(DetonationSentry::new, MobCategory.MONSTER).sized(0.9F, 0.9F).eyeHeight(0.45F).clientTrackingRange(10).build(AetherIIEntities.DETONATION_SENTRY));
@@ -223,6 +226,7 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), AetherIIStats.merge(ArkeniumTaluton.createMobAttributes(), AetherIIStats.ARKENIUM_TALUTON).build());
         event.put(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), AetherIIStats.merge(GravititeTaluton.createMobAttributes(), AetherIIStats.GRAVITITE_TALUTON).build());
         event.put(AetherIIEntityTypes.MIMIC.get(), AetherIIStats.merge(Mimic.createMobAttributes(), AetherIIStats.MIMIC).build());
+        event.put(AetherIIEntityTypes.SENTRY_CRATE_MIMIC.get(), AetherIIStats.merge(SentryCrateMimic.createMobAttributes(), AetherIIStats.SENTRY_CRATE_MIMIC).build());
         event.put(AetherIIEntityTypes.DETONATION_SENTRY.get(), AetherIIStats.merge(DetonationSentry.createMobAttributes(), AetherIIStats.DETONATION_SENTRY).build());
         event.put(AetherIIEntityTypes.SENTRY_GOLEM.get(), AetherIIStats.merge(SentryGolem.createMobAttributes(), AetherIIStats.SENTRY_GOLEM).build());
         event.put(AetherIIEntityTypes.SLIDER.get(), Slider.createMobAttributes().build());

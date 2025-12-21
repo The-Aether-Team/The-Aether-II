@@ -36,7 +36,8 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.neoforged.neoforge.common.Tags;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class AetherIIEntityLoot extends EntityLootSubProvider {
@@ -248,6 +249,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         this.add(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), LootTable.lootTable());
 
         this.add(AetherIIEntityTypes.MIMIC.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.SENTRY_CRATE_MIMIC.get(), LootTable.lootTable());
 
         //TODO CARVED STONE LOOT
         this.add(AetherIIEntityTypes.DETONATION_SENTRY.get(), LootTable.lootTable()

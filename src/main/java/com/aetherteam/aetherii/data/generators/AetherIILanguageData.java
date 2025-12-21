@@ -1294,6 +1294,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.ARKENIUM_TALUTON, "Arkenium Taluton");
         this.addEntityType(AetherIIEntityTypes.GRAVITITE_TALUTON, "Gravitite Taluton");
         this.addEntityType(AetherIIEntityTypes.MIMIC, "Mimic");
+        this.addEntityType(AetherIIEntityTypes.SENTRY_CRATE_MIMIC, "Sentry Crate Mimic");
         this.addEntityType(AetherIIEntityTypes.DETONATION_SENTRY, "Detonation Sentry");
         this.addEntityType(AetherIIEntityTypes.DEMOLITION_PROJECTILE, "Detonation Projectile");
         this.addEntityType(AetherIIEntityTypes.SENTRY_GOLEM, "Sentry Golem");
@@ -1523,6 +1524,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.MIMIC.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.SENTRY_CRATE_MIMIC.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.DETONATION_SENTRY.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.SENTRY_GOLEM.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), loremIpsum);

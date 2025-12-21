@@ -127,6 +127,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), ArkeniumTalutonRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), GravititeTalutonRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.MIMIC.get(), MimicRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.SENTRY_CRATE_MIMIC.get(), SentryCrateMimicRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.DETONATION_SENTRY.get(), DetonationSentryRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SENTRY_GOLEM.get(), SentryGolemRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SLIDER.get(), SliderRenderer::new);
@@ -219,6 +220,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_TALUTON, GravititeTalutonModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.DETONATION_SENTRY, DetonationSentryModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MIMIC, MimicModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SENTRY_CRATE_MIMIC, SentryCrateMimicModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SENTRY_GOLEM, SentryGolemModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SLIDER, SliderModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.BLADESHROOM_HUNTER, BladeshroomHunterModel::createBodyLayer);
