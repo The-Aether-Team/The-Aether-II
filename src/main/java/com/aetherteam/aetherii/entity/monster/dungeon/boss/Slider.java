@@ -52,6 +52,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.IEntityWithComplexSpawn;
+import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -66,12 +67,6 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     private static final EntityDataAccessor<Float> DATA_HURT_ANGLE_X_ID = SynchedEntityData.defineId(Slider.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> DATA_HURT_ANGLE_Z_ID = SynchedEntityData.defineId(Slider.class, EntityDataSerializers.FLOAT);
     private static final Music SLIDER_MUSIC = new Music(AetherIISoundEvents.MUSIC_BOSS_SLIDER, 0, 0, true);
-//    public static final Map<Block, Function<BlockState, BlockState>> DUNGEON_BLOCK_CONVERSIONS = new HashMap<>(Map.ofEntries(
-//            Map.entry(AetherBlocks.LOCKED_CARVED_STONE.get(), (blockState) -> AetherBlocks.CARVED_STONE.get().defaultBlockState()),
-//            Map.entry(AetherBlocks.LOCKED_SENTRY_STONE.get(), (blockState) -> AetherBlocks.SENTRY_STONE.get().defaultBlockState()),
-//            Map.entry(AetherBlocks.BOSS_DOORWAY_CARVED_STONE.get(), (blockState) -> Blocks.AIR.defaultBlockState()),
-//            Map.entry(AetherBlocks.TREASURE_DOORWAY_CARVED_STONE.get(), (blockState) -> AetherBlocks.SKYROOT_TRAPDOOR.get().defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, blockState.getValue(HorizontalDirectionalBlock.FACING)))
-//    ));
 
     /**
      * Goal for targeting in groups of entities
@@ -92,6 +87,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     private Vec3 targetPoint = null;
     private int attackCooldown = 0;
     public int sliderDeathTime = 0;
+
     public Slider(EntityType<? extends Slider> type, Level level) {
         super(type, level);
         this.moveControl = new BlankMoveControl(this);
@@ -119,12 +115,11 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new CollideGoal(this));
-        this.goalSelector.addGoal(2, new CrushGoal(this));
-        this.goalSelector.addGoal(3, new BackOffAfterAttackGoal(this));
-        this.goalSelector.addGoal(4, new SetPathUpOrDownGoal(this));
-        this.goalSelector.addGoal(5, new AvoidObstaclesGoal(this));
-        this.goalSelector.addGoal(6, new SliderMoveGoal(this));
-        this.goalSelector.addGoal(7, new SliderSummonDetonationSentryGoal(this));
+        this.goalSelector.addGoal(2, new BackOffAfterAttackGoal(this));
+        this.goalSelector.addGoal(3, new SetPathUpOrDownGoal(this));
+        this.goalSelector.addGoal(4, new AvoidObstaclesGoal(this));
+        this.goalSelector.addGoal(5, new SliderMoveGoal(this));
+        this.goalSelector.addGoal(6, new SliderSummonDetonationSentryGoal(this));
 
         this.mostDamageTargetGoal = new MostDamageTargetGoal(this);
         this.targetSelector.addGoal(1, this.mostDamageTargetGoal);
@@ -151,10 +146,33 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
             this.setTarget(null);
         }
         if (this.isAwake()) {
+            this.breakBlocks();
             this.evaporate();
         }
         if (this.getChatCooldown() > 0) {
             this.chatCooldown--;
+        }
+    }
+
+    private void breakBlocks() {
+        if (this.level() instanceof ServerLevel serverLevel) {
+            if (EventHooks.canEntityGrief(serverLevel, this)) {
+                if (this.getMoveDirection() != null) {
+                    AABB crushBox = this.getBoundingBox().expandTowards(this.getMoveDirection().getUnitVec3().scale(0.1));
+                    for (BlockPos pos : BlockPos.betweenClosed(Mth.floor(crushBox.minX), Mth.floor(crushBox.minY), Mth.floor(crushBox.minZ), Mth.floor(crushBox.maxX), Mth.floor(crushBox.maxY), Mth.floor(crushBox.maxZ))) {
+                        if (this.getDungeon() == null || this.getDungeon().roomBounds().contains(pos.getCenter())) {
+                            BlockState blockState = serverLevel.getBlockState(pos);
+                            if (!blockState.isAir() && !blockState.is(AetherIITags.Blocks.SLIDER_UNBREAKABLE) && blockState.getBlock().defaultDestroyTime() >= 0.0F && blockState.getBlock().defaultDestroyTime() < 100.0F) {
+                                serverLevel.destroyBlock(pos, true, this);
+                                double a = pos.getX() + 0.5 + (double) (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.375;
+                                double b = pos.getY() + 0.5 + (double) (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.375;
+                                double c = pos.getZ() + 0.5 + (double) (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.375;
+                                serverLevel.sendParticles(ParticleTypes.POOF, a, b, c, 1, 0.0, 0.0, 0.0, 0.0);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 

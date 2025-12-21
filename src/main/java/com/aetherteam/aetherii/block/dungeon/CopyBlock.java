@@ -42,13 +42,15 @@ public abstract class CopyBlock extends BaseEntityBlock {
 
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (stack.getItem() instanceof BlockItem blockItem) {
-            BlockState copyState = blockItem.getBlock().getStateForPlacement(new BlockPlaceContext(player, hand, stack, hitResult));
-            if (copyState != null && copyState.getBlock() != this && copyState.is(AetherIITags.Blocks.COPYABLE_DUNGEON_BLOCKS)) {
-                if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity) {
-                    BlockState newState = state.setValue(CopyBlock.EMPTY, false);
-                    this.setCopyBlocksInfo(level, pos, state, copyState, newState, blockEntity);
-                    return InteractionResult.SUCCESS;
+        if (player.isCreative()) {
+            if (stack.getItem() instanceof BlockItem blockItem) {
+                BlockState copyState = blockItem.getBlock().getStateForPlacement(new BlockPlaceContext(player, hand, stack, hitResult));
+                if (copyState != null && copyState.getBlock() != this && copyState.is(AetherIITags.Blocks.COPYABLE_DUNGEON_BLOCKS)) {
+                    if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity) {
+                        BlockState newState = state.setValue(CopyBlock.EMPTY, false);
+                        this.setCopyBlocksInfo(level, pos, state, copyState, newState, blockEntity);
+                        return InteractionResult.SUCCESS;
+                    }
                 }
             }
         }
