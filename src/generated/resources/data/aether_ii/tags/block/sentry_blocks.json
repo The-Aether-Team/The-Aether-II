@@ -5,7 +5,6 @@
     "aether_ii:sentry_brick_stairs",
     "aether_ii:sentry_brick_slab",
     "aether_ii:sentry_brick_wall",
-    "aether_ii:sentry_spawner",
-    "aether_ii:sentry_trap"
+    "aether_ii:sentry_spawner"
   ]
 }
