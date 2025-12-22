@@ -28,7 +28,6 @@ public class Mimic extends Monster {
     public final AnimationState attackAnimationState = new AnimationState();
     public static int ATTACK_EVENT = 100;
 
-
     public Mimic(EntityType<? extends Mimic> type, Level level) {
         super(type, level);
     }
@@ -103,7 +102,6 @@ public class Mimic extends Monster {
     public void spawnAnim() {
         if (this.level().isClientSide()) {
             this.spawnAnimationState.start(this.tickCount);
-            this.spawnSummoningExplosionParticles();
         } else {
             this.level().broadcastEntityEvent(this, (byte) 70);
         }
@@ -129,24 +127,9 @@ public class Mimic extends Monster {
         if (id == ATTACK_EVENT) {
             this.attackAnimationState.start(this.tickCount);
         } else if (id == 70) {
-            this.spawnSummoningExplosionParticles();
             this.spawnAnimationState.start(this.tickCount);
         } else {
             super.handleEntityEvent(id);
-        }
-    }
-
-    private void spawnSummoningExplosionParticles() {
-        RandomSource random = this.getRandom();
-        for (int i = 0; i < 20; ++i) {
-            double d0 = random.nextGaussian() * 0.02;
-            double d1 = random.nextGaussian() * 0.02;
-            double d2 = random.nextGaussian() * 0.02;
-            double d3 = 10.0;
-            double x = this.getX(0.0) - d0 * d3;
-            double y = this.getRandomY() - d1 * d3;
-            double z = this.getRandomZ(1.0) - d2 * d3;
-            this.level().addParticle(ParticleTypes.POOF, x, y, z, d0, d1, d2);
         }
     }
 

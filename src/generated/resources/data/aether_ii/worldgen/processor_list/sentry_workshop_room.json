@@ -393,6 +393,9 @@
           }
         }
       ]
+    },
+    {
+      "processor_type": "aether_ii:mimic_chest"
     }
   ]
 }

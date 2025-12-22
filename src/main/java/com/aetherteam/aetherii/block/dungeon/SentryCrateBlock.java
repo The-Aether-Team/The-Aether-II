@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.block.dungeon;
 
-import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.SentryCrateBlockEntity;
 import com.mojang.serialization.MapCodec;
@@ -162,14 +161,6 @@ public class SentryCrateBlock extends BaseEntityBlock implements MimicOption {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity != null) {
-            if (blockEntity.getData(AetherIIDataAttachments.MIMIC)) {
-                level.destroyBlock(pos, false);
-                MimicOption.spawnMimic(state, level, pos);
-                return InteractionResult.SUCCESS;
-            }
-        }
         if (level instanceof ServerLevel serverlevel) {
             MenuProvider menu = this.getMenuProvider(state, level, pos);
             if (menu != null) {

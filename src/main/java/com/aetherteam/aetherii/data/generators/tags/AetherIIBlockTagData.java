@@ -313,6 +313,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SENTRY_BRICKS.get(),
                 AetherIIBlocks.UNDERGROWTH_LEAVES.get()
         );
+        this.tag(AetherIITags.Blocks.MIMIC_CONTAINERS).add(AetherIIBlocks.SENTRY_CRATE.get());
         this.tag(AetherIITags.Blocks.SLIDER_UNBREAKABLE).add(
                 Blocks.BARRIER,
                 Blocks.BEDROCK,

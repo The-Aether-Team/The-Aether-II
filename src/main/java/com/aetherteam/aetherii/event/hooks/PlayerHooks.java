@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.dungeon.MimicOption;
 import com.aetherteam.aetherii.block.natural.AercloudBlock;
 import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
 import com.aetherteam.aetherii.block.natural.Snowable;
@@ -47,6 +48,8 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
@@ -151,6 +154,24 @@ public class PlayerHooks {
                     itemStack.shrink(1);
                 }
                 player.swing(hand);
+                return true;
+            }
+        }
+        return cancellationStatus;
+    }
+
+    public static boolean interactWithMimicContainer(Level level, BlockPos pos, boolean cancellationStatus) {
+        BlockState state = level.getBlockState(pos);
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+
+        if (blockEntity instanceof RandomizableContainerBlockEntity containerBlockEntity) {
+            if (blockEntity.components().has(AetherIIDataComponents.MIMIC)) {
+                containerBlockEntity.setLootTable(null);
+                containerBlockEntity.clearContent();
+                level.destroyBlock(pos, false);
+                if (level instanceof ServerLevel serverLevel) {
+                    MimicOption.spawnMimic(state, serverLevel, pos);
+                }
                 return true;
             }
         }

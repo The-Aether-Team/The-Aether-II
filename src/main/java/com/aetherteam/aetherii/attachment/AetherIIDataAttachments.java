@@ -51,7 +51,4 @@ public class AetherIIDataAttachments {
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<CurrencyAttachment>> CURRENCY = ATTACHMENTS.register("currency", () -> AttachmentType.builder(CurrencyAttachment::new).serialize(CurrencyAttachment.CODEC).sync(CurrencyAttachment.STREAM_CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<GuidebookDiscoveryAttachment>> GUIDEBOOK_DISCOVERY = ATTACHMENTS.register("guidebook_discovery", () -> AttachmentType.builder(GuidebookDiscoveryAttachment::new).serialize(GuidebookDiscoveryAttachment.CODEC).copyOnDeath().build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<OutpostTrackerAttachment>> OUTPOST_TRACKER = ATTACHMENTS.register("outpost_tracker", () -> AttachmentType.builder(OutpostTrackerAttachment::new).serialize(OutpostTrackerAttachment.CODEC).copyOnDeath().build());
-
-    // Block Entity
-    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> MIMIC = ATTACHMENTS.register("mimic", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL.fieldOf("mimic")).sync(ByteBufCodecs.BOOL).build());
 }
