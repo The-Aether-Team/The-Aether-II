@@ -7,10 +7,9 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -25,6 +24,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 
 public class Mimic extends Monster {
+    public final AnimationState spawnAnimationState = new AnimationState();
+    public final AnimationState attackAnimationState = new AnimationState();
+    public static int ATTACK_EVENT = 100;
+
+
     public Mimic(EntityType<? extends Mimic> type, Level level) {
         super(type, level);
     }
@@ -32,7 +36,7 @@ public class Mimic extends Monster {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, false));
+        this.goalSelector.addGoal(2, new MimicMeleeAttackGoal(this, 1.0, false));
         this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this, Mimic.class));
@@ -98,6 +102,7 @@ public class Mimic extends Monster {
     @Override
     public void spawnAnim() {
         if (this.level().isClientSide()) {
+            this.spawnAnimationState.start(this.tickCount);
             this.spawnSummoningExplosionParticles();
         } else {
             this.level().broadcastEntityEvent(this, (byte) 70);
@@ -121,8 +126,11 @@ public class Mimic extends Monster {
 
     @Override
     public void handleEntityEvent(byte id) {
-        if (id == 70) {
+        if (id == ATTACK_EVENT) {
+            this.attackAnimationState.start(this.tickCount);
+        } else if (id == 70) {
             this.spawnSummoningExplosionParticles();
+            this.spawnAnimationState.start(this.tickCount);
         } else {
             super.handleEntityEvent(id);
         }
@@ -141,5 +149,78 @@ public class Mimic extends Monster {
             this.level().addParticle(ParticleTypes.POOF, x, y, z, d0, d1, d2);
         }
     }
+
+    protected static class MimicMeleeAttackGoal extends MeleeAttackGoal {
+        private int ticksUntilNextAttack;
+        private boolean attack;
+
+        public MimicMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen) {
+            super(mob, speedModifier, followingTargetEvenIfNotSeen);
+        }
+
+        @Override
+        public boolean canUse() {
+            return super.canUse();
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return super.canContinueToUse();
+        }
+
+        @Override
+        public void start() {
+            super.start();
+            this.ticksUntilNextAttack = 0;
+            this.attack = false;
+        }
+
+        @Override
+        protected void checkAndPerformAttack(LivingEntity target) {
+            if ((this.mob.isWithinMeleeAttackRange(target) && this.mob.getSensing().hasLineOfSight(target)) && !this.attack) {
+                this.resetAttackCooldown();
+                this.attack = true;
+            }
+
+            if (this.attack && this.ticksUntilNextAttack == 20) {
+                this.mob.level().broadcastEntityEvent(this.mob, (byte) ATTACK_EVENT);
+            }
+
+            if (this.canPerformAttack(target)) {
+                this.mob.swing(InteractionHand.MAIN_HAND);
+                this.mob.doHurtTarget(getServerLevel(this.mob.level()), target);
+                this.mob.setZza(0.2F);
+            }
+
+            if (this.attack) {
+                --this.ticksUntilNextAttack;
+            }
+
+            if (this.ticksUntilNextAttack <= 0) {
+                this.attack = false;
+            }
+        }
+
+        @Override
+        protected void resetAttackCooldown() {
+            this.ticksUntilNextAttack = this.adjustedTickDelay(20);
+        }
+
+        @Override
+        protected boolean isTimeToAttack() {
+            return this.ticksUntilNextAttack == 11;
+        }
+
+        @Override
+        protected int getTicksUntilNextAttack() {
+            return this.ticksUntilNextAttack;
+        }
+
+        @Override
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
+    }
+
 }
 

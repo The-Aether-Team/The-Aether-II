@@ -3,31 +3,40 @@ package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockb
 // Paste this class into your mod and generate all required imports
 
 
+import com.aetherteam.aetherii.client.renderer.entity.animation.MimicAnimations;
+import com.aetherteam.aetherii.client.renderer.entity.state.MimicRenderState;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-import net.minecraft.util.Mth;
 
-public class MimicModel<T extends LivingEntityRenderState> extends EntityModel<T> {
-    private final ModelPart body;
-    private final ModelPart eye;
+public class MimicModel<T extends MimicRenderState> extends EntityModel<T> {
+    public final ModelPart body;
+    public final ModelPart head;
+    public final ModelPart eye;
     private final ModelPart tongue_1;
     private final ModelPart tongue_2;
     private final ModelPart tongue_3;
     private final ModelPart leg_left;
     private final ModelPart leg_right;
+    private final KeyframeAnimation walkAnimation;
+    private final KeyframeAnimation attackAnimation;
+    private final KeyframeAnimation spawnAnimation;
 
     public MimicModel(ModelPart root) {
         super(root);
         this.body = root.getChild("body");
-        this.eye = this.body.getChild("eye");
-        this.tongue_1 = this.body.getChild("tongue_1");
+        this.head = this.body.getChild("head");
+        this.eye = this.head.getChild("eye");
+        this.tongue_1 = this.head.getChild("tongue_1");
         this.tongue_2 = this.tongue_1.getChild("tongue_2");
         this.tongue_3 = this.tongue_2.getChild("tongue_3");
         this.leg_left = this.body.getChild("leg_left");
         this.leg_right = this.body.getChild("leg_right");
+        this.walkAnimation = MimicAnimations.walk.bake(root);
+        this.attackAnimation = MimicAnimations.attack.bake(root);
+        this.spawnAnimation = MimicAnimations.spawn.bake(root);
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -36,13 +45,15 @@ public class MimicModel<T extends LivingEntityRenderState> extends EntityModel<T
 
         PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.offset(0.5F, 9.0F, 1.0F));
 
-        PartDefinition cube_r1 = body.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(72, 0).mirror().addBox(-2.0F, -0.4F, -2.5F, 2.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false)
-                .texOffs(84, 0).addBox(14.0F, -0.4F, -2.5F, 2.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-7.5F, -1.5F, -1.75F, 0.7854F, 0.0F, 0.0F));
+        PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        PartDefinition cube_r2 = body.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 28).addBox(-7.0F, -7.0F, -7.0F, 14.0F, 14.0F, 14.0F, new CubeDeformation(-0.2F))
+        PartDefinition cube_r1 = head.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(84, 0).addBox(0.0F, -0.4F, -2.5F, 2.0F, 6.0F, 4.0F, new CubeDeformation(0.0F))
+                .texOffs(72, 0).mirror().addBox(-16.0F, -0.4F, -2.5F, 2.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(6.5F, -1.5F, -1.75F, 0.7854F, 0.0F, 0.0F));
+
+        PartDefinition cube_r2 = head.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 28).addBox(-7.0F, -7.0F, -7.0F, 14.0F, 14.0F, 14.0F, new CubeDeformation(-0.2F))
                 .texOffs(0, 0).addBox(-7.0F, -7.0F, -7.0F, 14.0F, 14.0F, 14.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, 0.0F, -1.0F, -2.3562F, 0.0F, 0.0F));
 
-        PartDefinition tooth_left_5_r1 = body.addOrReplaceChild("tooth_left_5_r1", CubeListBuilder.create().texOffs(122, 43).addBox(5.0F, -11.0F, -10.0F, 0.0F, 7.0F, 3.0F, new CubeDeformation(0.0F))
+        PartDefinition tooth_left_5_r1 = head.addOrReplaceChild("tooth_left_5_r1", CubeListBuilder.create().texOffs(122, 43).addBox(5.0F, -11.0F, -10.0F, 0.0F, 7.0F, 3.0F, new CubeDeformation(0.0F))
                 .texOffs(120, 41).addBox(3.0F, -11.0F, -5.0F, 4.0F, 5.0F, 0.0F, new CubeDeformation(0.0F))
                 .texOffs(122, 38).addBox(4.0F, -10.0F, -2.0F, 3.0F, 3.0F, 0.0F, new CubeDeformation(0.0F))
                 .texOffs(122, 35).addBox(4.0F, -10.0F, 1.0F, 3.0F, 3.0F, 0.0F, new CubeDeformation(0.0F))
@@ -52,9 +63,9 @@ public class MimicModel<T extends LivingEntityRenderState> extends EntityModel<T
                 .texOffs(122, 10).addBox(-7.0F, -10.0F, 1.0F, 3.0F, 3.0F, 0.0F, new CubeDeformation(0.0F))
                 .texOffs(120, 5).addBox(-7.0F, -12.0F, 4.0F, 4.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, 0.0F, -1.0F, 0.7854F, 0.0F, 0.0F));
 
-        PartDefinition eye = body.addOrReplaceChild("eye", CubeListBuilder.create().texOffs(42, 0).addBox(-5.0F, -5.0F, 0.0F, 9.0F, 9.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition eye = head.addOrReplaceChild("eye", CubeListBuilder.create().texOffs(42, 0).addBox(-5.0F, -5.0F, 0.0F, 9.0F, 9.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        PartDefinition tongue_1 = body.addOrReplaceChild("tongue_1", CubeListBuilder.create().texOffs(46, 9).addBox(-4.0F, 0.0F, -10.0F, 8.0F, 0.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, 5.0F, 1.0F, -0.3491F, 0.0F, 0.0F));
+        PartDefinition tongue_1 = head.addOrReplaceChild("tongue_1", CubeListBuilder.create().texOffs(46, 9).addBox(-4.0F, 0.0F, -10.0F, 8.0F, 0.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, 5.0F, 1.0F, -0.3491F, 0.0F, 0.0F));
 
         PartDefinition tongue_2 = tongue_1.addOrReplaceChild("tongue_2", CubeListBuilder.create().texOffs(47, 19).addBox(-4.0F, 0.0F, -9.0F, 8.0F, 0.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -10.0F, 0.9599F, 0.0F, 0.0F));
 
@@ -79,9 +90,11 @@ public class MimicModel<T extends LivingEntityRenderState> extends EntityModel<T
 
     @Override
     public void setupAnim(T renderState) {
+        super.setupAnim(renderState);
         float f1 = renderState.walkAnimationPos;
         float f2 = renderState.walkAnimationSpeed;
-        this.leg_right.xRot = Mth.cos(f1 * 0.6662F) * 1.4F * f2;
-        this.leg_left.xRot = Mth.cos(f1 * 0.6662F + (float) Math.PI) * 1.4F * f2;
+        this.walkAnimation.applyWalk(f2, f1, 1.0F, 1.0F);
+        this.spawnAnimation.apply(renderState.spawnAnimationState, renderState.ageInTicks);
+        this.attackAnimation.apply(renderState.attackAnimationState, renderState.ageInTicks);
     }
 }
