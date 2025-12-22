@@ -16,9 +16,9 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
 public class MimicRenderer extends MobRenderer<Mimic, MimicRenderState, MimicModel<MimicRenderState>> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sentry_crate_mimic/sentry_crate_mimic.png");
-    private static final ResourceLocation TEXTURE_EYE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sentry_crate_mimic/sentry_crate_mimic_eye.png");
-    private static final ResourceLocation TEXTURE_EMISSIVE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sentry_crate_mimic/sentry_crate_mimic_emissive.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/mimic/sentry_crate_mimic.png");
+    private static final ResourceLocation TEXTURE_EYE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/mimic/sentry_crate_mimic_eye.png");
+    private static final ResourceLocation TEXTURE_EMISSIVE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/mimic/sentry_crate_mimic_emissive.png");
 
     public MimicRenderer(EntityRendererProvider.Context renderer) {
         super(renderer, new MimicModel<>(renderer.bakeLayer(AetherIIModelLayers.MIMIC)), 1.0F);
@@ -43,24 +43,18 @@ public class MimicRenderer extends MobRenderer<Mimic, MimicRenderState, MimicMod
     }
 
     @Override
-    public void render(MimicRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int p_115313_) {
-        super.render(renderState, poseStack, bufferSource, p_115313_);
+    public void render(MimicRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        super.render(renderState, poseStack, bufferSource, packedLight);
         poseStack.pushPose();
-        float f1 = renderState.scale;
-        poseStack.scale(f1, f1, f1);
-        this.setupRotations(renderState, poseStack, renderState.bodyRot + 180, f1);
-        poseStack.scale(-1.0F, -1.0F, 1.0F);
-        this.model.body.translateAndRotate(poseStack);
-        this.model.head.translateAndRotate(poseStack);
-        this.model.eye.translateAndRotate(poseStack);
-        this.scale(renderState, poseStack);
-        poseStack.translate(0.0F, -1.501F, 0.0F);
+        poseStack.scale(0.45F, 0.45F, 0.45F);
+        poseStack.translate(0.0F, 2.25F, 0.0F);
+        poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
         PoseStack.Pose posestack$pose = poseStack.last();
         VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderType.entityCutout(TEXTURE_EYE));
-        vertex(vertexconsumer, posestack$pose, p_115313_, -0.5F + (2.5F / 16F), -0.85F, 0, 1);
-        vertex(vertexconsumer, posestack$pose, p_115313_, 0.5F + (2.5F / 16F), -0.85F, 1, 1);
-        vertex(vertexconsumer, posestack$pose, p_115313_, 0.5F + (2.5F / 16F), 0.15F, 1, 0);
-        vertex(vertexconsumer, posestack$pose, p_115313_, -0.5F + (2.5F / 16F), 0.15F, 0, 0);
+        vertex(vertexconsumer, posestack$pose, packedLight, -0.5F, -0.5F, 0, 1);
+        vertex(vertexconsumer, posestack$pose, packedLight, 0.5F, -0.5F, 1, 1);
+        vertex(vertexconsumer, posestack$pose, packedLight, 0.5F, 0.5F, 1, 0);
+        vertex(vertexconsumer, posestack$pose, packedLight, -0.5F, 0.5F, 0, 0);
         poseStack.popPose();
     }
 
