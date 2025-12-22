@@ -19,6 +19,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class SentrySpawnerBlockEntity extends WallSpawnerBlockEntity {
     public boolean triggerPiston;
@@ -91,16 +92,23 @@ public class SentrySpawnerBlockEntity extends WallSpawnerBlockEntity {
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, SentrySpawnerBlockEntity blockEntity) {
         BaseSpawnerAccessor accessor = (BaseSpawnerAccessor) blockEntity.getSpawner();
-        if (blockEntity.firstTick) {
-            accessor.aether_ii$setSpawnCount(1);
-            blockEntity.firstTick = false;
-        }
         blockEntity.getSpawner().serverTick((ServerLevel) level, pos);
         blockEntity.spawnerTriggerTick(level, pos, state, blockEntity);
-        if (blockEntity.triggerPiston && blockEntity.triggerTick == 0) {
+        if (blockEntity.firstTick || (blockEntity.triggerPiston && blockEntity.triggerTick == 0)) {
             if (blockEntity.getLevel() != null) {
-                Direction randomDirection = Direction.Plane.HORIZONTAL.getRandomDirection(level.getRandom());
-                blockEntity.setPos(pos.relative(randomDirection).getBottomCenter(), blockEntity.getLevel().getRandom());
+                boolean hasPosition = false;
+                List<Direction> directions = Direction.Plane.HORIZONTAL.shuffledCopy(level.getRandom());
+                for (Direction randomDirection : directions) {
+                    BlockPos relativePos = pos.relative(randomDirection);
+                    if (level.isEmptyBlock(relativePos) && !hasPosition) {
+                        blockEntity.setPos(relativePos.getBottomCenter(), blockEntity.getLevel().getRandom());
+                        hasPosition = true;
+                    }
+                }
+            }
+            accessor.aether_ii$setSpawnCount(1);
+            if (blockEntity.firstTick) {
+                blockEntity.firstTick = false;
             }
         }
     }
