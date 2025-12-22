@@ -20,7 +20,7 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 
 public abstract class WallSpawnerBlockEntity extends CustomSpawnerBlockEntity {
-    public boolean firstTick = true;
+    protected boolean firstTick = true;
 
     private final ConditionalSpawner spawner = new ConditionalSpawner() {
         @Override

@@ -8,7 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -22,7 +21,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -30,7 +28,6 @@ import javax.annotation.Nullable;
 
 public class SentryWallSpawnerBlock extends BaseEntityBlock implements SentryBlockUpdating {
     public static final MapCodec<SentryWallSpawnerBlock> CODEC = simpleCodec(SentryWallSpawnerBlock::new);
-    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty TRIGGERED = BlockStateProperties.TRIGGERED;
@@ -42,7 +39,7 @@ public class SentryWallSpawnerBlock extends BaseEntityBlock implements SentryBlo
 
     public SentryWallSpawnerBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(LIT, false).setValue(POWERED, false).setValue(TRIGGERED, false));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(LIT, false).setValue(POWERED, false).setValue(TRIGGERED, false));
     }
 
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
@@ -77,19 +74,6 @@ public class SentryWallSpawnerBlock extends BaseEntityBlock implements SentryBlo
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
-    }
-
-    protected BlockState rotate(BlockState state, Rotation rotation) {
-        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
-    }
-
-    protected BlockState mirror(BlockState state, Mirror mirror) {
-        return state.rotate(mirror.getRotation(state.getValue(FACING)));
-    }
-
-    @Override
     public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
         return state.getValue(LIT) ? super.getLightEmission(state, level, pos) : 0;
     }
@@ -97,7 +81,7 @@ public class SentryWallSpawnerBlock extends BaseEntityBlock implements SentryBlo
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(FACING, LIT, POWERED, TRIGGERED);
+        builder.add(LIT, POWERED, TRIGGERED);
     }
 
     @Override

@@ -2,11 +2,13 @@ package com.aetherteam.aetherii.blockentity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.dungeon.SentryWallSpawnerBlock;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.BaseSpawnerAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -88,7 +90,12 @@ public class SentrySpawnerBlockEntity extends WallSpawnerBlockEntity {
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, SentrySpawnerBlockEntity blockEntity) {
-        WallSpawnerBlockEntity.serverTick(level, pos, state, blockEntity);
+        BaseSpawnerAccessor accessor = (BaseSpawnerAccessor) blockEntity.getSpawner();
+        if (blockEntity.firstTick) {
+            accessor.aether_ii$setSpawnCount(1);
+            blockEntity.firstTick = false;
+        }
+        blockEntity.getSpawner().serverTick((ServerLevel) level, pos);
         blockEntity.spawnerTriggerTick(level, pos, state, blockEntity);
         if (blockEntity.triggerPiston && blockEntity.triggerTick == 0) {
             if (blockEntity.getLevel() != null) {
