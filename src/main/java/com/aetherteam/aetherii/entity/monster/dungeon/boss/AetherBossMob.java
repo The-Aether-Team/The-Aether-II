@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.entity.monster.dungeon.boss;
 
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.dungeon.CopyBlock;
+import com.aetherteam.aetherii.block.dungeon.GroundTrapBlock;
 import com.aetherteam.aetherii.blockentity.CopyBlockEntity;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.nitrogen.entity.BossMob;
@@ -57,6 +59,9 @@ public interface AetherBossMob<T extends Mob & AetherBossMob<T>> extends BossMob
                 if (level.getBlockEntity(pos) instanceof CopyBlockEntity blockEntity) {
                     return blockEntity.open(level, pos);
                 }
+            }
+            if (oldState.getBlock() instanceof GroundTrapBlock && oldState.getValue(GroundTrapBlock.LOCKED) && oldState.getValue(GroundTrapBlock.TRAP_STATE) != AetherIIBlockStateProperties.TrapState.LOADED) {
+                return oldState.setValue(GroundTrapBlock.TRAP_STATE, AetherIIBlockStateProperties.TrapState.LOADED);
             }
             return null;
         });

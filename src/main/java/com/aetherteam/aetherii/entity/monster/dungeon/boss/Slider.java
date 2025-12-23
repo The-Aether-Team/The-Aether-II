@@ -462,6 +462,9 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
                 return blockEntity.destroy(level, pos);
             }
         }
+        if (oldState.getBlock() instanceof GroundTrapBlock && oldState.getValue(GroundTrapBlock.LOCKED)) {
+            return oldState.setValue(GroundTrapBlock.LOCKED, false);
+        }
         return null;
     }
 
