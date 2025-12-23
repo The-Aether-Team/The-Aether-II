@@ -76,8 +76,6 @@ public abstract class GroundTrapBlockEntity extends CustomSpawnerBlockEntity {
                                     Objects.requireNonNull(mob);
                                     equipment.ifPresent(mob::equip);
 
-
-                                    //todo set state here
                                     BlockState spawnedState = state.setValue(GroundTrapBlock.TRAP_STATE, AetherIIBlockStateProperties.TrapState.SPAWNED);
                                     serverLevel.setBlock(pos, spawnedState, 3);
                                     serverLevel.sendBlockUpdated(pos, state, state, 3);
