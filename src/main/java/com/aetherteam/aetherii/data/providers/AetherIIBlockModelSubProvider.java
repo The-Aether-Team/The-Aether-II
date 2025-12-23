@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.furniture.OutpostCampfireBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
@@ -1098,14 +1099,18 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(tile))
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(tile))
                 .put(AetherIITextureSlots.EMISSIVE_TOP, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/blank"));
-        TextureMapping mappingTriggered = new TextureMapping()
-                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_triggered"))
+        TextureMapping mappingSpawned = new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_spawned"))
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(tile))
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(tile))
                 .put(AetherIITextureSlots.EMISSIVE_TOP, TextureMapping.getBlockTexture(block, "_emissive"));
         MultiVariant trap = plainVariant(AetherIIModelTemplates.SENTRY_TRAP.create(block, mapping, this.modelOutput));
-        MultiVariant trapTriggered = plainVariant(AetherIIModelTemplates.SENTRY_TRAP.createWithSuffix(block, "_triggered", mappingTriggered, this.modelOutput));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(createBooleanModelDispatch(BlockStateProperties.TRIGGERED, trapTriggered, trap)));  //todo
+        MultiVariant trapSpawned = plainVariant(AetherIIModelTemplates.SENTRY_TRAP.createWithSuffix(block, "_spawned", mappingSpawned, this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(AetherIIBlockStateProperties.TRAP_STATE)
+                .select(AetherIIBlockStateProperties.TrapState.LOADED, trap)
+                .select(AetherIIBlockStateProperties.TrapState.TRIGGERED, trap)
+                .select(AetherIIBlockStateProperties.TrapState.SPAWNED, trapSpawned)
+        ));
     }
 
     public void createCopyBlock(Holder<Block> block, String overlay) {

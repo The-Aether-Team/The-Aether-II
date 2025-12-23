@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.entity.monster.dungeon.boss;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.dungeon.CopyBlock;
 import com.aetherteam.aetherii.block.dungeon.GroundTrapBlock;
@@ -167,14 +168,14 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
 
     private void triggerTraps() {
         if (this.level() instanceof ServerLevel) {
-            if (this.getRandom().nextInt(200) == 0) {
+            if (this.getRandom().nextInt(250) == 0) {
                 if (this.getDungeon() != null) {
                     AtomicBoolean flag = new AtomicBoolean(false);
                     this.getDungeon().modifyRoom(this, (level, pos, oldState) -> {
                         if (!flag.get()) {
-                            if (oldState.is(AetherIIBlocks.SENTRY_TRAP) && oldState.getValue(GroundTrapBlock.LOCKED) && !oldState.getValue(GroundTrapBlock.TRIGGERED)) {
+                            if (oldState.is(AetherIIBlocks.SENTRY_TRAP) && oldState.getValue(GroundTrapBlock.LOCKED) && oldState.getValue(GroundTrapBlock.TRAP_STATE) == AetherIIBlockStateProperties.TrapState.LOADED) {
                                 flag.set(true);
-                                return oldState.setValue(GroundTrapBlock.TRIGGERED,  true);
+                                return oldState.setValue(GroundTrapBlock.TRAP_STATE,  AetherIIBlockStateProperties.TrapState.TRIGGERED);
                             }
                         }
                         return null;

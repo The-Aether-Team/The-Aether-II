@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.dungeon;
 
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.SentryTrapBlockEntity;
 import com.mojang.serialization.MapCodec;
@@ -18,7 +19,7 @@ public class SentryTrapBlock extends GroundTrapBlock {
 
     public SentryTrapBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(GroundTrapBlock.LOCKED, false).setValue(GroundTrapBlock.TRIGGERED, false));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(LOCKED, false).setValue(TRAP_STATE, AetherIIBlockStateProperties.TrapState.LOADED));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.blockentity;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.dungeon.GroundTrapBlock;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.BaseSpawnerAccessor;
 import net.minecraft.core.BlockPos;
@@ -44,13 +45,13 @@ public abstract class GroundTrapBlockEntity extends CustomSpawnerBlockEntity {
         return this.spawner;
     }
 
-    public static class GroundTrapSpawner extends BaseSpawner {
+    public class GroundTrapSpawner extends BaseSpawner {
         private boolean spawnedEntity = false;
 
         @Override
         public void serverTick(ServerLevel serverLevel, BlockPos pos) {
             BlockState state = serverLevel.getBlockState(pos);
-            if (state.getValueOrElse(GroundTrapBlock.TRIGGERED, false)) {
+            if (state.getValueOrElse(GroundTrapBlock.TRAP_STATE, AetherIIBlockStateProperties.TrapState.LOADED) == AetherIIBlockStateProperties.TrapState.TRIGGERED) {
                 if (!this.hasSpawnedEntity()) {
                     BaseSpawnerAccessor spawnerAccessor = (BaseSpawnerAccessor) this;
                     RandomSource random = serverLevel.getRandom();
@@ -61,11 +62,7 @@ public abstract class GroundTrapBlockEntity extends CustomSpawnerBlockEntity {
                         Optional<EntityType<?>> optional = EntityType.by(valueInput);
                         if (optional.isPresent()) {
                             Vec3 vec3 = pos.above().getBottomCenter();
-                            if (serverLevel.noBlockCollision(null, optional.get().getSpawnAABB(vec3.x, vec3.y, vec3.z))) { //todo this is the actual gameplay check to worry about for animation staging
-
-                                //todo may need a block renderer for more advanced check if a mob is gonna spawn not related to the blockstates.
-
-
+                            if (serverLevel.noBlockCollision(null, optional.get().getSpawnAABB(vec3.x, vec3.y, vec3.z))) {
                                 BlockPos vecPos = BlockPos.containing(vec3);
                                 Entity entity = EntityType.loadEntityRecursive(valueInput, serverLevel, EntitySpawnReason.SPAWNER, (loadedEntity) -> {
                                     loadedEntity.snapTo(vec3.x, vec3.y, vec3.z, loadedEntity.getYRot(), loadedEntity.getXRot());
@@ -79,20 +76,22 @@ public abstract class GroundTrapBlockEntity extends CustomSpawnerBlockEntity {
                                     Objects.requireNonNull(mob);
                                     equipment.ifPresent(mob::equip);
 
+
+                                    //todo set state here
+                                    BlockState spawnedState = state.setValue(GroundTrapBlock.TRAP_STATE, AetherIIBlockStateProperties.TrapState.SPAWNED);
+                                    serverLevel.setBlock(pos, spawnedState, 3);
+                                    serverLevel.sendBlockUpdated(pos, state, state, 3);
+                                    GroundTrapBlockEntity.this.setChanged();
+
                                     if (serverLevel.tryAddFreshEntityWithPassengers(entity)) {
                                         serverLevel.levelEvent(2004, pos, 0);
                                         serverLevel.gameEvent(entity, GameEvent.ENTITY_PLACE, vecPos);
                                         mob.spawnAnim();
                                         this.setSpawnedEntity(true);
-                                        serverLevel.sendBlockUpdated(pos, state, state, 3);
                                     }
                                 }
                             }
                         }
-
-
-
-//                this.delay(serverLevel, pos); //todo how to handle delay when block is covered up by collisions
                     }
                 }
             }
