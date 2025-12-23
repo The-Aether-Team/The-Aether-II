@@ -27,7 +27,24 @@ import java.util.Optional;
 public abstract class GroundTrapBlockEntity extends CustomSpawnerBlockEntity {
     private final GroundTrapSpawner spawner = new GroundTrapSpawner();
 
-    public class GroundTrapSpawner extends BaseSpawner {
+    public GroundTrapBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
+        super(type, pos, blockState);
+    }
+
+    public static void clientTick(Level level, BlockPos pos, BlockState state, GroundTrapBlockEntity blockEntity) {
+        blockEntity.getSpawner().clientTick(level, pos);
+    }
+
+    public static void serverTick(Level level, BlockPos pos, BlockState state, GroundTrapBlockEntity blockEntity) {
+        blockEntity.getSpawner().serverTick((ServerLevel) level, pos);
+    }
+
+    @Override
+    public GroundTrapSpawner getSpawner() {
+        return this.spawner;
+    }
+
+    public static class GroundTrapSpawner extends BaseSpawner {
         private boolean spawnedEntity = false;
 
         @Override
@@ -106,22 +123,5 @@ public abstract class GroundTrapBlockEntity extends CustomSpawnerBlockEntity {
         public void setSpawnedEntity(boolean spawnedEntity) {
             this.spawnedEntity = spawnedEntity;
         }
-    }
-
-    public GroundTrapBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
-        super(type, pos, blockState);
-    }
-
-    public static void clientTick(Level level, BlockPos pos, BlockState state, GroundTrapBlockEntity blockEntity) {
-        blockEntity.getSpawner().clientTick(level, pos);
-    }
-
-    public static void serverTick(Level level, BlockPos pos, BlockState state, GroundTrapBlockEntity blockEntity) {
-        blockEntity.getSpawner().serverTick((ServerLevel) level, pos);
-    }
-
-    @Override
-    public GroundTrapSpawner getSpawner() {
-        return this.spawner;
     }
 }

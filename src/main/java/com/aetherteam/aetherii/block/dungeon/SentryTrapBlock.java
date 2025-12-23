@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.block.dungeon;
 
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
-import com.aetherteam.aetherii.blockentity.GroundTrapBlockEntity;
 import com.aetherteam.aetherii.blockentity.SentryTrapBlockEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
