@@ -49,7 +49,7 @@ public abstract class WallSpawnerBlockEntity extends CustomSpawnerBlockEntity {
 
         @Override
         public boolean canSpawn(ServerLevel serverLevel, BlockPos pos) {
-            return WallSpawnerBlockEntity.this.getBlockState().getValue(BlockStateProperties.TRIGGERED);
+            return serverLevel.getBlockState(pos).getValueOrElse(BlockStateProperties.TRIGGERED, false);
         }
     };
 

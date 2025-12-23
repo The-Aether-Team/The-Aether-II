@@ -8,10 +8,7 @@ import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.*;
-import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
-import com.aetherteam.aetherii.client.renderer.blockentity.model.SentryCrateModel;
-import com.aetherteam.aetherii.client.renderer.blockentity.model.SentrySpawnerModel;
-import com.aetherteam.aetherii.client.renderer.blockentity.model.SentrySpawnerPistonModel;
+import com.aetherteam.aetherii.client.renderer.blockentity.model.*;
 import com.aetherteam.aetherii.client.renderer.entity.*;
 import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLatchLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.*;
@@ -95,6 +92,7 @@ public class AetherIIRenderers {
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.AMBROSIUM_CAMPFIRE.get(), CampfireRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SENTRY_CRATE.get(), SentryCrateRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SENTRY_SPAWNER.get(), SentrySpawnerRenderer::new);
+        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SENTRY_TRAP.get(), SentryTrapRenderer::new);
 
         // Entities
         // Passive
@@ -170,6 +168,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.SENTRY_CRATE, SentryCrateModel::createSingleBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SENTRY_SPAWNER, SentrySpawnerModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SENTRY_SPAWNER_PISTON, SentrySpawnerPistonModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SENTRY_TRAP, SentryTrapModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.DOUBLE_SENTRY_CRATE_RIGHT, SentryCrateModel::createDoubleBodyRightLayer);
         event.registerLayerDefinition(AetherIIModelLayers.DOUBLE_SENTRY_CRATE_LEFT, SentryCrateModel::createDoubleBodyLeftLayer);
 

@@ -6,19 +6,19 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 
-public class SentrySpawnerModel extends Model {
-    private final ModelPart spawner;
+public class SentryTrapModel extends Model {
+    private final ModelPart trap;
 
-    public SentrySpawnerModel(ModelPart root) {
+    public SentryTrapModel(ModelPart root) {
         super(root, RenderType::entityCutout);
-        this.spawner = root.getChild("spawner");
+        this.trap = root.getChild("trap");
     }
 
     public static LayerDefinition createBodyLayer() {
         MeshDefinition meshDefinition = new MeshDefinition();
         PartDefinition partDefinition = meshDefinition.getRoot();
 
-        partDefinition.addOrReplaceChild("spawner", CubeListBuilder.create().texOffs(0, 0).addBox(-8.0F, -14.0F, -8.0F, 16.0F, 14.0F, 16.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+        partDefinition.addOrReplaceChild("trap", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 16.0F, CubeDeformation.NONE), PartPose.ZERO);
 
         return LayerDefinition.create(meshDefinition, 64, 32);
     }

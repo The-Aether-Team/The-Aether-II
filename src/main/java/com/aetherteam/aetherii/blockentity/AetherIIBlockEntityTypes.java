@@ -50,8 +50,8 @@ public class AetherIIBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SentrySpawnerBlockEntity>> SENTRY_SPAWNER = BLOCK_ENTITY_TYPES.register("wall_spawner", () ->
             new BlockEntityType<>(SentrySpawnerBlockEntity::new, AetherIIBlocks.SENTRY_SPAWNER.get()));
 
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GroundTrapBlockEntity>> GROUND_TRAP = BLOCK_ENTITY_TYPES.register("ground_trap", () ->
-            new BlockEntityType<>(GroundTrapBlockEntity::new, AetherIIBlocks.SENTRY_TRAP.get()));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SentryTrapBlockEntity>> SENTRY_TRAP = BLOCK_ENTITY_TYPES.register("sentry_trap", () ->
+            new BlockEntityType<>(SentryTrapBlockEntity::new, AetherIIBlocks.SENTRY_TRAP.get()));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<LockedBlockEntity>> LOCKED_BLOCK = BLOCK_ENTITY_TYPES.register("locked_block", () ->
             new BlockEntityType<>(LockedBlockEntity::new, AetherIIBlocks.LOCKED_BLOCK.get()));

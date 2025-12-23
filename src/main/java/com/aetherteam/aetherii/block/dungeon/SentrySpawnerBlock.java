@@ -26,18 +26,18 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class SentryWallSpawnerBlock extends BaseEntityBlock implements SentryBlockUpdating {
-    public static final MapCodec<SentryWallSpawnerBlock> CODEC = simpleCodec(SentryWallSpawnerBlock::new);
+public class SentrySpawnerBlock extends BaseEntityBlock implements SentryBlockUpdating {
+    public static final MapCodec<SentrySpawnerBlock> CODEC = simpleCodec(SentrySpawnerBlock::new);
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty TRIGGERED = BlockStateProperties.TRIGGERED;
     private static final VoxelShape SHAPE = Block.column(16.0F, 0.0F, 14.0F);
 
-    public MapCodec<SentryWallSpawnerBlock> codec() {
+    public MapCodec<SentrySpawnerBlock> codec() {
         return CODEC;
     }
 
-    public SentryWallSpawnerBlock(BlockBehaviour.Properties properties) {
+    public SentrySpawnerBlock(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(LIT, false).setValue(POWERED, false).setValue(TRIGGERED, false));
     }

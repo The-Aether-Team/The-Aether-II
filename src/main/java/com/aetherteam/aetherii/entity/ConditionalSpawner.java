@@ -13,8 +13,6 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 
 public abstract class ConditionalSpawner extends BaseSpawner {
-    private boolean spawnedEntity;
-
     @Override
     public void serverTick(ServerLevel serverLevel, BlockPos pos) {
         if (this.canSpawn(serverLevel, pos)) {
@@ -26,28 +24,8 @@ public abstract class ConditionalSpawner extends BaseSpawner {
         ((BaseSpawnerAccessor) this).callGetOrCreateNextSpawnData(level, random, pos).getEntityToSpawn().store("Pos", Vec3.CODEC, spawnPos);
     }
 
-    public boolean hasSpawnedEntity() {
-        return this.spawnedEntity;
-    }
-
-    public void setSpawnedEntity(boolean spawnedEntity) {
-        this.spawnedEntity = spawnedEntity;
-    }
-
     public void markSyncDelay() {
     }
 
     public abstract boolean canSpawn(ServerLevel serverLevel, BlockPos pos);
-
-    @Override
-    public void load(@Nullable Level level, BlockPos pos, ValueInput input) {
-        super.load(level, pos, input);
-        this.spawnedEntity = input.getBooleanOr("SpawnedEntity", false);
-    }
-
-    @Override
-    public void save(ValueOutput output) {
-        super.save(output);
-        output.putBoolean("SpawnedEntity", this.hasSpawnedEntity());
-    }
 }

@@ -1,10 +1,7 @@
 {
   "variants": {
-    "triggered=false": {
+    "": {
       "model": "aether_ii:block/sentry_trap"
-    },
-    "triggered=true": {
-      "model": "aether_ii:block/sentry_trap_triggered"
     }
   }
 }

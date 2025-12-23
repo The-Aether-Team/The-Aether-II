@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.blockentity;
 
-import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.block.dungeon.SentryWallSpawnerBlock;
+import com.aetherteam.aetherii.block.dungeon.SentrySpawnerBlock;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.BaseSpawnerAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,7 +12,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -43,7 +41,7 @@ public class SentrySpawnerBlockEntity extends WallSpawnerBlockEntity {
     }
 
     public void spawnerTriggerTick(Level level, BlockPos blockPos, BlockState state, SentrySpawnerBlockEntity blockEntity) {
-        blockEntity.active = state.getValue(SentryWallSpawnerBlock.TRIGGERED);
+        blockEntity.active = state.getValue(SentrySpawnerBlock.TRIGGERED);
 
         if (this.isActive()) {
             --this.delaySyncTick;

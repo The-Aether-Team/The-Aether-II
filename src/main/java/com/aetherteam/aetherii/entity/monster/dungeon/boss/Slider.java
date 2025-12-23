@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.dungeon.CopyBlock;
+import com.aetherteam.aetherii.block.dungeon.GroundTrapBlock;
 import com.aetherteam.aetherii.blockentity.CopyBlockEntity;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.ai.controller.BlankMoveControl;
@@ -52,12 +53,12 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.IEntityWithComplexSpawn;
-import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 
 public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enemy, IEntityWithComplexSpawn {
@@ -147,6 +148,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
         }
         if (this.isAwake()) {
             this.evaporate();
+            this.triggerTraps();
         }
         if (this.getChatCooldown() > 0) {
             this.chatCooldown--;
@@ -161,6 +163,25 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     private void evaporate() {
         Pair<BlockPos, BlockPos> minMax = this.getDefaultBounds(this);
         AetherBossMob.super.evaporate(this, minMax.getLeft(), minMax.getRight(), (blockState) -> true);
+    }
+
+    private void triggerTraps() {
+        if (this.level() instanceof ServerLevel) {
+            if (this.getRandom().nextInt(200) == 0) {
+                if (this.getDungeon() != null) {
+                    AtomicBoolean flag = new AtomicBoolean(false);
+                    this.getDungeon().modifyRoom(this, (level, pos, oldState) -> {
+                        if (!flag.get()) {
+                            if (oldState.is(AetherIIBlocks.SENTRY_TRAP) && oldState.getValue(GroundTrapBlock.LOCKED) && !oldState.getValue(GroundTrapBlock.TRIGGERED)) {
+                                flag.set(true);
+                                return oldState.setValue(GroundTrapBlock.TRIGGERED,  true);
+                            }
+                        }
+                        return null;
+                    });
+                }
+            }
+        }
     }
 
     /**

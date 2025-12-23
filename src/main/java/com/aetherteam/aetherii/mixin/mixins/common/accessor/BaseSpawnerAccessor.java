@@ -25,6 +25,9 @@ public interface BaseSpawnerAccessor {
     @Accessor("spawnCount")
     void aether_ii$setSpawnCount(int count);
 
+    @Accessor("maxNearbyEntities")
+    void aether_ii$setMaxNearbyEntities(int entities);
+
     @Invoker
     SpawnData callGetOrCreateNextSpawnData(@Nullable Level level, RandomSource random, BlockPos pos);
 }

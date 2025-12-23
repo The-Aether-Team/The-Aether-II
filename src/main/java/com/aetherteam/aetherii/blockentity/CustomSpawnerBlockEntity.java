@@ -19,33 +19,39 @@ public abstract class CustomSpawnerBlockEntity extends BlockEntity implements Sp
         super(type, pos, blockState);
     }
 
+    @Override
     public boolean triggerEvent(int id, int type) {
         return this.getSpawner().onEventTriggered(this.level, id) ? true : super.triggerEvent(id, type);
     }
 
+    @Override
     public void setEntityId(EntityType<?> type, RandomSource random) {
         this.getSpawner().setEntityId(type, this.level, random, this.worldPosition);
         this.setChanged();
     }
 
+    @Override
     protected void loadAdditional(ValueInput input) {
         super.loadAdditional(input);
         this.getSpawner().load(this.level, this.worldPosition, input);
     }
 
+    @Override
     protected void saveAdditional(ValueOutput output) {
         super.saveAdditional(output);
         this.getSpawner().save(output);
     }
 
-    public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
-
+    @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
         CompoundTag tag = this.saveCustomOnly(provider);
         tag.remove("SpawnPotentials");
         return tag;
+    }
+
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     public abstract BaseSpawner getSpawner();

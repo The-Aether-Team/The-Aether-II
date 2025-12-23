@@ -32,9 +32,9 @@ public class SentrySpawnerRenderer implements BlockEntityRenderer<SentrySpawnerB
     private final SentrySpawnerModel sentrySpawnerModel;
     private final SentrySpawnerPistonModel sentrySpawnerPistonModel;
 
-    public SentrySpawnerRenderer(BlockEntityRendererProvider.Context pContext) {
-        this.sentrySpawnerModel = new SentrySpawnerModel(pContext.getModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER));
-        this.sentrySpawnerPistonModel = new SentrySpawnerPistonModel(pContext.getModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER_PISTON));
+    public SentrySpawnerRenderer(BlockEntityRendererProvider.Context context) {
+        this.sentrySpawnerModel = new SentrySpawnerModel(context.getModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER));
+        this.sentrySpawnerPistonModel = new SentrySpawnerPistonModel(context.getModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER_PISTON));
     }
 
     public static Map<Integer, Material> getPieces() {
