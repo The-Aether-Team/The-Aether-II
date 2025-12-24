@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.blockentity;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.dungeon.SentrySpawnerBlock;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.BaseSpawnerAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -44,6 +45,13 @@ public class SentrySpawnerBlockEntity extends CustomSpawnerBlockEntity {
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, SentrySpawnerBlockEntity blockEntity) {
+        if (blockEntity.firstTick) {
+            BaseSpawnerAccessor accessor = (BaseSpawnerAccessor) blockEntity.getSpawner();
+            blockEntity.getSpawner().setEntityId(AetherIIEntityTypes.DETONATION_SENTRY.get(), level, level.getRandom(), pos);
+            accessor.aether_ii$setMaxSpawnDelay(150);
+            accessor.aether_ii$setMinSpawnDelay(100);
+            blockEntity.firstTick = false;
+        }
         blockEntity.getSpawner().serverTick((ServerLevel) level, pos);
 
         AetherIIBlockStateProperties.SentrySpawnerState spawnerState = state.getValue(SentrySpawnerBlock.SENTRY_SPAWNER_STATE);
@@ -101,8 +109,6 @@ public class SentrySpawnerBlockEntity extends CustomSpawnerBlockEntity {
             BaseSpawnerAccessor accessor = (BaseSpawnerAccessor) this;
             BlockState state = serverLevel.getBlockState(pos);
             RandomSource random = serverLevel.getRandom();
-            accessor.aether_ii$setMaxSpawnDelay(150);
-            accessor.aether_ii$setMinSpawnDelay(100);
 
             if (state.getValueOrElse(SentrySpawnerBlock.SENTRY_SPAWNER_STATE, AetherIIBlockStateProperties.SentrySpawnerState.INACTIVE) != AetherIIBlockStateProperties.SentrySpawnerState.INACTIVE) {
                 if (accessor.callIsNearPlayer(serverLevel, pos)) {

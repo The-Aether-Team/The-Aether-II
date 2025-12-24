@@ -15,6 +15,8 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
 public abstract class CustomSpawnerBlockEntity extends BlockEntity implements Spawner {
+    protected boolean firstTick = true;
+
     public CustomSpawnerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
         super(type, pos, blockState);
     }
