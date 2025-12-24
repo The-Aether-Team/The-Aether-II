@@ -1,9 +1,6 @@
 package com.aetherteam.aetherii.entity.monster.dungeon;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
-import net.minecraft.core.particles.BlockParticleOption;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
@@ -20,7 +17,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 
 public class Mimic extends Monster {
     public final AnimationState spawnAnimationState = new AnimationState();
@@ -65,11 +61,6 @@ public class Mimic extends Monster {
     public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
         if (!(source.getDirectEntity() instanceof Mimic)) {
             if (source.getDirectEntity() instanceof LivingEntity livingEntity && this.hurtTime == 0) {
-                if (this.level() instanceof ServerLevel serverLevel) {
-                    for (int i = 0; i < 20; i++) {
-                        serverLevel.sendParticles(this.getHurtParticle(), this.getX(), this.getY() + this.getBbHeight() / 1.5, this.getZ(), 1, this.getBbWidth() / 4.0, this.getBbHeight() / 4.0, this.getBbWidth() / 4.0, 0.05F);
-                    }
-                }
                 if (!(livingEntity instanceof Player player) || !player.isCreative()) {
                     this.setTarget(livingEntity);
                 }
@@ -78,13 +69,6 @@ public class Mimic extends Monster {
         } else {
             return false;
         }
-    }
-
-    /**
-     * @return The type of {@link ParticleOptions} to render when a Mimic is hurt.
-     */
-    public ParticleOptions getHurtParticle() {
-        return new BlockParticleOption(ParticleTypes.BLOCK, Blocks.CHEST.defaultBlockState());
     }
 
     /**
