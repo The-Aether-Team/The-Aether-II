@@ -745,6 +745,7 @@
   "block.aether_ii.yellow_cloudwool_carpet": "Yellow Cloudwool Carpet",
   "block.aether_ii.zanite_block": "Block of Zanite",
   "block.aether_ii.zanite_ore": "Zanite Ore",
+  "death.attack.aether_ii.crush": "%1$s was crushed by %2$s",
   "death.attack.aether_ii.effect.charged": "%1$s was electrocuted",
   "death.attack.aether_ii.effect.fracture": "Oof, owie, %1$s's bones",
   "death.attack.aether_ii.effect.immolation": "%1$s burned to death",

@@ -1765,6 +1765,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
     private void addDeaths() {
         // Deaths
+        this.addDeath("crush", "%1$s was crushed by %2$s");
         this.addDeath("effect.wound", "%1$s was fatally wounded");
         this.addDeath("effect.fracture", "Oof, owie, %1$s's bones");
         this.addDeath("effect.toxin", "%1$s succumbed to toxin");
