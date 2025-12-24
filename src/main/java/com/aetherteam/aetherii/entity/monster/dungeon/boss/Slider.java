@@ -58,6 +58,9 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
@@ -167,19 +170,21 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     }
 
     private void triggerTraps() {
-        if (this.level() instanceof ServerLevel) {
-            if (this.getRandom().nextInt(250) == 0) {
+        if (this.level() instanceof ServerLevel serverLevel) {
+            if (this.getRandom().nextInt(250) == 50) {
                 if (this.getDungeon() != null) {
-                    AtomicBoolean flag = new AtomicBoolean(false);
-                    this.getDungeon().modifyRoom(this, (level, pos, oldState) -> {
-                        if (!flag.get()) {
-                            if (oldState.is(AetherIIBlocks.SENTRY_TRAP) && oldState.getValue(GroundTrapBlock.LOCKED) && oldState.getValue(GroundTrapBlock.TRAP_STATE) == AetherIIBlockStateProperties.TrapState.LOADED) {
-                                flag.set(true);
-                                return oldState.setValue(GroundTrapBlock.TRAP_STATE,  AetherIIBlockStateProperties.TrapState.TRIGGERED);
-                            }
+                    AABB bounds = this.getDungeon().roomBounds();
+                    List<BlockPos> positions = new ArrayList<>();
+                    BlockPos.betweenClosed((int) bounds.minX, (int) bounds.minY, (int) bounds.minZ, (int) bounds.maxX, (int) bounds.minY + 2, (int) bounds.maxZ).forEach(position -> positions.add(position.immutable()));
+                    Collections.shuffle(positions);
+                    for (BlockPos pos : positions) {
+                        BlockState oldState = serverLevel.getBlockState(pos);
+                        if (oldState.is(AetherIIBlocks.SENTRY_TRAP) && oldState.getValue(GroundTrapBlock.LOCKED) && oldState.getValue(GroundTrapBlock.TRAP_STATE) == AetherIIBlockStateProperties.TrapState.LOADED) {
+                            BlockState newState = oldState.setValue(GroundTrapBlock.TRAP_STATE,  AetherIIBlockStateProperties.TrapState.TRIGGERED);
+                            serverLevel.setBlock(pos, newState, 1 | 2);
+                            break;
                         }
-                        return null;
-                    });
+                    }
                 }
             }
         }
