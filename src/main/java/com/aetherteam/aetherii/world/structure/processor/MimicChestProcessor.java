@@ -7,6 +7,8 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
@@ -19,10 +21,13 @@ public class MimicChestProcessor extends StructureProcessor {
 
     public static final MapCodec<MimicChestProcessor> CODEC = MapCodec.unit(MimicChestProcessor.INSTANCE);
 
+    @SuppressWarnings("deprecation")
     @Override
     public @Nullable StructureTemplate.StructureBlockInfo process(LevelReader level, BlockPos offset, BlockPos pos, StructureTemplate.StructureBlockInfo blockInfo, StructureTemplate.StructureBlockInfo relativeBlockInfo, StructurePlaceSettings settings, @Nullable StructureTemplate template) {
+        RandomSource random = RandomSource.create(Mth.getSeed(blockInfo.pos()));
+
         if (blockInfo.state().is(AetherIITags.Blocks.MIMIC_CONTAINERS)) {
-            if (settings.getRandom(pos).nextDouble() < 0.35) {
+            if (random.nextDouble() < 0.45) {
                 CompoundTag tag = blockInfo.nbt();
                 if (tag != null) {
                     DataComponentMap oldMap = tag.read("components", DataComponentMap.CODEC).orElse(DataComponentMap.EMPTY);
