@@ -1049,6 +1049,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSpawnEggItem(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.DETONATION_SENTRY_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.SENTRY_GOLEM_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.SENTRY_CRATE_MIMIC_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.SLIDER_SPAWN_EGG);
 
         // Misc

@@ -362,6 +362,7 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> GRAVITITE_TALUTON_SPAWN_EGG = register("gravitite_taluton_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), properties));
     public static final DeferredItem<SpawnEggItem> DETONATION_SENTRY_SPAWN_EGG = register("detonation_sentry_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.DETONATION_SENTRY.get(), properties));
     public static final DeferredItem<SpawnEggItem> SENTRY_GOLEM_SPAWN_EGG = register("sentry_golem_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.SENTRY_GOLEM.get(), properties));
+    public static final DeferredItem<SpawnEggItem> SENTRY_CRATE_MIMIC_SPAWN_EGG = register("sentry_crate_mimic_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.MIMIC.get(), properties));
     public static final DeferredItem<SpawnEggItem> SLIDER_SPAWN_EGG = register("slider_spawn_egg", (properties) -> new SliderSpawnEggItem(AetherIIEntityTypes.SLIDER.get(), properties));
 
     // Misc
