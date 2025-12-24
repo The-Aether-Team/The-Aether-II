@@ -17,14 +17,14 @@ import javax.annotation.Nullable;
 public class SentryTrapBlock extends GroundTrapBlock {
     public static final MapCodec<SentryTrapBlock> CODEC = simpleCodec(SentryTrapBlock::new);
 
-    public SentryTrapBlock(BlockBehaviour.Properties properties) {
-        super(properties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(LOCKED, false).setValue(TRAP_STATE, AetherIIBlockStateProperties.TrapState.LOADED));
-    }
-
     @Override
     public MapCodec<SentryTrapBlock> codec() {
         return CODEC;
+    }
+
+    public SentryTrapBlock(BlockBehaviour.Properties properties) {
+        super(properties);
+        this.registerDefaultState(this.getStateDefinition().any().setValue(LOCKED, false).setValue(TRAP_STATE, AetherIIBlockStateProperties.TrapState.LOADED));
     }
 
     @Override

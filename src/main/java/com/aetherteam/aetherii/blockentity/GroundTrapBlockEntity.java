@@ -48,12 +48,12 @@ public abstract class GroundTrapBlockEntity extends CustomSpawnerBlockEntity {
         public void serverTick(ServerLevel serverLevel, BlockPos pos) {
             BlockState state = serverLevel.getBlockState(pos);
             if (state.getValueOrElse(GroundTrapBlock.TRAP_STATE, AetherIIBlockStateProperties.TrapState.LOADED) == AetherIIBlockStateProperties.TrapState.TRIGGERED) {
-                BaseSpawnerAccessor spawnerAccessor = (BaseSpawnerAccessor) this;
+                BaseSpawnerAccessor accessor = (BaseSpawnerAccessor) this;
                 RandomSource random = serverLevel.getRandom();
-                SpawnData spawnData = spawnerAccessor.callGetOrCreateNextSpawnData(serverLevel, random, pos);
+                SpawnData spawnData = accessor.callGetOrCreateNextSpawnData(serverLevel, random, pos);
 
-                try (ProblemReporter.ScopedCollector problemreporter$scopedcollector = new ProblemReporter.ScopedCollector(this::toString, AetherII.LOGGER)) {
-                    ValueInput valueInput = TagValueInput.create(problemreporter$scopedcollector, serverLevel.registryAccess(), spawnData.getEntityToSpawn());
+                try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(this::toString, AetherII.LOGGER)) {
+                    ValueInput valueInput = TagValueInput.create(reporter, serverLevel.registryAccess(), spawnData.getEntityToSpawn());
                     Optional<EntityType<?>> optional = EntityType.by(valueInput);
                     if (optional.isPresent()) {
                         Vec3 vec3 = pos.above().getBottomCenter();
