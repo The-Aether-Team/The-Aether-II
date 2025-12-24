@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.client.renderer.blockentity;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
+import com.aetherteam.aetherii.block.dungeon.SentrySpawnerBlock;
 import com.aetherteam.aetherii.blockentity.SentrySpawnerBlockEntity;
 import com.aetherteam.aetherii.client.AetherIIAtlases;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
@@ -15,6 +17,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
@@ -32,18 +35,16 @@ public class SentrySpawnerRenderer implements BlockEntityRenderer<SentrySpawnerB
     private final SentrySpawnerModel sentrySpawnerModel;
     private final SentrySpawnerPistonModel sentrySpawnerPistonModel;
 
-    public SentrySpawnerRenderer(BlockEntityRendererProvider.Context pContext) {
-        this.sentrySpawnerModel = new SentrySpawnerModel(pContext.getModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER));
-        this.sentrySpawnerPistonModel = new SentrySpawnerPistonModel(pContext.getModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER_PISTON));
+    public SentrySpawnerRenderer(BlockEntityRendererProvider.Context context) {
+        this.sentrySpawnerModel = new SentrySpawnerModel(context.getModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER));
+        this.sentrySpawnerPistonModel = new SentrySpawnerPistonModel(context.getModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER_PISTON));
     }
 
-    public static Map<Integer, Material> getPieces() {
+    public static Map<Integer, Material> getFrames() {
         Map<Integer, Material> pieces = new HashMap<>();
         for (int i = 0; i <= SENTRY_SPAWNER_FRAMES - 1; i++) {
             pieces.put(i, AetherIIAtlases.SENTRY_SPAWNER_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner_base_" + (i % SENTRY_SPAWNER_FRAMES))));
-
         }
-
         return pieces;
     }
 
@@ -51,35 +52,39 @@ public class SentrySpawnerRenderer implements BlockEntityRenderer<SentrySpawnerB
     public void render(SentrySpawnerBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, Vec3 cameraPos) {
         poseStack.translate(0.5F, 1.5F, 0.5F);
         poseStack.mulPose(Axis.XN.rotationDegrees(180F));
+
+        BlockState state = blockEntity.getBlockState();
+        AetherIIBlockStateProperties.SentrySpawnerState spawnerState = state.getValue(SentrySpawnerBlock.SENTRY_SPAWNER_STATE);
+
         int frame = Math.max(0, (int) Math.ceil(blockEntity.getPistonAnimationScale(partialTick) * 10));
 
-        Material material = AetherIIAtlases.SENTRY_SPAWNER_MATERIALS.get(frame);
+        Material baseMaterial = AetherIIAtlases.SENTRY_SPAWNER_MATERIALS.get(frame);
+        ResourceLocation pistonLocation = PISTON_OFF;
+        ResourceLocation emissiveLocation = null;
 
-        VertexConsumer vertexConsumer = material.buffer(buffer, RenderType::entityCutout);
-        this.sentrySpawnerModel.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay);
-        boolean spawning = blockEntity.triggerPiston;
-        boolean on = blockEntity.isActive();
-        ResourceLocation piston = PISTON_OFF;
-        ResourceLocation pistonEmissive = null;
-        if (on) {
-            if (spawning) {
-                piston = PISTON_SPAWNING;
-                pistonEmissive = PISTON_SPAWNING_EMISSIVE;
-            } else {
-                piston = PISTON_ON;
-                pistonEmissive = PISTON_ON_EMISSIVE;
+        switch (spawnerState) {
+            case TRIGGERED, CLOSING -> {
+                pistonLocation = PISTON_ON;
+                emissiveLocation = PISTON_ON_EMISSIVE;
+            }
+            case OPENING -> {
+                pistonLocation = PISTON_SPAWNING;
+                emissiveLocation = PISTON_SPAWNING_EMISSIVE;
             }
         }
+
+        VertexConsumer baseConsumer = baseMaterial.buffer(buffer, RenderType::entityCutout);
+        this.sentrySpawnerModel.renderToBuffer(poseStack, baseConsumer, packedLight, packedOverlay);
 
         this.sentrySpawnerPistonModel.root().resetPose();
         this.sentrySpawnerPistonModel.root().offsetPos(new Vector3f(0, -(frame), 0));
 
-        VertexConsumer pistonBuffer = buffer.getBuffer(RenderType.entityCutoutNoCull(piston));
-        this.sentrySpawnerPistonModel.renderToBuffer(poseStack, pistonBuffer, packedLight, packedOverlay);
-        if (pistonEmissive != null) {
-            VertexConsumer pistonEmissiveBuffer = buffer.getBuffer(RenderType.entityTranslucentEmissive(pistonEmissive));
-            this.sentrySpawnerPistonModel.renderToBuffer(poseStack, pistonEmissiveBuffer, packedLight, packedOverlay);
+        VertexConsumer pistonConsumer = buffer.getBuffer(RenderType.entityCutoutNoCull(pistonLocation));
+        this.sentrySpawnerPistonModel.renderToBuffer(poseStack, pistonConsumer, packedLight, packedOverlay);
 
+        if (emissiveLocation != null) {
+            VertexConsumer emissiveConsumer = buffer.getBuffer(RenderType.entityTranslucentEmissive(emissiveLocation));
+            this.sentrySpawnerPistonModel.renderToBuffer(poseStack, emissiveConsumer, packedLight, packedOverlay);
         }
     }
 }

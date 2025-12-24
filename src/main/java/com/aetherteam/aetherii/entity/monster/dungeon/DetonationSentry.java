@@ -9,12 +9,10 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -29,7 +27,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 
 import java.util.EnumSet;
 
-public class DetonationSentry extends Monster {
+public class DetonationSentry extends PathfinderMob {
     private static final EntityDataAccessor<Boolean> DATA_AWAKE_ID = SynchedEntityData.defineId(DetonationSentry.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_IS_IGNITED = SynchedEntityData.defineId(DetonationSentry.class, EntityDataSerializers.BOOLEAN);
 
@@ -40,7 +38,6 @@ public class DetonationSentry extends Monster {
     private float timeSpotted = 0.0F;
     private boolean playSound;
     public AnimationState explosionAnimationState = new AnimationState();
-
 
     public DetonationSentry(EntityType<? extends DetonationSentry> type, Level level) {
         super(type, level);
@@ -175,6 +172,11 @@ public class DetonationSentry extends Monster {
     }
 
     @Override
+    public SoundSource getSoundSource() {
+        return SoundSource.HOSTILE;
+    }
+
+    @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
         return AetherIISoundEvents.ENTITY_DETONATION_SENTRY_HURT.get();
     }
@@ -191,6 +193,16 @@ public class DetonationSentry extends Monster {
 
     @Override
     protected boolean shouldDespawnInPeaceful() {
+        return true;
+    }
+
+    @Override
+    public boolean shouldDropExperience() {
+        return true;
+    }
+
+    @Override
+    protected boolean shouldDropLoot() {
         return true;
     }
 

@@ -1,153 +1,197 @@
 package com.aetherteam.aetherii.blockentity;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.block.dungeon.SentryWallSpawnerBlock;
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
+import com.aetherteam.aetherii.block.dungeon.SentrySpawnerBlock;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.BaseSpawnerAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.util.ProblemReporter;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.BaseSpawner;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.SpawnData;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.entity.EntityTypeTest;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.TagValueInput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.event.EventHooks;
 
-import javax.annotation.Nullable;
-import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
-public class SentrySpawnerBlockEntity extends WallSpawnerBlockEntity {
-    public boolean triggerPiston;
-    private int triggerTick;
-    private int delaySyncTick;
+public class SentrySpawnerBlockEntity extends CustomSpawnerBlockEntity {
+    private final SentrySpawner spawner = new SentrySpawner();
     private float pistonScale;
     private float pistonScaleOld;
-    private boolean active;
 
     public SentrySpawnerBlockEntity(BlockPos pos, BlockState blockState) {
         super(AetherIIBlockEntityTypes.SENTRY_SPAWNER.get(), pos, blockState);
     }
 
-    @Override
-    public void markSyncDelay() {
-        super.markSyncDelay();
-        //BaseSpawner's Delay thing's client and server are different. so bring server side valve and use it
-        //make sync from spawner server side
-        this.delaySyncTick = this.getSpawner().spawnDelay;
-        this.markUpdated();
+    public static void clientTick(Level level, BlockPos pos, BlockState state, SentrySpawnerBlockEntity blockEntity) {
+        blockEntity.getSpawner().clientTick(level, pos);
     }
 
-    public void spawnerTriggerTick(Level level, BlockPos blockPos, BlockState state, SentrySpawnerBlockEntity blockEntity) {
-        blockEntity.active = state.getValue(SentryWallSpawnerBlock.TRIGGERED);
+    public static void serverTick(Level level, BlockPos pos, BlockState state, SentrySpawnerBlockEntity blockEntity) {
+        blockEntity.getSpawner().serverTick((ServerLevel) level, pos);
 
-        if (this.isActive()) {
-            --this.delaySyncTick;
-        }
-
-        if (this.delaySyncTick < 30 && !this.triggerPiston && this.isActive()) {
-            this.triggerPiston = true;
-            this.triggerTick = 50 + (29 - this.delaySyncTick);
-            level.playSound(null, blockPos, SoundEvents.PISTON_EXTEND, SoundSource.BLOCKS, 1.25F, 1.5F);
-            this.markSyncDelay();
-        }
-
-        if (this.triggerPiston) {
-            if (this.triggerTick <= 0) {
-                this.spawnTriggerStop(level, blockPos);
-            } else {
-                --this.triggerTick;
+        AetherIIBlockStateProperties.SentrySpawnerState spawnerState = state.getValue(SentrySpawnerBlock.SENTRY_SPAWNER_STATE);
+        if (spawnerState != AetherIIBlockStateProperties.SentrySpawnerState.INACTIVE) {
+            if (blockEntity.pistonScaleOld != blockEntity.pistonScale) {
+                level.sendBlockUpdated(pos, state, state, 3);
+            }
+            blockEntity.pistonScaleOld = blockEntity.pistonScale;
+            if (spawnerState == AetherIIBlockStateProperties.SentrySpawnerState.OPENING) {
+                blockEntity.pistonScale = Mth.clamp(blockEntity.pistonScale + 0.1F, 0.0F, 1.0F);
+            } else if (spawnerState == AetherIIBlockStateProperties.SentrySpawnerState.CLOSING) {
+                blockEntity.pistonScale = Mth.clamp(blockEntity.pistonScale - 0.1F, 0.0F, 1.0F);
+                if (blockEntity.pistonScale == 0.0F) {
+                    BlockState newState = state.setValue(SentrySpawnerBlock.SENTRY_SPAWNER_STATE, AetherIIBlockStateProperties.SentrySpawnerState.TRIGGERED);
+                    blockEntity.updateSpawnerState((ServerLevel) level, pos, state, newState);
+                }
             }
         }
-        this.pistonScaleOld = this.pistonScale;
-        if (this.triggerPiston) {
-            this.pistonScale = Mth.clamp(this.pistonScale + 0.1F, 0.0F, 1.0F);
-        } else {
-            this.pistonScale = Mth.clamp(this.pistonScale - 0.1F, 0.0F, 1.0F);
-        }
-
-        /*if (this.isDirty) {
-            level.sendBlockUpdated(blockPos, state, state, 2);
-        }*/
     }
 
-    public void spawnTriggerStop(Level level, BlockPos blockPos) {
-        this.triggerPiston = false;
-        level.playSound(null, blockPos, SoundEvents.PISTON_CONTRACT, SoundSource.BLOCKS, 1.25F, 1.5F);
-        this.markSyncDelay();
+    public void updateSpawnerState(ServerLevel serverLevel, BlockPos pos, BlockState oldState, BlockState newState) {
+        serverLevel.setBlock(pos, newState, 3);
+        serverLevel.sendBlockUpdated(pos, oldState, newState, 3);
+        this.setChanged();
     }
 
     public float getPistonAnimationScale(float partialTick) {
         return Mth.lerp(partialTick, this.pistonScaleOld, this.pistonScale);
     }
 
-    public static void clientTick(Level level, BlockPos pos, BlockState state, SentrySpawnerBlockEntity blockEntity) {
-        WallSpawnerBlockEntity.clientTick(level, pos, state, blockEntity);
-        blockEntity.spawnerTriggerTick(level, pos, state, blockEntity);
-    }
-
-    public static void serverTick(Level level, BlockPos pos, BlockState state, SentrySpawnerBlockEntity blockEntity) {
-        BaseSpawnerAccessor accessor = (BaseSpawnerAccessor) blockEntity.getSpawner();
-        blockEntity.getSpawner().serverTick((ServerLevel) level, pos);
-        blockEntity.spawnerTriggerTick(level, pos, state, blockEntity);
-        if (blockEntity.firstTick || (blockEntity.triggerPiston && blockEntity.triggerTick == 0)) {
-            if (blockEntity.getLevel() != null) {
-                boolean hasPosition = false;
-                List<Direction> directions = Direction.Plane.HORIZONTAL.shuffledCopy(level.getRandom());
-                for (Direction randomDirection : directions) {
-                    BlockPos relativePos = pos.relative(randomDirection);
-                    if (level.isEmptyBlock(relativePos) && !hasPosition) {
-                        blockEntity.setPos(relativePos.getBottomCenter(), blockEntity.getLevel().getRandom());
-                        hasPosition = true;
-                    }
-                }
-            }
-            accessor.aether_ii$setSpawnCount(1);
-            if (blockEntity.firstTick) {
-                blockEntity.firstTick = false;
-            }
-        }
+    @Override
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        this.pistonScaleOld = input.getFloatOr("piston_scale_old", 0.0F);
+        this.pistonScale = input.getFloatOr("piston_scale", 0.0F);
     }
 
     @Override
     protected void saveAdditional(ValueOutput output) {
         super.saveAdditional(output);
+        output.putFloat("piston_scale_old", this.pistonScaleOld);
+        output.putFloat("piston_scale", this.pistonScale);
     }
 
     @Override
-    protected void loadAdditional(ValueInput input) {
-        super.loadAdditional(input);
-        if (this.level != null) {
-            this.markSyncDelay();
+    public SentrySpawner getSpawner() {
+        return this.spawner;
+    }
+
+    public class SentrySpawner extends BaseSpawner {
+        private Mob delayedEntity = null;
+
+        @Override
+        public void serverTick(ServerLevel serverLevel, BlockPos pos) {
+            BaseSpawnerAccessor accessor = (BaseSpawnerAccessor) this;
+            BlockState state = serverLevel.getBlockState(pos);
+            RandomSource random = serverLevel.getRandom();
+            accessor.aether_ii$setMaxSpawnDelay(150);
+            accessor.aether_ii$setMinSpawnDelay(100);
+
+            if (state.getValueOrElse(SentrySpawnerBlock.SENTRY_SPAWNER_STATE, AetherIIBlockStateProperties.SentrySpawnerState.INACTIVE) != AetherIIBlockStateProperties.SentrySpawnerState.INACTIVE) {
+                if (accessor.callIsNearPlayer(serverLevel, pos)) {
+                    if (this.delayedEntity == null) {
+                        if (this.spawnDelay == -1) {
+                            accessor.callDelay(serverLevel, pos);
+                        }
+
+                        if (this.spawnDelay <= 0) {
+                            SpawnData spawnData = accessor.callGetOrCreateNextSpawnData(serverLevel, random, pos);
+
+                            try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(this::toString, AetherII.LOGGER)) {
+                                ValueInput valueInput = TagValueInput.create(reporter, serverLevel.registryAccess(), spawnData.getEntityToSpawn());
+                                Optional<EntityType<?>> optional = EntityType.by(valueInput);
+                                if (optional.isPresent()) {
+                                    Vec3 vec3 = pos.relative(Direction.Plane.HORIZONTAL.getRandomDirection(random)).getBottomCenter();
+                                    if (serverLevel.noBlockCollision(null, optional.get().getSpawnAABB(vec3.x, vec3.y, vec3.z))) {
+                                        BlockPos vecPos = BlockPos.containing(vec3);
+                                        if (spawnData.getCustomSpawnRules().isPresent()) {
+                                            if (!(optional.get()).getCategory().isFriendly() && serverLevel.getDifficulty() == Difficulty.PEACEFUL) {
+                                                return;
+                                            }
+                                            SpawnData.CustomSpawnRules spawnRules = spawnData.getCustomSpawnRules().get();
+                                            if (!spawnRules.isValidPosition(vecPos, serverLevel)) {
+                                                return;
+                                            }
+                                        } else if (!SpawnPlacements.checkSpawnRules(optional.get(), serverLevel, EntitySpawnReason.SPAWNER, vecPos, serverLevel.getRandom())) {
+                                            return;
+                                        }
+
+                                        Entity entity = EntityType.loadEntityRecursive(valueInput, serverLevel, EntitySpawnReason.SPAWNER, (loadedEntity) -> {
+                                            loadedEntity.snapTo(vec3.x, vec3.y, vec3.z, loadedEntity.getYRot(), loadedEntity.getXRot());
+                                            return loadedEntity;
+                                        });
+                                        if (entity != null) {
+                                            int nearby = serverLevel.getEntities(EntityTypeTest.forExactClass(entity.getClass()), new AABB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1), EntitySelector.NO_SPECTATORS).size();
+                                            if (nearby < accessor.aether_ii$getMaxNearbyEntities()) {
+                                                if (entity instanceof Mob mob) {
+                                                    entity.snapTo(entity.getX(), entity.getY(), entity.getZ(), random.nextFloat() * 360.0F, 0.0F);
+                                                    if (EventHooks.checkSpawnPositionSpawner(mob, serverLevel, EntitySpawnReason.SPAWNER, spawnData, this)) {
+                                                        boolean def = spawnData.getEntityToSpawn().size() == 1 && spawnData.getEntityToSpawn().getString("id").isPresent();
+                                                        EventHooks.finalizeMobSpawnSpawner(mob, serverLevel, serverLevel.getCurrentDifficultyAt(entity.blockPosition()), EntitySpawnReason.SPAWNER, (SpawnGroupData) null, this, def);
+                                                        Optional<EquipmentTable> equipment = spawnData.getEquipment();
+                                                        Objects.requireNonNull(mob);
+                                                        equipment.ifPresent(mob::equip);
+
+                                                        this.delayedEntity = mob;
+
+                                                        BlockState openingState = state.setValue(SentrySpawnerBlock.SENTRY_SPAWNER_STATE, AetherIIBlockStateProperties.SentrySpawnerState.OPENING);
+                                                        SentrySpawnerBlockEntity.this.updateSpawnerState(serverLevel, pos, state, openingState);
+                                                        serverLevel.playSound(null, pos, SoundEvents.PISTON_EXTEND, SoundSource.BLOCKS, 1.25F, 1.5F);
+
+                                                        return;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            accessor.callDelay(serverLevel, pos);
+                        }
+                    }
+
+                    if (this.delayedEntity != null && SentrySpawnerBlockEntity.this.pistonScale == 1.0F) {
+                        if (serverLevel.tryAddFreshEntityWithPassengers(this.delayedEntity)) {
+                            serverLevel.levelEvent(2004, pos, 0);
+                            serverLevel.gameEvent(this.delayedEntity, GameEvent.ENTITY_PLACE, this.delayedEntity.position());
+                            this.delayedEntity.spawnAnim();
+
+                            BlockState closingState = state.setValue(SentrySpawnerBlock.SENTRY_SPAWNER_STATE, AetherIIBlockStateProperties.SentrySpawnerState.CLOSING);
+                            SentrySpawnerBlockEntity.this.updateSpawnerState(serverLevel, pos, state, closingState);
+                            serverLevel.playSound(null, pos, SoundEvents.PISTON_CONTRACT, SoundSource.BLOCKS, 1.25F, 1.5F);
+
+                            this.delayedEntity = null;
+
+                            accessor.callDelay(serverLevel, pos);
+                        }
+                    }
+
+                    --this.spawnDelay;
+                }
+            }
         }
-    }
 
-    public void markUpdated() {
-        this.setChanged();
-        if (this.level != null) {
-            this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 3);
+        @Override
+        public void broadcastEvent(Level level, BlockPos pos, int id) {
+            BlockState state = level.getBlockState(pos);
+            level.blockEvent(pos, state.getBlock(), id, 0);
         }
-    }
-
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
-        CompoundTag tag = this.saveCustomOnly(provider);
-        tag.remove("SpawnPotentials");
-        return tag;
-    }
-
-    @Nullable
-    @Override
-    public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-
-    public boolean isActive() {
-        return active;
     }
 }

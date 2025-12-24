@@ -7,7 +7,6 @@
   "refmap": "aether_ii.refmap.json",
   "mixins": [
     "common.AttributeUtilMixin",
-    "common.BaseSpawnerMixin",
     "common.BlockBehaviourMixin",
     "common.BoneMealItemMixin",
     "common.EntityMixin",

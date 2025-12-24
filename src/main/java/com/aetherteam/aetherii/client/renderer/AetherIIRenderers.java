@@ -8,10 +8,7 @@ import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.*;
-import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
-import com.aetherteam.aetherii.client.renderer.blockentity.model.SentryCrateModel;
-import com.aetherteam.aetherii.client.renderer.blockentity.model.SentrySpawnerModel;
-import com.aetherteam.aetherii.client.renderer.blockentity.model.SentrySpawnerPistonModel;
+import com.aetherteam.aetherii.client.renderer.blockentity.model.*;
 import com.aetherteam.aetherii.client.renderer.entity.*;
 import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLatchLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.*;
@@ -95,6 +92,7 @@ public class AetherIIRenderers {
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.AMBROSIUM_CAMPFIRE.get(), CampfireRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SENTRY_CRATE.get(), SentryCrateRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SENTRY_SPAWNER.get(), SentrySpawnerRenderer::new);
+
 
         // Entities
         // Passive

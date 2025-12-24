@@ -1,10 +1,13 @@
 {
   "variants": {
-    "triggered=false": {
+    "trap_state=loaded": {
       "model": "aether_ii:block/sentry_trap"
     },
-    "triggered=true": {
-      "model": "aether_ii:block/sentry_trap_triggered"
+    "trap_state=spawned": {
+      "model": "aether_ii:block/sentry_trap_spawned"
+    },
+    "trap_state=triggered": {
+      "model": "aether_ii:block/sentry_trap"
     }
   }
 }

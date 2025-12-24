@@ -1,55 +1,30 @@
 package com.aetherteam.aetherii.blockentity;
 
-import com.aetherteam.aetherii.entity.ConditionalSpawner;
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
+import com.aetherteam.aetherii.block.dungeon.GroundTrapBlock;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.BaseSpawnerAccessor;
-import com.mojang.datafixers.util.Either;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.level.BaseSpawner;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.SpawnData;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.TagValueInput;
+import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.event.EventHooks;
 
-import javax.annotation.Nullable;
+import java.util.Objects;
+import java.util.Optional;
 
-public class GroundTrapBlockEntity extends CustomSpawnerBlockEntity {
-    public boolean firstTick = true;
-
-    private final ConditionalSpawner spawner = new ConditionalSpawner() {
-        @Override
-        public void broadcastEvent(Level level, BlockPos pos, int id) {
-            level.blockEvent(pos, GroundTrapBlockEntity.this.getBlockState().getBlock(), id, 0);
-        }
-
-        @Override
-        public void setNextSpawnData(@Nullable Level level, BlockPos pos, SpawnData data) {
-            super.setNextSpawnData(level, pos, data);
-            if (level != null) {
-                BlockState state = level.getBlockState(pos);
-                level.sendBlockUpdated(pos, state, state, 260);
-            }
-        }
-
-        @Override
-        public Either<BlockEntity, Entity> getOwner() {
-            return Either.left(GroundTrapBlockEntity.this);
-        }
-
-        @Override
-        public boolean canSpawn(ServerLevel serverLevel, BlockPos pos) {
-            return GroundTrapBlockEntity.this.getBlockState().getValue(BlockStateProperties.TRIGGERED) && !this.hasSpawnedEntity();
-        }
-    };
-
-    public GroundTrapBlockEntity(BlockPos pos, BlockState blockState) {
-        this(AetherIIBlockEntityTypes.GROUND_TRAP.get(), pos, blockState);
-    }
+public abstract class GroundTrapBlockEntity extends CustomSpawnerBlockEntity {
+    private final GroundTrapSpawner spawner = new GroundTrapSpawner();
 
     public GroundTrapBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
         super(type, pos, blockState);
@@ -60,27 +35,63 @@ public class GroundTrapBlockEntity extends CustomSpawnerBlockEntity {
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, GroundTrapBlockEntity blockEntity) {
-        if (blockEntity.firstTick) {
-            BaseSpawnerAccessor accessor = (BaseSpawnerAccessor) blockEntity.getSpawner();
-            accessor.aether_ii$setSpawnDelay(0);
-            accessor.aether_ii$setMaxSpawnDelay(1);
-            accessor.aether_ii$setMinSpawnDelay(0);
-            accessor.aether_ii$setSpawnCount(1);
-            if (blockEntity.getLevel() != null) {
-                blockEntity.setPos(pos.above().getBottomCenter(), blockEntity.getLevel().getRandom());
-            }
-            blockEntity.firstTick = false;
-        }
         blockEntity.getSpawner().serverTick((ServerLevel) level, pos);
     }
 
-    public void setPos(Vec3 spawnPos, RandomSource random) {
-        ((ConditionalSpawner) this.getSpawner()).setPos(spawnPos, this.level, random, this.worldPosition);
-        this.setChanged();
+    @Override
+    public GroundTrapSpawner getSpawner() {
+        return this.spawner;
     }
 
-    @Override
-    public BaseSpawner getSpawner() {
-        return this.spawner;
+    public class GroundTrapSpawner extends BaseSpawner {
+        @Override
+        public void serverTick(ServerLevel serverLevel, BlockPos pos) {
+            BlockState state = serverLevel.getBlockState(pos);
+            if (state.getValueOrElse(GroundTrapBlock.TRAP_STATE, AetherIIBlockStateProperties.TrapState.LOADED) == AetherIIBlockStateProperties.TrapState.TRIGGERED) {
+                BaseSpawnerAccessor accessor = (BaseSpawnerAccessor) this;
+                RandomSource random = serverLevel.getRandom();
+                SpawnData spawnData = accessor.callGetOrCreateNextSpawnData(serverLevel, random, pos);
+
+                try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(this::toString, AetherII.LOGGER)) {
+                    ValueInput valueInput = TagValueInput.create(reporter, serverLevel.registryAccess(), spawnData.getEntityToSpawn());
+                    Optional<EntityType<?>> optional = EntityType.by(valueInput);
+                    if (optional.isPresent()) {
+                        Vec3 vec3 = pos.above().getBottomCenter();
+                        if (serverLevel.noBlockCollision(null, optional.get().getSpawnAABB(vec3.x, vec3.y, vec3.z))) {
+                            BlockPos vecPos = BlockPos.containing(vec3);
+                            Entity entity = EntityType.loadEntityRecursive(valueInput, serverLevel, EntitySpawnReason.SPAWNER, (loadedEntity) -> {
+                                loadedEntity.snapTo(vec3.x, vec3.y, vec3.z, loadedEntity.getYRot(), loadedEntity.getXRot());
+                                return loadedEntity;
+                            });
+                            if (entity instanceof Mob mob) {
+                                entity.snapTo(entity.getX(), entity.getY(), entity.getZ(), random.nextFloat() * 360.0F, 0.0F);
+                                boolean def = spawnData.getEntityToSpawn().size() == 1 && spawnData.getEntityToSpawn().getString("id").isPresent();
+                                EventHooks.finalizeMobSpawnSpawner(mob, serverLevel, serverLevel.getCurrentDifficultyAt(entity.blockPosition()), EntitySpawnReason.SPAWNER, null, this, def);
+                                Optional<EquipmentTable> equipment = spawnData.getEquipment();
+                                Objects.requireNonNull(mob);
+                                equipment.ifPresent(mob::equip);
+
+                                BlockState spawnedState = state.setValue(GroundTrapBlock.TRAP_STATE, AetherIIBlockStateProperties.TrapState.SPAWNED);
+                                serverLevel.setBlock(pos, spawnedState, 3);
+                                serverLevel.sendBlockUpdated(pos, state, state, 3);
+                                GroundTrapBlockEntity.this.setChanged();
+
+                                if (serverLevel.tryAddFreshEntityWithPassengers(entity)) {
+                                    serverLevel.levelEvent(2004, pos, 0);
+                                    serverLevel.gameEvent(entity, GameEvent.ENTITY_PLACE, vecPos);
+                                    mob.spawnAnim();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @Override
+        public void broadcastEvent(Level level, BlockPos pos, int id) {
+            BlockState state = level.getBlockState(pos);
+            level.blockEvent(pos, state.getBlock(), id, 0);
+        }
     }
 }

@@ -42,7 +42,7 @@ public class CrushGoal extends Goal {
                 for (BlockPos pos : BlockPos.betweenClosed(Mth.floor(crushBox.minX), Mth.floor(crushBox.minY), Mth.floor(crushBox.minZ), Mth.floor(crushBox.maxX), Mth.floor(crushBox.maxY), Mth.floor(crushBox.maxZ))) {
                     if (this.slider.getDungeon() == null || this.slider.getDungeon().roomBounds().contains(pos.getCenter())) {
                         BlockState blockState = this.slider.level().getBlockState(pos);
-                        if (this.isBreakable(blockState)) {
+                        if (this.isBreakable(blockState, pos)) {
                             crushed = this.slider.level().destroyBlock(pos, true, this.slider) || crushed;
                             double a = pos.getX() + 0.5 + (double) (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.375;
                             double b = pos.getY() + 0.5 + (double) (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.375;
@@ -71,13 +71,17 @@ public class CrushGoal extends Goal {
         if (target == null) {
             return false;
         }
-        return slider.level().getBlockStates(
-                AABB.of(BoundingBox.fromCorners(target.blockPosition(), slider.blockPosition()))
-                ).anyMatch(this::isBreakable);
+        for (BlockPos pos : BlockPos.betweenClosed(AABB.of(BoundingBox.fromCorners(target.blockPosition(), slider.blockPosition())))) {
+            BlockState state = slider.level().getBlockState(pos);
+            if (this.isBreakable(state, pos)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    private boolean isBreakable(BlockState blockState) {
-        return !blockState.isAir() && !blockState.is(AetherIITags.Blocks.SLIDER_UNBREAKABLE) && blockState.getBlock().defaultDestroyTime() >= 0.0F && blockState.getBlock().defaultDestroyTime() < 100.0F;
+    private boolean isBreakable(BlockState blockState, BlockPos pos) {
+        return !blockState.isAir() && !blockState.is(AetherIITags.Blocks.SLIDER_UNBREAKABLE) && blockState.getBlock().defaultDestroyTime() >= 0.0F && blockState.getBlock().defaultDestroyTime() < 100.0F && blockState.getBlock().canEntityDestroy(blockState, this.slider.level(), pos, this.slider);
     }
 
     @Override

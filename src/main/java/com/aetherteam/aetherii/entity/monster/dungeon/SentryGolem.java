@@ -11,6 +11,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -36,7 +37,7 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 
-public class SentryGolem extends Monster implements RangedAttackMob, CooldownEntity, FakeShiftEntity {
+public class SentryGolem extends PathfinderMob implements RangedAttackMob, CooldownEntity, FakeShiftEntity {
     public static final EntityDataAccessor<Integer> DATA_FIRE_TIME_ID = SynchedEntityData.defineId(SentryGolem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> DATA_RANGED_ID = SynchedEntityData.defineId(SentryGolem.class, EntityDataSerializers.BOOLEAN);
     public int timeTilToss = 50;
@@ -120,6 +121,12 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
             this.setupAnimationStates();
         }
         this.cooldowns.tick();
+    }
+
+    @Override
+    public void aiStep() {
+        this.updateSwingTime();
+        super.aiStep();
     }
 
     private void setupRunning() {
@@ -311,8 +318,8 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
     }
 
     @Override
-    protected boolean shouldDespawnInPeaceful() {
-        return true;
+    public SoundSource getSoundSource() {
+        return SoundSource.HOSTILE;
     }
 
     @Override
@@ -328,6 +335,21 @@ public class SentryGolem extends Monster implements RangedAttackMob, CooldownEnt
     @Override
     protected SoundEvent getDeathSound() {
         return AetherIISoundEvents.ENTITY_SENTRY_GOLEM_DEATH.get();
+    }
+
+    @Override
+    protected boolean shouldDespawnInPeaceful() {
+        return true;
+    }
+
+    @Override
+    public boolean shouldDropExperience() {
+        return true;
+    }
+
+    @Override
+    protected boolean shouldDropLoot() {
+        return true;
     }
 
     @Override

@@ -13,17 +13,20 @@ import javax.annotation.Nullable;
 
 @Mixin(BaseSpawner.class)
 public interface BaseSpawnerAccessor {
-    @Accessor("spawnDelay")
-    void aether_ii$setSpawnDelay(int delay);
-
     @Accessor("minSpawnDelay")
     void aether_ii$setMinSpawnDelay(int delay);
 
     @Accessor("maxSpawnDelay")
     void aether_ii$setMaxSpawnDelay(int delay);
 
-    @Accessor("spawnCount")
-    void aether_ii$setSpawnCount(int count);
+    @Accessor("maxNearbyEntities")
+    int aether_ii$getMaxNearbyEntities();
+
+    @Invoker
+    boolean callIsNearPlayer(Level level, BlockPos pos);
+
+    @Invoker
+    void callDelay(Level level, BlockPos pos);
 
     @Invoker
     SpawnData callGetOrCreateNextSpawnData(@Nullable Level level, RandomSource random, BlockPos pos);
