@@ -23,15 +23,17 @@ public abstract class GroundTrapBlock extends BaseEntityBlock {
         super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(LOCKED, false).setValue(TRAP_STATE, AetherIIBlockStateProperties.TrapState.LOADED));
     }
-
-    @Override
-    public boolean canHarvestBlock(BlockState state, BlockGetter level, BlockPos pos, Player player) {
-        return !state.getValue(LOCKED) && super.canHarvestBlock(state, level, pos, player);
-    }
-
     @Override
     public boolean canEntityDestroy(BlockState state, BlockGetter level, BlockPos pos, Entity entity) {
         return !state.getValue(LOCKED) && super.canEntityDestroy(state, level, pos, entity);
+    }
+
+    @Override
+    protected float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
+        if (state.getValue(LOCKED)) {
+            return 0.0F;
+        }
+        return super.getDestroyProgress(state, player, level, pos);
     }
 
     @Override

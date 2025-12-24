@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.mixin.mixins.client;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.dungeon.SentryTrapBlock;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -20,7 +21,7 @@ import java.util.List;
 public class ModelBlockRendererMixin {
     @ModifyArgs(method = "putQuadData(Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lnet/minecraft/client/renderer/block/model/BakedQuad;Lnet/minecraft/client/renderer/block/ModelBlockRenderer$CommonRenderStorage;I)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/VertexConsumer;putBulkData(Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lnet/minecraft/client/renderer/block/model/BakedQuad;[FFFFF[IIZ)V"))
     private void putQuadData(Args args, @Local(argsOnly = true) BlockState state) {
-        if (state.is(AetherIIBlocks.LOCKED_BLOCK) || state.is(AetherIIBlocks.BOSS_DOORWAY_BLOCK) || state.is(AetherIIBlocks.TREASURE_DOORWAY_BLOCK)) {
+        if (state.is(AetherIIBlocks.LOCKED_BLOCK) || state.is(AetherIIBlocks.BOSS_DOORWAY_BLOCK) || state.is(AetherIIBlocks.TREASURE_DOORWAY_BLOCK) || (state.is(AetherIIBlocks.SENTRY_TRAP) && state.getValue(SentryTrapBlock.LOCKED))) {
             float red = args.get(3);
             float green = args.get(4);
             float blue = args.get(5);
@@ -32,7 +33,7 @@ public class ModelBlockRendererMixin {
 
     @WrapOperation(method = "renderModel(Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/renderer/block/model/BlockStateModel;FFFIILnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/block/ModelBlockRenderer;renderQuadList(Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lcom/mojang/blaze3d/vertex/VertexConsumer;FFFLjava/util/List;II)V"))
     private static void renderQuadList(PoseStack.Pose pose, VertexConsumer consumer, float red, float green, float blue, List<BakedQuad> quads, int packedLight, int packedOverlay, Operation<Void> original, @Local(argsOnly = true) BlockState state) {
-        if (state.is(AetherIIBlocks.LOCKED_BLOCK) || state.is(AetherIIBlocks.BOSS_DOORWAY_BLOCK) || state.is(AetherIIBlocks.TREASURE_DOORWAY_BLOCK)) {
+        if (state.is(AetherIIBlocks.LOCKED_BLOCK) || state.is(AetherIIBlocks.BOSS_DOORWAY_BLOCK) || state.is(AetherIIBlocks.TREASURE_DOORWAY_BLOCK) || (state.is(AetherIIBlocks.SENTRY_TRAP) && state.getValue(SentryTrapBlock.LOCKED))) {
             for (BakedQuad bakedquad : quads) {
                 consumer.putBulkData(pose, bakedquad, red * 0.75F, green * 0.75F, blue * 0.75F, 1.0F, packedLight, packedOverlay);
             }
