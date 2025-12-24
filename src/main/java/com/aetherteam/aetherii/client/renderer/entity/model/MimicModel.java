@@ -91,8 +91,8 @@ public class MimicModel<T extends MimicRenderState> extends EntityModel<T> {
     @Override
     public void setupAnim(T renderState) {
         super.setupAnim(renderState);
-        float f1 = renderState.walkAnimationPos;
-        float f2 = renderState.walkAnimationSpeed;
+        float f1 = renderState.walkAnimationSpeed;
+        float f2 = renderState.walkAnimationPos;
         this.walkAnimation.applyWalk(f2, f1, 1.0F, 1.0F);
         this.spawnAnimation.apply(renderState.spawnAnimationState, renderState.ageInTicks);
         this.attackAnimation.apply(renderState.attackAnimationState, renderState.ageInTicks);

@@ -6,7 +6,6 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -47,6 +46,12 @@ public class Mimic extends Monster {
                 .add(Attributes.ATTACK_DAMAGE, 3.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.28)
                 .add(Attributes.FOLLOW_RANGE, 8.0);
+    }
+
+    @Override
+    protected void updateWalkAnimation(float p_382793_) {
+        float f2 = Math.min(p_382793_ * (8.0F), 1.0F);
+        this.walkAnimation.update(f2, 0.4F, 1.0F);
     }
 
     /**
