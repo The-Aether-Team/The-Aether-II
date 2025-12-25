@@ -127,6 +127,9 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         // Relics
         this.generateFlatItem(AetherIIItems.KINETIC_THRUSTERS.get(), ModelTemplates.FLAT_ITEM);
 
+        // Accessories
+        this.generateFlatItem(AetherIIItems.ZANITE_PENDANT.get(), ModelTemplates.FLAT_ITEM);
+
         // Charms
         this.generateFlatItem(AetherIIItems.CHARM_OF_DAMAGE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.CHARM_OF_DEXTERITY.get(), ModelTemplates.FLAT_ITEM);

@@ -87,7 +87,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_GLOVES.get(),
                 AetherIIItems.GRAVITITE_GLOVES.get(),
                 AetherIIItems.NEPTUNE_GLOVES.get());
-        this.tag(AetherIITags.Items.EQUIPMENT_ACCESSORIES);
+        this.tag(AetherIITags.Items.EQUIPMENT_ACCESSORIES).add(
+                AetherIIItems.ZANITE_PENDANT.get());
         this.tag(AetherIITags.Items.EQUIPABLE).addTags(
                 AetherIITags.Items.EQUIPMENT_RELICS,
                 AetherIITags.Items.EQUIPMENT_HANDWEAR,

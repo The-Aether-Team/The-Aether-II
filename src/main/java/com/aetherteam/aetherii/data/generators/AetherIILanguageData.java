@@ -907,6 +907,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Relics
         this.addItem(AetherIIItems.KINETIC_THRUSTERS, "Kinetic Thrusters");
 
+        // Accessories
+        this.addItem(AetherIIItems.ZANITE_PENDANT, "Zanite Pendant");
+
         // Charms
         this.addItem(AetherIIItems.CHARM_OF_DAMAGE, "Charm of Damage");
         this.addItem(AetherIIItems.CHARM_OF_DEXTERITY, "Charm of Dexterity");

@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.inventory.menu.slot;
 
-import com.aetherteam.aetherii.item.equipment.accessories.AccessoryItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
@@ -34,13 +33,5 @@ public class AccessorySlot extends Slot {
     public boolean mayPickup(Player player) {
         ItemStack stack = this.getItem();
         return (stack.isEmpty() || player.isCreative() || !EnchantmentHelper.has(stack, EnchantmentEffectComponents.PREVENT_ARMOR_CHANGE)) && super.mayPickup(player);
-    }
-
-    @Override
-    public void onTake(Player player, ItemStack stack) {
-        if (!player.level().isClientSide() && stack.getItem() instanceof AccessoryItem accessory) {
-            accessory.onUnequip(stack, player);
-        }
-        super.onTake(player, stack);
     }
 }

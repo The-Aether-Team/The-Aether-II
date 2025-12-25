@@ -2,16 +2,19 @@ package com.aetherteam.aetherii.integration;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
+import com.aetherteam.aetherii.item.equipment.accessories.AccessoryItem;
 import com.google.common.collect.Multimap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -110,5 +113,11 @@ public class AccessoryUtil {
         tooltip.accept(Component.translatable("aether_ii.tooltip.item.modifiers." + group).withStyle(ChatFormatting.GRAY));
 
         AttributeUtil.applyTextFor(stack, tooltip, modifiers, ctx);
+    }
+
+    public static void breakAccessory(Item item, ItemStack stack, ServerPlayer wearer) { //todo  sound
+        if (item instanceof AccessoryItem accessoryItem) {
+            accessoryItem.onUnequip(stack, wearer);
+        }
     }
 }

@@ -17,6 +17,7 @@ import com.aetherteam.aetherii.item.components.BuildupContents;
 import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
+import com.aetherteam.aetherii.item.equipment.accessories.ZanitePendantItem;
 import com.aetherteam.aetherii.item.equipment.accessories.companions.CompanionItem;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.item.equipment.accessories.GlovesItem;
@@ -218,6 +219,9 @@ public class AetherIIItems {
 
     // Relics
     public static final DeferredItem<Item> KINETIC_THRUSTERS = register("kinetic_thrusters", KineticThrustersItem::new);
+
+    // Accessories
+    public static final DeferredItem<Item> ZANITE_PENDANT = register("zanite_pendant", ZanitePendantItem::new);
 
     // Charms
     public static final DeferredItem<Item> CHARM_OF_DAMAGE = register("charm_of_damage", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_MELEE, AetherIIStats.CHARM_DAMAGE_BONUS));
@@ -429,6 +433,7 @@ public class AetherIIItems {
 
         // Accessories
         bus.addListener(GlovesItem::updatePlayerAttributes);
+        bus.addListener(ZanitePendantItem::onBlockBreak);
 
         // Other
         bus.addListener(CompanionItem::entityPostTick);

@@ -41,12 +41,16 @@ public class AccessoryContainer extends SimpleContainer {
         if (!entity.level().isClientSide()) {
             if (!this.lastItems.equals(this.getItems())) {
                 for (int i = 0; i < this.getItems().size(); i++) {
-                    if (!ItemStack.isSameItem(this.lastItems.get(i), this.getItem(i))) {
-                        if (!this.getItem(i).isEmpty() && this.getItem(i).getItem() instanceof AccessoryItem accessory) {
-                            accessory.onEquip(this.getItem(i), entity);
+                    ItemStack thisItem = this.getItem(i);
+                    ItemStack lastItem = this.lastItems.get(i);
+                    if (!ItemStack.isSameItem(lastItem, this.getItem(i))) {
+                        if (!thisItem.isEmpty() && thisItem.getItem() instanceof AccessoryItem accessory) {
+                            accessory.onEquip(thisItem, entity);
+                        } else if (thisItem.isEmpty() && !lastItem.isEmpty() && lastItem.getItem() instanceof AccessoryItem accessoryItem) {
+                            accessoryItem.onUnequip(lastItem, entity);
                         }
                     }
-                    this.lastItems.set(i, this.getItem(i));
+                    this.lastItems.set(i, thisItem);
                 }
             }
         }

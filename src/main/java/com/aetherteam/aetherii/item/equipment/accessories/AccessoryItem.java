@@ -1,13 +1,13 @@
 package com.aetherteam.aetherii.item.equipment.accessories;
 
-import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,21 +25,16 @@ import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import java.util.*;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class AccessoryItem extends Item {
     private final AccessoryContainer.SlotType slotType;
     private final Set<ConditionalAttribute> attributes;
-    private final Multimap<Holder<Attribute>, AttributeModifier> attributesMap;
 
     public AccessoryItem(Properties properties, AccessoryContainer.SlotType slotType) {
-        super(properties);
+        super(properties.stacksTo(1));
         this.slotType = slotType;
         this.attributes = this.gatherAttributes(new HashSet<>());
-        Multimap<Holder<Attribute>, AttributeModifier> attributesMap = ArrayListMultimap.create();
-        for (ConditionalAttribute attribute : this.attributes) {
-            attributesMap.put(attribute.attribute(), attribute.modifier());
-        }
-        this.attributesMap = attributesMap;
     }
 
     @Override
@@ -50,16 +45,24 @@ public class AccessoryItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipComponents, tooltipFlag);
-        AccessoryUtil.addAttributeTooltips(stack, tooltipComponents, AttributeTooltipContext.of(null, context, tooltipDisplay, tooltipFlag), this.attributesMap, this.getSlotType().name().toLowerCase(Locale.ROOT));
+        Multimap<Holder<Attribute>, AttributeModifier> attributesMap = ArrayListMultimap.create();
+        for (ConditionalAttribute attribute : this.attributes) {
+            attributesMap.put(attribute.attribute(), attribute.modifier().getModifier(stack));
+        }
+        AccessoryUtil.addAttributeTooltips(stack, tooltipComponents, AttributeTooltipContext.of(null, context, tooltipDisplay, tooltipFlag), attributesMap, this.getSlotType().name().toLowerCase(Locale.ROOT));
     }
 
     public void tick(ItemStack stack, LivingEntity wearer) {
-        for (ConditionalAttribute entry : this.attributes) {
-            AttributeInstance attribute = wearer.getAttribute(entry.attribute());
-            if (attribute != null && !attribute.hasModifier(entry.modifier().id()) && entry.condition().test(stack, wearer)) {
-                attribute.addTransientModifier(entry.modifier());
-            } else if (attribute != null && attribute.hasModifier(entry.modifier().id()) && !entry.condition().test(stack, wearer)) {
-                attribute.removeModifier(entry.modifier().id());
+        if (!wearer.level().isClientSide()) {
+            for (ConditionalAttribute entry : this.attributes) {
+                AttributeInstance attribute = wearer.getAttribute(entry.attribute());
+                AttributeModifier modifier = entry.modifier().getModifier(stack);
+
+                if (attribute != null && !attribute.hasModifier(modifier.id()) && entry.condition().test(stack, wearer)) {
+                    attribute.addTransientModifier(modifier);
+                } else if (attribute != null && attribute.hasModifier(modifier.id()) && (!entry.condition().test(stack, wearer) || modifier.amount() != attribute.getModifier(modifier.id()).amount())) {
+                    attribute.removeModifier(modifier.id());
+                }
             }
         }
     }
@@ -71,8 +74,10 @@ public class AccessoryItem extends Item {
     public void onUnequip(ItemStack stack, LivingEntity wearer) {
         for (ConditionalAttribute entry : this.attributes) {
             AttributeInstance attribute = wearer.getAttribute(entry.attribute());
-            if (attribute != null && attribute.hasModifier(entry.modifier().id())) {
-                attribute.removeModifier(entry.modifier().id());
+            AttributeModifier modifier = entry.modifier().getModifier(stack);
+            if (attribute != null && attribute.hasModifier(modifier.id())) {
+                attribute.removeModifier(modifier.id());
+                AetherII.LOGGER.info("a");
             }
         }
     }
@@ -85,5 +90,19 @@ public class AccessoryItem extends Item {
         return this.slotType;
     }
 
-    public record ConditionalAttribute(Holder<Attribute> attribute, AttributeModifier modifier, BiPredicate<ItemStack, LivingEntity> condition) { }
+    public Set<ConditionalAttribute> getAttributes() {
+        return this.attributes;
+    }
+
+    public record ConditionalAttribute(Holder<Attribute> attribute, ConditionalModifier modifier, BiPredicate<ItemStack, LivingEntity> condition) { }
+
+    public record ConditionalModifier(ResourceLocation location, Function<ItemStack, Double> amount, AttributeModifier.Operation operation) {
+        public ConditionalModifier(ResourceLocation location, double amount, AttributeModifier.Operation operation) {
+            this(location, (stack) -> amount, operation);
+        }
+
+        public AttributeModifier getModifier(ItemStack stack) {
+            return new AttributeModifier(this.location(), this.amount().apply(stack), this.operation());
+        }
+    }
 }
