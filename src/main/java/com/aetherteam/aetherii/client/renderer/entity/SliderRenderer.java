@@ -74,8 +74,8 @@ public class SliderRenderer extends MobRenderer<Slider, SliderRenderState, Slide
     private static void renderRays(PoseStack poseStack, float deathCompletion, VertexConsumer buffer) {
         poseStack.pushPose();
         float f = Math.min(deathCompletion > 0.8F ? (deathCompletion - 0.8F) / 0.2F : 0.0F, 1.0F);
-        int i = ARGB.colorFromFloat(1.0F - f, 1.0F, 1.0F, 1.0F);
-        int j = 16711935;
+        int i = ARGB.colorFromFloat(1.0F - f, 1.0F, 0.5F, 0.5F);
+        int j = 16711680;
         RandomSource randomsource = RandomSource.create(432L);
         Vector3f vector3f = new Vector3f();
         Vector3f vector3f1 = new Vector3f();
@@ -103,14 +103,14 @@ public class SliderRenderer extends MobRenderer<Slider, SliderRenderState, Slide
             vector3f3.set(0.0F, f1, f2);
             PoseStack.Pose posestack$pose = poseStack.last();
             buffer.addVertex(posestack$pose, vector3f).setColor(i);
-            buffer.addVertex(posestack$pose, vector3f1).setColor(16711935);
-            buffer.addVertex(posestack$pose, vector3f2).setColor(16711935);
+            buffer.addVertex(posestack$pose, vector3f1).setColor(j);
+            buffer.addVertex(posestack$pose, vector3f2).setColor(j);
             buffer.addVertex(posestack$pose, vector3f).setColor(i);
-            buffer.addVertex(posestack$pose, vector3f2).setColor(16711935);
-            buffer.addVertex(posestack$pose, vector3f3).setColor(16711935);
+            buffer.addVertex(posestack$pose, vector3f2).setColor(j);
+            buffer.addVertex(posestack$pose, vector3f3).setColor(j);
             buffer.addVertex(posestack$pose, vector3f).setColor(i);
-            buffer.addVertex(posestack$pose, vector3f3).setColor(16711935);
-            buffer.addVertex(posestack$pose, vector3f1).setColor(16711935);
+            buffer.addVertex(posestack$pose, vector3f3).setColor(j);
+            buffer.addVertex(posestack$pose, vector3f1).setColor(j);
         }
 
         poseStack.popPose();
