@@ -21,12 +21,12 @@ public class AvoidObstaclesGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        if (!this.slider.isAwake() || this.slider.isDeadOrDying() || this.slider.getMoveDelay() != 1) {
+        if (!this.slider.isAwake() || this.slider.isDeadOrDying()) {
             return false;
         }
 
         Direction direction = this.slider.getMoveDirection();
-        return direction != null && direction.getAxis() != Direction.Axis.Y;
+        return direction != Direction.UP;
     }
 
     @Override
@@ -58,8 +58,8 @@ public class AvoidObstaclesGoal extends Goal {
             while (isTouchingWall) {
                 y++;
                 isTouchingWall = false;
-                for (int x = Mth.floor(collisionBox.minX); x < collisionBox.maxX; x++) {
-                    for (int z = Mth.floor(collisionBox.minZ); z < collisionBox.maxZ; z++) {
+                for (int x = Mth.floor(collisionBox.minX); x < Mth.ceil(collisionBox.maxX - 1); x++) {
+                    for (int z = Mth.floor(collisionBox.minZ); z < Mth.ceil(collisionBox.maxZ - 1); z++) {
                         if (this.slider.level().getBlockState(pos.set(x, y, z)).is(AetherIITags.Blocks.SLIDER_UNBREAKABLE)) {
                             isTouchingWall = true;
                         }
