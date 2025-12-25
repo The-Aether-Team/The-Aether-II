@@ -275,6 +275,11 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
     }
 
     @Override
+    protected void dropEquipment(ServerLevel level) {
+
+    }
+
+    @Override
     public void performRangedAttack(LivingEntity target, float distance) {
         DemolitionProjectile bomb = new DemolitionProjectile(this, this.level());
         double x = target.getX() - this.getX();
