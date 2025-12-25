@@ -64,6 +64,7 @@ public abstract class GroundTrapBlockEntity extends CustomSpawnerBlockEntity {
                                 return loadedEntity;
                             });
                             if (entity instanceof Mob mob) {
+                                mob.setTarget(serverLevel.getNearestPlayer(mob, 20));
                                 entity.snapTo(entity.getX(), entity.getY(), entity.getZ(), random.nextFloat() * 360.0F, 0.0F);
                                 boolean def = spawnData.getEntityToSpawn().size() == 1 && spawnData.getEntityToSpawn().getString("id").isPresent();
                                 EventHooks.finalizeMobSpawnSpawner(mob, serverLevel, serverLevel.getCurrentDifficultyAt(entity.blockPosition()), EntitySpawnReason.SPAWNER, null, this, def);
