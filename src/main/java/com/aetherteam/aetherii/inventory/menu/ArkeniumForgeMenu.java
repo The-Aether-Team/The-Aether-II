@@ -48,6 +48,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             AetherIIItems.GRAVITITE_SHORTSWORD,
             AetherIIItems.GRAVITITE_HAMMER,
             AetherIIItems.GRAVITITE_SPEAR,
+            AetherIIItems.HAMMER_OF_DEMOLITION,
             AetherIIItems.SKYROOT_SHIELD,
             AetherIIItems.BURRUKAI_PLATE_SHIELD,
             AetherIIItems.ZANITE_SHIELD,
