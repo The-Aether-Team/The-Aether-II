@@ -5,7 +5,8 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
 import com.aetherteam.aetherii.world.structure.piece.sentry.SentryWorkshopPiece;
 import com.aetherteam.aetherii.world.structure.processor.BossRoomProcessor;
-import com.aetherteam.aetherii.world.structure.processor.MimicChestProcessor;
+import com.aetherteam.aetherii.world.structure.processor.CopyRuleProcessor;
+import com.aetherteam.aetherii.world.structure.processor.MimicContainerProcessor;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -45,15 +46,16 @@ public class AetherIIProcessorLists {
                 SentryWorkshopPiece.CAVE_REPLACEABLE,
                 SentryWorkshopPiece.SENTRY_STONE,
                 SentryWorkshopPiece.ROOM_DECORATION_RANDOMIZATION,
-                MimicChestProcessor.INSTANCE
+                MimicContainerProcessor.INSTANCE
         ));
         register(context, SENTRY_WORKSHOP_TUNNEL, List.of(
                 SentryWorkshopPiece.CAVE_REPLACEABLE,
                 SentryWorkshopPiece.SENTRY_STONE,
-                MimicChestProcessor.INSTANCE
+                MimicContainerProcessor.INSTANCE
         ));
         register(context, SENTRY_WORKSHOP_BOSS_ROOM, List.of(
                 SentryWorkshopPiece.SENTRY_STONE,
+                new CopyRuleProcessor(SentryWorkshopPiece.SENTRY_STONE_LIST),
                 BossRoomProcessor.INSTANCE
         ));
 

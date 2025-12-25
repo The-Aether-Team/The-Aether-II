@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.world.structure.processor;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
@@ -16,10 +15,10 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import org.jetbrains.annotations.Nullable;
 
-public class MimicChestProcessor extends StructureProcessor {
-    public static final MimicChestProcessor INSTANCE = new MimicChestProcessor();
+public class MimicContainerProcessor extends StructureProcessor {
+    public static final MimicContainerProcessor INSTANCE = new MimicContainerProcessor();
 
-    public static final MapCodec<MimicChestProcessor> CODEC = MapCodec.unit(MimicChestProcessor.INSTANCE);
+    public static final MapCodec<MimicContainerProcessor> CODEC = MapCodec.unit(MimicContainerProcessor.INSTANCE);
 
     @SuppressWarnings("deprecation")
     @Override
@@ -41,6 +40,6 @@ public class MimicChestProcessor extends StructureProcessor {
 
     @Override
     protected StructureProcessorType<?> getType() {
-        return AetherIIStructureProcessorTypes.MIMIC_CHEST.get();
+        return AetherIIStructureProcessorTypes.MIMIC_CONTAINER.get();
     }
 }

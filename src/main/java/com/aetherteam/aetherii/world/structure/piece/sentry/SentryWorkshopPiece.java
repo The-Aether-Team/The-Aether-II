@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
 
+import java.util.List;
 import java.util.function.Function;
 
 /**
@@ -30,7 +31,7 @@ public abstract class SentryWorkshopPiece extends AetherTemplateStructurePiece {
             new ProcessorRule(new BlockMatchTest(AetherIIBlocks.CYAN_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE_BASE_BRICKS.get().defaultBlockState())
     ));
 
-    public static final RuleProcessor SENTRY_STONE = new RuleProcessor(ImmutableList.of(
+    public static final List<ProcessorRule> SENTRY_STONE_LIST = ImmutableList.of(
             new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_BRICKS.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_BRICKS.get().defaultBlockState()),
             new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_FLAGSTONES.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_FLAGSTONES.get().defaultBlockState()),
             new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.UNDERSHALE_BASE_BRICKS.get(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_BASE_BRICKS.get().defaultBlockState()),
@@ -46,7 +47,9 @@ public abstract class SentryWorkshopPiece extends AetherTemplateStructurePiece {
             new ProcessorRule(new RandomBlockStateMatchTest(AetherIIBlocks.UNDERSHALE_BASE_PILLAR.get().defaultBlockState(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_BASE_PILLAR.get().defaultBlockState().setValue(SentryBlock.LIT, false)),
             new ProcessorRule(new RandomBlockStateMatchTest(AetherIIBlocks.UNDERSHALE_CAPSTONE_PILLAR.get().defaultBlockState(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_CAPSTONE_PILLAR.get().defaultBlockState().setValue(SentryBlock.LIT, false)),
             new ProcessorRule(new RandomBlockStateMatchTest(AetherIIBlocks.UNDERSHALE_PILLAR.get().defaultBlockState(), 0.05F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_PILLAR.get().defaultBlockState().setValue(SentryBlock.LIT, false))
-    ));
+    );
+
+    public static final RuleProcessor SENTRY_STONE = new RuleProcessor(SENTRY_STONE_LIST);
 
     public static final RuleProcessor ROOM_DECORATION_RANDOMIZATION = new RuleProcessor(ImmutableList.of(
             new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.SENTRY_TRAP.get(), 0.65F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_FLAGSTONES.get().defaultBlockState()),

@@ -360,7 +360,7 @@
       ]
     },
     {
-      "processor_type": "aether_ii:mimic_chest"
+      "processor_type": "aether_ii:mimic_container"
     }
   ]
 }
