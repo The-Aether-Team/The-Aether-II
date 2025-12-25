@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.event.hooks.BiomeHooks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.event.FreezeEvent;
 import com.aetherteam.aetherii.event.hooks.BlockHooks;
 import com.aetherteam.aetherii.event.hooks.PlayerHooks;
@@ -26,10 +27,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.StructureManager;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -45,6 +43,7 @@ import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.level.AlterGroundEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.neoforge.event.level.SleepFinishedTimeEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -79,6 +78,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onEntityPostTick);
         bus.addListener(AetherIIEventListeners::onEntitySpawn);
         bus.addListener(AetherIIEventListeners::onEntityTravelToDimension);
+        bus.addListener(AetherIIEventListeners::onEntityCauseExplosion);
 
         // Living
         bus.addListener(AetherIIEventListeners::onLivingPreDamaged);
@@ -302,6 +302,15 @@ public class AetherIIEventListeners {
 
         if (entity instanceof Player player) {
             player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT.get()).removeAerbunny();
+        }
+    }
+
+    public static void onEntityCauseExplosion(ExplosionEvent.Detonate event) {
+        ServerExplosion explosion = event.getExplosion();
+        Entity source = explosion.getIndirectSourceEntity();
+
+        if (source != null && (source.getType() == AetherIIEntityTypes.DETONATION_SENTRY.get() || source.getType() == AetherIIEntityTypes.SENTRY_GOLEM.get())) {
+            event.getAffectedEntities().removeIf((entity) -> entity instanceof ItemEntity);
         }
     }
 
