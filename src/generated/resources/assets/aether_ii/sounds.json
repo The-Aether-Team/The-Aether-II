@@ -934,21 +934,19 @@
   },
   "entity.sentry_golem.death": {
     "sounds": [
-      "aether_ii:entity/sentry_golem/death"
+      "mob/irongolem/death"
     ],
     "subtitle": "subtitles.aether_ii.entity.sentry_golem.death"
   },
   "entity.sentry_golem.hurt": {
     "sounds": [
-      "aether_ii:entity/sentry_golem/hurt_1",
-      "aether_ii:entity/sentry_golem/hurt_2"
+      "mob/irongolem/hit1"
     ],
     "subtitle": "subtitles.aether_ii.entity.sentry_golem.hurt"
   },
   "entity.sentry_golem.say": {
     "sounds": [
-      "aether_ii:entity/sentry_golem/say_1",
-      "aether_ii:entity/sentry_golem/say_2"
+      "mob/irongolem/walk1"
     ],
     "subtitle": "subtitles.aether_ii.entity.sentry_golem.say"
   },

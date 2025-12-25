@@ -1047,19 +1047,17 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
 
         this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_DEATH,
-                definition().with(sound("aether_ii:entity/sentry_golem/death"))
+                definition().with(sound("minecraft:mob/irongolem/death"))
                         .subtitle("subtitles.aether_ii.entity.sentry_golem.death")
         );
         this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_HURT,
                 definition().with(
-                        sound("aether_ii:entity/sentry_golem/hurt_1"),
-                        sound("aether_ii:entity/sentry_golem/hurt_2")
+                        sound("minecraft:mob/irongolem/hit1")
                 ).subtitle("subtitles.aether_ii.entity.sentry_golem.hurt")
         );
         this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_SAY,
                 definition().with(
-                        sound("aether_ii:entity/sentry_golem/say_1"),
-                        sound("aether_ii:entity/sentry_golem/say_2")
+                        sound("minecraft:mob/irongolem/walk1")
                 ).subtitle("subtitles.aether_ii.entity.sentry_golem.say")
         );
         this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_THROW_BOMB,

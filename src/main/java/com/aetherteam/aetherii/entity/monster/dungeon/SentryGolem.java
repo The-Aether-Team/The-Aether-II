@@ -222,9 +222,9 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
     }
 
     @Override
-    protected void updateWalkAnimation(float p_382793_) {
-        float f2 = Math.min(p_382793_ * (8.0F), 1.0F);
-        this.walkAnimation.update(f2, 0.4F, 1.0F);
+    protected void updateWalkAnimation(float partialTick) {
+        float f2 = Math.min(partialTick * (12.0F), 1.0F);
+        this.walkAnimation.update(f2, 1.0F, 1.0F);
     }
 
     @Override
