@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.item.equipment.accessories;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.google.common.collect.ArrayListMultimap;
@@ -77,7 +76,6 @@ public class AccessoryItem extends Item {
             AttributeModifier modifier = entry.modifier().getModifier(stack);
             if (attribute != null && attribute.hasModifier(modifier.id())) {
                 attribute.removeModifier(modifier.id());
-                AetherII.LOGGER.info("a");
             }
         }
     }

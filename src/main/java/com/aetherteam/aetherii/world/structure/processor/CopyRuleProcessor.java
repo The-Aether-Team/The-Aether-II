@@ -32,17 +32,17 @@ public class CopyRuleProcessor extends StructureProcessor {
         BlockState state = level.getBlockState(relativeBlockInfo.pos());
 
         if (state.getBlock() instanceof CopyBlock) {
-            AetherII.LOGGER.info("1");
+//            AetherII.LOGGER.info("1");
             CompoundTag tag = relativeBlockInfo.nbt();
             if (tag != null) {
-                AetherII.LOGGER.info("2");
+//                AetherII.LOGGER.info("2");
                 Optional<BlockState> copyState = tag.read("copy_state", BlockState.CODEC);
                 if (copyState.isPresent()) {
-                    AetherII.LOGGER.info("3");
+//                    AetherII.LOGGER.info("3");
                     for (ProcessorRule rule : this.rules) {
-                        AetherII.LOGGER.info("4");
+//                        AetherII.LOGGER.info("4");
                         if (rule.test(copyState.get(), state, blockInfo.pos(), relativeBlockInfo.pos(), pos, random)) {
-                            AetherII.LOGGER.info("5");
+//                            AetherII.LOGGER.info("5");
                             tag.store("copy_state", BlockState.CODEC, rule.getOutputState());
                             return new StructureTemplate.StructureBlockInfo(relativeBlockInfo.pos(), relativeBlockInfo.state(), tag);
                         }
