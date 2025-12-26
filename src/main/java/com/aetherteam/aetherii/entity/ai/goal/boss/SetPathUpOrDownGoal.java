@@ -55,7 +55,7 @@ public class SetPathUpOrDownGoal extends Goal {
         for (int x = Mth.floor(currentPath.minX); x < currentPath.maxX; x++) {
             for (int z = Mth.floor(currentPath.minZ); z < currentPath.maxZ; z++) {
                 BlockState state = this.slider.level().getBlockState(pos.set(x, targetPos.y(), z));
-                if (state.is(AetherIITags.Blocks.SLIDER_UNBREAKABLE)) {
+                if (isBreakable(state, pos)) {
                     return;
                 }
             }
@@ -64,6 +64,10 @@ public class SetPathUpOrDownGoal extends Goal {
         double y = direction == Direction.UP ? Math.max(targetPos.y(), currentPos.y() + 1) : targetPos.y();
         this.slider.setMoveDirection(direction);
         this.slider.setTargetPoint(new Vec3(currentPos.x(), y, currentPos.z()));
+    }
+
+    private boolean isBreakable(BlockState blockState, BlockPos pos) {
+        return !blockState.isAir() && !blockState.is(AetherIITags.Blocks.SLIDER_UNBREAKABLE) && blockState.getBlock().defaultDestroyTime() >= 0.0F && blockState.getBlock().defaultDestroyTime() < 100.0F && blockState.getBlock().canEntityDestroy(blockState, this.slider.level(), pos, this.slider);
     }
 
     @Override

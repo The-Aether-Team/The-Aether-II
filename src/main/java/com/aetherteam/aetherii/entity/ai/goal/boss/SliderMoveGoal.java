@@ -89,7 +89,7 @@ public class SliderMoveGoal extends Goal {
             double x = targetPoint.x - slider.getX();
             double y = targetPoint.y - slider.getY();
             double z = targetPoint.z - slider.getZ();
-            moveDir = Slider.calculateDirection(x, y, z);
+            moveDir = Slider.calculateDirection(slider, x, y, z);
             slider.setMoveDirection(moveDir);
         }
         return moveDir;

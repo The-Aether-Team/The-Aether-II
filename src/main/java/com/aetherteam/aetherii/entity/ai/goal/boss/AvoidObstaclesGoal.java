@@ -21,12 +21,12 @@ public class AvoidObstaclesGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        if (!this.slider.isAwake() || this.slider.isDeadOrDying()) {
+        if (!this.slider.isAwake() || this.slider.isDeadOrDying() || this.slider.getMoveDelay() != 1) {
             return false;
         }
 
         Direction direction = this.slider.getMoveDirection();
-        return direction != Direction.UP;
+        return direction != null && direction.getAxis() != Direction.Axis.Y;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class AvoidObstaclesGoal extends Goal {
         if (targetPos == null) {
             return;
         }
-        Direction direction = Slider.calculateDirection(targetPos.x() - this.slider.getX(), targetPos.y() - this.slider.getY(), targetPos.z() - this.slider.getZ());
+        Direction direction = Slider.calculateDirection(this.slider, targetPos.x() - this.slider.getX(), targetPos.y() - this.slider.getY(), targetPos.z() - this.slider.getZ());
         AABB collisionBox = Slider.calculateAdjacentBox(this.slider.getBoundingBox(), direction);
         BlockPos min = new BlockPos(Mth.floor(collisionBox.minX), Mth.floor(collisionBox.minY), Mth.floor(collisionBox.minZ));
         BlockPos max = new BlockPos(Mth.ceil(collisionBox.maxX - 1), Mth.ceil(collisionBox.maxY - 1), Mth.ceil(collisionBox.maxZ - 1));
@@ -58,8 +58,8 @@ public class AvoidObstaclesGoal extends Goal {
             while (isTouchingWall) {
                 y++;
                 isTouchingWall = false;
-                for (int x = Mth.floor(collisionBox.minX); x < Mth.ceil(collisionBox.maxX - 1); x++) {
-                    for (int z = Mth.floor(collisionBox.minZ); z < Mth.ceil(collisionBox.maxZ - 1); z++) {
+                for (int x = Mth.floor(collisionBox.minX); x < collisionBox.maxX; x++) {
+                    for (int z = Mth.floor(collisionBox.minZ); z < collisionBox.maxZ; z++) {
                         if (this.slider.level().getBlockState(pos.set(x, y, z)).is(AetherIITags.Blocks.SLIDER_UNBREAKABLE)) {
                             isTouchingWall = true;
                         }
@@ -69,6 +69,7 @@ public class AvoidObstaclesGoal extends Goal {
             Vec3 currentPos = this.slider.position();
             this.slider.setTargetPoint(new Vec3(currentPos.x(), y, currentPos.z()));
             this.slider.setMoveDirection(Direction.UP);
+            this.slider.upwardFlag = true;
         }
     }
 

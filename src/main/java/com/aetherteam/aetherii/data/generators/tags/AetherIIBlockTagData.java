@@ -327,7 +327,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 Blocks.JIGSAW,
                 Blocks.MOVING_PISTON,
                 Blocks.LIGHT,
-                Blocks.REINFORCED_DEEPSLATE
+                Blocks.REINFORCED_DEEPSLATE,
+                AetherIIBlocks.LOCKED_BLOCK.get()
         );
 
         // Vanilla

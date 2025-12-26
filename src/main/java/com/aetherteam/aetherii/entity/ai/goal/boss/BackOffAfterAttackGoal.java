@@ -29,7 +29,7 @@ public class BackOffAfterAttackGoal extends Goal {
         LivingEntity target = this.slider.getTarget();
         if (target != null && this.slider.getBoundingBox().inflate(1.5).contains(target.position())) {
             // Move one block in the opposite direction of the target.
-            Direction direction = Slider.calculateDirection(this.slider.getX() - target.getX(), 0, this.slider.getZ() - target.getZ());
+            Direction direction = Slider.calculateDirection(this.slider, this.slider.getX() - target.getX(), 0, this.slider.getZ() - target.getZ());
             this.slider.setTargetPoint(this.slider.position().relative(direction, 2));
         }
     }

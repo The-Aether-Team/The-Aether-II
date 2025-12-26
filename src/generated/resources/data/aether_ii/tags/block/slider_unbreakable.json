@@ -12,6 +12,7 @@
     "minecraft:jigsaw",
     "minecraft:moving_piston",
     "minecraft:light",
-    "minecraft:reinforced_deepslate"
+    "minecraft:reinforced_deepslate",
+    "aether_ii:locked_block"
   ]
 }

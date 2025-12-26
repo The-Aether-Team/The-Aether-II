@@ -62,7 +62,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 
 public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enemy, IEntityWithComplexSpawn {
@@ -92,6 +91,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     private Vec3 targetPoint = null;
     private int attackCooldown = 0;
     public int sliderDeathTime = 0;
+    public boolean upwardFlag;
 
     public Slider(EntityType<? extends Slider> type, Level level) {
         super(type, level);
@@ -743,11 +743,11 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
         return this.isCritical() ? 1 + this.getRandom().nextInt(10) : 2 + this.getRandom().nextInt(14);
     }
 
-    public static Direction calculateDirection(double x, double y, double z) {
+    public static Direction calculateDirection(Slider slider, double x, double y, double z) {
         double absX = Math.abs(x);
         double absY = Math.abs(y);
         double absZ = Math.abs(z);
-        if (absY > absX && absY > absZ) {
+        if (absY > absX && absY > absZ && !slider.upwardFlag) {
             return y > 0 ? Direction.UP : Direction.DOWN;
         } else if (absX > absZ) {
             return x > 0 ? Direction.EAST : Direction.WEST;
