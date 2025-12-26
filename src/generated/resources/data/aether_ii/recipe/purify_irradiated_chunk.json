@@ -116,6 +116,20 @@
     {
       "data": {
         "count": 1,
+        "id": "aether_ii:music_disc_chinchilla"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:music_disc_high"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
         "id": "aether_ii:recording_892"
       },
       "weight": 1

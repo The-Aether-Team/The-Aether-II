@@ -1513,10 +1513,26 @@
       }
     ]
   },
+  "item.music_disc.chinchilla": {
+    "sounds": [
+      {
+        "name": "aether_ii:item/records/chinchilla",
+        "stream": true
+      }
+    ]
+  },
   "item.music_disc.demise": {
     "sounds": [
       {
         "name": "aether_ii:item/records/demise",
+        "stream": true
+      }
+    ]
+  },
+  "item.music_disc.high": {
+    "sounds": [
+      {
+        "name": "aether_ii:item/records/high",
         "stream": true
       }
     ]

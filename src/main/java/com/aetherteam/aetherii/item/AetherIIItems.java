@@ -335,6 +335,8 @@ public class AetherIIItems {
     public static final DeferredItem<Item> MUSIC_DISC_AERWHALE = register("music_disc_aerwhale", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.AERWHALE));
     public static final DeferredItem<Item> MUSIC_DISC_APPROACHES = register("music_disc_approaches", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.APPROACHES));
     public static final DeferredItem<Item> MUSIC_DISC_DEMISE = register("music_disc_demise", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.DEMISE));
+    public static final DeferredItem<Item> MUSIC_DISC_CHINCHILLA = register("music_disc_chinchilla", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.CHINCHILLA));
+    public static final DeferredItem<Item> MUSIC_DISC_HIGH = register("music_disc_high", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.HIGH));
     public static final DeferredItem<Item> RECORDING_892 = register("recording_892", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.RECORDING_892));
 
     // Spawn Eggs

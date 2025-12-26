@@ -304,6 +304,12 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         this.add(AetherIISoundEvents.ITEM_MUSIC_DISC_DEMISE,
                 definition().with(sound("aether_ii:item/records/demise").stream())
         );
+        this.add(AetherIISoundEvents.ITEM_MUSIC_DISC_CHINCHILLA,
+                definition().with(sound("aether_ii:item/records/chinchilla").stream())
+        );
+        this.add(AetherIISoundEvents.ITEM_MUSIC_DISC_HIGH,
+                definition().with(sound("aether_ii:item/records/high").stream())
+        );
         this.add(AetherIISoundEvents.ITEM_RECORDING_892,
                 definition().with(sound("aether_ii:item/records/chase").stream())
         );

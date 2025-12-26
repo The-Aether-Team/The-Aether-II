@@ -26,6 +26,14 @@
         },
         {
           "type": "minecraft:item",
+          "name": "aether_ii:music_disc_chinchilla"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:music_disc_high"
+        },
+        {
+          "type": "minecraft:item",
           "name": "aether_ii:recording_892"
         }
       ],

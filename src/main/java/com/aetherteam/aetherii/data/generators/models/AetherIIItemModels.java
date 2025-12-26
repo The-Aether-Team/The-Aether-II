@@ -239,6 +239,8 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.MUSIC_DISC_AERWHALE.get(), ModelTemplates.MUSIC_DISC);
         this.generateFlatItem(AetherIIItems.MUSIC_DISC_APPROACHES.get(), ModelTemplates.MUSIC_DISC);
         this.generateFlatItem(AetherIIItems.MUSIC_DISC_DEMISE.get(), ModelTemplates.MUSIC_DISC);
+        this.generateFlatItem(AetherIIItems.MUSIC_DISC_CHINCHILLA.get(), ModelTemplates.MUSIC_DISC);
+        this.generateFlatItem(AetherIIItems.MUSIC_DISC_HIGH.get(), ModelTemplates.MUSIC_DISC);
         this.generateFlatItem(AetherIIItems.RECORDING_892.get(), ModelTemplates.MUSIC_DISC);
 
         // Spawn Eggs

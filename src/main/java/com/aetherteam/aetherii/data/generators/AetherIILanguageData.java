@@ -1021,6 +1021,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.MUSIC_DISC_AERWHALE, "Aerwhale Music Disc");
         this.addItem(AetherIIItems.MUSIC_DISC_APPROACHES, "Moa Music Disc");
         this.addItem(AetherIIItems.MUSIC_DISC_DEMISE, "Labyrinth Music Disc");
+        this.addItem(AetherIIItems.MUSIC_DISC_CHINCHILLA, "Sepia Music Disc");
+        this.addItem(AetherIIItems.MUSIC_DISC_HIGH, "Super Music Disc");
         this.addItem(AetherIIItems.RECORDING_892, "Recording #892");
 
         // Spawn Eggs
@@ -1575,6 +1577,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addJukeboxSong("aerwhale", "AetherAudio - Aerwhale");
         this.addJukeboxSong("approaches", "Emile van Krieken - Approaches");
         this.addJukeboxSong("demise", "Moorziey - Demise");
+        this.addJukeboxSong("chinchilla", "RENREN - chinchilla");
+        this.addJukeboxSong("high", "RENREN - high");
         this.addJukeboxSong("recording_892", "Emile van Krieken - ???");
     }
 
