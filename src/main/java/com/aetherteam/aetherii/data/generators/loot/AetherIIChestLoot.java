@@ -250,13 +250,14 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.HAMMER_OF_DEMOLITION).setWeight(2))
-                        .add(LootItem.lootTableItem(AetherIIItems.KINETIC_THRUSTERS).setWeight(2))
-                        .add(LootItem.lootTableItem(AetherIIItems.NEPTUNE_HELMET))
-                        .add(LootItem.lootTableItem(AetherIIItems.NEPTUNE_CHESTPLATE))
-                        .add(LootItem.lootTableItem(AetherIIItems.NEPTUNE_LEGGINGS))
-                        .add(LootItem.lootTableItem(AetherIIItems.NEPTUNE_BOOTS))
-                        .add(LootItem.lootTableItem(AetherIIItems.NEPTUNE_GLOVES))
+                        .add(LootItem.lootTableItem(AetherIIItems.HAMMER_OF_DEMOLITION).setWeight(3))
+                        .add(LootItem.lootTableItem(AetherIIItems.KINETIC_THRUSTERS).setWeight(3))
+                        .add(LootItem.lootTableItem(AetherIIItems.SENTRY_BOOTS).setWeight(3))
+                        .add(LootItem.lootTableItem(AetherIIItems.NEPTUNE_HELMET).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.NEPTUNE_CHESTPLATE).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.NEPTUNE_LEGGINGS).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.NEPTUNE_BOOTS).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.NEPTUNE_GLOVES).setWeight(2))
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
@@ -286,6 +287,10 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.ENCHANTED_WYNDBERRY).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.ZANITE_GEMSTONE).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_PLATES))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.GLINT_COIN).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(6.0F, 8.0F))))
                 )
         );
     }

@@ -25,32 +25,42 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:hammer_of_demolition",
-          "weight": 2
+          "weight": 3
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:kinetic_thrusters",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:sentry_boots",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:neptune_helmet",
           "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:neptune_helmet"
+          "name": "aether_ii:neptune_chestplate",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:neptune_chestplate"
+          "name": "aether_ii:neptune_leggings",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:neptune_leggings"
+          "name": "aether_ii:neptune_boots",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:neptune_boots"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:neptune_gloves"
+          "name": "aether_ii:neptune_gloves",
+          "weight": 2
         }
       ],
       "rolls": {
@@ -217,6 +227,32 @@
         "type": "minecraft:uniform",
         "max": 5.0,
         "min": 3.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 8.0,
+                "min": 6.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:glint_coin",
+          "weight": 3
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 2.0
       }
     }
   ],
