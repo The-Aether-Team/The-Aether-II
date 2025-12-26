@@ -17,7 +17,7 @@
     {
       "loot": {
         "chance": 1.0,
-        "item": "minecraft:feather",
+        "item": "aether_ii:cockatrice_feather",
         "max_count": 3,
         "min_count": 1
       }
