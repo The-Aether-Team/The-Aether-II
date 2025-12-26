@@ -68,6 +68,14 @@ public class SliderMoveGoal extends Goal {
         this.targetPoint = null;
         this.velocity = 0;
         this.slider.setDeltaMovement(Vec3.ZERO);
+        if (this.slider.upwardFlag) {
+            this.slider.upwardFlag = false;
+            this.slider.upwardPostFlag = true;
+        }
+
+        if (this.slider.upwardPostFlag) {
+            this.slider.upwardPostFlag = false;
+        }
     }
 
     @Override
