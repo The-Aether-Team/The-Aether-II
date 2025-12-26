@@ -59,7 +59,10 @@ public class SentryWorkshopBuilder {
         ROOM_OPTIONS_BUILDER.get("lobby").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "lobby", pos, rotation, processorList), 1);
         ROOM_OPTIONS_BUILDER.get("square_tunnel").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "square_tunnel", pos, rotation, processorList), 1);
         ROOM_OPTIONS_BUILDER.get("staircase").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "staircase", pos, rotation, processorList), 1);
-        ROOM_OPTIONS_BUILDER.get("surface_ruin").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "surface_ruins/ruin_01", pos, rotation, processorList), 1);
+        ROOM_OPTIONS_BUILDER.get("surface_ruin")
+                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "surface_ruins/ruin_01", pos, rotation, processorList), 1)
+                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "surface_ruins/ruin_02", pos, rotation, processorList), 1)
+                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "surface_ruins/ruin_03", pos, rotation, processorList), 1);
     }
 
     private final Structure.GenerationContext context;
