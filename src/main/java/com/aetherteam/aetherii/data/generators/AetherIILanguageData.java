@@ -1135,7 +1135,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("currency.amount", "%s Glint");
         this.addItemTooltip("curative.removes", "Removes: %s");
         this.addItemTooltip("curative.reduces", "Reduces: %s");
-        this.addItemTooltip("healing_stone.charges", "%s/5 Charges");
+        this.addItemTooltip("healing_stone.charges", "%s/5 Altar Charges");
         this.addItemTooltip("effect_buildup", "%s Buildup");
         this.addItemTooltip("effect_buildup.inflicts", "Inflicts: %s");
         this.addItemTooltip("reinforcement", "Reinforcement");
