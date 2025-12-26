@@ -5,13 +5,16 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 
 public class UnstableBlock extends Block {
     public UnstableBlock(Properties properties) {
@@ -41,5 +44,17 @@ public class UnstableBlock extends Block {
             level.scheduleTick(pos, this, 20);
         }
         super.stepOn(level, pos, state, entity);
+    }
+
+    @Override
+    protected void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
+        if (projectile.getType().is(EntityTypeTags.IMPACT_PROJECTILES)) {
+            BlockPos pos = hit.getBlockPos();
+            SoundType sound = this.getSoundType(state, level, pos, projectile);
+            level.playLocalSound(pos, sound.getBreakSound(), SoundSource.BLOCKS, (sound.getVolume() + 1.0F) / 2.0F, sound.getPitch() * 0.4F, false);
+            level.addDestroyBlockEffect(pos, state);
+            level.scheduleTick(pos, this, 2);
+        }
+        super.onProjectileHit(level, state, hit, projectile);
     }
 }
