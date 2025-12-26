@@ -60,9 +60,12 @@
     "client.accessor.ItemRendererAccessor",
     "client.accessor.LevelRendererAccessor",
     "client.accessor.MouseHandlerAccessor",
+    "client.accessor.OverlayRecipeComponentAccessor",
     "client.accessor.ParticleAccessor",
     "client.accessor.ParticleEngineAccessor",
     "client.accessor.PlayerModelAccessor",
+    "client.accessor.RecipeBookComponentAccessor",
+    "client.accessor.RecipeBookPageAccessor",
     "client.accessor.RenderChunkRegionAccessor",
     "debug.DebugRendererMixin"
   ],

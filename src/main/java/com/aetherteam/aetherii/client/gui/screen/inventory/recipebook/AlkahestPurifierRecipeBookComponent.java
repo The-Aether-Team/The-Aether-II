@@ -2,13 +2,16 @@ package com.aetherteam.aetherii.client.gui.screen.inventory.recipebook;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.AlkahestPurifierMenu;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.RecipeBookComponentAccessor;
 import com.aetherteam.aetherii.recipe.display.AlkahestPurifierRecipeDisplay;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.recipebook.GhostSlots;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeCollection;
+import net.minecraft.client.gui.screens.recipebook.SlotSelectTime;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.util.context.ContextMap;
 import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.Slot;
@@ -26,6 +29,9 @@ public class AlkahestPurifierRecipeBookComponent extends RecipeBookComponent<Alk
 
     public AlkahestPurifierRecipeBookComponent(AlkahestPurifierMenu menu, List<TabInfo> tabs) {
         super(menu, tabs);
+        RecipeBookComponentAccessor componentAccessor = (RecipeBookComponentAccessor) this;
+        SlotSelectTime slotSelectTime = () -> Mth.floor(componentAccessor.aether_ii$getTime() / 30.0F);
+        componentAccessor.aether_ii$setRecipeBookPage(new AetherRecipeBookPage(this, slotSelectTime));
     }
 
     @Override
