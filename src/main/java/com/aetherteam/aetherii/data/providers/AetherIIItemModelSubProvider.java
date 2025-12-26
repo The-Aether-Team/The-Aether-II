@@ -56,7 +56,7 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
                 ItemModelUtils.select(new Charge(), base, ItemModelUtils.when(CrossbowItem.ChargeType.ARROW, arrow))));
     }
 
-    public void generateModeledShield(Item item, ResourceLocation particle) {
+    public void generateModeledShield(Item item, ResourceLocation particle, String type) {
         ShieldModel.Textures textures = new ShieldModel.Textures(
                 List.of(TextureMapping.getItemTexture(item, "_front_0"),
                         TextureMapping.getItemTexture(item, "_front_1"),
@@ -68,7 +68,7 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
                         TextureMapping.getItemTexture(item, "_back_3")),
                 TextureMapping.getItemTexture(item, "_handle"),
                 particle);
-        ItemModel.Unbaked normal = new ShieldModel.Unbaked(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "item/shield"), textures);
+        ItemModel.Unbaked normal = new ShieldModel.Unbaked(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "item/" + type), textures);
         ItemModel.Unbaked blocking = new ShieldModel.Unbaked(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "item/shield_blocking"), textures);
         this.generateBooleanDispatch(item, ItemModelUtils.isUsingItem(), blocking, normal);
     }
