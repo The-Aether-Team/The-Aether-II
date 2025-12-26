@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.client.renderer.entity.state.MimicRenderState;
 import com.aetherteam.aetherii.entity.monster.dungeon.Mimic;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -14,6 +15,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 public class MimicRenderer extends MobRenderer<Mimic, MimicRenderState, MimicModel<MimicRenderState>> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/mimic/sentry_crate_mimic.png");
@@ -46,6 +48,14 @@ public class MimicRenderer extends MobRenderer<Mimic, MimicRenderState, MimicMod
     public void render(MimicRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         super.render(renderState, poseStack, bufferSource, packedLight);
         poseStack.pushPose();
+        if (renderState.deathTime > 0.0F) {
+            float f = (renderState.deathTime - 1.0F) / 20.0F * 1.6F;
+            f = Mth.sqrt(f);
+            if (f > 1.0F) {
+                f = 1.0F;
+            }
+            poseStack.mulPose(Axis.ZN.rotationDegrees(f * this.getFlipDegrees()));
+        }
         poseStack.scale(0.45F, 0.45F, 0.45F);
         poseStack.translate(0.0F, 2.25F, 0.0F);
         poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
