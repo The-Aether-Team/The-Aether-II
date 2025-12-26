@@ -91,8 +91,11 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     private Vec3 targetPoint = null;
     private int attackCooldown = 0;
     public int sliderDeathTime = 0;
-    public boolean upwardFlag;
-    public boolean upwardPostFlag;
+    @Nullable
+    public Direction needMoveState;
+    @Nullable
+    public Direction moveState;
+    public boolean moveYFlag;
 
     public Slider(EntityType<? extends Slider> type, Level level) {
         super(type, level);
@@ -748,7 +751,13 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
         double absX = Math.abs(x);
         double absY = Math.abs(y);
         double absZ = Math.abs(z);
-        if (absY > absX && absY > absZ && !slider.upwardPostFlag) {
+
+
+        if (slider.moveYFlag && slider.moveState != null && slider.moveState != Direction.UP) {
+            return slider.moveState;
+        }
+
+        if (absY > absX && absY > absZ && !slider.moveYFlag) {
             return y > 0 ? Direction.UP : Direction.DOWN;
         } else if (absX > absZ) {
             return x > 0 ? Direction.EAST : Direction.WEST;

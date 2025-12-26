@@ -68,13 +68,20 @@ public class SliderMoveGoal extends Goal {
         this.targetPoint = null;
         this.velocity = 0;
         this.slider.setDeltaMovement(Vec3.ZERO);
-        if (this.slider.upwardFlag) {
-            this.slider.upwardFlag = false;
-            this.slider.upwardPostFlag = true;
+
+        if (this.slider.moveYFlag) {
+            this.slider.moveYFlag = false;
         }
 
-        if (this.slider.upwardPostFlag) {
-            this.slider.upwardPostFlag = false;
+        if (this.slider.moveState != null) {
+            if (this.slider.moveState.getAxis() == Direction.Axis.Y) {
+                this.slider.moveYFlag = true;
+            }
+            this.slider.moveState = null;
+        }
+        if (this.slider.needMoveState != null) {
+            this.slider.moveState = this.slider.needMoveState;
+            this.slider.needMoveState = null;
         }
     }
 
