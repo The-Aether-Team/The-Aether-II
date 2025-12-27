@@ -48,8 +48,8 @@ public class SentrySpawnerBlockEntity extends CustomSpawnerBlockEntity {
         if (blockEntity.firstTick) {
             BaseSpawnerAccessor accessor = (BaseSpawnerAccessor) blockEntity.getSpawner();
             blockEntity.getSpawner().setEntityId(AetherIIEntityTypes.DETONATION_SENTRY.get(), level, level.getRandom(), pos);
-            accessor.aether_ii$setMaxSpawnDelay(150);
-            accessor.aether_ii$setMinSpawnDelay(100);
+            accessor.aether_ii$setMaxSpawnDelay(250);
+            accessor.aether_ii$setMinSpawnDelay(150);
             blockEntity.firstTick = false;
         }
         blockEntity.getSpawner().serverTick((ServerLevel) level, pos);

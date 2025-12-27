@@ -820,7 +820,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARKENIUM_DOOR.get(),
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.get(),
                 AetherIIBlocks.MURAL.get(),
-                AetherIIBlocks.SENTRY_CRATE.get()
+                AetherIIBlocks.SENTRY_CRATE.get(),
+                AetherIIBlocks.SENTRY_SPAWNER.get(),
+                AetherIIBlocks.SENTRY_TRAP.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
                 AetherIIBlocks.SHORT_AETHER_GRASS.get(),

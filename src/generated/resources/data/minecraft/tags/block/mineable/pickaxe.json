@@ -181,6 +181,8 @@
     "aether_ii:arkenium_door",
     "aether_ii:arkenium_trapdoor",
     "aether_ii:mural",
-    "aether_ii:sentry_crate"
+    "aether_ii:sentry_crate",
+    "aether_ii:sentry_spawner",
+    "aether_ii:sentry_trap"
   ]
 }
