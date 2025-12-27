@@ -288,7 +288,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.HOLYSTONE_ABILITY_GUARANTEED).addTag(Tags.Blocks.ORES);
         this.tag(AetherIITags.Blocks.GRAVITITE_ABILITY_BLACKLIST).add(
-                Blocks.PISTON_HEAD
+                Blocks.PISTON_HEAD,
+                AetherIIBlocks.SENTRY_SPAWNER.get(),
+                AetherIIBlocks.SENTRY_TRAP.get()
         );
         this.tag(AetherIITags.Blocks.HOVERING_BLOCK_REPLACE_BLACKLIST).addTags(
                 BlockTags.PORTALS
