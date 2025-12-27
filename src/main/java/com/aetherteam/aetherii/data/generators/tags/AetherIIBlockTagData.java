@@ -74,6 +74,21 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                         AetherIITags.Blocks.AETHER_DIRT,
                         AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
         );
+        this.tag(AetherIITags.Blocks.SENTRY_RUIN_MOSS_REPLACEABLES).add(
+                AetherIIBlocks.UNDERSHALE_BRICKS.get(),
+                AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get(),
+                AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get(),
+                AetherIIBlocks.UNDERSHALE_BRICK_WALL.get(),
+                AetherIIBlocks.SENTRY_BRICKS.get(),
+                AetherIIBlocks.SENTRY_BRICK_STAIRS.get(),
+                AetherIIBlocks.SENTRY_BRICK_SLAB.get(),
+                AetherIIBlocks.SENTRY_BRICK_WALL.get()
+        ).addTags(
+                AetherIITags.Blocks.UNDERSHALE_DECORATIVE_BLOCKS,
+                AetherIITags.Blocks.SENTRY_DECORATIVE_BLOCKS,
+                AetherIITags.Blocks.AETHER_DIRT,
+                AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
+        );
         this.tag(AetherIITags.Blocks.SHAPES_COASTS)
                 .add(Blocks.WATER)
                 .addTags(

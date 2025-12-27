@@ -290,12 +290,17 @@ public class HighlandsConfiguredFeatures {
 
 
     // Dungeon
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_DUNGEON = createKey("bryalinn_moss_dungeon");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_DUNGEON = createKey("shayelinn_moss_dungeon");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_DUNGEON = createKey("ambrelinn_moss_dungeon");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_HOLYSTONE = createKey("pile_holystone");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_UNDERSHALE = createKey("pile_undershale");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_AGIOSITE = createKey("pile_agiosite");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_AMBROSIUM_ORE = createKey("pile_ambrosium_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_ICESTONE = createKey("pile_icestone");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_ARCTIC_PACKED_ICE = createKey("pile_arctic_packed_ice");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILES_MATERIAL_DEPOSIT = createKey("piles_material_deposit");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILES_COLD_STORAGE = createKey("piles_cold_storage");
 
@@ -2356,6 +2361,74 @@ public class HighlandsConfiguredFeatures {
 
     private static void bootstrapDungeon(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+
+        register(
+                context,
+                BRYALINN_MOSS_DUNGEON,
+                Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.SENTRY_RUIN_MOSS_REPLACEABLES,
+                        BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()),
+                        PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                                List.of(
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_CARPET)), 0.2F),
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_FLOWERS)), 0.3F),
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_GRASS_PATCH)), 0.1F)
+                                ),
+                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_VINES), CountPlacement.of(16), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))))),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),
+                        0.35F,
+                        5,
+                        0.925F,
+                        UniformInt.of(1, 4),
+                        0.35F
+                )
+        );
+        register(
+                context,
+                SHAYELINN_MOSS_DUNGEON,
+                Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.SENTRY_RUIN_MOSS_REPLACEABLES,
+                        BlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get()),
+                        PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                                List.of(
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SHAYELINN_MOSS_CARPET)), 0.4F),
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_GRASS_PATCH)), 0.2F)
+                                ),
+                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SHAYELINN_MOSS_VINES), CountPlacement.of(16), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))))),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),
+                        0.35F,
+                        5,
+                        0.925F,
+                        UniformInt.of(1, 4),
+                        0.35F
+                )
+        );
+        register(
+                context,
+                AMBRELINN_MOSS_DUNGEON,
+                Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.SENTRY_RUIN_MOSS_REPLACEABLES,
+                        BlockStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()),
+                        PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                                List.of(
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AMBRELINN_MOSS_CARPET)), 0.4F),
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_GRASS_PATCH)), 0.2F)
+                                ),
+                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AMBRELINN_MOSS_VINES), CountPlacement.of(16), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))))),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),
+                        0.35F,
+                        5,
+                        0.925F,
+                        UniformInt.of(1, 4),
+                        0.35F
+                )
+        );
 
         register(context, PILE_HOLYSTONE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get())));
         register(context, PILE_UNDERSHALE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.UNDERSHALE.get())));
