@@ -29,6 +29,6 @@ public class AetherIIStructureTagData extends StructureTagsProvider {
                 AetherIIStructures.CAMP_MAGNETIC,
                 AetherIIStructures.CAMP_ARCTIC
         );
-        this.tag(AetherIITags.Structures.DUNGEONS).add(AetherIIStructures.SENTRY_WORKSHOP);
+        this.tag(AetherIITags.Structures.DUNGEONS).add(AetherIIStructures.SENTRY_RUINS);
     }
 }

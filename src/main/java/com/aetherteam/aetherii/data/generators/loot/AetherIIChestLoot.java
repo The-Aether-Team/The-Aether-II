@@ -127,9 +127,9 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
         );
 
-        builder.accept(AetherIILoot.CHESTS_DUNGEONS_SENTRY_WORKSHOP_COMMON, LootTable.lootTable()
+        builder.accept(AetherIILoot.CHESTS_DUNGEONS_SENTRY_RUINS_COMMON, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 2.0F))
-                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_SENTRY_WORKSHOP_RARE))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_SENTRY_RUINS_RARE))
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(3.0F, 6.0F))
@@ -156,7 +156,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
         );
 
-        builder.accept(AetherIILoot.CHESTS_DUNGEONS_SENTRY_WORKSHOP_RARE, LootTable.lootTable()
+        builder.accept(AetherIILoot.CHESTS_DUNGEONS_SENTRY_RUINS_RARE, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 1.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.COLD_AERCLOUD_GLIDER).setWeight(2))
                         .add(LootItem.lootTableItem(AetherIIItems.BLUE_AERCLOUD_GLIDER))
@@ -177,9 +177,9 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
         );
 
-        builder.accept(AetherIILoot.CHESTS_DUNGEONS_SENTRY_WORKSHOP_MATERIAL_DEPOSIT, LootTable.lootTable()
+        builder.accept(AetherIILoot.CHESTS_DUNGEONS_SENTRY_RUINS_MATERIAL_DEPOSIT, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 2.0F))
-                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_SENTRY_WORKSHOP_RARE))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_SENTRY_RUINS_RARE))
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(3.0F, 6.0F))
@@ -209,9 +209,9 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
         );
 
-        builder.accept(AetherIILoot.CHESTS_DUNGEONS_SENTRY_WORKSHOP_COLD_STORAGE, LootTable.lootTable()
+        builder.accept(AetherIILoot.CHESTS_DUNGEONS_SENTRY_RUINS_COLD_STORAGE, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 2.0F))
-                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_SENTRY_WORKSHOP_RARE))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_SENTRY_RUINS_RARE))
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(3.0F, 6.0F))
@@ -243,7 +243,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
         );
 
-        builder.accept(AetherIILoot.CHESTS_DUNGEONS_SENTRY_WORKSHOP_BOSS, LootTable.lootTable()
+        builder.accept(AetherIILoot.CHESTS_DUNGEONS_SENTRY_RUINS_BOSS, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_IRRADIATED_ITEMS))
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_MUSIC_DISCS))

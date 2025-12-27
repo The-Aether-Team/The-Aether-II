@@ -51,11 +51,11 @@ public class AetherIILoot {
     public static final ResourceKey<LootTable> CHESTS_DUNGEONS_IRRADIATED_ITEMS = register("chests/dungeons/irradiated_items");
     public static final ResourceKey<LootTable> CHESTS_DUNGEONS_MUSIC_DISCS = register("chests/dungeons/music_discs");
 
-    public static final ResourceKey<LootTable> CHESTS_DUNGEONS_SENTRY_WORKSHOP_COMMON = register("chests/dungeons/sentry_workshop/common");
-    public static final ResourceKey<LootTable> CHESTS_DUNGEONS_SENTRY_WORKSHOP_RARE = register("chests/dungeons/sentry_workshop/rare");
-    public static final ResourceKey<LootTable> CHESTS_DUNGEONS_SENTRY_WORKSHOP_MATERIAL_DEPOSIT = register("chests/dungeons/sentry_workshop/material_deposit");
-    public static final ResourceKey<LootTable> CHESTS_DUNGEONS_SENTRY_WORKSHOP_COLD_STORAGE = register("chests/dungeons/sentry_workshop/cold_storage");
-    public static final ResourceKey<LootTable> CHESTS_DUNGEONS_SENTRY_WORKSHOP_BOSS = register("chests/dungeons/sentry_workshop/boss");
+    public static final ResourceKey<LootTable> CHESTS_DUNGEONS_SENTRY_RUINS_COMMON = register("chests/dungeons/sentry_ruins/common");
+    public static final ResourceKey<LootTable> CHESTS_DUNGEONS_SENTRY_RUINS_RARE = register("chests/dungeons/sentry_ruins/rare");
+    public static final ResourceKey<LootTable> CHESTS_DUNGEONS_SENTRY_RUINS_MATERIAL_DEPOSIT = register("chests/dungeons/sentry_ruins/material_deposit");
+    public static final ResourceKey<LootTable> CHESTS_DUNGEONS_SENTRY_RUINS_COLD_STORAGE = register("chests/dungeons/sentry_ruins/cold_storage");
+    public static final ResourceKey<LootTable> CHESTS_DUNGEONS_SENTRY_RUINS_BOSS = register("chests/dungeons/sentry_ruins/boss");
 
     // Gift
     public static final ResourceKey<LootTable> TAEGORE_DIGGING = register("gameplay/taegore_digging");

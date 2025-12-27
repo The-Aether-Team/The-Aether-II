@@ -32,24 +32,24 @@ import java.util.function.Function;
 /**
  * Starting piece for the Bronze Dungeon. Has the slider.
  */
-public class SentryWorkshopBossRoom extends SentryWorkshopPiece {
-    public SentryWorkshopBossRoom(StructureTemplateManager manager, String name, BlockPos pos, Rotation rotation, Holder<StructureProcessorList> processors) {
-        this(AetherIIStructurePieceTypes.SENTRY_WORKSHOP_BOSS_ROOM.get(), manager, name, AetherTemplateStructurePiece.makeSettingsWithPivot(makeSettings(), manager, SentryWorkshopPiece.makeLocation(name), rotation), pos, processors);
+public class SentryRuinsBossRoom extends SentryRuinsPiece {
+    public SentryRuinsBossRoom(StructureTemplateManager manager, String name, BlockPos pos, Rotation rotation, Holder<StructureProcessorList> processors) {
+        this(AetherIIStructurePieceTypes.SENTRY_RUINS_BOSS_ROOM.get(), manager, name, AetherTemplateStructurePiece.makeSettingsWithPivot(makeSettings(), manager, SentryRuinsPiece.makeLocation(name), rotation), pos, processors);
     }
 
-    public SentryWorkshopBossRoom(StructurePieceSerializationContext context, CompoundTag tag) {
-        this(AetherIIStructurePieceTypes.SENTRY_WORKSHOP_BOSS_ROOM.get(), context.registryAccess(), tag, context.structureTemplateManager(), resourceLocation -> SentryWorkshopBossRoom.makeSettings());
+    public SentryRuinsBossRoom(StructurePieceSerializationContext context, CompoundTag tag) {
+        this(AetherIIStructurePieceTypes.SENTRY_RUINS_BOSS_ROOM.get(), context.registryAccess(), tag, context.structureTemplateManager(), resourceLocation -> SentryRuinsBossRoom.makeSettings());
     }
 
-    public SentryWorkshopBossRoom(StructurePieceType type, StructureTemplateManager manager, String name, StructurePlaceSettings settings, BlockPos pos, Holder<StructureProcessorList> processors) {
+    public SentryRuinsBossRoom(StructurePieceType type, StructureTemplateManager manager, String name, StructurePlaceSettings settings, BlockPos pos, Holder<StructureProcessorList> processors) {
         this(type, manager, makeLocation(name), settings, pos, processors);
     }
 
-    public SentryWorkshopBossRoom(StructurePieceType type, StructureTemplateManager manager, ResourceLocation name, StructurePlaceSettings settings, BlockPos pos, Holder<StructureProcessorList> processors) {
+    public SentryRuinsBossRoom(StructurePieceType type, StructureTemplateManager manager, ResourceLocation name, StructurePlaceSettings settings, BlockPos pos, Holder<StructureProcessorList> processors) {
         super(type, manager, name, settings, pos, processors);
     }
 
-    public SentryWorkshopBossRoom(StructurePieceType type, RegistryAccess access, CompoundTag tag, StructureTemplateManager manager, Function<ResourceLocation, StructurePlaceSettings> settingsFactory) {
+    public SentryRuinsBossRoom(StructurePieceType type, RegistryAccess access, CompoundTag tag, StructureTemplateManager manager, Function<ResourceLocation, StructurePlaceSettings> settingsFactory) {
         super(type, access, tag, manager, settingsFactory);
     }
 

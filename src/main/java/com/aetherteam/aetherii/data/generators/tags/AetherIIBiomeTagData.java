@@ -109,7 +109,7 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HighlandsBiomes.ENDURING_WOODLAND,
                 HighlandsBiomes.SHEER_TUNDRA
         );
-        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_SENTRY_WORKSHOP).add(
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_SENTRY_RUINS).add(
                 HighlandsBiomes.FLOURISHING_FIELD,
                 HighlandsBiomes.VERDANT_WOODS,
                 HighlandsBiomes.SHROUDED_FOREST,

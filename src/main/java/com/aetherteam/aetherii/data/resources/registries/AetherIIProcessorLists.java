@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
-import com.aetherteam.aetherii.world.structure.piece.sentry.SentryWorkshopPiece;
+import com.aetherteam.aetherii.world.structure.piece.sentry.SentryRuinsPiece;
 import com.aetherteam.aetherii.world.structure.processor.BossRoomProcessor;
 import com.aetherteam.aetherii.world.structure.processor.CopyRuleProcessor;
 import com.aetherteam.aetherii.world.structure.processor.MimicContainerProcessor;
@@ -21,9 +21,9 @@ import java.util.List;
 
 public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> CAMP_HIGHFIELDS = createKey("camp_highfields");
-    public static final ResourceKey<StructureProcessorList> SENTRY_WORKSHOP_ROOM = createKey("sentry_workshop_room");
-    public static final ResourceKey<StructureProcessorList> SENTRY_WORKSHOP_TUNNEL = createKey("sentry_workshop_tunnel");
-    public static final ResourceKey<StructureProcessorList> SENTRY_WORKSHOP_BOSS_ROOM = createKey("sentry_workshop_boss_room");
+    public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_ROOM = createKey("sentry_ruins_room");
+    public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_TUNNEL = createKey("sentry_ruins_tunnel");
+    public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_BOSS_ROOM = createKey("sentry_ruins_boss_room");
     public static final ResourceKey<StructureProcessorList> INFECTED_GUARDIAN_TREE = createKey("infected_guardian_tree");
 
     public static void bootstrap(BootstrapContext<StructureProcessorList> context) {
@@ -42,20 +42,20 @@ public class AetherIIProcessorLists {
                 ))
         ));
 
-        register(context, SENTRY_WORKSHOP_ROOM, List.of(
-                SentryWorkshopPiece.CAVE_REPLACEABLE,
-                SentryWorkshopPiece.SENTRY_STONE,
-                SentryWorkshopPiece.ROOM_DECORATION_RANDOMIZATION,
+        register(context, SENTRY_RUINS_ROOM, List.of(
+                SentryRuinsPiece.CAVE_REPLACEABLE,
+                SentryRuinsPiece.SENTRY_STONE,
+                SentryRuinsPiece.ROOM_DECORATION_RANDOMIZATION,
                 MimicContainerProcessor.INSTANCE
         ));
-        register(context, SENTRY_WORKSHOP_TUNNEL, List.of(
-                SentryWorkshopPiece.CAVE_REPLACEABLE,
-                SentryWorkshopPiece.SENTRY_STONE,
+        register(context, SENTRY_RUINS_TUNNEL, List.of(
+                SentryRuinsPiece.CAVE_REPLACEABLE,
+                SentryRuinsPiece.SENTRY_STONE,
                 MimicContainerProcessor.INSTANCE
         ));
-        register(context, SENTRY_WORKSHOP_BOSS_ROOM, List.of(
-                SentryWorkshopPiece.SENTRY_STONE,
-                new CopyRuleProcessor(SentryWorkshopPiece.SENTRY_STONE_LIST),
+        register(context, SENTRY_RUINS_BOSS_ROOM, List.of(
+                SentryRuinsPiece.SENTRY_STONE,
+                new CopyRuleProcessor(SentryRuinsPiece.SENTRY_STONE_LIST),
                 BossRoomProcessor.INSTANCE
         ));
 

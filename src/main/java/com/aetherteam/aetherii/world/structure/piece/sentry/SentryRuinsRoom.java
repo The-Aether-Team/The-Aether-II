@@ -30,13 +30,13 @@ import java.util.Objects;
 /**
  * A normal Bronze Dungeon room or hallway.
  */
-public class SentryWorkshopRoom extends SentryWorkshopPiece {
-    public SentryWorkshopRoom(StructureTemplateManager manager, String name, BlockPos pos, Rotation rotation, Holder<StructureProcessorList> processors) {
-        super(AetherIIStructurePieceTypes.SENTRY_WORKSHOP_ROOM.get(), manager, name, new StructurePlaceSettings().setRotation(rotation), pos, processors);
+public class SentryRuinsRoom extends SentryRuinsPiece {
+    public SentryRuinsRoom(StructureTemplateManager manager, String name, BlockPos pos, Rotation rotation, Holder<StructureProcessorList> processors) {
+        super(AetherIIStructurePieceTypes.SENTRY_RUINS_ROOM.get(), manager, name, new StructurePlaceSettings().setRotation(rotation), pos, processors);
     }
 
-    public SentryWorkshopRoom(StructurePieceSerializationContext context, CompoundTag tag) {
-        super(AetherIIStructurePieceTypes.SENTRY_WORKSHOP_ROOM.get(), context.registryAccess(), tag, context.structureTemplateManager(), resourceLocation -> new StructurePlaceSettings());
+    public SentryRuinsRoom(StructurePieceSerializationContext context, CompoundTag tag) {
+        super(AetherIIStructurePieceTypes.SENTRY_RUINS_ROOM.get(), context.registryAccess(), tag, context.structureTemplateManager(), resourceLocation -> new StructurePlaceSettings());
     }
 
     @Override

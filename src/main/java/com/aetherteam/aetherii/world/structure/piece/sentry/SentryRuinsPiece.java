@@ -20,7 +20,7 @@ import java.util.function.Function;
 /**
  * Superclass for all Bronze Dungeon structure pieces. This exists to simplify the code.
  */
-public abstract class SentryWorkshopPiece extends AetherTemplateStructurePiece {
+public abstract class SentryRuinsPiece extends AetherTemplateStructurePiece {
 
     public static final RuleProcessor CAVE_REPLACEABLE = new RuleProcessor(ImmutableList.of(
             new ProcessorRule(new BlockMatchTest(AetherIIBlocks.ORANGE_CLOUDWOOL.get()), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
@@ -56,19 +56,19 @@ public abstract class SentryWorkshopPiece extends AetherTemplateStructurePiece {
             new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.SENTRY_CRATE.get(), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
     ));
 
-    public SentryWorkshopPiece(StructurePieceType type, StructureTemplateManager manager, String name, StructurePlaceSettings settings, BlockPos pos, Holder<StructureProcessorList> processors) {
+    public SentryRuinsPiece(StructurePieceType type, StructureTemplateManager manager, String name, StructurePlaceSettings settings, BlockPos pos, Holder<StructureProcessorList> processors) {
         this(type, manager, makeLocation(name), settings, pos, processors);
     }
 
-    public SentryWorkshopPiece(StructurePieceType type, StructureTemplateManager manager, ResourceLocation name, StructurePlaceSettings settings, BlockPos pos, Holder<StructureProcessorList> processors) {
+    public SentryRuinsPiece(StructurePieceType type, StructureTemplateManager manager, ResourceLocation name, StructurePlaceSettings settings, BlockPos pos, Holder<StructureProcessorList> processors) {
         super(type, manager, name, settings, pos, processors);
     }
 
-    public SentryWorkshopPiece(StructurePieceType type, RegistryAccess access, CompoundTag tag, StructureTemplateManager manager, Function<ResourceLocation, StructurePlaceSettings> settingsFactory) {
+    public SentryRuinsPiece(StructurePieceType type, RegistryAccess access, CompoundTag tag, StructureTemplateManager manager, Function<ResourceLocation, StructurePlaceSettings> settingsFactory) {
         super(type, access, tag, manager, settingsFactory);
     }
 
     protected static ResourceLocation makeLocation(String name) {
-        return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/" + name);
+        return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/" + name);
     }
 }

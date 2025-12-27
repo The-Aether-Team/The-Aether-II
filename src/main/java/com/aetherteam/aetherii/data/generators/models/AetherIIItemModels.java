@@ -291,6 +291,8 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generatePortalFrameItem(AetherIIItems.AETHER_PORTAL_FRAME.get());
         this.generateFlatItem(AetherIIItems.MURAL_ITEM.get(), ModelTemplates.FLAT_ITEM);
 
+        this.generateFlatItem(AetherIIItems.MUSIC_PLAYER.get(), ModelTemplates.FLAT_ITEM);
+
         // Blocks
         this.generateFlatItem(AetherIIBlocks.ARKENIUM_CHAIN.get().asItem(), ModelTemplates.FLAT_ITEM);
     }

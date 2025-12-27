@@ -18,13 +18,13 @@ import net.neoforged.neoforge.common.world.PieceBeardifierModifier;
 /**
  * The entrance to the Bronze Dungeon. It shouldn't replace air so that it matches the landscape.
  */
-public class SentryWorkshopTunnel extends SentryWorkshopPiece implements PieceBeardifierModifier {
-    public SentryWorkshopTunnel(StructureTemplateManager manager, String name, BlockPos pos, Rotation rotation, Holder<StructureProcessorList> processors) {
-        super(AetherIIStructurePieceTypes.SENTRY_WORKSHOP_TUNNEL.get(), manager, name, new StructurePlaceSettings().setRotation(rotation), pos, processors);
+public class SentryRuinsTunnel extends SentryRuinsPiece implements PieceBeardifierModifier {
+    public SentryRuinsTunnel(StructureTemplateManager manager, String name, BlockPos pos, Rotation rotation, Holder<StructureProcessorList> processors) {
+        super(AetherIIStructurePieceTypes.SENTRY_RUINS_TUNNEL.get(), manager, name, new StructurePlaceSettings().setRotation(rotation), pos, processors);
     }
 
-    public SentryWorkshopTunnel(StructurePieceSerializationContext context, CompoundTag tag) {
-        super(AetherIIStructurePieceTypes.SENTRY_WORKSHOP_TUNNEL.get(), context.registryAccess(), tag, context.structureTemplateManager(), resourceLocation -> new StructurePlaceSettings());
+    public SentryRuinsTunnel(StructurePieceSerializationContext context, CompoundTag tag) {
+        super(AetherIIStructurePieceTypes.SENTRY_RUINS_TUNNEL.get(), context.registryAccess(), tag, context.structureTemplateManager(), resourceLocation -> new StructurePlaceSettings());
     }
 
     @Override

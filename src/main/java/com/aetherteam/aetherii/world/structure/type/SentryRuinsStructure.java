@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.world.structure.type;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.world.structure.piece.sentry.SentryWorkshopBuilder;
-import com.aetherteam.aetherii.world.structure.piece.sentry.SentryWorkshopProcessorSettings;
+import com.aetherteam.aetherii.world.structure.piece.sentry.SentryRuinsBuilder;
+import com.aetherteam.aetherii.world.structure.piece.sentry.SentryRuinsProcessorSettings;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -25,21 +25,21 @@ import org.apache.commons.lang3.mutable.MutableInt;
 
 import java.util.Optional;
 
-public class SentryWorkshopStructure extends Structure {
-    public static final MapCodec<SentryWorkshopStructure> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(
+public class SentryRuinsStructure extends Structure {
+    public static final MapCodec<SentryRuinsStructure> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(
             settingsCodec(builder),
             Codec.INT.fieldOf("max_rooms").forGetter(o -> o.maxRooms),
             Codec.INT.fieldOf("above_bottom").forGetter(o -> o.aboveBottom),
             Codec.INT.fieldOf("below_top").forGetter(o -> o.belowTop),
-            SentryWorkshopProcessorSettings.CODEC.fieldOf("processor_settings").forGetter(o -> o.processors)
-    ).apply(builder, SentryWorkshopStructure::new));
+            SentryRuinsProcessorSettings.CODEC.fieldOf("processor_settings").forGetter(o -> o.processors)
+    ).apply(builder, SentryRuinsStructure::new));
 
     private final int maxRooms;
     private final int aboveBottom;
     private final int belowTop;
-    private final SentryWorkshopProcessorSettings processors;
+    private final SentryRuinsProcessorSettings processors;
 
-    public SentryWorkshopStructure(StructureSettings settings, int maxRooms, int aboveBottom, int belowTop, SentryWorkshopProcessorSettings processors) {
+    public SentryRuinsStructure(StructureSettings settings, int maxRooms, int aboveBottom, int belowTop, SentryRuinsProcessorSettings processors) {
         super(settings);
         this.maxRooms = maxRooms;
         this.aboveBottom = aboveBottom;
@@ -69,7 +69,7 @@ public class SentryWorkshopStructure extends Structure {
     }
 
     private void generatePieces(StructurePiecesBuilder builder, GenerationContext context, BlockPos startPos) {
-        SentryWorkshopBuilder graph = new SentryWorkshopBuilder(context, this.maxRooms, this.processors);
+        SentryRuinsBuilder graph = new SentryRuinsBuilder(context, this.maxRooms, this.processors);
         graph.initializeDungeon(startPos, context, builder);
     }
 
@@ -90,7 +90,7 @@ public class SentryWorkshopStructure extends Structure {
             for (int z = -1; z <= 1; z++) {
                 if (x != 0 || z != 0) {
                     ChunkPos offset = new ChunkPos(chunkPos.x + x, chunkPos.z + z);
-                    y = SentryWorkshopStructure.findStartingHeight(generator, heightAccessor, offset, randomState, templateManager, aboveBottom, belowTop);
+                    y = SentryRuinsStructure.findStartingHeight(generator, heightAccessor, offset, randomState, templateManager, aboveBottom, belowTop);
                     if (y > heightAccessor.getMinY()) {
                         height.setValue(y);
                         return offset;
@@ -123,7 +123,7 @@ public class SentryWorkshopStructure extends Structure {
                 generator.getBaseColumn(maxX, minZ, heightAccessor, random),
                 generator.getBaseColumn(maxX, maxZ, heightAccessor, random)
         };
-        int roomHeight = checkRoomHeight(templateManager, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/boss_room"));
+        int roomHeight = checkRoomHeight(templateManager, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/boss_room"));
         int height = heightAccessor.getMinY();
         int maxHeight = heightAccessor.getMaxY() - belowTop;
         int thickness = roomHeight + 2;
@@ -158,7 +158,7 @@ public class SentryWorkshopStructure extends Structure {
      */
     private static boolean checkEachCornerAtY(NoiseColumn[] columns, int y) {
         for (NoiseColumn column : columns) {
-            if (column.getBlock(y).isAir() || column.getBlock(y).is(AetherIITags.Blocks.NON_SENTRY_WORKSHOP_SPAWNABLE)) {
+            if (column.getBlock(y).isAir() || column.getBlock(y).is(AetherIITags.Blocks.NON_SENTRY_RUINS_SPAWNABLE)) {
                 return false;
             }
         }
@@ -178,6 +178,6 @@ public class SentryWorkshopStructure extends Structure {
 
     @Override
     public StructureType<?> type() {
-        return AetherIIStructureTypes.SENTRY_WORKSHOP.get();
+        return AetherIIStructureTypes.SENTRY_RUINS.get();
     }
 }

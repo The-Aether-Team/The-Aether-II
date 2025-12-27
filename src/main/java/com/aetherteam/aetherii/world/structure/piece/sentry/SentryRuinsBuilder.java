@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
  *
  * @see <a href="https://en.wikipedia.org/wiki/Directed_graph">https://en.wikipedia.org/wiki/Directed_graph</a>
  */
-public class SentryWorkshopBuilder {
+public class SentryRuinsBuilder {
     public static final Map<String, WeightedList.Builder<RoomProvider<?>>> ROOM_OPTIONS_BUILDER = Map.ofEntries(
             Map.entry("boss_room", new WeightedList.Builder<>()),
             Map.entry("chest_room", new WeightedList.Builder<>()),
@@ -48,27 +48,27 @@ public class SentryWorkshopBuilder {
     private static Map<String, WeightedList<RoomProvider<?>>> ROOM_OPTIONS;
     
     static {
-        ROOM_OPTIONS_BUILDER.get("boss_room").add((manager, pos, rotation, processorList) -> new SentryWorkshopBossRoom(manager, "boss_room", pos, rotation, processorList), 1);
+        ROOM_OPTIONS_BUILDER.get("boss_room").add((manager, pos, rotation, processorList) -> new SentryRuinsBossRoom(manager, "boss_room", pos, rotation, processorList), 1);
         ROOM_OPTIONS_BUILDER.get("chest_room")
-                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "rooms/lounge", pos, rotation, processorList), 1)
-                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "rooms/material_deposit", pos, rotation, processorList), 1)
-                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "rooms/cold_storage", pos, rotation, processorList), 1)
-                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "rooms/testing", pos, rotation, processorList), 1)
-                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "rooms/workshop", pos, rotation, processorList), 1)
-                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "rooms/forge", pos, rotation, processorList), 1);
-        ROOM_OPTIONS_BUILDER.get("lobby").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "lobby", pos, rotation, processorList), 1);
-        ROOM_OPTIONS_BUILDER.get("square_tunnel").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "square_tunnel", pos, rotation, processorList), 1);
-        ROOM_OPTIONS_BUILDER.get("staircase").add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "staircase", pos, rotation, processorList), 1);
+                .add((manager, pos, rotation, processorList) -> new SentryRuinsRoom(manager, "rooms/lounge", pos, rotation, processorList), 1)
+                .add((manager, pos, rotation, processorList) -> new SentryRuinsRoom(manager, "rooms/material_deposit", pos, rotation, processorList), 1)
+                .add((manager, pos, rotation, processorList) -> new SentryRuinsRoom(manager, "rooms/cold_storage", pos, rotation, processorList), 1)
+                .add((manager, pos, rotation, processorList) -> new SentryRuinsRoom(manager, "rooms/testing", pos, rotation, processorList), 1)
+                .add((manager, pos, rotation, processorList) -> new SentryRuinsRoom(manager, "rooms/workshop", pos, rotation, processorList), 1)
+                .add((manager, pos, rotation, processorList) -> new SentryRuinsRoom(manager, "rooms/forge", pos, rotation, processorList), 1);
+        ROOM_OPTIONS_BUILDER.get("lobby").add((manager, pos, rotation, processorList) -> new SentryRuinsRoom(manager, "lobby", pos, rotation, processorList), 1);
+        ROOM_OPTIONS_BUILDER.get("square_tunnel").add((manager, pos, rotation, processorList) -> new SentryRuinsRoom(manager, "square_tunnel", pos, rotation, processorList), 1);
+        ROOM_OPTIONS_BUILDER.get("staircase").add((manager, pos, rotation, processorList) -> new SentryRuinsRoom(manager, "staircase", pos, rotation, processorList), 1);
         ROOM_OPTIONS_BUILDER.get("surface_ruin")
-                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "surface_ruins/ruin_01", pos, rotation, processorList), 1)
-                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "surface_ruins/ruin_02", pos, rotation, processorList), 1)
-                .add((manager, pos, rotation, processorList) -> new SentryWorkshopRoom(manager, "surface_ruins/ruin_03", pos, rotation, processorList), 1);
+                .add((manager, pos, rotation, processorList) -> new SentryRuinsRoom(manager, "surface_ruins/ruin_01", pos, rotation, processorList), 1)
+                .add((manager, pos, rotation, processorList) -> new SentryRuinsRoom(manager, "surface_ruins/ruin_02", pos, rotation, processorList), 1)
+                .add((manager, pos, rotation, processorList) -> new SentryRuinsRoom(manager, "surface_ruins/ruin_03", pos, rotation, processorList), 1);
     }
 
     private final Structure.GenerationContext context;
     private final StructureTemplateManager manager;
     private final RandomSource random;
-    private final SentryWorkshopProcessorSettings processors;
+    private final SentryRuinsProcessorSettings processors;
 
     private final int nodeWidth;
     private final int edgeWidth;
@@ -78,16 +78,16 @@ public class SentryWorkshopBuilder {
     private final List<StructurePiece> nodes = new ArrayList<>();
     private final Map<StructurePiece, Map<Direction, Connection>> edges = new HashMap<>();
 
-    public SentryWorkshopBuilder(Structure.GenerationContext context, int maxSize, SentryWorkshopProcessorSettings processors) {
+    public SentryRuinsBuilder(Structure.GenerationContext context, int maxSize, SentryRuinsProcessorSettings processors) {
         this.context = context;
         this.manager = context.structureTemplateManager();
         this.random = context.random();
         this.processors = processors;
 
-        Vec3i nodeSize = context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/rooms/lounge")).getSize();
+        Vec3i nodeSize = context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/rooms/lounge")).getSize();
         this.nodeWidth = nodeSize.getX();
 
-        Vec3i edgeSize = context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/square_tunnel")).getSize();
+        Vec3i edgeSize = context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/square_tunnel")).getSize();
         this.edgeWidth = edgeSize.getX();
         this.edgeLength = edgeSize.getZ();
 
@@ -97,19 +97,19 @@ public class SentryWorkshopBuilder {
     public void initializeDungeon(BlockPos startPos, Structure.GenerationContext genContext, StructurePiecesBuilder builder) {
         ROOM_OPTIONS = ROOM_OPTIONS_BUILDER.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, (e) -> e.getValue().build()));
 
-        StructureTemplate bossTemplate = this.context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/boss_room"));
+        StructureTemplate bossTemplate = this.context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/boss_room"));
 
         Rotation rotation = getBossRoomRotation(startPos, startPos.offset(bossTemplate.getSize()));
         if (rotation == null) { // The space may not be big enough for multiple rooms. If so, stop trying.
             return;
         }
-        SentryWorkshopPiece bossRoom = this.chooseRoom("boss_room", startPos, rotation, this.processors.bossSettings());
+        SentryRuinsPiece bossRoom = this.chooseRoom("boss_room", startPos, rotation, this.processors.bossSettings());
         Direction direction = bossRoom.getOrientation();
         if (direction != null) {
             BlockPos pos = BlockLogicUtil.tunnelFromEvenSquareRoom(bossRoom.getBoundingBox(), direction, this.edgeWidth);
-            SentryWorkshopPiece hallway = this.chooseRoom("square_tunnel", pos, bossRoom.getRotation(), this.processors.roomSettings());
+            SentryRuinsPiece hallway = this.chooseRoom("square_tunnel", pos, bossRoom.getRotation(), this.processors.roomSettings());
             pos = BlockLogicUtil.tunnelFromEvenSquareRoom(hallway.getBoundingBox(), direction, this.nodeWidth);
-            SentryWorkshopPiece defaultRoom = this.chooseRoom("chest_room", pos, hallway.getRotation(), this.processors.roomSettings());
+            SentryRuinsPiece defaultRoom = this.chooseRoom("chest_room", pos, hallway.getRotation(), this.processors.roomSettings());
 
             this.nodes.add(bossRoom);
             this.nodes.add(defaultRoom);
@@ -155,9 +155,9 @@ public class SentryWorkshopBuilder {
             } else {
                 BlockPos pos = BlockLogicUtil.tunnelFromEvenSquareRoom(currentNode.getBoundingBox(), direction, this.edgeWidth);
 
-                SentryWorkshopPiece hallway = this.chooseRoom("square_tunnel", pos, rotation, this.processors.roomSettings());
+                SentryRuinsPiece hallway = this.chooseRoom("square_tunnel", pos, rotation, this.processors.roomSettings());
                 pos = BlockLogicUtil.tunnelFromEvenSquareRoom(hallway.getBoundingBox(), direction, this.nodeWidth);
-                SentryWorkshopPiece room = this.chooseRoom(roomName, pos, rotation, this.processors.roomSettings());
+                SentryRuinsPiece room = this.chooseRoom(roomName, pos, rotation, this.processors.roomSettings());
                 StructurePiece collisionPiece = StructurePiece.findCollisionPiece(this.nodes, room.getBoundingBox());
 
                 if (this.isCloseToCenter(chunkPos, room.templatePosition()) && this.isCoveredAtPos(room.getBoundingBox())) {
@@ -165,7 +165,7 @@ public class SentryWorkshopBuilder {
                         new Connection(currentNode, room, hallway, direction);
                         this.nodes.add(room);
                         return true;
-                    } else if (!(collisionPiece instanceof SentryWorkshopBossRoom)) { // If there's a piece in the way, see if there's a connection already. If not, make one. Then continue the loop.
+                    } else if (!(collisionPiece instanceof SentryRuinsBossRoom)) { // If there's a piece in the way, see if there's a connection already. If not, make one. Then continue the loop.
                         boolean flag = this.edges.computeIfAbsent(collisionPiece, piece -> new HashMap<>()).values().stream()
                                 .map(Connection::endPiece).anyMatch(piece -> piece == currentNode);
                         if (!flag) {
@@ -203,14 +203,14 @@ public class SentryWorkshopBuilder {
         int topSurfaceY = chunkGenerator.getFirstOccupiedHeight(entranceRoomCenter.getX(), entranceRoomCenter.getZ(), Heightmap.Types.OCEAN_FLOOR_WG, level, randomState);
 
         for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY() - stopBeforeSurface) / 6; i++) {
-            SentryWorkshopPiece staircase = this.chooseRoom("staircase", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6, 0), lobbyRotation, this.processors.bossSettings());
+            SentryRuinsPiece staircase = this.chooseRoom("staircase", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6, 0), lobbyRotation, this.processors.bossSettings());
             this.nodes.add(staircase);
 
 
         }
         for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY() - stopBeforeSurface) / 6; i++) {
             if (i++ >= (topSurfaceY - lobbyBounds.maxY() - stopBeforeSurface - 6) / 6) {
-                SentryWorkshopPiece surfaceRuin = this.chooseRoom("surface_ruin", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6, 1), lobbyRotation, this.processors.bossSettings());
+                SentryRuinsPiece surfaceRuin = this.chooseRoom("surface_ruin", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6, 1), lobbyRotation, this.processors.bossSettings());
                 this.nodes.add(surfaceRuin);
             }
         }
@@ -229,7 +229,7 @@ public class SentryWorkshopBuilder {
         return new BlockPos(lobbyBounds.minX() + 6 - offset, y, lobbyBounds.minZ() + 16 + offset);
     }
 
-    public SentryWorkshopPiece chooseRoom(String name, BlockPos pos, Rotation rotation, Holder<StructureProcessorList> processors) {
+    public SentryRuinsPiece chooseRoom(String name, BlockPos pos, Rotation rotation, Holder<StructureProcessorList> processors) {
         WeightedList<RoomProvider<?>> list = ROOM_OPTIONS.get(name);
         if (list != null) {
             Optional<RoomProvider<?>> option = list.getRandom(this.random);
@@ -237,7 +237,7 @@ public class SentryWorkshopBuilder {
                 return option.get().provide(this.manager, pos, rotation, processors);
             }
         }
-        return new SentryWorkshopRoom(this.manager, name, pos, rotation, processors);
+        return new SentryRuinsRoom(this.manager, name, pos, rotation, processors);
     }
 
     /**
@@ -311,7 +311,7 @@ public class SentryWorkshopBuilder {
      */
     @Nullable
     private Rotation getBossRoomRotation(BlockPos minPos, BlockPos maxPos) {
-        StructureTemplate template = this.context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_workshop/rooms/lounge"));
+        StructureTemplate template = this.context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/rooms/lounge"));
         RandomSource random = this.context.random();
         BoundingBox bossBox = new BoundingBox(minPos.getX(), minPos.getY(), minPos.getZ(), maxPos.getX(), maxPos.getY(), maxPos.getZ());
 
@@ -338,7 +338,7 @@ public class SentryWorkshopBuilder {
     private static boolean isSolidInColumns(NoiseColumn[] columns, int minY, int maxY) {
         for (NoiseColumn column : columns) {
             for (int y = minY; y <= maxY; ++y) {
-                if (column.getBlock(y).isAir() || column.getBlock(y).is(AetherIITags.Blocks.NON_SENTRY_WORKSHOP_SPAWNABLE)) {
+                if (column.getBlock(y).isAir() || column.getBlock(y).is(AetherIITags.Blocks.NON_SENTRY_RUINS_SPAWNABLE)) {
                     return false;
                 }
             }
@@ -347,7 +347,7 @@ public class SentryWorkshopBuilder {
     }
 
     @FunctionalInterface
-    public interface RoomProvider<T extends SentryWorkshopPiece> {
+    public interface RoomProvider<T extends SentryRuinsPiece> {
         T provide(StructureTemplateManager manager, BlockPos pos, Rotation rotation, Holder<StructureProcessorList> processors);
     }
 
@@ -371,7 +371,7 @@ public class SentryWorkshopBuilder {
             this.start = start;
             this.end = end;
             this.hallway = hallway;
-            SentryWorkshopBuilder.this.edges.computeIfAbsent(start, piece -> new HashMap<>()).put(direction, this);
+            SentryRuinsBuilder.this.edges.computeIfAbsent(start, piece -> new HashMap<>()).put(direction, this);
         }
 
         public StructurePiece endPiece() {
