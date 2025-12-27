@@ -1,9 +1,7 @@
 package com.aetherteam.aetherii.world.structure.processor;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.dungeon.CopyBlock;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.UnmodifiableIterator;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -28,29 +26,22 @@ public class CopyRuleProcessor extends StructureProcessor {
     @SuppressWarnings("deprecation")
     @Override
     public @Nullable StructureTemplate.StructureBlockInfo process(LevelReader level, BlockPos offset, BlockPos pos, StructureTemplate.StructureBlockInfo blockInfo, StructureTemplate.StructureBlockInfo relativeBlockInfo, StructurePlaceSettings settings, @Nullable StructureTemplate template) {
-        RandomSource random = RandomSource.create(Mth.getSeed(relativeBlockInfo.pos()));
-        BlockState state = level.getBlockState(relativeBlockInfo.pos());
-
+        RandomSource random = RandomSource.create(Mth.getSeed(blockInfo.pos()));
+        BlockState state = blockInfo.state();
         if (state.getBlock() instanceof CopyBlock) {
-//            AetherII.LOGGER.info("1");
-            CompoundTag tag = relativeBlockInfo.nbt();
+            CompoundTag tag = blockInfo.nbt();
             if (tag != null) {
-//                AetherII.LOGGER.info("2");
                 Optional<BlockState> copyState = tag.read("copy_state", BlockState.CODEC);
                 if (copyState.isPresent()) {
-//                    AetherII.LOGGER.info("3");
                     for (ProcessorRule rule : this.rules) {
-//                        AetherII.LOGGER.info("4");
                         if (rule.test(copyState.get(), state, blockInfo.pos(), relativeBlockInfo.pos(), pos, random)) {
-//                            AetherII.LOGGER.info("5");
-                            tag.store("copy_state", BlockState.CODEC, rule.getOutputState());
-                            return new StructureTemplate.StructureBlockInfo(relativeBlockInfo.pos(), relativeBlockInfo.state(), tag);
+                            blockInfo.nbt().store("copy_state", BlockState.CODEC, rule.getOutputState());
                         }
                     }
                 }
             }
         }
-        return relativeBlockInfo;
+        return super.process(level, offset, pos, blockInfo, relativeBlockInfo, settings, template);
     }
 
     @Override
