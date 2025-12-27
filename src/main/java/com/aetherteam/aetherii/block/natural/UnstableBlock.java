@@ -28,7 +28,7 @@ public class UnstableBlock extends Block {
         if (random.nextInt(7) == 0) {
             this.causeDestroyEffects(level, state, pos, null);
         }
-        level.removeBlock(pos, false)
+        level.removeBlock(pos, false);
         super.tick(state, level, pos, random);
     }
 
