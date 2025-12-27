@@ -842,6 +842,7 @@
   "gui.aether_ii.recipebook.toggleRecipes.enchantable": "Showing Enchantable",
   "gui.aether_ii.recipebook.toggleRecipes.purifiable": "Showing Purifiable",
   "gui.aether_ii.slider.message.attack.invalid": "Hmm. Perhaps I need to attack it with a Pickaxe?",
+  "gui.aether_ii.slider.title": "Slider %s",
   "gui.aether_ii.toast.guidebook.bestiary": "New Bestiary Entry!",
   "gui.aether_ii.toast.guidebook.description": "Check your Guidebook",
   "gui.aether_ii.toast.guidebook.effects": "New Effects Entry!",

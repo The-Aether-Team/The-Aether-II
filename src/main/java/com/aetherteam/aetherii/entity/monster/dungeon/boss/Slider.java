@@ -21,6 +21,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -58,10 +59,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enemy, IEntityWithComplexSpawn {
@@ -110,7 +108,16 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnReason, @Nullable SpawnGroupData spawnData) {
-        this.setBossName(Component.translatable("entity.aether_ii.slider"));
+        MutableComponent mk = Component.literal("Mk.E-");
+        for (int i = 0; i < 4; i++) {
+            if (this.getRandom().nextBoolean()) {
+                mk.append(Component.literal(String.valueOf(this.random.nextInt(10))));
+            } else {
+                mk.append(Component.literal(String.valueOf((char) (this.getRandom().nextInt(26) + 'a')).toUpperCase()));
+            }
+        }
+        MutableComponent name = Component.translatable("gui.aether_ii.slider.title", mk);
+        this.setBossName(name);
         this.moveOrInterpolateTo(new Vec3(Mth.floor(this.getX()), this.getY(), Mth.floor(this.getZ())), 0, 0); // Aligns the Slider with the blocks below it.
         return spawnData;
     }
