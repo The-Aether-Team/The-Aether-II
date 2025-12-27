@@ -30,7 +30,7 @@ public class AetherIIPools {
         context.register(Pools.EMPTY, new StructureTemplatePool(fallback, ImmutableList.of(), StructureTemplatePool.Projection.RIGID));
 
         OutpostPools.bootstrap(context);
-        CampHighfieldsPools.bootstrap(context);
+        CampPools.bootstrap(context);
         InfectedGuardianTreePools.bootstrap(context);
     }
 

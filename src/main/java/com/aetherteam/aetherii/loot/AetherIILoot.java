@@ -43,10 +43,10 @@ public class AetherIILoot {
     public static final ResourceKey<LootTable> SHEARING_SHEEPUFF = register("shearing/sheepuff");
 
     // Chests
-    public static final ResourceKey<LootTable> CHESTS_CAMP_HIGHFIELDS = register("chests/camp_highfields");
-    public static final ResourceKey<LootTable> CHESTS_CAMP_HIGHFIELDS_FARMER = register("chests/camp_highfields_farmer");
-    public static final ResourceKey<LootTable> CHESTS_CAMP_HIGHFIELDS_HUNTER = register("chests/camp_highfields_hunter");
-    public static final ResourceKey<LootTable> CHESTS_CAMP_HIGHFIELDS_FLETCHER = register("chests/camp_highfields_fletcher");
+    public static final ResourceKey<LootTable> CHESTS_CAMP_SELECTOR = register("chests/camp/selector");
+    public static final ResourceKey<LootTable> CHESTS_CAMP_FARMER = register("chests/camp/farmer");
+    public static final ResourceKey<LootTable> CHESTS_CAMP_HUNTER = register("chests/camp/hunter");
+    public static final ResourceKey<LootTable> CHESTS_CAMP_FLETCHER = register("chests/camp/fletcher");
 
     public static final ResourceKey<LootTable> CHESTS_DUNGEONS_IRRADIATED_ITEMS = register("chests/dungeons/irradiated_items");
     public static final ResourceKey<LootTable> CHESTS_DUNGEONS_MUSIC_DISCS = register("chests/dungeons/music_discs");

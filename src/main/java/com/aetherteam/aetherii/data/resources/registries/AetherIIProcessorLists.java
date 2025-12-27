@@ -16,13 +16,13 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.*;
 import java.util.List;
 
 public class AetherIIProcessorLists {
-    public static final ResourceKey<StructureProcessorList> CAMP_HIGHFIELDS = createKey("camp_highfields");
+    public static final ResourceKey<StructureProcessorList> CAMP = createKey("camp");
     public static final ResourceKey<StructureProcessorList> INFECTED_GUARDIAN_TREE = createKey("infected_guardian_tree");
 
     public static void bootstrap(BootstrapContext<StructureProcessorList> context) {
         HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
 
-        register(context, CAMP_HIGHFIELDS, ImmutableList.of(
+        register(context, CAMP, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.COARSE_AETHER_DIRT.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.HOLYSTONE.get(), 0.3F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState()),
