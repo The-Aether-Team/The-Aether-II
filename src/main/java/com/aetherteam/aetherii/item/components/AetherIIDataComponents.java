@@ -44,4 +44,5 @@ public class AetherIIDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<UUID>> COMPANION_UUID = DATA_COMPONENT_TYPES.register("companion_uuid", () -> DataComponentType.<UUID>builder().persistent(UUIDUtil.CODEC).networkSynchronized(UUIDUtil.STREAM_CODEC).build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<CompoundTag>> COMPANION_NBT = DATA_COMPONENT_TYPES.register("companion_tag", () -> DataComponentType.<CompoundTag>builder().persistent(CompoundTag.CODEC).networkSynchronized(ByteBufCodecs.COMPOUND_TAG).build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> MIMIC = DATA_COMPONENT_TYPES.register("mimic", () -> DataComponentType.<Boolean>builder().persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL).build());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<StoredMusic>> STORED_MUSIC = DATA_COMPONENT_TYPES.register("stored_music", () -> DataComponentType.<StoredMusic>builder().persistent(StoredMusic.CODEC).networkSynchronized(StoredMusic.STREAM_CODEC).build());
 }
