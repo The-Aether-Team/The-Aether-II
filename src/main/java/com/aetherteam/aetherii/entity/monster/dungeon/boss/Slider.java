@@ -94,6 +94,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     @Nullable
     public Direction moveState;
     public boolean moveYFlag;
+    public float lastHealthStage = 0.0F;
 
     public Slider(EntityType<? extends Slider> type, Level level) {
         super(type, level);
@@ -163,10 +164,17 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
         }
         if (this.isAwake()) {
             this.evaporate();
-            this.triggerTraps();
         }
         if (this.getChatCooldown() > 0) {
             this.chatCooldown--;
+        }
+
+        if (this.level() instanceof ServerLevel serverLevel) {
+            float stageIncrement = this.getMaxHealth() / 18.0F;
+            if (this.getHealth() <= this.lastHealthStage - stageIncrement) {
+                this.triggerTrap(serverLevel);
+                this.lastHealthStage = this.getHealth();
+            }
         }
     }
 
@@ -180,22 +188,18 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
         AetherBossMob.super.evaporate(this, minMax.getLeft(), minMax.getRight(), (blockState) -> true);
     }
 
-    private void triggerTraps() {
-        if (this.level() instanceof ServerLevel serverLevel) {
-            if (this.getRandom().nextInt(250) == 50) {
-                if (this.getDungeon() != null) {
-                    AABB bounds = this.getDungeon().roomBounds();
-                    List<BlockPos> positions = new ArrayList<>();
-                    BlockPos.betweenClosed((int) bounds.minX, (int) bounds.minY, (int) bounds.minZ, (int) bounds.maxX, (int) bounds.minY + 2, (int) bounds.maxZ).forEach(position -> positions.add(position.immutable()));
-                    Collections.shuffle(positions);
-                    for (BlockPos pos : positions) {
-                        BlockState oldState = serverLevel.getBlockState(pos);
-                        if (oldState.is(AetherIIBlocks.SENTRY_TRAP) && oldState.getValue(GroundTrapBlock.LOCKED) && oldState.getValue(GroundTrapBlock.TRAP_STATE) == AetherIIBlockStateProperties.TrapState.LOADED) {
-                            BlockState newState = oldState.setValue(GroundTrapBlock.TRAP_STATE,  AetherIIBlockStateProperties.TrapState.TRIGGERED);
-                            serverLevel.setBlock(pos, newState, 1 | 2);
-                            break;
-                        }
-                    }
+    private void triggerTrap(ServerLevel serverLevel) {
+        if (this.getDungeon() != null) {
+            AABB bounds = this.getDungeon().roomBounds();
+            List<BlockPos> positions = new ArrayList<>();
+            BlockPos.betweenClosed((int) bounds.minX, (int) bounds.minY, (int) bounds.minZ, (int) bounds.maxX, (int) bounds.minY + 2, (int) bounds.maxZ).forEach(position -> positions.add(position.immutable()));
+            Collections.shuffle(positions);
+            for (BlockPos pos : positions) {
+                BlockState oldState = serverLevel.getBlockState(pos);
+                if (oldState.is(AetherIIBlocks.SENTRY_TRAP) && oldState.getValue(GroundTrapBlock.LOCKED) && oldState.getValue(GroundTrapBlock.TRAP_STATE) == AetherIIBlockStateProperties.TrapState.LOADED) {
+                    BlockState newState = oldState.setValue(GroundTrapBlock.TRAP_STATE,  AetherIIBlockStateProperties.TrapState.TRIGGERED);
+                    serverLevel.setBlock(pos, newState, 1 | 2);
+                    break;
                 }
             }
         }
@@ -345,6 +349,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
             this.playSound(this.getAwakenSound(), 2.5F, 1.0F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
         }
         this.setHealth(this.getMaxHealth());
+        this.lastHealthStage = this.getMaxHealth();
         this.setAwake(true);
         this.setBossFight(true);
         if (this.getDungeon() != null) {
@@ -971,6 +976,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
         super.addAdditionalSaveData(output);
         this.addBossSaveData(output);
         output.putBoolean("Awake", this.isAwake());
+        output.putFloat("LastHealthStage", this.lastHealthStage);
     }
 
     /**
@@ -981,6 +987,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
         super.readAdditionalSaveData(input);
         this.readBossSaveData(input);
         this.setAwake(input.getBooleanOr("Awake", false));
+        this.lastHealthStage = input.getFloatOr("LastHealthStage", this.getMaxHealth());
     }
 
     @Override
