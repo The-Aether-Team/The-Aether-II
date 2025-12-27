@@ -288,7 +288,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.HOLYSTONE_ABILITY_GUARANTEED).addTag(Tags.Blocks.ORES);
         this.tag(AetherIITags.Blocks.GRAVITITE_ABILITY_BLACKLIST).add(
-                Blocks.PISTON_HEAD
+                Blocks.PISTON_HEAD,
+                AetherIIBlocks.SENTRY_SPAWNER.get(),
+                AetherIIBlocks.SENTRY_TRAP.get()
         );
         this.tag(AetherIITags.Blocks.HOVERING_BLOCK_REPLACE_BLACKLIST).addTags(
                 BlockTags.PORTALS
@@ -820,7 +822,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARKENIUM_DOOR.get(),
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.get(),
                 AetherIIBlocks.MURAL.get(),
-                AetherIIBlocks.SENTRY_CRATE.get()
+                AetherIIBlocks.SENTRY_CRATE.get(),
+                AetherIIBlocks.SENTRY_SPAWNER.get(),
+                AetherIIBlocks.SENTRY_TRAP.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
                 AetherIIBlocks.SHORT_AETHER_GRASS.get(),
