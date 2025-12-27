@@ -167,6 +167,10 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:cloudwool_bedroll"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:hide_bundle"
         }
       ],
       "rolls": {

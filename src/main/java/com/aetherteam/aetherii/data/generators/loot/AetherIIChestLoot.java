@@ -60,6 +60,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
                         .add(LootItem.lootTableItem(AetherIIBlocks.CLOUDWOOL_BEDROLL))
+                        .add(LootItem.lootTableItem(AetherIIItems.HIDE_BUNDLE))
                 )
         );
 
