@@ -31,7 +31,7 @@ public class DetonationSentry extends PathfinderMob {
     private static final EntityDataAccessor<Boolean> DATA_AWAKE_ID = SynchedEntityData.defineId(DetonationSentry.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_IS_IGNITED = SynchedEntityData.defineId(DetonationSentry.class, EntityDataSerializers.BOOLEAN);
 
-    private static final float EXPLOSION_RADIUS = 2.5F;
+    private static final float EXPLOSION_RADIUS = 2.0F;
     public static final int MAX_TIMER = 60;
     private int oldTimer;
     private int timer;
