@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.dungeon.GroundTrapBlock;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.BaseSpawnerAccessor;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.util.RandomSource;
@@ -78,7 +79,13 @@ public abstract class GroundTrapBlockEntity extends CustomSpawnerBlockEntity {
                                 GroundTrapBlockEntity.this.setChanged();
 
                                 if (serverLevel.tryAddFreshEntityWithPassengers(entity)) {
-                                    serverLevel.levelEvent(2004, pos, 0);
+                                    for (int l = 0; l < 20; l++) {
+                                        double x = pos.getX() + 0.5 + (random.nextDouble() - 0.5) * 2.0;
+                                        double y = pos.getY() + 0.5 + (random.nextDouble() - 0.5) * 2.0;
+                                        double z = pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 2.0;
+                                        serverLevel.sendParticles(ParticleTypes.SMOKE, x, y, z, 1, 0.0, 0.0, 0.0, 0.0);
+                                        serverLevel.sendParticles(ParticleTypes.WHITE_SMOKE, x, y, z, 1, 0.0, 0.0, 0.0, 0.0);
+                                    }
                                     serverLevel.gameEvent(entity, GameEvent.ENTITY_PLACE, vecPos);
                                     mob.spawnAnim();
                                 }

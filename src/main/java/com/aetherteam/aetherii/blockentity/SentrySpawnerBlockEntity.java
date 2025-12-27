@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.BaseSpawnerAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -175,7 +176,13 @@ public class SentrySpawnerBlockEntity extends CustomSpawnerBlockEntity {
 
                     if (this.delayedEntity != null && SentrySpawnerBlockEntity.this.pistonScale == 1.0F) {
                         if (serverLevel.tryAddFreshEntityWithPassengers(this.delayedEntity)) {
-                            serverLevel.levelEvent(2004, pos, 0);
+                            for (int l = 0; l < 20; l++) {
+                                double x = pos.getX() + 0.5 + (random.nextDouble() - 0.5) * 2.0;
+                                double y = pos.getY() + 0.5 + (random.nextDouble() - 0.5) * 2.0;
+                                double z = pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 2.0;
+                                serverLevel.sendParticles(ParticleTypes.SMOKE, x, y, z, 1, 0.0, 0.0, 0.0, 0.0);
+                                serverLevel.sendParticles(ParticleTypes.WHITE_SMOKE, x, y, z, 1, 0.0, 0.0, 0.0, 0.0);
+                            }
                             serverLevel.gameEvent(this.delayedEntity, GameEvent.ENTITY_PLACE, this.delayedEntity.position());
                             this.delayedEntity.spawnAnim();
 
