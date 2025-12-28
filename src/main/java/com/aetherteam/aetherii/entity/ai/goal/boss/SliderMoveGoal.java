@@ -68,21 +68,6 @@ public class SliderMoveGoal extends Goal {
         this.targetPoint = null;
         this.velocity = 0;
         this.slider.setDeltaMovement(Vec3.ZERO);
-
-        if (this.slider.moveYFlag) {
-            this.slider.moveYFlag = false;
-        }
-
-        if (this.slider.moveState != null) {
-            if (this.slider.moveState.getAxis() == Direction.Axis.Y) {
-                this.slider.moveYFlag = true;
-            }
-            this.slider.moveState = null;
-        }
-        if (this.slider.needMoveState != null) {
-            this.slider.moveState = this.slider.needMoveState;
-            this.slider.needMoveState = null;
-        }
     }
 
     @Override
@@ -92,8 +77,7 @@ public class SliderMoveGoal extends Goal {
 
     /**
      * Get the move direction if it already exists, or calculate a new one.
-     *
-     * @param slider      The {@link Slider} that the brain belongs to.
+     * @param slider The {@link Slider} that the brain belongs to.
      * @param targetPoint The target {@link Vec3} position.
      * @return The {@link Direction} to move in.
      */
@@ -104,7 +88,7 @@ public class SliderMoveGoal extends Goal {
             double x = targetPoint.x - slider.getX();
             double y = targetPoint.y - slider.getY();
             double z = targetPoint.z - slider.getZ();
-            moveDir = Slider.calculateDirection(slider, x, y, z);
+            moveDir = Slider.calculateDirection(x, y, z);
             slider.setMoveDirection(moveDir);
         }
         return moveDir;
@@ -112,7 +96,6 @@ public class SliderMoveGoal extends Goal {
 
     /**
      * Gets the calculated distance between two points on one axis.
-     *
      * @param direction The axis and direction to move along {@link Direction}.
      * @return The calculated distance.
      */

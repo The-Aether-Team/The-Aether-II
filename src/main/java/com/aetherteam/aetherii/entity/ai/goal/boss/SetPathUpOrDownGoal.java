@@ -55,7 +55,7 @@ public class SetPathUpOrDownGoal extends Goal {
         for (int x = Mth.floor(currentPath.minX); x < currentPath.maxX; x++) {
             for (int z = Mth.floor(currentPath.minZ); z < currentPath.maxZ; z++) {
                 BlockState state = this.slider.level().getBlockState(pos.set(x, targetPos.y(), z));
-                if (isBreakable(state, pos)) {
+                if (state.is(AetherIITags.Blocks.SLIDER_UNBREAKABLE)) {
                     return;
                 }
             }
@@ -66,10 +66,6 @@ public class SetPathUpOrDownGoal extends Goal {
         this.slider.setTargetPoint(new Vec3(currentPos.x(), y, currentPos.z()));
     }
 
-    private boolean isBreakable(BlockState blockState, BlockPos pos) {
-        return !blockState.isAir() && !blockState.is(AetherIITags.Blocks.SLIDER_UNBREAKABLE) && blockState.getBlock().defaultDestroyTime() >= 0.0F && blockState.getBlock().defaultDestroyTime() < 100.0F && blockState.getBlock().canEntityDestroy(blockState, this.slider.level(), pos, this.slider);
-    }
-
     @Override
     public boolean requiresUpdateEveryTick() {
         return true;
@@ -77,7 +73,6 @@ public class SetPathUpOrDownGoal extends Goal {
 
     /**
      * Attempts to get a target position to move to.
-     *
      * @param slider The {@link Slider} that the brain belongs to.
      * @return The {@link Vec3} position.
      */
@@ -92,11 +87,10 @@ public class SetPathUpOrDownGoal extends Goal {
 
     /**
      * Creates an AABB expanded to the point the slider wants to go to.
-     *
      * @param box The original {@link AABB}.
-     * @param x   The {@link Double} for the x-direction to expand to.
-     * @param y   The {@link Double} for the y-direction to expand to.
-     * @param z   The {@link Double} for the z-direction to expand to.
+     * @param x The {@link Double} for the x-direction to expand to.
+     * @param y The {@link Double} for the y-direction to expand to.
+     * @param z The {@link Double} for the z-direction to expand to.
      */
     private static AABB calculatePathBox(AABB box, double x, double y, double z) {
         return box.expandTowards(x, y, z);

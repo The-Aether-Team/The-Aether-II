@@ -345,7 +345,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 Blocks.MOVING_PISTON,
                 Blocks.LIGHT,
                 Blocks.REINFORCED_DEEPSLATE,
-                AetherIIBlocks.LOCKED_BLOCK.get()
+                AetherIIBlocks.LOCKED_BLOCK.get(),
+                AetherIIBlocks.BOSS_DOORWAY_BLOCK.get(),
+                AetherIIBlocks.TREASURE_DOORWAY_BLOCK.get()
         );
 
         // Vanilla
