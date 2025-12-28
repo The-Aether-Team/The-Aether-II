@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.block.natural;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -14,7 +13,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
@@ -25,8 +23,8 @@ public class UnstableBlock extends Block {
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (random.nextInt(3) == 0) {
-            this.causeDestroyEffects(level, state, pos, null);
+        if (random.nextInt(5) == 0) {
+            level.levelEvent(2001, pos, Block.getId(state));
         }
         level.removeBlock(pos, false);
         super.tick(state, level, pos, random);
@@ -44,7 +42,7 @@ public class UnstableBlock extends Block {
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
         if (entity instanceof Player player && !player.isCrouching()) {
             if (entity.tickCount % 5 == 0) {
-                this.causeDestroyEffects(level, state, pos, entity);
+                level.levelEvent(2001, pos, Block.getId(state));
             }
             level.scheduleTick(pos, this, 20);
         }
@@ -55,15 +53,9 @@ public class UnstableBlock extends Block {
     protected void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
         if (projectile.getType().is(EntityTypeTags.IMPACT_PROJECTILES)) {
             BlockPos pos = hit.getBlockPos();
-            this.causeDestroyEffects(level, state, pos, projectile);
+            level.levelEvent(2001, pos, Block.getId(state));
             level.scheduleTick(pos, this, 2);
         }
         super.onProjectileHit(level, state, hit, projectile);
-    }
-
-    protected void causeDestroyEffects(Level level, BlockState state, BlockPos pos, Entity entity) {
-        SoundType sound = this.getSoundType(state, level, pos, entity);
-        level.playLocalSound(pos, sound.getBreakSound(), SoundSource.BLOCKS, (sound.getVolume() + 1.0F) / 2.0F, sound.getPitch() * 0.4F, false);
-        level.addDestroyBlockEffect(pos, state);
     }
 }
