@@ -123,11 +123,11 @@ public class SentryGolemModel extends EntityModel<SentryGolemRenderState> implem
         float f1 = golem.walkAnimationPos;
         this.head.xRot = (golem.xRot * Mth.DEG_TO_RAD) + 0.0873F;
         this.head.yRot = golem.yRot * Mth.DEG_TO_RAD;
-        this.walkAnimation.applyWalk(f1, f * (1.0F - golem.dashScale), 1.0F, 1.0F);
-        this.runAnimation.applyWalk(f1, f * (golem.dashScale), 1.0F, 1.0F);
+        this.walkAnimation.applyWalk(f1, f, 1.0F, 1.0F);
+        this.runAnimation.applyWalk(f1, f, 1.0F, 1.0F);
+        this.idleAnimation.applyWalk(golem.ageInTicks, golem.ageInTicks, 1.0F, 1.0F);
         this.checkSelfAnimation.apply(golem.checkSelfAnimationState, golem.ageInTicks, 1F);
         this.lookAroundAnimation.apply(golem.lookAroundAnimationState, golem.ageInTicks, 1F);
-        this.idleAnimation.apply(golem.idleAnimationState, golem.ageInTicks, 1F);
         this.attackAnimation.apply(golem.attackAnimationState, golem.ageInTicks, 1.0F);
         this.attackReadyAnimation.apply(golem.attackReadyAnimationState, golem.ageInTicks, 1.0F);
         this.rangeAttackAnimation.apply(golem.attackRangeAnimationState, golem.ageInTicks, 1.0F);

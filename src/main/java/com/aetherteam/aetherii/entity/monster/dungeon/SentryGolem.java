@@ -45,7 +45,6 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
     private SentryGolemStrollGoal randomStrollGoal;
     private final ItemCooldowns cooldowns;
 
-    public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState checkSelfAnimationState = new AnimationState();
     public final AnimationState lookAroundAnimationState = new AnimationState();
     public final AnimationState attackAnimationState = new AnimationState();
@@ -58,13 +57,9 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
     public int attackRangeAnimationTick;
     public final int attackRangeAnimationLength = 20;
 
-    private float dashScale;
-    private float dashOldScale;
-
     private int idleAnimationCooldown;
     private int idleTick;
     public final int idleLength = 120;
-    private int hurtAnimationTick;
 
     public SentryGolem(EntityType<? extends SentryGolem> entityType, Level level) {
         super(entityType, level);
@@ -117,7 +112,6 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
                 this.randomStrollGoal.setInterval(RandomStrollGoal.DEFAULT_INTERVAL);
             }
         } else {
-            this.setupRunning();
             this.setupAnimationStates();
         }
         this.cooldowns.tick();
@@ -127,37 +121,6 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
     public void aiStep() {
         this.updateSwingTime();
         super.aiStep();
-    }
-
-    private void setupRunning() {
-        this.dashOldScale = this.dashScale;
-        if (this.isDash()) {
-            this.dashScale = Mth.clamp(this.dashScale + 0.1F, 0.0F, 1.0F);
-        } else {
-            this.dashScale = Mth.clamp(this.dashScale - 0.1F, 0.0F, 1.0F);
-        }
-
-        if (this.hurtAnimationTick > 0) {
-            this.hurtAnimationTick--;
-        }
-    }
-
-    public float getDashAnimationScale(float partialTick) {
-        return Mth.lerp(partialTick, this.dashOldScale, this.dashScale);
-    }
-
-    private boolean isDash() {
-        //don't forget about swing after hurt
-        return this.getDeltaMovement().horizontalDistanceSqr() > 0.015F || this.hurtAnimationTick > 0;
-    }
-
-    @Override
-    public void handleDamageEvent(DamageSource p_270229_) {
-        super.handleDamageEvent(p_270229_);
-        //don't forget about swing after hurt
-        this.dashScale = 1.0F;
-        this.dashOldScale = 1.0F;
-        this.hurtAnimationTick = 40;
     }
 
     private void setupIdleAnimationCooldown() {
@@ -172,7 +135,6 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
                 this.lookAroundAnimationState.start(this.tickCount);
             }
             this.idleTick = 0;
-            this.idleAnimationState.stop();
             this.setupIdleAnimationCooldown();
         }
 
@@ -184,7 +146,6 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
         if (this.idleTick >= this.idleLength) {
             this.checkSelfAnimationState.stop();
             this.lookAroundAnimationState.stop();
-            this.idleAnimationState.startIfStopped(this.tickCount);
         }
 
         if (this.attackAnimationTick < this.attackAnimationLength) {
