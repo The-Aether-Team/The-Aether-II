@@ -609,9 +609,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
         this.add(AetherIISoundEvents.ENTITY_KIRRID_HURT,
                 definition().with(
-                        sound("aether_ii:entity/kirrid/say1"),
-                        sound("aether_ii:entity/kirrid/say2"),
-                        sound("aether_ii:entity/kirrid/say3")
+                        sound("aether_ii:entity/kirrid/hurt")
                 ).subtitle("subtitles.aether_ii.entity.kirrid.hurt")
         );
         this.add(AetherIISoundEvents.ENTITY_KIRRID_STEP,

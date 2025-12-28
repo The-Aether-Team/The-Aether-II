@@ -506,9 +506,7 @@
   },
   "entity.kirrid.hurt": {
     "sounds": [
-      "aether_ii:entity/kirrid/say1",
-      "aether_ii:entity/kirrid/say2",
-      "aether_ii:entity/kirrid/say3"
+      "aether_ii:entity/kirrid/hurt"
     ],
     "subtitle": "subtitles.aether_ii.entity.kirrid.hurt"
   },
