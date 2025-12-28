@@ -106,6 +106,7 @@ public class AetherIITags {
         public static final TagKey<Block> MIMIC_CONTAINERS = tag("mimic_containers");
 
         public static final TagKey<Block> SLIDER_UNBREAKABLE = tag("slider_unbreakable");
+        public static final TagKey<Block> SENTRY_RUINS_BLOCKS = tag("sentry_ruins_blocks");
 
         private static TagKey<Block> tag(String name) {
             return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));

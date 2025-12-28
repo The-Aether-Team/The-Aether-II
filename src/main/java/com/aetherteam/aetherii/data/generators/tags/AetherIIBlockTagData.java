@@ -349,6 +349,19 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.BOSS_DOORWAY_BLOCK.get(),
                 AetherIIBlocks.TREASURE_DOORWAY_BLOCK.get()
         );
+        this.tag(AetherIITags.Blocks.SENTRY_RUINS_BLOCKS).addTags(
+                AetherIITags.Blocks.UNDERSHALE_DECORATIVE_BLOCKS,
+                AetherIITags.Blocks.SENTRY_DECORATIVE_BLOCKS
+        ).add(
+                AetherIIBlocks.UNDERSHALE_BRICKS.get(),
+                AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get(),
+                AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get(),
+                AetherIIBlocks.UNDERSHALE_BRICK_WALL.get(),
+                AetherIIBlocks.SENTRY_BRICKS.get(),
+                AetherIIBlocks.SENTRY_BRICK_SLAB.get(),
+                AetherIIBlocks.SENTRY_BRICK_STAIRS.get(),
+                AetherIIBlocks.SENTRY_BRICK_WALL.get()
+        );
 
         // Vanilla
         this.tag(BlockTags.PLANKS).add(
