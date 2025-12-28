@@ -2,17 +2,23 @@ package com.aetherteam.aetherii.client.gui.screen.inventory.recipebook;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.AltarMenu;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.OverlayRecipeComponentAccessor;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.RecipeBookComponentAccessor;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.RecipeBookPageAccessor;
 import com.aetherteam.aetherii.recipe.display.AltarRecipeDisplay;
 import net.minecraft.client.gui.components.WidgetSprites;
-import net.minecraft.client.gui.screens.recipebook.GhostSlots;
-import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
-import net.minecraft.client.gui.screens.recipebook.RecipeCollection;
+import net.minecraft.client.gui.screens.recipebook.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.util.context.ContextMap;
 import net.minecraft.world.entity.player.StackedItemContents;
+import net.minecraft.world.inventory.AbstractFurnaceMenu;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.display.FurnaceRecipeDisplay;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.RecipeDisplayId;
 
 import java.util.List;
 
@@ -26,6 +32,9 @@ public class AltarRecipeBookComponent extends RecipeBookComponent<AltarMenu> {
 
     public AltarRecipeBookComponent(AltarMenu menu, List<TabInfo> tabs) {
         super(menu, tabs);
+        RecipeBookComponentAccessor componentAccessor = (RecipeBookComponentAccessor) this;
+        SlotSelectTime slotSelectTime = () -> Mth.floor(componentAccessor.aether_ii$getTime() / 30.0F);
+        componentAccessor.aether_ii$setRecipeBookPage(new AetherRecipeBookPage(this, slotSelectTime));
     }
 
     @Override

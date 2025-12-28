@@ -190,19 +190,19 @@
         "type": "aether_ii:phyg",
         "maxCount": 2,
         "minCount": 1,
-        "weight": 8
+        "weight": 4
       },
       {
         "type": "aether_ii:flying_cow",
         "maxCount": 2,
         "minCount": 1,
-        "weight": 8
+        "weight": 4
       },
       {
         "type": "aether_ii:sheepuff",
         "maxCount": 2,
         "minCount": 2,
-        "weight": 12
+        "weight": 6
       },
       {
         "type": "aether_ii:aerbunny",

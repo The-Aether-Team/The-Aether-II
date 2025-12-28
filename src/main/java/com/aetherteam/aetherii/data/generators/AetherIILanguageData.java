@@ -1126,6 +1126,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.BLUE_AERCLOUD_GLIDER.get(), 2, "§3Use:§r Click-Use");
         this.addPerItemAbilityTooltip(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get(), 1, "§9Ability:§r Forwards Boost");
         this.addPerItemAbilityTooltip(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get(), 2, "§3Use:§r Click-Use");
+
+        this.addPerItemAbilityTooltip(AetherIIItems.SWET_GEL.get(), 1, "§9Ability:§r Grows Nature");
+        this.addPerItemAbilityTooltip(AetherIIItems.AMBROSIUM_SHARD.get(), 1, "§9Ability:§r Enchants Nature");
+        this.addPerItemAbilityTooltip(AetherIIItems.IRRADIATED_DUST.get(), 1, "§9Ability:§r Irradiates Nature");
     }
 
     private void addItemTooltips() {
@@ -1135,7 +1139,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("currency.amount", "%s Glint");
         this.addItemTooltip("curative.removes", "Removes: %s");
         this.addItemTooltip("curative.reduces", "Reduces: %s");
-        this.addItemTooltip("healing_stone.charges", "%s/5 Charges");
+        this.addItemTooltip("healing_stone.charges", "%s/5 Altar Charges");
         this.addItemTooltip("effect_buildup", "%s Buildup");
         this.addItemTooltip("effect_buildup.inflicts", "Inflicts: %s");
         this.addItemTooltip("reinforcement", "Reinforcement");

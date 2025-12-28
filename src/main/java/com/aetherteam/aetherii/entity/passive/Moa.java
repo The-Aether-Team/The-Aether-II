@@ -622,7 +622,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 }
             }
         } else {
-            if (this.isPlayerGrown() && player.isShiftKeyDown()) {
+            if (this.isPlayerGrown() && player.isShiftKeyDown() && !this.isBaby()) {
 //                this.setSitting(!this.isSitting()); //todo
                 if (!this.level().isClientSide()) {
                     this.openMenu(player);

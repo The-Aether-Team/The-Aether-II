@@ -1404,7 +1404,7 @@ public class HighlandsConfiguredFeatures {
                         new GiantTrunkPlacer(6, 2, 5),
                         BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LEAVES.get().defaultBlockState()),
                         new GreatrootFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
-                        new TwoLayersFeatureSize(1, 0, 2))
+                        new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty()))
                         .ignoreVines().build());
         register(context, GREATROOT_IRRADIATED_SAPLING, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
@@ -1412,7 +1412,7 @@ public class HighlandsConfiguredFeatures {
                         new GiantTrunkPlacer(6, 2, 5),
                         BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get().defaultBlockState()),
                         new GreatrootFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
-                        new TwoLayersFeatureSize(1, 0, 2))
+                        new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty()))
                         .ignoreVines().decorators(ImmutableList.of(new IrradiationTreeDecorator(), new MossDecorator(SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()), SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get()), SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_VINES.get()), Optional.of(new WeightedStateProvider(tarahespFlowers))))).build());
         register(context, GREATOAK_SAPLING, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
@@ -1420,7 +1420,7 @@ public class HighlandsConfiguredFeatures {
                         new GiantTrunkPlacer(16, 2, 1),
                         BlockStateProvider.simple(AetherIIBlocks.GREATOAK_LEAVES.get().defaultBlockState()),
                         new GreatoakFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
-                        new TwoLayersFeatureSize(1, 1, 2))
+                        new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty()))
                         .ignoreVines().build());
         register(context, GREATOAK_IRRADIATED_SAPLING, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
@@ -1428,7 +1428,7 @@ public class HighlandsConfiguredFeatures {
                         new GiantTrunkPlacer(12, 2, 0),
                         BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get().defaultBlockState()),
                         new GreatoakFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
-                        new TwoLayersFeatureSize(1, 0, 2))
+                        new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty()))
                         .ignoreVines().decorators(ImmutableList.of(new IrradiationTreeDecorator(), new MossDecorator(SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()), SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get()), SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_VINES.get()), Optional.of(new WeightedStateProvider(tarahespFlowers))))).build());
         register(context, GREATBOA_SAPLING, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
@@ -1436,7 +1436,7 @@ public class HighlandsConfiguredFeatures {
                         new GiantTrunkPlacer(15, 3, 8),
                         BlockStateProvider.simple(AetherIIBlocks.GREATBOA_LEAVES.get().defaultBlockState()),
                         new GreatboaFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
-                        new TwoLayersFeatureSize(1, 2, 2))
+                        new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty()))
                         .ignoreVines()
                         .build());
         register(context, GREATBOA_IRRADIATED_SAPLING, Feature.TREE,
@@ -1445,7 +1445,7 @@ public class HighlandsConfiguredFeatures {
                         new GiantTrunkPlacer(15, 3, 8),
                         BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get().defaultBlockState()),
                         new GreatoakFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
-                        new TwoLayersFeatureSize(1, 2, 2))
+                        new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty()))
                         .ignoreVines().decorators(ImmutableList.of(new IrradiationTreeDecorator(), new MossDecorator(SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()), SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get()), SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_VINES.get()), Optional.of(new WeightedStateProvider(tarahespFlowers))))).build());
         register(context, AMBEROOT_SAPLING, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(

@@ -3,7 +3,7 @@
     "type": "minecraft:condition",
     "on_false": {
       "type": "aether_ii:shield",
-      "parent": "aether_ii:item/shield",
+      "parent": "aether_ii:item/light_shield",
       "textures": {
         "back": [
           "aether_ii:item/zanite_shield_back_0",

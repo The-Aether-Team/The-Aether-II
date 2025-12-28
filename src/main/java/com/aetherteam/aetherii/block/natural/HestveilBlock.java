@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.block.natural;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
@@ -28,6 +29,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -47,6 +49,7 @@ public class HestveilBlock extends Block implements CanisterPickup {
     public static final int MAX_VERTICAL_DISTANCE = 3;
     public static final IntegerProperty HORIZONTAL_DISTANCE = IntegerProperty.create("hestveil_horizontal_distance", 0, MAX_HORIZONTAL_DISTANCE);
     public static final IntegerProperty VERTICAL_DISTANCE = IntegerProperty.create("hestveil_vertical_distance", 0, MAX_VERTICAL_DISTANCE);
+    public static final BooleanProperty IGNITED = AetherIIBlockStateProperties.IGNITED;
 
     public static final List<BlockPos> PLACEMENT_OFFSETS = BlockPos.betweenClosedStream(-1, 0, -1, 1, 1, 1).map(BlockPos::immutable).filter((e) -> Vector3i.length(e.getX(), e.getY(), e.getZ()) != 0).toList();
     public static final List<BlockPos> AROUND_OFFSETS = BlockPos.betweenClosedStream(-1, -1, -1, 1, 1, 1).map(BlockPos::immutable).filter((e) -> Vector3i.length(e.getX(), e.getY(), e.getZ()) != 0).toList();
@@ -54,10 +57,15 @@ public class HestveilBlock extends Block implements CanisterPickup {
 
     public HestveilBlock(Properties properties) {
         super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(HORIZONTAL_DISTANCE, 0).setValue(VERTICAL_DISTANCE, 0).setValue(IGNITED, false));
     }
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (state.getValue(IGNITED)) {
+            this.explode(level, pos, level.getRandom().nextInt(20) == 0);
+            return;
+        }
         level.setBlock(pos, updateDistance(state, level, pos), 3);
         if (state.getValue(HORIZONTAL_DISTANCE) < MAX_HORIZONTAL_DISTANCE && state.getValue(VERTICAL_DISTANCE) < MAX_VERTICAL_DISTANCE) {
             for (Vec3i offset : PLACEMENT_OFFSETS) {
@@ -77,38 +85,57 @@ public class HestveilBlock extends Block implements CanisterPickup {
     }
 
     @Override
-    protected void updateIndirectNeighbourShapes(BlockState state, LevelAccessor level, BlockPos pos, int flags, int recursionLeft) {
-        BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
-        for (Vec3i offset : INDIRECT_NEIGHBOR_OFFSETS) {
-            mutablePos.setWithOffset(pos, offset);
-            if (level.getBlockState(mutablePos).is(this)) {
-                if (this.shouldExplode(level.getBlockState(mutablePos)) || this.shouldExplode(state))
-                    this.explode(level, pos, true);
-            }
-        }
-    }
-
-    @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState blockstate = this.defaultBlockState();
         return updateDistance(blockstate, context.getLevel(), context.getClickedPos());
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(HORIZONTAL_DISTANCE).add(VERTICAL_DISTANCE);
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        int delay = 10;
+        for (Direction direction : Direction.values()) {
+            BlockPos offsetPos = pos.offset(direction.getUnitVec3i());
+            if (this.shouldExplode(level.getBlockState(offsetPos))) {
+                level.setBlock(pos, state.setValue(IGNITED, true), 3);
+                delay = 1;
+            }
+        }
+        level.scheduleTick(pos, this, delay);
+        super.onPlace(state, level, pos, oldState, movedByPiston);
     }
 
     @Override
-    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
-        level.scheduleTick(pos, this, 10);
-        for (Direction direction : Direction.values()) {
-            BlockPos offsetPos = pos.offset(direction.getUnitVec3i());
-
-            if (this.shouldExplode(level.getBlockState(offsetPos)))
-                this.explode(level, pos, true);
+    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource randomSource) {
+        if (this.shouldExplode(neighborState) || (neighborState.getBlock() == AetherIIBlocks.HESTVEIL.get() && neighborState.getValue(IGNITED))) {
+            state = state.setValue(IGNITED, true);
+            scheduledTickAccess.scheduleTick(pos, this, 1);
         }
-        super.onPlace(state, level, pos, oldState, movedByPiston);
+        if (direction.getAxis().isHorizontal()) {
+            int i = getDistanceAt(neighborState, HORIZONTAL_DISTANCE, MAX_HORIZONTAL_DISTANCE) + 1;
+            if (i != 1 || state.getValue(HORIZONTAL_DISTANCE) != i) {
+                scheduledTickAccess.scheduleTick(pos, this, 10);
+            }
+        } else if (direction.getAxis().isVertical()) {
+            int j = getDistanceAt(neighborState, VERTICAL_DISTANCE, MAX_VERTICAL_DISTANCE) + 1;
+            if (j != 1 || state.getValue(VERTICAL_DISTANCE) != j) {
+                scheduledTickAccess.scheduleTick(pos, this, 10);
+            }
+        }
+        return state;
+    }
+
+    @Override
+    protected void updateIndirectNeighbourShapes(BlockState state, LevelAccessor level, BlockPos pos, int flags, int recursionLeft) {
+        BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
+        for (Vec3i offset : INDIRECT_NEIGHBOR_OFFSETS) {
+            mutablePos.setWithOffset(pos, offset);
+            if (level.getBlockState(mutablePos).is(this)) {
+                if (this.shouldExplode(level.getBlockState(mutablePos))) {
+                    level.setBlock(pos, state.setValue(IGNITED, true), 3);
+                    level.scheduleTick(pos, this, 1);
+                }
+            }
+        }
     }
 
     @Override
@@ -118,13 +145,17 @@ public class HestveilBlock extends Block implements CanisterPickup {
 
     @Override
     public void wasExploded(ServerLevel level, BlockPos pos, Explosion explosion) {
-        this.explode(level, pos, true);
+        BlockState state = level.getBlockState(pos);
+        if (state.getBlock() == AetherIIBlocks.HESTVEIL.get()) {
+            level.setBlock(pos, state.setValue(IGNITED, true), 3);
+            level.scheduleTick(pos, this, 1);
+        }
     }
 
     public boolean shouldExplode(BlockState state) {
-        if (!state.is(AetherIITags.Blocks.TRIGGERS_HESTVEIL))
+        if (!state.is(AetherIITags.Blocks.TRIGGERS_HESTVEIL)) {
             return false;
-
+        }
         if (state.hasProperty(BlockStateProperties.LIT)) {
             return state.getValue(BlockStateProperties.LIT);
         } else {
@@ -161,35 +192,12 @@ public class HestveilBlock extends Block implements CanisterPickup {
             }
             for (Direction direction : Direction.values()) {
                 BlockPos offsetPos = pos.relative(direction);
-                if (level.getBlockState(offsetPos).getBlock() instanceof HestveilBlock hestveilBlock) {
-                    hestveilBlock.explode(level, offsetPos, level.getRandom().nextInt(20) == 0);
-                } else if (this.shouldExplode(level.getBlockState(offsetPos))) {
+                BlockState offsetState = level.getBlockState(offsetPos);
+                if (this.shouldExplode(offsetState)) {
                     level.destroyBlock(offsetPos, true);
                 }
             }
         }
-    }
-
-    @Override
-    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource randomSource) {
-        if (levelReader instanceof Level level) {
-            if (this.shouldExplode(level.getBlockState(neighborPos)) || this.shouldExplode(state)) {
-                this.explode(level, pos, true);
-                return state;
-            }
-        }
-        if (direction.getAxis().isHorizontal()) {
-            int i = getDistanceAt(neighborState, HORIZONTAL_DISTANCE, MAX_HORIZONTAL_DISTANCE) + 1;
-            if (i != 1 || state.getValue(HORIZONTAL_DISTANCE) != i) {
-                scheduledTickAccess.scheduleTick(pos, this, 10);
-            }
-        } else if (direction.getAxis().isVertical()) {
-            int j = getDistanceAt(neighborState, VERTICAL_DISTANCE, MAX_VERTICAL_DISTANCE) + 1;
-            if (j != 1 || state.getValue(VERTICAL_DISTANCE) != j) {
-                scheduledTickAccess.scheduleTick(pos, this, 10);
-            }
-        }
-        return state;
     }
 
     public static BlockState updateDistance(BlockState state, LevelAccessor level, BlockPos pos) {
@@ -263,5 +271,10 @@ public class HestveilBlock extends Block implements CanisterPickup {
     @Override
     public Optional<SoundEvent> getCanisterPickupSound(BlockState state) { //todo
         return Optional.empty();
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(HORIZONTAL_DISTANCE, VERTICAL_DISTANCE, IGNITED);
     }
 }
