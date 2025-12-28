@@ -25,7 +25,7 @@ public class UnstableBlock extends Block {
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (random.nextInt(7) == 0) {
+        if (random.nextInt(3) == 0) {
             this.causeDestroyEffects(level, state, pos, null);
         }
         level.removeBlock(pos, false);
@@ -43,7 +43,7 @@ public class UnstableBlock extends Block {
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
         if (entity instanceof Player player && !player.isCrouching()) {
-            if (entity.tickCount % 7 == 0) {
+            if (entity.tickCount % 5 == 0) {
                 this.causeDestroyEffects(level, state, pos, entity);
             }
             level.scheduleTick(pos, this, 20);
