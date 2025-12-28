@@ -367,7 +367,8 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         }
         if (this.getRemainingStamina() < this.getMaxStamina()) {
             if (this.getStaminaHealCooldown() > 0) {
-                this.setStaminaHealCooldown(this.getStaminaHealCooldown() - 1);
+                int heal = this.onGround() ? 2 : 1;
+                this.setStaminaHealCooldown(this.getStaminaHealCooldown() - heal);
             } else {
                 this.setRemainingStamina(this.getRemainingStamina() + 1);
                 this.setStaminaHealCooldown(300);
