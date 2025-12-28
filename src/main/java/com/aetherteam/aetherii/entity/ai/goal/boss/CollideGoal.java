@@ -36,7 +36,7 @@ public class CollideGoal extends Goal {
         if (this.slider.level() instanceof ServerLevel serverLevel) {
             for (Entity entity : this.slider.level().getEntities(this.slider, collisionBounds)) {
                 DamageSource damageSource = AetherIIDamageTypes.entityDamageSource(this.slider.level(), AetherIIDamageTypes.CRUSH, this.slider);
-                if (entity instanceof LivingEntity livingEntity && livingEntity.isInvulnerableTo(serverLevel, damageSource) && entity.hurtServer(serverLevel, damageSource, 6)) {
+                if (entity instanceof LivingEntity livingEntity && !livingEntity.isInvulnerableTo(serverLevel, damageSource) && entity.hurtServer(serverLevel, damageSource, 6)) {
                     if (livingEntity instanceof Player player && player.getUseItem().is(Items.SHIELD) && player.isBlocking()) { // Disables the player's Shield if one is being used. //TODO CHECK NEW SHIELDS
                         player.getCooldowns().addCooldown(Items.SHIELD.getDefaultInstance(), 100);
                         player.stopUsingItem();
