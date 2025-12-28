@@ -23,7 +23,6 @@ import org.joml.Vector3f;
 
 public class SliderRenderer extends MobRenderer<Slider, SliderRenderState, SliderModel> {
     private static final ResourceLocation SLIDER_ASLEEP_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/slider/slider_asleep.png");
-    private static final ResourceLocation SLIDER_ASLEEP_CRITICAL_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/slider/slider_asleep_critical.png");
     private static final ResourceLocation SLIDER_AWAKE_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/slider/slider_awake.png");
     private static final ResourceLocation SLIDER_AWAKE_CRITICAL_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/slider/slider_awake_critical.png");
 
@@ -138,7 +137,7 @@ public class SliderRenderer extends MobRenderer<Slider, SliderRenderState, Slide
     @Override
     public ResourceLocation getTextureLocation(SliderRenderState slider) {
         if (!slider.awake) {
-            return !slider.critical ? SLIDER_ASLEEP_TEXTURE : SLIDER_ASLEEP_CRITICAL_TEXTURE;
+            return SLIDER_ASLEEP_TEXTURE;
         } else {
             return !slider.critical ? SLIDER_AWAKE_TEXTURE : SLIDER_AWAKE_CRITICAL_TEXTURE;
         }

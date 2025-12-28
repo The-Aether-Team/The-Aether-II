@@ -13,8 +13,8 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
 public class SliderGlowLayer extends EyesLayer<SliderRenderState, SliderModel> {
-    private static final RenderType SLIDER_AWAKE_GLOW = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/slider/slider_awake_glow.png"));
-    private static final RenderType SLIDER_AWAKE_CRITICAL_GLOW = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/slider/slider_awake_critical_glow.png"));
+    private static final RenderType SLIDER_AWAKE_EMISSIVE = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/slider/slider_awake_emissive.png"));
+    private static final RenderType SLIDER_AWAKE_CRITICAL_EMISSIVE = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/slider/slider_awake_critical_emissive.png"));
 
     public SliderGlowLayer(RenderLayerParent<SliderRenderState, SliderModel> parent) {
         super(parent);
@@ -30,13 +30,13 @@ public class SliderGlowLayer extends EyesLayer<SliderRenderState, SliderModel> {
 
     public RenderType renderType(SliderRenderState slider) {
         if (slider.critical) {
-            return SLIDER_AWAKE_CRITICAL_GLOW;
+            return SLIDER_AWAKE_CRITICAL_EMISSIVE;
         }
         return this.renderType();
     }
 
     @Override
     public RenderType renderType() {
-        return SLIDER_AWAKE_GLOW;
+        return SLIDER_AWAKE_EMISSIVE;
     }
 }
