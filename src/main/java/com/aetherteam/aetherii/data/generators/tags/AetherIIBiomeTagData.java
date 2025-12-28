@@ -119,7 +119,9 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HighlandsBiomes.VIOLET_HIGHWOODS,
                 HighlandsBiomes.FRIGID_SIERRA,
                 HighlandsBiomes.ENDURING_WOODLAND,
-                HighlandsBiomes.SHEER_TUNDRA
+                HighlandsBiomes.SHEER_TUNDRA,
+                HighlandsBiomes.CONTAMINATED_JUNGLE,
+                HighlandsBiomes.BATTLEGROUND_WASTES
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_INFECTED_GUARDIAN_TREE).add(
                 HighlandsBiomes.FLOURISHING_FIELD,
