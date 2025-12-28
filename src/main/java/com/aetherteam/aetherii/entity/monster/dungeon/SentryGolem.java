@@ -275,7 +275,7 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
     }
 
     @Override
-    protected void dropEquipment(ServerLevel level) {
+    protected void dropCustomDeathLoot(ServerLevel serverLevel, DamageSource source, boolean flag) {
 
     }
 
