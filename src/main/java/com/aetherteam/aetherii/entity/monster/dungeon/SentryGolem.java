@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.monster.dungeon;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.CooldownEntity;
 import com.aetherteam.aetherii.entity.FakeShiftEntity;
@@ -337,6 +338,15 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
     @Override
     public boolean isFakeShift() {
         return this.isRanged();
+    }
+
+    @Override
+    public boolean isInvulnerableTo(ServerLevel level, DamageSource damageSource) {
+        Entity damageEntity = damageSource.getEntity();
+        if (damageEntity != null) {
+            return damageEntity.getType().is(AetherIITags.Entities.SENTRY_RUINS_MOBS) || super.isInvulnerableTo(level, damageSource);
+        }
+        return super.isInvulnerableTo(level, damageSource);
     }
 
     public static class ThrowExplosiveAttackGoal extends Goal {

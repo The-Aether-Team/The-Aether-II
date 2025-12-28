@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.dungeon.boss.Slider;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -34,7 +35,8 @@ public class CollideGoal extends Goal {
         AABB collisionBounds = new AABB(min, max);
         if (this.slider.level() instanceof ServerLevel serverLevel) {
             for (Entity entity : this.slider.level().getEntities(this.slider, collisionBounds)) {
-                if (entity instanceof LivingEntity livingEntity && entity.getType() != AetherIIEntityTypes.DETONATION_SENTRY.get() && entity.hurtServer(serverLevel, AetherIIDamageTypes.entityDamageSource(this.slider.level(), AetherIIDamageTypes.CRUSH, this.slider), 6)) {
+                DamageSource damageSource = AetherIIDamageTypes.entityDamageSource(this.slider.level(), AetherIIDamageTypes.CRUSH, this.slider);
+                if (entity instanceof LivingEntity livingEntity && livingEntity.isInvulnerableTo(serverLevel, damageSource) && entity.hurtServer(serverLevel, damageSource, 6)) {
                     if (livingEntity instanceof Player player && player.getUseItem().is(Items.SHIELD) && player.isBlocking()) { // Disables the player's Shield if one is being used. //TODO CHECK NEW SHIELDS
                         player.getCooldowns().addCooldown(Items.SHIELD.getDefaultInstance(), 100);
                         player.stopUsingItem();

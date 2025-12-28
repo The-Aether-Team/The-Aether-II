@@ -77,9 +77,15 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
         );
         this.tag(AetherIITags.Entities.NO_DOUBLE_DROPS).addTag(Tags.EntityTypes.BOSSES).add(EntityType.PLAYER);
         this.tag(AetherIITags.Entities.NO_AMBROSIUM_DROPS).add(EntityType.PLAYER);
+        this.tag(AetherIITags.Entities.SENTRY_RUINS_MOBS).add(
+                AetherIIEntityTypes.DETONATION_SENTRY.get(),
+                AetherIIEntityTypes.SENTRY_GOLEM.get(),
+                AetherIIEntityTypes.SLIDER.get()
+        );
         this.tag(AetherIITags.Entities.DUNGEON_MOBS).add(
                 AetherIIEntityTypes.DETONATION_SENTRY.get(),
                 AetherIIEntityTypes.SENTRY_GOLEM.get(),
+                AetherIIEntityTypes.MIMIC.get(),
                 AetherIIEntityTypes.SLIDER.get()
         );
 

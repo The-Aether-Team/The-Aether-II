@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.monster.dungeon;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.ai.goal.FakeMeleeAttackGoal;
 import net.minecraft.core.particles.ParticleTypes;
@@ -227,6 +228,15 @@ public class DetonationSentry extends PathfinderMob {
 
     public void ignite() {
         this.entityData.set(DATA_IS_IGNITED, true);
+    }
+
+    @Override
+    public boolean isInvulnerableTo(ServerLevel level, DamageSource damageSource) {
+        Entity damageEntity = damageSource.getEntity();
+        if (damageEntity != null) {
+            return damageEntity.getType().is(AetherIITags.Entities.SENTRY_RUINS_MOBS) || super.isInvulnerableTo(level, damageSource);
+        }
+        return super.isInvulnerableTo(level, damageSource);
     }
 
     static class SentryFloatGoal extends FloatGoal {
