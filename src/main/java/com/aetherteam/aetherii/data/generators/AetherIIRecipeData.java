@@ -1006,7 +1006,15 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("/#/")
                 .pattern("///")
                 .unlockedBy("has_leather", has(AetherIIItems.BEAST_PELT))
-                .save(this.output, this.name("item_frame_from_pelt"));
+                .save(this.output, this.name("item_frame_from_beast_pelt"));
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, Blocks.JUKEBOX) //todo
+                .define('#', AetherIITags.Items.PLANKS_CRAFTING)
+                .define('G', AetherIIItems.GRAVITITE_PLATE)
+                .pattern("###")
+                .pattern("#G#")
+                .pattern("###")
+                .unlockedBy(getHasName(Blocks.JUKEBOX), has(AetherIITags.Items.PLANKS_CRAFTING))
+                .save(this.output, this.name("jukebox_from_gravitite_plate"));
 
         // Bookshelves
         this.bookshelf(getter, AetherIIBlocks.SKYROOT_BOOKSHELF, AetherIIBlocks.SKYROOT_PLANKS);
