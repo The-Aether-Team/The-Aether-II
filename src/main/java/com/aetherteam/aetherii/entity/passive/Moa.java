@@ -528,7 +528,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     }
 
     private void setFeedingCooldown() {
-        this.feedingCooldown = 200 + this.random.nextInt(400);
+        this.feedingCooldown = 2400 + this.random.nextInt(2400);
     }
 
     @Override
