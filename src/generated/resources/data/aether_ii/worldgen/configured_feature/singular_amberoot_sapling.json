@@ -4,8 +4,8 @@
     "decorators": [
       {
         "type": "aether_ii:simple_trunk",
-        "above_placement_chance": 0.33,
-        "placement_chance": 0.5,
+        "above_placement_chance": 0.2,
+        "placement_chance": 0.2,
         "trunk_block_provider": {
           "type": "minecraft:weighted_state_provider",
           "entries": [
@@ -48,7 +48,7 @@
       }
     },
     "foliage_placer": {
-      "type": "aether_ii:amberoot_foliage_placer",
+      "type": "aether_ii:singular_amberoot_foliage_placer",
       "offset": 0,
       "radius": 2
     },
@@ -75,7 +75,7 @@
     },
     "trunk_placer": {
       "type": "minecraft:straight_trunk_placer",
-      "base_height": 5,
+      "base_height": 6,
       "height_rand_a": 4,
       "height_rand_b": 0
     },
