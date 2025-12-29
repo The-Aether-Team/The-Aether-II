@@ -30,6 +30,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -89,7 +91,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     protected static final EntityDataAccessor<Integer> DATA_FEATHER_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
 
     protected static final EntityDataAccessor<Boolean> DATA_HUNGRY = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
-    protected static final EntityDataAccessor<Integer> DATA_AMOUNT_FED = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
+    protected static final EntityDataAccessor<Integer> DATA_AMOUNT_FED_POINT = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
     protected static final EntityDataAccessor<Boolean> DATA_PLAYER_GROWN = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
 
     protected static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_RIDER_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
@@ -102,6 +104,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     protected static final EntityDataAccessor<ItemStack> DATA_SADDLEBAG = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.ITEM_STACK);
 
     protected static final EntityDataAccessor<OptionalInt> DATA_SPECIAL_VARIANT = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UNSIGNED_INT);
+    private static final int MOA_FEEDING_TICK = 8000;
 
     private SimpleContainer inventory;
 
@@ -113,6 +116,9 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     private float flapO;
 
     private int flyTick;
+    private int hungryTick;
+    private int feedingTimeCount;
+    private int feedingCooldown;
 
     private int eggTime = this.getEggTime();
 
@@ -126,6 +132,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         this.setPathfindingMalus(PathType.DAMAGE_OTHER, -1.0F);
         this.setPathfindingMalus(PathType.LAVA, -1.0F);
         this.createInventory();
+        this.setFeedingCooldown();
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
@@ -181,7 +188,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         builder.define(DATA_LAST_RIDER_REFERENCE, Optional.empty());
         builder.define(DATA_REMAINING_STAMINA, 0);
         builder.define(DATA_HUNGRY, false);
-        builder.define(DATA_AMOUNT_FED, 0);
+        builder.define(DATA_AMOUNT_FED_POINT, 0);
         builder.define(DATA_PLAYER_GROWN, false);
         builder.define(DATA_SITTING, false);
         builder.define(DATA_FOLLOWING_ID, Optional.empty());
@@ -424,13 +431,32 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         if (this.isBaby()) {
             if (!this.isHungry()) {
                 if (!this.level().isClientSide()) {
-                    if (this.getRandom().nextInt(2000) == 0) {
+                    if (--this.feedingCooldown <= 0) {
                         this.setHungry(true);
+                        this.hungryTick = MOA_FEEDING_TICK;
                     }
                 }
             } else {
                 if (this.getRandom().nextInt(10) == 0) {
-                    this.level().addParticle(AetherIIParticleTypes.MOA_HUNGRY.get(), this.getX() + (this.getRandom().nextDouble() - 0.5) * this.getBbWidth(), this.getY() + 1, this.getZ() + (this.getRandom().nextDouble() - 0.5) * this.getBbWidth(), 0.0, 0.0, 0.0);
+                    this.level().broadcastEntityEvent(this, (byte) 42);
+                }
+
+                if (this.hungryTick > 0) {
+                    this.hungryTick--;
+                } else {
+                    //missed feeding moa
+                    this.setHungry(false);
+                    this.feedingTimeCount++;
+                    this.setFeedingCooldown();
+                    switch (this.feedingTimeCount) {
+                        case 0 -> this.setAge(-24000);
+                        case 1 -> this.setAge(-16000);
+                        case 2 -> this.setAge(-8000);
+                        case 3 -> this.setBaby(false);
+                    }
+                    if (!this.level().isClientSide()) {
+                        this.level().broadcastEntityEvent(this, (byte) 13);
+                    }
                 }
             }
         } else {
@@ -479,6 +505,30 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 this.flap = Mth.clamp(this.flap - 0.2F, 0, 1F);
             }
         }
+    }
+
+    protected void addParticlesAroundSelf(ParticleOptions particleOption) {
+        for (int i = 0; i < 6; i++) {
+            double d0 = this.random.nextGaussian() * 0.02;
+            double d1 = this.random.nextGaussian() * 0.02;
+            double d2 = this.random.nextGaussian() * 0.02;
+            this.level().addParticle(particleOption, this.getRandomX(1.0), this.getRandomY() + 1.0, this.getRandomZ(1.0), d0, d1, d2);
+        }
+    }
+
+    @Override
+    public void handleEntityEvent(byte p_35391_) {
+        if (p_35391_ == 13) {
+            this.addParticlesAroundSelf(ParticleTypes.ANGRY_VILLAGER);
+        } else if (p_35391_ == 42) {
+            this.level().addParticle(AetherIIParticleTypes.MOA_HUNGRY.get(), this.getX() + (this.getRandom().nextDouble() - 0.5) * this.getBbWidth(), this.getY() + 1, this.getZ() + (this.getRandom().nextDouble() - 0.5) * this.getBbWidth(), 0.0, 0.0, 0.0);
+        } else {
+            super.handleEntityEvent(p_35391_);
+        }
+    }
+
+    private void setFeedingCooldown() {
+        this.feedingCooldown = 200 + this.random.nextInt(400);
     }
 
     @Override
@@ -629,18 +679,25 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                     this.openMenu(player);
                 }
                 return InteractionResult.SUCCESS;
-            } else if (!this.level().isClientSide() && this.isPlayerGrown() && this.isBaby() && this.isHungry() && this.getAmountFed() < 3 && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Feeds a hungry baby Moa.
+            } else if (!this.level().isClientSide() && this.isPlayerGrown() && this.isBaby() && this.isHungry() && this.feedingTimeCount < 3 && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Feeds a hungry baby Moa.
                 if (!player.getAbilities().instabuild) {
                     itemStack.shrink(1);
                 }
-                this.setAmountFed(this.getAmountFed() + 1);
-                switch (this.getAmountFed()) {
+                if (this.hungryTick > MOA_FEEDING_TICK / 2) {
+                    this.setAmountFed(this.getAmountFed() + 2);
+                } else {
+                    //bonus reduced
+                    this.setAmountFed(this.getAmountFed() + 1);
+                }
+                this.feedingTimeCount++;
+                switch (this.feedingTimeCount) {
                     case 0 -> this.setAge(-24000);
                     case 1 -> this.setAge(-16000);
                     case 2 -> this.setAge(-8000);
                     case 3 -> this.setBaby(false);
                 }
-                if (this.getAmountFed() > 3 && !this.isBaby()) {
+                this.setFeedingCooldown();
+                if (this.feedingTimeCount > 3 && !this.isBaby()) {
                     this.setBaby(false);
                 }
                 this.setHungry(false);
@@ -763,6 +820,29 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         this.entityData.set(DATA_FEATHER_COLOR, color.id);
     }
 
+    public void calculatePotentialStats() {
+        if (this.getAmountFed() != 4 || this.getAmountFed() != 5) {
+            if (this.getAmountFed() == 0) {
+                this.getAttribute(AetherIIAttributes.MOA_STAMINA).setBaseValue(this.getAttributeBaseValue(AetherIIAttributes.MOA_STAMINA) - 4);
+                this.getAttribute(AetherIIAttributes.MOA_SPEED).setBaseValue(this.getAttributeBaseValue(AetherIIAttributes.MOA_SPEED) - 4);
+                this.getAttribute(AetherIIAttributes.MOA_STRENGTH).setBaseValue(this.getAttributeBaseValue(AetherIIAttributes.MOA_STRENGTH) - 4);
+
+            } else if (this.getAmountFed() == 1 && this.getAmountFed() == 2) {
+                this.getAttribute(AetherIIAttributes.MOA_STAMINA).setBaseValue(this.getAttributeBaseValue(AetherIIAttributes.MOA_STAMINA) - 2);
+                this.getAttribute(AetherIIAttributes.MOA_SPEED).setBaseValue(this.getAttributeBaseValue(AetherIIAttributes.MOA_SPEED) - 2);
+                this.getAttribute(AetherIIAttributes.MOA_STRENGTH).setBaseValue(this.getAttributeBaseValue(AetherIIAttributes.MOA_STRENGTH) - 2);
+            } else if (this.getAmountFed() == 3) {
+                this.getAttribute(AetherIIAttributes.MOA_STAMINA).setBaseValue(this.getAttributeBaseValue(AetherIIAttributes.MOA_STAMINA) - 1);
+                this.getAttribute(AetherIIAttributes.MOA_SPEED).setBaseValue(this.getAttributeBaseValue(AetherIIAttributes.MOA_SPEED) - 1);
+                this.getAttribute(AetherIIAttributes.MOA_STRENGTH).setBaseValue(this.getAttributeBaseValue(AetherIIAttributes.MOA_STRENGTH) - 1);
+            } else {
+                this.getAttribute(AetherIIAttributes.MOA_STAMINA).setBaseValue(this.getAttributeBaseValue(AetherIIAttributes.MOA_STAMINA) + 1);
+                this.getAttribute(AetherIIAttributes.MOA_SPEED).setBaseValue(this.getAttributeBaseValue(AetherIIAttributes.MOA_SPEED) + 1);
+                this.getAttribute(AetherIIAttributes.MOA_STRENGTH).setBaseValue(this.getAttributeBaseValue(AetherIIAttributes.MOA_STRENGTH) + 1);
+            }
+        }
+    }
+
     /**
      * @return The {@link UUID} of the current rider of this Moa.
      */
@@ -839,19 +919,19 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     }
 
     /**
-     * @return The {@link Integer} value for how many times this Moa has been fed.
+     * @return The {@link Integer} value for how many amount of fed bonus(This will be affect growth stats).
      */
     public int getAmountFed() {
-        return this.getEntityData().get(DATA_AMOUNT_FED);
+        return this.getEntityData().get(DATA_AMOUNT_FED_POINT);
     }
 
     /**
-     * Sets the amount of times this Moa has been fed.
+     * Sets the amount of fed bonus.
      *
      * @param amountFed The {@link Integer} value.
      */
     public void setAmountFed(int amountFed) {
-        this.getEntityData().set(DATA_AMOUNT_FED, amountFed);
+        this.getEntityData().set(DATA_AMOUNT_FED_POINT, amountFed);
     }
 
     /**
@@ -1204,8 +1284,17 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      */
     @Override
     public void setAge(int age) {
-        if (age % -8000 == 0 || (age == 0 && this.getAmountFed() >= 3)) {
+        if (age % -8000 == 0 || (age == 0 && this.feedingTimeCount >= 3)) {
             super.setAge(age);
+        }
+    }
+
+    @Override
+    protected void ageBoundaryReached() {
+        super.ageBoundaryReached();
+        if (!this.isBaby()) {
+
+            this.calculatePotentialStats();
         }
     }
 
@@ -1329,6 +1418,9 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         output.putInt("StaminaHealCooldown", this.getStaminaHealCooldown());
         output.putInt("RemainingStamina", this.getRemainingStamina());
         output.putBoolean("Hungry", this.isHungry());
+        output.putInt("MoaHungryTick", this.hungryTick);
+        output.putInt("FeedingTimeCount", this.feedingTimeCount);
+        output.putInt("FeedingCooldown", this.feedingCooldown);
         output.putInt("AmountFed", this.getAmountFed());
         output.putBoolean("PlayerGrown", this.isPlayerGrown());
         output.putBoolean("Sitting", this.isSitting());
@@ -1367,6 +1459,9 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         input.getInt("StaminaHealCooldown").ifPresent(this::setStaminaHealCooldown);
         input.getInt("RemainingStamina").ifPresent(this::setRemainingStamina);
         this.setHungry(input.getBooleanOr("Hungry", false));
+        this.hungryTick = input.getIntOr("MoaHungryTick", 0);
+        this.feedingTimeCount = input.getIntOr("FeedingTimeCount", 0);
+        input.getInt("FeedingCooldown").ifPresent(consumer -> this.feedingCooldown = flapCooldown);
         input.getInt("AmountFed").ifPresent(this::setAmountFed);
         this.setPlayerGrown(input.getBooleanOr("PlayerGrown", false));
         this.setSitting(input.getBooleanOr("Sitting", false));
