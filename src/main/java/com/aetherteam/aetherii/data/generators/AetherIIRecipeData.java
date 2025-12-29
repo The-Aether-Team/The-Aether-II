@@ -1280,7 +1280,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_feed", has(AetherIIItems.MOA_FEED))
                 .save(this.output);
 
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.TOOLS, AetherIIItems.HIDE_BUNDLE)
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.TOOLS, AetherIIItems.BEAST_PELT_BUNDLE)
                 .define('-', AetherIIItems.CLOUDTWINE)
                 .define('#', AetherIIItems.BEAST_PELT)
                 .pattern("-")

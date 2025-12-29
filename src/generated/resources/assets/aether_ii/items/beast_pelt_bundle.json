@@ -7,21 +7,21 @@
           "type": "minecraft:condition",
           "on_false": {
             "type": "minecraft:model",
-            "model": "aether_ii:item/hide_bundle"
+            "model": "aether_ii:item/beast_pelt_bundle"
           },
           "on_true": {
             "type": "minecraft:composite",
             "models": [
               {
                 "type": "minecraft:model",
-                "model": "aether_ii:item/hide_bundle_open_back"
+                "model": "aether_ii:item/beast_pelt_bundle_open_back"
               },
               {
                 "type": "minecraft:bundle/selected_item"
               },
               {
                 "type": "minecraft:model",
-                "model": "aether_ii:item/hide_bundle_open_front"
+                "model": "aether_ii:item/beast_pelt_bundle_open_front"
               }
             ]
           },
@@ -32,7 +32,7 @@
     ],
     "fallback": {
       "type": "minecraft:model",
-      "model": "aether_ii:item/hide_bundle"
+      "model": "aether_ii:item/beast_pelt_bundle"
     },
     "property": "minecraft:display_context"
   }

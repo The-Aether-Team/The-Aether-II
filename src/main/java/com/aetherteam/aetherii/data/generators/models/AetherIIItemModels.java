@@ -254,7 +254,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
 
         // Misc
-        this.generateBundleModels(AetherIIItems.HIDE_BUNDLE.get());
+        this.generateBundleModels(AetherIIItems.BEAST_PELT_BUNDLE.get());
         this.generateLasso(AetherIIItems.BRETTL_LASSO.get());
         this.generateMoaEggItem(AetherIIItems.MOA_EGG.get());
         this.generateFlatItem(AetherIIItems.MOA_FEED.get(), ModelTemplates.FLAT_ITEM);
