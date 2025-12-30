@@ -1,10 +1,10 @@
 package com.aetherteam.aetherii.entity.monster.dungeon;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.CooldownEntity;
 import com.aetherteam.aetherii.entity.FakeShiftEntity;
+import com.aetherteam.aetherii.entity.ai.goal.PreAnimationMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.projectile.DemolitionProjectile;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -13,7 +13,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -21,7 +20,10 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.util.LandRandomPos;
 import net.minecraft.world.entity.monster.Monster;
@@ -439,41 +441,9 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
         }
     }
 
-    protected static class SentryGolemMeleeAttackGoal extends MeleeAttackGoal {
-        private int ticksUntilNextAttack;
-        private boolean attack;
-        private final float attackThresholdSqr;
-        private final SentryGolem sentryGolem;
-
+    protected static class SentryGolemMeleeAttackGoal extends PreAnimationMeleeAttackGoal {
         public SentryGolemMeleeAttackGoal(SentryGolem golem, double speedModifier, boolean followingTargetEvenIfNotSeen, float attackThreshold) {
-            super(golem, speedModifier, followingTargetEvenIfNotSeen);
-            this.attackThresholdSqr = attackThreshold * attackThreshold;
-            this.sentryGolem = golem;
-        }
-
-        @Override
-        public boolean canUse() {
-            return super.canUse() && this.mob.getTarget() != null && this.mob.distanceToSqr(this.mob.getTarget()) < this.attackThresholdSqr;
-        }
-
-        @Override
-        public boolean canContinueToUse() {
-            return super.canContinueToUse() && this.mob.getTarget() != null && this.mob.distanceToSqr(this.mob.getTarget()) < this.attackThresholdSqr;
-        }
-
-        @Override
-        public boolean requiresUpdateEveryTick() {
-            return true;
-        }
-
-        @Override
-        public void start() {
-            super.start();
-        }
-
-        @Override
-        public void stop() {
-            super.stop();
+            super(golem, speedModifier, followingTargetEvenIfNotSeen, attackThreshold, 2, 20);
         }
     }
 
