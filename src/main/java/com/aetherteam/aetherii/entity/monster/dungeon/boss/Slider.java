@@ -311,7 +311,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
      * @return An empty {@link Optional}.
      */
     private Optional<LivingEntity> sendInvalidToolMessage(LivingEntity attacker) {
-        if (!this.level().isClientSide() && attacker instanceof Player player) {
+        if (!this.level().isClientSide() && attacker instanceof Player player && !this.isAwake()) {
             if (this.getChatCooldown() <= 0) {
                 player.displayClientMessage(Component.translatable("gui.aether_ii.slider.message.attack.invalid"), true); // Invalid tool.
                 this.setChatCooldown(15);
