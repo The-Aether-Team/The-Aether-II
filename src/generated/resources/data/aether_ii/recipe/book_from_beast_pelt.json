@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:paper",
+    "minecraft:paper",
+    "minecraft:paper",
+    "aether_ii:beast_pelt"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:book"
+  }
+}
