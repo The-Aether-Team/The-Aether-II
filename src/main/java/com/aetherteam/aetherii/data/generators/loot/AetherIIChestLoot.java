@@ -60,7 +60,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
                         .add(LootItem.lootTableItem(AetherIIBlocks.CLOUDWOOL_BEDROLL))
-                        .add(LootItem.lootTableItem(AetherIIItems.HIDE_BUNDLE))
+                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT_BUNDLE))
                 )
         );
 
@@ -176,7 +176,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_CANISTER).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.HEALING_STONE).setWeight(2))
                         .add(LootItem.lootTableItem(AetherIIItems.CLOUD_SKIFF).setWeight(2))
-                        .add(LootItem.lootTableItem(AetherIIItems.HIDE_BUNDLE).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT_BUNDLE).setWeight(2))
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_IRRADIATED_ITEMS).setWeight(2))
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_MUSIC_DISCS).setWeight(2))
                 )
