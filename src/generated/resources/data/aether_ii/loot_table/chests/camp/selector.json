@@ -6,15 +6,15 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "value": "aether_ii:chests/camp_highfields_hunter"
+          "value": "aether_ii:chests/camp/hunter"
         },
         {
           "type": "minecraft:loot_table",
-          "value": "aether_ii:chests/camp_highfields_farmer"
+          "value": "aether_ii:chests/camp/farmer"
         },
         {
           "type": "minecraft:loot_table",
-          "value": "aether_ii:chests/camp_highfields_fletcher"
+          "value": "aether_ii:chests/camp/fletcher"
         }
       ],
       "rolls": {
@@ -24,5 +24,5 @@
       }
     }
   ],
-  "random_sequence": "aether_ii:chests/camp_highfields"
+  "random_sequence": "aether_ii:chests/camp/selector"
 }

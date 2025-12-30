@@ -5,9 +5,9 @@
         "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:camp/highfields/storage_areas/storage_area_01",
+        "location": "aether_ii:camp/common/storage_areas/chest",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:camp_highfields",
+        "processors": "aether_ii:camp",
         "projection": "rigid",
         "replace_air": true
       },
@@ -18,9 +18,9 @@
         "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:camp/highfields/storage_areas/storage_area_02",
+        "location": "aether_ii:camp/highfields/storage_areas/logs",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:camp_highfields",
+        "processors": "aether_ii:camp",
         "projection": "rigid",
         "replace_air": true
       },

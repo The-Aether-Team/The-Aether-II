@@ -160,7 +160,25 @@
         "max": 1.0,
         "min": 0.0
       }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:cloudwool_bedroll"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:hide_bundle"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 0.0
+      }
     }
   ],
-  "random_sequence": "aether_ii:chests/camp_highfields_hunter"
+  "random_sequence": "aether_ii:chests/camp/hunter"
 }

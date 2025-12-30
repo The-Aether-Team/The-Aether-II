@@ -5,10 +5,10 @@
         "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:camp/highfields/additional_paths/path_01",
+        "location": "aether_ii:camp/magnetic/tents/small_tent",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:camp",
-        "projection": "terrain_matching",
+        "projection": "rigid",
         "replace_air": true
       },
       "weight": 1
@@ -18,13 +18,13 @@
         "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:camp/highfields/additional_paths/path_02",
+        "location": "aether_ii:camp/magnetic/tents/tent",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:camp",
-        "projection": "terrain_matching",
+        "projection": "rigid",
         "replace_air": true
       },
-      "weight": 1
+      "weight": 2
     }
   ],
   "fallback": "minecraft:empty"

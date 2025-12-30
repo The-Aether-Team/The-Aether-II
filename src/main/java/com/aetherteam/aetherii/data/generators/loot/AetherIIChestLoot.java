@@ -25,15 +25,15 @@ public class AetherIIChestLoot implements LootTableSubProvider {
     @Override
     public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> builder) {
 
-        builder.accept(AetherIILoot.CHESTS_CAMP_HIGHFIELDS, LootTable.lootTable()
+        builder.accept(AetherIILoot.CHESTS_CAMP_SELECTOR, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 1.0F))
-                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_CAMP_HIGHFIELDS_HUNTER))
-                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_CAMP_HIGHFIELDS_FARMER))
-                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_CAMP_HIGHFIELDS_FLETCHER))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_CAMP_HUNTER))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_CAMP_FARMER))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_CAMP_FLETCHER))
                 )
         );
 
-        builder.accept(AetherIILoot.CHESTS_CAMP_HIGHFIELDS_HUNTER, LootTable.lootTable()
+        builder.accept(AetherIILoot.CHESTS_CAMP_HUNTER, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.KIRRID_LOIN).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.RAW_TAEGORE_MEAT).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F))))
@@ -57,9 +57,14 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE_SHIELD).setWeight(4))
                         .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_SHIELD))
                 )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.CLOUDWOOL_BEDROLL))
+                        .add(LootItem.lootTableItem(AetherIIItems.HIDE_BUNDLE))
+                )
         );
 
-        builder.accept(AetherIILoot.CHESTS_CAMP_HIGHFIELDS_FARMER, LootTable.lootTable()
+        builder.accept(AetherIILoot.CHESTS_CAMP_FARMER, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.BLUEBERRY).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.ORANGE).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
@@ -87,7 +92,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
         );
 
-        builder.accept(AetherIILoot.CHESTS_CAMP_HIGHFIELDS_FLETCHER, LootTable.lootTable()
+        builder.accept(AetherIILoot.CHESTS_CAMP_FLETCHER, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 3.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_BOLT).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 7.0F))))
                 )
