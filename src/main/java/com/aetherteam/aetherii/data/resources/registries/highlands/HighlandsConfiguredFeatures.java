@@ -1971,7 +1971,7 @@ public class HighlandsConfiguredFeatures {
                         UniformInt.of(6, 9),
                         0.5F,
                         4,
-                        1.0F,
+                        0.5F,
                         UniformInt.of(3, 6),
                         0.5F
                 )
