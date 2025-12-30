@@ -104,7 +104,7 @@ public class PlayerHooks {
                 level.setBlock(pos, snowable.setSnowy(blockInHand.defaultBlockState()), 1 | 2);
                 level.playSound(null, pos, blockInHand.getSoundType(blockInHand.defaultBlockState(), level, pos, player).getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
                 success = true;
-            } else if (blockInHand == AetherIIBlocks.ARCTIC_SNOW.get() && AetherGrassBlock.plantNotSnowed(stateInLevel) && stateInLevel instanceof Snowable snowable) {
+            } else if (blockInHand == AetherIIBlocks.ARCTIC_SNOW.get() && AetherGrassBlock.plantNotSnowed(stateInLevel) && stateInLevel.getBlock() instanceof Snowable snowable) {
                 level.setBlock(pos, snowable.setSnowy(stateInLevel), 1 | 2);
                 level.playSound(null, pos, blockInHand.getSoundType(blockInHand.defaultBlockState(), level, pos, player).getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
                 success = true;

@@ -19,7 +19,6 @@ public class AlkahestLiquidBlock extends VolatileLiquidBlock {
         level.scheduleTick(pos, state.getFluidState().getType(), this.fluid.getTickDelay(level));
     }
 
-
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
         if (this.fluid instanceof AlkahestFluid alkahestFluid && level instanceof ServerLevel serverLevel) {

@@ -72,12 +72,12 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.VALKYRIE_SPROUT_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.HIGHLANDS_BUSH_PATCH_FIELD),
                 new MobSpawnSettings.Builder().creatureGenerationProbability(0.2F)
-                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 2, 4))
-                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 3))
-                        .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 1, 3))
+                        .addSpawn(MobCategory.CREATURE, 9, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 9, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 2, 4))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 3))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 3)),
                 temperature, downfall);
     }
@@ -100,9 +100,9 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 12, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), 1, 3))
-                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 3, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
                         .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 2)),
                 temperature, downfall);
     }
@@ -127,9 +127,9 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(MobCategory.CREATURE, 20, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 20, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 24, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), 1, 3))
-                        .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 12, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
+                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
                         .addSpawn(MobCategory.CREATURE, 16, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 2)),
                 temperature, downfall);
     }
@@ -146,12 +146,12 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.ORANGE_TREE_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.FALLEN_SKYROOT_LOG),
                 new MobSpawnSettings.Builder().creatureGenerationProbability(0.1F)
-                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), 1, 2))
                         .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 2, 4))
-                        .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 3))
-                        .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 1, 3))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 2, 4))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 3))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 3)),
                 temperature, downfall);
     }
@@ -246,12 +246,12 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.HOLYSTONE_ROCKS)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.GRASS_FIELD),
                 new MobSpawnSettings.Builder().creatureGenerationProbability(0.2F)
-                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 2, 4))
-                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 3))
-                        .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 1, 3))
+                        .addSpawn(MobCategory.CREATURE, 9, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 9, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 2, 4))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 3))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 3)),
                 temperature, downfall);
     }
@@ -271,9 +271,9 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 12, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), 1, 3))
-                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
                         .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 2)),
                 temperature, downfall);
     }
@@ -289,12 +289,12 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.BONUS_MAGNETIC_SHROOM_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.SWAMP_BRYALINN_MOSS_COVER),
                 new MobSpawnSettings.Builder().creatureGenerationProbability(0.17F)
-                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 2, 4))
-                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 3))
-                        .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 1, 3))
+                        .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 2, 4))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 3))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 3)),
                 temperature, downfall);
     }
@@ -315,9 +315,9 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 12, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), 1, 3))
-                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
                         .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 2)),
                 temperature, downfall);
     }
@@ -444,9 +444,9 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 12, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_KIRRID.get(), 1, 3))
-                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
                         .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 2)),
                 temperature, downfall, true);
     }
@@ -467,9 +467,9 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 12, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_KIRRID.get(), 1, 3))
-                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
-                        .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 2, 2))
                         .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 1, 2)),
                 temperature, downfall, false);
     }

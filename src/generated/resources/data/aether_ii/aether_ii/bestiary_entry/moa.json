@@ -18,7 +18,7 @@
     {
       "loot": {
         "chance": 1.0,
-        "item": "minecraft:feather",
+        "item": "aether_ii:moa_feather",
         "max_count": 2,
         "min_count": 0
       }

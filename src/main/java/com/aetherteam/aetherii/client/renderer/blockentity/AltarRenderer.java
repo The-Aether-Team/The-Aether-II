@@ -53,7 +53,7 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity> {
                 poseStack.pushPose();
                 poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
                 poseStack.translate(0.5F, 0.5F, -1.01725F);
-                poseStack.mulPose(Axis.ZN.rotationDegrees(direction.toYRot() - 180));
+                poseStack.mulPose(Axis.ZP.rotationDegrees(direction.toYRot() - 180));
 
                 if (!inputStack.isEmpty()) {
                     poseStack.scale(0.5F, 0.5F, 0.5F);
