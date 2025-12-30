@@ -283,10 +283,13 @@ public class AetherIITags {
     }
 
     public static class Structures {
-        public static final TagKey<Structure> TREE_BLACKLIST_FILTER = tag("tree_blacklist_filter");
-        public static final TagKey<Structure> ACID_POOL_BLACKLIST_FILTER = tag("acid_pool_blacklist_filter");
         public static final TagKey<Structure> CAMPS = tag("camps");
         public static final TagKey<Structure> DUNGEONS = tag("dungeons");
+
+        public static final TagKey<Structure> TREE_BLACKLIST_FILTER = tag("tree_blacklist_filter");
+        public static final TagKey<Structure> ALKAHEST_POOL_BLACKLIST_FILTER = tag("alkahest_pool_blacklist_filter");
+        public static final TagKey<Structure> COAST_BLACKLIST_FILTER = tag("coast_blacklist_filter");
+        public static final TagKey<Structure> AERCLOUD_BLACKLIST_FILTER = tag("aercloud_blacklist_filter");
 
         private static TagKey<Structure> tag(String name) {
             return TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
