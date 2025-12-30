@@ -80,7 +80,8 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HighlandsBiomes.SHEER_TUNDRA,
                 HighlandsBiomes.CONTAMINATED_JUNGLE,
                 HighlandsBiomes.BATTLEGROUND_WASTES,
-                HighlandsBiomes.EXPANSE
+                HighlandsBiomes.EXPANSE,
+                HighlandsBiomes.HESTVEIL_CAVERNS
         );
 
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_OUTPOST).add(

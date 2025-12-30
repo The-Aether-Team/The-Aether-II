@@ -1058,7 +1058,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSpawnEggItem(AetherIIItems.SLIDER_SPAWN_EGG);
 
         // Misc
-        this.addItem(AetherIIItems.HIDE_BUNDLE, "Hide Bundle");
+        this.addItem(AetherIIItems.BEAST_PELT_BUNDLE, "Beast Pelt Bundle");
         this.addItem(AetherIIItems.BRETTL_LASSO, "Brettl Lasso");
         this.addItem(AetherIIItems.MOA_EGG, "Moa Egg");
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");

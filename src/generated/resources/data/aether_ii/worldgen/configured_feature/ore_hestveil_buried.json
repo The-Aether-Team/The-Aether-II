@@ -9,7 +9,8 @@
           "Name": "aether_ii:hestveil",
           "Properties": {
             "hestveil_horizontal_distance": "0",
-            "hestveil_vertical_distance": "0"
+            "hestveil_vertical_distance": "0",
+            "ignited": "false"
           }
         },
         "target": {

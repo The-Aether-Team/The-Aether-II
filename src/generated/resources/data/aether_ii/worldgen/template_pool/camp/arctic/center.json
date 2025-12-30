@@ -1,0 +1,83 @@
+{
+  "elements": [
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:camp/arctic/center/small_center_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:camp",
+        "projection": "terrain_matching",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:camp/arctic/center/small_center_02",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:camp",
+        "projection": "terrain_matching",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:camp/arctic/center/medium_center_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:camp",
+        "projection": "terrain_matching",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:camp/arctic/center/medium_center_02",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:camp",
+        "projection": "terrain_matching",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:camp/arctic/center/large_center_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:camp",
+        "projection": "terrain_matching",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:camp/arctic/center/large_center_02",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:camp",
+        "projection": "terrain_matching",
+        "replace_air": true
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

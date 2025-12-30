@@ -1133,7 +1133,15 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("/#/")
                 .pattern("///")
                 .unlockedBy("has_leather", has(AetherIIItems.BEAST_PELT))
-                .save(this.output, this.name("item_frame_from_pelt"));
+                .save(this.output, this.name("item_frame_from_beast_pelt"));
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, Blocks.JUKEBOX) //todo
+                .define('#', AetherIITags.Items.PLANKS_CRAFTING)
+                .define('G', AetherIIItems.GRAVITITE_PLATE)
+                .pattern("###")
+                .pattern("#G#")
+                .pattern("###")
+                .unlockedBy(getHasName(Blocks.JUKEBOX), has(AetherIITags.Items.PLANKS_CRAFTING))
+                .save(this.output, this.name("jukebox_from_gravitite_plate"));
 
         // Bookshelves
         this.bookshelf(getter, AetherIIBlocks.SKYROOT_BOOKSHELF, AetherIIBlocks.SKYROOT_PLANKS);
@@ -1305,6 +1313,27 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_skyroot_pinecone", has(AetherIIItems.SKYROOT_PINECONE))
                 .unlockedBy("has_aechor_petal", has(AetherIIItems.AECHOR_PETAL))
                 .save(this.output);
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.SCATTERGLASS_SHARD.get(), 4)
+                .requires(AetherIIBlocks.CRUDE_SCATTERGLASS)
+                .unlockedBy("has_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, Items.PAPER, 3) //todo
+                .define('#', AetherIIItems.BRETTL_CANE)
+                .pattern("###")
+                .unlockedBy("has_brettl_cane", has(AetherIIItems.BRETTL_CANE))
+                .save(this.output, this.name("paper_from_brettl_cane"));
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.BRETTL_ROPE.get(), 2)
+                .define('#', AetherIIItems.BRETTL_GRASS)
+                .pattern("  #")
+                .pattern(" # ")
+                .pattern("#  ")
+                .unlockedBy("has_brettl_grass", has(AetherIIItems.BRETTL_GRASS))
+                .save(this.output);
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, Items.BOOK) //todo
+                .requires(Items.PAPER, 3)
+                .requires(AetherIIItems.BEAST_PELT)
+                .unlockedBy("has_paper", this.has(Items.PAPER))
+                .save(this.output, this.name("book_from_beast_pelt"));
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.SKYROOT_BUCKET.get(), 1)
                 .define('#', AetherIITags.Items.CRAFTS_SKYROOT_TOOLS)
                 .pattern("# #")
@@ -1317,17 +1346,6 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("#S#")
                 .pattern("#S#")
                 .unlockedBy("has_arkenium", has(AetherIITags.Items.PLATES_ARKENIUM))
-                .save(this.output);
-        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.SCATTERGLASS_SHARD.get(), 4)
-                .requires(AetherIIBlocks.CRUDE_SCATTERGLASS)
-                .unlockedBy("has_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS))
-                .save(this.output);
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.BRETTL_ROPE.get(), 2)
-                .define('#', AetherIIItems.BRETTL_GRASS)
-                .pattern("  #")
-                .pattern(" # ")
-                .pattern("#  ")
-                .unlockedBy("has_brettl_grass", has(AetherIIItems.BRETTL_GRASS))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.SCATTERGLASS_VIAL.get(), 4)
                 .define('#', AetherIIBlocks.SCATTERGLASS.get())
@@ -1410,7 +1428,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_feed", has(AetherIIItems.MOA_FEED))
                 .save(this.output);
 
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.TOOLS, AetherIIItems.HIDE_BUNDLE)
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.TOOLS, AetherIIItems.BEAST_PELT_BUNDLE)
                 .define('-', AetherIIItems.CLOUDTWINE)
                 .define('#', AetherIIItems.BEAST_PELT)
                 .pattern("-")

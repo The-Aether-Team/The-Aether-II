@@ -7,7 +7,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/center/small_center_01",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:camp_highfields",
+        "processors": "aether_ii:camp",
         "projection": "terrain_matching",
         "replace_air": true
       },
@@ -20,7 +20,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/center/small_center_02",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:camp_highfields",
+        "processors": "aether_ii:camp",
         "projection": "terrain_matching",
         "replace_air": true
       },
@@ -33,7 +33,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/center/medium_center_01",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:camp_highfields",
+        "processors": "aether_ii:camp",
         "projection": "terrain_matching",
         "replace_air": true
       },
@@ -46,7 +46,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/center/medium_center_02",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:camp_highfields",
+        "processors": "aether_ii:camp",
         "projection": "terrain_matching",
         "replace_air": true
       },
@@ -59,7 +59,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/center/large_center_01",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:camp_highfields",
+        "processors": "aether_ii:camp",
         "projection": "terrain_matching",
         "replace_air": true
       },
@@ -72,7 +72,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/center/large_center_02",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:camp_highfields",
+        "processors": "aether_ii:camp",
         "projection": "terrain_matching",
         "replace_air": true
       },

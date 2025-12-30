@@ -685,7 +685,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.BLUE_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get());
-                output.accept(AetherIIItems.HIDE_BUNDLE.get());
+                output.accept(AetherIIItems.BEAST_PELT_BUNDLE.get());
                 output.accept(AetherIIItems.BRETTL_LASSO.get());
                 output.accept(AetherIIItems.MOA_SADDLE.get());
                 output.accept(AetherIIItems.MOA_SADDLEBAG.get());
