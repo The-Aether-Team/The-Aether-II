@@ -59,18 +59,16 @@ public class DamageSystemAttachment implements ValueIOSerializable {
             if (attachment.shieldEndurance == 0) {
                 attachment.setShieldEndurance(maxEndurance);
             }
-            if (player.tickCount % 5 == 0) {
-                if (attachment.getShieldEndurance() < maxEndurance && attachment.getShieldEndurance() > 0 && !player.isBlocking()) {
-                    attachment.setShieldEndurance(Math.min(maxEndurance, attachment.getShieldEndurance() + recovery));
-                    player.syncData(AetherIIDataAttachments.DAMAGE_SYSTEM);
-                }
+            if (attachment.getShieldEndurance() < maxEndurance && attachment.getShieldEndurance() > 0 && !player.isBlocking()) {
+                attachment.setShieldEndurance(Math.min(maxEndurance, attachment.getShieldEndurance() + recovery));
+                player.syncData(AetherIIDataAttachments.DAMAGE_SYSTEM);
             }
         }
     }
 
     public void buildUpShieldStun(LivingEntity entity, Entity source, double damage) {
         if (entity instanceof Player player && player.getUseItem().is(Tags.Items.TOOLS_SHIELD)) {
-            if (source != null) { // && source.getType().is(AetherIITags.Entities.AETHER_MOBS)
+            if (source != null && source.getType().is(AetherIITags.Entities.AETHER_MOBS)) {
                 double maxEndurance = AetherIIAttributes.getMaxEndurance(player);
                 double endurance = player.getAttributeValue(AetherIIAttributes.BLOCKING_STRENGTH);
 
