@@ -1,10 +1,10 @@
 package com.aetherteam.aetherii.entity.projectile;
 
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.entity.monster.dungeon.SentryGolem;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -31,15 +31,15 @@ public class DemolitionProjectile extends ThrowableProjectile {
     @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
-        this.level().explode(this, this.getX(), this.getY(), this.getZ(), 2.0F, Level.ExplosionInteraction.NONE);
+        float range = this.getOwner() instanceof Player ? 2.0F : 1.5F;
+        this.level().explode(this, this.getX(), this.getY(), this.getZ(), range, Level.ExplosionInteraction.NONE);
     }
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-        if (!(result.getEntity() instanceof SentryGolem sentryGolem) || (this.getOwner() != null && sentryGolem.getId() != this.getOwner().getId())) {
-            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 1.5F, Level.ExplosionInteraction.NONE);
-        }
+        float range = this.getOwner() instanceof Player ? 1.5F : 1.25F;
+        this.level().explode(this, this.getX(), this.getY(), this.getZ(), range, Level.ExplosionInteraction.NONE);
     }
 
     @Override
