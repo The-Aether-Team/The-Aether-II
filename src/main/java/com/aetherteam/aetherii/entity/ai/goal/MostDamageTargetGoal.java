@@ -101,6 +101,11 @@ public class MostDamageTargetGoal extends TargetGoal {
      */
     public void addAggro(LivingEntity attacker, double damage) {
         this.attackers.mergeDouble(attacker, damage, (Double::sum));
+        this.hurtByAttacker(attacker, this.attackers.getOrDefault(attacker, damage));
+    }
+
+    //usable when using to counter attack system
+    public void hurtByAttacker(LivingEntity attacker, double damage) {
     }
 
     /**
