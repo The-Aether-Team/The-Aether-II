@@ -43,7 +43,7 @@ public class AccessoryContainer extends SimpleContainer {
                 for (int i = 0; i < this.getItems().size(); i++) {
                     ItemStack thisItem = this.getItem(i);
                     ItemStack lastItem = this.lastItems.get(i);
-                    if (!ItemStack.isSameItem(lastItem, this.getItem(i))) {
+                    if (!ItemStack.isSameItem(lastItem, thisItem)) {
                         if (!thisItem.isEmpty() && thisItem.getItem() instanceof AccessoryItem accessory) {
                             accessory.onEquip(thisItem, entity);
                         } else if (thisItem.isEmpty() && !lastItem.isEmpty() && lastItem.getItem() instanceof AccessoryItem accessoryItem) {
