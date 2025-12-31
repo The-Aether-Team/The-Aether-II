@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.ai.controller.CellingMoveControl;
-import com.aetherteam.aetherii.entity.ai.goal.PreAnimationMeleeAttackGoal;
+import com.aetherteam.aetherii.entity.ai.goal.RangedAnimationMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.ai.navigator.CellingPathNavigation;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
@@ -255,9 +255,9 @@ public class BladeshroomHunter extends CellingMonster {
         return this.getState() == State.HIDING ? BURRY_DIMENSIONS : super.getDefaultDimensions(p_316426_);
     }
 
-    protected static class ShroomHunterMeleeAttackGoal extends PreAnimationMeleeAttackGoal {
+    protected static class ShroomHunterMeleeAttackGoal extends RangedAnimationMeleeAttackGoal {
         public ShroomHunterMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen, float attackThreshold) {
-            super(mob, speedModifier, followingTargetEvenIfNotSeen, attackThreshold, 18, 38);
+            super(mob, speedModifier, followingTargetEvenIfNotSeen, 18, 38, attackThreshold);
         }
 
         @Override

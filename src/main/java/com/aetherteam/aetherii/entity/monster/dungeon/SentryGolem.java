@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.CooldownEntity;
 import com.aetherteam.aetherii.entity.FakeShiftEntity;
-import com.aetherteam.aetherii.entity.ai.goal.PreAnimationMeleeAttackGoal;
+import com.aetherteam.aetherii.entity.ai.goal.RangedAnimationMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.projectile.DemolitionProjectile;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -441,9 +441,9 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
         }
     }
 
-    protected static class SentryGolemMeleeAttackGoal extends PreAnimationMeleeAttackGoal {
+    protected static class SentryGolemMeleeAttackGoal extends RangedAnimationMeleeAttackGoal {
         public SentryGolemMeleeAttackGoal(SentryGolem golem, double speedModifier, boolean followingTargetEvenIfNotSeen, float attackThreshold) {
-            super(golem, speedModifier, followingTargetEvenIfNotSeen, attackThreshold, 2, 20);
+            super(golem, speedModifier, followingTargetEvenIfNotSeen, 2, 20, attackThreshold);
         }
     }
 
