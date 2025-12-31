@@ -52,7 +52,7 @@ public abstract class SentryRuinsPiece extends AetherTemplateStructurePiece {
     public static final RuleProcessor SENTRY_STONE = new RuleProcessor(SENTRY_STONE_LIST);
 
     public static final RuleProcessor ROOM_DECORATION_RANDOMIZATION = new RuleProcessor(ImmutableList.of(
-            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.SENTRY_TRAP.get(), 0.65F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.SENTRY_FLAGSTONES.get().defaultBlockState()),
+            new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.SENTRY_TRAP.get(), 0.8F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE_TILE.get().defaultBlockState()),
             new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.SENTRY_CRATE.get(), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
     ));
 
