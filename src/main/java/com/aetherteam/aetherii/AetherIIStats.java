@@ -208,17 +208,9 @@ public class AetherIIStats {
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 2.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, -2.0)
             .build();
-    public static final ImmutableMap<Holder<Attribute>, Double> BLADESHROOM_HUNTER = ImmutableMap.<Holder<Attribute>, Double>builder()
-            .put(Attributes.MAX_HEALTH, 18.0)
-            .put(AetherIIAttributes.SLASH_RESISTANCE, -2.0)
-            .put(AetherIIAttributes.IMPACT_RESISTANCE, 3.0)
-            .put(AetherIIAttributes.PIERCE_RESISTANCE, 3.0)
-            .build();
-
     public static final ImmutableMap<Holder<Attribute>, Double> MIMIC = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 40.0)
             .build();
-
     public static final ImmutableMap<Holder<Attribute>, Double> DETONATION_SENTRY = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 10.0)
             .put(AetherIIAttributes.SLASH_RESISTANCE, 3.0)
@@ -229,6 +221,18 @@ public class AetherIIStats {
             .put(Attributes.MAX_HEALTH, 20.0)
             .put(AetherIIAttributes.SLASH_RESISTANCE, 3.0)
             .put(AetherIIAttributes.IMPACT_RESISTANCE, -2.0)
+            .put(AetherIIAttributes.PIERCE_RESISTANCE, 3.0)
+            .build();
+    public static final ImmutableMap<Holder<Attribute>, Double> SLIDER = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(Attributes.MAX_HEALTH, 350.0)
+            .put(AetherIIAttributes.SLASH_RESISTANCE, 0.0)
+            .put(AetherIIAttributes.IMPACT_RESISTANCE, 0.0)
+            .put(AetherIIAttributes.PIERCE_RESISTANCE, 0.0)
+            .build();
+    public static final ImmutableMap<Holder<Attribute>, Double> BLADESHROOM_HUNTER = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(Attributes.MAX_HEALTH, 18.0)
+            .put(AetherIIAttributes.SLASH_RESISTANCE, -2.0)
+            .put(AetherIIAttributes.IMPACT_RESISTANCE, 3.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, 3.0)
             .build();
 

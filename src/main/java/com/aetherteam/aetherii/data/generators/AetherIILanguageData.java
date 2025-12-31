@@ -1536,6 +1536,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.MIMIC.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.DETONATION_SENTRY.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.SENTRY_GOLEM.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.SLIDER.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), loremIpsum);
     }
 

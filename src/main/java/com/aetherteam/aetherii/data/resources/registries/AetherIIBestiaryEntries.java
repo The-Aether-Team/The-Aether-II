@@ -56,10 +56,11 @@ public class AetherIIBestiaryEntries {
     public static final ResourceKey<BestiaryEntry> COCKATRICE = createKey("cockatrice");
     public static final ResourceKey<BestiaryEntry> ARKENIUM_TALUTON = createKey("arkenium_taluton");
     public static final ResourceKey<BestiaryEntry> GRAVITITE_TALUTON = createKey("gravitite_taluton");
-    public static final ResourceKey<BestiaryEntry> BLADESHROOM_HUNTER = createKey("bladeshroom_hunter");
     public static final ResourceKey<BestiaryEntry> MIMIC = createKey("mimic");
     public static final ResourceKey<BestiaryEntry> DETONATION_SENTRY = createKey("detonation_sentry");
     public static final ResourceKey<BestiaryEntry> SENTRY_GOLEM = createKey("sentry_golem");
+    public static final ResourceKey<BestiaryEntry> SLIDER = createKey("slider");
+    public static final ResourceKey<BestiaryEntry> BLADESHROOM_HUNTER = createKey("bladeshroom_hunter");
 
     public static final Map<ResourceKey<BestiaryEntry>, Holder<EntityType<?>>> ENTITIES = Map.ofEntries(
             Map.entry(FLYING_COW, AetherIIEntityTypes.FLYING_COW),
@@ -90,6 +91,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(MIMIC, AetherIIEntityTypes.MIMIC),
             Map.entry(DETONATION_SENTRY, AetherIIEntityTypes.DETONATION_SENTRY),
             Map.entry(SENTRY_GOLEM, AetherIIEntityTypes.SENTRY_GOLEM),
+            Map.entry(SLIDER, AetherIIEntityTypes.SLIDER),
             Map.entry(BLADESHROOM_HUNTER, AetherIIEntityTypes.BLADESHROOM_HUNTER)
     );
     public static final List<Holder<EntityType<?>>> NAMED = List.of(
@@ -131,6 +133,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.MIMIC, AetherIIStats.MIMIC),
             Map.entry(AetherIIEntityTypes.DETONATION_SENTRY, AetherIIStats.DETONATION_SENTRY),
             Map.entry(AetherIIEntityTypes.SENTRY_GOLEM, AetherIIStats.SENTRY_GOLEM),
+            Map.entry(AetherIIEntityTypes.SLIDER, AetherIIStats.SLIDER),
             Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, AetherIIStats.BLADESHROOM_HUNTER)
     );
     public static final Map<Holder<EntityType<?>>, List<BestiaryEntry.LootDisplay>> LOOT = Map.ofEntries(
@@ -159,6 +162,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.MIMIC, List.of()),
             Map.entry(AetherIIEntityTypes.DETONATION_SENTRY, List.of()),
             Map.entry(AetherIIEntityTypes.SENTRY_GOLEM, List.of()),
+            Map.entry(AetherIIEntityTypes.SLIDER, List.of()),
             Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, List.of())
     );
     public static final Map<Holder<EntityType<?>>, TagKey<Item>> FED = Map.ofEntries(
