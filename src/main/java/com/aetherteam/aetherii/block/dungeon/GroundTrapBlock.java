@@ -1,7 +1,10 @@
 package com.aetherteam.aetherii.block.dungeon;
 
 import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
@@ -42,6 +45,9 @@ public abstract class GroundTrapBlock extends BaseEntityBlock {
         if (!state.getValue(LOCKED)) {
             if (entity instanceof Player && state.getValue(TRAP_STATE) == AetherIIBlockStateProperties.TrapState.LOADED) {
                 level.setBlock(pos, level.getBlockState(pos).setValue(TRAP_STATE, AetherIIBlockStateProperties.TrapState.TRIGGERED), 1 | 2);
+                if (level instanceof ServerLevel serverLevel) {
+                    serverLevel.playSound(null, pos, AetherIISoundEvents.BLOCK_GROUND_TRAP_TRIGGER.get(), SoundSource.BLOCKS, 0.5F, level.getRandom().nextFloat() * 0.1F + 0.9F);
+                }
             }
         }
     }
