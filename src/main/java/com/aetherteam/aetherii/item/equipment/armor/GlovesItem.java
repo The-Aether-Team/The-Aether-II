@@ -25,20 +25,26 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public class GlovesItem extends AccessoryItem {
-    public static final ResourceLocation BASE_GLOVES_COOLDOWN_RESTORATION_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_gloves_cooldown_restoration");
+    public static final ResourceLocation BASE_GLOVES_ENDURANCE_RECOVERY_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_gloves_endurance_recovery");
+    public static final ResourceLocation BASE_GLOVES_MAXIMUM_ENDURANCE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_gloves_maximum_endurance");
 
-    private final double restoration;
+    private final double maxEndurance;
+    private final double enduranceRecovery;
     protected ResourceLocation glovesTexture;
 
-    public GlovesItem(ArmorMaterial material, double restoration, Properties properties) {
+    public GlovesItem(ArmorMaterial material, double maxEndurance, double enduranceRecovery, Properties properties) {
         super(properties.durability(13 * material.durability()), AccessoryContainer.SlotType.HANDWEAR);
-        this.restoration = restoration;
+        this.maxEndurance = maxEndurance;
+        this.enduranceRecovery = enduranceRecovery;
         this.setRenderTexture(material.assetId().location().getNamespace(), material.assetId().location().getPath());
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = Multimaps.forMap(Map.of(AetherIIAttributes.SHIELD_COOLDOWN_REDUCTION, new AttributeModifier(BASE_GLOVES_COOLDOWN_RESTORATION_ID, this.getRestoration(), AttributeModifier.Operation.ADD_VALUE)));
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = Multimaps.forMap(Map.of(
+                AetherIIAttributes.MAXIMUM_ENDURANCE, new AttributeModifier(BASE_GLOVES_MAXIMUM_ENDURANCE_ID, this.getMaxEndurance(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL),
+                AetherIIAttributes.ENDURANCE_RECOVERY, new AttributeModifier(BASE_GLOVES_ENDURANCE_RECOVERY_ID, this.getEnduranceRecovery(), AttributeModifier.Operation.ADD_VALUE)
+        ));
         AccessoryUtil.addAttributeTooltips(stack, tooltipComponents, AttributeTooltipContext.of(null, context, tooltipDisplay, tooltipFlag), modifiers, "blocking");
         super.appendHoverText(stack, context, tooltipDisplay, tooltipComponents, tooltipFlag);
     }
@@ -51,21 +57,32 @@ public class GlovesItem extends AccessoryItem {
         return this.glovesTexture;
     }
 
-    public double getRestoration() {
-        return this.restoration;
+    public double getMaxEndurance() {
+        return this.maxEndurance;
+    }
+
+    public double getEnduranceRecovery() {
+        return this.enduranceRecovery;
     }
 
     public static void updatePlayerAttributes(EntityTickEvent.Pre event) {
         if (event.getEntity() instanceof LivingEntity livingEntity) {
-            AttributeInstance attribute = livingEntity.getAttribute(AetherIIAttributes.SHIELD_COOLDOWN_REDUCTION);
+            AttributeInstance maximumEndurance = livingEntity.getAttribute(AetherIIAttributes.MAXIMUM_ENDURANCE);
+            AttributeInstance enduranceRecovery = livingEntity.getAttribute(AetherIIAttributes.ENDURANCE_RECOVERY);
 
             AccessoryUtil.getFirst(livingEntity, AccessoryContainer.SlotType.HANDWEAR).ifPresentOrElse((stack) -> {
-                if (attribute != null && !attribute.hasModifier(BASE_GLOVES_COOLDOWN_RESTORATION_ID)) {
-                    attribute.addTransientModifier(new AttributeModifier(BASE_GLOVES_COOLDOWN_RESTORATION_ID, ((GlovesItem) stack.getItem()).getRestoration(), AttributeModifier.Operation.ADD_VALUE));
+                if (maximumEndurance != null && !maximumEndurance.hasModifier(BASE_GLOVES_MAXIMUM_ENDURANCE_ID)) {
+                    maximumEndurance.addTransientModifier(new AttributeModifier(BASE_GLOVES_MAXIMUM_ENDURANCE_ID, ((GlovesItem) stack.getItem()).getMaxEndurance(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                }
+                if (enduranceRecovery != null && !enduranceRecovery.hasModifier(BASE_GLOVES_ENDURANCE_RECOVERY_ID)) {
+                    enduranceRecovery.addTransientModifier(new AttributeModifier(BASE_GLOVES_ENDURANCE_RECOVERY_ID, ((GlovesItem) stack.getItem()).getEnduranceRecovery(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
                 }
             }, () -> {
-                if (attribute != null && attribute.hasModifier(BASE_GLOVES_COOLDOWN_RESTORATION_ID)) {
-                    attribute.removeModifier(BASE_GLOVES_COOLDOWN_RESTORATION_ID);
+                if (maximumEndurance != null && maximumEndurance.hasModifier(BASE_GLOVES_MAXIMUM_ENDURANCE_ID)) {
+                    maximumEndurance.removeModifier(BASE_GLOVES_MAXIMUM_ENDURANCE_ID);
+                }
+                if (enduranceRecovery != null && enduranceRecovery.hasModifier(BASE_GLOVES_ENDURANCE_RECOVERY_ID)) {
+                    enduranceRecovery.removeModifier(BASE_GLOVES_ENDURANCE_RECOVERY_ID);
                 }
             });
         }

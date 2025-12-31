@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.mixin.wrappers.common.ItemCooldownsWrapper;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -31,7 +32,7 @@ public class ItemCooldownsMixin implements ItemCooldownsWrapper {
         if (tagContents.contains(resourceLocation)) {
             if (!this.player.level().isClientSide()) {
                 DamageSystemAttachment attachment = this.player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
-                attachment.setShieldStamina(DamageSystemAttachment.MAX_SHIELD_STAMINA);
+                attachment.setShieldEndurance(AetherIIAttributes.getMaxEndurance(this.player));
                 this.player.syncData(AetherIIDataAttachments.DAMAGE_SYSTEM);
 
             }

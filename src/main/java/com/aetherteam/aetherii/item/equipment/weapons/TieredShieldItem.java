@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class TieredShieldItem extends ShieldItem {
-    public static final ResourceLocation BASE_SHIELD_STAMINA_REDUCTION_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_shield_stamina_reduction");
+    public static final ResourceLocation BASE_SHIELD_BLOCKING_STRENGTH_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_shield_blocking_strength");
 
     public TieredShieldItem(ToolMaterial tier, Properties properties) {
         super(properties.durability(tier.durability()).repairable(tier.repairItems()).enchantable(tier.enchantmentValue()).equippableUnswappable(EquipmentSlot.OFFHAND)
@@ -37,13 +37,9 @@ public class TieredShieldItem extends ShieldItem {
                 .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK));
     }
 
-    public static ItemAttributeModifiers createAttributes(int staminaReductionRate) {
-        return createAttributes((float) staminaReductionRate);
-    }
-
-    public static ItemAttributeModifiers createAttributes(float staminaReductionRate) {
+    public static ItemAttributeModifiers createAttributes(float strength) {
         return ItemAttributeModifiers.builder()
-                .add(AetherIIAttributes.SHIELD_STAMINA_REDUCTION, new AttributeModifier(BASE_SHIELD_STAMINA_REDUCTION_ID, staminaReductionRate, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HAND)
+                .add(AetherIIAttributes.BLOCKING_STRENGTH, new AttributeModifier(BASE_SHIELD_BLOCKING_STRENGTH_ID, strength, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HAND)
                 .build();
     }
 }

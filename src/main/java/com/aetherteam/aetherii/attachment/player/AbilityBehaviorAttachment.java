@@ -1,9 +1,9 @@
 package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
-import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -129,7 +129,7 @@ public class AbilityBehaviorAttachment {
     private void resetGlideCheck(Player player) {
         if (player.onGround()) {
             if (!this.getCanRefuelGlide()) {
-                this.setGlidingTimer(AercloudGliderItem.GLIDING_MAX);
+                this.setGlidingTimer(AetherIIAttributes.getMaxEndurance(player));
                 this.setCanRefuelGlide(true);
                 for (Iterator<Map.Entry<Holder<Item>, Boolean>> iterator = this.getCanRefuelAbilities().entrySet().iterator(); iterator.hasNext(); ) {
                     Map.Entry<Holder<Item>, Boolean> entry = iterator.next();

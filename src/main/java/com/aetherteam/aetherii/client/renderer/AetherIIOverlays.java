@@ -233,10 +233,10 @@ public class AetherIIOverlays {
         Options options = minecraft.options;
         if (minecraft.gameMode.getPlayerMode() != GameType.SPECTATOR) {
             DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
-            boolean missingStamina = attachment.getShieldStamina() < DamageSystemAttachment.MAX_SHIELD_STAMINA;
-            boolean displayIndicator = player.isBlocking() || missingStamina;
+            boolean missingEndurance = attachment.getShieldEndurance() < AetherIIAttributes.getMaxEndurance(player);
+            boolean displayIndicator = player.isBlocking() || missingEndurance;
             if (displayIndicator) {
-                float f = attachment.getShieldStamina() / (float) DamageSystemAttachment.MAX_SHIELD_STAMINA;
+                double f = attachment.getShieldEndurance() / AetherIIAttributes.getMaxEndurance(player);
                 if (options.attackIndicator().get() == AttackIndicatorStatus.CROSSHAIR) {
                     if (options.getCameraType().isFirstPerson()) {
                         if (!minecraft.getDebugOverlay().showDebugScreen() || player.isReducedDebugInfo() || options.reducedDebugInfo().get()) {
@@ -247,7 +247,7 @@ public class AetherIIOverlays {
 
                             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k, j, 10, 10);
 
-                            if (attachment.getShieldStamina() == 0) {
+                            if (attachment.getShieldEndurance() == 0) {
                                 int l = (int) (player.getCooldowns().getCooldownPercent(AetherIIItems.SKYROOT_SHIELD.toStack(), partialTicks.getGameTimeDeltaPartialTick(false)) * 10.0F);
                                 guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, CROSSHAIR_BLOCK_INDICATOR_BROKEN_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
                             } else {
@@ -270,7 +270,7 @@ public class AetherIIOverlays {
 
                     guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k2, j2, 18, 18);
 
-                    if (attachment.getShieldStamina() == 0) {
+                    if (attachment.getShieldEndurance() == 0) {
                         int l1 = (int) (player.getCooldowns().getCooldownPercent(AetherIIItems.SKYROOT_SHIELD.toStack(), partialTicks.getGameTimeDeltaPartialTick(false)) * 18.0F);
                         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, HOTBAR_BLOCK_INDICATOR_BROKEN_SPRITE, 18, 18, 0, 18 - l1, k2, j2 + 18 - l1, 18, l1);
                     } else {

@@ -291,8 +291,9 @@ public class AetherIIEventListeners {
     public static void onLivingBlockAttack(LivingShieldBlockEvent event) {
         LivingEntity livingEntity = event.getEntity();
         DamageSource source = event.getDamageSource();
+        double blockedDamage = event.getBlockedDamage();
 
-        livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, source.getEntity());
+        livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, source.getEntity(), blockedDamage);
     }
 
     public static void onLivingItemUsed(LivingEntityUseItemEvent.Finish event) {
