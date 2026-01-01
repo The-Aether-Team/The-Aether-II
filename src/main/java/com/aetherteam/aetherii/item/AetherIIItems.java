@@ -22,6 +22,7 @@ import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
 import com.aetherteam.aetherii.item.equipment.armor.abilities.*;
 import com.aetherteam.aetherii.item.equipment.charms.CharmItem;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.HolystoneTool;
+import com.aetherteam.aetherii.item.equipment.tools.abilities.ZaniteTool;
 import com.aetherteam.aetherii.item.equipment.tools.arkenium.ArkeniumAxeItem;
 import com.aetherteam.aetherii.item.equipment.tools.arkenium.ArkeniumPickaxeItem;
 import com.aetherteam.aetherii.item.equipment.tools.arkenium.ArkeniumShovelItem;
@@ -40,6 +41,7 @@ import com.aetherteam.aetherii.item.equipment.tools.skyroot.SkyrootShovelItem;
 import com.aetherteam.aetherii.item.equipment.tools.skyroot.SkyrootTrowelItem;
 import com.aetherteam.aetherii.item.equipment.tools.zanite.*;
 import com.aetherteam.aetherii.item.equipment.weapons.*;
+import com.aetherteam.aetherii.item.equipment.weapons.abilities.ZaniteWeapon;
 import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumCrossbowItem;
 import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumHammerItem;
 import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumShortswordItem;
@@ -391,8 +393,12 @@ public class AetherIIItems {
         bus.addListener(GravititeArmor::playerFall);
         bus.addListener(GravititeArmor::playerUpdate);
 
+        // Weapons
+        bus.addListener(ZaniteWeapon::updateItemAttributes);
+
         // Tools
         bus.addListener(HolystoneTool::dropAmbrosium);
+        bus.addListener(ZaniteTool::updateItemAttributes);
 
         // Charms
         bus.addListener(CharmItem::updateItemAttributes);

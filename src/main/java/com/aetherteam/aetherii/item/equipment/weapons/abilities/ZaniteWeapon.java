@@ -11,13 +11,14 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
-public interface ZaniteWeapon extends ZaniteTool { //todo replace with ItemAttributeModifierEvent
+public interface ZaniteWeapon extends ZaniteTool {
     ResourceLocation DAMAGE_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_attack_damage");
     ResourceLocation SLASH_DAMAGE_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_slash_attack_damage");
     ResourceLocation IMPACT_DAMAGE_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_impact_attack_damage");
@@ -29,20 +30,43 @@ public interface ZaniteWeapon extends ZaniteTool { //todo replace with ItemAttri
             Map.entry(AetherIIAttributes.PIERCE_DAMAGE, PIERCE_DAMAGE_MODIFIER_ID)
     );
 
-    default ItemAttributeModifiers increaseDamage(Holder<Attribute> typeAttribute, ItemAttributeModifiers modifiers, ItemStack stack) {
+    static void updateItemAttributes(ItemAttributeModifierEvent event) {
+        ItemStack stack = event.getItemStack();
+        ItemAttributeModifiers defaultModifiers = event.getDefaultModifiers();
+        List<ItemAttributeModifiers.Entry> modifiers = event.getModifiers();
+
+        if (stack.getItem() instanceof ZaniteWeapon zaniteWeapon) {
+            List<ItemAttributeModifiers.Entry> updatedEntries = new ArrayList<>();
+            List<ItemAttributeModifiers.Entry> newEntries = zaniteWeapon.increaseDamage(AetherIIAttributes.SLASH_DAMAGE, defaultModifiers, stack);
+            for (ItemAttributeModifiers.Entry newEntry : newEntries) {
+                boolean flag = true;
+                for (ItemAttributeModifiers.Entry oldEntry : modifiers) {
+                    double newAmount = newEntry.modifier().amount();
+                    double oldAmount = oldEntry.modifier().amount();
+                    if (oldEntry.matches(newEntry.attribute(), newEntry.modifier().id())) {
+                        if (oldAmount != newAmount) {
+                            updatedEntries.add(newEntry);
+                            flag = false;
+                        }
+                    }
+                }
+                if (flag) {
+                    updatedEntries.add(newEntry);
+                }
+            }
+            for (ItemAttributeModifiers.Entry updatedEntry : updatedEntries) {
+                event.replaceModifier(updatedEntry.attribute(), updatedEntry.modifier(), updatedEntry.slot());
+            }
+        }
+    }
+
+    default List<ItemAttributeModifiers.Entry> increaseDamage(Holder<Attribute> typeAttribute, ItemAttributeModifiers modifiers, ItemStack stack) {
         List<ItemAttributeModifiers.Entry> modifierEntryList = new ArrayList<>(modifiers.modifiers());
 
-        modifierEntryList.removeIf((entry) -> entry.modifier().is(DAMAGE_TYPES.get(typeAttribute)));
         modifierEntryList.add(new ItemAttributeModifiers.Entry(typeAttribute, new AttributeModifier(DAMAGE_TYPES.get(typeAttribute), this.calculateDamageIncrease(typeAttribute, DAMAGE_TYPES.get(typeAttribute), modifiers, stack), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND));
-
-        modifierEntryList.removeIf((entry) -> entry.modifier().is(DAMAGE_MODIFIER_ID));
         modifierEntryList.add(new ItemAttributeModifiers.Entry(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_MODIFIER_ID, this.calculateDamageIncrease(Attributes.ATTACK_DAMAGE, DAMAGE_MODIFIER_ID, modifiers, stack), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND));
 
-        ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
-        for (ItemAttributeModifiers.Entry entry : modifierEntryList) {
-            builder.add(entry.attribute(), entry.modifier(), entry.slot());
-        }
-        return builder.build();
+        return modifierEntryList;
     }
 
      default int calculateDamageIncrease(Holder<Attribute> base, ResourceLocation bonusModifier, ItemAttributeModifiers modifiers, ItemStack stack) {
