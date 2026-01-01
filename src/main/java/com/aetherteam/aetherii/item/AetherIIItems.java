@@ -394,11 +394,11 @@ public class AetherIIItems {
         bus.addListener(GravititeArmor::playerUpdate);
 
         // Weapons
-        bus.addListener(ZaniteWeapon::updateItemAttributes);
+        bus.addListener(ZaniteWeapon::updateWeaponAttributes);
 
         // Tools
         bus.addListener(HolystoneTool::dropAmbrosium);
-        bus.addListener(ZaniteTool::updateItemAttributes);
+        bus.addListener(ZaniteTool::updateToolAttributes);
 
         // Charms
         bus.addListener(CharmItem::updateItemAttributes);

@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.item.equipment.weapons.abilities;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
+import com.aetherteam.aetherii.item.equipment.ZaniteBuff;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.ZaniteTool;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -13,12 +14,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
-public interface ZaniteWeapon extends ZaniteTool {
+public interface ZaniteWeapon extends ZaniteBuff {
     ResourceLocation DAMAGE_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_attack_damage");
     ResourceLocation SLASH_DAMAGE_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_slash_attack_damage");
     ResourceLocation IMPACT_DAMAGE_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_impact_attack_damage");
@@ -30,14 +29,14 @@ public interface ZaniteWeapon extends ZaniteTool {
             Map.entry(AetherIIAttributes.PIERCE_DAMAGE, PIERCE_DAMAGE_MODIFIER_ID)
     );
 
-    static void updateItemAttributes(ItemAttributeModifierEvent event) {
+    static void updateWeaponAttributes(ItemAttributeModifierEvent event) {
         ItemStack stack = event.getItemStack();
         ItemAttributeModifiers defaultModifiers = event.getDefaultModifiers();
         List<ItemAttributeModifiers.Entry> modifiers = event.getModifiers();
 
         if (stack.getItem() instanceof ZaniteWeapon zaniteWeapon) {
-            List<ItemAttributeModifiers.Entry> updatedEntries = new ArrayList<>();
-            List<ItemAttributeModifiers.Entry> newEntries = zaniteWeapon.increaseDamage(AetherIIAttributes.SLASH_DAMAGE, defaultModifiers, stack);
+            Set<ItemAttributeModifiers.Entry> updatedEntries = new HashSet<>();
+            Set<ItemAttributeModifiers.Entry> newEntries = new HashSet<>(zaniteWeapon.increaseDamage(AetherIIAttributes.SLASH_DAMAGE, defaultModifiers, stack));
             for (ItemAttributeModifiers.Entry newEntry : newEntries) {
                 boolean flag = true;
                 for (ItemAttributeModifiers.Entry oldEntry : modifiers) {
@@ -61,7 +60,7 @@ public interface ZaniteWeapon extends ZaniteTool {
     }
 
     default List<ItemAttributeModifiers.Entry> increaseDamage(Holder<Attribute> typeAttribute, ItemAttributeModifiers modifiers, ItemStack stack) {
-        List<ItemAttributeModifiers.Entry> modifierEntryList = new ArrayList<>(modifiers.modifiers());
+        List<ItemAttributeModifiers.Entry> modifierEntryList = new ArrayList<>();
 
         modifierEntryList.add(new ItemAttributeModifiers.Entry(typeAttribute, new AttributeModifier(DAMAGE_TYPES.get(typeAttribute), this.calculateDamageIncrease(typeAttribute, DAMAGE_TYPES.get(typeAttribute), modifiers, stack), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND));
         modifierEntryList.add(new ItemAttributeModifiers.Entry(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_MODIFIER_ID, this.calculateDamageIncrease(Attributes.ATTACK_DAMAGE, DAMAGE_MODIFIER_ID, modifiers, stack), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND));
@@ -85,7 +84,6 @@ public interface ZaniteWeapon extends ZaniteTool {
         if (boostedDamage < 0.0) {
             boostedDamage = 0.0;
         }
-//         AetherII.LOGGER.info(String.valueOf(boostedDamage));
         return (int) Math.round(boostedDamage);
     }
 }

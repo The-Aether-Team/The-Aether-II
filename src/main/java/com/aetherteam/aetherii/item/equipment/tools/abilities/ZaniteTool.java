@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.item.equipment.tools.abilities;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.item.equipment.ZaniteBuff;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -14,10 +15,10 @@ import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-public interface ZaniteTool {
+public interface ZaniteTool extends ZaniteBuff {
     ResourceLocation MINING_EFFICIENCY_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_mining_efficiency");
 
-    static void updateItemAttributes(ItemAttributeModifierEvent event) {
+    static void updateToolAttributes(ItemAttributeModifierEvent event) {
         ItemStack stack = event.getItemStack();
         ItemAttributeModifiers defaultModifiers = event.getDefaultModifiers();
         List<ItemAttributeModifiers.Entry> modifiers = event.getModifiers();
@@ -57,9 +58,5 @@ public interface ZaniteTool {
             }
         });
         return this.calculateZaniteBuff(stack, baseStat.get()) - baseStat.get();
-    }
-
-    default double calculateZaniteBuff(ItemStack stack, double baseValue) {
-        return baseValue * (2.0 * ((double) stack.getDamageValue()) / ((double) stack.getMaxDamage()) + 0.5);
     }
 }
