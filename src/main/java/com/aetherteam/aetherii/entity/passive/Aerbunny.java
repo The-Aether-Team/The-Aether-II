@@ -220,7 +220,6 @@ public class Aerbunny extends AetherTamableAnimal {
                             if (this.getPuffCooldown() <= 0) { // Also check cooldown timer.
                                 player.setDeltaMovement(player.getDeltaMovement().x(), 0.125, player.getDeltaMovement().z());
                                 ClientPacketDistributor.sendToServer(new AerbunnyPuffPacket(this.getId())); // Calls Aerbunny#puff() on the server.
-                                this.spawnPuffParticles();
                                 this.lastPos = null;
                                 this.setPuffCooldown(20);
                             }
