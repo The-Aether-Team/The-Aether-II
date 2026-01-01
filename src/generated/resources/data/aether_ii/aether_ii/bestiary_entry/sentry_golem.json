@@ -2,7 +2,7 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.sentry_golem",
   "effect_resistances": [],
   "entity_type": "aether_ii:sentry_golem",
-  "health": 20,
+  "health": 40,
   "icon": "aether_ii:guidebook/bestiary/sentry_golem",
   "id": "aether_ii:sentry_golem",
   "impact_defense": -2,

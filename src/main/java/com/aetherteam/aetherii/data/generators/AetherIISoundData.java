@@ -142,6 +142,16 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:block/chest/close3")
                 ).subtitle("subtitles.aether_ii.block.alkahest_purifier.close")
         );
+        this.add(AetherIISoundEvents.BLOCK_GROUND_TRAP_TRIGGER,
+                definition().with(
+                        sound("aether_ii:block/ground_trap/trigger1"),
+                        sound("aether_ii:block/ground_trap/trigger2"),
+                        sound("aether_ii:block/ground_trap/trigger3"),
+                        sound("aether_ii:block/ground_trap/trigger4"),
+                        sound("aether_ii:block/ground_trap/trigger5"),
+                        sound("aether_ii:block/ground_trap/trigger6")
+                ).subtitle("subtitles.aether_ii.block.ground_trap.trigger")
+        );
         this.add(AetherIISoundEvents.WATER_EVAPORATE,
                 definition().with(sound("minecraft:random/fizz")
                 ).subtitle("subtitles.aether.block.water.evaporate")

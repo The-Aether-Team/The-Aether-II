@@ -37,6 +37,8 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_ALKAHEST_PURIFIER_OPEN = register("block.alkahest_purifier.open");
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_ALKAHEST_PURIFIER_CLOSE = register("block.alkahest_purifier.close");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_GROUND_TRAP_TRIGGER = register("block.ground_trap.trigger");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> WATER_EVAPORATE = register("block.water.evaporate");
 
     // Items

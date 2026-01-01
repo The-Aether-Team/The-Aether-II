@@ -26,7 +26,7 @@ public class MimicContainerProcessor extends StructureProcessor {
         RandomSource random = RandomSource.create(Mth.getSeed(blockInfo.pos()));
 
         if (blockInfo.state().is(AetherIITags.Blocks.MIMIC_CONTAINERS)) {
-            if (random.nextDouble() <= 0.2) {
+            if (random.nextDouble() <= 0.3) {
                 CompoundTag tag = blockInfo.nbt();
                 if (tag != null) {
                     DataComponentMap oldMap = tag.read("components", DataComponentMap.CODEC).orElse(DataComponentMap.EMPTY);

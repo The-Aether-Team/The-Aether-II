@@ -103,6 +103,17 @@
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },
+  "block.ground_trap.trigger": {
+    "sounds": [
+      "aether_ii:block/ground_trap/trigger1",
+      "aether_ii:block/ground_trap/trigger2",
+      "aether_ii:block/ground_trap/trigger3",
+      "aether_ii:block/ground_trap/trigger4",
+      "aether_ii:block/ground_trap/trigger5",
+      "aether_ii:block/ground_trap/trigger6"
+    ],
+    "subtitle": "subtitles.aether_ii.block.ground_trap.trigger"
+  },
   "block.hestveil.ignite": {
     "sounds": [
       "mob/ghast/fireball4"

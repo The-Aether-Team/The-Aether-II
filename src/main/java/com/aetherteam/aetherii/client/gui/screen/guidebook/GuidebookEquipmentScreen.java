@@ -268,10 +268,12 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                             }
                             this.getMinecraft().gameMode.handleCreativeModeItemAdd(ItemStack.EMPTY, j);
                         }
+                        return;
                     } else {
                         if (slot == this.destroyItemSlot && this.destroyItemSlot != null) {
                             this.getMenu().setCarried(ItemStack.EMPTY);
                             ClientPacketDistributor.sendToServer(new ClearItemPacket());
+                            return;
                         }
                     }
                 }
@@ -303,6 +305,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                                     //data.setSynched(Minecraft.getInstance().player.getId(), INBTSynchable.Direction.SERVER, "setAmount", data.getAmount() - amount);
                                     this.getMenu().setCarried(stack.copy());
                                     ClientPacketDistributor.sendToServer(new HeldCurrencyPacket(stack.copy()));
+                                    return;
                                 }
                             }
                         } else if (this.getMenu().getCarried().getItem() instanceof CurrencyItem currencyItem) {
@@ -320,6 +323,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                                 //data.setSynched(Minecraft.getInstance().player.getId(), INBTSynchable.Direction.SERVER, "setAmount", data.getAmount() + amount);
                                 this.getMenu().setCarried(stack);
                                 ClientPacketDistributor.sendToServer(new HeldCurrencyPacket(stack));
+                                return;
                             }
                         }
                     }
