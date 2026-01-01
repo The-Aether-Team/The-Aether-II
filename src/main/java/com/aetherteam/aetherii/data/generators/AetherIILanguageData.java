@@ -1,7 +1,5 @@
 package com.aetherteam.aetherii.data.generators;
 
-import java.util.TreeMap;
-
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
@@ -15,12 +13,13 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
-
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
+
+import java.util.TreeMap;
 
 public class AetherIILanguageData extends AetherIILanguageProvider {
     public AetherIILanguageData(PackOutput output) {
@@ -1559,6 +1558,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "sheepuff.death", "Sheepuff dies");
         this.addSubtitle("entity", "sheepuff.hurt", "Sheepuff hurts");
         this.addSubtitle("entity", "sheepuff.step", "Footsteps");
+
+        this.addSubtitle("entity", "aerwhale.ambient", "Aerwhale whistles");
+        this.addSubtitle("entity", "aerwhale.hurt", "Aerwhale hurts");
+        this.addSubtitle("entity", "aerwhale.death", "Aerwhale cries");
 
         this.addSubtitle("entity", "aerbunny.ambient", "Aerbunny squeaks");
         this.addSubtitle("entity", "aerbunny.death", "Aerbunny dies");
