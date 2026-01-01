@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.event.hooks.BiomeHooks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
+import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.event.FreezeEvent;
 import com.aetherteam.aetherii.event.hooks.BlockHooks;
@@ -311,6 +312,11 @@ public class AetherIIEventListeners {
 
         if (source != null && (source.getType() == AetherIIEntityTypes.DETONATION_SENTRY.get() || source.getType() == AetherIIEntityTypes.SENTRY_GOLEM.get())) {
             event.getAffectedEntities().removeIf((entity) -> entity instanceof ItemEntity);
+            event.getAffectedEntities().forEach((entity) -> {
+                if (entity instanceof LivingEntity livingEntity) {
+                    livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, EffectBuildupPresets.STUN, 150);
+                }
+            });
         }
     }
 

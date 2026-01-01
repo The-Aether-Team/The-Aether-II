@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.entity.ai.goal.boss;
 
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
+import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.dungeon.boss.Slider;
 import net.minecraft.server.level.ServerLevel;
@@ -37,6 +39,8 @@ public class CollideGoal extends Goal {
             for (Entity entity : this.slider.level().getEntities(this.slider, collisionBounds)) {
                 DamageSource damageSource = AetherIIDamageTypes.entityDamageSource(this.slider.level(), AetherIIDamageTypes.CRUSH, this.slider);
                 if (entity instanceof LivingEntity livingEntity && !livingEntity.isInvulnerableTo(serverLevel, damageSource) && entity.hurtServer(serverLevel, damageSource, 6)) {
+                    livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, EffectBuildupPresets.STUN, 150);
+
                     if (livingEntity instanceof Player player && player.getUseItem().is(Items.SHIELD) && player.isBlocking()) { // Disables the player's Shield if one is being used. //TODO CHECK NEW SHIELDS
                         player.getCooldowns().addCooldown(Items.SHIELD.getDefaultInstance(), 100);
                         player.stopUsingItem();
