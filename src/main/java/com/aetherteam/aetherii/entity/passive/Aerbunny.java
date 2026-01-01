@@ -338,16 +338,6 @@ public class Aerbunny extends AetherTamableAnimal {
     }
 
     @Override
-    protected EntityDimensions getDefaultDimensions(Pose pose) {
-        if (this.getVehicle() instanceof Player vehicle) {
-            if (!vehicle.isShiftKeyDown()) {
-                return EntityDimensions.scalable(0.03F, 0.03F);
-            }
-        }
-        return super.getDefaultDimensions(pose);
-    }
-
-    @Override
     public boolean shouldRenderAtSqrDistance(double distance) {
         double d0 = this.getType().getDimensions().makeBoundingBox(this.position()).getSize();
         if (Double.isNaN(d0)) {
@@ -591,6 +581,9 @@ public class Aerbunny extends AetherTamableAnimal {
 
     @Override
     public boolean canRiderInteract() {
+        if (this.getVehicle() instanceof Player vehicle) {
+            return vehicle.isShiftKeyDown();
+        }
         return true;
     }
 
@@ -601,7 +594,11 @@ public class Aerbunny extends AetherTamableAnimal {
     @Override
     public boolean isPickable() {
         if (this.getVehicle() instanceof Player player) {
-            return player.getBoundingBox().expandTowards(player.getViewVector(0.0F)).contains(this.getBoundingBox().getCenter().add(0, this.getBoundingBox().getSize() / 2, 0));
+            if (!player.isShiftKeyDown()) {
+                return false;
+            } else {
+                return player.getBoundingBox().expandTowards(player.getViewVector(0.0F)).contains(this.getBoundingBox().getCenter().add(0, this.getBoundingBox().getSize() / 2, 0));
+            }
         }
         return true;
     }
