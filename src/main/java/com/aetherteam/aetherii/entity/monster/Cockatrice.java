@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
-import com.aetherteam.aetherii.entity.ai.goal.RangedAnimationMeleeAttackGoal;
+import com.aetherteam.aetherii.entity.ai.goal.ClosedAnimationMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.projectile.VenomousDart;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -186,7 +186,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
         this.playSound(AetherIISoundEvents.ENTITY_COCKATRICE_STEP.get(), 0.15F, 1.0F);
     }
 
-    protected static class CockatriceMeleeAttackGoal extends RangedAnimationMeleeAttackGoal {
+    protected static class CockatriceMeleeAttackGoal extends ClosedAnimationMeleeAttackGoal {
 
         public CockatriceMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen, float attackThreshold) {
             super(mob, speedModifier, followingTargetEvenIfNotSeen, 13, 30, attackThreshold);

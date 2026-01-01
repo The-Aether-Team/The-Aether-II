@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.CooldownEntity;
 import com.aetherteam.aetherii.entity.FakeShiftEntity;
-import com.aetherteam.aetherii.entity.ai.goal.RangedAnimationMeleeAttackGoal;
+import com.aetherteam.aetherii.entity.ai.goal.ClosedAnimationMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.projectile.DemolitionProjectile;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -75,7 +75,7 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
         this.randomStrollGoal = new SentryGolemStrollGoal(this, 0.75F);
 
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new SentryGolemMeleeAttackGoal(this, 1.15F, true, 6.0F));
+        this.goalSelector.addGoal(1, new SentryGolemMeleeAttackGoal(this, 1.15F, true, 7.5F));
         this.goalSelector.addGoal(2, this.randomStrollGoal);
         this.goalSelector.addGoal(3, new ThrowExplosiveAttackGoal(this, 20, 0.45F, 52.0F, 255.0F));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
@@ -375,14 +375,14 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
             LivingEntity targetEntity = this.golem.getTarget();
             if (targetEntity != null && targetEntity.isAlive()) {
                 this.target = targetEntity;
-                return true;
+                return this.golem.distanceToSqr(targetEntity) >= this.minAttackRange;
             } else {
                 return false;
             }
         }
 
         public boolean canContinueToUse() {
-            return this.canUse() || this.target.isAlive() && !this.golem.getNavigation().isDone();
+            return this.canUse() || this.target.isAlive() && !this.golem.getNavigation().isDone() && this.golem.distanceToSqr(this.target) >= this.minAttackRange;
         }
 
         @Override
@@ -411,12 +411,7 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
             }
 
             if (distance <= (double) this.minAttackRange && this.seeTime >= 20) {
-                Vec3 randomPos = LandRandomPos.getPos(this.golem, 16, 7);
-                if (randomPos != null) {
-                    this.golem.getNavigation().moveTo(randomPos.x(), randomPos.y(), randomPos.z(), this.speedModifier);
-                } else {
-                    this.golem.getNavigation().moveTo(this.target, this.speedModifier);
-                }
+                this.golem.getNavigation().moveTo(this.target, this.speedModifier);
             } else if (distance <= (double) this.maxAttackRange && this.seeTime >= 20) {
                 this.golem.getNavigation().stop();
             } else {
@@ -441,7 +436,7 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
         }
     }
 
-    protected static class SentryGolemMeleeAttackGoal extends RangedAnimationMeleeAttackGoal {
+    protected static class SentryGolemMeleeAttackGoal extends ClosedAnimationMeleeAttackGoal {
         public SentryGolemMeleeAttackGoal(SentryGolem golem, double speedModifier, boolean followingTargetEvenIfNotSeen, float attackThreshold) {
             super(golem, speedModifier, followingTargetEvenIfNotSeen, 2, 20, attackThreshold);
         }

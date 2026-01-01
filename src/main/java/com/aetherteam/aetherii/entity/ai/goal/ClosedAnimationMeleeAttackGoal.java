@@ -2,12 +2,12 @@ package com.aetherteam.aetherii.entity.ai.goal;
 
 import net.minecraft.world.entity.PathfinderMob;
 
-public class RangedAnimationMeleeAttackGoal extends PreAnimationMeleeAttackGoal {
+public class ClosedAnimationMeleeAttackGoal extends PreAnimationMeleeAttackGoal {
     private double attackThresholdSqr;
 
-    public RangedAnimationMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen, int attackAction, int attackLength, float attackThreshold) {
+    public ClosedAnimationMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen, int attackAction, int attackLength, float attackThreshold) {
         super(mob, speedModifier, followingTargetEvenIfNotSeen, attackAction, attackLength);
-        this.attackThresholdSqr = attackThreshold;
+        this.attackThresholdSqr = attackThreshold * attackThreshold;
     }
 
     @Override
