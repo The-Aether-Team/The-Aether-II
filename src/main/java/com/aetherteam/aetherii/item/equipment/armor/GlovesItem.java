@@ -28,12 +28,10 @@ public class GlovesItem extends AccessoryItem {
     public static final ResourceLocation BASE_GLOVES_COOLDOWN_RESTORATION_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_gloves_cooldown_restoration");
 
     private final double restoration;
-    protected ResourceLocation glovesTexture;
 
     public GlovesItem(ArmorMaterial material, double restoration, Properties properties) {
         super(properties.durability(13 * material.durability()), AccessoryContainer.SlotType.HANDWEAR);
         this.restoration = restoration;
-        this.setRenderTexture(material.assetId().location().getNamespace(), material.assetId().location().getPath());
     }
 
     @Override
@@ -43,12 +41,9 @@ public class GlovesItem extends AccessoryItem {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipComponents, tooltipFlag);
     }
 
-    public void setRenderTexture(String modId, String registryName) {
-        this.glovesTexture = ResourceLocation.fromNamespaceAndPath(modId, "textures/entity/equipment/humanoid_gloves/" + registryName + ".png");
-    }
-
-    public ResourceLocation getGlovesTexture() {
-        return this.glovesTexture;
+    @Override
+    public boolean rendersInFirstPerson(ItemStack stack) {
+        return true;
     }
 
     public double getRestoration() {
