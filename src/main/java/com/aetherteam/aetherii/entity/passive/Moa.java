@@ -40,6 +40,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.Mth;
@@ -69,10 +70,12 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.ItemAbilities;
 import org.jetbrains.annotations.Contract;
 
 import javax.annotation.Nullable;
@@ -385,20 +388,6 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
             if (this.getRandom().nextInt(900) == 0 && this.deathTime == 0) {
                 this.heal(1.0F);
             }
-            if (!this.isBaby() && this.getRandom().nextInt(3750) == 0) {
-                if (this.level() instanceof ServerLevel serverLevel) {
-                    ItemStack featherStack = new ItemStack(AetherIIItems.MOA_FEATHER.get());
-                    FeatherColor featherColor = this.getFeatherColor();
-                    var specialVariantOpt = this.getSpecialVariant();
-                    if (specialVariantOpt.isPresent()) {
-                        var specialVariant = specialVariantOpt.get();
-                        featherColor = specialVariant.getFeatherColor(this);
-                        specialVariant.addDataToFeatherItem(featherStack);
-                    }
-                    featherStack.set(AetherIIDataComponents.FEATHER_COLOR, featherColor);
-                    this.spawnAtLocation(serverLevel, featherStack);
-                }
-            }
             //TODO MOA EGG LAY
 //            if (!this.isBaby() && this.getPassengers().isEmpty() && --this.eggTime <= 0) {
 //                MoaType moaType = this.getMoaType();
@@ -621,6 +610,23 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                     }
                 }
             }
+        } else if (itemStack.canPerformAction(ItemAbilities.SHEARS_HARVEST) && !this.isBaby() && this.isPlayerGrown()) {
+            if (this.level() instanceof ServerLevel serverLevel) {
+                ItemStack featherStack = new ItemStack(AetherIIItems.MOA_FEATHER.get(), 8);
+                FeatherColor featherColor = this.getFeatherColor();
+                var specialVariantOpt = this.getSpecialVariant();
+                if (specialVariantOpt.isPresent()) {
+                    var specialVariant = specialVariantOpt.get();
+                    featherColor = specialVariant.getFeatherColor(this);
+                    specialVariant.addDataToFeatherItem(featherStack);
+                }
+                featherStack.set(AetherIIDataComponents.FEATHER_COLOR, featherColor);
+                this.spawnAtLocation(serverLevel, featherStack);
+                this.gameEvent(GameEvent.ENTITY_INTERACT);
+                this.playSound(SoundEvents.SHEARS_SNIP);
+            }
+            itemStack.hurtAndBreak(32, player, getSlotForHand(hand));
+            return InteractionResult.SUCCESS;
         } else {
             if (this.isPlayerGrown() && player.isShiftKeyDown() && !this.isBaby()) {
 //                this.setSitting(!this.isSitting()); //todo
