@@ -22,6 +22,14 @@ public class SliderMoveGoal extends Goal {
         if (this.slider.isAwake() && !this.slider.isDeadOrDying() && this.slider.getMoveDelay() <= 0) {
             targetPoint = this.slider.findTargetPoint();
             return targetPoint != null;
+        } else if (this.slider.isAwake() && this.slider.isDeadOrDying() && this.slider.getMoveDelay() <= 0 && this.slider.getDungeon() != null) {
+            if (this.slider.sliderDeathTime >= 110) {
+                targetPoint = this.slider.getDungeon().originCoordinates();
+            } else {
+                targetPoint = this.slider.getDungeon().originCoordinates().add(0, 3, 0);
+            }
+
+            return targetPoint != null;
         }
         return false;
     }

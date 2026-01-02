@@ -6,7 +6,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -25,7 +24,7 @@ public class CrushGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        return this.slider.isAwake() && !this.slider.isDeadOrDying() && (slider.horizontalCollision || this.slider.verticalCollision || this.blocksBetween(this.slider));
+        return this.slider.isAwake() && (slider.horizontalCollision || this.slider.verticalCollision || this.blocksBetween(this.slider));
     }
 
     @Override

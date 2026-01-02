@@ -35,6 +35,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.profiling.Profiler;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
@@ -59,7 +61,10 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enemy, IEntityWithComplexSpawn {
@@ -387,6 +392,33 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     @Override
     protected void tickDeath() {
         this.sliderDeathTime++;
+
+        //use to slider usable goal while death animation
+        if (this.level() instanceof ServerLevel serverLevel) {
+            ProfilerFiller profilerfiller = Profiler.get();
+            int i = this.tickCount + this.getId();
+            if (i % 2 != 0 && this.tickCount > 1) {
+                profilerfiller.push("targetSelector");
+                this.targetSelector.tickRunningGoals(false);
+                profilerfiller.pop();
+                profilerfiller.push("goalSelector");
+                this.goalSelector.tickRunningGoals(false);
+                profilerfiller.pop();
+            } else {
+                profilerfiller.push("targetSelector");
+                this.targetSelector.tick();
+                profilerfiller.pop();
+                profilerfiller.push("goalSelector");
+                this.goalSelector.tick();
+                profilerfiller.pop();
+            }
+            if (this.moveDelay > 0) {
+                --this.moveDelay;
+            }
+            if (this.attackCooldown > 0) {
+                --this.attackCooldown;
+            }
+        }
         if (this.sliderDeathTime == 149) {
             //don't make particle with remove method some tick
             this.explode();

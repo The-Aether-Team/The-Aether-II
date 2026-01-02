@@ -21,7 +21,7 @@ public class AvoidObstaclesGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        if (!this.slider.isAwake() || this.slider.isDeadOrDying() || this.slider.getMoveDelay() != 1) {
+        if (!this.slider.isAwake() || this.slider.getMoveDelay() != 1) {
             return false;
         }
 
