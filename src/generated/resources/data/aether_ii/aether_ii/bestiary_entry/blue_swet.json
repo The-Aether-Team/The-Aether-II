@@ -10,6 +10,14 @@
     {
       "loot": {
         "chance": 1.0,
+        "item": "aether_ii:swet_gel",
+        "max_count": 3,
+        "min_count": 1
+      }
+    },
+    {
+      "loot": {
+        "chance": 1.0,
         "item": "aether_ii:swet_sugar",
         "max_count": 1,
         "min_count": 0
