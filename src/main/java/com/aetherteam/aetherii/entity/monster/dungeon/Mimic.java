@@ -1,15 +1,14 @@
 package com.aetherteam.aetherii.entity.monster.dungeon;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import com.aetherteam.aetherii.entity.ai.goal.PreAnimationMeleeAttackGoal;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.MoveTowardsRestrictionGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
@@ -122,75 +121,18 @@ public class Mimic extends Monster {
         }
     }
 
-    protected static class MimicMeleeAttackGoal extends MeleeAttackGoal {
+    protected static class MimicMeleeAttackGoal extends PreAnimationMeleeAttackGoal {
         private int ticksUntilNextAttack;
         private boolean attack;
 
         public MimicMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen) {
-            super(mob, speedModifier, followingTargetEvenIfNotSeen);
+            super(mob, speedModifier, followingTargetEvenIfNotSeen, 9, 20);
         }
 
         @Override
-        public boolean canUse() {
-            return super.canUse();
-        }
-
-        @Override
-        public boolean canContinueToUse() {
-            return super.canContinueToUse();
-        }
-
-        @Override
-        public void start() {
-            super.start();
-            this.ticksUntilNextAttack = 0;
-            this.attack = false;
-        }
-
-        @Override
-        protected void checkAndPerformAttack(LivingEntity target) {
-            if ((this.mob.isWithinMeleeAttackRange(target) && this.mob.getSensing().hasLineOfSight(target)) && !this.attack) {
-                this.resetAttackCooldown();
-                this.attack = true;
-            }
-
-            if (this.attack && this.ticksUntilNextAttack == 20) {
-                this.mob.level().broadcastEntityEvent(this.mob, (byte) ATTACK_EVENT);
-            }
-
-            if (this.canPerformAttack(target)) {
-                this.mob.swing(InteractionHand.MAIN_HAND);
-                this.mob.doHurtTarget(getServerLevel(this.mob.level()), target);
-                this.mob.setZza(0.2F);
-            }
-
-            if (this.attack) {
-                --this.ticksUntilNextAttack;
-            }
-
-            if (this.ticksUntilNextAttack <= 0) {
-                this.attack = false;
-            }
-        }
-
-        @Override
-        protected void resetAttackCooldown() {
-            this.ticksUntilNextAttack = this.adjustedTickDelay(20);
-        }
-
-        @Override
-        protected boolean isTimeToAttack() {
-            return this.ticksUntilNextAttack == 11;
-        }
-
-        @Override
-        protected int getTicksUntilNextAttack() {
-            return this.ticksUntilNextAttack;
-        }
-
-        @Override
-        public boolean requiresUpdateEveryTick() {
-            return true;
+        public void attackAnimation() {
+            super.attackAnimation();
+            this.mob.level().broadcastEntityEvent(this.mob, (byte) ATTACK_EVENT);
         }
     }
 
