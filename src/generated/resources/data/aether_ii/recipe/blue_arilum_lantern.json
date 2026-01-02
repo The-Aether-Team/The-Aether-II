@@ -3,16 +3,17 @@
   "category": "misc",
   "group": "arilum_lantern",
   "key": {
-    "#": "aether_ii:blue_swet_gel",
+    "#": "aether_ii:swet_gel",
+    "D": "minecraft:blue_dye",
     "X": "aether_ii:arilum_bulbs"
   },
   "pattern": [
     "#X#",
-    "XXX",
+    "XDX",
     "#X#"
   ],
   "result": {
-    "count": 1,
+    "count": 4,
     "id": "aether_ii:blue_arilum_lantern"
   }
 }

@@ -102,6 +102,18 @@
     "misc": [],
     "monster": [
       {
+        "type": "aether_ii:blue_swet",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:golden_swet",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 3
+      },
+      {
         "type": "aether_ii:skephid",
         "maxCount": 1,
         "minCount": 1,

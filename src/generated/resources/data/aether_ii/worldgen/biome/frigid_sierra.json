@@ -217,10 +217,16 @@
         "weight": 1
       },
       {
-        "type": "aether_ii:swet",
+        "type": "aether_ii:blue_swet",
         "maxCount": 2,
         "minCount": 1,
         "weight": 2
+      },
+      {
+        "type": "aether_ii:golden_swet",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
       },
       {
         "type": "aether_ii:cockatrice",

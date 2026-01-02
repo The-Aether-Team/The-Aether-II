@@ -132,7 +132,8 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.ZEPHYR.get(), ZephyrRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.TEMPEST.get(), TempestRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.COCKATRICE.get(), CockatriceRenderer::new);
-        event.registerEntityRenderer(AetherIIEntityTypes.SWET.get(), SwetRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.BLUE_SWET.get(), BlueSwetRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.GOLDEN_SWET.get(), GoldenSwetRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SKEPHID.get(), SkephidRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), ArkeniumTalutonRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), GravititeTalutonRenderer::new);
@@ -213,7 +214,8 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.ZEPHYR, ZephyrModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.TEMPEST, TempestModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.COCKATRICE, CockatriceModel::createBodyLayer);
-        event.registerLayerDefinition(AetherIIModelLayers.SWET, SwetModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.BLUE_SWET, SwetModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.GOLDEN_SWET, SwetModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SKEPHID, SkephidModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.ARKENIUM_TALUTON, ArkeniumTalutonModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_TALUTON, GravititeTalutonModel::createBodyLayer);

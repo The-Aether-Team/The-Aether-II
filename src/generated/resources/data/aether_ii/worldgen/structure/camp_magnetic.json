@@ -11,7 +11,7 @@
   "start_height": {
     "absolute": 0
   },
-  "start_pool": "aether_ii:camp/highfields/center",
+  "start_pool": "aether_ii:camp/magnetic/center",
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin"
 }

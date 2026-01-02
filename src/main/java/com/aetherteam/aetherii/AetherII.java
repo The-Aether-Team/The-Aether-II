@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.advancement.predicate.AetherIIEntitySubPredicates
 import com.aetherteam.aetherii.entity.variant.BeetleVariant;
 import com.aetherteam.aetherii.entity.variant.ButterflyVariant;
 import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
-import com.aetherteam.aetherii.entity.variant.SwetVariant;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
@@ -88,7 +87,6 @@ public class AetherII {
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY, ExplorationEntry.DIRECT_CODEC, ExplorationEntry.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIStyleDesigns.STYLE_DESIGN_REGISTRY_KEY, StyleDesign.DIRECT_CODEC, StyleDesign.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIStyleMaterials.STYLE_MATERIAL_REGISTRY_KEY, StyleMaterial.DIRECT_CODEC, StyleMaterial.DIRECT_CODEC));
-        bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY, SwetVariant.DIRECT_CODEC, SwetVariant.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY, SkyrootLizardVariant.DIRECT_CODEC, SkyrootLizardVariant.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIButterflyVariants.BUTTERFLY_VARIANT_REGISTRY_KEY, ButterflyVariant.DIRECT_CODEC, ButterflyVariant.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIBeetleVariants.BEETLE_VARIANT_REGISTRY_KEY, BeetleVariant.DIRECT_CODEC, BeetleVariant.DIRECT_CODEC));

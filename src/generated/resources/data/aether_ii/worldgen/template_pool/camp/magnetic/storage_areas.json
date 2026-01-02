@@ -1,0 +1,37 @@
+{
+  "elements": [
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:camp/common/storage_areas/chest",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:camp",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:camp/magnetic/storage_areas/logs",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:camp",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:empty_pool_element"
+      },
+      "weight": 3
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

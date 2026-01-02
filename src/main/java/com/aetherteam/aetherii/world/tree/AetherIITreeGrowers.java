@@ -97,40 +97,47 @@ public class AetherIITreeGrowers {
             "greatroot",
             Optional.of(HighlandsConfiguredFeatures.GREATROOT_SAPLING),
             Optional.empty(),
-            Optional.empty());
+            Optional.empty()
+    );
     public static final TreeGrower IRRADIATED_GREATROOT = new TreeGrower(
             "irradiated_greatroot",
             Optional.of(HighlandsConfiguredFeatures.GREATROOT_IRRADIATED_SAPLING),
             Optional.empty(),
-            Optional.empty());
+            Optional.empty()
+    );
 
     public static final TreeGrower GREATOAK = new TreeGrower(
             "greatoak",
             Optional.of(HighlandsConfiguredFeatures.GREATOAK_SAPLING),
             Optional.empty(),
-            Optional.empty());
+            Optional.empty()
+    );
     public static final TreeGrower IRRADIATED_GREATOAK = new TreeGrower(
             "irradiated_greatoak",
             Optional.of(HighlandsConfiguredFeatures.GREATOAK_IRRADIATED_SAPLING),
             Optional.empty(),
-            Optional.empty());
+            Optional.empty()
+    );
 
     public static final TreeGrower GREATBOA = new TreeGrower(
             "greatboa",
             Optional.of(HighlandsConfiguredFeatures.GREATBOA_SAPLING),
             Optional.empty(),
-            Optional.empty());
+            Optional.empty()
+    );
     public static final TreeGrower IRRADIATED_GREATBOA = new TreeGrower(
             "irradiated_greatboa",
             Optional.of(HighlandsConfiguredFeatures.GREATBOA_IRRADIATED_SAPLING),
             Optional.empty(),
-            Optional.empty());
+            Optional.empty()
+    );
 
     public static final TreeGrower AMBEROOT = new TreeGrower(
             "amberoot",
             Optional.empty(),
-            Optional.of(HighlandsConfiguredFeatures.AMBEROOT_SAPLING),
-            Optional.empty());
+            Optional.of(HighlandsConfiguredFeatures.AMBEROOT_SAPLING_SELECTOR),
+            Optional.empty()
+    );
 
     public static final Map<TreeGrower, TreeGrower> NORMAL_TO_IRRADIATED = Map.ofEntries(
             Map.entry(AetherIITreeGrowers.SKYROOT, AetherIITreeGrowers.IRRADIATED_SKYROOT),

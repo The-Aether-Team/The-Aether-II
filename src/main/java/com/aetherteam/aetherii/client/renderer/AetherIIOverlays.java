@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.entity.variant.SwetVariant;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
@@ -289,11 +288,10 @@ public class AetherIIOverlays {
         if (!swets.isEmpty()) {
             Swet swet = attachment.getLatchedSwets().getFirst();
             if (swet != null) {
-                Holder<SwetVariant> variant = swet.getVariant();
-                ResourceLocation left1Sprite = variant.value().left1();
-                ResourceLocation left2Sprite = variant.value().left2();
-                ResourceLocation right1Sprite = variant.value().right1();
-                ResourceLocation right2Sprite = variant.value().right2();
+                ResourceLocation left1Sprite = swet.overlay.left1();
+                ResourceLocation left2Sprite = swet.overlay.left2();
+                ResourceLocation right1Sprite = swet.overlay.right1();
+                ResourceLocation right2Sprite = swet.overlay.right2();
 
                 drawCorner(guiGraphics, left1Sprite, left2Sprite, 0, guiGraphics.guiHeight() - 128);
                 drawCorner(guiGraphics, right1Sprite, right2Sprite, guiGraphics.guiWidth() - 128, guiGraphics.guiHeight() - 128);

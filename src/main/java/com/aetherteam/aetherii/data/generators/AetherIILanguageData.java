@@ -1,7 +1,5 @@
 package com.aetherteam.aetherii.data.generators;
 
-import java.util.TreeMap;
-
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
@@ -15,12 +13,13 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
-
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
+
+import java.util.TreeMap;
 
 public class AetherIILanguageData extends AetherIILanguageProvider {
     public AetherIILanguageData(PackOutput output) {
@@ -687,10 +686,22 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.CORROBONITE_BLOCK, "Block of Corrobonite");
 
         // Arilum Lantern
-        this.addBlock(AetherIIBlocks.GREEN_ARILUM_LANTERN, "Green Arilum Lantern");
-        this.addBlock(AetherIIBlocks.BLUE_ARILUM_LANTERN, "Blue Arilum Lantern");
+        this.addBlock(AetherIIBlocks.WHITE_ARILUM_LANTERN, "White Arilum Lantern");
+        this.addBlock(AetherIIBlocks.ORANGE_ARILUM_LANTERN, "Orange Arilum Lantern");
+        this.addBlock(AetherIIBlocks.MAGENTA_ARILUM_LANTERN, "Magenta Arilum Lantern");
+        this.addBlock(AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN, "Light Blue Arilum Lantern");
+        this.addBlock(AetherIIBlocks.YELLOW_ARILUM_LANTERN, "Yellow Arilum Lantern");
+        this.addBlock(AetherIIBlocks.LIME_ARILUM_LANTERN, "Lime Arilum Lantern");
+        this.addBlock(AetherIIBlocks.PINK_ARILUM_LANTERN, "Pink Arilum Lantern");
+        this.addBlock(AetherIIBlocks.GRAY_ARILUM_LANTERN, "Gray Arilum Lantern");
+        this.addBlock(AetherIIBlocks.LIGHT_GRAY_ARILUM_LANTERN, "Light Gray Arilum Lantern");
+        this.addBlock(AetherIIBlocks.CYAN_ARILUM_LANTERN, "Cyan Arilum Lantern");
         this.addBlock(AetherIIBlocks.PURPLE_ARILUM_LANTERN, "Purple Arilum Lantern");
-        this.addBlock(AetherIIBlocks.GOLDEN_ARILUM_LANTERN, "Golden Arilum Lantern");
+        this.addBlock(AetherIIBlocks.BLUE_ARILUM_LANTERN, "Blue Arilum Lantern");
+        this.addBlock(AetherIIBlocks.BROWN_ARILUM_LANTERN, "Brown Arilum Lantern");
+        this.addBlock(AetherIIBlocks.GREEN_ARILUM_LANTERN, "Green Arilum Lantern");
+        this.addBlock(AetherIIBlocks.RED_ARILUM_LANTERN, "Red Arilum Lantern");
+        this.addBlock(AetherIIBlocks.BLACK_ARILUM_LANTERN, "Black Arilum Lantern");
 
         // Utility
         this.addBlock(AetherIIBlocks.AMBROSIUM_TORCH, "Ambrosium Torch");
@@ -872,10 +883,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.AECHOR_PETAL, "Aechor Petal");
         this.addItem(AetherIIItems.ARILUM_BULBS, "Arilum Bulbs");
         this.addItem(AetherIIItems.ARCTIC_SNOWBALL, "Arctic Snowball");
-        this.addItem(AetherIIItems.GREEN_SWET_GEL, "Green Swet Gel");
-        this.addItem(AetherIIItems.BLUE_SWET_GEL, "Blue Swet Gel");
-        this.addItem(AetherIIItems.PURPLE_SWET_GEL, "Purple Swet Gel");
-        this.addItem(AetherIIItems.GOLDEN_SWET_GEL, "Golden Swet Gel");
+        this.addItem(AetherIIItems.SWET_GEL, "Swet Gel");
         this.addItem(AetherIIItems.SWET_SUGAR, "Swet Sugar");
         this.addItem(AetherIIItems.MOA_FEATHER, "Moa Feather");
         this.addItem(AetherIIItems.COCKATRICE_FEATHER, "Cockatrice Feather");
@@ -904,10 +912,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.WYNDBERRY, "Wyndberry");
         this.addItem(AetherIIItems.ENCHANTED_WYNDBERRY, "Enchanted Wyndberry");
         this.addItem(AetherIIItems.SATIVAL_BULB, "Satival Bulb");
-        this.addItem(AetherIIItems.GREEN_SWET_JELLY, "Green Swet Jelly");
-        this.addItem(AetherIIItems.BLUE_SWET_JELLY, "Blue Swet Jelly");
-        this.addItem(AetherIIItems.PURPLE_SWET_JELLY, "Purple Swet Jelly");
-        this.addItem(AetherIIItems.GOLDEN_SWET_JELLY, "Golden Swet Jelly");
+        this.addItem(AetherIIItems.SWET_JELLY, "Swet Jelly");
         this.addItem(AetherIIItems.BURRUKAI_RIBS, "Burrukai Ribs");
         this.addItem(AetherIIItems.BURRUKAI_RIB_CUT, "Burrukai Rib Cut");
         this.addItem(AetherIIItems.KIRRID_CUTLET, "Kirrid Cutlet");
@@ -981,13 +986,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSpawnEggItem(AetherIIItems.ZEPHYR_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.TEMPEST_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.COCKATRICE_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.SWET_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.BLUE_SWET_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.GOLDEN_SWET_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.SKEPHID_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG);
 
         // Misc
-        this.addItem(AetherIIItems.HIDE_BUNDLE, "Hide Bundle");
+        this.addItem(AetherIIItems.BEAST_PELT_BUNDLE, "Beast Pelt Bundle");
         this.addItem(AetherIIItems.BRETTL_LASSO, "Brettl Lasso");
         this.addItem(AetherIIItems.MOA_EGG, "Moa Egg");
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
@@ -1121,6 +1127,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.BLUE_AERCLOUD_GLIDER.get(), 2, "§3Use:§r Click-Use");
         this.addPerItemAbilityTooltip(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get(), 1, "§9Ability:§r Forwards Boost");
         this.addPerItemAbilityTooltip(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get(), 2, "§3Use:§r Click-Use");
+
+        this.addPerItemAbilityTooltip(AetherIIItems.SWET_GEL.get(), 1, "§9Ability:§r Grows Nature");
+        this.addPerItemAbilityTooltip(AetherIIItems.AMBROSIUM_SHARD.get(), 1, "§9Ability:§r Enchants Nature");
+        this.addPerItemAbilityTooltip(AetherIIItems.IRRADIATED_DUST.get(), 1, "§9Ability:§r Irradiates Nature");
     }
 
     private void addItemTooltips() {
@@ -1130,7 +1140,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("currency.amount", "%s Glint");
         this.addItemTooltip("curative.removes", "Removes: %s");
         this.addItemTooltip("curative.reduces", "Reduces: %s");
-        this.addItemTooltip("healing_stone.charges", "%s/5 Charges");
+        this.addItemTooltip("healing_stone.charges", "%s/5 Altar Charges");
         this.addItemTooltip("effect_buildup", "%s Buildup");
         this.addItemTooltip("effect_buildup.inflicts", "Inflicts: %s");
         this.addItemTooltip("reinforcement", "Reinforcement");
@@ -1211,7 +1221,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
         this.addEntityType(AetherIIEntityTypes.TEMPEST, "Tempest");
         this.addEntityType(AetherIIEntityTypes.COCKATRICE, "Cockatrice");
-        this.addEntityType(AetherIIEntityTypes.SWET, "Swet");
+        this.addEntityType(AetherIIEntityTypes.BLUE_SWET, "Blue Swet");
+        this.addEntityType(AetherIIEntityTypes.GOLDEN_SWET, "Golden Swet");
         this.addEntityType(AetherIIEntityTypes.SKEPHID, "Skephid");
         this.addEntityType(AetherIIEntityTypes.ARKENIUM_TALUTON, "Arkenium Taluton");
         this.addEntityType(AetherIIEntityTypes.GRAVITITE_TALUTON, "Gravitite Taluton");
@@ -1331,9 +1342,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addCreativeTabs() {
         // Creative Tabs
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_BUILDING_BLOCKS.get(), "Aether II Building Blocks");
-        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_COLORED_BLOCKS.get(), "Aether II Colored Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_NATURAL_BLOCKS.get(), "Aether II Natural Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_FUNCTIONAL_BLOCKS.get(), "Aether II Functional Blocks");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_EQUIPMENT_AND_UTILITIES.get(), "Aether II Equipment & Utilities");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_ARMOR_AND_ACCESSORIES.get(), "Aether II Armor & Accessories");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_CONSUMABLES.get(), "Aether II Consumables");
@@ -1428,7 +1440,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.SWET.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.BLUE_SWET.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.GOLDEN_SWET.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.SKEPHID.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), loremIpsum);
@@ -1549,6 +1562,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "sheepuff.death", "Sheepuff dies");
         this.addSubtitle("entity", "sheepuff.hurt", "Sheepuff hurts");
         this.addSubtitle("entity", "sheepuff.step", "Footsteps");
+
+        this.addSubtitle("entity", "aerwhale.ambient", "Aerwhale whistles");
+        this.addSubtitle("entity", "aerwhale.hurt", "Aerwhale hurts");
+        this.addSubtitle("entity", "aerwhale.death", "Aerwhale cries");
 
         this.addSubtitle("entity", "aerbunny.ambient", "Aerbunny squeaks");
         this.addSubtitle("entity", "aerbunny.death", "Aerbunny dies");

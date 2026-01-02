@@ -432,10 +432,22 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.CORROBONITE_BLOCK.get());
 
         // Arilum Lantern
-        this.createArilumLantern(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());
-        this.createArilumLantern(AetherIIBlocks.BLUE_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.WHITE_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.ORANGE_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.MAGENTA_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.YELLOW_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.LIME_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.PINK_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.GRAY_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.LIGHT_GRAY_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.CYAN_ARILUM_LANTERN.get());
         this.createArilumLantern(AetherIIBlocks.PURPLE_ARILUM_LANTERN.get());
-        this.createArilumLantern(AetherIIBlocks.GOLDEN_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.BLUE_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.BROWN_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.RED_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.BLACK_ARILUM_LANTERN.get());
 
         // Utility
         this.createAmbrosiumTorch();

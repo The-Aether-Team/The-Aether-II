@@ -12,7 +12,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
@@ -635,10 +634,22 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.CORROBONITE_BLOCK.get());
 
         // Arilum Lantern
-        this.dropSelf(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.BLUE_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.WHITE_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.ORANGE_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.MAGENTA_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.YELLOW_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.LIME_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.PINK_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.GRAY_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.LIGHT_GRAY_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.CYAN_ARILUM_LANTERN.get());
         this.dropSelf(AetherIIBlocks.PURPLE_ARILUM_LANTERN.get());
-        this.dropSelf(AetherIIBlocks.GOLDEN_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.BLUE_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.BROWN_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.RED_ARILUM_LANTERN.get());
+        this.dropSelf(AetherIIBlocks.BLACK_ARILUM_LANTERN.get());
 
         // Utility
         this.dropSelf(AetherIIBlocks.AMBROSIUM_TORCH.get());

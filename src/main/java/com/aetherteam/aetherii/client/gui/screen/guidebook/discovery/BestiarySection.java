@@ -54,7 +54,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
             AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, AetherIIEntityTypes.MAGNETIC_BURRUKAI, AetherIIEntityTypes.ARCTIC_BURRUKAI,
             AetherIIEntityTypes.PHYG, AetherIIEntityTypes.SHEEPUFF, AetherIIEntityTypes.FLYING_COW,
             AetherIIEntityTypes.AERBUNNY, AetherIIEntityTypes.SKYROOT_LIZARD,AetherIIEntityTypes.MOA,
-            AetherIIEntityTypes.SWET, AetherIIEntityTypes.AECHOR_PLANT, AetherIIEntityTypes.CARRION_SPROUT,
+            AetherIIEntityTypes.BLUE_SWET, AetherIIEntityTypes.GOLDEN_SWET, AetherIIEntityTypes.AECHOR_PLANT, AetherIIEntityTypes.CARRION_SPROUT,
             AetherIIEntityTypes.SKEPHID, AetherIIEntityTypes.ZEPHYR,
             AetherIIEntityTypes.TEMPEST, AetherIIEntityTypes.COCKATRICE,
             AetherIIEntityTypes.ARKENIUM_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON,

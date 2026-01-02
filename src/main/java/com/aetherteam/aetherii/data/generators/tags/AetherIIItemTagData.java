@@ -302,12 +302,6 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.ARKENIUM_REPAIRING).add(AetherIIItems.ARKENIUM_PLATES.get());
         this.tag(AetherIITags.Items.GRAVITITE_REPAIRING).add(AetherIIItems.GRAVITITE_PLATE.get());
         this.tag(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS);
-        this.tag(AetherIITags.Items.SWET_GEL).add(
-                AetherIIItems.GREEN_SWET_GEL.get(),
-                AetherIIItems.BLUE_SWET_GEL.get(),
-                AetherIIItems.PURPLE_SWET_GEL.get(),
-                AetherIIItems.GOLDEN_SWET_GEL.get()
-        );
         this.tag(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS).add(
                 AetherIIItems.ZANITE_AXE.get(),
                 AetherIIItems.ARKENIUM_AXE.get(),
@@ -326,10 +320,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.BURRUKAI_PLATE.get(),
                 AetherIIItems.AECHOR_PETAL.get(),
                 AetherIIItems.ARCTIC_SNOWBALL.get(),
-                AetherIIItems.GREEN_SWET_GEL.get(),
-                AetherIIItems.BLUE_SWET_GEL.get(),
-                AetherIIItems.PURPLE_SWET_GEL.get(),
-                AetherIIItems.GOLDEN_SWET_GEL.get(),
+                AetherIIItems.SWET_GEL.get(),
+                AetherIIItems.SWET_SUGAR.get(),
                 AetherIIItems.BLUEBERRY.get(),
                 AetherIIItems.ORANGE.get(),
                 AetherIIItems.WYNDBERRY.get(),
@@ -361,11 +353,16 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.STORM_AERCLOUD.asItem(),
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.asItem(),
                 AetherIIBlocks.SKYROOT_LOG.asItem(),
+                AetherIIBlocks.SKYROOT_TRUNK.asItem(),
                 AetherIIBlocks.GREATROOT_LOG.asItem(),
+                AetherIIBlocks.GREATROOT_TRUNK.asItem(),
                 AetherIIBlocks.WISPROOT_LOG.asItem(),
+                AetherIIBlocks.WISPROOT_TRUNK.asItem(),
                 AetherIIBlocks.MOSSY_WISPROOT_LOG.asItem(),
                 AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.asItem(),
+                AetherIIBlocks.MOSSY_WISPROOT_TRUNK.asItem(),
                 AetherIIBlocks.AMBEROOT_LOG.asItem(),
+                AetherIIBlocks.AMBEROOT_TRUNK.asItem(),
                 AetherIIBlocks.SKYROOT_LEAVES.asItem(),
                 AetherIIBlocks.SKYPLANE_LEAVES.asItem(),
                 AetherIIBlocks.SKYBIRCH_LEAVES.asItem(),
@@ -622,7 +619,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_PICKAXE.get(),
                 AetherIIItems.GRAVITITE_PICKAXE.get()
         );
-        this.tag(ItemTags.BUNDLES).add(AetherIIItems.HIDE_BUNDLE.get());
+        this.tag(ItemTags.BUNDLES).add(AetherIIItems.BEAST_PELT_BUNDLE.get());
         this.tag(ItemTags.SWORDS).addTag(AetherIITags.Items.TOOLS_SHORTSWORDS);
         this.tag(ItemTags.AXES).add(
                 AetherIIItems.SKYROOT_AXE.get(),
