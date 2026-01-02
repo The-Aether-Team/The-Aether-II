@@ -97,7 +97,7 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.of(BladeshroomHunter::new, MobCategory.MONSTER).sized(0.9F, 1.3F).eyeHeight(1.2F).clientTrackingRange(10).build(AetherIIEntities.BLADESHROOM_HUNTER));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Mimic>> MIMIC = ENTITY_TYPES.register("mimic",
-            () -> EntityType.Builder.of(Mimic::new, MobCategory.MONSTER).sized(1.0F, 1.5F).clientTrackingRange(8).build(AetherIIEntities.MIMIC));
+            () -> EntityType.Builder.of(Mimic::new, MobCategory.MONSTER).sized(0.9F, 1.35F).clientTrackingRange(8).build(AetherIIEntities.MIMIC));
 
     public static final DeferredHolder<EntityType<?>, EntityType<DetonationSentry>> DETONATION_SENTRY = ENTITY_TYPES.register("detonation_sentry",
             () -> EntityType.Builder.of(DetonationSentry::new, MobCategory.MONSTER).sized(0.9F, 0.9F).eyeHeight(0.45F).clientTrackingRange(10).build(AetherIIEntities.DETONATION_SENTRY));
