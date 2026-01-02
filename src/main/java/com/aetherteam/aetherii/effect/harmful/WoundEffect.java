@@ -22,8 +22,12 @@ public class WoundEffect extends InstantenousMobEffect {
     }
 
     @Override
-    public void applyInstantenousEffect(ServerLevel serverLevel, @Nullable Entity source, @Nullable Entity indirectSource, LivingEntity livingEntity, int amplifier, double health) {
+    public void applyInstantenousEffect(ServerLevel serverLevel, @Nullable Entity source, @Nullable Entity trueSource, LivingEntity livingEntity, int amplifier, double distance) {
         float damageValue = DAMAGE_AMOUNT.getOrDefault(livingEntity.getType(), 5.0F);
-        livingEntity.hurt(AetherIIDamageTypes.indirectEntityDamageSource(livingEntity.level(), AetherIIDamageTypes.WOUND, source, indirectSource), damageValue);
+        if (source == null) {
+            livingEntity.hurtServer(serverLevel, AetherIIDamageTypes.damageSource(livingEntity.level(), AetherIIDamageTypes.WOUND), damageValue);
+        } else {
+            livingEntity.hurtServer(serverLevel, AetherIIDamageTypes.indirectEntityDamageSource(livingEntity.level(), AetherIIDamageTypes.WOUND, source, trueSource), damageValue);
+        }
     }
 }

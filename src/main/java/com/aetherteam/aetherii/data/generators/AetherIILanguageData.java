@@ -1334,6 +1334,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEffect(AetherIIEffects.FUNGAL_ROT, "Fungal Rot");
         this.addEffect(AetherIIEffects.CRYSTALLIZED, "Crystallized");
 
+        this.addEffect(AetherIIEffects.ELECTRIC_SHOCK, "Electric Shock");
         this.addEffect(AetherIIEffects.GRAVITATIONAL_PULL, "Gravitational Pull");
     }
 
@@ -1665,11 +1666,21 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addDeaths() {
         // Deaths
         this.addDeath("effect.wound", "%1$s was fatally wounded");
+        this.addDeath("effect.wound.player", "%1$s was fatally wounded by %2$s");
         this.addDeath("effect.fracture", "Oof, owie, %1$s's bones");
+        this.addDeath("effect.fracture.player", "%2$s oof owied %1$s's bones");
         this.addDeath("effect.toxin", "%1$s succumbed to toxin");
+        this.addDeath("effect.toxin.player", "%1$s succumbed to toxin while trying to escape %2$s");
         this.addDeath("effect.venom", "%1$s succumbed to venom");
+        this.addDeath("effect.venom.player", "%1$s succumbed to venom while trying to escape %2$s");
         this.addDeath("effect.charged", "%1$s was electrocuted");
+        this.addDeath("effect.charged.player", "%1$s was electrocuted by %2$s");
         this.addDeath("effect.immolation", "%1$s burned to death");
+        this.addDeath("effect.immolation.player", "%1$s burned to death while trying to escape %2$s");
+        this.addDeath("alkahest", "%1$s dissolved in alkahest");
+        this.addDeath("alkahest.player", "%1$s dissolved in alkahest while trying to escape %2$s");
+        this.addDeath("shock", "%1$s was electrocuted");
+        this.addDeath("shock.player", "%1$s was electrocuted by %2$s");
     }
 
     // Utility methods
