@@ -77,7 +77,7 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new SentryGolemMeleeAttackGoal(this, 1.15F, true, 7.5F));
         this.goalSelector.addGoal(2, this.randomStrollGoal);
-        this.goalSelector.addGoal(3, new ThrowExplosiveAttackGoal(this, 20, 0.45F, 52.0F, 255.0F));
+        this.goalSelector.addGoal(3, new ThrowExplosiveAttackGoal(this, 20, 0.8F, 52.0F, 255.0F));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
@@ -85,7 +85,7 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
         return Monster.createMobAttributes()
                 .add(Attributes.ATTACK_DAMAGE, 3.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.28)
-                .add(Attributes.FOLLOW_RANGE, 50.0);
+                .add(Attributes.FOLLOW_RANGE, 20.0);
     }
 
     @Override
