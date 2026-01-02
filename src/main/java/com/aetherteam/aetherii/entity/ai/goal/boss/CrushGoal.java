@@ -38,16 +38,18 @@ public class CrushGoal extends Goal {
         boolean crushed = false;
         if (this.slider.level() instanceof ServerLevel serverLevel) {
             if (EventHooks.canEntityGrief(serverLevel, this.slider)) {
-                AABB crushBox = this.slider.getBoundingBox().inflate(0.2);
-                for (BlockPos pos : BlockPos.betweenClosed(Mth.floor(crushBox.minX), Mth.floor(crushBox.minY), Mth.floor(crushBox.minZ), Mth.floor(crushBox.maxX), Mth.floor(crushBox.maxY), Mth.floor(crushBox.maxZ))) {
-                    if (this.slider.getDungeon() == null || this.slider.getDungeon().roomBounds().contains(pos.getCenter())) {
-                        BlockState blockState = this.slider.level().getBlockState(pos);
-                        if (this.isBreakable(blockState, pos)) {
-                            crushed = this.slider.level().destroyBlock(pos, !blockState.is(AetherIITags.Blocks.SENTRY_RUINS_BLOCKS), this.slider) || crushed;
-                            double a = pos.getX() + 0.5 + (double) (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.375;
-                            double b = pos.getY() + 0.5 + (double) (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.375;
-                            double c = pos.getZ() + 0.5 + (double) (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.375;
-                            serverLevel.sendParticles(ParticleTypes.POOF, a, b, c, 1, 0.0, 0.0, 0.0, 0.0);
+                if (this.slider.getMoveDirection() != null) {
+                    AABB crushBox = this.slider.getBoundingBox().expandTowards(this.slider.getMoveDirection().getUnitVec3().scale(0.1));
+                    for (BlockPos pos : BlockPos.betweenClosed(Mth.floor(crushBox.minX), Mth.floor(crushBox.minY), Mth.floor(crushBox.minZ), Mth.floor(crushBox.maxX), Mth.floor(crushBox.maxY), Mth.floor(crushBox.maxZ))) {
+                        if (this.slider.getDungeon() == null || this.slider.getDungeon().roomBounds().contains(pos.getCenter())) {
+                            BlockState blockState = this.slider.level().getBlockState(pos);
+                            if (this.isBreakable(blockState, pos)) {
+                                crushed = this.slider.level().destroyBlock(pos, !blockState.is(AetherIITags.Blocks.SENTRY_RUINS_BLOCKS), this.slider) || crushed;
+                                double a = pos.getX() + 0.5 + (double) (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.375;
+                                double b = pos.getY() + 0.5 + (double) (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.375;
+                                double c = pos.getZ() + 0.5 + (double) (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.375;
+                                serverLevel.sendParticles(ParticleTypes.POOF, a, b, c, 1, 0.0, 0.0, 0.0, 0.0);
+                            }
                         }
                     }
                 }
