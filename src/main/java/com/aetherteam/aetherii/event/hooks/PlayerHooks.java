@@ -160,7 +160,7 @@ public class PlayerHooks {
         return cancellationStatus;
     }
 
-    public static boolean interactWithMimicContainer(Level level, BlockPos pos, boolean cancellationStatus) {
+    public static boolean interactWithMimicContainer(LevelAccessor level, BlockPos pos, boolean cancellationStatus) {
         BlockState state = level.getBlockState(pos);
         BlockEntity blockEntity = level.getBlockEntity(pos);
 

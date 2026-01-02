@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.structure.processor;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.mojang.serialization.MapCodec;
@@ -29,6 +30,7 @@ public class MimicContainerProcessor extends StructureProcessor {
             if (random.nextDouble() <= 0.3) {
                 CompoundTag tag = blockInfo.nbt();
                 if (tag != null) {
+                    AetherII.LOGGER.info(String.valueOf(pos));
                     DataComponentMap oldMap = tag.read("components", DataComponentMap.CODEC).orElse(DataComponentMap.EMPTY);
                     DataComponentMap newMap = DataComponentMap.builder().addAll(oldMap).set(AetherIIDataComponents.MIMIC, true).build();
                     blockInfo.nbt().store("components", DataComponentMap.CODEC, newMap);

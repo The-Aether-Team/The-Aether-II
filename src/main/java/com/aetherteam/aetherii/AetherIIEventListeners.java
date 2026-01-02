@@ -89,6 +89,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onEffectRemove);
 
         // Block
+        bus.addListener(AetherIIEventListeners::onBreakBlock);
         bus.addListener(AetherIIEventListeners::onBlockUpdateNeighbor);
         bus.addListener(AetherIIEventListeners::onModifyBlock);
         bus.addListener(AetherIIEventListeners::onAlterGround);
@@ -361,6 +362,13 @@ public class AetherIIEventListeners {
         if (effect.is(AetherIITags.MobEffects.MILK_DOESNT_CLEAR) && livingEntity.getUseItem().is(Tags.Items.BUCKETS_MILK)) {
             event.setCanceled(true);
         }
+    }
+
+    public static void onBreakBlock(BlockEvent.BreakEvent event) {
+        LevelAccessor level = event.getLevel();
+        BlockPos pos = event.getPos();
+
+        PlayerHooks.interactWithMimicContainer(level, pos, false);
     }
 
     public static void onBlockUpdateNeighbor(BlockEvent.NeighborNotifyEvent event) {

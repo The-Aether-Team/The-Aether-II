@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.item.equipment.accessories;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.google.common.collect.ArrayListMultimap;
@@ -60,10 +59,8 @@ public class AccessoryItem extends Item {
 
                 if (attribute != null && !attribute.hasModifier(modifier.id()) && entry.condition().test(stack, wearer)) {
                     attribute.addTransientModifier(modifier);
-                    AetherII.LOGGER.info("add on tick");
                 } else if (attribute != null && attribute.hasModifier(modifier.id()) && (!entry.condition().test(stack, wearer) || modifier.amount() != attribute.getModifier(modifier.id()).amount())) {
                     attribute.removeModifier(modifier.id());
-                    AetherII.LOGGER.info("remove on tick");
                 }
             }
         }
@@ -79,7 +76,6 @@ public class AccessoryItem extends Item {
             AttributeModifier modifier = entry.modifier().getModifier(stack);
             if (attribute != null && attribute.hasModifier(modifier.id())) {
                 attribute.removeModifier(modifier.id());
-                AetherII.LOGGER.info("remove on unequip");
             }
         }
     }
