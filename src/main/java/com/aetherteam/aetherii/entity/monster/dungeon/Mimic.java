@@ -131,7 +131,6 @@ public class Mimic extends Monster {
 
         @Override
         public void attackAnimation() {
-            super.attackAnimation();
             this.mob.level().broadcastEntityEvent(this.mob, (byte) ATTACK_EVENT);
         }
     }

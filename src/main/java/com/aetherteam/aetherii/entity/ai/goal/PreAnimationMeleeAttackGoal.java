@@ -36,6 +36,13 @@ public class PreAnimationMeleeAttackGoal extends MeleeAttackGoal {
     }
 
     @Override
+    public boolean canContinueToUse() {
+        LivingEntity livingentity = this.mob.getTarget();
+
+        return super.canContinueToUse() || livingentity != null && livingentity.isAlive() && this.attack;
+    }
+
+    @Override
     protected void checkAndPerformAttack(LivingEntity target) {
         if (this.isTimeToAttack()) {
             if (this.canPerformAttack(target)) {
@@ -45,7 +52,7 @@ public class PreAnimationMeleeAttackGoal extends MeleeAttackGoal {
         } else if (this.attackTicks >= this.attackLength) {
             this.resetAttackCooldown();
             this.attack = false;
-        } else if (this.attackTicks == 0 || !this.attack) {
+        } else if (!this.attack) {
             if (!this.canPerformAttack(target)) {
                 this.resetAttackCooldown();
             } else {
