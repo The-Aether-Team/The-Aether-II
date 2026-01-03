@@ -2,7 +2,7 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.mimic",
   "effect_resistances": [],
   "entity_type": "aether_ii:mimic",
-  "health": 28,
+  "health": 26,
   "icon": "aether_ii:guidebook/bestiary/mimic",
   "id": "aether_ii:mimic",
   "impact_defense": 3,

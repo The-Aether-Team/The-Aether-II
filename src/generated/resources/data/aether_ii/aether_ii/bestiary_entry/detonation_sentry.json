@@ -2,7 +2,7 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.detonation_sentry",
   "effect_resistances": [],
   "entity_type": "aether_ii:detonation_sentry",
-  "health": 16,
+  "health": 14,
   "icon": "aether_ii:guidebook/bestiary/detonation_sentry",
   "id": "aether_ii:detonation_sentry",
   "impact_defense": -2,
