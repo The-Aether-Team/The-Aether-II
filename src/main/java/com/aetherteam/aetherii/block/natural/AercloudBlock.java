@@ -80,7 +80,7 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
      */
     @Override
     public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
-        return 0.25F;
+        return 0.75F;
     }
 
     /**
