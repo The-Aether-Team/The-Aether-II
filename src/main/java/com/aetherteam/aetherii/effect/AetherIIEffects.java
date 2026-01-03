@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.effect;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.effect.beneficial.SaturationBoostEffect;
 import com.aetherteam.aetherii.effect.harmful.*;
+import com.aetherteam.aetherii.effect.neutral.NaturalCamouflageEffect;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -50,6 +51,7 @@ public class AetherIIEffects {
     public static final DeferredHolder<MobEffect, MobEffect> FUNGAL_ROT = EFFECTS.register("fungal_rot", FungalRotEffect::new); //todo
     public static final DeferredHolder<MobEffect, MobEffect> CRYSTALLIZED = EFFECTS.register("crystallized", CrystallizedEffect::new); //todo
 
+    public static final DeferredHolder<MobEffect, MobEffect> NATURAL_CAMOUFLAGE = EFFECTS.register("natural_camouflage", NaturalCamouflageEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> ELECTRIC_SHOCK = EFFECTS.register("electric_shock", ElectricShockEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> GRAVITATIONAL_PULL = EFFECTS.register("gravitational_pull", () -> new GravitationalPullEffect()
             .addAttributeModifier(Attributes.GRAVITY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.gravitational_pull.gravity"), 2.0F, AttributeModifier.Operation.ADD_VALUE)
@@ -67,5 +69,8 @@ public class AetherIIEffects {
         bus.addListener(AmbrosiumPoisoningEffect::preventHealing);
 
         bus.addListener(WebbedEffect::reduceByJumping);
+
+        bus.addListener(NaturalCamouflageEffect::onEntityPostTick);
+        bus.addListener(NaturalCamouflageEffect::adjustVisibilityModifier);
     }
 }

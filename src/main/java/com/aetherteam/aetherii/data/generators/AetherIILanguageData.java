@@ -1334,6 +1334,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEffect(AetherIIEffects.FUNGAL_ROT, "Fungal Rot");
         this.addEffect(AetherIIEffects.CRYSTALLIZED, "Crystallized");
 
+        this.addEffect(AetherIIEffects.NATURAL_CAMOUFLAGE, "Natural Camouflage");
         this.addEffect(AetherIIEffects.ELECTRIC_SHOCK, "Electric Shock");
         this.addEffect(AetherIIEffects.GRAVITATIONAL_PULL, "Gravitational Pull");
     }
