@@ -7,10 +7,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.InsideBlockEffectApplier;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -25,10 +23,12 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 public class FullAetherBushBlock extends AetherBushBlock implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -50,6 +50,19 @@ public class FullAetherBushBlock extends AetherBushBlock implements SimpleWaterl
         } else {
             return Shapes.empty();
         }
+    }
+
+    @Override
+    protected VoxelShape getEntityInsideCollisionShape(BlockState state, BlockGetter level, BlockPos pos, Entity entity) {
+        if (!(entity instanceof Player)) {
+            return Shapes.empty();
+        }
+        return super.getEntityInsideCollisionShape(state, level, pos, entity);
+    }
+
+    @Override
+    protected VoxelShape getBlockSupportShape(BlockState state, BlockGetter reader, BlockPos pos) {
+        return Shapes.empty();
     }
 
     @Override
@@ -78,20 +91,14 @@ public class FullAetherBushBlock extends AetherBushBlock implements SimpleWaterl
     }
 
     @Override
-    protected VoxelShape getBlockSupportShape(BlockState state, BlockGetter reader, BlockPos pos) {
-        return Shapes.empty();
-    }
-
-    @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
         if (entity instanceof LivingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE) {
-            entity.makeStuckInBlock(state, new Vec3(0.8F, 0.75F, 0.8F));
             if (entity.getX() != entity.xOld && entity.getZ() != entity.zOld) {
                 if (level.getRandom().nextInt(10) == 0) {
                     level.playSound(null, pos, AetherIISoundEvents.BLOCK_BUSH_RUSTLE.get(), SoundSource.BLOCKS, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.4F);
                 }
-                int count = entity.isCrouching() ? 5 : 15;
-                this.spawnParticles(level, pos, count);
+                int count = entity.isCrouching() ? 1 : 2;
+                this.spawnParticles(level, entity.position(), count);
             }
         }
     }
@@ -100,25 +107,24 @@ public class FullAetherBushBlock extends AetherBushBlock implements SimpleWaterl
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
         super.stepOn(level, pos, state, entity);
         if (!entity.isCrouching() && entity.getX() != entity.xOld && entity.getZ() != entity.zOld) {
-            this.spawnParticles(level, pos, 5);
+            this.spawnParticles(level, entity.position().subtract(0, 1, 0), 1);
         }
     }
 
     @Override
     public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
         entity.causeFallDamage(fallDistance, 0.2F, entity.damageSources().fall());
-        this.spawnParticles(level, pos, 50);
+        this.spawnParticles(level, entity.position().subtract(0, 1, 0), 3);
     }
 
-    private void spawnParticles(Level level, BlockPos pos, int count) {
-        Vec3 vec3 = Vec3.atCenterOf(pos);
+    private void spawnParticles(Level level, Vec3 vec3, int count) {
         for (int j = 0; j < count; ++j) {
-            double d0 = vec3.x + Mth.nextDouble(level.getRandom(), -0.6, 0.6);
-            double d1 = vec3.y + Mth.nextDouble(level.getRandom(), -0.6, 0.6);
-            double d2 = vec3.z + Mth.nextDouble(level.getRandom(), -0.6, 0.6);
-            double d3 = Mth.nextDouble(level.getRandom(), -0.6, 0.6);
-            double d4 = Mth.nextDouble(level.getRandom(), -0.6, 0.6);
-            double d5 = Mth.nextDouble(level.getRandom(), -0.6, 0.6);
+            double d0 = vec3.x + Mth.nextDouble(level.getRandom(), -0.3, 0.3);
+            double d1 = vec3.y + Mth.nextDouble(level.getRandom(), 0, 1.0);
+            double d2 = vec3.z + Mth.nextDouble(level.getRandom(), -0.3, 0.3);
+            double d3 = Mth.nextDouble(level.getRandom(), -0.3, 0.3);
+            double d4 = Mth.nextDouble(level.getRandom(), 0, 1.0);
+            double d5 = Mth.nextDouble(level.getRandom(), -0.3, 0.3);
             level.addParticle(AetherIIParticleTypes.SKYROOT_LEAVES.get(), d0, d1, d2, d3, d4, d5);
         }
     }
@@ -126,5 +132,13 @@ public class FullAetherBushBlock extends AetherBushBlock implements SimpleWaterl
     @Override
     protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
         return false;
+    }
+
+    @Override
+    public @Nullable PathType getAdjacentBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, PathType originalType) {
+        if (mob == null || mob.getType() != EntityType.FOX && mob.getType() != EntityType.BEE) {
+            return PathType.DANGER_OTHER;
+        }
+        return super.getAdjacentBlockPathType(state, level, pos, mob, originalType);
     }
 }
