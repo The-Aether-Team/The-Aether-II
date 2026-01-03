@@ -7,21 +7,34 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
 
-public class SliderMoveGoal extends Goal {
+public class SliderDeathWithBreakDoorGoal extends Goal {
     private final Slider slider;
     private Vec3 targetPoint;
     private float velocity;
+    private boolean startMakeBreak;
 
-    public SliderMoveGoal(Slider slider) {
+    public SliderDeathWithBreakDoorGoal(Slider slider) {
         this.slider = slider;
         this.setFlags(EnumSet.of(Flag.MOVE));
     }
 
     @Override
     public boolean canUse() {
-        if (this.slider.isAwake() && !this.slider.isDeadOrDying() && this.slider.getMoveDelay() <= 0) {
-            targetPoint = this.slider.findTargetPoint();
+        if (this.slider.isDeadOrDying() && this.slider.getMoveDelay() <= 0 && this.slider.getDungeon() != null) {
+            if (this.slider.sliderDeathTime >= 110) {
+                targetPoint = this.slider.getDungeon().originCoordinates();
+                this.startMakeBreak = true;
+            } else {
+                targetPoint = this.slider.getDungeon().originCoordinates().add(0, 3, 0);
+            }
+
             return targetPoint != null;
+        } else {
+            if (this.slider.sliderDeathTime >= 110) {
+                this.startMakeBreak = true;
+                targetPoint = this.slider.position().add(0, -3, 0);
+                return targetPoint != null;
+            }
         }
         return false;
     }
@@ -68,6 +81,10 @@ public class SliderMoveGoal extends Goal {
         this.targetPoint = null;
         this.velocity = 0;
         this.slider.setDeltaMovement(Vec3.ZERO);
+
+        if (this.startMakeBreak) {
+            this.slider.setBreakTresureVault();
+        }
     }
 
     @Override
@@ -77,7 +94,8 @@ public class SliderMoveGoal extends Goal {
 
     /**
      * Get the move direction if it already exists, or calculate a new one.
-     * @param slider The {@link Slider} that the brain belongs to.
+     *
+     * @param slider      The {@link Slider} that the brain belongs to.
      * @param targetPoint The target {@link Vec3} position.
      * @return The {@link Direction} to move in.
      */
@@ -96,6 +114,7 @@ public class SliderMoveGoal extends Goal {
 
     /**
      * Gets the calculated distance between two points on one axis.
+     *
      * @param direction The axis and direction to move along {@link Direction}.
      * @return The calculated distance.
      */

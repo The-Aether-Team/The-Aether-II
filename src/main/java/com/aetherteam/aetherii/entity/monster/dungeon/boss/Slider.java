@@ -95,6 +95,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     private int attackCooldown = 0;
     public int sliderDeathTime = 0;
     public float lastHealthStage = 0.0F;
+    private boolean breakTresureVault;
 
     public Slider(EntityType<? extends Slider> type, Level level) {
         super(type, level);
@@ -136,7 +137,8 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
         this.goalSelector.addGoal(3, new BackOffAfterAttackGoal(this));
         this.goalSelector.addGoal(4, new SetPathUpOrDownGoal(this));
         this.goalSelector.addGoal(5, new AvoidObstaclesGoal(this));
-        this.goalSelector.addGoal(6, new SliderMoveGoal(this));
+        this.goalSelector.addGoal(6, new SliderDeathWithBreakDoorGoal(this));
+        this.goalSelector.addGoal(7, new SliderMoveGoal(this));
 
         this.mostDamageTargetGoal = new MostDamageTargetGoal(this);
         this.targetSelector.addGoal(1, this.mostDamageTargetGoal);
@@ -151,6 +153,15 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
         builder.define(DATA_HURT_ANGLE_ID, 0.0F);
         builder.define(DATA_HURT_ANGLE_X_ID, 0.0F);
         builder.define(DATA_HURT_ANGLE_Z_ID, 0.0F);
+    }
+
+    @Override
+    public void handleEntityEvent(byte p_21375_) {
+        if (p_21375_ == 60) {
+            this.explode();
+        } else {
+            super.handleEntityEvent(p_21375_);
+        }
     }
 
     /**
@@ -177,6 +188,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
             }
         }
     }
+
 
     /**
      * Evaporates liquid blocks.
@@ -389,6 +401,15 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
         super.die(source);
     }
 
+
+    public void setBreakTresureVault() {
+        this.breakTresureVault = true;
+        //don't make particle with remove method some tick
+        this.level().broadcastEntityEvent(this, (byte) 60);
+        this.playSound(SoundEvents.GENERIC_EXPLODE.value(), 2.5F, 1.0F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
+
+    }
+
     @Override
     protected void tickDeath() {
         this.sliderDeathTime++;
@@ -419,28 +440,19 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
                 --this.attackCooldown;
             }
         }
-        if (this.sliderDeathTime == 149) {
-            //don't make particle with remove method some tick
-            this.explode();
-            this.playSound(SoundEvents.GENERIC_EXPLODE.value(), 2.5F, 1.0F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
-        }
-        if (this.sliderDeathTime == 150) {
-            if (this.level() instanceof ServerLevel serverLevel) {
-                if (this.getDungeon() != null) {
-                    this.tearDownRoom();
-                }
-                this.remove(Entity.RemovalReason.KILLED);
-                this.gameEvent(GameEvent.ENTITY_DIE);
+        if (this.breakTresureVault) {
+            if (this.getDungeon() != null) {
+                this.tearDownRoom();
             }
-
+            this.remove(Entity.RemovalReason.KILLED);
+            this.gameEvent(GameEvent.ENTITY_DIE);
         }
-
     }
 
     /**
      * Explosion particles for the Slider.
      */
-    private void explode() {
+    public void explode() {
         for (int i = 0; i < 16; i++) {
             double x = this.getX() + (double) (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 1.5;
             double y = this.getY() + 1.75 + (double) (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 1.5;
