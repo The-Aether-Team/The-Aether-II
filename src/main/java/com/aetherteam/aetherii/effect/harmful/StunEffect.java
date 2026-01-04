@@ -24,7 +24,7 @@ public class StunEffect extends MobEffect {
         Entity entity = event.getEntity();
         if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(AetherIIEffects.STUN)) {
             EffectsSystemAttachment attachment = livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM);
-            attachment.setMotionMultiplier(attachment.getMotionMultiplier().multiply(new Vec3(0.25, 1.0, 0.25)));
+            attachment.setMotionMultiplier(attachment.getMotionMultiplier().multiply(new Vec3(0.4, 1.0, 0.4)));
         }
     }
 

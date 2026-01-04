@@ -40,6 +40,6 @@ public class WebbedEffect extends MobEffect {
 
     public static void reduceByJumping(LivingEvent.LivingJumpEvent event) {
         LivingEntity entity = event.getEntity();
-        entity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).reduceBuildup(AetherIIEffects.WEBBED, 5);
+        entity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).reduceBuildup(AetherIIEffects.WEBBED, 10);
     }
 }

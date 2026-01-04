@@ -32,8 +32,10 @@ public class ImmolationEffect extends MobEffect { //todo preventative measures
                 living.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(living, EffectBuildupPresets.IMMOLATION, 100);
             }
         }
-        if (livingEntity.getHealth() >= livingEntity.getMaxHealth() - DAMAGE_AMOUNT.getOrDefault(livingEntity.getType(), 10.0F)) { //todo possibly duration based.
-            livingEntity.hurt(AetherIIDamageTypes.damageSource(livingEntity.level(), AetherIIDamageTypes.IMMOLATION), 1.0F);
+        if (livingEntity.tickCount % 10 == 0) {
+            if (livingEntity.getHealth() >= livingEntity.getMaxHealth() - DAMAGE_AMOUNT.getOrDefault(livingEntity.getType(), 10.0F)) {
+                livingEntity.hurt(AetherIIDamageTypes.damageSource(livingEntity.level(), AetherIIDamageTypes.IMMOLATION), 1.0F);
+            }
         }
         serverLevel.sendParticles(ParticleTypes.FLAME,
                 livingEntity.getX() + (serverLevel.getRandom().nextGaussian() / 5.0),
