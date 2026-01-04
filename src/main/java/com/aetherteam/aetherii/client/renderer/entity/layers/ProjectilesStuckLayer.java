@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.renderer.entity.layers;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -38,7 +37,6 @@ public class ProjectilesStuckLayer<M extends PlayerModel> extends RenderLayer<Pl
     public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, PlayerRenderState renderState, float netHeadYaw, float headPitch) {
         List<EntityType<?>> list = renderState.getRenderData(AetherIIRenderers.STUCK_PROJECTILES_KEY);
         if (list != null && !list.isEmpty()) {
-            AetherII.LOGGER.info(list.toString());
             RandomSource random = RandomSource.create(renderState.id);
             for (EntityType<?> type : list) {
                 ResourceLocation key = BuiltInRegistries.ENTITY_TYPE.getKey(type);

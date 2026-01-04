@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.attachment.player;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
@@ -102,8 +101,6 @@ public class AetherIIPlayerAttachment {
         this.syncClients(player);
         this.handleAetherPortal(player);
         this.removeStuckProjectiles(player);
-
-        AetherII.LOGGER.info(this.getStuckProjectiles().toString());
     }
 
     private void syncClients(Player player) {
