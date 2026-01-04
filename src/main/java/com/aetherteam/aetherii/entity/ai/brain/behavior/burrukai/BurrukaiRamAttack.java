@@ -13,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.behavior.BlockPosTracker;
+import net.minecraft.world.entity.ai.behavior.EntityTracker;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
@@ -84,8 +85,12 @@ public class BurrukaiRamAttack extends Behavior<Burrukai> {
                 }
             }
         }
-        if (target.isPresent() && target.get().isAlive() && this.blockPos != null) {
-            owner.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, new BlockPosTracker(this.blockPos));
+        if (target.isPresent() && target.get().isAlive()) {
+            if (this.blockPos != null) {
+                owner.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, new BlockPosTracker(this.blockPos));
+            } else {
+                owner.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, new EntityTracker(target.get(), true));
+            }
         }
     }
 
