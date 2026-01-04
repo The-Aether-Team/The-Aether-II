@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.effect.harmful;
 
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.MobEffectInstanceAccessor;
@@ -7,7 +9,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 public class FractureEffect extends MobEffect {
     public FractureEffect() {
@@ -32,5 +37,13 @@ public class FractureEffect extends MobEffect {
     @Override
     public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
         return true;
+    }
+
+    public static void onEntityPostTick(EntityTickEvent.Post event) {
+        Entity entity = event.getEntity();
+        if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(AetherIIEffects.FRACTURE)) {
+            EffectsSystemAttachment attachment = livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM);
+            attachment.setMotionMultiplier(attachment.getMotionMultiplier().multiply(new Vec3(0.7, 1.0, 0.7)));
+        }
     }
 }
