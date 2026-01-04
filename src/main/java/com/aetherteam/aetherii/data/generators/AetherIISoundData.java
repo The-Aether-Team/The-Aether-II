@@ -1009,18 +1009,21 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.aether_ii.entity.mimic.attack")
         );
         this.add(AetherIISoundEvents.ENTITY_MIMIC_DEATH,
-                definition().with(
-                        sound("minecraft:block/chest/close1"),
-                        sound("minecraft:block/chest/close2"),
-                        sound("minecraft:block/chest/close3")
+                definition().with(sound("minecraft:step/stone1"),
+                        sound("minecraft:step/stone2"),
+                        sound("minecraft:step/stone3"),
+                        sound("minecraft:step/stone4"),
+                        sound("minecraft:step/stone5"),
+                        sound("minecraft:step/stone6")
                 ).subtitle("subtitles.aether_ii.entity.mimic.death")
         );
         this.add(AetherIISoundEvents.ENTITY_MIMIC_HURT,
-                definition().with(
-                        sound("minecraft:dig/wood1"),
-                        sound("minecraft:dig/wood2"),
-                        sound("minecraft:dig/wood3"),
-                        sound("minecraft:dig/wood4")
+                definition().with(sound("minecraft:step/stone1"),
+                        sound("minecraft:step/stone2"),
+                        sound("minecraft:step/stone3"),
+                        sound("minecraft:step/stone4"),
+                        sound("minecraft:step/stone5"),
+                        sound("minecraft:step/stone6")
                 ).subtitle("subtitles.aether_ii.entity.mimic.hurt")
         );
         this.add(AetherIISoundEvents.ENTITY_MIMIC_KILL,
@@ -1030,35 +1033,39 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
 
         this.add(AetherIISoundEvents.ENTITY_DETONATION_SENTRY_DEATH,
-                definition().with(
-                        sound("minecraft:mob/slime/big1"),
-                        sound("minecraft:mob/slime/big2"),
-                        sound("minecraft:mob/slime/big3"),
-                        sound("minecraft:mob/slime/big4")
+                definition().with(sound("minecraft:step/stone1"),
+                        sound("minecraft:step/stone2"),
+                        sound("minecraft:step/stone3"),
+                        sound("minecraft:step/stone4"),
+                        sound("minecraft:step/stone5"),
+                        sound("minecraft:step/stone6")
                 ).subtitle("subtitles.aether_ii.entity.detonation_sentry.death")
         );
         this.add(AetherIISoundEvents.ENTITY_DETONATION_SENTRY_HURT,
-                definition().with(
-                        sound("minecraft:mob/slime/big1"),
-                        sound("minecraft:mob/slime/big2"),
-                        sound("minecraft:mob/slime/big3"),
-                        sound("minecraft:mob/slime/big4")
+                definition().with(sound("minecraft:step/stone1"),
+                        sound("minecraft:step/stone2"),
+                        sound("minecraft:step/stone3"),
+                        sound("minecraft:step/stone4"),
+                        sound("minecraft:step/stone5"),
+                        sound("minecraft:step/stone6")
                 ).subtitle("subtitles.aether_ii.entity.detonation_sentry.hurt")
         );
         this.add(AetherIISoundEvents.ENTITY_DETONATION_SENTRY_JUMP,
-                definition().with(
-                        sound("minecraft:mob/slime/big1"),
-                        sound("minecraft:mob/slime/big2"),
-                        sound("minecraft:mob/slime/big3"),
-                        sound("minecraft:mob/slime/big4")
+                definition().with(sound("minecraft:step/stone1"),
+                        sound("minecraft:step/stone2"),
+                        sound("minecraft:step/stone3"),
+                        sound("minecraft:step/stone4"),
+                        sound("minecraft:step/stone5"),
+                        sound("minecraft:step/stone6")
                 ).subtitle("subtitles.aether_ii.entity.detonation_sentry.jump")
         );
         this.add(AetherIISoundEvents.ENTITY_DETONATION_SENTRY_SQUISH,
-                definition().with(
-                        sound("minecraft:mob/slime/big1"),
-                        sound("minecraft:mob/slime/big2"),
-                        sound("minecraft:mob/slime/big3"),
-                        sound("minecraft:mob/slime/big4")
+                definition().with(sound("minecraft:step/stone1"),
+                        sound("minecraft:step/stone2"),
+                        sound("minecraft:step/stone3"),
+                        sound("minecraft:step/stone4"),
+                        sound("minecraft:step/stone5"),
+                        sound("minecraft:step/stone6")
                 ).subtitle("subtitles.aether_ii.entity.detonation_sentry.squish")
         );
 

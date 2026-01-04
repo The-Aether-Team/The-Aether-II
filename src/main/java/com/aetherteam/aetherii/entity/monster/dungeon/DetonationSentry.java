@@ -20,7 +20,6 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.ValueInput;
@@ -92,7 +91,6 @@ public class DetonationSentry extends PathfinderMob {
             if (this.isIgnited()) {
                 this.timer += 1;
                 float flickerInterval = Mth.sin(Mth.square(this.timer) / 50.0F);
-                //AetherII.LOGGER.info(String.valueOf(flickerInterval));
                 if (flickerInterval < 0) {
                     if (this.playSound) {
                         this.playSound(SoundEvents.NOTE_BLOCK_BIT.value(), 1.0F, 1.0F);

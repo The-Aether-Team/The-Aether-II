@@ -409,37 +409,45 @@
   },
   "entity.detonation_sentry.death": {
     "sounds": [
-      "mob/slime/big1",
-      "mob/slime/big2",
-      "mob/slime/big3",
-      "mob/slime/big4"
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
     ],
     "subtitle": "subtitles.aether_ii.entity.detonation_sentry.death"
   },
   "entity.detonation_sentry.hurt": {
     "sounds": [
-      "mob/slime/big1",
-      "mob/slime/big2",
-      "mob/slime/big3",
-      "mob/slime/big4"
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
     ],
     "subtitle": "subtitles.aether_ii.entity.detonation_sentry.hurt"
   },
   "entity.detonation_sentry.jump": {
     "sounds": [
-      "mob/slime/big1",
-      "mob/slime/big2",
-      "mob/slime/big3",
-      "mob/slime/big4"
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
     ],
     "subtitle": "subtitles.aether_ii.entity.detonation_sentry.jump"
   },
   "entity.detonation_sentry.squish": {
     "sounds": [
-      "mob/slime/big1",
-      "mob/slime/big2",
-      "mob/slime/big3",
-      "mob/slime/big4"
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
     ],
     "subtitle": "subtitles.aether_ii.entity.detonation_sentry.squish"
   },
@@ -695,18 +703,23 @@
   },
   "entity.mimic.death": {
     "sounds": [
-      "block/chest/close1",
-      "block/chest/close2",
-      "block/chest/close3"
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
     ],
     "subtitle": "subtitles.aether_ii.entity.mimic.death"
   },
   "entity.mimic.hurt": {
     "sounds": [
-      "dig/wood1",
-      "dig/wood2",
-      "dig/wood3",
-      "dig/wood4"
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
     ],
     "subtitle": "subtitles.aether_ii.entity.mimic.hurt"
   },
