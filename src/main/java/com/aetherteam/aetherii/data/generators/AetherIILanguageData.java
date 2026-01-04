@@ -73,8 +73,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addTooltip("item.modifiers.handwear", "When wearing Handwear:");
         this.addTooltip("item.modifiers.accessory", "When wearing Accessory:");
         this.addTooltip("item.modifiers.blocking", "When blocking:");
-        this.addTooltip("item.modifiers.accepts_charms.melee", "When on melee item:");
-        this.addTooltip("item.modifiers.accepts_charms.armor", "When on armor item:");
+        this.addTooltip("item.modifiers.accepts_charms.tools", "When on tool:");
+        this.addTooltip("item.modifiers.accepts_charms.weapons", "When on weapon:");
+        this.addTooltip("item.modifiers.accepts_charms.armor", "When on armor:");
     }
 
     private void addBlocks() {

@@ -224,8 +224,8 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ZANITE_PENDANT = register("zanite_pendant", ZanitePendantItem::new);
 
     // Charms
-    public static final DeferredItem<Item> CHARM_OF_DAMAGE = register("charm_of_damage", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_MELEE, AetherIIStats.CHARM_DAMAGE_BONUS));
-    public static final DeferredItem<Item> CHARM_OF_DEXTERITY = register("charm_of_dexterity", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_MELEE, AetherIIStats.CHARM_ATTACK_SPEED_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_DAMAGE = register("charm_of_damage", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS, AetherIIStats.CHARM_DAMAGE_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_DEXTERITY = register("charm_of_dexterity", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS, AetherIIStats.CHARM_ATTACK_SPEED_BONUS));
 
     public static final DeferredItem<Item> CHARM_OF_HEALTH = register("charm_of_health", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_MAX_HEALTH_BONUS));
     public static final DeferredItem<Item> CHARM_OF_DEFENSE = register("charm_of_defense", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_ARMOR_BONUS));

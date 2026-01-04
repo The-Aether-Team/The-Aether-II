@@ -93,11 +93,12 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIITags.Items.EQUIPMENT_RELICS,
                 AetherIITags.Items.EQUIPMENT_HANDWEAR,
                 AetherIITags.Items.EQUIPMENT_ACCESSORIES);
-        this.tag(AetherIITags.Items.ACCEPTS_CHARMS_MELEE).addTags(
-                Tags.Items.MELEE_WEAPON_TOOLS,
+        this.tag(AetherIITags.Items.ACCEPTS_CHARMS_TOOLS).addTags(
                 Tags.Items.MINING_TOOL_TOOLS,
                 ItemTags.SHOVELS,
                 ItemTags.HOES);
+        this.tag(AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS).addTags(
+                Tags.Items.MELEE_WEAPON_TOOLS);
         this.tag(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR).addTags(
                 Tags.Items.ARMORS);
         this.tag(AetherIITags.Items.BEAST_PELT_ARMOR).add(

@@ -75,6 +75,31 @@
       }
     },
     {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:item/weapon_charm_runes"
+      ],
+      "palette_key": "aether_ii:item/color_palettes/charm_runes/base_palette",
+      "permutations": {
+        "damage": "aether_ii:item/color_palettes/charm_runes/damage",
+        "dexterity": "aether_ii:item/color_palettes/charm_runes/dexterity"
+      }
+    },
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:item/armor_charm_runes"
+      ],
+      "palette_key": "aether_ii:item/color_palettes/charm_runes/base_palette",
+      "permutations": {
+        "health": "aether_ii:item/color_palettes/charm_runes/health",
+        "defense": "aether_ii:item/color_palettes/charm_runes/defense",
+        "toughness": "aether_ii:item/color_palettes/charm_runes/toughness",
+        "resistance": "aether_ii:item/color_palettes/charm_runes/resistance",
+        "agility": "aether_ii:item/color_palettes/charm_runes/agility"
+      }
+    },
+    {
       "type": "aether_ii:overlaid",
       "textures": [
         "aether_ii:block/skyroot_leaves",

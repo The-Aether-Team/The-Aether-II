@@ -30,6 +30,7 @@ import net.minecraft.client.renderer.item.properties.conditional.CustomModelData
 import net.minecraft.client.renderer.item.properties.conditional.HasComponent;
 import net.minecraft.client.renderer.item.properties.select.Charge;
 import net.minecraft.client.renderer.item.properties.select.DisplayContext;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
@@ -129,6 +130,16 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
     public void generateDyedArmorItem(Item item, int defaultColor) {
         ResourceLocation resourceLocation = this.generateLayeredItem(item, TextureMapping.getItemTexture(item), TextureMapping.getItemTexture(item).withSuffix("_dyed"));
         this.itemModelOutput.accept(item, ItemModelUtils.tintedModel(resourceLocation, BLANK_LAYER, new Dye(defaultColor)));
+    }
+
+    public void generateCharmItem(Item item, String type, String tier, String stat) {
+        ResourceLocation key = BuiltInRegistries.ITEM.getKey(item);
+        ResourceLocation modelLocation = ModelLocationUtils.getModelLocation(item);
+        ModelTemplates.TWO_LAYERED_ITEM.create(modelLocation, TextureMapping.layered(
+                ResourceLocation.fromNamespaceAndPath(key.getNamespace(), "item/" + type + "_charm_" + tier),
+                ResourceLocation.fromNamespaceAndPath(key.getNamespace(), "item/" + type + "_charm_runes_" + stat)
+        ), this.modelOutput);
+        this.itemModelOutput.accept(item, ItemModelUtils.plainModel(modelLocation));
     }
 
     public void generateMoaFeatherItem(Item item) {

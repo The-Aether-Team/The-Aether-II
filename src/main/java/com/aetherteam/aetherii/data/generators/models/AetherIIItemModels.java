@@ -131,14 +131,14 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.ZANITE_PENDANT.get(), ModelTemplates.FLAT_ITEM);
 
         // Charms
-        this.generateFlatItem(AetherIIItems.CHARM_OF_DAMAGE.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.CHARM_OF_DEXTERITY.get(), ModelTemplates.FLAT_ITEM);
+        this.generateCharmItem(AetherIIItems.CHARM_OF_DAMAGE.get(), "weapon", "1", "damage");
+        this.generateCharmItem(AetherIIItems.CHARM_OF_DEXTERITY.get(), "weapon", "1", "dexterity");
 
-        this.generateFlatItem(AetherIIItems.CHARM_OF_HEALTH.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.CHARM_OF_DEFENSE.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.CHARM_OF_TOUGHNESS.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.CHARM_OF_RESISTANCE.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.CHARM_OF_AGILITY.get(), ModelTemplates.FLAT_ITEM);
+        this.generateCharmItem(AetherIIItems.CHARM_OF_HEALTH.get(), "armor", "1", "health");
+        this.generateCharmItem(AetherIIItems.CHARM_OF_DEFENSE.get(), "armor", "1", "defense");
+        this.generateCharmItem(AetherIIItems.CHARM_OF_TOUGHNESS.get(), "armor", "1", "toughness");
+        this.generateCharmItem(AetherIIItems.CHARM_OF_RESISTANCE.get(), "armor", "1", "resistance");
+        this.generateCharmItem(AetherIIItems.CHARM_OF_AGILITY.get(), "armor", "1", "agility");
 
         this.generateFlatItem(AetherIIItems.COMPANION.get(), ModelTemplates.FLAT_ITEM);
 

@@ -155,7 +155,8 @@ public class AetherIITags {
         public static final TagKey<Item> EQUIPMENT_ACCESSORIES = tag("equipment/accessories");
         public static final TagKey<Item> EQUIPABLE = tag("equipable");
 
-        public static final TagKey<Item> ACCEPTS_CHARMS_MELEE = tag("accepts_charms/melee");
+        public static final TagKey<Item> ACCEPTS_CHARMS_TOOLS = tag("accepts_charms/tools");
+        public static final TagKey<Item> ACCEPTS_CHARMS_WEAPONS = tag("accepts_charms/weapons");
         public static final TagKey<Item> ACCEPTS_CHARMS_ARMOR = tag("accepts_charms/armor");
 
         public static final TagKey<Item> BEAST_PELT_ARMOR = tag("armor/beast_pelt");
