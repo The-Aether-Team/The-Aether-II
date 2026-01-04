@@ -368,7 +368,9 @@ public class Aerbunny extends AetherTamableAnimal {
                 if (this.isTame()) {
                     this.setOrderedToSit(false);
                 }
-                player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(this);
+                if (!player.level().isClientSide()) {
+                    player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(this);
+                }
                 this.level().playSound(player, this, AetherIISoundEvents.ENTITY_AERBUNNY_LIFT.get(), SoundSource.NEUTRAL, 1.0F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F);
             }
             return InteractionResult.SUCCESS;

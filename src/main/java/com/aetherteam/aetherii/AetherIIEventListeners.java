@@ -12,6 +12,7 @@ import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -277,8 +278,9 @@ public class AetherIIEventListeners {
 
     public static void onEntityTravelToDimension(EntityTravelToDimensionEvent event) {
         Entity entity = event.getEntity();
+        ResourceKey<Level> dimension = event.getDimension();
 
-        if (entity instanceof Player player) {
+        if (entity instanceof Player player && !player.level().dimension().equals(dimension)) {
             player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT.get()).removeAerbunny();
         }
     }
