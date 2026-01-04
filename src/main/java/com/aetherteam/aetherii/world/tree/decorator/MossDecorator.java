@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.world.tree.decorator;
 
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
+import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
 import com.aetherteam.aetherii.block.natural.BottomedVineBlock;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -16,27 +18,28 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class MossDecorator extends TreeDecorator {
     public static final MapCodec<MossDecorator> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
-                    BlockStateProvider.CODEC.fieldOf("block_provider").forGetter(decorator -> decorator.blockProvider),
+                    AetherIIBlockStateProperties.Mossy.CODEC.fieldOf("moss_property").forGetter(decorator -> decorator.mossProperty),
                     BlockStateProvider.CODEC.fieldOf("carpet_provider").forGetter(decorator -> decorator.carpetProvider),
                     BlockStateProvider.CODEC.fieldOf("vines_provider").forGetter(decorator -> decorator.vinesProvider),
                     BlockStateProvider.CODEC.optionalFieldOf("flower_provider").forGetter(decorator -> decorator.flowerProvider)
             ).apply(instance, MossDecorator::new));
 
-    protected final BlockStateProvider blockProvider;
+    protected final AetherIIBlockStateProperties.Mossy mossProperty;
     protected final BlockStateProvider carpetProvider;
     protected final BlockStateProvider vinesProvider;
     protected final Optional<BlockStateProvider> flowerProvider;
 
-    public MossDecorator(BlockStateProvider blockProvider, BlockStateProvider carpetProvider, BlockStateProvider vinesProvider) {
-        this(blockProvider, carpetProvider, vinesProvider, Optional.empty());
+    public MossDecorator(AetherIIBlockStateProperties.Mossy mossProperty, BlockStateProvider carpetProvider, BlockStateProvider vinesProvider) {
+        this(mossProperty, carpetProvider, vinesProvider, Optional.empty());
     }
 
-    public MossDecorator(BlockStateProvider blockProvider, BlockStateProvider carpetProvider, BlockStateProvider vinesProvider, Optional<BlockStateProvider> flowerProvider) {
-        this.blockProvider = blockProvider;
+    public MossDecorator(AetherIIBlockStateProperties.Mossy mossProperty, BlockStateProvider carpetProvider, BlockStateProvider vinesProvider, Optional<BlockStateProvider> flowerProvider) {
+        this.mossProperty = mossProperty;
         this.carpetProvider = carpetProvider;
         this.vinesProvider = vinesProvider;
         this.flowerProvider = flowerProvider;
@@ -49,9 +52,16 @@ public class MossDecorator extends TreeDecorator {
             BlockPos heightmapPos = context.level().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, leafPos);
             BlockPos relativePos = leafPos.above();
             if (heightmapPos.getY() == relativePos.getY()) {
+                AtomicReference<BlockState> referenceState = new AtomicReference<>();
+                context.checkBlock(leafPos, (blockState) -> {
+                    if (blockState.getBlock() instanceof AetherLeavesBlock && blockState.getValue(AetherLeavesBlock.MOSSY) == AetherIIBlockStateProperties.Mossy.NONE) {
+                        referenceState.set(blockState);
+                    }
+                    return true;
+                });
                 if (random.nextInt(10) == 0) {
-                    context.setBlock(leafPos, this.blockProvider.getState(random, leafPos));
                     if (context.isAir(relativePos)) {
+                        context.setBlock(leafPos, referenceState.get().setValue(AetherLeavesBlock.MOSSY, this.mossProperty));
                         if (this.flowerProvider.isEmpty() || random.nextBoolean()) {
                             context.setBlock(relativePos, this.carpetProvider.getState(random, relativePos));
                         } else {
@@ -60,7 +70,13 @@ public class MossDecorator extends TreeDecorator {
                     }
                 }
                 if (random.nextInt(5) == 0) {
+                    context.setBlock(leafPos, referenceState.get().setValue(AetherLeavesBlock.MOSSY, this.mossProperty));
                     context.setBlock(relativePos, this.carpetProvider.getState(random, relativePos));
+                }
+                if (random.nextInt(3) == 0) {
+                    if (context.isAir(relativePos)) {
+                        context.setBlock(leafPos, referenceState.get().setValue(AetherLeavesBlock.MOSSY, this.mossProperty));
+                    }
                 }
                 for (Direction offsetDirection : Direction.Plane.HORIZONTAL.stream().toList()) {
                     BlockPos newPos = leafPos.relative(offsetDirection);
@@ -69,8 +85,8 @@ public class MossDecorator extends TreeDecorator {
                         if (context.level().isStateAtPosition(newPos.relative(direction), BlockBehaviour.BlockStateBase::isSolid)) {
                             BlockState blockState = this.vinesProvider.getState(random, newPos.relative(direction));
                             blockState = blockState.setValue(VineBlock.getPropertyForFace(direction), true);
-                            if ((context.level().isStateAtPosition(newPos.relative(direction), (state) -> state.is(this.blockProvider.getState(random, newPos.relative(direction)).getBlock()))
-                                    || context.level().isStateAtPosition(newPos.above().relative(direction), (state) -> state.is(this.blockProvider.getState(random, newPos.above().relative(direction)).getBlock()))
+                            if ((context.level().isStateAtPosition(newPos.relative(direction), (state) -> state.getValueOrElse(AetherIIBlockStateProperties.MOSSY, AetherIIBlockStateProperties.Mossy.NONE) == this.mossProperty)
+                                    || context.level().isStateAtPosition(newPos.above().relative(direction), (state) -> state.getValueOrElse(AetherIIBlockStateProperties.MOSSY, AetherIIBlockStateProperties.Mossy.NONE) == this.mossProperty)
                                     || context.level().isStateAtPosition(newPos.above().relative(direction), (state) -> state.is(this.carpetProvider.getState(random, newPos.above().relative(direction)).getBlock())))
                                     && random.nextInt(4) == 0) {
                                 blockState = blockState.setValue(BottomedVineBlock.AGE, 25);

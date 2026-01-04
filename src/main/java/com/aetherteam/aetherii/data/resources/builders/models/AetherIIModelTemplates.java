@@ -122,21 +122,6 @@ public class AetherIIModelTemplates {
                     .face(Direction.WEST, (faceBuilder) -> faceBuilder.texture(TextureSlot.EAST).uvs(16, 0, 0, 16).cullface(Direction.EAST))
                     .face(Direction.EAST, (faceBuilder) -> faceBuilder.texture(TextureSlot.EAST).uvs(0, 0, 16, 16).cullface(Direction.EAST))
             ).build();
-    public static final ModelTemplate CUBE_TOP_BOTTOM_INNER_TOP = ModelTemplates.create("cube_bottom_top", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE).extend()
-            .renderType(ResourceLocation.withDefaultNamespace("cutout_mipped"))
-            .element((builder) -> builder
-                    .from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F)
-                    .face(Direction.DOWN, (faceBuilder) -> faceBuilder.texture(TextureSlot.BOTTOM).cullface(Direction.DOWN))
-                    .face(Direction.UP, (faceBuilder) -> faceBuilder.texture(TextureSlot.TOP).cullface(Direction.UP))
-                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.texture(TextureSlot.SIDE).cullface(Direction.NORTH))
-                    .face(Direction.SOUTH, (faceBuilder) -> faceBuilder.texture(TextureSlot.SIDE).cullface(Direction.SOUTH))
-                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.texture(TextureSlot.SIDE).cullface(Direction.WEST))
-                    .face(Direction.EAST, (faceBuilder) -> faceBuilder.texture(TextureSlot.SIDE).cullface(Direction.EAST))
-            ).element((builder) -> builder
-                    .from(0.0F, 15.998F, 0.0F).to(16.0F, 16.0F, 16.0F)
-                    .face(Direction.DOWN, (faceBuilder) -> faceBuilder.texture(TextureSlot.UP).uvs(0, 16, 16, 0).cullface(Direction.UP))
-                    .face(Direction.UP, (faceBuilder) -> faceBuilder.texture(TextureSlot.UP).uvs(0, 0, 16, 16).cullface(Direction.UP))
-            ).build();
     public static final ModelTemplate BUSH_BLOCK = ModelTemplates.create("cube", TextureSlot.TEXTURE, TextureSlot.PARTICLE, TextureSlot.CROSS).extend()
             .renderType(ResourceLocation.withDefaultNamespace("cutout_mipped"))
             .element((builder) -> builder
@@ -255,6 +240,8 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate TRUNK_SIDE_TALL = AetherIIModelTemplates.create("template_trunk_side_tall", "_side_tall", TextureSlot.ALL);
     public static final ModelTemplate TRUNK_CORNER_TALL = AetherIIModelTemplates.create("template_trunk_corner_tall", "_corner_tall", TextureSlot.ALL);
     public static final ModelTemplate TRUNK_INVENTORY = AetherIIModelTemplates.create("template_trunk_inventory", "_inventory", TextureSlot.ALL);
+    public static final ModelTemplate OVERLAID_LEAVES = create("template_overlaid_leaves", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE, AetherIITextureSlots.OVERLAY);
+    public static final ModelTemplate TINTED_OVERLAID_LEAVES = create("template_tinted_overlaid_leaves", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE, AetherIITextureSlots.OVERLAY);
     public static final ModelTemplate MOSS_VINE = create("moss_vine", AetherIITextureSlots.VINE, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN = create("asymmetrical_cross_even", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN_MIRRORED = create("asymmetrical_cross_even_mirrored", "_mirrored", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();

@@ -461,12 +461,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         })));
     }
 
-    public void createLeavesWithPiles(Block leaves, Block piles) {
-        MultiVariant cube = plainVariant(AetherIITexturedModels.LEAVES.create(leaves, this.modelOutput));
-        MultiVariant snowy = plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_snowy"), AetherIITextureMappings.snowyLeaves(leaves), this.modelOutput));
-        MultiVariant bryalinn = plainVariant(AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_bryalinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "bryalinn"), this.modelOutput));
-        MultiVariant shayelinn = plainVariant(AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_shayelinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), "shayelinn"), this.modelOutput));
-        MultiVariant ambrelinn = plainVariant(AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_ambrelinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(), "ambrelinn"), this.modelOutput));
+    public void createLeavesWithPiles(Block leaves, Block piles, TexturedModel.Provider regularProvider, ModelTemplate overlaidTemplate) {
+        MultiVariant cube = plainVariant(regularProvider.create(leaves, this.modelOutput));
+        MultiVariant snowy = plainVariant(overlaidTemplate.create(ModelLocationUtils.getModelLocation(leaves, "_snowy"), AetherIITextureMappings.snowyLeaves(leaves), this.modelOutput));
+        MultiVariant bryalinn = plainVariant(overlaidTemplate.create(ModelLocationUtils.getModelLocation(leaves, "_bryalinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "bryalinn"), this.modelOutput));
+        MultiVariant shayelinn = plainVariant(overlaidTemplate.create(ModelLocationUtils.getModelLocation(leaves, "_shayelinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), "shayelinn"), this.modelOutput));
+        MultiVariant ambrelinn = plainVariant(overlaidTemplate.create(ModelLocationUtils.getModelLocation(leaves, "_ambrelinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(), "ambrelinn"), this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(leaves)
                 .with(PropertyDispatch.initial(AetherLeavesBlock.SNOWY, AetherLeavesBlock.MOSSY).generate((snowyState, mossyState) -> {
                     if (snowyState) {
@@ -489,11 +489,6 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                     }
                 }))
         );
-        this.createPiles(piles, leaves);
-    }
-
-    public void createTintedLeavesWithPiles(Block leaves, Block piles) {
-        this.createTrivialBlock(leaves, AetherIITexturedModels.TINTED_LEAVES);
         this.createPiles(piles, leaves);
     }
 
