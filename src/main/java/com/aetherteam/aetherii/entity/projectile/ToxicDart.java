@@ -79,6 +79,7 @@ public class ToxicDart extends AbstractArrow {
     protected void doPostHurtEffects(LivingEntity living) {
         super.doPostHurtEffects(living);
         living.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(living, EffectBuildupPresets.TOXIN, 350);
+        living.setArrowCount(living.getArrowCount() - 1);
     }
 
     @Override
