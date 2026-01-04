@@ -1,7 +1,9 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
@@ -404,6 +406,9 @@ public class Aerbunny extends AetherTamableAnimal {
                 ((EntityAccessor) vehicle).callGetIndirectPassengersStream().filter((entity) -> entity instanceof ServerPlayer).forEach((player) -> CriteriaTriggers.START_RIDING_TRIGGER.trigger((ServerPlayer) player));
                 if (this.getVehicle() instanceof Player player) {
                     this.setVehicleReference(Optional.of(new EntityReference<>(player.getUUID())));
+                    if (player.level().isClientSide()) {
+                        AetherIIClientProxy.sendClientPassengerMessage();
+                    }
                 }
                 return true;
             } else {

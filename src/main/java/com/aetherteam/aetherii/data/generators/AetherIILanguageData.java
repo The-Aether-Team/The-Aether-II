@@ -57,6 +57,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGeneric("bedroll.too_dark", "You may not rest now; it is too dark to sleep here");
         this.addGeneric("message.campfire_added", "Outpost campfire respawn point set");
         this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid outpost campfire");
+        this.addGeneric("message.passenger.onboard", "Press %1$s and %2$s to Dismount Passenger");
 
         // Packs
         this.addPackDescription("mod", "Aether II Resources");
@@ -65,6 +66,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addTooltip("item.modifiers.blocking", "When blocking:");
         this.addTooltip("item.modifiers.accepts_charms.melee", "When on melee item:");
         this.addTooltip("item.modifiers.accepts_charms.armor", "When on armor item:");
+
+        // Keys
+        this.addKeyInfo("category", "The Aether II");
+        this.addKeyInfo("allow_dismounting_passenger.desc", "Allow Dismounting Passenger");
     }
 
     private void addBlocks() {
