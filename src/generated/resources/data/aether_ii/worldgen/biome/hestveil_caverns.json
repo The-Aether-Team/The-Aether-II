@@ -80,6 +80,7 @@
   },
   "spawners": {
     "aether_ii:aether_aerwhale": [],
+    "aether_ii:aether_ambient": [],
     "aether_ii:aether_darkness_monster": [],
     "aether_ii:aether_sky_monster": [
       {
