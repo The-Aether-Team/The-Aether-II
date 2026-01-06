@@ -159,6 +159,12 @@ public class AetherIIStats {
     public static final ImmutableMap<Holder<Attribute>, Double> SKYROOT_LIZARD = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 4.0)
             .build();
+    public static final ImmutableMap<Holder<Attribute>, Double> GLITTERWING = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(Attributes.MAX_HEALTH, 6.0)
+            .build();
+    public static final ImmutableMap<Holder<Attribute>, Double> SHROUDWING = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(Attributes.MAX_HEALTH, 46.0)
+            .build();
     public static final ImmutableMap<Holder<Attribute>, Double> AECHOR_PLANT = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 15.0)
             .put(AetherIIAttributes.SLASH_RESISTANCE, -2.0)

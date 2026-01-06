@@ -47,6 +47,8 @@ public class AetherIIBestiaryEntries {
     public static final ResourceKey<BestiaryEntry> ARCTIC_KIRRID = createKey("arctic_kirrid");
     public static final ResourceKey<BestiaryEntry> MOA = createKey("moa");
     public static final ResourceKey<BestiaryEntry> SKYROOT_LIZARD = createKey("skyroot_lizard");
+    public static final ResourceKey<BestiaryEntry> GLITTERWING = createKey("glitterwing");
+    public static final ResourceKey<BestiaryEntry> SHROUDWING = createKey("shroudwing");
     public static final ResourceKey<BestiaryEntry> AECHOR_PLANT = createKey("aechor_plant");
     public static final ResourceKey<BestiaryEntry> CARRION_SPROUT = createKey("carrion_sprout");
     public static final ResourceKey<BestiaryEntry> ZEPHYR = createKey("zephyr");
@@ -75,6 +77,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(ARCTIC_KIRRID, AetherIIEntityTypes.ARCTIC_KIRRID),
             Map.entry(MOA, AetherIIEntityTypes.MOA),
             Map.entry(SKYROOT_LIZARD, AetherIIEntityTypes.SKYROOT_LIZARD),
+            Map.entry(GLITTERWING, AetherIIEntityTypes.GLITTERWING),
+            Map.entry(SHROUDWING, AetherIIEntityTypes.SHROUDWING),
             Map.entry(AECHOR_PLANT, AetherIIEntityTypes.AECHOR_PLANT),
             Map.entry(CARRION_SPROUT, AetherIIEntityTypes.CARRION_SPROUT),
             Map.entry(ZEPHYR, AetherIIEntityTypes.ZEPHYR),
@@ -113,6 +117,9 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.MAGNETIC_KIRRID, AetherIIStats.MAGNETIC_KIRRID),
             Map.entry(AetherIIEntityTypes.ARCTIC_KIRRID, AetherIIStats.ARCTIC_KIRRID),
             Map.entry(AetherIIEntityTypes.MOA, AetherIIStats.MOA),
+            Map.entry(AetherIIEntityTypes.SKYROOT_LIZARD, AetherIIStats.SKYROOT_LIZARD),
+            Map.entry(AetherIIEntityTypes.GLITTERWING, AetherIIStats.GLITTERWING),
+            Map.entry(AetherIIEntityTypes.SHROUDWING, AetherIIStats.SHROUDWING),
             Map.entry(AetherIIEntityTypes.AECHOR_PLANT, AetherIIStats.AECHOR_PLANT),
             Map.entry(AetherIIEntityTypes.CARRION_SPROUT, AetherIIStats.CARRION_SPROUT),
             Map.entry(AetherIIEntityTypes.ZEPHYR, AetherIIStats.ZEPHYR),
