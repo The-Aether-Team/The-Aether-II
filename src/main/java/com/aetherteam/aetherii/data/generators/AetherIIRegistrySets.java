@@ -35,8 +35,8 @@ public class AetherIIRegistrySets extends DatapackBuiltinEntriesProvider {
             .add(AetherIIStyleDesigns.STYLE_DESIGN_REGISTRY_KEY, AetherIIStyleDesigns::bootstrap)
             .add(AetherIIStyleMaterials.STYLE_MATERIAL_REGISTRY_KEY, AetherIIStyleMaterials::bootstrap)
             .add(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY, AetherIISkyrootLizardVariants::bootstrap)
-            .add(AetherIIButterflyVariants.BUTTERFLY_VARIANT_REGISTRY_KEY, AetherIIButterflyVariants::bootstrap)
-            .add(AetherIIBeetleVariants.BEETLE_VARIANT_REGISTRY_KEY, AetherIIBeetleVariants::bootstrap)
+            .add(AetherIIGlitterwingVariants.GLITTERWING_VARIANT_REGISTRY_KEY, AetherIIGlitterwingVariants::bootstrap)
+            .add(AetherIIShroudwingVariants.SHROUDWING_VARIANT_REGISTRY_KEY, AetherIIShroudwingVariants::bootstrap)
             .add(AetherIIRewardWrappers.REWARD_WRAPPER_REGISTRY_KEY, AetherIIRewardWrappers::bootstrap);
 
     public AetherIIRegistrySets(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {

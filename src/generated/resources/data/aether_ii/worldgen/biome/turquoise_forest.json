@@ -159,13 +159,13 @@
     ],
     "ambient": [
       {
-        "type": "aether_ii:butterfly",
+        "type": "aether_ii:glitterwing",
         "maxCount": 4,
         "minCount": 1,
         "weight": 2
       },
       {
-        "type": "aether_ii:beetle",
+        "type": "aether_ii:shroudwing",
         "maxCount": 2,
         "minCount": 1,
         "weight": 1
