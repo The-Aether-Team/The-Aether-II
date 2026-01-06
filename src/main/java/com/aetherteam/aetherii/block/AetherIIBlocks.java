@@ -820,8 +820,40 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
                 return new HangingSignItem(WISPROOT_HANGING_SIGN.get(), WISPROOT_WALL_HANGING_SIGN.get(), properties.stacksTo(16));
             } else if (block == CLOUDWOOL_BEDROLL) {
                 return new BedItem(CLOUDWOOL_BEDROLL.get(), properties.stacksTo(4));
-            }else if (block == SKYROOT_BED) {
+            } else if (block == SKYROOT_BED) { //todo: clean-up
                 return new BedItem(SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == WHITE_SKYROOT_BED) {
+                return new BedItem(WHITE_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == ORANGE_SKYROOT_BED) {
+                return new BedItem(ORANGE_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == MAGENTA_SKYROOT_BED) {
+                return new BedItem(MAGENTA_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == LIGHT_BLUE_SKYROOT_BED) {
+                return new BedItem(LIGHT_BLUE_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == YELLOW_SKYROOT_BED) {
+                return new BedItem(YELLOW_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == LIME_SKYROOT_BED) {
+                return new BedItem(LIME_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == PINK_SKYROOT_BED) {
+                return new BedItem(PINK_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == GRAY_SKYROOT_BED) {
+                return new BedItem(GRAY_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == LIGHT_GRAY_SKYROOT_BED) {
+                return new BedItem(LIGHT_GRAY_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == CYAN_SKYROOT_BED) {
+                return new BedItem(CYAN_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == PURPLE_SKYROOT_BED) {
+                return new BedItem(PURPLE_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == BLUE_SKYROOT_BED) {
+                return new BedItem(BLUE_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == BROWN_SKYROOT_BED) {
+                return new BedItem(BROWN_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == GREEN_SKYROOT_BED) {
+                return new BedItem(GREEN_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == RED_SKYROOT_BED) {
+                return new BedItem(RED_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == BLACK_SKYROOT_BED) {
+                return new BedItem(BLACK_SKYROOT_BED.get(), properties.stacksTo(1));
             } else {
                 return new BlockItem(block.get(), properties);
             }
