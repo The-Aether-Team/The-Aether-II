@@ -4,7 +4,7 @@
     "base": "aether_ii:item/brown_skyroot_bed",
     "model": {
       "type": "minecraft:bed",
-      "texture": "minecraft:brown"
+      "texture": "aether_ii:skyroot/brown"
     }
   }
 }
