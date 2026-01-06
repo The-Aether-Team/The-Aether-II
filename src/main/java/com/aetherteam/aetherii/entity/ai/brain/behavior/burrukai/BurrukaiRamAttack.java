@@ -29,20 +29,19 @@ public class BurrukaiRamAttack extends Behavior<Burrukai> {
     private BlockPos blockPos;
 
     public BurrukaiRamAttack(float speed) {
-        super(ImmutableMap.of(
-                MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryStatus.VALUE_PRESENT,
-                MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT
-        ), 600);
+        super(ImmutableMap.of(MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT
+        ));
         this.speed = speed;
     }
 
     @Override
-    protected boolean canStillUse(ServerLevel serverLevel, Burrukai owner, long gameTime) {
-        return this.getTarget(owner) != null;
+    protected boolean checkExtraStartConditions(ServerLevel level, Burrukai owner) {
+        return owner.getBrain().hasMemoryValue(MemoryModuleType.ATTACK_TARGET);
     }
 
-    private LivingEntity getTarget(Burrukai owner) {
-        return owner.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).orElse(null);
+    @Override
+    protected boolean canStillUse(ServerLevel serverLevel, Burrukai owner, long gameTime) {
+        return owner.getBrain().hasMemoryValue(MemoryModuleType.ATTACK_TARGET);
     }
 
     @Override

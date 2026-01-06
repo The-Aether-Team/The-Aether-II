@@ -18,6 +18,7 @@ import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
@@ -36,7 +37,10 @@ public class BurrukaiAi {
     );
     public static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
             MemoryModuleType.LOOK_TARGET,
+            MemoryModuleType.NEAREST_LIVING_ENTITIES,
             MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES,
+            MemoryModuleType.NEAREST_VISIBLE_PLAYER,
+            MemoryModuleType.NEAREST_VISIBLE_ATTACKABLE_PLAYER,
             MemoryModuleType.WALK_TARGET,
             MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE,
             MemoryModuleType.PATH,
@@ -108,17 +112,21 @@ public class BurrukaiAi {
         return findNearestValidAttackTarget(serverLevel, burrukai).filter(entity -> entity == target).isPresent();
     }
 
-    private static Optional<? extends LivingEntity> findNearestValidAttackTarget(ServerLevel serverLevel, Burrukai burrukai) {
-        if (burrukai.isBaby()) {
+    private static Optional<? extends LivingEntity> findNearestValidAttackTarget(ServerLevel level, Burrukai burrukai) {
+        Brain<Burrukai> brain = burrukai.getBrain();
+
+        Optional<LivingEntity> optional = BehaviorUtils.getLivingEntityFromUUIDMemory(burrukai, MemoryModuleType.ANGRY_AT);
+        if (optional.isPresent() && Sensor.isEntityAttackableIgnoringLineOfSight(level, burrukai, (LivingEntity) optional.get())) {
+            return optional;
+        } else {
+            if (brain.hasMemoryValue(MemoryModuleType.UNIVERSAL_ANGER)) {
+                Optional<Player> optional1 = brain.getMemory(MemoryModuleType.NEAREST_VISIBLE_ATTACKABLE_PLAYER);
+                if (optional1.isPresent()) {
+                    return optional1;
+                }
+            }
             return Optional.empty();
         }
-
-        Optional<LivingEntity> optionalTargetFromMemory = BehaviorUtils.getLivingEntityFromUUIDMemory(burrukai, MemoryModuleType.ANGRY_AT);
-        if (optionalTargetFromMemory.isPresent() && Sensor.isEntityAttackableIgnoringLineOfSight(serverLevel, burrukai, optionalTargetFromMemory.get())) {
-            return optionalTargetFromMemory;
-        }
-
-        return Optional.empty();
     }
 
     public static void updateActivity(Burrukai owner) {
