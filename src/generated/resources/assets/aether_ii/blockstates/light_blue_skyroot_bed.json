@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "aether_ii:block/skyroot_bed"
+      "model": "aether_ii:block/undyed"
     }
   }
 }
