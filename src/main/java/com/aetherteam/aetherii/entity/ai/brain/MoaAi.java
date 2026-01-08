@@ -105,15 +105,12 @@ public class MoaAi {
 
     private static void initFightActivity(Moa owner, Brain<Moa> brain) {
         brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
-                StopAttackingIfTargetInvalid.create((serverLevel, livingEntity) -> !isNearestValidAttackTarget(serverLevel, owner, livingEntity)),
+                StopAttackingIfTargetInvalid.create(),
                 SetWalkTargetFromAttackTargetIfTargetOutOfReach.create(0.14F),
                 MeleeAttack.create(5)
         ), MemoryModuleType.ATTACK_TARGET);
     }
 
-    private static boolean isNearestValidAttackTarget(ServerLevel serverLevel, Moa owner, LivingEntity target) {
-        return findNearestValidAttackTarget(serverLevel, owner).filter(entity -> entity == target).isPresent();
-    }
 
     private static Optional<? extends LivingEntity> findNearestValidAttackTarget(ServerLevel serverLevel, Moa owner) {
 

@@ -103,13 +103,9 @@ public class BurrukaiAi {
 
     private static void initFightActivity(Burrukai burrukai, Brain<Burrukai> brain) {
         brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
-                StopAttackingIfTargetInvalid.create((serverLevel, livingEntity) -> !isNearestValidAttackTarget(serverLevel, burrukai, livingEntity)),
+                StopAttackingIfTargetInvalid.create(),
                 new BurrukaiRamAttack(2.25F)
         ), MemoryModuleType.ATTACK_TARGET);
-    }
-
-    private static boolean isNearestValidAttackTarget(ServerLevel serverLevel, Burrukai burrukai, LivingEntity target) {
-        return findNearestValidAttackTarget(serverLevel, burrukai).filter(entity -> entity == target).isPresent();
     }
 
     private static Optional<? extends LivingEntity> findNearestValidAttackTarget(ServerLevel level, Burrukai burrukai) {
