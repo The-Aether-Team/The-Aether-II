@@ -184,7 +184,6 @@ public class AetherIITags {
         public static final TagKey<Item> CRAFTS_SKYROOT_TOOLS = tag("crafts_skyroot_tools");
         public static final TagKey<Item> CRAFTS_HOLYSTONE_TOOLS = tag("crafts_holystone_tools");
         public static final TagKey<Item> ALTAR_FUEL = tag("altar_fuel");
-        public static final TagKey<Item> CAN_BE_REINFORCED = tag("can_be_reinforced");
         public static final TagKey<Item> FORGE_PRIMARY_MATERIAL = tag("forge_primary_material");
         public static final TagKey<Item> FORGE_SECONDARY_MATERIAL = tag("forge_secondary_material");
 

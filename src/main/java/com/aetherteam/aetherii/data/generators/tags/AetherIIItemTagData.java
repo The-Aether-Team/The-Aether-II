@@ -95,10 +95,14 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIITags.Items.EQUIPMENT_ACCESSORIES);
         this.tag(AetherIITags.Items.ACCEPTS_CHARMS_TOOLS).addTags(
                 Tags.Items.MINING_TOOL_TOOLS,
+                ItemTags.AXES,
                 ItemTags.SHOVELS,
                 ItemTags.HOES);
         this.tag(AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS).addTags(
-                Tags.Items.MELEE_WEAPON_TOOLS);
+                AetherIITags.Items.TOOLS_SHORTSWORDS,
+                AetherIITags.Items.TOOLS_HAMMERS,
+                AetherIITags.Items.TOOLS_SPEARS,
+                ItemTags.SWORDS);
         this.tag(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR).addTags(
                 Tags.Items.ARMORS);
         this.tag(AetherIITags.Items.BEAST_PELT_ARMOR).add(
@@ -263,7 +267,6 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.ALTAR_FUEL).add(
                 AetherIIItems.AMBROSIUM_SHARD.get()
         );
-        this.tag(AetherIITags.Items.CAN_BE_REINFORCED).add(ArkeniumForgeMenu.REINFORCEABLE.stream().map(Holder::value).toArray(Item[]::new));
         this.tag(AetherIITags.Items.FORGE_PRIMARY_MATERIAL).add(AetherIIItems.ARKENIUM_PLATES.get());
         this.tag(AetherIITags.Items.FORGE_SECONDARY_MATERIAL).add(AetherIIItems.CORROBONITE_CRYSTAL.get());
         this.tag(AetherIITags.Items.AERBUNNY_FOOD).add(

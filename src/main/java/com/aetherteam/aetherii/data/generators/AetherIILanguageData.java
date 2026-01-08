@@ -73,9 +73,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addTooltip("item.modifiers.handwear", "When wearing Handwear:");
         this.addTooltip("item.modifiers.accessory", "When wearing Accessory:");
         this.addTooltip("item.modifiers.blocking", "When blocking:");
-        this.addTooltip("item.modifiers.accepts_charms.tools", "When on tool:");
-        this.addTooltip("item.modifiers.accepts_charms.weapons", "When on weapon:");
-        this.addTooltip("item.modifiers.accepts_charms.armor", "When on armor:");
+        this.addTooltip("item.modifiers.charms.tool", "When on tool:");
+        this.addTooltip("item.modifiers.charms.weapon", "When on weapon:");
+        this.addTooltip("item.modifiers.charms.armor", "When on armor:");
     }
 
     private void addBlocks() {
@@ -912,14 +912,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ZANITE_PENDANT, "Zanite Pendant");
 
         // Charms
-        this.addItem(AetherIIItems.CHARM_OF_DAMAGE, "Charm of Damage");
-        this.addItem(AetherIIItems.CHARM_OF_DEXTERITY, "Charm of Dexterity");
+        this.addItem(AetherIIItems.CHARM_OF_DAMAGE_I, "Charm of Damage I");
+        this.addItem(AetherIIItems.CHARM_OF_DEXTERITY_I, "Charm of Dexterity I");
 
-        this.addItem(AetherIIItems.CHARM_OF_HEALTH, "Charm of Health");
-        this.addItem(AetherIIItems.CHARM_OF_DEFENSE, "Charm of Defense");
-        this.addItem(AetherIIItems.CHARM_OF_TOUGHNESS, "Charm of Toughness");
-        this.addItem(AetherIIItems.CHARM_OF_RESISTANCE, "Charm of Resistance");
-        this.addItem(AetherIIItems.CHARM_OF_AGILITY, "Charm of Agility");
+        this.addItem(AetherIIItems.CHARM_OF_HEALTH_I, "Charm of Health I");
+        this.addItem(AetherIIItems.CHARM_OF_DEFENSE_I, "Charm of Defense I");
+        this.addItem(AetherIIItems.CHARM_OF_TOUGHNESS_I, "Charm of Toughness I");
+        this.addItem(AetherIIItems.CHARM_OF_RESISTANCE_I, "Charm of Resistance I");
+        this.addItem(AetherIIItems.CHARM_OF_AGILITY_I, "Charm of Agility I");
 
         // Materials
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");

@@ -118,31 +118,31 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:charm_of_agility"
+          "name": "aether_ii:charm_of_agility_1"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:charm_of_damage"
+          "name": "aether_ii:charm_of_damage_1"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:charm_of_defense"
+          "name": "aether_ii:charm_of_defense_1"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:charm_of_dexterity"
+          "name": "aether_ii:charm_of_dexterity_1"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:charm_of_health"
+          "name": "aether_ii:charm_of_health_1"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:charm_of_resistance"
+          "name": "aether_ii:charm_of_resistance_1"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:charm_of_toughness"
+          "name": "aether_ii:charm_of_toughness_1"
         }
       ],
       "rolls": {

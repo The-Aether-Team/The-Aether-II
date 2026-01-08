@@ -19,26 +19,24 @@ import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Set;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
 public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
-    FIRST(1, 50, 0, Cost.TIER_1),
-    SECOND(2, 100, 0, Cost.TIER_2),
-    THIRD(3, 150, 1, Cost.TIER_3),
-    FOURTH(4, 200, 1, Cost.TIER_4);
+    FIRST(1, Stats.TIER_1, Cost.TIER_1),
+    SECOND(2, Stats.TIER_2, Cost.TIER_2),
+    THIRD(3, Stats.TIER_3, Cost.TIER_3),
+    FOURTH(4, Stats.TIER_4, Cost.TIER_4);
 
     private final int tier;
-    private final int extraDurability;
-    private final int charmSlots;
+    private final Set<Stats> stats;
     private final Set<Cost> costs;
 
-    ReinforcementTier(int tier, int extraDurability, int charmSlots, Set<Cost> costs) {
+    ReinforcementTier(int tier, Set<Stats> stats, Set<Cost> costs) {
         this.tier = tier;
-        this.extraDurability = extraDurability;
-        this.charmSlots = charmSlots;
+        this.stats = stats;
         this.costs = costs;
     }
 
@@ -46,16 +44,12 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
     public static final StringRepresentable.EnumCodec<ReinforcementTier> CODEC = StringRepresentable.fromEnum(ReinforcementTier::values);
     public static final StreamCodec<ByteBuf, ReinforcementTier> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, ReinforcementTier::id);
 
-    public int getTier() {
+    public int getTierNumber() {
         return this.tier;
     }
 
-    public int getExtraDurability() {
-        return this.extraDurability;
-    }
-
-    public int getCharmSlots() {
-        return this.charmSlots;
+    public Set<Stats> getStats() {
+        return this.stats;
     }
 
     public Set<Cost> getCosts() {
@@ -63,10 +57,20 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
     }
 
     @Nullable
+    public Stats getStat(ItemStack stack) {
+        for (Stats testStats : this.getStats()) {
+            if (testStats.stackCondition().test(stack)) {
+                return testStats;
+            }
+        }
+        return null;
+    }
+
+    @Nullable
     public Cost getCost(ItemStack stack) {
-        for (Cost cost : this.getCosts()) {
-            if (cost.stackCondition().test(stack)) {
-                return cost;
+        for (Cost testCost : this.getCosts()) {
+            if (testCost.stackCondition().test(stack)) {
+                return testCost;
             }
         }
         return null;
@@ -83,11 +87,110 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
 
     @Override
     public void addToTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, DataComponentGetter dataComponentGetter) {
-        consumer.accept(createReinforcementComponent(this.getTier()));
+        consumer.accept(createReinforcementComponent(this.getTierNumber()));
     }
 
     public static Component createReinforcementComponent(int tier) {
         return Component.translatable("aether_ii.tooltip.item.reinforcement").withColor(14408667).append(CommonComponents.SPACE).append(Component.translatable("enchantment.level." + tier));
+    }
+
+    public static Map<Integer, Cost> getCosts(ItemStack stack) {
+        Map<Integer, ReinforcementTier.Cost> costs = new HashMap<>();
+        for (ReinforcementTier tier : ReinforcementTier.values()) {
+            int value = tier.getTierNumber();
+            ReinforcementTier.Cost cost = tier.getCost(stack);
+            costs.put(value, cost);
+        }
+        return costs;
+    }
+
+    public static int getTierCount(ItemStack stack) {
+        int count = 0;
+        List<Cost> costs = new ArrayList<>(getCosts(stack).values());
+        for (int i = costs.size() - 1; i >= 0; i--) {
+            ReinforcementTier.Cost cost = costs.get(i);
+            if (cost != null) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static boolean isItemAtMaxTier(ItemStack itemStack) {
+        int max = getTierCount(itemStack);
+        ReinforcementTier tier = itemStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
+        return tier != null && tier.getTierNumber() == max;
+    }
+
+    public static int getTierForItem(ItemStack itemStack) {
+        int max = getTierCount(itemStack);
+        ReinforcementTier tier = itemStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
+        if (tier != null) {
+            return Math.min(tier.getTierNumber(), max);
+        } else {
+            return 0;
+        }
+    }
+
+    @Nullable
+    public static ReinforcementTier.Cost getCostForTier(ItemStack stack, int tier) {
+        return getCosts(stack).getOrDefault(tier, null);
+    }
+
+    public static int getPrimaryCostForTier(ItemStack stack, int tier) {
+        ReinforcementTier.Cost initialCost = getCostForTier(stack, tier);
+        if (initialCost != null) {
+            int cost = initialCost.primaryCount();
+            int minimumTier = getTierForItem(stack);
+            for (int i = tier - 1; i > minimumTier; i--) {
+                ReinforcementTier.Cost costForTier = getCostForTier(stack, i);
+                if (costForTier != null) {
+                    cost += costForTier.primaryCount();
+                }
+            }
+            return cost;
+        }
+        return -1;
+    }
+
+    public static int getSecondaryCostForTier(ItemStack stack, int tier) {
+        ReinforcementTier.Cost initialCost = getCostForTier(stack, tier);
+        if (initialCost != null) {
+            int cost = initialCost.secondaryCount();
+            int minimumTier = getTierForItem(stack);
+            for (int i = tier - 1; i > minimumTier; i--) {
+                ReinforcementTier.Cost costForTier = getCostForTier(stack, i);
+                if (costForTier != null) {
+                    cost += costForTier.secondaryCount();
+                }
+            }
+            return cost;
+        }
+        return -1;
+    }
+
+    public record Stats(Predicate<ItemStack> stackCondition, int durabilityToAdd, Charms charmsToSet) {
+        public static final Predicate<ItemStack> DEFAULT = (stack) -> true;
+        public static final Predicate<ItemStack> TOOLS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_TOOLS);
+        public static final Predicate<ItemStack> WEAPONS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS);
+        public static final Predicate<ItemStack> ARMOR = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR);
+
+        public static final Set<Stats> TIER_1 = Set.of(
+                new Stats(DEFAULT, 50, new Charms())
+        );
+        public static final Set<Stats> TIER_2 = Set.of(
+                new Stats(DEFAULT, 100, new Charms())
+        );
+        public static final Set<Stats> TIER_3 = Set.of(
+                new Stats(TOOLS, 150, new Charms(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE))),
+                new Stats(WEAPONS, 150, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE))),
+                new Stats(ARMOR, 150, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)))
+        );
+        public static final Set<Stats> TIER_4 = Set.of(
+                new Stats(TOOLS, 200, new Charms(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.TWO))),
+                new Stats(WEAPONS, 200, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO))),
+                new Stats(ARMOR, 200, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)))
+        );
     }
 
     public record Cost(Predicate<ItemStack> stackCondition, ItemLike primaryMaterial, int primaryCount, ItemLike secondaryMaterial, int secondaryCount) {

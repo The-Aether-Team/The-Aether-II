@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.client.renderer.item.tooltip.ClientCharmTooltip;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
 import com.aetherteam.aetherii.entity.monster.dungeon.boss.AetherBossMob;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.Charms;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.DeathScreenAccessor;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.InventoryScreenAccessor;
@@ -198,9 +199,9 @@ public class RenderHooks {
                 componentIndex = i - 1;
             }
         }
-        List<ItemStack> charms = itemStack.get(AetherIIDataComponents.CHARMS);
-        if (charms != null) {
-            tooltipElements.add(componentIndex, Either.right(new ClientCharmTooltip.CharmTooltip(itemStack, charms)));
+        List<Charms.CharmHolder> charmHolders = Charms.getCharmsForItem(itemStack);
+        if (charmHolders != null) {
+            tooltipElements.add(componentIndex, Either.right(new ClientCharmTooltip.CharmTooltip(itemStack, charmHolders)));
         }
     }
 

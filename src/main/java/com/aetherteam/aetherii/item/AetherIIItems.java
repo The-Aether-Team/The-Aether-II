@@ -11,10 +11,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIStyleMaterials;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Moa;
-import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-import com.aetherteam.aetherii.item.components.ArmorStyle;
-import com.aetherteam.aetherii.item.components.BuildupContents;
-import com.aetherteam.aetherii.item.components.MoaEggType;
+import com.aetherteam.aetherii.item.components.*;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.accessories.ZanitePendantItem;
@@ -209,13 +206,13 @@ public class AetherIIItems {
     public static final DeferredItem<Item> GRAVITITE_BOOTS = register("gravitite_boots", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.GRAVITITE, ArmorType.BOOTS).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.GRAVITITE_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.GRAVITITE, AetherIIStyleDesigns.WARRIOR, false))));
     public static final DeferredItem<Item> GRAVITITE_GLOVES = register("gravitite_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.GRAVITITE, 200.0, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.GRAVITITE_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.GRAVITITE, AetherIIStyleDesigns.WARRIOR, false))));
 
-    public static final DeferredItem<Item> SENTRY_BOOTS = register("sentry_boots", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.SENTRY, ArmorType.BOOTS).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.SENTRY_ARMOR).attributes(AetherIIArmorMaterials.SENTRY.createAttributes(ArmorType.BOOTS).withModifierAdded(Attributes.FALL_DAMAGE_MULTIPLIER, new AttributeModifier(SentryArmor.SENTRY_FALL_DAMAGE_SUPPRESSION, -0.75, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), EquipmentSlotGroup.FEET))));
+    public static final DeferredItem<Item> SENTRY_BOOTS = register("sentry_boots", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.SENTRY, ArmorType.BOOTS).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.SENTRY_ARMOR).attributes(AetherIIArmorMaterials.SENTRY.createAttributes(ArmorType.BOOTS).withModifierAdded(Attributes.FALL_DAMAGE_MULTIPLIER, new AttributeModifier(SentryArmor.SENTRY_FALL_DAMAGE_SUPPRESSION, -0.75, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), EquipmentSlotGroup.FEET)).component(AetherIIDataComponents.CHARMS, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO), new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)))));
 
-    public static final DeferredItem<Item> NEPTUNE_HELMET = register("neptune_helmet", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.NEPTUNE, ArmorType.HELMET).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR)));
-    public static final DeferredItem<Item> NEPTUNE_CHESTPLATE = register("neptune_chestplate", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.NEPTUNE, ArmorType.CHESTPLATE).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR)));
-    public static final DeferredItem<Item> NEPTUNE_LEGGINGS = register("neptune_leggings", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.NEPTUNE, ArmorType.LEGGINGS).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR)));
-    public static final DeferredItem<Item> NEPTUNE_BOOTS = register("neptune_boots", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.NEPTUNE, ArmorType.BOOTS).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR)));
-    public static final DeferredItem<Item> NEPTUNE_GLOVES = register("neptune_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.NEPTUNE, 100.0, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR)));
+    public static final DeferredItem<Item> NEPTUNE_HELMET = register("neptune_helmet", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.NEPTUNE, ArmorType.HELMET).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR).component(AetherIIDataComponents.CHARMS, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO), new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)))));
+    public static final DeferredItem<Item> NEPTUNE_CHESTPLATE = register("neptune_chestplate", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.NEPTUNE, ArmorType.CHESTPLATE).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR).component(AetherIIDataComponents.CHARMS, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO), new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)))));
+    public static final DeferredItem<Item> NEPTUNE_LEGGINGS = register("neptune_leggings", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.NEPTUNE, ArmorType.LEGGINGS).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR).component(AetherIIDataComponents.CHARMS, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO), new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)))));
+    public static final DeferredItem<Item> NEPTUNE_BOOTS = register("neptune_boots", (properties) -> new Item(properties.humanoidArmor(AetherIIArmorMaterials.NEPTUNE, ArmorType.BOOTS).component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR).component(AetherIIDataComponents.CHARMS, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO), new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)))));
+    public static final DeferredItem<Item> NEPTUNE_GLOVES = register("neptune_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.NEPTUNE, 100.0, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.NEPTUNE_ARMOR).component(AetherIIDataComponents.CHARMS, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO), new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)))));
 
     // Relics
     public static final DeferredItem<Item> KINETIC_THRUSTERS = register("kinetic_thrusters", KineticThrustersItem::new);
@@ -224,14 +221,14 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ZANITE_PENDANT = register("zanite_pendant", ZanitePendantItem::new);
 
     // Charms
-    public static final DeferredItem<Item> CHARM_OF_DAMAGE = register("charm_of_damage", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS, AetherIIStats.CHARM_DAMAGE_BONUS));
-    public static final DeferredItem<Item> CHARM_OF_DEXTERITY = register("charm_of_dexterity", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS, AetherIIStats.CHARM_ATTACK_SPEED_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_DAMAGE_I = register("charm_of_damage_1", (properties) -> new CharmItem(properties, Charms.Type.WEAPON, Charms.Tier.ONE, AetherIIStats.CHARM_DAMAGE_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_DEXTERITY_I = register("charm_of_dexterity_1", (properties) -> new CharmItem(properties, Charms.Type.WEAPON, Charms.Tier.ONE, AetherIIStats.CHARM_ATTACK_SPEED_BONUS));
 
-    public static final DeferredItem<Item> CHARM_OF_HEALTH = register("charm_of_health", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_MAX_HEALTH_BONUS));
-    public static final DeferredItem<Item> CHARM_OF_DEFENSE = register("charm_of_defense", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_ARMOR_BONUS));
-    public static final DeferredItem<Item> CHARM_OF_TOUGHNESS = register("charm_of_toughness", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_ARMOR_TOUGHNESS_BONUS));
-    public static final DeferredItem<Item> CHARM_OF_RESISTANCE = register("charm_of_resistance", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_KNOCKBACK_RESISTANCE_BONUS));
-    public static final DeferredItem<Item> CHARM_OF_AGILITY = register("charm_of_agility", (properties) -> new CharmItem(properties, AetherIITags.Items.ACCEPTS_CHARMS_ARMOR, AetherIIStats.CHARM_MOVEMENT_SPEED_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_HEALTH_I = register("charm_of_health_1", (properties) -> new CharmItem(properties, Charms.Type.ARMOR, Charms.Tier.ONE, AetherIIStats.CHARM_MAX_HEALTH_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_DEFENSE_I = register("charm_of_defense_1", (properties) -> new CharmItem(properties, Charms.Type.ARMOR, Charms.Tier.ONE, AetherIIStats.CHARM_ARMOR_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_TOUGHNESS_I = register("charm_of_toughness_1", (properties) -> new CharmItem(properties, Charms.Type.ARMOR, Charms.Tier.ONE, AetherIIStats.CHARM_ARMOR_TOUGHNESS_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_RESISTANCE_I = register("charm_of_resistance_1", (properties) -> new CharmItem(properties, Charms.Type.ARMOR, Charms.Tier.ONE, AetherIIStats.CHARM_KNOCKBACK_RESISTANCE_BONUS));
+    public static final DeferredItem<Item> CHARM_OF_AGILITY_I = register("charm_of_agility_1", (properties) -> new CharmItem(properties, Charms.Type.ARMOR, Charms.Tier.ONE, AetherIIStats.CHARM_MOVEMENT_SPEED_BONUS));
 
     public static final DeferredItem<Item> COMPANION = register("companion", CompanionItem::new);
 

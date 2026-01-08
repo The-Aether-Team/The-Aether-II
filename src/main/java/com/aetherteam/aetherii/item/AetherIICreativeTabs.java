@@ -819,13 +819,13 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.CHARGE_CATALYST.get());
                 output.accept(AetherIIItems.ARKENIUM_CORE.get());
                 output.accept(AetherIIItems.GRAVITITE_CORE.get());
-                output.accept(AetherIIItems.CHARM_OF_DAMAGE.get());
-                output.accept(AetherIIItems.CHARM_OF_DEXTERITY.get());
-                output.accept(AetherIIItems.CHARM_OF_HEALTH.get());
-                output.accept(AetherIIItems.CHARM_OF_DEFENSE.get());
-                output.accept(AetherIIItems.CHARM_OF_TOUGHNESS.get());
-                output.accept(AetherIIItems.CHARM_OF_RESISTANCE.get());
-                output.accept(AetherIIItems.CHARM_OF_AGILITY.get());
+                output.accept(AetherIIItems.CHARM_OF_DAMAGE_I.get());
+                output.accept(AetherIIItems.CHARM_OF_DEXTERITY_I.get());
+                output.accept(AetherIIItems.CHARM_OF_HEALTH_I.get());
+                output.accept(AetherIIItems.CHARM_OF_DEFENSE_I.get());
+                output.accept(AetherIIItems.CHARM_OF_TOUGHNESS_I.get());
+                output.accept(AetherIIItems.CHARM_OF_RESISTANCE_I.get());
+                output.accept(AetherIIItems.CHARM_OF_AGILITY_I.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_SPAWN_EGGS = CREATIVE_MODE_TABS.register("spawn_eggs", () -> CreativeModeTab.builder()
