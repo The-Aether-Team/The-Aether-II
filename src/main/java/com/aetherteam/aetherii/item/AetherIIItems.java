@@ -14,6 +14,7 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.*;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
+import com.aetherteam.aetherii.item.equipment.BrokenItem;
 import com.aetherteam.aetherii.item.equipment.accessories.ZanitePendantItem;
 import com.aetherteam.aetherii.item.equipment.accessories.companions.CompanionItem;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
@@ -385,6 +386,8 @@ public class AetherIIItems {
     public static final DeferredItem<Item> MURAL_ITEM = register("mural_item", (properties) -> new MuralItem(AetherIIBlocks.MURAL.get(), properties), () -> new Item.Properties().stacksTo(1));
 
     public static final DeferredItem<Item> MUSIC_PLAYER = register("music_player", MusicPlayerItem::new, () -> new Item.Properties().stacksTo(1));
+
+    public static final DeferredItem<Item> BROKEN_ITEM = register("broken_item", BrokenItem::new, () -> new Item.Properties().stacksTo(1).component(AetherIIDataComponents.BROKEN_STACK, new BrokenStack(Items.WOODEN_PICKAXE.getDefaultInstance())));
 
     private static <T extends Item> DeferredItem<Item> register(String name) {
         return register(name, Item::new);

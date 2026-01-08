@@ -295,5 +295,9 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
 
         // Blocks
         this.generateFlatItem(AetherIIBlocks.ARKENIUM_CHAIN.get().asItem(), ModelTemplates.FLAT_ITEM);
+
+
+
+        this.generateFlatItem(AetherIIItems.BROKEN_ITEM.get(), ModelTemplates.FLAT_ITEM);
     }
 }

@@ -183,6 +183,14 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.GRAVITITE_SHORTSWORD.get(),
                 AetherIIItems.GRAVITITE_SPEAR.get(),
                 AetherIIItems.GRAVITITE_HAMMER.get());
+        this.tag(AetherIITags.Items.UNBREAKABLE_LOOT).add(
+                AetherIIItems.HAMMER_OF_DEMOLITION.get(),
+                AetherIIItems.SENTRY_BOOTS.get(),
+                AetherIIItems.NEPTUNE_HELMET.get(),
+                AetherIIItems.NEPTUNE_CHESTPLATE.get(),
+                AetherIIItems.NEPTUNE_LEGGINGS.get(),
+                AetherIIItems.NEPTUNE_BOOTS.get(),
+                AetherIIItems.NEPTUNE_GLOVES.get());
         this.tag(AetherIITags.Items.UNIQUE_TOOLTIP_COLOR).add(
                 AetherIIItems.SKYROOT_SHORTSWORD.get(),
                 AetherIIItems.SKYROOT_HAMMER.get(),

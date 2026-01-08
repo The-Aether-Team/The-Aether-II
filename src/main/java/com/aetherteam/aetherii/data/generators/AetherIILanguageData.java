@@ -1090,6 +1090,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GUIDEBOOK_PAGE, "Guidebook Page");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
         this.addItem(AetherIIItems.MURAL_ITEM, "Mural");
+
+        this.add("item.aether_ii.broken_item", "Broken %s");
     }
 
     private void addPerItemAbilityTooltips() {
@@ -1241,6 +1243,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("effect_buildup", "%s Buildup");
         this.addItemTooltip("effect_buildup.inflicts", "Inflicts: %s");
         this.addItemTooltip("reinforcement", "Reinforcement");
+        this.addItemTooltip("broken", "Requires Repairing");
 
         // Moa Egg Tooltips
         this.addItemTooltip("moa_egg.keratin", "%s Keratin");

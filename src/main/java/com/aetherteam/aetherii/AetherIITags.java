@@ -173,6 +173,8 @@ public class AetherIITags {
         public static final TagKey<Item> ARKENIUM_TOOL = tag("tool/arkenium");
         public static final TagKey<Item> GRAVITITE_TOOL = tag("tool/gravitite");
 
+        public static final TagKey<Item> UNBREAKABLE_LOOT = tag("unbreakable_loot");
+
         public static final TagKey<Item> UNIQUE_TOOLTIP_COLOR = tag("unique_tooltip_color");
 
         public static final TagKey<Item> CRAFTS_SKYROOT_PLANKS = tag("crafts_skyroot_planks");
