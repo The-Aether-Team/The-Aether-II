@@ -172,7 +172,7 @@
     "sounds": [
       "random/fizz"
     ],
-    "subtitle": "subtitles.aether.block.water.evaporate"
+    "subtitle": "subtitles.aether_ii.block.water.evaporate"
   },
   "entity.aechor_plant.death": {
     "sounds": [
@@ -1492,7 +1492,7 @@
       "item/armor/equip_netherite3",
       "item/armor/equip_netherite4"
     ],
-    "subtitle": "subtitles.aether.item.armor.equip_sentry"
+    "subtitle": "subtitles.aether_ii.item.armor.equip_sentry"
   },
   "item.armor.zanite": {
     "sounds": [

@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.network.packet.serverbound;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
+import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -9,20 +10,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record ForgeUpgradePacket() implements CustomPacketPayload {
+public record ForgeUpgradePacket(ReinforcementTier tier) implements CustomPacketPayload {
     public static final CustomPacketPayload.Type<ForgeUpgradePacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "forge_upgrade"));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, ForgeUpgradePacket> STREAM_CODEC = CustomPacketPayload.codec(
-            ForgeUpgradePacket::write,
-            ForgeUpgradePacket::decode);
-
-    public void write(RegistryFriendlyByteBuf buf) {
-
-    }
-
-    public static ForgeUpgradePacket decode(RegistryFriendlyByteBuf buf) {
-        return new ForgeUpgradePacket();
-    }
+    public static final StreamCodec<RegistryFriendlyByteBuf, ForgeUpgradePacket> STREAM_CODEC = StreamCodec.composite(
+            ReinforcementTier.STREAM_CODEC, ForgeUpgradePacket::tier,
+            ForgeUpgradePacket::new);
 
     @Override
     public CustomPacketPayload.Type<ForgeUpgradePacket> type() {
@@ -33,7 +26,7 @@ public record ForgeUpgradePacket() implements CustomPacketPayload {
         Player playerEntity = context.player();
         if (playerEntity.containerMenu instanceof ArkeniumForgeMenu menu) {
             if (menu.stillValid(playerEntity)) {
-                menu.upgradeItem();
+                menu.upgradeItem(payload.tier());
             }
         }
     }

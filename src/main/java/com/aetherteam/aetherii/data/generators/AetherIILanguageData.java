@@ -73,9 +73,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addTooltip("item.modifiers.handwear", "When wearing Handwear:");
         this.addTooltip("item.modifiers.accessory", "When wearing Accessory:");
         this.addTooltip("item.modifiers.blocking", "When blocking:");
-        this.addTooltip("item.modifiers.accepts_charms.tools", "When on tool:");
-        this.addTooltip("item.modifiers.accepts_charms.weapons", "When on weapon:");
-        this.addTooltip("item.modifiers.accepts_charms.armor", "When on armor:");
+        this.addTooltip("item.modifiers.charms.tool", "When on tool:");
+        this.addTooltip("item.modifiers.charms.weapon", "When on weapon:");
+        this.addTooltip("item.modifiers.charms.armor", "When on armor:");
     }
 
     private void addBlocks() {
@@ -724,7 +724,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GRAVITITE_BLOCK, "Block of Gravitite");
         this.addBlock(AetherIIBlocks.CORROBONITE_BLOCK, "Block of Corrobonite");
 
-        // Arilum Lantern
+        // Arilum Lanterns
         this.addBlock(AetherIIBlocks.WHITE_ARILUM_LANTERN, "White Arilum Lantern");
         this.addBlock(AetherIIBlocks.ORANGE_ARILUM_LANTERN, "Orange Arilum Lantern");
         this.addBlock(AetherIIBlocks.MAGENTA_ARILUM_LANTERN, "Magenta Arilum Lantern");
@@ -757,7 +757,24 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_CHEST, "Skyroot Chest");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
         this.addBlock(AetherIIBlocks.CLOUDWOOL_BEDROLL, "Cloudwool Bedroll");
+
         this.addBlock(AetherIIBlocks.SKYROOT_BED, "Skyroot Bed");
+        this.addBlock(AetherIIBlocks.WHITE_SKYROOT_BED, "White Skyroot Bed");
+        this.addBlock(AetherIIBlocks.ORANGE_SKYROOT_BED, "Orange Skyroot Bed");
+        this.addBlock(AetherIIBlocks.MAGENTA_SKYROOT_BED, "Magenta Skyroot Bed");
+        this.addBlock(AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED, "Light Blue Skyroot Bed");
+        this.addBlock(AetherIIBlocks.YELLOW_SKYROOT_BED, "Yellow Skyroot Bed");
+        this.addBlock(AetherIIBlocks.LIME_SKYROOT_BED, "Lime Skyroot Bed");
+        this.addBlock(AetherIIBlocks.PINK_SKYROOT_BED, "Pink Skyroot Bed");
+        this.addBlock(AetherIIBlocks.GRAY_SKYROOT_BED, "Gray Skyroot Bed");
+        this.addBlock(AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED, "Light Gray Skyroot Bed");
+        this.addBlock(AetherIIBlocks.CYAN_SKYROOT_BED, "Cyan Skyroot Bed");
+        this.addBlock(AetherIIBlocks.PURPLE_SKYROOT_BED, "Purple Skyroot Bed");
+        this.addBlock(AetherIIBlocks.BLUE_SKYROOT_BED, "Blue Skyroot Bed");
+        this.addBlock(AetherIIBlocks.BROWN_SKYROOT_BED, "Brown Skyroot Bed");
+        this.addBlock(AetherIIBlocks.GREEN_SKYROOT_BED, "Green Skyroot Bed");
+        this.addBlock(AetherIIBlocks.RED_SKYROOT_BED, "Red Skyroot Bed");
+        this.addBlock(AetherIIBlocks.BLACK_SKYROOT_BED, "Black Skyroot Bed");
 
         this.addBlock(AetherIIBlocks.SENTRY_CRATE, "Sentry Crate");
         this.addBlock(AetherIIBlocks.SENTRY_SPAWNER, "Sentry Spawner");
@@ -912,14 +929,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ZANITE_PENDANT, "Zanite Pendant");
 
         // Charms
-        this.addItem(AetherIIItems.CHARM_OF_DAMAGE, "Charm of Damage");
-        this.addItem(AetherIIItems.CHARM_OF_DEXTERITY, "Charm of Dexterity");
+        this.addItem(AetherIIItems.CHARM_OF_DAMAGE_I, "Charm of Damage I");
+        this.addItem(AetherIIItems.CHARM_OF_DEXTERITY_I, "Charm of Dexterity I");
 
-        this.addItem(AetherIIItems.CHARM_OF_HEALTH, "Charm of Health");
-        this.addItem(AetherIIItems.CHARM_OF_DEFENSE, "Charm of Defense");
-        this.addItem(AetherIIItems.CHARM_OF_TOUGHNESS, "Charm of Toughness");
-        this.addItem(AetherIIItems.CHARM_OF_RESISTANCE, "Charm of Resistance");
-        this.addItem(AetherIIItems.CHARM_OF_AGILITY, "Charm of Agility");
+        this.addItem(AetherIIItems.CHARM_OF_HEALTH_I, "Charm of Health I");
+        this.addItem(AetherIIItems.CHARM_OF_DEFENSE_I, "Charm of Defense I");
+        this.addItem(AetherIIItems.CHARM_OF_TOUGHNESS_I, "Charm of Toughness I");
+        this.addItem(AetherIIItems.CHARM_OF_RESISTANCE_I, "Charm of Resistance I");
+        this.addItem(AetherIIItems.CHARM_OF_AGILITY_I, "Charm of Agility I");
 
         // Materials
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
@@ -1073,6 +1090,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GUIDEBOOK_PAGE, "Guidebook Page");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
         this.addItem(AetherIIItems.MURAL_ITEM, "Mural");
+
+        this.add("item.aether_ii.broken_item", "Broken %s");
     }
 
     private void addPerItemAbilityTooltips() {
@@ -1224,6 +1243,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("effect_buildup", "%s Buildup");
         this.addItemTooltip("effect_buildup.inflicts", "Inflicts: %s");
         this.addItemTooltip("reinforcement", "Reinforcement");
+        this.addItemTooltip("broken", "Requires Repairing");
 
         // Moa Egg Tooltips
         this.addItemTooltip("moa_egg.keratin", "%s Keratin");
@@ -1611,6 +1631,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("block", "alkahest_purifier.close", "Alkahest Purifier closes");
 
         this.addSubtitle("block", "ground_trap.trigger", "Trap activates");
+        this.addSubtitle("block", "water.evaporate", "Water evaporated");
 
         // Items
         this.addSubtitle("item", "ambrosium_shard.use", "Ambrosium Shard used");

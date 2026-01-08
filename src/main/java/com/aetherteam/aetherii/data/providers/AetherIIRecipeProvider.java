@@ -23,6 +23,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.item.Item;
@@ -93,6 +94,16 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                     .unlockedBy("has_needed_dye", has(item))
                     .save(this.output, this.name("dye_" + getItemName(item1)));
         }
+    }
+
+    protected void bed(HolderGetter<Item> getter, ItemLike result, ItemLike wool) {
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, result)
+                .define('W', wool)
+                .define('#', AetherIITags.Items.PLANKS_CRAFTING)
+                .pattern("WWW")
+                .pattern("###")
+                .unlockedBy("has_cloudwool", has(AetherIITags.Items.CLOUDWOOL))
+                .save(this.output);
     }
 
     protected void bookshelf(HolderGetter<Item> getter, ItemLike result, ItemLike material) {

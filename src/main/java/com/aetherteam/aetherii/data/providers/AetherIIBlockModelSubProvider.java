@@ -1114,13 +1114,13 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createCopyBlock(Holder<Block> block, String overlay) {
-        ResourceLocation lock = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, overlay);
-        MultiVariant multivariant = plainVariant(ModelTemplates.PARTICLE_ONLY.create(block.value(), TextureMapping.particle(lock), this.modelOutput));
+        ResourceLocation icon = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, overlay);
+        MultiVariant multivariant = plainVariant(ModelTemplates.PARTICLE_ONLY.create(block.value(), TextureMapping.particle(icon), this.modelOutput));
         this.blockStateOutput.accept(createSimpleBlock(block.value(), multivariant));
 
-        CopyBlockSpecialRenderer.Unbaked unbaked = new CopyBlockSpecialRenderer.Unbaked(block, lock);
-        ResourceLocation base = ModelTemplates.CHEST_INVENTORY.create(block.value().asItem(), TextureMapping.particle(block.value()), this.modelOutput);
-        ResourceLocation baseFlat = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(block.value().asItem(), "_flat"), TextureMapping.layer0(lock), this.modelOutput);
+        CopyBlockSpecialRenderer.Unbaked unbaked = new CopyBlockSpecialRenderer.Unbaked(block, icon);
+        ResourceLocation base = ModelTemplates.CHEST_INVENTORY.create(block.value().asItem(), TextureMapping.particle(icon), this.modelOutput);
+        ResourceLocation baseFlat = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(block.value().asItem(), "_flat"), TextureMapping.layer0(icon), this.modelOutput);
         this.itemModelOutput.accept(block.value().asItem(), ItemModelUtils.conditional(new HasBlockState(), ItemModelUtils.specialModel(base, unbaked), ItemModelUtils.plainModel(baseFlat)));
     }
 

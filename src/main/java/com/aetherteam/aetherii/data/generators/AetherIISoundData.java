@@ -154,7 +154,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
         this.add(AetherIISoundEvents.WATER_EVAPORATE,
                 definition().with(sound("minecraft:random/fizz")
-                ).subtitle("subtitles.aether.block.water.evaporate")
+                ).subtitle("subtitles.aether_ii.block.water.evaporate")
         );
     }
 
@@ -243,7 +243,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:item/armor/equip_netherite2"),
                         sound("minecraft:item/armor/equip_netherite3"),
                         sound("minecraft:item/armor/equip_netherite4")
-                ).subtitle("subtitles.aether.item.armor.equip_sentry")
+                ).subtitle("subtitles.aether_ii.item.armor.equip_sentry")
         );
         this.add(AetherIISoundEvents.ITEM_ARMOR_EQUIP_NEPTUNE,
                 definition().with(

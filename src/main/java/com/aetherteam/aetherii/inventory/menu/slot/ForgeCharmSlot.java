@@ -2,8 +2,7 @@ package com.aetherteam.aetherii.inventory.menu.slot;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
-import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-import com.aetherteam.aetherii.item.components.ReinforcementTier;
+import com.aetherteam.aetherii.item.components.Charms;
 import com.aetherteam.aetherii.item.equipment.charms.CharmItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -12,12 +11,13 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
+import java.util.Locale;
 
 public class ForgeCharmSlot extends Slot {
-    public static final ResourceLocation SLOT_CHARM = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_charm");
     private final ArkeniumForgeMenu menu;
     private final int charmIndex;
+    private Charms.Type charmType;
+    private Charms.Tier charmTier;
     private boolean isLocked;
 
     public ForgeCharmSlot(ArkeniumForgeMenu menu, Container container, int slot, int x, int y, int charmIndex) {
@@ -28,34 +28,33 @@ public class ForgeCharmSlot extends Slot {
 
     @Override
     public boolean isActive() {
-        if (!this.menu.getInput().isEmpty()) {
-            List<ItemStack> charms = this.menu.getInput().get(AetherIIDataComponents.CHARMS);
-            if (charms != null) {
-                ItemStack charm = charms.get(this.charmIndex);
-                if (this.getItem().isEmpty() && !charm.isEmpty()) {
-                    this.set(charm);
-                    this.setLocked(true);
+        ItemStack input = this.menu.getInput();
+        if (!input.isEmpty()) {
+            Charms.CharmHolder charmHolder = Charms.getCharmHolderForItem(input, this.charmIndex);
+            if (charmHolder != null) {
+                this.charmType = charmHolder.getType();
+                this.charmTier = charmHolder.getTier();
+                if (this.getItem().isEmpty() && !charmHolder.getStack().isEmpty()) {
+                    this.set(charmHolder.getStack());
+                    if (!this.isLocked()) {
+                        this.setLocked(true);
+                    }
                 }
-            }
-            if (!this.isLocked()) {
-                ReinforcementTier tier = this.menu.getInput().get(AetherIIDataComponents.REINFORCEMENT_TIER);
-                if (tier != null) {
-                    return this.charmIndex < tier.getCharmSlots();
-                } else {
-                    return false;
-                }
-            } else {
                 return true;
             }
         } else {
-            this.setLocked(false);
+            this.charmType = null;
+            this.charmTier = null;
+            if (this.isLocked()) {
+                this.setLocked(false);
+            }
         }
         return false;
     }
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return this.menu.isCharm(stack) && this.isActive() && ((CharmItem) stack.getItem()).canBeAdded(this.menu.getInput());
+        return !this.isLocked() && this.isActive() && stack.getItem() instanceof CharmItem charmItem && charmItem.getType() == this.charmType && charmItem.getTier().getValue() <= this.charmTier.getValue();
     }
 
     @Override
@@ -83,6 +82,9 @@ public class ForgeCharmSlot extends Slot {
     @Nullable
     @Override
     public ResourceLocation getNoItemIcon() {
-        return SLOT_CHARM;
+        if (this.charmType != null && this.charmTier != null) {
+            return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_" + this.charmType.name().toLowerCase(Locale.ROOT) + "_charm_" + this.charmTier.getValue());
+        }
+        return null;
     }
 }

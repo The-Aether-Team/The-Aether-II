@@ -95,10 +95,14 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIITags.Items.EQUIPMENT_ACCESSORIES);
         this.tag(AetherIITags.Items.ACCEPTS_CHARMS_TOOLS).addTags(
                 Tags.Items.MINING_TOOL_TOOLS,
+                ItemTags.AXES,
                 ItemTags.SHOVELS,
                 ItemTags.HOES);
         this.tag(AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS).addTags(
-                Tags.Items.MELEE_WEAPON_TOOLS);
+                AetherIITags.Items.TOOLS_SHORTSWORDS,
+                AetherIITags.Items.TOOLS_HAMMERS,
+                AetherIITags.Items.TOOLS_SPEARS,
+                ItemTags.SWORDS);
         this.tag(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR).addTags(
                 Tags.Items.ARMORS);
         this.tag(AetherIITags.Items.BEAST_PELT_ARMOR).add(
@@ -179,6 +183,14 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.GRAVITITE_SHORTSWORD.get(),
                 AetherIIItems.GRAVITITE_SPEAR.get(),
                 AetherIIItems.GRAVITITE_HAMMER.get());
+        this.tag(AetherIITags.Items.UNBREAKABLE_LOOT).add(
+                AetherIIItems.HAMMER_OF_DEMOLITION.get(),
+                AetherIIItems.SENTRY_BOOTS.get(),
+                AetherIIItems.NEPTUNE_HELMET.get(),
+                AetherIIItems.NEPTUNE_CHESTPLATE.get(),
+                AetherIIItems.NEPTUNE_LEGGINGS.get(),
+                AetherIIItems.NEPTUNE_BOOTS.get(),
+                AetherIIItems.NEPTUNE_GLOVES.get());
         this.tag(AetherIITags.Items.UNIQUE_TOOLTIP_COLOR).add(
                 AetherIIItems.SKYROOT_SHORTSWORD.get(),
                 AetherIIItems.SKYROOT_HAMMER.get(),
@@ -263,7 +275,6 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.ALTAR_FUEL).add(
                 AetherIIItems.AMBROSIUM_SHARD.get()
         );
-        this.tag(AetherIITags.Items.CAN_BE_REINFORCED).add(ArkeniumForgeMenu.REINFORCEABLE.stream().map(Holder::value).toArray(Item[]::new));
         this.tag(AetherIITags.Items.FORGE_PRIMARY_MATERIAL).add(AetherIIItems.ARKENIUM_PLATES.get());
         this.tag(AetherIITags.Items.FORGE_SECONDARY_MATERIAL).add(AetherIIItems.CORROBONITE_CRYSTAL.get());
         this.tag(AetherIITags.Items.AERBUNNY_FOOD).add(
@@ -606,7 +617,25 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
         this.tag(ItemTags.BEDS).add(
                 AetherIIBlocks.CLOUDWOOL_BEDROLL.asItem(),
-                AetherIIBlocks.SKYROOT_BED.asItem()
+                AetherIIBlocks.SKYROOT_BED.asItem(),
+                AetherIIBlocks.CLOUDWOOL_BEDROLL.asItem(),
+                AetherIIBlocks.SKYROOT_BED.asItem(),
+                AetherIIBlocks.WHITE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.ORANGE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.MAGENTA_SKYROOT_BED.asItem(),
+                AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.YELLOW_SKYROOT_BED.asItem(),
+                AetherIIBlocks.LIME_SKYROOT_BED.asItem(),
+                AetherIIBlocks.PINK_SKYROOT_BED.asItem(),
+                AetherIIBlocks.GRAY_SKYROOT_BED.asItem(),
+                AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED.asItem(),
+                AetherIIBlocks.CYAN_SKYROOT_BED.asItem(),
+                AetherIIBlocks.PURPLE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.BLUE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.BROWN_SKYROOT_BED.asItem(),
+                AetherIIBlocks.GREEN_SKYROOT_BED.asItem(),
+                AetherIIBlocks.RED_SKYROOT_BED.asItem(),
+                AetherIIBlocks.BLACK_SKYROOT_BED.asItem()
         );
         this.tag(ItemTags.SIGNS).add(
                 AetherIIBlocks.SKYROOT_SIGN.asItem(),

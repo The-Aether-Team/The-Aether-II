@@ -337,6 +337,23 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.PURPLE_ARILUM_LANTERN.get());
                 output.accept(AetherIIBlocks.MAGENTA_ARILUM_LANTERN.get());
                 output.accept(AetherIIBlocks.PINK_ARILUM_LANTERN.get());
+                output.accept(AetherIIBlocks.SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.WHITE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.GRAY_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.BLACK_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.BROWN_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.RED_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.ORANGE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.YELLOW_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.LIME_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.GREEN_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.CYAN_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.BLUE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.PURPLE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.MAGENTA_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.PINK_SKYROOT_BED.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_NATURAL_BLOCKS = CREATIVE_MODE_TABS.register("natural_blocks", () -> CreativeModeTab.builder()
@@ -537,6 +554,22 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL_BEDROLL.get());
                 output.accept(AetherIIBlocks.SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.WHITE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.GRAY_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.BLACK_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.BROWN_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.RED_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.ORANGE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.YELLOW_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.LIME_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.GREEN_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.CYAN_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.BLUE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.PURPLE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.MAGENTA_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.PINK_SKYROOT_BED.get());
                 output.accept(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
                 output.accept(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
@@ -819,13 +852,13 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.CHARGE_CATALYST.get());
                 output.accept(AetherIIItems.ARKENIUM_CORE.get());
                 output.accept(AetherIIItems.GRAVITITE_CORE.get());
-                output.accept(AetherIIItems.CHARM_OF_DAMAGE.get());
-                output.accept(AetherIIItems.CHARM_OF_DEXTERITY.get());
-                output.accept(AetherIIItems.CHARM_OF_HEALTH.get());
-                output.accept(AetherIIItems.CHARM_OF_DEFENSE.get());
-                output.accept(AetherIIItems.CHARM_OF_TOUGHNESS.get());
-                output.accept(AetherIIItems.CHARM_OF_RESISTANCE.get());
-                output.accept(AetherIIItems.CHARM_OF_AGILITY.get());
+                output.accept(AetherIIItems.CHARM_OF_DAMAGE_I.get());
+                output.accept(AetherIIItems.CHARM_OF_DEXTERITY_I.get());
+                output.accept(AetherIIItems.CHARM_OF_HEALTH_I.get());
+                output.accept(AetherIIItems.CHARM_OF_DEFENSE_I.get());
+                output.accept(AetherIIItems.CHARM_OF_TOUGHNESS_I.get());
+                output.accept(AetherIIItems.CHARM_OF_RESISTANCE_I.get());
+                output.accept(AetherIIItems.CHARM_OF_AGILITY_I.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_SPAWN_EGGS = CREATIVE_MODE_TABS.register("spawn_eggs", () -> CreativeModeTab.builder()

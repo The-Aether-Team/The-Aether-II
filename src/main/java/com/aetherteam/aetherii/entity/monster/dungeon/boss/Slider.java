@@ -181,7 +181,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
         }
 
         if (this.level() instanceof ServerLevel serverLevel) {
-            float stageIncrement = this.getMaxHealth() / 18.0F;
+            float stageIncrement = this.getMaxHealth() / (14 + 2);
             if (this.getHealth() <= this.lastHealthStage - stageIncrement) {
                 this.triggerTrap(serverLevel);
                 this.lastHealthStage = this.getHealth();

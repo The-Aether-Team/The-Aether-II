@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.client;
 
-import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.core.Holder;
 import net.minecraft.util.Mth;
@@ -8,17 +8,85 @@ import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.client.IItemDecorator;
 import net.neoforged.neoforge.client.event.RegisterItemDecorationsEvent;
 
+import java.util.List;
+
 public class AetherIIItemDecorators {
+    public static final List<Holder<Item>> REINFORCEABLE = List.of(
+            AetherIIItems.SKYROOT_SHORTSWORD,
+            AetherIIItems.SKYROOT_HAMMER,
+            AetherIIItems.SKYROOT_SPEAR,
+            AetherIIItems.HOLYSTONE_SHORTSWORD,
+            AetherIIItems.HOLYSTONE_HAMMER,
+            AetherIIItems.HOLYSTONE_SPEAR,
+            AetherIIItems.ZANITE_SHORTSWORD,
+            AetherIIItems.ZANITE_HAMMER,
+            AetherIIItems.ZANITE_SPEAR,
+            AetherIIItems.ARKENIUM_SHORTSWORD,
+            AetherIIItems.ARKENIUM_HAMMER,
+            AetherIIItems.ARKENIUM_SPEAR,
+            AetherIIItems.GRAVITITE_SHORTSWORD,
+            AetherIIItems.GRAVITITE_HAMMER,
+            AetherIIItems.GRAVITITE_SPEAR,
+            AetherIIItems.HAMMER_OF_DEMOLITION,
+            AetherIIItems.SKYROOT_SHIELD,
+            AetherIIItems.BURRUKAI_PLATE_SHIELD,
+            AetherIIItems.ZANITE_SHIELD,
+            AetherIIItems.ARKENIUM_SHIELD,
+            AetherIIItems.GRAVITITE_SHIELD,
+            AetherIIItems.SKYROOT_AXE,
+            AetherIIItems.HOLYSTONE_AXE,
+            AetherIIItems.ZANITE_AXE,
+            AetherIIItems.ARKENIUM_AXE,
+            AetherIIItems.GRAVITITE_AXE,
+            AetherIIItems.SKYROOT_PICKAXE,
+            AetherIIItems.HOLYSTONE_PICKAXE,
+            AetherIIItems.ZANITE_PICKAXE,
+            AetherIIItems.ARKENIUM_PICKAXE,
+            AetherIIItems.GRAVITITE_PICKAXE,
+            AetherIIItems.SKYROOT_SHOVEL,
+            AetherIIItems.HOLYSTONE_SHOVEL,
+            AetherIIItems.ZANITE_SHOVEL,
+            AetherIIItems.ARKENIUM_SHOVEL,
+            AetherIIItems.GRAVITITE_SHOVEL,
+            AetherIIItems.SKYROOT_TROWEL,
+            AetherIIItems.HOLYSTONE_TROWEL,
+            AetherIIItems.ZANITE_TROWEL,
+            AetherIIItems.ARKENIUM_TROWEL,
+            AetherIIItems.GRAVITITE_TROWEL,
+            AetherIIItems.BEAST_PELT_HELMET,
+            AetherIIItems.BURRUKAI_PLATE_HELMET,
+            AetherIIItems.ZANITE_HELMET,
+            AetherIIItems.ARKENIUM_HELMET,
+            AetherIIItems.GRAVITITE_HELMET,
+            AetherIIItems.BEAST_PELT_CHESTPLATE,
+            AetherIIItems.BURRUKAI_PLATE_CHESTPLATE,
+            AetherIIItems.ZANITE_CHESTPLATE,
+            AetherIIItems.ARKENIUM_CHESTPLATE,
+            AetherIIItems.GRAVITITE_CHESTPLATE,
+            AetherIIItems.BEAST_PELT_LEGGINGS,
+            AetherIIItems.BURRUKAI_PLATE_LEGGINGS,
+            AetherIIItems.ZANITE_LEGGINGS,
+            AetherIIItems.ARKENIUM_LEGGINGS,
+            AetherIIItems.GRAVITITE_LEGGINGS,
+            AetherIIItems.BEAST_PELT_BOOTS,
+            AetherIIItems.BURRUKAI_PLATE_BOOTS,
+            AetherIIItems.ZANITE_BOOTS,
+            AetherIIItems.ARKENIUM_BOOTS,
+            AetherIIItems.GRAVITITE_BOOTS,
+            AetherIIItems.BEAST_PELT_GLOVES,
+            AetherIIItems.BURRUKAI_PLATE_GLOVES,
+            AetherIIItems.ZANITE_GLOVES,
+            AetherIIItems.ARKENIUM_GLOVES,
+            AetherIIItems.GRAVITITE_GLOVES);
+
     private static final IItemDecorator REINFORCED_DURABILITY = (guiGraphics, font, stack, xOffset, yOffset) -> { //todo improve visuals
         guiGraphics.pose().pushMatrix();
         if (stack.isBarVisible() && stack.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
             int l = stack.getBarWidth();
 
-
             float stackMaxDamage = stack.getMaxDamage();
             float f = Math.max(0.0F, (stackMaxDamage - (float) stack.getDamageValue()) / stackMaxDamage);
             int i = Mth.hsvToRgb(f / 3.0F, 0.0F, 0.85F);
-
 
             int j = xOffset + 2;
             int k = yOffset + 13;
@@ -30,7 +98,7 @@ public class AetherIIItemDecorators {
     };
 
     public static void registerItemDecorators(RegisterItemDecorationsEvent event) {
-        for (Holder<Item> item : ArkeniumForgeMenu.REINFORCEABLE) {
+        for (Holder<Item> item : REINFORCEABLE) {
             event.register(item.value(), REINFORCED_DURABILITY);
         }
     }
