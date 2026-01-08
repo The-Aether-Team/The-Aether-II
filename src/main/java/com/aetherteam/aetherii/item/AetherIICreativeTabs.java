@@ -772,12 +772,12 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GRAVITITE_LEGGINGS.get());
                 output.accept(AetherIIItems.GRAVITITE_BOOTS.get());
                 output.accept(AetherIIItems.GRAVITITE_GLOVES.get());
-                output.accept(AetherIIItems.SENTRY_BOOTS.get());
                 output.accept(AetherIIItems.NEPTUNE_HELMET.get());
                 output.accept(AetherIIItems.NEPTUNE_CHESTPLATE.get());
                 output.accept(AetherIIItems.NEPTUNE_LEGGINGS.get());
                 output.accept(AetherIIItems.NEPTUNE_BOOTS.get());
                 output.accept(AetherIIItems.NEPTUNE_GLOVES.get());
+                output.accept(AetherIIItems.SENTRY_BOOTS.get());
                 output.accept(AetherIIItems.KINETIC_THRUSTERS.get());
                 output.accept(AetherIIItems.ZANITE_PENDANT.get());
             }).build());
