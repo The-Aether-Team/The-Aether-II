@@ -479,7 +479,24 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(BlockTags.BEDS).add(
                 AetherIIBlocks.CLOUDWOOL_BEDROLL.get(),
-                AetherIIBlocks.SKYROOT_BED.get());
+                AetherIIBlocks.SKYROOT_BED.get(),
+                AetherIIBlocks.WHITE_SKYROOT_BED.get(),
+                AetherIIBlocks.ORANGE_SKYROOT_BED.get(),
+                AetherIIBlocks.MAGENTA_SKYROOT_BED.get(),
+                AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED.get(),
+                AetherIIBlocks.YELLOW_SKYROOT_BED.get(),
+                AetherIIBlocks.LIME_SKYROOT_BED.get(),
+                AetherIIBlocks.PINK_SKYROOT_BED.get(),
+                AetherIIBlocks.GRAY_SKYROOT_BED.get(),
+                AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED.get(),
+                AetherIIBlocks.CYAN_SKYROOT_BED.get(),
+                AetherIIBlocks.PURPLE_SKYROOT_BED.get(),
+                AetherIIBlocks.BLUE_SKYROOT_BED.get(),
+                AetherIIBlocks.BROWN_SKYROOT_BED.get(),
+                AetherIIBlocks.GREEN_SKYROOT_BED.get(),
+                AetherIIBlocks.RED_SKYROOT_BED.get(),
+                AetherIIBlocks.BLACK_SKYROOT_BED.get()
+        );
         this.tag(BlockTags.CAMPFIRES).add(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get());
         this.tag(BlockTags.DIRT).addTag(AetherIITags.Blocks.AETHER_DIRT).add(
                 AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(),
