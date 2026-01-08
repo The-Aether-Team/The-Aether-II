@@ -464,7 +464,24 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createChest(AetherIIBlocks.SKYROOT_CHEST.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot_chest"), true);
         this.createLadder(AetherIIBlocks.SKYROOT_LADDER.get());
         this.createBedroll(AetherIIBlocks.CLOUDWOOL_BEDROLL.get());
-        this.createBed(AetherIIBlocks.SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot_bed"));
+
+        this.createBed(AetherIIBlocks.SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/undyed"));
+        this.createBed(AetherIIBlocks.WHITE_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/white"));
+        this.createBed(AetherIIBlocks.ORANGE_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/orange"));
+        this.createBed(AetherIIBlocks.MAGENTA_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/magenta"));
+        this.createBed(AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/light_blue"));
+        this.createBed(AetherIIBlocks.YELLOW_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/yellow"));
+        this.createBed(AetherIIBlocks.LIME_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/lime"));
+        this.createBed(AetherIIBlocks.PINK_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/pink"));
+        this.createBed(AetherIIBlocks.GRAY_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/gray"));
+        this.createBed(AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/light_gray"));
+        this.createBed(AetherIIBlocks.CYAN_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/cyan"));
+        this.createBed(AetherIIBlocks.PURPLE_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/purple"));
+        this.createBed(AetherIIBlocks.BLUE_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/blue"));
+        this.createBed(AetherIIBlocks.BROWN_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/brown"));
+        this.createBed(AetherIIBlocks.GREEN_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/green"));
+        this.createBed(AetherIIBlocks.RED_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/red"));
+        this.createBed(AetherIIBlocks.BLACK_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot/black"));
 
         this.createHangingSign(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get(), AetherIIBlocks.SKYROOT_HANGING_SIGN.get(), AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get());
         this.createHangingSign(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get());

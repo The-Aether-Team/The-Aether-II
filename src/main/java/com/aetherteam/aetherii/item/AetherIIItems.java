@@ -347,7 +347,7 @@ public class AetherIIItems {
     // Misc
     public static final DeferredItem<Item> BEAST_PELT_BUNDLE = register("beast_pelt_bundle", BundleItem::new, () -> new Item.Properties().stacksTo(1).component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY));
     public static final DeferredItem<Item> BRETTL_LASSO = register("lasso", LassoItem::new);
-    public static final DeferredItem<Item> MOA_EGG = register("moa_egg", MoaEggItem::new, () -> new Item.Properties().stacksTo(1).component(AetherIIDataComponents.MOA_EGG_TYPE.get(), MoaEggType.defaultType()));
+    public static final DeferredItem<Item> MOA_EGG = register("moa_egg", MoaEggItem::new, () -> new Item.Properties().component(AetherIIDataComponents.MOA_EGG_TYPE.get(), MoaEggType.defaultType()));
     public static final DeferredItem<Item> MOA_FEED = register("moa_feed", MoaFeedItem::new);
     public static final DeferredItem<Item> BLUEBERRY_MOA_FEED = register("blueberry_moa_feed", MoaFeedItem::new);
     public static final DeferredItem<Item> ENCHANTED_MOA_FEED = register("enchanted_moa_feed", MoaFeedItem::new);
