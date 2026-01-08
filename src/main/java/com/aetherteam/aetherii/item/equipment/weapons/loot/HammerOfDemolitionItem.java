@@ -2,8 +2,6 @@ package com.aetherteam.aetherii.item.equipment.weapons.loot;
 
 import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.entity.projectile.DemolitionProjectile;
-import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-import com.aetherteam.aetherii.item.components.Charms;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
 import net.minecraft.core.Direction;
@@ -22,7 +20,7 @@ import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 
 public class HammerOfDemolitionItem extends TieredHammerItem implements ProjectileItem {
     public HammerOfDemolitionItem(Properties properties) {
-        super(applyWeaponProperties(properties, AetherIIItemTiers.HAMMER_OF_DEMOLITION, 3, -2.4F, AetherIIStats.HAMMER_OF_DEMOLITION).component(AetherIIDataComponents.CHARMS, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO), new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO))));
+        super(applyWeaponProperties(properties, AetherIIItemTiers.HAMMER_OF_DEMOLITION, 3, -2.4F, AetherIIStats.HAMMER_OF_DEMOLITION));
     }
 
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
