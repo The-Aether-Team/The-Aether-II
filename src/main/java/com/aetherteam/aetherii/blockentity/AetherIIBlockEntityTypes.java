@@ -36,7 +36,25 @@ public class AetherIIBlockEntityTypes {
             new BlockEntityType<>(AmbrosiumCampfireBlockEntity::new, AetherIIBlocks.AMBROSIUM_CAMPFIRE.get()));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SkyrootBedBlockEntity>> SKYROOT_BED = BLOCK_ENTITY_TYPES.register("skyroot_bed", () ->
-            new BlockEntityType<>(SkyrootBedBlockEntity::new, AetherIIBlocks.SKYROOT_BED.get()));
+            new BlockEntityType<>(SkyrootBedBlockEntity::new,
+                    AetherIIBlocks.SKYROOT_BED.get(),
+                    AetherIIBlocks.WHITE_SKYROOT_BED.get(),
+                    AetherIIBlocks.ORANGE_SKYROOT_BED.get(),
+                    AetherIIBlocks.MAGENTA_SKYROOT_BED.get(),
+                    AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED.get(),
+                    AetherIIBlocks.YELLOW_SKYROOT_BED.get(),
+                    AetherIIBlocks.LIME_SKYROOT_BED.get(),
+                    AetherIIBlocks.PINK_SKYROOT_BED.get(),
+                    AetherIIBlocks.GRAY_SKYROOT_BED.get(),
+                    AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED.get(),
+                    AetherIIBlocks.CYAN_SKYROOT_BED.get(),
+                    AetherIIBlocks.PURPLE_SKYROOT_BED.get(),
+                    AetherIIBlocks.BLUE_SKYROOT_BED.get(),
+                    AetherIIBlocks.BROWN_SKYROOT_BED.get(),
+                    AetherIIBlocks.GREEN_SKYROOT_BED.get(),
+                    AetherIIBlocks.RED_SKYROOT_BED.get(),
+                    AetherIIBlocks.BLACK_SKYROOT_BED.get()
+            ));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<OutpostCampfireBlockEntity>> OUTPOST_CAMPFIRE = BLOCK_ENTITY_TYPES.register("outpost_campfire", () ->
             new BlockEntityType<>(OutpostCampfireBlockEntity::new, AetherIIBlocks.OUTPOST_CAMPFIRE.get()));

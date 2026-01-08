@@ -1,32 +1,32 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "aether_ii:skyroot_bed"
-      },
-      "trigger": "minecraft:recipe_unlocked"
-    },
-    "has_wool": {
+    "has_book": {
       "conditions": {
         "items": [
           {
-            "items": "#minecraft:wool"
+            "items": "minecraft:book"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:yellow_skyroot_bed"
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_wool"
+      "has_book"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:skyroot_bed"
+      "aether_ii:yellow_skyroot_bed"
     ]
   }
 }
