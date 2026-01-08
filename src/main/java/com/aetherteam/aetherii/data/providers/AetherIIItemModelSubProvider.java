@@ -132,6 +132,11 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
         this.itemModelOutput.accept(item, ItemModelUtils.tintedModel(resourceLocation, BLANK_LAYER, new Dye(defaultColor)));
     }
 
+    public void generateBrokenItem(Item item) {
+        ResourceLocation modelLocation = ModelLocationUtils.getModelLocation(item).withSuffix("_broken");
+        ModelTemplates.FLAT_ITEM.create(modelLocation, TextureMapping.layer0(modelLocation), this.modelOutput);
+    }
+
     public void generateCharmItem(Item item, String type, String tier, String stat) {
         ResourceLocation key = BuiltInRegistries.ITEM.getKey(item);
         ResourceLocation modelLocation = ModelLocationUtils.getModelLocation(item);

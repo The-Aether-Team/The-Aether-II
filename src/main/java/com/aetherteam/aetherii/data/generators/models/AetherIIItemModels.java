@@ -84,6 +84,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.SCATTERGLASS_BOLT.get(), ModelTemplates.FLAT_ITEM);
 
         this.generateHammerOfDemolition(AetherIIItems.HAMMER_OF_DEMOLITION.get());
+        this.generateBrokenItem(AetherIIItems.HAMMER_OF_DEMOLITION.get());
 
         // Armor
         this.generateDyedArmorItem(AetherIIItems.BEAST_PELT_HELMET.get(), 0xFFCFEEF9);
@@ -117,6 +118,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.GRAVITITE_GLOVES.get(), ModelTemplates.FLAT_ITEM);
 
         this.generateFlatItem(AetherIIItems.SENTRY_BOOTS.get(), ModelTemplates.FLAT_ITEM);
+        this.generateBrokenItem(AetherIIItems.SENTRY_BOOTS.get());
 
         this.generateFlatItem(AetherIIItems.NEPTUNE_HELMET.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.NEPTUNE_CHESTPLATE.get(), ModelTemplates.FLAT_ITEM);
