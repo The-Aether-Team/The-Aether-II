@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.monster.Monster;
@@ -86,6 +87,13 @@ public class CellingMonster extends Monster {
         profilerfiller.push("cellingAI");
         this.cellingTick();
         profilerfiller.pop();
+    }
+
+    @Override
+    public void die(DamageSource damageSource) {
+        super.die(damageSource);
+
+        this.stopCelling();
     }
 
     protected void cellingTick() {

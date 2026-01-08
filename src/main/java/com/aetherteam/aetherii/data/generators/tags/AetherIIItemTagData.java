@@ -586,7 +586,25 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
         this.tag(ItemTags.BEDS).add(
                 AetherIIBlocks.CLOUDWOOL_BEDROLL.asItem(),
-                AetherIIBlocks.SKYROOT_BED.asItem()
+                AetherIIBlocks.SKYROOT_BED.asItem(),
+                AetherIIBlocks.CLOUDWOOL_BEDROLL.asItem(),
+                AetherIIBlocks.SKYROOT_BED.asItem(),
+                AetherIIBlocks.WHITE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.ORANGE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.MAGENTA_SKYROOT_BED.asItem(),
+                AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.YELLOW_SKYROOT_BED.asItem(),
+                AetherIIBlocks.LIME_SKYROOT_BED.asItem(),
+                AetherIIBlocks.PINK_SKYROOT_BED.asItem(),
+                AetherIIBlocks.GRAY_SKYROOT_BED.asItem(),
+                AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED.asItem(),
+                AetherIIBlocks.CYAN_SKYROOT_BED.asItem(),
+                AetherIIBlocks.PURPLE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.BLUE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.BROWN_SKYROOT_BED.asItem(),
+                AetherIIBlocks.GREEN_SKYROOT_BED.asItem(),
+                AetherIIBlocks.RED_SKYROOT_BED.asItem(),
+                AetherIIBlocks.BLACK_SKYROOT_BED.asItem()
         );
         this.tag(ItemTags.SIGNS).add(
                 AetherIIBlocks.SKYROOT_SIGN.asItem(),

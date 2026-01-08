@@ -685,7 +685,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GRAVITITE_BLOCK, "Block of Gravitite");
         this.addBlock(AetherIIBlocks.CORROBONITE_BLOCK, "Block of Corrobonite");
 
-        // Arilum Lantern
+        // Arilum Lanterns
         this.addBlock(AetherIIBlocks.WHITE_ARILUM_LANTERN, "White Arilum Lantern");
         this.addBlock(AetherIIBlocks.ORANGE_ARILUM_LANTERN, "Orange Arilum Lantern");
         this.addBlock(AetherIIBlocks.MAGENTA_ARILUM_LANTERN, "Magenta Arilum Lantern");
@@ -718,7 +718,24 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_CHEST, "Skyroot Chest");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
         this.addBlock(AetherIIBlocks.CLOUDWOOL_BEDROLL, "Cloudwool Bedroll");
+
         this.addBlock(AetherIIBlocks.SKYROOT_BED, "Skyroot Bed");
+        this.addBlock(AetherIIBlocks.WHITE_SKYROOT_BED, "White Skyroot Bed");
+        this.addBlock(AetherIIBlocks.ORANGE_SKYROOT_BED, "Orange Skyroot Bed");
+        this.addBlock(AetherIIBlocks.MAGENTA_SKYROOT_BED, "Magenta Skyroot Bed");
+        this.addBlock(AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED, "Light Blue Skyroot Bed");
+        this.addBlock(AetherIIBlocks.YELLOW_SKYROOT_BED, "Yellow Skyroot Bed");
+        this.addBlock(AetherIIBlocks.LIME_SKYROOT_BED, "Lime Skyroot Bed");
+        this.addBlock(AetherIIBlocks.PINK_SKYROOT_BED, "Pink Skyroot Bed");
+        this.addBlock(AetherIIBlocks.GRAY_SKYROOT_BED, "Gray Skyroot Bed");
+        this.addBlock(AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED, "Light Gray Skyroot Bed");
+        this.addBlock(AetherIIBlocks.CYAN_SKYROOT_BED, "Cyan Skyroot Bed");
+        this.addBlock(AetherIIBlocks.PURPLE_SKYROOT_BED, "Purple Skyroot Bed");
+        this.addBlock(AetherIIBlocks.BLUE_SKYROOT_BED, "Blue Skyroot Bed");
+        this.addBlock(AetherIIBlocks.BROWN_SKYROOT_BED, "Brown Skyroot Bed");
+        this.addBlock(AetherIIBlocks.GREEN_SKYROOT_BED, "Green Skyroot Bed");
+        this.addBlock(AetherIIBlocks.RED_SKYROOT_BED, "Red Skyroot Bed");
+        this.addBlock(AetherIIBlocks.BLACK_SKYROOT_BED, "Black Skyroot Bed");
 
         this.addBlock(AetherIIBlocks.SKYROOT_SIGN, "Skyroot Sign");
         this.addBlock(AetherIIBlocks.SKYROOT_HANGING_SIGN, "Skyroot Hanging Sign");
