@@ -41,7 +41,7 @@ public class Glitterwing extends Insect {
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData spawnData) {
-        if (spawnData instanceof ButterflyGroupData groupData) {
+        if (spawnData instanceof GlitterwingGroupData groupData) {
             this.setVariant(groupData.type);
         } else {
             Optional<? extends Holder<GlitterwingVariant>> optional = VariantUtils.selectVariantToSpawn(SpawnContext.create(level, this.blockPosition()), AetherIIGlitterwingVariants.GLITTERWING_VARIANT_REGISTRY_KEY);
@@ -70,10 +70,10 @@ public class Glitterwing extends Insect {
         VariantUtils.readVariant(input, AetherIIGlitterwingVariants.GLITTERWING_VARIANT_REGISTRY_KEY).ifPresent(this::setVariant);
     }
 
-    public static class ButterflyGroupData extends AgeableMob.AgeableMobGroupData {
+    public static class GlitterwingGroupData extends AgeableMob.AgeableMobGroupData {
         public final Holder<GlitterwingVariant> type;
 
-        public ButterflyGroupData(Holder<GlitterwingVariant> type) {
+        public GlitterwingGroupData(Holder<GlitterwingVariant> type) {
             super(false);
             this.type = type;
         }

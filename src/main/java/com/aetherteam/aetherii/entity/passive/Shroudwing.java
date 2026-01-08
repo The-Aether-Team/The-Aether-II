@@ -36,12 +36,12 @@ public class Shroudwing extends Insect {
     @Override
     public void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(DATA_VARIANT_ID, VariantUtils.getDefaultOrAny(this.registryAccess(), AetherIIShroudwingVariants.BEETLE));
+        builder.define(DATA_VARIANT_ID, VariantUtils.getDefaultOrAny(this.registryAccess(), AetherIIShroudwingVariants.SHROUDWING));
     }
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData spawnData) {
-        if (spawnData instanceof BeetleGroupData groupData) {
+        if (spawnData instanceof ShroudwingGroupData groupData) {
             this.setVariant(groupData.type);
         } else {
             Optional<? extends Holder<ShroudwingVariant>> optional = VariantUtils.selectVariantToSpawn(SpawnContext.create(level, this.blockPosition()), AetherIIShroudwingVariants.SHROUDWING_VARIANT_REGISTRY_KEY);
@@ -70,10 +70,10 @@ public class Shroudwing extends Insect {
         VariantUtils.readVariant(input, AetherIIShroudwingVariants.SHROUDWING_VARIANT_REGISTRY_KEY).ifPresent(this::setVariant);
     }
 
-    public static class BeetleGroupData extends AgeableMob.AgeableMobGroupData {
+    public static class ShroudwingGroupData extends AgeableMob.AgeableMobGroupData {
         public final Holder<ShroudwingVariant> type;
 
-        public BeetleGroupData(Holder<ShroudwingVariant> type) {
+        public ShroudwingGroupData(Holder<ShroudwingVariant> type) {
             super(false);
             this.type = type;
         }

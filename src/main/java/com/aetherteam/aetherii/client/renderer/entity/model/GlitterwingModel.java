@@ -12,28 +12,28 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class GlitterwingModel extends EntityModel<GlitterwingRenderState> {
-    public static final AnimationHolder FLY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "butterfly/fly"));
+    public static final AnimationHolder FLY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "glitterwing/fly"));
     private final KeyframeAnimation flyAnimation;
 
-    private final ModelPart butterfly;
+    private final ModelPart glitterwing;
     private final ModelPart rightWing;
     private final ModelPart leftWing;
 
     public GlitterwingModel(ModelPart root) {
         super(root);
         this.flyAnimation = FLY_ANIMATION.get().bake(root);
-        this.butterfly = root.getChild("butterfly");
-        this.rightWing = this.butterfly.getChild("right_wing");
-        this.leftWing = this.butterfly.getChild("left_wing");
+        this.glitterwing = root.getChild("glitterwing");
+        this.rightWing = this.glitterwing.getChild("right_wing");
+        this.leftWing = this.glitterwing.getChild("left_wing");
     }
 
     public static LayerDefinition createBodyLayer() {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition butterfly = partdefinition.addOrReplaceChild("butterfly", CubeListBuilder.create().texOffs(-26, 26).addBox(-4.0F, -2.0F, -17.0F, 8.0F, 0.0F, 26.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 26.0F, 4.0F));
-        butterfly.addOrReplaceChild("right_wing", CubeListBuilder.create().texOffs(-26, 0).addBox(-13.0F, 0.0F, -17.0F, 13.0F, 0.0F, 26.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, 0.0F));
-        butterfly.addOrReplaceChild("left_wing", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, 0.0F, -17.0F, 13.0F, 0.0F, 26.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, 0.0F));
+        PartDefinition glitterwing = partdefinition.addOrReplaceChild("glitterwing", CubeListBuilder.create().texOffs(-26, 26).addBox(-4.0F, -2.0F, -17.0F, 8.0F, 0.0F, 26.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 26.0F, 4.0F));
+        glitterwing.addOrReplaceChild("right_wing", CubeListBuilder.create().texOffs(-26, 0).addBox(-13.0F, 0.0F, -17.0F, 13.0F, 0.0F, 26.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, 0.0F));
+        glitterwing.addOrReplaceChild("left_wing", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, 0.0F, -17.0F, 13.0F, 0.0F, 26.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 64, 64);
     }

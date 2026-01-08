@@ -17,8 +17,8 @@ public class GlitterwingGlowLayer extends RenderLayer<GlitterwingRenderState, Gl
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, GlitterwingRenderState butterflyRenderState, float v, float v1) {
-        ResourceLocation emissiveTexture = butterflyRenderState.emissiveTexture;
+    public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, GlitterwingRenderState glitterwingRenderState, float v, float v1) {
+        ResourceLocation emissiveTexture = glitterwingRenderState.emissiveTexture;
         if (emissiveTexture != null) {
             RenderType renderType = RenderType.eyes(emissiveTexture);
             VertexConsumer vertexConsumer = multiBufferSource.getBuffer(renderType);

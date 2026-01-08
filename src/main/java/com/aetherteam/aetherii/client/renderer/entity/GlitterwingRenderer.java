@@ -28,13 +28,13 @@ public class GlitterwingRenderer extends MobRenderer<Glitterwing, GlitterwingRen
     }
 
     @Override
-    public void extractRenderState(Glitterwing butterfly, GlitterwingRenderState state, float partialTicks) {
-        super.extractRenderState(butterfly, state, partialTicks);
-        state.texture = butterfly.getVariant().value().texture();
-        state.emissiveTexture = butterfly.getVariant().value().emissiveTexture().orElse(null);
-        state.wingXOffset = butterfly.getVariant().value().wingXOffset();
-        state.wingZRotation = butterfly.getVariant().value().wingZRotation();
-        state.restScale = butterfly.getRestAnimationScale(partialTicks);
+    public void extractRenderState(Glitterwing glitterwing, GlitterwingRenderState state, float partialTicks) {
+        super.extractRenderState(glitterwing, state, partialTicks);
+        state.texture = glitterwing.getVariant().value().texture();
+        state.emissiveTexture = glitterwing.getVariant().value().emissiveTexture().orElse(null);
+        state.wingXOffset = glitterwing.getVariant().value().wingXOffset();
+        state.wingZRotation = glitterwing.getVariant().value().wingZRotation();
+        state.restScale = glitterwing.getRestAnimationScale(partialTicks);
     }
 
     @Override

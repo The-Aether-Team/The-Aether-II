@@ -19,7 +19,7 @@ import java.util.Optional;
 public class AetherIIShroudwingVariants {
     public static final ResourceKey<Registry<ShroudwingVariant>> SHROUDWING_VARIANT_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "shroudwing_variant"));
 
-    public static final ResourceKey<ShroudwingVariant> BEETLE = createKey("beetle");
+    public static final ResourceKey<ShroudwingVariant> SHROUDWING = createKey("shroudwing");
     public static final ResourceKey<ShroudwingVariant> SCARAB = createKey("scarab");
     public static final ResourceKey<ShroudwingVariant> FIRE_BEETLE = createKey("fire_beetle");
 
@@ -28,7 +28,7 @@ public class AetherIIShroudwingVariants {
     }
 
     public static void bootstrap(BootstrapContext<ShroudwingVariant> context) {
-        register(context, BEETLE, SpawnPrioritySelectors.fallback(1));
+        register(context, SHROUDWING, SpawnPrioritySelectors.fallback(1));
         register(context, SCARAB, biomes(context, AetherIITags.Biomes.HIGHLANDS));
         register(context, FIRE_BEETLE, biomes(context, AetherIITags.Biomes.HIGHLANDS));
     }

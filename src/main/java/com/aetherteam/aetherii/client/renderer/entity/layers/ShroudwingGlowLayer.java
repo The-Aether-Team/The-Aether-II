@@ -17,8 +17,8 @@ public class ShroudwingGlowLayer extends RenderLayer<ShroudwingRenderState, Shro
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, ShroudwingRenderState beetleRenderState, float v, float v1) {
-        ResourceLocation emissiveTexture = beetleRenderState.emissiveTexture;
+    public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, ShroudwingRenderState shroudwingRenderState, float v, float v1) {
+        ResourceLocation emissiveTexture = shroudwingRenderState.emissiveTexture;
         if (emissiveTexture != null) {
             RenderType renderType = RenderType.eyes(emissiveTexture);
             VertexConsumer vertexConsumer = multiBufferSource.getBuffer(renderType);
