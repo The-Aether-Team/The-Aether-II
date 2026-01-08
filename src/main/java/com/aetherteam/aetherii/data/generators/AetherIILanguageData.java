@@ -1628,6 +1628,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("block", "alkahest_purifier.close", "Alkahest Purifier closes");
 
         this.addSubtitle("block", "ground_trap.trigger", "Trap activates");
+        this.addSubtitle("block", "water.evaporate", "Water evaporated");
 
         // Items
         this.addSubtitle("item", "ambrosium_shard.use", "Ambrosium Shard used");
