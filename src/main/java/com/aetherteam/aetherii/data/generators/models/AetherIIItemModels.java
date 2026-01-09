@@ -125,6 +125,11 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.NEPTUNE_LEGGINGS.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.NEPTUNE_BOOTS.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.NEPTUNE_GLOVES.get(), ModelTemplates.FLAT_ITEM);
+        this.generateBrokenItem(AetherIIItems.NEPTUNE_HELMET.get());
+        this.generateBrokenItem(AetherIIItems.NEPTUNE_CHESTPLATE.get());
+        this.generateBrokenItem(AetherIIItems.NEPTUNE_LEGGINGS.get());
+        this.generateBrokenItem(AetherIIItems.NEPTUNE_BOOTS.get());
+        this.generateBrokenItem(AetherIIItems.NEPTUNE_GLOVES.get());
 
         // Relics
         this.generateFlatItem(AetherIIItems.KINETIC_THRUSTERS.get(), ModelTemplates.FLAT_ITEM);
