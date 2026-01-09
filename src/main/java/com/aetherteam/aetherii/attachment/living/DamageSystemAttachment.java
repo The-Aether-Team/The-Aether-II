@@ -58,6 +58,7 @@ public class DamageSystemAttachment implements ValueIOSerializable {
             double recovery = player.getAttributeValue(AetherIIAttributes.ENDURANCE_RECOVERY);
             if (attachment.shieldEndurance == 0) {
                 attachment.setShieldEndurance(maxEndurance);
+                player.syncData(AetherIIDataAttachments.DAMAGE_SYSTEM);
             }
             if (attachment.getShieldEndurance() < maxEndurance && attachment.getShieldEndurance() > 0 && !player.isBlocking()) {
                 attachment.setShieldEndurance(Math.min(maxEndurance, attachment.getShieldEndurance() + recovery));
