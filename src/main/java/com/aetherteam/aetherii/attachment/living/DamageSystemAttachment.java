@@ -80,8 +80,10 @@ public class DamageSystemAttachment implements ValueIOSerializable {
                     endurance = maxEndurance / 2;
                 }
 
-                this.setShieldEndurance(Math.max(0, this.getShieldEndurance() - endurance));
-                player.syncData(AetherIIDataAttachments.DAMAGE_SYSTEM);
+                if (!player.level().isClientSide()) {
+                    this.setShieldEndurance(Math.max(0, this.getShieldEndurance() - endurance));
+                    player.syncData(AetherIIDataAttachments.DAMAGE_SYSTEM);
+                }
                 if (this.getShieldEndurance() <= 0) {
                     player.level().registryAccess().lookupOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELD).forEach((item) -> player.getCooldowns().addCooldown(item.value().getDefaultInstance(), 300));
                     player.stopUsingItem();
