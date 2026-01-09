@@ -57,7 +57,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     protected void init() {
         super.init();
         this.imageWidth = 176;
-        this.imageHeight = 251;
+        this.imageHeight = 255;
         this.leftPos = (this.width - this.imageWidth) / 2;
         this.topPos = (this.height - this.imageHeight) / 2;
         this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2;
@@ -87,7 +87,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             int spriteSize = 16;
             int areaWidth = 162;
             int x = this.leftPos + 7;
-            int y = this.topPos + 108;
+            int y = this.topPos + 110;
             for (int tier = 1; tier <= tierCount; tier++) {
                 int offsetX = x + ((areaWidth / (tierCount + 1)) * tier);
 
@@ -221,14 +221,14 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                         if (!primary.isEmpty()) {
                             int secondX = secondary.isEmpty() ? button.getWidth() / 2 : 0;
                             int x = secondX + button.getX() - 8;
-                            int y = button.getY() + button.getHeight();
+                            int y = button.getY() + button.getHeight() + 2;
                             guiGraphics.renderFakeItem(primary, x, y);
                             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, ArkeniumForgeMenu.SLOT_PRIMARY, x, y, 16, 16);
                             guiGraphics.renderItemDecorations(this.font, primary, x, y);
                         }
                         if (!secondary.isEmpty()) {
                             int x = button.getX() + 8;
-                            int y = button.getY() + button.getHeight();
+                            int y = button.getY() + button.getHeight() + 2;
                             guiGraphics.renderFakeItem(secondary, x, y);
                             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, ArkeniumForgeMenu.SLOT_SECONDARY, x, y, 16, 16);
                             guiGraphics.renderItemDecorations(this.font, secondary, x, y);

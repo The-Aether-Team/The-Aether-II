@@ -52,7 +52,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             }
         });
 
-        this.addSlot(new Slot(this.container, 1, 69, 149) {
+        this.addSlot(new Slot(this.container, 1, 69, 153) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return ArkeniumForgeMenu.this.isPrimaryMaterial(stack);
@@ -63,7 +63,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                 return SLOT_PRIMARY;
             }
         });
-        this.addSlot(new Slot(this.container, 2, 91, 149) {
+        this.addSlot(new Slot(this.container, 2, 91, 153) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return ArkeniumForgeMenu.this.isSecondaryMaterial(stack);
@@ -83,7 +83,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             }
         }
 
-        this.addStandardInventorySlots(playerInventory, 8, 169);
+        this.addStandardInventorySlots(playerInventory, 8, 173);
     }
 
     public void changeInput() {
