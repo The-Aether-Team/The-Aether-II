@@ -158,11 +158,11 @@ public class AetherIIItems {
     public static final DeferredItem<TieredSpearItem> GRAVITITE_SPEAR = register("gravitite_spear", GravititeSpearItem::new);
     public static final DeferredItem<CrossbowItem> GRAVITITE_CROSSBOW = register("gravitite_crossbow", GravititeCrossbowItem::new, () -> new Item.Properties().enchantable(1));
 
-    public static final DeferredItem<ShieldItem> SKYROOT_SHIELD = register("skyroot_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.SKYROOT, properties), () -> new Item.Properties().attributes(TieredShieldItem.createAttributes(0.2F)));
-    public static final DeferredItem<ShieldItem> BURRUKAI_PLATE_SHIELD = register("burrukai_plate_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.HOLYSTONE, properties), () -> new Item.Properties().attributes(TieredShieldItem.createAttributes(0.4F)));
-    public static final DeferredItem<ShieldItem> ZANITE_SHIELD = register("zanite_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.ZANITE, properties), () -> new Item.Properties().attributes(TieredShieldItem.createAttributes(0.6F)));
-    public static final DeferredItem<ShieldItem> ARKENIUM_SHIELD = register("arkenium_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.ARKENIUM, properties), () -> new Item.Properties().attributes(TieredShieldItem.createAttributes(0.6F)));
-    public static final DeferredItem<ShieldItem> GRAVITITE_SHIELD = register("gravitite_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.GRAVITITE, properties), () -> new Item.Properties().attributes(TieredShieldItem.createAttributes(0.8F)));
+    public static final DeferredItem<ShieldItem> SKYROOT_SHIELD = register("skyroot_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.SKYROOT, 0.2F, properties));
+    public static final DeferredItem<ShieldItem> BURRUKAI_PLATE_SHIELD = register("burrukai_plate_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.HOLYSTONE, 0.4F, properties));
+    public static final DeferredItem<ShieldItem> ZANITE_SHIELD = register("zanite_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.ZANITE, 0.6F, properties));
+    public static final DeferredItem<ShieldItem> ARKENIUM_SHIELD = register("arkenium_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.ARKENIUM, 0.6F, properties));
+    public static final DeferredItem<ShieldItem> GRAVITITE_SHIELD = register("gravitite_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.GRAVITITE, 0.8F, properties));
 
     public static final DeferredItem<Item> DART_SHOOTER = register("dart_shooter", DartShooterItem::new, () -> new Item.Properties().durability(100));
     public static final DeferredItem<Item> AMBER_DARTS = register("amber_darts", AmberDartsItem::new, () -> new Item.Properties().component(AetherIIDataComponents.BUILDUP_CONTENTS, new BuildupContents(EffectBuildupPresets.VULNERABILITY)).stacksTo(16));
@@ -393,6 +393,7 @@ public class AetherIIItems {
 
         // Tools
         bus.addListener(HolystoneTool::dropAmbrosium);
+        bus.addListener(TieredShieldItem::updatePlayerAttributes);
 
         // Charms
         bus.addListener(CharmItem::updateItemAttributes);

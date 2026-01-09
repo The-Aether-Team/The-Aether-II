@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.attachment.living;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
@@ -72,6 +73,8 @@ public class DamageSystemAttachment implements ValueIOSerializable {
             if (source != null && source.getType().is(AetherIITags.Entities.AETHER_MOBS)) {
                 double maxEndurance = AetherIIAttributes.getMaxEndurance(player);
                 double endurance = player.getAttributeValue(AetherIIAttributes.BLOCKING_STRENGTH);
+
+                AetherII.LOGGER.info(String.valueOf(player.getAttributes().getInstance(AetherIIAttributes.BLOCKING_STRENGTH).getModifiers()));
 
                 damage *= 10;
                 endurance = damage - (damage * endurance);
