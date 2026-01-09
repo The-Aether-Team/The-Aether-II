@@ -487,6 +487,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createHangingSign(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get());
         this.createHangingSign(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get());
 
+        this.createLever(AetherIIBlocks.HOLYSTONE_LEVER.get());
+
         // Moa Egg
         this.createMoaEgg(AetherIIBlocks.MOA_EGG.get());
 

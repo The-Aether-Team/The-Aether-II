@@ -742,7 +742,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<BedBlock> RED_SKYROOT_BED = register("red_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.RED, properties), () -> Block.Properties.ofFullCopy(Blocks.RED_BED));
     public static final DeferredBlock<BedBlock> BLACK_SKYROOT_BED = register("black_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.BLACK, properties), () -> Block.Properties.ofFullCopy(Blocks.BLACK_BED));
 
-
     public static final DeferredBlock<StandingSignBlock> SKYROOT_SIGN = register("skyroot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.SKYROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
     public static final DeferredBlock<WallSignBlock> SKYROOT_WALL_SIGN = registerWithoutItem("skyroot_wall_sign", (properties) -> new WallSignBlock(AetherIIWoodTypes.SKYROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
     public static final DeferredBlock<CeilingHangingSignBlock> SKYROOT_HANGING_SIGN = register("skyroot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.SKYROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
@@ -757,6 +756,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<WallSignBlock> WISPROOT_WALL_SIGN = registerWithoutItem("wisproot_wall_sign", (properties) -> new WallSignBlock(AetherIIWoodTypes.WISPROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
     public static final DeferredBlock<CeilingHangingSignBlock> WISPROOT_HANGING_SIGN = register("wisproot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.WISPROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
     public static final DeferredBlock<WallHangingSignBlock> WISPROOT_WALL_HANGING_SIGN = registerWithoutItem("wisproot_wall_hanging_sign", (properties) -> new WallHangingSignBlock(AetherIIWoodTypes.WISPROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
+
+    public static final DeferredBlock<Block> HOLYSTONE_LEVER = register("holystone_lever", LeverBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LEVER));
 
     // Moa Egg
     public static final DeferredBlock<Block> MOA_EGG = registerWithoutItem("moa_egg", MoaEggBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BLUE).strength(0.5F).sound(SoundType.METAL).noOcclusion());

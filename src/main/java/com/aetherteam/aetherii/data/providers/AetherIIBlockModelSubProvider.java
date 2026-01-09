@@ -10,6 +10,7 @@ import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.*;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -47,10 +48,6 @@ import net.minecraft.client.renderer.special.BedSpecialRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.MossyCarpetBlock;
-import net.minecraft.world.level.block.MultifaceBlock;
-import net.minecraft.world.level.block.SlabBlock;
 
 public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public AetherIIBlockModelSubProvider(Consumer<BlockModelDefinitionGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
@@ -904,6 +901,27 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         Item item = block.asItem();
         ResourceLocation inventoryLocation = ModelTemplates.BED_INVENTORY.create(ModelLocationUtils.getModelLocation(item), TextureMapping.particle(particle), this.modelOutput);
         this.itemModelOutput.accept(item, ItemModelUtils.specialModel(inventoryLocation, new BedSpecialRenderer.Unbaked(location)));
+    }
+
+    public void createLever(Block block) {
+        MultiVariant lever = plainVariant(ModelLocationUtils.getModelLocation(block));
+        MultiVariant leverOn = plainVariant(ModelLocationUtils.getModelLocation(block, "_on"));
+        this.registerSimpleFlatItemModel(block);
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+                .with(createBooleanModelDispatch(BlockStateProperties.POWERED, lever, leverOn))
+                .with(PropertyDispatch.modify(BlockStateProperties.ATTACH_FACE, BlockStateProperties.HORIZONTAL_FACING)
+                        .select(AttachFace.CEILING, Direction.NORTH, X_ROT_180.then(Y_ROT_180))
+                        .select(AttachFace.CEILING, Direction.EAST, X_ROT_180.then(Y_ROT_270))
+                        .select(AttachFace.CEILING, Direction.SOUTH, X_ROT_180)
+                        .select(AttachFace.CEILING, Direction.WEST, X_ROT_180.then(Y_ROT_90))
+                        .select(AttachFace.FLOOR, Direction.NORTH, NOP)
+                        .select(AttachFace.FLOOR, Direction.EAST, Y_ROT_90)
+                        .select(AttachFace.FLOOR, Direction.SOUTH, Y_ROT_180)
+                        .select(AttachFace.FLOOR, Direction.WEST, Y_ROT_270)
+                        .select(AttachFace.WALL, Direction.NORTH, X_ROT_90)
+                        .select(AttachFace.WALL, Direction.EAST, X_ROT_90.then(Y_ROT_90))
+                        .select(AttachFace.WALL, Direction.SOUTH, X_ROT_90.then(Y_ROT_180))
+                        .select(AttachFace.WALL, Direction.WEST, X_ROT_90.then(Y_ROT_270))));
     }
 
     public void createArilumLantern(Block block) {

@@ -1008,6 +1008,13 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .unlockedBy(getHasName(Blocks.JUKEBOX), has(AetherIITags.Items.PLANKS_CRAFTING))
                 .save(this.output, this.name("jukebox_from_gravitite_plate"));
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.REDSTONE, AetherIIBlocks.HOLYSTONE_LEVER)
+                .define('#', AetherIIBlocks.HOLYSTONE)
+                .define('X', AetherIITags.Items.RODS_SKYROOT)
+                .pattern("X")
+                .pattern("#")
+                .unlockedBy("has_holystone", this.has(AetherIIBlocks.HOLYSTONE))
+                .save(this.output);
 
         // Skyroot Beds
         this.bookshelf(getter, AetherIIBlocks.SKYROOT_BED, AetherIIBlocks.CLOUDWOOL);
