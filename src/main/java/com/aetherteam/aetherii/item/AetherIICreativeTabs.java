@@ -257,7 +257,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ARKENIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.GRAVITITE_BLOCK.get());
                 output.accept(AetherIIBlocks.CORROBONITE_BLOCK.get());
-
+                output.accept(AetherIIBlocks.GLINT_BLOCK.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_COLORED_BLOCKS = CREATIVE_MODE_TABS.register("colored_blocks", () -> CreativeModeTab.builder()
@@ -370,14 +370,14 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_ORE.get());
                 output.accept(AetherIIBlocks.ZANITE_ORE.get());
-                output.accept(AetherIIBlocks.GLINT_ORE.get());
                 output.accept(AetherIIBlocks.ARKENIUM_ORE.get());
                 output.accept(AetherIIBlocks.GRAVITITE_ORE.get());
+                output.accept(AetherIIBlocks.GLINT_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get());
-                output.accept(AetherIIBlocks.UNDERSHALE_GLINT_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_GLINT_ORE.get());
                 output.accept(AetherIIBlocks.CORROBONITE_ORE.get());
                 output.accept(AetherIIBlocks.CORROBONITE_CLUSTER.get());
                 output.accept(AetherIIBlocks.INERT_ARKENIUM_BLOCK.get());
@@ -795,8 +795,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ZANITE_GEMSTONE.get());
                 output.accept(AetherIIItems.INERT_ARKENIUM.get());
                 output.accept(AetherIIItems.INERT_GRAVITITE.get());
-                output.accept(AetherIIItems.CORROBONITE_CRYSTAL.get());
                 output.accept(AetherIIItems.GLINT_GEMSTONE.get());
+                output.accept(AetherIIItems.CORROBONITE_CRYSTAL.get());
                 output.accept(AetherIIItems.GOLDEN_AMBER.get());
                 output.accept(AetherIIItems.ARKENIUM_PLATES.get());
                 output.accept(AetherIIItems.GRAVITITE_PLATE.get());

@@ -100,14 +100,14 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
         this.createTrivialCube(AetherIIBlocks.AMBROSIUM_ORE.get());
         this.createTrivialCube(AetherIIBlocks.ZANITE_ORE.get());
-        this.createTrivialCube(AetherIIBlocks.GLINT_ORE.get());
         this.createTrivialCube(AetherIIBlocks.ARKENIUM_ORE.get());
         this.createTrivialCube(AetherIIBlocks.GRAVITITE_ORE.get());
+        this.createTrivialCube(AetherIIBlocks.GLINT_ORE.get());
         this.createTrivialCube(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get());
         this.createTrivialCube(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get());
-        this.createTrivialCube(AetherIIBlocks.UNDERSHALE_GLINT_ORE.get());
         this.createTrivialCube(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get());
         this.createTrivialCube(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get());
+        this.createTrivialCube(AetherIIBlocks.UNDERSHALE_GLINT_ORE.get());
         this.createTrivialCube(AetherIIBlocks.CORROBONITE_ORE.get());
         this.createCorroboniteCluster(AetherIIBlocks.CORROBONITE_CLUSTER.get(), AetherIIModelTemplates.MEDIUM_CRYSTAL);
 
@@ -430,6 +430,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.ARKENIUM_BLOCK.get());
         this.createTrivialCube(AetherIIBlocks.GRAVITITE_BLOCK.get());
         this.createTrivialCube(AetherIIBlocks.CORROBONITE_BLOCK.get());
+        this.createTrivialCube(AetherIIBlocks.GLINT_BLOCK.get());
 
         // Arilum Lantern
         this.createArilumLantern(AetherIIBlocks.WHITE_ARILUM_LANTERN.get());
