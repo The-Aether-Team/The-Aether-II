@@ -98,6 +98,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                             this.quickMoveStack(this.player, forgeCharmSlot.index);
                         }
                     }
+                    forgeCharmSlot.setLocked(false);
                 }
             }
         }
