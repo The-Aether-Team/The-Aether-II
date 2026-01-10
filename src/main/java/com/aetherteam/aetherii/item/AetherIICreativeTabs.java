@@ -256,8 +256,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ZANITE_BLOCK.get());
                 output.accept(AetherIIBlocks.ARKENIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.GRAVITITE_BLOCK.get());
-                output.accept(AetherIIBlocks.CORROBONITE_BLOCK.get());
                 output.accept(AetherIIBlocks.GLINT_BLOCK.get());
+                output.accept(AetherIIBlocks.CORROBONITE_BLOCK.get());
+                output.accept(AetherIIBlocks.GOLDEN_AMBER_BLOCK.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_COLORED_BLOCKS = CREATIVE_MODE_TABS.register("colored_blocks", () -> CreativeModeTab.builder()

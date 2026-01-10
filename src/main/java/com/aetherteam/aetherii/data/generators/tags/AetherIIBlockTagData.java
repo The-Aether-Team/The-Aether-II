@@ -592,6 +592,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ZANITE_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.ARKENIUM_BLOCK.get(),
+                AetherIIBlocks.GLINT_BLOCK.get(),
                 AetherIIBlocks.CORROBONITE_BLOCK.get()
         );
         this.tag(BlockTags.WALL_POST_OVERRIDE).add(AetherIIBlocks.AMBROSIUM_TORCH.get());
@@ -757,10 +758,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.INERT_GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
-                AetherIIBlocks.GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.ARKENIUM_BLOCK.get(),
-                AetherIIBlocks.CORROBONITE_BLOCK.get(),
+                AetherIIBlocks.GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.GLINT_BLOCK.get(),
+                AetherIIBlocks.CORROBONITE_BLOCK.get(),
+                AetherIIBlocks.GOLDEN_AMBER_BLOCK.get(),
                 AetherIIBlocks.ARKENIUM_LANTERN.get(),
                 AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get(),
                 AetherIIBlocks.ARKENIUM_CHAIN.get(),
@@ -998,7 +1000,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.INERT_GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.ARKENIUM_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
-                AetherIIBlocks.GLINT_BLOCK.get()
+                AetherIIBlocks.GLINT_BLOCK.get(),
+                AetherIIBlocks.GOLDEN_AMBER_BLOCK.get()
         );
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
                 AetherIIBlocks.CORROBONITE_ORE.get(),
@@ -1120,9 +1123,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.INERT_GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
-                AetherIIBlocks.GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.ARKENIUM_BLOCK.get(),
+                AetherIIBlocks.GRAVITITE_BLOCK.get(),
+                AetherIIBlocks.GLINT_BLOCK.get(),
                 AetherIIBlocks.CORROBONITE_BLOCK.get(),
+                AetherIIBlocks.GOLDEN_AMBER_BLOCK.get(),
                 AetherIIBlocks.BRETTL_GRASS_BUNDLE.get()
         );
         this.tag(Tags.Blocks.CHAINS).add(

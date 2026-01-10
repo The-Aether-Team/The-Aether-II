@@ -628,6 +628,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ZANITE_GEMSTONE.get(),
                 AetherIIItems.ARKENIUM_PLATES.get(),
                 AetherIIItems.GRAVITITE_PLATE.get(),
+                AetherIIItems.GLINT_GEMSTONE.get(),
                 AetherIIItems.CORROBONITE_CRYSTAL.get()
         );
         this.tag(ItemTags.CLUSTER_MAX_HARVESTABLES).add(
@@ -808,7 +809,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.ZANITE_BLOCK.asItem(),
                 AetherIIBlocks.ARKENIUM_BLOCK.asItem(),
                 AetherIIBlocks.GRAVITITE_BLOCK.asItem(),
+                AetherIIBlocks.GLINT_BLOCK.asItem(),
                 AetherIIBlocks.CORROBONITE_BLOCK.asItem(),
+                AetherIIBlocks.GOLDEN_AMBER_BLOCK.asItem(),
                 AetherIIBlocks.BRETTL_GRASS_BUNDLE.asItem()
         );
         this.tag(Tags.Items.TOOLS_SHEAR).add(

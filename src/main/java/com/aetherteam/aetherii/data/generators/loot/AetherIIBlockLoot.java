@@ -631,8 +631,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.ZANITE_BLOCK.get());
         this.dropSelf(AetherIIBlocks.ARKENIUM_BLOCK.get());
         this.dropSelf(AetherIIBlocks.GRAVITITE_BLOCK.get());
-        this.dropSelf(AetherIIBlocks.CORROBONITE_BLOCK.get());
         this.dropSelf(AetherIIBlocks.GLINT_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.CORROBONITE_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.GOLDEN_AMBER_BLOCK.get());
 
         // Arilum Lantern
         this.dropSelf(AetherIIBlocks.WHITE_ARILUM_LANTERN.get());
