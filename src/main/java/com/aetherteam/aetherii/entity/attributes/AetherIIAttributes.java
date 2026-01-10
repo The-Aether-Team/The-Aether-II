@@ -41,7 +41,7 @@ public class AetherIIAttributes {
     public static final DeferredHolder<Attribute, Attribute> STAB_DAMAGE = ATTRIBUTES.register("stab_damage", () -> new RangedAttribute("attributes.aether_ii.stab_damage", 0.0, 0.0, 1024.0));
 
     public static final DeferredHolder<Attribute, Attribute> MAXIMUM_ENDURANCE = ATTRIBUTES.register("maximum_endurance", () -> new PercentageAttribute("attributes.aether_ii.maximum_endurance", 500.0, 100.0, 1000.0));
-    public static final DeferredHolder<Attribute, Attribute> ENDURANCE_RECOVERY = ATTRIBUTES.register("endurance_recovery", () -> new PercentageAttribute("attributes.aether_ii.endurance_recovery", 1.0, 1.0, 500.0));
+    public static final DeferredHolder<Attribute, Attribute> ENDURANCE_RECOVERY = ATTRIBUTES.register("endurance_recovery", () -> new PercentageAttribute("attributes.aether_ii.endurance_recovery", 0.3, 0.3, 500.0));
 
     public static final DeferredHolder<Attribute, Attribute> BLOCKING_STRENGTH = ATTRIBUTES.register("blocking_strength", () -> new PercentageAttribute("attributes.aether_ii.blocking_strength", 0.0, 0.0, 1.0));
 
@@ -86,7 +86,7 @@ public class AetherIIAttributes {
         event.add(EntityType.PLAYER, STAB_DAMAGE, 2.0);
 
         event.add(EntityType.PLAYER, MAXIMUM_ENDURANCE, 100.0);
-        event.add(EntityType.PLAYER, ENDURANCE_RECOVERY, 1.0);
+        event.add(EntityType.PLAYER, ENDURANCE_RECOVERY, 0.3);
         event.add(EntityType.PLAYER, BLOCKING_STRENGTH, 0.0);
 
         event.add(EntityType.PLAYER, WOUND_EFFECT_RESISTANCE, 0.0);
