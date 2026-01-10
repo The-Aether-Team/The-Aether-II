@@ -85,8 +85,8 @@ public class AetherIIAttributes {
         event.add(EntityType.PLAYER, STAB_KNOCKBACK, 0.2);
         event.add(EntityType.PLAYER, STAB_DAMAGE, 2.0);
 
-        event.add(EntityType.PLAYER, MAXIMUM_ENDURANCE, 0.0);
-        event.add(EntityType.PLAYER, ENDURANCE_RECOVERY, 0.0);
+        event.add(EntityType.PLAYER, MAXIMUM_ENDURANCE, 100.0);
+        event.add(EntityType.PLAYER, ENDURANCE_RECOVERY, 1.0);
         event.add(EntityType.PLAYER, BLOCKING_STRENGTH, 0.0);
 
         event.add(EntityType.PLAYER, WOUND_EFFECT_RESISTANCE, 0.0);

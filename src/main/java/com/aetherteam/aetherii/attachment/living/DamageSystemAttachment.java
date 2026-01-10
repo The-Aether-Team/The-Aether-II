@@ -74,8 +74,6 @@ public class DamageSystemAttachment implements ValueIOSerializable {
                 double maxEndurance = AetherIIAttributes.getMaxEndurance(player);
                 double endurance = player.getAttributeValue(AetherIIAttributes.BLOCKING_STRENGTH);
 
-                AetherII.LOGGER.info(String.valueOf(player.getAttributes().getInstance(AetherIIAttributes.BLOCKING_STRENGTH).getModifiers()));
-
                 damage *= 10;
                 endurance = damage - (damage * endurance);
 

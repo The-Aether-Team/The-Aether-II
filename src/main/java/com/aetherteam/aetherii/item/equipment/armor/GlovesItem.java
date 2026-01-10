@@ -75,7 +75,7 @@ public class GlovesItem extends AccessoryItem {
                     maximumEndurance.addTransientModifier(new AttributeModifier(BASE_GLOVES_MAXIMUM_ENDURANCE_ID, ((GlovesItem) stack.getItem()).getMaxEndurance(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
                 }
                 if (enduranceRecovery != null && !enduranceRecovery.hasModifier(BASE_GLOVES_ENDURANCE_RECOVERY_ID)) {
-                    enduranceRecovery.addTransientModifier(new AttributeModifier(BASE_GLOVES_ENDURANCE_RECOVERY_ID, ((GlovesItem) stack.getItem()).getEnduranceRecovery(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                    enduranceRecovery.addTransientModifier(new AttributeModifier(BASE_GLOVES_ENDURANCE_RECOVERY_ID, ((GlovesItem) stack.getItem()).getEnduranceRecovery(), AttributeModifier.Operation.ADD_VALUE));
                 }
             }, () -> {
                 if (maximumEndurance != null && maximumEndurance.hasModifier(BASE_GLOVES_MAXIMUM_ENDURANCE_ID)) {
