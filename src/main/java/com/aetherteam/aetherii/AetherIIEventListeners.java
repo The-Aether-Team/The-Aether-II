@@ -110,6 +110,7 @@ public class AetherIIEventListeners {
 
         if (entity instanceof Player player) {
             player.getData(AetherIIDataAttachments.PLAYER).onJoinLevel(player);
+            player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).onJoinLevel(player);
             player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).onJoinLevel(player);
         }
     }

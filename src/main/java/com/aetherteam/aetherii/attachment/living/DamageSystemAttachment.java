@@ -45,6 +45,15 @@ public class DamageSystemAttachment implements ValueIOSerializable {
 
     public DamageSystemAttachment() { }
 
+    public void onJoinLevel(Player player) {
+        DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
+        double maxEndurance = AetherIIAttributes.getMaxEndurance(player);
+        if (attachment.shieldEndurance == 0) {
+            attachment.setShieldEndurance(maxEndurance);
+            player.syncData(AetherIIDataAttachments.DAMAGE_SYSTEM);
+        }
+    }
+
     public void postTickUpdate(LivingEntity livingEntity) {
         if (livingEntity instanceof Player player) {
             this.restoreShieldEndurance(player);
@@ -56,10 +65,6 @@ public class DamageSystemAttachment implements ValueIOSerializable {
             DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
             double maxEndurance = AetherIIAttributes.getMaxEndurance(player);
             double recovery = player.getAttributeValue(AetherIIAttributes.ENDURANCE_RECOVERY);
-            if (player.isBlocking() && attachment.shieldEndurance == 0) {
-                attachment.setShieldEndurance(maxEndurance);
-                player.syncData(AetherIIDataAttachments.DAMAGE_SYSTEM);
-            }
             if (attachment.getShieldEndurance() < maxEndurance && attachment.getShieldEndurance() > 0 && !player.isBlocking()) {
                 attachment.setShieldEndurance(Math.min(maxEndurance, attachment.getShieldEndurance() + recovery));
                 player.syncData(AetherIIDataAttachments.DAMAGE_SYSTEM);
