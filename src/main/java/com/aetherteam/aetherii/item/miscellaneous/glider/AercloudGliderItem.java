@@ -75,9 +75,7 @@ public class AercloudGliderItem extends Item implements ToggleItem {
             if (entity.onGround() || timer <= 0) {
                 entity.stopUsingItem();
             } else {
-                if (entity.tickCount % 2 == 0) {
-                    player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(Math.max(timer - 1, 0));
-                }
+                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(Math.max(timer - 1, 0));
             }
         }
         super.onUseTick(level, entity, stack, remainingTicks);
