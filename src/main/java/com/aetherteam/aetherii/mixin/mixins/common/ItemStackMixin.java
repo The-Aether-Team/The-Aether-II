@@ -1,14 +1,9 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
-import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-import com.aetherteam.aetherii.item.components.BrokenStack;
+import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -34,22 +29,6 @@ public abstract class ItemStackMixin<E> {
     @Inject(method = "applyDamage(ILnet/minecraft/world/entity/LivingEntity;Ljava/util/function/Consumer;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getItem()Lnet/minecraft/world/item/Item;"))
     private void applyDamage(int damage, LivingEntity livingEntity, Consumer<Item> itemConsumer, CallbackInfo ci) {
         ItemStack itemStack = (ItemStack) (Object) this;
-        if (itemStack.is(AetherIITags.Items.UNBREAKABLE_LOOT)) {
-            EquipmentSlot slot = livingEntity.getEquipmentSlotForItem(itemStack);
-            ItemStack brokenItem = new ItemStack(AetherIIItems.BROKEN_ITEM.get());
-            brokenItem.set(AetherIIDataComponents.BROKEN_STACK, new BrokenStack(itemStack.copy()));
-            ResourceLocation modelLocation = itemStack.get(DataComponents.ITEM_MODEL);
-            if (modelLocation != null) {
-                brokenItem.set(DataComponents.ITEM_MODEL, modelLocation.withSuffix("_broken"));
-            }
-            brokenItem.set(DataComponents.ITEM_NAME, Component.translatable("item.aether_ii.broken_item", itemStack.get(DataComponents.ITEM_NAME)));
-            Integer maxDamage = itemStack.get(DataComponents.MAX_DAMAGE);
-            if (maxDamage != null) {
-                brokenItem.set(DataComponents.MAX_DAMAGE, maxDamage);
-                brokenItem.set(DataComponents.DAMAGE, maxDamage - 1);
-            }
-            brokenItem.set(DataComponents.RARITY, itemStack.get(DataComponents.RARITY));
-            livingEntity.setItemSlot(slot, brokenItem);
-        }
+        MixinHooks.breakLootItem(itemStack, livingEntity);
     }
 }

@@ -1,11 +1,15 @@
 package com.aetherteam.aetherii.mixin;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
+import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.BrokenStack;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.ItemRendererAccessor;
 import com.aetherteam.aetherii.network.packet.clientbound.AttackShockParticlePacket;
 import com.aetherteam.aetherii.network.packet.clientbound.AttackStabParticlePacket;
@@ -18,15 +22,20 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Vector3f;
@@ -148,6 +157,26 @@ public class MixinHooks {
             Vector3f playerPos = new Vector3f((float) player.position().x(), (float) player.getEyeY(), (float) player.position().z());
             Vector3f targetPos = target.position().toVector3f();
             PacketDistributor.sendToPlayer(serverPlayer, new AttackStabParticlePacket(playerPos, targetPos));
+        }
+    }
+
+    public static void breakLootItem(ItemStack itemStack, LivingEntity livingEntity) {
+        if (itemStack.is(AetherIITags.Items.UNBREAKABLE_LOOT)) {
+            EquipmentSlot slot = livingEntity.getEquipmentSlotForItem(itemStack);
+            ItemStack brokenItem = new ItemStack(AetherIIItems.BROKEN_ITEM.get());
+            brokenItem.set(AetherIIDataComponents.BROKEN_STACK, new BrokenStack(itemStack.copy()));
+            ResourceLocation modelLocation = itemStack.get(DataComponents.ITEM_MODEL);
+            if (modelLocation != null) {
+                brokenItem.set(DataComponents.ITEM_MODEL, modelLocation.withSuffix("_broken"));
+            }
+            brokenItem.set(DataComponents.ITEM_NAME, Component.translatable("item.aether_ii.broken_item", itemStack.get(DataComponents.ITEM_NAME)));
+            Integer maxDamage = itemStack.get(DataComponents.MAX_DAMAGE);
+            if (maxDamage != null) {
+                brokenItem.set(DataComponents.MAX_DAMAGE, maxDamage);
+                brokenItem.set(DataComponents.DAMAGE, maxDamage - 1);
+            }
+            brokenItem.set(DataComponents.RARITY, itemStack.get(DataComponents.RARITY));
+            livingEntity.setItemSlot(slot, brokenItem);
         }
     }
 
