@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "golden_amber",
+  "ingredients": [
+    "aether_ii:golden_amber_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "aether_ii:golden_amber"
+  }
+}

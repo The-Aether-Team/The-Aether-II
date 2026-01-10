@@ -766,6 +766,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     // Bookshelves
     public static final DeferredBlock<Block> SKYROOT_BOOKSHELF = register("skyroot_bookshelf", BookshelfBlock::new, () -> Block.Properties.ofFullCopy(Blocks.BOOKSHELF));
+    public static final DeferredBlock<Block> GREATROOT_BOOKSHELF = register("greatroot_bookshelf", BookshelfBlock::new, () -> Block.Properties.ofFullCopy(Blocks.BOOKSHELF));
+    public static final DeferredBlock<Block> WISPROOT_BOOKSHELF = register("wisproot_bookshelf", BookshelfBlock::new, () -> Block.Properties.ofFullCopy(Blocks.BOOKSHELF));
     public static final DeferredBlock<Block> HOLYSTONE_BOOKSHELF = register("holystone_bookshelf", BookshelfBlock::new, () -> Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get()));
 
     // Furniture

@@ -496,6 +496,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
 
         // Bookshelves
         this.createCubeColumn(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), AetherIIBlocks.SKYROOT_PLANKS.get());
+        this.createCubeColumn(AetherIIBlocks.GREATROOT_BOOKSHELF.get(), AetherIIBlocks.GREATROOT_PLANKS.get());
+        this.createCubeColumn(AetherIIBlocks.WISPROOT_BOOKSHELF.get(), AetherIIBlocks.WISPROOT_PLANKS.get());
         this.createCubeColumn(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get());
 
         // Furniture

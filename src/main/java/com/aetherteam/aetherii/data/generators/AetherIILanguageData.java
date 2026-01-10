@@ -752,6 +752,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Bookshelves
         this.addBlock(AetherIIBlocks.SKYROOT_BOOKSHELF, "Skyroot Bookshelf");
+        this.addBlock(AetherIIBlocks.GREATROOT_BOOKSHELF, "Greatroot Bookshelf");
+        this.addBlock(AetherIIBlocks.WISPROOT_BOOKSHELF, "Wisproot Bookshelf");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF, "Holystone Bookshelf");
 
         // Furniture

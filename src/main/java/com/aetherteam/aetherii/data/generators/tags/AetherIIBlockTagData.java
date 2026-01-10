@@ -838,6 +838,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(),
                 AetherIIBlocks.SKYROOT_CHEST.get(),
                 AetherIIBlocks.SKYROOT_BOOKSHELF.get(),
+                AetherIIBlocks.GREATROOT_BOOKSHELF.get(),
+                AetherIIBlocks.WISPROOT_BOOKSHELF.get(),
                 AetherIIBlocks.SKYROOT_FLOORBOARDS.get(),
                 AetherIIBlocks.SKYROOT_HIGHLIGHT.get(),
                 AetherIIBlocks.SKYROOT_SHINGLES.get(),
@@ -1030,6 +1032,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(BlockTags.ENCHANTMENT_POWER_PROVIDER).add(
                 AetherIIBlocks.SKYROOT_BOOKSHELF.get(),
+                AetherIIBlocks.GREATROOT_BOOKSHELF.get(),
+                AetherIIBlocks.WISPROOT_BOOKSHELF.get(),
                 AetherIIBlocks.HOLYSTONE_BOOKSHELF.get()
         );
         this.tag(BlockTags.SNIFFER_DIGGABLE_BLOCK).add(
@@ -1061,6 +1065,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         // NeoForge
         this.tag(Tags.Blocks.BOOKSHELVES).add(
                 AetherIIBlocks.SKYROOT_BOOKSHELF.get(),
+                AetherIIBlocks.GREATROOT_BOOKSHELF.get(),
+                AetherIIBlocks.WISPROOT_BOOKSHELF.get(),
                 AetherIIBlocks.HOLYSTONE_BOOKSHELF.get()
         );
         this.tag(Tags.Blocks.FENCE_GATES_WOODEN).add(
