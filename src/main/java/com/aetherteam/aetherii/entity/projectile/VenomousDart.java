@@ -10,7 +10,6 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.HitResult;
 
 public class VenomousDart extends AbstractArrow {
     public VenomousDart(EntityType<? extends VenomousDart> entityType, Level level) {
@@ -33,23 +32,6 @@ public class VenomousDart extends AbstractArrow {
         if (((AbstractArrowAccessor) this).aether$getLife() >= 300) {
             this.discard();
         }
-    }
-
-    /**
-     * Handles shield damaging when this projectile hits an entity.
-     *
-     * @param result The {@link HitResult} of the projectile.
-     */
-    @Override
-    protected void onHit(HitResult result) {
-        super.onHit(result);
-//        if (result.getType() == HitResult.Type.ENTITY) {
-//            Entity entity = ((EntityHitResult) result).getEntity();
-//            if (entity instanceof Player player && player.isBlocking()) {
-//                PlayerAccessor playerAccessor = (PlayerAccessor) player;
-//                playerAccessor.callHurtCurrentlyUsedShield(3.0F);
-//            }
-//        }
     }
 
     /**
