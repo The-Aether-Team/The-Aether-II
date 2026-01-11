@@ -105,7 +105,7 @@ public class AercloudGliderItem extends Item implements ToggleItem {
                 }
             }
             if (reset) {
-                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(AetherIIAttributes.getMaxEndurance(player));
+                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(this.getUseDuration(stack, entity));
                 if (player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().containsKey(stack.getItemHolder()) && !player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().get(stack.getItemHolder())) {
                     player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().put(stack.getItemHolder(), true);
                 }
@@ -116,7 +116,7 @@ public class AercloudGliderItem extends Item implements ToggleItem {
 
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
-        return AetherIIAttributes.getMaxEndurance(entity);
+        return AetherIIAttributes.getMaxEndurance(entity) * 2;
     }
 
     @Override
@@ -137,7 +137,7 @@ public class AercloudGliderItem extends Item implements ToggleItem {
         if (this.isGliding()) {
             AbilityBehaviorAttachment data = AetherIIClientProxy.getClientPlayerData(AetherIIDataAttachments.ABILITY_BEHAVIOR);
             if (data != null) {
-                return Math.round((float) data.getGlidingTimer() * 13.0F / (float) AetherIIAttributes.getMaxEndurance(AetherIIClientProxy.getClientPlayer()));
+                return Math.round((float) data.getGlidingTimer() * 13.0F / this.getUseDuration(stack, AetherIIClientProxy.getClientPlayer()));
             }
         }
         return super.getBarWidth(stack);
@@ -155,7 +155,7 @@ public class AercloudGliderItem extends Item implements ToggleItem {
         Player player = AetherIIClientProxy.getClientPlayer();
         if (player != null && player.getUseItem().getItem() instanceof AercloudGliderItem) {
             int progress = player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getGlidingTimer();
-            return progress > 0 && progress < AetherIIAttributes.getMaxEndurance(player);
+            return progress > 0 && progress < this.getUseDuration(player.getUseItem(), player);
         }
         return false;
     }
