@@ -1,10 +1,10 @@
 package com.aetherteam.aetherii.entity.monster;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.entity.PlantCuttingMob;
 import com.aetherteam.aetherii.entity.projectile.ToxicDart;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -31,14 +31,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-public class AechorPlant extends PathfinderMob implements RangedAttackMob {
+public class AechorPlant extends PathfinderMob implements RangedAttackMob, PlantCuttingMob {
     public static int DART_ATTACK_EVENT = 100;
 
     private static final EntityDataAccessor<Boolean> DATA_TARGETING_ENTITY_ID = SynchedEntityData.defineId(AechorPlant.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_PLAYER_GROWN_ID = SynchedEntityData.defineId(AechorPlant.class, EntityDataSerializers.BOOLEAN);
 
     public AnimationState attackAnimationState = new AnimationState();
 
@@ -64,6 +66,7 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(DATA_TARGETING_ENTITY_ID, false);
+        builder.define(DATA_PLAYER_GROWN_ID, false);
     }
 
     @Nullable
@@ -243,6 +246,26 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
         return effect.getEffect().value() != AetherIIEffects.TOXIN.get() && super.canBeAffected(effect);
+    }
+
+    @Override
+    public boolean isPlayerGrown() {
+        return this.entityData.get(DATA_PLAYER_GROWN_ID);
+    }
+
+    @Override
+    public void setPlayerGrown(boolean playerGrown) {
+        this.entityData.set(DATA_PLAYER_GROWN_ID, playerGrown);
+    }
+
+    @Override
+    public void addAdditionalSaveData(ValueOutput output) {
+        output.putBoolean("PlayerGrown", this.isPlayerGrown());
+    }
+
+    @Override
+    public void readAdditionalSaveData(ValueInput input) {
+        this.setPlayerGrown(input.getBooleanOr("PlayerGrown", false));
     }
 
     public static class ShootDartGoal extends Goal {
