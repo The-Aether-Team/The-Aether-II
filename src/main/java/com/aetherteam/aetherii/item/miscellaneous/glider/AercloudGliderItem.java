@@ -116,7 +116,7 @@ public class AercloudGliderItem extends Item implements ToggleItem {
 
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
-        return AetherIIAttributes.getMaxEndurance(entity) * 2;
+        return AetherIIAttributes.getMaxEndurance(entity) * 5;
     }
 
     @Override

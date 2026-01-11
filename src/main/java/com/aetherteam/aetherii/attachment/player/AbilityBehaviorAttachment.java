@@ -129,7 +129,7 @@ public class AbilityBehaviorAttachment {
     private void resetGlideCheck(Player player) {
         if (player.onGround()) {
             if (!this.getCanRefuelGlide()) {
-                this.setGlidingTimer(AetherIIAttributes.getMaxEndurance(player) * 2);
+                this.setGlidingTimer(AetherIIAttributes.getMaxEndurance(player) * 5);
                 this.setCanRefuelGlide(true);
                 for (Iterator<Map.Entry<Holder<Item>, Boolean>> iterator = this.getCanRefuelAbilities().entrySet().iterator(); iterator.hasNext(); ) {
                     Map.Entry<Holder<Item>, Boolean> entry = iterator.next();
