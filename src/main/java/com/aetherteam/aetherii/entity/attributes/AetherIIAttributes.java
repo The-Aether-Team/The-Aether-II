@@ -40,7 +40,7 @@ public class AetherIIAttributes {
     public static final DeferredHolder<Attribute, Attribute> STAB_KNOCKBACK = ATTRIBUTES.register("stab_knockback", () -> new RangedAttribute("attributes.aether_ii.stab_knockback", 0.0, 0.0, 1024.0));
     public static final DeferredHolder<Attribute, Attribute> STAB_DAMAGE = ATTRIBUTES.register("stab_damage", () -> new RangedAttribute("attributes.aether_ii.stab_damage", 0.0, 0.0, 1024.0));
 
-    public static final DeferredHolder<Attribute, Attribute> MAXIMUM_ENDURANCE = ATTRIBUTES.register("maximum_endurance", () -> new PercentageAttribute("attributes.aether_ii.maximum_endurance", 500.0, 100.0, 1000.0));
+    public static final DeferredHolder<Attribute, Attribute> MAXIMUM_ENDURANCE = ATTRIBUTES.register("maximum_endurance", () -> new PercentageAttribute("attributes.aether_ii.maximum_endurance", 100.0, 100.0, 1000.0));
     public static final DeferredHolder<Attribute, Attribute> ENDURANCE_RECOVERY = ATTRIBUTES.register("endurance_recovery", () -> new PercentageAttribute("attributes.aether_ii.endurance_recovery", 0.3, 0.3, 500.0));
 
     public static final DeferredHolder<Attribute, Attribute> BLOCKING_STRENGTH = ATTRIBUTES.register("blocking_strength", () -> new PercentageAttribute("attributes.aether_ii.blocking_strength", 0.0, 0.0, 1.0));

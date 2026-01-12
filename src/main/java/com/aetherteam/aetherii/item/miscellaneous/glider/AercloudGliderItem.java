@@ -33,6 +33,7 @@ public class AercloudGliderItem extends Item implements ToggleItem {
             this.onParachuteOpen(level, player, hand, stack);
             if (player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelGlide()) {
                 player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setCanRefuelGlide(false);
+                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(this.getUseDuration(stack, player));
             }
             return super.use(level, player, hand);
         } else {
@@ -44,6 +45,7 @@ public class AercloudGliderItem extends Item implements ToggleItem {
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingTicks) {
         if (entity instanceof Player player) {
             int timer = player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getGlidingTimer();
+
             if (level.isClientSide()) {
                 float x = entity.xxa * 0.5F; // Side-to-side movement is slowed.
                 float z = entity.zza; // Forward movement is normal.
@@ -76,6 +78,10 @@ public class AercloudGliderItem extends Item implements ToggleItem {
                 entity.stopUsingItem();
             } else {
                 player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(Math.max(timer - 1, 0));
+            }
+
+            if (timer > this.getUseDuration(stack, entity)) {
+                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(this.getUseDuration(stack, entity));
             }
         }
         super.onUseTick(level, entity, stack, remainingTicks);
