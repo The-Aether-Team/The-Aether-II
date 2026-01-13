@@ -1108,6 +1108,7 @@
   "item.aether_ii.music_disc_chinchilla": "Sepia Music Disc",
   "item.aether_ii.music_disc_demise": "Labyrinth Music Disc",
   "item.aether_ii.music_disc_high": "Super Music Disc",
+  "item.aether_ii.music_player": "Music Player",
   "item.aether_ii.neptune_boots": "Neptune Boots",
   "item.aether_ii.neptune_boots.nitrogen_internals.ability.tooltip.1": "§9Ability:§r Walk in Water",
   "item.aether_ii.neptune_boots.nitrogen_internals.ability.tooltip.2": "§9Set Pieces:§r %s",

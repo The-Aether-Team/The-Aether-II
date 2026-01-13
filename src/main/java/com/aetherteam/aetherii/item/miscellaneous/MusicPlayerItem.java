@@ -1,14 +1,12 @@
 package com.aetherteam.aetherii.item.miscellaneous;
 
+import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.StoredMusic;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.game.ClientboundSoundPacket;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -66,21 +64,26 @@ public class MusicPlayerItem extends Item {
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         StoredMusic music = stack.get(AetherIIDataComponents.STORED_MUSIC);
-        if (music != null && level instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer) {
-            Holder<SoundEvent> sound = music.sound();
+        if (music != null && player.level().isClientSide()) {
+            Holder<SoundEvent> sound = Holder.direct(SoundEvent.createVariableRangeEvent(music.sound().value().location()));
             SoundSource category = SoundSource.MASTER;
-            Vec3 pos = player.position();
-            float volume = 1.0F;
-            float pitch = 1.0F;
-            double d0 = Mth.square(sound.value().getRange(volume));
-            long i = serverLevel.getRandom().nextLong();
-            double d1 = pos.x - serverPlayer.getX();
-            double d2 = pos.y - serverPlayer.getY();
-            double d3 = pos.z - serverPlayer.getZ();
-            double d4 = d1 * d1 + d2 * d2 + d3 * d3;
-            if (d4 <= d0) {
-                serverPlayer.connection.send(new ClientboundSoundPacket(sound, category, pos.x(), pos.y(), pos.z(), volume, pitch, i));
-                return InteractionResult.SUCCESS_SERVER;
+            if (!AetherIIClientProxy.isPlayingSoundEvent(music.sound().value())) {
+                Vec3 pos = player.position();
+                float volume = 1.0F;
+                float pitch = 1.0F;
+                double d0 = Mth.square(sound.value().getRange(volume));
+                long i = player.level().getRandom().nextLong();
+                double d1 = pos.x - player.getX();
+                double d2 = pos.y - player.getY();
+                double d3 = pos.z - player.getZ();
+                double d4 = d1 * d1 + d2 * d2 + d3 * d3;
+                if (d4 <= d0) {
+                    AetherIIClientProxy.playSoundEvent(sound, category, pos.x(), pos.y(), pos.z(), volume, pitch, i);
+                    return InteractionResult.SUCCESS;
+                }
+            } else {
+                AetherIIClientProxy.stopSoundEvent(sound.value(), category);
+                return InteractionResult.SUCCESS;
             }
         }
         return super.use(level, player, hand);

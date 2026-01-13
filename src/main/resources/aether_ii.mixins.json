@@ -74,6 +74,8 @@
     "client.accessor.RecipeBookComponentAccessor",
     "client.accessor.RecipeBookPageAccessor",
     "client.accessor.RenderChunkRegionAccessor",
+    "client.accessor.SoundEngineAccessor",
+    "client.accessor.SoundManagerAccessor",
     "client.accessor.WeatherEffectRendererAccessor",
     "debug.DebugRendererMixin"
   ],

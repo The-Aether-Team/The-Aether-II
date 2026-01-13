@@ -1,16 +1,42 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.SoundEngineAccessor;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.SoundManagerAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.client.sounds.ChannelAccess;
+import net.minecraft.client.sounds.SoundEngine;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class AetherIIClientProxy {
+    public static boolean isPlayingSoundEvent(SoundEvent soundEvent) {
+        SoundEngine soundEngine = ((SoundManagerAccessor) Minecraft.getInstance().getSoundManager()).aether_ii$getSoundEngine();
+        Map<SoundInstance, ChannelAccess.ChannelHandle> soundInstances = ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel();
+        List<ResourceLocation> sounds = soundInstances.keySet().stream().map(SoundInstance::getLocation).toList();
+        return sounds.contains(soundEvent.location());
+    }
+
+    public static void playSoundEvent(Holder<SoundEvent> sound, SoundSource source, double x, double y, double z, float volume, float pitch, long seed) {
+        Minecraft.getInstance().level.playSeededSound(Minecraft.getInstance().player, x, y, z, sound, source, volume, pitch, seed);
+    }
+
+    public static void stopSoundEvent(SoundEvent soundEvent, SoundSource source) {
+        Minecraft.getInstance().getSoundManager().stop(soundEvent.location(), source);
+    }
+
     public static boolean isHighlandsSpecialEffects(Level level) {
         return level instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HighlandsSpecialEffects;
     }

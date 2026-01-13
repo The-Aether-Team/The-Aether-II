@@ -1034,6 +1034,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ARKENIUM_HESTVEIL_CANISTER, "Arkenium Hestveil Canister");
 
         // Music Discs
+        this.addItem(AetherIIItems.MUSIC_PLAYER, "Music Player");
         this.addItem(AetherIIItems.MUSIC_DISC_AETHER_TUNE, "Blue Music Disc");
         this.addItem(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN, "Valkyrie Music Disc");
         this.addItem(AetherIIItems.MUSIC_DISC_AERWHALE, "Aerwhale Music Disc");

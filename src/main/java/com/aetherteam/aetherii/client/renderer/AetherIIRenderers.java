@@ -246,6 +246,7 @@ public class AetherIIRenderers {
     public static void registerItemModels(RegisterItemModelsEvent event) {
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "emissive"), EmissiveModel.Unbaked.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "shield"), ShieldModel.Unbaked.MAP_CODEC);
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "music_player_disc"), MusicPlayerDiscModel.Unbaked.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "mural"), MuralItemModel.Unbaked.MAP_CODEC);
     }
 

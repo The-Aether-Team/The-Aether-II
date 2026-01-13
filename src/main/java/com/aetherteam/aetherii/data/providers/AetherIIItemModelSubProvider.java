@@ -6,6 +6,7 @@ import java.util.function.BiConsumer;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.item.color.EffectBuildupColorSource;
 import com.aetherteam.aetherii.client.renderer.item.model.EmissiveModel;
+import com.aetherteam.aetherii.client.renderer.item.model.MusicPlayerDiscModel;
 import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.BetterIsUsingItem;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.HoldingShift;
@@ -24,8 +25,10 @@ import net.minecraft.client.color.item.Dye;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.item.BundleSelectedItemSpecialRenderer;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
+import net.minecraft.client.renderer.item.properties.conditional.BundleHasSelectedItem;
 import net.minecraft.client.renderer.item.properties.conditional.CustomModelDataProperty;
 import net.minecraft.client.renderer.item.properties.conditional.HasComponent;
 import net.minecraft.client.renderer.item.properties.select.Charge;
@@ -236,6 +239,13 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
         }
     }
 
+    public void generateMusicDisc(Item item) {
+        ResourceLocation modelLocation = ModelLocationUtils.getModelLocation(item);
+        ModelTemplates.MUSIC_DISC.create(modelLocation, TextureMapping.layer0(modelLocation), this.modelOutput);
+        ModelTemplates.MUSIC_DISC.create(modelLocation.withSuffix("_animated"), TextureMapping.layer0(modelLocation.withSuffix("_animated")), this.modelOutput);
+        this.itemModelOutput.accept(item, ItemModelUtils.plainModel(modelLocation));
+    }
+
     public void generateLasso(Item item) {
         ItemModel.Unbaked normal = ItemModelUtils.plainModel(this.createFlatItemModel(item, ModelTemplates.FLAT_HANDHELD_ROD_ITEM));
         ItemModel.Unbaked thrown = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_thrown", ModelTemplates.FLAT_HANDHELD_ROD_ITEM));
@@ -330,5 +340,14 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
         ResourceLocation location = ModelTemplates.TWO_LAYERED_ITEM.extend().renderType(ResourceLocation.withDefaultNamespace("translucent")).build()
                 .create(item, TextureMapping.layered(TextureMapping.getItemTexture(item), TextureMapping.getItemTexture(item, "_inside")), this.modelOutput);
         this.itemModelOutput.accept(item, ItemModelUtils.plainModel(location));
+    }
+
+    public void generateMusicPlayer(Item item) {
+        ResourceLocation backLocation = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(item, "_back"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_back")), this.modelOutput);
+        ResourceLocation frontLocation = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(item, "_front"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_front")), this.modelOutput);
+
+        ItemModel.Unbaked model = ItemModelUtils.composite(ItemModelUtils.plainModel(backLocation), new MusicPlayerDiscModel.Unbaked(), ItemModelUtils.plainModel(frontLocation));
+
+        this.itemModelOutput.accept(item, model);
     }
 }

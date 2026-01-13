@@ -241,14 +241,16 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.ARKENIUM_HESTVEIL_CANISTER.get(), ModelTemplates.FLAT_ITEM);
 
         // Music Discs
-        this.generateFlatItem(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get(), ModelTemplates.MUSIC_DISC);
-        this.generateFlatItem(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get(), ModelTemplates.MUSIC_DISC);
-        this.generateFlatItem(AetherIIItems.MUSIC_DISC_AERWHALE.get(), ModelTemplates.MUSIC_DISC);
-        this.generateFlatItem(AetherIIItems.MUSIC_DISC_APPROACHES.get(), ModelTemplates.MUSIC_DISC);
-        this.generateFlatItem(AetherIIItems.MUSIC_DISC_DEMISE.get(), ModelTemplates.MUSIC_DISC);
-        this.generateFlatItem(AetherIIItems.MUSIC_DISC_CHINCHILLA.get(), ModelTemplates.MUSIC_DISC);
-        this.generateFlatItem(AetherIIItems.MUSIC_DISC_HIGH.get(), ModelTemplates.MUSIC_DISC);
-        this.generateFlatItem(AetherIIItems.RECORDING_892.get(), ModelTemplates.MUSIC_DISC);
+        this.generateMusicPlayer(AetherIIItems.MUSIC_PLAYER.get());
+
+        this.generateMusicDisc(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get());
+        this.generateMusicDisc(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get());
+        this.generateMusicDisc(AetherIIItems.MUSIC_DISC_AERWHALE.get());
+        this.generateMusicDisc(AetherIIItems.MUSIC_DISC_APPROACHES.get());
+        this.generateMusicDisc(AetherIIItems.MUSIC_DISC_DEMISE.get());
+        this.generateMusicDisc(AetherIIItems.MUSIC_DISC_CHINCHILLA.get());
+        this.generateMusicDisc(AetherIIItems.MUSIC_DISC_HIGH.get());
+        this.generateMusicDisc(AetherIIItems.RECORDING_892.get());
 
         // Spawn Eggs
         this.generateFlatItem(AetherIIItems.FLYING_COW_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
@@ -297,14 +299,9 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.GUIDEBOOK_PAGE.get(), ModelTemplates.FLAT_ITEM);
         this.generatePortalFrameItem(AetherIIItems.AETHER_PORTAL_FRAME.get());
         this.generateFlatItem(AetherIIItems.MURAL_ITEM.get(), ModelTemplates.FLAT_ITEM);
-
-        this.generateFlatItem(AetherIIItems.MUSIC_PLAYER.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.BROKEN_ITEM.get(), ModelTemplates.FLAT_ITEM);
 
         // Blocks
         this.generateFlatItem(AetherIIBlocks.ARKENIUM_CHAIN.get().asItem(), ModelTemplates.FLAT_ITEM);
-
-
-
-        this.generateFlatItem(AetherIIItems.BROKEN_ITEM.get(), ModelTemplates.FLAT_ITEM);
     }
 }

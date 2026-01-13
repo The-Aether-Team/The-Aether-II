@@ -729,14 +729,15 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.IRRADIATED_TOOL.get());
                 output.accept(AetherIIItems.IRRADIATED_CHUNK.get());
                 output.accept(AetherIIItems.IRRADIATED_DUST.get());
+                output.accept(AetherIIItems.MUSIC_PLAYER.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AERWHALE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_APPROACHES.get());
                 output.accept(AetherIIItems.MUSIC_DISC_DEMISE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_CHINCHILLA.get());
-                output.accept(AetherIIItems.MUSIC_DISC_DEMISE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_HIGH.get());
+                output.accept(AetherIIItems.RECORDING_892.get());
                 output.accept(AetherIIItems.GLINT_COIN.get());
                 output.accept(AetherIIItems.GUIDEBOOK_PAGE.get());
             }).build());
