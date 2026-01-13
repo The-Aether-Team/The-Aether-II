@@ -28,12 +28,14 @@ public class AercloudGliderItem extends Item implements ToggleItem {
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
+        if (player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getGlidingTimer() < 0) {
+            player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(this.getUseDuration(stack, player));
+        }
         if (!player.onGround() && player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getGlidingTimer() > 0) {
             player.startUsingItem(hand);
             this.onParachuteOpen(level, player, hand, stack);
             if (player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelGlide()) {
                 player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setCanRefuelGlide(false);
-                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(this.getUseDuration(stack, player));
             }
             return super.use(level, player, hand);
         } else {
@@ -111,11 +113,11 @@ public class AercloudGliderItem extends Item implements ToggleItem {
                 }
             }
             if (reset) {
-                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(this.getUseDuration(stack, entity));
                 if (player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().containsKey(stack.getItemHolder()) && !player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().get(stack.getItemHolder())) {
                     player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().put(stack.getItemHolder(), true);
                 }
             }
+            player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(-1);
         }
         super.onStopUsing(stack, entity, count);
     }
