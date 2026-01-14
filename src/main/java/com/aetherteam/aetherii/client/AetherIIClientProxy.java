@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
+import com.aetherteam.aetherii.client.sound.instance.MusicPlayerSoundInstance;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.SoundEngineAccessor;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.SoundManagerAccessor;
 import net.minecraft.client.Minecraft;
@@ -12,6 +13,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.attachment.AttachmentType;
@@ -25,12 +27,12 @@ public class AetherIIClientProxy {
     public static boolean isPlayingSoundEvent(SoundEvent soundEvent) {
         SoundEngine soundEngine = ((SoundManagerAccessor) Minecraft.getInstance().getSoundManager()).aether_ii$getSoundEngine();
         Map<SoundInstance, ChannelAccess.ChannelHandle> soundInstances = ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel();
-        List<ResourceLocation> sounds = soundInstances.keySet().stream().map(SoundInstance::getLocation).toList();
+        List<ResourceLocation> sounds = soundInstances.keySet().stream().filter((soundInstance) -> soundInstance instanceof MusicPlayerSoundInstance).map(SoundInstance::getLocation).toList();
         return sounds.contains(soundEvent.location());
     }
 
     public static void playSoundEvent(Holder<SoundEvent> sound, SoundSource source, double x, double y, double z, float volume, float pitch, long seed) {
-        Minecraft.getInstance().level.playSeededSound(Minecraft.getInstance().player, x, y, z, sound, source, volume, pitch, seed);
+        Minecraft.getInstance().getSoundManager().play(new MusicPlayerSoundInstance(sound.value(), source, volume, pitch, RandomSource.create(seed), x, y, z));
     }
 
     public static void stopSoundEvent(SoundEvent soundEvent, SoundSource source) {
