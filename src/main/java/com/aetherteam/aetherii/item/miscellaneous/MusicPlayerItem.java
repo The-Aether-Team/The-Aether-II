@@ -53,8 +53,14 @@ public class MusicPlayerItem extends Item {
                 return true;
             }
         } else if (action == ClickAction.SECONDARY && stack.has(AetherIIDataComponents.STORED_MUSIC) && other.isEmpty()) {
+            StoredMusic music = stack.get(AetherIIDataComponents.STORED_MUSIC);
+            Holder<SoundEvent> sound = Holder.direct(SoundEvent.createVariableRangeEvent(music.sound().value().location()));
+            SoundSource category = SoundSource.MASTER;
             slot.set(stack.get(AetherIIDataComponents.STORED_MUSIC).item().value().getDefaultInstance());
             stack.remove(AetherIIDataComponents.STORED_MUSIC);
+            if (player.level().isClientSide()) {
+                AetherIIClientProxy.stopSoundEvent(sound.value(), category);
+            }
             return false;
         }
         return super.overrideStackedOnOther(stack, slot, action, player);
