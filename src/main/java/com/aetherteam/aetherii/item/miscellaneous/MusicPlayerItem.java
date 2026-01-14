@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.item.miscellaneous;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.StoredMusic;
@@ -31,7 +32,7 @@ public class MusicPlayerItem extends Item {
 
     @Override
     public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction action, Player player, SlotAccess access) {
-        if (!stack.has(AetherIIDataComponents.STORED_MUSIC) && other.has(DataComponents.JUKEBOX_PLAYABLE)) {
+        if (!stack.has(AetherIIDataComponents.STORED_MUSIC) && other.has(DataComponents.JUKEBOX_PLAYABLE) && other.is(AetherIITags.Items.COMPACT_DISCS)) {
             Optional<Holder<JukeboxSong>> optional = JukeboxSong.fromStack(player.registryAccess(), other);
             if (optional.isPresent()) {
                 stack.set(AetherIIDataComponents.STORED_MUSIC, new StoredMusic(other.getItemHolder(), optional.get().value().soundEvent()));
@@ -45,7 +46,7 @@ public class MusicPlayerItem extends Item {
     @Override
     public boolean overrideStackedOnOther(ItemStack stack, Slot slot, ClickAction action, Player player) {
         ItemStack other = slot.getItem();
-        if (!stack.has(AetherIIDataComponents.STORED_MUSIC) && other.has(DataComponents.JUKEBOX_PLAYABLE)) {
+        if (!stack.has(AetherIIDataComponents.STORED_MUSIC) && other.has(DataComponents.JUKEBOX_PLAYABLE) && other.is(AetherIITags.Items.COMPACT_DISCS)) {
             Optional<Holder<JukeboxSong>> optional = JukeboxSong.fromStack(player.registryAccess(), other);
             if (optional.isPresent()) {
                 stack.set(AetherIIDataComponents.STORED_MUSIC, new StoredMusic(other.getItemHolder(), optional.get().value().soundEvent()));

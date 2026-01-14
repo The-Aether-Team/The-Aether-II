@@ -55,15 +55,15 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_FILL_HESTVEIL = register("item.arkenium_canister.fill_hestveil");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_EMPTY_HESTVEIL = register("item.arkenium_canister.empty_hestveil");
 
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_MUSIC_DISC_AETHER_TUNE = register("item.music_disc.aether_tune");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_MUSIC_DISC_ASCENDING_DAWN = register("item.music_disc.ascending_dawn");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_MUSIC_DISC_AERWHALE = register("item.music_disc.aerwhale");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_MUSIC_DISC_APPROACHES = register("item.music_disc.approaches");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_MUSIC_DISC_DEMISE = register("item.music_disc.demise");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_MUSIC_DISC_CHINCHILLA = register("item.music_disc.chinchilla");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_MUSIC_DISC_HIGH = register("item.music_disc.high");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_MUSIC_DISC_REVOLUTIONS = register("item.music_disc.revolutions");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_RECORDING_892 = register("item.music_disc.recording_892");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_COMPACT_DISC_AETHER_TUNE = register("item.compact_disc.aether_tune");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_COMPACT_DISC_ASCENDING_DAWN = register("item.compact_disc.ascending_dawn");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_COMPACT_DISC_AERWHALE = register("item.compact_disc.aerwhale");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_COMPACT_DISC_APPROACHES = register("item.compact_disc.approaches");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_COMPACT_DISC_DEMISE = register("item.compact_disc.demise");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_COMPACT_DISC_CHINCHILLA = register("item.compact_disc.chinchilla");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_COMPACT_DISC_HIGH = register("item.compact_disc.high");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_COMPACT_DISC_REVOLUTIONS = register("item.compact_disc.revolutions");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_COMPACT_DISC_CHASE = register("item.compact_disc.recording_892");
 
     // Armor
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_BEAST_PELT = register("item.armor.equip_beast_pelt");

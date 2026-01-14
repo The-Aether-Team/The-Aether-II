@@ -1505,7 +1505,7 @@
     ],
     "subtitle": "subtitles.aether_ii.item.armor.equip_zanite"
   },
-  "item.music_disc.aerwhale": {
+  "item.compact_disc.aerwhale": {
     "sounds": [
       {
         "name": "aether_ii:item/records/aerwhale",
@@ -1513,7 +1513,7 @@
       }
     ]
   },
-  "item.music_disc.aether_tune": {
+  "item.compact_disc.aether_tune": {
     "sounds": [
       {
         "name": "aether_ii:item/records/aether_tune",
@@ -1521,7 +1521,7 @@
       }
     ]
   },
-  "item.music_disc.approaches": {
+  "item.compact_disc.approaches": {
     "sounds": [
       {
         "name": "aether_ii:item/records/approaches",
@@ -1529,7 +1529,7 @@
       }
     ]
   },
-  "item.music_disc.ascending_dawn": {
+  "item.compact_disc.ascending_dawn": {
     "sounds": [
       {
         "name": "aether_ii:item/records/ascending_dawn",
@@ -1537,7 +1537,7 @@
       }
     ]
   },
-  "item.music_disc.chinchilla": {
+  "item.compact_disc.chinchilla": {
     "sounds": [
       {
         "name": "aether_ii:item/records/chinchilla",
@@ -1545,7 +1545,7 @@
       }
     ]
   },
-  "item.music_disc.demise": {
+  "item.compact_disc.demise": {
     "sounds": [
       {
         "name": "aether_ii:item/records/demise",
@@ -1553,7 +1553,7 @@
       }
     ]
   },
-  "item.music_disc.high": {
+  "item.compact_disc.high": {
     "sounds": [
       {
         "name": "aether_ii:item/records/high",
@@ -1561,7 +1561,7 @@
       }
     ]
   },
-  "item.music_disc.recording_892": {
+  "item.compact_disc.recording_892": {
     "sounds": [
       {
         "name": "aether_ii:item/records/chase",
@@ -1569,7 +1569,7 @@
       }
     ]
   },
-  "item.music_disc.revolutions": {
+  "item.compact_disc.revolutions": {
     "sounds": [
       {
         "name": "aether_ii:item/records/revolutions",

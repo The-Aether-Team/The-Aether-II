@@ -328,15 +328,15 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ARKENIUM_HESTVEIL_CANISTER = register("arkenium_hestveil_canister", (properties) -> new SolidCanisterItem(AetherIIBlocks.HESTVEIL.get(), SoundEvents.BUCKET_EMPTY_POWDER_SNOW, properties.stacksTo(1).craftRemainder(ARKENIUM_CANISTER.get()))); //todo
 
     // Music Discs
-    public static final DeferredItem<Item> MUSIC_DISC_AETHER_TUNE = register("music_disc_aether_tune", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.AETHER_TUNE));
-    public static final DeferredItem<Item> MUSIC_DISC_ASCENDING_DAWN = register("music_disc_ascending_dawn", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.ASCENDING_DAWN));
-    public static final DeferredItem<Item> MUSIC_DISC_AERWHALE = register("music_disc_aerwhale", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.AERWHALE));
-    public static final DeferredItem<Item> MUSIC_DISC_APPROACHES = register("music_disc_approaches", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.APPROACHES));
-    public static final DeferredItem<Item> MUSIC_DISC_DEMISE = register("music_disc_demise", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.DEMISE));
-    public static final DeferredItem<Item> MUSIC_DISC_CHINCHILLA = register("music_disc_chinchilla", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.CHINCHILLA));
-    public static final DeferredItem<Item> MUSIC_DISC_HIGH = register("music_disc_high", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.HIGH));
-    public static final DeferredItem<Item> MUSIC_DISC_REVOLUTIONS = register("music_disc_revolutions", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.REVOLUTIONS));
-    public static final DeferredItem<Item> RECORDING_892 = register("recording_892", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.RECORDING_892));
+    public static final DeferredItem<Item> COMPACT_DISC_AETHER_TUNE = register("compact_disc_aether_tune", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.AETHER_TUNE));
+    public static final DeferredItem<Item> COMPACT_DISC_ASCENDING_DAWN = register("compact_disc_ascending_dawn", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.ASCENDING_DAWN));
+    public static final DeferredItem<Item> COMPACT_DISC_AERWHALE = register("compact_disc_aerwhale", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.AERWHALE));
+    public static final DeferredItem<Item> COMPACT_DISC_APPROACHES = register("compact_disc_approaches", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.APPROACHES));
+    public static final DeferredItem<Item> COMPACT_DISC_DEMISE = register("compact_disc_demise", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.DEMISE));
+    public static final DeferredItem<Item> COMPACT_DISC_CHINCHILLA = register("compact_disc_chinchilla", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.CHINCHILLA));
+    public static final DeferredItem<Item> COMPACT_DISC_HIGH = register("compact_disc_high", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.HIGH));
+    public static final DeferredItem<Item> COMPACT_DISC_REVOLUTIONS = register("compact_disc_revolutions", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.REVOLUTIONS));
+    public static final DeferredItem<Item> COMPACT_DISC_CHASE = register("compact_disc_chase", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.CHASE));
 
     // Spawn Eggs
     public static final DeferredItem<SpawnEggItem> FLYING_COW_SPAWN_EGG = register("flying_cow_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.FLYING_COW.get(), properties));

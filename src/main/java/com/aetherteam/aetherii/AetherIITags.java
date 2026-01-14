@@ -139,6 +139,8 @@ public class AetherIITags {
         public static final TagKey<Item> DENSE_GUARDIAN_LOGS = tag("dense_guardian_logs");
         public static final TagKey<Item> DENSE_GUARDIAN_BLOCKS = tag("dense_guardian_blocks");
 
+        public static final TagKey<Item> COMPACT_DISCS = tag("compact_discs");
+
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");
         public static final TagKey<Item> PLATES_ARKENIUM = tag("plates/arkenium");

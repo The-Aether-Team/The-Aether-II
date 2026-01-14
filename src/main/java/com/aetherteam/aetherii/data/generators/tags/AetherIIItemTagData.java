@@ -4,9 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIIBlockItemTagProvider;
-import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -39,6 +37,16 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         }.run();
 
         // Aether
+        this.tag(AetherIITags.Items.COMPACT_DISCS).add(
+                AetherIIItems.COMPACT_DISC_AETHER_TUNE.get(),
+                AetherIIItems.COMPACT_DISC_ASCENDING_DAWN.get(),
+                AetherIIItems.COMPACT_DISC_AERWHALE.get(),
+                AetherIIItems.COMPACT_DISC_APPROACHES.get(),
+                AetherIIItems.COMPACT_DISC_DEMISE.get(),
+                AetherIIItems.COMPACT_DISC_CHINCHILLA.get(),
+                AetherIIItems.COMPACT_DISC_HIGH.get(),
+                AetherIIItems.COMPACT_DISC_REVOLUTIONS.get(),
+                AetherIIItems.COMPACT_DISC_CHASE.get());
         this.tag(AetherIITags.Items.RODS_SKYROOT).add(AetherIIItems.SKYROOT_STICK.get());
         this.tag(AetherIITags.Items.GEMS_ZANITE).add(AetherIIItems.ZANITE_GEMSTONE.get());
         this.tag(AetherIITags.Items.PLATES_ARKENIUM).add(AetherIIItems.ARKENIUM_PLATES.get());
@@ -646,17 +654,6 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.SKYROOT_HANGING_SIGN.asItem(),
                 AetherIIBlocks.GREATROOT_HANGING_SIGN.asItem(),
                 AetherIIBlocks.WISPROOT_HANGING_SIGN.asItem()
-        );
-        this.tag(Tags.Items.MUSIC_DISCS).add(
-                AetherIIItems.MUSIC_DISC_AETHER_TUNE.get(),
-                AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get(),
-                AetherIIItems.MUSIC_DISC_AERWHALE.get(),
-                AetherIIItems.MUSIC_DISC_APPROACHES.get(),
-                AetherIIItems.MUSIC_DISC_DEMISE.get(),
-                AetherIIItems.MUSIC_DISC_CHINCHILLA.get(),
-                AetherIIItems.MUSIC_DISC_HIGH.get(),
-                AetherIIItems.MUSIC_DISC_REVOLUTIONS.get(),
-                AetherIIItems.RECORDING_892.get()
         );
         this.tag(ItemTags.BEACON_PAYMENT_ITEMS).add(
                 AetherIIItems.ZANITE_GEMSTONE.get(),

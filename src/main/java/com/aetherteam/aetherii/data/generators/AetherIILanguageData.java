@@ -1035,14 +1035,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Music Discs
         this.addItem(AetherIIItems.MUSIC_PLAYER, "Music Player");
-        this.addItem(AetherIIItems.MUSIC_DISC_AETHER_TUNE, "Blue Music Disc");
-        this.addItem(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN, "Valkyrie Music Disc");
-        this.addItem(AetherIIItems.MUSIC_DISC_AERWHALE, "Aerwhale Music Disc");
-        this.addItem(AetherIIItems.MUSIC_DISC_APPROACHES, "Moa Music Disc");
-        this.addItem(AetherIIItems.MUSIC_DISC_DEMISE, "Labyrinth Music Disc");
-        this.addItem(AetherIIItems.MUSIC_DISC_CHINCHILLA, "Sepia Music Disc");
-        this.addItem(AetherIIItems.MUSIC_DISC_HIGH, "Super Music Disc");
-        this.addItem(AetherIIItems.RECORDING_892, "Recording #892");
+        this.addItem(AetherIIItems.COMPACT_DISC_AETHER_TUNE, "Compact Disc");
+        this.addItem(AetherIIItems.COMPACT_DISC_ASCENDING_DAWN, "Compact Disc");
+        this.addItem(AetherIIItems.COMPACT_DISC_AERWHALE, "Compact Disc");
+        this.addItem(AetherIIItems.COMPACT_DISC_APPROACHES, "Compact Disc");
+        this.addItem(AetherIIItems.COMPACT_DISC_DEMISE, "Compact Disc");
+        this.addItem(AetherIIItems.COMPACT_DISC_CHINCHILLA, "Compact Disc");
+        this.addItem(AetherIIItems.COMPACT_DISC_HIGH, "Compact Disc");
+        this.addItem(AetherIIItems.COMPACT_DISC_REVOLUTIONS, "Compact Disc");
+        this.addItem(AetherIIItems.COMPACT_DISC_CHASE, "Compact Disc");
 
         // Spawn Eggs
         this.addSpawnEggItem(AetherIIItems.AERBUNNY_SPAWN_EGG);
