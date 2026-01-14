@@ -128,6 +128,7 @@ public class AbilityBehaviorAttachment {
     private void resetGlideCheck(Player player) {
         if (player.onGround()) {
             if (!this.getCanRefuelGlide()) {
+                this.setGlidingTimer(-1);
                 this.setCanRefuelGlide(true);
                 for (Iterator<Map.Entry<Holder<Item>, Boolean>> iterator = this.getCanRefuelAbilities().entrySet().iterator(); iterator.hasNext(); ) {
                     Map.Entry<Holder<Item>, Boolean> entry = iterator.next();

@@ -113,11 +113,11 @@ public class AercloudGliderItem extends Item implements ToggleItem {
                 }
             }
             if (reset) {
+                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(-1);
                 if (player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().containsKey(stack.getItemHolder()) && !player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().get(stack.getItemHolder())) {
                     player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().put(stack.getItemHolder(), true);
                 }
             }
-            player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(-1);
         }
         super.onStopUsing(stack, entity, count);
     }
