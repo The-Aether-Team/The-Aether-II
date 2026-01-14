@@ -1748,6 +1748,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .add(AetherIIItems.MUSIC_DISC_DEMISE.toStack(), 1)
                 .add(AetherIIItems.MUSIC_DISC_CHINCHILLA.toStack(), 1)
                 .add(AetherIIItems.MUSIC_DISC_HIGH.toStack(), 1)
+                .add(AetherIIItems.MUSIC_DISC_REVOLUTIONS.toStack(), 1)
                 .add(AetherIIItems.RECORDING_892.toStack(), 1)
                 .build(), AetherIIItems.IRRADIATED_CHUNK, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 1, this.output);
 

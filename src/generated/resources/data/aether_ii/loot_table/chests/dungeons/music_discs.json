@@ -34,6 +34,10 @@
         },
         {
           "type": "minecraft:item",
+          "name": "aether_ii:music_disc_revolutions"
+        },
+        {
+          "type": "minecraft:item",
           "name": "aether_ii:recording_892"
         }
       ],

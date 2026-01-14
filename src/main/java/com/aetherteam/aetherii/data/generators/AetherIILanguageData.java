@@ -1607,6 +1607,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addJukeboxSong("demise", "Moorziey - Demise");
         this.addJukeboxSong("chinchilla", "RENREN - chinchilla");
         this.addJukeboxSong("high", "RENREN - high");
+        this.addJukeboxSong("revolutions", "sunsette - revolutions");
         this.addJukeboxSong("recording_892", "Emile van Krieken - ???");
     }
 

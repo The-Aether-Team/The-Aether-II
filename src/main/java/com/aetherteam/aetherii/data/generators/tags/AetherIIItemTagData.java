@@ -655,6 +655,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.MUSIC_DISC_DEMISE.get(),
                 AetherIIItems.MUSIC_DISC_CHINCHILLA.get(),
                 AetherIIItems.MUSIC_DISC_HIGH.get(),
+                AetherIIItems.MUSIC_DISC_REVOLUTIONS.get(),
                 AetherIIItems.RECORDING_892.get()
         );
         this.tag(ItemTags.BEACON_PAYMENT_ITEMS).add(

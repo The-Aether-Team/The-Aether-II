@@ -250,6 +250,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateMusicDisc(AetherIIItems.MUSIC_DISC_DEMISE.get());
         this.generateMusicDisc(AetherIIItems.MUSIC_DISC_CHINCHILLA.get());
         this.generateMusicDisc(AetherIIItems.MUSIC_DISC_HIGH.get());
+        this.generateMusicDisc(AetherIIItems.MUSIC_DISC_REVOLUTIONS.get());
         this.generateMusicDisc(AetherIIItems.RECORDING_892.get());
 
         // Spawn Eggs

@@ -130,6 +130,13 @@
     {
       "data": {
         "count": 1,
+        "id": "aether_ii:music_disc_revolutions"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
         "id": "aether_ii:recording_892"
       },
       "weight": 1

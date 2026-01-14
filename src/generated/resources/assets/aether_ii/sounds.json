@@ -1569,6 +1569,14 @@
       }
     ]
   },
+  "item.music_disc.revolutions": {
+    "sounds": [
+      {
+        "name": "aether_ii:item/records/revolutions",
+        "stream": true
+      }
+    ]
+  },
   "item.scatterglass_vial.empty": {
     "sounds": [
       "item/bottle/empty1",

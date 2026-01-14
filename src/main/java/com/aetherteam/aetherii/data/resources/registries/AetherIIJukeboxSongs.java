@@ -20,6 +20,7 @@ public class AetherIIJukeboxSongs {
     public static ResourceKey<JukeboxSong> DEMISE = create("demise");
     public static ResourceKey<JukeboxSong> CHINCHILLA = create("chinchilla");
     public static ResourceKey<JukeboxSong> HIGH = create("high");
+    public static ResourceKey<JukeboxSong> REVOLUTIONS = create("revolutions");
     public static ResourceKey<JukeboxSong> RECORDING_892 = create("recording_892");
 
     private static ResourceKey<JukeboxSong> create(String pName) {
@@ -34,7 +35,8 @@ public class AetherIIJukeboxSongs {
         register(context, DEMISE, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_MUSIC_DISC_DEMISE.getDelegate(), 300, 5);
         register(context, CHINCHILLA, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_MUSIC_DISC_CHINCHILLA.getDelegate(), 163, 6);
         register(context, HIGH, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_MUSIC_DISC_HIGH.getDelegate(), 186, 7);
-        register(context, RECORDING_892, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_RECORDING_892.getDelegate(), 97, 8);
+        register(context, REVOLUTIONS, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_MUSIC_DISC_REVOLUTIONS.getDelegate(), 221, 8);
+        register(context, RECORDING_892, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_RECORDING_892.getDelegate(), 97, 9);
     }
 
     private static void register(BootstrapContext<JukeboxSong> context, ResourceKey<JukeboxSong> key, Holder.Reference<SoundEvent> soundEvent, int lengthInSeconds, int comparatorOutput) {

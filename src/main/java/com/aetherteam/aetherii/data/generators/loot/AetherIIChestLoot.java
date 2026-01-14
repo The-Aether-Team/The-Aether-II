@@ -128,6 +128,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.MUSIC_DISC_DEMISE))
                         .add(LootItem.lootTableItem(AetherIIItems.MUSIC_DISC_CHINCHILLA))
                         .add(LootItem.lootTableItem(AetherIIItems.MUSIC_DISC_HIGH))
+                        .add(LootItem.lootTableItem(AetherIIItems.MUSIC_DISC_REVOLUTIONS))
                         .add(LootItem.lootTableItem(AetherIIItems.RECORDING_892))
                 )
         );
