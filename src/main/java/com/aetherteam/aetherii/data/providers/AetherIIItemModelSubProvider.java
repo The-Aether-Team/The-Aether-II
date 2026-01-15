@@ -1,8 +1,5 @@
 package com.aetherteam.aetherii.data.providers;
 
-import java.util.List;
-import java.util.function.BiConsumer;
-
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.item.color.EffectBuildupColorSource;
 import com.aetherteam.aetherii.client.renderer.item.model.EmissiveModel;
@@ -19,16 +16,13 @@ import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMap
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureSlots;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
-
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.client.color.item.Dye;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.model.*;
-import net.minecraft.client.renderer.item.BundleSelectedItemSpecialRenderer;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
-import net.minecraft.client.renderer.item.properties.conditional.BundleHasSelectedItem;
 import net.minecraft.client.renderer.item.properties.conditional.CustomModelDataProperty;
 import net.minecraft.client.renderer.item.properties.conditional.HasComponent;
 import net.minecraft.client.renderer.item.properties.select.Charge;
@@ -38,6 +32,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
+
+import java.util.List;
+import java.util.function.BiConsumer;
 
 public class AetherIIItemModelSubProvider extends ItemModelGenerators {
     public AetherIIItemModelSubProvider(ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {

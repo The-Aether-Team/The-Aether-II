@@ -18,6 +18,9 @@
     "aether_ii:arkenium_hestveil_canister": {
       "burn_time": 5000
     },
+    "aether_ii:greatroot_bookshelf": {
+      "burn_time": 300
+    },
     "aether_ii:greatroot_planks": {
       "burn_time": 300
     },
@@ -62,6 +65,9 @@
     },
     "aether_ii:skyroot_twig": {
       "burn_time": 200
+    },
+    "aether_ii:wisproot_bookshelf": {
+      "burn_time": 300
     },
     "aether_ii:wisproot_planks": {
       "burn_time": 300

@@ -1,17 +1,10 @@
 package com.aetherteam.aetherii.data.generators.loot;
 
-import java.util.Set;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.dungeon.MuralBlock;
 import com.aetherteam.aetherii.data.providers.AetherIIBlockLootSubProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.BlockLootAccessor;
-
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -26,9 +19,12 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+
+import java.util.Set;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
     private static final Set<Item> EXPLOSION_RESISTANT = Set.of();
@@ -667,7 +663,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.ZANITE_BLOCK.get());
         this.dropSelf(AetherIIBlocks.ARKENIUM_BLOCK.get());
         this.dropSelf(AetherIIBlocks.GRAVITITE_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.GLINT_BLOCK.get());
         this.dropSelf(AetherIIBlocks.CORROBONITE_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.GOLDEN_AMBER_BLOCK.get());
 
         // Arilum Lantern
         this.dropSelf(AetherIIBlocks.WHITE_ARILUM_LANTERN.get());
@@ -743,8 +741,12 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropOther(AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
 
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_LEVER.get());
+
         // Bookshelves
         this.add(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
+        this.add(AetherIIBlocks.GREATROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
+        this.add(AetherIIBlocks.WISPROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
         this.add(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
 
         // Furniture

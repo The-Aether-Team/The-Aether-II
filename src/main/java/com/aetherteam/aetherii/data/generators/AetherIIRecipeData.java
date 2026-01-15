@@ -1,8 +1,5 @@
 package com.aetherteam.aetherii.data.generators;
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
@@ -11,7 +8,6 @@ import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
@@ -28,6 +24,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
+
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class AetherIIRecipeData extends AetherIIRecipeProvider {
     public AetherIIRecipeData(RecipeOutput output, HolderLookup.Provider provider) {
@@ -979,7 +978,9 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.ZANITE_GEMSTONE.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.ZANITE_BLOCK, "zanite_gemstone_from_zanite_block", "zanite_gemstone");
         this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATES.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.ARKENIUM_BLOCK, "arkenium_plates_from_arkenium_block", "arkenium_plates");
         this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GRAVITITE_BLOCK, "gravitite_plate_from_gravitite_block", "gravitite_plate");
+        this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.GLINT_GEMSTONE.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GLINT_BLOCK, "glint_gemstone_from_glint_block", "glint_gemstone");
         this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.CORROBONITE_CRYSTAL.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.CORROBONITE_BLOCK, "corrobonite_crystal_from_corrobonite_block", "corrobonite_crystal");
+        this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.GOLDEN_AMBER.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GOLDEN_AMBER_BLOCK, "golden_amber_from_golden_amber_block", "golden_amber");
 
         // Farming Blocks
         this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.BRETTL_GRASS.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.BRETTL_GRASS_BUNDLE, "brettl_grass", "brettl_grass");
@@ -1143,6 +1144,13 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .unlockedBy(getHasName(Blocks.JUKEBOX), has(AetherIITags.Items.PLANKS_CRAFTING))
                 .save(this.output, this.name("jukebox_from_gravitite_plate"));
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.REDSTONE, AetherIIBlocks.HOLYSTONE_LEVER)
+                .define('#', AetherIIBlocks.HOLYSTONE)
+                .define('X', AetherIITags.Items.RODS_SKYROOT)
+                .pattern("X")
+                .pattern("#")
+                .unlockedBy("has_holystone", this.has(AetherIIBlocks.HOLYSTONE))
+                .save(this.output);
 
         // Skyroot Beds
         this.bookshelf(getter, AetherIIBlocks.SKYROOT_BED, AetherIIBlocks.CLOUDWOOL);
@@ -1165,6 +1173,8 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         // Bookshelves
         this.bookshelf(getter, AetherIIBlocks.SKYROOT_BOOKSHELF, AetherIIBlocks.SKYROOT_PLANKS);
+        this.bookshelf(getter, AetherIIBlocks.GREATROOT_BOOKSHELF, AetherIIBlocks.GREATROOT_PLANKS);
+        this.bookshelf(getter, AetherIIBlocks.WISPROOT_BOOKSHELF, AetherIIBlocks.WISPROOT_PLANKS);
         this.bookshelf(getter, AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), AetherIIBlocks.HOLYSTONE_BRICKS);
 
         // Items

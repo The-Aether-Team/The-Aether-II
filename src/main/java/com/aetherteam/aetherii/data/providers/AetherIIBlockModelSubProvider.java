@@ -1150,6 +1150,27 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.itemModelOutput.accept(item, ItemModelUtils.specialModel(inventoryLocation, new BedSpecialRenderer.Unbaked(location)));
     }
 
+    public void createLever(Block block) {
+        MultiVariant lever = plainVariant(ModelLocationUtils.getModelLocation(block));
+        MultiVariant leverOn = plainVariant(ModelLocationUtils.getModelLocation(block, "_on"));
+        this.registerSimpleFlatItemModel(block);
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+                .with(createBooleanModelDispatch(BlockStateProperties.POWERED, lever, leverOn))
+                .with(PropertyDispatch.modify(BlockStateProperties.ATTACH_FACE, BlockStateProperties.HORIZONTAL_FACING)
+                        .select(AttachFace.CEILING, Direction.NORTH, X_ROT_180.then(Y_ROT_180))
+                        .select(AttachFace.CEILING, Direction.EAST, X_ROT_180.then(Y_ROT_270))
+                        .select(AttachFace.CEILING, Direction.SOUTH, X_ROT_180)
+                        .select(AttachFace.CEILING, Direction.WEST, X_ROT_180.then(Y_ROT_90))
+                        .select(AttachFace.FLOOR, Direction.NORTH, NOP)
+                        .select(AttachFace.FLOOR, Direction.EAST, Y_ROT_90)
+                        .select(AttachFace.FLOOR, Direction.SOUTH, Y_ROT_180)
+                        .select(AttachFace.FLOOR, Direction.WEST, Y_ROT_270)
+                        .select(AttachFace.WALL, Direction.NORTH, X_ROT_90)
+                        .select(AttachFace.WALL, Direction.EAST, X_ROT_90.then(Y_ROT_90))
+                        .select(AttachFace.WALL, Direction.SOUTH, X_ROT_90.then(Y_ROT_180))
+                        .select(AttachFace.WALL, Direction.WEST, X_ROT_90.then(Y_ROT_270))));
+    }
+
     public void createArilumLantern(Block block) {
         MultiVariant lantern = plainVariant(AetherIIModelTemplates.ARILUM_LANTERN.create(block, TextureMapping.cube(block).put(TextureSlot.INSIDE, TextureMapping.getBlockTexture(block, "_inside")), this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, lantern));

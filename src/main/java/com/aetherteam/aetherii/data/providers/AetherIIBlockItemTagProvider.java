@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.data.tags.TagAppender;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;

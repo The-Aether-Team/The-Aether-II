@@ -30,13 +30,13 @@ public class AetherIIDataAttachments {
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<DamageSystemAttachment>> DAMAGE_SYSTEM = ATTACHMENTS.register("damage_system", () -> AttachmentType.serializable(DamageSystemAttachment::new).sync(new AttachmentSyncHandler<>() {
         @Override
         public void write(RegistryFriendlyByteBuf registryFriendlyByteBuf, DamageSystemAttachment damageSystemAttachment, boolean b) {
-            registryFriendlyByteBuf.writeInt(damageSystemAttachment.getShieldStamina());
+            registryFriendlyByteBuf.writeDouble(damageSystemAttachment.getShieldEndurance());
         }
 
         @Override
         public @Nullable DamageSystemAttachment read(IAttachmentHolder iAttachmentHolder, RegistryFriendlyByteBuf registryFriendlyByteBuf, @Nullable DamageSystemAttachment damageSystemAttachment) {
             DamageSystemAttachment attachment = damageSystemAttachment != null ? damageSystemAttachment : new DamageSystemAttachment();
-            attachment.setShieldStamina(registryFriendlyByteBuf.readInt());
+            attachment.setShieldEndurance(registryFriendlyByteBuf.readDouble());
             return attachment;
         }
     }).build());

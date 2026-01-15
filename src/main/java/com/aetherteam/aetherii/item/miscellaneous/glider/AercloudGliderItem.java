@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.AbilityBehaviorAttachment;
 import com.aetherteam.aetherii.client.AetherIIClientProxy;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.miscellaneous.ToggleItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.InteractionHand;
@@ -20,8 +21,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class AercloudGliderItem extends Item implements ToggleItem {
-    public static final int GLIDING_MAX = 500;
-
     public AercloudGliderItem(Properties properties) {
         super(properties);
     }
@@ -29,6 +28,9 @@ public class AercloudGliderItem extends Item implements ToggleItem {
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
+        if (player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getGlidingTimer() < 0) {
+            player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(this.getUseDuration(stack, player));
+        }
         if (!player.onGround() && player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getGlidingTimer() > 0) {
             player.startUsingItem(hand);
             this.onParachuteOpen(level, player, hand, stack);
@@ -45,6 +47,7 @@ public class AercloudGliderItem extends Item implements ToggleItem {
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingTicks) {
         if (entity instanceof Player player) {
             int timer = player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getGlidingTimer();
+
             if (level.isClientSide()) {
                 float x = entity.xxa * 0.5F; // Side-to-side movement is slowed.
                 float z = entity.zza; // Forward movement is normal.
@@ -78,6 +81,10 @@ public class AercloudGliderItem extends Item implements ToggleItem {
             } else {
                 player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(Math.max(timer - 1, 0));
             }
+
+            if (timer > this.getUseDuration(stack, entity)) {
+                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(this.getUseDuration(stack, entity));
+            }
         }
         super.onUseTick(level, entity, stack, remainingTicks);
     }
@@ -106,7 +113,7 @@ public class AercloudGliderItem extends Item implements ToggleItem {
                 }
             }
             if (reset) {
-                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(GLIDING_MAX);
+                player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGlidingTimer(-1);
                 if (player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().containsKey(stack.getItemHolder()) && !player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().get(stack.getItemHolder())) {
                     player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().put(stack.getItemHolder(), true);
                 }
@@ -117,7 +124,7 @@ public class AercloudGliderItem extends Item implements ToggleItem {
 
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
-        return GLIDING_MAX;
+        return AetherIIAttributes.getMaxEndurance(entity) * 5;
     }
 
     @Override
@@ -138,7 +145,7 @@ public class AercloudGliderItem extends Item implements ToggleItem {
         if (this.isGliding()) {
             AbilityBehaviorAttachment data = AetherIIClientProxy.getClientPlayerData(AetherIIDataAttachments.ABILITY_BEHAVIOR);
             if (data != null) {
-                return Math.round((float) data.getGlidingTimer() * 13.0F / (float) AercloudGliderItem.GLIDING_MAX);
+                return Math.round((float) data.getGlidingTimer() * 13.0F / this.getUseDuration(stack, AetherIIClientProxy.getClientPlayer()));
             }
         }
         return super.getBarWidth(stack);
@@ -156,13 +163,13 @@ public class AercloudGliderItem extends Item implements ToggleItem {
         Player player = AetherIIClientProxy.getClientPlayer();
         if (player != null && player.getUseItem().getItem() instanceof AercloudGliderItem) {
             int progress = player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getGlidingTimer();
-            return progress > 0 && progress < AercloudGliderItem.GLIDING_MAX;
+            return progress > 0 && progress < this.getUseDuration(player.getUseItem(), player);
         }
         return false;
     }
 
     private void setCooldowns(Player player, int cooldown) {
-        player.level().registryAccess().lookupOrThrow(Registries.ITEM).getTagOrEmpty(AetherIITags.Items.TOOLS_GLIDERS).forEach((item) -> player.getCooldowns().addCooldown(item.value().getDefaultInstance(), cooldown)); //todo
+        player.level().registryAccess().lookupOrThrow(Registries.ITEM).getTagOrEmpty(AetherIITags.Items.TOOLS_GLIDERS).forEach((item) -> player.getCooldowns().addCooldown(item.value().getDefaultInstance(), cooldown));
     }
 
     protected void onParachuteOpen(Level level, Player player, InteractionHand hand, ItemStack stack) {

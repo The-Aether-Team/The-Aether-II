@@ -2,25 +2,40 @@ package com.aetherteam.aetherii.item.equipment.weapons;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
+import com.aetherteam.aetherii.integration.AccessoryUtil;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.BlocksAttacks;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.component.TooltipDisplay;
+import net.neoforged.neoforge.common.util.AttributeTooltipContext;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public class TieredShieldItem extends ShieldItem {
-    public static final ResourceLocation BASE_SHIELD_STAMINA_REDUCTION_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_shield_stamina_reduction");
+    public static final ResourceLocation BASE_SHIELD_BLOCKING_STRENGTH_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_shield_blocking_strength");
 
-    public TieredShieldItem(ToolMaterial tier, Properties properties) {
+    private final double strength;
+
+    public TieredShieldItem(ToolMaterial tier, double strength, Properties properties) {
         super(properties.durability(tier.durability()).repairable(tier.repairItems()).enchantable(tier.enchantmentValue()).equippableUnswappable(EquipmentSlot.OFFHAND)
                 .component(
                         DataComponents.BLOCKS_ATTACKS,
@@ -35,15 +50,36 @@ public class TieredShieldItem extends ShieldItem {
                         )
                 )
                 .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK));
+        this.strength = strength;
     }
 
-    public static ItemAttributeModifiers createAttributes(int staminaReductionRate) {
-        return createAttributes((float) staminaReductionRate);
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = Multimaps.forMap(Map.of(
+                AetherIIAttributes.BLOCKING_STRENGTH, new AttributeModifier(BASE_SHIELD_BLOCKING_STRENGTH_ID, this.getStrength(), AttributeModifier.Operation.ADD_VALUE)
+        ));
+        AccessoryUtil.addAttributeTooltips(stack, tooltipComponents, AttributeTooltipContext.of(null, context, tooltipDisplay, tooltipFlag), modifiers, "blocking");
+        super.appendHoverText(stack, context, tooltipDisplay, tooltipComponents, tooltipFlag);
     }
 
-    public static ItemAttributeModifiers createAttributes(float staminaReductionRate) {
-        return ItemAttributeModifiers.builder()
-                .add(AetherIIAttributes.SHIELD_STAMINA_REDUCTION, new AttributeModifier(BASE_SHIELD_STAMINA_REDUCTION_ID, staminaReductionRate, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HAND)
-                .build();
+    public double getStrength() {
+        return this.strength;
+    }
+
+    public static void updatePlayerAttributes(EntityTickEvent.Pre event) {
+        if (event.getEntity() instanceof LivingEntity livingEntity) {
+            AttributeInstance blockingStrength = livingEntity.getAttribute(AetherIIAttributes.BLOCKING_STRENGTH);
+
+            ItemStack useItem = livingEntity.getUseItem();
+            if (livingEntity.isBlocking() && useItem.getItem() instanceof TieredShieldItem tieredShieldItem) {
+                if (blockingStrength != null && !blockingStrength.hasModifier(BASE_SHIELD_BLOCKING_STRENGTH_ID)) {
+                    blockingStrength.addTransientModifier(new AttributeModifier(BASE_SHIELD_BLOCKING_STRENGTH_ID, tieredShieldItem.getStrength(), AttributeModifier.Operation.ADD_VALUE));
+                }
+            } else {
+                if (blockingStrength != null && blockingStrength.hasModifier(BASE_SHIELD_BLOCKING_STRENGTH_ID)) {
+                    blockingStrength.removeModifier(BASE_SHIELD_BLOCKING_STRENGTH_ID);
+                }
+            }
+        }
     }
 }

@@ -1,13 +1,10 @@
 package com.aetherteam.aetherii.data.generators.loot;
 
-import java.util.function.BiConsumer;
-
 import com.aetherteam.aetherii.advancement.predicate.SheepuffPredicate;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import com.aetherteam.aetherii.loot.AetherIILoot;
-
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.LootTableSubProvider;
@@ -18,6 +15,8 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+
+import java.util.function.BiConsumer;
 
 public class AetherIIShearingLoot implements LootTableSubProvider {
     protected final HolderLookup.Provider registries;
