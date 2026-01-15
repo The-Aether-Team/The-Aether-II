@@ -136,14 +136,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE, "Holystone Quartz Ore");
         this.addBlock(AetherIIBlocks.AMBROSIUM_ORE, "Ambrosium Ore");
         this.addBlock(AetherIIBlocks.ZANITE_ORE, "Zanite Ore");
-        this.addBlock(AetherIIBlocks.GLINT_ORE, "Glint Ore");
         this.addBlock(AetherIIBlocks.ARKENIUM_ORE, "Arkenium Ore");
         this.addBlock(AetherIIBlocks.GRAVITITE_ORE, "Gravitite Ore");
+        this.addBlock(AetherIIBlocks.GLINT_ORE, "Glint Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE, "Undershale Ambrosium Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_ZANITE_ORE, "Undershale Zanite Ore");
-        this.addBlock(AetherIIBlocks.UNDERSHALE_GLINT_ORE, "Undershale Glint Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE, "Undershale Arkenium Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE, "Undershale Gravitite Ore");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_GLINT_ORE, "Undershale Glint Ore");
         this.addBlock(AetherIIBlocks.CORROBONITE_ORE, "Corrobonite Ore");
         this.addBlock(AetherIIBlocks.CORROBONITE_CLUSTER, "Corrobonite Cluster");
 
@@ -684,6 +684,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARKENIUM_BLOCK, "Block of Arkenium");
         this.addBlock(AetherIIBlocks.GRAVITITE_BLOCK, "Block of Gravitite");
         this.addBlock(AetherIIBlocks.CORROBONITE_BLOCK, "Block of Corrobonite");
+        this.addBlock(AetherIIBlocks.GOLDEN_AMBER_BLOCK, "Block of Golden Amber");
+        this.addBlock(AetherIIBlocks.GLINT_BLOCK, "Block of Glint");
 
         // Arilum Lanterns
         this.addBlock(AetherIIBlocks.WHITE_ARILUM_LANTERN, "White Arilum Lantern");
@@ -746,8 +748,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.WISPROOT_SIGN, "Wisproot Sign");
         this.addBlock(AetherIIBlocks.WISPROOT_HANGING_SIGN, "Wisproot Hanging Sign");
 
+        this.addBlock(AetherIIBlocks.HOLYSTONE_LEVER, "Holystone Lever");
+
         // Bookshelves
         this.addBlock(AetherIIBlocks.SKYROOT_BOOKSHELF, "Skyroot Bookshelf");
+        this.addBlock(AetherIIBlocks.GREATROOT_BOOKSHELF, "Greatroot Bookshelf");
+        this.addBlock(AetherIIBlocks.WISPROOT_BOOKSHELF, "Wisproot Bookshelf");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF, "Holystone Bookshelf");
 
         // Furniture

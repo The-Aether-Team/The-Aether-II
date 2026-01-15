@@ -3,12 +3,14 @@
     "aether_ii:glint_ore",
     "aether_ii:arkenium_ore",
     "aether_ii:gravitite_ore",
-    "aether_ii:undershale_glint_ore",
     "aether_ii:undershale_arkenium_ore",
     "aether_ii:undershale_gravitite_ore",
+    "aether_ii:undershale_glint_ore",
     "aether_ii:inert_arkenium_block",
     "aether_ii:inert_gravitite_block",
     "aether_ii:arkenium_block",
-    "aether_ii:gravitite_block"
+    "aether_ii:gravitite_block",
+    "aether_ii:glint_block",
+    "aether_ii:golden_amber_block"
   ]
 }
