@@ -222,6 +222,8 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ZANITE_PENDANT = register("zanite_pendant", ZanitePendantItem::new);
 
     // Charms
+    public static final DeferredItem<Item> CHARM_OF_EFFICIENCY_I = register("charm_of_efficiency_1", (properties) -> new CharmItem(properties, Charms.Type.TOOL, Charms.Tier.ONE, AetherIIStats.CHARM_MINING_EFFICIENCY_BONUS), () -> new Item.Properties().rarity(Rarity.UNCOMMON));
+
     public static final DeferredItem<Item> CHARM_OF_DAMAGE_I = register("charm_of_damage_1", (properties) -> new CharmItem(properties, Charms.Type.WEAPON, Charms.Tier.ONE, AetherIIStats.CHARM_DAMAGE_BONUS), () -> new Item.Properties().rarity(Rarity.UNCOMMON));
     public static final DeferredItem<Item> CHARM_OF_DEXTERITY_I = register("charm_of_dexterity_1", (properties) -> new CharmItem(properties, Charms.Type.WEAPON, Charms.Tier.ONE, AetherIIStats.CHARM_ATTACK_SPEED_BONUS), () -> new Item.Properties().rarity(Rarity.UNCOMMON));
 

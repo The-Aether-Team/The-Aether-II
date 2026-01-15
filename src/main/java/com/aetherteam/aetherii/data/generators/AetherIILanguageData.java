@@ -935,6 +935,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ZANITE_PENDANT, "Zanite Pendant");
 
         // Charms
+        this.addItem(AetherIIItems.CHARM_OF_EFFICIENCY_I, "Charm of Efficiency I");
+
         this.addItem(AetherIIItems.CHARM_OF_DAMAGE_I, "Charm of Damage I");
         this.addItem(AetherIIItems.CHARM_OF_DEXTERITY_I, "Charm of Dexterity I");
 

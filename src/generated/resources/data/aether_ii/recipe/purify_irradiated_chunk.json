@@ -32,6 +32,13 @@
     {
       "data": {
         "count": 1,
+        "id": "aether_ii:charm_of_efficiency_1"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
         "id": "aether_ii:charm_of_damage_1"
       },
       "weight": 1

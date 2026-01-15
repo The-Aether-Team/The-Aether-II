@@ -278,13 +278,14 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_AGILITY_I))
+                        .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_EFFICIENCY_I))
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_DAMAGE_I))
-                        .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_DEFENSE_I))
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_DEXTERITY_I))
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_HEALTH_I))
-                        .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_RESISTANCE_I))
+                        .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_DEFENSE_I))
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_TOUGHNESS_I))
+                        .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_RESISTANCE_I))
+                        .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_AGILITY_I))
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(3.0F, 5.0F))

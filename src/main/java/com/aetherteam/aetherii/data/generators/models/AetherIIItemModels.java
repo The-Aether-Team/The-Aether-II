@@ -138,6 +138,8 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.ZANITE_PENDANT.get(), ModelTemplates.FLAT_ITEM);
 
         // Charms
+        this.generateCharmItem(AetherIIItems.CHARM_OF_EFFICIENCY_I.get(), "tool", "1", "efficiency");
+
         this.generateCharmItem(AetherIIItems.CHARM_OF_DAMAGE_I.get(), "weapon", "1", "damage");
         this.generateCharmItem(AetherIIItems.CHARM_OF_DEXTERITY_I.get(), "weapon", "1", "dexterity");
 

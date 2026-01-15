@@ -858,6 +858,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.CHARGE_CATALYST.get());
                 output.accept(AetherIIItems.ARKENIUM_CORE.get());
                 output.accept(AetherIIItems.GRAVITITE_CORE.get());
+                output.accept(AetherIIItems.CHARM_OF_EFFICIENCY_I.get());
                 output.accept(AetherIIItems.CHARM_OF_DAMAGE_I.get());
                 output.accept(AetherIIItems.CHARM_OF_DEXTERITY_I.get());
                 output.accept(AetherIIItems.CHARM_OF_HEALTH_I.get());

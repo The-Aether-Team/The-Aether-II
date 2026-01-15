@@ -77,6 +77,16 @@
     {
       "type": "paletted_permutations",
       "textures": [
+        "aether_ii:item/tool_charm_runes"
+      ],
+      "palette_key": "aether_ii:item/color_palettes/charm_runes/base_palette",
+      "permutations": {
+        "efficiency": "aether_ii:item/color_palettes/charm_runes/efficiency"
+      }
+    },
+    {
+      "type": "paletted_permutations",
+      "textures": [
         "aether_ii:item/weapon_charm_runes"
       ],
       "palette_key": "aether_ii:item/color_palettes/charm_runes/base_palette",

@@ -37,6 +37,11 @@ public class AetherIIStats {
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_CROSSBOW = List.of(rangedPierceDamageModifer(5.0));
     public static final List<ItemAttributeModifiers.Entry> HAMMER_OF_DEMOLITION = List.of(impactDamageModifer(5.0));
 
+    public static final ItemAttributeModifiers.Entry CHARM_MINING_EFFICIENCY_BONUS = new ItemAttributeModifiers.Entry(
+            Attributes.MINING_EFFICIENCY,
+            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.mining_efficiency"), 2.0, AttributeModifier.Operation.ADD_VALUE),
+            EquipmentSlotGroup.MAINHAND);
+
     public static final ItemAttributeModifiers.Entry CHARM_DAMAGE_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.ATTACK_DAMAGE,
             new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.attack_damage"), 1.0, AttributeModifier.Operation.ADD_VALUE),

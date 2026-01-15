@@ -1744,6 +1744,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .add(AetherIIItems.GRAVITITE_TROWEL.toStack(), 1)
                 .build(), AetherIIItems.IRRADIATED_TOOL, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 1, this.output);
         this.alkahestPurification(RecipeCategory.COMBAT, WeightedList.<ItemStack>builder() //todo
+                .add(AetherIIItems.CHARM_OF_EFFICIENCY_I.toStack(), 1)
                 .add(AetherIIItems.CHARM_OF_DAMAGE_I.toStack(), 1)
                 .add(AetherIIItems.CHARM_OF_DEXTERITY_I.toStack(), 1)
                 .add(AetherIIItems.CHARM_OF_HEALTH_I.toStack(), 1)
