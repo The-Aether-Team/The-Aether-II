@@ -54,6 +54,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         ).addTags(
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS,
                 AetherIITags.Blocks.AERCLOUDS,
+                AetherIITags.Blocks.SENTRY_RUINS_BLOCKS,
                 BlockTags.LEAVES
         );
         this.tag(AetherIITags.Blocks.UNDERSHALE).add(AetherIIBlocks.UNDERSHALE.get());
