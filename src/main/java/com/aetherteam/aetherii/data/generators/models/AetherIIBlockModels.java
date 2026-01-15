@@ -100,14 +100,14 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
         this.createTrivialCube(AetherIIBlocks.AMBROSIUM_ORE.get());
         this.createTrivialCube(AetherIIBlocks.ZANITE_ORE.get());
-        this.createTrivialCube(AetherIIBlocks.GLINT_ORE.get());
         this.createTrivialCube(AetherIIBlocks.ARKENIUM_ORE.get());
         this.createTrivialCube(AetherIIBlocks.GRAVITITE_ORE.get());
+        this.createTrivialCube(AetherIIBlocks.GLINT_ORE.get());
         this.createTrivialCube(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get());
         this.createTrivialCube(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get());
-        this.createTrivialCube(AetherIIBlocks.UNDERSHALE_GLINT_ORE.get());
         this.createTrivialCube(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get());
         this.createTrivialCube(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get());
+        this.createTrivialCube(AetherIIBlocks.UNDERSHALE_GLINT_ORE.get());
         this.createTrivialCube(AetherIIBlocks.CORROBONITE_ORE.get());
         this.createCorroboniteCluster(AetherIIBlocks.CORROBONITE_CLUSTER.get(), AetherIIModelTemplates.MEDIUM_CRYSTAL);
 
@@ -429,7 +429,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.ZANITE_BLOCK.get());
         this.createTrivialCube(AetherIIBlocks.ARKENIUM_BLOCK.get());
         this.createTrivialCube(AetherIIBlocks.GRAVITITE_BLOCK.get());
+        this.createTrivialCube(AetherIIBlocks.GLINT_BLOCK.get());
         this.createTrivialCube(AetherIIBlocks.CORROBONITE_BLOCK.get());
+        this.createTrivialCube(AetherIIBlocks.GOLDEN_AMBER_BLOCK.get());
 
         // Arilum Lantern
         this.createArilumLantern(AetherIIBlocks.WHITE_ARILUM_LANTERN.get());
@@ -487,11 +489,15 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createHangingSign(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get());
         this.createHangingSign(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get());
 
+        this.createLever(AetherIIBlocks.HOLYSTONE_LEVER.get());
+
         // Moa Egg
         this.createMoaEgg(AetherIIBlocks.MOA_EGG.get());
 
         // Bookshelves
         this.createCubeColumn(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), AetherIIBlocks.SKYROOT_PLANKS.get());
+        this.createCubeColumn(AetherIIBlocks.GREATROOT_BOOKSHELF.get(), AetherIIBlocks.GREATROOT_PLANKS.get());
+        this.createCubeColumn(AetherIIBlocks.WISPROOT_BOOKSHELF.get(), AetherIIBlocks.WISPROOT_PLANKS.get());
         this.createCubeColumn(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get());
 
         // Furniture

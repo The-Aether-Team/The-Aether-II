@@ -86,7 +86,7 @@ public class AmberDart extends AbstractArrow {
         Entity entity = result.getEntity();
         if (entity instanceof LivingEntity livingEntity) {
             if (livingEntity.isBlocking()) {
-                livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, this.getOwner());
+                livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, this.getOwner(), 1);
                 if (entity instanceof Player player && player.isBlocking()) {
                     if (!player.getUseItem().isEmpty()) {
                         player.getUseItem().hurtAndBreak(3, player, player.getUsedItemHand());

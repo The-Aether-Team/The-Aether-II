@@ -4,8 +4,10 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
+import net.neoforged.neoforge.common.PercentageAttribute;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -38,8 +40,10 @@ public class AetherIIAttributes {
     public static final DeferredHolder<Attribute, Attribute> STAB_KNOCKBACK = ATTRIBUTES.register("stab_knockback", () -> new RangedAttribute("attributes.aether_ii.stab_knockback", 0.0, 0.0, 1024.0));
     public static final DeferredHolder<Attribute, Attribute> STAB_DAMAGE = ATTRIBUTES.register("stab_damage", () -> new RangedAttribute("attributes.aether_ii.stab_damage", 0.0, 0.0, 1024.0));
 
-    public static final DeferredHolder<Attribute, Attribute> SHIELD_STAMINA_REDUCTION = ATTRIBUTES.register("shield_stamina_reduction", () -> new ScaledPercentageAttribute("attributes.aether_ii.shield_stamina_reduction", 0.0, 0.0, 500.0));
-    public static final DeferredHolder<Attribute, Attribute> SHIELD_COOLDOWN_REDUCTION = ATTRIBUTES.register("shield_cooldown_reduction", () -> new ScaledPercentageAttribute("attributes.aether_ii.shield_cooldown_reduction", 0.0, 0.0, 300.0));
+    public static final DeferredHolder<Attribute, Attribute> MAXIMUM_ENDURANCE = ATTRIBUTES.register("maximum_endurance", () -> new PercentageAttribute("attributes.aether_ii.maximum_endurance", 100.0, 100.0, 1000.0));
+    public static final DeferredHolder<Attribute, Attribute> ENDURANCE_RECOVERY = ATTRIBUTES.register("endurance_recovery", () -> new PercentageAttribute("attributes.aether_ii.endurance_recovery", 0.3, 0.3, 500.0));
+
+    public static final DeferredHolder<Attribute, Attribute> BLOCKING_STRENGTH = ATTRIBUTES.register("blocking_strength", () -> new PercentageAttribute("attributes.aether_ii.blocking_strength", 0.0, 0.0, 1.0));
 
     public static final DeferredHolder<Attribute, Attribute> WOUND_EFFECT_RESISTANCE = ATTRIBUTES.register("wound_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.WOUND, "attributes.aether_ii.wound_effect_resistance", 0.0, -10.0, 10.0));
     public static final DeferredHolder<Attribute, Attribute> STUN_EFFECT_RESISTANCE = ATTRIBUTES.register("stun_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.STUN, "attributes.aether_ii.stun_effect_resistance", 0.0, -10.0, 10.0));
@@ -81,8 +85,9 @@ public class AetherIIAttributes {
         event.add(EntityType.PLAYER, STAB_KNOCKBACK, 0.2);
         event.add(EntityType.PLAYER, STAB_DAMAGE, 2.0);
 
-        event.add(EntityType.PLAYER, SHIELD_STAMINA_REDUCTION, 0.0);
-        event.add(EntityType.PLAYER, SHIELD_COOLDOWN_REDUCTION, 0.0);
+        event.add(EntityType.PLAYER, MAXIMUM_ENDURANCE, 100.0);
+        event.add(EntityType.PLAYER, ENDURANCE_RECOVERY, 0.3);
+        event.add(EntityType.PLAYER, BLOCKING_STRENGTH, 0.0);
 
         event.add(EntityType.PLAYER, WOUND_EFFECT_RESISTANCE, 0.0);
         event.add(EntityType.PLAYER, STUN_EFFECT_RESISTANCE, 0.0);
@@ -98,5 +103,13 @@ public class AetherIIAttributes {
         event.add(EntityType.PLAYER, CRYSTALLIZED_EFFECT_RESISTANCE, 0.0);
 
         event.add(EntityType.PLAYER, SATURATION_BOOST, 1.0);
+    }
+
+    public static int getMaxEndurance(LivingEntity entity) {
+        if (entity.getAttribute(MAXIMUM_ENDURANCE) != null) {
+            return (int) entity.getAttributeValue(MAXIMUM_ENDURANCE);
+        } else {
+            return (int) MAXIMUM_ENDURANCE.get().getDefaultValue();
+        }
     }
 }

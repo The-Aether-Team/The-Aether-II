@@ -32,55 +32,65 @@ import net.neoforged.neoforge.common.util.ValueIOSerializable;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class DamageSystemAttachment implements ValueIOSerializable {
-    public static final int MAX_SHIELD_STAMINA = 500;
     private float criticalDamageModifier = 1.0F;
-    private int shieldStamina = MAX_SHIELD_STAMINA;
+    private double shieldEndurance = 0;
 
     public static final StreamCodec<RegistryFriendlyByteBuf, DamageSystemAttachment> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.INT, DamageSystemAttachment::getShieldStamina,
+            ByteBufCodecs.DOUBLE, DamageSystemAttachment::getShieldEndurance,
             DamageSystemAttachment::new);
 
-    protected DamageSystemAttachment(int shieldStamina) {
-        this.shieldStamina = shieldStamina;
+    protected DamageSystemAttachment(double shieldEndurance) {
+        this.shieldEndurance = shieldEndurance;
     }
 
     public DamageSystemAttachment() { }
 
-    public void postTickUpdate(LivingEntity livingEntity) {
-        if (livingEntity instanceof Player player) {
-            this.restoreShieldStamina(player);
+    public void onJoinLevel(Player player) {
+        DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
+        double maxEndurance = AetherIIAttributes.getMaxEndurance(player);
+        if (attachment.shieldEndurance == 0) {
+            attachment.setShieldEndurance(maxEndurance);
+            player.syncData(AetherIIDataAttachments.DAMAGE_SYSTEM);
         }
     }
 
-    public void restoreShieldStamina(Player player) {
+    public void postTickUpdate(LivingEntity livingEntity) {
+        if (livingEntity instanceof Player player) {
+            this.restoreShieldEndurance(player);
+        }
+    }
+
+    public void restoreShieldEndurance(Player player) {
         if (!player.level().isClientSide()) {
             DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
-            if (player.tickCount % 5 == 0) {
-                if (attachment.getShieldStamina() < DamageSystemAttachment.MAX_SHIELD_STAMINA && attachment.getShieldStamina() > 0) { //todo balance
-                    if (!player.isBlocking()) {
-                        attachment.setShieldStamina(Math.min(500, attachment.getShieldStamina() + 2));
-                        player.syncData(AetherIIDataAttachments.DAMAGE_SYSTEM);
-                    }
-                }
+            double maxEndurance = AetherIIAttributes.getMaxEndurance(player);
+            double recovery = player.getAttributeValue(AetherIIAttributes.ENDURANCE_RECOVERY);
+            if (attachment.getShieldEndurance() < maxEndurance && attachment.getShieldEndurance() > 0 && !player.isBlocking()) {
+                attachment.setShieldEndurance(Math.min(maxEndurance, attachment.getShieldEndurance() + recovery));
+                player.syncData(AetherIIDataAttachments.DAMAGE_SYSTEM);
             }
         }
     }
 
-    public void buildUpShieldStun(LivingEntity entity, Entity source) {
+    public void buildUpShieldStun(LivingEntity entity, Entity source, double damage) {
         if (entity instanceof Player player && player.getUseItem().is(Tags.Items.TOOLS_SHIELD)) {
             if (source != null && source.getType().is(AetherIITags.Entities.AETHER_MOBS)) {
-                int rate = DamageSystemAttachment.MAX_SHIELD_STAMINA / 2;
-                int cooldown;
-                if (entity.getUseItem().getItem() instanceof TieredShieldItem) {
-                    rate = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_STAMINA_REDUCTION);
-                    cooldown = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_COOLDOWN_REDUCTION);
-                } else {
-                    cooldown = 0;
+                double maxEndurance = AetherIIAttributes.getMaxEndurance(player);
+                double endurance = player.getAttributeValue(AetherIIAttributes.BLOCKING_STRENGTH);
+
+                damage *= 10;
+                endurance = damage - (damage * endurance);
+
+                if (!(entity.getUseItem().getItem() instanceof TieredShieldItem)) {
+                    endurance = maxEndurance / 2;
                 }
-                this.setShieldStamina(Math.max(0, this.getShieldStamina() - rate));
-                player.syncData(AetherIIDataAttachments.DAMAGE_SYSTEM);
-                if (this.getShieldStamina() <= 0) {
-                    player.level().registryAccess().lookupOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELD).forEach((item) -> player.getCooldowns().addCooldown(item.value().getDefaultInstance(), 300 - cooldown));
+
+                if (!player.level().isClientSide()) {
+                    this.setShieldEndurance(Math.max(0, this.getShieldEndurance() - endurance));
+                    player.syncData(AetherIIDataAttachments.DAMAGE_SYSTEM);
+                }
+                if (this.getShieldEndurance() <= 0) {
+                    player.level().registryAccess().lookupOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELD).forEach((item) -> player.getCooldowns().addCooldown(item.value().getDefaultInstance(), 300));
                     player.stopUsingItem();
                 }
             }
@@ -169,21 +179,21 @@ public class DamageSystemAttachment implements ValueIOSerializable {
         return this.criticalDamageModifier;
     }
 
-    public void setShieldStamina(int shieldStamina) {
-        this.shieldStamina = shieldStamina;
+    public void setShieldEndurance(double shieldEndurance) {
+        this.shieldEndurance = shieldEndurance;
     }
 
-    public int getShieldStamina() {
-        return this.shieldStamina;
+    public double getShieldEndurance() {
+        return this.shieldEndurance;
     }
 
     @Override
     public void serialize(ValueOutput valueOutput) {
-        valueOutput.putInt("shield_stamina", this.shieldStamina);
+        valueOutput.putDouble("shield_endurance", this.shieldEndurance);
     }
 
     @Override
     public void deserialize(ValueInput valueInput) {
-        this.setShieldStamina(valueInput.getIntOr("shield_stamina", MAX_SHIELD_STAMINA));
+        this.setShieldEndurance(valueInput.getDoubleOr("shield_endurance", 0));
     }
 }

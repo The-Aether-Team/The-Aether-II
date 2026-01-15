@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.attachment.player;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
-import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -26,7 +25,7 @@ import java.util.Map;
 
 public class AbilityBehaviorAttachment {
     private boolean canRefuelGlide;
-    private int glidingTimer;
+    private int glidingTimer = -1;
     private Map<Holder<Item>, Boolean> canRefuelAbilities = new HashMap<>(Map.of(
             AetherIIItems.BLUE_AERCLOUD_GLIDER, false,
             AetherIIItems.PURPLE_AERCLOUD_GLIDER, false
@@ -135,7 +134,7 @@ public class AbilityBehaviorAttachment {
     private void resetGlideCheck(Player player) {
         if (player.onGround()) {
             if (!this.getCanRefuelGlide()) {
-                this.setGlidingTimer(AercloudGliderItem.GLIDING_MAX);
+                this.setGlidingTimer(-1);
                 this.setCanRefuelGlide(true);
                 for (Iterator<Map.Entry<Holder<Item>, Boolean>> iterator = this.getCanRefuelAbilities().entrySet().iterator(); iterator.hasNext(); ) {
                     Map.Entry<Holder<Item>, Boolean> entry = iterator.next();
