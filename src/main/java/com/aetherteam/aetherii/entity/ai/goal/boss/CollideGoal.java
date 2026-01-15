@@ -43,9 +43,7 @@ public class CollideGoal extends Goal {
                         livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, EffectBuildupPresets.STUN, 75);
                     }
 
-                    if (livingEntity instanceof Player player && player.getUseItem().is(Items.SHIELD) && player.isBlocking()) { // Disables the player's Shield if one is being used. //TODO CHECK NEW SHIELDS
-                        player.getCooldowns().addCooldown(Items.SHIELD.getDefaultInstance(), 100);
-                        player.stopUsingItem();
+                    if (livingEntity instanceof Player player && player.isBlocking()) {
                         this.slider.level().broadcastEntityEvent(player, (byte) 30);
                     }
                     entity.setDeltaMovement(entity.getDeltaMovement().multiply(4.0, 1.0, 4.0).add(0.0, 0.25, 0.0));
