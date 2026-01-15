@@ -238,8 +238,8 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                         } else {
                             Charms.CharmHolder newStatCharmHolder = newStatCharmHolders.get(i - baseSize);
                             if (i < currentCharmHolders.size()) {
-                                Charms.CharmHolder currentStatCharmHolder = currentStatCharmHolders.get(i);
-                                newCharmHolders.add(i, new Charms.CharmHolder(newStatCharmHolder.getType(), newStatCharmHolder.getTier(), currentStatCharmHolder.getStack()));
+                                Charms.CharmHolder currentCharmHolder = currentCharmHolders.get(i);
+                                newCharmHolders.add(i, new Charms.CharmHolder(newStatCharmHolder.getType(), newStatCharmHolder.getTier(), currentCharmHolder.getStack()));
                             } else {
                                 newCharmHolders.add(i, newStatCharmHolder);
                             }
