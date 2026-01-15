@@ -133,6 +133,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         this.setPathfindingMalus(PathType.LAVA, -1.0F);
         this.createInventory();
         this.setFeedingCooldown();
+        this.hungryTick = MOA_FEEDING_TICK;
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
@@ -432,15 +433,23 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
             if (!this.isHungry()) {
                 if (!this.level().isClientSide()) {
                     if (--this.feedingCooldown <= 0) {
-                        this.setHungry(true);
                         this.hungryTick = MOA_FEEDING_TICK;
+                        this.setHungry(true);
                     }
                 }
             } else {
-                if (this.getRandom().nextInt(10) == 0) {
-                    this.level().broadcastEntityEvent(this, (byte) 42);
-                }
 
+                if (this.hungryTick > MOA_FEEDING_TICK / 2) {
+                    if (this.getRandom().nextInt(10) == 0) {
+
+                        this.level().broadcastEntityEvent(this, (byte) 42);
+                    }
+                } else {
+                    if (this.getRandom().nextInt(10) == 0) {
+                        this.level().broadcastEntityEvent(this, (byte) 13);
+
+                    }
+                }
                 if (this.hungryTick > 0) {
                     this.hungryTick--;
                 } else {
@@ -454,6 +463,11 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                         case 2 -> this.setAge(-8000);
                         case 3 -> this.setBaby(false);
                     }
+                    if (this.feedingTimeCount > 3 && !this.isBaby()) {
+                        this.setBaby(false);
+                    }
+                    this.hungryTick = MOA_FEEDING_TICK;
+
                     if (!this.level().isClientSide()) {
                         this.level().broadcastEntityEvent(this, (byte) 13);
                     }
@@ -519,7 +533,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     @Override
     public void handleEntityEvent(byte p_35391_) {
         if (p_35391_ == 13) {
-            this.addParticlesAroundSelf(ParticleTypes.ANGRY_VILLAGER);
+            this.level().addParticle(ParticleTypes.ANGRY_VILLAGER, this.getX() + (this.getRandom().nextDouble() - 0.5) * this.getBbWidth(), this.getY() + 1, this.getZ() + (this.getRandom().nextDouble() - 0.5) * this.getBbWidth(), 0.0, 0.0, 0.0);
         } else if (p_35391_ == 42) {
             this.level().addParticle(AetherIIParticleTypes.MOA_HUNGRY.get(), this.getX() + (this.getRandom().nextDouble() - 0.5) * this.getBbWidth(), this.getY() + 1, this.getZ() + (this.getRandom().nextDouble() - 0.5) * this.getBbWidth(), 0.0, 0.0, 0.0);
         } else {
@@ -557,7 +571,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 }
             }
         }
-   }
+    }
 
     public float getFlyAmount(float pPartialTicks) {
         return Mth.lerp(pPartialTicks, this.flapO, this.flap);
@@ -1211,8 +1225,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         if (this.isVehicle() && this.isSaddled()) {
             if (this.onGround()) {
                 return this.getSteeringSpeed() * 0.2F;
-            } else
-            if (this.isFallFlying()) {
+            } else if (this.isFallFlying()) {
                 return this.getSteeringSpeed() * 0.25F;
             } else {
                 return this.getSteeringSpeed() * 0.2F;
@@ -1284,7 +1297,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      */
     @Override
     public void setAge(int age) {
-        if (age % -8000 == 0 || (age == 0 && this.feedingTimeCount >= 3)) {
+        if (age % -8000 == 0 || (age == 0 && this.feedingTimeCount > 3)) {
             super.setAge(age);
         }
     }
@@ -1327,7 +1340,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     public MoaEggType getDefaultEggType() {
         return new MoaEggType(this.getKeratinColor(), this.getEyeColor(), this.getFeatherColor(), this.getFeatherShape());
     }
-    
+
     public MoaEggType getEggType() {
         return this.getSpecialVariant().map(variant -> variant.getEggType(this)).orElseGet(this::getDefaultEggType);
     }
@@ -1503,7 +1516,9 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
 
         public static final KeratinColor DEFAULT = GRAY;
 
-        /** Alternate spelling of {@link #GRAY} */
+        /**
+         * Alternate spelling of {@link #GRAY}
+         */
         public static final KeratinColor GREY = GRAY;
 
         public static final StringRepresentable.EnumCodec<KeratinColor> CODEC = StringRepresentable.fromEnum(KeratinColor::values);
@@ -1690,9 +1705,13 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
 
         public static final FeatherColor DEFAULT = LIGHT_BLUE;
 
-        /** Alternate spelling of {@link #GRAY} */
+        /**
+         * Alternate spelling of {@link #GRAY}
+         */
         public static final FeatherColor GREY = GRAY;
-        /** Alternate spelling of {@link #LIGHT_GRAY} */
+        /**
+         * Alternate spelling of {@link #LIGHT_GRAY}
+         */
         public static final FeatherColor LIGHT_GREY = LIGHT_GRAY;
 
         public static final StringRepresentable.EnumCodec<FeatherColor> CODEC = StringRepresentable.fromEnum(FeatherColor::values);
@@ -1703,7 +1722,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         private final int id;
         public final DyeColor dyeColor;
         public final boolean isSpecialColor;
-        
+
         private static final FeatherColor[] VALUES = values();
         private static final FeatherColor[] NORMAL_VALUES = Stream.of(VALUES).filter(FeatherColor::isNormalColor).toArray(FeatherColor[]::new);
 
@@ -1776,7 +1795,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
             FeatherColor color = FeatherColor.byName(name);
             return color != null ? color : fallback;
         }
-        
+
         @Nullable
         @Contract("!null->!null;null->null")
         public static FeatherColor byDyeColor(@Nullable DyeColor dyeColor) {
@@ -1829,17 +1848,17 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         public static final StringRepresentable.EnumCodec<FeatherShape> CODEC = StringRepresentable.fromEnum(FeatherShape::values);
         static final IntFunction<FeatherShape> BY_ID = ByIdMap.continuous(FeatherShape::id, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
         public static final StreamCodec<ByteBuf, FeatherShape> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, FeatherShape::id);
-        
+
         private final String name;
         private final int id;
         public final double speed;
         public final double stamina;
         public final double strength;
         public final boolean isSpecialShape;
-        
+
         private static final FeatherShape[] VALUES = values();
         private static final FeatherShape[] NORMAL_VALUES = Stream.of(VALUES).filter(FeatherShape::isNormalShape).toArray(FeatherShape[]::new);
-        
+
         FeatherShape(String name, int id, double speed, double stamina, double strength, boolean isSpecialShape) {
             this.name = name;
             this.id = id;
@@ -1852,7 +1871,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         public boolean isSpecialShape() {
             return this.isSpecialShape;
         }
-        
+
         public boolean isNormalShape() {
             return !this.isSpecialShape;
         }
@@ -1926,9 +1945,8 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 if (moa.getCustomName() == null) return false;
                 String customName = moa.getCustomName().getString(20);
                 boolean result = switch (customName.hashCode()) {
-                    case -1854343754, 387083286 ->
-                        customName.length() >= 6 && customName.length() < 20
-                        && this.canApplyTo(moa);
+                    case -1854343754, 387083286 -> customName.length() >= 6 && customName.length() < 20
+                            && this.canApplyTo(moa);
                     default -> false;
                 };
                 return result;
@@ -1968,7 +1986,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         public static final StringRepresentable.EnumCodec<SpecialVariant> CODEC = StringRepresentable.fromEnum(SpecialVariant::values);
         static final IntFunction<SpecialVariant> BY_ID = ByIdMap.continuous(SpecialVariant::id, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
         public static final StreamCodec<ByteBuf, SpecialVariant> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, SpecialVariant::id);
-        public static final Codec<Optional<SpecialVariant>> OPTIONAL_INT_CODEC = Codec.INT.xmap(id -> Optional.of(BY_ID.apply(id)), opt -> opt.isPresent()? opt.get().id + 1 : 0);
+        public static final Codec<Optional<SpecialVariant>> OPTIONAL_INT_CODEC = Codec.INT.xmap(id -> Optional.of(BY_ID.apply(id)), opt -> opt.isPresent() ? opt.get().id + 1 : 0);
         public static final Codec<SpecialVariant> INT_CODEC = Codec.INT.xmap(BY_ID::apply, SpecialVariant::id);
 
         private final String name;
@@ -1989,9 +2007,9 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         private static final SpecialVariant[] VALUES = values();
 
         private SpecialVariant(String name, int id,
-                @Nullable ResourceLocation defaultTexture, @Nullable ResourceLocation babyTexture,
-                @Nullable KeratinColor keratinColorOverride, @Nullable EyeColor eyeColorOverride, @Nullable FeatherColor featherColorOverride, @Nullable FeatherShape featherShapeOverride,
-                @Nullable MoaEggType eggTypeOverride) {
+                               @Nullable ResourceLocation defaultTexture, @Nullable ResourceLocation babyTexture,
+                               @Nullable KeratinColor keratinColorOverride, @Nullable EyeColor eyeColorOverride, @Nullable FeatherColor featherColorOverride, @Nullable FeatherShape featherShapeOverride,
+                               @Nullable MoaEggType eggTypeOverride) {
             this.name = name;
             this.id = id;
             this.defaultTexture = defaultTexture;
@@ -2014,29 +2032,29 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         private SpecialVariant(String name, int id, ResourceLocation baseTextureName) {
             this(name, id, baseTextureName, null, null, null, null);
         }
-        
+
         private SpecialVariant(String name, int id,
-                @Nullable ResourceLocation defaultTexture, @Nullable ResourceLocation babyTexture) {
+                               @Nullable ResourceLocation defaultTexture, @Nullable ResourceLocation babyTexture) {
             this(name, id, defaultTexture, babyTexture, null, null, null, null);
         }
 
         private SpecialVariant(String name, int id, String baseTextureNameNoModid,
-                @Nullable KeratinColor keratinColorOverride, @Nullable EyeColor eyeColorOverride, @Nullable FeatherColor featherColorOverride, @Nullable FeatherShape featherShapeOverride) {
+                               @Nullable KeratinColor keratinColorOverride, @Nullable EyeColor eyeColorOverride, @Nullable FeatherColor featherColorOverride, @Nullable FeatherShape featherShapeOverride) {
             this(name, id,
                     ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/" + baseTextureNameNoModid + ".png"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/" + baseTextureNameNoModid + "_baby.png"),
                     keratinColorOverride, eyeColorOverride, featherColorOverride, featherShapeOverride);
         }
 
         private SpecialVariant(String name, int id, ResourceLocation baseTextureName,
-                @Nullable KeratinColor keratinColorOverride, @Nullable EyeColor eyeColorOverride, @Nullable FeatherColor featherColorOverride, @Nullable FeatherShape featherShapeOverride) {
+                               @Nullable KeratinColor keratinColorOverride, @Nullable EyeColor eyeColorOverride, @Nullable FeatherColor featherColorOverride, @Nullable FeatherShape featherShapeOverride) {
             this(name, id,
                     baseTextureName.withPath(path -> "textures/entity/mobs/moa/" + path + ".png"), baseTextureName.withPath(path -> "textures/entity/mobs/moa/" + path + "_baby.png"),
                     keratinColorOverride, eyeColorOverride, featherColorOverride, featherShapeOverride);
         }
 
         private SpecialVariant(String name, int id,
-                @Nullable ResourceLocation defaultTexture, @Nullable ResourceLocation babyTexture,
-                @Nullable KeratinColor keratinColorOverride, @Nullable EyeColor eyeColorOverride, @Nullable FeatherColor featherColorOverride, @Nullable FeatherShape featherShapeOverride) {
+                               @Nullable ResourceLocation defaultTexture, @Nullable ResourceLocation babyTexture,
+                               @Nullable KeratinColor keratinColorOverride, @Nullable EyeColor eyeColorOverride, @Nullable FeatherColor featherColorOverride, @Nullable FeatherShape featherShapeOverride) {
             this(name, id,
                     defaultTexture, babyTexture,
                     keratinColorOverride, eyeColorOverride, featherColorOverride, featherShapeOverride,
@@ -2091,7 +2109,8 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
             return false;
         }
 
-        public void addDataToFeatherItem(ItemStack feather) {}
+        public void addDataToFeatherItem(ItemStack feather) {
+        }
 
         public KeratinColor getKeratinColor(Moa moa) {
             return keratinColorOverride != null ? keratinColorOverride : moa.getKeratinColor();
