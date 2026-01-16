@@ -49,6 +49,7 @@
     "client.EquipmentLayerRendererMixin",
     "client.HumanoidMobRendererMixin",
     "client.HumanoidModelMixin",
+    "client.PlayerItemInHandLayerMixin",
     "client.ItemInHandRendererMixin",
     "client.LayerRenderStateMixin",
     "client.LevelRendererMixin",
