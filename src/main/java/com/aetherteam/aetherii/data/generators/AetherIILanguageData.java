@@ -1252,8 +1252,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("healing_stone.charges", "%s/5 Altar Charges");
         this.addItemTooltip("effect_buildup", "%s Buildup");
         this.addItemTooltip("effect_buildup.inflicts", "Inflicts: %s");
-        this.addItemTooltip("reinforcement", "Reinforcement");
+        this.addItemTooltip("reinforcement", "Reinforcement %s");
         this.addItemTooltip("broken", "Requires Repairing");
+        this.addItemTooltip("charm.tier", "Tier %s");
 
         // Moa Egg Tooltips
         this.addItemTooltip("moa_egg.keratin", "%s Keratin");

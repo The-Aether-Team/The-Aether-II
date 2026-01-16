@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.item.components.Charms;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -36,6 +37,8 @@ public class CharmItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        tooltipComponents.accept(Component.translatable("aether_ii.tooltip.item.charm.tier", Component.translatable("enchantment.level." + this.tier.getValue())).withStyle(ChatFormatting.GRAY));
+
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = Multimaps.newListMultimap(new HashMap<>(), ArrayList::new);
         for (ItemAttributeModifiers.Entry entry : this.getCharmAttributes()) {
             modifiers.put(entry.attribute(), entry.modifier());

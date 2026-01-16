@@ -91,7 +91,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
     }
 
     public static Component createReinforcementComponent(int tier) {
-        return Component.translatable("aether_ii.tooltip.item.reinforcement").withColor(14408667).append(CommonComponents.SPACE).append(Component.translatable("enchantment.level." + tier));
+        return Component.translatable("aether_ii.tooltip.item.reinforcement", Component.translatable("enchantment.level." + tier)).withColor(14408667);
     }
 
     public static Map<Integer, Cost> getCosts(ItemStack stack) {
