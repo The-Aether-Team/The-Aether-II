@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.inventory.container;
 
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.equipment.accessories.AccessoryItem;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -38,20 +39,19 @@ public class AccessoryContainer extends SimpleContainer {
     }
 
     public void postTickUpdate(LivingEntity entity) {
-        if (!entity.level().isClientSide()) {
-            if (!this.lastItems.equals(this.getItems())) {
-                for (int i = 0; i < this.getItems().size(); i++) {
-                    ItemStack thisItem = this.getItem(i);
-                    ItemStack lastItem = this.lastItems.get(i);
-                    if (!ItemStack.isSameItem(lastItem, thisItem)) {
-                        if (!thisItem.isEmpty() && thisItem.getItem() instanceof AccessoryItem accessory) {
-                            accessory.onEquip(thisItem, entity);
-                        } else if (thisItem.isEmpty() && !lastItem.isEmpty() && lastItem.getItem() instanceof AccessoryItem accessoryItem) {
-                            accessoryItem.onUnequip(lastItem, entity);
-                        }
+        if (!this.lastItems.equals(this.getItems())) {
+            for (int i = 0; i < this.getItems().size(); i++) {
+                ItemStack thisItem = this.getItem(i);
+                ItemStack lastItem = this.lastItems.get(i);
+                if (!ItemStack.isSameItem(lastItem, thisItem)) {
+                    if (!thisItem.isEmpty() && thisItem.getItem() instanceof AccessoryItem accessory) {
+                        accessory.onEquip(thisItem, entity);
+                    } else if (thisItem.isEmpty() && !lastItem.isEmpty() && lastItem.getItem() instanceof AccessoryItem accessoryItem) {
+                        accessoryItem.onUnequip(lastItem, entity);
                     }
-                    this.lastItems.set(i, thisItem);
                 }
+                this.lastItems.set(i, thisItem.copy());
+                entity.syncData(AetherIIDataAttachments.ACCESSORIES);
             }
         }
         for (ItemStack stack : this.getItems()) {

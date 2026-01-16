@@ -52,16 +52,14 @@ public class AccessoryItem extends Item {
     }
 
     public void tick(ItemStack stack, LivingEntity wearer) {
-        if (!wearer.level().isClientSide()) {
-            for (ConditionalAttribute entry : this.attributes) {
-                AttributeInstance attribute = wearer.getAttribute(entry.attribute());
-                AttributeModifier modifier = entry.modifier().getModifier(stack);
+        for (ConditionalAttribute entry : this.attributes) {
+            AttributeInstance attribute = wearer.getAttribute(entry.attribute());
+            AttributeModifier modifier = entry.modifier().getModifier(stack);
 
-                if (attribute != null && !attribute.hasModifier(modifier.id()) && entry.condition().test(stack, wearer)) {
-                    attribute.addTransientModifier(modifier);
-                } else if (attribute != null && attribute.hasModifier(modifier.id()) && (!entry.condition().test(stack, wearer) || modifier.amount() != attribute.getModifier(modifier.id()).amount())) {
-                    attribute.removeModifier(modifier.id());
-                }
+            if (attribute != null && !attribute.hasModifier(modifier.id()) && entry.condition().test(stack, wearer)) {
+                attribute.addTransientModifier(modifier);
+            } else if (attribute != null && attribute.hasModifier(modifier.id()) && (!entry.condition().test(stack, wearer) || modifier.amount() != attribute.getModifier(modifier.id()).amount())) {
+                attribute.removeModifier(modifier.id());
             }
         }
     }

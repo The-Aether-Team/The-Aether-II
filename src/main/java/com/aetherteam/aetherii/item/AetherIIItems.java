@@ -443,7 +443,6 @@ public class AetherIIItems {
         bus.addListener(CharmItem::updateItemAttributes);
 
         // Accessories
-        bus.addListener(GlovesItem::updatePlayerAttributes);
         bus.addListener(ZanitePendantItem::onBlockBreak);
 
         // Other

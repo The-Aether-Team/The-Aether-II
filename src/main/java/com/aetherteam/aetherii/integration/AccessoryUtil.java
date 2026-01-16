@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.integration;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
-import com.aetherteam.aetherii.item.equipment.accessories.AccessoryItem;
+import com.aetherteam.aetherii.network.packet.clientbound.BreakItemPacket;
 import com.google.common.collect.Multimap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -22,6 +22,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import net.neoforged.neoforge.common.util.AttributeUtil;
 import net.neoforged.neoforge.event.GatherSkippedAttributeTooltipsEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,9 +116,7 @@ public class AccessoryUtil {
         AttributeUtil.applyTextFor(stack, tooltip, modifiers, ctx);
     }
 
-    public static void breakAccessory(Item item, ItemStack stack, ServerPlayer wearer) { //todo  sound
-        if (item instanceof AccessoryItem accessoryItem) {
-            accessoryItem.onUnequip(stack, wearer);
-        }
+    public static void breakAccessory(Item item, ItemStack stack, ServerPlayer wearer) {
+        PacketDistributor.sendToAllPlayers(new BreakItemPacket(wearer.getId(), stack.copy()));
     }
 }
