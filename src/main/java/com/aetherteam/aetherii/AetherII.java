@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii;
 
+import com.aetherteam.aetherii.command.AetherIICommands;
 import org.slf4j.Logger;
 
 import com.aetherteam.aetherii.advancement.predicate.AetherIIEntitySubPredicates;
@@ -181,6 +182,7 @@ public class AetherII {
         AetherIIItems.registerEquipmentAbilities(bus);
         AetherIIEffects.registerUniqueBehaviors(bus);
 
+        bus.addListener(AetherIICommands::registerCommands);
         bus.addListener(ReloadListeners::registerReloadListeners);
         neoBus.addListener(AetherIIBlockEntityTypes::registerValidBlockEntityTypes);
         neoBus.addListener(AetherIIAttributes::registerEntityAttributes);

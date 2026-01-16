@@ -6,8 +6,10 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -77,19 +79,6 @@ public abstract class CopyBlockEntity extends BlockEntity {
     }
 
     @Override
-    public ModelData getModelData() {
-        if (this.copyState != null) {
-            return ModelData.of(CopyData.PROPERTY, new CopyData(this.copyState));
-        }
-        return super.getModelData();
-    }
-
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
-        return this.saveWithoutMetadata(provider);
-    }
-
-    @Override
     protected void applyImplicitComponents(DataComponentGetter getter) {
         super.applyImplicitComponents(getter);
         this.copyState = getter.getOrDefault(AetherIIDataComponents.BLOCK_STATE, null);
@@ -104,6 +93,32 @@ public abstract class CopyBlockEntity extends BlockEntity {
     @Override
     public void removeComponentsFromTag(ValueOutput output) {
         output.discard("copy_state");
+    }
+
+    @Override
+    public void handleUpdateTag(ValueInput input) {
+        super.handleUpdateTag(input);
+        this.requestModelDataUpdate();
+    }
+
+    @Override
+    public void onDataPacket(Connection net, ValueInput valueInput) {
+        super.onDataPacket(net, valueInput);
+        this.handleUpdateTag(valueInput);
+        this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        return this.saveCustomOnly(registries);
+    }
+
+    @Override
+    public ModelData getModelData() {
+        if (this.copyState != null) {
+            return ModelData.of(CopyData.PROPERTY, new CopyData(this.copyState));
+        }
+        return super.getModelData();
     }
 
     public BlockState open(Level level, BlockPos pos) {

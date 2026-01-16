@@ -76,18 +76,11 @@ public class SentryRuinsBossRoom extends SentryRuinsPiece {
         super.postProcess(level, manager, chunkGenerator, random, boundingBox, chunkPos, blockPos);
         for (StructureTemplate.StructureBlockInfo info : this.template.filterBlocks(this.templatePosition, this.placeSettings, AetherIIBlocks.LOCKED_BLOCK.get())) {
             if (level.getBlockEntity(info.pos()) instanceof CopyBlockEntity blockEntity) {
-                boolean changed = false;
                 if (this.getMirror() != Mirror.NONE) {
                     blockEntity.setCopyState(blockEntity.getCopyState().mirror(this.getMirror()));
-                    changed = true;
                 }
                 if (this.getRotation() != Rotation.NONE) {
                     blockEntity.setCopyState(blockEntity.getCopyState().rotate(this.getRotation()));
-                    changed = true;
-                }
-                if (changed) {
-                    blockEntity.requestModelDataUpdate();
-                    blockEntity.setChanged();
                 }
             }
         }
