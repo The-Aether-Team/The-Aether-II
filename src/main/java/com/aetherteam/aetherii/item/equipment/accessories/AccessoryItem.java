@@ -2,6 +2,8 @@ package com.aetherteam.aetherii.item.equipment.accessories;
 
 import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
+import com.aetherteam.aetherii.item.components.Charms;
+import com.aetherteam.aetherii.item.equipment.charms.CharmItem;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.core.Holder;
@@ -17,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
@@ -45,14 +48,14 @@ public class AccessoryItem extends Item {
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipComponents, tooltipFlag);
         Multimap<Holder<Attribute>, AttributeModifier> attributesMap = ArrayListMultimap.create();
-        for (ConditionalAttribute attribute : this.attributes) {
+        for (ConditionalAttribute attribute : this.getBaseAttributes()) {
             attributesMap.put(attribute.attribute(), attribute.modifier().getModifier(stack));
         }
         AccessoryUtil.addAttributeTooltips(stack, tooltipComponents, AttributeTooltipContext.of(null, context, tooltipDisplay, tooltipFlag), attributesMap, this.getSlotType().name().toLowerCase(Locale.ROOT));
     }
 
     public void tick(ItemStack stack, LivingEntity wearer) {
-        for (ConditionalAttribute entry : this.attributes) {
+        for (ConditionalAttribute entry : this.getAttributes(stack)) {
             AttributeInstance attribute = wearer.getAttribute(entry.attribute());
             AttributeModifier modifier = entry.modifier().getModifier(stack);
 
@@ -69,7 +72,7 @@ public class AccessoryItem extends Item {
     }
 
     public void onUnequip(ItemStack stack, LivingEntity wearer) {
-        for (ConditionalAttribute entry : this.attributes) {
+        for (ConditionalAttribute entry : this.getAttributes(stack)) {
             AttributeInstance attribute = wearer.getAttribute(entry.attribute());
             AttributeModifier modifier = entry.modifier().getModifier(stack);
             if (attribute != null && attribute.hasModifier(modifier.id())) {
@@ -86,8 +89,23 @@ public class AccessoryItem extends Item {
         return this.slotType;
     }
 
-    public Set<ConditionalAttribute> getAttributes() {
+    public Set<ConditionalAttribute> getBaseAttributes() {
         return this.attributes;
+    }
+
+    public Set<ConditionalAttribute> getAttributes(ItemStack itemStack) {
+        Set<ConditionalAttribute> conditionalAttributes = new HashSet<>(this.getBaseAttributes());
+        List<Charms.CharmHolder> charmHolders = Charms.getCharmsForItem(itemStack);
+        if (charmHolders != null) {
+            for (Charms.CharmHolder charmHolder : charmHolders) {
+                if (charmHolder.getStack().getItem() instanceof CharmItem charmItem) {
+                    for (ItemAttributeModifiers.Entry entry : charmItem.getCharmAttributes()) {
+                        conditionalAttributes.add(new ConditionalAttribute(entry.attribute(), new ConditionalModifier(entry.modifier().id(), entry.modifier().amount(), entry.modifier().operation()), (stack, wearer) -> true));
+                    }
+                }
+            }
+        }
+        return conditionalAttributes;
     }
 
     public record ConditionalAttribute(Holder<Attribute> attribute, ConditionalModifier modifier, BiPredicate<ItemStack, LivingEntity> condition) { }
