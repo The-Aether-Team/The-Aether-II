@@ -22,6 +22,7 @@ import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.BlocksAttacks;
 import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
@@ -64,6 +65,11 @@ public class TieredShieldItem extends ShieldItem {
 
     public double getStrength() {
         return this.strength;
+    }
+
+    @Override
+    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+        return false;
     }
 
     public static void updatePlayerAttributes(EntityTickEvent.Pre event) {

@@ -23,6 +23,7 @@ public class HammerOfDemolitionItem extends TieredHammerItem implements Projecti
         super(applyWeaponProperties(properties, AetherIIItemTiers.HAMMER_OF_DEMOLITION, 3, -2.4F, AetherIIStats.HAMMER_OF_DEMOLITION));
     }
 
+    @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack heldStack = player.getItemInHand(hand);
 //        level.playLocalSound(player.getX(), player.getY(), player.getZ(), (SoundEvent)AetherSoundEvents.ITEM_HAMMER_OF_KINGBDOGZ_SHOOT.get(), SoundSource.PLAYERS, 1.0F, 1.0F / (player.getRandom().nextFloat() * 0.4F + 0.8F), false); //todo
@@ -40,10 +41,12 @@ public class HammerOfDemolitionItem extends TieredHammerItem implements Projecti
         return super.use(level, player, hand);
     }
 
+    @Override
     public Projectile asProjectile(Level level, Position pos, ItemStack stack, Direction direction) {
         return new DemolitionProjectile(pos.x(), pos.y(), pos.z(), level);
     }
 
+    @Override
     public ProjectileItem.DispenseConfig createDispenseConfig() {
         return DispenseConfig.builder().uncertainty(1.0F).build();
     }

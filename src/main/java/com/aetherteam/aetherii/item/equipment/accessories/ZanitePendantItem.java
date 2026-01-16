@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -31,6 +33,11 @@ public class ZanitePendantItem extends AccessoryItem {
         attributes = super.gatherAttributes(attributes);
         attributes.add(new ConditionalAttribute(Attributes.MINING_EFFICIENCY, new ConditionalModifier(MINING_EFFICIENCY, (stack) -> 0.25 + (1.75 * stack.getDamageValue() / (stack.getMaxDamage() + 0.5)), AttributeModifier.Operation.ADD_VALUE), (stack, wearer) -> true));
         return attributes;
+    }
+
+    @Override
+    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+        return false;
     }
 
     public static void onBlockBreak(BlockEvent.BreakEvent event) {

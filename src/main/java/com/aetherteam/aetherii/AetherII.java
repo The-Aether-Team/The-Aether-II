@@ -190,6 +190,7 @@ public class AetherII {
         neoBus.addListener(AetherIIEntityTypes::registerEntityAttributes);
         neoBus.addListener(AetherIIDataMaps::registerDataMaps);
         neoBus.addListener(AetherIICreativeTabs::addCreativeModTabContents);
+        neoBus.addListener(AetherIIItems::modifyDefaultComponents);
     }
 
     public void registerPackets(RegisterPayloadHandlersEvent event) {
