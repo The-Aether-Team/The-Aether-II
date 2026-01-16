@@ -56,7 +56,7 @@ public class MusicPlayerItem extends Item {
         } else if (action == ClickAction.SECONDARY && stack.has(AetherIIDataComponents.STORED_MUSIC) && other.isEmpty()) {
             StoredMusic music = stack.get(AetherIIDataComponents.STORED_MUSIC);
             Holder<SoundEvent> sound = Holder.direct(SoundEvent.createVariableRangeEvent(music.sound().value().location()));
-            SoundSource category = SoundSource.MASTER;
+            SoundSource category = SoundSource.RECORDS;
             slot.set(stack.get(AetherIIDataComponents.STORED_MUSIC).item().value().getDefaultInstance());
             stack.remove(AetherIIDataComponents.STORED_MUSIC);
             if (player.level().isClientSide()) {
@@ -73,7 +73,7 @@ public class MusicPlayerItem extends Item {
         StoredMusic music = stack.get(AetherIIDataComponents.STORED_MUSIC);
         if (music != null && player.level().isClientSide()) {
             Holder<SoundEvent> sound = Holder.direct(SoundEvent.createVariableRangeEvent(music.sound().value().location()));
-            SoundSource category = SoundSource.MASTER;
+            SoundSource category = SoundSource.RECORDS;
             if (!AetherIIClientProxy.isPlayingSoundEvent(music.sound().value())) {
                 Vec3 pos = player.position();
                 float volume = 1.0F;
