@@ -677,7 +677,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
             }
         } else if (itemStack.canPerformAction(ItemAbilities.SHEARS_HARVEST) && !this.isBaby() && this.isPlayerGrown()) {
             if (this.level() instanceof ServerLevel serverLevel) {
-                ItemStack featherStack = new ItemStack(AetherIIItems.MOA_FEATHER.get(), 8);
+                ItemStack featherStack = new ItemStack(AetherIIItems.MOA_FEATHER.get(), 4);
                 FeatherColor featherColor = this.getFeatherColor();
                 var specialVariantOpt = this.getSpecialVariant();
                 if (specialVariantOpt.isPresent()) {
@@ -691,6 +691,9 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 this.playSound(SoundEvents.SHEARS_SNIP);
             }
             itemStack.hurtAndBreak(32, player, getSlotForHand(hand));
+            if (!itemStack.isEmpty()) {
+                player.getCooldowns().addCooldown(itemStack, 200);
+            }
             return InteractionResult.SUCCESS;
         } else {
             if (this.isPlayerGrown() && player.isShiftKeyDown() && !this.isBaby()) {
