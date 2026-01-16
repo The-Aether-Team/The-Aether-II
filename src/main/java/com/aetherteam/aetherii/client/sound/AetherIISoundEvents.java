@@ -55,6 +55,8 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_FILL_HESTVEIL = register("item.arkenium_canister.fill_hestveil");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_EMPTY_HESTVEIL = register("item.arkenium_canister.empty_hestveil");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_HAMMER_OF_DEMOLITION_SHOOT = register("item.hammer_of_demolition.shoot");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_COMPACT_DISC_AETHER_TUNE = register("item.compact_disc.aether_tune");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_COMPACT_DISC_ASCENDING_DAWN = register("item.compact_disc.ascending_dawn");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_COMPACT_DISC_AERWHALE = register("item.compact_disc.aerwhale");

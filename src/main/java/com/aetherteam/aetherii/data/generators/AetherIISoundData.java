@@ -187,6 +187,12 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.aether_ii.item.scaterglass_vial.empty")
         );
 
+        this.add(AetherIISoundEvents.ITEM_HAMMER_OF_DEMOLITION_SHOOT,
+                definition().with(
+                        sound("minecraft:mob/ghast/fireball4")
+                ).subtitle("subtitles.aether.item.hammer_of_kingbdogz.shoot")
+        );
+
         this.add(AetherIISoundEvents.ITEM_ARMOR_EQUIP_BEAST_PELT,
                 definition().with(
                         sound("minecraft:item/armor/equip_leather1"),

@@ -1577,6 +1577,12 @@
       }
     ]
   },
+  "item.hammer_of_demolition.shoot": {
+    "sounds": [
+      "mob/ghast/fireball4"
+    ],
+    "subtitle": "subtitles.aether.item.hammer_of_kingbdogz.shoot"
+  },
   "item.scatterglass_vial.empty": {
     "sounds": [
       "item/bottle/empty1",

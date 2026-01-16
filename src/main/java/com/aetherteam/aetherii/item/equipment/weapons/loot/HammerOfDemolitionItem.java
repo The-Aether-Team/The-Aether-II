@@ -1,12 +1,14 @@
 package com.aetherteam.aetherii.item.equipment.weapons.loot;
 
 import com.aetherteam.aetherii.AetherIIStats;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.projectile.DemolitionProjectile;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -26,7 +28,7 @@ public class HammerOfDemolitionItem extends TieredHammerItem implements Projecti
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack heldStack = player.getItemInHand(hand);
-//        level.playLocalSound(player.getX(), player.getY(), player.getZ(), (SoundEvent)AetherSoundEvents.ITEM_HAMMER_OF_KINGBDOGZ_SHOOT.get(), SoundSource.PLAYERS, 1.0F, 1.0F / (player.getRandom().nextFloat() * 0.4F + 0.8F), false); //todo
+        level.playLocalSound(player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.ITEM_HAMMER_OF_DEMOLITION_SHOOT.get(), SoundSource.PLAYERS, 1.0F, 1.0F / (player.getRandom().nextFloat() * 0.4F + 0.8F), false);
         if (player.isShiftKeyDown()) {
             if (level instanceof ServerLevel serverlevel) {
                 if (!player.getAbilities().instabuild) {
