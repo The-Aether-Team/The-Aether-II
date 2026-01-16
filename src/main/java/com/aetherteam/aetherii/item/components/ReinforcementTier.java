@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.component.DataComponentGetter;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

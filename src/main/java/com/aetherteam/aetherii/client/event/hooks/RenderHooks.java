@@ -52,11 +52,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.FogType;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import org.apache.commons.lang3.tuple.Triple;
@@ -170,6 +170,10 @@ public class RenderHooks {
             }
         }
         return null;
+    }
+
+    public static void addReinforcementTooltip(ItemStack stack, List<Component> components, Item.TooltipContext context, TooltipFlag flag) {
+        stack.addToTooltip(AetherIIDataComponents.REINFORCEMENT_TIER, context, (component) -> components.add(1, component), flag);
     }
 
     public static void addAbilityAttributeTooltip(ItemStack itemStack, List<Component> tooltipLines, AttributeTooltipContext context) {

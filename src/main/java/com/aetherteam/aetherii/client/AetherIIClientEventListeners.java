@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.client;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.event.hooks.MusicHooks;
 import com.aetherteam.aetherii.client.event.hooks.RenderHooks;
-import com.aetherteam.aetherii.client.renderer.block.model.blockstate.MuralModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Camera;
@@ -23,12 +22,16 @@ import net.minecraft.network.chat.FormattedText;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import net.neoforged.neoforge.event.AddAttributeTooltipsEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.ArrayList;
@@ -44,6 +47,7 @@ public class AetherIIClientEventListeners {
         bus.addListener(AetherIIClientEventListeners::onRenderBossBar);
 
         // Tooltip
+        bus.addListener(EventPriority.LOWEST, AetherIIClientEventListeners::onAddTooltipsLowest);
         bus.addListener(AetherIIClientEventListeners::onAddAttributeTooltips);
         bus.addListener(AetherIIClientEventListeners::onGatherTooltipComponents);
 
@@ -102,6 +106,15 @@ public class AetherIIClientEventListeners {
             RenderHooks.drawBossHealthBar(guiGraphics, event.getX(), event.getY(), bossEvent);
             event.setIncrement(event.getIncrement() + 13);
         }
+    }
+
+    public static void onAddTooltipsLowest(ItemTooltipEvent event) {
+        ItemStack itemStack = event.getItemStack();
+        List<Component> itemTooltips = event.getToolTip();
+        Item.TooltipContext context = event.getContext();
+        TooltipFlag flag = event.getFlags();
+
+        RenderHooks.addReinforcementTooltip(itemStack, itemTooltips, context, flag);
     }
 
     public static void onAddAttributeTooltips(AddAttributeTooltipsEvent event) {

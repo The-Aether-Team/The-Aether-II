@@ -112,6 +112,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIITags.Items.TOOLS_SPEARS,
                 ItemTags.SWORDS);
         this.tag(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR).addTags(
+                AetherIITags.Items.EQUIPMENT_HANDWEAR,
                 Tags.Items.ARMORS);
         this.tag(AetherIITags.Items.BEAST_PELT_ARMOR).add(
                 AetherIIItems.BEAST_PELT_HELMET.get(),
