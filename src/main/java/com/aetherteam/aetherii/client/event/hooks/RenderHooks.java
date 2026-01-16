@@ -200,7 +200,7 @@ public class RenderHooks {
             Either<FormattedText, TooltipComponent> tooltips = tooltipElements.get(i);
             Optional<FormattedText> text = tooltips.left();
             if (text.isPresent() && text.get().getString().equals(id.getString())) {
-                componentIndex = i - 1;
+                componentIndex = i;
             }
         }
         List<Charms.CharmHolder> charmHolders = Charms.getCharmsForItem(itemStack);
