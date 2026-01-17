@@ -131,16 +131,16 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                     if (!this.moveItemStackTo(slotStack, 3, 11, false)) {
                         return ItemStack.EMPTY;
                     }
+                } else if (slotIndex >= 11 && slotIndex < 47) {
+                    if (!this.moveItemStackTo(slotStack, 0, 1, false)) {
+                        return ItemStack.EMPTY;
+                    }
                 } else if (slotIndex >= 11 && slotIndex < 38) {
                     if (!this.moveItemStackTo(slotStack, 38, 47, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else if (slotIndex >= 38 && slotIndex < 47 && !this.moveItemStackTo(slotStack, 11, 38, false)) {
                     return ItemStack.EMPTY;
-                } else {
-                    if (!this.moveItemStackTo(slotStack, 0, 1, false)) { //todo fix; look at anvil move stack code
-                        return ItemStack.EMPTY;
-                    }
                 }
             } else if (!this.moveItemStackTo(slotStack, 11, 47, false)) {
                 return ItemStack.EMPTY;
