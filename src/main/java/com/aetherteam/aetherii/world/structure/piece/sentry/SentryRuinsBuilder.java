@@ -94,15 +94,9 @@ public class SentryRuinsBuilder {
         this.maxSize = Math.max(3, maxSize);
     }
 
-    public void initializeDungeon(BlockPos startPos, Structure.GenerationContext genContext, StructurePiecesBuilder builder) {
+    public void initializeDungeon(BlockPos startPos, Rotation rotation, Structure.GenerationContext genContext, StructurePiecesBuilder builder) {
         ROOM_OPTIONS = ROOM_OPTIONS_BUILDER.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, (e) -> e.getValue().build()));
 
-        StructureTemplate bossTemplate = this.context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/boss_room"));
-
-        Rotation rotation = getBossRoomRotation(startPos, startPos.offset(bossTemplate.getSize()));
-        if (rotation == null) { // The space may not be big enough for multiple rooms. If so, stop trying.
-            return;
-        }
         SentryRuinsPiece bossRoom = this.chooseRoom("boss_room", startPos, rotation, this.processors.bossSettings());
         Direction direction = bossRoom.getOrientation();
         if (direction != null) {
@@ -300,31 +294,6 @@ public class SentryRuinsBuilder {
         };
 
         return isSolidInColumns(columns, room.minY() - 1, room.maxY() + 1);
-    }
-
-    /**
-     * Find a viable direction for the boss room to face.
-     *
-     * @param minPos The starting corner {@link BlockPos} for the boss room.
-     * @param maxPos The ending corner {@link BlockPos} for the boss room.
-     * @return A viable {@link Rotation} direction.
-     */
-    @Nullable
-    private Rotation getBossRoomRotation(BlockPos minPos, BlockPos maxPos) {
-        StructureTemplate template = this.context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/rooms/lounge"));
-        RandomSource random = this.context.random();
-        BoundingBox bossBox = new BoundingBox(minPos.getX(), minPos.getY(), minPos.getZ(), maxPos.getX(), maxPos.getY(), maxPos.getZ());
-
-        for (Rotation rotation : Rotation.getShuffled(random)) {
-            Direction direction = rotation.rotate(Direction.SOUTH);
-            BlockPos.MutableBlockPos neighbor = BlockLogicUtil.tunnelFromEvenSquareRoom(bossBox, direction, this.nodeWidth).mutable();
-            neighbor = neighbor.move(direction.getStepX() * (this.edgeLength + bossBox.getXSpan()), 0, direction.getStepZ() * (this.edgeLength + bossBox.getZSpan()));
-            if (isCoveredAtPos(template.getBoundingBox(neighbor, rotation, BlockPos.ZERO, Mirror.NONE))) {
-                return rotation;
-            }
-        }
-
-        return null; // Returns null if there isn't a viable direction for the boss room.
     }
 
     /**

@@ -2,27 +2,37 @@ package com.aetherteam.aetherii.world.structure.type;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.world.BlockLogicUtil;
+import com.aetherteam.aetherii.world.structure.piece.AetherTemplateStructurePiece;
 import com.aetherteam.aetherii.world.structure.piece.sentry.SentryRuinsBuilder;
 import com.aetherteam.aetherii.world.structure.piece.sentry.SentryRuinsProcessorSettings;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.NoiseColumn;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.RandomState;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
+import net.minecraft.world.phys.Vec3;
 import org.apache.commons.lang3.mutable.MutableInt;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class SentryRuinsStructure extends Structure {
@@ -53,24 +63,21 @@ public class SentryRuinsStructure extends Structure {
         ChunkGenerator chunkGenerator = context.chunkGenerator();
         LevelHeightAccessor heightAccessor = context.heightAccessor();
         RandomState randomState = context.randomState();
+        WorldgenRandom random = context.random();
         StructureTemplateManager templateManager = context.structureTemplateManager();
-        int height = findStartingHeight(chunkGenerator, heightAccessor, chunkPos, randomState, templateManager, this.aboveBottom, this.belowTop);
         // To make structure placement more reliable, we check the surrounding 8 chunks for suitable locations.
-        if (height <= heightAccessor.getMinY()) {
-            MutableInt y = new MutableInt(height);
-            chunkPos = searchNearbyChunks(chunkPos, y, chunkGenerator, heightAccessor, randomState, templateManager, this.aboveBottom, this.belowTop);
-            height = y.getValue();
-            if (height <= heightAccessor.getMinY()) {
-                return Optional.empty();
-            }
+        RuinsOriginInfo originInfo = searchNearbyChunks(chunkPos, chunkGenerator, heightAccessor, randomState, random, templateManager, this.aboveBottom, this.belowTop);
+        if (originInfo == null || originInfo.height() <= heightAccessor.getMinY() || originInfo.rotation() == null) {
+            return Optional.empty();
         }
-        BlockPos blockPos = new BlockPos(chunkPos.getMinBlockX(), height, chunkPos.getMinBlockZ());
-        return Optional.of(new GenerationStub(blockPos, builder -> this.generatePieces(builder, context, blockPos)));
+        BlockPos blockPos = new BlockPos(chunkPos.getMinBlockX(), originInfo.height(), chunkPos.getMinBlockZ());
+        AetherII.LOGGER.info(String.valueOf(blockPos));
+        return Optional.of(new GenerationStub(blockPos, builder -> this.generatePieces(builder, context, blockPos, originInfo.rotation())));
     }
 
-    private void generatePieces(StructurePiecesBuilder builder, GenerationContext context, BlockPos startPos) {
+    private void generatePieces(StructurePiecesBuilder builder, GenerationContext context, BlockPos startPos, Rotation rotation) {
         SentryRuinsBuilder graph = new SentryRuinsBuilder(context, this.maxRooms, this.processors);
-        graph.initializeDungeon(startPos, context, builder);
+        graph.initializeDungeon(startPos, rotation, context, builder);
     }
 
     /**
@@ -84,21 +91,19 @@ public class SentryRuinsStructure extends Structure {
      * @param templateManager The {@link StructureTemplateManager}.
      * @return A {@link ChunkPos} for placement.
      */
-    private static ChunkPos searchNearbyChunks(ChunkPos chunkPos, MutableInt height, ChunkGenerator generator, LevelHeightAccessor heightAccessor, RandomState randomState, StructureTemplateManager templateManager, int aboveBottom, int belowTop) {
-        int y;
+    private static RuinsOriginInfo searchNearbyChunks(ChunkPos chunkPos, ChunkGenerator generator, LevelHeightAccessor heightAccessor, RandomState randomState, WorldgenRandom random, StructureTemplateManager templateManager, int aboveBottom, int belowTop) {
         for (int x = -1; x <= 1; x++) {
             for (int z = -1; z <= 1; z++) {
                 if (x != 0 || z != 0) {
                     ChunkPos offset = new ChunkPos(chunkPos.x + x, chunkPos.z + z);
-                    y = SentryRuinsStructure.findStartingHeight(generator, heightAccessor, offset, randomState, templateManager, aboveBottom, belowTop);
-                    if (y > heightAccessor.getMinY()) {
-                        height.setValue(y);
-                        return offset;
+                    RuinsOriginInfo info = SentryRuinsStructure.findStartingOrigin(generator, heightAccessor, offset, randomState, random, templateManager, aboveBottom, belowTop);
+                    if (info.height() > heightAccessor.getMinY()) {
+                        return info;
                     }
                 }
             }
         }
-        return chunkPos;
+        return null;
     }
 
     /**
@@ -112,41 +117,59 @@ public class SentryRuinsStructure extends Structure {
      * @param templateManager The {@link StructureTemplateManager}.
      * @return The starting height as an {@link Integer}.
      */
-    private static int findStartingHeight(ChunkGenerator generator, LevelHeightAccessor heightAccessor, ChunkPos chunkPos, RandomState random, StructureTemplateManager templateManager, int aboveBottom, int belowTop) {
-        int minX = chunkPos.getMinBlockX() - 1;
-        int minZ = chunkPos.getMinBlockZ() - 1;
-        int maxX = chunkPos.getMaxBlockX() + 1;
-        int maxZ = chunkPos.getMaxBlockZ() + 1;
-        NoiseColumn[] columns = {
-                generator.getBaseColumn(minX, minZ, heightAccessor, random),
-                generator.getBaseColumn(minX, maxZ, heightAccessor, random),
-                generator.getBaseColumn(maxX, minZ, heightAccessor, random),
-                generator.getBaseColumn(maxX, maxZ, heightAccessor, random)
-        };
-        int roomHeight = checkRoomHeight(templateManager, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/boss_room"));
-        int height = heightAccessor.getMinY();
-        int maxHeight = heightAccessor.getMaxY() - belowTop;
-        int thickness = roomHeight + 2;
-        int currentThickness = 0;
-        for (int y = height + aboveBottom; y <= maxHeight; y++) {
-            if (checkEachCornerAtY(columns, y)) {
-                ++currentThickness;
-            } else {
-                if (currentThickness > thickness) {
-                    thickness = currentThickness;
-                    height = y;
+    private static RuinsOriginInfo findStartingOrigin(ChunkGenerator generator, LevelHeightAccessor heightAccessor, ChunkPos chunkPos, RandomState randomState, WorldgenRandom random, StructureTemplateManager templateManager, int aboveBottom, int belowTop) {
+        StructureTemplate template = templateManager.getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/boss_room"));
+
+        int returnHeight = heightAccessor.getMinY();
+        Rotation returnRotation = null;
+
+        for (Rotation rotation : Rotation.getShuffled(random)) {
+            Vec3i roomSize = template.getSize(rotation);
+            AetherTemplateStructurePiece.TransformInfo transformInfo = AetherTemplateStructurePiece.getTransformInfo(template, rotation);
+
+            int height = heightAccessor.getMinY() + aboveBottom;
+            int maxHeight = heightAccessor.getMaxY() - belowTop;
+            int goalThickness = roomSize.getY() + 2;
+            int currentThickness = 0;
+
+            BlockPos initialPos = new BlockPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ());
+            BlockPos transformPos = StructureTemplate.transform(initialPos, transformInfo.mirror(), transformInfo.rotation(), transformInfo.pivot());
+
+            int minX = transformPos.getX() - 1;
+            int minZ = transformPos.getZ() - 1;
+            int maxX = transformPos.getX() + roomSize.getX() + 1;
+            int maxZ = transformPos.getZ() + roomSize.getZ() + 1;
+
+            NoiseColumn[] columns = {
+                    generator.getBaseColumn(minX, minZ, heightAccessor, randomState),
+                    generator.getBaseColumn(minX, maxZ, heightAccessor, randomState),
+                    generator.getBaseColumn(maxX, minZ, heightAccessor, randomState),
+                    generator.getBaseColumn(maxX, maxZ, heightAccessor, randomState)
+            };
+
+            for (int y = height; y <= maxHeight; y++) {
+                if (checkEachCornerAtY(columns, y)) {
+                    currentThickness++;
+                    if (currentThickness >= goalThickness) {
+                        returnHeight = y - roomSize.getY() - 1; //todo maybe y - currentthickness idk
+                        returnRotation = rotation;
+                        break;
+                    }
+                } else {
+                    currentThickness = 0;
                 }
-                currentThickness = 0;
+            }
+            if (returnHeight > heightAccessor.getMinY() && returnRotation != null) {
+//                AetherII.LOGGER.info(boundingBox + " " + returnHeight + " " + transformInfo);
+                break;
             }
         }
-        int offset = (thickness + roomHeight) / 2;
-        height -= offset;
-        return height;
+
+        return new RuinsOriginInfo(returnHeight, returnRotation);
     }
 
-    private static int checkRoomHeight(StructureTemplateManager manager, ResourceLocation roomName) {
-        StructureTemplate template = manager.getOrCreate(roomName);
-        return template.getSize().getY();
+    public record RuinsOriginInfo(int height, Rotation rotation) {
+
     }
 
     /**
