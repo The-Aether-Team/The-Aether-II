@@ -96,6 +96,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     protected static final EntityDataAccessor<Boolean> DATA_HUNGRY = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
     protected static final EntityDataAccessor<Integer> DATA_AMOUNT_FED_POINT = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
     protected static final EntityDataAccessor<Boolean> DATA_PLAYER_GROWN = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
+    protected static final EntityDataAccessor<Integer> DATA_SHEARING_TIME = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
 
     protected static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_RIDER_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
     protected static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_LAST_RIDER_REFERENCE = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
@@ -194,6 +195,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         builder.define(DATA_HUNGRY, false);
         builder.define(DATA_AMOUNT_FED_POINT, 0);
         builder.define(DATA_PLAYER_GROWN, false);
+        builder.define(DATA_SHEARING_TIME, 0);
         builder.define(DATA_SITTING, false);
         builder.define(DATA_FOLLOWING_ID, Optional.empty());
         builder.define(DATA_SADDLE, ItemStack.EMPTY);
@@ -508,6 +510,10 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 this.flap = Mth.clamp(this.flap - 0.2F, 0, 1F);
             }
         }
+
+        if (!this.level().isClientSide() && this.getShearingTime() > 0) {
+            this.setShearingTime(this.getShearingTime() - 1);
+        }
     }
 
     protected void addParticlesAroundSelf(ParticleOptions particleOption) {
@@ -675,7 +681,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                     }
                 }
             }
-        } else if (itemStack.canPerformAction(ItemAbilities.SHEARS_HARVEST) && !this.isBaby() && this.isPlayerGrown()) {
+        } else if (itemStack.canPerformAction(ItemAbilities.SHEARS_HARVEST) && !this.isBaby() && this.isPlayerGrown() && this.getShearingTime() == 0) {
             if (this.level() instanceof ServerLevel serverLevel) {
                 ItemStack featherStack = new ItemStack(AetherIIItems.MOA_FEATHER.get(), 4);
                 FeatherColor featherColor = this.getFeatherColor();
@@ -689,11 +695,9 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 this.spawnAtLocation(serverLevel, featherStack);
                 this.gameEvent(GameEvent.ENTITY_INTERACT);
                 this.playSound(SoundEvents.SHEARS_SNIP);
+                this.setShearingTime(this.getRandom().nextInt(2000));
             }
             itemStack.hurtAndBreak(32, player, getSlotForHand(hand));
-            if (!itemStack.isEmpty()) {
-                player.getCooldowns().addCooldown(itemStack, 200);
-            }
             return InteractionResult.SUCCESS;
         } else {
             if (this.isPlayerGrown() && player.isShiftKeyDown() && !this.isBaby()) {
@@ -971,6 +975,14 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      */
     public void setPlayerGrown(boolean playerGrown) {
         this.getEntityData().set(DATA_PLAYER_GROWN, playerGrown);
+    }
+
+    public int getShearingTime() {
+        return this.getEntityData().get(DATA_SHEARING_TIME);
+    }
+
+    public void setShearingTime(int shearingTime) {
+        this.getEntityData().set(DATA_SHEARING_TIME, shearingTime);
     }
 
     /**
@@ -1465,6 +1477,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
             }
         }
         output.putBoolean("FlyingMode", this.isFallFlying());
+        output.putInt("ShearingTime", this.getShearingTime());
     }
 
     @Override
@@ -1512,6 +1525,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         if (input.getBooleanOr("FlyingMode", false)) {
             this.startFallFlying();
         }
+        this.setShearingTime(input.getIntOr("ShearingTime", 0));
     }
 
     public enum KeratinColor implements StringRepresentable {
