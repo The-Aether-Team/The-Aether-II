@@ -120,6 +120,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
                 output.accept(AetherIIBlocks.AMBEROOT_WOOD.get());
                 output.accept(AetherIIBlocks.AMBEROOT_TRUNK.get());
+                output.accept(AetherIIBlocks.CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_STAIRS.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_SLAB.get());
@@ -285,7 +286,7 @@ public class AetherIICreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_COLORED_BLOCKS = CREATIVE_MODE_TABS.register("colored_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "building_blocks"))
             .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "natural_blocks"))
-            .icon(() -> new ItemStack(AetherIIBlocks.CYAN_CLOUDWOOL.get()))
+            .icon(() -> new ItemStack(AetherIIBlocks.PURPLE_CLOUDWOOL.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".colored_blocks"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIBlocks.CLOUDWOOL.get());
@@ -380,9 +381,11 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ARCTIC_SNOW.get());
                 output.accept(AetherIIBlocks.IRRADIATED_DUST_BLOCK.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());
+                output.accept(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.MOSSY_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE.get());
+                output.accept(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
                 output.accept(AetherIIBlocks.ICHORITE.get());
                 output.accept(AetherIIBlocks.AGIOSITE.get());
                 output.accept(AetherIIBlocks.FERROSITE.get());
@@ -520,7 +523,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get());
                 output.accept(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get());
                 output.accept(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get());
-                output.accept(AetherIIBlocks.MOA_EGG.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FUNCTIONAL_BLOCKS = CREATIVE_MODE_TABS.register("functional_blocks", () -> CreativeModeTab.builder()
@@ -536,11 +538,11 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HOLYSTONE_LEVER.get());
                 output.accept(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_FURNACE.get());
-                output.accept(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get());
                 output.accept(AetherIIBlocks.ALTAR.get());
                 output.accept(AetherIIBlocks.ARTISANS_BENCH.get());
                 output.accept(AetherIIBlocks.ARKENIUM_FORGE.get());
                 output.accept(AetherIIBlocks.ALKAHEST_PURIFIER.get());
+                output.accept(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get());
                 output.accept(AetherIIBlocks.SKYROOT_LADDER.get());
                 output.accept(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.GREATROOT_BOOKSHELF.get());
@@ -558,22 +560,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL_BEDROLL.get());
                 output.accept(AetherIIBlocks.SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.WHITE_SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.GRAY_SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.BLACK_SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.BROWN_SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.RED_SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.ORANGE_SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.YELLOW_SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.LIME_SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.GREEN_SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.CYAN_SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.BLUE_SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.PURPLE_SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.MAGENTA_SKYROOT_BED.get());
-                output.accept(AetherIIBlocks.PINK_SKYROOT_BED.get());
                 output.accept(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
                 output.accept(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
@@ -648,63 +634,34 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.TREASURE_DOORWAY_BLOCK.get());
             }).build());
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_EQUIPMENT_AND_UTILITIES = CREATIVE_MODE_TABS.register("equipment_and_utilities", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_EQUIPMENT_AND_UTILITIES = CREATIVE_MODE_TABS.register("tools_and_utilities", () -> CreativeModeTab.builder()
             .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "dungeon_blocks"))
-            .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "armor_and_accessories"))
+            .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "combat_and_equipment"))
             .icon(() -> new ItemStack(AetherIIItems.GRAVITITE_PICKAXE.get()))
-            .title(Component.translatable("itemGroup." + AetherII.MODID + ".equipment_and_utilities"))
+            .title(Component.translatable("itemGroup." + AetherII.MODID + ".tools_and_utilities"))
             .displayItems((features, output) -> {
-                output.accept(AetherIIItems.SKYROOT_SHORTSWORD.get());
-                output.accept(AetherIIItems.SKYROOT_HAMMER.get());
-                output.accept(AetherIIItems.SKYROOT_SPEAR.get());
-                output.accept(AetherIIItems.SKYROOT_CROSSBOW.get());
+
                 output.accept(AetherIIItems.SKYROOT_SHOVEL.get());
                 output.accept(AetherIIItems.SKYROOT_PICKAXE.get());
                 output.accept(AetherIIItems.SKYROOT_AXE.get());
                 output.accept(AetherIIItems.SKYROOT_TROWEL.get());
-                output.accept(AetherIIItems.SKYROOT_SHIELD.get());
-                output.accept(AetherIIItems.HOLYSTONE_SHORTSWORD.get());
-                output.accept(AetherIIItems.HOLYSTONE_HAMMER.get());
-                output.accept(AetherIIItems.HOLYSTONE_SPEAR.get());
-                output.accept(AetherIIItems.HOLYSTONE_CROSSBOW.get());
                 output.accept(AetherIIItems.HOLYSTONE_SHOVEL.get());
                 output.accept(AetherIIItems.HOLYSTONE_PICKAXE.get());
                 output.accept(AetherIIItems.HOLYSTONE_AXE.get());
                 output.accept(AetherIIItems.HOLYSTONE_TROWEL.get());
-                output.accept(AetherIIItems.BURRUKAI_PLATE_SHIELD.get());
-                output.accept(AetherIIItems.ZANITE_SHORTSWORD.get());
-                output.accept(AetherIIItems.ZANITE_HAMMER.get());
-                output.accept(AetherIIItems.ZANITE_SPEAR.get());
-                output.accept(AetherIIItems.ZANITE_CROSSBOW.get());
                 output.accept(AetherIIItems.ZANITE_SHOVEL.get());
                 output.accept(AetherIIItems.ZANITE_PICKAXE.get());
                 output.accept(AetherIIItems.ZANITE_AXE.get());
                 output.accept(AetherIIItems.ZANITE_TROWEL.get());
-                output.accept(AetherIIItems.ZANITE_SHIELD.get());
-                output.accept(AetherIIItems.ARKENIUM_SHORTSWORD.get());
-                output.accept(AetherIIItems.ARKENIUM_HAMMER.get());
-                output.accept(AetherIIItems.ARKENIUM_SPEAR.get());
-                output.accept(AetherIIItems.ARKENIUM_CROSSBOW.get());
                 output.accept(AetherIIItems.ARKENIUM_SHOVEL.get());
                 output.accept(AetherIIItems.ARKENIUM_PICKAXE.get());
                 output.accept(AetherIIItems.ARKENIUM_AXE.get());
                 output.accept(AetherIIItems.ARKENIUM_TROWEL.get());
-                output.accept(AetherIIItems.ARKENIUM_SHIELD.get());
-                output.accept(AetherIIItems.GRAVITITE_SHORTSWORD.get());
-                output.accept(AetherIIItems.GRAVITITE_HAMMER.get());
-                output.accept(AetherIIItems.GRAVITITE_SPEAR.get());
-                output.accept(AetherIIItems.GRAVITITE_CROSSBOW.get());
                 output.accept(AetherIIItems.GRAVITITE_SHOVEL.get());
                 output.accept(AetherIIItems.GRAVITITE_PICKAXE.get());
                 output.accept(AetherIIItems.GRAVITITE_AXE.get());
                 output.accept(AetherIIItems.GRAVITITE_TROWEL.get());
-                output.accept(AetherIIItems.GRAVITITE_SHIELD.get());
                 output.accept(AetherIIItems.ZANITE_SHEARS.get());
-                output.accept(AetherIIItems.SCATTERGLASS_BOLT.get());
-                output.accept(AetherIIItems.DART_SHOOTER.get());
-                output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.VULNERABILITY)).build()));
-                output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.TOXIN)).build()));
-                output.accept(AetherIIItems.HAMMER_OF_DEMOLITION.get());
                 output.accept(AetherIIItems.SKYROOT_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_WATER_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_PUFFERFISH_BUCKET.get());
@@ -728,11 +685,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.MOA_SADDLEBAG.get());
                 output.accept(AetherIIItems.LARGE_MOA_SADDLEBAG.get());
                 output.accept(AetherIIItems.CLOUD_SKIFF.get());
-                output.accept(AetherIIItems.IRRADIATED_ARMOR.get());
-                output.accept(AetherIIItems.IRRADIATED_WEAPON.get());
-                output.accept(AetherIIItems.IRRADIATED_TOOL.get());
-                output.accept(AetherIIItems.IRRADIATED_CHUNK.get());
-                output.accept(AetherIIItems.IRRADIATED_DUST.get());
                 output.accept(AetherIIItems.MUSIC_PLAYER.get());
                 output.accept(AetherIIItems.COMPACT_DISC_AETHER_TUNE.get());
                 output.accept(AetherIIItems.COMPACT_DISC_ASCENDING_DAWN.get());
@@ -747,12 +699,41 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GUIDEBOOK_PAGE.get());
             }).build());
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_ARMOR_AND_ACCESSORIES = CREATIVE_MODE_TABS.register("armor_and_accessories", () -> CreativeModeTab.builder()
-            .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "equipment_and_utilities"))
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_ARMOR_AND_ACCESSORIES = CREATIVE_MODE_TABS.register("combat_and_equipment", () -> CreativeModeTab.builder()
+            .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tools_and_utilities"))
             .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "consumables"))
-            .icon(() -> new ItemStack(AetherIIItems.GRAVITITE_HELMET.get()))
-            .title(Component.translatable("itemGroup." + AetherII.MODID + ".armor_and_accessories"))
+            .icon(() -> new ItemStack(AetherIIItems.ARKENIUM_SHORTSWORD.get()))
+            .title(Component.translatable("itemGroup." + AetherII.MODID + ".combat_and_equipment"))
             .displayItems((features, output) -> {
+                output.accept(AetherIIItems.SKYROOT_SHORTSWORD.get());
+                output.accept(AetherIIItems.HOLYSTONE_SHORTSWORD.get());
+                output.accept(AetherIIItems.ZANITE_SHORTSWORD.get());
+                output.accept(AetherIIItems.ARKENIUM_SHORTSWORD.get());
+                output.accept(AetherIIItems.GRAVITITE_SHORTSWORD.get());
+                output.accept(AetherIIItems.SKYROOT_SPEAR.get());
+                output.accept(AetherIIItems.HOLYSTONE_SPEAR.get());
+                output.accept(AetherIIItems.ZANITE_SPEAR.get());
+                output.accept(AetherIIItems.ARKENIUM_SPEAR.get());
+                output.accept(AetherIIItems.GRAVITITE_SPEAR.get());
+                output.accept(AetherIIItems.SKYROOT_HAMMER.get());
+                output.accept(AetherIIItems.HOLYSTONE_HAMMER.get());
+                output.accept(AetherIIItems.ZANITE_HAMMER.get());
+                output.accept(AetherIIItems.ARKENIUM_HAMMER.get());
+                output.accept(AetherIIItems.GRAVITITE_HAMMER.get());
+                output.accept(AetherIIItems.SKYROOT_SHIELD.get());
+                output.accept(AetherIIItems.BURRUKAI_PLATE_SHIELD.get());
+                output.accept(AetherIIItems.ZANITE_SHIELD.get());
+                output.accept(AetherIIItems.ARKENIUM_SHIELD.get());
+                output.accept(AetherIIItems.GRAVITITE_SHIELD.get());
+                output.accept(AetherIIItems.SKYROOT_CROSSBOW.get());
+                output.accept(AetherIIItems.HOLYSTONE_CROSSBOW.get());
+                output.accept(AetherIIItems.ZANITE_CROSSBOW.get());
+                output.accept(AetherIIItems.ARKENIUM_CROSSBOW.get());
+                output.accept(AetherIIItems.GRAVITITE_CROSSBOW.get());
+                output.accept(AetherIIItems.SCATTERGLASS_BOLT.get());
+                output.accept(AetherIIItems.DART_SHOOTER.get());
+                output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.VULNERABILITY)).build()));
+                output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.TOXIN)).build()));
                 output.accept(AetherIIItems.BEAST_PELT_HELMET.get());
                 output.accept(AetherIIItems.BEAST_PELT_CHESTPLATE.get());
                 output.accept(AetherIIItems.BEAST_PELT_LEGGINGS.get());
@@ -778,6 +759,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GRAVITITE_LEGGINGS.get());
                 output.accept(AetherIIItems.GRAVITITE_BOOTS.get());
                 output.accept(AetherIIItems.GRAVITITE_GLOVES.get());
+                output.accept(AetherIIItems.HAMMER_OF_DEMOLITION.get());
                 output.accept(AetherIIItems.NEPTUNE_HELMET.get());
                 output.accept(AetherIIItems.NEPTUNE_CHESTPLATE.get());
                 output.accept(AetherIIItems.NEPTUNE_LEGGINGS.get());
@@ -786,6 +768,14 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SENTRY_BOOTS.get());
                 output.accept(AetherIIItems.KINETIC_THRUSTERS.get());
                 output.accept(AetherIIItems.ZANITE_PENDANT.get());
+                output.accept(AetherIIItems.CHARM_OF_DAMAGE_I.get());
+                output.accept(AetherIIItems.CHARM_OF_DEXTERITY_I.get());
+                output.accept(AetherIIItems.CHARM_OF_HEALTH_I.get());
+                output.accept(AetherIIItems.CHARM_OF_DEFENSE_I.get());
+                output.accept(AetherIIItems.CHARM_OF_TOUGHNESS_I.get());
+                output.accept(AetherIIItems.CHARM_OF_RESISTANCE_I.get());
+                output.accept(AetherIIItems.CHARM_OF_AGILITY_I.get());
+                output.accept(AetherIIItems.CHARM_OF_EFFICIENCY_I.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_CONSUMABLES = CREATIVE_MODE_TABS.register("consumables", () -> CreativeModeTab.builder()
@@ -817,12 +807,13 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ANTIVENOM_VIAL.get());
                 output.accept(AetherIIItems.VALKYRIE_TEA.get());
                 output.accept(AetherIIItems.HEALING_STONE.get());
+                output.accept(new ItemStack(AetherIIItems.HEALING_STONE, 1, DataComponentPatch.builder().set(AetherIIDataComponents.HEALING_STONE_CHARGES.get(), 5).build()));
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_INGREDIENTS = CREATIVE_MODE_TABS.register("ingredients", () -> CreativeModeTab.builder()
             .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "consumables"))
             .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "spawn_eggs"))
-            .icon(() -> new ItemStack(AetherIIItems.INERT_ARKENIUM.get()))
+            .icon(() -> new ItemStack(AetherIIItems.AMBROSIUM_SHARD.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".ingredients"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.AMBROSIUM_SHARD.get());
@@ -848,24 +839,22 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.COCKATRICE_FEATHER.get());
                 output.accept(AetherIIItems.SWET_GEL.get());
                 output.accept(AetherIIItems.SWET_SUGAR.get());
+                output.accept(AetherIIBlocks.MOA_EGG.get());
                 output.accept(AetherIIItems.AECHOR_PETAL.get());
                 output.accept(AetherIIItems.SKYROOT_PINECONE.get());
                 output.accept(AetherIIItems.MOA_FEED.get());
                 output.accept(AetherIIItems.BLUEBERRY_MOA_FEED.get());
                 output.accept(AetherIIItems.ENCHANTED_MOA_FEED.get());
                 output.accept(AetherIIItems.SCATTERGLASS_VIAL.get());
+                output.accept(AetherIIItems.IRRADIATED_ARMOR.get());
+                output.accept(AetherIIItems.IRRADIATED_WEAPON.get());
+                output.accept(AetherIIItems.IRRADIATED_TOOL.get());
+                output.accept(AetherIIItems.IRRADIATED_CHUNK.get());
+                output.accept(AetherIIItems.IRRADIATED_DUST.get());
                 output.accept(AetherIIItems.ZEPHYR_HUSK.get());
                 output.accept(AetherIIItems.CHARGE_CATALYST.get());
                 output.accept(AetherIIItems.ARKENIUM_CORE.get());
                 output.accept(AetherIIItems.GRAVITITE_CORE.get());
-                output.accept(AetherIIItems.CHARM_OF_EFFICIENCY_I.get());
-                output.accept(AetherIIItems.CHARM_OF_DAMAGE_I.get());
-                output.accept(AetherIIItems.CHARM_OF_DEXTERITY_I.get());
-                output.accept(AetherIIItems.CHARM_OF_HEALTH_I.get());
-                output.accept(AetherIIItems.CHARM_OF_DEFENSE_I.get());
-                output.accept(AetherIIItems.CHARM_OF_TOUGHNESS_I.get());
-                output.accept(AetherIIItems.CHARM_OF_RESISTANCE_I.get());
-                output.accept(AetherIIItems.CHARM_OF_AGILITY_I.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_SPAWN_EGGS = CREATIVE_MODE_TABS.register("spawn_eggs", () -> CreativeModeTab.builder()
