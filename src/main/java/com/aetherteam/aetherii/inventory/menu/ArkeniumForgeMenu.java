@@ -26,6 +26,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class ArkeniumForgeMenu extends AbstractContainerMenu {
     public static final ResourceLocation SLOT_PRIMARY = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_primary");
@@ -34,6 +35,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
     private final Player player;
     @Nullable
     private String itemName;
+    private Consumer<ItemStack> inputUpdater = (input) -> {};
 
     public ArkeniumForgeMenu(int containerId, Inventory playerInventory) {
         this(containerId, playerInventory, new SimpleContainer(11));
@@ -184,6 +186,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                             }
                         }
                         if (flag) {
+                            this.inputUpdater.accept(input);
                             this.getPrimaryMaterial().shrink(primaryCost);
                             this.getSecondaryMaterial().shrink(secondaryCost);
                             return true;
@@ -306,5 +309,9 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             }
         }
         return false;
+    }
+
+    public void registerUpdater(Consumer<ItemStack> updater) {
+        this.inputUpdater = updater;
     }
 }
