@@ -6,12 +6,14 @@ import com.aetherteam.aetherii.client.gui.component.inventory.ReinforcementTierB
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
 import com.aetherteam.aetherii.inventory.menu.slot.ForgeCharmSlot;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.Charms;
 import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.EditBoxAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeRenamePacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeSlotCharmsPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeTriggerSoundPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeUpgradePacket;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -222,6 +224,17 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                             guiGraphics.renderFakeItem(secondary, x, y);
                             guiGraphics.renderItemDecorations(this.font, secondary, x, y);
                         }
+                    }
+                }
+            }
+
+            for (Slot slot : this.getMenu().slots) {
+                if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
+                    if (forgeCharmSlot.isActive() && !forgeCharmSlot.hasItem() && this.isHovering(forgeCharmSlot.x, forgeCharmSlot.y, 16, 16, mouseX, mouseY)) {
+                        List<Component> tooltipLines = new ArrayList<>();
+                        tooltipLines.add(Component.translatable("gui.aether_ii.arkenium_forge.charm_slot.tooltip"));
+                        tooltipLines.add(Charms.createCharmTierComponent(forgeCharmSlot.getCharmTier()).append(CommonComponents.SPACE).append(Charms.createCharmTypeComponent(forgeCharmSlot.getCharmType())).withStyle(ChatFormatting.GRAY));
+                        guiGraphics.setComponentTooltipForNextFrame(this.font, tooltipLines, mouseX, mouseY);
                     }
                 }
             }

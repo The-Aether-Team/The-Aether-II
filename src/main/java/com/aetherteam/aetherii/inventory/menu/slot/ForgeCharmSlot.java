@@ -79,6 +79,14 @@ public class ForgeCharmSlot extends Slot {
         return this.charmIndex;
     }
 
+    public Charms.Type getCharmType() {
+        return this.charmType;
+    }
+
+    public Charms.Tier getCharmTier() {
+        return this.charmTier;
+    }
+
     @Nullable
     @Override
     public ResourceLocation getNoItemIcon() {

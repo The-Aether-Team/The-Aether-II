@@ -264,7 +264,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                         (oldStack, newStack, newTier, baseComponent) -> {
                             baseComponent = tierTooltip(baseComponent);
                             baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE.getValue());
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE);
                             baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
                             baseComponent = durabilityTooltip(baseComponent, 150);
                             return baseComponent;
@@ -279,7 +279,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                         (oldStack, newStack, newTier, baseComponent) -> {
                             baseComponent = tierTooltip(baseComponent);
                             baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE.getValue());
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE);
                             baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
                             baseComponent = durabilityTooltip(baseComponent, 150);
                             return baseComponent;
@@ -293,7 +293,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                         (oldStack, newStack, newTier, baseComponent) -> {
                             baseComponent = tierTooltip(baseComponent);
                             baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE.getValue());
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE);
                             baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
                             baseComponent = durabilityTooltip(baseComponent, 150);
                             return baseComponent;
@@ -305,7 +305,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                             newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
                         },
                         (oldStack, newStack, newTier, baseComponent) -> {
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE.getValue());
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE);
                             baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
                             baseComponent = durabilityTooltip(baseComponent, 150);
                             return baseComponent;
@@ -317,7 +317,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                             newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
                         },
                         (oldStack, newStack, newTier, baseComponent) -> {
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE.getValue());
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE);
                             baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
                             baseComponent = durabilityTooltip(baseComponent, 150);
                             return baseComponent;
@@ -329,7 +329,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                             newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
                         },
                         (oldStack, newStack, newTier, baseComponent) -> {
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE.getValue());
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE);
                             baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
                             baseComponent = durabilityTooltip(baseComponent, 150);
                             return baseComponent;
@@ -347,7 +347,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                         (oldStack, newStack, newTier, baseComponent) -> {
                             baseComponent = tierTooltip(baseComponent);
                             baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.TWO.getValue());
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.TWO);
                             baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
                             baseComponent = durabilityTooltip(baseComponent, 200);
                             return baseComponent;
@@ -362,7 +362,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                         (oldStack, newStack, newTier, baseComponent) -> {
                             baseComponent = tierTooltip(baseComponent);
                             baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.TWO.getValue());
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.TWO);
                             baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
                             baseComponent = durabilityTooltip(baseComponent, 200);
                             return baseComponent;
@@ -376,7 +376,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                         (oldStack, newStack, newTier, baseComponent) -> {
                             baseComponent = tierTooltip(baseComponent);
                             baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
-                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.TWO.getValue());
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.TWO);
                             baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
                             baseComponent = durabilityTooltip(baseComponent, 200);
                             return baseComponent;
@@ -467,7 +467,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
             return baseComponent.append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.durability", Component.literal(String.valueOf(value))).withStyle(ChatFormatting.GRAY));
         }
 
-        public static MutableComponent charmTooltip(MutableComponent baseComponent, int amount, int tier) {
+        public static MutableComponent charmTooltip(MutableComponent baseComponent, int amount, Charms.Tier tier) {
             if (amount > 1) {
                 return baseComponent.append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.charms", Component.literal(String.valueOf(amount)), Charms.createCharmTierComponent(tier)).withStyle(ChatFormatting.GRAY));
             } else {

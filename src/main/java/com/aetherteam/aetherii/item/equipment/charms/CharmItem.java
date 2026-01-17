@@ -6,6 +6,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -20,7 +21,6 @@ import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.function.Consumer;
 
 public class CharmItem extends Item {
@@ -37,13 +37,13 @@ public class CharmItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.accept(Charms.createCharmTierComponent(this.tier.getValue()).withStyle(ChatFormatting.GRAY));
+        tooltipComponents.accept(Charms.createCharmTierComponent(this.tier).append(CommonComponents.SPACE).append(Charms.createCharmTypeComponent(this.type)).withStyle(ChatFormatting.GRAY));
 
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = Multimaps.newListMultimap(new HashMap<>(), ArrayList::new);
         for (ItemAttributeModifiers.Entry entry : this.getCharmAttributes()) {
             modifiers.put(entry.attribute(), entry.modifier());
         }
-        AccessoryUtil.addAttributeTooltips(stack, tooltipComponents, AttributeTooltipContext.of(null, context, tooltipDisplay, tooltipFlag), modifiers, "charms." + this.type.name().toLowerCase(Locale.ROOT));
+        AccessoryUtil.addAttributeTooltips(stack, tooltipComponents, AttributeTooltipContext.of(null, context, tooltipDisplay, tooltipFlag), modifiers, "charms");
         super.appendHoverText(stack, context, tooltipDisplay, tooltipComponents, tooltipFlag);
     }
 
