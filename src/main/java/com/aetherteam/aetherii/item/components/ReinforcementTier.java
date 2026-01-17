@@ -3,9 +3,12 @@ package com.aetherteam.aetherii.item.components;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.TagKey;
@@ -180,7 +183,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
     //  armor level - attributes
     //  armor toughness - attributes
 
-    public record Stats(Predicate<ItemStack> stackCondition, Charms charms, UpgradeFunction upgrades) {
+    public record Stats(Predicate<ItemStack> stackCondition, Charms charms, UpgradeInfo upgrades) {
         public static final Predicate<ItemStack> DEFAULT = (stack) -> true;
         public static final Predicate<ItemStack> TOOLS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_TOOLS) && !(stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
         public static final Predicate<ItemStack> WEAPONS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS) && !(stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
@@ -230,69 +233,154 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
 
 
         public static final Set<Stats> TIER_1 = Set.of(
-                new Stats(DEFAULT, new Charms(), (oldStack, newStack, newTier) -> {
-                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 50);
-                })
+                new Stats(DEFAULT, new Charms(), new UpgradeInfo(
+                        (oldStack, newStack, newTier) -> {
+                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 50);
+                        },
+                        (oldStack, newStack, newTier, baseComponent) -> {
+                            baseComponent = durabilityTooltip(baseComponent, 50);
+                            return baseComponent;
+                        }))
         );
         public static final Set<Stats> TIER_2 = Set.of(
-                new Stats(DEFAULT, new Charms(), (oldStack, newStack, newTier) -> {
-                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 100);
-                })
+                new Stats(DEFAULT, new Charms(), new UpgradeInfo(
+                        (oldStack, newStack, newTier) -> {
+                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 100);
+                        },
+                        (oldStack, newStack, newTier, baseComponent) -> {
+                            baseComponent = durabilityTooltip(baseComponent, 100);
+                            return baseComponent;
+                        }))
         );
         public static final Set<Stats> TIER_3 = Set.of(
-                new Stats(TOOLS, new Charms(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)), (oldStack, newStack, newTier) -> {
-                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
-                    upgradeToolTier(oldStack, newStack);
-                    upgradeAttributes(oldStack, newStack);
-                    upgradeCharms(oldStack, newStack, newTier);
-                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
-                }),
-                new Stats(WEAPONS, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)), (oldStack, newStack, newTier) -> {
-                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
-                    upgradeAttributes(oldStack, newStack);
-                    upgradeCharms(oldStack, newStack, newTier);
-                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
-                }),
-                new Stats(ARMOR, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)), (oldStack, newStack, newTier) -> {
-                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
-                    upgradeCharms(oldStack, newStack, newTier);
-                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
-                }),
-                new Stats(ARKENIUM_TOOLS, new Charms(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)), (oldStack, newStack, newTier) -> {
-                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
-                    upgradeCharms(oldStack, newStack, newTier);
-                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
-                }),
-                new Stats(ARKENIUM_WEAPONS, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)), (oldStack, newStack, newTier) -> {
-                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
-                    upgradeCharms(oldStack, newStack, newTier);
-                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
-                }),
-                new Stats(ARKENIUM_ARMOR, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)), (oldStack, newStack, newTier) -> {
-                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
-                    upgradeCharms(oldStack, newStack, newTier);
-                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
-                })
+                new Stats(TOOLS, new Charms(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)), new UpgradeInfo(
+                        (oldStack, newStack, newTier) -> {
+                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
+                            upgradeToolTier(oldStack, newStack);
+                            upgradeAttributes(oldStack, newStack);
+                            upgradeCharms(oldStack, newStack, newTier);
+                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                        },
+                        (oldStack, newStack, newTier, baseComponent) -> {
+                            baseComponent = tierTooltip(baseComponent);
+                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE.getValue());
+                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
+                            baseComponent = durabilityTooltip(baseComponent, 150);
+                            return baseComponent;
+                        })),
+                new Stats(WEAPONS, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),  new UpgradeInfo(
+                        (oldStack, newStack, newTier) -> {
+                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
+                            upgradeAttributes(oldStack, newStack);
+                            upgradeCharms(oldStack, newStack, newTier);
+                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                        },
+                        (oldStack, newStack, newTier, baseComponent) -> {
+                            baseComponent = tierTooltip(baseComponent);
+                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE.getValue());
+                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
+                            baseComponent = durabilityTooltip(baseComponent, 150);
+                            return baseComponent;
+                        })),
+                new Stats(ARMOR, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),  new UpgradeInfo(
+                        (oldStack, newStack, newTier) -> {
+                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
+                            upgradeCharms(oldStack, newStack, newTier);
+                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                        },
+                        (oldStack, newStack, newTier, baseComponent) -> {
+                            baseComponent = tierTooltip(baseComponent);
+                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE.getValue());
+                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
+                            baseComponent = durabilityTooltip(baseComponent, 150);
+                            return baseComponent;
+                        })),
+                new Stats(ARKENIUM_TOOLS, new Charms(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)),  new UpgradeInfo(
+                        (oldStack, newStack, newTier) -> {
+                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
+                            upgradeCharms(oldStack, newStack, newTier);
+                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                        },
+                        (oldStack, newStack, newTier, baseComponent) -> {
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE.getValue());
+                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
+                            baseComponent = durabilityTooltip(baseComponent, 150);
+                            return baseComponent;
+                        })),
+                new Stats(ARKENIUM_WEAPONS, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)),  new UpgradeInfo(
+                        (oldStack, newStack, newTier) -> {
+                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
+                            upgradeCharms(oldStack, newStack, newTier);
+                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                        },
+                        (oldStack, newStack, newTier, baseComponent) -> {
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE.getValue());
+                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
+                            baseComponent = durabilityTooltip(baseComponent, 150);
+                            return baseComponent;
+                        })),
+                new Stats(ARKENIUM_ARMOR, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),  new UpgradeInfo(
+                        (oldStack, newStack, newTier) -> {
+                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
+                            upgradeCharms(oldStack, newStack, newTier);
+                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                        },
+                        (oldStack, newStack, newTier, baseComponent) -> {
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE.getValue());
+                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
+                            baseComponent = durabilityTooltip(baseComponent, 150);
+                            return baseComponent;
+                        }))
         );
         public static final Set<Stats> TIER_4 = Set.of(
-                new Stats(ARKENIUM_TOOLS, new Charms(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.TWO)), (oldStack, newStack, newTier) -> {
-                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 200);
-                    upgradeToolTier(oldStack, newStack);
-                    upgradeAttributes(oldStack, newStack);
-                    upgradeCharms(oldStack, newStack, newTier);
-                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
-                }),
-                new Stats(ARKENIUM_WEAPONS, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO)), (oldStack, newStack, newTier) -> {
-                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 200);
-                    upgradeAttributes(oldStack, newStack);
-                    upgradeCharms(oldStack, newStack, newTier);
-                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
-                }),
-                new Stats(ARKENIUM_ARMOR, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)), (oldStack, newStack, newTier) -> {
-                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 200);
-                    upgradeCharms(oldStack, newStack, newTier);
-                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
-                })
+                new Stats(ARKENIUM_TOOLS, new Charms(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.TWO)),  new UpgradeInfo(
+                        (oldStack, newStack, newTier) -> {
+                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 200);
+                            upgradeToolTier(oldStack, newStack);
+                            upgradeAttributes(oldStack, newStack);
+                            upgradeCharms(oldStack, newStack, newTier);
+                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                        },
+                        (oldStack, newStack, newTier, baseComponent) -> {
+                            baseComponent = tierTooltip(baseComponent);
+                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.TWO.getValue());
+                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
+                            baseComponent = durabilityTooltip(baseComponent, 200);
+                            return baseComponent;
+                        })),
+                new Stats(ARKENIUM_WEAPONS, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO)),  new UpgradeInfo(
+                        (oldStack, newStack, newTier) -> {
+                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 200);
+                            upgradeAttributes(oldStack, newStack);
+                            upgradeCharms(oldStack, newStack, newTier);
+                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                        },
+                        (oldStack, newStack, newTier, baseComponent) -> {
+                            baseComponent = tierTooltip(baseComponent);
+                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.TWO.getValue());
+                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
+                            baseComponent = durabilityTooltip(baseComponent, 200);
+                            return baseComponent;
+                        })),
+                new Stats(ARKENIUM_ARMOR, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)),  new UpgradeInfo(
+                        (oldStack, newStack, newTier) -> {
+                            newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 200);
+                            upgradeCharms(oldStack, newStack, newTier);
+                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                        },
+                        (oldStack, newStack, newTier, baseComponent) -> {
+                            baseComponent = tierTooltip(baseComponent);
+                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
+                            baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.TWO.getValue());
+                            baseComponent = baseComponent.append(CommonComponents.NEW_LINE);
+                            baseComponent = durabilityTooltip(baseComponent, 200);
+                            return baseComponent;
+                        }))
         );
 
         private static void upgradeToolTier(ItemStack oldStack, ItemStack newStack) {
@@ -375,9 +463,32 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
             }
         }
 
+        public static MutableComponent durabilityTooltip(MutableComponent baseComponent, int value) {
+            return baseComponent.append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.durability", Component.literal(String.valueOf(value))).withStyle(ChatFormatting.GRAY));
+        }
+
+        public static MutableComponent charmTooltip(MutableComponent baseComponent, int amount, int tier) {
+            if (amount > 1) {
+                return baseComponent.append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.charms", Component.literal(String.valueOf(amount)), Charms.createCharmTierComponent(tier)).withStyle(ChatFormatting.GRAY));
+            } else {
+                return baseComponent.append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.charm", Component.literal(String.valueOf(amount)), Charms.createCharmTierComponent(tier)).withStyle(ChatFormatting.GRAY));
+            }
+        }
+
+        public static MutableComponent tierTooltip(MutableComponent baseComponent) {
+            return baseComponent.append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.tier").withStyle(ChatFormatting.GRAY));
+        }
+
+        public record UpgradeInfo(UpgradeFunction upgradeFunction, TooltipFunction tooltipFunction) { }
+
         @FunctionalInterface
         public interface UpgradeFunction {
             void updateComponents(ItemStack oldStack, ItemStack newStack, ReinforcementTier newTier);
+        }
+
+        @FunctionalInterface
+        public interface TooltipFunction {
+            MutableComponent createTooltip(ItemStack oldStack, ItemStack newStack, ReinforcementTier newTier, MutableComponent baseComponent);
         }
     }
 

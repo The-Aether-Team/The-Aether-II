@@ -3,6 +3,8 @@ package com.aetherteam.aetherii.item.components;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;
@@ -44,6 +46,10 @@ public record Charms(List<CharmHolder> charmHolders) {
             }
         }
         return null;
+    }
+
+    public static MutableComponent createCharmTierComponent(int tier) {
+        return Component.translatable("aether_ii.tooltip.item.charm.tier", Component.translatable("enchantment.level." + tier));
     }
 
     public static class CharmHolder {

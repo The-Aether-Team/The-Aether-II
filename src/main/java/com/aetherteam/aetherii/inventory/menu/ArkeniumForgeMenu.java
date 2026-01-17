@@ -178,7 +178,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                         for (ReinforcementTier tier : List.of(ReinforcementTier.values()).subList(minTier, tierNumberToUpgradeTo)) {
                             ReinforcementTier.Stats stats = tier.getStat(input);
                             if (stats != null) {
-                                stats.upgrades().updateComponents(input.copy(), input, tier);
+                                stats.upgrades().upgradeFunction().updateComponents(input.copy(), input, tier);
                                 input.set(AetherIIDataComponents.REINFORCEMENT_TIER, tier);
                             } else {
                                 flag = false;

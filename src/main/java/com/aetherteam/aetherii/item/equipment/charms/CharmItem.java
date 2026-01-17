@@ -37,7 +37,7 @@ public class CharmItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.accept(Component.translatable("aether_ii.tooltip.item.charm.tier", Component.translatable("enchantment.level." + this.tier.getValue())).withStyle(ChatFormatting.GRAY));
+        tooltipComponents.accept(Charms.createCharmTierComponent(this.tier.getValue()).withStyle(ChatFormatting.GRAY));
 
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = Multimaps.newListMultimap(new HashMap<>(), ArrayList::new);
         for (ItemAttributeModifiers.Entry entry : this.getCharmAttributes()) {
