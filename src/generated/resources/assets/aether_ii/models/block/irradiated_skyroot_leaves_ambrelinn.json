@@ -1,0 +1,10 @@
+{
+  "parent": "aether_ii:block/template_tinted_overlaid_leaves",
+  "textures": {
+    "bottom": "aether_ii:block/irradiated_skyroot_leaves",
+    "overlay": "aether_ii:block/ambrelinn_overlay",
+    "particle": "aether_ii:block/irradiated_skyroot_leaves",
+    "side": "aether_ii:block/irradiated_skyroot_leaves_ambrelinn",
+    "top": "aether_ii:block/ambrelinn_moss_block"
+  }
+}

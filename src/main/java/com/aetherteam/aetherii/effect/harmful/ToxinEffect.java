@@ -21,7 +21,6 @@ public class ToxinEffect extends MobEffect {
 
     @Override
     public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-        int i = 40 >> amplifier;
-        return i == 0 || duration % i == 0;
+        return duration % 40 == 0;
     }
 }

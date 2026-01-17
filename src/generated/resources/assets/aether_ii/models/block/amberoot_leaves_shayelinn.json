@@ -1,76 +1,8 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
-  "elements": [
-    {
-      "faces": {
-        "down": {
-          "cullface": "down",
-          "texture": "#bottom"
-        },
-        "east": {
-          "cullface": "east",
-          "texture": "#side"
-        },
-        "north": {
-          "cullface": "north",
-          "texture": "#side"
-        },
-        "south": {
-          "cullface": "south",
-          "texture": "#side"
-        },
-        "up": {
-          "cullface": "up",
-          "texture": "#top"
-        },
-        "west": {
-          "cullface": "west",
-          "texture": "#side"
-        }
-      },
-      "from": [
-        0,
-        0,
-        0
-      ],
-      "to": [
-        16,
-        16,
-        16
-      ]
-    },
-    {
-      "faces": {
-        "down": {
-          "cullface": "up",
-          "texture": "#up",
-          "uv": [
-            0.0,
-            16.0,
-            16.0,
-            0.0
-          ]
-        },
-        "up": {
-          "cullface": "up",
-          "texture": "#up"
-        }
-      },
-      "from": [
-        0,
-        15.998,
-        0
-      ],
-      "to": [
-        16,
-        16,
-        16
-      ]
-    }
-  ],
-  "render_type": "minecraft:cutout_mipped",
+  "parent": "aether_ii:block/template_overlaid_leaves",
   "textures": {
     "bottom": "aether_ii:block/amberoot_leaves",
+    "overlay": "aether_ii:block/shayelinn_overlay",
     "particle": "aether_ii:block/amberoot_leaves",
     "side": "aether_ii:block/amberoot_leaves_shayelinn",
     "top": "aether_ii:block/shayelinn_moss_block"

@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.event.hooks;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AercloudBlock;
 import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
@@ -13,7 +13,7 @@ import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.passive.FlyingCow;
 import com.aetherteam.aetherii.entity.passive.MountableAnimal;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
 import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootBucketItem;
 import com.aetherteam.aetherii.world.LevelUtil;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -55,8 +55,7 @@ import java.util.Optional;
 public class PlayerHooks {
     public static void forceSpecialLoadingCrouch(Player player) {
         ItemStack useStack = player.getUseItem();
-        Boolean special = useStack.get(AetherIIDataComponents.CROSSBOW_SPECIAL);
-        if (special != null && special) {
+        if (useStack.getItem() instanceof TieredCrossbowItem && player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).isCrossbowSpecial()) {
             if (!player.getAbilities().flying && !player.isSwimming() && !player.isPassenger()) {
                 player.setPose(Pose.CROUCHING);
             }

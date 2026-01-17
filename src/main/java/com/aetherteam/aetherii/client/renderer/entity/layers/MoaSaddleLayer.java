@@ -2,14 +2,13 @@ package com.aetherteam.aetherii.client.renderer.entity.layers;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
+import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaSaddleModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -34,11 +33,12 @@ public class MoaSaddleLayer extends RenderLayer<MoaRenderState, EntityModel<MoaR
             ItemStack saddle = moa.saddle;
             int colorRaw = IClientItemExtensions.of(saddle).getDefaultDyeColor(saddle);
             float opacity = moa.opacity;
-            int color = ARGB.colorFromFloat(opacity, ARGB.redFloat(colorRaw), ARGB.greenFloat(colorRaw), ARGB.blueFloat(colorRaw));
+            int baseColor = ARGB.colorFromFloat(opacity, ARGB.redFloat(colorRaw), ARGB.greenFloat(colorRaw), ARGB.blueFloat(colorRaw));
+            int overlayColor = ARGB.colorFromFloat(opacity, 1.0F, 1.0F, 1.0F);
 
             this.saddle.setupAnim(moa);
-            this.saddle.renderToBuffer(poseStack, ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(SADDLE_TEXTURE), false), packedLight, OverlayTexture.NO_OVERLAY, color);
-            this.saddle.renderToBuffer(poseStack, ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(SADDLE_OVERLAY_TEXTURE), false), packedLight, OverlayTexture.NO_OVERLAY, color);
+            this.saddle.renderToBuffer(poseStack, buffer.getBuffer(AetherIIRenderTypes.entityDitherNoCull(SADDLE_TEXTURE)), packedLight, OverlayTexture.NO_OVERLAY, baseColor);
+            this.saddle.renderToBuffer(poseStack, buffer.getBuffer(AetherIIRenderTypes.entityDitherNoCull(SADDLE_OVERLAY_TEXTURE)), packedLight, OverlayTexture.NO_OVERLAY, overlayColor);
         }
     }
 }

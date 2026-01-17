@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.item.equipment.weapons.holystone;
 
 import com.aetherteam.aetherii.AetherIIStats;
-import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
 import net.minecraft.server.level.ServerLevel;
@@ -16,7 +16,7 @@ public class HolystoneCrossbowItem extends TieredCrossbowItem {
 
     @Override
     public float getProjectileSpread(ServerLevel level, ItemStack tool, Entity entity, float projectileSpread) {
-        if (tool.has(AetherIIDataComponents.CROSSBOW_SPECIAL) && Boolean.TRUE.equals(tool.get(AetherIIDataComponents.CROSSBOW_SPECIAL))) {
+        if (entity.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).isCrossbowSpecial()) {
             return 10.0F;
         }
         return super.getProjectileSpread(level, tool, entity, projectileSpread);
@@ -24,7 +24,7 @@ public class HolystoneCrossbowItem extends TieredCrossbowItem {
 
     @Override
     public int getProjectileCount(ServerLevel level, ItemStack tool, Entity entity, int projectileCount) {
-        if (tool.has(AetherIIDataComponents.CROSSBOW_SPECIAL) && Boolean.TRUE.equals(tool.get(AetherIIDataComponents.CROSSBOW_SPECIAL))) {
+        if (entity.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).isCrossbowSpecial()) {
             return 3;
         }
         return super.getProjectileCount(level, tool, entity, projectileCount);

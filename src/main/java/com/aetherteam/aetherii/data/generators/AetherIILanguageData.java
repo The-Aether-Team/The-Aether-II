@@ -57,6 +57,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGeneric("bedroll.too_dark", "You may not rest now; it is too dark to sleep here");
         this.addGeneric("message.campfire_added", "Outpost campfire respawn point set");
         this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid outpost campfire");
+        this.addGeneric("message.passenger.onboard", "Press %1$s and %2$s to Dismount Passenger");
 
         // Packs
         this.addPackDescription("mod", "Aether II Resources");
@@ -65,6 +66,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addTooltip("item.modifiers.blocking", "When blocking:");
         this.addTooltip("item.modifiers.accepts_charms.melee", "When on melee item:");
         this.addTooltip("item.modifiers.accepts_charms.armor", "When on armor item:");
+
+        // Keys
+        this.addKeyInfo("category", "The Aether II");
+        this.addKeyInfo("allow_dismounting_passenger.desc", "Allow Dismounting Passenger");
     }
 
     private void addBlocks() {
@@ -1081,9 +1086,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SHOVEL.get(), 2, "§3Use:§r Crouch-Interact");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_TROWEL.get(), 1, "§9Ability:§r Levitates Block");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_TROWEL.get(), 2, "§3Use:§r Crouch-Interact");
-        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SHORTSWORD.get(), 1, "§9Ability:§r Shifts Gravity");
-        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_HAMMER.get(), 1, "§9Ability:§r Shifts Gravity");
-        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SPEAR.get(), 1, "§9Ability:§r Shifts Gravity");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SHORTSWORD.get(), 1, "§9Ability:§r Increases Gravity");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_HAMMER.get(), 1, "§9Ability:§r Increases Gravity");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SPEAR.get(), 1, "§9Ability:§r Increases Gravity");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 1, "§9Ability:§r Straight Shot");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 2, "§3Use:§r Crouch-Use");
 
@@ -1357,6 +1362,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEffect(AetherIIEffects.FROSTBITE, "Frostbite");
         this.addEffect(AetherIIEffects.FUNGAL_ROT, "Fungal Rot");
         this.addEffect(AetherIIEffects.CRYSTALLIZED, "Crystallized");
+
+        this.addEffect(AetherIIEffects.NATURAL_CAMOUFLAGE, "Natural Camouflage");
+        this.addEffect(AetherIIEffects.ELECTRIC_SHOCK, "Electric Shock");
+        this.addEffect(AetherIIEffects.GRAVITATIONAL_PULL, "Gravitational Pull");
     }
 
     private void addCreativeTabs() {
@@ -1687,11 +1696,21 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addDeaths() {
         // Deaths
         this.addDeath("effect.wound", "%1$s was fatally wounded");
+        this.addDeath("effect.wound.player", "%1$s was fatally wounded by %2$s");
         this.addDeath("effect.fracture", "Oof, owie, %1$s's bones");
+        this.addDeath("effect.fracture.player", "%2$s oof owied %1$s's bones");
         this.addDeath("effect.toxin", "%1$s succumbed to toxin");
+        this.addDeath("effect.toxin.player", "%1$s succumbed to toxin while trying to escape %2$s");
         this.addDeath("effect.venom", "%1$s succumbed to venom");
+        this.addDeath("effect.venom.player", "%1$s succumbed to venom while trying to escape %2$s");
         this.addDeath("effect.charged", "%1$s was electrocuted");
+        this.addDeath("effect.charged.player", "%1$s was electrocuted by %2$s");
         this.addDeath("effect.immolation", "%1$s burned to death");
+        this.addDeath("effect.immolation.player", "%1$s burned to death while trying to escape %2$s");
+        this.addDeath("alkahest", "%1$s dissolved in alkahest");
+        this.addDeath("alkahest.player", "%1$s dissolved in alkahest while trying to escape %2$s");
+        this.addDeath("shock", "%1$s was electrocuted");
+        this.addDeath("shock.player", "%1$s was electrocuted by %2$s");
     }
 
     // Utility methods

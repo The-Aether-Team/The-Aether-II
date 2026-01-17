@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.item.equipment.weapons.gravitite;
 
 import com.aetherteam.aetherii.AetherIIStats;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
@@ -18,7 +19,7 @@ public class GravititeCrossbowItem extends TieredCrossbowItem {
     @Override
     protected Projectile createProjectile(Level level, LivingEntity shooter, ItemStack weapon, ItemStack ammo, boolean isCrit) {
         Projectile projectile = super.createProjectile(level, shooter, weapon, ammo, isCrit);
-        if (weapon.has(AetherIIDataComponents.CROSSBOW_SPECIAL) && Boolean.TRUE.equals(weapon.get(AetherIIDataComponents.CROSSBOW_SPECIAL))) {
+        if (shooter.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).isCrossbowSpecial()) {
             projectile.setNoGravity(true);
         }
         return projectile;

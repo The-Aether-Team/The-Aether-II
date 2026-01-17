@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.renderer.entity.layers;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
+import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaLargeSaddlebagModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaSaddlebagModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
@@ -39,10 +40,10 @@ public class MoaSaddlebagLayer extends RenderLayer<MoaRenderState, EntityModel<M
 
             if (moa.saddlebag.is(AetherIIItems.MOA_SADDLEBAG)) {
                 this.saddlebag.setupAnim(moa);
-                this.saddlebag.renderToBuffer(poseStack, ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(SADDLEBAG_TEXTURE), false), packedLight, OverlayTexture.NO_OVERLAY, color);
+                this.saddlebag.renderToBuffer(poseStack, buffer.getBuffer(AetherIIRenderTypes.entityDitherNoCull(SADDLEBAG_TEXTURE)), packedLight, OverlayTexture.NO_OVERLAY, color);
             } else if (moa.saddlebag.is(AetherIIItems.LARGE_MOA_SADDLEBAG)) {
                 this.largeSaddlebag.setupAnim(moa);
-                this.largeSaddlebag.renderToBuffer(poseStack, ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(LARGE_SADDLEBAG_TEXTURE), false), packedLight, OverlayTexture.NO_OVERLAY, color);
+                this.largeSaddlebag.renderToBuffer(poseStack, buffer.getBuffer(AetherIIRenderTypes.entityDitherNoCull(LARGE_SADDLEBAG_TEXTURE)), packedLight, OverlayTexture.NO_OVERLAY, color);
             }
         }
     }

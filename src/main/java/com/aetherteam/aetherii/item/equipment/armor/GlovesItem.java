@@ -30,13 +30,11 @@ public class GlovesItem extends AccessoryItem {
 
     private final double maxEndurance;
     private final double enduranceRecovery;
-    protected ResourceLocation glovesTexture;
 
     public GlovesItem(ArmorMaterial material, double maxEndurance, double enduranceRecovery, Properties properties) {
         super(properties.durability(13 * material.durability()), AccessoryContainer.SlotType.HANDWEAR);
         this.maxEndurance = maxEndurance;
         this.enduranceRecovery = enduranceRecovery;
-        this.setRenderTexture(material.assetId().location().getNamespace(), material.assetId().location().getPath());
     }
 
     @Override
@@ -49,12 +47,9 @@ public class GlovesItem extends AccessoryItem {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipComponents, tooltipFlag);
     }
 
-    public void setRenderTexture(String modId, String registryName) {
-        this.glovesTexture = ResourceLocation.fromNamespaceAndPath(modId, "textures/entity/equipment/humanoid_gloves/" + registryName + ".png");
-    }
-
-    public ResourceLocation getGlovesTexture() {
-        return this.glovesTexture;
+    @Override
+    public boolean rendersInFirstPerson(ItemStack stack) {
+        return true;
     }
 
     public double getMaxEndurance() {

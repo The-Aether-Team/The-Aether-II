@@ -21,15 +21,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class Overlaid implements SpriteSource {
-    public static final MapCodec<Overlaid> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-            Codec.list(ResourceLocation.CODEC).fieldOf("textures").forGetter((overlaid) -> overlaid.textures),
-            Codec.unboundedMap(Codec.STRING, ResourceLocation.CODEC).fieldOf("overlays").forGetter((overlaid) -> overlaid.overlays)
-    ).apply(instance, Overlaid::new));
+public class Subtractive implements SpriteSource {
+    public static final MapCodec<Subtractive> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+            Codec.list(ResourceLocation.CODEC).fieldOf("textures").forGetter((subtractive) -> subtractive.textures),
+            Codec.unboundedMap(Codec.STRING, ResourceLocation.CODEC).fieldOf("overlays").forGetter((subtractive) -> subtractive.overlays)
+    ).apply(instance, Subtractive::new));
     private final List<ResourceLocation> textures;
     private final Map<String, ResourceLocation> overlays;
 
-    public Overlaid(List<ResourceLocation> textures, Map<String, ResourceLocation> overlays) {
+    public Subtractive(List<ResourceLocation> textures, Map<String, ResourceLocation> overlays) {
         this.textures = textures;
         this.overlays = overlays;
     }
@@ -47,7 +47,7 @@ public class Overlaid implements SpriteSource {
                     if (overlayTexture.isPresent()) {
                         LazyLoadedImage overlayImage = new LazyLoadedImage(overlayTextureLocation, overlayTexture.get(), this.textures.size());
                         ResourceLocation outputLocation = location.withSuffix("_" + overlayEntry.getKey());
-                        output.add(outputLocation, new OverlaidSpriteSupplier(originalImage, overlayImage, outputLocation));
+                        output.add(outputLocation, new SubtractiveSpriteSupplier(originalImage, overlayImage, outputLocation));
                     }
                 }
             }
@@ -59,7 +59,7 @@ public class Overlaid implements SpriteSource {
         return CODEC;
     }
 
-    public record OverlaidSpriteSupplier(LazyLoadedImage baseImage, LazyLoadedImage overlayImage, ResourceLocation outputLocation) implements SpriteSource.SpriteSupplier {
+    public record SubtractiveSpriteSupplier(LazyLoadedImage baseImage, LazyLoadedImage overlayImage, ResourceLocation outputLocation) implements SpriteSource.SpriteSupplier {
         @Nullable
         public SpriteContents apply(SpriteResourceLoader p_295023_) {
             try {
@@ -69,13 +69,14 @@ public class Overlaid implements SpriteSource {
 
                 for (int i = 0; i < nativeImage.getHeight(); i++) {
                     for (int j = 0; j < nativeImage.getWidth(); j++) {
-                        int color = nativeOverlayImage.getLuminanceOrAlpha(i, j) != 0 ? nativeOverlayImage.getPixel(i, j) : nativeBaseImage.getPixel(i, j);
-                        nativeImage.setPixel(i, j, color);
+                        if (nativeOverlayImage.getLuminanceOrAlpha(i, j) == 0) {
+                            nativeImage.setPixel(i, j, nativeBaseImage.getPixel(i, j));
+                        }
                     }
                 }
                 return new SpriteContents(this.outputLocation(), new FrameSize(nativeImage.getWidth(), nativeImage.getHeight()), nativeImage, ResourceMetadata.EMPTY);
             } catch (IOException | IllegalArgumentException ioexception) {
-                AetherII.LOGGER.error("unable to create overlaid sprite at {}", this.outputLocation(), ioexception);
+                AetherII.LOGGER.error("unable to create subtractive sprite at {}", this.outputLocation(), ioexception);
             } finally {
                 this.baseImage.release();
                 this.overlayImage.release();
