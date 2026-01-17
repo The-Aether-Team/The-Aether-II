@@ -107,10 +107,12 @@ public class AetherIIItems {
 
     public static final Style CURRENCY_NAME_COLOR = Style.EMPTY.withColor(12566527);
     public static final Style TREASURE_NAME_COLOR = Style.EMPTY.withColor(16765952);
+    public static final Style UPGRADED_WEAPON_COLOR = Style.EMPTY.withColor(11730876);
     public static final Style WEAPON_TOOLTIP_COLOR = Style.EMPTY.withColor(11393240);
 
     public static final Rarity AETHER_II_CURRENCY = Rarity.valueOf("AETHER_II_CURRENCY");
     public static final Rarity AETHER_II_TREASURE = Rarity.valueOf("AETHER_II_TREASURE");
+    public static final Rarity AETHER_II_UPGRADED = Rarity.valueOf("AETHER_II_UPGRADED");
 
     // Tools
     public static final DeferredItem<Item> SKYROOT_PICKAXE = register("skyroot_pickaxe", SkyrootPickaxeItem::new);

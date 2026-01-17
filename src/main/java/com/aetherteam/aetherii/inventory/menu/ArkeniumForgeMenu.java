@@ -136,7 +136,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                 } else if (slotIndex >= 38 && slotIndex < 47 && !this.moveItemStackTo(slotStack, 11, 38, false)) {
                     return ItemStack.EMPTY;
                 } else {
-                    if (!this.moveItemStackTo(slotStack, 0, 1, false)) {
+                    if (!this.moveItemStackTo(slotStack, 0, 1, false)) { //todo fix; look at anvil move stack code
                         return ItemStack.EMPTY;
                     }
                 }
@@ -173,26 +173,17 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                         }
 
                         boolean flag = true;
-                        int extraDurability = 0;
                         for (ReinforcementTier tier : List.of(ReinforcementTier.values()).subList(minTier, tierNumberToUpgradeTo)) {
                             ReinforcementTier.Stats stats = tier.getStat(input);
                             if (stats != null) {
-                                extraDurability += stats.durabilityToAdd();
+                                stats.upgrades().updateComponents(input.copy(), input, tier);
+                                input.set(AetherIIDataComponents.REINFORCEMENT_TIER, tier);
                             } else {
                                 flag = false;
                                 break;
                             }
                         }
-
                         if (flag) {
-                            Charms newCharms = this.upgradeCharmSlots(tierToUpgradeTo);
-                            if (newCharms != null) {
-                                input.set(AetherIIDataComponents.CHARMS, newCharms);
-                            }
-
-                            input.set(DataComponents.MAX_DAMAGE, input.getMaxDamage() + extraDurability);
-                            input.set(AetherIIDataComponents.REINFORCEMENT_TIER, tierToUpgradeTo);
-
                             this.getPrimaryMaterial().shrink(primaryCost);
                             this.getSecondaryMaterial().shrink(secondaryCost);
                             return true;
@@ -203,54 +194,6 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         }
 
         return false;
-    }
-
-    public Charms upgradeCharmSlots(ReinforcementTier tierToUpgradeTo) {
-        ItemStack input = this.getInput();
-        ReinforcementTier currentReinforcementTier = input.get(AetherIIDataComponents.REINFORCEMENT_TIER);
-        ReinforcementTier.Stats newStats = tierToUpgradeTo.getStat(input);
-        Charms newCharms = null;
-
-        if (newStats != null) {
-            Charms newStatCharms = newStats.charmsToSet();
-
-            if (newStatCharms != null) {
-                Charms charms = input.get(AetherIIDataComponents.CHARMS);
-                newCharms = new Charms();
-
-                if (charms != null) {
-                    List<Charms.CharmHolder> currentCharmHolders = charms.charmHolders();
-                    List<Charms.CharmHolder> newStatCharmHolders = newStatCharms.charmHolders();
-                    List<Charms.CharmHolder> newCharmHolders = newCharms.charmHolders();
-                    List<Charms.CharmHolder> currentStatCharmHolders = List.of();
-                    if (currentReinforcementTier != null) {
-                        ReinforcementTier.Stats currentStats = currentReinforcementTier.getStat(input);
-                        if (currentStats != null) {
-                            currentStatCharmHolders = currentStats.charmsToSet().charmHolders();
-                        }
-                    }
-
-                    int baseSize = currentCharmHolders.size() - currentStatCharmHolders.size();
-                    int size = baseSize + newStatCharmHolders.size();
-                    for (int i = 0; i < size; i++) {
-                        if (i < baseSize) {
-                            newCharmHolders.add(i, new Charms.CharmHolder(currentCharmHolders.get(i)));
-                        } else {
-                            Charms.CharmHolder newStatCharmHolder = newStatCharmHolders.get(i - baseSize);
-                            if (i < currentCharmHolders.size()) {
-                                Charms.CharmHolder currentCharmHolder = currentCharmHolders.get(i);
-                                newCharmHolders.add(i, new Charms.CharmHolder(newStatCharmHolder.getType(), newStatCharmHolder.getTier(), currentCharmHolder.getStack()));
-                            } else {
-                                newCharmHolders.add(i, newStatCharmHolder);
-                            }
-                        }
-                    }
-                } else {
-                    newCharms = newStatCharms;
-                }
-            }
-        }
-        return newCharms;
     }
 
     public boolean slotCharms() {

@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -14,6 +15,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
@@ -22,6 +25,7 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
     FIRST(1, Stats.TIER_1, Cost.TIER_1),
@@ -168,28 +172,213 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
         return -1;
     }
 
-    public record Stats(Predicate<ItemStack> stackCondition, int durabilityToAdd, Charms charmsToSet) {
+    //todo the item tier upgrading system; need to upgrade:
+    //  base attack damage/typed damage - attributes
+    //  base attack speed - attributes
+    //  mining tool tier - tool component
+    //  mining speed - tool component
+    //  armor level - attributes
+    //  armor toughness - attributes
+
+    public record Stats(Predicate<ItemStack> stackCondition, Charms charms, UpgradeFunction upgrades) {
         public static final Predicate<ItemStack> DEFAULT = (stack) -> true;
-        public static final Predicate<ItemStack> TOOLS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_TOOLS);
-        public static final Predicate<ItemStack> WEAPONS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS);
-        public static final Predicate<ItemStack> ARMOR = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR);
+        public static final Predicate<ItemStack> TOOLS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_TOOLS) && !(stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
+        public static final Predicate<ItemStack> WEAPONS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS) && !(stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
+        public static final Predicate<ItemStack> ARMOR = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR) && !(stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
+        public static final Predicate<ItemStack> ARKENIUM_TOOLS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_TOOLS) && (stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
+        public static final Predicate<ItemStack> ARKENIUM_WEAPONS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS) && (stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
+        public static final Predicate<ItemStack> ARKENIUM_ARMOR = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR) && (stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
+
+        public static final Map<Supplier<? extends Item>, Supplier<? extends Item>> UPGRADE_REFERENCE = Map.ofEntries(
+                Map.entry(AetherIIItems.SKYROOT_PICKAXE, AetherIIItems.HOLYSTONE_PICKAXE),
+                Map.entry(AetherIIItems.SKYROOT_AXE, AetherIIItems.HOLYSTONE_AXE),
+                Map.entry(AetherIIItems.SKYROOT_SHOVEL, AetherIIItems.HOLYSTONE_SHOVEL),
+                Map.entry(AetherIIItems.SKYROOT_TROWEL, AetherIIItems.HOLYSTONE_TROWEL),
+                Map.entry(AetherIIItems.HOLYSTONE_PICKAXE, AetherIIItems.ZANITE_PICKAXE),
+                Map.entry(AetherIIItems.HOLYSTONE_AXE, AetherIIItems.ZANITE_AXE),
+                Map.entry(AetherIIItems.HOLYSTONE_SHOVEL, AetherIIItems.ZANITE_SHOVEL),
+                Map.entry(AetherIIItems.HOLYSTONE_TROWEL, AetherIIItems.ZANITE_TROWEL),
+                Map.entry(AetherIIItems.ZANITE_PICKAXE, AetherIIItems.GRAVITITE_PICKAXE),
+                Map.entry(AetherIIItems.ZANITE_AXE, AetherIIItems.GRAVITITE_AXE),
+                Map.entry(AetherIIItems.ZANITE_SHOVEL, AetherIIItems.GRAVITITE_SHOVEL),
+                Map.entry(AetherIIItems.ZANITE_TROWEL, AetherIIItems.GRAVITITE_TROWEL),
+                Map.entry(AetherIIItems.ARKENIUM_PICKAXE, AetherIIItems.GRAVITITE_PICKAXE),
+                Map.entry(AetherIIItems.ARKENIUM_AXE, AetherIIItems.GRAVITITE_AXE),
+                Map.entry(AetherIIItems.ARKENIUM_SHOVEL, AetherIIItems.GRAVITITE_SHOVEL),
+                Map.entry(AetherIIItems.ARKENIUM_TROWEL, AetherIIItems.GRAVITITE_TROWEL),
+                Map.entry(AetherIIItems.GRAVITITE_PICKAXE, () -> Items.NETHERITE_PICKAXE),
+                Map.entry(AetherIIItems.GRAVITITE_AXE, () -> Items.NETHERITE_AXE),
+                Map.entry(AetherIIItems.GRAVITITE_SHOVEL, () -> Items.NETHERITE_SHOVEL),
+                Map.entry(AetherIIItems.GRAVITITE_TROWEL, () -> Items.NETHERITE_HOE),
+
+                Map.entry(AetherIIItems.SKYROOT_SHORTSWORD, AetherIIItems.HOLYSTONE_SHORTSWORD),
+                Map.entry(AetherIIItems.SKYROOT_HAMMER, AetherIIItems.HOLYSTONE_HAMMER),
+                Map.entry(AetherIIItems.SKYROOT_SPEAR, AetherIIItems.HOLYSTONE_SPEAR),
+                Map.entry(AetherIIItems.HOLYSTONE_SHORTSWORD, AetherIIItems.ZANITE_SHORTSWORD),
+                Map.entry(AetherIIItems.HOLYSTONE_HAMMER, AetherIIItems.ZANITE_HAMMER),
+                Map.entry(AetherIIItems.HOLYSTONE_SPEAR, AetherIIItems.ZANITE_SPEAR),
+                Map.entry(AetherIIItems.ZANITE_SHORTSWORD, AetherIIItems.GRAVITITE_SHORTSWORD),
+                Map.entry(AetherIIItems.ZANITE_HAMMER, AetherIIItems.GRAVITITE_HAMMER),
+                Map.entry(AetherIIItems.ZANITE_SPEAR, AetherIIItems.GRAVITITE_SPEAR),
+                Map.entry(AetherIIItems.ARKENIUM_SHORTSWORD, AetherIIItems.GRAVITITE_SHORTSWORD),
+                Map.entry(AetherIIItems.ARKENIUM_HAMMER, AetherIIItems.GRAVITITE_HAMMER),
+                Map.entry(AetherIIItems.ARKENIUM_SPEAR, AetherIIItems.GRAVITITE_SPEAR)
+//                Map.entry(AetherIIItems.GRAVITITE_SHORTSWORD, AetherIIItems.GRAVITITE_SHORTSWORD), //TODO
+//                Map.entry(AetherIIItems.GRAVITITE_HAMMER, AetherIIItems.GRAVITITE_HAMMER),
+//                Map.entry(AetherIIItems.GRAVITITE_SPEAR, AetherIIItems.GRAVITITE_SPEAR),
+        );
+
 
         public static final Set<Stats> TIER_1 = Set.of(
-                new Stats(DEFAULT, 50, new Charms())
+                new Stats(DEFAULT, new Charms(), (oldStack, newStack, newTier) -> {
+                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 50);
+                })
         );
         public static final Set<Stats> TIER_2 = Set.of(
-                new Stats(DEFAULT, 100, new Charms())
+                new Stats(DEFAULT, new Charms(), (oldStack, newStack, newTier) -> {
+                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 100);
+                })
         );
         public static final Set<Stats> TIER_3 = Set.of(
-                new Stats(TOOLS, 150, new Charms(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE))),
-                new Stats(WEAPONS, 150, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE))),
-                new Stats(ARMOR, 150, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)))
+                new Stats(TOOLS, new Charms(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)), (oldStack, newStack, newTier) -> {
+                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
+                    upgradeToolTier(oldStack, newStack);
+                    upgradeAttributes(oldStack, newStack);
+                    upgradeCharms(oldStack, newStack, newTier);
+                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                }),
+                new Stats(WEAPONS, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)), (oldStack, newStack, newTier) -> {
+                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
+                    upgradeAttributes(oldStack, newStack);
+                    upgradeCharms(oldStack, newStack, newTier);
+                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                }),
+                new Stats(ARMOR, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)), (oldStack, newStack, newTier) -> {
+                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
+                    upgradeCharms(oldStack, newStack, newTier);
+                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                }),
+                new Stats(ARKENIUM_TOOLS, new Charms(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.ONE)), (oldStack, newStack, newTier) -> {
+                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
+                    upgradeCharms(oldStack, newStack, newTier);
+                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                }),
+                new Stats(ARKENIUM_WEAPONS, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.ONE)), (oldStack, newStack, newTier) -> {
+                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
+                    upgradeCharms(oldStack, newStack, newTier);
+                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                }),
+                new Stats(ARKENIUM_ARMOR, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)), (oldStack, newStack, newTier) -> {
+                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
+                    upgradeCharms(oldStack, newStack, newTier);
+                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                })
         );
         public static final Set<Stats> TIER_4 = Set.of(
-                new Stats(TOOLS, 200, new Charms(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.TWO))),
-                new Stats(WEAPONS, 200, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO))),
-                new Stats(ARMOR, 200, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)))
+                new Stats(ARKENIUM_TOOLS, new Charms(new Charms.CharmHolder(Charms.Type.TOOL, Charms.Tier.TWO)), (oldStack, newStack, newTier) -> {
+                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 200);
+                    upgradeToolTier(oldStack, newStack);
+                    upgradeAttributes(oldStack, newStack);
+                    upgradeCharms(oldStack, newStack, newTier);
+                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                }),
+                new Stats(ARKENIUM_WEAPONS, new Charms(new Charms.CharmHolder(Charms.Type.WEAPON, Charms.Tier.TWO)), (oldStack, newStack, newTier) -> {
+                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 200);
+                    upgradeAttributes(oldStack, newStack);
+                    upgradeCharms(oldStack, newStack, newTier);
+                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                }),
+                new Stats(ARKENIUM_ARMOR, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)), (oldStack, newStack, newTier) -> {
+                    newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 200);
+                    upgradeCharms(oldStack, newStack, newTier);
+                    newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
+                })
         );
+
+        private static void upgradeToolTier(ItemStack oldStack, ItemStack newStack) {
+            Item upgradeReference = null;
+            for (Map.Entry<Supplier<? extends Item>, Supplier<? extends Item>> entry : UPGRADE_REFERENCE.entrySet()) {
+                if (entry.getKey().get() == oldStack.getItem()) {
+                    upgradeReference = entry.getValue().get();
+                    break;
+                }
+            }
+            if (upgradeReference != null) {
+                Tool tool = upgradeReference.getDefaultInstance().get(DataComponents.TOOL);
+                if (tool != null) {
+                    newStack.set(DataComponents.TOOL, tool);
+                }
+            }
+        }
+
+        private static void upgradeAttributes(ItemStack oldStack, ItemStack newStack) {
+            Item upgradeReference = null;
+            for (Map.Entry<Supplier<? extends Item>, Supplier<? extends Item>> entry : UPGRADE_REFERENCE.entrySet()) {
+                if (entry.getKey().get() == oldStack.getItem()) {
+                    upgradeReference = entry.getValue().get();
+                    break;
+                }
+            }
+            if (upgradeReference != null) {
+                ItemAttributeModifiers modifiers = upgradeReference.getDefaultInstance().get(DataComponents.ATTRIBUTE_MODIFIERS);
+                if (modifiers != null) {
+                    newStack.set(DataComponents.ATTRIBUTE_MODIFIERS, modifiers);
+                }
+            }
+        }
+
+        private static void upgradeCharms(ItemStack oldStack, ItemStack newStack, ReinforcementTier newTier) {
+            ReinforcementTier currentReinforcementTier = oldStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
+            ReinforcementTier.Stats newStats = newTier.getStat(oldStack);
+            Charms newCharms = null;
+            if (newStats != null) {
+                Charms newStatCharms = newStats.charms();
+
+                if (newStatCharms != null) {
+                    Charms charms = oldStack.get(AetherIIDataComponents.CHARMS);
+                    newCharms = new Charms();
+
+                    if (charms != null) {
+                        List<Charms.CharmHolder> currentCharmHolders = charms.charmHolders();
+                        List<Charms.CharmHolder> newStatCharmHolders = newStatCharms.charmHolders();
+                        List<Charms.CharmHolder> newCharmHolders = newCharms.charmHolders();
+                        List<Charms.CharmHolder> currentStatCharmHolders = List.of();
+                        if (currentReinforcementTier != null) {
+                            ReinforcementTier.Stats currentStats = currentReinforcementTier.getStat(oldStack);
+                            if (currentStats != null) {
+                                currentStatCharmHolders = currentStats.charms().charmHolders();
+                            }
+                        }
+
+                        int baseSize = currentCharmHolders.size() - currentStatCharmHolders.size();
+                        int size = baseSize + newStatCharmHolders.size();
+                        for (int i = 0; i < size; i++) {
+                            if (i < baseSize) {
+                                newCharmHolders.add(i, new Charms.CharmHolder(currentCharmHolders.get(i)));
+                            } else {
+                                Charms.CharmHolder newStatCharmHolder = newStatCharmHolders.get(i - baseSize);
+                                if (i < currentCharmHolders.size()) {
+                                    Charms.CharmHolder currentCharmHolder = currentCharmHolders.get(i);
+                                    newCharmHolders.add(i, new Charms.CharmHolder(newStatCharmHolder.getType(), newStatCharmHolder.getTier(), currentCharmHolder.getStack()));
+                                } else {
+                                    newCharmHolders.add(i, newStatCharmHolder);
+                                }
+                            }
+                        }
+                    } else {
+                        newCharms = newStatCharms;
+                    }
+                }
+            }
+            if (newCharms != null) {
+                newStack.set(AetherIIDataComponents.CHARMS, newCharms);
+            }
+        }
+
+        @FunctionalInterface
+        public interface UpgradeFunction {
+            void updateComponents(ItemStack oldStack, ItemStack newStack, ReinforcementTier newTier);
+        }
     }
 
     public record Cost(Predicate<ItemStack> stackCondition, ItemLike primaryMaterial, int primaryCount, ItemLike secondaryMaterial, int secondaryCount) {

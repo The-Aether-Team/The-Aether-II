@@ -100,16 +100,16 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                         }
                     });
 
-                    MutableComponent component = ReinforcementTier.createReinforcementComponent(tier).copy();
-                    component = component
-                            .append(CommonComponents.NEW_LINE)
-                            .append(Component.literal("+").withStyle(ChatFormatting.GRAY).append(Component.literal(String.valueOf(labelStats.durabilityToAdd()))).append(CommonComponents.SPACE).append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.durability")));
-                    if (!labelStats.charmsToSet().charmHolders().isEmpty()) {
-                        component = component
-                                .append(CommonComponents.NEW_LINE)
-                                .append(Component.literal("+").withStyle(ChatFormatting.GRAY).append(Component.literal(String.valueOf(labelStats.charmsToSet().charmHolders().size()))).append(CommonComponents.SPACE).append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.charms")));
-                    }
-                    tierButton.setTooltip(Tooltip.create(component));
+//                    MutableComponent component = ReinforcementTier.createReinforcementComponent(tier).copy(); //todo restore
+//                    component = component
+//                            .append(CommonComponents.NEW_LINE)
+//                            .append(Component.literal("+").withStyle(ChatFormatting.GRAY).append(Component.literal(String.valueOf(labelStats.durabilityToAdd()))).append(CommonComponents.SPACE).append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.durability")));
+//                    if (!labelStats.charmsToSet().charmHolders().isEmpty()) {
+//                        component = component
+//                                .append(CommonComponents.NEW_LINE)
+//                                .append(Component.literal("+").withStyle(ChatFormatting.GRAY).append(Component.literal(String.valueOf(labelStats.charmsToSet().charmHolders().size()))).append(CommonComponents.SPACE).append(Component.translatable("gui.aether_ii.arkenium_forge.tooltip.charms")));
+//                    }
+//                    tierButton.setTooltip(Tooltip.create(component));
                     this.tierButtons.add(this.addRenderableWidget(tierButton));
                 }
             }
@@ -186,13 +186,12 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
         if (!input.isEmpty()) {
             ItemStack displayStack = input.copy();
             if (this.selectedTier != null) {
-                displayStack.set(AetherIIDataComponents.REINFORCEMENT_TIER, this.selectedTier);
-                Charms charms = this.getMenu().upgradeCharmSlots(this.selectedTier);
-                if (charms != null) {
-                    displayStack.set(AetherIIDataComponents.CHARMS, charms);
+                ReinforcementTier.Stats stats = this.selectedTier.getStat(displayStack);
+                if (stats != null) {
+                    stats.upgrades().updateComponents(displayStack.copy(), displayStack, this.selectedTier);
+                    displayStack.set(AetherIIDataComponents.REINFORCEMENT_TIER, this.selectedTier);
                 }
             }
-            this.getMenu().replaceCharms(displayStack, false);
             if (this.nameDifferent()) {
                 displayStack.set(DataComponents.CUSTOM_NAME, Component.literal(this.name.getValue()));
             }
