@@ -222,14 +222,12 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                             int x = secondX + button.getX() - 8;
                             int y = button.getY() + button.getHeight() + 2;
                             guiGraphics.renderFakeItem(primary, x, y);
-                            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, ArkeniumForgeMenu.SLOT_PRIMARY, x, y, 16, 16);
                             guiGraphics.renderItemDecorations(this.font, primary, x, y);
                         }
                         if (!secondary.isEmpty()) {
                             int x = button.getX() + 8;
                             int y = button.getY() + button.getHeight() + 2;
                             guiGraphics.renderFakeItem(secondary, x, y);
-                            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, ArkeniumForgeMenu.SLOT_SECONDARY, x, y, 16, 16);
                             guiGraphics.renderItemDecorations(this.font, secondary, x, y);
                         }
                     }
