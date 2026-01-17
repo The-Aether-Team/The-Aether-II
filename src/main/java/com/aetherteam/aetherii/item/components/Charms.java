@@ -48,8 +48,12 @@ public record Charms(List<CharmHolder> charmHolders) {
         return null;
     }
 
-    public static MutableComponent createCharmTierComponent(int tier) {
-        return Component.translatable("aether_ii.tooltip.item.charm.tier", Component.translatable("enchantment.level." + tier));
+    public static MutableComponent createCharmTypeComponent(Type type) {
+        return Component.translatable("aether_ii.tooltip.item.charm.type." + type.name().toLowerCase(Locale.ROOT));
+    }
+
+    public static MutableComponent createCharmTierComponent(Tier tier) {
+        return Component.translatable("aether_ii.tooltip.item.charm.tier", Component.translatable("enchantment.level." + tier.getValue()));
     }
 
     public static class CharmHolder {

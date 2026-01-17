@@ -73,9 +73,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addTooltip("item.modifiers.handwear", "When wearing Handwear:");
         this.addTooltip("item.modifiers.accessory", "When wearing Accessory:");
         this.addTooltip("item.modifiers.blocking", "When blocking:");
-        this.addTooltip("item.modifiers.charms.tool", "When on tool:");
-        this.addTooltip("item.modifiers.charms.weapon", "When on weapon:");
-        this.addTooltip("item.modifiers.charms.armor", "When on armor:");
+        this.addTooltip("item.modifiers.charms", "When attached:");
     }
 
     private void addBlocks() {
@@ -1255,6 +1253,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("reinforcement", "Reinforcement %s");
         this.addItemTooltip("broken", "Requires Repairing");
         this.addItemTooltip("charm.tier", "Tier %s");
+        this.addItemTooltip("charm.type.tool", "Tool Charm");
+        this.addItemTooltip("charm.type.weapon", "Weapon Charm");
+        this.addItemTooltip("charm.type.armor", "Armor Charm");
 
         // Moa Egg Tooltips
         this.addItemTooltip("moa_egg.keratin", "%s Keratin");
@@ -1482,6 +1483,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addGuiText() {
         // GUIs
         this.addGuiText("arkenium_forge.forge_button.tooltip", "Forge Item");
+        this.addGuiText("arkenium_forge.charm_slot.tooltip", "Charm Slot");
         this.addGuiText("arkenium_forge.tooltip.durability", "+%s Max Durability");
         this.addGuiText("arkenium_forge.tooltip.charm", " %1$s %2$s Charm Slot");
         this.addGuiText("arkenium_forge.tooltip.charms", " %1$s %2$s Charm Slots");
