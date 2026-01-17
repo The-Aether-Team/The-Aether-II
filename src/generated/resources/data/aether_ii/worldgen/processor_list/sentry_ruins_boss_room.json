@@ -7,7 +7,7 @@
           "input_predicate": {
             "block": "aether_ii:undershale_bricks",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -24,7 +24,7 @@
           "input_predicate": {
             "block": "aether_ii:undershale_flagstones",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -41,7 +41,7 @@
           "input_predicate": {
             "block": "aether_ii:undershale_base_bricks",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -58,7 +58,7 @@
           "input_predicate": {
             "block": "aether_ii:undershale_capstone_bricks",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -80,7 +80,7 @@
               }
             },
             "predicate_type": "minecraft:random_blockstate_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -103,7 +103,7 @@
               }
             },
             "predicate_type": "minecraft:random_blockstate_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -126,7 +126,7 @@
               }
             },
             "predicate_type": "minecraft:random_blockstate_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -144,7 +144,7 @@
           "input_predicate": {
             "block": "aether_ii:undershale_bricks",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -161,7 +161,7 @@
           "input_predicate": {
             "block": "aether_ii:undershale_flagstones",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -178,7 +178,7 @@
           "input_predicate": {
             "block": "aether_ii:undershale_base_bricks",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -195,7 +195,7 @@
           "input_predicate": {
             "block": "aether_ii:undershale_capstone_bricks",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -217,7 +217,7 @@
               }
             },
             "predicate_type": "minecraft:random_blockstate_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -240,7 +240,7 @@
               }
             },
             "predicate_type": "minecraft:random_blockstate_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -263,7 +263,7 @@
               }
             },
             "predicate_type": "minecraft:random_blockstate_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -286,7 +286,7 @@
           "input_predicate": {
             "block": "aether_ii:undershale_bricks",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -303,7 +303,7 @@
           "input_predicate": {
             "block": "aether_ii:undershale_flagstones",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -320,7 +320,7 @@
           "input_predicate": {
             "block": "aether_ii:undershale_base_bricks",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -337,7 +337,7 @@
           "input_predicate": {
             "block": "aether_ii:undershale_capstone_bricks",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -359,7 +359,7 @@
               }
             },
             "predicate_type": "minecraft:random_blockstate_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -382,7 +382,7 @@
               }
             },
             "predicate_type": "minecraft:random_blockstate_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -405,7 +405,7 @@
               }
             },
             "predicate_type": "minecraft:random_blockstate_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -423,7 +423,7 @@
           "input_predicate": {
             "block": "aether_ii:undershale_bricks",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -440,7 +440,7 @@
           "input_predicate": {
             "block": "aether_ii:undershale_flagstones",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -457,7 +457,7 @@
           "input_predicate": {
             "block": "aether_ii:undershale_base_bricks",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -474,7 +474,7 @@
           "input_predicate": {
             "block": "aether_ii:undershale_capstone_bricks",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -496,7 +496,7 @@
               }
             },
             "predicate_type": "minecraft:random_blockstate_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -519,7 +519,7 @@
               }
             },
             "predicate_type": "minecraft:random_blockstate_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -542,7 +542,7 @@
               }
             },
             "predicate_type": "minecraft:random_blockstate_match",
-            "probability": 0.05
+            "probability": 0.02
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"

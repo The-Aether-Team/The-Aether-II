@@ -59,19 +59,6 @@ public class SentryRuinsBossRoom extends SentryRuinsPiece {
     }
 
     @Override
-    protected void handleDataMarker(String name, BlockPos pos, ServerLevelAccessor level, RandomSource random, BoundingBox box) {
-        if (name.equals("Treasure Chest")) {
-//            BlockPos chest = pos.below();
-//            BlockEntity entity = level.getBlockEntity(chest);
-//            if (entity instanceof RandomizableContainerBlockEntity container) {
-//                container.setLootTable(AetherLoot.BRONZE_DUNGEON_REWARD, random.nextLong());
-//            }
-//            TreasureChestBlockEntity.setDungeonType(level, chest, ResourceLocation.fromNamespaceAndPath(Aether.MODID, "bronze"));
-            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
-        }
-    }
-
-    @Override
     public void postProcess(WorldGenLevel level, StructureManager manager, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox boundingBox, ChunkPos chunkPos, BlockPos blockPos) {
         super.postProcess(level, manager, chunkGenerator, random, boundingBox, chunkPos, blockPos);
         for (StructureTemplate.StructureBlockInfo info : this.template.filterBlocks(this.templatePosition, this.placeSettings, AetherIIBlocks.LOCKED_BLOCK.get())) {

@@ -21,7 +21,6 @@ import java.util.List;
 
 public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> CAMP = createKey("camp");
-    public static final ResourceKey<StructureProcessorList> CAMP_HIGHFIELDS = createKey("camp_highfields");
     public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_ROOM = createKey("sentry_ruins_room");
     public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_TUNNEL = createKey("sentry_ruins_tunnel");
     public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_BOSS_ROOM = createKey("sentry_ruins_boss_room");
@@ -55,8 +54,8 @@ public class AetherIIProcessorLists {
                 MimicContainerProcessor.INSTANCE
         ));
         register(context, SENTRY_RUINS_BOSS_ROOM, List.of(
-                SentryRuinsPiece.SENTRY_STONE,
-                new CopyRuleProcessor(SentryRuinsPiece.SENTRY_STONE_LIST),
+                SentryRuinsPiece.SENTRY_STONE_REDUCED,
+                new CopyRuleProcessor(SentryRuinsPiece.SENTRY_STONE_LIST_REDUCED),
                 BossRoomProcessor.INSTANCE
         ));
 

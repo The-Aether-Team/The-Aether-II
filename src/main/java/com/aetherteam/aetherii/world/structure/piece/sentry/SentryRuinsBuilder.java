@@ -107,7 +107,7 @@ public class SentryRuinsBuilder {
         Direction direction = bossRoom.getOrientation();
         if (direction != null) {
             BlockPos pos = BlockLogicUtil.tunnelFromEvenSquareRoom(bossRoom.getBoundingBox(), direction, this.edgeWidth);
-            SentryRuinsPiece hallway = this.chooseRoom("square_tunnel", pos, bossRoom.getRotation(), this.processors.roomSettings());
+            SentryRuinsPiece hallway = this.chooseRoom("square_tunnel", pos, bossRoom.getRotation(), this.processors.tunnelSettings());
             pos = BlockLogicUtil.tunnelFromEvenSquareRoom(hallway.getBoundingBox(), direction, this.nodeWidth);
             SentryRuinsPiece defaultRoom = this.chooseRoom("chest_room", pos, hallway.getRotation(), this.processors.roomSettings());
 
