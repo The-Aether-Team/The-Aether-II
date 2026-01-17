@@ -17,6 +17,7 @@ import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureSlo
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import net.minecraft.client.color.item.Dye;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
@@ -41,11 +42,11 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
         super(itemModelOutput, modelOutput);
     }
 
-    public void generateReinforcedItem(Item item, ModelTemplate template) {
+    public void generateReinforcedItem(Item item, ModelTemplate template, ReinforcementTier tier) {
         ItemModel.Unbaked base = ItemModelUtils.plainModel(this.createFlatItemModel(item, template));
         ItemModel.Unbaked reinforced1 = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_reinforced_1", template));
         ItemModel.Unbaked reinforced2 = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_reinforced_2", template));
-        this.itemModelOutput.accept(item, ItemModelUtils.rangeSelect(new ReinforcementTierRange(), base, ItemModelUtils.override(reinforced1, 0.1F), ItemModelUtils.override(reinforced2, 0.3F)));
+        this.itemModelOutput.accept(item, ItemModelUtils.rangeSelect(new ReinforcementTierRange(), base, ItemModelUtils.override(reinforced1, 0.1F), ItemModelUtils.override(reinforced2, tier.getTierNumber() * 0.1F)));
     }
 
     public void generateCrossbow(Item item) {

@@ -14,7 +14,7 @@
           "type": "minecraft:model",
           "model": "aether_ii:item/arkenium_spear_reinforced_2"
         },
-        "threshold": 0.3
+        "threshold": 0.4
       }
     ],
     "fallback": {
