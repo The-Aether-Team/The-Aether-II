@@ -175,7 +175,7 @@ public class SentryRuinsStructure extends Structure {
                 generator.getBaseColumn(maxX, maxZ, heightAccessor, randomState)
         };
 
-        for (int y = minHeight; y <= maxHeight; y++) {
+        for (int y = maxHeight; y >= minHeight; y--) {
             if (checkEachCornerAtY(columns, y)) {
                 currentThickness++;
                 if (currentThickness >= goalThickness) {
