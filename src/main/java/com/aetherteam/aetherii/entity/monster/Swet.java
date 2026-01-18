@@ -277,14 +277,16 @@ public class Swet extends Monster {
     public void addAdditionalSaveData(ValueOutput output) {
         super.addAdditionalSaveData(output);
         output.putFloat("WaterDamageScale", this.getWaterDamage());
+        output.putFloat("SwetScale", this.getSwetScale());
         output.putFloat("Saturation", this.getFoodSaturation());
     }
 
     @Override
     public void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
-        this.setWaterDamage(input.getFloatOr("WaterDamageScale", 0));
-        this.setFoodSaturation(input.getFloatOr("Saturation", 0));
+        this.setWaterDamage(input.getFloatOr("WaterDamageScale", 0.0F));
+        this.setSwetScale(input.getFloatOr("SwetScale", 0.95F));
+        this.setFoodSaturation(input.getFloatOr("Saturation", 0.0F));
     }
 
     /**

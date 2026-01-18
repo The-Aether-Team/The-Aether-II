@@ -29,6 +29,8 @@ public class AbilityBehaviorAttachment {
             AetherIIItems.PURPLE_AERCLOUD_GLIDER, false
     ));
 
+    private boolean crossbowSpecial;
+
     private boolean gravititeHoldingFloatingBlock = false;
     private boolean gravititeJumpUsed = true;
 
@@ -42,27 +44,31 @@ public class AbilityBehaviorAttachment {
             Codec.BOOL.fieldOf("can_refuel_glide").forGetter(AbilityBehaviorAttachment::getCanRefuelGlide),
             Codec.INT.fieldOf("gliding_timer").forGetter(AbilityBehaviorAttachment::getGlidingTimer),
             ExtraCodecs.strictUnboundedMap(BuiltInRegistries.ITEM.holderByNameCodec(), Codec.BOOL).fieldOf("can_refuel_abilities").forGetter(AbilityBehaviorAttachment::getCanRefuelAbilities),
+            Codec.BOOL.fieldOf("crossbow_special").forGetter(AbilityBehaviorAttachment::isCrossbowSpecial),
             Codec.BOOL.fieldOf("gravitite_holding_floating_block").forGetter(AbilityBehaviorAttachment::isGravititeHoldingFloatingBlock),
             Codec.BOOL.fieldOf("gravitite_jump_used").forGetter(AbilityBehaviorAttachment::isGravititeJumpUsed)
     ).apply(instance, AbilityBehaviorAttachment::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, AbilityBehaviorAttachment> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.INT, AbilityBehaviorAttachment::getGlidingTimer,
+            ByteBufCodecs.BOOL, AbilityBehaviorAttachment::isCrossbowSpecial,
             ByteBufCodecs.BOOL, AbilityBehaviorAttachment::isGravititeJumpUsed,
             AbilityBehaviorAttachment::new);
 
     private boolean shouldSyncAfterJoin;
     private boolean shouldSyncBetweenClients;
 
-    protected AbilityBehaviorAttachment(boolean canRefuelGlide, int glidingTimer, Map<Holder<Item>, Boolean> canRefuelAbilities, boolean gravititeHoldingFloatingBlock, boolean gravititeJumpUsed) {
+    protected AbilityBehaviorAttachment(boolean canRefuelGlide, int glidingTimer, Map<Holder<Item>, Boolean> canRefuelAbilities, boolean crossbowSpecial, boolean gravititeHoldingFloatingBlock, boolean gravititeJumpUsed) {
         this.canRefuelGlide = canRefuelGlide;
         this.glidingTimer = glidingTimer;
         this.canRefuelAbilities =  new HashMap<>(canRefuelAbilities);
+        this.crossbowSpecial = crossbowSpecial;
         this.gravititeHoldingFloatingBlock = gravititeHoldingFloatingBlock;
         this.gravititeJumpUsed = gravititeJumpUsed;
     }
 
-    protected AbilityBehaviorAttachment(int glidingTimer, boolean gravititeJumpUsed) {
+    protected AbilityBehaviorAttachment(int glidingTimer, boolean crossbowSpecial, boolean gravititeJumpUsed) {
         this.glidingTimer = glidingTimer;
+        this.crossbowSpecial = crossbowSpecial;
         this.gravititeJumpUsed = gravititeJumpUsed;
     }
 
@@ -158,6 +164,14 @@ public class AbilityBehaviorAttachment {
 
     public Map<Holder<Item>, Boolean> getCanRefuelAbilities() {
         return this.canRefuelAbilities;
+    }
+
+    public void setCrossbowSpecial(boolean crossbowSpecial) {
+        this.crossbowSpecial = crossbowSpecial;
+    }
+
+    public boolean isCrossbowSpecial() {
+        return this.crossbowSpecial;
     }
 
     public void setGravititeHoldingFloatingBlock(boolean gravititeHoldingFloatingBlock) {

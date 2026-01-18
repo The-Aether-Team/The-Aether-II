@@ -1,18 +1,31 @@
 package com.aetherteam.aetherii.effect.harmful;
 
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 public class StunEffect extends MobEffect {
     public StunEffect() {
         super(MobEffectCategory.HARMFUL, 16515010);
+    }
+
+    public static void onEntityPostTick(EntityTickEvent.Post event) {
+        Entity entity = event.getEntity();
+        if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(AetherIIEffects.STUN)) {
+            EffectsSystemAttachment attachment = livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM);
+            attachment.setMotionMultiplier(attachment.getMotionMultiplier().multiply(new Vec3(0.4, 1.0, 0.4)));
+        }
     }
 
     public static void disableAttacks(AttackEntityEvent event) {

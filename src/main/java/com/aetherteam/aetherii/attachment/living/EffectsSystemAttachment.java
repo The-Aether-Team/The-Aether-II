@@ -25,6 +25,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.*;
 
@@ -38,6 +39,7 @@ public class EffectsSystemAttachment {
     public static final int BUILDUP_CAP = 1000;
 
     private final Map<Holder<MobEffect>, EffectBuildupInstance> activeBuildups;
+    private Vec3 motionMultiplier = new Vec3(1, 1, 1);
 
     private boolean needSync;
 
@@ -120,5 +122,19 @@ public class EffectsSystemAttachment {
 
     public Map<Holder<MobEffect>, EffectBuildupInstance> getActiveBuildups() {
         return ImmutableMap.copyOf(this.activeBuildups);
+    }
+
+    public Vec3 getMotionMultiplier() {
+        return this.motionMultiplier;
+    }
+
+    public void setMotionMultiplier(Vec3 motionMultiplier) {
+        this.motionMultiplier = motionMultiplier;
+    }
+
+    public void trySetMultiplier(Vec3 motionMultiplier) {
+        if (motionMultiplier.length() < this.motionMultiplier.length()) {
+            this.motionMultiplier = motionMultiplier;
+        }
     }
 }

@@ -81,6 +81,10 @@ public class AccessoryItem extends Item {
         }
     }
 
+    public boolean rendersInFirstPerson(ItemStack stack) {
+        return false;
+    }
+
     public Set<ConditionalAttribute> gatherAttributes(Set<ConditionalAttribute> attributes) {
         return attributes;
     }

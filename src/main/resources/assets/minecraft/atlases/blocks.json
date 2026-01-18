@@ -110,7 +110,7 @@
       }
     },
     {
-      "type": "aether_ii:overlaid",
+      "type": "aether_ii:subtractive",
       "textures": [
         "aether_ii:block/skyroot_leaves",
         "aether_ii:block/skyplane_leaves",
@@ -121,7 +121,17 @@
         "aether_ii:block/greatroot_leaves",
         "aether_ii:block/greatoak_leaves",
         "aether_ii:block/greatboa_leaves",
-        "aether_ii:block/amberoot_leaves"
+        "aether_ii:block/amberoot_leaves",
+        "aether_ii:block/irradiated_skyroot_leaves",
+        "aether_ii:block/irradiated_skyplane_leaves",
+        "aether_ii:block/irradiated_skybirch_leaves",
+        "aether_ii:block/irradiated_skypine_leaves",
+        "aether_ii:block/irradiated_wisproot_leaves",
+        "aether_ii:block/irradiated_wisptop_leaves",
+        "aether_ii:block/irradiated_greatroot_leaves",
+        "aether_ii:block/irradiated_greatoak_leaves",
+        "aether_ii:block/irradiated_greatboa_leaves",
+        "aether_ii:block/irradiated_amberoot_leaves"
       ],
       "overlays": {
         "snowy": "aether_ii:block/snowy_overlay",
@@ -131,7 +141,7 @@
       }
     },
     {
-      "type": "aether_ii:overlaid",
+      "type": "aether_ii:additive",
       "textures": [
         "aether_ii:block/woven_skyroot_sticks"
       ],

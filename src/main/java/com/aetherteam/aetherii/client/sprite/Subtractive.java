@@ -21,26 +21,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public record Overlaid(List<ResourceLocation> textures, Map<String, ResourceLocation> overlays) implements SpriteSource {
-    public static final MapCodec<Overlaid> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-            Codec.list(ResourceLocation.CODEC).fieldOf("textures").forGetter(Overlaid::textures),
-            Codec.unboundedMap(Codec.STRING, ResourceLocation.CODEC).fieldOf("overlays").forGetter(Overlaid::overlays)
-    ).apply(instance, Overlaid::new));
+public record Subtractive(List<ResourceLocation> textures, Map<String, ResourceLocation> overlays) implements SpriteSource {
+    public static final MapCodec<Subtractive> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+            Codec.list(ResourceLocation.CODEC).fieldOf("textures").forGetter(Subtractive::textures),
+            Codec.unboundedMap(Codec.STRING, ResourceLocation.CODEC).fieldOf("overlays").forGetter(Subtractive::overlays)
+    ).apply(instance, Subtractive::new));
 
     @Override
     public void run(ResourceManager resourceManager, Output output) {
-        for (ResourceLocation location : this.textures()) {
+        for (ResourceLocation location : this.textures) {
             ResourceLocation originalTextureLocation = TEXTURE_ID_CONVERTER.idToFile(location);
             Optional<Resource> originalTexture = resourceManager.getResource(originalTextureLocation);
             if (originalTexture.isPresent()) {
-                LazyLoadedImage originalImage = new LazyLoadedImage(originalTextureLocation, originalTexture.get(), this.overlays().size());
-                for (Map.Entry<String, ResourceLocation> overlayEntry : this.overlays().entrySet()) {
+                LazyLoadedImage originalImage = new LazyLoadedImage(originalTextureLocation, originalTexture.get(), this.overlays.size());
+                for (Map.Entry<String, ResourceLocation> overlayEntry : this.overlays.entrySet()) {
                     ResourceLocation overlayTextureLocation = TEXTURE_ID_CONVERTER.idToFile(overlayEntry.getValue());
                     Optional<Resource> overlayTexture = resourceManager.getResource(overlayTextureLocation);
                     if (overlayTexture.isPresent()) {
-                        LazyLoadedImage overlayImage = new LazyLoadedImage(overlayTextureLocation, overlayTexture.get(), this.textures().size());
+                        LazyLoadedImage overlayImage = new LazyLoadedImage(overlayTextureLocation, overlayTexture.get(), this.textures.size());
                         ResourceLocation outputLocation = location.withSuffix("_" + overlayEntry.getKey());
-                        output.add(outputLocation, new OverlaidSpriteSupplier(originalImage, overlayImage, outputLocation));
+                        output.add(outputLocation, new SubtractiveSpriteSupplier(originalImage, overlayImage, outputLocation));
                     }
                 }
             }
@@ -52,34 +52,35 @@ public record Overlaid(List<ResourceLocation> textures, Map<String, ResourceLoca
         return CODEC;
     }
 
-    public record OverlaidSpriteSupplier(LazyLoadedImage baseImage, LazyLoadedImage overlayImage, ResourceLocation outputLocation) implements SpriteSource.SpriteSupplier {
+    public record SubtractiveSpriteSupplier(LazyLoadedImage baseImage, LazyLoadedImage overlayImage, ResourceLocation outputLocation) implements SpriteSource.SpriteSupplier {
         @Nullable
         public SpriteContents apply(SpriteResourceLoader p_295023_) {
             try {
-                NativeImage nativeBaseImage = this.baseImage().get();
-                NativeImage nativeOverlayImage = this.overlayImage().get();
+                NativeImage nativeBaseImage = this.baseImage.get();
+                NativeImage nativeOverlayImage = this.overlayImage.get();
                 NativeImage nativeImage = new NativeImage(nativeBaseImage.getWidth(), nativeBaseImage.getHeight(), false);
 
                 for (int i = 0; i < nativeImage.getHeight(); i++) {
                     for (int j = 0; j < nativeImage.getWidth(); j++) {
-                        int color = nativeOverlayImage.getLuminanceOrAlpha(i, j) != 0 ? nativeOverlayImage.getPixel(i, j) : nativeBaseImage.getPixel(i, j);
-                        nativeImage.setPixel(i, j, color);
+                        if (nativeOverlayImage.getLuminanceOrAlpha(i, j) == 0) {
+                            nativeImage.setPixel(i, j, nativeBaseImage.getPixel(i, j));
+                        }
                     }
                 }
                 return new SpriteContents(this.outputLocation(), new FrameSize(nativeImage.getWidth(), nativeImage.getHeight()), nativeImage, ResourceMetadata.EMPTY);
             } catch (IOException | IllegalArgumentException ioexception) {
-                AetherII.LOGGER.error("unable to create overlaid sprite at {}", this.outputLocation(), ioexception);
+                AetherII.LOGGER.error("unable to create subtractive sprite at {}", this.outputLocation(), ioexception);
             } finally {
-                this.baseImage().release();
-                this.overlayImage().release();
+                this.baseImage.release();
+                this.overlayImage.release();
             }
             return null;
         }
 
         @Override
         public void discard() {
-            this.baseImage().release();
-            this.overlayImage().release();
+            this.baseImage.release();
+            this.overlayImage.release();
         }
     }
 }

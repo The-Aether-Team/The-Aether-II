@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.entity.projectile;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
+import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ElectricField;
 import net.minecraft.core.BlockPos;
@@ -103,7 +105,7 @@ public class TempestThunderball extends AbstractHurtingProjectile {
         electricCircle.setWaitTime(10);
         electricCircle.setDuration(50);
 
-        electricCircle.addEffect(new MobEffectInstance(MobEffects.INSTANT_DAMAGE, 1, 0, false, false, false));
+        electricCircle.addEffect(new MobEffectInstance(AetherIIEffects.ELECTRIC_SHOCK, 1, 0, false, false, false));
         electricCircle.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 1, false, false, false));
 
         this.level().addFreshEntity(electricCircle);
@@ -117,7 +119,11 @@ public class TempestThunderball extends AbstractHurtingProjectile {
             Entity entity = result.getEntity();
             if (entity instanceof LivingEntity livingEntity) {
                 if (livingEntity.level() instanceof ServerLevel serverLevel) {
-                    entity.hurtServer(serverLevel, this.damageSources().mobProjectile(this, livingEntity), 3.0F);
+                    if (this.getOwner() instanceof LivingEntity livingOwner) {
+                        livingEntity.hurtServer(serverLevel, AetherIIDamageTypes.indirectEntityDamageSource(livingEntity.level(), AetherIIDamageTypes.SHOCK, this, livingOwner), 3.0F);
+                    } else {
+                        livingEntity.hurtServer(serverLevel, AetherIIDamageTypes.damageSource(livingEntity.level(), AetherIIDamageTypes.SHOCK), 3.0F);
+                    }
                 }
             }
         }

@@ -13,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.behavior.BlockPosTracker;
+import net.minecraft.world.entity.ai.behavior.EntityTracker;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
@@ -28,20 +29,19 @@ public class BurrukaiRamAttack extends Behavior<Burrukai> {
     private BlockPos blockPos;
 
     public BurrukaiRamAttack(float speed) {
-        super(ImmutableMap.of(
-                MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryStatus.VALUE_PRESENT,
-                MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT
-        ), 600);
+        super(ImmutableMap.of(MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT
+        ));
         this.speed = speed;
     }
 
     @Override
-    protected boolean canStillUse(ServerLevel serverLevel, Burrukai owner, long gameTime) {
-        return this.getTarget(owner) != null;
+    protected boolean checkExtraStartConditions(ServerLevel level, Burrukai owner) {
+        return owner.getBrain().hasMemoryValue(MemoryModuleType.ATTACK_TARGET);
     }
 
-    private LivingEntity getTarget(Burrukai owner) {
-        return owner.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).orElse(null);
+    @Override
+    protected boolean canStillUse(ServerLevel serverLevel, Burrukai owner, long gameTime) {
+        return owner.getBrain().hasMemoryValue(MemoryModuleType.ATTACK_TARGET);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class BurrukaiRamAttack extends Behavior<Burrukai> {
                         serverLevel.playSound(null, owner, AetherIISoundEvents.ENTITY_BURRUKAI_RAM_IMPACT.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
                         ramTarget.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(ramTarget, EffectBuildupPresets.STUN, 500);
                     }
-                } else if (this.blockPos.distSqr(owner.blockPosition()) < 5 || this.ramTick >= 100) {
+                } else if (this.ramTick >= 100) {
                     this.finishRam(serverLevel, owner);
                     serverLevel.broadcastEntityEvent(owner, (byte) Burrukai.RAM_START_EVENT);
                 } else {
@@ -84,8 +84,12 @@ public class BurrukaiRamAttack extends Behavior<Burrukai> {
                 }
             }
         }
-        if (target.isPresent() && target.get().isAlive() && this.blockPos != null) {
-            owner.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, new BlockPosTracker(this.blockPos));
+        if (target.isPresent() && target.get().isAlive()) {
+            if (this.blockPos != null) {
+                owner.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, new BlockPosTracker(this.blockPos));
+            } else {
+                owner.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, new EntityTracker(target.get(), true));
+            }
         }
     }
 

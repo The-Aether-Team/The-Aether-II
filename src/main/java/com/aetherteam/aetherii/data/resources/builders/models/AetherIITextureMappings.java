@@ -75,15 +75,17 @@ public class AetherIITextureMappings {
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(leaves))
                 .copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
                 .put(TextureSlot.TOP, TextureMapping.getBlockTexture(leaves))
-                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(leaves, "_snowy"));
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(leaves, "_snowy"))
+                .put(AetherIITextureSlots.OVERLAY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/snowy_overlay"));
     }
 
     public static TextureMapping mossyTopped(Block top, Block moss, String suffix) {
-        return  new TextureMapping()
+        return new TextureMapping()
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(top))
                 .copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
                 .put(TextureSlot.TOP, TextureMapping.getBlockTexture(moss))
-                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(top, "_" + suffix));
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(top, "_" + suffix))
+                .put(AetherIITextureSlots.OVERLAY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/" + suffix + "_overlay"));
     }
 
     public static TextureMapping tintedGrass(Block grass, Block dirt) {

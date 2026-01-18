@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.mixin.mixins.client;
 
-import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
 import com.aetherteam.aetherii.network.packet.serverbound.MoaFlyModeChangePacket;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -33,8 +34,7 @@ public class LocalPlayerMixin extends AbstractClientPlayer {
     private void aiStep(CallbackInfo ci) {
         LocalPlayer localPlayer = (LocalPlayer) (Object) this;
         ItemStack useStack = localPlayer.getUseItem();
-        Boolean special = useStack.get(AetherIIDataComponents.CROSSBOW_SPECIAL);
-        if (special != null && special) {
+        if (useStack.getItem() instanceof TieredCrossbowItem && localPlayer.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).isCrossbowSpecial()) {
             if (!localPlayer.getAbilities().flying && !localPlayer.isSwimming() && !localPlayer.isPassenger()) {
                 this.crouching = true;
             }

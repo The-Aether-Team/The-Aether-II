@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.client;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.event.hooks.MusicHooks;
 import com.aetherteam.aetherii.client.event.hooks.RenderHooks;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -12,14 +11,10 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.ClientInput;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.client.sounds.MusicInfo;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
-import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
@@ -60,9 +55,6 @@ public class AetherIIClientEventListeners {
         // Input
         bus.addListener(AetherIIClientEventListeners::onMouseInputPost);
         bus.addListener(AetherIIClientEventListeners::onMovementInputUpdate);
-
-        // Entity
-        bus.addListener(AetherIIClientEventListeners::onRenderFirstPersonArm);
 
         // Datapacks
         bus.addListener(AetherIIClientEventListeners::onDatapackSync);
@@ -187,17 +179,6 @@ public class AetherIIClientEventListeners {
         ClientInput input = event.getInput();
 
         player.getData(AetherIIDataAttachments.PLAYER).movementInput(player, input);
-    }
-
-    public static void onRenderFirstPersonArm(RenderArmEvent event) {
-        PoseStack poseStack = event.getPoseStack();
-        MultiBufferSource buffer = event.getMultiBufferSource();
-        HumanoidArm arm = event.getArm();
-        AbstractClientPlayer player = event.getPlayer();
-        int packedLight = event.getPackedLight();
-        PlayerSkin skin = player.getSkin();
-
-        RenderHooks.renderFirstPersonGloves(poseStack, buffer, arm, player, packedLight, skin);
     }
 
     public static void onDatapackSync(OnDatapackSyncEvent event) {

@@ -52,6 +52,11 @@ public class GlovesItem extends AccessoryItem {
     }
 
     @Override
+    public boolean rendersInFirstPerson(ItemStack stack) {
+        return true;
+    }
+
+    @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
         return false;
     }

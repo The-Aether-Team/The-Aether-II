@@ -50,6 +50,7 @@ public class AetherIITags {
         public static final TagKey<Block> QUICKSOIL_GLASS_PANE = tag("quicksoil_glass_pane");
         public static final TagKey<Block> CRUDE_SCATTERGLASS_PANE = tag("crude_scatterglass_pane");
         public static final TagKey<Block> SCATTERGLASS_PANE = tag("scatterglass_pane");
+        public static final TagKey<Block> ARILUM_LANTERN = tag("arilum_lantern");
 
         public static final TagKey<Block> GUARDIAN_LOGS = tag("guardian_logs");
         public static final TagKey<Block> DENSE_GUARDIAN_LOGS = tag("dense_guardian_logs");
@@ -134,6 +135,7 @@ public class AetherIITags {
         public static final TagKey<Item> MARBLED_ICHORITE_DECORATIVE_BLOCKS = tag("marbled_ichorite_decorative_blocks");
         public static final TagKey<Item> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Item> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
+        public static final TagKey<Item> ARILUM_LANTERN = tag("arilum_lantern");
 
         public static final TagKey<Item> GUARDIAN_LOGS = tag("guardian_logs");
         public static final TagKey<Item> DENSE_GUARDIAN_LOGS = tag("dense_guardian_logs");
@@ -234,9 +236,13 @@ public class AetherIITags {
         public static final TagKey<EntityType<?>> AETHER_MOBS = tag("aether_mobs");
         public static final TagKey<EntityType<?>> NO_DOUBLE_DROPS = tag("no_double_drops");
         public static final TagKey<EntityType<?>> NO_AMBROSIUM_DROPS = tag("no_ambrosium_drops");
+
         public static final TagKey<EntityType<?>> SLIDER_DAMAGING_PROJECTILES = tag("slider_damaging_projectiles");
         public static final TagKey<EntityType<?>> SENTRY_RUINS_MOBS = tag("sentry_ruins_mobs");
         public static final TagKey<EntityType<?>> DUNGEON_MOBS = tag("dungeon_mobs");
+
+        public static final TagKey<EntityType<?>> STICKABLE_PROJECTILES = tag("stickable_projectiles");
+        public static final TagKey<EntityType<?>> STICKABLE_PROJECTILES_EMISSIVE = tag("stickable_projectiles_emissive");
 
         public static final TagKey<EntityType<?>> SPAWNING_ICE = tag("spawning/ice");
         public static final TagKey<EntityType<?>> SPAWNING_AERCLOUDS = tag("spawning/aerclouds");

@@ -77,6 +77,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
         );
         this.tag(AetherIITags.Entities.NO_DOUBLE_DROPS).addTag(Tags.EntityTypes.BOSSES).add(EntityType.PLAYER);
         this.tag(AetherIITags.Entities.NO_AMBROSIUM_DROPS).add(EntityType.PLAYER);
+
         this.tag(AetherIITags.Entities.SENTRY_RUINS_MOBS).add(
                 AetherIIEntityTypes.DETONATION_SENTRY.get(),
                 AetherIIEntityTypes.SENTRY_GOLEM.get(),
@@ -87,6 +88,16 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.SENTRY_GOLEM.get(),
                 AetherIIEntityTypes.MIMIC.get(),
                 AetherIIEntityTypes.SLIDER.get()
+        );
+
+        this.tag(AetherIITags.Entities.STICKABLE_PROJECTILES).add(
+                AetherIIEntityTypes.SCATTERGLASS_BOLT.get(),
+                AetherIIEntityTypes.AMBER_DART.get(),
+                AetherIIEntityTypes.TOXIC_DART.get(),
+                AetherIIEntityTypes.VENOMOUS_DART.get()
+        );
+        this.tag(AetherIITags.Entities.STICKABLE_PROJECTILES_EMISSIVE).add(
+                AetherIIEntityTypes.VENOMOUS_DART.get()
         );
 
         this.tag(AetherIITags.Entities.SPAWNING_ICE).add(

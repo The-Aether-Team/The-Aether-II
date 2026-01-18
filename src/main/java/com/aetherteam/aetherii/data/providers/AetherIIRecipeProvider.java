@@ -151,6 +151,12 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .pattern("#X#")
                 .unlockedBy("has_bulbs", has(AetherIIItems.ARILUM_BULBS))
                 .save(this.output);
+        ShapelessRecipeBuilder.shapeless(this.getter, RecipeCategory.BUILDING_BLOCKS, result)
+                .group("arilum_lantern")
+                .requires(dye)
+                .requires(Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.ARILUM_LANTERN)))
+                .unlockedBy("has_lantern", has(result))
+                .save(this.output, this.name("dyed_" + getItemName(result)));
     }
 
     protected ShapedRecipeBuilder makePickaxeWithTag(Supplier<? extends Item> pickaxe, TagKey<Item> material, String has) {

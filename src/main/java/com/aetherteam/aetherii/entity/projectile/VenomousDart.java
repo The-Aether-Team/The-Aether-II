@@ -10,7 +10,6 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.HitResult;
 
 public class VenomousDart extends AbstractArrow {
     public VenomousDart(EntityType<? extends VenomousDart> entityType, Level level) {
@@ -36,23 +35,6 @@ public class VenomousDart extends AbstractArrow {
     }
 
     /**
-     * Handles shield damaging when this projectile hits an entity.
-     *
-     * @param result The {@link HitResult} of the projectile.
-     */
-    @Override
-    protected void onHit(HitResult result) {
-        super.onHit(result);
-//        if (result.getType() == HitResult.Type.ENTITY) {
-//            Entity entity = ((EntityHitResult) result).getEntity();
-//            if (entity instanceof Player player && player.isBlocking()) {
-//                PlayerAccessor playerAccessor = (PlayerAccessor) player;
-//                playerAccessor.callHurtCurrentlyUsedShield(3.0F);
-//            }
-//        }
-    }
-
-    /**
      * Applies the Inebriation effect to an entity after being hurt.
      *
      * @param living The {@link LivingEntity} to affect.
@@ -61,6 +43,7 @@ public class VenomousDart extends AbstractArrow {
     protected void doPostHurtEffects(LivingEntity living) {
         super.doPostHurtEffects(living);
         living.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(living, EffectBuildupPresets.VENOM, 350);
+        living.setArrowCount(living.getArrowCount() - 1);
     }
 
     @Override

@@ -20,14 +20,14 @@ public class EffectBuildupPresets {
 
     public static Preset VULNERABILITY = register(new Preset(AetherIIEffects.VULNERABILITY, 1000, 0, false, true, false, 2));
     public static Preset WOUND = register(new Preset(AetherIIEffects.WOUND, 1, 0, false, true, false, 2));
-    public static Preset STUN = register(new Preset(AetherIIEffects.STUN, 1000, 0, false, true, false, 2));
-    public static Preset AMBROSIUM_POISONING = register(new Preset(AetherIIEffects.AMBROSIUM_POISONING, 1000, 0, false, true, false, 2));
-    public static Preset FRACTURE = register(new Preset(AetherIIEffects.FRACTURE, 1000, 0, false, true, false, 1));
+    public static Preset STUN = register(new Preset(AetherIIEffects.STUN, 500, 0, false, true, false, 2));
+    public static Preset AMBROSIUM_POISONING = register(new Preset(AetherIIEffects.AMBROSIUM_POISONING, 3600, 0, false, true, false, 2));
+    public static Preset FRACTURE = register(new Preset(AetherIIEffects.FRACTURE, 500, 0, false, true, false, 1));
     public static Preset TOXIN = register(new Preset(AetherIIEffects.TOXIN, 1000, 0, false, true, false, 2));
     public static Preset VENOM = register(new Preset(AetherIIEffects.VENOM, 1000, 0, false, true, false, 2));
     public static Preset CHARGED = register(new Preset(AetherIIEffects.CHARGED, 1000, 0, false, true, false, 2));
     public static Preset WEBBED = register(new Preset(AetherIIEffects.WEBBED, 500, 0, false, true, false, 2));
-    public static Preset IMMOLATION = register(new Preset(AetherIIEffects.IMMOLATION, 1000, 0, false, true, false, 2));
+    public static Preset IMMOLATION = register(new Preset(AetherIIEffects.IMMOLATION, 100, 0, false, true, false, 2));
     public static Preset FROSTBITE = register(new Preset(AetherIIEffects.FROSTBITE, 1000, 0, false, true, false, 2));
     public static Preset FUNGAL_ROT = register(new Preset(AetherIIEffects.FUNGAL_ROT, 1000, 0, false, true, false, 2));
     public static Preset CRYSTALLIZED = register(new Preset(AetherIIEffects.CRYSTALLIZED, 1000, 0, false, true, false, 2));

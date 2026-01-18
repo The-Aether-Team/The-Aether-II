@@ -225,6 +225,24 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get(),
                 AetherIIBlocks.ICESTONE_PILLAR.get()
         );
+        this.tag(AetherIITags.Blocks.ARILUM_LANTERN, AetherIITags.Items.ARILUM_LANTERN).add(
+                AetherIIBlocks.WHITE_ARILUM_LANTERN.get(),
+                AetherIIBlocks.ORANGE_ARILUM_LANTERN.get(),
+                AetherIIBlocks.MAGENTA_ARILUM_LANTERN.get(),
+                AetherIIBlocks.LIGHT_BLUE_ARILUM_LANTERN.get(),
+                AetherIIBlocks.YELLOW_ARILUM_LANTERN.get(),
+                AetherIIBlocks.LIME_ARILUM_LANTERN.get(),
+                AetherIIBlocks.PINK_CLOUDWOOL.get(),
+                AetherIIBlocks.GRAY_ARILUM_LANTERN.get(),
+                AetherIIBlocks.LIGHT_GRAY_ARILUM_LANTERN.get(),
+                AetherIIBlocks.CYAN_ARILUM_LANTERN.get(),
+                AetherIIBlocks.PURPLE_ARILUM_LANTERN.get(),
+                AetherIIBlocks.BLUE_ARILUM_LANTERN.get(),
+                AetherIIBlocks.BROWN_ARILUM_LANTERN.get(),
+                AetherIIBlocks.GREEN_ARILUM_LANTERN.get(),
+                AetherIIBlocks.RED_ARILUM_LANTERN.get(),
+                AetherIIBlocks.BLACK_ARILUM_LANTERN.get()
+        );
     }
 
     protected abstract TagAppender<Block, Block> tag(TagKey<Block> blockKey, TagKey<Item> itemKey);

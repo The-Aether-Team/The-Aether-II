@@ -75,6 +75,7 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation GLOVES = register("gloves");
     public static final ModelLayerLocation GLOVES_SLIM = register("gloves_slim");
     public static final ModelLayerLocation GLOVES_FIRST_PERSON = register("gloves_first_person");
+    public static final ModelLayerLocation GLOVES_SLIM_FIRST_PERSON = register("gloves_slim_first_person");
 
     public static final ModelLayerLocation ACCESSORY = register("accessory");
 

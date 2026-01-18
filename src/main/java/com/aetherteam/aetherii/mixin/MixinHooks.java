@@ -38,11 +38,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.ApiStatus;
 import org.joml.Vector3f;
 
 import java.util.List;
 
 public class MixinHooks {
+    @ApiStatus.Internal
+    public static boolean RENDERING_ACCESSORY = false;
+
     public static void shortswordSlashBehavior(Player player, Entity target, boolean canShortswordSlash) {
         if (canShortswordSlash) {
             float sweepRange = (float) player.getAttributeValue(AetherIIAttributes.SWEEP_RANGE);

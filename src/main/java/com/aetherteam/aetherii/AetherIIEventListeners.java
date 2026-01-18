@@ -17,6 +17,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -25,6 +26,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.*;
@@ -33,12 +35,15 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.portal.TeleportTransition;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityMountEvent;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
+import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.level.AlterGroundEvent;
@@ -79,6 +84,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onEntitySpawn);
         bus.addListener(AetherIIEventListeners::onEntityTravelToDimension);
         bus.addListener(AetherIIEventListeners::onEntityCauseExplosion);
+        bus.addListener(AetherIIEventListeners::onProjectileImpact);
 
         // Living
         bus.addListener(AetherIIEventListeners::onLivingPreDamaged);
@@ -301,8 +307,9 @@ public class AetherIIEventListeners {
 
     public static void onEntityTravelToDimension(EntityTravelToDimensionEvent event) {
         Entity entity = event.getEntity();
+        ResourceKey<Level> dimension = event.getDimension();
 
-        if (entity instanceof Player player) {
+        if (entity instanceof Player player && !player.level().dimension().equals(dimension)) {
             player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT.get()).removeAerbunny();
         }
     }
@@ -320,6 +327,17 @@ public class AetherIIEventListeners {
                     }
                 }
             });
+        }
+    }
+
+    public static void onProjectileImpact(ProjectileImpactEvent event) {
+        HitResult hitResult = event.getRayTraceResult();
+        Projectile projectile = event.getProjectile();
+
+        if (hitResult instanceof EntityHitResult entityHitResult) {
+            if (entityHitResult.getEntity() instanceof Player player) {
+                player.getData(AetherIIDataAttachments.PLAYER.get()).stickProjectile(projectile, player);
+            }
         }
     }
 

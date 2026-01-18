@@ -24,6 +24,7 @@ import com.aetherteam.aetherii.item.equipment.accessories.KineticThrustersItem;
 import com.aetherteam.aetherii.item.equipment.armor.abilities.*;
 import com.aetherteam.aetherii.item.equipment.charms.CharmItem;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.HolystoneTool;
+import com.aetherteam.aetherii.item.equipment.tools.abilities.ZaniteTool;
 import com.aetherteam.aetherii.item.equipment.tools.arkenium.ArkeniumAxeItem;
 import com.aetherteam.aetherii.item.equipment.tools.arkenium.ArkeniumPickaxeItem;
 import com.aetherteam.aetherii.item.equipment.tools.arkenium.ArkeniumShovelItem;
@@ -42,6 +43,7 @@ import com.aetherteam.aetherii.item.equipment.tools.skyroot.SkyrootShovelItem;
 import com.aetherteam.aetherii.item.equipment.tools.skyroot.SkyrootTrowelItem;
 import com.aetherteam.aetherii.item.equipment.tools.zanite.*;
 import com.aetherteam.aetherii.item.equipment.weapons.*;
+import com.aetherteam.aetherii.item.equipment.weapons.abilities.ZaniteWeapon;
 import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumCrossbowItem;
 import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumHammerItem;
 import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumShortswordItem;
@@ -438,8 +440,12 @@ public class AetherIIItems {
         // Weapons
         bus.addListener(HammerOfDemolitionItem::disableAttacks);
 
+        // Weapons
+        bus.addListener(ZaniteWeapon::updateWeaponAttributes);
+
         // Tools
         bus.addListener(HolystoneTool::dropAmbrosium);
+        bus.addListener(ZaniteTool::updateToolAttributes);
         bus.addListener(TieredShieldItem::updatePlayerAttributes);
 
         // Charms

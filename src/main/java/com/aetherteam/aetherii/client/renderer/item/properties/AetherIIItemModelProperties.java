@@ -32,7 +32,6 @@ public class AetherIIItemModelProperties {
     public static void registerRangeSelectProperties(RegisterRangeSelectItemModelPropertyEvent event) {
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "better_cooldown"), BetterCooldown.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "reinforcement_tier"), ReinforcementTierRange.MAP_CODEC);
-        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "crossbow/pull"), TieredCrossbowPullRange.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "darts_loaded"), DartsLoadedRange.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "healing_stone_charges"), HealingStoneChargeRange.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "parachuting"), ParachutingRange.MAP_CODEC);

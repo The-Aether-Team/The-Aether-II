@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.mixin.MixinHooks;
@@ -26,7 +27,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -117,5 +120,19 @@ public class EntityMixin {
     private boolean collide(boolean original) {
         Entity entity = (Entity) (Object) this;
         return original || entity instanceof Moa moa && moa.hasControllingPassenger();
+    }
+
+    @ModifyArgs(method = "move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;maybeBackOffFromEdge(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/entity/MoverType;)Lnet/minecraft/world/phys/Vec3;"))
+    private void maybeBackOffFromEdge(Args args) {
+        Entity entity = (Entity) (Object) this;
+        if (entity instanceof LivingEntity livingEntity) {
+            EffectsSystemAttachment attachment = livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM);
+            Vec3 multiplier = attachment.getMotionMultiplier();
+            if (multiplier.length() != new Vec3(1, 1, 1).length()) {
+                Vec3 movement = args.get(0);
+                args.set(0, movement.multiply(multiplier));
+                attachment.setMotionMultiplier(new Vec3(1, 1, 1));
+            }
+        }
     }
 }

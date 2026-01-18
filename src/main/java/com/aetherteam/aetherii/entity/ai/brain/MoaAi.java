@@ -105,17 +105,17 @@ public class MoaAi {
 
     private static void initFightActivity(Moa owner, Brain<Moa> brain) {
         brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
-                StopAttackingIfTargetInvalid.create((serverLevel, livingEntity) -> !isNearestValidAttackTarget(serverLevel, owner, livingEntity)),
+                StopAttackingIfTargetInvalid.create(),
                 SetWalkTargetFromAttackTargetIfTargetOutOfReach.create(0.14F),
                 MeleeAttack.create(5)
         ), MemoryModuleType.ATTACK_TARGET);
     }
 
-    private static boolean isNearestValidAttackTarget(ServerLevel serverLevel, Moa owner, LivingEntity target) {
-        return findNearestValidAttackTarget(serverLevel, owner).filter(entity -> entity == target).isPresent();
-    }
 
     private static Optional<? extends LivingEntity> findNearestValidAttackTarget(ServerLevel serverLevel, Moa owner) {
+
+        Brain<Moa> brain = owner.getBrain();
+
         if (owner.isBaby()) {
             return Optional.empty();
         }
@@ -123,6 +123,11 @@ public class MoaAi {
         Optional<LivingEntity> target = BehaviorUtils.getLivingEntityFromUUIDMemory(owner, MemoryModuleType.ANGRY_AT);
         if (target.isPresent() && Sensor.isEntityAttackableIgnoringLineOfSight(serverLevel, owner, target.get()) && target.filter(player -> player.closerThan(owner, 6.0)).isPresent()) { //todo track line of sight and distance and follow range and dont make it too fast.
             return target;
+        } else if (brain.hasMemoryValue(MemoryModuleType.UNIVERSAL_ANGER)) {
+            Optional<Player> optional1 = brain.getMemory(MemoryModuleType.NEAREST_VISIBLE_ATTACKABLE_PLAYER);
+            if (optional1.isPresent()) {
+                return optional1;
+            }
         } else if (owner.getBrain().hasMemoryValue(MemoryModuleType.HOME)) {
             Optional<Player> nearestPlayer = getTargetIfWithinRange(owner, MemoryModuleType.NEAREST_VISIBLE_PLAYER); //todo they need to be able to have the moa see the player if its near the nest and ignore follow range.
             Optional<GlobalPos> homePos = owner.getBrain().getMemory(MemoryModuleType.HOME);

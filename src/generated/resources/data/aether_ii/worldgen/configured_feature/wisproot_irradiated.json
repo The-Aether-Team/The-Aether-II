@@ -28,12 +28,6 @@
       },
       {
         "type": "aether_ii:moss",
-        "block_provider": {
-          "type": "minecraft:simple_state_provider",
-          "state": {
-            "Name": "aether_ii:ambrelinn_moss_block"
-          }
-        },
         "carpet_provider": {
           "type": "minecraft:simple_state_provider",
           "state": {
@@ -221,6 +215,7 @@
             }
           ]
         },
+        "moss_property": "ambrelinn",
         "vines_provider": {
           "type": "minecraft:simple_state_provider",
           "state": {

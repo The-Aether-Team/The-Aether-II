@@ -1,0 +1,10 @@
+{
+  "parent": "aether_ii:block/template_tinted_overlaid_leaves",
+  "textures": {
+    "bottom": "aether_ii:block/irradiated_wisptop_leaves",
+    "overlay": "aether_ii:block/snowy_overlay",
+    "particle": "aether_ii:block/irradiated_wisptop_leaves",
+    "side": "aether_ii:block/irradiated_wisptop_leaves_snowy",
+    "top": "aether_ii:block/irradiated_wisptop_leaves"
+  }
+}

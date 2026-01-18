@@ -40,7 +40,7 @@ public class AetherIIDamageTypeTagData extends KeyTagProvider<DamageType> {
                 AetherIIDamageTypes.FRACTURE,
                 AetherIIDamageTypes.TOXIN,
                 AetherIIDamageTypes.VENOM);
-        this.tag(DamageTypeTags.IS_LIGHTNING).add(AetherIIDamageTypes.CHARGED);
+        this.tag(DamageTypeTags.IS_LIGHTNING).add(AetherIIDamageTypes.CHARGED, AetherIIDamageTypes.SHOCK);
         this.tag(DamageTypeTags.IS_FIRE).add(AetherIIDamageTypes.IMMOLATION);
     }
 }

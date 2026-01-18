@@ -102,7 +102,7 @@ public class CellingMonster extends Monster {
         boolean flag2 = this.moveControl.hasWanted() && this.moveControl.getWantedY() - this.getY() > 0;
 
 
-        if (!flag && !flag2 && (this.onGround() && this.isInWater() || this.isInLava() || this.isInFluidType())) {
+        if (!flag && !flag2 && (this.onGround() || this.isInWater() || this.isInLava() || this.isInFluidType())) {
             this.entityData.set(ATTACHED_FACE, Direction.DOWN);
             this.setCellRotation(new Quaternionf());
         } else {
