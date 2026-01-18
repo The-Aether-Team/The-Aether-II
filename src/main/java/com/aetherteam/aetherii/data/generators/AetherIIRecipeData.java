@@ -1026,23 +1026,23 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .save(this.output);
 
         // Skyroot Beds
-        this.bookshelf(getter, AetherIIBlocks.SKYROOT_BED, AetherIIBlocks.CLOUDWOOL);
-        this.bookshelf(getter, AetherIIBlocks.WHITE_SKYROOT_BED, AetherIIBlocks.WHITE_CLOUDWOOL);
-        this.bookshelf(getter, AetherIIBlocks.ORANGE_SKYROOT_BED, AetherIIBlocks.ORANGE_CLOUDWOOL);
-        this.bookshelf(getter, AetherIIBlocks.MAGENTA_SKYROOT_BED, AetherIIBlocks.MAGENTA_CLOUDWOOL);
-        this.bookshelf(getter, AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED, AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL);
-        this.bookshelf(getter, AetherIIBlocks.YELLOW_SKYROOT_BED, AetherIIBlocks.YELLOW_CLOUDWOOL);
-        this.bookshelf(getter, AetherIIBlocks.LIME_SKYROOT_BED, AetherIIBlocks.LIME_CLOUDWOOL);
-        this.bookshelf(getter, AetherIIBlocks.PINK_SKYROOT_BED, AetherIIBlocks.PINK_CLOUDWOOL);
-        this.bookshelf(getter, AetherIIBlocks.GRAY_SKYROOT_BED, AetherIIBlocks.GRAY_CLOUDWOOL);
-        this.bookshelf(getter, AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED, AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL);
-        this.bookshelf(getter, AetherIIBlocks.CYAN_SKYROOT_BED, AetherIIBlocks.CYAN_CLOUDWOOL);
-        this.bookshelf(getter, AetherIIBlocks.PURPLE_SKYROOT_BED, AetherIIBlocks.PURPLE_CLOUDWOOL);
-        this.bookshelf(getter, AetherIIBlocks.BLUE_SKYROOT_BED, AetherIIBlocks.BLUE_CLOUDWOOL);
-        this.bookshelf(getter, AetherIIBlocks.BROWN_SKYROOT_BED, AetherIIBlocks.BROWN_CLOUDWOOL);
-        this.bookshelf(getter, AetherIIBlocks.GREEN_SKYROOT_BED, AetherIIBlocks.GREEN_CLOUDWOOL);
-        this.bookshelf(getter, AetherIIBlocks.RED_SKYROOT_BED, AetherIIBlocks.RED_CLOUDWOOL);
-        this.bookshelf(getter, AetherIIBlocks.BLACK_SKYROOT_BED, AetherIIBlocks.BLACK_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.SKYROOT_BED, AetherIIBlocks.CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.WHITE_SKYROOT_BED, AetherIIBlocks.WHITE_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.ORANGE_SKYROOT_BED, AetherIIBlocks.ORANGE_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.MAGENTA_SKYROOT_BED, AetherIIBlocks.MAGENTA_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED, AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.YELLOW_SKYROOT_BED, AetherIIBlocks.YELLOW_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.LIME_SKYROOT_BED, AetherIIBlocks.LIME_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.PINK_SKYROOT_BED, AetherIIBlocks.PINK_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.GRAY_SKYROOT_BED, AetherIIBlocks.GRAY_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED, AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.CYAN_SKYROOT_BED, AetherIIBlocks.CYAN_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.PURPLE_SKYROOT_BED, AetherIIBlocks.PURPLE_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.BLUE_SKYROOT_BED, AetherIIBlocks.BLUE_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.BROWN_SKYROOT_BED, AetherIIBlocks.BROWN_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.GREEN_SKYROOT_BED, AetherIIBlocks.GREEN_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.RED_SKYROOT_BED, AetherIIBlocks.RED_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.BLACK_SKYROOT_BED, AetherIIBlocks.BLACK_CLOUDWOOL);
 
         // Bookshelves
         this.bookshelf(getter, AetherIIBlocks.SKYROOT_BOOKSHELF, AetherIIBlocks.SKYROOT_PLANKS);

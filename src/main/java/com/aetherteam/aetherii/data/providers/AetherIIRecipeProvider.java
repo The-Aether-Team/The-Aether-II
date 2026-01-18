@@ -98,11 +98,12 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
 
     protected void bed(HolderGetter<Item> getter, ItemLike result, ItemLike wool) {
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, result)
+                .group("skyroot_bed")
                 .define('W', wool)
                 .define('#', AetherIITags.Items.PLANKS_CRAFTING)
                 .pattern("WWW")
                 .pattern("###")
-                .unlockedBy("has_cloudwool", has(AetherIITags.Items.CLOUDWOOL))
+                .unlockedBy("has_cloudwool", has(wool))
                 .save(this.output);
     }
 
