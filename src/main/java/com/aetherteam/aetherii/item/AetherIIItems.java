@@ -276,6 +276,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> CHARGE_CATALYST = register("charge_catalyst", TreasureItem::new);
     public static final DeferredItem<Item> ARKENIUM_CORE = register("arkenium_core", TreasureItem::new);
     public static final DeferredItem<Item> GRAVITITE_CORE = register("gravitite_core", TreasureItem::new);
+    public static final DeferredItem<Item> EYE_OF_THE_MIMIC = register("eye_of_the_mimic", TreasureItem::new);
 
     // Irradiated Items
     public static final DeferredItem<Item> IRRADIATED_ARMOR = register("irradiated_armor", () -> new Item.Properties().stacksTo(1));

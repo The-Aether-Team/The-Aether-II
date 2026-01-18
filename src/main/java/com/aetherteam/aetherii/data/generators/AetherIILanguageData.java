@@ -977,6 +977,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.CHARGE_CATALYST, "Charge Catalyst");
         this.addItem(AetherIIItems.ARKENIUM_CORE, "Arkenium Core");
         this.addItem(AetherIIItems.GRAVITITE_CORE, "Gravitite Core");
+        this.addItem(AetherIIItems.EYE_OF_THE_MIMIC, "Eye of the Mimic");
 
         // Irradiated Items
         this.addItem(AetherIIItems.IRRADIATED_ARMOR, "Irradiated Armor");

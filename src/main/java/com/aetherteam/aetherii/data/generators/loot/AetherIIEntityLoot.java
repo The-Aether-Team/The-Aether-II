@@ -254,7 +254,13 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
 
         this.add(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), LootTable.lootTable());
 
-        this.add(AetherIIEntityTypes.MIMIC.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.MIMIC.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.EYE_OF_THE_MIMIC.get())
+                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
+                        )
+                )
+        );
 
         //TODO CARVED STONE LOOT
         this.add(AetherIIEntityTypes.DETONATION_SENTRY.get(), LootTable.lootTable()

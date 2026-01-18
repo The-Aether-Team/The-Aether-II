@@ -185,6 +185,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.CHARGE_CATALYST.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.ARKENIUM_CORE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GRAVITITE_CORE.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.EYE_OF_THE_MIMIC.get(), ModelTemplates.FLAT_ITEM);
 
         // Irradiated Items
         this.generateFlatItem(AetherIIItems.IRRADIATED_ARMOR.get(), ModelTemplates.FLAT_ITEM);

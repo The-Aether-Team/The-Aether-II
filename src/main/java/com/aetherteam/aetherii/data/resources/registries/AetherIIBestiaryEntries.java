@@ -160,7 +160,7 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.COCKATRICE, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.COCKATRICE_FEATHER, 1.0, 1, 3))),
             Map.entry(AetherIIEntityTypes.ARKENIUM_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.ARKENIUM_CORE, 0.075, 1, 1))),
             Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.GRAVITITE_CORE, 0.075, 1, 1))),
-            Map.entry(AetherIIEntityTypes.MIMIC, List.of()),
+            Map.entry(AetherIIEntityTypes.MIMIC, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.EYE_OF_THE_MIMIC, 0.075, 1, 1))),
             Map.entry(AetherIIEntityTypes.DETONATION_SENTRY, List.of()),
             Map.entry(AetherIIEntityTypes.SENTRY_GOLEM, List.of()),
             Map.entry(AetherIIEntityTypes.SLIDER, List.of()),
