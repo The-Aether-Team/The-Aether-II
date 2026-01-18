@@ -9,11 +9,14 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.NoiseColumn;
+import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.RandomState;
@@ -109,51 +112,80 @@ public class SentryRuinsStructure extends Structure {
      * @return The starting height as an {@link Integer}.
      */
     private static RuinsOriginInfo findStartingOrigin(ChunkGenerator generator, LevelHeightAccessor heightAccessor, ChunkPos chunkPos, RandomState randomState, WorldgenRandom random, StructureTemplateManager templateManager, int aboveBottom, int belowTop) {
-        StructureTemplate template = templateManager.getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/boss_room"));
+        StructureTemplate bossTemplate = templateManager.getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/boss_room"));
+        StructureTemplate tunnelTemplate = templateManager.getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/square_tunnel"));
+        StructureTemplate loungeTemplate = templateManager.getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/rooms/lounge"));
+
+        Vec3i bossSize = bossTemplate.getSize();
+        Vec3i tunnelSize = tunnelTemplate.getSize();
+        Vec3i loungeSize = loungeTemplate.getSize();
 
         BlockPos returnPos = null;
         Rotation returnRotation = null;
 
         for (Rotation rotation : Rotation.getShuffled(random)) {
+            Direction direction = rotation.rotate(Direction.SOUTH);
+
             BlockPos initialPos = new BlockPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ());
 
-            AetherTemplateStructurePiece.TransformInfo transformInfo = AetherTemplateStructurePiece.getTransformInfo(template, rotation);
-            BoundingBox boundingBox = template.getBoundingBox(initialPos, transformInfo.rotation(), transformInfo.pivot(), transformInfo.mirror());
-
-            int minX = boundingBox.minX() - 1;
-            int minZ = boundingBox.minZ() - 1;
-            int maxX = boundingBox.maxX() + 1;
-            int maxZ = boundingBox.maxZ() + 1;
+            AetherTemplateStructurePiece.TransformInfo transformInfo = AetherTemplateStructurePiece.getTransformInfo(bossTemplate, rotation);
+            BoundingBox bossBox = bossTemplate.getBoundingBox(initialPos, transformInfo.rotation(), transformInfo.pivot(), transformInfo.mirror());
 
             int height = heightAccessor.getMinY() + aboveBottom;
             int maxHeight = heightAccessor.getMaxY() - belowTop;
-            int goalThickness = boundingBox.getYSpan() + 2;
-            int currentThickness = 0;
 
-            NoiseColumn[] columns = {
-                    generator.getBaseColumn(minX, minZ, heightAccessor, randomState),
-                    generator.getBaseColumn(minX, maxZ, heightAccessor, randomState),
-                    generator.getBaseColumn(maxX, minZ, heightAccessor, randomState),
-                    generator.getBaseColumn(maxX, maxZ, heightAccessor, randomState)
-            };
-
-            for (int y = height; y <= maxHeight; y++) {
-                if (checkEachCornerAtY(columns, y)) {
-                    currentThickness++;
-                    if (currentThickness >= goalThickness) {
-                        returnPos = initialPos.atY(y - boundingBox.getYSpan() - 1);
-                        returnRotation = rotation;
-                        break;
-                    }
-                } else {
-                    currentThickness = 0;
-                }
+            int bossCheckY = checkCorners(bossBox, generator, heightAccessor, randomState, height, maxHeight);
+            if (bossCheckY > heightAccessor.getMinY()) {
+                returnPos = initialPos.atY(bossCheckY - bossBox.getYSpan() - 1);
+                returnRotation = rotation;
             }
+
             if (returnPos != null && returnRotation != null) {
+                int offsetDistance = (bossSize.getZ() / 2) + tunnelSize.getZ() + (loungeSize.getZ() / 2);
+                BlockPos neighborOffset = bossBox.getCenter().atY(returnPos.getY()).offset(direction.getUnitVec3i().multiply(offsetDistance));
+                BoundingBox loungeBox = loungeTemplate.getBoundingBox(neighborOffset, Rotation.NONE, BlockPos.ZERO, Mirror.NONE);
+
+                int loungeCheckY = checkCorners(loungeBox, generator, heightAccessor, randomState, returnPos.getY(), returnPos.getY() + loungeBox.getYSpan() + 2);
+                if (loungeCheckY <= heightAccessor.getMinY()) {
+                    returnPos = null;
+                    returnRotation = null;
+                    continue;
+                }
+
                 break;
             }
         }
+
         return new RuinsOriginInfo(returnPos, returnRotation);
+    }
+
+    public static int checkCorners(BoundingBox boundingBox, ChunkGenerator generator, LevelHeightAccessor heightAccessor, RandomState randomState, int minHeight, int maxHeight) {
+        int minX = boundingBox.minX() - 1;
+        int minZ = boundingBox.minZ() - 1;
+        int maxX = boundingBox.maxX() + 1;
+        int maxZ = boundingBox.maxZ() + 1;
+
+        int goalThickness = boundingBox.getYSpan() + 2;
+        int currentThickness = 0;
+
+        NoiseColumn[] columns = {
+                generator.getBaseColumn(minX, minZ, heightAccessor, randomState),
+                generator.getBaseColumn(minX, maxZ, heightAccessor, randomState),
+                generator.getBaseColumn(maxX, minZ, heightAccessor, randomState),
+                generator.getBaseColumn(maxX, maxZ, heightAccessor, randomState)
+        };
+
+        for (int y = minHeight; y <= maxHeight; y++) {
+            if (checkEachCornerAtY(columns, y)) {
+                currentThickness++;
+                if (currentThickness >= goalThickness) {
+                    return y;
+                }
+            } else {
+                currentThickness = 0;
+            }
+        }
+        return heightAccessor.getMinY();
     }
 
     /**

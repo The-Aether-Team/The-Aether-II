@@ -154,7 +154,7 @@ public class SentryRuinsBuilder {
                 SentryRuinsPiece room = this.chooseRoom(roomName, pos, rotation, this.processors.roomSettings());
                 StructurePiece collisionPiece = StructurePiece.findCollisionPiece(this.nodes, room.getBoundingBox());
 
-                if (this.isCloseToCenter(chunkPos, room.templatePosition()) && this.isCoveredAtPos(room.getBoundingBox())) {
+                if (this.isCloseToCenter(chunkPos, room.templatePosition()) && isCoveredAtPos(room.getBoundingBox(), this.context.chunkGenerator(), this.context.heightAccessor(), this.context.randomState())) {
                     if (collisionPiece == null) {
                         new Connection(currentNode, room, hallway, direction);
                         this.nodes.add(room);
@@ -277,10 +277,7 @@ public class SentryRuinsBuilder {
      * @param room The {@link BoundingBox} of the room.
      * @return Whether the room is covered, as a {@link Boolean}.
      */
-    private boolean isCoveredAtPos(BoundingBox room) {
-        ChunkGenerator chunkGenerator = this.context.chunkGenerator();
-        LevelHeightAccessor heightAccessor = this.context.heightAccessor();
-        RandomState randomState = this.context.randomState();
+    public static boolean isCoveredAtPos(BoundingBox room, ChunkGenerator chunkGenerator, LevelHeightAccessor heightAccessor, RandomState randomState) {
         int minX = room.minX() - 1;
         int minZ = room.minZ() - 1;
         int maxX = room.maxX() + 1;
@@ -304,7 +301,7 @@ public class SentryRuinsBuilder {
      * @param maxY    The maximum y {@link Integer} for the range.
      * @return If there is no air in the range, as a {@link Boolean}.
      */
-    private static boolean isSolidInColumns(NoiseColumn[] columns, int minY, int maxY) {
+    public static boolean isSolidInColumns(NoiseColumn[] columns, int minY, int maxY) {
         for (NoiseColumn column : columns) {
             for (int y = minY; y <= maxY; ++y) {
                 if (column.getBlock(y).isAir() || column.getBlock(y).is(AetherIITags.Blocks.NON_SENTRY_RUINS_SPAWNABLE)) {
