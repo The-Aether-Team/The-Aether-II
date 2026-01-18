@@ -262,27 +262,8 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                 )
         );
 
-        //TODO CARVED STONE LOOT
-        this.add(AetherIIEntityTypes.DETONATION_SENTRY.get(), LootTable.lootTable()
-                /*.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherBlocks.CARVED_STONE.get()).setWeight(4)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 1.0F)))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F)))
-                        )
-                )*/
-        );
-        this.add(AetherIIEntityTypes.SENTRY_GOLEM.get(), LootTable.lootTable()
-                /*.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherBlocks.CARVED_STONE.get()).setWeight(4)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 1.0F)))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F)))
-                        )
-                        .add(LootItem.lootTableItem(AetherBlocks.SENTRY_STONE.get()).setWeight(1)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 1.0F)))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F)))
-                        )
-                )*/
-        );
+        this.add(AetherIIEntityTypes.DETONATION_SENTRY.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.SENTRY_GOLEM.get(), LootTable.lootTable());
         this.add(AetherIIEntityTypes.SLIDER.get(), LootTable.lootTable());
 
         this.add(AetherIIEntityTypes.EDWARD.get(), LootTable.lootTable());
