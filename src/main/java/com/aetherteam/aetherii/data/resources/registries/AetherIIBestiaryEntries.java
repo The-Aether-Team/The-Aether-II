@@ -62,6 +62,20 @@ public class AetherIIBestiaryEntries {
     public static final ResourceKey<BestiaryEntry> SLIDER = createKey("slider");
     public static final ResourceKey<BestiaryEntry> BLADESHROOM_HUNTER = createKey("bladeshroom_hunter");
 
+    public static final List<Holder<EntityType<?>>> ENTRY_ORDER = List.of(
+            AetherIIEntityTypes.HIGHFIELDS_TAEGORE, AetherIIEntityTypes.MAGNETIC_TAEGORE, AetherIIEntityTypes.ARCTIC_TAEGORE,
+            AetherIIEntityTypes.HIGHFIELDS_KIRRID, AetherIIEntityTypes.MAGNETIC_KIRRID, AetherIIEntityTypes.ARCTIC_KIRRID,
+            AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, AetherIIEntityTypes.MAGNETIC_BURRUKAI, AetherIIEntityTypes.ARCTIC_BURRUKAI,
+            AetherIIEntityTypes.PHYG, AetherIIEntityTypes.SHEEPUFF, AetherIIEntityTypes.FLYING_COW,
+            AetherIIEntityTypes.AERBUNNY, AetherIIEntityTypes.SKYROOT_LIZARD,AetherIIEntityTypes.MOA,
+            AetherIIEntityTypes.BLUE_SWET, AetherIIEntityTypes.GOLDEN_SWET, AetherIIEntityTypes.AECHOR_PLANT, AetherIIEntityTypes.CARRION_SPROUT,
+            AetherIIEntityTypes.SKEPHID, AetherIIEntityTypes.ZEPHYR,
+            AetherIIEntityTypes.TEMPEST, AetherIIEntityTypes.COCKATRICE,
+            AetherIIEntityTypes.ARKENIUM_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON,
+            AetherIIEntityTypes.MIMIC, AetherIIEntityTypes.DETONATION_SENTRY, AetherIIEntityTypes.SENTRY_GOLEM, AetherIIEntityTypes.SLIDER,
+            AetherIIEntityTypes.BLADESHROOM_HUNTER
+    );
+
     public static final Map<ResourceKey<BestiaryEntry>, Holder<EntityType<?>>> ENTITIES = Map.ofEntries(
             Map.entry(FLYING_COW, AetherIIEntityTypes.FLYING_COW),
             Map.entry(SHEEPUFF, AetherIIEntityTypes.SHEEPUFF),

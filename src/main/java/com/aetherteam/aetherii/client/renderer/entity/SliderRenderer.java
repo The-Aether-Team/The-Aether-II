@@ -56,15 +56,15 @@ public class SliderRenderer extends MobRenderer<Slider, SliderRenderState, Slide
     @Override
     public void render(SliderRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int partialTick) {
         if (renderState.deathTime > 0) {
-                float f2 = renderState.deathTime / 300.0F;
-                poseStack.pushPose();
-                poseStack.translate(0.0F, 1.0F, 0.0F);
-                renderRays(poseStack, f2, bufferSource.getBuffer(RenderType.dragonRays()));
-                renderRays(poseStack, f2, bufferSource.getBuffer(RenderType.dragonRaysDepth()));
-                poseStack.popPose();
-            }
+            float f2 = renderState.deathTime / 300.0F;
+            poseStack.pushPose();
+            poseStack.translate(0.0F, 1.0F, 0.0F);
+            renderRays(poseStack, f2, bufferSource.getBuffer(RenderType.dragonRays()));
+            renderRays(poseStack, f2, bufferSource.getBuffer(RenderType.dragonRaysDepth()));
+            poseStack.popPose();
+        }
 
-            super.render(renderState, poseStack, bufferSource, partialTick);
+        super.render(renderState, poseStack, bufferSource, partialTick);
     }
 
     private static void renderRays(PoseStack poseStack, float deathCompletion, VertexConsumer buffer) {
@@ -115,6 +115,8 @@ public class SliderRenderer extends MobRenderer<Slider, SliderRenderState, Slide
     @Override
     protected void setupRotations(SliderRenderState renderState, PoseStack poseStack, float bodyRot, float scale) {
         if (!Minecraft.getInstance().isPaused()) {
+            poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - bodyRot));
+
             if (renderState.hurtAngle != 0) {
                 poseStack.mulPose(Axis.of(new Vector3f(renderState.hurtAngleX, 0.0F, -renderState.hurtAngleZ)).rotationDegrees(renderState.hurtAngle * -15.0F));
             }
