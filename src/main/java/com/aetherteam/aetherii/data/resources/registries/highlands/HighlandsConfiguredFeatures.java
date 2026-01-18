@@ -37,6 +37,7 @@ import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.blockpredicates.HasSturdyFacePredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
@@ -1834,7 +1835,7 @@ public class HighlandsConfiguredFeatures {
                         3,
                         2,
                         2,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_CARPET.get())), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.solid(BlockPos.ZERO.below())))
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_CARPET.get())), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
                 )
         );
         FeatureUtils.register(context,
@@ -1905,7 +1906,7 @@ public class HighlandsConfiguredFeatures {
                         3,
                         2,
                         2,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_CARPET.get())), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.solid(BlockPos.ZERO.below())))
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_CARPET.get())), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
                 )
         );
         register(context,
@@ -1942,7 +1943,7 @@ public class HighlandsConfiguredFeatures {
                         3,
                         2,
                         2,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get())), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.solid(BlockPos.ZERO.below())))
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get())), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
                 )
         );
         register(context,
