@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -13,11 +14,18 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.IceBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class UnstableBlock extends Block {
-    public UnstableBlock(Properties properties) {
+public class FragileIceBlock extends IceBlock {
+    public static final MapCodec<FragileIceBlock> CODEC = simpleCodec(FragileIceBlock::new);
+
+    public MapCodec<? extends IceBlock> codec() {
+        return CODEC;
+    }
+
+    public FragileIceBlock(Properties properties) {
         super(properties);
     }
 
@@ -26,13 +34,13 @@ public class UnstableBlock extends Block {
         if (random.nextInt(5) == 0) {
             level.levelEvent(2001, pos, Block.getId(state));
         }
-        level.removeBlock(pos, false);
+        melt(state, level, pos);
         super.tick(state, level, pos, random);
     }
 
     @Override
     protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
-        if (neighborState.is(Blocks.WATER)) {
+        if (neighborState.is(Blocks.AIR)) {
             scheduledTickAccess.scheduleTick(pos, this, 1);
         }
         return super.updateShape(state, level, scheduledTickAccess, pos, direction, neighborPos, neighborState, random);

@@ -5,6 +5,12 @@
     "height": {
       "value": 124
     },
+    "ice_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:quicksoil"
+      }
+    },
     "lake_barrier_noise": "aether_ii:highlands/lakes/lake_barrier",
     "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor",
     "lake_noise": "aether_ii:highlands/lakes/noise",

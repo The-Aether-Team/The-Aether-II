@@ -120,6 +120,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARCTIC_SNOW_BLOCK, "Arctic Snow Block");
         this.addBlock(AetherIIBlocks.ARCTIC_SNOW, "Arctic Snow");
         this.addBlock(AetherIIBlocks.ARCTIC_ICE, "Arctic Ice");
+        this.addBlock(AetherIIBlocks.FRAGILE_ARCTIC_ICE, "Fragile Arctic Ice");
         this.addBlock(AetherIIBlocks.ARCTIC_PACKED_ICE, "Arctic Packed Ice");
         this.addBlock(AetherIIBlocks.ICESTONE, "Icestone");
         this.addBlock(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL, "Large Arctic Ice Crystal");

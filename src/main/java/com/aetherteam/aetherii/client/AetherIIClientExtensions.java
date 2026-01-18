@@ -216,7 +216,7 @@ public class AetherIIClientExtensions {
         event.registerItem(GLIDER, AetherIIItems.COLD_AERCLOUD_GLIDER, AetherIIItems.GOLDEN_AERCLOUD_GLIDER, AetherIIItems.BLUE_AERCLOUD_GLIDER, AetherIIItems.PURPLE_AERCLOUD_GLIDER);
         event.registerItem(MOA_SADDLE, AetherIIItems.MOA_SADDLE);
 
-        event.registerBlock(UNSTABLE_BLOCK, AetherIIBlocks.UNSTABLE_HOLYSTONE.get(),AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
+        event.registerBlock(UNSTABLE_BLOCK, AetherIIBlocks.UNSTABLE_HOLYSTONE.get(), AetherIIBlocks.UNSTABLE_UNDERSHALE.get(), AetherIIBlocks.FRAGILE_ARCTIC_ICE.get(), AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS.get());
 
         event.registerFluidType(ALKAHEST_FLUID, AetherIIFluidTypes.ALKAHEST_TYPE.get());
 

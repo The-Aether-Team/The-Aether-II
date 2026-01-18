@@ -354,6 +354,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.FERROSITE_SAND.get());
                 output.accept(AetherIIBlocks.FERROSITE_MUD.get());
                 output.accept(AetherIIBlocks.ARCTIC_ICE.get());
+                output.accept(AetherIIBlocks.FRAGILE_ARCTIC_ICE.get());
                 output.accept(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
                 output.accept(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
                 output.accept(AetherIIBlocks.ARCTIC_SNOW.get());

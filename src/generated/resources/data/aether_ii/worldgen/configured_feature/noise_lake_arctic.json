@@ -5,6 +5,48 @@
     "height": {
       "value": 124
     },
+    "ice_block": {
+      "type": "minecraft:dual_noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": -2
+      },
+      "scale": 2.0,
+      "seed": 2345,
+      "slow_noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": -6
+      },
+      "slow_scale": 2.0,
+      "states": [
+        {
+          "Name": "aether_ii:arctic_packed_ice"
+        },
+        {
+          "Name": "aether_ii:arctic_packed_ice"
+        },
+        {
+          "Name": "aether_ii:arctic_packed_ice"
+        },
+        {
+          "Name": "aether_ii:coarse_aether_dirt"
+        },
+        {
+          "Name": "aether_ii:shimmering_silt"
+        },
+        {
+          "Name": "aether_ii:shimmering_silt"
+        }
+      ],
+      "variety": [
+        1,
+        4
+      ]
+    },
     "lake_barrier_noise": "aether_ii:highlands/lakes/lake_barrier",
     "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor",
     "lake_noise": "aether_ii:highlands/lakes/noise",

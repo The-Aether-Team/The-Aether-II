@@ -91,10 +91,10 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                             && !level.isEmptyBlock(pos.south(thickness))
                             && !level.isEmptyBlock(pos.west(thickness))
                             && !level.isEmptyBlock(pos.below(2))
-                            && (!level.getBlockState(pos.above()).isSolid() || level.getBlockState(pos.above()).is(AetherIIBlocks.ARCTIC_ICE))
+                            && (!level.getBlockState(pos.above()).isSolid() || level.getBlockState(pos.above()).is(AetherIIBlocks.ARCTIC_ICE) || level.getBlockState(pos.above()).is(AetherIIBlocks.FRAGILE_ARCTIC_ICE))
                     ) {
                         if (pos.getY() == config.height().getValue() - 1 && config.frozen()) {
-                            this.setBlock(level, pos, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState());
+                            this.setBlock(level, pos, config.iceBlock().getState(context.random(), pos));
                         }
                         else this.setBlock(level, pos, Blocks.WATER.defaultBlockState());
                         this.setBlock(level, pos.below(), config.underwaterBlock().getState(context.random(), pos.below()));

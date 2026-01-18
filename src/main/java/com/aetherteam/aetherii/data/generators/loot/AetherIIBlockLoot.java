@@ -78,6 +78,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIItems.ARCTIC_SNOWBALL, ConstantValue.exactly(4.0F)));
         this.add(AetherIIBlocks.ARCTIC_SNOW.get(), this::droppingSnowLayer);
         this.dropWhenSilkTouch(AetherIIBlocks.ARCTIC_ICE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.FRAGILE_ARCTIC_ICE.get());
         this.dropWhenSilkTouch(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
         this.dropSelf(AetherIIBlocks.ICESTONE.get());
         this.dropWhenSilkTouch(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get());

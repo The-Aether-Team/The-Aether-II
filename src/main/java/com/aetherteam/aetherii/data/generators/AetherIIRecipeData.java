@@ -151,6 +151,13 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .unlockedBy("has_snowball", has(AetherIIItems.ARCTIC_SNOWBALL))
                 .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.FRAGILE_ARCTIC_ICE, 2)
+                .define('S', AetherIIBlocks.ARCTIC_ICE)
+                .define('B', AetherIIItems.ARCTIC_SNOWBALL)
+                .pattern("SB")
+                .pattern("BS")
+                .unlockedBy(getHasName(AetherIIBlocks.ARCTIC_ICE), has(AetherIIBlocks.ARCTIC_ICE))
+                .save(this.output);
         this.threeByThreePacker(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.ARCTIC_PACKED_ICE, AetherIIBlocks.ARCTIC_ICE);
         this.carpet(AetherIIBlocks.SHAYELINN_MOSS_CARPET, AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get());
 
