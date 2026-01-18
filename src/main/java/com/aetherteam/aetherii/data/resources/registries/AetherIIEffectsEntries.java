@@ -34,6 +34,23 @@ public class AetherIIEffectsEntries {
     public static final ResourceKey<EffectsEntry> CRYSTALLIZED = createKey("crystallized");
     public static final ResourceKey<EffectsEntry> SATURATION_BOOST = createKey("saturation_boost");
 
+    public static final List<Holder<MobEffect>> ENTRY_ORDER = List.of(
+            AetherIIEffects.VULNERABILITY,
+            AetherIIEffects.WOUND,
+            AetherIIEffects.STUN,
+            AetherIIEffects.FRACTURE,
+            AetherIIEffects.AMBROSIUM_POISONING,
+            AetherIIEffects.TOXIN,
+            AetherIIEffects.VENOM,
+            AetherIIEffects.CHARGED,
+            AetherIIEffects.WEBBED,
+            AetherIIEffects.IMMOLATION,
+            AetherIIEffects.FROSTBITE,
+            AetherIIEffects.FUNGAL_ROT,
+            AetherIIEffects.CRYSTALLIZED,
+            AetherIIEffects.SATURATION_BOOST
+    );
+
     public static final Map<ResourceKey<EffectsEntry>, Holder<MobEffect>> EFFECTS = Map.ofEntries(
             Map.entry(VULNERABILITY, AetherIIEffects.VULNERABILITY),
             Map.entry(WOUND, AetherIIEffects.WOUND),

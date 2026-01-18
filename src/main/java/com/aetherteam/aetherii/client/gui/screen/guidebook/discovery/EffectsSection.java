@@ -45,7 +45,7 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
         this.entries.clear();
         this.registryAccess.lookupOrThrow(this.registryKey).asHolderIdMap().forEach((entry) -> this.entries.add(new EffectsEntry.Mutable(entry)));
         this.getOrderedEntries().clear();
-        AetherIIEffectsEntries.EFFECTS.values().forEach((entityTypeHolder) -> this.entries.forEach((entry) -> {
+        AetherIIEffectsEntries.ENTRY_ORDER.forEach((entityTypeHolder) -> this.entries.forEach((entry) -> {
             if (entry.getEffect().value() == entityTypeHolder.value()) {
                 this.getOrderedEntries().add(entry);
             }
