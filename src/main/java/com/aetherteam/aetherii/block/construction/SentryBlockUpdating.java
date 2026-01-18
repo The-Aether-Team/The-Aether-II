@@ -19,14 +19,15 @@ public interface SentryBlockUpdating {
 
             boolean hasPowered = neighborState.is(AetherIITags.Blocks.SENTRY_BLOCKS) && neighborState.getValueOrElse(BlockStateProperties.POWERED, false);
             boolean hasSignal = level.getSignal(neighborPos, direction) > 0;
+            if ((neighborState.is(AetherIIBlocks.UNDERSHALE_BRICK_PRESSURE_PLATE) || neighborState.is(AetherIIBlocks.SENTRY_CRATE)) && state.getValueOrElse(BlockStateProperties.LIT, false)) {
+                hasSignal = false;
+            }
             if ((!neighborState.is(AetherIITags.Blocks.SENTRY_BLOCKS) && hasSignal != state.getValue(BlockStateProperties.POWERED)) || hasPowered != state.getValue(BlockStateProperties.POWERED)) {
-                if (!state.getValueOrElse(BlockStateProperties.LIT, false) || (!neighborState.is(AetherIIBlocks.UNDERSHALE_BRICK_PRESSURE_PLATE) && !neighborState.is(AetherIIBlocks.SENTRY_CRATE))) {
-                    BlockState blockstate = state;
-                    if (!state.getValue(BlockStateProperties.POWERED)) {
-                        blockstate = state.cycle(BlockStateProperties.LIT);
-                    }
-                    newState = blockstate.setValue(BlockStateProperties.POWERED, hasSignal || hasPowered);
+                BlockState blockstate = state;
+                if (!state.getValue(BlockStateProperties.POWERED)) {
+                    blockstate = state.cycle(BlockStateProperties.LIT);
                 }
+                newState = blockstate.setValue(BlockStateProperties.POWERED, hasSignal || hasPowered);
             }
         }
         if (newState != null) {
