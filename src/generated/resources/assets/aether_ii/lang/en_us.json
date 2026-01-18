@@ -1313,8 +1313,8 @@
   "subtitles.aether_ii.item.armor.equip_burrukai_plate": "Burrukai Plate armor rustles",
   "subtitles.aether_ii.item.armor.equip_gravitite": "Gravitite armor clinks",
   "subtitles.aether_ii.item.armor.equip_zanite": "Zanite armor clangs",
-  "subtitles.aether_ii.item.scaterglass_vial.empty": "Scatterglass Vial empties",
-  "subtitles.aether_ii.item.scaterglass_vial.fill": "Scatterglass Vial fills",
+  "subtitles.aether_ii.item.scatterglass_vial.empty": "Scatterglass Vial empties",
+  "subtitles.aether_ii.item.scatterglass_vial.fill": "Scatterglass Vial fills",
   "subtitles.aether_ii.item.swet_gel.use": "Swet Gel used",
   "subtitles.aether_ii.ui.artisans_bench.take_result": "Artisan's Bench used"
 }

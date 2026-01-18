@@ -1551,8 +1551,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("item", "ambrosium_shard.use", "Ambrosium Shard used");
         this.addSubtitle("item", "swet_gel.use", "Swet Gel used");
 
-        this.addSubtitle("item", "scaterglass_vial.fill", "Scatterglass Vial fills");
-        this.addSubtitle("item", "scaterglass_vial.empty", "Scatterglass Vial empties");
+        this.addSubtitle("item", "scatterglass_vial.fill", "Scatterglass Vial fills");
+        this.addSubtitle("item", "scatterglass_vial.empty", "Scatterglass Vial empties");
 
         this.addSubtitle("item", "arkenium_canister.fill", "Arkenium Canister fills");
         this.addSubtitle("item", "arkenium_canister.empty", "Arkenium Canister empties");
