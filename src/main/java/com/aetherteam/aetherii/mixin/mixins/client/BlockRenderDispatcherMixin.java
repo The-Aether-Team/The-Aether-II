@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.mixin.mixins.client;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
+import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
@@ -22,6 +23,16 @@ import java.util.function.Function;
 
 @Mixin(BlockRenderDispatcher.class)
 public class BlockRenderDispatcherMixin {
+    @Inject(at = @At(value = "HEAD"), method = "renderBreakingTexture(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/BlockAndTintGetter;Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;)V")
+    private void renderBreakingTextureHead(BlockState state, BlockPos pos, BlockAndTintGetter level, PoseStack poseStack, VertexConsumer consumer, CallbackInfo ci) {
+        MixinHooks.RENDERING_BREAKING_TEXTURE = true;
+    }
+
+    @Inject(at = @At(value = "RETURN"), method = "renderBreakingTexture(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/BlockAndTintGetter;Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;)V")
+    private void renderBreakingTextureTail(BlockState state, BlockPos pos, BlockAndTintGetter level, PoseStack poseStack, VertexConsumer consumer, CallbackInfo ci) {
+        MixinHooks.RENDERING_BREAKING_TEXTURE = false;
+    }
+
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/block/ModelBlockRenderer;tesselateBlock(Lnet/minecraft/world/level/BlockAndTintGetter;Ljava/util/List;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/function/Function;ZI)V", shift = At.Shift.BEFORE), method = "renderBatched(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/BlockAndTintGetter;Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/function/Function;ZLjava/util/List;)V")
     private void tesselateWithAO(BlockState state, BlockPos pos, BlockAndTintGetter level, PoseStack poseStack, Function<ChunkSectionLayer, VertexConsumer> vertexConsumer, boolean checkSides, List<BlockModelPart> parts, CallbackInfo ci) {
         BlockRenderDispatcher renderer = (BlockRenderDispatcher) (Object) this;
