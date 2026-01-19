@@ -27,7 +27,6 @@ import net.minecraft.client.renderer.block.model.VariantMutator;
 import net.minecraft.client.renderer.block.model.multipart.CombinedCondition;
 import net.minecraft.client.renderer.block.model.multipart.Condition;
 import net.minecraft.client.renderer.item.ItemModel;
-import net.minecraft.client.renderer.special.BedSpecialRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -1137,12 +1136,13 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(generator);
     }
 
-    public void createBed(Block block, Block particle, ResourceLocation location) {
+    public void createBed(Block block, Block particle, String name) {
+        ResourceLocation location = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/bed/skyroot/" + name + ".png");
         MultiVariant bed = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("skyroot_bed"));
         this.blockStateOutput.accept( createSimpleBlock(block, bed));
         Item item = block.asItem();
         ResourceLocation inventoryLocation = ModelTemplates.BED_INVENTORY.create(ModelLocationUtils.getModelLocation(item), TextureMapping.particle(particle), this.modelOutput);
-        this.itemModelOutput.accept(item, ItemModelUtils.specialModel(inventoryLocation, new BedSpecialRenderer.Unbaked(location)));
+        this.itemModelOutput.accept(item, ItemModelUtils.specialModel(inventoryLocation, new SkyrootBedSpecialRenderer.Unbaked(location)));
     }
 
     public void createLever(Block block) {
