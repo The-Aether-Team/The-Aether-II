@@ -13,7 +13,6 @@ import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.NoiseColumn;
-import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -23,7 +22,6 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
 
 import javax.annotation.Nullable;
@@ -112,11 +110,12 @@ public class SentryRuinsBuilder {
             ChunkPos chunkPos = genContext.chunkPos();
 
             for (int i = 2; i < this.maxSize - 1; ++i) {
-                this.propagateRooms(defaultRoom, chunkPos, false);
+                this.propagateRooms(defaultRoom, chunkPos, false, 0);
             }
 
-            this.propagateRooms(defaultRoom, chunkPos, true);
-            this.buildSurfaceStaircase(genContext.heightAccessor(), genContext.chunkGenerator(), genContext.randomState(), 6);
+            if (this.propagateRooms(defaultRoom, chunkPos, true, 0)) {
+                this.buildSurfaceStaircase(genContext.heightAccessor(), genContext.chunkGenerator(), genContext.randomState(), 6);
+            }
 
             this.populatePiecesBuilder(builder);
         }
@@ -130,7 +129,7 @@ public class SentryRuinsBuilder {
      * @param placeLobby  Whether to place a lobby or a chest room, as a {@link Boolean}.
      * @return Whether the new piece was successfully placed, as a {@link Boolean}.
      */
-    private boolean propagateRooms(StructurePiece currentNode, ChunkPos chunkPos, boolean placeLobby) {
+    private boolean propagateRooms(StructurePiece currentNode, ChunkPos chunkPos, boolean placeLobby, int iteration) {
         Rotation rotation = currentNode.getRotation();
         List<Rotation> rotations = new ArrayList<>(3);
         rotations.add(rotation.getRotated(Rotation.COUNTERCLOCKWISE_90));
@@ -143,7 +142,7 @@ public class SentryRuinsBuilder {
             rotation = rotations.remove(this.random.nextInt(i));
             Direction direction = rotation.rotate(Direction.SOUTH);
             if (this.hasConnection(currentNode, direction)) {
-                if (propagateRooms(this.edges.get(currentNode).get(direction).end, chunkPos, placeLobby)) {
+                if (propagateRooms(this.edges.get(currentNode).get(direction).end, chunkPos, placeLobby, iteration + 1)) {
                     return true;
                 }
             } else {
@@ -154,7 +153,8 @@ public class SentryRuinsBuilder {
                 SentryRuinsPiece room = this.chooseRoom(roomName, pos, rotation, this.processors.roomSettings());
                 StructurePiece collisionPiece = StructurePiece.findCollisionPiece(this.nodes, room.getBoundingBox());
 
-                if (this.isCloseToCenter(chunkPos, room.templatePosition()) && isCoveredAtPos(room.getBoundingBox(), this.context.chunkGenerator(), this.context.heightAccessor(), this.context.randomState())) {
+                if ((this.isCloseToCenter(chunkPos, room.templatePosition()) && isCoveredAtPos(room.getBoundingBox(), this.context.chunkGenerator(), this.context.heightAccessor(), this.context.randomState()))
+                        || (iteration == this.nodes.size() - 2 && placeLobby)) {
                     if (collisionPiece == null) {
                         new Connection(currentNode, room, hallway, direction);
                         this.nodes.add(room);
