@@ -1,11 +1,9 @@
 package com.aetherteam.aetherii.entity.projectile;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractArrowAccessor;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -17,7 +15,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class ToxicDart extends AbstractArrow {
@@ -43,23 +40,6 @@ public class ToxicDart extends AbstractArrow {
         }
     }
 
-    /**
-     * Handles shield damaging when this projectile hits an entity.
-     *
-     * @param result The {@link HitResult} of the projectile.
-     */
-    @Override
-    protected void onHit(HitResult result) {
-        super.onHit(result);
-//        if (result.getType() == HitResult.Type.ENTITY) {
-//            Entity entity = ((EntityHitResult) result).getEntity();
-//            if (entity instanceof Player player && player.isBlocking()) {
-//                PlayerAccessor playerAccessor = (PlayerAccessor) player;
-//                playerAccessor.callHurtCurrentlyUsedShield(3.0F);
-//            }
-//        }
-    }
-
     @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
@@ -79,6 +59,7 @@ public class ToxicDart extends AbstractArrow {
     protected void doPostHurtEffects(LivingEntity living) {
         super.doPostHurtEffects(living);
         living.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(living, EffectBuildupPresets.TOXIN, 350);
+        living.setArrowCount(living.getArrowCount() - 1);
     }
 
     @Override

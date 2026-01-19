@@ -31,7 +31,7 @@ public record HestveilExplosionEffectsPacket(BlockPos pos) implements CustomPack
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             for (Entity entity : Minecraft.getInstance().level.getEntities(null, AABB.encapsulatingFullBlocks(payload.pos(), payload.pos()))) {
                 if (entity instanceof LivingEntity livingEntity) {
-                    double d10 = 0.35 * (1.0 - livingEntity.getAttributeValue(Attributes.EXPLOSION_KNOCKBACK_RESISTANCE));
+                    double d10 = 0.225 * (1.0 - livingEntity.getAttributeValue(Attributes.EXPLOSION_KNOCKBACK_RESISTANCE));
                     double d5 = (livingEntity.getX() - payload.pos().getX()) * d10;
                     double d7 = (livingEntity.getEyeY() - payload.pos().getY()) * d10 * 0.25;
                     double d9 = (livingEntity.getZ() - payload.pos().getZ()) * d10;

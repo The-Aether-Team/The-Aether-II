@@ -12,6 +12,7 @@ import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -29,12 +31,15 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.portal.TeleportTransition;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityMountEvent;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
+import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.level.AlterGroundEvent;
@@ -72,6 +77,7 @@ public class AetherIIEventListeners {
         // Entity
         bus.addListener(AetherIIEventListeners::onEntityPostTick);
         bus.addListener(AetherIIEventListeners::onEntityTravelToDimension);
+        bus.addListener(AetherIIEventListeners::onProjectileImpact);
 
         // Living
         bus.addListener(AetherIIEventListeners::onLivingPreDamaged);
@@ -110,6 +116,7 @@ public class AetherIIEventListeners {
 
         if (entity instanceof Player player) {
             player.getData(AetherIIDataAttachments.PLAYER).onJoinLevel(player);
+            player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).onJoinLevel(player);
             player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).onJoinLevel(player);
         }
     }
@@ -272,9 +279,21 @@ public class AetherIIEventListeners {
 
     public static void onEntityTravelToDimension(EntityTravelToDimensionEvent event) {
         Entity entity = event.getEntity();
+        ResourceKey<Level> dimension = event.getDimension();
 
-        if (entity instanceof Player player) {
+        if (entity instanceof Player player && !player.level().dimension().equals(dimension)) {
             player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT.get()).removeAerbunny();
+        }
+    }
+
+    public static void onProjectileImpact(ProjectileImpactEvent event) {
+        HitResult hitResult = event.getRayTraceResult();
+        Projectile projectile = event.getProjectile();
+
+        if (hitResult instanceof EntityHitResult entityHitResult) {
+            if (entityHitResult.getEntity() instanceof Player player) {
+                player.getData(AetherIIDataAttachments.PLAYER.get()).stickProjectile(projectile, player);
+            }
         }
     }
 
@@ -291,8 +310,9 @@ public class AetherIIEventListeners {
     public static void onLivingBlockAttack(LivingShieldBlockEvent event) {
         LivingEntity livingEntity = event.getEntity();
         DamageSource source = event.getDamageSource();
+        double blockedDamage = event.getBlockedDamage();
 
-        livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, source.getEntity());
+        livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, source.getEntity(), blockedDamage);
     }
 
     public static void onLivingItemUsed(LivingEntityUseItemEvent.Finish event) {

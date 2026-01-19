@@ -57,6 +57,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGeneric("bedroll.too_dark", "You may not rest now; it is too dark to sleep here");
         this.addGeneric("message.campfire_added", "Outpost campfire respawn point set");
         this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid outpost campfire");
+        this.addGeneric("message.passenger.onboard", "Press %1$s and %2$s to Dismount Passenger");
 
         // Packs
         this.addPackDescription("mod", "Aether II Resources");
@@ -65,6 +66,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addTooltip("item.modifiers.blocking", "When blocking:");
         this.addTooltip("item.modifiers.accepts_charms.melee", "When on melee item:");
         this.addTooltip("item.modifiers.accepts_charms.armor", "When on armor item:");
+
+        // Keys
+        this.addKeyInfo("category", "The Aether II");
+        this.addKeyInfo("allow_dismounting_passenger.desc", "Allow Dismounting Passenger");
     }
 
     private void addBlocks() {
@@ -136,14 +141,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE, "Holystone Quartz Ore");
         this.addBlock(AetherIIBlocks.AMBROSIUM_ORE, "Ambrosium Ore");
         this.addBlock(AetherIIBlocks.ZANITE_ORE, "Zanite Ore");
-        this.addBlock(AetherIIBlocks.GLINT_ORE, "Glint Ore");
         this.addBlock(AetherIIBlocks.ARKENIUM_ORE, "Arkenium Ore");
         this.addBlock(AetherIIBlocks.GRAVITITE_ORE, "Gravitite Ore");
+        this.addBlock(AetherIIBlocks.GLINT_ORE, "Glint Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE, "Undershale Ambrosium Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_ZANITE_ORE, "Undershale Zanite Ore");
-        this.addBlock(AetherIIBlocks.UNDERSHALE_GLINT_ORE, "Undershale Glint Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE, "Undershale Arkenium Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE, "Undershale Gravitite Ore");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_GLINT_ORE, "Undershale Glint Ore");
         this.addBlock(AetherIIBlocks.CORROBONITE_ORE, "Corrobonite Ore");
         this.addBlock(AetherIIBlocks.CORROBONITE_CLUSTER, "Corrobonite Cluster");
 
@@ -684,8 +689,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARKENIUM_BLOCK, "Block of Arkenium");
         this.addBlock(AetherIIBlocks.GRAVITITE_BLOCK, "Block of Gravitite");
         this.addBlock(AetherIIBlocks.CORROBONITE_BLOCK, "Block of Corrobonite");
+        this.addBlock(AetherIIBlocks.GOLDEN_AMBER_BLOCK, "Block of Golden Amber");
+        this.addBlock(AetherIIBlocks.GLINT_BLOCK, "Block of Glint");
 
-        // Arilum Lantern
+        // Arilum Lanterns
         this.addBlock(AetherIIBlocks.WHITE_ARILUM_LANTERN, "White Arilum Lantern");
         this.addBlock(AetherIIBlocks.ORANGE_ARILUM_LANTERN, "Orange Arilum Lantern");
         this.addBlock(AetherIIBlocks.MAGENTA_ARILUM_LANTERN, "Magenta Arilum Lantern");
@@ -718,7 +725,24 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_CHEST, "Skyroot Chest");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
         this.addBlock(AetherIIBlocks.CLOUDWOOL_BEDROLL, "Cloudwool Bedroll");
+
         this.addBlock(AetherIIBlocks.SKYROOT_BED, "Skyroot Bed");
+        this.addBlock(AetherIIBlocks.WHITE_SKYROOT_BED, "White Skyroot Bed");
+        this.addBlock(AetherIIBlocks.ORANGE_SKYROOT_BED, "Orange Skyroot Bed");
+        this.addBlock(AetherIIBlocks.MAGENTA_SKYROOT_BED, "Magenta Skyroot Bed");
+        this.addBlock(AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED, "Light Blue Skyroot Bed");
+        this.addBlock(AetherIIBlocks.YELLOW_SKYROOT_BED, "Yellow Skyroot Bed");
+        this.addBlock(AetherIIBlocks.LIME_SKYROOT_BED, "Lime Skyroot Bed");
+        this.addBlock(AetherIIBlocks.PINK_SKYROOT_BED, "Pink Skyroot Bed");
+        this.addBlock(AetherIIBlocks.GRAY_SKYROOT_BED, "Gray Skyroot Bed");
+        this.addBlock(AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED, "Light Gray Skyroot Bed");
+        this.addBlock(AetherIIBlocks.CYAN_SKYROOT_BED, "Cyan Skyroot Bed");
+        this.addBlock(AetherIIBlocks.PURPLE_SKYROOT_BED, "Purple Skyroot Bed");
+        this.addBlock(AetherIIBlocks.BLUE_SKYROOT_BED, "Blue Skyroot Bed");
+        this.addBlock(AetherIIBlocks.BROWN_SKYROOT_BED, "Brown Skyroot Bed");
+        this.addBlock(AetherIIBlocks.GREEN_SKYROOT_BED, "Green Skyroot Bed");
+        this.addBlock(AetherIIBlocks.RED_SKYROOT_BED, "Red Skyroot Bed");
+        this.addBlock(AetherIIBlocks.BLACK_SKYROOT_BED, "Black Skyroot Bed");
 
         this.addBlock(AetherIIBlocks.SKYROOT_SIGN, "Skyroot Sign");
         this.addBlock(AetherIIBlocks.SKYROOT_HANGING_SIGN, "Skyroot Hanging Sign");
@@ -729,8 +753,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.WISPROOT_SIGN, "Wisproot Sign");
         this.addBlock(AetherIIBlocks.WISPROOT_HANGING_SIGN, "Wisproot Hanging Sign");
 
+        this.addBlock(AetherIIBlocks.HOLYSTONE_LEVER, "Holystone Lever");
+
         // Bookshelves
         this.addBlock(AetherIIBlocks.SKYROOT_BOOKSHELF, "Skyroot Bookshelf");
+        this.addBlock(AetherIIBlocks.GREATROOT_BOOKSHELF, "Greatroot Bookshelf");
+        this.addBlock(AetherIIBlocks.WISPROOT_BOOKSHELF, "Wisproot Bookshelf");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF, "Holystone Bookshelf");
 
         // Furniture
@@ -1060,9 +1088,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SHOVEL.get(), 2, "§3Use:§r Crouch-Interact");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_TROWEL.get(), 1, "§9Ability:§r Levitates Block");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_TROWEL.get(), 2, "§3Use:§r Crouch-Interact");
-        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SHORTSWORD.get(), 1, "§9Ability:§r Shifts Gravity");
-        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_HAMMER.get(), 1, "§9Ability:§r Shifts Gravity");
-        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SPEAR.get(), 1, "§9Ability:§r Shifts Gravity");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SHORTSWORD.get(), 1, "§9Ability:§r Increases Gravity");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_HAMMER.get(), 1, "§9Ability:§r Increases Gravity");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SPEAR.get(), 1, "§9Ability:§r Increases Gravity");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 1, "§9Ability:§r Straight Shot");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 2, "§3Use:§r Crouch-Use");
 
@@ -1302,8 +1330,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAttribute(AetherIIAttributes.STAB_DISTANCE.get(), "Stab Distance");
         this.addAttribute(AetherIIAttributes.STAB_KNOCKBACK.get(), "Stab Knockback");
         this.addAttribute(AetherIIAttributes.STAB_DAMAGE.get(), "Stab Damage");
-        this.addAttribute(AetherIIAttributes.SHIELD_STAMINA_REDUCTION.get(), "Shield Stamina Used");
-        this.addAttribute(AetherIIAttributes.SHIELD_COOLDOWN_REDUCTION.get(), "Shield Cooldown Speed");
+        this.addAttribute(AetherIIAttributes.MAXIMUM_ENDURANCE.get(), "Maximum Endurance");
+        this.addAttribute(AetherIIAttributes.ENDURANCE_RECOVERY.get(), "Endurance Recovery");
+        this.addAttribute(AetherIIAttributes.BLOCKING_STRENGTH.get(), "Blocking Strength");
         this.addAttribute(AetherIIAttributes.WOUND_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
         this.addAttribute(AetherIIAttributes.STUN_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
         this.addAttribute(AetherIIAttributes.FRACTURE_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
@@ -1337,6 +1366,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEffect(AetherIIEffects.FROSTBITE, "Frostbite");
         this.addEffect(AetherIIEffects.FUNGAL_ROT, "Fungal Rot");
         this.addEffect(AetherIIEffects.CRYSTALLIZED, "Crystallized");
+
+        this.addEffect(AetherIIEffects.NATURAL_CAMOUFLAGE, "Natural Camouflage");
+        this.addEffect(AetherIIEffects.ELECTRIC_SHOCK, "Electric Shock");
+        this.addEffect(AetherIIEffects.GRAVITATIONAL_PULL, "Gravitational Pull");
     }
 
     private void addCreativeTabs() {
@@ -1667,11 +1700,21 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addDeaths() {
         // Deaths
         this.addDeath("effect.wound", "%1$s was fatally wounded");
+        this.addDeath("effect.wound.player", "%1$s was fatally wounded by %2$s");
         this.addDeath("effect.fracture", "Oof, owie, %1$s's bones");
+        this.addDeath("effect.fracture.player", "%2$s oof owied %1$s's bones");
         this.addDeath("effect.toxin", "%1$s succumbed to toxin");
+        this.addDeath("effect.toxin.player", "%1$s succumbed to toxin while trying to escape %2$s");
         this.addDeath("effect.venom", "%1$s succumbed to venom");
+        this.addDeath("effect.venom.player", "%1$s succumbed to venom while trying to escape %2$s");
         this.addDeath("effect.charged", "%1$s was electrocuted");
+        this.addDeath("effect.charged.player", "%1$s was electrocuted by %2$s");
         this.addDeath("effect.immolation", "%1$s burned to death");
+        this.addDeath("effect.immolation.player", "%1$s burned to death while trying to escape %2$s");
+        this.addDeath("alkahest", "%1$s dissolved in alkahest");
+        this.addDeath("alkahest.player", "%1$s dissolved in alkahest while trying to escape %2$s");
+        this.addDeath("shock", "%1$s was electrocuted");
+        this.addDeath("shock.player", "%1$s was electrocuted by %2$s");
     }
 
     // Utility methods

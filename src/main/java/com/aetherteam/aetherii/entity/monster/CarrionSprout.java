@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import com.aetherteam.aetherii.entity.PlantCuttingMob;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -18,12 +19,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-public class CarrionSprout extends PathfinderMob {
+public class CarrionSprout extends PathfinderMob implements PlantCuttingMob {
     private static final EntityDataAccessor<Boolean> DATA_TRAP_ID = SynchedEntityData.defineId(CarrionSprout.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_TRAP_TRIGGER_ID = SynchedEntityData.defineId(CarrionSprout.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_PLAYER_GROWN_ID = SynchedEntityData.defineId(CarrionSprout.class, EntityDataSerializers.BOOLEAN);
 
     public AnimationState trapActiveAnimationState = new AnimationState();
     public AnimationState trapDeactiveAnimationState = new AnimationState();
@@ -103,6 +107,7 @@ public class CarrionSprout extends PathfinderMob {
         super.defineSynchedData(builder);
         builder.define(DATA_TRAP_ID, false);
         builder.define(DATA_TRAP_TRIGGER_ID, false);
+        builder.define(DATA_PLAYER_GROWN_ID, false);
     }
 
     @Nullable
@@ -253,5 +258,25 @@ public class CarrionSprout extends PathfinderMob {
     @Override
     public boolean removeWhenFarAway(double distanceToClosestPlayer) {
         return false;
+    }
+
+    @Override
+    public boolean isPlayerGrown() {
+        return this.entityData.get(DATA_PLAYER_GROWN_ID);
+    }
+
+    @Override
+    public void setPlayerGrown(boolean playerGrown) {
+        this.entityData.set(DATA_PLAYER_GROWN_ID, playerGrown);
+    }
+
+    @Override
+    public void addAdditionalSaveData(ValueOutput output) {
+        output.putBoolean("PlayerGrown", this.isPlayerGrown());
+    }
+
+    @Override
+    public void readAdditionalSaveData(ValueInput input) {
+        this.setPlayerGrown(input.getBooleanOr("PlayerGrown", false));
     }
 }

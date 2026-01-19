@@ -26,7 +26,6 @@ public class VenomEffect extends MobEffect {
 
     @Override
     public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-        int i = 20 >> amplifier;
-        return i == 0 || duration % i == 0;
+        return duration % 40 == 0;
     }
 }

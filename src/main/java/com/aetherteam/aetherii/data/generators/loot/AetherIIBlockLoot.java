@@ -631,7 +631,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.ZANITE_BLOCK.get());
         this.dropSelf(AetherIIBlocks.ARKENIUM_BLOCK.get());
         this.dropSelf(AetherIIBlocks.GRAVITITE_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.GLINT_BLOCK.get());
         this.dropSelf(AetherIIBlocks.CORROBONITE_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.GOLDEN_AMBER_BLOCK.get());
 
         // Arilum Lantern
         this.dropSelf(AetherIIBlocks.WHITE_ARILUM_LANTERN.get());
@@ -666,7 +668,24 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.SKYROOT_CHEST.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_LADDER.get());
         this.add(AetherIIBlocks.CLOUDWOOL_BEDROLL.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+
         this.add(AetherIIBlocks.SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.WHITE_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.ORANGE_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.MAGENTA_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.YELLOW_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.LIME_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.PINK_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.GRAY_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.CYAN_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.PURPLE_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.BLUE_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.BROWN_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.GREEN_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.RED_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
+        this.add(AetherIIBlocks.BLACK_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
 
         this.dropOther(AetherIIBlocks.SKYROOT_WALL_SIGN.get(), AetherIIBlocks.SKYROOT_SIGN.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_SIGN.get());
@@ -686,8 +705,12 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropOther(AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
 
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_LEVER.get());
+
         // Bookshelves
         this.add(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
+        this.add(AetherIIBlocks.GREATROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
+        this.add(AetherIIBlocks.WISPROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
         this.add(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
 
         // Furniture

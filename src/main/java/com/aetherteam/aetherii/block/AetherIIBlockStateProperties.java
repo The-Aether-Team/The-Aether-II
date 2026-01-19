@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -21,6 +22,8 @@ public class AetherIIBlockStateProperties {
         SHAYELINN,
         AMBRELINN,
         NONE;
+
+        public static final Codec<Mossy> CODEC = StringRepresentable.fromEnum(Mossy::values);
 
         @Override
         public String getSerializedName() {

@@ -23,6 +23,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.item.Item;
@@ -95,6 +96,16 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         }
     }
 
+    protected void bed(HolderGetter<Item> getter, ItemLike result, ItemLike wool) {
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, result)
+                .define('W', wool)
+                .define('#', AetherIITags.Items.PLANKS_CRAFTING)
+                .pattern("WWW")
+                .pattern("###")
+                .unlockedBy("has_cloudwool", has(AetherIITags.Items.CLOUDWOOL))
+                .save(this.output);
+    }
+
     protected void bookshelf(HolderGetter<Item> getter, ItemLike result, ItemLike material) {
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.BUILDING_BLOCKS, result)
                 .define('#', material)
@@ -141,6 +152,12 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .pattern("#X#")
                 .unlockedBy("has_bulbs", has(AetherIIItems.ARILUM_BULBS))
                 .save(this.output);
+        ShapelessRecipeBuilder.shapeless(this.getter, RecipeCategory.BUILDING_BLOCKS, result)
+                .group("arilum_lantern")
+                .requires(dye)
+                .requires(Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.ARILUM_LANTERN)))
+                .unlockedBy("has_lantern", has(result))
+                .save(this.output, this.name("dyed_" + getItemName(result)));
     }
 
     protected ShapedRecipeBuilder makePickaxeWithTag(Supplier<? extends Item> pickaxe, TagKey<Item> material, String has) {

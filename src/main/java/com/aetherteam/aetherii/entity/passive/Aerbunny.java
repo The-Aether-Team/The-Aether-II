@@ -1,7 +1,9 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
@@ -220,7 +222,6 @@ public class Aerbunny extends AetherTamableAnimal {
                             if (this.getPuffCooldown() <= 0) { // Also check cooldown timer.
                                 player.setDeltaMovement(player.getDeltaMovement().x(), 0.125, player.getDeltaMovement().z());
                                 ClientPacketDistributor.sendToServer(new AerbunnyPuffPacket(this.getId())); // Calls Aerbunny#puff() on the server.
-                                this.spawnPuffParticles();
                                 this.lastPos = null;
                                 this.setPuffCooldown(20);
                             }
@@ -338,16 +339,6 @@ public class Aerbunny extends AetherTamableAnimal {
     }
 
     @Override
-    protected EntityDimensions getDefaultDimensions(Pose pose) {
-        if (this.getVehicle() instanceof Player vehicle) {
-            if (!vehicle.isShiftKeyDown()) {
-                return EntityDimensions.scalable(0.03F, 0.03F);
-            }
-        }
-        return super.getDefaultDimensions(pose);
-    }
-
-    @Override
     public boolean shouldRenderAtSqrDistance(double distance) {
         double d0 = this.getType().getDimensions().makeBoundingBox(this.position()).getSize();
         if (Double.isNaN(d0)) {
@@ -379,7 +370,9 @@ public class Aerbunny extends AetherTamableAnimal {
                 if (this.isTame()) {
                     this.setOrderedToSit(false);
                 }
-                player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(this);
+                if (!player.level().isClientSide()) {
+                    player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(this);
+                }
                 this.level().playSound(player, this, AetherIISoundEvents.ENTITY_AERBUNNY_LIFT.get(), SoundSource.NEUTRAL, 1.0F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F);
             }
             return InteractionResult.SUCCESS;
@@ -413,6 +406,9 @@ public class Aerbunny extends AetherTamableAnimal {
                 ((EntityAccessor) vehicle).callGetIndirectPassengersStream().filter((entity) -> entity instanceof ServerPlayer).forEach((player) -> CriteriaTriggers.START_RIDING_TRIGGER.trigger((ServerPlayer) player));
                 if (this.getVehicle() instanceof Player player) {
                     this.setVehicleReference(Optional.of(new EntityReference<>(player.getUUID())));
+                    if (player.level().isClientSide()) {
+                        AetherIIClientProxy.sendClientPassengerMessage();
+                    }
                 }
                 return true;
             } else {
@@ -591,6 +587,9 @@ public class Aerbunny extends AetherTamableAnimal {
 
     @Override
     public boolean canRiderInteract() {
+        if (this.getVehicle() instanceof Player vehicle) {
+            return vehicle.isShiftKeyDown();
+        }
         return true;
     }
 
@@ -601,7 +600,11 @@ public class Aerbunny extends AetherTamableAnimal {
     @Override
     public boolean isPickable() {
         if (this.getVehicle() instanceof Player player) {
-            return player.getBoundingBox().expandTowards(player.getViewVector(0.0F)).contains(this.getBoundingBox().getCenter().add(0, this.getBoundingBox().getSize() / 2, 0));
+            if (!player.isShiftKeyDown()) {
+                return false;
+            } else {
+                return player.getBoundingBox().expandTowards(player.getViewVector(0.0F)).contains(this.getBoundingBox().getCenter().add(0, this.getBoundingBox().getSize() / 2, 0));
+            }
         }
         return true;
     }

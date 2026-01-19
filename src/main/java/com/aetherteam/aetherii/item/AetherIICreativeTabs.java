@@ -256,8 +256,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ZANITE_BLOCK.get());
                 output.accept(AetherIIBlocks.ARKENIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.GRAVITITE_BLOCK.get());
+                output.accept(AetherIIBlocks.GLINT_BLOCK.get());
                 output.accept(AetherIIBlocks.CORROBONITE_BLOCK.get());
-
+                output.accept(AetherIIBlocks.GOLDEN_AMBER_BLOCK.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_COLORED_BLOCKS = CREATIVE_MODE_TABS.register("colored_blocks", () -> CreativeModeTab.builder()
@@ -316,6 +317,23 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.PURPLE_ARILUM_LANTERN.get());
                 output.accept(AetherIIBlocks.MAGENTA_ARILUM_LANTERN.get());
                 output.accept(AetherIIBlocks.PINK_ARILUM_LANTERN.get());
+                output.accept(AetherIIBlocks.SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.WHITE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.GRAY_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.BLACK_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.BROWN_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.RED_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.ORANGE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.YELLOW_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.LIME_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.GREEN_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.CYAN_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.BLUE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.PURPLE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.MAGENTA_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.PINK_SKYROOT_BED.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_NATURAL_BLOCKS = CREATIVE_MODE_TABS.register("natural_blocks", () -> CreativeModeTab.builder()
@@ -353,14 +371,14 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_ORE.get());
                 output.accept(AetherIIBlocks.ZANITE_ORE.get());
-                output.accept(AetherIIBlocks.GLINT_ORE.get());
                 output.accept(AetherIIBlocks.ARKENIUM_ORE.get());
                 output.accept(AetherIIBlocks.GRAVITITE_ORE.get());
+                output.accept(AetherIIBlocks.GLINT_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get());
-                output.accept(AetherIIBlocks.UNDERSHALE_GLINT_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_GLINT_ORE.get());
                 output.accept(AetherIIBlocks.CORROBONITE_ORE.get());
                 output.accept(AetherIIBlocks.CORROBONITE_CLUSTER.get());
                 output.accept(AetherIIBlocks.INERT_ARKENIUM_BLOCK.get());
@@ -494,6 +512,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ARKENIUM_LANTERN.get());
                 output.accept(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get());
                 output.accept(AetherIIBlocks.ARKENIUM_CHAIN.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_LEVER.get());
                 output.accept(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_FURNACE.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get());
@@ -503,6 +522,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ALKAHEST_PURIFIER.get());
                 output.accept(AetherIIBlocks.SKYROOT_LADDER.get());
                 output.accept(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
+                output.accept(AetherIIBlocks.GREATROOT_BOOKSHELF.get());
+                output.accept(AetherIIBlocks.WISPROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.SKYROOT_CHEST.get());
                 output.accept(AetherIIBlocks.SKYROOT_SIGN.get());
@@ -513,6 +534,22 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL_BEDROLL.get());
                 output.accept(AetherIIBlocks.SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.WHITE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.GRAY_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.BLACK_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.BROWN_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.RED_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.ORANGE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.YELLOW_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.LIME_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.GREEN_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.CYAN_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.BLUE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.PURPLE_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.MAGENTA_SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.PINK_SKYROOT_BED.get());
                 output.accept(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
                 output.accept(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
@@ -761,8 +798,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ZANITE_GEMSTONE.get());
                 output.accept(AetherIIItems.INERT_ARKENIUM.get());
                 output.accept(AetherIIItems.INERT_GRAVITITE.get());
-                output.accept(AetherIIItems.CORROBONITE_CRYSTAL.get());
                 output.accept(AetherIIItems.GLINT_GEMSTONE.get());
+                output.accept(AetherIIItems.CORROBONITE_CRYSTAL.get());
                 output.accept(AetherIIItems.GOLDEN_AMBER.get());
                 output.accept(AetherIIItems.ARKENIUM_PLATES.get());
                 output.accept(AetherIIItems.GRAVITITE_PLATE.get());

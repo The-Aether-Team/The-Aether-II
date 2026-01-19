@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.Vec3;
 
 public class IrradiatedBlock extends Block {
     public IrradiatedBlock(Properties properties) {
@@ -23,7 +24,8 @@ public class IrradiatedBlock extends Block {
             ParticleUtils.spawnParticlesOnBlockFaces(level, pos, AetherIIParticleTypes.IRRADIATION.get(), UniformInt.of(50, 100));
         }
         if (!player.isCreative()) {
-            player.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(player, EffectBuildupPresets.AMBROSIUM_POISONING, 350);
+            double dist = Math.sqrt(player.distanceToSqr(Vec3.atCenterOf(pos)));
+            player.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(player, EffectBuildupPresets.AMBROSIUM_POISONING, (int) (350 / dist));
         }
         return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
     }

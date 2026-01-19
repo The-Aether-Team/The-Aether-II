@@ -31,6 +31,10 @@ public class AccessoryItem extends Item {
 
     }
 
+    public boolean rendersInFirstPerson(ItemStack stack) {
+        return false;
+    }
+
     public AccessoryContainer.SlotType getSlotType() {
         return this.slotType;
     }

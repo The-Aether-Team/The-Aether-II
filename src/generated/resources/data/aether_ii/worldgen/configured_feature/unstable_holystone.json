@@ -16,7 +16,7 @@
     },
     "replaceable": "#aether_ii:holystone",
     "surface": "floor",
-    "vegetation_chance": 0.5,
+    "vegetation_chance": 0.15,
     "vegetation_feature": {
       "feature": "aether_ii:holystone_rocks",
       "placement": []

@@ -10,6 +10,8 @@ import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import com.aetherteam.aetherii.client.renderer.item.model.SkyrootBedSpecialRenderer;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.*;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -47,10 +49,6 @@ import net.minecraft.client.renderer.special.BedSpecialRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.MossyCarpetBlock;
-import net.minecraft.world.level.block.MultifaceBlock;
-import net.minecraft.world.level.block.SlabBlock;
 
 public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public AetherIIBlockModelSubProvider(Consumer<BlockModelDefinitionGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
@@ -461,12 +459,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         })));
     }
 
-    public void createLeavesWithPiles(Block leaves, Block piles) {
-        MultiVariant cube = plainVariant(AetherIITexturedModels.LEAVES.create(leaves, this.modelOutput));
-        MultiVariant snowy = plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_snowy"), AetherIITextureMappings.snowyLeaves(leaves), this.modelOutput));
-        MultiVariant bryalinn = plainVariant(AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_bryalinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "bryalinn"), this.modelOutput));
-        MultiVariant shayelinn = plainVariant(AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_shayelinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), "shayelinn"), this.modelOutput));
-        MultiVariant ambrelinn = plainVariant(AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_ambrelinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(), "ambrelinn"), this.modelOutput));
+    public void createLeavesWithPiles(Block leaves, Block piles, TexturedModel.Provider regularProvider, ModelTemplate overlaidTemplate) {
+        MultiVariant cube = plainVariant(regularProvider.create(leaves, this.modelOutput));
+        MultiVariant snowy = plainVariant(overlaidTemplate.create(ModelLocationUtils.getModelLocation(leaves, "_snowy"), AetherIITextureMappings.snowyLeaves(leaves), this.modelOutput));
+        MultiVariant bryalinn = plainVariant(overlaidTemplate.create(ModelLocationUtils.getModelLocation(leaves, "_bryalinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "bryalinn"), this.modelOutput));
+        MultiVariant shayelinn = plainVariant(overlaidTemplate.create(ModelLocationUtils.getModelLocation(leaves, "_shayelinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), "shayelinn"), this.modelOutput));
+        MultiVariant ambrelinn = plainVariant(overlaidTemplate.create(ModelLocationUtils.getModelLocation(leaves, "_ambrelinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(), "ambrelinn"), this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(leaves)
                 .with(PropertyDispatch.initial(AetherLeavesBlock.SNOWY, AetherLeavesBlock.MOSSY).generate((snowyState, mossyState) -> {
                     if (snowyState) {
@@ -489,11 +487,6 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                     }
                 }))
         );
-        this.createPiles(piles, leaves);
-    }
-
-    public void createTintedLeavesWithPiles(Block leaves, Block piles) {
-        this.createTrivialBlock(leaves, AetherIITexturedModels.TINTED_LEAVES);
         this.createPiles(piles, leaves);
     }
 
@@ -898,12 +891,34 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(generator);
     }
 
-    public void createBed(Block block, Block particle, ResourceLocation location) {
+    public void createBed(Block block, Block particle, String name) {
+        ResourceLocation location = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/bed/skyroot/" + name + ".png");
         MultiVariant bed = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("skyroot_bed"));
         this.blockStateOutput.accept(createSimpleBlock(block, bed));
         Item item = block.asItem();
         ResourceLocation inventoryLocation = ModelTemplates.BED_INVENTORY.create(ModelLocationUtils.getModelLocation(item), TextureMapping.particle(particle), this.modelOutput);
-        this.itemModelOutput.accept(item, ItemModelUtils.specialModel(inventoryLocation, new BedSpecialRenderer.Unbaked(location)));
+        this.itemModelOutput.accept(item, ItemModelUtils.specialModel(inventoryLocation, new SkyrootBedSpecialRenderer.Unbaked(location)));
+    }
+
+    public void createLever(Block block) {
+        MultiVariant lever = plainVariant(ModelLocationUtils.getModelLocation(block));
+        MultiVariant leverOn = plainVariant(ModelLocationUtils.getModelLocation(block, "_on"));
+        this.registerSimpleFlatItemModel(block);
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+                .with(createBooleanModelDispatch(BlockStateProperties.POWERED, lever, leverOn))
+                .with(PropertyDispatch.modify(BlockStateProperties.ATTACH_FACE, BlockStateProperties.HORIZONTAL_FACING)
+                        .select(AttachFace.CEILING, Direction.NORTH, X_ROT_180.then(Y_ROT_180))
+                        .select(AttachFace.CEILING, Direction.EAST, X_ROT_180.then(Y_ROT_270))
+                        .select(AttachFace.CEILING, Direction.SOUTH, X_ROT_180)
+                        .select(AttachFace.CEILING, Direction.WEST, X_ROT_180.then(Y_ROT_90))
+                        .select(AttachFace.FLOOR, Direction.NORTH, NOP)
+                        .select(AttachFace.FLOOR, Direction.EAST, Y_ROT_90)
+                        .select(AttachFace.FLOOR, Direction.SOUTH, Y_ROT_180)
+                        .select(AttachFace.FLOOR, Direction.WEST, Y_ROT_270)
+                        .select(AttachFace.WALL, Direction.NORTH, X_ROT_90)
+                        .select(AttachFace.WALL, Direction.EAST, X_ROT_90.then(Y_ROT_90))
+                        .select(AttachFace.WALL, Direction.SOUTH, X_ROT_90.then(Y_ROT_180))
+                        .select(AttachFace.WALL, Direction.WEST, X_ROT_90.then(Y_ROT_270))));
     }
 
     public void createArilumLantern(Block block) {

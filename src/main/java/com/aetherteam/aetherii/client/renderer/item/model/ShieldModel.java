@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.item.model;
 
+import com.aetherteam.aetherii.AetherII;
 import com.mojang.math.Transformation;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -11,6 +12,7 @@ import net.minecraft.client.renderer.item.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BlockModelRotation;
 import net.minecraft.client.resources.model.ModelDebugName;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -69,8 +71,27 @@ public class ShieldModel implements ItemModel {
 
     public List<BakedQuad> faceElement(TextureAtlasSprite sprite, float xOffset, float yOffset, boolean front) {
         Vector3f scale = front ? new Vector3f(1, 1, 1) : new Vector3f(0.9999F, 0.9999F, 0.9999F);
-        return UnbakedElementsHelper.bakeElements(UnbakedElementsHelper.createUnbakedItemElements(0, sprite), $ -> sprite,
-                new ComposedModelState(BlockModelRotation.X0_Y0, new Transformation(new Vector3f(px(xOffset) + px(3.0F), px(yOffset) - px(0.5F), (0.0001F * (front ? 1.0F : -1.0F)) + px(3.5F)), new Quaternionf(), scale, new Quaternionf())));
+        List<BakedQuad> quads = new ArrayList<>(UnbakedElementsHelper.bakeElements(UnbakedElementsHelper.createUnbakedItemElements(0, sprite), $ -> sprite,
+                new ComposedModelState(BlockModelRotation.X0_Y0, new Transformation(new Vector3f(px(xOffset) + px(3.0F), px(yOffset) - px(0.5F), (0.0001F * (front ? 1.0F : -1.0F)) + px(3.5F)), new Quaternionf(), scale, new Quaternionf()))));
+        if (front) {
+            quads.removeIf((bakedQuad) -> bakedQuad.direction() != Direction.SOUTH);
+        } else {
+            quads.removeIf((bakedQuad) -> {
+                boolean flag = bakedQuad.direction() == Direction.SOUTH;
+                if (yOffset < 0) {
+                    flag = flag || bakedQuad.direction() == Direction.UP;
+                } else {
+                    flag = flag || bakedQuad.direction() == Direction.DOWN;
+                }
+                if (xOffset < 0) {
+                    flag = flag || bakedQuad.direction() == Direction.EAST;
+                } else {
+                    flag = flag || bakedQuad.direction() == Direction.WEST;
+                }
+                return flag;
+            });
+        }
+        return quads;
     }
 
     public static float px(float offset) {

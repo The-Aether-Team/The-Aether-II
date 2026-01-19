@@ -29,11 +29,13 @@ public class ImmolationEffect extends MobEffect { //todo preventative measures
     public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity livingEntity, int amplifier) {
         for (Entity entity : serverLevel.getEntities(livingEntity, AABB.ofSize(livingEntity.position(), 5, 5, 5), (entity) -> entity instanceof LivingEntity living && !living.hasEffect(AetherIIEffects.IMMOLATION))) {
             if (entity instanceof LivingEntity living) {
-                living.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(living, EffectBuildupPresets.IMMOLATION, 100);
+                living.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(living, EffectBuildupPresets.IMMOLATION, 20);
             }
         }
-        if (livingEntity.getHealth() >= livingEntity.getMaxHealth() - DAMAGE_AMOUNT.getOrDefault(livingEntity.getType(), 10.0F)) { //todo possibly duration based.
-            livingEntity.hurt(AetherIIDamageTypes.damageSource(livingEntity.level(), AetherIIDamageTypes.IMMOLATION), 1.0F);
+        if (livingEntity.tickCount % 10 == 0) {
+            if (livingEntity.getHealth() >= livingEntity.getMaxHealth() - DAMAGE_AMOUNT.getOrDefault(livingEntity.getType(), 10.0F)) {
+                livingEntity.hurt(AetherIIDamageTypes.damageSource(livingEntity.level(), AetherIIDamageTypes.IMMOLATION), 1.0F);
+            }
         }
         serverLevel.sendParticles(ParticleTypes.FLAME,
                 livingEntity.getX() + (serverLevel.getRandom().nextGaussian() / 5.0),

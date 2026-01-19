@@ -266,10 +266,4 @@ public class RenderHooks {
         }
         return null;
     }
-
-    public static void renderFirstPersonGloves(PoseStack poseStack, MultiBufferSource buffer, HumanoidArm arm, AbstractClientPlayer player, int packedLight, PlayerSkin skin) {
-        poseStack.pushPose();
-        GlovesLayer.renderOnFirstPerson(poseStack, buffer, arm, skin, packedLight);
-        poseStack.popPose();
-    }
 }

@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.mixin.mixins.client;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.mixin.wrappers.common.LayerRenderStateWrapper;
+import com.aetherteam.aetherii.mixin.wrappers.client.LayerRenderStateWrapper;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.BlockModelWrapper;

@@ -74,6 +74,15 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
         );
         this.tag(AetherIITags.Entities.NO_DOUBLE_DROPS).addTag(Tags.EntityTypes.BOSSES).add(EntityType.PLAYER);
         this.tag(AetherIITags.Entities.NO_AMBROSIUM_DROPS).add(EntityType.PLAYER);
+        this.tag(AetherIITags.Entities.STICKABLE_PROJECTILES).add(
+                AetherIIEntityTypes.SCATTERGLASS_BOLT.get(),
+                AetherIIEntityTypes.AMBER_DART.get(),
+                AetherIIEntityTypes.TOXIC_DART.get(),
+                AetherIIEntityTypes.VENOMOUS_DART.get()
+        );
+        this.tag(AetherIITags.Entities.STICKABLE_PROJECTILES_EMISSIVE).add(
+                AetherIIEntityTypes.VENOMOUS_DART.get()
+        );
         this.tag(AetherIITags.Entities.SPAWNING_ICE).add(
                 EntityType.POLAR_BEAR
         );

@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.monster.Monster;
@@ -88,13 +89,20 @@ public class CellingMonster extends Monster {
         profilerfiller.pop();
     }
 
+    @Override
+    public void die(DamageSource damageSource) {
+        super.die(damageSource);
+
+        this.stopCelling();
+    }
+
     protected void cellingTick() {
 
         boolean flag = this.moveControl instanceof CellingMoveControl && ((CellingMoveControl) this.moveControl).isWalkableUpper();
         boolean flag2 = this.moveControl.hasWanted() && this.moveControl.getWantedY() - this.getY() > 0;
 
 
-        if (!flag && !flag2 && (this.onGround() && this.isInWater() || this.isInLava() || this.isInFluidType())) {
+        if (!flag && !flag2 && (this.onGround() || this.isInWater() || this.isInLava() || this.isInFluidType())) {
             this.entityData.set(ATTACHED_FACE, Direction.DOWN);
             this.setCellRotation(new Quaternionf());
         } else {

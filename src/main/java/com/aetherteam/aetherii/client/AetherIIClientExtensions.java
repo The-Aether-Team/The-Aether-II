@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluidTypes;
+import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -20,6 +21,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -27,10 +29,7 @@ import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.client.extensions.common.IClientBlockExtensions;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.neoforged.neoforge.client.extensions.common.*;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector4f;
 
@@ -197,6 +196,18 @@ public class AetherIIClientExtensions {
         }
     };
 
+    public static final IClientMobEffectExtensions HIDE_EFFECT = new IClientMobEffectExtensions() {
+        @Override
+        public boolean isVisibleInInventory(MobEffectInstance instance) {
+            return false;
+        }
+
+        @Override
+        public boolean isVisibleInGui(MobEffectInstance instance) {
+            return false;
+        }
+    };
+
     public static void registerClientItemExtensions(RegisterClientExtensionsEvent event) {
         event.registerItem(BEAST_PELT, AetherIIItems.BEAST_PELT_HELMET.get(), AetherIIItems.BEAST_PELT_CHESTPLATE.get(), AetherIIItems.BEAST_PELT_LEGGINGS.get(), AetherIIItems.BEAST_PELT_BOOTS.get(), AetherIIItems.BEAST_PELT_GLOVES.get());
         event.registerItem(BURRUKAI_PLATE, AetherIIItems.BURRUKAI_PLATE_HELMET.get(), AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(), AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(), AetherIIItems.BURRUKAI_PLATE_BOOTS.get(), AetherIIItems.BURRUKAI_PLATE_GLOVES.get());
@@ -208,5 +219,7 @@ public class AetherIIClientExtensions {
         event.registerBlock(UNSTABLE_BLOCK, AetherIIBlocks.UNSTABLE_HOLYSTONE.get(),AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
 
         event.registerFluidType(ALKAHEST_FLUID, AetherIIFluidTypes.ALKAHEST_TYPE.get());
+
+        event.registerMobEffect(HIDE_EFFECT, AetherIIEffects.NATURAL_CAMOUFLAGE.get(), AetherIIEffects.ELECTRIC_SHOCK.get(), AetherIIEffects.GRAVITATIONAL_PULL.get());
     }
 }

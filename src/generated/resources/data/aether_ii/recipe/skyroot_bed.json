@@ -1,13 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "category": "building",
   "key": {
-    "P": "#aether_ii:planks_crafting",
-    "W": "#minecraft:wool"
+    "#": "aether_ii:cloudwool",
+    "B": "minecraft:book"
   },
   "pattern": [
-    "WWW",
-    "PPP"
+    "###",
+    "BBB",
+    "###"
   ],
   "result": {
     "count": 1,

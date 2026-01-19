@@ -131,14 +131,14 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> HOLYSTONE_QUARTZ_ORE = register("holystone_quartz_ore", (properties) -> new DropExperienceBlock(UniformInt.of(2, 5), properties), () -> Block.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> AMBROSIUM_ORE = register("ambrosium_ore", (properties) -> new DropExperienceBlock(UniformInt.of(0, 2), properties), () -> Block.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops().lightLevel(AetherIIBlocks::lightLevel8));
     public static final DeferredBlock<Block> ZANITE_ORE = register("zanite_ore", (properties) -> new DropExperienceBlock(UniformInt.of(3, 5), properties), () -> Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops());
-    public static final DeferredBlock<Block> GLINT_ORE = register("glint_ore", (properties) -> new DropExperienceBlock(UniformInt.of(3, 5), properties), () -> Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> ARKENIUM_ORE = register("arkenium_ore", (properties) -> new DropExperienceBlock(ConstantInt.of(0), properties), () -> Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> GRAVITITE_ORE = register("gravitite_ore", (properties) -> new DropExperienceBlock(ConstantInt.of(0), properties), () -> Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops());
+    public static final DeferredBlock<Block> GLINT_ORE = register("glint_ore", (properties) -> new DropExperienceBlock(UniformInt.of(3, 5), properties), () -> Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> UNDERSHALE_AMBROSIUM_ORE = register("undershale_ambrosium_ore", (properties) -> new DropExperienceBlock(UniformInt.of(0, 2), properties), () -> Block.Properties.ofFullCopy(AMBROSIUM_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.5F, 3.0F).sound(SoundType.DEEPSLATE).lightLevel(AetherIIBlocks::lightLevel8));
     public static final DeferredBlock<Block> UNDERSHALE_ZANITE_ORE = register("undershale_zanite_ore", (properties) -> new DropExperienceBlock(UniformInt.of(3, 5), properties), () -> Block.Properties.ofFullCopy(ZANITE_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.5F, 3.0F).sound(SoundType.DEEPSLATE));
-    public static final DeferredBlock<Block> UNDERSHALE_GLINT_ORE = register("undershale_glint_ore", (properties) -> new DropExperienceBlock(UniformInt.of(3, 5), properties), () -> Block.Properties.ofFullCopy(GLINT_ORE.get()).mapColor(MapColor.WOOL).strength(4.5F, 3.0F).sound(SoundType.DEEPSLATE));
     public static final DeferredBlock<Block> UNDERSHALE_ARKENIUM_ORE = register("undershale_arkenium_ore", (properties) -> new DropExperienceBlock(ConstantInt.of(0), properties), () -> Block.Properties.ofFullCopy(ARKENIUM_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.5F, 3.0F).sound(SoundType.DEEPSLATE));
     public static final DeferredBlock<Block> UNDERSHALE_GRAVITITE_ORE = register("undershale_gravitite_ore", (properties) -> new DropExperienceBlock(ConstantInt.of(0), properties), () -> Block.Properties.ofFullCopy(GRAVITITE_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.5F, 3.0F).sound(SoundType.DEEPSLATE));
+    public static final DeferredBlock<Block> UNDERSHALE_GLINT_ORE = register("undershale_glint_ore", (properties) -> new DropExperienceBlock(UniformInt.of(3, 5), properties), () -> Block.Properties.ofFullCopy(GLINT_ORE.get()).mapColor(MapColor.WOOL).strength(4.5F, 3.0F).sound(SoundType.DEEPSLATE));
     public static final DeferredBlock<Block> CORROBONITE_ORE = register("corrobonite_ore", (properties) -> new CorroboniteOreBlock(ConstantInt.of(0), properties), () -> Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(4.5F, 3.0F).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> CORROBONITE_CLUSTER = register("corrobonite_cluster", CorroboniteClusterBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).strength(3.0F, 3.0F).replaceable().noOcclusion().noCollission().instabreak());
 
@@ -685,7 +685,9 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> ZANITE_BLOCK = register("zanite_block", () -> Block.Properties.of().mapColor(MapColor.COLOR_PURPLE).instrument(NoteBlockInstrument.BIT).strength(5.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.METAL));
     public static final DeferredBlock<Block> ARKENIUM_BLOCK = register("arkenium_block", () -> Block.Properties.of().mapColor(MapColor.METAL).instrument(NoteBlockInstrument.PLING).strength(5.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.METAL));
     public static final DeferredBlock<Block> GRAVITITE_BLOCK = register("gravitite_block", () -> Block.Properties.of().mapColor(MapColor.COLOR_PINK).instrument(NoteBlockInstrument.PLING).strength(5.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.METAL));
+    public static final DeferredBlock<Block> GLINT_BLOCK = register("glint_block", () -> Block.Properties.of().mapColor(MapColor.COLOR_MAGENTA).instrument(NoteBlockInstrument.PLING).strength(5.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.METAL));
     public static final DeferredBlock<Block> CORROBONITE_BLOCK = register("corrobonite_block", () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_LIGHT_GREEN).instrument(NoteBlockInstrument.BIT).strength(5.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.METAL));
+    public static final DeferredBlock<Block> GOLDEN_AMBER_BLOCK = register("golden_amber_block", () -> Block.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BIT).strength(5.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.METAL));
 
     // Arilum Lantern
     public static final DeferredBlock<Block> WHITE_ARILUM_LANTERN = register("white_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.SNOW));
@@ -723,7 +725,24 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> SKYROOT_CHEST = register("skyroot_chest", (properties) -> new SkyrootChestBlock(properties, AetherIIBlockEntityTypes.SKYROOT_CHEST::get), () -> Block.Properties.ofFullCopy(Blocks.CHEST));
     public static final DeferredBlock<LadderBlock> SKYROOT_LADDER = register("skyroot_ladder", LadderBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LADDER).strength(0.4F).sound(SoundType.LADDER).noOcclusion());
     public static final DeferredBlock<BedrollBlock> CLOUDWOOL_BEDROLL = register("cloudwool_bedroll", BedrollBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).sound(SoundType.WOOL).strength(0.2F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY));
+
     public static final DeferredBlock<BedBlock> SKYROOT_BED = register("skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.WHITE, properties), () -> Block.Properties.ofFullCopy(Blocks.WHITE_BED));
+    public static final DeferredBlock<BedBlock> WHITE_SKYROOT_BED = register("white_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.WHITE, properties), () -> Block.Properties.ofFullCopy(Blocks.WHITE_BED));
+    public static final DeferredBlock<BedBlock> ORANGE_SKYROOT_BED = register("orange_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.ORANGE, properties), () -> Block.Properties.ofFullCopy(Blocks.ORANGE_BED));
+    public static final DeferredBlock<BedBlock> MAGENTA_SKYROOT_BED = register("magenta_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.MAGENTA, properties), () -> Block.Properties.ofFullCopy(Blocks.MAGENTA_BED));
+    public static final DeferredBlock<BedBlock> LIGHT_BLUE_SKYROOT_BED = register("light_blue_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.LIGHT_BLUE, properties), () -> Block.Properties.ofFullCopy(Blocks.LIGHT_BLUE_BED));
+    public static final DeferredBlock<BedBlock> YELLOW_SKYROOT_BED = register("yellow_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.YELLOW, properties), () -> Block.Properties.ofFullCopy(Blocks.YELLOW_BED));
+    public static final DeferredBlock<BedBlock> LIME_SKYROOT_BED = register("lime_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.LIME, properties), () -> Block.Properties.ofFullCopy(Blocks.LIME_BED));
+    public static final DeferredBlock<BedBlock> PINK_SKYROOT_BED = register("pink_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.PINK, properties), () -> Block.Properties.ofFullCopy(Blocks.PINK_BED));
+    public static final DeferredBlock<BedBlock> GRAY_SKYROOT_BED = register("gray_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.GRAY, properties), () -> Block.Properties.ofFullCopy(Blocks.GRAY_BED));
+    public static final DeferredBlock<BedBlock> LIGHT_GRAY_SKYROOT_BED = register("light_gray_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.LIGHT_GRAY, properties), () -> Block.Properties.ofFullCopy(Blocks.LIGHT_GRAY_BED));
+    public static final DeferredBlock<BedBlock> CYAN_SKYROOT_BED = register("cyan_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.CYAN, properties), () -> Block.Properties.ofFullCopy(Blocks.CYAN_BED));
+    public static final DeferredBlock<BedBlock> PURPLE_SKYROOT_BED = register("purple_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.PURPLE, properties), () -> Block.Properties.ofFullCopy(Blocks.PURPLE_BED));
+    public static final DeferredBlock<BedBlock> BLUE_SKYROOT_BED = register("blue_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.BLUE, properties), () -> Block.Properties.ofFullCopy(Blocks.BLUE_BED));
+    public static final DeferredBlock<BedBlock> BROWN_SKYROOT_BED = register("brown_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.BROWN, properties), () -> Block.Properties.ofFullCopy(Blocks.BROWN_BED));
+    public static final DeferredBlock<BedBlock> GREEN_SKYROOT_BED = register("green_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.GREEN, properties), () -> Block.Properties.ofFullCopy(Blocks.GREEN_BED));
+    public static final DeferredBlock<BedBlock> RED_SKYROOT_BED = register("red_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.RED, properties), () -> Block.Properties.ofFullCopy(Blocks.RED_BED));
+    public static final DeferredBlock<BedBlock> BLACK_SKYROOT_BED = register("black_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.BLACK, properties), () -> Block.Properties.ofFullCopy(Blocks.BLACK_BED));
 
     public static final DeferredBlock<StandingSignBlock> SKYROOT_SIGN = register("skyroot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.SKYROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
     public static final DeferredBlock<WallSignBlock> SKYROOT_WALL_SIGN = registerWithoutItem("skyroot_wall_sign", (properties) -> new WallSignBlock(AetherIIWoodTypes.SKYROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
@@ -740,11 +759,15 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<CeilingHangingSignBlock> WISPROOT_HANGING_SIGN = register("wisproot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.WISPROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
     public static final DeferredBlock<WallHangingSignBlock> WISPROOT_WALL_HANGING_SIGN = registerWithoutItem("wisproot_wall_hanging_sign", (properties) -> new WallHangingSignBlock(AetherIIWoodTypes.WISPROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
 
+    public static final DeferredBlock<Block> HOLYSTONE_LEVER = register("holystone_lever", LeverBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LEVER));
+
     // Moa Egg
     public static final DeferredBlock<Block> MOA_EGG = registerWithoutItem("moa_egg", MoaEggBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BLUE).strength(0.5F).sound(SoundType.METAL).noOcclusion());
 
     // Bookshelves
     public static final DeferredBlock<Block> SKYROOT_BOOKSHELF = register("skyroot_bookshelf", BookshelfBlock::new, () -> Block.Properties.ofFullCopy(Blocks.BOOKSHELF));
+    public static final DeferredBlock<Block> GREATROOT_BOOKSHELF = register("greatroot_bookshelf", BookshelfBlock::new, () -> Block.Properties.ofFullCopy(Blocks.BOOKSHELF));
+    public static final DeferredBlock<Block> WISPROOT_BOOKSHELF = register("wisproot_bookshelf", BookshelfBlock::new, () -> Block.Properties.ofFullCopy(Blocks.BOOKSHELF));
     public static final DeferredBlock<Block> HOLYSTONE_BOOKSHELF = register("holystone_bookshelf", BookshelfBlock::new, () -> Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get()));
 
     // Furniture
@@ -802,8 +825,40 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
                 return new HangingSignItem(WISPROOT_HANGING_SIGN.get(), WISPROOT_WALL_HANGING_SIGN.get(), properties.stacksTo(16));
             } else if (block == CLOUDWOOL_BEDROLL) {
                 return new BedItem(CLOUDWOOL_BEDROLL.get(), properties.stacksTo(4));
-            }else if (block == SKYROOT_BED) {
+            } else if (block == SKYROOT_BED) { //todo: clean-up
                 return new BedItem(SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == WHITE_SKYROOT_BED) {
+                return new BedItem(WHITE_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == ORANGE_SKYROOT_BED) {
+                return new BedItem(ORANGE_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == MAGENTA_SKYROOT_BED) {
+                return new BedItem(MAGENTA_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == LIGHT_BLUE_SKYROOT_BED) {
+                return new BedItem(LIGHT_BLUE_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == YELLOW_SKYROOT_BED) {
+                return new BedItem(YELLOW_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == LIME_SKYROOT_BED) {
+                return new BedItem(LIME_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == PINK_SKYROOT_BED) {
+                return new BedItem(PINK_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == GRAY_SKYROOT_BED) {
+                return new BedItem(GRAY_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == LIGHT_GRAY_SKYROOT_BED) {
+                return new BedItem(LIGHT_GRAY_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == CYAN_SKYROOT_BED) {
+                return new BedItem(CYAN_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == PURPLE_SKYROOT_BED) {
+                return new BedItem(PURPLE_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == BLUE_SKYROOT_BED) {
+                return new BedItem(BLUE_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == BROWN_SKYROOT_BED) {
+                return new BedItem(BROWN_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == GREEN_SKYROOT_BED) {
+                return new BedItem(GREEN_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == RED_SKYROOT_BED) {
+                return new BedItem(RED_SKYROOT_BED.get(), properties.stacksTo(1));
+            } else if (block == BLACK_SKYROOT_BED) {
+                return new BedItem(BLACK_SKYROOT_BED.get(), properties.stacksTo(1));
             } else {
                 return new BlockItem(block.get(), properties);
             }

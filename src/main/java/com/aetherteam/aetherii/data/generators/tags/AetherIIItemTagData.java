@@ -586,7 +586,25 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
         this.tag(ItemTags.BEDS).add(
                 AetherIIBlocks.CLOUDWOOL_BEDROLL.asItem(),
-                AetherIIBlocks.SKYROOT_BED.asItem()
+                AetherIIBlocks.SKYROOT_BED.asItem(),
+                AetherIIBlocks.CLOUDWOOL_BEDROLL.asItem(),
+                AetherIIBlocks.SKYROOT_BED.asItem(),
+                AetherIIBlocks.WHITE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.ORANGE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.MAGENTA_SKYROOT_BED.asItem(),
+                AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.YELLOW_SKYROOT_BED.asItem(),
+                AetherIIBlocks.LIME_SKYROOT_BED.asItem(),
+                AetherIIBlocks.PINK_SKYROOT_BED.asItem(),
+                AetherIIBlocks.GRAY_SKYROOT_BED.asItem(),
+                AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED.asItem(),
+                AetherIIBlocks.CYAN_SKYROOT_BED.asItem(),
+                AetherIIBlocks.PURPLE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.BLUE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.BROWN_SKYROOT_BED.asItem(),
+                AetherIIBlocks.GREEN_SKYROOT_BED.asItem(),
+                AetherIIBlocks.RED_SKYROOT_BED.asItem(),
+                AetherIIBlocks.BLACK_SKYROOT_BED.asItem()
         );
         this.tag(ItemTags.SIGNS).add(
                 AetherIIBlocks.SKYROOT_SIGN.asItem(),
@@ -610,6 +628,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ZANITE_GEMSTONE.get(),
                 AetherIIItems.ARKENIUM_PLATES.get(),
                 AetherIIItems.GRAVITITE_PLATE.get(),
+                AetherIIItems.GLINT_GEMSTONE.get(),
                 AetherIIItems.CORROBONITE_CRYSTAL.get()
         );
         this.tag(ItemTags.CLUSTER_MAX_HARVESTABLES).add(
@@ -712,6 +731,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         // NeoForge
         this.tag(Tags.Items.BOOKSHELVES).add(
                 AetherIIBlocks.SKYROOT_BOOKSHELF.asItem(),
+                AetherIIBlocks.GREATROOT_BOOKSHELF.asItem(),
+                AetherIIBlocks.WISPROOT_BOOKSHELF.asItem(),
                 AetherIIBlocks.HOLYSTONE_BOOKSHELF.asItem()
         );
         this.tag(Tags.Items.FENCE_GATES_WOODEN).add(
@@ -790,7 +811,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.ZANITE_BLOCK.asItem(),
                 AetherIIBlocks.ARKENIUM_BLOCK.asItem(),
                 AetherIIBlocks.GRAVITITE_BLOCK.asItem(),
+                AetherIIBlocks.GLINT_BLOCK.asItem(),
                 AetherIIBlocks.CORROBONITE_BLOCK.asItem(),
+                AetherIIBlocks.GOLDEN_AMBER_BLOCK.asItem(),
                 AetherIIBlocks.BRETTL_GRASS_BUNDLE.asItem()
         );
         this.tag(Tags.Items.TOOLS_SHEAR).add(

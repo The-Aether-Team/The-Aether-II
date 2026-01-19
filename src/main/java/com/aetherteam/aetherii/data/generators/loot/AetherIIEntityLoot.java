@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.data.generators.loot;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.advancement.predicate.KirridPredicate;
 import com.aetherteam.aetherii.advancement.predicate.SheepuffPredicate;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
@@ -8,13 +9,12 @@ import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.AetherIILoot;
+import com.aetherteam.aetherii.loot.conditions.PlayerGrownCondition;
 import com.aetherteam.aetherii.loot.functions.GelDropsFunction;
 import com.aetherteam.aetherii.loot.functions.SugarDropsFunction;
-import net.minecraft.advancements.critereon.DamageSourcePredicate;
-import net.minecraft.advancements.critereon.EntityFlagsPredicate;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.TagPredicate;
+import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
@@ -28,10 +28,7 @@ import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 import net.minecraft.world.level.storage.loot.functions.EnchantedCountIncreaseFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
-import net.minecraft.world.level.storage.loot.predicates.DamageSourceCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithEnchantedBonusCondition;
+import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.neoforged.neoforge.common.Tags;
@@ -121,14 +118,16 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                 )
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIBlocks.AECHOR_CUTTING.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
-                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                                .when(PlayerGrownCondition::new)
                         )
                 )
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIBlocks.AECHOR_CUTTING.get())
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
-                                .when(DamageSourceCondition.hasDamageSource(DamageSourcePredicate.Builder.damageType().tag(TagPredicate.is(Tags.DamageTypes.IS_TECHNICAL))))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.1F, 0.1F))
+                                .when(InvertedLootItemCondition.invert(PlayerGrownCondition::new))
                         )
                 )
         );
@@ -140,16 +139,34 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                 )
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIBlocks.CARRION_CUTTING.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
-                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                                .when(PlayerGrownCondition::new)
                         )
                 )
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIBlocks.CARRION_CUTTING.get())
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
-                                .when(DamageSourceCondition.hasDamageSource(DamageSourcePredicate.Builder.damageType().tag(TagPredicate.is(Tags.DamageTypes.IS_TECHNICAL))))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.1F, 0.1F))
+                                .when(InvertedLootItemCondition.invert(PlayerGrownCondition::new))
                         )
                 )
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+//                        .add(LootItem.lootTableItem(AetherIIBlocks.CARRION_CUTTING.get())
+//                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+//                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
+//                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.1F, 0.1F))
+//                                .when(InvertedLootItemCondition.invert(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.ATTACKING_PLAYER, EntityPredicate.Builder.entity().equipment(EntityEquipmentPredicate.Builder.equipment().mainhand(ItemPredicate.Builder.item().of(this.registries.lookupOrThrow(Registries.ITEM), AetherIITags.Items.TOOLS_TROWELS))))))
+//                        )
+//                )
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+//                        .add(LootItem.lootTableItem(AetherIIBlocks.CARRION_CUTTING.get())
+//                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+//                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
+//                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.5F, 0.1F))
+//                                .when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.ATTACKING_PLAYER, EntityPredicate.Builder.entity().equipment(EntityEquipmentPredicate.Builder.equipment().mainhand(ItemPredicate.Builder.item().of(this.registries.lookupOrThrow(Registries.ITEM), AetherIITags.Items.TOOLS_TROWELS)))))
+//                        )
+//                )
         );
 
         this.add(AetherIIEntityTypes.ZEPHYR.get(), LootTable.lootTable()

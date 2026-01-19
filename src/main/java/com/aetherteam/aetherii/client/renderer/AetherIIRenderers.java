@@ -21,6 +21,7 @@ import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
 import com.aetherteam.aetherii.client.renderer.entity.*;
+import com.aetherteam.aetherii.client.renderer.entity.layers.ProjectilesStuckLayer;
 import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLatchLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.ArcticBurrukaiModel;
@@ -36,6 +37,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyM
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
 import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
 import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
+import com.aetherteam.aetherii.client.renderer.item.model.SkyrootBedSpecialRenderer;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Moa;
@@ -54,6 +56,7 @@ import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.context.ContextKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -66,11 +69,15 @@ public class AetherIIRenderers {
     public static final ContextKey<Float> SKIFF_STEERING_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skiff_steering"));
     public static final ContextKey<Boolean> RIDING_MOA_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "riding_moa"));
     public static final ContextKey<List<Swet>> SWET_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet"));
+    public static final ContextKey<List<EntityType<?>>> STUCK_PROJECTILES_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "stuck_projectiles"));
 
     public static void registerAddLayer(EntityRenderersEvent.AddLayers event) {
         event.getSkins().forEach(model -> {
             if (event.getSkin(model) instanceof LivingEntityRenderer<?, ?, ?> livingEntityRenderer) {
                 registerLivingEntityLayers(event.getContext(), livingEntityRenderer);
+                if (livingEntityRenderer instanceof PlayerRenderer playerRenderer) {
+                    playerRenderer.addLayer(new ProjectilesStuckLayer<>(playerRenderer, event.getContext()));
+                }
             }
         });
     }
@@ -91,6 +98,7 @@ public class AetherIIRenderers {
                 playerRenderState.setRenderData(RIDING_SKIFF_KEY, true);
                 playerRenderState.setRenderData(SKIFF_STEERING_KEY, cloudSkiff.steering);
             }
+            playerRenderState.setRenderData(STUCK_PROJECTILES_KEY, abstractClientPlayer.getData(AetherIIDataAttachments.PLAYER).getStuckProjectiles());
         });
     }
 
@@ -168,8 +176,8 @@ public class AetherIIRenderers {
 
     public static void registerLayerDefinition(EntityRenderersEvent.RegisterLayerDefinitions event) {
         // Blocks
-        event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_BED_FOOT, BedRenderer::createFootLayer);
-        event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_BED_HEAD, BedRenderer::createHeadLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_BED_FOOT, SkyrootBedRenderer::createFootLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_BED_HEAD, SkyrootBedRenderer::createHeadLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA_EGG, MoaEggModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.ALKAHEST_PURIFIER, AlkahestPurifierModel::createBodyLayer);
 
@@ -235,6 +243,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.GLOVES, () -> GlovesModel.createLayer(new CubeDeformation(0.6F), false));
         event.registerLayerDefinition(AetherIIModelLayers.GLOVES_SLIM, () -> GlovesModel.createLayer(new CubeDeformation(0.6F), true));
         event.registerLayerDefinition(AetherIIModelLayers.GLOVES_FIRST_PERSON, () -> GlovesModel.createLayer(new CubeDeformation(0.25F), false));
+        event.registerLayerDefinition(AetherIIModelLayers.GLOVES_SLIM_FIRST_PERSON, () -> GlovesModel.createLayer(new CubeDeformation(0.25F), true));
     }
 
     public static void registerItemModels(RegisterItemModelsEvent event) {
@@ -306,6 +315,7 @@ public class AetherIIRenderers {
     }
 
     public static void registerSpecialModelRenderers(RegisterSpecialModelRendererEvent event) {
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot_bed"), SkyrootBedSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier"), AlkahestPurifierSpecialRenderer.Unbaked.MAP_CODEC);
     }
 }
