@@ -10,6 +10,7 @@ import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import com.aetherteam.aetherii.client.renderer.item.model.SkyrootBedSpecialRenderer;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.*;
 import org.apache.commons.lang3.ArrayUtils;
@@ -890,12 +891,13 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(generator);
     }
 
-    public void createBed(Block block, Block particle, ResourceLocation location) {
+    public void createBed(Block block, Block particle, String name) {
+        ResourceLocation location = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/bed/skyroot/" + name + ".png");
         MultiVariant bed = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("skyroot_bed"));
         this.blockStateOutput.accept(createSimpleBlock(block, bed));
         Item item = block.asItem();
         ResourceLocation inventoryLocation = ModelTemplates.BED_INVENTORY.create(ModelLocationUtils.getModelLocation(item), TextureMapping.particle(particle), this.modelOutput);
-        this.itemModelOutput.accept(item, ItemModelUtils.specialModel(inventoryLocation, new BedSpecialRenderer.Unbaked(location)));
+        this.itemModelOutput.accept(item, ItemModelUtils.specialModel(inventoryLocation, new SkyrootBedSpecialRenderer.Unbaked(location)));
     }
 
     public void createLever(Block block) {
