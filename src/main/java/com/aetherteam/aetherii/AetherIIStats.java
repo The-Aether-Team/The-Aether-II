@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 import java.util.List;
@@ -244,27 +245,31 @@ public class AetherIIStats {
             .put(AetherIIAttributes.PIERCE_RESISTANCE, 3.0)
             .build();
 
-    private static ItemAttributeModifiers.Entry slashDamageModifer(double amount) {
+    public static ItemAttributeModifiers.Entry baseDamageModifer(double amount) {
+        return new ItemAttributeModifiers.Entry(Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, amount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
+    }
+
+    public static ItemAttributeModifiers.Entry slashDamageModifer(double amount) {
         return new ItemAttributeModifiers.Entry(AetherIIAttributes.SLASH_DAMAGE, new AttributeModifier(AetherIIItems.BASE_SLASH_DAMAGE_ID, amount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
     }
 
-    private static ItemAttributeModifiers.Entry rangedSlashDamageModifer(double amount) {
+    public static ItemAttributeModifiers.Entry rangedSlashDamageModifer(double amount) {
         return new ItemAttributeModifiers.Entry(AetherIIAttributes.SLASH_RANGED_DAMAGE, new AttributeModifier(AetherIIItems.BASE_SLASH_RANGED_DAMAGE_ID, amount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HAND);
     }
 
-    private static ItemAttributeModifiers.Entry impactDamageModifer(double amount) {
+    public static ItemAttributeModifiers.Entry impactDamageModifer(double amount) {
         return new ItemAttributeModifiers.Entry(AetherIIAttributes.IMPACT_DAMAGE, new AttributeModifier(AetherIIItems.BASE_IMPACT_DAMAGE_ID, amount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
     }
 
-    private static ItemAttributeModifiers.Entry rangedImpactDamageModifer(double amount) {
+    public static ItemAttributeModifiers.Entry rangedImpactDamageModifer(double amount) {
         return new ItemAttributeModifiers.Entry(AetherIIAttributes.IMPACT_RANGED_DAMAGE, new AttributeModifier(AetherIIItems.BASE_IMPACT_RANGED_DAMAGE_ID, amount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HAND);
     }
 
-    private static ItemAttributeModifiers.Entry pierceDamageModifer(double amount) {
+    public static ItemAttributeModifiers.Entry pierceDamageModifer(double amount) {
         return new ItemAttributeModifiers.Entry(AetherIIAttributes.PIERCE_DAMAGE, new AttributeModifier(AetherIIItems.BASE_PIERCE_DAMAGE_ID, amount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
     }
 
-    private static ItemAttributeModifiers.Entry rangedPierceDamageModifer(double amount) {
+    public static ItemAttributeModifiers.Entry rangedPierceDamageModifer(double amount) {
         return new ItemAttributeModifiers.Entry(AetherIIAttributes.PIERCE_RANGED_DAMAGE, new AttributeModifier(AetherIIItems.BASE_PIERCE_RANGED_DAMAGE_ID, amount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HAND);
     }
 

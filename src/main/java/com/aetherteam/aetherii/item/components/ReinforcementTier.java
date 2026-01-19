@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.item.components;
 
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import io.netty.buffer.ByteBuf;
@@ -192,45 +194,74 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
         public static final Predicate<ItemStack> ARKENIUM_WEAPONS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS) && (stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
         public static final Predicate<ItemStack> ARKENIUM_ARMOR = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR) && (stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
 
-        public static final Map<Supplier<? extends Item>, Supplier<? extends Item>> UPGRADE_REFERENCE = Map.ofEntries(
-                Map.entry(AetherIIItems.SKYROOT_PICKAXE, AetherIIItems.HOLYSTONE_PICKAXE),
-                Map.entry(AetherIIItems.SKYROOT_AXE, AetherIIItems.HOLYSTONE_AXE),
-                Map.entry(AetherIIItems.SKYROOT_SHOVEL, AetherIIItems.HOLYSTONE_SHOVEL),
-                Map.entry(AetherIIItems.SKYROOT_TROWEL, AetherIIItems.HOLYSTONE_TROWEL),
-                Map.entry(AetherIIItems.HOLYSTONE_PICKAXE, AetherIIItems.ZANITE_PICKAXE),
-                Map.entry(AetherIIItems.HOLYSTONE_AXE, AetherIIItems.ZANITE_AXE),
-                Map.entry(AetherIIItems.HOLYSTONE_SHOVEL, AetherIIItems.ZANITE_SHOVEL),
-                Map.entry(AetherIIItems.HOLYSTONE_TROWEL, AetherIIItems.ZANITE_TROWEL),
-                Map.entry(AetherIIItems.ZANITE_PICKAXE, AetherIIItems.GRAVITITE_PICKAXE),
-                Map.entry(AetherIIItems.ZANITE_AXE, AetherIIItems.GRAVITITE_AXE),
-                Map.entry(AetherIIItems.ZANITE_SHOVEL, AetherIIItems.GRAVITITE_SHOVEL),
-                Map.entry(AetherIIItems.ZANITE_TROWEL, AetherIIItems.GRAVITITE_TROWEL),
-                Map.entry(AetherIIItems.ARKENIUM_PICKAXE, AetherIIItems.GRAVITITE_PICKAXE),
-                Map.entry(AetherIIItems.ARKENIUM_AXE, AetherIIItems.GRAVITITE_AXE),
-                Map.entry(AetherIIItems.ARKENIUM_SHOVEL, AetherIIItems.GRAVITITE_SHOVEL),
-                Map.entry(AetherIIItems.ARKENIUM_TROWEL, AetherIIItems.GRAVITITE_TROWEL),
-                Map.entry(AetherIIItems.GRAVITITE_PICKAXE, () -> Items.NETHERITE_PICKAXE),
-                Map.entry(AetherIIItems.GRAVITITE_AXE, () -> Items.NETHERITE_AXE),
-                Map.entry(AetherIIItems.GRAVITITE_SHOVEL, () -> Items.NETHERITE_SHOVEL),
-                Map.entry(AetherIIItems.GRAVITITE_TROWEL, () -> Items.NETHERITE_HOE),
+        public static final Map<Supplier<? extends Item>, Supplier<ItemStack>> UPGRADE_REFERENCE = Map.ofEntries(
+                Map.entry(AetherIIItems.SKYROOT_PICKAXE, () -> AetherIIItems.HOLYSTONE_PICKAXE.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.SKYROOT_AXE, () -> AetherIIItems.HOLYSTONE_AXE.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.SKYROOT_SHOVEL, () -> AetherIIItems.HOLYSTONE_SHOVEL.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.SKYROOT_TROWEL, () -> AetherIIItems.HOLYSTONE_TROWEL.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.HOLYSTONE_PICKAXE, () -> AetherIIItems.ZANITE_PICKAXE.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.HOLYSTONE_AXE, () -> AetherIIItems.ZANITE_AXE.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.HOLYSTONE_SHOVEL, () -> AetherIIItems.ZANITE_SHOVEL.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.HOLYSTONE_TROWEL, () -> AetherIIItems.ZANITE_TROWEL.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ZANITE_PICKAXE, () -> AetherIIItems.GRAVITITE_PICKAXE.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ZANITE_AXE, () -> AetherIIItems.GRAVITITE_AXE.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ZANITE_SHOVEL, () -> AetherIIItems.GRAVITITE_SHOVEL.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ZANITE_TROWEL, () -> AetherIIItems.GRAVITITE_TROWEL.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ARKENIUM_PICKAXE, () -> AetherIIItems.GRAVITITE_PICKAXE.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ARKENIUM_AXE, () -> AetherIIItems.GRAVITITE_AXE.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ARKENIUM_SHOVEL, () -> AetherIIItems.GRAVITITE_SHOVEL.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ARKENIUM_TROWEL, () -> AetherIIItems.GRAVITITE_TROWEL.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.GRAVITITE_PICKAXE, () -> Items.NETHERITE_PICKAXE.getDefaultInstance()),
+                Map.entry(AetherIIItems.GRAVITITE_AXE, () -> Items.NETHERITE_AXE.getDefaultInstance()),
+                Map.entry(AetherIIItems.GRAVITITE_SHOVEL, () -> Items.NETHERITE_SHOVEL.getDefaultInstance()),
+                Map.entry(AetherIIItems.GRAVITITE_TROWEL, () -> Items.NETHERITE_HOE.getDefaultInstance()),
 
-                Map.entry(AetherIIItems.SKYROOT_SHORTSWORD, AetherIIItems.HOLYSTONE_SHORTSWORD),
-                Map.entry(AetherIIItems.SKYROOT_HAMMER, AetherIIItems.HOLYSTONE_HAMMER),
-                Map.entry(AetherIIItems.SKYROOT_SPEAR, AetherIIItems.HOLYSTONE_SPEAR),
-                Map.entry(AetherIIItems.HOLYSTONE_SHORTSWORD, AetherIIItems.ZANITE_SHORTSWORD),
-                Map.entry(AetherIIItems.HOLYSTONE_HAMMER, AetherIIItems.ZANITE_HAMMER),
-                Map.entry(AetherIIItems.HOLYSTONE_SPEAR, AetherIIItems.ZANITE_SPEAR),
-                Map.entry(AetherIIItems.ZANITE_SHORTSWORD, AetherIIItems.GRAVITITE_SHORTSWORD),
-                Map.entry(AetherIIItems.ZANITE_HAMMER, AetherIIItems.GRAVITITE_HAMMER),
-                Map.entry(AetherIIItems.ZANITE_SPEAR, AetherIIItems.GRAVITITE_SPEAR),
-                Map.entry(AetherIIItems.ARKENIUM_SHORTSWORD, AetherIIItems.GRAVITITE_SHORTSWORD),
-                Map.entry(AetherIIItems.ARKENIUM_HAMMER, AetherIIItems.GRAVITITE_HAMMER),
-                Map.entry(AetherIIItems.ARKENIUM_SPEAR, AetherIIItems.GRAVITITE_SPEAR)
-//                Map.entry(AetherIIItems.GRAVITITE_SHORTSWORD, AetherIIItems.GRAVITITE_SHORTSWORD), //TODO
-//                Map.entry(AetherIIItems.GRAVITITE_HAMMER, AetherIIItems.GRAVITITE_HAMMER),
-//                Map.entry(AetherIIItems.GRAVITITE_SPEAR, AetherIIItems.GRAVITITE_SPEAR),
+                Map.entry(AetherIIItems.SKYROOT_SHORTSWORD, () -> AetherIIItems.HOLYSTONE_SHORTSWORD.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.SKYROOT_HAMMER, () -> AetherIIItems.HOLYSTONE_HAMMER.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.SKYROOT_SPEAR, () -> AetherIIItems.HOLYSTONE_SPEAR.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.HOLYSTONE_SHORTSWORD, () -> AetherIIItems.ZANITE_SHORTSWORD.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.HOLYSTONE_HAMMER, () -> AetherIIItems.ZANITE_HAMMER.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.HOLYSTONE_SPEAR, () -> AetherIIItems.ZANITE_SPEAR.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ZANITE_SHORTSWORD, () -> AetherIIItems.GRAVITITE_SHORTSWORD.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ZANITE_HAMMER, () -> AetherIIItems.GRAVITITE_HAMMER.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ZANITE_SPEAR, () -> AetherIIItems.GRAVITITE_SPEAR.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ARKENIUM_SHORTSWORD, () -> AetherIIItems.GRAVITITE_SHORTSWORD.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ARKENIUM_HAMMER, () -> AetherIIItems.GRAVITITE_HAMMER.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ARKENIUM_SPEAR, () -> AetherIIItems.GRAVITITE_SPEAR.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.GRAVITITE_SHORTSWORD, () -> stackWithAddedStats(AetherIIItems.GRAVITITE_SHORTSWORD.get(), AetherIIStats.baseDamageModifer(7.0), AetherIIStats.slashDamageModifer(7.0))),
+                Map.entry(AetherIIItems.GRAVITITE_HAMMER, () -> stackWithAddedStats(AetherIIItems.GRAVITITE_HAMMER.get(), AetherIIStats.baseDamageModifer(7.0), AetherIIStats.impactDamageModifer(7.0))),
+                Map.entry(AetherIIItems.GRAVITITE_SPEAR, () -> stackWithAddedStats(AetherIIItems.GRAVITITE_SPEAR.get(), AetherIIStats.baseDamageModifer(7.0), AetherIIStats.pierceDamageModifer(7.0))),
+
+                Map.entry(AetherIIItems.BEAST_PELT_BOOTS, () -> AetherIIItems.BURRUKAI_PLATE_BOOTS.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.BEAST_PELT_LEGGINGS, () -> AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.BEAST_PELT_CHESTPLATE, () -> AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.BEAST_PELT_HELMET, () -> AetherIIItems.BURRUKAI_PLATE_HELMET.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.BEAST_PELT_GLOVES, () -> AetherIIItems.BURRUKAI_PLATE_GLOVES.get().getDefaultInstance()),
+
+                Map.entry(AetherIIItems.BURRUKAI_PLATE_BOOTS, () -> AetherIIItems.ZANITE_BOOTS.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.BURRUKAI_PLATE_LEGGINGS, () -> AetherIIItems.ZANITE_LEGGINGS.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE, () -> AetherIIItems.ZANITE_CHESTPLATE.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.BURRUKAI_PLATE_HELMET, () -> AetherIIItems.ZANITE_HELMET.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.BURRUKAI_PLATE_GLOVES, () -> AetherIIItems.ZANITE_GLOVES.get().getDefaultInstance()),
+
+                Map.entry(AetherIIItems.ZANITE_BOOTS, () -> AetherIIItems.ARKENIUM_BOOTS.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ZANITE_LEGGINGS, () -> AetherIIItems.ARKENIUM_LEGGINGS.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ZANITE_CHESTPLATE, () -> AetherIIItems.ARKENIUM_CHESTPLATE.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ZANITE_HELMET, () -> AetherIIItems.ARKENIUM_HELMET.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ZANITE_GLOVES, () -> AetherIIItems.ARKENIUM_GLOVES.get().getDefaultInstance()),
+
+                Map.entry(AetherIIItems.ARKENIUM_BOOTS, () -> AetherIIItems.GRAVITITE_BOOTS.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ARKENIUM_LEGGINGS, () -> AetherIIItems.GRAVITITE_LEGGINGS.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ARKENIUM_CHESTPLATE, () -> AetherIIItems.GRAVITITE_CHESTPLATE.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ARKENIUM_HELMET, () -> AetherIIItems.GRAVITITE_HELMET.get().getDefaultInstance()),
+                Map.entry(AetherIIItems.ARKENIUM_GLOVES, () -> AetherIIItems.GRAVITITE_GLOVES.get().getDefaultInstance()),
+
+                Map.entry(AetherIIItems.GRAVITITE_BOOTS, () -> Items.NETHERITE_BOOTS.getDefaultInstance()),
+                Map.entry(AetherIIItems.GRAVITITE_LEGGINGS, () -> Items.NETHERITE_LEGGINGS.getDefaultInstance()),
+                Map.entry(AetherIIItems.GRAVITITE_CHESTPLATE, () -> Items.NETHERITE_CHESTPLATE.getDefaultInstance()),
+                Map.entry(AetherIIItems.GRAVITITE_HELMET, () -> Items.NETHERITE_HELMET.getDefaultInstance())
+//                Map.entry(AetherIIItems.GRAVITITE_GLOVES, () -> AetherIIItems.GRAVITITE_GLOVES.get().getDefaultInstance())
         );
-
 
         public static final Set<Stats> TIER_1 = Set.of(
                 new Stats(DEFAULT, new Charms(), new UpgradeInfo(
@@ -287,6 +318,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                 new Stats(ARMOR, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.ONE)),  new UpgradeInfo(
                         (oldStack, newStack, newTier) -> {
                             newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
+                            upgradeAttributes(oldStack, newStack);
                             upgradeCharms(oldStack, newStack, newTier);
                             newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
                         },
@@ -370,6 +402,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                 new Stats(ARKENIUM_ARMOR, new Charms(new Charms.CharmHolder(Charms.Type.ARMOR, Charms.Tier.TWO)),  new UpgradeInfo(
                         (oldStack, newStack, newTier) -> {
                             newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 200);
+                            upgradeAttributes(oldStack, newStack);
                             upgradeCharms(oldStack, newStack, newTier);
                             newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
                         },
@@ -383,16 +416,33 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                         }))
         );
 
+        public static ItemStack stackWithAddedStats(Item item, ItemAttributeModifiers.Entry... entries) {
+            ItemStack stack = item.getDefaultInstance();
+            ItemAttributeModifiers oldModifiers = stack.getAttributeModifiers();
+            ItemAttributeModifiers newModifiers = ItemAttributeModifiers.EMPTY;
+            for (ItemAttributeModifiers.Entry oldEntry : oldModifiers.modifiers()) {
+                ItemAttributeModifiers.Entry newEntry = oldEntry;
+                for (ItemAttributeModifiers.Entry entry : entries) {
+                    if (oldEntry.matches(entry.attribute(), entry.modifier().id())) {
+                        newEntry = entry;
+                    }
+                }
+                newModifiers = newModifiers.withModifierAdded(newEntry.attribute(), newEntry.modifier(), newEntry.slot());
+            }
+            stack.set(DataComponents.ATTRIBUTE_MODIFIERS, newModifiers);
+            return stack;
+        }
+
         private static void upgradeToolTier(ItemStack oldStack, ItemStack newStack) {
-            Item upgradeReference = null;
-            for (Map.Entry<Supplier<? extends Item>, Supplier<? extends Item>> entry : UPGRADE_REFERENCE.entrySet()) {
+            ItemStack upgradeReference = null;
+            for (Map.Entry<Supplier<? extends Item>, Supplier<ItemStack>> entry : UPGRADE_REFERENCE.entrySet()) {
                 if (entry.getKey().get() == oldStack.getItem()) {
                     upgradeReference = entry.getValue().get();
                     break;
                 }
             }
             if (upgradeReference != null) {
-                Tool tool = upgradeReference.getDefaultInstance().get(DataComponents.TOOL);
+                Tool tool = upgradeReference.get(DataComponents.TOOL);
                 if (tool != null) {
                     newStack.set(DataComponents.TOOL, tool);
                 }
@@ -400,15 +450,15 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
         }
 
         private static void upgradeAttributes(ItemStack oldStack, ItemStack newStack) {
-            Item upgradeReference = null;
-            for (Map.Entry<Supplier<? extends Item>, Supplier<? extends Item>> entry : UPGRADE_REFERENCE.entrySet()) {
+            ItemStack upgradeReference = null;
+            for (Map.Entry<Supplier<? extends Item>, Supplier<ItemStack>> entry : UPGRADE_REFERENCE.entrySet()) {
                 if (entry.getKey().get() == oldStack.getItem()) {
                     upgradeReference = entry.getValue().get();
                     break;
                 }
             }
             if (upgradeReference != null) {
-                ItemAttributeModifiers modifiers = upgradeReference.getDefaultInstance().get(DataComponents.ATTRIBUTE_MODIFIERS);
+                ItemAttributeModifiers modifiers = upgradeReference.get(DataComponents.ATTRIBUTE_MODIFIERS);
                 if (modifiers != null) {
                     newStack.set(DataComponents.ATTRIBUTE_MODIFIERS, modifiers);
                 }
