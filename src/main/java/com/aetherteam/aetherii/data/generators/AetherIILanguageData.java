@@ -1470,6 +1470,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     
         this.addBestiaryDescription(AetherIIEntityTypes.MOA.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.SKYROOT_LIZARD.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.GLITTERWING.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.SHROUDWING.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), loremIpsum);
