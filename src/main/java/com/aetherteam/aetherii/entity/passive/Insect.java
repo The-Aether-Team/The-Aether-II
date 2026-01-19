@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.entity.passive;
 
-import com.aetherteam.aetherii.entity.ai.controller.FlyingMoveControl;
+import com.aetherteam.aetherii.entity.ai.controller.InsectMoveControl;
 import com.aetherteam.aetherii.entity.ai.goal.FleeRainGoal;
 import com.aetherteam.aetherii.entity.ai.goal.FlyingLookGoal;
 import com.aetherteam.aetherii.entity.ai.navigator.InsectPathNavigation;
@@ -35,7 +35,7 @@ public class Insect extends PathfinderMob {
 
     public Insect(EntityType<? extends Insect> entityType, Level level) {
         super(entityType, level);
-        this.moveControl = new FlyingMoveControl(this);
+        this.moveControl = new InsectMoveControl(this);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class Insect extends PathfinderMob {
 
     @Override
     public float getWalkTargetValue(BlockPos pos, LevelReader level) {
-        return level.getRawBrightness(pos, 0) - 8;
+        return level.getPathfindingCostFromLightLevels(pos);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class Insect extends PathfinderMob {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, Player.class, 6.0F, 1.0, 1.1, livingEntity -> {
-            return !livingEntity.isShiftKeyDown() && EntitySelector.NO_SPECTATORS.test(livingEntity);
+            return !livingEntity.isShiftKeyDown() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingEntity);
         }) {
             @Override
             public void start() {
@@ -178,11 +178,7 @@ public class Insect extends PathfinderMob {
 
         @Override
         public void start() {
-            if (this.insect.isInWaterOrRain()) {
-                this.checkRainAndFly();
-            } else {
-                this.randomFly();
-            }
+            this.randomFly();
         }
 
         private void randomFly() {
@@ -190,14 +186,6 @@ public class Insect extends PathfinderMob {
             double d0 = this.insect.getX() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
             double d1 = this.insect.getY() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
             double d2 = this.insect.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
-            this.insect.getNavigation().moveTo(d0, d1, d2, 1.0);
-        }
-
-        private void checkRainAndFly() {
-            RandomSource random = this.insect.getRandom();
-            double d0 = this.insect.getX() + (random.nextFloat() * 2.0F - 1.0F) * 32.0F;
-            double d1 = this.insect.getY() + (random.nextFloat() * 2.0F - 1.0F) * 32.0F;
-            double d2 = this.insect.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 32.0F;
             this.insect.getNavigation().moveTo(d0, d1, d2, 1.0);
         }
 
