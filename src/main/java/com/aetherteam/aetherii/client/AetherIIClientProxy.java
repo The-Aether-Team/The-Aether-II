@@ -40,6 +40,12 @@ public class AetherIIClientProxy {
         Minecraft.getInstance().getSoundManager().stop(soundEvent.location(), source);
     }
 
+    public static void stopOtherMusicPlayerSound(SoundSource source) {
+        SoundEngine soundEngine = ((SoundManagerAccessor) Minecraft.getInstance().getSoundManager()).aether_ii$getSoundEngine();
+        Map<SoundInstance, ChannelAccess.ChannelHandle> soundInstances = ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel();
+        soundInstances.keySet().stream().filter((soundInstance) -> soundInstance instanceof MusicPlayerSoundInstance).map(SoundInstance::getLocation).forEach(location -> Minecraft.getInstance().getSoundManager().stop(location, source));
+    }
+
     public static void sendClientPassengerMessage() {
         Component component = Component.translatable("aether_ii.message.passenger.onboard", AetherIIKeyMappings.ALLOW_DISMOUNTING_PASSENGER.getTranslatedKeyMessage(), Minecraft.getInstance().options.keyUse.getTranslatedKeyMessage());
         Minecraft.getInstance().gui.setOverlayMessage(component, false);

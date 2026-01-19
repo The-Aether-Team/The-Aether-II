@@ -85,6 +85,7 @@ public class MusicPlayerItem extends Item {
                 double d3 = pos.z - player.getZ();
                 double d4 = d1 * d1 + d2 * d2 + d3 * d3;
                 if (d4 <= d0) {
+                    AetherIIClientProxy.stopOtherMusicPlayerSound(category);
                     AetherIIClientProxy.playSoundEvent(sound, category, pos.x(), pos.y(), pos.z(), volume, pitch, i);
                     return InteractionResult.SUCCESS;
                 }
