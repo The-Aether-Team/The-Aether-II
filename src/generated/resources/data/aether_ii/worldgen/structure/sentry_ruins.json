@@ -1,6 +1,6 @@
 {
   "type": "aether_ii:sentry_ruins",
-  "above_bottom": 32,
+  "above_bottom": 64,
   "below_top": 24,
   "biomes": "#aether_ii:has_structure/sentry_ruins",
   "max_rooms": 6,

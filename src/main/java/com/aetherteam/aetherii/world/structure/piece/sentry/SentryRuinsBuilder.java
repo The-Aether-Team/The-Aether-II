@@ -13,7 +13,6 @@ import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.NoiseColumn;
-import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -23,7 +22,6 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
 
 import javax.annotation.Nullable;
@@ -94,15 +92,9 @@ public class SentryRuinsBuilder {
         this.maxSize = Math.max(3, maxSize);
     }
 
-    public void initializeDungeon(BlockPos startPos, Structure.GenerationContext genContext, StructurePiecesBuilder builder) {
+    public void initializeDungeon(BlockPos startPos, Rotation rotation, Structure.GenerationContext genContext, StructurePiecesBuilder builder) {
         ROOM_OPTIONS = ROOM_OPTIONS_BUILDER.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, (e) -> e.getValue().build()));
 
-        StructureTemplate bossTemplate = this.context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/boss_room"));
-
-        Rotation rotation = getBossRoomRotation(startPos, startPos.offset(bossTemplate.getSize()));
-        if (rotation == null) { // The space may not be big enough for multiple rooms. If so, stop trying.
-            return;
-        }
         SentryRuinsPiece bossRoom = this.chooseRoom("boss_room", startPos, rotation, this.processors.bossSettings());
         Direction direction = bossRoom.getOrientation();
         if (direction != null) {
@@ -118,11 +110,12 @@ public class SentryRuinsBuilder {
             ChunkPos chunkPos = genContext.chunkPos();
 
             for (int i = 2; i < this.maxSize - 1; ++i) {
-                this.propagateRooms(defaultRoom, chunkPos, false);
+                this.propagateRooms(defaultRoom, chunkPos, false, 0);
             }
 
-            this.propagateRooms(defaultRoom, chunkPos, true);
-            this.buildSurfaceStaircase(genContext.heightAccessor(), genContext.chunkGenerator(), genContext.randomState(), 6);
+            if (this.propagateRooms(defaultRoom, chunkPos, true, 0)) {
+                this.buildSurfaceStaircase(genContext.heightAccessor(), genContext.chunkGenerator(), genContext.randomState(), 6);
+            }
 
             this.populatePiecesBuilder(builder);
         }
@@ -136,7 +129,7 @@ public class SentryRuinsBuilder {
      * @param placeLobby  Whether to place a lobby or a chest room, as a {@link Boolean}.
      * @return Whether the new piece was successfully placed, as a {@link Boolean}.
      */
-    private boolean propagateRooms(StructurePiece currentNode, ChunkPos chunkPos, boolean placeLobby) {
+    private boolean propagateRooms(StructurePiece currentNode, ChunkPos chunkPos, boolean placeLobby, int iteration) {
         Rotation rotation = currentNode.getRotation();
         List<Rotation> rotations = new ArrayList<>(3);
         rotations.add(rotation.getRotated(Rotation.COUNTERCLOCKWISE_90));
@@ -149,7 +142,7 @@ public class SentryRuinsBuilder {
             rotation = rotations.remove(this.random.nextInt(i));
             Direction direction = rotation.rotate(Direction.SOUTH);
             if (this.hasConnection(currentNode, direction)) {
-                if (propagateRooms(this.edges.get(currentNode).get(direction).end, chunkPos, placeLobby)) {
+                if (propagateRooms(this.edges.get(currentNode).get(direction).end, chunkPos, placeLobby, iteration + 1)) {
                     return true;
                 }
             } else {
@@ -160,7 +153,8 @@ public class SentryRuinsBuilder {
                 SentryRuinsPiece room = this.chooseRoom(roomName, pos, rotation, this.processors.roomSettings());
                 StructurePiece collisionPiece = StructurePiece.findCollisionPiece(this.nodes, room.getBoundingBox());
 
-                if (this.isCloseToCenter(chunkPos, room.templatePosition()) && this.isCoveredAtPos(room.getBoundingBox())) {
+                if ((this.isCloseToCenter(chunkPos, room.templatePosition()) && isCoveredAtPos(room.getBoundingBox(), this.context.chunkGenerator(), this.context.heightAccessor(), this.context.randomState()))
+                        || (iteration == this.nodes.size() - 2 && placeLobby)) {
                     if (collisionPiece == null) {
                         new Connection(currentNode, room, hallway, direction);
                         this.nodes.add(room);
@@ -283,10 +277,7 @@ public class SentryRuinsBuilder {
      * @param room The {@link BoundingBox} of the room.
      * @return Whether the room is covered, as a {@link Boolean}.
      */
-    private boolean isCoveredAtPos(BoundingBox room) {
-        ChunkGenerator chunkGenerator = this.context.chunkGenerator();
-        LevelHeightAccessor heightAccessor = this.context.heightAccessor();
-        RandomState randomState = this.context.randomState();
+    public static boolean isCoveredAtPos(BoundingBox room, ChunkGenerator chunkGenerator, LevelHeightAccessor heightAccessor, RandomState randomState) {
         int minX = room.minX() - 1;
         int minZ = room.minZ() - 1;
         int maxX = room.maxX() + 1;
@@ -303,31 +294,6 @@ public class SentryRuinsBuilder {
     }
 
     /**
-     * Find a viable direction for the boss room to face.
-     *
-     * @param minPos The starting corner {@link BlockPos} for the boss room.
-     * @param maxPos The ending corner {@link BlockPos} for the boss room.
-     * @return A viable {@link Rotation} direction.
-     */
-    @Nullable
-    private Rotation getBossRoomRotation(BlockPos minPos, BlockPos maxPos) {
-        StructureTemplate template = this.context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/rooms/lounge"));
-        RandomSource random = this.context.random();
-        BoundingBox bossBox = new BoundingBox(minPos.getX(), minPos.getY(), minPos.getZ(), maxPos.getX(), maxPos.getY(), maxPos.getZ());
-
-        for (Rotation rotation : Rotation.getShuffled(random)) {
-            Direction direction = rotation.rotate(Direction.SOUTH);
-            BlockPos.MutableBlockPos neighbor = BlockLogicUtil.tunnelFromEvenSquareRoom(bossBox, direction, this.nodeWidth).mutable();
-            neighbor = neighbor.move(direction.getStepX() * (this.edgeLength + bossBox.getXSpan()), 0, direction.getStepZ() * (this.edgeLength + bossBox.getZSpan()));
-            if (isCoveredAtPos(template.getBoundingBox(neighbor, rotation, BlockPos.ZERO, Mirror.NONE))) {
-                return rotation;
-            }
-        }
-
-        return null; // Returns null if there isn't a viable direction for the boss room.
-    }
-
-    /**
      * Iterates through an array of noise columns and checks if any of them have air in the range specified.
      *
      * @param columns The {@link NoiseColumn NoiseColumn[]} array to check.
@@ -335,7 +301,7 @@ public class SentryRuinsBuilder {
      * @param maxY    The maximum y {@link Integer} for the range.
      * @return If there is no air in the range, as a {@link Boolean}.
      */
-    private static boolean isSolidInColumns(NoiseColumn[] columns, int minY, int maxY) {
+    public static boolean isSolidInColumns(NoiseColumn[] columns, int minY, int maxY) {
         for (NoiseColumn column : columns) {
             for (int y = minY; y <= maxY; ++y) {
                 if (column.getBlock(y).isAir() || column.getBlock(y).is(AetherIITags.Blocks.NON_SENTRY_RUINS_SPAWNABLE)) {

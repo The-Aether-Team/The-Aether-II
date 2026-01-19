@@ -80,16 +80,23 @@ public abstract class AetherTemplateStructurePiece extends TemplateStructurePiec
 
     public static StructurePlaceSettings makeSettingsWithPivot(StructurePlaceSettings settings, StructureTemplateManager templateManager, ResourceLocation name, Rotation rotation) {
         StructureTemplate template = templateManager.getOrCreate(name);
-        Vec3i size = template.getSize();
+        TransformInfo info = getTransformInfo(template, rotation);
+        settings.setRotationPivot(info.pivot());
+        settings.setRotation(info.rotation());
+        settings.setMirror(info.mirror());
+        return settings;
+    }
+
+    public static TransformInfo getTransformInfo(StructureTemplate template, Rotation rotation) {
+        Vec3i size = template.getSize(rotation);
         int xOffset = ((size.getX()) >> 1);
         int zOffset = ((size.getZ()) >> 1);
         BlockPos pivot = new BlockPos(xOffset, 0, zOffset);
-        settings.setRotationPivot(pivot);
-        settings.setRotation(rotation);
-        settings.setMirror(Mirror.NONE);
-        return settings;
+        return new TransformInfo(Mirror.NONE, rotation, pivot);
     }
 
     @Override
     protected void handleDataMarker(String name, BlockPos pos, ServerLevelAccessor level, RandomSource random, BoundingBox box) { }
+
+    public record TransformInfo(Mirror mirror, Rotation rotation, BlockPos pivot) { }
 }
