@@ -4,11 +4,11 @@
       {
         "condition": {
           "type": "minecraft:biome",
-          "biomes": "#aether_ii:highfields"
+          "biomes": "#aether_ii:arctic"
         },
         "priority": 1
       }
     ]
   },
-  "texture": "aether_ii:textures/entity/mobs/shroudwing/fire_beetle.png"
+  "texture": "aether_ii:textures/entity/mobs/shroudwing/arctic.png"
 }

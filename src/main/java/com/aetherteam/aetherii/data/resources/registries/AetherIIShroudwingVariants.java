@@ -22,6 +22,9 @@ public class AetherIIShroudwingVariants {
     public static final ResourceKey<ShroudwingVariant> SHROUDWING = createKey("shroudwing");
     public static final ResourceKey<ShroudwingVariant> SCARAB = createKey("scarab");
     public static final ResourceKey<ShroudwingVariant> FIRE_BEETLE = createKey("fire_beetle");
+    public static final ResourceKey<ShroudwingVariant> ORE = createKey("ore");
+    public static final ResourceKey<ShroudwingVariant> ARCTIC = createKey("arctic");
+    public static final ResourceKey<ShroudwingVariant> MOSS = createKey("moss");
 
     private static ResourceKey<ShroudwingVariant> createKey(String name) {
         return ResourceKey.create(AetherIIShroudwingVariants.SHROUDWING_VARIANT_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -30,7 +33,10 @@ public class AetherIIShroudwingVariants {
     public static void bootstrap(BootstrapContext<ShroudwingVariant> context) {
         register(context, SHROUDWING, SpawnPrioritySelectors.fallback(1));
         register(context, SCARAB, biomes(context, AetherIITags.Biomes.HIGHLANDS));
-        register(context, FIRE_BEETLE, biomes(context, AetherIITags.Biomes.HIGHLANDS));
+        register(context, FIRE_BEETLE, biomes(context, AetherIITags.Biomes.HIGHFIELDS));
+        register(context, ORE, biomes(context, AetherIITags.Biomes.HIGHLANDS));
+        register(context, ARCTIC, biomes(context, AetherIITags.Biomes.ARCTIC));
+        register(context, MOSS, biomes(context, AetherIITags.Biomes.HIGHLANDS));
     }
 
     private static PriorityProvider.Selector<SpawnContext, SpawnCondition> biomes(BootstrapContext<ShroudwingVariant> context, TagKey<Biome> biomeTag) {
