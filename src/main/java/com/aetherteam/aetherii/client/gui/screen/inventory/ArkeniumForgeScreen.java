@@ -33,6 +33,7 @@ import org.joml.Matrix3x2fStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMenu> {
     private static final ResourceLocation TEXT_FIELD_SPRITE = ResourceLocation.withDefaultNamespace("container/anvil/text_field");
@@ -184,6 +185,21 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                 if (stats != null) {
                     stats.upgrades().upgradeFunction().updateComponents(displayStack.copy(), displayStack, this.selectedTier);
                     displayStack.set(AetherIIDataComponents.REINFORCEMENT_TIER, this.selectedTier);
+                    Charms charms = displayStack.get(AetherIIDataComponents.CHARMS);
+                    if (charms != null) {
+                        List<Charms.CharmHolder> charmHolders = charms.charmHolders();
+                        for (Slot slot : this.getMenu().slots) {
+                            if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
+                                if (forgeCharmSlot.getCharmIndex() < charmHolders.size()) {
+                                    Charms.CharmHolder charmHolder = charmHolders.get(forgeCharmSlot.getCharmIndex());
+                                    if (!forgeCharmSlot.hasItem() && (!forgeCharmSlot.isActive() || charmHolder.getTier().getValue() != forgeCharmSlot.getCharmTier().getValue())) {
+                                        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_" + charmHolder.getType().name().toLowerCase(Locale.ROOT) + "_charm_" + charmHolder.getTier().getValue());
+                                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, i + slot.x, j + slot.y, 16, 16);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
             if (this.nameDifferent()) {
