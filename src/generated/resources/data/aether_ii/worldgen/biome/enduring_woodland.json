@@ -124,9 +124,9 @@
     "aether_ii:aether_ambient": [
       {
         "type": "aether_ii:glitterwing",
-        "maxCount": 4,
+        "maxCount": 2,
         "minCount": 1,
-        "weight": 2
+        "weight": 1
       },
       {
         "type": "aether_ii:shroudwing",
