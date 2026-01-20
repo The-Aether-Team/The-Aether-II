@@ -1367,6 +1367,17 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.zephyr.shoot"
   },
+  "item.accessory.equip_generic": {
+    "sounds": [
+      "item/armor/equip_chain1",
+      "item/armor/equip_chain2",
+      "item/armor/equip_chain3",
+      "item/armor/equip_chain4",
+      "item/armor/equip_chain5",
+      "item/armor/equip_chain6"
+    ],
+    "subtitle": "subtitles.aether_ii.item.accessory.equip_generic"
+  },
   "item.ambrosium_shard.use": {
     "sounds": [
       "block/amethyst/shimmer"

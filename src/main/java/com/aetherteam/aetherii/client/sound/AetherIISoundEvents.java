@@ -76,6 +76,8 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_SENTRY = register("item.armor.sentry");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_NEPTUNE = register("item.armor.neptune");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ACCESSORY_EQUIP_GENERIC = register("item.accessory.equip_generic");
+
     // Player
     public static final DeferredHolder<SoundEvent, SoundEvent> PLAYER_SLASH_DAMAGE_CORRECT = register("entity.player.damage.slash.correct");
     public static final DeferredHolder<SoundEvent, SoundEvent> PLAYER_IMPACT_DAMAGE_CORRECT = register("entity.player.damage.impact.correct");

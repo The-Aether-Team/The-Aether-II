@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.inventory.container;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.equipment.accessories.AccessoryItem;
 import com.mojang.serialization.MapCodec;
@@ -8,9 +9,11 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -77,14 +80,20 @@ public class AccessoryContainer extends SimpleContainer {
     }
 
     public enum SlotType {
-        RELIC(0, 1),
-        HANDWEAR(2),
-        ACCESSORY(3);
+        RELIC(AetherIITags.Items.EQUIPMENT_RELICS, 0, 1),
+        HANDWEAR(AetherIITags.Items.EQUIPMENT_HANDWEAR, 2),
+        ACCESSORY(AetherIITags.Items.EQUIPMENT_ACCESSORIES, 3);
 
+        private final TagKey<Item> accessoryTag;
         private final int[] index;
 
-        SlotType(int... index) {
+        SlotType(TagKey<Item> accessoryTag, int... index) {
+            this.accessoryTag = accessoryTag;
             this.index = index;
+        }
+
+        public TagKey<Item> getAccessoryTag() {
+            return this.accessoryTag;
         }
 
         public int[] getIndex() {

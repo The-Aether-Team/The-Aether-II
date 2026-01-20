@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.item.equipment.accessories;
 
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.components.Charms;
@@ -7,8 +8,10 @@ import com.aetherteam.aetherii.item.equipment.charms.CharmItem;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,7 +24,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 
 import java.util.*;
@@ -68,7 +73,7 @@ public class AccessoryItem extends Item {
     }
 
     public void onEquip(ItemStack stack, LivingEntity wearer) {
-
+        this.playEquipSound(wearer, true);
     }
 
     public void onUnequip(ItemStack stack, LivingEntity wearer) {
@@ -78,6 +83,24 @@ public class AccessoryItem extends Item {
             if (attribute != null && attribute.hasModifier(modifier.id())) {
                 attribute.removeModifier(modifier.id());
             }
+        }
+        this.playEquipSound(wearer, false);
+    }
+
+    public void playEquipSound(LivingEntity wearer, boolean equip) {
+        if (!wearer.level().isClientSide() && !wearer.isSpectator() && !wearer.isSilent()) {
+            wearer.level().playSeededSound(
+                    null,
+                    wearer.getX(),
+                    wearer.getY(),
+                    wearer.getZ(),
+                    this.getEquipSound(),
+                    wearer.getSoundSource(),
+                    1.0F,
+                    1.0F,
+                    wearer.getRandom().nextLong()
+            );
+            wearer.gameEvent(equip ? GameEvent.EQUIP : GameEvent.UNEQUIP);
         }
     }
 
@@ -91,6 +114,10 @@ public class AccessoryItem extends Item {
 
     public AccessoryContainer.SlotType getSlotType() {
         return this.slotType;
+    }
+
+    public Holder<SoundEvent> getEquipSound() {
+        return AetherIISoundEvents.ITEM_ACCESSORY_EQUIP_GENERIC;
     }
 
     public Set<ConditionalAttribute> getBaseAttributes() {

@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -18,13 +19,13 @@ public class GlovesItem extends AccessoryItem {
 
     private final double maxEndurance;
     private final double enduranceRecovery;
-    protected ResourceLocation glovesTexture;
+    private final Holder<SoundEvent> equipSound;
 
     public GlovesItem(ArmorMaterial material, double maxEndurance, double enduranceRecovery, Properties properties) {
         super(properties.durability(13 * material.durability()), AccessoryContainer.SlotType.HANDWEAR);
         this.maxEndurance = maxEndurance;
         this.enduranceRecovery = enduranceRecovery;
-        this.setRenderTexture(material.assetId().location().getNamespace(), material.assetId().location().getPath());
+        this.equipSound = material.equipSound();
     }
 
     @Override
@@ -35,20 +36,17 @@ public class GlovesItem extends AccessoryItem {
         return attributes;
     }
 
-    public void setRenderTexture(String modId, String registryName) {
-        this.glovesTexture = ResourceLocation.fromNamespaceAndPath(modId, "textures/entity/equipment/humanoid_gloves/" + registryName + ".png");
-    }
-
-    public ResourceLocation getGlovesTexture() {
-        return this.glovesTexture;
-    }
-
     public double getMaxEndurance() {
         return this.maxEndurance;
     }
 
     public double getEnduranceRecovery() {
         return this.enduranceRecovery;
+    }
+
+    @Override
+    public Holder<SoundEvent> getEquipSound() {
+        return this.equipSound;
     }
 
     @Override

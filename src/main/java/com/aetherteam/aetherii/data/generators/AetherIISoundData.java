@@ -262,6 +262,17 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.aether_ii.item.armor.equip_neptune")
         );
 
+        this.add(AetherIISoundEvents.ITEM_ACCESSORY_EQUIP_GENERIC,
+                definition().with(
+                        sound("minecraft:item/armor/equip_chain1"),
+                        sound("minecraft:item/armor/equip_chain2"),
+                        sound("minecraft:item/armor/equip_chain3"),
+                        sound("minecraft:item/armor/equip_chain4"),
+                        sound("minecraft:item/armor/equip_chain5"),
+                        sound("minecraft:item/armor/equip_chain6")
+                ).subtitle("subtitles.aether_ii.item.accessory.equip_generic")
+        );
+
         this.add(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_FILL,
                 definition().with(
                         sound("minecraft:item/bucket/fill1"),

@@ -1678,6 +1678,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("item", "armor.equip_sentry", "Sentry armor clanks");
         this.addSubtitle("item", "armor.equip_neptune", "Neptune armor clinks");
 
+        this.addSubtitle("item", "accessory.equip_generic", "Accessory equips");
+
         // Player
         this.addSubtitle("entity", "player.damage.slash.correct", "Strong slashing attack");
         this.addSubtitle("entity", "player.damage.impact.correct", "Strong impacting attack");
