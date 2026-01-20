@@ -19,7 +19,7 @@ public record NoiseLakeConfiguration(DensityFunction lakeNoise, DensityFunction 
             Codec.DOUBLE.fieldOf("shore_start_value").forGetter(NoiseLakeConfiguration::shoreStartValue),
             BlockStateProvider.CODEC.fieldOf("shore_block").forGetter(NoiseLakeConfiguration::shoreBlock),
             DensityFunction.HOLDER_HELPER_CODEC.fieldOf("shore_noise").forGetter(NoiseLakeConfiguration::shoreNoise),
-            BlockStateProvider.CODEC.fieldOf("ice_block").forGetter(NoiseLakeConfiguration::shoreBlock),
+            BlockStateProvider.CODEC.fieldOf("ice_block").forGetter(NoiseLakeConfiguration::iceBlock),
             Codec.BOOL.fieldOf("frozen").orElse(false).forGetter(NoiseLakeConfiguration::frozen)
     ).apply(instance, NoiseLakeConfiguration::new));
 }

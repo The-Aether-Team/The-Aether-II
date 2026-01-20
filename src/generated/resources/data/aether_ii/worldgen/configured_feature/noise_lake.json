@@ -8,7 +8,7 @@
     "ice_block": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "aether_ii:quicksoil"
+        "Name": "minecraft:air"
       }
     },
     "lake_barrier_noise": "aether_ii:highlands/lakes/lake_barrier",
