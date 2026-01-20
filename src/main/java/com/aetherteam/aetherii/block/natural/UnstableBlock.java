@@ -32,7 +32,7 @@ public class UnstableBlock extends Block {
 
     @Override
     protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
-        if (neighborState.is(Blocks.WATER)) {
+        if (neighborState.is(Blocks.AIR)) {
             scheduledTickAccess.scheduleTick(pos, this, 1);
         }
         return super.updateShape(state, level, scheduledTickAccess, pos, direction, neighborPos, neighborState, random);

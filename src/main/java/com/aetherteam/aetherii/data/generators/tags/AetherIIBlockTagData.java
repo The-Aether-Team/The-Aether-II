@@ -82,6 +82,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                         AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS,
                         AetherIITags.Blocks.FERROSITE
                 );
+        this.tag(AetherIITags.Blocks.ARCTIC_ICE).add(
+                AetherIIBlocks.ARCTIC_ICE.get(),
+                AetherIIBlocks.FRAGILE_ARCTIC_ICE.get(),
+                AetherIIBlocks.ARCTIC_PACKED_ICE.get());
         this.tag(AetherIITags.Blocks.LEAVES).add(
                 AetherIIBlocks.SKYROOT_LEAVES.get(),
                 AetherIIBlocks.SKYPLANE_LEAVES.get(),
