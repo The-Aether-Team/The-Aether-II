@@ -1391,6 +1391,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_ambrosium_shard", has(AetherIIItems.AMBROSIUM_SHARD.get()))
                 .unlockedBy("has_quartz", has(Items.QUARTZ))
                 .save(this.output, this.name("aether_glowstone_dust"));
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.MUSIC_PLAYER.get())
+                .define('A', AetherIIItems.GOLDEN_AMBER)
+                .define('F', AetherIIBlocks.FERROSITE.get())
+                .pattern(" AF")
+                .pattern("A F")
+                .pattern(" AF")
+                .unlockedBy("has_ferrosite", has(AetherIIBlocks.FERROSITE))
+                .save(this.output);
 
         this.smeltingOreRecipe(Items.QUARTZ, AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), 0.5F).group("quartz").save(this.output, this.name("quartz_from_smelting_holystone_quartz_ore"));
         this.blastingOreRecipe(Items.QUARTZ, AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), 0.5F).group("quartz").save(this.output, this.name("quartz_from_blasting_holystone_quartz_ore"));
