@@ -97,7 +97,7 @@ public class ArkeniumTaluton extends Monster {
         private final ArkeniumTaluton taluton;
 
         public TalutonMeleeAttackGoal(ArkeniumTaluton taluton, double speedModifier, boolean followingTargetEvenIfNotSeen) {
-            super(taluton, speedModifier, followingTargetEvenIfNotSeen, 3, 20);
+            super(taluton, speedModifier, followingTargetEvenIfNotSeen, 3, 40);
             this.taluton = taluton;
         }
 
