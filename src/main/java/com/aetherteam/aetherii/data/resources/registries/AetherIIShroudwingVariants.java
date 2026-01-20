@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.entity.variant.ShroudwingVariant;
+import com.aetherteam.aetherii.entity.variant.spawning.RandomCheck;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
@@ -19,9 +20,9 @@ import java.util.Optional;
 public class AetherIIShroudwingVariants {
     public static final ResourceKey<Registry<ShroudwingVariant>> SHROUDWING_VARIANT_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "shroudwing_variant"));
 
-    public static final ResourceKey<ShroudwingVariant> SHROUDWING = createKey("shroudwing");
+    public static final ResourceKey<ShroudwingVariant> PURPLE = createKey("purple");
     public static final ResourceKey<ShroudwingVariant> SCARAB = createKey("scarab");
-    public static final ResourceKey<ShroudwingVariant> FIRE_BEETLE = createKey("fire_beetle");
+    public static final ResourceKey<ShroudwingVariant> FIRE = createKey("fire");
     public static final ResourceKey<ShroudwingVariant> ORE = createKey("ore");
     public static final ResourceKey<ShroudwingVariant> ARCTIC = createKey("arctic");
     public static final ResourceKey<ShroudwingVariant> MOSS = createKey("moss");
@@ -31,12 +32,16 @@ public class AetherIIShroudwingVariants {
     }
 
     public static void bootstrap(BootstrapContext<ShroudwingVariant> context) {
-        register(context, SHROUDWING, SpawnPrioritySelectors.fallback(1));
-        register(context, SCARAB, biomes(context, AetherIITags.Biomes.HIGHLANDS));
-        register(context, FIRE_BEETLE, biomes(context, AetherIITags.Biomes.HIGHFIELDS));
+        register(context, PURPLE, SpawnPrioritySelectors.fallback(1));
+        register(context, SCARAB, biomes(context, AetherIITags.Biomes.MAGNETIC));
+        register(context, FIRE, random(biomeCheck(context, AetherIITags.Biomes.HIGHFIELDS), 100, 50));
         register(context, ORE, biomes(context, AetherIITags.Biomes.HIGHLANDS));
         register(context, ARCTIC, biomes(context, AetherIITags.Biomes.ARCTIC));
-        register(context, MOSS, biomes(context, AetherIITags.Biomes.HIGHLANDS));
+        register(context, MOSS, random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 35), random(biomeCheck(context, AetherIITags.Biomes.MAGNETIC), 100, 35));
+    }
+
+    private static PriorityProvider.Selector<SpawnContext, SpawnCondition> random(SpawnCondition condition, int bound, int check) {
+        return new PriorityProvider.Selector<>(new RandomCheck(condition, bound, check), 1);
     }
 
     private static PriorityProvider.Selector<SpawnContext, SpawnCondition> biomes(BootstrapContext<ShroudwingVariant> context, TagKey<Biome> biomeTag) {

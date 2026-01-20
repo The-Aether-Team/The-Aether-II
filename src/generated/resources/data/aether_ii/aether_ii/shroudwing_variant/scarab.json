@@ -4,7 +4,7 @@
       {
         "condition": {
           "type": "minecraft:biome",
-          "biomes": "#aether_ii:highlands"
+          "biomes": "#aether_ii:magnetic"
         },
         "priority": 1
       }
