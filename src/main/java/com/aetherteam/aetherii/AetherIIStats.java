@@ -145,24 +145,24 @@ public class AetherIIStats {
             .build();
     public static final ImmutableMap<Holder<Attribute>, Double> MOA = ImmutableMap.<Holder<Attribute>, Double>builder() //todo
             .put(Attributes.MAX_HEALTH, 35.0)
-            .put(AetherIIAttributes.SLASH_RESISTANCE, 0.0)
+            .put(AetherIIAttributes.SLASH_RESISTANCE, -1.0)
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 0.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, 0.0)
             .put(AetherIIAttributes.TOXIN_EFFECT_RESISTANCE, 1.0)
             .build();
-    public static final ImmutableMap<Holder<Attribute>, Double> SKYROOT_LIZARD = ImmutableMap.<Holder<Attribute>, Double>builder() //todo
+    public static final ImmutableMap<Holder<Attribute>, Double> SKYROOT_LIZARD = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 4.0)
             .build();
     public static final ImmutableMap<Holder<Attribute>, Double> AECHOR_PLANT = ImmutableMap.<Holder<Attribute>, Double>builder() //todo
             .put(Attributes.MAX_HEALTH, 15.0)
-            .put(AetherIIAttributes.SLASH_RESISTANCE, 0.0)
+            .put(AetherIIAttributes.SLASH_RESISTANCE, -1.0)
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 0.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, 0.0)
             .put(AetherIIAttributes.TOXIN_EFFECT_RESISTANCE, 1.0)
             .build();
     public static final ImmutableMap<Holder<Attribute>, Double> CARRION_SPROUT = ImmutableMap.<Holder<Attribute>, Double>builder() //todo
             .put(Attributes.MAX_HEALTH, 8.0)
-            .put(AetherIIAttributes.SLASH_RESISTANCE, 0.0)
+            .put(AetherIIAttributes.SLASH_RESISTANCE, -1.0)
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 0.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, 0.0)
             .build();
@@ -170,17 +170,17 @@ public class AetherIIStats {
             .put(Attributes.MAX_HEALTH, 10.0)
             .put(AetherIIAttributes.SLASH_RESISTANCE, 0.0)
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 0.0)
-            .put(AetherIIAttributes.PIERCE_RESISTANCE, 0.0)
+            .put(AetherIIAttributes.PIERCE_RESISTANCE, -1.0)
             .build();
     public static final ImmutableMap<Holder<Attribute>, Double> TEMPEST = ImmutableMap.<Holder<Attribute>, Double>builder() //todo
             .put(Attributes.MAX_HEALTH, 30.0)
             .put(AetherIIAttributes.SLASH_RESISTANCE, 0.0)
-            .put(AetherIIAttributes.IMPACT_RESISTANCE, 0.0)
+            .put(AetherIIAttributes.IMPACT_RESISTANCE, -1.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, 0.0)
             .build();
     public static final ImmutableMap<Holder<Attribute>, Double> COCKATRICE = ImmutableMap.<Holder<Attribute>, Double>builder() //todo
             .put(Attributes.MAX_HEALTH, 25.0)
-            .put(AetherIIAttributes.SLASH_RESISTANCE, 0.0)
+            .put(AetherIIAttributes.SLASH_RESISTANCE, -1.0)
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 0.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, 0.0)
             .put(AetherIIAttributes.VENOM_EFFECT_RESISTANCE, 1.0)
@@ -194,7 +194,7 @@ public class AetherIIStats {
     public static final ImmutableMap<Holder<Attribute>, Double> SKEPHID = ImmutableMap.<Holder<Attribute>, Double>builder() //todo
             .put(Attributes.MAX_HEALTH, 10.0)
             .put(AetherIIAttributes.SLASH_RESISTANCE, 0.0)
-            .put(AetherIIAttributes.IMPACT_RESISTANCE, 0.0)
+            .put(AetherIIAttributes.IMPACT_RESISTANCE, -1.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, 0.0)
             .build();
     public static final ImmutableMap<Holder<Attribute>, Double> ARKENIUM_TALUTON = ImmutableMap.<Holder<Attribute>, Double>builder()
