@@ -1047,15 +1047,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Music Discs
         this.addItem(AetherIIItems.MUSIC_PLAYER, "Music Player");
-        this.addItem(AetherIIItems.COMPACT_DISC_AETHER_TUNE, "Compact Disc");
-        this.addItem(AetherIIItems.COMPACT_DISC_ASCENDING_DAWN, "Compact Disc");
-        this.addItem(AetherIIItems.COMPACT_DISC_AERWHALE, "Compact Disc");
-        this.addItem(AetherIIItems.COMPACT_DISC_APPROACHES, "Compact Disc");
-        this.addItem(AetherIIItems.COMPACT_DISC_DEMISE, "Compact Disc");
-        this.addItem(AetherIIItems.COMPACT_DISC_CHINCHILLA, "Compact Disc");
-        this.addItem(AetherIIItems.COMPACT_DISC_HIGH, "Compact Disc");
-        this.addItem(AetherIIItems.COMPACT_DISC_REVOLUTIONS, "Compact Disc");
-        this.addItem(AetherIIItems.COMPACT_DISC_CHASE, "Compact Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_AETHER_TUNE, "Engraved Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN, "Engraved Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_AERWHALE, "Engraved Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_APPROACHES, "Engraved Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_DEMISE, "Engraved Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_CHINCHILLA, "Engraved Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_HIGH, "Engraved Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS, "Engraved Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_CHASE, "Engraved Disc");
 
         // Spawn Eggs
         this.addSpawnEggItem(AetherIIItems.AERBUNNY_SPAWN_EGG);

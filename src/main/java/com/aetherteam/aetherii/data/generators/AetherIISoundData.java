@@ -316,31 +316,31 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.aether_ii.item.arkenium_canister.empty")
         );
 
-        this.add(AetherIISoundEvents.ITEM_COMPACT_DISC_AETHER_TUNE,
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_AETHER_TUNE,
                 definition().with(sound("aether_ii:item/records/aether_tune").stream())
         );
-        this.add(AetherIISoundEvents.ITEM_COMPACT_DISC_ASCENDING_DAWN,
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_ASCENDING_DAWN,
                 definition().with(sound("aether_ii:item/records/ascending_dawn").stream())
         );
-        this.add(AetherIISoundEvents.ITEM_COMPACT_DISC_AERWHALE,
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_AERWHALE,
                 definition().with(sound("aether_ii:item/records/aerwhale").stream())
         );
-        this.add(AetherIISoundEvents.ITEM_COMPACT_DISC_APPROACHES,
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_APPROACHES,
                 definition().with(sound("aether_ii:item/records/approaches").stream())
         );
-        this.add(AetherIISoundEvents.ITEM_COMPACT_DISC_DEMISE,
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_DEMISE,
                 definition().with(sound("aether_ii:item/records/demise").stream())
         );
-        this.add(AetherIISoundEvents.ITEM_COMPACT_DISC_CHINCHILLA,
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_CHINCHILLA,
                 definition().with(sound("aether_ii:item/records/chinchilla").stream())
         );
-        this.add(AetherIISoundEvents.ITEM_COMPACT_DISC_HIGH,
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_HIGH,
                 definition().with(sound("aether_ii:item/records/high").stream())
         );
-        this.add(AetherIISoundEvents.ITEM_COMPACT_DISC_REVOLUTIONS,
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_REVOLUTIONS,
                 definition().with(sound("aether_ii:item/records/revolutions").stream())
         );
-        this.add(AetherIISoundEvents.ITEM_COMPACT_DISC_CHASE,
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_CHASE,
                 definition().with(sound("aether_ii:item/records/chase").stream())
         );
     }

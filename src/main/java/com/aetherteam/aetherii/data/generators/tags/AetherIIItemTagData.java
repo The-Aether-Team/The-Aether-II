@@ -37,16 +37,16 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         }.run();
 
         // Aether
-        this.tag(AetherIITags.Items.COMPACT_DISCS).add(
-                AetherIIItems.COMPACT_DISC_AETHER_TUNE.get(),
-                AetherIIItems.COMPACT_DISC_ASCENDING_DAWN.get(),
-                AetherIIItems.COMPACT_DISC_AERWHALE.get(),
-                AetherIIItems.COMPACT_DISC_APPROACHES.get(),
-                AetherIIItems.COMPACT_DISC_DEMISE.get(),
-                AetherIIItems.COMPACT_DISC_CHINCHILLA.get(),
-                AetherIIItems.COMPACT_DISC_HIGH.get(),
-                AetherIIItems.COMPACT_DISC_REVOLUTIONS.get(),
-                AetherIIItems.COMPACT_DISC_CHASE.get());
+        this.tag(AetherIITags.Items.ENGRAVED_DISCS).add(
+                AetherIIItems.ENGRAVED_DISC_AETHER_TUNE.get(),
+                AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN.get(),
+                AetherIIItems.ENGRAVED_DISC_AERWHALE.get(),
+                AetherIIItems.ENGRAVED_DISC_APPROACHES.get(),
+                AetherIIItems.ENGRAVED_DISC_DEMISE.get(),
+                AetherIIItems.ENGRAVED_DISC_CHINCHILLA.get(),
+                AetherIIItems.ENGRAVED_DISC_HIGH.get(),
+                AetherIIItems.ENGRAVED_DISC_REVOLUTIONS.get(),
+                AetherIIItems.ENGRAVED_DISC_CHASE.get());
         this.tag(AetherIITags.Items.RODS_SKYROOT).add(AetherIIItems.SKYROOT_STICK.get());
         this.tag(AetherIITags.Items.GEMS_ZANITE).add(AetherIIItems.ZANITE_GEMSTONE.get());
         this.tag(AetherIITags.Items.PLATES_ARKENIUM).add(AetherIIItems.ARKENIUM_PLATES.get());

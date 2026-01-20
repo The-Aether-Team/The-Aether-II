@@ -247,15 +247,15 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         // Music Discs
         this.generateMusicPlayer(AetherIIItems.MUSIC_PLAYER.get());
 
-        this.generateMusicDisc(AetherIIItems.COMPACT_DISC_AETHER_TUNE.get());
-        this.generateMusicDisc(AetherIIItems.COMPACT_DISC_ASCENDING_DAWN.get());
-        this.generateMusicDisc(AetherIIItems.COMPACT_DISC_AERWHALE.get());
-        this.generateMusicDisc(AetherIIItems.COMPACT_DISC_APPROACHES.get());
-        this.generateMusicDisc(AetherIIItems.COMPACT_DISC_DEMISE.get());
-        this.generateMusicDisc(AetherIIItems.COMPACT_DISC_CHINCHILLA.get());
-        this.generateMusicDisc(AetherIIItems.COMPACT_DISC_HIGH.get());
-        this.generateMusicDisc(AetherIIItems.COMPACT_DISC_REVOLUTIONS.get());
-        this.generateMusicDisc(AetherIIItems.COMPACT_DISC_CHASE.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_AETHER_TUNE.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_AERWHALE.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_APPROACHES.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_DEMISE.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_CHINCHILLA.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_HIGH.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_CHASE.get());
 
         // Spawn Eggs
         this.generateFlatItem(AetherIIItems.FLYING_COW_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);

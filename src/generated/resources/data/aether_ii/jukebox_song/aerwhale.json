@@ -4,5 +4,5 @@
     "translate": "jukebox_song.aether_ii.aerwhale"
   },
   "length_in_seconds": 178.0,
-  "sound_event": "aether_ii:item.compact_disc.aerwhale"
+  "sound_event": "aether_ii:item.engraved_disc.aerwhale"
 }

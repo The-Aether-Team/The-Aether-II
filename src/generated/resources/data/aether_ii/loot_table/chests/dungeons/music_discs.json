@@ -6,39 +6,39 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:compact_disc_aether_tune"
+          "name": "aether_ii:engraved_disc_aether_tune"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:compact_disc_ascending_dawn"
+          "name": "aether_ii:engraved_disc_ascending_dawn"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:compact_disc_aerwhale"
+          "name": "aether_ii:engraved_disc_aerwhale"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:compact_disc_approaches"
+          "name": "aether_ii:engraved_disc_approaches"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:compact_disc_demise"
+          "name": "aether_ii:engraved_disc_demise"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:compact_disc_chinchilla"
+          "name": "aether_ii:engraved_disc_chinchilla"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:compact_disc_high"
+          "name": "aether_ii:engraved_disc_high"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:compact_disc_revolutions"
+          "name": "aether_ii:engraved_disc_revolutions"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:compact_disc_chase"
+          "name": "aether_ii:engraved_disc_chase"
         }
       ],
       "rolls": {

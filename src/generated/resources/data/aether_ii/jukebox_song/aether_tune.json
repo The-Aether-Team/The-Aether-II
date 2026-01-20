@@ -4,5 +4,5 @@
     "translate": "jukebox_song.aether_ii.aether_tune"
   },
   "length_in_seconds": 149.0,
-  "sound_event": "aether_ii:item.compact_disc.aether_tune"
+  "sound_event": "aether_ii:item.engraved_disc.aether_tune"
 }
