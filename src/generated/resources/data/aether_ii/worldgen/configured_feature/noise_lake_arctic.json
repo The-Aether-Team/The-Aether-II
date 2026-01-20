@@ -10,13 +10,14 @@
       "noise": {
         "amplitudes": [
           1.0,
-          0.5,
+          0.75,
+          0.0,
           0.0,
           0.0
         ],
         "firstOctave": -3
       },
-      "scale": 1.0,
+      "scale": 1.25,
       "seed": 123,
       "states": [
         {
@@ -27,6 +28,12 @@
         },
         {
           "Name": "aether_ii:arctic_ice"
+        },
+        {
+          "Name": "aether_ii:arctic_ice"
+        },
+        {
+          "Name": "aether_ii:fragile_arctic_ice"
         },
         {
           "Name": "aether_ii:fragile_arctic_ice"
