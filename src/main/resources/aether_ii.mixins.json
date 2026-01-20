@@ -52,7 +52,6 @@
     "client.EquipmentLayerRendererMixin",
     "client.HumanoidMobRendererMixin",
     "client.HumanoidModelMixin",
-    "client.PlayerItemInHandLayerMixin",
     "client.ItemInHandRendererMixin",
     "client.LayerRenderStateMixin",
     "client.LevelRendererMixin",
@@ -61,6 +60,7 @@
     "client.ModelBlockRendererMixin",
     "client.MultiPlayerGameModeMixin",
     "client.MusicManagerMixin",
+    "client.PlayerItemInHandLayerMixin",
     "client.PlayerRendererMixin",
     "client.accessor.BlockModelWrapperAccessor",
     "client.accessor.BossHealthOverlayAccessor",
@@ -81,6 +81,7 @@
     "client.accessor.SoundEngineAccessor",
     "client.accessor.SoundManagerAccessor",
     "client.accessor.WeatherEffectRendererAccessor",
+    "client.accessor.WeighedSoundEventsAccessor",
     "debug.DebugRendererMixin"
   ],
   "injectors": {

@@ -22,6 +22,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -46,6 +47,8 @@ import java.util.List;
 public class MixinHooks {
     @ApiStatus.Internal
     public static boolean RENDERING_ACCESSORY = false;
+    @ApiStatus.Internal
+    public static SoundInstance LAST_MUSIC = null;
 
     public static void shortswordSlashBehavior(Player player, Entity target, boolean canShortswordSlash) {
         if (canShortswordSlash) {

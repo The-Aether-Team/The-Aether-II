@@ -1,13 +1,19 @@
 package com.aetherteam.aetherii.client.sound.instance;
 
 import com.aetherteam.aetherii.client.event.hooks.MusicHooks;
+import com.aetherteam.aetherii.mixin.MixinHooks;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.WeighedSoundEventsAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.MusicInfo;
+import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.client.sounds.WeighedSoundEvents;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import org.jetbrains.annotations.Nullable;
 
 public class MusicSoundInstance extends AbstractTickableSoundInstance {
     private static final int FADE_LIMIT = 50;
@@ -62,6 +68,33 @@ public class MusicSoundInstance extends AbstractTickableSoundInstance {
                 true,
                 true
         );
+    }
+
+    @Override
+    public @Nullable WeighedSoundEvents resolve(SoundManager handler) {
+        if (this.location.equals(SoundManager.INTENTIONALLY_EMPTY_SOUND_LOCATION)) {
+            this.sound = SoundManager.INTENTIONALLY_EMPTY_SOUND;
+            return SoundManager.INTENTIONALLY_EMPTY_SOUND_EVENT;
+        } else {
+            WeighedSoundEvents weighedsoundevents = handler.getSoundEvent(this.location);
+            if (weighedsoundevents == null) {
+                this.sound = SoundManager.EMPTY_SOUND;
+            } else {
+                if (((WeighedSoundEventsAccessor) weighedsoundevents).aether_ii$getList().size() > 1) {
+                    SoundInstance lastMusic = MixinHooks.LAST_MUSIC;
+                    if (lastMusic instanceof MusicSoundInstance musicSoundInstance && musicSoundInstance.getSound() != null) {
+                        Sound newSound = null;
+                        while (newSound == null || musicSoundInstance.getSound().getLocation().equals(newSound.getLocation())) {
+                            newSound = weighedsoundevents.getSound(this.random);
+                        }
+                        this.sound = newSound;
+                        return weighedsoundevents;
+                    }
+                }
+                this.sound = weighedsoundevents.getSound(this.random);
+            }
+            return weighedsoundevents;
+        }
     }
 
     @Override
