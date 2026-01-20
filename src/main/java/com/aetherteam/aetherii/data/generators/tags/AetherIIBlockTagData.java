@@ -311,7 +311,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.HOVERING_BLOCK_REPLACE_BLACKLIST).addTags(
                 BlockTags.PORTALS
         );
-        this.tag(AetherIITags.Blocks.NON_SENTRY_RUINS_SPAWNABLE).add(
+        this.tag(AetherIITags.Blocks.NON_SENTRY_RUINS_SPAWNABLE).addTag(AetherIITags.Blocks.AERCLOUDS).add(
                 Blocks.WATER);
         this.tag(AetherIITags.Blocks.NON_TUNNEL_REPLACEABLE).add(
                 Blocks.AIR,
