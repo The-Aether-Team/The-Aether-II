@@ -12,10 +12,10 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
 
-public abstract class SwetGelLayer extends RenderLayer<SwetRenderState, SwetModel<SwetRenderState>> {
-    private final SwetModel<SwetRenderState> model;
+public abstract class SwetGelLayer extends RenderLayer<SwetRenderState, SwetModel> {
+    private final SwetModel model;
 
-    public SwetGelLayer(RenderLayerParent<SwetRenderState, SwetModel<SwetRenderState>> renderer, EntityModelSet modelSet, SwetModel<SwetRenderState> model) {
+    public SwetGelLayer(RenderLayerParent<SwetRenderState, SwetModel> renderer, EntityModelSet modelSet, SwetModel model) {
         super(renderer);
         this.model = model;
     }
