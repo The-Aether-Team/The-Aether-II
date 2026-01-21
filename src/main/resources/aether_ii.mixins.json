@@ -38,7 +38,6 @@
     "common.accessor.RecipeManagerAccessor",
     "common.accessor.SaplingBlockAccessor",
     "common.accessor.ServerGamePacketListenerImplAccessor",
-    "common.accessor.ServerPlayerAccessor",
     "common.accessor.SlotAccessor",
     "debug.DebugPacketsMixin",
     "debug.PathFinderMixin",

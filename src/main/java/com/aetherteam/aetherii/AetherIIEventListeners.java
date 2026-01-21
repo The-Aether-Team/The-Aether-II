@@ -152,7 +152,6 @@ public class AetherIIEventListeners {
         Player player = event.getEntity();
         boolean wasDeath = event.isWasDeath();
 
-        player.getData(AetherIIDataAttachments.CURRENCY).clone(original, player, wasDeath);
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).clone(player);
     }
 

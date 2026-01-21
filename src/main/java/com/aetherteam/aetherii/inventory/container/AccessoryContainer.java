@@ -3,12 +3,15 @@ package com.aetherteam.aetherii.inventory.container;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.equipment.accessories.AccessoryItem;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.LivingEntityAccessor;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,6 +20,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.GameRules;
 
 import java.util.Collection;
 import java.util.List;
@@ -65,16 +69,26 @@ public class AccessoryContainer extends SimpleContainer {
     }
 
     public void dropItems(LivingEntity entity, Collection<ItemEntity> drops) {
-        NonNullList<ItemStack> items = this.getItems();
-        for (int i = 0; i < items.size(); i++) {
-            ItemStack stack = items.get(i);
-            if (!stack.isEmpty()) {
-                if (!EnchantmentHelper.has(stack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
-                    ItemEntity itemEntity = new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack);
-                    itemEntity.setDefaultPickUpDelay();
-                    drops.add(itemEntity);
+        boolean keepInventory = false;
+        if (entity instanceof ServerPlayer serverPlayer && serverPlayer.level() instanceof ServerLevel serverLevel) {
+            GameRules gameRules = serverLevel.getGameRules();
+            if (gameRules.getRule(GameRules.RULE_KEEPINVENTORY).get()) {
+                keepInventory = true;
+            }
+        }
+        if (!keepInventory) {
+            NonNullList<ItemStack> items = this.getItems();
+            for (int i = 0; i < items.size(); i++) {
+                ItemStack stack = items.get(i);
+                if (!stack.isEmpty()) {
+                    if (!EnchantmentHelper.has(stack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
+                        ItemEntity itemEntity = ((LivingEntityAccessor) entity).callCreateItemStackToDrop(stack.copy(), true, false);
+                        if (itemEntity != null) {
+                            drops.add(itemEntity);
+                        }
+                    }
+                    this.setItem(i, ItemStack.EMPTY);
                 }
-                this.setItem(i, ItemStack.EMPTY);
             }
         }
     }
