@@ -408,7 +408,7 @@ public class Aerbunny extends AetherTamableAnimal {
                 ((EntityAccessor) vehicle).callGetIndirectPassengersStream().filter((entity) -> entity instanceof ServerPlayer).forEach((player) -> CriteriaTriggers.START_RIDING_TRIGGER.trigger((ServerPlayer) player));
                 if (this.getVehicle() instanceof Player player) {
                     this.setVehicleReference(Optional.of(new EntityReference<>(player.getUUID())));
-                    if (player instanceof ServerPlayer serverPlayer) {
+                    if (player instanceof ServerPlayer serverPlayer && !this.firstTick) {
                         PacketDistributor.sendToPlayer(serverPlayer, new AerbunnyMessagePacket());
                     }
                 }
