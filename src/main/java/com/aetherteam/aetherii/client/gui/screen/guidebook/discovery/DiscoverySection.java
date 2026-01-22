@@ -59,7 +59,7 @@ public abstract class DiscoverySection<S extends GuidebookEntry, T extends Mutab
 
 
     public void renderEntries(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        guiGraphics.drawString(this.screen.getMinecraft().font, this.getTitle(), 40, 48, 16777215, true);
+        guiGraphics.drawString(this.screen.getMinecraft().font, this.getTitle(), 40, 48, 0xffffffff, true);
     }
 
     public abstract void renderInformation(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick);
