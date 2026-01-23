@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.animation.ShroudwingAnimations;
 import com.aetherteam.aetherii.client.renderer.entity.state.ShroudwingRenderState;
 import net.minecraft.client.animation.KeyframeAnimation;
@@ -12,6 +11,8 @@ import net.minecraft.util.Mth;
 
 public class ShroudwingModel extends EntityModel<ShroudwingRenderState> {
     private final KeyframeAnimation flyingAnimation;
+    private final KeyframeAnimation landAnimation;
+    private final KeyframeAnimation takeOffAnimation;
     private final ModelPart shroudwing;
     private final ModelPart rightWing;
     private final ModelPart leftWing;
@@ -19,6 +20,8 @@ public class ShroudwingModel extends EntityModel<ShroudwingRenderState> {
     public ShroudwingModel(ModelPart root) {
         super(root);
         this.flyingAnimation = ShroudwingAnimations.FLYING.bake(root);
+        this.landAnimation = ShroudwingAnimations.LAND.bake(root);
+        this.takeOffAnimation = ShroudwingAnimations.TAKEOFF.bake(root);
         this.shroudwing = root.getChild("shroudwing");
         this.rightWing = this.shroudwing.getChild("right_wing");
         this.leftWing = this.shroudwing.getChild("left_wing");
@@ -51,6 +54,8 @@ public class ShroudwingModel extends EntityModel<ShroudwingRenderState> {
     public void setupAnim(ShroudwingRenderState renderState) {
         super.setupAnim(renderState);
         this.flyingAnimation.applyWalk(renderState.ageInTicks, 1F - renderState.restScale, 1.0F, 1.0F);
+        this.landAnimation.apply(renderState.landAnimationState, renderState.ageInTicks);
+        this.takeOffAnimation.apply(renderState.takeOffAnimationState, renderState.ageInTicks);
         float rotation = (Mth.sin((renderState.ageInTicks) * 3) * Mth.DEG_TO_RAD);
         this.rightWing.zRot = rotation;
         this.leftWing.zRot = rotation;

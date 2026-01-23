@@ -2,16 +2,14 @@ package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.data.resources.registries.AetherIIShroudwingVariants;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
-import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.ai.navigator.FlyAndGroundInsectPathNavigation;
 import com.aetherteam.aetherii.entity.variant.ShroudwingVariant;
 import net.minecraft.core.Holder;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.variant.SpawnContext;
 import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.level.Level;
@@ -24,19 +22,57 @@ import java.util.Optional;
 
 public class Shroudwing extends Insect {
     private static final EntityDataAccessor<Holder<ShroudwingVariant>> DATA_VARIANT_ID = SynchedEntityData.defineId(Shroudwing.class, AetherIIDataSerializers.SHROUDWING_VARIANT.get());
+    public static int LAND_EVENT = 101;
+    public static int TAKE_OFF_EVENT = 102;
+    public AnimationState landAnimationState = new AnimationState();
+    public AnimationState takeOffAnimationState = new AnimationState();
 
     public Shroudwing(EntityType<? extends Shroudwing> entityType, Level level) {
         super(entityType, level);
-    }
-
-    public Shroudwing(Level level) {
-        super(AetherIIEntityTypes.SHROUDWING.get(), level);
     }
 
     @Override
     public void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(DATA_VARIANT_ID, VariantUtils.getDefaultOrAny(this.registryAccess(), AetherIIShroudwingVariants.PURPLE));
+    }
+
+    @Override
+    protected PathNavigation createNavigation(Level level) {
+        FlyAndGroundInsectPathNavigation flyingpathnavigation = new FlyAndGroundInsectPathNavigation(this, level);
+        flyingpathnavigation.setCanOpenDoors(false);
+        flyingpathnavigation.setCanFloat(true);
+        return flyingpathnavigation;
+    }
+
+    @Override
+    public void setRestWithAnimation(boolean rest) {
+        super.setRestWithAnimation(rest);
+        if (rest) {
+            this.level().broadcastEntityEvent(this, (byte) LAND_EVENT);
+        } else {
+            this.level().broadcastEntityEvent(this, (byte) TAKE_OFF_EVENT);
+        }
+    }
+
+    @Override
+    public void handleEntityEvent(byte id) {
+        if (id == LAND_EVENT) {
+            this.takeOffAnimationState.stop();
+            this.landAnimationState.start(this.tickCount);
+        } else if (id == TAKE_OFF_EVENT) {
+            this.landAnimationState.stop();
+            this.takeOffAnimationState.start(this.tickCount);
+        } else {
+            super.handleEntityEvent(id);
+        }
+    }
+
+    @Override
+    public void restTick() {
+        if (this.isNeedRest() && this.onGround() && !this.isRest()) {
+            this.setRestWithAnimation(true);
+        }
     }
 
     @Override
@@ -59,15 +95,15 @@ public class Shroudwing extends Insect {
     }
 
     @Override
-    protected void addAdditionalSaveData(ValueOutput output) {
-        super.addAdditionalSaveData(output);
-        VariantUtils.writeVariant(output, this.getVariant());
+    protected void addAdditionalSaveData(ValueOutput valueOutput) {
+        super.addAdditionalSaveData(valueOutput);
+        VariantUtils.writeVariant(valueOutput, this.getVariant());
     }
 
     @Override
-    protected void readAdditionalSaveData(ValueInput input) {
-        super.readAdditionalSaveData(input);
-        VariantUtils.readVariant(input, AetherIIShroudwingVariants.SHROUDWING_VARIANT_REGISTRY_KEY).ifPresent(this::setVariant);
+    protected void readAdditionalSaveData(ValueInput valueInput) {
+        super.readAdditionalSaveData(valueInput);
+        VariantUtils.readVariant(valueInput, AetherIIShroudwingVariants.SHROUDWING_VARIANT_REGISTRY_KEY).ifPresent(this::setVariant);
     }
 
     public static class ShroudwingGroupData extends AgeableMob.AgeableMobGroupData {

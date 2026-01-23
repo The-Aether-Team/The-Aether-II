@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.entity.passive;
 import com.aetherteam.aetherii.entity.ai.controller.InsectMoveControl;
 import com.aetherteam.aetherii.entity.ai.goal.FleeRainGoal;
 import com.aetherteam.aetherii.entity.ai.goal.FlyingLookGoal;
-import com.aetherteam.aetherii.entity.ai.navigator.InsectPathNavigation;
+import com.aetherteam.aetherii.entity.ai.navigator.FlyInsectPathNavigation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -23,6 +23,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
@@ -32,16 +35,25 @@ public class Insect extends PathfinderMob {
 
     private float restAnimationO;
     private float restAnimation;
+    private float needNextAction;
+    private boolean needRest;
 
     public Insect(EntityType<? extends Insect> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new InsectMoveControl(this);
+        this.setPathfindingMalus(PathType.DANGER_FIRE, -1.0F);
+        this.setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0F);
+        this.makeActionCooldown();
     }
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder p_326499_) {
         super.defineSynchedData(p_326499_);
         p_326499_.define(DATA_REST, false);
+    }
+
+    public void setRestWithAnimation(boolean rest) {
+        this.setRest(rest);
     }
 
     public void setRest(boolean rest) {
@@ -54,16 +66,24 @@ public class Insect extends PathfinderMob {
 
     @Override
     protected PathNavigation createNavigation(Level level) {
-        return new InsectPathNavigation(this, level);
+        FlyInsectPathNavigation flyingpathnavigation = new FlyInsectPathNavigation(this, level);
+        flyingpathnavigation.setCanOpenDoors(false);
+        flyingpathnavigation.setCanFloat(true);
+        return flyingpathnavigation;
     }
 
 
     public static AttributeSupplier.Builder createMobAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0F);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0F).add(Attributes.MOVEMENT_SPEED, 0.15F);
     }
+
 
     @Override
     public float getWalkTargetValue(BlockPos pos, LevelReader level) {
+        if (this.isNeedRest() && level.getBlockState(pos.below()).entityCanStandOn(level, pos.below(), this)) {
+            return 10.0F + level.getPathfindingCostFromLightLevels(pos);
+        }
+
         return level.getPathfindingCostFromLightLevels(pos);
     }
 
@@ -85,7 +105,7 @@ public class Insect extends PathfinderMob {
             @Override
             public void start() {
                 super.start();
-                setRest(false);
+                stopRest();
             }
         });
         this.goalSelector.addGoal(4, new FleeRainGoal(this, 1.0F));
@@ -108,6 +128,64 @@ public class Insect extends PathfinderMob {
         }
     }
 
+    @Override
+    protected void addAdditionalSaveData(ValueOutput valueOutput) {
+        super.addAdditionalSaveData(valueOutput);
+        valueOutput.putBoolean("Rest", this.isRest());
+    }
+
+    @Override
+    protected void readAdditionalSaveData(ValueInput valueInput) {
+        super.readAdditionalSaveData(valueInput);
+        this.setRest(valueInput.getBooleanOr("Rest", this.isRest()));
+    }
+
+    public boolean isNeedRest() {
+        return this.needRest;
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if (this.needNextAction <= 0) {
+            if (!this.isNeedRest() && !this.isRest()) {
+                this.makeActionCooldown();
+                this.needRest = true;
+            } else if (this.isNeedRest() && this.isRest()) {
+                this.makeActionCooldown();
+                this.needRest = false;
+                this.setRestWithAnimation(false);
+            }
+        } else {
+            this.needNextAction--;
+        }
+
+        this.restTick();
+    }
+
+    public void restTick() {
+        if (this.isNeedRest() && this.onGround() && !this.isRest()) {
+            this.setRestWithAnimation(true);
+        }
+
+        if (!this.onGround() && this.isRest()) {
+            this.stopRest();
+        }
+    }
+
+    public void stopRest() {
+        this.makeActionCooldown();
+        this.setRest(false);
+    }
+
+    public void makeActionCooldown() {
+        this.needNextAction = this.getRandom().nextInt(400) + 200;
+    }
+
+    public float getNeedNextAction() {
+        return needNextAction;
+    }
+
     public float getRestAnimationScale(float partialTick) {
         return Mth.lerp(partialTick, this.restAnimationO, this.restAnimation);
     }
@@ -115,7 +193,11 @@ public class Insect extends PathfinderMob {
 
     @Override
     public void travel(Vec3 p_415638_) {
-        this.travelFlying(p_415638_, 0.02F);
+        if (this.isRest()) {
+            super.travel(p_415638_);
+        } else {
+            this.travelFlying(p_415638_, 0.02F);
+        }
     }
 
     @Override
@@ -149,7 +231,7 @@ public class Insect extends PathfinderMob {
         boolean flag = super.hurtServer(p_376221_, p_376460_, p_376610_);
 
         if (flag && this.isRest()) {
-            this.setRest(false);
+            this.stopRest();
         }
 
         return flag;

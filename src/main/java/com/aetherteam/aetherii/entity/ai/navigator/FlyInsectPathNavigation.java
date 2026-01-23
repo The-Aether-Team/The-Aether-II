@@ -6,8 +6,8 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.Node;
 
-public class InsectPathNavigation extends FlyingPathNavigation {
-    public InsectPathNavigation(Mob p_26424_, Level p_26425_) {
+public class FlyInsectPathNavigation extends FlyingPathNavigation {
+    public FlyInsectPathNavigation(Mob p_26424_, Level p_26425_) {
         super(p_26424_, p_26425_);
     }
 

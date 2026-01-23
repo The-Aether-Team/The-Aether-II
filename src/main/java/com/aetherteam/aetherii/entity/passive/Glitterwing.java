@@ -59,15 +59,15 @@ public class Glitterwing extends Insect {
     }
 
     @Override
-    protected void addAdditionalSaveData(ValueOutput output) {
-        super.addAdditionalSaveData(output);
-        VariantUtils.writeVariant(output, this.getVariant());
+    protected void addAdditionalSaveData(ValueOutput valueOutput) {
+        super.addAdditionalSaveData(valueOutput);
+        VariantUtils.writeVariant(valueOutput, this.getVariant());
     }
 
     @Override
-    protected void readAdditionalSaveData(ValueInput input) {
-        super.readAdditionalSaveData(input);
-        VariantUtils.readVariant(input, AetherIIGlitterwingVariants.GLITTERWING_VARIANT_REGISTRY_KEY).ifPresent(this::setVariant);
+    protected void readAdditionalSaveData(ValueInput valueInput) {
+        super.readAdditionalSaveData(valueInput);
+        VariantUtils.readVariant(valueInput, AetherIIGlitterwingVariants.GLITTERWING_VARIANT_REGISTRY_KEY).ifPresent(this::setVariant);
     }
 
     public static class GlitterwingGroupData extends AgeableMob.AgeableMobGroupData {
