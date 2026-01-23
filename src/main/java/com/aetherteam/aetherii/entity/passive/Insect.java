@@ -175,7 +175,7 @@ public class Insect extends PathfinderMob {
 
     public void stopRest() {
         this.makeActionCooldown();
-        this.setRest(false);
+        this.setRestWithAnimation(false);
     }
 
     public void makeActionCooldown() {
