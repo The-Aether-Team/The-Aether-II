@@ -233,6 +233,7 @@ public class AetherIIItems {
 
     public static final DeferredItem<Item> CHARM_OF_DAMAGE_I = register("charm_of_damage_1", (properties) -> new CharmItem(properties, Charms.Type.WEAPON, Charms.Tier.ONE, AetherIIStats.CHARM_DAMAGE_BONUS), () -> new Item.Properties().rarity(Rarity.UNCOMMON));
     public static final DeferredItem<Item> CHARM_OF_DEXTERITY_I = register("charm_of_dexterity_1", (properties) -> new CharmItem(properties, Charms.Type.WEAPON, Charms.Tier.ONE, AetherIIStats.CHARM_ATTACK_SPEED_BONUS), () -> new Item.Properties().rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> CHARM_OF_KNOCKBACK_I = register("charm_of_knockback_1", (properties) -> new CharmItem(properties, Charms.Type.WEAPON, Charms.Tier.ONE, AetherIIStats.CHARM_ATTACK_KNOCKBACK_BONUS), () -> new Item.Properties().rarity(Rarity.UNCOMMON));
 
     public static final DeferredItem<Item> CHARM_OF_HEALTH_I = register("charm_of_health_1", (properties) -> new CharmItem(properties, Charms.Type.ARMOR, Charms.Tier.ONE, AetherIIStats.CHARM_MAX_HEALTH_BONUS), () -> new Item.Properties().rarity(Rarity.UNCOMMON));
     public static final DeferredItem<Item> CHARM_OF_DEFENSE_I = register("charm_of_defense_1", (properties) -> new CharmItem(properties, Charms.Type.ARMOR, Charms.Tier.ONE, AetherIIStats.CHARM_ARMOR_BONUS), () -> new Item.Properties().rarity(Rarity.UNCOMMON));

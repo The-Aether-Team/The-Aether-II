@@ -281,6 +281,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_EFFICIENCY_I))
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_DAMAGE_I))
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_DEXTERITY_I))
+                        .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_KNOCKBACK_I))
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_HEALTH_I))
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_DEFENSE_I))
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_TOUGHNESS_I))

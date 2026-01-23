@@ -942,6 +942,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addItem(AetherIIItems.CHARM_OF_DAMAGE_I, "Charm of Damage I");
         this.addItem(AetherIIItems.CHARM_OF_DEXTERITY_I, "Charm of Dexterity I");
+        this.addItem(AetherIIItems.CHARM_OF_KNOCKBACK_I, "Charm of Knockback I");
 
         this.addItem(AetherIIItems.CHARM_OF_HEALTH_I, "Charm of Health I");
         this.addItem(AetherIIItems.CHARM_OF_DEFENSE_I, "Charm of Defense I");

@@ -143,6 +143,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
 
         this.generateCharmItem(AetherIIItems.CHARM_OF_DAMAGE_I.get(), "weapon", "1", "damage");
         this.generateCharmItem(AetherIIItems.CHARM_OF_DEXTERITY_I.get(), "weapon", "1", "dexterity");
+        this.generateCharmItem(AetherIIItems.CHARM_OF_KNOCKBACK_I.get(), "weapon", "1", "knockback");
 
         this.generateCharmItem(AetherIIItems.CHARM_OF_HEALTH_I.get(), "armor", "1", "health");
         this.generateCharmItem(AetherIIItems.CHARM_OF_DEFENSE_I.get(), "armor", "1", "defense");

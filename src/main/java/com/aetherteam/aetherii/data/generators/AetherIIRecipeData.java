@@ -1755,6 +1755,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .add(AetherIIItems.CHARM_OF_EFFICIENCY_I.toStack(), 1)
                 .add(AetherIIItems.CHARM_OF_DAMAGE_I.toStack(), 1)
                 .add(AetherIIItems.CHARM_OF_DEXTERITY_I.toStack(), 1)
+                .add(AetherIIItems.CHARM_OF_KNOCKBACK_I.toStack(), 1)
                 .add(AetherIIItems.CHARM_OF_HEALTH_I.toStack(), 1)
                 .add(AetherIIItems.CHARM_OF_DEFENSE_I.toStack(), 1)
                 .add(AetherIIItems.CHARM_OF_TOUGHNESS_I.toStack(), 1)

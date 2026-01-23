@@ -92,7 +92,8 @@
       "palette_key": "aether_ii:item/color_palettes/charm_runes/base_palette",
       "permutations": {
         "damage": "aether_ii:item/color_palettes/charm_runes/damage",
-        "dexterity": "aether_ii:item/color_palettes/charm_runes/dexterity"
+        "dexterity": "aether_ii:item/color_palettes/charm_runes/dexterity",
+        "knockback": "aether_ii:item/color_palettes/charm_runes/knockback"
       }
     },
     {

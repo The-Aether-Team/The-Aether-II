@@ -53,6 +53,13 @@
     {
       "data": {
         "count": 1,
+        "id": "aether_ii:charm_of_knockback_1"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
         "id": "aether_ii:charm_of_health_1"
       },
       "weight": 1

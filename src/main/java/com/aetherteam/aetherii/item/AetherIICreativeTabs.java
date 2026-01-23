@@ -770,6 +770,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ZANITE_PENDANT.get());
                 output.accept(AetherIIItems.CHARM_OF_DAMAGE_I.get());
                 output.accept(AetherIIItems.CHARM_OF_DEXTERITY_I.get());
+                output.accept(AetherIIItems.CHARM_OF_KNOCKBACK_I.get());
                 output.accept(AetherIIItems.CHARM_OF_HEALTH_I.get());
                 output.accept(AetherIIItems.CHARM_OF_DEFENSE_I.get());
                 output.accept(AetherIIItems.CHARM_OF_TOUGHNESS_I.get());

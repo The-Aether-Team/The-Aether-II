@@ -130,6 +130,10 @@
         },
         {
           "type": "minecraft:item",
+          "name": "aether_ii:charm_of_knockback_1"
+        },
+        {
+          "type": "minecraft:item",
           "name": "aether_ii:charm_of_health_1"
         },
         {

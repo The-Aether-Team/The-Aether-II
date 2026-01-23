@@ -51,6 +51,10 @@ public class AetherIIStats {
             Attributes.ATTACK_SPEED,
             new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.attack_speed"), 0.25, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.MAINHAND);
+    public static final ItemAttributeModifiers.Entry CHARM_ATTACK_KNOCKBACK_BONUS = new ItemAttributeModifiers.Entry(
+            Attributes.ATTACK_KNOCKBACK,
+            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.attack_knockback"), 0.5, AttributeModifier.Operation.ADD_VALUE),
+            EquipmentSlotGroup.MAINHAND);
 
     public static final ItemAttributeModifiers.Entry CHARM_MAX_HEALTH_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.MAX_HEALTH,
