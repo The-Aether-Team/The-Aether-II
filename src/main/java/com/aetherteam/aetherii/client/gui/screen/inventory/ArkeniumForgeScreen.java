@@ -202,6 +202,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                     }
                 }
             }
+            this.getMenu().replaceCharms(displayStack, false);
             if (this.nameDifferent()) {
                 displayStack.set(DataComponents.CUSTOM_NAME, Component.literal(this.name.getValue()));
             }
