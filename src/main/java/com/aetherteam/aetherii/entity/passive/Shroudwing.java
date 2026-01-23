@@ -57,6 +57,10 @@ public class Shroudwing extends Insect {
         }
     }
 
+    public boolean shouldStayGround() {
+        return false;
+    }
+
     @Override
     public void handleEntityEvent(byte id) {
         if (id == LAND_EVENT) {
@@ -67,13 +71,6 @@ public class Shroudwing extends Insect {
             this.takeOffAnimationState.start(this.tickCount);
         } else {
             super.handleEntityEvent(id);
-        }
-    }
-
-    @Override
-    public void restTick() {
-        if (this.isNeedRest() && this.onGround() && !this.isRest()) {
-            this.setRestWithAnimation(true);
         }
     }
 

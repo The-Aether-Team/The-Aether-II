@@ -168,7 +168,7 @@ public class Insect extends PathfinderMob {
             this.setRestWithAnimation(true);
         }
 
-        if (!this.onGround() && this.isRest()) {
+        if (!this.onGround() && this.shouldStayGround() && this.isRest()) {
             this.stopRest();
         }
     }
@@ -202,7 +202,11 @@ public class Insect extends PathfinderMob {
 
     @Override
     public Vec3 getDeltaMovement() {
-        return this.isRest() ? Vec3.ZERO : super.getDeltaMovement();
+        return this.isRest() && this.shouldStayGround() ? Vec3.ZERO : super.getDeltaMovement();
+    }
+
+    public boolean shouldStayGround() {
+        return true;
     }
 
     protected Entity.MovementEmission getMovementEmission() {
