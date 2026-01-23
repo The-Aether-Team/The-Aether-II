@@ -48,10 +48,10 @@ public class ModelBlockRendererMixin {
                         editedModelParts.add(new SimpleModelWrapper(builder.build(), wrapper.useAmbientOcclusion(), wrapper.particleIcon(), wrapper.renderType()));
                     }
                 }
+                original.call(blockAndTintGetter, editedModelParts, state, pos, poseStack, bufferLookup, checkSides, packedOverlay);
+                return;
             }
-            original.call(blockAndTintGetter, editedModelParts, state, pos, poseStack, bufferLookup, checkSides, packedOverlay);
-        } else {
-            original.call(blockAndTintGetter, modelParts, state, pos, poseStack, bufferLookup, checkSides, packedOverlay);
         }
+        original.call(blockAndTintGetter, modelParts, state, pos, poseStack, bufferLookup, checkSides, packedOverlay);
     }
 }
