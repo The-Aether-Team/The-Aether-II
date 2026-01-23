@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.data.resources.registries.AetherIIShroudwingVariants;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
+import com.aetherteam.aetherii.entity.ai.controller.ShroudwingMoveControl;
 import com.aetherteam.aetherii.entity.ai.navigator.FlyAndGroundInsectPathNavigation;
 import com.aetherteam.aetherii.entity.variant.ShroudwingVariant;
 import net.minecraft.core.Holder;
@@ -29,6 +30,7 @@ public class Shroudwing extends Insect {
 
     public Shroudwing(EntityType<? extends Shroudwing> entityType, Level level) {
         super(entityType, level);
+        this.moveControl = new ShroudwingMoveControl(this);
     }
 
     @Override
