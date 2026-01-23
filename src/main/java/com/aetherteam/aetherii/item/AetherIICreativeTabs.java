@@ -634,7 +634,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.TREASURE_DOORWAY_BLOCK.get());
             }).build());
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_EQUIPMENT_AND_UTILITIES = CREATIVE_MODE_TABS.register("tools_and_utilities", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_TOOLS_AND_UTILITIES = CREATIVE_MODE_TABS.register("tools_and_utilities", () -> CreativeModeTab.builder()
             .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "dungeon_blocks"))
             .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "combat_and_equipment"))
             .icon(() -> new ItemStack(AetherIIItems.GRAVITITE_PICKAXE.get()))
@@ -699,7 +699,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GUIDEBOOK_PAGE.get());
             }).build());
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_ARMOR_AND_ACCESSORIES = CREATIVE_MODE_TABS.register("combat_and_equipment", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_COMBAT_AND_EQUIPMENT = CREATIVE_MODE_TABS.register("combat_and_equipment", () -> CreativeModeTab.builder()
             .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tools_and_utilities"))
             .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "consumables"))
             .icon(() -> new ItemStack(AetherIIItems.ARKENIUM_SHORTSWORD.get()))
