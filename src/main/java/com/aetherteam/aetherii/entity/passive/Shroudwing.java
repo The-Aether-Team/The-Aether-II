@@ -10,6 +10,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.variant.SpawnContext;
 import net.minecraft.world.entity.variant.VariantUtils;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.EnumSet;
 import java.util.Optional;
 
 public class Shroudwing extends Insect {
@@ -31,6 +33,12 @@ public class Shroudwing extends Insect {
     public Shroudwing(EntityType<? extends Shroudwing> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new ShroudwingMoveControl(this);
+    }
+
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(5, new RandomWalkAroundGoal(this));
     }
 
     @Override
@@ -112,5 +120,26 @@ public class Shroudwing extends Insect {
             super(false);
             this.type = type;
         }
+    }
+
+    public static class RandomWalkAroundGoal extends WaterAvoidingRandomStrollGoal {
+        private final Insect insect;
+
+        public RandomWalkAroundGoal(Insect insect) {
+            super(insect, 1.0F);
+            this.insect = insect;
+            this.setFlags(EnumSet.of(Flag.MOVE));
+        }
+
+        @Override
+        public boolean canUse() {
+            return this.insect.isRest() && super.canUse();
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.insect.isRest() && super.canContinueToUse();
+        }
+
     }
 }
