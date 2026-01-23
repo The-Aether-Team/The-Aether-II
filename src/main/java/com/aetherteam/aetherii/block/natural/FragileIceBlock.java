@@ -59,7 +59,7 @@ public class FragileIceBlock extends IceBlock {
             if (entity.tickCount % 5 == 0) {
                 level.levelEvent(2001, pos, Block.getId(state));
             }
-            level.scheduleTick(pos, this, 20);
+            level.scheduleTick(pos, this, 6);
         }
         super.stepOn(level, pos, state, entity);
     }

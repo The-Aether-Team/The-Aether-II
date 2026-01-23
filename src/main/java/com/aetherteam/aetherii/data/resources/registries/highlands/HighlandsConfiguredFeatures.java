@@ -2199,8 +2199,8 @@ public class HighlandsConfiguredFeatures {
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_SHORE),
                         new NoiseProvider(
                                 123L,
-                                new NormalNoise.NoiseParameters(-3, 1.0, 0.75, 0.0, 0.0, 0.0),
-                                1.25F,
+                                new NormalNoise.NoiseParameters(-3, 1.25, 0.5, 0.0, 0.0, 0.0),
+                                0.75F,
                                 List.of(
                                         AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(),
                                         AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(),
