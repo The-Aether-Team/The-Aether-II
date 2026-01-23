@@ -177,14 +177,6 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
         return -1;
     }
 
-    //todo the item tier upgrading system; need to upgrade:
-    //  base attack damage/typed damage - attributes
-    //  base attack speed - attributes
-    //  mining tool tier - tool component
-    //  mining speed - tool component
-    //  armor level - attributes
-    //  armor toughness - attributes
-
     public record Stats(Predicate<ItemStack> stackCondition, Charms charms, UpgradeInfo upgrades) {
         public static final Predicate<ItemStack> DEFAULT = (stack) -> true;
         public static final Predicate<ItemStack> TOOLS = (stack) -> stack.is(AetherIITags.Items.ACCEPTS_CHARMS_TOOLS) && !(stack.is(AetherIITags.Items.ARKENIUM_TOOL) || stack.is(AetherIITags.Items.ARKENIUM_ARMOR));
@@ -260,7 +252,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                 Map.entry(AetherIIItems.GRAVITITE_LEGGINGS, () -> Items.NETHERITE_LEGGINGS.getDefaultInstance()),
                 Map.entry(AetherIIItems.GRAVITITE_CHESTPLATE, () -> Items.NETHERITE_CHESTPLATE.getDefaultInstance()),
                 Map.entry(AetherIIItems.GRAVITITE_HELMET, () -> Items.NETHERITE_HELMET.getDefaultInstance())
-//                Map.entry(AetherIIItems.GRAVITITE_GLOVES, () -> AetherIIItems.GRAVITITE_GLOVES.get().getDefaultInstance())
+//                Map.entry(AetherIIItems.GRAVITITE_GLOVES, () -> AetherIIItems.GRAVITITE_GLOVES.get().getDefaultInstance()) //todo
         );
 
         public static final Set<Stats> TIER_1 = Set.of(
@@ -334,7 +326,6 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                         (oldStack, newStack, newTier) -> {
                             newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
                             upgradeCharms(oldStack, newStack, newTier);
-                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
                         },
                         (oldStack, newStack, newTier, baseComponent) -> {
                             baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE);
@@ -346,7 +337,6 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                         (oldStack, newStack, newTier) -> {
                             newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
                             upgradeCharms(oldStack, newStack, newTier);
-                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
                         },
                         (oldStack, newStack, newTier, baseComponent) -> {
                             baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE);
@@ -358,7 +348,6 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                         (oldStack, newStack, newTier) -> {
                             newStack.set(DataComponents.MAX_DAMAGE, oldStack.getMaxDamage() + 150);
                             upgradeCharms(oldStack, newStack, newTier);
-                            newStack.set(DataComponents.RARITY, AetherIIItems.AETHER_II_UPGRADED);
                         },
                         (oldStack, newStack, newTier, baseComponent) -> {
                             baseComponent = charmTooltip(baseComponent, 1, Charms.Tier.ONE);
