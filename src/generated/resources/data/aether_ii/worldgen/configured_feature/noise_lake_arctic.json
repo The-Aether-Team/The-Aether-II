@@ -5,6 +5,41 @@
     "height": {
       "value": 124
     },
+    "ice_block": {
+      "type": "minecraft:noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.25,
+          0.5,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "firstOctave": -3
+      },
+      "scale": 0.75,
+      "seed": 123,
+      "states": [
+        {
+          "Name": "aether_ii:arctic_ice"
+        },
+        {
+          "Name": "aether_ii:arctic_ice"
+        },
+        {
+          "Name": "aether_ii:arctic_ice"
+        },
+        {
+          "Name": "aether_ii:arctic_ice"
+        },
+        {
+          "Name": "aether_ii:fragile_arctic_ice"
+        },
+        {
+          "Name": "aether_ii:fragile_arctic_ice"
+        }
+      ]
+    },
     "lake_barrier_noise": "aether_ii:highlands/lakes/lake_barrier",
     "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor",
     "lake_noise": "aether_ii:highlands/lakes/noise",

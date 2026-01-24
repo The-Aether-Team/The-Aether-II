@@ -354,6 +354,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.FERROSITE_SAND.get());
                 output.accept(AetherIIBlocks.FERROSITE_MUD.get());
                 output.accept(AetherIIBlocks.ARCTIC_ICE.get());
+                output.accept(AetherIIBlocks.FRAGILE_ARCTIC_ICE.get());
                 output.accept(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
                 output.accept(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
                 output.accept(AetherIIBlocks.ARCTIC_SNOW.get());
@@ -677,6 +678,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.DART_SHOOTER.get());
                 output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.VULNERABILITY)).build()));
                 output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.TOXIN)).build()));
+                output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.VENOM)).build()));
+                output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.AMBROSIUM_POISONING)).build()));
                 output.accept(AetherIIItems.SKYROOT_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_WATER_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_PUFFERFISH_BUCKET.get());

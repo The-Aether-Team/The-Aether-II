@@ -49,6 +49,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.UNSTABLE_UNDERSHALE.get(),
                 AetherIIBlocks.MOSSY_HOLYSTONE.get(),
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
+                AetherIIBlocks.FRAGILE_ARCTIC_ICE.get(),
                 AetherIIBlocks.ALKAHEST.get(),
                 AetherIIBlocks.HESTVEIL.get()
         ).addTags(
@@ -81,6 +82,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                         AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS,
                         AetherIITags.Blocks.FERROSITE
                 );
+        this.tag(AetherIITags.Blocks.ARCTIC_ICE).add(
+                AetherIIBlocks.ARCTIC_ICE.get(),
+                AetherIIBlocks.FRAGILE_ARCTIC_ICE.get(),
+                AetherIIBlocks.ARCTIC_PACKED_ICE.get());
         this.tag(AetherIITags.Blocks.LEAVES).add(
                 AetherIIBlocks.SKYROOT_LEAVES.get(),
                 AetherIIBlocks.SKYPLANE_LEAVES.get(),
@@ -198,6 +203,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON).addTag(AetherIITags.Blocks.AETHER_DIRT);
         this.tag(AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON).add(
                 AetherIIBlocks.ARCTIC_ICE.get(),
+                AetherIIBlocks.FRAGILE_ARCTIC_ICE.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get());
         this.tag(AetherIITags.Blocks.ARCTIC_TREE_SURVIVES_ON).addTag(AetherIITags.Blocks.AETHER_DIRT).add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
         this.tag(AetherIITags.Blocks.ARILUM_SURVIVES_ON).add(
@@ -543,6 +549,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(BlockTags.ICE).add(
                 AetherIIBlocks.ARCTIC_ICE.get(),
+                AetherIIBlocks.FRAGILE_ARCTIC_ICE.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get()
         );
         this.tag(BlockTags.VALID_SPAWN).addTag(AetherIITags.Blocks.AETHER_DIRT);
@@ -631,6 +638,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.FERROSITE.get(),
                 AetherIIBlocks.RUSTED_FERROSITE.get(),
                 AetherIIBlocks.ARCTIC_ICE.get(),
+                AetherIIBlocks.FRAGILE_ARCTIC_ICE.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get(),
                 AetherIIBlocks.ICESTONE.get(),
                 AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(),
@@ -1045,6 +1053,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
                 AetherIIBlocks.ICESTONE.get(),
                 AetherIIBlocks.ARCTIC_ICE.get(),
+                AetherIIBlocks.FRAGILE_ARCTIC_ICE.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get()
         );
         this.tag(BlockTags.REPLACEABLE).add(

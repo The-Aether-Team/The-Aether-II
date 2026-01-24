@@ -22,6 +22,7 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_UNDERGROUND_BLOCKS = tag("aether_underground_blocks");
         public static final TagKey<Block> AETHER_CARVER_REPLACEABLES = tag("aether_carver_replaceables");
         public static final TagKey<Block> SHAPES_COASTS = tag("shapes_coasts");
+        public static final TagKey<Block> ARCTIC_ICE = tag("arctic_ice");
         public static final TagKey<Block> FERROSITE = tag("ferrosite");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Block> CLOUDWOOL = tag("cloudwool");

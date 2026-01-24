@@ -74,6 +74,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Arctic
         this.createArcticSnowBlocks();
         this.createTranslucentCube(AetherIIBlocks.ARCTIC_ICE.get());
+        this.createTranslucentCube(AetherIIBlocks.FRAGILE_ARCTIC_ICE.get());
         this.createTrivialCube(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
         this.createCrystal(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get(), AetherIIModelTemplates.FULL_CRYSTAL);
         this.createCrystal(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get(), AetherIIModelTemplates.FULL_CRYSTAL);

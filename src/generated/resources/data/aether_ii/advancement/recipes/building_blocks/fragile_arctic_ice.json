@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_book": {
+    "has_arctic_ice": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:book"
+            "items": "aether_ii:arctic_ice"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:lime_skyroot_bed"
+        "recipe": "aether_ii:fragile_arctic_ice"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_book"
+      "has_arctic_ice"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:lime_skyroot_bed"
+      "aether_ii:fragile_arctic_ice"
     ]
   }
 }

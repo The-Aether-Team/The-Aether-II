@@ -2153,6 +2153,7 @@ public class HighlandsConfiguredFeatures {
                         0.31,
                         BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_SHORE),
+                        BlockStateProvider.simple(Blocks.AIR),
                         false
                 ));
         register(context, NOISE_LAKE_ARCTIC, AetherIIFeatures.NOISE_LAKE.get(),
@@ -2196,6 +2197,19 @@ public class HighlandsConfiguredFeatures {
                                 )
                         ),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_SHORE),
+                        new NoiseProvider(
+                                123L,
+                                new NormalNoise.NoiseParameters(-3, 1.25, 0.5, 0.0, 0.0, 0.0),
+                                0.75F,
+                                List.of(
+                                        AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(),
+                                        AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(),
+                                        AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(),
+                                        AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(),
+                                        AetherIIBlocks.FRAGILE_ARCTIC_ICE.get().defaultBlockState(),
+                                        AetherIIBlocks.FRAGILE_ARCTIC_ICE.get().defaultBlockState()
+                                )
+                        ),
                         true
                 ));
 
@@ -2239,6 +2253,7 @@ public class HighlandsConfiguredFeatures {
                                 )
                         ),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_SHORE),
+                        BlockStateProvider.simple(Blocks.AIR),
                         false
                 ));
 
