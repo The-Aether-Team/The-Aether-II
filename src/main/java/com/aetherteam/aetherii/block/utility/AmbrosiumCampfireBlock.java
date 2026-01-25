@@ -2,18 +2,24 @@ package com.aetherteam.aetherii.block.utility;
 
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.AmbrosiumCampfireBlockEntity;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.item.crafting.CampfireCookingRecipe;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
 
@@ -34,6 +40,23 @@ public class AmbrosiumCampfireBlock extends CampfireBlock {
             RecipeManager.CachedCheck<SingleRecipeInput, CampfireCookingRecipe> cache = RecipeManager.createCheck(RecipeType.CAMPFIRE_COOKING);
             return state.getValue(LIT) ? createTickerHelper(blockEntityType, AetherIIBlockEntityTypes.AMBROSIUM_CAMPFIRE.get(), (entityLevel, entityPos, entityState, blockEntity) -> AmbrosiumCampfireBlockEntity.cookTick(serverlevel, entityPos, entityState, blockEntity, cache)) : createTickerHelper(blockEntityType, AetherIIBlockEntityTypes.AMBROSIUM_CAMPFIRE.get(), AmbrosiumCampfireBlockEntity::cooldownTick);
         }
+    }
+
+    @Override
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (!state.getValue(LIT)) {
+            if (stack.is(AetherIIItems.AMBROSIUM_SHARD)) {
+                BlockState litState = state.setValue(LIT, true);
+                level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+                level.setBlock(pos, litState, 11);
+                level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+                if (!player.getAbilities().instabuild) {
+                    stack.shrink(1);
+                }
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 }
 

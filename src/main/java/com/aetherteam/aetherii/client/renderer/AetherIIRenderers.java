@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
+import com.aetherteam.aetherii.client.renderer.block.model.blockstate.BreakingFixModel;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.TrunkModel;
 import com.aetherteam.aetherii.client.renderer.blockentity.*;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.AmbientOcclusionLightModel;
@@ -35,6 +36,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.MagneticKirri
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.MagneticKirridModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
+import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
 import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
 import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.client.renderer.item.model.SkyrootBedSpecialRenderer;
@@ -46,7 +48,6 @@ import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
-import net.minecraft.client.renderer.blockentity.BedRenderer;
 import net.minecraft.client.renderer.blockentity.CampfireRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -68,7 +69,7 @@ public class AetherIIRenderers {
     public static final ContextKey<Boolean> RIDING_SKIFF_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "riding_skiff"));
     public static final ContextKey<Float> SKIFF_STEERING_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skiff_steering"));
     public static final ContextKey<Boolean> RIDING_MOA_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "riding_moa"));
-    public static final ContextKey<List<Swet>> SWET_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet"));
+    public static final ContextKey<List<SwetRenderState>> SWET_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet"));
     public static final ContextKey<List<EntityType<?>>> STUCK_PROJECTILES_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "stuck_projectiles"));
 
     public static void registerAddLayer(EntityRenderersEvent.AddLayers event) {
@@ -83,7 +84,7 @@ public class AetherIIRenderers {
     }
 
     private static <T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>> void registerLivingEntityLayers(EntityRendererProvider.Context context, LivingEntityRenderer<T, S, M> livingEntityRenderer) {
-        livingEntityRenderer.addLayer(new SwetLatchLayer<S, M>(context, livingEntityRenderer));
+        livingEntityRenderer.addLayer(new SwetLatchLayer<S, M>(livingEntityRenderer));
         livingEntityRenderer.addLayer(new GlovesLayer<S, M>(livingEntityRenderer));
     }
 
@@ -91,7 +92,14 @@ public class AetherIIRenderers {
         event.registerEntityModifier(PlayerRenderer.class, (abstractClientPlayer, playerRenderState) -> {
             List<Swet> swets = abstractClientPlayer.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwets();
             if (swets != null) {
-                playerRenderState.setRenderData(SWET_KEY, swets);
+                List<SwetRenderState> states = new ArrayList<>();
+                for (Swet swet : swets) {
+                    SwetRenderState state = new SwetRenderState();
+                    state.entityType = swet.getType();
+                    state.swetScale = swet.getSwetScale();
+                    states.add(state);
+                }
+                playerRenderState.setRenderData(SWET_KEY, states);
             }
             playerRenderState.setRenderData(RIDING_MOA_KEY, abstractClientPlayer.getVehicle() instanceof Moa);
             if (abstractClientPlayer.getVehicle() instanceof CloudSkiff cloudSkiff) {
@@ -293,9 +301,13 @@ public class AetherIIRenderers {
                 AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK,
                 AetherIIBlocks.LUCENT_GUARDIAN_ROOTS,
                 AetherIIBlocks.GUARDIAN_LAMP);
+        List<DeferredBlock<? extends Block>> breakingFixBlocks = List.of(
+                AetherIIBlocks.AETHER_GRASS_BLOCK,
+                AetherIIBlocks.MOA_EGG);
 
         getModels(event.getBakingResult().blockStateModels(), fastBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new FastModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
+        getModels(event.getBakingResult().blockStateModels(), breakingFixBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new BreakingFixModel(entry.getValue())));
     }
 
     private static List<Map.Entry<BlockState, BlockStateModel>> getModels(Map<BlockState, BlockStateModel> originalModels, List<DeferredBlock<? extends Block>> blocks) {
