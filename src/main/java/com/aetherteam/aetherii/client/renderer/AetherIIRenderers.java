@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
+import com.aetherteam.aetherii.client.renderer.block.model.blockstate.BreakingFixModel;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.TrunkModel;
 import com.aetherteam.aetherii.client.renderer.blockentity.*;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.AmbientOcclusionLightModel;
@@ -300,9 +301,13 @@ public class AetherIIRenderers {
                 AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK,
                 AetherIIBlocks.LUCENT_GUARDIAN_ROOTS,
                 AetherIIBlocks.GUARDIAN_LAMP);
+        List<DeferredBlock<? extends Block>> breakingFixBlocks = List.of(
+                AetherIIBlocks.AETHER_GRASS_BLOCK,
+                AetherIIBlocks.MOA_EGG);
 
         getModels(event.getBakingResult().blockStateModels(), fastBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new FastModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
+        getModels(event.getBakingResult().blockStateModels(), breakingFixBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new BreakingFixModel(entry.getValue())));
     }
 
     private static List<Map.Entry<BlockState, BlockStateModel>> getModels(Map<BlockState, BlockStateModel> originalModels, List<DeferredBlock<? extends Block>> blocks) {

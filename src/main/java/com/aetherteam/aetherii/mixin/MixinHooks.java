@@ -37,8 +37,6 @@ import java.util.List;
 public class MixinHooks {
     @ApiStatus.Internal
     public static boolean RENDERING_ACCESSORY = false;
-    @ApiStatus.Internal
-    public static boolean RENDERING_BREAKING_TEXTURE = false;
 
     public static void shortswordSlashBehavior(Player player, Entity target, boolean canShortswordSlash) {
         if (canShortswordSlash) {

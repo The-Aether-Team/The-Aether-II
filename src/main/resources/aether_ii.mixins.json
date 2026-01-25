@@ -54,7 +54,6 @@
     "client.LevelRendererMixin",
     "client.LiquidBlockRendererMixin",
     "client.LocalPlayerMixin",
-    "client.ModelBlockRendererMixin",
     "client.MultiPlayerGameModeMixin",
     "client.PlayerItemInHandLayerMixin",
     "client.PlayerRendererMixin",
