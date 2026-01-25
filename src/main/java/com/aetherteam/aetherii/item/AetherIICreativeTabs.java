@@ -376,6 +376,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.FERROSITE_SAND.get());
                 output.accept(AetherIIBlocks.FERROSITE_MUD.get());
                 output.accept(AetherIIBlocks.ARCTIC_ICE.get());
+                output.accept(AetherIIBlocks.FRAGILE_ARCTIC_ICE.get());
                 output.accept(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
                 output.accept(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
                 output.accept(AetherIIBlocks.ARCTIC_SNOW.get());
@@ -640,7 +641,6 @@ public class AetherIICreativeTabs {
             .icon(() -> new ItemStack(AetherIIItems.GRAVITITE_PICKAXE.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".tools_and_utilities"))
             .displayItems((features, output) -> {
-
                 output.accept(AetherIIItems.SKYROOT_SHOVEL.get());
                 output.accept(AetherIIItems.SKYROOT_PICKAXE.get());
                 output.accept(AetherIIItems.SKYROOT_AXE.get());
@@ -734,6 +734,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.DART_SHOOTER.get());
                 output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.VULNERABILITY)).build()));
                 output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.TOXIN)).build()));
+                output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.VENOM)).build()));
+                output.accept(new ItemStack(AetherIIItems.AMBER_DARTS, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.AMBROSIUM_POISONING)).build()));
                 output.accept(AetherIIItems.BEAST_PELT_HELMET.get());
                 output.accept(AetherIIItems.BEAST_PELT_CHESTPLATE.get());
                 output.accept(AetherIIItems.BEAST_PELT_LEGGINGS.get());

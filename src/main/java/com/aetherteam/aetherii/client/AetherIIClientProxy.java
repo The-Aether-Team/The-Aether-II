@@ -14,7 +14,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.attachment.AttachmentType;
@@ -44,12 +43,6 @@ public class AetherIIClientProxy {
         SoundEngine soundEngine = ((SoundManagerAccessor) Minecraft.getInstance().getSoundManager()).aether_ii$getSoundEngine();
         Map<SoundInstance, ChannelAccess.ChannelHandle> soundInstances = ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel();
         soundInstances.keySet().stream().filter((soundInstance) -> soundInstance instanceof MusicPlayerSoundInstance).map(SoundInstance::getLocation).forEach(location -> Minecraft.getInstance().getSoundManager().stop(location, source));
-    }
-
-    public static void sendClientPassengerMessage() {
-        Component component = Component.translatable("aether_ii.message.passenger.onboard", AetherIIKeyMappings.ALLOW_DISMOUNTING_PASSENGER.getTranslatedKeyMessage(), Minecraft.getInstance().options.keyUse.getTranslatedKeyMessage());
-        Minecraft.getInstance().gui.setOverlayMessage(component, false);
-        Minecraft.getInstance().getNarrator().saySystemNow(component);
     }
 
     public static boolean isHighlandsSpecialEffects(Level level) {

@@ -21,6 +21,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
 import com.aetherteam.aetherii.client.renderer.item.model.*;
+import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
 import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
 import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.client.renderer.item.model.SkyrootBedSpecialRenderer;
@@ -58,7 +59,7 @@ public class AetherIIRenderers {
     public static final ContextKey<Boolean> RIDING_SKIFF_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "riding_skiff"));
     public static final ContextKey<Float> SKIFF_STEERING_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skiff_steering"));
     public static final ContextKey<Boolean> RIDING_MOA_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "riding_moa"));
-    public static final ContextKey<List<Swet>> SWET_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet"));
+    public static final ContextKey<List<SwetRenderState>> SWET_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet"));
     public static final ContextKey<List<EntityType<?>>> STUCK_PROJECTILES_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "stuck_projectiles"));
 
     public static void registerAddLayer(EntityRenderersEvent.AddLayers event) {
@@ -74,7 +75,7 @@ public class AetherIIRenderers {
     }
 
     private static <T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>> void registerLivingEntityLayers(EntityRendererProvider.Context context, LivingEntityRenderer<T, S, M> livingEntityRenderer) {
-        livingEntityRenderer.addLayer(new SwetLatchLayer<S, M>(context, livingEntityRenderer));
+        livingEntityRenderer.addLayer(new SwetLatchLayer<S, M>(livingEntityRenderer));
         livingEntityRenderer.addLayer(new GlovesLayer<S, M>(livingEntityRenderer));
     }
 
@@ -82,7 +83,14 @@ public class AetherIIRenderers {
         event.registerEntityModifier(PlayerRenderer.class, (abstractClientPlayer, playerRenderState) -> {
             List<Swet> swets = abstractClientPlayer.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwets();
             if (swets != null) {
-                playerRenderState.setRenderData(SWET_KEY, swets);
+                List<SwetRenderState> states = new ArrayList<>();
+                for (Swet swet : swets) {
+                    SwetRenderState state = new SwetRenderState();
+                    state.entityType = swet.getType();
+                    state.swetScale = swet.getSwetScale();
+                    states.add(state);
+                }
+                playerRenderState.setRenderData(SWET_KEY, states);
             }
             playerRenderState.setRenderData(RIDING_MOA_KEY, abstractClientPlayer.getVehicle() instanceof Moa);
             if (abstractClientPlayer.getVehicle() instanceof CloudSkiff cloudSkiff) {
@@ -318,6 +326,9 @@ public class AetherIIRenderers {
                 AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK,
                 AetherIIBlocks.LUCENT_GUARDIAN_ROOTS,
                 AetherIIBlocks.GUARDIAN_LAMP);
+        List<DeferredBlock<? extends Block>> breakingFixBlocks = List.of(
+                AetherIIBlocks.AETHER_GRASS_BLOCK,
+                AetherIIBlocks.MOA_EGG);
         List<DeferredBlock<? extends Block>> copyBlocks = List.of(
                 AetherIIBlocks.LOCKED_BLOCK,
                 AetherIIBlocks.BOSS_DOORWAY_BLOCK,
@@ -325,6 +336,7 @@ public class AetherIIRenderers {
 
         getModels(event.getBakingResult().blockStateModels(), fastBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new FastModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
+        getModels(event.getBakingResult().blockStateModels(), breakingFixBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new BreakingFixModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), List.of(AetherIIBlocks.MURAL)).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new MuralModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), copyBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new CopyBlockModel(entry.getValue())));
     }

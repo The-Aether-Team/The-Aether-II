@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.EntityAccessor;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerGamePacketListenerImplAccessor;
+import com.aetherteam.aetherii.network.packet.clientbound.AerbunnyMessagePacket;
 import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -49,6 +50,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.event.EventHooks;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
@@ -99,7 +101,7 @@ public class Aerbunny extends AetherTamableAnimal {
         builder.define(DATA_PUFF_COOLDOWN_ID, 0);
         builder.define(DATA_AFRAID_TIME_ID, 0);
         builder.define(DATA_FAST_FALLING_ID, false);
-        builder.define(DATA_COLLAR_COLOR, DyeColor.BLUE.getId());
+        builder.define(DATA_COLLAR_COLOR, DyeColor.LIGHT_BLUE.getId());
         builder.define(DATA_VEHICLE_REFERENCE, Optional.empty());
     }
 
@@ -413,8 +415,8 @@ public class Aerbunny extends AetherTamableAnimal {
                 ((EntityAccessor) vehicle).callGetIndirectPassengersStream().filter((entity) -> entity instanceof ServerPlayer).forEach((player) -> CriteriaTriggers.START_RIDING_TRIGGER.trigger((ServerPlayer) player));
                 if (this.getVehicle() instanceof Player player) {
                     this.setVehicleReference(Optional.of(new EntityReference<>(player.getUUID())));
-                    if (player.level().isClientSide()) {
-                        AetherIIClientProxy.sendClientPassengerMessage();
+                    if (player instanceof ServerPlayer serverPlayer && !this.firstTick) {
+                        PacketDistributor.sendToPlayer(serverPlayer, new AerbunnyMessagePacket());
                     }
                 }
                 return true;

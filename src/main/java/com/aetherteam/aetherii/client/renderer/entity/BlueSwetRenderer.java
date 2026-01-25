@@ -12,7 +12,7 @@ public class BlueSwetRenderer extends SwetRenderer {
     public static ResourceLocation BLUE_SWET_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/swet/blue_swet.png");
 
     public BlueSwetRenderer(EntityRendererProvider.Context context) {
-        super(context, new SwetModel<>(context.bakeLayer(AetherIIModelLayers.BLUE_SWET), false));
+        super(context, new SwetModel(context.bakeLayer(AetherIIModelLayers.BLUE_SWET), false));
         this.addLayer(new BlueSwetGelLayer(this, context.getModelSet()));
     }
 

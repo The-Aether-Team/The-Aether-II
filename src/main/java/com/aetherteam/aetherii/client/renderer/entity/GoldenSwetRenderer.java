@@ -12,7 +12,7 @@ public class GoldenSwetRenderer extends SwetRenderer {
     public static ResourceLocation GOLDEN_SWET_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/swet/golden_swet.png");
 
     public GoldenSwetRenderer(EntityRendererProvider.Context context) {
-        super(context, new SwetModel<>(context.bakeLayer(AetherIIModelLayers.BLUE_SWET), false));
+        super(context, new SwetModel(context.bakeLayer(AetherIIModelLayers.BLUE_SWET), false));
         this.addLayer(new GoldenSwetGelLayer(this, context.getModelSet()));
     }
 

@@ -129,6 +129,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARCTIC_SNOW_BLOCK, "Arctic Snow Block");
         this.addBlock(AetherIIBlocks.ARCTIC_SNOW, "Arctic Snow");
         this.addBlock(AetherIIBlocks.ARCTIC_ICE, "Arctic Ice");
+        this.addBlock(AetherIIBlocks.FRAGILE_ARCTIC_ICE, "Fragile Arctic Ice");
         this.addBlock(AetherIIBlocks.ARCTIC_PACKED_ICE, "Arctic Packed Ice");
         this.addBlock(AetherIIBlocks.ICESTONE, "Icestone");
         this.addBlock(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL, "Large Arctic Ice Crystal");
@@ -1591,6 +1592,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addEffectsDescriptions() {
         final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
+        this.addEffectsDescription(AetherIIEffects.SATURATION_BOOST.get(), loremIpsum);
         this.addEffectsDescription(AetherIIEffects.VULNERABILITY.get(), loremIpsum);
         this.addEffectsDescription(AetherIIEffects.WOUND.get(), loremIpsum);
         this.addEffectsDescription(AetherIIEffects.STUN.get(), loremIpsum);
@@ -1665,8 +1667,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("item", "ambrosium_shard.use", "Ambrosium Shard used");
         this.addSubtitle("item", "swet_gel.use", "Swet Gel used");
 
-        this.addSubtitle("item", "scaterglass_vial.fill", "Scatterglass Vial fills");
-        this.addSubtitle("item", "scaterglass_vial.empty", "Scatterglass Vial empties");
+        this.addSubtitle("item", "scatterglass_vial.fill", "Scatterglass Vial fills");
+        this.addSubtitle("item", "scatterglass_vial.empty", "Scatterglass Vial empties");
 
         this.addSubtitle("item", "arkenium_canister.fill", "Arkenium Canister fills");
         this.addSubtitle("item", "arkenium_canister.empty", "Arkenium Canister empties");

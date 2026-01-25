@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
+  "category": "misc",
+  "group": "skyroot_bed",
   "key": {
-    "#": "aether_ii:red_cloudwool",
-    "B": "minecraft:book"
+    "#": "#aether_ii:planks_crafting",
+    "W": "aether_ii:red_cloudwool"
   },
   "pattern": [
-    "###",
-    "BBB",
+    "WWW",
     "###"
   ],
   "result": {

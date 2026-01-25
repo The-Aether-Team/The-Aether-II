@@ -69,6 +69,7 @@
   "aether_ii.guidebook_effects.description.effect.aether_ii.frostbite": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   "aether_ii.guidebook_effects.description.effect.aether_ii.fungal_rot": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   "aether_ii.guidebook_effects.description.effect.aether_ii.immolation": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "aether_ii.guidebook_effects.description.effect.aether_ii.saturation_boost": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   "aether_ii.guidebook_effects.description.effect.aether_ii.stun": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   "aether_ii.guidebook_effects.description.effect.aether_ii.toxin": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   "aether_ii.guidebook_effects.description.effect.aether_ii.venom": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -337,6 +338,7 @@
   "block.aether_ii.ferrosite": "Ferrosite",
   "block.aether_ii.ferrosite_mud": "Ferrosite Mud",
   "block.aether_ii.ferrosite_sand": "Ferrosite Sand",
+  "block.aether_ii.fragile_arctic_ice": "Fragile Arctic Ice",
   "block.aether_ii.glint_block": "Block of Glint",
   "block.aether_ii.glint_ore": "Glint Ore",
   "block.aether_ii.golden_aercloud": "Golden Aercloud",
@@ -1427,8 +1429,8 @@
   "subtitles.aether_ii.item.armor.equip_neptune": "Neptune armor clinks",
   "subtitles.aether_ii.item.armor.equip_sentry": "Sentry armor clanks",
   "subtitles.aether_ii.item.armor.equip_zanite": "Zanite armor clangs",
-  "subtitles.aether_ii.item.scaterglass_vial.empty": "Scatterglass Vial empties",
-  "subtitles.aether_ii.item.scaterglass_vial.fill": "Scatterglass Vial fills",
+  "subtitles.aether_ii.item.scatterglass_vial.empty": "Scatterglass Vial empties",
+  "subtitles.aether_ii.item.scatterglass_vial.fill": "Scatterglass Vial fills",
   "subtitles.aether_ii.item.swet_gel.use": "Swet Gel used",
   "subtitles.aether_ii.ui.artisans_bench.take_result": "Artisan's Bench used"
 }
