@@ -101,7 +101,7 @@ public class Aerbunny extends AetherTamableAnimal {
         builder.define(DATA_PUFF_COOLDOWN_ID, 0);
         builder.define(DATA_AFRAID_TIME_ID, 0);
         builder.define(DATA_FAST_FALLING_ID, false);
-        builder.define(DATA_COLLAR_COLOR, DyeColor.LIGHT_BLUE.getId());
+        builder.define(DATA_COLLAR_COLOR, DyeColor.BLUE.getId());
         builder.define(DATA_VEHICLE_REFERENCE, Optional.empty());
     }
 
