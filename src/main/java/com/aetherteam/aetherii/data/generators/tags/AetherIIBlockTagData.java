@@ -331,10 +331,22 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.COPYABLE_DUNGEON_BLOCKS).addTags(
                 AetherIITags.Blocks.UNDERSHALE_DECORATIVE_BLOCKS,
-                AetherIITags.Blocks.SENTRY_DECORATIVE_BLOCKS
+                AetherIITags.Blocks.SENTRY_DECORATIVE_BLOCKS,
+                AetherIITags.Blocks.GUARDIAN_LOGS
         ).add(
                 AetherIIBlocks.UNDERSHALE_BRICKS.get(),
                 AetherIIBlocks.SENTRY_BRICKS.get(),
+                AetherIIBlocks.GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.GUARDIAN_LAMP.get(),
+                AetherIIBlocks.GUARDIAN_LOG_SLAB.get(),
+                AetherIIBlocks.GUARDIAN_WOOD_SLAB.get(),
+                AetherIIBlocks.INFECTED_LOG_SLAB.get(),
+                AetherIIBlocks.INFECTED_WOOD_SLAB.get(),
+                AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB.get(),
+                AetherIIBlocks.STRIPPED_GUARDIAN_WOOD_SLAB.get(),
+                AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB.get(),
+                AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB.get(),
                 AetherIIBlocks.UNDERGROWTH_LEAVES.get()
         );
         this.tag(AetherIITags.Blocks.MIMIC_CONTAINERS).add(AetherIIBlocks.SENTRY_CRATE.get());
@@ -1201,7 +1213,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.FERROSITE_MUD.get(),
                 AetherIIBlocks.GUARDIAN_ROOTS.get(),
                 AetherIIBlocks.DENSE_GUARDIAN_ROOTS.get()
-        ).addTags(AetherIITags.Blocks.GUARDIAN_LOGS, AetherIITags.Blocks.DENSE_GUARDIAN_LOGS);
+        ).addTag(AetherIITags.Blocks.GUARDIAN_LOGS);
 
         // NeoForge
         this.tag(Tags.Blocks.BOOKSHELVES).add(
