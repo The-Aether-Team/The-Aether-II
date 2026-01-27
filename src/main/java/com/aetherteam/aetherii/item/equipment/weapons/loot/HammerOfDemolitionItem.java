@@ -28,7 +28,6 @@ public class HammerOfDemolitionItem extends TieredHammerItem implements Projecti
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack heldStack = player.getItemInHand(hand);
-        level.playLocalSound(player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.ITEM_HAMMER_OF_DEMOLITION_SHOOT.get(), SoundSource.PLAYERS, 1.0F, 1.0F / (player.getRandom().nextFloat() * 0.4F + 0.8F), false);
         if (player.isShiftKeyDown()) {
             if (level instanceof ServerLevel serverlevel) {
                 if (!player.getAbilities().instabuild) {
@@ -37,6 +36,7 @@ public class HammerOfDemolitionItem extends TieredHammerItem implements Projecti
                 }
                 Projectile.spawnProjectileFromRotation((l, e, s) -> new DemolitionProjectile(e, l), serverlevel, heldStack, player, 0.0F, 1.0F, 1.0F);
             }
+            level.playLocalSound(player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.ITEM_HAMMER_OF_DEMOLITION_SHOOT.get(), SoundSource.PLAYERS, 1.0F, 1.0F / (player.getRandom().nextFloat() * 0.4F + 0.8F), false);
             player.awardStat(Stats.ITEM_USED.get(this));
             return InteractionResult.SUCCESS;
         }
