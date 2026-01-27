@@ -220,6 +220,6 @@ public class AetherIIClientExtensions {
 
         event.registerFluidType(ALKAHEST_FLUID, AetherIIFluidTypes.ALKAHEST_TYPE.get());
 
-        event.registerMobEffect(HIDE_EFFECT, AetherIIEffects.NATURAL_CAMOUFLAGE.get(), AetherIIEffects.ELECTRIC_SHOCK.get(), AetherIIEffects.GRAVITATIONAL_PULL.get());
+        event.registerMobEffect(HIDE_EFFECT, AetherIIEffects.NATURAL_CAMOUFLAGE.get(), AetherIIEffects.ELECTRIC_SHOCK.get(), AetherIIEffects.CARRION_PULL.get(), AetherIIEffects.GRAVITATIONAL_PULL.get());
     }
 }

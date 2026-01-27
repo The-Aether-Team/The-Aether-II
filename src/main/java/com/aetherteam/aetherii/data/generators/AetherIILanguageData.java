@@ -1366,6 +1366,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addEffect(AetherIIEffects.NATURAL_CAMOUFLAGE, "Natural Camouflage");
         this.addEffect(AetherIIEffects.ELECTRIC_SHOCK, "Electric Shock");
+        this.addEffect(AetherIIEffects.CARRION_PULL, "Carrion Pull");
         this.addEffect(AetherIIEffects.GRAVITATIONAL_PULL, "Gravitational Pull");
     }
 
@@ -1713,6 +1714,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addDeath("alkahest.player", "%1$s dissolved in alkahest while trying to escape %2$s");
         this.addDeath("shock", "%1$s was electrocuted");
         this.addDeath("shock.player", "%1$s was electrocuted by %2$s");
+        this.addDeath("carrion_sprout", "%1$s was munched-up by %2$s");
     }
 
     // Utility methods
