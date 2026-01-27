@@ -13,6 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -76,11 +77,14 @@ public class CarrionSprout extends PathfinderMob implements PlantCuttingMob {
         if (this.isTrapTrigger()) {
             if (entity instanceof LivingEntity livingEntity) {
                 livingEntity.forceAddEffect(new MobEffectInstance(AetherIIEffects.CARRION_PULL, 1, 0, false, false, false), this);
-            }
 
-            if (this.trapTriggerTick <= 0) {
-                if (this.level() instanceof ServerLevel serverLevel) {
-                    entity.hurtServer(serverLevel, AetherIIDamageTypes.damageSource(this.level(), AetherIIDamageTypes.CARRION_SPROUT), 2.0F);
+                if (this.trapTriggerTick <= 0) {
+                    if (this.level() instanceof ServerLevel serverLevel) {
+                        DamageSource damageSource = AetherIIDamageTypes.entityDamageSource(this.level(), AetherIIDamageTypes.CARRION_SPROUT, this);
+                        if (!livingEntity.isInvulnerableTo(serverLevel, damageSource)) {
+                            entity.hurtServer(serverLevel, AetherIIDamageTypes.entityDamageSource(this.level(), AetherIIDamageTypes.CARRION_SPROUT, this), 2.0F);
+                        }
+                    }
                 }
             }
 
