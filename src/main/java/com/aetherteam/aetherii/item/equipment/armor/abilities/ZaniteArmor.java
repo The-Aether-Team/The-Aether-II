@@ -19,7 +19,7 @@ public interface ZaniteArmor {
         Player player = event.getEntity();
         AttributeInstance attackSpeedAttribute = player.getAttribute(Attributes.ATTACK_SPEED);
         AttributeInstance miningSpeedAttribute = player.getAttribute(Attributes.MINING_EFFICIENCY);
-        AttributeInstance movementSpeedAttribute = player.getAttribute(Attributes.MOVEMENT_EFFICIENCY);
+        AttributeInstance movementSpeedAttribute = player.getAttribute(Attributes.MOVEMENT_SPEED);
 
         if (EquipmentUtil.hasArmorAbility(player, AetherIITags.Items.ZANITE_ARMOR)) {
             if (attackSpeedAttribute != null && !attackSpeedAttribute.hasModifier(ZANITE_ATTACK_SPEED)) {
@@ -29,7 +29,7 @@ public interface ZaniteArmor {
                 miningSpeedAttribute.addTransientModifier(new AttributeModifier(ZANITE_MINING_SPEED, 2, AttributeModifier.Operation.ADD_VALUE));
             }
             if (movementSpeedAttribute != null && !movementSpeedAttribute.hasModifier(ZANITE_MOVEMENT_SPEED)) {
-                movementSpeedAttribute.addTransientModifier(new AttributeModifier(ZANITE_MOVEMENT_SPEED, 2, AttributeModifier.Operation.ADD_VALUE));
+                movementSpeedAttribute.addTransientModifier(new AttributeModifier(ZANITE_MOVEMENT_SPEED, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
             }
         } else {
             if (attackSpeedAttribute != null && attackSpeedAttribute.hasModifier(ZANITE_ATTACK_SPEED)) {

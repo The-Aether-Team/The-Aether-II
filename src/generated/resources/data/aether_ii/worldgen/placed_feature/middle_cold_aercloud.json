@@ -18,6 +18,10 @@
       "chance": 48
     },
     {
+      "type": "aether_ii:structure_blacklist_filter",
+      "tag": "aether_ii:aercloud_blacklist_filter"
+    },
+    {
       "type": "minecraft:biome"
     }
   ]

@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client.gui.screen.guidebook.discovery;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.api.guidebook.GuidebookEntry;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.GuidebookDiscoveryAttachment;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
@@ -36,7 +37,7 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
     private final List<EffectsEntry.Mutable> orderedEntries = new ArrayList<>();
 
     public EffectsSection(RegistryAccess registryAccess, GuidebookDiscoveryScreen screen, Component title) {
-        super(registryAccess, AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY, screen, title);
+        super(registryAccess, AetherIIRegistries.EFFECTS_ENTRY, screen, title);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
         this.entries.clear();
         this.registryAccess.lookupOrThrow(this.registryKey).asHolderIdMap().forEach((entry) -> this.entries.add(new EffectsEntry.Mutable(entry)));
         this.getOrderedEntries().clear();
-        AetherIIEffectsEntries.EFFECTS.values().forEach((entityTypeHolder) -> this.entries.forEach((entry) -> {
+        AetherIIEffectsEntries.ENTRY_ORDER.forEach((entityTypeHolder) -> this.entries.forEach((entry) -> {
             if (entry.getEffect().value() == entityTypeHolder.value()) {
                 this.getOrderedEntries().add(entry);
             }

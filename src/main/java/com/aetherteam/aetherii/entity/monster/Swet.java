@@ -284,7 +284,6 @@ public class Swet extends Monster {
     @Override
     public void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
-
         this.setWaterDamage(input.getFloatOr("WaterDamageScale", 0.0F));
         this.setSwetScale(input.getFloatOr("SwetScale", 0.95F));
         this.setFoodSaturation(input.getFloatOr("Saturation", 0.0F));

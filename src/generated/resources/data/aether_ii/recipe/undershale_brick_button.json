@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "aether_ii:undershale_bricks"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:undershale_brick_button"
+  }
+}

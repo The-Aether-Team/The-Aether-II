@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.api.guidebook;
 
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIExplorationEntries;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -22,8 +22,8 @@ public class ExplorationEntry extends GuidebookEntry {
             RecordCodecBuilder.create(in -> in.group(
                     GuidebookEntry.MAP_CODEC.forGetter(GuidebookEntry::root)
             ).apply(in, ExplorationEntry::new));
-    public static final Codec<Holder<ExplorationEntry>> REFERENCE_CODEC = RegistryFileCodec.create(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY, DIRECT_CODEC);
-    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<ExplorationEntry>> STREAM_CODEC = ByteBufCodecs.holderRegistry(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY);
+    public static final Codec<Holder<ExplorationEntry>> REFERENCE_CODEC = RegistryFileCodec.create(AetherIIRegistries.EXPLORATION_ENTRY, DIRECT_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<ExplorationEntry>> STREAM_CODEC = ByteBufCodecs.holderRegistry(AetherIIRegistries.EXPLORATION_ENTRY);
 
     public ExplorationEntry(GuidebookEntry root) {
         super(root.getId(), root.getIcon(), root.getName(), root.getSlotName(), root.getSlotSubtitle(), root.getDescriptionKey());

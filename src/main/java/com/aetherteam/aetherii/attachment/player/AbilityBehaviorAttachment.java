@@ -19,9 +19,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class AbilityBehaviorAttachment {
     private boolean canRefuelGlide;
@@ -78,6 +76,10 @@ public class AbilityBehaviorAttachment {
 
     public void login(Player player) {
         this.shouldSyncAfterJoin = true;
+    }
+
+    public void logout(Player player) {
+
     }
 
     public void onJoinLevel(Player player) {

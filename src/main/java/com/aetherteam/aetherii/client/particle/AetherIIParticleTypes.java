@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.particle.options.AttackShockParticleOption;
 import com.aetherteam.aetherii.client.particle.options.AttackStabParticleOption;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -55,6 +54,10 @@ public class AetherIIParticleTypes {
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> TEMPEST_SMOKE = PARTICLES.register("tempest_smoke", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MOA_HUNGRY = PARTICLES.register("moa_hungry", () -> new SimpleParticleType(false));
+
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> LOCKED_BLOCK = PARTICLES.register("locked_block", () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> BOSS_DOORWAY_BLOCK = PARTICLES.register("boss_doorway_block", () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> TREASURE_DOORWAY_BLOCK = PARTICLES.register("treasure_doorway_block", () -> new SimpleParticleType(true));
 
     private static <T extends ParticleOptions> DeferredHolder<ParticleType<?>, ParticleType<T>> register(String name, boolean overrideLimiter, final Function<ParticleType<T>, MapCodec<T>> codecGetter, final Function<ParticleType<T>, StreamCodec<? super RegistryFriendlyByteBuf, T>> streamCodecGetter) {
         return PARTICLES.register(name, () -> new ParticleType<T>(overrideLimiter) {

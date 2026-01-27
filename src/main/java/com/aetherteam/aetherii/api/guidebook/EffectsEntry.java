@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.api.guidebook;
 
-import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
@@ -28,8 +28,8 @@ public class EffectsEntry extends GuidebookEntry {
                     EffectsEntry.EFFECT.mapCodec().forGetter(EffectsEntry::getEffect),
                     Codec.list(EffectsEntry.ITEM.mapCodec().codec(), 0, 6).fieldOf("items").forGetter(EffectsEntry::getItems)
             ).apply(in, EffectsEntry::new));
-    public static final Codec<Holder<EffectsEntry>> REFERENCE_CODEC = RegistryFileCodec.create(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY, DIRECT_CODEC);
-    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<EffectsEntry>> STREAM_CODEC = ByteBufCodecs.holderRegistry(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY);
+    public static final Codec<Holder<EffectsEntry>> REFERENCE_CODEC = RegistryFileCodec.create(AetherIIRegistries.EFFECTS_ENTRY, DIRECT_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<EffectsEntry>> STREAM_CODEC = ByteBufCodecs.holderRegistry(AetherIIRegistries.EFFECTS_ENTRY);
 
     private final Holder<MobEffect> effect;
     private final List<Holder<Item>> items;

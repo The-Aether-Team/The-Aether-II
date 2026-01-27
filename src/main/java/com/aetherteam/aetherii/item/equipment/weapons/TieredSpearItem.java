@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.item.equipment.weapons;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.AetherIINeoItemAbilities;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.component.Weapon;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.List;
@@ -68,5 +70,10 @@ public class TieredSpearItem extends Item {
     @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility toolAction) {
         return AetherIINeoItemAbilities.DEFAULT_SPEAR_ACTIONS.contains(toolAction);
+    }
+
+    @Override
+    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+        return false;
     }
 }

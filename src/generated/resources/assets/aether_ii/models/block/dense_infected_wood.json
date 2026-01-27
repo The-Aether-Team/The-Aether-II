@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "aether_ii:block/dense_infected_log",
-    "side": "aether_ii:block/dense_infected_log"
-  }
-}

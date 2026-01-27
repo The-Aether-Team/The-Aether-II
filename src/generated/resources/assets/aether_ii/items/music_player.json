@@ -1,0 +1,18 @@
+{
+  "model": {
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "aether_ii:item/music_player_back"
+      },
+      {
+        "type": "aether_ii:music_player_disc"
+      },
+      {
+        "type": "minecraft:model",
+        "model": "aether_ii:item/music_player_front"
+      }
+    ]
+  }
+}

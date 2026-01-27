@@ -6,7 +6,9 @@ import com.aetherteam.aetherii.data.resources.builders.worldgen.AetherIIStructur
 import com.aetherteam.aetherii.data.resources.registries.pools.CampPools;
 import com.aetherteam.aetherii.data.resources.registries.pools.InfectedGuardianTreePools;
 import com.aetherteam.aetherii.data.resources.registries.pools.OutpostPools;
-import com.aetherteam.aetherii.world.structure.AetherJigsawStructure;
+import com.aetherteam.aetherii.world.structure.type.AetherJigsawStructure;
+import com.aetherteam.aetherii.world.structure.piece.sentry.SentryRuinsProcessorSettings;
+import com.aetherteam.aetherii.world.structure.type.SentryRuinsStructure;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -22,6 +24,7 @@ import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.minecraft.world.level.levelgen.structure.pools.DimensionPadding;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +34,7 @@ public class AetherIIStructures {
     public static final ResourceKey<Structure> CAMP_HIGHFIELDS = createKey("camp_highfields");
     public static final ResourceKey<Structure> CAMP_MAGNETIC = createKey("camp_magnetic");
     public static final ResourceKey<Structure> CAMP_ARCTIC = createKey("camp_arctic");
+    public static final ResourceKey<Structure> SENTRY_RUINS = createKey("sentry_ruins");
     public static final ResourceKey<Structure> INFECTED_GUARDIAN_TREE = createKey("infected_guardian_tree");
 
     private static ResourceKey<Structure> createKey(String name) {
@@ -40,6 +44,7 @@ public class AetherIIStructures {
     public static void bootstrap(BootstrapContext<Structure> context) {
         HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
+        HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
 
         context.register(OUTPOST, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_OUTPOST), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
@@ -54,6 +59,16 @@ public class AetherIIStructures {
         context.register(CAMP_ARCTIC, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_CAMP_ARCTIC), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
                 templatePools.getOrThrow(CampPools.ARCTIC_CENTER), Optional.empty(), 20, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 32, 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+
+        context.register(SENTRY_RUINS, new SentryRuinsStructure(AetherIIStructureBuilders.structure(
+                biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_SENTRY_RUINS),
+                GenerationStep.Decoration.UNDERGROUND_STRUCTURES,
+                TerrainAdjustment.NONE),
+                6, 64, 24,
+                new SentryRuinsProcessorSettings(
+                        processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM),
+                        processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_TUNNEL),
+                        processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_BOSS_ROOM))));
 
         context.register(INFECTED_GUARDIAN_TREE, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_INFECTED_GUARDIAN_TREE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),

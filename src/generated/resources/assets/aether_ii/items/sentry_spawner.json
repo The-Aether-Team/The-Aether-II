@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "aether_ii:item/sentry_spawner",
+    "model": {
+      "type": "aether_ii:sentry_spawner"
+    }
+  }
+}

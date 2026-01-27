@@ -11,6 +11,8 @@ public class AetherIIEquipmentAssets {
     public static ResourceKey<EquipmentAsset> ZANITE = create("zanite");
     public static ResourceKey<EquipmentAsset> ARKENIUM = create("arkenium");
     public static ResourceKey<EquipmentAsset> GRAVITITE = create("gravitite");
+    public static ResourceKey<EquipmentAsset> SENTRY = create("sentry");
+    public static ResourceKey<EquipmentAsset> NEPTUNE = create("neptune");
 
     private static ResourceKey<EquipmentAsset> create(String name) {
         return ResourceKey.create(ResourceKey.createRegistryKey(ResourceLocation.withDefaultNamespace("equipment_asset")), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));

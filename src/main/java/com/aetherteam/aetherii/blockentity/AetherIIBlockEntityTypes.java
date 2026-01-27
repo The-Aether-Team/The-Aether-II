@@ -59,6 +59,27 @@ public class AetherIIBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<OutpostCampfireBlockEntity>> OUTPOST_CAMPFIRE = BLOCK_ENTITY_TYPES.register("outpost_campfire", () ->
             new BlockEntityType<>(OutpostCampfireBlockEntity::new, AetherIIBlocks.OUTPOST_CAMPFIRE.get()));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MuralBlockEntity>> MURAL = BLOCK_ENTITY_TYPES.register("mural", () ->
+            new BlockEntityType<>(MuralBlockEntity::new, AetherIIBlocks.MURAL.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SentryCrateBlockEntity>> SENTRY_CRATE = BLOCK_ENTITY_TYPES.register("sentry_crate", () ->
+            new BlockEntityType<>(SentryCrateBlockEntity::new, AetherIIBlocks.SENTRY_CRATE.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SentrySpawnerBlockEntity>> SENTRY_SPAWNER = BLOCK_ENTITY_TYPES.register("wall_spawner", () ->
+            new BlockEntityType<>(SentrySpawnerBlockEntity::new, AetherIIBlocks.SENTRY_SPAWNER.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SentryTrapBlockEntity>> SENTRY_TRAP = BLOCK_ENTITY_TYPES.register("sentry_trap", () ->
+            new BlockEntityType<>(SentryTrapBlockEntity::new, AetherIIBlocks.SENTRY_TRAP.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<LockedBlockEntity>> LOCKED_BLOCK = BLOCK_ENTITY_TYPES.register("locked_block", () ->
+            new BlockEntityType<>(LockedBlockEntity::new, AetherIIBlocks.LOCKED_BLOCK.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BossDoorwayBlockEntity>> BOSS_DOORWAY_BLOCK = BLOCK_ENTITY_TYPES.register("boss_doorway_block", () ->
+            new BlockEntityType<>(BossDoorwayBlockEntity::new, AetherIIBlocks.BOSS_DOORWAY_BLOCK.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TreasureDoorwayBlockEntity>> TREASURE_DOORWAY_BLOCK = BLOCK_ENTITY_TYPES.register("treasure_doorway_block", () ->
+            new BlockEntityType<>(TreasureDoorwayBlockEntity::new, AetherIIBlocks.TREASURE_DOORWAY_BLOCK.get()));
+
     public static void registerValidBlockEntityTypes(BlockEntityTypeAddBlocksEvent event) {
         event.modify(BlockEntityType.SIGN, AetherIIBlocks.SKYROOT_WALL_SIGN.get(), AetherIIBlocks.SKYROOT_SIGN.get(),
                 AetherIIBlocks.GREATROOT_WALL_SIGN.get(), AetherIIBlocks.GREATROOT_SIGN.get(),

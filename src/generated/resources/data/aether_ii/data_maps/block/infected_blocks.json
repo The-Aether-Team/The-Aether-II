@@ -1,17 +1,5 @@
 {
   "values": {
-    "aether_ii:dense_guardian_log": {
-      "block": "aether_ii:dense_infected_log"
-    },
-    "aether_ii:dense_guardian_wood": {
-      "block": "aether_ii:dense_infected_wood"
-    },
-    "aether_ii:dense_stripped_guardian_log": {
-      "block": "aether_ii:dense_stripped_infected_log"
-    },
-    "aether_ii:dense_stripped_guardian_wood": {
-      "block": "aether_ii:dense_stripped_infected_wood"
-    },
     "aether_ii:guardian_log": {
       "block": "aether_ii:infected_log"
     },

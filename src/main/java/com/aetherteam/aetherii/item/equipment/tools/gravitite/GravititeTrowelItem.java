@@ -2,9 +2,12 @@ package com.aetherteam.aetherii.item.equipment.tools.gravitite;
 
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.GravititeTool;
+import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.enchantment.Enchantment;
 
 public class GravititeTrowelItem extends HoeItem implements GravititeTool {
     public GravititeTrowelItem(Properties properties) {
@@ -18,5 +21,10 @@ public class GravititeTrowelItem extends HoeItem implements GravititeTool {
         } else {
             return super.useOn(context);
         }
+    }
+
+    @Override
+    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+        return false;
     }
 }

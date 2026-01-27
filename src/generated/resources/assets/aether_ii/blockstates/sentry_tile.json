@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "aether_ii:block/sentry_tile_off"
+    },
+    "lit=true": {
+      "model": "aether_ii:block/sentry_tile"
+    }
+  }
+}

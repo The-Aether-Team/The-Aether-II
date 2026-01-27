@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.item.equipment.weapons;
 
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ARGB;
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ChargedProjectiles;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.EventHooks;
 import org.jetbrains.annotations.Nullable;
@@ -149,5 +151,10 @@ public class DartShooterItem extends ProjectileWeaponItem {
             return Mth.ceil(((float) getDartsLoaded(stack) / (float) AmberDartsItem.FULL_AMOUNT) * 13);
         }
         return super.getBarWidth(stack);
+    }
+
+    @Override
+    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+        return false;
     }
 }

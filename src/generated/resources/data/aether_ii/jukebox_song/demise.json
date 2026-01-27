@@ -4,5 +4,5 @@
     "translate": "jukebox_song.aether_ii.demise"
   },
   "length_in_seconds": 300.0,
-  "sound_event": "aether_ii:item.music_disc.demise"
+  "sound_event": "aether_ii:item.engraved_disc.demise"
 }

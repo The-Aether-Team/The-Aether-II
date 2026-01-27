@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client.gui.screen.guidebook.discovery;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.GuidebookEntry;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.GuidebookDiscoveryAttachment;
 import com.aetherteam.aetherii.client.gui.component.guidebook.DescriptionButton;
@@ -48,18 +49,6 @@ import org.joml.Vector3f;
 import java.util.*;
 
 public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEntry.Mutable> {
-    private static final List<Holder<EntityType<?>>> ENTRY_ORDER = List.of(
-            AetherIIEntityTypes.HIGHFIELDS_TAEGORE, AetherIIEntityTypes.MAGNETIC_TAEGORE, AetherIIEntityTypes.ARCTIC_TAEGORE,
-            AetherIIEntityTypes.HIGHFIELDS_KIRRID, AetherIIEntityTypes.MAGNETIC_KIRRID, AetherIIEntityTypes.ARCTIC_KIRRID,
-            AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, AetherIIEntityTypes.MAGNETIC_BURRUKAI, AetherIIEntityTypes.ARCTIC_BURRUKAI,
-            AetherIIEntityTypes.PHYG, AetherIIEntityTypes.SHEEPUFF, AetherIIEntityTypes.FLYING_COW,
-            AetherIIEntityTypes.AERBUNNY, AetherIIEntityTypes.SKYROOT_LIZARD,AetherIIEntityTypes.MOA,
-            AetherIIEntityTypes.BLUE_SWET, AetherIIEntityTypes.GOLDEN_SWET, AetherIIEntityTypes.AECHOR_PLANT, AetherIIEntityTypes.CARRION_SPROUT,
-            AetherIIEntityTypes.SKEPHID, AetherIIEntityTypes.ZEPHYR,
-            AetherIIEntityTypes.TEMPEST, AetherIIEntityTypes.COCKATRICE,
-            AetherIIEntityTypes.ARKENIUM_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON,
-            AetherIIEntityTypes.BLADESHROOM_HUNTER
-    );
     private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_BESTIARY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_bestiary.png");
     private static final ResourceLocation SLASH_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/slash");
     private static final ResourceLocation IMPACT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/impact");
@@ -72,7 +61,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     private int switchFoodItemCounter = 0;
 
     public BestiarySection(RegistryAccess registryAccess, GuidebookDiscoveryScreen screen, Component title) {
-        super(registryAccess, AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, screen, title);
+        super(registryAccess, AetherIIRegistries.BESTIARY_ENTRY, screen, title);
     }
 
     @Override
@@ -80,7 +69,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         this.entries.clear();
         this.registryAccess.lookupOrThrow(this.registryKey).asHolderIdMap().forEach((entry) -> this.entries.add(new BestiaryEntry.Mutable(entry)));
         this.getOrderedEntries().clear();
-        ENTRY_ORDER.forEach((entityTypeHolder) -> this.entries.forEach((entry) -> {
+        AetherIIBestiaryEntries.ENTRY_ORDER.forEach((entityTypeHolder) -> this.entries.forEach((entry) -> {
             if (entry.getEntityType().value() == entityTypeHolder.value()) {
                 this.getOrderedEntries().add(entry);
             }

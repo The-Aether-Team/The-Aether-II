@@ -1,8 +1,10 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -18,8 +20,14 @@ import java.util.function.Consumer;
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin<E> {
     @Inject(method = "addDetailsToTooltip", at = @At(value = "FIELD", target = "Lnet/minecraft/core/component/DataComponents;STORED_ENCHANTMENTS:Lnet/minecraft/core/component/DataComponentType;", shift = At.Shift.BEFORE))
-    private void addReinforcementTooltip(Item.TooltipContext context, TooltipDisplay tooltipDisplay, Player player, TooltipFlag tooltipFlag, Consumer<Component> tooltipAdder, CallbackInfo ci, @Local Consumer<Component> consumer) {
+    private void aether$addDetailsToTooltip(Item.TooltipContext context, TooltipDisplay tooltipDisplay, Player player, TooltipFlag tooltipFlag, Consumer<Component> tooltipAdder, CallbackInfo ci, @Local Consumer<Component> consumer) {
         ItemStack itemStack = (ItemStack) (Object) this;
-        itemStack.addToTooltip(AetherIIDataComponents.REINFORCEMENT_TIER, context, consumer, tooltipFlag);
+        itemStack.addToTooltip(AetherIIDataComponents.MURAL_SECTION, context, consumer, tooltipFlag);
+    }
+
+    @Inject(method = "applyDamage(ILnet/minecraft/world/entity/LivingEntity;Ljava/util/function/Consumer;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getItem()Lnet/minecraft/world/item/Item;"))
+    private void applyDamage(int damage, LivingEntity livingEntity, Consumer<Item> itemConsumer, CallbackInfo ci) {
+        ItemStack itemStack = (ItemStack) (Object) this;
+        MixinHooks.breakLootItem(itemStack, livingEntity);
     }
 }

@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.api.guidebook;
 
-import com.aetherteam.aetherii.data.resources.registries.AetherIIRewardWrappers;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
@@ -23,6 +23,6 @@ public record RewardWrapper(ResourceLocation advancement, ResourceLocation entry
             ResourceLocation.STREAM_CODEC, RewardWrapper::entryId,
             ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()), RewardWrapper::entryValues,
             RewardWrapper::new);
-    public static final Codec<Holder<RewardWrapper>> CODEC = RegistryFileCodec.create(AetherIIRewardWrappers.REWARD_WRAPPER_REGISTRY_KEY, DIRECT_CODEC);
-    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<RewardWrapper>> STREAM_CODEC = ByteBufCodecs.holder(AetherIIRewardWrappers.REWARD_WRAPPER_REGISTRY_KEY, DIRECT_STREAM_CODEC);
+    public static final Codec<Holder<RewardWrapper>> CODEC = RegistryFileCodec.create(AetherIIRegistries.REWARD_WRAPPER, DIRECT_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<RewardWrapper>> STREAM_CODEC = ByteBufCodecs.holder(AetherIIRegistries.REWARD_WRAPPER, DIRECT_STREAM_CODEC);
 }

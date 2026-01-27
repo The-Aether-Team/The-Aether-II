@@ -1,0 +1,93 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/hammer_of_demolition"
+        },
+        "when": "gui"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/hammer_of_demolition"
+        },
+        "when": "ground"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/hammer_of_demolition"
+        },
+        "when": "fixed"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:range_dispatch",
+      "entries": [
+        {
+          "model": {
+            "type": "minecraft:composite",
+            "models": [
+              {
+                "type": "minecraft:model",
+                "model": "aether_ii:item/hammer_of_demolition_held_ranged"
+              },
+              {
+                "type": "minecraft:model",
+                "model": "aether_ii:item/hammer_of_demolition_head_deployed"
+              },
+              {
+                "type": "aether_ii:emissive",
+                "model": "aether_ii:item/hammer_of_demolition_held_ranged_emissive"
+              }
+            ]
+          },
+          "threshold": 0.01
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:condition",
+        "on_false": {
+          "type": "minecraft:composite",
+          "models": [
+            {
+              "type": "minecraft:model",
+              "model": "aether_ii:item/hammer_of_demolition_held"
+            },
+            {
+              "type": "minecraft:model",
+              "model": "aether_ii:item/hammer_of_demolition_head"
+            },
+            {
+              "type": "aether_ii:emissive",
+              "model": "aether_ii:item/hammer_of_demolition_held_emissive"
+            }
+          ]
+        },
+        "on_true": {
+          "type": "minecraft:composite",
+          "models": [
+            {
+              "type": "minecraft:model",
+              "model": "aether_ii:item/hammer_of_demolition_held_ranged"
+            },
+            {
+              "type": "minecraft:model",
+              "model": "aether_ii:item/hammer_of_demolition_head_ready"
+            },
+            {
+              "type": "aether_ii:emissive",
+              "model": "aether_ii:item/hammer_of_demolition_held_ranged_emissive"
+            }
+          ]
+        },
+        "property": "aether_ii:holding_shift"
+      },
+      "property": "aether_ii:better_cooldown"
+    },
+    "property": "minecraft:display_context"
+  }
+}
