@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.generators.models;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIIItemModelSubProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.model.ModelInstance;
 import net.minecraft.client.data.models.model.ModelTemplates;
@@ -19,57 +20,57 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
     @Override
     public void run() {
         // Tools
-        this.generateFlatItem(AetherIIItems.SKYROOT_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.SKYROOT_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.SKYROOT_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.SKYROOT_TROWEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        this.generateReinforcedItem(AetherIIItems.SKYROOT_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.SKYROOT_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.SKYROOT_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.SKYROOT_TROWEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
 
-        this.generateFlatItem(AetherIIItems.HOLYSTONE_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.HOLYSTONE_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.HOLYSTONE_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.HOLYSTONE_TROWEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        this.generateReinforcedItem(AetherIIItems.HOLYSTONE_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.HOLYSTONE_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.HOLYSTONE_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.HOLYSTONE_TROWEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
 
-        this.generateReinforcedItem(AetherIIItems.ZANITE_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateReinforcedItem(AetherIIItems.ZANITE_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateReinforcedItem(AetherIIItems.ZANITE_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateReinforcedItem(AetherIIItems.ZANITE_TROWEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        this.generateReinforcedItem(AetherIIItems.ZANITE_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.ZANITE_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.ZANITE_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.ZANITE_TROWEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
 
-        this.generateFlatItem(AetherIIItems.ARKENIUM_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.ARKENIUM_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.ARKENIUM_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.ARKENIUM_TROWEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        this.generateReinforcedItem(AetherIIItems.ARKENIUM_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.FOURTH);
+        this.generateReinforcedItem(AetherIIItems.ARKENIUM_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.FOURTH);
+        this.generateReinforcedItem(AetherIIItems.ARKENIUM_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.FOURTH);
+        this.generateReinforcedItem(AetherIIItems.ARKENIUM_TROWEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.FOURTH);
 
-        this.generateFlatItem(AetherIIItems.GRAVITITE_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.GRAVITITE_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.GRAVITITE_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.GRAVITITE_TROWEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        this.generateReinforcedItem(AetherIIItems.GRAVITITE_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.GRAVITITE_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.GRAVITITE_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.GRAVITITE_TROWEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
 
         this.generateFlatItem(AetherIIItems.ZANITE_SHEARS.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
         // Combat
-        this.generateFlatItem(AetherIIItems.SKYROOT_SHORTSWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.SKYROOT_HAMMER.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.SKYROOT_SPEAR.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        this.generateReinforcedItem(AetherIIItems.SKYROOT_SHORTSWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.SKYROOT_HAMMER.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.SKYROOT_SPEAR.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
         this.generateCrossbow(AetherIIItems.SKYROOT_CROSSBOW.get());
 
-        this.generateFlatItem(AetherIIItems.HOLYSTONE_SHORTSWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.HOLYSTONE_HAMMER.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.HOLYSTONE_SPEAR.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        this.generateReinforcedItem(AetherIIItems.HOLYSTONE_SHORTSWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.HOLYSTONE_HAMMER.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.HOLYSTONE_SPEAR.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
         this.generateCrossbow(AetherIIItems.HOLYSTONE_CROSSBOW.get());
 
-        this.generateReinforcedItem(AetherIIItems.ZANITE_SHORTSWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateReinforcedItem(AetherIIItems.ZANITE_HAMMER.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateReinforcedItem(AetherIIItems.ZANITE_SPEAR.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        this.generateReinforcedItem(AetherIIItems.ZANITE_SHORTSWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.ZANITE_HAMMER.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.ZANITE_SPEAR.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
         this.generateCrossbow(AetherIIItems.ZANITE_CROSSBOW.get());
 
-        this.generateFlatItem(AetherIIItems.ARKENIUM_SHORTSWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.ARKENIUM_HAMMER.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.ARKENIUM_SPEAR.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        this.generateReinforcedItem(AetherIIItems.ARKENIUM_SHORTSWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.FOURTH);
+        this.generateReinforcedItem(AetherIIItems.ARKENIUM_HAMMER.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.FOURTH);
+        this.generateReinforcedItem(AetherIIItems.ARKENIUM_SPEAR.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.FOURTH);
         this.generateCrossbow(AetherIIItems.ARKENIUM_CROSSBOW.get());
 
-        this.generateFlatItem(AetherIIItems.GRAVITITE_SHORTSWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.GRAVITITE_HAMMER.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        this.generateFlatItem(AetherIIItems.GRAVITITE_SPEAR.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        this.generateReinforcedItem(AetherIIItems.GRAVITITE_SHORTSWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.GRAVITITE_HAMMER.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.GRAVITITE_SPEAR.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
         this.generateCrossbow(AetherIIItems.GRAVITITE_CROSSBOW.get());
 
         this.generateModeledShield(AetherIIItems.SKYROOT_SHIELD.get(), TextureMapping.getBlockTexture(AetherIIBlocks.SKYROOT_PLANKS.get()), "light_shield");
@@ -82,6 +83,9 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateDarts(AetherIIItems.AMBER_DARTS.get());
 
         this.generateFlatItem(AetherIIItems.SCATTERGLASS_BOLT.get(), ModelTemplates.FLAT_ITEM);
+
+        this.generateHammerOfDemolition(AetherIIItems.HAMMER_OF_DEMOLITION.get());
+        this.generateBrokenItem(AetherIIItems.HAMMER_OF_DEMOLITION.get());
 
         // Armor
         this.generateDyedArmorItem(AetherIIItems.BEAST_PELT_HELMET.get(), 0xFFCFEEF9);
@@ -114,17 +118,40 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.GRAVITITE_BOOTS.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GRAVITITE_GLOVES.get(), ModelTemplates.FLAT_ITEM);
 
-        // Charms
-        this.generateFlatItem(AetherIIItems.CHARM_OF_SLASH.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.CHARM_OF_IMPACT.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.CHARM_OF_PIERCE.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.CHARM_OF_DEXTERITY.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.SENTRY_BOOTS.get(), ModelTemplates.FLAT_ITEM);
+        this.generateBrokenItem(AetherIIItems.SENTRY_BOOTS.get());
 
-        this.generateFlatItem(AetherIIItems.CHARM_OF_HEALTH.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.CHARM_OF_DEFENSE.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.CHARM_OF_TOUGHNESS.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.CHARM_OF_RESISTANCE.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.CHARM_OF_AGILITY.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.NEPTUNE_HELMET.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.NEPTUNE_CHESTPLATE.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.NEPTUNE_LEGGINGS.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.NEPTUNE_BOOTS.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.NEPTUNE_GLOVES.get(), ModelTemplates.FLAT_ITEM);
+        this.generateBrokenItem(AetherIIItems.NEPTUNE_HELMET.get());
+        this.generateBrokenItem(AetherIIItems.NEPTUNE_CHESTPLATE.get());
+        this.generateBrokenItem(AetherIIItems.NEPTUNE_LEGGINGS.get());
+        this.generateBrokenItem(AetherIIItems.NEPTUNE_BOOTS.get());
+        this.generateBrokenItem(AetherIIItems.NEPTUNE_GLOVES.get());
+
+        // Relics
+        this.generateFlatItem(AetherIIItems.KINETIC_THRUSTERS.get(), ModelTemplates.FLAT_ITEM);
+
+        // Accessories
+        this.generateFlatItem(AetherIIItems.ZANITE_PENDANT.get(), ModelTemplates.FLAT_ITEM);
+
+        // Charms
+        this.generateCharmItem(AetherIIItems.CHARM_OF_EFFICIENCY_I.get(), "tool", "1", "efficiency");
+
+        this.generateCharmItem(AetherIIItems.CHARM_OF_DAMAGE_I.get(), "weapon", "1", "damage");
+        this.generateCharmItem(AetherIIItems.CHARM_OF_DEXTERITY_I.get(), "weapon", "1", "dexterity");
+        this.generateCharmItem(AetherIIItems.CHARM_OF_KNOCKBACK_I.get(), "weapon", "1", "knockback");
+
+        this.generateCharmItem(AetherIIItems.CHARM_OF_HEALTH_I.get(), "armor", "1", "health");
+        this.generateCharmItem(AetherIIItems.CHARM_OF_DEFENSE_I.get(), "armor", "1", "defense");
+        this.generateCharmItem(AetherIIItems.CHARM_OF_TOUGHNESS_I.get(), "armor", "1", "toughness");
+        this.generateCharmItem(AetherIIItems.CHARM_OF_RESISTANCE_I.get(), "armor", "1", "resistance");
+        this.generateCharmItem(AetherIIItems.CHARM_OF_AGILITY_I.get(), "armor", "1", "agility");
+
+        this.generateFlatItem(AetherIIItems.COMPANION.get(), ModelTemplates.FLAT_ITEM);
 
         // Materials
         this.generateFlatItem(AetherIIItems.SKYROOT_STICK.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
@@ -159,6 +186,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.CHARGE_CATALYST.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.ARKENIUM_CORE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GRAVITITE_CORE.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.EYE_OF_THE_MIMIC.get(), ModelTemplates.FLAT_ITEM);
 
         // Irradiated Items
         this.generateFlatItem(AetherIIItems.IRRADIATED_ARMOR.get(), ModelTemplates.FLAT_ITEM);
@@ -218,12 +246,17 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.ARKENIUM_HESTVEIL_CANISTER.get(), ModelTemplates.FLAT_ITEM);
 
         // Music Discs
-        this.generateFlatItem(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get(), ModelTemplates.MUSIC_DISC);
-        this.generateFlatItem(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get(), ModelTemplates.MUSIC_DISC);
-        this.generateFlatItem(AetherIIItems.MUSIC_DISC_AERWHALE.get(), ModelTemplates.MUSIC_DISC);
-        this.generateFlatItem(AetherIIItems.MUSIC_DISC_APPROACHES.get(), ModelTemplates.MUSIC_DISC);
-        this.generateFlatItem(AetherIIItems.MUSIC_DISC_DEMISE.get(), ModelTemplates.MUSIC_DISC);
-        this.generateFlatItem(AetherIIItems.RECORDING_892.get(), ModelTemplates.MUSIC_DISC);
+        this.generateMusicPlayer(AetherIIItems.MUSIC_PLAYER.get());
+
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_AETHER_TUNE.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_AERWHALE.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_APPROACHES.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_DEMISE.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_CHINCHILLA.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_HIGH.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS.get());
+        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_CHASE.get());
 
         // Spawn Eggs
         this.generateFlatItem(AetherIIItems.FLYING_COW_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
@@ -254,6 +287,10 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.SKEPHID_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.DETONATION_SENTRY_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.SENTRY_GOLEM_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.SENTRY_CRATE_MIMIC_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.SLIDER_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
 
         // Misc
         this.generateBundleModels(AetherIIItems.BEAST_PELT_BUNDLE.get());
@@ -269,6 +306,8 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.GLINT_COIN.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GUIDEBOOK_PAGE.get(), ModelTemplates.FLAT_ITEM);
         this.generatePortalFrameItem(AetherIIItems.AETHER_PORTAL_FRAME.get());
+        this.generateFlatItem(AetherIIItems.MURAL_ITEM.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.BROKEN_ITEM.get(), ModelTemplates.FLAT_ITEM);
 
         // Blocks
         this.generateFlatItem(AetherIIBlocks.ARKENIUM_CHAIN.get().asItem(), ModelTemplates.FLAT_ITEM);

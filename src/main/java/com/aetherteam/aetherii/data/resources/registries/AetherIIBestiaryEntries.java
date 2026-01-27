@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
@@ -30,8 +31,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class AetherIIBestiaryEntries {
-    public static final ResourceKey<Registry<BestiaryEntry>> BESTIARY_ENTRY_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bestiary_entry"));
-
     public static final ResourceKey<BestiaryEntry> FLYING_COW = createKey("flying_cow");
     public static final ResourceKey<BestiaryEntry> SHEEPUFF = createKey("sheepuff");
     public static final ResourceKey<BestiaryEntry> PHYG = createKey("phyg");
@@ -59,7 +58,25 @@ public class AetherIIBestiaryEntries {
     public static final ResourceKey<BestiaryEntry> COCKATRICE = createKey("cockatrice");
     public static final ResourceKey<BestiaryEntry> ARKENIUM_TALUTON = createKey("arkenium_taluton");
     public static final ResourceKey<BestiaryEntry> GRAVITITE_TALUTON = createKey("gravitite_taluton");
+    public static final ResourceKey<BestiaryEntry> MIMIC = createKey("mimic");
+    public static final ResourceKey<BestiaryEntry> DETONATION_SENTRY = createKey("detonation_sentry");
+    public static final ResourceKey<BestiaryEntry> SENTRY_GOLEM = createKey("sentry_golem");
+    public static final ResourceKey<BestiaryEntry> SLIDER = createKey("slider");
     public static final ResourceKey<BestiaryEntry> BLADESHROOM_HUNTER = createKey("bladeshroom_hunter");
+
+    public static final List<Holder<EntityType<?>>> ENTRY_ORDER = List.of(
+            AetherIIEntityTypes.HIGHFIELDS_TAEGORE, AetherIIEntityTypes.MAGNETIC_TAEGORE, AetherIIEntityTypes.ARCTIC_TAEGORE,
+            AetherIIEntityTypes.HIGHFIELDS_KIRRID, AetherIIEntityTypes.MAGNETIC_KIRRID, AetherIIEntityTypes.ARCTIC_KIRRID,
+            AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, AetherIIEntityTypes.MAGNETIC_BURRUKAI, AetherIIEntityTypes.ARCTIC_BURRUKAI,
+            AetherIIEntityTypes.PHYG, AetherIIEntityTypes.SHEEPUFF, AetherIIEntityTypes.FLYING_COW, AetherIIEntityTypes.AERBUNNY,
+            AetherIIEntityTypes.SKYROOT_LIZARD, AetherIIEntityTypes.GLITTERWING, AetherIIEntityTypes.SHROUDWING,
+            AetherIIEntityTypes.MOA,
+            AetherIIEntityTypes.BLUE_SWET, AetherIIEntityTypes.GOLDEN_SWET, AetherIIEntityTypes.AECHOR_PLANT, AetherIIEntityTypes.CARRION_SPROUT,
+            AetherIIEntityTypes.SKEPHID, AetherIIEntityTypes.ZEPHYR,
+            AetherIIEntityTypes.TEMPEST, AetherIIEntityTypes.COCKATRICE,
+            AetherIIEntityTypes.ARKENIUM_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON,
+            AetherIIEntityTypes.MIMIC, AetherIIEntityTypes.DETONATION_SENTRY, AetherIIEntityTypes.SENTRY_GOLEM, AetherIIEntityTypes.SLIDER
+    );
 
     public static final Map<ResourceKey<BestiaryEntry>, Holder<EntityType<?>>> ENTITIES = Map.ofEntries(
             Map.entry(FLYING_COW, AetherIIEntityTypes.FLYING_COW),
@@ -89,6 +106,10 @@ public class AetherIIBestiaryEntries {
             Map.entry(COCKATRICE, AetherIIEntityTypes.COCKATRICE),
             Map.entry(ARKENIUM_TALUTON, AetherIIEntityTypes.ARKENIUM_TALUTON),
             Map.entry(GRAVITITE_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON),
+            Map.entry(MIMIC, AetherIIEntityTypes.MIMIC),
+            Map.entry(DETONATION_SENTRY, AetherIIEntityTypes.DETONATION_SENTRY),
+            Map.entry(SENTRY_GOLEM, AetherIIEntityTypes.SENTRY_GOLEM),
+            Map.entry(SLIDER, AetherIIEntityTypes.SLIDER),
             Map.entry(BLADESHROOM_HUNTER, AetherIIEntityTypes.BLADESHROOM_HUNTER)
     );
     public static final List<Holder<EntityType<?>>> NAMED = List.of(
@@ -130,6 +151,10 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.SKEPHID, AetherIIStats.SKEPHID),
             Map.entry(AetherIIEntityTypes.ARKENIUM_TALUTON, AetherIIStats.ARKENIUM_TALUTON),
             Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, AetherIIStats.GRAVITITE_TALUTON),
+            Map.entry(AetherIIEntityTypes.MIMIC, AetherIIStats.MIMIC),
+            Map.entry(AetherIIEntityTypes.DETONATION_SENTRY, AetherIIStats.DETONATION_SENTRY),
+            Map.entry(AetherIIEntityTypes.SENTRY_GOLEM, AetherIIStats.SENTRY_GOLEM),
+            Map.entry(AetherIIEntityTypes.SLIDER, AetherIIStats.SLIDER),
             Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, AetherIIStats.BLADESHROOM_HUNTER)
     );
     public static final Map<Holder<EntityType<?>>, List<BestiaryEntry.LootDisplay>> LOOT = Map.ofEntries(
@@ -156,6 +181,10 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.COCKATRICE, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.COCKATRICE_FEATHER, 1.0, 1, 3))),
             Map.entry(AetherIIEntityTypes.ARKENIUM_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.ARKENIUM_CORE, 0.075, 1, 1))),
             Map.entry(AetherIIEntityTypes.GRAVITITE_TALUTON, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.HOLYSTONE, 1.0, 0, 2), BestiaryEntry.LootDisplay.item(AetherIIItems.GRAVITITE_CORE, 0.075, 1, 1))),
+            Map.entry(AetherIIEntityTypes.MIMIC, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.EYE_OF_THE_MIMIC, 0.075, 1, 1))),
+            Map.entry(AetherIIEntityTypes.DETONATION_SENTRY, List.of()),
+            Map.entry(AetherIIEntityTypes.SENTRY_GOLEM, List.of()),
+            Map.entry(AetherIIEntityTypes.SLIDER, List.of()),
             Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, List.of())
     );
     public static final Map<Holder<EntityType<?>>, TagKey<Item>> FED = Map.ofEntries(
@@ -176,7 +205,7 @@ public class AetherIIBestiaryEntries {
     );
 
     private static ResourceKey<BestiaryEntry> createKey(String name) {
-        return ResourceKey.create(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.BESTIARY_ENTRY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<BestiaryEntry> context) {
@@ -216,7 +245,7 @@ public class AetherIIBestiaryEntries {
     }
 
     public static Registry<BestiaryEntry> getRegistry(RegistryAccess registryAccess) {
-        return registryAccess.lookupOrThrow(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY);
+        return registryAccess.lookupOrThrow(AetherIIRegistries.BESTIARY_ENTRY);
     }
 
     public static List<BestiaryEntry.EffectResistanceDisplay> getEffectResistances(Holder<EntityType<?>> holder) {

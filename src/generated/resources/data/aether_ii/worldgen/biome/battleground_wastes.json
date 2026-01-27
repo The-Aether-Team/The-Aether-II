@@ -105,7 +105,22 @@
   "spawners": {
     "aether_ii:aether_aerwhale": [],
     "aether_ii:aether_ambient": [],
+    "aether_ii:aether_cave_monster": [
+      {
+        "type": "aether_ii:arkenium_taluton",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:gravitite_taluton",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
     "aether_ii:aether_darkness_monster": [],
+    "aether_ii:aether_dungeon_monster": [],
     "aether_ii:aether_sky_monster": [
       {
         "type": "aether_ii:zephyr",
@@ -125,20 +140,7 @@
     "axolotls": [],
     "creature": [],
     "misc": [],
-    "monster": [
-      {
-        "type": "aether_ii:arkenium_taluton",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
-        "type": "aether_ii:gravitite_taluton",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      }
-    ],
+    "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []

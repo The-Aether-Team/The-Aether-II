@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.api.styles;
 
-import com.aetherteam.aetherii.data.resources.registries.AetherIIStyleDesigns;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
@@ -21,6 +21,6 @@ public record StyleDesign(ResourceLocation assetId, Component description) {
             ResourceLocation.STREAM_CODEC, StyleDesign::assetId,
             ComponentSerialization.STREAM_CODEC, StyleDesign::description,
             StyleDesign::new);
-    public static final Codec<Holder<StyleDesign>> CODEC = RegistryFileCodec.create(AetherIIStyleDesigns.STYLE_DESIGN_REGISTRY_KEY, DIRECT_CODEC);
-    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<StyleDesign>> STREAM_CODEC = ByteBufCodecs.holder(AetherIIStyleDesigns.STYLE_DESIGN_REGISTRY_KEY, DIRECT_STREAM_CODEC);
+    public static final Codec<Holder<StyleDesign>> CODEC = RegistryFileCodec.create(AetherIIRegistries.STYLE_DESIGN, DIRECT_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<StyleDesign>> STREAM_CODEC = ByteBufCodecs.holder(AetherIIRegistries.STYLE_DESIGN, DIRECT_STREAM_CODEC);
 }

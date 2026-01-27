@@ -2,10 +2,10 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.entity.variant.ShroudwingVariant;
 import com.aetherteam.aetherii.entity.variant.spawning.RandomCheck;
 import net.minecraft.core.HolderSet;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -18,8 +18,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class AetherIIShroudwingVariants {
-    public static final ResourceKey<Registry<ShroudwingVariant>> SHROUDWING_VARIANT_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "shroudwing_variant"));
-
     public static final ResourceKey<ShroudwingVariant> PURPLE = createKey("purple");
     public static final ResourceKey<ShroudwingVariant> SCARAB = createKey("scarab");
     public static final ResourceKey<ShroudwingVariant> FIRE = createKey("fire");
@@ -28,7 +26,7 @@ public class AetherIIShroudwingVariants {
     public static final ResourceKey<ShroudwingVariant> MOSS = createKey("moss");
 
     private static ResourceKey<ShroudwingVariant> createKey(String name) {
-        return ResourceKey.create(AetherIIShroudwingVariants.SHROUDWING_VARIANT_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.SHROUDWING_VARIANT, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<ShroudwingVariant> context) {

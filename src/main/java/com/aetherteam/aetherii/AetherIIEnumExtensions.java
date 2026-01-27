@@ -18,6 +18,10 @@ public class AetherIIEnumExtensions {
             Rarity.class, -1, "aether_ii:treasure", (UnaryOperator<Style>) (style) -> AetherIIItems.TREASURE_NAME_COLOR
     );
 
+    public static final EnumProxy<Rarity> AETHER_II_UPGRADED_RARITY_PROXY = new EnumProxy<>(
+            Rarity.class, -1, "aether_ii:upgraded", (UnaryOperator<Style>) (style) -> AetherIIItems.UPGRADED_WEAPON_COLOR
+    );
+
     private static String prefix(String id) {
         return AetherII.MODID + ":" + id;
     }

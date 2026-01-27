@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIISkyrootLizardVariants;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
@@ -59,7 +60,7 @@ public class SkyrootLizard extends AetherAnimal {
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(DATA_VARIANT_ID, this.registryAccess().lookupOrThrow(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY).getOrThrow(AetherIISkyrootLizardVariants.SKYROOT));
+        builder.define(DATA_VARIANT_ID, this.registryAccess().lookupOrThrow(AetherIIRegistries.SKYROOT_LIZARD_VARIANT).getOrThrow(AetherIISkyrootLizardVariants.SKYROOT));
     }
 
     @Nullable
@@ -140,6 +141,6 @@ public class SkyrootLizard extends AetherAnimal {
     @Override
     public void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
-        VariantUtils.readVariant(input, AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY).ifPresent(this::setVariant);
+        VariantUtils.readVariant(input, AetherIIRegistries.SKYROOT_LIZARD_VARIANT).ifPresent(this::setVariant);
     }
 }

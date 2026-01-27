@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.miscellaneous;
 
+import com.aetherteam.aetherii.AetherII;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -48,6 +49,6 @@ public class FacingPillarBlock extends DirectionalBlock {
     @SuppressWarnings("deprecation")
     @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
-        return state.setValue(FACING, mirror.mirror(state.getValue(FACING)));
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 }

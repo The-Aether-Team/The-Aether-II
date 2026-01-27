@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.entity.ai.goal.ClosedAnimationMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.projectile.VenomousDart;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -12,7 +13,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
@@ -186,77 +186,21 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
         this.playSound(AetherIISoundEvents.ENTITY_COCKATRICE_STEP.get(), 0.15F, 1.0F);
     }
 
-    protected static class CockatriceMeleeAttackGoal extends MeleeAttackGoal {
-        private int ticksUntilNextAttack;
-        private boolean attack;
-        private final float attackThresholdSqr;
+    protected static class CockatriceMeleeAttackGoal extends ClosedAnimationMeleeAttackGoal {
 
         public CockatriceMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen, float attackThreshold) {
-            super(mob, speedModifier, followingTargetEvenIfNotSeen);
-            this.attackThresholdSqr = attackThreshold * attackThreshold;
+            super(mob, speedModifier, followingTargetEvenIfNotSeen, 13, 30, attackThreshold);
         }
 
         @Override
-        public boolean canUse() {
-            return super.canUse() && this.mob.getTarget() != null && this.mob.distanceToSqr(this.mob.getTarget()) < this.attackThresholdSqr;
+        public void attackAnimation() {
+            this.mob.level().broadcastEntityEvent(this.mob, (byte) CLAW_ATTACK_EVENT);
         }
 
         @Override
-        public boolean canContinueToUse() {
-            return super.canContinueToUse() && this.mob.getTarget() != null && this.mob.distanceToSqr(this.mob.getTarget()) < this.attackThresholdSqr;
-        }
-
-        @Override
-        public void start() {
-            super.start();
-            this.ticksUntilNextAttack = 0;
-            this.attack = false;
-        }
-
-        @Override
-        protected void checkAndPerformAttack(LivingEntity target) {
-            if ((this.mob.isWithinMeleeAttackRange(target) && this.mob.getSensing().hasLineOfSight(target)) && !this.attack) {
-                this.resetAttackCooldown();
-                this.attack = true;
-            }
-
-            if (this.attack && this.ticksUntilNextAttack == 30) {
-                this.mob.level().broadcastEntityEvent(this.mob, (byte) CLAW_ATTACK_EVENT);
-            }
-
-            if (this.canPerformAttack(target)) {
-                this.mob.swing(InteractionHand.MAIN_HAND);
-                this.mob.doHurtTarget(getServerLevel(this.mob.level()), target);
-                this.mob.setZza(0.3F);
-            }
-
-            if (this.attack) {
-                --this.ticksUntilNextAttack;
-            }
-
-            if (this.ticksUntilNextAttack <= 0) {
-                this.attack = false;
-            }
-        }
-
-        @Override
-        protected void resetAttackCooldown() {
-            this.ticksUntilNextAttack = this.adjustedTickDelay(30);
-        }
-
-        @Override
-        protected boolean isTimeToAttack() {
-            return this.ticksUntilNextAttack == 10 + 3;
-        }
-
-        @Override
-        protected int getTicksUntilNextAttack() {
-            return this.ticksUntilNextAttack;
-        }
-
-        @Override
-        public boolean requiresUpdateEveryTick() {
-            return true;
+        public void attackAction() {
+            super.attackAction();
+            this.mob.setZza(0.3F);
         }
     }
 

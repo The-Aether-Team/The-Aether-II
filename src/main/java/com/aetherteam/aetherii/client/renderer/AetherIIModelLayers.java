@@ -9,6 +9,12 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation SKYROOT_BED_HEAD = register("skyroot_bed_head");
     public static final ModelLayerLocation MOA_EGG = register("moa_egg");
     public static final ModelLayerLocation ALKAHEST_PURIFIER = register("alkahest_purifier");
+    public static final ModelLayerLocation SENTRY_CRATE = register("sentry_crate");
+    public static final ModelLayerLocation SENTRY_SPAWNER = register("sentry_spawner");
+    
+    public static final ModelLayerLocation SENTRY_SPAWNER_PISTON = register("sentry_spawner_piston");
+    public static final ModelLayerLocation DOUBLE_SENTRY_CRATE_LEFT = register("double_sentry_crate_left");
+    public static final ModelLayerLocation DOUBLE_SENTRY_CRATE_RIGHT = register("double_sentry_crate_right");
 
     public static final ModelLayerLocation PHYG = register("phyg");
     public static final ModelLayerLocation AERBUNNY = register("aerbunny");
@@ -55,6 +61,13 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation GRAVITITE_TALUTON = register("gravitite_taluton");
     public static final ModelLayerLocation BLADESHROOM_HUNTER = register("bladeshroom_hunter");
 
+    public static final ModelLayerLocation MIMIC = register("mimic");
+    public static final ModelLayerLocation DETONATION_SENTRY = register("detonation_sentry");
+    public static final ModelLayerLocation DEMOLITION_PROJECTILE = register("detonation_projectile");
+    public static final ModelLayerLocation SENTRY_GOLEM = register("sentry_golem");
+
+    public static final ModelLayerLocation SLIDER = register("slider");
+
     public static final ModelLayerLocation EDWARD = register("edward");
 
     public static final ModelLayerLocation GRAVITITE_DEBRIS_SHOT = register("gravitite_debris_shot");
@@ -65,6 +78,8 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation GLOVES_SLIM = register("gloves_slim");
     public static final ModelLayerLocation GLOVES_FIRST_PERSON = register("gloves_first_person");
     public static final ModelLayerLocation GLOVES_SLIM_FIRST_PERSON = register("gloves_slim_first_person");
+
+    public static final ModelLayerLocation ACCESSORY = register("accessory");
 
     private static ModelLayerLocation register(String name) {
         return register(name, "main");

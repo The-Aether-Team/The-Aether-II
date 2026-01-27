@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.client.renderer.item.tooltip;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-import com.aetherteam.aetherii.item.components.ReinforcementTier;
+import com.aetherteam.aetherii.item.components.Charms;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
@@ -12,27 +12,22 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
+import java.util.Locale;
 
-public class ClientCharmTooltip implements ClientTooltipComponent {
-    public final ItemStack base;
-    public final List<ItemStack> items;
-
-    public ClientCharmTooltip(ItemStack base, List<ItemStack> items) {
-        this.base = base;
-        this.items = items;
-    }
-
+public record ClientCharmTooltip(ItemStack base, List<Charms.CharmHolder> charmHolders) implements ClientTooltipComponent {
     @Override
     public void renderImage(Font font, int x, int y, int p_368529_, int p_368584_, GuiGraphics guiGraphics) {
         int index = 0;
         for (int j = 0; j < 2; j++) {
             for (int i = 0; i < 4; i++) {
                 if (index < this.limit()) {
-                    ItemStack stack = this.items.get(index);
+                    Charms.CharmHolder charmHolder = this.charmHolders.get(index);
+                    ItemStack stack = charmHolder.getStack();
                     int xOffset = x + (18 * i);
                     int yOffset = y + (18 * j);
                     if (stack.isEmpty()) {
-                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tooltip/charm"), xOffset, yOffset, 16, 16);
+                        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_" + charmHolder.getType().name().toLowerCase(Locale.ROOT) + "_charm_" + charmHolder.getTier().getValue());
+                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, xOffset, yOffset, 16, 16);
                     } else {
                         guiGraphics.renderItem(stack, xOffset, yOffset);
                     }
@@ -58,15 +53,10 @@ public class ClientCharmTooltip implements ClientTooltipComponent {
     }
 
     private int limit() {
-        int limit = 0;
-        ReinforcementTier tier = this.base.get(AetherIIDataComponents.REINFORCEMENT_TIER);
-        if (tier != null) {
-            limit = tier.getCharmSlots();
-        }
-        return limit;
+        return this.charmHolders().size();
     }
 
-    public record CharmTooltip(ItemStack base, List<ItemStack> items) implements TooltipComponent {
+    public record CharmTooltip(ItemStack base, List<Charms.CharmHolder> items) implements TooltipComponent {
 
     }
 }

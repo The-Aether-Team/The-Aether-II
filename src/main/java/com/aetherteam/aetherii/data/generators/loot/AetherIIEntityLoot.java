@@ -33,7 +33,8 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.neoforged.neoforge.common.Tags;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class AetherIIEntityLoot extends EntityLootSubProvider {
@@ -272,6 +273,18 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         );
 
         this.add(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), LootTable.lootTable());
+
+        this.add(AetherIIEntityTypes.MIMIC.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.EYE_OF_THE_MIMIC.get())
+                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
+                        )
+                )
+        );
+
+        this.add(AetherIIEntityTypes.DETONATION_SENTRY.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.SENTRY_GOLEM.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.SLIDER.get(), LootTable.lootTable());
 
         this.add(AetherIIEntityTypes.EDWARD.get(), LootTable.lootTable());
     }

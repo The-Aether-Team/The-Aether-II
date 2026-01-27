@@ -18,6 +18,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.TagValueOutput;
@@ -38,7 +39,12 @@ public class ArkeniumForgeBlockEntity extends BaseContainerBlockEntity implement
 
     @Override
     protected AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
-        return new ArkeniumForgeMenu(containerId, inventory, this);
+        ArkeniumForgeMenu menu = new ArkeniumForgeMenu(containerId, inventory, this);
+        menu.registerUpdater(input -> {
+            this.setItem(0, input);
+            this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
+        });
+        return menu;
     }
 
     @Override

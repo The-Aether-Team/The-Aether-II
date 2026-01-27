@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.variant;
 
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIShroudwingVariants;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -23,9 +24,9 @@ public record ShroudwingVariant(ResourceLocation texture, Optional<ResourceLocat
             ResourceLocation.CODEC.optionalFieldOf("emissive_texture").forGetter(ShroudwingVariant::emissiveTexture),
             SpawnPrioritySelectors.CODEC.fieldOf("spawn_conditions").fieldOf("spawn_biomes").forGetter(ShroudwingVariant::spawnConditions)
     ).apply(instance, ShroudwingVariant::new));
-    public static final StreamCodec<RegistryFriendlyByteBuf, ShroudwingVariant> DIRECT_STREAM_CODEC = ByteBufCodecs.registry(AetherIIShroudwingVariants.SHROUDWING_VARIANT_REGISTRY_KEY);
-    public static final Codec<Holder<ShroudwingVariant>> CODEC = RegistryFileCodec.create(AetherIIShroudwingVariants.SHROUDWING_VARIANT_REGISTRY_KEY, DIRECT_CODEC);
-    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<ShroudwingVariant>> STREAM_CODEC = ByteBufCodecs.holder(AetherIIShroudwingVariants.SHROUDWING_VARIANT_REGISTRY_KEY, DIRECT_STREAM_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, ShroudwingVariant> DIRECT_STREAM_CODEC = ByteBufCodecs.registry(AetherIIRegistries.SHROUDWING_VARIANT);
+    public static final Codec<Holder<ShroudwingVariant>> CODEC = RegistryFileCodec.create(AetherIIRegistries.SHROUDWING_VARIANT, DIRECT_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<ShroudwingVariant>> STREAM_CODEC = ByteBufCodecs.holder(AetherIIRegistries.SHROUDWING_VARIANT, DIRECT_STREAM_CODEC);
 
     public List<Selector<SpawnContext, SpawnCondition>> selectors() {
         return this.spawnConditions.selectors();

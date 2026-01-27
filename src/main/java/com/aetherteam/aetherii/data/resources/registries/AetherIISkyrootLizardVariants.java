@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -16,8 +17,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class AetherIISkyrootLizardVariants {
-    public static final ResourceKey<Registry<SkyrootLizardVariant>> SKYROOT_LIZARD_VARIANT_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot_lizard_variant"));
-
     public static final ResourceKey<SkyrootLizardVariant> SKYROOT = createKey("skyroot");
     public static final ResourceKey<SkyrootLizardVariant> SKYPLANE = createKey("skyplane");
     public static final ResourceKey<SkyrootLizardVariant> SKYBIRCH = createKey("skybirch");
@@ -30,7 +29,7 @@ public class AetherIISkyrootLizardVariants {
     public static final ResourceKey<SkyrootLizardVariant> AMBEROOT = createKey("amberoot");
 
     private static ResourceKey<SkyrootLizardVariant> createKey(String name) {
-        return ResourceKey.create(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.SKYROOT_LIZARD_VARIANT, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<SkyrootLizardVariant> context) {
@@ -51,14 +50,14 @@ public class AetherIISkyrootLizardVariants {
     }
 
     public static Holder<SkyrootLizardVariant> getVariantForLeaves(RegistryAccess registryAccess, Holder<Block> leafBlock) {
-        Registry<SkyrootLizardVariant> registry = registryAccess.lookupOrThrow(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY);
+        Registry<SkyrootLizardVariant> registry = registryAccess.lookupOrThrow(AetherIIRegistries.SKYROOT_LIZARD_VARIANT);
         Optional<Holder.Reference<SkyrootLizardVariant>> optional = registry.listElements().filter((variant) -> variant.value().leafBlock().is(leafBlock)).findFirst().or(() -> registry.get(SKYROOT));
         Objects.requireNonNull(registry);
         return optional.or(registry::getAny).orElseThrow();
     }
 
     public static Holder<SkyrootLizardVariant> getRandomVariant(RandomSource randomSource, RegistryAccess registryAccess) {
-        Registry<SkyrootLizardVariant> registry = registryAccess.lookupOrThrow(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY);
+        Registry<SkyrootLizardVariant> registry = registryAccess.lookupOrThrow(AetherIIRegistries.SKYROOT_LIZARD_VARIANT);
         Optional<Holder.Reference<SkyrootLizardVariant>> optional = registry.getRandom(randomSource);
         Objects.requireNonNull(registry);
         return optional.or(registry::getAny).orElseThrow();

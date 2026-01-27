@@ -126,10 +126,6 @@ public class AetherIIDataMapData extends DataMapProvider {
         blocks.add(AetherIIBlocks.GUARDIAN_WOOD.get().builtInRegistryHolder(), new BlockInfection(AetherIIBlocks.INFECTED_WOOD.getKey()), false);
         blocks.add(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get().builtInRegistryHolder(), new BlockInfection(AetherIIBlocks.STRIPPED_INFECTED_LOG.getKey()), false);
         blocks.add(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get().builtInRegistryHolder(), new BlockInfection(AetherIIBlocks.STRIPPED_INFECTED_WOOD.getKey()), false);
-        blocks.add(AetherIIBlocks.DENSE_GUARDIAN_LOG.get().builtInRegistryHolder(), new BlockInfection(AetherIIBlocks.DENSE_INFECTED_LOG.getKey()), false);
-        blocks.add(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get().builtInRegistryHolder(), new BlockInfection(AetherIIBlocks.DENSE_INFECTED_WOOD.getKey()), false);
-        blocks.add(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_LOG.get().builtInRegistryHolder(), new BlockInfection(AetherIIBlocks.DENSE_STRIPPED_INFECTED_LOG.getKey()), false);
-        blocks.add(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_WOOD.get().builtInRegistryHolder(), new BlockInfection(AetherIIBlocks.DENSE_STRIPPED_INFECTED_WOOD.getKey()), false);
 
         var colors = this.builder(AetherIIDataMaps.AETHER_GRASS_COLORS);
         colors.add(AetherIITags.Biomes.HIGHFIELDS, 0xb5ffd0, false);

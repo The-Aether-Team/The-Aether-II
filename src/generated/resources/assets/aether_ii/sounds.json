@@ -103,6 +103,17 @@
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },
+  "block.ground_trap.trigger": {
+    "sounds": [
+      "aether_ii:block/ground_trap/trigger1",
+      "aether_ii:block/ground_trap/trigger2",
+      "aether_ii:block/ground_trap/trigger3",
+      "aether_ii:block/ground_trap/trigger4",
+      "aether_ii:block/ground_trap/trigger5",
+      "aether_ii:block/ground_trap/trigger6"
+    ],
+    "subtitle": "subtitles.aether_ii.block.ground_trap.trigger"
+  },
   "block.hestveil.ignite": {
     "sounds": [
       "mob/ghast/fireball4"
@@ -156,6 +167,12 @@
       }
     ],
     "subtitle": "subtitles.aether_ii.block.moa_egg.hatch"
+  },
+  "block.water.evaporate": {
+    "sounds": [
+      "random/fizz"
+    ],
+    "subtitle": "subtitles.aether_ii.block.water.evaporate"
   },
   "entity.aechor_plant.death": {
     "sounds": [
@@ -389,6 +406,50 @@
       "mob/pig/step5"
     ],
     "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.detonation_sentry.death": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.detonation_sentry.death"
+  },
+  "entity.detonation_sentry.hurt": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.detonation_sentry.hurt"
+  },
+  "entity.detonation_sentry.jump": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.detonation_sentry.jump"
+  },
+  "entity.detonation_sentry.squish": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.detonation_sentry.squish"
   },
   "entity.electric_field.ambient": {
     "sounds": [
@@ -632,6 +693,42 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.lasso.throw"
   },
+  "entity.mimic.attack": {
+    "sounds": [
+      "random/eat1",
+      "random/eat2",
+      "random/eat3"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.mimic.attack"
+  },
+  "entity.mimic.death": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.mimic.death"
+  },
+  "entity.mimic.hurt": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.mimic.hurt"
+  },
+  "entity.mimic.kill": {
+    "sounds": [
+      "random/burp"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.mimic.kill"
+  },
   "entity.moa.ambient": {
     "sounds": [
       "aether_ii:entity/moa/say"
@@ -859,6 +956,30 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.rock.throw"
   },
+  "entity.sentry_golem.death": {
+    "sounds": [
+      "mob/irongolem/death"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.sentry_golem.death"
+  },
+  "entity.sentry_golem.hurt": {
+    "sounds": [
+      "mob/irongolem/hit1"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.sentry_golem.hurt"
+  },
+  "entity.sentry_golem.say": {
+    "sounds": [
+      "mob/irongolem/walk1"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.sentry_golem.say"
+  },
+  "entity.sentry_golem.throw_bomb": {
+    "sounds": [
+      "random/bow"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.sentry_golem.throw_bomb"
+  },
   "entity.sheepuff.ambient": {
     "sounds": [
       "mob/sheep/say1",
@@ -973,6 +1094,65 @@
       "random/bow"
     ],
     "subtitle": "subtitles.aether_ii.entity.skyroot_pinecone.throw"
+  },
+  "entity.slider.ambient": {
+    "sounds": [
+      "ambient/cave/cave1",
+      "ambient/cave/cave2",
+      "ambient/cave/cave3",
+      "ambient/cave/cave4",
+      "ambient/cave/cave5",
+      "ambient/cave/cave6",
+      "ambient/cave/cave7",
+      "ambient/cave/cave8",
+      "ambient/cave/cave9",
+      "ambient/cave/cave10",
+      "ambient/cave/cave11",
+      "ambient/cave/cave12",
+      "ambient/cave/cave13",
+      "ambient/cave/cave14",
+      "ambient/cave/cave15",
+      "ambient/cave/cave16",
+      "ambient/cave/cave17",
+      "ambient/cave/cave18",
+      "ambient/cave/cave19"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.slider.ambient"
+  },
+  "entity.slider.awaken": {
+    "sounds": [
+      "aether_ii:entity/slider/awaken"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.slider.awaken"
+  },
+  "entity.slider.collide": {
+    "sounds": [
+      "aether_ii:entity/slider/collide"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.slider.collide"
+  },
+  "entity.slider.death": {
+    "sounds": [
+      "aether_ii:entity/slider/death"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.slider.death"
+  },
+  "entity.slider.hurt": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.slider.hurt"
+  },
+  "entity.slider.move": {
+    "sounds": [
+      "aether_ii:entity/slider/move"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.slider.move"
   },
   "entity.swet.attack": {
     "sounds": [
@@ -1187,6 +1367,17 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.zephyr.shoot"
   },
+  "item.accessory.equip_generic": {
+    "sounds": [
+      "item/armor/equip_chain1",
+      "item/armor/equip_chain2",
+      "item/armor/equip_chain3",
+      "item/armor/equip_chain4",
+      "item/armor/equip_chain5",
+      "item/armor/equip_chain6"
+    ],
+    "subtitle": "subtitles.aether_ii.item.accessory.equip_generic"
+  },
   "item.ambrosium_shard.use": {
     "sounds": [
       "block/amethyst/shimmer"
@@ -1294,6 +1485,26 @@
     ],
     "subtitle": "subtitles.aether_ii.item.armor.equip_gravitite"
   },
+  "item.armor.neptune": {
+    "sounds": [
+      "item/armor/equip_gold1",
+      "item/armor/equip_gold2",
+      "item/armor/equip_gold3",
+      "item/armor/equip_gold4",
+      "item/armor/equip_gold5",
+      "item/armor/equip_gold6"
+    ],
+    "subtitle": "subtitles.aether_ii.item.armor.equip_neptune"
+  },
+  "item.armor.sentry": {
+    "sounds": [
+      "item/armor/equip_netherite1",
+      "item/armor/equip_netherite2",
+      "item/armor/equip_netherite3",
+      "item/armor/equip_netherite4"
+    ],
+    "subtitle": "subtitles.aether_ii.item.armor.equip_sentry"
+  },
   "item.armor.zanite": {
     "sounds": [
       "item/armor/equip_diamond1",
@@ -1305,7 +1516,7 @@
     ],
     "subtitle": "subtitles.aether_ii.item.armor.equip_zanite"
   },
-  "item.music_disc.aerwhale": {
+  "item.engraved_disc.aerwhale": {
     "sounds": [
       {
         "name": "aether_ii:item/records/aerwhale",
@@ -1313,7 +1524,7 @@
       }
     ]
   },
-  "item.music_disc.aether_tune": {
+  "item.engraved_disc.aether_tune": {
     "sounds": [
       {
         "name": "aether_ii:item/records/aether_tune",
@@ -1321,7 +1532,7 @@
       }
     ]
   },
-  "item.music_disc.approaches": {
+  "item.engraved_disc.approaches": {
     "sounds": [
       {
         "name": "aether_ii:item/records/approaches",
@@ -1329,7 +1540,7 @@
       }
     ]
   },
-  "item.music_disc.ascending_dawn": {
+  "item.engraved_disc.ascending_dawn": {
     "sounds": [
       {
         "name": "aether_ii:item/records/ascending_dawn",
@@ -1337,7 +1548,15 @@
       }
     ]
   },
-  "item.music_disc.demise": {
+  "item.engraved_disc.chinchilla": {
+    "sounds": [
+      {
+        "name": "aether_ii:item/records/chinchilla",
+        "stream": true
+      }
+    ]
+  },
+  "item.engraved_disc.demise": {
     "sounds": [
       {
         "name": "aether_ii:item/records/demise",
@@ -1345,13 +1564,35 @@
       }
     ]
   },
-  "item.music_disc.recording_892": {
+  "item.engraved_disc.high": {
+    "sounds": [
+      {
+        "name": "aether_ii:item/records/high",
+        "stream": true
+      }
+    ]
+  },
+  "item.engraved_disc.recording_892": {
     "sounds": [
       {
         "name": "aether_ii:item/records/chase",
         "stream": true
       }
     ]
+  },
+  "item.engraved_disc.revolutions": {
+    "sounds": [
+      {
+        "name": "aether_ii:item/records/revolutions",
+        "stream": true
+      }
+    ]
+  },
+  "item.hammer_of_demolition.shoot": {
+    "sounds": [
+      "mob/ghast/fireball4"
+    ],
+    "subtitle": "subtitles.aether.item.hammer_of_kingbdogz.shoot"
   },
   "item.scatterglass_vial.empty": {
     "sounds": [
@@ -1482,6 +1723,14 @@
         "name": "aether_ii:music/aether_sunset",
         "stream": true,
         "volume": 0.4
+      }
+    ]
+  },
+  "music.boss.slider": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/boss/slider_fight",
+        "stream": true
       }
     ]
   },

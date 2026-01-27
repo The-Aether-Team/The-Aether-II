@@ -2,6 +2,7 @@ package com.aetherteam.aetherii;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
@@ -21,7 +22,9 @@ public class AetherIITags {
         public static final TagKey<Block> UNDERSHALE = tag("undershale");
         public static final TagKey<Block> AETHER_UNDERGROUND_BLOCKS = tag("aether_underground_blocks");
         public static final TagKey<Block> AETHER_CARVER_REPLACEABLES = tag("aether_carver_replaceables");
+        public static final TagKey<Block> SENTRY_RUIN_MOSS_REPLACEABLES = tag("sentry_ruin_moss_replaceables");
         public static final TagKey<Block> SHAPES_COASTS = tag("shapes_coasts");
+        public static final TagKey<Block> ARCTIC_ICE = tag("arctic_ice");
         public static final TagKey<Block> FERROSITE = tag("ferrosite");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Block> CLOUDWOOL = tag("cloudwool");
@@ -35,10 +38,13 @@ public class AetherIITags {
         public static final TagKey<Block> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
         public static final TagKey<Block> HOLYSTONE_DECORATIVE_BLOCKS = tag("holystone_decorative_blocks");
         public static final TagKey<Block> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
+        public static final TagKey<Block> UNDERSHALE_DECORATIVE_BLOCKS = tag("undershale_decorative_blocks");
+        public static final TagKey<Block> SENTRY_DECORATIVE_BLOCKS = tag("sentry_decorative_blocks");
         public static final TagKey<Block> ICHORITE_DECORATIVE_BLOCKS = tag("ichorite_decorative_blocks");
         public static final TagKey<Block> MARBLED_ICHORITE_DECORATIVE_BLOCKS = tag("marbled_ichorite_decorative_blocks");
         public static final TagKey<Block> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Block> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
+        public static final TagKey<Block> SENTRY_BLOCKS = tag("sentry_blocks");
         public static final TagKey<Block> QUICKSOIL_GLASS = tag("quicksoil_glass");
         public static final TagKey<Block> CRUDE_SCATTERGLASS = tag("crude_scatterglass");
         public static final TagKey<Block> SCATTERGLASS = tag("scatterglass");
@@ -48,8 +54,6 @@ public class AetherIITags {
         public static final TagKey<Block> ARILUM_LANTERN = tag("arilum_lantern");
 
         public static final TagKey<Block> GUARDIAN_LOGS = tag("guardian_logs");
-        public static final TagKey<Block> DENSE_GUARDIAN_LOGS = tag("dense_guardian_logs");
-        public static final TagKey<Block> DENSE_GUARDIAN_BLOCKS = tag("dense_guardian_blocks");
 
         public static final TagKey<Block> ALLOWED_BUCKET_PICKUP = tag("allowed_bucket_pickup");
         public static final TagKey<Block> ALKAHEST_RESISTANT = tag("alkahest_resistant");
@@ -96,8 +100,13 @@ public class AetherIITags {
         public static final TagKey<Block> HOLYSTONE_ABILITY_GUARANTEED = tag("holystone_ability_guaranteed");
         public static final TagKey<Block> GRAVITITE_ABILITY_BLACKLIST = tag("gravitite_ability_blacklist");
         public static final TagKey<Block> HOVERING_BLOCK_REPLACE_BLACKLIST = tag("hovering_block_replace_blacklist");
+        public static final TagKey<Block> NON_SENTRY_RUINS_SPAWNABLE = tag("non_sentry_ruins_spawnable");
+        public static final TagKey<Block> NON_TUNNEL_REPLACEABLE = tag("non_tunnel_replaceable");
+        public static final TagKey<Block> COPYABLE_DUNGEON_BLOCKS = tag("copyable_dungeon_blocks");
+        public static final TagKey<Block> MIMIC_CONTAINERS = tag("mimic_containers");
 
-        public static final TagKey<Block> LOCKED_DUNGEON_BLOCKS = tag("locked_dungeon_blocks");
+        public static final TagKey<Block> SLIDER_UNBREAKABLE = tag("slider_unbreakable");
+        public static final TagKey<Block> SENTRY_RUINS_BLOCKS = tag("sentry_ruins_blocks");
 
         private static TagKey<Block> tag(String name) {
             return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -119,6 +128,8 @@ public class AetherIITags {
         public static final TagKey<Item> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
         public static final TagKey<Item> HOLYSTONE_DECORATIVE_BLOCKS = tag("holystone_decorative_blocks");
         public static final TagKey<Item> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
+        public static final TagKey<Item> UNDERSHALE_DECORATIVE_BLOCKS = tag("undershale_decorative_blocks");
+        public static final TagKey<Item> SENTRY_DECORATIVE_BLOCKS = tag("sentry_decorative_blocks");
         public static final TagKey<Item> ICHORITE_DECORATIVE_BLOCKS = tag("ichorite_decorative_blocks");
         public static final TagKey<Item> MARBLED_ICHORITE_DECORATIVE_BLOCKS = tag("marbled_ichorite_decorative_blocks");
         public static final TagKey<Item> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
@@ -126,10 +137,8 @@ public class AetherIITags {
         public static final TagKey<Item> ARILUM_LANTERN = tag("arilum_lantern");
 
         public static final TagKey<Item> GUARDIAN_LOGS = tag("guardian_logs");
-        public static final TagKey<Item> DENSE_GUARDIAN_LOGS = tag("dense_guardian_logs");
-        public static final TagKey<Item> DENSE_GUARDIAN_BLOCKS = tag("dense_guardian_blocks");
 
-        public static final TagKey<Item> LOCKED_DUNGEON_BLOCKS = tag("locked_dungeon_blocks");
+        public static final TagKey<Item> ENGRAVED_DISCS = tag("engraved_discs");
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");
@@ -147,7 +156,8 @@ public class AetherIITags {
         public static final TagKey<Item> EQUIPMENT_ACCESSORIES = tag("equipment/accessories");
         public static final TagKey<Item> EQUIPABLE = tag("equipable");
 
-        public static final TagKey<Item> ACCEPTS_CHARMS_MELEE = tag("accepts_charms/melee");
+        public static final TagKey<Item> ACCEPTS_CHARMS_TOOLS = tag("accepts_charms/tools");
+        public static final TagKey<Item> ACCEPTS_CHARMS_WEAPONS = tag("accepts_charms/weapons");
         public static final TagKey<Item> ACCEPTS_CHARMS_ARMOR = tag("accepts_charms/armor");
 
         public static final TagKey<Item> BEAST_PELT_ARMOR = tag("armor/beast_pelt");
@@ -155,12 +165,16 @@ public class AetherIITags {
         public static final TagKey<Item> ZANITE_ARMOR = tag("armor/zanite");
         public static final TagKey<Item> ARKENIUM_ARMOR = tag("armor/arkenium");
         public static final TagKey<Item> GRAVITITE_ARMOR = tag("armor/gravitite");
+        public static final TagKey<Item> SENTRY_ARMOR = tag("armor/sentry");
+        public static final TagKey<Item> NEPTUNE_ARMOR = tag("armor/neptune");
 
         public static final TagKey<Item> SKYROOT_TOOL = tag("tool/skyroot");
         public static final TagKey<Item> HOLYSTONE_TOOL = tag("tool/holystone");
         public static final TagKey<Item> ZANITE_TOOL = tag("tool/zanite");
         public static final TagKey<Item> ARKENIUM_TOOL = tag("tool/arkenium");
         public static final TagKey<Item> GRAVITITE_TOOL = tag("tool/gravitite");
+
+        public static final TagKey<Item> UNBREAKABLE_LOOT = tag("unbreakable_loot");
 
         public static final TagKey<Item> UNIQUE_TOOLTIP_COLOR = tag("unique_tooltip_color");
 
@@ -173,7 +187,6 @@ public class AetherIITags {
         public static final TagKey<Item> CRAFTS_SKYROOT_TOOLS = tag("crafts_skyroot_tools");
         public static final TagKey<Item> CRAFTS_HOLYSTONE_TOOLS = tag("crafts_holystone_tools");
         public static final TagKey<Item> ALTAR_FUEL = tag("altar_fuel");
-        public static final TagKey<Item> CAN_BE_REINFORCED = tag("can_be_reinforced");
         public static final TagKey<Item> FORGE_PRIMARY_MATERIAL = tag("forge_primary_material");
         public static final TagKey<Item> FORGE_SECONDARY_MATERIAL = tag("forge_secondary_material");
 
@@ -184,6 +197,9 @@ public class AetherIITags {
         public static final TagKey<Item> ZANITE_REPAIRING = tag("zanite_repairing");
         public static final TagKey<Item> ARKENIUM_REPAIRING = tag("arkenium_repairing");
         public static final TagKey<Item> GRAVITITE_REPAIRING = tag("gravitite_repairing");
+        public static final TagKey<Item> SENTRY_BOOTS_REPAIRING = tag("sentry_boots_repairing");
+        public static final TagKey<Item> HAMMER_OF_DEMOLITION_REPAIRING = tag("hammer_of_demolition_repairing");
+        public static final TagKey<Item> NEPTUNE_REPAIRING = tag("neptune_repairing");
 
         public static final TagKey<Item> AERBUNNY_FOOD = tag("aerbunny_food");
         public static final TagKey<Item> AERBUNNY_TAME_ITEMS = tag("aerbunny_tame_items");
@@ -202,6 +218,7 @@ public class AetherIITags {
         public static final TagKey<Item> DOUBLE_DROPS = tag("double_drops");
         public static final TagKey<Item> IRRADIATED_ITEM = tag("irradiated_item");
         public static final TagKey<Item> ALKAHEST_RESISTANT_ITEM = tag("alkahest_resistant_item");
+        public static final TagKey<Item> SLIDER_DAMAGING_ITEMS = tag("slider_damaging_items");
 
         private static TagKey<Item> tag(String name) {
             return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -216,6 +233,11 @@ public class AetherIITags {
         public static final TagKey<EntityType<?>> AETHER_MOBS = tag("aether_mobs");
         public static final TagKey<EntityType<?>> NO_DOUBLE_DROPS = tag("no_double_drops");
         public static final TagKey<EntityType<?>> NO_AMBROSIUM_DROPS = tag("no_ambrosium_drops");
+
+        public static final TagKey<EntityType<?>> SLIDER_DAMAGING_PROJECTILES = tag("slider_damaging_projectiles");
+        public static final TagKey<EntityType<?>> SENTRY_RUINS_MOBS = tag("sentry_ruins_mobs");
+        public static final TagKey<EntityType<?>> DUNGEON_MOBS = tag("dungeon_mobs");
+
         public static final TagKey<EntityType<?>> STICKABLE_PROJECTILES = tag("stickable_projectiles");
         public static final TagKey<EntityType<?>> STICKABLE_PROJECTILES_EMISSIVE = tag("stickable_projectiles_emissive");
 
@@ -254,6 +276,7 @@ public class AetherIITags {
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_HIGHFIELDS = tag("has_structure/camp_highfields");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_MAGNETIC = tag("has_structure/camp_magnetic");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_ARCTIC = tag("has_structure/camp_arctic");
+        public static final TagKey<Biome> HAS_STRUCTURE_SENTRY_RUINS = tag("has_structure/sentry_ruins");
         public static final TagKey<Biome> HAS_STRUCTURE_INFECTED_GUARDIAN_TREE = tag("has_structure/infected_guardian_tree");
 
         public static final TagKey<Biome> MYCELIUM_CONVERSION = tag("mycelium_conversion");
@@ -271,9 +294,13 @@ public class AetherIITags {
     }
 
     public static class Structures {
-        public static final TagKey<Structure> TREE_BLACKLIST_FILTER = tag("tree_blacklist_filter");
-        public static final TagKey<Structure> ACID_POOL_BLACKLIST_FILTER = tag("acid_pool_blacklist_filter");
         public static final TagKey<Structure> CAMPS = tag("camps");
+        public static final TagKey<Structure> DUNGEONS = tag("dungeons");
+
+        public static final TagKey<Structure> TREE_BLACKLIST_FILTER = tag("tree_blacklist_filter");
+        public static final TagKey<Structure> ALKAHEST_POOL_BLACKLIST_FILTER = tag("alkahest_pool_blacklist_filter");
+        public static final TagKey<Structure> COAST_BLACKLIST_FILTER = tag("coast_blacklist_filter");
+        public static final TagKey<Structure> AERCLOUD_BLACKLIST_FILTER = tag("aercloud_blacklist_filter");
 
         private static TagKey<Structure> tag(String name) {
             return TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -293,6 +320,15 @@ public class AetherIITags {
 
         private static TagKey<MobEffect> tag(String name) {
             return TagKey.create(Registries.MOB_EFFECT, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        }
+    }
+
+    public static class SoundEvents {
+        public static final TagKey<SoundEvent> MUSIC = tag("music");
+        public static final TagKey<SoundEvent> BOSS_MUSIC = tag("boss_music");
+
+        private static TagKey<SoundEvent> tag(String name) {
+            return TagKey.create(Registries.SOUND_EVENT, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 }

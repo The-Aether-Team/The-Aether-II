@@ -2,12 +2,12 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.entity.variant.GlitterwingVariant;
 import com.aetherteam.aetherii.entity.variant.spawning.LightCheck;
 import com.aetherteam.aetherii.entity.variant.spawning.RandomCheck;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.core.HolderSet;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class AetherIIGlitterwingVariants {
-    public static final ResourceKey<Registry<GlitterwingVariant>> GLITTERWING_VARIANT_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "glitterwing_variant"));
-
     public static final ResourceKey<GlitterwingVariant> ORANGE_MIMIC = createKey("orange_mimic");
     public static final ResourceKey<GlitterwingVariant> DRAGONFLY = createKey("dragonfly");
     public static final ResourceKey<GlitterwingVariant> DRAPEWING = createKey("drapewing");
@@ -35,7 +33,7 @@ public class AetherIIGlitterwingVariants {
     public static final ResourceKey<GlitterwingVariant> LEAF_INSECT = createKey("leaf_insect");
 
     private static ResourceKey<GlitterwingVariant> createKey(String name) {
-        return ResourceKey.create(AetherIIGlitterwingVariants.GLITTERWING_VARIANT_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.GLITTERWING_VARIANT, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<GlitterwingVariant> context) {

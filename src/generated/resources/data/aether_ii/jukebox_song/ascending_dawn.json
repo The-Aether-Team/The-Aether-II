@@ -4,5 +4,5 @@
     "translate": "jukebox_song.aether_ii.ascending_dawn"
   },
   "length_in_seconds": 350.0,
-  "sound_event": "aether_ii:item.music_disc.ascending_dawn"
+  "sound_event": "aether_ii:item.engraved_disc.ascending_dawn"
 }

@@ -61,6 +61,11 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.COCKATRICE.get(),
                 AetherIIEntityTypes.ARKENIUM_TALUTON.get(),
                 AetherIIEntityTypes.GRAVITITE_TALUTON.get(),
+                AetherIIEntityTypes.MIMIC.get(),
+                AetherIIEntityTypes.DETONATION_SENTRY.get(),
+                AetherIIEntityTypes.SENTRY_GOLEM.get(),
+                AetherIIEntityTypes.SLIDER.get(),
+                AetherIIEntityTypes.DEMOLITION_PROJECTILE.get(),
                 AetherIIEntityTypes.BLADESHROOM_HUNTER.get(),
                 AetherIIEntityTypes.HOLYSTONE_ROCK.get(),
                 AetherIIEntityTypes.ARCTIC_SNOWBALL.get(),
@@ -74,6 +79,19 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
         );
         this.tag(AetherIITags.Entities.NO_DOUBLE_DROPS).addTag(Tags.EntityTypes.BOSSES).add(EntityType.PLAYER);
         this.tag(AetherIITags.Entities.NO_AMBROSIUM_DROPS).add(EntityType.PLAYER);
+
+        this.tag(AetherIITags.Entities.SENTRY_RUINS_MOBS).add(
+                AetherIIEntityTypes.DETONATION_SENTRY.get(),
+                AetherIIEntityTypes.SENTRY_GOLEM.get(),
+                AetherIIEntityTypes.SLIDER.get()
+        );
+        this.tag(AetherIITags.Entities.DUNGEON_MOBS).add(
+                AetherIIEntityTypes.DETONATION_SENTRY.get(),
+                AetherIIEntityTypes.SENTRY_GOLEM.get(),
+                AetherIIEntityTypes.MIMIC.get(),
+                AetherIIEntityTypes.SLIDER.get()
+        );
+
         this.tag(AetherIITags.Entities.STICKABLE_PROJECTILES).add(
                 AetherIIEntityTypes.SCATTERGLASS_BOLT.get(),
                 AetherIIEntityTypes.AMBER_DART.get(),
@@ -83,6 +101,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
         this.tag(AetherIITags.Entities.STICKABLE_PROJECTILES_EMISSIVE).add(
                 AetherIIEntityTypes.VENOMOUS_DART.get()
         );
+
         this.tag(AetherIITags.Entities.SPAWNING_ICE).add(
                 EntityType.POLAR_BEAR
         );
@@ -121,6 +140,12 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.GRAVITITE_TALUTON.get(),
                 AetherIIEntityTypes.GLITTERWING.get(),
                 AetherIIEntityTypes.SHROUDWING.get()
+        );
+
+        this.tag(EntityTypeTags.CAN_BREATHE_UNDER_WATER).add(
+                AetherIIEntityTypes.DETONATION_SENTRY.get(),
+                AetherIIEntityTypes.SENTRY_GOLEM.get(),
+                AetherIIEntityTypes.SLIDER.get()
         );
     }
 }

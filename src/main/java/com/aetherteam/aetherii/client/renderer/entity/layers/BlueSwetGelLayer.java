@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.resources.ResourceLocation;
 
 public class BlueSwetGelLayer extends SwetGelLayer {
-    public BlueSwetGelLayer(RenderLayerParent<SwetRenderState, SwetModel<SwetRenderState>> renderer, EntityModelSet modelSet) {
-        super(renderer, modelSet, new SwetModel<>(modelSet.bakeLayer(AetherIIModelLayers.BLUE_SWET), true));
+    public BlueSwetGelLayer(RenderLayerParent<SwetRenderState, SwetModel> renderer, EntityModelSet modelSet) {
+        super(renderer, modelSet, new SwetModel(modelSet.bakeLayer(AetherIIModelLayers.BLUE_SWET), true));
     }
 
     @Override

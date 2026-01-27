@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.variant;
 
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIGlitterwingVariants;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -25,9 +26,9 @@ public record GlitterwingVariant(ResourceLocation texture, Optional<ResourceLoca
             Codec.FLOAT.fieldOf("wing_x_offset").forGetter(GlitterwingVariant::wingXOffset),
             Codec.FLOAT.fieldOf("wing_z_rotation").forGetter(GlitterwingVariant::wingZRotation)
     ).apply(instance, GlitterwingVariant::new));
-    public static final StreamCodec<RegistryFriendlyByteBuf, GlitterwingVariant> DIRECT_STREAM_CODEC = ByteBufCodecs.registry(AetherIIGlitterwingVariants.GLITTERWING_VARIANT_REGISTRY_KEY);
-    public static final Codec<Holder<GlitterwingVariant>> CODEC = RegistryFileCodec.create(AetherIIGlitterwingVariants.GLITTERWING_VARIANT_REGISTRY_KEY, DIRECT_CODEC);
-    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<GlitterwingVariant>> STREAM_CODEC = ByteBufCodecs.holder(AetherIIGlitterwingVariants.GLITTERWING_VARIANT_REGISTRY_KEY, DIRECT_STREAM_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, GlitterwingVariant> DIRECT_STREAM_CODEC = ByteBufCodecs.registry(AetherIIRegistries.GLITTERWING_VARIANT);
+    public static final Codec<Holder<GlitterwingVariant>> CODEC = RegistryFileCodec.create(AetherIIRegistries.GLITTERWING_VARIANT, DIRECT_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<GlitterwingVariant>> STREAM_CODEC = ByteBufCodecs.holder(AetherIIRegistries.GLITTERWING_VARIANT, DIRECT_STREAM_CODEC);
 
     public List<Selector<SpawnContext, SpawnCondition>> selectors() {
         return this.spawnConditions.selectors();

@@ -8,6 +8,26 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
 public class AetherIITextureMappings {
+    public static TextureMapping emissive(ResourceLocation texture) {
+        return new TextureMapping()
+                .put(TextureSlot.TEXTURE, texture)
+                .put(AetherIITextureSlots.EMISSIVE, texture.withSuffix("_emissive"));
+    }
+
+    public static TextureMapping cubeEmissive(ResourceLocation texture) {
+        return new TextureMapping()
+                .put(TextureSlot.ALL, texture)
+                .put(AetherIITextureSlots.EMISSIVE, texture.withSuffix("_emissive"));
+    }
+
+    public static TextureMapping cubeColumnEmissive(ResourceLocation side, ResourceLocation end) {
+        return new TextureMapping()
+                .put(TextureSlot.SIDE, side)
+                .put(TextureSlot.END, end)
+                .put(AetherIITextureSlots.EMISSIVE_SIDE, side.withSuffix("_emissive"))
+                .put(AetherIITextureSlots.EMISSIVE_END, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/blank")); //todo
+    }
+
     public static TextureMapping block(Block block) {
         return block(TextureMapping.getBlockTexture(block));
     }

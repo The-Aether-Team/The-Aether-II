@@ -226,12 +226,12 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_AERWHALE, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERWHALE.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GOLDEN_SWET.get(), 1, 2))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GOLDEN_SWET.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 5, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
                         .build(),
                 builder.build(),
                 Biome.TemperatureModifier.NONE
@@ -390,12 +390,12 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_AERWHALE, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERWHALE.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GOLDEN_SWET.get(), 1, 2))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GOLDEN_SWET.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 5, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
                         .build(),
                 builder.build(),
                 Biome.TemperatureModifier.NONE
@@ -542,12 +542,12 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_AERWHALE, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERWHALE.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GOLDEN_SWET.get(), 1, 2))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GOLDEN_SWET.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 5, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
                         .build(),
                 builder.build(),
                 Biome.TemperatureModifier.NONE
@@ -621,8 +621,8 @@ public class HighlandsBiomeBuilders {
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.6, 0.16)
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 3, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 2))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
                         .build(),
                 builder.build(),
                 Biome.TemperatureModifier.NONE
@@ -644,10 +644,10 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_AERWHALE, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERWHALE.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 5, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
                         .build(),
                 generationSettingsBuilder
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HighlandsPlacedFeatures.CLOUDBED)
@@ -683,12 +683,12 @@ public class HighlandsBiomeBuilders {
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.6, 0.16)
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))
-                        .addSpawn(MobCategory.MONSTER, 3, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GOLDEN_SWET.get(), 1, 3))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
-                        .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GOLDEN_SWET.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 5, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
                         .build(),
                 generationSettingsBuilder
                         .addCarver(AetherIICarvers.HESTVEIL_CAVE)

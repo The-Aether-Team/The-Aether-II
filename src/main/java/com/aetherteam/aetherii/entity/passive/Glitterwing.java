@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIGlitterwingVariants;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -44,7 +45,7 @@ public class Glitterwing extends Insect {
         if (spawnData instanceof GlitterwingGroupData groupData) {
             this.setVariant(groupData.type);
         } else {
-            Optional<? extends Holder<GlitterwingVariant>> optional = VariantUtils.selectVariantToSpawn(SpawnContext.create(level, this.blockPosition()), AetherIIGlitterwingVariants.GLITTERWING_VARIANT_REGISTRY_KEY);
+            Optional<? extends Holder<GlitterwingVariant>> optional = VariantUtils.selectVariantToSpawn(SpawnContext.create(level, this.blockPosition()), AetherIIRegistries.GLITTERWING_VARIANT);
             optional.ifPresent(this::setVariant);
         }
         return super.finalizeSpawn(level, difficulty, reason, spawnData);
@@ -67,7 +68,7 @@ public class Glitterwing extends Insect {
     @Override
     protected void readAdditionalSaveData(ValueInput valueInput) {
         super.readAdditionalSaveData(valueInput);
-        VariantUtils.readVariant(valueInput, AetherIIGlitterwingVariants.GLITTERWING_VARIANT_REGISTRY_KEY).ifPresent(this::setVariant);
+        VariantUtils.readVariant(valueInput, AetherIIRegistries.GLITTERWING_VARIANT).ifPresent(this::setVariant);
     }
 
     public static class GlitterwingGroupData extends AgeableMob.AgeableMobGroupData {

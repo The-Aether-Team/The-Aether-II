@@ -31,6 +31,10 @@
       }
     },
     {
+      "type": "aether_ii:structure_blacklist_filter",
+      "tag": "aether_ii:coast_blacklist_filter"
+    },
+    {
       "type": "minecraft:biome"
     }
   ]

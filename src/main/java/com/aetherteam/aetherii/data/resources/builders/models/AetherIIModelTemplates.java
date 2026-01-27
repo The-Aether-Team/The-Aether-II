@@ -233,6 +233,25 @@ public class AetherIIModelTemplates {
             ).build();
     public static final ModelTemplate POINTED_STONE_BLOCK = ModelTemplates.create("pointed_dripstone", TextureSlot.CROSS).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
 
+    public static final ModelTemplate TEMPLATE_EMISSIVE_CUBE_ALL =  AetherIIModelTemplates.create("emissive_cube_all", TextureSlot.ALL, AetherIITextureSlots.EMISSIVE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate TEMPLATE_EMISSIVE_CUBE_COLUMN =  AetherIIModelTemplates.create("emissive_cube_column", TextureSlot.SIDE, TextureSlot.END, AetherIITextureSlots.EMISSIVE_SIDE, AetherIITextureSlots.EMISSIVE_END).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate TEMPLATE_EMISSIVE_CUBE_COLUMN_HORIZONTAL =  AetherIIModelTemplates.create("emissive_cube_column_horizontal", "_horizontal", TextureSlot.SIDE, TextureSlot.END, AetherIITextureSlots.EMISSIVE_SIDE, AetherIITextureSlots.EMISSIVE_END).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate TEMPLATE_EMISSIVE_STAIRS_STRAIGHT = create("emissive_stairs", TextureSlot.ALL, AetherIITextureSlots.EMISSIVE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate TEMPLATE_EMISSIVE_STAIRS_INNER = create("emissive_inner_stairs", "_inner", TextureSlot.ALL, AetherIITextureSlots.EMISSIVE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate TEMPLATE_EMISSIVE_STAIRS_OUTER = create("emissive_outer_stairs", "_outer", TextureSlot.ALL, AetherIITextureSlots.EMISSIVE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate TEMPLATE_EMISSIVE_SLAB_BOTTOM = create("emissive_slab", TextureSlot.ALL, AetherIITextureSlots.EMISSIVE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate TEMPLATE_EMISSIVE_SLAB_TOP = create("emissive_slab_top", "_top", TextureSlot.ALL, AetherIITextureSlots.EMISSIVE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate COLUMN_WALL_POST = create("template_column_wall_post", "_post", TextureSlot.END, TextureSlot.SIDE);
+    public static final ModelTemplate COLUMN_WALL_LOW_SIDE = create("template_column_wall_side", "_side", TextureSlot.END, TextureSlot.SIDE);
+    public static final ModelTemplate COLUMN_WALL_TALL_SIDE = create("template_column_wall_side_tall", "_side_tall", TextureSlot.END, TextureSlot.SIDE);
+    public static final ModelTemplate EMISSIVE_COLUMN_WALL_POST = create("template_emissive_column_wall_post", "_post", TextureSlot.END, TextureSlot.SIDE, AetherIITextureSlots.EMISSIVE_END, AetherIITextureSlots.EMISSIVE_SIDE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate EMISSIVE_COLUMN_WALL_LOW_SIDE = create("template_emissive_column_wall_side", "_side", TextureSlot.END, TextureSlot.SIDE, AetherIITextureSlots.EMISSIVE_END, AetherIITextureSlots.EMISSIVE_SIDE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate EMISSIVE_COLUMN_WALL_TALL_SIDE = create("template_emissive_column_wall_side_tall", "_side_tall", TextureSlot.END, TextureSlot.SIDE, AetherIITextureSlots.EMISSIVE_END, AetherIITextureSlots.EMISSIVE_SIDE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate EMISSIVE_COLUMN_WALL_INVENTORY = create("emissive_column_wall_inventory", "_inventory", TextureSlot.END, TextureSlot.SIDE, TextureSlot.WALL, AetherIITextureSlots.EMISSIVE_END, AetherIITextureSlots.EMISSIVE_SIDE, AetherIITextureSlots.EMISSIVE_WALL);
+    public static final ModelTemplate TEMPLATE_EMISSIVE_BUTTON =  AetherIIModelTemplates.create("template_emissive_button", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate TEMPLATE_EMISSIVE_BUTTON_PRESSED =  AetherIIModelTemplates.create("template_emissive_button_pressed", "_pressed", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate TEMPLATE_EMISSIVE_BUTTON_INVENTORY =  AetherIIModelTemplates.create("template_emissive_button_inventory", "_inventory", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+
     public static final ModelTemplate TRUNK_CENTER = AetherIIModelTemplates.create("template_trunk_center", "_center", TextureSlot.ALL);
     public static final ModelTemplate TRUNK_SIDE = AetherIIModelTemplates.create("template_trunk_side", "_side", TextureSlot.ALL);
     public static final ModelTemplate TRUNK_CORNER = AetherIIModelTemplates.create("template_trunk_corner", "_corner", TextureSlot.ALL);
@@ -294,11 +313,17 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate ARILUM_LANTERN = create("template_arilum_lantern", TextureSlot.TEXTURE, TextureSlot.INSIDE);
     public static final ModelTemplate CAMPFIRE = create("template_campfire", TextureSlot.FIRE, TextureSlot.LIT_LOG, AetherIITextureSlots.LOG, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate CAMPFIRE_OFF = create("template_campfire_off", "_off", TextureSlot.FIRE, AetherIITextureSlots.LOG, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate SENTRY_TRAP =  AetherIIModelTemplates.create("template_sentry_trap", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE, AetherIITextureSlots.EMISSIVE_TOP).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
 
     public static final ModelTemplate DART_SHOOTER = createItem("handheld_dart_shooter", TextureSlot.LAYER0);
     public static final ModelTemplate DART_SHOOTER_TWO_LAYER = createItem("handheld_dart_shooter", TextureSlot.LAYER0, TextureSlot.LAYER1);
     public static final ModelTemplate USING_DART_SHOOTER_TWO_LAYER = createItem("using_dart_shooter", TextureSlot.LAYER0, TextureSlot.LAYER1);
+    public static final ModelTemplate HAMMER_OF_DEMOLITION_HANDLE = createItem("template_hammer_of_demolition_handle", "_handle", TextureSlot.LAYER0);
+    public static final ModelTemplate HAMMER_OF_DEMOLITION_HEAD = createItem("template_hammer_of_demolition_head", "_head", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
+    public static final ModelTemplate HAMMER_OF_DEMOLITION_HEAD_READY = createItem("template_hammer_of_demolition_head_ready", "_head_ready", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
+    public static final ModelTemplate HAMMER_OF_DEMOLITION_HEAD_DEPLOYED = createItem("template_hammer_of_demolition_head_deployed", "_head_deployed", TextureSlot.TEXTURE, AetherIITextureSlots.EMISSIVE);
     public static final ModelTemplate ALKAHEST_PURIFIER_INVENTORY = createItem("template_alkahest_purifier", TextureSlot.PARTICLE);
+    public static final ModelTemplate SENTRY_SPAWNER_INVENTORY = createItem("template_sentry_spawner", TextureSlot.PARTICLE);
     public static final ModelTemplate LOCKED_BLOCK_INVENTORY = createItem("locked_block_inventory", AetherIITextureSlots.FACE, AetherIITextureSlots.OVERLAY).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
 
     public static final ModelTemplate TRANSLUCENT_FLAT_ITEM = ModelTemplates.FLAT_ITEM.extend().renderType(ResourceLocation.withDefaultNamespace("translucent")).build();

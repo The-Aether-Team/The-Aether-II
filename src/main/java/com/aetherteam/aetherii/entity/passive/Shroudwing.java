@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIShroudwingVariants;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.ai.controller.ShroudwingMoveControl;
@@ -87,7 +88,7 @@ public class Shroudwing extends Insect {
         if (spawnData instanceof ShroudwingGroupData groupData) {
             this.setVariant(groupData.type);
         } else {
-            Optional<? extends Holder<ShroudwingVariant>> optional = VariantUtils.selectVariantToSpawn(SpawnContext.create(level, this.blockPosition()), AetherIIShroudwingVariants.SHROUDWING_VARIANT_REGISTRY_KEY);
+            Optional<? extends Holder<ShroudwingVariant>> optional = VariantUtils.selectVariantToSpawn(SpawnContext.create(level, this.blockPosition()), AetherIIRegistries.SHROUDWING_VARIANT);
             optional.ifPresent(this::setVariant);
         }
         return super.finalizeSpawn(level, difficulty, reason, spawnData);
@@ -110,7 +111,7 @@ public class Shroudwing extends Insect {
     @Override
     protected void readAdditionalSaveData(ValueInput valueInput) {
         super.readAdditionalSaveData(valueInput);
-        VariantUtils.readVariant(valueInput, AetherIIShroudwingVariants.SHROUDWING_VARIANT_REGISTRY_KEY).ifPresent(this::setVariant);
+        VariantUtils.readVariant(valueInput, AetherIIRegistries.SHROUDWING_VARIANT).ifPresent(this::setVariant);
     }
 
     public static class ShroudwingGroupData extends AgeableMob.AgeableMobGroupData {

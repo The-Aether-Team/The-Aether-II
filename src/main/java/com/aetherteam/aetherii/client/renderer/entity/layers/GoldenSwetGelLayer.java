@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.resources.ResourceLocation;
 
 public class GoldenSwetGelLayer extends SwetGelLayer {
-    public GoldenSwetGelLayer(RenderLayerParent<SwetRenderState, SwetModel<SwetRenderState>> renderer, EntityModelSet modelSet) {
-        super(renderer, modelSet, new SwetModel<>(modelSet.bakeLayer(AetherIIModelLayers.GOLDEN_SWET), true));
+    public GoldenSwetGelLayer(RenderLayerParent<SwetRenderState, SwetModel> renderer, EntityModelSet modelSet) {
+        super(renderer, modelSet, new SwetModel(modelSet.bakeLayer(AetherIIModelLayers.GOLDEN_SWET), true));
     }
 
     @Override

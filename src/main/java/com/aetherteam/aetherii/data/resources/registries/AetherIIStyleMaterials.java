@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.api.styles.StyleMaterial;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.Registry;
@@ -13,8 +14,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 public class AetherIIStyleMaterials {
-    public static final ResourceKey<Registry<StyleMaterial>> STYLE_MATERIAL_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "style_material"));
-
     public static final ResourceKey<StyleMaterial> BEAST_PELT = createKey("beast_pelt");
     public static final ResourceKey<StyleMaterial> BURRUKAI_PLATE = createKey("burrukai_plate");
     public static final ResourceKey<StyleMaterial> ZANITE = createKey("zanite");
@@ -22,7 +21,7 @@ public class AetherIIStyleMaterials {
     public static final ResourceKey<StyleMaterial> GRAVITITE = createKey("gravitite");
 
     private static ResourceKey<StyleMaterial> createKey(String name) {
-        return ResourceKey.create(AetherIIStyleMaterials.STYLE_MATERIAL_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.STYLE_MATERIAL, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<StyleMaterial> context) {
@@ -39,6 +38,6 @@ public class AetherIIStyleMaterials {
     }
 
     public static Registry<StyleMaterial> getRegistry(RegistryAccess registryAccess) {
-        return registryAccess.lookupOrThrow(AetherIIStyleMaterials.STYLE_MATERIAL_REGISTRY_KEY);
+        return registryAccess.lookupOrThrow(AetherIIRegistries.STYLE_MATERIAL);
     }
 }

@@ -8,7 +8,6 @@ import com.aetherteam.aetherii.inventory.menu.AlkahestPurifierMenu;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
-import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
 import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -33,7 +32,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -267,7 +265,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
             } else if (ItemStack.isSameItemSameComponents(outputSlot, result)) {
                 outputSlot.grow(result.getCount());
             }
-            ItemStack byproducts = recipeHolder.value().byproducts().getRandom(this.getLevel().getRandom()).orElse(ItemStack.EMPTY);
+            ItemStack byproducts = recipeHolder.value().byproducts().process(this.getLevel().getRandom());
             ItemStack byproductSlot = stacks.get(6);
             if (byproductSlot.isEmpty()) {
                 stacks.set(6, byproducts.copy());

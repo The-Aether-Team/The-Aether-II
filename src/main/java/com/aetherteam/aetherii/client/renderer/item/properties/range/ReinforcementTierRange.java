@@ -15,7 +15,7 @@ public class ReinforcementTierRange implements RangeSelectItemModelProperty {
     @Override
     public float get(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
         ReinforcementTier tier = itemStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
-        return tier != null ? tier.getTier() * 0.1F : 0.0F;
+        return tier != null ? tier.getTierNumber() * 0.1F : 0.0F;
     }
 
     @Override

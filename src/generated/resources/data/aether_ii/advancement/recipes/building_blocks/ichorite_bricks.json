@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_ichorite": {
+    "has_smooth_ichorite": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:ichorite"
+            "items": "aether_ii:smooth_ichorite"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_ichorite"
+      "has_smooth_ichorite"
     ]
   ],
   "rewards": {

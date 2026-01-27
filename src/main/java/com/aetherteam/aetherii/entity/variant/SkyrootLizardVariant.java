@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.entity.variant;
 
-import com.aetherteam.aetherii.data.resources.registries.AetherIISkyrootLizardVariants;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
@@ -22,6 +22,6 @@ public record SkyrootLizardVariant(ResourceLocation texture, Holder<Block> leafB
             ResourceLocation.STREAM_CODEC, SkyrootLizardVariant::texture,
             ByteBufCodecs.holderRegistry(Registries.BLOCK), SkyrootLizardVariant::leafBlock,
             SkyrootLizardVariant::new);
-    public static final Codec<Holder<SkyrootLizardVariant>> CODEC = RegistryFileCodec.create(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY, DIRECT_CODEC);
-    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<SkyrootLizardVariant>> STREAM_CODEC = ByteBufCodecs.holder(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY, DIRECT_STREAM_CODEC);
+    public static final Codec<Holder<SkyrootLizardVariant>> CODEC = RegistryFileCodec.create(AetherIIRegistries.SKYROOT_LIZARD_VARIANT, DIRECT_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<SkyrootLizardVariant>> STREAM_CODEC = ByteBufCodecs.holder(AetherIIRegistries.SKYROOT_LIZARD_VARIANT, DIRECT_STREAM_CODEC);
 }

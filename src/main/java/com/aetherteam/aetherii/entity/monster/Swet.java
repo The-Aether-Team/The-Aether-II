@@ -84,7 +84,7 @@ public class Swet extends Monster {
     }
 
     public static boolean checkSwetSpawnRules(EntityType<Swet> entityType, ServerLevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
-        return level.getBlockState(pos.below()).is(AetherIITags.Blocks.SWET_SPAWNABLE_ON) && level.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn( level, pos, random) && checkMobSpawnRules(entityType, level, reason, pos, random);
+        return level.getBlockState(pos.below()).is(AetherIITags.Blocks.SWET_SPAWNABLE_ON) && level.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(level, pos, random) && checkMobSpawnRules(entityType, level, reason, pos, random);
     }
 
     @Override
@@ -284,7 +284,6 @@ public class Swet extends Monster {
     @Override
     public void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
-
         this.setWaterDamage(input.getFloatOr("WaterDamageScale", 0.0F));
         this.setSwetScale(input.getFloatOr("SwetScale", 0.95F));
         this.setFoodSaturation(input.getFloatOr("Saturation", 0.0F));
