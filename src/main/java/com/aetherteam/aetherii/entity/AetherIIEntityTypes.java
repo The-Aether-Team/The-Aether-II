@@ -83,7 +83,7 @@ public class AetherIIEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<Swet>> GOLDEN_SWET = ENTITY_TYPES.register("golden_swet",
             () -> EntityType.Builder.of(Swet::new, AetherIIMobCategory.AETHER_DARKNESS_MONSTER).sized(0.95F, 0.95F).clientTrackingRange(10).build(AetherIIEntities.GOLDEN_SWET));
     public static final DeferredHolder<EntityType<?>, EntityType<Skephid>> SKEPHID = ENTITY_TYPES.register("skephid",
-            () -> EntityType.Builder.of(Skephid::new, AetherIIMobCategory.AETHER_DARKNESS_MONSTER).sized(0.8F, 0.8F).clientTrackingRange(10).build(AetherIIEntities.SKEPHID));
+            () -> EntityType.Builder.of(Skephid::new, AetherIIMobCategory.AETHER_CAVE_MONSTER).sized(0.8F, 0.8F).clientTrackingRange(10).build(AetherIIEntities.SKEPHID));
     public static final DeferredHolder<EntityType<?>, EntityType<ArkeniumTaluton>> ARKENIUM_TALUTON = ENTITY_TYPES.register("arkenium_taluton",
             () -> EntityType.Builder.of(ArkeniumTaluton::new, AetherIIMobCategory.AETHER_CAVE_MONSTER).sized(1.0F, 1.65F).eyeHeight(1.25F).clientTrackingRange(10).build(AetherIIEntities.ARKENIUM_TALUTON));
     public static final DeferredHolder<EntityType<?>, EntityType<GravititeTaluton>> GRAVITITE_TALUTON = ENTITY_TYPES.register("gravitite_taluton",
