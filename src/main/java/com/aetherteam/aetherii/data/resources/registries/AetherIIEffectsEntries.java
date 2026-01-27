@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.Holder;
@@ -18,8 +19,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public class AetherIIEffectsEntries {
-    public static final ResourceKey<Registry<EffectsEntry>> EFFECTS_ENTRY_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effects_entry"));
-
     public static final ResourceKey<EffectsEntry> VULNERABILITY = createKey("vulnerability");
     public static final ResourceKey<EffectsEntry> WOUND = createKey("wound");
     public static final ResourceKey<EffectsEntry> STUN = createKey("stun");
@@ -34,6 +33,23 @@ public class AetherIIEffectsEntries {
     public static final ResourceKey<EffectsEntry> FUNGAL_ROT = createKey("fungal_rot");
     public static final ResourceKey<EffectsEntry> CRYSTALLIZED = createKey("crystallized");
     public static final ResourceKey<EffectsEntry> SATURATION_BOOST = createKey("saturation_boost");
+
+    public static final List<Holder<MobEffect>> ENTRY_ORDER = List.of(
+            AetherIIEffects.VULNERABILITY,
+            AetherIIEffects.WOUND,
+            AetherIIEffects.STUN,
+            AetherIIEffects.FRACTURE,
+            AetherIIEffects.AMBROSIUM_POISONING,
+            AetherIIEffects.TOXIN,
+            AetherIIEffects.VENOM,
+            AetherIIEffects.CHARGED,
+            AetherIIEffects.WEBBED,
+            AetherIIEffects.IMMOLATION,
+            AetherIIEffects.FROSTBITE,
+            AetherIIEffects.FUNGAL_ROT,
+            AetherIIEffects.CRYSTALLIZED,
+            AetherIIEffects.SATURATION_BOOST
+    );
 
     public static final Map<ResourceKey<EffectsEntry>, Holder<MobEffect>> EFFECTS = Map.ofEntries(
             Map.entry(VULNERABILITY, AetherIIEffects.VULNERABILITY),
@@ -70,7 +86,7 @@ public class AetherIIEffectsEntries {
     );
 
     private static ResourceKey<EffectsEntry> createKey(String name) {
-        return ResourceKey.create(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.EFFECTS_ENTRY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<EffectsEntry> context) {
@@ -90,6 +106,6 @@ public class AetherIIEffectsEntries {
     }
 
     public static Registry<EffectsEntry> getRegistry(RegistryAccess registryAccess) {
-        return registryAccess.lookupOrThrow(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY);
+        return registryAccess.lookupOrThrow(AetherIIRegistries.EFFECTS_ENTRY);
     }
 }

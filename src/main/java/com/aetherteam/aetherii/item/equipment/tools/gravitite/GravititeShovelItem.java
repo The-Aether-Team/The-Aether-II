@@ -2,9 +2,12 @@ package com.aetherteam.aetherii.item.equipment.tools.gravitite;
 
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.GravititeTool;
+import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.enchantment.Enchantment;
 
 public class GravititeShovelItem extends ShovelItem implements GravititeTool {
     public GravititeShovelItem(Properties properties) {
@@ -18,5 +21,10 @@ public class GravititeShovelItem extends ShovelItem implements GravititeTool {
         } else {
             return super.useOn(context);
         }
+    }
+
+    @Override
+    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+        return false;
     }
 }

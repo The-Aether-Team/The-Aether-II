@@ -20,6 +20,7 @@ import java.util.Optional;
 public class AetherIIStructureSets {
     public static final ResourceKey<StructureSet> OUTPOSTS = createKey("outposts");
     public static final ResourceKey<StructureSet> CAMPS = createKey("camps");
+    public static final ResourceKey<StructureSet> SENTRY_RUINS = createKey("sentry_ruins");
 
     private static ResourceKey<StructureSet> createKey(String name) {
         return ResourceKey.create(Registries.STRUCTURE_SET, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -41,5 +42,8 @@ public class AetherIIStructureSets {
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_ARCTIC))),
                 new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 0.6F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 22, 10, RandomSpreadType.LINEAR))
         );
+
+        context.register(SENTRY_RUINS, new StructureSet(structures.getOrThrow(AetherIIStructures.SENTRY_RUINS),
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 1.0F, 32146754, Optional.empty(), 14, 7, RandomSpreadType.TRIANGULAR)));
     }
 }

@@ -19,6 +19,15 @@
       }
     },
     {
+      "enum": "net/minecraft/world/item/Rarity",
+      "name": "AETHER_II_UPGRADED",
+      "constructor": "(ILjava/lang/String;Ljava/util/function/UnaryOperator;)V",
+      "parameters": {
+        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
+        "field": "AETHER_II_UPGRADED_RARITY_PROXY"
+      }
+    },
+    {
       "enum": "net/minecraft/world/inventory/RecipeBookType",
       "name": "AETHER_II_ALTAR",
       "constructor": "()V",

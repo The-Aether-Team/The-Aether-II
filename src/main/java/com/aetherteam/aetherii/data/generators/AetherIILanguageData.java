@@ -1,9 +1,11 @@
 package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.api.Mural;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIMurals;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
 import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
@@ -17,6 +19,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.TreeMap;
@@ -46,6 +49,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addMusic();
         this.addSubtitles();
         this.addDeaths();
+        this.addMuralTitles();
 
         // Dimensions
         this.addDimension(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, "Aether Highlands");
@@ -58,14 +62,19 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGeneric("message.campfire_added", "Outpost campfire respawn point set");
         this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid outpost campfire");
         this.addGeneric("message.passenger.onboard", "Press %1$s and %2$s to Dismount Passenger");
+        this.add("mural.random", "Random variant");
+        this.add("mural.dimensions", "%sx%s");
+        this.add("mural.offset", "Section: (%s, %s)");
 
         // Packs
         this.addPackDescription("mod", "Aether II Resources");
         
         // Use Action
+        this.addTooltip("item.modifiers.relic", "When wearing Relic:");
+        this.addTooltip("item.modifiers.handwear", "When wearing Handwear:");
+        this.addTooltip("item.modifiers.accessory", "When wearing Accessory:");
         this.addTooltip("item.modifiers.blocking", "When blocking:");
-        this.addTooltip("item.modifiers.accepts_charms.melee", "When on melee item:");
-        this.addTooltip("item.modifiers.accepts_charms.armor", "When on armor item:");
+        this.addTooltip("item.modifiers.charms", "When attached:");
 
         // Keys
         this.addKeyInfo("category", "The Aether II");
@@ -451,6 +460,34 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS, "Undershale Brick Stairs");
         this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_SLAB, "Undershale Brick Slab");
         this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_WALL, "Undershale Brick Wall");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_BUTTON, "Undershale Brick Button");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_PRESSURE_PLATE, "Undershale Brick Pressure Plate");
+
+        // Undershale Decorative Blocks
+        this.addBlock(AetherIIBlocks.UNDERSHALE_FLAGSTONES, "Undershale Flagstones");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_TILE, "Undershale Tile");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_BASE_BRICKS, "Undershale Base Bricks");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_CAPSTONE_BRICKS, "Undershale Capstone Bricks");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_BASE_PILLAR, "Undershale Base Pillar");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_CAPSTONE_PILLAR, "Undershale Capstone Pillar");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_PILLAR, "Undershale Pillar");
+
+        // Sentry Bricks
+        this.addBlock(AetherIIBlocks.SENTRY_BRICKS, "Sentry Bricks");
+        this.addBlock(AetherIIBlocks.SENTRY_BRICK_STAIRS, "Sentry Brick Stairs");
+        this.addBlock(AetherIIBlocks.SENTRY_BRICK_SLAB, "Sentry Brick Slab");
+        this.addBlock(AetherIIBlocks.SENTRY_BRICK_WALL, "Sentry Brick Wall");
+        this.addBlock(AetherIIBlocks.SENTRY_BUTTON, "Sentry Button");
+
+        // Sentry Decorative Blocks
+        this.addBlock(AetherIIBlocks.SENTRY_LIGHTSTONE, "Sentry Lightstone");
+        this.addBlock(AetherIIBlocks.SENTRY_FLAGSTONES, "Sentry Flagstones");
+        this.addBlock(AetherIIBlocks.SENTRY_TILE, "Sentry Tile");
+        this.addBlock(AetherIIBlocks.SENTRY_BASE_BRICKS, "Sentry Base Bricks");
+        this.addBlock(AetherIIBlocks.SENTRY_CAPSTONE_BRICKS, "Sentry Capstone Bricks");
+        this.addBlock(AetherIIBlocks.SENTRY_BASE_PILLAR, "Sentry Base Pillar");
+        this.addBlock(AetherIIBlocks.SENTRY_CAPSTONE_PILLAR, "Sentry Capstone Pillar");
+        this.addBlock(AetherIIBlocks.SENTRY_PILLAR, "Sentry Pillar");
 
         // Ichorite
         this.addBlock(AetherIIBlocks.ICHORITE, "Ichorite");
@@ -568,20 +605,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GUARDIAN_WOOD, "Guardian Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_LOG, "Stripped Guardian Log");
         this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD, "Stripped Guardian Wood");
-        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_LOG, "Dense Guardian Log");
-        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_WOOD, "Dense Guardian Wood");
-        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_LOG, "Dense Stripped Guardian Log");
-        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_WOOD, "Dense Stripped Guardian Wood");
 
         // Infected Wood
         this.addBlock(AetherIIBlocks.INFECTED_LOG, "Infected Log");
         this.addBlock(AetherIIBlocks.INFECTED_WOOD, "Infected Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG, "Stripped Infected Log");
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD, "Stripped Infected Wood");
-        this.addBlock(AetherIIBlocks.DENSE_INFECTED_LOG, "Dense Infected Log");
-        this.addBlock(AetherIIBlocks.DENSE_INFECTED_WOOD, "Dense Infected Wood");
-        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_INFECTED_LOG, "Dense Infected Log");
-        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_INFECTED_WOOD, "Dense Infected Wood");
 
         // Guardian Slabs
         this.addBlock(AetherIIBlocks.GUARDIAN_LOG_SLAB, "Guardian Log Slab");
@@ -593,16 +622,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB, "Stripped Infected Log Slab");
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB, "Stripped Infected Wood Slab");
 
-        // Guardian Slabs
-        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_LOG_SLAB, "Dense Guardian Log Slab");
-        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_WOOD_SLAB, "Dense Guardian Wood Slab");
-        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_LOG_SLAB, "Dense Stripped Guardian Log Slab");
-        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_WOOD_SLAB, "Dense Stripped Guardian Wood Slab");
-        this.addBlock(AetherIIBlocks.DENSE_INFECTED_LOG_SLAB, "Dense Infected Log Slab");
-        this.addBlock(AetherIIBlocks.DENSE_INFECTED_WOOD_SLAB, "Dense Infected Wood Slab");
-        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_INFECTED_LOG_SLAB, "Dense Stripped Infected Log Slab");
-        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_INFECTED_WOOD_SLAB, "Dense Stripped Infected Wood Slab");
-
         // Guardian Trunks
         this.addBlock(AetherIIBlocks.GUARDIAN_TRUNK, "Guardian Trunk");
         this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK, "Stripped Guardian Trunk");
@@ -612,13 +631,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Guardian Root Blocks
         this.addBlock(AetherIIBlocks.GUARDIAN_ROOTS, "Guardian Roots");
         this.addBlock(AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS, "Unstable Guardian Roots");
-        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_ROOTS, "Dense Guardian Roots");
         this.addBlock(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS, "Lucent Guardian Roots");
         this.addBlock(AetherIIBlocks.GUARDIAN_LAMP, "Guardian Lamp");
 
         // Undergrowth Blocks
         this.addBlock(AetherIIBlocks.UNDERGROWTH_LEAVES, "Undergrowth Leaves");
-        this.addBlock(AetherIIBlocks.DENSE_UNDERGROWTH_LEAVES, "Dense Undergrowth Leaves");
         this.addBlock(AetherIIBlocks.UNDERGROWTH_VINES, "Undergrowth Vines");
         this.addBlock(AetherIIBlocks.HANGING_UNDERGROWTH, "Hanging Undergrowth");
         this.addBlock(AetherIIBlocks.HANGING_UNDERGROWTH_PLANT, "Hanging Undergrowth Plant");
@@ -627,9 +644,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ROTSHROOM_BLOCK, "Rotshroom Block");
         this.addBlock(AetherIIBlocks.ROTSHROOM_SLAB, "Rotshroom Slab");
         this.addBlock(AetherIIBlocks.ROTSHROOM_STEM, "Rotshroom Stem");
-        this.addBlock(AetherIIBlocks.DENSE_ROTSHROOM_BLOCK, "Dense Rotshroom Block");
-        this.addBlock(AetherIIBlocks.DENSE_ROTSHROOM_SLAB, "Dense Rotshroom Slab");
-        this.addBlock(AetherIIBlocks.DENSE_ROTSHROOM_STEM, "Dense Rotshroom Stem");
         this.addBlock(AetherIIBlocks.SHELF_ROTSHROOM_SLAB, "Shelf Rotshroom Slab");
         this.addBlock(AetherIIBlocks.ROTSHROOM, "Rotshroom");
         this.addBlock(AetherIIBlocks.POTTED_ROTSHROOM, "Potted Rotshroom");
@@ -745,6 +759,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.RED_SKYROOT_BED, "Red Skyroot Bed");
         this.addBlock(AetherIIBlocks.BLACK_SKYROOT_BED, "Black Skyroot Bed");
 
+        this.addBlock(AetherIIBlocks.SENTRY_CRATE, "Sentry Crate");
+        this.addBlock(AetherIIBlocks.SENTRY_SPAWNER, "Sentry Spawner");
+        this.addBlock(AetherIIBlocks.SENTRY_TRAP, "Sentry Trap");
+
+        this.addBlock(AetherIIBlocks.LOCKED_BLOCK, "Locked Block");
+        this.addBlock(AetherIIBlocks.BOSS_DOORWAY_BLOCK, "Boss Doorway Block");
+        this.addBlock(AetherIIBlocks.TREASURE_DOORWAY_BLOCK, "Treasure Doorway Block");
+
         this.addBlock(AetherIIBlocks.SKYROOT_SIGN, "Skyroot Sign");
         this.addBlock(AetherIIBlocks.SKYROOT_HANGING_SIGN, "Skyroot Hanging Sign");
 
@@ -764,6 +786,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Furniture
         this.addBlock(AetherIIBlocks.OUTPOST_CAMPFIRE, "Outpost Campfire");
+        this.addBlock(AetherIIBlocks.MURAL, "Mural");
     }
 
     private void addItems() {
@@ -845,6 +868,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addItem(AetherIIItems.SCATTERGLASS_BOLT, "Scatterglass Bolt");
 
+        this.addItem(AetherIIItems.HAMMER_OF_DEMOLITION, "Hammer of Demolition");
+
         // Armor
         this.addItem(AetherIIItems.BEAST_PELT_HELMET, "Beast Pelt Cap");
         this.addItem(AetherIIItems.BEAST_PELT_CHESTPLATE, "Beast Pelt Tunic");
@@ -876,17 +901,32 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GRAVITITE_BOOTS, "Gravitite Boots");
         this.addItem(AetherIIItems.GRAVITITE_GLOVES, "Gravitite Gauntlets");
 
-        // Charms
-        this.addItem(AetherIIItems.CHARM_OF_SLASH, "Charm of Slash");
-        this.addItem(AetherIIItems.CHARM_OF_IMPACT, "Charm of Impact");
-        this.addItem(AetherIIItems.CHARM_OF_PIERCE, "Charm of Pierce");
-        this.addItem(AetherIIItems.CHARM_OF_DEXTERITY, "Charm of Dexterity");
+        this.addItem(AetherIIItems.SENTRY_BOOTS, "Sentry Boots");
 
-        this.addItem(AetherIIItems.CHARM_OF_HEALTH, "Charm of Health");
-        this.addItem(AetherIIItems.CHARM_OF_DEFENSE, "Charm of Defense");
-        this.addItem(AetherIIItems.CHARM_OF_TOUGHNESS, "Charm of Toughness");
-        this.addItem(AetherIIItems.CHARM_OF_RESISTANCE, "Charm of Resistance");
-        this.addItem(AetherIIItems.CHARM_OF_AGILITY, "Charm of Agility");
+        this.addItem(AetherIIItems.NEPTUNE_HELMET, "Neptune Helmet");
+        this.addItem(AetherIIItems.NEPTUNE_CHESTPLATE, "Neptune Chestplate");
+        this.addItem(AetherIIItems.NEPTUNE_LEGGINGS, "Neptune Leggings");
+        this.addItem(AetherIIItems.NEPTUNE_BOOTS, "Neptune Boots");
+        this.addItem(AetherIIItems.NEPTUNE_GLOVES, "Neptune Gauntlets");
+
+        // Relics
+        this.addItem(AetherIIItems.KINETIC_THRUSTERS, "Kinetic Thrusters");
+
+        // Accessories
+        this.addItem(AetherIIItems.ZANITE_PENDANT, "Zanite Pendant");
+
+        // Charms
+        this.addItem(AetherIIItems.CHARM_OF_EFFICIENCY_I, "Charm of Efficiency I");
+
+        this.addItem(AetherIIItems.CHARM_OF_DAMAGE_I, "Charm of Damage I");
+        this.addItem(AetherIIItems.CHARM_OF_DEXTERITY_I, "Charm of Dexterity I");
+        this.addItem(AetherIIItems.CHARM_OF_KNOCKBACK_I, "Charm of Knockback I");
+
+        this.addItem(AetherIIItems.CHARM_OF_HEALTH_I, "Charm of Health I");
+        this.addItem(AetherIIItems.CHARM_OF_DEFENSE_I, "Charm of Defense I");
+        this.addItem(AetherIIItems.CHARM_OF_TOUGHNESS_I, "Charm of Toughness I");
+        this.addItem(AetherIIItems.CHARM_OF_RESISTANCE_I, "Charm of Resistance I");
+        this.addItem(AetherIIItems.CHARM_OF_AGILITY_I, "Charm of Agility I");
 
         // Materials
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
@@ -921,6 +961,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.CHARGE_CATALYST, "Charge Catalyst");
         this.addItem(AetherIIItems.ARKENIUM_CORE, "Arkenium Core");
         this.addItem(AetherIIItems.GRAVITITE_CORE, "Gravitite Core");
+        this.addItem(AetherIIItems.EYE_OF_THE_MIMIC, "Eye of the Mimic");
 
         // Irradiated Items
         this.addItem(AetherIIItems.IRRADIATED_ARMOR, "Irradiated Armor");
@@ -984,12 +1025,16 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ARKENIUM_HESTVEIL_CANISTER, "Arkenium Hestveil Canister");
 
         // Music Discs
-        this.addItem(AetherIIItems.MUSIC_DISC_AETHER_TUNE, "Blue Music Disc");
-        this.addItem(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN, "Valkyrie Music Disc");
-        this.addItem(AetherIIItems.MUSIC_DISC_AERWHALE, "Aerwhale Music Disc");
-        this.addItem(AetherIIItems.MUSIC_DISC_APPROACHES, "Moa Music Disc");
-        this.addItem(AetherIIItems.MUSIC_DISC_DEMISE, "Labyrinth Music Disc");
-        this.addItem(AetherIIItems.RECORDING_892, "Recording #892");
+        this.addItem(AetherIIItems.MUSIC_PLAYER, "Music Player");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_AETHER_TUNE, "Engraved Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN, "Engraved Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_AERWHALE, "Engraved Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_APPROACHES, "Engraved Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_DEMISE, "Engraved Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_CHINCHILLA, "Engraved Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_HIGH, "Engraved Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS, "Engraved Disc");
+        this.addItem(AetherIIItems.ENGRAVED_DISC_CHASE, "Engraved Disc");
 
         // Spawn Eggs
         this.addSpawnEggItem(AetherIIItems.AERBUNNY_SPAWN_EGG);
@@ -1018,6 +1063,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSpawnEggItem(AetherIIItems.SKEPHID_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.DETONATION_SENTRY_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.SENTRY_GOLEM_SPAWN_EGG);
+        this.addItem(AetherIIItems.SENTRY_CRATE_MIMIC_SPAWN_EGG, "Sentry Crate Mimic Spawn Egg");
+        this.addSpawnEggItem(AetherIIItems.SLIDER_SPAWN_EGG);
 
         // Misc
         this.addItem(AetherIIItems.BEAST_PELT_BUNDLE, "Beast Pelt Bundle");
@@ -1033,7 +1082,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GLINT_COIN, "Glint Coin");
         this.addItem(AetherIIItems.GUIDEBOOK_PAGE, "Guidebook Page");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
+        this.addItem(AetherIIItems.MURAL_ITEM, "Mural");
 
+        this.add("item.aether_ii.broken_item", "Broken %s");
     }
 
     private void addPerItemAbilityTooltips() {
@@ -1093,6 +1144,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 1, "§9Ability:§r Straight Shot");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 2, "§3Use:§r Crouch-Use");
 
+        this.addPerItemAbilityTooltip(AetherIIItems.HAMMER_OF_DEMOLITION.get(), 1, "§9Ability:§r Shoots Explosive");
+        this.addPerItemAbilityTooltip(AetherIIItems.HAMMER_OF_DEMOLITION.get(), 2, "§3Use:§r Crouch-Use");
+
         this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_BOOTS.get(), 1, "§9Ability:§r Calms Animals");
         this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_BOOTS.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.BEAST_PELT_LEGGINGS.get(), 1, "§9Ability:§r Calms Animals");
@@ -1148,6 +1202,17 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_GLOVES.get(), 1, "§9Ability:§r Double Jump");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_BOOTS.get(), 1, "§9Ability:§r Walk in Water");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_BOOTS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_LEGGINGS.get(), 1, "§9Ability:§r Walk in Water");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_CHESTPLATE.get(), 1, "§9Ability:§r Walk in Water");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_HELMET.get(), 1, "§9Ability:§r Walk in Water");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_HELMET.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_GLOVES.get(), 1, "§9Ability:§r Walk in Water");
+        this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
+
         this.addPerItemAbilityTooltip(AetherIIItems.COLD_AERCLOUD_GLIDER.get(), 1, "§3Use:§r Click-Use");
         this.addPerItemAbilityTooltip(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get(), 1, "§3Use:§r Click-Use");
         this.addPerItemAbilityTooltip(AetherIIItems.BLUE_AERCLOUD_GLIDER.get(), 1, "§9Ability:§r Upwards Boost");
@@ -1170,7 +1235,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("healing_stone.charges", "%s/5 Altar Charges");
         this.addItemTooltip("effect_buildup", "%s Buildup");
         this.addItemTooltip("effect_buildup.inflicts", "Inflicts: %s");
-        this.addItemTooltip("reinforcement", "Reinforcement");
+        this.addItemTooltip("reinforcement", "Reinforcement %s");
+        this.addItemTooltip("broken", "Requires Repairing");
+        this.addItemTooltip("charm.tier", "Tier %s");
+        this.addItemTooltip("charm.type.tool", "Tool Charm");
+        this.addItemTooltip("charm.type.weapon", "Weapon Charm");
+        this.addItemTooltip("charm.type.armor", "Armor Charm");
 
         // Moa Egg Tooltips
         this.addItemTooltip("moa_egg.keratin", "%s Keratin");
@@ -1251,6 +1321,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.SKEPHID, "Skephid");
         this.addEntityType(AetherIIEntityTypes.ARKENIUM_TALUTON, "Arkenium Taluton");
         this.addEntityType(AetherIIEntityTypes.GRAVITITE_TALUTON, "Gravitite Taluton");
+        this.addEntityType(AetherIIEntityTypes.MIMIC, "Mimic");
+        this.addEntityType(AetherIIEntityTypes.DETONATION_SENTRY, "Detonation Sentry");
+        this.addEntityType(AetherIIEntityTypes.DEMOLITION_PROJECTILE, "Detonation Projectile");
+        this.addEntityType(AetherIIEntityTypes.SENTRY_GOLEM, "Sentry Golem");
+        this.addEntityType(AetherIIEntityTypes.SLIDER, "Slider");
         this.addEntityType(AetherIIEntityTypes.BLADESHROOM_HUNTER, "Bladeshroom Hunter");
 
         // Projectile
@@ -1377,8 +1452,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_NATURAL_BLOCKS.get(), "Aether II Natural Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_FUNCTIONAL_BLOCKS.get(), "Aether II Functional Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
-        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_EQUIPMENT_AND_UTILITIES.get(), "Aether II Equipment & Utilities");
-        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_ARMOR_AND_ACCESSORIES.get(), "Aether II Armor & Accessories");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_TOOLS_AND_UTILITIES.get(), "Aether II Tools & Utilities");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_COMBAT_AND_EQUIPMENT.get(), "Aether II Combat & Equipment");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_CONSUMABLES.get(), "Aether II Consumables");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_INGREDIENTS.get(), "Aether II Ingredients");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_SPAWN_EGGS.get(), "Aether II Spawn Eggs");
@@ -1391,13 +1466,18 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addContainerType(AetherIIMenuTypes.ALTAR, "Altar");
         this.addContainerType(AetherIIMenuTypes.ARKENIUM_FORGE, "Arkenium Forge");
         this.addContainerType(AetherIIMenuTypes.ALKAHEST_PURIFIER, "Alkahest Purifier");
+
+        this.addGeneric("container.sentry_crate", "Sentry Crate");
     }
 
     private void addGuiText() {
         // GUIs
         this.addGuiText("arkenium_forge.forge_button.tooltip", "Forge Item");
-        this.addGuiText("arkenium_forge.tooltip.durability", "Max Durability");
-        this.addGuiText("arkenium_forge.tooltip.charms", "Charm Slots");
+        this.addGuiText("arkenium_forge.charm_slot.tooltip", "Charm Slot");
+        this.addGuiText("arkenium_forge.tooltip.durability", "+%s Max Durability");
+        this.addGuiText("arkenium_forge.tooltip.charm", " %1$s %2$s Charm Slot");
+        this.addGuiText("arkenium_forge.tooltip.charms", " %1$s %2$s Charm Slots");
+        this.addGuiText("arkenium_forge.tooltip.tier", " Upgrade Item Tier");
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
         this.addGuiText("recipebook.toggleRecipes.purifiable", "Showing Purifiable");
         this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");
@@ -1427,6 +1507,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("toast.guidebook.effects", "New Effects Entry!");
         this.addGuiText("toast.guidebook.exploration", "New Exploration Entry!");
         this.addGuiText("toast.guidebook.description", "Check your Guidebook");
+        this.addGuiText("slider.message.attack.invalid", "Hmm. Perhaps I need to attack it with a Pickaxe?");
+        this.addGuiText("slider.title", "Slider %s");
     }
 
     private void addBestiaryEntries() {
@@ -1478,7 +1560,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), loremIpsum);
-
+        this.addBestiaryDescription(AetherIIEntityTypes.MIMIC.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.DETONATION_SENTRY.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.SENTRY_GOLEM.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.SLIDER.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), loremIpsum);
     }
 
@@ -1518,6 +1603,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addMusic("aether_sunrise", "Emile van Krieken - Sunrise");
         this.addMusic("aether_sunset", "Emile van Krieken - Sunset");
         this.addMusic("aether_ambience1", "Emile van Krieken - Sentience");
+        this.addMusic("boss.slider_fight", "Emile van Krieken - Labyrinth's Vengeance");
 
         // Jukebox Songs
         this.addJukeboxSong("aether_tune", "Noisestorm - Aether Tune");
@@ -1525,6 +1611,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addJukeboxSong("aerwhale", "AetherAudio - Aerwhale");
         this.addJukeboxSong("approaches", "Emile van Krieken - Approaches");
         this.addJukeboxSong("demise", "Moorziey - Demise");
+        this.addJukeboxSong("chinchilla", "RENREN - chinchilla");
+        this.addJukeboxSong("high", "RENREN - high");
+        this.addJukeboxSong("revolutions", "sunsette - revolutions");
         this.addJukeboxSong("recording_892", "Emile van Krieken - ???");
     }
 
@@ -1549,6 +1638,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("block", "alkahest_purifier.open", "Alkahest Purifier opens");
         this.addSubtitle("block", "alkahest_purifier.close", "Alkahest Purifier closes");
 
+        this.addSubtitle("block", "ground_trap.trigger", "Trap activates");
+        this.addSubtitle("block", "water.evaporate", "Water evaporated");
+
         // Items
         this.addSubtitle("item", "ambrosium_shard.use", "Ambrosium Shard used");
         this.addSubtitle("item", "swet_gel.use", "Swet Gel used");
@@ -1564,6 +1656,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("item", "armor.equip_zanite", "Zanite armor clangs");
         this.addSubtitle("item", "armor.equip_arkenium", "Arkenium armor clanks");
         this.addSubtitle("item", "armor.equip_gravitite", "Gravitite armor clinks");
+        this.addSubtitle("item", "armor.equip_sentry", "Sentry armor clanks");
+        this.addSubtitle("item", "armor.equip_neptune", "Neptune armor clinks");
+
+        this.addSubtitle("item", "accessory.equip_generic", "Accessory equips");
 
         // Player
         this.addSubtitle("entity", "player.damage.slash.correct", "Strong slashing attack");
@@ -1681,6 +1777,28 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "gravitite_taluton.death", "Gravitite Taluton dies");
         this.addSubtitle("entity", "gravitite_taluton.hurt", "Gravitite Taluton hurts");
 
+        this.addSubtitle("entity", "mimic.attack", "Mimic attacks");
+        this.addSubtitle("entity", "mimic.death", "Mimic dies");
+        this.addSubtitle("entity", "mimic.hurt", "Mimic hurts");
+        this.addSubtitle("entity", "mimic.kill", "Mimic burps");
+
+        this.addSubtitle("entity", "detonation_sentry.death", "Sentry dies");
+        this.addSubtitle("entity", "detonation_sentry.hurt", "Sentry hurts");
+        this.addSubtitle("entity", "detonation_sentry.jump", "Sentry squishes");
+        this.addSubtitle("entity", "detonation_sentry.squish", "Sentry squishes");
+
+        this.addSubtitle("entity", "slider.awaken", "Slider awakens");
+        this.addSubtitle("entity", "slider.ambient", "Slider drones");
+        this.addSubtitle("entity", "slider.collide", "Slider smashes");
+        this.addSubtitle("entity", "slider.move", "Slider slides");
+        this.addSubtitle("entity", "slider.hurt", "Slider hurts");
+        this.addSubtitle("entity", "slider.death", "Slider breaks");
+
+        this.addSubtitle("entity", "sentry_golem.death", "Sentry Golem dies");
+        this.addSubtitle("entity", "sentry_golem.hurt", "Sentry Golem hurts");
+        this.addSubtitle("entity", "sentry_golem.say", "Sentry Golem drones");
+        this.addSubtitle("entity", "sentry_golem.throw_bomb", "Sentry Golem throws explosive");
+
         this.addSubtitle("entity", "blighted.burn", "Something burns");
 
         // Projectiles
@@ -1698,6 +1816,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
     private void addDeaths() {
         // Deaths
+        this.addDeath("crush", "%1$s was crushed by %2$s");
         this.addDeath("effect.wound", "%1$s was fatally wounded");
         this.addDeath("effect.wound.player", "%1$s was fatally wounded by %2$s");
         this.addDeath("effect.fracture", "Oof, owie, %1$s's bones");
@@ -1715,6 +1834,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addDeath("shock", "%1$s was electrocuted");
         this.addDeath("shock.player", "%1$s was electrocuted by %2$s");
         this.addDeath("carrion_sprout", "%1$s was munched-up by %2$s");
+    }
+
+    private void addMuralTitles() {
+        this.addMuralTitle(AetherIIMurals.TEST, "Test Mural");
     }
 
     // Utility methods
@@ -1746,5 +1869,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         SpawnEggItem item = key.get();
         EntityType<?> entitytype = item.getType(null, ItemStack.EMPTY);
         this.add(item, entityTypes.get(entitytype.getDescriptionId()).concat(" Spawn Egg"));
+    }
+
+    public void addMuralTitle(DeferredHolder<Mural, Mural> key, String title) {
+        this.add(key.getKey().location().toLanguageKey("mural", "title"), title);
     }
 }

@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerPlayerAccessor;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.LivingEntityAccessor;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -37,18 +37,6 @@ public class CurrencyAttachment {
         this.amount = 0;
     }
 
-    public void clone(Player original, Player player, boolean wasDeath) {
-        if (wasDeath) {
-            if (player.level() instanceof ServerLevel serverLevel) {
-                GameRules gameRules = serverLevel.getGameRules();
-                if (gameRules.getRule(GameRules.RULE_KEEPINVENTORY).get()) {
-                    player.getData(AetherIIDataAttachments.CURRENCY).setAmount(original.getData(AetherIIDataAttachments.CURRENCY).getAmount());
-                    player.syncData(AetherIIDataAttachments.CURRENCY);
-                }
-            }
-        }
-    }
-
     public void dropAll(Player player, Collection<ItemEntity> drops) {
         if (player instanceof ServerPlayer serverPlayer && player.level() instanceof ServerLevel serverLevel) {
             GameRules gameRules = serverLevel.getGameRules();
@@ -59,18 +47,20 @@ public class CurrencyAttachment {
                 Collection<ItemEntity> newStacks = new ArrayList<>();
                 for (int i = 0; i < fullStacks; i++) {
                     ItemStack itemStack = new ItemStack(AetherIIItems.GLINT_COIN.get(), 64);
-                    ItemEntity itemEntity = ((ServerPlayerAccessor) serverPlayer).callCreateItemStackToDrop(itemStack, true, false);
-                    newStacks.add(itemEntity);
+                    ItemEntity itemEntity = ((LivingEntityAccessor) serverPlayer).callCreateItemStackToDrop(itemStack.copy(), true, false);
                     if (itemEntity != null) {
                         newStacks.add(itemEntity);
                     }
                 }
-                ItemStack itemStack = new ItemStack(AetherIIItems.GLINT_COIN.get(), leftoverStack);
-                ItemEntity itemEntity = ((ServerPlayerAccessor) serverPlayer).callCreateItemStackToDrop(itemStack, true, false);
-                if (itemEntity != null) {
-                    newStacks.add(itemEntity);
+                if (leftoverStack > 0) {
+                    ItemStack itemStack = new ItemStack(AetherIIItems.GLINT_COIN.get(), leftoverStack);
+                    ItemEntity itemEntity = ((LivingEntityAccessor) serverPlayer).callCreateItemStackToDrop(itemStack.copy(), true, false);
+                    if (itemEntity != null) {
+                        newStacks.add(itemEntity);
+                    }
                 }
                 drops.addAll(newStacks);
+                player.getData(AetherIIDataAttachments.CURRENCY).setAmount(0);
             }
         }
     }

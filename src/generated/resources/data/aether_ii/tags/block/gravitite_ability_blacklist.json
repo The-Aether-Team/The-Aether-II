@@ -1,5 +1,7 @@
 {
   "values": [
-    "minecraft:piston_head"
+    "minecraft:piston_head",
+    "aether_ii:sentry_spawner",
+    "aether_ii:sentry_trap"
   ]
 }

@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.api.styles.StyleDesign;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
@@ -10,8 +11,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
 public class AetherIIStyleDesigns { //todo style names
-    public static final ResourceKey<Registry<StyleDesign>> STYLE_DESIGN_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "style_design"));
-
     public static final ResourceKey<StyleDesign> GUARD = createKey("guard");
     public static final ResourceKey<StyleDesign> KNIGHT = createKey("knight");
     public static final ResourceKey<StyleDesign> RANGER = createKey("ranger");
@@ -19,7 +18,7 @@ public class AetherIIStyleDesigns { //todo style names
     public static final ResourceKey<StyleDesign> WARRIOR = createKey("warrior");
 
     private static ResourceKey<StyleDesign> createKey(String name) {
-        return ResourceKey.create(AetherIIStyleDesigns.STYLE_DESIGN_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.STYLE_DESIGN, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<StyleDesign> context) {
@@ -36,6 +35,6 @@ public class AetherIIStyleDesigns { //todo style names
     }
 
     public static Registry<StyleDesign> getRegistry(RegistryAccess registryAccess) {
-        return registryAccess.lookupOrThrow(AetherIIStyleDesigns.STYLE_DESIGN_REGISTRY_KEY);
+        return registryAccess.lookupOrThrow(AetherIIRegistries.STYLE_DESIGN);
     }
 }

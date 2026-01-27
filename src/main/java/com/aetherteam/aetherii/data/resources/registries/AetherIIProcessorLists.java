@@ -3,6 +3,10 @@ package com.aetherteam.aetherii.data.resources.registries;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
+import com.aetherteam.aetherii.world.structure.piece.sentry.SentryRuinsPiece;
+import com.aetherteam.aetherii.world.structure.processor.BossRoomProcessor;
+import com.aetherteam.aetherii.world.structure.processor.CopyRuleProcessor;
+import com.aetherteam.aetherii.world.structure.processor.MimicContainerProcessor;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -17,6 +21,9 @@ import java.util.List;
 
 public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> CAMP = createKey("camp");
+    public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_ROOM = createKey("sentry_ruins_room");
+    public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_TUNNEL = createKey("sentry_ruins_tunnel");
+    public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_BOSS_ROOM = createKey("sentry_ruins_boss_room");
     public static final ResourceKey<StructureProcessorList> INFECTED_GUARDIAN_TREE = createKey("infected_guardian_tree");
 
     public static void bootstrap(BootstrapContext<StructureProcessorList> context) {
@@ -33,6 +40,23 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VALKYRIE_SPROUT.get(), 0.25F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 0)),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VALKYRIE_SPROUT.get(), 0.15F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 1))
                 ))
+        ));
+
+        register(context, SENTRY_RUINS_ROOM, List.of(
+                SentryRuinsPiece.CAVE_REPLACEABLE,
+                SentryRuinsPiece.SENTRY_STONE,
+                SentryRuinsPiece.ROOM_DECORATION_RANDOMIZATION,
+                MimicContainerProcessor.INSTANCE
+        ));
+        register(context, SENTRY_RUINS_TUNNEL, List.of(
+                SentryRuinsPiece.CAVE_REPLACEABLE,
+                SentryRuinsPiece.SENTRY_STONE,
+                MimicContainerProcessor.INSTANCE
+        ));
+        register(context, SENTRY_RUINS_BOSS_ROOM, List.of(
+                SentryRuinsPiece.SENTRY_STONE_REDUCED,
+                new CopyRuleProcessor(SentryRuinsPiece.SENTRY_STONE_LIST_REDUCED),
+                BossRoomProcessor.INSTANCE
         ));
 
         register(context, INFECTED_GUARDIAN_TREE, ImmutableList.of(

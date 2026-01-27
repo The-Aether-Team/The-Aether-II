@@ -6,7 +6,9 @@ import com.aetherteam.aetherii.client.event.hooks.RenderHooks;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.ClientInput;
@@ -15,15 +17,21 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import net.neoforged.neoforge.event.AddAttributeTooltipsEvent;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class AetherIIClientEventListeners {
     public static void listen(IEventBus bus) {
@@ -31,8 +39,10 @@ public class AetherIIClientEventListeners {
         bus.addListener(AetherIIClientEventListeners::onGuiOpen);
         bus.addListener(AetherIIClientEventListeners::onGuiInitializePost);
         bus.addListener(AetherIIClientEventListeners::onGuiClose);
+        bus.addListener(AetherIIClientEventListeners::onRenderBossBar);
 
         // Tooltip
+        bus.addListener(EventPriority.LOWEST, AetherIIClientEventListeners::onAddTooltipsLowest);
         bus.addListener(AetherIIClientEventListeners::onAddAttributeTooltips);
         bus.addListener(AetherIIClientEventListeners::onGatherTooltipComponents);
 
@@ -45,6 +55,9 @@ public class AetherIIClientEventListeners {
         // Input
         bus.addListener(AetherIIClientEventListeners::onMouseInputPost);
         bus.addListener(AetherIIClientEventListeners::onMovementInputUpdate);
+
+        // Datapacks
+        bus.addListener(AetherIIClientEventListeners::onDatapackSync);
     }
 
     public static void onGuiOpen(ScreenEvent.Opening event) {
@@ -75,6 +88,25 @@ public class AetherIIClientEventListeners {
         Screen screen = event.getScreen();
 
         RenderHooks.storeGuidebookScreen(screen);
+    }
+
+    public static void onRenderBossBar(CustomizeGuiOverlayEvent.BossEventProgress event) {
+        GuiGraphics guiGraphics = event.getGuiGraphics();
+        LerpingBossEvent bossEvent = event.getBossEvent();
+        UUID bossUUID = bossEvent.getId();
+        if (RenderHooks.isAetherBossBar(bossUUID)) {
+            RenderHooks.drawBossHealthBar(guiGraphics, event.getX(), event.getY(), bossEvent);
+            event.setIncrement(event.getIncrement() + 13);
+        }
+    }
+
+    public static void onAddTooltipsLowest(ItemTooltipEvent event) {
+        ItemStack itemStack = event.getItemStack();
+        List<Component> itemTooltips = event.getToolTip();
+        Item.TooltipContext context = event.getContext();
+        TooltipFlag flag = event.getFlags();
+
+        RenderHooks.addReinforcementTooltip(itemStack, itemTooltips, context, flag);
     }
 
     public static void onAddAttributeTooltips(AddAttributeTooltipsEvent event) {
@@ -147,5 +179,9 @@ public class AetherIIClientEventListeners {
         ClientInput input = event.getInput();
 
         player.getData(AetherIIDataAttachments.PLAYER).movementInput(player, input);
+    }
+
+    public static void onDatapackSync(OnDatapackSyncEvent event) {
+        AetherIIClientCaches.onDatapackSync(event);
     }
 }

@@ -1,0 +1,565 @@
+{
+  "processors": [
+    {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_bricks",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_bricks",
+            "Properties": {
+              "lit": "true",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_flagstones",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_flagstones",
+            "Properties": {
+              "lit": "true",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_base_bricks",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_base_bricks",
+            "Properties": {
+              "lit": "true",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_capstone_bricks",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_capstone_bricks",
+            "Properties": {
+              "lit": "true",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block_state": {
+              "Name": "aether_ii:undershale_base_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_base_pillar",
+            "Properties": {
+              "facing": "up",
+              "lit": "true",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block_state": {
+              "Name": "aether_ii:undershale_capstone_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_capstone_pillar",
+            "Properties": {
+              "facing": "up",
+              "lit": "true",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block_state": {
+              "Name": "aether_ii:undershale_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_pillar",
+            "Properties": {
+              "facing": "up",
+              "lit": "true",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_bricks",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_bricks",
+            "Properties": {
+              "lit": "false",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_flagstones",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_flagstones",
+            "Properties": {
+              "lit": "false",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_base_bricks",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_base_bricks",
+            "Properties": {
+              "lit": "false",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_capstone_bricks",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_capstone_bricks",
+            "Properties": {
+              "lit": "false",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block_state": {
+              "Name": "aether_ii:undershale_base_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_base_pillar",
+            "Properties": {
+              "facing": "up",
+              "lit": "false",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block_state": {
+              "Name": "aether_ii:undershale_capstone_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_capstone_pillar",
+            "Properties": {
+              "facing": "up",
+              "lit": "false",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block_state": {
+              "Name": "aether_ii:undershale_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_pillar",
+            "Properties": {
+              "facing": "up",
+              "lit": "false",
+              "powered": "false"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "processor_type": "aether_ii:copy_rule",
+      "rules": [
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_bricks",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_bricks",
+            "Properties": {
+              "lit": "true",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_flagstones",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_flagstones",
+            "Properties": {
+              "lit": "true",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_base_bricks",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_base_bricks",
+            "Properties": {
+              "lit": "true",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_capstone_bricks",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_capstone_bricks",
+            "Properties": {
+              "lit": "true",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block_state": {
+              "Name": "aether_ii:undershale_base_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_base_pillar",
+            "Properties": {
+              "facing": "up",
+              "lit": "true",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block_state": {
+              "Name": "aether_ii:undershale_capstone_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_capstone_pillar",
+            "Properties": {
+              "facing": "up",
+              "lit": "true",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block_state": {
+              "Name": "aether_ii:undershale_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_pillar",
+            "Properties": {
+              "facing": "up",
+              "lit": "true",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_bricks",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_bricks",
+            "Properties": {
+              "lit": "false",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_flagstones",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_flagstones",
+            "Properties": {
+              "lit": "false",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_base_bricks",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_base_bricks",
+            "Properties": {
+              "lit": "false",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:undershale_capstone_bricks",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_capstone_bricks",
+            "Properties": {
+              "lit": "false",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block_state": {
+              "Name": "aether_ii:undershale_base_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_base_pillar",
+            "Properties": {
+              "facing": "up",
+              "lit": "false",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block_state": {
+              "Name": "aether_ii:undershale_capstone_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_capstone_pillar",
+            "Properties": {
+              "facing": "up",
+              "lit": "false",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block_state": {
+              "Name": "aether_ii:undershale_pillar",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "predicate_type": "minecraft:random_blockstate_match",
+            "probability": 0.02
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:sentry_pillar",
+            "Properties": {
+              "facing": "up",
+              "lit": "false",
+              "powered": "false"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "processor_type": "aether_ii:boss_room"
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "type": "aether_ii:alkahest_purification",
+  "alkahest_usage": 1,
+  "byproducts": {
+    "type": "list",
+    "value": [
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:irradiated_dust"
+          }
+        },
+        "weight": 3
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 2,
+            "id": "aether_ii:irradiated_dust"
+          }
+        },
+        "weight": 2
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 3,
+            "id": "aether_ii:irradiated_dust"
+          }
+        },
+        "weight": 1
+      }
+    ]
+  },
+  "category": "items",
+  "experience": 0.0,
+  "ingredient": "aether_ii:irradiated_chunk",
+  "processing_time": 200,
+  "results": {
+    "type": "list",
+    "value": [
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:charm_of_efficiency_1"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:charm_of_damage_1"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:charm_of_dexterity_1"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:charm_of_knockback_1"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:charm_of_health_1"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:charm_of_defense_1"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:charm_of_toughness_1"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:charm_of_resistance_1"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:charm_of_agility_1"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:engraved_disc_aether_tune"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:engraved_disc_ascending_dawn"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:engraved_disc_aerwhale"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:engraved_disc_approaches"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:engraved_disc_demise"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:engraved_disc_chinchilla"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:engraved_disc_high"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:engraved_disc_revolutions"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:engraved_disc_chase"
+          }
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

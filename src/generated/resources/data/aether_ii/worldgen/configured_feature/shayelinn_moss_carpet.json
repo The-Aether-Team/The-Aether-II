@@ -24,7 +24,8 @@
                 "blocks": "minecraft:air"
               },
               {
-                "type": "minecraft:solid",
+                "type": "minecraft:has_sturdy_face",
+                "direction": "up",
                 "offset": [
                   0,
                   -1,

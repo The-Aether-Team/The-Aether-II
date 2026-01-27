@@ -142,6 +142,20 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:block/chest/close3")
                 ).subtitle("subtitles.aether_ii.block.alkahest_purifier.close")
         );
+        this.add(AetherIISoundEvents.BLOCK_GROUND_TRAP_TRIGGER,
+                definition().with(
+                        sound("aether_ii:block/ground_trap/trigger1"),
+                        sound("aether_ii:block/ground_trap/trigger2"),
+                        sound("aether_ii:block/ground_trap/trigger3"),
+                        sound("aether_ii:block/ground_trap/trigger4"),
+                        sound("aether_ii:block/ground_trap/trigger5"),
+                        sound("aether_ii:block/ground_trap/trigger6")
+                ).subtitle("subtitles.aether_ii.block.ground_trap.trigger")
+        );
+        this.add(AetherIISoundEvents.WATER_EVAPORATE,
+                definition().with(sound("minecraft:random/fizz")
+                ).subtitle("subtitles.aether_ii.block.water.evaporate")
+        );
     }
 
     private void registerItemSounds() {
@@ -171,6 +185,12 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:item/bottle/empty1"),
                         sound("minecraft:item/bottle/empty2")
                 ).subtitle("subtitles.aether_ii.item.scaterglass_vial.empty")
+        );
+
+        this.add(AetherIISoundEvents.ITEM_HAMMER_OF_DEMOLITION_SHOOT,
+                definition().with(
+                        sound("minecraft:mob/ghast/fireball4")
+                ).subtitle("subtitles.aether.item.hammer_of_kingbdogz.shoot")
         );
 
         this.add(AetherIISoundEvents.ITEM_ARMOR_EQUIP_BEAST_PELT,
@@ -223,6 +243,35 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:item/armor/equip_gold6")
                 ).subtitle("subtitles.aether_ii.item.armor.equip_gravitite")
         );
+        this.add(AetherIISoundEvents.ITEM_ARMOR_EQUIP_SENTRY,
+                definition().with(
+                        sound("minecraft:item/armor/equip_netherite1"),
+                        sound("minecraft:item/armor/equip_netherite2"),
+                        sound("minecraft:item/armor/equip_netherite3"),
+                        sound("minecraft:item/armor/equip_netherite4")
+                ).subtitle("subtitles.aether_ii.item.armor.equip_sentry")
+        );
+        this.add(AetherIISoundEvents.ITEM_ARMOR_EQUIP_NEPTUNE,
+                definition().with(
+                        sound("minecraft:item/armor/equip_gold1"),
+                        sound("minecraft:item/armor/equip_gold2"),
+                        sound("minecraft:item/armor/equip_gold3"),
+                        sound("minecraft:item/armor/equip_gold4"),
+                        sound("minecraft:item/armor/equip_gold5"),
+                        sound("minecraft:item/armor/equip_gold6")
+                ).subtitle("subtitles.aether_ii.item.armor.equip_neptune")
+        );
+
+        this.add(AetherIISoundEvents.ITEM_ACCESSORY_EQUIP_GENERIC,
+                definition().with(
+                        sound("minecraft:item/armor/equip_chain1"),
+                        sound("minecraft:item/armor/equip_chain2"),
+                        sound("minecraft:item/armor/equip_chain3"),
+                        sound("minecraft:item/armor/equip_chain4"),
+                        sound("minecraft:item/armor/equip_chain5"),
+                        sound("minecraft:item/armor/equip_chain6")
+                ).subtitle("subtitles.aether_ii.item.accessory.equip_generic")
+        );
 
         this.add(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_FILL,
                 definition().with(
@@ -267,22 +316,31 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.aether_ii.item.arkenium_canister.empty")
         );
 
-        this.add(AetherIISoundEvents.ITEM_MUSIC_DISC_AETHER_TUNE,
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_AETHER_TUNE,
                 definition().with(sound("aether_ii:item/records/aether_tune").stream())
         );
-        this.add(AetherIISoundEvents.ITEM_MUSIC_DISC_ASCENDING_DAWN,
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_ASCENDING_DAWN,
                 definition().with(sound("aether_ii:item/records/ascending_dawn").stream())
         );
-        this.add(AetherIISoundEvents.ITEM_MUSIC_DISC_AERWHALE,
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_AERWHALE,
                 definition().with(sound("aether_ii:item/records/aerwhale").stream())
         );
-        this.add(AetherIISoundEvents.ITEM_MUSIC_DISC_APPROACHES,
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_APPROACHES,
                 definition().with(sound("aether_ii:item/records/approaches").stream())
         );
-        this.add(AetherIISoundEvents.ITEM_MUSIC_DISC_DEMISE,
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_DEMISE,
                 definition().with(sound("aether_ii:item/records/demise").stream())
         );
-        this.add(AetherIISoundEvents.ITEM_RECORDING_892,
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_CHINCHILLA,
+                definition().with(sound("aether_ii:item/records/chinchilla").stream())
+        );
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_HIGH,
+                definition().with(sound("aether_ii:item/records/high").stream())
+        );
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_REVOLUTIONS,
+                definition().with(sound("aether_ii:item/records/revolutions").stream())
+        );
+        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_CHASE,
                 definition().with(sound("aether_ii:item/records/chase").stream())
         );
     }
@@ -963,6 +1021,141 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.block.generic.footsteps")
         );
 
+        this.add(AetherIISoundEvents.ENTITY_MIMIC_ATTACK,
+                definition().with(
+                        sound("minecraft:random/eat1"),
+                        sound("minecraft:random/eat2"),
+                        sound("minecraft:random/eat3")
+                ).subtitle("subtitles.aether_ii.entity.mimic.attack")
+        );
+        this.add(AetherIISoundEvents.ENTITY_MIMIC_DEATH,
+                definition().with(sound("minecraft:step/stone1"),
+                        sound("minecraft:step/stone2"),
+                        sound("minecraft:step/stone3"),
+                        sound("minecraft:step/stone4"),
+                        sound("minecraft:step/stone5"),
+                        sound("minecraft:step/stone6")
+                ).subtitle("subtitles.aether_ii.entity.mimic.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_MIMIC_HURT,
+                definition().with(sound("minecraft:step/stone1"),
+                        sound("minecraft:step/stone2"),
+                        sound("minecraft:step/stone3"),
+                        sound("minecraft:step/stone4"),
+                        sound("minecraft:step/stone5"),
+                        sound("minecraft:step/stone6")
+                ).subtitle("subtitles.aether_ii.entity.mimic.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_MIMIC_KILL,
+                definition().with(
+                        sound("minecraft:random/burp")
+                ).subtitle("subtitles.aether_ii.entity.mimic.kill")
+        );
+
+        this.add(AetherIISoundEvents.ENTITY_DETONATION_SENTRY_DEATH,
+                definition().with(sound("minecraft:step/stone1"),
+                        sound("minecraft:step/stone2"),
+                        sound("minecraft:step/stone3"),
+                        sound("minecraft:step/stone4"),
+                        sound("minecraft:step/stone5"),
+                        sound("minecraft:step/stone6")
+                ).subtitle("subtitles.aether_ii.entity.detonation_sentry.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_DETONATION_SENTRY_HURT,
+                definition().with(sound("minecraft:step/stone1"),
+                        sound("minecraft:step/stone2"),
+                        sound("minecraft:step/stone3"),
+                        sound("minecraft:step/stone4"),
+                        sound("minecraft:step/stone5"),
+                        sound("minecraft:step/stone6")
+                ).subtitle("subtitles.aether_ii.entity.detonation_sentry.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_DETONATION_SENTRY_JUMP,
+                definition().with(sound("minecraft:step/stone1"),
+                        sound("minecraft:step/stone2"),
+                        sound("minecraft:step/stone3"),
+                        sound("minecraft:step/stone4"),
+                        sound("minecraft:step/stone5"),
+                        sound("minecraft:step/stone6")
+                ).subtitle("subtitles.aether_ii.entity.detonation_sentry.jump")
+        );
+        this.add(AetherIISoundEvents.ENTITY_DETONATION_SENTRY_SQUISH,
+                definition().with(sound("minecraft:step/stone1"),
+                        sound("minecraft:step/stone2"),
+                        sound("minecraft:step/stone3"),
+                        sound("minecraft:step/stone4"),
+                        sound("minecraft:step/stone5"),
+                        sound("minecraft:step/stone6")
+                ).subtitle("subtitles.aether_ii.entity.detonation_sentry.squish")
+        );
+
+        this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_DEATH,
+                definition().with(sound("minecraft:mob/irongolem/death"))
+                        .subtitle("subtitles.aether_ii.entity.sentry_golem.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_HURT,
+                definition().with(
+                        sound("minecraft:mob/irongolem/hit1")
+                ).subtitle("subtitles.aether_ii.entity.sentry_golem.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_SAY,
+                definition().with(
+                        sound("minecraft:mob/irongolem/walk1")
+                ).subtitle("subtitles.aether_ii.entity.sentry_golem.say")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_THROW_BOMB,
+                definition().with(sound("minecraft:random/bow"))
+                        .subtitle("subtitles.aether_ii.entity.sentry_golem.throw_bomb")
+        );
+
+        this.add(AetherIISoundEvents.ENTITY_SLIDER_AWAKEN,
+                definition().with(sound("aether_ii:entity/slider/awaken"))
+                        .subtitle("subtitles.aether_ii.entity.slider.awaken")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SLIDER_AMBIENT,
+                definition().with(sound("minecraft:ambient/cave/cave1"),
+                                sound("minecraft:ambient/cave/cave2"),
+                                sound("minecraft:ambient/cave/cave3"),
+                                sound("minecraft:ambient/cave/cave4"),
+                                sound("minecraft:ambient/cave/cave5"),
+                                sound("minecraft:ambient/cave/cave6"),
+                                sound("minecraft:ambient/cave/cave7"),
+                                sound("minecraft:ambient/cave/cave8"),
+                                sound("minecraft:ambient/cave/cave9"),
+                                sound("minecraft:ambient/cave/cave10"),
+                                sound("minecraft:ambient/cave/cave11"),
+                                sound("minecraft:ambient/cave/cave12"),
+                                sound("minecraft:ambient/cave/cave13"),
+                                sound("minecraft:ambient/cave/cave14"),
+                                sound("minecraft:ambient/cave/cave15"),
+                                sound("minecraft:ambient/cave/cave16"),
+                                sound("minecraft:ambient/cave/cave17"),
+                                sound("minecraft:ambient/cave/cave18"),
+                                sound("minecraft:ambient/cave/cave19"))
+                        .subtitle("subtitles.aether_ii.entity.slider.ambient")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SLIDER_COLLIDE,
+                definition().with(sound("aether_ii:entity/slider/collide"))
+                        .subtitle("subtitles.aether_ii.entity.slider.collide")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SLIDER_MOVE,
+                definition().with(sound("aether_ii:entity/slider/move"))
+                        .subtitle("subtitles.aether_ii.entity.slider.move")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SLIDER_HURT,
+                definition().with(sound("minecraft:step/stone1"),
+                                sound("minecraft:step/stone2"),
+                                sound("minecraft:step/stone3"),
+                                sound("minecraft:step/stone4"),
+                                sound("minecraft:step/stone5"),
+                                sound("minecraft:step/stone6"))
+                        .subtitle("subtitles.aether_ii.entity.slider.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SLIDER_DEATH,
+                definition().with(sound("aether_ii:entity/slider/death"))
+                        .subtitle("subtitles.aether_ii.entity.slider.death")
+        );
+
         this.add(AetherIISoundEvents.ENTITY_BLIGHTED_BURN,
                 definition().with(
                         sound("minecraft:random/fizz")
@@ -1053,6 +1246,10 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 definition().with(
                         sound("aether_ii:music/aether_ambience1").volume(0.4F).stream()
                 )
+        );
+
+        this.add(AetherIISoundEvents.MUSIC_BOSS_SLIDER,
+                definition().with(sound("aether_ii:music/boss/slider_fight").stream())
         );
     }
 }

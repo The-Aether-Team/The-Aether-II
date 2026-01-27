@@ -4,12 +4,11 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.blockentity.ArkeniumForgeBlockEntity;
 import com.aetherteam.aetherii.inventory.menu.slot.ForgeCharmSlot;
-import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.Charms;
 import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import com.aetherteam.aetherii.item.equipment.charms.CharmItem;
 import com.aetherteam.aetherii.network.packet.clientbound.ForgeSoundPacket;
-import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -20,90 +19,23 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.function.Consumer;
 
 public class ArkeniumForgeMenu extends AbstractContainerMenu {
-    public static final List<Holder<Item>> REINFORCEABLE = List.of(
-            AetherIIItems.SKYROOT_SHORTSWORD,
-            AetherIIItems.SKYROOT_HAMMER,
-            AetherIIItems.SKYROOT_SPEAR,
-            AetherIIItems.HOLYSTONE_SHORTSWORD,
-            AetherIIItems.HOLYSTONE_HAMMER,
-            AetherIIItems.HOLYSTONE_SPEAR,
-            AetherIIItems.ZANITE_SHORTSWORD,
-            AetherIIItems.ZANITE_HAMMER,
-            AetherIIItems.ZANITE_SPEAR,
-            AetherIIItems.ARKENIUM_SHORTSWORD,
-            AetherIIItems.ARKENIUM_HAMMER,
-            AetherIIItems.ARKENIUM_SPEAR,
-            AetherIIItems.GRAVITITE_SHORTSWORD,
-            AetherIIItems.GRAVITITE_HAMMER,
-            AetherIIItems.GRAVITITE_SPEAR,
-            AetherIIItems.SKYROOT_SHIELD,
-            AetherIIItems.BURRUKAI_PLATE_SHIELD,
-            AetherIIItems.ZANITE_SHIELD,
-            AetherIIItems.ARKENIUM_SHIELD,
-            AetherIIItems.GRAVITITE_SHIELD,
-            AetherIIItems.SKYROOT_AXE,
-            AetherIIItems.HOLYSTONE_AXE,
-            AetherIIItems.ZANITE_AXE,
-            AetherIIItems.ARKENIUM_AXE,
-            AetherIIItems.GRAVITITE_AXE,
-            AetherIIItems.SKYROOT_PICKAXE,
-            AetherIIItems.HOLYSTONE_PICKAXE,
-            AetherIIItems.ZANITE_PICKAXE,
-            AetherIIItems.ARKENIUM_PICKAXE,
-            AetherIIItems.GRAVITITE_PICKAXE,
-            AetherIIItems.SKYROOT_SHOVEL,
-            AetherIIItems.HOLYSTONE_SHOVEL,
-            AetherIIItems.ZANITE_SHOVEL,
-            AetherIIItems.ARKENIUM_SHOVEL,
-            AetherIIItems.GRAVITITE_SHOVEL,
-            AetherIIItems.SKYROOT_TROWEL,
-            AetherIIItems.HOLYSTONE_TROWEL,
-            AetherIIItems.ZANITE_TROWEL,
-            AetherIIItems.ARKENIUM_TROWEL,
-            AetherIIItems.GRAVITITE_TROWEL,
-            AetherIIItems.BEAST_PELT_HELMET,
-            AetherIIItems.BURRUKAI_PLATE_HELMET,
-            AetherIIItems.ZANITE_HELMET,
-            AetherIIItems.ARKENIUM_HELMET,
-            AetherIIItems.GRAVITITE_HELMET,
-            AetherIIItems.BEAST_PELT_CHESTPLATE,
-            AetherIIItems.BURRUKAI_PLATE_CHESTPLATE,
-            AetherIIItems.ZANITE_CHESTPLATE,
-            AetherIIItems.ARKENIUM_CHESTPLATE,
-            AetherIIItems.GRAVITITE_CHESTPLATE,
-            AetherIIItems.BEAST_PELT_LEGGINGS,
-            AetherIIItems.BURRUKAI_PLATE_LEGGINGS,
-            AetherIIItems.ZANITE_LEGGINGS,
-            AetherIIItems.ARKENIUM_LEGGINGS,
-            AetherIIItems.GRAVITITE_LEGGINGS,
-            AetherIIItems.BEAST_PELT_BOOTS,
-            AetherIIItems.BURRUKAI_PLATE_BOOTS,
-            AetherIIItems.ZANITE_BOOTS,
-            AetherIIItems.ARKENIUM_BOOTS,
-            AetherIIItems.GRAVITITE_BOOTS,
-            AetherIIItems.BEAST_PELT_GLOVES,
-            AetherIIItems.BURRUKAI_PLATE_GLOVES,
-            AetherIIItems.ZANITE_GLOVES,
-            AetherIIItems.ARKENIUM_GLOVES,
-            AetherIIItems.GRAVITITE_GLOVES);
     public static final ResourceLocation SLOT_PRIMARY = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_primary");
     public static final ResourceLocation SLOT_SECONDARY = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_secondary");
     private final Container container;
     private final Player player;
     @Nullable
     private String itemName;
+    private Consumer<ItemStack> inputUpdater = (input) -> {};
 
     public ArkeniumForgeMenu(int containerId, Inventory playerInventory) {
         this(containerId, playerInventory, new SimpleContainer(11));
@@ -116,18 +48,13 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
 
         this.addSlot(new Slot(this.container, 0, 29, 65) {
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return ArkeniumForgeMenu.this.isEquipment(stack);
-            }
-
-            @Override
             public void setChanged() {
                 super.setChanged();
                 ArkeniumForgeMenu.this.changeInput();
             }
         });
 
-        this.addSlot(new Slot(this.container, 1, 69, 149) {
+        this.addSlot(new Slot(this.container, 1, 69, 153) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return ArkeniumForgeMenu.this.isPrimaryMaterial(stack);
@@ -138,7 +65,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                 return SLOT_PRIMARY;
             }
         });
-        this.addSlot(new Slot(this.container, 2, 91, 149) {
+        this.addSlot(new Slot(this.container, 2, 91, 153) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return ArkeniumForgeMenu.this.isSecondaryMaterial(stack);
@@ -151,21 +78,21 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         });
 
         int index = 3;
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int j = 0; j < 4; j++) {
+            for (int i = 0; i < 2; i++) {
                 this.addSlot(new ForgeCharmSlot(this, this.container, index, 54 + (52 * i), 39 + (17 * j), index - 3));
                 index++;
             }
         }
 
-        this.addStandardInventorySlots(playerInventory, 8, 169);
+        this.addStandardInventorySlots(playerInventory, 8, 173);
     }
 
     public void changeInput() {
         ItemStack input = this.getInput();
-        if (input.isEmpty()) {
-            for (Slot slot : this.slots) {
-                if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
+        for (Slot slot : this.slots) {
+            if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
+                if (input.isEmpty()) {
                     if (!forgeCharmSlot.getItem().isEmpty()) {
                         if (forgeCharmSlot.isLocked()) {
                             forgeCharmSlot.set(ItemStack.EMPTY);
@@ -173,11 +100,8 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                             this.quickMoveStack(this.player, forgeCharmSlot.index);
                         }
                     }
+                    forgeCharmSlot.setLocked(false);
                 }
-            }
-        } else {
-            if (input.get(AetherIIDataComponents.CHARMS) == null) { //todo better handling?
-                input.set(AetherIIDataComponents.CHARMS, new ArrayList<>(List.of(ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY)));
             }
         }
     }
@@ -195,11 +119,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             ItemStack slotStack = slot.getItem();
             itemStack = slotStack.copy();
             if (slotIndex > 10) {
-                if (this.isEquipment(slotStack)) {
-                    if (!this.moveItemStackTo(slotStack, 0, 1, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (this.isPrimaryMaterial(slotStack)) {
+                if (this.isPrimaryMaterial(slotStack)) {
                     if (!this.moveItemStackTo(slotStack, 1, 2, false)) {
                         return ItemStack.EMPTY;
                     }
@@ -209,6 +129,10 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                     }
                 } else if (this.isCharm(slotStack)) {
                     if (!this.moveItemStackTo(slotStack, 3, 11, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (slotIndex >= 11 && slotIndex < 47) {
+                    if (!this.moveItemStackTo(slotStack, 0, 1, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else if (slotIndex >= 11 && slotIndex < 38) {
@@ -234,47 +158,75 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         return itemStack;
     }
 
-    public boolean upgradeItem() {
-        int tierToUpgradeTo = this.getTierForMaterials();
-        ItemStack input = this.getInput();
-        ReinforcementTier reinforcementTier = input.get(AetherIIDataComponents.REINFORCEMENT_TIER);
-        if (!this.isItemAtMaxTier() && ((reinforcementTier == null && tierToUpgradeTo > 0) || (reinforcementTier != null && tierToUpgradeTo > reinforcementTier.getTier()))) {
-            if (!input.isEmpty()) {
-                ReinforcementTier tier = ReinforcementTier.values()[tierToUpgradeTo - 1];
-                int primaryCost = this.getPrimaryCostForTier(tierToUpgradeTo);
-                int secondaryCost = this.getSecondaryCostForTier(tierToUpgradeTo);
-                if (tier != null && primaryCost != -1 && secondaryCost != -1) {
-                    input.set(AetherIIDataComponents.REINFORCEMENT_TIER, tier);
+    public boolean upgradeItem(ReinforcementTier tierToUpgradeTo) {
+        if (tierToUpgradeTo != null) {
+            int tierNumberToUpgradeTo = tierToUpgradeTo.getTierNumber();
+            ItemStack input = this.getInput();
+            ReinforcementTier currentReinforcementTier = input.get(AetherIIDataComponents.REINFORCEMENT_TIER);
 
-                    int minTier = 0;
-                    if (reinforcementTier != null) {
-                        minTier = reinforcementTier.getTier();
+            if (!ReinforcementTier.isItemAtMaxTier(input) && ((currentReinforcementTier == null && tierNumberToUpgradeTo > 0) || (currentReinforcementTier != null && tierNumberToUpgradeTo > currentReinforcementTier.getTierNumber()))) {
+                if (!input.isEmpty()) {
+                    int primaryCost = ReinforcementTier.getPrimaryCostForTier(input, tierNumberToUpgradeTo);
+                    int secondaryCost = ReinforcementTier.getSecondaryCostForTier(input, tierNumberToUpgradeTo);
+                    if (primaryCost != -1 && secondaryCost != -1) {
+                        int minTier = 0;
+                        if (currentReinforcementTier != null) {
+                            minTier = currentReinforcementTier.getTierNumber();
+                        }
+
+                        boolean flag = true;
+                        for (ReinforcementTier tier : List.of(ReinforcementTier.values()).subList(minTier, tierNumberToUpgradeTo)) {
+                            ReinforcementTier.Stats stats = tier.getStat(input);
+                            if (stats != null) {
+                                stats.upgrades().upgradeFunction().updateComponents(input.copy(), input, tier);
+                                input.set(AetherIIDataComponents.REINFORCEMENT_TIER, tier);
+                            } else {
+                                flag = false;
+                                break;
+                            }
+                        }
+                        if (flag) {
+                            this.inputUpdater.accept(input);
+                            this.getPrimaryMaterial().shrink(primaryCost);
+                            this.getSecondaryMaterial().shrink(secondaryCost);
+                            return true;
+                        }
                     }
-                    int extraDurability = List.of(ReinforcementTier.values()).subList(minTier, tierToUpgradeTo).stream().mapToInt(ReinforcementTier::getExtraDurability).sum();
-                    input.set(DataComponents.MAX_DAMAGE, input.getMaxDamage() + extraDurability);
-
-                    this.getPrimaryMaterial().shrink(primaryCost);
-                    this.getSecondaryMaterial().shrink(secondaryCost);
-                    return true;
                 }
             }
         }
+
         return false;
     }
 
     public boolean slotCharms() {
-        List<ItemStack> charms = this.getInput().get(AetherIIDataComponents.CHARMS);
+        return this.replaceCharms(this.getInput(), true);
+    }
+
+    public boolean replaceCharms(ItemStack stack, boolean lock) {
         boolean flag = false;
-        if (charms != null) {
-            charms = new ArrayList<>(charms);
+        List<Charms.CharmHolder> charmHolders = Charms.getCharmsForItem(stack);
+        Charms newCharms = new Charms();
+        if (charmHolders != null) {
             for (Slot slot : this.slots) {
-                if (slot instanceof ForgeCharmSlot charmSlot && !charmSlot.isLocked() && !charmSlot.getItem().isEmpty()) {
-                    charms.set(charmSlot.getCharmIndex(), charmSlot.getItem());
-                    charmSlot.setLocked(true);
-                    flag = true;
+                if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
+                    Charms.CharmHolder charmHolder = Charms.getCharmHolderForItem(stack, forgeCharmSlot.getCharmIndex());
+                    if (charmHolder != null) {
+                        if (forgeCharmSlot.isLocked()) {
+                            newCharms.charmHolders().add(forgeCharmSlot.getCharmIndex(), new Charms.CharmHolder(charmHolder));
+                        } else {
+                            newCharms.charmHolders().add(forgeCharmSlot.getCharmIndex(), new Charms.CharmHolder(charmHolder, slot.getItem()));
+                            if (!slot.getItem().isEmpty() && lock) {
+                                forgeCharmSlot.setLocked(true);
+                            }
+                        }
+                        flag = true;
+                    }
                 }
             }
-            this.getInput().set(AetherIIDataComponents.CHARMS, charms);
+        }
+        if (flag) {
+            stack.set(AetherIIDataComponents.CHARMS, newCharms);
         }
         return flag;
     }
@@ -291,7 +243,6 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                     itemstack.set(DataComponents.CUSTOM_NAME, Component.literal(s));
                 }
             }
-
             return true;
         } else {
             return false;
@@ -322,87 +273,6 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         return this.container.getItem(2);
     }
 
-    public Map<Integer, ReinforcementTier.Cost> getCosts() {
-        Map<Integer, ReinforcementTier.Cost> costs = new HashMap<>();
-        for (ReinforcementTier tier : ReinforcementTier.values()) {
-            int value = tier.getTier();
-            ReinforcementTier.Cost cost = tier.getCost(this.getInput());
-            if (costs != null) {
-                costs.put(value, cost);
-            }
-        }
-        return costs;
-    }
-
-    public int getTierCount() {
-        int count = 0;
-        List<ReinforcementTier.Cost> costs = new ArrayList<>(this.getCosts().values());
-        for (int i = costs.size() - 1; i >= 0; i--) {
-            ReinforcementTier.Cost cost = costs.get(i);
-            if (cost != null) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    public boolean isItemAtMaxTier() {
-        int max = this.getTierCount();
-        ReinforcementTier tier = this.getInput().get(AetherIIDataComponents.REINFORCEMENT_TIER);
-        return tier != null && tier.getTier() == max;
-    }
-
-    public int getTierForItem() {
-        int max = this.getTierCount();
-        ReinforcementTier tier = this.getInput().get(AetherIIDataComponents.REINFORCEMENT_TIER);
-        if (tier != null) {
-            return Math.min(tier.getTier(), max);
-        } else {
-            return 0;
-        }
-    }
-
-    @Nullable
-    public ReinforcementTier.Cost getCostForTier(int tier) {
-        return this.getCosts().getOrDefault(tier, null);
-    }
-
-    public int getPrimaryCostForTier(int tier) {
-        ReinforcementTier.Cost initialCost = this.getCostForTier(tier);
-        if (initialCost != null) {
-            int cost = initialCost.primaryCount();
-            int minimumTier = this.getTierForItem();
-            for (int i = tier - 1; i > minimumTier; i--) {
-                ReinforcementTier.Cost costForTier = this.getCostForTier(i);
-                if (costForTier != null) {
-                    cost += costForTier.primaryCount();
-                }
-            }
-            return cost;
-        }
-        return -1;
-    }
-
-    public int getSecondaryCostForTier(int tier) {
-        ReinforcementTier.Cost initialCost = this.getCostForTier(tier);
-        if (initialCost != null) {
-            int cost = initialCost.secondaryCount();
-            int minimumTier = this.getTierForItem();
-            for (int i = tier - 1; i > minimumTier; i--) {
-                ReinforcementTier.Cost costForTier = this.getCostForTier(i);
-                if (costForTier != null) {
-                    cost += costForTier.secondaryCount();
-                }
-            }
-            return cost;
-        }
-        return -1;
-    }
-
-    public boolean isEquipment(ItemStack itemStack) {
-        return itemStack.is(AetherIITags.Items.CAN_BE_REINFORCED);
-    }
-
     public boolean isPrimaryMaterial(ItemStack material) {
         return material.is(AetherIITags.Items.FORGE_PRIMARY_MATERIAL);
     }
@@ -411,24 +281,25 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         return material.is(AetherIITags.Items.FORGE_SECONDARY_MATERIAL);
     }
 
+    public boolean isCharm(ItemStack itemStack) {
+        return itemStack.getItem() instanceof CharmItem;
+    }
+
     public int getTierForMaterials() {
-        if (!this.isItemAtMaxTier()) {
-            List<ReinforcementTier.Cost> costs = new ArrayList<>(this.getCosts().values());
+        ItemStack input = this.getInput();
+        if (!ReinforcementTier.isItemAtMaxTier(input)) {
+            List<ReinforcementTier.Cost> costs = new ArrayList<>(ReinforcementTier.getCosts(input).values());
             for (int i = costs.size() - 1; i >= 0; i--) {
                 ReinforcementTier.Cost cost = costs.get(i);
                 if (cost != null) {
-                    if (((cost.primaryMaterial().asItem() == Items.AIR && cost.secondaryMaterial().asItem() != Items.AIR) || (this.getPrimaryMaterial().is(cost.primaryMaterial().asItem()) && this.getPrimaryMaterial().getCount() >= this.getPrimaryCostForTier(i + 1)))
-                            && ((cost.primaryMaterial().asItem() != Items.AIR && cost.secondaryMaterial().asItem() == Items.AIR) || (this.getSecondaryMaterial().is(cost.secondaryMaterial().asItem()) && this.getSecondaryMaterial().getCount() >= this.getSecondaryCostForTier(i + 1)))) {
+                    if (((cost.primaryMaterial().asItem() == Items.AIR && cost.secondaryMaterial().asItem() != Items.AIR) || (this.getPrimaryMaterial().is(cost.primaryMaterial().asItem()) && this.getPrimaryMaterial().getCount() >= ReinforcementTier.getPrimaryCostForTier(input, i + 1)))
+                            && ((cost.primaryMaterial().asItem() != Items.AIR && cost.secondaryMaterial().asItem() == Items.AIR) || (this.getSecondaryMaterial().is(cost.secondaryMaterial().asItem()) && this.getSecondaryMaterial().getCount() >= ReinforcementTier.getSecondaryCostForTier(input, i + 1)))) {
                         return i + 1;
                     }
                 }
             }
         }
         return -1;
-    }
-
-    public boolean isCharm(ItemStack itemStack) {
-        return itemStack.getItem() instanceof CharmItem;
     }
 
     public boolean hasNewCharms() {
@@ -438,5 +309,9 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             }
         }
         return false;
+    }
+
+    public void registerUpdater(Consumer<ItemStack> updater) {
+        this.inputUpdater = updater;
     }
 }

@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -17,7 +18,11 @@ public class AttributeUtilMixin {
     @WrapOperation(method = "applyTextFor(Lnet/minecraft/world/item/ItemStack;Ljava/util/function/Consumer;Lcom/google/common/collect/Multimap;Lnet/neoforged/neoforge/common/util/AttributeTooltipContext;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/MutableComponent;withStyle(Lnet/minecraft/ChatFormatting;)Lnet/minecraft/network/chat/MutableComponent;"), remap = false)
     private static MutableComponent withStyle(MutableComponent instance, ChatFormatting format, Operation<MutableComponent> original, @Local(argsOnly = true) ItemStack stack) {
         if (stack.is(AetherIITags.Items.UNIQUE_TOOLTIP_COLOR) && format == ChatFormatting.DARK_GREEN) {
-            return instance.withStyle(AetherIIItems.WEAPON_TOOLTIP_COLOR);
+            if (ReinforcementTier.isItemAtMaxTier(stack)) {
+                return instance.withStyle(AetherIIItems.UPGRADED_WEAPON_COLOR);
+            } else {
+                return instance.withStyle(AetherIIItems.WEAPON_TOOLTIP_COLOR);
+            }
         }
         return original.call(instance, format);
     }

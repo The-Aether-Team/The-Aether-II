@@ -194,10 +194,10 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
             }
         } else {
             AccessoryContainer accessories = this.owner.getData(AetherIIDataAttachments.ACCESSORIES);
-            this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_RELICS, 0, 64, 38, RELIC_SLOT_LOCATION));
-            this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_RELICS, 1, 64, 56, RELIC_SLOT_LOCATION));
-            this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_HANDWEAR, 2, 64, 74, HANDWEAR_SLOT_LOCATION));
-            this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_ACCESSORIES, 3, 64, 92, ACCESSORY_SLOT_LOCATION));
+            this.addSlot(new AccessorySlot(accessories, this.owner, AccessoryContainer.SlotType.RELIC, 0, 64, 38, RELIC_SLOT_LOCATION));
+            this.addSlot(new AccessorySlot(accessories, this.owner, AccessoryContainer.SlotType.RELIC, 1, 64, 56, RELIC_SLOT_LOCATION));
+            this.addSlot(new AccessorySlot(accessories, this.owner, AccessoryContainer.SlotType.HANDWEAR, 2, 64, 74, HANDWEAR_SLOT_LOCATION));
+            this.addSlot(new AccessorySlot(accessories, this.owner, AccessoryContainer.SlotType.ACCESSORY, 3, 64, 92, ACCESSORY_SLOT_LOCATION));
 
             for (int k = 0; k < 4; k++) {
                 EquipmentSlot equipmentslot = SLOT_IDS[k];

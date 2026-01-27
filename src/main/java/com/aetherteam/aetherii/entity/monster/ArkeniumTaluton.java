@@ -1,16 +1,14 @@
 package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import com.aetherteam.aetherii.entity.ai.goal.PreAnimationMeleeAttackGoal;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
@@ -33,7 +31,7 @@ public class ArkeniumTaluton extends Monster {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0, false));
+        this.goalSelector.addGoal(1, new TalutonMeleeAttackGoal(this, 1.0, false));
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
@@ -67,14 +65,6 @@ public class ArkeniumTaluton extends Monster {
         }
     }
 
-    @Override
-    public boolean doHurtTarget(ServerLevel serverLevel, Entity entity) {
-        this.attackAnimationTick = 10;
-        serverLevel.broadcastEntityEvent(this, (byte) ATTACK_EVENT);
-        this.playSound(AetherIISoundEvents.ENTITY_ARKENIUM_TALUTON_ATTACK.get(), 1.0F, 1.0F);
-        return super.doHurtTarget(serverLevel, entity);
-    }
-
     public int getAttackAnimationTick() {
         return this.attackAnimationTick;
     }
@@ -100,5 +90,23 @@ public class ArkeniumTaluton extends Monster {
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(AetherIISoundEvents.ENTITY_ARKENIUM_TALUTON_STEP.get(), 0.15F, 1.0F);
+    }
+
+    protected static class TalutonMeleeAttackGoal extends PreAnimationMeleeAttackGoal {
+
+        private final ArkeniumTaluton taluton;
+
+        public TalutonMeleeAttackGoal(ArkeniumTaluton taluton, double speedModifier, boolean followingTargetEvenIfNotSeen) {
+            super(taluton, speedModifier, followingTargetEvenIfNotSeen, 3, 40);
+            this.taluton = taluton;
+        }
+
+        @Override
+        public void attackAnimation() {
+            this.taluton.attackAnimationTick = 10;
+            getServerLevel(this.mob.level()).broadcastEntityEvent(this.mob, (byte) ATTACK_EVENT);
+            this.taluton.playSound(AetherIISoundEvents.ENTITY_ARKENIUM_TALUTON_ATTACK.get(), 1.0F, 1.0F);
+
+        }
     }
 }

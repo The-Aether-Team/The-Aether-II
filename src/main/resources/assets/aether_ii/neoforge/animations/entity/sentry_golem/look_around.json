@@ -1,0 +1,221 @@
+{
+  "length": 6,
+  "animations": [
+    {
+      "bone": "head",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 0.83333,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 1.08333,
+          "target": [
+            30,
+            -37.5,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 2.625,
+          "target": [
+            30,
+            -37.5,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 2.875,
+          "target": [
+            -10,
+            45,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 4.16667,
+          "target": [
+            -10,
+            45,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 4.45833,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 5.04167,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 5.25,
+          "target": [
+            0,
+            0,
+            -5
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 5.70833,
+          "target": [
+            0,
+            0,
+            -5
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 6,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        }
+      ]
+    },
+    {
+      "bone": "rotator",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 2,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 2.5,
+          "target": [
+            0,
+            360,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 6,
+          "target": [
+            0,
+            360,
+            0
+          ],
+          "interpolation": "linear"
+        }
+      ]
+    },
+    {
+      "bone": "torso",
+      "target": "rotation",
+      "keyframes": [
+        {
+          "timestamp": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 1,
+          "target": [
+            2.5,
+            -5,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 2,
+          "target": [
+            2.5,
+            -5,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 3,
+          "target": [
+            -2.5,
+            5,
+            0
+          ],
+          "interpolation": "catmullrom"
+        },
+        {
+          "timestamp": 4,
+          "target": [
+            -2.5,
+            5,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 5.5,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        },
+        {
+          "timestamp": 6,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "interpolation": "linear"
+        }
+      ]
+    }
+  ]
+}
