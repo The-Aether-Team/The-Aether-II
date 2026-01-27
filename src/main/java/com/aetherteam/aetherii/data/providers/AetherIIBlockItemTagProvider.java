@@ -105,16 +105,6 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.STRIPPED_INFECTED_LOG.get(),
                 AetherIIBlocks.STRIPPED_INFECTED_WOOD.get()
         );
-        this.tag(AetherIITags.Blocks.DENSE_GUARDIAN_LOGS, AetherIITags.Items.DENSE_GUARDIAN_LOGS).add(
-                AetherIIBlocks.DENSE_GUARDIAN_LOG.get(),
-                AetherIIBlocks.DENSE_GUARDIAN_WOOD.get(),
-                AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_LOG.get(),
-                AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_WOOD.get(),
-                AetherIIBlocks.DENSE_INFECTED_LOG.get(),
-                AetherIIBlocks.DENSE_INFECTED_WOOD.get(),
-                AetherIIBlocks.DENSE_STRIPPED_INFECTED_LOG.get(),
-                AetherIIBlocks.DENSE_STRIPPED_INFECTED_WOOD.get()
-        );
 
         this.tag(AetherIITags.Blocks.SKYROOT_DECORATIVE_BLOCKS, AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.SKYROOT_FLOORBOARDS.get(),

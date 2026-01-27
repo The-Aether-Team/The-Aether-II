@@ -54,8 +54,6 @@ public class AetherIITags {
         public static final TagKey<Block> ARILUM_LANTERN = tag("arilum_lantern");
 
         public static final TagKey<Block> GUARDIAN_LOGS = tag("guardian_logs");
-        public static final TagKey<Block> DENSE_GUARDIAN_LOGS = tag("dense_guardian_logs");
-        public static final TagKey<Block> DENSE_GUARDIAN_BLOCKS = tag("dense_guardian_blocks");
 
         public static final TagKey<Block> ALLOWED_BUCKET_PICKUP = tag("allowed_bucket_pickup");
         public static final TagKey<Block> ALKAHEST_RESISTANT = tag("alkahest_resistant");
@@ -139,8 +137,6 @@ public class AetherIITags {
         public static final TagKey<Item> ARILUM_LANTERN = tag("arilum_lantern");
 
         public static final TagKey<Item> GUARDIAN_LOGS = tag("guardian_logs");
-        public static final TagKey<Item> DENSE_GUARDIAN_LOGS = tag("dense_guardian_logs");
-        public static final TagKey<Item> DENSE_GUARDIAN_BLOCKS = tag("dense_guardian_blocks");
 
         public static final TagKey<Item> ENGRAVED_DISCS = tag("engraved_discs");
 

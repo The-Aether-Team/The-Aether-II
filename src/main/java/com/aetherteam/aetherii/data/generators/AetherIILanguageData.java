@@ -605,20 +605,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GUARDIAN_WOOD, "Guardian Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_LOG, "Stripped Guardian Log");
         this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD, "Stripped Guardian Wood");
-        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_LOG, "Dense Guardian Log");
-        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_WOOD, "Dense Guardian Wood");
-        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_LOG, "Dense Stripped Guardian Log");
-        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_WOOD, "Dense Stripped Guardian Wood");
 
         // Infected Wood
         this.addBlock(AetherIIBlocks.INFECTED_LOG, "Infected Log");
         this.addBlock(AetherIIBlocks.INFECTED_WOOD, "Infected Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG, "Stripped Infected Log");
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD, "Stripped Infected Wood");
-        this.addBlock(AetherIIBlocks.DENSE_INFECTED_LOG, "Dense Infected Log");
-        this.addBlock(AetherIIBlocks.DENSE_INFECTED_WOOD, "Dense Infected Wood");
-        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_INFECTED_LOG, "Dense Infected Log");
-        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_INFECTED_WOOD, "Dense Infected Wood");
 
         // Guardian Slabs
         this.addBlock(AetherIIBlocks.GUARDIAN_LOG_SLAB, "Guardian Log Slab");
@@ -630,16 +622,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB, "Stripped Infected Log Slab");
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB, "Stripped Infected Wood Slab");
 
-        // Guardian Slabs
-        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_LOG_SLAB, "Dense Guardian Log Slab");
-        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_WOOD_SLAB, "Dense Guardian Wood Slab");
-        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_LOG_SLAB, "Dense Stripped Guardian Log Slab");
-        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_WOOD_SLAB, "Dense Stripped Guardian Wood Slab");
-        this.addBlock(AetherIIBlocks.DENSE_INFECTED_LOG_SLAB, "Dense Infected Log Slab");
-        this.addBlock(AetherIIBlocks.DENSE_INFECTED_WOOD_SLAB, "Dense Infected Wood Slab");
-        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_INFECTED_LOG_SLAB, "Dense Stripped Infected Log Slab");
-        this.addBlock(AetherIIBlocks.DENSE_STRIPPED_INFECTED_WOOD_SLAB, "Dense Stripped Infected Wood Slab");
-
         // Guardian Trunks
         this.addBlock(AetherIIBlocks.GUARDIAN_TRUNK, "Guardian Trunk");
         this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK, "Stripped Guardian Trunk");
@@ -649,13 +631,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Guardian Root Blocks
         this.addBlock(AetherIIBlocks.GUARDIAN_ROOTS, "Guardian Roots");
         this.addBlock(AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS, "Unstable Guardian Roots");
-        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_ROOTS, "Dense Guardian Roots");
         this.addBlock(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS, "Lucent Guardian Roots");
         this.addBlock(AetherIIBlocks.GUARDIAN_LAMP, "Guardian Lamp");
 
         // Undergrowth Blocks
         this.addBlock(AetherIIBlocks.UNDERGROWTH_LEAVES, "Undergrowth Leaves");
-        this.addBlock(AetherIIBlocks.DENSE_UNDERGROWTH_LEAVES, "Dense Undergrowth Leaves");
         this.addBlock(AetherIIBlocks.UNDERGROWTH_VINES, "Undergrowth Vines");
         this.addBlock(AetherIIBlocks.HANGING_UNDERGROWTH, "Hanging Undergrowth");
         this.addBlock(AetherIIBlocks.HANGING_UNDERGROWTH_PLANT, "Hanging Undergrowth Plant");
@@ -664,9 +644,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ROTSHROOM_BLOCK, "Rotshroom Block");
         this.addBlock(AetherIIBlocks.ROTSHROOM_SLAB, "Rotshroom Slab");
         this.addBlock(AetherIIBlocks.ROTSHROOM_STEM, "Rotshroom Stem");
-        this.addBlock(AetherIIBlocks.DENSE_ROTSHROOM_BLOCK, "Dense Rotshroom Block");
-        this.addBlock(AetherIIBlocks.DENSE_ROTSHROOM_SLAB, "Dense Rotshroom Slab");
-        this.addBlock(AetherIIBlocks.DENSE_ROTSHROOM_STEM, "Dense Rotshroom Stem");
         this.addBlock(AetherIIBlocks.SHELF_ROTSHROOM_SLAB, "Shelf Rotshroom Slab");
         this.addBlock(AetherIIBlocks.ROTSHROOM, "Rotshroom");
         this.addBlock(AetherIIBlocks.POTTED_ROTSHROOM, "Potted Rotshroom");

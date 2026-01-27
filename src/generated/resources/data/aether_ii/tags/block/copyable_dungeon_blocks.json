@@ -16,6 +16,9 @@
     "aether_ii:stripped_guardian_wood_slab",
     "aether_ii:stripped_infected_log_slab",
     "aether_ii:stripped_infected_wood_slab",
-    "aether_ii:undergrowth_leaves"
+    "aether_ii:undergrowth_leaves",
+    "aether_ii:rotshroom_block",
+    "aether_ii:rotshroom_slab",
+    "aether_ii:rotshroom_stem"
   ]
 }

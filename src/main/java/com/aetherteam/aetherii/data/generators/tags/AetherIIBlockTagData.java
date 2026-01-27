@@ -347,7 +347,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.STRIPPED_GUARDIAN_WOOD_SLAB.get(),
                 AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB.get(),
                 AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB.get(),
-                AetherIIBlocks.UNDERGROWTH_LEAVES.get()
+                AetherIIBlocks.UNDERGROWTH_LEAVES.get(),
+                AetherIIBlocks.ROTSHROOM_BLOCK.get(),
+                AetherIIBlocks.ROTSHROOM_SLAB.get(),
+                AetherIIBlocks.ROTSHROOM_STEM.get()
         );
         this.tag(AetherIITags.Blocks.MIMIC_CONTAINERS).add(AetherIIBlocks.SENTRY_CRATE.get());
         this.tag(AetherIITags.Blocks.SLIDER_UNBREAKABLE).add(
@@ -1211,8 +1214,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.MYCELIAL_AETHER_DIRT.get(),
                 AetherIIBlocks.FERROSITE_SAND.get(),
                 AetherIIBlocks.FERROSITE_MUD.get(),
-                AetherIIBlocks.GUARDIAN_ROOTS.get(),
-                AetherIIBlocks.DENSE_GUARDIAN_ROOTS.get()
+                AetherIIBlocks.GUARDIAN_ROOTS.get()
         ).addTag(AetherIITags.Blocks.GUARDIAN_LOGS);
 
         // NeoForge
