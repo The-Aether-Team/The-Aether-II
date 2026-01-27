@@ -1,6 +1,6 @@
 {
   "carvers": "aether_ii:highlands_cave",
-  "creature_spawn_probability": 0.2,
+  "creature_spawn_probability": 0.23,
   "downfall": 0.3,
   "effects": {
     "fog_color": 15593205,
