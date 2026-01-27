@@ -71,7 +71,7 @@ public class CarrionSprout extends PathfinderMob implements PlantCuttingMob {
         }
 
         if (this.isTrapTrigger()) {
-            entity.makeStuckInBlock(Blocks.COBWEB.defaultBlockState(), new Vec3(0.3F, 0.05F, 0.3F));
+            entity.makeStuckInBlock(Blocks.AIR.defaultBlockState(), new Vec3(0.3F, 0.05F, 0.3F));
 
             if (this.trapTriggerTick <= 0) {
                 if (this.level() instanceof ServerLevel serverLevel) {
@@ -99,7 +99,7 @@ public class CarrionSprout extends PathfinderMob implements PlantCuttingMob {
         return Mob.createMobAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-                .add(Attributes.ATTACK_DAMAGE, 1.0);
+                .add(Attributes.ATTACK_DAMAGE, 2.0);
     }
 
     @Override
