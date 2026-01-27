@@ -1024,6 +1024,15 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("#")
                 .unlockedBy("has_holystone", this.has(AetherIIBlocks.HOLYSTONE))
                 .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.REDSTONE, Blocks.DAYLIGHT_DETECTOR)
+                .define('Q', Items.QUARTZ)
+                .define('G', AetherIIBlocks.SCATTERGLASS)
+                .define('W', ItemTags.WOODEN_SLABS)
+                .pattern("GGG")
+                .pattern("QQQ")
+                .pattern("WWW")
+                .unlockedBy("has_quartz", this.has(Items.QUARTZ))
+                .save(this.output);
 
         // Skyroot Beds
         this.bed(getter, AetherIIBlocks.SKYROOT_BED, AetherIIBlocks.CLOUDWOOL);
