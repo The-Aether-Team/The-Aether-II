@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "#aether_ii:gems/zanite",
+    "S": "aether_ii:cloudtwine"
+  },
+  "pattern": [
+    "SSS",
+    "S S",
+    " # "
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:zanite_pendant"
+  }
+}

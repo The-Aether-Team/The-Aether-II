@@ -8,6 +8,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -362,6 +364,39 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(TALL, NORTH_CONNECTION, EAST_CONNECTION, SOUTH_CONNECTION, WEST_CONNECTION, WATERLOGGED);
+    }
+
+    @Override
+    protected BlockState rotate(BlockState state, Rotation rotation) {
+        switch (rotation) {
+            case CLOCKWISE_180 -> {
+                return state.setValue(NORTH_CONNECTION, state.getValue(SOUTH_CONNECTION)).setValue(EAST_CONNECTION, state.getValue(WEST_CONNECTION)).setValue(SOUTH_CONNECTION, state.getValue(NORTH_CONNECTION)).setValue(WEST_CONNECTION, state.getValue(EAST_CONNECTION));
+            }
+            case COUNTERCLOCKWISE_90 -> {
+                return state.setValue(NORTH_CONNECTION, state.getValue(EAST_CONNECTION)).setValue(EAST_CONNECTION, state.getValue(SOUTH_CONNECTION)).setValue(SOUTH_CONNECTION, state.getValue(WEST_CONNECTION)).setValue(WEST_CONNECTION, state.getValue(NORTH_CONNECTION));
+            }
+            case CLOCKWISE_90 -> {
+                return state.setValue(NORTH_CONNECTION, state.getValue(WEST_CONNECTION)).setValue(EAST_CONNECTION, state.getValue(NORTH_CONNECTION)).setValue(SOUTH_CONNECTION, state.getValue(EAST_CONNECTION)).setValue(WEST_CONNECTION, state.getValue(SOUTH_CONNECTION));
+            }
+            default -> {
+                return state;
+            }
+        }
+    }
+
+    @Override
+    protected BlockState mirror(BlockState state, Mirror mirror) {
+        switch (mirror) {
+            case LEFT_RIGHT -> {
+                return state.setValue(NORTH_CONNECTION, state.getValue(SOUTH_CONNECTION)).setValue(SOUTH_CONNECTION, state.getValue(NORTH_CONNECTION));
+            }
+            case FRONT_BACK -> {
+                return state.setValue(EAST_CONNECTION, state.getValue(WEST_CONNECTION)).setValue(WEST_CONNECTION, state.getValue(EAST_CONNECTION));
+            }
+            default -> {
+                return super.mirror(state, mirror);
+            }
+        }
     }
 
     public record TrunkProperties(boolean tall, WallSide north, WallSide east, WallSide south, WallSide west, WallSide northwest, WallSide northeast, WallSide southeast, WallSide southwest) {

@@ -21,31 +21,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class Additive implements SpriteSource {
-    public static final MapCodec<Additive> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-            Codec.list(ResourceLocation.CODEC).fieldOf("textures").forGetter((additive) -> additive.textures),
-            Codec.unboundedMap(Codec.STRING, ResourceLocation.CODEC).fieldOf("overlays").forGetter((additive) -> additive.overlays)
-    ).apply(instance, Additive::new));
-    private final List<ResourceLocation> textures;
-    private final Map<String, ResourceLocation> overlays;
 
-    public Additive(List<ResourceLocation> textures, Map<String, ResourceLocation> overlays) {
-        this.textures = textures;
-        this.overlays = overlays;
-    }
+public record Additive( List<ResourceLocation> textures, Map<String, ResourceLocation> overlays) implements SpriteSource {
+    public static final MapCodec<Additive> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+            Codec.list(ResourceLocation.CODEC).fieldOf("textures").forGetter(Additive::textures),
+            Codec.unboundedMap(Codec.STRING, ResourceLocation.CODEC).fieldOf("overlays").forGetter(Additive::overlays)
+    ).apply(instance, Additive::new));
 
     @Override
     public void run(ResourceManager resourceManager, Output output) {
-        for (ResourceLocation location : this.textures) {
+        for (ResourceLocation location : this.textures()) {
             ResourceLocation originalTextureLocation = TEXTURE_ID_CONVERTER.idToFile(location);
             Optional<Resource> originalTexture = resourceManager.getResource(originalTextureLocation);
             if (originalTexture.isPresent()) {
-                LazyLoadedImage originalImage = new LazyLoadedImage(originalTextureLocation, originalTexture.get(), this.overlays.size());
-                for (Map.Entry<String, ResourceLocation> overlayEntry : this.overlays.entrySet()) {
+                LazyLoadedImage originalImage = new LazyLoadedImage(originalTextureLocation, originalTexture.get(), this.overlays().size());
+                for (Map.Entry<String, ResourceLocation> overlayEntry : this.overlays().entrySet()) {
                     ResourceLocation overlayTextureLocation = TEXTURE_ID_CONVERTER.idToFile(overlayEntry.getValue());
                     Optional<Resource> overlayTexture = resourceManager.getResource(overlayTextureLocation);
                     if (overlayTexture.isPresent()) {
-                        LazyLoadedImage overlayImage = new LazyLoadedImage(overlayTextureLocation, overlayTexture.get(), this.textures.size());
+                        LazyLoadedImage overlayImage = new LazyLoadedImage(overlayTextureLocation, overlayTexture.get(), this.textures().size());
                         ResourceLocation outputLocation = location.withSuffix("_" + overlayEntry.getKey());
                         output.add(outputLocation, new AdditiveSpriteSupplier(originalImage, overlayImage, outputLocation));
                     }
@@ -63,8 +57,8 @@ public class Additive implements SpriteSource {
         @Nullable
         public SpriteContents apply(SpriteResourceLoader p_295023_) {
             try {
-                NativeImage nativeBaseImage = this.baseImage.get();
-                NativeImage nativeOverlayImage = this.overlayImage.get();
+                NativeImage nativeBaseImage = this.baseImage().get();
+                NativeImage nativeOverlayImage = this.overlayImage().get();
                 NativeImage nativeImage = new NativeImage(nativeBaseImage.getWidth(), nativeBaseImage.getHeight(), false);
 
                 for (int i = 0; i < nativeImage.getHeight(); i++) {
@@ -77,16 +71,16 @@ public class Additive implements SpriteSource {
             } catch (IOException | IllegalArgumentException ioexception) {
                 AetherII.LOGGER.error("unable to create additive sprite at {}", this.outputLocation(), ioexception);
             } finally {
-                this.baseImage.release();
-                this.overlayImage.release();
+                this.baseImage().release();
+                this.overlayImage().release();
             }
             return null;
         }
 
         @Override
         public void discard() {
-            this.baseImage.release();
-            this.overlayImage.release();
+            this.baseImage().release();
+            this.overlayImage().release();
         }
     }
 }

@@ -82,6 +82,8 @@ public class EffectsSystemAttachment {
             this.needSync = false;
             livingEntity.syncData(AetherIIDataAttachments.EFFECTS_SYSTEM);
         }
+
+        this.setMotionMultiplier(new Vec3(1, 1, 1));
     }
 
     public void addBuildup(LivingEntity livingEntity, EffectBuildupPresets.Preset buildup, int amount) {

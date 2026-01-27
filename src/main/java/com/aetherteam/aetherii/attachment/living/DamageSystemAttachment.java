@@ -22,9 +22,12 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.storage.ValueInput;
@@ -114,7 +117,14 @@ public class DamageSystemAttachment implements ValueIOSerializable {
 
             if (slashDefense != 0 || impactDefense != 0 || pierceDefense != 0) {
                 if (source.getDirectEntity() instanceof LivingEntity livingEntity && !livingEntity.getMainHandItem().isEmpty()) {
-                    baseDamage = livingEntity.getAttributeBaseValue(Attributes.ATTACK_DAMAGE);
+                    baseDamage = livingEntity.getAttributeValue(Attributes.ATTACK_DAMAGE);
+                    AttributeInstance damageAttribute = livingEntity.getAttribute(Attributes.ATTACK_DAMAGE);
+                    if (damageAttribute != null) {
+                        AttributeModifier damageModifier = damageAttribute.getModifier(Item.BASE_ATTACK_DAMAGE_ID);
+                        if (damageModifier != null) {
+                            baseDamage -= damageModifier.amount();
+                        }
+                    }
                     slashDamage.set(livingEntity.getAttributes().hasAttribute(AetherIIAttributes.SLASH_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.SLASH_DAMAGE) : 0.0);
                     impactDamage.set(livingEntity.getAttributes().hasAttribute(AetherIIAttributes.IMPACT_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.IMPACT_DAMAGE) : 0.0);
                     pierceDamage.set(livingEntity.getAttributes().hasAttribute(AetherIIAttributes.PIERCE_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.PIERCE_DAMAGE) : 0.0);

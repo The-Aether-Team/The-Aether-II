@@ -1,0 +1,102 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:cold_aercloud_glider",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:blue_aercloud_glider"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:purple_aercloud_glider"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:golden_aercloud_glider"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_pickaxe",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_hammer",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:arkenium_pickaxe",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:arkenium_hammer"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:moa_saddle",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:skyroot_bucket",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:arkenium_canister"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:healing_stone",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:cloud_skiff",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:beast_pelt_bundle",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "aether_ii:chests/dungeons/irradiated_items",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "aether_ii:chests/dungeons/music_discs",
+          "weight": 2
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 1.0
+      }
+    }
+  ],
+  "random_sequence": "aether_ii:chests/dungeons/sentry_ruins/rare"
+}

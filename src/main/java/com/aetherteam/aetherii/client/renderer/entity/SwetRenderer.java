@@ -8,8 +8,8 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.Mth;
 
-public abstract class SwetRenderer extends MobRenderer<Swet, SwetRenderState, SwetModel<SwetRenderState>> {
-    public SwetRenderer(EntityRendererProvider.Context context, SwetModel<SwetRenderState> model) {
+public abstract class SwetRenderer extends MobRenderer<Swet, SwetRenderState, SwetModel> {
+    public SwetRenderer(EntityRendererProvider.Context context, SwetModel model) {
         super(context, model, 0.3F);
     }
 

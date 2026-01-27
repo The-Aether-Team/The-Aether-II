@@ -37,19 +37,19 @@ public class AetherIIClientExtensions {
     public static final IClientItemExtensions BEAST_PELT = new IClientItemExtensions() {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
-            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0xCFEEF9) : -1;
+            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0xFFCFEEF9) : -1;
         }
     };
     public static final IClientItemExtensions BURRUKAI_PLATE = new IClientItemExtensions() {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
-            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0x619CC0) : -1;
+            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0xFF619CC0) : -1;
         }
     };
     public static final IClientItemExtensions MOA_SADDLE = new IClientItemExtensions() {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
-            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0x7D8BA3) : -1;
+            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0xFF7D8BA3) : -1;
         }
     };
 
@@ -216,7 +216,7 @@ public class AetherIIClientExtensions {
         event.registerItem(GLIDER, AetherIIItems.COLD_AERCLOUD_GLIDER, AetherIIItems.GOLDEN_AERCLOUD_GLIDER, AetherIIItems.BLUE_AERCLOUD_GLIDER, AetherIIItems.PURPLE_AERCLOUD_GLIDER);
         event.registerItem(MOA_SADDLE, AetherIIItems.MOA_SADDLE);
 
-        event.registerBlock(UNSTABLE_BLOCK, AetherIIBlocks.UNSTABLE_HOLYSTONE.get(),AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
+        event.registerBlock(UNSTABLE_BLOCK, AetherIIBlocks.UNSTABLE_HOLYSTONE.get(), AetherIIBlocks.UNSTABLE_UNDERSHALE.get(), AetherIIBlocks.FRAGILE_ARCTIC_ICE.get(), AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS.get());
 
         event.registerFluidType(ALKAHEST_FLUID, AetherIIFluidTypes.ALKAHEST_TYPE.get());
 

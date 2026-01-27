@@ -1,22 +1,23 @@
 package com.aetherteam.aetherii.data.providers;
 
-import java.util.List;
-import java.util.function.BiConsumer;
-
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.item.color.EffectBuildupColorSource;
+import com.aetherteam.aetherii.client.renderer.item.model.EmissiveModel;
+import com.aetherteam.aetherii.client.renderer.item.model.MusicPlayerDiscModel;
 import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.BetterIsUsingItem;
+import com.aetherteam.aetherii.client.renderer.item.properties.conditional.HoldingShift;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.LassoThrow;
 import com.aetherteam.aetherii.client.renderer.item.properties.range.*;
 import com.aetherteam.aetherii.client.renderer.item.properties.select.SelectFeatherColor;
 import com.aetherteam.aetherii.client.renderer.item.properties.select.SelectMoaEggType;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
+import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureSlots;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
-
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import net.minecraft.client.color.item.Dye;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
@@ -24,26 +25,29 @@ import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
 import net.minecraft.client.renderer.item.properties.conditional.CustomModelDataProperty;
-import net.minecraft.client.renderer.item.properties.conditional.FishingRodCast;
 import net.minecraft.client.renderer.item.properties.conditional.HasComponent;
 import net.minecraft.client.renderer.item.properties.numeric.CrossbowPull;
 import net.minecraft.client.renderer.item.properties.select.Charge;
 import net.minecraft.client.renderer.item.properties.select.DisplayContext;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
+
+import java.util.List;
+import java.util.function.BiConsumer;
 
 public class AetherIIItemModelSubProvider extends ItemModelGenerators {
     public AetherIIItemModelSubProvider(ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
         super(itemModelOutput, modelOutput);
     }
 
-    public void generateReinforcedItem(Item item, ModelTemplate template) {
+    public void generateReinforcedItem(Item item, ModelTemplate template, ReinforcementTier tier) {
         ItemModel.Unbaked base = ItemModelUtils.plainModel(this.createFlatItemModel(item, template));
         ItemModel.Unbaked reinforced1 = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_reinforced_1", template));
         ItemModel.Unbaked reinforced2 = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_reinforced_2", template));
-        this.itemModelOutput.accept(item, ItemModelUtils.rangeSelect(new ReinforcementTierRange(), base, ItemModelUtils.override(reinforced1, 0.1F), ItemModelUtils.override(reinforced2, 0.3F)));
+        this.itemModelOutput.accept(item, ItemModelUtils.rangeSelect(new ReinforcementTierRange(), base, ItemModelUtils.override(reinforced1, 0.1F), ItemModelUtils.override(reinforced2, tier.getTierNumber() * 0.1F)));
     }
 
     public void generateCrossbow(Item item) {
@@ -100,9 +104,52 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
         this.itemModelOutput.accept(item, ItemModelUtils.tintedModel(location, new EffectBuildupColorSource()));
     }
 
+    public void generateHammerOfDemolition(Item item) {
+        ResourceLocation inventorySprite = ModelTemplates.FLAT_HANDHELD_ITEM.create(item, TextureMapping.layer0(item), this.modelOutput);
+        List<SelectItemModel.SwitchCase<ItemDisplayContext>> normalList = List.of(
+                ItemModelUtils.when(ItemDisplayContext.GUI, ItemModelUtils.plainModel(inventorySprite)),
+                ItemModelUtils.when(ItemDisplayContext.GROUND, ItemModelUtils.plainModel(inventorySprite)),
+                ItemModelUtils.when(ItemDisplayContext.FIXED, ItemModelUtils.plainModel(inventorySprite))
+        );
+
+        ResourceLocation melee = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.create(ModelLocationUtils.getModelLocation(item, "_held"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held")), this.modelOutput);
+        ResourceLocation meleeEmissive = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.create(ModelLocationUtils.getModelLocation(item, "_held_emissive"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held_emissive")), this.modelOutput);
+        ResourceLocation ranged = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.create(ModelLocationUtils.getModelLocation(item, "_held_ranged"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held_ranged")), this.modelOutput);
+        ResourceLocation rangedEmissive = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.create(ModelLocationUtils.getModelLocation(item, "_held_ranged_emissive"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held_ranged_emissive")), this.modelOutput);
+
+        ResourceLocation head = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HEAD.create(item, AetherIITextureMappings.emissive(TextureMapping.getItemTexture(item, "_head")), this.modelOutput);
+        ResourceLocation headReady = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HEAD_READY.create(item, AetherIITextureMappings.emissive(TextureMapping.getItemTexture(item, "_head_ranged")), this.modelOutput);
+        ResourceLocation headDeployed = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HEAD_DEPLOYED.create(item, AetherIITextureMappings.emissive(TextureMapping.getItemTexture(item, "_head_ranged")), this.modelOutput);
+
+        ItemModel.Unbaked model = ItemModelUtils.composite(ItemModelUtils.plainModel(melee), ItemModelUtils.plainModel(head), new EmissiveModel.Unbaked(meleeEmissive));
+        ItemModel.Unbaked readyModel = ItemModelUtils.composite(ItemModelUtils.plainModel(ranged), ItemModelUtils.plainModel(headReady), new EmissiveModel.Unbaked(rangedEmissive));
+        ItemModel.Unbaked deployedModel = ItemModelUtils.composite(ItemModelUtils.plainModel(ranged), ItemModelUtils.plainModel(headDeployed), new EmissiveModel.Unbaked(rangedEmissive));
+
+        ItemModel.Unbaked finalModel = ItemModelUtils.select(new DisplayContext(),
+                ItemModelUtils.rangeSelect(new BetterCooldown(), ItemModelUtils.conditional(new HoldingShift(), readyModel, model), ItemModelUtils.override(deployedModel, 0.01F)),
+                normalList
+        );
+        this.itemModelOutput.accept(item, finalModel);
+    }
+
     public void generateDyedArmorItem(Item item, int defaultColor) {
         ResourceLocation resourceLocation = this.generateLayeredItem(item, TextureMapping.getItemTexture(item), TextureMapping.getItemTexture(item).withSuffix("_dyed"));
         this.itemModelOutput.accept(item, ItemModelUtils.tintedModel(resourceLocation, BLANK_LAYER, new Dye(defaultColor)));
+    }
+
+    public void generateBrokenItem(Item item) {
+        ResourceLocation modelLocation = ModelLocationUtils.getModelLocation(item).withSuffix("_broken");
+        ModelTemplates.FLAT_ITEM.create(modelLocation, TextureMapping.layer0(modelLocation), this.modelOutput);
+    }
+
+    public void generateCharmItem(Item item, String type, String tier, String stat) {
+        ResourceLocation key = BuiltInRegistries.ITEM.getKey(item);
+        ResourceLocation modelLocation = ModelLocationUtils.getModelLocation(item);
+        ModelTemplates.TWO_LAYERED_ITEM.create(modelLocation, TextureMapping.layered(
+                ResourceLocation.fromNamespaceAndPath(key.getNamespace(), "item/" + type + "_charm_" + tier),
+                ResourceLocation.fromNamespaceAndPath(key.getNamespace(), "item/" + type + "_charm_runes_" + stat)
+        ), this.modelOutput);
+        this.itemModelOutput.accept(item, ItemModelUtils.plainModel(modelLocation));
     }
 
     public void generateMoaFeatherItem(Item item) {
@@ -192,6 +239,13 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
                     ItemModelUtils.override(dullRangeSelect, 1.0F))
             );
         }
+    }
+
+    public void generateMusicDisc(Item item) {
+        ResourceLocation modelLocation = ModelLocationUtils.getModelLocation(item);
+        ModelTemplates.MUSIC_DISC.create(modelLocation, TextureMapping.layer0(modelLocation), this.modelOutput);
+        ModelTemplates.MUSIC_DISC.create(modelLocation.withSuffix("_animated"), TextureMapping.layer0(modelLocation.withSuffix("_animated")), this.modelOutput);
+        this.itemModelOutput.accept(item, ItemModelUtils.plainModel(modelLocation));
     }
 
     public void generateLasso(Item item) {
@@ -288,5 +342,14 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
         ResourceLocation location = ModelTemplates.TWO_LAYERED_ITEM.extend().renderType(ResourceLocation.withDefaultNamespace("translucent")).build()
                 .create(item, TextureMapping.layered(TextureMapping.getItemTexture(item), TextureMapping.getItemTexture(item, "_inside")), this.modelOutput);
         this.itemModelOutput.accept(item, ItemModelUtils.plainModel(location));
+    }
+
+    public void generateMusicPlayer(Item item) {
+        ResourceLocation backLocation = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(item, "_back"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_back")), this.modelOutput);
+        ResourceLocation frontLocation = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(item, "_front"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_front")), this.modelOutput);
+
+        ItemModel.Unbaked model = ItemModelUtils.composite(ItemModelUtils.plainModel(backLocation), new MusicPlayerDiscModel.Unbaked(), ItemModelUtils.plainModel(frontLocation));
+
+        this.itemModelOutput.accept(item, model);
     }
 }

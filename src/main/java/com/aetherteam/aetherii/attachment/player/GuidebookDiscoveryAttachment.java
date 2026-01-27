@@ -1,10 +1,8 @@
 package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.api.guidebook.*;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.client.gui.component.toast.GuidebookToast;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIExplorationEntries;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIRewardWrappers;
 import com.aetherteam.aetherii.network.packet.clientbound.FlushGuidebookDataPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.GuidebookToastPacket;
@@ -84,19 +82,19 @@ public class GuidebookDiscoveryAttachment {
     private void setupEntries(ServerPlayer serverPlayer) {
         RegistryAccess registryAccess = serverPlayer.registryAccess();
         if (this.bestiaryEntries.isEmpty()) {
-            Registry<BestiaryEntry> bestiaryEntries = registryAccess.lookupOrThrow(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY);
+            Registry<BestiaryEntry> bestiaryEntries = registryAccess.lookupOrThrow(AetherIIRegistries.BESTIARY_ENTRY);
             for (Holder<BestiaryEntry> entry : bestiaryEntries.asHolderIdMap()) {
                 this.bestiaryEntries.add(new BestiaryEntry.Mutable(entry));
             }
         }
         if (this.effectsEntries.isEmpty()) {
-            Registry<EffectsEntry> effectsEntries = registryAccess.lookupOrThrow(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY);
+            Registry<EffectsEntry> effectsEntries = registryAccess.lookupOrThrow(AetherIIRegistries.EFFECTS_ENTRY);
             for (Holder<EffectsEntry> entry : effectsEntries.asHolderIdMap()) {
                 this.effectsEntries.add(new EffectsEntry.Mutable(entry));
             }
         }
         if (this.explorationEntries.isEmpty()) {
-            Registry<ExplorationEntry> explorationEntries = registryAccess.lookupOrThrow(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY);
+            Registry<ExplorationEntry> explorationEntries = registryAccess.lookupOrThrow(AetherIIRegistries.EXPLORATION_ENTRY);
             for (Holder<ExplorationEntry> entry : explorationEntries.asHolderIdMap()) {
                 this.explorationEntries.add(new ExplorationEntry.Mutable(entry));
             }

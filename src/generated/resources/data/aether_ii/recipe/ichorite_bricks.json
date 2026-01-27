@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": "aether_ii:ichorite"
+    "S": "aether_ii:smooth_ichorite"
   },
   "pattern": [
     "SS",

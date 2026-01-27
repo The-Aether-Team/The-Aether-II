@@ -60,7 +60,7 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
         }
 
         for (BlockPos position : positions) {
-            level.setBlock(position, config.block().getState(random, pos), 2);
+            level.setBlock(position, config.block().getState(random, position), 2);
         }
 
         return true;

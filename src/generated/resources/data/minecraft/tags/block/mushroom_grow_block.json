@@ -4,8 +4,6 @@
     "aether_ii:ferrosite_sand",
     "aether_ii:ferrosite_mud",
     "aether_ii:guardian_roots",
-    "aether_ii:dense_guardian_roots",
-    "#aether_ii:guardian_logs",
-    "#aether_ii:dense_guardian_logs"
+    "#aether_ii:guardian_logs"
   ]
 }

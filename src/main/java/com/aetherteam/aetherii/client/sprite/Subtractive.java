@@ -21,18 +21,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class Subtractive implements SpriteSource {
+public record Subtractive(List<ResourceLocation> textures, Map<String, ResourceLocation> overlays) implements SpriteSource {
     public static final MapCodec<Subtractive> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-            Codec.list(ResourceLocation.CODEC).fieldOf("textures").forGetter((subtractive) -> subtractive.textures),
-            Codec.unboundedMap(Codec.STRING, ResourceLocation.CODEC).fieldOf("overlays").forGetter((subtractive) -> subtractive.overlays)
+            Codec.list(ResourceLocation.CODEC).fieldOf("textures").forGetter(Subtractive::textures),
+            Codec.unboundedMap(Codec.STRING, ResourceLocation.CODEC).fieldOf("overlays").forGetter(Subtractive::overlays)
     ).apply(instance, Subtractive::new));
-    private final List<ResourceLocation> textures;
-    private final Map<String, ResourceLocation> overlays;
-
-    public Subtractive(List<ResourceLocation> textures, Map<String, ResourceLocation> overlays) {
-        this.textures = textures;
-        this.overlays = overlays;
-    }
 
     @Override
     public void run(ResourceManager resourceManager, Output output) {

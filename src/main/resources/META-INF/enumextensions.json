@@ -19,6 +19,15 @@
       }
     },
     {
+      "enum": "net/minecraft/world/item/Rarity",
+      "name": "AETHER_II_UPGRADED",
+      "constructor": "(ILjava/lang/String;Ljava/util/function/UnaryOperator;)V",
+      "parameters": {
+        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
+        "field": "AETHER_II_UPGRADED_RARITY_PROXY"
+      }
+    },
+    {
       "enum": "net/minecraft/world/inventory/RecipeBookType",
       "name": "AETHER_II_ALTAR",
       "constructor": "()V",
@@ -34,19 +43,31 @@
       "enum": "net/minecraft/world/entity/MobCategory",
       "name": "AETHER_II_AETHER_SURFACE_MONSTER",
       "constructor": "(Ljava/lang/String;IZZI)V",
-      "parameters": [ "aether_ii:aether_surface_monster", 15, false, false, 128 ]
+      "parameters": [ "aether_ii:aether_surface_monster", 25, false, false, 128 ]
     },
     {
       "enum": "net/minecraft/world/entity/MobCategory",
       "name": "AETHER_II_AETHER_DARKNESS_MONSTER",
       "constructor": "(Ljava/lang/String;IZZI)V",
-      "parameters": [ "aether_ii:aether_darkness_monster", 5, false, false, 128 ]
+      "parameters": [ "aether_ii:aether_darkness_monster", 65, false, false, 128 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_II_AETHER_CAVE_MONSTER",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_ii:aether_cave_monster", 20, false, false, 128 ]
     },
     {
       "enum": "net/minecraft/world/entity/MobCategory",
       "name": "AETHER_II_AETHER_SKY_MONSTER",
       "constructor": "(Ljava/lang/String;IZZI)V",
       "parameters": [ "aether_ii:aether_sky_monster", 4, false, false, 128 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_II_AETHER_DUNGEON_MONSTER",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_ii:aether_dungeon_monster", 50, false, false, 128 ]
     },
     {
       "enum": "net/minecraft/world/entity/MobCategory",

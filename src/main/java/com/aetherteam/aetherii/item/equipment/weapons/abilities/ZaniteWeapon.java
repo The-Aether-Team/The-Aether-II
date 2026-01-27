@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.item.equipment.weapons.abilities;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.ZaniteBuff;
-import com.aetherteam.aetherii.item.equipment.tools.abilities.ZaniteTool;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -36,7 +35,7 @@ public interface ZaniteWeapon extends ZaniteBuff {
 
         if (stack.getItem() instanceof ZaniteWeapon zaniteWeapon) {
             Set<ItemAttributeModifiers.Entry> updatedEntries = new HashSet<>();
-            Set<ItemAttributeModifiers.Entry> newEntries = new HashSet<>(zaniteWeapon.increaseDamage(AetherIIAttributes.SLASH_DAMAGE, defaultModifiers, stack));
+            Set<ItemAttributeModifiers.Entry> newEntries = new HashSet<>(zaniteWeapon.increaseDamage(zaniteWeapon.getDamageType(), defaultModifiers, stack));
             for (ItemAttributeModifiers.Entry newEntry : newEntries) {
                 boolean flag = true;
                 for (ItemAttributeModifiers.Entry oldEntry : modifiers) {
@@ -86,4 +85,6 @@ public interface ZaniteWeapon extends ZaniteBuff {
         }
         return (int) Math.round(boostedDamage);
     }
+
+    Holder<Attribute> getDamageType();
 }

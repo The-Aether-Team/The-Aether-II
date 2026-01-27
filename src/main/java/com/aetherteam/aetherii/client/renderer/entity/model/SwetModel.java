@@ -8,7 +8,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class SwetModel<T extends SwetRenderState> extends EntityModel<T> {
+public class SwetModel extends EntityModel<SwetRenderState> {
     private final KeyframeAnimation groundAnimation;
     private final KeyframeAnimation jumpAnimation;
     public final ModelPart body;
@@ -70,7 +70,7 @@ public class SwetModel<T extends SwetRenderState> extends EntityModel<T> {
     }
 
     @Override
-    public void setupAnim(T entity) {
+    public void setupAnim(SwetRenderState entity) {
         super.setupAnim(entity);
         if (this.isGel) {
             this.head.visible = false;

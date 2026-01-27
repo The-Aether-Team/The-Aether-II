@@ -123,7 +123,7 @@ public class EntityMixin {
     }
 
     @ModifyArgs(method = "move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;maybeBackOffFromEdge(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/entity/MoverType;)Lnet/minecraft/world/phys/Vec3;"))
-    private void maybeBackOffFromEdge(Args args) {
+    private void move(Args args) {
         Entity entity = (Entity) (Object) this;
         if (entity instanceof LivingEntity livingEntity) {
             EffectsSystemAttachment attachment = livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM);
@@ -131,7 +131,6 @@ public class EntityMixin {
             if (multiplier.length() != new Vec3(1, 1, 1).length()) {
                 Vec3 movement = args.get(0);
                 args.set(0, movement.multiply(multiplier));
-                attachment.setMotionMultiplier(new Vec3(1, 1, 1));
             }
         }
     }

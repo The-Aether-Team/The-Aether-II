@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_darts": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:amber_darts"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:dart_shooter_aether_ii_venom"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_darts"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:dart_shooter_aether_ii_venom"
+    ]
+  }
+}

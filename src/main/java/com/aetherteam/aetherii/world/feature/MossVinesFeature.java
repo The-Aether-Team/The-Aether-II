@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -25,7 +26,7 @@ public class MossVinesFeature extends Feature<MossVinesConfiguration> {
         RandomSource random = context.random();
         if (worldgenlevel.isEmptyBlock(blockpos)) {
             Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
-            if (BottomedVineBlock.isAcceptableNeighbour(worldgenlevel, blockpos.relative(direction), direction)) {
+            if (BottomedVineBlock.isAcceptableNeighbour(worldgenlevel, blockpos.relative(direction), direction) && !worldgenlevel.getBlockState(blockpos.relative(direction)).is(Blocks.STRUCTURE_BLOCK)) {
                 BlockState aboveState = worldgenlevel.getBlockState(blockpos.above());
                 BlockState blockState = context.config().blockStateProvider().getState(random, blockpos);
                 blockState = blockState.setValue(VineBlock.getPropertyForFace(direction), true);

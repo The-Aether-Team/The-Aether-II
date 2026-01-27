@@ -1,0 +1,56 @@
+{
+  "variants": {
+    "facing=down,lit=false": {
+      "model": "aether_ii:block/sentry_base_pillar_off",
+      "x": 180
+    },
+    "facing=down,lit=true": {
+      "model": "aether_ii:block/sentry_base_pillar",
+      "x": 180
+    },
+    "facing=east,lit=false": {
+      "model": "aether_ii:block/sentry_base_pillar_off_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,lit=true": {
+      "model": "aether_ii:block/sentry_base_pillar_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,lit=false": {
+      "model": "aether_ii:block/sentry_base_pillar_off_horizontal",
+      "x": 90
+    },
+    "facing=north,lit=true": {
+      "model": "aether_ii:block/sentry_base_pillar_horizontal",
+      "x": 90
+    },
+    "facing=south,lit=false": {
+      "model": "aether_ii:block/sentry_base_pillar_off_horizontal",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,lit=true": {
+      "model": "aether_ii:block/sentry_base_pillar_horizontal",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,lit=false": {
+      "model": "aether_ii:block/sentry_base_pillar_off"
+    },
+    "facing=up,lit=true": {
+      "model": "aether_ii:block/sentry_base_pillar"
+    },
+    "facing=west,lit=false": {
+      "model": "aether_ii:block/sentry_base_pillar_off_horizontal",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,lit=true": {
+      "model": "aether_ii:block/sentry_base_pillar_horizontal",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

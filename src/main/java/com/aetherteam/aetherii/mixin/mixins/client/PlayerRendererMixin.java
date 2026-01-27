@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.client.renderer.accessory.FirstPersonRendering;
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
-import com.aetherteam.aetherii.item.equipment.AccessoryItem;
+import com.aetherteam.aetherii.item.equipment.accessories.AccessoryItem;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
 import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;

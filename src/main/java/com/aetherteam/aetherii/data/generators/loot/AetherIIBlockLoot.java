@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.generators.loot;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIIBlockLootSubProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.BlockLootAccessor;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
@@ -13,7 +14,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BedPart;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -78,6 +82,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIItems.ARCTIC_SNOWBALL, ConstantValue.exactly(4.0F)));
         this.add(AetherIIBlocks.ARCTIC_SNOW.get(), this::droppingSnowLayer);
         this.dropWhenSilkTouch(AetherIIBlocks.ARCTIC_ICE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.FRAGILE_ARCTIC_ICE.get());
         this.dropWhenSilkTouch(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
         this.dropSelf(AetherIIBlocks.ICESTONE.get());
         this.dropWhenSilkTouch(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get());
@@ -417,6 +422,34 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get());
         this.add(AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.UNDERSHALE_BRICK_WALL.get());
+        this.dropSelf(AetherIIBlocks.UNDERSHALE_BRICK_BUTTON.get());
+        this.dropSelf(AetherIIBlocks.UNDERSHALE_BRICK_PRESSURE_PLATE.get());
+
+        // Undershale Decorative Blocks
+        this.dropSelf(AetherIIBlocks.UNDERSHALE_FLAGSTONES.get());
+        this.dropSelf(AetherIIBlocks.UNDERSHALE_TILE.get());
+        this.dropSelf(AetherIIBlocks.UNDERSHALE_BASE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.UNDERSHALE_CAPSTONE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.UNDERSHALE_BASE_PILLAR.get());
+        this.dropSelf(AetherIIBlocks.UNDERSHALE_CAPSTONE_PILLAR.get());
+        this.dropSelf(AetherIIBlocks.UNDERSHALE_PILLAR.get());
+
+        // Sentry Bricks
+        this.dropSelf(AetherIIBlocks.SENTRY_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_BRICK_STAIRS.get());
+        this.add(AetherIIBlocks.SENTRY_BRICK_SLAB.get(), this::createSlabItemTable);
+        this.dropSelf(AetherIIBlocks.SENTRY_BRICK_WALL.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_BUTTON.get());
+
+        // Sentry Decorative Blocks
+        this.dropSelf(AetherIIBlocks.SENTRY_LIGHTSTONE.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_FLAGSTONES.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_TILE.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_BASE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_CAPSTONE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_BASE_PILLAR.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_CAPSTONE_PILLAR.get());
+        this.dropSelf(AetherIIBlocks.SENTRY_PILLAR.get());
 
         // Ichorite
         this.dropSelf(AetherIIBlocks.ICHORITE.get());
@@ -687,6 +720,10 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.RED_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
         this.add(AetherIIBlocks.BLACK_SKYROOT_BED.get(), (bed) -> this.createSinglePropConditionTable(bed, BedBlock.PART, BedPart.HEAD));
 
+        this.dropSelf(AetherIIBlocks.SENTRY_CRATE.get());
+        this.dropNone(AetherIIBlocks.SENTRY_SPAWNER.get());
+        this.dropNone(AetherIIBlocks.SENTRY_TRAP.get());
+
         this.dropOther(AetherIIBlocks.SKYROOT_WALL_SIGN.get(), AetherIIBlocks.SKYROOT_SIGN.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_SIGN.get());
 
@@ -715,6 +752,13 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Furniture
         this.dropNone(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
+        this.add(AetherIIBlocks.MURAL.get(), (mural) -> LootTable.lootTable()
+            .withPool(this.applyExplosionCondition(mural, LootPool.lootPool()
+                    .setRolls(ConstantValue.exactly(1.0F))
+                    .add(LootItem.lootTableItem(mural)))
+                .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+                    .include(AetherIIDataComponents.MURAL_SECTION.get())))
+        );
     }
 
     @Override

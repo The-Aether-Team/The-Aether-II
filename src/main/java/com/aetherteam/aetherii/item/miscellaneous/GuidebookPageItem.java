@@ -2,12 +2,10 @@ package com.aetherteam.aetherii.item.miscellaneous;
 
 import com.aetherteam.aetherii.api.guidebook.GuidebookEntry;
 import com.aetherteam.aetherii.api.guidebook.MutableEntry;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.GuidebookDiscoveryAttachment;
 import com.aetherteam.aetherii.client.gui.component.toast.GuidebookToast;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIExplorationEntries;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.GuidebookEntryData;
 import com.aetherteam.aetherii.network.packet.clientbound.GuidebookToastPacket;
@@ -45,11 +43,11 @@ public class GuidebookPageItem extends Item {
             List<GuidebookEntryData> dataList = stack.get(AetherIIDataComponents.GUIDEBOOK_ENTRY_DATA);
             if (dataList != null) {
                 for (GuidebookEntryData data : dataList) {
-                    if (data.registry().toString().equals(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY.location().toString())) {
+                    if (data.registry().toString().equals(AetherIIRegistries.BESTIARY_ENTRY.location().toString())) {
                         return this.unlockEntries(serverPlayer, attachment, data, attachment.getBestiaryEntries());
-                    } else if (data.registry().toString().equals(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY.location().toString())) {
+                    } else if (data.registry().toString().equals(AetherIIRegistries.EFFECTS_ENTRY.location().toString())) {
                         return this.unlockEntries(serverPlayer, attachment, data, attachment.getEffectsEntries());
-                    } else if (data.registry().toString().equals(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY.location().toString())) {
+                    } else if (data.registry().toString().equals(AetherIIRegistries.EXPLORATION_ENTRY.location().toString())) {
                         return this.unlockEntries(serverPlayer, attachment, data, attachment.getExplorationEntries());
                     }
                 }

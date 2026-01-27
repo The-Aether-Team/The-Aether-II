@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.data.tags.TagAppender;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -106,16 +105,6 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.STRIPPED_INFECTED_LOG.get(),
                 AetherIIBlocks.STRIPPED_INFECTED_WOOD.get()
         );
-        this.tag(AetherIITags.Blocks.DENSE_GUARDIAN_LOGS, AetherIITags.Items.DENSE_GUARDIAN_LOGS).add(
-                AetherIIBlocks.DENSE_GUARDIAN_LOG.get(),
-                AetherIIBlocks.DENSE_GUARDIAN_WOOD.get(),
-                AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_LOG.get(),
-                AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_WOOD.get(),
-                AetherIIBlocks.DENSE_INFECTED_LOG.get(),
-                AetherIIBlocks.DENSE_INFECTED_WOOD.get(),
-                AetherIIBlocks.DENSE_STRIPPED_INFECTED_LOG.get(),
-                AetherIIBlocks.DENSE_STRIPPED_INFECTED_WOOD.get()
-        );
 
         this.tag(AetherIITags.Blocks.SKYROOT_DECORATIVE_BLOCKS, AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.SKYROOT_FLOORBOARDS.get(),
@@ -170,6 +159,25 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_PILLAR.get(),
                 AetherIIBlocks.FADED_HOLYSTONE_PILLAR.get()
         );
+        this.tag(AetherIITags.Blocks.UNDERSHALE_DECORATIVE_BLOCKS, AetherIITags.Items.UNDERSHALE_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.UNDERSHALE_FLAGSTONES.get(),
+                AetherIIBlocks.UNDERSHALE_TILE.get(),
+                AetherIIBlocks.UNDERSHALE_BASE_BRICKS.get(),
+                AetherIIBlocks.UNDERSHALE_CAPSTONE_BRICKS.get(),
+                AetherIIBlocks.UNDERSHALE_BASE_PILLAR.get(),
+                AetherIIBlocks.UNDERSHALE_CAPSTONE_PILLAR.get(),
+                AetherIIBlocks.UNDERSHALE_PILLAR.get()
+        );
+        this.tag(AetherIITags.Blocks.SENTRY_DECORATIVE_BLOCKS, AetherIITags.Items.SENTRY_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.SENTRY_LIGHTSTONE.get(),
+                AetherIIBlocks.SENTRY_FLAGSTONES.get(),
+                AetherIIBlocks.SENTRY_TILE.get(),
+                AetherIIBlocks.SENTRY_BASE_BRICKS.get(),
+                AetherIIBlocks.SENTRY_CAPSTONE_BRICKS.get(),
+                AetherIIBlocks.SENTRY_BASE_PILLAR.get(),
+                AetherIIBlocks.SENTRY_CAPSTONE_PILLAR.get(),
+                AetherIIBlocks.SENTRY_PILLAR.get()
+        );
         this.tag(AetherIITags.Blocks.ICHORITE_DECORATIVE_BLOCKS, AetherIITags.Items.ICHORITE_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.ICHORITE_FLAGSTONES.get(),
                 AetherIIBlocks.ICHORITE_RUNESTONE.get(),
@@ -206,9 +214,6 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.ICESTONE_BASE_PILLAR.get(),
                 AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get(),
                 AetherIIBlocks.ICESTONE_PILLAR.get()
-        );
-        this.tag(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS, AetherIITags.Items.LOCKED_DUNGEON_BLOCKS).add(
-
         );
         this.tag(AetherIITags.Blocks.ARILUM_LANTERN, AetherIITags.Items.ARILUM_LANTERN).add(
                 AetherIIBlocks.WHITE_ARILUM_LANTERN.get(),
