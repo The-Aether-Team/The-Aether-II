@@ -1,0 +1,31 @@
+{
+  "criteria": {
+    "the_highlands": {
+      "conditions": {
+        "to": "aether_ii:aether_highlands"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "aether_ii:textures/block/holystone.png",
+    "description": {
+      "translate": "advancement.aether_ii.the_highlands.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:aether_portal_frame"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancement.aether_ii.the_highlands"
+    }
+  },
+  "requirements": [
+    [
+      "the_highlands"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

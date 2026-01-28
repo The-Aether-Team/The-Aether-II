@@ -1,0 +1,34 @@
+{
+  "parent": "aether_ii:slider",
+  "criteria": {
+    "hammer_loot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:hammer_of_demolition"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.aether_ii.hammer_loot.desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:hammer_of_demolition"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.hammer_loot"
+    }
+  },
+  "requirements": [
+    [
+      "hammer_loot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -44,6 +44,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addCreativeTabs();
         this.addContainerTypes();
         this.addGuiText();
+        this.addAdvancements();
         this.addBestiaryEntries();
         this.addEffectsDescriptions();
         this.addMusic();
@@ -1508,6 +1509,34 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("toast.guidebook.description", "Check your Guidebook");
         this.addGuiText("slider.message.attack.invalid", "Hmm. Perhaps I need to attack it with a Pickaxe?");
         this.addGuiText("slider.title", "Slider %s");
+    }
+
+    private void addAdvancements() {
+        this.addAdvancement("the_highlands", "The Aether II");
+        this.addAdvancement("enter_highlands", "Hostile Paradise");
+        this.addAdvancement("blue_aercloud", "To Infinity and Beyond!");
+        this.addAdvancement("obtain_egg", "Don't Count Your Moas...");
+        this.addAdvancement("obtain_petal", "Baby Food");
+        this.addAdvancement("zanite", "Exotic Hardware");
+        this.addAdvancement("craft_altar", "Do You Believe in Magic?");
+        this.addAdvancement("icestone", "Cold as Ice");
+        this.addAdvancement("gravitite_plate", "Pink is the New Blue");
+        this.addAdvancement("gravitite_armor", "Defying Gravity");
+        this.addAdvancement("slider", "Like a Bossaru!");
+        this.addAdvancement("hammer_loot", "The Power of the Gods");
+
+        this.addAdvancementDesc("the_highlands", "It's not dead!");
+        this.addAdvancementDesc("enter_highlands", "Enter the Aether");
+        this.addAdvancementDesc("blue_aercloud", "Bounce on a Blue Aercloud");
+        this.addAdvancementDesc("obtain_egg", "Obtain a Moa Egg");
+        this.addAdvancementDesc("obtain_petal", "Harvest an Aechor Petal from an Aechor Plant");
+        this.addAdvancementDesc("zanite", "Have a Zanite Gemstone in your inventory");
+        this.addAdvancementDesc("craft_altar", "Craft an Altar");
+        this.addAdvancementDesc("icestone", "Obtain Icestone");
+        this.addAdvancementDesc("gravitite_plate", "Use an Altar to obtain a Gravitite Plate");
+        this.addAdvancementDesc("gravitite_armor", "Have a full set of gravitite armor in your inventory");
+        this.addAdvancementDesc("slider", "Defeat the Slider");
+        this.addAdvancementDesc("hammer_loot", "Obtain the Hammer of Demolition from the Sentry Ruins");
     }
 
     private void addBestiaryEntries() {
