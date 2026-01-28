@@ -9,7 +9,7 @@
   },
   "display": {
     "announce_to_chat": false,
-    "background": "aether_ii:textures/block/holystone.png",
+    "background": "aether_ii:block/holystone",
     "description": {
       "translate": "advancement.aether_ii.the_highlands.desc"
     },
