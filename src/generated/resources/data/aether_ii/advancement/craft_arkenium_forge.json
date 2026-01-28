@@ -1,11 +1,11 @@
 {
-  "parent": "aether_ii:enter_highlands",
+  "parent": "aether_ii:corrobonite_crystal",
   "criteria": {
-    "icestone": {
+    "craft_arkenium_forge": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:icestone"
+            "items": "aether_ii:arkenium_forge"
           }
         ]
       },
@@ -14,19 +14,19 @@
   },
   "display": {
     "description": {
-      "translate": "advancement.aether_ii.icestone.desc"
+      "translate": "advancement.aether_ii.craft_arkenium_forge.desc"
     },
     "icon": {
       "count": 1,
-      "id": "aether_ii:icestone"
+      "id": "aether_ii:arkenium_forge"
     },
     "title": {
-      "translate": "advancement.aether_ii.icestone"
+      "translate": "advancement.aether_ii.craft_arkenium_forge"
     }
   },
   "requirements": [
     [
-      "icestone"
+      "craft_arkenium_forge"
     ]
   ],
   "sends_telemetry_event": true

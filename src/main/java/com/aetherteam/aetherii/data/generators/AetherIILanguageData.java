@@ -1517,26 +1517,34 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("blue_aercloud", "To Infinity and Beyond!");
         this.addAdvancement("obtain_egg", "Don't Count Your Moas...");
         this.addAdvancement("obtain_petal", "Baby Food");
+        this.addAdvancement("incubate_moa", "... Until They hatch!");
         this.addAdvancement("zanite", "Exotic Hardware");
         this.addAdvancement("craft_altar", "Do You Believe in Magic?");
         this.addAdvancement("icestone", "Cold as Ice");
         this.addAdvancement("gravitite_plate", "Pink is the New Blue");
         this.addAdvancement("gravitite_armor", "Defying Gravity");
+        this.addAdvancement("corrobonite_crystal", "Green Energy");
+        this.addAdvancement("craft_arkenium_forge", "Upgrades, People, Upgrades!");
         this.addAdvancement("slider", "Like a Bossaru!");
         this.addAdvancement("hammer_loot", "The Power of the Gods");
+        this.addAdvancement("neptune_armor", "Aquaman");
 
         this.addAdvancementDesc("the_highlands", "It's not dead!");
         this.addAdvancementDesc("enter_highlands", "Enter the Aether");
         this.addAdvancementDesc("blue_aercloud", "Bounce on a Blue Aercloud");
         this.addAdvancementDesc("obtain_egg", "Obtain a Moa Egg");
         this.addAdvancementDesc("obtain_petal", "Harvest an Aechor Petal from an Aechor Plant");
+        this.addAdvancementDesc("incubate_moa", "Incubate a Moa Egg by placing it on top of Woven Skyroot Sticks");
         this.addAdvancementDesc("zanite", "Have a Zanite Gemstone in your inventory");
         this.addAdvancementDesc("craft_altar", "Craft an Altar");
         this.addAdvancementDesc("icestone", "Obtain Icestone");
         this.addAdvancementDesc("gravitite_plate", "Use an Altar to obtain a Gravitite Plate");
-        this.addAdvancementDesc("gravitite_armor", "Have a full set of gravitite armor in your inventory");
+        this.addAdvancementDesc("gravitite_armor", "Have a full set of Gravitite armor in your inventory");
+        this.addAdvancementDesc("corrobonite_crystal", "Acquire Corrobonite by mining it with a Gravitite Pickaxe");
+        this.addAdvancementDesc("craft_arkenium_forge", "Craft an Arkenium Forge");
         this.addAdvancementDesc("slider", "Defeat the Slider");
         this.addAdvancementDesc("hammer_loot", "Obtain the Hammer of Demolition from the Sentry Ruins");
+        this.addAdvancementDesc("neptune_armor", "Have a full set of Neptune armor in your inventory");
     }
 
     private void addBestiaryEntries() {

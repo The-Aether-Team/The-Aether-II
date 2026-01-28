@@ -87,7 +87,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "craft_altar"));
 
             AdvancementHolder icestone = Advancement.Builder.advancement()
-                    .parent(craftAltar)
+                    .parent(enterAether)
                     .display(AetherIIBlocks.ICESTONE.get(),
                             Component.translatable("advancement.aether_ii.icestone"),
                             Component.translatable("advancement.aether_ii.icestone.desc"),
@@ -117,6 +117,16 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("moa_egg", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.MOA_EGG.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "obtain_egg"));
 
+            AdvancementHolder incubateMoa = Advancement.Builder.advancement() //todo
+                    .parent(obtainEgg)
+                    .display(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
+                            Component.translatable("advancement.aether_ii.incubate_moa"),
+                            Component.translatable("advancement.aether_ii.incubate_moa.desc"),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("incubate_moa", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.MOA_EGG.get())) //todo
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "incubate_moa"));
+
             AdvancementHolder obtainPetal = Advancement.Builder.advancement()
                     .parent(obtainEgg)
                     .display(AetherIIItems.AECHOR_PETAL.get(),
@@ -127,7 +137,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("aechor_petal", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.AECHOR_PETAL.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "obtain_petal"));
 
-            AdvancementHolder enchantedGravitite = Advancement.Builder.advancement()
+            AdvancementHolder gravititePlate = Advancement.Builder.advancement()
                     .parent(craftAltar)
                     .display(AetherIIItems.GRAVITITE_PLATE.get(),
                             Component.translatable("advancement.aether_ii.gravitite_plate"),
@@ -135,10 +145,10 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("gravitite_plate", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GRAVITITE_PLATE.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "enchanted_gravitite"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite_plate"));
 
             AdvancementHolder gravititeArmor = Advancement.Builder.advancement()
-                    .parent(enchantedGravitite)
+                    .parent(gravititePlate)
                     .display(AetherIIItems.GRAVITITE_CHESTPLATE.get(),
                             Component.translatable("advancement.aether_ii.gravitite_armor"),
                             Component.translatable("advancement.aether_ii.gravitite_armor.desc"),
@@ -151,8 +161,28 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("gravitite_gloves", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GRAVITITE_GLOVES.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite_armor"));
 
+            AdvancementHolder corroboniteCrystal = Advancement.Builder.advancement()
+                    .parent(gravititePlate)
+                    .display(AetherIIItems.CORROBONITE_CRYSTAL.get(),
+                            Component.translatable("advancement.aether_ii.corrobonite_crystal"),
+                            Component.translatable("advancement.aether_ii.corrobonite_crystal.desc"),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("corrobonite_crystal", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.CORROBONITE_CRYSTAL.get()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "corrobonite_crystal"));
+
+            AdvancementHolder craftArkeniumForge = Advancement.Builder.advancement()
+                    .parent(corroboniteCrystal)
+                    .display(AetherIIBlocks.ARKENIUM_FORGE.get(),
+                            Component.translatable("advancement.aether_ii.craft_arkenium_forge"),
+                            Component.translatable("advancement.aether_ii.craft_arkenium_forge.desc"),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("craft_arkenium_forge", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.ARKENIUM_FORGE.get()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "craft_arkenium_forge"));
+
             AdvancementHolder slider = Advancement.Builder.advancement()
-                    .parent(enchantedGravitite)
+                    .parent(gravititePlate)
                     .display(AetherIIBlocks.SENTRY_BRICKS.get(),
                             Component.translatable("advancement.aether_ii.slider"),
                             Component.translatable("advancement.aether_ii.slider.desc"),
@@ -170,6 +200,20 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             AdvancementType.GOAL, true, true, false)
                     .addCriterion("hammer_loot", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.HAMMER_OF_DEMOLITION))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hammer_loot"));
+
+            AdvancementHolder neptuneArmor = Advancement.Builder.advancement()
+                    .parent(slider)
+                    .display(AetherIIItems.NEPTUNE_CHESTPLATE.get(),
+                            Component.translatable("advancement.aether_ii.neptune_armor"),
+                            Component.translatable("advancement.aether_ii.neptune_armor.desc"),
+                            null,
+                            AdvancementType.GOAL, true, true, false)
+                    .addCriterion("neptune_helmet", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_HELMET.get()))
+                    .addCriterion("neptune_chestplate", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_CHESTPLATE.get()))
+                    .addCriterion("neptune_leggings", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_LEGGINGS.get()))
+                    .addCriterion("neptune_boots", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_BOOTS.get()))
+                    .addCriterion("neptune_gloves", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_GLOVES.get()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "neptune_armor"));
         }
     }
 

@@ -1,5 +1,5 @@
 {
-  "parent": "aether_ii:enchanted_gravitite",
+  "parent": "aether_ii:gravitite_plate",
   "criteria": {
     "kill_slider": {
       "conditions": {

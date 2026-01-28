@@ -1,11 +1,11 @@
 {
-  "parent": "aether_ii:enter_highlands",
+  "parent": "aether_ii:gravitite_plate",
   "criteria": {
-    "icestone": {
+    "corrobonite_crystal": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:icestone"
+            "items": "aether_ii:corrobonite_crystal"
           }
         ]
       },
@@ -14,19 +14,19 @@
   },
   "display": {
     "description": {
-      "translate": "advancement.aether_ii.icestone.desc"
+      "translate": "advancement.aether_ii.corrobonite_crystal.desc"
     },
     "icon": {
       "count": 1,
-      "id": "aether_ii:icestone"
+      "id": "aether_ii:corrobonite_crystal"
     },
     "title": {
-      "translate": "advancement.aether_ii.icestone"
+      "translate": "advancement.aether_ii.corrobonite_crystal"
     }
   },
   "requirements": [
     [
-      "icestone"
+      "corrobonite_crystal"
     ]
   ],
   "sends_telemetry_event": true

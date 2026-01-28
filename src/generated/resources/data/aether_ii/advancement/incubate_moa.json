@@ -1,11 +1,11 @@
 {
-  "parent": "aether_ii:enter_highlands",
+  "parent": "aether_ii:obtain_egg",
   "criteria": {
-    "icestone": {
+    "incubate_moa": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:icestone"
+            "items": "aether_ii:moa_egg"
           }
         ]
       },
@@ -14,19 +14,19 @@
   },
   "display": {
     "description": {
-      "translate": "advancement.aether_ii.icestone.desc"
+      "translate": "advancement.aether_ii.incubate_moa.desc"
     },
     "icon": {
       "count": 1,
-      "id": "aether_ii:icestone"
+      "id": "aether_ii:woven_skyroot_sticks"
     },
     "title": {
-      "translate": "advancement.aether_ii.icestone"
+      "translate": "advancement.aether_ii.incubate_moa"
     }
   },
   "requirements": [
     [
-      "icestone"
+      "incubate_moa"
     ]
   ],
   "sends_telemetry_event": true

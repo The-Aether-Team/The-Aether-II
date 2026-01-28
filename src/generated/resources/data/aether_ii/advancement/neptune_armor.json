@@ -1,51 +1,51 @@
 {
-  "parent": "aether_ii:gravitite_plate",
+  "parent": "aether_ii:slider",
   "criteria": {
-    "gravitite_boots": {
+    "neptune_boots": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:gravitite_boots"
+            "items": "aether_ii:neptune_boots"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "gravitite_chestplate": {
+    "neptune_chestplate": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:gravitite_chestplate"
+            "items": "aether_ii:neptune_chestplate"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "gravitite_gloves": {
+    "neptune_gloves": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:gravitite_gloves"
+            "items": "aether_ii:neptune_gloves"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "gravitite_helmet": {
+    "neptune_helmet": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:gravitite_helmet"
+            "items": "aether_ii:neptune_helmet"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "gravitite_leggings": {
+    "neptune_leggings": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:gravitite_leggings"
+            "items": "aether_ii:neptune_leggings"
           }
         ]
       },
@@ -54,32 +54,32 @@
   },
   "display": {
     "description": {
-      "translate": "advancement.aether_ii.gravitite_armor.desc"
+      "translate": "advancement.aether_ii.neptune_armor.desc"
     },
     "frame": "goal",
     "icon": {
       "count": 1,
-      "id": "aether_ii:gravitite_chestplate"
+      "id": "aether_ii:neptune_chestplate"
     },
     "title": {
-      "translate": "advancement.aether_ii.gravitite_armor"
+      "translate": "advancement.aether_ii.neptune_armor"
     }
   },
   "requirements": [
     [
-      "gravitite_helmet"
+      "neptune_helmet"
     ],
     [
-      "gravitite_chestplate"
+      "neptune_chestplate"
     ],
     [
-      "gravitite_leggings"
+      "neptune_leggings"
     ],
     [
-      "gravitite_boots"
+      "neptune_boots"
     ],
     [
-      "gravitite_gloves"
+      "neptune_gloves"
     ]
   ],
   "sends_telemetry_event": true
