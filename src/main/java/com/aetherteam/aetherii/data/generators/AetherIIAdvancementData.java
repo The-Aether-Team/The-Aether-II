@@ -31,7 +31,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterList;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RespawnAnchorBlock;
 import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 
@@ -50,6 +52,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
         @SuppressWarnings("unused")
         @Override
         public void generate(HolderLookup.Provider provider, Consumer<AdvancementHolder> consumer) {
+            HolderGetter<Block> blocks = provider.lookupOrThrow(Registries.BLOCK);
             HolderGetter<EntityType<?>> entityTypes = provider.lookupOrThrow(Registries.ENTITY_TYPE);
             HolderGetter<Biome> biomes = provider.lookupOrThrow(Registries.BIOME);
 
@@ -112,6 +115,24 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("antitoxin", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ANTITOXIN_VIAL.get(), AetherIIItems.ANTIVENOM_VIAL.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "antitoxin"));
 
+            AdvancementHolder engravedDiscs = Advancement.Builder.advancement()
+                    .parent(enterAether)
+                    .display(AetherIIItems.MUSIC_PLAYER.get(),
+                            Component.translatable("advancement.aether_ii.engraved_discs"),
+                            Component.translatable("advancement.aether_ii.engraved_discs.desc"),
+                            null,
+                            AdvancementType.GOAL, true, true, true)
+                    .addCriterion("aether_tune", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_AETHER_TUNE.get()))
+                    .addCriterion("ascending_dawn", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN.get()))
+                    .addCriterion("aerwhale", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_AERWHALE.get()))
+                    .addCriterion("approaches", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_APPROACHES.get()))
+                    .addCriterion("demise", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_DEMISE.get()))
+                    .addCriterion("chinchilla", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_CHINCHILLA.get()))
+                    .addCriterion("high", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_HIGH.get()))
+                    .addCriterion("revolutions", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS.get()))
+                    .addCriterion("chase", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_CHASE.get()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "engraved_discs"));
+
             AdvancementHolder blueAercloud = Advancement.Builder.advancement()
                     .parent(enterAether)
                     .display(AetherIIBlocks.BLUE_AERCLOUD.get(),
@@ -121,6 +142,16 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("blue_aercloud", EnterBlockTrigger.TriggerInstance.entersBlock(AetherIIBlocks.BLUE_AERCLOUD.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "blue_aercloud"));
+
+            AdvancementHolder outpostCampfire = Advancement.Builder.advancement()
+                    .parent(enterAether)
+                    .display(AetherIIBlocks.OUTPOST_CAMPFIRE.get(),
+                            Component.translatable("advancement.aether_ii.outpost_campfire"),
+                            Component.translatable("advancement.aether_ii.outpost_campfire.desc"),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("outpost_campfire", EnterBlockTrigger.TriggerInstance.entersBlock(AetherIIBlocks.OUTPOST_CAMPFIRE.get())) //todo
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "outpost_campfire"));
 
             AdvancementHolder cloudSkiff = Advancement.Builder.advancement()
                     .parent(blueAercloud)
@@ -231,6 +262,46 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("gravitite_boots", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GRAVITITE_BOOTS.get()))
                     .addCriterion("gravitite_gloves", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GRAVITITE_GLOVES.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite_armor"));
+
+            AdvancementHolder arkeniumPlates = Advancement.Builder.advancement()
+                    .parent(craftAltar)
+                    .display(AetherIIItems.ARKENIUM_PLATES.get(),
+                            Component.translatable("advancement.aether_ii.arkenium_plates"),
+                            Component.translatable("advancement.aether_ii.arkenium_plates.desc"),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("arkenium_plates", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ARKENIUM_PLATES.get()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "arkenium_plates"));
+
+            AdvancementHolder alkahestCanister = Advancement.Builder.advancement()
+                    .parent(arkeniumPlates)
+                    .display(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER.get(),
+                            Component.translatable("advancement.aether_ii.alkahest_canister"),
+                            Component.translatable("advancement.aether_ii.alkahest_canister.desc"),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("alkahest_canister", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER.get()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_canister"));
+
+            AdvancementHolder craftAlkahestPurifier = Advancement.Builder.advancement()
+                    .parent(alkahestCanister)
+                    .display(AetherIIBlocks.ALKAHEST_PURIFIER.get(),
+                            Component.translatable("advancement.aether_ii.craft_alkahest_purifier"),
+                            Component.translatable("advancement.aether_ii.craft_alkahest_purifier.desc"),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("craft_alkahest_purifier", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.ALKAHEST_PURIFIER.get()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "craft_alkahest_purifier"));
+
+            AdvancementHolder irradiatedItem = Advancement.Builder.advancement()
+                    .parent(alkahestCanister)
+                    .display(AetherIIItems.IRRADIATED_WEAPON.get(),
+                            Component.translatable("advancement.aether_ii.irradiated_item"),
+                            Component.translatable("advancement.aether_ii.irradiated_item.desc"),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("irradiated_item", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.IRRADIATED_WEAPON.get(), AetherIIItems.IRRADIATED_TOOL.get(), AetherIIItems.IRRADIATED_ARMOR.get(), AetherIIItems.IRRADIATED_CHUNK.get()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "irradiated_item"));
 
             AdvancementHolder corroboniteCrystal = Advancement.Builder.advancement()
                     .parent(gravititePlate)

@@ -1,0 +1,33 @@
+{
+  "parent": "aether_ii:blue_aercloud",
+  "criteria": {
+    "cloud_skiff": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:cloud_skiff"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.aether_ii.cloud_skiff.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:cloud_skiff"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.cloud_skiff"
+    }
+  },
+  "requirements": [
+    [
+      "cloud_skiff"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

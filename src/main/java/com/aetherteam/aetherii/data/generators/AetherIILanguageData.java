@@ -1524,14 +1524,20 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("explore_aether", "The World Above");
         this.addAdvancement("icestone", "Cold as Ice");
         this.addAdvancement("antitoxin", "The Cure");
+        this.addAdvancement("engraved_discs", "The Full Album");
+        this.addAdvancement("outpost_campfire", "Community Hotspot");
         this.addAdvancement("zanite", "Exotic Hardware");
         this.addAdvancement("craft_altar", "Do You Believe in Magic?");
         this.addAdvancement("gravitite_plate", "Pink is the New Blue");
         this.addAdvancement("gravitite_armor", "Defying Gravity");
+        this.addAdvancement("arkenium_plates", "The Steel of Gods");
+        this.addAdvancement("alkahest_canister", "Handle with Care");
+        this.addAdvancement("craft_alkahest_purifier", "Contained");
+        this.addAdvancement("irradiated_item", "Radioactive");
         this.addAdvancement("corrobonite_crystal", "Green Energy");
         this.addAdvancement("craft_arkenium_forge", "Upgrades, People, Upgrades!");
         this.addAdvancement("slider", "Like a Bossaru!");
-        this.addAdvancement("hammer_loot", "The Power of the Gods");
+        this.addAdvancement("hammer_loot", "The Power of Force");
         this.addAdvancement("neptune_armor", "Aquaman");
 
         this.addAdvancementDesc("the_highlands", "It's not dead!");
@@ -1546,10 +1552,16 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("explore_aether", "Explore all Aether biomes");
         this.addAdvancementDesc("icestone", "Obtain Icestone");
         this.addAdvancementDesc("antitoxin", "Craft an Antitoxin or Antivenom Vial to protect yourself against poison effects");
+        this.addAdvancementDesc("engraved_discs", "Collect all Aether engraved discs");
+        this.addAdvancementDesc("outpost_campfire", "Set your respawn point at an Outpost Campfire");
         this.addAdvancementDesc("zanite", "Have a Zanite Gemstone in your inventory");
         this.addAdvancementDesc("craft_altar", "Craft an Altar");
         this.addAdvancementDesc("gravitite_plate", "Use an Altar to obtain a Gravitite Plate");
         this.addAdvancementDesc("gravitite_armor", "Have a full set of Gravitite armor in your inventory");
+        this.addAdvancementDesc("arkenium_plates", "Use an Altar to obtain a Arkenium Plates");
+        this.addAdvancementDesc("alkahest_canister", "Collect Alkahest using an Arkenium Canister");
+        this.addAdvancementDesc("craft_alkahest_purifier", "Craft an Alkahest Purifier");
+        this.addAdvancementDesc("irradiated_item", "Obtain an Irradiated Item, these can be cleaned using Alkahest");
         this.addAdvancementDesc("corrobonite_crystal", "Acquire Corrobonite by mining it with a Gravitite Pickaxe");
         this.addAdvancementDesc("craft_arkenium_forge", "Craft an Arkenium Forge");
         this.addAdvancementDesc("slider", "Defeat the Slider");

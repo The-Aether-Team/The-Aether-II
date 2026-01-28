@@ -1,0 +1,33 @@
+{
+  "parent": "aether_ii:obtain_egg",
+  "criteria": {
+    "skyroot_lizard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:skyroot_lizard_on_a_stick"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.aether_ii.skyroot_lizard.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:skyroot_lizard_on_a_stick"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.skyroot_lizard"
+    }
+  },
+  "requirements": [
+    [
+      "skyroot_lizard"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
