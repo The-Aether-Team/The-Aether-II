@@ -1526,6 +1526,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("antitoxin", "The Cure");
         this.addAdvancement("engraved_discs", "The Full Album");
         this.addAdvancement("outpost_campfire", "Community Hotspot");
+        this.addAdvancement("ambrosium", "Enlightenment");
         this.addAdvancement("zanite", "Exotic Hardware");
         this.addAdvancement("craft_altar", "Do You Believe in Magic?");
         this.addAdvancement("gravitite_plate", "Pink is the New Blue");
@@ -1534,6 +1535,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("alkahest_canister", "Handle with Care");
         this.addAdvancement("craft_alkahest_purifier", "Contained");
         this.addAdvancement("irradiated_item", "Radioactive");
+        this.addAdvancement("dart_shooter", "Pick Your Poison");
         this.addAdvancement("corrobonite_crystal", "Green Energy");
         this.addAdvancement("craft_arkenium_forge", "Upgrades, People, Upgrades!");
         this.addAdvancement("slider", "Like a Bossaru!");
@@ -1554,6 +1556,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("antitoxin", "Craft an Antitoxin or Antivenom Vial to protect yourself against poison effects");
         this.addAdvancementDesc("engraved_discs", "Collect all Aether engraved discs");
         this.addAdvancementDesc("outpost_campfire", "Set your respawn point at an Outpost Campfire");
+        this.addAdvancementDesc("ambrosium", "Obtain an Ambrosium Shard");
         this.addAdvancementDesc("zanite", "Have a Zanite Gemstone in your inventory");
         this.addAdvancementDesc("craft_altar", "Craft an Altar");
         this.addAdvancementDesc("gravitite_plate", "Use an Altar to obtain a Gravitite Plate");
@@ -1562,6 +1565,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("alkahest_canister", "Collect Alkahest using an Arkenium Canister");
         this.addAdvancementDesc("craft_alkahest_purifier", "Craft an Alkahest Purifier");
         this.addAdvancementDesc("irradiated_item", "Obtain an Irradiated Item, these can be cleaned using Alkahest");
+        this.addAdvancementDesc("dart_shooter", "Craft a dart shooter and a dart cartridge");
         this.addAdvancementDesc("corrobonite_crystal", "Acquire Corrobonite by mining it with a Gravitite Pickaxe");
         this.addAdvancementDesc("craft_arkenium_forge", "Craft an Arkenium Forge");
         this.addAdvancementDesc("slider", "Defeat the Slider");

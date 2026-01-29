@@ -1,11 +1,11 @@
 {
-  "parent": "aether_ii:ambrosium",
+  "parent": "aether_ii:enter_highlands",
   "criteria": {
-    "icestone": {
+    "ambrosium": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:icestone"
+            "items": "aether_ii:ambrosium_shard"
           }
         ]
       },
@@ -14,19 +14,19 @@
   },
   "display": {
     "description": {
-      "translate": "advancement.aether_ii.icestone.desc"
+      "translate": "advancement.aether_ii.ambrosium.desc"
     },
     "icon": {
       "count": 1,
-      "id": "aether_ii:icestone"
+      "id": "aether_ii:ambrosium_shard"
     },
     "title": {
-      "translate": "advancement.aether_ii.icestone"
+      "translate": "advancement.aether_ii.ambrosium"
     }
   },
   "requirements": [
     [
-      "icestone"
+      "ambrosium"
     ]
   ],
   "sends_telemetry_event": true

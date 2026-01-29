@@ -75,8 +75,18 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("enter_highlands", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "enter_highlands"));
 
-            AdvancementHolder zanite = Advancement.Builder.advancement()
+            AdvancementHolder ambrosium = Advancement.Builder.advancement()
                     .parent(enterAether)
+                    .display(AetherIIItems.AMBROSIUM_SHARD.get(),
+                            Component.translatable("advancement.aether_ii.ambrosium"),
+                            Component.translatable("advancement.aether_ii.ambrosium.desc"),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("ambrosium", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.AMBROSIUM_SHARD.get()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "ambrosium"));
+
+            AdvancementHolder zanite = Advancement.Builder.advancement()
+                    .parent(ambrosium)
                     .display(AetherIIItems.ZANITE_GEMSTONE.get(),
                             Component.translatable("advancement.aether_ii.zanite"),
                             Component.translatable("advancement.aether_ii.zanite.desc"),
@@ -96,7 +106,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "craft_altar"));
 
             AdvancementHolder icestone = Advancement.Builder.advancement()
-                    .parent(enterAether)
+                    .parent(ambrosium)
                     .display(AetherIIBlocks.ICESTONE.get(),
                             Component.translatable("advancement.aether_ii.icestone"),
                             Component.translatable("advancement.aether_ii.icestone.desc"),
@@ -302,6 +312,17 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("irradiated_item", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.IRRADIATED_WEAPON.get(), AetherIIItems.IRRADIATED_TOOL.get(), AetherIIItems.IRRADIATED_ARMOR.get(), AetherIIItems.IRRADIATED_CHUNK.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "irradiated_item"));
+
+            AdvancementHolder dartShooter = Advancement.Builder.advancement()
+                    .parent(zanite)
+                    .display(AetherIIItems.DART_SHOOTER.get(),
+                            Component.translatable("advancement.aether_ii.dart_shooter"),
+                            Component.translatable("advancement.aether_ii.dart_shooter.desc"),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("dart_shooter", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.DART_SHOOTER.get()))
+                    .addCriterion("amber_darts", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.AMBER_DARTS.get()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "dart_shooter"));
 
             AdvancementHolder corroboniteCrystal = Advancement.Builder.advancement()
                     .parent(gravititePlate)
