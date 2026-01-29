@@ -216,7 +216,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
 
             AdvancementHolder incubateMoa = Advancement.Builder.advancement() //todo
                     .parent(obtainEgg)
-                    .display(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
+                    .display(AetherIIItems.MOA_FEATHER.get(),
                             Component.translatable("advancement.aether_ii.incubate_moa"),
                             Component.translatable("advancement.aether_ii.incubate_moa.desc"),
                             null,
