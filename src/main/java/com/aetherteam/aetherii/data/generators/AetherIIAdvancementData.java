@@ -30,6 +30,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -84,6 +85,18 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("ambrosium", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.AMBROSIUM_SHARD.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "ambrosium"));
+
+            AdvancementHolder enchantedAetherGrass = Advancement.Builder.advancement()
+                    .parent(ambrosium)
+                    .display(AetherIIItems.ENCHANTED_BLUEBERRY.get(),
+                            Component.translatable("advancement.aether_ii.enchanted_aether_grass"),
+                            Component.translatable("advancement.aether_ii.enchanted_aether_grass.desc"),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("enchanted_aether_grass", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
+                            LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get())),
+                            ItemPredicate.Builder.item().of(items, AetherIIItems.AMBROSIUM_SHARD.get())))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "enchanted_aether_grass"));
 
             AdvancementHolder zanite = Advancement.Builder.advancement()
                     .parent(ambrosium)

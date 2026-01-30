@@ -1527,6 +1527,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("engraved_discs", "The Full Album");
         this.addAdvancement("outpost_campfire", "Community Hotspot");
         this.addAdvancement("ambrosium", "Enlightenment");
+        this.addAdvancement("enchanted_aether_grass", "Golden Gardening");
         this.addAdvancement("zanite", "Exotic Hardware");
         this.addAdvancement("craft_altar", "Do You Believe in Magic?");
         this.addAdvancement("gravitite_plate", "Pink is the New Blue");
@@ -1558,6 +1559,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("engraved_discs", "Collect all Aether engraved discs");
         this.addAdvancementDesc("outpost_campfire", "Set your respawn point at an Outpost Campfire");
         this.addAdvancementDesc("ambrosium", "Obtain an Ambrosium Shard");
+        this.addAdvancementDesc("enchanted_aether_grass", "Enchant an Aether Grass Block with an Ambrosium Shard to receive more drops from crops planted above");
         this.addAdvancementDesc("zanite", "Have a Zanite Gemstone in your inventory");
         this.addAdvancementDesc("craft_altar", "Craft an Altar");
         this.addAdvancementDesc("gravitite_plate", "Use an Altar to obtain a Gravitite Plate");
