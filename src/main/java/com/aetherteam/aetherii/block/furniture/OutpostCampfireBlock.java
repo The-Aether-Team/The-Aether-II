@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.furniture;
 
+import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.OutpostTrackerAttachment;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
@@ -10,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -118,6 +120,9 @@ public class OutpostCampfireBlock extends MultiBlock {
                         data.addCampfirePosition(new OutpostTrackerAttachment.CampfirePosition(level.dimension(), pos));
                         if (!level.isClientSide()) {
                             player.displayClientMessage(Component.translatable("aether_ii.message.campfire_added"), false);
+                        }
+                        if (player instanceof ServerPlayer serverPlayer) {
+                            AetherIIAdvancementTriggers.OUTPOST_CAMPFIRE_TRIGGER.get().trigger(serverPlayer, Blocks.AIR.asItem().getDefaultInstance());
                         }
                     }
                     return InteractionResult.SUCCESS;

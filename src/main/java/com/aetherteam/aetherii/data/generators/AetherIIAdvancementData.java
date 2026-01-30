@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.advancement.trigger.IncubationTrigger;
+import com.aetherteam.aetherii.advancement.trigger.OutpostCampfireTrigger;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
@@ -53,6 +55,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
         @Override
         public void generate(HolderLookup.Provider provider, Consumer<AdvancementHolder> consumer) {
             HolderGetter<Block> blocks = provider.lookupOrThrow(Registries.BLOCK);
+            HolderGetter<Item> items = provider.lookupOrThrow(Registries.ITEM);
             HolderGetter<EntityType<?>> entityTypes = provider.lookupOrThrow(Registries.ENTITY_TYPE);
             HolderGetter<Biome> biomes = provider.lookupOrThrow(Registries.BIOME);
 
@@ -160,7 +163,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.outpost_campfire.desc"),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("outpost_campfire", EnterBlockTrigger.TriggerInstance.entersBlock(AetherIIBlocks.OUTPOST_CAMPFIRE.get())) //todo
+                    .addCriterion("outpost_campfire", OutpostCampfireTrigger.Instance.forItem(ItemPredicate.Builder.item().of(items, Blocks.AIR).build()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "outpost_campfire"));
 
             AdvancementHolder cloudSkiff = Advancement.Builder.advancement()
@@ -214,14 +217,14 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("skyroot_lizard", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot_lizard"));
 
-            AdvancementHolder incubateMoa = Advancement.Builder.advancement() //todo
+            AdvancementHolder incubateMoa = Advancement.Builder.advancement()
                     .parent(obtainEgg)
                     .display(AetherIIItems.MOA_FEATHER.get(),
                             Component.translatable("advancement.aether_ii.incubate_moa"),
                             Component.translatable("advancement.aether_ii.incubate_moa.desc"),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("incubate_moa", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.MOA_EGG.get())) //todo
+                    .addCriterion("incubate_moa", IncubationTrigger.Instance.forItem(ItemPredicate.Builder.item().of(items, Blocks.AIR).build()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "incubate_moa"));
 
             Advancement.Builder.advancement()

@@ -3,13 +3,11 @@
   "criteria": {
     "incubate_moa": {
       "conditions": {
-        "items": [
-          {
-            "items": "aether_ii:moa_egg"
-          }
-        ]
+        "item": {
+          "items": "minecraft:air"
+        }
       },
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "aether_ii:incubation_trigger"
     }
   },
   "display": {

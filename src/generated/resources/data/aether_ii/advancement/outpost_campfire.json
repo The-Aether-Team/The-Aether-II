@@ -3,9 +3,11 @@
   "criteria": {
     "outpost_campfire": {
       "conditions": {
-        "block": "aether_ii:outpost_campfire"
+        "item": {
+          "items": "minecraft:air"
+        }
       },
-      "trigger": "minecraft:enter_block"
+      "trigger": "aether_ii:outpost_campfire_trigger"
     }
   },
   "display": {

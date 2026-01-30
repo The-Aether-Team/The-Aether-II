@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii;
 
+import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.command.AetherIICommands;
 import org.slf4j.Logger;
 
@@ -133,6 +134,7 @@ public class AetherII {
                 AetherIISurfaceRules.MATERIAL_RULES,
                 AetherIIBlockPredicateTypes.BLOCK_PREDICATE_TYPES,
                 AetherIIPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES,
+                AetherIIAdvancementTriggers.TRIGGERS,
                 AetherIIEntitySubPredicates.ENTITY_SUB_PREDICATES,
         };
 
