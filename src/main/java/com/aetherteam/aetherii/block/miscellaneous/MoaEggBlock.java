@@ -2,6 +2,9 @@ package com.aetherteam.aetherii.block.miscellaneous;
 
 import java.util.Optional;
 
+import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
 
 import com.aetherteam.aetherii.AetherIITags;
@@ -116,6 +119,10 @@ public class MoaEggBlock extends BaseEntityBlock {
                 //moa.setMoaTypeByKey(this.moaType);
                 moa.snapTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(level.random.nextFloat() * 360.0F), 0.0F);
                 level.addFreshEntity(moa);
+                Player player = level.getNearestPlayer(pos.getX(), pos.getY(), pos.getZ(), 24, false);
+                if (player instanceof ServerPlayer serverPlayer) {
+                    AetherIIAdvancementTriggers.INCUBATION_TRIGGER.get().trigger(serverPlayer, Blocks.AIR.asItem().getDefaultInstance());
+                }
             }
         }
     }
