@@ -1,0 +1,31 @@
+{
+  "parent": "aether_ii:slider",
+  "criteria": {
+    "sentry_boots_fall": {
+      "conditions": {
+        "item": {
+          "items": "aether_ii:sentry_boots"
+        }
+      },
+      "trigger": "aether_ii:sentry_boots_fall_trigger"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.aether_ii.sentry_boots_fall.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:sentry_boots"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.sentry_boots_fall"
+    }
+  },
+  "requirements": [
+    [
+      "sentry_boots_fall"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

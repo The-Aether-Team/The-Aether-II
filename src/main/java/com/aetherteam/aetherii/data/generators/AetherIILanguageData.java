@@ -1541,6 +1541,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("slider", "Like a Bossaru!");
         this.addAdvancement("hammer_loot", "The Power of Force");
         this.addAdvancement("neptune_armor", "Aquaman");
+        this.addAdvancement("sentry_boots_fall", "Vertigo");
 
         this.addAdvancementDesc("the_highlands", "It's not dead!");
         this.addAdvancementDesc("enter_highlands", "Enter the Aether");
@@ -1571,6 +1572,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("slider", "Defeat the Slider");
         this.addAdvancementDesc("hammer_loot", "Obtain the Hammer of Demolition from the Sentry Ruins");
         this.addAdvancementDesc("neptune_armor", "Have a full set of Neptune armor in your inventory");
+        this.addAdvancementDesc("sentry_boots_fall", "Survive a critical fall with the help of Sentry Boots");
     }
 
     private void addBestiaryEntries() {

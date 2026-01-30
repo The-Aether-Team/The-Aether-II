@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.generators;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.advancement.trigger.IncubationTrigger;
 import com.aetherteam.aetherii.advancement.trigger.OutpostCampfireTrigger;
+import com.aetherteam.aetherii.advancement.trigger.SentryBootsFallTrigger;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
@@ -22,7 +23,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.advancements.AdvancementProvider;
 import net.minecraft.data.advancements.AdvancementSubProvider;
-import net.minecraft.data.advancements.packs.VanillaAdventureAdvancements;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -30,12 +30,9 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterList;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.RespawnAnchorBlock;
 import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 
@@ -229,7 +226,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
 
             Advancement.Builder.advancement()
                     .parent(incubateMoa)
-                    .display(AetherIIItems.SENTRY_BOOTS.get(),
+                    .display(AetherIIItems.GRAVITITE_BOOTS.get(),
                             Component.translatable("advancement.aether_ii.explore_aether"),
                             Component.translatable("advancement.aether_ii.explore_aether.desc"),
                             null,
@@ -380,6 +377,16 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("neptune_boots", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_BOOTS.get()))
                     .addCriterion("neptune_gloves", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_GLOVES.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "neptune_armor"));
+
+            AdvancementHolder sentryBootsFall = Advancement.Builder.advancement()
+                    .parent(slider)
+                    .display(AetherIIItems.SENTRY_BOOTS.get(),
+                            Component.translatable("advancement.aether_ii.sentry_boots_fall"),
+                            Component.translatable("advancement.aether_ii.sentry_boots_fall.desc"),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("sentry_boots_fall", SentryBootsFallTrigger.Instance.forItem(ItemPredicate.Builder.item().of(items, AetherIIItems.SENTRY_BOOTS).build()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_boots_fall"));
         }
     }
 
