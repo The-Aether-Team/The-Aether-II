@@ -1,5 +1,5 @@
 {
-  "parent": "aether_ii:highlands/craft_arkenium_forge",
+  "parent": "aether_ii:craft_arkenium_forge",
   "criteria": {
     "charm": {
       "conditions": {

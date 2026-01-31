@@ -61,7 +61,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/holystone"),
                             AdvancementType.TASK, false, false, false)
                     .addCriterion("the_highlands", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/the_highlands"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "the_highlands"));
 
             AdvancementHolder enterAether = Advancement.Builder.advancement()
                     .parent(theAether)
@@ -71,7 +71,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("enter_highlands", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/enter_highlands"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "enter_highlands"));
 
             AdvancementHolder ambrosium = Advancement.Builder.advancement()
                     .parent(enterAether)
@@ -81,7 +81,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("ambrosium", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.AMBROSIUM_SHARD.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/ambrosium"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "ambrosium"));
 
             AdvancementHolder enchantedAetherGrass = Advancement.Builder.advancement()
                     .parent(ambrosium)
@@ -93,7 +93,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("enchanted_aether_grass", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
                             LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get())),
                             ItemPredicate.Builder.item().of(items, AetherIIItems.AMBROSIUM_SHARD.get())))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/enchanted_aether_grass"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "enchanted_aether_grass"));
 
             AdvancementHolder zanite = Advancement.Builder.advancement()
                     .parent(ambrosium)
@@ -103,7 +103,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("zanite", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ZANITE_GEMSTONE.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/zanite"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite"));
 
             AdvancementHolder craftAltar = Advancement.Builder.advancement()
                     .parent(zanite)
@@ -113,7 +113,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("craft_altar", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.ALTAR.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/craft_altar"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "craft_altar"));
 
             AdvancementHolder icestone = Advancement.Builder.advancement()
                     .parent(ambrosium)
@@ -123,7 +123,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("icestone", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.ICESTONE.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/icestone"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "icestone"));
 
             AdvancementHolder antitoxin = Advancement.Builder.advancement()
                     .parent(icestone)
@@ -133,7 +133,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("antitoxin", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ANTITOXIN_VIAL.get(), AetherIIItems.ANTIVENOM_VIAL.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/antitoxin"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "antitoxin"));
 
             AdvancementHolder engravedDiscs = Advancement.Builder.advancement()
                     .parent(enterAether)
@@ -151,7 +151,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("high", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_HIGH.get()))
                     .addCriterion("revolutions", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS.get()))
                     .addCriterion("chase", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_CHASE.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/engraved_discs"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "engraved_discs"));
 
             AdvancementHolder blueAercloud = Advancement.Builder.advancement()
                     .parent(enterAether)
@@ -161,7 +161,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("blue_aercloud", EnterBlockTrigger.TriggerInstance.entersBlock(AetherIIBlocks.BLUE_AERCLOUD.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/blue_aercloud"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "blue_aercloud"));
 
             AdvancementHolder outpostCampfire = Advancement.Builder.advancement()
                     .parent(enterAether)
@@ -171,7 +171,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("outpost_campfire", OutpostCampfireTrigger.Instance.forItem(ItemPredicate.Builder.item().of(items, Blocks.AIR).build()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/outpost_campfire"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "outpost_campfire"));
 
             AdvancementHolder glint = Advancement.Builder.advancement()
                     .parent(outpostCampfire)
@@ -181,7 +181,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.GOAL, true, true, false)
                     .addCriterion("glint", hasNumberofItem(64, AetherIIItems.GLINT_COIN.get())) //todo: make count 100 and make glint slot work
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/glint"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "glint"));
 
 
             AdvancementHolder bestiary = Advancement.Builder.advancement()
@@ -192,7 +192,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("glint", hasNumberofItem(64, AetherIIItems.GLINT_COIN.get())) //.addCriterion("bestiary", PlayerPredicate .Builder.player().checkAdvancementDone(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "observe"), true))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/bestiary")); //todo
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bestiary")); //todo
 
 
 
@@ -204,7 +204,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("cloud_skiff", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.CLOUD_SKIFF.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/cloud_skiff"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cloud_skiff"));
 
             AdvancementHolder aercloudGlider = Advancement.Builder.advancement()
                     .parent(blueAercloud)
@@ -214,7 +214,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("aercloud_glider", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.COLD_AERCLOUD_GLIDER.get(), AetherIIItems.BLUE_AERCLOUD_GLIDER.get(), AetherIIItems.PURPLE_AERCLOUD_GLIDER.get(), AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/aercloud_glider"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aercloud_glider"));
 
             AdvancementHolder obtainEgg = Advancement.Builder.advancement()
                     .parent(blueAercloud)
@@ -225,7 +225,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             AdvancementType.TASK, true, true, false)
                     .requirements(AdvancementRequirements.Strategy.OR)
                     .addCriterion("moa_egg", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.MOA_EGG.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/obtain_egg"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "obtain_egg"));
 
             AdvancementHolder obtainPetal = Advancement.Builder.advancement()
                     .parent(obtainEgg)
@@ -235,7 +235,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("aechor_petal", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.AECHOR_PETAL.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/obtain_petal"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "obtain_petal"));
 
             AdvancementHolder skyrootLizard = Advancement.Builder.advancement()
                     .parent(obtainEgg)
@@ -245,7 +245,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("skyroot_lizard", itemUsedOnSpecificEntity(ItemPredicate.Builder.item().of(items, AetherIIItems.SKYROOT_STICK.get()), EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.SKYROOT_LIZARD.get())))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/skyroot_lizard"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot_lizard"));
 
             AdvancementHolder incubateMoa = Advancement.Builder.advancement()
                     .parent(obtainEgg)
@@ -255,7 +255,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("incubate_moa", IncubationTrigger.Instance.forItem(ItemPredicate.Builder.item().of(items, Blocks.AIR).build()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/incubate_moa"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "incubate_moa"));
 
             Advancement.Builder.advancement()
                     .parent(incubateMoa)
@@ -280,7 +280,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("battleground_wastes", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.BATTLEGROUND_WASTES))))
                     .addCriterion("hestveil_caverns", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.HESTVEIL_CAVERNS))))
                     //.addCriterion("expanse", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.EXPANSE))))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/explore_aether"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "explore_aether"));
 
             AdvancementHolder gravititePlate = Advancement.Builder.advancement()
                     .parent(craftAltar)
@@ -290,7 +290,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("gravitite_plate", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GRAVITITE_PLATE.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/gravitite_plate"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite_plate"));
 
             AdvancementHolder gravititeArmor = Advancement.Builder.advancement()
                     .parent(gravititePlate)
@@ -304,7 +304,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("gravitite_leggings", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GRAVITITE_LEGGINGS.get()))
                     .addCriterion("gravitite_boots", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GRAVITITE_BOOTS.get()))
                     .addCriterion("gravitite_gloves", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GRAVITITE_GLOVES.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/gravitite_armor"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite_armor"));
 
             AdvancementHolder arkeniumPlates = Advancement.Builder.advancement()
                     .parent(craftAltar)
@@ -314,7 +314,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("arkenium_plates", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ARKENIUM_PLATES.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/arkenium_plates"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "arkenium_plates"));
 
             AdvancementHolder alkahestCanister = Advancement.Builder.advancement()
                     .parent(arkeniumPlates)
@@ -324,7 +324,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("alkahest_canister", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/alkahest_canister"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_canister"));
 
             AdvancementHolder craftAlkahestPurifier = Advancement.Builder.advancement()
                     .parent(alkahestCanister)
@@ -334,7 +334,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("craft_alkahest_purifier", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.ALKAHEST_PURIFIER.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/craft_alkahest_purifier"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "craft_alkahest_purifier"));
 
             AdvancementHolder irradiatedItem = Advancement.Builder.advancement()
                     .parent(alkahestCanister)
@@ -344,7 +344,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("irradiated_item", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.IRRADIATED_WEAPON.get(), AetherIIItems.IRRADIATED_TOOL.get(), AetherIIItems.IRRADIATED_ARMOR.get(), AetherIIItems.IRRADIATED_CHUNK.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/irradiated_item"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "irradiated_item"));
 
             AdvancementHolder dartShooter = Advancement.Builder.advancement()
                     .parent(zanite)
@@ -355,7 +355,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("dart_shooter", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.DART_SHOOTER.get()))
                     .addCriterion("amber_darts", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.AMBER_DARTS.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/dart_shooter"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "dart_shooter"));
 
             AdvancementHolder corroboniteCrystal = Advancement.Builder.advancement()
                     .parent(gravititePlate)
@@ -365,7 +365,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("corrobonite_crystal", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.CORROBONITE_CRYSTAL.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/corrobonite_crystal"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "corrobonite_crystal"));
 
             AdvancementHolder craftArkeniumForge = Advancement.Builder.advancement()
                     .parent(corroboniteCrystal)
@@ -375,7 +375,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("craft_arkenium_forge", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.ARKENIUM_FORGE.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/craft_arkenium_forge"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "craft_arkenium_forge"));
 
             AdvancementHolder charm = Advancement.Builder.advancement()
                     .parent(craftArkeniumForge)
@@ -385,7 +385,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("charm", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.CHARM_OF_RESISTANCE_I.get())) //todo
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/charm"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm"));
 
             AdvancementHolder slider = Advancement.Builder.advancement()
                     .parent(gravititePlate)
@@ -395,7 +395,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.GOAL, true, true, false)
                     .addCriterion("kill_slider", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.SLIDER.get())))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/slider"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "slider"));
 
             AdvancementHolder demolitionHammerLoot = Advancement.Builder.advancement()
                     .parent(slider)
@@ -405,7 +405,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("demolition_hammer_loot", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.HAMMER_OF_DEMOLITION))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/demolition_hammer_loot"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "demolition_hammer_loot"));
 
             AdvancementHolder killGolemWithDemolitionHammer = Advancement.Builder.advancement()
                     .parent(demolitionHammerLoot)
@@ -419,7 +419,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                                     DamageSourcePredicate.Builder.damageType().direct(EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.DEMOLITION_PROJECTILE.get()))
                             )
                     )
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/kill_golem_with_demolition_hammer"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "kill_golem_with_demolition_hammer"));
 
             AdvancementHolder neptuneArmor = Advancement.Builder.advancement()
                     .parent(slider)
@@ -433,7 +433,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("neptune_leggings", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_LEGGINGS.get()))
                     .addCriterion("neptune_boots", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_BOOTS.get()))
                     .addCriterion("neptune_gloves", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_GLOVES.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/neptune_armor_loot"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "neptune_armor_loot"));
 
             AdvancementHolder sentryBootsFall = Advancement.Builder.advancement()
                     .parent(slider)
@@ -443,7 +443,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("sentry_boots_fall", SentryBootsFallTrigger.Instance.forItem(ItemPredicate.Builder.item().of(items, AetherIIItems.SENTRY_BOOTS).build()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "highlands/sentry_boots_fall"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_boots_fall"));
         }
     }
 
