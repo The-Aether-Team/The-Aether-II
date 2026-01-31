@@ -1,0 +1,33 @@
+{
+  "parent": "aether_ii:highlands/ambrosium",
+  "criteria": {
+    "icestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:icestone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.aether_ii.icestone.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:icestone"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.icestone"
+    }
+  },
+  "requirements": [
+    [
+      "icestone"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

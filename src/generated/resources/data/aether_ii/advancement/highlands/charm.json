@@ -1,0 +1,33 @@
+{
+  "parent": "aether_ii:highlands/craft_arkenium_forge",
+  "criteria": {
+    "charm": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:charm_of_resistance_1"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.aether_ii.charm.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:charm_of_resistance_1"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.charm"
+    }
+  },
+  "requirements": [
+    [
+      "charm"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

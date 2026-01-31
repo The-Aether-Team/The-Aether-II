@@ -1,0 +1,36 @@
+{
+  "parent": "aether_ii:highlands/icestone",
+  "criteria": {
+    "antitoxin": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:antitoxin_vial"
+          },
+          {
+            "items": "aether_ii:antivenom_vial"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.aether_ii.antitoxin.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:antitoxin_vial"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.antitoxin"
+    }
+  },
+  "requirements": [
+    [
+      "antitoxin"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

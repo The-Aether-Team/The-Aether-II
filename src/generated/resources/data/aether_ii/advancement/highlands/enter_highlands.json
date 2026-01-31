@@ -1,0 +1,29 @@
+{
+  "parent": "aether_ii:highlands/the_highlands",
+  "criteria": {
+    "enter_highlands": {
+      "conditions": {
+        "to": "aether_ii:aether_highlands"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.aether_ii.enter_highlands.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:glowstone"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.enter_highlands"
+    }
+  },
+  "requirements": [
+    [
+      "enter_highlands"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

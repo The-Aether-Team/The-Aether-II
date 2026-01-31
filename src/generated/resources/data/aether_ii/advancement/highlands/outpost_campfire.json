@@ -1,0 +1,31 @@
+{
+  "parent": "aether_ii:highlands/enter_highlands",
+  "criteria": {
+    "outpost_campfire": {
+      "conditions": {
+        "item": {
+          "items": "minecraft:air"
+        }
+      },
+      "trigger": "aether_ii:outpost_campfire_trigger"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.aether_ii.outpost_campfire.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:outpost_campfire"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.outpost_campfire"
+    }
+  },
+  "requirements": [
+    [
+      "outpost_campfire"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
