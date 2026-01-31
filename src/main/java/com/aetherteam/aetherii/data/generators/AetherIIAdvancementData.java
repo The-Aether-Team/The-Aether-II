@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIEntities;
 import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -245,7 +246,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.skyroot_lizard.desc"),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("skyroot_lizard", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get()))
+                    .addCriterion("skyroot_lizard", itemUsedOnSpecificEntity(ItemPredicate.Builder.item().of(items, AetherIIItems.SKYROOT_STICK.get()), EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.SKYROOT_LIZARD.get())))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot_lizard"));
 
             AdvancementHolder incubateMoa = Advancement.Builder.advancement()
@@ -443,7 +444,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
         return CriteriaTriggers.ITEM_USED_ON_BLOCK.createCriterion(itemUsedOnLocationCheckAbove(location, above, item));
     }
 
-    public static Criterion<InventoryChangeTrigger.TriggerInstance> hasNumberofItem(int count, ItemLike... items) {
+    public static Criterion<InventoryChangeTrigger.TriggerInstance> hasNumberofItem(int count, ItemLike... items) { //todo
         ItemPredicate[] aitempredicate = new ItemPredicate[items.length];
 
         for (int i = 0; i < items.length; i++) {
@@ -452,6 +453,10 @@ public class AetherIIAdvancementData extends AdvancementProvider {
         }
 
         return InventoryChangeTrigger.TriggerInstance.hasItems(aitempredicate);
+    }
+
+    public static Criterion<PlayerInteractTrigger.TriggerInstance> itemUsedOnSpecificEntity(ItemPredicate.Builder item, EntityPredicate.Builder entity) {
+        return PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(Optional.empty(), item, Optional.of(EntityPredicate.wrap(entity)));
     }
 
     public static class BestiaryAdvancements implements AdvancementSubProvider {
