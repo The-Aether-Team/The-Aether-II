@@ -260,7 +260,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
                 AetherIIBlocks.SHIMMERING_SILT.get(),
-                AetherIIBlocks.MOSSY_HOLYSTONE.get());
+                AetherIIBlocks.MOSSY_HOLYSTONE.get(),
+                AetherIIBlocks.FERROSITE_SAND.get(),
+                AetherIIBlocks.FERROSITE_MUD.get());
         this.tag(AetherIITags.Blocks.SHAYELINN_MOSS_REPLACEABLE).add(
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
