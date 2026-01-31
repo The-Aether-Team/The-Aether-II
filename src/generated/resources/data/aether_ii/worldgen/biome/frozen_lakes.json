@@ -32,7 +32,10 @@
       "aether_ii:water_pond_underground",
       "aether_ii:alkahest_pool_rare"
     ],
-    [],
+    [
+      "aether_ii:holystone_rocks",
+      "aether_ii:underwater_arctic_holystone_boulder"
+    ],
     [],
     [],
     [],

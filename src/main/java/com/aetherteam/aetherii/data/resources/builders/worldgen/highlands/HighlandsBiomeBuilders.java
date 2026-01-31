@@ -281,6 +281,8 @@ public class HighlandsBiomeBuilders {
     public static Biome glisteningSwampBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeMagneticBiome(Optional.of(HighlandsPlacedFeatures.GLISTENING_SWAMP_TREES), new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addFeature(GenerationStep.Decoration.FLUID_SPRINGS, HighlandsPlacedFeatures.BONUS_WATER_SPRING)
+                        .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.HOLYSTONE_ROCKS)
+                        .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.UNDERWATER_MOSSY_HOLYSTONE_BOULDER)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.GLISTENING_SWAMP_TREES_SUNKEN)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.GLISTENING_SWAMP_MAGNETIC_SHROOMS)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.SMALL_GRASS_PATCH)
@@ -438,6 +440,8 @@ public class HighlandsBiomeBuilders {
 
     public static Biome frozenLakesBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeArcticBiome(Optional.of(HighlandsPlacedFeatures.FROZEN_LAKES_TREES), new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
+                        .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.HOLYSTONE_ROCKS)
+                        .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.UNDERWATER_ARCTIC_HOLYSTONE_BOULDER)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.GRASS_FIELD)
                         .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HighlandsPlacedFeatures.FREEZE_TOP_LAYER_ARCTIC),
                 new MobSpawnSettings.Builder().creatureGenerationProbability(0.13F)
