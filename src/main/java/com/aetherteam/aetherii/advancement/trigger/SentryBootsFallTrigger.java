@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.Optional;
 
-public class SentryBootsFallTrigger extends SimpleCriterionTrigger<SentryBootsFallTrigger.Instance> {
+public class SentryBootsFallTrigger extends SimpleCriterionTrigger<SentryBootsFallTrigger.Instance> { //todo
     @Override
     public Codec<Instance> codec() {
         return Instance.CODEC;

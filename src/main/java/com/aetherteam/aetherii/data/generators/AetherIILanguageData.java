@@ -1543,8 +1543,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("craft_arkenium_forge", "Upgrades, People, Upgrades!");
         this.addAdvancement("charm", "Charmed, I'm sure");
         this.addAdvancement("slider", "Like a Bossaru!");
-        this.addAdvancement("hammer_loot", "The Power of Force");
-        this.addAdvancement("neptune_armor", "Aquaman");
+        this.addAdvancement("demolition_hammer_loot", "The Power of Force");
+        this.addAdvancement("kill_golem_with_demolition_hammer", "Impactful Revenge");
+        this.addAdvancement("neptune_armor_loot", "Aquaman");
         this.addAdvancement("sentry_boots_fall", "Vertigo");
 
         this.addAdvancementDesc("the_highlands", "It's not dead!");
@@ -1578,8 +1579,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("craft_arkenium_forge", "Craft an Arkenium Forge");
         this.addAdvancementDesc("charm", "Apply a Charm to a piece of equipment");
         this.addAdvancementDesc("slider", "Defeat the Slider");
-        this.addAdvancementDesc("hammer_loot", "Obtain the Hammer of Demolition from the Sentry Ruins");
-        this.addAdvancementDesc("neptune_armor", "Have a full set of Neptune armor in your inventory");
+        this.addAdvancementDesc("demolition_hammer_loot", "Obtain the Hammer of Demolition from the Sentry Ruins");
+        this.addAdvancementDesc("kill_golem_with_demolition_hammer", "Kill a Sentry Golem with Hammer of Demolition projectile");
+        this.addAdvancementDesc("neptune_armor_loot", "Have a full set of Neptune armor in your inventory");
         this.addAdvancementDesc("sentry_boots_fall", "Survive a critical fall with the help of Sentry Boots");
     }
 

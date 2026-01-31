@@ -10,7 +10,6 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIEntities;
 import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -24,11 +23,11 @@ import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -399,21 +398,35 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("kill_slider", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.SLIDER.get())))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "slider"));
 
-            AdvancementHolder hammerLoot = Advancement.Builder.advancement()
+            AdvancementHolder demolitionHammerLoot = Advancement.Builder.advancement()
                     .parent(slider)
                     .display(AetherIIItems.HAMMER_OF_DEMOLITION.get(),
-                            Component.translatable("advancement.aether_ii.hammer_loot"),
-                            Component.translatable("advancement.aether_ii.hammer_loot.desc"),
+                            Component.translatable("advancement.aether_ii.demolition_hammer_loot"),
+                            Component.translatable("advancement.aether_ii.demolition_hammer_loot.desc"),
                             null,
                             AdvancementType.GOAL, true, true, false)
-                    .addCriterion("hammer_loot", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.HAMMER_OF_DEMOLITION))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hammer_loot"));
+                    .addCriterion("demolition_hammer_loot", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.HAMMER_OF_DEMOLITION))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "demolition_hammer_loot"));
+
+            AdvancementHolder killGolemWithDemolitionHammer = Advancement.Builder.advancement()
+                    .parent(demolitionHammerLoot)
+                    .display(AetherIIItems.HAMMER_OF_DEMOLITION.get(),
+                            Component.translatable("advancement.aether_ii.kill_golem_with_demolition_hammer"),
+                            Component.translatable("advancement.aether_ii.kill_golem_with_demolition_hammer.desc"),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("killed_sentry_golem", KilledTrigger.TriggerInstance.playerKilledEntity(
+                                    EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.SENTRY_GOLEM.get()),
+                                    DamageSourcePredicate.Builder.damageType().direct(EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.DEMOLITION_PROJECTILE.get()))
+                            )
+                    )
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "kill_golem_with_demolition_hammer"));
 
             AdvancementHolder neptuneArmor = Advancement.Builder.advancement()
                     .parent(slider)
                     .display(AetherIIItems.NEPTUNE_CHESTPLATE.get(),
-                            Component.translatable("advancement.aether_ii.neptune_armor"),
-                            Component.translatable("advancement.aether_ii.neptune_armor.desc"),
+                            Component.translatable("advancement.aether_ii.neptune_armor_loot"),
+                            Component.translatable("advancement.aether_ii.neptune_armor_loot.desc"),
                             null,
                             AdvancementType.GOAL, true, true, false)
                     .addCriterion("neptune_helmet", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_HELMET.get()))
@@ -421,7 +434,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("neptune_leggings", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_LEGGINGS.get()))
                     .addCriterion("neptune_boots", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_BOOTS.get()))
                     .addCriterion("neptune_gloves", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_GLOVES.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "neptune_armor"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "neptune_armor_loot"));
 
             AdvancementHolder sentryBootsFall = Advancement.Builder.advancement()
                     .parent(slider)
