@@ -380,7 +380,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
 
             AdvancementHolder charm = Advancement.Builder.advancement()
                     .parent(craftArkeniumForge)
-                    .display(AetherIIItems.CHARM_OF_AGILITY_I.get(),
+                    .display(AetherIIItems.CHARM_OF_RESISTANCE_I.get(),
                             Component.translatable("advancement.aether_ii.charm"),
                             Component.translatable("advancement.aether_ii.charm.desc"),
                             null,

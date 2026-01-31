@@ -11,5 +11,6 @@ public class AetherIIAdvancementTriggers {
 
     public static final DeferredHolder<CriterionTrigger<?>, IncubationTrigger> INCUBATION_TRIGGER = TRIGGERS.register("incubation_trigger", IncubationTrigger::new);
     public static final DeferredHolder<CriterionTrigger<?>, OutpostCampfireTrigger> OUTPOST_CAMPFIRE_TRIGGER = TRIGGERS.register("outpost_campfire_trigger", OutpostCampfireTrigger::new);
+    public static final DeferredHolder<CriterionTrigger<?>, ForgingCharmTrigger> FORGING_CHARM_TRIGGER = TRIGGERS.register("forging_charm_trigger", ForgingCharmTrigger::new);
     public static final DeferredHolder<CriterionTrigger<?>, SentryBootsFallTrigger> SENTRY_BOOTS_FALL_TRIGGER = TRIGGERS.register("sentry_boots_fall_trigger", SentryBootsFallTrigger::new);
 }
