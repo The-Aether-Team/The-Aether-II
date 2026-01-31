@@ -431,8 +431,9 @@ public class AetherIIDensityFunctionBuilders {
 
         CubicSpline<C, I> lakeSpline = CubicSpline.builder(lakes)
                 .addPoint(0.15F, 1.0F)
-                .addPoint(0.3F, 1.5F)
-                .addPoint(0.325F, 3.0F)
+                .addPoint(0.3F, 1.35F)
+                .addPoint(0.325F, 1.75F)
+                .addPoint(0.345F, 2.25F)
                 .addPoint(0.35F, 5.0F)
                 .addPoint(0.4F, 25.0F)
                 .build();
