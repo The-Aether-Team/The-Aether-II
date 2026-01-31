@@ -184,7 +184,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("glint", hasNumberofItem(64, AetherIIItems.GLINT_COIN.get())) //todo: make count 100 and make glint slot work
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "glint"));
 
-            /*
+
             AdvancementHolder bestiary = Advancement.Builder.advancement()
                     .parent(outpostCampfire)
                     .display(AetherIIItems.GUIDEBOOK_PAGE.get(),
@@ -192,10 +192,10 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.bestiary.desc"),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("bestiary", PlayerPredicate .Builder.player().checkAdvancementDone(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "observe"), true))
+                    .addCriterion("glint", hasNumberofItem(64, AetherIIItems.GLINT_COIN.get())) //.addCriterion("bestiary", PlayerPredicate .Builder.player().checkAdvancementDone(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "observe"), true))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bestiary")); //todo
 
-             */
+
 
             AdvancementHolder cloudSkiff = Advancement.Builder.advancement()
                     .parent(blueAercloud)
@@ -377,6 +377,16 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("craft_arkenium_forge", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.ARKENIUM_FORGE.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "craft_arkenium_forge"));
+
+            AdvancementHolder charm = Advancement.Builder.advancement()
+                    .parent(craftArkeniumForge)
+                    .display(AetherIIItems.CHARM_OF_AGILITY_I.get(),
+                            Component.translatable("advancement.aether_ii.charm"),
+                            Component.translatable("advancement.aether_ii.charm.desc"),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("charm", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.CHARM_OF_RESISTANCE_I.get())) //todo
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm"));
 
             AdvancementHolder slider = Advancement.Builder.advancement()
                     .parent(gravititePlate)

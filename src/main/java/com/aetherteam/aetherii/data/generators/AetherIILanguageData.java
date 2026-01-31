@@ -1541,6 +1541,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("dart_shooter", "Pick Your Poison");
         this.addAdvancement("corrobonite_crystal", "Green Energy");
         this.addAdvancement("craft_arkenium_forge", "Upgrades, People, Upgrades!");
+        this.addAdvancement("charm", "Charmed, I'm sure");
         this.addAdvancement("slider", "Like a Bossaru!");
         this.addAdvancement("hammer_loot", "The Power of Force");
         this.addAdvancement("neptune_armor", "Aquaman");
@@ -1575,6 +1576,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("dart_shooter", "Craft a dart shooter and a dart cartridge");
         this.addAdvancementDesc("corrobonite_crystal", "Acquire Corrobonite by mining it with a Gravitite Pickaxe");
         this.addAdvancementDesc("craft_arkenium_forge", "Craft an Arkenium Forge");
+        this.addAdvancementDesc("charm", "Apply a Charm to a piece of equipment");
         this.addAdvancementDesc("slider", "Defeat the Slider");
         this.addAdvancementDesc("hammer_loot", "Obtain the Hammer of Demolition from the Sentry Ruins");
         this.addAdvancementDesc("neptune_armor", "Have a full set of Neptune armor in your inventory");
