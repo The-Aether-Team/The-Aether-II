@@ -297,7 +297,7 @@ public class HighlandsPlacedFeatures {
                 UNDERWATER_ARCTIC_HOLYSTONE_BOULDER,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.UNDERWATER_ARCTIC_HOLYSTONE_BOULDER),
                 new LakePlacementModifier(),
-                RarityFilter.onAverageOnceEvery(40),
+                RarityFilter.onAverageOnceEvery(60),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.BOULDER_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))),
                 RandomOffsetPlacement.vertical(UniformInt.of(0, 1)),
                 BiomeFilter.biome()

@@ -75,7 +75,8 @@ public class AetherIITags {
         public static final TagKey<Block> MAGNETIC_SHROOM_SURVIVES_ON = tag("arilum_survives_on");
         public static final TagKey<Block> GRASS_AND_DIRT_REPLACEABLE = tag("grass_and_dirt_replaceable");
         public static final TagKey<Block> COARSE_AETHER_DIRT_REPLACEABLE = tag("coarse_aether_dirt_replaceable");
-        public static final TagKey<Block> UNDERWATER_MOSS_REPLACEABLE = tag("underwater_moss_replaceable");
+        public static final TagKey<Block> BRYALINN_MOSS_REPLACEABLE = tag("bryalinn_moss_replaceable");
+        public static final TagKey<Block> SHAYELINN_MOSS_REPLACEABLE = tag("shayelinn_moss_replaceable");
         public static final TagKey<Block> ARCTIC_ICE_REPLACEABLE = tag("arctic_ice_replaceable");
         public static final TagKey<Block> GRASS_SNOW_REPLACEABLE = tag("grass_snow_replaceable");
         public static final TagKey<Block> QUICKSOIL_COAST_GENERATES_ON = tag("quicksoil_coast_generates_on");

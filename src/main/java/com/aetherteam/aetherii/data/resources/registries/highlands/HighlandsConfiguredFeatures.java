@@ -2065,10 +2065,10 @@ public class HighlandsConfiguredFeatures {
                 )
         );
         register(context, DISK_BRYALINN_MOSS, Feature.DISK, new DiskConfiguration(
-                RuleBasedBlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()), BlockPredicate.matchesTag(AetherIITags.Blocks.UNDERWATER_MOSS_REPLACEABLE), UniformInt.of(1, 2), 1
+                RuleBasedBlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()), BlockPredicate.matchesTag(AetherIITags.Blocks.BRYALINN_MOSS_REPLACEABLE), UniformInt.of(1, 2), 1
         ));
         register(context, DISK_SHAYELINN_MOSS, Feature.DISK, new DiskConfiguration(
-                RuleBasedBlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get()), BlockPredicate.matchesTag(AetherIITags.Blocks.UNDERWATER_MOSS_REPLACEABLE), UniformInt.of(1, 2), 1
+                RuleBasedBlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get()), BlockPredicate.matchesTag(AetherIITags.Blocks.SHAYELINN_MOSS_REPLACEABLE), UniformInt.of(1, 2), 1
         ));
 
         register(context, COAST_QUICKSOIL, AetherIIFeatures.COAST.get(), new CoastConfiguration(

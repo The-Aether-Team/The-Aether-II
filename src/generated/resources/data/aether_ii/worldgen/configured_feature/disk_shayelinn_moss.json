@@ -18,7 +18,7 @@
     },
     "target": {
       "type": "minecraft:matching_block_tag",
-      "tag": "aether_ii:underwater_moss_replaceable"
+      "tag": "aether_ii:shayelinn_moss_replaceable"
     }
   }
 }
