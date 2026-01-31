@@ -15,10 +15,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderGetter;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.advancements.AdvancementProvider;
@@ -31,6 +28,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -175,6 +173,17 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("outpost_campfire", OutpostCampfireTrigger.Instance.forItem(ItemPredicate.Builder.item().of(items, Blocks.AIR).build()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "outpost_campfire"));
+
+
+            AdvancementHolder glint = Advancement.Builder.advancement()
+                    .parent(outpostCampfire)
+                    .display(AetherIIItems.GLINT_COIN.get(),
+                            Component.translatable("advancement.aether_ii.glint"),
+                            Component.translatable("advancement.aether_ii.glint.desc"),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("glint", has100ofItem(AetherIIItems.GLINT_COIN.get()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "glint")); //todo
 
             AdvancementHolder cloudSkiff = Advancement.Builder.advancement()
                     .parent(blueAercloud)
@@ -410,6 +419,18 @@ public class AetherIIAdvancementData extends AdvancementProvider {
 
     public static Criterion<ItemUsedOnLocationTrigger.TriggerInstance> itemUsedOnBlockCheckAbove(LocationPredicate.Builder location, LocationPredicate.Builder above, ItemPredicate.Builder item) {
         return CriteriaTriggers.ITEM_USED_ON_BLOCK.createCriterion(itemUsedOnLocationCheckAbove(location, above, item));
+    }
+
+    public static Criterion<InventoryChangeTrigger.TriggerInstance> has100ofItem(ItemLike... items) {
+        ItemPredicate[] aitempredicate = new ItemPredicate[items.length];
+
+        for (int i = 0; i < items.length; i++) {
+            aitempredicate[i] = new ItemPredicate(
+                    Optional.of(HolderSet.direct(items[i].asItem().builtInRegistryHolder())), MinMaxBounds.Ints.atLeast(100), DataComponentMatchers.ANY
+            );
+        }
+
+        return InventoryChangeTrigger.TriggerInstance.hasItems(aitempredicate);
     }
 
     public static class BestiaryAdvancements implements AdvancementSubProvider {

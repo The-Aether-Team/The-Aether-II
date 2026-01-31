@@ -1526,6 +1526,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("antitoxin", "The Cure");
         this.addAdvancement("engraved_discs", "The Full Album");
         this.addAdvancement("outpost_campfire", "Community Hotspot");
+        this.addAdvancement("glint", "Who wants to be a Glintillionaire?");
         this.addAdvancement("ambrosium", "Enlightenment");
         this.addAdvancement("enchanted_aether_grass", "Golden Gardening");
         this.addAdvancement("zanite", "Exotic Hardware");
@@ -1558,6 +1559,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("antitoxin", "Craft an Antitoxin or Antivenom Vial to protect yourself against poison effects");
         this.addAdvancementDesc("engraved_discs", "Collect all Aether engraved discs");
         this.addAdvancementDesc("outpost_campfire", "Set your respawn point at an Outpost Campfire");
+        this.addAdvancementDesc("glint", "Earn at least 100 Glint Coins");
         this.addAdvancementDesc("ambrosium", "Obtain an Ambrosium Shard");
         this.addAdvancementDesc("enchanted_aether_grass", "Enchant an Aether Grass Block with an Ambrosium Shard to receive more drops from crops planted above");
         this.addAdvancementDesc("zanite", "Have a Zanite Gemstone in your inventory");
