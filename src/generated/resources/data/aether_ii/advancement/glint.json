@@ -19,6 +19,7 @@
     "description": {
       "translate": "advancement.aether_ii.glint.desc"
     },
+    "frame": "goal",
     "icon": {
       "count": 1,
       "id": "aether_ii:glint_coin"

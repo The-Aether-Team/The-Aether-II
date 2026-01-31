@@ -96,7 +96,7 @@
     "description": {
       "translate": "advancement.aether_ii.engraved_discs.desc"
     },
-    "frame": "goal",
+    "frame": "challenge",
     "hidden": true,
     "icon": {
       "count": 1,

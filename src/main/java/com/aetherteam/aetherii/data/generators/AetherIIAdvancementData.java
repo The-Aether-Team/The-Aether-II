@@ -142,7 +142,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.engraved_discs"),
                             Component.translatable("advancement.aether_ii.engraved_discs.desc"),
                             null,
-                            AdvancementType.GOAL, true, true, true)
+                            AdvancementType.CHALLENGE, true, true, true)
                     .addCriterion("aether_tune", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_AETHER_TUNE.get()))
                     .addCriterion("ascending_dawn", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN.get()))
                     .addCriterion("aerwhale", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_AERWHALE.get()))
@@ -180,7 +180,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.glint"),
                             Component.translatable("advancement.aether_ii.glint.desc"),
                             null,
-                            AdvancementType.TASK, true, true, false)
+                            AdvancementType.GOAL, true, true, false)
                     .addCriterion("glint", hasNumberofItem(64, AetherIIItems.GLINT_COIN.get())) //todo: make count 100 and make glint slot work
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "glint"));
 
@@ -264,7 +264,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.explore_aether"),
                             Component.translatable("advancement.aether_ii.explore_aether.desc"),
                             null,
-                            AdvancementType.GOAL, true, true, false)
+                            AdvancementType.CHALLENGE, true, true, false)
                     .addCriterion("flourishing_field", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.FLOURISHING_FIELD))))
                     .addCriterion("verdant_woods", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.VERDANT_WOODS))))
                     .addCriterion("shrouded_forest", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.SHROUDED_FOREST))))
@@ -404,7 +404,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.demolition_hammer_loot"),
                             Component.translatable("advancement.aether_ii.demolition_hammer_loot.desc"),
                             null,
-                            AdvancementType.GOAL, true, true, false)
+                            AdvancementType.TASK, true, true, false)
                     .addCriterion("demolition_hammer_loot", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.HAMMER_OF_DEMOLITION))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "demolition_hammer_loot"));
 

@@ -54,7 +54,7 @@
   },
   "display": {
     "description": {
-      "translate": "advancement.aether_ii.neptune_armor.desc"
+      "translate": "advancement.aether_ii.neptune_armor_loot.desc"
     },
     "frame": "goal",
     "icon": {
@@ -62,7 +62,7 @@
       "id": "aether_ii:neptune_chestplate"
     },
     "title": {
-      "translate": "advancement.aether_ii.neptune_armor"
+      "translate": "advancement.aether_ii.neptune_armor_loot"
     }
   },
   "requirements": [
