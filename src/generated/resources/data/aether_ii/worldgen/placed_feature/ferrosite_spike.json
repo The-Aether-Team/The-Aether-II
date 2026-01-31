@@ -34,6 +34,10 @@
       "heightmap": "OCEAN_FLOOR"
     },
     {
+      "type": "aether_ii:structure_blacklist_filter",
+      "tag": "aether_ii:ferrosite_spike_blacklist_filter"
+    },
+    {
       "type": "minecraft:biome"
     }
   ]

@@ -850,6 +850,7 @@ public class HighlandsPlacedFeatures {
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(256)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON)),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                new StructureBlacklistFilter(AetherIITags.Structures.FERROSITE_SPIKE_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
         register(context, COASTAL_ARCTIC_ICE_SPIKE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ARCTIC_ICE_SPIKE),
