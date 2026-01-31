@@ -6,7 +6,7 @@
         "items": [
           {
             "count": {
-              "min": 100
+              "min": 64
             },
             "items": "aether_ii:glint_coin"
           }
