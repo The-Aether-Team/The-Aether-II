@@ -506,7 +506,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
      */
     @Override
     public int getMaxFallDistance() {
-        return this.onGround() || this.fallDistance < 5 ? 5 : 14;
+        return this.onGround() || this.fallDistance < 5 ? 3 : 14;
     }
 
     @Override
