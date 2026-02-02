@@ -70,6 +70,7 @@
     "client.accessor.ItemRendererAccessor",
     "client.accessor.LevelRendererAccessor",
     "client.accessor.MouseHandlerAccessor",
+    "client.accessor.MusicManagerAccessor",
     "client.accessor.OverlayRecipeComponentAccessor",
     "client.accessor.ParticleAccessor",
     "client.accessor.ParticleEngineAccessor",
