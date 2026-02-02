@@ -19,7 +19,6 @@
     "common.PointedDripstoneBlockMixin",
     "common.ProjectileWeaponItemMixin",
     "common.RandomStateMixin",
-    "common.ServerChunkCacheMixin",
     "common.ServerGamePacketListenerImplMixin",
     "common.ServerLevelMixin",
     "common.ServerPlayerMixin",
