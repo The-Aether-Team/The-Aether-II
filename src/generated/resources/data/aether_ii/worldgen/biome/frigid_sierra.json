@@ -1,6 +1,5 @@
 {
   "carvers": "aether_ii:highlands_cave",
-  "creature_spawn_probability": 0.07,
   "downfall": 0.9,
   "effects": {
     "fog_color": 15986943,
@@ -122,12 +121,6 @@
     ],
     "aether_ii:aether_cave_monster": [
       {
-        "type": "aether_ii:skephid",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 2
-      },
-      {
         "type": "aether_ii:arkenium_taluton",
         "maxCount": 1,
         "minCount": 1,
@@ -140,7 +133,65 @@
         "weight": 1
       }
     ],
-    "aether_ii:aether_creature": [
+    "aether_ii:aether_darkness_monster": [
+      {
+        "type": "aether_ii:skephid",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 2
+      },
+      {
+        "type": "aether_ii:blue_swet",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 2
+      },
+      {
+        "type": "aether_ii:golden_swet",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:cockatrice",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      }
+    ],
+    "aether_ii:aether_dungeon_monster": [],
+    "aether_ii:aether_moa": [],
+    "aether_ii:aether_sky_monster": [
+      {
+        "type": "aether_ii:zephyr",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:tempest",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
+    "aether_ii:aether_surface_monster": [
+      {
+        "type": "aether_ii:aechor_plant",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:carrion_sprout",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
+    "ambient": [],
+    "axolotls": [],
+    "creature": [
       {
         "type": "aether_ii:arctic_taegore",
         "maxCount": 3,
@@ -184,59 +235,6 @@
         "weight": 8
       }
     ],
-    "aether_ii:aether_darkness_monster": [
-      {
-        "type": "aether_ii:blue_swet",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 2
-      },
-      {
-        "type": "aether_ii:golden_swet",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
-        "type": "aether_ii:cockatrice",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 3
-      }
-    ],
-    "aether_ii:aether_dungeon_monster": [],
-    "aether_ii:aether_moa": [],
-    "aether_ii:aether_sky_monster": [
-      {
-        "type": "aether_ii:zephyr",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
-        "type": "aether_ii:tempest",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      }
-    ],
-    "aether_ii:aether_surface_monster": [
-      {
-        "type": "aether_ii:aechor_plant",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
-        "type": "aether_ii:carrion_sprout",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      }
-    ],
-    "ambient": [],
-    "axolotls": [],
-    "creature": [],
     "misc": [],
     "monster": [],
     "underground_water_creature": [],
