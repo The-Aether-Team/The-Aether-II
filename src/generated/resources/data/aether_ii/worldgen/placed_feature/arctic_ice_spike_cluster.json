@@ -36,6 +36,10 @@
       "heightmap": "OCEAN_FLOOR"
     },
     {
+      "type": "aether_ii:structure_blacklist_filter",
+      "tag": "aether_ii:arctic_ice_spike_blacklist_filter"
+    },
+    {
       "type": "minecraft:biome"
     }
   ]

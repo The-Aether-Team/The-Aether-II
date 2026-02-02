@@ -1,6 +1,6 @@
 {
   "carvers": "aether_ii:highlands_cave",
-  "creature_spawn_probability": 0.2,
+  "creature_spawn_probability": 0.23,
   "downfall": 0.3,
   "effects": {
     "fog_color": 15593205,
@@ -74,6 +74,9 @@
       "aether_ii:highlands_flower_patch",
       "aether_ii:magnetic_flower_patch",
       "aether_ii:blueberry_bush_patch",
+      "aether_ii:short_arilum",
+      "aether_ii:arilum",
+      "aether_ii:blooming_arilum",
       "aether_ii:magnetic_shroom_patch",
       "aether_ii:magnetic_scar_trees"
     ],
