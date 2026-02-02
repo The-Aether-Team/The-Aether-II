@@ -1486,6 +1486,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIItems.ENCHANTED_BLUEBERRY)
                 .unlockedBy("has_feed", has(AetherIIItems.MOA_FEED))
                 .save(this.output);
+        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ENCHANTED_MOA_FEED, AetherIIItems.BLUEBERRY_MOA_FEED, 1, 0.0F).save(this.output, this.name("enchanted_moa_feed_enchanting"));
 
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.TOOLS, AetherIIItems.BEAST_PELT_BUNDLE)
                 .define('-', AetherIIItems.CLOUDTWINE)
