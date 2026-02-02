@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "aether_ii:golden_amber",
+    "F": "aether_ii:ferrosite"
+  },
+  "pattern": [
+    " AF",
+    "A F",
+    " AF"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:music_player"
+  }
+}

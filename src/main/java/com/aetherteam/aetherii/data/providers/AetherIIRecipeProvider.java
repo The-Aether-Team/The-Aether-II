@@ -7,10 +7,11 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.BuildupContents;
 import com.aetherteam.aetherii.item.equipment.weapons.AmberDartsItem;
+import com.aetherteam.aetherii.recipe.builder.AlkahestPurificationRecipeBuilder;
 import com.aetherteam.aetherii.recipe.builder.AltarEnchantingRecipeBuilder;
 import com.aetherteam.aetherii.recipe.builder.BiomeParameterRecipeBuilder;
-import com.aetherteam.aetherii.recipe.builder.AlkahestPurificationRecipeBuilder;
 import com.aetherteam.aetherii.recipe.recipes.block.*;
+import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
 import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
 import com.aetherteam.nitrogen.recipe.BlockPropertyPair;
 import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
@@ -23,7 +24,6 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.*;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.item.Item;
@@ -332,11 +332,11 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, AlkahestCorrosionRecipe::new);
     }
 
-    protected void alkahestPurification(RecipeCategory recipeCategory, WeightedList<ItemStack> results, ItemLike ingredient, WeightedList<ItemStack> byproducts, int alkahestUsage, RecipeOutput consumer) {
+    protected void alkahestPurification(RecipeCategory recipeCategory, AlkahestPurificationRecipe.BaseEntry results, ItemLike ingredient, AlkahestPurificationRecipe.BaseEntry byproducts, int alkahestUsage, RecipeOutput consumer) {
         AlkahestPurificationRecipeBuilder.recipe(Ingredient.of(ingredient), recipeCategory, results, byproducts, 0.0F, alkahestUsage, 200).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, this.name("purify_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath()));
     }
 
-    protected void alkahestPurification(RecipeCategory recipeCategory, WeightedList<ItemStack> results, ItemLike ingredient, WeightedList<ItemStack> byproducts, int alkahestUsage, String group, RecipeOutput consumer) {
+    protected void alkahestPurification(RecipeCategory recipeCategory, AlkahestPurificationRecipe.BaseEntry results, ItemLike ingredient, AlkahestPurificationRecipe.BaseEntry byproducts, int alkahestUsage, String group, RecipeOutput consumer) {
         AlkahestPurificationRecipeBuilder.recipe(Ingredient.of(ingredient), recipeCategory, results, byproducts, 0.0F, alkahestUsage, 200).group(group).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, this.name("purify_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath()));
     }
 
@@ -348,11 +348,11 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, IrradiationRecipe::new);
     }
 
-    protected WeightedList<ItemStack> byproducts(ItemLike item, int max) {
-        WeightedList.Builder<ItemStack> builder = WeightedList.builder();
+    protected AlkahestPurificationRecipe.BaseEntry byproducts(ItemLike item, int max) {
+        WeightedList.Builder<AlkahestPurificationRecipe.BaseEntry> builder = WeightedList.builder();
         for (int i = 1; i <= max; i++) {
-            builder.add(new ItemStack(item, i), (max + 1) - i);
+            builder.add(new AlkahestPurificationRecipe.ItemEntry(new ItemStack(item, i)), (max + 1) - i);
         }
-        return builder.build();
+        return new AlkahestPurificationRecipe.ListEntry(builder.build());
     }
 }

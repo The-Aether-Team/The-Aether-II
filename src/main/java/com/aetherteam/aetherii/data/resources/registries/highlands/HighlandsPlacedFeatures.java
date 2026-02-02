@@ -41,6 +41,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MOSSY_HOLYSTONE_BOULDER_TUNDRA = createKey("mossy_holystone_boulder_tundra");
     public static final ResourceKey<PlacedFeature> UNDERWATER_MOSSY_HOLYSTONE_BOULDER = createKey("underwater_mossy_holystone_boulder");
     public static final ResourceKey<PlacedFeature> ICESTONE_BOULDER = createKey("icestone_boulder");
+    public static final ResourceKey<PlacedFeature> UNDERWATER_ARCTIC_HOLYSTONE_BOULDER = createKey("underwater_arctic_holystone_boulder");
     public static final ResourceKey<PlacedFeature> FALLEN_SKYROOT_LOG = createKey("fallen_skyroot_log");
     public static final ResourceKey<PlacedFeature> FALLEN_WISPROOT_LOG = createKey("fallen_wisproot_log");
     public static final ResourceKey<PlacedFeature> MOA_NEST = createKey("moa_nest");
@@ -288,6 +289,16 @@ public class HighlandsPlacedFeatures {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 new ElevationFilter(VerticalAnchor.aboveBottom(192), VerticalAnchor.top()),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.BOULDER_SURVIVES_ON))),
+                RandomOffsetPlacement.vertical(UniformInt.of(0, 1)),
+                BiomeFilter.biome()
+        );
+        register(
+                context,
+                UNDERWATER_ARCTIC_HOLYSTONE_BOULDER,
+                configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.UNDERWATER_ARCTIC_HOLYSTONE_BOULDER),
+                new LakePlacementModifier(),
+                RarityFilter.onAverageOnceEvery(60),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.BOULDER_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))),
                 RandomOffsetPlacement.vertical(UniformInt.of(0, 1)),
                 BiomeFilter.biome()
         );
@@ -673,6 +684,7 @@ public class HighlandsPlacedFeatures {
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().east(6), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().south(6), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().west(6), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
+                new StructureBlacklistFilter(AetherIITags.Structures.ALKAHEST_POOL_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
         register(context, ALKAHEST_POOL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ALKAHEST_POOL),
@@ -686,7 +698,7 @@ public class HighlandsPlacedFeatures {
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().east(3), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().south(3), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().west(3), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
-                new StructureBlacklistFilter(AetherIITags.Structures.ACID_POOL_BLACKLIST_FILTER),
+                new StructureBlacklistFilter(AetherIITags.Structures.ALKAHEST_POOL_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
 
@@ -726,6 +738,7 @@ public class HighlandsPlacedFeatures {
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.UP, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 4)),
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 4)),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
+                new StructureBlacklistFilter(AetherIITags.Structures.ALKAHEST_POOL_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
         register(context, ORE_HESTVEIL_BURIED, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_HESTVEIL_BURIED),
@@ -733,6 +746,7 @@ public class HighlandsPlacedFeatures {
                 InSquarePlacement.spread(),
                 HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(-96), VerticalAnchor.aboveBottom(128))),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
+                new StructureBlacklistFilter(AetherIITags.Structures.ALKAHEST_POOL_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
     }
@@ -765,18 +779,21 @@ public class HighlandsPlacedFeatures {
                 CountPlacement.of(6),
                 HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(156)),
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
+                new StructureBlacklistFilter(AetherIITags.Structures.COAST_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
         register(context, COAST_QUICKSOIL_SPARSE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COAST_QUICKSOIL),
                 CountPlacement.of(2),
                 HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(156)),
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
+                new StructureBlacklistFilter(AetherIITags.Structures.COAST_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
         register(context, COAST_FERROSITE_SAND, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COAST_FERROSITE_SAND),
                 CountPlacement.of(4),
                 HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(156)),
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
+                new StructureBlacklistFilter(AetherIITags.Structures.COAST_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
         register(context, COAST_FERROSITE_PILLAR, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COAST_FERROSITE_PILLAR),
@@ -789,6 +806,7 @@ public class HighlandsPlacedFeatures {
                 CountPlacement.of(3),
                 HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(144)),
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
+                new StructureBlacklistFilter(AetherIITags.Structures.COAST_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
 
@@ -832,6 +850,7 @@ public class HighlandsPlacedFeatures {
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(256)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON)),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                new StructureBlacklistFilter(AetherIITags.Structures.FERROSITE_SPIKE_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
         register(context, COASTAL_ARCTIC_ICE_SPIKE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ARCTIC_ICE_SPIKE),
@@ -839,6 +858,7 @@ public class HighlandsPlacedFeatures {
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(136)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON)),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                new StructureBlacklistFilter(AetherIITags.Structures.ARCTIC_ICE_SPIKE_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
         register(context, ARCTIC_ICE_SPIKE_CLUSTER, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ARCTIC_ICE_SPIKE_VARIANTS),
@@ -846,6 +866,7 @@ public class HighlandsPlacedFeatures {
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(128), VerticalAnchor.absolute(224)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON)),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                new StructureBlacklistFilter(AetherIITags.Structures.ARCTIC_ICE_SPIKE_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
 
@@ -875,61 +896,75 @@ public class HighlandsPlacedFeatures {
         register(context, HIGH_STORM_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(288), VerticalAnchor.aboveBottom(320)),
                 RarityFilter.onAverageOnceEvery(1024),
+                new StructureBlacklistFilter(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER),
                 BiomeFilter.biome());
         register(context, HIGH_GREEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREEN_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(256), VerticalAnchor.aboveBottom(304)),
                 RarityFilter.onAverageOnceEvery(512),
+                new StructureBlacklistFilter(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER),
                 BiomeFilter.biome());
         register(context, HIGH_PURPLE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(256), VerticalAnchor.aboveBottom(304)),
                 RarityFilter.onAverageOnceEvery(512),
+                new StructureBlacklistFilter(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER),
                 BiomeFilter.biome());
 
         register(context, MIDDLE_COLD_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COLD_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(208), VerticalAnchor.aboveBottom(256)),
                 RarityFilter.onAverageOnceEvery(48),
+                new StructureBlacklistFilter(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER),
                 BiomeFilter.biome());
         register(context, MIDDLE_STORM_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(208), VerticalAnchor.aboveBottom(256)),
                 RarityFilter.onAverageOnceEvery(768),
+                new StructureBlacklistFilter(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER),
                 BiomeFilter.biome());
 
         register(context, SURFACE_COLD_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COLD_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
                 RarityFilter.onAverageOnceEvery(36),
+                new StructureBlacklistFilter(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER),
                 BiomeFilter.biome());
         register(context, SURFACE_GOLDEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GOLDEN_AERCLOUD),
                 HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
                 RarityFilter.onAverageOnceEvery(384),
+                new StructureBlacklistFilter(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER),
                 BiomeFilter.biome());
         register(context, SURFACE_BLUE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLUE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
                 RarityFilter.onAverageOnceEvery(128),
+                new StructureBlacklistFilter(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER),
                 BiomeFilter.biome());
         register(context, SURFACE_GREEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREEN_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
                 RarityFilter.onAverageOnceEvery(196),
+                new StructureBlacklistFilter(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER),
                 BiomeFilter.biome());
         register(context, SURFACE_PURPLE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
                 RarityFilter.onAverageOnceEvery(156),
+                new StructureBlacklistFilter(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER),
                 BiomeFilter.biome());
 
         register(context, LOWER_STORM_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(64), VerticalAnchor.aboveBottom(96)),
                 RarityFilter.onAverageOnceEvery(64),
+                new StructureBlacklistFilter(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER),
                 BiomeFilter.biome());
         register(context, LOWER_BLUE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLUE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96)),
                 RarityFilter.onAverageOnceEvery(128),
+                new StructureBlacklistFilter(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER),
                 BiomeFilter.biome());
         register(context, LOWER_GREEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREEN_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96)),
                 RarityFilter.onAverageOnceEvery(128),
+                new StructureBlacklistFilter(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER),
                 BiomeFilter.biome());
         register(context, LOWER_PURPLE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96)),
                 RarityFilter.onAverageOnceEvery(128),
+                new StructureBlacklistFilter(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER),
                 BiomeFilter.biome());
     }
 

@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.data.resources.registries.*;
 import com.aetherteam.aetherii.data.resources.registries.pools.AetherIIPools;
 import net.minecraft.core.HolderLookup;
@@ -29,13 +30,13 @@ public class AetherIIRegistrySets extends DatapackBuiltinEntriesProvider {
             .add(Registries.PROCESSOR_LIST, AetherIIProcessorLists::bootstrap)
             .add(Registries.DAMAGE_TYPE, AetherIIDamageTypes::bootstrap)
             .add(Registries.JUKEBOX_SONG, AetherIIJukeboxSongs::bootstrap)
-            .add(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, AetherIIBestiaryEntries::bootstrap)
-            .add(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY, AetherIIEffectsEntries::bootstrap)
-            .add(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY, AetherIIExplorationEntries::bootstrap)
-            .add(AetherIIStyleDesigns.STYLE_DESIGN_REGISTRY_KEY, AetherIIStyleDesigns::bootstrap)
-            .add(AetherIIStyleMaterials.STYLE_MATERIAL_REGISTRY_KEY, AetherIIStyleMaterials::bootstrap)
-            .add(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY, AetherIISkyrootLizardVariants::bootstrap)
-            .add(AetherIIRewardWrappers.REWARD_WRAPPER_REGISTRY_KEY, AetherIIRewardWrappers::bootstrap);
+            .add(AetherIIRegistries.BESTIARY_ENTRY, AetherIIBestiaryEntries::bootstrap)
+            .add(AetherIIRegistries.EFFECTS_ENTRY, AetherIIEffectsEntries::bootstrap)
+            .add(AetherIIRegistries.EXPLORATION_ENTRY, AetherIIExplorationEntries::bootstrap)
+            .add(AetherIIRegistries.STYLE_DESIGN, AetherIIStyleDesigns::bootstrap)
+            .add(AetherIIRegistries.STYLE_MATERIAL, AetherIIStyleMaterials::bootstrap)
+            .add(AetherIIRegistries.SKYROOT_LIZARD_VARIANT, AetherIISkyrootLizardVariants::bootstrap)
+            .add(AetherIIRegistries.REWARD_WRAPPER, AetherIIRewardWrappers::bootstrap);
 
     public AetherIIRegistrySets(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Collections.singleton(AetherII.MODID));

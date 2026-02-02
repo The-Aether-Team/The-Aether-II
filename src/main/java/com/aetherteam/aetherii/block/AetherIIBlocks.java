@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.block;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -13,16 +14,20 @@ import com.aetherteam.aetherii.block.dungeon.*;
 import com.aetherteam.aetherii.block.furniture.OutpostCampfireBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.miscellaneous.MoaEggBlock;
+import com.aetherteam.aetherii.block.miscellaneous.PlayerPressurePlateBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.portal.AetherPortalBlock;
 import com.aetherteam.aetherii.block.utility.*;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
+import com.aetherteam.aetherii.blockentity.MuralSection;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundTypes;
 import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsConfiguredFeatures;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.materials.RockItem;
+import com.aetherteam.aetherii.item.miscellaneous.CopyBlockItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.FireBlockAccessor;
 import com.aetherteam.aetherii.world.tree.AetherIITreeGrowers;
 import com.google.common.collect.ImmutableMap;
@@ -316,7 +321,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     // Ground Decoration
     public static final DeferredBlock<Block> SKYROOT_TWIG = register("skyroot_twig", TwigBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).noOcclusion().noCollission().instabreak().sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> HOLYSTONE_ROCK = register("holystone_rock", RockBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).noOcclusion().noCollission().instabreak().sound(SoundType.STONE).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> HOLYSTONE_ROCK = register("holystone_rock", RockBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).noOcclusion().noCollission().instabreak().sound(SoundType.STONE).pushReaction(PushReaction.DESTROY), RockItem::new);
 
     // Skyroot Planks
     public static final DeferredBlock<Block> SKYROOT_PLANKS = register("skyroot_planks", () -> Block.Properties.ofFullCopy(Blocks.OAK_PLANKS));
@@ -449,8 +454,36 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<StairBlock> UNDERSHALE_BRICK_STAIRS = register("undershale_brick_stairs", (properties) -> new StairBlock(UNDERSHALE_BRICKS.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()));
     public static final DeferredBlock<SlabBlock> UNDERSHALE_BRICK_SLAB = register("undershale_brick_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()));
     public static final DeferredBlock<WallBlock> UNDERSHALE_BRICK_WALL = register("undershale_brick_wall", WallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()).forceSolidOn());
+    public static final DeferredBlock<ButtonBlock> UNDERSHALE_BRICK_BUTTON = register("undershale_brick_button", (properties) -> new ButtonBlock(BlockSetType.STONE, 20, properties), () -> Block.Properties.ofFullCopy(Blocks.STONE_BUTTON).sound(SoundType.DEEPSLATE));
+    public static final DeferredBlock<PlayerPressurePlateBlock> UNDERSHALE_BRICK_PRESSURE_PLATE = register("undershale_brick_pressure_plate", (properties) -> new PlayerPressurePlateBlock(BlockSetType.STONE, properties), () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.DEEPSLATE).forceSolidOn().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().strength(0.5F));
 
-    //Ichorite
+    // Undershale Decorative Blocks
+    public static final DeferredBlock<Block> UNDERSHALE_FLAGSTONES = register("undershale_flagstones", () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));
+    public static final DeferredBlock<Block> UNDERSHALE_TILE = register("undershale_tile", () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));
+    public static final DeferredBlock<Block> UNDERSHALE_BASE_BRICKS = register("undershale_base_bricks", () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));
+    public static final DeferredBlock<Block> UNDERSHALE_CAPSTONE_BRICKS = register("undershale_capstone_bricks", () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> UNDERSHALE_BASE_PILLAR = register("undershale_base_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> UNDERSHALE_CAPSTONE_PILLAR = register("undershale_capstone_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> UNDERSHALE_PILLAR = register("undershale_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(UNDERSHALE_BRICKS.get()));
+
+    // Sentry Bricks
+    public static final DeferredBlock<Block> SENTRY_BRICKS = register("sentry_bricks", SentryBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE).requiresCorrectToolForDrops().isRedstoneConductor(AetherIIBlockBuilders::never).lightLevel(AetherIIBlockBuilders::lightLevel6));
+    public static final DeferredBlock<StairBlock> SENTRY_BRICK_STAIRS = register("sentry_brick_stairs", (properties) -> new SentryStairBlock(SENTRY_BRICKS.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.SENTRY_BRICKS.get()));
+    public static final DeferredBlock<SlabBlock> SENTRY_BRICK_SLAB = register("sentry_brick_slab", SentrySlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.SENTRY_BRICKS.get()));
+    public static final DeferredBlock<WallBlock> SENTRY_BRICK_WALL = register("sentry_brick_wall", SentryWallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.SENTRY_BRICKS.get()).forceSolidOn());
+    public static final DeferredBlock<ButtonBlock> SENTRY_BUTTON = register("sentry_button", (properties) -> new ButtonBlock(BlockSetType.STONE, 20, properties), () -> Block.Properties.ofFullCopy(Blocks.STONE_BUTTON).sound(SoundType.DEEPSLATE));
+
+    // Sentry Decorative Blocks
+    public static final DeferredBlock<Block> SENTRY_LIGHTSTONE = register("sentry_lightstone", SentryBlock::new, () -> Block.Properties.ofFullCopy(SENTRY_BRICKS.get()).lightLevel(AetherIIBlockBuilders::lightLevel11));
+    public static final DeferredBlock<Block> SENTRY_FLAGSTONES = register("sentry_flagstones", SentryBlock::new, () -> Block.Properties.ofFullCopy(SENTRY_BRICKS.get()));
+    public static final DeferredBlock<Block> SENTRY_TILE = register("sentry_tile", SentryBlock::new, () -> Block.Properties.ofFullCopy(SENTRY_BRICKS.get()));
+    public static final DeferredBlock<Block> SENTRY_BASE_BRICKS = register("sentry_base_bricks", SentryBlock::new, () -> Block.Properties.ofFullCopy(SENTRY_BRICKS.get()));
+    public static final DeferredBlock<Block> SENTRY_CAPSTONE_BRICKS = register("sentry_capstone_bricks", SentryBlock::new, () -> Block.Properties.ofFullCopy(SENTRY_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> SENTRY_BASE_PILLAR = register("sentry_base_pillar", SentryFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(SENTRY_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> SENTRY_CAPSTONE_PILLAR = register("sentry_capstone_pillar", SentryFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(SENTRY_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> SENTRY_PILLAR = register("sentry_pillar", SentryFacingPillarBlock::new, () -> Block.Properties.ofFullCopy(SENTRY_BRICKS.get()));
+
+    // Ichorite
     public static final DeferredBlock<StairBlock> ICHORITE_STAIRS = register("ichorite_stairs", (properties) -> new StairBlock(ICHORITE.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE.get()));
     public static final DeferredBlock<SlabBlock> ICHORITE_SLAB = register("ichorite_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE.get()).strength(2.0F, 6.0F));
     public static final DeferredBlock<WallBlock> ICHORITE_WALL = register("ichorite_wall", WallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE.get()).forceSolidOn());
@@ -565,20 +598,12 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<RotatedPillarBlock> GUARDIAN_WOOD = register("guardian_wood", RotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.WOOD));
     public static final DeferredBlock<RotatedPillarBlock> STRIPPED_GUARDIAN_LOG = register("stripped_guardian_log", RotatedPillarBlock::new, logProperties(MapColor.WOOD, MapColor.WOOD));
     public static final DeferredBlock<RotatedPillarBlock> STRIPPED_GUARDIAN_WOOD = register("stripped_guardian_wood", RotatedPillarBlock::new, logProperties(MapColor.WOOD, MapColor.WOOD));
-    public static final DeferredBlock<RotatedPillarBlock> DENSE_GUARDIAN_LOG = register("dense_guardian_log", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_LOG.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<RotatedPillarBlock> DENSE_GUARDIAN_WOOD = register("dense_guardian_wood", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_WOOD.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<RotatedPillarBlock> DENSE_STRIPPED_GUARDIAN_LOG = register("dense_stripped_guardian_log", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(STRIPPED_GUARDIAN_LOG.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<RotatedPillarBlock> DENSE_STRIPPED_GUARDIAN_WOOD = register("dense_stripped_guardian_wood", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(STRIPPED_GUARDIAN_WOOD.get()).strength(-1.0F, 3600000.0F).noLootTable());
 
     // Infected Wood
     public static final DeferredBlock<RotatedPillarBlock> INFECTED_LOG = register("infected_log", RotatedPillarBlock::new, logProperties(MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.SAND));
     public static final DeferredBlock<RotatedPillarBlock> INFECTED_WOOD = register("infected_wood", RotatedPillarBlock::new, logProperties(MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.SAND));
     public static final DeferredBlock<RotatedPillarBlock> STRIPPED_INFECTED_LOG = register("stripped_infected_log", RotatedPillarBlock::new, logProperties(MapColor.SAND, MapColor.SAND));
     public static final DeferredBlock<RotatedPillarBlock> STRIPPED_INFECTED_WOOD = register("stripped_infected_wood", RotatedPillarBlock::new, logProperties(MapColor.SAND, MapColor.SAND));
-    public static final DeferredBlock<RotatedPillarBlock> DENSE_INFECTED_LOG = register("dense_infected_log", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_LOG.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<RotatedPillarBlock> DENSE_INFECTED_WOOD = register("dense_infected_wood", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_WOOD.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<RotatedPillarBlock> DENSE_STRIPPED_INFECTED_LOG = register("dense_stripped_infected_log", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(STRIPPED_INFECTED_LOG.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<RotatedPillarBlock> DENSE_STRIPPED_INFECTED_WOOD = register("dense_stripped_infected_wood", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(STRIPPED_INFECTED_WOOD.get()).strength(-1.0F, 3600000.0F).noLootTable());
 
     // Guardian Slabs
     public static final DeferredBlock<SlabBlock> GUARDIAN_LOG_SLAB = register("guardian_log_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.GUARDIAN_LOG.get()).mapColor(MapColor.WOOD));
@@ -590,16 +615,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<SlabBlock> STRIPPED_INFECTED_LOG_SLAB = register("stripped_infected_log_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get()).mapColor(MapColor.SAND));
     public static final DeferredBlock<SlabBlock> STRIPPED_INFECTED_WOOD_SLAB = register("stripped_infected_wood_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get()).mapColor(MapColor.SAND));
 
-   // Dense Guardian Slabs
-    public static final DeferredBlock<SlabBlock> DENSE_GUARDIAN_LOG_SLAB = register("dense_guardian_log_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_GUARDIAN_LOG.get()).mapColor(MapColor.WOOD));
-    public static final DeferredBlock<SlabBlock> DENSE_GUARDIAN_WOOD_SLAB = register("dense_guardian_wood_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get()).mapColor(MapColor.COLOR_BROWN));
-    public static final DeferredBlock<SlabBlock> DENSE_STRIPPED_GUARDIAN_LOG_SLAB = register("dense_stripped_guardian_log_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_LOG.get()).mapColor(MapColor.WOOD));
-    public static final DeferredBlock<SlabBlock> DENSE_STRIPPED_GUARDIAN_WOOD_SLAB = register("dense_stripped_guardian_wood_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_WOOD.get()).mapColor(MapColor.WOOD));
-    public static final DeferredBlock<SlabBlock> DENSE_INFECTED_LOG_SLAB = register("dense_infected_log_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_GUARDIAN_LOG.get()).mapColor(MapColor.SAND));
-    public static final DeferredBlock<SlabBlock> DENSE_INFECTED_WOOD_SLAB = register("dense_infected_wood_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get()).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY));
-    public static final DeferredBlock<SlabBlock> DENSE_STRIPPED_INFECTED_LOG_SLAB = register("dense_stripped_infected_log_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_LOG.get()).mapColor(MapColor.SAND));
-    public static final DeferredBlock<SlabBlock> DENSE_STRIPPED_INFECTED_WOOD_SLAB = register("dense_stripped_infected_wood_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_STRIPPED_GUARDIAN_WOOD.get()).mapColor(MapColor.SAND));
-
     // Guardian Trunks
     public static final DeferredBlock<TrunkBlock> GUARDIAN_TRUNK = register("guardian_trunk", TrunkBlock::new, trunkProperties(MapColor.COLOR_BROWN));
     public static final DeferredBlock<TrunkBlock> STRIPPED_GUARDIAN_TRUNK = register("stripped_guardian_trunk", TrunkBlock::new, trunkProperties(MapColor.WOOD));
@@ -609,13 +624,11 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     // Guardian Root Blocks
     public static final DeferredBlock<Block> GUARDIAN_ROOTS = register("guardian_roots", Block::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.ROOTS).ignitedByLava());
     public static final DeferredBlock<Block> UNSTABLE_GUARDIAN_ROOTS = register("unstable_guardian_roots", UnstableBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.ROOTS).ignitedByLava());
-    public static final DeferredBlock<Block> DENSE_GUARDIAN_ROOTS = register("dense_guardian_roots", () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()).strength(-1.0F, 3600000.0F).noLootTable());
     public static final DeferredBlock<Block> LUCENT_GUARDIAN_ROOTS = register("lucent_guardian_roots", Block::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()).lightLevel((state) -> 7));
     public static final DeferredBlock<Block> GUARDIAN_LAMP = register("guardian_lamp", Block::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()).lightLevel((state) -> 10));
 
     // Undergrowth Blocks
     public static final DeferredBlock<Block> UNDERGROWTH_LEAVES = register("undergrowth_leaves", () -> Block.Properties.of().strength(0.2F).mapColor(MapColor.TERRACOTTA_LIGHT_GREEN).sound(SoundType.AZALEA_LEAVES).noOcclusion().isSuffocating(AetherIIBlockBuilders::never).isViewBlocking(AetherIIBlockBuilders::never).isRedstoneConductor(AetherIIBlockBuilders::never).pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> DENSE_UNDERGROWTH_LEAVES = register("dense_undergrowth_leaves", () -> Block.Properties.ofFullCopy(UNDERGROWTH_LEAVES.get()).strength(-1.0F, 3600000.0F).noLootTable());
     public static final DeferredBlock<Block> UNDERGROWTH_VINES = register("undergrowth_vines", BottomedVineBlock::new, () -> Block.Properties.ofFullCopy(Blocks.VINE).mapColor(MapColor.TERRACOTTA_LIGHT_GREEN));
     public static final DeferredBlock<Block> HANGING_UNDERGROWTH = register("hanging_undergrowth", HangingUndergrowthBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_LIGHT_GREEN).randomTicks().noCollission().instabreak().sound(SoundType.CAVE_VINES).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<Block> HANGING_UNDERGROWTH_PLANT = registerWithoutItem("hanging_undergrowth_plant", HangingUndergrowthPlantBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.HANGING_UNDERGROWTH.get()));
@@ -624,9 +637,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> ROTSHROOM_BLOCK = register("rotshroom_block", Block::new, () -> Block.Properties.of().mapColor(MapColor.DIRT).instrument(NoteBlockInstrument.BASS).strength(0.2F).sound(SoundType.WOOD));
     public static final DeferredBlock<SlabBlock> ROTSHROOM_SLAB = register("rotshroom_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ROTSHROOM_BLOCK.get()).mapColor(MapColor.WOOD));
     public static final DeferredBlock<RotatedPillarBlock> ROTSHROOM_STEM = register("rotshroom_stem", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ROTSHROOM_BLOCK.get()).mapColor(MapColor.WOOL));
-    public static final DeferredBlock<Block> DENSE_ROTSHROOM_BLOCK = register("dense_rotshroom_block", Block::new, () -> Block.Properties.ofFullCopy(ROTSHROOM_BLOCK.get()).strength(-1.0F, 3600000.0F).noLootTable());
-    public static final DeferredBlock<SlabBlock> DENSE_ROTSHROOM_SLAB = register("dense_rotshroom_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.DENSE_ROTSHROOM_BLOCK.get()));
-    public static final DeferredBlock<RotatedPillarBlock> DENSE_ROTSHROOM_STEM = register("dense_rotshroom_stem", RotatedPillarBlock::new, () -> Block.Properties.ofFullCopy(ROTSHROOM_STEM.get()).strength(-1.0F, 3600000.0F).noLootTable());
     public static final DeferredBlock<Block> SHELF_ROTSHROOM_SLAB = register("shelf_rotshroom_slab", LargeShelfRotshroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.DIRT).instrument(NoteBlockInstrument.BASS).strength(0.2F).sound(SoundType.WOOD).ignitedByLava());
     public static final DeferredBlock<Block> ROTSHROOM = register("rotshroom", RotshroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.DIRT).noCollission().noOcclusion().randomTicks().instabreak().offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<FlowerPotBlock> POTTED_ROTSHROOM = registerWithoutItem("potted_rotshroom", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ROTSHROOM, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
@@ -711,7 +721,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
 
     // Utility
-    public static final DeferredBlock<Block> AMBROSIUM_TORCH = register("ambrosium_torch", AmbrosiumTorchBlock::new, () -> Block.Properties.ofFullCopy(Blocks.TORCH));
+    public static final DeferredBlock<Block> AMBROSIUM_TORCH = register("ambrosium_torch", AmbrosiumTorchBlock::new, () -> Block.Properties.ofFullCopy(Blocks.TORCH), torchItem(() -> AetherIIBlocks.AMBROSIUM_WALL_TORCH));
     public static final DeferredBlock<Block> AMBROSIUM_WALL_TORCH = registerWithoutItem("ambrosium_wall_torch", AmbrosiumWallTorchBlock::new, () -> Block.Properties.ofFullCopy(Blocks.WALL_TORCH));
     public static final DeferredBlock<Block> ARKENIUM_LANTERN = register("arkenium_lantern", ArkeniumLanternBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LANTERN));
     public static final DeferredBlock<Block> RUSTIC_ARKENIUM_LANTERN = register("rustic_arkenium_lantern", RusticArkeniumLanternBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LANTERN));
@@ -745,22 +755,39 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<BedBlock> RED_SKYROOT_BED = register("red_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.RED, properties), () -> Block.Properties.ofFullCopy(Blocks.RED_BED));
     public static final DeferredBlock<BedBlock> BLACK_SKYROOT_BED = register("black_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.BLACK, properties), () -> Block.Properties.ofFullCopy(Blocks.BLACK_BED));
 
-    public static final DeferredBlock<StandingSignBlock> SKYROOT_SIGN = register("skyroot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.SKYROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
-    public static final DeferredBlock<WallSignBlock> SKYROOT_WALL_SIGN = registerWithoutItem("skyroot_wall_sign", (properties) -> new WallSignBlock(AetherIIWoodTypes.SKYROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
-    public static final DeferredBlock<CeilingHangingSignBlock> SKYROOT_HANGING_SIGN = register("skyroot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.SKYROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
-    public static final DeferredBlock<WallHangingSignBlock> SKYROOT_WALL_HANGING_SIGN = registerWithoutItem("skyroot_wall_hanging_sign", (properties) -> new WallHangingSignBlock(AetherIIWoodTypes.SKYROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
+    private static Block.Properties skyrootSignProperties() { return Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD); }
+    public static final DeferredBlock<StandingSignBlock> SKYROOT_SIGN = register("skyroot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.SKYROOT, properties), AetherIIBlocks::skyrootSignProperties, signItem(() -> AetherIIBlocks.SKYROOT_WALL_SIGN));
+    public static final DeferredBlock<WallSignBlock> SKYROOT_WALL_SIGN = registerWithoutItem("skyroot_wall_sign", (properties) -> new WallSignBlock(AetherIIWoodTypes.SKYROOT, properties), AetherIIBlocks::skyrootSignProperties);
 
-    public static final DeferredBlock<StandingSignBlock> GREATROOT_SIGN = register("greatroot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.GREATROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
-    public static final DeferredBlock<WallSignBlock> GREATROOT_WALL_SIGN = registerWithoutItem("greatroot_wall_sign", (properties) -> new WallSignBlock(AetherIIWoodTypes.GREATROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
-    public static final DeferredBlock<CeilingHangingSignBlock> GREATROOT_HANGING_SIGN = register("greatroot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.GREATROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
-    public static final DeferredBlock<WallHangingSignBlock> GREATROOT_WALL_HANGING_SIGN = registerWithoutItem("greatroot_wall_hanging_sign", (properties) -> new WallHangingSignBlock(AetherIIWoodTypes.GREATROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
+    private static Block.Properties skyrootHangingSignProperties() { return Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava(); }
+    public static final DeferredBlock<CeilingHangingSignBlock> SKYROOT_HANGING_SIGN = register("skyroot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.SKYROOT, properties), AetherIIBlocks::skyrootHangingSignProperties, hangingSignItem(() -> AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN));
+    public static final DeferredBlock<WallHangingSignBlock> SKYROOT_WALL_HANGING_SIGN = registerWithoutItem("skyroot_wall_hanging_sign", (properties) -> new WallHangingSignBlock(AetherIIWoodTypes.SKYROOT, properties), AetherIIBlocks::skyrootHangingSignProperties);
 
-    public static final DeferredBlock<StandingSignBlock> WISPROOT_SIGN = register("wisproot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.WISPROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
-    public static final DeferredBlock<WallSignBlock> WISPROOT_WALL_SIGN = registerWithoutItem("wisproot_wall_sign", (properties) -> new WallSignBlock(AetherIIWoodTypes.WISPROOT, properties), () -> Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
-    public static final DeferredBlock<CeilingHangingSignBlock> WISPROOT_HANGING_SIGN = register("wisproot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.WISPROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
-    public static final DeferredBlock<WallHangingSignBlock> WISPROOT_WALL_HANGING_SIGN = registerWithoutItem("wisproot_wall_hanging_sign", (properties) -> new WallHangingSignBlock(AetherIIWoodTypes.WISPROOT, properties), () -> Block.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
+    private static Block.Properties greatrootSignProperties() { return skyrootSignProperties(); }
+    public static final DeferredBlock<StandingSignBlock> GREATROOT_SIGN = register("greatroot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.GREATROOT, properties), AetherIIBlocks::greatrootSignProperties, signItem(() -> AetherIIBlocks.GREATROOT_WALL_SIGN));
+    public static final DeferredBlock<WallSignBlock> GREATROOT_WALL_SIGN = registerWithoutItem("greatroot_wall_sign", (properties) -> new WallSignBlock(AetherIIWoodTypes.GREATROOT, properties), AetherIIBlocks::greatrootSignProperties);
+
+    private static Block.Properties greatrootHangingSignProperties() { return skyrootHangingSignProperties(); }
+    public static final DeferredBlock<CeilingHangingSignBlock> GREATROOT_HANGING_SIGN = register("greatroot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.GREATROOT, properties), AetherIIBlocks::greatrootHangingSignProperties, hangingSignItem(() -> AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN));
+    public static final DeferredBlock<WallHangingSignBlock> GREATROOT_WALL_HANGING_SIGN = registerWithoutItem("greatroot_wall_hanging_sign", (properties) -> new WallHangingSignBlock(AetherIIWoodTypes.GREATROOT, properties), AetherIIBlocks::greatrootHangingSignProperties);
+
+    private static Block.Properties wisprootSignProperties() { return skyrootSignProperties(); }
+    public static final DeferredBlock<StandingSignBlock> WISPROOT_SIGN = register("wisproot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.WISPROOT, properties), AetherIIBlocks::wisprootSignProperties, signItem(() -> AetherIIBlocks.WISPROOT_WALL_SIGN));
+    public static final DeferredBlock<WallSignBlock> WISPROOT_WALL_SIGN = registerWithoutItem("wisproot_wall_sign", (properties) -> new WallSignBlock(AetherIIWoodTypes.WISPROOT, properties), AetherIIBlocks::wisprootSignProperties);
+
+    private static Block.Properties wisprootHangingSignProperties() { return skyrootHangingSignProperties(); }
+    public static final DeferredBlock<CeilingHangingSignBlock> WISPROOT_HANGING_SIGN = register("wisproot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.WISPROOT, properties), AetherIIBlocks::wisprootHangingSignProperties, hangingSignItem(() -> AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN));
+    public static final DeferredBlock<WallHangingSignBlock> WISPROOT_WALL_HANGING_SIGN = registerWithoutItem("wisproot_wall_hanging_sign", (properties) -> new WallHangingSignBlock(AetherIIWoodTypes.WISPROOT, properties), AetherIIBlocks::wisprootHangingSignProperties);
 
     public static final DeferredBlock<Block> HOLYSTONE_LEVER = register("holystone_lever", LeverBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LEVER));
+
+    public static final DeferredBlock<Block> SENTRY_CRATE = register("sentry_crate", SentryCrateBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F).sound(SoundType.STONE).lightLevel((state) -> 4).requiresCorrectToolForDrops());
+    public static final DeferredBlock<Block> SENTRY_SPAWNER = register("sentry_spawner", SentrySpawnerBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(5.0F).sound(SoundType.STONE).lightLevel(AetherIIBlockBuilders::lightLevel6));
+    public static final DeferredBlock<Block> SENTRY_TRAP = register("sentry_trap", SentryTrapBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(5.0F).sound(SoundType.STONE).lightLevel(AetherIIBlockBuilders::lightLevel6));
+
+    public static final DeferredBlock<Block> LOCKED_BLOCK = register("locked_block", LockedBlock::new, () -> BlockBehaviour.Properties.of().strength(-1.0F, 3600000.8F).noLootTable().dynamicShape().isValidSpawn(Blocks::always).pushReaction(PushReaction.BLOCK), CopyBlockItem::new);
+    public static final DeferredBlock<Block> BOSS_DOORWAY_BLOCK = register("boss_doorway_block", BossDoorwayBlock::new, () -> BlockBehaviour.Properties.of().strength(-1.0F, 3600000.8F).noLootTable().dynamicShape().isValidSpawn(Blocks::always).pushReaction(PushReaction.BLOCK), CopyBlockItem::new);
+    public static final DeferredBlock<Block> TREASURE_DOORWAY_BLOCK = register("treasure_doorway_block", TreasureDoorwayBlock::new, () -> BlockBehaviour.Properties.of().strength(-1.0F, 3600000.8F).noLootTable().dynamicShape().isValidSpawn(Blocks::always).pushReaction(PushReaction.BLOCK), CopyBlockItem::new);
 
     // Moa Egg
     public static final DeferredBlock<Block> MOA_EGG = registerWithoutItem("moa_egg", MoaEggBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BLUE).strength(0.5F).sound(SoundType.METAL).noOcclusion());
@@ -773,35 +800,54 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     // Furniture
     public static final DeferredBlock<OutpostCampfireBlock> OUTPOST_CAMPFIRE = register("outpost_campfire", OutpostCampfireBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(15.0F, 1200.0F).noOcclusion().pushReaction(PushReaction.BLOCK));
+    public static final DeferredBlock<Block> MURAL = register("mural", MuralBlock::new, () -> Block.Properties.ofFullCopy(Blocks.STONE), (block, properties) -> new BlockItem(block, properties.component(AetherIIDataComponents.MURAL_SECTION, MuralSection.DEFAULT)));
 
-    private static <T extends Block> DeferredBlock<Block> registerWithoutItem(String name, Supplier<Block.Properties> properties) {
+    private static DeferredBlock<Block> registerWithoutItem(String name, Supplier<Block.Properties> properties) {
         return registerWithoutItem(name, Block::new, properties);
     }
 
     private static <T extends Block> DeferredBlock<T> registerWithoutItem(String name, Function<Block.Properties, T> builder, Supplier<Block.Properties> properties) {
-        return registerWithoutItem(name, createKey(name), builder, properties);
-    }
-
-    private static <T extends Block> DeferredBlock<T> registerWithoutItem(String name, ResourceKey<Block> key, Function<Block.Properties, T> builder, Supplier<Block.Properties> properties) {
+        var key = ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
         return BLOCKS.register(name, () -> builder.apply(properties.get().setId(key)));
     }
 
-    private static <T extends Block> DeferredBlock<Block> register(String name, Supplier<Block.Properties> properties) {
+    private static DeferredBlock<Block> register(String name, Supplier<Block.Properties> properties) {
         return register(name, Block::new, properties);
     }
 
     private static <T extends Block> DeferredBlock<T> register(String name, Function<Block.Properties, T> builder, Supplier<Block.Properties> properties) {
-        return register(name, createKey(name), builder, properties);
+        return register(name, builder, properties, BlockItem::new);
     }
 
-    private static <T extends Block> DeferredBlock<T> register(String name, ResourceKey<Block> key, Function<Block.Properties, T> builder, Supplier<Block.Properties> properties) {
-        return baseRegister(name, key, builder, properties, (deferredBlock) -> registerBlockItem(deferredBlock, name));
+    private static <T extends Block> DeferredBlock<T> register(String name, Function<Block.Properties, T> builder, Supplier<Block.Properties> properties, BiFunction<? super T, Item.Properties, ? extends Item> itemCreator) {
+        var key = ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        DeferredBlock<T> block = BLOCKS.register(name, () -> builder.apply(properties.get().setId(key)));
+        AetherIIItems.ITEMS.register(name, id -> itemCreator.apply(
+            block.get(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name)))
+                .useBlockDescriptionPrefix()
+        ));
+        return block;
     }
 
-    private static <T extends Block> DeferredBlock<T> baseRegister(String name, ResourceKey<Block> key, Function<Block.Properties, T> builder, Supplier<Block.Properties> properties, Function<DeferredBlock<T>, Supplier<? extends Item>> item) {
-        DeferredBlock<T> registered = BLOCKS.register(name, () -> builder.apply(properties.get().setId(key)));
-        AetherIIItems.ITEMS.register(name, item.apply(registered));
-        return registered;
+    private static BiFunction<Block, Item.Properties, StandingAndWallBlockItem> torchItem(Supplier<? extends DeferredBlock<?>> wallTorch) {
+        return standingAndWallBlockItem(wallTorch, Direction.DOWN);
+    }
+
+    private static BiFunction<Block, Item.Properties, StandingAndWallBlockItem> standingAndWallBlockItem(Supplier<? extends DeferredBlock<?>> wallBlock, Direction attachmentDirection) {
+        Objects.requireNonNull(wallBlock);
+        return (standingBlock, properties) -> new StandingAndWallBlockItem(standingBlock, Objects.requireNonNull(wallBlock.get().get()), attachmentDirection, properties);
+    }
+
+    private static BiFunction<StandingSignBlock, Item.Properties, SignItem> signItem(Supplier<? extends DeferredBlock<? extends WallSignBlock>> wallSignBlock) {
+        Objects.requireNonNull(wallSignBlock);
+        return (standingSignBlock, properties) -> new SignItem(standingSignBlock, Objects.requireNonNull(wallSignBlock.get().get()), properties.stacksTo(16));
+    }
+
+    private static BiFunction<CeilingHangingSignBlock, Item.Properties, HangingSignItem> hangingSignItem(Supplier<? extends DeferredBlock<? extends WallHangingSignBlock>> wallHangingSignBlock) {
+        Objects.requireNonNull(wallHangingSignBlock);
+        return (ceilingHangingSignBlock, properties) -> new HangingSignItem(ceilingHangingSignBlock, Objects.requireNonNull(wallHangingSignBlock.get().get()), properties.stacksTo(16));
     }
 
     private static <T extends Block> Supplier<BlockItem> registerBlockItem(final DeferredBlock<T> deferredBlock, String name) {

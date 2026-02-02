@@ -1,6 +1,16 @@
 {
   "sources": [
     {
+      "type": "single",
+      "resource": "aether_ii:entity/mural/mural_base",
+      "sprite": "aether_ii:block/mural_top"
+    },
+    {
+      "type": "single",
+      "resource": "aether_ii:entity/mural/mural_side",
+      "sprite": "aether_ii:block/mural_side"
+    },
+    {
       "type": "directory",
       "source": "fluid",
       "prefix": "fluid/"
@@ -65,6 +75,42 @@
       }
     },
     {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:item/tool_charm_runes"
+      ],
+      "palette_key": "aether_ii:item/color_palettes/charm_runes/base_palette",
+      "permutations": {
+        "efficiency": "aether_ii:item/color_palettes/charm_runes/efficiency"
+      }
+    },
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:item/weapon_charm_runes"
+      ],
+      "palette_key": "aether_ii:item/color_palettes/charm_runes/base_palette",
+      "permutations": {
+        "damage": "aether_ii:item/color_palettes/charm_runes/damage",
+        "dexterity": "aether_ii:item/color_palettes/charm_runes/dexterity",
+        "knockback": "aether_ii:item/color_palettes/charm_runes/knockback"
+      }
+    },
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:item/armor_charm_runes"
+      ],
+      "palette_key": "aether_ii:item/color_palettes/charm_runes/base_palette",
+      "permutations": {
+        "health": "aether_ii:item/color_palettes/charm_runes/health",
+        "defense": "aether_ii:item/color_palettes/charm_runes/defense",
+        "toughness": "aether_ii:item/color_palettes/charm_runes/toughness",
+        "resistance": "aether_ii:item/color_palettes/charm_runes/resistance",
+        "agility": "aether_ii:item/color_palettes/charm_runes/agility"
+      }
+    },
+    {
       "type": "aether_ii:subtractive",
       "textures": [
         "aether_ii:block/skyroot_leaves",
@@ -105,6 +151,30 @@
         "shayelinn": "aether_ii:block/shayelinn_overlay",
         "ambrelinn": "aether_ii:block/ambrelinn_overlay"
       }
+    },
+    {
+      "type": "aether_ii:squares",
+      "textures": [
+        "aether_ii:entity/mural/test_mural"
+      ],
+      "width": 2,
+      "height": 2
+    },
+    {
+      "type": "aether_ii:squares",
+      "textures": [
+        "aether_ii:entity/mural/large_test_mural"
+      ],
+      "width": 3,
+      "height": 2
+    },
+    {
+      "type": "aether_ii:squares",
+      "textures": [
+        "aether_ii:entity/mural/giant_test_mural"
+      ],
+      "width": 4,
+      "height": 4
     }
   ]
 }

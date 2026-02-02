@@ -3,9 +3,7 @@ package com.aetherteam.aetherii.item.components;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIExplorationEntries;
+import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -32,26 +30,26 @@ public record GuidebookEntryData(ResourceLocation registry, String name, List<St
             GuidebookEntryData::new);
 
     public static GuidebookEntryData bestiary(ResourceKey<BestiaryEntry> name) {
-        return new GuidebookEntryData(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY.location(), name.location().toString(), List.of());
+        return new GuidebookEntryData(AetherIIRegistries.BESTIARY_ENTRY.location(), name.location().toString(), List.of());
     }
 
     public static GuidebookEntryData bestiary(ResourceKey<BestiaryEntry> name, String... values) {
-        return new GuidebookEntryData(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY.location(), name.location().toString(), List.of(values));
+        return new GuidebookEntryData(AetherIIRegistries.BESTIARY_ENTRY.location(), name.location().toString(), List.of(values));
     }
 
     public static GuidebookEntryData effects(ResourceKey<EffectsEntry> name) {
-        return new GuidebookEntryData(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY.location(), name.location().toString(), List.of());
+        return new GuidebookEntryData(AetherIIRegistries.EFFECTS_ENTRY.location(), name.location().toString(), List.of());
     }
 
     public static GuidebookEntryData effects(ResourceKey<EffectsEntry> name, String... values) {
-        return new GuidebookEntryData(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY.location(), name.location().toString(), List.of(values));
+        return new GuidebookEntryData(AetherIIRegistries.EFFECTS_ENTRY.location(), name.location().toString(), List.of(values));
     }
 
     public static GuidebookEntryData exploration(ResourceKey<ExplorationEntry> name) {
-        return new GuidebookEntryData(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY.location(), name.location().toString(), List.of());
+        return new GuidebookEntryData(AetherIIRegistries.EXPLORATION_ENTRY.location(), name.location().toString(), List.of());
     }
 
     public static GuidebookEntryData exploration(ResourceKey<ExplorationEntry> name, String... values) {
-        return new GuidebookEntryData(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY.location(), name.location().toString(), List.of(values));
+        return new GuidebookEntryData(AetherIIRegistries.EXPLORATION_ENTRY.location(), name.location().toString(), List.of(values));
     }
 }

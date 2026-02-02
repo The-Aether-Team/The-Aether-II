@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "aether_ii:block/sentry_lightstone_off"
+    },
+    "lit=true": {
+      "model": "aether_ii:block/sentry_lightstone"
+    }
+  }
+}

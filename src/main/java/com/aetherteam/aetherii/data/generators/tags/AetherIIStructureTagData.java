@@ -17,17 +17,21 @@ public class AetherIIStructureTagData extends StructureTagsProvider {
     @SuppressWarnings("unchecked")
     @Override
     public void addTags(HolderLookup.Provider provider) {
-        this.tag(AetherIITags.Structures.TREE_BLACKLIST_FILTER).add(
-                AetherIIStructures.CAMP_HIGHFIELDS,
-                AetherIIStructures.CAMP_MAGNETIC,
-                AetherIIStructures.CAMP_ARCTIC
-        );
-        this.tag(AetherIITags.Structures.ACID_POOL_BLACKLIST_FILTER).add(AetherIIStructures.INFECTED_GUARDIAN_TREE);
-
         this.tag(AetherIITags.Structures.CAMPS).add(
                 AetherIIStructures.CAMP_HIGHFIELDS,
                 AetherIIStructures.CAMP_MAGNETIC,
                 AetherIIStructures.CAMP_ARCTIC
         );
+        this.tag(AetherIITags.Structures.DUNGEONS).add(
+                AetherIIStructures.SENTRY_RUINS,
+                AetherIIStructures.INFECTED_GUARDIAN_TREE
+        );
+
+        this.tag(AetherIITags.Structures.TREE_BLACKLIST_FILTER).addTag(AetherIITags.Structures.CAMPS);
+        this.tag(AetherIITags.Structures.ALKAHEST_POOL_BLACKLIST_FILTER).addTag(AetherIITags.Structures.DUNGEONS);
+        this.tag(AetherIITags.Structures.COAST_BLACKLIST_FILTER).add(AetherIIStructures.SENTRY_RUINS);
+        this.tag(AetherIITags.Structures.FERROSITE_SPIKE_BLACKLIST_FILTER).addTag(AetherIITags.Structures.CAMPS);
+        this.tag(AetherIITags.Structures.ARCTIC_ICE_SPIKE_BLACKLIST_FILTER).addTag(AetherIITags.Structures.CAMPS);
+        this.tag(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER).addTag(AetherIITags.Structures.DUNGEONS);
     }
 }

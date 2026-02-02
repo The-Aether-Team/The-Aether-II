@@ -1,11 +1,8 @@
 package com.aetherteam.aetherii.data.generators.tags;
 
-import java.util.concurrent.CompletableFuture;
-
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
-
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -13,6 +10,8 @@ import net.minecraft.data.tags.KeyTagProvider;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
+
+import java.util.concurrent.CompletableFuture;
 
 public class AetherIIDamageTypeTagData extends KeyTagProvider<DamageType> {
     public AetherIIDamageTypeTagData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
@@ -35,7 +34,8 @@ public class AetherIIDamageTypeTagData extends KeyTagProvider<DamageType> {
                 AetherIIDamageTypes.TOXIN,
                 AetherIIDamageTypes.VENOM,
                 AetherIIDamageTypes.IMMOLATION,
-                AetherIIDamageTypes.ALKAHEST);
+                AetherIIDamageTypes.ALKAHEST,
+                AetherIIDamageTypes.CARRION_SPROUT);
         this.tag(DamageTypeTags.BYPASSES_ARMOR).add(
                 AetherIIDamageTypes.WOUND,
                 AetherIIDamageTypes.FRACTURE,

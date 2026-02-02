@@ -8,5 +8,6 @@ public class AetherIISpriteSourceTypes {
     public static void registerSpriteSourceTypes(RegisterSpriteSourcesEvent event) {
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "additive"), Additive.CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "subtractive"), Subtractive.CODEC);
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "squares"), Squares.CODEC);
     }
 }

@@ -1,26 +1,15 @@
 package com.aetherteam.aetherii.client.renderer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
+import com.aetherteam.aetherii.client.renderer.accessory.AccessoryLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
-import com.aetherteam.aetherii.client.renderer.block.model.blockstate.BreakingFixModel;
-import com.aetherteam.aetherii.client.renderer.block.model.blockstate.TrunkModel;
+import com.aetherteam.aetherii.client.renderer.block.model.blockstate.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.*;
-import com.aetherteam.aetherii.client.renderer.block.model.blockstate.AmbientOcclusionLightModel;
-import com.aetherteam.aetherii.client.renderer.block.model.blockstate.FastModel;
-import com.aetherteam.aetherii.client.renderer.blockentity.AlkahestPurifierRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.ArkeniumForgeRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.MoaEggRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
+import com.aetherteam.aetherii.client.renderer.blockentity.model.*;
 import com.aetherteam.aetherii.client.renderer.entity.*;
 import com.aetherteam.aetherii.client.renderer.entity.layers.ProjectilesStuckLayer;
 import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLatchLayer;
@@ -28,14 +17,10 @@ import com.aetherteam.aetherii.client.renderer.entity.model.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.ArcticBurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.ArcticKirridBabyModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.ArcticKirridModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.HighfieldsKirridBabyModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.HighfieldsKirridModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.MagneticKirridBabyModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.MagneticKirridModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
+import com.aetherteam.aetherii.client.renderer.item.model.*;
 import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
 import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
 import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
@@ -43,10 +28,11 @@ import com.aetherteam.aetherii.client.renderer.item.model.SkyrootBedSpecialRende
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Moa;
-
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.blockentity.CampfireRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -65,6 +51,10 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class AetherIIRenderers {
     public static final ContextKey<Boolean> RIDING_SKIFF_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "riding_skiff"));
     public static final ContextKey<Float> SKIFF_STEERING_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skiff_steering"));
@@ -74,8 +64,9 @@ public class AetherIIRenderers {
 
     public static void registerAddLayer(EntityRenderersEvent.AddLayers event) {
         event.getSkins().forEach(model -> {
-            if (event.getSkin(model) instanceof LivingEntityRenderer<?, ?, ?> livingEntityRenderer) {
+            if (event.getSkin(model) instanceof LivingEntityRenderer livingEntityRenderer) {
                 registerLivingEntityLayers(event.getContext(), livingEntityRenderer);
+                livingEntityRenderer.addLayer(new AccessoryLayer(livingEntityRenderer));
                 if (livingEntityRenderer instanceof PlayerRenderer playerRenderer) {
                     playerRenderer.addLayer(new ProjectilesStuckLayer<>(playerRenderer, event.getContext()));
                 }
@@ -120,6 +111,9 @@ public class AetherIIRenderers {
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ARKENIUM_FORGE.get(), ArkeniumForgeRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ALKAHEST_PURIFIER.get(), AlkahestPurifierRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.AMBROSIUM_CAMPFIRE.get(), CampfireRenderer::new);
+        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SENTRY_CRATE.get(), SentryCrateRenderer::new);
+        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SENTRY_SPAWNER.get(), SentrySpawnerRenderer::new);
+
 
         // Entities
         // Passive
@@ -151,6 +145,10 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.SKEPHID.get(), SkephidRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), ArkeniumTalutonRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), GravititeTalutonRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.MIMIC.get(), MimicRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.DETONATION_SENTRY.get(), DetonationSentryRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.SENTRY_GOLEM.get(), SentryGolemRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.SLIDER.get(), SliderRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), BladeshroomHunterRenderer::new);
 
         // NPCs
@@ -170,6 +168,8 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.SKEPHID_WEBBING_BALL.get(), SkephidWebbingBallRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.GRAVITITE_DEBRIS_SHOT.get(), GravititeDebrisShotRenderer::new);
 
+        event.registerEntityRenderer(AetherIIEntityTypes.DEMOLITION_PROJECTILE.get(), DemolitionProjectileRenderer::new);
+
         // Blocks
         event.registerEntityRenderer(AetherIIEntityTypes.HOVERING_BLOCK.get(), HoveringBlockRenderer::new);
 
@@ -186,6 +186,11 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_BED_HEAD, SkyrootBedRenderer::createHeadLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA_EGG, MoaEggModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.ALKAHEST_PURIFIER, AlkahestPurifierModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SENTRY_CRATE, SentryCrateModel::createSingleBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SENTRY_SPAWNER, SentrySpawnerModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SENTRY_SPAWNER_PISTON, SentrySpawnerPistonModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.DOUBLE_SENTRY_CRATE_RIGHT, SentryCrateModel::createDoubleBodyRightLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.DOUBLE_SENTRY_CRATE_LEFT, SentryCrateModel::createDoubleBodyLeftLayer);
 
         // Entities
         // Passive
@@ -231,11 +236,15 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.SKEPHID, SkephidModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.ARKENIUM_TALUTON, ArkeniumTalutonModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_TALUTON, GravititeTalutonModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.DETONATION_SENTRY, DetonationSentryModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.MIMIC, MimicModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SENTRY_GOLEM, SentryGolemModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SLIDER, SliderModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.BLADESHROOM_HUNTER, BladeshroomHunterModel::createBodyLayer);
 
         // Projectiles
         event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_DEBRIS_SHOT, GravititeDebrisShotModel::createBodyLayer);
-
+        event.registerLayerDefinition(AetherIIModelLayers.DEMOLITION_PROJECTILE, DemolitionProjectileModel::createBodyLayer);
         // NPCs
         event.registerLayerDefinition(AetherIIModelLayers.EDWARD, EdwardModel::createBodyLayer);
 
@@ -243,15 +252,19 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.CLOUD_SKIFF, CloudSkiffModel::createLayer);
 
         // Accessories
-        // Handwear
         event.registerLayerDefinition(AetherIIModelLayers.GLOVES, () -> GlovesModel.createLayer(new CubeDeformation(0.6F), false));
         event.registerLayerDefinition(AetherIIModelLayers.GLOVES_SLIM, () -> GlovesModel.createLayer(new CubeDeformation(0.6F), true));
         event.registerLayerDefinition(AetherIIModelLayers.GLOVES_FIRST_PERSON, () -> GlovesModel.createLayer(new CubeDeformation(0.25F), false));
         event.registerLayerDefinition(AetherIIModelLayers.GLOVES_SLIM_FIRST_PERSON, () -> GlovesModel.createLayer(new CubeDeformation(0.25F), true));
+
+        event.registerLayerDefinition(AetherIIModelLayers.ACCESSORY, () -> LayerDefinition.create(HumanoidModel.createMesh(new CubeDeformation(0.5F), 0.0F), 64, 32));
     }
 
     public static void registerItemModels(RegisterItemModelsEvent event) {
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "emissive"), EmissiveModel.Unbaked.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "shield"), ShieldModel.Unbaked.MAP_CODEC);
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "music_player_disc"), MusicPlayerDiscModel.Unbaked.MAP_CODEC);
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "mural"), MuralItemModel.Unbaked.MAP_CODEC);
     }
 
     public static void registerBlockStateModels(RegisterBlockStateModels event) {
@@ -296,6 +309,18 @@ public class AetherIIRenderers {
         List<DeferredBlock<? extends Block>> aoBlocks = List.of(
                 AetherIIBlocks.AMBROSIUM_ORE,
                 AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE,
+                AetherIIBlocks.SENTRY_BRICKS,
+                AetherIIBlocks.SENTRY_BRICK_STAIRS,
+                AetherIIBlocks.SENTRY_BRICK_SLAB,
+                AetherIIBlocks.SENTRY_BRICK_WALL,
+                AetherIIBlocks.SENTRY_LIGHTSTONE,
+                AetherIIBlocks.SENTRY_FLAGSTONES,
+                AetherIIBlocks.SENTRY_TILE,
+                AetherIIBlocks.SENTRY_BASE_BRICKS,
+                AetherIIBlocks.SENTRY_CAPSTONE_BRICKS,
+                AetherIIBlocks.SENTRY_BASE_PILLAR,
+                AetherIIBlocks.SENTRY_CAPSTONE_PILLAR,
+                AetherIIBlocks.SENTRY_PILLAR,
                 AetherIIBlocks.BLOOMING_ARILUM,
                 AetherIIBlocks.BLOOMING_ARILUM_PLANT,
                 AetherIIBlocks.SPOTTED_MAGNETIC_SHROOM_BLOCK,
@@ -304,10 +329,16 @@ public class AetherIIRenderers {
         List<DeferredBlock<? extends Block>> breakingFixBlocks = List.of(
                 AetherIIBlocks.AETHER_GRASS_BLOCK,
                 AetherIIBlocks.MOA_EGG);
+        List<DeferredBlock<? extends Block>> copyBlocks = List.of(
+                AetherIIBlocks.LOCKED_BLOCK,
+                AetherIIBlocks.BOSS_DOORWAY_BLOCK,
+                AetherIIBlocks.TREASURE_DOORWAY_BLOCK);
 
         getModels(event.getBakingResult().blockStateModels(), fastBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new FastModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), breakingFixBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new BreakingFixModel(entry.getValue())));
+        getModels(event.getBakingResult().blockStateModels(), List.of(AetherIIBlocks.MURAL)).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new MuralModel(entry.getValue())));
+        getModels(event.getBakingResult().blockStateModels(), copyBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new CopyBlockModel(entry.getValue())));
     }
 
     private static List<Map.Entry<BlockState, BlockStateModel>> getModels(Map<BlockState, BlockStateModel> originalModels, List<DeferredBlock<? extends Block>> blocks) {
@@ -325,5 +356,8 @@ public class AetherIIRenderers {
     public static void registerSpecialModelRenderers(RegisterSpecialModelRendererEvent event) {
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot_bed"), SkyrootBedSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier"), AlkahestPurifierSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_crate"), SentryCrateSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner"), SentrySpawnerSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "copy_block"), CopyBlockSpecialRenderer.Unbaked.MAP_CODEC);
     }
 }

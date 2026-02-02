@@ -4,6 +4,8 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.event.hooks.BiomeHooks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
+import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.event.FreezeEvent;
 import com.aetherteam.aetherii.event.hooks.BlockHooks;
 import com.aetherteam.aetherii.event.hooks.PlayerHooks;
@@ -12,24 +14,26 @@ import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -44,6 +48,7 @@ import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.level.AlterGroundEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.neoforge.event.level.SleepFinishedTimeEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -76,7 +81,9 @@ public class AetherIIEventListeners {
 
         // Entity
         bus.addListener(AetherIIEventListeners::onEntityPostTick);
+        bus.addListener(AetherIIEventListeners::onEntitySpawn);
         bus.addListener(AetherIIEventListeners::onEntityTravelToDimension);
+        bus.addListener(AetherIIEventListeners::onEntityCauseExplosion);
         bus.addListener(AetherIIEventListeners::onProjectileImpact);
 
         // Living
@@ -87,6 +94,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onEffectRemove);
 
         // Block
+        bus.addListener(AetherIIEventListeners::onBreakBlock);
         bus.addListener(AetherIIEventListeners::onBlockUpdateNeighbor);
         bus.addListener(AetherIIEventListeners::onModifyBlock);
         bus.addListener(AetherIIEventListeners::onAlterGround);
@@ -109,6 +117,7 @@ public class AetherIIEventListeners {
         Player player = event.getEntity();
 
         player.getData(AetherIIDataAttachments.PLAYER).logout(player);
+        player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).logout(player);
     }
 
     public static void onPlayerJoinLevel(EntityJoinLevelEvent event) {
@@ -143,7 +152,6 @@ public class AetherIIEventListeners {
         Player player = event.getEntity();
         boolean wasDeath = event.isWasDeath();
 
-        player.getData(AetherIIDataAttachments.CURRENCY).clone(original, player, wasDeath);
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).clone(player);
     }
 
@@ -178,6 +186,7 @@ public class AetherIIEventListeners {
         cancelled = PlayerHooks.playerActivatePortal(player, level, pos, face, itemStack, hand, cancelled);
         cancelled = PlayerHooks.snowlogBlock(player, level, pos, itemStack, hand, cancelled);
         cancelled = PlayerHooks.ferrositeMudBottleConversion(player, level, pos, itemStack, hand, face, cancelled);
+        cancelled = PlayerHooks.interactWithMimicContainer(level, pos, cancelled);
 
         if (cancelled) {
             event.setCanceled(true);
@@ -277,12 +286,46 @@ public class AetherIIEventListeners {
         }
     }
 
+    public static void onEntitySpawn(MobSpawnEvent.SpawnPlacementCheck event) {
+        EntityType<?> type = event.getEntityType();
+        ServerLevelAccessor level = event.getLevel();
+        BlockPos pos = event.getPos();
+        ServerLevel serverLevel = level.getLevel();
+        StructureManager structureManager = serverLevel.structureManager();
+        Registry<Structure> structureRegistry = serverLevel.registryAccess().lookupOrThrow(Registries.STRUCTURE);
+
+        if (!type.is(AetherIITags.Entities.DUNGEON_MOBS)) {
+            for (Holder<Structure> structure : structureRegistry.getTagOrEmpty(AetherIITags.Structures.DUNGEONS)) {
+                StructureStart structureStart = structureManager.getStructureAt(pos, structure.value());
+                if (structureStart.isValid() && structureManager.structureHasPieceAt(pos, structureStart)) {
+                    event.setResult(MobSpawnEvent.SpawnPlacementCheck.Result.FAIL);
+                }
+            }
+        }
+    }
+
     public static void onEntityTravelToDimension(EntityTravelToDimensionEvent event) {
         Entity entity = event.getEntity();
         ResourceKey<Level> dimension = event.getDimension();
 
         if (entity instanceof Player player && !player.level().dimension().equals(dimension)) {
             player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT.get()).removeAerbunny();
+        }
+    }
+
+    public static void onEntityCauseExplosion(ExplosionEvent.Detonate event) {
+        ServerExplosion explosion = event.getExplosion();
+        Entity source = explosion.getIndirectSourceEntity();
+
+        if (source != null && (source.getType() == AetherIIEntityTypes.DETONATION_SENTRY.get() || source.getType() == AetherIIEntityTypes.SENTRY_GOLEM.get())) {
+            event.getAffectedEntities().removeIf((entity) -> entity instanceof ItemEntity);
+            event.getAffectedEntities().forEach((entity) -> {
+                if (entity instanceof LivingEntity livingEntity) {
+                    if (!livingEntity.isBlocking()) {
+                        livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, EffectBuildupPresets.STUN, 150);
+                    }
+                }
+            });
         }
     }
 
@@ -339,6 +382,13 @@ public class AetherIIEventListeners {
         if (effect.is(AetherIITags.MobEffects.MILK_DOESNT_CLEAR) && livingEntity.getUseItem().is(Tags.Items.BUCKETS_MILK)) {
             event.setCanceled(true);
         }
+    }
+
+    public static void onBreakBlock(BlockEvent.BreakEvent event) {
+        LevelAccessor level = event.getLevel();
+        BlockPos pos = event.getPos();
+
+        PlayerHooks.interactWithMimicContainer(level, pos, false);
     }
 
     public static void onBlockUpdateNeighbor(BlockEvent.NeighborNotifyEvent event) {

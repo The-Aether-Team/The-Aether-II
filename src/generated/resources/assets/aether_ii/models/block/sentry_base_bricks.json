@@ -1,0 +1,10 @@
+{
+  "parent": "aether_ii:block/emissive_cube_column",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "emissive_end": "aether_ii:block/blank",
+    "emissive_side": "aether_ii:block/sentry_base_bricks_emissive",
+    "end": "aether_ii:block/undershale_tile",
+    "side": "aether_ii:block/sentry_base_bricks"
+  }
+}

@@ -105,6 +105,10 @@ public class AetherIIBlockBuilders {
         return entityType.is(AetherIITags.Entities.SPAWNING_LEAVES) || (state.getOptionalValue(AetherIIBlockStateProperties.MOSSY).isPresent() && state.getValue(AetherIIBlockStateProperties.MOSSY) != AetherIIBlockStateProperties.Mossy.NONE);
     }
 
+    public static int lightLevel6(BlockState state) {
+        return 6;
+    }
+
     public static int lightLevel8(BlockState state) {
         return 8;
     }

@@ -50,6 +50,8 @@ public class AetherIIData {
         generator.addProvider(true, new AetherIIBiomeTagData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIIStructureTagData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIIDamageTypeTagData(packOutput, registryProvider));
+        generator.addProvider(true, new AetherIIMobEffectTagData(packOutput, registryProvider));
+        generator.addProvider(true, new AetherIISoundEventTagData(packOutput, registryProvider));
 
         // pack.mcmeta
         generator.addProvider(true, new PackMetadataGenerator(packOutput).add(PackMetadataSection.TYPE, new PackMetadataSection(

@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.monster;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
@@ -110,7 +111,13 @@ public class Zephyr extends Mob implements Enemy {
         if (this.getBlowChargeTime() >= 25 && this.getBlowChargeTime() < 50) {
             Vec3 look = this.getViewVector(1.0F);
             List<Entity> list = this.level().getEntities(this, this.getBoundingBox().inflate(5, 0, 5).expandTowards(0, -2, 0).move(look.scale(10.5F)), entity -> entity != this);
-            list.forEach(entity -> entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(0.2F).add(0, 0.05F, 0))));
+            list.forEach(entity -> {
+                if (entity instanceof LivingEntity livingEnity && livingEnity.getItemBySlot(EquipmentSlot.FEET).is(AetherIITags.Items.SENTRY_ARMOR)) {
+                    entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(0.05F)));
+                } else {
+                    entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(0.2F).add(0, 0.05F, 0)));
+                }
+            });
 
             if (this.level().isClientSide()) {
                 this.level().addParticle(AetherIIParticleTypes.ZEPHYR_SNOWFLAKE.get(),
