@@ -72,6 +72,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> MOSSY_HOLYSTONE_BOULDER = createKey("mossy_holystone_boulder");
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERWATER_MOSSY_HOLYSTONE_BOULDER = createKey("underwater_mossy_holystone_boulder");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICESTONE_BOULDER = createKey("icestone_boulder");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERWATER_ARCTIC_HOLYSTONE_BOULDER = createKey("underwater_arctic_holystone_boulder");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_SKYROOT_LOG = createKey("fallen_skyroot_log");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_WISPROOT_LOG = createKey("fallen_wisproot_log");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MOA_NEST = createKey("moa_nest");
@@ -264,6 +265,7 @@ public class HighlandsConfiguredFeatures {
     // Worldgen
     public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_SURFACE = createKey("coarse_aether_dirt_surface");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DISK_BRYALINN_MOSS = createKey("disk_bryalinn_moss");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DISK_SHAYELINN_MOSS = createKey("disk_shayelinn_moss");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_QUICKSOIL = createKey("coast_quicksoil");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_FERROSITE_SAND = createKey("coast_ferrosite_sand");
@@ -431,6 +433,15 @@ public class HighlandsConfiguredFeatures {
                 UniformFloat.of(0.0F, 1.0F),
                 Optional.empty(),
                 0.0F));
+        register(context, UNDERWATER_ARCTIC_HOLYSTONE_BOULDER, AetherIIFeatures.BOULDER.get(), new BoulderConfiguration(
+                BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get()),
+                0.5F,
+                UniformFloat.of(0.0F, 1.25F),
+                Optional.of(PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                        List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(DISK_SHAYELINN_MOSS)), 0.6F)),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(UNDERWATER_HOLYSTONE_ROCKS), CountPlacement.of(UniformInt.of(1, 4)))
+                ), CountPlacement.of(UniformInt.of(1, 3)))),
+                1.0F));
         register(context, FALLEN_SKYROOT_LOG, AetherIIFeatures.FALLEN_LOG.get(), new FallenLogConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get()),
                 UniformInt.of(2, 4),
@@ -2054,7 +2065,10 @@ public class HighlandsConfiguredFeatures {
                 )
         );
         register(context, DISK_BRYALINN_MOSS, Feature.DISK, new DiskConfiguration(
-                RuleBasedBlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()), BlockPredicate.matchesTag(AetherIITags.Blocks.UNDERWATER_BRYALINN_REPLACEABLE), UniformInt.of(1, 2), 1
+                RuleBasedBlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()), BlockPredicate.matchesTag(AetherIITags.Blocks.BRYALINN_MOSS_REPLACEABLE), UniformInt.of(1, 2), 1
+        ));
+        register(context, DISK_SHAYELINN_MOSS, Feature.DISK, new DiskConfiguration(
+                RuleBasedBlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get()), BlockPredicate.matchesTag(AetherIITags.Blocks.SHAYELINN_MOSS_REPLACEABLE), UniformInt.of(1, 2), 1
         ));
 
         register(context, COAST_QUICKSOIL, AetherIIFeatures.COAST.get(), new CoastConfiguration(

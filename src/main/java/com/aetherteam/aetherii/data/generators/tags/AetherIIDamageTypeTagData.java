@@ -34,7 +34,8 @@ public class AetherIIDamageTypeTagData extends KeyTagProvider<DamageType> {
                 AetherIIDamageTypes.TOXIN,
                 AetherIIDamageTypes.VENOM,
                 AetherIIDamageTypes.IMMOLATION,
-                AetherIIDamageTypes.ALKAHEST);
+                AetherIIDamageTypes.ALKAHEST,
+                AetherIIDamageTypes.CARRION_SPROUT);
         this.tag(DamageTypeTags.BYPASSES_ARMOR).add(
                 AetherIIDamageTypes.WOUND,
                 AetherIIDamageTypes.FRACTURE,

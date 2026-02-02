@@ -41,6 +41,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MOSSY_HOLYSTONE_BOULDER_TUNDRA = createKey("mossy_holystone_boulder_tundra");
     public static final ResourceKey<PlacedFeature> UNDERWATER_MOSSY_HOLYSTONE_BOULDER = createKey("underwater_mossy_holystone_boulder");
     public static final ResourceKey<PlacedFeature> ICESTONE_BOULDER = createKey("icestone_boulder");
+    public static final ResourceKey<PlacedFeature> UNDERWATER_ARCTIC_HOLYSTONE_BOULDER = createKey("underwater_arctic_holystone_boulder");
     public static final ResourceKey<PlacedFeature> FALLEN_SKYROOT_LOG = createKey("fallen_skyroot_log");
     public static final ResourceKey<PlacedFeature> FALLEN_WISPROOT_LOG = createKey("fallen_wisproot_log");
     public static final ResourceKey<PlacedFeature> MOA_NEST = createKey("moa_nest");
@@ -288,6 +289,16 @@ public class HighlandsPlacedFeatures {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 new ElevationFilter(VerticalAnchor.aboveBottom(192), VerticalAnchor.top()),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.BOULDER_SURVIVES_ON))),
+                RandomOffsetPlacement.vertical(UniformInt.of(0, 1)),
+                BiomeFilter.biome()
+        );
+        register(
+                context,
+                UNDERWATER_ARCTIC_HOLYSTONE_BOULDER,
+                configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.UNDERWATER_ARCTIC_HOLYSTONE_BOULDER),
+                new LakePlacementModifier(),
+                RarityFilter.onAverageOnceEvery(60),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.BOULDER_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))),
                 RandomOffsetPlacement.vertical(UniformInt.of(0, 1)),
                 BiomeFilter.biome()
         );
@@ -839,6 +850,7 @@ public class HighlandsPlacedFeatures {
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(256)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON)),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                new StructureBlacklistFilter(AetherIITags.Structures.FERROSITE_SPIKE_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
         register(context, COASTAL_ARCTIC_ICE_SPIKE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ARCTIC_ICE_SPIKE),
@@ -846,6 +858,7 @@ public class HighlandsPlacedFeatures {
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(136)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON)),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                new StructureBlacklistFilter(AetherIITags.Structures.ARCTIC_ICE_SPIKE_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
         register(context, ARCTIC_ICE_SPIKE_CLUSTER, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ARCTIC_ICE_SPIKE_VARIANTS),
@@ -853,6 +866,7 @@ public class HighlandsPlacedFeatures {
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(128), VerticalAnchor.absolute(224)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON)),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                new StructureBlacklistFilter(AetherIITags.Structures.ARCTIC_ICE_SPIKE_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
 

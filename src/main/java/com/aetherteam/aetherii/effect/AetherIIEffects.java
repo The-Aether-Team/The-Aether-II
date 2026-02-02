@@ -49,6 +49,11 @@ public class AetherIIEffects {
 
     public static final DeferredHolder<MobEffect, MobEffect> NATURAL_CAMOUFLAGE = EFFECTS.register("natural_camouflage", NaturalCamouflageEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> ELECTRIC_SHOCK = EFFECTS.register("electric_shock", ElectricShockEffect::new);
+    public static final DeferredHolder<MobEffect, MobEffect> CARRION_PULL = EFFECTS.register("carrion_pull", () -> new CarrionPullEffect()
+            .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.carrion_pull.slowness"), -0.8F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
+            .addAttributeModifier(Attributes.JUMP_STRENGTH, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.carrion_pull.jump_hinder"), -0.8F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
+            .addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.carrion_pull.knockback_resistance"), 1.0F, AttributeModifier.Operation.ADD_VALUE));
+
     public static final DeferredHolder<MobEffect, MobEffect> GRAVITATIONAL_PULL = EFFECTS.register("gravitational_pull", () -> new GravitationalPullEffect()
             .addAttributeModifier(Attributes.GRAVITY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.gravitational_pull.gravity"), 2.0F, AttributeModifier.Operation.ADD_VALUE)
             .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.gravitational_pull.slowness"), -0.25F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));

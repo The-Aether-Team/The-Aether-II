@@ -1159,6 +1159,15 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("#")
                 .unlockedBy("has_holystone", this.has(AetherIIBlocks.HOLYSTONE))
                 .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.REDSTONE, Blocks.DAYLIGHT_DETECTOR)
+                .define('Q', Items.QUARTZ)
+                .define('G', AetherIIBlocks.SCATTERGLASS)
+                .define('W', ItemTags.WOODEN_SLABS)
+                .pattern("GGG")
+                .pattern("QQQ")
+                .pattern("WWW")
+                .unlockedBy("has_quartz", this.has(Items.QUARTZ))
+                .save(this.output);
 
         // Skyroot Beds
         this.bed(getter, AetherIIBlocks.SKYROOT_BED, AetherIIBlocks.CLOUDWOOL);
@@ -1477,6 +1486,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIItems.ENCHANTED_BLUEBERRY)
                 .unlockedBy("has_feed", has(AetherIIItems.MOA_FEED))
                 .save(this.output);
+        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ENCHANTED_MOA_FEED, AetherIIItems.BLUEBERRY_MOA_FEED, 1, 0.0F).save(this.output, this.name("enchanted_moa_feed_enchanting"));
 
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.TOOLS, AetherIIItems.BEAST_PELT_BUNDLE)
                 .define('-', AetherIIItems.CLOUDTWINE)

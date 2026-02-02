@@ -2,6 +2,8 @@ package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
+import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.PlantCuttingMob;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -11,6 +13,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -71,11 +75,16 @@ public class CarrionSprout extends PathfinderMob implements PlantCuttingMob {
         }
 
         if (this.isTrapTrigger()) {
-            entity.makeStuckInBlock(Blocks.COBWEB.defaultBlockState(), new Vec3(0.3F, 0.05F, 0.3F));
+            if (entity instanceof LivingEntity livingEntity) {
+                livingEntity.forceAddEffect(new MobEffectInstance(AetherIIEffects.CARRION_PULL, 1, 0, false, false, false), this);
 
-            if (this.trapTriggerTick <= 0) {
-                if (this.level() instanceof ServerLevel serverLevel) {
-                    entity.hurtServer(serverLevel, this.damageSources().sweetBerryBush(), 1.0F);
+                if (this.trapTriggerTick <= 0) {
+                    if (this.level() instanceof ServerLevel serverLevel) {
+                        DamageSource damageSource = AetherIIDamageTypes.entityDamageSource(this.level(), AetherIIDamageTypes.CARRION_SPROUT, this);
+                        if (!livingEntity.isInvulnerableTo(serverLevel, damageSource)) {
+                            entity.hurtServer(serverLevel, AetherIIDamageTypes.entityDamageSource(this.level(), AetherIIDamageTypes.CARRION_SPROUT, this), 2.0F);
+                        }
+                    }
                 }
             }
 
@@ -99,7 +108,7 @@ public class CarrionSprout extends PathfinderMob implements PlantCuttingMob {
         return Mob.createMobAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-                .add(Attributes.ATTACK_DAMAGE, 1.0);
+                .add(Attributes.ATTACK_DAMAGE, 2.0);
     }
 
     @Override

@@ -75,7 +75,8 @@ public class AetherIITags {
         public static final TagKey<Block> MAGNETIC_SHROOM_SURVIVES_ON = tag("arilum_survives_on");
         public static final TagKey<Block> GRASS_AND_DIRT_REPLACEABLE = tag("grass_and_dirt_replaceable");
         public static final TagKey<Block> COARSE_AETHER_DIRT_REPLACEABLE = tag("coarse_aether_dirt_replaceable");
-        public static final TagKey<Block> UNDERWATER_BRYALINN_REPLACEABLE = tag("underwater_bryalinn_replaceable");
+        public static final TagKey<Block> BRYALINN_MOSS_REPLACEABLE = tag("bryalinn_moss_replaceable");
+        public static final TagKey<Block> SHAYELINN_MOSS_REPLACEABLE = tag("shayelinn_moss_replaceable");
         public static final TagKey<Block> ARCTIC_ICE_REPLACEABLE = tag("arctic_ice_replaceable");
         public static final TagKey<Block> GRASS_SNOW_REPLACEABLE = tag("grass_snow_replaceable");
         public static final TagKey<Block> QUICKSOIL_COAST_GENERATES_ON = tag("quicksoil_coast_generates_on");
@@ -296,6 +297,8 @@ public class AetherIITags {
         public static final TagKey<Structure> TREE_BLACKLIST_FILTER = tag("tree_blacklist_filter");
         public static final TagKey<Structure> ALKAHEST_POOL_BLACKLIST_FILTER = tag("alkahest_pool_blacklist_filter");
         public static final TagKey<Structure> COAST_BLACKLIST_FILTER = tag("coast_blacklist_filter");
+        public static final TagKey<Structure> FERROSITE_SPIKE_BLACKLIST_FILTER = tag("ferrosite_spike_blacklist_filter");
+        public static final TagKey<Structure> ARCTIC_ICE_SPIKE_BLACKLIST_FILTER = tag("arctic_ice_spike_blacklist_filter");
         public static final TagKey<Structure> AERCLOUD_BLACKLIST_FILTER = tag("aercloud_blacklist_filter");
 
         private static TagKey<Structure> tag(String name) {
