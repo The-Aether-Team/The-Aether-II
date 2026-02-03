@@ -200,11 +200,6 @@ public class Insect extends PathfinderMob {
         }
     }
 
-    @Override
-    public Vec3 getDeltaMovement() {
-        return this.isRest() && this.shouldStayGround() ? Vec3.ZERO : super.getDeltaMovement();
-    }
-
     public boolean shouldStayGround() {
         return true;
     }
