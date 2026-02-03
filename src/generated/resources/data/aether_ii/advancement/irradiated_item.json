@@ -1,20 +1,41 @@
 {
   "parent": "aether_ii:alkahest_canister",
   "criteria": {
-    "irradiated_item": {
+    "irradiated_armor": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:irradiated_armor"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "irradiated_chunk": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:irradiated_chunk"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "irradiated_tool": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:irradiated_tool"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "irradiated_weapon": {
       "conditions": {
         "items": [
           {
             "items": "aether_ii:irradiated_weapon"
-          },
-          {
-            "items": "aether_ii:irradiated_tool"
-          },
-          {
-            "items": "aether_ii:irradiated_armor"
-          },
-          {
-            "items": "aether_ii:irradiated_chunk"
           }
         ]
       },
@@ -35,7 +56,10 @@
   },
   "requirements": [
     [
-      "irradiated_item"
+      "irradiated_weapon",
+      "irradiated_tool",
+      "irradiated_armor",
+      "irradiated_chunk"
     ]
   ],
   "sends_telemetry_event": true

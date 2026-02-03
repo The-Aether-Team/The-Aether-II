@@ -1,20 +1,41 @@
 {
   "parent": "aether_ii:blue_aercloud",
   "criteria": {
-    "aercloud_glider": {
+    "blue_aercloud_glider": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:blue_aercloud_glider"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cold_aercloud_glider": {
       "conditions": {
         "items": [
           {
             "items": "aether_ii:cold_aercloud_glider"
-          },
-          {
-            "items": "aether_ii:blue_aercloud_glider"
-          },
-          {
-            "items": "aether_ii:purple_aercloud_glider"
-          },
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "golden_aercloud_glider": {
+      "conditions": {
+        "items": [
           {
             "items": "aether_ii:golden_aercloud_glider"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "purple_aercloud_glider": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:purple_aercloud_glider"
           }
         ]
       },
@@ -35,7 +56,10 @@
   },
   "requirements": [
     [
-      "aercloud_glider"
+      "cold_aercloud_glider",
+      "golden_aercloud_glider",
+      "blue_aercloud_glider",
+      "purple_aercloud_glider"
     ]
   ],
   "sends_telemetry_event": true

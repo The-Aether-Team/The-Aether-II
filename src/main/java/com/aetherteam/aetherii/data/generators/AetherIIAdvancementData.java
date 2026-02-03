@@ -132,7 +132,9 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.antitoxin.desc"),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("antitoxin", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ANTITOXIN_VIAL.get(), AetherIIItems.ANTIVENOM_VIAL.get()))
+                    .requirements(AdvancementRequirements.Strategy.OR)
+                    .addCriterion("antitoxin_vial", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ANTITOXIN_VIAL.get()))
+                    .addCriterion("antivenom_vial", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ANTIVENOM_VIAL.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "antitoxin"));
 
             AdvancementHolder engravedDiscs = Advancement.Builder.advancement()
@@ -213,7 +215,11 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.aercloud_glider.desc"),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("aercloud_glider", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.COLD_AERCLOUD_GLIDER.get(), AetherIIItems.BLUE_AERCLOUD_GLIDER.get(), AetherIIItems.PURPLE_AERCLOUD_GLIDER.get(), AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get()))
+                    .requirements(AdvancementRequirements.Strategy.OR)
+                    .addCriterion("cold_aercloud_glider", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.COLD_AERCLOUD_GLIDER.get()))
+                    .addCriterion("golden_aercloud_glider", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get()))
+                    .addCriterion("blue_aercloud_glider", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.BLUE_AERCLOUD_GLIDER.get()))
+                    .addCriterion("purple_aercloud_glider", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aercloud_glider"));
 
             AdvancementHolder obtainEgg = Advancement.Builder.advancement()
@@ -343,7 +349,11 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.irradiated_item.desc"),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("irradiated_item", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.IRRADIATED_WEAPON.get(), AetherIIItems.IRRADIATED_TOOL.get(), AetherIIItems.IRRADIATED_ARMOR.get(), AetherIIItems.IRRADIATED_CHUNK.get()))
+                    .requirements(AdvancementRequirements.Strategy.OR)
+                    .addCriterion("irradiated_weapon", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.IRRADIATED_WEAPON.get()))
+                    .addCriterion("irradiated_tool", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.IRRADIATED_TOOL.get()))
+                    .addCriterion("irradiated_armor", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.IRRADIATED_ARMOR.get()))
+                    .addCriterion("irradiated_chunk", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.IRRADIATED_CHUNK.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "irradiated_item"));
 
             AdvancementHolder dartShooter = Advancement.Builder.advancement()
@@ -443,7 +453,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("sentry_boots_fall", SentryBootsFallTrigger.Instance.forItem(ItemPredicate.Builder.item().of(items, AetherIIItems.SENTRY_BOOTS).build()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_boots_fall"));
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_boots_fall")); //todo
         }
     }
 

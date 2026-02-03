@@ -1,12 +1,19 @@
 {
   "parent": "aether_ii:icestone",
   "criteria": {
-    "antitoxin": {
+    "antitoxin_vial": {
       "conditions": {
         "items": [
           {
             "items": "aether_ii:antitoxin_vial"
-          },
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "antivenom_vial": {
+      "conditions": {
+        "items": [
           {
             "items": "aether_ii:antivenom_vial"
           }
@@ -29,7 +36,8 @@
   },
   "requirements": [
     [
-      "antitoxin"
+      "antitoxin_vial",
+      "antivenom_vial"
     ]
   ],
   "sends_telemetry_event": true
