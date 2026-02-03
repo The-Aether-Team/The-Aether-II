@@ -1,19 +1,17 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
-import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.renderer.entity.animation.GlitterwingAnimations;
 import com.aetherteam.aetherii.client.renderer.entity.state.GlitterwingRenderState;
 import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class GlitterwingModel extends EntityModel<GlitterwingRenderState> {
-    public static final AnimationHolder FLY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "glitterwing/fly"));
-    private final KeyframeAnimation flyAnimation;
+    private final KeyframeAnimation flyingAnimation;
+    private final KeyframeAnimation landAnimation;
+    private final KeyframeAnimation takeOffAnimation;
 
     private final ModelPart glitterwing;
     private final ModelPart rightWing;
@@ -21,7 +19,9 @@ public class GlitterwingModel extends EntityModel<GlitterwingRenderState> {
 
     public GlitterwingModel(ModelPart root) {
         super(root);
-        this.flyAnimation = FLY_ANIMATION.get().bake(root);
+        this.flyingAnimation = GlitterwingAnimations.FLYING.bake(root);
+        this.landAnimation = GlitterwingAnimations.LAND.bake(root);
+        this.takeOffAnimation = GlitterwingAnimations.TAKEOFF.bake(root);
         this.glitterwing = root.getChild("glitterwing");
         this.rightWing = this.glitterwing.getChild("right_wing");
         this.leftWing = this.glitterwing.getChild("left_wing");
@@ -45,6 +45,6 @@ public class GlitterwingModel extends EntityModel<GlitterwingRenderState> {
         this.leftWing.x += renderState.wingXOffset;
         this.rightWing.zRot += renderState.wingZRotation;
         this.leftWing.zRot -= renderState.wingZRotation;
-        this.flyAnimation.applyWalk(renderState.ageInTicks, 1F - renderState.restScale, 5.0F, 1.0F);
+        this.flyingAnimation.applyWalk(renderState.ageInTicks, 1.0F, 1.0F, 1.0F);
     }
 }
