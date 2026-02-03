@@ -79,6 +79,7 @@
   "aether_ii.highfields": "Highfields",
   "aether_ii.impact": "§eImpact§r",
   "aether_ii.magnetic": "Magnetic",
+  "aether_ii.menu_title.the_aether_ii": "The Aether II",
   "aether_ii.message.campfire_added": "Outpost campfire respawn point set",
   "aether_ii.message.campfire_respawn_failed": "Failed to locate a valid outpost campfire",
   "aether_ii.message.passenger.onboard": "Press %1$s and %2$s to Dismount Passenger",

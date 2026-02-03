@@ -1509,6 +1509,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("toast.guidebook.description", "Check your Guidebook");
         this.addGuiText("slider.message.attack.invalid", "Hmm. Perhaps I need to attack it with a Pickaxe?");
         this.addGuiText("slider.title", "Slider %s");
+
+        // Title Screen
+        this.add("aether_ii.menu_title.the_aether_ii", "The Aether II");
     }
 
     private void addBestiaryEntries() {
