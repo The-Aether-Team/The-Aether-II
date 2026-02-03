@@ -35,8 +35,9 @@ public class Insect extends PathfinderMob {
 
     private float restAnimationO;
     private float restAnimation;
-    private float needNextAction;
+    private int needNextAction;
     private boolean needRest;
+    private int groundTick;
 
     public Insect(EntityType<? extends Insect> entityType, Level level) {
         super(entityType, level);
@@ -165,11 +166,19 @@ public class Insect extends PathfinderMob {
 
     public void restTick() {
         if (this.isNeedRest() && this.onGround() && !this.isRest()) {
+            this.groundTick = 0;
             this.setRestWithAnimation(true);
         }
 
-        if (!this.onGround() && this.shouldStayGround() && this.isRest()) {
-            this.stopRest();
+        if (this.shouldStayGround() && this.isRest()) {
+            if (this.level().getBlockState(BlockPos.containing(this.position().add(0, -0.01F, 0))).getCollisionShape(this.level(), BlockPos.containing(this.position().add(0, -0.01F, 0))).isEmpty()) {
+                ++this.groundTick;
+            }
+            if (this.groundTick > 4) {
+                this.stopRest();
+            } else {
+                this.groundTick = 0;
+            }
         }
     }
 

@@ -45,7 +45,7 @@ public class GlitterwingModel extends EntityModel<GlitterwingRenderState> {
         this.leftWing.x += renderState.wingXOffset;
         this.rightWing.zRot += renderState.wingZRotation;
         this.leftWing.zRot -= renderState.wingZRotation;
-        this.flyingAnimation.applyWalk(renderState.ageInTicks, 1.0F, 1.0F, 1.0F);
+        this.flyingAnimation.applyWalk(renderState.ageInTicks, 1F - renderState.restScale, 1.0F, 1.0F);
         this.landAnimation.apply(renderState.landAnimationState, renderState.ageInTicks);
         this.takeOffAnimation.apply(renderState.takeOffAnimationState, renderState.ageInTicks);
     }
