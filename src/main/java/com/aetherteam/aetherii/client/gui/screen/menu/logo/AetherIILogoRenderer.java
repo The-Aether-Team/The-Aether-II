@@ -26,7 +26,7 @@ public class AetherIILogoRenderer extends LogoRenderer {
        // RenderSystem.enableBlend();
         int logoX = this.alignedLeft ? 28 : (int) ((screenWidth / 2.0F - (190.0F / 2.0F)));
         int logoY = this.alignedLeft ? 25 : 36;
-        guiGraphics.blit(AETHER_LOGO, logoX, logoY, 0, 0, 190, 38, 190, 38);
+        guiGraphics.blit(AETHER_LOGO, logoX, logoY, 0, 0, 190, 61, 190, 61);
        // guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F); //todo
        // RenderSystem.disableBlend();
     }
