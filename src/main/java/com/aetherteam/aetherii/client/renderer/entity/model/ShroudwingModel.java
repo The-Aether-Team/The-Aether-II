@@ -7,7 +7,6 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.util.Mth;
 
 public class ShroudwingModel extends EntityModel<ShroudwingRenderState> {
     private final KeyframeAnimation flyingAnimation;
@@ -56,8 +55,5 @@ public class ShroudwingModel extends EntityModel<ShroudwingRenderState> {
         this.flyingAnimation.applyWalk(renderState.ageInTicks, 1F - renderState.restScale, 1.0F, 1.0F);
         this.landAnimation.apply(renderState.landAnimationState, renderState.ageInTicks);
         this.takeOffAnimation.apply(renderState.takeOffAnimationState, renderState.ageInTicks);
-        float rotation = (Mth.sin(renderState.ageInTicks * 2) * 10 * Mth.DEG_TO_RAD);
-        this.rightWing.zRot = rotation;
-        this.leftWing.zRot = rotation;
     }
 }
