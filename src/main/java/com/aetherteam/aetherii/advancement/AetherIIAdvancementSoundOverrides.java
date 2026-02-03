@@ -19,6 +19,7 @@ public class AetherIIAdvancementSoundOverrides {
     public static final Registry<AdvancementSoundOverride> ADVANCEMENT_SOUND_OVERRIDE_REGISTRY = ADVANCEMENT_SOUND_OVERRIDES.makeRegistry((builder) -> builder.sync(true).defaultKey(AetherIIRegistries.ADVANCEMENT_SOUND_OVERRIDE.location()));
 
     public static final DeferredHolder<AdvancementSoundOverride, AdvancementSoundOverride> GENERAL = ADVANCEMENT_SOUND_OVERRIDES.register("general", () -> new AdvancementSoundOverride(0, (advancements, advancement) -> checkRoot(advancements, advancement, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "the_highlands")), AetherIISoundEvents.UI_TOAST_AETHER_GENERAL));
+    public static final DeferredHolder<AdvancementSoundOverride, AdvancementSoundOverride> SLIDER = ADVANCEMENT_SOUND_OVERRIDES.register("slider", () -> new AdvancementSoundOverride(1, (advancements, advancement) -> checkAdvancement(advancement, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "slider")), AetherIISoundEvents.UI_TOAST_AETHER_SLIDER));
 
     @Nullable
     public static AdvancementSoundOverride get(ResourceLocation location) {
@@ -51,5 +52,12 @@ public class AetherIIAdvancementSoundOverrides {
             }
         }
         return false;
+    }
+
+    /**
+     * Checks for a specific advancement
+     */
+    public static boolean checkAdvancement(AdvancementHolder holder, ResourceLocation root) {
+        return holder.id().equals(root);
     }
 }
