@@ -81,6 +81,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 .add(AetherIIBlocks.HIGHLANDS_BUSH.get())
                 .add(AetherIIBlocks.HOLYSTONE_ROCK.get())
                 .add(AetherIIBlocks.SKYROOT_TWIG.get())
+                .add(AetherIIBlocks.VALKYRIE_SPROUT.get())
                 .addTags(
                         BlockTags.REPLACEABLE,
                         BlockTags.REPLACEABLE_BY_TREES
