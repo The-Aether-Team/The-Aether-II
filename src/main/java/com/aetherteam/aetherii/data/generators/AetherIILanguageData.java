@@ -1552,8 +1552,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("the_highlands", "It's not dead!");
         this.addAdvancementDesc("enter_highlands", "Enter the Aether");
         this.addAdvancementDesc("blue_aercloud", "Bounce on a Blue Aercloud");
-        this.addAdvancementDesc("cloud_skiff", "Craft and ride a Cloud Skiff for better movement on the Cloud Sea");
-        this.addAdvancementDesc("aercloud_glider", "Craft and use an Aercloud Glider for better mid-air movement");
+        this.addAdvancementDesc("cloud_skiff", "Ride a Cloud Skiff for better movement on the Cloud Sea");
+        this.addAdvancementDesc("aercloud_glider", "Use an Aercloud Glider for better mid-air movement");
         this.addAdvancementDesc("obtain_egg", "Obtain a Moa Egg from a Moa Nest");
         this.addAdvancementDesc("obtain_petal", "Harvest an Aechor Petal from an Aechor Plant");
         this.addAdvancementDesc("skyroot_lizard", "Skewer a Skyroot Lizard on a Skyroot Stick");
