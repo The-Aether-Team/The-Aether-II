@@ -25,7 +25,7 @@ public class AetherIISplashRenderer extends SplashRenderer {
         float textSize = 1.8F - Mth.abs(Mth.sin((float) (Util.getMillis() % 1000L) / 1000.0F * Mth.TWO_PI) * 0.1F);
         textSize = textSize * 100.0F / 1 / (font.width(this.splash) + 32);
         guiGraphics.pose().scale(textSize, textSize);
-        guiGraphics.drawCenteredString(font, this.splash, 0, -8, 8158399 | color);
+        guiGraphics.drawCenteredString(font, this.splash, 0, -8, 15391948 | color);
         guiGraphics.pose().popMatrix();
     }
 }
