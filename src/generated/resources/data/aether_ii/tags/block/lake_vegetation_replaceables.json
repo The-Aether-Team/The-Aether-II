@@ -1,0 +1,10 @@
+{
+  "values": [
+    "aether_ii:blueberry_bush",
+    "aether_ii:highlands_bush",
+    "aether_ii:holystone_rock",
+    "aether_ii:skyroot_twig",
+    "#minecraft:replaceable",
+    "#minecraft:replaceable_by_trees"
+  ]
+}
