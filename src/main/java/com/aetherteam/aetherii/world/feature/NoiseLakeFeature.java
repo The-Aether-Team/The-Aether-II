@@ -204,7 +204,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         }
 
         // Removes Floating Grass above the shores
-        if (level.getBlockState(pos.above()).getBlock() instanceof BushBlock || level.getBlockState(pos.above()).getBlock() instanceof TwigBlock || level.getBlockState(pos.above()).getBlock() instanceof RockBlock) {
+        if (level.getBlockState(pos.above()).getBlock() instanceof VegetationBlock || level.getBlockState(pos.above()).getBlock() instanceof TwigBlock || level.getBlockState(pos.above()).getBlock() instanceof RockBlock) {
             this.setBlock(level, pos.above(), Blocks.AIR.defaultBlockState());
         }
     }
