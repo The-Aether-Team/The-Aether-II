@@ -118,11 +118,9 @@ public class OutpostCampfireBlock extends MultiBlock {
                     var data = player.getData(AetherIIDataAttachments.OUTPOST_TRACKER);
                     if (!data.getCampfirePositions().stream().map(OutpostTrackerAttachment.CampfirePosition::pos).collect(Collectors.toSet()).contains(origin)) {
                         data.addCampfirePosition(new OutpostTrackerAttachment.CampfirePosition(level.dimension(), pos));
-                        if (!level.isClientSide()) {
-                            player.displayClientMessage(Component.translatable("aether_ii.message.campfire_added"), false);
-                        }
                         if (player instanceof ServerPlayer serverPlayer) {
-                            AetherIIAdvancementTriggers.OUTPOST_CAMPFIRE_TRIGGER.get().trigger(serverPlayer, Blocks.AIR.asItem().getDefaultInstance());
+                            serverPlayer.displayClientMessage(Component.translatable("aether_ii.message.campfire_added"), false);
+                            AetherIIAdvancementTriggers.OUTPOST_CAMPFIRE.get().trigger(serverPlayer);
                         }
                     }
                     return InteractionResult.SUCCESS;

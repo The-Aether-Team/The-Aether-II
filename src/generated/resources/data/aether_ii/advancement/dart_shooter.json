@@ -1,25 +1,15 @@
 {
   "parent": "aether_ii:zanite",
   "criteria": {
-    "amber_darts": {
-      "conditions": {
-        "items": [
-          {
-            "items": "aether_ii:amber_darts"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "dart_shooter": {
       "conditions": {
-        "items": [
-          {
-            "items": "aether_ii:dart_shooter"
-          }
-        ]
+        "direct_source": {
+          "type": "aether_ii:amber_dart"
+        },
+        "mob_effects": "#aether_ii:dart_effects",
+        "triggered": true
       },
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "aether_ii:dart_effect"
     }
   },
   "display": {
@@ -37,9 +27,6 @@
   "requirements": [
     [
       "dart_shooter"
-    ],
-    [
-      "amber_darts"
     ]
   ],
   "sends_telemetry_event": true

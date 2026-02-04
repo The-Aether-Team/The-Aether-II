@@ -2,20 +2,14 @@
   "parent": "aether_ii:craft_arkenium_forge",
   "criteria": {
     "charm": {
-      "conditions": {
-        "items": [
-          {
-            "items": "aether_ii:charm_of_resistance_1"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "aether_ii:forging_charm"
     }
   },
   "display": {
     "description": {
       "translate": "advancement.aether_ii.charm.desc"
     },
+    "frame": "goal",
     "icon": {
       "count": 1,
       "id": "aether_ii:charm_of_resistance_1"

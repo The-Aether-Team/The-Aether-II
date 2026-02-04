@@ -3,13 +3,24 @@
   "criteria": {
     "cloud_skiff": {
       "conditions": {
-        "items": [
+        "player": [
           {
-            "items": "aether_ii:cloud_skiff"
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "movement_affected_by": {
+                "block": {
+                  "blocks": "#aether_ii:aerclouds"
+                }
+              },
+              "vehicle": {
+                "type": "aether_ii:cloud_skiff"
+              }
+            }
           }
         ]
       },
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "minecraft:location"
     }
   },
   "display": {

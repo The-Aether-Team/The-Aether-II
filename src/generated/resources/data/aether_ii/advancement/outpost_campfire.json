@@ -2,12 +2,7 @@
   "parent": "aether_ii:enter_highlands",
   "criteria": {
     "outpost_campfire": {
-      "conditions": {
-        "item": {
-          "items": "minecraft:air"
-        }
-      },
-      "trigger": "aether_ii:outpost_campfire_trigger"
+      "trigger": "aether_ii:outpost_campfire"
     }
   },
   "display": {

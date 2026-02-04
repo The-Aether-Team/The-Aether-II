@@ -8,6 +8,7 @@ import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Optional;
@@ -15,25 +16,32 @@ import java.util.Optional;
 public class IncubationTrigger extends SimpleCriterionTrigger<IncubationTrigger.Instance> {
     @Override
     public Codec<Instance> codec() {
-        return Instance.CODEC;
+        return IncubationTrigger.Instance.CODEC;
     }
 
-    public void trigger(ServerPlayer player, ItemStack stack) {
-        this.trigger(player, (instance) -> instance.test(stack));
+    public void trigger(ServerPlayer player, Entity entity) {
+        this.trigger(player, (instance) -> instance.test(player, entity));
     }
 
-    public record Instance(Optional<ContextAwarePredicate> player, Optional<ItemPredicate> item) implements SimpleInstance {
-        public static final Codec<Instance> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public record Instance(Optional<ContextAwarePredicate> player, Optional<EntityPredicate> entity) implements SimpleInstance {
+        public static final Codec<IncubationTrigger.Instance> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                         EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(IncubationTrigger.Instance::player),
-                        ItemPredicate.CODEC.optionalFieldOf("item").forGetter(IncubationTrigger.Instance::item))
+                        EntityPredicate.CODEC.optionalFieldOf("entity").forGetter(IncubationTrigger.Instance::entity))
                 .apply(instance, IncubationTrigger.Instance::new));
 
-        public static Criterion<Instance> forItem(ItemPredicate item) {
-            return AetherIIAdvancementTriggers.INCUBATION_TRIGGER.get().createCriterion(new IncubationTrigger.Instance(Optional.empty(), Optional.of(item)));
+        public static Criterion<Instance> incubate() {
+            return AetherIIAdvancementTriggers.INCUBATION.get().createCriterion(new IncubationTrigger.Instance(Optional.empty(), Optional.empty()));
         }
 
-        public boolean test(ItemStack stack) {
-            return this.item.isEmpty() || this.item.get().test(stack);
+        public static Criterion<Instance> incubateEntity(EntityPredicate entity) {
+            return AetherIIAdvancementTriggers.INCUBATION.get().createCriterion(new IncubationTrigger.Instance(Optional.empty(), Optional.of(entity)));
+        }
+
+        public boolean test(ServerPlayer serverPlayer, Entity entity) {
+            if (this.entity.isPresent()) {
+                return this.entity().get().matches(serverPlayer, entity);
+            }
+            return true;
         }
     }
 }

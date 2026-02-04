@@ -9,8 +9,9 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class AetherIIAdvancementTriggers {
     public static final DeferredRegister<CriterionTrigger<?>> TRIGGERS = DeferredRegister.create(Registries.TRIGGER_TYPE, AetherII.MODID);
 
-    public static final DeferredHolder<CriterionTrigger<?>, IncubationTrigger> INCUBATION_TRIGGER = TRIGGERS.register("incubation_trigger", IncubationTrigger::new);
-    public static final DeferredHolder<CriterionTrigger<?>, OutpostCampfireTrigger> OUTPOST_CAMPFIRE_TRIGGER = TRIGGERS.register("outpost_campfire_trigger", OutpostCampfireTrigger::new);
-    public static final DeferredHolder<CriterionTrigger<?>, ForgingCharmTrigger> FORGING_CHARM_TRIGGER = TRIGGERS.register("forging_charm_trigger", ForgingCharmTrigger::new);
-    public static final DeferredHolder<CriterionTrigger<?>, SentryBootsFallTrigger> SENTRY_BOOTS_FALL_TRIGGER = TRIGGERS.register("sentry_boots_fall_trigger", SentryBootsFallTrigger::new);
+    public static final DeferredHolder<CriterionTrigger<?>, OutpostCampfireTrigger> OUTPOST_CAMPFIRE = TRIGGERS.register("outpost_campfire", OutpostCampfireTrigger::new);
+    public static final DeferredHolder<CriterionTrigger<?>, CurrencyTrigger> CURRENCY = TRIGGERS.register("currency", CurrencyTrigger::new);
+    public static final DeferredHolder<CriterionTrigger<?>, IncubationTrigger> INCUBATION = TRIGGERS.register("incubation", IncubationTrigger::new);
+    public static final DeferredHolder<CriterionTrigger<?>, EffectBuildupTrigger> EFFECT_BUILDUP = TRIGGERS.register("dart_effect", EffectBuildupTrigger::new);
+    public static final DeferredHolder<CriterionTrigger<?>, ForgingCharmTrigger> FORGING_CHARM = TRIGGERS.register("forging_charm", ForgingCharmTrigger::new);
 }

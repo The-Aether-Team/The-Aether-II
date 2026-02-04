@@ -28,8 +28,12 @@ public class ForgingCharmTrigger extends SimpleCriterionTrigger<ForgingCharmTrig
                         ItemPredicate.CODEC.optionalFieldOf("item").forGetter(ForgingCharmTrigger.Instance::item))
                 .apply(instance, ForgingCharmTrigger.Instance::new));
 
-        public static Criterion<Instance> forItem(ItemPredicate item) {
-            return AetherIIAdvancementTriggers.FORGING_CHARM_TRIGGER.get().createCriterion(new ForgingCharmTrigger.Instance(Optional.empty(), Optional.of(item)));
+        public static Criterion<Instance> charm() {
+            return AetherIIAdvancementTriggers.FORGING_CHARM.get().createCriterion(new ForgingCharmTrigger.Instance(Optional.empty(), Optional.empty()));
+        }
+
+        public static Criterion<Instance> charmItem(ItemPredicate item) {
+            return AetherIIAdvancementTriggers.FORGING_CHARM.get().createCriterion(new ForgingCharmTrigger.Instance(Optional.empty(), Optional.of(item)));
         }
 
         public boolean test(ItemStack stack) {

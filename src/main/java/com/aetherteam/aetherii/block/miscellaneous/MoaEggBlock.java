@@ -121,7 +121,7 @@ public class MoaEggBlock extends BaseEntityBlock {
                 level.addFreshEntity(moa);
                 Player player = level.getNearestPlayer(pos.getX(), pos.getY(), pos.getZ(), 24, false);
                 if (player instanceof ServerPlayer serverPlayer) {
-                    AetherIIAdvancementTriggers.INCUBATION_TRIGGER.get().trigger(serverPlayer, Blocks.AIR.asItem().getDefaultInstance());
+                    AetherIIAdvancementTriggers.INCUBATION.get().trigger(serverPlayer, moa);
                 }
             }
         }

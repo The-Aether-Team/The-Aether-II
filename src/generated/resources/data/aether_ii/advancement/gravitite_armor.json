@@ -1,55 +1,22 @@
 {
   "parent": "aether_ii:gravitite_plate",
   "criteria": {
-    "gravitite_boots": {
+    "gravitite_armor": {
       "conditions": {
-        "items": [
+        "player": [
           {
-            "items": "aether_ii:gravitite_boots"
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "aether_ii:armor_set",
+                "armor": "aether_ii:armor/gravitite"
+              }
+            }
           }
         ]
       },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "gravitite_chestplate": {
-      "conditions": {
-        "items": [
-          {
-            "items": "aether_ii:gravitite_chestplate"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "gravitite_gloves": {
-      "conditions": {
-        "items": [
-          {
-            "items": "aether_ii:gravitite_gloves"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "gravitite_helmet": {
-      "conditions": {
-        "items": [
-          {
-            "items": "aether_ii:gravitite_helmet"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "gravitite_leggings": {
-      "conditions": {
-        "items": [
-          {
-            "items": "aether_ii:gravitite_leggings"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "minecraft:tick"
     }
   },
   "display": {
@@ -67,19 +34,7 @@
   },
   "requirements": [
     [
-      "gravitite_helmet"
-    ],
-    [
-      "gravitite_chestplate"
-    ],
-    [
-      "gravitite_leggings"
-    ],
-    [
-      "gravitite_boots"
-    ],
-    [
-      "gravitite_gloves"
+      "gravitite_armor"
     ]
   ],
   "sends_telemetry_event": true

@@ -31,7 +31,7 @@
       },
       "trigger": "minecraft:player_killed_entity"
     },
-    "observe": {
+    "observe_phyg": {
       "conditions": {
         "player": [
           {
@@ -53,7 +53,7 @@
   },
   "requirements": [
     [
-      "observe",
+      "observe_phyg",
       "kill_phyg",
       "feed_phyg"
     ]

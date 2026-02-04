@@ -14,7 +14,7 @@
       },
       "trigger": "minecraft:player_killed_entity"
     },
-    "observe": {
+    "observe_carrion_sprout": {
       "conditions": {
         "player": [
           {
@@ -36,7 +36,7 @@
   },
   "requirements": [
     [
-      "observe",
+      "observe_carrion_sprout",
       "kill_carrion_sprout"
     ]
   ],

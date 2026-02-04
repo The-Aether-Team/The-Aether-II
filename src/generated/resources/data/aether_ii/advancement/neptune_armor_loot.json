@@ -1,55 +1,22 @@
 {
   "parent": "aether_ii:slider",
   "criteria": {
-    "neptune_boots": {
+    "neptune_armor": {
       "conditions": {
-        "items": [
+        "player": [
           {
-            "items": "aether_ii:neptune_boots"
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "aether_ii:armor_set",
+                "armor": "aether_ii:armor/neptune"
+              }
+            }
           }
         ]
       },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "neptune_chestplate": {
-      "conditions": {
-        "items": [
-          {
-            "items": "aether_ii:neptune_chestplate"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "neptune_gloves": {
-      "conditions": {
-        "items": [
-          {
-            "items": "aether_ii:neptune_gloves"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "neptune_helmet": {
-      "conditions": {
-        "items": [
-          {
-            "items": "aether_ii:neptune_helmet"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "neptune_leggings": {
-      "conditions": {
-        "items": [
-          {
-            "items": "aether_ii:neptune_leggings"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "minecraft:tick"
     }
   },
   "display": {
@@ -67,19 +34,7 @@
   },
   "requirements": [
     [
-      "neptune_helmet"
-    ],
-    [
-      "neptune_chestplate"
-    ],
-    [
-      "neptune_leggings"
-    ],
-    [
-      "neptune_boots"
-    ],
-    [
-      "neptune_gloves"
+      "neptune_armor"
     ]
   ],
   "sends_telemetry_event": true

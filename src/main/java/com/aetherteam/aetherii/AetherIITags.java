@@ -315,6 +315,7 @@ public class AetherIITags {
     }
 
     public static class MobEffects {
+        public static final TagKey<MobEffect> DART_EFFECTS = tag("dart_effects");
         public static final TagKey<MobEffect> MILK_DOESNT_CLEAR = tag("typed");
 
         private static TagKey<MobEffect> tag(String name) {

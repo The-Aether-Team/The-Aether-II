@@ -3,16 +3,9 @@
   "criteria": {
     "glint": {
       "conditions": {
-        "items": [
-          {
-            "count": {
-              "min": 64
-            },
-            "items": "aether_ii:glint_coin"
-          }
-        ]
+        "amount": 100
       },
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "aether_ii:currency"
     }
   },
   "display": {

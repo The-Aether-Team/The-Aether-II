@@ -25,6 +25,7 @@
     "description": {
       "translate": "advancement.aether_ii.kill_golem_with_demolition_hammer.desc"
     },
+    "frame": "goal",
     "icon": {
       "count": 1,
       "id": "aether_ii:hammer_of_demolition"

@@ -2,12 +2,7 @@
   "parent": "aether_ii:obtain_egg",
   "criteria": {
     "incubate_moa": {
-      "conditions": {
-        "item": {
-          "items": "minecraft:air"
-        }
-      },
-      "trigger": "aether_ii:incubation_trigger"
+      "trigger": "aether_ii:incubation"
     }
   },
   "display": {

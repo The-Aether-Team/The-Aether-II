@@ -1,9 +1,11 @@
 package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.advancement.trigger.IncubationTrigger;
-import com.aetherteam.aetherii.advancement.trigger.OutpostCampfireTrigger;
-import com.aetherteam.aetherii.advancement.trigger.SentryBootsFallTrigger;
+import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.advancement.predicate.AlivePredicate;
+import com.aetherteam.aetherii.advancement.predicate.ArmorSetPredicate;
+import com.aetherteam.aetherii.advancement.predicate.EffectBuildupPredicate;
+import com.aetherteam.aetherii.advancement.trigger.*;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
@@ -11,6 +13,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
 import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
+import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.advancements.*;
@@ -27,12 +30,12 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
-import net.minecraft.world.level.storage.loot.predicates.MatchTool;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 
 import java.util.List;
 import java.util.Map;
@@ -52,6 +55,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
             HolderGetter<Block> blocks = provider.lookupOrThrow(Registries.BLOCK);
             HolderGetter<Item> items = provider.lookupOrThrow(Registries.ITEM);
             HolderGetter<EntityType<?>> entityTypes = provider.lookupOrThrow(Registries.ENTITY_TYPE);
+            HolderGetter<MobEffect> mobEffects = provider.lookupOrThrow(Registries.MOB_EFFECT);
             HolderGetter<Biome> biomes = provider.lookupOrThrow(Registries.BIOME);
 
             AdvancementHolder theAether = Advancement.Builder.advancement()
@@ -133,8 +137,8 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .requirements(AdvancementRequirements.Strategy.OR)
-                    .addCriterion("antitoxin_vial", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ANTITOXIN_VIAL.get()))
-                    .addCriterion("antivenom_vial", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ANTIVENOM_VIAL.get()))
+                    .addCriterion("antitoxin_vial", buildupReductionItemConsumed(ItemPredicate.Builder.item().of(items, AetherIIItems.ANTITOXIN_VIAL), AetherIIEffects.TOXIN))
+                    .addCriterion("antivenom_vial", buildupReductionItemConsumed(ItemPredicate.Builder.item().of(items, AetherIIItems.ANTIVENOM_VIAL), AetherIIEffects.VENOM))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "antitoxin"));
 
             AdvancementHolder engravedDiscs = Advancement.Builder.advancement()
@@ -172,7 +176,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.outpost_campfire.desc"),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("outpost_campfire", OutpostCampfireTrigger.Instance.forItem(ItemPredicate.Builder.item().of(items, Blocks.AIR).build()))
+                    .addCriterion("outpost_campfire", OutpostCampfireTrigger.Instance.setSpawn())
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "outpost_campfire"));
 
             AdvancementHolder glint = Advancement.Builder.advancement()
@@ -182,20 +186,10 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.glint.desc"),
                             null,
                             AdvancementType.GOAL, true, true, false)
-                    .addCriterion("glint", hasNumberofItem(64, AetherIIItems.GLINT_COIN.get())) //todo: make count 100 and make glint slot work
+                    .addCriterion("glint", CurrencyTrigger.Instance.forValue(100))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "glint"));
 
-
-            AdvancementHolder bestiary = Advancement.Builder.advancement()
-                    .parent(outpostCampfire)
-                    .display(AetherIIItems.GUIDEBOOK_PAGE.get(),
-                            Component.translatable("advancement.aether_ii.bestiary"),
-                            Component.translatable("advancement.aether_ii.bestiary.desc"),
-                            null,
-                            AdvancementType.TASK, true, true, false)
-                    .addCriterion("glint", hasNumberofItem(64, AetherIIItems.GLINT_COIN.get())) //.addCriterion("bestiary", PlayerPredicate .Builder.player().checkAdvancementDone(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "observe"), true))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bestiary")); //todo
-
+            AdvancementHolder bestiary = createBestiaryAdvancement(outpostCampfire, consumer);
 
 
             AdvancementHolder cloudSkiff = Advancement.Builder.advancement()
@@ -205,7 +199,9 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.cloud_skiff.desc"),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("cloud_skiff", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.CLOUD_SKIFF.get()))
+                    .addCriterion("cloud_skiff", PlayerTrigger.TriggerInstance.located(EntityPredicate.Builder.entity()
+                            .vehicle(EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.CLOUD_SKIFF.get()))
+                            .movementAffectedBy(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, AetherIITags.Blocks.AERCLOUDS)))))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cloud_skiff"));
 
             AdvancementHolder aercloudGlider = Advancement.Builder.advancement()
@@ -216,10 +212,10 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .requirements(AdvancementRequirements.Strategy.OR)
-                    .addCriterion("cold_aercloud_glider", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.COLD_AERCLOUD_GLIDER.get()))
-                    .addCriterion("golden_aercloud_glider", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get()))
-                    .addCriterion("blue_aercloud_glider", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.BLUE_AERCLOUD_GLIDER.get()))
-                    .addCriterion("purple_aercloud_glider", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get()))
+                    .addCriterion("cold_aercloud_glider", itemUsed(ItemPredicate.Builder.item().of(items, AetherIIItems.COLD_AERCLOUD_GLIDER.get())))
+                    .addCriterion("golden_aercloud_glider", itemUsed(ItemPredicate.Builder.item().of(items, AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get())))
+                    .addCriterion("blue_aercloud_glider", itemUsed(ItemPredicate.Builder.item().of(items, AetherIIItems.BLUE_AERCLOUD_GLIDER.get())))
+                    .addCriterion("purple_aercloud_glider", itemUsed(ItemPredicate.Builder.item().of(items, AetherIIItems.PURPLE_AERCLOUD_GLIDER.get())))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aercloud_glider"));
 
             AdvancementHolder obtainEgg = Advancement.Builder.advancement()
@@ -260,7 +256,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.incubate_moa.desc"),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("incubate_moa", IncubationTrigger.Instance.forItem(ItemPredicate.Builder.item().of(items, Blocks.AIR).build()))
+                    .addCriterion("incubate_moa", IncubationTrigger.Instance.incubate())
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "incubate_moa"));
 
             Advancement.Builder.advancement()
@@ -305,11 +301,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.gravitite_armor.desc"),
                             null,
                             AdvancementType.GOAL, true, true, false)
-                    .addCriterion("gravitite_helmet", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GRAVITITE_HELMET.get()))
-                    .addCriterion("gravitite_chestplate", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GRAVITITE_CHESTPLATE.get()))
-                    .addCriterion("gravitite_leggings", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GRAVITITE_LEGGINGS.get()))
-                    .addCriterion("gravitite_boots", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GRAVITITE_BOOTS.get()))
-                    .addCriterion("gravitite_gloves", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GRAVITITE_GLOVES.get()))
+                    .addCriterion("gravitite_armor", armorSet(AetherIITags.Items.GRAVITITE_ARMOR))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite_armor"));
 
             AdvancementHolder arkeniumPlates = Advancement.Builder.advancement()
@@ -350,10 +342,10 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .requirements(AdvancementRequirements.Strategy.OR)
-                    .addCriterion("irradiated_weapon", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.IRRADIATED_WEAPON.get()))
-                    .addCriterion("irradiated_tool", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.IRRADIATED_TOOL.get()))
-                    .addCriterion("irradiated_armor", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.IRRADIATED_ARMOR.get()))
-                    .addCriterion("irradiated_chunk", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.IRRADIATED_CHUNK.get()))
+                    .addCriterion("irradiated_weapon", RecipeCraftedTrigger.TriggerInstance.craftedItem(ResourceKey.create(Registries.RECIPE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "purify_irradiated_weapon"))))
+                    .addCriterion("irradiated_tool", RecipeCraftedTrigger.TriggerInstance.craftedItem(ResourceKey.create(Registries.RECIPE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "purify_irradiated_tool"))))
+                    .addCriterion("irradiated_armor", RecipeCraftedTrigger.TriggerInstance.craftedItem(ResourceKey.create(Registries.RECIPE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "purify_irradiated_armor"))))
+                    .addCriterion("irradiated_chunk", RecipeCraftedTrigger.TriggerInstance.craftedItem(ResourceKey.create(Registries.RECIPE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "purify_irradiated_chunk"))))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "irradiated_item"));
 
             AdvancementHolder dartShooter = Advancement.Builder.advancement()
@@ -363,8 +355,11 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.dart_shooter.desc"),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("dart_shooter", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.DART_SHOOTER.get()))
-                    .addCriterion("amber_darts", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.AMBER_DARTS.get()))
+                    .addCriterion("dart_shooter", EffectBuildupTrigger.Instance.effect(
+                            Optional.of(EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.AMBER_DART.get()).build()),
+                            Optional.empty(),
+                            mobEffects.getOrThrow(AetherIITags.MobEffects.DART_EFFECTS),
+                            true))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "dart_shooter"));
 
             AdvancementHolder corroboniteCrystal = Advancement.Builder.advancement()
@@ -393,8 +388,8 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.charm"),
                             Component.translatable("advancement.aether_ii.charm.desc"),
                             null,
-                            AdvancementType.TASK, true, true, false)
-                    .addCriterion("charm", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.CHARM_OF_RESISTANCE_I.get())) //todo
+                            AdvancementType.GOAL, true, true, false)
+                    .addCriterion("charm", ForgingCharmTrigger.Instance.charm())
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm"));
 
             AdvancementHolder slider = Advancement.Builder.advancement()
@@ -423,7 +418,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.kill_golem_with_demolition_hammer"),
                             Component.translatable("advancement.aether_ii.kill_golem_with_demolition_hammer.desc"),
                             null,
-                            AdvancementType.TASK, true, true, false)
+                            AdvancementType.GOAL, true, true, false)
                     .addCriterion("killed_sentry_golem", KilledTrigger.TriggerInstance.playerKilledEntity(
                                     EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.SENTRY_GOLEM.get()),
                                     DamageSourcePredicate.Builder.damageType().direct(EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.DEMOLITION_PROJECTILE.get()))
@@ -438,11 +433,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.neptune_armor_loot.desc"),
                             null,
                             AdvancementType.GOAL, true, true, false)
-                    .addCriterion("neptune_helmet", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_HELMET.get()))
-                    .addCriterion("neptune_chestplate", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_CHESTPLATE.get()))
-                    .addCriterion("neptune_leggings", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_LEGGINGS.get()))
-                    .addCriterion("neptune_boots", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_BOOTS.get()))
-                    .addCriterion("neptune_gloves", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.NEPTUNE_GLOVES.get()))
+                    .addCriterion("neptune_armor", armorSet(AetherIITags.Items.NEPTUNE_ARMOR))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "neptune_armor_loot"));
 
             AdvancementHolder sentryBootsFall = Advancement.Builder.advancement()
@@ -452,33 +443,58 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.sentry_boots_fall.desc"),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("sentry_boots_fall", SentryBootsFallTrigger.Instance.forItem(ItemPredicate.Builder.item().of(items, AetherIIItems.SENTRY_BOOTS).build()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_boots_fall")); //todo
+                    .addCriterion("sentry_boots_fall", fallDistance(
+                            EntityPredicate.Builder.entity()
+                                    .equipment(EntityEquipmentPredicate.Builder.equipment().feet(ItemPredicate.Builder.item().of(items, AetherIIItems.SENTRY_BOOTS.get())))
+                                    .subPredicate(new AlivePredicate()),
+                            DistancePredicate.vertical(MinMaxBounds.Doubles.atLeast(22.0))))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_boots_fall"));
         }
     }
 
-    private static ItemUsedOnLocationTrigger.TriggerInstance itemUsedOnLocationCheckAbove(LocationPredicate.Builder location, LocationPredicate.Builder above, ItemPredicate.Builder item) {
-        ContextAwarePredicate contextawarepredicate = ContextAwarePredicate.create(LocationCheck.checkLocation(location).build(), LocationCheck.checkLocation(above, BlockPos.ZERO.above()).build(), MatchTool.toolMatches(item).build());
-        return new ItemUsedOnLocationTrigger.TriggerInstance(Optional.empty(), Optional.of(contextawarepredicate));
-    }
+    public static AdvancementHolder createBestiaryAdvancement(AdvancementHolder parent, Consumer<AdvancementHolder> output) {
+        Advancement.Builder bestiary = Advancement.Builder.advancement()
+                .parent(parent)
+                .display(AetherIIItems.GUIDEBOOK_PAGE.get(),
+                        Component.translatable("advancement.aether_ii.bestiary"),
+                        Component.translatable("advancement.aether_ii.bestiary.desc"),
+                        null,
+                        AdvancementType.CHALLENGE, true, true, false);
 
-    public static Criterion<ItemUsedOnLocationTrigger.TriggerInstance> itemUsedOnBlockCheckAbove(LocationPredicate.Builder location, LocationPredicate.Builder above, ItemPredicate.Builder item) {
-        return CriteriaTriggers.ITEM_USED_ON_BLOCK.createCriterion(itemUsedOnLocationCheckAbove(location, above, item));
-    }
+        for (Map.Entry<ResourceKey<BestiaryEntry>, Holder<EntityType<?>>> entry : AetherIIBestiaryEntries.ENTITIES.entrySet()) {
+            EntityType<?> entityType = entry.getValue().value();
+            ResourceLocation observeId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "observe_" + entityType.toShortString()).withPrefix("bestiary/");
 
-    public static Criterion<InventoryChangeTrigger.TriggerInstance> hasNumberofItem(int count, ItemLike... items) { //todo
-        ItemPredicate[] aitempredicate = new ItemPredicate[items.length];
-
-        for (int i = 0; i < items.length; i++) {
-            aitempredicate[i] = new ItemPredicate(
-                    Optional.of(HolderSet.direct(items[i].asItem().builtInRegistryHolder())), MinMaxBounds.Ints.atLeast(count), DataComponentMatchers.ANY);
+            EntityPredicate.Builder builder = EntityPredicate.Builder.entity().subPredicate(PlayerPredicate.Builder.player().checkAdvancementDone(observeId, true).build());
+            LootItemCondition condition = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, builder).build();
+            bestiary = bestiary.addCriterion(entityType.toShortString(), CriteriaTriggers.TICK.createCriterion(new PlayerTrigger.TriggerInstance(Optional.of(ContextAwarePredicate.create(condition)))));
         }
 
-        return InventoryChangeTrigger.TriggerInstance.hasItems(aitempredicate);
+        return bestiary.save(output, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bestiary"));
+    }
+
+    public static Criterion<ConsumeItemTrigger.TriggerInstance> buildupReductionItemConsumed(ItemPredicate.Builder item, Holder<MobEffect> effect) {
+        EntityPredicate.Builder builder = EntityPredicate.Builder.entity().subPredicate(new EffectBuildupPredicate(effect, Optional.empty()));
+        LootItemCondition condition = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, builder).build();
+        return CriteriaTriggers.CONSUME_ITEM.createCriterion(new ConsumeItemTrigger.TriggerInstance(Optional.of(ContextAwarePredicate.create(condition)), Optional.of(item.build())));
+    }
+
+    public static Criterion<UsingItemTrigger.TriggerInstance> itemUsed(ItemPredicate.Builder itemPredicate) {
+        return CriteriaTriggers.USING_ITEM.createCriterion(new UsingItemTrigger.TriggerInstance(Optional.empty(), Optional.of(itemPredicate.build())));
     }
 
     public static Criterion<PlayerInteractTrigger.TriggerInstance> itemUsedOnSpecificEntity(ItemPredicate.Builder item, EntityPredicate.Builder entity) {
         return PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(Optional.empty(), item, Optional.of(EntityPredicate.wrap(entity)));
+    }
+
+    public static Criterion<PlayerTrigger.TriggerInstance> armorSet(TagKey<Item> armor) {
+        EntityPredicate.Builder builder = EntityPredicate.Builder.entity().subPredicate(new ArmorSetPredicate(armor));
+        LootItemCondition condition = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, builder).build();
+        return CriteriaTriggers.TICK.createCriterion(new PlayerTrigger.TriggerInstance(Optional.of(ContextAwarePredicate.create(condition))));
+    }
+
+    public static Criterion<DistanceTrigger.TriggerInstance> fallDistance(EntityPredicate.Builder player, DistancePredicate distance) {
+        return CriteriaTriggers.FALL_FROM_HEIGHT.createCriterion(new DistanceTrigger.TriggerInstance(Optional.of(EntityPredicate.wrap(player)), Optional.empty(), Optional.of(distance)));
     }
 
     public static class BestiaryAdvancements implements AdvancementSubProvider {
@@ -503,7 +519,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
         }
 
         private static Advancement.Builder observe(HolderGetter<Item> itemGetter, HolderGetter<EntityType<?>> entityGetter, Advancement.Builder builder, EntityType<?> entity) {
-            return understand(itemGetter, entityGetter, builder.addCriterion("observe", PlayerTrigger.TriggerInstance.located(EntityPredicate.Builder.entity().subPredicate(PlayerPredicate.Builder.player().setLookingAt(EntityPredicate.Builder.entity().of(entityGetter, entity)).build()))), entity);
+            return understand(itemGetter, entityGetter, builder.addCriterion("observe_" + entity.toShortString(), PlayerTrigger.TriggerInstance.located(EntityPredicate.Builder.entity().subPredicate(PlayerPredicate.Builder.player().setLookingAt(EntityPredicate.Builder.entity().of(entityGetter, entity)).build()))), entity);
         }
 
         private static Advancement.Builder understand(HolderGetter<Item> itemGetter, HolderGetter<EntityType<?>> entityGetter, Advancement.Builder builder, EntityType<?> entity) {

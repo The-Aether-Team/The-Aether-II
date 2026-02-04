@@ -3,11 +3,29 @@
   "criteria": {
     "sentry_boots_fall": {
       "conditions": {
-        "item": {
-          "items": "aether_ii:sentry_boots"
-        }
+        "distance": {
+          "y": {
+            "min": 22.0
+          }
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "equipment": {
+                "feet": {
+                  "items": "aether_ii:sentry_boots"
+                }
+              },
+              "type_specific": {
+                "type": "aether_ii:alive"
+              }
+            }
+          }
+        ]
       },
-      "trigger": "aether_ii:sentry_boots_fall_trigger"
+      "trigger": "minecraft:fall_from_height"
     }
   },
   "display": {

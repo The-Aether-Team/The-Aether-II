@@ -3,23 +3,43 @@
   "criteria": {
     "antitoxin_vial": {
       "conditions": {
-        "items": [
+        "item": {
+          "items": "aether_ii:antitoxin_vial"
+        },
+        "player": [
           {
-            "items": "aether_ii:antitoxin_vial"
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "aether_ii:effect_buildup",
+                "effect": "aether_ii:toxin"
+              }
+            }
           }
         ]
       },
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "minecraft:consume_item"
     },
     "antivenom_vial": {
       "conditions": {
-        "items": [
+        "item": {
+          "items": "aether_ii:antivenom_vial"
+        },
+        "player": [
           {
-            "items": "aether_ii:antivenom_vial"
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "aether_ii:effect_buildup",
+                "effect": "aether_ii:venom"
+              }
+            }
           }
         ]
       },
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "minecraft:consume_item"
     }
   },
   "display": {
