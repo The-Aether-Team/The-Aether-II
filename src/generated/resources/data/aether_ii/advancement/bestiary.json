@@ -568,25 +568,28 @@
   },
   "requirements": [
     [
-      "golden_swet"
+      "highfields_taegore"
     ],
     [
-      "aechor_plant"
+      "magnetic_taegore"
     ],
     [
-      "cockatrice"
-    ],
-    [
-      "sentry_golem"
+      "arctic_taegore"
     ],
     [
       "highfields_kirrid"
     ],
     [
-      "arkenium_taluton"
+      "magnetic_kirrid"
     ],
     [
-      "skyroot_lizard"
+      "arctic_kirrid"
+    ],
+    [
+      "highfields_burrukai"
+    ],
+    [
+      "magnetic_burrukai"
     ],
     [
       "arctic_burrukai"
@@ -595,64 +598,61 @@
       "phyg"
     ],
     [
-      "zephyr"
-    ],
-    [
-      "magnetic_kirrid"
-    ],
-    [
       "sheepuff"
-    ],
-    [
-      "aerbunny"
-    ],
-    [
-      "arctic_kirrid"
-    ],
-    [
-      "tempest"
-    ],
-    [
-      "mimic"
-    ],
-    [
-      "magnetic_burrukai"
-    ],
-    [
-      "highfields_burrukai"
     ],
     [
       "flying_cow"
     ],
     [
-      "blue_swet"
+      "aerbunny"
     ],
     [
-      "skephid"
-    ],
-    [
-      "slider"
-    ],
-    [
-      "arctic_taegore"
-    ],
-    [
-      "detonation_sentry"
-    ],
-    [
-      "carrion_sprout"
+      "skyroot_lizard"
     ],
     [
       "moa"
     ],
     [
+      "blue_swet"
+    ],
+    [
+      "golden_swet"
+    ],
+    [
+      "aechor_plant"
+    ],
+    [
+      "carrion_sprout"
+    ],
+    [
+      "skephid"
+    ],
+    [
+      "zephyr"
+    ],
+    [
+      "tempest"
+    ],
+    [
+      "cockatrice"
+    ],
+    [
+      "arkenium_taluton"
+    ],
+    [
       "gravitite_taluton"
     ],
     [
-      "magnetic_taegore"
+      "mimic"
     ],
     [
-      "highfields_taegore"
+      "detonation_sentry"
+    ],
+    [
+      "sentry_golem"
+    ],
+    [
+      "slider"
     ]
   ],
   "sends_telemetry_event": true

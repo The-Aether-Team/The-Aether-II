@@ -461,8 +461,8 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                         null,
                         AdvancementType.CHALLENGE, true, true, false);
 
-        for (Map.Entry<ResourceKey<BestiaryEntry>, Holder<EntityType<?>>> entry : AetherIIBestiaryEntries.ENTITIES.entrySet()) {
-            EntityType<?> entityType = entry.getValue().value();
+        for (Holder<EntityType<?>> entry : AetherIIBestiaryEntries.ENTRY_ORDER) {
+            EntityType<?> entityType = entry.value();
             ResourceLocation observeId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "observe_" + entityType.toShortString()).withPrefix("bestiary/");
 
             EntityPredicate.Builder builder = EntityPredicate.Builder.entity().subPredicate(PlayerPredicate.Builder.player().checkAdvancementDone(observeId, true).build());
