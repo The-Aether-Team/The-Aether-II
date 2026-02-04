@@ -169,8 +169,13 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.carpet(AetherIIBlocks.AMBRELINN_MOSS_CARPET, AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get());
 
         // Moa Nest
-        this.twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.WOVEN_SKYROOT_STICKS, AetherIIItems.SKYROOT_STICK.get());
-        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.SKYROOT_STICK.get(), 4)
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.WOVEN_SKYROOT_STICKS, 2)
+                .define('#', AetherIIItems.SKYROOT_STICK)
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy(getHasName(AetherIIItems.SKYROOT_STICK), has(AetherIIItems.SKYROOT_STICK))
+                .save(this.output);
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.SKYROOT_STICK.get(), 2)
                 .requires(AetherIIBlocks.WOVEN_SKYROOT_STICKS)
                 .unlockedBy("has_woven_skyroot_sticks", has(AetherIIBlocks.WOVEN_SKYROOT_STICKS))
                 .save(this.output);

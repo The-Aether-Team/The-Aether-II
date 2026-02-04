@@ -61,7 +61,9 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
                         this.instance.getEffect().value().applyInstantenousEffect(serverLevel, null, null, entity, this.instance.getAmplifier(), 1.0);
                     }
                 } else {
-                    entity.addEffect(this.instance);
+                    if (!entity.level().isClientSide()) {
+                        entity.addEffect(this.instance);
+                    }
                 }
                 this.triggerEffect = false;
             }
