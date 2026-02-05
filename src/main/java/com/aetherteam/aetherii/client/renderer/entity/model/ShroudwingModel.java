@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.animation.ShroudwingAnimations;
 import com.aetherteam.aetherii.client.renderer.entity.state.ShroudwingRenderState;
 import net.minecraft.client.animation.KeyframeAnimation;
@@ -53,11 +54,13 @@ public class ShroudwingModel extends EntityModel<ShroudwingRenderState> {
     @Override
     public void setupAnim(ShroudwingRenderState renderState) {
         super.setupAnim(renderState);
-        this.flyingAnimation.applyWalk(renderState.ageInTicks, 1F - renderState.restScale, 1.0F, 1.0F);
+        this.flyingAnimation.applyWalk(renderState.ageInTicks, renderState.rest ? 0.0F : 1.0F, 1.0F, 1.0F);
         this.landAnimation.apply(renderState.landAnimationState, renderState.ageInTicks);
         this.takeOffAnimation.apply(renderState.takeOffAnimationState, renderState.ageInTicks);
-        float rotation = (Mth.sin(renderState.ageInTicks * 2) * 10 * Mth.DEG_TO_RAD);
-        this.rightWing.zRot = rotation;
-        this.leftWing.zRot = rotation;
+        if (!renderState.rest) {
+            float rotation = (Mth.sin(renderState.ageInTicks * 2) * 10 * Mth.DEG_TO_RAD);
+            this.rightWing.zRot = rotation;
+            this.leftWing.zRot = rotation;
+        }
     }
 }

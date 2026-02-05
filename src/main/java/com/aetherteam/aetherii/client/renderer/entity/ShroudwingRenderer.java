@@ -31,7 +31,7 @@ public class ShroudwingRenderer extends MobRenderer<Shroudwing, ShroudwingRender
         super.extractRenderState(shroudwing, state, partialTicks);
         state.texture = shroudwing.getVariant().value().texture();
         state.emissiveTexture = shroudwing.getVariant().value().emissiveTexture().orElse(null);
-        state.restScale = shroudwing.getRestAnimationScale(partialTicks);
+        state.rest = shroudwing.isRest();
         state.landAnimationState.copyFrom(shroudwing.landAnimationState);
         state.takeOffAnimationState.copyFrom(shroudwing.takeOffAnimationState);
     }

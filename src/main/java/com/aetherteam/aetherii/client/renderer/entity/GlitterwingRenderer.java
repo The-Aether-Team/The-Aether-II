@@ -34,7 +34,7 @@ public class GlitterwingRenderer extends MobRenderer<Glitterwing, GlitterwingRen
         state.emissiveTexture = glitterwing.getVariant().value().emissiveTexture().orElse(null);
         state.wingXOffset = glitterwing.getVariant().value().wingXOffset();
         state.wingZRotation = glitterwing.getVariant().value().wingZRotation();
-        state.restScale = glitterwing.getRestAnimationScale(partialTicks);
+        state.rest = glitterwing.isRest();
         state.landAnimationState.copyFrom(glitterwing.landAnimationState);
         state.takeOffAnimationState.copyFrom(glitterwing.takeOffAnimationState);
     }

@@ -33,8 +33,6 @@ import java.util.EnumSet;
 public class Insect extends PathfinderMob {
     private static final EntityDataAccessor<Boolean> DATA_REST = SynchedEntityData.defineId(Insect.class, EntityDataSerializers.BOOLEAN);
 
-    private float restAnimationO;
-    private float restAnimation;
     private int needNextAction;
     private boolean needRest;
     private int groundTick;
@@ -116,20 +114,6 @@ public class Insect extends PathfinderMob {
     }
 
     @Override
-    public void tick() {
-        super.tick();
-        if (this.level().isClientSide) {
-
-            this.restAnimationO = this.restAnimation;
-            if (this.isRest()) {
-                this.restAnimation = Mth.clamp(this.restAnimation + 0.1F, 0.0F, 1.0F);
-            } else {
-                this.restAnimation = Mth.clamp(this.restAnimation - 0.1F, 0.0F, 1.0F);
-            }
-        }
-    }
-
-    @Override
     protected void addAdditionalSaveData(ValueOutput valueOutput) {
         super.addAdditionalSaveData(valueOutput);
         valueOutput.putBoolean("Rest", this.isRest());
@@ -194,11 +178,6 @@ public class Insect extends PathfinderMob {
     public float getNeedNextAction() {
         return needNextAction;
     }
-
-    public float getRestAnimationScale(float partialTick) {
-        return Mth.lerp(partialTick, this.restAnimationO, this.restAnimation);
-    }
-
 
     @Override
     public void travel(Vec3 p_415638_) {
