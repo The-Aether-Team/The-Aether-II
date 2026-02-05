@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.LogoRenderer;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 
 public class AetherIILogoRenderer extends LogoRenderer {
@@ -26,7 +27,7 @@ public class AetherIILogoRenderer extends LogoRenderer {
        // RenderSystem.enableBlend();
         int logoX = this.alignedLeft ? 28 : (int) ((screenWidth / 2.0F - (190.0F / 2.0F)));
         int logoY = this.alignedLeft ? 15 : 36;
-        guiGraphics.blit(AETHER_LOGO, logoX, logoY, 0, 0, 190, 61, 190, 61);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, AETHER_LOGO, logoX, logoY, 0, 0, 190, 61, 190, 61);
        // guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F); //todo
        // RenderSystem.disableBlend();
     }
