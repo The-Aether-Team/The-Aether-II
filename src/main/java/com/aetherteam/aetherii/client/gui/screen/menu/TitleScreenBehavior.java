@@ -101,6 +101,7 @@ public interface TitleScreenBehavior {
                 || buttonText.equals(Component.translatable("menu.multiplayer"))
                 || buttonText.equals(Component.translatable("gui.aether.menu.server"))
                 || buttonText.equals(Component.translatable("menu.online"))
+                || buttonText.equals(Component.literal("Create Test World"))
                 || buttonText.equals(Component.translatable("fml.menu.mods"))
                 || buttonText.equals(Component.translatable("menu.options"))
                 || buttonText.equals(Component.translatable("menu.quit"));
