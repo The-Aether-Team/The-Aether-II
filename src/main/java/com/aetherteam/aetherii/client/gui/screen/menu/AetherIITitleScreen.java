@@ -22,7 +22,7 @@ import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehavior, CustomBranding {
-    public static final Music MENU = new Music(AetherIISoundEvents.MUSIC_MENU, 20, 600, true);
+    public static final Music MENU = new Music(AetherIISoundEvents.MUSIC_MENU, 20, 100, true);
     private final boolean alignedLeft;
     private Map<Component, AbstractWidget> widgetsByName = new HashMap<>();
 
