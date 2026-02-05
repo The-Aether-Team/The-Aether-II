@@ -1751,5 +1751,21 @@
       }
     ],
     "subtitle": "subtitles.aether_ii.ui.artisans_bench.take_result"
+  },
+  "ui.toast.aether_general": {
+    "sounds": [
+      {
+        "name": "aether_ii:advancement/advancement_gen",
+        "stream": true
+      }
+    ]
+  },
+  "ui.toast.aether_slider": {
+    "sounds": [
+      {
+        "name": "aether_ii:advancement/advancement_slider",
+        "stream": true
+      }
+    ]
   }
 }

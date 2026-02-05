@@ -1,0 +1,33 @@
+{
+  "parent": "aether_ii:corrobonite_crystal",
+  "criteria": {
+    "craft_arkenium_forge": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:arkenium_forge"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.aether_ii.craft_arkenium_forge.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:arkenium_forge"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.craft_arkenium_forge"
+    }
+  },
+  "requirements": [
+    [
+      "craft_arkenium_forge"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

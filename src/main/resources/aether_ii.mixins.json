@@ -61,6 +61,8 @@
     "client.MusicManagerMixin",
     "client.PlayerItemInHandLayerMixin",
     "client.PlayerRendererMixin",
+    "client.ToastManagerMixin",
+    "client.accessor.AdvancementToastAccessor",
     "client.accessor.BlockModelWrapperAccessor",
     "client.accessor.BossHealthOverlayAccessor",
     "client.accessor.DeathScreenAccessor",

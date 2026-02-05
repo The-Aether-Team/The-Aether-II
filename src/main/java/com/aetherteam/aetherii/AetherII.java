@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii;
 
+import com.aetherteam.aetherii.advancement.AetherIIAdvancementSoundOverrides;
+import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.command.AetherIICommands;
 import org.slf4j.Logger;
 
@@ -94,6 +96,7 @@ public class AetherII {
 
         DeferredRegister<?>[] registers = {
                 AetherIIMurals.MURALS,
+                AetherIIAdvancementSoundOverrides.ADVANCEMENT_SOUND_OVERRIDES,
                 AetherIIFluidTypes.FLUID_TYPES,
                 AetherIIFluids.FLUIDS,
                 AetherIIBlocks.BLOCKS,
@@ -133,6 +136,7 @@ public class AetherII {
                 AetherIISurfaceRules.MATERIAL_RULES,
                 AetherIIBlockPredicateTypes.BLOCK_PREDICATE_TYPES,
                 AetherIIPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES,
+                AetherIIAdvancementTriggers.TRIGGERS,
                 AetherIIEntitySubPredicates.ENTITY_SUB_PREDICATES,
         };
 

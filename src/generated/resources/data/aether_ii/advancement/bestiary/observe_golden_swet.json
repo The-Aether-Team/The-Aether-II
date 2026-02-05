@@ -14,7 +14,7 @@
       },
       "trigger": "minecraft:player_killed_entity"
     },
-    "observe": {
+    "observe_golden_swet": {
       "conditions": {
         "player": [
           {
@@ -36,7 +36,7 @@
   },
   "requirements": [
     [
-      "observe",
+      "observe_golden_swet",
       "kill_golden_swet"
     ]
   ],
