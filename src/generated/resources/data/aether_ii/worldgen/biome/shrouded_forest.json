@@ -1,5 +1,6 @@
 {
   "carvers": "aether_ii:highlands_cave",
+  "creature_spawn_probability": 0.25,
   "downfall": 0.8,
   "effects": {
     "fog_color": 15526908,
@@ -117,9 +118,13 @@
       "charge": 0.4,
       "energy_budget": 0.12
     },
-    "aether_ii:tempest": {
+    "aether_ii:cockatrice": {
       "charge": 0.6,
-      "energy_budget": 0.16
+      "energy_budget": 0.1
+    },
+    "aether_ii:tempest": {
+      "charge": 0.9,
+      "energy_budget": 0.1
     },
     "aether_ii:zephyr": {
       "charge": 0.6,
@@ -209,45 +214,45 @@
     "creature": [
       {
         "type": "aether_ii:highfields_taegore",
-        "maxCount": 3,
+        "maxCount": 4,
         "minCount": 1,
-        "weight": 20
+        "weight": 14
       },
       {
         "type": "aether_ii:highfields_burrukai",
-        "maxCount": 3,
+        "maxCount": 2,
         "minCount": 1,
-        "weight": 20
+        "weight": 14
       },
       {
         "type": "aether_ii:highfields_kirrid",
         "maxCount": 3,
-        "minCount": 1,
-        "weight": 24
+        "minCount": 2,
+        "weight": 14
       },
       {
         "type": "aether_ii:phyg",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 4
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 1
       },
       {
         "type": "aether_ii:flying_cow",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 4
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 1
       },
       {
         "type": "aether_ii:sheepuff",
-        "maxCount": 2,
+        "maxCount": 4,
         "minCount": 2,
-        "weight": 6
+        "weight": 1
       },
       {
         "type": "aether_ii:aerbunny",
-        "maxCount": 2,
+        "maxCount": 3,
         "minCount": 1,
-        "weight": 16
+        "weight": 12
       }
     ],
     "misc": [],
