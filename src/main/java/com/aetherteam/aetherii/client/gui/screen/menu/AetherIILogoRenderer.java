@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ARGB;
 
 public class AetherIILogoRenderer extends LogoRenderer {
     private static final ResourceLocation AETHER_LOGO = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/title/aether_ii.png");
@@ -23,12 +24,10 @@ public class AetherIILogoRenderer extends LogoRenderer {
     }
 
     public void renderLogo(GuiGraphics guiGraphics, int screenWidth, float transparency, int height) {
-       // guiGraphics.setColor(1.0F, 1.0F, 1.0F, this.keepLogoThroughFade ? 1.0F : transparency);
-       // RenderSystem.enableBlend();
+        float f = this.keepLogoThroughFade ? 1.0F : transparency;
+        int i = ARGB.white(f);
         int logoX = this.alignedLeft ? 8 : (int) ((screenWidth / 2.0F - (190.0F / 2.0F)));
         int logoY = this.alignedLeft ? 8 : 36;
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, AETHER_LOGO, logoX, logoY, 0, 0, 190, 61, 190, 61);
-       // guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F); //todo
-       // RenderSystem.disableBlend();
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, AETHER_LOGO, logoX, logoY, 0, 0, 190, 61, 190, 61, i);
     }
 }
