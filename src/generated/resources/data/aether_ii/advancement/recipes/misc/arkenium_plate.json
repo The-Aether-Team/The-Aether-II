@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:arkenium_plates"
+        "recipe": "aether_ii:arkenium_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:arkenium_plates"
+      "aether_ii:arkenium_plate"
     ]
   }
 }

@@ -979,8 +979,8 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.carpet(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET, AetherIIBlocks.BLACK_CLOUDWOOL.get());
 
         // Arkenium Blocks
-        this.doorBuilder(AetherIIBlocks.ARKENIUM_DOOR, Ingredient.of(AetherIIItems.ARKENIUM_PLATES.get())).unlockedBy(getHasName(AetherIIItems.ARKENIUM_PLATES.get()), has(AetherIIItems.ARKENIUM_PLATES.get())).save(this.output);
-        this.twoByTwoPacker(RecipeCategory.REDSTONE, AetherIIBlocks.ARKENIUM_TRAPDOOR, AetherIIItems.ARKENIUM_PLATES);
+        this.doorBuilder(AetherIIBlocks.ARKENIUM_DOOR, Ingredient.of(AetherIIItems.ARKENIUM_PLATE.get())).unlockedBy(getHasName(AetherIIItems.ARKENIUM_PLATE.get()), has(AetherIIItems.ARKENIUM_PLATE.get())).save(this.output);
+        this.twoByTwoPacker(RecipeCategory.REDSTONE, AetherIIBlocks.ARKENIUM_TRAPDOOR, AetherIIItems.ARKENIUM_PLATE);
 
         // Inert Mineral Blocks
         this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.INERT_ARKENIUM.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.INERT_ARKENIUM_BLOCK, "inert_arkenium_from_inert_arkenium_block", "inert_arkenium");
@@ -989,7 +989,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         // Mineral Blocks
         this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.AMBROSIUM_SHARD.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.AMBROSIUM_BLOCK, "ambrosium_shard_from_ambrosium_block", "ambrosium_shard");
         this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.ZANITE_GEMSTONE.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.ZANITE_BLOCK, "zanite_gemstone_from_zanite_block", "zanite_gemstone");
-        this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATES.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.ARKENIUM_BLOCK, "arkenium_plates_from_arkenium_block", "arkenium_plates");
+        this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.ARKENIUM_BLOCK, "arkenium_plate_from_arkenium_block", "arkenium_plate");
         this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GRAVITITE_BLOCK, "gravitite_plate_from_gravitite_block", "gravitite_plate");
         this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.GLINT_GEMSTONE.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GLINT_BLOCK, "glint_gemstone_from_glint_block", "glint_gemstone");
         this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.CORROBONITE_CRYSTAL.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.CORROBONITE_BLOCK, "corrobonite_crystal_from_corrobonite_block", "corrobonite_crystal");
@@ -1025,20 +1025,20 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy(getHasName(AetherIIItems.AMBROSIUM_SHARD.get()), has(AetherIIItems.AMBROSIUM_SHARD.get()))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_LANTERN.get(), 2)
-                .define('#', AetherIIItems.ARKENIUM_PLATES.get())
+                .define('#', AetherIIItems.ARKENIUM_PLATE.get())
                 .define('/', AetherIIBlocks.AMBROSIUM_TORCH)
                 .pattern("#")
                 .pattern("/")
                 .pattern("#")
-                .unlockedBy(getHasName(AetherIIItems.ARKENIUM_PLATES.get()), has(AetherIIItems.ARKENIUM_PLATES.get()))
+                .unlockedBy(getHasName(AetherIIItems.ARKENIUM_PLATE.get()), has(AetherIIItems.ARKENIUM_PLATE.get()))
                 .save(this.output);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get(), AetherIIBlocks.ARKENIUM_LANTERN.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_LANTERN.get(), AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get());
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_CHAIN.get(), 2)
-                .define('#', AetherIIItems.ARKENIUM_PLATES.get())
+                .define('#', AetherIIItems.ARKENIUM_PLATE.get())
                 .pattern("#")
                 .pattern("#")
-                .unlockedBy(getHasName(AetherIIItems.ARKENIUM_PLATES.get()), has(AetherIIItems.ARKENIUM_PLATES.get()))
+                .unlockedBy(getHasName(AetherIIItems.ARKENIUM_PLATE.get()), has(AetherIIItems.ARKENIUM_PLATE.get()))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get())
                 .define('#', AetherIITags.Items.PLANKS_CRAFTING)
@@ -1441,9 +1441,9 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.smeltingOreRecipe(AetherIIItems.GLINT_GEMSTONE.get(), AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(), 0.3F).group("glint").save(this.output, this.name("glint_gemstone_from_smelting_undershale_glint_ore"));
         this.blastingOreRecipe(AetherIIItems.GLINT_GEMSTONE.get(), AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(), 0.3F).group("glint").save(this.output, this.name("glint_gemstone_from_blasting_undershale_glint_ore"));
 
-        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATES, AetherIIItems.INERT_ARKENIUM, 3, 0.0F).group("arkenium").save(this.output);
-        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATES, AetherIIBlocks.ARKENIUM_ORE, 3, 0.0F).group("arkenium").save(this.output, this.name("arkenium_plates_from_arkenium_ore"));
-        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATES, AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE, 3, 0.0F).group("arkenium").save(this.output, this.name("arkenium_plates_from_undershale_arkenium_ore"));
+        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, AetherIIItems.INERT_ARKENIUM, 3, 0.0F).group("arkenium").save(this.output);
+        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, AetherIIBlocks.ARKENIUM_ORE, 3, 0.0F).group("arkenium").save(this.output, this.name("arkenium_plates_from_arkenium_ore"));
+        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE, 3, 0.0F).group("arkenium").save(this.output, this.name("arkenium_plates_from_undershale_arkenium_ore"));
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIItems.INERT_GRAVITITE, 4, 0.0F).group("gravitite").save(this.output);
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIBlocks.GRAVITITE_ORE, 4, 0.0F).group("gravitite").save(this.output, this.name("gravitite_plates_from_gravitite_ore"));
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE, 4, 0.0F).group("gravitite").save(this.output, this.name("gravitite_plates_from_undershale_gravitite_ore"));
