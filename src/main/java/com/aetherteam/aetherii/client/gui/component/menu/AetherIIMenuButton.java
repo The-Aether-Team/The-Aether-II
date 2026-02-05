@@ -66,9 +66,9 @@ public class AetherIIMenuButton extends Button {
      */
     public int getTextColor(int mouseX, int mouseY) {
         if (!this.serverButton) {
-            return this.isMouseOver(mouseX, mouseY) ? 11842776 : 13948116;
+            return this.isMouseOver(mouseX, mouseY) ? 11391231 : 13948116;
         } else {
-            return this.isMouseOver(mouseX, mouseY) ? 13746759 : 15457113;
+            return this.isMouseOver(mouseX, mouseY) ? 4407144 : 15457113;
         }
     }
 }
