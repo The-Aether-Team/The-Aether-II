@@ -38,7 +38,7 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
         this.alignedLeft = alignedLeft;
         TitleScreenAccessor accessor = ((TitleScreenAccessor) this);
         accessor.aetherII$setFading(true);
-        accessor.aetherII$setLogoRenderer(new AetherIILogoRenderer(false, this.alignedLeft));
+        accessor.aetherII$setLogoRenderer(new AetherIILogoRenderer(false));
     }
 
     @Override

@@ -11,12 +11,10 @@ import net.minecraft.util.ARGB;
 public class AetherIILogoRenderer extends LogoRenderer {
     private static final ResourceLocation AETHER_LOGO = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/title/aether_ii.png");
     private final boolean keepLogoThroughFade;
-    private final boolean alignedLeft;
 
-    public AetherIILogoRenderer(boolean keepLogoThroughFade, boolean alignedLeft) {
+    public AetherIILogoRenderer(boolean keepLogoThroughFade) {
         super(keepLogoThroughFade);
         this.keepLogoThroughFade = keepLogoThroughFade;
-        this.alignedLeft = alignedLeft;
     }
 
     public void renderLogo(GuiGraphics guiGraphics, int screenWidth, float transparency) {
@@ -26,8 +24,8 @@ public class AetherIILogoRenderer extends LogoRenderer {
     public void renderLogo(GuiGraphics guiGraphics, int screenWidth, float transparency, int height) {
         float f = this.keepLogoThroughFade ? 1.0F : transparency;
         int i = ARGB.white(f);
-        int logoX = this.alignedLeft ? 8 : (int) ((screenWidth / 2.0F - (190.0F / 2.0F)));
-        int logoY = this.alignedLeft ? 8 : 36;
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, AETHER_LOGO, logoX, logoY, 0, 0, 190, 61, 190, 61, i);
+        int logoX = (int) ((screenWidth / 2.0F - (218.0F / 2.0F)));
+        int logoY = 16;
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, AETHER_LOGO, logoX, logoY, 0, 0, 218, 70, 218, 70, i);
     }
 }
