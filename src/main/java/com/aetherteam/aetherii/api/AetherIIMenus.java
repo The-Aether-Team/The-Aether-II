@@ -15,8 +15,11 @@ public class AetherIIMenus implements MenuInitializer {
     // Names
     private static final Component AETHER_II_NAME = Component.translatable("aether_ii.menu_title.the_aether_ii");
 
+    // Panorama
+    public static final ResourceLocation AETHER_II_PANORAMA = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/title/panorama/panorama"); // Registered in AetherIIClient
+
     // Menus //todo remove alignedLeft boolean since the menu will always be aligned left
-    public static final Menu AETHER_II = new Menu(AETHER_II_ICON, AETHER_II_NAME, new AetherIITitleScreen(true), new Menu.Properties().music(AetherIITitleScreen.MENU).panorama(new CubeMap(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/title/panorama/panorama"))));
+    public static final Menu AETHER_II = new Menu(AETHER_II_ICON, AETHER_II_NAME, new AetherIITitleScreen(true), new Menu.Properties().music(AetherIITitleScreen.MENU).panorama(new CubeMap(AETHER_II_PANORAMA)));
 
     @Override
     public void registerMenus(MenuRegisterCallback menuRegisterCallback) {
