@@ -158,12 +158,12 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
                         this.buttonRows++;
                     }
                 }
-               // if (buttonText.equals(Component.translatable("gui.aether_ii.menu.server"))) {
-               //     aetherIIButton.serverButton = true;
-               //     aetherIIButton.buttonCountOffset = 2;
-               // } else {
+                if (buttonText.equals(Component.translatable("gui.aether_ii.menu.server"))) {
+                    aetherIIButton.serverButton = true;
+                    aetherIIButton.buttonCountOffset = 2;
+                } else {
                     aetherIIButton.buttonCountOffset = this.buttonRows;
-                //}
+                }
                // if (AetherConfig.CLIENT.enable_server_button.get() && buttonText.equals(Component.translatable("menu.singleplayer"))) {
                //     this.buttonRows++;
                // }
