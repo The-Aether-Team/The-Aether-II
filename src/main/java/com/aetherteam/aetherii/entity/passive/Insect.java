@@ -9,7 +9,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -132,20 +131,23 @@ public class Insect extends PathfinderMob {
     @Override
     public void aiStep() {
         super.aiStep();
-        if (this.needNextAction <= 0) {
-            if (!this.isNeedRest() && !this.isRest()) {
-                this.makeActionCooldown();
-                this.needRest = true;
-            } else if (this.isNeedRest() && this.isRest()) {
-                this.makeActionCooldown();
-                this.needRest = false;
-                this.setRestWithAnimation(false);
+        if (!this.level().isClientSide) {
+            if (this.needNextAction <= 0) {
+                if (!this.isNeedRest() && !this.isRest()) {
+                    this.makeActionCooldown();
+                    this.needRest = true;
+                } else if (this.isNeedRest() && this.isRest()) {
+                    this.makeActionCooldown();
+                    this.needRest = false;
+                    this.setRestWithAnimation(false);
+                }
+            } else {
+                this.needNextAction--;
             }
-        } else {
-            this.needNextAction--;
+
+            this.restTick();
         }
 
-        this.restTick();
     }
 
     public void restTick() {
@@ -158,8 +160,9 @@ public class Insect extends PathfinderMob {
             if (this.level().getBlockState(BlockPos.containing(this.position().add(0, -0.01F, 0))).getCollisionShape(this.level(), BlockPos.containing(this.position().add(0, -0.01F, 0))).isEmpty()) {
                 ++this.groundTick;
             }
-            if (this.groundTick > 4) {
+            if (this.groundTick > 2) {
                 this.stopRest();
+                this.groundTick = 0;
             } else {
                 this.groundTick = 0;
             }
