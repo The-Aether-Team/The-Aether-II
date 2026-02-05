@@ -2,12 +2,10 @@ package com.aetherteam.aetherii.client.gui.screen.menu;
 
 import com.aetherteam.aetherii.client.gui.component.menu.AetherIIMenuButton;
 import com.aetherteam.aetherii.client.gui.screen.menu.logo.AetherIILogoRenderer;
-import com.aetherteam.aetherii.client.gui.screen.menu.splash.AetherIISplashRenderer;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.TitleScreenAccessor;
 import com.aetherteam.cumulus.CumulusConfig;
 import com.aetherteam.cumulus.client.gui.screen.DynamicMenuButton;
-import com.aetherteam.cumulus.mixin.mixins.client.accessor.SplashRendererAccessor;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
@@ -51,7 +49,7 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
         this.lastY = 0;
         super.init();
         if (this.minecraft != null) {
-            accessor.aetherII$setSplash(new AetherIISplashRenderer(this.alignedLeft, ((SplashRendererAccessor) ((TitleScreenAccessor) this).aetherII$getSplash()).cumulus$getSplash()));
+            accessor.aetherII$setSplash(null);
         }
         this.setupButtons();
         this.widgetsByName = this.children().stream().filter(e -> e instanceof AbstractWidget).map(e -> (AbstractWidget) e)
