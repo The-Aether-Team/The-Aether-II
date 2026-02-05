@@ -76,6 +76,16 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                         AetherIITags.Blocks.AETHER_DIRT,
                         AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
         );
+        this.tag(AetherIITags.Blocks.LAKE_VEGETATION_REPLACEABLES)
+                .add(AetherIIBlocks.BLUEBERRY_BUSH.get())
+                .add(AetherIIBlocks.HIGHLANDS_BUSH.get())
+                .add(AetherIIBlocks.HOLYSTONE_ROCK.get())
+                .add(AetherIIBlocks.SKYROOT_TWIG.get())
+                .add(AetherIIBlocks.VALKYRIE_SPROUT.get())
+                .addTags(
+                        BlockTags.REPLACEABLE,
+                        BlockTags.REPLACEABLE_BY_TREES
+                );
         this.tag(AetherIITags.Blocks.SENTRY_RUIN_MOSS_REPLACEABLES).add(
                 AetherIIBlocks.UNDERSHALE_BRICKS.get(),
                 AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get(),
