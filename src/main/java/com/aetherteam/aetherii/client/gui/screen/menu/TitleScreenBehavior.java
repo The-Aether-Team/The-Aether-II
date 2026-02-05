@@ -99,7 +99,7 @@ public interface TitleScreenBehavior {
     static boolean isMainButton(Component buttonText) {
         return buttonText.equals(Component.translatable("menu.singleplayer"))
                 || buttonText.equals(Component.translatable("menu.multiplayer"))
-                || buttonText.equals(Component.translatable("gui.aether.menu.server"))
+                || buttonText.equals(Component.translatable("gui.aether_ii.menu.server"))
                 || buttonText.equals(Component.translatable("menu.online"))
                 || buttonText.equals(Component.literal("Create Test World"))
                 || buttonText.equals(Component.translatable("fml.menu.mods"))
