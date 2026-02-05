@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.animation.ShroudwingAnimations;
 import com.aetherteam.aetherii.client.renderer.entity.state.ShroudwingRenderState;
 import net.minecraft.client.animation.KeyframeAnimation;
@@ -14,6 +13,7 @@ public class ShroudwingModel extends EntityModel<ShroudwingRenderState> {
     private final KeyframeAnimation flyingAnimation;
     private final KeyframeAnimation landAnimation;
     private final KeyframeAnimation takeOffAnimation;
+    private final KeyframeAnimation walkAnimation;
     private final ModelPart shroudwing;
     private final ModelPart rightWing;
     private final ModelPart leftWing;
@@ -23,6 +23,7 @@ public class ShroudwingModel extends EntityModel<ShroudwingRenderState> {
         this.flyingAnimation = ShroudwingAnimations.FLYING.bake(root);
         this.landAnimation = ShroudwingAnimations.LAND.bake(root);
         this.takeOffAnimation = ShroudwingAnimations.TAKEOFF.bake(root);
+        this.walkAnimation = ShroudwingAnimations.WALK.bake(root);
         this.shroudwing = root.getChild("shroudwing");
         this.rightWing = this.shroudwing.getChild("right_wing");
         this.leftWing = this.shroudwing.getChild("left_wing");
@@ -54,7 +55,11 @@ public class ShroudwingModel extends EntityModel<ShroudwingRenderState> {
     @Override
     public void setupAnim(ShroudwingRenderState renderState) {
         super.setupAnim(renderState);
+        float f = renderState.walkAnimationSpeed;
+        float f1 = renderState.walkAnimationPos;
+
         this.flyingAnimation.applyWalk(renderState.ageInTicks, renderState.rest ? 0.0F : 1.0F, 1.0F, 1.0F);
+        this.walkAnimation.applyWalk(f1, renderState.rest ? f : 0.0F, 1.0F, 1.0F);
         this.landAnimation.apply(renderState.landAnimationState, renderState.ageInTicks);
         this.takeOffAnimation.apply(renderState.takeOffAnimationState, renderState.ageInTicks);
         if (!renderState.rest) {
