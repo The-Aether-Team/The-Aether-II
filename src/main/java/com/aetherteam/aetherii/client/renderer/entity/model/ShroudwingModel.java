@@ -59,7 +59,7 @@ public class ShroudwingModel extends EntityModel<ShroudwingRenderState> {
         float f1 = renderState.walkAnimationPos;
 
         this.flyingAnimation.applyWalk(renderState.ageInTicks, renderState.rest ? 0.0F : 1.0F, 1.0F, 1.0F);
-        this.walkAnimation.applyWalk(f1, renderState.rest ? f : 0.0F, 1.0F, 1.0F);
+        this.walkAnimation.applyWalk(f1, renderState.rest ? f : 0.0F, 16.0F, 5.0F);
         this.landAnimation.apply(renderState.landAnimationState, renderState.ageInTicks);
         this.takeOffAnimation.apply(renderState.takeOffAnimationState, renderState.ageInTicks);
         if (!renderState.rest) {
