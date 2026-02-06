@@ -35,7 +35,7 @@ public class ShroudwingModel extends EntityModel<ShroudwingRenderState> {
 
         PartDefinition shroudwing = partDefinition.addOrReplaceChild("shroudwing", CubeListBuilder.create().texOffs(28, 0).addBox(-1.0F, -3.0F, -3.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
                 .texOffs(12, 23).addBox(-2.0F, -1.0F, -3.0F, 3.0F, 2.0F, 7.0F, new CubeDeformation(0.0F))
-                .texOffs(-3, 0).addBox(-3.0F, 0.0F, -5.25F, 5.0F, 0.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 22.0F, 0.0F));
+                .texOffs(-3, 0).addBox(-3.0F, 0.0F, -5.25F, 5.0F, 0.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 23.0F, 0.0F));
 
         PartDefinition leftWingBase = shroudwing.addOrReplaceChild("left_wing_base", CubeListBuilder.create(), PartPose.offset(0.5F, -1.1F, -1.0F));
         leftWingBase.addOrReplaceChild("left_wing_case_r1", CubeListBuilder.create().texOffs(0, 19).addBox(-1.0F, 0.0F, 0.0F, 2.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.3054F, 0.1745F, 0.0F));
@@ -53,20 +53,26 @@ public class ShroudwingModel extends EntityModel<ShroudwingRenderState> {
     }
 
     @Override
-    public void setupAnim(ShroudwingRenderState renderState) { //todo the y position offsets for the take off and landing animations dont quite align with the flying animation of the shroudwing.
+    public void setupAnim(ShroudwingRenderState renderState) {
         super.setupAnim(renderState);
-//        float f = renderState.walkAnimationSpeed;
-//        float f1 = renderState.walkAnimationPos;
 
         this.flyingAnimation.apply(renderState.flyingAnimationState, renderState.ageInTicks);
         this.landAnimation.apply(renderState.landAnimationState, renderState.ageInTicks);
-        this.walkAnimation.apply(renderState.landAnimationState, renderState.ageInTicks); //todo increase speed again
         this.takeoffAnimation.apply(renderState.takeoffAnimationState, renderState.ageInTicks);
 
-        if (!renderState.rest) { //todo this needs more proper timing
+        if (renderState.walkAnimationState.isStarted()) {
+            float f = renderState.walkAnimationSpeed;
+            float f1 = renderState.walkAnimationPos;
+            this.walkAnimation.applyWalk(f1, f, 16.0F, 5.0F);
+        }
+
+        if (renderState.flyingAnimationState.isStarted()
+                || (renderState.landAnimationState.isStarted() && renderState.landAnimationState.getTimeInMillis(renderState.ageInTicks) <= 750)
+                || (renderState.takeoffAnimationState.isStarted() && renderState.takeoffAnimationState.getTimeInMillis(renderState.ageInTicks) >= 1083)) {
             float rotation = (Mth.sin(renderState.ageInTicks * 2) * 10 * Mth.DEG_TO_RAD);
             this.rightWing.zRot = rotation;
             this.leftWing.zRot = rotation;
         }
     }
+
 }
