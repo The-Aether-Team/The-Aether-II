@@ -40,7 +40,7 @@ public class CollideGoal extends Goal {
                 DamageSource damageSource = AetherIIDamageTypes.entityDamageSource(this.slider.level(), AetherIIDamageTypes.CRUSH, this.slider);
                 if (entity instanceof LivingEntity livingEntity && !livingEntity.isInvulnerableTo(serverLevel, damageSource) && entity.hurtServer(serverLevel, damageSource, 6)) {
                     if (!livingEntity.isBlocking()) {
-                        livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, EffectBuildupPresets.STUN, 75);
+                        livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, this.slider, EffectBuildupPresets.STUN, 75);
                     }
 
                     if (livingEntity instanceof Player player && player.isBlocking()) {

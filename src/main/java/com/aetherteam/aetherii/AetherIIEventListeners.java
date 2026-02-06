@@ -315,14 +315,15 @@ public class AetherIIEventListeners {
 
     public static void onEntityCauseExplosion(ExplosionEvent.Detonate event) {
         ServerExplosion explosion = event.getExplosion();
-        Entity source = explosion.getIndirectSourceEntity();
+        Entity directSource = explosion.getDirectSourceEntity();
+        Entity indirectSource = explosion.getIndirectSourceEntity();
 
-        if (source != null && (source.getType() == AetherIIEntityTypes.DETONATION_SENTRY.get() || source.getType() == AetherIIEntityTypes.SENTRY_GOLEM.get())) {
+        if (indirectSource != null && (indirectSource.getType() == AetherIIEntityTypes.DETONATION_SENTRY.get() || indirectSource.getType() == AetherIIEntityTypes.SENTRY_GOLEM.get())) {
             event.getAffectedEntities().removeIf((entity) -> entity instanceof ItemEntity);
             event.getAffectedEntities().forEach((entity) -> {
                 if (entity instanceof LivingEntity livingEntity) {
                     if (!livingEntity.isBlocking()) {
-                        livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, EffectBuildupPresets.STUN, 150);
+                        livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, indirectSource, directSource, EffectBuildupPresets.STUN, 150);
                     }
                 }
             });

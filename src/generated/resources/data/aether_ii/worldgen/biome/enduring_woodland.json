@@ -127,6 +127,12 @@
     ],
     "aether_ii:aether_cave_monster": [
       {
+        "type": "aether_ii:skephid",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 2
+      },
+      {
         "type": "aether_ii:arkenium_taluton",
         "maxCount": 1,
         "minCount": 1,
@@ -140,12 +146,6 @@
       }
     ],
     "aether_ii:aether_darkness_monster": [
-      {
-        "type": "aether_ii:skephid",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 2
-      },
       {
         "type": "aether_ii:blue_swet",
         "maxCount": 2,
@@ -166,6 +166,7 @@
       }
     ],
     "aether_ii:aether_dungeon_monster": [],
+    "aether_ii:aether_moa": [],
     "aether_ii:aether_sky_monster": [
       {
         "type": "aether_ii:zephyr",

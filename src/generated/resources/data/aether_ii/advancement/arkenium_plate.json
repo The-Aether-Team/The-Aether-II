@@ -1,0 +1,33 @@
+{
+  "parent": "aether_ii:craft_altar",
+  "criteria": {
+    "arkenium_plate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:arkenium_plate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.aether_ii.arkenium_plate.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:arkenium_plate"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.arkenium_plate"
+    }
+  },
+  "requirements": [
+    [
+      "arkenium_plate"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

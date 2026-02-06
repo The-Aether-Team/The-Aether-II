@@ -1,0 +1,33 @@
+{
+  "parent": "aether_ii:zanite",
+  "criteria": {
+    "dart_shooter": {
+      "conditions": {
+        "direct_source": {
+          "type": "aether_ii:amber_dart"
+        },
+        "mob_effects": "#aether_ii:dart_effects",
+        "triggered": true
+      },
+      "trigger": "aether_ii:effect_buildup"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.aether_ii.dart_shooter.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:dart_shooter"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.dart_shooter"
+    }
+  },
+  "requirements": [
+    [
+      "dart_shooter"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,5 +1,12 @@
 {
   "criteria": {
+    "buildup_frostbite": {
+      "conditions": {
+        "mob_effects": "aether_ii:frostbite",
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
     "obtain_frostbite": {
       "conditions": {
         "effects": {
@@ -11,7 +18,8 @@
   },
   "requirements": [
     [
-      "obtain_frostbite"
+      "obtain_frostbite",
+      "buildup_frostbite"
     ]
   ],
   "sends_telemetry_event": true

@@ -202,7 +202,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                     }
                 }
             }
-            this.getMenu().replaceCharms(displayStack, false);
+            this.getMenu().replaceCharms(Minecraft.getInstance().player, displayStack, false);
             if (this.nameDifferent()) {
                 displayStack.set(DataComponents.CUSTOM_NAME, Component.literal(this.name.getValue()));
             }
@@ -302,7 +302,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     }
 
     private void onCharmSlotted() {
-        if (this.menu.slotCharms()) {
+        if (this.menu.slotCharms(Minecraft.getInstance().player)) {
             ClientPacketDistributor.sendToServer(new ForgeSlotCharmsPacket());
         }
     }

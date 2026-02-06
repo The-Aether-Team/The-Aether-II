@@ -31,7 +31,7 @@
       },
       "trigger": "minecraft:player_killed_entity"
     },
-    "observe": {
+    "observe_arctic_burrukai": {
       "conditions": {
         "player": [
           {
@@ -53,7 +53,7 @@
   },
   "requirements": [
     [
-      "observe",
+      "observe_arctic_burrukai",
       "kill_arctic_burrukai",
       "feed_arctic_burrukai"
     ]

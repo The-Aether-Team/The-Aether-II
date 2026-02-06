@@ -1,9 +1,7 @@
 package com.aetherteam.aetherii.entity.passive;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
@@ -101,7 +99,7 @@ public class Aerbunny extends AetherTamableAnimal {
         builder.define(DATA_PUFF_COOLDOWN_ID, 0);
         builder.define(DATA_AFRAID_TIME_ID, 0);
         builder.define(DATA_FAST_FALLING_ID, false);
-        builder.define(DATA_COLLAR_COLOR, DyeColor.LIGHT_BLUE.getId());
+        builder.define(DATA_COLLAR_COLOR, DyeColor.BLUE.getId());
         builder.define(DATA_VEHICLE_REFERENCE, Optional.empty());
     }
 
@@ -669,6 +667,11 @@ public class Aerbunny extends AetherTamableAnimal {
         this.setAfraidTime(input.getIntOr("AfraidTime", 0));
         input.read("CollarColor", DyeColor.CODEC).ifPresent(this::setCollarColor);
         this.setVehicleReference(input.read("VehicleUUID", EntityReference.codec()));
+    }
+
+    @Override
+    public int getMaxFallDistance() {
+        return 2;
     }
 
     /**

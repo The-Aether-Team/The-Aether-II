@@ -1,0 +1,26 @@
+{
+  "parent": "aether_ii:enter_highlands",
+  "criteria": {
+    "outpost_campfire": {
+      "trigger": "aether_ii:outpost_campfire"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.aether_ii.outpost_campfire.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:outpost_campfire"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.outpost_campfire"
+    }
+  },
+  "requirements": [
+    [
+      "outpost_campfire"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

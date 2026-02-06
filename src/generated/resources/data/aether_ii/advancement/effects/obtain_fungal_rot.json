@@ -1,5 +1,12 @@
 {
   "criteria": {
+    "buildup_fungal_rot": {
+      "conditions": {
+        "mob_effects": "aether_ii:fungal_rot",
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
     "obtain_fungal_rot": {
       "conditions": {
         "effects": {
@@ -11,7 +18,8 @@
   },
   "requirements": [
     [
-      "obtain_fungal_rot"
+      "obtain_fungal_rot",
+      "buildup_fungal_rot"
     ]
   ],
   "sends_telemetry_event": true

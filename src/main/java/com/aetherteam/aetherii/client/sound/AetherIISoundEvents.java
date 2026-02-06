@@ -238,6 +238,9 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ELECTRIC_FIELD_CREATE = register("entity.electric_field.ambient");
 
     // UI
+    public static final DeferredHolder<SoundEvent, SoundEvent> UI_TOAST_AETHER_GENERAL = register("ui.toast.aether_general");
+    public static final DeferredHolder<SoundEvent, SoundEvent> UI_TOAST_AETHER_SLIDER = register("ui.toast.aether_slider");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> UI_ARTISANS_BENCH_SELECT_RECIPE = register("ui.artisans_bench.select_recipe");
     public static final DeferredHolder<SoundEvent, SoundEvent> UI_ARTISANS_BENCH_TAKE_RESULT = register("ui.artisans_bench.take_result");
 
@@ -247,6 +250,8 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_SUNRISE = register("music.aether_sunrise");
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_SUNSET = register("music.aether_sunset");
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_AMBIENCE = register("music.aether_ambience");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_MENU = register("music.menu");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_BOSS_SLIDER = register("music.boss.slider");
 
