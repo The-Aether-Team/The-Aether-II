@@ -304,18 +304,18 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("gravitite_armor", armorSet(AetherIITags.Items.GRAVITITE_ARMOR))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite_armor"));
 
-            AdvancementHolder arkeniumPlates = Advancement.Builder.advancement()
+            AdvancementHolder arkeniumPlate = Advancement.Builder.advancement()
                     .parent(craftAltar)
-                    .display(AetherIIItems.ARKENIUM_PLATES.get(),
-                            Component.translatable("advancement.aether_ii.arkenium_plates"),
-                            Component.translatable("advancement.aether_ii.arkenium_plates.desc"),
+                    .display(AetherIIItems.ARKENIUM_PLATE.get(),
+                            Component.translatable("advancement.aether_ii.arkenium_plate"),
+                            Component.translatable("advancement.aether_ii.arkenium_plate.desc"),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("arkenium_plates", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ARKENIUM_PLATES.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "arkenium_plates"));
+                    .addCriterion("arkenium_plate", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ARKENIUM_PLATE.get()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "arkenium_plate"));
 
             AdvancementHolder alkahestCanister = Advancement.Builder.advancement()
-                    .parent(arkeniumPlates)
+                    .parent(arkeniumPlate)
                     .display(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER.get(),
                             Component.translatable("advancement.aether_ii.alkahest_canister"),
                             Component.translatable("advancement.aether_ii.alkahest_canister.desc"),

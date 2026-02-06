@@ -1543,7 +1543,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("craft_altar", "Do You Believe in Magic?");
         this.addAdvancement("gravitite_plate", "Pink is the New Blue");
         this.addAdvancement("gravitite_armor", "Defying Gravity");
-        this.addAdvancement("arkenium_plates", "The Steel of Gods");
+        this.addAdvancement("arkenium_plate", "The Steel of Gods");
         this.addAdvancement("alkahest_canister", "Handle with Care");
         this.addAdvancement("craft_alkahest_purifier", "Contained");
         this.addAdvancement("irradiated_item", "Let's Go Gambling");
@@ -1579,7 +1579,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("craft_altar", "Craft an Altar");
         this.addAdvancementDesc("gravitite_plate", "Enchant Inert Gravitite into a Gravitite Plate using the Altar");
         this.addAdvancementDesc("gravitite_armor", "Wear 3 pieces of Gravitite Armor to activate its set ability");
-        this.addAdvancementDesc("arkenium_plates", "Enchant Inert Arkenium into Arkenium Plates using the Altar");
+        this.addAdvancementDesc("arkenium_plate", "Enchant Inert Arkenium into an Arkenium Plate using the Altar");
         this.addAdvancementDesc("alkahest_canister", "Collect Alkahest using an Arkenium Canister");
         this.addAdvancementDesc("craft_alkahest_purifier", "Craft an Alkahest Purifier");
         this.addAdvancementDesc("irradiated_item", "Clean an Irradiated Item in an Alkahest Purifier and see what you get");

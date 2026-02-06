@@ -1,11 +1,11 @@
 {
   "parent": "aether_ii:craft_altar",
   "criteria": {
-    "arkenium_plates": {
+    "arkenium_plate": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:arkenium_plates"
+            "items": "aether_ii:arkenium_plate"
           }
         ]
       },
@@ -14,19 +14,19 @@
   },
   "display": {
     "description": {
-      "translate": "advancement.aether_ii.arkenium_plates.desc"
+      "translate": "advancement.aether_ii.arkenium_plate.desc"
     },
     "icon": {
       "count": 1,
-      "id": "aether_ii:arkenium_plates"
+      "id": "aether_ii:arkenium_plate"
     },
     "title": {
-      "translate": "advancement.aether_ii.arkenium_plates"
+      "translate": "advancement.aether_ii.arkenium_plate"
     }
   },
   "requirements": [
     [
-      "arkenium_plates"
+      "arkenium_plate"
     ]
   ],
   "sends_telemetry_event": true
