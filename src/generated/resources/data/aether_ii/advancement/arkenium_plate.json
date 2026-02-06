@@ -14,14 +14,14 @@
   },
   "display": {
     "description": {
-      "translate": "advancement.aether_ii.arkenium_plates.desc"
+      "translate": "advancement.aether_ii.arkenium_plate.desc"
     },
     "icon": {
       "count": 1,
       "id": "aether_ii:arkenium_plate"
     },
     "title": {
-      "translate": "advancement.aether_ii.arkenium_plates"
+      "translate": "advancement.aether_ii.arkenium_plate"
     }
   },
   "requirements": [

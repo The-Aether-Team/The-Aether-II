@@ -307,8 +307,8 @@ public class AetherIIAdvancementData extends AdvancementProvider {
             AdvancementHolder arkeniumPlate = Advancement.Builder.advancement()
                     .parent(craftAltar)
                     .display(AetherIIItems.ARKENIUM_PLATE.get(),
-                            Component.translatable("advancement.aether_ii.arkenium_plates"),
-                            Component.translatable("advancement.aether_ii.arkenium_plates.desc"),
+                            Component.translatable("advancement.aether_ii.arkenium_plate"),
+                            Component.translatable("advancement.aether_ii.arkenium_plate.desc"),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("arkenium_plate", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ARKENIUM_PLATE.get()))
