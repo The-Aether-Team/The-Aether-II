@@ -292,7 +292,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_IRRADIATED_ITEMS))
                 )
 
-                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(2))
                         .add(LootItem.lootTableItem(AetherIIItems.NEPTUNE_HELMET).setWeight(2))
                         .add(LootItem.lootTableItem(AetherIIItems.NEPTUNE_CHESTPLATE).setWeight(2))
                         .add(LootItem.lootTableItem(AetherIIItems.NEPTUNE_LEGGINGS).setWeight(2))
