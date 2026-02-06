@@ -50,12 +50,12 @@
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:zanite_gloves",
-          "weight": 2
+          "name": "aether_ii:zanite_gloves"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:zanite_pendant"
+          "name": "aether_ii:zanite_pendant",
+          "weight": 2
         },
         {
           "type": "minecraft:item",

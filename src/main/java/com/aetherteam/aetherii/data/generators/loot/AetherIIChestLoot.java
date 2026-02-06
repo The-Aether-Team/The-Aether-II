@@ -12,6 +12,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.function.BiConsumer;
@@ -143,8 +144,8 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE_BOOTS))
                         .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE_GLOVES))
                         .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE_SHIELD).setWeight(2))
-                        .add(LootItem.lootTableItem(AetherIIItems.ZANITE_GLOVES).setWeight(2))
-                        .add(LootItem.lootTableItem(AetherIIItems.ZANITE_PENDANT))
+                        .add(LootItem.lootTableItem(AetherIIItems.ZANITE_GLOVES))
+                        .add(LootItem.lootTableItem(AetherIIItems.ZANITE_PENDANT).setWeight(2))
                         .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT_BUNDLE).setWeight(3))
                         .add(LootItem.lootTableItem(AetherIIItems.COLD_AERCLOUD_GLIDER).setWeight(3))
                         .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AERCLOUD_GLIDER))
@@ -214,13 +215,13 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_SHARD).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.ZANITE_GEMSTONE).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_SHARD).setWeight(9).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE).setWeight(9).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.ZANITE_GEMSTONE).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.AMBROSIUM_BLOCK).setWeight(2))
                         .add(LootItem.lootTableItem(AetherIIItems.GLINT_GEMSTONE))
-                        .add(LootItem.lootTableItem(AetherIIBlocks.AMBROSIUM_BLOCK))
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
@@ -286,7 +287,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
         );
 
         builder.accept(AetherIILoot.CHESTS_DUNGEONS_SENTRY_RUINS_BOSS, LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_MUSIC_DISCS).setWeight(2))
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_IRRADIATED_ITEMS))
                 )

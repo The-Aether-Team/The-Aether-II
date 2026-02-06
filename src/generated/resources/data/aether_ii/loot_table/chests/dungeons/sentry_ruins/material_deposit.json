@@ -165,7 +165,7 @@
             }
           ],
           "name": "aether_ii:ambrosium_shard",
-          "weight": 8
+          "weight": 12
         },
         {
           "type": "minecraft:item",
@@ -181,7 +181,7 @@
             }
           ],
           "name": "aether_ii:scatterglass_shard",
-          "weight": 5
+          "weight": 9
         },
         {
           "type": "minecraft:item",
@@ -197,7 +197,7 @@
             }
           ],
           "name": "aether_ii:burrukai_plate",
-          "weight": 5
+          "weight": 9
         },
         {
           "type": "minecraft:item",
@@ -213,7 +213,7 @@
             }
           ],
           "name": "aether_ii:golden_amber",
-          "weight": 4
+          "weight": 6
         },
         {
           "type": "minecraft:item",
@@ -229,15 +229,16 @@
             }
           ],
           "name": "aether_ii:zanite_gemstone",
-          "weight": 3
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:ambrosium_block",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:glint_gemstone"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:ambrosium_block"
         }
       ],
       "rolls": {
