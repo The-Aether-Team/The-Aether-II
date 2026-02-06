@@ -312,13 +312,13 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                             ItemStack stack = this.getMenu().getCarried().copy();
                             int amount = 0;
                             if (mouseButton == 0) { // place carried stack
-                                amount = stack.getCount() * currencyItem.getCurrencyAmount();
+                                amount = stack.getCount();
                             } else if (mouseButton == 1) { // place single item
-                                amount = currencyItem.getCurrencyAmount();
+                                amount = 1;
                             }
                             if (amount > 0) {
                                 stack.shrink(amount);
-                                ClientPacketDistributor.sendToServer(new CurrencyAmountPacket(data.getAmount() + amount));
+                                ClientPacketDistributor.sendToServer(new CurrencyAmountPacket(data.getAmount() + (amount * currencyItem.getCurrencyAmount())));
 
                                 //data.setSynched(Minecraft.getInstance().player.getId(), INBTSynchable.Direction.SERVER, "setAmount", data.getAmount() + amount);
                                 this.getMenu().setCarried(stack);

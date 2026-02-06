@@ -65,10 +65,10 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.of(Kirrid::new, MobCategory.CREATURE).sized(0.95F, 1.35F).eyeHeight(1.1F).clientTrackingRange(10).build(AetherIIEntities.ARCTIC_KIRRID));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Moa>> MOA = ENTITY_TYPES.register("moa",
-            () -> EntityType.Builder.of(Moa::new, MobCategory.CREATURE).sized(1.25F, 2.35F).eyeHeight(2.1F).clientTrackingRange(10).build(AetherIIEntities.MOA));
+            () -> EntityType.Builder.of(Moa::new, AetherIIMobCategory.AETHER_MOA).sized(1.25F, 2.35F).eyeHeight(2.1F).clientTrackingRange(10).build(AetherIIEntities.MOA));
 
     public static final DeferredHolder<EntityType<?>, EntityType<SkyrootLizard>> SKYROOT_LIZARD = ENTITY_TYPES.register("skyroot_lizard",
-            () -> EntityType.Builder.of(SkyrootLizard::new, MobCategory.CREATURE).sized(0.95F, 0.35F).clientTrackingRange(10).build(AetherIIEntities.SKYROOT_LIZARD));
+            () -> EntityType.Builder.of(SkyrootLizard::new, MobCategory.AMBIENT).sized(0.95F, 0.35F).clientTrackingRange(10).build(AetherIIEntities.SKYROOT_LIZARD));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Glitterwing>> GLITTERWING = ENTITY_TYPES.register("glitterwing",
             () -> EntityType.Builder.<Glitterwing>of(Glitterwing::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.55F, 0.125F).eyeHeight(0.125F).clientTrackingRange(5).build(AetherIIEntities.GLITTERWING));
@@ -93,7 +93,7 @@ public class AetherIIEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<Swet>> GOLDEN_SWET = ENTITY_TYPES.register("golden_swet",
             () -> EntityType.Builder.of(Swet::new, AetherIIMobCategory.AETHER_DARKNESS_MONSTER).sized(0.95F, 0.95F).clientTrackingRange(10).build(AetherIIEntities.GOLDEN_SWET));
     public static final DeferredHolder<EntityType<?>, EntityType<Skephid>> SKEPHID = ENTITY_TYPES.register("skephid",
-            () -> EntityType.Builder.of(Skephid::new, AetherIIMobCategory.AETHER_DARKNESS_MONSTER).sized(0.8F, 0.8F).clientTrackingRange(10).build(AetherIIEntities.SKEPHID));
+            () -> EntityType.Builder.of(Skephid::new, AetherIIMobCategory.AETHER_CAVE_MONSTER).sized(0.8F, 0.8F).clientTrackingRange(10).build(AetherIIEntities.SKEPHID));
     public static final DeferredHolder<EntityType<?>, EntityType<ArkeniumTaluton>> ARKENIUM_TALUTON = ENTITY_TYPES.register("arkenium_taluton",
             () -> EntityType.Builder.of(ArkeniumTaluton::new, AetherIIMobCategory.AETHER_CAVE_MONSTER).sized(1.0F, 1.65F).eyeHeight(1.25F).clientTrackingRange(10).build(AetherIIEntities.ARKENIUM_TALUTON));
     public static final DeferredHolder<EntityType<?>, EntityType<GravititeTaluton>> GRAVITITE_TALUTON = ENTITY_TYPES.register("gravitite_taluton",

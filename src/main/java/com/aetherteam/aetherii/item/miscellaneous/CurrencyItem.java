@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.item.miscellaneous;
 
+import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.CurrencyAttachment;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -7,6 +8,7 @@ import com.aetherteam.aetherii.mixin.mixins.client.accessor.GuiAccessor;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -39,6 +41,9 @@ public class CurrencyItem extends Item {
         CurrencyAttachment attachment = player.getData(AetherIIDataAttachments.CURRENCY);
         attachment.setAmount(attachment.getAmount() + this.currencyAmount);
         player.syncData(AetherIIDataAttachments.CURRENCY);
+        if (player instanceof ServerPlayer serverPlayer) {
+            AetherIIAdvancementTriggers.CURRENCY.get().trigger(serverPlayer, attachment.getAmount());
+        }
         player.awardStat(Stats.ITEM_USED.get(this));
         stack.consume(1, player);
         if (level.isClientSide()) {

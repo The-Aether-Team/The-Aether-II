@@ -19,6 +19,10 @@ public class AetherIIMobEffectTagData extends KeyTagProvider<MobEffect> {
     @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        this.tag(AetherIITags.MobEffects.DART_EFFECTS).add(
+                AetherIIEffects.VULNERABILITY.getKey(),
+                AetherIIEffects.TOXIN.getKey(),
+                AetherIIEffects.VENOM.getKey());
         this.tag(AetherIITags.MobEffects.MILK_DOESNT_CLEAR).add(
                 AetherIIEffects.VULNERABILITY.getKey(),
                 AetherIIEffects.WOUND.getKey(),

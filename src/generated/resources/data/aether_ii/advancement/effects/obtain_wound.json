@@ -1,5 +1,12 @@
 {
   "criteria": {
+    "buildup_wound": {
+      "conditions": {
+        "mob_effects": "aether_ii:wound",
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
     "obtain_wound": {
       "conditions": {
         "effects": {
@@ -11,7 +18,8 @@
   },
   "requirements": [
     [
-      "obtain_wound"
+      "obtain_wound",
+      "buildup_wound"
     ]
   ],
   "sends_telemetry_event": true

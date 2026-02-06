@@ -22,7 +22,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,8 +108,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(MIMIC, AetherIIEntityTypes.MIMIC),
             Map.entry(DETONATION_SENTRY, AetherIIEntityTypes.DETONATION_SENTRY),
             Map.entry(SENTRY_GOLEM, AetherIIEntityTypes.SENTRY_GOLEM),
-            Map.entry(SLIDER, AetherIIEntityTypes.SLIDER),
-            Map.entry(BLADESHROOM_HUNTER, AetherIIEntityTypes.BLADESHROOM_HUNTER)
+            Map.entry(SLIDER, AetherIIEntityTypes.SLIDER)
+//            Map.entry(BLADESHROOM_HUNTER, AetherIIEntityTypes.BLADESHROOM_HUNTER)
     );
     public static final List<Holder<EntityType<?>>> NAMED = List.of(
             AetherIIEntityTypes.HIGHFIELDS_TAEGORE,
@@ -154,8 +153,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.MIMIC, AetherIIStats.MIMIC),
             Map.entry(AetherIIEntityTypes.DETONATION_SENTRY, AetherIIStats.DETONATION_SENTRY),
             Map.entry(AetherIIEntityTypes.SENTRY_GOLEM, AetherIIStats.SENTRY_GOLEM),
-            Map.entry(AetherIIEntityTypes.SLIDER, AetherIIStats.SLIDER),
-            Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, AetherIIStats.BLADESHROOM_HUNTER)
+            Map.entry(AetherIIEntityTypes.SLIDER, AetherIIStats.SLIDER)
+//            Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, AetherIIStats.BLADESHROOM_HUNTER)
     );
     public static final Map<Holder<EntityType<?>>, List<BestiaryEntry.LootDisplay>> LOOT = Map.ofEntries(
             Map.entry(AetherIIEntityTypes.FLYING_COW, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.BURRUKAI_RIB_CUT, 1.0, 1, 2))),
@@ -184,8 +183,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.MIMIC, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.EYE_OF_THE_MIMIC, 0.075, 1, 1))),
             Map.entry(AetherIIEntityTypes.DETONATION_SENTRY, List.of()),
             Map.entry(AetherIIEntityTypes.SENTRY_GOLEM, List.of()),
-            Map.entry(AetherIIEntityTypes.SLIDER, List.of()),
-            Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, List.of())
+            Map.entry(AetherIIEntityTypes.SLIDER, List.of())
+//            Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, List.of())
     );
     public static final Map<Holder<EntityType<?>>, TagKey<Item>> FED = Map.ofEntries(
             Map.entry(AetherIIEntityTypes.FLYING_COW, AetherIITags.Items.FLYING_COW_FOOD),

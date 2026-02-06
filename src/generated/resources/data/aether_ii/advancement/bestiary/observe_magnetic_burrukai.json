@@ -31,7 +31,7 @@
       },
       "trigger": "minecraft:player_killed_entity"
     },
-    "observe": {
+    "observe_magnetic_burrukai": {
       "conditions": {
         "player": [
           {
@@ -53,7 +53,7 @@
   },
   "requirements": [
     [
-      "observe",
+      "observe_magnetic_burrukai",
       "kill_magnetic_burrukai",
       "feed_magnetic_burrukai"
     ]

@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.RockBlock;
 import com.aetherteam.aetherii.block.natural.TwigBlock;
+import com.aetherteam.aetherii.data.generators.tags.AetherIIBlockTagData;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.NoiseLakeConfiguration;
 import com.mojang.serialization.Codec;
@@ -152,8 +153,8 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                         }
                         this.setBlock(level, pos.below(2), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
 
-                        // Removes Floating Grass above the lakes
-                        if (level.getBlockState(pos.above()).getBlock() instanceof VegetationBlock || level.getBlockState(pos.above()).getBlock() instanceof TwigBlock || level.getBlockState(pos.above()).getBlock() instanceof RockBlock) {
+                        // Removes floating vegetation above lakes
+                        if (level.getBlockState(pos.above()).is(AetherIITags.Blocks.LAKE_VEGETATION_REPLACEABLES) || level.getBlockState(pos.above(2)).is(AetherIITags.Blocks.LAKE_VEGETATION_REPLACEABLES)) {
                             this.setBlock(level, pos.above(), Blocks.AIR.defaultBlockState());
                         }
                     }
@@ -187,7 +188,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
             }
         }
 
-        // Blends the Shores with the surrounding Terrain
+        // Blends the shores with the surrounding terrain
         if (density > config.shoreStartValue() + shore - 0.005) {
             if (level.getBlockState(pos.above()).is(AetherIIBlocks.AETHER_GRASS_BLOCK)) {
                 this.setBlock(level, pos.below(), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
@@ -201,11 +202,11 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                 this.setBlock(level, pos.above(), AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState());
                 this.setBlock(level, pos.above(2), Blocks.AIR.defaultBlockState());
             }
-        }
 
-        // Removes Floating Grass above the shores
-        if (level.getBlockState(pos.above()).getBlock() instanceof BushBlock || level.getBlockState(pos.above()).getBlock() instanceof TwigBlock || level.getBlockState(pos.above()).getBlock() instanceof RockBlock) {
-            this.setBlock(level, pos.above(), Blocks.AIR.defaultBlockState());
+            // Removes floating vegetation above shores
+            if (level.getBlockState(pos.above()).is(AetherIITags.Blocks.LAKE_VEGETATION_REPLACEABLES) || level.getBlockState(pos.above(2)).is(AetherIITags.Blocks.LAKE_VEGETATION_REPLACEABLES)) {
+                this.setBlock(level, pos.above(), Blocks.AIR.defaultBlockState());
+            }
         }
     }
 

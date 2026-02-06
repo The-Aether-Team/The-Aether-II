@@ -42,7 +42,7 @@ public class VenomousDart extends AbstractArrow {
     @Override
     protected void doPostHurtEffects(LivingEntity living) {
         super.doPostHurtEffects(living);
-        living.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(living, EffectBuildupPresets.VENOM, 350);
+        living.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(living, this, this.getOwner(), EffectBuildupPresets.VENOM, 350);
         living.setArrowCount(living.getArrowCount() - 1);
     }
 
