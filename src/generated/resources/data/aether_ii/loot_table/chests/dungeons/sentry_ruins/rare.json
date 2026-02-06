@@ -6,38 +6,42 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "aether_ii:holystone_pickaxe",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:holystone_crossbow",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
           "name": "aether_ii:zanite_pickaxe",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:zanite_hammer",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:burrukai_plate_helmet",
           "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:burrukai_plate_chestplate",
-          "weight": 2
+          "name": "aether_ii:zanite_hammer"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:burrukai_plate_leggings",
-          "weight": 2
+          "name": "aether_ii:burrukai_plate_helmet"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:burrukai_plate_boots",
-          "weight": 2
+          "name": "aether_ii:burrukai_plate_chestplate"
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:burrukai_plate_gloves",
-          "weight": 2
+          "name": "aether_ii:burrukai_plate_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:burrukai_plate_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:burrukai_plate_gloves"
         },
         {
           "type": "minecraft:item",
@@ -51,8 +55,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:zanite_pendant",
-          "weight": 2
+          "name": "aether_ii:zanite_pendant"
         },
         {
           "type": "minecraft:item",
@@ -75,11 +78,12 @@
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:healing_stone"
+          "name": "aether_ii:guidebook_page",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:guidebook_page"
+          "name": "aether_ii:healing_stone"
         },
         {
           "type": "minecraft:loot_table",

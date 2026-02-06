@@ -32,7 +32,7 @@
             }
           ],
           "name": "aether_ii:ambrosium_torch",
-          "weight": 10
+          "weight": 12
         },
         {
           "type": "minecraft:item",
@@ -48,7 +48,7 @@
             }
           ],
           "name": "aether_ii:scatterglass_bolt",
-          "weight": 6
+          "weight": 8
         },
         {
           "type": "minecraft:item",

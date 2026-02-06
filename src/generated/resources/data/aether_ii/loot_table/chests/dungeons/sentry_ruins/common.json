@@ -32,7 +32,7 @@
             }
           ],
           "name": "aether_ii:ambrosium_torch",
-          "weight": 12
+          "weight": 14
         },
         {
           "type": "minecraft:item",
@@ -48,7 +48,7 @@
             }
           ],
           "name": "aether_ii:scatterglass_bolt",
-          "weight": 6
+          "weight": 8
         },
         {
           "type": "minecraft:item",
@@ -150,7 +150,8 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:zanite_gemstone"
+          "name": "aether_ii:zanite_gemstone",
+          "weight": 2
         }
       ],
       "rolls": {
