@@ -45,6 +45,17 @@ public class AetherIIBlockFamilies {
             .door(AetherIIBlocks.WISPROOT_DOOR.get())
             .trapdoor(AetherIIBlocks.WISPROOT_TRAPDOOR.get())
             .getFamily();
+    public static final BlockFamily AMBEROOT_PLANKS = familyBuilder(AetherIIBlocks.AMBEROOT_PLANKS.get())
+            .button(AetherIIBlocks.AMBEROOT_BUTTON.get())
+            .fence(AetherIIBlocks.AMBEROOT_FENCE.get())
+            .fenceGate(AetherIIBlocks.AMBEROOT_FENCE_GATE.get())
+            .pressurePlate(AetherIIBlocks.AMBEROOT_PRESSURE_PLATE.get())
+           // .sign(AetherIIBlocks.AMBEROOT_SIGN.get(), AetherIIBlocks.AMBEROOT_WALL_SIGN.get()) todo
+            .slab(AetherIIBlocks.AMBEROOT_SLAB.get())
+            .stairs(AetherIIBlocks.AMBEROOT_STAIRS.get())
+            .door(AetherIIBlocks.AMBEROOT_DOOR.get())
+            .trapdoor(AetherIIBlocks.AMBEROOT_TRAPDOOR.get())
+            .getFamily();
     public static final BlockFamily HOLYSTONE = familyBuilder(AetherIIBlocks.HOLYSTONE.get())
             .button(AetherIIBlocks.HOLYSTONE_BUTTON.get())
             .pressurePlate(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get())

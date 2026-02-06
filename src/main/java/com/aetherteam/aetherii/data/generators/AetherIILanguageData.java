@@ -402,6 +402,30 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SECRET_WISPROOT_DOOR, "Secret Wisproot Door");
         this.addBlock(AetherIIBlocks.SECRET_WISPROOT_TRAPDOOR, "Secret Wisproot Trapdoor");
 
+        // Amberoot Planks
+        this.addBlock(AetherIIBlocks.AMBEROOT_PLANKS, "Amberoot Planks");
+        this.addBlock(AetherIIBlocks.AMBEROOT_STAIRS, "Amberoot Stairs");
+        this.addBlock(AetherIIBlocks.AMBEROOT_SLAB, "Amberoot Slab");
+        this.addBlock(AetherIIBlocks.AMBEROOT_FENCE, "Amberoot Fence");
+        this.addBlock(AetherIIBlocks.AMBEROOT_FENCE_GATE, "Amberoot Fence Gate");
+        this.addBlock(AetherIIBlocks.AMBEROOT_DOOR, "Amberoot Door");
+        this.addBlock(AetherIIBlocks.AMBEROOT_TRAPDOOR, "Amberoot Trapdoor");
+        this.addBlock(AetherIIBlocks.AMBEROOT_BUTTON, "Amberoot Button");
+        this.addBlock(AetherIIBlocks.AMBEROOT_PRESSURE_PLATE, "Amberoot Pressure Plate");
+
+        // Amberoot Decorative Blocks
+        this.addBlock(AetherIIBlocks.AMBEROOT_FLOORBOARDS, "Amberoot Floorboards");
+        this.addBlock(AetherIIBlocks.AMBEROOT_HIGHLIGHT, "Amberoot Highlight");
+        this.addBlock(AetherIIBlocks.AMBEROOT_SHINGLES, "Amberoot Shingles");
+        this.addBlock(AetherIIBlocks.AMBEROOT_SMALL_SHINGLES, "Amberoot Small Shingles");
+        this.addBlock(AetherIIBlocks.AMBEROOT_BASE_PLANKS, "Amberoot Base Planks");
+        this.addBlock(AetherIIBlocks.AMBEROOT_TOP_PLANKS, "Amberoot Top Planks");
+        this.addBlock(AetherIIBlocks.AMBEROOT_BASE_BEAM, "Amberoot Base Beam");
+        this.addBlock(AetherIIBlocks.AMBEROOT_TOP_BEAM, "Amberoot Top Beam");
+        this.addBlock(AetherIIBlocks.AMBEROOT_BEAM, "Amberoot Beam");
+        this.addBlock(AetherIIBlocks.SECRET_AMBEROOT_DOOR, "Amberoot Wisproot Door");
+        this.addBlock(AetherIIBlocks.SECRET_AMBEROOT_TRAPDOOR, "Amberoot Wisproot Trapdoor");
+
         // Holystone
         this.addBlock(AetherIIBlocks.HOLYSTONE_STAIRS, "Holystone Stairs");
         this.addBlock(AetherIIBlocks.HOLYSTONE_SLAB, "Holystone Slab");

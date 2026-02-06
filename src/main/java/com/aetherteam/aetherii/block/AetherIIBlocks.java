@@ -176,7 +176,10 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<RotatedPillarBlock> STRIPPED_WISPROOT_LOG = register("stripped_wisproot_log", RotatedPillarBlock::new, logProperties(MapColor.QUARTZ, MapColor.QUARTZ));
     public static final DeferredBlock<RotatedPillarBlock> STRIPPED_WISPROOT_WOOD = register("stripped_wisproot_wood", RotatedPillarBlock::new, logProperties(MapColor.QUARTZ, MapColor.QUARTZ));
     public static final DeferredBlock<RotatedPillarBlock> AMBEROOT_LOG = register("amberoot_log", RotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
-    public static final DeferredBlock<RotatedPillarBlock> AMBEROOT_WOOD = register("amberoot_wood", RotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
+    public static final DeferredBlock<RotatedPillarBlock> AMBEROOT_DEPOSIT = register("amberoot_deposit", RotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
+    public static final DeferredBlock<RotatedPillarBlock> AMBEROOT_WOOD = register("amberoot_wood", RotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY)); //TODO Map colors
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_AMBEROOT_LOG = register("stripped_amberoot_log", RotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_AMBEROOT_WOOD = register("stripped_amberoot_wood", RotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
 
     // Trunks
     public static final DeferredBlock<TrunkBlock> SKYROOT_TRUNK = register("skyroot_trunk", TrunkBlock::new, trunkProperties(MapColor.COLOR_BROWN));
@@ -187,6 +190,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<TrunkBlock> MOSSY_WISPROOT_TRUNK = register("mossy_wisproot_trunk", TrunkBlock::new, trunkProperties(MapColor.QUARTZ));
     public static final DeferredBlock<TrunkBlock> STRIPPED_WISPROOT_TRUNK = register("stripped_wisproot_trunk", TrunkBlock::new, trunkProperties(MapColor.QUARTZ));
     public static final DeferredBlock<TrunkBlock> AMBEROOT_TRUNK = register("amberoot_trunk", TrunkBlock::new, trunkProperties(MapColor.COLOR_BROWN));
+    public static final DeferredBlock<TrunkBlock> STRIPPED_AMBEROOT_TRUNK = register("stripped_amberoot_trunk", TrunkBlock::new, trunkProperties(MapColor.COLOR_BROWN));
 
     // Leaf Pile
     public static final DeferredBlock<Block> SKYROOT_LEAF_PILE = register("skyroot_leaf_pile", AetherLeafPileBlock::new, leafPileProperties(MapColor.GRASS));
@@ -394,6 +398,30 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FacingPillarBlock> WISPROOT_BEAM = register("wisproot_beam", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
     public static final DeferredBlock<DoorBlock> SECRET_WISPROOT_DOOR = register("secret_wisproot_door", (properties) -> new SecretDoorBlock(AetherIIWoodTypes.WISPROOT_BLOCK_SET, properties), () -> Block.Properties.of().mapColor(WISPROOT_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava().pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<TrapDoorBlock> SECRET_WISPROOT_TRAPDOOR = register("secret_wisproot_trapdoor", (properties) -> new SecretTrapDoorBlock(AetherIIWoodTypes.WISPROOT_BLOCK_SET, properties), () -> Block.Properties.of().mapColor(WISPROOT_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).isValidSpawn(AetherIIBlocks::never).ignitedByLava());
+
+    // Amberoot Planks
+    public static final DeferredBlock<Block> AMBEROOT_PLANKS = register("amberoot_planks", () -> Block.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+    public static final DeferredBlock<StairBlock> AMBEROOT_STAIRS = register("amberoot_stairs", (properties) -> new StairBlock(AMBEROOT_PLANKS.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.AMBEROOT_PLANKS.get()));
+    public static final DeferredBlock<SlabBlock> AMBEROOT_SLAB = register("amberoot_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.AMBEROOT_PLANKS.get()).strength(2.0F, 3.0F));
+    public static final DeferredBlock<FenceBlock> AMBEROOT_FENCE = register("amberoot_fence", FenceBlock::new, () -> Block.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<FenceGateBlock> AMBEROOT_FENCE_GATE = register("amberoot_fence_gate", (properties) -> new FenceGateBlock(AetherIIWoodTypes.AMBEROOT, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE));
+    public static final DeferredBlock<DoorBlock> AMBEROOT_DOOR = register("amberoot_door", (properties) -> new DoorBlock(AetherIIWoodTypes.AMBEROOT_BLOCK_SET, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_DOOR));
+    public static final DeferredBlock<TrapDoorBlock> AMBEROOT_TRAPDOOR = register("amberoot_trapdoor", (properties) -> new TrapDoorBlock(AetherIIWoodTypes.AMBEROOT_BLOCK_SET, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR));
+    public static final DeferredBlock<ButtonBlock> AMBEROOT_BUTTON = register("amberoot_button", (properties) -> new ButtonBlock(AetherIIWoodTypes.AMBEROOT_BLOCK_SET, 30, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_BUTTON));
+    public static final DeferredBlock<PressurePlateBlock> AMBEROOT_PRESSURE_PLATE = register("amberoot_pressure_plate", (properties) -> new PressurePlateBlock(AetherIIWoodTypes.AMBEROOT_BLOCK_SET, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_PRESSURE_PLATE));
+
+    // Amberoot Decorative Blocks
+    public static final DeferredBlock<Block> AMBEROOT_FLOORBOARDS = register("amberoot_floorboards", () -> Block.Properties.ofFullCopy(AMBEROOT_PLANKS.get()));
+    public static final DeferredBlock<Block> AMBEROOT_HIGHLIGHT = register("amberoot_highlight", () -> Block.Properties.ofFullCopy(AMBEROOT_PLANKS.get()));
+    public static final DeferredBlock<Block> AMBEROOT_SHINGLES = register("amberoot_shingles", HorizontalFacingBlock::new, () -> Block.Properties.ofFullCopy(AMBEROOT_PLANKS.get()));
+    public static final DeferredBlock<Block> AMBEROOT_SMALL_SHINGLES = register("amberoot_small_shingles", HorizontalFacingBlock::new, () -> Block.Properties.ofFullCopy(AMBEROOT_PLANKS.get()));
+    public static final DeferredBlock<Block> AMBEROOT_BASE_PLANKS = register("amberoot_base_planks", () -> Block.Properties.ofFullCopy(AMBEROOT_PLANKS.get()));
+    public static final DeferredBlock<Block> AMBEROOT_TOP_PLANKS = register("amberoot_top_planks", () -> Block.Properties.ofFullCopy(AMBEROOT_PLANKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> AMBEROOT_BASE_BEAM = register("amberoot_base_beam", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(AMBEROOT_PLANKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> AMBEROOT_TOP_BEAM = register("amberoot_top_beam", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(AMBEROOT_PLANKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> AMBEROOT_BEAM = register("amberoot_beam", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(AMBEROOT_PLANKS.get()));
+    public static final DeferredBlock<DoorBlock> SECRET_AMBEROOT_DOOR = register("secret_amberoot_door", (properties) -> new SecretDoorBlock(AetherIIWoodTypes.AMBEROOT_BLOCK_SET, properties), () -> Block.Properties.of().mapColor(AMBEROOT_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).isValidSpawn(AetherIIBlocks::never).ignitedByLava());
+    public static final DeferredBlock<TrapDoorBlock> SECRET_AMBEROOT_TRAPDOOR = register("secret_amberoot_trapdoor", (properties) -> new SecretTrapDoorBlock(AetherIIWoodTypes.AMBEROOT_BLOCK_SET, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR));
 
     // Holystone
     public static final DeferredBlock<StairBlock> HOLYSTONE_STAIRS = register("holystone_stairs", (properties) -> new StairBlock(HOLYSTONE.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE.get()));

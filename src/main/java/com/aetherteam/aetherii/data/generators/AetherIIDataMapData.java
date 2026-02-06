@@ -97,6 +97,8 @@ public class AetherIIDataMapData extends DataMapProvider {
         fuels.add(AetherIITags.Items.GREATROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.WISPROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
         fuels.add(AetherIITags.Items.WISPROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.AMBEROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIITags.Items.AMBEROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.SKYROOT_BOOKSHELF.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.GREATROOT_BOOKSHELF.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.WISPROOT_BOOKSHELF.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);

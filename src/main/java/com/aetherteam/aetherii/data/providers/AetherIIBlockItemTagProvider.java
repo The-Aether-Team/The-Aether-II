@@ -139,6 +139,17 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.WISPROOT_TOP_BEAM.get(),
                 AetherIIBlocks.WISPROOT_BEAM.get()
         );
+        this.tag(AetherIITags.Blocks.AMBEROOT_DECORATIVE_BLOCKS, AetherIITags.Items.AMBEROOT_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.AMBEROOT_FLOORBOARDS.get(),
+                AetherIIBlocks.AMBEROOT_HIGHLIGHT.get(),
+                AetherIIBlocks.AMBEROOT_SHINGLES.get(),
+                AetherIIBlocks.AMBEROOT_SMALL_SHINGLES.get(),
+                AetherIIBlocks.AMBEROOT_BASE_PLANKS.get(),
+                AetherIIBlocks.AMBEROOT_TOP_PLANKS.get(),
+                AetherIIBlocks.AMBEROOT_BASE_BEAM.get(),
+                AetherIIBlocks.AMBEROOT_TOP_BEAM.get(),
+                AetherIIBlocks.AMBEROOT_BEAM.get()
+        );
         this.tag(AetherIITags.Blocks.HOLYSTONE_DECORATIVE_BLOCKS, AetherIITags.Items.HOLYSTONE_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.HOLYSTONE_FLAGSTONES.get(),
                 AetherIIBlocks.HOLYSTONE_HEADSTONE.get(),
