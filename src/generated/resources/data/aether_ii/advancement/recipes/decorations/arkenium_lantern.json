@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_arkenium_plates": {
+    "has_arkenium_plate": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:arkenium_plates"
+            "items": "aether_ii:arkenium_plate"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_arkenium_plates"
+      "has_arkenium_plate"
     ]
   ],
   "rewards": {

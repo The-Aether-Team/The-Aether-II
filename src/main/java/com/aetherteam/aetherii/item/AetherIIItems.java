@@ -73,7 +73,6 @@ import com.aetherteam.aetherii.item.miscellaneous.glider.BlueAercloudGliderItem;
 import com.aetherteam.aetherii.item.miscellaneous.glider.GoldenAercloudGliderItem;
 import com.aetherteam.aetherii.item.miscellaneous.glider.PurpleAercloudGliderItem;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
@@ -251,7 +250,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> AMBROSIUM_SHARD = register("ambrosium_shard", AmbrosiumShardItem::new);
     public static final DeferredItem<Item> ZANITE_GEMSTONE = register("zanite_gemstone");
     public static final DeferredItem<Item> INERT_ARKENIUM = register("inert_arkenium");
-    public static final DeferredItem<Item> ARKENIUM_PLATES = register("arkenium_plates");
+    public static final DeferredItem<Item> ARKENIUM_PLATE = register("arkenium_plate");
     public static final DeferredItem<Item> INERT_GRAVITITE = register("inert_gravitite");
     public static final DeferredItem<Item> GRAVITITE_PLATE = register("gravitite_plate");
     public static final DeferredItem<Item> CORROBONITE_CRYSTAL = register("corrobonite_crystal");

@@ -228,7 +228,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:arkenium_plates"
+          "name": "aether_ii:arkenium_plate"
         }
       ],
       "rolls": {
