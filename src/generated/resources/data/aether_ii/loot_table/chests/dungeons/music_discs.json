@@ -6,10 +6,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:engraved_disc_aether_tune"
-        },
-        {
-          "type": "minecraft:item",
           "name": "aether_ii:engraved_disc_ascending_dawn"
         },
         {
@@ -35,10 +31,6 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:engraved_disc_revolutions"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:engraved_disc_chase"
         }
       ],
       "rolls": {

@@ -121,7 +121,6 @@ public class AetherIIChestLoot implements LootTableSubProvider {
         );
         builder.accept(AetherIILoot.CHESTS_DUNGEONS_MUSIC_DISCS, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 1.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.ENGRAVED_DISC_AETHER_TUNE))
                         .add(LootItem.lootTableItem(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN))
                         .add(LootItem.lootTableItem(AetherIIItems.ENGRAVED_DISC_AERWHALE))
                         .add(LootItem.lootTableItem(AetherIIItems.ENGRAVED_DISC_APPROACHES))
@@ -129,7 +128,6 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.ENGRAVED_DISC_CHINCHILLA))
                         .add(LootItem.lootTableItem(AetherIIItems.ENGRAVED_DISC_HIGH))
                         .add(LootItem.lootTableItem(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS))
-                        .add(LootItem.lootTableItem(AetherIIItems.ENGRAVED_DISC_CHASE))
                 )
         );
 

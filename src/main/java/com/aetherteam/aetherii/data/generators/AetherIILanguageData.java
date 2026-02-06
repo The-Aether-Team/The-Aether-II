@@ -1027,7 +1027,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Music Discs
         this.addItem(AetherIIItems.MUSIC_PLAYER, "Music Player");
-        this.addItem(AetherIIItems.ENGRAVED_DISC_AETHER_TUNE, "Engraved Disc");
         this.addItem(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN, "Engraved Disc");
         this.addItem(AetherIIItems.ENGRAVED_DISC_AERWHALE, "Engraved Disc");
         this.addItem(AetherIIItems.ENGRAVED_DISC_APPROACHES, "Engraved Disc");
@@ -1035,7 +1034,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ENGRAVED_DISC_CHINCHILLA, "Engraved Disc");
         this.addItem(AetherIIItems.ENGRAVED_DISC_HIGH, "Engraved Disc");
         this.addItem(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS, "Engraved Disc");
-        this.addItem(AetherIIItems.ENGRAVED_DISC_CHASE, "Engraved Disc");
 
         // Spawn Eggs
         this.addSpawnEggItem(AetherIIItems.AERBUNNY_SPAWN_EGG);
