@@ -1,5 +1,5 @@
 {
-  "parent": "aether_ii:arkenium_plates",
+  "parent": "aether_ii:arkenium_plate",
   "criteria": {
     "alkahest_canister": {
       "conditions": {
