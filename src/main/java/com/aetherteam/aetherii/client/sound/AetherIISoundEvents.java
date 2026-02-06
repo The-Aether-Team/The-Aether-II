@@ -251,6 +251,8 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_SUNSET = register("music.aether_sunset");
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_AMBIENCE = register("music.aether_ambience");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_MENU = register("music.menu");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_BOSS_SLIDER = register("music.boss.slider");
 
     private static DeferredHolder<SoundEvent, SoundEvent> register(String location) {

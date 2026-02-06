@@ -1734,6 +1734,15 @@
       }
     ]
   },
+  "music.menu": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether_ii_menu",
+        "stream": true,
+        "volume": 0.4
+      }
+    ]
+  },
   "ui.artisans_bench.select_recipe": {
     "sounds": [
       "random/click"

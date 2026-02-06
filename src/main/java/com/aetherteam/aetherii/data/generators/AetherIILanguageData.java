@@ -1510,6 +1510,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("toast.guidebook.description", "Check your Guidebook");
         this.addGuiText("slider.message.attack.invalid", "Hmm. Perhaps I need to attack it with a Pickaxe?");
         this.addGuiText("slider.title", "Slider %s");
+
+        // Title Screen
+        this.add("aether_ii.menu_title.the_aether_ii", "The Aether II");
+        this.addGuiText("menu.server", "Official Aether Testing Server");
     }
 
     private void addAdvancements() {
@@ -1679,6 +1683,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addMusic("aether_sunset", "Emile van Krieken - Sunset");
         this.addMusic("aether_ambience1", "Emile van Krieken - Sentience");
         this.addMusic("boss.slider_fight", "Emile van Krieken - Labyrinth's Vengeance");
+        this.addMusic("aether_ii_menu", "Emile van Krieken - Aether II Menu Theme");
 
         // Jukebox Songs
         this.addJukeboxSong("aether_tune", "Noisestorm - Aether Tune");

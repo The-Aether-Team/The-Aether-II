@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client;
 
+import com.aetherteam.aetherii.api.AetherIIMenus;
 import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.client.event.listeners.DimensionClientListener;
 import com.aetherteam.aetherii.client.event.listeners.LevelClientListener;
@@ -20,13 +21,16 @@ import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
 import com.aetherteam.nitrogen.event.listeners.TooltipListeners;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.client.renderer.texture.CubeMapTexture;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterDimensionTransitionScreenEvent;
 import net.neoforged.neoforge.common.NeoForge;
 
@@ -55,6 +59,7 @@ public class AetherIIClient {
         bus.addListener(DimensionClientListener::onRenderFog);
         bus.addListener(LevelClientListener::onRenderLevelLast);
 
+        neoBus.addListener(AetherIIClient::registerMenuTextures);
         neoBus.addListener(AetherIIMenuTypes::registerMenuScreens);
         neoBus.addListener(AetherIIColorResolvers::registerColorResolvers);
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
@@ -83,6 +88,10 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIItemTintSources::registerTintSources);
         neoBus.addListener(AetherIIClientCaches::registerReloadListeners);
         neoBus.addListener(AetherIIKeyMappings::registerKeyMappings);
+    }
+
+    public static void registerMenuTextures(AddClientReloadListenersEvent event) {
+        Minecraft.getInstance().getTextureManager().register(AetherIIMenus.AETHER_II_PANORAMA, new CubeMapTexture(AetherIIMenus.AETHER_II_PANORAMA));
     }
 
     public static void registerDimensionTransitionScreens(RegisterDimensionTransitionScreenEvent event) {

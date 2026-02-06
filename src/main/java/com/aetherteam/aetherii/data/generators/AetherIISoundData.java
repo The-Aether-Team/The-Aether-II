@@ -1255,6 +1255,12 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 )
         );
 
+        this.add(AetherIISoundEvents.MUSIC_MENU,
+                definition().with(
+                        sound("aether_ii:music/aether_ii_menu").volume(0.4F).stream()
+                )
+        );
+
         this.add(AetherIISoundEvents.MUSIC_BOSS_SLIDER,
                 definition().with(sound("aether_ii:music/boss/slider_fight").stream())
         );
