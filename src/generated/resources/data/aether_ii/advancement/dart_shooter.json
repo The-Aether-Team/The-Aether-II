@@ -9,7 +9,7 @@
         "mob_effects": "#aether_ii:dart_effects",
         "triggered": true
       },
-      "trigger": "aether_ii:dart_effect"
+      "trigger": "aether_ii:effect_buildup"
     }
   },
   "display": {

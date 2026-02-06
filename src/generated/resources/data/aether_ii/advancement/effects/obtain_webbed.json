@@ -1,5 +1,12 @@
 {
   "criteria": {
+    "buildup_webbed": {
+      "conditions": {
+        "mob_effects": "aether_ii:webbed",
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
     "obtain_webbed": {
       "conditions": {
         "effects": {
@@ -11,7 +18,8 @@
   },
   "requirements": [
     [
-      "obtain_webbed"
+      "obtain_webbed",
+      "buildup_webbed"
     ]
   ],
   "sends_telemetry_event": true

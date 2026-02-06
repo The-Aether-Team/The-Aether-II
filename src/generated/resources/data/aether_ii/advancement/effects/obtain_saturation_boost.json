@@ -1,5 +1,12 @@
 {
   "criteria": {
+    "buildup_saturation_boost": {
+      "conditions": {
+        "mob_effects": "aether_ii:saturation_boost",
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
     "obtain_saturation_boost": {
       "conditions": {
         "effects": {
@@ -11,7 +18,8 @@
   },
   "requirements": [
     [
-      "obtain_saturation_boost"
+      "obtain_saturation_boost",
+      "buildup_saturation_boost"
     ]
   ],
   "sends_telemetry_event": true

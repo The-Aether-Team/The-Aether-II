@@ -114,6 +114,8 @@ public class EffectsSystemAttachment {
             }
             if (source instanceof ServerPlayer serverPlayer) {
                 AetherIIAdvancementTriggers.EFFECT_BUILDUP.get().trigger(serverPlayer, directSource, target, buildup.type(), this.activeBuildups.get(effect).isBuildupFull());
+            } else if (target instanceof ServerPlayer serverPlayer) {
+                AetherIIAdvancementTriggers.EFFECT_BUILDUP.get().trigger(serverPlayer, directSource, target, buildup.type(), this.activeBuildups.get(effect).isBuildupFull());
             }
             this.needSync = true;
         }

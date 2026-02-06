@@ -1,5 +1,12 @@
 {
   "criteria": {
+    "buildup_charged": {
+      "conditions": {
+        "mob_effects": "aether_ii:charged",
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
     "obtain_charged": {
       "conditions": {
         "effects": {
@@ -11,7 +18,8 @@
   },
   "requirements": [
     [
-      "obtain_charged"
+      "obtain_charged",
+      "buildup_charged"
     ]
   ],
   "sends_telemetry_event": true
