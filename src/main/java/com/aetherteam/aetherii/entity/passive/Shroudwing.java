@@ -64,6 +64,9 @@ public class Shroudwing extends Insect {
         } else {
             this.level().broadcastEntityEvent(this, (byte) TAKE_OFF_EVENT);
         }
+        if (!this.level().isClientSide) {
+            this.getNavigation().stop();
+        }
     }
 
     public boolean shouldStayGround() {

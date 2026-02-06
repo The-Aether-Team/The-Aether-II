@@ -7,6 +7,8 @@ import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.phys.Vec3;
 
@@ -35,9 +37,8 @@ public class FlyAndGroundInsectPathNavigation extends FlyInsectPathNavigation {
                 if (this.canUpdatePath()) {
                     this.followThePath();
                 } else if (this.path != null && !this.path.isDone()) {
-                    Vec3 vec3 = this.getTempMobPos();
                     Vec3 vec31 = this.path.getNextEntityPos(this.mob);
-                    if (vec3.y > vec31.y && !this.mob.onGround() && Mth.floor(vec3.x) == Mth.floor(vec31.x) && Mth.floor(vec3.z) == Mth.floor(vec31.z)) {
+                    if (this.mob.getBlockY() > vec31.y && this.mob.getBlockX() == Mth.floor(vec31.x) && this.mob.getBlockZ() == Mth.floor(vec31.z)) {
                         this.path.advance();
                     }
                 }
@@ -53,11 +54,41 @@ public class FlyAndGroundInsectPathNavigation extends FlyInsectPathNavigation {
         }
     }
 
+    @Override
+    protected Vec3 getTempMobPos() {
+        if (this.mob instanceof Insect insect && insect.isRest()) {
+            return new Vec3(this.mob.getX(), this.getSurfaceY(), this.mob.getZ());
+        } else {
+            return super.getTempMobPos();
+        }
+    }
 
+    private int getSurfaceY() {
+        if (this.mob.isInWater() && this.canFloat()) {
+            int i = this.mob.getBlockY();
+            BlockState blockstate = this.level.getBlockState(BlockPos.containing(this.mob.getX(), i, this.mob.getZ()));
+            int j = 0;
 
+            while (blockstate.is(Blocks.WATER)) {
+                blockstate = this.level.getBlockState(BlockPos.containing(this.mob.getX(), ++i, this.mob.getZ()));
+                if (++j > 16) {
+                    return this.mob.getBlockY();
+                }
+            }
+
+            return i;
+        } else {
+            return Mth.floor(this.mob.getY() + 0.5);
+        }
+    }
 
     @Override
     public boolean isStableDestination(BlockPos pos) {
+        if (this.mob instanceof Insect insect && insect.isRest()) {
+            BlockPos blockpos = pos.below();
+            return this.level.getBlockState(blockpos).isSolidRender();
+        }
+
         return this.level.getBlockState(pos).entityCanStandOn(this.level, pos, this.mob);
     }
 

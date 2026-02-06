@@ -6,9 +6,12 @@ import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.level.PathNavigationRegion;
 import net.minecraft.world.level.pathfinder.FlyNodeEvaluator;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.pathfinder.PathfindingContext;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
@@ -17,6 +20,12 @@ import javax.annotation.Nullable;
 public class InsectNodeEvaluator extends FlyNodeEvaluator {
     private final Object2BooleanMap<AABB> collisionCache = new Object2BooleanOpenHashMap<>();
     private final Node[] reusableNeighbors = new Node[Direction.Plane.HORIZONTAL.length()];
+
+    @Override
+    public void prepare(PathNavigationRegion p_77261_, Mob p_77262_) {
+        super.prepare(p_77261_, p_77262_);
+    }
+
 
     @Override
     public void done() {
@@ -111,7 +120,6 @@ public class InsectNodeEvaluator extends FlyNodeEvaluator {
     }
 
     @Nullable
-    @Override
     protected Node findAcceptedNode(int x, int y, int z, int verticalDeltaLimit, double nodeFloorLevel, Direction direction, PathType pathType) {
         Node node = null;
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
@@ -267,6 +275,15 @@ public class InsectNodeEvaluator extends FlyNodeEvaluator {
         }
 
         return true;
+    }
+
+    @Override
+    public PathType getPathType(PathfindingContext p_330217_, int p_326856_, int p_326857_, int p_326859_) {
+        if (this.mob instanceof Insect insect && insect.isRest()) {
+            return getPathTypeStatic(p_330217_, new BlockPos.MutableBlockPos(p_326856_, p_326857_, p_326859_));
+        } else {
+            return super.getPathType(p_330217_, p_326856_, p_326857_, p_326859_);
+        }
     }
 
     private static boolean doesBlockHavePartialCollision(PathType pathType) {
