@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.projectile;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -99,7 +100,7 @@ public class AmberDart extends AbstractArrow {
             BuildupContents buildupContents = this.getWeaponItem().get(AetherIIDataComponents.BUILDUP_CONTENTS);
             if (buildupContents != null) {
                 if (entity instanceof LivingEntity livingEntity) {
-                    entity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, buildupContents.preset(), buildupContents.amount());
+                    entity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, this, this.getOwner(), buildupContents.preset(), buildupContents.amount());
                 }
                 Vec3 vec3 = result.getLocation();
                 serverLevel.sendParticles(ColorParticleOption.create(AetherIIParticleTypes.EFFECT_BUILDUP.get(), buildupContents.getColor()), vec3.x, vec3.y, vec3.z, 1, 0.0F, this.random.nextDouble() / 3.0, 0.0F, 0.0F);

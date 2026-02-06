@@ -1,0 +1,49 @@
+{
+  "parent": "aether_ii:slider",
+  "criteria": {
+    "sentry_boots_fall": {
+      "conditions": {
+        "distance": {
+          "y": {
+            "min": 22.0
+          }
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "equipment": {
+                "feet": {
+                  "items": "aether_ii:sentry_boots"
+                }
+              },
+              "type_specific": {
+                "type": "aether_ii:alive"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:fall_from_height"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.aether_ii.sentry_boots_fall.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:sentry_boots"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.sentry_boots_fall"
+    }
+  },
+  "requirements": [
+    [
+      "sentry_boots_fall"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

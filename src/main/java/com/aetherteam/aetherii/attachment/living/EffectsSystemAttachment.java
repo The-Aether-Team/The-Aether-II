@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.attachment.living;
 
+import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
@@ -20,13 +21,16 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.ARGB;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 public class EffectsSystemAttachment {
@@ -86,11 +90,19 @@ public class EffectsSystemAttachment {
         this.setMotionMultiplier(new Vec3(1, 1, 1));
     }
 
-    public void addBuildup(LivingEntity livingEntity, EffectBuildupPresets.Preset buildup, int amount) {
+    public void addBuildup(LivingEntity target, EffectBuildupPresets.Preset buildup, int amount) {
+        this.addBuildup(target, null, null, buildup, amount);
+    }
+
+    public void addBuildup(LivingEntity target, @Nullable Entity source, EffectBuildupPresets.Preset buildup, int amount) {
+        this.addBuildup(target, source, source, buildup, amount);
+    }
+
+    public void addBuildup(LivingEntity target, @Nullable Entity directSource, @Nullable Entity source, EffectBuildupPresets.Preset buildup, int amount) {
         Holder<MobEffect> effect = buildup.type();
-        if (!livingEntity.hasEffect(effect)) {
+        if (!target.hasEffect(effect)) {
             double modifiedAmount = amount;
-            for (Map.Entry<Holder<Attribute>, AttributeInstance> attributeEntries : ((AttributeMapAccessor) livingEntity.getAttributes()).aether_ii$getAttributes().entrySet()) {
+            for (Map.Entry<Holder<Attribute>, AttributeInstance> attributeEntries : ((AttributeMapAccessor) target.getAttributes()).aether_ii$getAttributes().entrySet()) {
                 if (attributeEntries.getKey().value() instanceof EffectResistanceAttribute effectResistanceAttribute && effectResistanceAttribute.getEffect().is(effect)) {
                     modifiedAmount -= modifiedAmount * attributeEntries.getValue().getValue();
                 }
@@ -100,7 +112,10 @@ public class EffectsSystemAttachment {
             } else {
                 this.activeBuildups.get(effect).increaseBuildup((int) modifiedAmount);
             }
-            needSync = true;
+            if (source instanceof ServerPlayer serverPlayer) {
+                AetherIIAdvancementTriggers.EFFECT_BUILDUP.get().trigger(serverPlayer, directSource, target, buildup.type(), this.activeBuildups.get(effect).isBuildupFull());
+            }
+            this.needSync = true;
         }
     }
 

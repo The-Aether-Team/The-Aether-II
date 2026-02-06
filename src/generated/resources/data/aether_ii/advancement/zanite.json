@@ -1,0 +1,33 @@
+{
+  "parent": "aether_ii:ambrosium",
+  "criteria": {
+    "zanite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:zanite_gemstone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.aether_ii.zanite.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:zanite_gemstone"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.zanite"
+    }
+  },
+  "requirements": [
+    [
+      "zanite"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

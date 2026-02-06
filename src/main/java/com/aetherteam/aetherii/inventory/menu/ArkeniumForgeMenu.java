@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.inventory.menu;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.blockentity.ArkeniumForgeBlockEntity;
 import com.aetherteam.aetherii.inventory.menu.slot.ForgeCharmSlot;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
@@ -12,6 +13,7 @@ import com.aetherteam.aetherii.network.packet.clientbound.ForgeSoundPacket;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.StringUtil;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -199,11 +201,11 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         return false;
     }
 
-    public boolean slotCharms() {
-        return this.replaceCharms(this.getInput(), true);
+    public boolean slotCharms(Player player) {
+        return this.replaceCharms(player, this.getInput(), true);
     }
 
-    public boolean replaceCharms(ItemStack stack, boolean lock) {
+    public boolean replaceCharms(Player player, ItemStack stack, boolean lock) {
         boolean flag = false;
         List<Charms.CharmHolder> charmHolders = Charms.getCharmsForItem(stack);
         Charms newCharms = new Charms();
@@ -218,6 +220,9 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                             newCharms.charmHolders().add(forgeCharmSlot.getCharmIndex(), new Charms.CharmHolder(charmHolder, slot.getItem()));
                             if (!slot.getItem().isEmpty() && lock) {
                                 forgeCharmSlot.setLocked(true);
+                                if (player instanceof ServerPlayer serverPlayer) {
+                                    AetherIIAdvancementTriggers.FORGING_CHARM.get().trigger(serverPlayer, slot.getItem());
+                                }
                             }
                         }
                         flag = true;
