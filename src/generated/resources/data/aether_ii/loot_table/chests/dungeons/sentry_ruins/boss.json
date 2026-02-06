@@ -47,8 +47,8 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 3.0,
-        "min": 2.0
+        "max": 2.0,
+        "min": 1.0
       }
     },
     {
@@ -80,18 +80,72 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:zanite_pickaxe",
+          "name": "aether_ii:zanite_helmet",
           "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:zanite_hammer",
+          "name": "aether_ii:zanite_chestplate",
           "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_leggings",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_boots",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_gloves"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:neptune_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:neptune_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:neptune_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:neptune_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:neptune_gloves"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_pickaxe",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_hammer",
+          "weight": 3
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:zanite_pendant",
           "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_shield"
         },
         {
           "type": "minecraft:item",
@@ -112,16 +166,12 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:zanite_gloves"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:zanite_shield"
         }
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 3.0,
-        "min": 2.0
+        "max": 2.0,
+        "min": 1.0
       }
     },
     {
