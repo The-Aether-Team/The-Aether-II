@@ -32,7 +32,23 @@
             }
           ],
           "name": "aether_ii:ambrosium_torch",
-          "weight": 8
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 5.0,
+                "min": 3.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:scatterglass_bolt",
+          "weight": 6
         },
         {
           "type": "minecraft:item",
@@ -43,6 +59,10 @@
           "type": "minecraft:item",
           "name": "aether_ii:holystone_hammer",
           "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:holystone_crossbow"
         }
       ],
       "rolls": {

@@ -6,11 +6,12 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "value": "aether_ii:chests/dungeons/irradiated_items"
+          "value": "aether_ii:chests/dungeons/music_discs",
+          "weight": 2
         },
         {
           "type": "minecraft:loot_table",
-          "value": "aether_ii:chests/dungeons/music_discs"
+          "value": "aether_ii:chests/dungeons/irradiated_items"
         }
       ],
       "rolls": {
@@ -22,21 +23,6 @@
     {
       "bonus_rolls": 0.0,
       "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:hammer_of_demolition",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:kinetic_thrusters",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:sentry_boots",
-          "weight": 3
-        },
         {
           "type": "minecraft:item",
           "name": "aether_ii:neptune_helmet",
@@ -74,12 +60,41 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:arkenium_hammer",
+          "name": "aether_ii:hammer_of_demolition",
           "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:arkenium_pickaxe",
+          "name": "aether_ii:sentry_boots",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:kinetic_thrusters"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 2.0,
+        "min": 1.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_pickaxe",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_hammer",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:zanite_pendant",
           "weight": 2
         },
         {
@@ -155,8 +170,8 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 2.0,
-        "min": 1.0
+        "max": 1.0,
+        "min": 0.0
       }
     },
     {
@@ -169,8 +184,8 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 2.0
+                "max": 4.0,
+                "min": 3.0
               },
               "function": "minecraft:set_count"
             }
@@ -192,6 +207,47 @@
             }
           ],
           "name": "aether_ii:enchanted_orange",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:enchanted_wyndberry"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 2.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 6.0,
+                "min": 3.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:glint_coin",
           "weight": 3
         },
         {
@@ -201,15 +257,24 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 2.0
+                "max": 2.0,
+                "min": 1.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:enchanted_wyndberry",
-          "weight": 3
-        },
+          "name": "aether_ii:glint_gemstone"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 2.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
         {
           "type": "minecraft:item",
           "functions": [
@@ -228,39 +293,13 @@
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:arkenium_plate"
+          "name": "aether_ii:inert_arkenium"
         }
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 5.0,
-        "min": 3.0
-      }
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 8.0,
-                "min": 6.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "aether_ii:glint_coin",
-          "weight": 3
-        }
-      ],
-      "rolls": {
-        "type": "minecraft:uniform",
-        "max": 3.0,
-        "min": 2.0
+        "max": 2.0,
+        "min": 1.0
       }
     }
   ],
