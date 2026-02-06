@@ -12,7 +12,7 @@ import net.minecraft.util.Mth;
 public class ShroudwingModel extends EntityModel<ShroudwingRenderState> {
     private final KeyframeAnimation flyingAnimation;
     private final KeyframeAnimation landAnimation;
-    private final KeyframeAnimation takeOffAnimation;
+    private final KeyframeAnimation takeoffAnimation;
     private final KeyframeAnimation walkAnimation;
     private final ModelPart shroudwing;
     private final ModelPart rightWing;
@@ -22,7 +22,7 @@ public class ShroudwingModel extends EntityModel<ShroudwingRenderState> {
         super(root);
         this.flyingAnimation = ShroudwingAnimations.FLYING.bake(root);
         this.landAnimation = ShroudwingAnimations.LAND.bake(root);
-        this.takeOffAnimation = ShroudwingAnimations.TAKEOFF.bake(root);
+        this.takeoffAnimation = ShroudwingAnimations.TAKEOFF.bake(root);
         this.walkAnimation = ShroudwingAnimations.WALK.bake(root);
         this.shroudwing = root.getChild("shroudwing");
         this.rightWing = this.shroudwing.getChild("right_wing");
@@ -53,16 +53,17 @@ public class ShroudwingModel extends EntityModel<ShroudwingRenderState> {
     }
 
     @Override
-    public void setupAnim(ShroudwingRenderState renderState) {
+    public void setupAnim(ShroudwingRenderState renderState) { //todo the y position offsets for the take off and landing animations dont quite align with the flying animation of the shroudwing.
         super.setupAnim(renderState);
-        float f = renderState.walkAnimationSpeed;
-        float f1 = renderState.walkAnimationPos;
+//        float f = renderState.walkAnimationSpeed;
+//        float f1 = renderState.walkAnimationPos;
 
-        this.flyingAnimation.applyWalk(renderState.ageInTicks, renderState.rest ? 0.0F : 1.0F, 1.0F, 1.0F);
-        this.walkAnimation.applyWalk(f1, renderState.rest ? f : 0.0F, 16.0F, 5.0F);
+        this.flyingAnimation.apply(renderState.flyingAnimationState, renderState.ageInTicks);
         this.landAnimation.apply(renderState.landAnimationState, renderState.ageInTicks);
-        this.takeOffAnimation.apply(renderState.takeOffAnimationState, renderState.ageInTicks);
-        if (!renderState.rest) {
+        this.walkAnimation.apply(renderState.landAnimationState, renderState.ageInTicks); //todo increase speed again
+        this.takeoffAnimation.apply(renderState.takeoffAnimationState, renderState.ageInTicks);
+
+        if (!renderState.rest) { //todo this needs more proper timing
             float rotation = (Mth.sin(renderState.ageInTicks * 2) * 10 * Mth.DEG_TO_RAD);
             this.rightWing.zRot = rotation;
             this.leftWing.zRot = rotation;

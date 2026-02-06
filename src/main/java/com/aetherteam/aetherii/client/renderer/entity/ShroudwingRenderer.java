@@ -32,8 +32,10 @@ public class ShroudwingRenderer extends MobRenderer<Shroudwing, ShroudwingRender
         state.texture = shroudwing.getVariant().value().texture();
         state.emissiveTexture = shroudwing.getVariant().value().emissiveTexture().orElse(null);
         state.rest = shroudwing.isRest();
+        state.flyingAnimationState.copyFrom(shroudwing.flyingAnimationState);
         state.landAnimationState.copyFrom(shroudwing.landAnimationState);
-        state.takeOffAnimationState.copyFrom(shroudwing.takeOffAnimationState);
+        state.walkAnimationState.copyFrom(shroudwing.walkAnimationState);
+        state.takeoffAnimationState.copyFrom(shroudwing.takeoffAnimationState);
     }
 
     @Override

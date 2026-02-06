@@ -26,10 +26,14 @@ import java.util.Optional;
 
 public class Shroudwing extends Insect {
     private static final EntityDataAccessor<Holder<ShroudwingVariant>> DATA_VARIANT_ID = SynchedEntityData.defineId(Shroudwing.class, AetherIIDataSerializers.SHROUDWING_VARIANT.get());
+
     public static int LAND_EVENT = 101;
-    public static int TAKE_OFF_EVENT = 102;
+    public static int TAKEOFF_EVENT = 102;
+
+    public AnimationState flyingAnimationState = new AnimationState();
     public AnimationState landAnimationState = new AnimationState();
-    public AnimationState takeOffAnimationState = new AnimationState();
+    public AnimationState walkAnimationState = new AnimationState();
+    public AnimationState takeoffAnimationState = new AnimationState();
 
     public Shroudwing(EntityType<? extends Shroudwing> entityType, Level level) {
         super(entityType, level);
@@ -62,7 +66,7 @@ public class Shroudwing extends Insect {
         if (rest) {
             this.level().broadcastEntityEvent(this, (byte) LAND_EVENT);
         } else {
-            this.level().broadcastEntityEvent(this, (byte) TAKE_OFF_EVENT);
+            this.level().broadcastEntityEvent(this, (byte) TAKEOFF_EVENT);
         }
         if (!this.level().isClientSide) {
             this.getNavigation().stop();
@@ -74,13 +78,29 @@ public class Shroudwing extends Insect {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+        if (this.level().isClientSide()) {
+            if (this.landAnimationState.isStarted() && this.landAnimationState.getTimeInMillis(this.tickCount) >= 1417) {
+                this.landAnimationState.stop();
+                this.walkAnimationState.startIfStopped(this.tickCount);
+            } else if (this.takeoffAnimationState.isStarted() && this.takeoffAnimationState.getTimeInMillis(this.tickCount) >= 2167F) {
+                this.takeoffAnimationState.stop();
+                this.flyingAnimationState.startIfStopped(this.tickCount);
+            } else if (!this.walkAnimationState.isStarted() && !this.flyingAnimationState.isStarted() && !this.landAnimationState.isStarted() && !this.takeoffAnimationState.isStarted()) {
+                this.flyingAnimationState.start(this.tickCount);
+            }
+        }
+    }
+
+    @Override
     public void handleEntityEvent(byte id) {
         if (id == LAND_EVENT) {
-            this.takeOffAnimationState.stop();
+            this.flyingAnimationState.stop();
             this.landAnimationState.start(this.tickCount);
-        } else if (id == TAKE_OFF_EVENT) {
-            this.landAnimationState.stop();
-            this.takeOffAnimationState.start(this.tickCount);
+        } else if (id == TAKEOFF_EVENT) {
+            this.walkAnimationState.stop();
+            this.takeoffAnimationState.start(this.tickCount);
         } else {
             super.handleEntityEvent(id);
         }
