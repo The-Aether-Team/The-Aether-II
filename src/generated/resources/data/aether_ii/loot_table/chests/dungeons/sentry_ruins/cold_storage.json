@@ -344,7 +344,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:arkenium_plates",
+          "name": "aether_ii:arkenium_plate",
           "weight": 2
         },
         {

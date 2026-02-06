@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "aether_ii:arkenium_plates"
+    "#": "aether_ii:arkenium_plate"
   },
   "pattern": [
     "###",
