@@ -1,5 +1,12 @@
 {
   "criteria": {
+    "buildup_ambrosium_poisoning": {
+      "conditions": {
+        "mob_effects": "aether_ii:ambrosium_poisoning",
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
     "obtain_ambrosium_poisoning": {
       "conditions": {
         "effects": {
@@ -11,7 +18,8 @@
   },
   "requirements": [
     [
-      "obtain_ambrosium_poisoning"
+      "obtain_ambrosium_poisoning",
+      "buildup_ambrosium_poisoning"
     ]
   ],
   "sends_telemetry_event": true

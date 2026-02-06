@@ -1,5 +1,12 @@
 {
   "criteria": {
+    "buildup_fracture": {
+      "conditions": {
+        "mob_effects": "aether_ii:fracture",
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
     "obtain_fracture": {
       "conditions": {
         "effects": {
@@ -11,7 +18,8 @@
   },
   "requirements": [
     [
-      "obtain_fracture"
+      "obtain_fracture",
+      "buildup_fracture"
     ]
   ],
   "sends_telemetry_event": true

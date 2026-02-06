@@ -1,5 +1,12 @@
 {
   "criteria": {
+    "buildup_immolation": {
+      "conditions": {
+        "mob_effects": "aether_ii:immolation",
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
     "obtain_immolation": {
       "conditions": {
         "effects": {
@@ -11,7 +18,8 @@
   },
   "requirements": [
     [
-      "obtain_immolation"
+      "obtain_immolation",
+      "buildup_immolation"
     ]
   ],
   "sends_telemetry_event": true

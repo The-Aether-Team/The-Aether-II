@@ -1,5 +1,12 @@
 {
   "criteria": {
+    "buildup_toxin": {
+      "conditions": {
+        "mob_effects": "aether_ii:toxin",
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
     "obtain_toxin": {
       "conditions": {
         "effects": {
@@ -11,7 +18,8 @@
   },
   "requirements": [
     [
-      "obtain_toxin"
+      "obtain_toxin",
+      "buildup_toxin"
     ]
   ],
   "sends_telemetry_event": true

@@ -540,7 +540,11 @@ public class AetherIIAdvancementData extends AdvancementProvider {
             for (Map.Entry<ResourceKey<EffectsEntry>, Holder<MobEffect>> entry : AetherIIEffectsEntries.EFFECTS.entrySet()) {
                 Holder<MobEffect> effect = entry.getValue();
                 ResourceLocation id = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "obtain_" + effect.getKey().location().getPath()).withPrefix(path);
-                Advancement.Builder.advancement().addCriterion("obtain_" + effect.getKey().location().getPath(), EffectsChangedTrigger.TriggerInstance.hasEffects(MobEffectsPredicate.Builder.effects().and(effect))).save(consumer, id);
+                Advancement.Builder.advancement()
+                        .requirements(AdvancementRequirements.Strategy.OR)
+                        .addCriterion("obtain_" + effect.getKey().location().getPath(), EffectsChangedTrigger.TriggerInstance.hasEffects(MobEffectsPredicate.Builder.effects().and(effect)))
+                        .addCriterion("buildup_" + effect.getKey().location().getPath(), EffectBuildupTrigger.Instance.effect(Optional.empty(), Optional.empty(), HolderSet.direct(effect), false))
+                        .save(consumer, id);
             }
         }
     }
