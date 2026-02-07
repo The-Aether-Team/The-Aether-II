@@ -62,7 +62,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
             AdvancementHolder theAether = Advancement.Builder.advancement()
                     .display(AetherIIItems.AETHER_PORTAL_FRAME.get(),
                             Component.translatable("advancement.aether_ii.the_highlands"),
-                            Component.translatable("advancement.aether_ii.the_highlands.desc"),
+                            Component.translatable("advancement.aether_ii.the_highlands.desc").withStyle(ChatFormatting.AQUA),
                             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/holystone"),
                             AdvancementType.TASK, false, false, false)
                     .addCriterion("the_highlands", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL))
