@@ -797,6 +797,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.SKYROOT_BOOKSHELF.asItem(),
                 AetherIIBlocks.GREATROOT_BOOKSHELF.asItem(),
                 AetherIIBlocks.WISPROOT_BOOKSHELF.asItem(),
+                AetherIIBlocks.AMBEROOT_BOOKSHELF.asItem(),
                 AetherIIBlocks.HOLYSTONE_BOOKSHELF.asItem()
         );
         this.tag(Tags.Items.FENCE_GATES_WOODEN).add(
