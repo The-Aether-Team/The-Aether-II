@@ -999,8 +999,12 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.WISPROOT_TRUNK.get(), 5, 5);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get(), 5, 5);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_LOG.get(), 5, 5);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_DEPOSIT.get(), 5, 5);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_WOOD.get(), 5, 5);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_TRUNK.get(), 5, 5);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get(), 5, 5);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.STRIPPED_AMBEROOT_WOOD.get(), 5, 5);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK.get(), 5, 5);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.SKYROOT_LEAF_PILE.get(), 60, 100);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.SKYPLANE_LEAF_PILE.get(), 60, 100);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.SKYBIRCH_LEAF_PILE.get(), 60, 100);
@@ -1071,6 +1075,20 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.WISPROOT_BASE_BEAM.get(), 5, 20);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.WISPROOT_TOP_BEAM.get(), 5, 20);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.WISPROOT_BEAM.get(), 5, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_PLANKS.get(), 5, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_STAIRS.get(), 5, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_SLAB.get(), 5, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_FENCE.get(), 5, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_FENCE_GATE.get(), 5, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_FLOORBOARDS.get(), 5, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_HIGHLIGHT.get(), 5, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_SHINGLES.get(), 5, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_SMALL_SHINGLES.get(), 5, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_BASE_PLANKS.get(), 5, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_TOP_PLANKS.get(), 5, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_BASE_BEAM.get(), 5, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_TOP_BEAM.get(), 5, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_BEAM.get(), 5, 20);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.CLOUDWOOL.get(), 30, 60);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.CLOUDWOOL_CARPET.get(), 60, 20);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), 30, 20);
@@ -1080,6 +1098,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         WoodType.register(AetherIIWoodTypes.SKYROOT);
         WoodType.register(AetherIIWoodTypes.GREATROOT);
         WoodType.register(AetherIIWoodTypes.WISPROOT);
+        WoodType.register(AetherIIWoodTypes.AMBEROOT);
     }
 
     /**
@@ -1099,9 +1118,10 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
             .put(() -> AetherIIBlocks.MOSSY_WISPROOT_WOOD, () -> AetherIIBlocks.WISPROOT_WOOD)
             .put(() -> AetherIIBlocks.MOSSY_WISPROOT_TRUNK, () -> AetherIIBlocks.WISPROOT_TRUNK)
             .put(() -> AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE, () -> AetherIIBlocks.WISPROOT_LOG)
-            .put(() -> AetherIIBlocks.AMBEROOT_LOG, () -> AetherIIBlocks.STRIPPED_SKYROOT_LOG)
-            .put(() -> AetherIIBlocks.AMBEROOT_WOOD, () -> AetherIIBlocks.STRIPPED_SKYROOT_WOOD)
-            .put(() -> AetherIIBlocks.AMBEROOT_TRUNK, () -> AetherIIBlocks.STRIPPED_SKYROOT_TRUNK)
+            .put(() -> AetherIIBlocks.AMBEROOT_LOG, () -> AetherIIBlocks.STRIPPED_AMBEROOT_LOG)
+            .put(() -> AetherIIBlocks.AMBEROOT_DEPOSIT, () -> AetherIIBlocks.STRIPPED_AMBEROOT_LOG)
+            .put(() -> AetherIIBlocks.AMBEROOT_WOOD, () -> AetherIIBlocks.STRIPPED_AMBEROOT_WOOD)
+            .put(() -> AetherIIBlocks.AMBEROOT_TRUNK, () -> AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK)
             .put(() -> AetherIIBlocks.GUARDIAN_LOG, () -> AetherIIBlocks.STRIPPED_GUARDIAN_LOG)
             .put(() -> AetherIIBlocks.GUARDIAN_LOG_SLAB, () -> AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB)
             .put(() -> AetherIIBlocks.GUARDIAN_WOOD, () -> AetherIIBlocks.STRIPPED_GUARDIAN_WOOD)
