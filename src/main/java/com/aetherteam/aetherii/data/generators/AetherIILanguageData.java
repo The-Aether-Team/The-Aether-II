@@ -184,6 +184,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE, "Mossy Wisproot Log Base");
         this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_LOG, "Stripped Wisproot Log");
         this.addBlock(AetherIIBlocks.AMBEROOT_LOG, "Amberoot Log");
+        this.addBlock(AetherIIBlocks.AMBEROOT_DEPOSIT, "Amberoot Deposit");
+        this.addBlock(AetherIIBlocks.STRIPPED_AMBEROOT_LOG, "Stripped Amberoot Log");
         this.addBlock(AetherIIBlocks.SKYROOT_WOOD, "Skyroot Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_SKYROOT_WOOD, "Stripped Skyroot Wood");
         this.addBlock(AetherIIBlocks.GREATROOT_WOOD, "Greatroot Wood");
@@ -192,6 +194,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.MOSSY_WISPROOT_WOOD, "Mossy Wisproot Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_WOOD, "Stripped Wisproot Wood");
         this.addBlock(AetherIIBlocks.AMBEROOT_WOOD, "Amberoot Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_AMBEROOT_WOOD, "Stripped Amberoot Wood");
 
         // Trunks
         this.addBlock(AetherIIBlocks.SKYROOT_TRUNK, "Skyroot Trunk");
@@ -202,6 +205,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.MOSSY_WISPROOT_TRUNK, "Mossy Wisproot Trunk");
         this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_TRUNK, "Stripped Wisproot Trunk");
         this.addBlock(AetherIIBlocks.AMBEROOT_TRUNK, "Amberoot Trunk");
+        this.addBlock(AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK, "Stripped Amberoot Trunk");
 
         // Leaf Pile
         this.addBlock(AetherIIBlocks.SKYROOT_LEAF_PILE, "Skyroot Leaf Pile");
@@ -401,6 +405,30 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.WISPROOT_BEAM, "Wisproot Beam");
         this.addBlock(AetherIIBlocks.SECRET_WISPROOT_DOOR, "Secret Wisproot Door");
         this.addBlock(AetherIIBlocks.SECRET_WISPROOT_TRAPDOOR, "Secret Wisproot Trapdoor");
+
+        // Amberoot Planks
+        this.addBlock(AetherIIBlocks.AMBEROOT_PLANKS, "Amberoot Planks");
+        this.addBlock(AetherIIBlocks.AMBEROOT_STAIRS, "Amberoot Stairs");
+        this.addBlock(AetherIIBlocks.AMBEROOT_SLAB, "Amberoot Slab");
+        this.addBlock(AetherIIBlocks.AMBEROOT_FENCE, "Amberoot Fence");
+        this.addBlock(AetherIIBlocks.AMBEROOT_FENCE_GATE, "Amberoot Fence Gate");
+        this.addBlock(AetherIIBlocks.AMBEROOT_DOOR, "Amberoot Door");
+        this.addBlock(AetherIIBlocks.AMBEROOT_TRAPDOOR, "Amberoot Trapdoor");
+        this.addBlock(AetherIIBlocks.AMBEROOT_BUTTON, "Amberoot Button");
+        this.addBlock(AetherIIBlocks.AMBEROOT_PRESSURE_PLATE, "Amberoot Pressure Plate");
+
+        // Amberoot Decorative Blocks
+        this.addBlock(AetherIIBlocks.AMBEROOT_FLOORBOARDS, "Amberoot Floorboards");
+        this.addBlock(AetherIIBlocks.AMBEROOT_HIGHLIGHT, "Amberoot Highlight");
+        this.addBlock(AetherIIBlocks.AMBEROOT_SHINGLES, "Amberoot Shingles");
+        this.addBlock(AetherIIBlocks.AMBEROOT_SMALL_SHINGLES, "Amberoot Small Shingles");
+        this.addBlock(AetherIIBlocks.AMBEROOT_BASE_PLANKS, "Amberoot Base Planks");
+        this.addBlock(AetherIIBlocks.AMBEROOT_TOP_PLANKS, "Amberoot Top Planks");
+        this.addBlock(AetherIIBlocks.AMBEROOT_BASE_BEAM, "Amberoot Base Beam");
+        this.addBlock(AetherIIBlocks.AMBEROOT_TOP_BEAM, "Amberoot Top Beam");
+        this.addBlock(AetherIIBlocks.AMBEROOT_BEAM, "Amberoot Beam");
+        this.addBlock(AetherIIBlocks.SECRET_AMBEROOT_DOOR, "Secret Amberoot Door");
+        this.addBlock(AetherIIBlocks.SECRET_AMBEROOT_TRAPDOOR, "Secret Amberoot Trapdoor");
 
         // Holystone
         this.addBlock(AetherIIBlocks.HOLYSTONE_STAIRS, "Holystone Stairs");
@@ -777,12 +805,16 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.WISPROOT_SIGN, "Wisproot Sign");
         this.addBlock(AetherIIBlocks.WISPROOT_HANGING_SIGN, "Wisproot Hanging Sign");
 
+        this.addBlock(AetherIIBlocks.AMBEROOT_SIGN, "Amberoot Sign");
+        this.addBlock(AetherIIBlocks.AMBEROOT_HANGING_SIGN, "Amberoot Hanging Sign");
+
         this.addBlock(AetherIIBlocks.HOLYSTONE_LEVER, "Holystone Lever");
 
         // Bookshelves
         this.addBlock(AetherIIBlocks.SKYROOT_BOOKSHELF, "Skyroot Bookshelf");
         this.addBlock(AetherIIBlocks.GREATROOT_BOOKSHELF, "Greatroot Bookshelf");
         this.addBlock(AetherIIBlocks.WISPROOT_BOOKSHELF, "Wisproot Bookshelf");
+        this.addBlock(AetherIIBlocks.AMBEROOT_BOOKSHELF, "Amberoot Bookshelf");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF, "Holystone Bookshelf");
 
         // Furniture

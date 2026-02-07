@@ -262,7 +262,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .save(this.output);
 
         // Skyroot Planks
-        this.planksFromLog(AetherIIBlocks.SKYROOT_PLANKS.get(), AetherIITags.Items.CRAFTS_SKYROOT_PLANKS, 4);
+        this.planksFromLog(AetherIIBlocks.SKYROOT_PLANKS.get(), AetherIITags.Items.SKYROOT_LOGS, 4);
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SKYROOT_PLANKS.get())
                 .group("planks_from_artisanry")
                 .requires(AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS)
@@ -309,7 +309,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_TRAPDOOR.get(), AetherIIBlocks.SECRET_SKYROOT_TRAPDOOR.get());
         
         // Greatroot Planks
-        this.planksFromLog(AetherIIBlocks.GREATROOT_PLANKS.get(), AetherIITags.Items.CRAFTS_GREATROOT_PLANKS, 4);
+        this.planksFromLog(AetherIIBlocks.GREATROOT_PLANKS.get(), AetherIITags.Items.GREATROOT_LOGS, 4);
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GREATROOT_PLANKS.get())
                 .group("planks_from_artisanry")
                 .requires(AetherIITags.Items.GREATROOT_DECORATIVE_BLOCKS)
@@ -356,7 +356,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GREATROOT_TRAPDOOR.get(), AetherIIBlocks.SECRET_GREATROOT_TRAPDOOR.get());
 
         // Wisproot Planks
-        this.planksFromLog(AetherIIBlocks.WISPROOT_PLANKS.get(), AetherIITags.Items.CRAFTS_WISPROOT_PLANKS, 4);
+        this.planksFromLog(AetherIIBlocks.WISPROOT_PLANKS.get(), AetherIITags.Items.WISPROOT_LOGS, 4);
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.WISPROOT_PLANKS.get())
                 .group("planks_from_artisanry")
                 .requires(AetherIITags.Items.WISPROOT_DECORATIVE_BLOCKS)
@@ -401,6 +401,53 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.WISPROOT_PLANKS.get(), AetherIIBlocks.WISPROOT_BEAM.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.WISPROOT_DOOR.get(), AetherIIBlocks.SECRET_WISPROOT_DOOR.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.WISPROOT_TRAPDOOR.get(), AetherIIBlocks.SECRET_WISPROOT_TRAPDOOR.get());
+
+        // Amberoot Planks
+        this.planksFromLog(AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIITags.Items.AMBEROOT_LOGS, 4);
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.AMBEROOT_PLANKS.get())
+                .group("planks_from_artisanry")
+                .requires(AetherIITags.Items.AMBEROOT_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.AMBEROOT_DECORATIVE_BLOCKS))
+                .save(this.output, this.name("amberoot_planks_from_artisanry"));
+        this.fence(AetherIIBlocks.AMBEROOT_FENCE, AetherIIBlocks.AMBEROOT_PLANKS).save(this.output);
+        this.fenceGate(AetherIIBlocks.AMBEROOT_FENCE_GATE, AetherIIBlocks.AMBEROOT_PLANKS).save(this.output);
+        this.doorBuilder(AetherIIBlocks.AMBEROOT_DOOR, Ingredient.of(AetherIIBlocks.AMBEROOT_PLANKS.get())).unlockedBy(getHasName(AetherIIBlocks.AMBEROOT_PLANKS.get()), has(AetherIIBlocks.AMBEROOT_PLANKS.get())).group("wooden_door").save(this.output);
+        this.trapdoorBuilder(AetherIIBlocks.AMBEROOT_TRAPDOOR, Ingredient.of(AetherIIBlocks.AMBEROOT_PLANKS.get())).unlockedBy(getHasName(AetherIIBlocks.AMBEROOT_PLANKS.get()), has(AetherIIBlocks.AMBEROOT_PLANKS.get())).group("wooden_trapdoor").save(this.output);
+        this.buttonBuilder(AetherIIBlocks.AMBEROOT_BUTTON.get(), Ingredient.of(AetherIIBlocks.AMBEROOT_PLANKS.get())).unlockedBy(getHasName(AetherIIBlocks.AMBEROOT_PLANKS.get()), has(AetherIIBlocks.AMBEROOT_PLANKS.get())).group("wooden_button").save(this.output);
+        this.pressurePlateBuilder(RecipeCategory.REDSTONE, AetherIIBlocks.AMBEROOT_PRESSURE_PLATE.get(), Ingredient.of(AetherIIBlocks.AMBEROOT_PLANKS.get())).unlockedBy(getHasName(AetherIIBlocks.AMBEROOT_PLANKS.get()), has(AetherIIBlocks.AMBEROOT_PLANKS.get())).group("wooden_pressure_plate").save(this.output);
+        this.stairs(AetherIIBlocks.AMBEROOT_STAIRS, AetherIIBlocks.AMBEROOT_PLANKS).group("wooden_stairs").save(this.output);
+        this.slabBuilder(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.AMBEROOT_SLAB.get(), Ingredient.of(AetherIIBlocks.AMBEROOT_PLANKS.get()))
+                .group("wooden_slab")
+                .unlockedBy(getHasName(AetherIIBlocks.AMBEROOT_PLANKS.get()), has(AetherIIBlocks.AMBEROOT_PLANKS.get()))
+                .save(this.output);
+        this.sign(getter, AetherIIBlocks.AMBEROOT_SIGN.get(), AetherIIBlocks.AMBEROOT_PLANKS);
+        this.hangingSign(getter, AetherIIBlocks.AMBEROOT_HANGING_SIGN.get(), AetherIIBlocks.STRIPPED_AMBEROOT_LOG);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_STAIRS.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_SLAB.get(), AetherIIBlocks.AMBEROOT_PLANKS.get(), 2);
+
+        // Amberoot Decorative Blocks
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_FLOORBOARDS.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_HIGHLIGHT.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_SHINGLES.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_SMALL_SHINGLES.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_BASE_PLANKS.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_TOP_PLANKS.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_BASE_BEAM.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_TOP_BEAM.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_BEAM.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SECRET_AMBEROOT_DOOR.get(), AetherIIBlocks.AMBEROOT_DOOR.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SECRET_AMBEROOT_TRAPDOOR.get(), AetherIIBlocks.AMBEROOT_TRAPDOOR.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_FLOORBOARDS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_HIGHLIGHT.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_SHINGLES.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_SMALL_SHINGLES.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_BASE_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_TOP_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_BASE_BEAM.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_TOP_BEAM.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_BEAM.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_DOOR.get(), AetherIIBlocks.SECRET_AMBEROOT_DOOR.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_TRAPDOOR.get(), AetherIIBlocks.SECRET_AMBEROOT_TRAPDOOR.get());
 
         // Holystone
         this.stairs(AetherIIBlocks.HOLYSTONE_STAIRS, AetherIIBlocks.HOLYSTONE).save(this.output);
@@ -1197,6 +1244,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.bookshelf(getter, AetherIIBlocks.SKYROOT_BOOKSHELF, AetherIIBlocks.SKYROOT_PLANKS);
         this.bookshelf(getter, AetherIIBlocks.GREATROOT_BOOKSHELF, AetherIIBlocks.GREATROOT_PLANKS);
         this.bookshelf(getter, AetherIIBlocks.WISPROOT_BOOKSHELF, AetherIIBlocks.WISPROOT_PLANKS);
+        this.bookshelf(getter, AetherIIBlocks.AMBEROOT_BOOKSHELF, AetherIIBlocks.AMBEROOT_PLANKS);
         this.bookshelf(getter, AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), AetherIIBlocks.HOLYSTONE_BRICKS);
 
         // Items
