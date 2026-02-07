@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    "#aether_ii:crafts_amberoot_planks"
+  ],
+  "result": {
+    "count": 4,
+    "id": "aether_ii:amberoot_planks"
+  }
+}

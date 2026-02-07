@@ -450,6 +450,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
+                output.accept(AetherIIBlocks.AMBEROOT_DEPOSIT.get());
                 output.accept(AetherIIBlocks.AMBEROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.SKYROOT_LEAVES.get());
                 output.accept(AetherIIBlocks.SKYPLANE_LEAVES.get());

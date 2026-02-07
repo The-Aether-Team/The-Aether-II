@@ -344,6 +344,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.NEPTUNE_REPAIRING);
         this.tag(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS);
         this.tag(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS).add(
+                AetherIIItems.HOLYSTONE_AXE.get(),
                 AetherIIItems.ZANITE_AXE.get(),
                 AetherIIItems.ARKENIUM_AXE.get(),
                 AetherIIItems.GRAVITITE_AXE.get()
