@@ -555,6 +555,7 @@
   },
   "display": {
     "description": {
+      "color": "gold",
       "translate": "advancement.aether_ii.bestiary.desc"
     },
     "frame": "challenge",

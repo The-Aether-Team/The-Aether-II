@@ -74,6 +74,7 @@
   },
   "display": {
     "description": {
+      "color": "gold",
       "translate": "advancement.aether_ii.engraved_discs.desc"
     },
     "frame": "challenge",
