@@ -93,7 +93,11 @@ public abstract class AetherIIBlockItemTagProvider {
         this.tag(AetherIITags.Blocks.AMBEROOT_LOGS, AetherIITags.Items.AMBEROOT_LOGS).add(
                 AetherIIBlocks.AMBEROOT_LOG.get(),
                 AetherIIBlocks.AMBEROOT_WOOD.get(),
-                AetherIIBlocks.AMBEROOT_TRUNK.get()
+                AetherIIBlocks.AMBEROOT_TRUNK.get(),
+                AetherIIBlocks.AMBEROOT_DEPOSIT.get(),
+                AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get(),
+                AetherIIBlocks.STRIPPED_AMBEROOT_WOOD.get(),
+                AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK.get()
         );
         this.tag(AetherIITags.Blocks.GUARDIAN_LOGS, AetherIITags.Items.GUARDIAN_LOGS).add(
                 AetherIIBlocks.GUARDIAN_LOG.get(),
