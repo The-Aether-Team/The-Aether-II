@@ -248,18 +248,6 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.GRAVITITE_TROWEL.get(),
                 AetherIIItems.HAMMER_OF_DEMOLITION.get()
         );
-        this.tag(AetherIITags.Items.CRAFTS_SKYROOT_PLANKS).addTags(
-                AetherIITags.Items.SKYROOT_LOGS
-        );
-        this.tag(AetherIITags.Items.CRAFTS_GREATROOT_PLANKS).addTag(
-                AetherIITags.Items.GREATROOT_LOGS
-        );
-        this.tag(AetherIITags.Items.CRAFTS_WISPROOT_PLANKS).addTag(
-                AetherIITags.Items.WISPROOT_LOGS
-        );
-        this.tag(AetherIITags.Items.CRAFTS_AMBEROOT_PLANKS).addTag( //todo: additional crafting tag is now no longer needed
-                AetherIITags.Items.AMBEROOT_LOGS
-        );
         this.tag(AetherIITags.Items.PLANKS_CRAFTING).add(
                 AetherIIBlocks.SKYROOT_PLANKS.asItem(),
                 AetherIIBlocks.GREATROOT_PLANKS.asItem(),

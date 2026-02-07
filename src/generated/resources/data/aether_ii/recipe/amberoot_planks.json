@@ -3,7 +3,7 @@
   "category": "building",
   "group": "planks",
   "ingredients": [
-    "#aether_ii:crafts_amberoot_planks"
+    "#aether_ii:amberoot_logs"
   ],
   "result": {
     "count": 4,
