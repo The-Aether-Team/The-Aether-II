@@ -1105,6 +1105,9 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.CLOUDWOOL.get(), 30, 60);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.CLOUDWOOL_CARPET.get(), 60, 20);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), 30, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.GREATROOT_BOOKSHELF.get(), 30, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.WISPROOT_BOOKSHELF.get(), 30, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_BOOKSHELF.get(), 30, 20);
     }
 
     public static void registerWoodTypes() {
