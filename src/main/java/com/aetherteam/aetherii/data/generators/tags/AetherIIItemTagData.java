@@ -489,34 +489,57 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(ItemTags.WOODEN_STAIRS).add(
                 AetherIIBlocks.SKYROOT_STAIRS.asItem(),
                 AetherIIBlocks.GREATROOT_STAIRS.asItem(),
-                AetherIIBlocks.WISPROOT_STAIRS.asItem()
+                AetherIIBlocks.WISPROOT_STAIRS.asItem(),
+                AetherIIBlocks.AMBEROOT_STAIRS.asItem()
         );
         this.tag(ItemTags.WOODEN_SLABS).add(
                 AetherIIBlocks.SKYROOT_SLAB.asItem(),
                 AetherIIBlocks.GREATROOT_SLAB.asItem(),
-                AetherIIBlocks.WISPROOT_SLAB.asItem()
+                AetherIIBlocks.WISPROOT_SLAB.asItem(),
+                AetherIIBlocks.AMBEROOT_SLAB.asItem()
         );
         this.tag(ItemTags.WOODEN_FENCES).add(
                 AetherIIBlocks.SKYROOT_FENCE.asItem(),
                 AetherIIBlocks.GREATROOT_FENCE.asItem(),
-                AetherIIBlocks.WISPROOT_FENCE.asItem()
+                AetherIIBlocks.WISPROOT_FENCE.asItem(),
+                AetherIIBlocks.AMBEROOT_FENCE.asItem()
         );
         this.tag(ItemTags.WOODEN_DOORS).add(
-                AetherIIBlocks.SKYROOT_DOOR.asItem()
+                AetherIIBlocks.SKYROOT_DOOR.asItem(),
+                AetherIIBlocks.GREATROOT_DOOR.asItem(),
+                AetherIIBlocks.WISPROOT_DOOR.asItem(),
+                AetherIIBlocks.AMBEROOT_DOOR.asItem(),
+                AetherIIBlocks.SECRET_SKYROOT_DOOR.asItem(),
+                AetherIIBlocks.SECRET_GREATROOT_DOOR.asItem(),
+                AetherIIBlocks.SECRET_WISPROOT_DOOR.asItem(),
+                AetherIIBlocks.SECRET_AMBEROOT_DOOR.asItem()
         );
         this.tag(ItemTags.WOODEN_TRAPDOORS).add(
-                AetherIIBlocks.SKYROOT_TRAPDOOR.asItem()
+                AetherIIBlocks.SKYROOT_TRAPDOOR.asItem(),
+                AetherIIBlocks.GREATROOT_TRAPDOOR.asItem(),
+                AetherIIBlocks.WISPROOT_TRAPDOOR.asItem(),
+                AetherIIBlocks.AMBEROOT_TRAPDOOR.asItem(),
+                AetherIIBlocks.SECRET_SKYROOT_TRAPDOOR.asItem(),
+                AetherIIBlocks.SECRET_GREATROOT_TRAPDOOR.asItem(),
+                AetherIIBlocks.SECRET_WISPROOT_TRAPDOOR.asItem(),
+                AetherIIBlocks.SECRET_AMBEROOT_TRAPDOOR.asItem()
         );
         this.tag(ItemTags.WOODEN_BUTTONS).add(
                 AetherIIBlocks.SKYROOT_BUTTON.asItem(),
                 AetherIIBlocks.GREATROOT_BUTTON.asItem(),
-                AetherIIBlocks.WISPROOT_BUTTON.asItem()
+                AetherIIBlocks.WISPROOT_BUTTON.asItem(),
+                AetherIIBlocks.AMBEROOT_BUTTON.asItem()
         );
-        this.tag(ItemTags.STONE_BUTTONS).add(AetherIIBlocks.HOLYSTONE_BUTTON.asItem());
+        this.tag(ItemTags.STONE_BUTTONS).add(
+                AetherIIBlocks.HOLYSTONE_BUTTON.asItem(),
+                AetherIIBlocks.UNDERSHALE_BRICK_BUTTON.asItem(),
+                AetherIIBlocks.SENTRY_BUTTON.asItem()
+        );
         this.tag(ItemTags.WOODEN_PRESSURE_PLATES).add(
                 AetherIIBlocks.SKYROOT_PRESSURE_PLATE.asItem(),
                 AetherIIBlocks.GREATROOT_PRESSURE_PLATE.asItem(),
-                AetherIIBlocks.WISPROOT_PRESSURE_PLATE.asItem()
+                AetherIIBlocks.WISPROOT_PRESSURE_PLATE.asItem(),
+                AetherIIBlocks.AMBEROOT_PRESSURE_PLATE.asItem()
         );
         this.tag(ItemTags.WOOL_CARPETS).add(
                 AetherIIBlocks.CLOUDWOOL_CARPET.asItem(),
