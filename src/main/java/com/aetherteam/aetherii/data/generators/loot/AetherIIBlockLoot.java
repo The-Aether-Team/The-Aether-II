@@ -770,6 +770,12 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropOther(AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
 
+        this.dropOther(AetherIIBlocks.AMBEROOT_WALL_SIGN.get(), AetherIIBlocks.AMBEROOT_SIGN.get());
+        this.dropSelf(AetherIIBlocks.AMBEROOT_SIGN.get());
+
+        this.dropOther(AetherIIBlocks.AMBEROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.AMBEROOT_HANGING_SIGN.get());
+        this.dropSelf(AetherIIBlocks.AMBEROOT_HANGING_SIGN.get());
+
         this.dropSelf(AetherIIBlocks.HOLYSTONE_LEVER.get());
 
         // Bookshelves

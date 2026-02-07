@@ -681,12 +681,14 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(ItemTags.SIGNS).add(
                 AetherIIBlocks.SKYROOT_SIGN.asItem(),
                 AetherIIBlocks.GREATROOT_SIGN.asItem(),
-                AetherIIBlocks.WISPROOT_SIGN.asItem()
+                AetherIIBlocks.WISPROOT_SIGN.asItem(),
+                AetherIIBlocks.AMBEROOT_SIGN.asItem()
         );
         this.tag(ItemTags.HANGING_SIGNS).add(
                 AetherIIBlocks.SKYROOT_HANGING_SIGN.asItem(),
                 AetherIIBlocks.GREATROOT_HANGING_SIGN.asItem(),
-                AetherIIBlocks.WISPROOT_HANGING_SIGN.asItem()
+                AetherIIBlocks.WISPROOT_HANGING_SIGN.asItem(),
+                AetherIIBlocks.AMBEROOT_HANGING_SIGN.asItem()
         );
         this.tag(ItemTags.BEACON_PAYMENT_ITEMS).add(
                 AetherIIItems.ZANITE_GEMSTONE.get(),

@@ -50,7 +50,7 @@ public class AetherIIBlockFamilies {
             .fence(AetherIIBlocks.AMBEROOT_FENCE.get())
             .fenceGate(AetherIIBlocks.AMBEROOT_FENCE_GATE.get())
             .pressurePlate(AetherIIBlocks.AMBEROOT_PRESSURE_PLATE.get())
-           // .sign(AetherIIBlocks.AMBEROOT_SIGN.get(), AetherIIBlocks.AMBEROOT_WALL_SIGN.get()) todo
+            .sign(AetherIIBlocks.AMBEROOT_SIGN.get(), AetherIIBlocks.AMBEROOT_WALL_SIGN.get())
             .slab(AetherIIBlocks.AMBEROOT_SLAB.get())
             .stairs(AetherIIBlocks.AMBEROOT_STAIRS.get())
             .door(AetherIIBlocks.AMBEROOT_DOOR.get())

@@ -807,6 +807,14 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<CeilingHangingSignBlock> WISPROOT_HANGING_SIGN = register("wisproot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.WISPROOT, properties), AetherIIBlocks::wisprootHangingSignProperties, hangingSignItem(() -> AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN));
     public static final DeferredBlock<WallHangingSignBlock> WISPROOT_WALL_HANGING_SIGN = registerWithoutItem("wisproot_wall_hanging_sign", (properties) -> new WallHangingSignBlock(AetherIIWoodTypes.WISPROOT, properties), AetherIIBlocks::wisprootHangingSignProperties);
 
+    private static Block.Properties amberootSignProperties() { return skyrootSignProperties(); }
+    public static final DeferredBlock<StandingSignBlock> AMBEROOT_SIGN = register("amberoot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.AMBEROOT, properties), AetherIIBlocks::wisprootSignProperties, signItem(() -> AetherIIBlocks.AMBEROOT_WALL_SIGN));
+    public static final DeferredBlock<WallSignBlock> AMBEROOT_WALL_SIGN = registerWithoutItem("amberoot_wall_sign", (properties) -> new WallSignBlock(AetherIIWoodTypes.AMBEROOT, properties), AetherIIBlocks::wisprootSignProperties);
+
+    private static Block.Properties amberootHangingSignProperties() { return skyrootHangingSignProperties(); }
+    public static final DeferredBlock<CeilingHangingSignBlock> AMBEROOT_HANGING_SIGN = register("amberoot_hanging_sign", (properties) -> new CeilingHangingSignBlock(AetherIIWoodTypes.AMBEROOT, properties), AetherIIBlocks::wisprootHangingSignProperties, hangingSignItem(() -> AetherIIBlocks.AMBEROOT_WALL_HANGING_SIGN));
+    public static final DeferredBlock<WallHangingSignBlock> AMBEROOT_WALL_HANGING_SIGN = registerWithoutItem("amberoot_wall_hanging_sign", (properties) -> new WallHangingSignBlock(AetherIIWoodTypes.AMBEROOT, properties), AetherIIBlocks::wisprootHangingSignProperties);
+
     public static final DeferredBlock<Block> HOLYSTONE_LEVER = register("holystone_lever", LeverBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LEVER));
 
     public static final DeferredBlock<Block> SENTRY_CRATE = register("sentry_crate", SentryCrateBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F).sound(SoundType.STONE).lightLevel((state) -> 4).requiresCorrectToolForDrops());
@@ -899,6 +907,10 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
                 return new SignItem(WISPROOT_SIGN.get(), WISPROOT_WALL_SIGN.get(), properties.stacksTo(16));
             } else if (block == WISPROOT_HANGING_SIGN) {
                 return new HangingSignItem(WISPROOT_HANGING_SIGN.get(), WISPROOT_WALL_HANGING_SIGN.get(), properties.stacksTo(16));
+            } else if (block == AMBEROOT_SIGN) {
+                return new SignItem(AMBEROOT_SIGN.get(), AMBEROOT_WALL_SIGN.get(), properties.stacksTo(16));
+            } else if (block == AMBEROOT_HANGING_SIGN) {
+                return new HangingSignItem(AMBEROOT_HANGING_SIGN.get(), AMBEROOT_WALL_HANGING_SIGN.get(), properties.stacksTo(16));
             } else if (block == CLOUDWOOL_BEDROLL) {
                 return new BedItem(CLOUDWOOL_BEDROLL.get(), properties.stacksTo(4));
             } else if (block == SKYROOT_BED) { //todo: clean-up

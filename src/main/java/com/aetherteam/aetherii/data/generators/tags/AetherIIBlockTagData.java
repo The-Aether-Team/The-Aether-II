@@ -681,33 +681,29 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS.get()
         );
         this.tag(BlockTags.BAMBOO_PLANTABLE_ON).addTag(AetherIITags.Blocks.AETHER_DIRT);
-        this.tag(BlockTags.SIGNS).add(
-                AetherIIBlocks.SKYROOT_SIGN.get(),
-                AetherIIBlocks.SKYROOT_WALL_SIGN.get(),
-                AetherIIBlocks.GREATROOT_SIGN.get(),
-                AetherIIBlocks.GREATROOT_WALL_SIGN.get(),
-                AetherIIBlocks.WISPROOT_SIGN.get(),
-                AetherIIBlocks.WISPROOT_WALL_SIGN.get()
-        );
         this.tag(BlockTags.STANDING_SIGNS).add(
                 AetherIIBlocks.SKYROOT_SIGN.get(),
                 AetherIIBlocks.GREATROOT_SIGN.get(),
-                AetherIIBlocks.WISPROOT_SIGN.get()
+                AetherIIBlocks.WISPROOT_SIGN.get(),
+                AetherIIBlocks.AMBEROOT_SIGN.get()
         );
         this.tag(BlockTags.WALL_SIGNS).add(
                 AetherIIBlocks.SKYROOT_WALL_SIGN.get(),
                 AetherIIBlocks.GREATROOT_WALL_SIGN.get(),
-                AetherIIBlocks.WISPROOT_WALL_SIGN.get()
+                AetherIIBlocks.WISPROOT_WALL_SIGN.get(),
+                AetherIIBlocks.AMBEROOT_WALL_SIGN.get()
         );
         this.tag(BlockTags.CEILING_HANGING_SIGNS).add(
                 AetherIIBlocks.SKYROOT_HANGING_SIGN.get(),
                 AetherIIBlocks.GREATROOT_HANGING_SIGN.get(),
-                AetherIIBlocks.WISPROOT_HANGING_SIGN.get()
+                AetherIIBlocks.WISPROOT_HANGING_SIGN.get(),
+                AetherIIBlocks.AMBEROOT_WALL_SIGN.get()
         );
         this.tag(BlockTags.WALL_HANGING_SIGNS).add(
                 AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get(),
                 AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get(),
-                AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get()
+                AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(),
+                AetherIIBlocks.AMBEROOT_WALL_SIGN.get()
         );
         this.tag(BlockTags.PORTALS).add(AetherIIBlocks.AETHER_PORTAL.get());
         this.tag(BlockTags.BEACON_BASE_BLOCKS).add(
@@ -1055,6 +1051,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_WALL_SIGN.get(),
                 AetherIIBlocks.WISPROOT_HANGING_SIGN.get(),
                 AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(),
+                AetherIIBlocks.AMBEROOT_SIGN.get(),
+                AetherIIBlocks.AMBEROOT_WALL_SIGN.get(),
+                AetherIIBlocks.AMBEROOT_HANGING_SIGN.get(),
+                AetherIIBlocks.AMBEROOT_WALL_HANGING_SIGN.get(),
                 AetherIIBlocks.GUARDIAN_LOG.get(),
                 AetherIIBlocks.GUARDIAN_WOOD.get(),
                 AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get(),

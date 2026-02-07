@@ -805,6 +805,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.WISPROOT_SIGN, "Wisproot Sign");
         this.addBlock(AetherIIBlocks.WISPROOT_HANGING_SIGN, "Wisproot Hanging Sign");
 
+        this.addBlock(AetherIIBlocks.AMBEROOT_SIGN, "Amberoot Sign");
+        this.addBlock(AetherIIBlocks.AMBEROOT_HANGING_SIGN, "Amberoot Hanging Sign");
+
         this.addBlock(AetherIIBlocks.HOLYSTONE_LEVER, "Holystone Lever");
 
         // Bookshelves
