@@ -14,6 +14,7 @@
   },
   "display": {
     "description": {
+      "color": "aqua",
       "translate": "advancement.aether_ii.ambrosium.desc"
     },
     "icon": {

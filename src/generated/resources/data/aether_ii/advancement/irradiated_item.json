@@ -28,6 +28,7 @@
   },
   "display": {
     "description": {
+      "color": "aqua",
       "translate": "advancement.aether_ii.irradiated_item.desc"
     },
     "icon": {
