@@ -26,6 +26,13 @@
           "feature": "aether_ii:pile_ambrosium_ore",
           "placement": []
         }
+      },
+      {
+        "chance": 0.05,
+        "feature": {
+          "feature": "aether_ii:pile_ferrosite",
+          "placement": []
+        }
       }
     ]
   }
