@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.item.equipment.weapons.AmberDartsItem;
 import com.aetherteam.aetherii.recipe.builder.AlkahestPurificationRecipeBuilder;
 import com.aetherteam.aetherii.recipe.builder.AltarEnchantingRecipeBuilder;
 import com.aetherteam.aetherii.recipe.builder.BiomeParameterRecipeBuilder;
+import com.aetherteam.aetherii.recipe.builder.HourglassRestoringRecipeBuilder;
 import com.aetherteam.aetherii.recipe.recipes.block.*;
 import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
 import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
@@ -19,6 +20,7 @@ import com.aetherteam.nitrogen.recipe.builder.BlockStateRecipeBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -294,6 +296,14 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 200).unlockedBy("has_item", has(material.get())).save(consumer, this.name("smelting_" + getHasName(result.get())));
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 100).unlockedBy("has_item", has(material.get())).save(consumer, this.name("smoking_" + getHasName(result.get())));
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 600).unlockedBy("has_item", has(material.get())).save(consumer, this.name("campfire_cooking_" + getHasName(result.get())));
+    }
+
+    protected HourglassRestoringRecipeBuilder hourglassRestoring(RecipeCategory category, ItemLike result, ItemLike ingredient, float experience) {
+        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, NonNullList.of(ItemStack.EMPTY, new ItemStack(result)), experience, 200, false).unlockedBy("has_item", has(ingredient));
+    }
+
+    protected HourglassRestoringRecipeBuilder hourglassUncrafting(RecipeCategory category, ItemLike result1, ItemLike result2, ItemLike result3, ItemLike ingredient, float experience) {
+        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, NonNullList.of(ItemStack.EMPTY, new ItemStack(result1), new ItemStack(result2), new ItemStack(result3)), experience, 200, true).unlockedBy("has_item", has(ingredient));
     }
 
     protected AltarEnchantingRecipeBuilder altarEnchanting(RecipeCategory category, ItemLike result, ItemLike ingredient, int fuelCount, float experience) {

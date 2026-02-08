@@ -1489,6 +1489,8 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.smeltingOreRecipe(AetherIIItems.FOSSILIZED_GLINT.get(), AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(), 0.3F).group("glint").save(this.output, this.name("fossilized_glint_from_smelting_undershale_glint_ore"));
         this.blastingOreRecipe(AetherIIItems.FOSSILIZED_GLINT.get(), AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(), 0.3F).group("glint").save(this.output, this.name("fossilized_glint_from_blasting_undershale_glint_ore"));
 
+        this.hourglassRestoring(RecipeCategory.MISC, AetherIIItems.ZANITE_GEMSTONE, AetherIIItems.FOSSILIZED_ZANITE, 0.0F).group("zanite").save(this.output);
+
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, AetherIIItems.INERT_ARKENIUM, 3, 0.0F).group("arkenium").save(this.output);
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, AetherIIBlocks.ARKENIUM_ORE, 3, 0.0F).group("arkenium").save(this.output, this.name("arkenium_plates_from_arkenium_ore"));
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE, 3, 0.0F).group("arkenium").save(this.output, this.name("arkenium_plates_from_undershale_arkenium_ore"));
