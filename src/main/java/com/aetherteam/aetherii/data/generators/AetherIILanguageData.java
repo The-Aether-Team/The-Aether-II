@@ -1410,6 +1410,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addStructures() {
         // Structures
         this.addStructure(AetherIIStructures.OUTPOST, "Outpost");
+        this.addStructure(AetherIIStructures.CAMP_HIGHFIELDS, "Highfields Camp");
+        this.addStructure(AetherIIStructures.CAMP_MAGNETIC, "Magnetic Camp");
+        this.addStructure(AetherIIStructures.CAMP_ARCTIC, "Arctic Camp");
+        this.addStructure(AetherIIStructures.WATCHTOWER, "Watchtower");
+        this.addStructure(AetherIIStructures.SENTRY_RUINS, "Sentry Ruins");
+        this.addStructure(AetherIIStructures.INFECTED_GUARDIAN_TREE, "Infected Guardian Tree");
     }
 
     private void addAttributes() {
