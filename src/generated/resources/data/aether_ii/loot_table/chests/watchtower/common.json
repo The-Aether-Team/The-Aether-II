@@ -6,11 +6,13 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "value": "aether_ii:chests/watchtower/crossbow"
+          "value": "aether_ii:chests/watchtower/crossbow",
+          "weight": 3
         },
         {
           "type": "minecraft:loot_table",
-          "value": "aether_ii:chests/watchtower/dart_shooter"
+          "value": "aether_ii:chests/watchtower/dart_shooter",
+          "weight": 2
         }
       ],
       "rolls": 1.0

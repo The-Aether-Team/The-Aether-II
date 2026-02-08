@@ -143,16 +143,12 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:skyroot_shield",
-          "weight": 7
+          "weight": 3
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:burrukai_plate_shield",
-          "weight": 4
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:arkenium_shield"
+          "weight": 2
         }
       ],
       "rolls": {

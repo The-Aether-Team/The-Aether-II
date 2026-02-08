@@ -129,16 +129,11 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:skyroot_trowel",
-          "weight": 9
+          "weight": 3
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:holystone_trowel",
-          "weight": 6
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:arkenium_trowel"
+          "name": "aether_ii:holystone_trowel"
         }
       ],
       "rolls": {

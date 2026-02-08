@@ -27,17 +27,12 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:golden_amber",
-          "weight": 4
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:zanite_gemstone"
+          "name": "aether_ii:golden_amber"
         }
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 3.0,
+        "max": 2.0,
         "min": 1.0
       }
     },

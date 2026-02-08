@@ -7,16 +7,12 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:skyroot_crossbow",
-          "weight": 9
+          "weight": 3
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:holystone_crossbow",
-          "weight": 6
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:zanite_crossbow"
+          "weight": 2
         }
       ],
       "rolls": 1.0
@@ -37,17 +33,12 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:scatterglass_shard",
-          "weight": 4
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:zanite_gemstone"
+          "name": "aether_ii:scatterglass_shard"
         }
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 3.0,
+        "max": 2.0,
         "min": 1.0
       }
     },
