@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:glint_gemstone_from_blasting"
+        "recipe": "aether_ii:fossilized_glint_from_smelting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:glint_gemstone_from_blasting"
+      "aether_ii:fossilized_glint_from_smelting"
     ]
   }
 }

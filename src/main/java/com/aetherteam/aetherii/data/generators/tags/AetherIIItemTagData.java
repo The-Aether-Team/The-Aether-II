@@ -339,7 +339,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.SKYROOT_STICK.get(),
                 AetherIIItems.SKYROOT_PINECONE.get(),
                 AetherIIItems.AMBROSIUM_SHARD.get(),
-                AetherIIItems.ZANITE_GEMSTONE.get(),
+                AetherIIItems.FOSSILIZED_ZANITE.get(),
                 AetherIIItems.INERT_ARKENIUM.get(),
                 AetherIIItems.INERT_GRAVITITE.get(),
                 AetherIIItems.SCATTERGLASS_SHARD.get(),

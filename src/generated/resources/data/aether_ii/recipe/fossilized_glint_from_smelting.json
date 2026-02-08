@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:blasting",
+  "type": "minecraft:smelting",
   "category": "misc",
-  "cookingtime": 100,
+  "cookingtime": 200,
   "experience": 0.3,
   "group": "glint",
   "ingredient": "aether_ii:glint_ore",
   "result": {
     "count": 1,
-    "id": "aether_ii:glint_gemstone"
+    "id": "aether_ii:fossilized_glint"
   }
 }

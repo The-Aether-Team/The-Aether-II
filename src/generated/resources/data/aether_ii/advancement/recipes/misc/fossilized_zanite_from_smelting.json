@@ -3,15 +3,15 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:zanite_gemstone_from_blasting_undershale_zanite_ore"
+        "recipe": "aether_ii:fossilized_zanite_from_smelting"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_undershale_zanite_ore": {
+    "has_zanite_ore": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:undershale_zanite_ore"
+            "items": "aether_ii:zanite_ore"
           }
         ]
       },
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_undershale_zanite_ore"
+      "has_zanite_ore"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:zanite_gemstone_from_blasting_undershale_zanite_ore"
+      "aether_ii:fossilized_zanite_from_smelting"
     ]
   }
 }

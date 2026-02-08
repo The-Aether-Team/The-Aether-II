@@ -248,12 +248,15 @@ public class AetherIIItems {
     public static final DeferredItem<Item> VALKYRIE_WINGS = register("valkyrie_wings");
     public static final DeferredItem<Item> SCATTERGLASS_SHARD = register("scatterglass_shard");
     public static final DeferredItem<Item> AMBROSIUM_SHARD = register("ambrosium_shard", AmbrosiumShardItem::new);
+    public static final DeferredItem<Item> FOSSILIZED_ZANITE = register("fossilized_zanite");
     public static final DeferredItem<Item> ZANITE_GEMSTONE = register("zanite_gemstone");
     public static final DeferredItem<Item> INERT_ARKENIUM = register("inert_arkenium");
     public static final DeferredItem<Item> ARKENIUM_PLATE = register("arkenium_plate");
     public static final DeferredItem<Item> INERT_GRAVITITE = register("inert_gravitite");
     public static final DeferredItem<Item> GRAVITITE_PLATE = register("gravitite_plate");
+    public static final DeferredItem<Item> FOSSILIZED_CORROBONITE = register("fossilized_corrobonite");
     public static final DeferredItem<Item> CORROBONITE_CRYSTAL = register("corrobonite_crystal");
+    public static final DeferredItem<Item> FOSSILIZED_GLINT = register("fossilized_glint");
     public static final DeferredItem<Item> GLINT_GEMSTONE = register("glint_gemstone", (properties) -> new CurrencyItem(10, properties)); //todo
     public static final DeferredItem<Item> GOLDEN_AMBER = register("golden_amber");
     public static final DeferredItem<Item> CLOUDTWINE = register("cloudtwine");

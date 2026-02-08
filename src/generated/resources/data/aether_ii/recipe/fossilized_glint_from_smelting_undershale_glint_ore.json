@@ -3,10 +3,10 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.3,
-  "group": "zanite",
-  "ingredient": "aether_ii:zanite_ore",
+  "group": "glint",
+  "ingredient": "aether_ii:undershale_glint_ore",
   "result": {
     "count": 1,
-    "id": "aether_ii:zanite_gemstone"
+    "id": "aether_ii:fossilized_glint"
   }
 }

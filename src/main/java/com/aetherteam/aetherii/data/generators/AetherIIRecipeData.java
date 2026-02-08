@@ -1480,14 +1480,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.blastingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.AMBROSIUM_ORE.get(), 0.1F).group("ambrosium").save(this.output, this.name("ambrosium_shard_from_blasting"));
         this.smeltingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(), 0.1F).group("ambrosium").save(this.output, this.name("ambrosium_shard_from_smelting_undershale_ambrosium_ore"));
         this.blastingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(), 0.1F).group("ambrosium").save(this.output, this.name("ambrosium_shard_from_blasting_undershale_ambrosium_ore"));
-        this.smeltingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.ZANITE_ORE.get(), 0.3F).group("zanite").save(this.output, this.name("zanite_gemstone_from_smelting"));
-        this.blastingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.ZANITE_ORE.get(), 0.3F).group("zanite").save(this.output, this.name("zanite_gemstone_from_blasting"));
-        this.smeltingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), 0.3F).group("zanite").save(this.output, this.name("zanite_gemstone_from_smelting_undershale_zanite_ore"));
-        this.blastingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), 0.3F).group("zanite").save(this.output, this.name("zanite_gemstone_from_blasting_undershale_zanite_ore"));
-        this.smeltingOreRecipe(AetherIIItems.GLINT_GEMSTONE.get(), AetherIIBlocks.GLINT_ORE.get(), 0.3F).group("glint").save(this.output, this.name("glint_gemstone_from_smelting"));
-        this.blastingOreRecipe(AetherIIItems.GLINT_GEMSTONE.get(), AetherIIBlocks.GLINT_ORE.get(), 0.3F).group("glint").save(this.output, this.name("glint_gemstone_from_blasting"));
-        this.smeltingOreRecipe(AetherIIItems.GLINT_GEMSTONE.get(), AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(), 0.3F).group("glint").save(this.output, this.name("glint_gemstone_from_smelting_undershale_glint_ore"));
-        this.blastingOreRecipe(AetherIIItems.GLINT_GEMSTONE.get(), AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(), 0.3F).group("glint").save(this.output, this.name("glint_gemstone_from_blasting_undershale_glint_ore"));
+        this.smeltingOreRecipe(AetherIIItems.FOSSILIZED_ZANITE.get(), AetherIIBlocks.ZANITE_ORE.get(), 0.3F).group("zanite").save(this.output, this.name("fossilized_zanite_from_smelting"));
+        this.blastingOreRecipe(AetherIIItems.FOSSILIZED_ZANITE.get(), AetherIIBlocks.ZANITE_ORE.get(), 0.3F).group("zanite").save(this.output, this.name("fossilized_zanite_from_blasting"));
+        this.smeltingOreRecipe(AetherIIItems.FOSSILIZED_ZANITE.get(), AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), 0.3F).group("zanite").save(this.output, this.name("fossilized_zanite_from_smelting_undershale_zanite_ore"));
+        this.blastingOreRecipe(AetherIIItems.FOSSILIZED_ZANITE.get(), AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), 0.3F).group("zanite").save(this.output, this.name("fossilized_zanite_from_blasting_undershale_zanite_ore"));
+        this.smeltingOreRecipe(AetherIIItems.FOSSILIZED_GLINT.get(), AetherIIBlocks.GLINT_ORE.get(), 0.3F).group("glint").save(this.output, this.name("fossilized_glint_from_smelting"));
+        this.blastingOreRecipe(AetherIIItems.FOSSILIZED_GLINT.get(), AetherIIBlocks.GLINT_ORE.get(), 0.3F).group("glint").save(this.output, this.name("fossilized_glint_from_blasting"));
+        this.smeltingOreRecipe(AetherIIItems.FOSSILIZED_GLINT.get(), AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(), 0.3F).group("glint").save(this.output, this.name("fossilized_glint_from_smelting_undershale_glint_ore"));
+        this.blastingOreRecipe(AetherIIItems.FOSSILIZED_GLINT.get(), AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(), 0.3F).group("glint").save(this.output, this.name("fossilized_glint_from_blasting_undershale_glint_ore"));
 
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, AetherIIItems.INERT_ARKENIUM, 3, 0.0F).group("arkenium").save(this.output);
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, AetherIIBlocks.ARKENIUM_ORE, 3, 0.0F).group("arkenium").save(this.output, this.name("arkenium_plates_from_arkenium_ore"));
