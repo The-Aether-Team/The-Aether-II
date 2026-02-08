@@ -9,24 +9,24 @@
     "frequency_reduction_method": "legacy_type_1",
     "salt": 1147092,
     "separation": 8,
-    "spacing": 22
+    "spacing": 20
   },
   "structures": [
     {
       "structure": "aether_ii:camp_highfields",
-      "weight": 2
+      "weight": 3
     },
     {
       "structure": "aether_ii:camp_magnetic",
-      "weight": 2
+      "weight": 3
     },
     {
       "structure": "aether_ii:camp_arctic",
-      "weight": 2
+      "weight": 3
     },
     {
       "structure": "aether_ii:watchtower",
-      "weight": 1
+      "weight": 2
     }
   ]
 }

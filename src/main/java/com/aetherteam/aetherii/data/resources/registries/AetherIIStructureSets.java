@@ -37,11 +37,11 @@ public class AetherIIStructureSets {
                 new RandomSpreadStructurePlacement(28, 18, RandomSpreadType.LINEAR, 2738116)));
 
         context.register(AETHER_SURFACE_STRUCTURES, new StructureSet(List.of(
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_HIGHFIELDS), 2),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_MAGNETIC), 2),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_ARCTIC), 2),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER))),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 0.75F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 22, 8, RandomSpreadType.LINEAR))
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_HIGHFIELDS), 3),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_MAGNETIC), 3),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_ARCTIC), 3),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER), 2)),
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 0.75F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 20, 8, RandomSpreadType.LINEAR))
         );
 
         context.register(SENTRY_RUINS, new StructureSet(structures.getOrThrow(AetherIIStructures.SENTRY_RUINS),
