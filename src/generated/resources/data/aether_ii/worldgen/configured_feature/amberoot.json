@@ -7,37 +7,18 @@
         "above_placement_chance": 0.33,
         "placement_chance": 0.5,
         "trunk_block_provider": {
-          "type": "minecraft:weighted_state_provider",
-          "entries": [
-            {
-              "data": {
-                "Name": "aether_ii:amberoot_trunk",
-                "Properties": {
-                  "east_connection": "none",
-                  "north_connection": "none",
-                  "south_connection": "none",
-                  "tall": "false",
-                  "waterlogged": "false",
-                  "west_connection": "none"
-                }
-              },
-              "weight": 3
-            },
-            {
-              "data": {
-                "Name": "aether_ii:skyroot_trunk",
-                "Properties": {
-                  "east_connection": "none",
-                  "north_connection": "none",
-                  "south_connection": "none",
-                  "tall": "false",
-                  "waterlogged": "false",
-                  "west_connection": "none"
-                }
-              },
-              "weight": 2
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:amberoot_trunk",
+            "Properties": {
+              "east_connection": "none",
+              "north_connection": "none",
+              "south_connection": "none",
+              "tall": "false",
+              "waterlogged": "false",
+              "west_connection": "none"
             }
-          ]
+          }
         }
       }
     ],
@@ -84,7 +65,7 @@
       "entries": [
         {
           "data": {
-            "Name": "aether_ii:amberoot_log",
+            "Name": "aether_ii:amberoot_deposit",
             "Properties": {
               "axis": "y"
             }
@@ -93,7 +74,7 @@
         },
         {
           "data": {
-            "Name": "aether_ii:skyroot_log",
+            "Name": "aether_ii:amberoot_log",
             "Properties": {
               "axis": "y"
             }

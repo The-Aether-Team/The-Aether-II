@@ -16,6 +16,7 @@ import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiom
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.*;
@@ -61,7 +62,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
             AdvancementHolder theAether = Advancement.Builder.advancement()
                     .display(AetherIIItems.AETHER_PORTAL_FRAME.get(),
                             Component.translatable("advancement.aether_ii.the_highlands"),
-                            Component.translatable("advancement.aether_ii.the_highlands.desc"),
+                            Component.translatable("advancement.aether_ii.the_highlands.desc").withStyle(ChatFormatting.AQUA),
                             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/holystone"),
                             AdvancementType.TASK, false, false, false)
                     .addCriterion("the_highlands", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL))
@@ -71,7 +72,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(theAether)
                     .display(Blocks.GLOWSTONE,
                             Component.translatable("advancement.aether_ii.enter_highlands"),
-                            Component.translatable("advancement.aether_ii.enter_highlands.desc"),
+                            Component.translatable("advancement.aether_ii.enter_highlands.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("enter_highlands", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL))
@@ -81,7 +82,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(enterAether)
                     .display(AetherIIItems.AMBROSIUM_SHARD.get(),
                             Component.translatable("advancement.aether_ii.ambrosium"),
-                            Component.translatable("advancement.aether_ii.ambrosium.desc"),
+                            Component.translatable("advancement.aether_ii.ambrosium.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("ambrosium", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.AMBROSIUM_SHARD.get()))
@@ -91,7 +92,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(ambrosium)
                     .display(AetherIIItems.ENCHANTED_BLUEBERRY.get(),
                             Component.translatable("advancement.aether_ii.enchanted_aether_grass"),
-                            Component.translatable("advancement.aether_ii.enchanted_aether_grass.desc"),
+                            Component.translatable("advancement.aether_ii.enchanted_aether_grass.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("enchanted_aether_grass", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
@@ -103,7 +104,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(ambrosium)
                     .display(AetherIIItems.ZANITE_GEMSTONE.get(),
                             Component.translatable("advancement.aether_ii.zanite"),
-                            Component.translatable("advancement.aether_ii.zanite.desc"),
+                            Component.translatable("advancement.aether_ii.zanite.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("zanite", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ZANITE_GEMSTONE.get()))
@@ -113,7 +114,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(zanite)
                     .display(AetherIIBlocks.ALTAR.get(),
                             Component.translatable("advancement.aether_ii.craft_altar"),
-                            Component.translatable("advancement.aether_ii.craft_altar.desc"),
+                            Component.translatable("advancement.aether_ii.craft_altar.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("craft_altar", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.ALTAR.get()))
@@ -123,7 +124,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(ambrosium)
                     .display(AetherIIBlocks.ICESTONE.get(),
                             Component.translatable("advancement.aether_ii.icestone"),
-                            Component.translatable("advancement.aether_ii.icestone.desc"),
+                            Component.translatable("advancement.aether_ii.icestone.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("icestone", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.ICESTONE.get()))
@@ -133,7 +134,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(icestone)
                     .display(AetherIIItems.ANTITOXIN_VIAL,
                             Component.translatable("advancement.aether_ii.antitoxin"),
-                            Component.translatable("advancement.aether_ii.antitoxin.desc"),
+                            Component.translatable("advancement.aether_ii.antitoxin.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .requirements(AdvancementRequirements.Strategy.OR)
@@ -145,10 +146,9 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(enterAether)
                     .display(AetherIIItems.MUSIC_PLAYER.get(),
                             Component.translatable("advancement.aether_ii.engraved_discs"),
-                            Component.translatable("advancement.aether_ii.engraved_discs.desc"),
+                            Component.translatable("advancement.aether_ii.engraved_discs.desc").withStyle(ChatFormatting.GOLD),
                             null,
                             AdvancementType.CHALLENGE, true, true, true)
-                    .addCriterion("aether_tune", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_AETHER_TUNE.get()))
                     .addCriterion("ascending_dawn", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN.get()))
                     .addCriterion("aerwhale", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_AERWHALE.get()))
                     .addCriterion("approaches", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_APPROACHES.get()))
@@ -156,14 +156,13 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("chinchilla", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_CHINCHILLA.get()))
                     .addCriterion("high", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_HIGH.get()))
                     .addCriterion("revolutions", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS.get()))
-                    .addCriterion("chase", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_CHASE.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "engraved_discs"));
 
             AdvancementHolder blueAercloud = Advancement.Builder.advancement()
                     .parent(enterAether)
                     .display(AetherIIBlocks.BLUE_AERCLOUD.get(),
                             Component.translatable("advancement.aether_ii.blue_aercloud"),
-                            Component.translatable("advancement.aether_ii.blue_aercloud.desc"),
+                            Component.translatable("advancement.aether_ii.blue_aercloud.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("blue_aercloud", EnterBlockTrigger.TriggerInstance.entersBlock(AetherIIBlocks.BLUE_AERCLOUD.get()))
@@ -173,7 +172,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(enterAether)
                     .display(AetherIIBlocks.OUTPOST_CAMPFIRE.get(),
                             Component.translatable("advancement.aether_ii.outpost_campfire"),
-                            Component.translatable("advancement.aether_ii.outpost_campfire.desc"),
+                            Component.translatable("advancement.aether_ii.outpost_campfire.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("outpost_campfire", OutpostCampfireTrigger.Instance.setSpawn())
@@ -183,7 +182,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(outpostCampfire)
                     .display(AetherIIItems.GLINT_COIN.get(),
                             Component.translatable("advancement.aether_ii.glint"),
-                            Component.translatable("advancement.aether_ii.glint.desc"),
+                            Component.translatable("advancement.aether_ii.glint.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.GOAL, true, true, false)
                     .addCriterion("glint", CurrencyTrigger.Instance.forValue(100))
@@ -196,7 +195,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(blueAercloud)
                     .display(AetherIIItems.CLOUD_SKIFF.get(),
                             Component.translatable("advancement.aether_ii.cloud_skiff"),
-                            Component.translatable("advancement.aether_ii.cloud_skiff.desc"),
+                            Component.translatable("advancement.aether_ii.cloud_skiff.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("cloud_skiff", PlayerTrigger.TriggerInstance.located(EntityPredicate.Builder.entity()
@@ -208,7 +207,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(blueAercloud)
                     .display(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get(),
                             Component.translatable("advancement.aether_ii.aercloud_glider"),
-                            Component.translatable("advancement.aether_ii.aercloud_glider.desc"),
+                            Component.translatable("advancement.aether_ii.aercloud_glider.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .requirements(AdvancementRequirements.Strategy.OR)
@@ -222,7 +221,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(blueAercloud)
                     .display(AetherIIBlocks.MOA_EGG.get(),
                             Component.translatable("advancement.aether_ii.obtain_egg"),
-                            Component.translatable("advancement.aether_ii.obtain_egg.desc"),
+                            Component.translatable("advancement.aether_ii.obtain_egg.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .requirements(AdvancementRequirements.Strategy.OR)
@@ -233,7 +232,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(obtainEgg)
                     .display(AetherIIItems.AECHOR_PETAL.get(),
                             Component.translatable("advancement.aether_ii.obtain_petal"),
-                            Component.translatable("advancement.aether_ii.obtain_petal.desc"),
+                            Component.translatable("advancement.aether_ii.obtain_petal.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("aechor_petal", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.AECHOR_PETAL.get()))
@@ -243,7 +242,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(obtainEgg)
                     .display(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get(),
                             Component.translatable("advancement.aether_ii.skyroot_lizard"),
-                            Component.translatable("advancement.aether_ii.skyroot_lizard.desc"),
+                            Component.translatable("advancement.aether_ii.skyroot_lizard.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("skyroot_lizard", itemUsedOnSpecificEntity(ItemPredicate.Builder.item().of(items, AetherIIItems.SKYROOT_STICK.get()), EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.SKYROOT_LIZARD.get())))
@@ -253,7 +252,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(obtainEgg)
                     .display(AetherIIItems.MOA_FEATHER.get(),
                             Component.translatable("advancement.aether_ii.incubate_moa"),
-                            Component.translatable("advancement.aether_ii.incubate_moa.desc"),
+                            Component.translatable("advancement.aether_ii.incubate_moa.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("incubate_moa", IncubationTrigger.Instance.incubate())
@@ -263,7 +262,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(incubateMoa)
                     .display(AetherIIItems.GRAVITITE_BOOTS.get(),
                             Component.translatable("advancement.aether_ii.explore_aether"),
-                            Component.translatable("advancement.aether_ii.explore_aether.desc"),
+                            Component.translatable("advancement.aether_ii.explore_aether.desc").withStyle(ChatFormatting.GOLD),
                             null,
                             AdvancementType.CHALLENGE, true, true, false)
                     .addCriterion("flourishing_field", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.FLOURISHING_FIELD))))
@@ -288,7 +287,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(craftAltar)
                     .display(AetherIIItems.GRAVITITE_PLATE.get(),
                             Component.translatable("advancement.aether_ii.gravitite_plate"),
-                            Component.translatable("advancement.aether_ii.gravitite_plate.desc"),
+                            Component.translatable("advancement.aether_ii.gravitite_plate.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("gravitite_plate", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GRAVITITE_PLATE.get()))
@@ -298,7 +297,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(gravititePlate)
                     .display(AetherIIItems.GRAVITITE_CHESTPLATE.get(),
                             Component.translatable("advancement.aether_ii.gravitite_armor"),
-                            Component.translatable("advancement.aether_ii.gravitite_armor.desc"),
+                            Component.translatable("advancement.aether_ii.gravitite_armor.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.GOAL, true, true, false)
                     .addCriterion("gravitite_armor", armorSet(AetherIITags.Items.GRAVITITE_ARMOR))
@@ -308,7 +307,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(craftAltar)
                     .display(AetherIIItems.ARKENIUM_PLATE.get(),
                             Component.translatable("advancement.aether_ii.arkenium_plate"),
-                            Component.translatable("advancement.aether_ii.arkenium_plate.desc"),
+                            Component.translatable("advancement.aether_ii.arkenium_plate.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("arkenium_plate", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ARKENIUM_PLATE.get()))
@@ -318,7 +317,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(arkeniumPlate)
                     .display(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER.get(),
                             Component.translatable("advancement.aether_ii.alkahest_canister"),
-                            Component.translatable("advancement.aether_ii.alkahest_canister.desc"),
+                            Component.translatable("advancement.aether_ii.alkahest_canister.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("alkahest_canister", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER.get()))
@@ -328,7 +327,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(alkahestCanister)
                     .display(AetherIIBlocks.ALKAHEST_PURIFIER.get(),
                             Component.translatable("advancement.aether_ii.craft_alkahest_purifier"),
-                            Component.translatable("advancement.aether_ii.craft_alkahest_purifier.desc"),
+                            Component.translatable("advancement.aether_ii.craft_alkahest_purifier.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("craft_alkahest_purifier", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.ALKAHEST_PURIFIER.get()))
@@ -338,7 +337,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(alkahestCanister)
                     .display(AetherIIItems.IRRADIATED_WEAPON.get(),
                             Component.translatable("advancement.aether_ii.irradiated_item"),
-                            Component.translatable("advancement.aether_ii.irradiated_item.desc"),
+                            Component.translatable("advancement.aether_ii.irradiated_item.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .requirements(AdvancementRequirements.Strategy.OR)
@@ -352,7 +351,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(zanite)
                     .display(AetherIIItems.DART_SHOOTER.get(),
                             Component.translatable("advancement.aether_ii.dart_shooter"),
-                            Component.translatable("advancement.aether_ii.dart_shooter.desc"),
+                            Component.translatable("advancement.aether_ii.dart_shooter.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("dart_shooter", EffectBuildupTrigger.Instance.effect(
@@ -366,7 +365,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(gravititePlate)
                     .display(AetherIIItems.CORROBONITE_CRYSTAL.get(),
                             Component.translatable("advancement.aether_ii.corrobonite_crystal"),
-                            Component.translatable("advancement.aether_ii.corrobonite_crystal.desc"),
+                            Component.translatable("advancement.aether_ii.corrobonite_crystal.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("corrobonite_crystal", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.CORROBONITE_CRYSTAL.get()))
@@ -376,7 +375,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(corroboniteCrystal)
                     .display(AetherIIBlocks.ARKENIUM_FORGE.get(),
                             Component.translatable("advancement.aether_ii.craft_arkenium_forge"),
-                            Component.translatable("advancement.aether_ii.craft_arkenium_forge.desc"),
+                            Component.translatable("advancement.aether_ii.craft_arkenium_forge.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("craft_arkenium_forge", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.ARKENIUM_FORGE.get()))
@@ -386,7 +385,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(craftArkeniumForge)
                     .display(AetherIIItems.CHARM_OF_RESISTANCE_I.get(),
                             Component.translatable("advancement.aether_ii.charm"),
-                            Component.translatable("advancement.aether_ii.charm.desc"),
+                            Component.translatable("advancement.aether_ii.charm.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.GOAL, true, true, false)
                     .addCriterion("charm", ForgingCharmTrigger.Instance.charm())
@@ -396,9 +395,9 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(gravititePlate)
                     .display(AetherIIBlocks.SENTRY_BRICKS.get(),
                             Component.translatable("advancement.aether_ii.slider"),
-                            Component.translatable("advancement.aether_ii.slider.desc"),
+                            Component.translatable("advancement.aether_ii.slider.desc").withStyle(ChatFormatting.GOLD),
                             null,
-                            AdvancementType.GOAL, true, true, false)
+                            AdvancementType.CHALLENGE, true, true, false)
                     .addCriterion("kill_slider", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.SLIDER.get())))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "slider"));
 
@@ -406,7 +405,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(slider)
                     .display(AetherIIItems.HAMMER_OF_DEMOLITION.get(),
                             Component.translatable("advancement.aether_ii.demolition_hammer_loot"),
-                            Component.translatable("advancement.aether_ii.demolition_hammer_loot.desc"),
+                            Component.translatable("advancement.aether_ii.demolition_hammer_loot.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("demolition_hammer_loot", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.HAMMER_OF_DEMOLITION))
@@ -416,7 +415,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(demolitionHammerLoot)
                     .display(AetherIIItems.HAMMER_OF_DEMOLITION.get(),
                             Component.translatable("advancement.aether_ii.kill_golem_with_demolition_hammer"),
-                            Component.translatable("advancement.aether_ii.kill_golem_with_demolition_hammer.desc"),
+                            Component.translatable("advancement.aether_ii.kill_golem_with_demolition_hammer.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.GOAL, true, true, false)
                     .addCriterion("killed_sentry_golem", KilledTrigger.TriggerInstance.playerKilledEntity(
@@ -430,7 +429,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(slider)
                     .display(AetherIIItems.NEPTUNE_CHESTPLATE.get(),
                             Component.translatable("advancement.aether_ii.neptune_armor_loot"),
-                            Component.translatable("advancement.aether_ii.neptune_armor_loot.desc"),
+                            Component.translatable("advancement.aether_ii.neptune_armor_loot.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.GOAL, true, true, false)
                     .addCriterion("neptune_armor", armorSet(AetherIITags.Items.NEPTUNE_ARMOR))
@@ -440,7 +439,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .parent(slider)
                     .display(AetherIIItems.SENTRY_BOOTS.get(),
                             Component.translatable("advancement.aether_ii.sentry_boots_fall"),
-                            Component.translatable("advancement.aether_ii.sentry_boots_fall.desc"),
+                            Component.translatable("advancement.aether_ii.sentry_boots_fall.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("sentry_boots_fall", fallDistance(
@@ -457,7 +456,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                 .parent(parent)
                 .display(AetherIIItems.GUIDEBOOK_PAGE.get(),
                         Component.translatable("advancement.aether_ii.bestiary"),
-                        Component.translatable("advancement.aether_ii.bestiary.desc"),
+                        Component.translatable("advancement.aether_ii.bestiary.desc").withStyle(ChatFormatting.GOLD),
                         null,
                         AdvancementType.CHALLENGE, true, true, false);
 

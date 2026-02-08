@@ -30,6 +30,7 @@
   },
   "display": {
     "description": {
+      "color": "aqua",
       "translate": "advancement.aether_ii.sentry_boots_fall.desc"
     },
     "icon": {

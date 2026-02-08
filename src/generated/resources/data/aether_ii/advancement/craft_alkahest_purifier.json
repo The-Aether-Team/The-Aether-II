@@ -14,6 +14,7 @@
   },
   "display": {
     "description": {
+      "color": "aqua",
       "translate": "advancement.aether_ii.craft_alkahest_purifier.desc"
     },
     "icon": {

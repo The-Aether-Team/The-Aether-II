@@ -74,7 +74,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:feather",
+          "name": "aether_ii:moa_feather",
           "weight": 2
         },
         {
@@ -105,23 +105,15 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:skyroot_crossbow",
-          "weight": 9
+          "weight": 3
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:holystone_crossbow",
-          "weight": 6
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:arkenium_crossbow"
+          "weight": 2
         }
       ],
-      "rolls": {
-        "type": "minecraft:uniform",
-        "max": 1.0,
-        "min": 1.0
-      }
+      "rolls": 1.0
     }
   ],
   "random_sequence": "aether_ii:chests/camp/fletcher"

@@ -19,7 +19,7 @@ import java.util.Optional;
 
 public class AetherIIStructureSets {
     public static final ResourceKey<StructureSet> OUTPOSTS = createKey("outposts");
-    public static final ResourceKey<StructureSet> CAMPS = createKey("camps");
+    public static final ResourceKey<StructureSet> AETHER_SURFACE_STRUCTURES = createKey("aether_surface_structures");
     public static final ResourceKey<StructureSet> SENTRY_RUINS = createKey("sentry_ruins");
 
     private static ResourceKey<StructureSet> createKey(String name) {
@@ -36,11 +36,12 @@ public class AetherIIStructureSets {
         Holder.Reference<StructureSet> outposts = context.register(OUTPOSTS, new StructureSet(structures.getOrThrow(AetherIIStructures.OUTPOST),
                 new RandomSpreadStructurePlacement(28, 18, RandomSpreadType.LINEAR, 2738116)));
 
-        context.register(CAMPS, new StructureSet(List.of(
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_HIGHFIELDS)),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_MAGNETIC)),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_ARCTIC))),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 0.6F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 22, 10, RandomSpreadType.LINEAR))
+        context.register(AETHER_SURFACE_STRUCTURES, new StructureSet(List.of(
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_HIGHFIELDS), 3),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_MAGNETIC), 3),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_ARCTIC), 3),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER), 2)),
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 18, 8, RandomSpreadType.LINEAR))
         );
 
         context.register(SENTRY_RUINS, new StructureSet(structures.getOrThrow(AetherIIStructures.SENTRY_RUINS),

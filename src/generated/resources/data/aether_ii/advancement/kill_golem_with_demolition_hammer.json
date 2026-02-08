@@ -23,6 +23,7 @@
   },
   "display": {
     "description": {
+      "color": "aqua",
       "translate": "advancement.aether_ii.kill_golem_with_demolition_hammer.desc"
     },
     "frame": "goal",

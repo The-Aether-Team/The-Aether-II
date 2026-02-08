@@ -18,9 +18,10 @@
   },
   "display": {
     "description": {
+      "color": "gold",
       "translate": "advancement.aether_ii.slider.desc"
     },
-    "frame": "goal",
+    "frame": "challenge",
     "icon": {
       "count": 1,
       "id": "aether_ii:sentry_bricks"

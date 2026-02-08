@@ -21,6 +21,7 @@
   },
   "display": {
     "description": {
+      "color": "aqua",
       "translate": "advancement.aether_ii.neptune_armor_loot.desc"
     },
     "frame": "goal",

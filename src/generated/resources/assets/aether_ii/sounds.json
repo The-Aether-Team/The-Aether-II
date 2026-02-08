@@ -1524,14 +1524,6 @@
       }
     ]
   },
-  "item.engraved_disc.aether_tune": {
-    "sounds": [
-      {
-        "name": "aether_ii:item/records/aether_tune",
-        "stream": true
-      }
-    ]
-  },
   "item.engraved_disc.approaches": {
     "sounds": [
       {
@@ -1568,14 +1560,6 @@
     "sounds": [
       {
         "name": "aether_ii:item/records/high",
-        "stream": true
-      }
-    ]
-  },
-  "item.engraved_disc.recording_892": {
-    "sounds": [
-      {
-        "name": "aether_ii:item/records/chase",
         "stream": true
       }
     ]

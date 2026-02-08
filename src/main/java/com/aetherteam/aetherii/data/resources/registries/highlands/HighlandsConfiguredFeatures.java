@@ -115,8 +115,13 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_AMBEROOT = createKey("large_amberoot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SINGULAR_AMBEROOT = createKey("singular_amberoot");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AMBEROOT_SNOWY = createKey("amberoot_snowy");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_AMBEROOT_SNOWY = createKey("large_amberoot_snowy");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SINGULAR_AMBEROOT_SNOWY = createKey("singular_amberoot_snowy");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AMBEROOT_SPARSE = createKey("trees_amberoot_sparse");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AMBEROOT_DENSE = createKey("trees_amberoot_dense");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AMBEROOT_SNOWY = createKey("trees_amberoot_snowy");
 
     // Highfields
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT = createKey("skyroot");
@@ -305,6 +310,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_UNDERSHALE = createKey("pile_undershale");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_AGIOSITE = createKey("pile_agiosite");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_AMBROSIUM_ORE = createKey("pile_ambrosium_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_FERROSITE = createKey("pile_ferrosite");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_ICESTONE = createKey("pile_icestone");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PILE_ARCTIC_PACKED_ICE = createKey("pile_arctic_packed_ice");
 
@@ -814,28 +820,65 @@ public class HighlandsConfiguredFeatures {
 
         register(context, AMBEROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
-                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_DEPOSIT.get().defaultBlockState(), 3).add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 2).build()),
                         new StraightTrunkPlacer(5, 4, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
                         new AmberootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(1, 0, 1))
                         .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
-                        .decorators(List.of(new SimpleTrunkTreeDecorator(new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState(), 2).build()), 0.5F, 0.33F))).build());
+                        .decorators(List.of(new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState()), 0.5F, 0.33F))).build());
         register(context, LARGE_AMBEROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
-                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_DEPOSIT.get().defaultBlockState(), 3).add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 2).build()),
                         new StraightTrunkPlacer(8, 5, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
                         new LargeAmberootFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(3)))
                         .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
-                        .decorators(List.of(new SimpleTrunkTreeDecorator(new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState(), 2).build()), 0.75F, 0.5F))).build());
+                        .decorators(List.of(new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState()), 0.75F, 0.5F))).build());
         register(context, SINGULAR_AMBEROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
-                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_DEPOSIT.get().defaultBlockState(), 3).add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 2).build()),
                         new StraightTrunkPlacer(6, 4, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
                         new SingularAmberootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(1, 0, 1))
                         .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
-                        .decorators(List.of(new SimpleTrunkTreeDecorator(new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState(), 2).build()), 0.2F, 0.2F))).build());
+                        .decorators(List.of(new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState()), 0.2F, 0.2F))).build());
+
+        register(context, AMBEROOT_SNOWY, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_DEPOSIT.get().defaultBlockState(), 3).add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 2).build()),
+                        new StraightTrunkPlacer(5, 4, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
+                        new AmberootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(1, 0, 1))
+                        .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
+                        .decorators(List.of(
+                                new AlterGroundTagDecorator(BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()), AetherIITags.Blocks.GRASS_SNOW_REPLACEABLE),
+                                new SnowDecorator(),
+                                new GroundFeatureDecorator(new WeightedStateProvider(twigs), 50),
+                                new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState()), 0.5F, 0.33F))).build());
+        register(context, LARGE_AMBEROOT_SNOWY, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_DEPOSIT.get().defaultBlockState(), 3).add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 2).build()),
+                        new StraightTrunkPlacer(8, 5, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
+                        new LargeAmberootFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
+                        new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(3)))
+                        .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
+                        .decorators(List.of(
+                                new AlterGroundTagDecorator(BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()), AetherIITags.Blocks.GRASS_SNOW_REPLACEABLE),
+                                new SnowDecorator(),
+                                new GroundFeatureDecorator(new WeightedStateProvider(twigs), 50),
+                                new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState()), 0.75F, 0.5F))).build());
+        register(context, SINGULAR_AMBEROOT_SNOWY, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_DEPOSIT.get().defaultBlockState(), 3).add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 2).build()),
+                        new StraightTrunkPlacer(6, 4, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
+                        new SingularAmberootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(1, 0, 1))
+                        .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
+                        .decorators(List.of(
+                                new AlterGroundTagDecorator(BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()), AetherIITags.Blocks.GRASS_SNOW_REPLACEABLE),
+                                new SnowDecorator(),
+                                new GroundFeatureDecorator(new WeightedStateProvider(twigs), 50),
+                                new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState()), 0.2F, 0.2F))).build());
 
         register(context, TREES_AMBEROOT_SPARSE, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SINGULAR_AMBEROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.3F),
@@ -845,6 +888,10 @@ public class HighlandsConfiguredFeatures {
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SINGULAR_AMBEROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.3F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AMBEROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.2F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(LARGE_AMBEROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get()))));
+        register(context, TREES_AMBEROOT_SNOWY, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SINGULAR_AMBEROOT_SNOWY), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.3F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(LARGE_AMBEROOT_SNOWY), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.2F)
+        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AMBEROOT_SNOWY), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get()))));
 
         // Highfields
         register(context, SKYROOT, Feature.TREE,
@@ -1189,13 +1236,16 @@ public class HighlandsConfiguredFeatures {
                         .build());
 
         register(context, TREES_BIOME_FRIGID_SIERRA, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
-                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPINE_DECORATED), BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARCTIC_TREE_SURVIVES_ON))), 0.1F)
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPINE_DECORATED), BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARCTIC_TREE_SURVIVES_ON))), 0.1F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(TREES_AMBEROOT_SNOWY), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.0025F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATBOA_DECORATED), BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARCTIC_TREE_SURVIVES_ON)))));
         register(context, TREES_BIOME_ENDURING_WOODLANDS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
-                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATBOA_DECORATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATBOA_SAPLING.get())), 0.03F)
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATBOA_DECORATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATBOA_SAPLING.get())), 0.03F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(TREES_AMBEROOT_SNOWY), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.0025F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPINE_DECORATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYPINE_SAPLING.get()))));
         register(context, TREES_BIOME_FROZEN_LAKES, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
-                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATBOA_DECORATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATBOA_SAPLING.get())), 0.35F)
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATBOA_DECORATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATBOA_SAPLING.get())), 0.35F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(TREES_AMBEROOT_SNOWY), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.005F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPINE_DECORATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYPINE_SAPLING.get()))));
 
         // Irradiated
@@ -1512,25 +1562,25 @@ public class HighlandsConfiguredFeatures {
 
         register(context, AMBEROOT_SAPLING, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
-                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_DEPOSIT.get().defaultBlockState(), 3).add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 2).build()),
                         new StraightTrunkPlacer(5, 4, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
                         new AmberootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(1, 0, 1))
-                        .ignoreVines().decorators(List.of(new SimpleTrunkTreeDecorator(new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState(), 2).build()), 0.5F, 0.33F))).build());
+                        .ignoreVines().decorators(List.of(new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState()), 0.5F, 0.33F))).build());
         register(context, LARGE_AMBEROOT_SAPLING, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
-                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_DEPOSIT.get().defaultBlockState(), 3).add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 2).build()),
                         new StraightTrunkPlacer(8, 5, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
                         new LargeAmberootFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(3)))
-                        .ignoreVines().decorators(List.of(new SimpleTrunkTreeDecorator(new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState(), 2).build()), 0.75F, 0.5F))).build());
+                        .ignoreVines().decorators(List.of(new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState()), 0.75F, 0.5F))).build());
         register(context, SINGULAR_AMBEROOT_SAPLING, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
-                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_DEPOSIT.get().defaultBlockState(), 3).add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 2).build()),
                         new StraightTrunkPlacer(6, 4, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
                         new SingularAmberootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(1, 0, 1)).ignoreVines()
-                        .decorators(List.of(new SimpleTrunkTreeDecorator(new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState(), 2).build()), 0.2F, 0.2F))).build());
+                        .decorators(List.of(new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_TRUNK.get().defaultBlockState()), 0.2F, 0.2F))).build());
         register(context, AMBEROOT_SAPLING_SELECTOR, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SINGULAR_AMBEROOT_SAPLING), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.3F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(LARGE_AMBEROOT_SAPLING), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.2F)
@@ -2518,13 +2568,15 @@ public class HighlandsConfiguredFeatures {
         register(context, PILE_UNDERSHALE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.UNDERSHALE.get())));
         register(context, PILE_AGIOSITE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.AGIOSITE.get())));
         register(context, PILE_AMBROSIUM_ORE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.AMBROSIUM_ORE.get())));
+        register(context, PILE_FERROSITE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.FERROSITE.get())));
         register(context, PILE_ICESTONE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.ICESTONE.get())));
         register(context, PILE_ARCTIC_PACKED_ICE, Feature.BLOCK_PILE, new BlockPileConfiguration(BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get())));
 
         register(context, PILES_MATERIAL_DEPOSIT, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(PILE_UNDERSHALE)), 0.4F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(PILE_AGIOSITE)), 0.2F),
-                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(PILE_AMBROSIUM_ORE)), 0.1F)
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(PILE_AMBROSIUM_ORE)), 0.1F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(PILE_FERROSITE)), 0.05F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(PILE_HOLYSTONE))));
 
         register(context, PILES_COLD_STORAGE, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
