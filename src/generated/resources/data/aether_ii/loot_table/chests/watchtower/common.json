@@ -11,8 +11,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "aether_ii:chests/watchtower/dart_shooter",
-          "weight": 2
+          "value": "aether_ii:chests/watchtower/dart_shooter"
         }
       ],
       "rolls": 1.0

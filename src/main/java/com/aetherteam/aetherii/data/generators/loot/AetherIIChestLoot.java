@@ -116,7 +116,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
         builder.accept(AetherIILoot.CHESTS_WATCHTOWER, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_WATCHTOWER_CROSSBOW).setWeight(3))
-                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_WATCHTOWER_DART_SHOOTER).setWeight(2))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_WATCHTOWER_DART_SHOOTER))
                 )
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
                         .add(LootItem.lootTableItem(AetherIIBlocks.AMBROSIUM_TORCH).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
