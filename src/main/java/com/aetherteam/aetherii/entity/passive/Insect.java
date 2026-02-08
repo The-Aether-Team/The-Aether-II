@@ -30,7 +30,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.EnumSet;
 
 public class Insect extends PathfinderMob {
-    private static final EntityDataAccessor<Boolean> DATA_REST = SynchedEntityData.defineId(Insect.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> DATA_REST = SynchedEntityData.defineId(Insect.class, EntityDataSerializers.BOOLEAN);
 
     private int needNextAction;
     private boolean needRest;
@@ -57,6 +57,7 @@ public class Insect extends PathfinderMob {
     public void setRest(boolean rest) {
         this.entityData.set(DATA_REST, rest);
     }
+
 
     public boolean isRest() {
         return this.entityData.get(DATA_REST);

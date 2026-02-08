@@ -35,7 +35,7 @@ public class ShroudwingMoveControl extends MoveControl {
             } else {
                 this.mob.setZza(0.0F);
             }
-        } else {
+        } else if (this.mob.isFullyFlying()) {
             if (this.operation == Operation.MOVE_TO) {
                 if (this.floatDuration-- <= 0) {
                     this.operation = Operation.WAIT;

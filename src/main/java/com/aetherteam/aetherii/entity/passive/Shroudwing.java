@@ -29,6 +29,7 @@ public class Shroudwing extends Insect {
 
     public static int LAND_EVENT = 101;
     public static int TAKEOFF_EVENT = 102;
+    private int fullyFlyTick;
 
     public AnimationState flyingAnimationState = new AnimationState();
     public AnimationState landAnimationState = new AnimationState();
@@ -68,9 +69,16 @@ public class Shroudwing extends Insect {
         } else {
             this.level().broadcastEntityEvent(this, (byte) TAKEOFF_EVENT);
         }
+        this.fullyFlyTick = 21;
+
         if (!this.level().isClientSide) {
             this.getNavigation().stop();
         }
+    }
+
+    //using to adjust fly animation
+    public boolean isFullyFlying() {
+        return this.fullyFlyTick <= 0 && !this.isRest();
     }
 
     public boolean shouldStayGround() {
@@ -88,7 +96,14 @@ public class Shroudwing extends Insect {
                 this.takeoffAnimationState.stop();
                 this.flyingAnimationState.startIfStopped(this.tickCount);
             } else if (!this.walkAnimationState.isStarted() && !this.flyingAnimationState.isStarted() && !this.landAnimationState.isStarted() && !this.takeoffAnimationState.isStarted()) {
+                this.landAnimationState.stop();
                 this.flyingAnimationState.start(this.tickCount);
+            }
+        } else {
+            if (!this.isRest() && !this.isFullyFlying()) {
+                this.fullyFlyTick--;
+            } else {
+                this.fullyFlyTick = 0;
             }
         }
     }
