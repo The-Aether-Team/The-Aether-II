@@ -41,7 +41,7 @@ public class AetherIIStructureSets {
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_MAGNETIC), 3),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_ARCTIC), 3),
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.WATCHTOWER), 2)),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 0.75F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 20, 8, RandomSpreadType.LINEAR))
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 0.75F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 18, 8, RandomSpreadType.LINEAR))
         );
 
         context.register(SENTRY_RUINS, new StructureSet(structures.getOrThrow(AetherIIStructures.SENTRY_RUINS),
