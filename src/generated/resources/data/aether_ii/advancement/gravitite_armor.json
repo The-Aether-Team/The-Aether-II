@@ -21,6 +21,7 @@
   },
   "display": {
     "description": {
+      "color": "aqua",
       "translate": "advancement.aether_ii.gravitite_armor.desc"
     },
     "frame": "goal",

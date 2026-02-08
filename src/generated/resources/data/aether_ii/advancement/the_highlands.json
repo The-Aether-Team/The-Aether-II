@@ -11,6 +11,7 @@
     "announce_to_chat": false,
     "background": "aether_ii:block/holystone",
     "description": {
+      "color": "aqua",
       "translate": "advancement.aether_ii.the_highlands.desc"
     },
     "icon": {

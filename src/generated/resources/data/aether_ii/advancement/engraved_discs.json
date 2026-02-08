@@ -11,16 +11,6 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aether_tune": {
-      "conditions": {
-        "items": [
-          {
-            "items": "aether_ii:engraved_disc_aether_tune"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "approaches": {
       "conditions": {
         "items": [
@@ -36,16 +26,6 @@
         "items": [
           {
             "items": "aether_ii:engraved_disc_ascending_dawn"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "chase": {
-      "conditions": {
-        "items": [
-          {
-            "items": "aether_ii:engraved_disc_chase"
           }
         ]
       },
@@ -94,6 +74,7 @@
   },
   "display": {
     "description": {
+      "color": "gold",
       "translate": "advancement.aether_ii.engraved_discs.desc"
     },
     "frame": "challenge",
@@ -107,9 +88,6 @@
     }
   },
   "requirements": [
-    [
-      "aether_tune"
-    ],
     [
       "ascending_dawn"
     ],
@@ -130,9 +108,6 @@
     ],
     [
       "revolutions"
-    ],
-    [
-      "chase"
     ]
   ],
   "sends_telemetry_event": true

@@ -316,9 +316,6 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.aether_ii.item.arkenium_canister.empty")
         );
 
-        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_AETHER_TUNE,
-                definition().with(sound("aether_ii:item/records/aether_tune").stream())
-        );
         this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_ASCENDING_DAWN,
                 definition().with(sound("aether_ii:item/records/ascending_dawn").stream())
         );
@@ -339,9 +336,6 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
         this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_REVOLUTIONS,
                 definition().with(sound("aether_ii:item/records/revolutions").stream())
-        );
-        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_CHASE,
-                definition().with(sound("aether_ii:item/records/chase").stream())
         );
     }
 

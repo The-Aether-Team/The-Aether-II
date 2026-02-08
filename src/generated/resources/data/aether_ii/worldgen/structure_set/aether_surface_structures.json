@@ -1,0 +1,31 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "exclusion_zone": {
+      "chunk_count": 8,
+      "other_set": "aether_ii:outposts"
+    },
+    "frequency_reduction_method": "legacy_type_1",
+    "salt": 1147092,
+    "separation": 8,
+    "spacing": 18
+  },
+  "structures": [
+    {
+      "structure": "aether_ii:camp_highfields",
+      "weight": 3
+    },
+    {
+      "structure": "aether_ii:camp_magnetic",
+      "weight": 3
+    },
+    {
+      "structure": "aether_ii:camp_arctic",
+      "weight": 3
+    },
+    {
+      "structure": "aether_ii:watchtower",
+      "weight": 2
+    }
+  ]
+}

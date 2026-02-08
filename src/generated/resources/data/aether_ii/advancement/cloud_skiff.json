@@ -25,6 +25,7 @@
   },
   "display": {
     "description": {
+      "color": "aqua",
       "translate": "advancement.aether_ii.cloud_skiff.desc"
     },
     "icon": {

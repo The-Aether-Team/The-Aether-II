@@ -37,6 +37,7 @@ public class AetherIITags {
         public static final TagKey<Block> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");
         public static final TagKey<Block> GREATROOT_DECORATIVE_BLOCKS = tag("greatroot_decorative_blocks");
         public static final TagKey<Block> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
+        public static final TagKey<Block> AMBEROOT_DECORATIVE_BLOCKS = tag("amberoot_decorative_blocks");
         public static final TagKey<Block> HOLYSTONE_DECORATIVE_BLOCKS = tag("holystone_decorative_blocks");
         public static final TagKey<Block> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
         public static final TagKey<Block> UNDERSHALE_DECORATIVE_BLOCKS = tag("undershale_decorative_blocks");
@@ -128,6 +129,7 @@ public class AetherIITags {
         public static final TagKey<Item> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");
         public static final TagKey<Item> GREATROOT_DECORATIVE_BLOCKS = tag("greatroot_decorative_blocks");
         public static final TagKey<Item> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
+        public static final TagKey<Item> AMBEROOT_DECORATIVE_BLOCKS = tag("amberoot_decorative_blocks");
         public static final TagKey<Item> HOLYSTONE_DECORATIVE_BLOCKS = tag("holystone_decorative_blocks");
         public static final TagKey<Item> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
         public static final TagKey<Item> UNDERSHALE_DECORATIVE_BLOCKS = tag("undershale_decorative_blocks");
@@ -180,9 +182,6 @@ public class AetherIITags {
 
         public static final TagKey<Item> UNIQUE_TOOLTIP_COLOR = tag("unique_tooltip_color");
 
-        public static final TagKey<Item> CRAFTS_SKYROOT_PLANKS = tag("crafts_skyroot_planks");
-        public static final TagKey<Item> CRAFTS_GREATROOT_PLANKS = tag("crafts_greatroot_planks");
-        public static final TagKey<Item> CRAFTS_WISPROOT_PLANKS = tag("crafts_wisproot_planks");
         public static final TagKey<Item> PLANKS_CRAFTING = tag("planks_crafting");
         public static final TagKey<Item> STONE_CRAFTING = tag("stone_crafting");
         public static final TagKey<Item> CRAFTS_SKYROOT_STICKS = tag("crafts_skyroot_sticks");
@@ -278,6 +277,7 @@ public class AetherIITags {
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_HIGHFIELDS = tag("has_structure/camp_highfields");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_MAGNETIC = tag("has_structure/camp_magnetic");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_ARCTIC = tag("has_structure/camp_arctic");
+        public static final TagKey<Biome> HAS_STRUCTURE_WATCHTOWER = tag("has_structure/watchtower");
         public static final TagKey<Biome> HAS_STRUCTURE_SENTRY_RUINS = tag("has_structure/sentry_ruins");
         public static final TagKey<Biome> HAS_STRUCTURE_INFECTED_GUARDIAN_TREE = tag("has_structure/infected_guardian_tree");
 
