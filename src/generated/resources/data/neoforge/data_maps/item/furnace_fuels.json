@@ -1,5 +1,8 @@
 {
   "values": {
+    "#aether_ii:amberoot_decorative_blocks": {
+      "burn_time": 300
+    },
     "#aether_ii:greatroot_decorative_blocks": {
       "burn_time": 300
     },
@@ -7,6 +10,12 @@
       "burn_time": 300
     },
     "#aether_ii:wisproot_decorative_blocks": {
+      "burn_time": 300
+    },
+    "aether_ii:amberoot_bookshelf": {
+      "burn_time": 300
+    },
+    "aether_ii:amberoot_planks": {
       "burn_time": 300
     },
     "aether_ii:ambrosium_block": {
