@@ -48,6 +48,10 @@ public class AetherIILoot {
     public static final ResourceKey<LootTable> CHESTS_CAMP_HUNTER = register("chests/camp/hunter");
     public static final ResourceKey<LootTable> CHESTS_CAMP_FLETCHER = register("chests/camp/fletcher");
 
+    public static final ResourceKey<LootTable> CHESTS_WATCHTOWER = register("chests/watchtower/common");
+    public static final ResourceKey<LootTable> CHESTS_WATCHTOWER_CROSSBOW = register("chests/watchtower/crossbow");
+    public static final ResourceKey<LootTable> CHESTS_WATCHTOWER_DART_SHOOTER = register("chests/watchtower/dart_shooter");
+
     public static final ResourceKey<LootTable> CHESTS_DUNGEONS_IRRADIATED_ITEMS = register("chests/dungeons/irradiated_items");
     public static final ResourceKey<LootTable> CHESTS_DUNGEONS_MUSIC_DISCS = register("chests/dungeons/music_discs");
 

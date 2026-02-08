@@ -114,14 +114,10 @@
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:arkenium_crossbow"
+          "name": "aether_ii:zanite_crossbow"
         }
       ],
-      "rolls": {
-        "type": "minecraft:uniform",
-        "max": 1.0,
-        "min": 1.0
-      }
+      "rolls": 1.0
     }
   ],
   "random_sequence": "aether_ii:chests/camp/fletcher"

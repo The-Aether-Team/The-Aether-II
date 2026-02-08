@@ -41,11 +41,7 @@
           "name": "aether_ii:engraved_disc_chase"
         }
       ],
-      "rolls": {
-        "type": "minecraft:uniform",
-        "max": 1.0,
-        "min": 1.0
-      }
+      "rolls": 1.0
     }
   ],
   "random_sequence": "aether_ii:chests/dungeons/music_discs"
