@@ -158,15 +158,6 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("revolutions", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "engraved_discs"));
 
-            AdvancementHolder blueAercloud = Advancement.Builder.advancement()
-                    .parent(enterAether)
-                    .display(AetherIIBlocks.BLUE_AERCLOUD.get(),
-                            Component.translatable("advancement.aether_ii.blue_aercloud"),
-                            Component.translatable("advancement.aether_ii.blue_aercloud.desc").withStyle(ChatFormatting.AQUA),
-                            null,
-                            AdvancementType.TASK, true, true, false)
-                    .addCriterion("blue_aercloud", EnterBlockTrigger.TriggerInstance.entersBlock(AetherIIBlocks.BLUE_AERCLOUD.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "blue_aercloud"));
 
             AdvancementHolder outpostCampfire = Advancement.Builder.advancement()
                     .parent(enterAether)
@@ -190,6 +181,27 @@ public class AetherIIAdvancementData extends AdvancementProvider {
 
             AdvancementHolder bestiary = createBestiaryAdvancement(outpostCampfire, consumer);
 
+
+
+            AdvancementHolder aerbunny = Advancement.Builder.advancement()
+                    .parent(enterAether)
+                    .display(AetherIIItems.ORANGE.get(),
+                            Component.translatable("advancement.aether_ii.aerbunny"),
+                            Component.translatable("advancement.aether_ii.aerbunny.desc").withStyle(ChatFormatting.AQUA),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("aerbunny", PlayerTrigger.TriggerInstance.located(EntityPredicate.Builder.entity().passenger(EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.AERBUNNY.get()))))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aerbunny"));
+
+            AdvancementHolder blueAercloud = Advancement.Builder.advancement()
+                    .parent(aerbunny)
+                    .display(AetherIIBlocks.BLUE_AERCLOUD.get(),
+                            Component.translatable("advancement.aether_ii.blue_aercloud"),
+                            Component.translatable("advancement.aether_ii.blue_aercloud.desc").withStyle(ChatFormatting.AQUA),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("blue_aercloud", EnterBlockTrigger.TriggerInstance.entersBlock(AetherIIBlocks.BLUE_AERCLOUD.get()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "blue_aercloud"));
 
             AdvancementHolder cloudSkiff = Advancement.Builder.advancement()
                     .parent(blueAercloud)
@@ -218,7 +230,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aercloud_glider"));
 
             AdvancementHolder obtainEgg = Advancement.Builder.advancement()
-                    .parent(blueAercloud)
+                    .parent(aerbunny)
                     .display(AetherIIBlocks.MOA_EGG.get(),
                             Component.translatable("advancement.aether_ii.obtain_egg"),
                             Component.translatable("advancement.aether_ii.obtain_egg.desc").withStyle(ChatFormatting.AQUA),
@@ -334,7 +346,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "craft_alkahest_purifier"));
 
             AdvancementHolder irradiatedItem = Advancement.Builder.advancement()
-                    .parent(alkahestCanister)
+                    .parent(craftAlkahestPurifier)
                     .display(AetherIIItems.IRRADIATED_WEAPON.get(),
                             Component.translatable("advancement.aether_ii.irradiated_item"),
                             Component.translatable("advancement.aether_ii.irradiated_item.desc").withStyle(ChatFormatting.AQUA),
