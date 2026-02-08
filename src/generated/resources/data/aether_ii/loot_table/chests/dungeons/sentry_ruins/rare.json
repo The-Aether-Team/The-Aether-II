@@ -78,11 +78,18 @@
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:guidebook_page",
-          "weight": 2
+          "name": "aether_ii:guidebook_page"
         },
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "aether_ii:healing_stone_charges": 1
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
           "name": "aether_ii:healing_stone"
         },
         {

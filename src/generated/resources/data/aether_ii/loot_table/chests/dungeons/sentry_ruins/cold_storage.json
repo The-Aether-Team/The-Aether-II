@@ -87,44 +87,13 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:icestone",
-          "weight": 4
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 4.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "aether_ii:arctic_snowball"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "aether_ii:arctic_packed_ice"
+          "name": "aether_ii:icestone"
         }
       ],
       "rolls": {
         "type": "minecraft:uniform",
         "max": 3.0,
-        "min": 2.0
+        "min": 1.0
       }
     },
     {
@@ -232,38 +201,6 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:brettl_grass",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 4.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "aether_ii:brettl_rope",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 4.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
           "name": "aether_ii:swet_gel",
           "weight": 2
         },
@@ -290,8 +227,8 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 5.0,
-                "min": 2.0
+                "max": 3.0,
+                "min": 1.0
               },
               "function": "minecraft:set_count"
             }

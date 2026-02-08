@@ -118,7 +118,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:burrukai_plate",
+          "name": "aether_ii:golden_amber",
           "weight": 3
         },
         {
@@ -129,13 +129,13 @@
               "count": {
                 "type": "minecraft:uniform",
                 "max": 3.0,
-                "min": 2.0
+                "min": 1.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:golden_amber",
-          "weight": 3
+          "name": "aether_ii:burrukai_plate",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -259,13 +259,13 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 4.0,
-                "min": 2.0
+                "max": 3.0,
+                "min": 1.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:brettl_grass",
+          "name": "aether_ii:swet_gel",
           "weight": 2
         },
         {
@@ -275,14 +275,13 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 4.0,
-                "min": 2.0
+                "max": 2.0,
+                "min": 1.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:brettl_rope",
-          "weight": 2
+          "name": "aether_ii:swet_sugar"
         },
         {
           "type": "minecraft:item",
@@ -291,8 +290,8 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 4.0,
-                "min": 2.0
+                "max": 3.0,
+                "min": 1.0
               },
               "function": "minecraft:set_count"
             }

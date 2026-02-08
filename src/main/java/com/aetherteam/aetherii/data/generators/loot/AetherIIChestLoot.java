@@ -2,8 +2,10 @@ package com.aetherteam.aetherii.data.generators.loot;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
@@ -11,6 +13,8 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
+import net.minecraft.world.level.storage.loot.functions.SetComponentsFunction;
+import net.minecraft.world.level.storage.loot.functions.SetCustomDataFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -150,8 +154,8 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.COLD_AERCLOUD_GLIDER).setWeight(3))
                         .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AERCLOUD_GLIDER))
                         .add(LootItem.lootTableItem(AetherIIItems.MOA_SADDLE).setWeight(2))
-                        .add(LootItem.lootTableItem(AetherIIItems.GUIDEBOOK_PAGE).setWeight(2))
-                        .add(LootItem.lootTableItem(AetherIIItems.HEALING_STONE))
+                        .add(LootItem.lootTableItem(AetherIIItems.GUIDEBOOK_PAGE))
+                        .add(LootItem.lootTableItem(AetherIIItems.HEALING_STONE).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.HEALING_STONE_CHARGES.get(), 1)))
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_MUSIC_DISCS))
                 )
         );
@@ -172,8 +176,8 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 3.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_SHARD).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.ZANITE_GEMSTONE).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                 )
 
@@ -186,9 +190,9 @@ public class AetherIIChestLoot implements LootTableSubProvider {
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 4.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.CLOUDTWINE).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.BRETTL_GRASS).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.BRETTL_ROPE).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.SWET_GEL).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.SWET_SUGAR).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.COCKATRICE_FEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                 )
         );
@@ -217,7 +221,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_SHARD).setWeight(9).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE).setWeight(9).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE).setWeight(9).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.ZANITE_GEMSTONE).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIBlocks.AMBROSIUM_BLOCK).setWeight(2))
@@ -231,10 +235,10 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.WYNDBERRY).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                 )
 
-                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 3.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.CLOUDTWINE).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.BRETTL_ROPE).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.SWET_GEL).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.SWET_SUGAR).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.COCKATRICE_FEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                 )
         );
@@ -252,10 +256,8 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_CROSSBOW))
                 )
 
-                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
-                        .add(LootItem.lootTableItem(AetherIIBlocks.ICESTONE).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.ARCTIC_SNOWBALL).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
-                        .add(LootItem.lootTableItem(AetherIIBlocks.ARCTIC_PACKED_ICE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 3.0F))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.ICESTONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
@@ -267,11 +269,9 @@ public class AetherIIChestLoot implements LootTableSubProvider {
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 3.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.CLOUDTWINE).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.BRETTL_GRASS).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.BRETTL_ROPE).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.SWET_GEL).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.SWET_SUGAR).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.COCKATRICE_FEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
                 )
 
