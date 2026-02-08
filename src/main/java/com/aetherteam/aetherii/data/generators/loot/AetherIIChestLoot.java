@@ -5,19 +5,14 @@ import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.BuildupContents;
-import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
-import net.minecraft.world.level.storage.loot.functions.SetComponentsFunction;
-import net.minecraft.world.level.storage.loot.functions.SetCustomDataFunction;
 import net.minecraft.world.level.storage.loot.functions.SetComponentsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -184,7 +179,6 @@ public class AetherIIChestLoot implements LootTableSubProvider {
         );
         builder.accept(AetherIILoot.CHESTS_DUNGEONS_MUSIC_DISCS, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherIIItems.ENGRAVED_DISC_AETHER_TUNE))
                         .add(LootItem.lootTableItem(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN))
                         .add(LootItem.lootTableItem(AetherIIItems.ENGRAVED_DISC_AERWHALE))
                         .add(LootItem.lootTableItem(AetherIIItems.ENGRAVED_DISC_APPROACHES))
@@ -196,7 +190,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
         );
 
         builder.accept(AetherIILoot.CHESTS_DUNGEONS_SENTRY_RUINS_RARE, LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 1.0F))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_PICKAXE).setWeight(2))
                         .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_CROSSBOW).setWeight(2))
                         .add(LootItem.lootTableItem(AetherIIItems.ZANITE_PICKAXE).setWeight(2))
