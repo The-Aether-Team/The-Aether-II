@@ -1,20 +1,19 @@
 package com.aetherteam.aetherii.data.generators.loot;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.BuildupContents;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 import net.minecraft.world.level.storage.loot.functions.SetComponentsFunction;
-import net.minecraft.world.level.storage.loot.functions.SetCustomDataFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -31,7 +30,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
     public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> builder) {
 
         builder.accept(AetherIILoot.CHESTS_CAMP_SELECTOR, LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 1.0F))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_CAMP_HUNTER))
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_CAMP_FARMER))
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_CAMP_FLETCHER))
@@ -52,15 +51,13 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_SPEAR).setWeight(5))
+                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_SPEAR).setWeight(3))
                         .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_SPEAR).setWeight(2))
-                        .add(LootItem.lootTableItem(AetherIIItems.ZANITE_SPEAR))
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_SHIELD).setWeight(7))
-                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE_SHIELD).setWeight(4))
-                        .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_SHIELD))
+                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_SHIELD).setWeight(3))
+                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE_SHIELD).setWeight(2))
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
@@ -85,9 +82,8 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_TROWEL).setWeight(5))
-                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_TROWEL).setWeight(2))
-                        .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_TROWEL))
+                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_TROWEL).setWeight(3))
+                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_TROWEL).setWeight(1))
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
@@ -105,19 +101,59 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_SHARD).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.CLOUDTWINE).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
-                        .add(LootItem.lootTableItem(Items.FEATHER).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F))))
                 )
 
-                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 1.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_CROSSBOW).setWeight(9))
-                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_CROSSBOW).setWeight(6))
-                        .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_CROSSBOW))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_CROSSBOW).setWeight(3))
+                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_CROSSBOW).setWeight(2))
+                )
+        );
+
+        builder.accept(AetherIILoot.CHESTS_WATCHTOWER, LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_CROSSBOW).setWeight(4))
+                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_CROSSBOW).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.DART_SHOOTER))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_SHARD).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 3.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_BOLT).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.AMBER_DARTS).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.AMBER_DARTS).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.TOXIN))))
+                        .add(LootItem.lootTableItem(AetherIIItems.AMBER_DARTS).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.VENOM))))
+                )
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.AMBROSIUM_TORCH).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.BLUEBERRY).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.SATIVAL_BULB).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.ORANGE).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.CLOUDWOOL_BEDROLL).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.AMBROSIUM_CAMPFIRE))
+                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_BUCKET))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.BRETTL_ROPE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.CLOUDTWINE).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                 )
         );
 
         builder.accept(AetherIILoot.CHESTS_DUNGEONS_IRRADIATED_ITEMS, LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 1.0F))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIItems.IRRADIATED_ARMOR))
                         .add(LootItem.lootTableItem(AetherIIItems.IRRADIATED_WEAPON))
                         .add(LootItem.lootTableItem(AetherIIItems.IRRADIATED_TOOL))
@@ -125,7 +161,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
         );
         builder.accept(AetherIILoot.CHESTS_DUNGEONS_MUSIC_DISCS, LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 1.0F))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN))
                         .add(LootItem.lootTableItem(AetherIIItems.ENGRAVED_DISC_AERWHALE))
                         .add(LootItem.lootTableItem(AetherIIItems.ENGRAVED_DISC_APPROACHES))
@@ -137,7 +173,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
         );
 
         builder.accept(AetherIILoot.CHESTS_DUNGEONS_SENTRY_RUINS_RARE, LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 1.0F))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_PICKAXE).setWeight(2))
                         .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_CROSSBOW).setWeight(2))
                         .add(LootItem.lootTableItem(AetherIIItems.ZANITE_PICKAXE).setWeight(2))
