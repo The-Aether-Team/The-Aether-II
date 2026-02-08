@@ -113,8 +113,21 @@ public class AetherIIChestLoot implements LootTableSubProvider {
 
         builder.accept(AetherIILoot.CHESTS_WATCHTOWER, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_WATCHTOWER_CROSSBOW).setWeight(3))
-                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_WATCHTOWER_DART_SHOOTER))
+                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_CROSSBOW).setWeight(4))
+                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_CROSSBOW).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.DART_SHOOTER))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_SHARD).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 3.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_BOLT).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.AMBER_DARTS).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.AMBER_DARTS).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.TOXIN))))
+                        .add(LootItem.lootTableItem(AetherIIItems.AMBER_DARTS).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.VENOM))))
                 )
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
                         .add(LootItem.lootTableItem(AetherIIBlocks.AMBROSIUM_TORCH).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
@@ -136,35 +149,6 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.BRETTL_ROPE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.CLOUDTWINE).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
-                )
-        );
-        builder.accept(AetherIILoot.CHESTS_WATCHTOWER_CROSSBOW, LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_CROSSBOW).setWeight(3))
-                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_CROSSBOW).setWeight(2))
-                )
-
-                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_SHARD).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
-                )
-
-                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 3.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_BOLT).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
-                )
-        );
-        builder.accept(AetherIILoot.CHESTS_WATCHTOWER_DART_SHOOTER, LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherIIItems.DART_SHOOTER))
-                )
-
-                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
-                )
-
-                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.AMBER_DARTS).setWeight(3))
-                        .add(LootItem.lootTableItem(AetherIIItems.AMBER_DARTS).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.TOXIN))))
-                        .add(LootItem.lootTableItem(AetherIIItems.AMBER_DARTS).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(EffectBuildupPresets.VENOM))))
                 )
         );
 

@@ -5,16 +5,139 @@
       "bonus_rolls": 0.0,
       "entries": [
         {
-          "type": "minecraft:loot_table",
-          "value": "aether_ii:chests/watchtower/crossbow",
-          "weight": 3
+          "type": "minecraft:item",
+          "name": "aether_ii:skyroot_crossbow",
+          "weight": 4
         },
         {
-          "type": "minecraft:loot_table",
-          "value": "aether_ii:chests/watchtower/dart_shooter"
+          "type": "minecraft:item",
+          "name": "aether_ii:holystone_crossbow",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:dart_shooter"
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:scatterglass_shard",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:golden_amber"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 2.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:scatterglass_bolt",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:amber_darts",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "aether_ii:buildup_contents": {
+                  "amount": 55,
+                  "preset": {
+                    "type": "aether_ii:toxin",
+                    "ambient": false,
+                    "amplifier": 0,
+                    "buildup_reduction_rate": 2,
+                    "duration": 1000,
+                    "show_icon": false,
+                    "visible": true
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "aether_ii:amber_darts"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "aether_ii:buildup_contents": {
+                  "amount": 55,
+                  "preset": {
+                    "type": "aether_ii:venom",
+                    "ambient": false,
+                    "amplifier": 0,
+                    "buildup_reduction_rate": 2,
+                    "duration": 1000,
+                    "show_icon": false,
+                    "visible": true
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "aether_ii:amber_darts"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 1.0
+      }
     },
     {
       "bonus_rolls": 0.0,
