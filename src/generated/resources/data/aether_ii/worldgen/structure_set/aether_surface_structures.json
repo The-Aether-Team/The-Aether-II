@@ -5,23 +5,27 @@
       "chunk_count": 8,
       "other_set": "aether_ii:outposts"
     },
-    "frequency": 0.6,
+    "frequency": 0.75,
     "frequency_reduction_method": "legacy_type_1",
     "salt": 1147092,
-    "separation": 10,
+    "separation": 8,
     "spacing": 22
   },
   "structures": [
     {
       "structure": "aether_ii:camp_highfields",
-      "weight": 1
+      "weight": 2
     },
     {
       "structure": "aether_ii:camp_magnetic",
-      "weight": 1
+      "weight": 2
     },
     {
       "structure": "aether_ii:camp_arctic",
+      "weight": 2
+    },
+    {
+      "structure": "aether_ii:watchtower",
       "weight": 1
     }
   ]
