@@ -6,8 +6,8 @@
     "Z": "#aether_ii:gems/zanite"
   },
   "pattern": [
-    "HHH",
-    "HZH",
+    "ZZZ",
+    " Z ",
     "HHH"
   ],
   "result": {

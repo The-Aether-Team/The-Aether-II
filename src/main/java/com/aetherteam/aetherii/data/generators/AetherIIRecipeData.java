@@ -1129,8 +1129,8 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ALTAR.get())
                 .define('H', AetherIITags.Items.STONE_CRAFTING)
                 .define('Z', AetherIITags.Items.GEMS_ZANITE)
-                .pattern("HHH")
-                .pattern("HZH")
+                .pattern("ZZZ")
+                .pattern(" Z ")
                 .pattern("HHH")
                 .unlockedBy(getHasName(AetherIIBlocks.ALTAR.get()), has(AetherIITags.Items.GEMS_ZANITE))
                 .save(this.output);
