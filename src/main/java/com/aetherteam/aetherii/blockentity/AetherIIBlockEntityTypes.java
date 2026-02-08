@@ -23,6 +23,9 @@ public class AetherIIBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MoaEggBlockEntity>> MOA_EGG = BLOCK_ENTITY_TYPES.register("moa_egg", () ->
             new BlockEntityType<>(MoaEggBlockEntity::new, AetherIIBlocks.MOA_EGG.get()));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AmberHourglassBlockEntity>> AMBER_HOURGLASS = BLOCK_ENTITY_TYPES.register("amber_hourglass", () ->
+            new BlockEntityType<>(AmberHourglassBlockEntity::new, AetherIIBlocks.AMBER_HOURGLASS.get()));
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AltarBlockEntity>> ALTAR = BLOCK_ENTITY_TYPES.register("altar", () ->
             new BlockEntityType<>(AltarBlockEntity::new, AetherIIBlocks.ALTAR.get()));
 

@@ -1117,6 +1117,15 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .unlockedBy(getHasName(Blocks.BLAST_FURNACE), has(Blocks.SMOOTH_STONE))
                 .save(this.output, this.name("blast_furnace_from_holystone_furnace"));
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBER_HOURGLASS.get())
+                .define('P', AetherIITags.Items.PLANKS_CRAFTING)
+                .define('S', AetherIITags.Items.RODS_SKYROOT)
+                .define('A', AetherIITags.Items.GEMS_AMBER)
+                .pattern("APA")
+                .pattern("SAS")
+                .pattern("APA")
+                .unlockedBy(getHasName(AetherIIBlocks.AMBER_HOURGLASS.get()), has(AetherIITags.Items.PLANKS_CRAFTING))
+                .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ALTAR.get())
                 .define('H', AetherIITags.Items.STONE_CRAFTING)
                 .define('Z', AetherIITags.Items.GEMS_ZANITE)

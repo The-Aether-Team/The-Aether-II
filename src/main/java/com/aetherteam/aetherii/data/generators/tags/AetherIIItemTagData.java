@@ -46,6 +46,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ENGRAVED_DISC_HIGH.get(),
                 AetherIIItems.ENGRAVED_DISC_REVOLUTIONS.get());
         this.tag(AetherIITags.Items.RODS_SKYROOT).add(AetherIIItems.SKYROOT_STICK.get());
+        this.tag(AetherIITags.Items.GEMS_AMBER).add(AetherIIItems.GOLDEN_AMBER.get());
         this.tag(AetherIITags.Items.GEMS_ZANITE).add(AetherIIItems.ZANITE_GEMSTONE.get());
         this.tag(AetherIITags.Items.PLATES_ARKENIUM).add(AetherIIItems.ARKENIUM_PLATE.get());
         this.tag(AetherIITags.Items.PLATES_GRAVITITE).add(AetherIIItems.GRAVITITE_PLATE.get());
