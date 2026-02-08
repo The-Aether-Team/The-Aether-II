@@ -129,12 +129,12 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:skyroot_trowel",
-          "weight": 5
+          "weight": 9
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:holystone_trowel",
-          "weight": 2
+          "weight": 6
         },
         {
           "type": "minecraft:item",
