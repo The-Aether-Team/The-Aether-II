@@ -81,7 +81,7 @@ public class AmberHourglassMenu extends RecipeBookMenu {
     }
 
     @Override
-    public ItemStack quickMoveStack(Player player, int slotIndex) { //TODO
+    public ItemStack quickMoveStack(Player player, int slotIndex) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(slotIndex);
         if (slot != null && slot.hasItem()) {
