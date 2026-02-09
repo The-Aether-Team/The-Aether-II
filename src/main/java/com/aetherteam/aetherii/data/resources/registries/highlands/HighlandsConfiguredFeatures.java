@@ -252,6 +252,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_HOLYSTONE_QUARTZ = createKey("ore_holystone_quartz");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_AMBROSIUM = createKey("ore_ambrosium");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ZANITE = createKey("ore_zanite");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ZANITE_MOUNTAIN = createKey("ore_zanite_mountain");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GLINT = createKey("ore_glint");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ARKENIUM = createKey("ore_arkenium");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GRAVITITE_BURIED = createKey("ore_gravitite_buried");
@@ -2031,8 +2032,9 @@ public class HighlandsConfiguredFeatures {
 
         register(context, ORE_HOLYSTONE_QUARTZ, Feature.ORE, new OreConfiguration(quartz, 15));
         register(context, ORE_AMBROSIUM, Feature.ORE, new OreConfiguration(ambrosium, 16));
-        register(context, ORE_ZANITE, Feature.ORE, new OreConfiguration(zanite, 6, 0.1F));
-        register(context, ORE_GLINT, Feature.ORE, new OreConfiguration(glint, 5));
+        register(context, ORE_ZANITE, Feature.ORE, new OreConfiguration(zanite, 6, 0.15F));
+        register(context, ORE_ZANITE_MOUNTAIN, Feature.ORE, new OreConfiguration(zanite, 4));
+        register(context, ORE_GLINT, Feature.ORE, new OreConfiguration(glint, 4));
         register(context, ORE_ARKENIUM, Feature.ORE, new OreConfiguration(arkenium, 6, 0.25F));
         register(context, ORE_GRAVITITE_BURIED, Feature.ORE, new OreConfiguration(gravitite, 5, 0.5F));
         register(context, ORE_GRAVITITE, Feature.ORE, new OreConfiguration(gravitite, 5));

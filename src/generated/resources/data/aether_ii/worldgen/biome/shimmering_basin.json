@@ -1,6 +1,6 @@
 {
   "carvers": [],
-  "creature_spawn_probability": 0.24,
+  "creature_spawn_probability": 0.22,
   "downfall": 0.5,
   "effects": {
     "fog_color": 15526908,
@@ -43,6 +43,7 @@
       "aether_ii:ore_icestone_small",
       "aether_ii:ore_ambrosium",
       "aether_ii:ore_zanite",
+      "aether_ii:ore_zanite_mountain",
       "aether_ii:ore_arkenium",
       "aether_ii:ore_gravitite_buried",
       "aether_ii:ore_gravitite",
@@ -117,11 +118,11 @@
     },
     "aether_ii:cockatrice": {
       "charge": 0.6,
-      "energy_budget": 0.1
+      "energy_budget": 0.12
     },
     "aether_ii:tempest": {
       "charge": 0.9,
-      "energy_budget": 0.1
+      "energy_budget": 0.11
     },
     "aether_ii:zephyr": {
       "charge": 0.6,
@@ -174,7 +175,7 @@
         "type": "aether_ii:cockatrice",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 5
+        "weight": 4
       }
     ],
     "aether_ii:aether_dungeon_monster": [],

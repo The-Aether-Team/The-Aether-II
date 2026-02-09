@@ -1,9 +1,9 @@
 {
-  "feature": "aether_ii:ore_gravitite_buried",
+  "feature": "aether_ii:ore_zanite_mountain",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 4
+      "count": 5
     },
     {
       "type": "minecraft:in_square"
@@ -11,14 +11,13 @@
     {
       "type": "minecraft:height_range",
       "height": {
-        "type": "minecraft:trapezoid",
+        "type": "minecraft:uniform",
         "max_inclusive": {
-          "above_bottom": 80
+          "below_top": 0
         },
         "min_inclusive": {
-          "above_bottom": 0
-        },
-        "plateau": 20
+          "above_bottom": 35
+        }
       }
     },
     {

@@ -57,11 +57,11 @@
     },
     "aether_ii:cockatrice": {
       "charge": 0.6,
-      "energy_budget": 0.1
+      "energy_budget": 0.12
     },
     "aether_ii:tempest": {
       "charge": 0.9,
-      "energy_budget": 0.1
+      "energy_budget": 0.11
     },
     "aether_ii:zephyr": {
       "charge": 0.6,
@@ -102,7 +102,7 @@
         "type": "aether_ii:cockatrice",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 5
+        "weight": 4
       }
     ],
     "aether_ii:aether_dungeon_monster": [],
