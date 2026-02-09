@@ -43,6 +43,7 @@ public class AmberHourglassMenu extends RecipeBookMenu {
         this.data = data;
         this.level = playerInventory.player.level();
         this.acceptedInputs = this.level.recipeAccess().propertySet(AetherIIRecipePropertySets.AMBER_HOURGLASS_INPUT);
+        container.startOpen(playerInventory.player);
 
         // Hourglass
         this.addSlot(new Slot(container, 0, 80, 30)); // Input
@@ -127,6 +128,12 @@ public class AmberHourglassMenu extends RecipeBookMenu {
     @Override
     public boolean stillValid(Player player) {
         return this.container.stillValid(player);
+    }
+
+    @Override
+    public void removed(Player player) {
+        super.removed(player);
+        this.container.stopOpen(player);
     }
 
     protected boolean canProcess(ItemStack stack) {

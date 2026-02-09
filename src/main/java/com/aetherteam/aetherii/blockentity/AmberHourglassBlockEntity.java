@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.blockentity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.utility.AmberHourglassBlock;
 import com.aetherteam.aetherii.data.resources.maps.AmberHourglassFuel;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.inventory.menu.AmberHourglassMenu;
@@ -59,6 +60,7 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
     protected int powerTotalTime;
     protected int processingProgress;
     protected int processingTotalTime;
+    protected boolean open;
     protected final ContainerData dataAccess = new ContainerData() {
         @Override
         public int get(int id) {
@@ -171,7 +173,7 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
     }
 
     public static void serverTick(ServerLevel level, BlockPos pos, BlockState state, AmberHourglassBlockEntity blockEntity) {
-        boolean flag = false;
+        boolean changed = false;
         if (blockEntity.isPowered()) {
             blockEntity.powerTimeRemaining--;
         }
@@ -194,7 +196,7 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
                 blockEntity.powerTimeRemaining = blockEntity.getFuelDuration(fuelStack);
                 blockEntity.powerTotalTime = blockEntity.powerTimeRemaining;
                 if (blockEntity.isPowered()) {
-                    flag = true;
+                    changed = true;
                     var remainder = fuelStack.getCraftingRemainder();
                     if (!remainder.isEmpty())
                         blockEntity.items.set(1, remainder);
@@ -218,7 +220,7 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
                         blockEntity.setRecipeUsed(recipe);
                     }
 
-                    flag = true;
+                    changed = true;
                 }
             } else {
                 blockEntity.processingProgress = 0;
@@ -227,13 +229,14 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
             blockEntity.processingProgress = Mth.clamp(blockEntity.processingProgress - 2, 0, blockEntity.processingTotalTime);
         }
 
-//        if (powered != blockEntity.isPowered()) {
-//            flag = true;
-//            state = state.setValue(AbstractFurnaceBlock.LIT, furnace.isLit());
-//            level.setBlock(pos, state, 3);
-//        }
+        boolean open = blockEntity.open || blockEntity.isOutputFull();
+        if (open != state.getValue(AmberHourglassBlock.OPEN)) {
+            changed = true;
+            state = state.setValue(AmberHourglassBlock.OPEN, open);
+            level.setBlock(pos, state, 1 | 2);
+        }
 
-        if (flag) {
+        if (changed) {
             setChanged(level, pos, state);
         }
     }
@@ -298,6 +301,17 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
         return this.powerTimeRemaining > 0;
     }
 
+    private boolean isOutputFull() {
+        boolean full = false;
+        for (int i = 2; i <= 4; i++) {
+            if (!this.items.get(i).isEmpty()) {
+                full = true;
+                break;
+            }
+        }
+        return full;
+    }
+
     @Override
     public int[] getSlotsForFace(Direction side) {
         if (side == Direction.DOWN) {
@@ -309,12 +323,26 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
 
     @Override
     public boolean canPlaceItemThroughFace(int i, ItemStack itemStack, @Nullable Direction direction) {
-        return false;
+        return false; //todo
     }
 
     @Override
     public boolean canTakeItemThroughFace(int i, ItemStack itemStack, Direction direction) {
-        return false;
+        return false; //todo
+    }
+
+    @Override
+    public void startOpen(Player player) {
+        if (!this.remove && !player.isSpectator() && this.getLevel() != null) {
+            this.open = true;
+        }
+    }
+
+    @Override
+    public void stopOpen(Player player) {
+        if (!this.remove && !player.isSpectator() && this.getLevel() != null) {
+            this.open = false;
+        }
     }
 
     @Override
@@ -379,7 +407,6 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
     public void clearContent() {
         this.items.clear();
     }
-
 
     @Override
     public void setRecipeUsed(@Nullable RecipeHolder<?> recipeHolder) {
