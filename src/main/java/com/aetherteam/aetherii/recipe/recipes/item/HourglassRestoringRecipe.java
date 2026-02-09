@@ -18,6 +18,7 @@ import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HourglassRestoringRecipe implements Recipe<SingleRecipeInputWithRandom> {
@@ -72,13 +73,21 @@ public class HourglassRestoringRecipe implements Recipe<SingleRecipeInputWithRan
     }
 
     @Override
-    public boolean matches(SingleRecipeInputWithRandom singleRecipeInput, Level level) {
-        return this.ingredient().test(singleRecipeInput.item());
+    public boolean matches(SingleRecipeInputWithRandom input, Level level) {
+        return this.ingredient().test(input.item());
     }
 
     @Override
-    public ItemStack assemble(SingleRecipeInputWithRandom singleRecipeInput, HolderLookup.Provider provider) {
-        return this.results.output1().process(singleRecipeInput.randomSource()); //todo; 3 item output with random variation.
+    public ItemStack assemble(SingleRecipeInputWithRandom input, HolderLookup.Provider provider) {
+        return this.results.output1().process(input.randomSource()); //todo; 3 item output with random variation.
+    }
+
+    public List<ItemStack> assembleOutputs(SingleRecipeInputWithRandom input, HolderLookup.Provider provider) {
+        List<ItemStack> outputs = new ArrayList<>();
+        outputs.add(0, this.results.output1().process(input.randomSource()));
+        outputs.add(1, this.results.output2().process(input.randomSource()));
+        outputs.add(2, this.results.output3().process(input.randomSource()));
+        return outputs;
     }
 
     @Override

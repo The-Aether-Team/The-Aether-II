@@ -1,14 +1,13 @@
 package com.aetherteam.aetherii.inventory.menu.slot;
 
-import com.aetherteam.aetherii.blockentity.AltarBlockEntity;
+import com.aetherteam.aetherii.blockentity.AmberHourglassBlockEntity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
-public class AltarResultSlot extends AbstractResultSlot {
-    public AltarResultSlot(Player player, Container container, int slot, int x, int y) {
+public class HourglassResultSlot extends AbstractResultSlot {
+    public HourglassResultSlot(Player player, Container container, int slot, int x, int y) {
         super(player, container, slot, x, y);
     }
 
@@ -18,8 +17,8 @@ public class AltarResultSlot extends AbstractResultSlot {
         Player player = this.player;
         if (player instanceof ServerPlayer serverplayer) {
             Container container = this.container;
-            if (container instanceof AltarBlockEntity altarBlockEntity) {
-                altarBlockEntity.awardUsedRecipesAndPopExperience(serverplayer);
+            if (container instanceof AmberHourglassBlockEntity amberHourglassBlockEntity) {
+                amberHourglassBlockEntity.awardUsedRecipesAndPopExperience(serverplayer);
             }
         }
         this.removeCount = 0;

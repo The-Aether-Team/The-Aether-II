@@ -1,11 +1,17 @@
 package com.aetherteam.aetherii.inventory.menu;
 
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
+import com.aetherteam.aetherii.inventory.menu.slot.HourglassResultSlot;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.item.HourglassRestoringRecipe;
 import com.aetherteam.aetherii.recipe.set.AetherIIRecipePropertySets;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.recipebook.ServerPlaceRecipe;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,7 +21,6 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipePropertySet;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
@@ -27,13 +32,13 @@ public class AmberHourglassMenu extends RecipeBookMenu {
     private final RecipePropertySet acceptedInputs;
 
     public AmberHourglassMenu(int containerId, Inventory playerInventory) {
-        this(containerId, playerInventory, new SimpleContainer(5), new SimpleContainerData(0));
+        this(containerId, playerInventory, new SimpleContainer(5), new SimpleContainerData(4));
     }
 
     public AmberHourglassMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
         super(AetherIIMenuTypes.AMBER_HOURGLASS.get(), containerId);
         checkContainerSize(container, 5);
-        checkContainerDataCount(data, 0);
+        checkContainerDataCount(data, 4);
         this.container = container;
         this.data = data;
         this.level = playerInventory.player.level();
@@ -41,12 +46,23 @@ public class AmberHourglassMenu extends RecipeBookMenu {
 
         // Hourglass
         this.addSlot(new Slot(container, 0, 80, 30)); // Input
-        this.addSlot(new Slot(container, 1, 80, 62)); // Fuel
+        this.addSlot(new Slot(container, 1, 80, 62) {
+            public static final ResourceLocation SLOT_FUEL = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/amber_hourglass/slot_golden_amber");
 
-        // Outputs
-        this.addSlot(new Slot(container, 2, 48, 94));
-        this.addSlot(new Slot(container, 3, 80, 94));
-        this.addSlot(new Slot(container, 4, 112, 94));
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return AmberHourglassMenu.this.isFuel(stack);
+            }
+
+            @Override
+            public ResourceLocation getNoItemIcon() {
+                return SLOT_FUEL;
+            }
+        }); // Fuel
+
+        this.addSlot(new HourglassResultSlot(playerInventory.player, container, 2, 48, 94)); // Output
+        this.addSlot(new HourglassResultSlot(playerInventory.player, container, 3, 80, 94)); // Output
+        this.addSlot(new HourglassResultSlot(playerInventory.player, container, 4, 112, 94)); // Output
 
         this.addStandardInventorySlots(playerInventory, 8, 140);
         this.addDataSlots(data);
@@ -112,6 +128,36 @@ public class AmberHourglassMenu extends RecipeBookMenu {
     @Override
     public boolean stillValid(Player player) {
         return this.container.stillValid(player);
+    }
+
+    protected boolean canProcess(ItemStack stack) {
+        return this.acceptedInputs.test(stack);
+    }
+
+    public boolean isFuel(ItemStack stack) {
+        return BuiltInRegistries.ITEM.wrapAsHolder(stack.getItem()).getData(AetherIIDataMaps.AMBER_HOURGLASS_FUELS) != null;
+    }
+
+    public ItemStack getInputStack() {
+        return this.getItems().getFirst();
+    }
+
+    public float getProcessingProgress() {
+        int i = this.data.get(2);
+        int j = this.data.get(3);
+        return j != 0 && i != 0 ? Mth.clamp((float) i / (float) j, 0.0F, 1.0F) : 0.0F;
+    }
+
+    public float getPowerProgress() {
+        int i = this.data.get(1);
+        if (i == 0) {
+            i = 200;
+        }
+        return Mth.clamp((float) this.data.get(0) / (float) i, 0.0F, 1.0F);
+    }
+
+    public boolean isPowered() {
+        return this.data.get(0) > 0;
     }
 
     @Override

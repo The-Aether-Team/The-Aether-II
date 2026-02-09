@@ -1503,7 +1503,8 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.ZANITE_GEMSTONE.get(), 1)), 85)
                 .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.ZANITE_GEMSTONE.get(), 2)), 10)
                 .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.ZANITE_GEMSTONE.get(), 3)), 5)
-                .build()), AetherIIItems.FOSSILIZED_ZANITE, 0.0F).group("zanite").save(this.output, this.name("restore_zanite_gemstone"));
+                .build()
+        ), AetherIIItems.FOSSILIZED_ZANITE, 0.0F).group("zanite").save(this.output, this.name("restore_zanite_gemstone"));
 
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, AetherIIItems.INERT_ARKENIUM, 3, 0.0F).group("arkenium").save(this.output);
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, AetherIIBlocks.ARKENIUM_ORE, 3, 0.0F).group("arkenium").save(this.output, this.name("arkenium_plates_from_arkenium_ore"));

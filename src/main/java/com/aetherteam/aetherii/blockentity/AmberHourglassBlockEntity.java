@@ -2,6 +2,8 @@ package com.aetherteam.aetherii.blockentity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.data.resources.maps.AmberHourglassFuel;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.inventory.menu.AmberHourglassMenu;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
@@ -9,10 +11,8 @@ import com.aetherteam.aetherii.recipe.recipes.item.HourglassRestoringRecipe;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
+import net.minecraft.core.*;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -34,11 +34,9 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.RecipeCraftingHolder;
 import net.minecraft.world.inventory.StackedContentsCompatible;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -52,23 +50,54 @@ import java.util.List;
 import java.util.Optional;
 
 public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeCraftingHolder, StackedContentsCompatible {
+    private static final int[] SLOTS_FOR_UP = new int[]{0};
+    private static final int[] SLOTS_FOR_DOWN = new int[]{2, 3, 4};
+    private static final int[] SLOTS_FOR_SIDES = new int[]{1};
+
     protected NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY);
+    protected int powerTimeRemaining;
+    protected int powerTotalTime;
+    protected int processingProgress;
+    protected int processingTotalTime;
     protected final ContainerData dataAccess = new ContainerData() {
         @Override
         public int get(int id) {
-            return 0;
+            return switch (id) {
+                case 0 -> {
+                    if (AmberHourglassBlockEntity.this.powerTotalTime > Short.MAX_VALUE) {
+                        yield Mth.floor(((double) AmberHourglassBlockEntity.this.powerTimeRemaining / AmberHourglassBlockEntity.this.powerTotalTime) * Short.MAX_VALUE);
+                    }
+                    yield AmberHourglassBlockEntity.this.powerTimeRemaining;
+                }
+                case 1 -> Math.min(AmberHourglassBlockEntity.this.powerTotalTime, Short.MAX_VALUE);
+                case 2 -> AmberHourglassBlockEntity.this.processingProgress;
+                case 3 -> AmberHourglassBlockEntity.this.processingTotalTime;
+                default -> 0;
+            };
         }
 
         @Override
         public void set(int id, int value) {
+            switch (id) {
+                case 0:
+                    AmberHourglassBlockEntity.this.powerTimeRemaining = value;
+                    break;
+                case 1:
+                    AmberHourglassBlockEntity.this.powerTotalTime = value;
+                    break;
+                case 2:
+                    AmberHourglassBlockEntity.this.processingProgress = value;
+                    break;
+                case 3:
+                    AmberHourglassBlockEntity.this.processingTotalTime = value;
+            }
         }
 
         @Override
         public int getCount() {
-            return 0;
+            return 4;
         }
     };
-
     private final Object2IntOpenHashMap<ResourceKey<Recipe<?>>> recipesUsed = new Object2IntOpenHashMap<>();
     private final RecipeManager.CachedCheck<SingleRecipeInputWithRandom, HourglassRestoringRecipe> quickCheck;
 
@@ -100,8 +129,10 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
         super.loadAdditional(input);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         ContainerHelper.loadAllItems(input, this.items);
-//        this.processingProgress = input.getIntOr("ProcessingTime", 0);
-//        this.processingTotalTime = input.getIntOr("ProcessingTimeTotal", 200);
+        this.processingProgress = input.getIntOr("ProcessingTime", (short) 0);
+        this.processingTotalTime = input.getIntOr("ProcessingTimeTotal", (short) 0);
+        this.powerTimeRemaining = input.getIntOr("PowerTimeRemaining", (short) 0);
+        this.powerTotalTime = input.getIntOr("PowerTimeTotal", (short) 0);
         Optional<CompoundTag> recipesUsedTag = input.read("RecipesUsed", CompoundTag.CODEC);
         recipesUsedTag.ifPresent(tag -> {
             for (String key : tag.keySet()) {
@@ -113,8 +144,10 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
     @Override
     protected void saveAdditional(ValueOutput output) {
         super.saveAdditional(output);
-//        output.putInt("ProcessingTime", this.processingProgress);
-//        output.putInt("ProcessingTimeTotal", this.processingTotalTime);
+        output.putInt("ProcessingTime", this.processingProgress);
+        output.putInt("ProcessingTimeTotal", this.processingTotalTime);
+        output.putInt("PowerTimeRemaining", this.powerTimeRemaining);
+        output.putInt("PowerTimeTotal", this.powerTotalTime);
         ContainerHelper.saveAllItems(output, this.items);
         CompoundTag recipesUsedTag = new CompoundTag();
         this.recipesUsed.forEach((key, integer) -> recipesUsedTag.putInt(key.location().toString(), integer));
@@ -138,12 +171,140 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
     }
 
     public static void serverTick(ServerLevel level, BlockPos pos, BlockState state, AmberHourglassBlockEntity blockEntity) {
+        boolean flag = false;
+        if (blockEntity.isPowered()) {
+            blockEntity.powerTimeRemaining--;
+        }
 
+        ItemStack fuelStack = blockEntity.items.get(1);
+        ItemStack inputStack = blockEntity.items.get(0);
+        boolean noInput = !inputStack.isEmpty();
+        boolean noFuel = !fuelStack.isEmpty();
+        if (blockEntity.isPowered() || noFuel && noInput) {
+            SingleRecipeInputWithRandom input = new SingleRecipeInputWithRandom(inputStack, level.getRandom());
+            RecipeHolder<HourglassRestoringRecipe> recipe;
+            if (noInput) {
+                recipe = blockEntity.quickCheck.getRecipeFor(input, level).orElse(null);
+            } else {
+                recipe = null;
+            }
+
+            int i = blockEntity.getMaxStackSize();
+            if (!blockEntity.isPowered() && canProcess(level.registryAccess(), recipe, input, blockEntity.items, i)) {
+                blockEntity.powerTimeRemaining = blockEntity.getFuelDuration(fuelStack);
+                blockEntity.powerTotalTime = blockEntity.powerTimeRemaining;
+                if (blockEntity.isPowered()) {
+                    flag = true;
+                    var remainder = fuelStack.getCraftingRemainder();
+                    if (!remainder.isEmpty())
+                        blockEntity.items.set(1, remainder);
+                    else
+                    if (noFuel) {
+                        Item item = fuelStack.getItem();
+                        fuelStack.shrink(1);
+                        if (fuelStack.isEmpty()) {
+                            blockEntity.items.set(1, item.getCraftingRemainder()); // Neo: Remainder is handled in the `if` check above.
+                        }
+                    }
+                }
+            }
+
+            if (blockEntity.isPowered() && canProcess(level.registryAccess(), recipe, input, blockEntity.items, i)) {
+                blockEntity.processingProgress++;
+                if (blockEntity.processingProgress == blockEntity.processingTotalTime) {
+                    blockEntity.processingProgress = 0;
+                    blockEntity.processingTotalTime = getTotalProcessingTime(level, blockEntity);
+                    if (process(level.registryAccess(), recipe, input, blockEntity.items, i)) {
+                        blockEntity.setRecipeUsed(recipe);
+                    }
+
+                    flag = true;
+                }
+            } else {
+                blockEntity.processingProgress = 0;
+            }
+        } else if (!blockEntity.isPowered() && blockEntity.processingProgress > 0) {
+            blockEntity.processingProgress = Mth.clamp(blockEntity.processingProgress - 2, 0, blockEntity.processingTotalTime);
+        }
+
+//        if (powered != blockEntity.isPowered()) {
+//            flag = true;
+//            state = state.setValue(AbstractFurnaceBlock.LIT, furnace.isLit());
+//            level.setBlock(pos, state, 3);
+//        }
+
+        if (flag) {
+            setChanged(level, pos, state);
+        }
+    }
+
+    private static boolean canProcess(RegistryAccess registryAccess, @Nullable RecipeHolder<HourglassRestoringRecipe> recipe, SingleRecipeInputWithRandom recipeInput, NonNullList<ItemStack> items, int maxStackSize) {
+        if (!items.get(0).isEmpty() && recipe != null) {
+            List<ItemStack> output = recipe.value().assembleOutputs(recipeInput, registryAccess); //todo
+            if (output.isEmpty()) {
+                return false;
+            } else {
+                return true;
+//                ItemStack itemstack1 = items.get(2); //todo need to check all output slots? set and return a flag by looping thru
+//                if (itemstack1.isEmpty()) {
+//                    return true;
+//                } else if (!ItemStack.isSameItemSameComponents(itemstack1, output)) {
+//                    return false;
+//                } else {
+//                    // Neo fix: make furnace respect stack sizes in furnace recipes
+//                    return itemstack1.getCount() + output.getCount() <= maxStackSize && itemstack1.getCount() + output.getCount() <= itemstack1.getMaxStackSize() || itemstack1.getCount() + output.getCount() <= output.getMaxStackSize(); // Neo fix: make furnace respect stack sizes in furnace recipes
+//                }
+            }
+        } else {
+            return false;
+        }
+    }
+
+    private static boolean process(RegistryAccess registryAccess, @Nullable RecipeHolder<HourglassRestoringRecipe> recipe, SingleRecipeInputWithRandom recipeInput, NonNullList<ItemStack> items, int maxStackSize) {
+        if (recipe != null && canProcess(registryAccess, recipe, recipeInput, items, maxStackSize)) {
+            ItemStack input = items.get(0);
+            List<ItemStack> results = recipe.value().assembleOutputs(recipeInput, registryAccess);
+            for (int i = 0; i < 3; i++) {
+                int slot = i + 2;
+                ItemStack output = items.get(slot);
+                ItemStack result = results.get(i);
+                if (output.isEmpty()) {
+                    items.set(slot, result.copy());
+                } else if (ItemStack.isSameItemSameComponents(output, result)) {
+                    output.grow(result.getCount());
+                }
+            }
+            input.shrink(1);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    protected int getFuelDuration(ItemStack stack) {
+        AmberHourglassFuel fuel = BuiltInRegistries.ITEM.wrapAsHolder(stack.getItem()).getData(AetherIIDataMaps.AMBER_HOURGLASS_FUELS);
+        if (fuel != null) {
+            return fuel.powerTime();
+        }
+        return 0;
+    }
+
+    private static int getTotalProcessingTime(ServerLevel level, AmberHourglassBlockEntity blockEntity) {
+        SingleRecipeInputWithRandom input = new SingleRecipeInputWithRandom(blockEntity.getItem(0), level.getRandom());
+        return blockEntity.quickCheck.getRecipeFor(input, level).map(holder -> holder.value().processingTime()).orElse(200);
+    }
+
+    private boolean isPowered() {
+        return this.powerTimeRemaining > 0;
     }
 
     @Override
-    public int[] getSlotsForFace(Direction direction) {
-        return new int[0];
+    public int[] getSlotsForFace(Direction side) {
+        if (side == Direction.DOWN) {
+            return SLOTS_FOR_DOWN;
+        } else {
+            return side == Direction.UP ? SLOTS_FOR_UP : SLOTS_FOR_SIDES;
+        }
     }
 
     @Override
@@ -201,8 +362,11 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
         ItemStack itemstack = this.items.get(index);
         boolean flag = !stack.isEmpty() && ItemStack.isSameItemSameComponents(itemstack, stack);
         this.items.set(index, stack);
-        if (stack.getCount() > this.getMaxStackSize()) {
-            stack.setCount(this.getMaxStackSize());
+        stack.limitSize(this.getMaxStackSize(stack));
+        if (index == 0 && !flag && this.level instanceof ServerLevel serverlevel) {
+            this.processingTotalTime = getTotalProcessingTime(serverlevel, this);
+            this.processingProgress = 0;
+            this.setChanged();
         }
     }
 
