@@ -77,8 +77,8 @@ public class AltarMenu extends RecipeBookMenu {
 
     @Override
     public void fillCraftSlotsStackedContents(StackedItemContents itemHelper) {
-        if (this.container instanceof StackedContentsCompatible container) {
-            container.fillStackedContents(itemHelper);
+        if (this.container instanceof StackedContentsCompatible contents) {
+            contents.fillStackedContents(itemHelper);
         }
     }
 
@@ -142,10 +142,6 @@ public class AltarMenu extends RecipeBookMenu {
 
     public boolean isFuel(ItemStack stack) {
         return stack.is(AetherIITags.Items.ALTAR_FUEL);
-    }
-
-    public ItemStack getInputStack() {
-        return this.getItems().getFirst();
     }
 
     public float getProcessingProgress() {

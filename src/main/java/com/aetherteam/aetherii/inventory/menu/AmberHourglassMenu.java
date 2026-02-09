@@ -70,8 +70,8 @@ public class AmberHourglassMenu extends RecipeBookMenu {
 
     @Override
     public void fillCraftSlotsStackedContents(StackedItemContents itemHelper) {
-        if (this.container instanceof StackedContentsCompatible container) {
-            container.fillStackedContents(itemHelper);
+        if (this.container instanceof StackedContentsCompatible contents) {
+            contents.fillStackedContents(itemHelper);
         }
     }
 
@@ -135,10 +135,6 @@ public class AmberHourglassMenu extends RecipeBookMenu {
 
     public boolean isFuel(ItemStack stack) {
         return BuiltInRegistries.ITEM.wrapAsHolder(stack.getItem()).getData(AetherIIDataMaps.AMBER_HOURGLASS_FUELS) != null;
-    }
-
-    public ItemStack getInputStack() {
-        return this.getItems().getFirst();
     }
 
     public float getProcessingProgress() {
