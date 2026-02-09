@@ -21,11 +21,11 @@ import java.util.List;
 
 public class AmberHourglassRecipeBookComponent extends RecipeBookComponent<AmberHourglassMenu> {
     private static final WidgetSprites FILTER_SPRITES = new WidgetSprites(
-            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/altar_filter_enabled"),
-            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/altar_filter_disabled"),
-            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/altar_filter_enabled_highlighted"),
-            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/altar_filter_disabled_highlighted"));
-    private static final Component FILTER_NAME = Component.translatable("gui.aether_ii.recipebook.toggleRecipes.enchantable");
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/hourglass_filter_enabled"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/hourglass_filter_disabled"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/hourglass_filter_enabled_highlighted"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/hourglass_filter_disabled_highlighted"));
+    private static final Component FILTER_NAME = Component.translatable("gui.aether_ii.recipebook.toggleRecipes.restorable");
 
     public AmberHourglassRecipeBookComponent(AmberHourglassMenu menu, List<TabInfo> tabInfos) {
         super(menu, tabInfos);

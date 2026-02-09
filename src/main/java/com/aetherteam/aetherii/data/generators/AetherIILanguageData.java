@@ -1520,6 +1520,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("arkenium_forge.tooltip.charm", " %1$s %2$s Charm Slot");
         this.addGuiText("arkenium_forge.tooltip.charms", " %1$s %2$s Charm Slots");
         this.addGuiText("arkenium_forge.tooltip.tier", " Upgrade Item Tier");
+        this.addGuiText("recipebook.toggleRecipes.restorable", "Showing Restorable");
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
         this.addGuiText("recipebook.toggleRecipes.purifiable", "Showing Purifiable");
         this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");

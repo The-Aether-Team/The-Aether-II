@@ -79,7 +79,7 @@ public class HourglassRestoringRecipe implements Recipe<SingleRecipeInputWithRan
 
     @Override
     public ItemStack assemble(SingleRecipeInputWithRandom input, HolderLookup.Provider provider) {
-        return this.results.output1().process(input.randomSource()); //todo; 3 item output with random variation.
+        return this.results.output1().process(input.randomSource());
     }
 
     public List<ItemStack> assembleOutputs(SingleRecipeInputWithRandom input, HolderLookup.Provider provider) {
