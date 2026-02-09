@@ -1555,6 +1555,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addAdvancements() {
         this.addAdvancement("the_highlands", "The Aether II");
         this.addAdvancement("enter_highlands", "Hostile Paradise");
+        this.addAdvancement("aerbunny", "Marketable Plushie");
         this.addAdvancement("blue_aercloud", "To Infinity and Beyond!");
         this.addAdvancement("cloud_skiff", "Cloud Sailor");
         this.addAdvancement("aercloud_glider", "Amateur Flying");
@@ -1570,27 +1571,28 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("glint", "Who wants to be a Glintillionaire?");
         this.addAdvancement("bestiary", "The Beast");
         this.addAdvancement("ambrosium", "Enlightenment");
-        this.addAdvancement("enchanted_aether_grass", "Golden Gardening");
+        this.addAdvancement("enchanted_aether_grass", "Golden Thumb");
         this.addAdvancement("zanite", "Exotic Hardware");
         this.addAdvancement("craft_altar", "Do You Believe in Magic?");
         this.addAdvancement("gravitite_plate", "Pink is the New Blue");
         this.addAdvancement("gravitite_armor", "Defying Gravity");
         this.addAdvancement("arkenium_plate", "The Steel of Gods");
         this.addAdvancement("alkahest_canister", "Handle with Care");
-        this.addAdvancement("craft_alkahest_purifier", "Contained");
+        this.addAdvancement("craft_alkahest_purifier", "Deep Clean");
         this.addAdvancement("irradiated_item", "Let's Go Gambling");
         this.addAdvancement("dart_shooter", "Pick Your Poison");
         this.addAdvancement("corrobonite_crystal", "Green Energy");
         this.addAdvancement("craft_arkenium_forge", "Upgrades, People, Upgrades!");
-        this.addAdvancement("charm", "Charmed, I'm sure");
+        this.addAdvancement("charm", "Charmed, I'm Sure");
         this.addAdvancement("slider", "Like a Bossaru!");
-        this.addAdvancement("demolition_hammer_loot", "The Power of Force");
+        this.addAdvancement("demolition_hammer_loot", "Controlled Demolition");
         this.addAdvancement("kill_golem_with_demolition_hammer", "Impactful Revenge");
         this.addAdvancement("neptune_armor_loot", "Ocean Man");
         this.addAdvancement("sentry_boots_fall", "Vertigo");
 
         this.addAdvancementDesc("the_highlands", "It's not dead!");
         this.addAdvancementDesc("enter_highlands", "Enter the Aether");
+        this.addAdvancementDesc("aerbunny", "Interact with an Aerbunny to put it on your head");
         this.addAdvancementDesc("blue_aercloud", "Bounce on a Blue Aercloud");
         this.addAdvancementDesc("cloud_skiff", "Ride a Cloud Skiff for better movement on the Cloud Sea");
         this.addAdvancementDesc("aercloud_glider", "Use an Aercloud Glider for better mid-air movement");
@@ -1614,7 +1616,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("arkenium_plate", "Enchant Inert Arkenium into an Arkenium Plate using the Altar");
         this.addAdvancementDesc("alkahest_canister", "Collect Alkahest using an Arkenium Canister");
         this.addAdvancementDesc("craft_alkahest_purifier", "Craft an Alkahest Purifier");
-        this.addAdvancementDesc("irradiated_item", "Clean an Irradiated Item in an Alkahest Purifier and see what you get");
+        this.addAdvancementDesc("irradiated_item", "Restore an Irradiated Item in an Alkahest Purifier and see what you get");
         this.addAdvancementDesc("dart_shooter", "Use a Dart Shooter's full ammo to inflict an effect on an enemy");
         this.addAdvancementDesc("corrobonite_crystal", "Acquire Corrobonite by mining it with a Gravitite Pickaxe");
         this.addAdvancementDesc("craft_arkenium_forge", "Craft an Arkenium Forge");
