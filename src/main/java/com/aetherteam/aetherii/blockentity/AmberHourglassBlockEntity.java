@@ -243,20 +243,28 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
 
     private static boolean canProcess(RegistryAccess registryAccess, @Nullable RecipeHolder<HourglassRestoringRecipe> recipe, SingleRecipeInputWithRandom recipeInput, NonNullList<ItemStack> items, int maxStackSize) {
         if (!items.get(0).isEmpty() && recipe != null) {
-            List<ItemStack> output = recipe.value().assembleOutputs(recipeInput, registryAccess); //todo
-            if (output.isEmpty()) {
+            List<ItemStack> results = recipe.value().assembleOutputs(recipeInput, registryAccess);
+            if (results.isEmpty()) {
                 return false;
             } else {
-                return true;
-//                ItemStack itemstack1 = items.get(2); //todo need to check all output slots? set and return a flag by looping thru
-//                if (itemstack1.isEmpty()) {
-//                    return true;
-//                } else if (!ItemStack.isSameItemSameComponents(itemstack1, output)) {
-//                    return false;
-//                } else {
-//                    // Neo fix: make furnace respect stack sizes in furnace recipes
-//                    return itemstack1.getCount() + output.getCount() <= maxStackSize && itemstack1.getCount() + output.getCount() <= itemstack1.getMaxStackSize() || itemstack1.getCount() + output.getCount() <= output.getMaxStackSize(); // Neo fix: make furnace respect stack sizes in furnace recipes
-//                }
+                boolean flag = false;
+                for (int i = 0; i < 3; i++) { //todo this could maybe be improved to be more lenient?
+                    int slot = i + 2;
+                    ItemStack output = items.get(slot);
+                    ItemStack result = results.get(i);
+                    if (!result.isEmpty()) {
+                        if (output.isEmpty()) {
+                            flag = true;
+                            break;
+                        } else if (ItemStack.isSameItemSameComponents(output, result)) {
+                            flag = output.getCount() + result.getCount() <= maxStackSize && output.getCount() + result.getCount() <= output.getMaxStackSize() || output.getCount() + result.getCount() <= result.getMaxStackSize();
+                            if (flag) {
+                                break;
+                            }
+                        }
+                    }
+                }
+                return flag;
             }
         } else {
             return false;
