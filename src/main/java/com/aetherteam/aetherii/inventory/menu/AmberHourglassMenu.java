@@ -87,29 +87,28 @@ public class AmberHourglassMenu extends RecipeBookMenu {
         if (slot != null && slot.hasItem()) {
             ItemStack slotStack = slot.getItem();
             itemStack = slotStack.copy();
-            if (slotIndex == 9) {
-                if (!this.moveItemStackTo(slotStack, 10, 46, true)) {
+            if (slotIndex >= 2 && slotIndex < 5) {
+                if (!this.moveItemStackTo(slotStack, 5, 41, true)) {
                     return ItemStack.EMPTY;
                 }
                 slot.onQuickCraft(slotStack, itemStack);
-            } else if (slotIndex > 8) {
-//                if (this.canProcess(slotStack)) {
-//                    if (!this.moveItemStackTo(slotStack, 0, 1, false)) {
-//                        return ItemStack.EMPTY;
-//                    }
-//                } else if (this.isFuel(slotStack)) {
-//                    if (!this.moveItemStackTo(slotStack, 1, 9, false)) {
-//                        return ItemStack.EMPTY;
-//                    }
-//                } else
-                if (slotIndex >= 10 && slotIndex < 37) {
-                    if (!this.moveItemStackTo(slotStack, 37, 46, false)) {
+            } else if (slotIndex > 4) {
+                if (this.canProcess(slotStack)) {
+                    if (!this.moveItemStackTo(slotStack, 0, 1, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (slotIndex >= 37 && slotIndex < 46 && !this.moveItemStackTo(slotStack, 10, 37, false)) {
+                } else if (this.isFuel(slotStack)) {
+                    if (!this.moveItemStackTo(slotStack, 1, 2, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (slotIndex >= 5 && slotIndex < 32) {
+                    if (!this.moveItemStackTo(slotStack, 32, 41, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (slotIndex >= 32 && slotIndex < 41 && !this.moveItemStackTo(slotStack, 5, 32, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(slotStack, 10, 46, false)) {
+            } else if (!this.moveItemStackTo(slotStack, 5, 41, false)) {
                 return ItemStack.EMPTY;
             }
             if (slotStack.isEmpty()) {
