@@ -7,7 +7,6 @@ import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
-import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -15,6 +14,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 
@@ -26,7 +26,7 @@ import java.util.Objects;
 public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
     private final RecipeCategory category;
     private final AmberHourglassBookCategory bookCategory;
-    private final NonNullList<ItemStack> results;
+    private final HourglassRestoringRecipe.HourglassOutput results;
     private final Ingredient ingredient;
     private final float experience;
     private final int processingTime;
@@ -34,7 +34,7 @@ public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
     @Nullable
     private String group;
 
-    public HourglassRestoringRecipeBuilder(RecipeCategory category, AmberHourglassBookCategory bookCategory, NonNullList<ItemStack> results, Ingredient ingredient, float experience, int processingTime) {
+    public HourglassRestoringRecipeBuilder(RecipeCategory category, AmberHourglassBookCategory bookCategory, HourglassRestoringRecipe.HourglassOutput results, Ingredient ingredient, float experience, int processingTime) {
         this.category = category;
         this.bookCategory = bookCategory;
         this.results = results;
@@ -43,7 +43,7 @@ public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
         this.processingTime = processingTime;
     }
 
-    public static HourglassRestoringRecipeBuilder restoring(Ingredient ingredient, RecipeCategory category, NonNullList<ItemStack> results, float experience, int processingTime, boolean uncrafting) {
+    public static HourglassRestoringRecipeBuilder restoring(Ingredient ingredient, RecipeCategory category, HourglassRestoringRecipe.HourglassOutput results, float experience, int processingTime, boolean uncrafting) {
         return new HourglassRestoringRecipeBuilder(category, uncrafting ? AmberHourglassBookCategory.UNCRAFTING : determineRecipeCategory(new ItemStack(ingredient.items().toList().getFirst().value()), results), results, ingredient, experience, processingTime);
     }
 
@@ -61,7 +61,7 @@ public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
 
     @Override
     public Item getResult() {
-        return this.results.getFirst().getItem(); //todo
+        return Items.AIR; //todo?
     }
 
     @Override
@@ -78,7 +78,7 @@ public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
         output.accept(id, recipe, builder.build(id.location().withPrefix("recipes/" + this.category.getFolderName() + "/")));
     }
 
-    private static AmberHourglassBookCategory determineRecipeCategory(ItemStack ingredient, NonNullList<ItemStack> results) { //todo determine based on results? how do we actually go about this in the recipe book.
+    private static AmberHourglassBookCategory determineRecipeCategory(ItemStack ingredient, HourglassRestoringRecipe.HourglassOutput results) { //todo determine based on results? how do we actually go about this in the recipe book.
         if (ingredient.getItem() instanceof BlockItem) {
             return AmberHourglassBookCategory.BLOCKS;
         } else {

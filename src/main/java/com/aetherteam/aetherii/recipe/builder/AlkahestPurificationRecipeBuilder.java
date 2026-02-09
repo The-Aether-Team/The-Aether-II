@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.recipe.builder;
 
 import com.aetherteam.aetherii.recipe.book.AlkahestPurifierBookCategory;
+import com.aetherteam.aetherii.recipe.recipes.OutputEntry;
 import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
@@ -26,8 +27,8 @@ import java.util.Objects;
 public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
     private final RecipeCategory category;
     private final AlkahestPurifierBookCategory bookCategory;
-    private final AlkahestPurificationRecipe.BaseEntry results;
-    private final AlkahestPurificationRecipe.BaseEntry byproducts;
+    private final OutputEntry.BaseEntry results;
+    private final OutputEntry.BaseEntry byproducts;
     private final Ingredient ingredient;
     private final float experience;
     private final int alkahestUsage;
@@ -36,7 +37,7 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
     @Nullable
     private String group;
 
-    public AlkahestPurificationRecipeBuilder(RecipeCategory category, AlkahestPurifierBookCategory bookCategory, AlkahestPurificationRecipe.BaseEntry results, AlkahestPurificationRecipe.BaseEntry byproducts, Ingredient ingredient, float experience, int alkahestUsage, int processingTime) {
+    public AlkahestPurificationRecipeBuilder(RecipeCategory category, AlkahestPurifierBookCategory bookCategory, OutputEntry.BaseEntry results, OutputEntry.BaseEntry byproducts, Ingredient ingredient, float experience, int alkahestUsage, int processingTime) {
         this.category = category;
         this.bookCategory = bookCategory;
         this.results = results;
@@ -47,7 +48,7 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
         this.processingTime = processingTime;
     }
 
-    public static AlkahestPurificationRecipeBuilder recipe(Ingredient ingredient, RecipeCategory category, AlkahestPurificationRecipe.BaseEntry results, AlkahestPurificationRecipe.BaseEntry byproducts, float experience, int alkahestUsage, int processingTime) {
+    public static AlkahestPurificationRecipeBuilder recipe(Ingredient ingredient, RecipeCategory category, OutputEntry.BaseEntry results, OutputEntry.BaseEntry byproducts, float experience, int alkahestUsage, int processingTime) {
         return new AlkahestPurificationRecipeBuilder(category, determineRecipeCategory(new ItemStack(results.list().getFirst().getItem())), results, byproducts, ingredient, experience, alkahestUsage, processingTime);
     }
 

@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.blockentity;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.inventory.menu.AmberHourglassMenu;
+import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.item.HourglassRestoringRecipe;
 import com.google.common.collect.Lists;
@@ -69,7 +70,7 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
     };
 
     private final Object2IntOpenHashMap<ResourceKey<Recipe<?>>> recipesUsed = new Object2IntOpenHashMap<>();
-    private final RecipeManager.CachedCheck<SingleRecipeInput, HourglassRestoringRecipe> quickCheck;
+    private final RecipeManager.CachedCheck<SingleRecipeInputWithRandom, HourglassRestoringRecipe> quickCheck;
 
     public AmberHourglassBlockEntity() {
         this(AetherIIBlockEntityTypes.AMBER_HOURGLASS.get(), BlockPos.ZERO, AetherIIBlocks.AMBER_HOURGLASS.get().defaultBlockState());

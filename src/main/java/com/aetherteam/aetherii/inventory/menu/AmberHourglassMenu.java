@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.inventory.menu;
 
 import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
+import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.item.HourglassRestoringRecipe;
 import com.aetherteam.aetherii.recipe.set.AetherIIRecipePropertySets;
 import net.minecraft.recipebook.ServerPlaceRecipe;
@@ -127,7 +128,7 @@ public class AmberHourglassMenu extends RecipeBookMenu {
             }
 
             public boolean recipeMatches(RecipeHolder<HourglassRestoringRecipe> holder) {
-                return holder.value().matches(new SingleRecipeInput(AmberHourglassMenu.this.container.getItem(0)), level);
+                return holder.value().matches(new SingleRecipeInputWithRandom(AmberHourglassMenu.this.container.getItem(0), level.random), level);
             }
         }, 1, 1, List.of(this.getSlot(0)), list, container, (RecipeHolder<HourglassRestoringRecipe>) recipeHolder, useMaxItems, isCreative);
     }

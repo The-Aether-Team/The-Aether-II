@@ -11,8 +11,10 @@ import com.aetherteam.aetherii.recipe.builder.AlkahestPurificationRecipeBuilder;
 import com.aetherteam.aetherii.recipe.builder.AltarEnchantingRecipeBuilder;
 import com.aetherteam.aetherii.recipe.builder.BiomeParameterRecipeBuilder;
 import com.aetherteam.aetherii.recipe.builder.HourglassRestoringRecipeBuilder;
+import com.aetherteam.aetherii.recipe.recipes.OutputEntry;
 import com.aetherteam.aetherii.recipe.recipes.block.*;
 import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
+import com.aetherteam.aetherii.recipe.recipes.item.HourglassRestoringRecipe;
 import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
 import com.aetherteam.nitrogen.recipe.BlockPropertyPair;
 import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
@@ -298,12 +300,12 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 600).unlockedBy("has_item", has(material.get())).save(consumer, this.name("campfire_cooking_" + getHasName(result.get())));
     }
 
-    protected HourglassRestoringRecipeBuilder hourglassRestoring(RecipeCategory category, ItemLike result, ItemLike ingredient, float experience) {
-        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, NonNullList.of(ItemStack.EMPTY, new ItemStack(result)), experience, 200, false).unlockedBy("has_item", has(ingredient));
+    protected HourglassRestoringRecipeBuilder hourglassRestoring(RecipeCategory category, OutputEntry.BaseEntry result, ItemLike ingredient, float experience) {
+        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.ItemEntry(ItemStack.EMPTY), result, new OutputEntry.ItemEntry(ItemStack.EMPTY)), experience, 200, false).unlockedBy("has_item", has(ingredient));
     }
 
-    protected HourglassRestoringRecipeBuilder hourglassUncrafting(RecipeCategory category, ItemLike result1, ItemLike result2, ItemLike result3, ItemLike ingredient, float experience) {
-        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, NonNullList.of(ItemStack.EMPTY, new ItemStack(result1), new ItemStack(result2), new ItemStack(result3)), experience, 200, true).unlockedBy("has_item", has(ingredient));
+    protected HourglassRestoringRecipeBuilder hourglassUncrafting(RecipeCategory category, OutputEntry.BaseEntry result1, OutputEntry.BaseEntry result2, OutputEntry.BaseEntry result3, ItemLike ingredient, float experience) {
+        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, new HourglassRestoringRecipe.HourglassOutput(result1, result2, result3), experience, 200, true).unlockedBy("has_item", has(ingredient));
     }
 
     protected AltarEnchantingRecipeBuilder altarEnchanting(RecipeCategory category, ItemLike result, ItemLike ingredient, int fuelCount, float experience) {
@@ -342,11 +344,11 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, AlkahestCorrosionRecipe::new);
     }
 
-    protected void alkahestPurification(RecipeCategory recipeCategory, AlkahestPurificationRecipe.BaseEntry results, ItemLike ingredient, AlkahestPurificationRecipe.BaseEntry byproducts, int alkahestUsage, RecipeOutput consumer) {
+    protected void alkahestPurification(RecipeCategory recipeCategory, OutputEntry.BaseEntry results, ItemLike ingredient, OutputEntry.BaseEntry byproducts, int alkahestUsage, RecipeOutput consumer) {
         AlkahestPurificationRecipeBuilder.recipe(Ingredient.of(ingredient), recipeCategory, results, byproducts, 0.0F, alkahestUsage, 200).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, this.name("purify_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath()));
     }
 
-    protected void alkahestPurification(RecipeCategory recipeCategory, AlkahestPurificationRecipe.BaseEntry results, ItemLike ingredient, AlkahestPurificationRecipe.BaseEntry byproducts, int alkahestUsage, String group, RecipeOutput consumer) {
+    protected void alkahestPurification(RecipeCategory recipeCategory, OutputEntry.BaseEntry results, ItemLike ingredient, OutputEntry.BaseEntry byproducts, int alkahestUsage, String group, RecipeOutput consumer) {
         AlkahestPurificationRecipeBuilder.recipe(Ingredient.of(ingredient), recipeCategory, results, byproducts, 0.0F, alkahestUsage, 200).group(group).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, this.name("purify_" + BuiltInRegistries.ITEM.getKey(ingredient.asItem()).getPath()));
     }
 
@@ -358,11 +360,11 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, IrradiationRecipe::new);
     }
 
-    protected AlkahestPurificationRecipe.BaseEntry byproducts(ItemLike item, int max) {
-        WeightedList.Builder<AlkahestPurificationRecipe.BaseEntry> builder = WeightedList.builder();
+    protected OutputEntry.BaseEntry byproducts(ItemLike item, int max) {
+        WeightedList.Builder<OutputEntry.BaseEntry> builder = WeightedList.builder();
         for (int i = 1; i <= max; i++) {
-            builder.add(new AlkahestPurificationRecipe.ItemEntry(new ItemStack(item, i)), (max + 1) - i);
+            builder.add(new OutputEntry.ItemEntry(new ItemStack(item, i)), (max + 1) - i);
         }
-        return new AlkahestPurificationRecipe.ListEntry(builder.build());
+        return new OutputEntry.ListEntry(builder.build());
     }
 }
