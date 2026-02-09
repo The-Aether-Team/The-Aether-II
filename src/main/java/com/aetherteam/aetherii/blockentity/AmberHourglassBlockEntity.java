@@ -37,6 +37,7 @@ import net.minecraft.world.inventory.RecipeCraftingHolder;
 import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -330,13 +331,25 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
     }
 
     @Override
-    public boolean canPlaceItemThroughFace(int i, ItemStack itemStack, @Nullable Direction direction) {
-        return false; //todo
+    public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, @Nullable Direction direction) {
+        return this.canPlaceItem(index, itemStack);
     }
 
     @Override
-    public boolean canTakeItemThroughFace(int i, ItemStack itemStack, Direction direction) {
-        return false; //todo
+    public boolean canTakeItemThroughFace(int index, ItemStack itemStack, Direction direction) {
+        return direction != Direction.DOWN || index >= 2;
+    }
+
+    @Override
+    public boolean canPlaceItem(int index, ItemStack stack) {
+        if (index >= 2) {
+            return false;
+        } else if (index != 1) {
+            return true;
+        } else {
+            ItemStack fuelStack = this.items.get(1);
+            return this.getFuelDuration(fuelStack) > 0;
+        }
     }
 
     @Override
