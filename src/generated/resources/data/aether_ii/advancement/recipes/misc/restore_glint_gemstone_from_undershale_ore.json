@@ -1,13 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "aether_ii:fossilized_glint_from_blasting_undershale_glint_ore"
-      },
-      "trigger": "minecraft:recipe_unlocked"
-    },
-    "has_undershale_glint_ore": {
+    "has_item": {
       "conditions": {
         "items": [
           {
@@ -16,17 +10,23 @@
         ]
       },
       "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:restore_glint_gemstone_from_undershale_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_undershale_glint_ore"
+      "has_item"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:fossilized_glint_from_blasting_undershale_glint_ore"
+      "aether_ii:restore_glint_gemstone_from_undershale_ore"
     ]
   }
 }

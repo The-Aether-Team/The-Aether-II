@@ -1,13 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "aether_ii:fossilized_zanite_from_blasting"
-      },
-      "trigger": "minecraft:recipe_unlocked"
-    },
-    "has_zanite_ore": {
+    "has_item": {
       "conditions": {
         "items": [
           {
@@ -16,17 +10,23 @@
         ]
       },
       "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:restore_zanite_gemstone_from_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_zanite_ore"
+      "has_item"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:fossilized_zanite_from_blasting"
+      "aether_ii:restore_zanite_gemstone_from_ore"
     ]
   }
 }

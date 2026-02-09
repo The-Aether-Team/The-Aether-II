@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_glint_ore": {
+    "has_item": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:glint_ore"
+            "items": "aether_ii:fossilized_glint"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:fossilized_glint_from_smelting"
+        "recipe": "aether_ii:restore_glint_gemstone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_glint_ore"
+      "has_item"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:fossilized_glint_from_smelting"
+      "aether_ii:restore_glint_gemstone"
     ]
   }
 }
