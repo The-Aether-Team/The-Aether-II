@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.blockentity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.inventory.menu.AmberHourglassMenu;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
-import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
 import com.aetherteam.aetherii.recipe.recipes.item.HourglassRestoringRecipe;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -30,6 +30,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.RecipeCraftingHolder;
 import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.ItemStack;
@@ -51,6 +52,21 @@ import java.util.Optional;
 
 public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeCraftingHolder, StackedContentsCompatible {
     protected NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY);
+    protected final ContainerData dataAccess = new ContainerData() {
+        @Override
+        public int get(int id) {
+            return 0;
+        }
+
+        @Override
+        public void set(int id, int value) {
+        }
+
+        @Override
+        public int getCount() {
+            return 0;
+        }
+    };
 
     private final Object2IntOpenHashMap<ResourceKey<Recipe<?>>> recipesUsed = new Object2IntOpenHashMap<>();
     private final RecipeManager.CachedCheck<SingleRecipeInput, HourglassRestoringRecipe> quickCheck;
@@ -74,8 +90,8 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
     }
 
     @Override
-    protected AbstractContainerMenu createMenu(int i, Inventory inventory) {
-        return null;
+    protected AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
+        return new AmberHourglassMenu(containerId, inventory, this, this.dataAccess);
     }
 
     @Override
@@ -234,7 +250,7 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
         for (Object2IntMap.Entry<ResourceKey<Recipe<?>>> entry : this.recipesUsed.object2IntEntrySet()) {
             level.recipeAccess().byKey(entry.getKey()).ifPresent(recipeHolder -> {
                 list.add(recipeHolder);
-                createExperience(level, popVec, entry.getIntValue(), ((AltarEnchantingRecipe) recipeHolder.value()).experience());
+                createExperience(level, popVec, entry.getIntValue(), ((HourglassRestoringRecipe) recipeHolder.value()).experience());
             });
         }
         return list;

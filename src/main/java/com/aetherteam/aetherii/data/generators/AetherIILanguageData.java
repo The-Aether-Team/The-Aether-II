@@ -1504,6 +1504,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Containers
         this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
         this.addContainerType(AetherIIMenuTypes.ARTISANS_BENCH, "Artisan's Bench");
+        this.addContainerType(AetherIIMenuTypes.AMBER_HOURGLASS, "Amber Hourglass");
         this.addContainerType(AetherIIMenuTypes.ALTAR, "Altar");
         this.addContainerType(AetherIIMenuTypes.ARKENIUM_FORGE, "Arkenium Forge");
         this.addContainerType(AetherIIMenuTypes.ALKAHEST_PURIFIER, "Alkahest Purifier");

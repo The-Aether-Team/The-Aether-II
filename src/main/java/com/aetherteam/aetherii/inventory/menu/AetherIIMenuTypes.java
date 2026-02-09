@@ -19,6 +19,7 @@ public class AetherIIMenuTypes {
     public static final DeferredHolder<MenuType<?>, MenuType<SkyrootCraftingMenu>> SKYROOT_CRAFTING_TABLE = register("skyroot_crafting_table", SkyrootCraftingMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<HolystoneFurnaceMenu>> HOLYSTONE_FURNACE = register("holystone_furnace", HolystoneFurnaceMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<ArtisansBenchMenu>> ARTISANS_BENCH = register("artisans_bench", ArtisansBenchMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<AmberHourglassMenu>> AMBER_HOURGLASS = register("amber_hourglass", AmberHourglassMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<AltarMenu>> ALTAR = register("altar", AltarMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<ArkeniumForgeMenu>> ARKENIUM_FORGE = register("arkenium_forge", ArkeniumForgeMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<AlkahestPurifierMenu>> ALKAHEST_PURIFIER = register("alkahest_purifier", AlkahestPurifierMenu::new);
@@ -31,6 +32,7 @@ public class AetherIIMenuTypes {
         event.register(AetherIIMenuTypes.GUIDEBOOK.get(), GuidebookEquipmentScreen::new);
         event.register(AetherIIMenuTypes.SKYROOT_CRAFTING_TABLE.get(), SkyrootCraftingScreen::new);
         event.register(AetherIIMenuTypes.HOLYSTONE_FURNACE.get(), HolystoneFurnaceScreen::new);
+        event.register(AetherIIMenuTypes.AMBER_HOURGLASS.get(), AmberHourglassScreen::new);
         event.register(AetherIIMenuTypes.ALTAR.get(), AltarScreen::new);
         event.register(AetherIIMenuTypes.ARTISANS_BENCH.get(), ArtisansBenchScreen::new);
         event.register(AetherIIMenuTypes.ARKENIUM_FORGE.get(), ArkeniumForgeScreen::new);
