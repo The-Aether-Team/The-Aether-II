@@ -242,47 +242,73 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
     }
 
     private static boolean canProcess(RegistryAccess registryAccess, @Nullable RecipeHolder<HourglassRestoringRecipe> recipe, SingleRecipeInputWithRandom recipeInput, NonNullList<ItemStack> items, int maxStackSize) {
+        return canProcessResults(registryAccess, recipe, recipeInput, items, maxStackSize).contains(true);
+    }
+
+    private static NonNullList<Boolean> canProcessResults(RegistryAccess registryAccess, @Nullable RecipeHolder<HourglassRestoringRecipe> recipe, SingleRecipeInputWithRandom recipeInput, NonNullList<ItemStack> items, int maxStackSize) {
+        NonNullList<Boolean> checks = NonNullList.withSize(3, false);
+
         if (!items.get(0).isEmpty() && recipe != null) {
             List<ItemStack> results = recipe.value().assembleOutputs(recipeInput, registryAccess);
-            if (results.isEmpty()) {
-                return false;
-            } else {
-                boolean flag = false;
-                for (int i = 0; i < 3; i++) { //todo this could maybe be improved to be more lenient?
-                    int slot = i + 2;
-                    ItemStack output = items.get(slot);
-                    ItemStack result = results.get(i);
-                    if (!result.isEmpty()) {
-                        if (output.isEmpty()) {
-                            flag = true;
-                            break;
-                        } else if (ItemStack.isSameItemSameComponents(output, result)) {
-                            flag = output.getCount() + result.getCount() <= maxStackSize && output.getCount() + result.getCount() <= output.getMaxStackSize() || output.getCount() + result.getCount() <= result.getMaxStackSize();
-                            if (flag) {
-                                break;
+            if (!results.isEmpty()) {
+                for (int resultIndex = 0; resultIndex < 3; resultIndex++) {
+                    ItemStack result = results.get(resultIndex);
+
+                    for (int slotIndex = 2; slotIndex < 5; slotIndex++) {
+                        boolean flag = false;
+                        ItemStack outputSlot = items.get(slotIndex);
+
+                        if (!result.isEmpty()) {
+                            if (outputSlot.isEmpty()) {
+                                flag = true;
+                            } else if (ItemStack.isSameItemSameComponents(outputSlot, result)) {
+                                flag = outputSlot.getCount() + result.getCount() <= maxStackSize && outputSlot.getCount() + result.getCount() <= outputSlot.getMaxStackSize() || outputSlot.getCount() + result.getCount() <= result.getMaxStackSize();
                             }
+                        }
+                        if (flag) {
+                            checks.set(slotIndex - 2, true);
                         }
                     }
                 }
-                return flag;
             }
-        } else {
-            return false;
         }
+        return checks;
     }
 
     private static boolean process(RegistryAccess registryAccess, @Nullable RecipeHolder<HourglassRestoringRecipe> recipe, SingleRecipeInputWithRandom recipeInput, NonNullList<ItemStack> items, int maxStackSize) {
-        if (recipe != null && canProcess(registryAccess, recipe, recipeInput, items, maxStackSize)) {
+        NonNullList<Boolean> validSpots = canProcessResults(registryAccess, recipe, recipeInput, items, maxStackSize);
+
+        if (recipe != null && validSpots.contains(true)) {
             ItemStack input = items.get(0);
-            List<ItemStack> results = recipe.value().assembleOutputs(recipeInput, registryAccess);
-            for (int i = 0; i < 3; i++) {
-                int slot = i + 2;
-                ItemStack output = items.get(slot);
-                ItemStack result = results.get(i);
-                if (output.isEmpty()) {
-                    items.set(slot, result.copy());
-                } else if (ItemStack.isSameItemSameComponents(output, result)) {
-                    output.grow(result.getCount());
+            List<ItemStack> recipeResults = recipe.value().assembleOutputs(recipeInput, registryAccess);
+
+            for (int resultIndex = 0; resultIndex < 3; resultIndex++) {
+                ItemStack result = recipeResults.get(resultIndex);
+
+                if (!result.isEmpty()) {
+                    int finalIndex = -1;
+
+                    for (int checkIndex = 0; checkIndex < 3; checkIndex++) {
+                        if (validSpots.get(checkIndex)) {
+                            int slotIndex = checkIndex + 2;
+                            ItemStack outputSlot = items.get(slotIndex);
+
+                            if ((outputSlot.isEmpty() && finalIndex == -1) || (outputSlot.isEmpty() && checkIndex == resultIndex) || ItemStack.isSameItemSameComponents(outputSlot, result)) {
+                                finalIndex = slotIndex;
+                                if (ItemStack.isSameItemSameComponents(outputSlot, result)) {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (finalIndex != -1) {
+                        ItemStack output = items.get(finalIndex);
+                        if (output.isEmpty()) {
+                            items.set(finalIndex, result.copy());
+                        } else if (ItemStack.isSameItemSameComponents(output, result)) {
+                            output.grow(result.getCount());
+                        }
+                    }
                 }
             }
             input.shrink(1);
