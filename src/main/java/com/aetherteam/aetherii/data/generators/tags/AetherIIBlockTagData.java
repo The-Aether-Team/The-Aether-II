@@ -1151,6 +1151,25 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBRELINN_MOSS_CARPET.get()
         );
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(
+                AetherIIBlocks.ICESTONE.get(),
+                AetherIIBlocks.ICESTONE_STAIRS.get(),
+                AetherIIBlocks.ICESTONE_SLAB.get(),
+                AetherIIBlocks.ICESTONE_WALL.get(),
+                AetherIIBlocks.ICESTONE_BRICKS.get(),
+                AetherIIBlocks.ICESTONE_BRICK_STAIRS.get(),
+                AetherIIBlocks.ICESTONE_BRICK_SLAB.get(),
+                AetherIIBlocks.ICESTONE_BRICK_WALL.get(),
+                AetherIIBlocks.ICESTONE_FLAGSTONES.get(),
+                AetherIIBlocks.ICESTONE_KEYSTONE.get(),
+                AetherIIBlocks.ICESTONE_BASE_BRICKS.get(),
+                AetherIIBlocks.ICESTONE_CAPSTONE_BRICKS.get(),
+                AetherIIBlocks.ICESTONE_BASE_PILLAR.get(),
+                AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get(),
+                AetherIIBlocks.ICESTONE_PILLAR.get(),
+                AetherIIBlocks.ZANITE_ORE.get(),
+                AetherIIBlocks.ZANITE_BLOCK.get()
+        );
+        this.tag(BlockTags.NEEDS_IRON_TOOL).add(
                 AetherIIBlocks.UNDERSHALE.get(),
                 AetherIIBlocks.UNDERSHALE_STAIRS.get(),
                 AetherIIBlocks.UNDERSHALE_SLAB.get(),
@@ -1178,27 +1197,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SENTRY_BASE_PILLAR.get(),
                 AetherIIBlocks.SENTRY_CAPSTONE_PILLAR.get(),
                 AetherIIBlocks.SENTRY_PILLAR.get(),
-                AetherIIBlocks.ICESTONE.get(),
-                AetherIIBlocks.ICESTONE_STAIRS.get(),
-                AetherIIBlocks.ICESTONE_SLAB.get(),
-                AetherIIBlocks.ICESTONE_WALL.get(),
-                AetherIIBlocks.ICESTONE_BRICKS.get(),
-                AetherIIBlocks.ICESTONE_BRICK_STAIRS.get(),
-                AetherIIBlocks.ICESTONE_BRICK_SLAB.get(),
-                AetherIIBlocks.ICESTONE_BRICK_WALL.get(),
-                AetherIIBlocks.ICESTONE_FLAGSTONES.get(),
-                AetherIIBlocks.ICESTONE_KEYSTONE.get(),
-                AetherIIBlocks.ICESTONE_BASE_BRICKS.get(),
-                AetherIIBlocks.ICESTONE_CAPSTONE_BRICKS.get(),
-                AetherIIBlocks.ICESTONE_BASE_PILLAR.get(),
-                AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get(),
-                AetherIIBlocks.ICESTONE_PILLAR.get(),
-                AetherIIBlocks.ZANITE_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(),
-                AetherIIBlocks.ZANITE_BLOCK.get()
-        );
-        this.tag(BlockTags.NEEDS_IRON_TOOL).add(
                 AetherIIBlocks.GLINT_ORE.get(),
                 AetherIIBlocks.ARKENIUM_ORE.get(),
                 AetherIIBlocks.GRAVITITE_ORE.get(),

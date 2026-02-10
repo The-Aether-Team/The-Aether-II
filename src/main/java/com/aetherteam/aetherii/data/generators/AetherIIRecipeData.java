@@ -1128,11 +1128,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy(getHasName(AetherIIBlocks.AMBER_HOURGLASS.get()), has(AetherIITags.Items.PLANKS_CRAFTING))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ALTAR.get())
-                .define('H', AetherIITags.Items.STONE_CRAFTING)
+                .define('U', AetherIIBlocks.UNDERSHALE)
                 .define('Z', AetherIITags.Items.GEMS_ZANITE)
                 .pattern("ZZZ")
                 .pattern(" Z ")
-                .pattern("HHH")
+                .pattern("UUU")
                 .unlockedBy(getHasName(AetherIIBlocks.ALTAR.get()), has(AetherIITags.Items.GEMS_ZANITE))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ARTISANS_BENCH.get())
