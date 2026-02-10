@@ -44,7 +44,7 @@ public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
     }
 
     public static HourglassRestoringRecipeBuilder restoring(Ingredient ingredient, RecipeCategory category, HourglassRestoringRecipe.HourglassOutput results, float experience, int processingTime, boolean uncrafting) {
-        return new HourglassRestoringRecipeBuilder(category, uncrafting ? AmberHourglassBookCategory.UNCRAFTING : determineRecipeCategory(new ItemStack(ingredient.items().toList().getFirst().value()), results), results, ingredient, experience, processingTime);
+        return new HourglassRestoringRecipeBuilder(category, uncrafting ? AmberHourglassBookCategory.UNCRAFTING : determineRecipeCategory(new ItemStack(ingredient.items().toList().getFirst().value())), results, ingredient, experience, processingTime);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
         output.accept(id, recipe, builder.build(id.location().withPrefix("recipes/" + this.category.getFolderName() + "/")));
     }
 
-    private static AmberHourglassBookCategory determineRecipeCategory(ItemStack ingredient, HourglassRestoringRecipe.HourglassOutput results) { //todo determine based on results? how do we actually go about this in the recipe book.
+    private static AmberHourglassBookCategory determineRecipeCategory(ItemStack ingredient) {
         if (ingredient.getItem() instanceof BlockItem) {
             return AmberHourglassBookCategory.BLOCKS;
         } else {

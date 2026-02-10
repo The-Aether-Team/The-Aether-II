@@ -1,7 +1,10 @@
 package com.aetherteam.aetherii.recipe.recipes.item;
 
+import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
 import com.aetherteam.aetherii.recipe.book.AmberHourglassBookCategory;
+import com.aetherteam.aetherii.recipe.display.AmberHourglassRecipeDisplay;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.OutputEntry;
@@ -13,13 +16,16 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HourglassRestoringRecipe implements Recipe<SingleRecipeInputWithRandom> {
     private final String group;
@@ -101,10 +107,20 @@ public class HourglassRestoringRecipe implements Recipe<SingleRecipeInputWithRan
     }
 
     @Override
-    public List<RecipeDisplay> display() { //todo
-
-
-        return Recipe.super.display();
+    public List<RecipeDisplay> display() {
+        List<SlotDisplay> results1 = this.results().output1().list().stream().map(ItemStack::getItem).distinct().filter((item) -> item != Items.AIR).map((item) -> new SlotDisplay.ItemSlotDisplay(item.builtInRegistryHolder())).collect(Collectors.toUnmodifiableList());
+        List<SlotDisplay> results2 = this.results().output2().list().stream().map(ItemStack::getItem).distinct().filter((item) -> item != Items.AIR).map((item) -> new SlotDisplay.ItemSlotDisplay(item.builtInRegistryHolder())).collect(Collectors.toUnmodifiableList());
+        List<SlotDisplay> results3 = this.results().output3().list().stream().map(ItemStack::getItem).distinct().filter((item) -> item != Items.AIR).map((item) -> new SlotDisplay.ItemSlotDisplay(item.builtInRegistryHolder())).collect(Collectors.toUnmodifiableList());
+        return List.of(new AmberHourglassRecipeDisplay(
+                this.ingredient().display(),
+                new SlotDisplay.TagSlotDisplay(AetherIITags.Items.ALTAR_FUEL), //todo
+                new SlotDisplay.Composite(results1),
+                new SlotDisplay.Composite(results2),
+                new SlotDisplay.Composite(results3),
+                new SlotDisplay.ItemSlotDisplay(AetherIIBlocks.AMBER_HOURGLASS.asItem()),
+                this.processingTime,
+                this.experience
+        ));
     }
 
     @Override
