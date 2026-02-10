@@ -837,6 +837,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GRAVITITE_PLATE.get());
                 output.accept(AetherIIItems.GLINT_GEMSTONE.get());
                 output.accept(AetherIIItems.CORROBONITE_CRYSTAL.get());
+                output.accept(AetherIIItems.NEPTUNE_SCALE.get());
+                output.accept(AetherIIItems.SENTRY_SERVO.get());
                 output.accept(AetherIIItems.SKYROOT_STICK.get());
                 output.accept(AetherIIItems.SCATTERGLASS_SHARD.get());
                 output.accept(AetherIIItems.ARCTIC_SNOWBALL.get());

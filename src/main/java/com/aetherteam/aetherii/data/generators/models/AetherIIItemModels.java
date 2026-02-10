@@ -165,6 +165,8 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.GRAVITITE_PLATE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.FOSSILIZED_CORROBONITE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.CORROBONITE_CRYSTAL.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.NEPTUNE_SCALE.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.SENTRY_SERVO.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.FOSSILIZED_GLINT.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GLINT_GEMSTONE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GOLDEN_AMBER.get(), ModelTemplates.FLAT_ITEM);
