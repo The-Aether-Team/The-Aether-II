@@ -1,9 +1,9 @@
 package com.aetherteam.aetherii.recipe.recipes.item;
 
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
 import com.aetherteam.aetherii.recipe.book.AmberHourglassBookCategory;
+import com.aetherteam.aetherii.recipe.display.slot.AmberFuel;
 import com.aetherteam.aetherii.recipe.display.AmberHourglassRecipeDisplay;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
@@ -113,7 +113,7 @@ public class HourglassRestoringRecipe implements Recipe<SingleRecipeInputWithRan
         List<SlotDisplay> results3 = this.results().output3().list().stream().map(ItemStack::getItem).distinct().filter((item) -> item != Items.AIR).map((item) -> new SlotDisplay.ItemSlotDisplay(item.builtInRegistryHolder())).collect(Collectors.toUnmodifiableList());
         return List.of(new AmberHourglassRecipeDisplay(
                 this.ingredient().display(),
-                new SlotDisplay.TagSlotDisplay(AetherIITags.Items.ALTAR_FUEL), //todo
+                AmberFuel.INSTANCE,
                 new SlotDisplay.Composite(results1),
                 new SlotDisplay.Composite(results2),
                 new SlotDisplay.Composite(results3),

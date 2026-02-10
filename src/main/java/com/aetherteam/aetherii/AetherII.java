@@ -3,6 +3,7 @@ package com.aetherteam.aetherii;
 import com.aetherteam.aetherii.advancement.AetherIIAdvancementSoundOverrides;
 import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.command.AetherIICommands;
+import com.aetherteam.aetherii.recipe.display.slot.AetherIISlotDisplays;
 import org.slf4j.Logger;
 
 import com.aetherteam.aetherii.advancement.predicate.AetherIIEntitySubPredicates;
@@ -118,6 +119,7 @@ public class AetherII {
                 AetherIIRecipeTypes.RECIPE_TYPES,
                 AetherIIRecipeSerializers.RECIPE_SERIALIZERS,
                 AetherIIRecipeDisplays.RECIPE_DISPLAYS,
+                AetherIISlotDisplays.SLOT_DISPLAYS,
                 AetherIIRecipeBookCategories.RECIPE_BOOK_CATEGORIES,
                 AetherIIGameEvents.GAME_EVENTS,
                 AetherIIPoi.POI,
