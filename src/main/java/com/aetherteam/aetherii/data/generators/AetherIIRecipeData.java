@@ -1390,6 +1390,72 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.makeBootsWithTag(getter, AetherIIItems.GRAVITITE_BOOTS, AetherIITags.Items.PLATES_GRAVITITE, "gravitite").save(this.output);
         this.makeGlovesWithTag(getter, AetherIIItems.GRAVITITE_GLOVES, AetherIITags.Items.PLATES_GRAVITITE, "gravitite").save(this.output);
 
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.NEPTUNE_HELMET, 1)
+                .define('N', AetherIIItems.NEPTUNE_SCALE)
+                .define('#', AetherIIItems.ZANITE_HELMET)
+                .pattern("NNN")
+                .pattern("N#N")
+                .pattern("NNN")
+                .unlockedBy("neptune", has(AetherIIItems.NEPTUNE_SCALE))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.NEPTUNE_CHESTPLATE, 1)
+                .define('N', AetherIIItems.NEPTUNE_SCALE)
+                .define('#', AetherIIItems.ZANITE_CHESTPLATE)
+                .pattern("NNN")
+                .pattern("N#N")
+                .pattern("NNN")
+                .unlockedBy("neptune", has(AetherIIItems.NEPTUNE_SCALE))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.NEPTUNE_LEGGINGS, 1)
+                .define('N', AetherIIItems.NEPTUNE_SCALE)
+                .define('#', AetherIIItems.ZANITE_LEGGINGS)
+                .pattern("NNN")
+                .pattern("N#N")
+                .pattern("NNN")
+                .unlockedBy("neptune", has(AetherIIItems.NEPTUNE_SCALE))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.NEPTUNE_BOOTS, 1)
+                .define('N', AetherIIItems.NEPTUNE_SCALE)
+                .define('#', AetherIIItems.ZANITE_BOOTS)
+                .pattern("NNN")
+                .pattern("N#N")
+                .pattern("NNN")
+                .unlockedBy("neptune", has(AetherIIItems.NEPTUNE_SCALE))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.NEPTUNE_GLOVES, 1)
+                .define('N', AetherIIItems.NEPTUNE_SCALE)
+                .define('#', AetherIIItems.ZANITE_GLOVES)
+                .pattern("NNN")
+                .pattern("N#N")
+                .pattern("NNN")
+                .unlockedBy("neptune", has(AetherIIItems.NEPTUNE_SCALE))
+                .save(this.output);
+
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.SENTRY_BOOTS, 1)
+                .define('S', AetherIIItems.SENTRY_SERVO)
+                .define('#', AetherIIItems.ZANITE_BOOTS)
+                .pattern("SSS")
+                .pattern("S#S")
+                .pattern("SSS")
+                .unlockedBy("sentry", has(AetherIIItems.SENTRY_SERVO))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.HAMMER_OF_DEMOLITION, 1)
+                .define('S', AetherIIItems.SENTRY_SERVO)
+                .define('#', AetherIIItems.ZANITE_HAMMER)
+                .pattern("SSS")
+                .pattern("S#S")
+                .pattern("SSS")
+                .unlockedBy("sentry", has(AetherIIItems.SENTRY_SERVO))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.KINETIC_THRUSTERS, 1)
+                .define('S', AetherIIItems.SENTRY_SERVO)
+                .define('#', AetherIIItems.ZANITE_GEMSTONE)
+                .pattern("SSS")
+                .pattern("S#S")
+                .pattern("SSS")
+                .unlockedBy("sentry", has(AetherIIItems.SENTRY_SERVO))
+                .save(this.output);
+
         // Accessories
         this.makePendantWithTag(getter, AetherIIItems.ZANITE_PENDANT, AetherIITags.Items.GEMS_ZANITE, Ingredient.of(AetherIIItems.CLOUDTWINE), "zanite").save(this.output);
 
