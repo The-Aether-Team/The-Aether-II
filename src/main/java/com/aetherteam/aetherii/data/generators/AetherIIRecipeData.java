@@ -1542,6 +1542,21 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .build()
         ), AetherIIBlocks.CORROBONITE_ORE, 0.0F).group("corrobonite").save(this.output, this.name("restore_corrobonite_crystal_from_ore"));
 
+
+        this.hourglassUncrafting(RecipeCategory.MISC,
+                new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
+                        .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.SKYROOT_STICK.get(), 1)), 75)
+                        .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.SKYROOT_STICK.get(), 2)), 25)
+                        .build()),
+                new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
+                        .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIBlocks.SKYROOT_PLANKS.get(), 1)), 75)
+                        .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIBlocks.SKYROOT_PLANKS.get(), 2)), 15)
+                        .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIBlocks.SKYROOT_PLANKS.get(), 3)), 5)
+                        .build()),
+                new OutputEntry.ItemEntry(ItemStack.EMPTY),
+                AetherIIItems.SKYROOT_PICKAXE, 0.0F).save(this.output, this.name("uncraft_skyroot_pickaxe"));
+
+
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, AetherIIItems.INERT_ARKENIUM, 3, 0.0F).group("arkenium").save(this.output);
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, AetherIIBlocks.ARKENIUM_ORE, 3, 0.0F).group("arkenium").save(this.output, this.name("arkenium_plates_from_arkenium_ore"));
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE, 3, 0.0F).group("arkenium").save(this.output, this.name("arkenium_plates_from_undershale_arkenium_ore"));
