@@ -1613,7 +1613,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("bestiary", "Fill out the entire bestiary");
         this.addAdvancementDesc("ambrosium", "Obtain an Ambrosium Shard");
         this.addAdvancementDesc("enchanted_aether_grass", "Enchant an Aether Grass Block with an Ambrosium Shard to speed up plant growth above it");
-        this.addAdvancementDesc("zanite", "Obtain a Zanite Gemstone");
+        this.addAdvancementDesc("zanite", "Restore Fossilized Zanite into a Zanite Gemstone using the Amber Hourglass");
         this.addAdvancementDesc("craft_altar", "Craft an Altar");
         this.addAdvancementDesc("gravitite_plate", "Enchant Inert Gravitite into a Gravitite Plate using the Altar");
         this.addAdvancementDesc("gravitite_armor", "Wear 3 pieces of Gravitite Armor to activate its set ability");
