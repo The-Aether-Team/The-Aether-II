@@ -76,6 +76,11 @@ public class Shroudwing extends Insect {
         }
     }
 
+    @Override
+    public void stopRest() {
+        super.stopRest();
+    }
+
     //using to adjust fly animation
     public boolean isFullyFlying() {
         return this.fullyFlyTick <= 0 && !this.isRest();
@@ -102,8 +107,6 @@ public class Shroudwing extends Insect {
         } else {
             if (!this.isRest() && !this.isFullyFlying()) {
                 this.fullyFlyTick--;
-            } else {
-                this.fullyFlyTick = 0;
             }
         }
     }
