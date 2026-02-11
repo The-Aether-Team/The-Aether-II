@@ -29,7 +29,6 @@ public record HourglassProcessParticlesPacket(BlockPos pos) implements CustomPac
     public static void execute(HourglassProcessParticlesPacket payload, IPayloadContext context) {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             RandomSource random = Minecraft.getInstance().level.getRandom();
-
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 Vec3 vec3 = Vec3.atCenterOf(payload.pos());
                 double x = vec3.x + (direction.getStepX() == 0 ? Mth.nextDouble(random, -0.25F, 0.25F) : direction.getStepX() * 0.25);
