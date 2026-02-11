@@ -83,6 +83,7 @@ public class AetherIIParticleFactories {
             particle.setColor(0.65F, 0.9F, 0.6F);
             return particle;
         });
+        event.registerSpriteSet(AetherIIParticleTypes.GRAVITY_DUST.get(), GravityDustParticle.Provider::new);
 
         event.registerSpriteSet(AetherIIParticleTypes.RAIN.get(), spriteSet -> (particle, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
             WaterDropParticle rainParticle = new WaterDropParticle(level, x, y, z) {

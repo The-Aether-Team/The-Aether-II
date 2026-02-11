@@ -6,6 +6,9 @@ import com.aetherteam.aetherii.block.utility.AmberHourglassBlock;
 import com.aetherteam.aetherii.data.resources.maps.AmberHourglassFuel;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.inventory.menu.AmberHourglassMenu;
+import com.aetherteam.aetherii.network.packet.clientbound.AltarParticlesPacket;
+import com.aetherteam.aetherii.network.packet.clientbound.HourglassFinishParticlesPacket;
+import com.aetherteam.aetherii.network.packet.clientbound.HourglassProcessParticlesPacket;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.item.HourglassRestoringRecipe;
@@ -45,6 +48,7 @@ import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -213,11 +217,15 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
 
             if (blockEntity.isPowered() && canProcess(level.registryAccess(), recipe, input, blockEntity.items, i)) {
                 blockEntity.processingProgress++;
+                if (blockEntity.processingProgress % 2 == 0) {
+                    PacketDistributor.sendToAllPlayers(new HourglassProcessParticlesPacket(pos));
+                }
                 if (blockEntity.processingProgress == blockEntity.processingTotalTime) {
                     blockEntity.processingProgress = 0;
                     blockEntity.processingTotalTime = getTotalProcessingTime(level, blockEntity);
                     if (process(level.registryAccess(), recipe, input, blockEntity.items, i)) {
                         blockEntity.setRecipeUsed(recipe);
+                        PacketDistributor.sendToAllPlayers(new HourglassFinishParticlesPacket(pos));
                     }
 
                     changed = true;
