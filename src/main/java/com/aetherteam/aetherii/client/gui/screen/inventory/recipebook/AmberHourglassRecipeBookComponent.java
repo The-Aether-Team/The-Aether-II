@@ -48,7 +48,10 @@ public class AmberHourglassRecipeBookComponent extends RecipeBookComponent<Amber
     protected void fillGhostRecipe(GhostSlots ghostSlots, RecipeDisplay recipeDisplay, ContextMap contextMap) {
         if (recipeDisplay instanceof AmberHourglassRecipeDisplay amberHourglassRecipeDisplay) {
             ghostSlots.setInput(this.menu.getSlot(0), contextMap, amberHourglassRecipeDisplay.ingredient());
-            ghostSlots.setInput(this.menu.getSlot(1), contextMap, amberHourglassRecipeDisplay.fuel());
+            Slot slot = this.menu.getSlot(1);
+            if (slot.getItem().isEmpty()) {
+                ghostSlots.setInput(slot, contextMap, amberHourglassRecipeDisplay.fuel());
+            }
             ghostSlots.setResult(this.menu.getSlot(2), contextMap, amberHourglassRecipeDisplay.result1());
             ghostSlots.setResult(this.menu.getSlot(3), contextMap, amberHourglassRecipeDisplay.result2());
             ghostSlots.setResult(this.menu.getSlot(4), contextMap, amberHourglassRecipeDisplay.result3());
