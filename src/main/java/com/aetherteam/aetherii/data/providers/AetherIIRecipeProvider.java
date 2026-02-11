@@ -13,7 +13,6 @@ import com.aetherteam.aetherii.recipe.builder.BiomeParameterRecipeBuilder;
 import com.aetherteam.aetherii.recipe.builder.HourglassRestoringRecipeBuilder;
 import com.aetherteam.aetherii.recipe.recipes.OutputEntry;
 import com.aetherteam.aetherii.recipe.recipes.block.*;
-import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
 import com.aetherteam.aetherii.recipe.recipes.item.HourglassRestoringRecipe;
 import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
 import com.aetherteam.nitrogen.recipe.BlockPropertyPair;
@@ -22,7 +21,6 @@ import com.aetherteam.nitrogen.recipe.builder.BlockStateRecipeBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -300,12 +298,36 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 600).unlockedBy("has_item", has(material.get())).save(consumer, this.name("campfire_cooking_" + getHasName(result.get())));
     }
 
-    protected HourglassRestoringRecipeBuilder hourglassRestoring(RecipeCategory category, OutputEntry.BaseEntry result, ItemLike ingredient, float experience) {
-        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.ItemEntry(ItemStack.EMPTY), result, new OutputEntry.ItemEntry(ItemStack.EMPTY)), experience, 200, false).unlockedBy("has_item", has(ingredient));
+    protected HourglassItemEntry hourglass(ItemLike item, int count, int weight) {
+        return new HourglassItemEntry(item, count, weight);
     }
 
-    protected HourglassRestoringRecipeBuilder hourglassUncrafting(RecipeCategory category, OutputEntry.BaseEntry result1, OutputEntry.BaseEntry result2, OutputEntry.BaseEntry result3, ItemLike ingredient, float experience) {
-        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, new HourglassRestoringRecipe.HourglassOutput(result1, result2, result3), experience, 200, true).unlockedBy("has_item", has(ingredient));
+    protected HourglassDataEntry hourglass(int count, int weight) {
+        return new HourglassDataEntry(count, weight);
+    }
+
+    protected HourglassRestoringRecipeBuilder hourglassRestoring(RecipeCategory category, ItemLike resultItem, List<HourglassDataEntry> resultInfo, ItemLike ingredient, float experience) {
+        WeightedList.Builder<OutputEntry.BaseEntry> builder = WeightedList.builder();
+        for (HourglassDataEntry entry : resultInfo) {
+            builder.add(new OutputEntry.ItemEntry(new ItemStack(resultItem, entry.count())), entry.weight());
+        }
+        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.ItemEntry(ItemStack.EMPTY), new OutputEntry.ListEntry(builder.build()), new OutputEntry.ItemEntry(ItemStack.EMPTY)), experience, 200, false).unlockedBy("has_item", has(ingredient));
+    }
+
+    protected HourglassRestoringRecipeBuilder hourglassUncrafting(RecipeCategory category, ItemLike resultItem1, List<HourglassDataEntry> resultInfo1, ItemLike resultItem2, List<HourglassDataEntry> resultInfo2, ItemLike resultItem3, List<HourglassDataEntry> resultInfo3, ItemLike ingredient, float experience) {
+        WeightedList.Builder<OutputEntry.BaseEntry> builder1 = WeightedList.builder();
+        for (HourglassDataEntry entry : resultInfo1) {
+            builder1.add(new OutputEntry.ItemEntry(new ItemStack(resultItem1, entry.count())), entry.weight());
+        }
+        WeightedList.Builder<OutputEntry.BaseEntry> builder2 = WeightedList.builder();
+        for (HourglassDataEntry entry : resultInfo2) {
+            builder2.add(new OutputEntry.ItemEntry(new ItemStack(resultItem2, entry.count())), entry.weight());
+        }
+        WeightedList.Builder<OutputEntry.BaseEntry> builder3 = WeightedList.builder();
+        for (HourglassDataEntry entry : resultInfo3) {
+            builder3.add(new OutputEntry.ItemEntry(new ItemStack(resultItem3, entry.count())), entry.weight());
+        }
+        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.ListEntry(builder1.build()), new OutputEntry.ListEntry(builder2.build()), new OutputEntry.ListEntry(builder3.build())), experience, 200, true).unlockedBy("has_item", has(ingredient));
     }
 
     protected AltarEnchantingRecipeBuilder altarEnchanting(RecipeCategory category, ItemLike result, ItemLike ingredient, int fuelCount, float experience) {
@@ -367,4 +389,8 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         }
         return new OutputEntry.ListEntry(builder.build());
     }
+
+    public record HourglassItemEntry(ItemLike item, int count, int weight) { }
+
+    public record HourglassDataEntry(int count, int weight) { }
 }

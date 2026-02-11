@@ -1,6 +1,6 @@
 {
   "type": "aether_ii:hourglass_restoring",
-  "category": "items",
+  "category": "restoration",
   "experience": 0.0,
   "group": "glint",
   "ingredient": "aether_ii:fossilized_glint",

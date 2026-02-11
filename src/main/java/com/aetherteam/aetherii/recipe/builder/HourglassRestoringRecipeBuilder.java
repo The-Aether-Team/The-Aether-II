@@ -11,9 +11,7 @@ import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -44,7 +42,7 @@ public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
     }
 
     public static HourglassRestoringRecipeBuilder restoring(Ingredient ingredient, RecipeCategory category, HourglassRestoringRecipe.HourglassOutput results, float experience, int processingTime, boolean uncrafting) {
-        return new HourglassRestoringRecipeBuilder(category, uncrafting ? AmberHourglassBookCategory.UNCRAFTING : determineRecipeCategory(new ItemStack(ingredient.items().toList().getFirst().value())), results, ingredient, experience, processingTime);
+        return new HourglassRestoringRecipeBuilder(category, uncrafting ? AmberHourglassBookCategory.UNCRAFTING : AmberHourglassBookCategory.RESTORATION, results, ingredient, experience, processingTime);
     }
 
     @Override
@@ -76,14 +74,6 @@ public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
         this.criteria.forEach(builder::addCriterion);
         HourglassRestoringRecipe recipe = new HourglassRestoringRecipe(Objects.requireNonNullElse(this.group, ""), this.bookCategory, this.ingredient, this.results, this.experience, this.processingTime);
         output.accept(id, recipe, builder.build(id.location().withPrefix("recipes/" + this.category.getFolderName() + "/")));
-    }
-
-    private static AmberHourglassBookCategory determineRecipeCategory(ItemStack ingredient) {
-        if (ingredient.getItem() instanceof BlockItem) {
-            return AmberHourglassBookCategory.BLOCKS;
-        } else {
-            return AmberHourglassBookCategory.ITEMS;
-        }
     }
 
     private void ensureValid(ResourceKey<Recipe<?>> id) {

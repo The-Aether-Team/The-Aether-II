@@ -66,8 +66,8 @@
       ]
     },
     "output_3": {
-      "type": "item",
-      "value": {}
+      "type": "list",
+      "value": []
     }
   }
 }

@@ -126,8 +126,7 @@ public class HourglassRestoringRecipe implements Recipe<SingleRecipeInputWithRan
     @Override
     public RecipeBookCategory recipeBookCategory() {
         return switch (this.category()) {
-            case ITEMS -> AetherIIRecipeBookCategories.AMBER_HOURGLASS_ITEMS.get();
-            case BLOCKS -> AetherIIRecipeBookCategories.AMBER_HOURGLASS_BLOCKS.get();
+            case RESTORATION -> AetherIIRecipeBookCategories.AMBER_HOURGLASS_RESTORATION.get();
             case UNCRAFTING -> AetherIIRecipeBookCategories.AMBER_HOURGLASS_UNCRAFTING.get();
         };
     }
@@ -139,7 +138,7 @@ public class HourglassRestoringRecipe implements Recipe<SingleRecipeInputWithRan
         public Serializer() {
             this.codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
                     Codec.STRING.optionalFieldOf("group", "").forGetter(HourglassRestoringRecipe::group),
-                    AmberHourglassBookCategory.CODEC.fieldOf("category").orElse(AmberHourglassBookCategory.ITEMS).forGetter(HourglassRestoringRecipe::category),
+                    AmberHourglassBookCategory.CODEC.fieldOf("category").orElse(AmberHourglassBookCategory.RESTORATION).forGetter(HourglassRestoringRecipe::category),
                     Ingredient.CODEC.fieldOf("ingredient").forGetter(HourglassRestoringRecipe::ingredient),
                     HourglassOutput.CODEC.fieldOf("results").forGetter(HourglassRestoringRecipe::results),
                     Codec.FLOAT.fieldOf("experience").orElse(0.0F).forGetter(HourglassRestoringRecipe::experience),

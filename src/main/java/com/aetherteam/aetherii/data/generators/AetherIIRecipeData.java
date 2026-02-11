@@ -9,7 +9,6 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.recipe.recipes.OutputEntry;
-import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
@@ -1557,69 +1556,38 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.smeltingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(), 0.1F).group("ambrosium").save(this.output, this.name("ambrosium_shard_from_smelting_undershale_ambrosium_ore"));
         this.blastingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(), 0.1F).group("ambrosium").save(this.output, this.name("ambrosium_shard_from_blasting_undershale_ambrosium_ore"));
 
-        this.hourglassRestoring(RecipeCategory.MISC, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.ZANITE_GEMSTONE.get(), 1)), 85)
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.ZANITE_GEMSTONE.get(), 2)), 10)
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.ZANITE_GEMSTONE.get(), 3)), 5)
-                .build()
-        ), AetherIIItems.FOSSILIZED_ZANITE, 0.0F).group("zanite").save(this.output, this.name("restore_zanite_gemstone"));
-        this.hourglassRestoring(RecipeCategory.MISC, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.ZANITE_GEMSTONE.get(), 1)), 85)
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.ZANITE_GEMSTONE.get(), 2)), 10)
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.ZANITE_GEMSTONE.get(), 3)), 5)
-                .build()
-        ), AetherIIBlocks.ZANITE_ORE, 0.0F).group("zanite").save(this.output, this.name("restore_zanite_gemstone_from_ore"));
-        this.hourglassRestoring(RecipeCategory.MISC, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.ZANITE_GEMSTONE.get(), 1)), 85)
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.ZANITE_GEMSTONE.get(), 2)), 10)
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.ZANITE_GEMSTONE.get(), 3)), 5)
-                .build()
-        ), AetherIIBlocks.UNDERSHALE_ZANITE_ORE, 0.0F).group("zanite").save(this.output, this.name("restore_zanite_gemstone_from_undershale_ore"));
+        this.hourglassRestoring(RecipeCategory.MISC,
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 85), this.hourglass(2, 10), this.hourglass(3, 5)),
+                AetherIIItems.FOSSILIZED_ZANITE, 0.0F).group("zanite").save(this.output, this.name("restore_zanite_gemstone"));
+        this.hourglassRestoring(RecipeCategory.MISC,
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 85), this.hourglass(2, 10), this.hourglass(3, 5)),
+                AetherIIBlocks.ZANITE_ORE, 0.0F).group("zanite").save(this.output, this.name("restore_zanite_gemstone_from_ore"));
+        this.hourglassRestoring(RecipeCategory.MISC,
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 85), this.hourglass(2, 10), this.hourglass(3, 5)),
+                AetherIIBlocks.UNDERSHALE_ZANITE_ORE, 0.0F).group("zanite").save(this.output, this.name("restore_zanite_gemstone_from_undershale_ore"));
 
-        this.hourglassRestoring(RecipeCategory.MISC, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.GLINT_GEMSTONE.get(), 1)), 85)
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.GLINT_GEMSTONE.get(), 2)), 10)
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.GLINT_GEMSTONE.get(), 3)), 5)
-                .build()
-        ), AetherIIItems.FOSSILIZED_GLINT, 0.0F).group("glint").save(this.output, this.name("restore_glint_gemstone"));
-        this.hourglassRestoring(RecipeCategory.MISC, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.GLINT_GEMSTONE.get(), 1)), 85)
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.GLINT_GEMSTONE.get(), 2)), 10)
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.GLINT_GEMSTONE.get(), 3)), 5)
-                .build()
-        ), AetherIIBlocks.GLINT_ORE, 0.0F).group("glint").save(this.output, this.name("restore_glint_gemstone_from_ore"));
-        this.hourglassRestoring(RecipeCategory.MISC, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.GLINT_GEMSTONE.get(), 1)), 85)
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.GLINT_GEMSTONE.get(), 2)), 10)
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.GLINT_GEMSTONE.get(), 3)), 5)
-                .build()
-        ), AetherIIBlocks.UNDERSHALE_GLINT_ORE, 0.0F).group("glint").save(this.output, this.name("restore_glint_gemstone_from_undershale_ore"));
+        this.hourglassRestoring(RecipeCategory.MISC,
+                AetherIIItems.GLINT_GEMSTONE, List.of(this.hourglass(1, 85), this.hourglass(2, 10), this.hourglass(3, 5)),
+                AetherIIItems.FOSSILIZED_GLINT, 0.0F).group("glint").save(this.output, this.name("restore_glint_gemstone"));
+        this.hourglassRestoring(RecipeCategory.MISC,
+                AetherIIItems.GLINT_GEMSTONE, List.of(this.hourglass(1, 85), this.hourglass(2, 10), this.hourglass(3, 5)),
+                AetherIIBlocks.GLINT_ORE, 0.0F).group("glint").save(this.output, this.name("restore_glint_gemstone_from_ore"));
+        this.hourglassRestoring(RecipeCategory.MISC,
+                AetherIIItems.GLINT_GEMSTONE, List.of(this.hourglass(1, 85), this.hourglass(2, 10), this.hourglass(3, 5)),
+                AetherIIBlocks.UNDERSHALE_GLINT_ORE, 0.0F).group("glint").save(this.output, this.name("restore_glint_gemstone_from_undershale_ore"));
 
-        this.hourglassRestoring(RecipeCategory.MISC, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.CORROBONITE_CRYSTAL.get(), 1)), 85)
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.CORROBONITE_CRYSTAL.get(), 2)), 10)
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.CORROBONITE_CRYSTAL.get(), 3)), 5)
-                .build()
-        ), AetherIIItems.FOSSILIZED_CORROBONITE, 0.0F).group("corrobonite").save(this.output, this.name("restore_corrobonite_crystal"));
-        this.hourglassRestoring(RecipeCategory.MISC, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.CORROBONITE_CRYSTAL.get(), 1)), 85)
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.CORROBONITE_CRYSTAL.get(), 2)), 10)
-                .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.CORROBONITE_CRYSTAL.get(), 3)), 5)
-                .build()
-        ), AetherIIBlocks.CORROBONITE_ORE, 0.0F).group("corrobonite").save(this.output, this.name("restore_corrobonite_crystal_from_ore"));
+        this.hourglassRestoring(RecipeCategory.MISC,
+                AetherIIItems.CORROBONITE_CRYSTAL, List.of(this.hourglass(1, 85), this.hourglass(2, 10), this.hourglass(3, 5)),
+                AetherIIItems.FOSSILIZED_CORROBONITE, 0.0F).group("corrobonite").save(this.output, this.name("restore_corrobonite_crystal"));
+        this.hourglassRestoring(RecipeCategory.MISC,
+                AetherIIItems.CORROBONITE_CRYSTAL, List.of(this.hourglass(1, 85), this.hourglass(2, 10), this.hourglass(3, 5)),
+                AetherIIBlocks.CORROBONITE_ORE, 0.0F).group("corrobonite").save(this.output, this.name("restore_corrobonite_crystal_from_ore"));
 
 
         this.hourglassUncrafting(RecipeCategory.MISC,
-                new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                        .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.SKYROOT_STICK.get(), 1)), 75)
-                        .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIItems.SKYROOT_STICK.get(), 2)), 25)
-                        .build()),
-                new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                        .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIBlocks.SKYROOT_PLANKS.get(), 1)), 75)
-                        .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIBlocks.SKYROOT_PLANKS.get(), 2)), 15)
-                        .add(new OutputEntry.ItemEntry(new ItemStack(AetherIIBlocks.SKYROOT_PLANKS.get(), 3)), 5)
-                        .build()),
-                new OutputEntry.ItemEntry(ItemStack.EMPTY),
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 75), this.hourglass(2, 15), this.hourglass(3, 5)),
+                Items.AIR, List.of(),
                 AetherIIItems.SKYROOT_PICKAXE, 0.0F).save(this.output, this.name("uncraft_skyroot_pickaxe"));
 
 
