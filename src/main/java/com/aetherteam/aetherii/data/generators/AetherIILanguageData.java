@@ -1580,6 +1580,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("bestiary", "The Beast");
         this.addAdvancement("ambrosium", "Enlightenment");
         this.addAdvancement("enchanted_aether_grass", "Golden Thumb");
+        this.addAdvancement("golden_amber", "Prehistoric");
+        this.addAdvancement("amber_hourglass", "Time Warp");
         this.addAdvancement("zanite", "Exotic Hardware");
         this.addAdvancement("craft_altar", "Do You Believe in Magic?");
         this.addAdvancement("gravitite_plate", "Pink is the New Blue");
@@ -1617,6 +1619,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("bestiary", "Fill out the entire bestiary");
         this.addAdvancementDesc("ambrosium", "Obtain an Ambrosium Shard");
         this.addAdvancementDesc("enchanted_aether_grass", "Enchant an Aether Grass Block with an Ambrosium Shard to speed up plant growth above it");
+        this.addAdvancementDesc("golden_amber", "Harvest Golden Amber from an Amberoot tree using the proper tool");
+        this.addAdvancementDesc("amber_hourglass", "Craft an Amber Hourglass");
         this.addAdvancementDesc("zanite", "Restore Fossilized Zanite into a Zanite Gemstone using the Amber Hourglass");
         this.addAdvancementDesc("craft_altar", "Craft an Altar");
         this.addAdvancementDesc("gravitite_plate", "Enchant Inert Gravitite into a Gravitite Plate using the Altar");

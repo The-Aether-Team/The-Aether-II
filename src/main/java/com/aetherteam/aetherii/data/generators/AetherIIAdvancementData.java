@@ -100,8 +100,28 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             ItemPredicate.Builder.item().of(items, AetherIIItems.AMBROSIUM_SHARD.get())))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "enchanted_aether_grass"));
 
-            AdvancementHolder zanite = Advancement.Builder.advancement()
+            AdvancementHolder goldenAmber = Advancement.Builder.advancement()
                     .parent(ambrosium)
+                    .display(AetherIIItems.GOLDEN_AMBER.get(),
+                            Component.translatable("advancement.aether_ii.golden_amber"),
+                            Component.translatable("advancement.aether_ii.golden_amber.desc").withStyle(ChatFormatting.AQUA),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("golden_amber", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.GOLDEN_AMBER.get()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "golden_amber"));
+
+            AdvancementHolder amberHourglass = Advancement.Builder.advancement()
+                    .parent(goldenAmber)
+                    .display(AetherIIBlocks.AMBER_HOURGLASS.get(),
+                            Component.translatable("advancement.aether_ii.amber_hourglass"),
+                            Component.translatable("advancement.aether_ii.amber_hourglass.desc").withStyle(ChatFormatting.AQUA),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("amber_hourglass", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.AMBER_HOURGLASS.get()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "amber_hourglass"));
+
+            AdvancementHolder zanite = Advancement.Builder.advancement()
+                    .parent(amberHourglass)
                     .display(AetherIIItems.ZANITE_GEMSTONE.get(),
                             Component.translatable("advancement.aether_ii.zanite"),
                             Component.translatable("advancement.aether_ii.zanite.desc").withStyle(ChatFormatting.AQUA),
@@ -360,7 +380,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "irradiated_item"));
 
             AdvancementHolder dartShooter = Advancement.Builder.advancement()
-                    .parent(zanite)
+                    .parent(goldenAmber)
                     .display(AetherIIItems.DART_SHOOTER.get(),
                             Component.translatable("advancement.aether_ii.dart_shooter"),
                             Component.translatable("advancement.aether_ii.dart_shooter.desc").withStyle(ChatFormatting.AQUA),

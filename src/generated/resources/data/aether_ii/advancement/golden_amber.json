@@ -1,11 +1,11 @@
 {
-  "parent": "aether_ii:amber_hourglass",
+  "parent": "aether_ii:ambrosium",
   "criteria": {
-    "zanite": {
+    "golden_amber": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:zanite_gemstone"
+            "items": "aether_ii:golden_amber"
           }
         ]
       },
@@ -15,19 +15,19 @@
   "display": {
     "description": {
       "color": "aqua",
-      "translate": "advancement.aether_ii.zanite.desc"
+      "translate": "advancement.aether_ii.golden_amber.desc"
     },
     "icon": {
       "count": 1,
-      "id": "aether_ii:zanite_gemstone"
+      "id": "aether_ii:golden_amber"
     },
     "title": {
-      "translate": "advancement.aether_ii.zanite"
+      "translate": "advancement.aether_ii.golden_amber"
     }
   },
   "requirements": [
     [
-      "zanite"
+      "golden_amber"
     ]
   ],
   "sends_telemetry_event": true
