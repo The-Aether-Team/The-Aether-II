@@ -1,6 +1,6 @@
 {
   "carvers": "aether_ii:highlands_cave",
-  "creature_spawn_probability": 0.23,
+  "creature_spawn_probability": 0.22,
   "downfall": 0.8,
   "effects": {
     "fog_color": 15593205,
@@ -120,8 +120,8 @@
       "energy_budget": 0.12
     },
     "aether_ii:tempest": {
-      "charge": 0.9,
-      "energy_budget": 0.11
+      "charge": 0.7,
+      "energy_budget": 0.12
     },
     "aether_ii:zephyr": {
       "charge": 0.6,
@@ -212,20 +212,20 @@
     "creature": [
       {
         "type": "aether_ii:magnetic_taegore",
-        "maxCount": 4,
-        "minCount": 1,
-        "weight": 14
-      },
-      {
-        "type": "aether_ii:magnetic_burrukai",
         "maxCount": 2,
         "minCount": 1,
         "weight": 14
       },
       {
+        "type": "aether_ii:magnetic_burrukai",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 14
+      },
+      {
         "type": "aether_ii:magnetic_kirrid",
-        "maxCount": 3,
-        "minCount": 2,
+        "maxCount": 2,
+        "minCount": 1,
         "weight": 14
       },
       {
@@ -250,7 +250,7 @@
         "type": "aether_ii:aerbunny",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 12
+        "weight": 14
       }
     ],
     "misc": [],
