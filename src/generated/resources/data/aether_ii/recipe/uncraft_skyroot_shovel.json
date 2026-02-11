@@ -3,7 +3,7 @@
   "category": "uncrafting",
   "experience": 0.0,
   "group": "skyroot_tool",
-  "ingredient": "aether_ii:skyroot_pickaxe",
+  "ingredient": "aether_ii:skyroot_shovel",
   "processing_time": 200,
   "results": {
     "output_1": {
@@ -42,27 +42,7 @@
               "id": "aether_ii:skyroot_planks"
             }
           },
-          "weight": 75
-        },
-        {
-          "data": {
-            "type": "item",
-            "value": {
-              "count": 2,
-              "id": "aether_ii:skyroot_planks"
-            }
-          },
-          "weight": 15
-        },
-        {
-          "data": {
-            "type": "item",
-            "value": {
-              "count": 3,
-              "id": "aether_ii:skyroot_planks"
-            }
-          },
-          "weight": 5
+          "weight": 100
         }
       ]
     },

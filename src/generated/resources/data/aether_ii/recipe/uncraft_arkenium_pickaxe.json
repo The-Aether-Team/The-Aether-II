@@ -2,8 +2,8 @@
   "type": "aether_ii:hourglass_restoring",
   "category": "uncrafting",
   "experience": 0.0,
-  "group": "skyroot_tool",
-  "ingredient": "aether_ii:skyroot_pickaxe",
+  "group": "arkenium_tool",
+  "ingredient": "aether_ii:arkenium_pickaxe",
   "processing_time": 200,
   "results": {
     "output_1": {
@@ -39,7 +39,7 @@
             "type": "item",
             "value": {
               "count": 1,
-              "id": "aether_ii:skyroot_planks"
+              "id": "aether_ii:arkenium_plate"
             }
           },
           "weight": 75
@@ -49,7 +49,7 @@
             "type": "item",
             "value": {
               "count": 2,
-              "id": "aether_ii:skyroot_planks"
+              "id": "aether_ii:arkenium_plate"
             }
           },
           "weight": 15
@@ -59,7 +59,7 @@
             "type": "item",
             "value": {
               "count": 3,
-              "id": "aether_ii:skyroot_planks"
+              "id": "aether_ii:arkenium_plate"
             }
           },
           "weight": 5

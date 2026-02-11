@@ -3,7 +3,7 @@
   "category": "uncrafting",
   "experience": 0.0,
   "group": "skyroot_tool",
-  "ingredient": "aether_ii:skyroot_pickaxe",
+  "ingredient": "aether_ii:skyroot_axe",
   "processing_time": 200,
   "results": {
     "output_1": {
