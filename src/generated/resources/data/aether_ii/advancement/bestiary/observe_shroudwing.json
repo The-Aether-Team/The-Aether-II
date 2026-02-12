@@ -14,7 +14,7 @@
       },
       "trigger": "minecraft:player_killed_entity"
     },
-    "observe": {
+    "observe_shroudwing": {
       "conditions": {
         "player": [
           {
@@ -36,7 +36,7 @@
   },
   "requirements": [
     [
-      "observe",
+      "observe_shroudwing",
       "kill_shroudwing"
     ]
   ],

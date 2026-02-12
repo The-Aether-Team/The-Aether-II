@@ -14,7 +14,7 @@
       },
       "trigger": "minecraft:player_killed_entity"
     },
-    "observe": {
+    "observe_glitterwing": {
       "conditions": {
         "player": [
           {
@@ -36,7 +36,7 @@
   },
   "requirements": [
     [
-      "observe",
+      "observe_glitterwing",
       "kill_glitterwing"
     ]
   ],
