@@ -6,7 +6,6 @@ import com.aetherteam.aetherii.block.utility.AmberHourglassBlock;
 import com.aetherteam.aetherii.data.resources.maps.AmberHourglassFuel;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.inventory.menu.AmberHourglassMenu;
-import com.aetherteam.aetherii.network.packet.clientbound.AltarParticlesPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.HourglassFinishParticlesPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.HourglassProcessParticlesPacket;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
@@ -51,6 +50,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -250,7 +250,14 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
     }
 
     private static boolean canProcess(RegistryAccess registryAccess, @Nullable RecipeHolder<HourglassRestoringRecipe> recipe, SingleRecipeInputWithRandom recipeInput, NonNullList<ItemStack> items, int maxStackSize) {
-        return canProcessResults(registryAccess, recipe, recipeInput, items, maxStackSize).contains(true);
+        if (recipe != null) {
+            List<ItemStack> results = recipe.value().assembleOutputs(recipeInput, registryAccess);
+            int emptySpots = Collections.frequency(results, ItemStack.EMPTY);
+            int outputs = results.size() - emptySpots;
+            int availableSlots = Collections.frequency(canProcessResults(registryAccess, recipe, recipeInput, items, maxStackSize), true);
+            return availableSlots >= outputs;
+        }
+        return false;
     }
 
     private static NonNullList<Boolean> canProcessResults(RegistryAccess registryAccess, @Nullable RecipeHolder<HourglassRestoringRecipe> recipe, SingleRecipeInputWithRandom recipeInput, NonNullList<ItemStack> items, int maxStackSize) {
