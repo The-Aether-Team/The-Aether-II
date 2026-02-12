@@ -12,7 +12,7 @@ public class AetherIIBlockEntityTypes {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, AetherII.MODID);
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<IcestoneBlockEntity>> ICESTONE = BLOCK_ENTITY_TYPES.register("icestone", () ->
-            new BlockEntityType<>(IcestoneBlockEntity::new, AetherIIBlocks.ICESTONE.get()));
+            new BlockEntityType<>(IcestoneBlockEntity::new, AetherIIBlocks.ICESTONE.get(), AetherIIBlocks.ICESTONE_STAIRS.get(), AetherIIBlocks.ICESTONE_SLAB.get(), AetherIIBlocks.ICESTONE_WALL.get()));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HolystoneFurnaceBlockEntity>> HOLYSTONE_FURNACE = BLOCK_ENTITY_TYPES.register("holystone_furnace", () ->
             new BlockEntityType<>(HolystoneFurnaceBlockEntity::new, AetherIIBlocks.HOLYSTONE_FURNACE.get()));
