@@ -68,8 +68,8 @@ public class Shroudwing extends Insect {
             this.level().broadcastEntityEvent(this, (byte) LAND_EVENT);
         } else {
             this.level().broadcastEntityEvent(this, (byte) TAKEOFF_EVENT);
+            this.fullyFlyTick = 21;
         }
-        this.fullyFlyTick = 21;
 
         if (!this.level().isClientSide) {
             this.getNavigation().stop();
@@ -94,15 +94,26 @@ public class Shroudwing extends Insect {
     public void tick() { //todo hitting it puts it into the air and breaks the animation ordering; it plays the takeoff or land and flying animation at the same time
         super.tick();
         if (this.level().isClientSide()) {
-            if (this.landAnimationState.isStarted() && this.landAnimationState.getTimeInMillis(this.tickCount) >= 1417) {
-                this.landAnimationState.stop();
-                this.walkAnimationState.startIfStopped(this.tickCount);
-            } else if (this.takeoffAnimationState.isStarted() && this.takeoffAnimationState.getTimeInMillis(this.tickCount) >= 2167F) {
-                this.takeoffAnimationState.stop();
-                this.flyingAnimationState.startIfStopped(this.tickCount);
-            } else if (!this.walkAnimationState.isStarted() && !this.flyingAnimationState.isStarted() && !this.landAnimationState.isStarted() && !this.takeoffAnimationState.isStarted()) {
-                this.landAnimationState.stop();
-                this.flyingAnimationState.start(this.tickCount);
+            //check when loaded insect are rest in first tick. set the default animation
+            if (this.tickCount < 2) {
+                if (this.isRest()) {
+                    this.landAnimationState.stop();
+                    this.walkAnimationState.startIfStopped(this.tickCount);
+                } else {
+                    this.takeoffAnimationState.stop();
+                    this.flyingAnimationState.startIfStopped(this.tickCount);
+                }
+            } else {
+                if (this.landAnimationState.isStarted() && this.landAnimationState.getTimeInMillis(this.tickCount) >= 1417) {
+                    this.landAnimationState.stop();
+                    this.walkAnimationState.startIfStopped(this.tickCount);
+                } else if (this.takeoffAnimationState.isStarted() && this.takeoffAnimationState.getTimeInMillis(this.tickCount) >= 2167F) {
+                    this.takeoffAnimationState.stop();
+                    this.flyingAnimationState.startIfStopped(this.tickCount);
+                } else if (!this.walkAnimationState.isStarted() && !this.flyingAnimationState.isStarted() && !this.landAnimationState.isStarted() && !this.takeoffAnimationState.isStarted()) {
+                    this.landAnimationState.stop();
+                    this.flyingAnimationState.start(this.tickCount);
+                }
             }
         } else {
             if (!this.isRest() && !this.isFullyFlying()) {

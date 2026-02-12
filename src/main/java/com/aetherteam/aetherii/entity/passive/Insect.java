@@ -117,12 +117,16 @@ public class Insect extends PathfinderMob {
     protected void addAdditionalSaveData(ValueOutput valueOutput) {
         super.addAdditionalSaveData(valueOutput);
         valueOutput.putBoolean("Rest", this.isRest());
+        valueOutput.putBoolean("need_rest", this.isNeedRest());
+        valueOutput.putInt("next_action", this.needNextAction);
     }
 
     @Override
     protected void readAdditionalSaveData(ValueInput valueInput) {
         super.readAdditionalSaveData(valueInput);
         this.setRest(valueInput.getBooleanOr("Rest", this.isRest()));
+        this.needRest = valueInput.getBooleanOr("need_rest", false);
+        this.needNextAction = valueInput.getIntOr("next_action", this.needNextAction);
     }
 
     public boolean isNeedRest() {
