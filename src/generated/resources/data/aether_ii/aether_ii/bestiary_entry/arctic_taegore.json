@@ -3,7 +3,7 @@
   "effect_resistances": [],
   "entity_type": "aether_ii:arctic_taegore",
   "food": "aether_ii:taegore_food",
-  "health": 14,
+  "health": 18,
   "icon": "aether_ii:guidebook/bestiary/arctic_taegore",
   "id": "aether_ii:arctic_taegore",
   "impact_defense": 0,
@@ -27,7 +27,7 @@
   ],
   "name": "aether_ii.guidebook_bestiary.name.entity.aether_ii.arctic_taegore",
   "pierce_defense": 0,
-  "slash_defense": -2,
+  "slash_defense": -1,
   "slot_name": "aether_ii.guidebook_bestiary.slot_name.entity.aether_ii.arctic_taegore",
   "slot_subtitle": "aether_ii.guidebook_bestiary.slot_subtitle.entity.aether_ii.arctic_taegore"
 }

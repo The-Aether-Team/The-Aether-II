@@ -5,10 +5,10 @@
   "health": 18,
   "icon": "aether_ii:guidebook/bestiary/bladeshroom_hunter",
   "id": "aether_ii:bladeshroom_hunter",
-  "impact_defense": 3,
+  "impact_defense": 2,
   "loot_slots": [],
   "name": "entity.aether_ii.bladeshroom_hunter",
-  "pierce_defense": 3,
-  "slash_defense": -2,
+  "pierce_defense": 0,
+  "slash_defense": -1,
   "slot_name": "entity.aether_ii.bladeshroom_hunter"
 }
