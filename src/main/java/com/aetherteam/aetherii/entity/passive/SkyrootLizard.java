@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.entity.passive;
 
-import com.aetherteam.aetherii.api.SkyrootLizardVariant;
+import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIISkyrootLizardVariants;

@@ -70,6 +70,11 @@ public class AetherIIEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<SkyrootLizard>> SKYROOT_LIZARD = ENTITY_TYPES.register("skyroot_lizard",
             () -> EntityType.Builder.of(SkyrootLizard::new, MobCategory.AMBIENT).sized(0.95F, 0.35F).clientTrackingRange(10).build(AetherIIEntities.SKYROOT_LIZARD));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<Glitterwing>> GLITTERWING = ENTITY_TYPES.register("glitterwing",
+            () -> EntityType.Builder.<Glitterwing>of(Glitterwing::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.55F, 0.125F).eyeHeight(0.125F).clientTrackingRange(5).build(AetherIIEntities.GLITTERWING));
+    public static final DeferredHolder<EntityType<?>, EntityType<Shroudwing>> SHROUDWING = ENTITY_TYPES.register("shroudwing",
+            () -> EntityType.Builder.<Shroudwing>of(Shroudwing::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.25F, 0.125F).eyeHeight(0.125F).clientTrackingRange(5).build(AetherIIEntities.SHROUDWING));
+
     // Hostile
     public static final DeferredHolder<EntityType<?>, EntityType<AechorPlant>> AECHOR_PLANT = ENTITY_TYPES.register("aechor_plant",
             () -> EntityType.Builder.of(AechorPlant::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(0.9F, 0.6F).eyeHeight(0.25F).clientTrackingRange(8).build(AetherIIEntities.AECHOR_PLANT));
@@ -176,6 +181,8 @@ public class AetherIIEntityTypes {
         event.register(AetherIIEntityTypes.ARCTIC_KIRRID.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.MOA.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.CARRION_SPROUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CarrionSprout::checkCarrionSproutSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.GLITTERWING.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Insect::checkInsectSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.SHROUDWING.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Insect::checkInsectSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
 
         // Hostile
         event.register(AetherIIEntityTypes.AECHOR_PLANT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AechorPlant::checkAechorPlantSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
@@ -211,6 +218,8 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.MOA.get(), AetherIIStats.merge(Moa.createMobAttributes(), AetherIIStats.MOA).build());
         event.put(AetherIIEntityTypes.SKYROOT_LIZARD.get(), AetherIIStats.merge(SkyrootLizard.createMobAttributes(), AetherIIStats.SKYROOT_LIZARD).build());
         event.put(AetherIIEntityTypes.CARRION_SPROUT.get(), AetherIIStats.merge(CarrionSprout.createMobAttributes(), AetherIIStats.CARRION_SPROUT).build());
+        event.put(AetherIIEntityTypes.GLITTERWING.get(), Glitterwing.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.SHROUDWING.get(), Shroudwing.createMobAttributes().build());
 
         // Hostile
         event.put(AetherIIEntityTypes.AECHOR_PLANT.get(), AetherIIStats.merge(AechorPlant.createMobAttributes(), AetherIIStats.AECHOR_PLANT).build());

@@ -51,6 +51,8 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.ARCTIC_KIRRID.get(),
                 AetherIIEntityTypes.MOA.get(),
                 AetherIIEntityTypes.SKYROOT_LIZARD.get(),
+                AetherIIEntityTypes.GLITTERWING.get(),
+                AetherIIEntityTypes.SHROUDWING.get(),
                 AetherIIEntityTypes.AECHOR_PLANT.get(),
                 AetherIIEntityTypes.CARRION_SPROUT.get(),
                 AetherIIEntityTypes.ZEPHYR.get(),
@@ -135,7 +137,9 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.ZEPHYR.get(),
                 AetherIIEntityTypes.TEMPEST.get(),
                 AetherIIEntityTypes.SKEPHID.get(),
-                AetherIIEntityTypes.GRAVITITE_TALUTON.get()
+                AetherIIEntityTypes.GRAVITITE_TALUTON.get(),
+                AetherIIEntityTypes.GLITTERWING.get(),
+                AetherIIEntityTypes.SHROUDWING.get()
         );
 
         this.tag(EntityTypeTags.CAN_BREATHE_UNDER_WATER).add(

@@ -18,6 +18,12 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
     @SuppressWarnings("unchecked")
     @Override
     public void addTags(HolderLookup.Provider provider) {
+        this.tag(AetherIITags.Biomes.HIGHLANDS).addTags(
+                AetherIITags.Biomes.HIGHFIELDS,
+                AetherIITags.Biomes.MAGNETIC,
+                AetherIITags.Biomes.ARCTIC,
+                AetherIITags.Biomes.IRRADIATED,
+                AetherIITags.Biomes.EXPANSE);
         this.tag(AetherIITags.Biomes.HIGHFIELDS).add(
                 HighlandsBiomes.FLOURISHING_FIELD,
                 HighlandsBiomes.VERDANT_WOODS,
@@ -38,6 +44,17 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HighlandsBiomes.CONTAMINATED_JUNGLE,
                 HighlandsBiomes.BATTLEGROUND_WASTES);
         this.tag(AetherIITags.Biomes.EXPANSE).add(HighlandsBiomes.EXPANSE);
+
+        this.tag(AetherIITags.Biomes.LUSH).add(
+                HighlandsBiomes.VERDANT_WOODS,
+                HighlandsBiomes.SHROUDED_FOREST,
+                HighlandsBiomes.TURQUOISE_FOREST,
+                HighlandsBiomes.VIOLET_HIGHWOODS,
+                HighlandsBiomes.ENDURING_WOODLAND);
+        this.tag(AetherIITags.Biomes.WET).add(
+                HighlandsBiomes.SHIMMERING_BASIN,
+                HighlandsBiomes.GLISTENING_SWAMP,
+                HighlandsBiomes.FROZEN_LAKES);
 
         this.tag(AetherIITags.Biomes.MYCELIUM_CONVERSION).add(Biomes.MUSHROOM_FIELDS);
         this.tag(AetherIITags.Biomes.PODZOL_CONVERSION).add(

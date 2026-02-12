@@ -121,6 +121,20 @@
         "weight": 1
       }
     ],
+    "aether_ii:aether_ambient": [
+      {
+        "type": "aether_ii:glitterwing",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:shroudwing",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
     "aether_ii:aether_cave_monster": [
       {
         "type": "aether_ii:skephid",
