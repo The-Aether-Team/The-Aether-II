@@ -62,7 +62,7 @@ public class Shroudwing extends Insect {
     }
 
     @Override
-    public void setRestWithAnimation(boolean rest) { //todo the shroudwing should not takeoff until the takeoff animation is actually finished
+    public void setRestWithAnimation(boolean rest) {
         super.setRestWithAnimation(rest);
         if (rest) {
             this.level().broadcastEntityEvent(this, (byte) LAND_EVENT);
@@ -91,7 +91,7 @@ public class Shroudwing extends Insect {
     }
 
     @Override
-    public void tick() { //todo hitting it puts it into the air and breaks the animation ordering; it plays the takeoff or land and flying animation at the same time
+    public void tick() {
         super.tick();
         if (this.level().isClientSide()) {
             //check when loaded insect are rest in first tick. set the default animation

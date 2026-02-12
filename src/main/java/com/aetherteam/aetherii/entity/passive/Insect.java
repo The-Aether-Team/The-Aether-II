@@ -226,7 +226,9 @@ public class Insect extends PathfinderMob {
         boolean flag = super.hurtServer(p_376221_, p_376460_, p_376610_);
 
         if (flag && this.isRest()) {
-            this.stopRest();
+            this.makeActionCooldown();
+            this.needRest = false;
+            this.setRestWithAnimation(false);
         }
 
         return flag;
