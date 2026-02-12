@@ -39,27 +39,27 @@
             "type": "item",
             "value": {
               "count": 1,
-              "id": "aether_ii:arkenium_plate"
+              "id": "aether_ii:inert_arkenium"
             }
           },
-          "weight": 75
+          "weight": 80
         },
         {
           "data": {
             "type": "item",
             "value": {
               "count": 2,
-              "id": "aether_ii:arkenium_plate"
+              "id": "aether_ii:inert_arkenium"
             }
           },
-          "weight": 15
+          "weight": 10
         },
         {
           "data": {
             "type": "item",
             "value": {
               "count": 3,
-              "id": "aether_ii:arkenium_plate"
+              "id": "aether_ii:inert_arkenium"
             }
           },
           "weight": 5

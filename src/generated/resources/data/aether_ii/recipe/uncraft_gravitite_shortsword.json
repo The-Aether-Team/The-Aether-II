@@ -29,20 +29,20 @@
             "type": "item",
             "value": {
               "count": 1,
-              "id": "aether_ii:gravitite_plate"
+              "id": "aether_ii:inert_gravitite"
             }
           },
-          "weight": 75
+          "weight": 80
         },
         {
           "data": {
             "type": "item",
             "value": {
               "count": 2,
-              "id": "aether_ii:gravitite_plate"
+              "id": "aether_ii:inert_gravitite"
             }
           },
-          "weight": 25
+          "weight": 20
         }
       ]
     },
