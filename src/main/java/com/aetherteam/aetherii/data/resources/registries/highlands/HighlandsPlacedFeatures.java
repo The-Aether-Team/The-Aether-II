@@ -58,6 +58,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> HIGHLANDS_BUSH_PATCH_FIELD = createKey("highlands_bush_patch_field");
     public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH = createKey("blueberry_bush_patch");
     public static final ResourceKey<PlacedFeature> ORANGE_TREE_PATCH = createKey("orange_tree_patch");
+    public static final ResourceKey<PlacedFeature> ORANGE_TREE_PATCH_RARE = createKey("orange_tree_patch_rare");
 
     public static final ResourceKey<PlacedFeature> HIGHLANDS_FLOWER_PATCH = createKey("highlands_flower_patch");
     public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH = createKey("highfields_flower_patch");
@@ -399,6 +400,12 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome());
         register(context, ORANGE_TREE_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORANGE_TREE),
                 NoiseBasedCountPlacement.of(3, 10, 0),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
+                BiomeFilter.biome());
+        register(context, ORANGE_TREE_PATCH_RARE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORANGE_TREE),
+                RarityFilter.onAverageOnceEvery(24),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
