@@ -74,6 +74,13 @@ public abstract class SentryRuinsPiece extends AetherTemplateStructurePiece {
             new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.SENTRY_CRATE.get(), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
     ));
 
+    public static final RuleProcessor STAIRCASE_EXPOSED = new RuleProcessor(ImmutableList.of(
+            new ProcessorRule(new BlockMatchTest(AetherIIBlocks.UNDERSHALE_BRICK_WALL.get()), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
+            new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BROWN_CLOUDWOOL.get()), new RandomBlockMatchTest(Blocks.AIR, 0.25F), Blocks.AIR.defaultBlockState()),
+            new ProcessorRule(new BlockMatchTest(AetherIIBlocks.BROWN_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, AetherIIBlocks.UNDERSHALE_BRICKS.get().defaultBlockState())
+
+    ));
+
     public SentryRuinsPiece(StructurePieceType type, StructureTemplateManager manager, String name, StructurePlaceSettings settings, BlockPos pos, Holder<StructureProcessorList> processors) {
         this(type, manager, makeLocation(name), settings, pos, processors);
     }

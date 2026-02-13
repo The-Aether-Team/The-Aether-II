@@ -8,13 +8,11 @@ import com.aetherteam.aetherii.world.structure.processor.BossRoomProcessor;
 import com.aetherteam.aetherii.world.structure.processor.CopyRuleProcessor;
 import com.aetherteam.aetherii.world.structure.processor.MimicContainerProcessor;
 import com.google.common.collect.ImmutableList;
-import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
 
 import java.util.List;
@@ -22,13 +20,11 @@ import java.util.List;
 public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> CAMP = createKey("camp");
     public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_ROOM = createKey("sentry_ruins_room");
-    public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_TUNNEL = createKey("sentry_ruins_tunnel");
+    public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_STAIRCASE = createKey("sentry_ruins_staircase");
     public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_BOSS_ROOM = createKey("sentry_ruins_boss_room");
     public static final ResourceKey<StructureProcessorList> INFECTED_GUARDIAN_TREE = createKey("infected_guardian_tree");
 
     public static void bootstrap(BootstrapContext<StructureProcessorList> context) {
-        HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
-
         register(context, CAMP, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.COARSE_AETHER_DIRT.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState()),
@@ -48,9 +44,10 @@ public class AetherIIProcessorLists {
                 SentryRuinsPiece.ROOM_DECORATION_RANDOMIZATION,
                 MimicContainerProcessor.INSTANCE
         ));
-        register(context, SENTRY_RUINS_TUNNEL, List.of(
+        register(context, SENTRY_RUINS_STAIRCASE, List.of(
                 SentryRuinsPiece.CAVE_REPLACEABLE,
-                SentryRuinsPiece.SENTRY_STONE,
+                SentryRuinsPiece.STAIRCASE_EXPOSED,
+                SentryRuinsPiece.SENTRY_STONE_REDUCED,
                 MimicContainerProcessor.INSTANCE
         ));
         register(context, SENTRY_RUINS_BOSS_ROOM, List.of(
