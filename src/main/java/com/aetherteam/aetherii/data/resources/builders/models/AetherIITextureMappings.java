@@ -226,6 +226,20 @@ public class AetherIITextureMappings {
         return textureMapping.copyForced(TextureSlot.ALL, TextureSlot.PARTICLE);
     }
 
+    public static TextureMapping amberHourglass(Block block) {
+        return amberHourglass(block, "");
+    }
+
+    public static TextureMapping amberHourglass(Block block, String suffix) {
+        return new TextureMapping()
+                .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(block, "_cross"))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top" + suffix))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom"))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
+                .put(TextureSlot.INNER_TOP, TextureMapping.getBlockTexture(block, "_inner_top"))
+                .put(AetherIITextureSlots.INNER_BOTTOM, TextureMapping.getBlockTexture(block, "_inner_bottom"));
+    }
+
     public static TextureMapping altar(Block block) {
         return altar(block, "");
     }

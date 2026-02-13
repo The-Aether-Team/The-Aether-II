@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client.particle;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.particle.options.AttackShockParticleOption;
 import com.aetherteam.aetherii.client.particle.options.AttackStabParticleOption;
+import com.aetherteam.aetherii.client.particle.options.GravityDustParticleOption;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.particles.*;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -38,6 +39,7 @@ public class AetherIIParticleTypes {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FALLING_ALKAHEST = PARTICLES.register("falling_alkahest", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> DRIPPING_DRIPSTONE_ALKAHEST = PARTICLES.register("dripping_dripstone_alkahest", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FALLING_DRIPSTONE_ALKAHEST = PARTICLES.register("falling_dripstone_alkahest", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<GravityDustParticleOption>> GRAVITY_DUST = register("gravity_dust", false, p -> GravityDustParticleOption.CODEC, p -> GravityDustParticleOption.STREAM_CODEC);
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> RAIN = PARTICLES.register("rain", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> IRRADIATION = PARTICLES.register("irradiation", () -> new SimpleParticleType(false));

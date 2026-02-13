@@ -564,6 +564,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HOLYSTONE_LEVER.get());
                 output.accept(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_FURNACE.get());
+                output.accept(AetherIIBlocks.AMBER_HOURGLASS.get());
                 output.accept(AetherIIBlocks.ALTAR.get());
                 output.accept(AetherIIBlocks.ARTISANS_BENCH.get());
                 output.accept(AetherIIBlocks.ARKENIUM_FORGE.get());
@@ -825,14 +826,19 @@ public class AetherIICreativeTabs {
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".ingredients"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.AMBROSIUM_SHARD.get());
-                output.accept(AetherIIItems.ZANITE_GEMSTONE.get());
+                output.accept(AetherIIItems.FOSSILIZED_ZANITE.get());
                 output.accept(AetherIIItems.INERT_ARKENIUM.get());
                 output.accept(AetherIIItems.INERT_GRAVITITE.get());
-                output.accept(AetherIIItems.GLINT_GEMSTONE.get());
-                output.accept(AetherIIItems.CORROBONITE_CRYSTAL.get());
+                output.accept(AetherIIItems.FOSSILIZED_GLINT.get());
+                output.accept(AetherIIItems.FOSSILIZED_CORROBONITE.get());
                 output.accept(AetherIIItems.GOLDEN_AMBER.get());
+                output.accept(AetherIIItems.ZANITE_GEMSTONE.get());
                 output.accept(AetherIIItems.ARKENIUM_PLATE.get());
                 output.accept(AetherIIItems.GRAVITITE_PLATE.get());
+                output.accept(AetherIIItems.GLINT_GEMSTONE.get());
+                output.accept(AetherIIItems.CORROBONITE_CRYSTAL.get());
+                output.accept(AetherIIItems.NEPTUNE_SCALE.get());
+                output.accept(AetherIIItems.SENTRY_SERVO.get());
                 output.accept(AetherIIItems.SKYROOT_STICK.get());
                 output.accept(AetherIIItems.SCATTERGLASS_SHARD.get());
                 output.accept(AetherIIItems.ARCTIC_SNOWBALL.get());

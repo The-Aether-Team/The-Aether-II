@@ -3,8 +3,7 @@ package com.aetherteam.aetherii;
 import com.aetherteam.aetherii.advancement.AetherIIAdvancementSoundOverrides;
 import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.command.AetherIICommands;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIGlitterwingVariants;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIShroudwingVariants;
+import com.aetherteam.aetherii.recipe.display.slot.AetherIISlotDisplays;
 import org.slf4j.Logger;
 
 import com.aetherteam.aetherii.advancement.predicate.AetherIIEntitySubPredicates;
@@ -124,6 +123,7 @@ public class AetherII {
                 AetherIIRecipeTypes.RECIPE_TYPES,
                 AetherIIRecipeSerializers.RECIPE_SERIALIZERS,
                 AetherIIRecipeDisplays.RECIPE_DISPLAYS,
+                AetherIISlotDisplays.SLOT_DISPLAYS,
                 AetherIIRecipeBookCategories.RECIPE_BOOK_CATEGORIES,
                 AetherIIGameEvents.GAME_EVENTS,
                 AetherIIPoi.POI,
@@ -228,6 +228,8 @@ public class AetherII {
         registrar.playToClient(GuidebookToastPacket.TYPE, GuidebookToastPacket.STREAM_CODEC, GuidebookToastPacket::execute);
         registrar.playToClient(DamageTypeParticlePacket.TYPE, DamageTypeParticlePacket.STREAM_CODEC, DamageTypeParticlePacket::execute);
         registrar.playToClient(PortalTravelSoundPacket.TYPE, PortalTravelSoundPacket.STREAM_CODEC, PortalTravelSoundPacket::execute);
+        registrar.playToClient(HourglassFinishParticlesPacket.TYPE, HourglassFinishParticlesPacket.STREAM_CODEC, HourglassFinishParticlesPacket::execute);
+        registrar.playToClient(HourglassProcessParticlesPacket.TYPE, HourglassProcessParticlesPacket.STREAM_CODEC, HourglassProcessParticlesPacket::execute);
         registrar.playToClient(RemountAerbunnyPacket.TYPE, RemountAerbunnyPacket.STREAM_CODEC, RemountAerbunnyPacket::execute);
         registrar.playToClient(SetVehiclePacket.TYPE, SetVehiclePacket.STREAM_CODEC, SetVehiclePacket::execute);
         registrar.playToClient(SwetSyncPacket.TYPE, SwetSyncPacket.STREAM_CODEC, SwetSyncPacket::execute);

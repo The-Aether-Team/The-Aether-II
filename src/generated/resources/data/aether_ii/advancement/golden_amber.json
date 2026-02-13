@@ -1,0 +1,34 @@
+{
+  "parent": "aether_ii:ambrosium",
+  "criteria": {
+    "golden_amber": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:golden_amber"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.golden_amber.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:golden_amber"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.golden_amber"
+    }
+  },
+  "requirements": [
+    [
+      "golden_amber"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

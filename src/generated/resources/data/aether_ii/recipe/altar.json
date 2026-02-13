@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "H": "#aether_ii:stone_crafting",
+    "U": "aether_ii:undershale",
     "Z": "#aether_ii:gems/zanite"
   },
   "pattern": [
-    "HHH",
-    "HZH",
-    "HHH"
+    "ZZZ",
+    " Z ",
+    "UUU"
   ],
   "result": {
     "count": 1,

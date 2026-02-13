@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "aether_ii:zanite_helmet",
+    "N": "aether_ii:neptune_scale"
+  },
+  "pattern": [
+    "NNN",
+    "N#N",
+    "NNN"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:neptune_helmet"
+  }
+}

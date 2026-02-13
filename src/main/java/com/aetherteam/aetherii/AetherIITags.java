@@ -145,6 +145,7 @@ public class AetherIITags {
         public static final TagKey<Item> ENGRAVED_DISCS = tag("engraved_discs");
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
+        public static final TagKey<Item> GEMS_AMBER = tag("gems/amber");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");
         public static final TagKey<Item> PLATES_ARKENIUM = tag("plates/arkenium");
         public static final TagKey<Item> PLATES_GRAVITITE = tag("plates/gravitite");

@@ -103,16 +103,16 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         // Ores
         this.add(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), this::createQuartzOreDrops);
         this.dropWithFortune(AetherIIBlocks.AMBROSIUM_ORE.get(), AetherIIItems.AMBROSIUM_SHARD.get());
-        this.dropWithFortune(AetherIIBlocks.ZANITE_ORE.get(), AetherIIItems.ZANITE_GEMSTONE.get());
-        this.dropWithFortune(AetherIIBlocks.GLINT_ORE.get(), AetherIIItems.GLINT_GEMSTONE.get());
+        this.dropWithFortune(AetherIIBlocks.ZANITE_ORE.get(), AetherIIItems.FOSSILIZED_ZANITE.get());
+        this.dropWithFortune(AetherIIBlocks.GLINT_ORE.get(), AetherIIItems.FOSSILIZED_GLINT.get());
         this.dropWithFortune(AetherIIBlocks.ARKENIUM_ORE.get(), AetherIIItems.INERT_ARKENIUM.get());
         this.dropWithFortune(AetherIIBlocks.GRAVITITE_ORE.get(), AetherIIItems.INERT_GRAVITITE.get());
         this.dropWithFortune(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(), AetherIIItems.AMBROSIUM_SHARD.get());
-        this.dropWithFortune(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), AetherIIItems.ZANITE_GEMSTONE.get());
-        this.dropWithFortune(AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(), AetherIIItems.GLINT_GEMSTONE.get());
+        this.dropWithFortune(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), AetherIIItems.FOSSILIZED_ZANITE.get());
+        this.dropWithFortune(AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(), AetherIIItems.FOSSILIZED_GLINT.get());
         this.dropWithFortune(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(), AetherIIItems.INERT_ARKENIUM.get());
         this.dropWithFortune(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(), AetherIIItems.INERT_GRAVITITE.get());
-        this.dropWithFortune(AetherIIBlocks.CORROBONITE_ORE.get(), AetherIIItems.CORROBONITE_CRYSTAL.get());
+        this.dropWithFortune(AetherIIBlocks.CORROBONITE_ORE.get(), AetherIIItems.FOSSILIZED_CORROBONITE.get());
         this.dropNone(AetherIIBlocks.CORROBONITE_CLUSTER.get());
 
         // Aerclouds
@@ -721,6 +721,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.ARKENIUM_CHAIN.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_FURNACE.get());
+        this.dropSelf(AetherIIBlocks.AMBER_HOURGLASS.get());
         this.dropSelf(AetherIIBlocks.ALTAR.get());
         this.dropSelf(AetherIIBlocks.ARKENIUM_FORGE.get());
         this.dropSelf(AetherIIBlocks.ARTISANS_BENCH.get());

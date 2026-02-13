@@ -761,6 +761,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARKENIUM_CHAIN, "Arkenium Chain");
         this.addBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE, "Skyroot Crafting Table");
         this.addBlock(AetherIIBlocks.HOLYSTONE_FURNACE, "Holystone Furnace");
+        this.addBlock(AetherIIBlocks.AMBER_HOURGLASS, "Amber Hourglass");
         this.addBlock(AetherIIBlocks.ALTAR, "Altar");
         this.addBlock(AetherIIBlocks.ARTISANS_BENCH, "Artisan's Bench");
         this.addBlock(AetherIIBlocks.ARKENIUM_FORGE, "Arkenium Forge");
@@ -965,12 +966,17 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
         this.addItem(AetherIIItems.SCATTERGLASS_SHARD, "Scatterglass Shard");
         this.addItem(AetherIIItems.AMBROSIUM_SHARD, "Ambrosium Shard");
+        this.addItem(AetherIIItems.FOSSILIZED_ZANITE, "Fossilized Zanite");
         this.addItem(AetherIIItems.ZANITE_GEMSTONE, "Zanite Gemstone");
         this.addItem(AetherIIItems.INERT_ARKENIUM, "Inert Arkenium");
         this.addItem(AetherIIItems.ARKENIUM_PLATE, "Arkenium Plate");
         this.addItem(AetherIIItems.INERT_GRAVITITE, "Inert Gravitite");
         this.addItem(AetherIIItems.GRAVITITE_PLATE, "Gravitite Plate");
+        this.addItem(AetherIIItems.FOSSILIZED_CORROBONITE, "Fossilized Corrobonite");
         this.addItem(AetherIIItems.CORROBONITE_CRYSTAL, "Corrobonite Crystal");
+        this.addItem(AetherIIItems.NEPTUNE_SCALE, "Neptune Scale");
+        this.addItem(AetherIIItems.SENTRY_SERVO, "Sentry Servo");
+        this.addItem(AetherIIItems.FOSSILIZED_GLINT, "Fossilized Glint");
         this.addItem(AetherIIItems.GLINT_GEMSTONE, "Glint Gemstone");
         this.addItem(AetherIIItems.GOLDEN_AMBER, "Golden Amber");
         this.addItem(AetherIIItems.CLOUDTWINE, "Cloudtwine");
@@ -1504,6 +1510,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Containers
         this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
         this.addContainerType(AetherIIMenuTypes.ARTISANS_BENCH, "Artisan's Bench");
+        this.addContainerType(AetherIIMenuTypes.AMBER_HOURGLASS, "Amber Hourglass");
         this.addContainerType(AetherIIMenuTypes.ALTAR, "Altar");
         this.addContainerType(AetherIIMenuTypes.ARKENIUM_FORGE, "Arkenium Forge");
         this.addContainerType(AetherIIMenuTypes.ALKAHEST_PURIFIER, "Alkahest Purifier");
@@ -1519,6 +1526,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("arkenium_forge.tooltip.charm", " %1$s %2$s Charm Slot");
         this.addGuiText("arkenium_forge.tooltip.charms", " %1$s %2$s Charm Slots");
         this.addGuiText("arkenium_forge.tooltip.tier", " Upgrade Item Tier");
+        this.addGuiText("recipebook.toggleRecipes.restorable", "Showing Restorable");
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
         this.addGuiText("recipebook.toggleRecipes.purifiable", "Showing Purifiable");
         this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");
@@ -1576,6 +1584,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("bestiary", "The Beast");
         this.addAdvancement("ambrosium", "Enlightenment");
         this.addAdvancement("enchanted_aether_grass", "Golden Thumb");
+        this.addAdvancement("golden_amber", "Prehistoric");
+        this.addAdvancement("amber_hourglass", "Time Warp");
         this.addAdvancement("zanite", "Exotic Hardware");
         this.addAdvancement("craft_altar", "Do You Believe in Magic?");
         this.addAdvancement("gravitite_plate", "Pink is the New Blue");
@@ -1613,7 +1623,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("bestiary", "Fill out the entire bestiary");
         this.addAdvancementDesc("ambrosium", "Obtain an Ambrosium Shard");
         this.addAdvancementDesc("enchanted_aether_grass", "Enchant an Aether Grass Block with an Ambrosium Shard to speed up plant growth above it");
-        this.addAdvancementDesc("zanite", "Obtain a Zanite Gemstone");
+        this.addAdvancementDesc("golden_amber", "Harvest Golden Amber from an Amberoot tree using the proper tool");
+        this.addAdvancementDesc("amber_hourglass", "Craft an Amber Hourglass");
+        this.addAdvancementDesc("zanite", "Restore Fossilized Zanite into a Zanite Gemstone using the Amber Hourglass");
         this.addAdvancementDesc("craft_altar", "Craft an Altar");
         this.addAdvancementDesc("gravitite_plate", "Enchant Inert Gravitite into a Gravitite Plate using the Altar");
         this.addAdvancementDesc("gravitite_armor", "Wear 3 pieces of Gravitite Armor to activate its set ability");

@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.furniture.OutpostCampfireBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.natural.*;
+import com.aetherteam.aetherii.block.utility.AmberHourglassBlock;
 import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
 import com.aetherteam.aetherii.block.utility.BedrollBlock;
 import com.aetherteam.aetherii.client.AetherIIColorResolvers;
@@ -1034,6 +1035,13 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant hangingLantern = plainVariant(AetherIITexturedModels.HANGING_RUSTIC_ARKENIUM_LANTERN.create(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get(), this.modelOutput));
         this.registerSimpleFlatItemModel(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get().asItem());
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get()).with(createBooleanModelDispatch(BlockStateProperties.HANGING, hangingLantern, lantern)));
+    }
+
+    public void createAmberHourglass(Block block) {
+        MultiVariant closed = plainVariant(AetherIIModelTemplates.AMBER_HOURGLASS.create(block, AetherIITextureMappings.amberHourglass(block), this.modelOutput));
+        MultiVariant open = plainVariant(AetherIIModelTemplates.AMBER_HOURGLASS.createWithSuffix(block, "_open", AetherIITextureMappings.amberHourglass(block, "_open"), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+                .with(BlockModelGenerators.createBooleanModelDispatch(AmberHourglassBlock.OPEN, open, closed)));
     }
 
     public void createAltar(Block block, Block particle) {

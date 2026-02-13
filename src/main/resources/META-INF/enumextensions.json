@@ -29,6 +29,12 @@
     },
     {
       "enum": "net/minecraft/world/inventory/RecipeBookType",
+      "name": "AETHER_II_AMBER_HOURGLASS",
+      "constructor": "()V",
+      "parameters": [ ]
+    },
+    {
+      "enum": "net/minecraft/world/inventory/RecipeBookType",
       "name": "AETHER_II_ALTAR",
       "constructor": "()V",
       "parameters": [ ]
