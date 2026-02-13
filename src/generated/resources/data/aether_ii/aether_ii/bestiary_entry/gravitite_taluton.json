@@ -2,10 +2,10 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.gravitite_taluton",
   "effect_resistances": [],
   "entity_type": "aether_ii:gravitite_taluton",
-  "health": 20,
+  "health": 32,
   "icon": "aether_ii:guidebook/bestiary/gravitite_taluton",
   "id": "aether_ii:gravitite_taluton",
-  "impact_defense": 2,
+  "impact_defense": 1,
   "loot_slots": [
     {
       "loot": {
@@ -25,7 +25,7 @@
     }
   ],
   "name": "entity.aether_ii.gravitite_taluton",
-  "pierce_defense": -2,
-  "slash_defense": 2,
+  "pierce_defense": -1,
+  "slash_defense": 0,
   "slot_name": "entity.aether_ii.gravitite_taluton"
 }

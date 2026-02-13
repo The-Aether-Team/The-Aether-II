@@ -2,10 +2,10 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.skephid",
   "effect_resistances": [],
   "entity_type": "aether_ii:skephid",
-  "health": 10,
+  "health": 16,
   "icon": "aether_ii:guidebook/bestiary/skephid",
   "id": "aether_ii:skephid",
-  "impact_defense": -2,
+  "impact_defense": -1,
   "loot_slots": [
     {
       "loot": {
@@ -17,7 +17,7 @@
     }
   ],
   "name": "entity.aether_ii.skephid",
-  "pierce_defense": 2,
-  "slash_defense": 2,
+  "pierce_defense": 0,
+  "slash_defense": 1,
   "slot_name": "entity.aether_ii.skephid"
 }

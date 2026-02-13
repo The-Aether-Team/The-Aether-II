@@ -2,10 +2,10 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.tempest",
   "effect_resistances": [],
   "entity_type": "aether_ii:tempest",
-  "health": 30,
+  "health": 28,
   "icon": "aether_ii:guidebook/bestiary/tempest",
   "id": "aether_ii:tempest",
-  "impact_defense": 2,
+  "impact_defense": 0,
   "loot_slots": [
     {
       "loot": {
@@ -25,7 +25,7 @@
     }
   ],
   "name": "entity.aether_ii.tempest",
-  "pierce_defense": -2,
-  "slash_defense": 2,
+  "pierce_defense": -1,
+  "slash_defense": 0,
   "slot_name": "entity.aether_ii.tempest"
 }
