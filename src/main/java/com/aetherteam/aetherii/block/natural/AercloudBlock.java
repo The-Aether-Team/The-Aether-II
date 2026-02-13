@@ -1,13 +1,12 @@
 package com.aetherteam.aetherii.block.natural;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
-import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.BlockItem;
@@ -30,6 +29,7 @@ import org.jetbrains.annotations.Nullable;
 public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockContainer {
     protected static final VoxelShape COLLISION_SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 0.01, 16.0);
     protected static final VoxelShape FALLING_COLLISION_SHAPE = Shapes.box(0.0, 0.0, 0.0, 1.0, 0.9, 1.0);
+    protected static final VoxelShape ITEM_COLLISION_SHAPE = Shapes.box(0.0, 0.0, 0.0, 1.0, 0.65, 1.0);
 
     public AercloudBlock(Properties properties) {
         super(properties);
@@ -47,10 +47,14 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
         entity.resetFallDistance();
-        if (entity.getDeltaMovement().y < -0.0784000015258789 && !(entity instanceof Projectile) && !(entity instanceof CloudSkiff)) {
-            entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.25, 1.0));
+        if (!(entity instanceof ItemEntity itemEntity)) {
+            if (entity.getDeltaMovement().y < -0.0784000015258789 && !(entity instanceof Projectile) && !(entity instanceof CloudSkiff)) {
+                entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.25, 1.0));
+            } else {
+                entity.setOnGround(entity instanceof LivingEntity livingEntity && (!(livingEntity instanceof Player player) || !player.getAbilities().flying));
+            }
         } else {
-            entity.setOnGround(entity instanceof LivingEntity livingEntity && (!(livingEntity instanceof Player player) || !player.getAbilities().flying));
+            itemEntity.setDeltaMovement(entity.getDeltaMovement().scale(0.99F));
         }
     }
 
@@ -112,6 +116,8 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
                     } else {
                         return Shapes.empty();
                     }
+                } else if (entity instanceof ItemEntity) {
+                    return ITEM_COLLISION_SHAPE;
                 } else if (entity.fallDistance > 2.5F && (!(entity instanceof LivingEntity livingEntity) || !livingEntity.isFallFlying())) {
                     return FALLING_COLLISION_SHAPE; // Alternate shape when falling fast enough.
                 }
@@ -122,7 +128,11 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
 
     @Override
     public float getFriction(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
-        return entity instanceof CloudSkiff ? 0.92F : super.getFriction(state, level, pos, entity);
+        if (!(entity instanceof ItemEntity)) {
+            return entity instanceof CloudSkiff ? 0.92F : super.getFriction(state, level, pos, entity);
+        } else {
+            return 0.85F;
+        }
     }
 
     protected VoxelShape getDefaultCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
