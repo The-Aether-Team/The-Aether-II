@@ -29,6 +29,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.ParticleUtils;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -52,6 +53,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -90,6 +92,22 @@ public class PlayerHooks {
                         return true;
                     }
                 }
+            }
+        }
+        return cancellationStatus;
+    }
+
+    public static boolean cancelPlacementOnAercloud(LevelAccessor levelAccessor, BlockPos pos, ItemStack itemStack, boolean cancellationStatus) {
+        BlockState state = levelAccessor.getBlockState(pos);
+
+        if (state.is(AetherIITags.Blocks.AERCLOUDS)) {
+            if (itemStack.getItem() instanceof BlockItem && !itemStack.is(AetherIITags.Items.CAN_USE_ON_AERCLOUD)) {
+                if (levelAccessor.isClientSide() && levelAccessor instanceof Level level) {
+                    for (int i = 0; i < 10; i++) {
+                        ParticleUtils.spawnParticleOnFace(level, pos, Direction.UP, ParticleTypes.POOF, Vec3.ZERO, 0.5F);
+                    }
+                }
+                return true;
             }
         }
         return cancellationStatus;

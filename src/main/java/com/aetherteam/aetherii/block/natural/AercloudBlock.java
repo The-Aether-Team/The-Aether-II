@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.block.natural;
 
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -9,7 +8,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -147,14 +145,6 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
     @Override
     public VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return Shapes.empty();
-    }
-
-    @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        if (context instanceof EntityCollisionContext entityCollisionContext && entityCollisionContext.getEntity() instanceof Player player) {
-            return player.isHolding((stack) -> stack.getItem() instanceof BlockItem) && !player.isHolding((stack) -> stack.is(AetherIITags.Items.CAN_USE_ON_AERCLOUD)) ? Shapes.empty() : Shapes.block();
-        }
-        return Shapes.block();
     }
 
     @Override

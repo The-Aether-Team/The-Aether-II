@@ -329,9 +329,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.SENTRY_BOOTS_REPAIRING);
         this.tag(AetherIITags.Items.NEPTUNE_REPAIRING);
         this.tag(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS);
-        this.tag(AetherIITags.Items.CAN_USE_ON_AERCLOUD).addTag(AetherIITags.Items.AERCLOUDS).add(
-                AetherIIItems.CLOUD_SKIFF.get()
-        );
+        this.tag(AetherIITags.Items.CAN_USE_ON_AERCLOUD).addTag(AetherIITags.Items.AERCLOUDS);
         this.tag(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS).add(
                 AetherIIItems.HOLYSTONE_AXE.get(),
                 AetherIIItems.ZANITE_AXE.get(),
