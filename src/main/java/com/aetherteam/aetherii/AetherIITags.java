@@ -145,6 +145,7 @@ public class AetherIITags {
         public static final TagKey<Item> ENGRAVED_DISCS = tag("engraved_discs");
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
+        public static final TagKey<Item> GEMS_AMBER = tag("gems/amber");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");
         public static final TagKey<Item> PLATES_ARKENIUM = tag("plates/arkenium");
         public static final TagKey<Item> PLATES_GRAVITITE = tag("plates/gravitite");
@@ -215,6 +216,7 @@ public class AetherIITags {
         public static final TagKey<Item> MOA_FOOD = tag("moa_food");
 
         public static final TagKey<Item> AETHER_PORTAL_ACTIVATION_ITEMS = tag("aether_portal_activation_items");
+        public static final TagKey<Item> CAN_USE_ON_AERCLOUD = tag("can_use_on_aercloud");
         public static final TagKey<Item> GOLDEN_AMBER_HARVESTERS = tag("golden_amber_harvesters");
         public static final TagKey<Item> DOUBLE_DROPS = tag("double_drops");
         public static final TagKey<Item> IRRADIATED_ITEM = tag("irradiated_item");
@@ -262,12 +264,16 @@ public class AetherIITags {
     }
 
     public static class Biomes {
+        public static final TagKey<Biome> HIGHLANDS = tag("highlands");
         public static final TagKey<Biome> HIGHFIELDS = tag("highfields");
         public static final TagKey<Biome> MAGNETIC = tag("magnetic");
         public static final TagKey<Biome> MAGNETIC_FOG = tag("magnetic_fog");
         public static final TagKey<Biome> ARCTIC = tag("arctic");
         public static final TagKey<Biome> IRRADIATED = tag("irradiated");
         public static final TagKey<Biome> EXPANSE = tag("expanse");
+
+        public static final TagKey<Biome> LUSH = tag("lush");
+        public static final TagKey<Biome> WET = tag("wet");
 
         public static final TagKey<Biome> HAS_STRUCTURE_OUTPOST = tag("has_structure/outpost");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_HIGHFIELDS = tag("has_structure/camp_highfields");

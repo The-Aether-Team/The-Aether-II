@@ -35,6 +35,7 @@ public class AetherIIParticleData extends ParticleDescriptionProvider {
         this.sprite(AetherIIParticleTypes.FALLING_ALKAHEST.get(), ResourceLocation.withDefaultNamespace("drip_fall"));
         this.sprite(AetherIIParticleTypes.DRIPPING_DRIPSTONE_ALKAHEST.get(), ResourceLocation.withDefaultNamespace("drip_hang"));
         this.sprite(AetherIIParticleTypes.FALLING_DRIPSTONE_ALKAHEST.get(), ResourceLocation.withDefaultNamespace("drip_fall"));
+        this.spriteSet(AetherIIParticleTypes.GRAVITY_DUST.get(), ResourceLocation.withDefaultNamespace("generic"), 8, true);
 
         this.spriteSet(AetherIIParticleTypes.RAIN.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "splash"), 4, false);
         this.sprite(AetherIIParticleTypes.IRRADIATION.get(), ResourceLocation.withDefaultNamespace("generic_0"));

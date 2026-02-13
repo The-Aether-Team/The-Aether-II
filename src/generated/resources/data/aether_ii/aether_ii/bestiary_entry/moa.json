@@ -13,7 +13,7 @@
   "health": 35,
   "icon": "aether_ii:guidebook/bestiary/moa",
   "id": "aether_ii:moa",
-  "impact_defense": 2,
+  "impact_defense": 0,
   "loot_slots": [
     {
       "loot": {
@@ -25,7 +25,7 @@
     }
   ],
   "name": "entity.aether_ii.moa",
-  "pierce_defense": -2,
-  "slash_defense": 2,
+  "pierce_defense": 0,
+  "slash_defense": -1,
   "slot_name": "entity.aether_ii.moa"
 }

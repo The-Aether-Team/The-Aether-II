@@ -99,7 +99,7 @@ public class SentryRuinsBuilder {
         Direction direction = bossRoom.getOrientation();
         if (direction != null) {
             BlockPos pos = BlockLogicUtil.tunnelFromEvenSquareRoom(bossRoom.getBoundingBox(), direction, this.edgeWidth);
-            SentryRuinsPiece hallway = this.chooseRoom("square_tunnel", pos, bossRoom.getRotation(), this.processors.tunnelSettings());
+            SentryRuinsPiece hallway = this.chooseRoom("square_tunnel", pos, bossRoom.getRotation(), this.processors.roomSettings());
             pos = BlockLogicUtil.tunnelFromEvenSquareRoom(hallway.getBoundingBox(), direction, this.nodeWidth);
             SentryRuinsPiece defaultRoom = this.chooseRoom("chest_room", pos, hallway.getRotation(), this.processors.roomSettings());
 
@@ -197,7 +197,7 @@ public class SentryRuinsBuilder {
         int topSurfaceY = chunkGenerator.getFirstOccupiedHeight(entranceRoomCenter.getX(), entranceRoomCenter.getZ(), Heightmap.Types.OCEAN_FLOOR_WG, level, randomState);
 
         for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY() - stopBeforeSurface) / 6; i++) {
-            SentryRuinsPiece staircase = this.chooseRoom("staircase", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6, 0), lobbyRotation, this.processors.bossSettings());
+            SentryRuinsPiece staircase = this.chooseRoom("staircase", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6, 0), lobbyRotation, this.processors.staircaseSettings());
             this.nodes.add(staircase);
 
 

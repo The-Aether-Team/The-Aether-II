@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.data.resources.maps.AmberHourglassFuel;
 import com.aetherteam.aetherii.data.resources.maps.BlockInfection;
 import com.aetherteam.aetherii.data.resources.maps.BucketReplacement;
 import com.mojang.serialization.Codec;
@@ -13,6 +14,11 @@ import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 public class AetherIIDataMaps {
+    public static final DataMapType<Item, AmberHourglassFuel> AMBER_HOURGLASS_FUELS = DataMapType
+            .builder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "amber_hourglass_fuels"), Registries.ITEM, AmberHourglassFuel.CODEC)
+            .synced(AmberHourglassFuel.POWER_TIME_CODEC, false)
+            .build();
+
     public static final DataMapType<Item, BucketReplacement> BUCKET_REPLACEMENT = DataMapType
             .builder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bucket_replacement"), Registries.ITEM, BucketReplacement.CODEC)
             .synced(BucketReplacement.ITEM_CODEC, false)
@@ -29,6 +35,7 @@ public class AetherIIDataMaps {
             .build();
 
     public static void registerDataMaps(RegisterDataMapTypesEvent event) {
+        event.register(AMBER_HOURGLASS_FUELS);
         event.register(BUCKET_REPLACEMENT);
         event.register(INFECTED_BLOCKS);
         event.register(AETHER_GRASS_COLORS);

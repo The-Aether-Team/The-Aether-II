@@ -157,12 +157,17 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.SKYROOT_STICK.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         this.generateFlatItem(AetherIIItems.SCATTERGLASS_SHARD.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.AMBROSIUM_SHARD.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.FOSSILIZED_ZANITE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.ZANITE_GEMSTONE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.INERT_ARKENIUM.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.ARKENIUM_PLATE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.INERT_GRAVITITE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GRAVITITE_PLATE.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.FOSSILIZED_CORROBONITE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.CORROBONITE_CRYSTAL.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.NEPTUNE_SCALE.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.SENTRY_SERVO.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.FOSSILIZED_GLINT.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GLINT_GEMSTONE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GOLDEN_AMBER.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.CLOUDTWINE.get(), ModelTemplates.FLAT_ITEM);
@@ -275,6 +280,8 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.CARRION_SPROUT_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.GLITTERWING_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.SHROUDWING_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.ZEPHYR_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.TEMPEST_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.COCKATRICE_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);

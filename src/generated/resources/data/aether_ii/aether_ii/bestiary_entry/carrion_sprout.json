@@ -2,10 +2,10 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.carrion_sprout",
   "effect_resistances": [],
   "entity_type": "aether_ii:carrion_sprout",
-  "health": 8,
+  "health": 12,
   "icon": "aether_ii:guidebook/bestiary/carrion_sprout",
   "id": "aether_ii:carrion_sprout",
-  "impact_defense": 2,
+  "impact_defense": 0,
   "loot_slots": [
     {
       "loot": {
@@ -26,6 +26,6 @@
   ],
   "name": "entity.aether_ii.carrion_sprout",
   "pierce_defense": 0,
-  "slash_defense": -2,
+  "slash_defense": -1,
   "slot_name": "entity.aether_ii.carrion_sprout"
 }

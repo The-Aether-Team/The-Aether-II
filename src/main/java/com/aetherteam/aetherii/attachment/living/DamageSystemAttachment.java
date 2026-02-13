@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractArrowAccessor;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
+import com.aetherteam.aetherii.network.packet.clientbound.ResistanceKnockbackPacket;
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
@@ -15,6 +16,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -143,9 +145,9 @@ public class DamageSystemAttachment implements ValueIOSerializable {
                     });
                 }
                 if (slashDamage.get() != 0 || impactDamage.get() != 0 || pierceDamage.get() != 0) {
-                    this.createSoundsAndParticles(directEntity, target, slashDamage.get(), slashDefense, AetherIIParticleTypes.SLASH_DAMAGE.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_INCORRECT.get());
-                    this.createSoundsAndParticles(directEntity, target, impactDamage.get(), impactDefense, AetherIIParticleTypes.IMPACT_DAMAGE.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_INCORRECT.get());
-                    this.createSoundsAndParticles(directEntity, target, pierceDamage.get(), pierceDefense, AetherIIParticleTypes.PIERCE_DAMAGE.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_INCORRECT.get());
+                    this.createFeedback(directEntity, target, slashDamage.get(), slashDefense, AetherIIParticleTypes.SLASH_DAMAGE.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_INCORRECT.get());
+                    this.createFeedback(directEntity, target, impactDamage.get(), impactDefense, AetherIIParticleTypes.IMPACT_DAMAGE.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_INCORRECT.get());
+                    this.createFeedback(directEntity, target, pierceDamage.get(), pierceDefense, AetherIIParticleTypes.PIERCE_DAMAGE.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_INCORRECT.get());
 
                     double slashCalculation = slashDamage.get() > 0.0 ? Math.max(slashDamage.get() - slashDefense, 0.0) : 0.0;
                     double impactCalculation = impactDamage.get() > 0.0 ? Math.max(impactDamage.get() - impactDefense, 0.0) : 0.0;
@@ -168,9 +170,12 @@ public class DamageSystemAttachment implements ValueIOSerializable {
         return (float) damage;
     }
 
-    private void createSoundsAndParticles(Entity source, Entity target, double damage, double defense, SimpleParticleType particleType, SoundEvent correct, SoundEvent incorrect) {
+    private void createFeedback(Entity source, Entity target, double damage, double defense, SimpleParticleType particleType, SoundEvent correct, SoundEvent incorrect) {
         if (damage > 0) {
             if (defense > 0) {
+                if (source instanceof ServerPlayer serverPlayer) {
+                    PacketDistributor.sendToPlayer(serverPlayer, new ResistanceKnockbackPacket(serverPlayer.getId(), target.getId()));
+                }
                 source.level().playSound(null, source.getX(), source.getY(), source.getZ(), incorrect, source.getSoundSource(), 1.0F, 1.0F);
             } else if (defense < 0) {
                 if (source.level() instanceof ServerLevel serverLevel) {

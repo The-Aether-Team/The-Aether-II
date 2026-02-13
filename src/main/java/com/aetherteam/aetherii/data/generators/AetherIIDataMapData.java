@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.data.resources.maps.AmberHourglassFuel;
 import com.aetherteam.aetherii.data.resources.maps.BlockInfection;
 import com.aetherteam.aetherii.data.resources.maps.BucketReplacement;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
@@ -113,6 +114,9 @@ public class AetherIIDataMapData extends DataMapProvider {
         fuels.add(AetherIIItems.SKYROOT_TROWEL, new FurnaceFuel(200), false);
         fuels.add(AetherIIBlocks.SKYROOT_TWIG.asItem().builtInRegistryHolder(), new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_STICK, new FurnaceFuel(100), false);
+
+        var amberHourglassFuels = this.builder(AetherIIDataMaps.AMBER_HOURGLASS_FUELS);
+        amberHourglassFuels.add(AetherIIItems.GOLDEN_AMBER, new AmberHourglassFuel(400), false);
 
         var buckets = this.builder(AetherIIDataMaps.BUCKET_REPLACEMENT);
         buckets.add(Items.WATER_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_WATER_BUCKET.getKey()), false);

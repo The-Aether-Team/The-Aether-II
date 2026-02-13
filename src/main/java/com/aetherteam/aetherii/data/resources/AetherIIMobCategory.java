@@ -9,5 +9,6 @@ public class AetherIIMobCategory {
     public static final MobCategory AETHER_CAVE_MONSTER = MobCategory.valueOf("AETHER_II_AETHER_CAVE_MONSTER");
     public static final MobCategory AETHER_SKY_MONSTER = MobCategory.valueOf("AETHER_II_AETHER_SKY_MONSTER");
     public static final MobCategory AETHER_DUNGEON_MONSTER = MobCategory.valueOf("AETHER_II_AETHER_DUNGEON_MONSTER");
+    public static final MobCategory AETHER_AMBIENT = MobCategory.valueOf("AETHER_II_AETHER_AMBIENT");
     public static final MobCategory AETHER_AERWHALE = MobCategory.valueOf("AETHER_II_AETHER_AERWHALE");
 }

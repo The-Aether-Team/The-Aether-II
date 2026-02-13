@@ -46,6 +46,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ENGRAVED_DISC_HIGH.get(),
                 AetherIIItems.ENGRAVED_DISC_REVOLUTIONS.get());
         this.tag(AetherIITags.Items.RODS_SKYROOT).add(AetherIIItems.SKYROOT_STICK.get());
+        this.tag(AetherIITags.Items.GEMS_AMBER).add(AetherIIItems.GOLDEN_AMBER.get());
         this.tag(AetherIITags.Items.GEMS_ZANITE).add(AetherIIItems.ZANITE_GEMSTONE.get());
         this.tag(AetherIITags.Items.PLATES_ARKENIUM).add(AetherIIItems.ARKENIUM_PLATE.get());
         this.tag(AetherIITags.Items.PLATES_GRAVITITE).add(AetherIIItems.GRAVITITE_PLATE.get());
@@ -329,6 +330,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.SENTRY_BOOTS_REPAIRING);
         this.tag(AetherIITags.Items.NEPTUNE_REPAIRING);
         this.tag(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS);
+        this.tag(AetherIITags.Items.CAN_USE_ON_AERCLOUD).addTag(AetherIITags.Items.AERCLOUDS);
         this.tag(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS).add(
                 AetherIIItems.HOLYSTONE_AXE.get(),
                 AetherIIItems.ZANITE_AXE.get(),
@@ -339,7 +341,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.SKYROOT_STICK.get(),
                 AetherIIItems.SKYROOT_PINECONE.get(),
                 AetherIIItems.AMBROSIUM_SHARD.get(),
-                AetherIIItems.ZANITE_GEMSTONE.get(),
+                AetherIIItems.FOSSILIZED_ZANITE.get(),
                 AetherIIItems.INERT_ARKENIUM.get(),
                 AetherIIItems.INERT_GRAVITITE.get(),
                 AetherIIItems.SCATTERGLASS_SHARD.get(),

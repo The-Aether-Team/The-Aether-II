@@ -6,7 +6,7 @@ import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-public class FlyingMoveControl  extends MoveControl {
+public class FlyingMoveControl extends MoveControl {
     private final Mob mob;
     private int floatDuration;
 
