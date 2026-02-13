@@ -11,7 +11,9 @@ import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.recipe.recipes.OutputEntry;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentExactPredicate;
 import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -21,6 +23,7 @@ import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
@@ -1584,515 +1587,515 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 AetherIIBlocks.CORROBONITE_ORE, 0.0F).group("corrobonite").save(this.output, this.name("restore_corrobonite_crystal_from_ore"));
 
 
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
                 AetherIIItems.SKYROOT_SHOVEL, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_shovel"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 75), this.hourglass(2, 15), this.hourglass(3, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.SKYROOT_PICKAXE, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_pickaxe"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 75), this.hourglass(2, 15), this.hourglass(3, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.SKYROOT_AXE, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_axe"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.SKYROOT_TROWEL, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_trowel"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.SKYROOT_SHORTSWORD, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_shortsword"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.SKYROOT_SPEAR, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_spear"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.SKYROOT_HAMMER, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_hammer"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 100)),
                 AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 100)),
                 AetherIIItems.SKYROOT_CROSSBOW, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_crossbow"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 25), this.hourglass(1, 75)),
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(3, 75), this.hourglass(4, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.SKYROOT_SHIELD, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_shield"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 100)),
                 AetherIIItems.GOLDEN_AMBER, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
                 AetherIIItems.DART_SHOOTER, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_dart_shooter"));
 
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.BEAST_PELT, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.BEAST_PELT_HELMET, 0.0F).group("beast_pelt_armor").save(this.output, this.name("uncraft_beast_pelt_helmet"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.BEAST_PELT, List.of(this.hourglass(4, 75), this.hourglass(5, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.BEAST_PELT_CHESTPLATE, 0.0F).group("beast_pelt_armor").save(this.output, this.name("uncraft_beast_pelt_chestplate"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.BEAST_PELT, List.of(this.hourglass(3, 75), this.hourglass(4, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.BEAST_PELT_LEGGINGS, 0.0F).group("beast_pelt_armor").save(this.output, this.name("uncraft_beast_pelt_leggings"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.BEAST_PELT, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.BEAST_PELT_BOOTS, 0.0F).group("beast_pelt_armor").save(this.output, this.name("uncraft_beast_pelt_boots"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.BEAST_PELT, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
                 AetherIIItems.BEAST_PELT_GLOVES, 0.0F).group("beast_pelt_armor").save(this.output, this.name("uncraft_beast_pelt_gloves"));
 
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
                 AetherIIItems.HOLYSTONE_SHOVEL, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_shovel"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 15), this.hourglass(3, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.HOLYSTONE_PICKAXE, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_pickaxe"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 15), this.hourglass(3, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.HOLYSTONE_AXE, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_axe"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.HOLYSTONE_TROWEL, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_trowel"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.HOLYSTONE_SHORTSWORD, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_shortsword"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.HOLYSTONE_SPEAR, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_spear"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.HOLYSTONE_HAMMER, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_hammer"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 100)),
                 AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 100)),
                 AetherIIItems.HOLYSTONE_CROSSBOW, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_crossbow"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 AetherIIItems.AMBROSIUM_SHARD, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.HEALING_STONE, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_healing_stone"));
 
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.BURRUKAI_PLATE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.BURRUKAI_PLATE_HELMET, 0.0F).group("burrukai_plate_armor").save(this.output, this.name("uncraft_burrukai_plate_helmet"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.BURRUKAI_PLATE, List.of(this.hourglass(4, 75), this.hourglass(5, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.BURRUKAI_PLATE_CHESTPLATE, 0.0F).group("burrukai_plate_armor").save(this.output, this.name("uncraft_burrukai_plate_chestplate"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.BURRUKAI_PLATE, List.of(this.hourglass(3, 75), this.hourglass(4, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.BURRUKAI_PLATE_LEGGINGS, 0.0F).group("burrukai_plate_armor").save(this.output, this.name("uncraft_burrukai_plate_leggings"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.BURRUKAI_PLATE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.BURRUKAI_PLATE_BOOTS, 0.0F).group("burrukai_plate_armor").save(this.output, this.name("uncraft_burrukai_plate_boots"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.BURRUKAI_PLATE, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
                 AetherIIItems.BURRUKAI_PLATE_GLOVES, 0.0F).group("burrukai_plate_armor").save(this.output, this.name("uncraft_burrukai_plate_gloves"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 25), this.hourglass(1, 75)),
                 AetherIIItems.BURRUKAI_PLATE, List.of(this.hourglass(3, 75), this.hourglass(4, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.BURRUKAI_PLATE_SHIELD, 0.0F).group("burrukai_plate_armor").save(this.output, this.name("uncraft_burrukau_plate_shield"));
 
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_SHOVEL, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_shovel"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 15), this.hourglass(3, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_PICKAXE, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_pickaxe"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 15), this.hourglass(3, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_AXE, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_axe"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_TROWEL, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_trowel"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_SHORTSWORD, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_shortsword"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_SPEAR, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_spear"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_HAMMER, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_hammer"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 100)),
                 AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 100)),
                 AetherIIItems.ZANITE_CROSSBOW, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_crossbow"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_SHEARS, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_shears"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 25), this.hourglass(1, 75)),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(3, 75), this.hourglass(4, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_SHIELD, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_shield"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 50), this.hourglass(2, 50)),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_PENDANT, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_pendant"));
 
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_HELMET, 0.0F).group("zanite_armor").save(this.output, this.name("uncraft_zanite_helmet"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(4, 75), this.hourglass(5, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_CHESTPLATE, 0.0F).group("zanite_armor").save(this.output, this.name("uncraft_zanite_chestplate"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(3, 75), this.hourglass(4, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_LEGGINGS, 0.0F).group("zanite_armor").save(this.output, this.name("uncraft_zanite_leggings"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_BOOTS, 0.0F).group("zanite_armor").save(this.output, this.name("uncraft_zanite_boots"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
                 AetherIIItems.ZANITE_GLOVES, 0.0F).group("zanite_armor").save(this.output, this.name("uncraft_zanite_gloves"));
 
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
                 AetherIIItems.ARKENIUM_SHOVEL, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_shovel"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 80), this.hourglass(2, 10), this.hourglass(3, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.ARKENIUM_PICKAXE, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_pickaxe"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 80), this.hourglass(2, 10), this.hourglass(3, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.ARKENIUM_AXE, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_axe"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
                 Items.AIR, List.of(),
                 AetherIIItems.ARKENIUM_TROWEL, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_trowel"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
                 Items.AIR, List.of(),
                 AetherIIItems.ARKENIUM_SHORTSWORD, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_shortsword"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
                 Items.AIR, List.of(),
                 AetherIIItems.ARKENIUM_SPEAR, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_spear"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
                 Items.AIR, List.of(),
                 AetherIIItems.ARKENIUM_HAMMER, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_hammer"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 100)),
                 AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 100)),
                 AetherIIItems.ARKENIUM_CROSSBOW, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_crossbow"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 25), this.hourglass(1, 75)),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(3, 80), this.hourglass(4, 20)),
                 Items.AIR, List.of(),
                 AetherIIItems.ARKENIUM_SHIELD, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_shield"));
 
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(2, 80), this.hourglass(3, 20)),
                 Items.AIR, List.of(),
                 AetherIIItems.ARKENIUM_HELMET, 0.0F).group("arkenium_armor").save(this.output, this.name("uncraft_arkenium_helmet"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(4, 80), this.hourglass(5, 20)),
                 Items.AIR, List.of(),
                 AetherIIItems.ARKENIUM_CHESTPLATE, 0.0F).group("arkenium_armor").save(this.output, this.name("uncraft_arkenium_chestplate"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(3, 80), this.hourglass(4, 20)),
                 Items.AIR, List.of(),
                 AetherIIItems.ARKENIUM_LEGGINGS, 0.0F).group("arkenium_armor").save(this.output, this.name("uncraft_arkenium_leggings"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(2, 80), this.hourglass(3, 20)),
                 Items.AIR, List.of(),
                 AetherIIItems.ARKENIUM_BOOTS, 0.0F).group("arkenium_armor").save(this.output, this.name("uncraft_arkenium_boots"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
                 AetherIIItems.ARKENIUM_GLOVES, 0.0F).group("arkenium_armor").save(this.output, this.name("uncraft_arkenium_gloves"));
 
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
                 AetherIIItems.GRAVITITE_SHOVEL, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_shovel"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 80), this.hourglass(2, 10), this.hourglass(3, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.GRAVITITE_PICKAXE, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_pickaxe"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 80), this.hourglass(2, 10), this.hourglass(3, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.GRAVITITE_AXE, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_axe"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
                 Items.AIR, List.of(),
                 AetherIIItems.GRAVITITE_TROWEL, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_trowel"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
                 Items.AIR, List.of(),
                 AetherIIItems.GRAVITITE_SHORTSWORD, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_shortsword"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
                 Items.AIR, List.of(),
                 AetherIIItems.GRAVITITE_SPEAR, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_spear"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
                 Items.AIR, List.of(),
                 AetherIIItems.GRAVITITE_HAMMER, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_hammer"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 100)),
                 AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 100)),
                 AetherIIItems.GRAVITITE_CROSSBOW, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_crossbow"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 25), this.hourglass(1, 75)),
                 AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(3, 80), this.hourglass(4, 20)),
                 Items.AIR, List.of(),
                 AetherIIItems.GRAVITITE_SHIELD, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_shield"));
 
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(2, 85), this.hourglass(3, 15)),
                 Items.AIR, List.of(),
                 AetherIIItems.GRAVITITE_HELMET, 0.0F).group("gravitite_armor").save(this.output, this.name("uncraft_gravitite_helmet"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(4, 85), this.hourglass(5, 15)),
                 Items.AIR, List.of(),
                 AetherIIItems.GRAVITITE_CHESTPLATE, 0.0F).group("gravitite_armor").save(this.output, this.name("uncraft_gravitite_chestplate"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(3, 85), this.hourglass(4, 15)),
                 Items.AIR, List.of(),
                 AetherIIItems.GRAVITITE_LEGGINGS, 0.0F).group("gravitite_armor").save(this.output, this.name("uncraft_gravitite_leggings"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(2, 85), this.hourglass(3, 15)),
                 Items.AIR, List.of(),
                 AetherIIItems.GRAVITITE_BOOTS, 0.0F).group("gravitite_armor").save(this.output, this.name("uncraft_gravitite_boots"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
                 AetherIIItems.GRAVITITE_GLOVES, 0.0F).group("gravitite_armor").save(this.output, this.name("uncraft_gravitite_gloves"));
 
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingIngredient(RecipeCategory.MISC,
                 AetherIIItems.CLOUDTWINE, List.of(this.hourglass(0, 50), this.hourglass(1, 50)),
                 AetherIIItems.BEAST_PELT, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
-                AetherIIItems.BEAST_PELT_BUNDLE, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_beast_pelt_bundle"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+                DataComponentIngredient.of(false, DataComponentExactPredicate.expect(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY), AetherIIItems.BEAST_PELT_BUNDLE.get()), 0.0F, this.has(AetherIIItems.BEAST_PELT_BUNDLE)).group("misc_tools").save(this.output, this.name("uncraft_beast_pelt_bundle"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 50), this.hourglass(2, 50)),
                 Items.AIR, List.of(),
                 AetherIIItems.SKYROOT_BUCKET, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_skyroot_bucket"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.BRETTL_ROPE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.BRETTL_LASSO, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_brettl_lasso"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 50), this.hourglass(1, 50)),
                 AetherIIBlocks.COLD_AERCLOUD, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.COLD_AERCLOUD_GLIDER, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_cold_aercloud_glider"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 50), this.hourglass(1, 50)),
                 AetherIIBlocks.BLUE_AERCLOUD, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.BLUE_AERCLOUD_GLIDER, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_blue_aercloud_glider"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 50), this.hourglass(1, 50)),
                 AetherIIBlocks.PURPLE_AERCLOUD, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.PURPLE_AERCLOUD_GLIDER, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_purple_aercloud_glider"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 50), this.hourglass(1, 50)),
                 AetherIIBlocks.GOLDEN_AERCLOUD, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.GOLDEN_AERCLOUD_GLIDER, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_golden_aercloud_glider"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIBlocks.COLD_AERCLOUD, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
                 AetherIIItems.CLOUD_SKIFF, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_cloud_skiff"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 100)),
                 AetherIIItems.BEAST_PELT, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.MOA_SADDLE, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_moa_saddle"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 100)),
                 AetherIIItems.BEAST_PELT, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(4, 75), this.hourglass(5, 25)),
                 AetherIIItems.MOA_SADDLEBAG, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_moa_saddlebag"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 100)),
                 AetherIIItems.BEAST_PELT, List.of(this.hourglass(3, 75), this.hourglass(4, 25)),
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(4, 75), this.hourglass(5, 25)),
                 AetherIIItems.LARGE_MOA_SADDLEBAG, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_large_moa_saddlebag"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SCATTERGLASS_SHARD, List.of(this.hourglass(4, 75), this.hourglass(5, 25)),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.ARKENIUM_CANISTER, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_arkenium_cannister"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIBlocks.FERROSITE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.GOLDEN_AMBER, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 Items.AIR, List.of(),
                 AetherIIItems.MUSIC_PLAYER, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_music_player"));
 
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.NEPTUNE_SCALE, List.of(this.hourglass(2, 60), this.hourglass(3, 35), this.hourglass(4, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.NEPTUNE_HELMET, 0.0F).group("neptune_armor").save(this.output, this.name("uncraft_neptune_helmet"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.NEPTUNE_SCALE, List.of(this.hourglass(2, 60), this.hourglass(3, 35), this.hourglass(4, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.NEPTUNE_CHESTPLATE, 0.0F).group("neptune_armor").save(this.output, this.name("uncraft_neptune_chestplate"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.NEPTUNE_SCALE, List.of(this.hourglass(2, 60), this.hourglass(3, 35), this.hourglass(4, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.NEPTUNE_LEGGINGS, 0.0F).group("neptune_armor").save(this.output, this.name("uncraft_neptune_leggings"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.NEPTUNE_SCALE, List.of(this.hourglass(2, 60), this.hourglass(3, 35), this.hourglass(4, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.NEPTUNE_BOOTS, 0.0F).group("neptune_armor").save(this.output, this.name("uncraft_neptune_boots"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.NEPTUNE_SCALE, List.of(this.hourglass(2, 60), this.hourglass(3, 35), this.hourglass(4, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.NEPTUNE_GLOVES, 0.0F).group("neptune_armor").save(this.output, this.name("uncraft_neptune_gloves"));
 
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.SENTRY_SERVO, List.of(this.hourglass(2, 60), this.hourglass(3, 35), this.hourglass(4, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.HAMMER_OF_DEMOLITION, 0.0F).group("sentry_loot").save(this.output, this.name("uncraft_hammer_of_demolition"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.SENTRY_SERVO, List.of(this.hourglass(2, 60), this.hourglass(3, 35), this.hourglass(4, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.SENTRY_BOOTS, 0.0F).group("sentry_loot").save(this.output, this.name("uncraft_sentry_boots"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIItems.SENTRY_SERVO, List.of(this.hourglass(2, 60), this.hourglass(3, 35), this.hourglass(4, 5)),
                 Items.AIR, List.of(),
                 AetherIIItems.KINETIC_THRUSTERS, 0.0F).group("sentry_loot").save(this.output, this.name("uncraft_kinetic_thrusters"));
 
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
                 AetherIIItems.GOLDEN_AMBER, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1,100)),
                 AetherIIBlocks.AMBER_HOURGLASS, 0.0F).group("utility_blocks").save(this.output, this.name("uncraft_amber_hourglass"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIBlocks.UNDERSHALE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIBlocks.ALTAR, 0.0F).group("utility_blocks").save(this.output, this.name("uncraft_altar"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
                 Items.AIR, List.of(),
                 AetherIIBlocks.ARKENIUM_FORGE, 0.0F).group("utility_blocks").save(this.output, this.name("uncraft_arkenium_forge"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1,75), this.hourglass(2, 25)),
                 AetherIIBlocks.ARTISANS_BENCH, 0.0F).group("utility_blocks").save(this.output, this.name("uncraft_artians_bench"));
-        this.hourglassUncrafting(RecipeCategory.MISC,
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
                 AetherIIItems.SCATTERGLASS_SHARD, List.of(this.hourglass(4, 75), this.hourglass(5, 25)),
                 AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(3, 75), this.hourglass(4, 25)),
                 Items.AIR, List.of(),
