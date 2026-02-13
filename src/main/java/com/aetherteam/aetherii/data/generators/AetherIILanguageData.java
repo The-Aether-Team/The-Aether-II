@@ -1584,8 +1584,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("bestiary", "The Beast");
         this.addAdvancement("ambrosium", "Enlightenment");
         this.addAdvancement("enchanted_aether_grass", "Golden Thumb");
-        this.addAdvancement("golden_amber", "Prehistoric");
-        this.addAdvancement("amber_hourglass", "Time Warp");
+        this.addAdvancement("golden_amber", "Wisdom of the Ancients");
+        this.addAdvancement("amber_hourglass", "What's Old is New Again");
         this.addAdvancement("zanite", "Exotic Hardware");
         this.addAdvancement("craft_altar", "Do You Believe in Magic?");
         this.addAdvancement("gravitite_plate", "Pink is the New Blue");
