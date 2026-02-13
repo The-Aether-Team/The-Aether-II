@@ -1092,6 +1092,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSpawnEggItem(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.CARRION_SPROUT_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.GLITTERWING_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.SHROUDWING_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.ZEPHYR_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.TEMPEST_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.COCKATRICE_SPAWN_EGG);
@@ -1346,6 +1348,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.ARCTIC_KIRRID, "Arctic Kirrid");
         this.addEntityType(AetherIIEntityTypes.MOA, "Moa");
         this.addEntityType(AetherIIEntityTypes.SKYROOT_LIZARD, "Skyroot Lizard");
+        this.addEntityType(AetherIIEntityTypes.GLITTERWING, "Glitterwing");
+        this.addEntityType(AetherIIEntityTypes.SHROUDWING, "Shroudwing");
 
         // Hostile
         this.addEntityType(AetherIIEntityTypes.AECHOR_PLANT, "Aechor Plant");
@@ -1679,6 +1683,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     
         this.addBestiaryDescription(AetherIIEntityTypes.MOA.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.SKYROOT_LIZARD.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.GLITTERWING.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.SHROUDWING.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), loremIpsum);
         this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), loremIpsum);

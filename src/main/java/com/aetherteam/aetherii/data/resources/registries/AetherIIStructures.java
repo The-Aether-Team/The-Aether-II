@@ -73,7 +73,7 @@ public class AetherIIStructures {
                 6, 64, 24,
                 new SentryRuinsProcessorSettings(
                         processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM),
-                        processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_TUNNEL),
+                        processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_STAIRCASE),
                         processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_BOSS_ROOM))));
 
         context.register(INFECTED_GUARDIAN_TREE, new AetherJigsawStructure(

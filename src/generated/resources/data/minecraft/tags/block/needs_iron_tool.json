@@ -1,5 +1,7 @@
 {
   "values": [
+    "aether_ii:golden_aercloud",
+    "aether_ii:storm_aercloud",
     "aether_ii:undershale",
     "aether_ii:undershale_stairs",
     "aether_ii:undershale_slab",
@@ -29,6 +31,7 @@
     "aether_ii:sentry_pillar",
     "aether_ii:undershale_ambrosium_ore",
     "aether_ii:undershale_zanite_ore",
+    "aether_ii:zanite_block",
     "aether_ii:glint_ore",
     "aether_ii:arkenium_ore",
     "aether_ii:gravitite_ore",

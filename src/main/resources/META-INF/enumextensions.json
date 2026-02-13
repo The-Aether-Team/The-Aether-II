@@ -83,6 +83,12 @@
     },
     {
       "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_II_AETHER_AMBIENT",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_ii:aether_ambient", 25, true, false, 96 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
       "name": "AETHER_II_AETHER_AERWHALE",
       "constructor": "(Ljava/lang/String;IZZI)V",
       "parameters": [ "aether_ii:aether_aerwhale", 1, true, false, 128 ]

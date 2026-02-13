@@ -408,7 +408,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     public boolean dropPlate() {
-        if (this.getRandom().nextFloat() < 0.01F) {
+        if (this.getRandom().nextFloat() < 0.00005F) {
             this.setPlate(false);
             return true;
         }

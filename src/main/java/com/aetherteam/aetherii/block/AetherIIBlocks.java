@@ -149,12 +149,12 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> CORROBONITE_CLUSTER = register("corrobonite_cluster", CorroboniteClusterBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).strength(3.0F, 3.0F).replaceable().noOcclusion().noCollission().instabreak());
 
     // Aerclouds
-    public static final DeferredBlock<Block> COLD_AERCLOUD = register("cold_aercloud", AercloudBlock::new, aercloudProperties(MapColor.SNOW));
-    public static final DeferredBlock<Block> GOLDEN_AERCLOUD = register("golden_aercloud", AercloudBlock::new, aercloudProperties(MapColor.COLOR_YELLOW));
-    public static final DeferredBlock<Block> BLUE_AERCLOUD = register("blue_aercloud", BlueAercloudBlock::new, aercloudProperties(MapColor.COLOR_LIGHT_BLUE));
-    public static final DeferredBlock<Block> GREEN_AERCLOUD = register("green_aercloud", GreenAercloudBlock::new, aercloudProperties(MapColor.COLOR_LIGHT_GREEN));
-    public static final DeferredBlock<Block> PURPLE_AERCLOUD = register("purple_aercloud", PurpleAercloudBlock::new, aercloudProperties(MapColor.COLOR_MAGENTA));
-    public static final DeferredBlock<Block> STORM_AERCLOUD = register("storm_aercloud", AercloudBlock::new, aercloudProperties(MapColor.DEEPSLATE));
+    public static final DeferredBlock<Block> COLD_AERCLOUD = register("cold_aercloud", AercloudBlock::new, coldAercloudProperties(MapColor.SNOW));
+    public static final DeferredBlock<Block> GOLDEN_AERCLOUD = register("golden_aercloud", AercloudBlock::new, specialAercloudProperties(MapColor.COLOR_YELLOW));
+    public static final DeferredBlock<Block> BLUE_AERCLOUD = register("blue_aercloud", BlueAercloudBlock::new, specialAercloudProperties(MapColor.COLOR_LIGHT_BLUE));
+    public static final DeferredBlock<Block> GREEN_AERCLOUD = register("green_aercloud", GreenAercloudBlock::new, specialAercloudProperties(MapColor.COLOR_LIGHT_GREEN));
+    public static final DeferredBlock<Block> PURPLE_AERCLOUD = register("purple_aercloud", PurpleAercloudBlock::new, specialAercloudProperties(MapColor.COLOR_MAGENTA));
+    public static final DeferredBlock<Block> STORM_AERCLOUD = register("storm_aercloud", AercloudBlock::new, specialAercloudProperties(MapColor.DEEPSLATE));
 
     // Moa Nest
     public static final DeferredBlock<Block> WOVEN_SKYROOT_STICKS = register("woven_skyroot_sticks", WovenSticksBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(0.75F).sound(SoundType.GRASS));

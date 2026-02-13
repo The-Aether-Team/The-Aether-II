@@ -1151,6 +1151,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBRELINN_MOSS_CARPET.get()
         );
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(
+                AetherIIBlocks.BLUE_AERCLOUD.get(),
+                AetherIIBlocks.GREEN_AERCLOUD.get(),
+                AetherIIBlocks.PURPLE_AERCLOUD.get(),
                 AetherIIBlocks.ICESTONE.get(),
                 AetherIIBlocks.ICESTONE_STAIRS.get(),
                 AetherIIBlocks.ICESTONE_SLAB.get(),
@@ -1170,6 +1173,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ZANITE_BLOCK.get()
         );
         this.tag(BlockTags.NEEDS_IRON_TOOL).add(
+                AetherIIBlocks.GOLDEN_AERCLOUD.get(),
+                AetherIIBlocks.STORM_AERCLOUD.get(),
                 AetherIIBlocks.UNDERSHALE.get(),
                 AetherIIBlocks.UNDERSHALE_STAIRS.get(),
                 AetherIIBlocks.UNDERSHALE_SLAB.get(),
@@ -1199,6 +1204,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SENTRY_PILLAR.get(),
                 AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(),
+                AetherIIBlocks.ZANITE_BLOCK.get()
+        );
+        this.tag(BlockTags.NEEDS_IRON_TOOL).add(
                 AetherIIBlocks.GLINT_ORE.get(),
                 AetherIIBlocks.ARKENIUM_ORE.get(),
                 AetherIIBlocks.GRAVITITE_ORE.get(),

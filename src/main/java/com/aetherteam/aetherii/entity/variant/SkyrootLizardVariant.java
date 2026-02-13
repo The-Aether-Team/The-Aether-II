@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.api;
+package com.aetherteam.aetherii.entity.variant;
 
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.mojang.serialization.Codec;
