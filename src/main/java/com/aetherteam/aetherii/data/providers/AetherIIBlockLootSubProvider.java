@@ -33,12 +33,11 @@ import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
-import net.minecraft.world.level.storage.loot.predicates.MatchTool;
+import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.loot.CanItemPerformAbility;
 
 import java.util.Set;
 import java.util.stream.IntStream;
@@ -303,5 +302,10 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                 .add(LootItem.lootTableItem(block)
                         .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY).include(AetherIIDataComponents.MOA_EGG_TYPE.get()))))
         );
+    }
+
+    @Override
+    protected LootItemCondition.Builder hasShears() {
+        return CanItemPerformAbility.canItemPerformAbility(ItemAbilities.SHEARS_DIG);
     }
 }
