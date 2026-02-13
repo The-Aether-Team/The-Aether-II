@@ -31,6 +31,7 @@ public class AetherIIPools {
 
         OutpostPools.bootstrap(context);
         CampPools.bootstrap(context);
+        WatchtowerPools.bootstrap(context);
         InfectedGuardianTreePools.bootstrap(context);
     }
 

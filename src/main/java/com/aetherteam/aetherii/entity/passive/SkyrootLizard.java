@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.entity.passive;
 
-import com.aetherteam.aetherii.api.SkyrootLizardVariant;
+import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIISkyrootLizardVariants;
@@ -142,5 +142,10 @@ public class SkyrootLizard extends AetherAnimal {
     public void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
         VariantUtils.readVariant(input, AetherIIRegistries.SKYROOT_LIZARD_VARIANT).ifPresent(this::setVariant);
+    }
+
+    @Override
+    public int getMaxFallDistance() {
+        return this.onGround() || this.fallDistance < 5 ? 1 : super.getMaxFallDistance();
     }
 }

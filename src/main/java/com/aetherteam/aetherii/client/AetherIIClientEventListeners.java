@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.event.hooks.MusicHooks;
 import com.aetherteam.aetherii.client.event.hooks.RenderHooks;
+import com.aetherteam.aetherii.client.event.listeners.LevelClientListener;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -58,6 +59,8 @@ public class AetherIIClientEventListeners {
 
         // Datapacks
         bus.addListener(AetherIIClientEventListeners::onDatapackSync);
+
+        //bus.addListener(LevelClientListener::onKeyPress); todo: remove after port to 1.21.9+
     }
 
     public static void onGuiOpen(ScreenEvent.Opening event) {

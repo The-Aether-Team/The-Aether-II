@@ -1,0 +1,59 @@
+{
+  "parent": "aether_ii:blue_aercloud",
+  "criteria": {
+    "blue_aercloud_glider": {
+      "conditions": {
+        "item": {
+          "items": "aether_ii:blue_aercloud_glider"
+        }
+      },
+      "trigger": "minecraft:using_item"
+    },
+    "cold_aercloud_glider": {
+      "conditions": {
+        "item": {
+          "items": "aether_ii:cold_aercloud_glider"
+        }
+      },
+      "trigger": "minecraft:using_item"
+    },
+    "golden_aercloud_glider": {
+      "conditions": {
+        "item": {
+          "items": "aether_ii:golden_aercloud_glider"
+        }
+      },
+      "trigger": "minecraft:using_item"
+    },
+    "purple_aercloud_glider": {
+      "conditions": {
+        "item": {
+          "items": "aether_ii:purple_aercloud_glider"
+        }
+      },
+      "trigger": "minecraft:using_item"
+    }
+  },
+  "display": {
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.aercloud_glider.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:golden_aercloud_glider"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.aercloud_glider"
+    }
+  },
+  "requirements": [
+    [
+      "cold_aercloud_glider",
+      "golden_aercloud_glider",
+      "blue_aercloud_glider",
+      "purple_aercloud_glider"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

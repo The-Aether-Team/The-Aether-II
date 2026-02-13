@@ -44,11 +44,11 @@ public class GuidebookPageItem extends Item {
             if (dataList != null) {
                 for (GuidebookEntryData data : dataList) {
                     if (data.registry().toString().equals(AetherIIRegistries.BESTIARY_ENTRY.location().toString())) {
-                        return this.unlockEntries(serverPlayer, attachment, data, attachment.getBestiaryEntries());
+                        return this.unlockEntries(serverPlayer, stack, attachment, data, attachment.getBestiaryEntries());
                     } else if (data.registry().toString().equals(AetherIIRegistries.EFFECTS_ENTRY.location().toString())) {
-                        return this.unlockEntries(serverPlayer, attachment, data, attachment.getEffectsEntries());
+                        return this.unlockEntries(serverPlayer, stack, attachment, data, attachment.getEffectsEntries());
                     } else if (data.registry().toString().equals(AetherIIRegistries.EXPLORATION_ENTRY.location().toString())) {
-                        return this.unlockEntries(serverPlayer, attachment, data, attachment.getExplorationEntries());
+                        return this.unlockEntries(serverPlayer, stack, attachment, data, attachment.getExplorationEntries());
                     }
                 }
             } else {
@@ -61,6 +61,9 @@ public class GuidebookPageItem extends Item {
                 }
                 if (icon != null) {
                     PacketDistributor.sendToPlayer(serverPlayer, new GuidebookToastPacket(GuidebookToast.Type.DISCOVERY, icon));
+                    if (!player.getAbilities().instabuild) {
+                        stack.shrink(1);
+                    }
                     return InteractionResult.SUCCESS_SERVER;
                 }
             }
@@ -68,7 +71,7 @@ public class GuidebookPageItem extends Item {
         return InteractionResult.PASS;
     }
 
-    private InteractionResult unlockEntries(ServerPlayer serverPlayer, GuidebookDiscoveryAttachment attachment, GuidebookEntryData data, List<? extends MutableEntry> entries) {
+    private InteractionResult unlockEntries(ServerPlayer serverPlayer, ItemStack stack, GuidebookDiscoveryAttachment attachment, GuidebookEntryData data, List<? extends MutableEntry> entries) {
         if (entries != null) {
             for (MutableEntry entry : entries) {
                 GuidebookToast.Icons icon = null;
@@ -86,6 +89,9 @@ public class GuidebookPageItem extends Item {
                 }
                 if (icon != null) {
                     PacketDistributor.sendToPlayer(serverPlayer, new GuidebookToastPacket(GuidebookToast.Type.DISCOVERY, icon));
+                    if (!serverPlayer.getAbilities().instabuild) {
+                        stack.shrink(1);
+                    }
                     return InteractionResult.SUCCESS_SERVER;
                 }
             }

@@ -1,5 +1,12 @@
 {
   "criteria": {
+    "buildup_stun": {
+      "conditions": {
+        "mob_effects": "aether_ii:stun",
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
     "obtain_stun": {
       "conditions": {
         "effects": {
@@ -11,7 +18,8 @@
   },
   "requirements": [
     [
-      "obtain_stun"
+      "obtain_stun",
+      "buildup_stun"
     ]
   ],
   "sends_telemetry_event": true

@@ -52,10 +52,6 @@ public class KirridNodeEvaluator extends WalkNodeEvaluator { //todo: 1.21 portin
                         && pathtype != PathType.POWDER_SNOW) {
                     node = this.tryJumpOn(x, y, z, verticalDeltaLimit, nodeFloorLevel, direction, pathType, blockpos$mutableblockpos);
 
-                    //second jump start
-                    if (node == null) {
-                        node = this.tryJumpOn(x, y + 1, z, verticalDeltaLimit, nodeFloorLevel, direction, pathType, blockpos$mutableblockpos);
-                    }
                 } else if (!this.isAmphibious() && pathtype == PathType.WATER && !this.canFloat()) {
                     node = this.tryFindFirstNonWaterBelow(x, y, z, node);
                 } else if (pathtype == PathType.OPEN) {
@@ -112,15 +108,15 @@ public class KirridNodeEvaluator extends WalkNodeEvaluator { //todo: 1.21 portin
         } else if (node.type != PathType.OPEN && node.type != PathType.WALKABLE) {
             return node;
         } else {
-            double d0 = (double) (x - direction.getStepX()) + 0.5;
-            double d1 = (double) (z - direction.getStepZ()) + 0.5;
-            double d2 = (double) this.mob.getBbWidth() / 2.0;
+            double d0 = x - direction.getStepX() + 0.5;
+            double d1 = z - direction.getStepZ() + 0.5;
+            double d2 = this.mob.getBbWidth() / 2.0;
             AABB aabb = new AABB(
                     d0 - d2,
-                    this.getFloorLevel(pos.set(d0, (double) (y + 1), d1)) + 0.001,
+                    this.getFloorLevel(pos.set(d0, (y + 1), d1)) + 0.001,
                     d1 - d2,
                     d0 + d2,
-                    (double) this.mob.getBbHeight() + this.getFloorLevel(pos.set((double) node.x, (double) node.y, (double) node.z)) - 0.002,
+                    this.mob.getBbHeight() + this.getFloorLevel(pos.set(node.x, node.y, node.z)) - 0.002,
                     d1 + d2
             );
             return this.hasCollisions(aabb) ? null : node;
@@ -170,7 +166,7 @@ public class KirridNodeEvaluator extends WalkNodeEvaluator { //todo: 1.21 portin
 
     private double getMobJumpHeight() {
         //kirrid's jump height is 2 blocks
-        return Math.max(2.125, (double) this.mob.maxUpStep());
+        return Math.max(2.125, this.mob.maxUpStep());
     }
 
     private static boolean doesBlockHavePartialCollision(PathType pathType) {
@@ -180,12 +176,12 @@ public class KirridNodeEvaluator extends WalkNodeEvaluator { //todo: 1.21 portin
     private boolean canReachWithoutCollision(Node node) {
         AABB aabb = this.mob.getBoundingBox();
         Vec3 vec3 = new Vec3(
-                (double) node.x - this.mob.getX() + aabb.getXsize() / 2.0,
-                (double) node.y - this.mob.getY() + aabb.getYsize() / 2.0,
-                (double) node.z - this.mob.getZ() + aabb.getZsize() / 2.0
+                node.x - this.mob.getX() + aabb.getXsize() / 2.0,
+                node.y - this.mob.getY() + aabb.getYsize() / 2.0,
+                node.z - this.mob.getZ() + aabb.getZsize() / 2.0
         );
         int i = Mth.ceil(vec3.length() / aabb.getSize());
-        vec3 = vec3.scale((double) (1.0F / (float) i));
+        vec3 = vec3.scale((1.0F / (float) i));
 
         for (int j = 1; j <= i; j++) {
             aabb = aabb.move(vec3);

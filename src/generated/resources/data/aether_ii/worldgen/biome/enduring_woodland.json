@@ -1,6 +1,6 @@
 {
   "carvers": "aether_ii:highlands_cave",
-  "creature_spawn_probability": 0.15,
+  "creature_spawn_probability": 0.18,
   "downfall": 0.4,
   "effects": {
     "fog_color": 15986943,
@@ -121,7 +121,27 @@
         "weight": 1
       }
     ],
+    "aether_ii:aether_ambient": [
+      {
+        "type": "aether_ii:glitterwing",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:shroudwing",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
     "aether_ii:aether_cave_monster": [
+      {
+        "type": "aether_ii:skephid",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 2
+      },
       {
         "type": "aether_ii:arkenium_taluton",
         "maxCount": 1,
@@ -136,12 +156,6 @@
       }
     ],
     "aether_ii:aether_darkness_monster": [
-      {
-        "type": "aether_ii:skephid",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 2
-      },
       {
         "type": "aether_ii:blue_swet",
         "maxCount": 2,
@@ -162,6 +176,7 @@
       }
     ],
     "aether_ii:aether_dungeon_monster": [],
+    "aether_ii:aether_moa": [],
     "aether_ii:aether_sky_monster": [
       {
         "type": "aether_ii:zephyr",

@@ -28,7 +28,7 @@ public class AetherIIStyleMaterials {
         register(context, AetherIIItems.BEAST_PELT.get(), BEAST_PELT);
         register(context, AetherIIItems.BURRUKAI_PLATE.get(), BURRUKAI_PLATE);
         register(context, AetherIIItems.ZANITE_GEMSTONE.get(), ZANITE);
-        register(context, AetherIIItems.ARKENIUM_PLATES.get(), ARKENIUM);
+        register(context, AetherIIItems.ARKENIUM_PLATE.get(), ARKENIUM);
         register(context, AetherIIItems.GRAVITITE_PLATE.get(), GRAVITITE);
     }
 

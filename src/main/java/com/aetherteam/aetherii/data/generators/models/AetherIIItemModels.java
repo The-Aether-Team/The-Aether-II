@@ -159,7 +159,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.AMBROSIUM_SHARD.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.ZANITE_GEMSTONE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.INERT_ARKENIUM.get(), ModelTemplates.FLAT_ITEM);
-        this.generateFlatItem(AetherIIItems.ARKENIUM_PLATES.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.ARKENIUM_PLATE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.INERT_GRAVITITE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.GRAVITITE_PLATE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.CORROBONITE_CRYSTAL.get(), ModelTemplates.FLAT_ITEM);
@@ -248,7 +248,6 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         // Music Discs
         this.generateMusicPlayer(AetherIIItems.MUSIC_PLAYER.get());
 
-        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_AETHER_TUNE.get());
         this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN.get());
         this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_AERWHALE.get());
         this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_APPROACHES.get());
@@ -256,7 +255,6 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_CHINCHILLA.get());
         this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_HIGH.get());
         this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS.get());
-        this.generateMusicDisc(AetherIIItems.ENGRAVED_DISC_CHASE.get());
 
         // Spawn Eggs
         this.generateFlatItem(AetherIIItems.FLYING_COW_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
@@ -277,6 +275,8 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.CARRION_SPROUT_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.GLITTERWING_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.SHROUDWING_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.ZEPHYR_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.TEMPEST_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.COCKATRICE_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);

@@ -1,0 +1,40 @@
+{
+  "parent": "aether_ii:enter_highlands",
+  "criteria": {
+    "aerbunny": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "passenger": {
+                "type": "aether_ii:aerbunny"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.aerbunny.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:orange"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.aerbunny"
+    }
+  },
+  "requirements": [
+    [
+      "aerbunny"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

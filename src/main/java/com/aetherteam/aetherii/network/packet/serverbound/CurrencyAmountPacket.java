@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.network.packet.serverbound;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -25,7 +26,6 @@ public record CurrencyAmountPacket(int amount) implements CustomPacketPayload {
         return new CurrencyAmountPacket(buf.readInt());
     }
 
-
     @Override
     public Type<CurrencyAmountPacket> type() {
         return TYPE;
@@ -36,6 +36,7 @@ public record CurrencyAmountPacket(int amount) implements CustomPacketPayload {
         if (playerEntity != null && playerEntity.getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
             serverPlayer.getData(AetherIIDataAttachments.CURRENCY.get()).setAmount(payload.amount);
             serverPlayer.syncData(AetherIIDataAttachments.CURRENCY);
+            AetherIIAdvancementTriggers.CURRENCY.get().trigger(serverPlayer, serverPlayer.getData(AetherIIDataAttachments.CURRENCY.get()).getAmount());
         }
     }
 }

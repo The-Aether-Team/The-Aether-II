@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.entity.passive;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.sound.ClientSoundHooks;
@@ -226,5 +225,10 @@ public class Taegore extends AetherAnimal implements DiggingMob {
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
         EntityType<? extends Taegore> variant = level.getRandom().nextBoolean() ? this.variantType : ((Taegore) otherParent).variantType;
         return variant.create(level, EntitySpawnReason.BREEDING);
+    }
+
+    @Override
+    public int getMaxFallDistance() {
+        return this.onGround() || this.fallDistance < 5 ? 1 : super.getMaxFallDistance();
     }
 }

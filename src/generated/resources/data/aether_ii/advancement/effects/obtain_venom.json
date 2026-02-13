@@ -1,5 +1,12 @@
 {
   "criteria": {
+    "buildup_venom": {
+      "conditions": {
+        "mob_effects": "aether_ii:venom",
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
     "obtain_venom": {
       "conditions": {
         "effects": {
@@ -11,7 +18,8 @@
   },
   "requirements": [
     [
-      "obtain_venom"
+      "obtain_venom",
+      "buildup_venom"
     ]
   ],
   "sends_telemetry_event": true

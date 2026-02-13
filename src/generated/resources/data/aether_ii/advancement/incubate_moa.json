@@ -1,0 +1,27 @@
+{
+  "parent": "aether_ii:obtain_egg",
+  "criteria": {
+    "incubate_moa": {
+      "trigger": "aether_ii:incubation"
+    }
+  },
+  "display": {
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.incubate_moa.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:moa_feather"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.incubate_moa"
+    }
+  },
+  "requirements": [
+    [
+      "incubate_moa"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

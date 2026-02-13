@@ -57,7 +57,6 @@ public class AetherIISoundEvents {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_HAMMER_OF_DEMOLITION_SHOOT = register("item.hammer_of_demolition.shoot");
 
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ENGRAVED_DISC_AETHER_TUNE = register("item.engraved_disc.aether_tune");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ENGRAVED_DISC_ASCENDING_DAWN = register("item.engraved_disc.ascending_dawn");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ENGRAVED_DISC_AERWHALE = register("item.engraved_disc.aerwhale");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ENGRAVED_DISC_APPROACHES = register("item.engraved_disc.approaches");
@@ -65,7 +64,6 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ENGRAVED_DISC_CHINCHILLA = register("item.engraved_disc.chinchilla");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ENGRAVED_DISC_HIGH = register("item.engraved_disc.high");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ENGRAVED_DISC_REVOLUTIONS = register("item.engraved_disc.revolutions");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ENGRAVED_DISC_CHASE = register("item.engraved_disc.recording_892");
 
     // Armor
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_BEAST_PELT = register("item.armor.equip_beast_pelt");
@@ -238,6 +236,9 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ELECTRIC_FIELD_CREATE = register("entity.electric_field.ambient");
 
     // UI
+    public static final DeferredHolder<SoundEvent, SoundEvent> UI_TOAST_AETHER_GENERAL = register("ui.toast.aether_general");
+    public static final DeferredHolder<SoundEvent, SoundEvent> UI_TOAST_AETHER_SLIDER = register("ui.toast.aether_slider");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> UI_ARTISANS_BENCH_SELECT_RECIPE = register("ui.artisans_bench.select_recipe");
     public static final DeferredHolder<SoundEvent, SoundEvent> UI_ARTISANS_BENCH_TAKE_RESULT = register("ui.artisans_bench.take_result");
 
@@ -247,6 +248,8 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_SUNRISE = register("music.aether_sunrise");
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_SUNSET = register("music.aether_sunset");
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_AMBIENCE = register("music.aether_ambience");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_MENU = register("music.menu");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_BOSS_SLIDER = register("music.boss.slider");
 

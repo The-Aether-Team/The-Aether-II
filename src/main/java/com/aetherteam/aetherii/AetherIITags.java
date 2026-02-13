@@ -22,6 +22,7 @@ public class AetherIITags {
         public static final TagKey<Block> UNDERSHALE = tag("undershale");
         public static final TagKey<Block> AETHER_UNDERGROUND_BLOCKS = tag("aether_underground_blocks");
         public static final TagKey<Block> AETHER_CARVER_REPLACEABLES = tag("aether_carver_replaceables");
+        public static final TagKey<Block> LAKE_VEGETATION_REPLACEABLES = tag("lake_vegetation_replaceables");
         public static final TagKey<Block> SENTRY_RUIN_MOSS_REPLACEABLES = tag("sentry_ruin_moss_replaceables");
         public static final TagKey<Block> SHAPES_COASTS = tag("shapes_coasts");
         public static final TagKey<Block> ARCTIC_ICE = tag("arctic_ice");
@@ -36,6 +37,7 @@ public class AetherIITags {
         public static final TagKey<Block> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");
         public static final TagKey<Block> GREATROOT_DECORATIVE_BLOCKS = tag("greatroot_decorative_blocks");
         public static final TagKey<Block> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
+        public static final TagKey<Block> AMBEROOT_DECORATIVE_BLOCKS = tag("amberoot_decorative_blocks");
         public static final TagKey<Block> HOLYSTONE_DECORATIVE_BLOCKS = tag("holystone_decorative_blocks");
         public static final TagKey<Block> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
         public static final TagKey<Block> UNDERSHALE_DECORATIVE_BLOCKS = tag("undershale_decorative_blocks");
@@ -75,7 +77,8 @@ public class AetherIITags {
         public static final TagKey<Block> MAGNETIC_SHROOM_SURVIVES_ON = tag("arilum_survives_on");
         public static final TagKey<Block> GRASS_AND_DIRT_REPLACEABLE = tag("grass_and_dirt_replaceable");
         public static final TagKey<Block> COARSE_AETHER_DIRT_REPLACEABLE = tag("coarse_aether_dirt_replaceable");
-        public static final TagKey<Block> UNDERWATER_BRYALINN_REPLACEABLE = tag("underwater_bryalinn_replaceable");
+        public static final TagKey<Block> BRYALINN_MOSS_REPLACEABLE = tag("bryalinn_moss_replaceable");
+        public static final TagKey<Block> SHAYELINN_MOSS_REPLACEABLE = tag("shayelinn_moss_replaceable");
         public static final TagKey<Block> ARCTIC_ICE_REPLACEABLE = tag("arctic_ice_replaceable");
         public static final TagKey<Block> GRASS_SNOW_REPLACEABLE = tag("grass_snow_replaceable");
         public static final TagKey<Block> QUICKSOIL_COAST_GENERATES_ON = tag("quicksoil_coast_generates_on");
@@ -126,6 +129,7 @@ public class AetherIITags {
         public static final TagKey<Item> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");
         public static final TagKey<Item> GREATROOT_DECORATIVE_BLOCKS = tag("greatroot_decorative_blocks");
         public static final TagKey<Item> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
+        public static final TagKey<Item> AMBEROOT_DECORATIVE_BLOCKS = tag("amberoot_decorative_blocks");
         public static final TagKey<Item> HOLYSTONE_DECORATIVE_BLOCKS = tag("holystone_decorative_blocks");
         public static final TagKey<Item> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
         public static final TagKey<Item> UNDERSHALE_DECORATIVE_BLOCKS = tag("undershale_decorative_blocks");
@@ -178,9 +182,6 @@ public class AetherIITags {
 
         public static final TagKey<Item> UNIQUE_TOOLTIP_COLOR = tag("unique_tooltip_color");
 
-        public static final TagKey<Item> CRAFTS_SKYROOT_PLANKS = tag("crafts_skyroot_planks");
-        public static final TagKey<Item> CRAFTS_GREATROOT_PLANKS = tag("crafts_greatroot_planks");
-        public static final TagKey<Item> CRAFTS_WISPROOT_PLANKS = tag("crafts_wisproot_planks");
         public static final TagKey<Item> PLANKS_CRAFTING = tag("planks_crafting");
         public static final TagKey<Item> STONE_CRAFTING = tag("stone_crafting");
         public static final TagKey<Item> CRAFTS_SKYROOT_STICKS = tag("crafts_skyroot_sticks");
@@ -261,6 +262,7 @@ public class AetherIITags {
     }
 
     public static class Biomes {
+        public static final TagKey<Biome> HIGHLANDS = tag("highlands");
         public static final TagKey<Biome> HIGHFIELDS = tag("highfields");
         public static final TagKey<Biome> MAGNETIC = tag("magnetic");
         public static final TagKey<Biome> MAGNETIC_FOG = tag("magnetic_fog");
@@ -268,10 +270,14 @@ public class AetherIITags {
         public static final TagKey<Biome> IRRADIATED = tag("irradiated");
         public static final TagKey<Biome> EXPANSE = tag("expanse");
 
+        public static final TagKey<Biome> LUSH = tag("lush");
+        public static final TagKey<Biome> WET = tag("wet");
+
         public static final TagKey<Biome> HAS_STRUCTURE_OUTPOST = tag("has_structure/outpost");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_HIGHFIELDS = tag("has_structure/camp_highfields");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_MAGNETIC = tag("has_structure/camp_magnetic");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_ARCTIC = tag("has_structure/camp_arctic");
+        public static final TagKey<Biome> HAS_STRUCTURE_WATCHTOWER = tag("has_structure/watchtower");
         public static final TagKey<Biome> HAS_STRUCTURE_SENTRY_RUINS = tag("has_structure/sentry_ruins");
         public static final TagKey<Biome> HAS_STRUCTURE_INFECTED_GUARDIAN_TREE = tag("has_structure/infected_guardian_tree");
 
@@ -296,6 +302,8 @@ public class AetherIITags {
         public static final TagKey<Structure> TREE_BLACKLIST_FILTER = tag("tree_blacklist_filter");
         public static final TagKey<Structure> ALKAHEST_POOL_BLACKLIST_FILTER = tag("alkahest_pool_blacklist_filter");
         public static final TagKey<Structure> COAST_BLACKLIST_FILTER = tag("coast_blacklist_filter");
+        public static final TagKey<Structure> FERROSITE_SPIKE_BLACKLIST_FILTER = tag("ferrosite_spike_blacklist_filter");
+        public static final TagKey<Structure> ARCTIC_ICE_SPIKE_BLACKLIST_FILTER = tag("arctic_ice_spike_blacklist_filter");
         public static final TagKey<Structure> AERCLOUD_BLACKLIST_FILTER = tag("aercloud_blacklist_filter");
 
         private static TagKey<Structure> tag(String name) {
@@ -312,6 +320,7 @@ public class AetherIITags {
     }
 
     public static class MobEffects {
+        public static final TagKey<MobEffect> DART_EFFECTS = tag("dart_effects");
         public static final TagKey<MobEffect> MILK_DOESNT_CLEAR = tag("typed");
 
         private static TagKey<MobEffect> tag(String name) {

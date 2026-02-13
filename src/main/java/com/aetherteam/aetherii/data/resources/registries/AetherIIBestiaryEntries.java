@@ -22,7 +22,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +45,8 @@ public class AetherIIBestiaryEntries {
     public static final ResourceKey<BestiaryEntry> ARCTIC_KIRRID = createKey("arctic_kirrid");
     public static final ResourceKey<BestiaryEntry> MOA = createKey("moa");
     public static final ResourceKey<BestiaryEntry> SKYROOT_LIZARD = createKey("skyroot_lizard");
+    public static final ResourceKey<BestiaryEntry> GLITTERWING = createKey("glitterwing");
+    public static final ResourceKey<BestiaryEntry> SHROUDWING = createKey("shroudwing");
     public static final ResourceKey<BestiaryEntry> AECHOR_PLANT = createKey("aechor_plant");
     public static final ResourceKey<BestiaryEntry> CARRION_SPROUT = createKey("carrion_sprout");
     public static final ResourceKey<BestiaryEntry> ZEPHYR = createKey("zephyr");
@@ -66,8 +67,9 @@ public class AetherIIBestiaryEntries {
             AetherIIEntityTypes.HIGHFIELDS_TAEGORE, AetherIIEntityTypes.MAGNETIC_TAEGORE, AetherIIEntityTypes.ARCTIC_TAEGORE,
             AetherIIEntityTypes.HIGHFIELDS_KIRRID, AetherIIEntityTypes.MAGNETIC_KIRRID, AetherIIEntityTypes.ARCTIC_KIRRID,
             AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, AetherIIEntityTypes.MAGNETIC_BURRUKAI, AetherIIEntityTypes.ARCTIC_BURRUKAI,
-            AetherIIEntityTypes.PHYG, AetherIIEntityTypes.SHEEPUFF, AetherIIEntityTypes.FLYING_COW,
-            AetherIIEntityTypes.AERBUNNY, AetherIIEntityTypes.SKYROOT_LIZARD,AetherIIEntityTypes.MOA,
+            AetherIIEntityTypes.PHYG, AetherIIEntityTypes.SHEEPUFF, AetherIIEntityTypes.FLYING_COW, AetherIIEntityTypes.AERBUNNY,
+            AetherIIEntityTypes.SKYROOT_LIZARD, AetherIIEntityTypes.GLITTERWING, AetherIIEntityTypes.SHROUDWING,
+            AetherIIEntityTypes.MOA,
             AetherIIEntityTypes.BLUE_SWET, AetherIIEntityTypes.GOLDEN_SWET, AetherIIEntityTypes.AECHOR_PLANT, AetherIIEntityTypes.CARRION_SPROUT,
             AetherIIEntityTypes.SKEPHID, AetherIIEntityTypes.ZEPHYR,
             AetherIIEntityTypes.TEMPEST, AetherIIEntityTypes.COCKATRICE,
@@ -91,6 +93,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(ARCTIC_KIRRID, AetherIIEntityTypes.ARCTIC_KIRRID),
             Map.entry(MOA, AetherIIEntityTypes.MOA),
             Map.entry(SKYROOT_LIZARD, AetherIIEntityTypes.SKYROOT_LIZARD),
+            Map.entry(GLITTERWING, AetherIIEntityTypes.GLITTERWING),
+            Map.entry(SHROUDWING, AetherIIEntityTypes.SHROUDWING),
             Map.entry(AECHOR_PLANT, AetherIIEntityTypes.AECHOR_PLANT),
             Map.entry(CARRION_SPROUT, AetherIIEntityTypes.CARRION_SPROUT),
             Map.entry(ZEPHYR, AetherIIEntityTypes.ZEPHYR),
@@ -104,8 +108,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(MIMIC, AetherIIEntityTypes.MIMIC),
             Map.entry(DETONATION_SENTRY, AetherIIEntityTypes.DETONATION_SENTRY),
             Map.entry(SENTRY_GOLEM, AetherIIEntityTypes.SENTRY_GOLEM),
-            Map.entry(SLIDER, AetherIIEntityTypes.SLIDER),
-            Map.entry(BLADESHROOM_HUNTER, AetherIIEntityTypes.BLADESHROOM_HUNTER)
+            Map.entry(SLIDER, AetherIIEntityTypes.SLIDER)
+//            Map.entry(BLADESHROOM_HUNTER, AetherIIEntityTypes.BLADESHROOM_HUNTER)
     );
     public static final List<Holder<EntityType<?>>> NAMED = List.of(
             AetherIIEntityTypes.HIGHFIELDS_TAEGORE,
@@ -133,6 +137,9 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.MAGNETIC_KIRRID, AetherIIStats.MAGNETIC_KIRRID),
             Map.entry(AetherIIEntityTypes.ARCTIC_KIRRID, AetherIIStats.ARCTIC_KIRRID),
             Map.entry(AetherIIEntityTypes.MOA, AetherIIStats.MOA),
+            Map.entry(AetherIIEntityTypes.SKYROOT_LIZARD, AetherIIStats.SKYROOT_LIZARD),
+            Map.entry(AetherIIEntityTypes.GLITTERWING, AetherIIStats.GLITTERWING),
+            Map.entry(AetherIIEntityTypes.SHROUDWING, AetherIIStats.SHROUDWING),
             Map.entry(AetherIIEntityTypes.AECHOR_PLANT, AetherIIStats.AECHOR_PLANT),
             Map.entry(AetherIIEntityTypes.CARRION_SPROUT, AetherIIStats.CARRION_SPROUT),
             Map.entry(AetherIIEntityTypes.ZEPHYR, AetherIIStats.ZEPHYR),
@@ -146,8 +153,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.MIMIC, AetherIIStats.MIMIC),
             Map.entry(AetherIIEntityTypes.DETONATION_SENTRY, AetherIIStats.DETONATION_SENTRY),
             Map.entry(AetherIIEntityTypes.SENTRY_GOLEM, AetherIIStats.SENTRY_GOLEM),
-            Map.entry(AetherIIEntityTypes.SLIDER, AetherIIStats.SLIDER),
-            Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, AetherIIStats.BLADESHROOM_HUNTER)
+            Map.entry(AetherIIEntityTypes.SLIDER, AetherIIStats.SLIDER)
+//            Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, AetherIIStats.BLADESHROOM_HUNTER)
     );
     public static final Map<Holder<EntityType<?>>, List<BestiaryEntry.LootDisplay>> LOOT = Map.ofEntries(
             Map.entry(AetherIIEntityTypes.FLYING_COW, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.BURRUKAI_RIB_CUT, 1.0, 1, 2))),
@@ -176,8 +183,8 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.MIMIC, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.EYE_OF_THE_MIMIC, 0.075, 1, 1))),
             Map.entry(AetherIIEntityTypes.DETONATION_SENTRY, List.of()),
             Map.entry(AetherIIEntityTypes.SENTRY_GOLEM, List.of()),
-            Map.entry(AetherIIEntityTypes.SLIDER, List.of()),
-            Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, List.of())
+            Map.entry(AetherIIEntityTypes.SLIDER, List.of())
+//            Map.entry(AetherIIEntityTypes.BLADESHROOM_HUNTER, List.of())
     );
     public static final Map<Holder<EntityType<?>>, TagKey<Item>> FED = Map.ofEntries(
             Map.entry(AetherIIEntityTypes.FLYING_COW, AetherIITags.Items.FLYING_COW_FOOD),

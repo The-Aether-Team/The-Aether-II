@@ -15,7 +15,7 @@ public class GravitationalPullEffect extends MobEffect {
         if (entity.isNoGravity()) {
             entity.setNoGravity(false);
         }
-        entity.setDeltaMovement(entity.getDeltaMovement().subtract(0, 0.1, 0));
+        entity.setDeltaMovement(entity.getDeltaMovement().subtract(0, 0.15, 0));
         return super.applyEffectTick(level, entity, amplifier);
     }
 

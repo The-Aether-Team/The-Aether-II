@@ -7,6 +7,9 @@ import com.aetherteam.aetherii.entity.FakeShiftEntity;
 import com.aetherteam.aetherii.entity.ai.goal.ClosedAnimationMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.projectile.DemolitionProjectile;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -39,6 +42,7 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
+import java.util.List;
 
 public class SentryGolem extends PathfinderMob implements RangedAttackMob, CooldownEntity, FakeShiftEntity {
     public static final EntityDataAccessor<Integer> DATA_FIRE_TIME_ID = SynchedEntityData.defineId(SentryGolem.class, EntityDataSerializers.INT);
@@ -234,7 +238,9 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
 
     @Override
     protected void populateDefaultEquipmentSlots(RandomSource random, DifficultyInstance difficulty) {
-        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(AetherIIItems.HAMMER_OF_DEMOLITION.asItem()));
+        ItemStack weapon = new ItemStack(AetherIIItems.HAMMER_OF_DEMOLITION.asItem());
+        weapon.set(DataComponents.ATTRIBUTE_MODIFIERS, TieredHammerItem.createAttributes(AetherIIItemTiers.HAMMER_OF_DEMOLITION, 0.0F, 0.0F, List.of()));
+        this.setItemSlot(EquipmentSlot.MAINHAND, weapon);
     }
 
     @Override

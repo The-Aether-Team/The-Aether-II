@@ -72,15 +72,15 @@ public class BlockHooks {
             if (state.is(AetherIIBlocks.MOSSY_WISPROOT_LOG) || state.is(AetherIIBlocks.MOSSY_WISPROOT_WOOD) || state.is(AetherIIBlocks.MOSSY_WISPROOT_TRUNK)) {
                 stripLog(accessor, stack, context, AetherIILoot.STRIP_MOSSY_WISPROOT);
             } else if (state.is(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE)) {
-                stripLog(accessor, stack, context, AetherIILoot.STRIP_MOSSY_WISPROOT_END);
+                stripLog(accessor, stack, context, AetherIILoot.STRIP_MOSSY_WISPROOT_BASE);
             }
         }
     }
 
     public static void stripAmberoot(LevelAccessor accessor, BlockState state, ItemStack stack, ItemAbility action, UseOnContext context) {
         if (action == ItemAbilities.AXE_STRIP) {
-            if (state.is(AetherIITags.Blocks.AMBEROOT_LOGS) && stack.is(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS)) {
-                stripLog(accessor, stack, context, AetherIILoot.STRIP_AMBEROOT);
+            if (state.is(AetherIIBlocks.AMBEROOT_DEPOSIT) && stack.is(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS)) {
+                stripLog(accessor, stack, context, AetherIILoot.STRIP_AMBEROOT_DEPOSIT);
             }
         }
     }

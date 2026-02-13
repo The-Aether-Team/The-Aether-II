@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.loot.functions;
 
-import com.aetherteam.aetherii.api.SkyrootLizardVariant;
+import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
 import com.aetherteam.aetherii.data.resources.registries.AetherIISkyrootLizardVariants;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.SkyrootLizard;
