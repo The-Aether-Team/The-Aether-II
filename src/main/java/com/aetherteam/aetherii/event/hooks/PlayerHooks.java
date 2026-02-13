@@ -97,16 +97,17 @@ public class PlayerHooks {
         return cancellationStatus;
     }
 
-    public static boolean cancelPlacementOnAercloud(LevelAccessor levelAccessor, BlockPos pos, ItemStack itemStack, boolean cancellationStatus) {
-        BlockState state = levelAccessor.getBlockState(pos);
+    public static boolean cancelPlacementOnAercloud(Player player, Level level, BlockPos pos, ItemStack itemStack, boolean cancellationStatus) {
+        BlockState state = level.getBlockState(pos);
 
         if (state.is(AetherIITags.Blocks.AERCLOUDS)) {
             if (itemStack.getItem() instanceof BlockItem && !itemStack.is(AetherIITags.Items.CAN_USE_ON_AERCLOUD)) {
-                if (levelAccessor.isClientSide() && levelAccessor instanceof Level level) {
+                if (level.isClientSide()) {
                     for (int i = 0; i < 10; i++) {
                         ParticleUtils.spawnParticleOnFace(level, pos, Direction.UP, ParticleTypes.POOF, Vec3.ZERO, 0.5F);
                     }
                 }
+                level.playSound(null, pos, state.getSoundType(level, pos, player).getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
                 return true;
             }
         }
