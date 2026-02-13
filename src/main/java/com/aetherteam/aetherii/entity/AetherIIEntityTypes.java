@@ -68,7 +68,7 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.of(Moa::new, AetherIIMobCategory.AETHER_MOA).sized(1.25F, 2.35F).eyeHeight(2.1F).clientTrackingRange(10).build(AetherIIEntities.MOA));
 
     public static final DeferredHolder<EntityType<?>, EntityType<SkyrootLizard>> SKYROOT_LIZARD = ENTITY_TYPES.register("skyroot_lizard",
-            () -> EntityType.Builder.of(SkyrootLizard::new, MobCategory.AMBIENT).sized(0.95F, 0.35F).clientTrackingRange(10).build(AetherIIEntities.SKYROOT_LIZARD));
+            () -> EntityType.Builder.of(SkyrootLizard::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.95F, 0.35F).clientTrackingRange(10).build(AetherIIEntities.SKYROOT_LIZARD));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Glitterwing>> GLITTERWING = ENTITY_TYPES.register("glitterwing",
             () -> EntityType.Builder.<Glitterwing>of(Glitterwing::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.55F, 0.125F).eyeHeight(0.125F).clientTrackingRange(5).build(AetherIIEntities.GLITTERWING));
