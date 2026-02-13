@@ -103,6 +103,7 @@
   },
   "spawners": {
     "aether_ii:aether_aerwhale": [],
+    "aether_ii:aether_ambient": [],
     "aether_ii:aether_cave_monster": [
       {
         "type": "aether_ii:arkenium_taluton",

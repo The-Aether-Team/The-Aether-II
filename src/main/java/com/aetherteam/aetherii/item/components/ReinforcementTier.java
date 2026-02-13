@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.item.components;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -541,34 +540,34 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
         public static final Predicate<ItemStack> GRAVITITE = isTier(AetherIITags.Items.GRAVITITE_TOOL).or(isTier(AetherIITags.Items.GRAVITITE_ARMOR));
 
         public static final Set<Cost> TIER_1 = Set.of(
-                new Cost(BEAST_PELT, AetherIIItems.ARKENIUM_PLATES, 1, Items.AIR, 0),
-                new Cost(BURRUKAI_PLATE, AetherIIItems.ARKENIUM_PLATES, 1, Items.AIR, 0),
-                new Cost(SKYROOT, AetherIIItems.ARKENIUM_PLATES, 1, Items.AIR, 0),
-                new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATES, 1, Items.AIR, 0),
-                new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATES, 2, Items.AIR, 0),
-                new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATES, 2, Items.AIR, 0),
-                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATES, 3, Items.AIR, 0)
+                new Cost(BEAST_PELT, AetherIIItems.ARKENIUM_PLATE, 1, Items.AIR, 0),
+                new Cost(BURRUKAI_PLATE, AetherIIItems.ARKENIUM_PLATE, 1, Items.AIR, 0),
+                new Cost(SKYROOT, AetherIIItems.ARKENIUM_PLATE, 1, Items.AIR, 0),
+                new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATE, 1, Items.AIR, 0),
+                new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATE, 2, Items.AIR, 0),
+                new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATE, 2, Items.AIR, 0),
+                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATE, 3, Items.AIR, 0)
         );
         public static final Set<Cost> TIER_2 = Set.of(
-                new Cost(BEAST_PELT, AetherIIItems.ARKENIUM_PLATES, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
-                new Cost(BURRUKAI_PLATE, AetherIIItems.ARKENIUM_PLATES, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
-                new Cost(SKYROOT, AetherIIItems.ARKENIUM_PLATES, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
-                new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATES, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
-                new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATES, 3, AetherIIItems.CORROBONITE_CRYSTAL, 1),
-                new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATES, 3, AetherIIItems.CORROBONITE_CRYSTAL, 1),
-                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATES, 4, AetherIIItems.CORROBONITE_CRYSTAL, 1)
+                new Cost(BEAST_PELT, AetherIIItems.ARKENIUM_PLATE, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
+                new Cost(BURRUKAI_PLATE, AetherIIItems.ARKENIUM_PLATE, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
+                new Cost(SKYROOT, AetherIIItems.ARKENIUM_PLATE, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
+                new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATE, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
+                new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATE, 3, AetherIIItems.CORROBONITE_CRYSTAL, 1),
+                new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATE, 3, AetherIIItems.CORROBONITE_CRYSTAL, 1),
+                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATE, 4, AetherIIItems.CORROBONITE_CRYSTAL, 1)
         );
         public static final Set<Cost> TIER_3 = Set.of(
-                new Cost(BEAST_PELT, AetherIIItems.ARKENIUM_PLATES, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
-                new Cost(BURRUKAI_PLATE, AetherIIItems.ARKENIUM_PLATES, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
-                new Cost(SKYROOT, AetherIIItems.ARKENIUM_PLATES, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
-                new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATES, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
-                new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATES, 5, AetherIIItems.CORROBONITE_CRYSTAL, 3),
-                new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATES, 5, AetherIIItems.CORROBONITE_CRYSTAL, 3),
-                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATES, 6, AetherIIItems.CORROBONITE_CRYSTAL, 3)
+                new Cost(BEAST_PELT, AetherIIItems.ARKENIUM_PLATE, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
+                new Cost(BURRUKAI_PLATE, AetherIIItems.ARKENIUM_PLATE, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
+                new Cost(SKYROOT, AetherIIItems.ARKENIUM_PLATE, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
+                new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATE, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
+                new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATE, 5, AetherIIItems.CORROBONITE_CRYSTAL, 3),
+                new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATE, 5, AetherIIItems.CORROBONITE_CRYSTAL, 3),
+                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATE, 6, AetherIIItems.CORROBONITE_CRYSTAL, 3)
         );
         public static final Set<Cost> TIER_4 = Set.of(
-                new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATES, 6, AetherIIItems.CORROBONITE_CRYSTAL, 4)
+                new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATE, 6, AetherIIItems.CORROBONITE_CRYSTAL, 4)
         );
 
         private static Predicate<ItemStack> isTier(TagKey<Item> tier) {

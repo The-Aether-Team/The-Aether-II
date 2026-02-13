@@ -1,0 +1,31 @@
+{
+  "parent": "aether_ii:outpost_campfire",
+  "criteria": {
+    "glint": {
+      "conditions": {
+        "amount": 100
+      },
+      "trigger": "aether_ii:currency"
+    }
+  },
+  "display": {
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.glint.desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:glint_coin"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.glint"
+    }
+  },
+  "requirements": [
+    [
+      "glint"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

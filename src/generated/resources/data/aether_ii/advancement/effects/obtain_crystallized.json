@@ -1,5 +1,12 @@
 {
   "criteria": {
+    "buildup_crystallized": {
+      "conditions": {
+        "mob_effects": "aether_ii:crystallized",
+        "triggered": false
+      },
+      "trigger": "aether_ii:effect_buildup"
+    },
     "obtain_crystallized": {
       "conditions": {
         "effects": {
@@ -11,7 +18,8 @@
   },
   "requirements": [
     [
-      "obtain_crystallized"
+      "obtain_crystallized",
+      "buildup_crystallized"
     ]
   ],
   "sends_telemetry_event": true

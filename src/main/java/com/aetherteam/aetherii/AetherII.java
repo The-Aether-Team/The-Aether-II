@@ -1,10 +1,17 @@
 package com.aetherteam.aetherii;
 
+import com.aetherteam.aetherii.advancement.AetherIIAdvancementSoundOverrides;
+import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.command.AetherIICommands;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIGlitterwingVariants;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIShroudwingVariants;
 import org.slf4j.Logger;
 
 import com.aetherteam.aetherii.advancement.predicate.AetherIIEntitySubPredicates;
-import com.aetherteam.aetherii.api.SkyrootLizardVariant;
+
+import com.aetherteam.aetherii.entity.variant.GlitterwingVariant;
+import com.aetherteam.aetherii.entity.variant.ShroudwingVariant;
+import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
@@ -33,6 +40,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.brain.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.ai.brain.sensor.AetherIISensorTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.variant.spawning.AetherIISpawnConditions;
 import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
@@ -94,6 +102,7 @@ public class AetherII {
 
         DeferredRegister<?>[] registers = {
                 AetherIIMurals.MURALS,
+                AetherIIAdvancementSoundOverrides.ADVANCEMENT_SOUND_OVERRIDES,
                 AetherIIFluidTypes.FLUID_TYPES,
                 AetherIIFluids.FLUIDS,
                 AetherIIBlocks.BLOCKS,
@@ -133,7 +142,9 @@ public class AetherII {
                 AetherIISurfaceRules.MATERIAL_RULES,
                 AetherIIBlockPredicateTypes.BLOCK_PREDICATE_TYPES,
                 AetherIIPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES,
+                AetherIIAdvancementTriggers.TRIGGERS,
                 AetherIIEntitySubPredicates.ENTITY_SUB_PREDICATES,
+                AetherIISpawnConditions.SPAWN_CONDITION_TYPES
         };
 
         for (DeferredRegister<?> register : registers) {
@@ -159,6 +170,8 @@ public class AetherII {
         event.dataPackRegistry(AetherIIRegistries.STYLE_DESIGN, StyleDesign.DIRECT_CODEC, StyleDesign.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.STYLE_MATERIAL, StyleMaterial.DIRECT_CODEC, StyleMaterial.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.SKYROOT_LIZARD_VARIANT, SkyrootLizardVariant.DIRECT_CODEC, SkyrootLizardVariant.DIRECT_CODEC);
+        event.dataPackRegistry(AetherIIRegistries.GLITTERWING_VARIANT, GlitterwingVariant.DIRECT_CODEC, GlitterwingVariant.DIRECT_CODEC);
+        event.dataPackRegistry(AetherIIRegistries.SHROUDWING_VARIANT, ShroudwingVariant.DIRECT_CODEC, ShroudwingVariant.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.REWARD_WRAPPER, RewardWrapper.DIRECT_CODEC, RewardWrapper.DIRECT_CODEC);
     }
 

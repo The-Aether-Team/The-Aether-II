@@ -128,10 +128,11 @@ public class AccessoryItem extends Item {
         Set<ConditionalAttribute> conditionalAttributes = new HashSet<>(this.getBaseAttributes());
         List<Charms.CharmHolder> charmHolders = Charms.getCharmsForItem(itemStack);
         if (charmHolders != null) {
-            for (Charms.CharmHolder charmHolder : charmHolders) {
+            for (int i = 0; i < charmHolders.size(); i++) {
+                Charms.CharmHolder charmHolder = charmHolders.get(i);
                 if (charmHolder.getStack().getItem() instanceof CharmItem charmItem) {
                     for (ItemAttributeModifiers.Entry entry : charmItem.getCharmAttributes()) {
-                        conditionalAttributes.add(new ConditionalAttribute(entry.attribute(), new ConditionalModifier(entry.modifier().id(), entry.modifier().amount(), entry.modifier().operation()), (stack, wearer) -> true));
+                        conditionalAttributes.add(new ConditionalAttribute(entry.attribute(), new ConditionalModifier(CharmItem.getModifierId(entry.modifier().id(), itemStack, i, this.getSlotType().name()), entry.modifier().amount(), entry.modifier().operation()), (stack, wearer) -> true));
                     }
                 }
             }

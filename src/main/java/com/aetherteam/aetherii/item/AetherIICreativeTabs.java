@@ -118,8 +118,32 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_TOP_BEAM.get());
                 output.accept(AetherIIBlocks.WISPROOT_BEAM.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
+                output.accept(AetherIIBlocks.AMBEROOT_DEPOSIT.get());
                 output.accept(AetherIIBlocks.AMBEROOT_WOOD.get());
                 output.accept(AetherIIBlocks.AMBEROOT_TRUNK.get());
+                output.accept(AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get());
+                output.accept(AetherIIBlocks.STRIPPED_AMBEROOT_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK.get());
+                output.accept(AetherIIBlocks.AMBEROOT_PLANKS.get());
+                output.accept(AetherIIBlocks.AMBEROOT_STAIRS.get());
+                output.accept(AetherIIBlocks.AMBEROOT_SLAB.get());
+                output.accept(AetherIIBlocks.AMBEROOT_FENCE.get());
+                output.accept(AetherIIBlocks.AMBEROOT_FENCE_GATE.get());
+                output.accept(AetherIIBlocks.AMBEROOT_DOOR.get());
+                output.accept(AetherIIBlocks.AMBEROOT_TRAPDOOR.get());
+                output.accept(AetherIIBlocks.SECRET_AMBEROOT_DOOR.get());
+                output.accept(AetherIIBlocks.SECRET_AMBEROOT_TRAPDOOR.get());
+                output.accept(AetherIIBlocks.AMBEROOT_PRESSURE_PLATE.get());
+                output.accept(AetherIIBlocks.AMBEROOT_BUTTON.get());
+                output.accept(AetherIIBlocks.AMBEROOT_FLOORBOARDS.get());
+                output.accept(AetherIIBlocks.AMBEROOT_HIGHLIGHT.get());
+                output.accept(AetherIIBlocks.AMBEROOT_SHINGLES.get());
+                output.accept(AetherIIBlocks.AMBEROOT_SMALL_SHINGLES.get());
+                output.accept(AetherIIBlocks.AMBEROOT_BASE_PLANKS.get());
+                output.accept(AetherIIBlocks.AMBEROOT_TOP_PLANKS.get());
+                output.accept(AetherIIBlocks.AMBEROOT_BASE_BEAM.get());
+                output.accept(AetherIIBlocks.AMBEROOT_TOP_BEAM.get());
+                output.accept(AetherIIBlocks.AMBEROOT_BEAM.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_STAIRS.get());
@@ -426,6 +450,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
+                output.accept(AetherIIBlocks.AMBEROOT_DEPOSIT.get());
                 output.accept(AetherIIBlocks.AMBEROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.SKYROOT_LEAVES.get());
                 output.accept(AetherIIBlocks.SKYPLANE_LEAVES.get());
@@ -548,6 +573,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.GREATROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.WISPROOT_BOOKSHELF.get());
+                output.accept(AetherIIBlocks.AMBEROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.SKYROOT_CHEST.get());
                 output.accept(AetherIIBlocks.SENTRY_CRATE.get());
@@ -559,6 +585,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATROOT_HANGING_SIGN.get());
                 output.accept(AetherIIBlocks.WISPROOT_SIGN.get());
                 output.accept(AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
+                output.accept(AetherIIBlocks.AMBEROOT_SIGN.get());
+                output.accept(AetherIIBlocks.AMBEROOT_HANGING_SIGN.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL_BEDROLL.get());
                 output.accept(AetherIIBlocks.SKYROOT_BED.get());
                 output.accept(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
@@ -665,7 +693,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.LARGE_MOA_SADDLEBAG.get());
                 output.accept(AetherIIItems.CLOUD_SKIFF.get());
                 output.accept(AetherIIItems.MUSIC_PLAYER.get());
-                output.accept(AetherIIItems.ENGRAVED_DISC_AETHER_TUNE.get());
                 output.accept(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN.get());
                 output.accept(AetherIIItems.ENGRAVED_DISC_AERWHALE.get());
                 output.accept(AetherIIItems.ENGRAVED_DISC_APPROACHES.get());
@@ -673,7 +700,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ENGRAVED_DISC_CHINCHILLA.get());
                 output.accept(AetherIIItems.ENGRAVED_DISC_HIGH.get());
                 output.accept(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS.get());
-                output.accept(AetherIIItems.ENGRAVED_DISC_CHASE.get());
                 output.accept(AetherIIItems.GLINT_COIN.get());
                 output.accept(AetherIIItems.GUIDEBOOK_PAGE.get());
             }).build());
@@ -805,7 +831,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GLINT_GEMSTONE.get());
                 output.accept(AetherIIItems.CORROBONITE_CRYSTAL.get());
                 output.accept(AetherIIItems.GOLDEN_AMBER.get());
-                output.accept(AetherIIItems.ARKENIUM_PLATES.get());
+                output.accept(AetherIIItems.ARKENIUM_PLATE.get());
                 output.accept(AetherIIItems.GRAVITITE_PLATE.get());
                 output.accept(AetherIIItems.SKYROOT_STICK.get());
                 output.accept(AetherIIItems.SCATTERGLASS_SHARD.get());
@@ -856,6 +882,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.CARRION_SPROUT_SPAWN_EGG.get());
                 output.accept(AetherIIItems.COCKATRICE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
+                output.accept(AetherIIItems.GLITTERWING_SPAWN_EGG.get());
                 output.accept(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get());
@@ -868,6 +895,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SENTRY_CRATE_MIMIC_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SENTRY_GOLEM_SPAWN_EGG.get());
+                output.accept(AetherIIItems.SHROUDWING_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get());
                 output.accept(AetherIIItems.BLUE_SWET_SPAWN_EGG.get());
                 output.accept(AetherIIItems.GOLDEN_SWET_SPAWN_EGG.get());

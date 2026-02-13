@@ -8,6 +8,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
@@ -62,13 +64,19 @@ public class CharmItem extends Item {
     public static void updateItemAttributes(ItemAttributeModifierEvent event) {
         List<Charms.CharmHolder> charmHolders = Charms.getCharmsForItem(event.getItemStack());
         if (charmHolders != null) {
-            for (Charms.CharmHolder charmHolder : charmHolders) {
+            for (int i = 0; i < charmHolders.size(); i++) {
+                Charms.CharmHolder charmHolder = charmHolders.get(i);
                 if (charmHolder.getStack().getItem() instanceof CharmItem charmItem) {
                     for (ItemAttributeModifiers.Entry entry : charmItem.getCharmAttributes()) {
-                        event.addModifier(entry.attribute(), entry.modifier(), entry.slot());
+                        EquipmentSlot slot = event.getItemStack().getEquipmentSlot();
+                        event.addModifier(entry.attribute(), new AttributeModifier(CharmItem.getModifierId(entry.modifier().id(), event.getItemStack(), i, slot != null ? slot.name() : "default"), entry.modifier().amount(), entry.modifier().operation()), entry.slot());
                     }
                 }
             }
         }
+    }
+
+    public static ResourceLocation getModifierId(ResourceLocation base, ItemStack itemStack, int number, String slotName) {
+        return ResourceLocation.parse(itemStack.getItemHolder().getRegisteredName() + "_" + base.getPath() + "_" + number + "_" + slotName.toLowerCase());
     }
 }

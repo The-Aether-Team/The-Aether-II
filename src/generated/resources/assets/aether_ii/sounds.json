@@ -1524,14 +1524,6 @@
       }
     ]
   },
-  "item.engraved_disc.aether_tune": {
-    "sounds": [
-      {
-        "name": "aether_ii:item/records/aether_tune",
-        "stream": true
-      }
-    ]
-  },
   "item.engraved_disc.approaches": {
     "sounds": [
       {
@@ -1568,14 +1560,6 @@
     "sounds": [
       {
         "name": "aether_ii:item/records/high",
-        "stream": true
-      }
-    ]
-  },
-  "item.engraved_disc.recording_892": {
-    "sounds": [
-      {
-        "name": "aether_ii:item/records/chase",
         "stream": true
       }
     ]
@@ -1734,6 +1718,15 @@
       }
     ]
   },
+  "music.menu": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether_ii_menu",
+        "stream": true,
+        "volume": 0.4
+      }
+    ]
+  },
   "ui.artisans_bench.select_recipe": {
     "sounds": [
       "random/click"
@@ -1751,5 +1744,21 @@
       }
     ],
     "subtitle": "subtitles.aether_ii.ui.artisans_bench.take_result"
+  },
+  "ui.toast.aether_general": {
+    "sounds": [
+      {
+        "name": "aether_ii:advancement/advancement_gen",
+        "stream": true
+      }
+    ]
+  },
+  "ui.toast.aether_slider": {
+    "sounds": [
+      {
+        "name": "aether_ii:advancement/advancement_slider",
+        "stream": true
+      }
+    ]
   }
 }

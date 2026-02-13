@@ -316,9 +316,6 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.aether_ii.item.arkenium_canister.empty")
         );
 
-        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_AETHER_TUNE,
-                definition().with(sound("aether_ii:item/records/aether_tune").stream())
-        );
         this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_ASCENDING_DAWN,
                 definition().with(sound("aether_ii:item/records/ascending_dawn").stream())
         );
@@ -339,9 +336,6 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
         this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_REVOLUTIONS,
                 definition().with(sound("aether_ii:item/records/revolutions").stream())
-        );
-        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_CHASE,
-                definition().with(sound("aether_ii:item/records/chase").stream())
         );
     }
 
@@ -1194,6 +1188,13 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
     }
 
     private void registerUISounds() {
+        this.add(AetherIISoundEvents.UI_TOAST_AETHER_GENERAL,
+                definition().with(sound("aether_ii:advancement/advancement_gen").stream())
+        );
+        this.add(AetherIISoundEvents.UI_TOAST_AETHER_SLIDER,
+                definition().with(sound("aether_ii:advancement/advancement_slider").stream())
+        );
+
         this.add(AetherIISoundEvents.UI_ARTISANS_BENCH_SELECT_RECIPE,
                 definition().with(
                         sound("minecraft:random/click")
@@ -1245,6 +1246,12 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         this.add(AetherIISoundEvents.MUSIC_AETHER_AMBIENCE,
                 definition().with(
                         sound("aether_ii:music/aether_ambience1").volume(0.4F).stream()
+                )
+        );
+
+        this.add(AetherIISoundEvents.MUSIC_MENU,
+                definition().with(
+                        sound("aether_ii:music/aether_ii_menu").volume(0.4F).stream()
                 )
         );
 
