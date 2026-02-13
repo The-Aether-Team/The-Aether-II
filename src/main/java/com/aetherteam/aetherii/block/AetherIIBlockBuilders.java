@@ -16,7 +16,7 @@ import net.minecraft.world.level.material.PushReaction;
 import java.util.function.Supplier;
 
 public class AetherIIBlockBuilders {
-    public static Supplier<Block.Properties> aercloudProperties(MapColor mapColor) {
+    public static Supplier<Block.Properties> coldAercloudProperties(MapColor mapColor) {
         return () -> Block.Properties.of()
                 .mapColor(mapColor)
                 .instrument(NoteBlockInstrument.FLUTE)
@@ -29,6 +29,22 @@ public class AetherIIBlockBuilders {
                 .isRedstoneConductor(AetherIIBlockBuilders::never)
                 .isSuffocating(AetherIIBlockBuilders::never)
                 .isViewBlocking(AetherIIBlockBuilders::never);
+    }
+
+    public static Supplier<Block.Properties> specialAercloudProperties(MapColor mapColor) {
+        return () -> Block.Properties.of()
+                .mapColor(mapColor)
+                .instrument(NoteBlockInstrument.FLUTE)
+                .strength(0.9F)
+                .sound(SoundType.WOOL)
+                .noOcclusion()
+                .dynamicShape()
+                .forceSolidOn()
+                .isValidSpawn((state, level, pos, entityType) -> entityType.is(AetherIITags.Entities.SPAWNING_AERCLOUDS))
+                .isRedstoneConductor(AetherIIBlockBuilders::never)
+                .isSuffocating(AetherIIBlockBuilders::never)
+                .isViewBlocking(AetherIIBlockBuilders::never)
+                .requiresCorrectToolForDrops();
     }
 
     public static Supplier<Block.Properties> logProperties(MapColor topMapColor, MapColor sideMapColor) {

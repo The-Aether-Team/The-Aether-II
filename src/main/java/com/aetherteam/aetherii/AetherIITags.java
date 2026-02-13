@@ -215,6 +215,7 @@ public class AetherIITags {
         public static final TagKey<Item> MOA_FOOD = tag("moa_food");
 
         public static final TagKey<Item> AETHER_PORTAL_ACTIVATION_ITEMS = tag("aether_portal_activation_items");
+        public static final TagKey<Item> CAN_USE_ON_AERCLOUD = tag("can_use_on_aercloud");
         public static final TagKey<Item> GOLDEN_AMBER_HARVESTERS = tag("golden_amber_harvesters");
         public static final TagKey<Item> DOUBLE_DROPS = tag("double_drops");
         public static final TagKey<Item> IRRADIATED_ITEM = tag("irradiated_item");

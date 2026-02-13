@@ -433,10 +433,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.INERT_ARKENIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.INERT_GRAVITITE_BLOCK.get());
                 output.accept(AetherIIBlocks.COLD_AERCLOUD.get());
-                output.accept(AetherIIBlocks.GOLDEN_AERCLOUD.get());
                 output.accept(AetherIIBlocks.BLUE_AERCLOUD.get());
                 output.accept(AetherIIBlocks.GREEN_AERCLOUD.get());
                 output.accept(AetherIIBlocks.PURPLE_AERCLOUD.get());
+                output.accept(AetherIIBlocks.GOLDEN_AERCLOUD.get());
                 output.accept(AetherIIBlocks.STORM_AERCLOUD.get());
                 output.accept(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
                 output.accept(AetherIIBlocks.TANGLED_BRANCHES.get());
