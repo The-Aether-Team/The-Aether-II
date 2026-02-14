@@ -29,7 +29,7 @@ public interface ZaniteArmor {
                 miningSpeedAttribute.addTransientModifier(new AttributeModifier(ZANITE_MINING_SPEED, 2, AttributeModifier.Operation.ADD_VALUE));
             }
             if (movementSpeedAttribute != null && !movementSpeedAttribute.hasModifier(ZANITE_MOVEMENT_SPEED)) {
-                movementSpeedAttribute.addTransientModifier(new AttributeModifier(ZANITE_MOVEMENT_SPEED, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                movementSpeedAttribute.addTransientModifier(new AttributeModifier(ZANITE_MOVEMENT_SPEED, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
             }
         } else {
             if (attackSpeedAttribute != null && attackSpeedAttribute.hasModifier(ZANITE_ATTACK_SPEED)) {

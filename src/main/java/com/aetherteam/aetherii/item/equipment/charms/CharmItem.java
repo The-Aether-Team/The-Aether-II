@@ -2,13 +2,13 @@ package com.aetherteam.aetherii.item.equipment.charms;
 
 import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.item.components.Charms;
+import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -69,14 +69,10 @@ public class CharmItem extends Item {
                 if (charmHolder.getStack().getItem() instanceof CharmItem charmItem) {
                     for (ItemAttributeModifiers.Entry entry : charmItem.getCharmAttributes()) {
                         EquipmentSlot slot = event.getItemStack().getEquipmentSlot();
-                        event.addModifier(entry.attribute(), new AttributeModifier(CharmItem.getModifierId(entry.modifier().id(), event.getItemStack(), i, slot != null ? slot.name() : "default"), entry.modifier().amount(), entry.modifier().operation()), entry.slot());
+                        event.addModifier(entry.attribute(), new AttributeModifier(EquipmentUtil.getSlotModifierId(entry.modifier().id(), event.getItemStack(), i, slot != null ? slot.name() : "default"), entry.modifier().amount(), entry.modifier().operation()), entry.slot());
                     }
                 }
             }
         }
-    }
-
-    public static ResourceLocation getModifierId(ResourceLocation base, ItemStack itemStack, int number, String slotName) {
-        return ResourceLocation.parse(itemStack.getItemHolder().getRegisteredName() + "_" + base.getPath() + "_" + number + "_" + slotName.toLowerCase());
     }
 }
