@@ -13,6 +13,7 @@
     "#aether_ii:aether_underground_blocks",
     "#aether_ii:aerclouds",
     "#aether_ii:sentry_ruins_blocks",
-    "#minecraft:leaves"
+    "#minecraft:leaves",
+    "#c:ores"
   ]
 }
