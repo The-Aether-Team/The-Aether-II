@@ -14,7 +14,7 @@
             "ambient": false,
             "amplifier": 0,
             "buildup_reduction_rate": 2,
-            "duration": 1000,
+            "duration": 600,
             "show_icon": false,
             "visible": true
           }
@@ -44,7 +44,7 @@
           "ambient": false,
           "amplifier": 0,
           "buildup_reduction_rate": 2,
-          "duration": 1000,
+          "duration": 600,
           "show_icon": false,
           "visible": true
         }
@@ -60,7 +60,7 @@
                 "ambient": false,
                 "amplifier": 0,
                 "buildup_reduction_rate": 2,
-                "duration": 1000,
+                "duration": 600,
                 "show_icon": false,
                 "visible": true
               }
