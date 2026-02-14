@@ -293,7 +293,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     // Bushes
     public static final DeferredBlock<Block> HIGHLANDS_BUSH = register("highlands_bush", HighlandsBushBlock::new, () -> Block.Properties.of().mapColor(MapColor.GRASS).pushReaction(PushReaction.DESTROY).strength(0.2F).sound(SoundType.GRASS).noOcclusion().isValidSpawn(AetherIIBlocks::spawnOnLeaves).isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never));
-    public static final DeferredBlock<Block> BLUEBERRY_BUSH = register("blueberry_bush", BlueberryBushBlock::new, () -> Block.Properties.of().mapColor(MapColor.GRASS).pushReaction(PushReaction.DESTROY).strength(0.2F).sound(SoundType.GRASS).noOcclusion().isValidSpawn(AetherIIBlocks::spawnOnLeaves).isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never));
+    public static final DeferredBlock<Block> BLUEBERRY_BUSH = register("blueberry_bush", BlueberryBushBlock::new, () -> Block.Properties.of().mapColor(MapColor.GRASS).pushReaction(PushReaction.DESTROY).strength(0.5F).sound(SoundType.GRASS).noOcclusion().isValidSpawn(AetherIIBlocks::spawnOnLeaves).isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never));
     public static final DeferredBlock<Block> BLUEBERRY_BUSH_STEM = register("blueberry_bush_stem", BlueberryBushStemBlock::new, () -> Block.Properties.of().mapColor(MapColor.GRASS).pushReaction(PushReaction.DESTROY).strength(0.2F).sound(SoundType.GRASS).noCollission());
 
     // Potted Bushes
@@ -302,17 +302,17 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FlowerPotBlock> POTTED_BLUEBERRY_BUSH_STEM = registerWithoutItem("potted_blueberry_bush_stem", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BLUEBERRY_BUSH_STEM, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
 
     // Orange Tree
-    public static final DeferredBlock<Block> ORANGE_TREE = register("orange_tree", OrangeTreeBlock::new, () -> Block.Properties.of().mapColor(MapColor.GRASS).noCollission().strength(0.2F).sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> ORANGE_TREE = register("orange_tree", OrangeTreeBlock::new, () -> Block.Properties.of().mapColor(MapColor.GRASS).noCollission().strength(0.5F).sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
 
     // Potted Orange Tree
     public static final DeferredBlock<FlowerPotBlock> POTTED_ORANGE_TREE = registerWithoutItem("potted_orange_tree", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ORANGE_TREE, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
 
     // Valkyrie Sprout
-    public static final DeferredBlock<Block> VALKYRIE_SPROUT = register("valkyrie_sprout", ValkyrieSproutBlock::new, () -> Block.Properties.of().mapColor(MapColor.GRASS).pushReaction(PushReaction.DESTROY).sound(SoundType.GRASS).instabreak().noCollission().offsetType(Block.OffsetType.XZ));
+    public static final DeferredBlock<Block> VALKYRIE_SPROUT = register("valkyrie_sprout", ValkyrieSproutBlock::new, () -> Block.Properties.of().mapColor(MapColor.GRASS).pushReaction(PushReaction.DESTROY).sound(SoundType.GRASS).noCollission().strength(0.5F).offsetType(Block.OffsetType.XZ));
 
     // Brettl
-    public static final DeferredBlock<Block> BRETTL_PLANT = registerWithoutItem("brettl_plant", BrettlPlantBlock::new, () -> Block.Properties.of().strength(0.2F).noCollission().randomTicks().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> BRETTL_PLANT_TIP = registerWithoutItem("brettl_plant_tip", BrettlPlantTipBlock::new, () -> Block.Properties.of().strength(0.2F).noCollission().randomTicks().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> BRETTL_PLANT = registerWithoutItem("brettl_plant", BrettlPlantBlock::new, () -> Block.Properties.of().noCollission().strength(0.5F).randomTicks().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> BRETTL_PLANT_TIP = registerWithoutItem("brettl_plant_tip", BrettlPlantTipBlock::new, () -> Block.Properties.of().noCollission().strength(0.5F).randomTicks().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<Block> BRETTL_FLOWER = register("brettl_flower", CactusFlowerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.CACTUS_FLOWER).mapColor(MapColor.DIAMOND));
     public static final DeferredBlock<Block> BRETTL_GRASS_BUNDLE = register("brettl_grass_bundle", HayBlock::new, () -> Block.Properties.ofFullCopy(Blocks.HAY_BLOCK).mapColor(MapColor.TERRACOTTA_LIGHT_GREEN));
 

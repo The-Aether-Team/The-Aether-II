@@ -1146,6 +1146,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HIGHLANDS_BUSH.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH.get(),
                 AetherIIBlocks.ORANGE_TREE.get(),
+                AetherIIBlocks.VALKYRIE_SPROUT.get(),
                 AetherIIBlocks.BRETTL_PLANT.get(),
                 AetherIIBlocks.BRETTL_PLANT_TIP.get(),
                 AetherIIBlocks.BRETTL_GRASS_BUNDLE.get(),
