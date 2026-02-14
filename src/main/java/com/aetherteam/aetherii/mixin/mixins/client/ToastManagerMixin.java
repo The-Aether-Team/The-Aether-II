@@ -9,6 +9,7 @@ import net.minecraft.client.gui.components.toasts.AdvancementToast;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import org.spongepowered.asm.mixin.Final;
@@ -30,7 +31,9 @@ public class ToastManagerMixin {
     private void init(Toast toast, CallbackInfoReturnable<Boolean> cir, @Local SoundEvent soundEvent) {
         if (Minecraft.getInstance().player != null && toast instanceof AdvancementToast advancementToast) {
             AdvancementHolder advancementHolder = ((AdvancementToastAccessor) advancementToast).aether_ii$getAdvancement();
-            SoundEvent soundOverride = AetherIIAdvancementSoundOverrides.retrieveOverride(Minecraft.getInstance().player.connection.getAdvancements(), advancementHolder);
+            MinecraftServer server = Minecraft.getInstance().getSingleplayerServer();
+            if (server == null) server = Minecraft.getInstance().player.getServer();
+            SoundEvent soundOverride = AetherIIAdvancementSoundOverrides.retrieveOverride(server.getAdvancements(), advancementHolder);
             if (soundOverride != null && soundOverride != SoundEvents.EMPTY) {
                 if (this.playedToastSounds.add(soundOverride)) {
                     Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forMusic(soundOverride, 1.0F));
