@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 public class ZaniteTrowelItem extends HoeItem implements ZaniteTool {
     public ZaniteTrowelItem(Properties properties) {
-        super(AetherIIItemTiers.ZANITE, -2.0F, -1.0F, properties);
+        super(AetherIIItemTiers.ZANITE, 0.5F, -2.5F, properties);
     }
 
     @Override
