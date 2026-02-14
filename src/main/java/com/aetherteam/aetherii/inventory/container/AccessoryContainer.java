@@ -52,18 +52,19 @@ public class AccessoryContainer extends SimpleContainer {
                 ItemStack lastItem = this.lastItems.get(i);
                 if (!ItemStack.isSameItem(lastItem, thisItem)) {
                     if (!thisItem.isEmpty() && thisItem.getItem() instanceof AccessoryItem accessory) {
-                        accessory.onEquip(thisItem, entity);
+                        accessory.onEquip(thisItem, entity, i);
                     } else if (thisItem.isEmpty() && !lastItem.isEmpty() && lastItem.getItem() instanceof AccessoryItem accessoryItem) {
-                        accessoryItem.onUnequip(lastItem, entity);
+                        accessoryItem.onUnequip(lastItem, entity, i);
                     }
                 }
                 this.lastItems.set(i, thisItem.copy());
                 entity.syncData(AetherIIDataAttachments.ACCESSORIES);
             }
         }
-        for (ItemStack stack : this.getItems()) {
+        for (int i = 0; i < this.getItems().size(); i++) {
+            ItemStack stack = this.getItem(i);
             if (stack.getItem() instanceof AccessoryItem accessory) {
-                accessory.tick(stack, entity);
+                accessory.tick(stack, entity, i);
             }
         }
     }
