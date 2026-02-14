@@ -50,7 +50,7 @@ public class DiscoveryDescriptionScreen extends Screen {
         this.textPosition = Math.max(85, (this.width - 325) / 2);
         this.textWidth = Math.min(this.width - (85 * 2), 325);
 
-        this.addRenderableWidget(new DescriptionButton(this, this.textPosition - 49, 12, Guidebook.MAGNIFYING_GLASS));
+        this.addRenderableWidget(new DescriptionButton(this, this.textPosition - 49, 12, Guidebook.RETURN));
         this.previousButton = this.addRenderableWidget(new ImageButton(this.textPosition - 53, this.height - 28, 16, 16, ARROW_LEFT_TEXTURES, (button) -> {
             if (this.currentPageNumber > 0) {
                 this.currentPageNumber--;
