@@ -6,13 +6,16 @@
     "aether_ii:unstable_holystone",
     "aether_ii:unstable_undershale",
     "aether_ii:mossy_holystone",
+    "aether_ii:irradiated_holystone",
     "aether_ii:coarse_aether_dirt",
     "aether_ii:fragile_arctic_ice",
+    "aether_ii:crude_scatterglass",
     "aether_ii:alkahest",
     "aether_ii:hestveil",
     "#aether_ii:aether_underground_blocks",
     "#aether_ii:aerclouds",
     "#aether_ii:sentry_ruins_blocks",
-    "#minecraft:leaves"
+    "#minecraft:leaves",
+    "#c:ores"
   ]
 }
