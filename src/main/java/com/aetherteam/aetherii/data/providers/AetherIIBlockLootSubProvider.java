@@ -232,12 +232,6 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                         .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                         .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE))))
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ValkyrieSproutBlock.AGE, 2)))
-                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)).invert())
-        ).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop))
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
-                        .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE))))
-                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ValkyrieSproutBlock.AGE, 2)))
                 .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)))
         ).withPool(LootPool.lootPool().add(LootItem.lootTableItem(block)));
     }
