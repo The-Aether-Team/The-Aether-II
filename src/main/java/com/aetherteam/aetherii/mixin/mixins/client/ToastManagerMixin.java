@@ -30,7 +30,7 @@ public class ToastManagerMixin {
     private void init(Toast toast, CallbackInfoReturnable<Boolean> cir, @Local SoundEvent soundEvent) {
         if (Minecraft.getInstance().player != null && toast instanceof AdvancementToast advancementToast) {
             AdvancementHolder advancementHolder = ((AdvancementToastAccessor) advancementToast).aether_ii$getAdvancement();
-            SoundEvent soundOverride = AetherIIAdvancementSoundOverrides.retrieveOverride(Minecraft.getInstance().player.connection.getAdvancements(), advancementHolder);
+            SoundEvent soundOverride = AetherIIAdvancementSoundOverrides.retrieveOverride(advancementHolder);
             if (soundOverride != null && soundOverride != SoundEvents.EMPTY) {
                 if (this.playedToastSounds.add(soundOverride)) {
                     Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forMusic(soundOverride, 1.0F));
