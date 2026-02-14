@@ -385,7 +385,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         int y = 103;
         int lineHeight = 9;
         int color = 0xffffffff;
-        MultiLineLabel label = MultiLineLabel.create(font, 140, 5, component);
+        MultiLineLabel label = MultiLineLabel.create(font, 135, 5, component);
         label.renderLeftAligned(guiGraphics, x, y, lineHeight, color);
     }
 
