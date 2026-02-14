@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 public class SkyrootTrowelItem extends HoeItem implements SkyrootTool {
     public SkyrootTrowelItem(Properties properties) {
-        super(AetherIIItemTiers.SKYROOT, 0.0F, -3.0F, properties);
+        super(AetherIIItemTiers.SKYROOT, 0.5F, -2.5F, properties);
     }
 
     @Override

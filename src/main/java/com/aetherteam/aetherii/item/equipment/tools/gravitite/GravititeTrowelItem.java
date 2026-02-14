@@ -11,7 +11,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 public class GravititeTrowelItem extends HoeItem implements GravititeTool {
     public GravititeTrowelItem(Properties properties) {
-        super(AetherIIItemTiers.GRAVITITE, -3.0F, 0.0F, properties);
+        super(AetherIIItemTiers.GRAVITITE, 0.5F, -2.5F, properties);
     }
 
     @Override
