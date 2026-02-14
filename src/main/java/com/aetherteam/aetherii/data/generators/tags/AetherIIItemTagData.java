@@ -413,7 +413,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.asItem(),
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.asItem(),
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.asItem(),
-                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem());
+                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem(),
+                AetherIIBlocks.HIGHLANDS_BUSH.asItem());
         this.tag(AetherIITags.Items.IRRADIATED_ITEM).add(
                 AetherIIItems.IRRADIATED_WEAPON.get(),
                 AetherIIItems.IRRADIATED_ARMOR.get(),
