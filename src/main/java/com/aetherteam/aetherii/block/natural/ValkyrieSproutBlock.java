@@ -51,7 +51,7 @@ public class ValkyrieSproutBlock extends AetherBushBlock implements Bonemealable
 
     @Override
     public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
-        return random.nextFloat() <= 0.45;
+        return random.nextFloat() <= 0.65;
     }
 
     @Override
