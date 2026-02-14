@@ -48,8 +48,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.UNSTABLE_HOLYSTONE.get(),
                 AetherIIBlocks.UNSTABLE_UNDERSHALE.get(),
                 AetherIIBlocks.MOSSY_HOLYSTONE.get(),
+                AetherIIBlocks.IRRADIATED_HOLYSTONE.get(),
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
                 AetherIIBlocks.FRAGILE_ARCTIC_ICE.get(),
+                AetherIIBlocks.CRUDE_SCATTERGLASS.get(),
                 AetherIIBlocks.ALKAHEST.get(),
                 AetherIIBlocks.HESTVEIL.get()
         ).addTags(
