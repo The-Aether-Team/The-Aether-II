@@ -3,6 +3,15 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "aether_ii:brettl_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "grown": "false"
+          }
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
@@ -23,21 +32,27 @@
     },
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "aether_ii:brettl_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "grown": "true"
+          }
+        },
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "items": "#aether_ii:tools/trowels"
+          }
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
           "functions": [
             {
               "add": false,
-              "conditions": [
-                {
-                  "block": "aether_ii:brettl_plant",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "grown": "true"
-                  }
-                }
-              ],
               "count": {
                 "type": "minecraft:uniform",
                 "max": 2.0,

@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
@@ -25,7 +26,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
-import org.jetbrains.annotations.Nullable;
 
 public class BrettlPlantTipBlock extends GrowingPlantHeadBlock implements SimpleWaterloggedBlock {
     public static final MapCodec<BrettlPlantTipBlock> CODEC = simpleCodec(BrettlPlantTipBlock::new);
@@ -126,6 +126,26 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock implements Simple
     @Override
     public boolean isMaxAge(BlockState state) {
         return state.getValue(AGE) == 2;
+    }
+
+    @Override
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+        boolean flag = false;
+        int height = state.getValue(BrettlPlantTipBlock.AGE);
+        for (int i = 1; i <= height; i++) {
+            BlockPos bodyPos = pos.below(i);
+            BlockState bodyState = level.getBlockState(bodyPos);
+            flag = flag || !bodyState.getValue(GROWN);
+        }
+        if (!state.getValue(GROWN)) {
+            flag = flag || super.isValidBonemealTarget(level, pos, state);
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+        return random.nextFloat() <= 0.5F;
     }
 
     @Override

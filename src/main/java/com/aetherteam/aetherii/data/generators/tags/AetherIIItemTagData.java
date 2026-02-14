@@ -355,6 +355,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.BLUEBERRY.get(),
                 AetherIIItems.ORANGE.get(),
                 AetherIIItems.WYNDBERRY.get(),
+                AetherIIItems.BRETTL_GRASS.get(),
+                AetherIIItems.BRETTL_CANE.get(),
                 AetherIIItems.BURRUKAI_RIB_CUT.get(),
                 AetherIIItems.KIRRID_LOIN.get(),
                 AetherIIItems.RAW_TAEGORE_MEAT.get(),
@@ -414,7 +416,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.asItem(),
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.asItem(),
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem(),
-                AetherIIBlocks.HIGHLANDS_BUSH.asItem());
+                AetherIIBlocks.HIGHLANDS_BUSH.asItem(),
+                AetherIIBlocks.BRETTL_FLOWER.asItem());
         this.tag(AetherIITags.Items.IRRADIATED_ITEM).add(
                 AetherIIItems.IRRADIATED_WEAPON.get(),
                 AetherIIItems.IRRADIATED_ARMOR.get(),
