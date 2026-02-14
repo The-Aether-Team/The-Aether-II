@@ -1731,20 +1731,34 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     private void addEffectsDescriptions() {
         final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
-        this.addEffectsDescription(AetherIIEffects.SATURATION_BOOST.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.VULNERABILITY.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.WOUND.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.STUN.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.FRACTURE.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.AMBROSIUM_POISONING.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.TOXIN.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.VENOM.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.CHARGED.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.WEBBED.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.IMMOLATION.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.FROSTBITE.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.FUNGAL_ROT.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.CRYSTALLIZED.get(), loremIpsum);
+        this.addEffectsDescription(AetherIIEffects.SATURATION_BOOST.get(), "Temporarily increases the time for which consumable items keep you full.\n");
+        this.addEffectsDescription(AetherIIEffects.VULNERABILITY.get(), "Decreases all Damage Type Resistances of the affected mob.\n");
+        this.addEffectsDescription(AetherIIEffects.WOUND.get(), "Inflicts a large amount of damage instantly. \n" +
+                "\n" +
+                "Use a Bandage to reduce Wound buildup.\n");
+        this.addEffectsDescription(AetherIIEffects.STUN.get(), "Prevents the use of tools and items and slows movement. \n" +
+                "\n" +
+                "Use a Bandage to reduce Stun buildup.\n");
+        this.addEffectsDescription(AetherIIEffects.FRACTURE.get(), "Causes damage when sprinting and increases fall damage. \n" +
+                "\n" +
+                "Use a Bandage to reduce Fracture buildup. A Splint will cure the effect.\n");
+        this.addEffectsDescription(AetherIIEffects.AMBROSIUM_POISONING.get(), "Completely negates all forms of healing.\n");
+        this.addEffectsDescription(AetherIIEffects.TOXIN.get(), "Drains health over time until minimum remaining health is reached. \n" +
+                "\n" +
+                "Drink from an Antitoxin Vial to reduce Toxin buildup.\n");
+        this.addEffectsDescription(AetherIIEffects.VENOM.get(), "Drains both Health and Hunger over time until minimum remaining health is reached. \n" +
+                "\n" +
+                "Drink from an Antivenom Vial to reduce Venom buildup.\n");
+        this.addEffectsDescription(AetherIIEffects.CHARGED.get(), "When Charged, a Mob or Player will be shocked when coming into close contact with another source of Charge.\n");
+        this.addEffectsDescription(AetherIIEffects.WEBBED.get(), "Greatly impairs movement ability and prevents jumping. \n" +
+                "\n" +
+                "Repeatedly attempting to jump reduces buildup.\n");
+        this.addEffectsDescription(AetherIIEffects.IMMOLATION.get(), "A fast acting burning that causes damage and can also cause Immolation buildup on nearby entities.\n");
+        this.addEffectsDescription(AetherIIEffects.FROSTBITE.get(), "Slows item use, attack and mining speed. As well as slightly slowing movement.\n");
+        this.addEffectsDescription(AetherIIEffects.FUNGAL_ROT.get(), "Deals damage very slowly over time until death. \n" +
+                "\n" +
+                "Decreases detection range from Fungal type mobs and causes extra interactions within the Infected Guardian Tree.\n");
+        this.addEffectsDescription(AetherIIEffects.CRYSTALLIZED.get(), "Reduces Armor effectiveness and will alert nearby Crystaline type mobs unless sneaking.\n");
     }
 
     private void addMusic() {
