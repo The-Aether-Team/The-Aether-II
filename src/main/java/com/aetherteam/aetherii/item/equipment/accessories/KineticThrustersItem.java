@@ -19,7 +19,7 @@ public class KineticThrustersItem extends AccessoryItem {
     @Override
     public Set<ConditionalAttribute> gatherAttributes(Set<ConditionalAttribute> attributes) {
         attributes = super.gatherAttributes(attributes);
-        attributes.add(new ConditionalAttribute(Attributes.MOVEMENT_SPEED, new ConditionalModifier(MOVEMENT_SPEED, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), (stack, wearer) -> true));
+        attributes.add(new ConditionalAttribute(Attributes.MOVEMENT_SPEED, new ConditionalModifier(MOVEMENT_SPEED, 0.075, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), (stack, wearer) -> true));
         attributes.add(new ConditionalAttribute(Attributes.STEP_HEIGHT, new ConditionalModifier(STEP_HEIGHT, 0.5F, AttributeModifier.Operation.ADD_VALUE), (stack, wearer) -> !wearer.isShiftKeyDown()));
         return attributes;
     }
