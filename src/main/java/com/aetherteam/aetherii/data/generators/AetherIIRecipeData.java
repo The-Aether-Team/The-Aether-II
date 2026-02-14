@@ -1261,6 +1261,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("#")
                 .unlockedBy("has_holystone", this.has(AetherIIBlocks.HOLYSTONE))
                 .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, Items.ARMOR_STAND)
+                .define('/', AetherIITags.Items.RODS_SKYROOT)
+                .define('_', AetherIIBlocks.HOLYSTONE_SLAB)
+                .pattern("///")
+                .pattern(" / ")
+                .pattern("/_/")
+                .unlockedBy("has_holystone_slab", this.has(AetherIIBlocks.HOLYSTONE_SLAB))
+                .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.REDSTONE, Blocks.DAYLIGHT_DETECTOR)
                 .define('Q', Items.QUARTZ)
                 .define('G', AetherIIBlocks.SCATTERGLASS)
@@ -2155,7 +2163,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.oneToOneConversionRecipe(Items.PURPLE_DYE, AetherIIBlocks.AECHOR_CUTTING, "purple_dye");
         this.oneToOneConversionRecipe(Items.LIGHT_BLUE_DYE, AetherIIBlocks.CARRION_CUTTING, "light_blue_dye");
 
-        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.SWET_JELLY.get(), 1)
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.SWET_JELLY.get(), 2)
                 .requires(AetherIIItems.SWET_GEL)
                 .requires(AetherIIItems.SWET_SUGAR)
                 .unlockedBy("has_gel", has(AetherIIItems.SWET_GEL))

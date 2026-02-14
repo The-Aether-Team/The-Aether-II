@@ -256,8 +256,8 @@ public class AetherIIItems {
     public static final DeferredItem<Item> GRAVITITE_PLATE = register("gravitite_plate");
     public static final DeferredItem<Item> FOSSILIZED_CORROBONITE = register("fossilized_corrobonite");
     public static final DeferredItem<Item> CORROBONITE_CRYSTAL = register("corrobonite_crystal");
-    public static final DeferredItem<Item> NEPTUNE_SCALE = register("neptune_scale");
-    public static final DeferredItem<Item> SENTRY_SERVO = register("sentry_servo");
+    public static final DeferredItem<Item> NEPTUNE_SCALE = register("neptune_scale", () -> new Item.Properties().rarity(Rarity.RARE));
+    public static final DeferredItem<Item> SENTRY_SERVO = register("sentry_servo", () -> new Item.Properties().rarity(Rarity.RARE));
     public static final DeferredItem<Item> FOSSILIZED_GLINT = register("fossilized_glint");
     public static final DeferredItem<Item> GLINT_GEMSTONE = register("glint_gemstone", (properties) -> new CurrencyItem(10, properties)); //todo
     public static final DeferredItem<Item> GOLDEN_AMBER = register("golden_amber");
