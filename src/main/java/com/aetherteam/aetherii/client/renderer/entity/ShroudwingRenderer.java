@@ -19,6 +19,9 @@ public class ShroudwingRenderer extends MobRenderer<Shroudwing, ShroudwingRender
     @Override
     protected void scale(ShroudwingRenderState renderState, PoseStack poseStack) {
         poseStack.scale(0.725F, 0.725F, 0.725F);
+        if (renderState.ageInTicks < 0) {
+            poseStack.translate(0.0F, -0.25F, 0.0F);
+        }
     }
 
     @Override
