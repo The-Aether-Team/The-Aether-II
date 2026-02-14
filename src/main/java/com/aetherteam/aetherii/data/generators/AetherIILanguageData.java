@@ -1740,40 +1740,43 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
     private void addEffectsDescriptions() {
         this.addEffectsDescription(AetherIIEffects.SATURATION_BOOST.get(), "Temporarily increases the time for which consumable items keep you full.");
-        this.addEffectsDescription(AetherIIEffects.VULNERABILITY.get(), "Decreases all Damage Type Resistances of the affected mob.");
+        this.addEffectsDescription(AetherIIEffects.VULNERABILITY.get(), "Decreases Resistance to all Damage Types for the affected mob.");
         this.addEffectsDescription(AetherIIEffects.WOUND.get(), """
-                Inflicts a large amount of damage instantly.
+                Inflicts a large amount of Damage instantly.
                 
                 Use a Bandage to reduce Wound buildup.""");
         this.addEffectsDescription(AetherIIEffects.STUN.get(), """
-                Prevents the use of tools and items and slows movement.
+                Prevents the use of tools, blocks or items and slows movement.
                 
                 Use a Bandage to reduce Stun buildup.""");
         this.addEffectsDescription(AetherIIEffects.FRACTURE.get(), """
-                Causes damage when sprinting and increases fall damage.
+                Causes Damage when sprinting and increases Fall Damage.
                 
                 Use a Bandage to reduce Fracture buildup. A Splint will cure the effect.""");
         this.addEffectsDescription(AetherIIEffects.AMBROSIUM_POISONING.get(), "Completely negates all forms of healing.");
         this.addEffectsDescription(AetherIIEffects.TOXIN.get(), """
-                Drains health over time until minimum remaining health is reached.
+                Drains Health over time until minimum remaining Health is reached.
                 
                 Drink from an Antitoxin Vial to reduce Toxin buildup.""");
         this.addEffectsDescription(AetherIIEffects.VENOM.get(), """
-                Drains both Health and Hunger over time until minimum remaining health is reached.
+                Drains both Health and Hunger over time until minimum remaining Health is reached.
                 
                 Drink from an Antivenom Vial to reduce Venom buildup.""");
         this.addEffectsDescription(AetherIIEffects.CHARGED.get(), "When Charged, a Mob or Player will be shocked when coming into close contact with another source of Charge.");
         this.addEffectsDescription(AetherIIEffects.WEBBED.get(), """
-                Greatly impairs movement ability and prevents jumping
+                Greatly impairs movement ability and prevents jumping.
                 
                 Repeatedly attempting to jump reduces buildup.""");
-        this.addEffectsDescription(AetherIIEffects.IMMOLATION.get(), "A fast acting burning that causes damage and can also cause Immolation buildup on nearby entities.");
-        this.addEffectsDescription(AetherIIEffects.FROSTBITE.get(), "Slows item use, attack and mining speed. As well as slightly slowing movement.");
+        this.addEffectsDescription(AetherIIEffects.IMMOLATION.get(), "A fast acting burning that causes Damage and can also cause Immolation buildup on nearby entities.");
+        this.addEffectsDescription(AetherIIEffects.FROSTBITE.get(), "Slows item use, attack and mining speed, as well as slightly slowing movement.");
         this.addEffectsDescription(AetherIIEffects.FUNGAL_ROT.get(), """
-                Deals damage very slowly over time until death.
+                Deals Damage very slowly over time until death.
                 
                 Decreases detection range from Fungal type mobs and causes extra interactions within the Infected Guardian Tree.""");
-        this.addEffectsDescription(AetherIIEffects.CRYSTALLIZED.get(), "Reduces Armor effectiveness and will alert nearby Crystaline type mobs unless sneaking.");
+        this.addEffectsDescription(AetherIIEffects.CRYSTALLIZED.get(), """
+                Reduces effectiveness of Armor.
+                        
+                Movement faster than sneaking will alert Crystaline type mobs.""");
     }
 
     private void addMusic() {
