@@ -262,7 +262,7 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
      */
     @Override
     public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
-        return random.nextFloat() <= 0.45F;
+        return random.nextFloat() <= 0.75F;
     }
 
     /**
