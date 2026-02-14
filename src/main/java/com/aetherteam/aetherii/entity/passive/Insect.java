@@ -41,6 +41,7 @@ public class Insect extends PathfinderMob {
         this.moveControl = new InsectMoveControl(this);
         this.setPathfindingMalus(PathType.DANGER_FIRE, -1.0F);
         this.setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0F);
+        this.setPathfindingMalus(PathType.WATER, -1.0F);
         this.makeActionCooldown();
     }
 
@@ -81,6 +82,10 @@ public class Insect extends PathfinderMob {
     public float getWalkTargetValue(BlockPos pos, LevelReader level) {
         if (this.isNeedRest() && level.getBlockState(pos.below()).entityCanStandOn(level, pos.below(), this)) {
             return 10.0F + level.getPathfindingCostFromLightLevels(pos);
+        }
+
+        if (level.isWaterAt(pos)) {
+            return Float.NEGATIVE_INFINITY;
         }
 
         return level.getPathfindingCostFromLightLevels(pos);
