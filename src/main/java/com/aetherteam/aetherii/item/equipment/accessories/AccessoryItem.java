@@ -4,11 +4,11 @@ import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.components.Charms;
+import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.item.equipment.charms.CharmItem;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -24,7 +24,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.TooltipDisplay;
-import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
@@ -59,29 +58,38 @@ public class AccessoryItem extends Item {
         AccessoryUtil.addAttributeTooltips(stack, tooltipComponents, AttributeTooltipContext.of(null, context, tooltipDisplay, tooltipFlag), attributesMap, this.getSlotType().name().toLowerCase(Locale.ROOT));
     }
 
-    public void tick(ItemStack stack, LivingEntity wearer) {
+    public void tick(ItemStack stack, LivingEntity wearer, int slot) {
         for (ConditionalAttribute entry : this.getAttributes(stack)) {
             AttributeInstance attribute = wearer.getAttribute(entry.attribute());
             AttributeModifier modifier = entry.modifier().getModifier(stack);
 
-            if (attribute != null && !attribute.hasModifier(modifier.id()) && entry.condition().test(stack, wearer)) {
-                attribute.addTransientModifier(modifier);
-            } else if (attribute != null && attribute.hasModifier(modifier.id()) && (!entry.condition().test(stack, wearer) || modifier.amount() != attribute.getModifier(modifier.id()).amount())) {
-                attribute.removeModifier(modifier.id());
+            if (attribute != null) {
+                AttributeModifier newModifier = new AttributeModifier(EquipmentUtil.getSlotModifierId(modifier.id(), stack, slot, this.getSlotType().name()), modifier.amount(), modifier.operation());
+
+                if (!attribute.hasModifier(newModifier.id()) && entry.condition().test(stack, wearer)) {
+                    attribute.addTransientModifier(newModifier);
+                } else if (attribute.hasModifier(newModifier.id()) && (!entry.condition().test(stack, wearer) || newModifier.amount() != attribute.getModifier(newModifier.id()).amount())) {
+                    attribute.removeModifier(newModifier.id());
+                }
             }
         }
     }
 
-    public void onEquip(ItemStack stack, LivingEntity wearer) {
+    public void onEquip(ItemStack stack, LivingEntity wearer, int slot) {
         this.playEquipSound(wearer, true);
     }
 
-    public void onUnequip(ItemStack stack, LivingEntity wearer) {
+    public void onUnequip(ItemStack stack, LivingEntity wearer, int slot) {
         for (ConditionalAttribute entry : this.getAttributes(stack)) {
             AttributeInstance attribute = wearer.getAttribute(entry.attribute());
             AttributeModifier modifier = entry.modifier().getModifier(stack);
-            if (attribute != null && attribute.hasModifier(modifier.id())) {
-                attribute.removeModifier(modifier.id());
+
+            if (attribute != null) {
+                ResourceLocation modifierId = EquipmentUtil.getSlotModifierId(modifier.id(), stack, slot, this.getSlotType().name());
+
+                if (attribute.hasModifier(modifierId)) {
+                    attribute.removeModifier(modifierId);
+                }
             }
         }
         this.playEquipSound(wearer, false);
@@ -132,7 +140,7 @@ public class AccessoryItem extends Item {
                 Charms.CharmHolder charmHolder = charmHolders.get(i);
                 if (charmHolder.getStack().getItem() instanceof CharmItem charmItem) {
                     for (ItemAttributeModifiers.Entry entry : charmItem.getCharmAttributes()) {
-                        conditionalAttributes.add(new ConditionalAttribute(entry.attribute(), new ConditionalModifier(CharmItem.getModifierId(entry.modifier().id(), itemStack, i, this.getSlotType().name()), entry.modifier().amount(), entry.modifier().operation()), (stack, wearer) -> true));
+                        conditionalAttributes.add(new ConditionalAttribute(entry.attribute(), new ConditionalModifier(EquipmentUtil.getSlotModifierId(entry.modifier().id(), itemStack, i, this.getSlotType().name()), entry.modifier().amount(), entry.modifier().operation()), (stack, wearer) -> true));
                     }
                 }
             }
