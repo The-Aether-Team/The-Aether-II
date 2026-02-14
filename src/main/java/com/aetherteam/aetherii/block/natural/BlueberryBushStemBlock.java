@@ -43,7 +43,7 @@ public class BlueberryBushStemBlock extends AetherBushBlock implements Bonemeala
 
     @Override
     public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
-        return random.nextFloat() <= 0.45;
+        return random.nextFloat() <= 0.875F;
     }
 
     @Override
