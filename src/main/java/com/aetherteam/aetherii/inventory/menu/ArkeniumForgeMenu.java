@@ -91,19 +91,16 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
     }
 
     public void changeInput() {
-        ItemStack input = this.getInput();
         for (Slot slot : this.slots) {
             if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
-                if (input.isEmpty()) {
-                    if (!forgeCharmSlot.getItem().isEmpty()) {
-                        if (forgeCharmSlot.isLocked()) {
-                            forgeCharmSlot.set(ItemStack.EMPTY);
-                        } else {
-                            this.quickMoveStack(this.player, forgeCharmSlot.index);
-                        }
+                if (!forgeCharmSlot.getItem().isEmpty()) {
+                    if (forgeCharmSlot.isLocked()) {
+                        forgeCharmSlot.set(ItemStack.EMPTY);
+                    } else {
+                        this.quickMoveStack(this.player, forgeCharmSlot.index);
                     }
-                    forgeCharmSlot.setLocked(false);
                 }
+                forgeCharmSlot.setLocked(false);
             }
         }
     }
