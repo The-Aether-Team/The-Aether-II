@@ -23,6 +23,11 @@
             },
             {
               "function": "minecraft:explosion_decay"
+            },
+            {
+              "enchantment": "minecraft:fortune",
+              "formula": "minecraft:ore_drops",
+              "function": "minecraft:apply_bonus"
             }
           ],
           "name": "aether_ii:brettl_cane"
@@ -62,6 +67,11 @@
             },
             {
               "function": "minecraft:explosion_decay"
+            },
+            {
+              "enchantment": "minecraft:fortune",
+              "formula": "minecraft:ore_drops",
+              "function": "minecraft:apply_bonus"
             }
           ],
           "name": "aether_ii:brettl_grass"
