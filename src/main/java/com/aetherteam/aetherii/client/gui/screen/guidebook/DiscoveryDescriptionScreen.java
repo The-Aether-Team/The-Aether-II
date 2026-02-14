@@ -70,7 +70,7 @@ public class DiscoveryDescriptionScreen extends Screen {
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.DESCRIPTION_BORDER_LEFT_SPRITE, 35, 30, 10, 120);
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.DESCRIPTION_BORDER_RIGHT_SPRITE, this.width - 35 - 10, 30, 10, 120);
 
-        this.createText(guiGraphics, this.pages.get(this.currentPageNumber), (this.width - 325) / 2, 30);
+        this.createText(guiGraphics, this.pages.get(this.currentPageNumber), Math.max(85, (this.width - 325) / 2), 30);
 
         guiGraphics.drawCenteredString(this.font, Component.literal(String.valueOf(this.currentPageNumber + 1)).append("/").append(String.valueOf(this.pages.size())), this.width / 2, this.height - 20, 0xffffffff);
 
@@ -79,7 +79,7 @@ public class DiscoveryDescriptionScreen extends Screen {
     }
 
     private void createPages(Component entry) {
-        List<FormattedCharSequence> formattedText = new ArrayList<>(this.font.split(entry, 325));
+        List<FormattedCharSequence> formattedText = new ArrayList<>(this.font.split(entry, Math.min(this.width - (85 * 2), 325)));
         List<FormattedCharSequence> firstPage;
         int lines = (this.height - 70) / 10;
         if (formattedText.size() < lines) {
