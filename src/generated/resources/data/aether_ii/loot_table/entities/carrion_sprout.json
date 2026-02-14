@@ -6,30 +6,9 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "aether_ii:wyndberry"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:item",
           "conditions": [
             {
-              "condition": "aether_ii:player_grown"
+              "condition": "minecraft:killed_by_player"
             }
           ],
           "functions": [
@@ -39,7 +18,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:carrion_cutting"
+          "name": "aether_ii:wyndberry"
         }
       ],
       "rolls": 1.0
@@ -64,9 +43,14 @@
               "unenchanted_chance": 0.1
             },
             {
-              "condition": "minecraft:inverted",
-              "term": {
-                "condition": "aether_ii:player_grown"
+              "condition": "minecraft:entity_properties",
+              "entity": "attacking_player",
+              "predicate": {
+                "equipment": {
+                  "mainhand": {
+                    "items": "#aether_ii:tools/trowels"
+                  }
+                }
               }
             }
           ],

@@ -34,28 +34,6 @@
           "type": "minecraft:item",
           "conditions": [
             {
-              "condition": "aether_ii:player_grown"
-            }
-          ],
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "aether_ii:aechor_cutting"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "conditions": [
-            {
               "condition": "minecraft:killed_by_player"
             },
             {
@@ -69,9 +47,14 @@
               "unenchanted_chance": 0.1
             },
             {
-              "condition": "minecraft:inverted",
-              "term": {
-                "condition": "aether_ii:player_grown"
+              "condition": "minecraft:entity_properties",
+              "entity": "attacking_player",
+              "predicate": {
+                "equipment": {
+                  "mainhand": {
+                    "items": "#aether_ii:tools/trowels"
+                  }
+                }
               }
             }
           ],
