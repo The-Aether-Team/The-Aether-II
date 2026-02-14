@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.sound.instance;
 
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -62,7 +63,7 @@ public class PortalTriggerSoundInstance extends AbstractTickableSoundInstance {
 
     @Override
     public void tick() {
-        if (this.player == null || this.player.portalProcess == null || !this.player.portalProcess.isSamePortal(AetherIIBlocks.AETHER_PORTAL.get())) {
+        if (this.player == null || this.player.portalProcess == null || !this.player.portalProcess.isSamePortal(AetherIIBlocks.AETHER_PORTAL.get()) || this.player.getData(AetherIIDataAttachments.PLAYER).getPortalIntensity() <= 0.0) {
             this.fade++;
             this.volume = (float) Math.exp(-(this.fade / (75 / 1.5))) - (1 - this.startingVolume);
             if (this.fade >= 75) {
