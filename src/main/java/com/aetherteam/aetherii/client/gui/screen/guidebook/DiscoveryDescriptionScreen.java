@@ -5,8 +5,6 @@ import com.aetherteam.aetherii.api.guidebook.GuidebookEntry;
 import com.aetherteam.aetherii.client.gui.component.guidebook.DescriptionButton;
 import com.google.common.collect.Lists;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
@@ -15,7 +13,6 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,7 +70,7 @@ public class DiscoveryDescriptionScreen extends Screen {
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.DESCRIPTION_BORDER_LEFT_SPRITE, 35, 30, 10, 120);
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.DESCRIPTION_BORDER_RIGHT_SPRITE, this.width - 35 - 10, 30, 10, 120);
 
-        this.createText(guiGraphics, this.pages.get(this.currentPageNumber), 85, 30);
+        this.createText(guiGraphics, this.pages.get(this.currentPageNumber), (this.width - 325) / 2, 30);
 
         guiGraphics.drawCenteredString(this.font, Component.literal(String.valueOf(this.currentPageNumber + 1)).append("/").append(String.valueOf(this.pages.size())), this.width / 2, this.height - 20, 0xffffffff);
 
@@ -82,7 +79,7 @@ public class DiscoveryDescriptionScreen extends Screen {
     }
 
     private void createPages(Component entry) {
-        List<FormattedCharSequence> formattedText = new ArrayList<>(this.font.split(entry, this.width - (85 * 2)));
+        List<FormattedCharSequence> formattedText = new ArrayList<>(this.font.split(entry, 325));
         List<FormattedCharSequence> firstPage;
         int lines = (this.height - 70) / 10;
         if (formattedText.size() < lines) {
