@@ -15,6 +15,7 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -26,7 +27,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 
 public class IrradiatedDustItem extends Item implements ItemUseConversion<IrradiationRecipe>, UsableItem {
     public IrradiatedDustItem(Properties properties) {
-        super(properties);
+        super(properties.rarity(Rarity.UNCOMMON));
     }
 
     public InteractionResult useOn(UseOnContext context) {

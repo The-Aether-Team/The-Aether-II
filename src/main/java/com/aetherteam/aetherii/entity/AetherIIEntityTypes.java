@@ -71,9 +71,9 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.of(SkyrootLizard::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.95F, 0.35F).clientTrackingRange(10).build(AetherIIEntities.SKYROOT_LIZARD));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Glitterwing>> GLITTERWING = ENTITY_TYPES.register("glitterwing",
-            () -> EntityType.Builder.<Glitterwing>of(Glitterwing::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.55F, 0.125F).eyeHeight(0.125F).clientTrackingRange(5).build(AetherIIEntities.GLITTERWING));
+            () -> EntityType.Builder.<Glitterwing>of(Glitterwing::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.55F, 0.125F).eyeHeight(0.1F).clientTrackingRange(5).build(AetherIIEntities.GLITTERWING));
     public static final DeferredHolder<EntityType<?>, EntityType<Shroudwing>> SHROUDWING = ENTITY_TYPES.register("shroudwing",
-            () -> EntityType.Builder.<Shroudwing>of(Shroudwing::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.25F, 0.125F).eyeHeight(0.125F).clientTrackingRange(5).build(AetherIIEntities.SHROUDWING));
+            () -> EntityType.Builder.<Shroudwing>of(Shroudwing::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.25F, 0.125F).eyeHeight(0.1F).clientTrackingRange(5).build(AetherIIEntities.SHROUDWING));
 
     // Hostile
     public static final DeferredHolder<EntityType<?>, EntityType<AechorPlant>> AECHOR_PLANT = ENTITY_TYPES.register("aechor_plant",

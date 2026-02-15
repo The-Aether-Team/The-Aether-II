@@ -18,6 +18,16 @@ public class AetherIISoundEventTagData extends KeyTagProvider<SoundEvent> {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        this.tag(AetherIITags.SoundEvents.PORTAL_SOUNDS).add(
+                AetherIISoundEvents.BLOCK_AETHER_PORTAL_AMBIENT.getKey(),
+                AetherIISoundEvents.BLOCK_AETHER_PORTAL_TRIGGER.getKey(),
+                AetherIISoundEvents.BLOCK_AETHER_PORTAL_TRAVEL.getKey());
+        this.tag(AetherIITags.SoundEvents.AMBIENT_PORTAL_SOUNDS).add(
+                AetherIISoundEvents.BLOCK_AETHER_PORTAL_AMBIENT.getKey());
+        this.tag(AetherIITags.SoundEvents.ACTIVATED_PORTAL_SOUNDS).add(
+                AetherIISoundEvents.BLOCK_AETHER_PORTAL_TRIGGER.getKey(),
+                AetherIISoundEvents.BLOCK_AETHER_PORTAL_TRAVEL.getKey());
+        this.tag(AetherIITags.SoundEvents.ACHIEVEMENT_SOUNDS);
         this.tag(AetherIITags.SoundEvents.MUSIC).addTag(AetherIITags.SoundEvents.BOSS_MUSIC).add(
                 AetherIISoundEvents.MUSIC_AETHER.getKey(),
                 AetherIISoundEvents.MUSIC_AETHER_AMBIENCE.getKey(),
