@@ -87,6 +87,7 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> VALKYRIE_SPROUT_PATCH = createKey("valkyrie_sprout_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_BUSH = createKey("aether_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH = createKey("blueberry_bush");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH_RARE = createKey("blueberry_bush_rare");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORANGE_TREE = createKey("orange_tree_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRETTL_PLANT = createKey("brettl_plant");
 
@@ -607,6 +608,19 @@ public class HolyIslesConfiguredFeatures {
                 Feature.RANDOM_PATCH,
                 new RandomPatchConfiguration(
                         55,
+                        2,
+                        3,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState())
+                        ), BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
+                )
+        );
+        register(
+                context,
+                BLUEBERRY_BUSH_RARE,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        32,
                         2,
                         3,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
