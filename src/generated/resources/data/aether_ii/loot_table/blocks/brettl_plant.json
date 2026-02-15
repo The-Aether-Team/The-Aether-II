@@ -3,6 +3,21 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "aether_ii:brettl_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "grown": "false"
+          }
+        },
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "items": "#aether_ii:tools/trowels"
+          }
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
@@ -14,6 +29,11 @@
             },
             {
               "function": "minecraft:explosion_decay"
+            },
+            {
+              "enchantment": "minecraft:fortune",
+              "formula": "minecraft:ore_drops",
+              "function": "minecraft:apply_bonus"
             }
           ],
           "name": "aether_ii:brettl_cane"
@@ -23,21 +43,27 @@
     },
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "aether_ii:brettl_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "grown": "true"
+          }
+        },
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "items": "#aether_ii:tools/trowels"
+          }
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
           "functions": [
             {
               "add": false,
-              "conditions": [
-                {
-                  "block": "aether_ii:brettl_plant",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "grown": "true"
-                  }
-                }
-              ],
               "count": {
                 "type": "minecraft:uniform",
                 "max": 2.0,
@@ -47,6 +73,11 @@
             },
             {
               "function": "minecraft:explosion_decay"
+            },
+            {
+              "enchantment": "minecraft:fortune",
+              "formula": "minecraft:ore_drops",
+              "function": "minecraft:apply_bonus"
             }
           ],
           "name": "aether_ii:brettl_grass"

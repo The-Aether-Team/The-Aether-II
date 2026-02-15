@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 public class HolystoneAxeItem extends AxeItem implements HolystoneTool {
     public HolystoneAxeItem(Properties properties) {
-        super(AetherIIItemTiers.HOLYSTONE, 7.0F, -3.2F, properties);
+        super(AetherIIItemTiers.HOLYSTONE, 1.5F, -3.2F, properties);
     }
 
     @Override

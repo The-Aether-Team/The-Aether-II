@@ -9,6 +9,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class AetherIIAdvancementTriggers {
     public static final DeferredRegister<CriterionTrigger<?>> TRIGGERS = DeferredRegister.create(Registries.TRIGGER_TYPE, AetherII.MODID);
 
+    public static final DeferredHolder<CriterionTrigger<?>, ItemBreakBlockTrigger> ITEM_BREAK_BLOCK = TRIGGERS.register("item_break_block", ItemBreakBlockTrigger::new);
     public static final DeferredHolder<CriterionTrigger<?>, OutpostCampfireTrigger> OUTPOST_CAMPFIRE = TRIGGERS.register("outpost_campfire", OutpostCampfireTrigger::new);
     public static final DeferredHolder<CriterionTrigger<?>, CurrencyTrigger> CURRENCY = TRIGGERS.register("currency", CurrencyTrigger::new);
     public static final DeferredHolder<CriterionTrigger<?>, IncubationTrigger> INCUBATION = TRIGGERS.register("incubation", IncubationTrigger::new);

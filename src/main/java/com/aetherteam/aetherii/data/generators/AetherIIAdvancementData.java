@@ -78,18 +78,34 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("enter_holy_isles", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "enter_holy_isles"));
 
-            AdvancementHolder ambrosium = Advancement.Builder.advancement()
+
+            AdvancementHolder trowel = Advancement.Builder.advancement()
                     .parent(enterAether)
-                    .display(AetherIIItems.AMBROSIUM_SHARD.get(),
-                            Component.translatable("advancement.aether_ii.ambrosium"),
-                            Component.translatable("advancement.aether_ii.ambrosium.desc").withStyle(ChatFormatting.AQUA),
+                    .display(AetherIIItems.SKYROOT_TROWEL.get(),
+                            Component.translatable("advancement.aether_ii.trowel"),
+                            Component.translatable("advancement.aether_ii.trowel.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("ambrosium", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.AMBROSIUM_SHARD.get()))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "ambrosium"));
+                    .requirements(AdvancementRequirements.Strategy.OR)
+                    .addCriterion("break_satival_shoot", ItemBreakBlockTrigger.Instance.itemBrokeBlock(
+                            LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, AetherIIBlocks.SATIVAL_SHOOT.get())),
+                            ItemPredicate.Builder.item().of(items, AetherIITags.Items.TOOLS_TROWELS)))
+                    .addCriterion("break_berry_bush", ItemBreakBlockTrigger.Instance.itemBrokeBlock(
+                            LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, AetherIIBlocks.BLUEBERRY_BUSH.get())),
+                            ItemPredicate.Builder.item().of(items, AetherIITags.Items.TOOLS_TROWELS)))
+                    .addCriterion("break_orange_tree", ItemBreakBlockTrigger.Instance.itemBrokeBlock(
+                            LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, AetherIIBlocks.ORANGE_TREE.get())),
+                            ItemPredicate.Builder.item().of(items, AetherIITags.Items.TOOLS_TROWELS)))
+                    .addCriterion("break_brettl_plant", ItemBreakBlockTrigger.Instance.itemBrokeBlock(
+                            LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, AetherIIBlocks.BRETTL_PLANT.get())),
+                            ItemPredicate.Builder.item().of(items, AetherIITags.Items.TOOLS_TROWELS)))
+                    .addCriterion("break_valkyrie_sprout", ItemBreakBlockTrigger.Instance.itemBrokeBlock(
+                            LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, AetherIIBlocks.VALKYRIE_SPROUT.get())),
+                            ItemPredicate.Builder.item().of(items, AetherIITags.Items.TOOLS_TROWELS)))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "trowel"));
 
             AdvancementHolder enchantedAetherGrass = Advancement.Builder.advancement()
-                    .parent(ambrosium)
+                    .parent(trowel)
                     .display(AetherIIItems.ENCHANTED_BLUEBERRY.get(),
                             Component.translatable("advancement.aether_ii.enchanted_aether_grass"),
                             Component.translatable("advancement.aether_ii.enchanted_aether_grass.desc").withStyle(ChatFormatting.AQUA),
@@ -99,6 +115,33 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get())),
                             ItemPredicate.Builder.item().of(items, AetherIIItems.AMBROSIUM_SHARD.get())))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "enchanted_aether_grass"));
+
+            AdvancementHolder plantCutting = Advancement.Builder.advancement()
+                    .parent(enchantedAetherGrass)
+                    .display(AetherIIBlocks.CARRION_CUTTING.get(),
+                            Component.translatable("advancement.aether_ii.plant_cutting"),
+                            Component.translatable("advancement.aether_ii.plant_cutting.desc").withStyle(ChatFormatting.AQUA),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .requirements(AdvancementRequirements.Strategy.OR)
+                    .addCriterion("kill_aechor_plant", killEntityWithItem(
+                            ItemPredicate.Builder.item().of(items, AetherIITags.Items.TOOLS_TROWELS),
+                            EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.AECHOR_PLANT.get())))
+                    .addCriterion("kill_carrion_sprout", killEntityWithItem(
+                            ItemPredicate.Builder.item().of(items, AetherIITags.Items.TOOLS_TROWELS),
+                            EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.CARRION_SPROUT.get())))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "plant_cutting"));
+
+
+            AdvancementHolder ambrosium = Advancement.Builder.advancement()
+                    .parent(enterAether)
+                    .display(AetherIIItems.AMBROSIUM_SHARD.get(),
+                            Component.translatable("advancement.aether_ii.ambrosium"),
+                            Component.translatable("advancement.aether_ii.ambrosium.desc").withStyle(ChatFormatting.AQUA),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("ambrosium", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.AMBROSIUM_SHARD.get()))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "ambrosium"));
 
             AdvancementHolder goldenAmber = Advancement.Builder.advancement()
                     .parent(ambrosium)
@@ -516,6 +559,12 @@ public class AetherIIAdvancementData extends AdvancementProvider {
 
     public static Criterion<PlayerInteractTrigger.TriggerInstance> itemUsedOnSpecificEntity(ItemPredicate.Builder item, EntityPredicate.Builder entity) {
         return PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(Optional.empty(), item, Optional.of(EntityPredicate.wrap(entity)));
+    }
+
+    public static Criterion<KilledTrigger.TriggerInstance> killEntityWithItem(ItemPredicate.Builder item, EntityPredicate.Builder entity) {
+        EntityPredicate.Builder playerBuilder = EntityPredicate.Builder.entity().equipment(EntityEquipmentPredicate.Builder.equipment().mainhand(item));
+        LootItemCondition playerCondition = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, playerBuilder).build();
+        return CriteriaTriggers.PLAYER_KILLED_ENTITY.createCriterion(new KilledTrigger.TriggerInstance(Optional.of(ContextAwarePredicate.create(playerCondition)), Optional.of(EntityPredicate.wrap(entity)), Optional.empty()));
     }
 
     public static Criterion<PlayerTrigger.TriggerInstance> armorSet(TagKey<Item> armor) {

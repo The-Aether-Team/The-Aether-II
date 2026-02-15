@@ -10,6 +10,12 @@
           "properties": {
             "grown": "false"
           }
+        },
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "items": "#aether_ii:tools/trowels"
+          }
         }
       ],
       "entries": [
@@ -38,6 +44,12 @@
           "condition": "minecraft:block_state_property",
           "properties": {
             "grown": "true"
+          }
+        },
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "items": "#aether_ii:tools/trowels"
           }
         }
       ],

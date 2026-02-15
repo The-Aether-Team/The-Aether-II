@@ -25,7 +25,7 @@ public class BlueberryBushStemBlock extends AetherBushBlock implements Bonemeala
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (level.getRawBrightness(pos.above(), 0) >= 9 && CommonHooks.canCropGrow(level, pos, state, random.nextInt(60) == 0)) {
+        if (level.getRawBrightness(pos.above(), 0) >= 9 && CommonHooks.canCropGrow(level, pos, state, random.nextInt(10) == 0)) {
             level.setBlockAndUpdate(pos, AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState());
             CommonHooks.fireCropGrowPost(level, pos, state);
         }
@@ -43,7 +43,7 @@ public class BlueberryBushStemBlock extends AetherBushBlock implements Bonemeala
 
     @Override
     public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
-        return random.nextFloat() <= 0.45;
+        return random.nextFloat() <= 0.875F;
     }
 
     @Override
