@@ -64,6 +64,7 @@
       "aether_ii:water_spring"
     ],
     [
+      "aether_ii:orange_tree_patch_irradiated",
       "aether_ii:grass_field",
       "aether_ii:small_grass_patch",
       "aether_ii:medium_grass_patch",
@@ -71,6 +72,8 @@
       "aether_ii:irradiated_grass_patch",
       "aether_ii:enchanted_grass_and_dirt_floor",
       "aether_ii:coarse_aether_dirt_floor",
+      "aether_ii:blueberry_bush_patch_irradiated",
+      "aether_ii:brettl_patch_irradiated",
       "aether_ii:contaminated_jungle_trees"
     ],
     [

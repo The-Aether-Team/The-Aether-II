@@ -230,6 +230,30 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get(),
                 AetherIIBlocks.ICESTONE_PILLAR.get()
         );
+        this.tag(AetherIITags.Blocks.QUICKSOIL_GLASS_DECORATIVE_BLOCKS, AetherIITags.Items.QUICKSOIL_GLASS_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.TILED_QUICKSOIL_GLASS.get(),
+                AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS.get()
+        );
+        this.tag(AetherIITags.Blocks.QUICKSOIL_GLASS_PANE_DECORATIVE_BLOCKS, AetherIITags.Items.QUICKSOIL_GLASS_PANE_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.TILED_QUICKSOIL_GLASS_PANE.get(),
+                AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS_PANE.get()
+        );
+        this.tag(AetherIITags.Blocks.CRUDE_SCATTERGLASS_DECORATIVE_BLOCKS, AetherIITags.Items.CRUDE_SCATTERGLASS_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS.get(),
+                AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS.get()
+        );
+        this.tag(AetherIITags.Blocks.CRUDE_SCATTERGLASS_PANE_DECORATIVE_BLOCKS, AetherIITags.Items.CRUDE_SCATTERGLASS_PANE_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS_PANE.get(),
+                AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS_PANE.get()
+        );
+        this.tag(AetherIITags.Blocks.SCATTERGLASS_DECORATIVE_BLOCKS, AetherIITags.Items.SCATTERGLASS_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS.get(),
+                AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS.get()
+        );
+        this.tag(AetherIITags.Blocks.SCATTERGLASS_PANE_DECORATIVE_BLOCKS, AetherIITags.Items.SCATTERGLASS_PANE_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE.get(),
+                AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get()
+        );
         this.tag(AetherIITags.Blocks.ARILUM_LANTERN, AetherIITags.Items.ARILUM_LANTERN).add(
                 AetherIIBlocks.WHITE_ARILUM_LANTERN.get(),
                 AetherIIBlocks.ORANGE_ARILUM_LANTERN.get(),
