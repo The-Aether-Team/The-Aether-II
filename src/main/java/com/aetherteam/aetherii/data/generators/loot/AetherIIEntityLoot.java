@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.AetherIILoot;
+import com.aetherteam.aetherii.loot.conditions.PlayerGrownCondition;
 import com.aetherteam.aetherii.loot.functions.GelDropsFunction;
 import com.aetherteam.aetherii.loot.functions.SugarDropsFunction;
 import net.minecraft.advancements.critereon.*;
@@ -119,6 +120,15 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         .add(LootItem.lootTableItem(AetherIIBlocks.AECHOR_CUTTING.get())
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                                 .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                                .when(PlayerGrownCondition::new)
+                        )
+                )
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.AECHOR_CUTTING.get())
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.35F, 0.1F))
+                                .when(InvertedLootItemCondition.invert(PlayerGrownCondition::new))
                         )
                 )
         );
@@ -133,6 +143,15 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         .add(LootItem.lootTableItem(AetherIIBlocks.CARRION_CUTTING.get())
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                                 .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                                .when(PlayerGrownCondition::new)
+                        )
+                )
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.CARRION_CUTTING.get())
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.35F, 0.1F))
+                                .when(InvertedLootItemCondition.invert(PlayerGrownCondition::new))
                         )
                 )
         );
