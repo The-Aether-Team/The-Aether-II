@@ -1,5 +1,5 @@
 {
-  "carvers": "aether_ii:highlands_cave",
+  "carvers": "aether_ii:holy_isles_cave",
   "downfall": 0.8,
   "effects": {
     "fog_color": 15526908,
@@ -70,14 +70,14 @@
       "aether_ii:small_grass_patch",
       "aether_ii:medium_grass_patch",
       "aether_ii:large_grass_patch",
-      "aether_ii:highlands_bush_patch",
+      "aether_ii:aether_bush_patch",
       "aether_ii:bryalinn_flower_patch",
       "aether_ii:grass_and_dirt_floor",
       "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:coarse_aether_dirt_ceiling",
       "aether_ii:coarse_aether_dirt_overhang",
       "aether_ii:exposed_bryalinn_moss_cover",
-      "aether_ii:highlands_flower_patch",
+      "aether_ii:holy_isles_flower_patch",
       "aether_ii:highfields_flower_patch",
       "aether_ii:blueberry_bush_patch",
       "aether_ii:short_arilum",

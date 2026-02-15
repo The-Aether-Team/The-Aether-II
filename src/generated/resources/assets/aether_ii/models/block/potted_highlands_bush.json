@@ -1,8 +1,0 @@
-{
-  "parent": "aether_ii:block/flower_pot_bush_block",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "bush": "aether_ii:block/potted_highlands_bush",
-    "stem": "aether_ii:block/potted_highlands_bush_stem"
-  }
-}

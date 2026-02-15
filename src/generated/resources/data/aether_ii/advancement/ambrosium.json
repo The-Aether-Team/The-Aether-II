@@ -1,5 +1,5 @@
 {
-  "parent": "aether_ii:enter_highlands",
+  "parent": "aether_ii:enter_holy_isles",
   "criteria": {
     "ambrosium": {
       "conditions": {

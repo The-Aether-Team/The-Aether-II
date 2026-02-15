@@ -1,14 +1,13 @@
 package com.aetherteam.aetherii.world.structure.piece.sentry;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsConfiguredFeatures;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesConfiguredFeatures;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.dungeon.SentryGolem;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.world.structure.piece.AetherIIStructurePieceTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
@@ -57,11 +56,11 @@ public class SentryRuinsRoom extends SentryRuinsPiece {
         else if (random.nextInt(4) > 1) {
             if (name.equals("Entrance Moss")) {
                 if (level.getBiome(pos).is(AetherIITags.Biomes.ARCTIC)) {
-                    Objects.requireNonNull(level.registryAccess().get(HighlandsConfiguredFeatures.SHAYELINN_MOSS_DUNGEON).orElse(null)).value().place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);
+                    Objects.requireNonNull(level.registryAccess().get(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_DUNGEON).orElse(null)).value().place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);
                 } else if (level.getBiome(pos).is(AetherIITags.Biomes.IRRADIATED)) {
-                    Objects.requireNonNull(level.registryAccess().get(HighlandsConfiguredFeatures.AMBRELINN_MOSS_DUNGEON).orElse(null)).value().place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);
+                    Objects.requireNonNull(level.registryAccess().get(HolyIslesConfiguredFeatures.AMBRELINN_MOSS_DUNGEON).orElse(null)).value().place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);
                 }
-                else Objects.requireNonNull(level.registryAccess().get(HighlandsConfiguredFeatures.BRYALINN_MOSS_DUNGEON).orElse(null)).value().place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);
+                else Objects.requireNonNull(level.registryAccess().get(HolyIslesConfiguredFeatures.BRYALINN_MOSS_DUNGEON).orElse(null)).value().place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);
             } else {
                 ConfiguredFeature<?, ?> feature = Objects.requireNonNull(level.registryAccess().get(ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.parse(name))).orElse(null)).value();
                 feature.place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);

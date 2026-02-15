@@ -72,14 +72,14 @@ public class AetherPortalBlock extends Block implements Portal {
     @Nullable
     @Override
     public TeleportTransition getPortalDestination(ServerLevel pLevel, Entity pEntity, BlockPos pPos) {
-        ResourceKey<Level> resourcekey = pLevel.dimension() == AetherIIDimensions.AETHER_HIGHLANDS_LEVEL ? Level.OVERWORLD : AetherIIDimensions.AETHER_HIGHLANDS_LEVEL;
+        ResourceKey<Level> resourcekey = pLevel.dimension() == AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL ? Level.OVERWORLD : AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL;
         ServerLevel serverlevel = pLevel.getServer().getLevel(resourcekey);
         if (serverlevel == null) {
             return null;
         } else {
             WorldBorder worldborder = serverlevel.getWorldBorder();
             double d0 = DimensionType.getTeleportationScale(pLevel.dimensionType(), serverlevel.dimensionType());
-            int yOffset = resourcekey == AetherIIDimensions.AETHER_HIGHLANDS_LEVEL ? 64 : -64;
+            int yOffset = resourcekey == AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL ? 64 : -64;
             BlockPos blockpos = worldborder.clampToBounds(pEntity.getX() * d0, pEntity.getY() + yOffset, pEntity.getZ() * d0);
             return this.getExitPortal(serverlevel, pEntity, pPos, blockpos, worldborder);
         }

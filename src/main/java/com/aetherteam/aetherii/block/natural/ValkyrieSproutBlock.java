@@ -33,7 +33,7 @@ public class ValkyrieSproutBlock extends AetherBushBlock implements Bonemealable
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (level.getRawBrightness(pos.above(), 0) >= 9 && CommonHooks.canCropGrow(level, pos, state, random.nextInt(60) == 0)) {
+        if (level.getRawBrightness(pos.above(), 0) >= 9 && CommonHooks.canCropGrow(level, pos, state, random.nextInt(20) == 0)) {
             level.setBlockAndUpdate(pos, state.setValue(AGE, Math.min(state.getValue(AGE) + 1, 2)));
             CommonHooks.fireCropGrowPost(level, pos, state);
         }
@@ -51,7 +51,7 @@ public class ValkyrieSproutBlock extends AetherBushBlock implements Bonemealable
 
     @Override
     public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
-        return random.nextFloat() <= 0.45;
+        return random.nextFloat() <= 0.65;
     }
 
     @Override

@@ -38,7 +38,7 @@
         }
       ]
     },
-    "distance_noise": "aether_ii:highlands/coasts/ferrosite_pillar",
+    "distance_noise": "aether_ii:holy_isles/coasts/ferrosite_pillar",
     "size": 16.35,
     "valid_blocks": "aether_ii:ferrosite_pillar_coast_generates_on",
     "vegetation_chance": 0.0,

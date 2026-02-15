@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 public class ArkeniumAxeItem extends AxeItem {
     public ArkeniumAxeItem(Properties properties) {
-        super(AetherIIItemTiers.ARKENIUM, 6.0F, -3.1F, properties);
+        super(AetherIIItemTiers.ARKENIUM, 1.5F, -3.2F, properties);
     }
 
     @Override

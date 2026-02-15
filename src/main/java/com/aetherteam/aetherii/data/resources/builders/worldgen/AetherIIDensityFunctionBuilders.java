@@ -15,64 +15,64 @@ import net.minecraft.world.level.levelgen.DensityFunctions;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 public class AetherIIDensityFunctionBuilders {
-    public static final ResourceKey<DensityFunction> TEMPERATURE = createKey("highlands/temperature");
-    public static final ResourceKey<DensityFunction> VEGETATION = createKey("highlands/vegetation");
-    public static final ResourceKey<DensityFunction> VEGETATION_RARE = createKey("highlands/vegetation_rare");
-    public static final ResourceKey<DensityFunction> VEGETATION_RARITY_MAPPER = createKey("highlands/vegetation_rarity_mapper");
-    public static final ResourceKey<DensityFunction> EROSION = createKey("highlands/erosion");
-    public static final ResourceKey<DensityFunction> DEPTH = createKey("highlands/depth");
-    public static final ResourceKey<DensityFunction> CAVE_BIOMES = createKey("highlands/cave_biomes");
-    public static final ResourceKey<DensityFunction> CAVE_BIOMES_RARITY_MAPPER = createKey("highlands/cave_biomes_rarity_mapper");
-    public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("highlands/amplification");
-    public static final ResourceKey<DensityFunction> RIDGES = createKey("highlands/ridges");
-    public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("highlands/base_3d_noise");
+    public static final ResourceKey<DensityFunction> TEMPERATURE = createKey("holy_isles/temperature");
+    public static final ResourceKey<DensityFunction> VEGETATION = createKey("holy_isles/vegetation");
+    public static final ResourceKey<DensityFunction> VEGETATION_RARE = createKey("holy_isles/vegetation_rare");
+    public static final ResourceKey<DensityFunction> VEGETATION_RARITY_MAPPER = createKey("holy_isles/vegetation_rarity_mapper");
+    public static final ResourceKey<DensityFunction> EROSION = createKey("holy_isles/erosion");
+    public static final ResourceKey<DensityFunction> DEPTH = createKey("holy_isles/depth");
+    public static final ResourceKey<DensityFunction> CAVE_BIOMES = createKey("holy_isles/cave_biomes");
+    public static final ResourceKey<DensityFunction> CAVE_BIOMES_RARITY_MAPPER = createKey("holy_isles/cave_biomes_rarity_mapper");
+    public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("holy_isles/amplification");
+    public static final ResourceKey<DensityFunction> RIDGES = createKey("holy_isles/ridges");
+    public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("holy_isles/base_3d_noise");
 
-    public static final ResourceKey<DensityFunction> SHATTERED_ISLANDS = createKey("highlands/terrain/shattered_islands");
-    public static final ResourceKey<DensityFunction> FINAL_ISLANDS = createKey("highlands/terrain/final_islands");
+    public static final ResourceKey<DensityFunction> SHATTERED_ISLANDS = createKey("holy_isles/terrain/shattered_islands");
+    public static final ResourceKey<DensityFunction> FINAL_ISLANDS = createKey("holy_isles/terrain/final_islands");
 
-    public static final ResourceKey<DensityFunction> FACTOR = createKey("highlands/terrain/base/factor");
-    public static final ResourceKey<DensityFunction> ELEVATION = createKey("highlands/terrain/base/elevation");
-    public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("highlands/terrain/base/bottom_slide");
-    public static final ResourceKey<DensityFunction> TOP_SLIDE = createKey("highlands/terrain/base/top_slide");
-    public static final ResourceKey<DensityFunction> SLOPER = createKey("highlands/terrain/base/sloper");
-    public static final ResourceKey<DensityFunction> BASE_TERRAIN_SHAPER = createKey("highlands/terrain/base/base_terrain_shaper");
-    public static final ResourceKey<DensityFunction> TERRAIN_SHAPER = createKey("highlands/terrain/base/terrain_shaper");
+    public static final ResourceKey<DensityFunction> FACTOR = createKey("holy_isles/terrain/base/factor");
+    public static final ResourceKey<DensityFunction> ELEVATION = createKey("holy_isles/terrain/base/elevation");
+    public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("holy_isles/terrain/base/bottom_slide");
+    public static final ResourceKey<DensityFunction> TOP_SLIDE = createKey("holy_isles/terrain/base/top_slide");
+    public static final ResourceKey<DensityFunction> SLOPER = createKey("holy_isles/terrain/base/sloper");
+    public static final ResourceKey<DensityFunction> BASE_TERRAIN_SHAPER = createKey("holy_isles/terrain/base/base_terrain_shaper");
+    public static final ResourceKey<DensityFunction> TERRAIN_SHAPER = createKey("holy_isles/terrain/base/terrain_shaper");
 
-    public static final ResourceKey<DensityFunction> TOP_SLIDE_ARCTIC = createKey("highlands/terrain/arctic/top_slide_arctic");
-    public static final ResourceKey<DensityFunction> SLOPER_ARCTIC = createKey("highlands/terrain/arctic/sloper_arctic");
+    public static final ResourceKey<DensityFunction> TOP_SLIDE_ARCTIC = createKey("holy_isles/terrain/arctic/top_slide_arctic");
+    public static final ResourceKey<DensityFunction> SLOPER_ARCTIC = createKey("holy_isles/terrain/arctic/sloper_arctic");
 
-    public static final ResourceKey<DensityFunction> FACTOR_SHATTERED = createKey("highlands/terrain/shattered/factor_shattered");
-    public static final ResourceKey<DensityFunction> ELEVATION_SHATTERED = createKey("highlands/terrain/shattered/elevation_shattered");
-    public static final ResourceKey<DensityFunction> BOTTOM_SLIDE_SHATTERED = createKey("highlands/terrain/shattered/bottom_slide_shattered");
-    public static final ResourceKey<DensityFunction> TOP_SLIDE_SHATTERED = createKey("highlands/terrain/shattered/top_slide_shattered");
+    public static final ResourceKey<DensityFunction> FACTOR_SHATTERED = createKey("holy_isles/terrain/shattered/factor_shattered");
+    public static final ResourceKey<DensityFunction> ELEVATION_SHATTERED = createKey("holy_isles/terrain/shattered/elevation_shattered");
+    public static final ResourceKey<DensityFunction> BOTTOM_SLIDE_SHATTERED = createKey("holy_isles/terrain/shattered/bottom_slide_shattered");
+    public static final ResourceKey<DensityFunction> TOP_SLIDE_SHATTERED = createKey("holy_isles/terrain/shattered/top_slide_shattered");
 
-    public static final ResourceKey<DensityFunction> NOISE_CAVES = createKey("highlands/caves/noise_caves");
-    public static final ResourceKey<DensityFunction> UNDERGROUND_SHAPER = createKey("highlands/caves/underground_shaper");
+    public static final ResourceKey<DensityFunction> NOISE_CAVES = createKey("holy_isles/caves/noise_caves");
+    public static final ResourceKey<DensityFunction> UNDERGROUND_SHAPER = createKey("holy_isles/caves/underground_shaper");
 
-    public static final ResourceKey<DensityFunction> LAKES_NOISE = createKey("highlands/lakes/noise");
-    public static final ResourceKey<DensityFunction> LAKES_NOISE_SWAMP = createKey("highlands/lakes/noise_swamp");
-    public static final ResourceKey<DensityFunction> LAKES_FACTOR = createKey("highlands/lakes/factor");
-    public static final ResourceKey<DensityFunction> LAKES_FLOOR = createKey("highlands/lakes/lake_floor");
-    public static final ResourceKey<DensityFunction> LAKES_BARRIER = createKey("highlands/lakes/lake_barrier");
-    public static final ResourceKey<DensityFunction> LAKES_SHORE = createKey("highlands/lakes/lake_shore");
-    public static final ResourceKey<DensityFunction> LAKES_WATERFALLS = createKey("highlands/lakes/lakes_waterfalls");
+    public static final ResourceKey<DensityFunction> LAKES_NOISE = createKey("holy_isles/lakes/noise");
+    public static final ResourceKey<DensityFunction> LAKES_NOISE_SWAMP = createKey("holy_isles/lakes/noise_swamp");
+    public static final ResourceKey<DensityFunction> LAKES_FACTOR = createKey("holy_isles/lakes/factor");
+    public static final ResourceKey<DensityFunction> LAKES_FLOOR = createKey("holy_isles/lakes/lake_floor");
+    public static final ResourceKey<DensityFunction> LAKES_BARRIER = createKey("holy_isles/lakes/lake_barrier");
+    public static final ResourceKey<DensityFunction> LAKES_SHORE = createKey("holy_isles/lakes/lake_shore");
+    public static final ResourceKey<DensityFunction> LAKES_WATERFALLS = createKey("holy_isles/lakes/lakes_waterfalls");
 
-    public static final ResourceKey<DensityFunction> COASTS_BASE_NOISE = createKey("highlands/coasts/base_noise");
-    public static final ResourceKey<DensityFunction> COASTS_HIGHFIELDS = createKey("highlands/coasts/highfields");
-    public static final ResourceKey<DensityFunction> COASTS_MAGNETIC = createKey("highlands/coasts/magnetic");
-    public static final ResourceKey<DensityFunction> COASTS_FERROSITE_PILLAR = createKey("highlands/coasts/ferrosite_pillar");
-    public static final ResourceKey<DensityFunction> COASTS_ARCTIC = createKey("highlands/coasts/arctic");
+    public static final ResourceKey<DensityFunction> COASTS_BASE_NOISE = createKey("holy_isles/coasts/base_noise");
+    public static final ResourceKey<DensityFunction> COASTS_HIGHFIELDS = createKey("holy_isles/coasts/highfields");
+    public static final ResourceKey<DensityFunction> COASTS_MAGNETIC = createKey("holy_isles/coasts/magnetic");
+    public static final ResourceKey<DensityFunction> COASTS_FERROSITE_PILLAR = createKey("holy_isles/coasts/ferrosite_pillar");
+    public static final ResourceKey<DensityFunction> COASTS_ARCTIC = createKey("holy_isles/coasts/arctic");
 
-    public static final ResourceKey<DensityFunction> ENVIRONMENTAL_SNOW = createKey("highlands/environmental/snow");
-    public static final ResourceKey<DensityFunction> ENVIRONMENTAL_TREE_MOSS = createKey("highlands/environmental/tree_moss");
-    public static final ResourceKey<DensityFunction> ENVIRONMENTAL_CRATER = createKey("highlands/environmental/crater");
+    public static final ResourceKey<DensityFunction> ENVIRONMENTAL_SNOW = createKey("holy_isles/environmental/snow");
+    public static final ResourceKey<DensityFunction> ENVIRONMENTAL_TREE_MOSS = createKey("holy_isles/environmental/tree_moss");
+    public static final ResourceKey<DensityFunction> ENVIRONMENTAL_CRATER = createKey("holy_isles/environmental/crater");
 
-    public static final ResourceKey<DensityFunction> DUNGEON_DENSE_GUARDIAN_WOOD = createKey("highlands/dungeon/dense_guardian_wood");
-    public static final ResourceKey<DensityFunction> DUNGEON_STRIPPED_GUARDIAN_WOOD = createKey("highlands/dungeon/stripped_guardian_wood");
-    public static final ResourceKey<DensityFunction> DUNGEON_GUARDIAN_ROOTS = createKey("highlands/dungeon/guardian_roots");
+    public static final ResourceKey<DensityFunction> DUNGEON_DENSE_GUARDIAN_WOOD = createKey("holy_isles/dungeon/dense_guardian_wood");
+    public static final ResourceKey<DensityFunction> DUNGEON_STRIPPED_GUARDIAN_WOOD = createKey("holy_isles/dungeon/stripped_guardian_wood");
+    public static final ResourceKey<DensityFunction> DUNGEON_GUARDIAN_ROOTS = createKey("holy_isles/dungeon/guardian_roots");
 
-    public static final ResourceKey<DensityFunction> CLOUDBED_NOISE = createKey("highlands/cloudbed/noise");
-    public static final ResourceKey<DensityFunction> CLOUDBED_Y_OFFSET = createKey("highlands/cloudbed/y_offset");
+    public static final ResourceKey<DensityFunction> CLOUDBED_NOISE = createKey("holy_isles/cloudbed/noise");
+    public static final ResourceKey<DensityFunction> CLOUDBED_Y_OFFSET = createKey("holy_isles/cloudbed/y_offset");
 
     private static ResourceKey<DensityFunction> createKey(String name) {
         return ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));

@@ -12,7 +12,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
-import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesBiomes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -46,10 +46,10 @@ import java.util.function.Consumer;
 
 public class AetherIIAdvancementData extends AdvancementProvider {
     public AetherIIAdvancementData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, List.of(new HighlandsAdvancements(), new BestiaryAdvancements(), new EffectsAdvancements()));
+        super(output, registries, List.of(new HolyIslesAdvancements(), new BestiaryAdvancements(), new EffectsAdvancements()));
     }
 
-    public static class HighlandsAdvancements implements AdvancementSubProvider {
+    public static class HolyIslesAdvancements implements AdvancementSubProvider {
         @SuppressWarnings("unused")
         @Override
         public void generate(HolderLookup.Provider provider, Consumer<AdvancementHolder> consumer) {
@@ -61,22 +61,77 @@ public class AetherIIAdvancementData extends AdvancementProvider {
 
             AdvancementHolder theAether = Advancement.Builder.advancement()
                     .display(AetherIIItems.AETHER_PORTAL_FRAME.get(),
-                            Component.translatable("advancement.aether_ii.the_highlands"),
-                            Component.translatable("advancement.aether_ii.the_highlands.desc").withStyle(ChatFormatting.AQUA),
+                            Component.translatable("advancement.aether_ii.the_holy_isles"),
+                            Component.translatable("advancement.aether_ii.the_holy_isles.desc").withStyle(ChatFormatting.AQUA),
                             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/holystone"),
                             AdvancementType.TASK, false, false, false)
-                    .addCriterion("the_highlands", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "the_highlands"));
+                    .addCriterion("the_holy_isles", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "the_holy_isles"));
 
             AdvancementHolder enterAether = Advancement.Builder.advancement()
                     .parent(theAether)
                     .display(Blocks.GLOWSTONE,
-                            Component.translatable("advancement.aether_ii.enter_highlands"),
-                            Component.translatable("advancement.aether_ii.enter_highlands.desc").withStyle(ChatFormatting.AQUA),
+                            Component.translatable("advancement.aether_ii.enter_holy_isles"),
+                            Component.translatable("advancement.aether_ii.enter_holy_isles.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.TASK, true, true, false)
-                    .addCriterion("enter_highlands", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "enter_highlands"));
+                    .addCriterion("enter_holy_isles", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "enter_holy_isles"));
+
+
+            AdvancementHolder trowel = Advancement.Builder.advancement()
+                    .parent(enterAether)
+                    .display(AetherIIItems.SKYROOT_TROWEL.get(),
+                            Component.translatable("advancement.aether_ii.trowel"),
+                            Component.translatable("advancement.aether_ii.trowel.desc").withStyle(ChatFormatting.AQUA),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .requirements(AdvancementRequirements.Strategy.OR)
+                    .addCriterion("break_satival_shoot", ItemBreakBlockTrigger.Instance.itemBrokeBlock(
+                            LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, AetherIIBlocks.SATIVAL_SHOOT.get())),
+                            ItemPredicate.Builder.item().of(items, AetherIITags.Items.TOOLS_TROWELS)))
+                    .addCriterion("break_berry_bush", ItemBreakBlockTrigger.Instance.itemBrokeBlock(
+                            LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, AetherIIBlocks.BLUEBERRY_BUSH.get())),
+                            ItemPredicate.Builder.item().of(items, AetherIITags.Items.TOOLS_TROWELS)))
+                    .addCriterion("break_orange_tree", ItemBreakBlockTrigger.Instance.itemBrokeBlock(
+                            LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, AetherIIBlocks.ORANGE_TREE.get())),
+                            ItemPredicate.Builder.item().of(items, AetherIITags.Items.TOOLS_TROWELS)))
+                    .addCriterion("break_brettl_plant", ItemBreakBlockTrigger.Instance.itemBrokeBlock(
+                            LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, AetherIIBlocks.BRETTL_PLANT.get())),
+                            ItemPredicate.Builder.item().of(items, AetherIITags.Items.TOOLS_TROWELS)))
+                    .addCriterion("break_valkyrie_sprout", ItemBreakBlockTrigger.Instance.itemBrokeBlock(
+                            LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, AetherIIBlocks.VALKYRIE_SPROUT.get())),
+                            ItemPredicate.Builder.item().of(items, AetherIITags.Items.TOOLS_TROWELS)))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "trowel"));
+
+            AdvancementHolder enchantedAetherGrass = Advancement.Builder.advancement()
+                    .parent(trowel)
+                    .display(AetherIIItems.ENCHANTED_BLUEBERRY.get(),
+                            Component.translatable("advancement.aether_ii.enchanted_aether_grass"),
+                            Component.translatable("advancement.aether_ii.enchanted_aether_grass.desc").withStyle(ChatFormatting.AQUA),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("enchanted_aether_grass", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
+                            LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get())),
+                            ItemPredicate.Builder.item().of(items, AetherIIItems.AMBROSIUM_SHARD.get())))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "enchanted_aether_grass"));
+
+            AdvancementHolder plantCutting = Advancement.Builder.advancement()
+                    .parent(enchantedAetherGrass)
+                    .display(AetherIIBlocks.CARRION_CUTTING.get(),
+                            Component.translatable("advancement.aether_ii.plant_cutting"),
+                            Component.translatable("advancement.aether_ii.plant_cutting.desc").withStyle(ChatFormatting.AQUA),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .requirements(AdvancementRequirements.Strategy.OR)
+                    .addCriterion("kill_aechor_plant", killEntityWithItem(
+                            ItemPredicate.Builder.item().of(items, AetherIITags.Items.TOOLS_TROWELS),
+                            EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.AECHOR_PLANT.get())))
+                    .addCriterion("kill_carrion_sprout", killEntityWithItem(
+                            ItemPredicate.Builder.item().of(items, AetherIITags.Items.TOOLS_TROWELS),
+                            EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.CARRION_SPROUT.get())))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "plant_cutting"));
+
 
             AdvancementHolder ambrosium = Advancement.Builder.advancement()
                     .parent(enterAether)
@@ -87,18 +142,6 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             AdvancementType.TASK, true, true, false)
                     .addCriterion("ambrosium", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.AMBROSIUM_SHARD.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "ambrosium"));
-
-            AdvancementHolder enchantedAetherGrass = Advancement.Builder.advancement()
-                    .parent(ambrosium)
-                    .display(AetherIIItems.ENCHANTED_BLUEBERRY.get(),
-                            Component.translatable("advancement.aether_ii.enchanted_aether_grass"),
-                            Component.translatable("advancement.aether_ii.enchanted_aether_grass.desc").withStyle(ChatFormatting.AQUA),
-                            null,
-                            AdvancementType.TASK, true, true, false)
-                    .addCriterion("enchanted_aether_grass", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
-                            LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get())),
-                            ItemPredicate.Builder.item().of(items, AetherIIItems.AMBROSIUM_SHARD.get())))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "enchanted_aether_grass"));
 
             AdvancementHolder goldenAmber = Advancement.Builder.advancement()
                     .parent(ambrosium)
@@ -297,21 +340,21 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.explore_aether.desc").withStyle(ChatFormatting.GOLD),
                             null,
                             AdvancementType.CHALLENGE, true, true, false)
-                    .addCriterion("flourishing_field", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.FLOURISHING_FIELD))))
-                    .addCriterion("verdant_woods", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.VERDANT_WOODS))))
-                    .addCriterion("shrouded_forest", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.SHROUDED_FOREST))))
-                    .addCriterion("shimmering_basin", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.SHIMMERING_BASIN))))
-                    .addCriterion("magnetic_scar", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.MAGNETIC_SCAR))))
-                    .addCriterion("turquoise_forest", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.TURQUOISE_FOREST))))
-                    .addCriterion("glistening_swamp", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.GLISTENING_SWAMP))))
-                    .addCriterion("violet_highwoods", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.VIOLET_HIGHWOODS))))
-                    .addCriterion("frigid_sierra", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.FRIGID_SIERRA))))
-                    .addCriterion("enduring_woodland", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.ENDURING_WOODLAND))))
-                    .addCriterion("frozen_lakes", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.FROZEN_LAKES))))
-                    .addCriterion("sheer_tundra", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.SHEER_TUNDRA))))
-                    .addCriterion("contaminated_jungle", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.CONTAMINATED_JUNGLE))))
-                    .addCriterion("battleground_wastes", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.BATTLEGROUND_WASTES))))
-                    .addCriterion("hestveil_caverns", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.HESTVEIL_CAVERNS))))
+                    .addCriterion("flourishing_field", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.FLOURISHING_FIELD))))
+                    .addCriterion("verdant_woods", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.VERDANT_WOODS))))
+                    .addCriterion("shrouded_forest", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.SHROUDED_FOREST))))
+                    .addCriterion("shimmering_basin", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.SHIMMERING_BASIN))))
+                    .addCriterion("magnetic_scar", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.MAGNETIC_SCAR))))
+                    .addCriterion("turquoise_forest", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.TURQUOISE_FOREST))))
+                    .addCriterion("glistening_swamp", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.GLISTENING_SWAMP))))
+                    .addCriterion("violet_highwoods", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.VIOLET_HIGHWOODS))))
+                    .addCriterion("frigid_sierra", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.FRIGID_SIERRA))))
+                    .addCriterion("enduring_woodland", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.ENDURING_WOODLAND))))
+                    .addCriterion("frozen_lakes", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.FROZEN_LAKES))))
+                    .addCriterion("sheer_tundra", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.SHEER_TUNDRA))))
+                    .addCriterion("contaminated_jungle", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.CONTAMINATED_JUNGLE))))
+                    .addCriterion("battleground_wastes", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.BATTLEGROUND_WASTES))))
+                    .addCriterion("hestveil_caverns", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HolyIslesBiomes.HESTVEIL_CAVERNS))))
                     //.addCriterion("expanse", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HighlandsBiomes.EXPANSE))))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "explore_aether"));
 
@@ -516,6 +559,12 @@ public class AetherIIAdvancementData extends AdvancementProvider {
 
     public static Criterion<PlayerInteractTrigger.TriggerInstance> itemUsedOnSpecificEntity(ItemPredicate.Builder item, EntityPredicate.Builder entity) {
         return PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(Optional.empty(), item, Optional.of(EntityPredicate.wrap(entity)));
+    }
+
+    public static Criterion<KilledTrigger.TriggerInstance> killEntityWithItem(ItemPredicate.Builder item, EntityPredicate.Builder entity) {
+        EntityPredicate.Builder playerBuilder = EntityPredicate.Builder.entity().equipment(EntityEquipmentPredicate.Builder.equipment().mainhand(item));
+        LootItemCondition playerCondition = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, playerBuilder).build();
+        return CriteriaTriggers.PLAYER_KILLED_ENTITY.createCriterion(new KilledTrigger.TriggerInstance(Optional.of(ContextAwarePredicate.create(playerCondition)), Optional.of(EntityPredicate.wrap(entity)), Optional.empty()));
     }
 
     public static Criterion<PlayerTrigger.TriggerInstance> armorSet(TagKey<Item> armor) {

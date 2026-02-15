@@ -105,7 +105,7 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
         int age = state.getValue(AGE);
-        if (age < DOUBLE_AGE_MAX && level.getRawBrightness(pos.above(), 0) >= 9 && CommonHooks.canCropGrow(level, pos, state, random.nextInt(85) == 0)) { // Whether the Orange Tree is able to grow.
+        if (age < DOUBLE_AGE_MAX && level.getRawBrightness(pos.above(), 0) >= 9 && CommonHooks.canCropGrow(level, pos, state, random.nextInt(15) == 0)) { // Whether the Orange Tree is able to grow.
             age += 1;
             BlockState blockState = state.setValue(AGE, age);
             if (age > SINGLE_AGE_MAX && doubleBlockHalf == DoubleBlockHalf.LOWER) { // Growing for the double block state.
@@ -262,7 +262,7 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
      */
     @Override
     public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
-        return random.nextFloat() <= 0.45F;
+        return random.nextFloat() <= 0.75F;
     }
 
     /**

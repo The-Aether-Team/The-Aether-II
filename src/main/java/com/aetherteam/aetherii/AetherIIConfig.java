@@ -26,7 +26,7 @@ public class AetherIIConfig {
             portal_destination_dimension_ID = builder
                     .comment("Sets the ID of the dimension that the Aether Portal will send the player to")
                     .translation("config.aether.server.modpack.portal_destination_dimension_ID")
-                    .define("Sets portal destination dimension", AetherIIDimensions.AETHER_HIGHLANDS_LEVEL.location().toString());
+                    .define("Sets portal destination dimension", AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL.location().toString());
             portal_return_dimension_ID = builder
                     .comment("Sets the ID of the dimension that the Aether Portal will return the player to")
                     .translation("config.aether.server.modpack.portal_return_dimension_ID")

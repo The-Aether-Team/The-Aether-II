@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 public class ZaniteAxeItem extends AxeItem implements ZaniteTool {
     public ZaniteAxeItem(Properties properties) {
-        super(AetherIIItemTiers.ZANITE, 6.0F, -3.1F, properties);
+        super(AetherIIItemTiers.ZANITE, 1.5F, -3.2F, properties);
     }
 
     @Override

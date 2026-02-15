@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 public class HolystoneTrowelItem extends HoeItem implements HolystoneTool {
     public HolystoneTrowelItem(Properties properties) {
-        super(AetherIIItemTiers.HOLYSTONE, -1.0F, -2.0F, properties);
+        super(AetherIIItemTiers.HOLYSTONE, 0.5F, -2.5F, properties);
     }
 
     @Override

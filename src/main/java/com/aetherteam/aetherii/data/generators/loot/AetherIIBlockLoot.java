@@ -230,7 +230,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.SHORT_AETHER_GRASS.get(), this::createShearsOnlyDrop);
         this.add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get(), this::createShearsOnlyDrop);
         this.add(AetherIIBlocks.TALL_AETHER_GRASS.get(), this::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.HIGHLAND_FERN.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.AETHER_FERN.get(), this::createShearsOnlyDrop);
         this.add(AetherIIBlocks.SHIELD_FERN.get(), this::createShearsOnlyDrop);
 
         // Flowers
@@ -247,7 +247,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Potted Flowers
         this.dropPottedContents(AetherIIBlocks.POTTED_MAGNETIC_SHROOM.get());
-        this.dropPottedContents(AetherIIBlocks.POTTED_HIGHLAND_FERN.get());
+        this.dropPottedContents(AetherIIBlocks.POTTED_AETHER_FERN.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_SHIELD_FERN.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_HESPEROSE.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_TARABLOOM.get());
@@ -260,12 +260,12 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropPottedContents(AetherIIBlocks.POTTED_CARRION_CUTTING.get());
 
         // Bushes
-        this.dropSelf(AetherIIBlocks.HIGHLANDS_BUSH.get());
-        this.add(AetherIIBlocks.BLUEBERRY_BUSH.get(), (bush) -> this.droppingBerryBush(getter, bush, AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), AetherIIItems.BLUEBERRY.get()));
+        this.dropSelf(AetherIIBlocks.AETHER_BUSH.get());
+        this.add(AetherIIBlocks.BLUEBERRY_BUSH.get(), (bush) -> this.droppingBerryBush(bush, AetherIIItems.BLUEBERRY.get()));
         this.dropSelf(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get());
 
         // Potted Bushes
-        this.dropPottedContents(AetherIIBlocks.POTTED_HIGHLANDS_BUSH.get());
+        this.dropPottedContents(AetherIIBlocks.POTTED_AETHER_BUSH.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_BLUEBERRY_BUSH.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM.get());
 
@@ -276,11 +276,11 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropPottedContents(AetherIIBlocks.POTTED_ORANGE_TREE.get());
 
         // Valkyrie Sprout
-        this.add(AetherIIBlocks.VALKYRIE_SPROUT.get(), (sprout) -> this.droppingValkyrieSprout(getter, sprout, AetherIIItems.VALKYRIE_WINGS.get()));
+        this.add(AetherIIBlocks.VALKYRIE_SPROUT.get(), (sprout) -> this.droppingValkyrieSprout(sprout, AetherIIItems.VALKYRIE_WINGS.get()));
 
         // Brettl
-        this.add(AetherIIBlocks.BRETTL_PLANT.get(), (brettl) -> this.droppingBrettlPlant(brettl, AetherIIItems.BRETTL_CANE.get(), AetherIIItems.BRETTL_GRASS.get()));
-        this.add(AetherIIBlocks.BRETTL_PLANT_TIP.get(), (brettl) -> this.droppingBrettlPlantTip(brettl, AetherIIItems.BRETTL_CANE.get(), AetherIIBlocks.BRETTL_FLOWER.get()));
+        this.add(AetherIIBlocks.BRETTL_PLANT.get(), (brettl) -> this.droppingBrettlPlant(getter, brettl, AetherIIItems.BRETTL_CANE.get(), AetherIIItems.BRETTL_GRASS.get()));
+        this.add(AetherIIBlocks.BRETTL_PLANT_TIP.get(), (brettl) -> this.droppingBrettlPlantTip(getter, brettl, AetherIIItems.BRETTL_CANE.get(), AetherIIBlocks.BRETTL_FLOWER.get()));
         this.dropSelf(AetherIIBlocks.BRETTL_FLOWER.get());
         this.dropSelf(AetherIIBlocks.BRETTL_GRASS_BUNDLE.get());
 

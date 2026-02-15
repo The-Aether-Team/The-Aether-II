@@ -221,6 +221,7 @@ public class AetherIITags {
         public static final TagKey<Item> DOUBLE_DROPS = tag("double_drops");
         public static final TagKey<Item> IRRADIATED_ITEM = tag("irradiated_item");
         public static final TagKey<Item> ALKAHEST_RESISTANT_ITEM = tag("alkahest_resistant_item");
+        public static final TagKey<Item> PLANT_DAMAGING_ITEMS = tag("plant_damaging_items");
         public static final TagKey<Item> SLIDER_DAMAGING_ITEMS = tag("slider_damaging_items");
 
         private static TagKey<Item> tag(String name) {
@@ -237,6 +238,7 @@ public class AetherIITags {
         public static final TagKey<EntityType<?>> NO_DOUBLE_DROPS = tag("no_double_drops");
         public static final TagKey<EntityType<?>> NO_AMBROSIUM_DROPS = tag("no_ambrosium_drops");
 
+        public static final TagKey<EntityType<?>> PLANT_DAMAGING_PROJECTILES = tag("plant_damaging_projectiles");
         public static final TagKey<EntityType<?>> SLIDER_DAMAGING_PROJECTILES = tag("slider_damaging_projectiles");
         public static final TagKey<EntityType<?>> SENTRY_RUINS_MOBS = tag("sentry_ruins_mobs");
         public static final TagKey<EntityType<?>> DUNGEON_MOBS = tag("dungeon_mobs");
@@ -264,7 +266,7 @@ public class AetherIITags {
     }
 
     public static class Biomes {
-        public static final TagKey<Biome> HIGHLANDS = tag("highlands");
+        public static final TagKey<Biome> HOLY_ISLES = tag("holy_isles");
         public static final TagKey<Biome> HIGHFIELDS = tag("highfields");
         public static final TagKey<Biome> MAGNETIC = tag("magnetic");
         public static final TagKey<Biome> MAGNETIC_FOG = tag("magnetic_fog");

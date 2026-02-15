@@ -7,7 +7,7 @@ import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIMurals;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
-import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesBiomes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
@@ -53,7 +53,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addMuralTitles();
 
         // Dimensions
-        this.addDimension(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, "Aether Highlands");
+        this.addDimension(AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL, "Aether Holy Isles");
 
         // Misc
         this.addGeneric("slash", "§9Slash§r");
@@ -285,7 +285,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SHORT_AETHER_GRASS, "Short Aether Grass");
         this.addBlock(AetherIIBlocks.MEDIUM_AETHER_GRASS, "Medium Aether Grass");
         this.addBlock(AetherIIBlocks.TALL_AETHER_GRASS, "Tall Aether Grass");
-        this.addBlock(AetherIIBlocks.HIGHLAND_FERN, "Highland Fern");
+        this.addBlock(AetherIIBlocks.AETHER_FERN, "Aether Fern");
         this.addBlock(AetherIIBlocks.SHIELD_FERN, "Shield Fern");
 
         // Flowers
@@ -302,7 +302,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Potted Flowers
         this.addBlock(AetherIIBlocks.POTTED_MAGNETIC_SHROOM, "Potted Magnetic Shroom");
-        this.addBlock(AetherIIBlocks.POTTED_HIGHLAND_FERN, "Potted Highland Fern");
+        this.addBlock(AetherIIBlocks.POTTED_AETHER_FERN, "Potted Aether Fern");
         this.addBlock(AetherIIBlocks.POTTED_SHIELD_FERN, "Potted Shield Fern");
         this.addBlock(AetherIIBlocks.POTTED_HESPEROSE, "Potted Hesperose");
         this.addBlock(AetherIIBlocks.POTTED_TARABLOOM, "Potted Tarabloom");
@@ -315,7 +315,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.POTTED_CARRION_CUTTING, "Potted Carrion Cutting");
 
         // Bushes
-        this.addBlock(AetherIIBlocks.HIGHLANDS_BUSH, "Highlands Bush");
+        this.addBlock(AetherIIBlocks.AETHER_BUSH, "Aether Bush");
         this.addBlock(AetherIIBlocks.BLUEBERRY_BUSH, "Blueberry Bush");
         this.addBlock(AetherIIBlocks.BLUEBERRY_BUSH_STEM, "Blueberry Bush Stem");
 
@@ -1400,29 +1400,29 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
     private void addBiomes() {
         // Highfields
-        this.addBiome(HighlandsBiomes.FLOURISHING_FIELD, "Flourishing Field");
-        this.addBiome(HighlandsBiomes.VERDANT_WOODS, "Verdant Woods");
-        this.addBiome(HighlandsBiomes.SHROUDED_FOREST, "Shrouded Forest");
-        this.addBiome(HighlandsBiomes.SHIMMERING_BASIN, "Shimmering Basin");
+        this.addBiome(HolyIslesBiomes.FLOURISHING_FIELD, "Flourishing Field");
+        this.addBiome(HolyIslesBiomes.VERDANT_WOODS, "Verdant Woods");
+        this.addBiome(HolyIslesBiomes.SHROUDED_FOREST, "Shrouded Forest");
+        this.addBiome(HolyIslesBiomes.SHIMMERING_BASIN, "Shimmering Basin");
 
         // Magnetic
-        this.addBiome(HighlandsBiomes.MAGNETIC_SCAR, "Magnetic Scar");
-        this.addBiome(HighlandsBiomes.TURQUOISE_FOREST, "Turquoise Forest");
-        this.addBiome(HighlandsBiomes.VIOLET_HIGHWOODS, "Violet Highwoods");
-        this.addBiome(HighlandsBiomes.GLISTENING_SWAMP, "Glistening Swamp");
+        this.addBiome(HolyIslesBiomes.MAGNETIC_SCAR, "Magnetic Scar");
+        this.addBiome(HolyIslesBiomes.TURQUOISE_FOREST, "Turquoise Forest");
+        this.addBiome(HolyIslesBiomes.VIOLET_HIGHWOODS, "Violet Highwoods");
+        this.addBiome(HolyIslesBiomes.GLISTENING_SWAMP, "Glistening Swamp");
 
         // Arctic
-        this.addBiome(HighlandsBiomes.FRIGID_SIERRA, "Frigid Sierra");
-        this.addBiome(HighlandsBiomes.ENDURING_WOODLAND, "Enduring Woodland");
-        this.addBiome(HighlandsBiomes.FROZEN_LAKES, "Frozen Lakes");
-        this.addBiome(HighlandsBiomes.SHEER_TUNDRA, "Sheer Tundra");
+        this.addBiome(HolyIslesBiomes.FRIGID_SIERRA, "Frigid Sierra");
+        this.addBiome(HolyIslesBiomes.ENDURING_WOODLAND, "Enduring Woodland");
+        this.addBiome(HolyIslesBiomes.FROZEN_LAKES, "Frozen Lakes");
+        this.addBiome(HolyIslesBiomes.SHEER_TUNDRA, "Sheer Tundra");
 
         // Irradiated
-        this.addBiome(HighlandsBiomes.CONTAMINATED_JUNGLE, "Contaminated Jungle");
-        this.addBiome(HighlandsBiomes.BATTLEGROUND_WASTES, "Battleground Wastes");
+        this.addBiome(HolyIslesBiomes.CONTAMINATED_JUNGLE, "Contaminated Jungle");
+        this.addBiome(HolyIslesBiomes.BATTLEGROUND_WASTES, "Battleground Wastes");
 
         // Aercloud Sea
-        this.addBiome(HighlandsBiomes.EXPANSE, "Expanse");
+        this.addBiome(HolyIslesBiomes.EXPANSE, "Expanse");
     }
 
     private void addStructures() {
@@ -1564,6 +1564,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("toast.guidebook.effects", "New Effects Entry!");
         this.addGuiText("toast.guidebook.exploration", "New Exploration Entry!");
         this.addGuiText("toast.guidebook.description", "Check your Guidebook");
+        this.addGuiText("plant.message.attack.invalid", "Hmm. Perhaps I should cut it with a Trowel?");
         this.addGuiText("slider.message.attack.invalid", "Hmm. Perhaps I need to attack it with a Pickaxe?");
         this.addGuiText("slider.title", "Slider %s");
 
@@ -1572,8 +1573,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     }
 
     private void addAdvancements() {
-        this.addAdvancement("the_highlands", "The Aether II");
-        this.addAdvancement("enter_highlands", "Hostile Paradise");
+        this.addAdvancement("the_holy_isles", "The Aether II");
+        this.addAdvancement("enter_holy_isles", "Hostile Paradise");
         this.addAdvancement("aerbunny", "Marketable Plushie");
         this.addAdvancement("blue_aercloud", "To Infinity and Beyond!");
         this.addAdvancement("cloud_skiff", "Cloud Sailor");
@@ -1589,8 +1590,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("outpost_campfire", "Community Hotspot");
         this.addAdvancement("glint", "Who wants to be a Glintillionaire?");
         this.addAdvancement("bestiary", "The Beast");
-        this.addAdvancement("ambrosium", "Enlightenment");
+        this.addAdvancement("trowel", "Highfields Valley");
         this.addAdvancement("enchanted_aether_grass", "Golden Thumb");
+        this.addAdvancement("plant_cutting", "Weed Whacking");
+        this.addAdvancement("ambrosium", "Enlightenment");
         this.addAdvancement("golden_amber", "Wisdom of the Ancients");
         this.addAdvancement("amber_hourglass", "What's Old is New Again");
         this.addAdvancement("zanite", "Exotic Hardware");
@@ -1611,8 +1614,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("neptune_armor_loot", "Ocean Man");
         this.addAdvancement("sentry_boots_fall", "Vertigo");
 
-        this.addAdvancementDesc("the_highlands", "It's not dead!");
-        this.addAdvancementDesc("enter_highlands", "Enter the Aether");
+        this.addAdvancementDesc("the_holy_isles", "It's not dead!");
+        this.addAdvancementDesc("enter_holy_isles", "Enter the Aether");
         this.addAdvancementDesc("aerbunny", "Interact with a tamed Aerbunny to put it on your head");
         this.addAdvancementDesc("blue_aercloud", "Bounce on a Blue Aercloud");
         this.addAdvancementDesc("cloud_skiff", "Ride a Cloud Skiff for better movement on the Cloud Sea");
@@ -1628,8 +1631,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("outpost_campfire", "Set a secondary respawn point at an Outpost Campfire");
         this.addAdvancementDesc("glint", "Earn at least 100 Glint Coins");
         this.addAdvancementDesc("bestiary", "Fill out the entire bestiary");
-        this.addAdvancementDesc("ambrosium", "Obtain an Ambrosium Shard");
+        this.addAdvancementDesc("trowel", "Harvest drops from a wild plant using any Trowel");
         this.addAdvancementDesc("enchanted_aether_grass", "Enchant an Aether Grass Block with an Ambrosium Shard to speed up plant growth above it");
+        this.addAdvancementDesc("plant_cutting", "Harvest a cutting from an Aechor Plant or Carrion Sprout by killing with any Trowel");
+        this.addAdvancementDesc("ambrosium", "Obtain an Ambrosium Shard");
         this.addAdvancementDesc("golden_amber", "Harvest Golden Amber from an Amberoot tree using the proper tool");
         this.addAdvancementDesc("amber_hourglass", "Craft an Amber Hourglass");
         this.addAdvancementDesc("zanite", "Restore Fossilized Zanite into a Zanite Gemstone using the Amber Hourglass");

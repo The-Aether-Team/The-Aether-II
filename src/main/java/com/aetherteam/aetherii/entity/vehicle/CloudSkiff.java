@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.entity.vehicle;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.natural.AercloudBlock;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
-import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
+import com.aetherteam.aetherii.client.renderer.level.HolyIslesSpecialEffects;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractBoatAccessor;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -81,7 +81,7 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
 
         if (this.isInWater()) {
             ParticleOptions splashParticle = ParticleTypes.SPLASH;
-            if (this.level() instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HighlandsSpecialEffects) {
+            if (this.level() instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HolyIslesSpecialEffects) {
                 splashParticle = AetherIIParticleTypes.SPLASH.get();
             }
             for (int i = 0; i < 20; i++) {
