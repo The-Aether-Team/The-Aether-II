@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii;
 
+import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.event.hooks.BiomeHooks;
@@ -388,9 +389,14 @@ public class AetherIIEventListeners {
 
     public static void onBreakBlock(BlockEvent.BreakEvent event) {
         LevelAccessor level = event.getLevel();
+        Player player = event.getPlayer();
         BlockPos pos = event.getPos();
+        ItemStack stack = event.getPlayer().getMainHandItem();
 
         PlayerHooks.interactWithMimicContainer(level, pos, false);
+        if (player instanceof ServerPlayer serverPlayer) {
+            AetherIIAdvancementTriggers.ITEM_BREAK_BLOCK.get().trigger(serverPlayer, pos, stack);
+        }
     }
 
     public static void onBlockUpdateNeighbor(BlockEvent.NeighborNotifyEvent event) {
