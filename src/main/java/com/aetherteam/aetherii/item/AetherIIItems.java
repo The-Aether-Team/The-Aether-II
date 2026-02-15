@@ -286,10 +286,10 @@ public class AetherIIItems {
     public static final DeferredItem<Item> EYE_OF_THE_MIMIC = register("eye_of_the_mimic", TreasureItem::new);
 
     // Irradiated Items
-    public static final DeferredItem<Item> IRRADIATED_ARMOR = register("irradiated_armor", () -> new Item.Properties().stacksTo(1));
-    public static final DeferredItem<Item> IRRADIATED_WEAPON = register("irradiated_weapon", () -> new Item.Properties().stacksTo(1));
-    public static final DeferredItem<Item> IRRADIATED_TOOL = register("irradiated_tool", () -> new Item.Properties().stacksTo(1));
-    public static final DeferredItem<Item> IRRADIATED_CHUNK = register("irradiated_chunk", () -> new Item.Properties().stacksTo(1));
+    public static final DeferredItem<Item> IRRADIATED_ARMOR = register("irradiated_armor", () -> new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> IRRADIATED_WEAPON = register("irradiated_weapon", () -> new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> IRRADIATED_TOOL = register("irradiated_tool", () -> new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> IRRADIATED_CHUNK = register("irradiated_chunk", () -> new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
     public static final DeferredItem<Item> IRRADIATED_DUST = register("irradiated_dust", IrradiatedDustItem::new);
 
     // Food
