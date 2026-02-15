@@ -50,7 +50,7 @@ public class Shroudwing extends Insect {
     @Override
     public void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(DATA_VARIANT_ID, VariantUtils.getDefaultOrAny(this.registryAccess(), AetherIIShroudwingVariants.PURPLE));
+        builder.define(DATA_VARIANT_ID, VariantUtils.getDefaultOrAny(this.registryAccess(), AetherIIShroudwingVariants.SCARAB));
     }
 
     @Override

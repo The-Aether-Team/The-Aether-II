@@ -5,8 +5,6 @@ import com.aetherteam.aetherii.api.guidebook.GuidebookEntry;
 import com.aetherteam.aetherii.client.gui.component.guidebook.DescriptionButton;
 import com.google.common.collect.Lists;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
@@ -15,7 +13,6 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,6 +30,9 @@ public class DiscoveryDescriptionScreen extends Screen {
     protected final Screen lastScreen;
     protected final GuidebookEntry entry;
 
+    private int textPosition;
+    private int textWidth;
+
     private ImageButton previousButton, nextButton;
     private final Map<Integer, List<FormattedCharSequence>> pages = new HashMap<>();
     private int currentPageNumber = 0;
@@ -46,13 +46,17 @@ public class DiscoveryDescriptionScreen extends Screen {
     @Override
     protected void init() {
         super.init();
-        this.addRenderableWidget(new DescriptionButton(this, 36, 12, Guidebook.MAGNIFYING_GLASS));
-        this.previousButton = this.addRenderableWidget(new ImageButton(32, this.height - 28, 16, 16, ARROW_LEFT_TEXTURES, (button) -> {
+
+        this.textPosition = Math.max(85, (this.width - 325) / 2);
+        this.textWidth = Math.min(this.width - (85 * 2), 325);
+
+        this.addRenderableWidget(new DescriptionButton(this, this.textPosition - 49, 12, Guidebook.RETURN));
+        this.previousButton = this.addRenderableWidget(new ImageButton(this.textPosition - 53, this.height - 28, 16, 16, ARROW_LEFT_TEXTURES, (button) -> {
             if (this.currentPageNumber > 0) {
                 this.currentPageNumber--;
             }
         }));
-        this.nextButton = this.addRenderableWidget(new ImageButton(this.width - 32 - 16, this.height - 28, 16, 16, ARROW_RIGHT_TEXTURES, (button) -> {
+        this.nextButton = this.addRenderableWidget(new ImageButton(this.textPosition + this.textWidth + 47, this.height - 28, 16, 16, ARROW_RIGHT_TEXTURES, (button) -> {
             if (this.currentPageNumber < this.pages.size() - 1) {
                 this.currentPageNumber++;
             }
@@ -70,10 +74,10 @@ public class DiscoveryDescriptionScreen extends Screen {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.drawCenteredString(this.font, Component.translatable(this.entry.getName()).withStyle(ChatFormatting.UNDERLINE), this.width / 2, 10, 0xffffffff);
 
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.DESCRIPTION_BORDER_LEFT_SPRITE, 35, 30, 10, 120);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.DESCRIPTION_BORDER_RIGHT_SPRITE, this.width - 35 - 10, 30, 10, 120);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.DESCRIPTION_BORDER_LEFT_SPRITE, this.textPosition - 50, 30, 10, 120);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.DESCRIPTION_BORDER_RIGHT_SPRITE, this.textPosition + this.textWidth + 50, 30, 10, 120);
 
-        this.createText(guiGraphics, this.pages.get(this.currentPageNumber), 85, 30);
+        this.createText(guiGraphics, this.pages.get(this.currentPageNumber), this.textPosition, 30);
 
         guiGraphics.drawCenteredString(this.font, Component.literal(String.valueOf(this.currentPageNumber + 1)).append("/").append(String.valueOf(this.pages.size())), this.width / 2, this.height - 20, 0xffffffff);
 
@@ -82,7 +86,7 @@ public class DiscoveryDescriptionScreen extends Screen {
     }
 
     private void createPages(Component entry) {
-        List<FormattedCharSequence> formattedText = new ArrayList<>(this.font.split(entry, this.width - (85 * 2)));
+        List<FormattedCharSequence> formattedText = new ArrayList<>(this.font.split(entry, this.textWidth));
         List<FormattedCharSequence> firstPage;
         int lines = (this.height - 70) / 10;
         if (formattedText.size() < lines) {

@@ -1671,59 +1671,256 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGeneric("magnetic", magnetic);
         this.addGeneric("arctic", arctic);
 
-        this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), taegore, highfields, loremIpsum);
-        this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), taegore, magnetic, loremIpsum);
-        this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), taegore, arctic, loremIpsum);
-        this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), burrukai, highfields, loremIpsum);
-        this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), burrukai, magnetic, loremIpsum);
-        this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), burrukai, arctic, loremIpsum);
-        this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), kirrid, highfields, loremIpsum);
-        this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), kirrid, magnetic, loremIpsum);
-        this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_KIRRID.get(), kirrid, arctic, loremIpsum);
+        this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), taegore, highfields, """
+“Peaceful creatures native to The Aether's Holy Isles.
+
+Highfields taegore are notable for their golden armor plating and soft blue fur coat. Taegore will flee from potential threats, such as a person sprinting near them. Taegore will sometimes dig up buried vegetables.
+
+They can be hunted for beast hide and meat.”""");
+        this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), taegore, magnetic, """
+“Peaceful creatures native to The Aether's Holy Isles.
+
+Magnetic taegore feature bronze colored plating and green fur. Taegore will flee from potential threats, such as a person sprinting near them. Taegore will sometimes dig up buried vegetables.
+
+They can be hunted for beast hide and meat.”""");
+        this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), taegore, arctic, """
+“Peaceful creatures native to The Aether's Holy Isles.
+
+Arctic taegore plating takes on an icy silver hue alongside their warm thick blue fur. Taegore will flee from potential threats, such as a person sprinting near them. Taegore will sometimes dig up buried vegetables.
+
+They can be hunted for beast hide and meat.”""");
+        this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), burrukai, highfields, """
+“Protective creatures found roaming The Aether's Holy Isles.
+
+Highfields burrukai stand out from their natural environment with dark blue fur and dark armor plates. Burrukai are largely peaceful creatures, but they will respond harshly to aggression, using their heavy weight and sharp horns to charge at potential threats.
+
+Their armor plating is incredibly durable, making it a valuable material for crafting armor and shields.”""");
+        this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), burrukai, magnetic, """
+“Protective creatures found roaming The Aether's Holy Isles.
+
+Magnetic burrukai have striped fur and unique horn formations that help dispel static electricity. Burrukai are largely peaceful creatures, but they will respond harshly to aggression, using their heavy weight and sharp horns to charge at potential threats.
+
+Their armor plating is incredibly durable, making it a valuable material for crafting armor and shields.”""");
+        this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), burrukai, arctic, """
+“Protective creatures found roaming The Aether's Holy Isles.
+
+Arctic burrukai have a thicker undercoat than other burrukai and their armor is an icy blue that helps hide their size and numbers in snowstorms. Burrukai are largely peaceful creatures, but they will respond harshly to aggression, using their heavy weight and sharp horns to charge at potential threats.
+
+Their armor plating is incredibly durable, making it a valuable material for crafting armor and shields.”""");
+        this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), kirrid, highfields, """
+“Peaceful creatures that travel in small flocks across The Aether's Holy Isles.
+
+Highfields kirrid have a singular flat plate on their heads, the gold coloration of their plating and leg blades is thought to come from a high concentration of ambrosium in their diet. Kirrid will participate in friendly competition with their flock mates, ramming their head plates together until one breaks, this helps keep the fast-growing head plating trimmed down and aerodynamic.
+
+Kirrid have a thick coat of cloudwool that can grow in a variety of natural colors.”""");
+        this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), kirrid, magnetic, """
+“Peaceful creatures that travel in small flocks across The Aether's Holy Isles.
+
+In the magnetic biomes, kirrid have adapted a unique plate shaping that helps draw small bolts of electricity to strike them, which protects their bodies from electrical hazards. Kirrid will participate in friendly competition with their flock mates, ramming their head plates together until one breaks, this helps keep the fast-growing head plating trimmed down and aerodynamic.
+
+Kirrid have a thick coat of cloudwool that can grow in a variety of natural colors.”""");
+        this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_KIRRID.get(), kirrid, arctic, """
+“Peaceful creatures that travel in small flocks across The Aether's Holy Isles.
+
+The harsh cold of the arctic isles of the Holy Isles have caused kirrid to adapt with much larger fur cover, to account for the extra weight their head plates grow much smaller, resembling symmetrical horns. Kirrid will participate in friendly competition with their flock mates, ramming their head plates together until one breaks, this helps keep the fast-growing head plating trimmed down and aerodynamic.
+
+Kirrid have a thick coat of cloudwool that can grow in a variety of natural colors.”""");
     
-        this.addBestiaryDescription(AetherIIEntityTypes.FLYING_COW.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.SHEEPUFF.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.PHYG.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.AERBUNNY.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.FLYING_COW.get(), """
+“Peaceful creatures found in rare herds in The Aether's Holy Isles.
+
+Thought to be a domesticated cousin to the burrukai from early valkyrie civilization, flying cows lack the aggressive behavioral traits of their larger cousins. Their peaceful disposition makes them ideal for farming their high quality meat, though the reduction in size and density of their plating means they cannot be used as a substitute for burrukai plates.
+
+Flying cows represent a relatively low part of the wildlife population of the Holy Isles, making them a rare find in modern times.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.SHEEPUFF.get(), """
+“Peaceful creatures found in rare flocks in The Aether's Holy Isles.
+
+They are believed to be a domesticated cousin to the kirrid from early valkyrie civilization. The armor plating that traditionally forms a kirrid's leg blades grow much smaller on sheepuff, revealing more regular animal legs. This means sheepuff cannot bounce around the way a kirrid normally would, but instead they have developed a cloudwool coat rich in aercloud, similar to an aerbunny. If their coat of cloudwool sucks up enough compressed air, it can inflate and send the sheepuff high up into the sky, allowing them to traverse long distances or high cliffs.
+
+Sheepuff represent a relatively low part of the wildlife population of the Highlands, making them a rare find in modern times.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.PHYG.get(), """
+“Peaceful creatures found in rare sounders in The Aether's Holy Isles.
+
+Valkyrie records show phygs being used as farm animals in the distant past, likely as a domesticated cousin to the taegore. Phygs lack the fear response taegore show towards potential predators, making them much easier to capture and hunt. Unfortunately, their soft skin and smaller bodies mean they aren't particularly valuable for harvesting beast hide, but they are known to be a good source of high quality meat.
+
+Phygs represent a relatively low part of the wildlife population of the Holy Isles, making them a rare find in modern times.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.AERBUNNY.get(), """
+“Friendly creatures that roam The Aether's Holy Isles.
+
+They are deeply social creatures that enjoy the company of other species, including the people of The Aether and human visitors. an aerbunny's coat has a condensed layer of aercloud nestled beneath their fur, which allows them to float gently through the air. Aerbunnies can be held to grant their natural gliding abilities to someone travelling The Aether.
+
+Feeding an aerbunny its favorite fruit allows it to be tamed, which allows them to be commanded to sit in place.”""");
     
-        this.addBestiaryDescription(AetherIIEntityTypes.MOA.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.SKYROOT_LIZARD.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.GLITTERWING.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.SHROUDWING.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.BLUE_SWET.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.GOLDEN_SWET.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.SKEPHID.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.MIMIC.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.DETONATION_SENTRY.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.SENTRY_GOLEM.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.SLIDER.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.MOA.get(), """
+“Intelligent and territorial creatures that cannot be tamed from the wild, but can be raised from an egg to be tamed and ridden as a mount.
+
+Wild moas will attempt to protect their nest from any potential intruders. They are versatile creatures that will build nests in any suitable location across multiple different climates and conditions, using woven sticks to create an insulated area perfect for raising their eggs.
+
+Wild moas are smart but generally highly distrusting, so to tame and ride a moa you will need to steal a wild egg to hatch and raise yourself. Baby moas require a lot of nutrients to grow into healthy adults, but are typically quite picky eaters.
+
+The petals from the toxic aechor plants are a favorite of baby moas, having adapted an immunity to their toxins. Once a baby moa has grown into an adult, it can be fitted with a moa saddle and ridden as a flying mount.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.SKYROOT_LIZARD.get(), """
+“Peaceful creatures that nest across The Aether's Holy Isles.
+
+They are small creatures that nest in the leaves of The Aether's trees, adapting effective camouflage that makes them incredibly hard to spot in dense canopies. As a tree's leaves decay, a nesting lizard may drop to the ground, causing it to panic and run away.
+
+Skyroot lizards can be skewered on a skyroot stick and cooked into edible food, or fed to a moa, their natural predator.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.GLITTERWING.get(), """
+“The Aether is home to a wide variety of small insects, one category of insect are collectively known as glitterwings. These are flying insects with thin, flat wings displaying a variety of colors and patterns.
+
+Some adventurers enjoy collecting and documenting glitterwing patterns as a hobby.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.SHROUDWING.get(), """
+“The Aether is home to a wide variety of small insects, one category of insect are collectively known as shroudwings. These are a group of species with hard wing casings and often sport small horns on their heads for competition and mating rituals.
+
+Some adventurers enjoy collecting and documenting shroudwing shells as a hobby.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), """
+“Hazardous plants that grow across The Aether's Holy Isles.
+
+Aechor plants suck up a vast amount of nutrients and minerals from their surrounding territory, making them a precious food source for many animals in the Highlands. To defend themselves from potential predators, they developed toxic barbs that can be projected outward at targets they sense near their roots. While individually these barbs aren't very harmful, their toxins can build up and cause some negative effects if untreated.
+
+The petals of aechor plants are a favorite food of baby moas, offering enough nutrients to help them grow into strong flight-ready adults.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), """
+“Hazardous plants that grow across The Aether's Holy Isles.
+
+During the day, carrion sprouts curl up and draw energy from the sunlight. However, at night they become carnivorous plants capable of extracting nutrients from both living and dead animals. The carrion sprouts have adapted camouflage that allows them to hide in tall grass and trap wandering creatures within its tight jaws if they step on their leaves.
+
+Wyndberries can be harvested from carrion sprouts and enchanted into a valuable food source.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), """
+“Hostile pests found flying through The Aether's skies.
+
+Often seen as elemental manifestations of The Aether's strong wind currents, zephyrs are insect-like creatures that are able to manipulate aercloud and airflow. Zephyrs encase themselves in a shell made up of aercloud enriched webbing that grants them the ability to float in the air.
+
+When they sense potential threats, zephyrs will attempt to disable them by shooting at them with bundles of sticky webbing. If the webbing fails to incapacitate a predator, they are also capable of charging up a long concentrated burst of wind that can push threats away, often off the side of an island.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.BLUE_SWET.get(), """
+“Aggressive, parasitic creatures that roam in The Aether's shadows.
+
+Swets prefer dark environments, so are typically found during nighttime. They are small fish-like creatures that live in an outer shell of acidic gel, they use this gel for transportation, protection, and hunting. Swets can capture small creatures and plants inside their sticky gel, which allows them to extract nutrients from their prey. They are even known to feed on larger animals, attaching to the skin of larger prey and sapping them of their nutrients before detaching and attempting to escape.
+
+Their gel layer dissolves in water, so if you find one attached to yourself, a quick dive into some nearby water will force the swet to detach.
+
+Swet gel contains a lot of broken down nutrients and minerals that make it an excellent fertilizer, while the sugars stored inside a swet's body are often used as a sweetener in many foods. You can even combine a swet's gel and sugars together to make an almost palatable jelly.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.GOLDEN_SWET.get(), """
+“Aggressive, parasitic creatures that roam in The Aether's shadows.
+
+Swets prefer dark environments, so are typically found during nighttime. They are small fish-like creatures that live in an outer shell of acidic gel, they use this gel for transportation, protection, and hunting. Swets can capture small creatures and plants inside their sticky gel, which allows them to extract nutrients from their prey. They are even known to feed on larger animals, attaching to the skin of larger prey and sapping them of their nutrients before detaching and attempting to escape.
+
+Their gel layer dissolves in water, so if you find one attached to yourself, a quick dive into some nearby water will force the swet to detach. Golden swets are far rarer than their blue counterparts.
+
+Their gold coloration is caused by a much stronger concentration of alkahest in their gel layer, which also leads to a far higher concentration of sugars in their bodies. Golden swets can be found more frequently near alkahest ponds, deep underground.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.SKEPHID.get(), """
+“Protective insects native to The Aether's cave systems.
+
+Skephids wander through caverns and the undercloud looking for small bugs to hunt, moss deposits, and water sources, all of which they use to help support their secluded hives. If they feel threatened by a larger creature, they will use their spinnerets to shoot webbing at their target.
+
+While generally non-predatory to larger creatures or people, skephids have been known to capture small animals in webbing traps when in desperate need of food sources.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), """
+“Aggressive predators that roam The Aether's night skies and shadows.
+
+Centuries ago the blight, a mutagenic plague, once infected a distant population of zephyrs. This infection twisted the biology of these zephyrs into a new species of aggressive predator, the tempests. In modern times, tempests roam The Aether's skies at night as an apex predator.
+
+Their mutations have allowed tempests to generate bioelectrical projectiles they can shoot at potential prey to stun and incapacitate them.
+
+The blight is inherently weak to sunlight, though, so at sunrise tempests retreat into the shadows.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), """
+“Aggressive predators that roam The Aether's caves and shadows.
+
+In the distant past, an isolated colony of moas came into contact with the blight, a mutagenic plague. After prolonged exposure to its mutagenic effects, these moas developed highly aggressive features that turned them into a new species, the cockatrices. Cockatrices have largely lost their ability to fly, instead choosing to stalk the caves and dark forests of The Aether for their prey.
+
+Their main adaptation is the development of venomous darts that grow from their ribcages, at a distance cockatrices can fire these darts to harm and slow down distant prey. At close range, they switch to using their sharp claws and beaks to slash and crush their target.
+
+The blight is inherently weak to sunlight, though, so at sunrise cockatrices retreat into the shadows.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), """
+“Aggressive automatons native to The Aether's caves.
+
+Soul crystals grow in rare pockets all across The Aether's world, and when they reach a certain state of maturity, they pull in material from their surroundings and form a creature from those materials.
+
+When this process occurs deep underground, it will often pull in surrounding rocks and ores and constitute a body suited to those hard rocky minerals and metals. The arkenium taluton is primarily formed of holystone, undershale, and inert arkenium.
+
+They're simple but aggressive creatures, protecting areas that are likely to form new soul crystals from potential hazards. Arkenium talutons use the extreme weight and size of their rocky arms to slam into nearby threats, making them a distinctly dangerous creature for miners and cave explorers.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), """
+“Aggressive automatons native to The Aether's caves.
+
+Soul crystals grow in rare pockets all across The Aether's world, and when they reach a certain state of maturity, they pull in material from their surroundings and form a creature from those materials.
+
+When this process occurs deep underground, it will often pull in surrounding rocks and ores and constitute a body suited to those hard rocky minerals and metals. The gravitite taluton is primarily formed of holystone, undershale, and inert gravitite.
+
+They are cautious creatures capable of long ranged attacks. Gravitite talutons will use the weak gravitational energies from their inert gravitite to pull rocks and pebbles from the ground to launch at their targets, hoping they will dissuade wandering creatures from disturbing areas likely to form new soul crystals. A strong shield and stable footing are essential for navigating caves populated by gravitite talutons.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.MIMIC.get(), """
+“Twisted, hostile monsters found in The Aether's many ruins.
+
+Mimics are shapeshifting worm-like creatures that possess the unique ability to change their form to turn any empty container they find into a protective shell and camouflage. As a result, they are frequently found in old abandoned structures. They lie in wait for unsuspecting travelers to investigate the container, at which point they transform into a monstrous predatory form to hunt their newfound prey.
+
+Mimics take many unique forms, but they almost always need an empty container to use as a shell, so be cautious around any abandoned chests, crates, or barrels you find on your travels.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.DETONATION_SENTRY.get(), """
+“Aggressive mechanical relics found in sentry ruins.
+
+An older model of sentry frequently found in ancient underground sentry structures, the detonation sentry is thought to potentially be a prototype for demolition equipment used when creating the ancient vaults.
+
+These small machines will identify targets based on heat and, when within proximity, will begin a countdown to detonate a small explosive device embedded in their core.
+
+Detonation sentries aren't noted to exist in the vaults, leading scholars to believe their design may have been discontinued by the time the vaults were completed.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.SENTRY_GOLEM.get(), """
+“Aggressive mechanical relics found in sentry ruins.
+
+An older model of sentry found exclusively in larger sentry structures, the sentry golem is thought to be a prototype for the security sentries found patrolling the ancient vaults.
+
+Equipped with a mechanical hammer of demolition, sentry golems appear to have been programmed to seek out intruders and eliminate them using both ranged and melee attacks.
+
+The hammer of demolition contains a small explosive charge fabricator in its handle, which can then launch explosives at distant intruders. Once the core has been replaced, it can also be used as a traditional hammer weapon.
+
+Sentry golems interestingly feature prominent bird-like designs in their limbs and engravings.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.SLIDER.get(), """
+“The boss of the sentry ruins dungeon.
+
+The Slider is a security machine created for guarding the core of the ancient vaults. This prototype appears to be less efficient and durable than those found in the vaults, indicating that the sentry ruins may be a facility that was used to design and test sentry technology before the vaults were built.
+
+The Slider uses giant super cooled gravitite gears inside its hard stone shell to alter the direction of its gravity, allowing it to float or fall in six directions. Its reactor core uses an incredible amount of energy to drive these processes, so large reinforced glass heat vents on its sides both keep it cool and house optical sensors for tracking targets.
+
+The Slider's shell is made of a composite material derived from undershale and ferrosite, making it impervious to traditional weaponry. A strong pickaxe is required to chip away at the outer shell, but once it is compromised, the reactor core will become unstable and shut the Slider down.
+
+As the Slider takes damage, it will send signals to detonation sentry containers around the facility to assist it in battle. While this prototype is significantly weaker than those found in the vaults, it is still a dangerous and unstable machine capable of dealing tremendous damage.”""");
         this.addBestiaryDescription(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), loremIpsum);
     }
 
     private void addEffectsDescriptions() {
-        final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        this.addEffectsDescription(AetherIIEffects.SATURATION_BOOST.get(), "Temporarily increases the time for which consumable items keep you full.");
+        this.addEffectsDescription(AetherIIEffects.VULNERABILITY.get(), "Decreases Resistance to all Damage Types for the affected mob.");
+        this.addEffectsDescription(AetherIIEffects.WOUND.get(), """
+Inflicts a large amount of Damage instantly.
 
-        this.addEffectsDescription(AetherIIEffects.SATURATION_BOOST.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.VULNERABILITY.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.WOUND.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.STUN.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.FRACTURE.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.AMBROSIUM_POISONING.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.TOXIN.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.VENOM.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.CHARGED.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.WEBBED.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.IMMOLATION.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.FROSTBITE.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.FUNGAL_ROT.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.CRYSTALLIZED.get(), loremIpsum);
+Use a Bandage to reduce Wound buildup.""");
+        this.addEffectsDescription(AetherIIEffects.STUN.get(), """
+Prevents the use of tools, blocks or items and slows movement.
+
+Use a Bandage to reduce Stun buildup.""");
+        this.addEffectsDescription(AetherIIEffects.FRACTURE.get(), """
+Causes Damage when sprinting and increases Fall Damage.
+
+Use a Bandage to reduce Fracture buildup. A Splint will cure the effect.""");
+        this.addEffectsDescription(AetherIIEffects.AMBROSIUM_POISONING.get(), "Completely negates all forms of healing.");
+        this.addEffectsDescription(AetherIIEffects.TOXIN.get(), """
+Drains Health over time until minimum remaining Health is reached.
+
+Drink from an Antitoxin Vial to reduce Toxin buildup.""");
+        this.addEffectsDescription(AetherIIEffects.VENOM.get(), """
+Drains both Health and Hunger over time until minimum remaining Health is reached.
+
+Drink from an Antivenom Vial to reduce Venom buildup.""");
+        this.addEffectsDescription(AetherIIEffects.CHARGED.get(), "When Charged, a Mob or Player will be shocked when coming into close contact with another source of Charge.");
+        this.addEffectsDescription(AetherIIEffects.WEBBED.get(), """
+Greatly impairs movement ability and prevents jumping.
+
+Repeatedly attempting to jump reduces buildup.""");
+        this.addEffectsDescription(AetherIIEffects.IMMOLATION.get(), "A fast acting burning that causes Damage and can also cause Immolation buildup on nearby entities.");
+        this.addEffectsDescription(AetherIIEffects.FROSTBITE.get(), "Slows item use, attack and mining speed, as well as slightly slowing movement.");
+        this.addEffectsDescription(AetherIIEffects.FUNGAL_ROT.get(), """
+Deals Damage very slowly over time until death.
+
+Decreases detection range from Fungal type mobs and causes extra interactions within the Infected Guardian Tree.""");
+        this.addEffectsDescription(AetherIIEffects.CRYSTALLIZED.get(), """
+Reduces effectiveness of Armor.
+
+Movement faster than sneaking will alert Crystaline type mobs.""");
     }
 
     private void addMusic() {
