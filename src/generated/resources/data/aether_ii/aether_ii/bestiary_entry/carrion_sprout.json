@@ -2,7 +2,7 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.carrion_sprout",
   "effect_resistances": [],
   "entity_type": "aether_ii:carrion_sprout",
-  "health": 12,
+  "health": 8,
   "icon": "aether_ii:guidebook/bestiary/carrion_sprout",
   "id": "aether_ii:carrion_sprout",
   "impact_defense": 0,
