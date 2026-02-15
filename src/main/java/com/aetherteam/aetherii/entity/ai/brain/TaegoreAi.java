@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.entity.ai.brain.behavior.taegore.*;
 import com.aetherteam.aetherii.entity.ai.brain.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.ai.brain.sensor.AetherIISensorTypes;
 import com.aetherteam.aetherii.entity.passive.Taegore;
+import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
@@ -124,7 +125,7 @@ public class TaegoreAi {
 
         Optional<Player> optionalTargetFromMemory = owner.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_PLAYER);
         if (optionalTargetFromMemory.isPresent()) {
-            if (optionalTargetFromMemory.get().isSprinting()) {
+            if (optionalTargetFromMemory.get().isSprinting() && !EquipmentUtil.hasArmorAbility(optionalTargetFromMemory.get(), AetherIITags.Items.BEAST_PELT_ARMOR)) {
                 owner.getBrain().setMemory(MemoryModuleType.AVOID_TARGET, optionalTargetFromMemory);
             } else if (owner.getBrain().hasMemoryValue(MemoryModuleType.AVOID_TARGET)) {
                 owner.getBrain().setMemory(MemoryModuleType.AVOID_TARGET, Optional.empty());
