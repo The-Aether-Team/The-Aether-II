@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public record Charms(List<CharmHolder> charmHolders) {
     public static final Codec<Charms> CODEC = RecordCodecBuilder.create((builder) -> builder.group(
@@ -54,6 +55,29 @@ public record Charms(List<CharmHolder> charmHolders) {
 
     public static MutableComponent createCharmTierComponent(Tier tier) {
         return Component.translatable("aether_ii.tooltip.item.charm.tier", Component.translatable("enchantment.level." + tier.getValue()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else {
+            if (other instanceof Charms(List<CharmHolder> otherHolders)) {
+                return otherHolders.equals(this.charmHolders());
+            } else {
+                return false;
+            }
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.charmHolders());
+    }
+
+    @Override
+    public String toString() {
+        return "Charms{" + "charmHolders=" + this.charmHolders + '}';
     }
 
     public static class CharmHolder {
@@ -108,6 +132,29 @@ public record Charms(List<CharmHolder> charmHolders) {
 
         public void setStack(ItemStack stack) {
             this.stack = stack;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(this.getType(), this.getTier(), this.getStack());
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (this == other) {
+                return true;
+            } else {
+                if (other instanceof CharmHolder otherHolder) {
+                    return otherHolder.getType() == this.getType() && otherHolder.getTier() == this.getTier() && ItemStack.matches(otherHolder.getStack(), this.getStack());
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "CharmHolder{" + "type=" + type + ", tier=" + tier + ", stack=" + stack + '}';
         }
     }
 
