@@ -3,8 +3,37 @@
     "spawn_conditions": [
       {
         "condition": {
-          "type": "minecraft:biome",
-          "biomes": "#aether_ii:highlands"
+          "type": "aether_ii:random",
+          "bound": 100,
+          "check": 75,
+          "condition": {
+            "type": "minecraft:biome",
+            "biomes": "#aether_ii:highlands"
+          }
+        },
+        "priority": 1
+      },
+      {
+        "condition": {
+          "type": "aether_ii:random",
+          "bound": 100,
+          "check": 75,
+          "condition": {
+            "type": "minecraft:biome",
+            "biomes": "#aether_ii:magnetic"
+          }
+        },
+        "priority": 1
+      },
+      {
+        "condition": {
+          "type": "aether_ii:random",
+          "bound": 100,
+          "check": 75,
+          "condition": {
+            "type": "minecraft:biome",
+            "biomes": "#aether_ii:arctic"
+          }
         },
         "priority": 1
       }
