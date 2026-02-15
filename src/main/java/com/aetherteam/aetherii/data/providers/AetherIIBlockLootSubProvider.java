@@ -190,18 +190,13 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
         ).withPool(LootPool.lootPool().add(LootItem.lootTableItem(block)).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, AetherIITags.Items.TOOLS_TROWELS)).invert()));
     }
 
-    public LootTable.Builder droppingBerryBush(HolderGetter<Item> holderGetter, Block block, Block stem, Item drop) {
+    public LootTable.Builder droppingBerryBush(Block block, Item drop) {
         HolderLookup.RegistryLookup<Enchantment> registryLookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
         return LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(this.applyExplosionDecay(block, LootItem.lootTableItem(stem)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))))
-                        .when(LootItemEntityPropertyCondition.entityPresent(LootContext.EntityTarget.THIS).invert())
-                ).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                                 .apply(ApplyBonusCount.addOreBonusCount(registryLookup.getOrThrow(Enchantments.FORTUNE))))
-                        .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)))
                         .when(this.hasSilkTouch().invert())
                 ).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(block))
@@ -219,21 +214,23 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)))
                 .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)))
         ).withPool(LootPool.lootPool()
+                .add(LootItem.lootTableItem(block))
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)))
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(OrangeTreeBlock.AGE, 4)).invert())
-                .add(LootItem.lootTableItem(block))
+                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)))
         );
     }
 
-    public LootTable.Builder droppingValkyrieSprout(HolderGetter<Item> holderGetter, Block block, Item drop) {
+    public LootTable.Builder droppingValkyrieSprout(Block block, Item drop) {
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
         return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop))
                         .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                         .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE))))
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ValkyrieSproutBlock.AGE, 2)))
-                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)))
-        ).withPool(LootPool.lootPool().add(LootItem.lootTableItem(block)));
+        ).withPool(LootPool.lootPool()
+                .add(LootItem.lootTableItem(block))
+        );
     }
 
     protected LootTable.Builder droppingBrettlPlant(HolderGetter<Item> holderGetter, Block block, ItemLike drop, ItemLike dropGrown) {
@@ -244,6 +241,7 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
                                 .apply(ApplyBonusCount.addOreBonusCount(registryLookup.getOrThrow(Enchantments.FORTUNE))))
                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(GROWN, false)))
+                        .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)))
                 )
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(this.applyExplosionDecay(block, LootItem.lootTableItem(dropGrown)
@@ -254,14 +252,17 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                 );
     }
 
-    protected LootTable.Builder droppingBrettlPlantTip(Block block, ItemLike drop, ItemLike dropGrown) {
+    protected LootTable.Builder droppingBrettlPlantTip(HolderGetter<Item> holderGetter, Block block, ItemLike drop, ItemLike dropGrown) {
         return LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))))
-                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(GROWN, false))))
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(GROWN, false)))
+                        .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)))
+                )
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(this.applyExplosionDecay(block, LootItem.lootTableItem(dropGrown).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))))
                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(GROWN, true)))
+                        .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)))
                 );
     }
 
