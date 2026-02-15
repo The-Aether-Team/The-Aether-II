@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.CommonHooks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -68,11 +69,13 @@ public class BrettlPlantBlock extends GrowingPlantBodyBlock implements SimpleWat
 
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        BlockPos offsetPos = pos.relative(this.growthDirection);
-        BlockState offsetState = level.getBlockState(offsetPos);
-        if (offsetState.is(this.getHeadBlock()) || (offsetState.is(this) && offsetState.getValue(GROWN))) {
-            if (!state.getValue(GROWN)) {
-                level.setBlockAndUpdate(pos, state.setValue(GROWN, true));
+        if (level.getRawBrightness(pos.above(), 0) >= 9 && CommonHooks.canCropGrow(level, pos, state, random.nextInt(25) == 0)) {
+            BlockPos offsetPos = pos.relative(this.growthDirection);
+            BlockState offsetState = level.getBlockState(offsetPos);
+            if (offsetState.is(this.getHeadBlock()) || (offsetState.is(this) && offsetState.getValue(GROWN))) {
+                if (!state.getValue(GROWN)) {
+                    level.setBlockAndUpdate(pos, state.setValue(GROWN, true));
+                }
             }
         }
     }
