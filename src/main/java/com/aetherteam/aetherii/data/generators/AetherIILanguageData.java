@@ -1672,80 +1672,80 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGeneric("arctic", arctic);
 
         this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), taegore, highfields, """
-“Peaceful creatures native to The Aether's Highlands.
+“Peaceful creatures native to The Aether's Holy Isles.
 
 Highfields taegore are notable for their golden armor plating and soft blue fur coat. Taegore will flee from potential threats, such as a person sprinting near them. Taegore will sometimes dig up buried vegetables.
 
 They can be hunted for beast hide and meat.”""");
         this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), taegore, magnetic, """
-“Peaceful creatures native to The Aether's Highlands.
+“Peaceful creatures native to The Aether's Holy Isles.
 
 Magnetic taegore feature bronze colored plating and green fur. Taegore will flee from potential threats, such as a person sprinting near them. Taegore will sometimes dig up buried vegetables.
 
 They can be hunted for beast hide and meat.”""");
         this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), taegore, arctic, """
-“Peaceful creatures native to The Aether's Highlands.
+“Peaceful creatures native to The Aether's Holy Isles.
 
 Arctic taegore plating takes on an icy silver hue alongside their warm thick blue fur. Taegore will flee from potential threats, such as a person sprinting near them. Taegore will sometimes dig up buried vegetables.
 
 They can be hunted for beast hide and meat.”""");
         this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), burrukai, highfields, """
-“Protective creatures found roaming The Aether's Highlands.
+“Protective creatures found roaming The Aether's Holy Isles.
 
 Highfields burrukai stand out from their natural environment with dark blue fur and dark armor plates. Burrukai are largely peaceful creatures, but they will respond harshly to aggression, using their heavy weight and sharp horns to charge at potential threats.
 
 Their armor plating is incredibly durable, making it a valuable material for crafting armor and shields.”""");
         this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), burrukai, magnetic, """
-“Protective creatures found roaming The Aether's Highlands.
+“Protective creatures found roaming The Aether's Holy Isles.
 
 Magnetic burrukai have striped fur and unique horn formations that help dispel static electricity. Burrukai are largely peaceful creatures, but they will respond harshly to aggression, using their heavy weight and sharp horns to charge at potential threats.
 
 Their armor plating is incredibly durable, making it a valuable material for crafting armor and shields.”""");
         this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), burrukai, arctic, """
-“Protective creatures found roaming The Aether's Highlands.
+“Protective creatures found roaming The Aether's Holy Isles.
 
 Arctic burrukai have a thicker undercoat than other burrukai and their armor is an icy blue that helps hide their size and numbers in snowstorms. Burrukai are largely peaceful creatures, but they will respond harshly to aggression, using their heavy weight and sharp horns to charge at potential threats.
 
 Their armor plating is incredibly durable, making it a valuable material for crafting armor and shields.”""");
         this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), kirrid, highfields, """
-“Peaceful creatures that travel in small flocks across The Aether's Highlands.
+“Peaceful creatures that travel in small flocks across The Aether's Holy Isles.
 
 Highfields kirrid have a singular flat plate on their heads, the gold coloration of their plating and leg blades is thought to come from a high concentration of ambrosium in their diet. Kirrid will participate in friendly competition with their flock mates, ramming their head plates together until one breaks, this helps keep the fast-growing head plating trimmed down and aerodynamic.
 
 Kirrid have a thick coat of cloudwool that can grow in a variety of natural colors.”""");
         this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), kirrid, magnetic, """
-“Peaceful creatures that travel in small flocks across The Aether's Highlands.
+“Peaceful creatures that travel in small flocks across The Aether's Holy Isles.
 
 In the magnetic biomes, kirrid have adapted a unique plate shaping that helps draw small bolts of electricity to strike them, which protects their bodies from electrical hazards. Kirrid will participate in friendly competition with their flock mates, ramming their head plates together until one breaks, this helps keep the fast-growing head plating trimmed down and aerodynamic.
 
 Kirrid have a thick coat of cloudwool that can grow in a variety of natural colors.”""");
         this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_KIRRID.get(), kirrid, arctic, """
-“Peaceful creatures that travel in small flocks across The Aether's Highlands.
+“Peaceful creatures that travel in small flocks across The Aether's Holy Isles.
 
-The harsh cold of the arctic isles of the Highlands have caused kirrid to adapt with much larger fur cover, to account for the extra weight their head plates grow much smaller, resembling symmetrical horns. Kirrid will participate in friendly competition with their flock mates, ramming their head plates together until one breaks, this helps keep the fast-growing head plating trimmed down and aerodynamic.
+The harsh cold of the arctic isles of the Holy Isles have caused kirrid to adapt with much larger fur cover, to account for the extra weight their head plates grow much smaller, resembling symmetrical horns. Kirrid will participate in friendly competition with their flock mates, ramming their head plates together until one breaks, this helps keep the fast-growing head plating trimmed down and aerodynamic.
 
 Kirrid have a thick coat of cloudwool that can grow in a variety of natural colors.”""");
     
         this.addBestiaryDescription(AetherIIEntityTypes.FLYING_COW.get(), """
-“Peaceful creatures found in rare herds in The Aether's Highlands.
+“Peaceful creatures found in rare herds in The Aether's Holy Isles.
 
 Thought to be a domesticated cousin to the burrukai from early valkyrie civilization, flying cows lack the aggressive behavioral traits of their larger cousins. Their peaceful disposition makes them ideal for farming their high quality meat, though the reduction in size and density of their plating means they cannot be used as a substitute for burrukai plates.
 
-Flying cows represent a relatively low part of the wildlife population of the Highlands, making them a rare find in modern times.”""");
+Flying cows represent a relatively low part of the wildlife population of the Holy Isles, making them a rare find in modern times.”""");
         this.addBestiaryDescription(AetherIIEntityTypes.SHEEPUFF.get(), """
-“Peaceful creatures found in rare flocks in The Aether's Highlands.
+“Peaceful creatures found in rare flocks in The Aether's Holy Isles.
 
 They are believed to be a domesticated cousin to the kirrid from early valkyrie civilization. The armor plating that traditionally forms a kirrid's leg blades grow much smaller on sheepuff, revealing more regular animal legs. This means sheepuff cannot bounce around the way a kirrid normally would, but instead they have developed a cloudwool coat rich in aercloud, similar to an aerbunny. If their coat of cloudwool sucks up enough compressed air, it can inflate and send the sheepuff high up into the sky, allowing them to traverse long distances or high cliffs.
 
 Sheepuff represent a relatively low part of the wildlife population of the Highlands, making them a rare find in modern times.”""");
         this.addBestiaryDescription(AetherIIEntityTypes.PHYG.get(), """
-“Peaceful creatures found in rare sounders in The Aether's Highlands.
+“Peaceful creatures found in rare sounders in The Aether's Holy Isles.
 
 Valkyrie records show phygs being used as farm animals in the distant past, likely as a domesticated cousin to the taegore. Phygs lack the fear response taegore show towards potential predators, making them much easier to capture and hunt. Unfortunately, their soft skin and smaller bodies mean they aren't particularly valuable for harvesting beast hide, but they are known to be a good source of high quality meat.
 
-Phygs represent a relatively low part of the wildlife population of the Highlands, making them a rare find in modern times.”""");
+Phygs represent a relatively low part of the wildlife population of the Holy Isles, making them a rare find in modern times.”""");
         this.addBestiaryDescription(AetherIIEntityTypes.AERBUNNY.get(), """
-“Friendly creatures that roam The Aether's Highlands.
+“Friendly creatures that roam The Aether's Holy Isles.
 
 They are deeply social creatures that enjoy the company of other species, including the people of The Aether and human visitors. an aerbunny's coat has a condensed layer of aercloud nestled beneath their fur, which allows them to float gently through the air. Aerbunnies can be held to grant their natural gliding abilities to someone travelling The Aether.
 
@@ -1760,7 +1760,7 @@ Wild moas are smart but generally highly distrusting, so to tame and ride a moa 
 
 The petals from the toxic aechor plants are a favorite of baby moas, having adapted an immunity to their toxins. Once a baby moa has grown into an adult, it can be fitted with a moa saddle and ridden as a flying mount.”""");
         this.addBestiaryDescription(AetherIIEntityTypes.SKYROOT_LIZARD.get(), """
-“Peaceful creatures that nest across The Aether's Highlands.
+“Peaceful creatures that nest across The Aether's Holy Isles.
 
 They are small creatures that nest in the leaves of The Aether's trees, adapting effective camouflage that makes them incredibly hard to spot in dense canopies. As a tree's leaves decay, a nesting lizard may drop to the ground, causing it to panic and run away.
 
@@ -1774,13 +1774,13 @@ Some adventurers enjoy collecting and documenting glitterwing patterns as a hobb
 
 Some adventurers enjoy collecting and documenting shroudwing shells as a hobby.”""");
         this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), """
-“Hazardous plants that grow across The Aether's Highlands.
+“Hazardous plants that grow across The Aether's Holy Isles.
 
 Aechor plants suck up a vast amount of nutrients and minerals from their surrounding territory, making them a precious food source for many animals in the Highlands. To defend themselves from potential predators, they developed toxic barbs that can be projected outward at targets they sense near their roots. While individually these barbs aren't very harmful, their toxins can build up and cause some negative effects if untreated.
 
 The petals of aechor plants are a favorite food of baby moas, offering enough nutrients to help them grow into strong flight-ready adults.”""");
         this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), """
-“Hazardous plants that grow across The Aether's Highlands.
+“Hazardous plants that grow across The Aether's Holy Isles.
 
 During the day, carrion sprouts curl up and draw energy from the sunlight. However, at night they become carnivorous plants capable of extracting nutrients from both living and dead animals. The carrion sprouts have adapted camouflage that allows them to hide in tall grass and trap wandering creatures within its tight jaws if they step on their leaves.
 
