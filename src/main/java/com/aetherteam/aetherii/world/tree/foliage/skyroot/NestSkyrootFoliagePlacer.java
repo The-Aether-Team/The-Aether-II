@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.world.tree.foliage.skyroot;
 
-import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsConfiguredFeatures;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesConfiguredFeatures;
 import com.aetherteam.aetherii.world.tree.foliage.AbstractBranchedFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.MapCodec;
@@ -54,7 +54,7 @@ public class NestSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
 
         if (level instanceof WorldGenLevel worldGenLevel) {
             ChunkGenerator chunk = worldGenLevel.getLevel().getChunkSource().getGenerator();
-            ConfiguredFeature<?, ?> nest = Objects.requireNonNull(worldGenLevel.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HighlandsConfiguredFeatures.MOA_NEST).orElse(null)).value();
+            ConfiguredFeature<?, ?> nest = Objects.requireNonNull(worldGenLevel.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HolyIslesConfiguredFeatures.MOA_NEST).orElse(null)).value();
 
             for (int i = offset; i >= offset - foliageHeight; --i) {
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 2 * offsetX, y - 7, z + 2 * offsetZ), 13, i, doubleTrunk);

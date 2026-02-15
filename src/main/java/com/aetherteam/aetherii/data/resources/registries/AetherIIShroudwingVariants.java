@@ -33,9 +33,9 @@ public class AetherIIShroudwingVariants {
         register(context, SCARAB, SpawnPrioritySelectors.fallback(1));
         register(context, PURPLE, random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 75), random(biomeCheck(context, AetherIITags.Biomes.MAGNETIC), 100, 75), random(biomeCheck(context, AetherIITags.Biomes.ARCTIC), 100, 75));
         register(context, FIRE, random(biomeCheck(context, AetherIITags.Biomes.HIGHFIELDS), 100, 50));
-        register(context, ORE, biomes(context, AetherIITags.Biomes.HIGHLANDS));
+        register(context, ORE, biomes(context, AetherIITags.Biomes.HOLY_ISLES));
         register(context, ARCTIC, biomes(context, AetherIITags.Biomes.ARCTIC));
-        register(context, MOSS, random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 35), random(biomeCheck(context, AetherIITags.Biomes.MAGNETIC), 100, 35));
+        register(context, MOSS, random(biomeCheck(context, AetherIITags.Biomes.HOLY_ISLES), 100, 35), random(biomeCheck(context, AetherIITags.Biomes.MAGNETIC), 100, 35));
     }
 
     private static PriorityProvider.Selector<SpawnContext, SpawnCondition> random(SpawnCondition condition, int bound, int check) {

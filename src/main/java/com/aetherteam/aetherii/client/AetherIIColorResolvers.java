@@ -49,7 +49,7 @@ public class AetherIIColorResolvers {
         event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(tintIndex, level != null && pos != null ? getAverageColor(level, pos, GRASS_COLORS) : AETHER_TALL_GRASS_COLOR, 2.0F, 10.0F)),
                 AetherIIBlocks.SHORT_AETHER_GRASS.get(), AetherIIBlocks.MEDIUM_AETHER_GRASS.get(), AetherIIBlocks.TALL_AETHER_GRASS.get());
         event.register(((state, level, pos, tintIndex) ->  level != null && pos != null ? getAverageColor(level, pos, GRASS_COLORS) : AETHER_TALL_GRASS_COLOR),
-                AetherIIBlocks.HIGHLAND_FERN.get(), AetherIIBlocks.POTTED_HIGHLAND_FERN.get());
+                AetherIIBlocks.AETHER_FERN.get(), AetherIIBlocks.POTTED_AETHER_FERN.get());
     }
 
     public static int createTriTintGrassColor(int tintIndex, int defaultColor, float darkSaturationOffset, float lightSaturationOffset) {

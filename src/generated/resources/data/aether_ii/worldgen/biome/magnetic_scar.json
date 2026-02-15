@@ -1,5 +1,5 @@
 {
-  "carvers": "aether_ii:highlands_cave",
+  "carvers": "aether_ii:holy_isles_cave",
   "creature_spawn_probability": 0.23,
   "downfall": 0.3,
   "effects": {
@@ -71,7 +71,7 @@
       "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:coarse_aether_dirt_ceiling",
       "aether_ii:coarse_aether_dirt_overhang",
-      "aether_ii:highlands_flower_patch",
+      "aether_ii:holy_isles_flower_patch",
       "aether_ii:magnetic_flower_patch",
       "aether_ii:blueberry_bush_patch",
       "aether_ii:short_arilum",

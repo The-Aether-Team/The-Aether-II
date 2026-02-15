@@ -1,0 +1,30 @@
+{
+  "parent": "aether_ii:the_holy_isles",
+  "criteria": {
+    "enter_holy_isles": {
+      "conditions": {
+        "to": "aether_ii:aether_holy_isles"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.enter_holy_isles.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:glowstone"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.enter_holy_isles"
+    }
+  },
+  "requirements": [
+    [
+      "enter_holy_isles"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

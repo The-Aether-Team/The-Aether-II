@@ -14,10 +14,9 @@ import net.minecraft.world.level.levelgen.carver.CaveCarverConfiguration;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.carver.WorldCarver;
 import net.minecraft.world.level.levelgen.heightproviders.TrapezoidHeight;
-import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 
 public class AetherIICarvers {
-    public static final ResourceKey<ConfiguredWorldCarver<?>> HIGHLANDS_CAVE = createKey("highlands_cave");
+    public static final ResourceKey<ConfiguredWorldCarver<?>> HOLY_ISLES_CAVE = createKey("holy_isles_cave");
     public static final ResourceKey<ConfiguredWorldCarver<?>> HESTVEIL_CAVE = createKey("hestveil_cave");
 
     private static ResourceKey<ConfiguredWorldCarver<?>> createKey(String name) {
@@ -27,7 +26,7 @@ public class AetherIICarvers {
     public static void bootstrap(BootstrapContext<ConfiguredWorldCarver<?>> context) {
         HolderGetter<Block> blocks = context.lookup(Registries.BLOCK);
 
-        context.register(HIGHLANDS_CAVE, WorldCarver.CAVE.configured(new CaveCarverConfiguration(
+        context.register(HOLY_ISLES_CAVE, WorldCarver.CAVE.configured(new CaveCarverConfiguration(
                 0.25F,
                 TrapezoidHeight.of(VerticalAnchor.aboveBottom(-16), VerticalAnchor.absolute(256)),
                 UniformFloat.of(0.3F, 0.9F),

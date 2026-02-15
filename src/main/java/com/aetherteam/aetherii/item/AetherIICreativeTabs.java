@@ -503,7 +503,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SHORT_AETHER_GRASS.get());
                 output.accept(AetherIIBlocks.MEDIUM_AETHER_GRASS.get());
                 output.accept(AetherIIBlocks.TALL_AETHER_GRASS.get());
-                output.accept(AetherIIBlocks.HIGHLAND_FERN.get());
+                output.accept(AetherIIBlocks.AETHER_FERN.get());
                 output.accept(AetherIIBlocks.SHIELD_FERN.get());
                 output.accept(AetherIIBlocks.BLADE_POA.get());
                 output.accept(AetherIIBlocks.TARABLOOM.get());
@@ -516,7 +516,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HOLPUPEA.get());
                 output.accept(AetherIIBlocks.AECHOR_CUTTING.get());
                 output.accept(AetherIIBlocks.CARRION_CUTTING.get());
-                output.accept(AetherIIBlocks.HIGHLANDS_BUSH.get());
+                output.accept(AetherIIBlocks.AETHER_BUSH.get());
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get());
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH.get());
                 output.accept(AetherIIBlocks.ORANGE_TREE.get());
