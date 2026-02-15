@@ -36,7 +36,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-public class AechorPlant extends PathfinderMob implements RangedAttackMob, PlantCuttingMob {
+public class AechorPlant extends PlantMob implements RangedAttackMob, PlantCuttingMob {
     public static int DART_ATTACK_EVENT = 100;
 
     private static final EntityDataAccessor<Boolean> DATA_TARGETING_ENTITY_ID = SynchedEntityData.defineId(AechorPlant.class, EntityDataSerializers.BOOLEAN);
