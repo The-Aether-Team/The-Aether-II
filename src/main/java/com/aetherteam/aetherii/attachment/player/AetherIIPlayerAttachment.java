@@ -12,6 +12,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.player.ClientInput;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.MinecraftServer;
@@ -86,6 +87,11 @@ public class AetherIIPlayerAttachment {
      */
     public void login(Player player) {
         this.startInAether(player);
+
+
+        if (player instanceof ServerPlayer serverPlayer) {
+            serverPlayer.sendSystemMessage(Component.literal("test"));
+        }
     }
 
     public void onJoinLevel(Player player) {
