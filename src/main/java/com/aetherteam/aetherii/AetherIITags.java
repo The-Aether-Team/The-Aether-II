@@ -46,6 +46,12 @@ public class AetherIITags {
         public static final TagKey<Block> MARBLED_ICHORITE_DECORATIVE_BLOCKS = tag("marbled_ichorite_decorative_blocks");
         public static final TagKey<Block> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Block> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
+        public static final TagKey<Block> QUICKSOIL_GLASS_DECORATIVE_BLOCKS = tag("quicksoil_glass_decorative_blocks");
+        public static final TagKey<Block> QUICKSOIL_GLASS_PANE_DECORATIVE_BLOCKS = tag("quicksoil_glass_pane_decorative_blocks");
+        public static final TagKey<Block> CRUDE_SCATTERGLASS_DECORATIVE_BLOCKS = tag("crude_scatterglass_decorative_blocks");
+        public static final TagKey<Block> CRUDE_SCATTERGLASS_PANE_DECORATIVE_BLOCKS = tag("crude_scatterglass_pane_decorative_blocks");
+        public static final TagKey<Block> SCATTERGLASS_DECORATIVE_BLOCKS = tag("scatterglass_decorative_blocks");
+        public static final TagKey<Block> SCATTERGLASS_PANE_DECORATIVE_BLOCKS = tag("scatterglass_pane_decorative_blocks");
         public static final TagKey<Block> SENTRY_BLOCKS = tag("sentry_blocks");
         public static final TagKey<Block> QUICKSOIL_GLASS = tag("quicksoil_glass");
         public static final TagKey<Block> CRUDE_SCATTERGLASS = tag("crude_scatterglass");
@@ -138,6 +144,12 @@ public class AetherIITags {
         public static final TagKey<Item> MARBLED_ICHORITE_DECORATIVE_BLOCKS = tag("marbled_ichorite_decorative_blocks");
         public static final TagKey<Item> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Item> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
+        public static final TagKey<Item> QUICKSOIL_GLASS_DECORATIVE_BLOCKS = tag("quicksoil_glass_decorative_blocks");
+        public static final TagKey<Item> QUICKSOIL_GLASS_PANE_DECORATIVE_BLOCKS = tag("quicksoil_glass_pane_decorative_blocks");
+        public static final TagKey<Item> CRUDE_SCATTERGLASS_DECORATIVE_BLOCKS = tag("crude_scatterglass_decorative_blocks");
+        public static final TagKey<Item> CRUDE_SCATTERGLASS_PANE_DECORATIVE_BLOCKS = tag("crude_scatterglass_pane_decorative_blocks");
+        public static final TagKey<Item> SCATTERGLASS_DECORATIVE_BLOCKS = tag("scatterglass_decorative_blocks");
+        public static final TagKey<Item> SCATTERGLASS_PANE_DECORATIVE_BLOCKS = tag("scatterglass_pane_decorative_blocks");
         public static final TagKey<Item> ARILUM_LANTERN = tag("arilum_lantern");
 
         public static final TagKey<Item> GUARDIAN_LOGS = tag("guardian_logs");

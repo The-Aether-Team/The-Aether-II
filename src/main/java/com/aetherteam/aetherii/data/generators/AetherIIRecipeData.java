@@ -552,7 +552,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.HOLYSTONE_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get(), 0.1F, 200).unlockedBy(getHasName(AetherIIBlocks.HOLYSTONE_BRICKS.get()), has(AetherIIBlocks.HOLYSTONE_BRICKS.get())).save(this.output);
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get())
                 .group("bricks_from_artisanry")
-                .requires(AetherIITags.Items.HOLYSTONE_DECORATIVE_BLOCKS)
+                .requires(AetherIITags.Items.FADED_HOLYSTONE_DECORATIVE_BLOCKS)
                 .unlockedBy("has_faded_holystone_blocks", has(AetherIITags.Items.FADED_HOLYSTONE_DECORATIVE_BLOCKS))
                 .save(this.output, name("faded_holystone_bricks_from_artisanry"));
         this.stairs(AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS, AetherIIBlocks.FADED_HOLYSTONE_BRICKS).save(this.output);
@@ -935,6 +935,21 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         // Glass
         this.altarEnchanting(RecipeCategory.MISC, AetherIIBlocks.QUICKSOIL_GLASS, AetherIIBlocks.QUICKSOIL, 1, 0.0F).save(this.output);
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.CRUDE_SCATTERGLASS.get()), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SCATTERGLASS.get(), 0.1F, 200).unlockedBy("has_crude_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS.get())).save(this.output);
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.QUICKSOIL_GLASS.get())
+                .group("glass_from_artisanry")
+                .requires(AetherIITags.Items.QUICKSOIL_GLASS_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.QUICKSOIL_GLASS_DECORATIVE_BLOCKS))
+                .save(this.output, name("quicksoil_glass_from_artisanry"));
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.CRUDE_SCATTERGLASS.get())
+                .group("glass_from_artisanry")
+                .requires(AetherIITags.Items.CRUDE_SCATTERGLASS_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.CRUDE_SCATTERGLASS_DECORATIVE_BLOCKS))
+                .save(this.output, name("crude_scatterglass_from_artisanry"));
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SCATTERGLASS.get())
+                .group("glass_from_artisanry")
+                .requires(AetherIITags.Items.SCATTERGLASS_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.SCATTERGLASS_DECORATIVE_BLOCKS))
+                .save(this.output, name("scatterglass_from_artisanry"));
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.TILED_QUICKSOIL_GLASS.get(), AetherIIBlocks.QUICKSOIL_GLASS.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS.get(), AetherIIBlocks.QUICKSOIL_GLASS.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS.get(), AetherIIBlocks.CRUDE_SCATTERGLASS.get());
@@ -953,6 +968,21 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get(), 16).define('#', AetherIIBlocks.CRUDE_SCATTERGLASS.get()).pattern("###").pattern("###").unlockedBy("has_crude_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS.get())).save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SCATTERGLASS_PANE.get(), 16).define('#', AetherIIBlocks.SCATTERGLASS.get()).pattern("###").pattern("###").unlockedBy("has_scatterglass", has(AetherIIBlocks.SCATTERGLASS.get())).save(this.output);
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get()), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SCATTERGLASS_PANE.get(), 0.1F, 200).unlockedBy("has_crude_scatterglass_pane", has(AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get())).save(this.output, name("scatterglass_pane_from_smelting"));
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.QUICKSOIL_GLASS_PANE.get())
+                .group("glass_pane_from_artisanry")
+                .requires(AetherIITags.Items.QUICKSOIL_GLASS_PANE_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.QUICKSOIL_GLASS_PANE_DECORATIVE_BLOCKS))
+                .save(this.output, name("quicksoil_glass_pane_from_artisanry"));
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get())
+                .group("glass_pane_from_artisanry")
+                .requires(AetherIITags.Items.CRUDE_SCATTERGLASS_PANE_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.CRUDE_SCATTERGLASS_PANE_DECORATIVE_BLOCKS))
+                .save(this.output, name("crude_scatterglass_pane_from_artisanry"));
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SCATTERGLASS_PANE.get())
+                .group("glass_pane_from_artisanry")
+                .requires(AetherIITags.Items.SCATTERGLASS_PANE_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.SCATTERGLASS_PANE_DECORATIVE_BLOCKS))
+                .save(this.output, name("scatterglass_pane_from_artisanry"));
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.TILED_QUICKSOIL_GLASS_PANE.get(), AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS_PANE.get(), AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS_PANE.get(), AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get());

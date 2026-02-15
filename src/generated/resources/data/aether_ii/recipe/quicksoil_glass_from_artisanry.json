@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "glass_from_artisanry",
+  "ingredients": [
+    "#aether_ii:quicksoil_glass_decorative_blocks"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:quicksoil_glass"
+  }
+}
