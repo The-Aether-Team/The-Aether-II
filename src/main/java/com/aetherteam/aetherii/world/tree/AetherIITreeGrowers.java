@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.world.tree;
 
-import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsConfiguredFeatures;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesConfiguredFeatures;
 import net.minecraft.world.level.block.grower.TreeGrower;
 
 import java.util.Map;
@@ -12,8 +12,8 @@ public class AetherIITreeGrowers {
             0.2F,
             Optional.empty(),
             Optional.empty(),
-            Optional.of(HighlandsConfiguredFeatures.SHORT_SKYROOT_SAPLING),
-            Optional.of(HighlandsConfiguredFeatures.LARGE_SKYROOT_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.SHORT_SKYROOT_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.LARGE_SKYROOT_SAPLING),
             Optional.empty(),
             Optional.empty()
     );
@@ -22,8 +22,8 @@ public class AetherIITreeGrowers {
             0.2F,
             Optional.empty(),
             Optional.empty(),
-            Optional.of(HighlandsConfiguredFeatures.SKYROOT_IRRADIATED_SAPLING),
-            Optional.of(HighlandsConfiguredFeatures.LARGE_SKYROOT_IRRADIATED_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.SKYROOT_IRRADIATED_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.LARGE_SKYROOT_IRRADIATED_SAPLING),
             Optional.empty(),
             Optional.empty()
     );
@@ -31,103 +31,103 @@ public class AetherIITreeGrowers {
     public static final TreeGrower SKYPLANE = new TreeGrower(
             "skyplane",
             Optional.empty(),
-            Optional.of(HighlandsConfiguredFeatures.SKYPLANE_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.SKYPLANE_SAPLING),
             Optional.empty()
     );
     public static final TreeGrower IRRADIATED_SKYPLANE = new TreeGrower(
             "irradiated_skyplane",
             Optional.empty(),
-            Optional.of(HighlandsConfiguredFeatures.SKYPLANE_IRRADIATED),
+            Optional.of(HolyIslesConfiguredFeatures.SKYPLANE_IRRADIATED),
             Optional.empty()
     );
 
     public static final TreeGrower SKYBIRCH = new TreeGrower(
             "skybirch",
             Optional.empty(),
-            Optional.of(HighlandsConfiguredFeatures.SKYBIRCH_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.SKYBIRCH_SAPLING),
             Optional.empty()
     );
     public static final TreeGrower IRRADIATED_SKYBIRCH = new TreeGrower(
             "irradiated_skybirch",
             Optional.empty(),
-            Optional.of(HighlandsConfiguredFeatures.SKYBIRCH_IRRADIATED_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.SKYBIRCH_IRRADIATED_SAPLING),
             Optional.empty()
     );
 
     public static final TreeGrower SKYPINE = new TreeGrower(
             "skypine",
             Optional.empty(),
-            Optional.of(HighlandsConfiguredFeatures.SKYPINE_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.SKYPINE_SAPLING),
             Optional.empty()
     );
     public static final TreeGrower IRRADIATED_SKYPINE = new TreeGrower(
             "irradiated_skypine",
             Optional.empty(),
-            Optional.of(HighlandsConfiguredFeatures.SKYPINE_IRRADIATED_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.SKYPINE_IRRADIATED_SAPLING),
             Optional.empty()
     );
 
     public static final TreeGrower WISPROOT = new TreeGrower(
             "wisproot",
             Optional.empty(),
-            Optional.of(HighlandsConfiguredFeatures.WISPROOT_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.WISPROOT_SAPLING),
             Optional.empty()
     );
     public static final TreeGrower IRRADIATED_WISPROOT = new TreeGrower(
             "irradiated_wisproot",
             Optional.empty(),
-            Optional.of(HighlandsConfiguredFeatures.WISPROOT_IRRADIATED_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.WISPROOT_IRRADIATED_SAPLING),
             Optional.empty()
     );
 
     public static final TreeGrower WISPTOP = new TreeGrower(
             "wisptop",
             Optional.empty(),
-            Optional.of(HighlandsConfiguredFeatures.WISPTOP_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.WISPTOP_SAPLING),
             Optional.empty()
     );
     public static final TreeGrower IRRADIATED_WISPTOP = new TreeGrower(
             "irradiated_wisptop",
             Optional.empty(),
-            Optional.of(HighlandsConfiguredFeatures.WISPTOP_IRRADIATED_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.WISPTOP_IRRADIATED_SAPLING),
             Optional.empty()
     );
 
     public static final TreeGrower GREATROOT = new TreeGrower(
             "greatroot",
-            Optional.of(HighlandsConfiguredFeatures.GREATROOT_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.GREATROOT_SAPLING),
             Optional.empty(),
             Optional.empty()
     );
     public static final TreeGrower IRRADIATED_GREATROOT = new TreeGrower(
             "irradiated_greatroot",
-            Optional.of(HighlandsConfiguredFeatures.GREATROOT_IRRADIATED_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.GREATROOT_IRRADIATED_SAPLING),
             Optional.empty(),
             Optional.empty()
     );
 
     public static final TreeGrower GREATOAK = new TreeGrower(
             "greatoak",
-            Optional.of(HighlandsConfiguredFeatures.GREATOAK_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.GREATOAK_SAPLING),
             Optional.empty(),
             Optional.empty()
     );
     public static final TreeGrower IRRADIATED_GREATOAK = new TreeGrower(
             "irradiated_greatoak",
-            Optional.of(HighlandsConfiguredFeatures.GREATOAK_IRRADIATED_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.GREATOAK_IRRADIATED_SAPLING),
             Optional.empty(),
             Optional.empty()
     );
 
     public static final TreeGrower GREATBOA = new TreeGrower(
             "greatboa",
-            Optional.of(HighlandsConfiguredFeatures.GREATBOA_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.GREATBOA_SAPLING),
             Optional.empty(),
             Optional.empty()
     );
     public static final TreeGrower IRRADIATED_GREATBOA = new TreeGrower(
             "irradiated_greatboa",
-            Optional.of(HighlandsConfiguredFeatures.GREATBOA_IRRADIATED_SAPLING),
+            Optional.of(HolyIslesConfiguredFeatures.GREATBOA_IRRADIATED_SAPLING),
             Optional.empty(),
             Optional.empty()
     );
@@ -135,7 +135,7 @@ public class AetherIITreeGrowers {
     public static final TreeGrower AMBEROOT = new TreeGrower(
             "amberoot",
             Optional.empty(),
-            Optional.of(HighlandsConfiguredFeatures.AMBEROOT_SAPLING_SELECTOR),
+            Optional.of(HolyIslesConfiguredFeatures.AMBEROOT_SAPLING_SELECTOR),
             Optional.empty()
     );
 

@@ -266,7 +266,7 @@ public class AetherIITags {
     }
 
     public static class Biomes {
-        public static final TagKey<Biome> HIGHLANDS = tag("highlands");
+        public static final TagKey<Biome> HOLY_ISLES = tag("holy_isles");
         public static final TagKey<Biome> HIGHFIELDS = tag("highfields");
         public static final TagKey<Biome> MAGNETIC = tag("magnetic");
         public static final TagKey<Biome> MAGNETIC_FOG = tag("magnetic_fog");

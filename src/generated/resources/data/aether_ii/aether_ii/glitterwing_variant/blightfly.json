@@ -19,7 +19,7 @@
           "check": 85,
           "condition": {
             "type": "minecraft:biome",
-            "biomes": "#aether_ii:highlands"
+            "biomes": "#aether_ii:holy_isles"
           }
         },
         "priority": 1

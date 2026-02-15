@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.client.event.listeners;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
+import com.aetherteam.aetherii.client.renderer.level.HolyIslesSpecialEffects;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Holder;
@@ -23,7 +23,7 @@ public class DimensionClientListener {
 
         if (camera.getEntity().level() instanceof ClientLevel clientLevel) {
             Holder<Biome> biome = clientLevel.getBiome(camera.getBlockPosition());
-            if (clientLevel.effects() instanceof HighlandsSpecialEffects) {
+            if (clientLevel.effects() instanceof HolyIslesSpecialEffects) {
                 FogType fluidState = camera.getFluidInCamera();
                 if (fogMode == FogType.ATMOSPHERIC && fluidState == FogType.NONE && (camera.getEntity().getEyeInFluidType() == NeoForgeMod.EMPTY_TYPE.value())) {
                     if (modifiedNearDistance == null) {

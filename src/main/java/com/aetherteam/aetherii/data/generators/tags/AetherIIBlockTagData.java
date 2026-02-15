@@ -81,7 +81,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.LAKE_VEGETATION_REPLACEABLES)
                 .add(AetherIIBlocks.BLUEBERRY_BUSH.get())
-                .add(AetherIIBlocks.HIGHLANDS_BUSH.get())
+                .add(AetherIIBlocks.AETHER_BUSH.get())
                 .add(AetherIIBlocks.HOLYSTONE_ROCK.get())
                 .add(AetherIIBlocks.SKYROOT_TWIG.get())
                 .add(AetherIIBlocks.VALKYRIE_SPROUT.get())
@@ -638,12 +638,12 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.POTTED_GREATOAK_SAPLING.get(),
                 AetherIIBlocks.POTTED_GREATBOA_SAPLING.get(),
                 AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get(),
-                AetherIIBlocks.POTTED_HIGHLANDS_BUSH.get(),
+                AetherIIBlocks.POTTED_AETHER_BUSH.get(),
                 AetherIIBlocks.POTTED_BLUEBERRY_BUSH.get(),
                 AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM.get(),
                 AetherIIBlocks.POTTED_ORANGE_TREE.get(),
                 AetherIIBlocks.POTTED_MAGNETIC_SHROOM.get(),
-                AetherIIBlocks.POTTED_HIGHLAND_FERN.get(),
+                AetherIIBlocks.POTTED_AETHER_FERN.get(),
                 AetherIIBlocks.POTTED_SHIELD_FERN.get(),
                 AetherIIBlocks.POTTED_HESPEROSE.get(),
                 AetherIIBlocks.POTTED_TARABLOOM.get(),
@@ -1143,7 +1143,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get(),
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
-                AetherIIBlocks.HIGHLANDS_BUSH.get(),
+                AetherIIBlocks.AETHER_BUSH.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(),
                 AetherIIBlocks.ORANGE_TREE.get(),

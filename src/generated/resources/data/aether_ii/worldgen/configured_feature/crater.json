@@ -33,7 +33,7 @@
         }
       }
     },
-    "noise": "aether_ii:highlands/environmental/crater",
+    "noise": "aether_ii:holy_isles/environmental/crater",
     "radius": {
       "max_inclusive": 5,
       "min_inclusive": 4

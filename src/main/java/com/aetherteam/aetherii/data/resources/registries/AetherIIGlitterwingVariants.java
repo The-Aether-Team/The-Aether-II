@@ -24,7 +24,7 @@ public class AetherIIGlitterwingVariants {
     public static final ResourceKey<GlitterwingVariant> DRAGONFLY = createKey("dragonfly");
     public static final ResourceKey<GlitterwingVariant> DRAPEWING = createKey("drapewing");
     public static final ResourceKey<GlitterwingVariant> INDIGO = createKey("indigo");
-    public static final ResourceKey<GlitterwingVariant> HIGHLAND = createKey("highland");
+    public static final ResourceKey<GlitterwingVariant> SPOTTED = createKey("spotted");
     public static final ResourceKey<GlitterwingVariant> SUNSET_DRAGONFLY = createKey("sunset_dragonfly");
     public static final ResourceKey<GlitterwingVariant> QUICKSOIL_MOTH = createKey("quicksoil_moth");
     public static final ResourceKey<GlitterwingVariant> AMBER_MOTH = createKey("amber_moth");
@@ -38,20 +38,20 @@ public class AetherIIGlitterwingVariants {
 
     public static void bootstrap(BootstrapContext<GlitterwingVariant> context) {
         register(context, INDIGO, 1.0F, 0.0F, SpawnPrioritySelectors.fallback(1));
-        register(context, HIGHLAND, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.HIGHLANDS));
-        register(context, AMBER_MOTH, 2.0F, 0.0F, biomes(context, AetherIITags.Biomes.HIGHLANDS));
+        register(context, SPOTTED, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.HOLY_ISLES));
+        register(context, AMBER_MOTH, 2.0F, 0.0F, biomes(context, AetherIITags.Biomes.HOLY_ISLES));
 
         register(context, ORANGE_MIMIC, 0.0F, 40.0F, random(biomeCheck(context, AetherIITags.Biomes.HIGHFIELDS), 100, 25));
 
-        register(context, LEAF_INSECT, 2.0F, 0.0F, biomes(context, AetherIITags.Biomes.LUSH), random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 50));
-        register(context, DRAGONFLY, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.LUSH), random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 50));
-        register(context, DRAPEWING, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.LUSH), random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 50));
+        register(context, LEAF_INSECT, 2.0F, 0.0F, biomes(context, AetherIITags.Biomes.LUSH), random(biomeCheck(context, AetherIITags.Biomes.HOLY_ISLES), 100, 50));
+        register(context, DRAGONFLY, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.LUSH), random(biomeCheck(context, AetherIITags.Biomes.HOLY_ISLES), 100, 50));
+        register(context, DRAPEWING, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.LUSH), random(biomeCheck(context, AetherIITags.Biomes.HOLY_ISLES), 100, 50));
 
-        register(context, QUICKSOIL_MOTH, 2.0F, 0.0F, biomes(context, AetherIITags.Biomes.WET), random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 75));
-        register(context, SUNSET_DRAGONFLY, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.WET), random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 75));
+        register(context, QUICKSOIL_MOTH, 2.0F, 0.0F, biomes(context, AetherIITags.Biomes.WET), random(biomeCheck(context, AetherIITags.Biomes.HOLY_ISLES), 100, 75));
+        register(context, SUNSET_DRAGONFLY, 1.0F, 0.0F, biomes(context, AetherIITags.Biomes.WET), random(biomeCheck(context, AetherIITags.Biomes.HOLY_ISLES), 100, 75));
 
-        register(context, PHANTOMFLY, 2.0F, 0.0F, light(0, 8), random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 85));
-        register(context, BLIGHTFLY, 2.0F, 0.0F, true, light(0, 8), random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 85));
+        register(context, PHANTOMFLY, 2.0F, 0.0F, light(0, 8), random(biomeCheck(context, AetherIITags.Biomes.HOLY_ISLES), 100, 85));
+        register(context, BLIGHTFLY, 2.0F, 0.0F, true, light(0, 8), random(biomeCheck(context, AetherIITags.Biomes.HOLY_ISLES), 100, 85));
     }
 
     private static PriorityProvider.Selector<SpawnContext, SpawnCondition> random(SpawnCondition condition, int bound, int check) {
