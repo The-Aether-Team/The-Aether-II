@@ -105,8 +105,9 @@ public class AudioHooks { //todo creative music override
         return false;
     }
 
-    public static boolean isAetherBossMusicActive() {
-        return !getAetherBossFights().isEmpty() && Minecraft.getInstance().gui.getBossOverlay().shouldPlayMusic();
+    public static <T extends LivingEntity & AetherBossMob<?>> boolean isAetherBossMusicActive() {
+        T boss = getBossFromFight();
+        return !getAetherBossFights().isEmpty() && Minecraft.getInstance().gui.getBossOverlay().shouldPlayMusic() && boss != null && boss.getHealth() > 0;
     }
 
     public static Map<UUID, LerpingBossEvent> getAetherBossFights() {
