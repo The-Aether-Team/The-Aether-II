@@ -2,17 +2,26 @@ package com.aetherteam.aetherii.client.event.hooks;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.instance.FadeOutSoundInstance;
 import com.aetherteam.aetherii.entity.monster.dungeon.boss.AetherBossMob;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.BossHealthOverlayAccessor;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.MusicManagerAccessor;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.SoundEngineAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.client.gui.screens.WinScreen;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.MusicInfo;
+import net.minecraft.client.sounds.MusicManager;
+import net.minecraft.client.sounds.SoundEngine;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.Musics;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,7 +32,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class MusicHooks { //todo creative music override
+public class AudioHooks { //todo creative music override
     public static final Music AETHER_NIGHT = createAetherMusic(AetherIISoundEvents.MUSIC_AETHER_NIGHT);
     public static final Music AETHER_SUNRISE = createAetherMusic(AetherIISoundEvents.MUSIC_AETHER_SUNRISE);
     public static final Music AETHER_SUNSET = createAetherMusic(AetherIISoundEvents.MUSIC_AETHER_SUNSET);
@@ -105,6 +114,68 @@ public class MusicHooks { //todo creative music override
             Entity entity = Minecraft.getInstance().player.level().getEntity(entityId);
             if (entity instanceof LivingEntity && entity instanceof AetherBossMob<?>) {
                 return (T) entity;
+            }
+        }
+        return null;
+    }
+
+    public static boolean shouldCancelMusic(SoundInstance sound) {
+        Holder<SoundEvent> soundEvent = getSoundEvent(sound);
+        if (sound.getSource() == SoundSource.MUSIC && soundEvent != null && !soundEvent.is(AetherIITags.SoundEvents.ACHIEVEMENT_SOUNDS)) {
+            // Check whether there is Aether music and the sound that attempts to play does not match it.
+            MusicManager manager = Minecraft.getInstance().getMusicManager();
+            MusicManagerAccessor accessor = (MusicManagerAccessor) manager;
+            return Minecraft.getInstance().getSituationalMusic().music() != null && !sound.getLocation().equals(SimpleSoundInstance.forMusic(Minecraft.getInstance().getSituationalMusic().music().event().value(), 1.0F).getLocation())
+                    || (accessor.aether_ii$getCurrentMusic() != null && !sound.getLocation().equals(accessor.aether_ii$getCurrentMusic().getLocation()));
+        }
+        return false;
+    }
+
+    /**
+     * Prevents ambient Aether Portal sounds from overlapping other portal sounds.
+     *
+     * @see com.aetherteam.aether.client.event.listeners.AudioListener#onPlaySound(PlaySoundEvent)
+     */
+    public static boolean preventAmbientPortalSound(SoundEngine soundEngine, SoundInstance sound) {
+        if (sound != null) {
+            Holder<SoundEvent> soundEvent = getSoundEvent(sound);
+            if (soundEvent != null && soundEvent.is(AetherIITags.SoundEvents.AMBIENT_PORTAL_SOUNDS)) {
+                return ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel().keySet().stream().anyMatch((playingInstance) -> {
+                    Holder<SoundEvent> playingSound = getSoundEvent(playingInstance);
+                    return playingSound != null && playingSound.is(AetherIITags.SoundEvents.PORTAL_SOUNDS);
+                });
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Stops ambient Aether Portal sounds when other portal sounds are activated.
+     *
+     * @see com.aetherteam.aether.client.event.listeners.AudioListener#onPlaySound(PlaySoundEvent)
+     */
+    public static void overrideActivatedPortalSound(SoundEngine soundEngine, SoundInstance sound) {
+        if (sound != null) {
+            Holder<SoundEvent> soundEvent = getSoundEvent(sound);
+            if (soundEvent != null && soundEvent.is(AetherIITags.SoundEvents.ACTIVATED_PORTAL_SOUNDS)) {
+                ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel().keySet().forEach((playingInstance) -> {
+                    Holder<SoundEvent> playingSound = getSoundEvent(playingInstance);
+                    if (playingSound != null && playingSound.is(AetherIITags.SoundEvents.AMBIENT_PORTAL_SOUNDS)) {
+                        if (playingInstance instanceof FadeOutSoundInstance fadeOutSoundInstance) {
+                            fadeOutSoundInstance.fadeOut();
+                        }
+                    }
+                });
+            }
+        }
+    }
+
+    private static Holder<SoundEvent> getSoundEvent(SoundInstance sound) {
+        SoundEvent soundEvent = BuiltInRegistries.SOUND_EVENT.getValue(sound.getLocation());
+        if (soundEvent != null) {
+            Optional<ResourceKey<SoundEvent>> optionalResourceKey = BuiltInRegistries.SOUND_EVENT.getResourceKey(soundEvent);
+            if (optionalResourceKey.isPresent()) {
+                return BuiltInRegistries.SOUND_EVENT.getOrThrow(optionalResourceKey.get());
             }
         }
         return null;
