@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.client.sound.instance;
 
-import com.aetherteam.aetherii.client.event.hooks.MusicHooks;
+import com.aetherteam.aetherii.client.event.hooks.AudioHooks;
 import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.WeighedSoundEventsAccessor;
 import net.minecraft.client.Minecraft;
@@ -101,11 +101,11 @@ public class MusicSoundInstance extends AbstractTickableSoundInstance {
     public void tick() {
         MusicInfo musicInfo = Minecraft.getInstance().getSituationalMusic();
         if (this.isBossMusic()) {
-            if (musicInfo.music() == null || !MusicHooks.isAetherBossMusicActive()) {
+            if (musicInfo.music() == null || !AudioHooks.isAetherBossMusicActive()) {
                 this.fade();
             }
         } else {
-            if (musicInfo.music() != null && MusicHooks.isAetherBossMusicActive()) {
+            if (musicInfo.music() != null && AudioHooks.isAetherBossMusicActive()) {
                 this.fade();
             }
         }
