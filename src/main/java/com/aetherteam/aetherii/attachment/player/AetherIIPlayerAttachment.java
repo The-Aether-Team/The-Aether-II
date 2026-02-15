@@ -4,19 +4,24 @@ import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.portal.PortalClientUtil;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.miscellaneous.ToggleItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.player.ClientInput;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.dialog.*;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.world.entity.EntityType;
@@ -24,9 +29,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AetherIIPlayerAttachment {
     private boolean isMoving;
@@ -103,11 +110,18 @@ public class AetherIIPlayerAttachment {
     }
 
     public void changeDimension(Player player, ResourceKey<Level> to) {
-//        if (to == AetherII)
+        if (to == AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL) {
+            if (player instanceof ServerPlayer serverPlayer && !this.sentChatMessage) {
+                CommonDialogData dialogData = new CommonDialogData(Component.literal("test"), Optional.empty(), true, true, DialogAction.CLOSE, List.of(), List.of());
+                CommonButtonData buttonData = new CommonButtonData(Component.literal("button"), Optional.empty(), 200);
 
-        if (player instanceof ServerPlayer serverPlayer && !this.sentChatMessage) {
-            serverPlayer.sendSystemMessage(Component.literal("test"));
-            this.sentChatMessage = true;
+                ActionButton actionButton = new ActionButton(buttonData, Optional.empty());
+
+                NoticeDialog dialog = new NoticeDialog(dialogData, actionButton);
+
+                serverPlayer.sendSystemMessage(Component.literal("test").withStyle(Style.EMPTY.withClickEvent(new ClickEvent.ShowDialog(Holder.direct(dialog)))));
+                this.sentChatMessage = true;
+            }
         }
     }
 
