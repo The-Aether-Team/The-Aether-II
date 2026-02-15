@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.client.event.hooks.MusicHooks;
+import com.aetherteam.aetherii.client.event.hooks.AudioHooks;
 import com.aetherteam.aetherii.client.event.hooks.RenderHooks;
 import com.aetherteam.aetherii.client.event.listeners.LevelClientListener;
 import com.mojang.datafixers.util.Either;
@@ -13,7 +13,9 @@ import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.ClientInput;
+import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.MusicInfo;
+import net.minecraft.client.sounds.SoundEngine;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.world.entity.player.Player;
@@ -24,6 +26,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.event.sound.PlaySoundEvent;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import net.neoforged.neoforge.event.AddAttributeTooltipsEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
@@ -51,6 +54,7 @@ public class AetherIIClientEventListeners {
         bus.addListener(AetherIIClientEventListeners::onComputeFogColor);
 
         // Audio
+        bus.addListener(AetherIIClientEventListeners::onPlaySound);
         bus.addListener(AetherIIClientEventListeners::onMusicSelected);
 
         // Input
@@ -159,8 +163,17 @@ public class AetherIIClientEventListeners {
         }
     }
 
+    public static void onPlaySound(PlaySoundEvent event) {
+        SoundEngine soundEngine = event.getEngine();
+        SoundInstance sound = event.getOriginalSound();
+        if (AudioHooks.shouldCancelMusic(sound) || AudioHooks.preventAmbientPortalSound(soundEngine, sound)) {
+            event.setSound(null);
+        }
+        AudioHooks.overrideActivatedPortalSound(soundEngine, sound);
+    }
+
     public static void onMusicSelected(SelectMusicEvent event) {
-        MusicInfo music = MusicHooks.getSituationalMusic();
+        MusicInfo music = AudioHooks.getSituationalMusic();
         if (music != null) {
             event.setMusic(music);
         }
