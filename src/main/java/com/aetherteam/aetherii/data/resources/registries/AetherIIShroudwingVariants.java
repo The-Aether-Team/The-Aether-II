@@ -31,7 +31,7 @@ public class AetherIIShroudwingVariants {
 
     public static void bootstrap(BootstrapContext<ShroudwingVariant> context) {
         register(context, SCARAB, SpawnPrioritySelectors.fallback(1));
-        register(context, PURPLE, random(biomeCheck(context, AetherIITags.Biomes.HIGHLANDS), 100, 75), random(biomeCheck(context, AetherIITags.Biomes.MAGNETIC), 100, 75), random(biomeCheck(context, AetherIITags.Biomes.ARCTIC), 100, 75));
+        register(context, PURPLE, random(biomeCheck(context, AetherIITags.Biomes.HOLY_ISLES), 100, 75), random(biomeCheck(context, AetherIITags.Biomes.MAGNETIC), 100, 75), random(biomeCheck(context, AetherIITags.Biomes.ARCTIC), 100, 75));
         register(context, FIRE, random(biomeCheck(context, AetherIITags.Biomes.HIGHFIELDS), 100, 50));
         register(context, ORE, biomes(context, AetherIITags.Biomes.HOLY_ISLES));
         register(context, ARCTIC, biomes(context, AetherIITags.Biomes.ARCTIC));
