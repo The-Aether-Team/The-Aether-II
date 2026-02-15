@@ -47,7 +47,7 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
         entity.resetFallDistance();
         if (!(entity instanceof ItemEntity itemEntity)) {
             if (entity.getDeltaMovement().y < -0.0784000015258789 && !(entity instanceof Projectile) && !(entity instanceof CloudSkiff)) {
-                entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.25, 1.0));
+                entity.setDeltaMovement(entity.getDeltaMovement().x(), -0.08, entity.getDeltaMovement().z());
             } else {
                 entity.setOnGround(entity instanceof LivingEntity livingEntity && (!(livingEntity instanceof Player player) || !player.getAbilities().flying));
             }
