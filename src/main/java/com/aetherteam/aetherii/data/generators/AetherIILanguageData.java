@@ -1626,7 +1626,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("bestiary", "Fill out the entire bestiary");
         this.addAdvancementDesc("trowel", "Harvest drops from a wild plant using any Trowel");
         this.addAdvancementDesc("enchanted_aether_grass", "Enchant an Aether Grass Block with an Ambrosium Shard to speed up plant growth above it");
-        this.addAdvancementDesc("plant_cutting", "Harvest a cutting from an Aechor Plant or Carrion Sprout by killing with any Trowel");
+        this.addAdvancementDesc("plant_cutting", "Harvest a cutting from an Aechor Plant or Carrion Sprout");
         this.addAdvancementDesc("ambrosium", "Obtain an Ambrosium Shard");
         this.addAdvancementDesc("golden_amber", "Harvest Golden Amber from an Amberoot tree using the proper tool");
         this.addAdvancementDesc("amber_hourglass", "Craft an Amber Hourglass");

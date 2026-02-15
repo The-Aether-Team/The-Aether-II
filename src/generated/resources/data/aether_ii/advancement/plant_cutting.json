@@ -1,59 +1,25 @@
 {
   "parent": "aether_ii:enchanted_aether_grass",
   "criteria": {
-    "kill_aechor_plant": {
+    "aechor_cutting": {
       "conditions": {
-        "entity": [
+        "items": [
           {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "type": "aether_ii:aechor_plant"
-            }
-          }
-        ],
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "items": "#aether_ii:tools/trowels"
-                }
-              }
-            }
+            "items": "aether_ii:aechor_cutting"
           }
         ]
       },
-      "trigger": "minecraft:player_killed_entity"
+      "trigger": "minecraft:inventory_changed"
     },
-    "kill_carrion_sprout": {
+    "carrion_cutting": {
       "conditions": {
-        "entity": [
+        "items": [
           {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "type": "aether_ii:carrion_sprout"
-            }
-          }
-        ],
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "items": "#aether_ii:tools/trowels"
-                }
-              }
-            }
+            "items": "aether_ii:carrion_cutting"
           }
         ]
       },
-      "trigger": "minecraft:player_killed_entity"
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "display": {
@@ -71,8 +37,8 @@
   },
   "requirements": [
     [
-      "kill_aechor_plant",
-      "kill_carrion_sprout"
+      "aechor_cutting",
+      "carrion_cutting"
     ]
   ],
   "sends_telemetry_event": true

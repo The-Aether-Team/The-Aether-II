@@ -124,12 +124,8 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             null,
                             AdvancementType.TASK, true, true, false)
                     .requirements(AdvancementRequirements.Strategy.OR)
-                    .addCriterion("kill_aechor_plant", killEntityWithItem(
-                            ItemPredicate.Builder.item().of(items, AetherIITags.Items.TOOLS_TROWELS),
-                            EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.AECHOR_PLANT.get())))
-                    .addCriterion("kill_carrion_sprout", killEntityWithItem(
-                            ItemPredicate.Builder.item().of(items, AetherIITags.Items.TOOLS_TROWELS),
-                            EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.CARRION_SPROUT.get())))
+                    .addCriterion("aechor_cutting", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.AECHOR_CUTTING.get()))
+                    .addCriterion("carrion_cutting", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.CARRION_CUTTING.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "plant_cutting"));
 
 
@@ -559,12 +555,6 @@ public class AetherIIAdvancementData extends AdvancementProvider {
 
     public static Criterion<PlayerInteractTrigger.TriggerInstance> itemUsedOnSpecificEntity(ItemPredicate.Builder item, EntityPredicate.Builder entity) {
         return PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(Optional.empty(), item, Optional.of(EntityPredicate.wrap(entity)));
-    }
-
-    public static Criterion<KilledTrigger.TriggerInstance> killEntityWithItem(ItemPredicate.Builder item, EntityPredicate.Builder entity) {
-        EntityPredicate.Builder playerBuilder = EntityPredicate.Builder.entity().equipment(EntityEquipmentPredicate.Builder.equipment().mainhand(item));
-        LootItemCondition playerCondition = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, playerBuilder).build();
-        return CriteriaTriggers.PLAYER_KILLED_ENTITY.createCriterion(new KilledTrigger.TriggerInstance(Optional.of(ContextAwarePredicate.create(playerCondition)), Optional.of(EntityPredicate.wrap(entity)), Optional.empty()));
     }
 
     public static Criterion<PlayerTrigger.TriggerInstance> armorSet(TagKey<Item> armor) {
