@@ -178,19 +178,19 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:item/bottle/fill2"),
                         sound("minecraft:item/bottle/fill3"),
                         sound("minecraft:item/bottle/fill4")
-                ).subtitle("subtitles.aether_ii.item.scaterglass_vial.fill")
+                ).subtitle("subtitles.aether_ii.item.scatterglass_vial.fill")
         );
         this.add(AetherIISoundEvents.ITEM_SCATTERGLASS_VIAL_EMPTY,
                 definition().with(
                         sound("minecraft:item/bottle/empty1"),
                         sound("minecraft:item/bottle/empty2")
-                ).subtitle("subtitles.aether_ii.item.scaterglass_vial.empty")
+                ).subtitle("subtitles.aether_ii.item.scatterglass_vial.empty")
         );
 
         this.add(AetherIISoundEvents.ITEM_HAMMER_OF_DEMOLITION_SHOOT,
                 definition().with(
                         sound("minecraft:mob/ghast/fireball4")
-                ).subtitle("subtitles.aether.item.hammer_of_kingbdogz.shoot")
+                ).subtitle("subtitles.aether_ii.item.hammer_of_demolition.shoot")
         );
 
         this.add(AetherIISoundEvents.ITEM_ARMOR_EQUIP_BEAST_PELT,

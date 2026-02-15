@@ -1792,6 +1792,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("item", "arkenium_canister.fill", "Arkenium Canister fills");
         this.addSubtitle("item", "arkenium_canister.empty", "Arkenium Canister empties");
 
+        this.addSubtitle("item", "hammer_of_demolition.shoot", "Projectile fired");
+
         this.addSubtitle("item", "armor.equip_beast_pelt", "Beast Pelt armor rustles");
         this.addSubtitle("item", "armor.equip_burrukai_plate", "Burrukai Plate armor rustles");
         this.addSubtitle("item", "armor.equip_zanite", "Zanite armor clangs");
