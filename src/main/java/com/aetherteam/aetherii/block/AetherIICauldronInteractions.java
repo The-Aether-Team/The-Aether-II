@@ -30,10 +30,6 @@ public class AetherIICauldronInteractions {
             CauldronInteraction.fillBucket(state, level, pos, player, hand, stack, new ItemStack(AetherIIItems.SKYROOT_WATER_BUCKET.get()), (blockState) ->
                     blockState.getValue(LayeredCauldronBlock.LEVEL) == 3, SoundEvents.BUCKET_FILL);
 
-    public static final CauldronInteraction EMPTY_POWDER_SNOW = (state, level, pos, player, hand, stack) ->
-            CauldronInteraction.fillBucket(state, level, pos, player, hand, stack, new ItemStack(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get()), (blockState) ->
-                    blockState.getValue(LayeredCauldronBlock.LEVEL) == 3, SoundEvents.BUCKET_FILL);
-
     private static InteractionResult emptySkyrootBucket(Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stack, BlockState state, SoundEvent sound) {
         if (!level.isClientSide()) {
             Item item = stack.getItem();

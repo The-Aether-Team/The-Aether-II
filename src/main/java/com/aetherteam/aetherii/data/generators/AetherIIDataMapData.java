@@ -120,13 +120,6 @@ public class AetherIIDataMapData extends DataMapProvider {
 
         var buckets = this.builder(AetherIIDataMaps.BUCKET_REPLACEMENT);
         buckets.add(Items.WATER_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_WATER_BUCKET.getKey()), false);
-        buckets.add(Items.POWDER_SNOW_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.getKey()), false);
-        buckets.add(Items.COD_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_COD_BUCKET.getKey()), false);
-        buckets.add(Items.SALMON_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_SALMON_BUCKET.getKey()), false);
-        buckets.add(Items.PUFFERFISH_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_PUFFERFISH_BUCKET.getKey()), false);
-        buckets.add(Items.TROPICAL_FISH_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_TROPICAL_FISH_BUCKET.getKey()), false);
-        buckets.add(Items.AXOLOTL_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_AXOLOTL_BUCKET.getKey()), false);
-        buckets.add(Items.TADPOLE_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_TADPOLE_BUCKET.getKey()), false);
 
         var blocks = this.builder(AetherIIDataMaps.INFECTED_BLOCKS);
         blocks.add(AetherIIBlocks.GUARDIAN_LOG.get().builtInRegistryHolder(), new BlockInfection(AetherIIBlocks.INFECTED_LOG.getKey()), false);
