@@ -898,6 +898,14 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:mob/slime/big4")
                 ).subtitle("subtitles.aether_ii.entity.swet.squish")
         );
+        this.add(AetherIISoundEvents.ENTITY_SWET_LEECH,
+                definition().with(
+                        sound("minecraft:mob/slime/big1"),
+                        sound("minecraft:mob/slime/big2"),
+                        sound("minecraft:mob/slime/big3"),
+                        sound("minecraft:mob/slime/big4")
+                ).subtitle("subtitles.aether_ii.entity.swet.leech")
+        );
 
         this.add(AetherIISoundEvents.ENTITY_SKEPHID_SHOOT,
                 definition().with(sound("aether_ii:entity/zephyr/shoot"))

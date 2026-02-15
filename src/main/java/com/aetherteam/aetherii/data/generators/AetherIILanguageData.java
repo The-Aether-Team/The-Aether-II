@@ -1902,6 +1902,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "swet.hurt", "Swet hurts");
         this.addSubtitle("entity", "swet.jump", "Swet squishes");
         this.addSubtitle("entity", "swet.squish", "Swet squishes");
+        this.addSubtitle("entity", "swet.leech", "Swet leeches");
 
         this.addSubtitle("entity", "skephid.shoot", "Skephid shoots");
         this.addSubtitle("entity", "skephid.ambient", "Skephid chitters");

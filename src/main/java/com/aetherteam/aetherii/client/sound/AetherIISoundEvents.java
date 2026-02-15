@@ -180,6 +180,7 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SWET_HURT = register("entity.swet.hurt");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SWET_JUMP = register("entity.swet.jump");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SWET_SQUISH = register("entity.swet.squish");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SWET_LEECH = register("entity.swet.leech");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKEPHID_SHOOT = register("entity.skephid.shoot");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKEPHID_AMBIENT = register("entity.skephid.ambient");
