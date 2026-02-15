@@ -6,11 +6,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:killed_by_player"
-            }
-          ],
           "functions": [
             {
               "add": false,
@@ -28,19 +23,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:entity_properties",
-              "entity": "direct_attacker",
-              "predicate": {
-                "equipment": {
-                  "mainhand": {
-                    "items": "#aether_ii:tools/trowels"
-                  }
-                }
-              }
-            }
-          ],
           "functions": [
             {
               "add": false,

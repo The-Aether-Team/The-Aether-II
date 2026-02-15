@@ -10,12 +10,6 @@
           "properties": {
             "age": "2"
           }
-        },
-        {
-          "condition": "minecraft:match_tool",
-          "predicate": {
-            "items": "#aether_ii:tools/trowels"
-          }
         }
       ],
       "entries": [
