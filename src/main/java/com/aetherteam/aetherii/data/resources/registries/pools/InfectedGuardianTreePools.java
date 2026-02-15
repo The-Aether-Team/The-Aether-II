@@ -1,8 +1,7 @@
 package com.aetherteam.aetherii.data.resources.registries.pools;
 
 import com.aetherteam.aetherii.data.resources.registries.AetherIIProcessorLists;
-import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsPlacedFeatures;
-import com.aetherteam.aetherii.world.structure.pool.RotatablePoolElement;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesPlacedFeatures;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
@@ -812,7 +811,7 @@ public class InfectedGuardianTreePools {
         context.register(DECORATION_LARGE_SHELF_ROTSHROOM, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.LARGE_SHELF_ROTSHROOM)), 1),
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.LARGE_SHELF_ROTSHROOM)), 1),
                         Pair.of(StructurePoolElement.empty(), 6)
                 ),
                 StructureTemplatePool.Projection.RIGID)
@@ -820,7 +819,7 @@ public class InfectedGuardianTreePools {
         context.register(DECORATION_LARGE_SHELF_ROTSHROOM_REDUCED, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.LARGE_SHELF_ROTSHROOM_UNDERGROUND)), 1),
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.LARGE_SHELF_ROTSHROOM_UNDERGROUND)), 1),
                         Pair.of(StructurePoolElement.empty(), 12)
                 ),
                 StructureTemplatePool.Projection.RIGID)
@@ -828,8 +827,8 @@ public class InfectedGuardianTreePools {
         context.register(DECORATION_ROTSHROOM_PATCH, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.ROTSHROOM_PATCH)), 3),
-                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.INFECTED_PATCH)), 1),
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.ROTSHROOM_PATCH)), 3),
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.INFECTED_PATCH)), 1),
                         Pair.of(StructurePoolElement.empty(), 9)
                 ),
                 StructureTemplatePool.Projection.RIGID)
@@ -837,7 +836,7 @@ public class InfectedGuardianTreePools {
         context.register(DECORATION_COARSE_AETHER_DIRT_PATCH, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.COARSE_AETHER_DIRT_DUNGEON)), 6),
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.COARSE_AETHER_DIRT_DUNGEON)), 6),
                         Pair.of(StructurePoolElement.empty(), 4)
                 ),
                 StructureTemplatePool.Projection.RIGID)
@@ -845,7 +844,7 @@ public class InfectedGuardianTreePools {
         context.register(DECORATION_UNDERGROWTH_PATCH, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.UNDERGROWTH_PATCH)), 8),
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.UNDERGROWTH_PATCH)), 8),
                         Pair.of(StructurePoolElement.empty(), 64)
                 ),
                 StructureTemplatePool.Projection.RIGID)

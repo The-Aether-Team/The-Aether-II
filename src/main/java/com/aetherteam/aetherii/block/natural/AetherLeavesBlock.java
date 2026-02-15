@@ -122,7 +122,7 @@ public class AetherLeavesBlock extends LeavesBlock {
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         this.leafParticleChance = level.isRaining()? 0.01f : 0.005f;
-        if (AetherIIClientProxy.isHighlandsSpecialEffects(level)) {
+        if (AetherIIClientProxy.isHolyIslesSpecialEffects(level)) {
             BlockPos belowPos = pos.below();
             BlockState belowState = level.getBlockState(belowPos);
             makeAetherDrippingWaterParticles(level, pos, random, belowState, belowPos);

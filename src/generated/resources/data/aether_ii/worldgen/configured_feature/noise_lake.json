@@ -11,10 +11,10 @@
         "Name": "minecraft:air"
       }
     },
-    "lake_barrier_noise": "aether_ii:highlands/lakes/lake_barrier",
-    "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor",
-    "lake_noise": "aether_ii:highlands/lakes/noise",
-    "lake_waterfall_noise": "aether_ii:highlands/lakes/lakes_waterfalls",
+    "lake_barrier_noise": "aether_ii:holy_isles/lakes/lake_barrier",
+    "lake_floor_noise": "aether_ii:holy_isles/lakes/lake_floor",
+    "lake_noise": "aether_ii:holy_isles/lakes/noise",
+    "lake_waterfall_noise": "aether_ii:holy_isles/lakes/lakes_waterfalls",
     "noise_start_value": 0.3,
     "shore_block": {
       "type": "minecraft:simple_state_provider",
@@ -22,7 +22,7 @@
         "Name": "aether_ii:quicksoil"
       }
     },
-    "shore_noise": "aether_ii:highlands/lakes/lake_shore",
+    "shore_noise": "aether_ii:holy_isles/lakes/lake_shore",
     "shore_start_value": 0.31,
     "underwater_block": {
       "type": "minecraft:dual_noise_provider",

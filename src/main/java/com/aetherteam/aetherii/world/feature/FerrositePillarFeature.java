@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsConfiguredFeatures;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesConfiguredFeatures;
 import com.aetherteam.aetherii.world.BlockPlacementUtil;
 import com.aetherteam.aetherii.world.feature.configuration.FerrositePillarConfiguration;
 import com.mojang.serialization.Codec;
@@ -63,7 +63,7 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
                 random,
                 true);
 
-        ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HighlandsConfiguredFeatures.FERROSITE_PILLAR_TURF).orElse(null)).value();
+        ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HolyIslesConfiguredFeatures.FERROSITE_PILLAR_TURF).orElse(null)).value();
         turf.place(level, chunk, random, new BlockPos(pos.getX(), pos.getY() + height + (int) radius, pos.getZ()));
 
         distributeSidePillars(context, pos, random, radius, baseHeight, additionalHeight, 1);
@@ -109,7 +109,7 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
                 random,
                 true);
 
-        ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HighlandsConfiguredFeatures.FERROSITE_PILLAR_TURF).orElse(null)).value();
+        ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HolyIslesConfiguredFeatures.FERROSITE_PILLAR_TURF).orElse(null)).value();
         turf.place(level, chunk, random, new BlockPos(pos.getX(), pos.getY() + (int) radius, pos.getZ()));
     }
 

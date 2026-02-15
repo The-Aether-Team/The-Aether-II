@@ -1,13 +1,11 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
 import com.aetherteam.aetherii.block.natural.BottomedVineBlock;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
-import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesBiomes;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -16,7 +14,6 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
@@ -50,7 +47,7 @@ public class TreeMossCoverFeature extends Feature<NoneFeatureConfiguration> {
                     int zCoord = chunkZ + z;
                     int yCoord = worldGenLevel.getHeight(Heightmap.Types.MOTION_BLOCKING, xCoord, zCoord);
                     BlockPos groundPos = new BlockPos(xCoord, yCoord, zCoord).below();
-                    if (worldGenLevel.getBiome(groundPos).is(HighlandsBiomes.SHROUDED_FOREST) && worldGenLevel.getBlockState(groundPos.above()).isAir()) {
+                    if (worldGenLevel.getBiome(groundPos).is(HolyIslesBiomes.SHROUDED_FOREST) && worldGenLevel.getBlockState(groundPos.above()).isAir()) {
                         double calc = noise.compute(new DensityFunction.SinglePointContext(groundPos.getX(), groundPos.getY(), groundPos.getZ()));
                         if (calc >= 0.05F) {
                             if ((worldGenLevel.getBlockState(groundPos).is(AetherIIBlocks.SKYPLANE_LEAVES)) || worldGenLevel.getBlockState(groundPos).is(AetherIIBlocks.WOVEN_SKYROOT_STICKS)) {

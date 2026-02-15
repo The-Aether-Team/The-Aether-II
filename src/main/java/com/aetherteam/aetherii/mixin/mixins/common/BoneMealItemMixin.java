@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
-import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsPlacedFeatures;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesPlacedFeatures;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.core.BlockPos;
@@ -24,12 +24,12 @@ import java.util.Optional;
 public class BoneMealItemMixin {
     @WrapMethod(method = "growWaterPlant(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z")
     private static boolean growWaterPlant(ItemStack stack, Level level, BlockPos pos, Direction clickedSide, Operation<Boolean> original) {
-        if (level.dimension() == AetherIIDimensions.AETHER_HIGHLANDS_LEVEL) {
+        if (level.dimension() == AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL) {
             if (level.getBlockState(pos).is(Blocks.WATER) && level.getFluidState(pos).getAmount() == 8) {
                 if (level instanceof ServerLevel serverLevel) {
                     RandomSource random = level.getRandom();
                     BlockPos abovePos = pos.above();
-                    Optional<Holder.Reference<PlacedFeature>> featureOptional = level.registryAccess().lookupOrThrow(Registries.PLACED_FEATURE).get(HighlandsPlacedFeatures.ARILUM_BONEMEAL);
+                    Optional<Holder.Reference<PlacedFeature>> featureOptional = level.registryAccess().lookupOrThrow(Registries.PLACED_FEATURE).get(HolyIslesPlacedFeatures.ARILUM_BONEMEAL);
 
                     start:
                     for (int i = 0; i < 128; ++i) {

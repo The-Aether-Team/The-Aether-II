@@ -3,6 +3,12 @@
     "aether_ii:aechor_cutting": {
       "chance": 0.65
     },
+    "aether_ii:aether_bush": {
+      "chance": 0.5
+    },
+    "aether_ii:aether_fern": {
+      "chance": 0.65
+    },
     "aether_ii:amberoot_leaf_pile": {
       "chance": 0.018
     },
@@ -71,12 +77,6 @@
     },
     "aether_ii:hesperose": {
       "chance": 0.65
-    },
-    "aether_ii:highland_fern": {
-      "chance": 0.65
-    },
-    "aether_ii:highlands_bush": {
-      "chance": 0.5
     },
     "aether_ii:lilichime": {
       "chance": 0.65

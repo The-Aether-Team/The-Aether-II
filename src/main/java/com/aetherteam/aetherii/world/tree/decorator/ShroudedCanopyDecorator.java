@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.world.tree.decorator;
 
 import com.aetherteam.aetherii.block.natural.BottomedVineBlock;
-import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsConfiguredFeatures;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesConfiguredFeatures;
 import com.google.common.collect.HashMultimap;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -97,7 +97,7 @@ public class ShroudedCanopyDecorator extends TreeDecorator {
 
             if (context.level() instanceof WorldGenLevel worldGenLevel && context.random().nextDouble() <= this.nestChance) {
                 ChunkGenerator chunk = worldGenLevel.getLevel().getChunkSource().getGenerator();
-                ConfiguredFeature<?, ?> nest = Objects.requireNonNull(worldGenLevel.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HighlandsConfiguredFeatures.MOA_NEST).orElse(null)).value();
+                ConfiguredFeature<?, ?> nest = Objects.requireNonNull(worldGenLevel.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HolyIslesConfiguredFeatures.MOA_NEST).orElse(null)).value();
                 nest.place(worldGenLevel, chunk, context.random(), center.above(2));
             }
         }

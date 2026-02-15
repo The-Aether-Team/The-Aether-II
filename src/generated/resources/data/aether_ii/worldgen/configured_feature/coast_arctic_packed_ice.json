@@ -7,7 +7,7 @@
         "Name": "aether_ii:arctic_packed_ice"
       }
     },
-    "distance_noise": "aether_ii:highlands/coasts/arctic",
+    "distance_noise": "aether_ii:holy_isles/coasts/arctic",
     "size": 16.35,
     "valid_blocks": "aether_ii:arctic_coast_generates_on",
     "vegetation_chance": 0.25,

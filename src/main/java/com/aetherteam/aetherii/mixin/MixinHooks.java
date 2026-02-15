@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.mixin;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
-import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
+import com.aetherteam.aetherii.client.renderer.level.HolyIslesSpecialEffects;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
@@ -188,7 +188,7 @@ public class MixinHooks {
     }
 
     public static ParticleOptions replaceSplashParticles(Entity entity, ParticleOptions particleOptions) {
-        if (entity.level() instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HighlandsSpecialEffects) {
+        if (entity.level() instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HolyIslesSpecialEffects) {
             if (particleOptions == ParticleTypes.SPLASH) {
                 return AetherIIParticleTypes.SPLASH.get();
             }

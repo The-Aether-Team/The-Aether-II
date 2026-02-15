@@ -306,9 +306,9 @@ public class AetherIIRenderers {
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES,
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES,
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES,
-                AetherIIBlocks.HIGHLANDS_BUSH,
+                AetherIIBlocks.AETHER_BUSH,
                 AetherIIBlocks.BLUEBERRY_BUSH,
-                AetherIIBlocks.POTTED_HIGHLANDS_BUSH,
+                AetherIIBlocks.POTTED_AETHER_BUSH,
                 AetherIIBlocks.POTTED_BLUEBERRY_BUSH);
         List<DeferredBlock<? extends Block>> aoBlocks = List.of(
                 AetherIIBlocks.AMBROSIUM_ORE,

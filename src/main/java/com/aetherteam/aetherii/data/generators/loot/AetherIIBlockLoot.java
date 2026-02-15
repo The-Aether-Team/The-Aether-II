@@ -230,7 +230,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.SHORT_AETHER_GRASS.get(), this::createShearsOnlyDrop);
         this.add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get(), this::createShearsOnlyDrop);
         this.add(AetherIIBlocks.TALL_AETHER_GRASS.get(), this::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.HIGHLAND_FERN.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.AETHER_FERN.get(), this::createShearsOnlyDrop);
         this.add(AetherIIBlocks.SHIELD_FERN.get(), this::createShearsOnlyDrop);
 
         // Flowers
@@ -247,7 +247,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Potted Flowers
         this.dropPottedContents(AetherIIBlocks.POTTED_MAGNETIC_SHROOM.get());
-        this.dropPottedContents(AetherIIBlocks.POTTED_HIGHLAND_FERN.get());
+        this.dropPottedContents(AetherIIBlocks.POTTED_AETHER_FERN.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_SHIELD_FERN.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_HESPEROSE.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_TARABLOOM.get());
@@ -260,12 +260,12 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropPottedContents(AetherIIBlocks.POTTED_CARRION_CUTTING.get());
 
         // Bushes
-        this.dropSelf(AetherIIBlocks.HIGHLANDS_BUSH.get());
+        this.dropSelf(AetherIIBlocks.AETHER_BUSH.get());
         this.add(AetherIIBlocks.BLUEBERRY_BUSH.get(), (bush) -> this.droppingBerryBush(getter, bush, AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), AetherIIItems.BLUEBERRY.get()));
         this.dropSelf(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get());
 
         // Potted Bushes
-        this.dropPottedContents(AetherIIBlocks.POTTED_HIGHLANDS_BUSH.get());
+        this.dropPottedContents(AetherIIBlocks.POTTED_AETHER_BUSH.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_BLUEBERRY_BUSH.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM.get());
 

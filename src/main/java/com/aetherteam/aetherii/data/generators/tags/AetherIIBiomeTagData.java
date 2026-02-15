@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.data.generators.tags;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesBiomes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BiomeTagsProvider;
@@ -18,43 +18,43 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
     @SuppressWarnings("unchecked")
     @Override
     public void addTags(HolderLookup.Provider provider) {
-        this.tag(AetherIITags.Biomes.HIGHLANDS).addTags(
+        this.tag(AetherIITags.Biomes.HOLY_ISLES).addTags(
                 AetherIITags.Biomes.HIGHFIELDS,
                 AetherIITags.Biomes.MAGNETIC,
                 AetherIITags.Biomes.ARCTIC,
                 AetherIITags.Biomes.IRRADIATED,
                 AetherIITags.Biomes.EXPANSE);
         this.tag(AetherIITags.Biomes.HIGHFIELDS).add(
-                HighlandsBiomes.FLOURISHING_FIELD,
-                HighlandsBiomes.VERDANT_WOODS,
-                HighlandsBiomes.SHROUDED_FOREST,
-                HighlandsBiomes.SHIMMERING_BASIN);
+                HolyIslesBiomes.FLOURISHING_FIELD,
+                HolyIslesBiomes.VERDANT_WOODS,
+                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.SHIMMERING_BASIN);
         this.tag(AetherIITags.Biomes.MAGNETIC).add(
-                HighlandsBiomes.MAGNETIC_SCAR,
-                HighlandsBiomes.TURQUOISE_FOREST,
-                HighlandsBiomes.GLISTENING_SWAMP,
-                HighlandsBiomes.VIOLET_HIGHWOODS);
-        this.tag(AetherIITags.Biomes.MAGNETIC_FOG).add(HighlandsBiomes.GLISTENING_SWAMP);
+                HolyIslesBiomes.MAGNETIC_SCAR,
+                HolyIslesBiomes.TURQUOISE_FOREST,
+                HolyIslesBiomes.GLISTENING_SWAMP,
+                HolyIslesBiomes.VIOLET_HIGHWOODS);
+        this.tag(AetherIITags.Biomes.MAGNETIC_FOG).add(HolyIslesBiomes.GLISTENING_SWAMP);
         this.tag(AetherIITags.Biomes.ARCTIC).add(
-                HighlandsBiomes.FRIGID_SIERRA,
-                HighlandsBiomes.ENDURING_WOODLAND,
-                HighlandsBiomes.FROZEN_LAKES,
-                HighlandsBiomes.SHEER_TUNDRA);
+                HolyIslesBiomes.FRIGID_SIERRA,
+                HolyIslesBiomes.ENDURING_WOODLAND,
+                HolyIslesBiomes.FROZEN_LAKES,
+                HolyIslesBiomes.SHEER_TUNDRA);
         this.tag(AetherIITags.Biomes.IRRADIATED).add(
-                HighlandsBiomes.CONTAMINATED_JUNGLE,
-                HighlandsBiomes.BATTLEGROUND_WASTES);
-        this.tag(AetherIITags.Biomes.EXPANSE).add(HighlandsBiomes.EXPANSE);
+                HolyIslesBiomes.CONTAMINATED_JUNGLE,
+                HolyIslesBiomes.BATTLEGROUND_WASTES);
+        this.tag(AetherIITags.Biomes.EXPANSE).add(HolyIslesBiomes.EXPANSE);
 
         this.tag(AetherIITags.Biomes.LUSH).add(
-                HighlandsBiomes.VERDANT_WOODS,
-                HighlandsBiomes.SHROUDED_FOREST,
-                HighlandsBiomes.TURQUOISE_FOREST,
-                HighlandsBiomes.VIOLET_HIGHWOODS,
-                HighlandsBiomes.ENDURING_WOODLAND);
+                HolyIslesBiomes.VERDANT_WOODS,
+                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.TURQUOISE_FOREST,
+                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.ENDURING_WOODLAND);
         this.tag(AetherIITags.Biomes.WET).add(
-                HighlandsBiomes.SHIMMERING_BASIN,
-                HighlandsBiomes.GLISTENING_SWAMP,
-                HighlandsBiomes.FROZEN_LAKES);
+                HolyIslesBiomes.SHIMMERING_BASIN,
+                HolyIslesBiomes.GLISTENING_SWAMP,
+                HolyIslesBiomes.FROZEN_LAKES);
 
         this.tag(AetherIITags.Biomes.MYCELIUM_CONVERSION).add(Biomes.MUSHROOM_FIELDS);
         this.tag(AetherIITags.Biomes.PODZOL_CONVERSION).add(
@@ -65,102 +65,102 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
         this.tag(AetherIITags.Biomes.WARPED_NYLIUM_CONVERSION).add(Biomes.WARPED_FOREST);
 
         this.tag(AetherIITags.Biomes.ARCTIC_ICE).add(
-                HighlandsBiomes.FLOURISHING_FIELD,
-                HighlandsBiomes.VERDANT_WOODS,
-                HighlandsBiomes.SHROUDED_FOREST,
-                HighlandsBiomes.SHIMMERING_BASIN,
-                HighlandsBiomes.MAGNETIC_SCAR,
-                HighlandsBiomes.TURQUOISE_FOREST,
-                HighlandsBiomes.GLISTENING_SWAMP,
-                HighlandsBiomes.VIOLET_HIGHWOODS,
-                HighlandsBiomes.FRIGID_SIERRA,
-                HighlandsBiomes.ENDURING_WOODLAND,
-                HighlandsBiomes.FROZEN_LAKES,
-                HighlandsBiomes.SHEER_TUNDRA,
-                HighlandsBiomes.CONTAMINATED_JUNGLE,
-                HighlandsBiomes.BATTLEGROUND_WASTES,
-                HighlandsBiomes.EXPANSE
+                HolyIslesBiomes.FLOURISHING_FIELD,
+                HolyIslesBiomes.VERDANT_WOODS,
+                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.SHIMMERING_BASIN,
+                HolyIslesBiomes.MAGNETIC_SCAR,
+                HolyIslesBiomes.TURQUOISE_FOREST,
+                HolyIslesBiomes.GLISTENING_SWAMP,
+                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.FRIGID_SIERRA,
+                HolyIslesBiomes.ENDURING_WOODLAND,
+                HolyIslesBiomes.FROZEN_LAKES,
+                HolyIslesBiomes.SHEER_TUNDRA,
+                HolyIslesBiomes.CONTAMINATED_JUNGLE,
+                HolyIslesBiomes.BATTLEGROUND_WASTES,
+                HolyIslesBiomes.EXPANSE
         );
 
         this.tag(AetherIITags.Biomes.AETHER_MUSIC).add(
-                HighlandsBiomes.FLOURISHING_FIELD,
-                HighlandsBiomes.VERDANT_WOODS,
-                HighlandsBiomes.SHROUDED_FOREST,
-                HighlandsBiomes.SHIMMERING_BASIN,
-                HighlandsBiomes.MAGNETIC_SCAR,
-                HighlandsBiomes.TURQUOISE_FOREST,
-                HighlandsBiomes.GLISTENING_SWAMP,
-                HighlandsBiomes.VIOLET_HIGHWOODS,
-                HighlandsBiomes.FRIGID_SIERRA,
-                HighlandsBiomes.ENDURING_WOODLAND,
-                HighlandsBiomes.FROZEN_LAKES,
-                HighlandsBiomes.SHEER_TUNDRA,
-                HighlandsBiomes.CONTAMINATED_JUNGLE,
-                HighlandsBiomes.BATTLEGROUND_WASTES,
-                HighlandsBiomes.EXPANSE,
-                HighlandsBiomes.HESTVEIL_CAVERNS
+                HolyIslesBiomes.FLOURISHING_FIELD,
+                HolyIslesBiomes.VERDANT_WOODS,
+                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.SHIMMERING_BASIN,
+                HolyIslesBiomes.MAGNETIC_SCAR,
+                HolyIslesBiomes.TURQUOISE_FOREST,
+                HolyIslesBiomes.GLISTENING_SWAMP,
+                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.FRIGID_SIERRA,
+                HolyIslesBiomes.ENDURING_WOODLAND,
+                HolyIslesBiomes.FROZEN_LAKES,
+                HolyIslesBiomes.SHEER_TUNDRA,
+                HolyIslesBiomes.CONTAMINATED_JUNGLE,
+                HolyIslesBiomes.BATTLEGROUND_WASTES,
+                HolyIslesBiomes.EXPANSE,
+                HolyIslesBiomes.HESTVEIL_CAVERNS
         );
 
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_OUTPOST).add(
-                HighlandsBiomes.FLOURISHING_FIELD,
-                HighlandsBiomes.VERDANT_WOODS,
-                HighlandsBiomes.SHROUDED_FOREST,
-                HighlandsBiomes.MAGNETIC_SCAR,
-                HighlandsBiomes.TURQUOISE_FOREST,
-                HighlandsBiomes.GLISTENING_SWAMP,
-                HighlandsBiomes.VIOLET_HIGHWOODS,
-                HighlandsBiomes.FRIGID_SIERRA,
-                HighlandsBiomes.ENDURING_WOODLAND,
-                HighlandsBiomes.SHEER_TUNDRA
+                HolyIslesBiomes.FLOURISHING_FIELD,
+                HolyIslesBiomes.VERDANT_WOODS,
+                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.MAGNETIC_SCAR,
+                HolyIslesBiomes.TURQUOISE_FOREST,
+                HolyIslesBiomes.GLISTENING_SWAMP,
+                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.FRIGID_SIERRA,
+                HolyIslesBiomes.ENDURING_WOODLAND,
+                HolyIslesBiomes.SHEER_TUNDRA
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_CAMP_HIGHFIELDS).add(
-                HighlandsBiomes.FLOURISHING_FIELD,
-                HighlandsBiomes.VERDANT_WOODS
+                HolyIslesBiomes.FLOURISHING_FIELD,
+                HolyIslesBiomes.VERDANT_WOODS
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_CAMP_MAGNETIC).add(
-                HighlandsBiomes.MAGNETIC_SCAR,
-                HighlandsBiomes.TURQUOISE_FOREST,
-                HighlandsBiomes.VIOLET_HIGHWOODS
+                HolyIslesBiomes.MAGNETIC_SCAR,
+                HolyIslesBiomes.TURQUOISE_FOREST,
+                HolyIslesBiomes.VIOLET_HIGHWOODS
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_CAMP_ARCTIC).add(
-                HighlandsBiomes.FRIGID_SIERRA,
-                HighlandsBiomes.ENDURING_WOODLAND,
-                HighlandsBiomes.SHEER_TUNDRA
+                HolyIslesBiomes.FRIGID_SIERRA,
+                HolyIslesBiomes.ENDURING_WOODLAND,
+                HolyIslesBiomes.SHEER_TUNDRA
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_WATCHTOWER).add(
-                HighlandsBiomes.FLOURISHING_FIELD,
-                HighlandsBiomes.VERDANT_WOODS,
-                HighlandsBiomes.SHROUDED_FOREST,
-                HighlandsBiomes.MAGNETIC_SCAR,
-                HighlandsBiomes.TURQUOISE_FOREST,
-                HighlandsBiomes.GLISTENING_SWAMP,
-                HighlandsBiomes.VIOLET_HIGHWOODS,
-                HighlandsBiomes.FRIGID_SIERRA,
-                HighlandsBiomes.ENDURING_WOODLAND,
-                HighlandsBiomes.SHEER_TUNDRA
+                HolyIslesBiomes.FLOURISHING_FIELD,
+                HolyIslesBiomes.VERDANT_WOODS,
+                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.MAGNETIC_SCAR,
+                HolyIslesBiomes.TURQUOISE_FOREST,
+                HolyIslesBiomes.GLISTENING_SWAMP,
+                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.FRIGID_SIERRA,
+                HolyIslesBiomes.ENDURING_WOODLAND,
+                HolyIslesBiomes.SHEER_TUNDRA
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_SENTRY_RUINS).add(
-                HighlandsBiomes.FLOURISHING_FIELD,
-                HighlandsBiomes.VERDANT_WOODS,
-                HighlandsBiomes.SHROUDED_FOREST,
-                HighlandsBiomes.MAGNETIC_SCAR,
-                HighlandsBiomes.TURQUOISE_FOREST,
-                HighlandsBiomes.GLISTENING_SWAMP,
-                HighlandsBiomes.VIOLET_HIGHWOODS,
-                HighlandsBiomes.FRIGID_SIERRA,
-                HighlandsBiomes.ENDURING_WOODLAND,
-                HighlandsBiomes.SHEER_TUNDRA,
-                HighlandsBiomes.CONTAMINATED_JUNGLE,
-                HighlandsBiomes.BATTLEGROUND_WASTES
+                HolyIslesBiomes.FLOURISHING_FIELD,
+                HolyIslesBiomes.VERDANT_WOODS,
+                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.MAGNETIC_SCAR,
+                HolyIslesBiomes.TURQUOISE_FOREST,
+                HolyIslesBiomes.GLISTENING_SWAMP,
+                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.FRIGID_SIERRA,
+                HolyIslesBiomes.ENDURING_WOODLAND,
+                HolyIslesBiomes.SHEER_TUNDRA,
+                HolyIslesBiomes.CONTAMINATED_JUNGLE,
+                HolyIslesBiomes.BATTLEGROUND_WASTES
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_INFECTED_GUARDIAN_TREE).add(
-                HighlandsBiomes.FLOURISHING_FIELD,
-                HighlandsBiomes.VERDANT_WOODS,
-                HighlandsBiomes.SHROUDED_FOREST,
-                HighlandsBiomes.MAGNETIC_SCAR,
-                HighlandsBiomes.VIOLET_HIGHWOODS,
-                HighlandsBiomes.ENDURING_WOODLAND,
-                HighlandsBiomes.SHEER_TUNDRA
+                HolyIslesBiomes.FLOURISHING_FIELD,
+                HolyIslesBiomes.VERDANT_WOODS,
+                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.MAGNETIC_SCAR,
+                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.ENDURING_WOODLAND,
+                HolyIslesBiomes.SHEER_TUNDRA
         );
     }
 }

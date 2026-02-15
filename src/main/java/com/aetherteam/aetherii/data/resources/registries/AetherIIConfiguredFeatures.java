@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.data.resources.registries;
 
-import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsConfiguredFeatures;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesConfiguredFeatures;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
@@ -11,6 +11,6 @@ public class AetherIIConfiguredFeatures {
      Based on {@link net.minecraft.data.worldgen.features.FeatureUtils}
      */
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
-        HighlandsConfiguredFeatures.bootstrap(context);
+        HolyIslesConfiguredFeatures.bootstrap(context);
     }
 }
