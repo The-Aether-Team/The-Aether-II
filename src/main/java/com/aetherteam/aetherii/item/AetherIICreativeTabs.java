@@ -672,6 +672,13 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ZANITE_SHEARS.get());
                 output.accept(AetherIIItems.SKYROOT_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_WATER_BUCKET.get());
+                output.accept(AetherIIItems.SKYROOT_PUFFERFISH_BUCKET.get());
+                output.accept(AetherIIItems.SKYROOT_SALMON_BUCKET.get());
+                output.accept(AetherIIItems.SKYROOT_COD_BUCKET.get());
+                output.accept(AetherIIItems.SKYROOT_TROPICAL_FISH_BUCKET.get());
+                output.accept(AetherIIItems.SKYROOT_AXOLOTL_BUCKET.get());
+                output.accept(AetherIIItems.SKYROOT_TADPOLE_BUCKET.get());
+                output.accept(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_MILK_BUCKET.get());
                 output.accept(AetherIIItems.ARKENIUM_CANISTER.get());
                 output.accept(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER.get());
