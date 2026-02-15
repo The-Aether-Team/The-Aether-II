@@ -15,6 +15,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,8 @@ public class AetherIIPlayerAttachment {
     public List<EntityType<?>> stuckProjectiles = new ArrayList<>();
     public int removeStuckProjectileTime = 0;
 
+    private boolean sentChatMessage = false;
+
 //    private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
 //            Map.entry("setMoving", Triple.of(Type.BOOLEAN, (object) -> this.setMoving((boolean) object), this::isMoving)),
 //            Map.entry("setJumping", Triple.of(Type.BOOLEAN, (object) -> this.setJumping((boolean) object), this::isJumping)),
@@ -50,7 +54,8 @@ public class AetherIIPlayerAttachment {
             Codec.BOOL.fieldOf("is_moving").forGetter(AetherIIPlayerAttachment::isMoving),
             Codec.BOOL.fieldOf("is_jumping").forGetter(AetherIIPlayerAttachment::isJumping),
             Codec.BOOL.fieldOf("can_get_portal").forGetter(AetherIIPlayerAttachment::canGetPortal),
-            Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(AetherIIPlayerAttachment::canSpawnInAether)
+            Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(AetherIIPlayerAttachment::canSpawnInAether),
+            Codec.BOOL.fieldOf("sent_chat_message").forGetter((attachment) -> attachment.sentChatMessage)
     ).apply(instance, AetherIIPlayerAttachment::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, AetherIIPlayerAttachment> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.BOOL, AetherIIPlayerAttachment::isMoving,
@@ -60,11 +65,12 @@ public class AetherIIPlayerAttachment {
 
     private boolean shouldSyncBetweenClients;
 
-    protected AetherIIPlayerAttachment(boolean isMoving, boolean isJumping, boolean canGetPortal, boolean canSpawnInAether) {
+    protected AetherIIPlayerAttachment(boolean isMoving, boolean isJumping, boolean canGetPortal, boolean canSpawnInAether, boolean sentChatMessage) {
         this.isMoving = isMoving;
         this.isJumping = isJumping;
         this.canGetPortal = canGetPortal;
         this.canSpawnInAether = canSpawnInAether;
+        this.sentChatMessage = sentChatMessage;
     }
 
     protected AetherIIPlayerAttachment(boolean canGetPortal, boolean canSpawnInAether, List<EntityType<?>> stuckProjectiles) {
@@ -88,16 +94,21 @@ public class AetherIIPlayerAttachment {
     public void login(Player player) {
         this.startInAether(player);
 
-
-        if (player instanceof ServerPlayer serverPlayer) {
-            serverPlayer.sendSystemMessage(Component.literal("test"));
-        }
     }
 
     public void onJoinLevel(Player player) {
 //        if (player.level().isClientSide() && player.isLocalPlayer()) {
 //            this.setSynched(player.getId(), Direction.SERVER, "setShouldSyncBetweenClients", true);
 //        }
+    }
+
+    public void changeDimension(Player player, ResourceKey<Level> to) {
+//        if (to == AetherII)
+
+        if (player instanceof ServerPlayer serverPlayer && !this.sentChatMessage) {
+            serverPlayer.sendSystemMessage(Component.literal("test"));
+            this.sentChatMessage = true;
+        }
     }
 
     /**
