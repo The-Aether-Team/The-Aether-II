@@ -2,6 +2,10 @@
   "spawn_biomes": {
     "spawn_conditions": [
       {
+        "condition": {
+          "type": "minecraft:biome",
+          "biomes": "#aether_ii:highlands"
+        },
         "priority": 1
       }
     ]

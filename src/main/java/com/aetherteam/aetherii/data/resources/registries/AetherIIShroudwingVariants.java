@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class AetherIIShroudwingVariants {
-    public static final ResourceKey<ShroudwingVariant> PURPLE = createKey("purple");
     public static final ResourceKey<ShroudwingVariant> SCARAB = createKey("scarab");
+    public static final ResourceKey<ShroudwingVariant> PURPLE = createKey("purple");
     public static final ResourceKey<ShroudwingVariant> FIRE = createKey("fire");
     public static final ResourceKey<ShroudwingVariant> ORE = createKey("ore");
     public static final ResourceKey<ShroudwingVariant> ARCTIC = createKey("arctic");
@@ -30,8 +30,8 @@ public class AetherIIShroudwingVariants {
     }
 
     public static void bootstrap(BootstrapContext<ShroudwingVariant> context) {
-        register(context, PURPLE, SpawnPrioritySelectors.fallback(1));
-        register(context, SCARAB, biomes(context, AetherIITags.Biomes.MAGNETIC));
+        register(context, SCARAB, SpawnPrioritySelectors.fallback(1));
+        register(context, PURPLE, biomes(context, AetherIITags.Biomes.HIGHLANDS));
         register(context, FIRE, random(biomeCheck(context, AetherIITags.Biomes.HIGHFIELDS), 100, 50));
         register(context, ORE, biomes(context, AetherIITags.Biomes.HIGHLANDS));
         register(context, ARCTIC, biomes(context, AetherIITags.Biomes.ARCTIC));
