@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.monster.PlantMob;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.BrokenStack;
@@ -55,7 +56,7 @@ public class MixinHooks {
             float sweepRange = (float) player.getAttributeValue(AetherIIAttributes.SWEEP_RANGE);
             if (sweepRange > 0) {
                 for (LivingEntity other : player.level().getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(sweepRange, sweepRange, sweepRange))) {
-                    if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker())) {
+                    if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker()) && !(other instanceof PlantMob)) {
                         float sweepKnockback = (float) player.getAttributeValue(AetherIIAttributes.SWEEP_KNOCKBACK);
                         float sweepDamage = (float) player.getAttributeValue(AetherIIAttributes.SWEEP_DAMAGE);
                         if (sweepKnockback > 0) {
@@ -85,7 +86,7 @@ public class MixinHooks {
             float shockRange = (float) player.getAttributeValue(AetherIIAttributes.SHOCK_RANGE);
             if (shockRange > 0) {
                 for (LivingEntity other : player.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(shockRange, shockRange, shockRange))) {
-                    if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker())) {
+                    if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker()) && !(other instanceof PlantMob)) {
                         double x = target.position().x() - other.position().x();
                         double z = target.position().z() - other.position().z();
                         if (x > 0) {
@@ -127,7 +128,7 @@ public class MixinHooks {
             float stabDistance = (float) player.getAttributeValue(AetherIIAttributes.STAB_DISTANCE);
             if (stabRadius > 0 || stabDistance > 0) {
                 for (LivingEntity other : player.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(stabDistance, stabDistance, stabDistance), (other) -> withinStabDistance(player, target, other, stabRadius, stabDistance))) {
-                    if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker())) {
+                    if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker()) && !(other instanceof PlantMob)) {
                         float stabKnockback = (float) player.getAttributeValue(AetherIIAttributes.STAB_KNOCKBACK);
                         float stabDamage = (float) player.getAttributeValue(AetherIIAttributes.STAB_DAMAGE);
                         if (stabKnockback > 0) {
