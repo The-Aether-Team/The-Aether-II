@@ -112,17 +112,22 @@ public class AetherIIPlayerAttachment {
     public void changeDimension(Player player, ResourceKey<Level> to) {
         if (to == AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL) {
             if (player instanceof ServerPlayer serverPlayer && !this.sentChatMessage) {
-                CommonDialogData dialogData = new CommonDialogData(Component.literal("test"), Optional.empty(), true, true, DialogAction.CLOSE, List.of(), List.of());
-                CommonButtonData buttonData = new CommonButtonData(Component.literal("button"), Optional.empty(), 200);
 
-                ActionButton actionButton = new ActionButton(buttonData, Optional.empty());
-
-                NoticeDialog dialog = new NoticeDialog(dialogData, actionButton);
-
-                serverPlayer.sendSystemMessage(Component.literal("test").withStyle(Style.EMPTY.withClickEvent(new ClickEvent.ShowDialog(Holder.direct(dialog)))));
+                serverPlayer.sendSystemMessage(Component.literal("test").withStyle(Style.EMPTY.withClickEvent(new ClickEvent.ShowDialog(Holder.direct(getDialog())))));
                 this.sentChatMessage = true;
             }
         }
+    }
+
+    public static NoticeDialog getDialog() {
+        CommonDialogData dialogData = new CommonDialogData(Component.literal("test"), Optional.empty(), true, true, DialogAction.CLOSE, List.of(), List.of());
+        CommonButtonData buttonData = new CommonButtonData(Component.literal("button"), Optional.empty(), 200);
+
+        ActionButton actionButton = new ActionButton(buttonData, Optional.empty());
+
+        NoticeDialog dialog = new NoticeDialog(dialogData, actionButton);
+
+        return dialog;
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.client.event.hooks.AudioHooks;
 import com.aetherteam.aetherii.client.event.hooks.RenderHooks;
 import com.aetherteam.aetherii.client.event.listeners.LevelClientListener;
@@ -11,13 +12,17 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.ClientInput;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.MusicInfo;
 import net.minecraft.client.sounds.SoundEngine;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
@@ -88,6 +93,13 @@ public class AetherIIClientEventListeners {
         Button outpostRespawnButton = RenderHooks.setupOutpostRespawnButton(screen, listeners);
         if (outpostRespawnButton != null) {
             event.addListener(outpostRespawnButton);
+        }
+
+        if (screen instanceof PauseScreen pauseScreen) {
+            Button button = Button.builder(Component.literal("A"), (b) -> pauseScreen.handleComponentClicked(Style.EMPTY.withClickEvent(new ClickEvent.ShowDialog(Holder.direct(AetherIIPlayerAttachment.getDialog())))))
+                    .bounds(4, 4, 20, 20)
+                    .build();
+            event.addListener(button);
         }
     }
 
