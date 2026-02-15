@@ -1582,8 +1582,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("outpost_campfire", "Community Hotspot");
         this.addAdvancement("glint", "Who wants to be a Glintillionaire?");
         this.addAdvancement("bestiary", "The Beast");
-        this.addAdvancement("ambrosium", "Enlightenment");
+        this.addAdvancement("trowel", "Highfields Valley");
         this.addAdvancement("enchanted_aether_grass", "Golden Thumb");
+        this.addAdvancement("plant_cutting", "Weed Whacking");
+        this.addAdvancement("ambrosium", "Enlightenment");
         this.addAdvancement("golden_amber", "Wisdom of the Ancients");
         this.addAdvancement("amber_hourglass", "What's Old is New Again");
         this.addAdvancement("zanite", "Exotic Hardware");
@@ -1621,8 +1623,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("outpost_campfire", "Set a secondary respawn point at an Outpost Campfire");
         this.addAdvancementDesc("glint", "Earn at least 100 Glint Coins");
         this.addAdvancementDesc("bestiary", "Fill out the entire bestiary");
-        this.addAdvancementDesc("ambrosium", "Obtain an Ambrosium Shard");
+        this.addAdvancementDesc("trowel", "Harvest drops from a wild plant using any Trowel");
         this.addAdvancementDesc("enchanted_aether_grass", "Enchant an Aether Grass Block with an Ambrosium Shard to speed up plant growth above it");
+        this.addAdvancementDesc("plant_cutting", "Harvest a cutting from an Aechor Plant or Carrion Sprout by killing with any Trowel");
+        this.addAdvancementDesc("ambrosium", "Obtain an Ambrosium Shard");
         this.addAdvancementDesc("golden_amber", "Harvest Golden Amber from an Amberoot tree using the proper tool");
         this.addAdvancementDesc("amber_hourglass", "Craft an Amber Hourglass");
         this.addAdvancementDesc("zanite", "Restore Fossilized Zanite into a Zanite Gemstone using the Amber Hourglass");
