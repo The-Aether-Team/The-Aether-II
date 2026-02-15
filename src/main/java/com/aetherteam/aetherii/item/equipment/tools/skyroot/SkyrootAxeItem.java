@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 public class SkyrootAxeItem extends AxeItem implements SkyrootTool {
     public SkyrootAxeItem(Properties properties) {
-        super(AetherIIItemTiers.SKYROOT, 6.0F, -3.2F, properties);
+        super(AetherIIItemTiers.SKYROOT, 1.5F, -3.2F, properties);
     }
 
     @Override

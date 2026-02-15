@@ -11,7 +11,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 public class GravititeAxeItem extends AxeItem implements GravititeTool {
     public GravititeAxeItem(Properties properties) {
-        super(AetherIIItemTiers.GRAVITITE, 5.0F, -3.0F, properties);
+        super(AetherIIItemTiers.GRAVITITE, 1.5F, -3.2F, properties);
     }
 
     @Override
