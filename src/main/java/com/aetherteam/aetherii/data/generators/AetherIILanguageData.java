@@ -1606,7 +1606,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addAdvancementDesc("the_highlands", "It's not dead!");
         this.addAdvancementDesc("enter_highlands", "Enter the Aether");
-        this.addAdvancementDesc("aerbunny", "Interact with an Aerbunny to put it on your head");
+        this.addAdvancementDesc("aerbunny", "Interact with a tamed Aerbunny to put it on your head");
         this.addAdvancementDesc("blue_aercloud", "Bounce on a Blue Aercloud");
         this.addAdvancementDesc("cloud_skiff", "Ride a Cloud Skiff for better movement on the Cloud Sea");
         this.addAdvancementDesc("aercloud_glider", "Use an Aercloud Glider for better mid-air movement");
