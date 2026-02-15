@@ -1556,6 +1556,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("toast.guidebook.effects", "New Effects Entry!");
         this.addGuiText("toast.guidebook.exploration", "New Exploration Entry!");
         this.addGuiText("toast.guidebook.description", "Check your Guidebook");
+        this.addGuiText("plant.message.attack.invalid", "Hmm. Perhaps I need to attack it with a Trowel?");
         this.addGuiText("slider.message.attack.invalid", "Hmm. Perhaps I need to attack it with a Pickaxe?");
         this.addGuiText("slider.title", "Slider %s");
 

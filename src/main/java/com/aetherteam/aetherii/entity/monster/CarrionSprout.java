@@ -28,7 +28,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-public class CarrionSprout extends PathfinderMob implements PlantCuttingMob {
+public class CarrionSprout extends PlantMob implements PlantCuttingMob {
     private static final EntityDataAccessor<Boolean> DATA_TRAP_ID = SynchedEntityData.defineId(CarrionSprout.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_TRAP_TRIGGER_ID = SynchedEntityData.defineId(CarrionSprout.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_PLAYER_GROWN_ID = SynchedEntityData.defineId(CarrionSprout.class, EntityDataSerializers.BOOLEAN);
