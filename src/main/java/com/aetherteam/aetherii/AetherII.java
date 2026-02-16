@@ -215,6 +215,7 @@ public class AetherII {
         registrar.playToClient(AerbunnyMessagePacket.TYPE, AerbunnyMessagePacket.STREAM_CODEC, AerbunnyMessagePacket::execute);
         registrar.playToClient(AlkahestDamageBlockPacket.TYPE, AlkahestDamageBlockPacket.STREAM_CODEC, AlkahestDamageBlockPacket::execute);
         registrar.playToClient(AlkahestFizzPacket.TYPE, AlkahestFizzPacket.STREAM_CODEC, AlkahestFizzPacket::execute);
+        registrar.playToClient(AlkahestItemSmokePacket.TYPE, AlkahestItemSmokePacket.STREAM_CODEC, AlkahestItemSmokePacket::execute);
         registrar.playToClient(AltarParticlesPacket.TYPE, AltarParticlesPacket.STREAM_CODEC, AltarParticlesPacket::execute);
         registrar.playToClient(AttackShockParticlePacket.TYPE, AttackShockParticlePacket.STREAM_CODEC, AttackShockParticlePacket::execute);
         registrar.playToClient(AttackStabParticlePacket.TYPE, AttackStabParticlePacket.STREAM_CODEC, AttackStabParticlePacket::execute);

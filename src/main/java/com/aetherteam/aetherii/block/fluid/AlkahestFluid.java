@@ -15,6 +15,7 @@ import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.LevelRendererAccessor;
 import com.aetherteam.aetherii.network.packet.clientbound.AlkahestDamageBlockPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.AlkahestFizzPacket;
+import com.aetherteam.aetherii.network.packet.clientbound.AlkahestItemSmokePacket;
 import com.aetherteam.aetherii.network.packet.serverbound.AlkahestBreakBlockPacket;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
@@ -164,14 +165,7 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
             if (!itemStack.is(AetherIITags.Items.ALKAHEST_RESISTANT_ITEM) && !itemStack.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
                 int newLifespanValue = itemEntity.lifespan - 15;
 
-                if (entity.level().isClientSide()) { //todo this no longer works its always false
-                    for (int i = 0; i < 2; ++i) {
-                        double d0 = random.nextGaussian() * 0.02;
-                        double d1 = random.nextGaussian() * 0.02;
-                        double d2 = random.nextGaussian() * 0.02;
-                        level.addParticle(ParticleTypes.WHITE_SMOKE, itemEntity.getX(), (itemEntity.getY() + itemEntity.getBoundingBox().getYsize()), itemEntity.getZ(), d0, d1, d2);
-                    }
-                }
+                PacketDistributor.sendToAllPlayers(new AlkahestItemSmokePacket(new Vec3(itemEntity.getX(), (itemEntity.getY() + itemEntity.getBoundingBox().getYsize()), itemEntity.getZ())));
                 if (itemEntity.lifespan <= 500) {
                     if (itemStack.is(AetherIITags.Items.UNBREAKABLE_LOOT)) {
                         itemEntity.discard();
