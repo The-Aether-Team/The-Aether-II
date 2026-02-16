@@ -11,6 +11,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.*;
@@ -28,18 +31,28 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class CloudSkiff extends AbstractBoat implements RiderSitContext {
+    protected static final EntityDataAccessor<Boolean> DATA_ANIMATE_UNFOLD = SynchedEntityData.defineId(CloudSkiff.class, EntityDataSerializers.BOOLEAN);
+    public AnimationState unfoldAnimationState = new AnimationState();
     public float steering = 0.0F;
     public float steeringO = 0.0F;
-    public float wingLift = 0.2618F * Mth.RAD_TO_DEG;
-    public float wingLiftO = 0.2618F * Mth.RAD_TO_DEG;
+    public float wingLift = 0.0F;
+    public float wingLiftO = 0.0F;
 
     public CloudSkiff(EntityType<CloudSkiff> entityType, Level level) {
         super(entityType, level, AetherIIItems.CLOUD_SKIFF);
-        this.blocksBuilding = true;
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_ANIMATE_UNFOLD, false);
     }
 
     @Override
     public void tick() {
+        if (this.animateUnfold()) {
+            this.setAnimateUnfold(false);
+        }
         AbstractBoatAccessor accessor = (AbstractBoatAccessor) this;
         if (this.getControllingPassenger() instanceof Player || !this.level().isClientSide()) {
             if (this.getInBlockState().is(AetherIITags.Blocks.AERCLOUDS)) {
@@ -65,9 +78,9 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
 
         this.wingLiftO = this.wingLift;
         if (accessor.callGetStatus() == Status.IN_AIR || accessor.callGetStatus() == Status.UNDER_WATER) {
-            this.wingLift = Mth.lerp(0.1F, this.wingLift, 0.0F);
+            this.wingLift = Mth.lerp(0.1F, this.wingLift, -0.2618F * Mth.RAD_TO_DEG);
         } else {
-            this.wingLift = Mth.lerp(0.25F, this.wingLift, 0.2618F * Mth.RAD_TO_DEG);
+            this.wingLift = Mth.lerp(0.25F, this.wingLift, 0.0F);
         }
 
         if (accessor.aether$getInputUp() || accessor.aether$getInputRight() || accessor.aether$getInputLeft()) {
@@ -174,5 +187,13 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
     @Override
     public Vec3[] getQuadLeashOffsets() {
         return Leashable.createQuadLeashOffsets(this, 0.0F, 0.57F, 0.382, 0.88);
+    }
+
+    public boolean animateUnfold() {
+        return this.getEntityData().get(DATA_ANIMATE_UNFOLD);
+    }
+
+    public void setAnimateUnfold(boolean animate) {
+        this.getEntityData().set(DATA_ANIMATE_UNFOLD, animate);
     }
 }

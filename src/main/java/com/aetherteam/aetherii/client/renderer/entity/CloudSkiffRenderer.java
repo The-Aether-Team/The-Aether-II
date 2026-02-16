@@ -9,7 +9,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -31,6 +30,9 @@ public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRen
     @Override
     public void render(CloudSkiffRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.pushPose();
+        if (!renderState.unfoldAnimationState.isStarted() && renderState.animateUnfold) {
+            renderState.unfoldAnimationState.startIfStopped(renderState.animationTick);
+        }
         poseStack.translate(0.0F, 0.375F, 0.0F);
         poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - renderState.yRot));
         float f = renderState.hurtTime;
@@ -65,6 +67,11 @@ public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRen
     @Override
     public void extractRenderState(CloudSkiff entity, CloudSkiffRenderState reusedState, float partialTick) {
         super.extractRenderState(entity, reusedState, partialTick);
+        if (entity.tickCount == 0) {
+            reusedState.unfoldAnimationState.copyFrom(entity.unfoldAnimationState);
+        }
+        reusedState.animationTick = entity.tickCount;
+        reusedState.animateUnfold = entity.animateUnfold();
         reusedState.yRot = entity.getYRot(partialTick);
         reusedState.hurtTime = (float) entity.getHurtTime() - partialTick;
         reusedState.hurtDir = entity.getHurtDir();
