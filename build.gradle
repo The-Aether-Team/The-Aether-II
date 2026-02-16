@@ -12,7 +12,7 @@ tasks.named('wrapper', Wrapper).configure {
     distributionType = Wrapper.DistributionType.BIN
 }
 
-version = "${minecraft_version}-${mod_version}-neoforge"
+version = "${minecraft_version}-alpha.1-neoforge"
 group = mod_group
 
 base {
@@ -190,46 +190,42 @@ publishing {
     }
 }
 
-//curseforge {
-//    project {
-//        apiKey = System.getenv("CURSEFORGE_TOKEN")
-//        id = "${curseforge_id}"
-//        releaseType = "${version_type}"
-//        changelog = file("$rootDir/docs/CHANGELOG.md")
-//        changelogType = "markdown"
-//        addGameVersion("${minecraft_version}")
-//        addGameVersion("NeoForge")
-//        mainArtifact(tasks.jarJar) {
-//            displayName = "${mod_name} - ${version}"
-//            relations {
-//                requiredDependency "owo"
-//                embeddedLibrary "accessories"
-//                embeddedLibrary "cumulus"
-//            }
-//        }
-//    }
-//    options {
-//        debug = true
-//    }
-//}
-//
-//modrinth {
-//    token = System.getenv("MODRINTH_TOKEN")
-//    projectId = "${modrinth_id}"
-//    versionNumber = "${version}"
-//    versionType = "${version_type}"
-//    versionName = "${mod_name} - ${version}"
-//    changelog = new File("$rootDir/docs/CHANGELOG.md").text
-//    uploadFile = tasks.jarJar
-//    gameVersions = ["${minecraft_version}"]
-//    loaders = ["neoforge"]
-//    dependencies {
-//        required.project "owo"
-//        embedded.version "accessories", "${project.accessories_version}+${project.minecraft_version}"
-//        embedded.version "cumulus", "${project.cumulus_version}"
-//    }
-//    debugMode = true
-//}
+curseforge {
+    project {
+        apiKey = System.getenv("CURSEFORGE_TOKEN")
+        id = "${curseforge_id}"
+        releaseType = "${version_type}"
+        changelog = file("$rootDir/docs/CHANGELOG.md")
+        changelogType = "markdown"
+        addGameVersion("${minecraft_version}")
+        addGameVersion("NeoForge")
+        mainArtifact(tasks.jarJar) {
+            displayName = "${mod_name} - ${version}"
+            relations {
+                embeddedLibrary "cumulus"
+            }
+        }
+    }
+    options {
+        debug = true
+    }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
+    projectId = "${modrinth_id}"
+    versionNumber = "${version}"
+    versionType = "${version_type}"
+    versionName = "${mod_name} - ${version}"
+    changelog = new File("$rootDir/docs/CHANGELOG.md").text
+    uploadFile = tasks.jarJar
+    gameVersions = ["${minecraft_version}"]
+    loaders = ["neoforge"]
+    dependencies {
+        embedded.version "cumulus", "${project.cumulus_version}"
+    }
+    debugMode = true
+}
 
 idea {
     module {
