@@ -55,6 +55,20 @@ public class EffectsEntry extends GuidebookEntry {
         return this.items;
     }
 
+    @Override
+    public String toString() {
+        return "EffectsEntry{" +
+                "id=" + this.getId() +
+                ", icon=" + this.getIcon() +
+                ", name=" + this.getName() +
+                ", slotName=" + this.getSlotName() +
+                ", slotSubtitle=" + this.getSlotSubtitle() +
+                ", descriptionKey=" + this.getDescriptionKey() +
+                ", effect=" + this.effect +
+                ", items=" + this.items +
+                '}';
+    }
+
     public static class Mutable extends EffectsEntry implements MutableEntry {
         public static final Codec<EffectsEntry.Mutable> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 EffectsEntry.REFERENCE_CODEC.fieldOf("entry").forGetter(EffectsEntry.Mutable::getEntry),
@@ -84,6 +98,11 @@ public class EffectsEntry extends GuidebookEntry {
 
         public Map<String, Info> getClientValues() {
             return this.clientValues;
+        }
+
+        @Override
+        public String toString() {
+            return "Mutable{" + "entry=" + this.entry + ", clientValues=" + this.clientValues + '}';
         }
     }
 }
