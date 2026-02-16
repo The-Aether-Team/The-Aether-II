@@ -28,7 +28,7 @@ public class AlkahestLiquidBlock extends VolatileLiquidBlock {
         super.randomTick(state, level, pos, random);
         FluidState fluidState = level.getFluidState(pos);
         if (level.getBlockState(pos.above()).isEmpty() && fluidState.isSource()) {
-            level.scheduleTick(pos, state.getBlock(), 50);
+            level.scheduleTick(pos, state.getBlock(), 25);
         }
     }
 
