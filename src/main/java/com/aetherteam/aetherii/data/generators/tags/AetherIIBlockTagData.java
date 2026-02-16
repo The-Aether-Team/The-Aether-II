@@ -1195,7 +1195,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SENTRY_PILLAR.get(),
                 AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(),
-                AetherIIBlocks.ZANITE_BLOCK.get()
+                AetherIIBlocks.ZANITE_BLOCK.get(),
+                AetherIIBlocks.IRRADIATED_DUST_BLOCK.get()
         );
         this.tag(BlockTags.NEEDS_IRON_TOOL).add(
                 AetherIIBlocks.GLINT_ORE.get(),
