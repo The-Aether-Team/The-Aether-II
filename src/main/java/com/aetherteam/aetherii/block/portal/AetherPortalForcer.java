@@ -64,9 +64,7 @@ public class AetherPortalForcer {
         int i = Math.min(this.level.getMaxY(), this.level.getMinY() + this.level.getLogicalHeight()) - 1;
         BlockPos.MutableBlockPos mutablePos = pos.mutable();
 
-        for (BlockPos.MutableBlockPos mutablePos1 : BlockPos.spiralAround(pos, 64, Direction.EAST, Direction.SOUTH)) {
-            boolean valid = false;
-
+        for (BlockPos.MutableBlockPos mutablePos1 : BlockPos.spiralAround(pos, 128, Direction.EAST, Direction.SOUTH)) {
             int j = Math.min(i, this.level.getHeight(Heightmap.Types.MOTION_BLOCKING, mutablePos1.getX(), mutablePos1.getZ()));
             if (worldBorder.isWithinBounds(mutablePos1) && worldBorder.isWithinBounds(mutablePos1.move(direction, 1))) {
                 mutablePos1.move(direction.getOpposite(), 1);
@@ -92,14 +90,13 @@ public class AetherPortalForcer {
                                         d1 = d2;
                                         blockPos1 = mutablePos1.immutable();
                                     }
-                                    valid = true;
                                 }
                             }
                         }
                     }
                 }
             }
-            if (valid) {
+            if (d0 != -1.0 && d1 != -1.0) {
                 break;
             }
         }
@@ -159,7 +156,7 @@ public class AetherPortalForcer {
             for (int j = -1; j < 4; ++j) {
                 offsetPos.setWithOffset(originalPos, direction.getStepX() * i + clockWiseDirection.getStepX() * offsetScale, j, direction.getStepZ() * i + clockWiseDirection.getStepZ() * offsetScale);
                 BlockState blockState = this.level.getBlockState(offsetPos);
-                if (j < 0 && (blockState.isAir() || blockState.is(AetherIITags.Blocks.AETHER_PORTAL_BLACKLIST))) {
+                if (j < 0 && (blockState.isAir() || !blockState.is(AetherIITags.Blocks.AETHER_PORTAL_WHITELIST))) {
                     return false;
                 }
                 if (j >= 0 && !this.level.isEmptyBlock(offsetPos)) {

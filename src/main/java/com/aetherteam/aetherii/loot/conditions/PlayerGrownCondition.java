@@ -8,7 +8,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
-public record PlayerGrownCondition() implements LootItemCondition  {
+public record PlayerGrownCondition() implements LootItemCondition {
     public static final MapCodec<PlayerGrownCondition> CODEC = MapCodec.unit(PlayerGrownCondition::new);
 
     @Override

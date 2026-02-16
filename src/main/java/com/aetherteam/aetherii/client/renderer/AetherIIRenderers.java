@@ -134,6 +134,8 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.MOA.get(), MoaRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SKYROOT_LIZARD.get(), SkyrootLizardRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.CARRION_SPROUT.get(), CarrionSproutRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.GLITTERWING.get(), GlitterwingRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.SHROUDWING.get(), ShroudwingRenderer::new);
 
         // Hostile
         event.registerEntityRenderer(AetherIIEntityTypes.AECHOR_PLANT.get(), AechorPlantRenderer::new);
@@ -224,6 +226,8 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.MOA_SADDLEBAG, MoaSaddlebagModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA_LARGE_SADDLEBAG, MoaLargeSaddlebagModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_LIZARD, SkyrootLizardModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.GLITTERWING, GlitterwingModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SHROUDWING, ShroudwingModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.CARRION_SPROUT, CarrionSproutModel::createBodyLayer);
 
         // Hostile
@@ -302,9 +306,9 @@ public class AetherIIRenderers {
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES,
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES,
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES,
-                AetherIIBlocks.HIGHLANDS_BUSH,
+                AetherIIBlocks.AETHER_BUSH,
                 AetherIIBlocks.BLUEBERRY_BUSH,
-                AetherIIBlocks.POTTED_HIGHLANDS_BUSH,
+                AetherIIBlocks.POTTED_AETHER_BUSH,
                 AetherIIBlocks.POTTED_BLUEBERRY_BUSH);
         List<DeferredBlock<? extends Block>> aoBlocks = List.of(
                 AetherIIBlocks.AMBROSIUM_ORE,

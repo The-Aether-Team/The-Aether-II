@@ -19,11 +19,13 @@ public class VenomousDart extends AbstractArrow {
     public VenomousDart(double x, double y, double z, Level level) {
         super(AetherIIEntityTypes.VENOMOUS_DART.get(), x, y, z, level, new ItemStack(Items.ARROW), null);
         this.pickup = Pickup.DISALLOWED;
+        this.setBaseDamage(1.0F);
     }
 
     public VenomousDart(LivingEntity owner, Level level) {
         super(AetherIIEntityTypes.VENOMOUS_DART.get(), owner, level, new ItemStack(Items.ARROW), null);
         this.pickup = Pickup.DISALLOWED;
+        this.setBaseDamage(1.0F);
     }
 
     @Override
@@ -42,7 +44,7 @@ public class VenomousDart extends AbstractArrow {
     @Override
     protected void doPostHurtEffects(LivingEntity living) {
         super.doPostHurtEffects(living);
-        living.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(living, this, this.getOwner(), EffectBuildupPresets.VENOM, 350);
+        living.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(living, this, this.getOwner(), EffectBuildupPresets.VENOM, 200);
         living.setArrowCount(living.getArrowCount() - 1);
     }
 

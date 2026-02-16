@@ -248,12 +248,17 @@ public class AetherIIItems {
     public static final DeferredItem<Item> VALKYRIE_WINGS = register("valkyrie_wings");
     public static final DeferredItem<Item> SCATTERGLASS_SHARD = register("scatterglass_shard");
     public static final DeferredItem<Item> AMBROSIUM_SHARD = register("ambrosium_shard", AmbrosiumShardItem::new);
+    public static final DeferredItem<Item> FOSSILIZED_ZANITE = register("fossilized_zanite");
     public static final DeferredItem<Item> ZANITE_GEMSTONE = register("zanite_gemstone");
     public static final DeferredItem<Item> INERT_ARKENIUM = register("inert_arkenium");
     public static final DeferredItem<Item> ARKENIUM_PLATE = register("arkenium_plate");
     public static final DeferredItem<Item> INERT_GRAVITITE = register("inert_gravitite");
     public static final DeferredItem<Item> GRAVITITE_PLATE = register("gravitite_plate");
+    public static final DeferredItem<Item> FOSSILIZED_CORROBONITE = register("fossilized_corrobonite");
     public static final DeferredItem<Item> CORROBONITE_CRYSTAL = register("corrobonite_crystal");
+    public static final DeferredItem<Item> NEPTUNE_SCALE = register("neptune_scale", () -> new Item.Properties().rarity(Rarity.RARE));
+    public static final DeferredItem<Item> SENTRY_SERVO = register("sentry_servo", () -> new Item.Properties().rarity(Rarity.RARE));
+    public static final DeferredItem<Item> FOSSILIZED_GLINT = register("fossilized_glint");
     public static final DeferredItem<Item> GLINT_GEMSTONE = register("glint_gemstone", (properties) -> new CurrencyItem(10, properties)); //todo
     public static final DeferredItem<Item> GOLDEN_AMBER = register("golden_amber");
     public static final DeferredItem<Item> CLOUDTWINE = register("cloudtwine");
@@ -281,10 +286,10 @@ public class AetherIIItems {
     public static final DeferredItem<Item> EYE_OF_THE_MIMIC = register("eye_of_the_mimic", TreasureItem::new);
 
     // Irradiated Items
-    public static final DeferredItem<Item> IRRADIATED_ARMOR = register("irradiated_armor", () -> new Item.Properties().stacksTo(1));
-    public static final DeferredItem<Item> IRRADIATED_WEAPON = register("irradiated_weapon", () -> new Item.Properties().stacksTo(1));
-    public static final DeferredItem<Item> IRRADIATED_TOOL = register("irradiated_tool", () -> new Item.Properties().stacksTo(1));
-    public static final DeferredItem<Item> IRRADIATED_CHUNK = register("irradiated_chunk", () -> new Item.Properties().stacksTo(1));
+    public static final DeferredItem<Item> IRRADIATED_ARMOR = register("irradiated_armor", () -> new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> IRRADIATED_WEAPON = register("irradiated_weapon", () -> new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> IRRADIATED_TOOL = register("irradiated_tool", () -> new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> IRRADIATED_CHUNK = register("irradiated_chunk", () -> new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
     public static final DeferredItem<Item> IRRADIATED_DUST = register("irradiated_dust", IrradiatedDustItem::new);
 
     // Food
@@ -338,7 +343,6 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ARKENIUM_HESTVEIL_CANISTER = register("arkenium_hestveil_canister", (properties) -> new SolidCanisterItem(AetherIIBlocks.HESTVEIL.get(), SoundEvents.BUCKET_EMPTY_POWDER_SNOW, properties.stacksTo(1).craftRemainder(ARKENIUM_CANISTER.get()))); //todo
 
     // Music Discs
-    public static final DeferredItem<Item> ENGRAVED_DISC_AETHER_TUNE = register("engraved_disc_aether_tune", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.AETHER_TUNE));
     public static final DeferredItem<Item> ENGRAVED_DISC_ASCENDING_DAWN = register("engraved_disc_ascending_dawn", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.ASCENDING_DAWN));
     public static final DeferredItem<Item> ENGRAVED_DISC_AERWHALE = register("engraved_disc_aerwhale", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.AERWHALE));
     public static final DeferredItem<Item> ENGRAVED_DISC_APPROACHES = register("engraved_disc_approaches", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.APPROACHES));
@@ -346,7 +350,6 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ENGRAVED_DISC_CHINCHILLA = register("engraved_disc_chinchilla", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.CHINCHILLA));
     public static final DeferredItem<Item> ENGRAVED_DISC_HIGH = register("engraved_disc_high", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.HIGH));
     public static final DeferredItem<Item> ENGRAVED_DISC_REVOLUTIONS = register("engraved_disc_revolutions", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.REVOLUTIONS));
-    public static final DeferredItem<Item> ENGRAVED_DISC_CHASE = register("engraved_disc_chase", () -> new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.CHASE));
 
     // Spawn Eggs
     public static final DeferredItem<SpawnEggItem> FLYING_COW_SPAWN_EGG = register("flying_cow_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.FLYING_COW.get(), properties));
@@ -367,6 +370,8 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> SKYROOT_LIZARD_SPAWN_EGG = register("skyroot_lizard_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.SKYROOT_LIZARD.get(), properties));
     public static final DeferredItem<SpawnEggItem> AECHOR_PLANT_SPAWN_EGG = register("aechor_plant_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.AECHOR_PLANT.get(), properties));
     public static final DeferredItem<SpawnEggItem> CARRION_SPROUT_SPAWN_EGG = register("carrion_sprout_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.CARRION_SPROUT.get(), properties));
+    public static final DeferredItem<SpawnEggItem> GLITTERWING_SPAWN_EGG = register("glitterwing_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.GLITTERWING.get(), properties));
+    public static final DeferredItem<SpawnEggItem> SHROUDWING_SPAWN_EGG = register("shroudwing_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.SHROUDWING.get(), properties));
     public static final DeferredItem<SpawnEggItem> ZEPHYR_SPAWN_EGG = register("zephyr_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.ZEPHYR.get(), properties));
     public static final DeferredItem<SpawnEggItem> TEMPEST_SPAWN_EGG = register("tempest_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.TEMPEST.get(), properties));
     public static final DeferredItem<SpawnEggItem> COCKATRICE_SPAWN_EGG = register("cockatrice_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.COCKATRICE.get(), properties));

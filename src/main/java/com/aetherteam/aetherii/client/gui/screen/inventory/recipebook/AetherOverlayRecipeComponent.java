@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client.gui.screen.inventory.recipebook;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.OverlayRecipeComponentAccessor;
 import com.aetherteam.aetherii.recipe.display.AlkahestPurifierRecipeDisplay;
 import com.aetherteam.aetherii.recipe.display.AltarRecipeDisplay;
+import com.aetherteam.aetherii.recipe.display.AmberHourglassRecipeDisplay;
 import net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeCollection;
@@ -18,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class AetherOverlayRecipeComponent extends OverlayRecipeComponent {
-    private RecipeBookComponent<?> parent;
+    private final RecipeBookComponent<?> parent;
 
     public AetherOverlayRecipeComponent(RecipeBookComponent<?> parent, SlotSelectTime slotSelectTime, boolean isFurnaceMenu) {
         super(slotSelectTime, isFurnaceMenu);
@@ -42,10 +43,42 @@ public class AetherOverlayRecipeComponent extends OverlayRecipeComponent {
             int j1 = overlayAccessor.aether_ii$getX() + 4 + 25 * (i1 % k);
             int k1 = overlayAccessor.aether_ii$getY() + 5 + 25 * (i1 / k);
 
-            if (this.parent instanceof AltarRecipeBookComponent) {
+            if (this.parent instanceof AmberHourglassRecipeBookComponent) {
+                overlayAccessor.aether_ii$getRecipeButtons().add(new OverlayHourglassRecipeButton(j1, k1, displayEntry.id(), displayEntry.display(), contextMap, flag));
+            } else if (this.parent instanceof AltarRecipeBookComponent) {
                 overlayAccessor.aether_ii$getRecipeButtons().add(new OverlayAltarRecipeButton(j1, k1, displayEntry.id(), displayEntry.display(), contextMap, flag));
             } else if (this.parent instanceof AlkahestPurifierRecipeBookComponent) {
                 overlayAccessor.aether_ii$getRecipeButtons().add(new OverlayPurifierRecipeButton(j1, k1, displayEntry.id(), displayEntry.display(), contextMap, flag));
+            }
+        }
+    }
+
+    public class OverlayHourglassRecipeButton extends OverlayRecipeButton {
+        private static final ResourceLocation ENABLED_SPRITE = ResourceLocation.withDefaultNamespace("recipe_book/furnace_overlay");
+        private static final ResourceLocation HIGHLIGHTED_ENABLED_SPRITE = ResourceLocation.withDefaultNamespace("recipe_book/furnace_overlay_highlighted");
+        private static final ResourceLocation DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("recipe_book/furnace_overlay_disabled");
+        private static final ResourceLocation HIGHLIGHTED_DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("recipe_book/furnace_overlay_disabled_highlighted");
+
+        public OverlayHourglassRecipeButton(int x, int y, RecipeDisplayId recipe, RecipeDisplay recipeDisplay, ContextMap contextMap, boolean isCraftable) {
+            super(x, y, recipe, isCraftable, calculateIngredientsPositions(recipeDisplay, contextMap));
+        }
+
+        private static List<Pos> calculateIngredientsPositions(RecipeDisplay recipeDisplay, ContextMap contextMap) {
+            if (recipeDisplay instanceof AmberHourglassRecipeDisplay display) {
+                List<ItemStack> list = display.ingredient().resolveForStacks(contextMap);
+                if (!list.isEmpty()) {
+                    return List.of(createGridPos(1, 1, list));
+                }
+            }
+            return List.of();
+        }
+
+        @Override
+        protected ResourceLocation getSprite(boolean highlight) {
+            if (highlight) {
+                return this.isHoveredOrFocused() ? HIGHLIGHTED_ENABLED_SPRITE : ENABLED_SPRITE;
+            } else {
+                return this.isHoveredOrFocused() ? HIGHLIGHTED_DISABLED_SPRITE : DISABLED_SPRITE;
             }
         }
     }

@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 public class ArkeniumTrowelItem extends HoeItem {
     public ArkeniumTrowelItem(Properties properties) {
-        super(AetherIIItemTiers.ARKENIUM, -2.0F, 0.0F, properties);
+        super(AetherIIItemTiers.ARKENIUM, 0.5F, -2.5F, properties);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client.gui.screen.guidebook;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.gui.component.guidebook.GuidebookTab;
+import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
 import com.aetherteam.aetherii.inventory.menu.slot.SaddlebagSlot;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -19,8 +20,10 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -246,12 +249,39 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         entity.yHeadRot = entity.getYRot();
         entity.yHeadRotO = entity.getYRot();
         Vector3f vector3f = new Vector3f(0.0F, entity.getBbHeight() / 2.0F + yOffset, 0.0F);
-        InventoryScreen.renderEntityInInventory(guiGraphics, (int) f - (size.x / 2), (int) g - (size.y / 2), (int) f + (size.x / 2), (int) g + (size.y / 2), scale, vector3f, quaternionf, quaternionf2, entity);
+        renderMoaInInventory(guiGraphics, (int) f - (size.x / 2), (int) g - (size.y / 2), (int) f + (size.x / 2), (int) g + (size.y / 2), scale, vector3f, quaternionf, quaternionf2, entity);
         entity.yBodyRot = j;
         entity.setYRot(k);
         entity.setXRot(l);
         entity.yHeadRotO = m;
         entity.yHeadRot = n;
+    }
+
+    //remade to fix opacity make invisible moa
+    public static void renderMoaInInventory(
+            GuiGraphics guiGraphics,
+            int x1,
+            int y1,
+            int x2,
+            int y2,
+            float scale,
+            Vector3f translation,
+            Quaternionf rotation,
+            @Nullable Quaternionf overrideCameraAngle,
+            LivingEntity entity
+    ) {
+        EntityRenderDispatcher entityrenderdispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
+        EntityRenderer entityrenderer = entityrenderdispatcher.getRenderer(entity);
+        // Neo: use fresh render state to support multiple entities of the same type within a single frame
+        EntityRenderState entityrenderstate = entityrenderer.createRenderState();
+        entityrenderer.extractRenderState(entity, entityrenderstate, 1.0F);
+        //don't make invisible moa in gui
+        if (entityrenderstate instanceof MoaRenderState moaRenderState) {
+            moaRenderState.opacity = 1.0F;
+        }
+        net.neoforged.neoforge.client.renderstate.RenderStateExtensions.onUpdateEntityRenderState(entityrenderer, entity, entityrenderstate);
+        entityrenderstate.hitboxesRenderState = null;
+        guiGraphics.submitEntityRenderState(entityrenderstate, scale, translation, rotation, overrideCameraAngle, x1, y1, x2, y2);
     }
 
     @Override

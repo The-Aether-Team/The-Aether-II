@@ -210,6 +210,25 @@
       },
       "trigger": "minecraft:tick"
     },
+    "glitterwing": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "advancements": {
+                  "aether_ii:bestiary/observe_glitterwing": true
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tick"
+    },
     "golden_swet": {
       "conditions": {
         "player": [
@@ -457,6 +476,25 @@
       },
       "trigger": "minecraft:tick"
     },
+    "shroudwing": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "advancements": {
+                  "aether_ii:bestiary/observe_shroudwing": true
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tick"
+    },
     "skephid": {
       "conditions": {
         "player": [
@@ -555,6 +593,7 @@
   },
   "display": {
     "description": {
+      "color": "gold",
       "translate": "advancement.aether_ii.bestiary.desc"
     },
     "frame": "challenge",
@@ -608,6 +647,12 @@
     ],
     [
       "skyroot_lizard"
+    ],
+    [
+      "glitterwing"
+    ],
+    [
+      "shroudwing"
     ],
     [
       "moa"

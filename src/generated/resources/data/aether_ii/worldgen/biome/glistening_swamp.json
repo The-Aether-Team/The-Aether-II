@@ -70,13 +70,14 @@
       "aether_ii:large_grass_patch",
       "aether_ii:bonus_magnetic_shroom_patch",
       "aether_ii:swamp_bryalinn_moss_cover",
+      "aether_ii:orange_tree_patch_rare",
       "aether_ii:grass_and_dirt_floor",
       "aether_ii:small_mycelium_floor",
       "aether_ii:big_mycelium_floor",
       "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:coarse_aether_dirt_ceiling",
       "aether_ii:coarse_aether_dirt_overhang",
-      "aether_ii:highlands_flower_patch",
+      "aether_ii:holy_isles_flower_patch",
       "aether_ii:magnetic_flower_patch",
       "aether_ii:blueberry_bush_patch",
       "aether_ii:short_arilum",
@@ -134,6 +135,20 @@
       {
         "type": "aether_ii:aerwhale",
         "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
+    "aether_ii:aether_ambient": [
+      {
+        "type": "aether_ii:glitterwing",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:shroudwing",
+        "maxCount": 2,
         "minCount": 1,
         "weight": 1
       }

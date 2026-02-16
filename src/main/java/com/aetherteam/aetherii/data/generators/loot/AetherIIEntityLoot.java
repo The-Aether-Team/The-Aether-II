@@ -31,7 +31,6 @@ import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
 import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.neoforged.neoforge.common.Tags;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -107,6 +106,9 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
 
         this.add(AetherIIEntityTypes.SKYROOT_LIZARD.get(), LootTable.lootTable());
 
+        this.add(AetherIIEntityTypes.GLITTERWING.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.SHROUDWING.get(), LootTable.lootTable());
+
         this.add(AetherIIEntityTypes.AECHOR_PLANT.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIItems.AECHOR_PETAL.get())
@@ -117,6 +119,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIBlocks.AECHOR_CUTTING.get())
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
                                 .when(PlayerGrownCondition::new)
                         )
                 )
@@ -124,7 +127,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         .add(LootItem.lootTableItem(AetherIIBlocks.AECHOR_CUTTING.get())
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                                 .when(LootItemKilledByPlayerCondition.killedByPlayer())
-                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.1F, 0.1F))
+                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.35F, 0.1F))
                                 .when(InvertedLootItemCondition.invert(PlayerGrownCondition::new))
                         )
                 )
@@ -132,12 +135,14 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         this.add(AetherIIEntityTypes.CARRION_SPROUT.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIItems.WYNDBERRY.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
                         )
                 )
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIBlocks.CARRION_CUTTING.get())
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
                                 .when(PlayerGrownCondition::new)
                         )
                 )
@@ -145,26 +150,10 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         .add(LootItem.lootTableItem(AetherIIBlocks.CARRION_CUTTING.get())
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                                 .when(LootItemKilledByPlayerCondition.killedByPlayer())
-                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.1F, 0.1F))
+                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.35F, 0.1F))
                                 .when(InvertedLootItemCondition.invert(PlayerGrownCondition::new))
                         )
                 )
-//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-//                        .add(LootItem.lootTableItem(AetherIIBlocks.CARRION_CUTTING.get())
-//                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
-//                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
-//                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.1F, 0.1F))
-//                                .when(InvertedLootItemCondition.invert(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.ATTACKING_PLAYER, EntityPredicate.Builder.entity().equipment(EntityEquipmentPredicate.Builder.equipment().mainhand(ItemPredicate.Builder.item().of(this.registries.lookupOrThrow(Registries.ITEM), AetherIITags.Items.TOOLS_TROWELS))))))
-//                        )
-//                )
-//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-//                        .add(LootItem.lootTableItem(AetherIIBlocks.CARRION_CUTTING.get())
-//                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
-//                                .when(LootItemKilledByPlayerCondition.killedByPlayer())
-//                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.5F, 0.1F))
-//                                .when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.ATTACKING_PLAYER, EntityPredicate.Builder.entity().equipment(EntityEquipmentPredicate.Builder.equipment().mainhand(ItemPredicate.Builder.item().of(this.registries.lookupOrThrow(Registries.ITEM), AetherIITags.Items.TOOLS_TROWELS)))))
-//                        )
-//                )
         );
 
         this.add(AetherIIEntityTypes.ZEPHYR.get(), LootTable.lootTable()

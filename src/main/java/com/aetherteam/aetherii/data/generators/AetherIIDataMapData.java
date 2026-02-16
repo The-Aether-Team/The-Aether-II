@@ -2,10 +2,11 @@ package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.data.resources.maps.AmberHourglassFuel;
 import com.aetherteam.aetherii.data.resources.maps.BlockInfection;
 import com.aetherteam.aetherii.data.resources.maps.BucketReplacement;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
-import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesBiomes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -62,7 +63,7 @@ public class AetherIIDataMapData extends DataMapProvider {
         this.addCompost(compostables, AetherIIBlocks.MEDIUM_AETHER_GRASS, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.TALL_AETHER_GRASS, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.BRETTL_FLOWER, 0.3F);
-        this.addCompost(compostables, AetherIIBlocks.HIGHLAND_FERN, 0.65F);
+        this.addCompost(compostables, AetherIIBlocks.AETHER_FERN, 0.65F);
         this.addCompost(compostables, AetherIIBlocks.SHIELD_FERN, 0.65F);
         this.addCompost(compostables, AetherIIBlocks.HESPEROSE, 0.65F);
         this.addCompost(compostables, AetherIIBlocks.TARABLOOM, 0.65F);
@@ -72,7 +73,7 @@ public class AetherIIDataMapData extends DataMapProvider {
         this.addCompost(compostables, AetherIIBlocks.BLADE_POA, 0.65F);
         this.addCompost(compostables, AetherIIBlocks.AECHOR_CUTTING, 0.65F);
         this.addCompost(compostables, AetherIIBlocks.CARRION_CUTTING, 0.65F);
-        this.addCompost(compostables, AetherIIBlocks.HIGHLANDS_BUSH, 0.5F);
+        this.addCompost(compostables, AetherIIBlocks.AETHER_BUSH, 0.5F);
         this.addCompost(compostables, AetherIIBlocks.BLUEBERRY_BUSH, 0.5F);
         this.addCompost(compostables, AetherIIBlocks.BLUEBERRY_BUSH_STEM, 0.5F);
         this.addCompost(compostables, AetherIIBlocks.ORANGE_TREE, 0.5F);
@@ -90,16 +91,19 @@ public class AetherIIDataMapData extends DataMapProvider {
         fuels.add(AetherIIBlocks.AMBROSIUM_BLOCK.asItem().builtInRegistryHolder(), new FurnaceFuel(16000), false);
         fuels.add(AetherIIItems.AMBROSIUM_SHARD, new FurnaceFuel(1600), false);
         fuels.add(AetherIIItems.SKYROOT_PINECONE, new FurnaceFuel(400), false);
-        fuels.add(AetherIIBlocks.HIGHLANDS_BUSH.asItem().builtInRegistryHolder(), new FurnaceFuel(100), false);
+        fuels.add(AetherIIBlocks.AETHER_BUSH.asItem().builtInRegistryHolder(), new FurnaceFuel(100), false);
         fuels.add(AetherIIBlocks.SKYROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
         fuels.add(AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.GREATROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
         fuels.add(AetherIITags.Items.GREATROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.WISPROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
         fuels.add(AetherIITags.Items.WISPROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.AMBEROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIITags.Items.AMBEROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.SKYROOT_BOOKSHELF.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.GREATROOT_BOOKSHELF.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.WISPROOT_BOOKSHELF.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.AMBEROOT_BOOKSHELF.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
         fuels.add(AetherIIItems.SKYROOT_SHORTSWORD, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_HAMMER, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_SPEAR, new FurnaceFuel(200), false);
@@ -110,6 +114,9 @@ public class AetherIIDataMapData extends DataMapProvider {
         fuels.add(AetherIIItems.SKYROOT_TROWEL, new FurnaceFuel(200), false);
         fuels.add(AetherIIBlocks.SKYROOT_TWIG.asItem().builtInRegistryHolder(), new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_STICK, new FurnaceFuel(100), false);
+
+        var amberHourglassFuels = this.builder(AetherIIDataMaps.AMBER_HOURGLASS_FUELS);
+        amberHourglassFuels.add(AetherIIItems.GOLDEN_AMBER, new AmberHourglassFuel(400), false);
 
         var buckets = this.builder(AetherIIDataMaps.BUCKET_REPLACEMENT);
         buckets.add(Items.WATER_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_WATER_BUCKET.getKey()), false);
@@ -132,7 +139,7 @@ public class AetherIIDataMapData extends DataMapProvider {
         colors.add(AetherIITags.Biomes.MAGNETIC, 0xc9ffd1, false);
         colors.add(AetherIITags.Biomes.ARCTIC, 0xbdf9ff, false);
         colors.add(AetherIITags.Biomes.IRRADIATED, 0xffdd99, false);
-        colors.add(HighlandsBiomes.EXPANSE, 0xb5ffd0, false);
+        colors.add(HolyIslesBiomes.EXPANSE, 0xb5ffd0, false);
     }
 
     private void addCompost(DataMapProvider.Builder<Compostable, Item> map, ItemLike item, float chance) {

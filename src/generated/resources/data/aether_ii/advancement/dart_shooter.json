@@ -1,5 +1,5 @@
 {
-  "parent": "aether_ii:zanite",
+  "parent": "aether_ii:golden_amber",
   "criteria": {
     "dart_shooter": {
       "conditions": {
@@ -14,6 +14,7 @@
   },
   "display": {
     "description": {
+      "color": "aqua",
       "translate": "advancement.aether_ii.dart_shooter.desc"
     },
     "icon": {

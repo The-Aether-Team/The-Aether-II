@@ -1,5 +1,5 @@
 {
-  "parent": "aether_ii:enter_highlands",
+  "parent": "aether_ii:enter_holy_isles",
   "criteria": {
     "outpost_campfire": {
       "trigger": "aether_ii:outpost_campfire"
@@ -7,6 +7,7 @@
   },
   "display": {
     "description": {
+      "color": "aqua",
       "translate": "advancement.aether_ii.outpost_campfire.desc"
     },
     "icon": {

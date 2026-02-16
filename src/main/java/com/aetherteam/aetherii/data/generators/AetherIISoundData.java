@@ -178,19 +178,19 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:item/bottle/fill2"),
                         sound("minecraft:item/bottle/fill3"),
                         sound("minecraft:item/bottle/fill4")
-                ).subtitle("subtitles.aether_ii.item.scaterglass_vial.fill")
+                ).subtitle("subtitles.aether_ii.item.scatterglass_vial.fill")
         );
         this.add(AetherIISoundEvents.ITEM_SCATTERGLASS_VIAL_EMPTY,
                 definition().with(
                         sound("minecraft:item/bottle/empty1"),
                         sound("minecraft:item/bottle/empty2")
-                ).subtitle("subtitles.aether_ii.item.scaterglass_vial.empty")
+                ).subtitle("subtitles.aether_ii.item.scatterglass_vial.empty")
         );
 
         this.add(AetherIISoundEvents.ITEM_HAMMER_OF_DEMOLITION_SHOOT,
                 definition().with(
                         sound("minecraft:mob/ghast/fireball4")
-                ).subtitle("subtitles.aether.item.hammer_of_kingbdogz.shoot")
+                ).subtitle("subtitles.aether_ii.item.hammer_of_demolition.shoot")
         );
 
         this.add(AetherIISoundEvents.ITEM_ARMOR_EQUIP_BEAST_PELT,
@@ -316,9 +316,6 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.aether_ii.item.arkenium_canister.empty")
         );
 
-        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_AETHER_TUNE,
-                definition().with(sound("aether_ii:item/records/aether_tune").stream())
-        );
         this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_ASCENDING_DAWN,
                 definition().with(sound("aether_ii:item/records/ascending_dawn").stream())
         );
@@ -339,9 +336,6 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
         this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_REVOLUTIONS,
                 definition().with(sound("aether_ii:item/records/revolutions").stream())
-        );
-        this.add(AetherIISoundEvents.ITEM_ENGRAVED_DISC_CHASE,
-                definition().with(sound("aether_ii:item/records/chase").stream())
         );
     }
 
@@ -903,6 +897,14 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:mob/slime/big3"),
                         sound("minecraft:mob/slime/big4")
                 ).subtitle("subtitles.aether_ii.entity.swet.squish")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SWET_LEECH,
+                definition().with(
+                        sound("minecraft:mob/slime/big1"),
+                        sound("minecraft:mob/slime/big2"),
+                        sound("minecraft:mob/slime/big3"),
+                        sound("minecraft:mob/slime/big4")
+                ).subtitle("subtitles.aether_ii.entity.swet.leech")
         );
 
         this.add(AetherIISoundEvents.ENTITY_SKEPHID_SHOOT,

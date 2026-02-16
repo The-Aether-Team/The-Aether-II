@@ -1,5 +1,5 @@
 {
-  "parent": "aether_ii:alkahest_canister",
+  "parent": "aether_ii:craft_alkahest_purifier",
   "criteria": {
     "irradiated_armor": {
       "conditions": {
@@ -28,6 +28,7 @@
   },
   "display": {
     "description": {
+      "color": "aqua",
       "translate": "advancement.aether_ii.irradiated_item.desc"
     },
     "icon": {

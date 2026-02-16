@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:kinetic_thrusters"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "sentry": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:sentry_servo"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "sentry"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:kinetic_thrusters"
+    ]
+  }
+}

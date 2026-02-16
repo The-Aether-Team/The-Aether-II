@@ -29,6 +29,12 @@
     },
     {
       "enum": "net/minecraft/world/inventory/RecipeBookType",
+      "name": "AETHER_II_AMBER_HOURGLASS",
+      "constructor": "()V",
+      "parameters": [ ]
+    },
+    {
+      "enum": "net/minecraft/world/inventory/RecipeBookType",
       "name": "AETHER_II_ALTAR",
       "constructor": "()V",
       "parameters": [ ]
@@ -74,6 +80,12 @@
       "name": "AETHER_II_AETHER_DUNGEON_MONSTER",
       "constructor": "(Ljava/lang/String;IZZI)V",
       "parameters": [ "aether_ii:aether_dungeon_monster", 50, false, false, 128 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_II_AETHER_AMBIENT",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_ii:aether_ambient", 25, true, false, 96 ]
     },
     {
       "enum": "net/minecraft/world/entity/MobCategory",

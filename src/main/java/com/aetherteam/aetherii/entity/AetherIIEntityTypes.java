@@ -68,7 +68,12 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.of(Moa::new, AetherIIMobCategory.AETHER_MOA).sized(1.25F, 2.35F).eyeHeight(2.1F).clientTrackingRange(10).build(AetherIIEntities.MOA));
 
     public static final DeferredHolder<EntityType<?>, EntityType<SkyrootLizard>> SKYROOT_LIZARD = ENTITY_TYPES.register("skyroot_lizard",
-            () -> EntityType.Builder.of(SkyrootLizard::new, MobCategory.AMBIENT).sized(0.95F, 0.35F).clientTrackingRange(10).build(AetherIIEntities.SKYROOT_LIZARD));
+            () -> EntityType.Builder.of(SkyrootLizard::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.95F, 0.35F).clientTrackingRange(10).build(AetherIIEntities.SKYROOT_LIZARD));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<Glitterwing>> GLITTERWING = ENTITY_TYPES.register("glitterwing",
+            () -> EntityType.Builder.<Glitterwing>of(Glitterwing::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.55F, 0.125F).eyeHeight(0.1F).clientTrackingRange(5).build(AetherIIEntities.GLITTERWING));
+    public static final DeferredHolder<EntityType<?>, EntityType<Shroudwing>> SHROUDWING = ENTITY_TYPES.register("shroudwing",
+            () -> EntityType.Builder.<Shroudwing>of(Shroudwing::new, AetherIIMobCategory.AETHER_AMBIENT).sized(0.25F, 0.125F).eyeHeight(0.1F).clientTrackingRange(5).build(AetherIIEntities.SHROUDWING));
 
     // Hostile
     public static final DeferredHolder<EntityType<?>, EntityType<AechorPlant>> AECHOR_PLANT = ENTITY_TYPES.register("aechor_plant",
@@ -93,24 +98,25 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.of(ArkeniumTaluton::new, AetherIIMobCategory.AETHER_CAVE_MONSTER).sized(1.0F, 1.65F).eyeHeight(1.25F).clientTrackingRange(10).build(AetherIIEntities.ARKENIUM_TALUTON));
     public static final DeferredHolder<EntityType<?>, EntityType<GravititeTaluton>> GRAVITITE_TALUTON = ENTITY_TYPES.register("gravitite_taluton",
             () -> EntityType.Builder.of(GravititeTaluton::new, AetherIIMobCategory.AETHER_CAVE_MONSTER).sized(0.75F, 1.9F).eyeHeight(1.4F).clientTrackingRange(10).build(AetherIIEntities.GRAVITITE_TALUTON));
-    public static final DeferredHolder<EntityType<?>, EntityType<BladeshroomHunter>> BLADESHROOM_HUNTER = ENTITY_TYPES.register("bladeshroom_hunter",
-            () -> EntityType.Builder.of(BladeshroomHunter::new, AetherIIMobCategory.AETHER_DUNGEON_MONSTER).sized(0.9F, 1.3F).eyeHeight(1.2F).clientTrackingRange(10).build(AetherIIEntities.BLADESHROOM_HUNTER));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Mimic>> MIMIC = ENTITY_TYPES.register("mimic",
-            () -> EntityType.Builder.of(Mimic::new, MobCategory.MONSTER).sized(0.9F, 1.35F).clientTrackingRange(8).build(AetherIIEntities.MIMIC));
+            () -> EntityType.Builder.of(Mimic::new, AetherIIMobCategory.AETHER_DUNGEON_MONSTER).sized(0.9F, 1.35F).clientTrackingRange(8).build(AetherIIEntities.MIMIC));
 
     public static final DeferredHolder<EntityType<?>, EntityType<DetonationSentry>> DETONATION_SENTRY = ENTITY_TYPES.register("detonation_sentry",
-            () -> EntityType.Builder.of(DetonationSentry::new, MobCategory.MONSTER).sized(0.9F, 0.9F).eyeHeight(0.45F).clientTrackingRange(10).build(AetherIIEntities.DETONATION_SENTRY));
+            () -> EntityType.Builder.of(DetonationSentry::new, AetherIIMobCategory.AETHER_DUNGEON_MONSTER).sized(0.9F, 0.9F).eyeHeight(0.45F).clientTrackingRange(10).build(AetherIIEntities.DETONATION_SENTRY));
     public static final DeferredHolder<EntityType<?>, EntityType<SentryGolem>> SENTRY_GOLEM = ENTITY_TYPES.register("sentry_golem",
-            () -> EntityType.Builder.of(SentryGolem::new, MobCategory.MONSTER).sized(0.6F, 1.95F).eyeHeight(1.8F).clientTrackingRange(8).build(AetherIIEntities.SENTRY_GOLEM));
+            () -> EntityType.Builder.of(SentryGolem::new, AetherIIMobCategory.AETHER_DUNGEON_MONSTER).sized(0.6F, 1.95F).eyeHeight(1.8F).clientTrackingRange(8).build(AetherIIEntities.SENTRY_GOLEM));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Slider>> SLIDER = ENTITY_TYPES.register("slider",
-            () -> EntityType.Builder.of(Slider::new, MobCategory.MONSTER).sized(2.0F, 2.0F).fireImmune().clientTrackingRange(10).build(AetherIIEntities.SLIDER));
+            () -> EntityType.Builder.of(Slider::new, AetherIIMobCategory.AETHER_DUNGEON_MONSTER).sized(2.0F, 2.0F).fireImmune().clientTrackingRange(10).build(AetherIIEntities.SLIDER));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<BladeshroomHunter>> BLADESHROOM_HUNTER = ENTITY_TYPES.register("bladeshroom_hunter",
+            () -> EntityType.Builder.of(BladeshroomHunter::new, AetherIIMobCategory.AETHER_DUNGEON_MONSTER).sized(0.9F, 1.3F).eyeHeight(1.2F).clientTrackingRange(10).build(AetherIIEntities.BLADESHROOM_HUNTER));
 
 
     // NPCs
     public static final DeferredHolder<EntityType<?>, EntityType<Edward>> EDWARD = ENTITY_TYPES.register("edward",
-            () -> EntityType.Builder.of(Edward::new, MobCategory.CREATURE).sized(0.6F, 1.95F).eyeHeight(1.75F).clientTrackingRange(8).build(AetherIIEntities.EDWARD));
+            () -> EntityType.Builder.of(Edward::new, MobCategory.MISC).sized(0.6F, 1.95F).eyeHeight(1.75F).clientTrackingRange(8).build(AetherIIEntities.EDWARD));
 
     // Projectiles
     public static final DeferredHolder<EntityType<?>, EntityType<HolystoneRock>> HOLYSTONE_ROCK = ENTITY_TYPES.register("holystone_rock",
@@ -176,6 +182,8 @@ public class AetherIIEntityTypes {
         event.register(AetherIIEntityTypes.ARCTIC_KIRRID.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.MOA.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.CARRION_SPROUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CarrionSprout::checkCarrionSproutSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.GLITTERWING.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Insect::checkInsectSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.SHROUDWING.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Insect::checkInsectSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
 
         // Hostile
         event.register(AetherIIEntityTypes.AECHOR_PLANT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AechorPlant::checkAechorPlantSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
@@ -211,6 +219,8 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.MOA.get(), AetherIIStats.merge(Moa.createMobAttributes(), AetherIIStats.MOA).build());
         event.put(AetherIIEntityTypes.SKYROOT_LIZARD.get(), AetherIIStats.merge(SkyrootLizard.createMobAttributes(), AetherIIStats.SKYROOT_LIZARD).build());
         event.put(AetherIIEntityTypes.CARRION_SPROUT.get(), AetherIIStats.merge(CarrionSprout.createMobAttributes(), AetherIIStats.CARRION_SPROUT).build());
+        event.put(AetherIIEntityTypes.GLITTERWING.get(), Glitterwing.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.SHROUDWING.get(), Shroudwing.createMobAttributes().build());
 
         // Hostile
         event.put(AetherIIEntityTypes.AECHOR_PLANT.get(), AetherIIStats.merge(AechorPlant.createMobAttributes(), AetherIIStats.AECHOR_PLANT).build());

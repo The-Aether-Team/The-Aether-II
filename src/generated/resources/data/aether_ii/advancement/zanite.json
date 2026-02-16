@@ -1,5 +1,5 @@
 {
-  "parent": "aether_ii:ambrosium",
+  "parent": "aether_ii:amber_hourglass",
   "criteria": {
     "zanite": {
       "conditions": {
@@ -14,6 +14,7 @@
   },
   "display": {
     "description": {
+      "color": "aqua",
       "translate": "advancement.aether_ii.zanite.desc"
     },
     "icon": {

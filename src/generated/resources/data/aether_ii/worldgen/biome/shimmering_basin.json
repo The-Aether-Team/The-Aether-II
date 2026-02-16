@@ -67,7 +67,7 @@
       "aether_ii:shimmering_basin_trees_sunken",
       "aether_ii:grass_field",
       "aether_ii:valkyrie_sprout_patch",
-      "aether_ii:highlands_bush_patch_field",
+      "aether_ii:aether_bush_patch_field",
       "aether_ii:orange_tree_patch",
       "aether_ii:fallen_skyroot_log",
       "aether_ii:grass_and_dirt_floor",
@@ -75,7 +75,7 @@
       "aether_ii:coarse_aether_dirt_ceiling",
       "aether_ii:coarse_aether_dirt_overhang",
       "aether_ii:exposed_bryalinn_moss_cover",
-      "aether_ii:highlands_flower_patch",
+      "aether_ii:holy_isles_flower_patch",
       "aether_ii:highfields_flower_patch",
       "aether_ii:blueberry_bush_patch",
       "aether_ii:short_arilum",
@@ -134,6 +134,20 @@
       {
         "type": "aether_ii:aerwhale",
         "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
+    "aether_ii:aether_ambient": [
+      {
+        "type": "aether_ii:glitterwing",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:shroudwing",
+        "maxCount": 2,
         "minCount": 1,
         "weight": 1
       }

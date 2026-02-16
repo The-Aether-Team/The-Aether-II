@@ -48,6 +48,8 @@ public class AetherIILoot {
     public static final ResourceKey<LootTable> CHESTS_CAMP_HUNTER = register("chests/camp/hunter");
     public static final ResourceKey<LootTable> CHESTS_CAMP_FLETCHER = register("chests/camp/fletcher");
 
+    public static final ResourceKey<LootTable> CHESTS_WATCHTOWER = register("chests/watchtower/common");
+
     public static final ResourceKey<LootTable> CHESTS_DUNGEONS_IRRADIATED_ITEMS = register("chests/dungeons/irradiated_items");
     public static final ResourceKey<LootTable> CHESTS_DUNGEONS_MUSIC_DISCS = register("chests/dungeons/music_discs");
 
@@ -61,9 +63,9 @@ public class AetherIILoot {
     public static final ResourceKey<LootTable> TAEGORE_DIGGING = register("gameplay/taegore_digging");
 
     // Stripping
+    public static final ResourceKey<LootTable> STRIP_MOSSY_WISPROOT_BASE = register("stripping/strip_mossy_wisproot_base");
     public static final ResourceKey<LootTable> STRIP_MOSSY_WISPROOT = register("stripping/strip_mossy_wisproot");
-    public static final ResourceKey<LootTable> STRIP_MOSSY_WISPROOT_END = register("stripping/strip_mossy_wisproot_end");
-    public static final ResourceKey<LootTable> STRIP_AMBEROOT = register("stripping/strip_amberoot");
+    public static final ResourceKey<LootTable> STRIP_AMBEROOT_DEPOSIT = register("stripping/strip_amberoot_deposit");
 
     private static ResourceKey<LootTable> register(String id) {
         return register(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)));

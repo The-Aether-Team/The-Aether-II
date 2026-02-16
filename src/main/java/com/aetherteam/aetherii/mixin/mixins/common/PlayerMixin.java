@@ -1,14 +1,24 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
+import com.aetherteam.aetherii.entity.monster.PlantMob;
 import com.aetherteam.aetherii.entity.passive.MountableAnimal;
+import com.aetherteam.aetherii.item.SpecialAttackStrengthScale;
 import com.aetherteam.aetherii.item.equipment.AetherIINeoItemAbilities;
 import com.aetherteam.aetherii.mixin.MixinHooks;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.LivingEntityAccessor;
 import com.aetherteam.aetherii.mixin.wrappers.common.ItemCooldownsWrapper;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import com.mojang.authlib.GameProfile;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemCooldowns;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Player.class)
-public abstract class PlayerMixin { //todo sounds, particles, and stats
+public abstract class PlayerMixin { //todo sounds
     @Mutable
     @Final
     @Shadow
@@ -55,6 +65,14 @@ public abstract class PlayerMixin { //todo sounds, particles, and stats
         MixinHooks.spearStabBehavior(player, target, canSpearStab.get());
     }
 
+    @WrapOperation(method = "attack(Lnet/minecraft/world/entity/Entity;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurtServer(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
+    private static boolean wrapHurtServer(LivingEntity instance, ServerLevel serverLevel, DamageSource damageSource, float damage, Operation<Boolean> original, @Local LivingEntity livingEntity) {
+        if (livingEntity instanceof PlantMob) {
+            return false;
+        }
+        return original.call(instance, serverLevel, damageSource, damage);
+    }
+
     /**
      * Used to set whether the player tried to crouch for {@link MountableAnimal}, before crouching is cancelled for mounts by the {@link Player} class.
      *
@@ -79,5 +97,15 @@ public abstract class PlayerMixin { //todo sounds, particles, and stats
                 player.setShiftKeyDown(true);
             }
         }
+    }
+
+    @WrapMethod(method = "getAttackStrengthScale(F)F")
+    private float getCurrentItemAttackStrengthDelay(float adjustTicks, Operation<Float> original) {
+        Player player = (Player) (Object) this;
+        ItemStack itemStack = player.getWeaponItem();
+        if (itemStack.getItem() instanceof SpecialAttackStrengthScale specialAttackStrengthScale) {
+            return specialAttackStrengthScale.getAttackStrengthScale(player.level(), player, itemStack, adjustTicks, ((LivingEntityAccessor) player).aether$getAttackStrengthTicker());
+        }
+        return original.call(adjustTicks);
     }
 }

@@ -3,10 +3,10 @@
   "effect_resistances": [],
   "entity_type": "aether_ii:magnetic_kirrid",
   "food": "aether_ii:kirrid_food",
-  "health": 10,
+  "health": 16,
   "icon": "aether_ii:guidebook/bestiary/magnetic_kirrid",
   "id": "aether_ii:magnetic_kirrid",
-  "impact_defense": 2,
+  "impact_defense": 0,
   "loot_slots": [
     {
       "loot": {
@@ -26,7 +26,7 @@
     }
   ],
   "name": "aether_ii.guidebook_bestiary.name.entity.aether_ii.magnetic_kirrid",
-  "pierce_defense": -2,
+  "pierce_defense": -1,
   "slash_defense": 0,
   "slot_name": "aether_ii.guidebook_bestiary.slot_name.entity.aether_ii.magnetic_kirrid",
   "slot_subtitle": "aether_ii.guidebook_bestiary.slot_subtitle.entity.aether_ii.magnetic_kirrid"

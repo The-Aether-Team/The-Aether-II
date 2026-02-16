@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.api.guidebook.GuidebookEntry;
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.GuidebookDiscoveryAttachment;
+import com.aetherteam.aetherii.client.gui.component.guidebook.DescriptionButton;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
@@ -15,6 +16,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.MultiLineLabel;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
@@ -72,6 +74,8 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
         }
 
         super.initSection();
+
+        this.screen.addRenderableWidget(this.screen, new DescriptionButton(this.screen, (this.screen.width / 2) + 155, (this.screen.height / 2) + 35, Guidebook.MAGNIFYING_GLASS));
     }
 
     @Override
@@ -177,12 +181,11 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
 
     private void drawDescriptionString(GuiGraphics guiGraphics, Font font, Component component) {
         int x = 21;
-        int y = 89;
-        int width = 140;
-        for (FormattedCharSequence formattedcharsequence : font.split(component, width)) {
-            guiGraphics.drawString(font, formattedcharsequence, x, y, -1, true);
-            y += 9;
-        }
+        int y = 71;
+        int lineHeight = 9;
+        int color = 0xffffffff;
+        MultiLineLabel label = MultiLineLabel.create(font, 135, 8, component);
+        label.renderLeftAligned(guiGraphics, x, y, lineHeight, color);
     }
 
     @Override

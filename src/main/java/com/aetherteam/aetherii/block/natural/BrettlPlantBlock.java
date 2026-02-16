@@ -4,16 +4,23 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.mojang.serialization.MapCodec;
+import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.GrowingPlantBodyBlock;
 import net.minecraft.world.level.block.GrowingPlantHeadBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -22,6 +29,10 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.CommonHooks;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class BrettlPlantBlock extends GrowingPlantBodyBlock implements SimpleWaterloggedBlock {
     public static final MapCodec<BrettlPlantBlock> CODEC = simpleCodec(BrettlPlantBlock::new);
@@ -57,6 +68,35 @@ public class BrettlPlantBlock extends GrowingPlantBodyBlock implements SimpleWat
     }
 
     @Override
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (level.getRawBrightness(pos.above(), 0) >= 9 && CommonHooks.canCropGrow(level, pos, state, random.nextInt(25) == 0)) {
+            BlockPos offsetPos = pos.relative(this.growthDirection);
+            BlockState offsetState = level.getBlockState(offsetPos);
+            if (offsetState.is(this.getHeadBlock()) || (offsetState.is(this) && offsetState.getValue(GROWN))) {
+                if (!state.getValue(GROWN)) {
+                    level.setBlockAndUpdate(pos, state.setValue(GROWN, true));
+                }
+            }
+        }
+    }
+
+    @Override
+    public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool) {
+        super.playerDestroy(level, player, pos, state, blockEntity, tool);
+        if (state.getValue(GROWN)) {
+            level.setBlock(pos, AetherIIBlocks.BRETTL_PLANT.get().defaultBlockState().setValue(GROWN, false), 1 | 2);
+        }
+    }
+
+    @Override
+    public void onBlockExploded(BlockState state, ServerLevel level, BlockPos pos, Explosion explosion) {
+        super.onBlockExploded(state, level, pos, explosion);
+        if (state.getValue(GROWN)) {
+            level.setBlock(pos, AetherIIBlocks.BRETTL_PLANT.get().defaultBlockState().setValue(GROWN, false), 1 | 2);
+        }
+    }
+
+    @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState state = super.getStateForPlacement(context);
         if (state != null) {
@@ -75,10 +115,24 @@ public class BrettlPlantBlock extends GrowingPlantBodyBlock implements SimpleWat
 
     @Override
     public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
-        if (state.getValue(WATERLOGGED)) {
-            return false;
+        Optional<BlockPos> optional = BlockUtil.getTopConnectedBlock(level, pos, state.getBlock(), this.growthDirection, this.getHeadBlock());
+        boolean flag = false;
+        if (optional.isPresent()) {
+            BlockPos headPos = optional.get();
+            BlockState headState = level.getBlockState(headPos);
+
+            flag = this.getHeadBlock().isValidBonemealTarget(level, headPos, headState);
+
+            if (!headState.getValue(GROWN)) {
+                flag = flag || super.isValidBonemealTarget(level, pos, state);
+            }
         }
-        return super.isValidBonemealTarget(level, pos, state);
+        return flag;
+    }
+
+    @Override
+    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+        return random.nextFloat() <= 0.5F;
     }
 
     @Override

@@ -12,7 +12,7 @@ public class AetherIIBlockEntityTypes {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, AetherII.MODID);
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<IcestoneBlockEntity>> ICESTONE = BLOCK_ENTITY_TYPES.register("icestone", () ->
-            new BlockEntityType<>(IcestoneBlockEntity::new, AetherIIBlocks.ICESTONE.get()));
+            new BlockEntityType<>(IcestoneBlockEntity::new, AetherIIBlocks.ICESTONE.get(), AetherIIBlocks.ICESTONE_STAIRS.get(), AetherIIBlocks.ICESTONE_SLAB.get(), AetherIIBlocks.ICESTONE_WALL.get()));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HolystoneFurnaceBlockEntity>> HOLYSTONE_FURNACE = BLOCK_ENTITY_TYPES.register("holystone_furnace", () ->
             new BlockEntityType<>(HolystoneFurnaceBlockEntity::new, AetherIIBlocks.HOLYSTONE_FURNACE.get()));
@@ -22,6 +22,9 @@ public class AetherIIBlockEntityTypes {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MoaEggBlockEntity>> MOA_EGG = BLOCK_ENTITY_TYPES.register("moa_egg", () ->
             new BlockEntityType<>(MoaEggBlockEntity::new, AetherIIBlocks.MOA_EGG.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AmberHourglassBlockEntity>> AMBER_HOURGLASS = BLOCK_ENTITY_TYPES.register("amber_hourglass", () ->
+            new BlockEntityType<>(AmberHourglassBlockEntity::new, AetherIIBlocks.AMBER_HOURGLASS.get()));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AltarBlockEntity>> ALTAR = BLOCK_ENTITY_TYPES.register("altar", () ->
             new BlockEntityType<>(AltarBlockEntity::new, AetherIIBlocks.ALTAR.get()));
@@ -81,11 +84,15 @@ public class AetherIIBlockEntityTypes {
             new BlockEntityType<>(TreasureDoorwayBlockEntity::new, AetherIIBlocks.TREASURE_DOORWAY_BLOCK.get()));
 
     public static void registerValidBlockEntityTypes(BlockEntityTypeAddBlocksEvent event) {
-        event.modify(BlockEntityType.SIGN, AetherIIBlocks.SKYROOT_WALL_SIGN.get(), AetherIIBlocks.SKYROOT_SIGN.get(),
+        event.modify(BlockEntityType.SIGN,
+                AetherIIBlocks.SKYROOT_WALL_SIGN.get(), AetherIIBlocks.SKYROOT_SIGN.get(),
                 AetherIIBlocks.GREATROOT_WALL_SIGN.get(), AetherIIBlocks.GREATROOT_SIGN.get(),
-                AetherIIBlocks.WISPROOT_WALL_SIGN.get(), AetherIIBlocks.WISPROOT_SIGN.get());
-        event.modify(BlockEntityType.HANGING_SIGN, AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.SKYROOT_HANGING_SIGN.get(),
+                AetherIIBlocks.WISPROOT_WALL_SIGN.get(), AetherIIBlocks.WISPROOT_SIGN.get(),
+                AetherIIBlocks.AMBEROOT_WALL_SIGN.get(), AetherIIBlocks.AMBEROOT_SIGN.get());
+        event.modify(BlockEntityType.HANGING_SIGN,
+                AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.SKYROOT_HANGING_SIGN.get(),
                 AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get(),
-                AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
+                AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get(),
+                AetherIIBlocks.AMBEROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.AMBEROOT_HANGING_SIGN.get());
     }
 }

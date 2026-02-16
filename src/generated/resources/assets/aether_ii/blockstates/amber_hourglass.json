@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "open=false": {
+      "model": "aether_ii:block/amber_hourglass"
+    },
+    "open=true": {
+      "model": "aether_ii:block/amber_hourglass_open"
+    }
+  }
+}

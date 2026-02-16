@@ -129,9 +129,11 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.woodProvider(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get()).wood(AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get());
         this.woodProvider(AetherIIBlocks.WISPROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.WISPROOT_LOG.get()).wood(AetherIIBlocks.WISPROOT_WOOD.get());
         this.woodProvider(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get()).wood(AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get());
-        this.woodProviderColumn(AetherIIBlocks.AMBEROOT_LOG.get(), AetherIIBlocks.SKYROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.AMBEROOT_LOG.get()).wood(AetherIIBlocks.AMBEROOT_WOOD.get());
         this.woodProvider(AetherIIBlocks.MOSSY_WISPROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.MOSSY_WISPROOT_LOG.get()).wood(AetherIIBlocks.MOSSY_WISPROOT_WOOD.get());
         this.createFacingTopBottomColumnWithHorizontalVariant(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE.get(), AetherIIBlocks.WISPROOT_LOG.get(), AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
+        this.woodProvider(AetherIIBlocks.AMBEROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.AMBEROOT_LOG.get()).wood(AetherIIBlocks.AMBEROOT_WOOD.get());
+        this.woodProvider(AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get()).wood(AetherIIBlocks.STRIPPED_AMBEROOT_WOOD.get());
+        this.woodProviderColumn(AetherIIBlocks.AMBEROOT_DEPOSIT.get(), AetherIIBlocks.AMBEROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.AMBEROOT_DEPOSIT.get());
 
         // Trunks
         this.createTrunk(AetherIIBlocks.SKYROOT_TRUNK.get(), AetherIIBlocks.SKYROOT_LOG.get());
@@ -142,6 +144,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrunk(AetherIIBlocks.MOSSY_WISPROOT_TRUNK.get(), AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
         this.createTrunk(AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get(), AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
         this.createTrunk(AetherIIBlocks.AMBEROOT_TRUNK.get(), AetherIIBlocks.AMBEROOT_LOG.get());
+        this.createTrunk(AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK.get(), AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get());
 
         // Leaves
         this.createLeavesWithPiles(AetherIIBlocks.SKYROOT_LEAVES.get(), AetherIIBlocks.SKYROOT_LEAF_PILE.get(), AetherIITexturedModels.LEAVES, AetherIIModelTemplates.OVERLAID_LEAVES);
@@ -182,7 +185,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTintedTallGrass(AetherIIBlocks.TALL_AETHER_GRASS.get());
 
         // Flowers
-        this.createHighlandFern();
+        this.createAetherFern();
         this.createPlantWithDefaultItem(AetherIIBlocks.SHIELD_FERN.get(), AetherIIBlocks.POTTED_SHIELD_FERN.get(), PlantType.NOT_TINTED);
         this.createSnowyPlantWithDefaultItem(AetherIIBlocks.HESPEROSE.get(), AetherIIBlocks.POTTED_HESPEROSE.get());
         this.createSnowyPlantWithDefaultItem(AetherIIBlocks.TARABLOOM.get(), AetherIIBlocks.POTTED_TARABLOOM.get());
@@ -197,7 +200,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createPlantWithDefaultItem(AetherIIBlocks.CARRION_CUTTING.get(), AetherIIBlocks.POTTED_CARRION_CUTTING.get(), PlantType.NOT_TINTED);
 
         // Bushes
-        this.createBush(AetherIIBlocks.HIGHLANDS_BUSH.get(), AetherIIBlocks.POTTED_HIGHLANDS_BUSH.get());
+        this.createBush(AetherIIBlocks.AETHER_BUSH.get(), AetherIIBlocks.POTTED_AETHER_BUSH.get());
         this.createPlantWithDefaultItem(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM.get(), PlantType.NOT_TINTED);
         this.createBush(AetherIIBlocks.BLUEBERRY_BUSH.get(), AetherIIBlocks.POTTED_BLUEBERRY_BUSH.get());
 
@@ -260,6 +263,19 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.WISPROOT_BEAM.get(), AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
         this.createSecretDoor(AetherIIBlocks.SECRET_WISPROOT_DOOR.get(), AetherIIBlocks.WISPROOT_PLANKS.get());
         this.createOrientableSecretTrapdoor(AetherIIBlocks.SECRET_WISPROOT_TRAPDOOR.get(), AetherIIBlocks.WISPROOT_PLANKS.get());
+
+        // Amberoot Decorative Blocks
+        this.createTrivialCube(AetherIIBlocks.AMBEROOT_FLOORBOARDS.get());
+        this.createTrivialCube(AetherIIBlocks.AMBEROOT_HIGHLIGHT.get());
+        this.createHorizontallyRotatedBlock(AetherIIBlocks.AMBEROOT_SHINGLES.get(), TexturedModel.CUBE);
+        this.createHorizontallyRotatedBlock(AetherIIBlocks.AMBEROOT_SMALL_SHINGLES.get(), TexturedModel.CUBE);
+        this.createCubeColumn(AetherIIBlocks.AMBEROOT_BASE_PLANKS.get(), AetherIIBlocks.AMBEROOT_HIGHLIGHT.get());
+        this.createCubeColumn(AetherIIBlocks.AMBEROOT_TOP_PLANKS.get(), AetherIIBlocks.AMBEROOT_HIGHLIGHT.get());
+        this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.AMBEROOT_BASE_BEAM.get(), AetherIIBlocks.AMBEROOT_HIGHLIGHT.get());
+        this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.AMBEROOT_TOP_BEAM.get(), AetherIIBlocks.AMBEROOT_HIGHLIGHT.get());
+        this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.AMBEROOT_BEAM.get(), AetherIIBlocks.AMBEROOT_HIGHLIGHT.get());
+        this.createSecretDoor(AetherIIBlocks.SECRET_AMBEROOT_DOOR.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.createOrientableSecretTrapdoor(AetherIIBlocks.SECRET_AMBEROOT_TRAPDOOR.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
 
         // Holystone Decorative Blocks
         this.createTrivialCube(AetherIIBlocks.HOLYSTONE_FLAGSTONES.get());
@@ -469,6 +485,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createAxisAlignedPillarBlockCustomModel(AetherIIBlocks.ARKENIUM_CHAIN.get(), plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.ARKENIUM_CHAIN.get())));
         this.createCraftingTableLike(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), TextureMapping::craftingTable);
         this.createFurnace(AetherIIBlocks.HOLYSTONE_FURNACE.get(), TexturedModel.ORIENTABLE_ONLY_TOP);
+        this.createAmberHourglass(AetherIIBlocks.AMBER_HOURGLASS.get());
         this.createAltar(AetherIIBlocks.ALTAR.get(), AetherIIBlocks.HOLYSTONE.get());
         this.createArtisansBench(AetherIIBlocks.ARTISANS_BENCH.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get());
         this.createArkeniumForge(AetherIIBlocks.ARKENIUM_FORGE.get(), AetherIIBlocks.ARKENIUM_BLOCK.get());
@@ -507,6 +524,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createHangingSign(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get(), AetherIIBlocks.SKYROOT_HANGING_SIGN.get(), AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get());
         this.createHangingSign(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get());
         this.createHangingSign(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get());
+        this.createHangingSign(AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get(), AetherIIBlocks.AMBEROOT_HANGING_SIGN.get(), AetherIIBlocks.AMBEROOT_WALL_HANGING_SIGN.get());
 
         this.createLever(AetherIIBlocks.HOLYSTONE_LEVER.get());
 
@@ -517,6 +535,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createCubeColumn(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), AetherIIBlocks.SKYROOT_PLANKS.get());
         this.createCubeColumn(AetherIIBlocks.GREATROOT_BOOKSHELF.get(), AetherIIBlocks.GREATROOT_PLANKS.get());
         this.createCubeColumn(AetherIIBlocks.WISPROOT_BOOKSHELF.get(), AetherIIBlocks.WISPROOT_PLANKS.get());
+        this.createCubeColumn(AetherIIBlocks.AMBEROOT_BOOKSHELF.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
         this.createCubeColumn(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get());
 
         // Furniture

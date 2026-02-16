@@ -93,7 +93,11 @@ public abstract class AetherIIBlockItemTagProvider {
         this.tag(AetherIITags.Blocks.AMBEROOT_LOGS, AetherIITags.Items.AMBEROOT_LOGS).add(
                 AetherIIBlocks.AMBEROOT_LOG.get(),
                 AetherIIBlocks.AMBEROOT_WOOD.get(),
-                AetherIIBlocks.AMBEROOT_TRUNK.get()
+                AetherIIBlocks.AMBEROOT_TRUNK.get(),
+                AetherIIBlocks.AMBEROOT_DEPOSIT.get(),
+                AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get(),
+                AetherIIBlocks.STRIPPED_AMBEROOT_WOOD.get(),
+                AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK.get()
         );
         this.tag(AetherIITags.Blocks.GUARDIAN_LOGS, AetherIITags.Items.GUARDIAN_LOGS).add(
                 AetherIIBlocks.GUARDIAN_LOG.get(),
@@ -138,6 +142,17 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.WISPROOT_BASE_BEAM.get(),
                 AetherIIBlocks.WISPROOT_TOP_BEAM.get(),
                 AetherIIBlocks.WISPROOT_BEAM.get()
+        );
+        this.tag(AetherIITags.Blocks.AMBEROOT_DECORATIVE_BLOCKS, AetherIITags.Items.AMBEROOT_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.AMBEROOT_FLOORBOARDS.get(),
+                AetherIIBlocks.AMBEROOT_HIGHLIGHT.get(),
+                AetherIIBlocks.AMBEROOT_SHINGLES.get(),
+                AetherIIBlocks.AMBEROOT_SMALL_SHINGLES.get(),
+                AetherIIBlocks.AMBEROOT_BASE_PLANKS.get(),
+                AetherIIBlocks.AMBEROOT_TOP_PLANKS.get(),
+                AetherIIBlocks.AMBEROOT_BASE_BEAM.get(),
+                AetherIIBlocks.AMBEROOT_TOP_BEAM.get(),
+                AetherIIBlocks.AMBEROOT_BEAM.get()
         );
         this.tag(AetherIITags.Blocks.HOLYSTONE_DECORATIVE_BLOCKS, AetherIITags.Items.HOLYSTONE_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.HOLYSTONE_FLAGSTONES.get(),
@@ -214,6 +229,30 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.ICESTONE_BASE_PILLAR.get(),
                 AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get(),
                 AetherIIBlocks.ICESTONE_PILLAR.get()
+        );
+        this.tag(AetherIITags.Blocks.QUICKSOIL_GLASS_DECORATIVE_BLOCKS, AetherIITags.Items.QUICKSOIL_GLASS_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.TILED_QUICKSOIL_GLASS.get(),
+                AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS.get()
+        );
+        this.tag(AetherIITags.Blocks.QUICKSOIL_GLASS_PANE_DECORATIVE_BLOCKS, AetherIITags.Items.QUICKSOIL_GLASS_PANE_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.TILED_QUICKSOIL_GLASS_PANE.get(),
+                AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS_PANE.get()
+        );
+        this.tag(AetherIITags.Blocks.CRUDE_SCATTERGLASS_DECORATIVE_BLOCKS, AetherIITags.Items.CRUDE_SCATTERGLASS_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS.get(),
+                AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS.get()
+        );
+        this.tag(AetherIITags.Blocks.CRUDE_SCATTERGLASS_PANE_DECORATIVE_BLOCKS, AetherIITags.Items.CRUDE_SCATTERGLASS_PANE_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS_PANE.get(),
+                AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS_PANE.get()
+        );
+        this.tag(AetherIITags.Blocks.SCATTERGLASS_DECORATIVE_BLOCKS, AetherIITags.Items.SCATTERGLASS_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS.get(),
+                AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS.get()
+        );
+        this.tag(AetherIITags.Blocks.SCATTERGLASS_PANE_DECORATIVE_BLOCKS, AetherIITags.Items.SCATTERGLASS_PANE_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE.get(),
+                AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get()
         );
         this.tag(AetherIITags.Blocks.ARILUM_LANTERN, AetherIITags.Items.ARILUM_LANTERN).add(
                 AetherIIBlocks.WHITE_ARILUM_LANTERN.get(),

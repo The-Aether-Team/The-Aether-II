@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.furniture.OutpostCampfireBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.natural.*;
+import com.aetherteam.aetherii.block.utility.AmberHourglassBlock;
 import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
 import com.aetherteam.aetherii.block.utility.BedrollBlock;
 import com.aetherteam.aetherii.client.AetherIIColorResolvers;
@@ -792,21 +793,21 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         ));
     }
 
-    public void createHighlandFern() {
-        MultiVariant plant = plainVariant(AetherIIModelTemplates.TEMPLATE_CUTOUT_TINTED_CROSS.create(AetherIIBlocks.HIGHLAND_FERN.get(), TextureMapping.cross(AetherIIBlocks.HIGHLAND_FERN.get()), this.modelOutput));
-        MultiVariant snowy = plainVariant(this.createSuffixedVariant(AetherIIBlocks.HIGHLAND_FERN.get(), "_snowy", AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS, TextureMapping::cross));
-        MultiVariant enchanted = plainVariant(this.createSuffixedVariant(AetherIIBlocks.HIGHLAND_FERN.get(), "_enchanted", AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS, TextureMapping::cross));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.HIGHLAND_FERN.get()).with(PropertyDispatch.initial(AetherTallGrassBlock.TYPE).generate((property) -> switch (property) {
+    public void createAetherFern() {
+        MultiVariant plant = plainVariant(AetherIIModelTemplates.TEMPLATE_CUTOUT_TINTED_CROSS.create(AetherIIBlocks.AETHER_FERN.get(), TextureMapping.cross(AetherIIBlocks.AETHER_FERN.get()), this.modelOutput));
+        MultiVariant snowy = plainVariant(this.createSuffixedVariant(AetherIIBlocks.AETHER_FERN.get(), "_snowy", AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS, TextureMapping::cross));
+        MultiVariant enchanted = plainVariant(this.createSuffixedVariant(AetherIIBlocks.AETHER_FERN.get(), "_enchanted", AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS, TextureMapping::cross));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.AETHER_FERN.get()).with(PropertyDispatch.initial(AetherTallGrassBlock.TYPE).generate((property) -> switch (property) {
             case DEFAULT -> plant;
             case SNOWY -> snowy;
             case ENCHANTED -> enchanted;
         })));
 
-        MultiVariant crossPot = plainVariant(AetherIIModelTemplates.TEMPLATE_CUTOUT_TINTED_FLOWERPOT_CROSS.create(AetherIIBlocks.POTTED_HIGHLAND_FERN.get(), TextureMapping.plant(AetherIIBlocks.HIGHLAND_FERN.get()), this.modelOutput));
-        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.POTTED_HIGHLAND_FERN.get(), crossPot));
+        MultiVariant crossPot = plainVariant(AetherIIModelTemplates.TEMPLATE_CUTOUT_TINTED_FLOWERPOT_CROSS.create(AetherIIBlocks.POTTED_AETHER_FERN.get(), TextureMapping.plant(AetherIIBlocks.AETHER_FERN.get()), this.modelOutput));
+        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.POTTED_AETHER_FERN.get(), crossPot));
 
-        ResourceLocation itemLocation = this.createFlatItemModelWithBlockTexture(AetherIIBlocks.HIGHLAND_FERN.asItem(), AetherIIBlocks.HIGHLAND_FERN.get());
-        this.registerSimpleTintedItemModel(AetherIIBlocks.HIGHLAND_FERN.get(), itemLocation, new AetherGrassColorSource(1, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F));
+        ResourceLocation itemLocation = this.createFlatItemModelWithBlockTexture(AetherIIBlocks.AETHER_FERN.asItem(), AetherIIBlocks.AETHER_FERN.get());
+        this.registerSimpleTintedItemModel(AetherIIBlocks.AETHER_FERN.get(), itemLocation, new AetherGrassColorSource(1, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F));
     }
 
     public void createBush(Block block, Block pot) {
@@ -1034,6 +1035,13 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant hangingLantern = plainVariant(AetherIITexturedModels.HANGING_RUSTIC_ARKENIUM_LANTERN.create(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get(), this.modelOutput));
         this.registerSimpleFlatItemModel(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get().asItem());
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get()).with(createBooleanModelDispatch(BlockStateProperties.HANGING, hangingLantern, lantern)));
+    }
+
+    public void createAmberHourglass(Block block) {
+        MultiVariant closed = plainVariant(AetherIIModelTemplates.AMBER_HOURGLASS.create(block, AetherIITextureMappings.amberHourglass(block), this.modelOutput));
+        MultiVariant open = plainVariant(AetherIIModelTemplates.AMBER_HOURGLASS.createWithSuffix(block, "_open", AetherIITextureMappings.amberHourglass(block, "_open"), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+                .with(BlockModelGenerators.createBooleanModelDispatch(AmberHourglassBlock.OPEN, open, closed)));
     }
 
     public void createAltar(Block block, Block particle) {

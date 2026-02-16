@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.data.resources.builders.worldgen.AetherIIStructur
 import com.aetherteam.aetherii.data.resources.registries.pools.CampPools;
 import com.aetherteam.aetherii.data.resources.registries.pools.InfectedGuardianTreePools;
 import com.aetherteam.aetherii.data.resources.registries.pools.OutpostPools;
+import com.aetherteam.aetherii.data.resources.registries.pools.WatchtowerPools;
 import com.aetherteam.aetherii.world.structure.type.AetherJigsawStructure;
 import com.aetherteam.aetherii.world.structure.piece.sentry.SentryRuinsProcessorSettings;
 import com.aetherteam.aetherii.world.structure.type.SentryRuinsStructure;
@@ -34,6 +35,7 @@ public class AetherIIStructures {
     public static final ResourceKey<Structure> CAMP_HIGHFIELDS = createKey("camp_highfields");
     public static final ResourceKey<Structure> CAMP_MAGNETIC = createKey("camp_magnetic");
     public static final ResourceKey<Structure> CAMP_ARCTIC = createKey("camp_arctic");
+    public static final ResourceKey<Structure> WATCHTOWER = createKey("watchtower");
     public static final ResourceKey<Structure> SENTRY_RUINS = createKey("sentry_ruins");
     public static final ResourceKey<Structure> INFECTED_GUARDIAN_TREE = createKey("infected_guardian_tree");
 
@@ -48,7 +50,7 @@ public class AetherIIStructures {
 
         context.register(OUTPOST, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_OUTPOST), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
-                templatePools.getOrThrow(OutpostPools.OUTPOST), Optional.empty(), 10, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 32, 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+                templatePools.getOrThrow(OutpostPools.OUTPOST), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 32, 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
         context.register(CAMP_HIGHFIELDS, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_CAMP_HIGHFIELDS), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
@@ -60,6 +62,10 @@ public class AetherIIStructures {
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_CAMP_ARCTIC), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
                 templatePools.getOrThrow(CampPools.ARCTIC_CENTER), Optional.empty(), 20, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 32, 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
+        context.register(WATCHTOWER, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_WATCHTOWER), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
+                templatePools.getOrThrow(WatchtowerPools.WATCHTOWER), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 32, 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+
         context.register(SENTRY_RUINS, new SentryRuinsStructure(AetherIIStructureBuilders.structure(
                 biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_SENTRY_RUINS),
                 GenerationStep.Decoration.UNDERGROUND_STRUCTURES,
@@ -67,7 +73,7 @@ public class AetherIIStructures {
                 6, 64, 24,
                 new SentryRuinsProcessorSettings(
                         processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM),
-                        processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_TUNNEL),
+                        processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_STAIRCASE),
                         processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_BOSS_ROOM))));
 
         context.register(INFECTED_GUARDIAN_TREE, new AetherJigsawStructure(

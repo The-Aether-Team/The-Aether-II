@@ -3,10 +3,15 @@ package com.aetherteam.aetherii;
 import com.aetherteam.aetherii.advancement.AetherIIAdvancementSoundOverrides;
 import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.command.AetherIICommands;
+import com.aetherteam.aetherii.loot.conditions.AetherIILootConditions;
+import com.aetherteam.aetherii.recipe.display.slot.AetherIISlotDisplays;
 import org.slf4j.Logger;
 
 import com.aetherteam.aetherii.advancement.predicate.AetherIIEntitySubPredicates;
-import com.aetherteam.aetherii.api.SkyrootLizardVariant;
+
+import com.aetherteam.aetherii.entity.variant.GlitterwingVariant;
+import com.aetherteam.aetherii.entity.variant.ShroudwingVariant;
+import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
@@ -35,13 +40,13 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.brain.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.ai.brain.sensor.AetherIISensorTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.variant.spawning.AetherIISpawnConditions;
 import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.consumeeffect.AetherIIConsumeEffectTypes;
-import com.aetherteam.aetherii.loot.conditions.AetherIILootConditions;
 import com.aetherteam.aetherii.loot.functions.AetherIILootFunctions;
 import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
 import com.aetherteam.aetherii.network.packet.clientbound.*;
@@ -118,6 +123,7 @@ public class AetherII {
                 AetherIIRecipeTypes.RECIPE_TYPES,
                 AetherIIRecipeSerializers.RECIPE_SERIALIZERS,
                 AetherIIRecipeDisplays.RECIPE_DISPLAYS,
+                AetherIISlotDisplays.SLOT_DISPLAYS,
                 AetherIIRecipeBookCategories.RECIPE_BOOK_CATEGORIES,
                 AetherIIGameEvents.GAME_EVENTS,
                 AetherIIPoi.POI,
@@ -138,6 +144,7 @@ public class AetherII {
                 AetherIIPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES,
                 AetherIIAdvancementTriggers.TRIGGERS,
                 AetherIIEntitySubPredicates.ENTITY_SUB_PREDICATES,
+                AetherIISpawnConditions.SPAWN_CONDITION_TYPES
         };
 
         for (DeferredRegister<?> register : registers) {
@@ -163,6 +170,8 @@ public class AetherII {
         event.dataPackRegistry(AetherIIRegistries.STYLE_DESIGN, StyleDesign.DIRECT_CODEC, StyleDesign.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.STYLE_MATERIAL, StyleMaterial.DIRECT_CODEC, StyleMaterial.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.SKYROOT_LIZARD_VARIANT, SkyrootLizardVariant.DIRECT_CODEC, SkyrootLizardVariant.DIRECT_CODEC);
+        event.dataPackRegistry(AetherIIRegistries.GLITTERWING_VARIANT, GlitterwingVariant.DIRECT_CODEC, GlitterwingVariant.DIRECT_CODEC);
+        event.dataPackRegistry(AetherIIRegistries.SHROUDWING_VARIANT, ShroudwingVariant.DIRECT_CODEC, ShroudwingVariant.DIRECT_CODEC);
         event.dataPackRegistry(AetherIIRegistries.REWARD_WRAPPER, RewardWrapper.DIRECT_CODEC, RewardWrapper.DIRECT_CODEC);
     }
 
@@ -215,11 +224,15 @@ public class AetherII {
         registrar.playToClient(ClientGrabItemPacket.TYPE, ClientGrabItemPacket.STREAM_CODEC, ClientGrabItemPacket::execute);
         registrar.playToClient(FlushGuidebookDataPacket.TYPE, FlushGuidebookDataPacket.STREAM_CODEC, FlushGuidebookDataPacket::execute);
         registrar.playToClient(ForgeSoundPacket.TYPE, ForgeSoundPacket.STREAM_CODEC, ForgeSoundPacket::execute);
+        registrar.playToClient(FreezingParticlePacket.TYPE, FreezingParticlePacket.STREAM_CODEC, FreezingParticlePacket::execute);
         registrar.playToClient(HestveilExplosionEffectsPacket.TYPE, HestveilExplosionEffectsPacket.STREAM_CODEC, HestveilExplosionEffectsPacket::execute);
         registrar.playToClient(GuidebookToastPacket.TYPE, GuidebookToastPacket.STREAM_CODEC, GuidebookToastPacket::execute);
         registrar.playToClient(DamageTypeParticlePacket.TYPE, DamageTypeParticlePacket.STREAM_CODEC, DamageTypeParticlePacket::execute);
         registrar.playToClient(PortalTravelSoundPacket.TYPE, PortalTravelSoundPacket.STREAM_CODEC, PortalTravelSoundPacket::execute);
+        registrar.playToClient(HourglassFinishParticlesPacket.TYPE, HourglassFinishParticlesPacket.STREAM_CODEC, HourglassFinishParticlesPacket::execute);
+        registrar.playToClient(HourglassProcessParticlesPacket.TYPE, HourglassProcessParticlesPacket.STREAM_CODEC, HourglassProcessParticlesPacket::execute);
         registrar.playToClient(RemountAerbunnyPacket.TYPE, RemountAerbunnyPacket.STREAM_CODEC, RemountAerbunnyPacket::execute);
+        registrar.playToClient(ResistanceKnockbackPacket.TYPE, ResistanceKnockbackPacket.STREAM_CODEC, ResistanceKnockbackPacket::execute);
         registrar.playToClient(SetVehiclePacket.TYPE, SetVehiclePacket.STREAM_CODEC, SetVehiclePacket::execute);
         registrar.playToClient(SwetSyncPacket.TYPE, SwetSyncPacket.STREAM_CODEC, SwetSyncPacket::execute);
         registrar.playToClient(GrassTintSyncPacket.TYPE, GrassTintSyncPacket.STREAM_CODEC, GrassTintSyncPacket::execute);

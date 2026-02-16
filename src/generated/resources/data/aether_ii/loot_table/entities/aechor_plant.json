@@ -34,6 +34,9 @@
           "type": "minecraft:item",
           "conditions": [
             {
+              "condition": "minecraft:killed_by_player"
+            },
+            {
               "condition": "aether_ii:player_grown"
             }
           ],
@@ -62,11 +65,11 @@
               "condition": "minecraft:random_chance_with_enchanted_bonus",
               "enchanted_chance": {
                 "type": "minecraft:linear",
-                "base": 0.2,
+                "base": 0.45,
                 "per_level_above_first": 0.1
               },
               "enchantment": "minecraft:looting",
-              "unenchanted_chance": 0.1
+              "unenchanted_chance": 0.35
             },
             {
               "condition": "minecraft:inverted",

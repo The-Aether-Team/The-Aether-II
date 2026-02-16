@@ -2,7 +2,7 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.blue_swet",
   "effect_resistances": [],
   "entity_type": "aether_ii:blue_swet",
-  "health": 12,
+  "health": 16,
   "icon": "aether_ii:guidebook/bestiary/blue_swet",
   "id": "aether_ii:blue_swet",
   "impact_defense": 0,
@@ -25,7 +25,7 @@
     }
   ],
   "name": "entity.aether_ii.blue_swet",
-  "pierce_defense": -2,
-  "slash_defense": 2,
+  "pierce_defense": -1,
+  "slash_defense": 0,
   "slot_name": "entity.aether_ii.blue_swet"
 }

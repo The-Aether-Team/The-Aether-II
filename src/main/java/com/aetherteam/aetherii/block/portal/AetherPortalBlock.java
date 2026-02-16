@@ -3,8 +3,11 @@ package com.aetherteam.aetherii.block.portal;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.instance.FadeOutSoundInstance;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import net.minecraft.BlockUtil;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
@@ -69,14 +72,14 @@ public class AetherPortalBlock extends Block implements Portal {
     @Nullable
     @Override
     public TeleportTransition getPortalDestination(ServerLevel pLevel, Entity pEntity, BlockPos pPos) {
-        ResourceKey<Level> resourcekey = pLevel.dimension() == AetherIIDimensions.AETHER_HIGHLANDS_LEVEL ? Level.OVERWORLD : AetherIIDimensions.AETHER_HIGHLANDS_LEVEL;
+        ResourceKey<Level> resourcekey = pLevel.dimension() == AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL ? Level.OVERWORLD : AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL;
         ServerLevel serverlevel = pLevel.getServer().getLevel(resourcekey);
         if (serverlevel == null) {
             return null;
         } else {
             WorldBorder worldborder = serverlevel.getWorldBorder();
             double d0 = DimensionType.getTeleportationScale(pLevel.dimensionType(), serverlevel.dimensionType());
-            int yOffset = resourcekey == AetherIIDimensions.AETHER_HIGHLANDS_LEVEL ? 64 : -64;
+            int yOffset = resourcekey == AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL ? 64 : -64;
             BlockPos blockpos = worldborder.clampToBounds(pEntity.getX() * d0, pEntity.getY() + yOffset, pEntity.getZ() * d0);
             return this.getExitPortal(serverlevel, pEntity, pPos, blockpos, worldborder);
         }
@@ -157,7 +160,7 @@ public class AetherPortalBlock extends Block implements Portal {
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (random.nextInt(100) == 0) {
-            level.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, AetherIISoundEvents.BLOCK_AETHER_PORTAL_AMBIENT.get(), SoundSource.BLOCKS, 0.5F, random.nextFloat() * 0.4F + 0.8F, false);
+            PortalClientUtil.playAmbientSound(pos);
         }
         for (int i = 0; i < 4; ++i) {
             double x = pos.getX() + random.nextDouble();

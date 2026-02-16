@@ -1,0 +1,34 @@
+{
+  "parent": "aether_ii:golden_amber",
+  "criteria": {
+    "amber_hourglass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:amber_hourglass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "color": "aqua",
+      "translate": "advancement.aether_ii.amber_hourglass.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "aether_ii:amber_hourglass"
+    },
+    "title": {
+      "translate": "advancement.aether_ii.amber_hourglass"
+    }
+  },
+  "requirements": [
+    [
+      "amber_hourglass"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

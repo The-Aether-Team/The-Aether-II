@@ -1,9 +1,10 @@
 package com.aetherteam.aetherii.client;
 
-import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
+import com.aetherteam.aetherii.client.renderer.level.HolyIslesSpecialEffects;
 import com.aetherteam.aetherii.client.sound.instance.MusicPlayerSoundInstance;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.SoundEngineAccessor;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.SoundManagerAccessor;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -45,8 +46,15 @@ public class AetherIIClientProxy {
         soundInstances.keySet().stream().filter((soundInstance) -> soundInstance instanceof MusicPlayerSoundInstance).map(SoundInstance::getLocation).forEach(location -> Minecraft.getInstance().getSoundManager().stop(location, source));
     }
 
-    public static boolean isHighlandsSpecialEffects(Level level) {
-        return level instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HighlandsSpecialEffects;
+    public static boolean isHolyIslesSpecialEffects(Level level) {
+        return level instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HolyIslesSpecialEffects;
+    }
+
+    public static AdvancementHolder getAdvancementParent(AdvancementHolder advancement) {
+        if (Minecraft.getInstance().player != null && advancement.value().parent().isPresent()) {
+            return Minecraft.getInstance().player.connection.getAdvancements().get(advancement.value().parent().get());
+        }
+        return null;
     }
 
     public static Player getClientPlayer() {

@@ -10,7 +10,6 @@ import com.aetherteam.aetherii.client.gui.component.guidebook.DescriptionButton;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
-import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.attributes.EffectResistanceAttribute;
 import com.aetherteam.aetherii.network.packet.serverbound.CheckBestiaryEntryPacket;
 import com.google.common.collect.ImmutableList;
@@ -37,7 +36,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -140,7 +138,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         livingEntity.setXRot(-angleYComponent);
         livingEntity.setYHeadRot(livingEntity.getYRot());
         livingEntity.yHeadRotO = livingEntity.getYRot();
-        livingEntity.tickCount = -1;
+        livingEntity.tickCount = -2;
 
         Vector3f vector3f = new Vector3f(0.0F, livingEntity.getBbHeight() / 2.0F + yOffset, 0.0F);
         InventoryScreen.renderEntityInInventory(guiGraphics, startX, startY, endX, endY, scale, vector3f, xQuaternion, zQuaternion, livingEntity);
@@ -387,7 +385,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         int y = 103;
         int lineHeight = 9;
         int color = 0xffffffff;
-        MultiLineLabel label = MultiLineLabel.create(font, 140, 5, component);
+        MultiLineLabel label = MultiLineLabel.create(font, 135, 5, component);
         label.renderLeftAligned(guiGraphics, x, y, lineHeight, color);
     }
 

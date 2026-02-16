@@ -1,5 +1,5 @@
 {
-  "parent": "aether_ii:ambrosium",
+  "parent": "aether_ii:trowel",
   "criteria": {
     "enchanted_aether_grass": {
       "conditions": {
@@ -25,6 +25,7 @@
   },
   "display": {
     "description": {
+      "color": "aqua",
       "translate": "advancement.aether_ii.enchanted_aether_grass.desc"
     },
     "icon": {

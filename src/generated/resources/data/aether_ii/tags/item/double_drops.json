@@ -4,7 +4,7 @@
     "aether_ii:skyroot_stick",
     "aether_ii:skyroot_pinecone",
     "aether_ii:ambrosium_shard",
-    "aether_ii:zanite_gemstone",
+    "aether_ii:fossilized_zanite",
     "aether_ii:inert_arkenium",
     "aether_ii:inert_gravitite",
     "aether_ii:scatterglass_shard",
@@ -18,6 +18,8 @@
     "aether_ii:blueberry",
     "aether_ii:orange",
     "aether_ii:wyndberry",
+    "aether_ii:brettl_grass",
+    "aether_ii:brettl_cane",
     "aether_ii:burrukai_rib_cut",
     "aether_ii:kirrid_loin",
     "aether_ii:raw_taegore_meat",
@@ -76,6 +78,8 @@
     "aether_ii:irradiated_wisptop_leaves",
     "aether_ii:irradiated_greatroot_leaves",
     "aether_ii:irradiated_greatoak_leaves",
-    "aether_ii:irradiated_greatboa_leaves"
+    "aether_ii:irradiated_greatboa_leaves",
+    "aether_ii:aether_bush",
+    "aether_ii:brettl_flower"
   ]
 }

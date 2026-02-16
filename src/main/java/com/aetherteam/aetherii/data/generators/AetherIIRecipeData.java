@@ -8,10 +8,12 @@ import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
+import com.aetherteam.aetherii.recipe.recipes.OutputEntry;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentExactPredicate;
 import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -21,6 +23,7 @@ import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
@@ -91,6 +94,24 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 AetherIIBlocks.RED_CLOUDWOOL_CARPET.asItem(),
                 AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.asItem(),
                 AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.asItem()
+        );
+        List<Item> bed = List.of(
+                AetherIIBlocks.BLACK_SKYROOT_BED.asItem(),
+                AetherIIBlocks.BLUE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.BROWN_SKYROOT_BED.asItem(),
+                AetherIIBlocks.CYAN_SKYROOT_BED.asItem(),
+                AetherIIBlocks.GRAY_SKYROOT_BED.asItem(),
+                AetherIIBlocks.GREEN_SKYROOT_BED.asItem(),
+                AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED.asItem(),
+                AetherIIBlocks.LIME_SKYROOT_BED.asItem(),
+                AetherIIBlocks.MAGENTA_SKYROOT_BED.asItem(),
+                AetherIIBlocks.ORANGE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.PINK_SKYROOT_BED.asItem(),
+                AetherIIBlocks.PURPLE_SKYROOT_BED.asItem(),
+                AetherIIBlocks.RED_SKYROOT_BED.asItem(),
+                AetherIIBlocks.YELLOW_SKYROOT_BED.asItem(),
+                AetherIIBlocks.WHITE_SKYROOT_BED.asItem()
         );
         
         // Blocks
@@ -262,7 +283,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .save(this.output);
 
         // Skyroot Planks
-        this.planksFromLog(AetherIIBlocks.SKYROOT_PLANKS.get(), AetherIITags.Items.CRAFTS_SKYROOT_PLANKS, 4);
+        this.planksFromLog(AetherIIBlocks.SKYROOT_PLANKS.get(), AetherIITags.Items.SKYROOT_LOGS, 4);
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SKYROOT_PLANKS.get())
                 .group("planks_from_artisanry")
                 .requires(AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS)
@@ -309,7 +330,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_TRAPDOOR.get(), AetherIIBlocks.SECRET_SKYROOT_TRAPDOOR.get());
         
         // Greatroot Planks
-        this.planksFromLog(AetherIIBlocks.GREATROOT_PLANKS.get(), AetherIITags.Items.CRAFTS_GREATROOT_PLANKS, 4);
+        this.planksFromLog(AetherIIBlocks.GREATROOT_PLANKS.get(), AetherIITags.Items.GREATROOT_LOGS, 4);
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GREATROOT_PLANKS.get())
                 .group("planks_from_artisanry")
                 .requires(AetherIITags.Items.GREATROOT_DECORATIVE_BLOCKS)
@@ -356,7 +377,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GREATROOT_TRAPDOOR.get(), AetherIIBlocks.SECRET_GREATROOT_TRAPDOOR.get());
 
         // Wisproot Planks
-        this.planksFromLog(AetherIIBlocks.WISPROOT_PLANKS.get(), AetherIITags.Items.CRAFTS_WISPROOT_PLANKS, 4);
+        this.planksFromLog(AetherIIBlocks.WISPROOT_PLANKS.get(), AetherIITags.Items.WISPROOT_LOGS, 4);
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.WISPROOT_PLANKS.get())
                 .group("planks_from_artisanry")
                 .requires(AetherIITags.Items.WISPROOT_DECORATIVE_BLOCKS)
@@ -401,6 +422,53 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.WISPROOT_PLANKS.get(), AetherIIBlocks.WISPROOT_BEAM.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.WISPROOT_DOOR.get(), AetherIIBlocks.SECRET_WISPROOT_DOOR.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.WISPROOT_TRAPDOOR.get(), AetherIIBlocks.SECRET_WISPROOT_TRAPDOOR.get());
+
+        // Amberoot Planks
+        this.planksFromLog(AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIITags.Items.AMBEROOT_LOGS, 4);
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.AMBEROOT_PLANKS.get())
+                .group("planks_from_artisanry")
+                .requires(AetherIITags.Items.AMBEROOT_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.AMBEROOT_DECORATIVE_BLOCKS))
+                .save(this.output, this.name("amberoot_planks_from_artisanry"));
+        this.fence(AetherIIBlocks.AMBEROOT_FENCE, AetherIIBlocks.AMBEROOT_PLANKS).save(this.output);
+        this.fenceGate(AetherIIBlocks.AMBEROOT_FENCE_GATE, AetherIIBlocks.AMBEROOT_PLANKS).save(this.output);
+        this.doorBuilder(AetherIIBlocks.AMBEROOT_DOOR, Ingredient.of(AetherIIBlocks.AMBEROOT_PLANKS.get())).unlockedBy(getHasName(AetherIIBlocks.AMBEROOT_PLANKS.get()), has(AetherIIBlocks.AMBEROOT_PLANKS.get())).group("wooden_door").save(this.output);
+        this.trapdoorBuilder(AetherIIBlocks.AMBEROOT_TRAPDOOR, Ingredient.of(AetherIIBlocks.AMBEROOT_PLANKS.get())).unlockedBy(getHasName(AetherIIBlocks.AMBEROOT_PLANKS.get()), has(AetherIIBlocks.AMBEROOT_PLANKS.get())).group("wooden_trapdoor").save(this.output);
+        this.buttonBuilder(AetherIIBlocks.AMBEROOT_BUTTON.get(), Ingredient.of(AetherIIBlocks.AMBEROOT_PLANKS.get())).unlockedBy(getHasName(AetherIIBlocks.AMBEROOT_PLANKS.get()), has(AetherIIBlocks.AMBEROOT_PLANKS.get())).group("wooden_button").save(this.output);
+        this.pressurePlateBuilder(RecipeCategory.REDSTONE, AetherIIBlocks.AMBEROOT_PRESSURE_PLATE.get(), Ingredient.of(AetherIIBlocks.AMBEROOT_PLANKS.get())).unlockedBy(getHasName(AetherIIBlocks.AMBEROOT_PLANKS.get()), has(AetherIIBlocks.AMBEROOT_PLANKS.get())).group("wooden_pressure_plate").save(this.output);
+        this.stairs(AetherIIBlocks.AMBEROOT_STAIRS, AetherIIBlocks.AMBEROOT_PLANKS).group("wooden_stairs").save(this.output);
+        this.slabBuilder(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.AMBEROOT_SLAB.get(), Ingredient.of(AetherIIBlocks.AMBEROOT_PLANKS.get()))
+                .group("wooden_slab")
+                .unlockedBy(getHasName(AetherIIBlocks.AMBEROOT_PLANKS.get()), has(AetherIIBlocks.AMBEROOT_PLANKS.get()))
+                .save(this.output);
+        this.sign(getter, AetherIIBlocks.AMBEROOT_SIGN.get(), AetherIIBlocks.AMBEROOT_PLANKS);
+        this.hangingSign(getter, AetherIIBlocks.AMBEROOT_HANGING_SIGN.get(), AetherIIBlocks.STRIPPED_AMBEROOT_LOG);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_STAIRS.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_SLAB.get(), AetherIIBlocks.AMBEROOT_PLANKS.get(), 2);
+
+        // Amberoot Decorative Blocks
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_FLOORBOARDS.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_HIGHLIGHT.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_SHINGLES.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_SMALL_SHINGLES.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_BASE_PLANKS.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_TOP_PLANKS.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_BASE_BEAM.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_TOP_BEAM.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_BEAM.get(), AetherIIBlocks.AMBEROOT_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SECRET_AMBEROOT_DOOR.get(), AetherIIBlocks.AMBEROOT_DOOR.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SECRET_AMBEROOT_TRAPDOOR.get(), AetherIIBlocks.AMBEROOT_TRAPDOOR.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_FLOORBOARDS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_HIGHLIGHT.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_SHINGLES.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_SMALL_SHINGLES.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_BASE_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_TOP_PLANKS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_BASE_BEAM.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_TOP_BEAM.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_PLANKS.get(), AetherIIBlocks.AMBEROOT_BEAM.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_DOOR.get(), AetherIIBlocks.SECRET_AMBEROOT_DOOR.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_TRAPDOOR.get(), AetherIIBlocks.SECRET_AMBEROOT_TRAPDOOR.get());
 
         // Holystone
         this.stairs(AetherIIBlocks.HOLYSTONE_STAIRS, AetherIIBlocks.HOLYSTONE).save(this.output);
@@ -484,7 +552,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.HOLYSTONE_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get(), 0.1F, 200).unlockedBy(getHasName(AetherIIBlocks.HOLYSTONE_BRICKS.get()), has(AetherIIBlocks.HOLYSTONE_BRICKS.get())).save(this.output);
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get())
                 .group("bricks_from_artisanry")
-                .requires(AetherIITags.Items.HOLYSTONE_DECORATIVE_BLOCKS)
+                .requires(AetherIITags.Items.FADED_HOLYSTONE_DECORATIVE_BLOCKS)
                 .unlockedBy("has_faded_holystone_blocks", has(AetherIITags.Items.FADED_HOLYSTONE_DECORATIVE_BLOCKS))
                 .save(this.output, name("faded_holystone_bricks_from_artisanry"));
         this.stairs(AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS, AetherIIBlocks.FADED_HOLYSTONE_BRICKS).save(this.output);
@@ -867,6 +935,21 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         // Glass
         this.altarEnchanting(RecipeCategory.MISC, AetherIIBlocks.QUICKSOIL_GLASS, AetherIIBlocks.QUICKSOIL, 1, 0.0F).save(this.output);
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.CRUDE_SCATTERGLASS.get()), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SCATTERGLASS.get(), 0.1F, 200).unlockedBy("has_crude_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS.get())).save(this.output);
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.QUICKSOIL_GLASS.get())
+                .group("glass_from_artisanry")
+                .requires(AetherIITags.Items.QUICKSOIL_GLASS_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.QUICKSOIL_GLASS_DECORATIVE_BLOCKS))
+                .save(this.output, name("quicksoil_glass_from_artisanry"));
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.CRUDE_SCATTERGLASS.get())
+                .group("glass_from_artisanry")
+                .requires(AetherIITags.Items.CRUDE_SCATTERGLASS_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.CRUDE_SCATTERGLASS_DECORATIVE_BLOCKS))
+                .save(this.output, name("crude_scatterglass_from_artisanry"));
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SCATTERGLASS.get())
+                .group("glass_from_artisanry")
+                .requires(AetherIITags.Items.SCATTERGLASS_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.SCATTERGLASS_DECORATIVE_BLOCKS))
+                .save(this.output, name("scatterglass_from_artisanry"));
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.TILED_QUICKSOIL_GLASS.get(), AetherIIBlocks.QUICKSOIL_GLASS.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS.get(), AetherIIBlocks.QUICKSOIL_GLASS.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS.get(), AetherIIBlocks.CRUDE_SCATTERGLASS.get());
@@ -885,6 +968,21 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get(), 16).define('#', AetherIIBlocks.CRUDE_SCATTERGLASS.get()).pattern("###").pattern("###").unlockedBy("has_crude_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS.get())).save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SCATTERGLASS_PANE.get(), 16).define('#', AetherIIBlocks.SCATTERGLASS.get()).pattern("###").pattern("###").unlockedBy("has_scatterglass", has(AetherIIBlocks.SCATTERGLASS.get())).save(this.output);
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get()), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SCATTERGLASS_PANE.get(), 0.1F, 200).unlockedBy("has_crude_scatterglass_pane", has(AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get())).save(this.output, name("scatterglass_pane_from_smelting"));
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.QUICKSOIL_GLASS_PANE.get())
+                .group("glass_pane_from_artisanry")
+                .requires(AetherIITags.Items.QUICKSOIL_GLASS_PANE_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.QUICKSOIL_GLASS_PANE_DECORATIVE_BLOCKS))
+                .save(this.output, name("quicksoil_glass_pane_from_artisanry"));
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get())
+                .group("glass_pane_from_artisanry")
+                .requires(AetherIITags.Items.CRUDE_SCATTERGLASS_PANE_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.CRUDE_SCATTERGLASS_PANE_DECORATIVE_BLOCKS))
+                .save(this.output, name("crude_scatterglass_pane_from_artisanry"));
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SCATTERGLASS_PANE.get())
+                .group("glass_pane_from_artisanry")
+                .requires(AetherIITags.Items.SCATTERGLASS_PANE_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.SCATTERGLASS_PANE_DECORATIVE_BLOCKS))
+                .save(this.output, name("scatterglass_pane_from_artisanry"));
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.TILED_QUICKSOIL_GLASS_PANE.get(), AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS_PANE.get(), AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS_PANE.get(), AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get());
@@ -978,6 +1076,26 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.carpet(AetherIIBlocks.RED_CLOUDWOOL_CARPET, AetherIIBlocks.RED_CLOUDWOOL.get());
         this.carpet(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET, AetherIIBlocks.BLACK_CLOUDWOOL.get());
 
+        // Skyroot Beds
+        this.colorBlockWithDye(dyes, bed, AetherIIBlocks.SKYROOT_BED.asItem(), "bed");
+        this.bed(getter, AetherIIBlocks.SKYROOT_BED, AetherIIBlocks.CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.WHITE_SKYROOT_BED, AetherIIBlocks.WHITE_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.ORANGE_SKYROOT_BED, AetherIIBlocks.ORANGE_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.MAGENTA_SKYROOT_BED, AetherIIBlocks.MAGENTA_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED, AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.YELLOW_SKYROOT_BED, AetherIIBlocks.YELLOW_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.LIME_SKYROOT_BED, AetherIIBlocks.LIME_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.PINK_SKYROOT_BED, AetherIIBlocks.PINK_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.GRAY_SKYROOT_BED, AetherIIBlocks.GRAY_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED, AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.CYAN_SKYROOT_BED, AetherIIBlocks.CYAN_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.PURPLE_SKYROOT_BED, AetherIIBlocks.PURPLE_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.BLUE_SKYROOT_BED, AetherIIBlocks.BLUE_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.BROWN_SKYROOT_BED, AetherIIBlocks.BROWN_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.GREEN_SKYROOT_BED, AetherIIBlocks.GREEN_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.RED_SKYROOT_BED, AetherIIBlocks.RED_CLOUDWOOL);
+        this.bed(getter, AetherIIBlocks.BLACK_SKYROOT_BED, AetherIIBlocks.BLACK_CLOUDWOOL);
+
         // Arkenium Blocks
         this.doorBuilder(AetherIIBlocks.ARKENIUM_DOOR, Ingredient.of(AetherIIItems.ARKENIUM_PLATE.get())).unlockedBy(getHasName(AetherIIItems.ARKENIUM_PLATE.get()), has(AetherIIItems.ARKENIUM_PLATE.get())).save(this.output);
         this.twoByTwoPacker(RecipeCategory.REDSTONE, AetherIIBlocks.ARKENIUM_TRAPDOOR, AetherIIItems.ARKENIUM_PLATE);
@@ -1070,12 +1188,21 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .unlockedBy(getHasName(Blocks.BLAST_FURNACE), has(Blocks.SMOOTH_STONE))
                 .save(this.output, this.name("blast_furnace_from_holystone_furnace"));
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBER_HOURGLASS.get())
+                .define('P', AetherIITags.Items.PLANKS_CRAFTING)
+                .define('S', AetherIITags.Items.RODS_SKYROOT)
+                .define('A', AetherIITags.Items.GEMS_AMBER)
+                .pattern("APA")
+                .pattern("SAS")
+                .pattern("APA")
+                .unlockedBy(getHasName(AetherIIBlocks.AMBER_HOURGLASS.get()), has(AetherIITags.Items.PLANKS_CRAFTING))
+                .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ALTAR.get())
-                .define('H', AetherIITags.Items.STONE_CRAFTING)
+                .define('U', AetherIIBlocks.UNDERSHALE)
                 .define('Z', AetherIITags.Items.GEMS_ZANITE)
-                .pattern("HHH")
-                .pattern("HZH")
-                .pattern("HHH")
+                .pattern("ZZZ")
+                .pattern(" Z ")
+                .pattern("UUU")
                 .unlockedBy(getHasName(AetherIIBlocks.ALTAR.get()), has(AetherIITags.Items.GEMS_ZANITE))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ARTISANS_BENCH.get())
@@ -1164,6 +1291,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("#")
                 .unlockedBy("has_holystone", this.has(AetherIIBlocks.HOLYSTONE))
                 .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, Items.ARMOR_STAND)
+                .define('/', AetherIITags.Items.RODS_SKYROOT)
+                .define('_', AetherIIBlocks.HOLYSTONE_SLAB)
+                .pattern("///")
+                .pattern(" / ")
+                .pattern("/_/")
+                .unlockedBy("has_holystone_slab", this.has(AetherIIBlocks.HOLYSTONE_SLAB))
+                .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.REDSTONE, Blocks.DAYLIGHT_DETECTOR)
                 .define('Q', Items.QUARTZ)
                 .define('G', AetherIIBlocks.SCATTERGLASS)
@@ -1174,29 +1309,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_quartz", this.has(Items.QUARTZ))
                 .save(this.output);
 
-        // Skyroot Beds
-        this.bed(getter, AetherIIBlocks.SKYROOT_BED, AetherIIBlocks.CLOUDWOOL);
-        this.bed(getter, AetherIIBlocks.WHITE_SKYROOT_BED, AetherIIBlocks.WHITE_CLOUDWOOL);
-        this.bed(getter, AetherIIBlocks.ORANGE_SKYROOT_BED, AetherIIBlocks.ORANGE_CLOUDWOOL);
-        this.bed(getter, AetherIIBlocks.MAGENTA_SKYROOT_BED, AetherIIBlocks.MAGENTA_CLOUDWOOL);
-        this.bed(getter, AetherIIBlocks.LIGHT_BLUE_SKYROOT_BED, AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL);
-        this.bed(getter, AetherIIBlocks.YELLOW_SKYROOT_BED, AetherIIBlocks.YELLOW_CLOUDWOOL);
-        this.bed(getter, AetherIIBlocks.LIME_SKYROOT_BED, AetherIIBlocks.LIME_CLOUDWOOL);
-        this.bed(getter, AetherIIBlocks.PINK_SKYROOT_BED, AetherIIBlocks.PINK_CLOUDWOOL);
-        this.bed(getter, AetherIIBlocks.GRAY_SKYROOT_BED, AetherIIBlocks.GRAY_CLOUDWOOL);
-        this.bed(getter, AetherIIBlocks.LIGHT_GRAY_SKYROOT_BED, AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL);
-        this.bed(getter, AetherIIBlocks.CYAN_SKYROOT_BED, AetherIIBlocks.CYAN_CLOUDWOOL);
-        this.bed(getter, AetherIIBlocks.PURPLE_SKYROOT_BED, AetherIIBlocks.PURPLE_CLOUDWOOL);
-        this.bed(getter, AetherIIBlocks.BLUE_SKYROOT_BED, AetherIIBlocks.BLUE_CLOUDWOOL);
-        this.bed(getter, AetherIIBlocks.BROWN_SKYROOT_BED, AetherIIBlocks.BROWN_CLOUDWOOL);
-        this.bed(getter, AetherIIBlocks.GREEN_SKYROOT_BED, AetherIIBlocks.GREEN_CLOUDWOOL);
-        this.bed(getter, AetherIIBlocks.RED_SKYROOT_BED, AetherIIBlocks.RED_CLOUDWOOL);
-        this.bed(getter, AetherIIBlocks.BLACK_SKYROOT_BED, AetherIIBlocks.BLACK_CLOUDWOOL);
-
         // Bookshelves
         this.bookshelf(getter, AetherIIBlocks.SKYROOT_BOOKSHELF, AetherIIBlocks.SKYROOT_PLANKS);
         this.bookshelf(getter, AetherIIBlocks.GREATROOT_BOOKSHELF, AetherIIBlocks.GREATROOT_PLANKS);
         this.bookshelf(getter, AetherIIBlocks.WISPROOT_BOOKSHELF, AetherIIBlocks.WISPROOT_PLANKS);
+        this.bookshelf(getter, AetherIIBlocks.AMBEROOT_BOOKSHELF, AetherIIBlocks.AMBEROOT_PLANKS);
         this.bookshelf(getter, AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), AetherIIBlocks.HOLYSTONE_BRICKS);
 
         // Items
@@ -1332,6 +1449,72 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.makeBootsWithTag(getter, AetherIIItems.GRAVITITE_BOOTS, AetherIITags.Items.PLATES_GRAVITITE, "gravitite").save(this.output);
         this.makeGlovesWithTag(getter, AetherIIItems.GRAVITITE_GLOVES, AetherIITags.Items.PLATES_GRAVITITE, "gravitite").save(this.output);
 
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.NEPTUNE_HELMET, 1)
+                .define('N', AetherIIItems.NEPTUNE_SCALE)
+                .define('#', AetherIIItems.ZANITE_HELMET)
+                .pattern("NNN")
+                .pattern("N#N")
+                .pattern("NNN")
+                .unlockedBy("neptune", has(AetherIIItems.NEPTUNE_SCALE))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.NEPTUNE_CHESTPLATE, 1)
+                .define('N', AetherIIItems.NEPTUNE_SCALE)
+                .define('#', AetherIIItems.ZANITE_CHESTPLATE)
+                .pattern("NNN")
+                .pattern("N#N")
+                .pattern("NNN")
+                .unlockedBy("neptune", has(AetherIIItems.NEPTUNE_SCALE))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.NEPTUNE_LEGGINGS, 1)
+                .define('N', AetherIIItems.NEPTUNE_SCALE)
+                .define('#', AetherIIItems.ZANITE_LEGGINGS)
+                .pattern("NNN")
+                .pattern("N#N")
+                .pattern("NNN")
+                .unlockedBy("neptune", has(AetherIIItems.NEPTUNE_SCALE))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.NEPTUNE_BOOTS, 1)
+                .define('N', AetherIIItems.NEPTUNE_SCALE)
+                .define('#', AetherIIItems.ZANITE_BOOTS)
+                .pattern("NNN")
+                .pattern("N#N")
+                .pattern("NNN")
+                .unlockedBy("neptune", has(AetherIIItems.NEPTUNE_SCALE))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.NEPTUNE_GLOVES, 1)
+                .define('N', AetherIIItems.NEPTUNE_SCALE)
+                .define('#', AetherIIItems.ZANITE_GLOVES)
+                .pattern("NNN")
+                .pattern("N#N")
+                .pattern("NNN")
+                .unlockedBy("neptune", has(AetherIIItems.NEPTUNE_SCALE))
+                .save(this.output);
+
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.SENTRY_BOOTS, 1)
+                .define('S', AetherIIItems.SENTRY_SERVO)
+                .define('#', AetherIIItems.ZANITE_BOOTS)
+                .pattern("SSS")
+                .pattern("S#S")
+                .pattern("SSS")
+                .unlockedBy("sentry", has(AetherIIItems.SENTRY_SERVO))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.HAMMER_OF_DEMOLITION, 1)
+                .define('S', AetherIIItems.SENTRY_SERVO)
+                .define('#', AetherIIItems.ZANITE_HAMMER)
+                .pattern("SSS")
+                .pattern("S#S")
+                .pattern("SSS")
+                .unlockedBy("sentry", has(AetherIIItems.SENTRY_SERVO))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIItems.KINETIC_THRUSTERS, 1)
+                .define('S', AetherIIItems.SENTRY_SERVO)
+                .define('#', AetherIIItems.ZANITE_GEMSTONE)
+                .pattern("SSS")
+                .pattern("S#S")
+                .pattern("SSS")
+                .unlockedBy("sentry", has(AetherIIItems.SENTRY_SERVO))
+                .save(this.output);
+
         // Accessories
         this.makePendantWithTag(getter, AetherIIItems.ZANITE_PENDANT, AetherIITags.Items.GEMS_ZANITE, Ingredient.of(AetherIIItems.CLOUDTWINE), "zanite").save(this.output);
 
@@ -1432,14 +1615,549 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.blastingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.AMBROSIUM_ORE.get(), 0.1F).group("ambrosium").save(this.output, this.name("ambrosium_shard_from_blasting"));
         this.smeltingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(), 0.1F).group("ambrosium").save(this.output, this.name("ambrosium_shard_from_smelting_undershale_ambrosium_ore"));
         this.blastingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(), 0.1F).group("ambrosium").save(this.output, this.name("ambrosium_shard_from_blasting_undershale_ambrosium_ore"));
-        this.smeltingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.ZANITE_ORE.get(), 0.3F).group("zanite").save(this.output, this.name("zanite_gemstone_from_smelting"));
-        this.blastingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.ZANITE_ORE.get(), 0.3F).group("zanite").save(this.output, this.name("zanite_gemstone_from_blasting"));
-        this.smeltingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), 0.3F).group("zanite").save(this.output, this.name("zanite_gemstone_from_smelting_undershale_zanite_ore"));
-        this.blastingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), 0.3F).group("zanite").save(this.output, this.name("zanite_gemstone_from_blasting_undershale_zanite_ore"));
-        this.smeltingOreRecipe(AetherIIItems.GLINT_GEMSTONE.get(), AetherIIBlocks.GLINT_ORE.get(), 0.3F).group("glint").save(this.output, this.name("glint_gemstone_from_smelting"));
-        this.blastingOreRecipe(AetherIIItems.GLINT_GEMSTONE.get(), AetherIIBlocks.GLINT_ORE.get(), 0.3F).group("glint").save(this.output, this.name("glint_gemstone_from_blasting"));
-        this.smeltingOreRecipe(AetherIIItems.GLINT_GEMSTONE.get(), AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(), 0.3F).group("glint").save(this.output, this.name("glint_gemstone_from_smelting_undershale_glint_ore"));
-        this.blastingOreRecipe(AetherIIItems.GLINT_GEMSTONE.get(), AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(), 0.3F).group("glint").save(this.output, this.name("glint_gemstone_from_blasting_undershale_glint_ore"));
+
+        this.hourglassRestoring(RecipeCategory.MISC,
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 85), this.hourglass(2, 10), this.hourglass(3, 5)),
+                AetherIIItems.FOSSILIZED_ZANITE, 0.0F).group("zanite").save(this.output, this.name("restore_zanite_gemstone"));
+        this.hourglassRestoring(RecipeCategory.MISC,
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 85), this.hourglass(2, 10), this.hourglass(3, 5)),
+                AetherIIBlocks.ZANITE_ORE, 0.0F).group("zanite").save(this.output, this.name("restore_zanite_gemstone_from_ore"));
+        this.hourglassRestoring(RecipeCategory.MISC,
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 85), this.hourglass(2, 10), this.hourglass(3, 5)),
+                AetherIIBlocks.UNDERSHALE_ZANITE_ORE, 0.0F).group("zanite").save(this.output, this.name("restore_zanite_gemstone_from_undershale_ore"));
+
+        this.hourglassRestoring(RecipeCategory.MISC,
+                AetherIIItems.GLINT_GEMSTONE, List.of(this.hourglass(1, 85), this.hourglass(2, 10), this.hourglass(3, 5)),
+                AetherIIItems.FOSSILIZED_GLINT, 0.0F).group("glint").save(this.output, this.name("restore_glint_gemstone"));
+        this.hourglassRestoring(RecipeCategory.MISC,
+                AetherIIItems.GLINT_GEMSTONE, List.of(this.hourglass(1, 85), this.hourglass(2, 10), this.hourglass(3, 5)),
+                AetherIIBlocks.GLINT_ORE, 0.0F).group("glint").save(this.output, this.name("restore_glint_gemstone_from_ore"));
+        this.hourglassRestoring(RecipeCategory.MISC,
+                AetherIIItems.GLINT_GEMSTONE, List.of(this.hourglass(1, 85), this.hourglass(2, 10), this.hourglass(3, 5)),
+                AetherIIBlocks.UNDERSHALE_GLINT_ORE, 0.0F).group("glint").save(this.output, this.name("restore_glint_gemstone_from_undershale_ore"));
+
+        this.hourglassRestoring(RecipeCategory.MISC,
+                AetherIIItems.CORROBONITE_CRYSTAL, List.of(this.hourglass(1, 85), this.hourglass(2, 10), this.hourglass(3, 5)),
+                AetherIIItems.FOSSILIZED_CORROBONITE, 0.0F).group("corrobonite").save(this.output, this.name("restore_corrobonite_crystal"));
+        this.hourglassRestoring(RecipeCategory.MISC,
+                AetherIIItems.CORROBONITE_CRYSTAL, List.of(this.hourglass(1, 85), this.hourglass(2, 10), this.hourglass(3, 5)),
+                AetherIIBlocks.CORROBONITE_ORE, 0.0F).group("corrobonite").save(this.output, this.name("restore_corrobonite_crystal_from_ore"));
+
+
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.SKYROOT_SHOVEL, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_shovel"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 75), this.hourglass(2, 15), this.hourglass(3, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.SKYROOT_PICKAXE, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_pickaxe"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 75), this.hourglass(2, 15), this.hourglass(3, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.SKYROOT_AXE, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_axe"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.SKYROOT_TROWEL, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_trowel"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.SKYROOT_SHORTSWORD, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_shortsword"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.SKYROOT_SPEAR, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_spear"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.SKYROOT_HAMMER, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_hammer"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 100)),
+                AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 100)),
+                AetherIIItems.SKYROOT_CROSSBOW, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_crossbow"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 25), this.hourglass(1, 75)),
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(3, 75), this.hourglass(4, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.SKYROOT_SHIELD, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_skyroot_shield"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 100)),
+                AetherIIItems.GOLDEN_AMBER, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.DART_SHOOTER, 0.0F).group("skyroot_tool").save(this.output, this.name("uncraft_dart_shooter"));
+
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.BEAST_PELT, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.BEAST_PELT_HELMET, 0.0F).group("beast_pelt_armor").save(this.output, this.name("uncraft_beast_pelt_helmet"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.BEAST_PELT, List.of(this.hourglass(4, 75), this.hourglass(5, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.BEAST_PELT_CHESTPLATE, 0.0F).group("beast_pelt_armor").save(this.output, this.name("uncraft_beast_pelt_chestplate"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.BEAST_PELT, List.of(this.hourglass(3, 75), this.hourglass(4, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.BEAST_PELT_LEGGINGS, 0.0F).group("beast_pelt_armor").save(this.output, this.name("uncraft_beast_pelt_leggings"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.BEAST_PELT, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.BEAST_PELT_BOOTS, 0.0F).group("beast_pelt_armor").save(this.output, this.name("uncraft_beast_pelt_boots"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.BEAST_PELT, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.BEAST_PELT_GLOVES, 0.0F).group("beast_pelt_armor").save(this.output, this.name("uncraft_beast_pelt_gloves"));
+
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.HOLYSTONE_SHOVEL, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_shovel"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 15), this.hourglass(3, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.HOLYSTONE_PICKAXE, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_pickaxe"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 15), this.hourglass(3, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.HOLYSTONE_AXE, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_axe"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.HOLYSTONE_TROWEL, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_trowel"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
+                AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.HOLYSTONE_SHORTSWORD, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_shortsword"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
+                AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.HOLYSTONE_SPEAR, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_spear"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
+                AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.HOLYSTONE_HAMMER, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_hammer"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 100)),
+                AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 100)),
+                AetherIIItems.HOLYSTONE_CROSSBOW, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_holystone_crossbow"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                AetherIIItems.AMBROSIUM_SHARD, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.HEALING_STONE, 0.0F).group("holystone_tool").save(this.output, this.name("uncraft_healing_stone"));
+
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.BURRUKAI_PLATE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.BURRUKAI_PLATE_HELMET, 0.0F).group("burrukai_plate_armor").save(this.output, this.name("uncraft_burrukai_plate_helmet"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.BURRUKAI_PLATE, List.of(this.hourglass(4, 75), this.hourglass(5, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.BURRUKAI_PLATE_CHESTPLATE, 0.0F).group("burrukai_plate_armor").save(this.output, this.name("uncraft_burrukai_plate_chestplate"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.BURRUKAI_PLATE, List.of(this.hourglass(3, 75), this.hourglass(4, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.BURRUKAI_PLATE_LEGGINGS, 0.0F).group("burrukai_plate_armor").save(this.output, this.name("uncraft_burrukai_plate_leggings"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.BURRUKAI_PLATE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.BURRUKAI_PLATE_BOOTS, 0.0F).group("burrukai_plate_armor").save(this.output, this.name("uncraft_burrukai_plate_boots"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.BURRUKAI_PLATE, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.BURRUKAI_PLATE_GLOVES, 0.0F).group("burrukai_plate_armor").save(this.output, this.name("uncraft_burrukai_plate_gloves"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 25), this.hourglass(1, 75)),
+                AetherIIItems.BURRUKAI_PLATE, List.of(this.hourglass(3, 75), this.hourglass(4, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.BURRUKAI_PLATE_SHIELD, 0.0F).group("burrukai_plate_armor").save(this.output, this.name("uncraft_burrukau_plate_shield"));
+
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_SHOVEL, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_shovel"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 15), this.hourglass(3, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_PICKAXE, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_pickaxe"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 15), this.hourglass(3, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_AXE, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_axe"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_TROWEL, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_trowel"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_SHORTSWORD, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_shortsword"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_SPEAR, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_spear"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_HAMMER, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_hammer"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 100)),
+                AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 100)),
+                AetherIIItems.ZANITE_CROSSBOW, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_crossbow"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_SHEARS, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_shears"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 25), this.hourglass(1, 75)),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(3, 75), this.hourglass(4, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_SHIELD, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_shield"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 50), this.hourglass(2, 50)),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_PENDANT, 0.0F).group("zanite_tool").save(this.output, this.name("uncraft_zanite_pendant"));
+
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_HELMET, 0.0F).group("zanite_armor").save(this.output, this.name("uncraft_zanite_helmet"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(4, 75), this.hourglass(5, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_CHESTPLATE, 0.0F).group("zanite_armor").save(this.output, this.name("uncraft_zanite_chestplate"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(3, 75), this.hourglass(4, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_LEGGINGS, 0.0F).group("zanite_armor").save(this.output, this.name("uncraft_zanite_leggings"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_BOOTS, 0.0F).group("zanite_armor").save(this.output, this.name("uncraft_zanite_boots"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.ZANITE_GLOVES, 0.0F).group("zanite_armor").save(this.output, this.name("uncraft_zanite_gloves"));
+
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.ARKENIUM_SHOVEL, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_shovel"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 80), this.hourglass(2, 10), this.hourglass(3, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.ARKENIUM_PICKAXE, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_pickaxe"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 80), this.hourglass(2, 10), this.hourglass(3, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.ARKENIUM_AXE, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_axe"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
+                Items.AIR, List.of(),
+                AetherIIItems.ARKENIUM_TROWEL, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_trowel"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
+                Items.AIR, List.of(),
+                AetherIIItems.ARKENIUM_SHORTSWORD, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_shortsword"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
+                Items.AIR, List.of(),
+                AetherIIItems.ARKENIUM_SPEAR, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_spear"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
+                Items.AIR, List.of(),
+                AetherIIItems.ARKENIUM_HAMMER, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_hammer"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 100)),
+                AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 100)),
+                AetherIIItems.ARKENIUM_CROSSBOW, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_crossbow"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 25), this.hourglass(1, 75)),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(3, 80), this.hourglass(4, 20)),
+                Items.AIR, List.of(),
+                AetherIIItems.ARKENIUM_SHIELD, 0.0F).group("arkenium_tool").save(this.output, this.name("uncraft_arkenium_shield"));
+
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(2, 80), this.hourglass(3, 20)),
+                Items.AIR, List.of(),
+                AetherIIItems.ARKENIUM_HELMET, 0.0F).group("arkenium_armor").save(this.output, this.name("uncraft_arkenium_helmet"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(4, 80), this.hourglass(5, 20)),
+                Items.AIR, List.of(),
+                AetherIIItems.ARKENIUM_CHESTPLATE, 0.0F).group("arkenium_armor").save(this.output, this.name("uncraft_arkenium_chestplate"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(3, 80), this.hourglass(4, 20)),
+                Items.AIR, List.of(),
+                AetherIIItems.ARKENIUM_LEGGINGS, 0.0F).group("arkenium_armor").save(this.output, this.name("uncraft_arkenium_leggings"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(2, 80), this.hourglass(3, 20)),
+                Items.AIR, List.of(),
+                AetherIIItems.ARKENIUM_BOOTS, 0.0F).group("arkenium_armor").save(this.output, this.name("uncraft_arkenium_boots"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.ARKENIUM_GLOVES, 0.0F).group("arkenium_armor").save(this.output, this.name("uncraft_arkenium_gloves"));
+
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.GRAVITITE_SHOVEL, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_shovel"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 80), this.hourglass(2, 10), this.hourglass(3, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.GRAVITITE_PICKAXE, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_pickaxe"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 80), this.hourglass(2, 10), this.hourglass(3, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.GRAVITITE_AXE, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_axe"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
+                Items.AIR, List.of(),
+                AetherIIItems.GRAVITITE_TROWEL, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_trowel"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
+                AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
+                Items.AIR, List.of(),
+                AetherIIItems.GRAVITITE_SHORTSWORD, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_shortsword"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
+                AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
+                Items.AIR, List.of(),
+                AetherIIItems.GRAVITITE_SPEAR, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_spear"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
+                AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 80), this.hourglass(2, 20)),
+                Items.AIR, List.of(),
+                AetherIIItems.GRAVITITE_HAMMER, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_hammer"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 100)),
+                AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 100)),
+                AetherIIItems.GRAVITITE_CROSSBOW, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_crossbow"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 25), this.hourglass(1, 75)),
+                AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(3, 80), this.hourglass(4, 20)),
+                Items.AIR, List.of(),
+                AetherIIItems.GRAVITITE_SHIELD, 0.0F).group("gravitite_tool").save(this.output, this.name("uncraft_gravitite_shield"));
+
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(2, 85), this.hourglass(3, 15)),
+                Items.AIR, List.of(),
+                AetherIIItems.GRAVITITE_HELMET, 0.0F).group("gravitite_armor").save(this.output, this.name("uncraft_gravitite_helmet"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(4, 85), this.hourglass(5, 15)),
+                Items.AIR, List.of(),
+                AetherIIItems.GRAVITITE_CHESTPLATE, 0.0F).group("gravitite_armor").save(this.output, this.name("uncraft_gravitite_chestplate"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(3, 85), this.hourglass(4, 15)),
+                Items.AIR, List.of(),
+                AetherIIItems.GRAVITITE_LEGGINGS, 0.0F).group("gravitite_armor").save(this.output, this.name("uncraft_gravitite_leggings"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(2, 85), this.hourglass(3, 15)),
+                Items.AIR, List.of(),
+                AetherIIItems.GRAVITITE_BOOTS, 0.0F).group("gravitite_armor").save(this.output, this.name("uncraft_gravitite_boots"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.INERT_GRAVITITE, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.GRAVITITE_GLOVES, 0.0F).group("gravitite_armor").save(this.output, this.name("uncraft_gravitite_gloves"));
+
+        this.hourglassUncraftingIngredient(RecipeCategory.MISC,
+                AetherIIItems.CLOUDTWINE, List.of(this.hourglass(0, 50), this.hourglass(1, 50)),
+                AetherIIItems.BEAST_PELT, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                DataComponentIngredient.of(false, DataComponentExactPredicate.expect(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY), AetherIIItems.BEAST_PELT_BUNDLE.get()), 0.0F, this.has(AetherIIItems.BEAST_PELT_BUNDLE)).group("misc_tools").save(this.output, this.name("uncraft_beast_pelt_bundle"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 50), this.hourglass(2, 50)),
+                Items.AIR, List.of(),
+                AetherIIItems.SKYROOT_BUCKET, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_skyroot_bucket"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.BRETTL_ROPE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.BRETTL_LASSO, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_brettl_lasso"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 50), this.hourglass(1, 50)),
+                AetherIIBlocks.COLD_AERCLOUD, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.COLD_AERCLOUD_GLIDER, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_cold_aercloud_glider"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 50), this.hourglass(1, 50)),
+                AetherIIBlocks.BLUE_AERCLOUD, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.BLUE_AERCLOUD_GLIDER, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_blue_aercloud_glider"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 50), this.hourglass(1, 50)),
+                AetherIIBlocks.PURPLE_AERCLOUD, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.PURPLE_AERCLOUD_GLIDER, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_purple_aercloud_glider"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(0, 50), this.hourglass(1, 50)),
+                AetherIIBlocks.GOLDEN_AERCLOUD, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.GOLDEN_AERCLOUD_GLIDER, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_golden_aercloud_glider"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIBlocks.COLD_AERCLOUD, List.of(this.hourglass(1, 100)),
+                Items.AIR, List.of(),
+                AetherIIItems.CLOUD_SKIFF, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_cloud_skiff"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 100)),
+                AetherIIItems.BEAST_PELT, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.MOA_SADDLE, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_moa_saddle"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 100)),
+                AetherIIItems.BEAST_PELT, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(4, 75), this.hourglass(5, 25)),
+                AetherIIItems.MOA_SADDLEBAG, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_moa_saddlebag"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 100)),
+                AetherIIItems.BEAST_PELT, List.of(this.hourglass(3, 75), this.hourglass(4, 25)),
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(4, 75), this.hourglass(5, 25)),
+                AetherIIItems.LARGE_MOA_SADDLEBAG, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_large_moa_saddlebag"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SCATTERGLASS_SHARD, List.of(this.hourglass(4, 75), this.hourglass(5, 25)),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.ARKENIUM_CANISTER, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_arkenium_cannister"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIBlocks.FERROSITE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.GOLDEN_AMBER, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                Items.AIR, List.of(),
+                AetherIIItems.MUSIC_PLAYER, 0.0F).group("misc_tools").save(this.output, this.name("uncraft_music_player"));
+
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.NEPTUNE_SCALE, List.of(this.hourglass(2, 60), this.hourglass(3, 35), this.hourglass(4, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.NEPTUNE_HELMET, 0.0F).group("neptune_armor").save(this.output, this.name("uncraft_neptune_helmet"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.NEPTUNE_SCALE, List.of(this.hourglass(2, 60), this.hourglass(3, 35), this.hourglass(4, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.NEPTUNE_CHESTPLATE, 0.0F).group("neptune_armor").save(this.output, this.name("uncraft_neptune_chestplate"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.NEPTUNE_SCALE, List.of(this.hourglass(2, 60), this.hourglass(3, 35), this.hourglass(4, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.NEPTUNE_LEGGINGS, 0.0F).group("neptune_armor").save(this.output, this.name("uncraft_neptune_leggings"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.NEPTUNE_SCALE, List.of(this.hourglass(2, 60), this.hourglass(3, 35), this.hourglass(4, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.NEPTUNE_BOOTS, 0.0F).group("neptune_armor").save(this.output, this.name("uncraft_neptune_boots"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.NEPTUNE_SCALE, List.of(this.hourglass(2, 60), this.hourglass(3, 35), this.hourglass(4, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.NEPTUNE_GLOVES, 0.0F).group("neptune_armor").save(this.output, this.name("uncraft_neptune_gloves"));
+
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.SENTRY_SERVO, List.of(this.hourglass(2, 60), this.hourglass(3, 35), this.hourglass(4, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.HAMMER_OF_DEMOLITION, 0.0F).group("sentry_loot").save(this.output, this.name("uncraft_hammer_of_demolition"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.SENTRY_SERVO, List.of(this.hourglass(2, 60), this.hourglass(3, 35), this.hourglass(4, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.SENTRY_BOOTS, 0.0F).group("sentry_loot").save(this.output, this.name("uncraft_sentry_boots"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                Items.AIR, List.of(),
+                AetherIIItems.SENTRY_SERVO, List.of(this.hourglass(2, 60), this.hourglass(3, 35), this.hourglass(4, 5)),
+                Items.AIR, List.of(),
+                AetherIIItems.KINETIC_THRUSTERS, 0.0F).group("sentry_loot").save(this.output, this.name("uncraft_kinetic_thrusters"));
+
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SKYROOT_STICK, List.of(this.hourglass(1, 100)),
+                AetherIIItems.GOLDEN_AMBER, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1,100)),
+                AetherIIBlocks.AMBER_HOURGLASS, 0.0F).group("utility_blocks").save(this.output, this.name("uncraft_amber_hourglass"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIBlocks.UNDERSHALE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.ZANITE_GEMSTONE, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                Items.AIR, List.of(),
+                AetherIIBlocks.ALTAR, 0.0F).group("utility_blocks").save(this.output, this.name("uncraft_altar"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(2, 75), this.hourglass(3, 25)),
+                Items.AIR, List.of(),
+                AetherIIBlocks.ARKENIUM_FORGE, 0.0F).group("utility_blocks").save(this.output, this.name("uncraft_arkenium_forge"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIBlocks.HOLYSTONE, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(1, 75), this.hourglass(2, 25)),
+                AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1,75), this.hourglass(2, 25)),
+                AetherIIBlocks.ARTISANS_BENCH, 0.0F).group("utility_blocks").save(this.output, this.name("uncraft_artians_bench"));
+        this.hourglassUncraftingItem(RecipeCategory.MISC,
+                AetherIIItems.SCATTERGLASS_SHARD, List.of(this.hourglass(4, 75), this.hourglass(5, 25)),
+                AetherIIItems.INERT_ARKENIUM, List.of(this.hourglass(3, 75), this.hourglass(4, 25)),
+                Items.AIR, List.of(),
+                AetherIIBlocks.ALKAHEST_PURIFIER, 0.0F).group("utility_blocks").save(this.output, this.name("uncraft_alkahest_purifier"));
+
 
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, AetherIIItems.INERT_ARKENIUM, 3, 0.0F).group("arkenium").save(this.output);
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, AetherIIBlocks.ARKENIUM_ORE, 3, 0.0F).group("arkenium").save(this.output, this.name("arkenium_plates_from_arkenium_ore"));
@@ -1687,116 +2405,114 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         this.alkahestCorrosion(AetherIIBlocks.ICHORITE.get(), AetherIIBlocks.UNDERSHALE.get()).save(this.output, this.name("corrode_undershale_to_ichorite"));
 
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.HOLYSTONE.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.HOLYSTONE_STAIRS.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.HOLYSTONE_SLAB.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE_SLAB, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.HOLYSTONE_WALL.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE_WALL, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.HOLYSTONE.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.HOLYSTONE_STAIRS.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.HOLYSTONE_SLAB.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE_SLAB, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.HOLYSTONE_WALL.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE_WALL, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
 
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.SKYROOT_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.SKYPLANE_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.SKYBIRCH_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.SKYPINE_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.WISPROOT_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.WISPTOP_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.GREATROOT_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.GREATOAK_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.GREATBOA_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYROOT_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYPLANE_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYBIRCH_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYPINE_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.WISPROOT_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.WISPTOP_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATROOT_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATOAK_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATBOA_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
 
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.SKYROOT_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.SKYPLANE_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.SKYBIRCH_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.SKYPINE_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.WISPROOT_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.WISPTOP_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.GREATROOT_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.GREATOAK_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new AlkahestPurificationRecipe.ItemEntry(AetherIIBlocks.GREATBOA_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYROOT_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYPLANE_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYBIRCH_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYPINE_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.WISPROOT_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.WISPTOP_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATROOT_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATOAK_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATBOA_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
 
-        this.alkahestPurification(RecipeCategory.COMBAT, new AlkahestPurificationRecipe.ListEntry(WeightedList.<AlkahestPurificationRecipe.BaseEntry>builder()
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.BEAST_PELT_HELMET.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.BURRUKAI_PLATE_HELMET.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ZANITE_HELMET.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ARKENIUM_HELMET.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.GRAVITITE_HELMET.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.BEAST_PELT_CHESTPLATE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ZANITE_CHESTPLATE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ARKENIUM_CHESTPLATE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.GRAVITITE_CHESTPLATE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.BEAST_PELT_LEGGINGS.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.BURRUKAI_PLATE_LEGGINGS.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ZANITE_LEGGINGS.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ARKENIUM_LEGGINGS.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.GRAVITITE_LEGGINGS.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.BEAST_PELT_BOOTS.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.BURRUKAI_PLATE_BOOTS.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ZANITE_BOOTS.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ARKENIUM_BOOTS.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.GRAVITITE_BOOTS.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.BEAST_PELT_GLOVES.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.BURRUKAI_PLATE_GLOVES.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ZANITE_GLOVES.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ARKENIUM_GLOVES.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.GRAVITITE_GLOVES.toStack()), 1)
+        this.alkahestPurification(RecipeCategory.COMBAT, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BEAST_PELT_HELMET.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BURRUKAI_PLATE_HELMET.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_HELMET.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_HELMET.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_HELMET.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BEAST_PELT_CHESTPLATE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_CHESTPLATE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_CHESTPLATE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_CHESTPLATE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BEAST_PELT_LEGGINGS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BURRUKAI_PLATE_LEGGINGS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_LEGGINGS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_LEGGINGS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_LEGGINGS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BEAST_PELT_BOOTS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BURRUKAI_PLATE_BOOTS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_BOOTS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_BOOTS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_BOOTS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BEAST_PELT_GLOVES.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BURRUKAI_PLATE_GLOVES.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_GLOVES.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_GLOVES.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_GLOVES.toStack()), 1)
                 .build()), AetherIIItems.IRRADIATED_ARMOR, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 1, this.output);
-        this.alkahestPurification(RecipeCategory.COMBAT, new AlkahestPurificationRecipe.ListEntry(WeightedList.<AlkahestPurificationRecipe.BaseEntry>builder()
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.SKYROOT_SHORTSWORD.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.HOLYSTONE_SHORTSWORD.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ZANITE_SHORTSWORD.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ARKENIUM_SHORTSWORD.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.GRAVITITE_SHORTSWORD.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.SKYROOT_SPEAR.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.HOLYSTONE_SPEAR.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ZANITE_SPEAR.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ARKENIUM_SPEAR.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.GRAVITITE_SPEAR.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.SKYROOT_HAMMER.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.HOLYSTONE_HAMMER.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ZANITE_HAMMER.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ARKENIUM_HAMMER.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.GRAVITITE_HAMMER.toStack()), 1)
+        this.alkahestPurification(RecipeCategory.COMBAT, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
+                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_SHORTSWORD.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_SHORTSWORD.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_SHORTSWORD.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_SHORTSWORD.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_SHORTSWORD.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_SPEAR.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_SPEAR.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_SPEAR.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_SPEAR.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_SPEAR.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_HAMMER.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_HAMMER.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_HAMMER.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_HAMMER.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_HAMMER.toStack()), 1)
                 .build()), AetherIIItems.IRRADIATED_WEAPON, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 1, this.output);
-        this.alkahestPurification(RecipeCategory.COMBAT, new AlkahestPurificationRecipe.ListEntry(WeightedList.<AlkahestPurificationRecipe.BaseEntry>builder()
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.SKYROOT_AXE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.HOLYSTONE_AXE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ZANITE_AXE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ARKENIUM_AXE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.GRAVITITE_AXE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.SKYROOT_PICKAXE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.HOLYSTONE_PICKAXE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ZANITE_PICKAXE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ARKENIUM_PICKAXE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.GRAVITITE_PICKAXE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.SKYROOT_SHOVEL.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.HOLYSTONE_SHOVEL.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ZANITE_SHOVEL.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ARKENIUM_SHOVEL.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.GRAVITITE_SHOVEL.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.SKYROOT_TROWEL.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.HOLYSTONE_TROWEL.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ZANITE_TROWEL.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ARKENIUM_TROWEL.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.GRAVITITE_TROWEL.toStack()), 1)
+        this.alkahestPurification(RecipeCategory.COMBAT, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
+                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_AXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_AXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_AXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_AXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_AXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_PICKAXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_PICKAXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_PICKAXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_PICKAXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_PICKAXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_SHOVEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_SHOVEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_SHOVEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_SHOVEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_SHOVEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_TROWEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_TROWEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_TROWEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_TROWEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_TROWEL.toStack()), 1)
                 .build()), AetherIIItems.IRRADIATED_TOOL, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 1, this.output);
-        this.alkahestPurification(RecipeCategory.COMBAT, new AlkahestPurificationRecipe.ListEntry(WeightedList.<AlkahestPurificationRecipe.BaseEntry>builder() //todo
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.CHARM_OF_EFFICIENCY_I.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.CHARM_OF_DAMAGE_I.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.CHARM_OF_DEXTERITY_I.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.CHARM_OF_KNOCKBACK_I.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.CHARM_OF_HEALTH_I.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.CHARM_OF_DEFENSE_I.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.CHARM_OF_TOUGHNESS_I.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.CHARM_OF_RESISTANCE_I.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.CHARM_OF_AGILITY_I.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ENGRAVED_DISC_AETHER_TUNE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ENGRAVED_DISC_AERWHALE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ENGRAVED_DISC_APPROACHES.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ENGRAVED_DISC_DEMISE.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ENGRAVED_DISC_CHINCHILLA.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ENGRAVED_DISC_HIGH.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS.toStack()), 1)
-                .add(new AlkahestPurificationRecipe.ItemEntry(AetherIIItems.ENGRAVED_DISC_CHASE.toStack()), 1)
+        this.alkahestPurification(RecipeCategory.COMBAT, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder() //todo
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_EFFICIENCY_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_DAMAGE_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_DEXTERITY_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_KNOCKBACK_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_HEALTH_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_DEFENSE_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_TOUGHNESS_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_RESISTANCE_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_AGILITY_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_AERWHALE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_APPROACHES.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_DEMISE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_CHINCHILLA.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_HIGH.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS.toStack()), 1)
                 .build()), AetherIIItems.IRRADIATED_CHUNK, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 1, this.output);
 
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE, 1).requires(AetherIIBlocks.SKYROOT_LEAF_PILE.get()).requires(AetherIIItems.IRRADIATED_DUST.get())

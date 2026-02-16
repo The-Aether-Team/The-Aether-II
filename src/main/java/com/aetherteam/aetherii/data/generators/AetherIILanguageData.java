@@ -7,7 +7,7 @@ import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIMurals;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
-import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
+import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesBiomes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
@@ -53,7 +53,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addMuralTitles();
 
         // Dimensions
-        this.addDimension(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, "Aether Highlands");
+        this.addDimension(AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL, "Aether Holy Isles");
 
         // Misc
         this.addGeneric("slash", "§9Slash§r");
@@ -184,6 +184,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.MOSSY_WISPROOT_LOG_BASE, "Mossy Wisproot Log Base");
         this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_LOG, "Stripped Wisproot Log");
         this.addBlock(AetherIIBlocks.AMBEROOT_LOG, "Amberoot Log");
+        this.addBlock(AetherIIBlocks.AMBEROOT_DEPOSIT, "Amberoot Deposit");
+        this.addBlock(AetherIIBlocks.STRIPPED_AMBEROOT_LOG, "Stripped Amberoot Log");
         this.addBlock(AetherIIBlocks.SKYROOT_WOOD, "Skyroot Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_SKYROOT_WOOD, "Stripped Skyroot Wood");
         this.addBlock(AetherIIBlocks.GREATROOT_WOOD, "Greatroot Wood");
@@ -192,6 +194,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.MOSSY_WISPROOT_WOOD, "Mossy Wisproot Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_WOOD, "Stripped Wisproot Wood");
         this.addBlock(AetherIIBlocks.AMBEROOT_WOOD, "Amberoot Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_AMBEROOT_WOOD, "Stripped Amberoot Wood");
 
         // Trunks
         this.addBlock(AetherIIBlocks.SKYROOT_TRUNK, "Skyroot Trunk");
@@ -202,6 +205,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.MOSSY_WISPROOT_TRUNK, "Mossy Wisproot Trunk");
         this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_TRUNK, "Stripped Wisproot Trunk");
         this.addBlock(AetherIIBlocks.AMBEROOT_TRUNK, "Amberoot Trunk");
+        this.addBlock(AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK, "Stripped Amberoot Trunk");
 
         // Leaf Pile
         this.addBlock(AetherIIBlocks.SKYROOT_LEAF_PILE, "Skyroot Leaf Pile");
@@ -273,7 +277,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SHORT_AETHER_GRASS, "Short Aether Grass");
         this.addBlock(AetherIIBlocks.MEDIUM_AETHER_GRASS, "Medium Aether Grass");
         this.addBlock(AetherIIBlocks.TALL_AETHER_GRASS, "Tall Aether Grass");
-        this.addBlock(AetherIIBlocks.HIGHLAND_FERN, "Highland Fern");
+        this.addBlock(AetherIIBlocks.AETHER_FERN, "Aether Fern");
         this.addBlock(AetherIIBlocks.SHIELD_FERN, "Shield Fern");
 
         // Flowers
@@ -290,7 +294,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Potted Flowers
         this.addBlock(AetherIIBlocks.POTTED_MAGNETIC_SHROOM, "Potted Magnetic Shroom");
-        this.addBlock(AetherIIBlocks.POTTED_HIGHLAND_FERN, "Potted Highland Fern");
+        this.addBlock(AetherIIBlocks.POTTED_AETHER_FERN, "Potted Aether Fern");
         this.addBlock(AetherIIBlocks.POTTED_SHIELD_FERN, "Potted Shield Fern");
         this.addBlock(AetherIIBlocks.POTTED_HESPEROSE, "Potted Hesperose");
         this.addBlock(AetherIIBlocks.POTTED_TARABLOOM, "Potted Tarabloom");
@@ -303,7 +307,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.POTTED_CARRION_CUTTING, "Potted Carrion Cutting");
 
         // Bushes
-        this.addBlock(AetherIIBlocks.HIGHLANDS_BUSH, "Highlands Bush");
+        this.addBlock(AetherIIBlocks.AETHER_BUSH, "Aether Bush");
         this.addBlock(AetherIIBlocks.BLUEBERRY_BUSH, "Blueberry Bush");
         this.addBlock(AetherIIBlocks.BLUEBERRY_BUSH_STEM, "Blueberry Bush Stem");
 
@@ -401,6 +405,30 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.WISPROOT_BEAM, "Wisproot Beam");
         this.addBlock(AetherIIBlocks.SECRET_WISPROOT_DOOR, "Secret Wisproot Door");
         this.addBlock(AetherIIBlocks.SECRET_WISPROOT_TRAPDOOR, "Secret Wisproot Trapdoor");
+
+        // Amberoot Planks
+        this.addBlock(AetherIIBlocks.AMBEROOT_PLANKS, "Amberoot Planks");
+        this.addBlock(AetherIIBlocks.AMBEROOT_STAIRS, "Amberoot Stairs");
+        this.addBlock(AetherIIBlocks.AMBEROOT_SLAB, "Amberoot Slab");
+        this.addBlock(AetherIIBlocks.AMBEROOT_FENCE, "Amberoot Fence");
+        this.addBlock(AetherIIBlocks.AMBEROOT_FENCE_GATE, "Amberoot Fence Gate");
+        this.addBlock(AetherIIBlocks.AMBEROOT_DOOR, "Amberoot Door");
+        this.addBlock(AetherIIBlocks.AMBEROOT_TRAPDOOR, "Amberoot Trapdoor");
+        this.addBlock(AetherIIBlocks.AMBEROOT_BUTTON, "Amberoot Button");
+        this.addBlock(AetherIIBlocks.AMBEROOT_PRESSURE_PLATE, "Amberoot Pressure Plate");
+
+        // Amberoot Decorative Blocks
+        this.addBlock(AetherIIBlocks.AMBEROOT_FLOORBOARDS, "Amberoot Floorboards");
+        this.addBlock(AetherIIBlocks.AMBEROOT_HIGHLIGHT, "Amberoot Highlight");
+        this.addBlock(AetherIIBlocks.AMBEROOT_SHINGLES, "Amberoot Shingles");
+        this.addBlock(AetherIIBlocks.AMBEROOT_SMALL_SHINGLES, "Amberoot Small Shingles");
+        this.addBlock(AetherIIBlocks.AMBEROOT_BASE_PLANKS, "Amberoot Base Planks");
+        this.addBlock(AetherIIBlocks.AMBEROOT_TOP_PLANKS, "Amberoot Top Planks");
+        this.addBlock(AetherIIBlocks.AMBEROOT_BASE_BEAM, "Amberoot Base Beam");
+        this.addBlock(AetherIIBlocks.AMBEROOT_TOP_BEAM, "Amberoot Top Beam");
+        this.addBlock(AetherIIBlocks.AMBEROOT_BEAM, "Amberoot Beam");
+        this.addBlock(AetherIIBlocks.SECRET_AMBEROOT_DOOR, "Secret Amberoot Door");
+        this.addBlock(AetherIIBlocks.SECRET_AMBEROOT_TRAPDOOR, "Secret Amberoot Trapdoor");
 
         // Holystone
         this.addBlock(AetherIIBlocks.HOLYSTONE_STAIRS, "Holystone Stairs");
@@ -733,6 +761,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARKENIUM_CHAIN, "Arkenium Chain");
         this.addBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE, "Skyroot Crafting Table");
         this.addBlock(AetherIIBlocks.HOLYSTONE_FURNACE, "Holystone Furnace");
+        this.addBlock(AetherIIBlocks.AMBER_HOURGLASS, "Amber Hourglass");
         this.addBlock(AetherIIBlocks.ALTAR, "Altar");
         this.addBlock(AetherIIBlocks.ARTISANS_BENCH, "Artisan's Bench");
         this.addBlock(AetherIIBlocks.ARKENIUM_FORGE, "Arkenium Forge");
@@ -777,12 +806,16 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.WISPROOT_SIGN, "Wisproot Sign");
         this.addBlock(AetherIIBlocks.WISPROOT_HANGING_SIGN, "Wisproot Hanging Sign");
 
+        this.addBlock(AetherIIBlocks.AMBEROOT_SIGN, "Amberoot Sign");
+        this.addBlock(AetherIIBlocks.AMBEROOT_HANGING_SIGN, "Amberoot Hanging Sign");
+
         this.addBlock(AetherIIBlocks.HOLYSTONE_LEVER, "Holystone Lever");
 
         // Bookshelves
         this.addBlock(AetherIIBlocks.SKYROOT_BOOKSHELF, "Skyroot Bookshelf");
         this.addBlock(AetherIIBlocks.GREATROOT_BOOKSHELF, "Greatroot Bookshelf");
         this.addBlock(AetherIIBlocks.WISPROOT_BOOKSHELF, "Wisproot Bookshelf");
+        this.addBlock(AetherIIBlocks.AMBEROOT_BOOKSHELF, "Amberoot Bookshelf");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF, "Holystone Bookshelf");
 
         // Furniture
@@ -933,12 +966,17 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
         this.addItem(AetherIIItems.SCATTERGLASS_SHARD, "Scatterglass Shard");
         this.addItem(AetherIIItems.AMBROSIUM_SHARD, "Ambrosium Shard");
+        this.addItem(AetherIIItems.FOSSILIZED_ZANITE, "Fossilized Zanite");
         this.addItem(AetherIIItems.ZANITE_GEMSTONE, "Zanite Gemstone");
         this.addItem(AetherIIItems.INERT_ARKENIUM, "Inert Arkenium");
         this.addItem(AetherIIItems.ARKENIUM_PLATE, "Arkenium Plate");
         this.addItem(AetherIIItems.INERT_GRAVITITE, "Inert Gravitite");
         this.addItem(AetherIIItems.GRAVITITE_PLATE, "Gravitite Plate");
+        this.addItem(AetherIIItems.FOSSILIZED_CORROBONITE, "Fossilized Corrobonite");
         this.addItem(AetherIIItems.CORROBONITE_CRYSTAL, "Corrobonite Crystal");
+        this.addItem(AetherIIItems.NEPTUNE_SCALE, "Neptune Scale");
+        this.addItem(AetherIIItems.SENTRY_SERVO, "Sentry Servo");
+        this.addItem(AetherIIItems.FOSSILIZED_GLINT, "Fossilized Glint");
         this.addItem(AetherIIItems.GLINT_GEMSTONE, "Glint Gemstone");
         this.addItem(AetherIIItems.GOLDEN_AMBER, "Golden Amber");
         this.addItem(AetherIIItems.CLOUDTWINE, "Cloudtwine");
@@ -1027,7 +1065,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Music Discs
         this.addItem(AetherIIItems.MUSIC_PLAYER, "Music Player");
-        this.addItem(AetherIIItems.ENGRAVED_DISC_AETHER_TUNE, "Engraved Disc");
         this.addItem(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN, "Engraved Disc");
         this.addItem(AetherIIItems.ENGRAVED_DISC_AERWHALE, "Engraved Disc");
         this.addItem(AetherIIItems.ENGRAVED_DISC_APPROACHES, "Engraved Disc");
@@ -1035,7 +1072,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ENGRAVED_DISC_CHINCHILLA, "Engraved Disc");
         this.addItem(AetherIIItems.ENGRAVED_DISC_HIGH, "Engraved Disc");
         this.addItem(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS, "Engraved Disc");
-        this.addItem(AetherIIItems.ENGRAVED_DISC_CHASE, "Engraved Disc");
 
         // Spawn Eggs
         this.addSpawnEggItem(AetherIIItems.AERBUNNY_SPAWN_EGG);
@@ -1056,6 +1092,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSpawnEggItem(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.CARRION_SPROUT_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.GLITTERWING_SPAWN_EGG);
+        this.addSpawnEggItem(AetherIIItems.SHROUDWING_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.ZEPHYR_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.TEMPEST_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.COCKATRICE_SPAWN_EGG);
@@ -1310,6 +1348,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.ARCTIC_KIRRID, "Arctic Kirrid");
         this.addEntityType(AetherIIEntityTypes.MOA, "Moa");
         this.addEntityType(AetherIIEntityTypes.SKYROOT_LIZARD, "Skyroot Lizard");
+        this.addEntityType(AetherIIEntityTypes.GLITTERWING, "Glitterwing");
+        this.addEntityType(AetherIIEntityTypes.SHROUDWING, "Shroudwing");
 
         // Hostile
         this.addEntityType(AetherIIEntityTypes.AECHOR_PLANT, "Aechor Plant");
@@ -1352,34 +1392,40 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
     private void addBiomes() {
         // Highfields
-        this.addBiome(HighlandsBiomes.FLOURISHING_FIELD, "Flourishing Field");
-        this.addBiome(HighlandsBiomes.VERDANT_WOODS, "Verdant Woods");
-        this.addBiome(HighlandsBiomes.SHROUDED_FOREST, "Shrouded Forest");
-        this.addBiome(HighlandsBiomes.SHIMMERING_BASIN, "Shimmering Basin");
+        this.addBiome(HolyIslesBiomes.FLOURISHING_FIELD, "Flourishing Field");
+        this.addBiome(HolyIslesBiomes.VERDANT_WOODS, "Verdant Woods");
+        this.addBiome(HolyIslesBiomes.SHROUDED_FOREST, "Shrouded Forest");
+        this.addBiome(HolyIslesBiomes.SHIMMERING_BASIN, "Shimmering Basin");
 
         // Magnetic
-        this.addBiome(HighlandsBiomes.MAGNETIC_SCAR, "Magnetic Scar");
-        this.addBiome(HighlandsBiomes.TURQUOISE_FOREST, "Turquoise Forest");
-        this.addBiome(HighlandsBiomes.VIOLET_HIGHWOODS, "Violet Highwoods");
-        this.addBiome(HighlandsBiomes.GLISTENING_SWAMP, "Glistening Swamp");
+        this.addBiome(HolyIslesBiomes.MAGNETIC_SCAR, "Magnetic Scar");
+        this.addBiome(HolyIslesBiomes.TURQUOISE_FOREST, "Turquoise Forest");
+        this.addBiome(HolyIslesBiomes.VIOLET_HIGHWOODS, "Violet Highwoods");
+        this.addBiome(HolyIslesBiomes.GLISTENING_SWAMP, "Glistening Swamp");
 
         // Arctic
-        this.addBiome(HighlandsBiomes.FRIGID_SIERRA, "Frigid Sierra");
-        this.addBiome(HighlandsBiomes.ENDURING_WOODLAND, "Enduring Woodland");
-        this.addBiome(HighlandsBiomes.FROZEN_LAKES, "Frozen Lakes");
-        this.addBiome(HighlandsBiomes.SHEER_TUNDRA, "Sheer Tundra");
+        this.addBiome(HolyIslesBiomes.FRIGID_SIERRA, "Frigid Sierra");
+        this.addBiome(HolyIslesBiomes.ENDURING_WOODLAND, "Enduring Woodland");
+        this.addBiome(HolyIslesBiomes.FROZEN_LAKES, "Frozen Lakes");
+        this.addBiome(HolyIslesBiomes.SHEER_TUNDRA, "Sheer Tundra");
 
         // Irradiated
-        this.addBiome(HighlandsBiomes.CONTAMINATED_JUNGLE, "Contaminated Jungle");
-        this.addBiome(HighlandsBiomes.BATTLEGROUND_WASTES, "Battleground Wastes");
+        this.addBiome(HolyIslesBiomes.CONTAMINATED_JUNGLE, "Contaminated Jungle");
+        this.addBiome(HolyIslesBiomes.BATTLEGROUND_WASTES, "Battleground Wastes");
 
         // Aercloud Sea
-        this.addBiome(HighlandsBiomes.EXPANSE, "Expanse");
+        this.addBiome(HolyIslesBiomes.EXPANSE, "Expanse");
     }
 
     private void addStructures() {
         // Structures
         this.addStructure(AetherIIStructures.OUTPOST, "Outpost");
+        this.addStructure(AetherIIStructures.CAMP_HIGHFIELDS, "Highfields Camp");
+        this.addStructure(AetherIIStructures.CAMP_MAGNETIC, "Magnetic Camp");
+        this.addStructure(AetherIIStructures.CAMP_ARCTIC, "Arctic Camp");
+        this.addStructure(AetherIIStructures.WATCHTOWER, "Watchtower");
+        this.addStructure(AetherIIStructures.SENTRY_RUINS, "Sentry Ruins");
+        this.addStructure(AetherIIStructures.INFECTED_GUARDIAN_TREE, "Infected Guardian Tree");
     }
 
     private void addAttributes() {
@@ -1464,6 +1510,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Containers
         this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
         this.addContainerType(AetherIIMenuTypes.ARTISANS_BENCH, "Artisan's Bench");
+        this.addContainerType(AetherIIMenuTypes.AMBER_HOURGLASS, "Amber Hourglass");
         this.addContainerType(AetherIIMenuTypes.ALTAR, "Altar");
         this.addContainerType(AetherIIMenuTypes.ARKENIUM_FORGE, "Arkenium Forge");
         this.addContainerType(AetherIIMenuTypes.ALKAHEST_PURIFIER, "Alkahest Purifier");
@@ -1479,6 +1526,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("arkenium_forge.tooltip.charm", " %1$s %2$s Charm Slot");
         this.addGuiText("arkenium_forge.tooltip.charms", " %1$s %2$s Charm Slots");
         this.addGuiText("arkenium_forge.tooltip.tier", " Upgrade Item Tier");
+        this.addGuiText("recipebook.toggleRecipes.restorable", "Showing Restorable");
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
         this.addGuiText("recipebook.toggleRecipes.purifiable", "Showing Purifiable");
         this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");
@@ -1508,6 +1556,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("toast.guidebook.effects", "New Effects Entry!");
         this.addGuiText("toast.guidebook.exploration", "New Exploration Entry!");
         this.addGuiText("toast.guidebook.description", "Check your Guidebook");
+        this.addGuiText("plant.message.attack.invalid", "Hmm. Perhaps I should cut it with a Trowel?");
         this.addGuiText("slider.message.attack.invalid", "Hmm. Perhaps I need to attack it with a Pickaxe?");
         this.addGuiText("slider.title", "Slider %s");
 
@@ -1517,8 +1566,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
     }
 
     private void addAdvancements() {
-        this.addAdvancement("the_highlands", "The Aether II");
-        this.addAdvancement("enter_highlands", "Hostile Paradise");
+        this.addAdvancement("the_holy_isles", "The Aether II");
+        this.addAdvancement("enter_holy_isles", "Hostile Paradise");
+        this.addAdvancement("aerbunny", "Marketable Plushie");
         this.addAdvancement("blue_aercloud", "To Infinity and Beyond!");
         this.addAdvancement("cloud_skiff", "Cloud Sailor");
         this.addAdvancement("aercloud_glider", "Amateur Flying");
@@ -1533,28 +1583,33 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("outpost_campfire", "Community Hotspot");
         this.addAdvancement("glint", "Who wants to be a Glintillionaire?");
         this.addAdvancement("bestiary", "The Beast");
+        this.addAdvancement("trowel", "Highfields Valley");
+        this.addAdvancement("enchanted_aether_grass", "Golden Thumb");
+        this.addAdvancement("plant_cutting", "Weed Whacking");
         this.addAdvancement("ambrosium", "Enlightenment");
-        this.addAdvancement("enchanted_aether_grass", "Golden Gardening");
+        this.addAdvancement("golden_amber", "Wisdom of the Ancients");
+        this.addAdvancement("amber_hourglass", "What's Old is New Again");
         this.addAdvancement("zanite", "Exotic Hardware");
         this.addAdvancement("craft_altar", "Do You Believe in Magic?");
         this.addAdvancement("gravitite_plate", "Pink is the New Blue");
         this.addAdvancement("gravitite_armor", "Defying Gravity");
         this.addAdvancement("arkenium_plate", "The Steel of Gods");
         this.addAdvancement("alkahest_canister", "Handle with Care");
-        this.addAdvancement("craft_alkahest_purifier", "Contained");
+        this.addAdvancement("craft_alkahest_purifier", "Deep Clean");
         this.addAdvancement("irradiated_item", "Let's Go Gambling");
         this.addAdvancement("dart_shooter", "Pick Your Poison");
         this.addAdvancement("corrobonite_crystal", "Green Energy");
         this.addAdvancement("craft_arkenium_forge", "Upgrades, People, Upgrades!");
-        this.addAdvancement("charm", "Charmed, I'm sure");
+        this.addAdvancement("charm", "Charmed, I'm Sure");
         this.addAdvancement("slider", "Like a Bossaru!");
-        this.addAdvancement("demolition_hammer_loot", "The Power of Force");
+        this.addAdvancement("demolition_hammer_loot", "Controlled Demolition");
         this.addAdvancement("kill_golem_with_demolition_hammer", "Impactful Revenge");
         this.addAdvancement("neptune_armor_loot", "Ocean Man");
         this.addAdvancement("sentry_boots_fall", "Vertigo");
 
-        this.addAdvancementDesc("the_highlands", "It's not dead!");
-        this.addAdvancementDesc("enter_highlands", "Enter the Aether");
+        this.addAdvancementDesc("the_holy_isles", "It's not dead!");
+        this.addAdvancementDesc("enter_holy_isles", "Enter the Aether");
+        this.addAdvancementDesc("aerbunny", "Interact with a tamed Aerbunny to put it on your head");
         this.addAdvancementDesc("blue_aercloud", "Bounce on a Blue Aercloud");
         this.addAdvancementDesc("cloud_skiff", "Ride a Cloud Skiff for better movement on the Cloud Sea");
         this.addAdvancementDesc("aercloud_glider", "Use an Aercloud Glider for better mid-air movement");
@@ -1569,16 +1624,20 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("outpost_campfire", "Set a secondary respawn point at an Outpost Campfire");
         this.addAdvancementDesc("glint", "Earn at least 100 Glint Coins");
         this.addAdvancementDesc("bestiary", "Fill out the entire bestiary");
-        this.addAdvancementDesc("ambrosium", "Obtain an Ambrosium Shard");
+        this.addAdvancementDesc("trowel", "Harvest drops from a wild plant using any Trowel");
         this.addAdvancementDesc("enchanted_aether_grass", "Enchant an Aether Grass Block with an Ambrosium Shard to speed up plant growth above it");
-        this.addAdvancementDesc("zanite", "Obtain a Zanite Gemstone");
+        this.addAdvancementDesc("plant_cutting", "Harvest a cutting from an Aechor Plant or Carrion Sprout");
+        this.addAdvancementDesc("ambrosium", "Obtain an Ambrosium Shard");
+        this.addAdvancementDesc("golden_amber", "Harvest Golden Amber from an Amberoot tree using the proper tool");
+        this.addAdvancementDesc("amber_hourglass", "Craft an Amber Hourglass");
+        this.addAdvancementDesc("zanite", "Restore Fossilized Zanite into a Zanite Gemstone using the Amber Hourglass");
         this.addAdvancementDesc("craft_altar", "Craft an Altar");
         this.addAdvancementDesc("gravitite_plate", "Enchant Inert Gravitite into a Gravitite Plate using the Altar");
         this.addAdvancementDesc("gravitite_armor", "Wear 3 pieces of Gravitite Armor to activate its set ability");
         this.addAdvancementDesc("arkenium_plate", "Enchant Inert Arkenium into an Arkenium Plate using the Altar");
         this.addAdvancementDesc("alkahest_canister", "Collect Alkahest using an Arkenium Canister");
         this.addAdvancementDesc("craft_alkahest_purifier", "Craft an Alkahest Purifier");
-        this.addAdvancementDesc("irradiated_item", "Clean an Irradiated Item in an Alkahest Purifier and see what you get");
+        this.addAdvancementDesc("irradiated_item", "Restore an Irradiated Item in an Alkahest Purifier and see what you get");
         this.addAdvancementDesc("dart_shooter", "Use a Dart Shooter's full ammo to inflict an effect on an enemy");
         this.addAdvancementDesc("corrobonite_crystal", "Acquire Corrobonite by mining it with a Gravitite Pickaxe");
         this.addAdvancementDesc("craft_arkenium_forge", "Craft an Arkenium Forge");
@@ -1612,57 +1671,256 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGeneric("magnetic", magnetic);
         this.addGeneric("arctic", arctic);
 
-        this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), taegore, highfields, loremIpsum);
-        this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), taegore, magnetic, loremIpsum);
-        this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), taegore, arctic, loremIpsum);
-        this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), burrukai, highfields, loremIpsum);
-        this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), burrukai, magnetic, loremIpsum);
-        this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), burrukai, arctic, loremIpsum);
-        this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), kirrid, highfields, loremIpsum);
-        this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), kirrid, magnetic, loremIpsum);
-        this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_KIRRID.get(), kirrid, arctic, loremIpsum);
+        this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), taegore, highfields, """
+“Peaceful creatures native to The Aether's Holy Isles.
+
+Highfields taegore are notable for their golden armor plating and soft blue fur coat. Taegore will flee from potential threats, such as a person sprinting near them. Taegore will sometimes dig up buried vegetables.
+
+They can be hunted for beast hide and meat.”""");
+        this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), taegore, magnetic, """
+“Peaceful creatures native to The Aether's Holy Isles.
+
+Magnetic taegore feature bronze colored plating and green fur. Taegore will flee from potential threats, such as a person sprinting near them. Taegore will sometimes dig up buried vegetables.
+
+They can be hunted for beast hide and meat.”""");
+        this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), taegore, arctic, """
+“Peaceful creatures native to The Aether's Holy Isles.
+
+Arctic taegore plating takes on an icy silver hue alongside their warm thick blue fur. Taegore will flee from potential threats, such as a person sprinting near them. Taegore will sometimes dig up buried vegetables.
+
+They can be hunted for beast hide and meat.”""");
+        this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), burrukai, highfields, """
+“Protective creatures found roaming The Aether's Holy Isles.
+
+Highfields burrukai stand out from their natural environment with dark blue fur and dark armor plates. Burrukai are largely peaceful creatures, but they will respond harshly to aggression, using their heavy weight and sharp horns to charge at potential threats.
+
+Their armor plating is incredibly durable, making it a valuable material for crafting armor and shields.”""");
+        this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), burrukai, magnetic, """
+“Protective creatures found roaming The Aether's Holy Isles.
+
+Magnetic burrukai have striped fur and unique horn formations that help dispel static electricity. Burrukai are largely peaceful creatures, but they will respond harshly to aggression, using their heavy weight and sharp horns to charge at potential threats.
+
+Their armor plating is incredibly durable, making it a valuable material for crafting armor and shields.”""");
+        this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), burrukai, arctic, """
+“Protective creatures found roaming The Aether's Holy Isles.
+
+Arctic burrukai have a thicker undercoat than other burrukai and their armor is an icy blue that helps hide their size and numbers in snowstorms. Burrukai are largely peaceful creatures, but they will respond harshly to aggression, using their heavy weight and sharp horns to charge at potential threats.
+
+Their armor plating is incredibly durable, making it a valuable material for crafting armor and shields.”""");
+        this.addBestiaryEntry(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), kirrid, highfields, """
+“Peaceful creatures that travel in small flocks across The Aether's Holy Isles.
+
+Highfields kirrid have a singular flat plate on their heads, the gold coloration of their plating and leg blades is thought to come from a high concentration of ambrosium in their diet. Kirrid will participate in friendly competition with their flock mates, ramming their head plates together until one breaks, this helps keep the fast-growing head plating trimmed down and aerodynamic.
+
+Kirrid have a thick coat of cloudwool that can grow in a variety of natural colors.”""");
+        this.addBestiaryEntry(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), kirrid, magnetic, """
+“Peaceful creatures that travel in small flocks across The Aether's Holy Isles.
+
+In the magnetic biomes, kirrid have adapted a unique plate shaping that helps draw small bolts of electricity to strike them, which protects their bodies from electrical hazards. Kirrid will participate in friendly competition with their flock mates, ramming their head plates together until one breaks, this helps keep the fast-growing head plating trimmed down and aerodynamic.
+
+Kirrid have a thick coat of cloudwool that can grow in a variety of natural colors.”""");
+        this.addBestiaryEntry(AetherIIEntityTypes.ARCTIC_KIRRID.get(), kirrid, arctic, """
+“Peaceful creatures that travel in small flocks across The Aether's Holy Isles.
+
+The harsh cold of the arctic isles of the Holy Isles have caused kirrid to adapt with much larger fur cover, to account for the extra weight their head plates grow much smaller, resembling symmetrical horns. Kirrid will participate in friendly competition with their flock mates, ramming their head plates together until one breaks, this helps keep the fast-growing head plating trimmed down and aerodynamic.
+
+Kirrid have a thick coat of cloudwool that can grow in a variety of natural colors.”""");
     
-        this.addBestiaryDescription(AetherIIEntityTypes.FLYING_COW.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.SHEEPUFF.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.PHYG.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.AERBUNNY.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.FLYING_COW.get(), """
+“Peaceful creatures found in rare herds in The Aether's Holy Isles.
+
+Thought to be a domesticated cousin to the burrukai from early valkyrie civilization, flying cows lack the aggressive behavioral traits of their larger cousins. Their peaceful disposition makes them ideal for farming their high quality meat, though the reduction in size and density of their plating means they cannot be used as a substitute for burrukai plates.
+
+Flying cows represent a relatively low part of the wildlife population of the Holy Isles, making them a rare find in modern times.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.SHEEPUFF.get(), """
+“Peaceful creatures found in rare flocks in The Aether's Holy Isles.
+
+They are believed to be a domesticated cousin to the kirrid from early valkyrie civilization. The armor plating that traditionally forms a kirrid's leg blades grow much smaller on sheepuff, revealing more regular animal legs. This means sheepuff cannot bounce around the way a kirrid normally would, but instead they have developed a cloudwool coat rich in aercloud, similar to an aerbunny. If their coat of cloudwool sucks up enough compressed air, it can inflate and send the sheepuff high up into the sky, allowing them to traverse long distances or high cliffs.
+
+Sheepuff represent a relatively low part of the wildlife population of the Highlands, making them a rare find in modern times.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.PHYG.get(), """
+“Peaceful creatures found in rare sounders in The Aether's Holy Isles.
+
+Valkyrie records show phygs being used as farm animals in the distant past, likely as a domesticated cousin to the taegore. Phygs lack the fear response taegore show towards potential predators, making them much easier to capture and hunt. Unfortunately, their soft skin and smaller bodies mean they aren't particularly valuable for harvesting beast hide, but they are known to be a good source of high quality meat.
+
+Phygs represent a relatively low part of the wildlife population of the Holy Isles, making them a rare find in modern times.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.AERBUNNY.get(), """
+“Friendly creatures that roam The Aether's Holy Isles.
+
+They are deeply social creatures that enjoy the company of other species, including the people of The Aether and human visitors. an aerbunny's coat has a condensed layer of aercloud nestled beneath their fur, which allows them to float gently through the air. Aerbunnies can be held to grant their natural gliding abilities to someone travelling The Aether.
+
+Feeding an aerbunny its favorite fruit allows it to be tamed, which allows them to be commanded to sit in place.”""");
     
-        this.addBestiaryDescription(AetherIIEntityTypes.MOA.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.SKYROOT_LIZARD.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.BLUE_SWET.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.GOLDEN_SWET.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.SKEPHID.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.MIMIC.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.DETONATION_SENTRY.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.SENTRY_GOLEM.get(), loremIpsum);
-        this.addBestiaryDescription(AetherIIEntityTypes.SLIDER.get(), loremIpsum);
+        this.addBestiaryDescription(AetherIIEntityTypes.MOA.get(), """
+“Intelligent and territorial creatures that cannot be tamed from the wild, but can be raised from an egg to be tamed and ridden as a mount.
+
+Wild moas will attempt to protect their nest from any potential intruders. They are versatile creatures that will build nests in any suitable location across multiple different climates and conditions, using woven sticks to create an insulated area perfect for raising their eggs.
+
+Wild moas are smart but generally highly distrusting, so to tame and ride a moa you will need to steal a wild egg to hatch and raise yourself. Baby moas require a lot of nutrients to grow into healthy adults, but are typically quite picky eaters.
+
+The petals from the toxic aechor plants are a favorite of baby moas, having adapted an immunity to their toxins. Once a baby moa has grown into an adult, it can be fitted with a moa saddle and ridden as a flying mount.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.SKYROOT_LIZARD.get(), """
+“Peaceful creatures that nest across The Aether's Holy Isles.
+
+They are small creatures that nest in the leaves of The Aether's trees, adapting effective camouflage that makes them incredibly hard to spot in dense canopies. As a tree's leaves decay, a nesting lizard may drop to the ground, causing it to panic and run away.
+
+Skyroot lizards can be skewered on a skyroot stick and cooked into edible food, or fed to a moa, their natural predator.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.GLITTERWING.get(), """
+“The Aether is home to a wide variety of small insects, one category of insect are collectively known as glitterwings. These are flying insects with thin, flat wings displaying a variety of colors and patterns.
+
+Some adventurers enjoy collecting and documenting glitterwing patterns as a hobby.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.SHROUDWING.get(), """
+“The Aether is home to a wide variety of small insects, one category of insect are collectively known as shroudwings. These are a group of species with hard wing casings and often sport small horns on their heads for competition and mating rituals.
+
+Some adventurers enjoy collecting and documenting shroudwing shells as a hobby.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), """
+“Hazardous plants that grow across The Aether's Holy Isles.
+
+Aechor plants suck up a vast amount of nutrients and minerals from their surrounding territory, making them a precious food source for many animals in the Highlands. To defend themselves from potential predators, they developed toxic barbs that can be projected outward at targets they sense near their roots. While individually these barbs aren't very harmful, their toxins can build up and cause some negative effects if untreated.
+
+The petals of aechor plants are a favorite food of baby moas, offering enough nutrients to help them grow into strong flight-ready adults.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), """
+“Hazardous plants that grow across The Aether's Holy Isles.
+
+During the day, carrion sprouts curl up and draw energy from the sunlight. However, at night they become carnivorous plants capable of extracting nutrients from both living and dead animals. The carrion sprouts have adapted camouflage that allows them to hide in tall grass and trap wandering creatures within its tight jaws if they step on their leaves.
+
+Wyndberries can be harvested from carrion sprouts and enchanted into a valuable food source.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), """
+“Hostile pests found flying through The Aether's skies.
+
+Often seen as elemental manifestations of The Aether's strong wind currents, zephyrs are insect-like creatures that are able to manipulate aercloud and airflow. Zephyrs encase themselves in a shell made up of aercloud enriched webbing that grants them the ability to float in the air.
+
+When they sense potential threats, zephyrs will attempt to disable them by shooting at them with bundles of sticky webbing. If the webbing fails to incapacitate a predator, they are also capable of charging up a long concentrated burst of wind that can push threats away, often off the side of an island.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.BLUE_SWET.get(), """
+“Aggressive, parasitic creatures that roam in The Aether's shadows.
+
+Swets prefer dark environments, so are typically found during nighttime. They are small fish-like creatures that live in an outer shell of acidic gel, they use this gel for transportation, protection, and hunting. Swets can capture small creatures and plants inside their sticky gel, which allows them to extract nutrients from their prey. They are even known to feed on larger animals, attaching to the skin of larger prey and sapping them of their nutrients before detaching and attempting to escape.
+
+Their gel layer dissolves in water, so if you find one attached to yourself, a quick dive into some nearby water will force the swet to detach.
+
+Swet gel contains a lot of broken down nutrients and minerals that make it an excellent fertilizer, while the sugars stored inside a swet's body are often used as a sweetener in many foods. You can even combine a swet's gel and sugars together to make an almost palatable jelly.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.GOLDEN_SWET.get(), """
+“Aggressive, parasitic creatures that roam in The Aether's shadows.
+
+Swets prefer dark environments, so are typically found during nighttime. They are small fish-like creatures that live in an outer shell of acidic gel, they use this gel for transportation, protection, and hunting. Swets can capture small creatures and plants inside their sticky gel, which allows them to extract nutrients from their prey. They are even known to feed on larger animals, attaching to the skin of larger prey and sapping them of their nutrients before detaching and attempting to escape.
+
+Their gel layer dissolves in water, so if you find one attached to yourself, a quick dive into some nearby water will force the swet to detach. Golden swets are far rarer than their blue counterparts.
+
+Their gold coloration is caused by a much stronger concentration of alkahest in their gel layer, which also leads to a far higher concentration of sugars in their bodies. Golden swets can be found more frequently near alkahest ponds, deep underground.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.SKEPHID.get(), """
+“Protective insects native to The Aether's cave systems.
+
+Skephids wander through caverns and the undercloud looking for small bugs to hunt, moss deposits, and water sources, all of which they use to help support their secluded hives. If they feel threatened by a larger creature, they will use their spinnerets to shoot webbing at their target.
+
+While generally non-predatory to larger creatures or people, skephids have been known to capture small animals in webbing traps when in desperate need of food sources.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), """
+“Aggressive predators that roam The Aether's night skies and shadows.
+
+Centuries ago the blight, a mutagenic plague, once infected a distant population of zephyrs. This infection twisted the biology of these zephyrs into a new species of aggressive predator, the tempests. In modern times, tempests roam The Aether's skies at night as an apex predator.
+
+Their mutations have allowed tempests to generate bioelectrical projectiles they can shoot at potential prey to stun and incapacitate them.
+
+The blight is inherently weak to sunlight, though, so at sunrise tempests retreat into the shadows.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), """
+“Aggressive predators that roam The Aether's caves and shadows.
+
+In the distant past, an isolated colony of moas came into contact with the blight, a mutagenic plague. After prolonged exposure to its mutagenic effects, these moas developed highly aggressive features that turned them into a new species, the cockatrices. Cockatrices have largely lost their ability to fly, instead choosing to stalk the caves and dark forests of The Aether for their prey.
+
+Their main adaptation is the development of venomous darts that grow from their ribcages, at a distance cockatrices can fire these darts to harm and slow down distant prey. At close range, they switch to using their sharp claws and beaks to slash and crush their target.
+
+The blight is inherently weak to sunlight, though, so at sunrise cockatrices retreat into the shadows.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), """
+“Aggressive automatons native to The Aether's caves.
+
+Soul crystals grow in rare pockets all across The Aether's world, and when they reach a certain state of maturity, they pull in material from their surroundings and form a creature from those materials.
+
+When this process occurs deep underground, it will often pull in surrounding rocks and ores and constitute a body suited to those hard rocky minerals and metals. The arkenium taluton is primarily formed of holystone, undershale, and inert arkenium.
+
+They're simple but aggressive creatures, protecting areas that are likely to form new soul crystals from potential hazards. Arkenium talutons use the extreme weight and size of their rocky arms to slam into nearby threats, making them a distinctly dangerous creature for miners and cave explorers.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), """
+“Aggressive automatons native to The Aether's caves.
+
+Soul crystals grow in rare pockets all across The Aether's world, and when they reach a certain state of maturity, they pull in material from their surroundings and form a creature from those materials.
+
+When this process occurs deep underground, it will often pull in surrounding rocks and ores and constitute a body suited to those hard rocky minerals and metals. The gravitite taluton is primarily formed of holystone, undershale, and inert gravitite.
+
+They are cautious creatures capable of long ranged attacks. Gravitite talutons will use the weak gravitational energies from their inert gravitite to pull rocks and pebbles from the ground to launch at their targets, hoping they will dissuade wandering creatures from disturbing areas likely to form new soul crystals. A strong shield and stable footing are essential for navigating caves populated by gravitite talutons.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.MIMIC.get(), """
+“Twisted, hostile monsters found in The Aether's many ruins.
+
+Mimics are shapeshifting worm-like creatures that possess the unique ability to change their form to turn any empty container they find into a protective shell and camouflage. As a result, they are frequently found in old abandoned structures. They lie in wait for unsuspecting travelers to investigate the container, at which point they transform into a monstrous predatory form to hunt their newfound prey.
+
+Mimics take many unique forms, but they almost always need an empty container to use as a shell, so be cautious around any abandoned chests, crates, or barrels you find on your travels.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.DETONATION_SENTRY.get(), """
+“Aggressive mechanical relics found in sentry ruins.
+
+An older model of sentry frequently found in ancient underground sentry structures, the detonation sentry is thought to potentially be a prototype for demolition equipment used when creating the ancient vaults.
+
+These small machines will identify targets based on heat and, when within proximity, will begin a countdown to detonate a small explosive device embedded in their core.
+
+Detonation sentries aren't noted to exist in the vaults, leading scholars to believe their design may have been discontinued by the time the vaults were completed.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.SENTRY_GOLEM.get(), """
+“Aggressive mechanical relics found in sentry ruins.
+
+An older model of sentry found exclusively in larger sentry structures, the sentry golem is thought to be a prototype for the security sentries found patrolling the ancient vaults.
+
+Equipped with a mechanical hammer of demolition, sentry golems appear to have been programmed to seek out intruders and eliminate them using both ranged and melee attacks.
+
+The hammer of demolition contains a small explosive charge fabricator in its handle, which can then launch explosives at distant intruders. Once the core has been replaced, it can also be used as a traditional hammer weapon.
+
+Sentry golems interestingly feature prominent bird-like designs in their limbs and engravings.”""");
+        this.addBestiaryDescription(AetherIIEntityTypes.SLIDER.get(), """
+“The boss of the sentry ruins dungeon.
+
+The Slider is a security machine created for guarding the core of the ancient vaults. This prototype appears to be less efficient and durable than those found in the vaults, indicating that the sentry ruins may be a facility that was used to design and test sentry technology before the vaults were built.
+
+The Slider uses giant super cooled gravitite gears inside its hard stone shell to alter the direction of its gravity, allowing it to float or fall in six directions. Its reactor core uses an incredible amount of energy to drive these processes, so large reinforced glass heat vents on its sides both keep it cool and house optical sensors for tracking targets.
+
+The Slider's shell is made of a composite material derived from undershale and ferrosite, making it impervious to traditional weaponry. A strong pickaxe is required to chip away at the outer shell, but once it is compromised, the reactor core will become unstable and shut the Slider down.
+
+As the Slider takes damage, it will send signals to detonation sentry containers around the facility to assist it in battle. While this prototype is significantly weaker than those found in the vaults, it is still a dangerous and unstable machine capable of dealing tremendous damage.”""");
         this.addBestiaryDescription(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), loremIpsum);
     }
 
     private void addEffectsDescriptions() {
-        final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        this.addEffectsDescription(AetherIIEffects.SATURATION_BOOST.get(), "Temporarily increases the time for which consumable items keep you full.");
+        this.addEffectsDescription(AetherIIEffects.VULNERABILITY.get(), "Decreases Resistance to all Damage Types for the affected mob.");
+        this.addEffectsDescription(AetherIIEffects.WOUND.get(), """
+Inflicts a large amount of Damage instantly.
 
-        this.addEffectsDescription(AetherIIEffects.SATURATION_BOOST.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.VULNERABILITY.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.WOUND.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.STUN.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.FRACTURE.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.AMBROSIUM_POISONING.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.TOXIN.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.VENOM.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.CHARGED.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.WEBBED.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.IMMOLATION.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.FROSTBITE.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.FUNGAL_ROT.get(), loremIpsum);
-        this.addEffectsDescription(AetherIIEffects.CRYSTALLIZED.get(), loremIpsum);
+Use a Bandage to reduce Wound buildup.""");
+        this.addEffectsDescription(AetherIIEffects.STUN.get(), """
+Prevents the use of tools, blocks or items and slows movement.
+
+Use a Bandage to reduce Stun buildup.""");
+        this.addEffectsDescription(AetherIIEffects.FRACTURE.get(), """
+Causes Damage when sprinting and increases Fall Damage.
+
+Use a Bandage to reduce Fracture buildup. A Splint will cure the effect.""");
+        this.addEffectsDescription(AetherIIEffects.AMBROSIUM_POISONING.get(), "Completely negates all forms of healing.");
+        this.addEffectsDescription(AetherIIEffects.TOXIN.get(), """
+Drains Health over time until minimum remaining Health is reached.
+
+Drink from an Antitoxin Vial to reduce Toxin buildup.""");
+        this.addEffectsDescription(AetherIIEffects.VENOM.get(), """
+Drains both Health and Hunger over time until minimum remaining Health is reached.
+
+Drink from an Antivenom Vial to reduce Venom buildup.""");
+        this.addEffectsDescription(AetherIIEffects.CHARGED.get(), "When Charged, a Mob or Player will be shocked when coming into close contact with another source of Charge.");
+        this.addEffectsDescription(AetherIIEffects.WEBBED.get(), """
+Greatly impairs movement ability and prevents jumping.
+
+Repeatedly attempting to jump reduces buildup.""");
+        this.addEffectsDescription(AetherIIEffects.IMMOLATION.get(), "A fast acting burning that causes Damage and can also cause Immolation buildup on nearby entities.");
+        this.addEffectsDescription(AetherIIEffects.FROSTBITE.get(), "Slows item use, attack and mining speed, as well as slightly slowing movement.");
+        this.addEffectsDescription(AetherIIEffects.FUNGAL_ROT.get(), """
+Deals Damage very slowly over time until death.
+
+Decreases detection range from Fungal type mobs and causes extra interactions within the Infected Guardian Tree.""");
+        this.addEffectsDescription(AetherIIEffects.CRYSTALLIZED.get(), """
+Reduces effectiveness of Armor.
+
+Movement faster than sneaking will alert Crystaline type mobs.""");
     }
 
     private void addMusic() {
@@ -1730,6 +1988,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addSubtitle("item", "arkenium_canister.fill", "Arkenium Canister fills");
         this.addSubtitle("item", "arkenium_canister.empty", "Arkenium Canister empties");
+
+        this.addSubtitle("item", "hammer_of_demolition.shoot", "Projectile fired");
 
         this.addSubtitle("item", "armor.equip_beast_pelt", "Beast Pelt armor rustles");
         this.addSubtitle("item", "armor.equip_burrukai_plate", "Burrukai Plate armor rustles");
@@ -1841,6 +2101,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "swet.hurt", "Swet hurts");
         this.addSubtitle("entity", "swet.jump", "Swet squishes");
         this.addSubtitle("entity", "swet.squish", "Swet squishes");
+        this.addSubtitle("entity", "swet.leech", "Swet leeches");
 
         this.addSubtitle("entity", "skephid.shoot", "Skephid shoots");
         this.addSubtitle("entity", "skephid.ambient", "Skephid chitters");

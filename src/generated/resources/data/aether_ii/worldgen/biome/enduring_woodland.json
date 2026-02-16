@@ -1,5 +1,5 @@
 {
-  "carvers": "aether_ii:highlands_cave",
+  "carvers": "aether_ii:holy_isles_cave",
   "creature_spawn_probability": 0.212,
   "downfall": 0.4,
   "effects": {
@@ -64,11 +64,13 @@
       "aether_ii:small_grass_patch",
       "aether_ii:medium_grass_patch",
       "aether_ii:large_grass_patch",
+      "aether_ii:blueberry_bush_patch_rare",
+      "aether_ii:orange_tree_patch_rare",
       "aether_ii:grass_and_dirt_floor",
       "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:coarse_aether_dirt_frosted_ceiling",
       "aether_ii:ice_overhang",
-      "aether_ii:highlands_flower_patch",
+      "aether_ii:holy_isles_flower_patch",
       "aether_ii:arctic_flower_patch",
       "aether_ii:enduring_woodland_trees"
     ],
@@ -122,6 +124,20 @@
       {
         "type": "aether_ii:aerwhale",
         "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
+    "aether_ii:aether_ambient": [
+      {
+        "type": "aether_ii:glitterwing",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:shroudwing",
+        "maxCount": 2,
         "minCount": 1,
         "weight": 1
       }

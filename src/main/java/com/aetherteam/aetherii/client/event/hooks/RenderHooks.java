@@ -6,7 +6,7 @@ import com.aetherteam.aetherii.client.gui.component.guidebook.GuidebookButton;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookEquipmentScreen;
 import com.aetherteam.aetherii.client.renderer.item.tooltip.ClientCharmTooltip;
-import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
+import com.aetherteam.aetherii.client.renderer.level.HolyIslesSpecialEffects;
 import com.aetherteam.aetherii.entity.monster.dungeon.boss.AetherBossMob;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.Charms;
@@ -206,7 +206,7 @@ public class RenderHooks {
     @Nullable
     public static Triple<Float, Float, Float> adjustHeightBasedFogColors(Camera camera, float red, float green, float blue) {
         if (camera.getEntity().level() instanceof ClientLevel clientLevel) {
-            if (clientLevel.effects() instanceof HighlandsSpecialEffects) {
+            if (clientLevel.effects() instanceof HolyIslesSpecialEffects) {
                 ClientLevel.ClientLevelData worldInfo = clientLevel.getLevelData();
                 FogType type = camera.getFluidInCamera();
 
@@ -243,7 +243,7 @@ public class RenderHooks {
     @Nullable
     public static Triple<Float, Float, Float> adjustWeatherFogColors(Camera camera, float red, float green, float blue) {
         if (camera.getEntity().level() instanceof ClientLevel clientLevel) {
-            if (clientLevel.effects() instanceof HighlandsSpecialEffects) {
+            if (clientLevel.effects() instanceof HolyIslesSpecialEffects) {
                 FogType fluidState = camera.getFluidInCamera();
                 if (fluidState == FogType.NONE) {
                     Vec3 defaultSky = Vec3.fromRGB24(clientLevel.getBiome(camera.getBlockPosition()).value().getModifiedSpecialEffects().getFogColor());

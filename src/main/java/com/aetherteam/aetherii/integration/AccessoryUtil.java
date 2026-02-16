@@ -79,13 +79,14 @@ public class AccessoryUtil {
     }
 
     private static int getValidSlot(Player player, AccessoryContainer.SlotType slot) {
+        AccessoryContainer container = player.getData(AetherIIDataAttachments.ACCESSORIES);
         int firstEmptyIndex = -1;
         int firstFullIndex = -1;
         for (int i : slot.getIndex()) {
-            if (firstEmptyIndex < 0 && get(player, slot).isEmpty()) {
+            if (firstEmptyIndex < 0 && container.getItem(i).isEmpty()) {
                 firstEmptyIndex = i;
             }
-            if (firstFullIndex < 0 && !get(player, slot).isEmpty()) {
+            if (firstFullIndex < 0 && !container.getItem(i).isEmpty()) {
                 firstFullIndex = i;
             }
         }

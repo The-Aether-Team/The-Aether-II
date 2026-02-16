@@ -57,7 +57,7 @@ public class EntityMixin {
         Entity entity = (Entity) (Object) this;
         Level level = entity.level();
         if (level instanceof ServerLevel serverLevel) {
-            if (serverLevel.dimension() == AetherIIDimensions.AETHER_HIGHLANDS_LEVEL) {
+            if (serverLevel.dimension() == AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL) {
                 if (entity.getY() <= serverLevel.getMinY() && !entity.isPassenger()) {
                     if (entity instanceof Player || entity.isVehicle() || (entity instanceof LivingEntity) && !((LivingEntity) entity).getItemBySlot(EquipmentSlot.SADDLE).isEmpty()) { // Checks if an entity is a player or a vehicle of a player.
                         entityFell(entity);
