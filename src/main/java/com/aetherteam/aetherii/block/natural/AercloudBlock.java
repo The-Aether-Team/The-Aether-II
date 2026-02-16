@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.LiquidBlockContainer;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -47,7 +48,7 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
         entity.resetFallDistance();
         if (!(entity instanceof ItemEntity itemEntity)) {
             if (entity.getDeltaMovement().y < -0.0784000015258789 && !(entity instanceof Projectile) && !(entity instanceof CloudSkiff)) {
-                entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.25, 1.0));
+                entity.setDeltaMovement(entity.getDeltaMovement().x(), -0.08, entity.getDeltaMovement().z());
             } else {
                 entity.setOnGround(entity instanceof LivingEntity livingEntity && (!(livingEntity instanceof Player player) || !player.getAbilities().flying));
             }
@@ -156,4 +157,10 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
     public boolean placeLiquid(LevelAccessor level, BlockPos pos, BlockState state, FluidState fluidState) {
         return false;
     }
+
+    @Override
+    public boolean isPathfindable(BlockState p_279414_, PathComputationType p_279299_) {
+        return false;
+    }
+
 }

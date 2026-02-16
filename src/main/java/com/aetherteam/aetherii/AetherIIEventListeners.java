@@ -89,6 +89,7 @@ public class AetherIIEventListeners {
 
         // Living
         bus.addListener(AetherIIEventListeners::onLivingPreDamaged);
+        bus.addListener(AetherIIEventListeners::onLivingKnockBack);
         bus.addListener(AetherIIEventListeners::onLivingBlockAttack);
         bus.addListener(AetherIIEventListeners::onLivingItemUsed);
         bus.addListener(AetherIIEventListeners::onLivingDrops);
@@ -353,6 +354,14 @@ public class AetherIIEventListeners {
         damage = target.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).getDamageTypeModifiedValue(target, source, damage);
 
         event.getContainer().setNewDamage(damage);
+    }
+
+    public static void onLivingKnockBack(LivingKnockBackEvent event) {
+        LivingEntity livingEntity = event.getEntity();
+
+        if (!event.isCanceled() && livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).cancelKnockback(livingEntity)) {
+            event.setCanceled(true);
+        }
     }
 
     public static void onLivingBlockAttack(LivingShieldBlockEvent event) {

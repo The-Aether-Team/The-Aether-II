@@ -61,13 +61,13 @@
       "enum": "net/minecraft/world/entity/MobCategory",
       "name": "AETHER_II_AETHER_DARKNESS_MONSTER",
       "constructor": "(Ljava/lang/String;IZZI)V",
-      "parameters": [ "aether_ii:aether_darkness_monster", 45, false, false, 128 ]
+      "parameters": [ "aether_ii:aether_darkness_monster", 26, false, false, 128 ]
     },
     {
       "enum": "net/minecraft/world/entity/MobCategory",
       "name": "AETHER_II_AETHER_CAVE_MONSTER",
       "constructor": "(Ljava/lang/String;IZZI)V",
-      "parameters": [ "aether_ii:aether_cave_monster", 20, false, false, 128 ]
+      "parameters": [ "aether_ii:aether_cave_monster", 18, false, false, 128 ]
     },
     {
       "enum": "net/minecraft/world/entity/MobCategory",
@@ -85,7 +85,7 @@
       "enum": "net/minecraft/world/entity/MobCategory",
       "name": "AETHER_II_AETHER_AMBIENT",
       "constructor": "(Ljava/lang/String;IZZI)V",
-      "parameters": [ "aether_ii:aether_ambient", 25, true, false, 96 ]
+      "parameters": [ "aether_ii:aether_ambient", 10, true, false, 96 ]
     },
     {
       "enum": "net/minecraft/world/entity/MobCategory",

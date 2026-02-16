@@ -65,17 +65,20 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     @Override
     public void initSection() {
         this.entries.clear();
-        this.registryAccess.lookupOrThrow(this.registryKey).asHolderIdMap().forEach((entry) -> this.entries.add(new BestiaryEntry.Mutable(entry)));
         this.getOrderedEntries().clear();
-        AetherIIBestiaryEntries.ENTRY_ORDER.forEach((entityTypeHolder) -> this.entries.forEach((entry) -> {
-            if (entry.getEntityType().value() == entityTypeHolder.value()) {
-                this.getOrderedEntries().add(entry);
-            }
-        }));
-
         Player player = Minecraft.getInstance().player;
         if (player != null) {
             GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
+            attachment.getBestiaryEntries().forEach((mutable) -> this.registryAccess.lookupOrThrow(this.registryKey).asHolderIdMap().forEach((entry) -> {
+                if (entry.value().getEntityType().value() == mutable.getEntityType().value()) {
+                    this.entries.add(mutable);
+                }
+            }));
+            AetherIIBestiaryEntries.ENTRY_ORDER.forEach((entityTypeHolder) -> this.entries.forEach((entry) -> {
+                if (entry.getEntityType().value() == entityTypeHolder.value()) {
+                    this.getOrderedEntries().add(entry);
+                }
+            }));
             for (BestiaryEntry.Mutable bestiaryEntry : attachment.getBestiaryEntries()) {
                 Optional<BestiaryEntry.Mutable> matchingEntry = this.getOrderedEntries().stream().filter((mutable) -> mutable.getEntityType().is(bestiaryEntry.getEntityType())).findFirst();
                 if (matchingEntry.isPresent()) {
@@ -138,7 +141,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         livingEntity.setXRot(-angleYComponent);
         livingEntity.setYHeadRot(livingEntity.getYRot());
         livingEntity.yHeadRotO = livingEntity.getYRot();
-        livingEntity.tickCount = -1;
+        livingEntity.tickCount = -2;
 
         Vector3f vector3f = new Vector3f(0.0F, livingEntity.getBbHeight() / 2.0F + yOffset, 0.0F);
         InventoryScreen.renderEntityInInventory(guiGraphics, startX, startY, endX, endY, scale, vector3f, xQuaternion, zQuaternion, livingEntity);
@@ -385,7 +388,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         int y = 103;
         int lineHeight = 9;
         int color = 0xffffffff;
-        MultiLineLabel label = MultiLineLabel.create(font, 140, 5, component);
+        MultiLineLabel label = MultiLineLabel.create(font, 135, 5, component);
         label.renderLeftAligned(guiGraphics, x, y, lineHeight, color);
     }
 

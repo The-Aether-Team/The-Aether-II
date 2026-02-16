@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.api.guidebook.GuidebookEntry;
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.GuidebookDiscoveryAttachment;
+import com.aetherteam.aetherii.client.gui.component.guidebook.DescriptionButton;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
@@ -15,13 +16,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.MultiLineLabel;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -43,17 +44,20 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
     @Override
     public void initSection() {
         this.entries.clear();
-        this.registryAccess.lookupOrThrow(this.registryKey).asHolderIdMap().forEach((entry) -> this.entries.add(new EffectsEntry.Mutable(entry)));
         this.getOrderedEntries().clear();
-        AetherIIEffectsEntries.ENTRY_ORDER.forEach((entityTypeHolder) -> this.entries.forEach((entry) -> {
-            if (entry.getEffect().value() == entityTypeHolder.value()) {
-                this.getOrderedEntries().add(entry);
-            }
-        }));
-
         Player player = Minecraft.getInstance().player;
         if (player != null) {
             GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
+            attachment.getEffectsEntries().forEach((mutable) -> this.registryAccess.lookupOrThrow(this.registryKey).asHolderIdMap().forEach((entry) -> {
+                if (entry.value().getEffect().value() == mutable.getEffect().value()) {
+                    this.entries.add(mutable);
+                }
+            }));
+            AetherIIEffectsEntries.ENTRY_ORDER.forEach((mobEffectHolder) -> this.entries.forEach((entry) -> {
+                if (entry.getEffect().value() == mobEffectHolder.value()) {
+                    this.getOrderedEntries().add(entry);
+                }
+            }));
             for (EffectsEntry.Mutable effectsEntry : attachment.getEffectsEntries()) {
                 Optional<EffectsEntry.Mutable> matchingEntry = this.getOrderedEntries().stream().filter((mutable) -> mutable.getEffect().is(effectsEntry.getEffect())).findFirst();
                 if (matchingEntry.isPresent()) {
@@ -72,6 +76,8 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
         }
 
         super.initSection();
+
+        this.screen.addRenderableWidget(this.screen, new DescriptionButton(this.screen, (this.screen.width / 2) + 155, (this.screen.height / 2) + 35, Guidebook.MAGNIFYING_GLASS));
     }
 
     @Override
@@ -177,12 +183,11 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
 
     private void drawDescriptionString(GuiGraphics guiGraphics, Font font, Component component) {
         int x = 21;
-        int y = 89;
-        int width = 140;
-        for (FormattedCharSequence formattedcharsequence : font.split(component, width)) {
-            guiGraphics.drawString(font, formattedcharsequence, x, y, -1, true);
-            y += 9;
-        }
+        int y = 71;
+        int lineHeight = 9;
+        int color = 0xffffffff;
+        MultiLineLabel label = MultiLineLabel.create(font, 135, 8, component);
+        label.renderLeftAligned(guiGraphics, x, y, lineHeight, color);
     }
 
     @Override

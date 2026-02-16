@@ -47,6 +47,7 @@
       "aether_ii:ore_icestone_small",
       "aether_ii:ore_ambrosium",
       "aether_ii:ore_zanite",
+      "aether_ii:ore_zanite_mountain",
       "aether_ii:ore_arkenium",
       "aether_ii:ore_gravitite_buried",
       "aether_ii:ore_gravitite",
@@ -64,6 +65,7 @@
       "aether_ii:water_spring"
     ],
     [
+      "aether_ii:orange_tree_patch_irradiated",
       "aether_ii:grass_field",
       "aether_ii:small_grass_patch",
       "aether_ii:medium_grass_patch",
@@ -71,6 +73,8 @@
       "aether_ii:irradiated_grass_patch",
       "aether_ii:enchanted_grass_and_dirt_floor",
       "aether_ii:coarse_aether_dirt_floor",
+      "aether_ii:blueberry_bush_patch_irradiated",
+      "aether_ii:brettl_patch_irradiated",
       "aether_ii:contaminated_jungle_trees"
     ],
     [
@@ -92,9 +96,13 @@
   ],
   "has_precipitation": true,
   "spawn_costs": {
-    "aether_ii:tempest": {
+    "aether_ii:cockatrice": {
       "charge": 0.6,
-      "energy_budget": 0.16
+      "energy_budget": 0.12
+    },
+    "aether_ii:tempest": {
+      "charge": 0.7,
+      "energy_budget": 0.12
     },
     "aether_ii:zephyr": {
       "charge": 0.6,

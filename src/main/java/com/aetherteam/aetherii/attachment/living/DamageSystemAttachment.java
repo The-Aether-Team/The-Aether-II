@@ -5,6 +5,9 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
+import com.aetherteam.aetherii.integration.AccessoryUtil;
+import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractArrowAccessor;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
@@ -39,6 +42,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public class DamageSystemAttachment implements ValueIOSerializable {
     private float criticalDamageModifier = 1.0F;
     private double shieldEndurance = 0;
+    private int resistantEntity = -1;
 
     public static final StreamCodec<RegistryFriendlyByteBuf, DamageSystemAttachment> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.DOUBLE, DamageSystemAttachment::getShieldEndurance,
@@ -97,6 +101,12 @@ public class DamageSystemAttachment implements ValueIOSerializable {
                 if (this.getShieldEndurance() <= 0) {
                     player.level().registryAccess().lookupOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELD).forEach((item) -> player.getCooldowns().addCooldown(item.value().getDefaultInstance(), 300));
                     player.stopUsingItem();
+                }
+                if (player.level() instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer) {
+                    AccessoryUtil.getFirst(player, AccessoryContainer.SlotType.HANDWEAR).ifPresent((stack) -> {
+                        ItemStack copyStack = stack.copy();
+                        stack.hurtAndBreak(1, serverLevel, player, item -> AccessoryUtil.breakAccessory(item, copyStack, serverPlayer));
+                    });
                 }
             }
         }
@@ -173,17 +183,28 @@ public class DamageSystemAttachment implements ValueIOSerializable {
     private void createFeedback(Entity source, Entity target, double damage, double defense, SimpleParticleType particleType, SoundEvent correct, SoundEvent incorrect) {
         if (damage > 0) {
             if (defense > 0) {
+                this.resistantEntity = target.getId();
                 if (source instanceof ServerPlayer serverPlayer) {
                     PacketDistributor.sendToPlayer(serverPlayer, new ResistanceKnockbackPacket(serverPlayer.getId(), target.getId()));
                 }
                 source.level().playSound(null, source.getX(), source.getY(), source.getZ(), incorrect, source.getSoundSource(), 1.0F, 1.0F);
             } else if (defense < 0) {
+                this.resistantEntity = -1;
                 if (source.level() instanceof ServerLevel serverLevel) {
                     PacketDistributor.sendToPlayersNear(serverLevel, null, source.getX(), source.getY(), source.getZ(), 15,  new DamageTypeParticlePacket(target.getId(), particleType));
                 }
                 source.level().playSound(null, source.getX(), source.getY(), source.getZ(), correct, source.getSoundSource(), 1.0F, 1.0F);
             }
         }
+    }
+
+    public boolean cancelKnockback(LivingEntity entity) {
+        if (entity.getId() == this.resistantEntity) {
+            this.resistantEntity = -1;
+            return true;
+        }
+        return false;
+
     }
 
     public void setCriticalDamageModifier(float criticalDamageModifier) {

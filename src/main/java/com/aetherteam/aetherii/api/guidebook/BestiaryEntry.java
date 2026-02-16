@@ -121,6 +121,27 @@ public class BestiaryEntry extends GuidebookEntry {
         return this.food;
     }
 
+    @Override
+    public String toString() {
+        return "BestiaryEntry{" +
+                "id=" + this.getId() +
+                ", icon=" + this.getIcon() +
+                ", name=" + this.getName() +
+                ", slotName=" + this.getSlotName() +
+                ", slotSubtitle=" + this.getSlotSubtitle() +
+                ", descriptionKey=" + this.getDescriptionKey() +
+                ", entityType=" + this.entityType +
+                ", health=" + this.health +
+                ", slashDefense=" + this.slashDefense +
+                ", impactDefense=" + this.impactDefense +
+                ", pierceDefense=" + this.pierceDefense +
+                ", effectResistances=" + this.effectResistances +
+                ", scaleMultiplier=" + this.scaleMultiplier +
+                ", loot=" + this.loot +
+                ", food=" + this.food +
+                '}';
+    }
+
     public record EffectResistanceDisplay(Holder<Attribute> attribute, int value) {
         public static final Codec<EffectResistanceDisplay> DIRECT_CODEC =
                 RecordCodecBuilder.create(in -> in.group(
@@ -186,6 +207,11 @@ public class BestiaryEntry extends GuidebookEntry {
 
         public Map<String, Info> getClientValues() {
             return this.clientValues;
+        }
+
+        @Override
+        public String toString() {
+            return "Mutable{" + "entry=" + this.entry + ", clientValues=" + this.clientValues + '}';
         }
     }
 }

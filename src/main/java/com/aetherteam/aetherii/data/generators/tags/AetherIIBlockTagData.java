@@ -41,25 +41,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 Blocks.QUARTZ_PILLAR,
                 Blocks.CHISELED_QUARTZ_BLOCK
         );
-        this.tag(AetherIITags.Blocks.AETHER_PORTAL_BLACKLIST).add(
-                AetherIIBlocks.QUICKSOIL.get(),
-                AetherIIBlocks.FERROSITE_SAND.get(),
-                AetherIIBlocks.ARCTIC_PACKED_ICE.get(),
-                AetherIIBlocks.UNSTABLE_HOLYSTONE.get(),
-                AetherIIBlocks.UNSTABLE_UNDERSHALE.get(),
-                AetherIIBlocks.MOSSY_HOLYSTONE.get(),
-                AetherIIBlocks.IRRADIATED_HOLYSTONE.get(),
-                AetherIIBlocks.COARSE_AETHER_DIRT.get(),
-                AetherIIBlocks.FRAGILE_ARCTIC_ICE.get(),
-                AetherIIBlocks.CRUDE_SCATTERGLASS.get(),
-                AetherIIBlocks.ALKAHEST.get(),
-                AetherIIBlocks.HESTVEIL.get()
-        ).addTags(
-                AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS,
-                AetherIITags.Blocks.AERCLOUDS,
-                AetherIITags.Blocks.SENTRY_RUINS_BLOCKS,
-                BlockTags.LEAVES,
-                Tags.Blocks.ORES
+        this.tag(AetherIITags.Blocks.AETHER_PORTAL_WHITELIST).addTags(
+                AetherIITags.Blocks.AETHER_DIRT
         );
         this.tag(AetherIITags.Blocks.UNDERSHALE).add(AetherIIBlocks.UNDERSHALE.get());
         this.tag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS).add(
@@ -1212,7 +1195,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SENTRY_PILLAR.get(),
                 AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(),
-                AetherIIBlocks.ZANITE_BLOCK.get()
+                AetherIIBlocks.ZANITE_BLOCK.get(),
+                AetherIIBlocks.IRRADIATED_DUST_BLOCK.get()
         );
         this.tag(BlockTags.NEEDS_IRON_TOOL).add(
                 AetherIIBlocks.GLINT_ORE.get(),

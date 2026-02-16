@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "glass_pane_from_artisanry",
+  "ingredients": [
+    "#aether_ii:scatterglass_pane_decorative_blocks"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:scatterglass_pane"
+  }
+}

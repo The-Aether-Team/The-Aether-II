@@ -3,6 +3,7 @@ package com.aetherteam.aetherii;
 import com.aetherteam.aetherii.advancement.AetherIIAdvancementSoundOverrides;
 import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.command.AetherIICommands;
+import com.aetherteam.aetherii.loot.conditions.AetherIILootConditions;
 import com.aetherteam.aetherii.recipe.display.slot.AetherIISlotDisplays;
 import org.slf4j.Logger;
 
@@ -136,6 +137,7 @@ public class AetherII {
                 AetherIIPoolElementTypes.POOL_ELEMENTS,
                 AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES,
                 AetherIILootFunctions.LOOT_FUNCTION_TYPES,
+                AetherIILootConditions.LOOT_CONDITION_TYPES,
                 AetherIILootModifiers.GLOBAL_LOOT_MODIFIERS,
                 AetherIISurfaceRules.MATERIAL_RULES,
                 AetherIIBlockPredicateTypes.BLOCK_PREDICATE_TYPES,
@@ -213,6 +215,7 @@ public class AetherII {
         registrar.playToClient(AerbunnyMessagePacket.TYPE, AerbunnyMessagePacket.STREAM_CODEC, AerbunnyMessagePacket::execute);
         registrar.playToClient(AlkahestDamageBlockPacket.TYPE, AlkahestDamageBlockPacket.STREAM_CODEC, AlkahestDamageBlockPacket::execute);
         registrar.playToClient(AlkahestFizzPacket.TYPE, AlkahestFizzPacket.STREAM_CODEC, AlkahestFizzPacket::execute);
+        registrar.playToClient(AlkahestItemSmokePacket.TYPE, AlkahestItemSmokePacket.STREAM_CODEC, AlkahestItemSmokePacket::execute);
         registrar.playToClient(AltarParticlesPacket.TYPE, AltarParticlesPacket.STREAM_CODEC, AltarParticlesPacket::execute);
         registrar.playToClient(AttackShockParticlePacket.TYPE, AttackShockParticlePacket.STREAM_CODEC, AttackShockParticlePacket::execute);
         registrar.playToClient(AttackStabParticlePacket.TYPE, AttackStabParticlePacket.STREAM_CODEC, AttackStabParticlePacket::execute);
@@ -222,6 +225,7 @@ public class AetherII {
         registrar.playToClient(ClientGrabItemPacket.TYPE, ClientGrabItemPacket.STREAM_CODEC, ClientGrabItemPacket::execute);
         registrar.playToClient(FlushGuidebookDataPacket.TYPE, FlushGuidebookDataPacket.STREAM_CODEC, FlushGuidebookDataPacket::execute);
         registrar.playToClient(ForgeSoundPacket.TYPE, ForgeSoundPacket.STREAM_CODEC, ForgeSoundPacket::execute);
+        registrar.playToClient(FreezingParticlePacket.TYPE, FreezingParticlePacket.STREAM_CODEC, FreezingParticlePacket::execute);
         registrar.playToClient(HestveilExplosionEffectsPacket.TYPE, HestveilExplosionEffectsPacket.STREAM_CODEC, HestveilExplosionEffectsPacket::execute);
         registrar.playToClient(GuidebookToastPacket.TYPE, GuidebookToastPacket.STREAM_CODEC, GuidebookToastPacket::execute);
         registrar.playToClient(DamageTypeParticlePacket.TYPE, DamageTypeParticlePacket.STREAM_CODEC, DamageTypeParticlePacket::execute);

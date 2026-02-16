@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
+import com.aetherteam.aetherii.client.renderer.entity.animation.CloudSkiffAnimations;
 import com.aetherteam.aetherii.client.renderer.entity.state.CloudSkiffRenderState;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -8,6 +10,8 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
 public class CloudSkiffModel extends EntityModel<CloudSkiffRenderState> {
+	private final KeyframeAnimation unfoldAnimation;
+	private final KeyframeAnimation foldAnimation;
 	private final ModelPart cloudSkiff;
 	private final ModelPart wingLeft;
 	private final ModelPart wingRight;
@@ -16,6 +20,8 @@ public class CloudSkiffModel extends EntityModel<CloudSkiffRenderState> {
 
 	public CloudSkiffModel(ModelPart root) {
 		super(root);
+		this.unfoldAnimation = CloudSkiffAnimations.UNFOLD.bake(root);
+		this.foldAnimation = CloudSkiffAnimations.FOLD.bake(root);
 		this.cloudSkiff = root.getChild("cloud_skiff");
 		this.wingLeft = this.cloudSkiff.getChild("wing_left");
 		this.wingRight = this.cloudSkiff.getChild("wing_right");
@@ -53,9 +59,11 @@ public class CloudSkiffModel extends EntityModel<CloudSkiffRenderState> {
 	@Override
 	public void setupAnim(CloudSkiffRenderState renderState) {
 		super.setupAnim(renderState);
-		this.sailRudder.yRot = renderState.steering + (Mth.sin((3.0F * renderState.ageInTicks * Mth.DEG_TO_RAD))) / 15.0F;
+		this.unfoldAnimation.apply(renderState.unfoldAnimationState, renderState.ageInTicks, 1.0F);
+		this.foldAnimation.apply(renderState.foldAnimationState, renderState.ageInTicks, 1.0F);
 
-		this.wingLeft.zRot = renderState.wingLift;
-		this.wingRight.zRot = -renderState.wingLift;
+		this.sailRudder.yRot += renderState.steering + (Mth.sin((3.0F * renderState.ageInTicks * Mth.DEG_TO_RAD))) / 15.0F;
+		this.wingLeft.zRot += renderState.wingLift;
+        this.wingRight.zRot -= renderState.wingLift;
 	}
 }

@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.item.equipment.weapons.loot;
 import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.projectile.DemolitionProjectile;
+import com.aetherteam.aetherii.item.SpecialAttackStrengthScale;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
 import net.minecraft.core.Direction;
@@ -20,7 +21,7 @@ import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 
-public class HammerOfDemolitionItem extends TieredHammerItem implements ProjectileItem {
+public class HammerOfDemolitionItem extends TieredHammerItem implements ProjectileItem, SpecialAttackStrengthScale {
     public HammerOfDemolitionItem(Properties properties) {
         super(applyWeaponProperties(properties, AetherIIItemTiers.HAMMER_OF_DEMOLITION, 3, -2.4F, AetherIIStats.HAMMER_OF_DEMOLITION));
     }
@@ -59,5 +60,14 @@ public class HammerOfDemolitionItem extends TieredHammerItem implements Projecti
         if (entity instanceof Player player && player.getCooldowns().getCooldownPercent(stack, 0.0F) != 0) {
             event.setCanceled(true);
         }
+    }
+
+    @Override
+    public float getAttackStrengthScale(Level level, Player player, ItemStack stack, float adjustTicks, int attackStrengthTicker) {
+        if (player.getCooldowns().isOnCooldown(stack)) {
+            float percent = player.getCooldowns().getCooldownPercent(stack, 1.0F);
+            return 1.0F - percent;
+        }
+        return SpecialAttackStrengthScale.super.getAttackStrengthScale(level, player, stack, adjustTicks, attackStrengthTicker);
     }
 }

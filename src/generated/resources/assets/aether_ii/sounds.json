@@ -407,6 +407,12 @@
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },
+  "entity.detonation_sentry.beep": {
+    "sounds": [
+      "note/bit"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.detonation_sentry.beep"
+  },
   "entity.detonation_sentry.death": {
     "sounds": [
       "step/stone1",
@@ -470,26 +476,22 @@
   },
   "entity.flying_cow.ambient": {
     "sounds": [
-      "mob/cow/say1",
-      "mob/cow/say2",
-      "mob/cow/say3",
-      "mob/cow/say4"
+      "aether_ii:entity/flying_cow/say1",
+      "aether_ii:entity/flying_cow/say2",
+      "aether_ii:entity/flying_cow/say3",
+      "aether_ii:entity/flying_cow/say4"
     ],
     "subtitle": "subtitles.aether_ii.entity.flying_cow.ambient"
   },
   "entity.flying_cow.death": {
     "sounds": [
-      "mob/cow/hurt1",
-      "mob/cow/hurt2",
-      "mob/cow/hurt3"
+      "aether_ii:entity/flying_cow/death"
     ],
     "subtitle": "subtitles.aether_ii.entity.flying_cow.death"
   },
   "entity.flying_cow.hurt": {
     "sounds": [
-      "mob/cow/hurt1",
-      "mob/cow/hurt2",
-      "mob/cow/hurt3"
+      "aether_ii:entity/flying_cow/hurt"
     ],
     "subtitle": "subtitles.aether_ii.entity.flying_cow.hurt"
   },
@@ -557,84 +559,21 @@
   },
   "entity.kirrid.ambient": {
     "sounds": [
-      {
-        "name": "mob/goat/idle1",
-        "volume": 0.82
-      },
-      {
-        "name": "mob/goat/idle2",
-        "volume": 0.82
-      },
-      {
-        "name": "mob/goat/idle3",
-        "volume": 0.84
-      },
-      {
-        "name": "mob/goat/idle4",
-        "volume": 0.84
-      },
-      {
-        "name": "mob/goat/idle5",
-        "volume": 0.84
-      },
-      {
-        "name": "mob/goat/idle6",
-        "volume": 0.84
-      },
-      {
-        "name": "mob/goat/idle7",
-        "volume": 0.83
-      },
-      {
-        "name": "mob/goat/idle8",
-        "volume": 0.84
-      }
+      "aether_ii:entity/kirrid/say1",
+      "aether_ii:entity/kirrid/say2",
+      "aether_ii:entity/kirrid/say3"
     ],
     "subtitle": "subtitles.aether_ii.entity.kirrid.ambient"
   },
   "entity.kirrid.death": {
     "sounds": [
-      {
-        "name": "mob/goat/death1",
-        "volume": 0.65
-      },
-      {
-        "name": "mob/goat/death2",
-        "volume": 0.65
-      },
-      {
-        "name": "mob/goat/death3",
-        "volume": 0.65
-      },
-      {
-        "name": "mob/goat/death4",
-        "volume": 0.65
-      },
-      {
-        "name": "mob/goat/death5",
-        "volume": 0.65
-      }
+      "aether_ii:entity/kirrid/death"
     ],
     "subtitle": "subtitles.aether_ii.entity.kirrid.death"
   },
   "entity.kirrid.hurt": {
     "sounds": [
-      {
-        "name": "mob/goat/hurt1",
-        "volume": 0.65
-      },
-      {
-        "name": "mob/goat/hurt2",
-        "volume": 0.65
-      },
-      {
-        "name": "mob/goat/hurt3",
-        "volume": 0.65
-      },
-      {
-        "name": "mob/goat/hurt4",
-        "volume": 0.65
-      }
+      "aether_ii:entity/kirrid/hurt"
     ],
     "subtitle": "subtitles.aether_ii.entity.kirrid.hurt"
   },
@@ -777,23 +716,23 @@
   },
   "entity.phyg.ambient": {
     "sounds": [
-      "mob/pig/say1",
-      "mob/pig/say2",
-      "mob/pig/say3"
+      "aether_ii:entity/phyg/say1",
+      "aether_ii:entity/phyg/say2",
+      "aether_ii:entity/phyg/say3"
     ],
     "subtitle": "subtitles.aether_ii.entity.phyg.ambient"
   },
   "entity.phyg.death": {
     "sounds": [
-      "mob/pig/death"
+      "aether_ii:entity/phyg/death"
     ],
     "subtitle": "subtitles.aether_ii.entity.phyg.death"
   },
   "entity.phyg.hurt": {
     "sounds": [
-      "mob/pig/say1",
-      "mob/pig/say2",
-      "mob/pig/say3"
+      "aether_ii:entity/phyg/say1",
+      "aether_ii:entity/phyg/say2",
+      "aether_ii:entity/phyg/say3"
     ],
     "subtitle": "subtitles.aether_ii.entity.phyg.hurt"
   },
@@ -982,25 +921,25 @@
   },
   "entity.sheepuff.ambient": {
     "sounds": [
-      "mob/sheep/say1",
-      "mob/sheep/say2",
-      "mob/sheep/say3"
+      "aether_ii:entity/sheepuff/say1",
+      "aether_ii:entity/sheepuff/say2",
+      "aether_ii:entity/sheepuff/say3"
     ],
     "subtitle": "subtitles.aether_ii.entity.sheepuff.ambient"
   },
   "entity.sheepuff.death": {
     "sounds": [
-      "mob/sheep/say1",
-      "mob/sheep/say2",
-      "mob/sheep/say3"
+      "aether_ii:entity/sheepuff/say1",
+      "aether_ii:entity/sheepuff/say2",
+      "aether_ii:entity/sheepuff/say3"
     ],
     "subtitle": "subtitles.aether_ii.entity.sheepuff.death"
   },
   "entity.sheepuff.hurt": {
     "sounds": [
-      "mob/sheep/say1",
-      "mob/sheep/say2",
-      "mob/sheep/say3"
+      "aether_ii:entity/sheepuff/say1",
+      "aether_ii:entity/sheepuff/say2",
+      "aether_ii:entity/sheepuff/say3"
     ],
     "subtitle": "subtitles.aether_ii.entity.sheepuff.hurt"
   },
@@ -1187,6 +1126,15 @@
       "mob/slime/big4"
     ],
     "subtitle": "subtitles.aether_ii.entity.swet.squish"
+  },
+  "entity.swet.leech": {
+    "sounds": [
+      "mob/slime/big1",
+      "mob/slime/big2",
+      "mob/slime/big3",
+      "mob/slime/big4"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.swet.leech"
   },
   "entity.swet.squish": {
     "sounds": [
@@ -1576,14 +1524,14 @@
     "sounds": [
       "mob/ghast/fireball4"
     ],
-    "subtitle": "subtitles.aether.item.hammer_of_kingbdogz.shoot"
+    "subtitle": "subtitles.aether_ii.item.hammer_of_demolition.shoot"
   },
   "item.scatterglass_vial.empty": {
     "sounds": [
       "item/bottle/empty1",
       "item/bottle/empty2"
     ],
-    "subtitle": "subtitles.aether_ii.item.scaterglass_vial.empty"
+    "subtitle": "subtitles.aether_ii.item.scatterglass_vial.empty"
   },
   "item.scatterglass_vial.fill": {
     "sounds": [
@@ -1592,7 +1540,7 @@
       "item/bottle/fill3",
       "item/bottle/fill4"
     ],
-    "subtitle": "subtitles.aether_ii.item.scaterglass_vial.fill"
+    "subtitle": "subtitles.aether_ii.item.scatterglass_vial.fill"
   },
   "item.swet_ball.use": {
     "sounds": [
