@@ -10,7 +10,6 @@ import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.vehicle.AbstractBoat;
 import net.minecraft.world.item.BoatItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -80,6 +79,7 @@ public class CloudSkiffItem extends BoatItem {
         if (skiff != null) {
             Vec3 hitPos = hitResult.getLocation();
             skiff.setInitialPos(hitPos.x, hitPos.y, hitPos.z);
+            skiff.setAnimateUnfold(true);
             if (level instanceof ServerLevel serverlevel) {
                 EntityType.createDefaultStackConfig(serverlevel, stack, player).accept(skiff);
             }
