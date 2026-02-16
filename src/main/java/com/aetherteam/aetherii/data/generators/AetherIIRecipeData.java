@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.recipe.recipes.OutputEntry;
+import com.aetherteam.aetherii.recipe.recipes.item.special.LootRepairRecipe;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentExactPredicate;
@@ -113,6 +114,9 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 AetherIIBlocks.YELLOW_SKYROOT_BED.asItem(),
                 AetherIIBlocks.WHITE_SKYROOT_BED.asItem()
         );
+
+        // Special
+        SpecialRecipeBuilder.special(LootRepairRecipe::new).save(this.output, "loot_repairing");
         
         // Blocks
         // Dirt

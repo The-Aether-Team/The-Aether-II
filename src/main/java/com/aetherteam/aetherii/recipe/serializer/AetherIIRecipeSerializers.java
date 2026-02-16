@@ -5,8 +5,10 @@ import com.aetherteam.aetherii.recipe.recipes.block.*;
 import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
 import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
 import com.aetherteam.aetherii.recipe.recipes.item.HourglassRestoringRecipe;
+import com.aetherteam.aetherii.recipe.recipes.item.special.LootRepairRecipe;
 import com.aetherteam.nitrogen.recipe.serializer.BlockStateRecipeSerializer;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -23,4 +25,6 @@ public class AetherIIRecipeSerializers {
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<HourglassRestoringRecipe>> HOURGLASS_RESTORING = RECIPE_SERIALIZERS.register("hourglass_restoring", HourglassRestoringRecipe.Serializer::new);
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<AltarEnchantingRecipe>> ALTAR_ENCHANTING = RECIPE_SERIALIZERS.register("altar_enchanting", AltarEnchantingRecipe.Serializer::new);
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<AlkahestPurificationRecipe>> ALKAHEST_PURIFICATION = RECIPE_SERIALIZERS.register("alkahest_purification", AlkahestPurificationRecipe.Serializer::new);
+
+    public static final DeferredHolder<RecipeSerializer<?>, CustomRecipe.Serializer<LootRepairRecipe>> LOOT_REPAIR = RECIPE_SERIALIZERS.register("loot_repair", () -> new CustomRecipe.Serializer<>(LootRepairRecipe::new));
 }
