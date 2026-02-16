@@ -1,6 +1,6 @@
 {
   "carvers": "aether_ii:holy_isles_cave",
-  "creature_spawn_probability": 0.23,
+  "creature_spawn_probability": 0.218,
   "downfall": 0.4,
   "effects": {
     "fog_color": 15526908,
@@ -43,6 +43,7 @@
       "aether_ii:ore_icestone_small",
       "aether_ii:ore_ambrosium",
       "aether_ii:ore_zanite",
+      "aether_ii:ore_zanite_mountain",
       "aether_ii:ore_arkenium",
       "aether_ii:ore_gravitite_buried",
       "aether_ii:ore_gravitite",
@@ -113,9 +114,13 @@
       "charge": 0.4,
       "energy_budget": 0.12
     },
-    "aether_ii:tempest": {
+    "aether_ii:cockatrice": {
       "charge": 0.6,
-      "energy_budget": 0.16
+      "energy_budget": 0.12
+    },
+    "aether_ii:tempest": {
+      "charge": 0.7,
+      "energy_budget": 0.12
     },
     "aether_ii:zephyr": {
       "charge": 0.6,
@@ -182,7 +187,7 @@
         "type": "aether_ii:cockatrice",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 5
+        "weight": 4
       }
     ],
     "aether_ii:aether_dungeon_monster": [],
@@ -222,43 +227,43 @@
         "type": "aether_ii:highfields_taegore",
         "maxCount": 2,
         "minCount": 1,
-        "weight": 9
+        "weight": 14
       },
       {
         "type": "aether_ii:highfields_burrukai",
-        "maxCount": 2,
+        "maxCount": 1,
         "minCount": 1,
-        "weight": 9
+        "weight": 14
       },
       {
         "type": "aether_ii:highfields_kirrid",
         "maxCount": 2,
         "minCount": 1,
-        "weight": 10
+        "weight": 14
       },
       {
         "type": "aether_ii:phyg",
         "maxCount": 4,
         "minCount": 2,
-        "weight": 2
+        "weight": 1
       },
       {
         "type": "aether_ii:flying_cow",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 2
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 1
       },
       {
         "type": "aether_ii:sheepuff",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 2
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 1
       },
       {
         "type": "aether_ii:aerbunny",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 10
+        "weight": 14
       }
     ],
     "misc": [],

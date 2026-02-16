@@ -34,6 +34,7 @@
       "aether_ii:ore_scatterglass",
       "aether_ii:ore_ambrosium",
       "aether_ii:ore_zanite",
+      "aether_ii:ore_zanite_mountain",
       "aether_ii:ore_arkenium",
       "aether_ii:ore_gravitite_buried",
       "aether_ii:ore_gravitite",
@@ -69,9 +70,13 @@
   ],
   "has_precipitation": false,
   "spawn_costs": {
-    "aether_ii:tempest": {
+    "aether_ii:cockatrice": {
       "charge": 0.6,
-      "energy_budget": 0.16
+      "energy_budget": 0.12
+    },
+    "aether_ii:tempest": {
+      "charge": 0.7,
+      "energy_budget": 0.12
     },
     "aether_ii:zephyr": {
       "charge": 0.6,
@@ -118,7 +123,7 @@
         "type": "aether_ii:cockatrice",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 5
+        "weight": 4
       }
     ],
     "aether_ii:aether_dungeon_monster": [],

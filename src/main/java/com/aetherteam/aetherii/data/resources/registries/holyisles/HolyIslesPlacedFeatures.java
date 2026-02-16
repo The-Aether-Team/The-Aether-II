@@ -141,6 +141,7 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ORE_HOLYSTONE_QUARTZ = createKey("ore_holystone_quartz");
     public static final ResourceKey<PlacedFeature> ORE_AMBROSIUM = createKey("ore_ambrosium");
     public static final ResourceKey<PlacedFeature> ORE_ZANITE = createKey("ore_zanite");
+    public static final ResourceKey<PlacedFeature> ORE_ZANITE_MOUNTAIN = createKey("ore_zanite_mountain");
     public static final ResourceKey<PlacedFeature> ORE_GLINT = createKey("ore_glint");
     public static final ResourceKey<PlacedFeature> ORE_ARKENIUM = createKey("ore_arkenium");
     public static final ResourceKey<PlacedFeature> ORE_GRAVITITE_BURIED = createKey("ore_gravitite_buried");
@@ -749,21 +750,23 @@ public class HolyIslesPlacedFeatures {
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(3, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(-96), VerticalAnchor.aboveBottom(96), 72))));
 
         register(context, ORE_HOLYSTONE_QUARTZ, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ORE_HOLYSTONE_QUARTZ),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(1, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(128), VerticalAnchor.top())));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(128), VerticalAnchor.top())));
         register(context, ORE_AMBROSIUM, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ORE_AMBROSIUM),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(20, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(24), VerticalAnchor.top(), 96))));
         register(context, ORE_ZANITE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ORE_ZANITE),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(16, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(48), VerticalAnchor.aboveBottom(256))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(12, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(55), VerticalAnchor.aboveBottom(160))));
+        register(context, ORE_ZANITE_MOUNTAIN, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ORE_ZANITE_MOUNTAIN),
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(5, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(35), VerticalAnchor.top())));
         register(context, ORE_GLINT, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ORE_GLINT),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(114))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(114))));
         register(context, ORE_ARKENIUM, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ORE_ARKENIUM),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(11, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96), 32))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(11, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(90), 32))));
         register(context, ORE_GRAVITITE_BURIED, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ORE_GRAVITITE_BURIED),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(3, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(72), 20))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(4, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(80), 20))));
         register(context, ORE_GRAVITITE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ORE_GRAVITITE),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(5, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(72), 20))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(7, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(-50), VerticalAnchor.aboveBottom(70), 40))));
         register(context, ORE_CORROBONITE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ORE_CORROBONITE),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(3, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(60), 25))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(3, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(-65), VerticalAnchor.aboveBottom(65), 35))));
 
         register(context, ORE_HESTVEIL_OPEN, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ORE_HESTVEIL_OPEN),
                 CountPlacement.of(16),
