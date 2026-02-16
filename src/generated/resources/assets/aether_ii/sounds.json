@@ -407,6 +407,12 @@
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },
+  "entity.detonation_sentry.beep": {
+    "sounds": [
+      "note/bit"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.detonation_sentry.beep"
+  },
   "entity.detonation_sentry.death": {
     "sounds": [
       "step/stone1",

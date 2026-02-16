@@ -1090,6 +1090,11 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:step/stone6")
                 ).subtitle("subtitles.aether_ii.entity.detonation_sentry.squish")
         );
+        this.add(AetherIISoundEvents.ENTITY_DETONATION_SENTRY_BEEP,
+                definition().with(
+                        sound("minecraft:note/bit")
+                ).subtitle("subtitles.aether_ii.entity.detonation_sentry.beep")
+        );
 
         this.add(AetherIISoundEvents.ENTITY_SENTRY_GOLEM_DEATH,
                 definition().with(sound("minecraft:mob/irongolem/death"))
