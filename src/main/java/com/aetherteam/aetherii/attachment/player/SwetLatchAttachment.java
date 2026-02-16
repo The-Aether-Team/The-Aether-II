@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.network.packet.clientbound.SwetSyncPacket;
@@ -10,6 +11,7 @@ import net.minecraft.CrashReportCategory;
 import net.minecraft.ReportedException;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
@@ -100,6 +102,13 @@ public class SwetLatchAttachment implements ValueIOSerializable {
                 }
             }
         }
+
+        if (!this.getLatchedSwets().isEmpty()) {
+            if (this.player.tickCount % 20 == 0) {
+                this.player.level().playLocalSound(this.player, AetherIISoundEvents.ENTITY_SWET_LEECH.get(), SoundSource.HOSTILE, 1.0F, ((this.player.getRandom().nextFloat() - this.player.getRandom().nextFloat()) * 0.2F + 1.0F) * 0.8F);
+            }
+        }
+
         if (this.player.isInWater()) {
             this.detachSwets();
         }

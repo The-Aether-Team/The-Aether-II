@@ -1989,6 +1989,8 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addSubtitle("item", "arkenium_canister.fill", "Arkenium Canister fills");
         this.addSubtitle("item", "arkenium_canister.empty", "Arkenium Canister empties");
 
+        this.addSubtitle("item", "hammer_of_demolition.shoot", "Projectile fired");
+
         this.addSubtitle("item", "armor.equip_beast_pelt", "Beast Pelt armor rustles");
         this.addSubtitle("item", "armor.equip_burrukai_plate", "Burrukai Plate armor rustles");
         this.addSubtitle("item", "armor.equip_zanite", "Zanite armor clangs");
@@ -2099,6 +2101,7 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addSubtitle("entity", "swet.hurt", "Swet hurts");
         this.addSubtitle("entity", "swet.jump", "Swet squishes");
         this.addSubtitle("entity", "swet.squish", "Swet squishes");
+        this.addSubtitle("entity", "swet.leech", "Swet leeches");
 
         this.addSubtitle("entity", "skephid.shoot", "Skephid shoots");
         this.addSubtitle("entity", "skephid.ambient", "Skephid chitters");

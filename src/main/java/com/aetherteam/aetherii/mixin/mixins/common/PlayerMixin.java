@@ -2,10 +2,13 @@ package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.entity.monster.PlantMob;
 import com.aetherteam.aetherii.entity.passive.MountableAnimal;
+import com.aetherteam.aetherii.item.SpecialAttackStrengthScale;
 import com.aetherteam.aetherii.item.equipment.AetherIINeoItemAbilities;
 import com.aetherteam.aetherii.mixin.MixinHooks;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.LivingEntityAccessor;
 import com.aetherteam.aetherii.mixin.wrappers.common.ItemCooldownsWrapper;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -29,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Player.class)
-public abstract class PlayerMixin { //todo sounds, particles, and stats
+public abstract class PlayerMixin { //todo sounds
     @Mutable
     @Final
     @Shadow
@@ -94,5 +97,15 @@ public abstract class PlayerMixin { //todo sounds, particles, and stats
                 player.setShiftKeyDown(true);
             }
         }
+    }
+
+    @WrapMethod(method = "getAttackStrengthScale(F)F")
+    private float getCurrentItemAttackStrengthDelay(float adjustTicks, Operation<Float> original) {
+        Player player = (Player) (Object) this;
+        ItemStack itemStack = player.getWeaponItem();
+        if (itemStack.getItem() instanceof SpecialAttackStrengthScale specialAttackStrengthScale) {
+            return specialAttackStrengthScale.getAttackStrengthScale(player.level(), player, itemStack, adjustTicks, ((LivingEntityAccessor) player).aether$getAttackStrengthTicker());
+        }
+        return original.call(adjustTicks);
     }
 }

@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.block;
 
 import com.aetherteam.aetherii.event.FreezeEvent;
+import com.aetherteam.aetherii.network.packet.clientbound.FreezingParticlePacket;
 import com.aetherteam.nitrogen.recipe.BlockStateRecipeUtil;
 import net.minecraft.commands.CacheableFunction;
 import net.minecraft.core.BlockPos;
@@ -9,6 +10,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Optional;
 
@@ -124,6 +126,7 @@ public interface FreezingBehavior<T> {
             if (newBlockState.isRandomlyTicking()) {
                 level.scheduleTick(pos, newBlockState.getBlock(), Mth.nextInt(level.getRandom(), 60, 120));
             }
+            PacketDistributor.sendToAllPlayers(new FreezingParticlePacket(newBlockState.getBlock(), pos));
             BlockStateRecipeUtil.executeFunction(level, pos, function);
             return 1;
         }
