@@ -63,5 +63,10 @@ public class ExplorationEntry extends GuidebookEntry {
         public Map<String, Info> getClientValues() {
             return this.clientValues;
         }
+
+        @Override
+        public String toString() {
+            return "Mutable{" + "entry=" + this.entry + ", clientValues=" + this.clientValues + '}';
+        }
     }
 }

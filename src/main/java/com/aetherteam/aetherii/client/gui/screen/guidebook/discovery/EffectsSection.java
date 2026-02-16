@@ -23,7 +23,6 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -45,17 +44,20 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
     @Override
     public void initSection() {
         this.entries.clear();
-        this.registryAccess.lookupOrThrow(this.registryKey).asHolderIdMap().forEach((entry) -> this.entries.add(new EffectsEntry.Mutable(entry)));
         this.getOrderedEntries().clear();
-        AetherIIEffectsEntries.ENTRY_ORDER.forEach((entityTypeHolder) -> this.entries.forEach((entry) -> {
-            if (entry.getEffect().value() == entityTypeHolder.value()) {
-                this.getOrderedEntries().add(entry);
-            }
-        }));
-
         Player player = Minecraft.getInstance().player;
         if (player != null) {
             GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
+            attachment.getEffectsEntries().forEach((mutable) -> this.registryAccess.lookupOrThrow(this.registryKey).asHolderIdMap().forEach((entry) -> {
+                if (entry.value().getEffect().value() == mutable.getEffect().value()) {
+                    this.entries.add(mutable);
+                }
+            }));
+            AetherIIEffectsEntries.ENTRY_ORDER.forEach((mobEffectHolder) -> this.entries.forEach((entry) -> {
+                if (entry.getEffect().value() == mobEffectHolder.value()) {
+                    this.getOrderedEntries().add(entry);
+                }
+            }));
             for (EffectsEntry.Mutable effectsEntry : attachment.getEffectsEntries()) {
                 Optional<EffectsEntry.Mutable> matchingEntry = this.getOrderedEntries().stream().filter((mutable) -> mutable.getEffect().is(effectsEntry.getEffect())).findFirst();
                 if (matchingEntry.isPresent()) {
