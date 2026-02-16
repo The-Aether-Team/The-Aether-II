@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.fluid;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluids;
@@ -10,6 +11,7 @@ import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.LevelRendererAccessor;
 import com.aetherteam.aetherii.network.packet.clientbound.AlkahestDamageBlockPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.AlkahestFizzPacket;
@@ -160,8 +162,9 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
         if (entity instanceof ItemEntity itemEntity) {
             ItemStack itemStack = itemEntity.getItem().copy();
             if (!itemStack.is(AetherIITags.Items.ALKAHEST_RESISTANT_ITEM) && !itemStack.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
-                itemEntity.lifespan -= 15;
-                if (entity.level().isClientSide()) {
+                int newLifespanValue = itemEntity.lifespan - 15;
+
+                if (entity.level().isClientSide()) { //todo this no longer works its always false
                     for (int i = 0; i < 2; ++i) {
                         double d0 = random.nextGaussian() * 0.02;
                         double d1 = random.nextGaussian() * 0.02;
@@ -170,19 +173,29 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
                     }
                 }
                 if (itemEntity.lifespan <= 500) {
-                    for (RecipeHolder<AlkahestPurificationRecipe> recipe : level.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.ALKAHEST_PURIFICATION.get())) {
-                        if (recipe != null) {
-                            SingleRecipeInputWithRandom input = new SingleRecipeInputWithRandom(itemStack, level.getRandom());
-                            if (recipe.value().matches(input, level)) {
-                                itemEntity.discard();
-                                ItemStack result = recipe.value().assemble(input, level.registryAccess());
-                                result.setDamageValue((result.getMaxDamage() / 3) + (random.nextInt(8) * (random.nextBoolean() ? 1 : -1)));
-                                ItemEntity cleansedItemEntity = new ItemEntity(level, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), result);
-                                level.addFreshEntity(cleansedItemEntity);
+                    if (itemStack.is(AetherIITags.Items.UNBREAKABLE_LOOT)) {
+                        itemEntity.discard();
+                        ItemStack brokenLootStack = MixinHooks.getBrokenLootStack(itemStack);
+                        ItemEntity lootItemEntity = new ItemEntity(level, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), brokenLootStack);
+                        level.addFreshEntity(lootItemEntity);
+                        return;
+                    } else {
+                        for (RecipeHolder<AlkahestPurificationRecipe> recipe : level.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.ALKAHEST_PURIFICATION.get())) {
+                            if (recipe != null) {
+                                SingleRecipeInputWithRandom input = new SingleRecipeInputWithRandom(itemStack, level.getRandom());
+                                if (recipe.value().matches(input, level)) {
+                                    itemEntity.discard();
+                                    ItemStack result = recipe.value().assemble(input, level.registryAccess());
+                                    result.setDamageValue((result.getMaxDamage() / 3) + (random.nextInt(8) * (random.nextBoolean() ? 1 : -1)));
+                                    ItemEntity cleansedItemEntity = new ItemEntity(level, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), result);
+                                    level.addFreshEntity(cleansedItemEntity);
+                                    return;
+                                }
                             }
                         }
                     }
                 }
+                itemEntity.lifespan = newLifespanValue;
             }
         } else if (entity instanceof LivingEntity livingEntity) {
             if (entity.tickCount % 20 == 0) {
