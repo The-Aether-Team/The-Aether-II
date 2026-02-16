@@ -39,6 +39,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public class DamageSystemAttachment implements ValueIOSerializable {
     private float criticalDamageModifier = 1.0F;
     private double shieldEndurance = 0;
+    private int resistantEntity = -1;
 
     public static final StreamCodec<RegistryFriendlyByteBuf, DamageSystemAttachment> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.DOUBLE, DamageSystemAttachment::getShieldEndurance,
@@ -173,17 +174,28 @@ public class DamageSystemAttachment implements ValueIOSerializable {
     private void createFeedback(Entity source, Entity target, double damage, double defense, SimpleParticleType particleType, SoundEvent correct, SoundEvent incorrect) {
         if (damage > 0) {
             if (defense > 0) {
+                this.resistantEntity = target.getId();
                 if (source instanceof ServerPlayer serverPlayer) {
                     PacketDistributor.sendToPlayer(serverPlayer, new ResistanceKnockbackPacket(serverPlayer.getId(), target.getId()));
                 }
                 source.level().playSound(null, source.getX(), source.getY(), source.getZ(), incorrect, source.getSoundSource(), 1.0F, 1.0F);
             } else if (defense < 0) {
+                this.resistantEntity = -1;
                 if (source.level() instanceof ServerLevel serverLevel) {
                     PacketDistributor.sendToPlayersNear(serverLevel, null, source.getX(), source.getY(), source.getZ(), 15,  new DamageTypeParticlePacket(target.getId(), particleType));
                 }
                 source.level().playSound(null, source.getX(), source.getY(), source.getZ(), correct, source.getSoundSource(), 1.0F, 1.0F);
             }
         }
+    }
+
+    public boolean cancelKnockback(LivingEntity entity) {
+        if (entity.getId() == this.resistantEntity) {
+            this.resistantEntity = -1;
+            return true;
+        }
+        return false;
+
     }
 
     public void setCriticalDamageModifier(float criticalDamageModifier) {
