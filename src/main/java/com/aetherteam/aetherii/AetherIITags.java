@@ -16,7 +16,7 @@ import net.minecraft.world.level.material.Fluid;
 public class AetherIITags {
     public static class Blocks {
         public static final TagKey<Block> AETHER_PORTAL_BLOCKS = tag("aether_portal_blocks");
-        public static final TagKey<Block> AETHER_PORTAL_BLACKLIST = tag("aether_portal_blacklist");
+        public static final TagKey<Block> AETHER_PORTAL_WHITELIST = tag("aether_portal_whitelist");
         public static final TagKey<Block> AETHER_DIRT = tag("aether_dirt");
         public static final TagKey<Block> HOLYSTONE = tag("holystone");
         public static final TagKey<Block> UNDERSHALE = tag("undershale");

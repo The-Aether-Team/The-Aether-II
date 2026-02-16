@@ -156,7 +156,7 @@ public class AetherPortalForcer {
             for (int j = -1; j < 4; ++j) {
                 offsetPos.setWithOffset(originalPos, direction.getStepX() * i + clockWiseDirection.getStepX() * offsetScale, j, direction.getStepZ() * i + clockWiseDirection.getStepZ() * offsetScale);
                 BlockState blockState = this.level.getBlockState(offsetPos);
-                if (j < 0 && (blockState.isAir() || blockState.is(AetherIITags.Blocks.AETHER_PORTAL_BLACKLIST))) {
+                if (j < 0 && (blockState.isAir() || !blockState.is(AetherIITags.Blocks.AETHER_PORTAL_WHITELIST))) {
                     return false;
                 }
                 if (j >= 0 && !this.level.isEmptyBlock(offsetPos)) {
