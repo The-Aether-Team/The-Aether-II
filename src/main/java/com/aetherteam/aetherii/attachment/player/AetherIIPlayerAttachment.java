@@ -10,12 +10,14 @@ import com.aetherteam.aetherii.item.miscellaneous.ToggleItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.ClientInput;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -31,6 +33,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.checkerframework.checker.units.qual.A;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -112,8 +115,18 @@ public class AetherIIPlayerAttachment {
     public void changeDimension(Player player, ResourceKey<Level> to) {
         if (to == AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL) {
             if (player instanceof ServerPlayer serverPlayer && !this.sentChatMessage) {
+                serverPlayer.sendSystemMessage(Component.literal("Thank you for checking out The Aether II's public alpha test!").withColor(12566527));
+                serverPlayer.sendSystemMessage(Component.literal("The mod is incomplete and in active development, so some features are missing or incomplete.").withColor(12566527));
 
-                serverPlayer.sendSystemMessage(Component.literal("test").withStyle(Style.EMPTY.withClickEvent(new ClickEvent.ShowDialog(Holder.direct(getDialog())))));
+                MutableComponent hereMessage = Component.literal("Check ").withColor(12566527);
+                hereMessage = hereMessage.append(Component.literal("here").withStyle(Style.EMPTY.withClickEvent(new ClickEvent.ShowDialog(Holder.direct(getDialog()))).withUnderlined(true).withColor(ChatFormatting.AQUA)));
+                hereMessage = hereMessage.append(Component.literal(" for an overview of the state of the mod and what to expect from future updates.").withColor(12566527));
+                serverPlayer.sendSystemMessage(hereMessage);
+
+                MutableComponent linkMessage = Component.literal("You can support the ongoing development of The Aether II on ").withColor(12566527);
+                linkMessage = linkMessage.append(Component.literal("Patreon").withStyle(Style.EMPTY.withClickEvent(new ClickEvent.OpenUrl(URI.create("https://www.patreon.com/TheAetherTeam"))).withUnderlined(true).withColor(16728653)));
+                serverPlayer.sendSystemMessage(linkMessage);
+
                 this.sentChatMessage = true;
             }
         }
