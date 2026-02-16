@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.api.entity.CustomPickItemEntity;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
@@ -735,6 +736,9 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                     itemStack.shrink(1);
                 }
                 this.heal(5.0F);
+                if (player instanceof ServerPlayer serverPlayer) {
+                    AetherIIAdvancementTriggers.FEED_MOA.get().trigger(serverPlayer, itemStack, this);
+                }
                 return InteractionResult.SUCCESS;
             }
         }

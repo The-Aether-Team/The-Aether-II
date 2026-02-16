@@ -1,9 +1,12 @@
 package com.aetherteam.aetherii.block.utility;
 
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
@@ -70,6 +73,10 @@ public class BedrollBlock extends HorizontalDirectionalBlock {
                 player.startSleepInBed(pos).ifLeft((problem) -> {
                     if (problem.getMessage() != null) {
                         player.displayClientMessage(problem.getMessage(), true);
+                    }
+                }).ifRight((unit) -> {
+                    if (player instanceof ServerPlayer serverPlayer) {
+                        AetherIIAdvancementTriggers.SLEPT_IN_BEDROLL.get().trigger(serverPlayer);
                     }
                 });
             }
