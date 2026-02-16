@@ -69,6 +69,11 @@ public class ArkeniumTaluton extends Monster {
         return this.attackAnimationTick;
     }
 
+    @Override
+    public int getAmbientSoundInterval() {
+        return 260;
+    }
+
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {

@@ -258,9 +258,16 @@
   },
   "entity.arkenium_taluton.ambient": {
     "sounds": [
-      "ambient/cave/cave3",
-      "ambient/cave/cave7",
-      "ambient/cave/cave9"
+      {
+        "name": "ui/stonecutter/cut1",
+        "pitch": 0.1,
+        "volume": 0.5
+      },
+      {
+        "name": "ui/stonecutter/cut2",
+        "pitch": 0.18,
+        "volume": 0.5
+      }
     ],
     "subtitle": "subtitles.aether_ii.entity.arkenium_taluton.ambient"
   },
@@ -518,9 +525,16 @@
   },
   "entity.gravitite_taluton.ambient": {
     "sounds": [
-      "ambient/cave/cave3",
-      "ambient/cave/cave7",
-      "ambient/cave/cave9"
+      {
+        "name": "ui/stonecutter/cut1",
+        "pitch": 0.6,
+        "volume": 0.35
+      },
+      {
+        "name": "ui/stonecutter/cut2",
+        "pitch": 0.68,
+        "volume": 0.35
+      }
     ],
     "subtitle": "subtitles.aether_ii.entity.gravitite_taluton.ambient"
   },
@@ -546,7 +560,21 @@
   },
   "entity.gravitite_taluton.shoot": {
     "sounds": [
-      "aether_ii:entity/zephyr/shoot"
+      {
+        "name": "item/mace/smash_air1",
+        "pitch": 1.85,
+        "volume": 0.5
+      },
+      {
+        "name": "item/mace/smash_air2",
+        "pitch": 1.85,
+        "volume": 0.5
+      },
+      {
+        "name": "item/mace/smash_air3",
+        "pitch": 1.85,
+        "volume": 0.5
+      }
     ],
     "subtitle": "subtitles.aether_ii.entity.gravitite_taluton.shoot"
   },
@@ -701,31 +729,64 @@
   },
   "entity.mimic.attack": {
     "sounds": [
-      "random/eat1",
-      "random/eat2",
-      "random/eat3"
+      {
+        "name": "random/eat1",
+        "pitch": 0.6
+      },
+      {
+        "name": "random/eat2",
+        "pitch": 0.6
+      },
+      {
+        "name": "random/eat3",
+        "pitch": 0.6
+      }
     ],
     "subtitle": "subtitles.aether_ii.entity.mimic.attack"
   },
   "entity.mimic.death": {
     "sounds": [
-      "step/stone1",
-      "step/stone2",
-      "step/stone3",
-      "step/stone4",
-      "step/stone5",
-      "step/stone6"
+      {
+        "name": "entity/shulker/death1",
+        "pitch": 0.55
+      },
+      {
+        "name": "entity/shulker/death2",
+        "pitch": 0.55
+      },
+      {
+        "name": "entity/shulker/death3",
+        "pitch": 0.55
+      },
+      {
+        "name": "entity/shulker/death4",
+        "pitch": 0.55
+      }
     ],
     "subtitle": "subtitles.aether_ii.entity.mimic.death"
   },
   "entity.mimic.hurt": {
     "sounds": [
-      "step/stone1",
-      "step/stone2",
-      "step/stone3",
-      "step/stone4",
-      "step/stone5",
-      "step/stone6"
+      {
+        "name": "entity/shulker/ambient1",
+        "pitch": 0.55
+      },
+      {
+        "name": "entity/shulker/ambient2",
+        "pitch": 0.55
+      },
+      {
+        "name": "entity/shulker/ambient3",
+        "pitch": 0.55
+      },
+      {
+        "name": "entity/shulker/ambient4",
+        "pitch": 0.55
+      },
+      {
+        "name": "entity/shulker/ambient5",
+        "pitch": 0.55
+      }
     ],
     "subtitle": "subtitles.aether_ii.entity.mimic.hurt"
   },
@@ -749,13 +810,20 @@
   },
   "entity.moa.egg": {
     "sounds": [
-      "mob/chicken/plop"
+      {
+        "name": "mob/chicken/plop",
+        "pitch": 0.7
+      }
     ],
     "subtitle": "subtitles.aether_ii.entity.moa.egg"
   },
   "entity.moa.flap": {
     "sounds": [
-      "mob/bat/takeoff"
+      {
+        "name": "mob/bat/takeoff",
+        "pitch": 0.8,
+        "volume": 0.5
+      }
     ],
     "subtitle": "subtitles.aether_ii.entity.moa.flap"
   },
@@ -1028,31 +1096,66 @@
   },
   "entity.skephid.ambient": {
     "sounds": [
-      "mob/spider/say1",
-      "mob/spider/say2",
-      "mob/spider/say3",
-      "mob/spider/say4"
+      {
+        "name": "mob/spider/say1",
+        "pitch": 1.3,
+        "volume": 0.8
+      },
+      {
+        "name": "mob/spider/say2",
+        "pitch": 1.3,
+        "volume": 0.8
+      },
+      {
+        "name": "mob/spider/say3",
+        "pitch": 1.3,
+        "volume": 0.8
+      },
+      {
+        "name": "mob/spider/say4",
+        "pitch": 1.3,
+        "volume": 0.8
+      }
     ],
     "subtitle": "subtitles.aether_ii.entity.skephid.ambient"
   },
   "entity.skephid.death": {
     "sounds": [
-      "mob/spider/death"
+      {
+        "name": "mob/spider/death",
+        "pitch": 1.3
+      }
     ],
     "subtitle": "subtitles.aether_ii.entity.skephid.death"
   },
   "entity.skephid.hurt": {
     "sounds": [
-      "mob/spider/say1",
-      "mob/spider/say2",
-      "mob/spider/say3",
-      "mob/spider/say4"
+      {
+        "name": "mob/spider/say1",
+        "pitch": 1.3
+      },
+      {
+        "name": "mob/spider/say2",
+        "pitch": 1.3
+      },
+      {
+        "name": "mob/spider/say3",
+        "pitch": 1.3
+      },
+      {
+        "name": "mob/spider/say4",
+        "pitch": 1.3
+      }
     ],
     "subtitle": "subtitles.aether_ii.entity.skephid.hurt"
   },
   "entity.skephid.shoot": {
     "sounds": [
-      "aether_ii:entity/zephyr/shoot"
+      {
+        "name": "aether_ii:entity/zephyr/shoot",
+        "pitch": 1.5,
+        "volume": 0.55
+      }
     ],
     "subtitle": "subtitles.aether_ii.entity.skephid.shoot"
   },
@@ -1067,8 +1170,16 @@
   },
   "entity.skyroot_lizard.ambient": {
     "sounds": [
-      "mob/silverfish/say1",
-      "mob/silverfish/say3"
+      {
+        "name": "mob/silverfish/say1",
+        "pitch": 0.8,
+        "volume": 0.8
+      },
+      {
+        "name": "mob/silverfish/say3",
+        "pitch": 0.8,
+        "volume": 0.8
+      }
     ],
     "subtitle": "subtitles.aether_ii.entity.skyroot_lizard.ambient"
   },
@@ -1353,7 +1464,10 @@
   },
   "entity.tempest.shoot": {
     "sounds": [
-      "aether_ii:entity/zephyr/shoot"
+      {
+        "name": "aether_ii:entity/zephyr/shoot",
+        "pitch": 0.7
+      }
     ],
     "subtitle": "subtitles.aether_ii.entity.tempest.shoot"
   },
@@ -1378,7 +1492,20 @@
   },
   "entity.zephyr.shoot": {
     "sounds": [
-      "aether_ii:entity/zephyr/shoot"
+      {
+        "name": "aether_ii:entity/zephyr/shoot",
+        "volume": 0.8
+      },
+      {
+        "name": "aether_ii:entity/zephyr/shoot",
+        "pitch": 1.1,
+        "volume": 0.8
+      },
+      {
+        "name": "aether_ii:entity/zephyr/shoot",
+        "pitch": 1.2,
+        "volume": 0.8
+      }
     ],
     "subtitle": "subtitles.aether_ii.entity.zephyr.shoot"
   },

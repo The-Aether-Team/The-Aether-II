@@ -168,7 +168,7 @@ public class Zephyr extends Mob implements Enemy {
 
     @Override
     public int getAmbientSoundInterval() {
-        return 160;
+        return 450;
     }
 
     @Override

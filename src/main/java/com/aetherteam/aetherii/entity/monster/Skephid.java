@@ -76,7 +76,7 @@ public class Skephid extends CellingMonster implements RangedAttackMob {
 
     @Override
     public int getAmbientSoundInterval() {
-        return 160;
+        return 380;
     }
 
     @Nullable

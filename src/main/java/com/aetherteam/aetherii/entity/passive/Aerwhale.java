@@ -130,7 +130,7 @@ public class Aerwhale extends PathfinderMob {
 
     @Override
     public int getAmbientSoundInterval() {
-        return 200;
+        return 1200;
     }
 
     @Override

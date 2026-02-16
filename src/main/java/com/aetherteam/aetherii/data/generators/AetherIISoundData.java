@@ -729,18 +729,18 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.block.generic.footsteps")
         );
         this.add(AetherIISoundEvents.ENTITY_MOA_FLAP,
-                definition().with(sound("minecraft:mob/bat/takeoff"))
+                definition().with(sound("minecraft:mob/bat/takeoff").volume(0.5).pitch(0.8))
                         .subtitle("subtitles.aether_ii.entity.moa.flap")
         );
         this.add(AetherIISoundEvents.ENTITY_MOA_EGG,
-                definition().with(sound("minecraft:mob/chicken/plop"))
+                definition().with(sound("minecraft:mob/chicken/plop").pitch(0.7))
                         .subtitle("subtitles.aether_ii.entity.moa.egg")
         );
 
         this.add(AetherIISoundEvents.ENTITY_SKYROOT_LIZARD_AMBIENT,
                 definition().with(
-                        sound("minecraft:mob/silverfish/say1"),
-                        sound("minecraft:mob/silverfish/say3")
+                        sound("minecraft:mob/silverfish/say1").pitch(0.8).volume(0.8),
+                        sound("minecraft:mob/silverfish/say3").pitch(0.8).volume(0.8)
                 ).subtitle("subtitles.aether_ii.entity.skyroot_lizard.ambient")
         );
         this.add(AetherIISoundEvents.ENTITY_SKYROOT_LIZARD_DEATH,
@@ -797,8 +797,10 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
 
         this.add(AetherIISoundEvents.ENTITY_ZEPHYR_SHOOT,
-                definition().with(sound("aether_ii:entity/zephyr/shoot"))
-                        .subtitle("subtitles.aether_ii.entity.zephyr.shoot")
+                definition().with(sound("aether_ii:entity/zephyr/shoot").volume(0.8),
+                                sound("aether_ii:entity/zephyr/shoot").volume(0.8).pitch(1.1),
+                                sound("aether_ii:entity/zephyr/shoot").volume(0.8).pitch(1.2)
+                        ).subtitle("subtitles.aether_ii.entity.zephyr.shoot")
         );
         this.add(AetherIISoundEvents.ENTITY_ZEPHYR_AMBIENT,
                 definition().with(
@@ -816,7 +818,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
 
         this.add(AetherIISoundEvents.ENTITY_TEMPEST_SHOOT,
-                definition().with(sound("aether_ii:entity/zephyr/shoot"))
+                definition().with(sound("aether_ii:entity/zephyr/shoot").pitch(0.7))
                         .subtitle("subtitles.aether_ii.entity.tempest.shoot")
         );
         this.add(AetherIISoundEvents.ENTITY_TEMPEST_AMBIENT,
@@ -908,28 +910,29 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
 
         this.add(AetherIISoundEvents.ENTITY_SKEPHID_SHOOT,
-                definition().with(sound("aether_ii:entity/zephyr/shoot"))
-                        .subtitle("subtitles.aether_ii.entity.skephid.shoot")
+                definition().with(
+                                sound("aether_ii:entity/zephyr/shoot").pitch(1.5).volume(0.55)
+                ).subtitle("subtitles.aether_ii.entity.skephid.shoot")
         );
         this.add(AetherIISoundEvents.ENTITY_SKEPHID_AMBIENT,
                 definition().with(
-                        sound("minecraft:mob/spider/say1"),
-                        sound("minecraft:mob/spider/say2"),
-                        sound("minecraft:mob/spider/say3"),
-                        sound("minecraft:mob/spider/say4")
+                        sound("minecraft:mob/spider/say1").pitch(1.3).volume(0.8),
+                        sound("minecraft:mob/spider/say2").pitch(1.3).volume(0.8),
+                        sound("minecraft:mob/spider/say3").pitch(1.3).volume(0.8),
+                        sound("minecraft:mob/spider/say4").pitch(1.3).volume(0.8)
                 ).subtitle("subtitles.aether_ii.entity.skephid.ambient")
         );
         this.add(AetherIISoundEvents.ENTITY_SKEPHID_DEATH,
                 definition().with(
-                        sound("minecraft:mob/spider/death")
+                        sound("minecraft:mob/spider/death").pitch(1.3)
                 ).subtitle("subtitles.aether_ii.entity.skephid.death")
         );
         this.add(AetherIISoundEvents.ENTITY_SKEPHID_HURT,
                 definition().with(
-                        sound("minecraft:mob/spider/say1"),
-                        sound("minecraft:mob/spider/say2"),
-                        sound("minecraft:mob/spider/say3"),
-                        sound("minecraft:mob/spider/say4")
+                        sound("minecraft:mob/spider/say1").pitch(1.3),
+                        sound("minecraft:mob/spider/say2").pitch(1.3),
+                        sound("minecraft:mob/spider/say3").pitch(1.3),
+                        sound("minecraft:mob/spider/say4").pitch(1.3)
                 ).subtitle("subtitles.aether_ii.entity.skephid.hurt")
         );
         this.add(AetherIISoundEvents.ENTITY_SKEPHID_STEP,
@@ -948,9 +951,8 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
         this.add(AetherIISoundEvents.ENTITY_ARKENIUM_TALUTON_AMBIENT,
                 definition().with(
-                        sound("minecraft:ambient/cave/cave3"),
-                        sound("minecraft:ambient/cave/cave7"),
-                        sound("minecraft:ambient/cave/cave9")
+                        sound("minecraft:ui/stonecutter/cut1").pitch(0.1).volume(0.5),
+                        sound("minecraft:ui/stonecutter/cut2").pitch(0.18).volume(0.5)
                 ).subtitle("subtitles.aether_ii.entity.arkenium_taluton.ambient")
         );
         this.add(AetherIISoundEvents.ENTITY_ARKENIUM_TALUTON_DEATH,
@@ -984,14 +986,15 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
 
         this.add(AetherIISoundEvents.ENTITY_GRAVITITE_TALUTON_SHOOT,
                 definition().with(
-                        sound("aether_ii:entity/zephyr/shoot")
+                        sound("minecraft:item/mace/smash_air1").pitch(1.85).volume (0.5),
+                        sound("minecraft:item/mace/smash_air2").pitch(1.85).volume (0.5),
+                        sound("minecraft:item/mace/smash_air3").pitch(1.85).volume (0.5)
                 ).subtitle("subtitles.aether_ii.entity.gravitite_taluton.shoot")
         );
         this.add(AetherIISoundEvents.ENTITY_GRAVITITE_TALUTON_AMBIENT,
                 definition().with(
-                        sound("minecraft:ambient/cave/cave3"),
-                        sound("minecraft:ambient/cave/cave7"),
-                        sound("minecraft:ambient/cave/cave9")
+                        sound("minecraft:ui/stonecutter/cut1").pitch(0.6).volume(0.35),
+                        sound("minecraft:ui/stonecutter/cut2").pitch(0.68).volume(0.35)
                 ).subtitle("subtitles.aether_ii.entity.gravitite_taluton.ambient")
         );
         this.add(AetherIISoundEvents.ENTITY_GRAVITITE_TALUTON_DEATH,
@@ -1025,27 +1028,24 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
 
         this.add(AetherIISoundEvents.ENTITY_MIMIC_ATTACK,
                 definition().with(
-                        sound("minecraft:random/eat1"),
-                        sound("minecraft:random/eat2"),
-                        sound("minecraft:random/eat3")
+                        sound("minecraft:random/eat1").pitch(0.6),
+                        sound("minecraft:random/eat2").pitch(0.6),
+                        sound("minecraft:random/eat3").pitch(0.6)
                 ).subtitle("subtitles.aether_ii.entity.mimic.attack")
         );
         this.add(AetherIISoundEvents.ENTITY_MIMIC_DEATH,
-                definition().with(sound("minecraft:step/stone1"),
-                        sound("minecraft:step/stone2"),
-                        sound("minecraft:step/stone3"),
-                        sound("minecraft:step/stone4"),
-                        sound("minecraft:step/stone5"),
-                        sound("minecraft:step/stone6")
+                definition().with(sound("minecraft:entity/shulker/death1").pitch(0.55),
+                        sound("minecraft:entity/shulker/death2").pitch(0.55),
+                        sound("minecraft:entity/shulker/death3").pitch(0.55),
+                        sound("minecraft:entity/shulker/death4").pitch(0.55)
                 ).subtitle("subtitles.aether_ii.entity.mimic.death")
         );
         this.add(AetherIISoundEvents.ENTITY_MIMIC_HURT,
-                definition().with(sound("minecraft:step/stone1"),
-                        sound("minecraft:step/stone2"),
-                        sound("minecraft:step/stone3"),
-                        sound("minecraft:step/stone4"),
-                        sound("minecraft:step/stone5"),
-                        sound("minecraft:step/stone6")
+                definition().with(sound("minecraft:entity/shulker/ambient1").pitch(0.55),
+                        sound("minecraft:entity/shulker/ambient2").pitch(0.55),
+                        sound("minecraft:entity/shulker/ambient3").pitch(0.55),
+                        sound("minecraft:entity/shulker/ambient4").pitch(0.55),
+                        sound("minecraft:entity/shulker/ambient5").pitch(0.55)
                 ).subtitle("subtitles.aether_ii.entity.mimic.hurt")
         );
         this.add(AetherIISoundEvents.ENTITY_MIMIC_KILL,

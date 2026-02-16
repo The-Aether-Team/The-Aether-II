@@ -165,7 +165,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
 
     @Override
     public int getAmbientSoundInterval() {
-        return 160;
+        return 360;
     }
 
     @Nullable

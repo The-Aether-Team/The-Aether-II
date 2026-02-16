@@ -127,6 +127,11 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
         return this.horizontalCollision;
     }
 
+    @Override
+    public int getAmbientSoundInterval() {
+        return 150;
+    }
+
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
