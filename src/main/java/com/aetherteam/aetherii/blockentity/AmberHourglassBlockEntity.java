@@ -387,8 +387,7 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
         } else if (index != 1) {
             return true;
         } else {
-            ItemStack fuelStack = this.items.get(1);
-            return this.getFuelDuration(fuelStack) > 0;
+            return this.getFuelDuration(stack) > 0;
         }
     }
 
