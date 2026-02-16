@@ -1574,6 +1574,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("aercloud_glider", "Amateur Flying");
         this.addAdvancement("obtain_egg", "Don't Count Your Moas...");
         this.addAdvancement("obtain_petal", "Baby Food");
+        this.addAdvancement("moa_feed", "Healthy Diet");
         this.addAdvancement("skyroot_lizard", "Get Stickbugged!");
         this.addAdvancement("incubate_moa", "... Until They hatch!");
         this.addAdvancement("explore_aether", "The World Above");
@@ -1615,6 +1616,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("aercloud_glider", "Use an Aercloud Glider for better mid-air movement");
         this.addAdvancementDesc("obtain_egg", "Obtain a Moa Egg from a Moa Nest");
         this.addAdvancementDesc("obtain_petal", "Harvest an Aechor Petal from an Aechor Plant");
+        this.addAdvancementDesc("moa_feed", "Heal a Moa with Moa Feed");
         this.addAdvancementDesc("skyroot_lizard", "Skewer a Skyroot Lizard on a Skyroot Stick");
         this.addAdvancementDesc("incubate_moa", "Incubate a Moa Egg by placing it on top of Woven Skyroot Sticks");
         this.addAdvancementDesc("explore_aether", "Explore all Aether biomes");

@@ -309,6 +309,16 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("aechor_petal", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIItems.AECHOR_PETAL.get()))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "obtain_petal"));
 
+            AdvancementHolder moaFeed = Advancement.Builder.advancement()
+                    .parent(obtainPetal)
+                    .display(AetherIIItems.BLUEBERRY_MOA_FEED.get(),
+                            Component.translatable("advancement.aether_ii.moa_feed"),
+                            Component.translatable("advancement.aether_ii.moa_feed.desc").withStyle(ChatFormatting.AQUA),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("feed_moa", FeedMoaTrigger.Instance.itemUsedOnEntity(ItemPredicate.Builder.item().of(items, AetherIITags.Items.MOA_FOOD)))
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_feed"));
+
             AdvancementHolder skyrootLizard = Advancement.Builder.advancement()
                     .parent(obtainEgg)
                     .display(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get(),
