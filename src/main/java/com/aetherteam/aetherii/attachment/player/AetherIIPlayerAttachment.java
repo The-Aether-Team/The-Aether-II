@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.attachment.player;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
@@ -15,13 +16,11 @@ import net.minecraft.client.player.ClientInput;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.chat.ClickEvent;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.*;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dialog.*;
 import net.minecraft.server.level.ServerPlayer;
@@ -39,6 +38,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class AetherIIPlayerAttachment {
+    private static final ResourceLocation LOGOMARKS = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "logomarks");
+    private static final Style INFO = Style.EMPTY.withColor(0x56C1EF).withUnderlined(true).withClickEvent(new ClickEvent.ShowDialog(Holder.direct(getDialog()))).withHoverEvent(new HoverEvent.ShowText(Component.literal("Open Info Screen")));
+    private static final Style PATREON = Style.EMPTY.withColor(16728653).withUnderlined(true).withClickEvent(new ClickEvent.OpenUrl(URI.create("https://www.patreon.com/TheAetherTeam"))).withHoverEvent(new HoverEvent.ShowText(Component.literal("https://www.patreon.com/TheAetherTeam")));
+
     private boolean isMoving;
     private boolean isJumping;
     private boolean useToggled = false;
@@ -115,16 +118,21 @@ public class AetherIIPlayerAttachment {
     public void changeDimension(Player player, ResourceKey<Level> to) {
         if (to == AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL) {
             if (player instanceof ServerPlayer serverPlayer && !this.sentChatMessage) {
-                serverPlayer.sendSystemMessage(Component.literal("Thank you for checking out The Aether II's public alpha test!").withColor(12566527));
-                serverPlayer.sendSystemMessage(Component.literal("The mod is incomplete and in active development, so some features are missing or incomplete.").withColor(12566527));
+                MutableComponent thanksMessage = Component.literal("Thank you for checking out ").withColor(0xE5E5FF);
+                thanksMessage = thanksMessage.append(Component.literal("The Aether II's public alpha test").withColor(0x56C1EF));
+                thanksMessage = thanksMessage.append(Component.literal("!").withColor(0xE5E5FF));
+                serverPlayer.sendSystemMessage(thanksMessage.append(CommonComponents.NEW_LINE));
 
-                MutableComponent hereMessage = Component.literal("Check ").withColor(12566527);
-                hereMessage = hereMessage.append(Component.literal("here").withStyle(Style.EMPTY.withClickEvent(new ClickEvent.ShowDialog(Holder.direct(getDialog()))).withUnderlined(true).withColor(ChatFormatting.AQUA)));
-                hereMessage = hereMessage.append(Component.literal(" for an overview of the state of the mod and what to expect from future updates.").withColor(12566527));
-                serverPlayer.sendSystemMessage(hereMessage);
+                serverPlayer.sendSystemMessage(Component.literal("The mod is incomplete and in active development, so some features are missing or unfinished.").withColor(0xE5E5FF).append(CommonComponents.NEW_LINE));
 
-                MutableComponent linkMessage = Component.literal("You can support the ongoing development of The Aether II on ").withColor(12566527);
-                linkMessage = linkMessage.append(Component.literal("Patreon").withStyle(Style.EMPTY.withClickEvent(new ClickEvent.OpenUrl(URI.create("https://www.patreon.com/TheAetherTeam"))).withUnderlined(true).withColor(16728653)));
+                MutableComponent hereMessage = Component.literal("Check ").withColor(0xE5E5FF);
+                hereMessage = hereMessage.append(Component.literal("* ").setStyle(INFO.withFont(LOGOMARKS))).append(Component.literal("here").setStyle(INFO));
+                hereMessage = hereMessage.append(Component.literal(" for an overview of the state of the mod and what to expect from future updates.").withColor(0xE5E5FF));
+                serverPlayer.sendSystemMessage(hereMessage.append(CommonComponents.NEW_LINE));
+
+                MutableComponent linkMessage = Component.literal("You can support our ongoing development on ").withColor(0xE5E5FF);
+                linkMessage = linkMessage.append(Component.literal(", ").setStyle(PATREON.withFont(LOGOMARKS))).append(Component.literal("Patreon").setStyle(PATREON));
+                linkMessage = linkMessage.append(Component.literal(".").withColor(0xE5E5FF));
                 serverPlayer.sendSystemMessage(linkMessage);
 
                 this.sentChatMessage = true;
