@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.attachment.player;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.api.guidebook.*;
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.client.gui.component.toast.GuidebookToast;
@@ -180,11 +179,9 @@ public class GuidebookDiscoveryAttachment {
     }
 
     public void syncAttachment(GuidebookDiscoveryAttachment other) {
-        AetherII.LOGGER.info(this.bestiaryEntries.toString());
         this.bestiaryEntries = other.bestiaryEntries;
         this.effectsEntries = other.effectsEntries;
         this.explorationEntries = other.explorationEntries;
-        AetherII.LOGGER.info(this.bestiaryEntries.toString());
     }
 
     public List<BestiaryEntry.Mutable> getBestiaryEntries() {
