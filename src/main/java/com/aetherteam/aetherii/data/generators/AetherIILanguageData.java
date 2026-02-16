@@ -1569,6 +1569,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancement("the_holy_isles", "The Aether II");
         this.addAdvancement("enter_holy_isles", "Hostile Paradise");
         this.addAdvancement("aerbunny", "Marketable Plushie");
+        this.addAdvancement("bedroll", "Under the Stars");
         this.addAdvancement("blue_aercloud", "To Infinity and Beyond!");
         this.addAdvancement("cloud_skiff", "Cloud Sailor");
         this.addAdvancement("aercloud_glider", "Amateur Flying");
@@ -1611,6 +1612,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("the_holy_isles", "It's not dead!");
         this.addAdvancementDesc("enter_holy_isles", "Enter the Aether");
         this.addAdvancementDesc("aerbunny", "Interact with a tamed Aerbunny to put it on your head");
+        this.addAdvancementDesc("bedroll", "Sleep in a Cloudwool Bedroll to pass the night without setting your spawn point");
         this.addAdvancementDesc("blue_aercloud", "Bounce on a Blue Aercloud");
         this.addAdvancementDesc("cloud_skiff", "Ride a Cloud Skiff for better movement on the Cloud Sea");
         this.addAdvancementDesc("aercloud_glider", "Use an Aercloud Glider for better mid-air movement");

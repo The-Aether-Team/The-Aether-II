@@ -252,6 +252,16 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("aerbunny", PlayerTrigger.TriggerInstance.located(EntityPredicate.Builder.entity().passenger(EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.AERBUNNY.get()))))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aerbunny"));
 
+            AdvancementHolder bedroll = Advancement.Builder.advancement()
+                    .parent(aerbunny)
+                    .display(AetherIIBlocks.CLOUDWOOL_BEDROLL.get(),
+                            Component.translatable("advancement.aether_ii.bedroll"),
+                            Component.translatable("advancement.aether_ii.bedroll.desc").withStyle(ChatFormatting.AQUA),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("slept_in_bedroll", SleptInBedrollTrigger.Instance.sleptInBedroll())
+                    .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bedroll"));
+
             AdvancementHolder blueAercloud = Advancement.Builder.advancement()
                     .parent(aerbunny)
                     .display(AetherIIBlocks.BLUE_AERCLOUD.get(),
