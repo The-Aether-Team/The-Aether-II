@@ -419,20 +419,21 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
     private void registerEntitySounds() {
         this.add(AetherIISoundEvents.ENTITY_PHYG_AMBIENT,
                 definition().with(
-                        sound("minecraft:mob/pig/say1"),
-                        sound("minecraft:mob/pig/say2"),
-                        sound("minecraft:mob/pig/say3")
+                        sound("aether_ii:entity/phyg/say1"),
+                        sound("aether_ii:entity/phyg/say2"),
+                        sound("aether_ii:entity/phyg/say3")
                 ).subtitle("subtitles.aether_ii.entity.phyg.ambient")
         );
         this.add(AetherIISoundEvents.ENTITY_PHYG_DEATH,
-                definition().with(sound("minecraft:mob/pig/death"))
-                        .subtitle("subtitles.aether_ii.entity.phyg.death")
+                definition().with(
+                        sound("aether_ii:entity/phyg/death")
+                ).subtitle("subtitles.aether_ii.entity.phyg.death")
         );
         this.add(AetherIISoundEvents.ENTITY_PHYG_HURT,
                 definition().with(
-                        sound("minecraft:mob/pig/say1"),
-                        sound("minecraft:mob/pig/say2"),
-                        sound("minecraft:mob/pig/say3")
+                        sound("aether_ii:entity/phyg/say1"),
+                        sound("aether_ii:entity/phyg/say2"),
+                        sound("aether_ii:entity/phyg/say3")
                 ).subtitle("subtitles.aether_ii.entity.phyg.hurt")
         );
         this.add(AetherIISoundEvents.ENTITY_PHYG_STEP,
@@ -447,24 +448,20 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
 
         this.add(AetherIISoundEvents.ENTITY_FLYING_COW_AMBIENT,
                 definition().with(
-                        sound("minecraft:mob/cow/say1"),
-                        sound("minecraft:mob/cow/say2"),
-                        sound("minecraft:mob/cow/say3"),
-                        sound("minecraft:mob/cow/say4")
+                        sound("aether_ii:entity/flying_cow/say1"),
+                        sound("aether_ii:entity/flying_cow/say2"),
+                        sound("aether_ii:entity/flying_cow/say3"),
+                        sound("aether_ii:entity/flying_cow/say4")
                 ).subtitle("subtitles.aether_ii.entity.flying_cow.ambient")
         );
         this.add(AetherIISoundEvents.ENTITY_FLYING_COW_DEATH,
                 definition().with(
-                        sound("minecraft:mob/cow/hurt1"),
-                        sound("minecraft:mob/cow/hurt2"),
-                        sound("minecraft:mob/cow/hurt3")
+                        sound("aether_ii:entity/flying_cow/death")
                 ).subtitle("subtitles.aether_ii.entity.flying_cow.death")
         );
         this.add(AetherIISoundEvents.ENTITY_FLYING_COW_HURT,
                 definition().with(
-                        sound("minecraft:mob/cow/hurt1"),
-                        sound("minecraft:mob/cow/hurt2"),
-                        sound("minecraft:mob/cow/hurt3")
+                        sound("aether_ii:entity/flying_cow/hurt")
                 ).subtitle("subtitles.aether_ii.entity.flying_cow.hurt")
         );
         this.add(AetherIISoundEvents.ENTITY_FLYING_COW_MILK,
@@ -485,23 +482,23 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
 
         this.add(AetherIISoundEvents.ENTITY_SHEEPUFF_AMBIENT,
                 definition().with(
-                        sound("minecraft:mob/sheep/say1"),
-                        sound("minecraft:mob/sheep/say2"),
-                        sound("minecraft:mob/sheep/say3")
+                        sound("aether_ii:entity/sheepuff/say1"),
+                        sound("aether_ii:entity/sheepuff/say2"),
+                        sound("aether_ii:entity/sheepuff/say3")
                 ).subtitle("subtitles.aether_ii.entity.sheepuff.ambient")
         );
         this.add(AetherIISoundEvents.ENTITY_SHEEPUFF_DEATH,
                 definition().with(
-                        sound("minecraft:mob/sheep/say1"),
-                        sound("minecraft:mob/sheep/say2"),
-                        sound("minecraft:mob/sheep/say3")
+                        sound("aether_ii:entity/sheepuff/say1"),
+                        sound("aether_ii:entity/sheepuff/say2"),
+                        sound("aether_ii:entity/sheepuff/say3")
                 ).subtitle("subtitles.aether_ii.entity.sheepuff.death")
         );
         this.add(AetherIISoundEvents.ENTITY_SHEEPUFF_HURT,
                 definition().with(
-                        sound("minecraft:mob/sheep/say1"),
-                        sound("minecraft:mob/sheep/say2"),
-                        sound("minecraft:mob/sheep/say3")
+                        sound("aether_ii:entity/sheepuff/say1"),
+                        sound("aether_ii:entity/sheepuff/say2"),
+                        sound("aether_ii:entity/sheepuff/say3")
                 ).subtitle("subtitles.aether_ii.entity.sheepuff.hurt")
         );
         this.add(AetherIISoundEvents.ENTITY_SHEEPUFF_SHEAR,
@@ -652,31 +649,19 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
 
         this.add(AetherIISoundEvents.ENTITY_KIRRID_AMBIENT,
                 definition().with(
-                        sound("minecraft:mob/goat/idle1").volume(0.82F),
-                        sound("minecraft:mob/goat/idle2").volume(0.82F),
-                        sound("minecraft:mob/goat/idle3").volume(0.84F),
-                        sound("minecraft:mob/goat/idle4").volume(0.84F),
-                        sound("minecraft:mob/goat/idle5").volume(0.84F),
-                        sound("minecraft:mob/goat/idle6").volume(0.84F),
-                        sound("minecraft:mob/goat/idle7").volume(0.83F),
-                        sound("minecraft:mob/goat/idle8").volume(0.84F)
+                        sound("aether_ii:entity/kirrid/say1"),
+                        sound("aether_ii:entity/kirrid/say2"),
+                        sound("aether_ii:entity/kirrid/say3")
                 ).subtitle("subtitles.aether_ii.entity.kirrid.ambient")
         );
         this.add(AetherIISoundEvents.ENTITY_KIRRID_DEATH,
                 definition().with(
-                        sound("minecraft:mob/goat/death1").volume(0.65F),
-                        sound("minecraft:mob/goat/death2").volume(0.65F),
-                        sound("minecraft:mob/goat/death3").volume(0.65F),
-                        sound("minecraft:mob/goat/death4").volume(0.65F),
-                        sound("minecraft:mob/goat/death5").volume(0.65F)
+                        sound("aether_ii:entity/kirrid/death")
                 ).subtitle("subtitles.aether_ii.entity.kirrid.death")
         );
         this.add(AetherIISoundEvents.ENTITY_KIRRID_HURT,
                 definition().with(
-                        sound("minecraft:mob/goat/hurt1").volume(0.65F),
-                        sound("minecraft:mob/goat/hurt2").volume(0.65F),
-                        sound("minecraft:mob/goat/hurt3").volume(0.65F),
-                        sound("minecraft:mob/goat/hurt4").volume(0.65F)
+                        sound("aether_ii:entity/kirrid/hurt")
                 ).subtitle("subtitles.aether_ii.entity.kirrid.hurt")
         );
         this.add(AetherIISoundEvents.ENTITY_KIRRID_STEP,
