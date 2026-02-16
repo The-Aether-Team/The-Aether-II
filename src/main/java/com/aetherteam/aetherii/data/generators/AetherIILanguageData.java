@@ -2127,10 +2127,11 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addSubtitle("entity", "mimic.hurt", "Mimic hurts");
         this.addSubtitle("entity", "mimic.kill", "Mimic burps");
 
-        this.addSubtitle("entity", "detonation_sentry.death", "Sentry dies");
-        this.addSubtitle("entity", "detonation_sentry.hurt", "Sentry hurts");
-        this.addSubtitle("entity", "detonation_sentry.jump", "Sentry squishes");
-        this.addSubtitle("entity", "detonation_sentry.squish", "Sentry squishes");
+        this.addSubtitle("entity", "detonation_sentry.death", "Detonation Sentry dies");
+        this.addSubtitle("entity", "detonation_sentry.hurt", "Detonation Sentry hurts");
+        this.addSubtitle("entity", "detonation_sentry.jump", "Detonation Sentry squishes");
+        this.addSubtitle("entity", "detonation_sentry.squish", "Detonation Sentry squishes");
+        this.addSubtitle("entity", "detonation_sentry.beep", "Detonation Sentry beeps");
 
         this.addSubtitle("entity", "slider.awaken", "Slider awakens");
         this.addSubtitle("entity", "slider.ambient", "Slider drones");

@@ -210,6 +210,7 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_DETONATION_SENTRY_JUMP = register("entity.detonation_sentry.jump");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_DETONATION_SENTRY_SQUISH = register("entity.detonation_sentry.squish");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_DETONATION_SENTRY_AMBIENT = register("entity.detonation_sentry.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_DETONATION_SENTRY_BEEP = register("entity.detonation_sentry.beep");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SENTRY_GOLEM_HURT = register("entity.sentry_golem.hurt");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SENTRY_GOLEM_DEATH = register("entity.sentry_golem.death");

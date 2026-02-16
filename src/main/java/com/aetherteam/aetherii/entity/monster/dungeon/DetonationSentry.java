@@ -93,7 +93,7 @@ public class DetonationSentry extends PathfinderMob {
                 float flickerInterval = Mth.sin(Mth.square(this.timer) / 50.0F);
                 if (flickerInterval < 0) {
                     if (this.playSound) {
-                        this.playSound(SoundEvents.NOTE_BLOCK_BIT.value(), 1.0F, 1.0F);
+                        this.playSound(AetherIISoundEvents.ENTITY_DETONATION_SENTRY_BEEP.value(), 1.0F, 1.0F);
                         this.playSound = false;
                     }
                 } else {
