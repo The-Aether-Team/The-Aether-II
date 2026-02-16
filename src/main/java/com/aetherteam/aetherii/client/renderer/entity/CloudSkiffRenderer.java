@@ -70,6 +70,7 @@ public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRen
         if (entity.tickCount == 0) {
             reusedState.unfoldAnimationState.copyFrom(entity.unfoldAnimationState);
         }
+        reusedState.foldAnimationState.copyFrom(entity.foldAnimationState);
         reusedState.animationTick = entity.tickCount;
         reusedState.animateUnfold = entity.animateUnfold();
         reusedState.yRot = entity.getYRot(partialTick);

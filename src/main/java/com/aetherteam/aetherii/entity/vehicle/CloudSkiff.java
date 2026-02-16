@@ -14,8 +14,10 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.AbstractBoat;
@@ -31,8 +33,12 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class CloudSkiff extends AbstractBoat implements RiderSitContext {
+    public static int FOLD_EVENT = 100;
+
     protected static final EntityDataAccessor<Boolean> DATA_ANIMATE_UNFOLD = SynchedEntityData.defineId(CloudSkiff.class, EntityDataSerializers.BOOLEAN);
+    protected static final EntityDataAccessor<Integer> DATA_FOLD_START_TICK = SynchedEntityData.defineId(CloudSkiff.class, EntityDataSerializers.INT);
     public AnimationState unfoldAnimationState = new AnimationState();
+    public AnimationState foldAnimationState = new AnimationState();
     public float steering = 0.0F;
     public float steeringO = 0.0F;
     public float wingLift = 0.0F;
@@ -46,12 +52,27 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(DATA_ANIMATE_UNFOLD, false);
+        builder.define(DATA_FOLD_START_TICK, 0);
+    }
+
+    @Override
+    public void handleEntityEvent(byte id) {
+        if (id == FOLD_EVENT) {
+            this.foldAnimationState.start(this.tickCount);
+        } else {
+            super.handleEntityEvent(id);
+        }
     }
 
     @Override
     public void tick() {
         if (this.animateUnfold()) {
             this.setAnimateUnfold(false);
+        }
+        if (this.level() instanceof ServerLevel serverLevel) {
+            if (this.getFoldStartTick() > 0 && this.tickCount > this.getFoldStartTick() + 10) {
+                super.destroy(serverLevel, this.getDropItem());
+            }
         }
         AbstractBoatAccessor accessor = (AbstractBoatAccessor) this;
         if (this.getControllingPassenger() instanceof Player || !this.level().isClientSide()) {
@@ -105,6 +126,12 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
             BlockState state = this.level().getBlockState(pos);
             this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, state, pos), this.position().x() + particleOffset.x(), this.position().y(), this.position().z() + particleOffset.z(), vec3.x * -4.0, 1.5, vec3.z * -4.0);
         }
+    }
+
+    @Override
+    protected void destroy(ServerLevel level, DamageSource damageSource) {
+        this.setFoldStartTick(this.tickCount);
+        level.broadcastEntityEvent(this, (byte) FOLD_EVENT);
     }
 
     @Override
@@ -189,11 +216,25 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
         return Leashable.createQuadLeashOffsets(this, 0.0F, 0.57F, 0.382, 0.88);
     }
 
+    @Override
+    public boolean isPickable() {
+        return this.getFoldStartTick() == 0;
+    }
+
+
     public boolean animateUnfold() {
         return this.getEntityData().get(DATA_ANIMATE_UNFOLD);
     }
 
     public void setAnimateUnfold(boolean animate) {
         this.getEntityData().set(DATA_ANIMATE_UNFOLD, animate);
+    }
+
+    public int getFoldStartTick() {
+        return this.getEntityData().get(DATA_FOLD_START_TICK);
+    }
+
+    public void setFoldStartTick(int tick) {
+        this.getEntityData().set(DATA_FOLD_START_TICK, tick);
     }
 }

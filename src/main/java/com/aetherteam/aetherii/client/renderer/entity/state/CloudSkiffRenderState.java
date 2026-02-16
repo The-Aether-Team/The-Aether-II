@@ -5,6 +5,7 @@ import net.minecraft.world.entity.AnimationState;
 
 public class CloudSkiffRenderState extends BoatRenderState {
     public AnimationState unfoldAnimationState = new AnimationState();
+    public AnimationState foldAnimationState = new AnimationState();
     public int animationTick;
     public boolean animateUnfold;
     public float steering;
