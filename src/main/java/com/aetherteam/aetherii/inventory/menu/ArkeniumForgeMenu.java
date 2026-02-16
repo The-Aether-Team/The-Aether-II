@@ -48,22 +48,6 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
 
         this.addSlot(new Slot(this.container, 0, 29, 65) {
             @Override
-            public void onTake(Player player, ItemStack stack) {
-                for (Slot slot : ArkeniumForgeMenu.this.slots) {
-                    if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
-                        if (!forgeCharmSlot.getItem().isEmpty()) {
-                            if (forgeCharmSlot.isLocked(stack)) {
-                                forgeCharmSlot.set(ItemStack.EMPTY);
-                            } else {
-                                ArkeniumForgeMenu.this.quickMoveStack(player, forgeCharmSlot.index);
-                            }
-                        }
-                    }
-                }
-                super.onTake(player, stack);
-            }
-
-            @Override
             public void setChanged() {
                 if (!this.getItem().isEmpty()) {
                     for (Slot slot : ArkeniumForgeMenu.this.slots) {
@@ -78,6 +62,22 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                     }
                 }
                 super.setChanged();
+            }
+
+            @Override
+            public boolean mayPickup(Player player) {
+                for (Slot slot : ArkeniumForgeMenu.this.slots) {
+                    if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
+                        if (!forgeCharmSlot.getItem().isEmpty()) {
+                            if (forgeCharmSlot.isLocked(this.getItem())) {
+                                forgeCharmSlot.set(ItemStack.EMPTY);
+                            } else {
+                                ArkeniumForgeMenu.this.quickMoveStack(player, forgeCharmSlot.index);
+                            }
+                        }
+                    }
+                }
+                return super.mayPickup(player);
             }
         });
 
