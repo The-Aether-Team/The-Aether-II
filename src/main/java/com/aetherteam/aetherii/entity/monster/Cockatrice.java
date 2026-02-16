@@ -163,6 +163,11 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
         this.getEntityData().set(DATA_HIDE_ID, hideTime);
     }
 
+    @Override
+    public int getAmbientSoundInterval() {
+        return 160;
+    }
+
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {

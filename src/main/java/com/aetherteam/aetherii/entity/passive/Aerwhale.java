@@ -130,8 +130,7 @@ public class Aerwhale extends PathfinderMob {
 
     @Override
     public int getAmbientSoundInterval() {
-        int i = super.getAmbientSoundInterval();
-        return this.isVehicle() ? 6 * i : i;
+        return 200;
     }
 
     @Override

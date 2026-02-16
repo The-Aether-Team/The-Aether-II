@@ -167,6 +167,11 @@ public class Zephyr extends Mob implements Enemy {
     }
 
     @Override
+    public int getAmbientSoundInterval() {
+        return 160;
+    }
+
+    @Override
     protected SoundEvent getAmbientSound() {
         return AetherIISoundEvents.ENTITY_ZEPHYR_AMBIENT.get();
     }
