@@ -1741,7 +1741,7 @@ Flying cows represent a relatively low part of the wildlife population of the Ho
 
 They are believed to be a domesticated cousin to the kirrid from early valkyrie civilization. The armor plating that traditionally forms a kirrid's leg blades grow much smaller on sheepuff, revealing more regular animal legs. This means sheepuff cannot bounce around the way a kirrid normally would, but instead they have developed a cloudwool coat rich in aercloud, similar to an aerbunny. If their coat of cloudwool sucks up enough compressed air, it can inflate and send the sheepuff high up into the sky, allowing them to traverse long distances or high cliffs.
 
-Sheepuff represent a relatively low part of the wildlife population of the Highlands, making them a rare find in modern times.”""");
+Sheepuff represent a relatively low part of the wildlife population of the Holy Isles, making them a rare find in modern times.”""");
         this.addBestiaryDescription(AetherIIEntityTypes.PHYG.get(), """
 “Peaceful creatures found in rare sounders in The Aether's Holy Isles.
 
@@ -1751,9 +1751,9 @@ Phygs represent a relatively low part of the wildlife population of the Holy Isl
         this.addBestiaryDescription(AetherIIEntityTypes.AERBUNNY.get(), """
 “Friendly creatures that roam The Aether's Holy Isles.
 
-They are deeply social creatures that enjoy the company of other species, including the people of The Aether and human visitors. an aerbunny's coat has a condensed layer of aercloud nestled beneath their fur, which allows them to float gently through the air. Aerbunnies can be held to grant their natural gliding abilities to someone travelling The Aether.
+They are deeply social creatures that enjoy the company of other species, including the people of The Aether and human visitors. an aerbunny's coat has a condensed layer of aercloud nestled beneath their fur, which allows them to float gently through the air.
 
-Feeding an aerbunny its favorite fruit allows it to be tamed, which allows them to be commanded to sit in place.”""");
+Feeding an aerbunny its favorite fruit allows it to be tamed.  This allows them to be held, granting their natural gliding abilities to someone travelling The Aether.”""");
     
         this.addBestiaryDescription(AetherIIEntityTypes.MOA.get(), """
 “Intelligent and territorial creatures that cannot be tamed from the wild, but can be raised from an egg to be tamed and ridden as a mount.
@@ -1780,7 +1780,7 @@ Some adventurers enjoy collecting and documenting shroudwing shells as a hobby.�
         this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), """
 “Hazardous plants that grow across The Aether's Holy Isles.
 
-Aechor plants suck up a vast amount of nutrients and minerals from their surrounding territory, making them a precious food source for many animals in the Highlands. To defend themselves from potential predators, they developed toxic barbs that can be projected outward at targets they sense near their roots. While individually these barbs aren't very harmful, their toxins can build up and cause some negative effects if untreated.
+Aechor plants suck up a vast amount of nutrients and minerals from their surrounding territory, making them a precious food source for many animals in the Holy Isles. To defend themselves from potential predators, they developed toxic barbs that can be projected outward at targets they sense near their roots. While individually these barbs aren't very harmful, their toxins can build up and cause some negative effects if untreated.
 
 The petals of aechor plants are a favorite food of baby moas, offering enough nutrients to help them grow into strong flight-ready adults.”""");
         this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), """
