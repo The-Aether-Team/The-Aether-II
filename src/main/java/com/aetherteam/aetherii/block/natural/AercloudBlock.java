@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.LiquidBlockContainer;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -156,4 +157,10 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
     public boolean placeLiquid(LevelAccessor level, BlockPos pos, BlockState state, FluidState fluidState) {
         return false;
     }
+
+    @Override
+    public boolean isPathfindable(BlockState p_279414_, PathComputationType p_279299_) {
+        return false;
+    }
+
 }
