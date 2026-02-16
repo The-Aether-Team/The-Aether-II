@@ -34,7 +34,7 @@ public record FreezingParticlePacket(Block block, BlockPos pos) implements Custo
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             for (Direction direction : Direction.values()) {
                 for (int i = 0; i < 25; i++) {
-                    ParticleUtils.spawnParticleOnFace(Minecraft.getInstance().level, payload.pos(), direction, new BlockParticleOption(ParticleTypes.BLOCK, payload.block().defaultBlockState()), Vec3.ZERO, 0.5F);
+                    ParticleUtils.spawnParticleOnFace(context.player().level(), payload.pos(), direction, new BlockParticleOption(ParticleTypes.BLOCK, payload.block().defaultBlockState()), Vec3.ZERO, 0.5F);
                 }
             }
         }
