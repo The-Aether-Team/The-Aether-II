@@ -59,43 +59,45 @@ public class MossDecorator extends TreeDecorator {
                     }
                     return true;
                 });
-                if (random.nextInt(10) == 0) {
-                    if (context.isAir(relativePos)) {
-                        context.setBlock(leafPos, referenceState.get().setValue(AetherLeavesBlock.MOSSY, this.mossProperty));
-                        if (this.flowerProvider.isEmpty() || random.nextBoolean()) {
-                            context.setBlock(relativePos, this.carpetProvider.getState(random, relativePos));
-                        } else {
-                            context.setBlock(relativePos, this.flowerProvider.get().getState(random, relativePos));
+                if (referenceState.get() != null) {
+                    if (random.nextInt(10) == 0) {
+                        if (context.isAir(relativePos)) {
+                            context.setBlock(leafPos, referenceState.get().setValue(AetherLeavesBlock.MOSSY, this.mossProperty));
+                            if (this.flowerProvider.isEmpty() || random.nextBoolean()) {
+                                context.setBlock(relativePos, this.carpetProvider.getState(random, relativePos));
+                            } else {
+                                context.setBlock(relativePos, this.flowerProvider.get().getState(random, relativePos));
+                            }
                         }
                     }
-                }
-                if (random.nextInt(5) == 0) {
-                    context.setBlock(leafPos, referenceState.get().setValue(AetherLeavesBlock.MOSSY, this.mossProperty));
-                    context.setBlock(relativePos, this.carpetProvider.getState(random, relativePos));
-                }
-                if (random.nextInt(3) == 0) {
-                    if (context.isAir(relativePos)) {
+                    if (random.nextInt(5) == 0) {
                         context.setBlock(leafPos, referenceState.get().setValue(AetherLeavesBlock.MOSSY, this.mossProperty));
+                        context.setBlock(relativePos, this.carpetProvider.getState(random, relativePos));
                     }
-                }
-                for (Direction offsetDirection : Direction.Plane.HORIZONTAL.stream().toList()) {
-                    BlockPos newPos = leafPos.relative(offsetDirection);
-                    if (context.isAir(newPos)) {
-                        Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
-                        if (context.level().isStateAtPosition(newPos.relative(direction), BlockBehaviour.BlockStateBase::isSolid)) {
-                            BlockState blockState = this.vinesProvider.getState(random, newPos.relative(direction));
-                            blockState = blockState.setValue(VineBlock.getPropertyForFace(direction), true);
-                            if ((context.level().isStateAtPosition(newPos.relative(direction), (state) -> state.getValueOrElse(AetherIIBlockStateProperties.MOSSY, AetherIIBlockStateProperties.Mossy.NONE) == this.mossProperty)
-                                    || context.level().isStateAtPosition(newPos.above().relative(direction), (state) -> state.getValueOrElse(AetherIIBlockStateProperties.MOSSY, AetherIIBlockStateProperties.Mossy.NONE) == this.mossProperty)
-                                    || context.level().isStateAtPosition(newPos.above().relative(direction), (state) -> state.is(this.carpetProvider.getState(random, newPos.above().relative(direction)).getBlock())))
-                                    && random.nextInt(4) == 0) {
-                                blockState = blockState.setValue(BottomedVineBlock.AGE, 25);
-                            } else {
-                                blockState = blockState.setValue(BottomedVineBlock.AGE, 20 + random.nextInt(5));
-                            }
-                            BlockState finalBlockState = blockState;
-                            if (context.level().isStateAtPosition(newPos.above(), (state) -> !state.is(finalBlockState.getBlock()) || (state.hasProperty(BottomedVineBlock.AGE) && state.getValue(BottomedVineBlock.AGE) < 25))) {
-                                addHangingVine(context, newPos, blockState);
+                    if (random.nextInt(3) == 0) {
+                        if (context.isAir(relativePos)) {
+                            context.setBlock(leafPos, referenceState.get().setValue(AetherLeavesBlock.MOSSY, this.mossProperty));
+                        }
+                    }
+                    for (Direction offsetDirection : Direction.Plane.HORIZONTAL.stream().toList()) {
+                        BlockPos newPos = leafPos.relative(offsetDirection);
+                        if (context.isAir(newPos)) {
+                            Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
+                            if (context.level().isStateAtPosition(newPos.relative(direction), BlockBehaviour.BlockStateBase::isSolid)) {
+                                BlockState blockState = this.vinesProvider.getState(random, newPos.relative(direction));
+                                blockState = blockState.setValue(VineBlock.getPropertyForFace(direction), true);
+                                if ((context.level().isStateAtPosition(newPos.relative(direction), (state) -> state.getValueOrElse(AetherIIBlockStateProperties.MOSSY, AetherIIBlockStateProperties.Mossy.NONE) == this.mossProperty)
+                                        || context.level().isStateAtPosition(newPos.above().relative(direction), (state) -> state.getValueOrElse(AetherIIBlockStateProperties.MOSSY, AetherIIBlockStateProperties.Mossy.NONE) == this.mossProperty)
+                                        || context.level().isStateAtPosition(newPos.above().relative(direction), (state) -> state.is(this.carpetProvider.getState(random, newPos.above().relative(direction)).getBlock())))
+                                        && random.nextInt(4) == 0) {
+                                    blockState = blockState.setValue(BottomedVineBlock.AGE, 25);
+                                } else {
+                                    blockState = blockState.setValue(BottomedVineBlock.AGE, 20 + random.nextInt(5));
+                                }
+                                BlockState finalBlockState = blockState;
+                                if (context.level().isStateAtPosition(newPos.above(), (state) -> !state.is(finalBlockState.getBlock()) || (state.hasProperty(BottomedVineBlock.AGE) && state.getValue(BottomedVineBlock.AGE) < 25))) {
+                                    addHangingVine(context, newPos, blockState);
+                                }
                             }
                         }
                     }
