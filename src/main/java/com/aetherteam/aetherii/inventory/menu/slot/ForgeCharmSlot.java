@@ -82,14 +82,6 @@ public class ForgeCharmSlot extends Slot {
         return this.charmTier;
     }
 
-    public void setCharmType(Charms.Type charmType) {
-        this.charmType = charmType;
-    }
-
-    public void setCharmTier(Charms.Tier charmTier) {
-        this.charmTier = charmTier;
-    }
-
     @Nullable
     @Override
     public ResourceLocation getNoItemIcon() {

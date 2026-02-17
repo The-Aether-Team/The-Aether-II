@@ -65,19 +65,9 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             }
 
             @Override
-            public boolean mayPickup(Player player) {
-                for (Slot slot : ArkeniumForgeMenu.this.slots) {
-                    if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
-                        if (!forgeCharmSlot.getItem().isEmpty()) {
-                            if (forgeCharmSlot.isLocked(this.getItem())) {
-                                forgeCharmSlot.set(ItemStack.EMPTY);
-                            } else {
-                                ArkeniumForgeMenu.this.quickMoveStack(player, forgeCharmSlot.index);
-                            }
-                        }
-                    }
-                }
-                return super.mayPickup(player);
+            public void onTake(Player player, ItemStack stack) {
+                ArkeniumForgeMenu.this.resetCharmSlots(player, stack);
+                super.onTake(player, stack);
             }
         });
 
@@ -127,6 +117,9 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         if (slot != null && slot.hasItem()) {
             ItemStack slotStack = slot.getItem();
             itemStack = slotStack.copy();
+            if (slotIndex == 0) {
+                this.resetCharmSlots(player, slotStack);
+            }
             if (slotIndex > 10) {
                 if (this.isPrimaryMaterial(slotStack)) {
                     if (!this.moveItemStackTo(slotStack, 1, 2, false)) {
@@ -165,6 +158,20 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             slot.onTake(player, slotStack);
         }
         return itemStack;
+    }
+
+    private void resetCharmSlots(Player player, ItemStack stack) {
+        for (Slot otherSlots : ArkeniumForgeMenu.this.slots) {
+            if (otherSlots instanceof ForgeCharmSlot forgeCharmSlot) {
+                if (!forgeCharmSlot.getItem().isEmpty()) {
+                    if (forgeCharmSlot.isLocked(stack)) {
+                        forgeCharmSlot.set(ItemStack.EMPTY);
+                    } else {
+                        ArkeniumForgeMenu.this.quickMoveStack(player, forgeCharmSlot.index);
+                    }
+                }
+            }
+        }
     }
 
     public boolean upgradeItem(ReinforcementTier tierToUpgradeTo) {
