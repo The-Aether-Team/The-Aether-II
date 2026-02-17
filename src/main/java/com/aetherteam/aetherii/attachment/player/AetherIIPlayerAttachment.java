@@ -53,8 +53,6 @@ public class AetherIIPlayerAttachment {
     public List<EntityType<?>> stuckProjectiles = new ArrayList<>();
     public int removeStuckProjectileTime = 0;
 
-    private boolean sentChatMessage = false;
-
 //    private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
 //            Map.entry("setMoving", Triple.of(Type.BOOLEAN, (object) -> this.setMoving((boolean) object), this::isMoving)),
 //            Map.entry("setJumping", Triple.of(Type.BOOLEAN, (object) -> this.setJumping((boolean) object), this::isJumping)),
@@ -65,8 +63,7 @@ public class AetherIIPlayerAttachment {
             Codec.BOOL.fieldOf("is_moving").forGetter(AetherIIPlayerAttachment::isMoving),
             Codec.BOOL.fieldOf("is_jumping").forGetter(AetherIIPlayerAttachment::isJumping),
             Codec.BOOL.fieldOf("can_get_portal").forGetter(AetherIIPlayerAttachment::canGetPortal),
-            Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(AetherIIPlayerAttachment::canSpawnInAether),
-            Codec.BOOL.fieldOf("sent_chat_message").forGetter((attachment) -> attachment.sentChatMessage)
+            Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(AetherIIPlayerAttachment::canSpawnInAether)
     ).apply(instance, AetherIIPlayerAttachment::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, AetherIIPlayerAttachment> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.BOOL, AetherIIPlayerAttachment::isMoving,
@@ -76,12 +73,11 @@ public class AetherIIPlayerAttachment {
 
     private boolean shouldSyncBetweenClients;
 
-    protected AetherIIPlayerAttachment(boolean isMoving, boolean isJumping, boolean canGetPortal, boolean canSpawnInAether, boolean sentChatMessage) {
+    protected AetherIIPlayerAttachment(boolean isMoving, boolean isJumping, boolean canGetPortal, boolean canSpawnInAether) {
         this.isMoving = isMoving;
         this.isJumping = isJumping;
         this.canGetPortal = canGetPortal;
         this.canSpawnInAether = canSpawnInAether;
-        this.sentChatMessage = sentChatMessage;
     }
 
     protected AetherIIPlayerAttachment(boolean canGetPortal, boolean canSpawnInAether, List<EntityType<?>> stuckProjectiles) {
@@ -115,7 +111,7 @@ public class AetherIIPlayerAttachment {
 
     public void changeDimension(Player player, ResourceKey<Level> to) {
         if (to == AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL) {
-            if (player instanceof ServerPlayer serverPlayer && !this.sentChatMessage) {
+            if (player instanceof ServerPlayer serverPlayer && AetherIIConfig.COMMON.show_alpha_message.get()) {
                 MutableComponent thanksMessage = Component.literal("Thank you for checking out ").withColor(0xE5E5FF);
                 thanksMessage = thanksMessage.append(Component.literal("The Aether II's public alpha test").withColor(0x56C1EF));
                 thanksMessage = thanksMessage.append(Component.literal("!").withColor(0xE5E5FF));
@@ -133,7 +129,7 @@ public class AetherIIPlayerAttachment {
                 linkMessage = linkMessage.append(Component.literal(".").withColor(0xE5E5FF));
                 serverPlayer.sendSystemMessage(linkMessage);
 
-                this.sentChatMessage = true;
+                AetherIIConfig.COMMON.show_alpha_message.set(false);
             }
         }
     }

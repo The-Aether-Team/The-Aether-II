@@ -37,6 +37,7 @@ public class AetherIIConfig {
 
     public static class Common {
         public final ConfigValue<Boolean> start_with_portal;
+        public final ConfigValue<Boolean> show_alpha_message;
 
         public Common(ModConfigSpec.Builder builder) {
             builder.push("Gameplay");
@@ -44,6 +45,8 @@ public class AetherIIConfig {
                     .comment("On world creation, the player is given an Aether Portal Frame item to automatically go to the Aether with")
                     .translation("config.aether.common.gameplay.start_with_portal")
                     .define("Gives player Aether Portal Frame item", false);
+            show_alpha_message = builder
+                    .define("Alpha Message", true);
             builder.pop();
         }
     }
