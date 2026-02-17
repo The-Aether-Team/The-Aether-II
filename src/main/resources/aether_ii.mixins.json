@@ -70,6 +70,7 @@
     "client.accessor.BossHealthOverlayAccessor",
     "client.accessor.ButtonAccessor",
     "client.accessor.DeathScreenAccessor",
+    "client.accessor.DialogScreenAccessor",
     "client.accessor.EditBoxAccessor",
     "client.accessor.GuiAccessor",
     "client.accessor.InventoryScreenAccessor",

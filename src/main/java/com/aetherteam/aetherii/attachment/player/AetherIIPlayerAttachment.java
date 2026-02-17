@@ -11,7 +11,6 @@ import com.aetherteam.aetherii.item.miscellaneous.ToggleItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.ClientInput;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -30,7 +29,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.checkerframework.checker.units.qual.A;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -142,13 +140,9 @@ public class AetherIIPlayerAttachment {
 
     public static NoticeDialog getDialog() {
         CommonDialogData dialogData = new CommonDialogData(Component.literal("The Aether II Public Alpha Info"), Optional.empty(), true, true, DialogAction.CLOSE, List.of(), List.of());
-        CommonButtonData buttonData = new CommonButtonData(Component.literal("Close"), Optional.empty(), 200);
-
+        CommonButtonData buttonData = new CommonButtonData(Component.literal(""), Optional.empty(), 200);
         ActionButton actionButton = new ActionButton(buttonData, Optional.empty());
-
-        NoticeDialog dialog = new NoticeDialog(dialogData, actionButton);
-
-        return dialog;
+        return new NoticeDialog(dialogData, actionButton);
     }
 
     /**
