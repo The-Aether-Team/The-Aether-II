@@ -93,9 +93,6 @@ public class HoveringBlockEntity extends Entity {
                 this.markShouldSettle();
             }
         } else {
-            if (holdingPlayer != null) {
-                holdingPlayer.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGravititeHoldingFloatingBlock(false);
-            }
             if (this.verticalCollision || this.horizontalCollision || this.onGround()) {
                 this.markShouldSettle();
             }
@@ -163,10 +160,15 @@ public class HoveringBlockEntity extends Entity {
     }
 
     private void settleBlock() {
+        Entity holdingPlayer = this.getHoldingPlayer();
         Vec3 currentPos = this.position();
         Vec3 motion = this.targetSettlePosition.subtract(currentPos);
         BlockPos newPos = BlockPos.containing(this.targetSettlePosition.x(), this.targetSettlePosition.y(), this.targetSettlePosition.z());
         this.setDeltaMovement(motion);
+        if (holdingPlayer != null) {
+            holdingPlayer.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGravititeHoldingFloatingBlock(false);
+            holdingPlayer.syncData(AetherIIDataAttachments.ABILITY_BEHAVIOR);
+        }
         if (this.position().distanceTo(this.targetSettlePosition) <= 0.001) {
             if (!this.level().isClientSide()) {
                 BlockState levelState = this.level().getBlockState(newPos);
