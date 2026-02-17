@@ -94,11 +94,3 @@ If you have a reason that you wish to use our brand or any unlicensed material, 
 
 ### :hammer: Contributions
 All of our code contribution credits can be found [here](https://github.com/The-Aether-Team/The-Aether-II/blob/1.20.4-develop/docs/CREDITS.txt). If you contributed to the project and do not see your name, please contact us.
-
-### :file_folder: Dependencies
-The Aether would not be possible without the features provided by the APIs and libraries it implements. Thanks goes to:
-| Library | Information |
-| ------- | ----------- |
-| [![Curios](assets/dependencies/curios.webp)](https://www.curseforge.com/minecraft/mc-mods/curios) | Curios API was created by [C4](https://github.com/TheIllusiveC4).<br />The source can be found at https://github.com/TheIllusiveC4/Curios.<br />The dependency is licensed under [LGPL v3](https://www.gnu.org/licenses/lgpl-3.0). |
-| [![Curios](assets/dependencies/geckolib.webp)](https://www.curseforge.com/minecraft/mc-mods/geckolib) | Geckolib was created by [Gecko](https://github.com/bernie-g).<br />The source can be found at https://github.com/bernie-g/geckolib.<br />The dependency is licensed under [MIT](https://opensource.org/license/mit/). |
-| [![Curios](assets/dependencies/sbl.webp)](https://www.curseforge.com/minecraft/mc-mods/smartbrainlib) | SmartBrainLib was created by [Tslat](https://github.com/Tslat).<br />The source can be found at https://github.com/Tslat/SmartBrainLib.<br />The dependency is licensed under [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/). |
