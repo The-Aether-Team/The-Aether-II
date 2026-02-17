@@ -51,6 +51,7 @@ public class AbilityBehaviorAttachment {
     public static final StreamCodec<RegistryFriendlyByteBuf, AbilityBehaviorAttachment> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.INT, AbilityBehaviorAttachment::getGlidingTimer,
             ByteBufCodecs.BOOL, AbilityBehaviorAttachment::isCrossbowSpecial,
+            ByteBufCodecs.BOOL, AbilityBehaviorAttachment::isGravititeHoldingFloatingBlock,
             ByteBufCodecs.BOOL, AbilityBehaviorAttachment::isGravititeJumpUsed,
             AbilityBehaviorAttachment::new);
 
@@ -66,9 +67,10 @@ public class AbilityBehaviorAttachment {
         this.gravititeJumpUsed = gravititeJumpUsed;
     }
 
-    protected AbilityBehaviorAttachment(int glidingTimer, boolean crossbowSpecial, boolean gravititeJumpUsed) {
+    protected AbilityBehaviorAttachment(int glidingTimer, boolean crossbowSpecial, boolean gravititeHoldingFloatingBlock, boolean gravititeJumpUsed) {
         this.glidingTimer = glidingTimer;
         this.crossbowSpecial = crossbowSpecial;
+        this.gravititeHoldingFloatingBlock = gravititeHoldingFloatingBlock;
         this.gravititeJumpUsed = gravititeJumpUsed;
     }
 
