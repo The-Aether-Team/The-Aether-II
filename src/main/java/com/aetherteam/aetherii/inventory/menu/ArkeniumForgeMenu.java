@@ -34,7 +34,6 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
     public static final ResourceLocation SLOT_PRIMARY = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_primary");
     public static final ResourceLocation SLOT_SECONDARY = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_secondary");
     private final Container container;
-    private final Player player;
     @Nullable
     private String itemName;
     private Consumer<ItemStack> inputUpdater = (input) -> {};
@@ -46,13 +45,29 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
     public ArkeniumForgeMenu(int containerId, Inventory playerInventory, Container container) {
         super(AetherIIMenuTypes.ARKENIUM_FORGE.get(), containerId);
         this.container = container;
-        this.player = playerInventory.player;
 
         this.addSlot(new Slot(this.container, 0, 29, 65) {
             @Override
             public void setChanged() {
+                if (!this.getItem().isEmpty()) {
+                    for (Slot slot : ArkeniumForgeMenu.this.slots) {
+                        if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
+                            Charms.CharmHolder charmHolder = Charms.getCharmHolderForItem(this.getItem(), forgeCharmSlot.getCharmIndex());
+                            if (charmHolder != null) {
+                                if (!charmHolder.getStack().isEmpty()) {
+                                    forgeCharmSlot.set(charmHolder.getStack());
+                                }
+                            }
+                        }
+                    }
+                }
                 super.setChanged();
-                ArkeniumForgeMenu.this.changeInput();
+            }
+
+            @Override
+            public void onTake(Player player, ItemStack stack) {
+                ArkeniumForgeMenu.this.resetCharmSlots(player, stack);
+                super.onTake(player, stack);
             }
         });
 
@@ -90,21 +105,6 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         this.addStandardInventorySlots(playerInventory, 8, 173);
     }
 
-    public void changeInput() {
-        for (Slot slot : this.slots) {
-            if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
-                if (!forgeCharmSlot.getItem().isEmpty()) {
-                    if (forgeCharmSlot.isLocked()) {
-                        forgeCharmSlot.set(ItemStack.EMPTY);
-                    } else {
-                        this.quickMoveStack(this.player, forgeCharmSlot.index);
-                    }
-                }
-                forgeCharmSlot.setLocked(false);
-            }
-        }
-    }
-
     @Override
     public boolean stillValid(Player player) {
         return this.container.stillValid(player);
@@ -117,6 +117,9 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         if (slot != null && slot.hasItem()) {
             ItemStack slotStack = slot.getItem();
             itemStack = slotStack.copy();
+            if (slotIndex == 0) {
+                this.resetCharmSlots(player, slotStack);
+            }
             if (slotIndex > 10) {
                 if (this.isPrimaryMaterial(slotStack)) {
                     if (!this.moveItemStackTo(slotStack, 1, 2, false)) {
@@ -155,6 +158,20 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             slot.onTake(player, slotStack);
         }
         return itemStack;
+    }
+
+    private void resetCharmSlots(Player player, ItemStack stack) {
+        for (Slot otherSlots : ArkeniumForgeMenu.this.slots) {
+            if (otherSlots instanceof ForgeCharmSlot forgeCharmSlot) {
+                if (!forgeCharmSlot.getItem().isEmpty()) {
+                    if (forgeCharmSlot.isLocked(stack)) {
+                        forgeCharmSlot.set(ItemStack.EMPTY);
+                    } else {
+                        ArkeniumForgeMenu.this.quickMoveStack(player, forgeCharmSlot.index);
+                    }
+                }
+            }
+        }
     }
 
     public boolean upgradeItem(ReinforcementTier tierToUpgradeTo) {
@@ -211,12 +228,11 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                 if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
                     Charms.CharmHolder charmHolder = Charms.getCharmHolderForItem(stack, forgeCharmSlot.getCharmIndex());
                     if (charmHolder != null) {
-                        if (forgeCharmSlot.isLocked()) {
+                        if (forgeCharmSlot.isLocked(stack)) {
                             newCharms.charmHolders().add(forgeCharmSlot.getCharmIndex(), new Charms.CharmHolder(charmHolder));
                         } else {
                             newCharms.charmHolders().add(forgeCharmSlot.getCharmIndex(), new Charms.CharmHolder(charmHolder, slot.getItem()));
                             if (!slot.getItem().isEmpty() && lock) {
-                                forgeCharmSlot.setLocked(true);
                                 if (player instanceof ServerPlayer serverPlayer) {
                                     AetherIIAdvancementTriggers.FORGING_CHARM.get().trigger(serverPlayer, slot.getItem());
                                 }
@@ -306,7 +322,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
 
     public boolean hasNewCharms() {
         for (Slot slot : this.slots) {
-            if (slot instanceof ForgeCharmSlot charmSlot && !charmSlot.isLocked() && !charmSlot.getItem().isEmpty()) {
+            if (slot instanceof ForgeCharmSlot charmSlot && !charmSlot.isLocked(this.getInput()) && !charmSlot.getItem().isEmpty()) {
                 return true;
             }
         }

@@ -18,7 +18,6 @@ public class ForgeCharmSlot extends Slot {
     private final int charmIndex;
     private Charms.Type charmType;
     private Charms.Tier charmTier;
-    private boolean isLocked;
 
     public ForgeCharmSlot(ArkeniumForgeMenu menu, Container container, int slot, int x, int y, int charmIndex) {
         super(container, slot, x, y);
@@ -34,45 +33,41 @@ public class ForgeCharmSlot extends Slot {
             if (charmHolder != null) {
                 this.charmType = charmHolder.getType();
                 this.charmTier = charmHolder.getTier();
-                if (this.getItem().isEmpty() && !charmHolder.getStack().isEmpty()) {
-                    this.set(charmHolder.getStack());
-                    if (!this.isLocked()) {
-                        this.setLocked(true);
-                    }
-                }
                 return true;
             }
         } else {
             this.charmType = null;
             this.charmTier = null;
-            if (this.isLocked()) {
-                this.setLocked(false);
-            }
         }
         return false;
     }
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return !this.isLocked() && this.isActive() && stack.getItem() instanceof CharmItem charmItem && charmItem.getType() == this.charmType && charmItem.getTier().getValue() <= this.charmTier.getValue();
+        return !this.isLocked(this.menu.getInput()) && this.isActive() && stack.getItem() instanceof CharmItem charmItem && charmItem.getType() == this.charmType && charmItem.getTier().getValue() <= this.charmTier.getValue();
     }
 
     @Override
     public boolean mayPickup(Player player) {
-        return !this.isLocked() && this.isActive();
+        return !this.isLocked(this.menu.getInput()) && this.isActive();
     }
 
     @Override
     public boolean allowModification(Player player) {
-        return !this.isLocked() && this.isActive();
+        return !this.isLocked(this.menu.getInput()) && this.isActive();
     }
 
-    public void setLocked(boolean locked) {
-        this.isLocked = locked;
-    }
-
-    public boolean isLocked() {
-        return this.isLocked;
+    public boolean isLocked(ItemStack input) {
+        boolean flag = false;
+        if (!input.isEmpty()) {
+            Charms.CharmHolder charmHolder = Charms.getCharmHolderForItem(input, this.charmIndex);
+            if (charmHolder != null) {
+                if (!charmHolder.getStack().isEmpty()) {
+                    flag = true;
+                }
+            }
+        }
+        return flag;
     }
 
     public int getCharmIndex() {
