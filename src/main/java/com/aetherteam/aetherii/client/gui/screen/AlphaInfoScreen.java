@@ -49,13 +49,96 @@ public class AlphaInfoScreen extends Screen {
 
         String description = """
 Ready for Testing
-- Material Progression (Skyroot, Holystone, Zanite, Arkenium, Gravitite)
-- Sentry Ruin Mini-Dungeon (Structure, Mobs, Boss, Loot)
-- Biome Generation
-- Outpost Campfire respawning
-- Gliders
-- Aercloud Skiff
-(etc)
+
+- Basic Dimension Material Progression
+
+Skyroot + Beast Hide Equipment
+Skyroot's reworked ability is implemented and working, Beast Hide Equipment ability works but is limited in scope atm
+
+Holystone + Burrukai Plate Equipment
+Holystone ability may be reworked in the future
+
+Amber Hourglass for refining Zanite
+Amber Hourglass balance is quite WIP but ready for testing for progression. Archaeology functionality not included yet
+
+Zanite Equipment
+Zanite Armor ability balance is WIP, needs feedback/tweaking
+
+Altar for refining Metals
+New Altar functionality and UI is implemented, costs and timing may need feedback
+
+Arkenium Equipment
+Arkenium currently has no ability instead can be upgraded further than other craftables in the Forge, may get a distinct ability in the future
+
+Arkenium Forge for enhancing equipment
+Forge mechanics for upgrading and affixing Charms implemented and working
+
+Gravitite Equipment
+New abilities implemented, feedback would be appreciated
+        
+        
+- Revamped Dimension Terrain Generation
+
+Playable Biomes
+
+Highfields Theme (Missing unique mobs and loot)
+
+Flourishing Fields (mostly visually finalised)
+Verdant Woods (mostly visually finalised)
+Shimmering Basin (playable but WIP)
+Shrouded Forest (playable but WIP)
+
+Magnetic Theme (Missing environmental mechanics, unique mobs, and loot)
+
+Magnetic Scar (mostly visually finalised)
+Violet Highwoods (mostly visually finalised)
+Turquoise Forest (playable but WIP)
+Glistening Swamp (very WIP)
+
+Arctic Theme (Missing environmental mechanics, unique mobs, and loot)
+
+Frigid Sierra (playable but WIP)
+Enduring Woodland (mostly visually finalised)
+Frozen Lakes (mostly visually finalised)
+Sheer Tundra (very WIP)
+
+Irradiated Theme (Missing key features, very WIP)
+
+Contaminated Jungle (visuals need work, very WIP)
+Battleground Wastes (missing most features, very WIP)
+
+Cloud Sea Theme (Missing key features, very WIP)
+
+Expanse (very basic implementation)
+            
+            
+- Structures
+
+Traveller's Outposts
+Campfire Respawn point is implemented and seems to work correctly
+Outpost NPCs and fast travel are not yet implemented
+Will get more structure variants over alpha development
+
+Miscellaneous Structures
+
+Camp Sites
+Variations and Biome specific versions
+Loot is WIP and needs properly balancing
+
+Watchtowers
+More variations will be added over time
+Loot is WIP and needs properly balancing
+
+Sentry Ruins
+Mini Dungeon with Sentry Enemies and Slider Boss
+Structure is in a playable state with some missing decoration
+Mobs and Boss are implemented and playable but need refining
+Loot is likely to be expanded and rebalanced over time
+Dungeon placement feedback would be appreciated
+How easy are Sentry Ruins to locate?
+How rare do they feel?
+How easy are they to navigate?
+
 
 Work in Progress
 - Moas (partially implemented/playable)
