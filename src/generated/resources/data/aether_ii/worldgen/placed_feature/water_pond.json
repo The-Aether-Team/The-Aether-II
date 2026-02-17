@@ -2,8 +2,8 @@
   "feature": "aether_ii:water_pond",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 256
+      "type": "minecraft:rarity_filter",
+      "chance": 25
     },
     {
       "type": "minecraft:heightmap",
