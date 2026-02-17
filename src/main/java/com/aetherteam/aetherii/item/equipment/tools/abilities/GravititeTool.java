@@ -36,7 +36,7 @@ public interface GravititeTool {
                     if (!attachment.isGravititeHoldingFloatingBlock()) {
                         attachment.setGravititeHoldingFloatingBlock(true);
                         if (!level.isClientSide()) {
-                            HoveringBlockEntity floatingBlockEntity = new HoveringBlockEntity(level, (double) blockPos.getX() + 0.5, blockPos.getY(), (double) blockPos.getZ() + 0.5, blockState);
+                            HoveringBlockEntity floatingBlockEntity = new HoveringBlockEntity(level, (double) blockPos.getX() + 0.5, blockPos.getY(), (double) blockPos.getZ() + 0.5, blockState.getBlock().defaultBlockState());
                             if (blockState.hasBlockEntity()) {
                                 BlockEntity blockEntity = level.getBlockEntity(blockPos);
                                 if (blockEntity != null) {
