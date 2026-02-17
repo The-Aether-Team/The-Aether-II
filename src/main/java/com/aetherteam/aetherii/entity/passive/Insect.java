@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.entity.ai.controller.InsectMoveControl;
 import com.aetherteam.aetherii.entity.ai.goal.FleeRainGoal;
 import com.aetherteam.aetherii.entity.ai.goal.FlyingLookGoal;
@@ -97,7 +98,7 @@ public class Insect extends PathfinderMob {
     }
 
     public static boolean checkInsectSpawnRules(EntityType<? extends Insect> animal, LevelAccessor level, EntitySpawnReason spawnReason, BlockPos pos, RandomSource random) {
-        return level.getRawBrightness(pos, 0) > 8;
+        return level.getRawBrightness(pos, 0) > 8 && level.getBlockState(pos.below()).is(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON);
     }
 
     @Override
