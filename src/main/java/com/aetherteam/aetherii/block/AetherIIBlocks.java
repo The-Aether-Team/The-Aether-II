@@ -764,25 +764,25 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<CampfireBlock> AMBROSIUM_CAMPFIRE = register("ambrosium_campfire", (properties) -> new AmbrosiumCampfireBlock(false, 1, properties), () -> Block.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).lightLevel((state) -> state.getValue(BlockStateProperties.LIT) ? 15 : 0).noOcclusion().ignitedByLava());
     public static final DeferredBlock<Block> SKYROOT_CHEST = register("skyroot_chest", (properties) -> new SkyrootChestBlock(properties, AetherIIBlockEntityTypes.SKYROOT_CHEST::get), () -> Block.Properties.ofFullCopy(Blocks.CHEST));
     public static final DeferredBlock<LadderBlock> SKYROOT_LADDER = register("skyroot_ladder", LadderBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LADDER).strength(0.4F).sound(SoundType.LADDER).noOcclusion());
-    public static final DeferredBlock<BedrollBlock> CLOUDWOOL_BEDROLL = register("cloudwool_bedroll", BedrollBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).sound(SoundType.WOOL).strength(0.2F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<BedrollBlock> CLOUDWOOL_BEDROLL = register("cloudwool_bedroll", BedrollBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).sound(SoundType.WOOL).strength(0.2F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY), AetherIIBlocks.bedrollBlockItem());
 
-    public static final DeferredBlock<BedBlock> SKYROOT_BED = register("skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.WHITE, properties), () -> Block.Properties.ofFullCopy(Blocks.WHITE_BED));
-    public static final DeferredBlock<BedBlock> WHITE_SKYROOT_BED = register("white_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.WHITE, properties), () -> Block.Properties.ofFullCopy(Blocks.WHITE_BED));
-    public static final DeferredBlock<BedBlock> ORANGE_SKYROOT_BED = register("orange_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.ORANGE, properties), () -> Block.Properties.ofFullCopy(Blocks.ORANGE_BED));
-    public static final DeferredBlock<BedBlock> MAGENTA_SKYROOT_BED = register("magenta_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.MAGENTA, properties), () -> Block.Properties.ofFullCopy(Blocks.MAGENTA_BED));
-    public static final DeferredBlock<BedBlock> LIGHT_BLUE_SKYROOT_BED = register("light_blue_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.LIGHT_BLUE, properties), () -> Block.Properties.ofFullCopy(Blocks.LIGHT_BLUE_BED));
-    public static final DeferredBlock<BedBlock> YELLOW_SKYROOT_BED = register("yellow_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.YELLOW, properties), () -> Block.Properties.ofFullCopy(Blocks.YELLOW_BED));
-    public static final DeferredBlock<BedBlock> LIME_SKYROOT_BED = register("lime_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.LIME, properties), () -> Block.Properties.ofFullCopy(Blocks.LIME_BED));
-    public static final DeferredBlock<BedBlock> PINK_SKYROOT_BED = register("pink_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.PINK, properties), () -> Block.Properties.ofFullCopy(Blocks.PINK_BED));
-    public static final DeferredBlock<BedBlock> GRAY_SKYROOT_BED = register("gray_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.GRAY, properties), () -> Block.Properties.ofFullCopy(Blocks.GRAY_BED));
-    public static final DeferredBlock<BedBlock> LIGHT_GRAY_SKYROOT_BED = register("light_gray_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.LIGHT_GRAY, properties), () -> Block.Properties.ofFullCopy(Blocks.LIGHT_GRAY_BED));
-    public static final DeferredBlock<BedBlock> CYAN_SKYROOT_BED = register("cyan_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.CYAN, properties), () -> Block.Properties.ofFullCopy(Blocks.CYAN_BED));
-    public static final DeferredBlock<BedBlock> PURPLE_SKYROOT_BED = register("purple_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.PURPLE, properties), () -> Block.Properties.ofFullCopy(Blocks.PURPLE_BED));
-    public static final DeferredBlock<BedBlock> BLUE_SKYROOT_BED = register("blue_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.BLUE, properties), () -> Block.Properties.ofFullCopy(Blocks.BLUE_BED));
-    public static final DeferredBlock<BedBlock> BROWN_SKYROOT_BED = register("brown_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.BROWN, properties), () -> Block.Properties.ofFullCopy(Blocks.BROWN_BED));
-    public static final DeferredBlock<BedBlock> GREEN_SKYROOT_BED = register("green_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.GREEN, properties), () -> Block.Properties.ofFullCopy(Blocks.GREEN_BED));
-    public static final DeferredBlock<BedBlock> RED_SKYROOT_BED = register("red_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.RED, properties), () -> Block.Properties.ofFullCopy(Blocks.RED_BED));
-    public static final DeferredBlock<BedBlock> BLACK_SKYROOT_BED = register("black_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.BLACK, properties), () -> Block.Properties.ofFullCopy(Blocks.BLACK_BED));
+    public static final DeferredBlock<BedBlock> SKYROOT_BED = register("skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.WHITE, properties), () -> Block.Properties.ofFullCopy(Blocks.WHITE_BED), AetherIIBlocks.bedBlockItem());
+    public static final DeferredBlock<BedBlock> WHITE_SKYROOT_BED = register("white_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.WHITE, properties), () -> Block.Properties.ofFullCopy(Blocks.WHITE_BED), AetherIIBlocks.bedBlockItem());
+    public static final DeferredBlock<BedBlock> ORANGE_SKYROOT_BED = register("orange_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.ORANGE, properties), () -> Block.Properties.ofFullCopy(Blocks.ORANGE_BED), AetherIIBlocks.bedBlockItem());
+    public static final DeferredBlock<BedBlock> MAGENTA_SKYROOT_BED = register("magenta_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.MAGENTA, properties), () -> Block.Properties.ofFullCopy(Blocks.MAGENTA_BED), AetherIIBlocks.bedBlockItem());
+    public static final DeferredBlock<BedBlock> LIGHT_BLUE_SKYROOT_BED = register("light_blue_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.LIGHT_BLUE, properties), () -> Block.Properties.ofFullCopy(Blocks.LIGHT_BLUE_BED), AetherIIBlocks.bedBlockItem());
+    public static final DeferredBlock<BedBlock> YELLOW_SKYROOT_BED = register("yellow_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.YELLOW, properties), () -> Block.Properties.ofFullCopy(Blocks.YELLOW_BED), AetherIIBlocks.bedBlockItem());
+    public static final DeferredBlock<BedBlock> LIME_SKYROOT_BED = register("lime_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.LIME, properties), () -> Block.Properties.ofFullCopy(Blocks.LIME_BED), AetherIIBlocks.bedBlockItem());
+    public static final DeferredBlock<BedBlock> PINK_SKYROOT_BED = register("pink_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.PINK, properties), () -> Block.Properties.ofFullCopy(Blocks.PINK_BED), AetherIIBlocks.bedBlockItem());
+    public static final DeferredBlock<BedBlock> GRAY_SKYROOT_BED = register("gray_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.GRAY, properties), () -> Block.Properties.ofFullCopy(Blocks.GRAY_BED), AetherIIBlocks.bedBlockItem());
+    public static final DeferredBlock<BedBlock> LIGHT_GRAY_SKYROOT_BED = register("light_gray_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.LIGHT_GRAY, properties), () -> Block.Properties.ofFullCopy(Blocks.LIGHT_GRAY_BED), AetherIIBlocks.bedBlockItem());
+    public static final DeferredBlock<BedBlock> CYAN_SKYROOT_BED = register("cyan_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.CYAN, properties), () -> Block.Properties.ofFullCopy(Blocks.CYAN_BED), AetherIIBlocks.bedBlockItem());
+    public static final DeferredBlock<BedBlock> PURPLE_SKYROOT_BED = register("purple_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.PURPLE, properties), () -> Block.Properties.ofFullCopy(Blocks.PURPLE_BED), AetherIIBlocks.bedBlockItem());
+    public static final DeferredBlock<BedBlock> BLUE_SKYROOT_BED = register("blue_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.BLUE, properties), () -> Block.Properties.ofFullCopy(Blocks.BLUE_BED), AetherIIBlocks.bedBlockItem());
+    public static final DeferredBlock<BedBlock> BROWN_SKYROOT_BED = register("brown_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.BROWN, properties), () -> Block.Properties.ofFullCopy(Blocks.BROWN_BED), AetherIIBlocks.bedBlockItem());
+    public static final DeferredBlock<BedBlock> GREEN_SKYROOT_BED = register("green_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.GREEN, properties), () -> Block.Properties.ofFullCopy(Blocks.GREEN_BED), AetherIIBlocks.bedBlockItem());
+    public static final DeferredBlock<BedBlock> RED_SKYROOT_BED = register("red_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.RED, properties), () -> Block.Properties.ofFullCopy(Blocks.RED_BED), AetherIIBlocks.bedBlockItem());
+    public static final DeferredBlock<BedBlock> BLACK_SKYROOT_BED = register("black_skyroot_bed", (properties) -> new SkyrootBedBlock(DyeColor.BLACK, properties), () -> Block.Properties.ofFullCopy(Blocks.BLACK_BED), AetherIIBlocks.bedBlockItem());
 
     private static Block.Properties skyrootSignProperties() { return Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD); }
     public static final DeferredBlock<StandingSignBlock> SKYROOT_SIGN = register("skyroot_sign", (properties) -> new StandingSignBlock(AetherIIWoodTypes.SKYROOT, properties), AetherIIBlocks::skyrootSignProperties, signItem(() -> AetherIIBlocks.SKYROOT_WALL_SIGN));
@@ -878,6 +878,14 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         return (standingBlock, properties) -> new StandingAndWallBlockItem(standingBlock, Objects.requireNonNull(wallBlock.get().get()), attachmentDirection, properties);
     }
 
+    private static BiFunction<BedrollBlock, Item.Properties, BedItem> bedrollBlockItem() {
+        return (bedrollBlock, properties) -> new BedItem(bedrollBlock, properties.stacksTo(4));
+    }
+
+    private static BiFunction<BedBlock, Item.Properties, BedItem> bedBlockItem() {
+        return (bedBlock, properties) -> new BedItem(bedBlock, properties.stacksTo(1));
+    }
+
     private static BiFunction<StandingSignBlock, Item.Properties, SignItem> signItem(Supplier<? extends DeferredBlock<? extends WallSignBlock>> wallSignBlock) {
         Objects.requireNonNull(wallSignBlock);
         return (standingSignBlock, properties) -> new SignItem(standingSignBlock, Objects.requireNonNull(wallSignBlock.get().get()), properties.stacksTo(16));
@@ -886,72 +894,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     private static BiFunction<CeilingHangingSignBlock, Item.Properties, HangingSignItem> hangingSignItem(Supplier<? extends DeferredBlock<? extends WallHangingSignBlock>> wallHangingSignBlock) {
         Objects.requireNonNull(wallHangingSignBlock);
         return (ceilingHangingSignBlock, properties) -> new HangingSignItem(ceilingHangingSignBlock, Objects.requireNonNull(wallHangingSignBlock.get().get()), properties.stacksTo(16));
-    }
-
-    private static <T extends Block> Supplier<BlockItem> registerBlockItem(final DeferredBlock<T> deferredBlock, String name) {
-        return () -> {
-            DeferredBlock<T> block = Objects.requireNonNull(deferredBlock);
-            Item.Properties properties = new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name))).useBlockDescriptionPrefix();
-            if (block == HOLYSTONE_ROCK) {
-                return new RockItem(HOLYSTONE_ROCK.get(), properties);
-            } else if (block == AMBROSIUM_TORCH) {
-                return new StandingAndWallBlockItem(AMBROSIUM_TORCH.get(), AMBROSIUM_WALL_TORCH.get(), Direction.DOWN, properties);
-            } else if (block == SKYROOT_SIGN) {
-                return new SignItem(SKYROOT_SIGN.get(), SKYROOT_WALL_SIGN.get(), properties.stacksTo(16));
-            } else if (block == SKYROOT_HANGING_SIGN) {
-                return new HangingSignItem(SKYROOT_HANGING_SIGN.get(), SKYROOT_WALL_HANGING_SIGN.get(), properties.stacksTo(16));
-            } else if (block == GREATROOT_SIGN) {
-                return new SignItem(GREATROOT_SIGN.get(), GREATROOT_WALL_SIGN.get(), properties.stacksTo(16));
-            } else if (block == GREATROOT_HANGING_SIGN) {
-                return new HangingSignItem(GREATROOT_HANGING_SIGN.get(), GREATROOT_WALL_HANGING_SIGN.get(), properties.stacksTo(16));
-            } else if (block == WISPROOT_SIGN) {
-                return new SignItem(WISPROOT_SIGN.get(), WISPROOT_WALL_SIGN.get(), properties.stacksTo(16));
-            } else if (block == WISPROOT_HANGING_SIGN) {
-                return new HangingSignItem(WISPROOT_HANGING_SIGN.get(), WISPROOT_WALL_HANGING_SIGN.get(), properties.stacksTo(16));
-            } else if (block == AMBEROOT_SIGN) {
-                return new SignItem(AMBEROOT_SIGN.get(), AMBEROOT_WALL_SIGN.get(), properties.stacksTo(16));
-            } else if (block == AMBEROOT_HANGING_SIGN) {
-                return new HangingSignItem(AMBEROOT_HANGING_SIGN.get(), AMBEROOT_WALL_HANGING_SIGN.get(), properties.stacksTo(16));
-            } else if (block == CLOUDWOOL_BEDROLL) {
-                return new BedItem(CLOUDWOOL_BEDROLL.get(), properties.stacksTo(4));
-            } else if (block == SKYROOT_BED) { //todo: clean-up
-                return new BedItem(SKYROOT_BED.get(), properties.stacksTo(1));
-            } else if (block == WHITE_SKYROOT_BED) {
-                return new BedItem(WHITE_SKYROOT_BED.get(), properties.stacksTo(1));
-            } else if (block == ORANGE_SKYROOT_BED) {
-                return new BedItem(ORANGE_SKYROOT_BED.get(), properties.stacksTo(1));
-            } else if (block == MAGENTA_SKYROOT_BED) {
-                return new BedItem(MAGENTA_SKYROOT_BED.get(), properties.stacksTo(1));
-            } else if (block == LIGHT_BLUE_SKYROOT_BED) {
-                return new BedItem(LIGHT_BLUE_SKYROOT_BED.get(), properties.stacksTo(1));
-            } else if (block == YELLOW_SKYROOT_BED) {
-                return new BedItem(YELLOW_SKYROOT_BED.get(), properties.stacksTo(1));
-            } else if (block == LIME_SKYROOT_BED) {
-                return new BedItem(LIME_SKYROOT_BED.get(), properties.stacksTo(1));
-            } else if (block == PINK_SKYROOT_BED) {
-                return new BedItem(PINK_SKYROOT_BED.get(), properties.stacksTo(1));
-            } else if (block == GRAY_SKYROOT_BED) {
-                return new BedItem(GRAY_SKYROOT_BED.get(), properties.stacksTo(1));
-            } else if (block == LIGHT_GRAY_SKYROOT_BED) {
-                return new BedItem(LIGHT_GRAY_SKYROOT_BED.get(), properties.stacksTo(1));
-            } else if (block == CYAN_SKYROOT_BED) {
-                return new BedItem(CYAN_SKYROOT_BED.get(), properties.stacksTo(1));
-            } else if (block == PURPLE_SKYROOT_BED) {
-                return new BedItem(PURPLE_SKYROOT_BED.get(), properties.stacksTo(1));
-            } else if (block == BLUE_SKYROOT_BED) {
-                return new BedItem(BLUE_SKYROOT_BED.get(), properties.stacksTo(1));
-            } else if (block == BROWN_SKYROOT_BED) {
-                return new BedItem(BROWN_SKYROOT_BED.get(), properties.stacksTo(1));
-            } else if (block == GREEN_SKYROOT_BED) {
-                return new BedItem(GREEN_SKYROOT_BED.get(), properties.stacksTo(1));
-            } else if (block == RED_SKYROOT_BED) {
-                return new BedItem(RED_SKYROOT_BED.get(), properties.stacksTo(1));
-            } else if (block == BLACK_SKYROOT_BED) {
-                return new BedItem(BLACK_SKYROOT_BED.get(), properties.stacksTo(1));
-            } else {
-                return new BlockItem(block.get(), properties);
-            }
-        };
     }
 
     private static ResourceKey<Block> createKey(String name) {
