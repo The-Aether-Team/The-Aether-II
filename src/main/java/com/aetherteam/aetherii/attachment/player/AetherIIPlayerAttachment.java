@@ -141,8 +141,8 @@ public class AetherIIPlayerAttachment {
     }
 
     public static NoticeDialog getDialog() {
-        CommonDialogData dialogData = new CommonDialogData(Component.literal("test"), Optional.empty(), true, true, DialogAction.CLOSE, List.of(), List.of());
-        CommonButtonData buttonData = new CommonButtonData(Component.literal("button"), Optional.empty(), 200);
+        CommonDialogData dialogData = new CommonDialogData(Component.literal("The Aether II Public Alpha Info"), Optional.empty(), true, true, DialogAction.CLOSE, List.of(), List.of());
+        CommonButtonData buttonData = new CommonButtonData(Component.literal("Close"), Optional.empty(), 200);
 
         ActionButton actionButton = new ActionButton(buttonData, Optional.empty());
 

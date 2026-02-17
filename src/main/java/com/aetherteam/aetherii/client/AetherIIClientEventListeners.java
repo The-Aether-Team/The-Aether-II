@@ -97,7 +97,7 @@ public class AetherIIClientEventListeners {
 
         if (screen instanceof PauseScreen pauseScreen) {
             Button button = Button.builder(Component.literal("A"), (b) -> pauseScreen.handleComponentClicked(Style.EMPTY.withClickEvent(new ClickEvent.ShowDialog(Holder.direct(AetherIIPlayerAttachment.getDialog())))))
-                    .bounds(4, 4, 20, 20)
+                    .bounds(pauseScreen.width - 20 - 4, 4, 20, 20)
                     .build();
             event.addListener(button);
         }
