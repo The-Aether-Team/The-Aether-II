@@ -154,8 +154,8 @@ Unimplemented
 - Outpost NPCs
                 """;
 
-        this.textPosition = Math.max(85, (this.width - 325) / 2);
-        this.textWidth = Math.min(this.width - (85 * 2), 325);
+        this.textPosition = Math.max(65, (this.width - 350) / 2);
+        this.textWidth = Math.min(this.width - (65 * 2), 350);
 
         ImageButton goBackButton = new ImageButton(this.textPosition - 49, 12, 8, 8, Guidebook.RETURN, (button) -> {
             Minecraft.getInstance().setScreen(this.lastScreen);
