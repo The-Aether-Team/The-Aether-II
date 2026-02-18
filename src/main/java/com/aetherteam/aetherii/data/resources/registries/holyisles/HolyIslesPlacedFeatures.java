@@ -851,15 +851,18 @@ public class HolyIslesPlacedFeatures {
         register(context, WATER_POND, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.WATER_POND),
                 RarityFilter.onAverageOnceEvery(25),
                 PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                BlockPredicateFilter.forPredicate(BlockPredicate.not(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.AERCLOUDS))),
                 BiomeFilter.biome());
         register(context, WATER_POND_UNDERGROUND, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.WATER_POND),
                 RarityFilter.onAverageOnceEvery(15),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.allOf(BlockPredicate.not(BlockPredicate.ONLY_IN_AIR_PREDICATE), BlockPredicate.insideWorld(new BlockPos(0, -5, 0))), 16),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -5),
+                BlockPredicateFilter.forPredicate(BlockPredicate.not(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.AERCLOUDS))),
                 BiomeFilter.biome());
         register(context, WATER_POND_TUNDRA, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.WATER_POND_TUNDRA),
                 RarityFilter.onAverageOnceEvery(2),
                 PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                BlockPredicateFilter.forPredicate(BlockPredicate.not(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.AERCLOUDS))),
                 BiomeFilter.biome());
         register(context, WATER_SPRING, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.WATER_SPRING),
                 CountPlacement.of(15),

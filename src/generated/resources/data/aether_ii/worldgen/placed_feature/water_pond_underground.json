@@ -36,6 +36,21 @@
       "max_inclusive": -5
     },
     {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:not",
+        "predicate": {
+          "type": "minecraft:matching_block_tag",
+          "offset": [
+            0,
+            -1,
+            0
+          ],
+          "tag": "aether_ii:aerclouds"
+        }
+      }
+    },
+    {
       "type": "minecraft:biome"
     }
   ]

@@ -249,6 +249,7 @@ public class AetherIITags {
         public static final TagKey<EntityType<?>> AETHER_MOBS = tag("aether_mobs");
         public static final TagKey<EntityType<?>> NO_DOUBLE_DROPS = tag("no_double_drops");
         public static final TagKey<EntityType<?>> NO_AMBROSIUM_DROPS = tag("no_ambrosium_drops");
+        public static final TagKey<EntityType<?>> ZEPHYR_BLOW_BLACKLIST = tag("zephyr_blow_blacklist");
 
         public static final TagKey<EntityType<?>> PLANT_DAMAGING_PROJECTILES = tag("plant_damaging_projectiles");
         public static final TagKey<EntityType<?>> SLIDER_DAMAGING_PROJECTILES = tag("slider_damaging_projectiles");

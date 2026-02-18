@@ -270,7 +270,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     protected void renderSlot(GuiGraphics guiGraphics, Slot slot) {
         super.renderSlot(guiGraphics, slot);
         if (slot instanceof ForgeCharmSlot charmSlot) {
-            if (charmSlot.isActive() && charmSlot.isLocked()) {
+            if (charmSlot.isActive() && charmSlot.isLocked(this.menu.getInput())) {
                 guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SLOT_LOCKED, charmSlot.x, charmSlot.y, 16, 16);
             }
         }
