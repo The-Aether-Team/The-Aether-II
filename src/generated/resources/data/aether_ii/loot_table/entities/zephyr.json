@@ -32,22 +32,11 @@
               "condition": "minecraft:random_chance_with_enchanted_bonus",
               "enchanted_chance": {
                 "type": "minecraft:linear",
-                "base": 0.4444,
+                "base": 0.2222,
                 "per_level_above_first": 0.1111
               },
               "enchantment": "minecraft:looting",
-              "unenchanted_chance": 0.3333
-            }
-          ],
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+              "unenchanted_chance": 0.1111
             }
           ],
           "name": "aether_ii:blue_aercloud"
