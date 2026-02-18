@@ -112,8 +112,14 @@ public class Zephyr extends Mob implements Enemy {
             Vec3 look = this.getViewVector(1.0F);
             List<Entity> list = this.level().getEntities(this, this.getBoundingBox().inflate(5, 0, 5).expandTowards(0, -2, 0).move(look.scale(10.5F)), entity -> entity != this && !entity.getType().is(AetherIITags.Entities.ZEPHYR_BLOW_BLACKLIST));
             list.forEach(entity -> {
-                if (entity instanceof LivingEntity livingEnity && livingEnity.getItemBySlot(EquipmentSlot.FEET).is(AetherIITags.Items.SENTRY_ARMOR)) {
-                    entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(0.05F)));
+                if (entity instanceof LivingEntity livingEntity) {
+                    if (livingEntity.getItemBySlot(EquipmentSlot.FEET).is(AetherIITags.Items.SENTRY_ARMOR)) {
+                        entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(0.05F)));
+                    } else if (livingEntity.hasEffect(AetherIIEffects.WEBBED)) {
+                        entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(1.2F).add(0, 0.05F, 0)));
+                    } else {
+                        entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(0.2F).add(0, 0.05F, 0)));
+                    }
                 } else {
                     entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(0.2F).add(0, 0.05F, 0)));
                 }
