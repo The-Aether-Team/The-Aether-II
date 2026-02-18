@@ -405,9 +405,6 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
 
     public void setBreakTresureVault() {
         this.breakTresureVault = true;
-        //don't make particle with remove method some tick
-        this.level().broadcastEntityEvent(this, (byte) 60);
-        this.playSound(SoundEvents.GENERIC_EXPLODE.value(), 2.5F, 1.0F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
 
     }
 
@@ -441,7 +438,10 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
                 --this.attackCooldown;
             }
         }
-        if (this.breakTresureVault) {
+        if (this.breakTresureVault && this.getMoveDelay() < 2) {
+            this.level().broadcastEntityEvent(this, (byte) 60);
+            this.playSound(SoundEvents.GENERIC_EXPLODE.value(), 2.5F, 1.0F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
+
             if (this.getDungeon() != null) {
                 this.tearDownRoom();
             }
