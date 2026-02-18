@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.attachment.living;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
@@ -65,6 +66,7 @@ public class DamageSystemAttachment implements ValueIOSerializable {
 
     public void postTickUpdate(LivingEntity livingEntity) {
         if (livingEntity instanceof Player player) {
+//            AetherII.LOGGER.info(String.valueOf(AetherIIAttributes.getMaxEndurance(player)));
             this.restoreShieldEndurance(player);
         }
     }

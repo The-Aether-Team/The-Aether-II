@@ -1,29 +1,40 @@
 package com.aetherteam.aetherii.inventory.container;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.equipment.accessories.AccessoryItem;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.EntityAccessor;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.LivingEntityAccessor;
+import com.aetherteam.aetherii.network.packet.clientbound.SetAccessoriesPacket;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.game.ClientboundSetEquipmentPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.GameRules;
+import net.neoforged.neoforge.network.PacketDistributor;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class AccessoryContainer extends SimpleContainer {
     public static final MapCodec<AccessoryContainer> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -46,25 +57,81 @@ public class AccessoryContainer extends SimpleContainer {
     }
 
     public void postTickUpdate(LivingEntity entity) {
-        if (!this.lastItems.equals(this.getItems())) {
+        if (entity instanceof Player player) {
+//            AetherII.LOGGER.info(this.lastItems + " " + this.getItems());
+        }
+        if (!entity.level().isClientSide()) {
+            NonNullList<ItemStack> list = null;
             for (int i = 0; i < this.getItems().size(); i++) {
-                ItemStack thisItem = this.getItem(i);
-                ItemStack lastItem = this.lastItems.get(i);
-                if (!ItemStack.isSameItem(lastItem, thisItem)) {
-                    if (!thisItem.isEmpty() && thisItem.getItem() instanceof AccessoryItem accessory) {
-                        accessory.onEquip(thisItem, entity, i);
-                    } else if (thisItem.isEmpty() && !lastItem.isEmpty() && lastItem.getItem() instanceof AccessoryItem accessoryItem) {
-                        accessoryItem.onUnequip(lastItem, entity, i);
+                ItemStack lastStack = this.lastItems.get(i);
+                ItemStack stack = this.getItem(i);
+                if (!ItemStack.matches(stack, lastStack)) {
+                    if (list == null) {
+                        list = NonNullList.withSize(4, ItemStack.EMPTY);
                     }
+                    list.set(i, stack);
+//                    AttributeMap entityAttributes = entity.getAttributes();
+//                    if (!lastStack.isEmpty() && lastStack.getItem() instanceof AccessoryItem lastAccessory) {
+//                        Set<AccessoryItem.ConditionalAttribute> accessoryAttributes = lastAccessory.getBaseAttributes();
+//                        for (AccessoryItem.ConditionalAttribute conditionalAttribute : accessoryAttributes) {
+//                            AttributeInstance attributeinstance = entityAttributes.getInstance(conditionalAttribute.attribute());
+//                            if (attributeinstance != null) {
+//                                attributeinstance.removeModifier(conditionalAttribute.modifier().getModifier(lastStack));
+//                            }
+//                        }
+//                    }
                 }
-                this.lastItems.set(i, thisItem.copy());
-                entity.syncData(AetherIIDataAttachments.ACCESSORIES);
+            }
+//            if (list != null) {
+//                for (ItemStack stack : list) {
+//                    if (!stack.isEmpty() && !stack.isBroken() && stack.getItem() instanceof AccessoryItem lastAccessory) {
+//                        Set<AccessoryItem.ConditionalAttribute> accessoryAttributes = lastAccessory.getBaseAttributes();
+//                        for (AccessoryItem.ConditionalAttribute conditionalAttribute : accessoryAttributes) {
+//                            AttributeInstance attributeinstance = entity.getAttributes().getInstance(conditionalAttribute.attribute());
+//                            if (attributeinstance != null) {
+//                                attributeinstance.removeModifier(conditionalAttribute.modifier().getModifier(stack).id());
+//                                attributeinstance.addTransientModifier(conditionalAttribute.modifier().getModifier(stack));
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+            if (list != null) {
+                if (!list.isEmpty()) {
+                    List<ItemStack> newList = NonNullList.withSize(list.size(), ItemStack.EMPTY);
+                    for (int i = 0; i < newList.size(); i++) {
+                        ItemStack copyStack = list.get(i).copy();
+                        this.equipItem(entity, i, this.lastItems.get(i), copyStack);
+                        newList.set(i, copyStack);
+                        this.lastItems.set(i, copyStack);
+                    }
+                    PacketDistributor.sendToAllPlayers(new SetAccessoriesPacket(entity.getId(), newList));
+                }
             }
         }
-        for (int i = 0; i < this.getItems().size(); i++) {
-            ItemStack stack = this.getItem(i);
-            if (stack.getItem() instanceof AccessoryItem accessory) {
-                accessory.tick(stack, entity, i);
+
+//        for (int i = 0; i < this.getItems().size(); i++) {
+//            ItemStack stack = this.getItem(i);
+//            if (stack.getItem() instanceof AccessoryItem accessory) {
+//                accessory.tick(stack, entity, i);
+//            }
+//        }
+    }
+
+    public void setItemWithEquip(LivingEntity wearer, int i, ItemStack stack) {
+        this.equipItem(wearer, i, this.getItems().set(i, stack), stack);
+    }
+
+    public void equipItem(LivingEntity wearer, int i, ItemStack oldItem, ItemStack newItem) {
+        if (!wearer.isSpectator()) {
+            if (!ItemStack.isSameItemSameComponents(oldItem, newItem) && !((EntityAccessor) wearer).aether_ii$getFirstTick()) {
+                if (!wearer.isSilent()) {
+                    if (!newItem.isEmpty() && newItem.getItem() instanceof AccessoryItem accessory) {
+                        accessory.onEquip(newItem, wearer, i);
+                    } else if (newItem.isEmpty() && !oldItem.isEmpty() && oldItem.getItem() instanceof AccessoryItem accessoryItem) {
+                        accessoryItem.onUnequip(oldItem, wearer, i);
+                    }
+                }
             }
         }
     }

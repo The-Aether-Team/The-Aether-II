@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.item.equipment.accessories;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
@@ -80,18 +81,6 @@ public class AccessoryItem extends Item {
     }
 
     public void onUnequip(ItemStack stack, LivingEntity wearer, int slot) {
-        for (ConditionalAttribute entry : this.getAttributes(stack)) {
-            AttributeInstance attribute = wearer.getAttribute(entry.attribute());
-            AttributeModifier modifier = entry.modifier().getModifier(stack);
-
-            if (attribute != null) {
-                ResourceLocation modifierId = EquipmentUtil.getSlotModifierId(modifier.id(), stack, slot, this.getSlotType().name());
-
-                if (attribute.hasModifier(modifierId)) {
-                    attribute.removeModifier(modifierId);
-                }
-            }
-        }
         this.playEquipSound(wearer, false);
     }
 
