@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.client.event.hooks.AudioHooks;
@@ -11,8 +12,7 @@ import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.LerpingBossEvent;
+import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.dialog.DialogScreen;
@@ -24,6 +24,7 @@ import net.minecraft.client.sounds.MusicInfo;
 import net.minecraft.client.sounds.SoundEngine;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.dialog.Dialog;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
@@ -105,9 +106,9 @@ public class AetherIIClientEventListeners {
         }
 
         if (screen instanceof Guidebook || screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
-            Button button = Button.builder(Component.literal("A"), (b) -> Minecraft.getInstance().setScreen(new AlphaInfoScreen(screen)))
-                    .bounds((screen.width / 2) + 54, (screen.height / 2) + 101, 22, 22)
-                    .build();
+            Button button = SpriteIconButton.builder(Component.literal("Alpha Info"),  (b) -> Minecraft.getInstance().setScreen(new AlphaInfoScreen(screen)), true).size(22, 22).sprite(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "icon/alpha_info"), 14, 14).build();
+            button.setPosition((screen.width / 2) + 54, (screen.height / 2) + 101);
+            button.setTooltip(Tooltip.create(Component.literal("Alpha Info")));
             event.addListener(button);
         }
     }
