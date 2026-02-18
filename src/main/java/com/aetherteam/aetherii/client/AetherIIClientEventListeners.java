@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.client.event.hooks.AudioHooks;
@@ -105,8 +106,12 @@ public class AetherIIClientEventListeners {
             event.addListener(outpostRespawnButton);
         }
 
-        if (screen instanceof Guidebook || screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
-            Button button = SpriteIconButton.builder(Component.literal("Alpha Info"),  (b) -> Minecraft.getInstance().setScreen(new AlphaInfoScreen(screen)), true).size(22, 22).sprite(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "icon/alpha_info"), 14, 14).build();
+        if (screen instanceof Guidebook) {
+            String spriteName = AetherIIConfig.COMMON.yellow_alpha_button.get() ? "alpha_info_yellow" : "alpha_info";
+            Button button = SpriteIconButton.builder(Component.literal("Alpha Info"),  (b) -> {
+                Minecraft.getInstance().setScreen(new AlphaInfoScreen(screen));
+                AetherIIConfig.COMMON.yellow_alpha_button.set(false);
+            }, true).size(22, 22).sprite(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "icon/" + spriteName), 14, 14).build();
             button.setPosition((screen.width / 2) + 54, (screen.height / 2) + 101);
             button.setTooltip(Tooltip.create(Component.literal("Alpha Info")));
             event.addListener(button);

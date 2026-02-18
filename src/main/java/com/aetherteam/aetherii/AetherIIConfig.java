@@ -38,6 +38,7 @@ public class AetherIIConfig {
     public static class Common {
         public final ConfigValue<Boolean> start_with_portal;
         public final ConfigValue<Boolean> show_alpha_message;
+        public final ConfigValue<Boolean> yellow_alpha_button;
 
         public Common(ModConfigSpec.Builder builder) {
             builder.push("Gameplay");
@@ -47,6 +48,8 @@ public class AetherIIConfig {
                     .define("Gives player Aether Portal Frame item", false);
             show_alpha_message = builder
                     .define("Alpha Message", true);
+            yellow_alpha_button = builder
+                    .define("Yellow Alpha Button", true);
             builder.pop();
         }
     }
