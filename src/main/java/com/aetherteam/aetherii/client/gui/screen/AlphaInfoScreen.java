@@ -49,86 +49,97 @@ public class AlphaInfoScreen extends Screen {
 
         String description = """
 Ready for Testing
-
+            
+Features that are marked Ready for Testing are things we're largely happy with the implementation of and would like players to give feedback on.
+            
 - Basic Dimension Material Progression
-
+            
 Skyroot + Beast Hide Equipment
 Skyroot's reworked ability is implemented and working, Beast Hide Equipment ability works but is limited in scope atm
-
+            
 Holystone + Burrukai Plate Equipment
 Holystone ability may be reworked in the future
-
+            
 Amber Hourglass for refining Zanite
 Amber Hourglass balance is quite WIP but ready for testing for progression. Archaeology functionality not included yet
-
+            
 Zanite Equipment
 Zanite Armor ability balance is WIP, needs feedback/tweaking
-
+            
 Altar for refining Metals
 New Altar functionality and UI is implemented, costs and timing may need feedback
-
+            
 Arkenium Equipment
 Arkenium currently has no ability instead can be upgraded further than other craftables in the Forge, may get a distinct ability in the future
-
+            
 Arkenium Forge for enhancing equipment
 Forge mechanics for upgrading and affixing Charms implemented and working
-
+            
 Gravitite Equipment
 New abilities implemented, feedback would be appreciated
-        
-        
+   
+   
 - Revamped Dimension Terrain Generation
-
+            
 Playable Biomes
-
+            
 Highfields Theme (Missing unique mobs and loot)
-
+            
 Flourishing Fields (mostly visually finalised)
 Verdant Woods (mostly visually finalised)
 Shimmering Basin (playable but WIP)
 Shrouded Forest (playable but WIP)
-
+            
 Magnetic Theme (Missing environmental mechanics, unique mobs, and loot)
-
+            
 Magnetic Scar (mostly visually finalised)
 Violet Highwoods (mostly visually finalised)
 Turquoise Forest (playable but WIP)
 Glistening Swamp (very WIP)
-
+            
 Arctic Theme (Missing environmental mechanics, unique mobs, and loot)
-
+            
 Frigid Sierra (playable but WIP)
 Enduring Woodland (mostly visually finalised)
 Frozen Lakes (mostly visually finalised)
 Sheer Tundra (very WIP)
-
+            
 Irradiated Theme (Missing key features, very WIP)
-
+            
 Contaminated Jungle (visuals need work, very WIP)
 Battleground Wastes (missing most features, very WIP)
-
+            
 Cloud Sea Theme (Missing key features, very WIP)
-
+            
 Expanse (very basic implementation)
             
+Playable Cave and Undercloud Generation
             
+Caves now intersect The Aether's island terrain allowing for a better experience exploring and mining for ores and other resources
+Beneath the Cloud Sea is a new area made of a rock called Undershale known as The Undercloud
+The Undercloud lacks an Aercloud safety net and has numerous hazards such as unstable blocks, toxic gas, and acid pools
+Arkenium, Gravitite, and Corrobonite Ore can only be found in The Undercloud
+In the future there will be unique Undercloud mobs
+In the future there will be a wide variety of Undercloud cave biomes
+       
+       
 - Structures
-
+            
 Traveller's Outposts
 Campfire Respawn point is implemented and seems to work correctly
 Outpost NPCs and fast travel are not yet implemented
 Will get more structure variants over alpha development
-
+            
 Miscellaneous Structures
-
+            
 Camp Sites
 Variations and Biome specific versions
 Loot is WIP and needs properly balancing
-
+            
 Watchtowers
 More variations will be added over time
 Loot is WIP and needs properly balancing
-
+            
 Sentry Ruins
 Mini Dungeon with Sentry Enemies and Slider Boss
 Structure is in a playable state with some missing decoration
@@ -138,21 +149,87 @@ Dungeon placement feedback would be appreciated
 How easy are Sentry Ruins to locate?
 How rare do they feel?
 How easy are they to navigate?
-
-
+            
+- Basic Loot Progression
+            
+The Sentry Ruins give the player access to our first Relic, the Kinetic Thrusters, and our first Charms, special items that can be equipped to high tier gear using the Arkenium Forge.\s
+Crafted Equipment can gain a Charm slot by reaching their maximum upgrade level in the Forge, while Uncraftable Dungeon Loot has Charm slots by default. The Neptune Armour set and the Hammer of Demolition all come with Charm slots by default.\s
+Once a Charm has been affixed to a Charm slot it cannot be removed.
+Dungeon Loot equipment cannot be repaired in an Altar but also cannot be permanently broken either, when durability hits 0 it enters a broken state that can be repaired via a crafting recipe using spare materials obtained by uncrafting loot via the Amber Hourglass.\s
+In the future this will be replaced with a specialised NPC who will repair Dungeon Loot for Glint and extra materials and will also be able to salvage Charms from equipment.\s
+Currently we have one wearable equipment piece, being the Zanite Pendant, in the future there will be multiple craftable Wearables and lots of Loot Wearables, with a focus on Loot Wearables having multiple Charm Slots.
+            
+            
 Work in Progress
-- Moas (partially implemented/playable)
-- Traveller's Guidebook (equipment and discovery pages implemented, status screen disabled)
-(other stuff Im sure)
-
+            
+Features that are marked Work in Progress are things we're actively working on getting to a more finalised state and currently do not require feedback on.
+            
+- Moas
+            
+Moas are functional but most of their planned features have not been implemented yet so currently we aren't looking for feedback on their implementation beyond bugs and unintended behaviour
+            
+Wild Moas will spawn at nests (but currently do not stay near them) and will attack players that enter their nest
+Moa Eggs can be obtained by breaking the Egg Block found in Moa Nests
+Moa Eggs can be hatched by placing them on a Woven Skyroot Sticks Block
+Once hatched a Baby Moa will request food (either Aechor Petals or Moa Feed work) after three feedings it will grow into an Adult Moa
+Adult Moas can be saddled with the new Moa Saddle item and ridden as a flying mount
+Moas have two modes of flight, by default they will be in a "hover" state where the jump input will use a chunk of stamina to gain vertical height, by using the sprint input you can switch to a partially implemented "glide" state where the Moa will move in the direction of the camera and the jump input will use a chunk of stamina to boost forward.
+In the future the plan is for the Glide state of the Moa to feel close to the Elytra in function.
+In the future Moas will have varied stats based on how they were raised, trained, and their genetic profile.
+Currently all Moas have the same stats.
+            
+- Traveller's Guidebook
+            
+The Traveller's Guidebook is The Aether II's custom player GUI that combines a lot of mechanics and information relevant to playing the mod, it can be accessed either through a button in the vanilla player UI or via a keybind
+            
+Currently only two of the planned Guidebook tabs have been implemented, the Equipment Screen and the Discovery Screen
+            
+The Aether II adds multiple new equipment slots to add extra gameplay mechanics and loot progression, these are accessed through the Equipment Screen, which has a page dedicated to Equipped Items and a page dedicated to the Player Inventory.
+The Equipment Screen adds 5 new equipment slots:
+Relics (x2) are powerful loot items that introduce new mechanics for the player or significantly alter their abilities, two can be equipped at the same time
+Wearables are items that offer decoration for the player model while providing buffs or extra Charm slots
+Gloves are new armor items that increase the effectiveness of blocking and stamina regeneration for actions like block recovery and gliding
+The final slot is a special equipment slot called the Glint Pouch, this is the player's wallet for storing Glint items, The Aether's currency. It has an infinite stack size so all Glint items can be stored in this slot and automatically converted into coins, which can be taken out of the pouch for storage in chests or for eventually trading with NPCs. Glint currently comes in the form of gemstones (worth 10 glint) or coins (worth 1 glint)
+            
+The other tab of the Guidebook is the Discovery Screen, which adds information for the player to read about the content they find throughout the mod. Currently only 2 of the 3 planned tabs have been implemented.
+The first tab is the mod's Bestiary, when encountering a mob in the dimension its information will be added to the Bestiary to view. This includes the mob's visuals, health, damage type weaknesses and resistances, effect weaknesses and resistances, feed items, item drops, and an in-world description of the mob giving insight into its gameplay functions and lore.
+The second tab is the mod's Effects, when encountering one of the mod's unique status effects its information will be added to the Effects screen to view. This includes the Effect's icon, a brief gameplay description of how it works, and a list of items that can be used to treat or cure the Effect.
+The third tab will eventually be a list of discovered points of interest including artwork and information about biomes, dungeons, settlements, and other structures found throughout the dimension.
+            
+The Guidebook will eventually have other Tabs for additional gameplay information, such as a Status Screen for tracking player information and mount information. We also are wanting to eventually have a dedicated Map Screen as part of the Guidebook.
+            
+The Guidebook also requires a visual overhaul as it is still using assets based on older iterations.
+            
+- Irradiated Biomes\s
+            
+The Irradiated Biome theme (Contaminated Jungle and Battleground Wastes biomes) are planned to have rich environmental storytelling and a suite of biome specific mobs and features, currently only the basic generation has been worked on and Irradiated Dust Blocks can be found in water pools and mined to obtain Irradiated Items. We have also noticed this biome frequently fails to properly generate terrain so its atmospheric effects sometimes trigger in the Cloud Sea due to a small Irradiated Biome with no terrain spawning.
+            
+- The Undercloud
+            
+The Undercloud generates properly and contributes significantly to the feel of resource gathering in the mod, but it is planned to have significant additional unique content such as structures, mobs, and additional biomes.
+            
+            
 Unimplemented
+            
+This is a list of some major features that have not yet been implemented but are expected to be worked on in the near future.
+            
 - Infected Guardian Tree Dungeon
 - Lost Valkyrie Temple Mini-Dungeon
 - Primordial Foundry Dungeon
 - Sun Acolyte Hideout Mini-Dungeon
 - Bandit King's Fortress Dungeon
+- Environmental Atmosphere and Mechanics
+- Biome Specific Environmental Mechanics
+- Biome Specific Mobs
+- Additional Miscellaneous Structures
+- Additional Undercloud Biomes
+- Undercloud Specific Mobs
 - Outpost NPCs
-                """;
+- Settlements
+- Non-Dungeon Loot items
+- New Moa Mechanics
+- Guidebook Status Screen
+- Patreon Cosmetic Rewards""";
 
         this.textPosition = Math.max(65, (this.width - 350) / 2);
         this.textWidth = Math.min(this.width - (65 * 2), 350);
