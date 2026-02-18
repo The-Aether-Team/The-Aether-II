@@ -1,12 +1,20 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.entity.passive.Moa;
+import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.mixin.MixinHooks;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.LivingEntityAccessor;
 import com.aetherteam.aetherii.network.packet.clientbound.SetVehiclePacket;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -20,6 +28,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -132,6 +141,18 @@ public class EntityMixin {
                 Vec3 movement = args.get(0);
                 args.set(0, movement.multiply(multiplier));
             }
+        }
+    }
+
+    @WrapMethod(method = "checkFallDamage(DZLnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;)V")
+    private void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos, Operation<Void> original) {
+        Entity entity = (Entity) (Object) this;
+        if ((entity.getFirstPassenger() != null && entity.getFirstPassenger().getType() == AetherIIEntityTypes.AERBUNNY.get())
+                || (entity instanceof LivingEntity livingEntity && livingEntity.getUseItem().is(AetherIITags.Items.TOOLS_GLIDERS))
+                || (entity instanceof Player player && !player.onGround() && !(player.isInWater() || player.isInFluidType()) && ((LivingEntityAccessor) player).aether$isJumping() && ((LivingEntityAccessor) player).aether$getNoJumpDelay() == 0 && EquipmentUtil.hasArmorAbility(player, AetherIITags.Items.GRAVITITE_ARMOR) && !player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).isGravititeJumpUsed())) {
+            entity.resetFallDistance();
+        } else {
+            original.call(y, onGround, state, pos);
         }
     }
 }

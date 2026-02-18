@@ -200,7 +200,6 @@ public class Aerbunny extends AetherTamableAnimal {
 
             EntityUtil.copyRotations(this, player);
 
-            player.resetFallDistance();
             if (!player.onGround() && !player.isFallFlying()) {
                 AttributeInstance playerGravity = player.getAttribute(Attributes.GRAVITY);
                 if (playerGravity != null) {

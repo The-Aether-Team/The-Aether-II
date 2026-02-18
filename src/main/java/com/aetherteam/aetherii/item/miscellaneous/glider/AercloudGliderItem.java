@@ -74,8 +74,6 @@ public class AercloudGliderItem extends Item implements ToggleItem {
                 }
             }
 
-            entity.resetFallDistance();
-
             if (entity.onGround() || timer <= 0) {
                 entity.stopUsingItem();
             } else {
