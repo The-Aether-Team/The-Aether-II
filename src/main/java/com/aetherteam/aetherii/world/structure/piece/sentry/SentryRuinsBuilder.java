@@ -186,15 +186,15 @@ public class SentryRuinsBuilder {
         return null;
     }
 
-    private void buildSurfaceStaircase(LevelHeightAccessor level, ChunkGenerator chunkGenerator, RandomState randomState , int stopBeforeSurface) {
+    private void buildSurfaceStaircase(LevelHeightAccessor level, ChunkGenerator chunkGenerator, RandomState randomState, int stopBeforeSurface) {
         final int shrink = 3;
         StructurePiece lobby = this.seekLastRoomNode(shrink * 2);
         if (lobby == null) return; // Not likely to happen ever, but just in case for wackiness
 
         BoundingBox lobbyBounds = lobby.getBoundingBox();
-        BlockPos entranceRoomCenter = lobbyBounds.getCenter();
+        BlockPos lobbyCenter = lobbyBounds.getCenter();
         Rotation lobbyRotation = lobby.getRotation();
-        int topSurfaceY = chunkGenerator.getFirstOccupiedHeight(entranceRoomCenter.getX(), entranceRoomCenter.getZ(), Heightmap.Types.OCEAN_FLOOR_WG, level, randomState);
+        int topSurfaceY = chunkGenerator.getFirstOccupiedHeight(lobbyCenter.getX(), lobbyCenter.getZ(), Heightmap.Types.OCEAN_FLOOR_WG, level, randomState);
 
         for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY() - stopBeforeSurface) / 6; i++) {
             SentryRuinsPiece staircase = this.chooseRoom("staircase", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6, 0), lobbyRotation, this.processors.staircaseSettings());
