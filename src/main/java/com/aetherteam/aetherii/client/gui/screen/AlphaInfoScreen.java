@@ -77,7 +77,32 @@ Forge mechanics for upgrading and affixing Charms implemented and working
             
 Gravitite Equipment
 New abilities implemented, feedback would be appreciated
+
+Basic Farming
+Blueberry Bushes, Orange Trees, Carrion Sprouts, and Aechor Plants form a very basic suite of farming interactions
+These blocks and mobs can all be interacted with using Trowel tools
+
+
+- New Damage System
+
+The Aether II's weapons carry specialised damage types, Slash, Impact, and Pierce. 
+Mobs in the dimension have differing defense values that can be checked in the Bestiary, using the correct damage type on a mob will deal bonus damage and special audiovisual feedback effects
+Stronger mobs, such as those found exclusively underground or in dungeons, may also be resistant to certain damage types.
+Using a damage type a mob is strong against will reduce the damage taken, cause a small amount of knockback to the player, and play a blocking sound effect
+The player is able to craft melee weapons with each of the three damage types which also carry special attacks based on the vanilla sweep attack
+Shortswords deal Slash Damage and carry a Slash attack similar to the vanilla sweep
+Hammers deal Impact Damage and carry a Smash attack that deals heavy knockback in a small area around a target
+Spears (name will be changed soon to account for vanilla Spears) and Crossbows deal Pierce Damage, Spears carry a Stab attack that heavily damages enemies directly behind a target
+In the future there will be special loot items that carry the attack characteristics of craftable weapons while dealing differing damage types (like a spiked hammer that deals pierce damage while still doing the hammer shock attack)
+
    
+- New Status Effects System
+
+The Aether II also features multiple new status effects, but they work slightly different to how vanilla handles status effects.
+Instead of being obtained immediately and then being active for a duration, Aether II's effects are obtained via "buildup".
+Environmental hazards, enemy attacks, and some items can deal an amount of Status Effect buildup, if an effect reaches 100% buildup it will trigger.
+Effects are generally negative, so it's usually a good idea to reduce buildup before the effect can trigger. Items that reduce buildup or cure effects are detailed in the Effects section of the Guidebook.
+
    
 - Revamped Dimension Terrain Generation
             
@@ -109,9 +134,9 @@ Irradiated Theme (Missing key features, very WIP)
 Contaminated Jungle (visuals need work, very WIP)
 Battleground Wastes (missing most features, very WIP)
             
-Cloud Sea Theme (Missing key features, very WIP)
+Cloud Sea Theme (Missing key features and proper generation, very WIP)
             
-Expanse (very basic implementation)
+Expanse (unimplemented)
             
 Playable Cave and Undercloud Generation
             
@@ -152,13 +177,16 @@ How easy are they to navigate?
             
 - Basic Loot Progression
             
-The Sentry Ruins give the player access to our first Relic, the Kinetic Thrusters, and our first Charms, special items that can be equipped to high tier gear using the Arkenium Forge.\s
-Crafted Equipment can gain a Charm slot by reaching their maximum upgrade level in the Forge, while Uncraftable Dungeon Loot has Charm slots by default. The Neptune Armour set and the Hammer of Demolition all come with Charm slots by default.\s
+The Sentry Ruins give the player access to our first Relic, the Kinetic Thrusters, and our first Charms, special items that can be equipped to high tier gear using the Arkenium Forge.
+Crafted Equipment can gain a Charm slot by reaching their maximum upgrade level in the Forge, while Uncraftable Dungeon Loot has Charm slots by default. The Neptune Armour set and the Hammer of Demolition all come with Charm slots by default.
 Once a Charm has been affixed to a Charm slot it cannot be removed.
-Dungeon Loot equipment cannot be repaired in an Altar but also cannot be permanently broken either, when durability hits 0 it enters a broken state that can be repaired via a crafting recipe using spare materials obtained by uncrafting loot via the Amber Hourglass.\s
-In the future this will be replaced with a specialised NPC who will repair Dungeon Loot for Glint and extra materials and will also be able to salvage Charms from equipment.\s
+Dungeon Loot equipment cannot be repaired in an Altar but also cannot be permanently broken either, when durability hits 0 it enters a broken state that can be repaired via a crafting recipe using spare materials obtained by uncrafting loot via the Amber Hourglass.
+In the future this will be replaced with a specialised NPC who will repair Dungeon Loot for Glint and extra materials and will also be able to salvage Charms from equipment.
 Currently we have one wearable equipment piece, being the Zanite Pendant, in the future there will be multiple craftable Wearables and lots of Loot Wearables, with a focus on Loot Wearables having multiple Charm Slots.
-            
+
+- New Music Player
+
+The Aether II uses new Engraved Disc items for our music loot, these can be played in the new portable Music Player tool to listen to full stereo music tracks completely portably.
             
 Work in Progress
             
@@ -196,11 +224,12 @@ The first tab is the mod's Bestiary, when encountering a mob in the dimension it
 The second tab is the mod's Effects, when encountering one of the mod's unique status effects its information will be added to the Effects screen to view. This includes the Effect's icon, a brief gameplay description of how it works, and a list of items that can be used to treat or cure the Effect.
 The third tab will eventually be a list of discovered points of interest including artwork and information about biomes, dungeons, settlements, and other structures found throughout the dimension.
             
-The Guidebook will eventually have other Tabs for additional gameplay information, such as a Status Screen for tracking player information and mount information. We also are wanting to eventually have a dedicated Map Screen as part of the Guidebook.
+The Guidebook will eventually have other Tabs for additional gameplay information, such as a Status Screen for tracking player information and mount information or a Journal tab for tracking progression information and important documents.
+We also are wanting to eventually have a dedicated Map Screen as part of the Guidebook.
             
 The Guidebook also requires a visual overhaul as it is still using assets based on older iterations.
             
-- Irradiated Biomes\s
+- Irradiated Biomes
             
 The Irradiated Biome theme (Contaminated Jungle and Battleground Wastes biomes) are planned to have rich environmental storytelling and a suite of biome specific mobs and features, currently only the basic generation has been worked on and Irradiated Dust Blocks can be found in water pools and mined to obtain Irradiated Items. We have also noticed this biome frequently fails to properly generate terrain so its atmospheric effects sometimes trigger in the Cloud Sea due to a small Irradiated Biome with no terrain spawning.
             
@@ -219,6 +248,7 @@ This is a list of some major features that have not yet been implemented but are
 - Sun Acolyte Hideout Mini-Dungeon
 - Bandit King's Fortress Dungeon
 - Environmental Atmosphere and Mechanics
+- Expanse Biome
 - Biome Specific Environmental Mechanics
 - Biome Specific Mobs
 - Additional Miscellaneous Structures
