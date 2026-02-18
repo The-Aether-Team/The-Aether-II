@@ -12,6 +12,8 @@ import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -38,16 +40,18 @@ import java.util.*;
 
 public class AccessoryContainer extends SimpleContainer {
     public static final MapCodec<AccessoryContainer> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            ItemStack.OPTIONAL_CODEC.sizeLimitedListOf(4).fieldOf("items").forGetter(container -> container.lastItems)
+            ItemStack.OPTIONAL_CODEC.sizeLimitedListOf(4).fieldOf("current_items").forGetter(SimpleContainer::getItems),
+            ItemStack.OPTIONAL_CODEC.sizeLimitedListOf(4).fieldOf("last_items").forGetter(container -> container.lastItems)
     ).apply(instance, AccessoryContainer::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, AccessoryContainer> STREAM_CODEC = StreamCodec.composite(
+            ItemStack.OPTIONAL_STREAM_CODEC.apply(ByteBufCodecs.list(4)), SimpleContainer::getItems,
             ItemStack.OPTIONAL_STREAM_CODEC.apply(ByteBufCodecs.list(4)), (container) -> container.lastItems,
             AccessoryContainer::new);
 
     private final NonNullList<ItemStack> lastItems;
 
-    protected AccessoryContainer(List<ItemStack> lastItems) {
-        super(lastItems.toArray(ItemStack[]::new));
+    protected AccessoryContainer(List<ItemStack> currentItems, List<ItemStack> lastItems) {
+        super(currentItems.toArray(ItemStack[]::new));
         this.lastItems = NonNullList.of(ItemStack.EMPTY, lastItems.toArray(ItemStack[]::new));
     }
 
@@ -57,65 +61,63 @@ public class AccessoryContainer extends SimpleContainer {
     }
 
     public void postTickUpdate(LivingEntity entity) {
-        if (entity instanceof Player player) {
-//            AetherII.LOGGER.info(this.lastItems + " " + this.getItems());
-        }
         if (!entity.level().isClientSide()) {
-            NonNullList<ItemStack> list = null;
+            Map<Integer, ItemStack> map = null;
             for (int i = 0; i < this.getItems().size(); i++) {
                 ItemStack lastStack = this.lastItems.get(i);
                 ItemStack stack = this.getItem(i);
                 if (!ItemStack.matches(stack, lastStack)) {
-                    if (list == null) {
-                        list = NonNullList.withSize(4, ItemStack.EMPTY);
+                    if (map == null) {
+                        map = new Int2ObjectOpenHashMap<>();
                     }
-                    list.set(i, stack);
-//                    AttributeMap entityAttributes = entity.getAttributes();
-//                    if (!lastStack.isEmpty() && lastStack.getItem() instanceof AccessoryItem lastAccessory) {
-//                        Set<AccessoryItem.ConditionalAttribute> accessoryAttributes = lastAccessory.getBaseAttributes();
-//                        for (AccessoryItem.ConditionalAttribute conditionalAttribute : accessoryAttributes) {
-//                            AttributeInstance attributeinstance = entityAttributes.getInstance(conditionalAttribute.attribute());
-//                            if (attributeinstance != null) {
-//                                attributeinstance.removeModifier(conditionalAttribute.modifier().getModifier(lastStack));
-//                            }
-//                        }
-//                    }
+                    map.put(i, stack);
+                    AttributeMap entityAttributes = entity.getAttributes();
+                    AetherII.LOGGER.info(lastStack + " " + stack);
+                    if (!lastStack.isEmpty() && lastStack.getItem() instanceof AccessoryItem lastAccessory) {
+                        Set<AccessoryItem.ConditionalAttribute> accessoryAttributes = lastAccessory.getBaseAttributes();
+                        for (AccessoryItem.ConditionalAttribute conditionalAttribute : accessoryAttributes) {
+                            AttributeInstance attributeinstance = entityAttributes.getInstance(conditionalAttribute.attribute());
+                            if (attributeinstance != null) {
+                                attributeinstance.removeModifier(conditionalAttribute.modifier().getModifier(lastStack));
+                            }
+                        }
+                    }
                 }
             }
-//            if (list != null) {
-//                for (ItemStack stack : list) {
-//                    if (!stack.isEmpty() && !stack.isBroken() && stack.getItem() instanceof AccessoryItem lastAccessory) {
-//                        Set<AccessoryItem.ConditionalAttribute> accessoryAttributes = lastAccessory.getBaseAttributes();
-//                        for (AccessoryItem.ConditionalAttribute conditionalAttribute : accessoryAttributes) {
-//                            AttributeInstance attributeinstance = entity.getAttributes().getInstance(conditionalAttribute.attribute());
-//                            if (attributeinstance != null) {
-//                                attributeinstance.removeModifier(conditionalAttribute.modifier().getModifier(stack).id());
-//                                attributeinstance.addTransientModifier(conditionalAttribute.modifier().getModifier(stack));
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-            if (list != null) {
-                if (!list.isEmpty()) {
-                    List<ItemStack> newList = NonNullList.withSize(list.size(), ItemStack.EMPTY);
+            if (map != null) {
+                for (Map.Entry<Integer, ItemStack> entry : map.entrySet()) {
+                    ItemStack stack = entry.getValue();
+                    if (!stack.isEmpty() && !stack.isBroken() && stack.getItem() instanceof AccessoryItem lastAccessory) {
+                        Set<AccessoryItem.ConditionalAttribute> accessoryAttributes = lastAccessory.getBaseAttributes();
+                        for (AccessoryItem.ConditionalAttribute conditionalAttribute : accessoryAttributes) {
+                            AttributeInstance attributeinstance = entity.getAttributes().getInstance(conditionalAttribute.attribute());
+                            if (attributeinstance != null) {
+                                attributeinstance.removeModifier(conditionalAttribute.modifier().getModifier(stack).id());
+                                attributeinstance.addTransientModifier(conditionalAttribute.modifier().getModifier(stack));
+                            }
+                        }
+                    }
+                }
+            }
+            if (map != null) {
+                if (!map.isEmpty()) {
+                    List<Pair<Integer, ItemStack>> newList = Lists.newArrayListWithCapacity(map.size());
                     for (int i = 0; i < newList.size(); i++) {
-                        ItemStack copyStack = list.get(i).copy();
+                        ItemStack copyStack = map.get(i).copy();
                         this.equipItem(entity, i, this.lastItems.get(i), copyStack);
-                        newList.set(i, copyStack);
+                        newList.add(Pair.of(i, copyStack));
                         this.lastItems.set(i, copyStack);
                     }
                     PacketDistributor.sendToAllPlayers(new SetAccessoriesPacket(entity.getId(), newList));
                 }
             }
         }
-
-//        for (int i = 0; i < this.getItems().size(); i++) {
-//            ItemStack stack = this.getItem(i);
-//            if (stack.getItem() instanceof AccessoryItem accessory) {
-//                accessory.tick(stack, entity, i);
-//            }
-//        }
+        for (int i = 0; i < this.getItems().size(); i++) {
+            ItemStack stack = this.getItem(i);
+            if (stack.getItem() instanceof AccessoryItem accessory) {
+                accessory.tick(stack, entity, i);
+            }
+        }
     }
 
     public void setItemWithEquip(LivingEntity wearer, int i, ItemStack stack) {
