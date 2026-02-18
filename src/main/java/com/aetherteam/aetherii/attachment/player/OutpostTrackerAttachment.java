@@ -6,7 +6,10 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,12 +25,15 @@ import java.util.List;
 public class OutpostTrackerAttachment {
     private List<CampfirePosition> campfirePositions;
     private boolean shouldRespawnAtOutpost;
-    private boolean shouldSyncAfterJoin;
 
     public static final MapCodec<OutpostTrackerAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             CampfirePosition.CODEC.listOf().fieldOf("campfire_positions").forGetter(OutpostTrackerAttachment::getCampfirePositions),
             Codec.BOOL.fieldOf("should_respawn_at_outpost").forGetter(OutpostTrackerAttachment::shouldRespawnAtOutpost)
     ).apply(instance, OutpostTrackerAttachment::new));
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, OutpostTrackerAttachment> STREAM_CODEC = StreamCodec.composite(
+            CampfirePosition.STREAM_CODEC.apply(ByteBufCodecs.list()), OutpostTrackerAttachment::getCampfirePositions,
+            OutpostTrackerAttachment::new);
 
     public OutpostTrackerAttachment() {
         this.campfirePositions = new ArrayList<>();
@@ -38,13 +44,16 @@ public class OutpostTrackerAttachment {
         this.shouldRespawnAtOutpost = shouldRespawnAtOutpost;
     }
 
+    protected OutpostTrackerAttachment(List<CampfirePosition> campfirePositions) {
+        this.campfirePositions = new ArrayList<>(campfirePositions);
+    }
+
     public void login(Player player) {
-        this.shouldSyncAfterJoin = true;
+        
     }
 
     public void respawn(Player player) {
         this.setShouldRespawnAtOutpost(false);
-        this.shouldSyncAfterJoin = true;
     }
 
     public TeleportTransition findOutpostRespawnLocation(Player player) {
@@ -119,5 +128,10 @@ public class OutpostTrackerAttachment {
                 ResourceKey.codec(Registries.DIMENSION).fieldOf("dimension").forGetter(CampfirePosition::level),
                 BlockPos.CODEC.fieldOf("position").forGetter(CampfirePosition::pos)
         ).apply(instance, CampfirePosition::new));
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, CampfirePosition> STREAM_CODEC = StreamCodec.composite(
+                ResourceKey.streamCodec(Registries.DIMENSION), CampfirePosition::level,
+                BlockPos.STREAM_CODEC, CampfirePosition::pos,
+                CampfirePosition::new);
     }
 }
