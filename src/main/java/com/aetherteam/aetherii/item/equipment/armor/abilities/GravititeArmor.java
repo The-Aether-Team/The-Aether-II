@@ -70,7 +70,6 @@ public interface GravititeArmor {
                 }
                 player.hasImpulse = true;
             }
-            player.resetFallDistance();
             accessor.aether$setNoJumpDelay(10);
             attachment.setGravititeJumpUsed(true);
         }
