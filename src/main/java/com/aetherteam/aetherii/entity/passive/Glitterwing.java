@@ -72,15 +72,19 @@ public class Glitterwing extends Insect {
         VariantUtils.readVariant(valueInput, AetherIIRegistries.GLITTERWING_VARIANT).ifPresent(this::setVariant);
     }
 
-
     @Override
-    public void setRestWithAnimation(boolean rest) {
-        super.setRestWithAnimation(rest);
-        if (rest) {
-            this.level().broadcastEntityEvent(this, (byte) LAND_EVENT);
-        } else {
-            this.level().broadcastEntityEvent(this, (byte) TAKE_OFF_EVENT);
+    public void onSyncedDataUpdated(EntityDataAccessor<?> p_218498_) {
+        if (DATA_REST.equals(p_218498_)) {
+            if (this.isRest()) {
+                this.takeOffAnimationState.stop();
+                this.landAnimationState.start(this.tickCount);
+            } else {
+                this.landAnimationState.stop();
+                this.takeOffAnimationState.start(this.tickCount);
+            }
         }
+
+        super.onSyncedDataUpdated(p_218498_);
     }
 
     @Override
