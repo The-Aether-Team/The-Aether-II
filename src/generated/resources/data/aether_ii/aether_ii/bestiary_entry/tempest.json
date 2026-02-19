@@ -14,14 +14,6 @@
         "max_count": 3,
         "min_count": 1
       }
-    },
-    {
-      "loot": {
-        "chance": 0.075,
-        "item": "aether_ii:charge_catalyst",
-        "max_count": 1,
-        "min_count": 1
-      }
     }
   ],
   "name": "entity.aether_ii.tempest",

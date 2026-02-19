@@ -14,14 +14,6 @@
         "max_count": 2,
         "min_count": 0
       }
-    },
-    {
-      "loot": {
-        "chance": 0.075,
-        "item": "aether_ii:gravitite_core",
-        "max_count": 1,
-        "min_count": 1
-      }
     }
   ],
   "name": "entity.aether_ii.gravitite_taluton",

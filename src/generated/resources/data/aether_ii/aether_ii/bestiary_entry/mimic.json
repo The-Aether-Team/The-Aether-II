@@ -6,16 +6,7 @@
   "icon": "aether_ii:guidebook/bestiary/mimic",
   "id": "aether_ii:mimic",
   "impact_defense": 0,
-  "loot_slots": [
-    {
-      "loot": {
-        "chance": 0.075,
-        "item": "aether_ii:eye_of_the_mimic",
-        "max_count": 1,
-        "min_count": 1
-      }
-    }
-  ],
+  "loot_slots": [],
   "name": "entity.aether_ii.mimic",
   "pierce_defense": -1,
   "slash_defense": 1,
