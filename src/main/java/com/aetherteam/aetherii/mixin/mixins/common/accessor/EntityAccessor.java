@@ -16,6 +16,9 @@ public interface EntityAccessor {
     @Accessor("random")
     RandomSource aether_ii$getRandom();
 
+    @Accessor("firstTick")
+    boolean aether_ii$getFirstTick();
+
     @Invoker
     boolean callCouldAcceptPassenger();
 

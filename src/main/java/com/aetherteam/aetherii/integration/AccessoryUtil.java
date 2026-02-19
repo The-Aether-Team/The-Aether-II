@@ -53,7 +53,7 @@ public class AccessoryUtil {
 
     public static InteractionResult equip(Player player, ItemStack stack, AccessoryContainer.SlotType slot) {
         AccessoryContainer container = player.getData(AetherIIDataAttachments.ACCESSORIES);
-        int index = getValidSlot(player, slot);
+        int index = getValidSlot(player, stack,  slot);
         ItemStack itemstack = container.getItem(index);
         if ((!EnchantmentHelper.has(itemstack, EnchantmentEffectComponents.PREVENT_ARMOR_CHANGE) || player.isCreative()) && !ItemStack.isSameItemSameComponents(stack, itemstack)) {
             if (!player.level().isClientSide()) {
@@ -62,12 +62,12 @@ public class AccessoryUtil {
             if (stack.getCount() <= 1) {
                 ItemStack resultStack = itemstack.isEmpty() ? stack : itemstack.copyAndClear();
                 ItemStack insertedStack = player.isCreative() ? stack.copy() : stack.copyAndClear();
-                container.setItem(index, insertedStack);
+                container.getItems().set(index, insertedStack);
                 return InteractionResult.SUCCESS.heldItemTransformedTo(resultStack);
             } else {
                 ItemStack copiedStack = itemstack.copyAndClear();
                 ItemStack insertedStack = stack.consumeAndReturn(1, player);
-                container.setItem(index, insertedStack);
+                container.getItems().set(index, insertedStack);
                 if (!player.getInventory().add(copiedStack)) {
                     player.drop(copiedStack, false);
                 }
@@ -78,12 +78,12 @@ public class AccessoryUtil {
         }
     }
 
-    private static int getValidSlot(Player player, AccessoryContainer.SlotType slot) {
+    private static int getValidSlot(Player player, ItemStack stack, AccessoryContainer.SlotType slot) {
         AccessoryContainer container = player.getData(AetherIIDataAttachments.ACCESSORIES);
         int firstEmptyIndex = -1;
         int firstFullIndex = -1;
         for (int i : slot.getIndex()) {
-            if (firstEmptyIndex < 0 && container.getItem(i).isEmpty()) {
+            if (firstEmptyIndex < 0 && container.getItem(i).isEmpty() && !container.hasAnyMatching((otherStack) -> otherStack.getItem() == stack.getItem())) {
                 firstEmptyIndex = i;
             }
             if (firstFullIndex < 0 && !container.getItem(i).isEmpty()) {
