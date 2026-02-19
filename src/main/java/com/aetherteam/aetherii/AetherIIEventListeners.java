@@ -66,7 +66,6 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onPlayerJoinLevel);
         bus.addListener(AetherIIEventListeners::onPlayerRespawn);
         bus.addListener(AetherIIEventListeners::onPlayerPositionRespawn);
-        bus.addListener(AetherIIEventListeners::onPlayerClone);
         bus.addListener(AetherIIEventListeners::onPlayerChangedDimension);
         bus.addListener(AetherIIEventListeners::onPlayerPostTick);
         bus.addListener(AetherIIEventListeners::onPlayerRightClickBlock);
@@ -110,7 +109,6 @@ public class AetherIIEventListeners {
         player.getData(AetherIIDataAttachments.PLAYER).login(player);
         player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).login(player);
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).login(player);
-        player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).login(player);
         player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).login(player); //todo verify
         BiomeHooks.sendColors(player);
     }
@@ -149,14 +147,6 @@ public class AetherIIEventListeners {
         }
     }
 
-    public static void onPlayerClone(PlayerEvent.Clone event) {
-        Player original = event.getOriginal();
-        Player player = event.getEntity();
-        boolean wasDeath = event.isWasDeath();
-
-        player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).clone(player);
-    }
-
     public static void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
         Player player = event.getEntity();
 
@@ -171,7 +161,6 @@ public class AetherIIEventListeners {
         player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.SWET_LATCH).postTickUpdate();
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).postTickUpdate(player);
-        player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).postTickUpdate(player);
         PlayerHooks.forceSpecialLoadingCrouch(player);
         PlayerHooks.mountAercloudEffects(player);
     }
