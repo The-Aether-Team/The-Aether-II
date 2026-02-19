@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
 
-public class ArkeniumTaluton extends Monster {
+public class ArkeniumTaluton extends Taluton {
     public static int ATTACK_EVENT = 4;
 
     private int attackAnimationTick;
