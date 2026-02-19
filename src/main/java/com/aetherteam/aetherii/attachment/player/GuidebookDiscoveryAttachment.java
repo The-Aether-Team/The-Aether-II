@@ -23,8 +23,10 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class GuidebookDiscoveryAttachment {
+    private boolean shouldSetupAfterJoin = false;
     private List<BestiaryEntry.Mutable> bestiaryEntries;
     private List<EffectsEntry.Mutable> effectsEntries;
     private List<ExplorationEntry.Mutable> explorationEntries;
@@ -51,6 +53,29 @@ public class GuidebookDiscoveryAttachment {
         this.bestiaryEntries = new ArrayList<>();
         this.effectsEntries = new ArrayList<>();
         this.explorationEntries = new ArrayList<>();
+    }
+
+    public void postTickUpdate(Player player) {
+        this.setupAfterJoin(player);
+    }
+
+    public void login(Player player) {
+        this.shouldSetupAfterJoin = true;
+    }
+
+    public void clone(Player player) {
+        this.shouldSetupAfterJoin = true;
+    }
+
+    private void setupAfterJoin(Player player) {
+        if (this.shouldSetupAfterJoin) {
+            if (player instanceof ServerPlayer serverPlayer) {
+                PacketDistributor.sendToPlayer(serverPlayer, new FlushGuidebookDataPacket());
+                this.setupEntries(serverPlayer);
+                player.syncData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
+            }
+            this.shouldSetupAfterJoin = false;
+        }
     }
 
     private void setupEntries(ServerPlayer serverPlayer) {
@@ -147,12 +172,6 @@ public class GuidebookDiscoveryAttachment {
                 return GuidebookToast.Icons.EXPLORATION;
             }
         }
-    }
-
-    public void syncAttachment(GuidebookDiscoveryAttachment other) {
-        this.bestiaryEntries = other.bestiaryEntries;
-        this.effectsEntries = other.effectsEntries;
-        this.explorationEntries = other.explorationEntries;
     }
 
     public List<BestiaryEntry.Mutable> getBestiaryEntries() {
