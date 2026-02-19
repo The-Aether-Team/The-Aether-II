@@ -9,9 +9,9 @@
   "size": 3,
   "spawn_overrides": {},
   "start_height": {
-    "absolute": 0
+    "absolute": -1
   },
-  "start_pool": "aether_ii:outpost/start_pool",
+  "start_pool": "aether_ii:outpost/outposts",
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin"
 }

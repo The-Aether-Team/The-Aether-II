@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.WorldGenerationContext;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
@@ -80,30 +81,31 @@ public class AetherJigsawStructure extends Structure {
         ChunkPos chunkPos = context.chunkPos();
         BlockPos pos = new BlockPos(chunkPos.getMiddleBlockX(), startY, chunkPos.getMiddleBlockZ());
 
-        BlockPos testPos0 = startPool.value().getRandomTemplate(context.random()).getBoundingBox(templateManager, pos, Rotation.NONE).getCenter();
+        WorldgenRandom worldGenRandom = context.random();
+        Rotation rotation = Rotation.getRandom(worldGenRandom);
+
+        BlockPos testPos = startPool.value().getRandomTemplate(context.random()).getBoundingBox(templateManager, pos, rotation).getCenter();
+
         BlockPos testPos90 = startPool.value().getRandomTemplate(context.random()).getBoundingBox(templateManager, pos, Rotation.CLOCKWISE_90).getCenter();
         BlockPos testPos180 = startPool.value().getRandomTemplate(context.random()).getBoundingBox(templateManager, pos, Rotation.CLOCKWISE_180).getCenter();
         BlockPos testPos270 = startPool.value().getRandomTemplate(context.random()).getBoundingBox(templateManager, pos, Rotation.COUNTERCLOCKWISE_90).getCenter();
 
-        if (!this.checkHeight(context, testPos0.getX(), testPos0.getZ(), discardBelowY, discardAboveY)
-                && !this.checkHeight(context, testPos90.getX(), testPos90.getZ(), discardBelowY, discardAboveY)
-                && !this.checkHeight(context, testPos180.getX(), testPos180.getZ(), discardBelowY, discardAboveY)
-                && !this.checkHeight(context, testPos270.getX(), testPos270.getZ(), discardBelowY, discardAboveY)) {
-            return Optional.empty();
+        if (this.checkHeight(context, testPos.getX(), testPos.getZ(), discardBelowY, discardAboveY)) {
+            return JigsawPlacement.addPieces(
+                    context,
+                    startPool,
+                    startJigsawName,
+                    size,
+                    pos,
+                    false,
+                    projectStartToHeightmap,
+                    maxDistanceFromCenter,
+                    PoolAliasLookup.create(poolAliases, pos, context.seed()),
+                    this.dimensionPadding,
+                    this.liquidSettings
+            );
         }
-        return JigsawPlacement.addPieces(
-                context,
-                startPool,
-                startJigsawName,
-                size,
-                pos,
-                false,
-                projectStartToHeightmap,
-                maxDistanceFromCenter,
-                PoolAliasLookup.create(poolAliases, pos, context.seed()),
-                this.dimensionPadding,
-                this.liquidSettings
-        );
+        return Optional.empty();
     }
 
     public boolean checkHeight(Structure.GenerationContext context, int x, int z, int minY, int maxY) {
