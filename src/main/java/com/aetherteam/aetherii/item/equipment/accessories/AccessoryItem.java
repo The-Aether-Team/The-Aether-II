@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.item.equipment.accessories;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
@@ -63,10 +62,8 @@ public class AccessoryItem extends Item {
         for (ConditionalAttribute entry : this.getAttributes(stack)) {
             AttributeInstance attribute = wearer.getAttribute(entry.attribute());
             AttributeModifier modifier = entry.modifier().getModifier(stack);
-
-
+            
             if (attribute != null) {
-                AetherII.LOGGER.info(attribute.getModifiers().toString());
                 if (!attribute.hasModifier(modifier.id()) && entry.condition().test(stack, wearer)) {
                     attribute.addTransientModifier(modifier);
                 } else if (attribute.hasModifier(modifier.id()) && (!entry.condition().test(stack, wearer))) {
