@@ -74,6 +74,11 @@ public class Skephid extends CellingMonster implements RangedAttackMob {
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.SKEPHID_SPAWNABLE_ON) && level.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn((ServerLevelAccessor) level, pos, random) && checkMobSpawnRules(skephid, level, reason, pos, random);
     }
 
+    @Override
+    public int getAmbientSoundInterval() {
+        return 380;
+    }
+
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
