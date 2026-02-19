@@ -106,11 +106,6 @@ public class Mimic extends Monster {
     }
 
     @Override
-    protected boolean shouldDespawnInPeaceful() {
-        return true;
-    }
-
-    @Override
     public void handleEntityEvent(byte id) {
         if (id == ATTACK_EVENT) {
             this.attackAnimationState.start(this.tickCount);

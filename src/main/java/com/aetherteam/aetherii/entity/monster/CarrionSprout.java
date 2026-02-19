@@ -260,11 +260,6 @@ public class CarrionSprout extends PlantMob implements PlantCuttingMob {
     }
 
     @Override
-    protected boolean shouldDespawnInPeaceful() {
-        return false;
-    }
-
-    @Override
     public boolean removeWhenFarAway(double distanceToClosestPlayer) {
         return false;
     }

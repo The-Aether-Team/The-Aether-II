@@ -183,6 +183,11 @@ public class Tempest extends Mob implements Blighted {
         return false;
     }
 
+    @Override
+    protected boolean shouldDespawnInPeaceful() {
+        return true;
+    }
+
     public static class ThunderballAttackGoal extends Goal {
         private final Tempest tempest;
         private final float attackThresholdSqr;
