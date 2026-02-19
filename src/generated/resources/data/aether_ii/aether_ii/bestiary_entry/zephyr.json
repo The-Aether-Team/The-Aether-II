@@ -17,17 +17,9 @@
     },
     {
       "loot": {
-        "chance": 0.3333,
+        "chance": 0.1111,
         "item": "aether_ii:blue_aercloud",
         "max_count": 2,
-        "min_count": 1
-      }
-    },
-    {
-      "loot": {
-        "chance": 0.075,
-        "item": "aether_ii:zephyr_husk",
-        "max_count": 1,
         "min_count": 1
       }
     }
