@@ -159,7 +159,9 @@ public class AetherIIEventListeners {
 
     public static void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
         Player player = event.getEntity();
+        ResourceKey<Level> to = event.getTo();
 
+        player.getData(AetherIIDataAttachments.PLAYER).changeDimension(player, to);
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).changeDimension(player);
         player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT.get()).remountAerbunny(player);
     }

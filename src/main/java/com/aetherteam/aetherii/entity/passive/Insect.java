@@ -168,7 +168,7 @@ public class Insect extends PathfinderMob {
         }
 
         if (this.shouldStayGround() && this.isRest()) {
-            if (this.level().getBlockState(BlockPos.containing(this.position().add(0, -0.01F, 0))).getCollisionShape(this.level(), BlockPos.containing(this.position().add(0, -0.01F, 0))).isEmpty()) {
+            if (this.onGround()) {
                 ++this.groundTick;
             }
             if (this.groundTick > 2) {

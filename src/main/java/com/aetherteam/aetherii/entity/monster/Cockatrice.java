@@ -142,7 +142,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
         double d0 = target.getEyeY() - this.getEyeY();
         double d1 = target.getX() - this.getX();
         double d3 = target.getZ() - this.getZ();
-        double d4 = Math.sqrt(d1 * d1 + d3 * d3) * 0.2F;
+        double d4 = Math.sqrt(d1 * d1 + d3 * d3) * 0.05F;
         dart.shoot(d1, d0 + d4, d3, 1.25F, 6.0F);
         this.playSound(AetherIISoundEvents.ENTITY_COCKATRICE_SHOOT.value(), 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.level().addFreshEntity(dart);
@@ -161,6 +161,11 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
     @Override
     public void setHideTime(int hideTime) {
         this.getEntityData().set(DATA_HIDE_ID, hideTime);
+    }
+
+    @Override
+    public int getAmbientSoundInterval() {
+        return 360;
     }
 
     @Nullable

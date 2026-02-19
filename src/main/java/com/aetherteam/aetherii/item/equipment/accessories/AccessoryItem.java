@@ -64,12 +64,10 @@ public class AccessoryItem extends Item {
             AttributeModifier modifier = entry.modifier().getModifier(stack);
 
             if (attribute != null) {
-                AttributeModifier newModifier = new AttributeModifier(EquipmentUtil.getSlotModifierId(modifier.id(), stack, slot, this.getSlotType().name()), modifier.amount(), modifier.operation());
-
-                if (!attribute.hasModifier(newModifier.id()) && entry.condition().test(stack, wearer)) {
-                    attribute.addTransientModifier(newModifier);
-                } else if (attribute.hasModifier(newModifier.id()) && (!entry.condition().test(stack, wearer) || newModifier.amount() != attribute.getModifier(newModifier.id()).amount())) {
-                    attribute.removeModifier(newModifier.id());
+                if (!attribute.hasModifier(modifier.id()) && entry.condition().test(stack, wearer)) {
+                    attribute.addTransientModifier(modifier);
+                } else if (attribute.hasModifier(modifier.id()) && (!entry.condition().test(stack, wearer))) {
+                    attribute.removeModifier(modifier.id());
                 }
             }
         }
@@ -80,18 +78,6 @@ public class AccessoryItem extends Item {
     }
 
     public void onUnequip(ItemStack stack, LivingEntity wearer, int slot) {
-        for (ConditionalAttribute entry : this.getAttributes(stack)) {
-            AttributeInstance attribute = wearer.getAttribute(entry.attribute());
-            AttributeModifier modifier = entry.modifier().getModifier(stack);
-
-            if (attribute != null) {
-                ResourceLocation modifierId = EquipmentUtil.getSlotModifierId(modifier.id(), stack, slot, this.getSlotType().name());
-
-                if (attribute.hasModifier(modifierId)) {
-                    attribute.removeModifier(modifierId);
-                }
-            }
-        }
         this.playEquipSound(wearer, false);
     }
 

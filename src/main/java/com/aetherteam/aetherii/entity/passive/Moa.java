@@ -1091,6 +1091,11 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     }
 
     @Override
+    public int getAmbientSoundInterval() {
+        return 580;
+    }
+
+    @Override
     protected SoundEvent getAmbientSound() {
         return AetherIISoundEvents.ENTITY_MOA_AMBIENT.get();
     }

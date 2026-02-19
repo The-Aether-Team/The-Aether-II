@@ -1610,7 +1610,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern(" AF")
                 .pattern("A F")
                 .pattern(" AF")
-                .unlockedBy("has_ferrosite", has(AetherIIBlocks.FERROSITE))
+                .unlockedBy("has_disc", has(AetherIITags.Items.ENGRAVED_DISCS))
                 .save(this.output);
 
         this.smeltingOreRecipe(Items.QUARTZ, AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), 0.5F).group("quartz").save(this.output, this.name("quartz_from_smelting_holystone_quartz_ore"));
