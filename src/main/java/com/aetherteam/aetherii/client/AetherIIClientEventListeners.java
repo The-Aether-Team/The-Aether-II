@@ -1,23 +1,32 @@
 package com.aetherteam.aetherii.client;
 
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.client.event.hooks.AudioHooks;
 import com.aetherteam.aetherii.client.event.hooks.RenderHooks;
-import com.aetherteam.aetherii.client.event.listeners.LevelClientListener;
+import com.aetherteam.aetherii.client.gui.screen.AlphaInfoScreen;
+import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.DialogScreenAccessor;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.LerpingBossEvent;
+import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.dialog.DialogScreen;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
+import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.player.ClientInput;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.MusicInfo;
 import net.minecraft.client.sounds.SoundEngine;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.dialog.Dialog;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
@@ -74,6 +83,13 @@ public class AetherIIClientEventListeners {
         if (storedScreen != null) {
             event.setNewScreen(storedScreen);
         }
+
+        if (screen instanceof DialogScreen<?> dialogScreen) {
+            Dialog dialog = ((DialogScreenAccessor<?>) dialogScreen).aether_ii$getDialog();
+            if (dialog.common().title().equals(AetherIIPlayerAttachment.getDialog().common().title())) {
+                event.setNewScreen(new AlphaInfoScreen(null));
+            }
+        }
     }
 
     public static void onGuiInitializePost(ScreenEvent.Init.Post event) {
@@ -88,6 +104,17 @@ public class AetherIIClientEventListeners {
         Button outpostRespawnButton = RenderHooks.setupOutpostRespawnButton(screen, listeners);
         if (outpostRespawnButton != null) {
             event.addListener(outpostRespawnButton);
+        }
+
+        if (screen instanceof Guidebook) {
+            String spriteName = AetherIIConfig.COMMON.yellow_alpha_button.get() ? "alpha_info_yellow" : "alpha_info";
+            Button button = SpriteIconButton.builder(Component.literal("Alpha Info"),  (b) -> {
+                Minecraft.getInstance().setScreen(new AlphaInfoScreen(screen));
+                AetherIIConfig.COMMON.yellow_alpha_button.set(false);
+            }, true).size(22, 22).sprite(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "icon/" + spriteName), 14, 14).build();
+            button.setPosition((screen.width / 2) + 54, (screen.height / 2) + 101);
+            button.setTooltip(Tooltip.create(Component.literal("Alpha Info")));
+            event.addListener(button);
         }
     }
 

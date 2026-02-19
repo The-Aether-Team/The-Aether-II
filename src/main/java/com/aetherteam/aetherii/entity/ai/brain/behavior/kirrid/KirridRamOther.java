@@ -120,9 +120,9 @@ public class KirridRamOther extends Behavior<Kirrid> {
         serverLevel.broadcastEntityEvent(owner, (byte) Kirrid.RAM_STOP_EVENT);
         owner.getBrain().setMemory(MemoryModuleType.RAM_COOLDOWN_TICKS, KirridAi.TIME_BETWEEN_RAMS.sample(serverLevel.random));
         owner.getBrain().eraseMemory(AetherIIMemoryModuleTypes.KIRRID_BATTLE_TARGET.get());
-        if (owner.hasPlate()) {
-            this.dropPlate(owner);
-        }
+//        if (owner.hasPlate()) {
+//            this.dropPlate(owner); //todo
+//        }
     }
 
     protected void dropPlate(Kirrid owner) {

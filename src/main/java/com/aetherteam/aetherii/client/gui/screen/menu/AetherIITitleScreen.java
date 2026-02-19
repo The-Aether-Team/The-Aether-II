@@ -23,19 +23,13 @@ import java.util.stream.Collectors;
 
 public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehavior, CustomBranding {
     public static final Music MENU = new Music(AetherIISoundEvents.MUSIC_MENU, 20, 100, true);
-    private final boolean alignedLeft;
     private Map<Component, AbstractWidget> widgetsByName = new HashMap<>();
 
     public int buttonRows = 0;
     public int lastY = 0;
 
     public AetherIITitleScreen() {
-        this(true);
-    }
-
-    public AetherIITitleScreen(boolean alignedLeft) {
         super();
-        this.alignedLeft = alignedLeft;
         TitleScreenAccessor accessor = ((TitleScreenAccessor) this);
         accessor.aetherII$setFading(true);
         accessor.aetherII$setLogoRenderer(new AetherIILogoRenderer(false));
@@ -56,21 +50,6 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
     }
 
     public void setupButtons() {
-        /*if (AetherIIConfig.CLIENT.enable_server_button.get()) {
-            Component component = ((TitleScreenAccessor) this).callGetMultiplayerDisabledReason();
-            boolean flag = component == null;
-            Tooltip tooltip = component != null ? Tooltip.create(component) : null;
-            Button serverButton = this.addRenderableWidget(Button.builder(Component.translatable("gui.aether.menu.server"), (button) -> {
-                ServerData serverData = new ServerData("OATS", "oats.aether-mod.net", ServerData.Type.OTHER);
-                ConnectScreen.startConnecting(this, this.minecraft, ServerAddress.parseString(serverData.ip), serverData, false, null);
-            }).bounds(this.width / 2 - 100, (this.height / 4 + 48) + 24 * 3, 200, 20).tooltip(tooltip).build());
-            serverButton.active = flag;
-            Predicate<AbstractWidget> predicate = (abstractWidget) -> (abstractWidget.getMessage().equals(Component.translatable("menu.multiplayer")) || abstractWidget.getMessage().equals(Component.translatable("menu.online")));
-            this.children().removeIf(button -> button instanceof AbstractWidget abstractWidget && predicate.test(abstractWidget));
-            this.renderables.removeIf(button -> button instanceof AbstractWidget abstractWidget && predicate.test(abstractWidget));
-        }
-
-         */
         for (Renderable renderable : this.renderables) {
             if (renderable instanceof AbstractWidget abstractWidget) {
                 Component buttonText = abstractWidget.getMessage();
@@ -104,33 +83,25 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
             }
         }
         TitleScreenBehavior.super.handleImageButtons(this, xOffset);
-        if (this.alignedLeft) {
-            TitleScreenBehavior.super.handleEssentialButtonsForLeftMenu(this);
-        }
+        TitleScreenBehavior.super.handleEssentialButtonsForLeftMenu(this);
+
+        guiGraphics.drawString(this.font, "The Aether II 1.21.8-ALPHA.1", 2, this.height - 10, 0xFFFF7575);
     }
 
     @Override
     public boolean forEachLineBranding(boolean includeMC, boolean reverse, BiConsumer<Integer, String> lineConsumer, GuiGraphics guiGraphics, int i) {
-        if (this.alignedLeft) {
-            BrandingControl.forEachLine(true, true, (brandingLine, branding) ->
+        BrandingControl.forEachLine(true, true, (brandingLine, branding) ->
                 guiGraphics.drawString(font, branding, this.width - font.width(branding) - 1, this.height - (10 + (brandingLine + 1) * (font.lineHeight + 1)), 16777215 | i)
-            );
-            return true;
-        } else {
-            return false;
-        }
+        );
+        return true;
     }
 
     @Override
     public boolean forEachAboveCopyrightLineBranding(BiConsumer<Integer, String> lineConsumer, GuiGraphics guiGraphics, int i) {
-        if (this.alignedLeft) {
-            BrandingControl.forEachAboveCopyrightLine((brandingLine, branding) ->
+        BrandingControl.forEachAboveCopyrightLine((brandingLine, branding) ->
                 guiGraphics.drawString(font, branding, 1, this.height - (brandingLine + 1) * (font.lineHeight + 1), 16777215 | i)
-            );
-            return true;
-        } else {
-            return false;
-        }
+        );
+        return true;
     }
 
     /**
@@ -146,41 +117,19 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
         if (renderable instanceof Button button) {
             if (TitleScreenBehavior.isMainButton(button.getMessage())) {
                 AetherIIMenuButton aetherIIButton = new AetherIIMenuButton(this, button);
-                Component buttonText = aetherIIButton.getMessage();
-
                 // Sets button values that determine their positioning on the screen.
-                if (this.isAlignedLeft()) {
-                    this.buttonRows++;
-                } else {
-                    if (this.lastY < aetherIIButton.originalY) {
-                        this.lastY = aetherIIButton.originalY;
-                        this.buttonRows++;
-                    }
-                }
-                if (buttonText.equals(Component.translatable("gui.aether_ii.menu.server"))) {
-                    aetherIIButton.serverButton = true;
-                    aetherIIButton.buttonCountOffset = 2;
-                } else {
-                    aetherIIButton.buttonCountOffset = this.buttonRows;
-                }
-               // if (AetherConfig.CLIENT.enable_server_button.get() && buttonText.equals(Component.translatable("menu.singleplayer"))) {
-               //     this.buttonRows++;
-               // }
-                if (this.isAlignedLeft()) { // Changes button positioning dependent on whether the parent title screen is aligned left or not.
-                    aetherIIButton.setX(16);
-                    aetherIIButton.setY(50 + aetherIIButton.buttonCountOffset * 25);
-                    aetherIIButton.setWidth(200);
-                } else {
-                    aetherIIButton.setY(this.height / 4 + 31 + 25 * (aetherIIButton.buttonCountOffset - 1));
-                }
+                this.buttonRows++;
+                aetherIIButton.buttonCountOffset = this.buttonRows;
+                aetherIIButton.setX(16);
+                aetherIIButton.setY(50 + aetherIIButton.buttonCountOffset * 25);
+                aetherIIButton.setWidth(200);
                 return (T) super.addRenderableWidget(aetherIIButton);
+            } else if (TitleScreenBehavior.isHiddenButton(button.getMessage())) {
+                button.active = false;
+                button.visible = false;
             }
         }
         return super.addRenderableWidget(renderable);
-    }
-
-    public boolean isAlignedLeft() {
-        return this.alignedLeft;
     }
 
     @Override

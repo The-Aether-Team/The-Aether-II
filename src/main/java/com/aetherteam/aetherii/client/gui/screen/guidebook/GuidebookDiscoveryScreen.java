@@ -61,8 +61,8 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
         this.addRenderableWidget(new SectionTab(this, this.bestiarySection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_bestiary")));
         x += 43;
         this.addRenderableWidget(new SectionTab(this, this.effectsSection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_effects")));
-        x += 43;
-        this.addRenderableWidget(new SectionTab(this, this.explorationSection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_exploration")));
+//        x += 43;
+//        this.addRenderableWidget(new SectionTab(this, this.explorationSection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_exploration"))); //todo
 
         this.currentSection.initSection();
     }

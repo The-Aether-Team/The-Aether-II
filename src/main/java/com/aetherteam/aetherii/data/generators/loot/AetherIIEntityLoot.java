@@ -167,11 +167,11 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                                 .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.1111F, 0.1111F))
                         )
                 )
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherIIItems.ZEPHYR_HUSK.get())
-                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
-                        )
-                )
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) //todo
+//                        .add(LootItem.lootTableItem(AetherIIItems.ZEPHYR_HUSK.get())
+//                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
+//                        )
+//                )
         );
 
         this.add(AetherIIEntityTypes.TEMPEST.get(), LootTable.lootTable()
@@ -180,11 +180,11 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                         )
                 )
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherIIItems.CHARGE_CATALYST.get())
-                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
-                        )
-                )
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) //todo
+//                        .add(LootItem.lootTableItem(AetherIIItems.CHARGE_CATALYST.get())
+//                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
+//                        )
+//                )
         );
 
         this.add(AetherIIEntityTypes.COCKATRICE.get(), LootTable.lootTable()
@@ -238,11 +238,11 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
                         )
                 )
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_CORE.get())
-                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
-                        )
-                )
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) //todo
+//                        .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_CORE.get())
+//                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
+//                        )
+//                )
         );
         this.add(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
@@ -250,21 +250,21 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
                         )
                 )
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherIIItems.GRAVITITE_CORE.get())
-                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
-                        )
-                )
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) //todo
+//                        .add(LootItem.lootTableItem(AetherIIItems.GRAVITITE_CORE.get())
+//                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
+//                        )
+//                )
         );
 
         this.add(AetherIIEntityTypes.BLADESHROOM_HUNTER.get(), LootTable.lootTable());
 
         this.add(AetherIIEntityTypes.MIMIC.get(), LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherIIItems.EYE_OF_THE_MIMIC.get())
-                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
-                        )
-                )
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)) //todo
+//                        .add(LootItem.lootTableItem(AetherIIItems.EYE_OF_THE_MIMIC.get())
+//                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
+//                        )
+//                )
         );
 
         this.add(AetherIIEntityTypes.DETONATION_SENTRY.get(), LootTable.lootTable());

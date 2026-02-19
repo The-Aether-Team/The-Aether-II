@@ -80,6 +80,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Keys
         this.addKeyInfo("category", "The Aether II");
         this.addKeyInfo("allow_dismounting_passenger.desc", "Allow Dismounting Passenger");
+
+        // TODO WIP ALPHA THINGS
+        this.addPerItemAbilityTooltip(AetherIIItems.KIRRID_PLATE.get(), 1, "§4§oWork in Progress§r§r");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZEPHYR_HUSK.get(), 1, "§4§oWork in Progress§r§r");
+        this.addPerItemAbilityTooltip(AetherIIItems.CHARGE_CATALYST.get(), 1, "§4§oWork in Progress§r§r");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_CORE.get(), 1, "§4§oWork in Progress§r§r");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CORE.get(), 1, "§4§oWork in Progress§r§r");
+        this.addPerItemAbilityTooltip(AetherIIItems.EYE_OF_THE_MIMIC.get(), 1, "§4§oWork in Progress§r§r");
     }
 
     private void addBlocks() {
@@ -1562,7 +1570,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Title Screen
         this.add("aether_ii.menu_title.the_aether_ii", "The Aether II");
-        this.addGuiText("menu.server", "Official Aether Testing Server");
     }
 
     private void addAdvancements() {

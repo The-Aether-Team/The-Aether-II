@@ -99,12 +99,14 @@ public interface TitleScreenBehavior {
     static boolean isMainButton(Component buttonText) {
         return buttonText.equals(Component.translatable("menu.singleplayer"))
                 || buttonText.equals(Component.translatable("menu.multiplayer"))
-                || buttonText.equals(Component.translatable("gui.aether_ii.menu.server"))
-                || buttonText.equals(Component.translatable("menu.online"))
                 || buttonText.equals(Component.literal("Create Test World"))
                 || buttonText.equals(Component.translatable("fml.menu.mods"))
                 || buttonText.equals(Component.translatable("menu.options"))
                 || buttonText.equals(Component.translatable("menu.quit"));
+    }
+
+    static boolean isHiddenButton(Component buttonText) {
+        return buttonText.equals(Component.translatable("menu.online"));
     }
 
     default Map<Component, AbstractWidget> getWidgetsByName() {
