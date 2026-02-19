@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_ferrosite": {
+    "has_disc": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:ferrosite"
+            "items": "#aether_ii:engraved_discs"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_ferrosite"
+      "has_disc"
     ]
   ],
   "rewards": {
