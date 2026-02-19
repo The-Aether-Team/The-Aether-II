@@ -67,10 +67,6 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> ENVIRONMENTAL_TREE_MOSS = createKey("holy_isles/environmental/tree_moss");
     public static final ResourceKey<DensityFunction> ENVIRONMENTAL_CRATER = createKey("holy_isles/environmental/crater");
 
-    public static final ResourceKey<DensityFunction> DUNGEON_DENSE_GUARDIAN_WOOD = createKey("holy_isles/dungeon/dense_guardian_wood");
-    public static final ResourceKey<DensityFunction> DUNGEON_STRIPPED_GUARDIAN_WOOD = createKey("holy_isles/dungeon/stripped_guardian_wood");
-    public static final ResourceKey<DensityFunction> DUNGEON_GUARDIAN_ROOTS = createKey("holy_isles/dungeon/guardian_roots");
-
     public static final ResourceKey<DensityFunction> CLOUDBED_NOISE = createKey("holy_isles/cloudbed/noise");
     public static final ResourceKey<DensityFunction> CLOUDBED_Y_OFFSET = createKey("holy_isles/cloudbed/y_offset");
 
