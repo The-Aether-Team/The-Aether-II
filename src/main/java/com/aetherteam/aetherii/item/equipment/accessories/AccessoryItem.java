@@ -64,13 +64,13 @@ public class AccessoryItem extends Item {
             AttributeInstance attribute = wearer.getAttribute(entry.attribute());
             AttributeModifier modifier = entry.modifier().getModifier(stack);
 
-            if (attribute != null) {
-                AttributeModifier newModifier = new AttributeModifier(EquipmentUtil.getSlotModifierId(modifier.id(), stack, slot, this.getSlotType().name()), modifier.amount(), modifier.operation());
 
-                if (!attribute.hasModifier(newModifier.id()) && entry.condition().test(stack, wearer)) {
-                    attribute.addTransientModifier(newModifier);
-                } else if (attribute.hasModifier(newModifier.id()) && (!entry.condition().test(stack, wearer) || newModifier.amount() != attribute.getModifier(newModifier.id()).amount())) {
-                    attribute.removeModifier(newModifier.id());
+            if (attribute != null) {
+                AetherII.LOGGER.info(attribute.getModifiers().toString());
+                if (!attribute.hasModifier(modifier.id()) && entry.condition().test(stack, wearer)) {
+                    attribute.addTransientModifier(modifier);
+                } else if (attribute.hasModifier(modifier.id()) && (!entry.condition().test(stack, wearer))) {
+                    attribute.removeModifier(modifier.id());
                 }
             }
         }

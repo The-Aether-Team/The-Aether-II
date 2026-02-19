@@ -1,34 +1,27 @@
 package com.aetherteam.aetherii.inventory.container;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.equipment.accessories.AccessoryItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.EntityAccessor;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.LivingEntityAccessor;
 import com.aetherteam.aetherii.network.packet.clientbound.SetAccessoriesPacket;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.game.ClientboundSetEquipmentPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
@@ -72,9 +65,8 @@ public class AccessoryContainer extends SimpleContainer {
                     }
                     map.put(i, stack);
                     AttributeMap entityAttributes = entity.getAttributes();
-                    AetherII.LOGGER.info(lastStack + " " + stack);
                     if (!lastStack.isEmpty() && lastStack.getItem() instanceof AccessoryItem lastAccessory) {
-                        Set<AccessoryItem.ConditionalAttribute> accessoryAttributes = lastAccessory.getBaseAttributes();
+                        Set<AccessoryItem.ConditionalAttribute> accessoryAttributes = lastAccessory.getAttributes(lastStack);
                         for (AccessoryItem.ConditionalAttribute conditionalAttribute : accessoryAttributes) {
                             AttributeInstance attributeinstance = entityAttributes.getInstance(conditionalAttribute.attribute());
                             if (attributeinstance != null) {
@@ -88,7 +80,7 @@ public class AccessoryContainer extends SimpleContainer {
                 for (Map.Entry<Integer, ItemStack> entry : map.entrySet()) {
                     ItemStack stack = entry.getValue();
                     if (!stack.isEmpty() && !stack.isBroken() && stack.getItem() instanceof AccessoryItem lastAccessory) {
-                        Set<AccessoryItem.ConditionalAttribute> accessoryAttributes = lastAccessory.getBaseAttributes();
+                        Set<AccessoryItem.ConditionalAttribute> accessoryAttributes = lastAccessory.getAttributes(stack);
                         for (AccessoryItem.ConditionalAttribute conditionalAttribute : accessoryAttributes) {
                             AttributeInstance attributeinstance = entity.getAttributes().getInstance(conditionalAttribute.attribute());
                             if (attributeinstance != null) {
@@ -102,12 +94,12 @@ public class AccessoryContainer extends SimpleContainer {
             if (map != null) {
                 if (!map.isEmpty()) {
                     List<Pair<Integer, ItemStack>> newList = Lists.newArrayListWithCapacity(map.size());
-                    for (int i = 0; i < newList.size(); i++) {
-                        ItemStack copyStack = map.get(i).copy();
+                    map.forEach((i, stack) -> {
+                        ItemStack copyStack = stack.copy();
                         this.equipItem(entity, i, this.lastItems.get(i), copyStack);
                         newList.add(Pair.of(i, copyStack));
                         this.lastItems.set(i, copyStack);
-                    }
+                    });
                     PacketDistributor.sendToAllPlayers(new SetAccessoriesPacket(entity.getId(), newList));
                 }
             }
