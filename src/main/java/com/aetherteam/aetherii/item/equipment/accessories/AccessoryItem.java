@@ -62,7 +62,7 @@ public class AccessoryItem extends Item {
         for (ConditionalAttribute entry : this.getAttributes(stack)) {
             AttributeInstance attribute = wearer.getAttribute(entry.attribute());
             AttributeModifier modifier = entry.modifier().getModifier(stack);
-            
+
             if (attribute != null) {
                 if (!attribute.hasModifier(modifier.id()) && entry.condition().test(stack, wearer)) {
                     attribute.addTransientModifier(modifier);
