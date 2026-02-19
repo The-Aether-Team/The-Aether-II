@@ -73,7 +73,6 @@ public class AetherJigsawStructure extends Structure {
 
     @Override
     public @NotNull Optional<GenerationStub> findGenerationPoint(@NotNull GenerationContext context) {
-
         ChunkGenerator generator = context.chunkGenerator();
         LevelHeightAccessor heightAccessor = context.heightAccessor();
         StructureTemplateManager templateManager = context.structureTemplateManager();
@@ -83,12 +82,7 @@ public class AetherJigsawStructure extends Structure {
 
         WorldgenRandom worldGenRandom = context.random();
         Rotation rotation = Rotation.getRandom(worldGenRandom);
-
         BlockPos testPos = startPool.value().getRandomTemplate(context.random()).getBoundingBox(templateManager, pos, rotation).getCenter();
-
-        BlockPos testPos90 = startPool.value().getRandomTemplate(context.random()).getBoundingBox(templateManager, pos, Rotation.CLOCKWISE_90).getCenter();
-        BlockPos testPos180 = startPool.value().getRandomTemplate(context.random()).getBoundingBox(templateManager, pos, Rotation.CLOCKWISE_180).getCenter();
-        BlockPos testPos270 = startPool.value().getRandomTemplate(context.random()).getBoundingBox(templateManager, pos, Rotation.COUNTERCLOCKWISE_90).getCenter();
 
         if (this.checkHeight(context, testPos.getX(), testPos.getZ(), discardBelowY, discardAboveY)) {
             return JigsawPlacement.addPieces(
