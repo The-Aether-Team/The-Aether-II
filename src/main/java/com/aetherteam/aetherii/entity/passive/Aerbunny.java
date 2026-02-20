@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
@@ -594,7 +595,7 @@ public class Aerbunny extends AetherTamableAnimal {
     @Override
     public boolean canRiderInteract() {
         if (this.getVehicle() instanceof Player vehicle) {
-            return vehicle.isShiftKeyDown();
+            return AetherIIClientProxy.isAerbunnyInteractable();
         }
         return true;
     }
@@ -606,7 +607,7 @@ public class Aerbunny extends AetherTamableAnimal {
     @Override
     public boolean isPickable() {
         if (this.getVehicle() instanceof Player player) {
-            if (!player.isShiftKeyDown()) {
+            if (!AetherIIClientProxy.isAerbunnyInteractable()) {
                 return false;
             } else {
                 return player.getBoundingBox().expandTowards(player.getViewVector(0.0F)).contains(this.getBoundingBox().getCenter().add(0, this.getBoundingBox().getSize() / 2, 0));
