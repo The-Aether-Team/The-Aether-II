@@ -21,6 +21,14 @@ public class AccessorySlot extends Slot {
     }
 
     @Override
+    public void setByPlayer(ItemStack newItem, ItemStack oldItem) {
+        if (this.container instanceof AccessoryContainer accessoryContainer) {
+            accessoryContainer.onEquipItem(this.owner, this.index, oldItem, newItem);
+        }
+        super.setByPlayer(newItem, oldItem);
+    }
+
+    @Override
     public int getMaxStackSize() {
         return 1;
     }

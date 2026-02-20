@@ -96,7 +96,6 @@ public class AccessoryContainer extends SimpleContainer {
                     List<Pair<Integer, ItemStack>> newList = Lists.newArrayListWithCapacity(map.size());
                     map.forEach((i, stack) -> {
                         ItemStack copyStack = stack.copy();
-                        this.equipItem(entity, i, this.lastItems.get(i), copyStack);
                         newList.add(Pair.of(i, copyStack));
                         this.lastItems.set(i, copyStack);
                     });
@@ -113,10 +112,10 @@ public class AccessoryContainer extends SimpleContainer {
     }
 
     public void setItemWithEquip(LivingEntity wearer, int i, ItemStack stack) {
-        this.equipItem(wearer, i, this.getItems().set(i, stack), stack);
+        this.onEquipItem(wearer, i, this.getItems().set(i, stack), stack);
     }
 
-    public void equipItem(LivingEntity wearer, int i, ItemStack oldItem, ItemStack newItem) {
+    public void onEquipItem(LivingEntity wearer, int i, ItemStack oldItem, ItemStack newItem) {
         if (!wearer.isSpectator()) {
             if (!ItemStack.isSameItemSameComponents(oldItem, newItem) && !((EntityAccessor) wearer).aether_ii$getFirstTick()) {
                 if (!wearer.isSilent()) {

@@ -62,12 +62,12 @@ public class AccessoryUtil {
             if (stack.getCount() <= 1) {
                 ItemStack resultStack = itemstack.isEmpty() ? stack : itemstack.copyAndClear();
                 ItemStack insertedStack = player.isCreative() ? stack.copy() : stack.copyAndClear();
-                container.getItems().set(index, insertedStack);
+                container.setItemWithEquip(player, index, insertedStack);
                 return InteractionResult.SUCCESS.heldItemTransformedTo(resultStack);
             } else {
                 ItemStack copiedStack = itemstack.copyAndClear();
                 ItemStack insertedStack = stack.consumeAndReturn(1, player);
-                container.getItems().set(index, insertedStack);
+                container.setItemWithEquip(player, index, insertedStack);
                 if (!player.getInventory().add(copiedStack)) {
                     player.drop(copiedStack, false);
                 }
