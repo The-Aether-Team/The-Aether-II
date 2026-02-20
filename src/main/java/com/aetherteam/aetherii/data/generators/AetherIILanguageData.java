@@ -1953,7 +1953,7 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addMusic("aether_sunset", "Emile van Krieken - Sunset");
         this.addMusic("aether_ambience1", "Emile van Krieken - Sentience");
         this.addMusic("boss.slider_fight", "Emile van Krieken - Labyrinth's Vengeance");
-        this.addMusic("aether_ii_menu", "Emile van Krieken - Aether II Menu Theme");
+        this.addMusic("aether_ii_menu", "anankalisto - Resonance of the Gods");
 
         // Jukebox Songs
         this.addJukeboxSong("aether_tune", "Noisestorm - Aether Tune");
