@@ -269,15 +269,6 @@ public class Aerbunny extends AetherTamableAnimal {
         }
     }
 
-    @Override
-    public Vec3 getVehicleAttachmentPoint(Entity entity) {
-        Vec3 vehicleAttachmentPoint = super.getVehicleAttachmentPoint(entity);
-        if (entity instanceof Player player && player.hasPose(Pose.SLEEPING) && player.getBedOrientation() != null) {
-            vehicleAttachmentPoint = vehicleAttachmentPoint.add(0, 0.1, -0.35).yRot(player.getBedOrientation().toYRot() * Mth.DEG_TO_RAD);
-        }
-        return vehicleAttachmentPoint;
-    }
-
     /**
      * Handles right-clicking the Aerbunny for mounting and dismounting.
      *
@@ -599,6 +590,15 @@ public class Aerbunny extends AetherTamableAnimal {
     @Override
     public boolean isFood(ItemStack stack) {
         return stack.is(AetherIITags.Items.AERBUNNY_FOOD);
+    }
+
+    @Override
+    public Vec3 getVehicleAttachmentPoint(Entity entity) {
+        Vec3 vehicleAttachmentPoint = super.getVehicleAttachmentPoint(entity);
+        if (entity instanceof Player player && player.hasPose(Pose.SLEEPING) && player.getBedOrientation() != null) {
+            vehicleAttachmentPoint = vehicleAttachmentPoint.add(0, 0.1, 0.5).yRot(-player.getBedOrientation().toYRot() * Mth.DEG_TO_RAD);
+        }
+        return vehicleAttachmentPoint;
     }
 
     @Override
