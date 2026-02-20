@@ -49,7 +49,7 @@ public class Zephyr extends Mob implements Enemy {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(4, new ZephyrBlowAwayGoal(this, 8));
-        this.goalSelector.addGoal(5, new ZephyrShootSnowballGoal(this, 8));
+        this.goalSelector.addGoal(5, new ZephyrShootSnowballGoal(this, 8, 40));
         this.goalSelector.addGoal(6, new RandomFloatAroundGoal(this));
         this.goalSelector.addGoal(7, new FlyingLookGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, false));
@@ -264,19 +264,19 @@ public class Zephyr extends Mob implements Enemy {
 
     protected static class ZephyrShootSnowballGoal extends Goal {
         private final Zephyr zephyr;
-        private final float attackThreshold;
         private final float attackThresholdSqr;
+        private final float attackFarLimitSqr;
         private LivingEntity trackedTarget;
 
-        public ZephyrShootSnowballGoal(Zephyr zephyr, float attackThreshold) {
+        public ZephyrShootSnowballGoal(Zephyr zephyr, float attackThreshold, float attackFarLimit) {
             this.zephyr = zephyr;
-            this.attackThreshold = attackThreshold;
             this.attackThresholdSqr = attackThreshold * attackThreshold;
+            this.attackFarLimitSqr = attackFarLimit * attackFarLimit;
         }
 
         @Override
         public boolean canUse() {
-            return this.zephyr.getTarget() != null && this.zephyr.getTarget().isAlive() && this.zephyr.distanceToSqr(this.zephyr.getTarget()) >= this.attackThresholdSqr && this.zephyr.getBlowChargeTime() == -40 && !this.zephyr.getTarget().hasEffect(AetherIIEffects.WEBBED);
+            return this.zephyr.getTarget() != null && this.zephyr.getTarget().isAlive() && this.zephyr.distanceToSqr(this.zephyr.getTarget()) >= this.attackThresholdSqr && this.zephyr.distanceToSqr(this.zephyr.getTarget()) < this.attackFarLimitSqr && this.zephyr.getBlowChargeTime() == -40 && !this.zephyr.getTarget().hasEffect(AetherIIEffects.WEBBED);
         }
 
         @Override
@@ -299,11 +299,9 @@ public class Zephyr extends Mob implements Enemy {
         @Override
         public void tick() {
             if (this.trackedTarget != null) {
-                boolean canSee = this.zephyr.hasLineOfSight(this.trackedTarget);
-
                 this.zephyr.setProjectileChargeTime(this.zephyr.getProjectileChargeTime() + 1);
 
-                if (this.zephyr.distanceTo(this.trackedTarget) < this.attackThreshold) {
+                if (this.zephyr.distanceToSqr(this.trackedTarget) < this.attackThresholdSqr) {
                     double d0 = this.zephyr.getX() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
                     double d1 = this.zephyr.getY() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
                     double d2 = this.zephyr.getZ() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
@@ -328,7 +326,12 @@ public class Zephyr extends Mob implements Enemy {
                     this.zephyr.level().addFreshEntity(snowball);
                     this.zephyr.setProjectileChargeTime(-40);
 
-                    if (!canSee || this.zephyr.getTarget() == null || !this.zephyr.getTarget().isAlive() || this.zephyr.distanceToSqr(this.trackedTarget) < this.attackThresholdSqr) {
+                    if (!this.zephyr.hasLineOfSight(this.trackedTarget)
+                            || this.zephyr.getTarget() == null
+                            || !this.zephyr.getTarget().isAlive()
+                            || this.zephyr.distanceToSqr(this.trackedTarget) < this.attackThresholdSqr
+                            || this.zephyr.distanceToSqr(this.zephyr.getTarget()) >= this.attackFarLimitSqr
+                            || this.zephyr.getTarget().hasEffect(AetherIIEffects.WEBBED)) {
                         this.trackedTarget = null;
                     }
                 }
