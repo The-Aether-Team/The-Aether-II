@@ -3,9 +3,11 @@ package com.aetherteam.aetherii.effect.harmful;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.MobEffectInstanceAccessor;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
@@ -40,8 +42,9 @@ public class WebbedEffect extends MobEffect {
 
     public static void reduceByJumping(LivingEvent.LivingJumpEvent event) {
         LivingEntity entity = event.getEntity();
-        if (!entity.level().isClientSide() && !entity.hasEffect(AetherIIEffects.WEBBED)) {
-            entity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).reduceBuildup(AetherIIEffects.WEBBED, 10);
+        MobEffectInstance instance = entity.getEffect(AetherIIEffects.WEBBED);
+        if (instance != null) {
+            ((MobEffectInstanceAccessor) instance).aether_ii$setDuration(Math.max(0, instance.mapDuration(mapper -> mapper - 10)));
         }
     }
 }
