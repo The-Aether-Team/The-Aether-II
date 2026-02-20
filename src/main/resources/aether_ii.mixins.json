@@ -6,7 +6,6 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "aether_ii.refmap.json",
   "mixins": [
-    "client.AdvancementMixin",
     "common.AttributeUtilMixin",
     "common.BoneMealItemMixin",
     "common.CrossbowItemMixin",
@@ -45,6 +44,7 @@
     "debug.accessor.PathAccessor"
   ],
   "client": [
+    "client.AdvancementMixin",
     "client.BlockModelWrapperMixin",
     "client.BlockRenderDispatcherMixin",
     "client.BossHealthOverlayMixin",
@@ -56,6 +56,7 @@
     "client.LayerRenderStateMixin",
     "client.LevelRendererMixin",
     "client.LiquidBlockRendererMixin",
+    "client.LivingEntityRendererMixin",
     "client.LocalPlayerMixin",
     "client.ModelBlockRendererMixin",
     "client.MultiPlayerGameModeMixin",
