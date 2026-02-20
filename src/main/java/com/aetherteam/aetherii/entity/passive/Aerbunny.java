@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
@@ -592,9 +593,18 @@ public class Aerbunny extends AetherTamableAnimal {
     }
 
     @Override
+    public Vec3 getVehicleAttachmentPoint(Entity entity) {
+        Vec3 vehicleAttachmentPoint = super.getVehicleAttachmentPoint(entity);
+        if (entity instanceof Player player && player.hasPose(Pose.SLEEPING) && player.getBedOrientation() != null) {
+            vehicleAttachmentPoint = vehicleAttachmentPoint.add(0, 0.1, 0.5).yRot(-player.getBedOrientation().toYRot() * Mth.DEG_TO_RAD);
+        }
+        return vehicleAttachmentPoint;
+    }
+
+    @Override
     public boolean canRiderInteract() {
         if (this.getVehicle() instanceof Player vehicle) {
-            return vehicle.isShiftKeyDown();
+            return AetherIIClientProxy.isAerbunnyInteractable();
         }
         return true;
     }
@@ -606,7 +616,7 @@ public class Aerbunny extends AetherTamableAnimal {
     @Override
     public boolean isPickable() {
         if (this.getVehicle() instanceof Player player) {
-            if (!player.isShiftKeyDown()) {
+            if (!AetherIIClientProxy.isAerbunnyInteractable()) {
                 return false;
             } else {
                 return player.getBoundingBox().expandTowards(player.getViewVector(0.0F)).contains(this.getBoundingBox().getCenter().add(0, this.getBoundingBox().getSize() / 2, 0));

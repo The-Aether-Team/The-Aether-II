@@ -50,6 +50,10 @@ public class AetherIIClientProxy {
         return level instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HolyIslesSpecialEffects;
     }
 
+    public static boolean isAerbunnyInteractable() {
+        return AetherIIKeyMappings.ALLOW_DISMOUNTING_PASSENGER.isDown();
+    }
+
     public static AdvancementHolder getAdvancementParent(AdvancementHolder advancement) {
         if (Minecraft.getInstance().player != null && advancement.value().parent().isPresent()) {
             return Minecraft.getInstance().player.connection.getAdvancements().get(advancement.value().parent().get());
