@@ -1218,7 +1218,8 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("aether_ii:music/polarity").stream(),
                         sound("aether_ii:music/sunbeam").stream(),
                         sound("aether_ii:music/thin_air").stream(),
-                        sound("aether_ii:music/walking_dream").stream()
+                        sound("aether_ii:music/walking_dream").stream(),
+                        sound("aether_ii:music/eulogy_for_a_whale").stream()
                 )
         );
         this.add(AetherIISoundEvents.MUSIC_AETHER_NIGHT,
@@ -1228,7 +1229,8 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("aether_ii:music/polarity").stream(),
                         sound("aether_ii:music/sunbeam").stream(),
                         sound("aether_ii:music/thin_air").stream(),
-                        sound("aether_ii:music/walking_dream").stream()
+                        sound("aether_ii:music/walking_dream").stream(),
+                        sound("aether_ii:music/eulogy_for_a_whale").stream()
                 )
         );
         this.add(AetherIISoundEvents.MUSIC_AETHER_SUNRISE,
