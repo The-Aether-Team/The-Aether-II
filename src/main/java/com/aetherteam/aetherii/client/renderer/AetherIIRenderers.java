@@ -27,6 +27,7 @@ import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.client.renderer.item.model.SkyrootBedSpecialRenderer;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
+import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import net.minecraft.client.model.EntityModel;
@@ -59,6 +60,7 @@ public class AetherIIRenderers {
     public static final ContextKey<Boolean> RIDING_SKIFF_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "riding_skiff"));
     public static final ContextKey<Float> SKIFF_STEERING_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skiff_steering"));
     public static final ContextKey<Boolean> RIDING_MOA_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "riding_moa"));
+    public static final ContextKey<Boolean> HAS_AERBUNNY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "has_aerbunny"));
     public static final ContextKey<List<SwetRenderState>> SWET_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet"));
     public static final ContextKey<List<EntityType<?>>> STUCK_PROJECTILES_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "stuck_projectiles"));
 
@@ -98,6 +100,7 @@ public class AetherIIRenderers {
                 playerRenderState.setRenderData(SKIFF_STEERING_KEY, cloudSkiff.steering);
             }
             playerRenderState.setRenderData(STUCK_PROJECTILES_KEY, abstractClientPlayer.getData(AetherIIDataAttachments.PLAYER).getStuckProjectiles());
+            playerRenderState.setRenderData(HAS_AERBUNNY, abstractClientPlayer.getFirstPassenger() instanceof Aerbunny);
         });
     }
 

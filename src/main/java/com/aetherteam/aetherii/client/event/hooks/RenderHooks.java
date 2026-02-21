@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.gui.component.guidebook.GuidebookButton;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookEquipmentScreen;
+import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.aetherteam.aetherii.client.renderer.item.tooltip.ClientCharmTooltip;
 import com.aetherteam.aetherii.client.renderer.level.HolyIslesSpecialEffects;
 import com.aetherteam.aetherii.entity.monster.dungeon.boss.AetherBossMob;
@@ -18,6 +19,7 @@ import com.aetherteam.aetherii.mixin.mixins.common.accessor.AttributeMapAccessor
 import com.aetherteam.aetherii.network.packet.serverbound.OpenGuidebookPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.OpenInventoryPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.OutpostRespawnPacket;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
@@ -33,6 +35,7 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -296,5 +299,11 @@ public class RenderHooks {
 
     public static boolean isAetherBossBar(UUID uuid) {
         return BOSS_EVENTS.containsKey(uuid);
+    }
+
+    public static void offsetNameTag(EntityRenderState entityRenderState, PoseStack poseStack) {
+        if (Boolean.TRUE.equals(entityRenderState.getRenderData(AetherIIRenderers.HAS_AERBUNNY))) {
+            poseStack.translate(0.0, 0.3, 0.0);
+        }
     }
 }

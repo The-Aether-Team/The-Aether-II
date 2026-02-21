@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.client.event.hooks.RenderHooks;
 import com.aetherteam.aetherii.client.gui.screen.AlphaInfoScreen;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.DialogScreenAccessor;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -17,9 +18,8 @@ import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.dialog.DialogScreen;
-import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.player.ClientInput;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.MusicInfo;
 import net.minecraft.client.sounds.SoundEngine;
@@ -58,6 +58,9 @@ public class AetherIIClientEventListeners {
         bus.addListener(EventPriority.LOWEST, AetherIIClientEventListeners::onAddTooltipsLowest);
         bus.addListener(AetherIIClientEventListeners::onAddAttributeTooltips);
         bus.addListener(AetherIIClientEventListeners::onGatherTooltipComponents);
+
+        // Entity
+        bus.addListener(AetherIIClientEventListeners::doRenderNameTag);
 
         // World
         bus.addListener(AetherIIClientEventListeners::onComputeFogColor);
@@ -158,6 +161,13 @@ public class AetherIIClientEventListeners {
         List<Either<FormattedText, TooltipComponent>> tooltipElements = event.getTooltipElements();
 
         RenderHooks.addCharmTooltip(itemStack, tooltipElements);
+    }
+
+    public static void doRenderNameTag(RenderNameTagEvent.DoRender event) {
+        EntityRenderState renderState = event.getEntityRenderState();
+        PoseStack poseStack = event.getPoseStack();
+
+        RenderHooks.offsetNameTag(renderState, poseStack);
     }
 
     public static void onComputeFogColor(ViewportEvent.ComputeFogColor event) {
