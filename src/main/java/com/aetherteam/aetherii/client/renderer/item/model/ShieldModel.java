@@ -76,20 +76,7 @@ public class ShieldModel implements ItemModel {
         if (front) {
             quads.removeIf((bakedQuad) -> bakedQuad.direction() != Direction.SOUTH);
         } else {
-            quads.removeIf((bakedQuad) -> {
-                boolean flag = bakedQuad.direction() == Direction.SOUTH;
-                if (yOffset < 0) {
-                    flag = flag || bakedQuad.direction() == Direction.UP;
-                } else {
-                    flag = flag || bakedQuad.direction() == Direction.DOWN;
-                }
-                if (xOffset < 0) {
-                    flag = flag || bakedQuad.direction() == Direction.EAST;
-                } else {
-                    flag = flag || bakedQuad.direction() == Direction.WEST;
-                }
-                return flag;
-            });
+            quads.removeIf((bakedQuad) -> bakedQuad.direction() == Direction.SOUTH);
         }
         return quads;
     }
