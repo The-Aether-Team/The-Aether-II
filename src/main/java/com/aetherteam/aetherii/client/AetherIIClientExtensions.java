@@ -57,7 +57,7 @@ public class AetherIIClientExtensions {
         @Nullable
         @Override
         public HumanoidModel.ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
-            if (entityLiving.getUsedItemHand() == hand && entityLiving.getUseItemRemainingTicks() > 0) {
+            if (entityLiving.getUsedItemHand() == hand && entityLiving.getItemInHand(hand).is(itemStack.getItem()) && entityLiving.isUsingItem()) {
                 return HumanoidModel.ArmPose.THROW_SPEAR;
             }
             return IClientItemExtensions.super.getArmPose(entityLiving, hand, itemStack);
@@ -65,7 +65,7 @@ public class AetherIIClientExtensions {
 
         @Override
         public boolean applyForgeHandTransform(PoseStack poseStack, LocalPlayer player, HumanoidArm arm, ItemStack itemInHand, float partialTick, float equipProcess, float swingProcess) {
-            if (player.isUsingItem() && player.getUseItemRemainingTicks() > 0) {
+            if (player.isUsingItem()) {
                 int i = arm == HumanoidArm.RIGHT ? 1 : -1;
                 poseStack.translate((float)i * 0.56F, -0.52F + equipProcess * -0.6F, -0.72F);
 
@@ -103,7 +103,7 @@ public class AetherIIClientExtensions {
         @Nullable
         @Override
         public HumanoidModel.ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
-            if (entityLiving.getUsedItemHand() == hand && entityLiving.getUseItemRemainingTicks() > 0) {
+            if (entityLiving.getUsedItemHand() == hand && entityLiving.getItemInHand(hand).is(itemStack.getItem()) && entityLiving.isUsingItem()) {
                 return AetherIIArmPoses.DART_SHOOTER;
             }
             return IClientItemExtensions.super.getArmPose(entityLiving, hand, itemStack);
@@ -114,7 +114,7 @@ public class AetherIIClientExtensions {
         @Nullable
         @Override
         public HumanoidModel.ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
-            if (entityLiving.getUsedItemHand() == hand && entityLiving.getUseItemRemainingTicks() > 0) {
+            if (entityLiving.getUsedItemHand() == hand && entityLiving.getItemInHand(hand).is(itemStack.getItem()) && entityLiving.isUsingItem()) {
                 return AetherIIArmPoses.GLIDING;
             }
             return IClientItemExtensions.super.getArmPose(entityLiving, hand, itemStack);

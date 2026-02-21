@@ -12,7 +12,7 @@ public class ParachutingRange implements RangeSelectItemModelProperty {
 
     @Override
     public float get(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
-        return livingEntity == null ? 0.0F : ItemStack.isSameItem(itemStack, livingEntity.getUseItem()) && livingEntity.getUseItemRemainingTicks() > 0 ? 1.0F : 0.0F;
+        return livingEntity == null ? 0.0F : ItemStack.isSameItem(itemStack, livingEntity.getItemInHand(livingEntity.getUsedItemHand())) && livingEntity.isUsingItem() ? 1.0F : 0.0F;
     }
 
     @Override
