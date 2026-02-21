@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.generators.loot;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
+import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.BuildupContents;
@@ -28,6 +29,29 @@ public class AetherIIChestLoot implements LootTableSubProvider {
     }
     @Override
     public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> builder) {
+
+        builder.accept(AetherIILoot.CHESTS_MOA_FEATHERS, LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.LIGHT_BLUE)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.BLACK)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.BLOOMING_RED)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.BLUE)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.BROWN)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.CLASSIC_BLACK)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.CYAN)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.GRAY)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.GREEN)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.LIGHT_GRAY)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.LIME)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.MAGENTA)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.ORANGE)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.PINK)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.PURPLE)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.RED)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.WHITE)))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).apply(SetComponentsFunction.setComponent(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.YELLOW)))
+                )
+        );
 
         builder.accept(AetherIILoot.CHESTS_CAMP_SELECTOR, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
@@ -101,7 +125,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_SHARD).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.CLOUDTWINE).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.MOA_FEATHER).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_MOA_FEATHERS).setWeight(2)).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F)))
                         .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F))))
                 )
 

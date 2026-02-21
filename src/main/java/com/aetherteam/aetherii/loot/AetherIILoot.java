@@ -43,6 +43,8 @@ public class AetherIILoot {
     public static final ResourceKey<LootTable> SHEARING_SHEEPUFF = register("shearing/sheepuff");
 
     // Chests
+    public static final ResourceKey<LootTable> CHESTS_MOA_FEATHERS = register("chests/moa_feathers");
+
     public static final ResourceKey<LootTable> CHESTS_CAMP_SELECTOR = register("chests/camp/selector");
     public static final ResourceKey<LootTable> CHESTS_CAMP_FARMER = register("chests/camp/farmer");
     public static final ResourceKey<LootTable> CHESTS_CAMP_HUNTER = register("chests/camp/hunter");
