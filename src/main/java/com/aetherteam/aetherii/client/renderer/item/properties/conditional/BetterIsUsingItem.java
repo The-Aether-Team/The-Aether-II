@@ -14,7 +14,7 @@ public record BetterIsUsingItem() implements ConditionalItemModelProperty {
 
     @Override
     public boolean get(ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int i, ItemDisplayContext context) {
-        return entity != null && entity.isUsingItem() && ItemStack.isSameItem(entity.getUseItem(), stack);
+        return entity != null && ItemStack.isSameItem(stack, entity.getItemInHand(entity.getUsedItemHand())) && entity.isUsingItem();
     }
 
     @Override
