@@ -81,6 +81,17 @@ public class BrettlPlantBlock extends GrowingPlantBodyBlock implements SimpleWat
     }
 
     @Override
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!state.getValue(GROWN) && !level.isClientSide() && !player.isCreative()) {
+            for (BlockPos abovePos = pos.above(); level.getBlockState(abovePos).is(AetherIIBlocks.BRETTL_PLANT) || level.getBlockState(abovePos).is(AetherIIBlocks.BRETTL_PLANT_TIP); abovePos = abovePos.above()) {
+                BlockState aboveState = level.getBlockState(abovePos);
+                dropResources(aboveState, level, abovePos, null, player, player.getMainHandItem());
+            }
+        }
+        return super.playerWillDestroy(level, pos, state, player);
+    }
+
+    @Override
     public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool) {
         super.playerDestroy(level, player, pos, state, blockEntity, tool);
         if (state.getValue(GROWN)) {
