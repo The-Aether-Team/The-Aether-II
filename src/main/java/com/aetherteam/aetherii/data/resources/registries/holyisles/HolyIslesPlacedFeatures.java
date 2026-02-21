@@ -435,7 +435,7 @@ public class HolyIslesPlacedFeatures {
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
                 BiomeFilter.biome());
         register(context, BRETTL_PATCH_LAKE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRETTL_PLANT),
-                CountPlacement.of(6),
+                CountPlacement.of(5),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.BRETTL_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
