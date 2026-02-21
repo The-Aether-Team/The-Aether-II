@@ -9,8 +9,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class AetherIIStructureProcessorTypes {
     public static final DeferredRegister<StructureProcessorType<?>> STRUCTURE_PROCESSOR_TYPES = DeferredRegister.create(Registries.STRUCTURE_PROCESSOR, AetherII.MODID);
 
-    public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<DensityFunctionProcessor>> DENSITY_FUNCTION = STRUCTURE_PROCESSOR_TYPES.register("density_function", () -> () -> DensityFunctionProcessor.CODEC);
-    public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<CappedGravityProcessor>> GRAVITY_CAPPED = STRUCTURE_PROCESSOR_TYPES.register("gravity_capped", () -> () -> CappedGravityProcessor.CODEC);
     public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<CopyRuleProcessor>> COPY_RULE = STRUCTURE_PROCESSOR_TYPES.register("copy_rule", () -> () -> CopyRuleProcessor.CODEC);
     public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<BossRoomProcessor>> BOSS_ROOM = STRUCTURE_PROCESSOR_TYPES.register("boss_room", () -> () -> BossRoomProcessor.CODEC);
     public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<MimicContainerProcessor>> MIMIC_CONTAINER = STRUCTURE_PROCESSOR_TYPES.register("mimic_container", () -> () -> MimicContainerProcessor.CODEC);

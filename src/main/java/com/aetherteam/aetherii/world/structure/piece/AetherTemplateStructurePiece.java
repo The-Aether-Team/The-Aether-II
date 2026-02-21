@@ -26,13 +26,13 @@ import java.util.function.Function;
 public abstract class AetherTemplateStructurePiece extends TemplateStructurePiece {
     protected final Holder<StructureProcessorList> processors;
     public AetherTemplateStructurePiece(StructurePieceType type, StructureTemplateManager templateManager, ResourceLocation name, StructurePlaceSettings placeSettings, BlockPos templatePosition, Holder<StructureProcessorList> processors) {
-        super(type, 0, templateManager, name, name.toString(), addProcessors(placeSettings, processors), templatePosition);
+        super(type, 0, templateManager, name, name.toString(), addProcessors(placeSettings.setLiquidSettings(LiquidSettings.IGNORE_WATERLOGGING), processors), templatePosition);
         this.setOrientation(this.getRotation().rotate(Direction.SOUTH));
         this.processors = processors;
     }
 
     public AetherTemplateStructurePiece(StructurePieceType type, RegistryAccess access, CompoundTag tag, StructureTemplateManager templateManager, Function<ResourceLocation, StructurePlaceSettings> settingsFactory) {
-        super(type, tag, templateManager, settingsFactory.andThen(settings -> readSettings(tag, settings, access)));
+        super(type, tag, templateManager, settingsFactory.andThen(settings -> readSettings(tag, settings.setLiquidSettings(LiquidSettings.IGNORE_WATERLOGGING), access)));
         this.setOrientation(this.getRotation().rotate(Direction.SOUTH));
         this.processors = readProcessors(tag, access);
     }
