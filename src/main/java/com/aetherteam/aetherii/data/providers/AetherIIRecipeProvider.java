@@ -99,6 +99,16 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         }
     }
 
+    protected void washDyedBlock(List<Item> dyeableItems, Item output, String group) {
+        List<ItemLike> ingredients = dyeableItems.stream().filter(itemElement -> !itemElement.equals(output)).map(ItemStack::new).map(ItemStack::getItem).collect(Collectors.toList());
+        ShapelessRecipeBuilder.shapeless(this.getter, RecipeCategory.BUILDING_BLOCKS, output)
+                .requires(AetherIIItems.WATER_VIAL)
+                .requires(Ingredient.of(ingredients.toArray(ItemLike[]::new)))
+                .group(group)
+                .unlockedBy("has_water_vial", has(AetherIIItems.WATER_VIAL))
+                .save(this.output, this.name("wash_" + getItemName(output)));
+    }
+
     protected void bed(HolderGetter<Item> getter, ItemLike result, ItemLike wool) {
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, result)
                 .group("skyroot_bed")
