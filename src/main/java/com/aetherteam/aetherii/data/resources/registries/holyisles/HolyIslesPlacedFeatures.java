@@ -62,6 +62,7 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ORANGE_TREE_PATCH = createKey("orange_tree_patch");
     public static final ResourceKey<PlacedFeature> ORANGE_TREE_PATCH_RARE = createKey("orange_tree_patch_rare");
     public static final ResourceKey<PlacedFeature> ORANGE_TREE_PATCH_IRRADIATED = createKey("orange_tree_patch_irradiated");
+    public static final ResourceKey<PlacedFeature> BRETTL_PATCH_LAKE = createKey("brettl_patch_lake");
     public static final ResourceKey<PlacedFeature> BRETTL_PATCH_IRRADIATED = createKey("brettl_patch_irradiated");
 
     public static final ResourceKey<PlacedFeature> HOLY_ISLES_FLOWER_PATCH = createKey("holy_isles_flower_patch");
@@ -432,6 +433,12 @@ public class HolyIslesPlacedFeatures {
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
+                BiomeFilter.biome());
+        register(context, BRETTL_PATCH_LAKE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRETTL_PLANT),
+                CountPlacement.of(6),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.BRETTL_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
                 BiomeFilter.biome());
         register(context, BRETTL_PATCH_IRRADIATED, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRETTL_PLANT),
                 CountPlacement.of(2),

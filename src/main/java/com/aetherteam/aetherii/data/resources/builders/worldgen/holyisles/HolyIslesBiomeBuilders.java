@@ -144,6 +144,7 @@ public class HolyIslesBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.VALKYRIE_SPROUT_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.AETHER_BUSH_PATCH_FIELD)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.ORANGE_TREE_PATCH)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.BRETTL_PATCH_LAKE)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HolyIslesPlacedFeatures.FALLEN_SKYROOT_LOG),
                 new MobSpawnSettings.Builder().creatureGenerationProbability(0.218F)
                         .addSpawn(MobCategory.CREATURE, 14, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), 1, 2))
