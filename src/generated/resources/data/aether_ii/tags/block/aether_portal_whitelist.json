@@ -1,5 +1,21 @@
 {
   "values": [
-    "#aether_ii:aether_dirt"
+    "aether_ii:aether_grass_block",
+    "aether_ii:enchanted_aether_grass_block",
+    "aether_ii:aether_dirt",
+    "aether_ii:quicksoil",
+    "aether_ii:ferrosite_sand",
+    "aether_ii:ferrosite_mud",
+    "aether_ii:arctic_snow",
+    "aether_ii:arctic_snow_block",
+    "aether_ii:short_aether_grass",
+    "aether_ii:medium_aether_grass",
+    "aether_ii:tall_aether_grass",
+    "aether_ii:blueberry_bush",
+    "aether_ii:aether_bush",
+    "aether_ii:holystone_rock",
+    "aether_ii:skyroot_twig",
+    "aether_ii:valkyrie_sprout",
+    "#minecraft:flowers"
   ]
 }
