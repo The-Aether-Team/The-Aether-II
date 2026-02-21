@@ -1059,9 +1059,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy(getHasName(AetherIIItems.CLOUDTWINE), has(AetherIIItems.CLOUDTWINE))
                 .save(this.output, this.name(getSimpleRecipeName(AetherIIBlocks.CLOUDWOOL)));
         this.colorBlockWithDye(dyes, wool, AetherIIBlocks.CLOUDWOOL.asItem(), "wool");
+        this.washDyedBlock(wool, AetherIIBlocks.CLOUDWOOL.asItem(), "wool");
         
         // Carpet
         this.colorBlockWithDye(dyes, carpet, AetherIIBlocks.CLOUDWOOL_CARPET.asItem(), "carpet");
+        this.washDyedBlock(carpet, AetherIIBlocks.CLOUDWOOL_CARPET.asItem(), "carpet");
         this.carpet(AetherIIBlocks.CLOUDWOOL_CARPET, AetherIIBlocks.CLOUDWOOL.get());
         this.carpet(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET, AetherIIBlocks.WHITE_CLOUDWOOL.get());
         this.carpet(AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET, AetherIIBlocks.ORANGE_CLOUDWOOL.get());
@@ -1082,6 +1084,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         // Skyroot Beds
         this.colorBlockWithDye(dyes, bed, AetherIIBlocks.SKYROOT_BED.asItem(), "bed");
+        this.washDyedBlock(bed, AetherIIBlocks.SKYROOT_BED.asItem(), "bed");
         this.bed(getter, AetherIIBlocks.SKYROOT_BED, AetherIIBlocks.CLOUDWOOL);
         this.bed(getter, AetherIIBlocks.WHITE_SKYROOT_BED, AetherIIBlocks.WHITE_CLOUDWOOL);
         this.bed(getter, AetherIIBlocks.ORANGE_SKYROOT_BED, AetherIIBlocks.ORANGE_CLOUDWOOL);

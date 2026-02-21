@@ -7,11 +7,13 @@ import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.brain.KirridAi;
 import com.aetherteam.aetherii.entity.ai.navigator.KirridPathNavigation;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import com.google.common.collect.Maps;
 import com.mojang.serialization.Dynamic;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -42,9 +44,9 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.DyeItem;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
@@ -245,6 +247,8 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
+        PotionContents potionContents = itemStack.get(DataComponents.POTION_CONTENTS);
+
         if (itemStack.getItem() instanceof DyeItem dyeItem) {
             DyeColor dyeColor = dyeItem.getDyeColor();
             KirridColor kirridColor = KirridColor.KIRRID_COLOR_BY_DYE.get(dyeColor);
@@ -254,6 +258,17 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
                     this.setColor(Optional.of(kirridColor));
                     if (!player.getAbilities().instabuild) {
                         itemStack.shrink(1);
+                    }
+                }
+            }
+        } else if (itemStack.is(AetherIIItems.WATER_VIAL) || (potionContents != null && potionContents.is(Potions.WATER))) {
+            if (!this.getColor().isEmpty()) {
+                player.swing(hand);
+                if (!player.level().isClientSide()) {
+                    this.setColor(Optional.empty());
+                    if (!player.getAbilities().instabuild) {
+                        Item result = itemStack.is(AetherIIItems.WATER_VIAL) ? AetherIIItems.SCATTERGLASS_VIAL.get() : Items.GLASS_BOTTLE;
+                        player.setItemInHand(hand, ItemUtils.createFilledResult(itemStack, player, new ItemStack(result)));
                     }
                 }
             }
