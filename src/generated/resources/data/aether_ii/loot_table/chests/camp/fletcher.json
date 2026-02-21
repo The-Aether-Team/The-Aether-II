@@ -62,19 +62,8 @@
           "weight": 2
         },
         {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "aether_ii:moa_feather",
+          "type": "minecraft:loot_table",
+          "value": "aether_ii:chests/moa_feathers",
           "weight": 2
         },
         {
@@ -91,6 +80,17 @@
             }
           ],
           "name": "aether_ii:skyroot_stick"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": {
+            "type": "minecraft:uniform",
+            "max": 3.0,
+            "min": 2.0
+          },
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": {
