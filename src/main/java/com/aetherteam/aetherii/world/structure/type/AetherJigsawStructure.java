@@ -14,6 +14,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.WorldGenerationContext;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pools.DimensionPadding;
@@ -82,9 +83,14 @@ public class AetherJigsawStructure extends Structure {
 
         WorldgenRandom worldGenRandom = context.random();
         Rotation rotation = Rotation.getRandom(worldGenRandom);
-        BlockPos testPos = startPool.value().getRandomTemplate(context.random()).getBoundingBox(templateManager, pos, rotation).getCenter();
+        BoundingBox startPoolBounds = startPool.value().getRandomTemplate(context.random()).getBoundingBox(templateManager, pos, rotation);
 
-        if (this.checkHeight(context, testPos.getX(), testPos.getZ(), discardBelowY, discardAboveY)) {
+        if (this.checkHeight(context, startPoolBounds.getCenter().getX(), startPoolBounds.getCenter().getZ(), discardBelowY, discardAboveY)
+                && this.checkHeight(context, startPoolBounds.minX(), startPoolBounds.minZ(), discardBelowY, discardAboveY)
+                && this.checkHeight(context, startPoolBounds.minX(), startPoolBounds.maxZ(), discardBelowY, discardAboveY)
+                && this.checkHeight(context, startPoolBounds.maxX(), startPoolBounds.minZ(), discardBelowY, discardAboveY)
+                && this.checkHeight(context, startPoolBounds.maxX(), startPoolBounds.maxZ(), discardBelowY, discardAboveY)
+        ) {
             return JigsawPlacement.addPieces(
                     context,
                     startPool,
