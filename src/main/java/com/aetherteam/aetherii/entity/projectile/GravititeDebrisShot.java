@@ -112,7 +112,7 @@ public class GravititeDebrisShot extends AbstractHurtingProjectile {
         Entity entity = result.getEntity();
         if (entity instanceof LivingEntity livingEntity) {
             if (livingEntity.level() instanceof ServerLevel serverLevel) {
-                entity.hurtServer(serverLevel, this.damageSources().mobProjectile(this, this.getOwner() instanceof LivingEntity owner ? owner : null), 4.0F);
+                entity.hurtServer(serverLevel, this.damageSources().mobProjectile(this, this.getOwner() instanceof LivingEntity owner ? owner : null), 6.0F);
             }
         }
     }

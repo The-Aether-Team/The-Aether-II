@@ -43,7 +43,7 @@ public class ArkeniumTaluton extends Taluton {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.2)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.75F)
-                .add(Attributes.ATTACK_DAMAGE, 3.0F)
+                .add(Attributes.ATTACK_DAMAGE, 8.0F)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.1F)
                 .add(Attributes.STEP_HEIGHT, 1.0F);
     }
