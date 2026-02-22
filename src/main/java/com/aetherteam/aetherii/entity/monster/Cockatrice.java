@@ -57,7 +57,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(2, new RestrictSunGoal(this));
         this.goalSelector.addGoal(3, new FleeSunGoal(this, 1.5));
-        this.goalSelector.addGoal(4, new Cockatrice.CockatriceMeleeAttackGoal(this, 1.15F, true, 6.0F));
+        this.goalSelector.addGoal(4, new Cockatrice.CockatriceMeleeAttackGoal(this, 1.075F, true, 6.0F));
         this.goalSelector.addGoal(5, new Cockatrice.CockatriceRangedAttackGoal(this, 1.15F, 200, 300, 15.0F, 6.0F));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.6));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
@@ -194,7 +194,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
     protected static class CockatriceMeleeAttackGoal extends ClosedAnimationMeleeAttackGoal {
 
         public CockatriceMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen, float attackThreshold) {
-            super(mob, speedModifier, followingTargetEvenIfNotSeen, 10, 20, attackThreshold);
+            super(mob, speedModifier, followingTargetEvenIfNotSeen, 7, 12, attackThreshold);
         }
 
         @Override
@@ -205,7 +205,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
         @Override
         public void attackAction() {
             super.attackAction();
-            this.mob.setZza(2.0F);
+            this.mob.setZza(0.3F);
         }
     }
 
