@@ -60,12 +60,12 @@
       "energy_budget": 0.12
     },
     "aether_ii:tempest": {
-      "charge": 0.7,
-      "energy_budget": 0.12
+      "charge": 0.85,
+      "energy_budget": 0.1
     },
     "aether_ii:zephyr": {
-      "charge": 0.6,
-      "energy_budget": 0.16
+      "charge": 0.7,
+      "energy_budget": 0.14
     }
   },
   "spawners": {
@@ -78,42 +78,12 @@
       }
     ],
     "aether_ii:aether_ambient": [],
-    "aether_ii:aether_cave_monster": [
-      {
-        "type": "aether_ii:skephid",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 2
-      },
-      {
-        "type": "aether_ii:arkenium_taluton",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
-        "type": "aether_ii:gravitite_taluton",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      }
-    ],
-    "aether_ii:aether_darkness_monster": [
+    "aether_ii:aether_blight_monster": [
       {
         "type": "aether_ii:cockatrice",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 4
-      }
-    ],
-    "aether_ii:aether_dungeon_monster": [],
-    "aether_ii:aether_moa": [],
-    "aether_ii:aether_sky_monster": [
-      {
-        "type": "aether_ii:zephyr",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
+        "weight": 5
       },
       {
         "type": "aether_ii:tempest",
@@ -122,7 +92,39 @@
         "weight": 1
       }
     ],
-    "aether_ii:aether_surface_monster": [],
+    "aether_ii:aether_darkness_hazard": [
+      {
+        "type": "aether_ii:skephid",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
+    "aether_ii:aether_darkness_monster": [
+      {
+        "type": "aether_ii:arkenium_taluton",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      },
+      {
+        "type": "aether_ii:gravitite_taluton",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 4
+      }
+    ],
+    "aether_ii:aether_dungeon_monster": [],
+    "aether_ii:aether_moa": [],
+    "aether_ii:aether_plant_hazard": [],
+    "aether_ii:aether_sky_hazard": [
+      {
+        "type": "aether_ii:zephyr",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
     "ambient": [],
     "axolotls": [],
     "creature": [],

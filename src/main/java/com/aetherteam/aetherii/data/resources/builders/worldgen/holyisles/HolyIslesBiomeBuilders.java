@@ -216,25 +216,23 @@ public class HolyIslesBiomeBuilders {
                 downfall,
                 HIGHFIELDS_EFFECTS,
                 spawnSettingsBuilder
-                        .addMobCharge(AetherIIEntityTypes.AECHOR_PLANT.get(), 0.4, 0.12)
-                        .addMobCharge(AetherIIEntityTypes.CARRION_SPROUT.get(), 0.4, 0.12)
-                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.6, 0.16)
-                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.7, 0.12)
+                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
+                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.10)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addMobCharge(AetherIIEntityTypes.AERWHALE.get(), 0.5, 0.11)
                         .addSpawn(AetherIIMobCategory.AETHER_AMBIENT, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GLITTERWING.get(), 1, 2))
                         .addSpawn(AetherIIMobCategory.AETHER_AMBIENT, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHROUDWING.get(), 1, 2))
-                        .addSpawn(AetherIIMobCategory.AETHER_SURFACE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AECHOR_PLANT.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_SURFACE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.CARRION_SPROUT.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_PLANT_HAZARD, 5, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AECHOR_PLANT.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_PLANT_HAZARD, 3, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.CARRION_SPROUT.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_SKY_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_AERWHALE, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERWHALE.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))
-                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GOLDEN_SWET.get(), 1, 2))
-                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_HAZARD, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GOLDEN_SWET.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_BLIGHT_MONSTER, 5, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_BLIGHT_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 3, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
                         .build(),
                 builder.build(),
                 Biome.TemperatureModifier.NONE
@@ -390,25 +388,23 @@ public class HolyIslesBiomeBuilders {
                 downfall,
                 MAGNETIC_EFFECTS,
                 spawnSettingsBuilder
-                        .addMobCharge(AetherIIEntityTypes.AECHOR_PLANT.get(), 0.4, 0.12)
-                        .addMobCharge(AetherIIEntityTypes.CARRION_SPROUT.get(), 0.4, 0.12)
-                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.6, 0.16)
-                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.7, 0.12)
+                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
+                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.10)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addMobCharge(AetherIIEntityTypes.AERWHALE.get(), 0.5, 0.11)
                         .addSpawn(AetherIIMobCategory.AETHER_AMBIENT, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GLITTERWING.get(), 1, 2))
                         .addSpawn(AetherIIMobCategory.AETHER_AMBIENT, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHROUDWING.get(), 1, 2))
-                        .addSpawn(AetherIIMobCategory.AETHER_SURFACE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AECHOR_PLANT.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_SURFACE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.CARRION_SPROUT.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_PLANT_HAZARD, 5, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AECHOR_PLANT.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_PLANT_HAZARD, 3, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.CARRION_SPROUT.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_SKY_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_AERWHALE, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERWHALE.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))
-                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GOLDEN_SWET.get(), 1, 2))
-                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_HAZARD, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GOLDEN_SWET.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_BLIGHT_MONSTER, 5, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_BLIGHT_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 3, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
                         .build(),
                 builder.build(),
                 Biome.TemperatureModifier.NONE
@@ -547,25 +543,23 @@ public class HolyIslesBiomeBuilders {
                 downfall,
                 ARCTIC_EFFECTS,
                 spawnSettingsBuilder
-                        .addMobCharge(AetherIIEntityTypes.AECHOR_PLANT.get(), 0.4, 0.12)
-                        .addMobCharge(AetherIIEntityTypes.CARRION_SPROUT.get(), 0.4, 0.12)
-                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.6, 0.16)
-                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.7, 0.12)
+                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
+                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.10)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addMobCharge(AetherIIEntityTypes.AERWHALE.get(), 0.5, 0.11)
                         .addSpawn(AetherIIMobCategory.AETHER_AMBIENT, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GLITTERWING.get(), 1, 2))
                         .addSpawn(AetherIIMobCategory.AETHER_AMBIENT, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHROUDWING.get(), 1, 2))
-                        .addSpawn(AetherIIMobCategory.AETHER_SURFACE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AECHOR_PLANT.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_SURFACE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.CARRION_SPROUT.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_PLANT_HAZARD, 5, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AECHOR_PLANT.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_PLANT_HAZARD, 3, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.CARRION_SPROUT.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_SKY_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_AERWHALE, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERWHALE.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))
-                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GOLDEN_SWET.get(), 1, 2))
-                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_HAZARD, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GOLDEN_SWET.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_BLIGHT_MONSTER, 5, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_BLIGHT_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 3, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
                         .build(),
                 builder.build(),
                 Biome.TemperatureModifier.NONE
@@ -639,13 +633,13 @@ public class HolyIslesBiomeBuilders {
                 downfall,
                 IRRADIATED_EFFECTS,
                 spawnSettingsBuilder
-                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.6, 0.16)
-                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.7, 0.12)
+                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
+                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.10)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
-                        .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 3, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 2))
-                        .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_SKY_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_BLIGHT_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 3, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
                         .build(),
                 builder.build(),
                 Biome.TemperatureModifier.NONE
@@ -661,17 +655,17 @@ public class HolyIslesBiomeBuilders {
                 downfall,
                 AERCLOUD_SEA_EFFECTS,
                 spawnSettingsBuilder
-                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.6, 0.16)
-                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.7, 0.12)
+                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
+                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.10)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addMobCharge(AetherIIEntityTypes.AERWHALE.get(), 0.5, 0.11)
-                        .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_SKY_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_AERWHALE, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERWHALE.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_BLIGHT_MONSTER, 5, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_BLIGHT_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 3, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
                         .build(),
                 generationSettingsBuilder
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HolyIslesPlacedFeatures.CLOUDBED)
@@ -703,17 +697,17 @@ public class HolyIslesBiomeBuilders {
                 downfall,
                 AERCLOUD_SEA_EFFECTS,
                 spawnSettingsBuilder
-                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.6, 0.16)
-                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.7, 0.12)
+                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
+                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.10)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
-                        .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))
-                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GOLDEN_SWET.get(), 1, 2))
-                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
-                        .addSpawn(AetherIIMobCategory.AETHER_CAVE_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_SKY_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_HAZARD, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GOLDEN_SWET.get(), 1, 2))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_BLIGHT_MONSTER, 5, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_BLIGHT_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 3, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
                         .build(),
                 generationSettingsBuilder
                         .addCarver(AetherIICarvers.HESTVEIL_CAVE)
