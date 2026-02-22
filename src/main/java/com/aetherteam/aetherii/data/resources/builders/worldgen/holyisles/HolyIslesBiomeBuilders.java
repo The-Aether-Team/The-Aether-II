@@ -217,7 +217,7 @@ public class HolyIslesBiomeBuilders {
                 HIGHFIELDS_EFFECTS,
                 spawnSettingsBuilder
                         .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
-                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.10)
+                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.11)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addMobCharge(AetherIIEntityTypes.AERWHALE.get(), 0.5, 0.11)
                         .addSpawn(AetherIIMobCategory.AETHER_AMBIENT, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GLITTERWING.get(), 1, 2))
@@ -389,7 +389,7 @@ public class HolyIslesBiomeBuilders {
                 MAGNETIC_EFFECTS,
                 spawnSettingsBuilder
                         .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
-                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.10)
+                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.11)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addMobCharge(AetherIIEntityTypes.AERWHALE.get(), 0.5, 0.11)
                         .addSpawn(AetherIIMobCategory.AETHER_AMBIENT, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GLITTERWING.get(), 1, 2))
@@ -544,7 +544,7 @@ public class HolyIslesBiomeBuilders {
                 ARCTIC_EFFECTS,
                 spawnSettingsBuilder
                         .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
-                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.10)
+                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.11)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addMobCharge(AetherIIEntityTypes.AERWHALE.get(), 0.5, 0.11)
                         .addSpawn(AetherIIMobCategory.AETHER_AMBIENT, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GLITTERWING.get(), 1, 2))
@@ -634,7 +634,7 @@ public class HolyIslesBiomeBuilders {
                 IRRADIATED_EFFECTS,
                 spawnSettingsBuilder
                         .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
-                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.10)
+                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.11)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 2))
                         .addSpawn(AetherIIMobCategory.AETHER_BLIGHT_MONSTER, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 1, 1))
@@ -656,7 +656,7 @@ public class HolyIslesBiomeBuilders {
                 AERCLOUD_SEA_EFFECTS,
                 spawnSettingsBuilder
                         .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
-                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.10)
+                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.11)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addMobCharge(AetherIIEntityTypes.AERWHALE.get(), 0.5, 0.11)
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
@@ -698,7 +698,7 @@ public class HolyIslesBiomeBuilders {
                 AERCLOUD_SEA_EFFECTS,
                 spawnSettingsBuilder
                         .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
-                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.10)
+                        .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.85, 0.11)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_HAZARD, 2, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.BLUE_SWET.get(), 1, 2))

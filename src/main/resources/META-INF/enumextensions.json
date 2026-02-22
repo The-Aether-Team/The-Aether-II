@@ -73,7 +73,7 @@
       "enum": "net/minecraft/world/entity/MobCategory",
       "name": "AETHER_II_AETHER_BLIGHT_MONSTER",
       "constructor": "(Ljava/lang/String;IZZI)V",
-      "parameters": [ "aether_ii:aether_blight_monster", 20, false, false, 128 ]
+      "parameters": [ "aether_ii:aether_blight_monster", 21, false, false, 128 ]
     },
     {
       "enum": "net/minecraft/world/entity/MobCategory",
