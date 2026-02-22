@@ -111,7 +111,7 @@
       "energy_budget": 0.12
     },
     "aether_ii:tempest": {
-      "charge": 0.8,
+      "charge": 0.65,
       "energy_budget": 0.13
     },
     "aether_ii:zephyr": {
@@ -147,7 +147,7 @@
         "type": "aether_ii:cockatrice",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 5
+        "weight": 4
       },
       {
         "type": "aether_ii:tempest",
