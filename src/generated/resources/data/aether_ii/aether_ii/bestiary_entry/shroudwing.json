@@ -2,7 +2,7 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.shroudwing",
   "effect_resistances": [],
   "entity_type": "aether_ii:shroudwing",
-  "health": 6,
+  "health": 2,
   "icon": "aether_ii:guidebook/bestiary/shroudwing",
   "id": "aether_ii:shroudwing",
   "impact_defense": 0,
