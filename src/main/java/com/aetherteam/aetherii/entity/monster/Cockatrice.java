@@ -71,8 +71,8 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
     public static AttributeSupplier.Builder createMobAttributes() {
         return Monster.createMobAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.3)
-                .add(Attributes.FOLLOW_RANGE, 16.0)
-                .add(Attributes.ATTACK_DAMAGE, 4.0);
+                .add(Attributes.FOLLOW_RANGE, 24.0)
+                .add(Attributes.ATTACK_DAMAGE, 6.0);
     }
 
     @Override
@@ -194,7 +194,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
     protected static class CockatriceMeleeAttackGoal extends ClosedAnimationMeleeAttackGoal {
 
         public CockatriceMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen, float attackThreshold) {
-            super(mob, speedModifier, followingTargetEvenIfNotSeen, 13, 30, attackThreshold);
+            super(mob, speedModifier, followingTargetEvenIfNotSeen, 10, 20, attackThreshold);
         }
 
         @Override
@@ -205,7 +205,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
         @Override
         public void attackAction() {
             super.attackAction();
-            this.mob.setZza(0.3F);
+            this.mob.setZza(2.0F);
         }
     }
 
