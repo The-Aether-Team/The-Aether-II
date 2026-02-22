@@ -62,7 +62,7 @@ public class BurrukaiRamAttack extends Behavior<Burrukai> {
         Brain<?> brain = owner.getBrain();
         Optional<LivingEntity> target = brain.getMemory(MemoryModuleType.ATTACK_TARGET);
 
-        if (++this.ramTick >= 60) {
+        if (++this.ramTick >= 30) {
             if (target.isPresent() && target.get().isAlive()) {
                 LivingEntity ramTarget = target.get();
                 if (this.blockPos == null) {
@@ -74,9 +74,9 @@ public class BurrukaiRamAttack extends Behavior<Burrukai> {
                         this.finishRam(serverLevel, owner);
                         serverLevel.broadcastEntityEvent(owner, (byte) Burrukai.RAM_START_EVENT);
                         serverLevel.playSound(null, owner, AetherIISoundEvents.ENTITY_BURRUKAI_RAM_IMPACT.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
-                        ramTarget.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(ramTarget, owner, EffectBuildupPresets.STUN, 500);
+                        ramTarget.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(ramTarget, owner, EffectBuildupPresets.STUN, 250);
                     }
-                } else if (this.ramTick >= 100) {
+                } else if (this.ramTick >= 50) {
                     this.finishRam(serverLevel, owner);
                     serverLevel.broadcastEntityEvent(owner, (byte) Burrukai.RAM_START_EVENT);
                 } else {
