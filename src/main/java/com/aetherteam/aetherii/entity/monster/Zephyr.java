@@ -57,7 +57,7 @@ public class Zephyr extends Mob implements Enemy {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.FOLLOW_RANGE, 50.0);
+                .add(Attributes.FOLLOW_RANGE, 35.0);
     }
 
     @Override
@@ -383,7 +383,7 @@ public class Zephyr extends Mob implements Enemy {
                 this.zephyr.getMoveControl().setWantedPosition(goal.x(), target.getY() + (random.nextFloat() * 2.0F - 1.0F), goal.z(), 1.0);
             } else if (this.zephyr.getBlowChargeTime() == -40 && !target.hasEffect(AetherIIEffects.WEBBED)) {
                 Vec3 goal = target.position().offsetRandom(random, 24.0F);
-                this.zephyr.getMoveControl().setWantedPosition(goal.x(), target.getY() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F, goal.z(), 1.0);
+                this.zephyr.getMoveControl().setWantedPosition(goal.x(), target.getY() + (random.nextFloat() * 2.0F - 1.0F) * 6.0F, goal.z(), 1.5);
             }
         }
 
