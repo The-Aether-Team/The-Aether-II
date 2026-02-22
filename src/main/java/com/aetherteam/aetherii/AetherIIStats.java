@@ -157,10 +157,10 @@ public class AetherIIStats {
             .put(Attributes.MAX_HEALTH, 4.0)
             .build();
     public static final ImmutableMap<Holder<Attribute>, Double> GLITTERWING = ImmutableMap.<Holder<Attribute>, Double>builder()
-            .put(Attributes.MAX_HEALTH, 6.0)
+            .put(Attributes.MAX_HEALTH, 2.0)
             .build();
     public static final ImmutableMap<Holder<Attribute>, Double> SHROUDWING = ImmutableMap.<Holder<Attribute>, Double>builder()
-            .put(Attributes.MAX_HEALTH, 6.0)
+            .put(Attributes.MAX_HEALTH, 2.0)
             .build();
 
     public static final ImmutableMap<Holder<Attribute>, Double> AECHOR_PLANT = ImmutableMap.<Holder<Attribute>, Double>builder()
