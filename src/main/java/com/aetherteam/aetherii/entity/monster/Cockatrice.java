@@ -72,7 +72,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
         return Monster.createMobAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.FOLLOW_RANGE, 24.0)
-                .add(Attributes.ATTACK_DAMAGE, 6.0);
+                .add(Attributes.ATTACK_DAMAGE, 4.0);
     }
 
     @Override
