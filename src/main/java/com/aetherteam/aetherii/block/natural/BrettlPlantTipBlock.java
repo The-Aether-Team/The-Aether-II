@@ -106,16 +106,6 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock implements Simple
                 CommonHooks.fireCropGrowPost(level, blockpos, level.getBlockState(blockpos));
             }
         }
-        if (state.getValue(GROWN)) {
-            if (level.getBlockState(pos.below()).hasProperty(GROWN) && level.getBlockState(pos.below(2)).hasProperty(GROWN)) {
-                if (level.getFluidState(pos.below()).isEmpty()) {
-                    level.setBlockAndUpdate(pos.below(), AetherIIBlocks.BRETTL_PLANT.get().defaultBlockState().setValue(GROWN, true));
-                }
-                if (level.getFluidState(pos.below(2)).isEmpty()) {
-                    level.setBlockAndUpdate(pos.below(2), AetherIIBlocks.BRETTL_PLANT.get().defaultBlockState().setValue(GROWN, true));
-                }
-            }
-        }
     }
 
     @Override
