@@ -41,10 +41,10 @@ public class ArkeniumTaluton extends Taluton {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MOVEMENT_SPEED, 0.2)
+                .add(Attributes.MOVEMENT_SPEED, 0.23)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.75F)
                 .add(Attributes.ATTACK_DAMAGE, 8.0F)
-                .add(Attributes.ATTACK_KNOCKBACK, 1.1F)
+                .add(Attributes.ATTACK_KNOCKBACK, 1.2F)
                 .add(Attributes.STEP_HEIGHT, 1.0F);
     }
 

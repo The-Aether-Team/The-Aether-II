@@ -87,9 +87,9 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 3.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.28)
-                .add(Attributes.FOLLOW_RANGE, 20.0);
+                .add(Attributes.ATTACK_DAMAGE, 4.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.25)
+                .add(Attributes.FOLLOW_RANGE, 15.0);
     }
 
     @Override
