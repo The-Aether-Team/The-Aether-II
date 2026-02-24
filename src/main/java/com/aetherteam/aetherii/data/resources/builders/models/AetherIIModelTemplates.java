@@ -259,8 +259,8 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate TRUNK_SIDE_TALL = AetherIIModelTemplates.create("template_trunk_side_tall", "_side_tall", TextureSlot.ALL);
     public static final ModelTemplate TRUNK_CORNER_TALL = AetherIIModelTemplates.create("template_trunk_corner_tall", "_corner_tall", TextureSlot.ALL);
     public static final ModelTemplate TRUNK_INVENTORY = AetherIIModelTemplates.create("template_trunk_inventory", "_inventory", TextureSlot.ALL);
-    public static final ModelTemplate OVERLAID_LEAVES = create("template_overlaid_leaves", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE, AetherIITextureSlots.OVERLAY);
-    public static final ModelTemplate TINTED_OVERLAID_LEAVES = create("template_tinted_overlaid_leaves", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE, AetherIITextureSlots.OVERLAY);
+    public static final ModelTemplate OVERLAID_LEAVES = create("template_overlaid_leaves", TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate TINTED_OVERLAID_LEAVES = create("template_tinted_overlaid_leaves", TextureSlot.BOTTOM, TextureSlot.SIDE);
     public static final ModelTemplate MOSS_VINE = create("moss_vine", AetherIITextureSlots.VINE, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN = create("asymmetrical_cross_even", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN_MIRRORED = create("asymmetrical_cross_even_mirrored", "_mirrored", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();

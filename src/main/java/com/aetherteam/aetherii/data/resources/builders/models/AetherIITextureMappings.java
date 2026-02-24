@@ -70,15 +70,6 @@ public class AetherIITextureMappings {
                 .copySlot(AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
     }
 
-    public static TextureMapping snowyLeaves(Block leaves) {
-        return new TextureMapping()
-                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(leaves))
-                .copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
-                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(leaves))
-                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(leaves, "_snowy"))
-                .put(AetherIITextureSlots.OVERLAY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/snowy_overlay"));
-    }
-
     public static TextureMapping mossyTopped(Block top, Block moss, String suffix) {
         return new TextureMapping()
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(top))

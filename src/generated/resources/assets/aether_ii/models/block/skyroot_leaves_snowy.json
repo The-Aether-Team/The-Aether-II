@@ -1,10 +1,17 @@
 {
-  "parent": "aether_ii:block/template_overlaid_leaves",
+  "parent": "minecraft:block/block",
+  "children": {
+    "base": "aether_ii:block/skyroot_leaves_snowy_base",
+    "overlay": "aether_ii:block/skyroot_leaves_snowy_overlay",
+    "regular": "aether_ii:block/skyroot_leaves"
+  },
+  "item_render_order": [
+    "regular",
+    "base",
+    "overlay"
+  ],
+  "loader": "neoforge:composite",
   "textures": {
-    "bottom": "aether_ii:block/skyroot_leaves",
-    "overlay": "aether_ii:block/snowy_overlay",
-    "particle": "aether_ii:block/skyroot_leaves",
-    "side": "aether_ii:block/skyroot_leaves_snowy",
-    "top": "aether_ii:block/skyroot_leaves"
+    "particle": "aether_ii:block/skyroot_leaves"
   }
 }

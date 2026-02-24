@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "aether_ii:block/irradiated_skypine_leaves",
+    "particle": "aether_ii:block/irradiated_skypine_leaves",
+    "side": "aether_ii:block/snowy_overlay",
+    "top": "aether_ii:block/arctic_snow"
+  }
+}

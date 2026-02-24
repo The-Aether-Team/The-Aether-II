@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "aether_ii:block/skypine_leaves",
+    "particle": "aether_ii:block/skypine_leaves",
+    "side": "aether_ii:block/shayelinn_overlay",
+    "top": "aether_ii:block/shayelinn_moss_block"
+  }
+}
