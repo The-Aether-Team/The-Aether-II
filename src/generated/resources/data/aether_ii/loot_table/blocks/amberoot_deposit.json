@@ -75,9 +75,13 @@
           "type": "minecraft:item",
           "conditions": [
             {
+              "condition": "aether_ii:tier_compare",
+              "items": "#aether_ii:golden_amber_harvesters"
+            },
+            {
               "condition": "minecraft:match_tool",
               "predicate": {
-                "items": "#aether_ii:golden_amber_harvesters"
+                "items": "#minecraft:axes"
               }
             },
             {

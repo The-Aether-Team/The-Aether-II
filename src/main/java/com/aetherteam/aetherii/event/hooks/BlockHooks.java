@@ -10,9 +10,11 @@ import com.aetherteam.aetherii.block.portal.AetherPortalShape;
 import com.aetherteam.aetherii.blockentity.IcestoneBlockEntity;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import com.aetherteam.aetherii.loot.AetherIILootContexts;
+import com.aetherteam.aetherii.loot.conditions.TierCompare;
 import com.aetherteam.aetherii.world.LevelUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
@@ -79,7 +81,7 @@ public class BlockHooks {
 
     public static void stripAmberoot(LevelAccessor accessor, BlockState state, ItemStack stack, ItemAbility action, UseOnContext context) {
         if (action == ItemAbilities.AXE_STRIP) {
-            if (state.is(AetherIIBlocks.AMBEROOT_DEPOSIT) && stack.is(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS)) {
+            if (state.is(AetherIIBlocks.AMBEROOT_DEPOSIT) && TierCompare.compareStack(stack, BuiltInRegistries.ITEM.getOrThrow(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS))) {
                 stripLog(accessor, stack, context, AetherIILoot.STRIP_AMBEROOT_DEPOSIT);
             }
         }
