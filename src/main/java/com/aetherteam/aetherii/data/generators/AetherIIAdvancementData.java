@@ -235,7 +235,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                             Component.translatable("advancement.aether_ii.glint.desc").withStyle(ChatFormatting.AQUA),
                             null,
                             AdvancementType.GOAL, true, true, false)
-                    .addCriterion("glint", CurrencyTrigger.Instance.forValue(100))
+                    .addCriterion("glint", CurrencyTrigger.Instance.forValue(1000))
                     .save(consumer, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "glint"));
 
             AdvancementHolder bestiary = createBestiaryAdvancement(outpostCampfire, consumer);
