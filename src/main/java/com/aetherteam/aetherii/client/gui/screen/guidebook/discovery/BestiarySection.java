@@ -44,6 +44,7 @@ import net.minecraft.world.level.Level;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEntry.Mutable> {
@@ -53,6 +54,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     private static final ResourceLocation PIERCE_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/pierce");
     private static final ResourceLocation UNDISCOVERED_ENTRY_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/undiscovered");
     private static final ResourceLocation DISCOVERED_ENTRY_FALLBACK_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/default");
+    private static final DecimalFormat PERCENTAGE = new DecimalFormat("##.##%");
     private final List<BestiaryEntry.Mutable> orderedEntries = new ArrayList<>();
     private float rotation = 0.0F;
     private final List<Holder<Item>> currentFoods = new ArrayList<>();
@@ -324,7 +326,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                                 } else {
                                     components.add(Component.literal(String.valueOf(lootDisplay.minCount())).withStyle(ChatFormatting.GRAY));
                                 }
-                                components.add(Component.literal(lootDisplay.chance() * 100 + "%").withStyle(ChatFormatting.GRAY));
+                                components.add(Component.literal(PERCENTAGE.format(lootDisplay.chance())).withStyle(ChatFormatting.GRAY));
                                 this.renderFakeSlot(guiGraphics, font, components, itemStack, mouseX, mouseY, slotX, dropsTextY - 5);
                                 renderTitle = true;
                             }
