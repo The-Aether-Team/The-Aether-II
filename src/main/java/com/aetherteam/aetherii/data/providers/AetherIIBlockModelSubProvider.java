@@ -37,6 +37,7 @@ import net.minecraft.world.level.block.MossyCarpetBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.*;
+import net.neoforged.neoforge.client.model.generators.loaders.CompositeModelBuilder;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
@@ -658,12 +659,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         })));
     }
 
-    public void createLeavesWithPiles(Block leaves, Block piles, TexturedModel.Provider regularProvider, ModelTemplate overlaidTemplate) {
-        MultiVariant cube = plainVariant(regularProvider.create(leaves, this.modelOutput));
-        MultiVariant snowy = plainVariant(overlaidTemplate.create(ModelLocationUtils.getModelLocation(leaves, "_snowy"), AetherIITextureMappings.snowyLeaves(leaves), this.modelOutput));
-        MultiVariant bryalinn = plainVariant(overlaidTemplate.create(ModelLocationUtils.getModelLocation(leaves, "_bryalinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "bryalinn"), this.modelOutput));
-        MultiVariant shayelinn = plainVariant(overlaidTemplate.create(ModelLocationUtils.getModelLocation(leaves, "_shayelinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), "shayelinn"), this.modelOutput));
-        MultiVariant ambrelinn = plainVariant(overlaidTemplate.create(ModelLocationUtils.getModelLocation(leaves, "_ambrelinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(), "ambrelinn"), this.modelOutput));
+    public void createLeavesWithPiles(Block leaves, Block piles, TexturedModel.Provider regularProvider, ModelTemplate baseTemplate) {
+        ResourceLocation cube = regularProvider.create(leaves, this.modelOutput);
+        MultiVariant snowy = plainVariant(this.createOverlaidLeaves(leaves, AetherIIBlocks.ARCTIC_SNOW.get(), "snowy", cube, baseTemplate));
+        MultiVariant bryalinn = plainVariant(this.createOverlaidLeaves(leaves, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "bryalinn", cube, baseTemplate));
+        MultiVariant shayelinn = plainVariant(this.createOverlaidLeaves(leaves, AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), "shayelinn", cube, baseTemplate));
+        MultiVariant ambrelinn = plainVariant(this.createOverlaidLeaves(leaves, AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(), "ambrelinn", cube, baseTemplate));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(leaves)
                 .with(PropertyDispatch.initial(AetherLeavesBlock.SNOWY, AetherLeavesBlock.MOSSY).generate((snowyState, mossyState) -> {
                     if (snowyState) {
@@ -680,13 +681,41 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                                 return ambrelinn;
                             }
                             default -> {
-                                return cube;
+                                return plainVariant(cube);
                             }
                         }
                     }
                 }))
         );
         this.createPiles(piles, leaves);
+    }
+
+    public ResourceLocation createOverlaidLeaves(Block block, Block top, String suffix, ResourceLocation regular, ModelTemplate baseTemplate) {
+        ResourceLocation base = baseTemplate.createWithSuffix(
+                block,
+                "_" + suffix + "_base",
+                new TextureMapping()
+                        .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block))
+                        .copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
+                        .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_" + suffix)),
+                this.modelOutput);
+        ResourceLocation overlay = ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(
+                block,
+                "_" + suffix + "_overlay",
+                new TextureMapping()
+                        .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block))
+                        .copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
+                        .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top))
+                        .put(TextureSlot.SIDE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/" + suffix + "_overlay")),
+                this.modelOutput);
+        return AetherIIModelTemplates.EMPTY.extend()
+                .customLoader(CompositeModelBuilder::new, (builder) -> builder.child("regular", regular).child("base", base).child("overlay", overlay))
+                .build()
+                .createWithSuffix(
+                        block,
+                        "_" + suffix,
+                        new TextureMapping().put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block)),
+                        this.modelOutput);
     }
 
     public void createPiles(Block piles, Block leaves) {

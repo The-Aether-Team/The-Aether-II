@@ -1,0 +1,8 @@
+{
+  "parent": "aether_ii:block/template_overlaid_leaves",
+  "textures": {
+    "bottom": "aether_ii:block/wisptop_leaves",
+    "particle": "aether_ii:block/wisptop_leaves",
+    "side": "aether_ii:block/wisptop_leaves_bryalinn"
+  }
+}
