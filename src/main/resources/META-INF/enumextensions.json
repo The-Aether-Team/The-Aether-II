@@ -53,27 +53,33 @@
     },
     {
       "enum": "net/minecraft/world/entity/MobCategory",
-      "name": "AETHER_II_AETHER_SURFACE_MONSTER",
+      "name": "AETHER_II_AETHER_PLANT_HAZARD",
       "constructor": "(Ljava/lang/String;IZZI)V",
-      "parameters": [ "aether_ii:aether_surface_monster", 20, false, false, 128 ]
+      "parameters": [ "aether_ii:aether_plant_hazard", 11, false, false, 128 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_II_AETHER_DARKNESS_HAZARD",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_ii:aether_darkness_hazard", 25, false, false, 128 ]
     },
     {
       "enum": "net/minecraft/world/entity/MobCategory",
       "name": "AETHER_II_AETHER_DARKNESS_MONSTER",
       "constructor": "(Ljava/lang/String;IZZI)V",
-      "parameters": [ "aether_ii:aether_darkness_monster", 26, false, false, 128 ]
+      "parameters": [ "aether_ii:aether_darkness_monster", 28, false, false, 128 ]
     },
     {
       "enum": "net/minecraft/world/entity/MobCategory",
-      "name": "AETHER_II_AETHER_CAVE_MONSTER",
+      "name": "AETHER_II_AETHER_BLIGHT_MONSTER",
       "constructor": "(Ljava/lang/String;IZZI)V",
-      "parameters": [ "aether_ii:aether_cave_monster", 18, false, false, 128 ]
+      "parameters": [ "aether_ii:aether_blight_monster", 21, false, false, 128 ]
     },
     {
       "enum": "net/minecraft/world/entity/MobCategory",
-      "name": "AETHER_II_AETHER_SKY_MONSTER",
+      "name": "AETHER_II_AETHER_SKY_HAZARD",
       "constructor": "(Ljava/lang/String;IZZI)V",
-      "parameters": [ "aether_ii:aether_sky_monster", 4, false, false, 128 ]
+      "parameters": [ "aether_ii:aether_sky_hazard", 4, false, false, 128 ]
     },
     {
       "enum": "net/minecraft/world/entity/MobCategory",

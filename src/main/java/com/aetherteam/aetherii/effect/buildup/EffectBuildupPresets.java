@@ -20,7 +20,7 @@ public class EffectBuildupPresets {
 
     public static Preset VULNERABILITY = register(new Preset(AetherIIEffects.VULNERABILITY, 1000, 0, false, true, false, 2));
     public static Preset WOUND = register(new Preset(AetherIIEffects.WOUND, 1, 0, false, true, false, 2));
-    public static Preset STUN = register(new Preset(AetherIIEffects.STUN, 500, 0, false, true, false, 2));
+    public static Preset STUN = register(new Preset(AetherIIEffects.STUN, 250, 0, false, true, false, 2));
     public static Preset AMBROSIUM_POISONING = register(new Preset(AetherIIEffects.AMBROSIUM_POISONING, 3600, 0, false, true, false, 2));
     public static Preset FRACTURE = register(new Preset(AetherIIEffects.FRACTURE, 500, 0, false, true, false, 1));
     public static Preset TOXIN = register(new Preset(AetherIIEffects.TOXIN, 1000, 0, false, true, false, 2));

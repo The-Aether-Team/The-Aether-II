@@ -38,9 +38,9 @@ public class Mimic extends Monster {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 3.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.28)
-                .add(Attributes.FOLLOW_RANGE, 8.0);
+                .add(Attributes.ATTACK_DAMAGE, 3.5)
+                .add(Attributes.MOVEMENT_SPEED, 0.33)
+                .add(Attributes.FOLLOW_RANGE, 12.0);
     }
 
     @Override
