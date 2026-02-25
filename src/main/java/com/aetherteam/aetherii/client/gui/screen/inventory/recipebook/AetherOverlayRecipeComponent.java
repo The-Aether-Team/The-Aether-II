@@ -1,13 +1,16 @@
 package com.aetherteam.aetherii.client.gui.screen.inventory.recipebook;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.OverlayRecipeComponentAccessor;
 import com.aetherteam.aetherii.recipe.display.AlkahestPurifierRecipeDisplay;
 import com.aetherteam.aetherii.recipe.display.AltarRecipeDisplay;
 import com.aetherteam.aetherii.recipe.display.AmberHourglassRecipeDisplay;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeCollection;
 import net.minecraft.client.gui.screens.recipebook.SlotSelectTime;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.context.ContextMap;
 import net.minecraft.world.item.ItemStack;
@@ -20,10 +23,12 @@ import java.util.List;
 
 public class AetherOverlayRecipeComponent extends OverlayRecipeComponent {
     private final RecipeBookComponent<?> parent;
+    private final SlotSelectTime slotSelectTime;
 
     public AetherOverlayRecipeComponent(RecipeBookComponent<?> parent, SlotSelectTime slotSelectTime, boolean isFurnaceMenu) {
         super(slotSelectTime, isFurnaceMenu);
         this.parent = parent;
+        this.slotSelectTime = slotSelectTime;
     }
 
     @Override
@@ -53,12 +58,49 @@ public class AetherOverlayRecipeComponent extends OverlayRecipeComponent {
         }
     }
 
-    public class OverlayHourglassRecipeButton extends OverlayRecipeButton {
-        private static final ResourceLocation ENABLED_SPRITE = ResourceLocation.withDefaultNamespace("recipe_book/furnace_overlay");
-        private static final ResourceLocation HIGHLIGHTED_ENABLED_SPRITE = ResourceLocation.withDefaultNamespace("recipe_book/furnace_overlay_highlighted");
-        private static final ResourceLocation DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("recipe_book/furnace_overlay_disabled");
-        private static final ResourceLocation HIGHLIGHTED_DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("recipe_book/furnace_overlay_disabled_highlighted");
+    public class OverlaySingleRecipeButton extends OverlayRecipeButton {
+        private static final ResourceLocation ENABLED_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/single_overlay");
+        private static final ResourceLocation HIGHLIGHTED_ENABLED_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/single_overlay_highlighted");
+        private static final ResourceLocation DISABLED_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/single_overlay_disabled");
+        private static final ResourceLocation HIGHLIGHTED_DISABLED_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/single_overlay_disabled_highlighted");
 
+        private final boolean isCraftable;
+        private final List<Pos> slots;
+
+        public OverlaySingleRecipeButton(int x, int y, RecipeDisplayId recipe, boolean isCraftable, List<Pos> slots) {
+            super(x, y, recipe, isCraftable, slots);
+            this.isCraftable = isCraftable;
+            this.slots = slots;
+        }
+
+        @Override
+        public void renderWidget(GuiGraphics guiGraphics, int p_283483_, int p_282919_, float p_282165_) {
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.getSprite(this.isCraftable), this.getX(), this.getY(), this.width, this.height);
+            float x = (float) (this.getX() + 2);
+            float y = (float) (this.getY() + 2);
+
+            for (Pos pos : this.slots) {
+                guiGraphics.pose().pushMatrix();
+                guiGraphics.pose().translate(x + (float) pos.x(), y + (float) pos.y());
+//                guiGraphics.pose().scale(0.375F, 0.375F);
+//                guiGraphics.pose().scale(1.0F, 1.0F);
+                guiGraphics.pose().translate(-8.0F, -8.0F);
+                guiGraphics.renderItem(pos.selectIngredient(AetherOverlayRecipeComponent.this.slotSelectTime.currentIndex()), 0, 0);
+                guiGraphics.pose().popMatrix();
+            }
+        }
+
+        @Override
+        protected ResourceLocation getSprite(boolean highlight) {
+            if (highlight) {
+                return this.isHoveredOrFocused() ? HIGHLIGHTED_ENABLED_SPRITE : ENABLED_SPRITE;
+            } else {
+                return this.isHoveredOrFocused() ? HIGHLIGHTED_DISABLED_SPRITE : DISABLED_SPRITE;
+            }
+        }
+    }
+
+    public class OverlayHourglassRecipeButton extends OverlaySingleRecipeButton {
         public OverlayHourglassRecipeButton(int x, int y, RecipeDisplayId recipe, RecipeDisplay recipeDisplay, ContextMap contextMap, boolean isCraftable) {
             super(x, y, recipe, isCraftable, calculateIngredientsPositions(recipeDisplay, contextMap));
         }
@@ -72,23 +114,9 @@ public class AetherOverlayRecipeComponent extends OverlayRecipeComponent {
             }
             return List.of();
         }
-
-        @Override
-        protected ResourceLocation getSprite(boolean highlight) {
-            if (highlight) {
-                return this.isHoveredOrFocused() ? HIGHLIGHTED_ENABLED_SPRITE : ENABLED_SPRITE;
-            } else {
-                return this.isHoveredOrFocused() ? HIGHLIGHTED_DISABLED_SPRITE : DISABLED_SPRITE;
-            }
-        }
     }
 
-    public class OverlayAltarRecipeButton extends OverlayRecipeButton {
-        private static final ResourceLocation ENABLED_SPRITE = ResourceLocation.withDefaultNamespace("recipe_book/furnace_overlay");
-        private static final ResourceLocation HIGHLIGHTED_ENABLED_SPRITE = ResourceLocation.withDefaultNamespace("recipe_book/furnace_overlay_highlighted");
-        private static final ResourceLocation DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("recipe_book/furnace_overlay_disabled");
-        private static final ResourceLocation HIGHLIGHTED_DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("recipe_book/furnace_overlay_disabled_highlighted");
-
+    public class OverlayAltarRecipeButton extends OverlaySingleRecipeButton {
         public OverlayAltarRecipeButton(int x, int y, RecipeDisplayId recipe, RecipeDisplay recipeDisplay, ContextMap contextMap, boolean isCraftable) {
             super(x, y, recipe, isCraftable, calculateIngredientsPositions(recipeDisplay, contextMap));
         }
@@ -102,23 +130,9 @@ public class AetherOverlayRecipeComponent extends OverlayRecipeComponent {
             }
             return List.of();
         }
-
-        @Override
-        protected ResourceLocation getSprite(boolean highlight) {
-            if (highlight) {
-                return this.isHoveredOrFocused() ? HIGHLIGHTED_ENABLED_SPRITE : ENABLED_SPRITE;
-            } else {
-                return this.isHoveredOrFocused() ? HIGHLIGHTED_DISABLED_SPRITE : DISABLED_SPRITE;
-            }
-        }
     }
 
-    public class OverlayPurifierRecipeButton extends OverlayRecipeButton {
-        private static final ResourceLocation ENABLED_SPRITE = ResourceLocation.withDefaultNamespace("recipe_book/furnace_overlay");
-        private static final ResourceLocation HIGHLIGHTED_ENABLED_SPRITE = ResourceLocation.withDefaultNamespace("recipe_book/furnace_overlay_highlighted");
-        private static final ResourceLocation DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("recipe_book/furnace_overlay_disabled");
-        private static final ResourceLocation HIGHLIGHTED_DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("recipe_book/furnace_overlay_disabled_highlighted");
-
+    public class OverlayPurifierRecipeButton extends OverlaySingleRecipeButton {
         public OverlayPurifierRecipeButton(int x, int y, RecipeDisplayId recipe, RecipeDisplay recipeDisplay, ContextMap contextMap, boolean isCraftable) {
             super(x, y, recipe, isCraftable, calculateIngredientsPositions(recipeDisplay, contextMap));
         }
@@ -131,15 +145,6 @@ public class AetherOverlayRecipeComponent extends OverlayRecipeComponent {
                 }
             }
             return List.of();
-        }
-
-        @Override
-        protected ResourceLocation getSprite(boolean highlight) {
-            if (highlight) {
-                return this.isHoveredOrFocused() ? HIGHLIGHTED_ENABLED_SPRITE : ENABLED_SPRITE;
-            } else {
-                return this.isHoveredOrFocused() ? HIGHLIGHTED_DISABLED_SPRITE : DISABLED_SPRITE;
-            }
         }
     }
 }
