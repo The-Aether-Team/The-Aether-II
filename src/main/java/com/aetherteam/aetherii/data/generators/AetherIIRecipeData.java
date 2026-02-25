@@ -2278,7 +2278,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .save(this.output);
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, new ItemStack(AetherIIItems.ANTIVENOM_VIAL.get()))
                 .requires(AetherIIItems.WATER_VIAL.get())
-                .requires(AetherIIItems.AECHOR_PETAL.get())
+                .requires(AetherIIItems.COCKATRICE_FEATHER.get())
                 .requires(AetherIIBlocks.HESPEROSE.get())
                 .unlockedBy("has_water_vial", has(AetherIIItems.WATER_VIAL.get()))
                 .save(this.output);

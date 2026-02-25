@@ -1634,13 +1634,13 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAdvancementDesc("antitoxin", "Consume an Antitoxin or Antivenom Vial to reduce the buildup of poison effects");
         this.addAdvancementDesc("engraved_discs", "Collect all Aether engraved discs");
         this.addAdvancementDesc("outpost_campfire", "Set a secondary respawn point at an Outpost Campfire");
-        this.addAdvancementDesc("glint", "Earn at least 100 Glint Coins");
+        this.addAdvancementDesc("glint", "Earn at least 1000 Glint Coins");
         this.addAdvancementDesc("bestiary", "Fill out the entire bestiary");
         this.addAdvancementDesc("trowel", "Harvest drops from a wild plant using any Trowel");
         this.addAdvancementDesc("enchanted_aether_grass", "Enchant an Aether Grass Block with an Ambrosium Shard to speed up plant growth above it");
         this.addAdvancementDesc("plant_cutting", "Harvest a cutting from an Aechor Plant or Carrion Sprout");
         this.addAdvancementDesc("ambrosium", "Obtain an Ambrosium Shard");
-        this.addAdvancementDesc("golden_amber", "Harvest Golden Amber from an Amberoot tree using the proper tool");
+        this.addAdvancementDesc("golden_amber", "Harvest Golden Amber from an Amberoot tree using at minimum a Holystone tier axe");
         this.addAdvancementDesc("amber_hourglass", "Craft an Amber Hourglass");
         this.addAdvancementDesc("zanite", "Restore Fossilized Zanite into a Zanite Gemstone using the Amber Hourglass");
         this.addAdvancementDesc("craft_altar", "Craft an Altar");

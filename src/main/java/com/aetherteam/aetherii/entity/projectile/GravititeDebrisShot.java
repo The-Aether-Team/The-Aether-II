@@ -70,14 +70,15 @@ public class GravititeDebrisShot extends AbstractHurtingProjectile {
                 vec3 = this.position().add(this.getDeltaMovement());
             }
 
+            if (hitresult.getType() != HitResult.Type.MISS && this.isAlive() && impacted) {
+                this.hitTargetOrDeflectSelf(hitresult);
+            }
+
             this.setPos(vec3);
             this.applyEffectsFromBlocks();
 
             this.baseTick();
 
-            if (hitresult.getType() != HitResult.Type.MISS && this.isAlive() && impacted) {
-                this.hitTargetOrDeflectSelf(hitresult);
-            }
         } else {
             this.discard();
         }

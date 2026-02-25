@@ -3,7 +3,7 @@
   "criteria": {
     "glint": {
       "conditions": {
-        "amount": 100
+        "amount": 1000
       },
       "trigger": "aether_ii:currency"
     }
