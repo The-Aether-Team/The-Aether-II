@@ -794,6 +794,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ENCHANTED_WYNDBERRY.get());
                 output.accept(AetherIIItems.SATIVAL_BULB.get());
                 output.accept(AetherIIItems.SWET_JELLY.get());
+                output.accept(AetherIIItems.ENCHANTED_SWET_JELLY.get());
                 output.accept(AetherIIItems.BURRUKAI_RIB_CUT.get());
                 output.accept(AetherIIItems.BURRUKAI_RIBS.get());
                 output.accept(AetherIIItems.KIRRID_LOIN.get());
