@@ -3,7 +3,7 @@
   "category": "building",
   "group": "bed",
   "ingredients": [
-    "aether_ii:water_vial",
+    "aether_ii:skyroot_water_bucket",
     [
       "aether_ii:black_skyroot_bed",
       "aether_ii:blue_skyroot_bed",
