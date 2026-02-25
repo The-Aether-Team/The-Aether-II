@@ -102,10 +102,10 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     protected void washDyedBlock(List<Item> dyeableItems, Item output, String group) {
         List<ItemLike> ingredients = dyeableItems.stream().filter(itemElement -> !itemElement.equals(output)).map(ItemStack::new).map(ItemStack::getItem).collect(Collectors.toList());
         ShapelessRecipeBuilder.shapeless(this.getter, RecipeCategory.BUILDING_BLOCKS, output)
-                .requires(AetherIIItems.WATER_VIAL)
+                .requires(AetherIIItems.SKYROOT_WATER_BUCKET)  //todo switch to vial eventually.
                 .requires(Ingredient.of(ingredients.toArray(ItemLike[]::new)))
                 .group(group)
-                .unlockedBy("has_water_vial", has(AetherIIItems.WATER_VIAL))
+                .unlockedBy("has_skyroot_water_bucket", has(AetherIIItems.SKYROOT_WATER_BUCKET))
                 .save(this.output, this.name("wash_" + getItemName(output)));
     }
 

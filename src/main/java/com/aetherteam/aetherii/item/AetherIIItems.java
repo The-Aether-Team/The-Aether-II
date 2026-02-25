@@ -311,7 +311,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ROASTED_SKYROOT_LIZARD_ON_A_STICK = register("roasted_skyroot_lizard_on_a_stick", () -> new Item.Properties().food(AetherIIFoods.ROASTED_SKYROOT_LIZARD_ON_A_STICK).component(DataComponents.CONSUMABLE, AetherIIConsumables.FAST));
 
     // Consumables
-    public static final DeferredItem<Item> WATER_VIAL = register("water_vial", WaterVialItem::new, () -> new Item.Properties().stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.WATER_VIAL).craftRemainder(SCATTERGLASS_VIAL.get()).usingConvertsTo(SCATTERGLASS_VIAL.get()));
+    public static final DeferredItem<Item> WATER_VIAL = register("water_vial", WaterVialItem::new, () -> new Item.Properties().stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.WATER_VIAL).usingConvertsTo(SCATTERGLASS_VIAL.get()));
     public static final DeferredItem<Item> BANDAGE = register("bandage", (properties) -> new SpecialTooltipItem(AetherIITooltips.CURATIVE, properties.stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.BANDAGE)));
     public static final DeferredItem<Item> SPLINT = register("splint", (properties) -> new SpecialTooltipItem(AetherIITooltips.CURATIVE, properties.stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.SPLINT)));
     public static final DeferredItem<Item> ANTITOXIN_VIAL = register("antitoxin_vial", (properties) -> new SpecialTooltipItem(AetherIITooltips.CURATIVE, properties.stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.ANTITOXIN_VIAL).usingConvertsTo(SCATTERGLASS_VIAL.get())));
