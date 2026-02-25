@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.mixin.mixins.client.accessor.OverlayRecipeCompone
 import com.aetherteam.aetherii.recipe.display.AlkahestPurifierRecipeDisplay;
 import com.aetherteam.aetherii.recipe.display.AltarRecipeDisplay;
 import com.aetherteam.aetherii.recipe.display.AmberHourglassRecipeDisplay;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
@@ -80,12 +81,12 @@ public class AetherOverlayRecipeComponent extends OverlayRecipeComponent {
             float y = (float) (this.getY() + 2);
 
             for (Pos pos : this.slots) {
+                ItemStack stack = pos.selectIngredient(AetherOverlayRecipeComponent.this.slotSelectTime.currentIndex());
                 guiGraphics.pose().pushMatrix();
                 guiGraphics.pose().translate(x + (float) pos.x(), y + (float) pos.y());
-//                guiGraphics.pose().scale(0.375F, 0.375F);
-//                guiGraphics.pose().scale(1.0F, 1.0F);
                 guiGraphics.pose().translate(-8.0F, -8.0F);
-                guiGraphics.renderItem(pos.selectIngredient(AetherOverlayRecipeComponent.this.slotSelectTime.currentIndex()), 0, 0);
+                guiGraphics.renderItem(stack, 0, 0);
+                guiGraphics.renderItemDecorations(Minecraft.getInstance().font, stack, 0, 0);
                 guiGraphics.pose().popMatrix();
             }
         }

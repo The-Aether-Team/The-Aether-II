@@ -34,6 +34,7 @@ public class AltarRecipeBookComponent extends RecipeBookComponent<AltarMenu> {
         super(menu, tabs);
         RecipeBookComponentAccessor componentAccessor = (RecipeBookComponentAccessor) this;
         SlotSelectTime slotSelectTime = () -> Mth.floor(componentAccessor.aether_ii$getTime() / 30.0F);
+        componentAccessor.aether_ii$setGhostSlots(new AltarGhostSlots(slotSelectTime));
         componentAccessor.aether_ii$setRecipeBookPage(new AetherRecipeBookPage(this, slotSelectTime));
     }
 
