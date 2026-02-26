@@ -2,9 +2,8 @@ package com.aetherteam.aetherii.integration.jei.categories.item;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.recipe.recipes.OutputEntry;
-import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
 import com.aetherteam.aetherii.recipe.recipes.item.HourglassRestoringRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -15,13 +14,17 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.AbstractRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,15 +58,21 @@ public class AmberHourglassRecipeCategory extends AbstractRecipeCategory<Hourgla
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, HourglassRestoringRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 47, 15).add(recipe.ingredient()).setStandardSlotBackground();
-        builder.addSlot(RecipeIngredientRole.INPUT, 47, 47).add(AetherIIItems.GOLDEN_AMBER).setStandardSlotBackground();
+        builder.addSlot(RecipeIngredientRole.INPUT, 47, 47).addItemStacks(createFuels()).setStandardSlotBackground();
         builder.addSlot(RecipeIngredientRole.OUTPUT, 15, 79).add(processOutput(recipe.results().output1())).setOutputSlotBackground();
         builder.addSlot(RecipeIngredientRole.OUTPUT, 47, 79).add(processOutput(recipe.results().output2())).setOutputSlotBackground();
         builder.addSlot(RecipeIngredientRole.OUTPUT, 79, 79).add(processOutput(recipe.results().output3())).setOutputSlotBackground();
     }
 
+    private static List<ItemStack> createFuels() {
+        List<ItemStack> fuels = new ArrayList<>();
+        Registry<Item> registry = Minecraft.getInstance().level.registryAccess().lookupOrThrow(Registries.ITEM);
+        registry.getDataMap(AetherIIDataMaps.AMBER_HOURGLASS_FUELS).forEach((key, fuel) -> fuels.add(new ItemStack(registry.getValue(key))));
+        return fuels;
+    }
+
     private static SlotDisplay processOutput(OutputEntry.BaseEntry entry) {
         List<SlotDisplay> result = entry.list().stream().distinct().filter((stack) -> !stack.isEmpty()).map(SlotDisplay.ItemStackSlotDisplay::new).collect(Collectors.toUnmodifiableList());
         return new SlotDisplay.Composite(result);
-
     }
 }
