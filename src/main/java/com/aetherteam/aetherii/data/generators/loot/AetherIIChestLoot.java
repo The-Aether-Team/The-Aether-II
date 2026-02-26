@@ -406,6 +406,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.ENCHANTED_BLUEBERRY).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 4.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.ENCHANTED_ORANGE).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.ENCHANTED_SWET_JELLY).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.ENCHANTED_WYNDBERRY).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                 )
 
