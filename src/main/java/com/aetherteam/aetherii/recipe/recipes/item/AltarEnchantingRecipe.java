@@ -49,6 +49,12 @@ public class AltarEnchantingRecipe extends SingleItemRecipe {
         return this.category;
     }
 
+    //making public
+    @Override
+    public ItemStack result() {
+        return super.result();
+    }
+
     @Override
     public RecipeType<AltarEnchantingRecipe> getType() {
         return AetherIIRecipeTypes.ALTAR_ENCHANTING.get();

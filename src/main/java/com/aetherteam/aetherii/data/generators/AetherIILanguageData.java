@@ -69,7 +69,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Packs
         this.addPackDescription("mod", "Aether II Resources");
-        
+
         // Use Action
         this.addTooltip("item.modifiers.relic", "When wearing Relic:");
         this.addTooltip("item.modifiers.handwear", "When wearing Handwear:");
@@ -1571,6 +1571,17 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Title Screen
         this.add("aether_ii.menu_title.the_aether_ii", "The Aether II");
+        this.addGuiText("menu.server", "Official Aether Testing Server");
+
+        //Recipe Viewers
+        this.addGuiText("jei.alkahest", "Alkahest Corrosion");
+        this.addGuiText("jei.ambrosium", "Ambrosium Enchanting");
+        this.addGuiText("jei.icestone", "Icestone Freezable");
+        this.addGuiText("jei.irradiated_dust", "Dust Irradiation");
+        this.addGuiText("jei.swet_gel", "Swet Gel Conversion");
+        this.addGuiText("jei.alkahest_purifier", "Alkahest Purifier");
+        this.addGuiText("jei.altar", "Altar Enchanting");
+        this.addGuiText("jei.amber_hourglass", "Hourglass Restoring");
     }
 
     private void addAdvancements() {
@@ -1671,7 +1682,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
                 "Nunc odio lectus, semper vel eros bibendum, mollis ornare turpis. Maecenas in nibh ut est tincidunt sollicitudin ut vel nunc. Vestibulum erat velit, sagittis et ante id, convallis consequat turpis. Cras at risus vitae ex placerat ultricies. Maecenas id augue eleifend metus luctus ornare. Proin metus leo, imperdiet in cursus viverra, aliquet vel odio. Mauris non porta justo, eget pharetra nulla. Aliquam erat volutpat. Duis rhoncus et ante id egestas. Suspendisse sodales porttitor metus quis molestie. Phasellus ante turpis, finibus sit amet metus eu, condimentum ullamcorper lorem. Nullam sollicitudin euismod enim, ac lobortis neque finibus sed. Proin iaculis dui sed odio cursus, non porta neque vulputate.\n" +
                 "\n" +
                 "Pellentesque egestas turpis non orci feugiat viverra. Morbi faucibus sollicitudin erat. Quisque commodo rhoncus neque, at ullamcorper purus ornare nec. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus vitae arcu dictum tortor mattis placerat blandit sit amet erat. Donec commodo neque sed elit eleifend condimentum. Mauris vitae rutrum augue.";
-        
+
         final String taegore = "Taegore";
         final String burrukai = "Burrukai";
         final String kirrid = "Kirrid";
@@ -1737,7 +1748,7 @@ Kirrid have a thick coat of cloudwool that can grow in a variety of natural colo
 The harsh cold of the arctic isles of the Holy Isles have caused kirrid to adapt with much larger fur cover, to account for the extra weight their head plates grow much smaller, resembling symmetrical horns. Kirrid will participate in friendly competition with their flock mates, ramming their head plates together until one breaks, this helps keep the fast-growing head plating trimmed down and aerodynamic.
 
 Kirrid have a thick coat of cloudwool that can grow in a variety of natural colors.”""");
-    
+
         this.addBestiaryDescription(AetherIIEntityTypes.FLYING_COW.get(), """
 “Peaceful creatures found in rare herds in The Aether's Holy Isles.
 
@@ -1762,7 +1773,7 @@ Phygs represent a relatively low part of the wildlife population of the Holy Isl
 They are deeply social creatures that enjoy the company of other species, including the people of The Aether and human visitors. an aerbunny's coat has a condensed layer of aercloud nestled beneath their fur, which allows them to float gently through the air.
 
 Feeding an aerbunny its favorite fruit allows it to be tamed.  This allows them to be held, granting their natural gliding abilities to someone travelling The Aether.”""");
-    
+
         this.addBestiaryDescription(AetherIIEntityTypes.MOA.get(), """
 “Intelligent and territorial creatures that cannot be tamed from the wild, but can be raised from an egg to be tamed and ridden as a mount.
 
