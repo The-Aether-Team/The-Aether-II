@@ -727,6 +727,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.RED_CLOUDWOOL_CARPET, "Red Cloudwool Carpet");
         this.addBlock(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET, "Black Cloudwool Carpet");
 
+        // Roofing
+        this.addBlock(AetherIIBlocks.CLOUDWOOL_ROOFING, "Cloudwool Roofing");
+
         // Arkenium Blocks
         this.addBlock(AetherIIBlocks.ARKENIUM_DOOR, "Arkenium Door");
         this.addBlock(AetherIIBlocks.ARKENIUM_TRAPDOOR, "Arkenium Trapdoor");

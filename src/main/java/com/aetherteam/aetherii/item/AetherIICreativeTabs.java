@@ -145,6 +145,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AMBEROOT_TOP_BEAM.get());
                 output.accept(AetherIIBlocks.AMBEROOT_BEAM.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.CLOUDWOOL_ROOFING.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_STAIRS.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_SLAB.get());

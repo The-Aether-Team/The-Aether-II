@@ -437,6 +437,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createFullAndCarpetBlocks(AetherIIBlocks.RED_CLOUDWOOL.get(), AetherIIBlocks.RED_CLOUDWOOL_CARPET.get());
         this.createFullAndCarpetBlocks(AetherIIBlocks.BLACK_CLOUDWOOL.get(), AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get());
 
+        // Roofing
+        this.createRoofing(AetherIIBlocks.CLOUDWOOL_ROOFING.get());
+
         // Arkenium Blocks
         this.createDoor(AetherIIBlocks.ARKENIUM_DOOR.get());
         this.createOrientableTrapdoor(AetherIIBlocks.ARKENIUM_TRAPDOOR.get());

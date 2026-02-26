@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "aether_ii:cloudwool",
+    "S": "#aether_ii:rods/skyroot"
+  },
+  "pattern": [
+    "##",
+    "SS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:cloudwool_roofing"
+  }
+}
