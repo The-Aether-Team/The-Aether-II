@@ -1083,7 +1083,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.carpet(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET, AetherIIBlocks.BLACK_CLOUDWOOL.get());
 
         // Roofing
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIBlocks.CLOUDWOOL_ROOFING)
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIBlocks.CLOUDWOOL_ROOFING, 4)
                 .define('#', AetherIIBlocks.CLOUDWOOL)
                 .define('S', AetherIITags.Items.RODS_SKYROOT)
                 .pattern("##")
