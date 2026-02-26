@@ -96,6 +96,10 @@ public class HoveringBlockEntity extends Entity {
             if (this.verticalCollision || this.horizontalCollision || this.onGround()) {
                 this.markShouldSettle();
             }
+            if (holdingPlayer != null) {
+                holdingPlayer.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGravititeHoldingFloatingBlock(false);
+                holdingPlayer.syncData(AetherIIDataAttachments.ABILITY_BEHAVIOR);
+            }
         }
         if (this.targetSettlePosition != null) {
             this.settleBlock();
@@ -131,6 +135,8 @@ public class HoveringBlockEntity extends Entity {
             this.held = false;
             this.launched = true;
             this.push(holdingPlayer.getViewVector(1.0F).x() * 2.5, holdingPlayer.getViewVector(1.0F).y() * 2.5, holdingPlayer.getViewVector(1.0F).z() * 2.5);
+            holdingPlayer.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGravititeHoldingFloatingBlock(false);
+            holdingPlayer.syncData(AetherIIDataAttachments.ABILITY_BEHAVIOR);
         }
         return true;
     }
