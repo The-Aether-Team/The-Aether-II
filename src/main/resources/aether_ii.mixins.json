@@ -73,6 +73,7 @@
     "client.accessor.DeathScreenAccessor",
     "client.accessor.DialogScreenAccessor",
     "client.accessor.EditBoxAccessor",
+    "client.accessor.GhostSlotsAccessor",
     "client.accessor.GuiAccessor",
     "client.accessor.InventoryScreenAccessor",
     "client.accessor.ItemRendererAccessor",
