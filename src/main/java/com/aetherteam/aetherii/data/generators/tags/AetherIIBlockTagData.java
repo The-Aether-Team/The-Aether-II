@@ -1157,7 +1157,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_CARPET.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(),
-                AetherIIBlocks.AMBRELINN_MOSS_CARPET.get()
+                AetherIIBlocks.AMBRELINN_MOSS_CARPET.get(),
+                AetherIIBlocks.CLOUDWOOL_ROOFING.get()
         );
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(
                 AetherIIBlocks.BLUE_AERCLOUD.get(),
