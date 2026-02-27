@@ -1,11 +1,5 @@
 {
   "values": [
-    "aether_ii:short_aether_grass",
-    "aether_ii:medium_aether_grass",
-    "aether_ii:tall_aether_grass",
-    "aether_ii:bryalinn_moss_vines",
-    "aether_ii:shayelinn_moss_vines",
-    "aether_ii:ambrelinn_moss_vines",
     "aether_ii:skyroot_log",
     "aether_ii:stripped_skyroot_log",
     "aether_ii:greatroot_log",
@@ -28,8 +22,6 @@
     "aether_ii:stripped_wisproot_trunk",
     "aether_ii:amberoot_trunk",
     "aether_ii:stripped_amberoot_trunk",
-    "aether_ii:blueberry_bush_stem",
-    "aether_ii:orange_tree",
     "aether_ii:skyroot_planks",
     "aether_ii:skyroot_fence",
     "aether_ii:skyroot_fence_gate",
