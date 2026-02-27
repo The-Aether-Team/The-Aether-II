@@ -39,6 +39,7 @@ import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.*;
 import net.neoforged.neoforge.client.model.generators.loaders.CompositeModelBuilder;
 import org.apache.commons.lang3.ArrayUtils;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -528,6 +529,15 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         });
         this.blockStateOutput.accept(generator);
         this.registerSimpleFlatItemModel(block);
+    }
+
+    public void createRoofing(Block block) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom"));
+        ResourceLocation location = ModelTemplates.CUBE_BOTTOM_TOP.create(block, mapping, this.modelOutput);
+        this.blockStateOutput.accept(createSimpleBlock(block, plainVariant(location)));
     }
 
     public void createCrystal(Block block, ModelTemplate itemModel) {

@@ -1082,6 +1082,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.carpet(AetherIIBlocks.RED_CLOUDWOOL_CARPET, AetherIIBlocks.RED_CLOUDWOOL.get());
         this.carpet(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET, AetherIIBlocks.BLACK_CLOUDWOOL.get());
 
+        // Roofing
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIBlocks.CLOUDWOOL_ROOFING, 8)
+                .define('#', AetherIIBlocks.CLOUDWOOL)
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy(getHasName(AetherIIBlocks.CLOUDWOOL), has(AetherIIBlocks.CLOUDWOOL))
+                .save(this.output);
+
         // Skyroot Beds
         this.colorBlockWithDye(dyes, bed, AetherIIBlocks.SKYROOT_BED.asItem(), "bed");
         this.washDyedBlock(bed, AetherIIBlocks.SKYROOT_BED.asItem(), "bed");
@@ -1529,6 +1537,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ENCHANTED_BLUEBERRY, AetherIIItems.BLUEBERRY, 1, 0.0F).save(this.output);
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ENCHANTED_ORANGE, AetherIIItems.ORANGE, 1, 0.0F).save(this.output);
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ENCHANTED_WYNDBERRY, AetherIIItems.WYNDBERRY, 2, 0.0F).save(this.output);
+        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ENCHANTED_SWET_JELLY, AetherIIItems.SWET_JELLY, 1, 0.0F).save(this.output);
         this.foodCooking(AetherIIItems.BURRUKAI_RIB_CUT, AetherIIItems.BURRUKAI_RIBS, 0.35F, this.output);
         this.foodCooking(AetherIIItems.KIRRID_LOIN, AetherIIItems.KIRRID_CUTLET, 0.35F, this.output);
         this.foodCooking(AetherIIItems.RAW_TAEGORE_MEAT, AetherIIItems.TAEGORE_STEAK, 0.35F, this.output);

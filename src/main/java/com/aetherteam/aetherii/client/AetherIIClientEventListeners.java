@@ -75,6 +75,7 @@ public class AetherIIClientEventListeners {
 
         // Datapacks
         bus.addListener(AetherIIClientEventListeners::onDatapackSync);
+        bus.addListener(AetherIIClientEventListeners::onReceiveRecipes);
 
         //bus.addListener(LevelClientListener::onKeyPress); todo: remove after port to 1.21.9+
     }
@@ -236,5 +237,9 @@ public class AetherIIClientEventListeners {
 
     public static void onDatapackSync(OnDatapackSyncEvent event) {
         AetherIIClientCaches.onDatapackSync(event);
+    }
+
+    public static void onReceiveRecipes(RecipesReceivedEvent event) {
+        AetherIIClientCaches.onReceiveRecipes(event);
     }
 }

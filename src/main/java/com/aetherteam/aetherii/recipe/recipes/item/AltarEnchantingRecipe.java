@@ -49,6 +49,12 @@ public class AltarEnchantingRecipe extends SingleItemRecipe {
         return this.category;
     }
 
+    //making public
+    @Override
+    public ItemStack result() {
+        return super.result();
+    }
+
     @Override
     public RecipeType<AltarEnchantingRecipe> getType() {
         return AetherIIRecipeTypes.ALTAR_ENCHANTING.get();
@@ -61,15 +67,29 @@ public class AltarEnchantingRecipe extends SingleItemRecipe {
 
     @Override
     public List<RecipeDisplay> display() {
-        return List.of(new AltarRecipeDisplay(
-                this.input().display(),
-                new SlotDisplay.TagSlotDisplay(AetherIITags.Items.ALTAR_FUEL),
-                new SlotDisplay.ItemStackSlotDisplay(this.result()),
-                new SlotDisplay.ItemSlotDisplay(AetherIIBlocks.ALTAR.asItem()),
-                this.fuelCount,
-                this.processingTime,
-                this.experience
-        ));
+        if (this.input().getCustomIngredient() == null && this.input().getValues().contains(this.result().getItemHolder())) {
+            ItemStack input = this.result().copy();
+            input.setDamageValue(input.getMaxDamage());
+            return List.of(new AltarRecipeDisplay(
+                    new SlotDisplay.ItemStackSlotDisplay(input),
+                    new SlotDisplay.TagSlotDisplay(AetherIITags.Items.ALTAR_FUEL),
+                    new SlotDisplay.ItemStackSlotDisplay(this.result().copy()),
+                    new SlotDisplay.ItemSlotDisplay(AetherIIBlocks.ALTAR.asItem()),
+                    this.fuelCount,
+                    this.processingTime,
+                    this.experience
+            ));
+        } else {
+            return List.of(new AltarRecipeDisplay(
+                    this.input().display(),
+                    new SlotDisplay.TagSlotDisplay(AetherIITags.Items.ALTAR_FUEL),
+                    new SlotDisplay.ItemStackSlotDisplay(this.result()),
+                    new SlotDisplay.ItemSlotDisplay(AetherIIBlocks.ALTAR.asItem()),
+                    this.fuelCount,
+                    this.processingTime,
+                    this.experience
+            ));
+        }
     }
 
     @Override

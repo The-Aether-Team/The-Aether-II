@@ -264,6 +264,22 @@
               "function": "minecraft:set_count"
             }
           ],
+          "name": "aether_ii:enchanted_swet_jelly",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
           "name": "aether_ii:enchanted_wyndberry"
         }
       ],

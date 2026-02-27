@@ -7,7 +7,9 @@ import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockModelPart;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
+import net.minecraft.world.item.crafting.RecipeMap;
 import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
+import net.neoforged.neoforge.client.event.RecipesReceivedEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AetherIIClientCaches {
     public static final Map<MuralBlockEntity.MuralData, List<BlockModelPart>> CACHED_MURAL_BLOCK_PARTS = new ConcurrentHashMap<>();
     public static final Map<MuralSection, List<BakedQuad>> CACHED_MURAL_ITEM_PARTS = new ConcurrentHashMap<>();
+    public static RecipeMap CLIENT_CACHES = RecipeMap.EMPTY;
 
     public static void registerReloadListeners(AddClientReloadListenersEvent event) { // Clear cache as UVs can change from resource packs
         event.addListener(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "mural_cache"), (ResourceManagerReloadListener) resourceManager -> {
@@ -28,5 +31,9 @@ public class AetherIIClientCaches {
     public static void onDatapackSync(OnDatapackSyncEvent event) { // Clear stale holders to prevent memory leaks
         CACHED_MURAL_BLOCK_PARTS.clear();
         CACHED_MURAL_ITEM_PARTS.clear();
+    }
+
+    public static void onReceiveRecipes(RecipesReceivedEvent event) {
+        CLIENT_CACHES = event.getRecipeMap();
     }
 }

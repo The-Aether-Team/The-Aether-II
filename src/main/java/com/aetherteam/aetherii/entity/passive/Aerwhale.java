@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import com.google.common.collect.ImmutableList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -10,10 +11,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.BodyRotationControl;
@@ -36,8 +34,16 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
+import java.util.List;
 
 public class Aerwhale extends PathfinderMob {
+
+    public static final List<Vec3> ENTITY_ATTACHMENT_POINT = ImmutableList.of(new Vec3(0.0, 0.5, 0.5));
+    public static final List<Vec3> LEASHER_ATTACHMENT_POINT = ImmutableList.of(new Vec3(0.0, 0.5, 0.0));
+    public static final List<Vec3> SHARED_QUAD_ATTACHMENT_POINTS = ImmutableList.of(
+            new Vec3(-0.5, 0.5, 0.5), new Vec3(-0.5, 0.5, -0.5), new Vec3(0.5, 0.5, -0.5), new Vec3(0.5, 0.5, 0.5)
+    );
+
     public Aerwhale(EntityType<? extends Aerwhale> type, Level level) {
         super(type, level);
         this.moveControl = new AerwhaleMoveControl(this, true);
@@ -184,6 +190,37 @@ public class Aerwhale extends PathfinderMob {
     public double leashSnapDistance() {
         return 16.0;
     }
+
+    @Override
+    public boolean supportQuadLeashAsHolder() {
+        return true;
+    }
+
+    @Override
+    public boolean supportQuadLeash() {
+        return true;
+    }
+
+    @Override
+    public Vec3[] getQuadLeashHolderOffsets() {
+        return createQuadLeashOffsetsWithRotate(this, 0.0F, 0.35F, 0.35F, 0.5F);
+    }
+
+    public Vec3[] getQuadLeashOffsets() {
+        return createQuadLeashOffsetsWithRotate(this, 0.0F, 0.35F, 0.35F, 0.7F);
+    }
+
+    private Vec3[] createQuadLeashOffsetsWithRotate(Entity entity, double zOffset, double z, double x, double y) {
+        float f = entity.getBbWidth();
+        double d0 = zOffset * (double) f;
+        double d1 = z * (double) f;
+        double d2 = x * (double) f;
+        double d3 = y * (double) entity.getBbHeight();
+        double lookAngleY = entity.getViewVector(1.0F).y;
+
+        return new Vec3[]{new Vec3(-d2, d3 + lookAngleY, d1 + d0), new Vec3(-d2, d3 - lookAngleY, -d1 + d0), new Vec3(d2, d3 + lookAngleY, -d1 + d0), new Vec3(d2, d3 - lookAngleY, d1 + d0)};
+    }
+
 
     @Override
     public void onElasticLeashPull() {
@@ -413,9 +450,7 @@ public class Aerwhale extends PathfinderMob {
                 vec3,
                 vec31,
                 aabb1,
-                (pos, index) -> aabb.intersects(pos)
-                    ? true
-                    : this.blockTraversalPossible(this.whale.level(), vec3, vec31, pos, flag, flag1)
+                    (pos, index) -> aabb.intersects(pos) || this.blockTraversalPossible(this.whale.level(), vec3, vec31, pos, flag, flag1)
             );
         }
 

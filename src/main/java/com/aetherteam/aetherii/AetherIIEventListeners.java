@@ -11,6 +11,7 @@ import com.aetherteam.aetherii.event.FreezeEvent;
 import com.aetherteam.aetherii.event.hooks.BlockHooks;
 import com.aetherteam.aetherii.event.hooks.PlayerHooks;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -41,6 +42,7 @@ import net.minecraft.world.phys.HitResult;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityMountEvent;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
@@ -102,6 +104,9 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onAlterGround);
         bus.addListener(AetherIIEventListeners::onBlockFreeze);
         bus.addListener(AetherIIEventListeners::onBreatheInBlock);
+
+        // Level
+        bus.addListener(AetherIIEventListeners::onDatapackSync);
     }
 
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
@@ -470,5 +475,17 @@ public class AetherIIEventListeners {
         if (!BlockHooks.canBreathe(entity)) {
             event.setCanBreathe(false);
         }
+    }
+
+    public static void onDatapackSync(OnDatapackSyncEvent event) {
+        event.sendRecipes(
+                AetherIIRecipeTypes.ALKAHEST_PURIFICATION.get(),
+                AetherIIRecipeTypes.ALKAHEST_CORROSION.get(),
+                AetherIIRecipeTypes.ALTAR_ENCHANTING.get(),
+                AetherIIRecipeTypes.AMBROSIUM_ENCHANTING.get(),
+                AetherIIRecipeTypes.DUST_IRRADIATION.get(),
+                AetherIIRecipeTypes.HOURGLASS_RESTORING.get(),
+                AetherIIRecipeTypes.ICESTONE_FREEZABLE.get(),
+                AetherIIRecipeTypes.SWET_GEL_CONVERSION.get());
     }
 }
