@@ -330,6 +330,15 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.HOLYSTONE_ABILITY_GUARANTEED).addTag(Tags.Blocks.ORES);
         this.tag(AetherIITags.Blocks.GRAVITITE_ABILITY_BLACKLIST).add(
                 Blocks.PISTON_HEAD,
+                AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(),
+                AetherIIBlocks.BLUEBERRY_BUSH.get(),
+                AetherIIBlocks.ORANGE_TREE.get(),
+                AetherIIBlocks.VALKYRIE_SPROUT.get(),
+                AetherIIBlocks.BRETTL_PLANT.get(),
+                AetherIIBlocks.BRETTL_PLANT_TIP.get(),
+                AetherIIBlocks.CARRION_CUTTING.get(),
+                AetherIIBlocks.AECHOR_CUTTING.get(),
+                AetherIIBlocks.BRETTL_FLOWER.get(),
                 AetherIIBlocks.SENTRY_SPAWNER.get(),
                 AetherIIBlocks.SENTRY_TRAP.get()
         );
