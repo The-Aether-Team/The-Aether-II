@@ -21,7 +21,6 @@ import net.minecraft.world.item.crafting.display.SlotDisplay;
 import java.util.stream.Collectors;
 
 public class AlkahestPurifierRecipeCategory extends AbstractRecipeCategory<AlkahestPurificationRecipe> {
-
     public static final IRecipeType<AlkahestPurificationRecipe> ALKAHEST_PURIFICATION = IRecipeType.create(AetherII.MODID, "alkahest_purification", AlkahestPurificationRecipe.class);
     private final IDrawable background;
     private final IDrawable arrow;

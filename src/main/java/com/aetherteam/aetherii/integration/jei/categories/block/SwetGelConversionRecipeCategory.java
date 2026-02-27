@@ -10,7 +10,6 @@ import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.network.chat.Component;
 
 public class SwetGelConversionRecipeCategory extends AbstractBlockStateRecipeCategory<SwetGelRecipe> {
-
     public static final IRecipeType<SwetGelRecipe> SWET_GEL_CONVERSION = IRecipeType.create(AetherII.MODID, "swet_gel_conversion", SwetGelRecipe.class);
 
     public SwetGelConversionRecipeCategory(IGuiHelper helper, IPlatformFluidHelper<?> fluidHelper) {

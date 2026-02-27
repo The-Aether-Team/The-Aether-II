@@ -105,7 +105,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onBlockFreeze);
         bus.addListener(AetherIIEventListeners::onBreatheInBlock);
 
-        //level
+        // Level
         bus.addListener(AetherIIEventListeners::onDatapackSync);
     }
 

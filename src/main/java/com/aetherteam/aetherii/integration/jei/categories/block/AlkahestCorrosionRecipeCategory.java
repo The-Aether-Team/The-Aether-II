@@ -10,7 +10,6 @@ import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.network.chat.Component;
 
 public class AlkahestCorrosionRecipeCategory extends AbstractBlockStateRecipeCategory<AlkahestCorrosionRecipe> {
-
     public static final IRecipeType<AlkahestCorrosionRecipe> ALKAHEST_CORROSION = IRecipeType.create(AetherII.MODID, "alkahest_corrosion", AlkahestCorrosionRecipe.class);
 
     public AlkahestCorrosionRecipeCategory(IGuiHelper helper, IPlatformFluidHelper<?> fluidHelper) {

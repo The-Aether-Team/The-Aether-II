@@ -3,9 +3,7 @@ package com.aetherteam.aetherii.integration.jei.categories.item;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.recipe.recipes.OutputEntry;
 import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
-import com.aetherteam.aetherii.recipe.recipes.item.HourglassRestoringRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
@@ -16,20 +14,11 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.AbstractRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.display.SlotDisplay;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class AltarRecipeCategory extends AbstractRecipeCategory<AltarEnchantingRecipe> {
-
     public static final IRecipeType<AltarEnchantingRecipe> ALTAR_ENCHANTING = IRecipeType.create(AetherII.MODID, "altar_enchanting", AltarEnchantingRecipe.class);
     private final IDrawable background;
     private final IDrawable progress;

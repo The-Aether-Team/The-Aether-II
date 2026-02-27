@@ -9,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 public class AmberDartInterpreter implements ISubtypeInterpreter<ItemStack> {
-
     @Override
     public @Nullable Object getSubtypeData(ItemStack stack, UidContext context) {
         return stack.getOrDefault(AetherIIDataComponents.BUILDUP_CONTENTS, new BuildupContents(EffectBuildupPresets.VULNERABILITY));

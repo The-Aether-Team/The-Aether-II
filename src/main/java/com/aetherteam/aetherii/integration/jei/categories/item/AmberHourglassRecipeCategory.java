@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AmberHourglassRecipeCategory extends AbstractRecipeCategory<HourglassRestoringRecipe> {
-
     public static final IRecipeType<HourglassRestoringRecipe> HOURGLASS_RESTORING = IRecipeType.create(AetherII.MODID, "hourglass_restoring", HourglassRestoringRecipe.class);
     private final IDrawable background;
     private final IDrawable leftProgress;

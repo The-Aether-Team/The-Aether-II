@@ -1,10 +1,9 @@
 package com.aetherteam.aetherii.integration.jei;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIIClientCaches;
-import com.aetherteam.aetherii.client.gui.screen.guidebook.*;
+import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookEquipmentScreen;
 import com.aetherteam.aetherii.client.gui.screen.inventory.*;
 import com.aetherteam.aetherii.integration.jei.categories.block.*;
 import com.aetherteam.aetherii.integration.jei.categories.item.AlkahestPurifierRecipeCategory;
@@ -18,20 +17,15 @@ import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
-import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.handlers.IGuiProperties;
 import mezz.jei.api.gui.handlers.IScreenHandler;
 import mezz.jei.api.registration.*;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
 @JeiPlugin
 public class AetherIIJEIPlugin implements IModPlugin {
-
     @Override
     public ResourceLocation getPluginUid() {
         return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "jei");
@@ -70,15 +64,15 @@ public class AetherIIJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        registration.addRecipes(AlkahestPurifierRecipeCategory.ALKAHEST_PURIFICATION, AetherIIClientCaches.clientRecipes.byType(AetherIIRecipeTypes.ALKAHEST_PURIFICATION.get()).stream().map(RecipeHolder::value).toList());
-        registration.addRecipes(AltarRecipeCategory.ALTAR_ENCHANTING, AetherIIClientCaches.clientRecipes.byType(AetherIIRecipeTypes.ALTAR_ENCHANTING.get()).stream().map(RecipeHolder::value).toList());
-        registration.addRecipes(AmberHourglassRecipeCategory.HOURGLASS_RESTORING, AetherIIClientCaches.clientRecipes.byType(AetherIIRecipeTypes.HOURGLASS_RESTORING.get()).stream().map(RecipeHolder::value).toList());
+        registration.addRecipes(AlkahestPurifierRecipeCategory.ALKAHEST_PURIFICATION, AetherIIClientCaches.CLIENT_CACHES.byType(AetherIIRecipeTypes.ALKAHEST_PURIFICATION.get()).stream().map(RecipeHolder::value).toList());
+        registration.addRecipes(AltarRecipeCategory.ALTAR_ENCHANTING, AetherIIClientCaches.CLIENT_CACHES.byType(AetherIIRecipeTypes.ALTAR_ENCHANTING.get()).stream().map(RecipeHolder::value).toList());
+        registration.addRecipes(AmberHourglassRecipeCategory.HOURGLASS_RESTORING, AetherIIClientCaches.CLIENT_CACHES.byType(AetherIIRecipeTypes.HOURGLASS_RESTORING.get()).stream().map(RecipeHolder::value).toList());
 
-        registration.addRecipes(AlkahestCorrosionRecipeCategory.ALKAHEST_CORROSION, AetherIIClientCaches.clientRecipes.byType(AetherIIRecipeTypes.ALKAHEST_CORROSION.get()).stream().map(RecipeHolder::value).toList());
-        registration.addRecipes(AmbrosiumConversionRecipeCategory.AMBROSIUM_CONVERSION, AetherIIClientCaches.clientRecipes.byType(AetherIIRecipeTypes.AMBROSIUM_ENCHANTING.get()).stream().map(RecipeHolder::value).toList());
-        registration.addRecipes(DustIrradiationRecipeCategory.DUST_IRRADIATION, AetherIIClientCaches.clientRecipes.byType(AetherIIRecipeTypes.DUST_IRRADIATION.get()).stream().map(RecipeHolder::value).toList());
-        registration.addRecipes(IcestoneFreezingRecipeCategory.ICESTONE_FREEZABLE, AetherIIClientCaches.clientRecipes.byType(AetherIIRecipeTypes.ICESTONE_FREEZABLE.get()).stream().map(RecipeHolder::value).toList());
-        registration.addRecipes(SwetGelConversionRecipeCategory.SWET_GEL_CONVERSION, AetherIIClientCaches.clientRecipes.byType(AetherIIRecipeTypes.SWET_GEL_CONVERSION.get()).stream().map(RecipeHolder::value).toList());
+        registration.addRecipes(AlkahestCorrosionRecipeCategory.ALKAHEST_CORROSION, AetherIIClientCaches.CLIENT_CACHES.byType(AetherIIRecipeTypes.ALKAHEST_CORROSION.get()).stream().map(RecipeHolder::value).toList());
+        registration.addRecipes(AmbrosiumConversionRecipeCategory.AMBROSIUM_CONVERSION, AetherIIClientCaches.CLIENT_CACHES.byType(AetherIIRecipeTypes.AMBROSIUM_ENCHANTING.get()).stream().map(RecipeHolder::value).toList());
+        registration.addRecipes(DustIrradiationRecipeCategory.DUST_IRRADIATION, AetherIIClientCaches.CLIENT_CACHES.byType(AetherIIRecipeTypes.DUST_IRRADIATION.get()).stream().map(RecipeHolder::value).toList());
+        registration.addRecipes(IcestoneFreezingRecipeCategory.ICESTONE_FREEZABLE, AetherIIClientCaches.CLIENT_CACHES.byType(AetherIIRecipeTypes.ICESTONE_FREEZABLE.get()).stream().map(RecipeHolder::value).toList());
+        registration.addRecipes(SwetGelConversionRecipeCategory.SWET_GEL_CONVERSION, AetherIIClientCaches.CLIENT_CACHES.byType(AetherIIRecipeTypes.SWET_GEL_CONVERSION.get()).stream().map(RecipeHolder::value).toList());
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.client;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.blockentity.MuralBlockEntity;
 import com.aetherteam.aetherii.blockentity.MuralSection;
-import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockModelPart;
 import net.minecraft.resources.ResourceLocation;
@@ -20,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AetherIIClientCaches {
     public static final Map<MuralBlockEntity.MuralData, List<BlockModelPart>> CACHED_MURAL_BLOCK_PARTS = new ConcurrentHashMap<>();
     public static final Map<MuralSection, List<BakedQuad>> CACHED_MURAL_ITEM_PARTS = new ConcurrentHashMap<>();
-    public static RecipeMap clientRecipes = RecipeMap.EMPTY;
+    public static RecipeMap CLIENT_CACHES = RecipeMap.EMPTY;
 
     public static void registerReloadListeners(AddClientReloadListenersEvent event) { // Clear cache as UVs can change from resource packs
         event.addListener(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "mural_cache"), (ResourceManagerReloadListener) resourceManager -> {
@@ -35,6 +34,6 @@ public class AetherIIClientCaches {
     }
 
     public static void onReceiveRecipes(RecipesReceivedEvent event) {
-        clientRecipes = event.getRecipeMap();
+        CLIENT_CACHES = event.getRecipeMap();
     }
 }

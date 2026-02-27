@@ -1574,7 +1574,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Title Screen
         this.add("aether_ii.menu_title.the_aether_ii", "The Aether II");
-        this.addGuiText("menu.server", "Official Aether Testing Server");
 
         //Recipe Viewers
         this.addGuiText("jei.alkahest", "Alkahest Corrosion");

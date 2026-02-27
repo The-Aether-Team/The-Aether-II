@@ -10,7 +10,6 @@ import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.network.chat.Component;
 
 public class AmbrosiumConversionRecipeCategory extends AbstractBlockStateRecipeCategory<AmbrosiumRecipe> {
-
     public static final IRecipeType<AmbrosiumRecipe> AMBROSIUM_CONVERSION = IRecipeType.create(AetherII.MODID, "ambrosium_enchanting", AmbrosiumRecipe.class);
 
     public AmbrosiumConversionRecipeCategory(IGuiHelper helper, IPlatformFluidHelper<?> fluidHelper) {
