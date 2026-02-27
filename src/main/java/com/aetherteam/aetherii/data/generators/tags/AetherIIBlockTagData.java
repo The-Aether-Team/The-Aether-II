@@ -925,12 +925,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SENTRY_TRAP.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
-                AetherIIBlocks.SHORT_AETHER_GRASS.get(),
-                AetherIIBlocks.MEDIUM_AETHER_GRASS.get(),
-                AetherIIBlocks.TALL_AETHER_GRASS.get(),
-                AetherIIBlocks.BRYALINN_MOSS_VINES.get(),
-                AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
-                AetherIIBlocks.AMBRELINN_MOSS_VINES.get(),
                 AetherIIBlocks.SKYROOT_LOG.get(),
                 AetherIIBlocks.STRIPPED_SKYROOT_LOG.get(),
                 AetherIIBlocks.GREATROOT_LOG.get(),
@@ -953,8 +947,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get(),
                 AetherIIBlocks.AMBEROOT_TRUNK.get(),
                 AetherIIBlocks.STRIPPED_AMBEROOT_TRUNK.get(),
-                AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(),
-                AetherIIBlocks.ORANGE_TREE.get(),
                 AetherIIBlocks.SKYROOT_PLANKS.get(),
                 AetherIIBlocks.SKYROOT_FENCE.get(),
                 AetherIIBlocks.SKYROOT_FENCE_GATE.get(),
