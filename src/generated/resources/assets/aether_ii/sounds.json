@@ -1729,6 +1729,10 @@
       {
         "name": "aether_ii:music/eulogy_for_a_whale",
         "stream": true
+      },
+      {
+        "name": "aether_ii:music/exhale",
+        "stream": true
       }
     ]
   },
@@ -1771,6 +1775,10 @@
       },
       {
         "name": "aether_ii:music/eulogy_for_a_whale",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/exhale",
         "stream": true
       }
     ]
