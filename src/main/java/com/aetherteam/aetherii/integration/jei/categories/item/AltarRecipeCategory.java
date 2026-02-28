@@ -17,6 +17,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
 public class AltarRecipeCategory extends AbstractRecipeCategory<AltarEnchantingRecipe> {
     public static final IRecipeType<AltarEnchantingRecipe> ALTAR_ENCHANTING = IRecipeType.create(AetherII.MODID, "altar_enchanting", AltarEnchantingRecipe.class);
@@ -79,9 +80,15 @@ public class AltarRecipeCategory extends AbstractRecipeCategory<AltarEnchantingR
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, AltarEnchantingRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 43, 43).add(recipe.input()).setStandardSlotBackground();
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 132, 43).add(recipe.result()).setOutputSlotBackground();
-
+        if (recipe.input().getCustomIngredient() == null && recipe.input().getValues().contains(recipe.result().getItemHolder())) {
+            ItemStack input = recipe.result().copy();
+            input.setDamageValue(input.getMaxDamage());
+            builder.addSlot(RecipeIngredientRole.INPUT, 43, 43).add(input).setStandardSlotBackground();
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 132, 43).add(recipe.result().copy()).setOutputSlotBackground();
+        } else {
+            builder.addSlot(RecipeIngredientRole.INPUT, 43, 43).add(recipe.input()).setStandardSlotBackground();
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 132, 43).add(recipe.result()).setOutputSlotBackground();
+        }
         int slotX = 43;
         int slotY = 11;
         Direction slotDirection = Direction.WEST;
