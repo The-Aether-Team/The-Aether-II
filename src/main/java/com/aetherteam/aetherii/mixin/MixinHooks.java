@@ -183,7 +183,7 @@ public class MixinHooks {
         if (modelLocation != null) {
             brokenItem.set(DataComponents.ITEM_MODEL, modelLocation.withSuffix("_broken"));
         }
-        brokenItem.set(DataComponents.ITEM_NAME, Component.translatable("item.aether_ii.broken_item", itemStack.get(DataComponents.ITEM_NAME)));
+        brokenItem.set(DataComponents.ITEM_NAME, Component.translatable("item.aether_ii.broken_item_template", itemStack.get(DataComponents.ITEM_NAME)));
         Integer maxDamage = itemStack.get(DataComponents.MAX_DAMAGE);
         if (maxDamage != null) {
             brokenItem.set(DataComponents.MAX_DAMAGE, maxDamage);

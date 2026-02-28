@@ -1136,8 +1136,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GUIDEBOOK_PAGE, "Guidebook Page");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
         this.addItem(AetherIIItems.MURAL_ITEM, "Mural");
+        this.addItem(AetherIIItems.BROKEN_ITEM, "Broken Item");
 
-        this.add("item.aether_ii.broken_item", "Broken %s");
+        this.add("item.aether_ii.broken_item_template", "Broken %s");
     }
 
     private void addPerItemAbilityTooltips() {
