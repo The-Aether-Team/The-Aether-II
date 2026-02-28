@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.integration.jei.categories.item;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
@@ -13,9 +14,16 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.AbstractRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;
+import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 
 import java.util.stream.Collectors;
@@ -42,12 +50,23 @@ public class AlkahestPurifierRecipeCategory extends AbstractRecipeCategory<Alkah
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, AlkahestPurificationRecipe recipe, IFocusGroup focuses) {
+        SlotDisplay resultDisplay = new SlotDisplay.Composite(recipe.results().list().stream().map(SlotDisplay.ItemStackSlotDisplay::new).collect(Collectors.toUnmodifiableList()));
+        HolderSet<Item> ingredients = recipe.ingredient().getValues();
+        Holder<Item> item = ingredients.get(0);
+        if (item.is(AetherIITags.Items.IRRADIATED_ITEM)) {
+            ResourceLocation location = item.getKey().location().withSuffix("_result");
+            resultDisplay = new SlotDisplay.ItemStackSlotDisplay(new ItemStack(item, 1, DataComponentPatch.builder()
+                    .set(DataComponents.ITEM_MODEL, location)
+                    .set(DataComponents.ITEM_NAME, Component.translatable(Util.makeDescriptionId("item", location)))
+                    .build()
+            ));
+        }
         builder.addSlot(RecipeIngredientRole.INPUT, 68, 6).add(recipe.ingredient()).setStandardSlotBackground();
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 5, 6).add(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER);
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 27, 6).add(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER);
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 27, 61).add(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER);
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 5, 61).add(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER);
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 137, 32).add(new SlotDisplay.Composite(recipe.results().list().stream().map(SlotDisplay.ItemStackSlotDisplay::new).collect(Collectors.toUnmodifiableList()))).setOutputSlotBackground();
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 137, 32).add(resultDisplay).setOutputSlotBackground();
         builder.addSlot(RecipeIngredientRole.OUTPUT, 137, 60).add(new SlotDisplay.Composite(recipe.byproducts().list().stream().map(SlotDisplay.ItemStackSlotDisplay::new).collect(Collectors.toUnmodifiableList()))).setStandardSlotBackground();
     }
 }
