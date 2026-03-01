@@ -189,7 +189,7 @@ curseforge {
         changelogType = "markdown"
         addGameVersion("${minecraft_version}")
         addGameVersion("NeoForge")
-        mainArtifact(tasks.jarJar) {
+        mainArtifact(tasks.jar) {
             displayName = "${mod_name} - ${version}"
             relations {
                 embeddedLibrary "cumulus"
@@ -205,7 +205,7 @@ modrinth {
     versionType = "${version_type}"
     versionName = "${mod_name} - ${version}"
     changelog = new File("$rootDir/docs/CHANGELOG.md").text
-    uploadFile = tasks.jarJar
+    uploadFile = tasks.jar
     gameVersions = ["${minecraft_version}"]
     loaders = ["neoforge"]
     dependencies {
