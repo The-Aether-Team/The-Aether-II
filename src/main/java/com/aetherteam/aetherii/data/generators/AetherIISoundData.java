@@ -1269,7 +1269,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
 
         this.add(AetherIISoundEvents.MUSIC_MENU,
                 definition().with(
-                        sound("aether_ii:music/aether_ii_menu").volume(0.4F).stream()
+                        sound("aether_ii:music/title/resonance_of_the_gods_redux").volume(0.4F).stream()
                 )
         );
 

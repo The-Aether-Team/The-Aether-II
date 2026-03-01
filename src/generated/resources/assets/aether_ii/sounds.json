@@ -1886,7 +1886,7 @@
   "music.menu": {
     "sounds": [
       {
-        "name": "aether_ii:music/aether_ii_menu",
+        "name": "aether_ii:music/title/resonance_of_the_gods_redux",
         "stream": true,
         "volume": 0.4
       }
