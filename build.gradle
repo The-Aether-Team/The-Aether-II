@@ -191,9 +191,9 @@ curseforge {
         addGameVersion("NeoForge")
         mainArtifact(tasks.jar) {
             displayName = "${mod_name} - ${version}"
-            relations {
-                embeddedLibrary "cumulus"
-            }
+//            relations {
+//                embeddedLibrary "cumulus"
+//            }
         }
     }
 }
@@ -208,9 +208,9 @@ modrinth {
     uploadFile = tasks.jar
     gameVersions = ["${minecraft_version}"]
     loaders = ["neoforge"]
-    dependencies {
-        embedded.version "cumulus", "${project.cumulus_version}"
-    }
+//    dependencies {
+//        embedded.version "cumulus", "${project.cumulus_version}"
+//    }
 }
 
 idea {
