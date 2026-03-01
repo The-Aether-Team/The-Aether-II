@@ -15,7 +15,7 @@ public class GravititeShortswordItem extends TieredShortswordItem {
 
     @Override
     public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        target.forceAddEffect(new MobEffectInstance(AetherIIEffects.GRAVITATIONAL_PULL, 25, 0, false, false, false), attacker);
+        target.forceAddEffect(new MobEffectInstance(AetherIIEffects.GRAVITATIONAL_PULL, 50, 0, false, false, false), attacker);
         super.hurtEnemy(stack, target, attacker);
     }
 }
