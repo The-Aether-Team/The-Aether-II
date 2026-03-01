@@ -1,21 +1,16 @@
 ![Banner image](assets/banner.webp)
 # The Aether II
 
-*Work in progress...*
+Step into a renewed and expanded Aether Dimension with The Aether II! The sequel to the quintessential dimension mod. Begin your journey with a Glowstone Portal and Water, and ascend to The Aether's Holy Isles for a new and exciting adventure!
+
+The Aether II adds an entirely new dimension to the game based on the original Aether Mod made by our team back in 2011, and works as a sequel to the recent remaster of The Aether Mod. This new take on the classic dimension revamps the concept with brand-new biomes, mobs, progression systems, structures, and much, much more!
 
 ## :heart: Support The Aether Team
 
 [![Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3DTheAetherTeam%26type%3Dpatrons&style=flat-square&logoColor=white)](https://patreon.com/TheAetherTeam)
 [![Discord](https://img.shields.io/discord/118816101936267265.svg?label=discord&logoColor=FFFFFF&logo=discord&color=7289DA&style=flat-square)](https://discord.gg/aethermod)
-[![Twitter](https://img.shields.io/badge/twitter-@DevAether-lightgrey?style=flat-square&logo=twitter&color=1DA1F2&logoColor=white)](https://twitter.com/DevAether)
-[![Mastodon](https://img.shields.io/mastodon/follow/110581810287361848?domain=https%3A%2F%2Fmastodon.gamedev.place%2F&style=flat-square&logo=mastodon&logoColor=white&label=mastodon&color=858AFA)](https://mastodon.gamedev.place/@DevAether)
 [![Bluesky](https://img.shields.io/badge/bluesky-@aether--mod--net-lightgrey?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1jbG91ZCI+PHBhdGggZD0iTTE4IDEwaC0xLjI2QTggOCAwIDEgMCA5IDIwaDlhNSA1IDAgMCAwIDAtMTB6Ij48L3BhdGg+PC9zdmc+&color=0085ff&logoColor=white)](https://bsky.app/profile/aether-mod.net)
-[![Threads](https://custom-icon-badges.demolab.com/badge/threads-devaether-green?logo=instagram-threads&style=flat-square&color=000000)](https://www.threads.net/@devaether)
-[![Facebook](https://img.shields.io/badge/facebook-AetherMod-blue?logo=facebook&style=flat-square&color=1877F2&logoColor=white)](https://www.facebook.com/AetherMod)
-[![Instagram](https://img.shields.io/badge/devaether-instagram?color=D50060&label=instagram&logo=instagram&style=flat-square&logoColor=white)](https://www.instagram.com/devaether)
-[![TikTok](https://img.shields.io/badge/@devaether-tiktok?color=000000&label=tiktok&logo=tiktok&style=flat-square&logoColor=white)](https://www.tiktok.com/@devaether)
 [![YouTube](https://img.shields.io/badge/youtube-@DevAether-blue?color=FF0000&label=youtube&logo=youtube&style=flat-square)](https://www.youtube.com/@DevAether)
-[![Twitch](https://img.shields.io/twitch/status/theaetherteam?logo=twitch&style=flat-square&logoColor=white)](https://www.twitch.tv/theaetherteam)
 [![Reddit](https://img.shields.io/badge/TheAether-reddit?color=FF4500&label=reddit&logo=reddit&style=flat-square&logoColor=white)](https://www.reddit.com/r/TheAether/)
 [![wiki.gg](https://custom-icon-badges.demolab.com/badge/wiki.gg-aether-green?logo=wikigg&style=flat-square&color=FF1980)](https://aether.wiki.gg/)
 
@@ -26,12 +21,12 @@ You can also support the Aether project and The Aether Team by telling your frie
 If you're interested in sponsoring the Aether project or The Aether Team, please [contact Oz#1986 on the Aether Community Discord](https://discord.gg/aethermod).
 
 ## :package: Download the latest releases
-[![Modloader: Forge](https://img.shields.io/badge/mod%20loader-forge-CC974D?style=flat-square)](https://files.minecraftforge.net/net/minecraftforge/forge/)
-[![Modrinth Downloads](https://img.shields.io/modrinth/dt/YhmgMVyu?color=JD2NSu5O&logo=modrinth)]()
-[![Modrinth Version](https://img.shields.io/modrinth/game-versions/YhmgMVyu?color=JD2NSu5O&label=latest&logo=modrinth&last=true)]()
-[![CurseForge Downloads](http://cf.way2muchnoise.eu/aetherii.svg)]()
-[![CurseForge Version](http://cf.way2muchnoise.eu/versions/aetherii_latest.svg)]()
-[![CircleCI](https://circleci.com/ghThe-Aether-Team/The-Aether-II/tree/1.20.4-develop.svg?style=shield)](https://app.circleci.com/pipelines/github/The-Aether-Team/The-Aether-II?branch=1.20.4-develop)
+[![Modloader: NeoForge](https://img.shields.io/badge/mod%20loader-neoforge-E08234?style=flat-square)](https://neoforged.net/)
+[![Modrinth Downloads](https://img.shields.io/modrinth/dt/JD2NSu5O?color=JD2NSu5O&logo=modrinth)]()
+[![Modrinth Version](https://img.shields.io/modrinth/game-versions/JD2NSu5O?color=JD2NSu5O&label=latest&logo=modrinth&last=true)]()
+[![CurseForge Downloads](http://cf.way2muchnoise.eu/223796.svg)]()
+[![CurseForge Version](http://cf.way2muchnoise.eu/versions/223796_latest.svg)]()
+[![CircleCI](https://circleci.com/gh/The-Aether-Team/The-Aether-II/tree/1.21.8-develop.svg?style=shield)](https://app.circleci.com/pipelines/github/The-Aether-Team/The-Aether-II?branch=1.21.8-develop)
 ### Release builds
 The Aether II has no stable release builds for the latest version of Minecraft just yet, but this port is in active development so keep an eye out for its eventual release.
 
@@ -73,13 +68,13 @@ dependencies {
 If you're running into bugs or other problems, feel free to open an issue on our [issue tracker](https://github.com/The-Aether-Team/The-Aether-II/issues). When doing so, make sure to use one of the provided templates and fill out all the requested information. Make sure to keep your issue's description clear and concise. Your issue's title should also be easy to digest, giving our developers and reporters a good idea of what's wrong without including too many details. Failure to follow any of the above may result in your issue being closed.
 
 ## :wrench: Contribute to the project
-Looking to contribute to the project? We ask that you read over our [Contributor's Guide](https://github.com/The-Aether-Team/The-Aether-II/blob/1.20.4-develop/docs/CONTRIBUTING.md) for more details as well as our [Contributor License Agreement (CLA)](https://github.com/The-Aether-Team/The-Aether-II/blob/1.20.4-develop/docs/AGREEMENT.md) before getting started.
+Looking to contribute to the project? We ask that you read over our [Contributor's Guide](https://github.com/The-Aether-Team/The-Aether-II/blob/1.21.8-develop/docs/CONTRIBUTING.md) for more details as well as our [Contributor License Agreement (CLA)](https://github.com/The-Aether-Team/The-Aether-II/blob/1.21.8-develop/docs/AGREEMENT.md) before getting started.
 
 Not sure what to help with? Take a look at our issue tracker for some ideas! [Here's a quick link](https://github.com/The-Aether-Team/The-Aether-II/labels/status%2Fhelp-wanted) which shows all the currently open issues that we'd love some help on.
 
 ## :scroll: License information
 [![Asset license (Unlicensed)](https://img.shields.io/badge/assets%20license-All%20Rights%20Reserved-red.svg?style=flat-square)](https://en.wikipedia.org/wiki/All_rights_reserved)
-[![Code license (LGPL v3.0)](https://img.shields.io/badge/code%20license-LGPL%20v3.0-green.svg?style=flat-square)](https://github.com/The-Aether-Team/The-Aether-II/blob/1.20.4-develop/LICENSE.txt)
+[![Code license (LGPL v3.0)](https://img.shields.io/badge/code%20license-LGPL%20v3.0-green.svg?style=flat-square)](https://github.com/The-Aether-Team/The-Aether-II/blob/1.21.8-develop/LICENSE.txt)
 
 If you're wanting to create a gameplay video/review, extension or addon, parody, or any other fan work of your own for The Aether II, go for it! We love seeing the content our community creates, and we hope to make it as welcoming as possible for everyone. We ask however that you please don't advertise using our brand (our specific logo assets, team name, official social media posts).
 
@@ -93,4 +88,4 @@ If you have a reason that you wish to use our brand or any unlicensed material, 
 *Work in progress...*
 
 ### :hammer: Contributions
-All of our code contribution credits can be found [here](https://github.com/The-Aether-Team/The-Aether-II/blob/1.20.4-develop/docs/CREDITS.txt). If you contributed to the project and do not see your name, please contact us.
+All of our code contribution credits can be found [here](https://github.com/The-Aether-Team/The-Aether-II/blob/1.21.8-develop/docs/CREDITS.txt). If you contributed to the project and do not see your name, please contact us.
