@@ -1736,7 +1736,7 @@
       }
     ]
   },
-  "music.aether_ambience": {
+  "music.aether_caves": {
     "sounds": [
       {
         "name": "aether_ii:music/aether_ambience1",
@@ -1780,7 +1780,62 @@
       {
         "name": "aether_ii:music/aether_sunrise",
         "stream": true,
+        "volume": 0.4,
+        "weight": 12
+      },
+      {
+        "name": "aether_ii:music/aether1",
+        "stream": true,
         "volume": 0.4
+      },
+      {
+        "name": "aether_ii:music/aether2",
+        "stream": true,
+        "volume": 0.4
+      },
+      {
+        "name": "aether_ii:music/aether3",
+        "stream": true,
+        "volume": 0.4
+      },
+      {
+        "name": "aether_ii:music/aether4",
+        "stream": true,
+        "volume": 0.4
+      },
+      {
+        "name": "aether_ii:music/aether5",
+        "stream": true,
+        "volume": 0.4
+      },
+      {
+        "name": "aether_ii:music/aether6",
+        "stream": true,
+        "volume": 0.4
+      },
+      {
+        "name": "aether_ii:music/polarity",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/sunbeam",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/thin_air",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/walking_dream",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/eulogy_for_a_whale",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/exhale",
+        "stream": true
       }
     ]
   },
@@ -1789,7 +1844,34 @@
       {
         "name": "aether_ii:music/aether_sunset",
         "stream": true,
+        "volume": 0.4,
+        "weight": 6
+      },
+      {
+        "name": "aether_ii:music/aether_night1",
+        "stream": true,
         "volume": 0.4
+      },
+      {
+        "name": "aether_ii:music/aether_night2",
+        "stream": true,
+        "volume": 0.4
+      },
+      {
+        "name": "aether_ii:music/polarity",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/thin_air",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/walking_dream",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/eulogy_for_a_whale",
+        "stream": true
       }
     ]
   },

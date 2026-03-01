@@ -1974,7 +1974,6 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addMusic("aether_ii_menu", "anankalisto - Resonance of the Gods");
 
         // Jukebox Songs
-        this.addJukeboxSong("aether_tune", "Noisestorm - Aether Tune");
         this.addJukeboxSong("ascending_dawn", "Emile van Krieken - Ascending Dawn");
         this.addJukeboxSong("aerwhale", "AetherAudio - Aerwhale");
         this.addJukeboxSong("approaches", "Emile van Krieken - Approaches");
@@ -1982,7 +1981,6 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addJukeboxSong("chinchilla", "RENREN - chinchilla");
         this.addJukeboxSong("high", "RENREN - high");
         this.addJukeboxSong("revolutions", "sunsette - revolutions");
-        this.addJukeboxSong("recording_892", "Emile van Krieken - ???");
     }
 
     private void addSubtitles() {

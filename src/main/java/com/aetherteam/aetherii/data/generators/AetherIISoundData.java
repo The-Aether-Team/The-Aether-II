@@ -1235,15 +1235,33 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
         this.add(AetherIISoundEvents.MUSIC_AETHER_SUNRISE,
                 definition().with(
-                        sound("aether_ii:music/aether_sunrise").volume(0.4F).stream()
+                        sound("aether_ii:music/aether_sunrise").volume(0.4F).stream().weight(12),
+                        sound("aether_ii:music/aether1").volume(0.4F).stream(),
+                        sound("aether_ii:music/aether2").volume(0.4F).stream(),
+                        sound("aether_ii:music/aether3").volume(0.4F).stream(),
+                        sound("aether_ii:music/aether4").volume(0.4F).stream(),
+                        sound("aether_ii:music/aether5").volume(0.4F).stream(),
+                        sound("aether_ii:music/aether6").volume(0.4F).stream(),
+                        sound("aether_ii:music/polarity").stream(),
+                        sound("aether_ii:music/sunbeam").stream(),
+                        sound("aether_ii:music/thin_air").stream(),
+                        sound("aether_ii:music/walking_dream").stream(),
+                        sound("aether_ii:music/eulogy_for_a_whale").stream(),
+                        sound("aether_ii:music/exhale").stream()
                 )
         );
         this.add(AetherIISoundEvents.MUSIC_AETHER_SUNSET,
                 definition().with(
-                        sound("aether_ii:music/aether_sunset").volume(0.4F).stream()
+                        sound("aether_ii:music/aether_sunset").volume(0.4F).stream().weight(6),
+                        sound("aether_ii:music/aether_night1").volume(0.4F).stream(),
+                        sound("aether_ii:music/aether_night2").volume(0.4F).stream(),
+                        sound("aether_ii:music/polarity").stream(),
+                        sound("aether_ii:music/thin_air").stream(),
+                        sound("aether_ii:music/walking_dream").stream(),
+                        sound("aether_ii:music/eulogy_for_a_whale").stream()
                 )
         );
-        this.add(AetherIISoundEvents.MUSIC_AETHER_AMBIENCE,
+        this.add(AetherIISoundEvents.MUSIC_AETHER_CAVES,
                 definition().with(
                         sound("aether_ii:music/aether_ambience1").volume(0.4F).stream()
                 )

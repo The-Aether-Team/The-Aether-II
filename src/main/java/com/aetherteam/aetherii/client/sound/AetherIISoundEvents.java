@@ -249,7 +249,7 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_NIGHT = register("music.aether_night");
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_SUNRISE = register("music.aether_sunrise");
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_SUNSET = register("music.aether_sunset");
-    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_AMBIENCE = register("music.aether_ambience");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_CAVES = register("music.aether_caves");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_MENU = register("music.menu");
 
