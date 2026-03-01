@@ -1962,7 +1962,7 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addMusic("polarity", "sunsette - Polarity");
         this.addMusic("sunbeam", "sunsette - Sunbeam");
         this.addMusic("thin_air", "sunsette - Thin Air");
-        this.addMusic("walking_dream", "sunsette - Walking Dream");
+        this.addMusic("waking_dream", "sunsette - Waking Dream");
         this.addMusic("eulogy_for_a_whale", "sunsette - Eulogy for a Whale");
         this.addMusic("exhale", "sunsette - Exhale");
         this.addMusic("aether_night1", "Emile van Krieken - A Light in the Night");
