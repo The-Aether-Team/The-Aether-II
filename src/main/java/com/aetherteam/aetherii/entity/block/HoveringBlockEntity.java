@@ -175,9 +175,6 @@ public class HoveringBlockEntity extends Entity {
         Vec3 currentPos = this.position();
         Vec3 motion = this.targetSettlePosition.subtract(currentPos);
         BlockPos newPos = BlockPos.containing(this.targetSettlePosition.x(), this.targetSettlePosition.y(), this.targetSettlePosition.z());
-
-        AetherII.LOGGER.info(newPos.toShortString());
-
         this.setDeltaMovement(motion);
         if (holdingPlayer != null) {
             holdingPlayer.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGravititeHoldingFloatingBlock(false);
