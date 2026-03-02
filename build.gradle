@@ -33,17 +33,20 @@ neoForge {
         client {
             client()
             systemProperty 'forge.enabledGameTestNamespaces', mod_id
+            jvmArgument '-XX:+AllowEnhancedClassRedefinition'
         }
 
         clientAuth {
             client()
             systemProperty 'forge.enabledGameTestNamespaces', mod_id
+            jvmArgument '-XX:+AllowEnhancedClassRedefinition'
             devLogin = true
         }
 
         server {
             server()
             systemProperty 'forge.enabledGameTestNamespaces', mod_id
+            jvmArgument '-XX:+AllowEnhancedClassRedefinition'
             programArgument '--nogui'
         }
 
