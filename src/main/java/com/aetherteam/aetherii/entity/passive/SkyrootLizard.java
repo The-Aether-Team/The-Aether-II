@@ -1,12 +1,11 @@
 package com.aetherteam.aetherii.entity.passive;
 
-import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIISkyrootLizardVariants;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
+import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -47,7 +46,7 @@ public class SkyrootLizard extends AetherAnimal {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 2.2));
         this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 2.2, 2.2, Entity::isSprinting));
-        this.goalSelector.addGoal(3, new FallingRandomStrollGoal(this, 1.0));
+        this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
     }
