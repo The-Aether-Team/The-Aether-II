@@ -77,7 +77,13 @@ public class HoveringBlockEntity extends Entity {
 
     @Override
     public void tick() {
+        if (this.level().isClientSide) {
+            this.interpolation.interpolate();
+            return;
+        }
+
         Entity holdingPlayer = this.getHoldingPlayer();
+
         if (this.held) {
             if (holdingPlayer != null) {
                 Vec3 playerToBlock = this.position().subtract(holdingPlayer.position().add(0, 1.15, 0));
@@ -106,7 +112,6 @@ public class HoveringBlockEntity extends Entity {
             this.setDeltaMovement(this.getDeltaMovement().scale(0.98));
         }
 
-        this.interpolation.interpolate();
 
         this.move(MoverType.SELF, this.getDeltaMovement());
 
@@ -170,6 +175,9 @@ public class HoveringBlockEntity extends Entity {
         Vec3 currentPos = this.position();
         Vec3 motion = this.targetSettlePosition.subtract(currentPos);
         BlockPos newPos = BlockPos.containing(this.targetSettlePosition.x(), this.targetSettlePosition.y(), this.targetSettlePosition.z());
+
+        AetherII.LOGGER.info(newPos.toShortString());
+
         this.setDeltaMovement(motion);
         if (holdingPlayer != null) {
             holdingPlayer.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGravititeHoldingFloatingBlock(false);

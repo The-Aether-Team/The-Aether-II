@@ -153,7 +153,7 @@ public class AetherIIEntityTypes {
 
     // Blocks
     public static final DeferredHolder<EntityType<?>, EntityType<HoveringBlockEntity>> HOVERING_BLOCK = ENTITY_TYPES.register("hovering_block",
-            () -> EntityType.Builder.<HoveringBlockEntity>of(HoveringBlockEntity::new, MobCategory.MISC).sized(0.9F, 0.9F).clientTrackingRange(10).updateInterval(20).noLootTable().build(AetherIIEntities.HOVERING_BLOCK));
+            () -> EntityType.Builder.<HoveringBlockEntity>of(HoveringBlockEntity::new, MobCategory.MISC).sized(0.9F, 0.9F).clientTrackingRange(10).updateInterval(1).noLootTable().build(AetherIIEntities.HOVERING_BLOCK));
 
     // Vehicles
     public static final DeferredHolder<EntityType<?>, EntityType<CloudSkiff>> CLOUD_SKIFF = ENTITY_TYPES.register("cloud_skiff",
