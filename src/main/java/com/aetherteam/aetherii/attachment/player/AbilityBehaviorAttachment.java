@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.attachment.player;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
@@ -78,10 +79,10 @@ public class AbilityBehaviorAttachment {
 
     public void login(Player player) {
         this.shouldSyncAfterJoin = true;
+        player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).gravititeHoldingFloatingBlock = false;
     }
 
     public void logout(Player player) {
-
     }
 
     public void onJoinLevel(Player player) {
