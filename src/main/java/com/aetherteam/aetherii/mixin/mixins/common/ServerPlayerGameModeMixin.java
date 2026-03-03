@@ -1,8 +1,6 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.mixin.MixinHooks;
-import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,7 +23,7 @@ public class ServerPlayerGameModeMixin {
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;setItemInHand(Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/ItemStack;)V", ordinal = 1, shift = At.Shift.AFTER), method = "useItem(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;")
     private void handleUseItemOn(ServerPlayer player, Level level, ItemStack stack, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir, @Share("itemStack") LocalRef<ItemStack> itemStack) {
-        if (itemStack.get() != null) {
+        if (itemStack.get() != null && itemStack.get().getDamageValue() == itemStack.get().getMaxDamage() - 1) {
             MixinHooks.breakLootItem(itemStack.get(), player);
         }
     }
