@@ -202,6 +202,12 @@ public class Aerwhale extends PathfinderMob {
     }
 
     @Override
+    public Vec3 getLeashOffset() {
+        Entity entity = (Entity) this;
+        return new Vec3(0.0, entity.getEyeHeight(), 0);
+    }
+
+    @Override
     public Vec3[] getQuadLeashHolderOffsets() {
         return createQuadLeashOffsetsWithRotate(this, 0.0F, 0.35F, 0.35F, 0.5F);
     }
@@ -231,11 +237,6 @@ public class Aerwhale extends PathfinderMob {
     @Override
     public boolean isFlyingVehicle() {
         return true;
-    }
-
-    @Override
-    public Vec3 getLeashOffset() {
-        return Vec3.ZERO;
     }
 
     @Override
