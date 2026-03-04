@@ -116,7 +116,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         );
 
         // Special
-        SpecialRecipeBuilder.special(LootRepairRecipe::new).save(this.output, "loot_repairing");
+        SpecialRecipeBuilder.special(LootRepairRecipe::new).save(this.output, this.name("loot_repairing"));
         
         // Blocks
         // Dirt
@@ -1313,7 +1313,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern(" / ")
                 .pattern("/_/")
                 .unlockedBy("has_holystone_slab", this.has(AetherIIBlocks.HOLYSTONE_SLAB))
-                .save(this.output);
+                .save(this.output, this.name("armor_stand_from_holystone"));
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.REDSTONE, Blocks.DAYLIGHT_DETECTOR)
                 .define('Q', Items.QUARTZ)
                 .define('G', AetherIIBlocks.SCATTERGLASS)
@@ -1322,7 +1322,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("QQQ")
                 .pattern("WWW")
                 .unlockedBy("has_quartz", this.has(Items.QUARTZ))
-                .save(this.output);
+                .save(this.output, this.name("daylight_detector_from_scatterglass"));
 
         // Bookshelves
         this.bookshelf(getter, AetherIIBlocks.SKYROOT_BOOKSHELF, AetherIIBlocks.SKYROOT_PLANKS);
