@@ -44,15 +44,14 @@ public class BlockModelWrapperMixin {
     }
 
     /*
-     *
-     * @Inject(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/item/ItemStackRenderState$LayerRenderState;setExtents(Ljava/util/function/Supplier;)V"))
-     * private static void update(ItemStackRenderState itemStackRenderState, ItemStack stack, ItemModelResolver modelResolver, ItemDisplayContext context, ClientLevel clientLevel, LivingEntity living, int i, CallbackInfo ci, @Local ItemStackRenderState.LayerRenderState layerRenderState) {
-     *   if (!stack.hasFoil() && stack.is(AetherIITags.Items.IRRADIATED_ITEM)) {
-     *       ((LayerRenderStateWrapper) layerRenderState).aether_ii$setIrradiated(true);
-     *       itemStackRenderState.setAnimated();
-     *   } else {
-     *       ((LayerRenderStateWrapper) layerRenderState).aether_ii$setIrradiated(false);
-     *   }
-     * }
+      @Inject(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/item/ItemStackRenderState$LayerRenderState;setExtents(Ljava/util/function/Supplier;)V"))
+      private static void update(ItemStackRenderState itemStackRenderState, ItemStack stack, ItemModelResolver modelResolver, ItemDisplayContext context, ClientLevel clientLevel, LivingEntity living, int i, CallbackInfo ci, @Local ItemStackRenderState.LayerRenderState layerRenderState) {
+        if (!stack.hasFoil() && stack.is(AetherIITags.Items.IRRADIATED_ITEM)) {
+            ((LayerRenderStateWrapper) layerRenderState).aether_ii$setIrradiated(true);
+            itemStackRenderState.setAnimated();
+        } else {
+            ((LayerRenderStateWrapper) layerRenderState).aether_ii$setIrradiated(false);
+        }
+      }
      */
 }
