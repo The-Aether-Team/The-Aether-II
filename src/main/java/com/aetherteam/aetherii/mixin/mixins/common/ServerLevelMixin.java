@@ -7,11 +7,11 @@ import com.aetherteam.aetherii.block.natural.Snowable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.levelgen.Heightmap;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,7 +38,7 @@ public class ServerLevelMixin {
 
             Biome.Precipitation precipitation = biome.getPrecipitationAt(belowHeightmapPos, serverLevel.getSeaLevel());
             if (serverLevel.isRaining() && precipitation != Biome.Precipitation.NONE) {
-                int i = serverLevel.getGameRules().getInt(GameRules.RULE_SNOW_ACCUMULATION_HEIGHT);
+                int i = serverLevel.getGameRules().get(GameRules.MAX_SNOW_ACCUMULATION_HEIGHT);
                 if (i > 0 && AetherGrassBlock.shouldSnow(biome, serverLevel, heightmapPos)) {
                     BlockState blockState = serverLevel.getBlockState(heightmapPos);
                     if (blockState.is(AetherIIBlocks.ARCTIC_SNOW.get())) {

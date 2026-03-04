@@ -1,20 +1,16 @@
 package com.aetherteam.aetherii.client.renderer.entity;
 
-import java.util.UUID;
-
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.model.AerwhaleModel;
 import com.aetherteam.aetherii.entity.passive.Aerwhale;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.Mth;
 import net.minecraft.world.phys.AABB;
 
 public class AerwhaleRenderer extends MobRenderer<Aerwhale, LivingEntityRenderState, AerwhaleModel> {

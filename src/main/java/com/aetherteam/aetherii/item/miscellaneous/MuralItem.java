@@ -1,24 +1,19 @@
 package com.aetherteam.aetherii.item.miscellaneous;
 
-import java.util.ArrayList;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
-
 import com.aetherteam.aetherii.api.Mural;
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.dungeon.MuralBlock;
 import com.aetherteam.aetherii.blockentity.MuralBlockEntity;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-
 import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Util;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -30,6 +25,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+
+import java.util.ArrayList;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class MuralItem extends Item {
     private final Block muralBlock;
@@ -43,7 +42,7 @@ public class MuralItem extends Item {
     @Override
     public InteractionResult useOn(UseOnContext context) {
         var player = context.getPlayer();
-        if (player != null && !context.getLevel().isClientSide) {
+        if (player != null && !context.getLevel().isClientSide()) {
             if (this.createMural(context)) {
                 player.swing(context.getHand());
                 player.level().playSound(null, context.getClickedPos(), this.muralBlock.defaultBlockState().getSoundType().getPlaceSound(), SoundSource.PLAYERS, 1.0F, 1.0F);

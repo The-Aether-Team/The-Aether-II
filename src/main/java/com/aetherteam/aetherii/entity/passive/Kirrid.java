@@ -399,7 +399,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
             double fallSpeed = Math.min(gravity.getValue() * -1.25, -0.1); // Entity isn't allowed to fall too slowly from gravity.
             if (this.getDeltaMovement().y() < fallSpeed) {
                 this.setDeltaMovement(this.getDeltaMovement().x(), fallSpeed, this.getDeltaMovement().z());
-                this.hasImpulse = true;
+                this.needsSync = true;
             }
         }
     }

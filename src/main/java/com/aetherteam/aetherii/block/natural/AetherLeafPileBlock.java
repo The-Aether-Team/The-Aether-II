@@ -120,12 +120,12 @@ public class AetherLeafPileBlock extends FallingBlock {
     }
 
     @Override
-    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean p_451772_) {
         if (entity instanceof FallingBlockEntity fallingBlock && fallingBlock.getBlockState().is(this)) {
             fallingBlock.discard();
             level.setBlock(pos, level.getBlockState(pos).setValue(PILES, Math.min(16, state.getValue(PILES) + 1)), 2);
         }
-        super.entityInside(state, level, pos, entity, effectApplier);
+        super.entityInside(state, level, pos, entity, effectApplier, p_451772_);
     }
 
     @Override

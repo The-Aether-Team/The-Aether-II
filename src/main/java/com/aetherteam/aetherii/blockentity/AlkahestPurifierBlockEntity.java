@@ -12,12 +12,15 @@ import com.aetherteam.aetherii.recipe.recipes.item.AlkahestPurificationRecipe;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.core.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -26,13 +29,19 @@ import net.minecraft.world.CompoundContainer;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.ContainerUser;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedItemContents;
-import net.minecraft.world.inventory.*;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.RecipeCraftingHolder;
+import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.*;
@@ -114,7 +123,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
                 AlkahestPurifierBlockEntity.this.signalOpenCount(level, pos, state, p_155364_, p_155365_);
             }
 
-            protected boolean isOwnContainer(Player player) {
+            public boolean isOwnContainer(Player player) {
                 if (!(player.containerMenu instanceof AlkahestPurifierMenu alkahestPurifierMenu)) {
                     return false;
                 } else {
@@ -161,7 +170,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
         output.putInt("AlkahestLevels", this.alkahestLevels);
         ContainerHelper.saveAllItems(output, this.items);
         CompoundTag recipesUsedTag = new CompoundTag();
-        this.recipesUsed.forEach((key, integer) -> recipesUsedTag.putInt(key.location().toString(), integer));
+        this.recipesUsed.forEach((key, integer) -> recipesUsedTag.putInt(key.identifier().toString(), integer));
         output.store("RecipesUsed", CompoundTag.CODEC, recipesUsedTag);
     }
 
@@ -317,17 +326,19 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
         return direction != Direction.DOWN || (index != 1 && index != 2 && index != 3 && index != 4) || !this.isFuel(itemStack);
     }
 
+
     @Override
-    public void startOpen(Player player) {
-        if (!this.remove && !player.isSpectator()) {
-            this.openersCounter.incrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
+    public void startOpen(ContainerUser p_435573_) {
+        super.startOpen(p_435573_);
+        if (!this.remove && !p_435573_.getLivingEntity().isSpectator()) {
+            this.openersCounter.incrementOpeners(p_435573_.getLivingEntity(), this.getLevel(), this.getBlockPos(), this.getBlockState(), p_435573_.getContainerInteractionRange());
         }
     }
 
     @Override
-    public void stopOpen(Player player) {
-        if (!this.remove && !player.isSpectator()) {
-            this.openersCounter.decrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
+    public void stopOpen(ContainerUser player) {
+        if (!this.remove && !player.getLivingEntity().isSpectator()) {
+            this.openersCounter.incrementOpeners(player.getLivingEntity(), this.getLevel(), this.getBlockPos(), this.getBlockState(), player.getContainerInteractionRange());
         }
     }
 

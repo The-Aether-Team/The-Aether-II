@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class AetherIIAdvancementSoundOverrides {
     public static final DeferredRegister<AdvancementSoundOverride> ADVANCEMENT_SOUND_OVERRIDES = DeferredRegister.create(AetherIIRegistries.ADVANCEMENT_SOUND_OVERRIDE, AetherII.MODID);
-    public static final Registry<AdvancementSoundOverride> ADVANCEMENT_SOUND_OVERRIDE_REGISTRY = ADVANCEMENT_SOUND_OVERRIDES.makeRegistry((builder) -> builder.sync(true).defaultKey(AetherIIRegistries.ADVANCEMENT_SOUND_OVERRIDE.location()));
+    public static final Registry<AdvancementSoundOverride> ADVANCEMENT_SOUND_OVERRIDE_REGISTRY = ADVANCEMENT_SOUND_OVERRIDES.makeRegistry((builder) -> builder.sync(true).defaultKey(AetherIIRegistries.ADVANCEMENT_SOUND_OVERRIDE.identifier()));
 
     public static final DeferredHolder<AdvancementSoundOverride, AdvancementSoundOverride> GENERAL = ADVANCEMENT_SOUND_OVERRIDES.register("general", () -> new AdvancementSoundOverride(0, (advancement) -> checkRoot(advancement, Identifier.fromNamespaceAndPath(AetherII.MODID, "the_holy_isles")), AetherIISoundEvents.UI_TOAST_AETHER_GENERAL));
     public static final DeferredHolder<AdvancementSoundOverride, AdvancementSoundOverride> SLIDER = ADVANCEMENT_SOUND_OVERRIDES.register("slider", () -> new AdvancementSoundOverride(1, (advancement) -> checkAdvancement(advancement, Identifier.fromNamespaceAndPath(AetherII.MODID, "slider")), AetherIISoundEvents.UI_TOAST_AETHER_SLIDER));

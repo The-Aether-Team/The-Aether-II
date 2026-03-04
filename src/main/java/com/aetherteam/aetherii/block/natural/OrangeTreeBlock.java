@@ -181,13 +181,13 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
     }
 
     @Override
-    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, ItemStack toolStack, boolean willHarvest, FluidState fluid) {
         DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
         int age = state.getValue(AGE);
         if (doubleBlockHalf == DoubleBlockHalf.UPPER && age == DOUBLE_AGE_MAX) {
             return true;
         }
-        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+        return super.onDestroyedByPlayer(state, level, pos, player, toolStack, willHarvest, fluid);
     }
 
     /**

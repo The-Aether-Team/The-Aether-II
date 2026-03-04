@@ -20,8 +20,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -29,6 +29,7 @@ import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.ContainerUser;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -39,7 +40,9 @@ import net.minecraft.world.inventory.RecipeCraftingHolder;
 import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -156,7 +159,7 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
         output.putInt("PowerTimeTotal", this.powerTotalTime);
         ContainerHelper.saveAllItems(output, this.items);
         CompoundTag recipesUsedTag = new CompoundTag();
-        this.recipesUsed.forEach((key, integer) -> recipesUsedTag.putInt(key.location().toString(), integer));
+        this.recipesUsed.forEach((key, integer) -> recipesUsedTag.putInt(key.identifier().toString(), integer));
         output.store("RecipesUsed", CompoundTag.CODEC, recipesUsedTag);
     }
 
@@ -392,15 +395,15 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
     }
 
     @Override
-    public void startOpen(Player player) {
-        if (!this.remove && !player.isSpectator() && this.getLevel() != null) {
+    public void startOpen(ContainerUser player) {
+        if (!this.remove && !player.getLivingEntity().isSpectator() && this.getLevel() != null) {
             this.open = true;
         }
     }
 
     @Override
-    public void stopOpen(Player player) {
-        if (!this.remove && !player.isSpectator() && this.getLevel() != null) {
+    public void stopOpen(ContainerUser player) {
+        if (!this.remove && !player.getLivingEntity().isSpectator() && this.getLevel() != null) {
             this.open = false;
         }
     }

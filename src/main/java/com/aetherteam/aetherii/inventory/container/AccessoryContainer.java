@@ -26,10 +26,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class AccessoryContainer extends SimpleContainer {
     public static final MapCodec<AccessoryContainer> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -133,7 +136,7 @@ public class AccessoryContainer extends SimpleContainer {
         boolean keepInventory = false;
         if (entity instanceof ServerPlayer serverPlayer && serverPlayer.level() instanceof ServerLevel serverLevel) {
             GameRules gameRules = serverLevel.getGameRules();
-            if (gameRules.getRule(GameRules.RULE_KEEPINVENTORY).get()) {
+            if (gameRules.get(GameRules.KEEP_INVENTORY)) {
                 keepInventory = true;
             }
         }

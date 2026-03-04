@@ -40,18 +40,18 @@ public class PurpleAercloudBlock extends AercloudBlock {
      * @param entity The {@link Entity} in the block.
      */
     @Override
-    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean p_451772_) {
         if (!entity.isShiftKeyDown() && (!entity.isVehicle() || !(entity.getControllingPassenger() instanceof Player))) {
             entity.resetFallDistance();
             this.runAercloudEffect(state, level, pos, entity);
         } else {
-            super.entityInside(state, level, pos, entity, effectApplier);
+            super.entityInside(state, level, pos, entity, effectApplier, p_451772_);
         }
     }
 
     @Override
     public void runAercloudEffect(BlockState state, Level level, BlockPos pos, Entity entity) {
-        entity.hasImpulse = true;
+        entity.needsSync = true;
         switch (state.getValue(FACING)) {
             case EAST -> entity.setDeltaMovement(2.0, entity.getDeltaMovement().y(), entity.getDeltaMovement().z());
             case WEST -> entity.setDeltaMovement(-2.0, entity.getDeltaMovement().y(), entity.getDeltaMovement().z());

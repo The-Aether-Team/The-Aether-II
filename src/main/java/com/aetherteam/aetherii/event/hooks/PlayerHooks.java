@@ -38,7 +38,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bucketable;
-import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.animal.cow.Cow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
@@ -84,7 +84,7 @@ public class PlayerHooks {
                                 stack.shrink(1);
                                 player.addItem(stack.getCraftingRemainder());
                             } else if (stack.isDamageableItem()) {
-                                stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                                stack.hurtAndBreak(1, player, hand);
                             } else {
                                 player.setItemInHand(hand, stack.getCraftingRemainder());
                             }
@@ -154,7 +154,7 @@ public class PlayerHooks {
                     }
                 }
 
-                if (!level.isClientSide) {
+                if (!level.isClientSide()) {
                     if(level instanceof ServerLevel serverLevel) {
                         for (int i = 0; i < 5; i++) {
                             serverLevel.sendParticles(ParticleTypes.SPLASH,

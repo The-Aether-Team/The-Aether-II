@@ -23,14 +23,15 @@ import net.minecraft.util.TriState;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -71,7 +72,7 @@ public class AetherLeavesBlock extends LeavesBlock {
         if (stack.canPerformAction(ItemAbilities.SHEARS_HARVEST) && state.getValue(MOSSY) != AetherIIBlockStateProperties.Mossy.NONE) {
             level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.SHEARS_SNIP, SoundSource.BLOCKS, 1.0F, 1.0F);
             level.setBlock(pos, state.setValue(MOSSY, AetherIIBlockStateProperties.Mossy.NONE), 3);
-            stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+            stack.hurtAndBreak(1, player, hand);
             if (!level.isClientSide()) {
                 player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
             }

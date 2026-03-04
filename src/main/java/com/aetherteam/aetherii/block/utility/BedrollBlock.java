@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.block.utility;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
@@ -10,16 +9,26 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.attribute.BedRule;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.block.state.properties.BedPart;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
@@ -56,7 +65,10 @@ public class BedrollBlock extends HorizontalDirectionalBlock {
                     return InteractionResult.CONSUME;
                 }
             }
-            if (!level.dimensionType().bedWorks()) {
+
+            BedRule bedrule = (BedRule) level.environmentAttributes().getValue(EnvironmentAttributes.BED_RULE, pos);
+
+            if (!bedrule.canSleep().test(level)) {
                 level.removeBlock(pos, false);
                 BlockPos relativePos = pos.relative(state.getValue(FACING).getOpposite());
                 if (level.getBlockState(relativePos).is(this)) {
@@ -71,8 +83,8 @@ public class BedrollBlock extends HorizontalDirectionalBlock {
                 }
             } else {
                 player.startSleepInBed(pos).ifLeft((problem) -> {
-                    if (problem.getMessage() != null) {
-                        player.displayClientMessage(problem.getMessage(), true);
+                    if (problem.message() != null) {
+                        player.displayClientMessage(problem.message(), true);
                     }
                 }).ifRight((unit) -> {
                     if (player instanceof ServerPlayer serverPlayer) {

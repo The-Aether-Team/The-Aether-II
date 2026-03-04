@@ -395,7 +395,7 @@ public class Aerbunny extends AetherTamableAnimal {
     }
 
     @Override
-    public boolean startRiding(Entity vehicle, boolean force) {
+    public boolean startRiding(Entity vehicle, boolean force, boolean p_433558_) {
         if (vehicle == this.getVehicle()) {
             return false;
         } else if (!((EntityAccessor) vehicle).callCouldAcceptPassenger()) {
@@ -419,7 +419,7 @@ public class Aerbunny extends AetherTamableAnimal {
                 ((EntityAccessor) this.getVehicle()).callAddPassenger(this);
                 ((EntityAccessor) vehicle).callGetIndirectPassengersStream().filter((entity) -> entity instanceof ServerPlayer).forEach((player) -> CriteriaTriggers.START_RIDING_TRIGGER.trigger((ServerPlayer) player));
                 if (this.getVehicle() instanceof Player player) {
-                    this.setVehicleReference(Optional.of(new EntityReference<>(player.getUUID())));
+                    this.setVehicleReference(Optional.of(EntityReference.of(player.getUUID())));
                     if (player instanceof ServerPlayer serverPlayer && !this.firstTick) {
                         PacketDistributor.sendToPlayer(serverPlayer, new AerbunnyMessagePacket());
                     }

@@ -18,10 +18,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.GuiSpriteManager;
 import net.minecraft.client.gui.components.MultiLineLabel;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -145,11 +147,29 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         livingEntity.yHeadRotO = livingEntity.getYRot();
         livingEntity.tickCount = -2;
 
-        Vector3f vector3f = new Vector3f(0.0F, livingEntity.getBbHeight() / 2.0F + yOffset, 0.0F);
-        InventoryScreen.renderEntityInInventory(guiGraphics, startX, startY, endX, endY, scale, vector3f, xQuaternion, zQuaternion, livingEntity);
-        livingEntity.setYBodyRot(yBodyRot);
-        livingEntity.setYRot(yRot);
-        livingEntity.setXRot(xRot);
+        EntityRenderState entityrenderstate = extractRenderState(livingEntity);
+        if (entityrenderstate instanceof LivingEntityRenderState livingentityrenderstate) {
+            livingentityrenderstate.bodyRot = livingentityrenderstate.bodyRot;
+            livingentityrenderstate.yRot = livingEntity.getYRot();
+            livingentityrenderstate.xRot = livingEntity.getXRot();
+
+            livingentityrenderstate.boundingBoxWidth = livingentityrenderstate.boundingBoxWidth / livingentityrenderstate.scale;
+            livingentityrenderstate.boundingBoxHeight = livingentityrenderstate.boundingBoxHeight / livingentityrenderstate.scale;
+            livingentityrenderstate.scale = 1.0F;
+        }
+
+        Vector3f vector3f = new Vector3f(0.0F, entityrenderstate.boundingBoxHeight / 2.0F + yOffset, 0.0F);
+        guiGraphics.submitEntityRenderState(entityrenderstate, scale, vector3f, xQuaternion, zQuaternion, startX, startY, endX, endY);
+    }
+
+    private static EntityRenderState extractRenderState(LivingEntity p_461127_) {
+        EntityRenderDispatcher entityrenderdispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
+        EntityRenderer<? super LivingEntity, ?> entityrenderer = entityrenderdispatcher.getRenderer(p_461127_);
+        EntityRenderState entityrenderstate = entityrenderer.createRenderState(p_461127_, 1.0F);
+        entityrenderstate.lightCoords = 15728880;
+        entityrenderstate.shadowPieces.clear();
+        entityrenderstate.outlineColor = 0;
+        return entityrenderstate;
     }
 
     @Override
@@ -391,7 +411,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         int lineHeight = 9;
         int color = 0xffffffff;
         MultiLineLabel label = MultiLineLabel.create(font, 135, 5, component);
-        label.renderLeftAligned(guiGraphics, x, y, lineHeight, color);
+        label.render(guiGraphics, x, y, lineHeight, color);
     }
 
     @Override

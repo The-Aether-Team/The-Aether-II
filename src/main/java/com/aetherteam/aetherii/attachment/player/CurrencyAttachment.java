@@ -14,7 +14,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.gamerules.GameRules;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,7 +40,7 @@ public class CurrencyAttachment {
     public void dropAll(Player player, Collection<ItemEntity> drops) {
         if (player instanceof ServerPlayer serverPlayer && player.level() instanceof ServerLevel serverLevel) {
             GameRules gameRules = serverLevel.getGameRules();
-            if (!gameRules.getRule(GameRules.RULE_KEEPINVENTORY).get()) {
+            if (!gameRules.get(GameRules.KEEP_INVENTORY)) {
                 int amount = player.getData(AetherIIDataAttachments.CURRENCY).getAmount();
                 int fullStacks = Math.floorDiv(amount, 64);
                 int leftoverStack = amount % 64;

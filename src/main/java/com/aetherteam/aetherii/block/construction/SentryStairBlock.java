@@ -55,7 +55,7 @@ public class SentryStairBlock extends StairBlock implements SentryBlockUpdating 
     }
 
     @Override
-    protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos, Direction direction) {
         return level.getBlockState(pos).getValue(LIT) ? 15 : 0;
     }
 }

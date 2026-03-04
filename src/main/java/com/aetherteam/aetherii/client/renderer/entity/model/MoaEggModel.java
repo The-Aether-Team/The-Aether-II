@@ -1,16 +1,17 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
+import com.aetherteam.aetherii.client.renderer.blockentity.state.MoaEggBlockRenderState;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 
-public class MoaEggModel extends Model {
+public class MoaEggModel extends Model<MoaEggBlockRenderState> {
     private final ModelPart moa_egg;
 
     public MoaEggModel(ModelPart root) {
-        super(root, RenderType::entityCutoutNoCull);
+        super(root, RenderTypes::entityCutoutNoCull);
         this.moa_egg = root.getChild("moa_egg");
     }
 

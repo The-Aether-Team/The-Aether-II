@@ -18,15 +18,18 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.*;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.core.*;
+import net.minecraft.advancements.criterion.*;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.advancements.AdvancementProvider;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
@@ -629,11 +632,11 @@ public class AetherIIAdvancementData extends AdvancementProvider {
             String path = "effects/";
             for (Map.Entry<ResourceKey<EffectsEntry>, Holder<MobEffect>> entry : AetherIIEffectsEntries.EFFECTS.entrySet()) {
                 Holder<MobEffect> effect = entry.getValue();
-                 id = Identifier.fromNamespaceAndPath(AetherII.MODID, "obtain_" + effect.getKey().location().getPath()).withPrefix(path);
+                Identifier id = Identifier.fromNamespaceAndPath(AetherII.MODID, "obtain_" + effect.getKey().identifier().getPath()).withPrefix(path);
                 Advancement.Builder.advancement()
                         .requirements(AdvancementRequirements.Strategy.OR)
-                        .addCriterion("obtain_" + effect.getKey().location().getPath(), EffectsChangedTrigger.TriggerInstance.hasEffects(MobEffectsPredicate.Builder.effects().and(effect)))
-                        .addCriterion("buildup_" + effect.getKey().location().getPath(), EffectBuildupTrigger.Instance.effect(Optional.empty(), Optional.empty(), HolderSet.direct(effect), false))
+                        .addCriterion("obtain_" + effect.getKey().identifier().getPath(), EffectsChangedTrigger.TriggerInstance.hasEffects(MobEffectsPredicate.Builder.effects().and(effect)))
+                        .addCriterion("buildup_" + effect.getKey().identifier().getPath(), EffectBuildupTrigger.Instance.effect(Optional.empty(), Optional.empty(), HolderSet.direct(effect), false))
                         .save(consumer, id);
             }
         }

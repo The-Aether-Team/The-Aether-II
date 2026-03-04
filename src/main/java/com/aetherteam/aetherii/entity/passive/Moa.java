@@ -24,7 +24,6 @@ import com.aetherteam.aetherii.item.miscellaneous.MoaSaddlebagItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Dynamic;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.Util;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -45,10 +44,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.ByIdMap;
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
-import net.minecraft.util.StringRepresentable;
+import net.minecraft.util.*;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.*;
@@ -69,11 +65,11 @@ import net.minecraft.world.item.component.CustomModelData;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.equipment.Equippable;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -282,7 +278,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     @Override
     public boolean hurtServer(ServerLevel serverLevel, DamageSource pSource, float pAmount) {
         boolean flag = super.hurtServer(serverLevel, pSource, pAmount);
-        if (this.level().isClientSide) {
+        if (this.level().isClientSide()) {
             return false;
         } else {
             if (flag && pSource.getEntity() instanceof LivingEntity) {
@@ -374,7 +370,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 double fallSpeed = Math.min(gravity.getValue() * -0.5, max); // Entity isn't allowed to fall too slowly from gravity.
                 if (this.getDeltaMovement().y() < fallSpeed && !this.playerTriedToCrouch()) {
                     this.setDeltaMovement(this.getDeltaMovement().x(), fallSpeed, this.getDeltaMovement().z());
-                    this.hasImpulse = true;
+                    this.needsSync = true;
                     this.setEntityOnGround(false);
                 }
             }
@@ -473,7 +469,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         // Handles rider tracking.
         if (this.getControllingPassenger() instanceof Player player) {
             if (this.getRider() == null) {
-                this.setRider(new EntityReference<>(player.getUUID()));
+                this.setRider(EntityReference.of(player.getUUID()));
             }
 //            if (!this.isEntityOnGround()) {
 //                if (!this.isFallFlying()) {
@@ -560,7 +556,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         Component deathMessage = this.getCombatTracker().getDeathMessage();
         super.die(cause);
         if (this.dead && this.level() instanceof ServerLevel serverlevel) {
-            if (serverlevel.getGameRules().getBoolean(GameRules.RULE_SHOWDEATHMESSAGES)) {
+            if (serverlevel.getGameRules().get(GameRules.SHOW_DEATH_MESSAGES)) {
                 LivingEntity owner = this.getOwner();
                 if (owner instanceof ServerPlayer serverplayer) {
                     serverplayer.sendSystemMessage(deathMessage);
@@ -583,7 +579,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         if (passenger instanceof Player player) {
             this.generateMoaReference();
             if (this.getLastRider() == null || !this.getLastRider().matches(player)) {
-                this.setLastRider(new EntityReference<>(player.getUUID()));
+                this.setLastRider(EntityReference.of(player.getUUID()));
             }
         }
         super.addPassenger(passenger);
@@ -698,7 +694,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
                 this.playSound(SoundEvents.SHEARS_SNIP);
                 this.setShearingTime(this.getRandom().nextInt(2000));
             }
-            itemStack.hurtAndBreak(32, player, getSlotForHand(hand));
+            itemStack.hurtAndBreak(32, player, hand);
             return InteractionResult.SUCCESS;
         } else {
             if (this.isPlayerGrown() && player.isShiftKeyDown() && !this.isBaby()) {
@@ -798,7 +794,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
      */
     public void generateMoaReference() {
         if (this.getMoaReference() == null) {
-            this.setMoaReference(new EntityReference<>(UUID.randomUUID()));
+            this.setMoaReference(EntityReference.of(UUID.randomUUID()));
         }
     }
 
@@ -911,10 +907,10 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     /**
      * Sets the last rider of this Moa (including the current rider).
      *
-     * @param reference The {@link UUID}.
+     * @param lastRider The {@link LivingEntity}.
      */
     public void setLastRider(@Nullable LivingEntity lastRider) {
-        this.getEntityData().set(DATA_LAST_RIDER_REFERENCE, Optional.ofNullable(lastRider).map(EntityReference::new));
+        this.getEntityData().set(DATA_LAST_RIDER_REFERENCE, Optional.ofNullable(lastRider).map(EntityReference::of));
     }
 
     /**

@@ -45,10 +45,10 @@ public class AlkahestLiquidBlock extends VolatileLiquidBlock {
     }
 
     @Override
-    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean p_451772_) {
         if (this.fluid instanceof AlkahestFluid alkahestFluid && level instanceof ServerLevel serverLevel) {
             alkahestFluid.entityInside(state, serverLevel, pos, entity);
         }
-        super.entityInside(state, level, pos, entity, effectApplier);
+        super.entityInside(state, level, pos, entity, effectApplier, p_451772_);
     }
 }

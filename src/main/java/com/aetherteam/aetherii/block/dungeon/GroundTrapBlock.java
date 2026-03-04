@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.block.dungeon;
 import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -69,7 +70,7 @@ public abstract class GroundTrapBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos, Direction direction) {
         return level.getBlockState(pos).getValue(TRAP_STATE) == AetherIIBlockStateProperties.TrapState.SPAWNED ? 15 : 0;
     }
 }

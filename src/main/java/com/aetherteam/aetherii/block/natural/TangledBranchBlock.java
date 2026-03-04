@@ -36,7 +36,7 @@ public class TangledBranchBlock extends Block implements SimpleWaterloggedBlock 
 
 
     @Override
-    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean p_451772_) {
         if (entity instanceof Player player) {
             Vec3 deltaMovement = player.getDeltaMovement();
             player.resetFallDistance();
@@ -52,7 +52,7 @@ public class TangledBranchBlock extends Block implements SimpleWaterloggedBlock 
             }
             player.setDeltaMovement(deltaMovement);
         }
-        super.entityInside(state, level, pos, entity, effectApplier);
+        super.entityInside(state, level, pos, entity, effectApplier, p_451772_);
     }
 
     @Override
