@@ -6,7 +6,7 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.AbilityBehaviorAttachment;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.LivingEntityAccessor;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -18,7 +18,7 @@ import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 public interface GravititeArmor {
-    ResourceLocation GRAVITITE_FALL_DAMAGE_SUPPRESSION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "armor_set.ability.gravitite.fall_damage_suppression");
+    Identifier GRAVITITE_FALL_DAMAGE_SUPPRESSION = Identifier.fromNamespaceAndPath(AetherII.MODID, "armor_set.ability.gravitite.fall_damage_suppression");
 
     static void updatePlayerAttributes(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();

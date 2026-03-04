@@ -6,7 +6,7 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -14,7 +14,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
  * Sets the {@link Aerbunny#DATA_PUFFINESS_ID} value to 11. This is needed in a packet for precise animation syncing.
  */
 public record MoaFlyModeChangePacket(int entityID) implements CustomPacketPayload {
-    public static final Type<MoaFlyModeChangePacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_fly_mode"));
+    public static final Type<MoaFlyModeChangePacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_fly_mode"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, MoaFlyModeChangePacket> STREAM_CODEC = CustomPacketPayload.codec(
             MoaFlyModeChangePacket::write,

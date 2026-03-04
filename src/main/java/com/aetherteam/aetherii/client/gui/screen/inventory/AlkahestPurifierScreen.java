@@ -13,7 +13,7 @@ import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Items;
@@ -21,13 +21,13 @@ import net.minecraft.world.item.Items;
 import java.util.List;
 
 public class AlkahestPurifierScreen extends AbstractRecipeBookScreen<AlkahestPurifierMenu> implements RecipeUpdateListener {
-    private static final ResourceLocation ALKAHEST_PURIFIER_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/alkahest_purifier.png");
-    private static final ResourceLocation OUTPUT_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/output_progress");
-    private static final ResourceLocation BUBBLES_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/bubbles");
-    private static final ResourceLocation ALKAHEST_1_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/alkahest_1");
-    private static final ResourceLocation ALKAHEST_2_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/alkahest_2");
-    private static final ResourceLocation ALKAHEST_3_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/alkahest_3");
-    private static final ResourceLocation ALKAHEST_4_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/alkahest_4");
+    private static final Identifier ALKAHEST_PURIFIER_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/alkahest_purifier.png");
+    private static final Identifier OUTPUT_PROGRESS_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/output_progress");
+    private static final Identifier BUBBLES_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/bubbles");
+    private static final Identifier ALKAHEST_1_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/alkahest_1");
+    private static final Identifier ALKAHEST_2_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/alkahest_2");
+    private static final Identifier ALKAHEST_3_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/alkahest_3");
+    private static final Identifier ALKAHEST_4_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/alkahest_4");
     private static final List<RecipeBookComponent.TabInfo> TABS = List.of(
             new RecipeBookComponent.TabInfo(Items.COMPASS, AetherIIRecipeBookCategories.ALKAHEST_PURIFIER_SEARCH),
             new RecipeBookComponent.TabInfo(AetherIIItems.IRRADIATED_CHUNK.get(), AetherIIRecipeBookCategories.ALKAHEST_PURIFIER_ITEMS.get()),

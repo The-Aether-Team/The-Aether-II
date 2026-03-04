@@ -8,11 +8,11 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class AetherIIExplorationEntries {
     private static ResourceKey<ExplorationEntry> createKey(String name) {
-        return ResourceKey.create(AetherIIRegistries.EXPLORATION_ENTRY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.EXPLORATION_ENTRY, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<ExplorationEntry> context) {

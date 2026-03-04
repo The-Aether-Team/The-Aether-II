@@ -8,16 +8,16 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class SectionTab extends ImageButton {
-    public static WidgetSprites SECTION_TAB = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/page_section_tab"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/page_section_tab_selected"));
+    public static WidgetSprites SECTION_TAB = new WidgetSprites(Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/page_section_tab"), Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/page_section_tab_selected"));
 
     private final GuidebookDiscoveryScreen currentScreen;
     private final DiscoverySection<?, ?> section;
-    private final ResourceLocation icon;
+    private final Identifier icon;
 
-    public SectionTab(GuidebookDiscoveryScreen currentScreen, DiscoverySection<?, ?> section, int x, int y, int width, int height, ResourceLocation icon) {
+    public SectionTab(GuidebookDiscoveryScreen currentScreen, DiscoverySection<?, ?> section, int x, int y, int width, int height, Identifier icon) {
         super(x, y, width, height, SECTION_TAB, (button) -> {
             if (currentScreen.getCurrentSection() != section) {
                 currentScreen.setCurrentSectionTab(section);

@@ -14,11 +14,11 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 
 public class AerbunnyCollarLayer extends RenderLayer<AerbunnyRenderState, AerbunnyModel> {
-    private static final ResourceLocation COLLAR_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/aerbunny/aerbunny_collar.png");
+    private static final Identifier COLLAR_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/aerbunny/aerbunny_collar.png");
     private final AerbunnyModel model;
 
     public AerbunnyCollarLayer(RenderLayerParent<AerbunnyRenderState, AerbunnyModel> renderer, EntityModelSet modelSet) {

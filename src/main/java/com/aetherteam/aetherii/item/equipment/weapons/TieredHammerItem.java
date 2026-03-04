@@ -6,7 +6,7 @@ import com.aetherteam.aetherii.item.equipment.AetherIINeoItemAbilities;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,7 +25,7 @@ import net.neoforged.neoforge.common.Tags;
 import java.util.List;
 
 public class TieredHammerItem extends Item {
-    public static final ResourceLocation BASE_SHOCK_RANGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_shock_range");
+    public static final Identifier BASE_SHOCK_RANGE_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "base_shock_range");
 
     public TieredHammerItem(Item.Properties properties) {
         super(properties);

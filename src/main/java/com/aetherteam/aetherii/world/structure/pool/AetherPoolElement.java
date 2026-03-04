@@ -13,7 +13,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.WorldGenLevel;
@@ -38,8 +38,8 @@ import java.util.function.Function;
  */
 public class AetherPoolElement extends StructurePoolElement {
     private static final Comparator<StructureTemplate.JigsawBlockInfo> HIGHEST_SELECTION_PRIORITY_FIRST = Comparator.comparingInt(StructureTemplate.JigsawBlockInfo::selectionPriority).reversed();
-    private static final Codec<Either<ResourceLocation, StructureTemplate>> TEMPLATE_CODEC = Codec.of(
-            AetherPoolElement::encodeTemplate, ResourceLocation.CODEC.map(Either::left)
+    private static final Codec<Either<Identifier, StructureTemplate>> TEMPLATE_CODEC = Codec.of(
+            AetherPoolElement::encodeTemplate, Identifier.CODEC.map(Either::left)
     );
     public static final MapCodec<AetherPoolElement> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
@@ -52,18 +52,18 @@ public class AetherPoolElement extends StructurePoolElement {
                     Codec.BOOL.fieldOf("replace_air").forGetter(structure -> structure.replaceAir)
             ).apply(instance, AetherPoolElement::new)
     );
-    protected final Either<ResourceLocation, StructureTemplate> template;
+    protected final Either<Identifier, StructureTemplate> template;
     protected final Holder<StructureProcessorList> processors;
     protected final Optional<LiquidSettings> overrideLiquidSettings;
     protected final int discardBelowY;
     protected final int discardAboveY;
     protected final boolean replaceAir;
 
-    private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> template, DynamicOps<T> ops, T prefix) {
-        Optional<ResourceLocation> optional = template.left();
+    private static <T> DataResult<T> encodeTemplate(Either<Identifier, StructureTemplate> template, DynamicOps<T> ops, T prefix) {
+        Optional<Identifier> optional = template.left();
         return optional.isEmpty()
                 ? DataResult.error(() -> "Can not serialize a runtime pool element")
-                : ResourceLocation.CODEC.encode(optional.get(), ops, prefix);
+                : Identifier.CODEC.encode(optional.get(), ops, prefix);
     }
 
     protected static <E extends AetherPoolElement> RecordCodecBuilder<E, Holder<StructureProcessorList>> processorsCodec() {
@@ -74,11 +74,11 @@ public class AetherPoolElement extends StructurePoolElement {
         return LiquidSettings.CODEC.optionalFieldOf("override_liquid_settings").forGetter((codec) -> codec.overrideLiquidSettings);
     }
 
-    protected static <E extends AetherPoolElement> RecordCodecBuilder<E, Either<ResourceLocation, StructureTemplate>> templateCodec() {
+    protected static <E extends AetherPoolElement> RecordCodecBuilder<E, Either<Identifier, StructureTemplate>> templateCodec() {
         return TEMPLATE_CODEC.fieldOf("location").forGetter(codec -> codec.template);
     }
 
-    public AetherPoolElement(Either<ResourceLocation, StructureTemplate> template, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, Optional<LiquidSettings> overrideLiquidSettings, int discardBelowY, int discardAboveY, boolean replaceAir) {
+    public AetherPoolElement(Either<Identifier, StructureTemplate> template, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, Optional<LiquidSettings> overrideLiquidSettings, int discardBelowY, int discardAboveY, boolean replaceAir) {
         super(projection);
         this.template = template;
         this.processors = processors;

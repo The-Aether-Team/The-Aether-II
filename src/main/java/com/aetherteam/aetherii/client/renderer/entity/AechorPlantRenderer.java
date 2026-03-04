@@ -9,10 +9,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class AechorPlantRenderer extends MobRenderer<AechorPlant, AechorPlantRenderState, AechorPlantModel> {
-    private static final ResourceLocation AECHOR_PLANT_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/aechor_plant/aechor_plant.png");
+    private static final Identifier AECHOR_PLANT_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/aechor_plant/aechor_plant.png");
 
     public AechorPlantRenderer(EntityRendererProvider.Context context) {
         super(context, new AechorPlantModel(context.bakeLayer(AetherIIModelLayers.AECHOR_PLANT)), 0.3F);
@@ -37,7 +37,7 @@ public class AechorPlantRenderer extends MobRenderer<AechorPlant, AechorPlantRen
     }
 
     @Override
-    public ResourceLocation getTextureLocation(AechorPlantRenderState renderState) {
+    public Identifier getTextureLocation(AechorPlantRenderState renderState) {
         return AECHOR_PLANT_TEXTURE;
     }
 }

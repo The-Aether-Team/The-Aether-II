@@ -6,7 +6,7 @@ import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.mixin.wrappers.common.ItemCooldownsWrapper;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemCooldowns;
 import net.neoforged.neoforge.common.Tags;
@@ -25,9 +25,9 @@ public class ItemCooldownsMixin implements ItemCooldownsWrapper {
     @Unique
     public Player player;
 
-    @Inject(at = @At(value = "HEAD"), method = "onCooldownEnded(Lnet/minecraft/resources/ResourceLocation;)V")
-    private void onCooldownEnded(ResourceLocation resourceLocation, CallbackInfo ci) {
-        List<ResourceLocation> tagContents = StreamSupport.stream(BuiltInRegistries.ITEM.getTagOrEmpty(Tags.Items.TOOLS_SHIELD).spliterator(), false)
+    @Inject(at = @At(value = "HEAD"), method = "onCooldownEnded(Lnet/minecraft/resources/Identifier;)V")
+    private void onCooldownEnded(Identifier resourceLocation, CallbackInfo ci) {
+        List<Identifier> tagContents = StreamSupport.stream(BuiltInRegistries.ITEM.getTagOrEmpty(Tags.Items.TOOLS_SHIELD).spliterator(), false)
                 .map(Holder::unwrapKey).filter(Optional::isPresent).map(optional -> optional.get().location()).toList();
         if (tagContents.contains(resourceLocation)) {
             if (!this.player.level().isClientSide()) {

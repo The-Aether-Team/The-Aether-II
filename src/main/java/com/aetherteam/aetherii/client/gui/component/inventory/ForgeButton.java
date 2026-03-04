@@ -4,13 +4,13 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.gui.screen.inventory.ArkeniumForgeScreen;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ForgeButton extends ImageButton {
     private static final WidgetSprites FORGE_BUTTON_SPRITE = new WidgetSprites(
-            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/forge_button"),
-            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/forge_button_disabled"),
-            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/forge_button_selected"));
+            Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/forge_button"),
+            Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/forge_button_disabled"),
+            Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/forge_button_selected"));
     private final ArkeniumForgeScreen parentScreen;
 
     public ForgeButton(ArkeniumForgeScreen parentScreen, int x, int y, int width, int height, OnPress onPress) {

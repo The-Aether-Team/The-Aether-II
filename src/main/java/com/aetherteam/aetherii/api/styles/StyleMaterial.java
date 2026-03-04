@@ -11,17 +11,17 @@ import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.RegistryFileCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 
-public record StyleMaterial(ResourceLocation assetId, Holder<Item> ingredient, Component description) {
+public record StyleMaterial(Identifier assetId, Holder<Item> ingredient, Component description) {
     public static final Codec<StyleMaterial> DIRECT_CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-            ResourceLocation.CODEC.fieldOf("asset_id").forGetter(StyleMaterial::assetId),
+            Identifier.CODEC.fieldOf("asset_id").forGetter(StyleMaterial::assetId),
             Item.CODEC.fieldOf("ingredient").forGetter(StyleMaterial::ingredient), 
             ComponentSerialization.CODEC.fieldOf("description").forGetter(StyleMaterial::description)
     ).apply(instance, StyleMaterial::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, StyleMaterial> DIRECT_STREAM_CODEC = StreamCodec.composite(
-            ResourceLocation.STREAM_CODEC, StyleMaterial::assetId,
+            Identifier.STREAM_CODEC, StyleMaterial::assetId,
             ByteBufCodecs.holderRegistry(Registries.ITEM), StyleMaterial::ingredient,
             ComponentSerialization.STREAM_CODEC, StyleMaterial::description,
             StyleMaterial::new);

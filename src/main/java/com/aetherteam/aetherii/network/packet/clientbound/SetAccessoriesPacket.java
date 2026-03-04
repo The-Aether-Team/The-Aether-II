@@ -8,7 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -16,7 +16,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import java.util.List;
 
 public record SetAccessoriesPacket(int entityId, List<Pair<Integer, ItemStack>> list) implements CustomPacketPayload {
-    public static final Type<SetAccessoriesPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "set_accessories"));
+    public static final Type<SetAccessoriesPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "set_accessories"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SetAccessoriesPacket> STREAM_CODEC = StreamCodec.of(SetAccessoriesPacket::toNetwork, SetAccessoriesPacket::fromNetwork);
 

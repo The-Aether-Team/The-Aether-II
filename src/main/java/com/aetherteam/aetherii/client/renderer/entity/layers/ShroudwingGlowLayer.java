@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ShroudwingGlowLayer extends RenderLayer<ShroudwingRenderState, ShroudwingModel> {
     public ShroudwingGlowLayer(RenderLayerParent<ShroudwingRenderState, ShroudwingModel> parent) {
@@ -18,7 +18,7 @@ public class ShroudwingGlowLayer extends RenderLayer<ShroudwingRenderState, Shro
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, ShroudwingRenderState shroudwingRenderState, float v, float v1) {
-        ResourceLocation emissiveTexture = shroudwingRenderState.emissiveTexture;
+         emissiveTexture = shroudwingRenderState.emissiveTexture;
         if (emissiveTexture != null) {
             RenderType renderType = RenderType.eyes(emissiveTexture);
             VertexConsumer vertexConsumer = multiBufferSource.getBuffer(renderType);

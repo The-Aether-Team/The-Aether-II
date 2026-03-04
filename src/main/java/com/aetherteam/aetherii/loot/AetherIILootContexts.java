@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.loot;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ContextKeySetSetsAccessor;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.context.ContextKeySet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
@@ -15,7 +15,7 @@ public class AetherIILootContexts {
         ContextKeySet.Builder lootcontextparamset$builder = new ContextKeySet.Builder();
         consumer.accept(lootcontextparamset$builder);
         ContextKeySet contextKeySet = lootcontextparamset$builder.build();
-        ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name);
+        Identifier resourceLocation = Identifier.fromNamespaceAndPath(AetherII.MODID, name);
         ContextKeySet contextKeySet1 = ContextKeySetSetsAccessor.getRegistry().put(resourceLocation, contextKeySet);
         if (contextKeySet1 != null) {
             throw new IllegalStateException("Loot table parameter set " + resourceLocation + " is already registered");

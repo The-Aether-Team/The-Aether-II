@@ -10,16 +10,16 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.RegistryFileCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 
-public record SkyrootLizardVariant(ResourceLocation texture, Holder<Block> leafBlock) {
+public record SkyrootLizardVariant(Identifier texture, Holder<Block> leafBlock) {
     public static final Codec<SkyrootLizardVariant> DIRECT_CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-            ResourceLocation.CODEC.fieldOf("texture").forGetter(SkyrootLizardVariant::texture),
+            Identifier.CODEC.fieldOf("texture").forGetter(SkyrootLizardVariant::texture),
             BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("leaf_block").forGetter(SkyrootLizardVariant::leafBlock)
     ).apply(instance, SkyrootLizardVariant::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, SkyrootLizardVariant> DIRECT_STREAM_CODEC = StreamCodec.composite(
-            ResourceLocation.STREAM_CODEC, SkyrootLizardVariant::texture,
+            Identifier.STREAM_CODEC, SkyrootLizardVariant::texture,
             ByteBufCodecs.holderRegistry(Registries.BLOCK), SkyrootLizardVariant::leafBlock,
             SkyrootLizardVariant::new);
     public static final Codec<Holder<SkyrootLizardVariant>> CODEC = RegistryFileCodec.create(AetherIIRegistries.SKYROOT_LIZARD_VARIANT, DIRECT_CODEC);

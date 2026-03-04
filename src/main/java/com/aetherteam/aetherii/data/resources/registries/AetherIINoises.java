@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 public class AetherIINoises {
@@ -24,7 +24,7 @@ public class AetherIINoises {
     public static final ResourceKey<NormalNoise.NoiseParameters> QUICKSOIL_IRRADIATED = createKey("quicksoil_irradiated");
 
     private static ResourceKey<NormalNoise.NoiseParameters> createKey(String name) {
-        return ResourceKey.create(Registries.NOISE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(Registries.NOISE, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<NormalNoise.NoiseParameters> context) {

@@ -8,10 +8,10 @@ import com.aetherteam.aetherii.client.renderer.entity.state.ArkeniumTalutonRende
 import com.aetherteam.aetherii.entity.monster.ArkeniumTaluton;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ArkeniumTalutonRenderer extends MobRenderer<ArkeniumTaluton, ArkeniumTalutonRenderState, ArkeniumTalutonModel> {
-    private static final ResourceLocation ARKENIUM_TALUTON_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/arkenium_taluton/arkenium_taluton.png");
+    private static final Identifier ARKENIUM_TALUTON_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/arkenium_taluton/arkenium_taluton.png");
 
     public ArkeniumTalutonRenderer(EntityRendererProvider.Context context) {
         super(context, new ArkeniumTalutonModel(context.bakeLayer(AetherIIModelLayers.ARKENIUM_TALUTON)), 0.5F);
@@ -30,7 +30,7 @@ public class ArkeniumTalutonRenderer extends MobRenderer<ArkeniumTaluton, Arkeni
     }
 
     @Override
-    public ResourceLocation getTextureLocation(ArkeniumTalutonRenderState renderState) {
+    public Identifier getTextureLocation(ArkeniumTalutonRenderState renderState) {
         return ARKENIUM_TALUTON_TEXTURE;
     }
 }

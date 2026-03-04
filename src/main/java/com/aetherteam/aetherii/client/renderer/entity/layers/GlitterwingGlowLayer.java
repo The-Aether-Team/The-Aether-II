@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class GlitterwingGlowLayer extends RenderLayer<GlitterwingRenderState, GlitterwingModel> {
     public GlitterwingGlowLayer(RenderLayerParent<GlitterwingRenderState, GlitterwingModel> parent) {
@@ -18,7 +18,7 @@ public class GlitterwingGlowLayer extends RenderLayer<GlitterwingRenderState, Gl
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, GlitterwingRenderState glitterwingRenderState, float v, float v1) {
-        ResourceLocation emissiveTexture = glitterwingRenderState.emissiveTexture;
+         emissiveTexture = glitterwingRenderState.emissiveTexture;
         if (emissiveTexture != null) {
             RenderType renderType = RenderType.eyes(emissiveTexture);
             VertexConsumer vertexConsumer = multiBufferSource.getBuffer(renderType);

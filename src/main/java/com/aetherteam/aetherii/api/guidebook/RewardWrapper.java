@@ -8,19 +8,19 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.RegistryFileCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.List;
 
-public record RewardWrapper(ResourceLocation advancement, ResourceLocation entryId, List<String> entryValues) {
+public record RewardWrapper(Identifier advancement, Identifier entryId, List<String> entryValues) {
     public static final Codec<RewardWrapper> DIRECT_CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-            ResourceLocation.CODEC.fieldOf("advancement").forGetter(RewardWrapper::advancement),
-            ResourceLocation.CODEC.fieldOf("entry").forGetter(RewardWrapper::entryId),
+            Identifier.CODEC.fieldOf("advancement").forGetter(RewardWrapper::advancement),
+            Identifier.CODEC.fieldOf("entry").forGetter(RewardWrapper::entryId),
             Codec.list(Codec.STRING).fieldOf("entry_values").forGetter(RewardWrapper::entryValues)
     ).apply(instance, RewardWrapper::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, RewardWrapper> DIRECT_STREAM_CODEC = StreamCodec.composite(
-            ResourceLocation.STREAM_CODEC, RewardWrapper::advancement,
-            ResourceLocation.STREAM_CODEC, RewardWrapper::entryId,
+            Identifier.STREAM_CODEC, RewardWrapper::advancement,
+            Identifier.STREAM_CODEC, RewardWrapper::entryId,
             ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()), RewardWrapper::entryValues,
             RewardWrapper::new);
     public static final Codec<Holder<RewardWrapper>> CODEC = RegistryFileCodec.create(AetherIIRegistries.REWARD_WRAPPER, DIRECT_CODEC);

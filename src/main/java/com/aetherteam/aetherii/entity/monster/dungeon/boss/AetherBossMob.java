@@ -8,7 +8,7 @@ import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.nitrogen.entity.BossMob;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.SoundSource;
@@ -122,16 +122,16 @@ public interface AetherBossMob<T extends Mob & AetherBossMob<T>> extends BossMob
     }
 
     /**
-     * @return The {@link ResourceLocation} for this boss's health bar.
+     * @return The {@link } for this boss's health bar.
      */
     @Nullable
-    ResourceLocation getBossBarTexture();
+    Identifier getBossBarTexture();
 
     /**
-     * @return The {@link ResourceLocation} for this boss's health bar background.
+     * @return The {@link } for this boss's health bar background.
      */
     @Nullable
-    ResourceLocation getBossBarBackgroundTexture();
+    Identifier getBossBarBackgroundTexture();
 
     /**
      * @return The {@link Music} for this boss's fight.

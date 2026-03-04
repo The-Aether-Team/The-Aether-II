@@ -6,10 +6,10 @@ import com.aetherteam.aetherii.client.renderer.entity.state.ArkeniumTalutonRende
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ArkeniumTalutonEyesLayer extends EyesLayer<ArkeniumTalutonRenderState, ArkeniumTalutonModel> {
-    private static final RenderType ARKENIUM_TALUTON_EYES = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/arkenium_taluton/arkenium_taluton_eyes.png"));
+    private static final RenderType ARKENIUM_TALUTON_EYES = RenderType.eyes(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/arkenium_taluton/arkenium_taluton_eyes.png"));
 
     public ArkeniumTalutonEyesLayer(RenderLayerParent<ArkeniumTalutonRenderState, ArkeniumTalutonModel> parent) {
         super(parent);

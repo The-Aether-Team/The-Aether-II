@@ -12,13 +12,13 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.AABB;
 import org.joml.Quaternionf;
 
 public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRenderState> {
-    private static final ResourceLocation CLOUD_SKIFF_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/cloud_skiff/cloud_skiff.png");
+    private static final Identifier CLOUD_SKIFF_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/cloud_skiff/cloud_skiff.png");
     private final CloudSkiffModel model;
 
     public CloudSkiffRenderer(EntityRendererProvider.Context context) {

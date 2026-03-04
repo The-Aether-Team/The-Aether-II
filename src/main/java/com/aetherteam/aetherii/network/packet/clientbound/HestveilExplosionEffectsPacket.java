@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -15,7 +15,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record HestveilExplosionEffectsPacket(BlockPos pos) implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<HestveilExplosionEffectsPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hestveil_explosion_effects"));
+    public static final CustomPacketPayload.Type<HestveilExplosionEffectsPacket> TYPE = new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "hestveil_explosion_effects"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, HestveilExplosionEffectsPacket> STREAM_CODEC = StreamCodec.composite(
             BlockPos.STREAM_CODEC,

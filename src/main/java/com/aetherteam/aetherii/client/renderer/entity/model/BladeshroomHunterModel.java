@@ -11,15 +11,15 @@ import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class BladeshroomHunterModel<T extends BladeshroomHunterRenderState> extends EntityModel<T> {
-    public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/attack"));
-    public static final AnimationHolder BURRY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/bury"));
-    public static final AnimationHolder UNBURRY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/unbury"));
-    public static final AnimationHolder RUSTLE_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/rustle"));
+    public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/attack"));
+    public static final AnimationHolder BURRY_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/bury"));
+    public static final AnimationHolder UNBURRY_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/unbury"));
+    public static final AnimationHolder RUSTLE_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "bladeshroom_hunter/rustle"));
 
 
     private final ModelPart body;

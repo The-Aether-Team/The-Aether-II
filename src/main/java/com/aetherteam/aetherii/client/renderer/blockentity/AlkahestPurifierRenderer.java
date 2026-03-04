@@ -18,17 +18,17 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 public class AlkahestPurifierRenderer implements BlockEntityRenderer<AlkahestPurifierBlockEntity> {
-    public static final Material ALKAHEST_PURIFIER_0 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_0"));
-    public static final Material ALKAHEST_PURIFIER_1 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_1"));
-    public static final Material ALKAHEST_PURIFIER_2 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_2"));
-    public static final Material ALKAHEST_PURIFIER_3 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_3"));
-    public static final Material ALKAHEST_PURIFIER_4 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_4"));
+    public static final Material ALKAHEST_PURIFIER_0 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_0"));
+    public static final Material ALKAHEST_PURIFIER_1 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_1"));
+    public static final Material ALKAHEST_PURIFIER_2 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_2"));
+    public static final Material ALKAHEST_PURIFIER_3 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_3"));
+    public static final Material ALKAHEST_PURIFIER_4 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_4"));
     private final AlkahestPurifierModel model;
 
     public AlkahestPurifierRenderer(BlockEntityRendererProvider.Context context) {

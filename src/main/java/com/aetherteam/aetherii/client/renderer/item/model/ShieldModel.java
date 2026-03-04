@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BlockModelRotation;
 import net.minecraft.client.resources.model.ModelDebugName;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -64,7 +64,7 @@ public class ShieldModel implements ItemModel {
         return new CompositeModel(List.of(new BlockModelWrapper(List.of(), combinedQuads, new ModelRenderProperties(true, this.sprite(this.unbakedModel.textures().particle()), this.itemTransforms), displayContext == ItemDisplayContext.GUI ? NeoForgeRenderTypes.ITEM_UNSORTED_UNLIT_TRANSLUCENT.get() : NeoForgeRenderTypes.ITEM_UNSORTED_TRANSLUCENT.get())));
     }
 
-    public TextureAtlasSprite sprite(ResourceLocation location) {
+    public TextureAtlasSprite sprite(Identifier location) {
         var sprites = this.bakingContext.blockModelBaker().sprites();
         return sprites.get(ClientHooks.getBlockMaterial(location), DEBUG_NAME);
     }
@@ -85,18 +85,18 @@ public class ShieldModel implements ItemModel {
         return offset / 16.0F;
     }
 
-    public record Textures(List<ResourceLocation> front, List<ResourceLocation> back, ResourceLocation handle, ResourceLocation particle) {
+    public record Textures(List<Identifier> front, List<Identifier> back, Identifier handle, Identifier particle) {
         public static final Codec<ShieldModel.Textures> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                ResourceLocation.CODEC.listOf(4, 4).fieldOf("front").forGetter(ShieldModel.Textures::front),
-                ResourceLocation.CODEC.listOf(4, 4).fieldOf("back").forGetter(ShieldModel.Textures::back),
-                ResourceLocation.CODEC.fieldOf("handle").forGetter(ShieldModel.Textures::handle),
-                ResourceLocation.CODEC.fieldOf("particle").forGetter(ShieldModel.Textures::particle)
+                Identifier.CODEC.listOf(4, 4).fieldOf("front").forGetter(ShieldModel.Textures::front),
+                Identifier.CODEC.listOf(4, 4).fieldOf("back").forGetter(ShieldModel.Textures::back),
+                Identifier.CODEC.fieldOf("handle").forGetter(ShieldModel.Textures::handle),
+                Identifier.CODEC.fieldOf("particle").forGetter(ShieldModel.Textures::particle)
         ).apply(instance, ShieldModel.Textures::new));
     }
 
-    public record Unbaked(ResourceLocation parent, ShieldModel.Textures textures) implements ItemModel.Unbaked {
+    public record Unbaked(Identifier parent, ShieldModel.Textures textures) implements ItemModel.Unbaked {
         public static final MapCodec<ShieldModel.Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                ResourceLocation.CODEC.fieldOf("parent").forGetter(ShieldModel.Unbaked::parent),
+                Identifier.CODEC.fieldOf("parent").forGetter(ShieldModel.Unbaked::parent),
                 ShieldModel.Textures.CODEC.fieldOf("textures").forGetter(ShieldModel.Unbaked::textures)
         ).apply(instance, ShieldModel.Unbaked::new));
 

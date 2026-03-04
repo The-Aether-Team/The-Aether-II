@@ -8,7 +8,7 @@ import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -22,11 +22,11 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class SwetGelRecipe extends AbstractBiomeParameterRecipe implements MatchEventRecipe {
-    public SwetGelRecipe(Optional<Either<ResourceKey<Biome>, TagKey<Biome>>> biome, BlockStateIngredient ingredient, BlockPropertyPair result, Optional<ResourceLocation> function) {
+    public SwetGelRecipe(Optional<Either<ResourceKey<Biome>, TagKey<Biome>>> biome, BlockStateIngredient ingredient, BlockPropertyPair result, Optional<Identifier> function) {
         super(AetherIIRecipeTypes.SWET_GEL_CONVERSION.get(), biome, ingredient, result, function);
     }
 
-    public SwetGelRecipe(BlockStateIngredient ingredient, BlockPropertyPair result, Optional<ResourceLocation> function) {
+    public SwetGelRecipe(BlockStateIngredient ingredient, BlockPropertyPair result, Optional<Identifier> function) {
         this(Optional.empty(), ingredient, result, function);
     }
 

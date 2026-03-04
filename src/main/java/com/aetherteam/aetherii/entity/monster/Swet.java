@@ -9,7 +9,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
@@ -469,13 +469,13 @@ public class Swet extends Monster {
         }
     }
 
-    public record Overlay(ResourceLocation left1, ResourceLocation left2, ResourceLocation right1, ResourceLocation right2) {
+    public record Overlay(Identifier left1, Identifier left2, Identifier right1, Identifier right2) {
         public static Overlay create(String name) {
             return new Overlay(
-                    ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_left_1"),
-                    ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_left_2"),
-                    ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_right_1"),
-                    ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_right_2"));
+                    Identifier.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_left_1"),
+                    Identifier.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_left_2"),
+                    Identifier.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_right_1"),
+                    Identifier.fromNamespaceAndPath(AetherII.MODID, "overlay/swet/" + name + "_right_2"));
         }
     }
 }

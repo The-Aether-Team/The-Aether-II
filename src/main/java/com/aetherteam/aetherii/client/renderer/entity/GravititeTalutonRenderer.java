@@ -10,11 +10,11 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
 public class GravititeTalutonRenderer extends MobRenderer<GravititeTaluton, GravititeTalutonRenderState, GravititeTalutonModel> {
-    private static final ResourceLocation GRAVITITE_TALUTON_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/gravitite_taluton/gravitite_taluton.png");
+    private static final Identifier GRAVITITE_TALUTON_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/gravitite_taluton/gravitite_taluton.png");
 
     public GravititeTalutonRenderer(EntityRendererProvider.Context context) {
         super(context, new GravititeTalutonModel(context.bakeLayer(AetherIIModelLayers.GRAVITITE_TALUTON)), 0.5F);
@@ -57,7 +57,7 @@ public class GravititeTalutonRenderer extends MobRenderer<GravititeTaluton, Grav
     }
 
     @Override
-    public ResourceLocation getTextureLocation(GravititeTalutonRenderState renderState) {
+    public Identifier getTextureLocation(GravititeTalutonRenderState renderState) {
         return GRAVITITE_TALUTON_TEXTURE;
     }
 }

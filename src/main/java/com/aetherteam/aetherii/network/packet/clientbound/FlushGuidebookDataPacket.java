@@ -6,11 +6,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record FlushGuidebookDataPacket() implements CustomPacketPayload {
-    public static final Type<FlushGuidebookDataPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "flush_guidebook_data"));
+    public static final Type<FlushGuidebookDataPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "flush_guidebook_data"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, FlushGuidebookDataPacket> STREAM_CODEC = CustomPacketPayload.codec(FlushGuidebookDataPacket::write, FlushGuidebookDataPacket::decode);
 

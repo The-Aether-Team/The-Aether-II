@@ -8,7 +8,7 @@ import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
 import com.aetherteam.aetherii.recipe.set.AetherIIRecipePropertySets;
 import net.minecraft.core.Direction;
 import net.minecraft.recipebook.ServerPlaceRecipe;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
@@ -51,7 +51,7 @@ public class AltarMenu extends RecipeBookMenu {
         Direction direction = Direction.WEST;
         for (int i = 1; i <= 8; i++) {
             this.addSlot(new Slot(container, i, x, y) {
-                public static final ResourceLocation SLOT_FUEL = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/altar/slot_fuel");
+                public static final Identifier SLOT_FUEL = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/altar/slot_fuel");
 
                 @Override
                 public boolean mayPlace(ItemStack stack) {
@@ -59,7 +59,7 @@ public class AltarMenu extends RecipeBookMenu {
                 }
 
                 @Override
-                public ResourceLocation getNoItemIcon() {
+                public Identifier getNoItemIcon() {
                     return SLOT_FUEL;
                 }
             }); // Fuel

@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelManager;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 
 public class MoaFeathersLayer extends RenderLayer<MoaRenderState, EntityModel<MoaRenderState>> {
@@ -29,7 +29,7 @@ public class MoaFeathersLayer extends RenderLayer<MoaRenderState, EntityModel<Mo
     public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, MoaRenderState moa, float netHeadYaw, float headPitch) {
         if (!moa.isInvisible && !moa.hasSpecialTexture()) {
             String name = moa.isBaby ? "moa_baby_feather" : "moa_feather";
-            ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entity/mobs/moa/" + name + "_" + moa.featherShape + "_" + moa.featherColor);
+             texture = Identifier.fromNamespaceAndPath(AetherII.MODID, "entity/mobs/moa/" + name + "_" + moa.featherShape + "_" + moa.featherColor);
             TextureAtlasSprite sprite = this.moaFeathersAtlas.getSprite(texture);
             VertexConsumer vertexConsumer = sprite.wrap(bufferSource.getBuffer(AetherIIRenderTypes.entityDitherNoCull(AetherIIAtlases.MOA_FEATHER_SHEET)));
             float opacity = moa.opacity;

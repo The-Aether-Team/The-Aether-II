@@ -8,10 +8,10 @@ import com.aetherteam.aetherii.client.renderer.entity.state.SheepuffRenderState;
 import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class SheepuffRenderer extends MobRenderer<Sheepuff, SheepuffRenderState, SheepuffModel<SheepuffRenderState>> {
-    private static final ResourceLocation SHEEPUFF_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sheepuff/sheepuff.png");
+    private static final Identifier SHEEPUFF_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sheepuff/sheepuff.png");
 
     public SheepuffRenderer(EntityRendererProvider.Context context) {
         super(context, new SheepuffModel<>(context.bakeLayer(AetherIIModelLayers.SHEEPUFF)), 0.7F);
@@ -36,7 +36,7 @@ public class SheepuffRenderer extends MobRenderer<Sheepuff, SheepuffRenderState,
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SheepuffRenderState renderState) {
+    public Identifier getTextureLocation(SheepuffRenderState renderState) {
         return SHEEPUFF_TEXTURE;
     }
 

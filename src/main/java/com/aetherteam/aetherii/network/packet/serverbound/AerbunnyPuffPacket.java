@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -13,7 +13,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
  * Sets the {@link Aerbunny#DATA_PUFFINESS_ID} value to 11. This is needed in a packet for precise animation syncing.
  */
 public record AerbunnyPuffPacket(int entityID) implements CustomPacketPayload {
-    public static final Type<AerbunnyPuffPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aerbunny_puff"));
+    public static final Type<AerbunnyPuffPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "aerbunny_puff"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, AerbunnyPuffPacket> STREAM_CODEC = CustomPacketPayload.codec(
             AerbunnyPuffPacket::write,

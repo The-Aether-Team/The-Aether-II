@@ -28,7 +28,7 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ARGB;
 import net.minecraft.world.entity.HumanoidArm;
@@ -56,8 +56,8 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
     public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, S state, float netHeadYaw, float headPitch) {
         if (Minecraft.getInstance().player != null) {
             AccessoryUtil.getFirst(Minecraft.getInstance().player, AccessoryContainer.SlotType.HANDWEAR).ifPresent((stack) -> {
-                ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
-                ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "textures/entity/equipment/humanoid_gloves/" + id.getPath() + ".png");
+                 id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+                 texture = Identifier.fromNamespaceAndPath(id.getNamespace(), "textures/entity/equipment/humanoid_gloves/" + id.getPath() + ".png");
                 VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(texture), stack.hasFoil());
                 GlovesModel glovesModel = this.glovesModel;
 
@@ -94,8 +94,8 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
     @Override
     public void renderOnFirstPerson(HumanoidArm arm, ItemStack stack, Player player, PoseStack poseStack, PlayerModel playerModel, MultiBufferSource buffer, int packedLight) {
         PlayerModelAccessor playerModelAccessor = (PlayerModelAccessor) playerModel;
-        ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
-        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "textures/entity/equipment/humanoid_gloves/" + id.getPath() + ".png");
+         id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+         texture = Identifier.fromNamespaceAndPath(id.getNamespace(), "textures/entity/equipment/humanoid_gloves/" + id.getPath() + ".png");
         VertexConsumer consumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(texture), stack.hasFoil());
         GlovesModel model = playerModelAccessor.aether$getSlim() ? this.glovesModelSlimFirstPerson : this.glovesModelFirstPerson;
 

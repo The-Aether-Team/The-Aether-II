@@ -6,10 +6,10 @@ import com.aetherteam.aetherii.client.renderer.entity.state.TempestRenderState;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class TempestEmissiveLayer extends EyesLayer<TempestRenderState, TempestModel> {
-    private static final RenderType TEMPEST_MARKINGS = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/tempest/tempest_emissive.png"));
+    private static final RenderType TEMPEST_MARKINGS = RenderType.eyes(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/tempest/tempest_emissive.png"));
 
     public TempestEmissiveLayer(RenderLayerParent<TempestRenderState, TempestModel> parent) {
         super(parent);

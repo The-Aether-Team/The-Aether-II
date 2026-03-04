@@ -7,7 +7,7 @@ import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class HealingStoneItem extends Item {
-    public static final ResourceLocation BONUS_ABSORPTION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "healing_stone.bonus_health");
+    public static final Identifier BONUS_ABSORPTION = Identifier.fromNamespaceAndPath(AetherII.MODID, "healing_stone.bonus_health");
 
     public HealingStoneItem(Properties properties) {
         super(properties);

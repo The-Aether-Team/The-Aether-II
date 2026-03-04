@@ -9,14 +9,14 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import org.joml.Matrix3x2fStack;
 
 public class AetherIIMenuButton extends Button {
-    private static final WidgetSprites AETHER_WIDGETS = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "title/button"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "title/button_highlighted"));
-    private static final WidgetSprites AETHER_WIDGETS_SMALL = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "title/button"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "title/button_highlighted_small"));
+    private static final WidgetSprites AETHER_WIDGETS = new WidgetSprites(Identifier.fromNamespaceAndPath(AetherII.MODID, "title/button"), Identifier.fromNamespaceAndPath(AetherII.MODID, "title/button_highlighted"));
+    private static final WidgetSprites AETHER_WIDGETS_SMALL = new WidgetSprites(Identifier.fromNamespaceAndPath(AetherII.MODID, "title/button"), Identifier.fromNamespaceAndPath(AetherII.MODID, "title/button_highlighted_small"));
     public final int originalX;
     public final int originalY;
     public int hoverOffset;
@@ -42,7 +42,7 @@ public class AetherIIMenuButton extends Button {
         Minecraft minecraft = Minecraft.getInstance();
         Font font = minecraft.font;
 
-        ResourceLocation location = this.getWidth() < 100 ? AETHER_WIDGETS_SMALL.get(this.isActive(), this.isHoveredOrFocused()) : AETHER_WIDGETS.get(this.isActive(), this.isHoveredOrFocused());
+        Identifier location = this.getWidth() < 100 ? AETHER_WIDGETS_SMALL.get(this.isActive(), this.isHoveredOrFocused()) : AETHER_WIDGETS.get(this.isActive(), this.isHoveredOrFocused());
 
        // RenderSystem.enableBlend();
        // guiGraphics.setColor(1.0F, 1.0F, 1.0F, this.alpha);

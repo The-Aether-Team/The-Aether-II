@@ -11,10 +11,10 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class TempestThunderballRenderer extends EntityRenderer<TempestThunderball, EntityRenderState> {
-    private static final ResourceLocation TEMPEST_PROJECTILE_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/tempest_thunderball.png");
+    private static final Identifier TEMPEST_PROJECTILE_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/tempest_thunderball.png");
     private static final RenderType RENDER_TYPE;
 
     public TempestThunderballRenderer(EntityRendererProvider.Context context) {

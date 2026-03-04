@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3f;
 
@@ -40,9 +40,9 @@ public class SentryCrateSpecialRenderer implements NoDataSpecialModelRenderer {
         this.model.root().getExtentsForGui(posestack, set);
     }
 
-    public record Unbaked(ResourceLocation texture) implements SpecialModelRenderer.Unbaked {
+    public record Unbaked(Identifier texture) implements SpecialModelRenderer.Unbaked {
         public static final MapCodec<SentryCrateSpecialRenderer.Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-                ResourceLocation.CODEC.fieldOf("texture").forGetter(SentryCrateSpecialRenderer.Unbaked::texture)
+                Identifier.CODEC.fieldOf("texture").forGetter(SentryCrateSpecialRenderer.Unbaked::texture)
         ).apply(instance, SentryCrateSpecialRenderer.Unbaked::new));
 
         public MapCodec<SentryCrateSpecialRenderer.Unbaked> type() {

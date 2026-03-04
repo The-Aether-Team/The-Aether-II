@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.texture.atlas.SpriteResourceLoader;
 import net.minecraft.client.renderer.texture.atlas.SpriteSource;
 import net.minecraft.client.renderer.texture.atlas.sources.LazyLoadedImage;
 import net.minecraft.client.resources.metadata.animation.FrameSize;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceMetadata;
@@ -20,23 +20,23 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-public record Squares(List<ResourceLocation> textures, int width, int height) implements SpriteSource {
+public record Squares(List<Identifier> textures, int width, int height) implements SpriteSource {
     public static final MapCodec<Squares> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-            Codec.list(ResourceLocation.CODEC).fieldOf("textures").forGetter(Squares::textures),
+            Codec.list(Identifier.CODEC).fieldOf("textures").forGetter(Squares::textures),
             Codec.INT.fieldOf("width").forGetter(Squares::width),
             Codec.INT.fieldOf("height").forGetter(Squares::height)
     ).apply(instance, Squares::new));
 
     @Override
     public void run(ResourceManager resourceManager, Output output) {
-        for (ResourceLocation location : this.textures()) {
-            ResourceLocation originalTextureLocation = TEXTURE_ID_CONVERTER.idToFile(location);
+        for (Identifier location : this.textures()) {
+             originalTextureLocation = TEXTURE_ID_CONVERTER.idToFile(location);
             Optional<Resource> originalTexture = resourceManager.getResource(originalTextureLocation);
             if (originalTexture.isPresent()) {
                 LazyLoadedImage originalImage = new LazyLoadedImage(originalTextureLocation, originalTexture.get(), this.width() * this.height());
                 for (int x = 0; x < this.width(); x++) {
                     for (int y = 0; y < this.height(); y++) {
-                        ResourceLocation outputLocation = location.withSuffix("_" + x + "_" + y);
+                         outputLocation = location.withSuffix("_" + x + "_" + y);
                         output.add(outputLocation, new SquaresSpriteSupplier(originalImage, x * 16, y * 16, outputLocation));
                     }
                 }
@@ -49,7 +49,7 @@ public record Squares(List<ResourceLocation> textures, int width, int height) im
         return CODEC;
     }
 
-    public record SquaresSpriteSupplier(LazyLoadedImage baseImage, int xOffset, int yOffset, ResourceLocation outputLocation) implements SpriteSource.SpriteSupplier {
+    public record SquaresSpriteSupplier(LazyLoadedImage baseImage, int xOffset, int yOffset, Identifier outputLocation) implements SpriteSource.SpriteSupplier {
         @Nullable
         public SpriteContents apply(SpriteResourceLoader p_295023_) {
             try {

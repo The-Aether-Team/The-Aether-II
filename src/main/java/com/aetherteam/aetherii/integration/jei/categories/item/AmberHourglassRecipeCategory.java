@@ -19,7 +19,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
@@ -38,11 +38,11 @@ public class AmberHourglassRecipeCategory extends AbstractRecipeCategory<Hourgla
 
     public AmberHourglassRecipeCategory(IGuiHelper helper) {
         super(HOURGLASS_RESTORING, Component.translatable("gui.aether_ii.jei.amber_hourglass"), helper.createDrawableItemLike(AetherIIBlocks.AMBER_HOURGLASS), 110, 110);
-        this.background = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/jei/amber_hourglass.png"), 0, 0, 108, 108).setTextureSize(108, 108).build();
-        this.leftProgress = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/amber_hourglass/progress_bar_left.png"), 0, 0, 28, 47).setTextureSize(28, 47).buildAnimated(200, IDrawableAnimated.StartDirection.TOP, false);
-        this.rightProgress = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/amber_hourglass/progress_bar_right.png"), 0, 0, 28, 47).setTextureSize(28, 47).buildAnimated(200, IDrawableAnimated.StartDirection.TOP, false);
-        this.leftFuel = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/amber_hourglass/fuel_bar_left.png"), 0, 0, 4, 20).setTextureSize(4, 20).buildAnimated(400, IDrawableAnimated.StartDirection.TOP, true);
-        this.rightFuel = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/amber_hourglass/fuel_bar_right.png"), 0, 0, 4, 20).setTextureSize(4, 20).buildAnimated(400, IDrawableAnimated.StartDirection.TOP, true);
+        this.background = helper.drawableBuilder(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/jei/amber_hourglass.png"), 0, 0, 108, 108).setTextureSize(108, 108).build();
+        this.leftProgress = helper.drawableBuilder(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/amber_hourglass/progress_bar_left.png"), 0, 0, 28, 47).setTextureSize(28, 47).buildAnimated(200, IDrawableAnimated.StartDirection.TOP, false);
+        this.rightProgress = helper.drawableBuilder(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/amber_hourglass/progress_bar_right.png"), 0, 0, 28, 47).setTextureSize(28, 47).buildAnimated(200, IDrawableAnimated.StartDirection.TOP, false);
+        this.leftFuel = helper.drawableBuilder(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/amber_hourglass/fuel_bar_left.png"), 0, 0, 4, 20).setTextureSize(4, 20).buildAnimated(400, IDrawableAnimated.StartDirection.TOP, true);
+        this.rightFuel = helper.drawableBuilder(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/amber_hourglass/fuel_bar_right.png"), 0, 0, 4, 20).setTextureSize(4, 20).buildAnimated(400, IDrawableAnimated.StartDirection.TOP, true);
     }
 
     @Override

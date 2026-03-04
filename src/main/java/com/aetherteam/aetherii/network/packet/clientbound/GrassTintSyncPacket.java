@@ -11,7 +11,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -20,7 +20,7 @@ import java.util.Map;
 
 public record GrassTintSyncPacket(Map<ResourceKey<Biome>, Integer> types) implements CustomPacketPayload {
 
-    public static final Type<GrassTintSyncPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sync_grass_tint"));
+    public static final Type<GrassTintSyncPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "sync_grass_tint"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, GrassTintSyncPacket> STREAM_CODEC = CustomPacketPayload.codec(
             GrassTintSyncPacket::write,

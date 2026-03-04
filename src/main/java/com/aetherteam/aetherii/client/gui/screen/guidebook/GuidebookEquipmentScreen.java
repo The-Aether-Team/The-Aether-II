@@ -25,7 +25,7 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.LivingEntity;
@@ -44,10 +44,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookEquipmentMenu> implements Guidebook {
-    private static final ResourceLocation GUIDEBOOK_EQUIPMENT_LEFT_PAGE_PLAYER_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_left_player.png");
-    private static final ResourceLocation GUIDEBOOK_EQUIPMENT_LEFT_PAGE_MOA_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_left_moa.png");
-    private static final ResourceLocation GUIDEBOOK_EQUIPMENT_RIGHT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_right.png");
-    private static final ResourceLocation GUIDEBOOK_EQUIPMENT_RIGHT_PAGE_CREATIVE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_right_creative.png");
+    private static final Identifier GUIDEBOOK_EQUIPMENT_LEFT_PAGE_PLAYER_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_left_player.png");
+    private static final Identifier GUIDEBOOK_EQUIPMENT_LEFT_PAGE_MOA_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_left_moa.png");
+    private static final Identifier GUIDEBOOK_EQUIPMENT_RIGHT_PAGE_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_right.png");
+    private static final Identifier GUIDEBOOK_EQUIPMENT_RIGHT_PAGE_CREATIVE_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_right_creative.png");
     private static final SimpleContainer DESTROY_ITEM_CONTAINER = new SimpleContainer(1);
     private static final SimpleContainer CURRENCY_CONTAINER = new SimpleContainer(1);
 
@@ -376,7 +376,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     @Override
-    public ResourceLocation getLeftPageTexture() {
+    public Identifier getLeftPageTexture() {
         if (this.getMenu().getMoa() != null) {
             return GUIDEBOOK_EQUIPMENT_LEFT_PAGE_MOA_LOCATION;
         } else {
@@ -385,7 +385,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     @Override
-    public ResourceLocation getRightPageTexture() {
+    public Identifier getRightPageTexture() {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.isCreative()) {
             return GUIDEBOOK_EQUIPMENT_RIGHT_PAGE_CREATIVE_LOCATION;
         }

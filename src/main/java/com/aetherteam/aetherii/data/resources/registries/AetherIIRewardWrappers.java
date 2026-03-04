@@ -12,7 +12,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 
@@ -22,7 +22,7 @@ import java.util.Optional;
 
 public class AetherIIRewardWrappers {
     private static ResourceKey<RewardWrapper> createKey(String name) {
-        return ResourceKey.create(AetherIIRegistries.REWARD_WRAPPER, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.REWARD_WRAPPER, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<RewardWrapper> context) {
@@ -34,7 +34,7 @@ public class AetherIIRewardWrappers {
         String path = "bestiary/";
         for (Map.Entry<ResourceKey<BestiaryEntry>, Holder<EntityType<?>>> entry : AetherIIBestiaryEntries.ENTITIES.entrySet()) {
             EntityType<?> entityType = entry.getValue().value();
-            ResourceLocation observeId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "observe_" + entityType.toShortString()).withPrefix(path);
+            Identifier observeId = Identifier.fromNamespaceAndPath(AetherII.MODID, "observe_" + entityType.toShortString()).withPrefix(path);
             RewardWrapper observeWrapper = new RewardWrapper(observeId, entry.getKey().location(), List.of(
                     BestiaryEntry.ICON.id(),
                     BestiaryEntry.NAME.id(),
@@ -63,7 +63,7 @@ public class AetherIIRewardWrappers {
         String path = "effects/";
         for (Map.Entry<ResourceKey<EffectsEntry>, Holder<MobEffect>> entry : AetherIIEffectsEntries.EFFECTS.entrySet()) {
             Holder<MobEffect> effect = entry.getValue();
-            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "obtain_" + effect.getKey().location().getPath()).withPrefix(path);
+            Identifier id = Identifier.fromNamespaceAndPath(AetherII.MODID, "obtain_" + effect.getKey().location().getPath()).withPrefix(path);
 
             RewardWrapper observeWrapper = new RewardWrapper(id, entry.getKey().location(), List.of(
                     EffectsEntry.ICON.id(),
@@ -86,7 +86,7 @@ public class AetherIIRewardWrappers {
         return registryAccess.lookupOrThrow(AetherIIRegistries.REWARD_WRAPPER);
     }
 
-    public static Optional<RewardWrapper> getWrapperForAdvancement(RegistryAccess registryAccess, ResourceLocation advancement) {
+    public static Optional<RewardWrapper> getWrapperForAdvancement(RegistryAccess registryAccess, Identifier advancement) {
         for (RewardWrapper wrapper : getRegistry(registryAccess)) {
             if (wrapper.advancement().equals(advancement)) {
                 return Optional.of(wrapper);

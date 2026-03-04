@@ -9,7 +9,7 @@ import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.variant.*;
 import net.minecraft.world.level.biome.Biome;
@@ -26,7 +26,7 @@ public class AetherIIShroudwingVariants {
     public static final ResourceKey<ShroudwingVariant> MOSS = createKey("moss");
 
     private static ResourceKey<ShroudwingVariant> createKey(String name) {
-        return ResourceKey.create(AetherIIRegistries.SHROUDWING_VARIANT, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.SHROUDWING_VARIANT, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<ShroudwingVariant> context) {
@@ -60,8 +60,8 @@ public class AetherIIShroudwingVariants {
     }
 
     private static void register(BootstrapContext<ShroudwingVariant> context, ResourceKey<ShroudwingVariant> key, SpawnPrioritySelectors spawnConditions, boolean emissive) {
-        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/shroudwing/" + key.location().getPath() + ".png");
-        ResourceLocation emissiveTexture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/shroudwing/" + key.location().getPath() + "_glow.png");
+        Identifier texture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/shroudwing/" + key.location().getPath() + ".png");
+        Identifier emissiveTexture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/shroudwing/" + key.location().getPath() + "_glow.png");
 
         context.register(key, new ShroudwingVariant(texture, emissive ? Optional.of(emissiveTexture) : Optional.empty(), spawnConditions));
     }

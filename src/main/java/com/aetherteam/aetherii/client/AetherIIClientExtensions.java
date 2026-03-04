@@ -17,7 +17,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.fog.FogData;
 import net.minecraft.client.renderer.fog.environment.FogEnvironment;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -160,23 +160,23 @@ public class AetherIIClientExtensions {
 
     public static final IClientFluidTypeExtensions ALKAHEST_FLUID = new IClientFluidTypeExtensions() {
         @Override
-        public ResourceLocation getStillTexture() {
-            return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_still");
+        public Identifier getStillTexture() {
+            return Identifier.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_still");
         }
 
         @Override
-        public ResourceLocation getFlowingTexture() {
-            return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_flow");
+        public Identifier getFlowingTexture() {
+            return Identifier.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_flow");
         }
 
         @Override
-        public ResourceLocation getOverlayTexture() {
-            return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_overlay");
+        public Identifier getOverlayTexture() {
+            return Identifier.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_overlay");
         }
 
         @Override
-        public ResourceLocation getRenderOverlayTexture(Minecraft mc) {
-            return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/misc/alkahest.png");
+        public Identifier getRenderOverlayTexture(Minecraft mc) {
+            return Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/misc/alkahest.png");
         }
 
         @Override

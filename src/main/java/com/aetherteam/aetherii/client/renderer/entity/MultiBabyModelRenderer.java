@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Mob;
 
 public abstract class MultiBabyModelRenderer<T extends Mob, S extends LivingEntityRenderState, M extends EntityModel<S>, MDefault extends M, MBaby extends M> extends MobRenderer<T, S, M> {
@@ -29,11 +29,11 @@ public abstract class MultiBabyModelRenderer<T extends Mob, S extends LivingEnti
     public abstract MBaby getBabyModel(S entity);
 
     @Override
-    public ResourceLocation getTextureLocation(S entity) {
+    public Identifier getTextureLocation(S entity) {
         return entity.isBaby ? this.getBabyTexture(entity) : this.getDefaultTexture(entity);
     }
 
-    public abstract ResourceLocation getDefaultTexture(S entity);
+    public abstract Identifier getDefaultTexture(S entity);
 
-    public abstract ResourceLocation getBabyTexture(S entity);
+    public abstract Identifier getBabyTexture(S entity);
 }

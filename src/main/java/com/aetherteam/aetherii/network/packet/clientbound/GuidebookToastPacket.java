@@ -7,11 +7,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record GuidebookToastPacket(GuidebookToast.Type toastType, GuidebookToast.Icons toastIcon) implements CustomPacketPayload {
-    public static final Type<GuidebookToastPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook_toast"));
+    public static final Type<GuidebookToastPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook_toast"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, GuidebookToastPacket> STREAM_CODEC = StreamCodec.composite(
             GuidebookToast.Type.STREAM_CODEC,

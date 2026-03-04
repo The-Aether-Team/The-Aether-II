@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class AetherIIModelLayers {
     public static final ModelLayerLocation SKYROOT_BED_FOOT = register("skyroot_bed_foot");
@@ -86,10 +86,10 @@ public class AetherIIModelLayers {
     }
 
     private static ModelLayerLocation register(String name, String type) {
-        return register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name), type);
+        return register(Identifier.fromNamespaceAndPath(AetherII.MODID, name), type);
     }
 
-    private static ModelLayerLocation register(ResourceLocation location, String type) {
+    private static ModelLayerLocation register(Identifier location, String type) {
         return new ModelLayerLocation(location, type);
     }
 }

@@ -8,7 +8,7 @@ import com.aetherteam.aetherii.entity.passive.Glitterwing;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class GlitterwingRenderer extends MobRenderer<Glitterwing, GlitterwingRenderState, GlitterwingModel> {
     public GlitterwingRenderer(EntityRendererProvider.Context context) {
@@ -40,7 +40,7 @@ public class GlitterwingRenderer extends MobRenderer<Glitterwing, GlitterwingRen
     }
 
     @Override
-    public ResourceLocation getTextureLocation(GlitterwingRenderState renderState) {
+    public Identifier getTextureLocation(GlitterwingRenderState renderState) {
         return renderState.texture;
     }
 }

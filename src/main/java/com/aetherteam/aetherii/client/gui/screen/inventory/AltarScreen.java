@@ -14,7 +14,7 @@ import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Items;
@@ -22,12 +22,12 @@ import net.minecraft.world.item.Items;
 import java.util.List;
 
 public class AltarScreen extends AbstractRecipeBookScreen<AltarMenu> implements RecipeUpdateListener {
-    private static final ResourceLocation ALTAR_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/altar.png");
-    private static final ResourceLocation OUTPUT_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/altar/output_progress");
-    private static final ResourceLocation CHARGE_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/altar/charge");
-    private static final ResourceLocation CHARGE_HORIZONTAL_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/altar/charge_horizontal");
-    private static final ResourceLocation CHARGE_VERTICAL_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/altar/charge_vertical");
-    private static final ResourceLocation CHARGE_SLOT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/altar/charge_slot");
+    private static final Identifier ALTAR_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/altar.png");
+    private static final Identifier OUTPUT_PROGRESS_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/altar/output_progress");
+    private static final Identifier CHARGE_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/altar/charge");
+    private static final Identifier CHARGE_HORIZONTAL_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/altar/charge_horizontal");
+    private static final Identifier CHARGE_VERTICAL_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/altar/charge_vertical");
+    private static final Identifier CHARGE_SLOT_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/altar/charge_slot");
     private static final List<RecipeBookComponent.TabInfo> TABS = List.of(
             new RecipeBookComponent.TabInfo(Items.COMPASS, AetherIIRecipeBookCategories.ALTAR_SEARCH),
             new RecipeBookComponent.TabInfo(AetherIIItems.ENCHANTED_BLUEBERRY.get(), AetherIIRecipeBookCategories.ALTAR_FOOD.get()),

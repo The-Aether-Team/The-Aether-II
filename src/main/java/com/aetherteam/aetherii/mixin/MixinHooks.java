@@ -28,7 +28,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -179,7 +179,7 @@ public class MixinHooks {
     public static ItemStack getBrokenLootStack(ItemStack itemStack) {
         ItemStack brokenItem = new ItemStack(AetherIIItems.BROKEN_ITEM.get());
         brokenItem.set(AetherIIDataComponents.BROKEN_STACK, new BrokenStack(itemStack.copy()));
-        ResourceLocation modelLocation = itemStack.get(DataComponents.ITEM_MODEL);
+        Identifier modelLocation = itemStack.get(DataComponents.ITEM_MODEL);
         if (modelLocation != null) {
             brokenItem.set(DataComponents.ITEM_MODEL, modelLocation.withSuffix("_broken"));
         }

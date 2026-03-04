@@ -8,16 +8,16 @@ import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class CockatriceModel extends EntityModel<CockatriceRenderState> {
-    public static final AnimationHolder RUN_START_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/run_start")); //todo
-    public static final AnimationHolder RUN_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/run"));
-    public static final AnimationHolder DART_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/dart_attack"));
-    public static final AnimationHolder CLAW_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/claw_attack"));
-    public static final AnimationHolder DIG_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/dig"));
+    public static final AnimationHolder RUN_START_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "cockatrice/run_start")); //todo
+    public static final AnimationHolder RUN_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "cockatrice/run"));
+    public static final AnimationHolder DART_ATTACK_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "cockatrice/dart_attack"));
+    public static final AnimationHolder CLAW_ATTACK_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "cockatrice/claw_attack"));
+    public static final AnimationHolder DIG_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "cockatrice/dig"));
     private final KeyframeAnimation runAnimation;
     private final KeyframeAnimation dartAttackAnimation;
     private final KeyframeAnimation clawAttackAnimation;

@@ -8,7 +8,7 @@ import com.aetherteam.aetherii.entity.passive.Shroudwing;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ShroudwingRenderer extends MobRenderer<Shroudwing, ShroudwingRenderState, ShroudwingModel> {
     public ShroudwingRenderer(EntityRendererProvider.Context context) {
@@ -42,7 +42,7 @@ public class ShroudwingRenderer extends MobRenderer<Shroudwing, ShroudwingRender
     }
 
     @Override
-    public ResourceLocation getTextureLocation(ShroudwingRenderState renderState) {
+    public Identifier getTextureLocation(ShroudwingRenderState renderState) {
         return renderState.texture;
     }
 }

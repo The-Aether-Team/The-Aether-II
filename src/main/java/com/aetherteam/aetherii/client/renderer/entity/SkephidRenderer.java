@@ -11,12 +11,12 @@ import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Pose;
 
 public class SkephidRenderer<T extends Skephid> extends MobRenderer<T, SkephidRenderState, SkephidModel<SkephidRenderState>> {
-    private static final ResourceLocation LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/skephid/skephid.png");
+    private static final Identifier LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/skephid/skephid.png");
 
     public SkephidRenderer(EntityRendererProvider.Context context) {
         super(context, new SkephidModel<>(context.bakeLayer(AetherIIModelLayers.SKEPHID)), 0.5F);
@@ -67,7 +67,7 @@ public class SkephidRenderer<T extends Skephid> extends MobRenderer<T, SkephidRe
 
 
     @Override
-    public ResourceLocation getTextureLocation(SkephidRenderState renderState) {
+    public Identifier getTextureLocation(SkephidRenderState renderState) {
         return LOCATION;
     }
 }

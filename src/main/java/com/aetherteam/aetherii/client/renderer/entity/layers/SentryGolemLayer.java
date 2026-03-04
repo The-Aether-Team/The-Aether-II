@@ -10,11 +10,11 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class SentryGolemLayer extends EyesLayer<SentryGolemRenderState, SentryGolemModel> {
-    private static final RenderType GLOW = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sentry_golem/sentry_golem_emissive.png"));
-    private static final RenderType RANGED_GLOW = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sentry_golem/sentry_golem_ranged_emissive.png"));
+    private static final RenderType GLOW = RenderType.eyes(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sentry_golem/sentry_golem_emissive.png"));
+    private static final RenderType RANGED_GLOW = RenderType.eyes(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sentry_golem/sentry_golem_ranged_emissive.png"));
 
     public SentryGolemLayer(RenderLayerParent<SentryGolemRenderState, SentryGolemModel> parent) {
         super(parent);

@@ -25,7 +25,7 @@ import net.minecraft.client.sounds.MusicInfo;
 import net.minecraft.client.sounds.SoundEngine;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.dialog.Dialog;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
@@ -115,7 +115,7 @@ public class AetherIIClientEventListeners {
             Button button = SpriteIconButton.builder(Component.literal("Alpha Info"),  (b) -> {
                 Minecraft.getInstance().setScreen(new AlphaInfoScreen(screen));
                 AetherIIConfig.COMMON.yellow_alpha_button.set(false);
-            }, true).size(22, 22).sprite(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "icon/" + spriteName), 14, 14).build();
+            }, true).size(22, 22).sprite(Identifier.fromNamespaceAndPath(AetherII.MODID, "icon/" + spriteName), 14, 14).build();
             button.setPosition((screen.width / 2) + 54, (screen.height / 2) + 101);
             button.setTooltip(Tooltip.create(Component.literal("Alpha Info")));
             event.addListener(button);

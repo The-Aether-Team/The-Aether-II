@@ -12,10 +12,10 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class GravititeDebrisShotRenderer extends EntityRenderer<GravititeDebrisShot, GravititeDebrisShotRenderState> {
-    private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/gravitite_debris_shot.png");
+    private static final Identifier TEXTURE_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/gravitite_debris_shot.png");
     private final GravititeDebrisShotModel model;
 
     public GravititeDebrisShotRenderer(EntityRendererProvider.Context context) {

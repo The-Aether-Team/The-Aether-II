@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.inventory.menu.slot;
 
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
@@ -13,7 +13,7 @@ public class AccessorySlot extends Slot {
     private final Player owner;
     private final AccessoryContainer.SlotType slotType;
 
-    public AccessorySlot(Container container, Player owner, AccessoryContainer.SlotType slotType, int index, int xPosition, int yPosition, ResourceLocation emptyIcon) {
+    public AccessorySlot(Container container, Player owner, AccessoryContainer.SlotType slotType, int index, int xPosition, int yPosition, Identifier emptyIcon) {
         super(container, index, xPosition, yPosition);
         this.owner = owner;
         this.slotType = slotType;

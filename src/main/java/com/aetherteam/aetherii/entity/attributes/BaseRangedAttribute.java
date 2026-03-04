@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShortswordItem;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredSpearItem;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,7 +14,7 @@ public class BaseRangedAttribute extends RangedAttribute {
     }
 
     @Override
-    public @Nullable ResourceLocation getBaseId() {
+    public @Nullable Identifier getBaseId() {
         if (this == AetherIIAttributes.SLASH_DAMAGE.get()) {
             return AetherIIItems.BASE_SLASH_DAMAGE_ID;
         } else if (this == AetherIIAttributes.SLASH_RANGED_DAMAGE.get()) {

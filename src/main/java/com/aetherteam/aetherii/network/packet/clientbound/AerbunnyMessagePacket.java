@@ -7,11 +7,11 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record AerbunnyMessagePacket() implements CustomPacketPayload {
-    public static final Type<AerbunnyMessagePacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aerbunny_message"));
+    public static final Type<AerbunnyMessagePacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "aerbunny_message"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, AerbunnyMessagePacket> STREAM_CODEC = StreamCodec.unit(new AerbunnyMessagePacket());
 

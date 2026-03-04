@@ -8,10 +8,10 @@ import com.aetherteam.aetherii.client.renderer.entity.state.CockatriceRenderStat
 import com.aetherteam.aetherii.entity.monster.Cockatrice;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class CockatriceRenderer extends MobRenderer<Cockatrice, CockatriceRenderState, CockatriceModel> {
-    private static final ResourceLocation COCKATRICE_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/cockatrice/cockatrice.png");
+    private static final Identifier COCKATRICE_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/cockatrice/cockatrice.png");
 
     public CockatriceRenderer(EntityRendererProvider.Context context) {
         super(context, new CockatriceModel(context.bakeLayer(AetherIIModelLayers.COCKATRICE)), 0.3F);
@@ -32,7 +32,7 @@ public class CockatriceRenderer extends MobRenderer<Cockatrice, CockatriceRender
     }
 
     @Override
-    public ResourceLocation getTextureLocation(CockatriceRenderState p_368654_) {
+    public Identifier getTextureLocation(CockatriceRenderState p_368654_) {
         return COCKATRICE_TEXTURE;
     }
 }

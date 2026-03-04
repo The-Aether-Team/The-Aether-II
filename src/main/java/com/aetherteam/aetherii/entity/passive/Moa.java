@@ -39,7 +39,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -2024,7 +2024,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         private final String name;
         private final int id;
         @Nullable
-        public final ResourceLocation defaultTexture, babyTexture;
+        public final Identifier defaultTexture, babyTexture;
         @Nullable
         public final KeratinColor keratinColorOverride;
         @Nullable
@@ -2039,7 +2039,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         private static final SpecialVariant[] VALUES = values();
 
         private SpecialVariant(String name, int id,
-                               @Nullable ResourceLocation defaultTexture, @Nullable ResourceLocation babyTexture,
+                               @Nullable Identifier defaultTexture, @Nullable Identifier babyTexture,
                                @Nullable KeratinColor keratinColorOverride, @Nullable EyeColor eyeColorOverride, @Nullable FeatherColor featherColorOverride, @Nullable FeatherShape featherShapeOverride,
                                @Nullable MoaEggType eggTypeOverride) {
             this.name = name;
@@ -2061,23 +2061,23 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
             this(name, id, baseTextureNameNoModid, null, null, null, null);
         }
 
-        private SpecialVariant(String name, int id, ResourceLocation baseTextureName) {
+        private SpecialVariant(String name, int id, Identifier baseTextureName) {
             this(name, id, baseTextureName, null, null, null, null);
         }
 
         private SpecialVariant(String name, int id,
-                               @Nullable ResourceLocation defaultTexture, @Nullable ResourceLocation babyTexture) {
+                               @Nullable Identifier defaultTexture, @Nullable Identifier babyTexture) {
             this(name, id, defaultTexture, babyTexture, null, null, null, null);
         }
 
         private SpecialVariant(String name, int id, String baseTextureNameNoModid,
                                @Nullable KeratinColor keratinColorOverride, @Nullable EyeColor eyeColorOverride, @Nullable FeatherColor featherColorOverride, @Nullable FeatherShape featherShapeOverride) {
             this(name, id,
-                    ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/" + baseTextureNameNoModid + ".png"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/" + baseTextureNameNoModid + "_baby.png"),
+                    Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/" + baseTextureNameNoModid + ".png"), Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/" + baseTextureNameNoModid + "_baby.png"),
                     keratinColorOverride, eyeColorOverride, featherColorOverride, featherShapeOverride);
         }
 
-        private SpecialVariant(String name, int id, ResourceLocation baseTextureName,
+        private SpecialVariant(String name, int id, Identifier baseTextureName,
                                @Nullable KeratinColor keratinColorOverride, @Nullable EyeColor eyeColorOverride, @Nullable FeatherColor featherColorOverride, @Nullable FeatherShape featherShapeOverride) {
             this(name, id,
                     baseTextureName.withPath(path -> "textures/entity/mobs/moa/" + path + ".png"), baseTextureName.withPath(path -> "textures/entity/mobs/moa/" + path + "_baby.png"),
@@ -2085,7 +2085,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         }
 
         private SpecialVariant(String name, int id,
-                               @Nullable ResourceLocation defaultTexture, @Nullable ResourceLocation babyTexture,
+                               @Nullable Identifier defaultTexture, @Nullable Identifier babyTexture,
                                @Nullable KeratinColor keratinColorOverride, @Nullable EyeColor eyeColorOverride, @Nullable FeatherColor featherColorOverride, @Nullable FeatherShape featherShapeOverride) {
             this(name, id,
                     defaultTexture, babyTexture,
@@ -2098,12 +2098,12 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         }
 
         @Nullable
-        public ResourceLocation getDefaultTexture() {
+        public Identifier getDefaultTexture() {
             return this.defaultTexture;
         }
 
         @Nullable
-        public ResourceLocation getBabyTexture() {
+        public Identifier getBabyTexture() {
             return this.babyTexture;
         }
 

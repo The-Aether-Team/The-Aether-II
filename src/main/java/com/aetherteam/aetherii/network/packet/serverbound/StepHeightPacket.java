@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.entity.passive.MountableAnimal;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -15,7 +15,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
  * Called by mounts to sync their step height modifier to the server. This fixes a movement bug where step height occasionally would not work otherwise.
  */
 public record StepHeightPacket(int entityID) implements CustomPacketPayload {
-    public static final Type<StepHeightPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sync_step_height"));
+    public static final Type<StepHeightPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "sync_step_height"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, StepHeightPacket> STREAM_CODEC = CustomPacketPayload.codec(
             StepHeightPacket::write,

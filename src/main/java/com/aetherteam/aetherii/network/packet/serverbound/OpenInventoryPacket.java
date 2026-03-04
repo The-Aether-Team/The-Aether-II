@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.network.packet.clientbound.ClientGrabItemPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +13,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record OpenInventoryPacket(ItemStack carryStack) implements CustomPacketPayload {
-    public static final Type<OpenInventoryPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "open_inventory"));
+    public static final Type<OpenInventoryPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "open_inventory"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, OpenInventoryPacket> STREAM_CODEC = StreamCodec.composite(
             ItemStack.OPTIONAL_STREAM_CODEC,

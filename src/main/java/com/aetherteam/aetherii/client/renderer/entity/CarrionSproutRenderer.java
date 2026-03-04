@@ -8,10 +8,10 @@ import com.aetherteam.aetherii.entity.monster.CarrionSprout;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class CarrionSproutRenderer extends MobRenderer<CarrionSprout, CarrionSproutRenderState, CarrionSproutModel<CarrionSproutRenderState>> {
-    private static final ResourceLocation CARRION_SPROUT_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/carrion_sprout/carrion_sprout.png");
+    private static final Identifier CARRION_SPROUT_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/carrion_sprout/carrion_sprout.png");
 
     public CarrionSproutRenderer(EntityRendererProvider.Context context) {
         super(context, new CarrionSproutModel(context.bakeLayer(AetherIIModelLayers.CARRION_SPROUT)), 0.3F);
@@ -35,7 +35,7 @@ public class CarrionSproutRenderer extends MobRenderer<CarrionSprout, CarrionSpr
     }
 
     @Override
-    public ResourceLocation getTextureLocation(CarrionSproutRenderState renderState) {
+    public Identifier getTextureLocation(CarrionSproutRenderState renderState) {
         return CARRION_SPROUT_TEXTURE;
     }
 }

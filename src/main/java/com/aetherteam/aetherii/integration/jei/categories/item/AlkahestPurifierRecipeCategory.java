@@ -21,7 +21,7 @@ import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
@@ -36,9 +36,9 @@ public class AlkahestPurifierRecipeCategory extends AbstractRecipeCategory<Alkah
 
     public AlkahestPurifierRecipeCategory(IGuiHelper helper) {
         super(ALKAHEST_PURIFICATION, Component.translatable("gui.aether_ii.jei.alkahest_purifier"), helper.createDrawableItemLike(AetherIIBlocks.ALKAHEST_PURIFIER), 160, 81);
-        this.background = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/jei/alkahest_purifier.png"), 0, 0, 122, 79).setTextureSize(122, 79).build();
-        this.arrow = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/alkahest_purifier/output_progress.png"), 0, 0, 18, 9).setTextureSize(18, 9).buildAnimated(100, IDrawableAnimated.StartDirection.LEFT, false);
-        this.bubbles = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/alkahest_purifier/bubbles.png"), 0, 0, 18, 10).setTextureSize(18, 10).buildAnimated(20, IDrawableAnimated.StartDirection.LEFT, false);
+        this.background = helper.drawableBuilder(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/jei/alkahest_purifier.png"), 0, 0, 122, 79).setTextureSize(122, 79).build();
+        this.arrow = helper.drawableBuilder(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/alkahest_purifier/output_progress.png"), 0, 0, 18, 9).setTextureSize(18, 9).buildAnimated(100, IDrawableAnimated.StartDirection.LEFT, false);
+        this.bubbles = helper.drawableBuilder(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/alkahest_purifier/bubbles.png"), 0, 0, 18, 10).setTextureSize(18, 10).buildAnimated(20, IDrawableAnimated.StartDirection.LEFT, false);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class AlkahestPurifierRecipeCategory extends AbstractRecipeCategory<Alkah
         HolderSet<Item> ingredients = recipe.ingredient().getValues();
         Holder<Item> item = ingredients.get(0);
         if (item.is(AetherIITags.Items.IRRADIATED_ITEM)) {
-            ResourceLocation location = item.getKey().location().withSuffix("_result");
+            Identifier location = item.getKey().location().withSuffix("_result");
             resultDisplay = new SlotDisplay.ItemStackSlotDisplay(new ItemStack(item, 1, DataComponentPatch.builder()
                     .set(DataComponents.ITEM_MODEL, location)
                     .set(DataComponents.ITEM_NAME, Component.translatable(Util.makeDescriptionId("item", location)))

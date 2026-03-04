@@ -15,11 +15,11 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
 public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
-    private static final ResourceLocation GUIDEBOOK_DISCOVERY_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_left.png");
+    private static final Identifier GUIDEBOOK_DISCOVERY_LEFT_PAGE_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_left.png");
 
     private final GuidebookEquipmentMenu equipmentMenu;
     private final Inventory playerInventory;
@@ -58,11 +58,11 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
 
         int x = ((this.width + 2) / 2) - Guidebook.PAGE_WIDTH + 36;
         int y = (this.height / 2) - 72;
-        this.addRenderableWidget(new SectionTab(this, this.bestiarySection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_bestiary")));
+        this.addRenderableWidget(new SectionTab(this, this.bestiarySection, x, y, 42, 19, Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_bestiary")));
         x += 43;
-        this.addRenderableWidget(new SectionTab(this, this.effectsSection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_effects")));
+        this.addRenderableWidget(new SectionTab(this, this.effectsSection, x, y, 42, 19, Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_effects")));
 //        x += 43;
-//        this.addRenderableWidget(new SectionTab(this, this.explorationSection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_exploration"))); //todo
+//        this.addRenderableWidget(new SectionTab(this, this.explorationSection, x, y, 42, 19, Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_exploration"))); //todo
 
         this.currentSection.initSection();
     }
@@ -140,12 +140,12 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     }
 
     @Override
-    public ResourceLocation getLeftPageTexture() {
+    public Identifier getLeftPageTexture() {
         return GUIDEBOOK_DISCOVERY_LEFT_PAGE_LOCATION;
     }
 
     @Override
-    public ResourceLocation getRightPageTexture() {
+    public Identifier getRightPageTexture() {
         return this.getCurrentSection().getRightPageTexture();
     }
 

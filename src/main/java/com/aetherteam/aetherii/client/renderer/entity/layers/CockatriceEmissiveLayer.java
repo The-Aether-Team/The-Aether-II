@@ -6,10 +6,10 @@ import com.aetherteam.aetherii.client.renderer.entity.state.CockatriceRenderStat
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class CockatriceEmissiveLayer extends EyesLayer<CockatriceRenderState, CockatriceModel> {
-    private static final RenderType COCKATRICE_MARKINGS = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/cockatrice/cockatrice_emissive.png"));
+    private static final RenderType COCKATRICE_MARKINGS = RenderType.eyes(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/cockatrice/cockatrice_emissive.png"));
 
     public CockatriceEmissiveLayer(RenderLayerParent<CockatriceRenderState, CockatriceModel> parent) {
         super(parent);

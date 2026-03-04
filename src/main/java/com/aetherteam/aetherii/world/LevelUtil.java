@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.world;
 import com.aetherteam.aetherii.AetherIIConfig;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.Level;
 
 public final class LevelUtil {
@@ -16,7 +16,7 @@ public final class LevelUtil {
      * @see com.aetherteam.aetherii.event.hooks.DimensionHooks
      */
     public static ResourceKey<Level> destinationDimension() {
-        return ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(AetherIIConfig.SERVER.portal_destination_dimension_ID.get()));
+        return ResourceKey.create(Registries.DIMENSION, Identifier.parse(AetherIIConfig.SERVER.portal_destination_dimension_ID.get()));
     }
 
     /**
@@ -28,6 +28,6 @@ public final class LevelUtil {
      * @see com.aetherteam.aetherii.event.hooks.DimensionHooks
      */
     public static ResourceKey<Level> returnDimension() {
-        return ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(AetherIIConfig.SERVER.portal_return_dimension_ID.get()));
+        return ResourceKey.create(Registries.DIMENSION, Identifier.parse(AetherIIConfig.SERVER.portal_return_dimension_ID.get()));
     }
 }

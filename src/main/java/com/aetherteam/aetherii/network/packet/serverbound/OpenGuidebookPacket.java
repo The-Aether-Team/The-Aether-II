@@ -9,7 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
@@ -18,7 +18,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record OpenGuidebookPacket(ItemStack carryStack) implements CustomPacketPayload {
-    public static final Type<OpenGuidebookPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "open_guidebook"));
+    public static final Type<OpenGuidebookPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "open_guidebook"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, OpenGuidebookPacket> STREAM_CODEC = StreamCodec.composite(
             ItemStack.OPTIONAL_STREAM_CODEC,

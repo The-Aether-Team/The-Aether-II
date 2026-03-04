@@ -10,7 +10,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 
 public class AetherIIStyleMaterials {
@@ -21,7 +21,7 @@ public class AetherIIStyleMaterials {
     public static final ResourceKey<StyleMaterial> GRAVITITE = createKey("gravitite");
 
     private static ResourceKey<StyleMaterial> createKey(String name) {
-        return ResourceKey.create(AetherIIRegistries.STYLE_MATERIAL, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.STYLE_MATERIAL, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<StyleMaterial> context) {

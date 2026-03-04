@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.item.equipment.armor.abilities;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -11,9 +11,9 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 public interface ZaniteArmor {
-    ResourceLocation ZANITE_ATTACK_SPEED = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "armor_set.ability.zanite.attack_speed");
-    ResourceLocation ZANITE_MINING_SPEED = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "armor_set.ability.zanite.mining_speed");
-    ResourceLocation ZANITE_MOVEMENT_SPEED = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "armor_set.ability.zanite.movement_speed");
+    Identifier ZANITE_ATTACK_SPEED = Identifier.fromNamespaceAndPath(AetherII.MODID, "armor_set.ability.zanite.attack_speed");
+    Identifier ZANITE_MINING_SPEED = Identifier.fromNamespaceAndPath(AetherII.MODID, "armor_set.ability.zanite.mining_speed");
+    Identifier ZANITE_MOVEMENT_SPEED = Identifier.fromNamespaceAndPath(AetherII.MODID, "armor_set.ability.zanite.movement_speed");
 
     static void updatePlayerAttributes(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();

@@ -9,7 +9,7 @@ import com.aetherteam.aetherii.recipe.recipes.item.HourglassRestoringRecipe;
 import com.aetherteam.aetherii.recipe.set.AetherIIRecipePropertySets;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.recipebook.ServerPlaceRecipe;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
@@ -48,7 +48,7 @@ public class AmberHourglassMenu extends RecipeBookMenu {
         // Hourglass
         this.addSlot(new Slot(container, 0, 80, 30)); // Input
         this.addSlot(new Slot(container, 1, 80, 62) {
-            public static final ResourceLocation SLOT_FUEL = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/amber_hourglass/slot_golden_amber");
+            public static final Identifier SLOT_FUEL = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/amber_hourglass/slot_golden_amber");
 
             @Override
             public boolean mayPlace(ItemStack stack) {
@@ -56,7 +56,7 @@ public class AmberHourglassMenu extends RecipeBookMenu {
             }
 
             @Override
-            public ResourceLocation getNoItemIcon() {
+            public Identifier getNoItemIcon() {
                 return SLOT_FUEL;
             }
         }); // Fuel

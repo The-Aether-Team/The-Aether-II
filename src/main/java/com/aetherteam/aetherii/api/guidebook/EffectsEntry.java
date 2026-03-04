@@ -9,7 +9,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.RegistryFileCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
 
@@ -38,7 +38,7 @@ public class EffectsEntry extends GuidebookEntry {
         this(root.getId(), root.getIcon(), root.getName(), root.getSlotName(), root.getSlotSubtitle(), root.getDescriptionKey(), effect, items);
     }
 
-    public EffectsEntry(ResourceLocation id, ResourceLocation icon, String name, String slotName, Optional<String> slotSubtitle, String descriptionKey, Holder<MobEffect> effect, List<Holder<Item>> items) {
+    public EffectsEntry(Identifier id, Identifier icon, String name, String slotName, Optional<String> slotSubtitle, String descriptionKey, Holder<MobEffect> effect, List<Holder<Item>> items) {
         super(id, icon, name, slotName, slotSubtitle, descriptionKey);
         this.effect = this.info(EFFECT, effect);
         this.items = items;

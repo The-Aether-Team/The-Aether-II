@@ -7,7 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.RegistryOps;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Mirror;
@@ -25,13 +25,13 @@ import java.util.function.Function;
  */
 public abstract class AetherTemplateStructurePiece extends TemplateStructurePiece {
     protected final Holder<StructureProcessorList> processors;
-    public AetherTemplateStructurePiece(StructurePieceType type, StructureTemplateManager templateManager, ResourceLocation name, StructurePlaceSettings placeSettings, BlockPos templatePosition, Holder<StructureProcessorList> processors) {
+    public AetherTemplateStructurePiece(StructurePieceType type, StructureTemplateManager templateManager, Identifier name, StructurePlaceSettings placeSettings, BlockPos templatePosition, Holder<StructureProcessorList> processors) {
         super(type, 0, templateManager, name, name.toString(), addProcessors(placeSettings.setLiquidSettings(LiquidSettings.IGNORE_WATERLOGGING), processors), templatePosition);
         this.setOrientation(this.getRotation().rotate(Direction.SOUTH));
         this.processors = processors;
     }
 
-    public AetherTemplateStructurePiece(StructurePieceType type, RegistryAccess access, CompoundTag tag, StructureTemplateManager templateManager, Function<ResourceLocation, StructurePlaceSettings> settingsFactory) {
+    public AetherTemplateStructurePiece(StructurePieceType type, RegistryAccess access, CompoundTag tag, StructureTemplateManager templateManager, Function<Identifier, StructurePlaceSettings> settingsFactory) {
         super(type, tag, templateManager, settingsFactory.andThen(settings -> readSettings(tag, settings.setLiquidSettings(LiquidSettings.IGNORE_WATERLOGGING), access)));
         this.setOrientation(this.getRotation().rotate(Direction.SOUTH));
         this.processors = readProcessors(tag, access);
@@ -78,7 +78,7 @@ public abstract class AetherTemplateStructurePiece extends TemplateStructurePiec
         return settings;
     }
 
-    public static StructurePlaceSettings makeSettingsWithPivot(StructurePlaceSettings settings, StructureTemplateManager templateManager, ResourceLocation name, Rotation rotation) {
+    public static StructurePlaceSettings makeSettingsWithPivot(StructurePlaceSettings settings, StructureTemplateManager templateManager, Identifier name, Rotation rotation) {
         StructureTemplate template = templateManager.getOrCreate(name);
         TransformInfo info = getTransformInfo(template, rotation);
         settings.setRotationPivot(info.pivot());

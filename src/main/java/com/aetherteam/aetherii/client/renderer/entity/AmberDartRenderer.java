@@ -13,11 +13,11 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class AmberDartRenderer extends ArrowRenderer<AmberDart, AmberDartRenderState> {
-    private static final ResourceLocation AMBER_DART_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/amber_dart.png");
-    private static final ResourceLocation AMBER_DART_OVERLAY_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/amber_dart_overlay.png");
+    private static final Identifier AMBER_DART_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/amber_dart.png");
+    private static final Identifier AMBER_DART_OVERLAY_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/amber_dart_overlay.png");
 
     private final ArrowModel model;
 
@@ -48,7 +48,7 @@ public class AmberDartRenderer extends ArrowRenderer<AmberDart, AmberDartRenderS
     }
 
     @Override
-    public ResourceLocation getTextureLocation(AmberDartRenderState dart) {
+    public Identifier getTextureLocation(AmberDartRenderState dart) {
         return AMBER_DART_TEXTURE;
     }
 }

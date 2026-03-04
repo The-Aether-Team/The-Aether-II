@@ -14,13 +14,13 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 
 public class GuidebookStatusScreen extends Screen implements Guidebook {
-    private static final ResourceLocation GUIDEBOOK_STATUS_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/status/guidebook_status_left.png");
-    private static final ResourceLocation GUIDEBOOK_STATUS_RIGHT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/status/guidebook_status_right.png");
+    private static final Identifier GUIDEBOOK_STATUS_LEFT_PAGE_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/status/guidebook_status_left.png");
+    private static final Identifier GUIDEBOOK_STATUS_RIGHT_PAGE_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/status/guidebook_status_right.png");
 
     private final GuidebookEquipmentMenu equipmentMenu;
     private final Inventory playerInventory;
@@ -110,12 +110,12 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
     }
 
     @Override
-    public ResourceLocation getLeftPageTexture() {
+    public Identifier getLeftPageTexture() {
         return GUIDEBOOK_STATUS_LEFT_PAGE_LOCATION;
     }
 
     @Override
-    public ResourceLocation getRightPageTexture() {
+    public Identifier getRightPageTexture() {
         return GUIDEBOOK_STATUS_RIGHT_PAGE_LOCATION;
     }
 

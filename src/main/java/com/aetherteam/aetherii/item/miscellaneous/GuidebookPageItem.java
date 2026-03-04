@@ -13,7 +13,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -105,7 +105,7 @@ public class GuidebookPageItem extends Item {
         if (dataList != null) {
             for (GuidebookEntryData data : dataList) {
                 ResourceKey registryKey = ResourceKey.createRegistryKey(data.registry());
-                ResourceKey resourceKey = ResourceKey.create(registryKey, ResourceLocation.parse(data.name()));
+                ResourceKey resourceKey = ResourceKey.create(registryKey, Identifier.parse(data.name()));
                 context.registries().lookupOrThrow(registryKey).get(resourceKey).ifPresent((object) -> {
                     if (object instanceof Holder holder && holder.value() instanceof GuidebookEntry guidebookEntry) {
                         tooltipAdder.accept(Component.translatable(guidebookEntry.getName()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));

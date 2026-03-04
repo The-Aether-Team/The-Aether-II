@@ -9,14 +9,14 @@ import com.aetherteam.aetherii.entity.monster.Tempest;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
 /**
  * [CODE COPY] - {@link com.aetherteam.aether.client.renderer.entity.ZephyrRenderer}.
  */
 public class TempestRenderer extends MobRenderer<Tempest, TempestRenderState, TempestModel> {
-    private static final ResourceLocation TEMPEST_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/tempest/tempest.png");
+    private static final Identifier TEMPEST_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/tempest/tempest.png");
 
     public TempestRenderer(EntityRendererProvider.Context context) {
         super(context, new TempestModel(context.bakeLayer(AetherIIModelLayers.TEMPEST)), 0.5F);
@@ -44,7 +44,7 @@ public class TempestRenderer extends MobRenderer<Tempest, TempestRenderState, Te
     }
 
     @Override
-    public ResourceLocation getTextureLocation(TempestRenderState renderState) {
+    public Identifier getTextureLocation(TempestRenderState renderState) {
         return TEMPEST_TEXTURE;
     }
 }

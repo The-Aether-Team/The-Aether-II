@@ -10,11 +10,11 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class SliderGlowLayer extends EyesLayer<SliderRenderState, SliderModel> {
-    private static final RenderType SLIDER_AWAKE_EMISSIVE = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/slider/slider_awake_emissive.png"));
-    private static final RenderType SLIDER_AWAKE_CRITICAL_EMISSIVE = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/slider/slider_awake_critical_emissive.png"));
+    private static final RenderType SLIDER_AWAKE_EMISSIVE = RenderType.eyes(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/slider/slider_awake_emissive.png"));
+    private static final RenderType SLIDER_AWAKE_CRITICAL_EMISSIVE = RenderType.eyes(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/slider/slider_awake_critical_emissive.png"));
 
     public SliderGlowLayer(RenderLayerParent<SliderRenderState, SliderModel> parent) {
         super(parent);

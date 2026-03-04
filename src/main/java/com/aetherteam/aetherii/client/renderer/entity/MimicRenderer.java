@@ -13,12 +13,12 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class MimicRenderer extends MobRenderer<Mimic, MimicRenderState, MimicModel<MimicRenderState>> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/mimic/sentry_crate_mimic.png");
-    private static final ResourceLocation TEXTURE_EYE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/mimic/sentry_crate_mimic_eye.png");
-    private static final ResourceLocation TEXTURE_EMISSIVE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/mimic/sentry_crate_mimic_emissive.png");
+    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/mimic/sentry_crate_mimic.png");
+    private static final Identifier TEXTURE_EYE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/mimic/sentry_crate_mimic_eye.png");
+    private static final Identifier TEXTURE_EMISSIVE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/mimic/sentry_crate_mimic_emissive.png");
 
     public MimicRenderer(EntityRendererProvider.Context renderer) {
         super(renderer, new MimicModel<>(renderer.bakeLayer(AetherIIModelLayers.MIMIC)), 1.0F);
@@ -73,10 +73,10 @@ public class MimicRenderer extends MobRenderer<Mimic, MimicRenderState, MimicMod
      * If the Lootr mod is installed or if it is Christmas, Mimics will have a custom texture.
      *
      * @param Mimic The {@link Mimic} entity.
-     * @return The texture {@link ResourceLocation}.
+     * @return The texture {@link }.
      */
     @Override
-    public ResourceLocation getTextureLocation(MimicRenderState Mimic) {
+    public Identifier getTextureLocation(MimicRenderState Mimic) {
         return TEXTURE;
     }
 }

@@ -8,14 +8,14 @@ import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class TaegoreModel extends EntityModel<TaegoreRenderState> {
-	public static final AnimationHolder DIG_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "taegore/dig"));
-	public static final AnimationHolder DIG_START_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "taegore/dig_start"));
-	public static final AnimationHolder DIG_END_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "taegore/dig_end"));
+	public static final AnimationHolder DIG_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "taegore/dig"));
+	public static final AnimationHolder DIG_START_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "taegore/dig_start"));
+	public static final AnimationHolder DIG_END_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "taegore/dig_end"));
 	private final KeyframeAnimation digAnimation;
 	private final KeyframeAnimation digStartAnimation;
 	private final KeyframeAnimation digEndAnimation;

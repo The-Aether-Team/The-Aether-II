@@ -12,28 +12,28 @@ import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
 import java.util.function.BiFunction;
 
 public interface Guidebook {
-    WidgetSprites EQUIPMENT_TAB = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/equipment_tab"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/equipment_tab_selected"));
-    WidgetSprites STATUS_TAB = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/status_tab"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/status_tab_selected"));
-    WidgetSprites DISCOVERY_TAB = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/discovery_tab"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/discovery_tab_selected"));
-    WidgetSprites JOURNAL_TAB = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/journal_tab"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/journal_tab_selected"));
-    WidgetSprites REWARDS_TAB = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/rewards_tab"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/rewards_tab_selected"));
-    WidgetSprites SCROLLER = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/scroller"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/scroller_selected"));
-    WidgetSprites MAGNIFYING_GLASS = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/magnifying_glass"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/magnifying_glass"));
-    WidgetSprites RETURN = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/return"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/return"));
-    ResourceLocation GUIDEBOOK_LEFT_BACKING_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/guidebook_backing_left.png");
-    ResourceLocation GUIDEBOOK_RIGHT_BACKING_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/guidebook_backing_right.png");
-    ResourceLocation SLOT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/slot");
-    ResourceLocation EXCLAMATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/exclamation");
-    ResourceLocation HEARTS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/hearts");
-    ResourceLocation ARMOR_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/armor");
-    ResourceLocation DESCRIPTION_BORDER_LEFT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/border_left");
-    ResourceLocation DESCRIPTION_BORDER_RIGHT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/border_right");
+    WidgetSprites EQUIPMENT_TAB = new WidgetSprites(Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/equipment_tab"), Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/equipment_tab_selected"));
+    WidgetSprites STATUS_TAB = new WidgetSprites(Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/status_tab"), Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/status_tab_selected"));
+    WidgetSprites DISCOVERY_TAB = new WidgetSprites(Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/discovery_tab"), Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/discovery_tab_selected"));
+    WidgetSprites JOURNAL_TAB = new WidgetSprites(Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/journal_tab"), Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/journal_tab_selected"));
+    WidgetSprites REWARDS_TAB = new WidgetSprites(Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/rewards_tab"), Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/rewards_tab_selected"));
+    WidgetSprites SCROLLER = new WidgetSprites(Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/scroller"), Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/scroller_selected"));
+    WidgetSprites MAGNIFYING_GLASS = new WidgetSprites(Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/magnifying_glass"), Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/magnifying_glass"));
+    WidgetSprites RETURN = new WidgetSprites(Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/return"), Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/return"));
+    Identifier GUIDEBOOK_LEFT_BACKING_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/guidebook_backing_left.png");
+    Identifier GUIDEBOOK_RIGHT_BACKING_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/guidebook_backing_right.png");
+    Identifier SLOT_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/slot");
+    Identifier EXCLAMATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/exclamation");
+    Identifier HEARTS_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/hearts");
+    Identifier ARMOR_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/armor");
+    Identifier DESCRIPTION_BORDER_LEFT_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/border_left");
+    Identifier DESCRIPTION_BORDER_RIGHT_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/border_right");
     int PAGE_WIDTH = 188;
     int PAGE_HEIGHT = 198;
 
@@ -97,9 +97,9 @@ public interface Guidebook {
 
     }
 
-    ResourceLocation getLeftPageTexture();
+    Identifier getLeftPageTexture();
 
-    ResourceLocation getRightPageTexture();
+    Identifier getRightPageTexture();
 
     GuidebookEquipmentMenu getEquipmentMenu();
 

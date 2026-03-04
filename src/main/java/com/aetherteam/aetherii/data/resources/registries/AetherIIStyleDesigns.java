@@ -8,7 +8,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class AetherIIStyleDesigns { //todo style names
     public static final ResourceKey<StyleDesign> GUARD = createKey("guard");
@@ -18,7 +18,7 @@ public class AetherIIStyleDesigns { //todo style names
     public static final ResourceKey<StyleDesign> WARRIOR = createKey("warrior");
 
     private static ResourceKey<StyleDesign> createKey(String name) {
-        return ResourceKey.create(AetherIIRegistries.STYLE_DESIGN, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.STYLE_DESIGN, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<StyleDesign> context) {

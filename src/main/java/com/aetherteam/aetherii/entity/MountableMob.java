@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerGamePacketListenerImplAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -23,8 +23,8 @@ import net.neoforged.neoforge.common.CommonHooks;
  * This interface has several methods for handling the movement for mounted mobs.
  */
 public interface MountableMob {
-    AttributeModifier STEP_HEIGHT_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "mountable_mob_step_height_modifier"), 0.4, AttributeModifier.Operation.ADD_VALUE);
-    AttributeModifier DEFAULT_STEP_HEIGHT_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "default_mountable_mob_step_height_modifier"), -0.1, AttributeModifier.Operation.ADD_VALUE);
+    AttributeModifier STEP_HEIGHT_MODIFIER = new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "mountable_mob_step_height_modifier"), 0.4, AttributeModifier.Operation.ADD_VALUE);
+    AttributeModifier DEFAULT_STEP_HEIGHT_MODIFIER = new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "default_mountable_mob_step_height_modifier"), -0.1, AttributeModifier.Operation.ADD_VALUE);
 
     /**
      * Call this at the beginning of your entity's tick method to update the state of the entity.

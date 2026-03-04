@@ -10,10 +10,10 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ZephyrWebbingBallRenderer extends EntityRenderer<ZephyrWebbingBall, EntityRenderState> {
-    private static final ResourceLocation ZEPHYR_PROJECTILE_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/zephyr_webbing_ball.png");
+    private static final Identifier ZEPHYR_PROJECTILE_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/zephyr_webbing_ball.png");
     private static final RenderType RENDER_TYPE;
 
     public ZephyrWebbingBallRenderer(EntityRendererProvider.Context context) {

@@ -14,7 +14,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class DiscoverySection<S extends GuidebookEntry, T extends MutableEntry> {
-    private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_GENERAL_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_general.png");
+    private static final Identifier GUIDEBOOK_DISCOVERY_RIGHT_PAGE_GENERAL_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_general.png");
     protected final RegistryAccess registryAccess;
     protected final ResourceKey<Registry<S>> registryKey;
     protected final GuidebookDiscoveryScreen screen;
@@ -67,7 +67,7 @@ public abstract class DiscoverySection<S extends GuidebookEntry, T extends Mutab
     protected void renderScrollbar(GuiGraphics guiGraphics) {
         int scrollbarTop = 59;
         int scrollbarLeft = 151;
-        ResourceLocation location = Guidebook.SCROLLER.get(this.isScrollActive(), this.scrolling);
+        Identifier location = Guidebook.SCROLLER.get(this.isScrollActive(), this.scrolling);
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, scrollbarLeft, (int) (scrollbarTop + this.scrollY), 6, 9); // Render scrollbar.
     }
 
@@ -259,7 +259,7 @@ public abstract class DiscoverySection<S extends GuidebookEntry, T extends Mutab
 
     protected abstract List<T> getOrderedEntries();
 
-    public ResourceLocation getRightPageTexture() {
+    public Identifier getRightPageTexture() {
         return GUIDEBOOK_DISCOVERY_RIGHT_PAGE_GENERAL_LOCATION;
     }
 }

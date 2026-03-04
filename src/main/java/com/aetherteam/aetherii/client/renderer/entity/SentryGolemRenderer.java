@@ -12,11 +12,11 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.client.renderer.entity.state.ArmedEntityRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class SentryGolemRenderer extends MobRenderer<SentryGolem, SentryGolemRenderState, SentryGolemModel> {
-    private static final ResourceLocation SENTRY_GOLEM_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sentry_golem/sentry_golem.png");
-    private static final ResourceLocation SENTRY_GOLEM_RANGED_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sentry_golem/sentry_golem_ranged.png");
+    private static final Identifier SENTRY_GOLEM_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sentry_golem/sentry_golem.png");
+    private static final Identifier SENTRY_GOLEM_RANGED_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sentry_golem/sentry_golem_ranged.png");
 
     public SentryGolemRenderer(EntityRendererProvider.Context context) {
         super(context, new SentryGolemModel(context.bakeLayer(AetherIIModelLayers.SENTRY_GOLEM)), 0.7F);
@@ -47,7 +47,7 @@ public class SentryGolemRenderer extends MobRenderer<SentryGolem, SentryGolemRen
         super.render(renderState, p_115311_, p_115312_, p_115313_);
     }
     @Override
-    public ResourceLocation getTextureLocation(SentryGolemRenderState golem) {
+    public Identifier getTextureLocation(SentryGolemRenderState golem) {
         return golem.ranged ? SENTRY_GOLEM_RANGED_TEXTURE : SENTRY_GOLEM_TEXTURE;
     }
 }

@@ -8,12 +8,12 @@ import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class AechorPlantModel extends EntityModel<AechorPlantRenderState> {
-    public static final AnimationHolder PASSIVE_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aechor_plant/passive"));
-    public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aechor_plant/attack"));
+    public static final AnimationHolder PASSIVE_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "aechor_plant/passive"));
+    public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "aechor_plant/attack"));
     private final KeyframeAnimation passiveAnimation;
     private final KeyframeAnimation attackAnimation;
 

@@ -10,7 +10,7 @@ import net.minecraft.client.resources.model.BlockModelRotation;
 import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.ResolvableModel;
 import net.minecraft.client.resources.model.ResolvedModel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.RenderTypeGroup;
 import net.neoforged.neoforge.client.model.NeoForgeModelProperties;
 import org.jetbrains.annotations.Nullable;
@@ -22,9 +22,9 @@ public class EmissiveModel extends BlockModelWrapper {
         super(List.of(), quads, properties, renderType);
     }
 
-    public record Unbaked(ResourceLocation model) implements ItemModel.Unbaked {
+    public record Unbaked(Identifier model) implements ItemModel.Unbaked {
         public static final MapCodec<EmissiveModel.Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-                ResourceLocation.CODEC.fieldOf("model").forGetter(EmissiveModel.Unbaked::model)
+                Identifier.CODEC.fieldOf("model").forGetter(EmissiveModel.Unbaked::model)
         ).apply(instance, EmissiveModel.Unbaked::new));
 
         public void resolveDependencies(ResolvableModel.Resolver resolver) {

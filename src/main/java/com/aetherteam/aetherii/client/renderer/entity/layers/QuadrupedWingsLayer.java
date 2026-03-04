@@ -10,13 +10,13 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class QuadrupedWingsLayer<T extends WingEntityRenderState, M extends QuadrupedModel<T>> extends RenderLayer<T, M> {
-    private final ResourceLocation resourceLocation;
+    private final Identifier resourceLocation;
     private final QuadrupedWingsModel<T> wings;
 
-    public QuadrupedWingsLayer(RenderLayerParent<T, M> entityRenderer, QuadrupedWingsModel<T> wingsModel, ResourceLocation resourceLocation) {
+    public QuadrupedWingsLayer(RenderLayerParent<T, M> entityRenderer, QuadrupedWingsModel<T> wingsModel, Identifier resourceLocation) {
         super(entityRenderer);
         this.wings = wingsModel;
         this.resourceLocation = resourceLocation;

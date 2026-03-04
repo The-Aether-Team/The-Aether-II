@@ -10,7 +10,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
 
@@ -86,7 +86,7 @@ public class AetherIIEffectsEntries {
     );
 
     private static ResourceKey<EffectsEntry> createKey(String name) {
-        return ResourceKey.create(AetherIIRegistries.EFFECTS_ENTRY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.EFFECTS_ENTRY, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<EffectsEntry> context) {
@@ -94,7 +94,7 @@ public class AetherIIEffectsEntries {
             Holder<MobEffect> holder = entry.getValue();
             context.register(entry.getKey(), new EffectsEntry(
                     entry.getKey().location(),
-                    ResourceLocation.parse(holder.getKey().location().getPath()),
+                    Identifier.parse(holder.getKey().location().getPath()),
                     holder.value().getDescriptionId(),
                     holder.value().getDescriptionId(),
                     Optional.empty(),

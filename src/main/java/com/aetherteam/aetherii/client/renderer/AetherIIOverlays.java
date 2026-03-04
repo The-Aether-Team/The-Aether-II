@@ -26,7 +26,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
@@ -43,22 +43,22 @@ import java.util.List;
 import java.util.Set;
 
 public class AetherIIOverlays {
-    protected static final ResourceLocation BUILDUP_BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background");
-    protected static final ResourceLocation BUILDUP_BACKGROUND_BACKING_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background_backing");
-    protected static final ResourceLocation BUILDUP_BACKGROUND_OUTLINE_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background_outline");
-    protected static final ResourceLocation BUILDUP_BACKGROUND_OVERLAY_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background_overlay");
-    protected static final ResourceLocation CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/crosshair_block_indicator_background");
-    protected static final ResourceLocation CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/crosshair_block_indicator_progress");
-    protected static final ResourceLocation CROSSHAIR_BLOCK_INDICATOR_BROKEN_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/crosshair_block_indicator_broken");
-    protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_background");
-    protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_progress");
-    protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_BROKEN_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_broken");
+    protected static final Identifier BUILDUP_BACKGROUND_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background");
+    protected static final Identifier BUILDUP_BACKGROUND_BACKING_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background_backing");
+    protected static final Identifier BUILDUP_BACKGROUND_OUTLINE_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background_outline");
+    protected static final Identifier BUILDUP_BACKGROUND_OVERLAY_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background_overlay");
+    protected static final Identifier CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "hud/crosshair_block_indicator_background");
+    protected static final Identifier CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "hud/crosshair_block_indicator_progress");
+    protected static final Identifier CROSSHAIR_BLOCK_INDICATOR_BROKEN_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "hud/crosshair_block_indicator_broken");
+    protected static final Identifier HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_background");
+    protected static final Identifier HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_progress");
+    protected static final Identifier HOTBAR_BLOCK_INDICATOR_BROKEN_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_broken");
 
-    public static final ResourceLocation TEXTURE_DEFAULT_JUMPS = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/jumps");
+    public static final Identifier TEXTURE_DEFAULT_JUMPS = Identifier.fromNamespaceAndPath(AetherII.MODID, "hud/jumps");
 
 
     public static void registerOverlays(RegisterGuiLayersEvent event) {
-        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aether_portal_overlay"), (guiGraphics, partialTicks) -> {
+        event.registerAboveAll(Identifier.fromNamespaceAndPath(AetherII.MODID, "aether_portal_overlay"), (guiGraphics, partialTicks) -> {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
             if (player != null) {
@@ -67,7 +67,7 @@ public class AetherIIOverlays {
                 }
             }
         });
-        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect_buildups"), (guiGraphics, partialTicks) -> {
+        event.registerAboveAll(Identifier.fromNamespaceAndPath(AetherII.MODID, "effect_buildups"), (guiGraphics, partialTicks) -> {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
             if (player != null) {
@@ -76,7 +76,7 @@ public class AetherIIOverlays {
                 }
             }
         });
-        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "shield_blocking"), (guiGraphics, partialTicks) -> {
+        event.registerAboveAll(Identifier.fromNamespaceAndPath(AetherII.MODID, "shield_blocking"), (guiGraphics, partialTicks) -> {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
             if (player != null) {
@@ -85,7 +85,7 @@ public class AetherIIOverlays {
                 }
             }
         });
-        event.registerBelowAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet_overlay"), (guiGraphics, partialTicks) -> {
+        event.registerBelowAll(Identifier.fromNamespaceAndPath(AetherII.MODID, "swet_overlay"), (guiGraphics, partialTicks) -> {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
             if (player != null) {
@@ -94,7 +94,7 @@ public class AetherIIOverlays {
                 }
             }
         });
-        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_jumps"), (guiGraphics, partialTicks) -> {
+        event.registerAboveAll(Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_jumps"), (guiGraphics, partialTicks) -> {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
             if (player != null) {
@@ -113,7 +113,7 @@ public class AetherIIOverlays {
         }
     }
 
-    private static ResourceLocation getMoaJumpTexture(Moa moa, double count) {
+    private static Identifier getMoaJumpTexture(Moa moa, double count) {
         AttributeInstance instance = moa.getAttribute(AetherIIAttributes.MOA_STAMINA);
         if (instance != null) {
             if (count < instance.getBaseValue()) {
@@ -138,7 +138,7 @@ public class AetherIIOverlays {
         return TEXTURE_DEFAULT_JUMPS;
     }
 
-    private static ResourceLocation appendBackground(boolean background, ResourceLocation location) {
+    private static Identifier appendBackground(boolean background, Identifier location) {
         if (background) {
             return location.withSuffix("_background");
         } else return location;
@@ -219,7 +219,7 @@ public class AetherIIOverlays {
                     guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BUILDUP_BACKGROUND_OUTLINE_SPRITE, i, j, 24, 24, ARGB.white(flashInterval));
                 }
 
-                ResourceLocation location = Gui.getMobEffectSprite(effect);
+                Identifier location = Gui.getMobEffectSprite(effect);
                 int i1 = j;
                 int i_f = i;
                 guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, i_f + 3, i1 + 3, 18, 18);
@@ -286,10 +286,10 @@ public class AetherIIOverlays {
         if (!swets.isEmpty()) {
             Swet swet = attachment.getLatchedSwets().getFirst();
             if (swet != null) {
-                ResourceLocation left1Sprite = swet.overlay.left1();
-                ResourceLocation left2Sprite = swet.overlay.left2();
-                ResourceLocation right1Sprite = swet.overlay.right1();
-                ResourceLocation right2Sprite = swet.overlay.right2();
+                Identifier left1Sprite = swet.overlay.left1();
+                Identifier left2Sprite = swet.overlay.left2();
+                 right1Sprite = swet.overlay.right1();
+                 right2Sprite = swet.overlay.right2();
 
                 drawCorner(guiGraphics, left1Sprite, left2Sprite, 0, guiGraphics.guiHeight() - 128);
                 drawCorner(guiGraphics, right1Sprite, right2Sprite, guiGraphics.guiWidth() - 128, guiGraphics.guiHeight() - 128);
@@ -297,7 +297,7 @@ public class AetherIIOverlays {
         }
     }
 
-    private static void drawCorner(GuiGraphics guiGraphics, ResourceLocation sprite, ResourceLocation sprite2, int x, int y) {
+    private static void drawCorner(GuiGraphics guiGraphics, Identifier sprite, Identifier sprite2, int x, int y) {
         final float startRange = 0.1F;
         final float endRange = 0.7F;
 
@@ -308,7 +308,7 @@ public class AetherIIOverlays {
         drawSingle(guiGraphics, sprite2, x, y, oscilationOffset + (float) Math.sin((System.currentTimeMillis() / 200.0) + 60.0) * oscilationRange);
     }
 
-    private static void drawSingle(GuiGraphics guiGraphics, ResourceLocation sprite, int x, int y, float alpha) {
+    private static void drawSingle(GuiGraphics guiGraphics, Identifier sprite, int x, int y, float alpha) {
         //RenderSystem.enableBlend();
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, 128, 128, ARGB.colorFromFloat(alpha, 1.0F, 1.0F, 1.0F));
         //RenderSystem.disableBlend();

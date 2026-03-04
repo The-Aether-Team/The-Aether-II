@@ -6,15 +6,15 @@ import net.minecraft.Util;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.event.RegisterRenderBuffersEvent;
 
 import java.util.function.BiFunction;
 
 public class AetherIIRenderTypes {
-    public static final ResourceLocation IRRADIATED_GLINT_ITEM = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/misc/irradiated_glint_item.png");
+    public static final Identifier IRRADIATED_GLINT_ITEM = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/misc/irradiated_glint_item.png");
 
-    public static final BiFunction<ResourceLocation, Boolean, RenderType> ENTITY_DITHER_NO_CULL = Util.memoize((location, outline) -> RenderType.create(
+    public static final BiFunction<Identifier, Boolean, RenderType> ENTITY_DITHER_NO_CULL = Util.memoize((location, outline) -> RenderType.create(
             "aether:entity_dither_no_cull",
             1536,
             true,
@@ -42,11 +42,11 @@ public class AetherIIRenderTypes {
                     .setTexturingState(RenderStateShard.GLINT_TEXTURING)
                     .createCompositeState(false));
 
-    public static RenderType entityDitherNoCull(ResourceLocation location) {
+    public static RenderType entityDitherNoCull(Identifier location) {
         return ENTITY_DITHER_NO_CULL.apply(location, true);
     }
 
-    public static RenderType entityDitherNoCull(ResourceLocation location, boolean outline) {
+    public static RenderType entityDitherNoCull(Identifier location, boolean outline) {
         return ENTITY_DITHER_NO_CULL.apply(location, outline);
     }
 

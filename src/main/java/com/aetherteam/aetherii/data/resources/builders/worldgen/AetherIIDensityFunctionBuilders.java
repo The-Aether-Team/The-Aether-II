@@ -6,7 +6,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIINoises;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.CubicSpline;
 import net.minecraft.util.ToFloatFunction;
 import net.minecraft.world.level.dimension.DimensionType;
@@ -71,7 +71,7 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> CLOUDBED_Y_OFFSET = createKey("holy_isles/cloudbed/y_offset");
 
     private static ResourceKey<DensityFunction> createKey(String name) {
-        return ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(Registries.DENSITY_FUNCTION, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static final ResourceKey<DensityFunction> SHIFT_X = createVanillaKey("shift_x");
@@ -79,7 +79,7 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> Y = createVanillaKey("y");
 
     private static ResourceKey<DensityFunction> createVanillaKey(String name) {
-        return ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.withDefaultNamespace(name));
+        return ResourceKey.create(Registries.DENSITY_FUNCTION, Identifier.withDefaultNamespace(name));
     }
 
     // Noises

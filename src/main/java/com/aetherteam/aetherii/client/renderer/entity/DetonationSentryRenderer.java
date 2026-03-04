@@ -8,10 +8,10 @@ import com.aetherteam.aetherii.client.renderer.entity.state.DetonationSentryRend
 import com.aetherteam.aetherii.entity.monster.dungeon.DetonationSentry;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class DetonationSentryRenderer extends MobRenderer<DetonationSentry, DetonationSentryRenderState, DetonationSentryModel> {
-    private static final ResourceLocation SENTRY_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/detonation_sentry/detonation_sentry.png");
+    private static final Identifier SENTRY_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/detonation_sentry/detonation_sentry.png");
 
     public DetonationSentryRenderer(EntityRendererProvider.Context context) {
         super(context, new DetonationSentryModel(context.bakeLayer(AetherIIModelLayers.DETONATION_SENTRY)), 0.3F);
@@ -32,7 +32,7 @@ public class DetonationSentryRenderer extends MobRenderer<DetonationSentry, Deto
     }
 
     @Override
-    public ResourceLocation getTextureLocation(DetonationSentryRenderState sentry) {
+    public Identifier getTextureLocation(DetonationSentryRenderState sentry) {
         return SENTRY_TEXTURE;
     }
 }

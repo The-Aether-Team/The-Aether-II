@@ -7,12 +7,12 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record AltarParticlesPacket(BlockPos pos) implements CustomPacketPayload {
-    public static final Type<AltarParticlesPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "altar_particles"));
+    public static final Type<AltarParticlesPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "altar_particles"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, AltarParticlesPacket> STREAM_CODEC = StreamCodec.composite(
             BlockPos.STREAM_CODEC,

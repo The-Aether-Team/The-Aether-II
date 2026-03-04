@@ -42,7 +42,7 @@ import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -57,12 +57,12 @@ import java.util.List;
 import java.util.Map;
 
 public class AetherIIRenderers {
-    public static final ContextKey<Boolean> RIDING_SKIFF_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "riding_skiff"));
-    public static final ContextKey<Float> SKIFF_STEERING_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skiff_steering"));
-    public static final ContextKey<Boolean> RIDING_MOA_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "riding_moa"));
-    public static final ContextKey<Boolean> HAS_AERBUNNY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "has_aerbunny"));
-    public static final ContextKey<List<SwetRenderState>> SWET_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet"));
-    public static final ContextKey<List<EntityType<?>>> STUCK_PROJECTILES_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "stuck_projectiles"));
+    public static final ContextKey<Boolean> RIDING_SKIFF_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "riding_skiff"));
+    public static final ContextKey<Float> SKIFF_STEERING_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "skiff_steering"));
+    public static final ContextKey<Boolean> RIDING_MOA_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "riding_moa"));
+    public static final ContextKey<Boolean> HAS_AERBUNNY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "has_aerbunny"));
+    public static final ContextKey<List<SwetRenderState>> SWET_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "swet"));
+    public static final ContextKey<List<EntityType<?>>> STUCK_PROJECTILES_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "stuck_projectiles"));
 
     public static void registerAddLayer(EntityRenderersEvent.AddLayers event) {
         event.getSkins().forEach(model -> {
@@ -268,10 +268,10 @@ public class AetherIIRenderers {
     }
 
     public static void registerItemModels(RegisterItemModelsEvent event) {
-        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "emissive"), EmissiveModel.Unbaked.MAP_CODEC);
-        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "shield"), ShieldModel.Unbaked.MAP_CODEC);
-        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "music_player_disc"), MusicPlayerDiscModel.Unbaked.MAP_CODEC);
-        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "mural"), MuralItemModel.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "emissive"), EmissiveModel.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "shield"), ShieldModel.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "music_player_disc"), MusicPlayerDiscModel.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "mural"), MuralItemModel.Unbaked.MAP_CODEC);
     }
 
     public static void registerBlockStateModels(RegisterBlockStateModels event) {
@@ -363,10 +363,10 @@ public class AetherIIRenderers {
     }
 
     public static void registerSpecialModelRenderers(RegisterSpecialModelRendererEvent event) {
-        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "skyroot_bed"), SkyrootBedSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier"), AlkahestPurifierSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_crate"), SentryCrateSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner"), SentrySpawnerSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "copy_block"), CopyBlockSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "skyroot_bed"), SkyrootBedSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier"), AlkahestPurifierSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_crate"), SentryCrateSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner"), SentrySpawnerSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "copy_block"), CopyBlockSpecialRenderer.Unbaked.MAP_CODEC);
     }
 }

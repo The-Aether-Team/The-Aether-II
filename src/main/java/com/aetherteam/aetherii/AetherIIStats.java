@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -40,41 +40,41 @@ public class AetherIIStats {
 
     public static final ItemAttributeModifiers.Entry CHARM_MINING_EFFICIENCY_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.MINING_EFFICIENCY,
-            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.mining_efficiency"), 2.0, AttributeModifier.Operation.ADD_VALUE),
+            new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "charm.mining_efficiency"), 2.0, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.MAINHAND);
 
     public static final ItemAttributeModifiers.Entry CHARM_DAMAGE_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.ATTACK_DAMAGE,
-            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.attack_damage"), 1.0, AttributeModifier.Operation.ADD_VALUE),
+            new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "charm.attack_damage"), 1.0, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.MAINHAND);
     public static final ItemAttributeModifiers.Entry CHARM_ATTACK_SPEED_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.ATTACK_SPEED,
-            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.attack_speed"), 0.25, AttributeModifier.Operation.ADD_VALUE),
+            new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "charm.attack_speed"), 0.25, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.MAINHAND);
     public static final ItemAttributeModifiers.Entry CHARM_ATTACK_KNOCKBACK_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.ATTACK_KNOCKBACK,
-            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.attack_knockback"), 0.5, AttributeModifier.Operation.ADD_VALUE),
+            new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "charm.attack_knockback"), 0.5, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.MAINHAND);
 
     public static final ItemAttributeModifiers.Entry CHARM_MAX_HEALTH_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.MAX_HEALTH,
-            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.max_health"), 2.0, AttributeModifier.Operation.ADD_VALUE),
+            new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "charm.max_health"), 2.0, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.ARMOR);
     public static final ItemAttributeModifiers.Entry CHARM_ARMOR_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.ARMOR,
-            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.armor"), 2.0, AttributeModifier.Operation.ADD_VALUE),
+            new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "charm.armor"), 2.0, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.ARMOR);
     public static final ItemAttributeModifiers.Entry CHARM_ARMOR_TOUGHNESS_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.ARMOR_TOUGHNESS,
-            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.armor_toughness"), 1.0, AttributeModifier.Operation.ADD_VALUE),
+            new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "charm.armor_toughness"), 1.0, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.ARMOR);
     public static final ItemAttributeModifiers.Entry CHARM_KNOCKBACK_RESISTANCE_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.KNOCKBACK_RESISTANCE,
-            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.knockback_resistance"), 0.25, AttributeModifier.Operation.ADD_VALUE),
+            new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "charm.knockback_resistance"), 0.25, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.ARMOR);
     public static final ItemAttributeModifiers.Entry CHARM_MOVEMENT_SPEED_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.MOVEMENT_SPEED,
-            new AttributeModifier(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charm.movement_speed"), 0.0025, AttributeModifier.Operation.ADD_VALUE),
+            new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "charm.movement_speed"), 0.0025, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.ARMOR);
 
     public static final ImmutableMap<Holder<Attribute>, Double> FLYING_COW = ImmutableMap.<Holder<Attribute>, Double>builder()

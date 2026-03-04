@@ -3,13 +3,13 @@ package com.aetherteam.aetherii.inventory.menu.slot;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.AlkahestPurifierMenu;
 import com.aetherteam.aetherii.inventory.menu.AltarMenu;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 public class CanisterSlot extends Slot {
-    public static final ResourceLocation SLOT_CANISTER = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/slot_canister");
+    public static final Identifier SLOT_CANISTER = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/alkahest_purifier/slot_canister");
     private final AlkahestPurifierMenu menu;
 
     public CanisterSlot(AlkahestPurifierMenu menu, Container container, int slot, int x, int y) {
@@ -23,7 +23,7 @@ public class CanisterSlot extends Slot {
     }
 
     @Override
-    public ResourceLocation getNoItemIcon() {
+    public Identifier getNoItemIcon() {
         return SLOT_CANISTER;
     }
 }

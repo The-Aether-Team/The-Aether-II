@@ -16,12 +16,12 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 
 public class MoaSaddlebagLayer extends RenderLayer<MoaRenderState, EntityModel<MoaRenderState>> {
-    private static final ResourceLocation SADDLEBAG_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/saddlebag/moa_saddlebag.png");
-    private static final ResourceLocation LARGE_SADDLEBAG_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/saddlebag/moa_saddlebag_large.png");
+    private static final Identifier SADDLEBAG_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/saddlebag/moa_saddlebag.png");
+    private static final Identifier LARGE_SADDLEBAG_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/saddlebag/moa_saddlebag_large.png");
 
     private final MoaSaddlebagModel saddlebag;
     private final MoaLargeSaddlebagModel largeSaddlebag;

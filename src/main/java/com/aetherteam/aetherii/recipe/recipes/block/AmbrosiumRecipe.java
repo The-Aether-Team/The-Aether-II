@@ -7,7 +7,7 @@ import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
 import com.aetherteam.nitrogen.recipe.recipes.AbstractBlockStateRecipe;
 import com.aetherteam.nitrogen.recipe.serializer.BlockStateRecipeSerializer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class AmbrosiumRecipe extends AbstractBlockStateRecipe implements MatchEventRecipe {
-    public AmbrosiumRecipe(BlockStateIngredient ingredient, BlockPropertyPair result, Optional<ResourceLocation> function) {
+    public AmbrosiumRecipe(BlockStateIngredient ingredient, BlockPropertyPair result, Optional<Identifier> function) {
         super(AetherIIRecipeTypes.AMBROSIUM_ENCHANTING.get(), ingredient, result, function);
     }
 

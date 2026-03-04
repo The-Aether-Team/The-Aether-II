@@ -13,11 +13,11 @@ import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.ArrowRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class VenomousDartRenderer extends ArrowRenderer<VenomousDart, ArrowRenderState> {
-    private static final ResourceLocation VENOMOUS_DART_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/venomous_dart.png");
-    private static final ResourceLocation VENOMOUS_DART_EMISSIVE_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/venomous_dart_emissive.png");
+    private static final Identifier VENOMOUS_DART_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/venomous_dart.png");
+    private static final Identifier VENOMOUS_DART_EMISSIVE_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/venomous_dart_emissive.png");
 
     private final ArrowModel model;
 
@@ -44,11 +44,11 @@ public class VenomousDartRenderer extends ArrowRenderer<VenomousDart, ArrowRende
     }
 
     @Override
-    public ResourceLocation getTextureLocation(ArrowRenderState renderState) {
+    public Identifier getTextureLocation(ArrowRenderState renderState) {
         return VENOMOUS_DART_TEXTURE;
     }
 
-    public ResourceLocation getEmissiveTextureLocation(ArrowRenderState renderState) {
+    public Identifier getEmissiveTextureLocation(ArrowRenderState renderState) {
         return VENOMOUS_DART_EMISSIVE_TEXTURE;
     }
 }

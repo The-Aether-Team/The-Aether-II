@@ -8,15 +8,15 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class ReinforcementTierButton extends ImageButton {
     private static final WidgetSprites TIER_BUTTON_SPRITE = new WidgetSprites(
-            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_button"),
-            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_button_disabled"),
-            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_button_selected"));
-    private static final ResourceLocation TIER_COMPLETED_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_completed");
+            Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_button"),
+            Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_button_disabled"),
+            Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_button_selected"));
+    private static final Identifier TIER_COMPLETED_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_completed");
     private final ArkeniumForgeScreen parentScreen;
     private final ReinforcementTier tier;
 
@@ -29,7 +29,7 @@ public class ReinforcementTierButton extends ImageButton {
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
-        ResourceLocation tierSprite = ArkeniumForgeScreen.TIER_LOCATIONS.get(this.getTier().getTierNumber() - 1);
+        Identifier tierSprite = ArkeniumForgeScreen.TIER_LOCATIONS.get(this.getTier().getTierNumber() - 1);
 
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, tierSprite, this.getX() + 2, this.getY() + 2, 16, 16);
 

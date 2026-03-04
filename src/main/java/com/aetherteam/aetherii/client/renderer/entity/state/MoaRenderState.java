@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.client.renderer.entity.state;
 
 import com.aetherteam.aetherii.entity.passive.Moa;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityReference;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -35,17 +35,17 @@ public class MoaRenderState extends LivingEntityRenderState {
 
     @Nullable
     @Contract("!null->!null")
-    public ResourceLocation getSpecialDefaultTextureOr(@Nullable ResourceLocation fallback) {
+    public Identifier getSpecialDefaultTextureOr(@Nullable Identifier fallback) {
         if (this.specialVariant == null) return fallback;
-        ResourceLocation texture = this.specialVariant.defaultTexture;
+        Identifier texture = this.specialVariant.defaultTexture;
         return texture != null ? texture : fallback;
     }
 
     @Nullable
     @Contract("!null->!null")
-    public ResourceLocation getSpecialBabyTextureOr(@Nullable ResourceLocation fallback) {
+    public Identifier getSpecialBabyTextureOr(@Nullable Identifier fallback) {
         if (this.specialVariant == null) return fallback;
-        ResourceLocation texture = this.specialVariant.babyTexture;
+        Identifier texture = this.specialVariant.babyTexture;
         return texture != null ? texture : fallback;
     }
 

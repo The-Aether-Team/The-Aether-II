@@ -9,11 +9,11 @@ import com.aetherteam.aetherii.client.renderer.entity.state.KirridRenderState;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class KirridRenderer extends MultiBabyModelRenderer<Kirrid, KirridRenderState, EntityModel<KirridRenderState>, AbstractKirridModel, AbstractKirridBabyModel> {
-    private final ResourceLocation defaultTexture;
-    private final ResourceLocation babyTexture;
+    private final Identifier defaultTexture;
+    private final Identifier babyTexture;
     private final AbstractKirridModel defaultModel;
     private final AbstractKirridBabyModel babyModel;
 
@@ -37,12 +37,12 @@ public class KirridRenderer extends MultiBabyModelRenderer<Kirrid, KirridRenderS
     }
 
     @Override
-    public ResourceLocation getDefaultTexture(KirridRenderState kirrid) {
+    public Identifier getDefaultTexture(KirridRenderState kirrid) {
         return this.defaultTexture;
     }
 
     @Override
-    public ResourceLocation getBabyTexture(KirridRenderState kirrid) {
+    public Identifier getBabyTexture(KirridRenderState kirrid) {
         return this.babyTexture;
     }
 

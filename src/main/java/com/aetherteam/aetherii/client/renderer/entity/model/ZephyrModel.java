@@ -8,13 +8,13 @@ import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class ZephyrModel extends EntityModel<ZephyrRenderState> {
-    public static final AnimationHolder FLY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zephyr/fly"));
-    public static final AnimationHolder BLOW_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zephyr/blow_attack"));
-    public static final AnimationHolder WEB_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zephyr/web_attack"));
+    public static final AnimationHolder FLY_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "zephyr/fly"));
+    public static final AnimationHolder BLOW_ATTACK_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "zephyr/blow_attack"));
+    public static final AnimationHolder WEB_ATTACK_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "zephyr/web_attack"));
     private final KeyframeAnimation flyAnimation;
     private final KeyframeAnimation blowAttackAnimation;
     private final KeyframeAnimation webAttackAnimation;

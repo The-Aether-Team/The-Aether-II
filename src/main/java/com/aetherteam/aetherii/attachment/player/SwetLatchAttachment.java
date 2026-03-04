@@ -9,7 +9,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.CrashReport;
 import net.minecraft.CrashReportCategory;
 import net.minecraft.ReportedException;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ProblemReporter;
@@ -30,7 +30,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class SwetLatchAttachment implements ValueIOSerializable {
-    public static final ResourceLocation DEBUFFED_MOVEMENT_SPEED = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "player.debuff.swet_movement_speed");
+    public static final Identifier DEBUFFED_MOVEMENT_SPEED = Identifier.fromNamespaceAndPath(AetherII.MODID, "player.debuff.swet_movement_speed");
     public static final int MAX_SWET_COUNT = 3;
 
 

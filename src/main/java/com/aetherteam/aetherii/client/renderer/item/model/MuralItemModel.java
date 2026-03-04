@@ -19,7 +19,7 @@ import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.ResolvableModel;
 import net.minecraft.client.resources.model.ResolvedModel;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -59,9 +59,9 @@ public class MuralItemModel extends BlockModelWrapper {
         super.update(renderState, stack, modelResolver, displayContext, level, entity, p_387820_);
     }
 
-    public record Unbaked(ResourceLocation model) implements ItemModel.Unbaked {
+    public record Unbaked(Identifier model) implements ItemModel.Unbaked {
         public static final MapCodec<Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-                ResourceLocation.CODEC.fieldOf("model").forGetter(Unbaked::model)
+                Identifier.CODEC.fieldOf("model").forGetter(Unbaked::model)
         ).apply(instance, Unbaked::new));
 
         public void resolveDependencies(ResolvableModel.Resolver resolver) {

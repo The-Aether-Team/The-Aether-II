@@ -8,7 +8,7 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 
 import java.util.HashMap;
@@ -25,13 +25,13 @@ public class AetherIIEquipmentAssetData extends EquipmentAssetProvider {
     }
 
     private static void bootstrap(BiConsumer<ResourceKey<EquipmentAsset>, EquipmentClientInfo> consumer) {
-        consumer.accept(AetherIIEquipmentAssets.BEAST_PELT, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "beast_pelt"), true).build());
-        consumer.accept(AetherIIEquipmentAssets.BURRUKAI_PLATE, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "burrukai_plate"), true).build());
-        consumer.accept(AetherIIEquipmentAssets.ZANITE, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite")).build());
-        consumer.accept(AetherIIEquipmentAssets.ARKENIUM, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "arkenium")).build());
-        consumer.accept(AetherIIEquipmentAssets.GRAVITITE, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite")).build());
-        consumer.accept(AetherIIEquipmentAssets.SENTRY, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry")).build());
-        consumer.accept(AetherIIEquipmentAssets.NEPTUNE, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "neptune")).build());
+        consumer.accept(AetherIIEquipmentAssets.BEAST_PELT, EquipmentClientInfo.builder().addHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "beast_pelt"), true).build());
+        consumer.accept(AetherIIEquipmentAssets.BURRUKAI_PLATE, EquipmentClientInfo.builder().addHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "burrukai_plate"), true).build());
+        consumer.accept(AetherIIEquipmentAssets.ZANITE, EquipmentClientInfo.builder().addHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite")).build());
+        consumer.accept(AetherIIEquipmentAssets.ARKENIUM, EquipmentClientInfo.builder().addHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "arkenium")).build());
+        consumer.accept(AetherIIEquipmentAssets.GRAVITITE, EquipmentClientInfo.builder().addHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "gravitite")).build());
+        consumer.accept(AetherIIEquipmentAssets.SENTRY, EquipmentClientInfo.builder().addHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry")).build());
+        consumer.accept(AetherIIEquipmentAssets.NEPTUNE, EquipmentClientInfo.builder().addHumanoidLayers(Identifier.fromNamespaceAndPath(AetherII.MODID, "neptune")).build());
     }
 
     @Override

@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BlockModelRotation;
 import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
@@ -36,11 +36,11 @@ public record TrunkModel(Map<Holder, BlockModelPart> connections, TextureAtlasSp
         }
     }
 
-    public record Unbaked(ResourceLocation corner, ResourceLocation cornerTall) implements CustomUnbakedBlockStateModel {
-        public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "trunk_corners");
+    public record Unbaked(Identifier corner, Identifier cornerTall) implements CustomUnbakedBlockStateModel {
+        public static final Identifier ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "trunk_corners");
         public static final MapCodec<Unbaked> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(
-                ResourceLocation.CODEC.fieldOf("corner").forGetter(Unbaked::corner),
-                ResourceLocation.CODEC.fieldOf("corner_tall").forGetter(Unbaked::cornerTall)
+                Identifier.CODEC.fieldOf("corner").forGetter(Unbaked::corner),
+                Identifier.CODEC.fieldOf("corner_tall").forGetter(Unbaked::cornerTall)
         ).apply(builder, Unbaked::new));
 
         private static final Map<String, BlockModelRotation> CORNER_ROTATIONS = Map.of(

@@ -11,7 +11,7 @@ import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.variant.*;
 import net.minecraft.world.level.biome.Biome;
@@ -33,7 +33,7 @@ public class AetherIIGlitterwingVariants {
     public static final ResourceKey<GlitterwingVariant> LEAF_INSECT = createKey("leaf_insect");
 
     private static ResourceKey<GlitterwingVariant> createKey(String name) {
-        return ResourceKey.create(AetherIIRegistries.GLITTERWING_VARIANT, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.GLITTERWING_VARIANT, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<GlitterwingVariant> context) {
@@ -92,8 +92,8 @@ public class AetherIIGlitterwingVariants {
     }
 
     private static void register(BootstrapContext<GlitterwingVariant> context, ResourceKey<GlitterwingVariant> key, SpawnPrioritySelectors spawnConditions, float wingXOffset, float wingZRotation, boolean emissive) {
-        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/glitterwing/" + key.location().getPath() + ".png");
-        ResourceLocation emissiveTexture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/glitterwing/" + key.location().getPath() + "_glow.png");
+        Identifier texture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/glitterwing/" + key.location().getPath() + ".png");
+        Identifier emissiveTexture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/glitterwing/" + key.location().getPath() + "_glow.png");
 
         context.register(key, new GlitterwingVariant(texture, emissive ? Optional.of(emissiveTexture) : Optional.empty(), spawnConditions, wingXOffset, wingZRotation));
     }

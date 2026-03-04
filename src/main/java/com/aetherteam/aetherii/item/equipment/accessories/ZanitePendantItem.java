@@ -7,7 +7,7 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -22,7 +22,7 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 import java.util.Set;
 
 public class ZanitePendantItem extends AccessoryItem {
-    private static final ResourceLocation MINING_EFFICIENCY = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessory.ability.zanite_pendant.mining_efficiency");
+    private static final Identifier MINING_EFFICIENCY = Identifier.fromNamespaceAndPath(AetherII.MODID, "accessory.ability.zanite_pendant.mining_efficiency");
 
     public ZanitePendantItem(Properties properties) {
         super(properties.durability(250), AccessoryContainer.SlotType.ACCESSORY);

@@ -12,7 +12,7 @@ import com.aetherteam.nitrogen.recipe.BlockPropertyPair;
 import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipePropertySet;
@@ -32,7 +32,7 @@ public class AetherIIRecipePropertySets {
     public static final ResourceKey<RecipePropertySet> DUST_IRRADIATION_STATES = register("dust_irradiation_states");
 
     private static ResourceKey<RecipePropertySet> register(String id) {
-        return ResourceKey.create(RecipePropertySet.TYPE_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id));
+        return ResourceKey.create(RecipePropertySet.TYPE_KEY, Identifier.fromNamespaceAndPath(AetherII.MODID, id));
     }
 
     public static void addToMap() {

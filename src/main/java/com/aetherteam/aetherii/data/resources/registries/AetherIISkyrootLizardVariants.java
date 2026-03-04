@@ -9,7 +9,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 
@@ -29,7 +29,7 @@ public class AetherIISkyrootLizardVariants {
     public static final ResourceKey<SkyrootLizardVariant> AMBEROOT = createKey("amberoot");
 
     private static ResourceKey<SkyrootLizardVariant> createKey(String name) {
-        return ResourceKey.create(AetherIIRegistries.SKYROOT_LIZARD_VARIANT, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.SKYROOT_LIZARD_VARIANT, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<SkyrootLizardVariant> context) {
@@ -46,7 +46,7 @@ public class AetherIISkyrootLizardVariants {
     }
 
     private static void register(BootstrapContext<SkyrootLizardVariant> context, ResourceKey<SkyrootLizardVariant> key, Holder<Block> leafBlock) {
-        context.register(key, new SkyrootLizardVariant(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/skyroot_lizard/" + key.location().getPath() + ".png"), leafBlock));
+        context.register(key, new SkyrootLizardVariant(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/skyroot_lizard/" + key.location().getPath() + ".png"), leafBlock));
     }
 
     public static Holder<SkyrootLizardVariant> getVariantForLeaves(RegistryAccess registryAccess, Holder<Block> leafBlock) {

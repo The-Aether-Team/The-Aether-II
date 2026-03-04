@@ -16,7 +16,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
@@ -26,11 +26,11 @@ import java.util.Map;
 
 public class SentrySpawnerRenderer implements BlockEntityRenderer<SentrySpawnerBlockEntity> {
     public static int SENTRY_SPAWNER_FRAMES = 11;
-    public static final ResourceLocation PISTON_OFF = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/sentry_spawner/piston_off.png");
-    public static final ResourceLocation PISTON_ON = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/sentry_spawner/piston_on.png");
-    public static final ResourceLocation PISTON_ON_EMISSIVE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/sentry_spawner/piston_on_emissive.png");
-    public static final ResourceLocation PISTON_SPAWNING = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/sentry_spawner/piston_spawning.png");
-    public static final ResourceLocation PISTON_SPAWNING_EMISSIVE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/sentry_spawner/piston_spawning_emissive.png");
+    public static final Identifier PISTON_OFF = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/sentry_spawner/piston_off.png");
+    public static final Identifier PISTON_ON = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/sentry_spawner/piston_on.png");
+    public static final Identifier PISTON_ON_EMISSIVE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/sentry_spawner/piston_on_emissive.png");
+    public static final Identifier PISTON_SPAWNING = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/sentry_spawner/piston_spawning.png");
+    public static final Identifier PISTON_SPAWNING_EMISSIVE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/sentry_spawner/piston_spawning_emissive.png");
 
     private final SentrySpawnerModel sentrySpawnerModel;
     private final SentrySpawnerPistonModel sentrySpawnerPistonModel;
@@ -43,7 +43,7 @@ public class SentrySpawnerRenderer implements BlockEntityRenderer<SentrySpawnerB
     public static Map<Integer, Material> getFrames() {
         Map<Integer, Material> pieces = new HashMap<>();
         for (int i = 0; i <= SENTRY_SPAWNER_FRAMES - 1; i++) {
-            pieces.put(i, AetherIIAtlases.SENTRY_SPAWNER_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner_base_" + (i % SENTRY_SPAWNER_FRAMES))));
+            pieces.put(i, AetherIIAtlases.SENTRY_SPAWNER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner_base_" + (i % SENTRY_SPAWNER_FRAMES))));
         }
         return pieces;
     }
@@ -59,8 +59,8 @@ public class SentrySpawnerRenderer implements BlockEntityRenderer<SentrySpawnerB
         int frame = Math.max(0, (int) Math.ceil(blockEntity.getPistonAnimationScale(partialTick) * 10));
 
         Material baseMaterial = AetherIIAtlases.SENTRY_SPAWNER_MATERIALS.get(frame);
-        ResourceLocation pistonLocation = PISTON_OFF;
-        ResourceLocation emissiveLocation = null;
+        Identifier pistonLocation = PISTON_OFF;
+        Identifier emissiveLocation = null;
 
         switch (spawnerState) {
             case TRIGGERED, CLOSING -> {

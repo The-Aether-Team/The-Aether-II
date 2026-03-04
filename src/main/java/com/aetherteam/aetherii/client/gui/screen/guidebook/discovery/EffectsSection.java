@@ -22,7 +22,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -33,8 +33,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.Mutable> {
-    private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_EFFECTS_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_effects.png");
-    private static final ResourceLocation UNDISCOVERED_ENTRY_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/effects/undiscovered");
+    private static final Identifier GUIDEBOOK_DISCOVERY_RIGHT_PAGE_EFFECTS_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_effects.png");
+    private static final Identifier UNDISCOVERED_ENTRY_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/effects/undiscovered");
     private final List<EffectsEntry.Mutable> orderedEntries = new ArrayList<>();
 
     public EffectsSection(RegistryAccess registryAccess, GuidebookDiscoveryScreen screen, Component title) {
@@ -105,7 +105,7 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
             int slotX = leftPos + (x * 18);
             int slotY = topPos + (y * 18);
 
-            ResourceLocation location = Gui.getMobEffectSprite(entry.getEffect());
+            Identifier location = Gui.getMobEffectSprite(entry.getEffect());
 
             if (this.isUnlocked(entry, EffectsEntry.ICON.id())) {
                 guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, slotX, slotY, 16, 16);
@@ -157,7 +157,7 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
             }
 
             if (this.isUnlocked(this.getSelectedEntry(), EffectsEntry.EFFECT.id())) {
-                ResourceLocation location = Gui.getMobEffectSprite(entry.getEffect());
+                Identifier location = Gui.getMobEffectSprite(entry.getEffect());
 
                 guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, 72, 30, 32, 32);
             }
@@ -212,7 +212,7 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
     }
 
     @Override
-    public ResourceLocation getRightPageTexture() {
+    public Identifier getRightPageTexture() {
         return GUIDEBOOK_DISCOVERY_RIGHT_PAGE_EFFECTS_LOCATION;
     }
 }

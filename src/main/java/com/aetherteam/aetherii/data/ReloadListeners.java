@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.FreezingBlock;
 import com.google.gson.JsonElement;
 import net.minecraft.resources.FileToIdConverter;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.ExtraCodecs;
@@ -14,7 +14,7 @@ import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import java.util.Map;
 
 public class ReloadListeners {
-    public static ResourceLocation RECIPE_CACHING = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_caching");
+    public static Identifier RECIPE_CACHING = Identifier.fromNamespaceAndPath(AetherII.MODID, "recipe_caching");
 
     /**
      * @see Aether#eventSetup()
@@ -32,7 +32,7 @@ public class ReloadListeners {
          * Resets the block caches for {@link FreezingBlock} recipes.
          */
         @Override
-        protected void apply(Map<ResourceLocation, JsonElement> object, ResourceManager resourceManager, ProfilerFiller profiler) {
+        protected void apply(Map<Identifier, JsonElement> object, ResourceManager resourceManager, ProfilerFiller profiler) {
             FreezingBlock.cachedBlocks.clear();
             FreezingBlock.cachedResults.clear();
         }

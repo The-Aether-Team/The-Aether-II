@@ -5,13 +5,13 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ClearAccessoriesPacket() implements CustomPacketPayload {
-    public static final Type<ClearAccessoriesPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "clear_accessories"));
+    public static final Type<ClearAccessoriesPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "clear_accessories"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ClearAccessoriesPacket> STREAM_CODEC = CustomPacketPayload.codec(ClearAccessoriesPacket::write, ClearAccessoriesPacket::decode);
 

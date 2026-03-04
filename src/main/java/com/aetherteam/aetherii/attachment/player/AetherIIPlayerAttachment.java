@@ -19,7 +19,7 @@ import net.minecraft.network.chat.*;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dialog.*;
 import net.minecraft.server.level.ServerPlayer;
@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class AetherIIPlayerAttachment {
-    private static final ResourceLocation LOGOMARKS = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "logomarks");
+    private static final Identifier LOGOMARKS = Identifier.fromNamespaceAndPath(AetherII.MODID, "logomarks");
     private static final Style INFO = Style.EMPTY.withColor(0x56C1EF).withUnderlined(true).withClickEvent(new ClickEvent.ShowDialog(Holder.direct(getDialog()))).withHoverEvent(new HoverEvent.ShowText(Component.literal("Open Info Screen")));
     private static final Style PATREON = Style.EMPTY.withColor(16728653).withUnderlined(true).withClickEvent(new ClickEvent.OpenUrl(URI.create("https://www.patreon.com/TheAetherTeam"))).withHoverEvent(new HoverEvent.ShowText(Component.literal("https://www.patreon.com/TheAetherTeam")));
 

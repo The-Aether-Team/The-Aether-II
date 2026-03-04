@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.texture.atlas.SpriteResourceLoader;
 import net.minecraft.client.renderer.texture.atlas.SpriteSource;
 import net.minecraft.client.renderer.texture.atlas.sources.LazyLoadedImage;
 import net.minecraft.client.resources.metadata.animation.FrameSize;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceMetadata;
@@ -21,25 +21,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public record Subtractive(List<ResourceLocation> textures, Map<String, ResourceLocation> overlays) implements SpriteSource {
+public record Subtractive(List<Identifier> textures, Map<String, Identifier> overlays) implements SpriteSource {
     public static final MapCodec<Subtractive> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-            Codec.list(ResourceLocation.CODEC).fieldOf("textures").forGetter(Subtractive::textures),
-            Codec.unboundedMap(Codec.STRING, ResourceLocation.CODEC).fieldOf("overlays").forGetter(Subtractive::overlays)
+            Codec.list(Identifier.CODEC).fieldOf("textures").forGetter(Subtractive::textures),
+            Codec.unboundedMap(Codec.STRING, Identifier.CODEC).fieldOf("overlays").forGetter(Subtractive::overlays)
     ).apply(instance, Subtractive::new));
 
     @Override
     public void run(ResourceManager resourceManager, Output output) {
-        for (ResourceLocation location : this.textures) {
-            ResourceLocation originalTextureLocation = TEXTURE_ID_CONVERTER.idToFile(location);
+        for (Identifier location : this.textures) {
+            Identifier originalTextureLocation = TEXTURE_ID_CONVERTER.idToFile(location);
             Optional<Resource> originalTexture = resourceManager.getResource(originalTextureLocation);
             if (originalTexture.isPresent()) {
                 LazyLoadedImage originalImage = new LazyLoadedImage(originalTextureLocation, originalTexture.get(), this.overlays.size());
-                for (Map.Entry<String, ResourceLocation> overlayEntry : this.overlays.entrySet()) {
-                    ResourceLocation overlayTextureLocation = TEXTURE_ID_CONVERTER.idToFile(overlayEntry.getValue());
+                for (Map.Entry<String, Identifier> overlayEntry : this.overlays.entrySet()) {
+                    Identifier overlayTextureLocation = TEXTURE_ID_CONVERTER.idToFile(overlayEntry.getValue());
                     Optional<Resource> overlayTexture = resourceManager.getResource(overlayTextureLocation);
                     if (overlayTexture.isPresent()) {
                         LazyLoadedImage overlayImage = new LazyLoadedImage(overlayTextureLocation, overlayTexture.get(), this.textures.size());
-                        ResourceLocation outputLocation = location.withSuffix("_" + overlayEntry.getKey());
+                        Identifier outputLocation = location.withSuffix("_" + overlayEntry.getKey());
                         output.add(outputLocation, new SubtractiveSpriteSupplier(originalImage, overlayImage, outputLocation));
                     }
                 }
@@ -52,7 +52,7 @@ public record Subtractive(List<ResourceLocation> textures, Map<String, ResourceL
         return CODEC;
     }
 
-    public record SubtractiveSpriteSupplier(LazyLoadedImage baseImage, LazyLoadedImage overlayImage, ResourceLocation outputLocation) implements SpriteSource.SpriteSupplier {
+    public record SubtractiveSpriteSupplier(LazyLoadedImage baseImage, LazyLoadedImage overlayImage, Identifier outputLocation) implements SpriteSource.SpriteSupplier {
         @Nullable
         public SpriteContents apply(SpriteResourceLoader p_295023_) {
             try {

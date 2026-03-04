@@ -12,7 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -49,7 +49,7 @@ public record BuildupContents(EffectBuildupPresets.Preset preset, int amount) im
     }
 
     public Component getName(String name) {
-        ResourceLocation location = BuiltInRegistries.MOB_EFFECT.getKey(this.preset().type().value());
+        Identifier location = BuiltInRegistries.MOB_EFFECT.getKey(this.preset().type().value());
         if (location != null) {
             return Component.translatable(name + location.getPath());
         }

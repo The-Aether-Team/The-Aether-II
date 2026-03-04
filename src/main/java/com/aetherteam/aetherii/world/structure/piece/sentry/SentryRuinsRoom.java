@@ -11,7 +11,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
@@ -62,7 +62,7 @@ public class SentryRuinsRoom extends SentryRuinsPiece {
                 }
                 else Objects.requireNonNull(level.registryAccess().get(HolyIslesConfiguredFeatures.BRYALINN_MOSS_DUNGEON).orElse(null)).value().place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);
             } else {
-                ConfiguredFeature<?, ?> feature = Objects.requireNonNull(level.registryAccess().get(ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.parse(name))).orElse(null)).value();
+                ConfiguredFeature<?, ?> feature = Objects.requireNonNull(level.registryAccess().get(ResourceKey.create(Registries.CONFIGURED_FEATURE, Identifier.parse(name))).orElse(null)).value();
                 feature.place((WorldGenLevel) level, level.getLevel().getChunkSource().getGenerator(), random, pos);
             }
         }

@@ -11,7 +11,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
@@ -112,9 +112,9 @@ public class SentryRuinsStructure extends Structure {
      * @return The starting height as an {@link Integer}.
      */
     private static RuinsOriginInfo findStartingOrigin(ChunkGenerator generator, LevelHeightAccessor heightAccessor, ChunkPos chunkPos, RandomState randomState, WorldgenRandom random, StructureTemplateManager templateManager, int aboveBottom, int belowTop) {
-        StructureTemplate bossTemplate = templateManager.getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/boss_room"));
-        StructureTemplate tunnelTemplate = templateManager.getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/square_tunnel"));
-        StructureTemplate loungeTemplate = templateManager.getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/rooms/lounge"));
+        StructureTemplate bossTemplate = templateManager.getOrCreate(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/boss_room"));
+        StructureTemplate tunnelTemplate = templateManager.getOrCreate(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/square_tunnel"));
+        StructureTemplate loungeTemplate = templateManager.getOrCreate(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/rooms/lounge"));
 
         Vec3i bossSize = bossTemplate.getSize();
         Vec3i tunnelSize = tunnelTemplate.getSize();

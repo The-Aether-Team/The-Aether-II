@@ -10,15 +10,15 @@ import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.RegistryFileCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
-public record StyleDesign(ResourceLocation assetId, Component description) {
+public record StyleDesign(Identifier assetId, Component description) {
     public static final Codec<StyleDesign> DIRECT_CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-            ResourceLocation.CODEC.fieldOf("asset_id").forGetter(StyleDesign::assetId),
+            Identifier.CODEC.fieldOf("asset_id").forGetter(StyleDesign::assetId),
             ComponentSerialization.CODEC.fieldOf("description").forGetter(StyleDesign::description)
     ).apply(instance, StyleDesign::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, StyleDesign> DIRECT_STREAM_CODEC = StreamCodec.composite(
-            ResourceLocation.STREAM_CODEC, StyleDesign::assetId,
+            Identifier.STREAM_CODEC, StyleDesign::assetId,
             ComponentSerialization.STREAM_CODEC, StyleDesign::description,
             StyleDesign::new);
     public static final Codec<Holder<StyleDesign>> CODEC = RegistryFileCodec.create(AetherIIRegistries.STYLE_DESIGN, DIRECT_CODEC);

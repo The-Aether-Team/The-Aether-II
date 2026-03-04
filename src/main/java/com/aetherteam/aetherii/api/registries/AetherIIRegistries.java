@@ -15,7 +15,7 @@ import com.aetherteam.aetherii.entity.variant.ShroudwingVariant;
 import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class AetherIIRegistries {
     public static final ResourceKey<Registry<AdvancementSoundOverride>> ADVANCEMENT_SOUND_OVERRIDE = createRegistryKey("advancement_sound_override");
@@ -31,6 +31,6 @@ public class AetherIIRegistries {
     public static final ResourceKey<Registry<Mural>> MURAL = createRegistryKey("mural");
 
     private static <T> ResourceKey<Registry<T>> createRegistryKey(String name) {
-        return ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.createRegistryKey(Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 }

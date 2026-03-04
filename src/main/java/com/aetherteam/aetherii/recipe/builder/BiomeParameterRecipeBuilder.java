@@ -10,7 +10,7 @@ import net.minecraft.advancements.Criterion;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -26,7 +26,7 @@ public class BiomeParameterRecipeBuilder implements RecipeBuilder {
     private final Optional<Either<ResourceKey<Biome>, TagKey<Biome>>> biome;
     private final BlockPropertyPair result;
     private final BlockStateIngredient ingredient;
-    private Optional<ResourceLocation> function = Optional.empty();
+    private Optional<Identifier> function = Optional.empty();
     private final BiomeParameterRecipeSerializer.Factory<?> factory;
 
     public BiomeParameterRecipeBuilder(BlockPropertyPair result, BlockStateIngredient ingredient, Optional<Either<ResourceKey<Biome>, TagKey<Biome>>> biome, BiomeParameterRecipeSerializer.Factory<?> factory) {
@@ -64,7 +64,7 @@ public class BiomeParameterRecipeBuilder implements RecipeBuilder {
         return new BiomeParameterRecipeBuilder(result, ingredient, biome, factory);
     }
 
-    public RecipeBuilder function(Optional<ResourceLocation> function) {
+    public RecipeBuilder function(Optional<Identifier> function) {
         this.function = function;
         return this;
     }

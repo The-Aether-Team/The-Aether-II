@@ -10,7 +10,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -136,8 +136,8 @@ public class AccessoryItem extends Item {
 
     public record ConditionalAttribute(Holder<Attribute> attribute, ConditionalModifier modifier, BiPredicate<ItemStack, LivingEntity> condition) { }
 
-    public record ConditionalModifier(ResourceLocation location, Function<ItemStack, Double> amount, AttributeModifier.Operation operation) {
-        public ConditionalModifier(ResourceLocation location, double amount, AttributeModifier.Operation operation) {
+    public record ConditionalModifier(Identifier location, Function<ItemStack, Double> amount, AttributeModifier.Operation operation) {
+        public ConditionalModifier(Identifier location, double amount, AttributeModifier.Operation operation) {
             this(location, (stack) -> amount, operation);
         }
 

@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 import com.aetherteam.aetherii.AetherII;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 
 //TODO: figure out proper naming for the class or we should merge it with AetherIIEntityTypes
@@ -88,6 +88,6 @@ public class AetherIIEntities {
     public static final ResourceKey<EntityType<?>> ELECTRIC_FIELD = createKey("electric_field");
 
     private static ResourceKey<EntityType<?>> createKey(String name) {
-        return ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 }

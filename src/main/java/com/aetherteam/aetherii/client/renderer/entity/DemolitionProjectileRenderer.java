@@ -14,11 +14,11 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class DemolitionProjectileRenderer extends EntityRenderer<DemolitionProjectile, DemolitionProjectileRenderState> {
-    private static final RenderType DEMOLITION_PROJECTILE = RenderType.entityCutoutNoCull(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/demolition_projectile.png"));
-    private static final RenderType DEMOLITION_PROJECTILE_EMISSIVE = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/demolition_projectile_emissive.png"));
+    private static final RenderType DEMOLITION_PROJECTILE = RenderType.entityCutoutNoCull(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/demolition_projectile.png"));
+    private static final RenderType DEMOLITION_PROJECTILE_EMISSIVE = RenderType.eyes(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/demolition_projectile_emissive.png"));
     private final DemolitionProjectileModel projectile;
 
     public DemolitionProjectileRenderer(EntityRendererProvider.Context context) {

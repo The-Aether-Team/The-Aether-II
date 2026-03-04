@@ -9,7 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
@@ -85,15 +85,15 @@ public abstract class SentryRuinsPiece extends AetherTemplateStructurePiece {
         this(type, manager, makeLocation(name), settings, pos, processors);
     }
 
-    public SentryRuinsPiece(StructurePieceType type, StructureTemplateManager manager, ResourceLocation name, StructurePlaceSettings settings, BlockPos pos, Holder<StructureProcessorList> processors) {
+    public SentryRuinsPiece(StructurePieceType type, StructureTemplateManager manager, Identifier name, StructurePlaceSettings settings, BlockPos pos, Holder<StructureProcessorList> processors) {
         super(type, manager, name, settings, pos, processors);
     }
 
-    public SentryRuinsPiece(StructurePieceType type, RegistryAccess access, CompoundTag tag, StructureTemplateManager manager, Function<ResourceLocation, StructurePlaceSettings> settingsFactory) {
+    public SentryRuinsPiece(StructurePieceType type, RegistryAccess access, CompoundTag tag, StructureTemplateManager manager, Function<Identifier, StructurePlaceSettings> settingsFactory) {
         super(type, access, tag, manager, settingsFactory);
     }
 
-    protected static ResourceLocation makeLocation(String name) {
-        return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/" + name);
+    protected static Identifier makeLocation(String name) {
+        return Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/" + name);
     }
 }

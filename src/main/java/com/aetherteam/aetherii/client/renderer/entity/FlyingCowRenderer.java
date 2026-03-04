@@ -7,11 +7,11 @@ import com.aetherteam.aetherii.client.renderer.entity.state.WingEntityRenderStat
 import com.aetherteam.aetherii.entity.passive.FlyingCow;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
 public class FlyingCowRenderer extends MobRenderer<FlyingCow, WingEntityRenderState, FlyingCowModel<WingEntityRenderState>> {
-    private static final ResourceLocation FLYING_COW_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/flying_cow/flying_cow.png");
+    private static final Identifier FLYING_COW_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/flying_cow/flying_cow.png");
 
     public FlyingCowRenderer(EntityRendererProvider.Context context) {
         super(context, new FlyingCowModel<>(context.bakeLayer(AetherIIModelLayers.FLYING_COW)), 0.7F);
@@ -32,7 +32,7 @@ public class FlyingCowRenderer extends MobRenderer<FlyingCow, WingEntityRenderSt
     }
 
     @Override
-    public ResourceLocation getTextureLocation(WingEntityRenderState renderState) {
+    public Identifier getTextureLocation(WingEntityRenderState renderState) {
         return FLYING_COW_TEXTURE;
     }
 }

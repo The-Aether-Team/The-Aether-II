@@ -6,7 +6,7 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.Level;
@@ -21,7 +21,7 @@ import java.util.Optional;
 import java.util.OptionalLong;
 
 public class AetherIIDimensions {
-    private final static ResourceLocation AETHER_HOLY_ISLES_LEVEL_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aether_holy_isles");
+    private final static Identifier AETHER_HOLY_ISLES_LEVEL_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "aether_holy_isles");
 
     // DimensionType - Specifies the logic and settings for a dimension.
     public static final ResourceKey<DimensionType> AETHER_HOLY_ISLES_DIMENSION_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE, AETHER_HOLY_ISLES_LEVEL_ID);

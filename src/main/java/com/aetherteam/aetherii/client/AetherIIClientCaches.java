@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.blockentity.MuralBlockEntity;
 import com.aetherteam.aetherii.blockentity.MuralSection;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockModelPart;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.world.item.crafting.RecipeMap;
 import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
@@ -22,7 +22,7 @@ public class AetherIIClientCaches {
     public static RecipeMap CLIENT_CACHES = RecipeMap.EMPTY;
 
     public static void registerReloadListeners(AddClientReloadListenersEvent event) { // Clear cache as UVs can change from resource packs
-        event.addListener(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "mural_cache"), (ResourceManagerReloadListener) resourceManager -> {
+        event.addListener(Identifier.fromNamespaceAndPath(AetherII.MODID, "mural_cache"), (ResourceManagerReloadListener) resourceManager -> {
             CACHED_MURAL_BLOCK_PARTS.clear();
             CACHED_MURAL_ITEM_PARTS.clear();
         });

@@ -6,7 +6,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.SwetModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class BlueSwetGelLayer extends SwetGelLayer {
     public BlueSwetGelLayer(RenderLayerParent<SwetRenderState, SwetModel> renderer, EntityModelSet modelSet) {
@@ -14,7 +14,7 @@ public class BlueSwetGelLayer extends SwetGelLayer {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SwetRenderState swetRenderState) {
+    public Identifier getTextureLocation(SwetRenderState swetRenderState) {
         return BlueSwetRenderer.BLUE_SWET_LOCATION;
     }
 }

@@ -15,7 +15,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
@@ -44,10 +44,10 @@ public record ArmorStyle(ResourceKey<StyleMaterial> material, ResourceKey<StyleD
             return material.value().assetId().getPath();
         }
 
-        public ResourceLocation textureId() {
+        public Identifier textureId() {
             Holder<StyleMaterial> materialHolder = AetherIIStyleMaterials.getRegistry(this.access()).getOrThrow(this.style().material());
             Holder<StyleDesign> designHolder = AetherIIStyleDesigns.getRegistry(this.access()).getOrThrow(this.style().design());
-            ResourceLocation designLocation = designHolder.value().assetId();
+            Identifier designLocation = designHolder.value().assetId();
             String color = getColorPaletteSuffix(materialHolder);
             return designLocation.withPath((string) -> "armor_styles/entity/" + this.layerType() + "/" + string + "_" + color);
         }

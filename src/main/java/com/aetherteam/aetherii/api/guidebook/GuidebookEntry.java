@@ -7,7 +7,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +15,8 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public class GuidebookEntry {
-    public static final DataTemplate<ResourceLocation> ID = new DataTemplate<>("id", ResourceLocation.CODEC::fieldOf);
-    public static final DataTemplate<ResourceLocation> ICON = new DataTemplate<>("icon", ResourceLocation.CODEC::fieldOf);
+    public static final DataTemplate<Identifier> ID = new DataTemplate<>("id", Identifier.CODEC::fieldOf);
+    public static final DataTemplate<Identifier> ICON = new DataTemplate<>("icon", Identifier.CODEC::fieldOf);
     public static final DataTemplate<String> NAME = new DataTemplate<>("name", Codec.STRING::fieldOf);
     public static final DataTemplate<String> SLOT_NAME = new DataTemplate<>("slot_name", Codec.STRING::fieldOf);
     public static final DataTemplate<Optional<String>> SLOT_SUBTITLE = new DataTemplate<>("slot_subtitle", Codec.STRING::optionalFieldOf);
@@ -32,8 +32,8 @@ public class GuidebookEntry {
                     BestiaryEntry.DESCRIPTION_KEY.mapCodec().forGetter(GuidebookEntry::getDescriptionKey)
             ).apply(in, GuidebookEntry::new));
 
-    private final ResourceLocation id;
-    private final ResourceLocation icon;
+    private final Identifier id;
+    private final Identifier icon;
     private final String name;
     private final String slotName;
     private final Optional<String> slotSubtitle;
@@ -41,7 +41,7 @@ public class GuidebookEntry {
 
     protected final Map<String, Info> values = new HashMap<>();
 
-    public GuidebookEntry(ResourceLocation id, ResourceLocation icon, String name, String slotName, Optional<String> slotSubtitle, String descriptionKey) {
+    public GuidebookEntry(Identifier id, Identifier icon, String name, String slotName, Optional<String> slotSubtitle, String descriptionKey) {
         this.id = this.info(ID, id);
         this.icon = this.info(ICON, icon);
         this.name = this.info(NAME, name);
@@ -50,11 +50,11 @@ public class GuidebookEntry {
         this.descriptionKey = this.info(DESCRIPTION_KEY, descriptionKey);
     }
 
-    public ResourceLocation getId() {
+    public Identifier getId() {
         return this.id;
     }
 
-    public ResourceLocation getIcon() {
+    public Identifier getIcon() {
         return this.icon;
     }
 

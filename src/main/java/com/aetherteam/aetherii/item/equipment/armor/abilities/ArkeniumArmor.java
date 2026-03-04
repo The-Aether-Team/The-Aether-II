@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.item.equipment.armor.abilities;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
@@ -17,7 +17,7 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 public interface ArkeniumArmor {
-    ResourceLocation ARKENIUM_BLAST_RESISTANCE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "armor_set.ability.arkenium.blast_resistance");
+    Identifier ARKENIUM_BLAST_RESISTANCE = Identifier.fromNamespaceAndPath(AetherII.MODID, "armor_set.ability.arkenium.blast_resistance");
 
     static void updatePlayerAttributes(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();

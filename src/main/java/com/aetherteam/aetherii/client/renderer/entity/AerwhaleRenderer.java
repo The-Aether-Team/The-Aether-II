@@ -13,19 +13,19 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.AABB;
 
 public class AerwhaleRenderer extends MobRenderer<Aerwhale, LivingEntityRenderState, AerwhaleModel> {
-    private static final ResourceLocation AERWHALE_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/aerwhale/aerwhale.png");
+    private static final Identifier AERWHALE_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/aerwhale/aerwhale.png");
     
     public AerwhaleRenderer(EntityRendererProvider.Context context) {
         super(context, new AerwhaleModel(context.bakeLayer(AetherIIModelLayers.AERWHALE)), 0.5F);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(LivingEntityRenderState renderState) {
+    public Identifier getTextureLocation(LivingEntityRenderState renderState) {
         return AERWHALE_TEXTURE;
     }
 

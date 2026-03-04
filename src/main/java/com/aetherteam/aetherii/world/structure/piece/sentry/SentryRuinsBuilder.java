@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Vec3i;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.level.ChunkPos;
@@ -82,10 +82,10 @@ public class SentryRuinsBuilder {
         this.random = context.random();
         this.processors = processors;
 
-        Vec3i nodeSize = context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/rooms/lounge")).getSize();
+        Vec3i nodeSize = context.structureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/rooms/lounge")).getSize();
         this.nodeWidth = nodeSize.getX();
 
-        Vec3i edgeSize = context.structureTemplateManager().getOrCreate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/square_tunnel")).getSize();
+        Vec3i edgeSize = context.structureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_ruins/square_tunnel")).getSize();
         this.edgeWidth = edgeSize.getX();
         this.edgeLength = edgeSize.getZ();
 

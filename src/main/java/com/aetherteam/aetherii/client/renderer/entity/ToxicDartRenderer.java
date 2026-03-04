@@ -5,10 +5,10 @@ import com.aetherteam.aetherii.entity.projectile.ToxicDart;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.ArrowRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ToxicDartRenderer extends ArrowRenderer<ToxicDart, ArrowRenderState> {
-    private static final ResourceLocation TOXIC_DART_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/toxic_dart.png");
+    private static final Identifier TOXIC_DART_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/toxic_dart.png");
 
     public ToxicDartRenderer(EntityRendererProvider.Context context) {
         super(context);
@@ -19,7 +19,7 @@ public class ToxicDartRenderer extends ArrowRenderer<ToxicDart, ArrowRenderState
     }
 
     @Override
-    public ResourceLocation getTextureLocation(ArrowRenderState renderState) {
+    public Identifier getTextureLocation(ArrowRenderState renderState) {
         return TOXIC_DART_TEXTURE;
     }
 }

@@ -9,13 +9,13 @@ import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class GravititeTalutonModel extends EntityModel<GravititeTalutonRenderState> {
-    public static final AnimationHolder SPIN_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite_taluton/spin"));
-    public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite_taluton/attack"));
+    public static final AnimationHolder SPIN_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "gravitite_taluton/spin"));
+    public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "gravitite_taluton/attack"));
     private final KeyframeAnimation spinAimation;
     private final KeyframeAnimation attackAnimation;
     private final KeyframeAnimation reloadAnimation;

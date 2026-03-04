@@ -7,10 +7,10 @@ import com.aetherteam.aetherii.client.renderer.entity.state.EdwardRenderState;
 import com.aetherteam.aetherii.entity.npc.outpost.Edward;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class EdwardRenderer extends MobRenderer<Edward, EdwardRenderState, EdwardModel> {
-    private static final ResourceLocation EDWARD_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/npcs/edward/edward.png");
+    private static final Identifier EDWARD_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/npcs/edward/edward.png");
 
     public EdwardRenderer(EntityRendererProvider.Context context) {
         super(context, new EdwardModel(context.bakeLayer(AetherIIModelLayers.EDWARD)), 0.5F);
@@ -28,7 +28,7 @@ public class EdwardRenderer extends MobRenderer<Edward, EdwardRenderState, Edwar
     }
 
     @Override
-    public ResourceLocation getTextureLocation(EdwardRenderState state) {
+    public Identifier getTextureLocation(EdwardRenderState state) {
         return EDWARD_TEXTURE;
     }
 }

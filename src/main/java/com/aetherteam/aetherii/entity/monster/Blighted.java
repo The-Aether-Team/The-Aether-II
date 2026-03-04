@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -18,9 +18,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
  * This interface has several methods for handling monsters related to the Blight.
  */
 public interface Blighted {
-    ResourceLocation SLASH_WEAKNESS = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "blight_entity.burning.slash_weakness");
-    ResourceLocation IMPACT_WEAKNESS = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "blight_entity.burning.impact_weakness");
-    ResourceLocation PIERCE_WEAKNESS = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "blight_entity.burning.pierce_weakness");
+    Identifier SLASH_WEAKNESS = Identifier.fromNamespaceAndPath(AetherII.MODID, "blight_entity.burning.slash_weakness");
+    Identifier IMPACT_WEAKNESS = Identifier.fromNamespaceAndPath(AetherII.MODID, "blight_entity.burning.impact_weakness");
+    Identifier PIERCE_WEAKNESS = Identifier.fromNamespaceAndPath(AetherII.MODID, "blight_entity.burning.pierce_weakness");
 
     /**
      * Call this from your entity's aiStep method.

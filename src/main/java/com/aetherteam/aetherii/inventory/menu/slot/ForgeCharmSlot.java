@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
 import com.aetherteam.aetherii.item.components.Charms;
 import com.aetherteam.aetherii.item.equipment.charms.CharmItem;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
@@ -84,9 +84,9 @@ public class ForgeCharmSlot extends Slot {
 
     @Nullable
     @Override
-    public ResourceLocation getNoItemIcon() {
+    public Identifier getNoItemIcon() {
         if (this.charmType != null && this.charmTier != null) {
-            return ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_" + this.charmType.name().toLowerCase(Locale.ROOT) + "_charm_" + this.charmTier.getValue());
+            return Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_" + this.charmType.name().toLowerCase(Locale.ROOT) + "_charm_" + this.charmTier.getValue());
         }
         return null;
     }

@@ -12,7 +12,7 @@ import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
 
 import java.util.ArrayList;
@@ -22,11 +22,11 @@ import java.util.Map;
 
 public class AlphaInfoScreen extends Screen {
     private static final WidgetSprites ARROW_LEFT_TEXTURES = new WidgetSprites(
-            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/arrow_left"),
-            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/arrow_left"));
+            Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/arrow_left"),
+            Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/arrow_left"));
     private static final WidgetSprites ARROW_RIGHT_TEXTURES = new WidgetSprites(
-            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/arrow_right"),
-            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/arrow_right"));
+            Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/arrow_right"),
+            Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/arrow_right"));
     private static final MutableComponent TITLE = Component.literal("The Aether II Alpha Test");
 
     protected final Screen lastScreen;

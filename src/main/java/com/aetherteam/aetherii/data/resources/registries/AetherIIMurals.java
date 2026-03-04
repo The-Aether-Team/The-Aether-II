@@ -9,7 +9,7 @@ import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -22,11 +22,11 @@ public class AetherIIMurals {
     public static final DeferredHolder<Mural, Mural> GIANT_TEST = register("giant_test", 4, 4, "giant_test_mural");
 
     private static DeferredHolder<Mural, Mural> register(String name, int width, int height, String assetId) {
-        return register(name, width, height, assetId, Component.translatable(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name).toLanguageKey("mural", "title")).withStyle(ChatFormatting.YELLOW));
+        return register(name, width, height, assetId, Component.translatable(Identifier.fromNamespaceAndPath(AetherII.MODID, name).toLanguageKey("mural", "title")).withStyle(ChatFormatting.YELLOW));
     }
 
     private static DeferredHolder<Mural, Mural> register(String name, int width, int height, String assetId, @Nullable Component title) {
-        var mural = new Mural(width, height, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, assetId), title);
+        var mural = new Mural(width, height, Identifier.fromNamespaceAndPath(AetherII.MODID, assetId), title);
         var holder = MURALS.register(name, id -> mural);
         return holder;
     }

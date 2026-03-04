@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class AccessoryLayer<S extends HumanoidRenderState, M extends HumanoidModel<S>> extends RenderLayer<S, M> {
     private final HumanoidModel<S> accessoryModel;
@@ -32,8 +32,8 @@ public class AccessoryLayer<S extends HumanoidRenderState, M extends HumanoidMod
                 HumanoidModel<S> model = this.accessoryModel;
                 this.getParentModel().copyPropertiesTo(model);
 
-                ResourceLocation itemLocation = BuiltInRegistries.ITEM.getKey(stack.getItem());
-                ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(itemLocation.getNamespace(), "textures/entity/equipment/accessory/" + itemLocation.getPath() + ".png");
+                 itemLocation = BuiltInRegistries.ITEM.getKey(stack.getItem());
+                 texture = Identifier.fromNamespaceAndPath(itemLocation.getNamespace(), "textures/entity/equipment/accessory/" + itemLocation.getPath() + ".png");
                 VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(texture), stack.hasFoil());
 
                 model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);

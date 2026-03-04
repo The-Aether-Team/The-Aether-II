@@ -11,14 +11,14 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 
 import java.util.function.IntFunction;
 
 public class GuidebookToast implements Toast {
-    private static final ResourceLocation BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "toast/guidebook");
+    private static final Identifier BACKGROUND_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "toast/guidebook");
     private final GuidebookToast.Type type;
     private final GuidebookToast.Icons icon;
     private long lastChanged;
@@ -57,17 +57,17 @@ public class GuidebookToast implements Toast {
     }
 
     public enum Type implements StringRepresentable {
-        DEFAULT(0, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "toast/guidebook")),
-        DISCOVERY(1, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "toast/guidebook_discovery")),
-        JOURNAL(2, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "toast/guidebook_journal"));
+        DEFAULT(0, Identifier.fromNamespaceAndPath(AetherII.MODID, "toast/guidebook")),
+        DISCOVERY(1, Identifier.fromNamespaceAndPath(AetherII.MODID, "toast/guidebook_discovery")),
+        JOURNAL(2, Identifier.fromNamespaceAndPath(AetherII.MODID, "toast/guidebook_journal"));
 
         public static final IntFunction<Type> BY_ID = ByIdMap.continuous(Type::id, Type.values(), ByIdMap.OutOfBoundsStrategy.ZERO);
         public static final StreamCodec<ByteBuf, Type> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, Type::id);
 
         private final int id;
-        private final ResourceLocation sprite;
+        private final Identifier sprite;
 
-        Type(int id, ResourceLocation sprite) {
+        Type(int id, Identifier sprite) {
             this.id = id;
             this.sprite = sprite;
         }
@@ -87,18 +87,18 @@ public class GuidebookToast implements Toast {
     }
 
     public enum Icons implements StringRepresentable {
-        BESTIARY(0, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_bestiary"), "gui.aether_ii.toast.guidebook.bestiary"),
-        EFFECTS(1, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_effects"), "gui.aether_ii.toast.guidebook.effects"),
-        EXPLORATION(2, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_exploration"), "gui.aether_ii.toast.guidebook.exploration");
+        BESTIARY(0, Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_bestiary"), "gui.aether_ii.toast.guidebook.bestiary"),
+        EFFECTS(1, Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_effects"), "gui.aether_ii.toast.guidebook.effects"),
+        EXPLORATION(2, Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_exploration"), "gui.aether_ii.toast.guidebook.exploration");
 
         public static final IntFunction<Icons> BY_ID = ByIdMap.continuous(Icons::id, Icons.values(), ByIdMap.OutOfBoundsStrategy.ZERO);
         public static final StreamCodec<ByteBuf, Icons> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, Icons::id);
 
         private final int id;
-        private final ResourceLocation sprite;
+        private final Identifier sprite;
         private final String title;
 
-        Icons(int id, ResourceLocation sprite, String title) {
+        Icons(int id, Identifier sprite, String title) {
             this.id = id;
             this.sprite = sprite;
             this.title = title;

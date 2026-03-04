@@ -8,7 +8,7 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3f;
 
@@ -16,9 +16,9 @@ import java.util.Set;
 
 public class SkyrootBedSpecialRenderer implements NoDataSpecialModelRenderer {
     private final SkyrootBedRenderer skyrootBedRenderer;
-    private final ResourceLocation location;
+    private final Identifier location;
 
-    public SkyrootBedSpecialRenderer(SkyrootBedRenderer skyrootBedRenderer, ResourceLocation location) {
+    public SkyrootBedSpecialRenderer(SkyrootBedRenderer skyrootBedRenderer, Identifier location) {
         this.skyrootBedRenderer = skyrootBedRenderer;
         this.location = location;
     }
@@ -32,9 +32,9 @@ public class SkyrootBedSpecialRenderer implements NoDataSpecialModelRenderer {
         this.skyrootBedRenderer.getExtents(p_428290_);
     }
 
-    public record Unbaked(ResourceLocation texture) implements SpecialModelRenderer.Unbaked {
+    public record Unbaked(Identifier texture) implements SpecialModelRenderer.Unbaked {
         public static final MapCodec<SkyrootBedSpecialRenderer.Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-                ResourceLocation.CODEC.fieldOf("texture").forGetter(SkyrootBedSpecialRenderer.Unbaked::texture)
+                Identifier.CODEC.fieldOf("texture").forGetter(SkyrootBedSpecialRenderer.Unbaked::texture)
         ).apply(instance, SkyrootBedSpecialRenderer.Unbaked::new));
 
         public MapCodec<SkyrootBedSpecialRenderer.Unbaked> type() {

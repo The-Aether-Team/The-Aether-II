@@ -8,11 +8,11 @@ import com.aetherteam.aetherii.entity.passive.Taegore;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class TaegoreRenderer extends MultiBabyModelRenderer<Taegore, TaegoreRenderState, EntityModel<TaegoreRenderState>, TaegoreModel, TaegoreBabyModel> {
-    private final ResourceLocation defaultTexture;
-    private final ResourceLocation babyTexture;
+    private final Identifier defaultTexture;
+    private final Identifier babyTexture;
     private final TaegoreModel defaultModel;
     private final TaegoreBabyModel babyModel;
 
@@ -48,12 +48,12 @@ public class TaegoreRenderer extends MultiBabyModelRenderer<Taegore, TaegoreRend
     }
 
     @Override
-    public ResourceLocation getDefaultTexture(TaegoreRenderState taegore) {
+    public Identifier getDefaultTexture(TaegoreRenderState taegore) {
         return this.defaultTexture;
     }
 
     @Override
-    public ResourceLocation getBabyTexture(TaegoreRenderState taegore) {
+    public Identifier getBabyTexture(TaegoreRenderState taegore) {
         return this.babyTexture;
     }
 }

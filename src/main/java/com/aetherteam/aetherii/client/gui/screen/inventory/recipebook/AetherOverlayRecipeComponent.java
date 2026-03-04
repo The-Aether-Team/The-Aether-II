@@ -12,7 +12,7 @@ import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeCollection;
 import net.minecraft.client.gui.screens.recipebook.SlotSelectTime;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.context.ContextMap;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
@@ -60,10 +60,10 @@ public class AetherOverlayRecipeComponent extends OverlayRecipeComponent {
     }
 
     public class OverlaySingleRecipeButton extends OverlayRecipeButton {
-        private static final ResourceLocation ENABLED_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/single_overlay");
-        private static final ResourceLocation HIGHLIGHTED_ENABLED_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/single_overlay_highlighted");
-        private static final ResourceLocation DISABLED_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/single_overlay_disabled");
-        private static final ResourceLocation HIGHLIGHTED_DISABLED_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "recipe_book/single_overlay_disabled_highlighted");
+        private static final Identifier ENABLED_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "recipe_book/single_overlay");
+        private static final Identifier HIGHLIGHTED_ENABLED_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "recipe_book/single_overlay_highlighted");
+        private static final Identifier DISABLED_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "recipe_book/single_overlay_disabled");
+        private static final Identifier HIGHLIGHTED_DISABLED_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "recipe_book/single_overlay_disabled_highlighted");
 
         private final boolean isCraftable;
         private final List<Pos> slots;
@@ -92,7 +92,7 @@ public class AetherOverlayRecipeComponent extends OverlayRecipeComponent {
         }
 
         @Override
-        protected ResourceLocation getSprite(boolean highlight) {
+        protected Identifier getSprite(boolean highlight) {
             if (highlight) {
                 return this.isHoveredOrFocused() ? HIGHLIGHTED_ENABLED_SPRITE : ENABLED_SPRITE;
             } else {

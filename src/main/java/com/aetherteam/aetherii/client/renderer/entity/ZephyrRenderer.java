@@ -8,10 +8,10 @@ import com.aetherteam.aetherii.entity.monster.Zephyr;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ZephyrRenderer extends MobRenderer<Zephyr, ZephyrRenderState, ZephyrModel> {
-    private static final ResourceLocation ZEPHYR_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/zephyr/zephyr.png");
+    private static final Identifier ZEPHYR_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/zephyr/zephyr.png");
 
     public ZephyrRenderer(EntityRendererProvider.Context context) {
         super(context, new ZephyrModel(context.bakeLayer(AetherIIModelLayers.ZEPHYR)), 0.5F);
@@ -42,7 +42,7 @@ public class ZephyrRenderer extends MobRenderer<Zephyr, ZephyrRenderState, Zephy
     }
 
     @Override
-    public ResourceLocation getTextureLocation(ZephyrRenderState renderState) {
+    public Identifier getTextureLocation(ZephyrRenderState renderState) {
         return ZEPHYR_TEXTURE;
     }
 }

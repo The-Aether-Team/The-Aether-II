@@ -11,13 +11,13 @@ import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 import net.minecraft.world.entity.player.Player;
 
 public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, EntityModel<MoaRenderState>, MoaModel, MoaBabyModel> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_base.png");
-    private static final ResourceLocation BABY_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_baby_base.png");
+    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_base.png");
+    private static final Identifier BABY_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_baby_base.png");
     private final MoaModel defaultModel;
     private final MoaBabyModel babyModel;
 
@@ -82,12 +82,12 @@ public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, Ent
     }
 
     @Override
-    public ResourceLocation getDefaultTexture(MoaRenderState moa) {
+    public Identifier getDefaultTexture(MoaRenderState moa) {
         return moa.getSpecialDefaultTextureOr(TEXTURE);
     }
 
     @Override
-    public ResourceLocation getBabyTexture(MoaRenderState moa) {
+    public Identifier getBabyTexture(MoaRenderState moa) {
         return moa.getSpecialBabyTextureOr(BABY_TEXTURE);
     }
 }

@@ -17,7 +17,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -31,9 +31,9 @@ import java.util.Set;
 
 public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState> {
     private final Holder<Block> block;
-    private final ResourceLocation overlay;
+    private final Identifier overlay;
 
-    public CopyBlockSpecialRenderer(Holder<Block> block, ResourceLocation overlay) {
+    public CopyBlockSpecialRenderer(Holder<Block> block, Identifier overlay) {
         this.block = block;
         this.overlay = overlay;
     }
@@ -123,10 +123,10 @@ public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState
         return itemStack.get(AetherIIDataComponents.BLOCK_STATE);
     }
 
-    public record Unbaked(Holder<Block> block, ResourceLocation overlay) implements SpecialModelRenderer.Unbaked {
+    public record Unbaked(Holder<Block> block, Identifier overlay) implements SpecialModelRenderer.Unbaked {
         public static final MapCodec<CopyBlockSpecialRenderer.Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
                 BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("block").forGetter(CopyBlockSpecialRenderer.Unbaked::block),
-                ResourceLocation.CODEC.fieldOf("overlay").forGetter(CopyBlockSpecialRenderer.Unbaked::overlay)
+                Identifier.CODEC.fieldOf("overlay").forGetter(CopyBlockSpecialRenderer.Unbaked::overlay)
         ).apply(instance, CopyBlockSpecialRenderer.Unbaked::new));
 
         @Override

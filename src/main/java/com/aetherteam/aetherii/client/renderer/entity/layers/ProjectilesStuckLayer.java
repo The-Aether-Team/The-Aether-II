@@ -18,7 +18,7 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.state.PlayerRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
@@ -39,11 +39,11 @@ public class ProjectilesStuckLayer<M extends PlayerModel> extends RenderLayer<Pl
         if (list != null && !list.isEmpty()) {
             RandomSource random = RandomSource.create(renderState.id);
             for (EntityType<?> type : list) {
-                ResourceLocation key = BuiltInRegistries.ENTITY_TYPE.getKey(type);
-                ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(key.getNamespace(), "textures/entity/projectile/" + key.getPath() + ".png");
-                ResourceLocation emissive = null;
+                 key = BuiltInRegistries.ENTITY_TYPE.getKey(type);
+                 texture = Identifier.fromNamespaceAndPath(key.getNamespace(), "textures/entity/projectile/" + key.getPath() + ".png");
+                 emissive = null;
                 if (type.is(AetherIITags.Entities.STICKABLE_PROJECTILES_EMISSIVE)) {
-                    emissive = ResourceLocation.fromNamespaceAndPath(key.getNamespace(), "textures/entity/projectile/" + key.getPath() + "_emissive.png");
+                    emissive = Identifier.fromNamespaceAndPath(key.getNamespace(), "textures/entity/projectile/" + key.getPath() + "_emissive.png");
                 }
 
                 poseStack.pushPose();
@@ -68,7 +68,7 @@ public class ProjectilesStuckLayer<M extends PlayerModel> extends RenderLayer<Pl
         }
     }
 
-    private void renderStuckItem(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, float x, float y, float z, ResourceLocation texture, ResourceLocation emissive) {
+    private void renderStuckItem(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, float x, float y, float z, Identifier texture, Identifier emissive) {
         float f = Mth.sqrt(x * x + z * z);
         float f1 = (float) (Math.atan2(x, z) * 180.0F / Math.PI);
         float f2 = (float) (Math.atan2(y, f) * 180.0F / Math.PI);

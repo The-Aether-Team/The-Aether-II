@@ -22,7 +22,7 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.entity.state.PlayerRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
@@ -45,18 +45,18 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
         super(context, model, shadowRadius);
     }
 
-    @Inject(method = "renderRightHand(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/resources/ResourceLocation;ZLnet/minecraft/client/player/AbstractClientPlayer;)V", at = @At("HEAD"))
-    private void firstPersonRightAccessories(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, ResourceLocation skinTexture, boolean isSleeveVisible, AbstractClientPlayer player, CallbackInfo ci) {
+    @Inject(method = "renderRightHand(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/resources/Identifier;ZLnet/minecraft/client/player/AbstractClientPlayer;)V", at = @At("HEAD"))
+    private void firstPersonRightAccessories(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, Identifier skinTexture, boolean isSleeveVisible, AbstractClientPlayer player, CallbackInfo ci) {
         currentArm = HumanoidArm.RIGHT;
     }
 
-    @Inject(method = "renderLeftHand(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/resources/ResourceLocation;ZLnet/minecraft/client/player/AbstractClientPlayer;)V", at = @At("HEAD"))
-    private void firstPersonLeftAccessories(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, ResourceLocation skinTexture, boolean isSleeveVisible, AbstractClientPlayer player, CallbackInfo ci) {
+    @Inject(method = "renderLeftHand(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/resources/Identifier;ZLnet/minecraft/client/player/AbstractClientPlayer;)V", at = @At("HEAD"))
+    private void firstPersonLeftAccessories(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, Identifier skinTexture, boolean isSleeveVisible, AbstractClientPlayer player, CallbackInfo ci) {
         currentArm = HumanoidArm.LEFT;
     }
 
-    @WrapMethod(method = "renderHand(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/resources/ResourceLocation;Lnet/minecraft/client/model/geom/ModelPart;Z)V")
-    private void renderHand(PoseStack poseStack, MultiBufferSource buffer, int packedLight, ResourceLocation skinTexture, ModelPart arm, boolean isSleeveVisible, Operation<Void> original) {
+    @WrapMethod(method = "renderHand(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/resources/Identifier;Lnet/minecraft/client/model/geom/ModelPart;Z)V")
+    private void renderHand(PoseStack poseStack, MultiBufferSource buffer, int packedLight, Identifier skinTexture, ModelPart arm, boolean isSleeveVisible, Operation<Void> original) {
         Player player = Minecraft.getInstance().player;
         PlayerRenderer playerRenderer = (PlayerRenderer) (Object) this;
         PlayerModel playerModel = playerRenderer.getModel();

@@ -21,20 +21,20 @@ import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.RegistryFixedCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
 
-public record Mural(int width, int height, ResourceLocation assetId, Optional<Component> title) implements TooltipProvider {
+public record Mural(int width, int height, Identifier assetId, Optional<Component> title) implements TooltipProvider {
     public static final int MAX_SIZE = 4;
     
     public static final Codec<Mural> DIRECT_CODEC = RecordCodecBuilder.create(
         builder -> builder.group(
                 ExtraCodecs.intRange(1, MAX_SIZE).fieldOf("width").forGetter(Mural::width),
                 ExtraCodecs.intRange(1, MAX_SIZE).fieldOf("height").forGetter(Mural::height),
-                ResourceLocation.CODEC.fieldOf("asset_id").forGetter(Mural::assetId),
+                Identifier.CODEC.fieldOf("asset_id").forGetter(Mural::assetId),
                 ComponentSerialization.CODEC.optionalFieldOf("title").forGetter(Mural::title)
             )
             .apply(builder, Mural::new)
@@ -42,7 +42,7 @@ public record Mural(int width, int height, ResourceLocation assetId, Optional<Co
     public static final StreamCodec<RegistryFriendlyByteBuf, Mural> DIRECT_STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.VAR_INT, Mural::width,
         ByteBufCodecs.VAR_INT, Mural::height,
-        ResourceLocation.STREAM_CODEC, Mural::assetId,
+        Identifier.STREAM_CODEC, Mural::assetId,
         ComponentSerialization.TRUSTED_OPTIONAL_STREAM_CODEC, Mural::title,
         Mural::new
     );
@@ -53,11 +53,11 @@ public record Mural(int width, int height, ResourceLocation assetId, Optional<Co
         checkSize(width, height);
     }
 
-    public Mural(int width, int height, ResourceLocation assetId, @Nullable Component title) {
+    public Mural(int width, int height, Identifier assetId, @Nullable Component title) {
         this(width, height, assetId, Optional.ofNullable(title));
     }
 
-    public Mural(int width, int height, ResourceLocation assetId) {
+    public Mural(int width, int height, Identifier assetId) {
         this(width, height, assetId, Optional.empty());
     }
 
@@ -90,14 +90,14 @@ public record Mural(int width, int height, ResourceLocation assetId, Optional<Co
         }
     }
 
-    public static Map<MuralSection, ResourceLocation> getPieces() {
-        Map<MuralSection, ResourceLocation> pieces = new HashMap<>();
+    public static Map<MuralSection, Identifier> getPieces() {
+        Map<MuralSection, Identifier> pieces = new HashMap<>();
         AetherIIMurals.MURALS_REGISTRY.listElements().forEach(muralReference -> {
             Mural mural = muralReference.value();
             for (int x = 0; x < mural.width(); x++) {
                 for (int y = 0; y < mural.height(); y++) {
                     MuralSection section = new MuralSection(muralReference, x, y);
-                    ResourceLocation location = mural.assetId().withSuffix("_" + x).withSuffix("_" + y);
+                    Identifier location = mural.assetId().withSuffix("_" + x).withSuffix("_" + y);
                     pieces.put(section, location);
                 }
             }

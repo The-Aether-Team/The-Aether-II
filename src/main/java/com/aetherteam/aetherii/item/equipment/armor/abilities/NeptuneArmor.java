@@ -4,7 +4,7 @@ package com.aetherteam.aetherii.item.equipment.armor.abilities;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -12,8 +12,8 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 public interface NeptuneArmor {
-    ResourceLocation NEPTUNE_SWIM_SPEED_BOOST = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "armor_set.ability.neptune.swim_speed_boost");
-    ResourceLocation NEPTUNE_OXYGEN_BONUS = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "armor_set.ability.neptune.oxygen_bonus");
+    Identifier NEPTUNE_SWIM_SPEED_BOOST = Identifier.fromNamespaceAndPath(AetherII.MODID, "armor_set.ability.neptune.swim_speed_boost");
+    Identifier NEPTUNE_OXYGEN_BONUS = Identifier.fromNamespaceAndPath(AetherII.MODID, "armor_set.ability.neptune.oxygen_bonus");
 
     static void updatePlayerAttributes(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();

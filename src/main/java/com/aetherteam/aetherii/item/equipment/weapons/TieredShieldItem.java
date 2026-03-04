@@ -8,7 +8,7 @@ import com.google.common.collect.Multimaps;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -32,7 +32,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public class TieredShieldItem extends ShieldItem {
-    public static final ResourceLocation BASE_SHIELD_BLOCKING_STRENGTH_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_shield_blocking_strength");
+    public static final Identifier BASE_SHIELD_BLOCKING_STRENGTH_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "base_shield_blocking_strength");
 
     private final double strength;
 

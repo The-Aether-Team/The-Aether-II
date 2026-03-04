@@ -10,10 +10,10 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class LassoLoopRenderer extends EntityRenderer<LassoLoop, EntityRenderState> {
-    private static final ResourceLocation PROJECTILE_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/lasso_loop.png");
+    private static final Identifier PROJECTILE_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/lasso_loop.png");
     private static final RenderType RENDER_TYPE = RenderType.entityCutoutNoCull(PROJECTILE_TEXTURE);
 
     public LassoLoopRenderer(EntityRendererProvider.Context context) {

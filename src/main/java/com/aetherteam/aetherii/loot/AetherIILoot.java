@@ -6,7 +6,7 @@ import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import net.minecraft.Util;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.storage.loot.LootTable;
 
 import java.util.*;
@@ -70,7 +70,7 @@ public class AetherIILoot {
     public static final ResourceKey<LootTable> STRIP_AMBEROOT_DEPOSIT = register("stripping/strip_amberoot_deposit");
 
     private static ResourceKey<LootTable> register(String id) {
-        return register(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)));
+        return register(ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath(AetherII.MODID, id)));
     }
 
     private static ResourceKey<LootTable> register(ResourceKey<LootTable> id) {

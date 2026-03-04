@@ -8,13 +8,13 @@ import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class TempestModel extends EntityModel<TempestRenderState> {
-	public static final AnimationHolder FLY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tempest/fly"));
-	public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tempest/attack"));
-	public static final AnimationHolder DESPAWN_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tempest/despawn"));
+	public static final AnimationHolder FLY_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "tempest/fly"));
+	public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "tempest/attack"));
+	public static final AnimationHolder DESPAWN_ANIMATION = Model.getAnimation(Identifier.fromNamespaceAndPath(AetherII.MODID, "tempest/despawn"));
 	private final KeyframeAnimation flyAnimation;
 	private final KeyframeAnimation attackAnimation;
 	private final KeyframeAnimation despawnAnimation;

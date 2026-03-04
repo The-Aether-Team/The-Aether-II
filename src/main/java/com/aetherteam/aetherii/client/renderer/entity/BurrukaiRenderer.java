@@ -8,11 +8,11 @@ import com.aetherteam.aetherii.client.renderer.entity.state.BurrukaiRenderState;
 import com.aetherteam.aetherii.entity.passive.Burrukai;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class BurrukaiRenderer extends MultiBabyModelRenderer<Burrukai, BurrukaiRenderState, EntityModel<BurrukaiRenderState>, AbstractBurrukaiModel, AbstractBurrukaiBabyModel> {
-    private final ResourceLocation defaultTexture;
-    private final ResourceLocation babyTexture;
+    private final Identifier defaultTexture;
+    private final Identifier babyTexture;
     private final AbstractBurrukaiModel defaultModel;
     private final AbstractBurrukaiBabyModel babyModel;
 
@@ -35,12 +35,12 @@ public class BurrukaiRenderer extends MultiBabyModelRenderer<Burrukai, BurrukaiR
     }
 
     @Override
-    public ResourceLocation getDefaultTexture(BurrukaiRenderState burrukai) {
+    public Identifier getDefaultTexture(BurrukaiRenderState burrukai) {
         return this.defaultTexture;
     }
 
     @Override
-    public ResourceLocation getBabyTexture(BurrukaiRenderState burrukai) {
+    public Identifier getBabyTexture(BurrukaiRenderState burrukai) {
         return this.babyTexture;
     }
 

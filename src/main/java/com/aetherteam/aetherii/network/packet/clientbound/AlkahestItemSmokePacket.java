@@ -6,12 +6,12 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record AlkahestItemSmokePacket(Vec3 pos) implements CustomPacketPayload {
-    public static final Type<AlkahestItemSmokePacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "alkahest_item_smoke"));
+    public static final Type<AlkahestItemSmokePacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_item_smoke"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, AlkahestItemSmokePacket> STREAM_CODEC = StreamCodec.composite(
             Vec3.STREAM_CODEC,

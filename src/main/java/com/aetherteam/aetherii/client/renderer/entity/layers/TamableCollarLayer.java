@@ -6,13 +6,13 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public abstract class TamableCollarLayer<S extends TamableRenderState, M extends EntityModel<S>> extends RenderLayer<S, M> {
-    private final ResourceLocation collarLocation;
+    private final Identifier collarLocation;
     private final M model;
 
-    public TamableCollarLayer(RenderLayerParent<S, M> renderer, M model, ResourceLocation collarLocation) {
+    public TamableCollarLayer(RenderLayerParent<S, M> renderer, M model, Identifier collarLocation) {
         super(renderer);
         this.collarLocation = collarLocation;
         this.model = model;

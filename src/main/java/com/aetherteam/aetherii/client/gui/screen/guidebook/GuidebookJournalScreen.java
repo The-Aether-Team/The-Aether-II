@@ -10,12 +10,12 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
 public class GuidebookJournalScreen extends Screen implements Guidebook {
-    private static final ResourceLocation GUIDEBOOK_JOURNAL_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/journal/guidebook_journal_left.png");
-    private static final ResourceLocation GUIDEBOOK_JOURNAL_RIGHT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/journal/guidebook_journal_right.png");
+    private static final Identifier GUIDEBOOK_JOURNAL_LEFT_PAGE_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/journal/guidebook_journal_left.png");
+    private static final Identifier GUIDEBOOK_JOURNAL_RIGHT_PAGE_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/journal/guidebook_journal_right.png");
 
     private final GuidebookEquipmentMenu equipmentMenu;
     private final Inventory playerInventory;
@@ -71,12 +71,12 @@ public class GuidebookJournalScreen extends Screen implements Guidebook {
     }
 
     @Override
-    public ResourceLocation getLeftPageTexture() {
+    public Identifier getLeftPageTexture() {
         return GUIDEBOOK_JOURNAL_LEFT_PAGE_LOCATION;
     }
 
     @Override
-    public ResourceLocation getRightPageTexture() {
+    public Identifier getRightPageTexture() {
         return GUIDEBOOK_JOURNAL_RIGHT_PAGE_LOCATION;
     }
 

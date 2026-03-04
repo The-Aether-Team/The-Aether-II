@@ -4,28 +4,28 @@ import com.aetherteam.aetherii.AetherII;
 
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 
 public class AetherIITextureMappings {
-    public static TextureMapping emissive(ResourceLocation texture) {
+    public static TextureMapping emissive(Identifier texture) {
         return new TextureMapping()
                 .put(TextureSlot.TEXTURE, texture)
                 .put(AetherIITextureSlots.EMISSIVE, texture.withSuffix("_emissive"));
     }
 
-    public static TextureMapping cubeEmissive(ResourceLocation texture) {
+    public static TextureMapping cubeEmissive(Identifier texture) {
         return new TextureMapping()
                 .put(TextureSlot.ALL, texture)
                 .put(AetherIITextureSlots.EMISSIVE, texture.withSuffix("_emissive"));
     }
 
-    public static TextureMapping cubeColumnEmissive(ResourceLocation side, ResourceLocation end) {
+    public static TextureMapping cubeColumnEmissive(Identifier side, Identifier end) {
         return new TextureMapping()
                 .put(TextureSlot.SIDE, side)
                 .put(TextureSlot.END, end)
                 .put(AetherIITextureSlots.EMISSIVE_SIDE, side.withSuffix("_emissive"))
-                .put(AetherIITextureSlots.EMISSIVE_END, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/blank")); //todo
+                .put(AetherIITextureSlots.EMISSIVE_END, Identifier.fromNamespaceAndPath(AetherII.MODID, "block/blank")); //todo
     }
 
     public static TextureMapping block(Block block) {
@@ -36,11 +36,11 @@ public class AetherIITextureMappings {
         return block(TextureMapping.getBlockTexture(block), suffix);
     }
 
-    public static TextureMapping block(ResourceLocation texture) {
+    public static TextureMapping block(Identifier texture) {
         return block(texture, "");
     }
 
-    public static TextureMapping block(ResourceLocation texture, String suffix) {
+    public static TextureMapping block(Identifier texture, String suffix) {
         return new TextureMapping()
             .put(TextureSlot.NORTH, texture.withSuffix("_front" + suffix))
             .put(TextureSlot.SOUTH, texture.withSuffix("_back" + suffix))
@@ -64,7 +64,7 @@ public class AetherIITextureMappings {
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(grass, "_snow"));
     }
 
-    public static TextureMapping vine(ResourceLocation vine) {
+    public static TextureMapping vine(Identifier vine) {
         return new TextureMapping()
                 .put(AetherIITextureSlots.VINE, vine)
                 .copySlot(AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
@@ -76,7 +76,7 @@ public class AetherIITextureMappings {
                 .copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
                 .put(TextureSlot.TOP, TextureMapping.getBlockTexture(moss))
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(top, "_" + suffix))
-                .put(AetherIITextureSlots.OVERLAY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/" + suffix + "_overlay"));
+                .put(AetherIITextureSlots.OVERLAY, Identifier.fromNamespaceAndPath(AetherII.MODID, "block/" + suffix + "_overlay"));
     }
 
     public static TextureMapping tintedGrass(Block grass, Block dirt) {
@@ -195,7 +195,7 @@ public class AetherIITextureMappings {
     public static TextureMapping lockedBlockInventory(Block block) {
         return new TextureMapping()
                 .put(AetherIITextureSlots.FACE, TextureMapping.getBlockTexture(block))
-                .put(AetherIITextureSlots.OVERLAY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/dungeon_lock"));
+                .put(AetherIITextureSlots.OVERLAY, Identifier.fromNamespaceAndPath(AetherII.MODID, "block/dungeon_lock"));
     }
 
     public static TextureMapping campfire(Block block) {

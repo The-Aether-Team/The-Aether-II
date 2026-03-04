@@ -2,16 +2,16 @@ package com.aetherteam.aetherii.client.renderer.block.model.builder;
 
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.TrunkModel;
 import net.minecraft.client.renderer.block.model.VariantMutator;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
 import net.neoforged.neoforge.client.model.generators.blockstate.CustomBlockStateModelBuilder;
 import net.neoforged.neoforge.client.model.generators.blockstate.UnbakedMutator;
 
 public class TrunkModelBuilder extends CustomBlockStateModelBuilder {
-    private final ResourceLocation corner;
-    private final ResourceLocation cornerTall;
+    private final Identifier corner;
+    private final Identifier cornerTall;
 
-    public TrunkModelBuilder(ResourceLocation corner, ResourceLocation cornerTall) {
+    public TrunkModelBuilder(Identifier corner, Identifier cornerTall) {
         this.corner = corner;
         this.cornerTall = cornerTall;
     }

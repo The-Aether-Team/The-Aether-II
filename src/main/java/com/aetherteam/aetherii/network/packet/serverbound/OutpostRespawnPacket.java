@@ -5,12 +5,12 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record OutpostRespawnPacket() implements CustomPacketPayload {
-    public static final Type<OutpostRespawnPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "outpost_respawn"));
+    public static final Type<OutpostRespawnPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "outpost_respawn"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, OutpostRespawnPacket> STREAM_CODEC = CustomPacketPayload.codec(
             OutpostRespawnPacket::write,

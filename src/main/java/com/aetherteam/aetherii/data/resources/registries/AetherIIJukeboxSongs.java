@@ -8,7 +8,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.JukeboxSong;
 
@@ -22,7 +22,7 @@ public class AetherIIJukeboxSongs {
     public static ResourceKey<JukeboxSong> REVOLUTIONS = create("revolutions");
 
     private static ResourceKey<JukeboxSong> create(String pName) {
-        return ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, pName));
+        return ResourceKey.create(Registries.JUKEBOX_SONG, Identifier.fromNamespaceAndPath(AetherII.MODID, pName));
     }
 
     public static void bootstrap(BootstrapContext<JukeboxSong> context) {

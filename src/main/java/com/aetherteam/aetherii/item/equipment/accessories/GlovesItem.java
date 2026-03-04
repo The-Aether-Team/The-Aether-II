@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
@@ -14,8 +14,8 @@ import net.minecraft.world.item.equipment.ArmorMaterial;
 import java.util.Set;
 
 public class GlovesItem extends AccessoryItem {
-    public static final ResourceLocation BASE_GLOVES_ENDURANCE_RECOVERY_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_gloves_endurance_recovery");
-    public static final ResourceLocation BASE_GLOVES_MAXIMUM_ENDURANCE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_gloves_maximum_endurance");
+    public static final Identifier BASE_GLOVES_ENDURANCE_RECOVERY_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "base_gloves_endurance_recovery");
+    public static final Identifier BASE_GLOVES_MAXIMUM_ENDURANCE_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "base_gloves_maximum_endurance");
 
     private final double maxEndurance;
     private final double enduranceRecovery;

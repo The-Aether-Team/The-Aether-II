@@ -24,7 +24,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -36,15 +36,15 @@ import java.util.List;
 import java.util.Locale;
 
 public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMenu> {
-    private static final ResourceLocation TEXT_FIELD_SPRITE = ResourceLocation.withDefaultNamespace("container/anvil/text_field");
-    private static final ResourceLocation TEXT_FIELD_DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("container/anvil/text_field_disabled");
-    private static final ResourceLocation TIER_1_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_1");
-    private static final ResourceLocation TIER_2_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_2");
-    private static final ResourceLocation TIER_3_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_3");
-    private static final ResourceLocation TIER_4_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_4");
-    private static final ResourceLocation SLOT_LOCKED = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_charm_locked");
-    private static final ResourceLocation ARKENIUM_FORGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/arkenium_forge.png");
-    public static final List<ResourceLocation> TIER_LOCATIONS = List.of(TIER_1_SPRITE, TIER_2_SPRITE, TIER_3_SPRITE, TIER_4_SPRITE);
+    private static final Identifier TEXT_FIELD_SPRITE = Identifier.withDefaultNamespace("container/anvil/text_field");
+    private static final Identifier TEXT_FIELD_DISABLED_SPRITE = Identifier.withDefaultNamespace("container/anvil/text_field_disabled");
+    private static final Identifier TIER_1_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_1");
+    private static final Identifier TIER_2_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_2");
+    private static final Identifier TIER_3_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_3");
+    private static final Identifier TIER_4_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_4");
+    private static final Identifier SLOT_LOCKED = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_charm_locked");
+    private static final Identifier ARKENIUM_FORGE_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/arkenium_forge.png");
+    public static final List<Identifier> TIER_LOCATIONS = List.of(TIER_1_SPRITE, TIER_2_SPRITE, TIER_3_SPRITE, TIER_4_SPRITE);
     private final List<ReinforcementTierButton> tierButtons = new ArrayList<>();
     private EditBox name;
     private ItemStack lastInput = ItemStack.EMPTY;
@@ -193,7 +193,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                                 if (forgeCharmSlot.getCharmIndex() < charmHolders.size()) {
                                     Charms.CharmHolder charmHolder = charmHolders.get(forgeCharmSlot.getCharmIndex());
                                     if (!forgeCharmSlot.hasItem() && (!forgeCharmSlot.isActive() || charmHolder.getTier().getValue() != forgeCharmSlot.getCharmTier().getValue())) {
-                                        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_" + charmHolder.getType().name().toLowerCase(Locale.ROOT) + "_charm_" + charmHolder.getTier().getValue());
+                                        Identifier texture = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_" + charmHolder.getType().name().toLowerCase(Locale.ROOT) + "_charm_" + charmHolder.getTier().getValue());
                                         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, i + slot.x, j + slot.y, 16, 16);
                                     }
                                 }

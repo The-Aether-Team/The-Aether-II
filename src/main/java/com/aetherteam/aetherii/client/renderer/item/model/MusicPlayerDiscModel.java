@@ -16,7 +16,7 @@ import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.ChannelAccess;
 import net.minecraft.client.sounds.SoundEngine;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -36,9 +36,9 @@ public class MusicPlayerDiscModel implements ItemModel {
             ItemStack selectedStack = music.item().value().getDefaultInstance();
             if (!selectedStack.isEmpty()) {
                 ItemStack displayStack = selectedStack.copy();
-                ResourceLocation model = selectedStack.get(DataComponents.ITEM_MODEL);
+                 model = selectedStack.get(DataComponents.ITEM_MODEL);
                 if (model != null) {
-                    ResourceLocation location = model.withSuffix("_animated");
+                     location = model.withSuffix("_animated");
                     if (AetherIIClientProxy.isPlayingSoundEvent(music.sound().value())) {
                         displayStack.set(DataComponents.ITEM_MODEL, location);
                     }

@@ -21,7 +21,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -142,7 +142,7 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
         Optional<CompoundTag> recipesUsedTag = input.read("RecipesUsed", CompoundTag.CODEC);
         recipesUsedTag.ifPresent(tag -> {
             for (String key : tag.keySet()) {
-                this.recipesUsed.put(ResourceKey.create(Registries.RECIPE, ResourceLocation.parse(key)), tag.getIntOr(key, 0));
+                this.recipesUsed.put(ResourceKey.create(Registries.RECIPE, Identifier.parse(key)), tag.getIntOr(key, 0));
             }
         });
     }

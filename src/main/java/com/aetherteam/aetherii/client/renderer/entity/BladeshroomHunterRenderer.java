@@ -10,12 +10,12 @@ import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Pose;
 
 public class BladeshroomHunterRenderer<T extends BladeshroomHunter> extends MobRenderer<T, BladeshroomHunterRenderState, BladeshroomHunterModel<BladeshroomHunterRenderState>> {
-    private static final ResourceLocation LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/bladeshroom_hunter/bladeshroom_hunter.png");
+    private static final Identifier LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/bladeshroom_hunter/bladeshroom_hunter.png");
 
     public BladeshroomHunterRenderer(EntityRendererProvider.Context context) {
         super(context, new BladeshroomHunterModel<>(context.bakeLayer(AetherIIModelLayers.BLADESHROOM_HUNTER)), 0.5F);
@@ -69,7 +69,7 @@ public class BladeshroomHunterRenderer<T extends BladeshroomHunter> extends MobR
 
 
     @Override
-    public ResourceLocation getTextureLocation(BladeshroomHunterRenderState renderState) {
+    public Identifier getTextureLocation(BladeshroomHunterRenderState renderState) {
         return LOCATION;
     }
 }

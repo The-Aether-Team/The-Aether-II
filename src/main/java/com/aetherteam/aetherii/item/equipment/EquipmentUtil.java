@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.item.equipment;
 import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -49,7 +49,7 @@ public final class EquipmentUtil {
         return getArmorCount(entity, armorSet) >= 3;
     }
 
-    public static ResourceLocation getSlotModifierId(ResourceLocation base, ItemStack itemStack, int number, String slotName) {
-        return ResourceLocation.parse(itemStack.getItemHolder().getRegisteredName() + "_" + base.getPath() + "_" + number + "_" + slotName.toLowerCase());
+    public static Identifier getSlotModifierId(Identifier base, ItemStack itemStack, int number, String slotName) {
+        return Identifier.parse(itemStack.getItemHolder().getRegisteredName() + "_" + base.getPath() + "_" + number + "_" + slotName.toLowerCase());
     }
 }

@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
@@ -118,7 +118,7 @@ public class AetherIITags {
         public static final TagKey<Block> SENTRY_RUINS_BLOCKS = tag("sentry_ruins_blocks");
 
         private static TagKey<Block> tag(String name) {
-            return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+            return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 
@@ -237,7 +237,7 @@ public class AetherIITags {
         public static final TagKey<Item> SLIDER_DAMAGING_ITEMS = tag("slider_damaging_items");
 
         private static TagKey<Item> tag(String name) {
-            return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+            return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 
@@ -264,7 +264,7 @@ public class AetherIITags {
         public static final TagKey<EntityType<?>> SPAWNING_LEAVES = tag("spawning/leaves");
 
         private static TagKey<EntityType<?>> tag(String name) {
-            return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+            return TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 
@@ -274,7 +274,7 @@ public class AetherIITags {
         public static final TagKey<Fluid> ALLOWED_BUCKET_PICKUP = tag("allowed_bucket_pickup");
 
         private static TagKey<Fluid> tag(String name) {
-            return TagKey.create(Registries.FLUID, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+            return TagKey.create(Registries.FLUID, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 
@@ -308,7 +308,7 @@ public class AetherIITags {
         public static final TagKey<Biome> AETHER_MUSIC = tag("aether_music");
 
         private static TagKey<Biome> tag(String name) {
-            return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+            return TagKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 
@@ -324,7 +324,7 @@ public class AetherIITags {
         public static final TagKey<Structure> AERCLOUD_BLACKLIST_FILTER = tag("aercloud_blacklist_filter");
 
         private static TagKey<Structure> tag(String name) {
-            return TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+            return TagKey.create(Registries.STRUCTURE, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 
@@ -332,7 +332,7 @@ public class AetherIITags {
         public static final TagKey<DamageType> TYPED = tag("typed");
 
         private static TagKey<DamageType> tag(String name) {
-            return TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+            return TagKey.create(Registries.DAMAGE_TYPE, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 
@@ -341,7 +341,7 @@ public class AetherIITags {
         public static final TagKey<MobEffect> MILK_DOESNT_CLEAR = tag("typed");
 
         private static TagKey<MobEffect> tag(String name) {
-            return TagKey.create(Registries.MOB_EFFECT, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+            return TagKey.create(Registries.MOB_EFFECT, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 
@@ -354,7 +354,7 @@ public class AetherIITags {
         public static final TagKey<SoundEvent> BOSS_MUSIC = tag("boss_music");
 
         private static TagKey<SoundEvent> tag(String name) {
-            return TagKey.create(Registries.SOUND_EVENT, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+            return TagKey.create(Registries.SOUND_EVENT, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 }

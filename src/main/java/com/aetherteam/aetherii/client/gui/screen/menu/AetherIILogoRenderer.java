@@ -5,11 +5,11 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 
 public class AetherIILogoRenderer extends LogoRenderer {
-    private static final ResourceLocation AETHER_LOGO = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/title/aether_ii.png");
+    private static final Identifier AETHER_LOGO = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/title/aether_ii.png");
     private final boolean keepLogoThroughFade;
 
     public AetherIILogoRenderer(boolean keepLogoThroughFade) {

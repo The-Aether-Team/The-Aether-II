@@ -76,7 +76,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -99,12 +99,12 @@ import java.util.function.Supplier;
 public class AetherIIItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(AetherII.MODID);
 
-    public static final ResourceLocation BASE_SLASH_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_slash_damage");
-    public static final ResourceLocation BASE_IMPACT_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_impact_damage");
-    public static final ResourceLocation BASE_PIERCE_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_pierce_damage");
-    public static final ResourceLocation BASE_SLASH_RANGED_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_slash_ranged_damage");
-    public static final ResourceLocation BASE_IMPACT_RANGED_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_impact_ranged_damage");
-    public static final ResourceLocation BASE_PIERCE_RANGED_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_pierce_ranged_damage");
+    public static final Identifier BASE_SLASH_DAMAGE_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "base_slash_damage");
+    public static final Identifier BASE_IMPACT_DAMAGE_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "base_impact_damage");
+    public static final Identifier BASE_PIERCE_DAMAGE_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "base_pierce_damage");
+    public static final Identifier BASE_SLASH_RANGED_DAMAGE_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "base_slash_ranged_damage");
+    public static final Identifier BASE_IMPACT_RANGED_DAMAGE_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "base_impact_ranged_damage");
+    public static final Identifier BASE_PIERCE_RANGED_DAMAGE_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "base_pierce_ranged_damage");
 
     public static final Style CURRENCY_NAME_COLOR = Style.EMPTY.withColor(12566527);
     public static final Style TREASURE_NAME_COLOR = Style.EMPTY.withColor(16765952);
@@ -427,7 +427,7 @@ public class AetherIIItems {
     }
     
     private static ResourceKey<Item> createKey(String name) {
-        return ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void registerEquipmentAbilities(IEventBus bus) {

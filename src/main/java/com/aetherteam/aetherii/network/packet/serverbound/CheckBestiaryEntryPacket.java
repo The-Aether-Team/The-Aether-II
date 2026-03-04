@@ -8,14 +8,14 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record CheckBestiaryEntryPacket(EntityType<?> entityType) implements CustomPacketPayload {
-    public static final Type<CheckBestiaryEntryPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "check_bestiary_entry"));
+    public static final Type<CheckBestiaryEntryPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "check_bestiary_entry"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, CheckBestiaryEntryPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.registry(Registries.ENTITY_TYPE),

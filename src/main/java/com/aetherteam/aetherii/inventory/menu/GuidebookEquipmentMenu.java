@@ -13,7 +13,7 @@ import com.aetherteam.aetherii.item.miscellaneous.MoaSaddlebagItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.CraftingMenuAccessor;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -28,10 +28,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 
 public class GuidebookEquipmentMenu extends AbstractContainerMenu {
-    public static final ResourceLocation RELIC_SLOT_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessories/slot_relic");
-    public static final ResourceLocation HANDWEAR_SLOT_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessories/slot_handwear");
-    public static final ResourceLocation ACCESSORY_SLOT_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessories/slot_accessory");
-    private static final Map<EquipmentSlot, ResourceLocation> TEXTURE_EMPTY_SLOTS = Map.of(
+    public static final Identifier RELIC_SLOT_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "accessories/slot_relic");
+    public static final Identifier HANDWEAR_SLOT_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "accessories/slot_handwear");
+    public static final Identifier ACCESSORY_SLOT_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "accessories/slot_accessory");
+    private static final Map<EquipmentSlot, Identifier> TEXTURE_EMPTY_SLOTS = Map.of(
             EquipmentSlot.FEET,
             InventoryMenu.EMPTY_ARMOR_SLOT_BOOTS,
             EquipmentSlot.LEGS,
@@ -41,9 +41,9 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
             EquipmentSlot.HEAD,
             InventoryMenu.EMPTY_ARMOR_SLOT_HELMET
     );
-    private static final ResourceLocation EMPTY_SADDLE_SLOT = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/equipment/slot_moa_saddle");
-    private static final ResourceLocation EMPTY_SADDLEBAG_SLOT = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/equipment/slot_saddlebag");
-    private static final ResourceLocation EMPTY_FEED_SLOT = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/equipment/slot_moa_feed");
+    private static final Identifier EMPTY_SADDLE_SLOT = Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/equipment/slot_moa_saddle");
+    private static final Identifier EMPTY_SADDLEBAG_SLOT = Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/equipment/slot_saddlebag");
+    private static final Identifier EMPTY_FEED_SLOT = Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/equipment/slot_moa_feed");
     private static final EquipmentSlot[] SLOT_IDS = new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
     private final CraftingContainer craftSlots = new TransientCraftingContainer(this, 2, 2);
     private final ResultContainer resultSlots = new ResultContainer();
@@ -123,7 +123,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
                 }
 
                 @Override
-                public ResourceLocation getNoItemIcon() {
+                public Identifier getNoItemIcon() {
                     return EMPTY_SADDLE_SLOT;
                 }
             });
@@ -151,7 +151,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
                 }
 
                 @Override
-                public ResourceLocation getNoItemIcon() {
+                public Identifier getNoItemIcon() {
                     return EMPTY_SADDLEBAG_SLOT;
                 }
             });
@@ -162,7 +162,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
                 }
 
                 @Override
-                public ResourceLocation getNoItemIcon() {
+                public Identifier getNoItemIcon() {
                     return EMPTY_FEED_SLOT;
                 }
             });
@@ -201,7 +201,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
 
             for (int k = 0; k < 4; k++) {
                 EquipmentSlot equipmentslot = SLOT_IDS[k];
-                ResourceLocation resourceLocation = TEXTURE_EMPTY_SLOTS.get(equipmentslot);
+                Identifier resourceLocation = TEXTURE_EMPTY_SLOTS.get(equipmentslot);
                 this.addSlot(new ArmorSlot(playerInventory, this.owner, equipmentslot, 39 - k, -64, 38 + k * 18, resourceLocation));
             }
 
@@ -213,7 +213,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
                 }
 
                 @Override
-                public ResourceLocation getNoItemIcon() {
+                public Identifier getNoItemIcon() {
                     return InventoryMenu.EMPTY_ARMOR_SLOT_SHIELD;
                 }
             });

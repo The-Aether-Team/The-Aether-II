@@ -11,14 +11,14 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 
 /**
  * [CODE COPY] - {@link net.minecraft.client.renderer.entity.layers.SheepFurLayer}.
  */
 public class SheepuffWoolLayer extends RenderLayer<SheepuffRenderState, SheepuffModel<SheepuffRenderState>> {
-    private static final ResourceLocation SHEEPUFF_WOOL_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sheepuff/sheepuff_wool.png");
+    private static final Identifier SHEEPUFF_WOOL_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/sheepuff/sheepuff_wool.png");
 
     public SheepuffWoolLayer(RenderLayerParent<SheepuffRenderState, SheepuffModel<SheepuffRenderState>> entityRenderer) {
         super(entityRenderer);

@@ -8,7 +8,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -18,7 +18,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
  * This also stores the summoned Aerbunny back into the capability so the player is tracked as having a mounted Aerbunny.
  */
 public record RemountAerbunnyPacket(int vehicleID, int aerbunnyID) implements CustomPacketPayload {
-    public static final Type<RemountAerbunnyPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "remount_aerbunny"));
+    public static final Type<RemountAerbunnyPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "remount_aerbunny"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, RemountAerbunnyPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.INT,

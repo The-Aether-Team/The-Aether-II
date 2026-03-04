@@ -16,7 +16,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -204,7 +204,7 @@ public class AetherIIBestiaryEntries {
     );
 
     private static ResourceKey<BestiaryEntry> createKey(String name) {
-        return ResourceKey.create(AetherIIRegistries.BESTIARY_ENTRY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIRegistries.BESTIARY_ENTRY, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstrapContext<BestiaryEntry> context) {
@@ -225,7 +225,7 @@ public class AetherIIBestiaryEntries {
 
             context.register(entry.getKey(), new BestiaryEntry(
                     entry.getKey().location(),
-                    ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/" + entity.toShortString()),
+                    Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/" + entity.toShortString()),
                     name,
                     slotName,
                     slotSubtitle,

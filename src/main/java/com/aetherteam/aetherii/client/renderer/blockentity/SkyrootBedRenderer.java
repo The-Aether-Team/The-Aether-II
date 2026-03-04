@@ -20,7 +20,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BrightnessCombiner;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DoubleBlockCombiner;
@@ -38,8 +38,8 @@ import java.util.Set;
  * Stripped down to only use what is necessary.
  */
 public class SkyrootBedRenderer implements BlockEntityRenderer<SkyrootBedBlockEntity> {
-    private static final ResourceLocation BED_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/bed/skyroot/undyed.png");
-    public static final ResourceLocation[] DYED_BED_TEXTURES = Arrays.stream(DyeColor.values()).sorted(Comparator.comparingInt(DyeColor::getId)).map((dyeColor) -> ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/bed/skyroot/" + dyeColor.getName() + ".png")).toArray(ResourceLocation[]::new);;
+    private static final Identifier BED_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/bed/skyroot/undyed.png");
+    public static final Identifier[] DYED_BED_TEXTURES = Arrays.stream(DyeColor.values()).sorted(Comparator.comparingInt(DyeColor::getId)).map((dyeColor) -> Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/bed/skyroot/" + dyeColor.getName() + ".png")).toArray(Identifier[]::new);
     private final Model headModel;
     private final Model footModel;
 
@@ -83,7 +83,7 @@ public class SkyrootBedRenderer implements BlockEntityRenderer<SkyrootBedBlockEn
         Level level = blockEntity.getLevel();
         BlockState state = blockEntity.getBlockState();
         if (level != null) {
-            ResourceLocation location = state.getBlock() != AetherIIBlocks.SKYROOT_BED.get() ? DYED_BED_TEXTURES[blockEntity.getColor().getId()] : BED_LOCATION;
+            Identifier location = state.getBlock() != AetherIIBlocks.SKYROOT_BED.get() ? DYED_BED_TEXTURES[blockEntity.getColor().getId()] : BED_LOCATION;
             BlockState blockstate = blockEntity.getBlockState();
             DoubleBlockCombiner.NeighborCombineResult<? extends SkyrootBedBlockEntity> combiner = DoubleBlockCombiner.combineWithNeigbour(AetherIIBlockEntityTypes.SKYROOT_BED.get(), SkyrootBedBlock::getBlockType, SkyrootBedBlock::getConnectedDirection, SkyrootBedBlock.FACING, blockstate, level, blockEntity.getBlockPos(), (levelAccessor, blockPos) -> false);
             int i = combiner.apply(new BrightnessCombiner<>()).get(packedLight);
@@ -91,12 +91,12 @@ public class SkyrootBedRenderer implements BlockEntityRenderer<SkyrootBedBlockEn
         }
     }
 
-    public void renderInHand(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, ResourceLocation location) {
+    public void renderInHand(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, Identifier location) {
         this.renderPiece(poseStack, bufferSource, this.headModel, Direction.SOUTH, location, packedLight, packedOverlay, false);
         this.renderPiece(poseStack, bufferSource, this.footModel, Direction.SOUTH, location, packedLight, packedOverlay, true);
     }
 
-    private void renderPiece(PoseStack poseStack, MultiBufferSource bufferSource, Model model, Direction direction, ResourceLocation location, int packedLight, int packedOverlay, boolean isFeet) {
+    private void renderPiece(PoseStack poseStack, MultiBufferSource bufferSource, Model model, Direction direction, Identifier location, int packedLight, int packedOverlay, boolean isFeet) {
         poseStack.pushPose();
         preparePose(poseStack, isFeet, direction);
         VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderType.entityCutout(location));

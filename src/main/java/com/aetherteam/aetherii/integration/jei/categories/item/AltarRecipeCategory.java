@@ -16,7 +16,7 @@ import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class AltarRecipeCategory extends AbstractRecipeCategory<AltarEnchantingRecipe> {
@@ -30,12 +30,12 @@ public class AltarRecipeCategory extends AbstractRecipeCategory<AltarEnchantingR
 
     public AltarRecipeCategory(IGuiHelper helper) {
         super(ALTAR_ENCHANTING, Component.translatable("gui.aether_ii.jei.altar"), helper.createDrawableItemLike(AetherIIBlocks.ALTAR), 160, 102);
-        this.background = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/jei/altar.png"), 0, 0, 158, 100).setTextureSize(158, 100).build();
-        this.progress = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/altar/output_progress.png"), 0, 0, 26, 16).setTextureSize(26, 16).buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
-        this.chargeSlot = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/altar/charge_slot.png"), 0, 0, 20, 20).setTextureSize(20, 20).build();
-        this.normalCharge = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/altar/charge.png"), 0, 0, 4, 7).setTextureSize(4, 7).build();
-        this.horizontalCharge = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/altar/charge_horizontal.png"), 0, 0, 12, 4).setTextureSize(12, 4).build();
-        this.verticalCharge = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/altar/charge_vertical.png"), 0, 0, 4, 12).setTextureSize(4, 12).build();
+        this.background = helper.drawableBuilder(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/jei/altar.png"), 0, 0, 158, 100).setTextureSize(158, 100).build();
+        this.progress = helper.drawableBuilder(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/altar/output_progress.png"), 0, 0, 26, 16).setTextureSize(26, 16).buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
+        this.chargeSlot = helper.drawableBuilder(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/altar/charge_slot.png"), 0, 0, 20, 20).setTextureSize(20, 20).build();
+        this.normalCharge = helper.drawableBuilder(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/altar/charge.png"), 0, 0, 4, 7).setTextureSize(4, 7).build();
+        this.horizontalCharge = helper.drawableBuilder(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/altar/charge_horizontal.png"), 0, 0, 12, 4).setTextureSize(12, 4).build();
+        this.verticalCharge = helper.drawableBuilder(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/sprites/container/altar/charge_vertical.png"), 0, 0, 4, 12).setTextureSize(4, 12).build();
     }
 
     @Override

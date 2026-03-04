@@ -12,7 +12,7 @@ import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Items;
@@ -20,11 +20,11 @@ import net.minecraft.world.item.Items;
 import java.util.List;
 
 public class AmberHourglassScreen extends AbstractRecipeBookScreen<AmberHourglassMenu> implements RecipeUpdateListener {
-    private static final ResourceLocation AMBER_HOURGLASS_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/amber_hourglass.png");
-    private static final ResourceLocation FUEL_BAR_LEFT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/amber_hourglass/fuel_bar_left");
-    private static final ResourceLocation FUEL_BAR_RIGHT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/amber_hourglass/fuel_bar_right");
-    private static final ResourceLocation PROGRESS_BAR_LEFT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/amber_hourglass/progress_bar_left");
-    private static final ResourceLocation PROGRESS_BAR_RIGHT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/amber_hourglass/progress_bar_right");
+    private static final Identifier AMBER_HOURGLASS_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/amber_hourglass.png");
+    private static final Identifier FUEL_BAR_LEFT_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/amber_hourglass/fuel_bar_left");
+    private static final Identifier FUEL_BAR_RIGHT_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/amber_hourglass/fuel_bar_right");
+    private static final Identifier PROGRESS_BAR_LEFT_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/amber_hourglass/progress_bar_left");
+    private static final Identifier PROGRESS_BAR_RIGHT_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/amber_hourglass/progress_bar_right");
     private static final List<RecipeBookComponent.TabInfo> TABS = List.of(
             new RecipeBookComponent.TabInfo(Items.COMPASS, AetherIIRecipeBookCategories.AMBER_HOURGLASS_SEARCH),
             new RecipeBookComponent.TabInfo(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIRecipeBookCategories.AMBER_HOURGLASS_RESTORATION.get()),

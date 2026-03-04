@@ -37,7 +37,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ColorRGBA;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -848,7 +848,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     }
 
     private static <T extends Block> DeferredBlock<T> registerWithoutItem(String name, Function<Block.Properties, T> builder, Supplier<Block.Properties> properties) {
-        var key = ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        var key = ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
         return BLOCKS.register(name, () -> builder.apply(properties.get().setId(key)));
     }
 
@@ -861,12 +861,12 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     }
 
     private static <T extends Block> DeferredBlock<T> register(String name, Function<Block.Properties, T> builder, Supplier<Block.Properties> properties, BiFunction<? super T, Item.Properties, ? extends Item> itemCreator) {
-        var key = ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        var key = ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
         DeferredBlock<T> block = BLOCKS.register(name, () -> builder.apply(properties.get().setId(key)));
         AetherIIItems.ITEMS.register(name, id -> itemCreator.apply(
             block.get(),
             new Item.Properties()
-                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name)))
+                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(AetherII.MODID, name)))
                 .useBlockDescriptionPrefix()
         ));
         return block;
@@ -900,7 +900,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     }
 
     private static ResourceKey<Block> createKey(String name) {
-        return ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        return ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static void registerPots() {

@@ -30,7 +30,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
@@ -48,12 +48,12 @@ import java.text.DecimalFormat;
 import java.util.*;
 
 public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEntry.Mutable> {
-    private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_BESTIARY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_bestiary.png");
-    private static final ResourceLocation SLASH_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/slash");
-    private static final ResourceLocation IMPACT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/impact");
-    private static final ResourceLocation PIERCE_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/pierce");
-    private static final ResourceLocation UNDISCOVERED_ENTRY_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/undiscovered");
-    private static final ResourceLocation DISCOVERED_ENTRY_FALLBACK_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/default");
+    private static final Identifier GUIDEBOOK_DISCOVERY_RIGHT_PAGE_BESTIARY_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_bestiary.png");
+    private static final Identifier SLASH_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/slash");
+    private static final Identifier IMPACT_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/impact");
+    private static final Identifier PIERCE_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/pierce");
+    private static final Identifier UNDISCOVERED_ENTRY_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/undiscovered");
+    private static final Identifier DISCOVERED_ENTRY_FALLBACK_SPRITE = Identifier.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/default");
     private static final DecimalFormat PERCENTAGE = new DecimalFormat("##.##%");
     private final List<BestiaryEntry.Mutable> orderedEntries = new ArrayList<>();
     private float rotation = 0.0F;
@@ -164,7 +164,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         for (BestiaryEntry.Mutable entry : visibleEntries) {
             GuiSpriteManager guiSpriteManager = Minecraft.getInstance().getGuiSprites();
 
-            ResourceLocation sprite;
+            Identifier sprite;
             if (this.isUnlocked(entry, BestiaryEntry.ICON.id())) {
                 sprite = entry.getIcon();
                 if (guiSpriteManager.getSprite(sprite).equals(guiSpriteManager.getSprite(MissingTextureAtlasSprite.getLocation()))) {
@@ -271,7 +271,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                             if (effectResistanceDisplay.attribute().value() instanceof EffectResistanceAttribute effectResistanceAttribute) {
                                 if (entry.getClientValues().containsKey(BestiaryEntry.EFFECT_RESISTANCE.id() + "_" + i) && this.isUnlocked(entry, BestiaryEntry.EFFECT_RESISTANCE.id() + "_" + i)) {
                                     Holder<MobEffect> effectHolder = effectResistanceAttribute.getEffect();
-                                    ResourceLocation location = Gui.getMobEffectSprite(effectHolder);
+                                    Identifier location = Gui.getMobEffectSprite(effectHolder);
                                     guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, x, y, 18, 18);
                                     int effectValue = effectResistanceDisplay.value();
                                     Component effectTooltip = Component.literal(effectValue * 100 + "%")
@@ -417,7 +417,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     }
 
     @Override
-    public ResourceLocation getRightPageTexture() {
+    public Identifier getRightPageTexture() {
         return GUIDEBOOK_DISCOVERY_RIGHT_PAGE_BESTIARY_LOCATION;
     }
 }

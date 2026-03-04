@@ -12,7 +12,7 @@ import com.aetherteam.aetherii.item.equipment.charms.CharmItem;
 import com.aetherteam.aetherii.network.packet.clientbound.ForgeSoundPacket;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.StringUtil;
 import net.minecraft.world.Container;
@@ -31,8 +31,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class ArkeniumForgeMenu extends AbstractContainerMenu {
-    public static final ResourceLocation SLOT_PRIMARY = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_primary");
-    public static final ResourceLocation SLOT_SECONDARY = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_secondary");
+    public static final Identifier SLOT_PRIMARY = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_primary");
+    public static final Identifier SLOT_SECONDARY = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_secondary");
     private final Container container;
     @Nullable
     private String itemName;
@@ -78,7 +78,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             }
 
             @Override
-            public ResourceLocation getNoItemIcon() {
+            public Identifier getNoItemIcon() {
                 return SLOT_PRIMARY;
             }
         });
@@ -89,7 +89,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             }
 
             @Override
-            public ResourceLocation getNoItemIcon() {
+            public Identifier getNoItemIcon() {
                 return SLOT_SECONDARY;
             }
         });

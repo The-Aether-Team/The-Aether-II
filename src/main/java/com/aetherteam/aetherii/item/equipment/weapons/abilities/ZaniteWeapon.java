@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.ZaniteBuff;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -17,12 +17,12 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 public interface ZaniteWeapon extends ZaniteBuff {
-    ResourceLocation DAMAGE_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_attack_damage");
-    ResourceLocation SLASH_DAMAGE_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_slash_attack_damage");
-    ResourceLocation IMPACT_DAMAGE_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_impact_attack_damage");
-    ResourceLocation PIERCE_DAMAGE_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_pierce_attack_damage");
+    Identifier DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_attack_damage");
+    Identifier SLASH_DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_slash_attack_damage");
+    Identifier IMPACT_DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_impact_attack_damage");
+    Identifier PIERCE_DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_pierce_attack_damage");
 
-    Map<Holder<Attribute>, ResourceLocation> DAMAGE_TYPES = Map.ofEntries(
+    Map<Holder<Attribute>, Identifier> DAMAGE_TYPES = Map.ofEntries(
             Map.entry(AetherIIAttributes.SLASH_DAMAGE, SLASH_DAMAGE_MODIFIER_ID),
             Map.entry(AetherIIAttributes.IMPACT_DAMAGE, IMPACT_DAMAGE_MODIFIER_ID),
             Map.entry(AetherIIAttributes.PIERCE_DAMAGE, PIERCE_DAMAGE_MODIFIER_ID)
@@ -67,7 +67,7 @@ public interface ZaniteWeapon extends ZaniteBuff {
         return modifierEntryList;
     }
 
-     default int calculateDamageIncrease(Holder<Attribute> base, ResourceLocation bonusModifier, ItemAttributeModifiers modifiers, ItemStack stack) {
+     default int calculateDamageIncrease(Holder<Attribute> base, Identifier bonusModifier, ItemAttributeModifiers modifiers, ItemStack stack) {
         AtomicReference<Double> baseStat = new AtomicReference<>(0.0);
         modifiers.forEach(EquipmentSlotGroup.MAINHAND, (attribute, modifier) -> {
             if (attribute.value() == base.value() && !modifier.id().equals(bonusModifier)) {

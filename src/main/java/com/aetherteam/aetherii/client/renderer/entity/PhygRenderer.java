@@ -7,11 +7,11 @@ import com.aetherteam.aetherii.client.renderer.entity.state.WingEntityRenderStat
 import com.aetherteam.aetherii.entity.passive.Phyg;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
 public class PhygRenderer extends MobRenderer<Phyg, WingEntityRenderState, PhygModel<WingEntityRenderState>> {
-    private static final ResourceLocation PHYG_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/phyg/phyg.png");
+    private static final Identifier PHYG_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/phyg/phyg.png");
 
     public PhygRenderer(EntityRendererProvider.Context context) {
         super(context, new PhygModel<>(context.bakeLayer(AetherIIModelLayers.PHYG)), 0.7F);
@@ -30,7 +30,7 @@ public class PhygRenderer extends MobRenderer<Phyg, WingEntityRenderState, PhygM
     }
 
     @Override
-    public ResourceLocation getTextureLocation(WingEntityRenderState renderState) {
+    public Identifier getTextureLocation(WingEntityRenderState renderState) {
         return PHYG_TEXTURE;
     }
 }
