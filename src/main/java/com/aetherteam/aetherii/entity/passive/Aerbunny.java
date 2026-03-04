@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
+import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.EntityAccessor;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerGamePacketListenerImplAccessor;
 import com.aetherteam.aetherii.network.packet.clientbound.AerbunnyMessagePacket;
@@ -33,6 +34,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
@@ -102,6 +104,11 @@ public class Aerbunny extends AetherTamableAnimal {
         builder.define(DATA_FAST_FALLING_ID, false);
         builder.define(DATA_COLLAR_COLOR, DyeColor.BLUE.getId());
         builder.define(DATA_VEHICLE_REFERENCE, Optional.empty());
+    }
+
+    @Override
+    protected PathNavigation createNavigation(Level level) {
+        return new FallPathNavigation(this, level);
     }
 
     @Override
@@ -750,7 +757,16 @@ public class Aerbunny extends AetherTamableAnimal {
 
         @Override
         public void tick() {
-            super.tick();
+            if (this.operation == Operation.JUMPING) {
+                this.mob.setSpeed((float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
+                if (this.mob.onGround()) {
+                    this.operation = Operation.WAIT;
+                } else {
+                    this.operation = Operation.MOVE_TO;
+                }
+            } else {
+                super.tick();
+            }
             if (this.aerbunny.zza != 0) {
                 if (this.aerbunny.onGround()) {
                     this.aerbunny.getJumpControl().jump();
