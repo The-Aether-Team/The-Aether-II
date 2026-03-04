@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_holystone_slab": {
+    "has_quartz": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:holystone_slab"
+            "items": "minecraft:quartz"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:armor_stand"
+        "recipe": "aether_ii:daylight_detector_from_scatterglass"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_holystone_slab"
+      "has_quartz"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:armor_stand"
+      "aether_ii:daylight_detector_from_scatterglass"
     ]
   }
 }
