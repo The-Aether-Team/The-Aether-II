@@ -5,7 +5,6 @@ import com.aetherteam.aetherii.entity.monster.CellingMonster;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
-import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.level.Level;
@@ -57,9 +56,6 @@ public class CellingPathNavigation extends GroundPathNavigation {
                     this.path.advance();
                 }
             }
-
-
-            DebugPackets.sendPathFindingPacket(this.level, this.mob, this.path, this.maxDistanceToWaypoint);
             if (!this.isDone()) {
                 Vec3 vec31 = this.path.getNextEntityPos(this.mob);
                 //TODO find why 0.5 block gap has!

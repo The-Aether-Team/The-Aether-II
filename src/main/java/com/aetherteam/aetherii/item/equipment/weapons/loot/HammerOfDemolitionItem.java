@@ -13,7 +13,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
@@ -33,7 +32,7 @@ public class HammerOfDemolitionItem extends TieredHammerItem implements Projecti
             if (level instanceof ServerLevel serverlevel) {
                 if (!player.getAbilities().instabuild) {
                     player.getCooldowns().addCooldown(heldStack, 100);
-                    heldStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                    heldStack.hurtAndBreak(1, player, hand);
                 }
                 Projectile.spawnProjectileFromRotation((l, e, s) -> new DemolitionProjectile(e, l), serverlevel, heldStack, player, 0.0F, 1.0F, 1.0F);
             }

@@ -97,7 +97,7 @@ public class AercloudGliderItem extends Item implements ToggleItem {
     @Override
     public void onStopUsing(ItemStack stack, LivingEntity entity, int count) {
         if (!entity.level().isClientSide()) {
-            stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
+            stack.hurtAndBreak(1, entity, entity.getUsedItemHand());
         }
         if (entity instanceof Player player) {
             boolean reset = false;

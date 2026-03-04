@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.entity.ai.navigator;
 import com.aetherteam.aetherii.entity.ai.navigator.node.InsectNodeEvaluator;
 import com.aetherteam.aetherii.entity.passive.Insect;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
@@ -42,8 +41,6 @@ public class FlyAndGroundInsectPathNavigation extends FlyInsectPathNavigation {
                         this.path.advance();
                     }
                 }
-
-                DebugPackets.sendPathFindingPacket(this.level, this.mob, this.path, this.maxDistanceToWaypoint);
                 if (!this.isDone()) {
                     Vec3 vec32 = this.path.getNextEntityPos(this.mob);
                     this.mob.getMoveControl().setWantedPosition(vec32.x, this.getGroundY(vec32), vec32.z, this.speedModifier);

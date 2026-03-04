@@ -3,10 +3,10 @@ package com.aetherteam.aetherii.loot;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.aetherteam.aetherii.entity.passive.Sheepuff;
-import net.minecraft.Util;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.Util;
 import net.minecraft.world.level.storage.loot.LootTable;
 
 import java.util.*;

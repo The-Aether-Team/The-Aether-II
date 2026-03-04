@@ -6,12 +6,12 @@ import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.entity.variant.GlitterwingVariant;
 import com.aetherteam.aetherii.entity.variant.spawning.LightCheck;
 import com.aetherteam.aetherii.entity.variant.spawning.RandomCheck;
-import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.advancements.criterion.MinMaxBounds;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.variant.*;
 import net.minecraft.world.level.biome.Biome;
@@ -92,8 +92,8 @@ public class AetherIIGlitterwingVariants {
     }
 
     private static void register(BootstrapContext<GlitterwingVariant> context, ResourceKey<GlitterwingVariant> key, SpawnPrioritySelectors spawnConditions, float wingXOffset, float wingZRotation, boolean emissive) {
-        Identifier texture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/glitterwing/" + key.location().getPath() + ".png");
-        Identifier emissiveTexture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/glitterwing/" + key.location().getPath() + "_glow.png");
+        Identifier texture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/glitterwing/" + key.identifier().getPath() + ".png");
+        Identifier emissiveTexture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/glitterwing/" + key.identifier().getPath() + "_glow.png");
 
         context.register(key, new GlitterwingVariant(texture, emissive ? Optional.of(emissiveTexture) : Optional.empty(), spawnConditions, wingXOffset, wingZRotation));
     }
