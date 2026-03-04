@@ -36,7 +36,7 @@ public record MoaFlyModeChangePacket(int entityID) implements CustomPacketPayloa
 
     public static void execute(MoaFlyModeChangePacket payload, IPayloadContext context) {
         Player playerEntity = context.player();
-        if (playerEntity.getServer() != null && playerEntity.level().getEntity(payload.entityID()) instanceof Moa moa) {
+        if (playerEntity.level().getServer() != null && playerEntity.level().getEntity(payload.entityID()) instanceof Moa moa) {
             moa.changeFlyMode();
         }
     }

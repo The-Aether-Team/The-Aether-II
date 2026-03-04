@@ -37,7 +37,7 @@ public record StepHeightPacket(int entityID) implements CustomPacketPayload {
 
     public static void execute(StepHeightPacket payload, IPayloadContext context) {
         Player playerEntity = context.player();
-        if (playerEntity != null && playerEntity.getServer() != null && playerEntity.level().getEntity(payload.entityID()) instanceof MountableAnimal mountableAnimal) {
+        if (playerEntity != null && playerEntity.level().getServer() != null && playerEntity.level().getEntity(payload.entityID()) instanceof MountableAnimal mountableAnimal) {
             AttributeInstance stepHeight = mountableAnimal.getAttribute(Attributes.STEP_HEIGHT);
             if (stepHeight != null) {
                 if (stepHeight.hasModifier(mountableAnimal.getDefaultStepHeightModifier().id())) {

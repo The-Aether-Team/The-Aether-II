@@ -22,7 +22,7 @@ public record HeldCurrencyPacket(ItemStack itemStack) implements CustomPacketPay
 
     public static void execute(HeldCurrencyPacket payload, IPayloadContext context) {
         Player playerEntity = context.player();
-        if (playerEntity != null && playerEntity.getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
+        if (playerEntity != null && playerEntity.level().getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
             serverPlayer.containerMenu.setCarried(payload.itemStack());
         }
     }

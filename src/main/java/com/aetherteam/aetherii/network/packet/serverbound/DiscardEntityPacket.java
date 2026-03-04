@@ -24,7 +24,7 @@ public record DiscardEntityPacket(int entityID) implements CustomPacketPayload {
 
     public static void execute(DiscardEntityPacket payload, IPayloadContext context) {
         Player playerEntity = context.player();
-        if (playerEntity != null && playerEntity.getServer() != null && playerEntity.level().getEntity(payload.entityID()) instanceof Entity entity) {
+        if (playerEntity != null && playerEntity.level().getServer() != null && playerEntity.level().getEntity(payload.entityID()) instanceof Entity entity) {
             entity.discard();
         }
     }

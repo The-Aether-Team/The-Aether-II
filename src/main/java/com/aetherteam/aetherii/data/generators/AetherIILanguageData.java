@@ -2242,6 +2242,6 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
     }
 
     public void addMuralTitle(DeferredHolder<Mural, Mural> key, String title) {
-        this.add(key.getKey().location().toLanguageKey("mural", "title"), title);
+        this.add(key.getKey().identifier().toLanguageKey("mural", "title"), title);
     }
 }

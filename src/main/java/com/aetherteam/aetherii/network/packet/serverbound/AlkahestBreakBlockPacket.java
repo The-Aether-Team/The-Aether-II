@@ -28,7 +28,7 @@ public record AlkahestBreakBlockPacket(BlockPos pos, boolean drop) implements Cu
 
     public static void execute(AlkahestBreakBlockPacket payload, IPayloadContext context) {
         Player playerEntity = context.player();
-        if (playerEntity.getServer() != null) {
+        if (playerEntity.level().getServer() != null) {
             AlkahestFluid.fullyDestroyBlock(playerEntity.level(), payload.pos(), payload.drop());
         }
     }

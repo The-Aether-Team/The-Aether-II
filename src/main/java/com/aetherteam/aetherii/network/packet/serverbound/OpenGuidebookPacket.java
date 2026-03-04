@@ -32,7 +32,7 @@ public record OpenGuidebookPacket(ItemStack carryStack) implements CustomPacketP
 
     public static void execute(OpenGuidebookPacket payload, IPayloadContext context) {
         Player playerEntity = context.player();
-        if (playerEntity != null && playerEntity.getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
+        if (playerEntity != null && playerEntity.level().getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
             ItemStack itemStack = serverPlayer.isCreative() ? payload.carryStack() : serverPlayer.containerMenu.getCarried();
             serverPlayer.containerMenu.setCarried(ItemStack.EMPTY);
             serverPlayer.openMenu(new ExtraDataMenuProvider(

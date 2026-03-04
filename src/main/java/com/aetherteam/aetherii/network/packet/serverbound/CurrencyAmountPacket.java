@@ -33,7 +33,7 @@ public record CurrencyAmountPacket(int amount) implements CustomPacketPayload {
 
     public static void execute(CurrencyAmountPacket payload, IPayloadContext context) {
         Player playerEntity = context.player();
-        if (playerEntity != null && playerEntity.getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
+        if (playerEntity != null && playerEntity.level().getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
             serverPlayer.getData(AetherIIDataAttachments.CURRENCY.get()).setAmount(payload.amount);
             serverPlayer.syncData(AetherIIDataAttachments.CURRENCY);
             AetherIIAdvancementTriggers.CURRENCY.get().trigger(serverPlayer, serverPlayer.getData(AetherIIDataAttachments.CURRENCY.get()).getAmount());

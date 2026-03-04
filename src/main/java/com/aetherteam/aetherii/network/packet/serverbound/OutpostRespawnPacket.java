@@ -31,7 +31,7 @@ public record OutpostRespawnPacket() implements CustomPacketPayload {
 
     public static void execute(OutpostRespawnPacket payload, IPayloadContext context) {
         Player playerEntity = context.player();
-        if (playerEntity != null && playerEntity.getServer() != null) {
+        if (playerEntity != null && playerEntity.level().getServer() != null) {
             playerEntity.getData(AetherIIDataAttachments.OUTPOST_TRACKER).setShouldRespawnAtOutpost(true);
         }
     }

@@ -54,7 +54,7 @@ public class AlkahestPurifierRecipeCategory extends AbstractRecipeCategory<Alkah
         HolderSet<Item> ingredients = recipe.ingredient().getValues();
         Holder<Item> item = ingredients.get(0);
         if (item.is(AetherIITags.Items.IRRADIATED_ITEM)) {
-            Identifier location = item.getKey().location().withSuffix("_result");
+            Identifier location = item.getKey().identifier().withSuffix("_result");
             resultDisplay = new SlotDisplay.ItemStackSlotDisplay(new ItemStack(item, 1, DataComponentPatch.builder()
                     .set(DataComponents.ITEM_MODEL, location)
                     .set(DataComponents.ITEM_NAME, Component.translatable(Util.makeDescriptionId("item", location)))

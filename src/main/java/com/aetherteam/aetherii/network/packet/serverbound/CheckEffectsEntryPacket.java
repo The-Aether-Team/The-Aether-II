@@ -29,7 +29,7 @@ public record CheckEffectsEntryPacket(MobEffect effect) implements CustomPacketP
 
     public static void execute(CheckEffectsEntryPacket payload, IPayloadContext context) {
         Player playerEntity = context.player();
-        if (playerEntity != null && playerEntity.getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
+        if (playerEntity != null && playerEntity.level().getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
             GuidebookDiscoveryAttachment attachment = serverPlayer.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
             attachment.getEffectsEntries().forEach((entry) -> {
                 if (entry.getEffect().value() == payload.effect()) {

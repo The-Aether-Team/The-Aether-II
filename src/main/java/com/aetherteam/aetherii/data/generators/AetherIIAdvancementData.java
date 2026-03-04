@@ -604,7 +604,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
 
 //                Identifier understandId = Identifier.fromNamespaceAndPath(AetherII.MODID, "understand_" + entityType.toShortString()).withPrefix(path);
 //                understand(itemGetter, entityGetter, Advancement.Builder.advancement(), entityType).requirements(AdvancementRequirements.Strategy.OR).save(consumer, understandId);
-//                RewardWrapper understandWrapper = new RewardWrapper(understandId, entry.getKey().location(), List.of("test"));
+//                RewardWrapper understandWrapper = new RewardWrapper(understandId, entry.getKey().identifier(), List.of("test"));
 //                if (!REWARD_WRAPPERS.contains(understandWrapper)) {
 //                    REWARD_WRAPPERS.add(understandWrapper);
 //                }

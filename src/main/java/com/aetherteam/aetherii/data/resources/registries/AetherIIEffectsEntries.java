@@ -93,12 +93,12 @@ public class AetherIIEffectsEntries {
         for (Map.Entry<ResourceKey<EffectsEntry>, Holder<MobEffect>> entry : EFFECTS.entrySet()) {
             Holder<MobEffect> holder = entry.getValue();
             context.register(entry.getKey(), new EffectsEntry(
-                    entry.getKey().location(),
-                    Identifier.parse(holder.getKey().location().getPath()),
+                    entry.getKey().identifier(),
+                    Identifier.parse(holder.getKey().identifier().getPath()),
                     holder.value().getDescriptionId(),
                     holder.value().getDescriptionId(),
                     Optional.empty(),
-                    "aether_ii.guidebook_effects.description.effect.aether_ii." + holder.getKey().location().getPath(),
+                    "aether_ii.guidebook_effects.description.effect.aether_ii." + holder.getKey().identifier().getPath(),
                     holder,
                     ITEMS.get(holder)
             ));

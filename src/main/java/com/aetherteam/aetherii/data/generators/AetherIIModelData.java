@@ -39,6 +39,6 @@ public class AetherIIModelData extends ModelProvider {
 
     @Override
     protected Stream<? extends Holder<Block>> getKnownBlocks() {
-        return BuiltInRegistries.BLOCK.listElements().filter((holder) -> holder.getKey().location().getNamespace().equals(this.modId) && !(holder.value() instanceof LiquidBlock));
+        return BuiltInRegistries.BLOCK.listElements().filter((holder) -> holder.getKey().identifier().getNamespace().equals(this.modId) && !(holder.value() instanceof LiquidBlock));
     }
 }

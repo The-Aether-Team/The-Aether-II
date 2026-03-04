@@ -28,7 +28,7 @@ public record ClearAccessoriesPacket() implements CustomPacketPayload {
 
     public static void execute(ClearAccessoriesPacket payload, IPayloadContext context) {
         Player playerEntity = context.player();
-        if (playerEntity != null && playerEntity.getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
+        if (playerEntity != null && playerEntity.level().getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
             serverPlayer.getData(AetherIIDataAttachments.ACCESSORIES).clearContent();
         }
     }

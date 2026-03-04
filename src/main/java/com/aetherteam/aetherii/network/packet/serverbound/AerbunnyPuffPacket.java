@@ -35,7 +35,7 @@ public record AerbunnyPuffPacket(int entityID) implements CustomPacketPayload {
 
     public static void execute(AerbunnyPuffPacket payload, IPayloadContext context) {
         Player playerEntity = context.player();
-        if (playerEntity.getServer() != null && playerEntity.level().getEntity(payload.entityID()) instanceof Aerbunny aerbunny) {
+        if (playerEntity.level().getServer() != null && playerEntity.level().getEntity(payload.entityID()) instanceof Aerbunny aerbunny) {
             aerbunny.puff();
             aerbunny.level().broadcastEntityEvent(aerbunny, (byte) Aerbunny.PUFF_PARTICLE_EVENT);
         }

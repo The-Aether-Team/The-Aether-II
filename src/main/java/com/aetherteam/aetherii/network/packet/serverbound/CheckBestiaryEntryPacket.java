@@ -29,7 +29,7 @@ public record CheckBestiaryEntryPacket(EntityType<?> entityType) implements Cust
 
     public static void execute(CheckBestiaryEntryPacket payload, IPayloadContext context) {
         Player playerEntity = context.player();
-        if (playerEntity != null && playerEntity.getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
+        if (playerEntity != null && playerEntity.level().getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
             GuidebookDiscoveryAttachment attachment = serverPlayer.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
             attachment.getBestiaryEntries().forEach((entry) -> {
                 if (entry.getEntityType().value() == payload.entityType()) {
