@@ -61,7 +61,7 @@ public class OutpostTrackerAttachment {
             if (this.shouldRespawnAtOutpost()) {
                 OutpostTrackerAttachment.CampfirePosition closest = this.findClosestPositionTo(serverPlayer.level(), player.blockPosition());
                 if (closest != null) {
-                    ServerLevel serverLevel = serverPlayer.getServer().getLevel(closest.level());
+                    ServerLevel serverLevel = serverPlayer.level().getServer().getLevel(closest.level());
                     if (serverLevel != null) {
                         BlockPos.MutableBlockPos respawnPos = closest.pos().mutable();
                         BlockPos newRespawnPos = null;
@@ -72,7 +72,7 @@ public class OutpostTrackerAttachment {
                             }
                         }
                         if (newRespawnPos != null) {
-                            ServerPlayer.RespawnPosAngle posAngle = new ServerPlayer.RespawnPosAngle(new Vec3((double) newRespawnPos.getX() + 0.5, (double) newRespawnPos.getY() + 0.1, (double) newRespawnPos.getZ() + 0.5), 0);
+                            ServerPlayer.RespawnPosAngle posAngle = new ServerPlayer.RespawnPosAngle(new Vec3((double) newRespawnPos.getX() + 0.5, (double) newRespawnPos.getY() + 0.1, (double) newRespawnPos.getZ() + 0.5), 0, 0);
                             return new TeleportTransition(serverLevel, posAngle.position(), Vec3.ZERO, posAngle.yaw(), 0.0F, TeleportTransition.DO_NOTHING);
                         }
                     }

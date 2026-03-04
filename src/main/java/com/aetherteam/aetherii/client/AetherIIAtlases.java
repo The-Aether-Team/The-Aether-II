@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.state.properties.ChestType;
-import net.neoforged.neoforge.client.event.RegisterMaterialAtlasesEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;

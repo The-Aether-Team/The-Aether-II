@@ -232,11 +232,6 @@ public class AechorPlant extends PlantMob implements RangedAttackMob, PlantCutti
         return this.distanceTo(entity) <= 8.0 && super.hasLineOfSight(entity);
     }
 
-    @Override
-    protected boolean shouldDespawnInPeaceful() {
-        return true;
-    }
-
     /**
      * Makes Aechor Plants immune to Inebriation.
      *

@@ -16,8 +16,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -143,7 +143,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         output.putInt("ProcessingTimeTotal", this.processingTotalTime);
         ContainerHelper.saveAllItems(output, this.items);
         CompoundTag recipesUsedTag = new CompoundTag();
-        this.recipesUsed.forEach((key, integer) -> recipesUsedTag.putInt(key.location().toString(), integer));
+        this.recipesUsed.forEach((key, integer) -> recipesUsedTag.putInt(key.identifier().toString(), integer));
         output.store("RecipesUsed", CompoundTag.CODEC, recipesUsedTag);
     }
 

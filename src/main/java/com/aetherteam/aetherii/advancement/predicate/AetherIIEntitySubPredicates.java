@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.advancement.predicate;
 
 import com.aetherteam.aetherii.AetherII;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.advancements.critereon.EntitySubPredicate;
+import net.minecraft.advancements.criterion.EntitySubPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;

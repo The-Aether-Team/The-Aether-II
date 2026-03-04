@@ -58,7 +58,7 @@ public class AetherIIClientExtensions {
         @Override
         public HumanoidModel.ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
             if (entityLiving.getUsedItemHand() == hand && entityLiving.getItemInHand(hand).is(itemStack.getItem()) && entityLiving.isUsingItem()) {
-                return HumanoidModel.ArmPose.THROW_SPEAR;
+                return HumanoidModel.ArmPose.THROW_TRIDENT;
             }
             return IClientItemExtensions.super.getArmPose(entityLiving, hand, itemStack);
         }

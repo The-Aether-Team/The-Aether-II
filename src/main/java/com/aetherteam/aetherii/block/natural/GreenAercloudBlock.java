@@ -31,7 +31,7 @@ public class GreenAercloudBlock extends AercloudBlock {
      * @param entity The {@link Entity} in the block.
      */
     @Override
-    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean p_451772_) {
         if (!entity.isShiftKeyDown() && (!entity.isVehicle() || !(entity.getControllingPassenger() instanceof Player))) {
             entity.resetFallDistance();
             this.runAercloudEffect(state, level, pos, entity);
@@ -39,14 +39,14 @@ public class GreenAercloudBlock extends AercloudBlock {
                 entity.setOnGround(false);
             }
         } else {
-            super.entityInside(state, level, pos, entity, effectApplier);
+            super.entityInside(state, level, pos, entity, effectApplier, p_451772_);
         }
     }
 
     @Override
     public void runAercloudEffect(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (!(entity instanceof CloudSkiff)) {
-            entity.hasImpulse = true;
+            entity.needsSync = true;
             entity.setDeltaMovement(entity.getDeltaMovement().x(), -2.0, entity.getDeltaMovement().z());
         }
     }

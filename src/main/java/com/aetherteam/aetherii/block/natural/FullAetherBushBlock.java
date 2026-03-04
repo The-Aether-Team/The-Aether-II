@@ -93,7 +93,7 @@ public class FullAetherBushBlock extends AetherBushBlock implements SimpleWaterl
     }
 
     @Override
-    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean p_451772_) {
         if (entity instanceof LivingEntity livingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE && !livingEntity.level().isClientSide()) {
             livingEntity.addEffect(new MobEffectInstance(AetherIIEffects.NATURAL_CAMOUFLAGE, 1, 0, false, false, false));
             if (entity.getX() != entity.xOld && entity.getZ() != entity.zOld) {

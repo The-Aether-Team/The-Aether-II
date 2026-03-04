@@ -205,11 +205,6 @@ public class Swet extends Monster {
         return this.getWaterDamage() > 0.0F;
     }
 
-    @Override
-    protected boolean shouldDespawnInPeaceful() {
-        return true;
-    }
-
     /**
      * @return The {@link Float} scale of water damage the Swet has received.
      */

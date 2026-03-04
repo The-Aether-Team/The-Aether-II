@@ -24,9 +24,9 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.animal.golem.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.npc.villager.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.ValueInput;
@@ -148,8 +148,8 @@ public class BladeshroomHunter extends CellingMonster {
     }
 
     @Override
-    public boolean startRiding(Entity entity, boolean force) {
-        boolean flag = super.startRiding(entity, force);
+    public boolean startRiding(Entity entity, boolean force, boolean p_433558_) {
+        boolean flag = super.startRiding(entity, force, p_433558_);
         if (flag) {
             this.setState(State.IDLING);
         }

@@ -96,7 +96,7 @@ public interface MountableMob {
                         vehicle.push(0.0, 0.1 * (jumpBoost.getAmplifier() + 1), 0.0);
                     }
                 }
-                vehicle.hasImpulse = true;
+                vehicle.needsSync = true;
                 vehicle.onJump(vehicle);
             }
             // Handles step height.

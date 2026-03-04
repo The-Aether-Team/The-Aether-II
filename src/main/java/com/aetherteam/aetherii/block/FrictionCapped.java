@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.block;
 
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractBoatAccessor;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.vehicle.AbstractBoat;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,7 +16,7 @@ public interface FrictionCapped {
     default float getCappedFriction(@Nullable Entity entity, float defaultFriction) {
         if (entity != null) {
             Vec3 motion = entity.getDeltaMovement();
-            if (entity instanceof AbstractBoat boat) {
+            if (entity instanceof net.minecraft.world.entity.vehicle.boat.AbstractBoat boat) {
                 float deltaRotation = ((AbstractBoatAccessor) boat).aether$getDeltaRotation();
                 if (deltaRotation > 25.0F) {
                     ((AbstractBoatAccessor) boat).aether$setDeltaRotation(25.0F);
