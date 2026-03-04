@@ -83,13 +83,13 @@ public class AetherIILoot {
 
     private static void makeKirridColorMap(EnumMap<Kirrid.KirridColor, ResourceKey<LootTable>> map, String name) {
         for (Kirrid.KirridColor color : Kirrid.KirridColor.values()) {
-            map.put(color, register(name + "/" + color.name().toLowerCase()));
+            map.put(color, register(name + "/" + color.name().toLowerCase(Locale.ROOT)));
         }
     }
 
     private static void makeSheepuffColorMap(EnumMap<Sheepuff.SheepuffColor, ResourceKey<LootTable>> map, String name) {
         for (Sheepuff.SheepuffColor color : Sheepuff.SheepuffColor.values()) {
-            map.put(color, register(name + "/" + color.name().toLowerCase()));
+            map.put(color, register(name + "/" + color.name().toLowerCase(Locale.ROOT)));
         }
     }
 }

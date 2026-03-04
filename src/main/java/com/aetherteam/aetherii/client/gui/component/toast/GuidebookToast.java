@@ -15,6 +15,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 
+import java.util.Locale;
 import java.util.function.IntFunction;
 
 public class GuidebookToast implements Toast {
@@ -82,7 +83,7 @@ public class GuidebookToast implements Toast {
 
         @Override
         public String getSerializedName() {
-            return this.name().toLowerCase();
+            return this.name().toLowerCase(Locale.ROOT);
         }
     }
 
@@ -115,7 +116,7 @@ public class GuidebookToast implements Toast {
 
         @Override
         public String getSerializedName() {
-            return this.name().toLowerCase();
+            return this.name().toLowerCase(Locale.ROOT);
         }
     }
 }
