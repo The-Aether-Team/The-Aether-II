@@ -6,12 +6,13 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.PlayerModel;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.model.player.PlayerModel;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.state.CameraRenderState;
 
 import java.util.List;
 
@@ -20,7 +21,8 @@ public class SwetLatchLayer<T extends LivingEntityRenderState, M extends EntityM
         super(renderer);
     }
 
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T livingEntity, float netHeadYaw, float headPitch) {
+    @Override
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, T livingEntity, float v, float v1) {
         if (this.getParentModel() instanceof PlayerModel) {
             List<SwetRenderState> swets = livingEntity.getRenderDataOrDefault(AetherIIRenderers.SWET_KEY, List.of());
             for (int i = 0; i < swets.size(); i++) {
@@ -43,7 +45,9 @@ public class SwetLatchLayer<T extends LivingEntityRenderState, M extends EntityM
                 }
                 poseStack.scale(1 + scale, 1 + scale, 1 + scale);
                 EntityRenderer<?, ? super SwetRenderState> renderer = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(swet);
-                renderer.render(swet, poseStack, buffer, packedLight);
+
+                CameraRenderState camerarenderstate = Minecraft.getInstance().gameRenderer.getLevelRenderState().cameraRenderState;
+                renderer.submit(swet, poseStack, submitNodeCollector, camerarenderstate);
                 poseStack.popPose();
             }
         }

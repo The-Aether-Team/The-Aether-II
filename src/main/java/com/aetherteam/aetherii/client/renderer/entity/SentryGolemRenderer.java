@@ -6,8 +6,6 @@ import com.aetherteam.aetherii.client.renderer.entity.layers.SentryGolemLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.SentryGolemModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.SentryGolemRenderState;
 import com.aetherteam.aetherii.entity.monster.dungeon.SentryGolem;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
@@ -32,7 +30,7 @@ public class SentryGolemRenderer extends MobRenderer<SentryGolem, SentryGolemRen
     @Override
     public void extractRenderState(SentryGolem sentryGolem, SentryGolemRenderState renderState, float p_361157_) {
         super.extractRenderState(sentryGolem, renderState, p_361157_);
-        ArmedEntityRenderState.extractArmedEntityRenderState(sentryGolem, renderState, itemModelResolver);
+        ArmedEntityRenderState.extractArmedEntityRenderState(sentryGolem, renderState, itemModelResolver, p_361157_);
         renderState.ranged = sentryGolem.isRanged();
         renderState.checkSelfAnimationState.copyFrom(sentryGolem.checkSelfAnimationState);
         renderState.lookAroundAnimationState.copyFrom(sentryGolem.lookAroundAnimationState);
@@ -42,10 +40,6 @@ public class SentryGolemRenderer extends MobRenderer<SentryGolem, SentryGolemRen
         renderState.attackRangeReadyAnimationState.copyFrom(sentryGolem.attackRangeReadyAnimationState);
     }
 
-    @Override
-    public void render(SentryGolemRenderState renderState, PoseStack p_115311_, MultiBufferSource p_115312_, int p_115313_) {
-        super.render(renderState, p_115311_, p_115312_, p_115313_);
-    }
     @Override
     public Identifier getTextureLocation(SentryGolemRenderState golem) {
         return golem.ranged ? SENTRY_GOLEM_RANGED_TEXTURE : SENTRY_GOLEM_TEXTURE;

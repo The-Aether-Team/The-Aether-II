@@ -7,10 +7,8 @@ import com.aetherteam.aetherii.client.renderer.entity.AerbunnyRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.model.AerbunnyModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.AerbunnyRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
@@ -27,13 +25,12 @@ public class AerbunnyCollarLayer extends RenderLayer<AerbunnyRenderState, Aerbun
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, AerbunnyRenderState renderState, float netHeadYaw, float headPitch) {
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, AerbunnyRenderState renderState, float v, float v1) {
         if (renderState.tame) {
             int color = this.getColor(renderState);
             if (!renderState.isInvisible) {
                 this.model.setupAnim(renderState);
-                VertexConsumer vertexconsumer = buffer.getBuffer(AetherIIRenderTypes.entityDitherNoCull(COLLAR_LOCATION));
-                this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, LivingEntityRenderer.getOverlayCoords(renderState, 0.0F), color);
+                submitNodeCollector.submitModel(this.model, renderState, poseStack, AetherIIRenderTypes.entityDitherNoCull(COLLAR_LOCATION), packedLight, LivingEntityRenderer.getOverlayCoords(renderState, 0.0F), color, null);
             }
         }
     }
@@ -46,4 +43,5 @@ public class AerbunnyCollarLayer extends RenderLayer<AerbunnyRenderState, Aerbun
         }
         return color;
     }
+
 }

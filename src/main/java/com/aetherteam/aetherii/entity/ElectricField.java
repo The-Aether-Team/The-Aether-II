@@ -25,7 +25,7 @@ public class ElectricField extends AreaEffectCloud {
         super.tick();
         boolean flag = this.isWaiting();
         float f = this.getRadius();
-        if (this.level().isClientSide) {
+        if (this.level().isClientSide()) {
             if (flag && this.random.nextBoolean()) {
                 return;
             }

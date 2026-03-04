@@ -7,11 +7,13 @@ import com.aetherteam.aetherii.client.renderer.entity.state.MimicRenderState;
 import com.aetherteam.aetherii.entity.monster.dungeon.Mimic;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 
@@ -25,7 +27,7 @@ public class MimicRenderer extends MobRenderer<Mimic, MimicRenderState, MimicMod
         this.addLayer(new EyesLayer<>(this) {
             @Override
             public RenderType renderType() {
-                return RenderType.eyes(TEXTURE_EMISSIVE);
+                return RenderTypes.eyes(TEXTURE_EMISSIVE);
             }
         });
     }
@@ -43,19 +45,21 @@ public class MimicRenderer extends MobRenderer<Mimic, MimicRenderState, MimicMod
     }
 
     @Override
-    public void render(MimicRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-        super.render(renderState, poseStack, bufferSource, packedLight);
+    public void submit(MimicRenderState renderState, PoseStack poseStack, SubmitNodeCollector p_433768_, CameraRenderState cameraRenderState) {
+        super.submit(renderState, poseStack, p_433768_, cameraRenderState);
+
         if (renderState.deathTime <= 0.0F) {
             poseStack.pushPose();
             poseStack.scale(0.45F, 0.45F, 0.45F);
             poseStack.translate(0.0F, 2.25F, 0.0F);
-            poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-            PoseStack.Pose posestack$pose = poseStack.last();
-            VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderType.entityCutout(TEXTURE_EYE));
-            vertex(vertexconsumer, posestack$pose, packedLight, -0.5F, -0.5F, 0, 1);
-            vertex(vertexconsumer, posestack$pose, packedLight, 0.5F, -0.5F, 1, 1);
-            vertex(vertexconsumer, posestack$pose, packedLight, 0.5F, 0.5F, 1, 0);
-            vertex(vertexconsumer, posestack$pose, packedLight, -0.5F, 0.5F, 0, 0);
+            poseStack.mulPose(cameraRenderState.orientation);
+            p_433768_.submitCustomGeometry(poseStack, RenderTypes.entityCutout(TEXTURE_EYE), (pose, vertexConsumer) -> {
+
+                vertex(vertexConsumer, pose, renderState.lightCoords, -0.5F, -0.5F, 0, 1);
+                vertex(vertexConsumer, pose, renderState.lightCoords, 0.5F, -0.5F, 1, 1);
+                vertex(vertexConsumer, pose, renderState.lightCoords, 0.5F, 0.5F, 1, 0);
+                vertex(vertexConsumer, pose, renderState.lightCoords, -0.5F, 0.5F, 0, 0);
+            });
             poseStack.popPose();
         }
     }

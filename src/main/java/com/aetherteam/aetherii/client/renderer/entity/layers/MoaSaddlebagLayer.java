@@ -10,9 +10,7 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -33,17 +31,17 @@ public class MoaSaddlebagLayer extends RenderLayer<MoaRenderState, EntityModel<M
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, MoaRenderState moa, float netHeadYaw, float headPitch) {
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, MoaRenderState moa, float v, float v1) {
         if (!moa.isInvisible) {
             float opacity = moa.opacity;
             int color = ARGB.colorFromFloat(opacity, 1.0F, 1.0F, 1.0F);
 
             if (moa.saddlebag.is(AetherIIItems.MOA_SADDLEBAG)) {
                 this.saddlebag.setupAnim(moa);
-                this.saddlebag.renderToBuffer(poseStack, buffer.getBuffer(AetherIIRenderTypes.entityDitherNoCull(SADDLEBAG_TEXTURE)), packedLight, OverlayTexture.NO_OVERLAY, color);
+                submitNodeCollector.submitModel(this.saddlebag, moa, poseStack, AetherIIRenderTypes.entityDitherNoCull(SADDLEBAG_TEXTURE), packedLight, OverlayTexture.NO_OVERLAY, color, null);
             } else if (moa.saddlebag.is(AetherIIItems.LARGE_MOA_SADDLEBAG)) {
                 this.largeSaddlebag.setupAnim(moa);
-                this.largeSaddlebag.renderToBuffer(poseStack, buffer.getBuffer(AetherIIRenderTypes.entityDitherNoCull(LARGE_SADDLEBAG_TEXTURE)), packedLight, OverlayTexture.NO_OVERLAY, color);
+                submitNodeCollector.submitModel(this.largeSaddlebag, moa, poseStack, AetherIIRenderTypes.entityDitherNoCull(LARGE_SADDLEBAG_TEXTURE), packedLight, OverlayTexture.NO_OVERLAY, color, null);
             }
         }
     }

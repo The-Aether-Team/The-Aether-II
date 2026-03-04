@@ -4,44 +4,44 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.model.ArrowModel;
 import net.minecraft.client.model.Model;
-import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.renderer.LightTexture;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.model.object.projectile.ArrowModel;
+import net.minecraft.client.model.player.PlayerModel;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.entity.state.PlayerRenderState;
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
+import org.jetbrains.annotations.UnknownNullability;
 
 import java.util.List;
 
-public class ProjectilesStuckLayer<M extends PlayerModel> extends RenderLayer<PlayerRenderState, M> {
+public class ProjectilesStuckLayer<M extends PlayerModel> extends RenderLayer<AvatarRenderState, M> {
     private final Model model;
 
-    public ProjectilesStuckLayer(LivingEntityRenderer<?, PlayerRenderState, M> renderer, EntityRendererProvider.Context context) {
+    public ProjectilesStuckLayer(LivingEntityRenderer<?, AvatarRenderState, M> renderer, EntityRendererProvider.Context context) {
         super(renderer);
         this.model = new ArrowModel(context.bakeLayer(ModelLayers.ARROW));
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, PlayerRenderState renderState, float netHeadYaw, float headPitch) {
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, AvatarRenderState renderState, float v, float v1) {
         List<EntityType<?>> list = renderState.getRenderData(AetherIIRenderers.STUCK_PROJECTILES_KEY);
         if (list != null && !list.isEmpty()) {
             RandomSource random = RandomSource.create(renderState.id);
             for (EntityType<?> type : list) {
-                 key = BuiltInRegistries.ENTITY_TYPE.getKey(type);
-                 texture = Identifier.fromNamespaceAndPath(key.getNamespace(), "textures/entity/projectile/" + key.getPath() + ".png");
-                 emissive = null;
+                Identifier key = BuiltInRegistries.ENTITY_TYPE.getKey(type);
+                Identifier texture = Identifier.fromNamespaceAndPath(key.getNamespace(), "textures/entity/projectile/" + key.getPath() + ".png");
+                Identifier emissive = null;
                 if (type.is(AetherIITags.Entities.STICKABLE_PROJECTILES_EMISSIVE)) {
                     emissive = Identifier.fromNamespaceAndPath(key.getNamespace(), "textures/entity/projectile/" + key.getPath() + "_emissive.png");
                 }
@@ -62,21 +62,21 @@ public class ProjectilesStuckLayer<M extends PlayerModel> extends RenderLayer<Pl
                 }
 
                 poseStack.translate(Mth.lerp(f, cube.minX, cube.maxX) / 16.0F, Mth.lerp(f1, cube.minY, cube.maxY) / 16.0F, Mth.lerp(f2, cube.minZ, cube.maxZ) / 16.0F);
-                this.renderStuckItem(poseStack, buffer, packedLight, -(f * 2.0F - 1.0F), -(f1 * 2.0F - 1.0F), -(f2 * 2.0F - 1.0F), texture, emissive);
+                this.renderStuckItem(poseStack, submitNodeCollector, renderState, i, -(f * 2.0F - 1.0F), -(f1 * 2.0F - 1.0F), -(f2 * 2.0F - 1.0F), texture, emissive);
                 poseStack.popPose();
             }
         }
     }
 
-    private void renderStuckItem(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, float x, float y, float z, Identifier texture, Identifier emissive) {
+    private void renderStuckItem(PoseStack poseStack, @UnknownNullability SubmitNodeCollector submitNodeCollector, AvatarRenderState renderState, int packedLight, float x, float y, float z, Identifier texture, Identifier emissive) {
         float f = Mth.sqrt(x * x + z * z);
         float f1 = (float) (Math.atan2(x, z) * 180.0F / Math.PI);
         float f2 = (float) (Math.atan2(y, f) * 180.0F / Math.PI);
         poseStack.mulPose(Axis.YP.rotationDegrees(f1 - 90.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(f2));
-        this.model.renderToBuffer(poseStack, bufferSource.getBuffer(this.model.renderType(texture)), packedLight, OverlayTexture.NO_OVERLAY);
+        submitNodeCollector.submitModel(this.model, renderState, poseStack, this.model.renderType(texture), packedLight, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
         if (emissive != null) {
-            this.model.renderToBuffer(poseStack, bufferSource.getBuffer(RenderType.eyes(emissive)), LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
+            submitNodeCollector.submitModel(this.model, renderState, poseStack, RenderTypes.eyes(emissive), packedLight, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
         }
     }
 

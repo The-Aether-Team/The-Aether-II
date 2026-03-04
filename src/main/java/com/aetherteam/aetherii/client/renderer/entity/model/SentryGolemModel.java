@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 
-public class SentryGolemModel extends EntityModel<SentryGolemRenderState> implements ArmedModel {
+public class SentryGolemModel extends EntityModel<SentryGolemRenderState> implements ArmedModel<SentryGolemRenderState> {
     private final KeyframeAnimation runAnimation;
     private final KeyframeAnimation walkAnimation;
     private final KeyframeAnimation idleAnimation;
@@ -143,7 +143,7 @@ public class SentryGolemModel extends EntityModel<SentryGolemRenderState> implem
     }
 
     @Override
-    public void translateToHand(HumanoidArm side, PoseStack poseStack) {
+    public void translateToHand(SentryGolemRenderState state, HumanoidArm side, PoseStack poseStack) {
         this.body.translateAndRotate(poseStack);
         this.torso.translateAndRotate(poseStack);
         this.getArm(side).translateAndRotate(poseStack);

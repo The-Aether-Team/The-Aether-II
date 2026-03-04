@@ -190,10 +190,6 @@ public class DetonationSentry extends PathfinderMob {
         return AetherIISoundEvents.ENTITY_DETONATION_SENTRY_AMBIENT.get();
     }
 
-    @Override
-    protected boolean shouldDespawnInPeaceful() {
-        return true;
-    }
 
     @Override
     public boolean shouldDropExperience() {
@@ -201,7 +197,7 @@ public class DetonationSentry extends PathfinderMob {
     }
 
     @Override
-    protected boolean shouldDropLoot() {
+    protected boolean shouldDropLoot(ServerLevel p_434748_) {
         return true;
     }
 

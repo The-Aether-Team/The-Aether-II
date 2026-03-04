@@ -146,11 +146,6 @@ public class Zephyr extends Mob implements Enemy {
         return true;
     }
 
-    @Override
-    protected boolean shouldDespawnInPeaceful() {
-        return true;
-    }
-
     public int getProjectileChargeTime() {
         return this.getEntityData().get(DATA_PROJECTILE_CHARGE_ID);
     }

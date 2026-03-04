@@ -1,17 +1,18 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.client.renderer.entity.state.EdwardRenderState;
-import com.aetherteam.aetherii.entity.npc.outpost.Edward;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.*;
+import net.minecraft.client.model.AnimationUtils;
+import net.minecraft.client.model.ArmedModel;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 
-public class EdwardModel extends EntityModel<EdwardRenderState> implements ArmedModel, HeadedModel {
+public class EdwardModel extends EntityModel<EdwardRenderState> implements ArmedModel<EdwardRenderState>, HeadedModel {
     private final ModelPart root;
     private final ModelPart waist;
     private final ModelPart abdomen;
@@ -199,7 +200,7 @@ public class EdwardModel extends EntityModel<EdwardRenderState> implements Armed
     }
 
     @Override
-    public void translateToHand(HumanoidArm side, PoseStack poseStack) {
+    public void translateToHand(EdwardRenderState edwardRenderState, HumanoidArm humanoidArm, PoseStack poseStack) {
 
     }
 }

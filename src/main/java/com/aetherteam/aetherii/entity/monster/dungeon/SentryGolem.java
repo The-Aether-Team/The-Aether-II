@@ -311,10 +311,6 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
         return AetherIISoundEvents.ENTITY_SENTRY_GOLEM_DEATH.get();
     }
 
-    @Override
-    protected boolean shouldDespawnInPeaceful() {
-        return true;
-    }
 
     @Override
     public boolean shouldDropExperience() {
@@ -322,7 +318,7 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
     }
 
     @Override
-    protected boolean shouldDropLoot() {
+    protected boolean shouldDropLoot(ServerLevel p_433619_) {
         return true;
     }
 

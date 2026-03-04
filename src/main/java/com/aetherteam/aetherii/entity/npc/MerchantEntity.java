@@ -103,7 +103,7 @@ public abstract class MerchantEntity extends NpcEntity implements Merchant {
 
     @Override
     public void notifyTradeUpdated(ItemStack stack) {
-        if (!this.level().isClientSide && this.ambientSoundTime > -this.getAmbientSoundInterval() + 20) {
+        if (!this.level().isClientSide() && this.ambientSoundTime > -this.getAmbientSoundInterval() + 20) {
             this.ambientSoundTime = -this.getAmbientSoundInterval();
             this.makeSound(this.getTradeUpdatedSound(!stack.isEmpty()));
         }
@@ -135,7 +135,7 @@ public abstract class MerchantEntity extends NpcEntity implements Merchant {
 
     @Override
     public boolean stillValid(Player player) {
-        return this.getTradingPlayer() == player && this.isAlive() && player.canInteractWithEntity(this, 4.0F);
+        return this.getTradingPlayer() == player && this.isAlive() && player.isWithinEntityInteractionRange(this, 4.0F);
     }
 
     @Override

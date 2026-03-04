@@ -5,32 +5,41 @@ import com.aetherteam.aetherii.entity.projectile.LassoLoop;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 
 public class LassoLoopRenderer extends EntityRenderer<LassoLoop, EntityRenderState> {
     private static final Identifier PROJECTILE_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/lasso_loop.png");
-    private static final RenderType RENDER_TYPE = RenderType.entityCutoutNoCull(PROJECTILE_TEXTURE);
+    private static final RenderType RENDER_TYPE = RenderTypes.entityCutoutNoCull(PROJECTILE_TEXTURE);
 
     public LassoLoopRenderer(EntityRendererProvider.Context context) {
         super(context);
     }
 
     @Override
-    public void render(EntityRenderState state, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    public void submit(EntityRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
         poseStack.pushPose();
-        poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-        PoseStack.Pose pose = poseStack.last();
-        VertexConsumer vertexconsumer = buffer.getBuffer(RENDER_TYPE);
-        vertex(vertexconsumer, pose, packedLight, 0.0F, 0, 0, 1);
-        vertex(vertexconsumer, pose, packedLight, 1.0F, 0, 1, 1);
-        vertex(vertexconsumer, pose, packedLight, 1.0F, 1, 1, 0);
-        vertex(vertexconsumer, pose, packedLight, 0.0F, 1, 0, 0);
+        poseStack.mulPose(cameraRenderState.orientation);
+        submitNodeCollector.submitCustomGeometry(poseStack, RENDER_TYPE, (pose, vertexConsumer) -> {
+            vertex(vertexConsumer, pose, state.lightCoords, 0.0F, 0, 0, 1);
+            vertex(vertexConsumer, pose, state.lightCoords, 1.0F, 0, 1, 1);
+            vertex(vertexConsumer, pose, state.lightCoords, 1.0F, 1, 1, 0);
+            vertex(vertexConsumer, pose, state.lightCoords, 0.0F, 1, 0, 0);
+        });
         poseStack.popPose();
+
+        super.submit(state, poseStack, submitNodeCollector, cameraRenderState);
+    }
+
+    @Override
+    public void render(EntityRenderState state, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         super.render(state, poseStack, buffer, packedLight);
     }
 

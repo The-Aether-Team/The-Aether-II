@@ -3,11 +3,9 @@ package com.aetherteam.aetherii.item.equipment.tools.abilities;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.AbilityBehaviorAttachment;
-import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -47,7 +45,7 @@ public interface GravititeTool {
                             level.addFreshEntity(floatingBlockEntity);
                             level.removeBlockEntity(blockPos);
                             level.removeBlock(blockPos, false);
-                            itemStack.hurtAndBreak(4, player, LivingEntity.getSlotForHand(hand));
+                            itemStack.hurtAndBreak(4, player, hand);
                         } else {
                             player.swing(hand);
                         }

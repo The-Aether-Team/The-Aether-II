@@ -22,12 +22,12 @@ public record DamageTypeParticlePacket(int entityID, SimpleParticleType particle
 
     public void write(RegistryFriendlyByteBuf buf) {
         buf.writeInt(this.entityID());
-        buf.writeResourceLocation(BuiltInRegistries.PARTICLE_TYPE.getKey(this.particleType()));
+        buf.writeIdentifier(BuiltInRegistries.PARTICLE_TYPE.getKey(this.particleType()));
     }
 
     public static DamageTypeParticlePacket decode(RegistryFriendlyByteBuf buf) {
         int entityID = buf.readInt();
-        SimpleParticleType particleType = (SimpleParticleType) BuiltInRegistries.PARTICLE_TYPE.getValue(buf.readResourceLocation());
+        SimpleParticleType particleType = (SimpleParticleType) BuiltInRegistries.PARTICLE_TYPE.getValue(buf.readIdentifier());
         return new DamageTypeParticlePacket(entityID, particleType);
     }
 
