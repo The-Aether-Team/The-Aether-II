@@ -24,6 +24,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Locale;
+
 public class AetherTallGrassBlock extends TallGrassBlock implements Snowable {
     protected static final VoxelShape SHORT_SHAPE = Block.box(2.0, 0.0, 2.0, 14.0, 7.0, 14.0);
     protected static final VoxelShape MEDIUM_SHAPE = Block.box(2.0, 0.0, 2.0, 14.0, 10.0, 14.0);
@@ -104,7 +106,7 @@ public class AetherTallGrassBlock extends TallGrassBlock implements Snowable {
 
         @Override
         public String getSerializedName() {
-            return this.name().toLowerCase();
+            return this.name().toLowerCase(Locale.ROOT);
         }
     }
 }

@@ -50,6 +50,6 @@ public final class EquipmentUtil {
     }
 
     public static ResourceLocation getSlotModifierId(ResourceLocation base, ItemStack itemStack, int number, String slotName) {
-        return ResourceLocation.parse(itemStack.getItemHolder().getRegisteredName() + "_" + base.getPath() + "_" + number + "_" + slotName.toLowerCase());
+        return ResourceLocation.parse(itemStack.getItemHolder().getRegisteredName() + "_" + base.getPath() + "_" + number + "_" + slotName.toLowerCase(Locale.ROOT));
     }
 }
