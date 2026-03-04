@@ -5,12 +5,11 @@ import com.aetherteam.aetherii.client.renderer.entity.model.SheepuffModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.SheepuffRenderState;
 import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 
@@ -25,19 +24,18 @@ public class SheepuffWoolLayer extends RenderLayer<SheepuffRenderState, Sheepuff
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, SheepuffRenderState sheepuff, float netHeadYaw, float headPitch) {
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, SheepuffRenderState sheepuff, float v, float v1) {
         if (!sheepuff.isSheared) {
             SheepuffModel<SheepuffRenderState> entitymodel = this.getParentModel();
             if (sheepuff.isInvisible) {
-                if (sheepuff.appearsGlowing) {
+                if (sheepuff.appearsGlowing()) {
                     entitymodel.setupAnim(sheepuff);
-                    VertexConsumer vertexconsumer = buffer.getBuffer(RenderType.outline(SHEEPUFF_WOOL_TEXTURE));
-                    entitymodel.renderToBuffer(poseStack, vertexconsumer, packedLight, LivingEntityRenderer.getOverlayCoords(sheepuff, 0.0F), -16777216);
+                    submitNodeCollector.submitModel(entitymodel, sheepuff, poseStack, RenderTypes.outline(SHEEPUFF_WOOL_TEXTURE), packedLight, LivingEntityRenderer.getOverlayCoords(sheepuff, 0.0F), -16777216, null);
                 }
             } else {
                 int i = Sheepuff.getDecimalColor(sheepuff.woolColor);
 
-                coloredCutoutModelCopyLayerRender(entitymodel, SHEEPUFF_WOOL_TEXTURE, poseStack, buffer, packedLight, sheepuff, ARGB.opaque(i));
+                coloredCutoutModelCopyLayerRender(entitymodel, SHEEPUFF_WOOL_TEXTURE, poseStack, submitNodeCollector, packedLight, sheepuff, ARGB.opaque(i), 0);
             }
         }
     }

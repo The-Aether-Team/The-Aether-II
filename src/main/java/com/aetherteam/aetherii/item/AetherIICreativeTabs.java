@@ -906,7 +906,7 @@ public class AetherIICreativeTabs {
             }).build());
 
     public static ItemStack getMoaBook() {
-        final String selector = "entity @e[type=" + AetherIIEntities.MOA.location() + ",limit=1,sort=nearest] ";
+        final String selector = "entity @e[type=" + AetherIIEntities.MOA.identifier() + ",limit=1,sort=nearest] ";
         final String dataMerge = "data merge " + selector;
         final String dataRemove = "data remove " + selector;
 

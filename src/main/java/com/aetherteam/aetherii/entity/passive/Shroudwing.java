@@ -71,7 +71,7 @@ public class Shroudwing extends Insect {
             this.fullyFlyTick = 21;
         }
 
-        if (!this.level().isClientSide) {
+        if (!this.level().isClientSide()) {
             this.getNavigation().stop();
         }
     }

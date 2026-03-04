@@ -43,7 +43,7 @@ public class SolidCanisterItem extends BlockItem implements DispensibleContainer
     @Override
     public boolean emptyContents(@org.jetbrains.annotations.Nullable LivingEntity livingEntity, Level level, BlockPos pos, @org.jetbrains.annotations.Nullable BlockHitResult blockHitResult) {
         if (level.isInWorldBounds(pos) && level.isEmptyBlock(pos)) {
-            if (!level.isClientSide) {
+            if (!level.isClientSide()) {
                 level.setBlock(pos, this.getBlock().defaultBlockState(), 3);
             }
 

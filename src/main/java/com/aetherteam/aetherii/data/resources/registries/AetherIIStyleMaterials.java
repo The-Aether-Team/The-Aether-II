@@ -9,8 +9,8 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 
 public class AetherIIStyleMaterials {
@@ -33,7 +33,7 @@ public class AetherIIStyleMaterials {
     }
 
     public static void register(BootstrapContext<StyleMaterial> context, Item item, ResourceKey<StyleMaterial> key) {
-        StyleMaterial design = new StyleMaterial(key.location(), BuiltInRegistries.ITEM.wrapAsHolder(item), Component.empty());
+        StyleMaterial design = new StyleMaterial(key.identifier(), BuiltInRegistries.ITEM.wrapAsHolder(item), Component.empty());
         context.register(key, design);
     }
 

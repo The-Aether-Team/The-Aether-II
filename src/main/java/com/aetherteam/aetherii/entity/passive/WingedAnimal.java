@@ -43,9 +43,9 @@ public abstract class WingedAnimal extends MountableAnimal {
         if (gravity != null) {
             double fallSpeed = Math.min(gravity.getValue() * -2.0, -0.1); // Entity isn't allowed to fall too slowly from gravity.
             if (this.getDeltaMovement().y() < fallSpeed && !this.playerTriedToCrouch()) {
-                if (this.slowFall == 0 || this.hasImpulse) {
+                if (this.slowFall == 0 || this.needsSync) {
                     this.slowFall = this.getDeltaMovement().y();
-                    this.hasImpulse = false;
+                    this.needsSync = false;
                 }
                 this.slowFall = Mth.lerp(0.1, this.slowFall, fallSpeed);
 

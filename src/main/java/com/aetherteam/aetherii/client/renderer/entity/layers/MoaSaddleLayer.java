@@ -8,7 +8,7 @@ import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -28,7 +28,7 @@ public class MoaSaddleLayer extends RenderLayer<MoaRenderState, EntityModel<MoaR
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, MoaRenderState moa, float netHeadYaw, float headPitch) {
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, MoaRenderState moa, float v, float v1) {
         if (!moa.isInvisible && moa.isSaddled()) {
             ItemStack saddle = moa.saddle;
             int colorRaw = IClientItemExtensions.of(saddle).getDefaultDyeColor(saddle);
@@ -37,8 +37,8 @@ public class MoaSaddleLayer extends RenderLayer<MoaRenderState, EntityModel<MoaR
             int overlayColor = ARGB.colorFromFloat(opacity, 1.0F, 1.0F, 1.0F);
 
             this.saddle.setupAnim(moa);
-            this.saddle.renderToBuffer(poseStack, buffer.getBuffer(AetherIIRenderTypes.entityDitherNoCull(SADDLE_TEXTURE)), packedLight, OverlayTexture.NO_OVERLAY, baseColor);
-            this.saddle.renderToBuffer(poseStack, buffer.getBuffer(AetherIIRenderTypes.entityDitherNoCull(SADDLE_OVERLAY_TEXTURE)), packedLight, OverlayTexture.NO_OVERLAY, overlayColor);
+            submitNodeCollector.submitModel(this.saddle, moa, poseStack, AetherIIRenderTypes.entityDitherNoCull(SADDLE_TEXTURE), moa.lightCoords, OverlayTexture.NO_OVERLAY, moa.outlineColor, null);
+            submitNodeCollector.submitModel(this.saddle, moa, poseStack, AetherIIRenderTypes.entityDitherNoCull(SADDLE_OVERLAY_TEXTURE), moa.lightCoords, OverlayTexture.NO_OVERLAY, moa.outlineColor, null);
         }
     }
 }

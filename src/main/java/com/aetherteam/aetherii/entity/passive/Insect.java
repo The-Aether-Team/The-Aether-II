@@ -142,7 +142,7 @@ public class Insect extends PathfinderMob {
     @Override
     public void aiStep() {
         super.aiStep();
-        if (!this.level().isClientSide) {
+        if (!this.level().isClientSide()) {
             if (this.needNextAction <= 0) {
                 if (!this.isNeedRest() && !this.isRest()) {
                     this.makeActionCooldown();

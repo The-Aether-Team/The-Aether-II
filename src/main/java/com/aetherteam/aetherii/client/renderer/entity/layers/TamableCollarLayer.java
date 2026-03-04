@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.client.renderer.entity.layers;
 import com.aetherteam.aetherii.client.renderer.entity.state.TamableRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.Identifier;
@@ -18,10 +18,11 @@ public abstract class TamableCollarLayer<S extends TamableRenderState, M extends
         this.model = model;
     }
 
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, S livingEntity, float netHeadYaw, float headPitch) {
+    @Override
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, S livingEntity, float v, float v1) {
         if (livingEntity.tame) {
             int color = this.getColor(livingEntity);
-            coloredCutoutModelCopyLayerRender(this.model, this.collarLocation, poseStack, buffer, packedLight, livingEntity, color);
+            coloredCutoutModelCopyLayerRender(this.model, this.collarLocation, poseStack, submitNodeCollector, packedLight, livingEntity, color, 1);
         }
     }
 

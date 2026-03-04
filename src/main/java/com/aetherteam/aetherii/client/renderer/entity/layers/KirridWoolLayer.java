@@ -5,14 +5,13 @@ import com.aetherteam.aetherii.client.renderer.entity.state.KirridRenderState;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 
@@ -29,19 +28,19 @@ public class KirridWoolLayer extends RenderLayer<KirridRenderState, EntityModel<
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, KirridRenderState kirrid, float netHeadYaw, float headPitch) {
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, KirridRenderState kirrid, float v, float v1) {
         if (kirrid.isInvisible) {
             Minecraft minecraft = Minecraft.getInstance();
-            boolean flag = kirrid.appearsGlowing;
+            boolean flag = kirrid.appearsGlowing();
             if (flag) {
                 this.getParentModel().setupAnim(kirrid);
-                VertexConsumer consumer = bufferSource.getBuffer(RenderType.outline(this.getTexture(kirrid)));
-                this.getParentModel().renderToBuffer(poseStack, consumer, packedLight, LivingEntityRenderer.getOverlayCoords(kirrid, 0.0F), -16777216);
+
+                submitNodeCollector.submitModel(this.getParentModel(), kirrid, poseStack, RenderTypes.outline(this.getTexture(kirrid)), packedLight, LivingEntityRenderer.getOverlayCoords(kirrid, 0.0F), -16777216, null);
             }
         } else {
             kirrid.woolColor.ifPresent((woolColor) -> {
                 int i = Kirrid.getDecimalColor(woolColor);
-                coloredCutoutModelCopyLayerRender(this.getParentModel(), getTexture(kirrid), poseStack, bufferSource, packedLight, kirrid, ARGB.opaque(i));
+                coloredCutoutModelCopyLayerRender(this.getParentModel(), getTexture(kirrid), poseStack, submitNodeCollector, packedLight, kirrid, ARGB.opaque(i), 0);
             });
         }
     }

@@ -53,7 +53,7 @@ public class ArkeniumCanisterItem extends BucketItem {
                             });
                             level.gameEvent(player, GameEvent.FLUID_PICKUP, blockpos);
                             ItemStack itemstack2 = ItemUtils.createFilledResult(itemstack, player, itemstack3);
-                            if (!level.isClientSide) {
+                            if (!level.isClientSide()) {
                                 CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer)player, itemstack3);
                             }
 

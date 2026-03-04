@@ -68,7 +68,7 @@ public interface GravititeArmor {
                     float f1 = player.getYRot() * (float) (Math.PI / 180.0);
                     player.addDeltaMovement(new Vec3((double) (-Mth.sin(f1)) * 0.2, 0.0, (double) Mth.cos(f1) * 0.2));
                 }
-                player.hasImpulse = true;
+                player.needsSync = true;
             }
             accessor.aether$setNoJumpDelay(10);
             attachment.setGravititeJumpUsed(true);

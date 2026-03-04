@@ -3,13 +3,13 @@ package com.aetherteam.aetherii.client.renderer.entity.layers;
 import com.aetherteam.aetherii.client.renderer.entity.model.SwetModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 
 public abstract class SwetGelLayer extends RenderLayer<SwetRenderState, SwetModel> {
@@ -21,14 +21,14 @@ public abstract class SwetGelLayer extends RenderLayer<SwetRenderState, SwetMode
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, SwetRenderState livingEntity, float netHeadYaw, float headPitch) {
-        boolean flag = livingEntity.appearsGlowing && livingEntity.isInvisible;
-        if (!livingEntity.isInvisible || flag) {
-            VertexConsumer vertexconsumer = flag
-                    ? bufferSource.getBuffer(RenderType.outline(this.getTextureLocation(livingEntity)))
-                    : bufferSource.getBuffer(RenderType.entityTranslucent(this.getTextureLocation(livingEntity)));
-            this.model.setupAnim(livingEntity);
-            this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, LivingEntityRenderer.getOverlayCoords(livingEntity, 0.0F));
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, SwetRenderState swetRenderState, float v, float v1) {
+        boolean flag = swetRenderState.appearsGlowing() && swetRenderState.isInvisible;
+        if (!swetRenderState.isInvisible || flag) {
+            this.model.setupAnim(swetRenderState);
+            RenderType renderType = flag
+                    ? RenderTypes.outline(this.getTextureLocation(swetRenderState))
+                    : RenderTypes.entityTranslucent(this.getTextureLocation(swetRenderState));
+            submitNodeCollector.submitModel(this.model, swetRenderState, poseStack, renderType, swetRenderState.lightCoords, OverlayTexture.NO_OVERLAY, swetRenderState.outlineColor, null);
         }
     }
 

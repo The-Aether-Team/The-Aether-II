@@ -6,7 +6,7 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -73,7 +73,7 @@ public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
         Advancement.Builder builder = output.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(builder::addCriterion);
         HourglassRestoringRecipe recipe = new HourglassRestoringRecipe(Objects.requireNonNullElse(this.group, ""), this.bookCategory, this.ingredient, this.results, this.experience, this.processingTime);
-        output.accept(id, recipe, builder.build(id.location().withPrefix("recipes/" + this.category.getFolderName() + "/")));
+        output.accept(id, recipe, builder.build(id.identifier().withPrefix("recipes/" + this.category.getFolderName() + "/")));
     }
 
     private void ensureValid(ResourceKey<Recipe<?>> id) {

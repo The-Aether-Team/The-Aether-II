@@ -3,15 +3,15 @@ package com.aetherteam.aetherii.client.renderer.entity;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.projectile.VenomousDart;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.minecraft.client.model.ArrowModel;
 import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.model.object.projectile.ArrowModel;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.ArrowRenderState;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 
@@ -27,16 +27,15 @@ public class VenomousDartRenderer extends ArrowRenderer<VenomousDart, ArrowRende
     }
 
     @Override
-    public void render(ArrowRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int partialTick) {
+    public void submit(ArrowRenderState renderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
         poseStack.pushPose();
         poseStack.mulPose(Axis.YP.rotationDegrees(renderState.yRot - 90.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(renderState.xRot));
-        VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderType.eyes(this.getEmissiveTextureLocation(renderState)));
-        this.model.setupAnim(renderState);
-        this.model.renderToBuffer(poseStack, vertexconsumer, partialTick, OverlayTexture.NO_OVERLAY);
+        submitNodeCollector.submitModel(this.model, renderState, poseStack, RenderTypes.eyes(this.getEmissiveTextureLocation(renderState)), renderState.lightCoords, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
         poseStack.popPose();
-        super.render(renderState, poseStack, bufferSource, partialTick);
+        super.submit(renderState, poseStack, submitNodeCollector, cameraRenderState);
     }
+
 
     @Override
     public ArrowRenderState createRenderState() {

@@ -5,10 +5,12 @@ import com.aetherteam.aetherii.entity.projectile.TempestThunderball;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
@@ -22,16 +24,27 @@ public class TempestThunderballRenderer extends EntityRenderer<TempestThunderbal
     }
 
     @Override
-    public void render(EntityRenderState thunderball, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    public void submit(EntityRenderState thunderball, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
         poseStack.pushPose();
-        poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-        PoseStack.Pose pose = poseStack.last();
-        VertexConsumer vertexconsumer = buffer.getBuffer(RENDER_TYPE);
-        vertex(vertexconsumer, pose, packedLight, 0.0F, 0, 0, 1);
-        vertex(vertexconsumer, pose, packedLight, 1.0F, 0, 1, 1);
-        vertex(vertexconsumer, pose, packedLight, 1.0F, 1, 1, 0);
-        vertex(vertexconsumer, pose, packedLight, 0.0F, 1, 0, 0);
+        poseStack.mulPose(cameraRenderState.orientation);
+        submitNodeCollector.submitCustomGeometry(poseStack, RENDER_TYPE, (pose, vertexConsumer) -> {
+            poseStack.pushPose();
+            poseStack.translate(0.0F, 1.0F, 0.0F);
+
+            vertex(vertexConsumer, pose, thunderball.lightCoords, 0.0F, 0, 0, 1);
+            vertex(vertexConsumer, pose, thunderball.lightCoords, 1.0F, 0, 1, 1);
+            vertex(vertexConsumer, pose, thunderball.lightCoords, 1.0F, 1, 1, 0);
+            vertex(vertexConsumer, pose, thunderball.lightCoords, 0.0F, 1, 0, 0);
+        });
         poseStack.popPose();
+
+
+        super.submit(thunderball, poseStack, submitNodeCollector, cameraRenderState);
+    }
+
+    @Override
+    public void render(EntityRenderState thunderball, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+
         super.render(thunderball, poseStack, buffer, packedLight);
     }
 

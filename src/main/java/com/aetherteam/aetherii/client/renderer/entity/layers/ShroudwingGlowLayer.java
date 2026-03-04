@@ -3,11 +3,11 @@ package com.aetherteam.aetherii.client.renderer.entity.layers;
 import com.aetherteam.aetherii.client.renderer.entity.model.ShroudwingModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.ShroudwingRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 
@@ -17,12 +17,11 @@ public class ShroudwingGlowLayer extends RenderLayer<ShroudwingRenderState, Shro
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, ShroudwingRenderState shroudwingRenderState, float v, float v1) {
-         emissiveTexture = shroudwingRenderState.emissiveTexture;
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, ShroudwingRenderState shroudwingRenderState, float v, float v1) {
+        Identifier emissiveTexture = shroudwingRenderState.emissiveTexture;
         if (emissiveTexture != null) {
-            RenderType renderType = RenderType.eyes(emissiveTexture);
-            VertexConsumer vertexConsumer = multiBufferSource.getBuffer(renderType);
-            this.getParentModel().renderToBuffer(poseStack, vertexConsumer, i, OverlayTexture.NO_OVERLAY);
+            RenderType renderType = RenderTypes.eyes(emissiveTexture);
+            submitNodeCollector.order(1).submitModel(this.getParentModel(), shroudwingRenderState, poseStack, renderType, 15728640, OverlayTexture.NO_OVERLAY, -1, null, shroudwingRenderState.outlineColor, null);
         }
     }
 }

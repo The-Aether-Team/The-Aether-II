@@ -1,13 +1,11 @@
 package com.aetherteam.aetherii.item.miscellaneous;
 
-import com.google.common.collect.Maps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
@@ -19,15 +17,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Map;
 import java.util.Objects;
 
 public class SliderSpawnEggItem extends SpawnEggItem {
-    private static final Map<EntityType<? extends Mob>, SpawnEggItem> BY_ID = Maps.newIdentityHashMap();
 
-    public SliderSpawnEggItem(EntityType<? extends Mob> defaultType, Item.Properties properties) {
-        super(defaultType, properties);
-        BY_ID.put(defaultType, this);
+    public SliderSpawnEggItem(Item.Properties properties) {
+        super(properties);
     }
 
     /**
@@ -48,7 +43,7 @@ public class SliderSpawnEggItem extends SpawnEggItem {
             BlockState state = level.getBlockState(pos);
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof Spawner spawner) {
-                EntityType<?> entityType = this.getType(level.registryAccess(), itemStack);
+                EntityType<?> entityType = this.getType(itemStack);
                 spawner.setEntityId(entityType, level.getRandom());
                 level.sendBlockUpdated(pos, state, state, 3);
                 level.gameEvent(context.getPlayer(), GameEvent.BLOCK_CHANGE, pos);
@@ -63,7 +58,7 @@ public class SliderSpawnEggItem extends SpawnEggItem {
 
                 Vec3 clickLoc = context.getClickLocation();
                 BlockPos roundedPos = new BlockPos((int) Math.round(clickLoc.x()), relativePos.getY(), (int) Math.round(clickLoc.z()));
-                EntityType<?> entitytype = this.getType(level.registryAccess(), itemStack);
+                EntityType<?> entitytype = this.getType(itemStack);
                 if (entitytype.spawn((ServerLevel) level, itemStack, context.getPlayer(), roundedPos, EntitySpawnReason.SPAWN_ITEM_USE, true, !Objects.equals(pos, relativePos) && direction == Direction.UP) != null) {
                     itemStack.shrink(1);
                     level.gameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, pos);

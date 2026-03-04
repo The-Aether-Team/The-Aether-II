@@ -1,23 +1,20 @@
 package com.aetherteam.aetherii.item.miscellaneous;
 
-import java.util.function.Consumer;
-
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.MoaVariant;
-
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 
+import java.util.function.Consumer;
+
 public class MoaSpawnEggItem extends SpawnEggItem {
-    public MoaSpawnEggItem(EntityType<? extends Mob> defaultType, Properties properties) {
-        super(defaultType, properties);
+    public MoaSpawnEggItem(Properties properties) {
+        super(properties);
     }
 
     @SuppressWarnings("deprecation")

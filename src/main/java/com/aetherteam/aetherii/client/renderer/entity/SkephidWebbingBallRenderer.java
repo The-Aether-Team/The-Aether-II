@@ -4,17 +4,19 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.projectile.SkephidWebbingBall;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 
 public class SkephidWebbingBallRenderer extends EntityRenderer<SkephidWebbingBall, EntityRenderState> {
     private static final Identifier ZEPHYR_PROJECTILE_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/zephyr_webbing_ball.png");
-    private static final RenderType RENDER_TYPE = RenderType.entityCutoutNoCull(ZEPHYR_PROJECTILE_TEXTURE);
+    private static final RenderType RENDER_TYPE = RenderTypes.entityCutoutNoCull(ZEPHYR_PROJECTILE_TEXTURE);
 
     public SkephidWebbingBallRenderer(EntityRendererProvider.Context context) {
         super(context);
@@ -26,17 +28,20 @@ public class SkephidWebbingBallRenderer extends EntityRenderer<SkephidWebbingBal
     }
 
     @Override
-    public void render(EntityRenderState webbingBall, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    public void submit(EntityRenderState entityRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState p_451076_) {
         poseStack.pushPose();
-        poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-        PoseStack.Pose pose = poseStack.last();
-        VertexConsumer vertexconsumer = buffer.getBuffer(RENDER_TYPE);
-        vertex(vertexconsumer, pose, packedLight, 0.0F, 0, 0, 1);
-        vertex(vertexconsumer, pose, packedLight, 1.0F, 0, 1, 1);
-        vertex(vertexconsumer, pose, packedLight, 1.0F, 1, 1, 0);
-        vertex(vertexconsumer, pose, packedLight, 0.0F, 1, 0, 0);
+        poseStack.mulPose(p_451076_.orientation);
+
+        submitNodeCollector.submitCustomGeometry(poseStack, RENDER_TYPE, (pose, vertexConsumer) -> {
+
+            vertex(vertexConsumer, pose, entityRenderState.lightCoords, 0.0F, 0, 0, 1);
+            vertex(vertexConsumer, pose, entityRenderState.lightCoords, 1.0F, 0, 1, 1);
+            vertex(vertexConsumer, pose, entityRenderState.lightCoords, 1.0F, 1, 1, 0);
+            vertex(vertexConsumer, pose, entityRenderState.lightCoords, 0.0F, 1, 0, 0);
+
+        });
         poseStack.popPose();
-        super.render(webbingBall, poseStack, buffer, packedLight);
+        super.submit(entityRenderState, poseStack, submitNodeCollector, p_451076_);
     }
 
     private static void vertex(VertexConsumer consumer, PoseStack.Pose pose, int packedLight, float x, int y, int u, int v) {

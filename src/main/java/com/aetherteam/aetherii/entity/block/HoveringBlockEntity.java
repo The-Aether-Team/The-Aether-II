@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.entity.block;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -42,7 +43,7 @@ import java.util.function.Predicate;
 public class HoveringBlockEntity extends Entity {
     private static final EntityDataAccessor<Integer> DATA_OWNER_ID = SynchedEntityData.defineId(HoveringBlockEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<BlockPos> DATA_START_POS_ID = SynchedEntityData.defineId(HoveringBlockEntity.class, EntityDataSerializers.BLOCK_POS);
-    private static final EntityDataAccessor<CompoundTag> DATA_BLOCK_ENTITY_DATA_ID = SynchedEntityData.defineId(HoveringBlockEntity.class, EntityDataSerializers.COMPOUND_TAG);
+    private static final EntityDataAccessor<CompoundTag> DATA_BLOCK_ENTITY_DATA_ID = SynchedEntityData.defineId(HoveringBlockEntity.class, AetherIIDataSerializers.COMPOUND_TAG.get());
 
     private final InterpolationHandler interpolation = new InterpolationHandler(this, 3);
 
@@ -77,7 +78,7 @@ public class HoveringBlockEntity extends Entity {
 
     @Override
     public void tick() {
-        if (this.level().isClientSide) {
+        if (this.level().isClientSide()) {
             this.interpolation.interpolate();
             return;
         }

@@ -9,7 +9,10 @@ import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.*;
-import com.aetherteam.aetherii.client.renderer.blockentity.model.*;
+import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
+import com.aetherteam.aetherii.client.renderer.blockentity.model.SentryCrateModel;
+import com.aetherteam.aetherii.client.renderer.blockentity.model.SentrySpawnerModel;
+import com.aetherteam.aetherii.client.renderer.blockentity.model.SentrySpawnerPistonModel;
 import com.aetherteam.aetherii.client.renderer.entity.*;
 import com.aetherteam.aetherii.client.renderer.entity.layers.ProjectilesStuckLayer;
 import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLatchLayer;
@@ -20,16 +23,14 @@ import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiMod
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
-import com.aetherteam.aetherii.client.renderer.item.model.*;
 import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
-import com.aetherteam.aetherii.client.renderer.item.model.AlkahestPurifierSpecialRenderer;
-import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
-import com.aetherteam.aetherii.client.renderer.item.model.SkyrootBedSpecialRenderer;
+import com.aetherteam.aetherii.client.renderer.item.model.*;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
+import com.google.common.reflect.TypeToken;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
@@ -40,7 +41,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.context.ContextKey;
@@ -66,10 +67,10 @@ public class AetherIIRenderers {
 
     public static void registerAddLayer(EntityRenderersEvent.AddLayers event) {
         event.getSkins().forEach(model -> {
-            if (event.getSkin(model) instanceof LivingEntityRenderer livingEntityRenderer) {
+            if (event.getMannequinRenderer(model) instanceof LivingEntityRenderer livingEntityRenderer) {
                 registerLivingEntityLayers(event.getContext(), livingEntityRenderer);
                 livingEntityRenderer.addLayer(new AccessoryLayer(livingEntityRenderer));
-                if (livingEntityRenderer instanceof PlayerRenderer playerRenderer) {
+                if (livingEntityRenderer instanceof AvatarRenderer playerRenderer) {
                     playerRenderer.addLayer(new ProjectilesStuckLayer<>(playerRenderer, event.getContext()));
                 }
             }
@@ -82,7 +83,8 @@ public class AetherIIRenderers {
     }
 
     public static void registerRenderStateModifier(RegisterRenderStateModifiersEvent event) {
-        event.registerEntityModifier(PlayerRenderer.class, (abstractClientPlayer, playerRenderState) -> {
+        event.registerEntityModifier(new TypeToken<AvatarRenderer<?>>(AvatarRenderer.class) {
+        }, (abstractClientPlayer, playerRenderState) -> {
             List<Swet> swets = abstractClientPlayer.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwets();
             if (swets != null) {
                 List<SwetRenderState> states = new ArrayList<>();

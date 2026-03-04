@@ -4,17 +4,16 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.ReceivingLevelScreen;
+import net.minecraft.client.gui.screens.LevelLoadingScreen;
+import net.minecraft.client.multiplayer.LevelLoadTracker;
 import net.minecraft.client.renderer.RenderPipelines;
 
-import java.util.function.BooleanSupplier;
-
-public class HolyIslesReceivingLevelScreen extends ReceivingLevelScreen {
+public class HolyIslesReceivingLevelScreen extends LevelLoadingScreen {
     private boolean isInAetherPortal;
     private float portalIntensity;
     private float oPortalIntensity;
 
-    public HolyIslesReceivingLevelScreen(BooleanSupplier levelReceived, Reason reason) {
+    public HolyIslesReceivingLevelScreen(LevelLoadTracker levelReceived, Reason reason) {
         super(levelReceived, reason);
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.portalProcess != null && Minecraft.getInstance().player.portalProcess.isSamePortal(AetherIIBlocks.AETHER_PORTAL.get())) {
             var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.PLAYER);

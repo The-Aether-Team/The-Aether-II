@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.entity.variant.spawning;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.advancements.criterion.MinMaxBounds;
 import net.minecraft.world.entity.variant.SpawnCondition;
 import net.minecraft.world.entity.variant.SpawnContext;
 
