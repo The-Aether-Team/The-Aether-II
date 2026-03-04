@@ -1,14 +1,18 @@
 package com.aetherteam.aetherii.client.particle;
 
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SingleQuadParticle;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
 
-public class AlkahestParticle extends TextureSheetParticle {
+public class AlkahestParticle extends SingleQuadParticle {
     private final SpriteSet sprites;
 
     protected AlkahestParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, SpriteSet sprites) {
-        super(level, x, y, z);
+        super(level, x, y, z, sprites.first());
         this.setSize(0.02F, 0.02F);
         this.quadSize *= this.random.nextFloat() * 0.6F + 0.2F;
         this.xd = xSpeed * 0.2 + (Math.random() * 2.0 - 1.0) * 0.02;
@@ -37,13 +41,13 @@ public class AlkahestParticle extends TextureSheetParticle {
     }
 
     @Override
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+    public SingleQuadParticle.Layer getLayer() {
+        return Layer.OPAQUE;
     }
 
     public record Provider(SpriteSet sprites) implements ParticleProvider<SimpleParticleType> {
         @Override
-        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
             return new AlkahestParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, this.sprites());
         }
     }

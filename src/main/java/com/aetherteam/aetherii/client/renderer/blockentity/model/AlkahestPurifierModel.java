@@ -1,17 +1,18 @@
 package com.aetherteam.aetherii.client.renderer.blockentity.model;
 
+import com.aetherteam.aetherii.client.renderer.blockentity.state.AlkahestPurifierRenderState;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 
-public class AlkahestPurifierModel extends Model {
+public class AlkahestPurifierModel extends Model<AlkahestPurifierRenderState> {
     private final ModelPart main;
     private final ModelPart lid;
 
     public AlkahestPurifierModel(ModelPart root) {
-        super(root, RenderType::entityCutout);
+        super(root, RenderTypes::entityCutout);
         this.main = root.getChild("main");
         this.lid = this.main.getChild("lid");
     }
