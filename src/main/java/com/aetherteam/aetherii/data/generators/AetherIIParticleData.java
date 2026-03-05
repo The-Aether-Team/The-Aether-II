@@ -25,36 +25,36 @@ public class AetherIIParticleData extends ParticleDescriptionProvider {
         this.spriteSet(AetherIIParticleTypes.GREATBOA_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "leaf"), 4, false);
         this.spriteSet(AetherIIParticleTypes.AMBEROOT_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "leaf"), 4, false);
         this.spriteSet(AetherIIParticleTypes.IRRADIATED_LEAVES.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "leaf"), 4, false);
-        this.sprite(AetherIIParticleTypes.DRIPPING_WATER.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "dripping_water"));
-        this.sprite(AetherIIParticleTypes.FALLING_WATER.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "falling_water"));
+        this.spriteSet(AetherIIParticleTypes.DRIPPING_WATER.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "dripping_water"));
+        this.spriteSet(AetherIIParticleTypes.FALLING_WATER.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "falling_water"));
         this.spriteSet(AetherIIParticleTypes.SPLASH.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "splash"), 4, false);
         this.spriteSet(AetherIIParticleTypes.AMBROSIUM.get(), Identifier.withDefaultNamespace("generic_0"), Identifier.withDefaultNamespace("generic_1"), Identifier.fromNamespaceAndPath(AetherII.MODID, "generic_1_mirrored"));
         this.spriteSet(AetherIIParticleTypes.ALKAHEST.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest"), 6, false);
-        this.sprite(AetherIIParticleTypes.HESTVEIL.get(), Identifier.withDefaultNamespace("generic_0"));
-        this.sprite(AetherIIParticleTypes.DRIPPING_ALKAHEST.get(), Identifier.withDefaultNamespace("drip_hang"));
-        this.sprite(AetherIIParticleTypes.FALLING_ALKAHEST.get(), Identifier.withDefaultNamespace("drip_fall"));
-        this.sprite(AetherIIParticleTypes.DRIPPING_DRIPSTONE_ALKAHEST.get(), Identifier.withDefaultNamespace("drip_hang"));
-        this.sprite(AetherIIParticleTypes.FALLING_DRIPSTONE_ALKAHEST.get(), Identifier.withDefaultNamespace("drip_fall"));
+        this.spriteSet(AetherIIParticleTypes.HESTVEIL.get(), Identifier.withDefaultNamespace("generic_0"));
+        this.spriteSet(AetherIIParticleTypes.DRIPPING_ALKAHEST.get(), Identifier.withDefaultNamespace("drip_hang"));
+        this.spriteSet(AetherIIParticleTypes.FALLING_ALKAHEST.get(), Identifier.withDefaultNamespace("drip_fall"));
+        this.spriteSet(AetherIIParticleTypes.DRIPPING_DRIPSTONE_ALKAHEST.get(), Identifier.withDefaultNamespace("drip_hang"));
+        this.spriteSet(AetherIIParticleTypes.FALLING_DRIPSTONE_ALKAHEST.get(), Identifier.withDefaultNamespace("drip_fall"));
         this.spriteSet(AetherIIParticleTypes.GRAVITY_DUST.get(), Identifier.withDefaultNamespace("generic"), 8, true);
 
         this.spriteSet(AetherIIParticleTypes.RAIN.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "splash"), 4, false);
-        this.sprite(AetherIIParticleTypes.IRRADIATION.get(), Identifier.withDefaultNamespace("generic_0"));
+        this.spriteSet(AetherIIParticleTypes.IRRADIATION.get(), Identifier.withDefaultNamespace("generic_0"));
 
         this.spriteSet(AetherIIParticleTypes.ZEPHYR_SNOWFLAKE.get(), Identifier.withDefaultNamespace("generic"), 8, true);
         this.spriteSet(AetherIIParticleTypes.TEMPEST_ELECTRICITY.get(), Identifier.withDefaultNamespace("generic"), 8, true);
-        this.sprite(AetherIIParticleTypes.SLASH_DAMAGE.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "slash_damage"));
-        this.sprite(AetherIIParticleTypes.IMPACT_DAMAGE.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "impact_damage"));
-        this.sprite(AetherIIParticleTypes.PIERCE_DAMAGE.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "pierce_damage"));
+        this.spriteSet(AetherIIParticleTypes.SLASH_DAMAGE.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "slash_damage"));
+        this.spriteSet(AetherIIParticleTypes.IMPACT_DAMAGE.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "impact_damage"));
+        this.spriteSet(AetherIIParticleTypes.PIERCE_DAMAGE.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "pierce_damage"));
         this.spriteSet(AetherIIParticleTypes.SWEEP_ATTACK.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "sweep_attack"), 8, false);
         this.spriteSet(AetherIIParticleTypes.SHOCK_ATTACK.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "shock_attack"), 4, false);
         this.spriteSet(AetherIIParticleTypes.STAB_ATTACK.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "stab_attack"), 10, false);
         this.spriteSet(AetherIIParticleTypes.EFFECT_BUILDUP.get(), Identifier.withDefaultNamespace("generic"), 8, true);
 
         this.spriteSet(AetherIIParticleTypes.TEMPEST_SMOKE.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "tempest_smoke"), 12, false);
-        this.sprite(AetherIIParticleTypes.MOA_HUNGRY.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_hungry"));
+        this.spriteSet(AetherIIParticleTypes.MOA_HUNGRY.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_hungry"));
 
-        this.sprite(AetherIIParticleTypes.LOCKED_BLOCK.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "dungeon_lock"));
-        this.sprite(AetherIIParticleTypes.BOSS_DOORWAY_BLOCK.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "dungeon_doorway"));
-        this.sprite(AetherIIParticleTypes.TREASURE_DOORWAY_BLOCK.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "dungeon_treasure"));
+        this.spriteSet(AetherIIParticleTypes.LOCKED_BLOCK.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "dungeon_lock"));
+        this.spriteSet(AetherIIParticleTypes.BOSS_DOORWAY_BLOCK.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "dungeon_doorway"));
+        this.spriteSet(AetherIIParticleTypes.TREASURE_DOORWAY_BLOCK.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "dungeon_treasure"));
     }
 }
