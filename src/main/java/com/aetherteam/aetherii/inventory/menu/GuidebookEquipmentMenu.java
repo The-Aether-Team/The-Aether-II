@@ -257,7 +257,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
     public void removed(Player player) {
         super.removed(player);
         this.resultSlots.clearContent();
-        if (!player.level().isClientSide) {
+        if (!player.level().isClientSide()) {
             this.clearContainer(player, this.craftSlots);
         }
     }

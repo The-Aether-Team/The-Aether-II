@@ -7,6 +7,7 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.BoundedFloatFunction;
 import net.minecraft.util.CubicSpline;
 import net.minecraft.util.ToFloatFunction;
 import net.minecraft.world.level.dimension.DimensionType;
@@ -139,7 +140,7 @@ public class AetherIIDensityFunctionBuilders {
         return DensityFunctions.spline(factor(temperature, erosion, ridges));
     }
 
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> factor(I temperature, I erosion, I ridges) {
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> factor(I temperature, I erosion, I ridges) {
         CubicSpline<C, I> temperatureSpline = CubicSpline.builder(temperature)
                 .addPoint(-0.525F, 1.0F)
                 .addPoint(-0.45F, 1.5F)
@@ -176,7 +177,7 @@ public class AetherIIDensityFunctionBuilders {
         return DensityFunctions.spline(topSlide(y, elevation, 0.0F));
     }
 
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> topSlide(I y, I elevation, float value) {
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> topSlide(I y, I elevation, float value) {
         return CubicSpline.builder(elevation)
                 .addPoint(0.1F, slidePiece(y, 128, 184, 1, value))
                 .addPoint(0.15F, slidePiece(y, 136, 192, 1, value))
@@ -201,7 +202,7 @@ public class AetherIIDensityFunctionBuilders {
         return DensityFunctions.spline(bottomSlide(y, elevation));
     }
 
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> bottomSlide(I y, I elevation) {
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> bottomSlide(I y, I elevation) {
         return CubicSpline.builder(elevation)
                 .addPoint(0.1F, slidePiece(y, -64, 128, 0, 1))
                 .addPoint(0.15F, slidePiece(y, -56, 136, 0, 1))
@@ -220,7 +221,7 @@ public class AetherIIDensityFunctionBuilders {
                 .build();
     }
 
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> slidePiece(I y, float locationFrom, float locationTo, float valueFrom, float valueTo) {
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> slidePiece(I y, float locationFrom, float locationTo, float valueFrom, float valueTo) {
         return CubicSpline.builder(y)
                 .addPoint(locationFrom, valueFrom)
                 .addPoint(locationTo, valueTo)
@@ -274,7 +275,7 @@ public class AetherIIDensityFunctionBuilders {
         return DensityFunctions.spline(topSlideArctic(y, elevation, 0.0F));
     }
 
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> topSlideArctic(I y, I elevation, float value) {
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> topSlideArctic(I y, I elevation, float value) {
         return CubicSpline.builder(elevation)
                 .addPoint(0.0F, slidePiece(y, 128, 200, 1, value))
                 .addPoint(0.05F, slidePiece(y, 136, 212, 1, value))
@@ -307,7 +308,7 @@ public class AetherIIDensityFunctionBuilders {
         return DensityFunctions.spline(factorShattered(temperature, erosion, ridges));
     }
 
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> factorShattered(I temperature, I erosion, I ridges) {
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> factorShattered(I temperature, I erosion, I ridges) {
         CubicSpline<C, I> temperatureSpline = CubicSpline.builder(temperature)
                 .addPoint(-0.475F, 1.0F)
                 .addPoint(-0.4F, 7.5F)
@@ -341,7 +342,7 @@ public class AetherIIDensityFunctionBuilders {
         return DensityFunctions.spline(topSlideShattered(y, elevation));
     }
 
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> topSlideShattered(I y, I elevation) {
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> topSlideShattered(I y, I elevation) {
         return CubicSpline.builder(elevation)
                 .addPoint(0.05F, slidePiece(y, 162, 182, 1, 0.0F))
                 .addPoint(0.1F, slidePiece(y, 166, 186, 1, 0.0F))
@@ -362,7 +363,7 @@ public class AetherIIDensityFunctionBuilders {
         return DensityFunctions.spline(bottomSlideShattered(y, elevation));
     }
 
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> bottomSlideShattered(I y, I elevation) {
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> bottomSlideShattered(I y, I elevation) {
         return CubicSpline.builder(elevation)
                 .addPoint(0.05F, slidePiece(y, 130, 162, 0, 1))
                 .addPoint(0.1F, slidePiece(y, 134, 166, 0, 1))
@@ -378,7 +379,7 @@ public class AetherIIDensityFunctionBuilders {
     }
 
     // Underground
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> caveGradient(I y) {
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> caveGradient(I y) {
         return CubicSpline.builder(y)
                 .addPoint(96, 0.0F)
                 .addPoint(112, 0.175F)
@@ -402,7 +403,7 @@ public class AetherIIDensityFunctionBuilders {
         return DensityFunctions.spline(undergroundShaper(y));
     }
 
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> undergroundShaper(I y) {
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> undergroundShaper(I y) {
         return CubicSpline.builder(y)
                 .addPoint(0, 3.0F)
                 .addPoint(8, 1.0F)
@@ -423,7 +424,7 @@ public class AetherIIDensityFunctionBuilders {
         return DensityFunctions.spline(lakeFactor(lakes, temperature));
     }
 
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> lakeFactor(I lakes, I temperature) {
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> lakeFactor(I lakes, I temperature) {
 
         CubicSpline<C, I> lakeSpline = CubicSpline.builder(lakes)
                 .addPoint(0.15F, 1.0F)

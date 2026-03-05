@@ -46,7 +46,7 @@ public class AetherIISkyrootLizardVariants {
     }
 
     private static void register(BootstrapContext<SkyrootLizardVariant> context, ResourceKey<SkyrootLizardVariant> key, Holder<Block> leafBlock) {
-        context.register(key, new SkyrootLizardVariant(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/skyroot_lizard/" + key.location().getPath() + ".png"), leafBlock));
+        context.register(key, new SkyrootLizardVariant(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/skyroot_lizard/" + key.identifier().getPath() + ".png"), leafBlock));
     }
 
     public static Holder<SkyrootLizardVariant> getVariantForLeaves(RegistryAccess registryAccess, Holder<Block> leafBlock) {

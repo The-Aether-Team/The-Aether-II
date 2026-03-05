@@ -17,7 +17,7 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 public class DungeonBlockLockCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext buildContext) {
-        dispatcher.register(Commands.literal("dungeon_block_lock").requires(Commands.hasPermission(2))
+        dispatcher.register(Commands.literal("dungeon_block_lock").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                 .then(Commands.argument("from", BlockPosArgument.blockPos()).then(Commands.argument("to", BlockPosArgument.blockPos())
                         .executes((context) -> makeBlocksLocked(context.getSource(), BoundingBox.fromCorners(BlockPosArgument.getLoadedBlockPos(context, "from"), BlockPosArgument.getLoadedBlockPos(context, "to"))))
                         .then(Commands.argument("block", BlockStateArgument.block(buildContext)).executes((context) -> applyBlockToLocks(context.getSource(), BoundingBox.fromCorners(BlockPosArgument.getLoadedBlockPos(context, "from"), BlockPosArgument.getLoadedBlockPos(context, "to")), BlockStateArgument.getBlock(context, "block")))

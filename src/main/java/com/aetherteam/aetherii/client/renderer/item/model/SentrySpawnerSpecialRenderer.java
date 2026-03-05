@@ -11,7 +11,7 @@ import com.mojang.math.Axis;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -30,14 +30,14 @@ public class SentrySpawnerSpecialRenderer implements NoDataSpecialModelRenderer 
 
     @Override
     public void render(ItemDisplayContext context, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, boolean partialTick) {
-        VertexConsumer vertexconsumer = AetherIIAtlases.SENTRY_SPAWNER_MATERIALS.get(0).buffer(buffer, RenderType::entitySolid);
+        VertexConsumer vertexconsumer = AetherIIAtlases.SENTRY_SPAWNER_MATERIALS.get(0).buffer(buffer, RenderTypes::entitySolid);
         poseStack.pushPose();
         poseStack.translate(0.5F, 1.5F, 0.5F);
         poseStack.mulPose(Axis.XP.rotationDegrees(180));
         this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, packedOverlay);
         poseStack.popPose();
 
-        VertexConsumer vertexconsumer2 = buffer.getBuffer(RenderType.entitySolid(SentrySpawnerRenderer.PISTON_OFF));
+        VertexConsumer vertexconsumer2 = buffer.getBuffer(RenderTypes.entitySolid(SentrySpawnerRenderer.PISTON_OFF));
         poseStack.pushPose();
         poseStack.translate(0.5F, 1.5F, 0.5F);
         poseStack.mulPose(Axis.XP.rotationDegrees(180));

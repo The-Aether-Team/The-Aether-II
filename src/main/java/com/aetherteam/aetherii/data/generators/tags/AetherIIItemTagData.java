@@ -741,31 +741,6 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.BURRUKAI_PLATE_GLOVES.get(),
                 AetherIIItems.MOA_SADDLE.get()
         );
-        this.tag(ItemTags.SWORD_ENCHANTABLE).addTags(
-                AetherIITags.Items.TOOLS_SPEARS,
-                AetherIITags.Items.TOOLS_HAMMERS
-        );
-        this.tag(ItemTags.CROSSBOW_ENCHANTABLE).add(
-                AetherIIItems.SKYROOT_CROSSBOW.get(),
-                AetherIIItems.HOLYSTONE_CROSSBOW.get(),
-                AetherIIItems.ZANITE_CROSSBOW.get(),
-                AetherIIItems.ARKENIUM_CROSSBOW.get(),
-                AetherIIItems.GRAVITITE_CROSSBOW.get()
-        );
-        this.tag(ItemTags.DURABILITY_ENCHANTABLE).add(
-                AetherIIItems.SKYROOT_CROSSBOW.get(),
-                AetherIIItems.HOLYSTONE_CROSSBOW.get(),
-                AetherIIItems.ZANITE_CROSSBOW.get(),
-                AetherIIItems.ARKENIUM_CROSSBOW.get(),
-                AetherIIItems.GRAVITITE_CROSSBOW.get()
-        );
-        this.tag(ItemTags.VANISHING_ENCHANTABLE).add(
-                AetherIIItems.SKYROOT_CROSSBOW.get(),
-                AetherIIItems.HOLYSTONE_CROSSBOW.get(),
-                AetherIIItems.ZANITE_CROSSBOW.get(),
-                AetherIIItems.ARKENIUM_CROSSBOW.get(),
-                AetherIIItems.GRAVITITE_CROSSBOW.get()
-        );
         this.tag(ItemTags.PILLAGER_PREFERRED_WEAPONS).add(
                 AetherIIItems.SKYROOT_CROSSBOW.get(),
                 AetherIIItems.HOLYSTONE_CROSSBOW.get(),

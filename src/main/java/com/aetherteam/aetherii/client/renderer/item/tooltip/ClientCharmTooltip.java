@@ -26,8 +26,8 @@ public record ClientCharmTooltip(ItemStack base, List<Charms.CharmHolder> charmH
                     int xOffset = x + (18 * i);
                     int yOffset = y + (18 * j);
                     if (stack.isEmpty()) {
-                         texture = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_" + charmHolder.getType().name().toLowerCase(Locale.ROOT) + "_charm_" + charmHolder.getTier().getValue());
-                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, xOffset, yOffset, 16, 16);
+                        Identifier identifier = Identifier.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/slot_" + charmHolder.getType().name().toLowerCase(Locale.ROOT) + "_charm_" + charmHolder.getTier().getValue());
+                        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, identifier, xOffset, yOffset, 16, 16);
                     } else {
                         guiGraphics.renderItem(stack, xOffset, yOffset);
                     }

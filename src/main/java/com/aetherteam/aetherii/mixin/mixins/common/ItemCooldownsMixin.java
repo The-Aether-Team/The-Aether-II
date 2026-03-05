@@ -28,7 +28,7 @@ public class ItemCooldownsMixin implements ItemCooldownsWrapper {
     @Inject(at = @At(value = "HEAD"), method = "onCooldownEnded(Lnet/minecraft/resources/Identifier;)V")
     private void onCooldownEnded(Identifier resourceLocation, CallbackInfo ci) {
         List<Identifier> tagContents = StreamSupport.stream(BuiltInRegistries.ITEM.getTagOrEmpty(Tags.Items.TOOLS_SHIELD).spliterator(), false)
-                .map(Holder::unwrapKey).filter(Optional::isPresent).map(optional -> optional.get().location()).toList();
+                .map(Holder::unwrapKey).filter(Optional::isPresent).map(optional -> optional.get().identifier()).toList();
         if (tagContents.contains(resourceLocation)) {
             if (!this.player.level().isClientSide()) {
                 DamageSystemAttachment attachment = this.player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);

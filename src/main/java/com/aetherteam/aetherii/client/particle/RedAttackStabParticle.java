@@ -71,8 +71,8 @@ public class RedAttackStabParticle extends AttackSweepParticle {
     }
 
     @Override
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+    public SingleQuadParticle.Layer getLayer() {
+        return Layer.OPAQUE;
     }
 
     public static class Provider implements ParticleProvider<AttackStabParticleOption> {

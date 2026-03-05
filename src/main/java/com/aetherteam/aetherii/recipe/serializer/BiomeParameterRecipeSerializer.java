@@ -48,10 +48,10 @@ public class BiomeParameterRecipeSerializer<T extends AbstractBiomeParameterReci
     }
 
     public T fromNetwork(RegistryFriendlyByteBuf buffer) {
-        Optional<Either<ResourceKey<Biome>, TagKey<Biome>>> biome = buffer.readOptional((buf) -> buf.readBoolean() ? Either.left(ResourceKey.create(Registries.BIOME, buf.readResourceLocation())) : Either.right(TagKey.create(Registries.BIOME, buf.readResourceLocation())));
+        Optional<Either<ResourceKey<Biome>, TagKey<Biome>>> biome = buffer.readOptional((buf) -> buf.readBoolean() ? Either.left(ResourceKey.create(Registries.BIOME, buf.readIdentifier())) : Either.right(TagKey.create(Registries.BIOME, buf.readIdentifier())));
         BlockStateIngredient ingredient = BlockStateIngredient.CONTENTS_STREAM_CODEC.decode(buffer);
         BlockPropertyPair result = BlockStateRecipeUtil.readPair(buffer);
-        Optional<Identifier> function = buffer.readOptional(FriendlyByteBuf::readResourceLocation);
+        Optional<Identifier> function = buffer.readOptional(FriendlyByteBuf::readIdentifier);
         return this.factory.create(biome, ingredient, result, function);
     }
 
@@ -59,10 +59,10 @@ public class BiomeParameterRecipeSerializer<T extends AbstractBiomeParameterReci
         buffer.writeOptional(recipe.getBiome(), (buf, either) -> {
             either.ifLeft(consumer -> {
                 buf.writeBoolean(true);
-                buf.writeResourceLocation(consumer.location());
+                buf.writeIdentifier(consumer.identifier());
             }).ifRight(consumer -> {
                 buf.writeBoolean(false);
-                buf.writeResourceLocation(consumer.location());
+                buf.writeIdentifier(consumer.location());
             });
         });
         super.toNetwork(buffer, recipe);

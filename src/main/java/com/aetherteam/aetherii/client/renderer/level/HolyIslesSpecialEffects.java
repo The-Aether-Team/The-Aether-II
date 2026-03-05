@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.client.renderer.level;
+/*package com.aetherteam.aetherii.client.renderer.level;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
@@ -88,6 +88,7 @@ public class HolyIslesSpecialEffects extends DimensionSpecialEffects {
      * [CODE COPY] - {@link ClientLevel#getCloudColor(float)}.<br><br>
      * Modified to have lighter cloud coloration than the Overworld during weather.
      */
+/*
     public int getCloudColor(ClientLevel level, float partialTick) {
         int i = -1;
         float f = level.getRainLevel(partialTick);
@@ -191,6 +192,7 @@ public class HolyIslesSpecialEffects extends DimensionSpecialEffects {
      * [CODE COPY] - {@link ClientLevel#getSkyColor(Vec3, float)}.<br><br>
      * Modified to have lighter sky coloration than the Overworld during weather.
      */
+/*
     public int getSkyColor(ClientLevel level, Vec3 pos, float partialTick) {
         float f = level.getTimeOfDay(partialTick);
         Vec3 vec3 = pos.subtract(2.0, 2.0, 2.0).scale(0.25);
@@ -326,3 +328,4 @@ public class HolyIslesSpecialEffects extends DimensionSpecialEffects {
         return true;
     }
 }
+*/

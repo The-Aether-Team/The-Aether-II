@@ -15,7 +15,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class AetherIIMurals {
     public static final DeferredRegister<Mural> MURALS = DeferredRegister.create(AetherIIRegistries.MURAL, AetherII.MODID);
-    public static final Registry<Mural> MURALS_REGISTRY = MURALS.makeRegistry((builder) -> builder.sync(true).defaultKey(AetherIIRegistries.MURAL.location()));
+    public static final Registry<Mural> MURALS_REGISTRY = MURALS.makeRegistry((builder) -> builder.sync(true).defaultKey(AetherIIRegistries.MURAL.identifier()));
 
     public static final DeferredHolder<Mural, Mural> TEST = register("test", 2, 2, "test_mural");
     public static final DeferredHolder<Mural, Mural> LARGE_TEST = register("large_test", 3, 2, "large_test_mural");

@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.renderer.block.model.blockstate;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.natural.TrunkBlock;
+import com.mojang.math.OctahedralGroup;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.renderer.block.model.BlockModelPart;
@@ -44,10 +45,10 @@ public record TrunkModel(Map<Holder, BlockModelPart> connections, TextureAtlasSp
         ).apply(builder, Unbaked::new));
 
         private static final Map<String, BlockModelRotation> CORNER_ROTATIONS = Map.of(
-                "northwest_connection", BlockModelRotation.X0_Y0,
-                "northeast_connection", BlockModelRotation.X0_Y90,
-                "southeast_connection", BlockModelRotation.X0_Y180,
-                "southwest_connection", BlockModelRotation.X0_Y270);
+                "northwest_connection", BlockModelRotation.IDENTITY,
+                "northeast_connection", BlockModelRotation.get(OctahedralGroup.BLOCK_ROT_Y_90),
+                "southeast_connection", BlockModelRotation.get(OctahedralGroup.BLOCK_ROT_Y_180),
+                "southwest_connection", BlockModelRotation.get(OctahedralGroup.BLOCK_ROT_Y_270));
 
         @Override
         public BlockStateModel bake(ModelBaker modelBaker) {

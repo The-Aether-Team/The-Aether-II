@@ -12,25 +12,24 @@ import com.aetherteam.aetherii.item.components.ArmorStyle;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.PlayerModelAccessor;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ARGB;
+import net.minecraft.util.Util;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -56,9 +55,9 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
     public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, S state, float netHeadYaw, float headPitch) {
         if (Minecraft.getInstance().player != null) {
             AccessoryUtil.getFirst(Minecraft.getInstance().player, AccessoryContainer.SlotType.HANDWEAR).ifPresent((stack) -> {
-                 id = BuiltInRegistries.ITEM.getKey(stack.getItem());
-                 texture = Identifier.fromNamespaceAndPath(id.getNamespace(), "textures/entity/equipment/humanoid_gloves/" + id.getPath() + ".png");
-                VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(texture), stack.hasFoil());
+                Identifier id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+                Identifier texture = Identifier.fromNamespaceAndPath(id.getNamespace(), "textures/entity/equipment/humanoid_gloves/" + id.getPath() + ".png");
+                VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderTypes.armorCutoutNoCull(texture), stack.hasFoil());
                 GlovesModel glovesModel = this.glovesModel;
 
                 if (this.getParentModel() instanceof HumanoidModel humanoidModel) {
@@ -77,14 +76,14 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
                 if (stack.is(ItemTags.DYEABLE)) {
                     IClientItemExtensions extensions = IClientItemExtensions.of(stack);
                     int color = ARGB.opaque(extensions.getDefaultDyeColor(stack));
-                    VertexConsumer dyedConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(texture), stack.hasFoil());
+                    VertexConsumer dyedConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderTypes.armorCutoutNoCull(texture), stack.hasFoil());
                     glovesModel.renderToBuffer(poseStack, dyedConsumer, packedLight, OverlayTexture.NO_OVERLAY, color);
                 }
 
                 ArmorStyle style = stack.get(AetherIIDataComponents.ARMOR_STYLE);
                 if (style != null && Minecraft.getInstance().level != null) {
                     TextureAtlasSprite sprite = ARMOR_STYLE_SPRITE_LOOKUP.apply(new ArmorStyle.SpriteKey(Minecraft.getInstance().level.registryAccess(), style, "humanoid_gloves"));
-                    VertexConsumer consumer = sprite.wrap(buffer.getBuffer(RenderType.armorCutoutNoCull(AetherIIAtlases.ARMOR_STYLES_SHEET)));
+                    VertexConsumer consumer = sprite.wrap(buffer.getBuffer(RenderTypes.armorCutoutNoCull(AetherIIAtlases.ARMOR_STYLES_SHEET)));
                     glovesModel.renderToBuffer(poseStack, consumer, packedLight, OverlayTexture.NO_OVERLAY);
                 }
             });
@@ -94,9 +93,9 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
     @Override
     public void renderOnFirstPerson(HumanoidArm arm, ItemStack stack, Player player, PoseStack poseStack, PlayerModel playerModel, MultiBufferSource buffer, int packedLight) {
         PlayerModelAccessor playerModelAccessor = (PlayerModelAccessor) playerModel;
-         id = BuiltInRegistries.ITEM.getKey(stack.getItem());
-         texture = Identifier.fromNamespaceAndPath(id.getNamespace(), "textures/entity/equipment/humanoid_gloves/" + id.getPath() + ".png");
-        VertexConsumer consumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(texture), stack.hasFoil());
+        Identifier id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        Identifier texture = Identifier.fromNamespaceAndPath(id.getNamespace(), "textures/entity/equipment/humanoid_gloves/" + id.getPath() + ".png");
+        VertexConsumer consumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderTypes.armorCutoutNoCull(texture), stack.hasFoil());
         GlovesModel model = playerModelAccessor.aether$getSlim() ? this.glovesModelSlimFirstPerson : this.glovesModelFirstPerson;
 
         ModelPart gloveArm = arm == HumanoidArm.RIGHT ? model.rightArm : model.leftArm;
@@ -108,14 +107,14 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
         if (stack.is(ItemTags.DYEABLE)) {
             IClientItemExtensions extensions = IClientItemExtensions.of(stack);
             int color = ARGB.opaque(extensions.getDefaultDyeColor(stack));
-            VertexConsumer dyedConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(texture), stack.hasFoil());
+            VertexConsumer dyedConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderTypes.armorCutoutNoCull(texture), stack.hasFoil());
             gloveArm.render(poseStack, dyedConsumer, packedLight, OverlayTexture.NO_OVERLAY, color);
         }
 
         ArmorStyle style = stack.get(AetherIIDataComponents.ARMOR_STYLE);
         if (style != null && Minecraft.getInstance().level != null) {
             TextureAtlasSprite sprite = ARMOR_STYLE_SPRITE_LOOKUP.apply(new ArmorStyle.SpriteKey(Minecraft.getInstance().level.registryAccess(), style, "humanoid_gloves"));
-            VertexConsumer styleConsumer = sprite.wrap(buffer.getBuffer(RenderType.armorCutoutNoCull(AetherIIAtlases.ARMOR_STYLES_SHEET)));
+            VertexConsumer styleConsumer = sprite.wrap(buffer.getBuffer(RenderTypes.armorCutoutNoCull(AetherIIAtlases.ARMOR_STYLES_SHEET)));
             gloveArm.render(poseStack, styleConsumer, packedLight, OverlayTexture.NO_OVERLAY);
         }
     }

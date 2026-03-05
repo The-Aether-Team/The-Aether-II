@@ -30,13 +30,13 @@ public record Squares(List<Identifier> textures, int width, int height) implemen
     @Override
     public void run(ResourceManager resourceManager, Output output) {
         for (Identifier location : this.textures()) {
-             originalTextureLocation = TEXTURE_ID_CONVERTER.idToFile(location);
+            Identifier  originalTextureLocation = TEXTURE_ID_CONVERTER.idToFile(location);
             Optional<Resource> originalTexture = resourceManager.getResource(originalTextureLocation);
             if (originalTexture.isPresent()) {
                 LazyLoadedImage originalImage = new LazyLoadedImage(originalTextureLocation, originalTexture.get(), this.width() * this.height());
                 for (int x = 0; x < this.width(); x++) {
                     for (int y = 0; y < this.height(); y++) {
-                         outputLocation = location.withSuffix("_" + x + "_" + y);
+                        Identifier  outputLocation = location.withSuffix("_" + x + "_" + y);
                         output.add(outputLocation, new SquaresSpriteSupplier(originalImage, x * 16, y * 16, outputLocation));
                     }
                 }

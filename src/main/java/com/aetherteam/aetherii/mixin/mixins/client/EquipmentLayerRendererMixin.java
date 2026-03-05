@@ -6,17 +6,17 @@ import com.aetherteam.aetherii.item.components.ArmorStyle;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.layers.EquipmentLayerRenderer;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Util;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import org.spongepowered.asm.mixin.Mixin;
@@ -39,7 +39,7 @@ public class EquipmentLayerRendererMixin {
             ArmorStyle style = stack.get(AetherIIDataComponents.ARMOR_STYLE);
             if (style != null && Minecraft.getInstance().level != null) {
                 TextureAtlasSprite sprite = this.armorStyleSpriteLookup.apply(new ArmorStyle.SpriteKey(Minecraft.getInstance().level.registryAccess(), style, layerType.getSerializedName()));
-                VertexConsumer consumer = sprite.wrap(buffer.getBuffer(RenderType.armorCutoutNoCull(AetherIIAtlases.ARMOR_STYLES_SHEET)));
+                VertexConsumer consumer = sprite.wrap(buffer.getBuffer(RenderTypes.armorCutoutNoCull(AetherIIAtlases.ARMOR_STYLES_SHEET)));
                 armorModel.renderToBuffer(poseStack, consumer, light, OverlayTexture.NO_OVERLAY);
             }
         }

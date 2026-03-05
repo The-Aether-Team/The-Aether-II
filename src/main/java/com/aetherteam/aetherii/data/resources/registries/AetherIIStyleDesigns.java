@@ -30,7 +30,7 @@ public class AetherIIStyleDesigns { //todo style names
     }
 
     public static void register(BootstrapContext<StyleDesign> context, ResourceKey<StyleDesign> key) {
-        StyleDesign design = new StyleDesign(key.location(), Component.empty());
+        StyleDesign design = new StyleDesign(key.identifier(), Component.empty());
         context.register(key, design);
     }
 
