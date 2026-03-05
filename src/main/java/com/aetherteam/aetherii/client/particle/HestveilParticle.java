@@ -2,13 +2,14 @@ package com.aetherteam.aetherii.client.particle;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.SimpleParticleType;
 
-public class HestveilParticle extends TextureSheetParticle {
+public class HestveilParticle extends SingleQuadParticle {
     private final float maxQuadSize;
 
-    protected HestveilParticle(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
-        super(level, x, y, z);
+    protected HestveilParticle(ClientLevel level, double x, double y, double z, SpriteSet spriteSet, TextureAtlasSprite atlasSprite) {
+        super(level, x, y, z, atlasSprite);
         this.setSprite(spriteSet.get(level.getRandom()));
         this.setSize(0.25F, 0.25F);
         this.quadSize = 0;
@@ -34,8 +35,8 @@ public class HestveilParticle extends TextureSheetParticle {
     }
 
     @Override
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+    public SingleQuadParticle.Layer getLayer() {
+        return Layer.OPAQUE;
     }
 
     public record Provider(SpriteSet sprites) implements ParticleProvider<SimpleParticleType> {

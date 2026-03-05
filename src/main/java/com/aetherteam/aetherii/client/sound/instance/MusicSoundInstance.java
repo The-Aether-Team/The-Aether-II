@@ -9,6 +9,7 @@ import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.client.sounds.WeighedSoundEvents;
+import net.minecraft.sounds.Music;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -98,13 +99,13 @@ public class MusicSoundInstance extends AbstractTickableSoundInstance {
 
     @Override
     public void tick() {
-        MusicInfo musicInfo = Minecraft.getInstance().getSituationalMusic();
+        Music music = Minecraft.getInstance().getSituationalMusic();
         if (this.isBossMusic()) {
-            if (musicInfo.music() == null || !AudioHooks.isAetherBossMusicActive()) {
+            if (music == null || !AudioHooks.isAetherBossMusicActive()) {
                 this.fade();
             }
         } else {
-            if (musicInfo.music() != null && AudioHooks.isAetherBossMusicActive()) {
+            if (music != null && AudioHooks.isAetherBossMusicActive()) {
                 this.fade();
             }
         }
