@@ -1,22 +1,19 @@
 package com.aetherteam.aetherii.blockentity;
 
-import javax.annotation.Nullable;
-
 import com.aetherteam.aetherii.block.miscellaneous.MoaEggBlock;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.MoaEggType;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentMap;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityReference;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+
+import javax.annotation.Nullable;
 
 public class MoaEggBlockEntity extends BlockEntity {
     @Nullable
@@ -38,7 +35,7 @@ public class MoaEggBlockEntity extends BlockEntity {
     }
 
     public void setPlacedBy(@Nullable Player placedBy) {
-        this.placedBy = placedBy == null? null : new EntityReference<>(placedBy);
+        this.placedBy = placedBy == null ? null : EntityReference.of(placedBy);
         this.setChanged();
     }
 
