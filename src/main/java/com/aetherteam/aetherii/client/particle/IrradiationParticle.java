@@ -6,6 +6,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
 
 public class IrradiationParticle extends BaseAshSmokeParticle {
     protected IrradiationParticle(
@@ -41,7 +42,8 @@ public class IrradiationParticle extends BaseAshSmokeParticle {
                 double pZ,
                 double pXSpeed,
                 double pYSpeed,
-                double pZSpeed
+                double pZSpeed,
+                RandomSource randomSource
         ) {
             return new IrradiationParticle(pLevel, pX, pY, pZ, 0.0, 0.0, 0.0, 1.0F, this.sprites);
         }

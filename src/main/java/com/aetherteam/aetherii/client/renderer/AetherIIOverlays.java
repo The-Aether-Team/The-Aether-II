@@ -288,8 +288,8 @@ public class AetherIIOverlays {
             if (swet != null) {
                 Identifier left1Sprite = swet.overlay.left1();
                 Identifier left2Sprite = swet.overlay.left2();
-                 right1Sprite = swet.overlay.right1();
-                 right2Sprite = swet.overlay.right2();
+                Identifier right1Sprite = swet.overlay.right1();
+                Identifier right2Sprite = swet.overlay.right2();
 
                 drawCorner(guiGraphics, left1Sprite, left2Sprite, 0, guiGraphics.guiHeight() - 128);
                 drawCorner(guiGraphics, right1Sprite, right2Sprite, guiGraphics.guiWidth() - 128, guiGraphics.guiHeight() - 128);

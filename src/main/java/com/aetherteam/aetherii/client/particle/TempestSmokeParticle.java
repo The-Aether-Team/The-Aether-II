@@ -6,10 +6,11 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
 
 public class TempestSmokeParticle extends CampfireSmokeParticle {
-    public TempestSmokeParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, boolean signal) {
-        super(level, x, y, z, xSpeed, ySpeed, zSpeed, signal);
+    public TempestSmokeParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, boolean signal, SpriteSet sprites) {
+        super(level, x, y, z, xSpeed, ySpeed, zSpeed, signal, sprites.first());
         this.lifetime = this.random.nextInt(25) + 40;
     }
 
@@ -38,10 +39,9 @@ public class TempestSmokeParticle extends CampfireSmokeParticle {
             this.sprites = sprites;
         }
 
-        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            TempestSmokeParticle particle = new TempestSmokeParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, false);
+        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
+            TempestSmokeParticle particle = new TempestSmokeParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, false, this.sprites);
             particle.setAlpha(0.9F);
-            particle.pickSprite(this.sprites);
             return particle;
         }
     }

@@ -17,7 +17,7 @@ public class YellowAttackShockParticle extends SingleQuadParticle {
     private final float rotation;
 
     public YellowAttackShockParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, float rotation, float shade, SpriteSet sprites) {
-        super(level, x, y, z);
+        super(level, x, y, z, sprites.first());
         this.sprites = sprites;
         this.lifetime = 4;
         this.rCol = shade;

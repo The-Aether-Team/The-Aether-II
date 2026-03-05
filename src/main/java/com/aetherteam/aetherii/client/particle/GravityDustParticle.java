@@ -2,7 +2,11 @@ package com.aetherteam.aetherii.client.particle;
 
 import com.aetherteam.aetherii.client.particle.options.GravityDustParticleOption;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.DustParticleBase;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.util.RandomSource;
 import org.joml.Vector3f;
 
 public class GravityDustParticle extends DustParticleBase<GravityDustParticleOption> {
@@ -25,7 +29,7 @@ public class GravityDustParticle extends DustParticleBase<GravityDustParticleOpt
             this.sprites = sprites;
         }
 
-        public Particle createParticle(GravityDustParticleOption type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle createParticle(GravityDustParticleOption type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
             return new GravityDustParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type, this.sprites);
         }
     }

@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.blockentity.model;
 
+import com.aetherteam.aetherii.client.renderer.blockentity.state.SentryCrateRenderState;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -7,11 +8,11 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 
-public class SentryCrateModel extends Model {
+public class SentryCrateModel extends Model<SentryCrateRenderState> {
     public SentryCrateModel(ModelPart root) {
-        super(root, RenderType::entitySolid);
+        super(root, RenderTypes::entitySolid);
     }
 
     public static LayerDefinition createSingleBodyLayer() {
