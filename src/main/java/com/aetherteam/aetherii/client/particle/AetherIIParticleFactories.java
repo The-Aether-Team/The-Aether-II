@@ -46,7 +46,7 @@ public class AetherIIParticleFactories {
                     return Layer.TRANSLUCENT;
                 }
             };
-            splashParticle.pickSprite(spriteSet);
+            splashParticle.getSprite(spriteSet);
             return splashParticle;
         });
         event.registerSpriteSet(AetherIIParticleTypes.AMBROSIUM.get(), AmbrosiumParticle.Provider::new);
@@ -62,7 +62,7 @@ public class AetherIIParticleFactories {
             particle.setColor(0.65F, 0.9F, 0.6F);
             return particle;
         });
-        event.registerSpriteSet(AetherIIParticleTypes.DRIPPING_DRIPSTONE_ALKAHEST.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
+        event.registerSpriteSet(AetherIIParticleTypes.DRIPPING_DRIPSTONE_ALKAHEST.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed, random) -> {
             DripParticle particle = new DripParticle.DripHangParticle(level, x, y, z, AetherIIFluids.ALKAHEST.get(), AetherIIParticleTypes.FALLING_DRIPSTONE_ALKAHEST.get());
             particle.setColor(0.65F, 0.9F, 0.6F);
             return particle;

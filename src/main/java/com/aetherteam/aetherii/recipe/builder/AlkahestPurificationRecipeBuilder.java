@@ -75,7 +75,7 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
         Advancement.Builder builder = output.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(builder::addCriterion);
         AlkahestPurificationRecipe recipe = new AlkahestPurificationRecipe(Objects.requireNonNullElse(this.group, ""), this.bookCategory, this.ingredient, this.results, this.byproducts, this.experience, this.alkahestUsage, this.processingTime);
-        output.accept(id, recipe, builder.build(id.location().withPrefix("recipes/" + this.category.getFolderName() + "/")));
+        output.accept(id, recipe, builder.build(id.identifier().withPrefix("recipes/" + this.category.getFolderName() + "/")));
     }
 
     private static AlkahestPurifierBookCategory determineRecipeCategory(ItemStack result) {

@@ -60,8 +60,8 @@ public class AetherIIShroudwingVariants {
     }
 
     private static void register(BootstrapContext<ShroudwingVariant> context, ResourceKey<ShroudwingVariant> key, SpawnPrioritySelectors spawnConditions, boolean emissive) {
-        Identifier texture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/shroudwing/" + key.location().getPath() + ".png");
-        Identifier emissiveTexture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/shroudwing/" + key.location().getPath() + "_glow.png");
+        Identifier texture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/shroudwing/" + key.identifier().getPath() + ".png");
+        Identifier emissiveTexture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/shroudwing/" + key.identifier().getPath() + "_glow.png");
 
         context.register(key, new ShroudwingVariant(texture, emissive ? Optional.of(emissiveTexture) : Optional.empty(), spawnConditions));
     }

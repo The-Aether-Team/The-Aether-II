@@ -7,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.client.resources.sounds.SoundInstance;
-import net.minecraft.client.sounds.MusicInfo;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.client.sounds.WeighedSoundEvents;
 import net.minecraft.sounds.SoundEvent;
@@ -72,11 +71,11 @@ public class MusicSoundInstance extends AbstractTickableSoundInstance {
 
     @Override
     public @Nullable WeighedSoundEvents resolve(SoundManager handler) {
-        if (this.location.equals(SoundManager.INTENTIONALLY_EMPTY_SOUND_LOCATION)) {
+        if (this.identifier.equals(SoundManager.INTENTIONALLY_EMPTY_SOUND_LOCATION)) {
             this.sound = SoundManager.INTENTIONALLY_EMPTY_SOUND;
             return SoundManager.INTENTIONALLY_EMPTY_SOUND_EVENT;
         } else {
-            WeighedSoundEvents weighedsoundevents = handler.getSoundEvent(this.location);
+            WeighedSoundEvents weighedsoundevents = handler.getSoundEvent(this.identifier);
             if (weighedsoundevents == null) {
                 this.sound = SoundManager.EMPTY_SOUND;
             } else {

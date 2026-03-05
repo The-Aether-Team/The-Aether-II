@@ -20,6 +20,7 @@ import net.minecraft.client.resources.model.ResolvableModel;
 import net.minecraft.client.resources.model.ResolvedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -36,7 +37,7 @@ public class MuralItemModel extends BlockModelWrapper {
     }
 
     @Override
-    public void update(ItemStackRenderState renderState, ItemStack stack, ItemModelResolver modelResolver, ItemDisplayContext displayContext, @Nullable ClientLevel level, @Nullable LivingEntity entity, int p_387820_) {
+    public void update(ItemStackRenderState renderState, ItemStack stack, ItemModelResolver modelResolver, ItemDisplayContext displayContext, @Nullable ClientLevel level, @Nullable ItemOwner owner, int i) {
         BlockModelWrapperAccessor accessor = (BlockModelWrapperAccessor) this;
         MuralSection section = stack.get(AetherIIDataComponents.MURAL_SECTION);
         List<BakedQuad> quads = AetherIIClientCaches.CACHED_MURAL_ITEM_PARTS.get(section);
@@ -56,7 +57,7 @@ public class MuralItemModel extends BlockModelWrapper {
         List<BakedQuad> finalQuads = quads;
         accessor.aether_ii$setQuads(finalQuads);
         accessor.aether_ii$setExtents(Suppliers.memoize(() -> computeExtents(finalQuads)));
-        super.update(renderState, stack, modelResolver, displayContext, level, entity, p_387820_);
+        super.update(renderState, stack, modelResolver, displayContext, level, owner, i);
     }
 
     public record Unbaked(Identifier model) implements ItemModel.Unbaked {
@@ -72,7 +73,7 @@ public class MuralItemModel extends BlockModelWrapper {
             ModelBaker modelbaker = context.blockModelBaker();
             ResolvedModel resolvedmodel = modelbaker.getModel(this.model);
             TextureSlots textureslots = resolvedmodel.getTopTextureSlots();
-            List<BakedQuad> list = resolvedmodel.bakeTopGeometry(textureslots, modelbaker, BlockModelRotation.X0_Y0).getAll();
+            List<BakedQuad> list = resolvedmodel.bakeTopGeometry(textureslots, modelbaker, BlockModelRotation.IDENTITY).getAll();
             ModelRenderProperties modelrenderproperties = ModelRenderProperties.fromResolvedModel(modelbaker, resolvedmodel, textureslots);
             RenderTypeGroup renderTypeGroup = resolvedmodel.getTopAdditionalProperties().getOptional(NeoForgeModelProperties.RENDER_TYPE);
             RenderType renderType = renderTypeGroup == null ? null : renderTypeGroup.entity();

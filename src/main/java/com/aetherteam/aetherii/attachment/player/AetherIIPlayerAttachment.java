@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class AetherIIPlayerAttachment {
-    private static final Identifier LOGOMARKS = Identifier.fromNamespaceAndPath(AetherII.MODID, "logomarks");
+    private static final FontDescription.Resource LOGOMARKS = new FontDescription.Resource(Identifier.fromNamespaceAndPath(AetherII.MODID, "logomarks"));
     private static final Style INFO = Style.EMPTY.withColor(0x56C1EF).withUnderlined(true).withClickEvent(new ClickEvent.ShowDialog(Holder.direct(getDialog()))).withHoverEvent(new HoverEvent.ShowText(Component.literal("Open Info Screen")));
     private static final Style PATREON = Style.EMPTY.withColor(16728653).withUnderlined(true).withClickEvent(new ClickEvent.OpenUrl(URI.create("https://www.patreon.com/TheAetherTeam"))).withHoverEvent(new HoverEvent.ShowText(Component.literal("https://www.patreon.com/TheAetherTeam")));
 
