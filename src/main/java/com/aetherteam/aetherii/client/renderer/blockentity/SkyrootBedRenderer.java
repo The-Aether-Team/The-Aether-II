@@ -40,8 +40,8 @@ import java.util.Set;
 public class SkyrootBedRenderer implements BlockEntityRenderer<SkyrootBedBlockEntity> {
     private static final Identifier BED_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/bed/skyroot/undyed.png");
     public static final Identifier[] DYED_BED_TEXTURES = Arrays.stream(DyeColor.values()).sorted(Comparator.comparingInt(DyeColor::getId)).map((dyeColor) -> Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/bed/skyroot/" + dyeColor.getName() + ".png")).toArray(Identifier[]::new);
-    private final Model headModel;
-    private final Model footModel;
+    private final Model.Simple headModel;
+    private final Model.Simple footModel;
 
     public SkyrootBedRenderer(BlockEntityRendererProvider.Context context) {
         this(context.getModelSet());
