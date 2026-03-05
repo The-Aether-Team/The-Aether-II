@@ -6,11 +6,11 @@ import com.aetherteam.aetherii.client.renderer.entity.model.CloudSkiffModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.CloudSkiffRenderState;
 import com.aetherteam.aetherii.entity.vehicle.CloudSkiff;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
@@ -28,7 +28,7 @@ public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRen
     }
 
     @Override
-    public void render(CloudSkiffRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+    public void submit(CloudSkiffRenderState renderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
         poseStack.pushPose();
         if (!renderState.unfoldAnimationState.isStarted() && renderState.animateUnfold) {
             renderState.unfoldAnimationState.startIfStopped(renderState.animationTick);
@@ -48,11 +48,13 @@ public class CloudSkiffRenderer extends EntityRenderer<CloudSkiff, CloudSkiffRen
         poseStack.mulPose(Axis.YN.rotationDegrees(90.0F));
         poseStack.translate(0.0F, 0.0F, -0.125F);
         this.model.setupAnim(renderState);
-        VertexConsumer vertexconsumer = bufferSource.getBuffer(this.model.renderType(CLOUD_SKIFF_TEXTURE));
-        this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, OverlayTexture.NO_OVERLAY);
+        submitNodeCollector.submitModel(this.model, renderState, poseStack, this.model.renderType(CLOUD_SKIFF_TEXTURE), renderState.lightCoords, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
+
         poseStack.popPose();
-        super.render(renderState, poseStack, bufferSource, packedLight);
+
+        super.submit(renderState, poseStack, submitNodeCollector, cameraRenderState);
     }
+
 
     @Override
     protected AABB getBoundingBoxForCulling(CloudSkiff minecraft) {

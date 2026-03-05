@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.client.particle.options.AttackStabParticleOption;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.minecraft.util.RandomSource;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -81,7 +82,8 @@ public class RedAttackStabParticle extends AttackSweepParticle {
             this.sprites = sprites;
         }
 
-        public Particle createParticle(AttackStabParticleOption options, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle createParticle(AttackStabParticleOption options, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed,
+                                       RandomSource randomSource) {
             return new RedAttackStabParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, options.shade(), this.sprites);
         }
     }

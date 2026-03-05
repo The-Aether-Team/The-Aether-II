@@ -25,9 +25,9 @@ public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, Ent
         super(context, new MoaModel(context.bakeLayer(AetherIIModelLayers.MOA)), 0.5F);
         this.defaultModel = new MoaModel(context.bakeLayer(AetherIIModelLayers.MOA));
         this.babyModel = new MoaBabyModel(context.bakeLayer(AetherIIModelLayers.MOA_BABY));
-        this.addLayer(new MoaKeratinLayer(this, context.getModelManager()));
-        this.addLayer(new MoaFeathersLayer(this, context.getModelManager()));
-        this.addLayer(new MoaEyesLayer(this, context.getModelManager()));
+        this.addLayer(new MoaKeratinLayer(this, context));
+        this.addLayer(new MoaFeathersLayer(this, context));
+        this.addLayer(new MoaEyesLayer(this, context));
         this.addLayer(new MoaSaddleLayer(this, context.getModelSet()));
         this.addLayer(new MoaSaddlebagLayer(this, context.getModelSet()));
     }

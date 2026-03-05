@@ -4,10 +4,11 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.AnimationState;
 import org.joml.Quaternionf;
+import org.joml.Quaternionfc;
 
 public class BladeshroomHunterRenderState extends LivingEntityRenderState {
-    public Quaternionf prevRotations = new Quaternionf();
-    public Quaternionf rotations = new Quaternionf();
+    public Quaternionfc prevRotations = new Quaternionf();
+    public Quaternionfc rotations = new Quaternionf();
 
     public Direction attachDir = Direction.DOWN;
     public float attachChangeProgress;

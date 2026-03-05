@@ -8,6 +8,7 @@ import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 
 public class AmbrosiumParticle extends BaseAshSmokeParticle {
     protected AmbrosiumParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, float quadSizeMultiplier, SpriteSet sprites) {
@@ -16,7 +17,7 @@ public class AmbrosiumParticle extends BaseAshSmokeParticle {
         this.gCol = 1.0F;
         this.bCol = 1.0F;
         this.quadSize *= 1.75F;
-        this.pickSprite(sprites);
+        this.setSprite(sprites.first());
     }
 
     @Override
@@ -60,7 +61,7 @@ public class AmbrosiumParticle extends BaseAshSmokeParticle {
             this.sprites = sprites;
         }
 
-        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
             return new AmbrosiumParticle(level, x, y, z, 0.0, 0.0, 0.0, 1.0F, this.sprites);
         }
     }

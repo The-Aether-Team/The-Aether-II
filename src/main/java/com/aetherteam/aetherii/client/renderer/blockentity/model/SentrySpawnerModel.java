@@ -1,16 +1,17 @@
 package com.aetherteam.aetherii.client.renderer.blockentity.model;
 
+import com.aetherteam.aetherii.client.renderer.blockentity.state.SentrySpawnerRenderState;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 
-public class SentrySpawnerModel extends Model {
+public class SentrySpawnerModel extends Model<SentrySpawnerRenderState> {
     private final ModelPart spawner;
 
     public SentrySpawnerModel(ModelPart root) {
-        super(root, RenderType::entityCutout);
+        super(root, RenderTypes::entityCutout);
         this.spawner = root.getChild("spawner");
     }
 

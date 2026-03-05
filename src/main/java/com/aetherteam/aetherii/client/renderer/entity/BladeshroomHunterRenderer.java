@@ -47,10 +47,10 @@ public class BladeshroomHunterRenderer<T extends BladeshroomHunter> extends MobR
                 super.setupRotations(entity, poseStack, rotationYaw, p_320045_);
             } else {
 
-                float yaw = (float) Math.toDegrees(Mth.atan2(entity.rotations.x, entity.rotations.z));
-                float pitch = (float) -Math.toDegrees(Mth.atan2(entity.rotations.y, Math.sqrt(entity.rotations.x * entity.rotations.x + entity.rotations.z * entity.rotations.z)));
-                float prevYaw = (float) Math.toDegrees(Mth.atan2(entity.prevRotations.x, entity.prevRotations.z));
-                float prevPitch = (float) -Math.toDegrees(Mth.atan2(entity.prevRotations.y, Math.sqrt(entity.prevRotations.x * entity.prevRotations.x + entity.prevRotations.z * entity.prevRotations.z)));
+                float yaw = (float) Math.toDegrees(Mth.atan2(entity.rotations.x(), entity.rotations.z()));
+                float pitch = (float) -Math.toDegrees(Mth.atan2(entity.rotations.y(), Math.sqrt(entity.rotations.x() * entity.rotations.x() + entity.rotations.z() * entity.rotations.z())));
+                float prevYaw = (float) Math.toDegrees(Mth.atan2(entity.prevRotations.x(), entity.prevRotations.z()));
+                float prevPitch = (float) -Math.toDegrees(Mth.atan2(entity.prevRotations.y(), Math.sqrt(entity.prevRotations.x() * entity.prevRotations.x() + entity.prevRotations.z() * entity.prevRotations.z())));
                 float realYaw = yaw;
                 float realPitch = pitch;
                 poseStack.translate(0.0F, trans, 0.0F);
