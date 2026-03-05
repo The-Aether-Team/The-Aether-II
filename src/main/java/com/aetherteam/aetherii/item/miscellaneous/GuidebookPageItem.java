@@ -43,11 +43,11 @@ public class GuidebookPageItem extends Item {
             List<GuidebookEntryData> dataList = stack.get(AetherIIDataComponents.GUIDEBOOK_ENTRY_DATA);
             if (dataList != null) {
                 for (GuidebookEntryData data : dataList) {
-                    if (data.registry().toString().equals(AetherIIRegistries.BESTIARY_ENTRY.location().toString())) {
+                    if (data.registry().toString().equals(AetherIIRegistries.BESTIARY_ENTRY.identifier().toString())) {
                         return this.unlockEntries(serverPlayer, stack, attachment, data, attachment.getBestiaryEntries());
-                    } else if (data.registry().toString().equals(AetherIIRegistries.EFFECTS_ENTRY.location().toString())) {
+                    } else if (data.registry().toString().equals(AetherIIRegistries.EFFECTS_ENTRY.identifier().toString())) {
                         return this.unlockEntries(serverPlayer, stack, attachment, data, attachment.getEffectsEntries());
-                    } else if (data.registry().toString().equals(AetherIIRegistries.EXPLORATION_ENTRY.location().toString())) {
+                    } else if (data.registry().toString().equals(AetherIIRegistries.EXPLORATION_ENTRY.identifier().toString())) {
                         return this.unlockEntries(serverPlayer, stack, attachment, data, attachment.getExplorationEntries());
                     }
                 }
