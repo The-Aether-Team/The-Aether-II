@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.item.model;
 
-import com.aetherteam.aetherii.AetherII;
+import com.mojang.math.Quadrant;
 import com.mojang.math.Transformation;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -15,18 +15,17 @@ import net.minecraft.client.resources.model.ModelDebugName;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ItemOwner;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.NeoForgeRenderTypes;
 import net.neoforged.neoforge.client.model.ComposedModelState;
 import net.neoforged.neoforge.client.model.UnbakedElementsHelper;
-import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShieldModel implements ItemModel {
     private static final ModelDebugName DEBUG_NAME = () -> "ShieldModel";
@@ -43,8 +42,8 @@ public class ShieldModel implements ItemModel {
     }
 
     @Override
-    public void update(ItemStackRenderState renderState, ItemStack stack, ItemModelResolver modelResolver, ItemDisplayContext displayContext, @Nullable ClientLevel level, @Nullable ItemOwner owner, int i) {
-        this.bake(displayContext).update(renderState, stack, modelResolver, displayContext, level, owner, i);
+    public void update(ItemStackRenderState itemStackRenderState, ItemStack itemStack, ItemModelResolver itemModelResolver, ItemDisplayContext itemDisplayContext, @org.jspecify.annotations.Nullable ClientLevel clientLevel, @org.jspecify.annotations.Nullable ItemOwner itemOwner, int i) {
+        this.bake(itemDisplayContext).update(itemStackRenderState, itemStack, itemModelResolver, itemDisplayContext, clientLevel, itemOwner, i);
     }
 
     private ItemModel bake(ItemDisplayContext displayContext) {
@@ -60,9 +59,9 @@ public class ShieldModel implements ItemModel {
         combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().back().get(3)), 7.998F, -7.998F, false));
 
         combinedQuads.addAll(UnbakedElementsHelper.bakeElements(UnbakedElementsHelper.createUnbakedItemElements(0, this.sprite(this.unbakedModel.textures().handle())), $ -> this.sprite(this.unbakedModel.textures().handle()),
-                new ComposedModelState(BlockModelRotation.X180_Y90, new Transformation(new Vector3f(0, px(0.5F), px(3.0F)), new Quaternionf(), new Vector3f(1, 1, 2), new Quaternionf()))));
+                new ComposedModelState(BlockModelRotation.get(Quadrant.fromXYAngles(Quadrant.R180, Quadrant.R90)), new Transformation(new Vector3f(0, px(0.5F), px(3.0F)), new Quaternionf(), new Vector3f(1, 1, 2), new Quaternionf()))));
 
-        return new CompositeModel(List.of(new BlockModelWrapper(List.of(), combinedQuads, new ModelRenderProperties(true, this.sprite(this.unbakedModel.textures().particle()), this.itemTransforms), displayContext == ItemDisplayContext.GUI ? NeoForgeRenderTypes.ITEM_UNSORTED_UNLIT_TRANSLUCENT.get() : NeoForgeRenderTypes.ITEM_UNSORTED_TRANSLUCENT.get())));
+        return new CompositeModel(List.of(new BlockModelWrapper(List.of(), combinedQuads, new ModelRenderProperties(true, this.sprite(this.unbakedModel.textures().particle()), this.itemTransforms), (stack) -> displayContext == ItemDisplayContext.GUI ? NeoForgeRenderTypes.ITEM_UNSORTED_UNLIT_TRANSLUCENT.get() : NeoForgeRenderTypes.ITEM_UNSORTED_TRANSLUCENT.get())));
     }
 
     public TextureAtlasSprite sprite(Identifier location) {

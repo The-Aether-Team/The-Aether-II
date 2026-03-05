@@ -10,14 +10,11 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,7 +34,7 @@ public class BiomeHooks {
     }
 
     public static int getColor(Biome biome, double x, double z) {
-        return biome.getModifiedSpecialEffects().getGrassColorModifier().modifyColor(
+        return biome.getModifiedSpecialEffects().grassColorModifier().modifyColor(
                 x, z, COLORS.getOrDefault(biome, AetherIIColorResolvers.AETHER_GRASS_COLOR));
     }
 

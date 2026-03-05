@@ -6,9 +6,10 @@ import com.aetherteam.aetherii.client.renderer.entity.model.AechorPlantModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.AechorPlantRenderState;
 import com.aetherteam.aetherii.entity.monster.AechorPlant;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.resources.Identifier;
 
 public class AechorPlantRenderer extends MobRenderer<AechorPlant, AechorPlantRenderState, AechorPlantModel> {
@@ -30,9 +31,9 @@ public class AechorPlantRenderer extends MobRenderer<AechorPlant, AechorPlantRen
     }
 
     @Override
-    public void render(AechorPlantRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int partialTick) {
+    public void submit(AechorPlantRenderState renderState, PoseStack p_434615_, SubmitNodeCollector p_433768_, CameraRenderState p_450931_) {
         if (renderState.deathTime <= 0) {
-            super.render(renderState, poseStack, bufferSource, partialTick);
+            super.submit(renderState, p_434615_, p_433768_, p_450931_);
         }
     }
 
