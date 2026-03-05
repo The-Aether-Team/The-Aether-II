@@ -4,15 +4,15 @@ import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
-import org.joml.Vector3f;
+import org.joml.Vector3fc;
+import org.jspecify.annotations.Nullable;
 
-import java.util.Set;
+import java.util.function.Consumer;
 
 public class SkyrootBedSpecialRenderer implements NoDataSpecialModelRenderer {
     private final SkyrootBedRenderer skyrootBedRenderer;
@@ -24,12 +24,13 @@ public class SkyrootBedSpecialRenderer implements NoDataSpecialModelRenderer {
     }
 
     @Override
-    public void render(ItemDisplayContext context, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, boolean partialTick) {
-        this.skyrootBedRenderer.renderInHand(poseStack, buffer, packedLight, packedOverlay, this.location);
+    public void getExtents(Consumer<Vector3fc> p_428290_) {
+        this.skyrootBedRenderer.getExtents(p_428290_);
     }
 
-    public void getExtents(Set<Vector3f> p_428290_) {
-        this.skyrootBedRenderer.getExtents(p_428290_);
+    @Override
+    public void submit(ItemDisplayContext itemDisplayContext, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int i1, boolean b, int i2) {
+        this.skyrootBedRenderer.renderInHand(poseStack, submitNodeCollector, i, i1, this.location);
     }
 
     public record Unbaked(Identifier texture) implements SpecialModelRenderer.Unbaked {
@@ -37,12 +38,14 @@ public class SkyrootBedSpecialRenderer implements NoDataSpecialModelRenderer {
                 Identifier.CODEC.fieldOf("texture").forGetter(SkyrootBedSpecialRenderer.Unbaked::texture)
         ).apply(instance, SkyrootBedSpecialRenderer.Unbaked::new));
 
+        @Override
+        public @Nullable SpecialModelRenderer<?> bake(BakingContext bakingContext) {
+            return new SkyrootBedSpecialRenderer(new SkyrootBedRenderer(bakingContext.entityModelSet()), this.texture());
+        }
+
         public MapCodec<SkyrootBedSpecialRenderer.Unbaked> type() {
             return MAP_CODEC;
         }
 
-        public SpecialModelRenderer<?> bake(EntityModelSet entityModelSet) {
-            return new SkyrootBedSpecialRenderer(new SkyrootBedRenderer(entityModelSet), this.texture());
-        }
     }
 }

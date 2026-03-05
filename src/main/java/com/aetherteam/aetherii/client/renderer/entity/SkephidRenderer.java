@@ -45,10 +45,10 @@ public class SkephidRenderer<T extends Skephid> extends MobRenderer<T, SkephidRe
                 super.setupRotations(entity, poseStack, rotationYaw, p_320045_);
             } else {
 
-                float yaw = (float) Math.toDegrees(Mth.atan2(entity.rotations.x, entity.rotations.z));
-                float pitch = (float) -Math.toDegrees(Mth.atan2(entity.rotations.y, Math.sqrt(entity.rotations.x * entity.rotations.x + entity.rotations.z * entity.rotations.z)));
-                float prevYaw = (float) Math.toDegrees(Mth.atan2(entity.prevRotations.x, entity.prevRotations.z));
-                float prevPitch = (float) -Math.toDegrees(Mth.atan2(entity.prevRotations.y, Math.sqrt(entity.prevRotations.x * entity.prevRotations.x + entity.prevRotations.z * entity.prevRotations.z)));
+                float yaw = (float) Math.toDegrees(Mth.atan2(entity.rotations.x(), entity.rotations.z()));
+                float pitch = (float) -Math.toDegrees(Mth.atan2(entity.rotations.y(), Math.sqrt(entity.rotations.x() * entity.rotations.x() + entity.rotations.z() * entity.rotations.z())));
+                float prevYaw = (float) Math.toDegrees(Mth.atan2(entity.prevRotations.x(), entity.prevRotations.z()));
+                float prevPitch = (float) -Math.toDegrees(Mth.atan2(entity.prevRotations.y(), Math.sqrt(entity.prevRotations.x() * entity.prevRotations.x() + entity.prevRotations.z() * entity.prevRotations.z())));
                 float realYaw = prevYaw * (1 - entity.attachChangeProgress) - yaw * entity.attachChangeProgress;
                 float realPitch = prevPitch * (1 - entity.attachChangeProgress) - pitch * entity.attachChangeProgress;
                 poseStack.translate(0.0F, trans, 0.0F);

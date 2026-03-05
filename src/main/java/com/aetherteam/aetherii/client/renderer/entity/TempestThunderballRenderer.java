@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.projectile.TempestThunderball;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -41,12 +40,6 @@ public class TempestThunderballRenderer extends EntityRenderer<TempestThunderbal
 
 
         super.submit(thunderball, poseStack, submitNodeCollector, cameraRenderState);
-    }
-
-    @Override
-    public void render(EntityRenderState thunderball, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
-
-        super.render(thunderball, poseStack, buffer, packedLight);
     }
 
     private static void vertex(VertexConsumer consumer, PoseStack.Pose pose, int packedLight, float x, int y, int u, int v) {

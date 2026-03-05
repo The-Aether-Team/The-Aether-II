@@ -1,7 +1,5 @@
 package com.aetherteam.aetherii.client.renderer.accessory;
 
-import java.util.function.Function;
-
 import com.aetherteam.aetherii.client.AetherIIAtlases;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
@@ -18,9 +16,11 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -34,9 +34,12 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import org.joml.Vector3f;
+
+import java.util.function.Function;
 
 public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityModel<? super S>> extends RenderLayer<S, M> implements FirstPersonRendering {
-    private static final Function<ArmorStyle.SpriteKey, TextureAtlasSprite> ARMOR_STYLE_SPRITE_LOOKUP = Util.memoize((key) -> Minecraft.getInstance().getModelManager().getAtlas(AetherIIAtlases.ARMOR_STYLES_SHEET).getSprite(key.textureId()));
+    private static final Function<ArmorStyle.SpriteKey, TextureAtlasSprite> ARMOR_STYLE_SPRITE_LOOKUP = Util.memoize((key) -> Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AetherIIAtlases.ARMOR_STYLES_SHEET).getSprite(key.textureId()));
     private final GlovesModel glovesModel;
     private final GlovesModel glovesModelSlim;
     private final GlovesModel glovesModelFirstPerson;
@@ -50,14 +53,12 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
         this.glovesModelSlimFirstPerson = new GlovesModel(Minecraft.getInstance().getEntityModels().bakeLayer(AetherIIModelLayers.GLOVES_SLIM_FIRST_PERSON));
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, S state, float netHeadYaw, float headPitch) {
-        if (Minecraft.getInstance().player != null) {
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, S s, float v, float v1) {
+        if (Minecraft.getInstance().player != null && s instanceof HumanoidRenderState humanoidRenderState) {
             AccessoryUtil.getFirst(Minecraft.getInstance().player, AccessoryContainer.SlotType.HANDWEAR).ifPresent((stack) -> {
                 Identifier id = BuiltInRegistries.ITEM.getKey(stack.getItem());
                 Identifier texture = Identifier.fromNamespaceAndPath(id.getNamespace(), "textures/entity/equipment/humanoid_gloves/" + id.getPath() + ".png");
-                VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderTypes.armorCutoutNoCull(texture), stack.hasFoil());
                 GlovesModel glovesModel = this.glovesModel;
 
                 if (this.getParentModel() instanceof HumanoidModel humanoidModel) {
@@ -65,49 +66,99 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
                         PlayerModelAccessor playerModelAccessor = (PlayerModelAccessor) playerModel;
                         glovesModel = playerModelAccessor.aether$getSlim() ? this.glovesModelSlim : this.glovesModel;
                     }
-                    humanoidModel.copyPropertiesTo(glovesModel);
+                    copyPropertiesTo(glovesModel, humanoidModel);
                 }
                 glovesModel.setAllVisible(false);
                 glovesModel.leftArm.visible = true;
                 glovesModel.rightArm.visible = true;
 
-                glovesModel.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
+                submitNodeCollector
+                        .submitModel(
+                                glovesModel,
+                                humanoidRenderState,
+                                poseStack,
+                                RenderTypes.armorCutoutNoCull(texture),
+                                packedLight,
+                                OverlayTexture.NO_OVERLAY,
+                                -1,
+                                null,
+                                s.outlineColor,
+                                null
+                        );
 
                 if (stack.is(ItemTags.DYEABLE)) {
                     IClientItemExtensions extensions = IClientItemExtensions.of(stack);
                     int color = ARGB.opaque(extensions.getDefaultDyeColor(stack));
-                    VertexConsumer dyedConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderTypes.armorCutoutNoCull(texture), stack.hasFoil());
-                    glovesModel.renderToBuffer(poseStack, dyedConsumer, packedLight, OverlayTexture.NO_OVERLAY, color);
+                    submitNodeCollector
+                            .submitModel(
+                                    glovesModel,
+                                    humanoidRenderState,
+                                    poseStack,
+                                    RenderTypes.armorCutoutNoCull(texture),
+                                    packedLight,
+                                    OverlayTexture.NO_OVERLAY,
+                                    color,
+                                    null,
+                                    s.outlineColor,
+                                    null
+                            );
+
                 }
 
                 ArmorStyle style = stack.get(AetherIIDataComponents.ARMOR_STYLE);
                 if (style != null && Minecraft.getInstance().level != null) {
                     TextureAtlasSprite sprite = ARMOR_STYLE_SPRITE_LOOKUP.apply(new ArmorStyle.SpriteKey(Minecraft.getInstance().level.registryAccess(), style, "humanoid_gloves"));
-                    VertexConsumer consumer = sprite.wrap(buffer.getBuffer(RenderTypes.armorCutoutNoCull(AetherIIAtlases.ARMOR_STYLES_SHEET)));
-                    glovesModel.renderToBuffer(poseStack, consumer, packedLight, OverlayTexture.NO_OVERLAY);
+                    submitNodeCollector
+                            .submitModel(
+                                    glovesModel,
+                                    humanoidRenderState,
+                                    poseStack,
+                                    RenderTypes.armorCutoutNoCull(AetherIIAtlases.ARMOR_STYLES_SHEET),
+                                    packedLight,
+                                    OverlayTexture.NO_OVERLAY,
+                                    -1,
+                                    sprite,
+                                    s.outlineColor,
+                                    null
+                            );
                 }
             });
         }
     }
 
+    public void copyPropertiesTo(HumanoidModel model, HumanoidModel from) {
+        copyFrom(model.head, from.head);
+        copyFrom(model.body, from.body);
+        copyFrom(model.rightArm, from.rightArm);
+        copyFrom(model.leftArm, from.leftArm);
+        copyFrom(model.rightLeg, from.rightLeg);
+        copyFrom(model.leftLeg, from.leftLeg);
+    }
+
+    public void copyFrom(ModelPart model, ModelPart from) {
+        model.offsetPos(new Vector3f(from.x, from.y, from.z));
+        model.offsetRotation(new Vector3f(from.xRot, from.yRot, from.zRot));
+    }
+
     @Override
-    public void renderOnFirstPerson(HumanoidArm arm, ItemStack stack, Player player, PoseStack poseStack, PlayerModel playerModel, MultiBufferSource buffer, int packedLight) {
-        PlayerModelAccessor playerModelAccessor = (PlayerModelAccessor) playerModel;
+    public void renderOnFirstPerson(HumanoidArm arm, ItemStack stack, Player player, PoseStack poseStack, PlayerModel model, MultiBufferSource buffer, int packedLight) {
+        PlayerModelAccessor playerModelAccessor = (PlayerModelAccessor) model;
         Identifier id = BuiltInRegistries.ITEM.getKey(stack.getItem());
         Identifier texture = Identifier.fromNamespaceAndPath(id.getNamespace(), "textures/entity/equipment/humanoid_gloves/" + id.getPath() + ".png");
-        VertexConsumer consumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderTypes.armorCutoutNoCull(texture), stack.hasFoil());
-        GlovesModel model = playerModelAccessor.aether$getSlim() ? this.glovesModelSlimFirstPerson : this.glovesModelFirstPerson;
+        VertexConsumer consumer = ItemRenderer.getFoilBuffer(buffer, RenderTypes.armorCutoutNoCull(texture), false, stack.hasFoil());
+        GlovesModel model2 = playerModelAccessor.aether$getSlim() ? this.glovesModelSlimFirstPerson : this.glovesModelFirstPerson;
 
-        ModelPart gloveArm = arm == HumanoidArm.RIGHT ? model.rightArm : model.leftArm;
-        ModelPart playerArm = arm == HumanoidArm.RIGHT ? playerModel.rightArm : playerModel.leftArm;
+        ModelPart gloveArm = arm == HumanoidArm.RIGHT ? model2.rightArm : model2.leftArm;
+        ModelPart playerArm = arm == HumanoidArm.RIGHT ? model.rightArm : model.leftArm;
         gloveArm.resetPose();
-        gloveArm.copyFrom(playerArm);
+        gloveArm.offsetPos(new Vector3f(playerArm.x, playerArm.y, playerArm.z));
+        gloveArm.offsetRotation(new Vector3f(playerArm.xRot, playerArm.yRot, playerArm.zRot));
         gloveArm.render(poseStack, consumer, packedLight, OverlayTexture.NO_OVERLAY);
 
         if (stack.is(ItemTags.DYEABLE)) {
             IClientItemExtensions extensions = IClientItemExtensions.of(stack);
             int color = ARGB.opaque(extensions.getDefaultDyeColor(stack));
-            VertexConsumer dyedConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderTypes.armorCutoutNoCull(texture), stack.hasFoil());
+            VertexConsumer dyedConsumer = ItemRenderer.getFoilBuffer(buffer, RenderTypes.armorCutoutNoCull(texture), false, stack.hasFoil());
             gloveArm.render(poseStack, dyedConsumer, packedLight, OverlayTexture.NO_OVERLAY, color);
         }
 
