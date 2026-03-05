@@ -46,7 +46,7 @@ public class SentryCrateBlockEntity extends RandomizableContainerBlockEntity {
         }
 
         @Override
-        protected boolean isOwnContainer(Player player) {
+        public boolean isOwnContainer(Player player) {
             if (!(player.containerMenu instanceof ChestMenu menu)) {
                 return false;
             } else {

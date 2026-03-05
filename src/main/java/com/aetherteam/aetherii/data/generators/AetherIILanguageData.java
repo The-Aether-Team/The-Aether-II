@@ -2237,7 +2237,7 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
 
     public void addSpawnEggItem(DeferredItem<? extends SpawnEggItem> key) {
         SpawnEggItem item = key.get();
-        EntityType<?> entitytype = item.getType(null, ItemStack.EMPTY);
+        EntityType<?> entitytype = item.getType(ItemStack.EMPTY);
         this.add(item, entityTypes.get(entitytype.getDescriptionId()).concat(" Spawn Egg"));
     }
 

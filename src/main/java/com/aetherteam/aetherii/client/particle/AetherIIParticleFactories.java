@@ -27,23 +27,23 @@ public class AetherIIParticleFactories {
         event.registerSpriteSet(AetherIIParticleTypes.GREATBOA_LEAVES.get(), AetherLeafParticle.GreatboaFactory::new);
         event.registerSpriteSet(AetherIIParticleTypes.AMBEROOT_LEAVES.get(), AetherLeafParticle.AmberootFactory::new);
         event.registerSpriteSet(AetherIIParticleTypes.IRRADIATED_LEAVES.get(), AetherLeafParticle.AmberootFactory::new);
-        event.registerSprite(AetherIIParticleTypes.DRIPPING_WATER.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> new DripParticle.DripHangParticle(level, x, y, z, Fluids.WATER, AetherIIParticleTypes.FALLING_WATER.get()) {
+        event.registerSpriteSet(AetherIIParticleTypes.DRIPPING_WATER.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> new DripParticle.DripHangParticle(level, x, y, z, Fluids.WATER, AetherIIParticleTypes.FALLING_WATER.get()) {
             @Override
-            public ParticleRenderType getRenderType() {
-                return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+            public SingleQuadParticle.Layer getLayer() {
+                return Layer.TRANSLUCENT;
             }
         });
-        event.registerSprite(AetherIIParticleTypes.FALLING_WATER.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> new DripParticle.FallAndLandParticle(level, x, y, z, Fluids.WATER, AetherIIParticleTypes.SPLASH.get()) {
+        event.registerSpriteSet(AetherIIParticleTypes.FALLING_WATER.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> new DripParticle.FallAndLandParticle(level, x, y, z, Fluids.WATER, AetherIIParticleTypes.SPLASH.get()) {
             @Override
-            public ParticleRenderType getRenderType() {
-                return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+            public SingleQuadParticle.Layer getLayer() {
+                return Layer.TRANSLUCENT;
             }
         });
         event.registerSpriteSet(AetherIIParticleTypes.SPLASH.get(), spriteSet -> (particle, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
             SplashParticle splashParticle = new SplashParticle(level, x, y, z, xSpeed, ySpeed, zSpeed) {
                 @Override
-                public ParticleRenderType getRenderType() {
-                    return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+                public SingleQuadParticle.Layer getLayer() {
+                    return Layer.TRANSLUCENT;
                 }
             };
             splashParticle.pickSprite(spriteSet);
@@ -52,22 +52,22 @@ public class AetherIIParticleFactories {
         event.registerSpriteSet(AetherIIParticleTypes.AMBROSIUM.get(), AmbrosiumParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.ALKAHEST.get(), AlkahestParticle.Provider::new);
         event.registerSpriteSet(AetherIIParticleTypes.HESTVEIL.get(), HestveilParticle.Provider::new);
-        event.registerSprite(AetherIIParticleTypes.DRIPPING_ALKAHEST.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
+        event.registerSpriteSet(AetherIIParticleTypes.DRIPPING_ALKAHEST.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
             DripParticle particle = new DripParticle.DripHangParticle(level, x, y, z, AetherIIFluids.ALKAHEST.get(), AetherIIParticleTypes.FALLING_ALKAHEST.get());
             particle.setColor(0.65F, 0.9F, 0.6F);
             return particle;
         });
-        event.registerSprite(AetherIIParticleTypes.FALLING_ALKAHEST.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
+        event.registerSpriteSet(AetherIIParticleTypes.FALLING_ALKAHEST.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
             DripParticle particle = new DripParticle.FallAndLandParticle(level, x, y, z, AetherIIFluids.ALKAHEST.get(), ParticleTypes.WHITE_SMOKE);
             particle.setColor(0.65F, 0.9F, 0.6F);
             return particle;
         });
-        event.registerSprite(AetherIIParticleTypes.DRIPPING_DRIPSTONE_ALKAHEST.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
+        event.registerSpriteSet(AetherIIParticleTypes.DRIPPING_DRIPSTONE_ALKAHEST.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
             DripParticle particle = new DripParticle.DripHangParticle(level, x, y, z, AetherIIFluids.ALKAHEST.get(), AetherIIParticleTypes.FALLING_DRIPSTONE_ALKAHEST.get());
             particle.setColor(0.65F, 0.9F, 0.6F);
             return particle;
         });
-        event.registerSprite(AetherIIParticleTypes.FALLING_DRIPSTONE_ALKAHEST.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
+        event.registerSpriteSet(AetherIIParticleTypes.FALLING_DRIPSTONE_ALKAHEST.get(), (particleType, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
             DripParticle particle = new DripParticle.DripstoneFallAndLandParticle(level, x, y, z, AetherIIFluids.ALKAHEST.get(), ParticleTypes.WHITE_SMOKE) {
                 @Override
                 protected void postMoveUpdate() {
@@ -88,8 +88,8 @@ public class AetherIIParticleFactories {
         event.registerSpriteSet(AetherIIParticleTypes.RAIN.get(), spriteSet -> (particle, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
             WaterDropParticle rainParticle = new WaterDropParticle(level, x, y, z) {
                 @Override
-                public ParticleRenderType getRenderType() {
-                    return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+                public SingleQuadParticle.Layer getLayer() {
+                    return Layer.TRANSLUCENT;
                 }
             };
             rainParticle.pickSprite(spriteSet);
