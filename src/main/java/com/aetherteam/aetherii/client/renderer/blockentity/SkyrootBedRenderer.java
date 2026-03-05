@@ -14,10 +14,10 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BrightnessCombiner;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
@@ -48,8 +48,8 @@ public class SkyrootBedRenderer implements BlockEntityRenderer<SkyrootBedBlockEn
     }
 
     public SkyrootBedRenderer(EntityModelSet modelSet) {
-        this.headModel = new Model.Simple(modelSet.bakeLayer(AetherIIModelLayers.SKYROOT_BED_HEAD), RenderType::entityCutout);
-        this.footModel = new Model.Simple(modelSet.bakeLayer(AetherIIModelLayers.SKYROOT_BED_FOOT), RenderType::entityCutout);
+        this.headModel = new Model.Simple(modelSet.bakeLayer(AetherIIModelLayers.SKYROOT_BED_HEAD), RenderTypes::entityCutout);
+        this.footModel = new Model.Simple(modelSet.bakeLayer(AetherIIModelLayers.SKYROOT_BED_FOOT), RenderTypes::entityCutout);
     }
 
     public static LayerDefinition createHeadLayer() {
@@ -99,7 +99,7 @@ public class SkyrootBedRenderer implements BlockEntityRenderer<SkyrootBedBlockEn
     private void renderPiece(PoseStack poseStack, MultiBufferSource bufferSource, Model model, Direction direction, Identifier location, int packedLight, int packedOverlay, boolean isFeet) {
         poseStack.pushPose();
         preparePose(poseStack, isFeet, direction);
-        VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderType.entityCutout(location));
+        VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderTypes.entityCutout(location));
         model.renderToBuffer(poseStack, vertexconsumer, packedLight, packedOverlay);
         poseStack.popPose();
     }

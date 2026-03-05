@@ -30,26 +30,26 @@ public record GuidebookEntryData(Identifier registry, String name, List<String> 
             GuidebookEntryData::new);
 
     public static GuidebookEntryData bestiary(ResourceKey<BestiaryEntry> name) {
-        return new GuidebookEntryData(AetherIIRegistries.BESTIARY_ENTRY.location(), name.location().toString(), List.of());
+        return new GuidebookEntryData(AetherIIRegistries.BESTIARY_ENTRY.identifier(), name.identifier().toString(), List.of());
     }
 
     public static GuidebookEntryData bestiary(ResourceKey<BestiaryEntry> name, String... values) {
-        return new GuidebookEntryData(AetherIIRegistries.BESTIARY_ENTRY.location(), name.location().toString(), List.of(values));
+        return new GuidebookEntryData(AetherIIRegistries.BESTIARY_ENTRY.identifier(), name.identifier().toString(), List.of(values));
     }
 
     public static GuidebookEntryData effects(ResourceKey<EffectsEntry> name) {
-        return new GuidebookEntryData(AetherIIRegistries.EFFECTS_ENTRY.location(), name.location().toString(), List.of());
+        return new GuidebookEntryData(AetherIIRegistries.EFFECTS_ENTRY.identifier(), name.identifier().toString(), List.of());
     }
 
     public static GuidebookEntryData effects(ResourceKey<EffectsEntry> name, String... values) {
-        return new GuidebookEntryData(AetherIIRegistries.EFFECTS_ENTRY.location(), name.location().toString(), List.of(values));
+        return new GuidebookEntryData(AetherIIRegistries.EFFECTS_ENTRY.identifier(), name.identifier().toString(), List.of(values));
     }
 
     public static GuidebookEntryData exploration(ResourceKey<ExplorationEntry> name) {
-        return new GuidebookEntryData(AetherIIRegistries.EXPLORATION_ENTRY.location(), name.location().toString(), List.of());
+        return new GuidebookEntryData(AetherIIRegistries.EXPLORATION_ENTRY.identifier(), name.identifier().toString(), List.of());
     }
 
     public static GuidebookEntryData exploration(ResourceKey<ExplorationEntry> name, String... values) {
-        return new GuidebookEntryData(AetherIIRegistries.EXPLORATION_ENTRY.location(), name.location().toString(), List.of(values));
+        return new GuidebookEntryData(AetherIIRegistries.EXPLORATION_ENTRY.identifier(), name.identifier().toString(), List.of(values));
     }
 }

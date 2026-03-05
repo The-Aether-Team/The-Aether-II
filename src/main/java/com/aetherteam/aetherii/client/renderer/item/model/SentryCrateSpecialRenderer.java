@@ -9,7 +9,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.resources.model.Material;
@@ -30,7 +30,7 @@ public class SentryCrateSpecialRenderer implements NoDataSpecialModelRenderer {
 
     @Override
     public void render(ItemDisplayContext context, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, boolean partialTick) {
-        VertexConsumer vertexConsumer = this.material.buffer(buffer, RenderType::entitySolid);
+        VertexConsumer vertexConsumer = this.material.buffer(buffer, RenderTypes::entitySolid);
         this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay);
     }
 
