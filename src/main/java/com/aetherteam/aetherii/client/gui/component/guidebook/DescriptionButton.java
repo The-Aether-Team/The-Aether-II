@@ -32,7 +32,7 @@ public class DescriptionButton extends ImageButton {
     @Override
     public void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         if (!(this.currentScreen instanceof GuidebookDiscoveryScreen screen) || screen.getCurrentSection().getSelectedEntry() != null) {
-            super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
+            super.renderContents(guiGraphics, mouseX, mouseY, partialTick);
         }
     }
 }

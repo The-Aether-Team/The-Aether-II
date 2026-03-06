@@ -28,13 +28,13 @@ public class AetherIIEnumExtensions {
 
     public static class Client {
         public static final EnumProxy<HumanoidModel.ArmPose> AETHER_II_DART_SHOOTER_ARM_POSE_PROXY = new EnumProxy<>(
-                HumanoidModel.ArmPose.class, true, AetherIIArmPoseTransformers.DART_SHOOTER_TRANSFORMER
+                HumanoidModel.ArmPose.class, true, false, AetherIIArmPoseTransformers.DART_SHOOTER_TRANSFORMER //todo
         );
         public static final EnumProxy<HumanoidModel.ArmPose> AETHER_II_GLIDING_ARM_POSE_PROXY = new EnumProxy<>(
-                HumanoidModel.ArmPose.class, true, AetherIIArmPoseTransformers.GLIDING_TRANSFORMER
+                HumanoidModel.ArmPose.class, true, false, AetherIIArmPoseTransformers.GLIDING_TRANSFORMER //todo
         );
         public static final EnumProxy<HumanoidModel.ArmPose> AETHER_II_SKIFF_SAILING_ARM_POSE_PROXY = new EnumProxy<>(
-                HumanoidModel.ArmPose.class, true, AetherIIArmPoseTransformers.SKIFF_SAILING_TRANSFORMER
+                HumanoidModel.ArmPose.class, true, false, AetherIIArmPoseTransformers.SKIFF_SAILING_TRANSFORMER //todo
         );
     }
 }
