@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookEquipmentScreen;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.aetherteam.aetherii.client.renderer.item.tooltip.ClientCharmTooltip;
-import com.aetherteam.aetherii.client.renderer.level.HolyIslesSpecialEffects;
 import com.aetherteam.aetherii.entity.monster.dungeon.boss.AetherBossMob;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.Charms;
@@ -50,6 +49,7 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.FogType;
@@ -170,7 +170,7 @@ public class RenderHooks {
     }
 
     public static void addReinforcementTooltip(ItemStack stack, List<Component> components, Item.TooltipContext context, TooltipFlag flag) {
-        stack.addToTooltip(AetherIIDataComponents.REINFORCEMENT_TIER, context, (component) -> components.add(1, component), flag);
+        stack.addToTooltip(AetherIIDataComponents.REINFORCEMENT_TIER, context, TooltipDisplay.DEFAULT, (component) -> components.add(1, component), flag);
     }
 
     public static void addAbilityAttributeTooltip(ItemStack itemStack, List<Component> tooltipLines, AttributeTooltipContext context) {
@@ -208,69 +208,69 @@ public class RenderHooks {
 
     @Nullable
     public static Triple<Float, Float, Float> adjustHeightBasedFogColors(Camera camera, float red, float green, float blue) {
-        if (camera.getEntity().level() instanceof ClientLevel clientLevel) {
-            if (clientLevel.effects() instanceof HolyIslesSpecialEffects) {
-                ClientLevel.ClientLevelData worldInfo = clientLevel.getLevelData();
-                FogType type = camera.getFluidInCamera();
-
-                double f = (camera.getPosition().y() - 64) * 0.03125F;
-                if (f < 1.0 && type != FogType.LAVA && type != FogType.POWDER_SNOW) {
-                    if (f < 0.0F) {
-                        f = 0.0F;
-                    }
-                    f *= f;
-                    red *= (float) Math.clamp(f, 0.2F, 1.0F);
-                    green *= (float) Math.clamp(f, 0.2F, 1.0F);
-                    blue *= (float) Math.clamp(f * 1.25F, 0.2F * 1.25F, 1.0F);
-                }
-
-//                double d0 = (camera.getPosition().y() - (double) clientLevel.getMinY()) * 0.03125F; //todo what was this used for?
-//                if (d0 < 1.0 && type != FogType.LAVA && type != FogType.POWDER_SNOW) {
-//                    if (d0 < 0.0) {
-//                        d0 = 0.0;
+//        if (camera.getEntity().level() instanceof ClientLevel clientLevel) { //TODO
+//            if (clientLevel.effects() instanceof HolyIslesSpecialEffects) {
+//                ClientLevel.ClientLevelData worldInfo = clientLevel.getLevelData();
+//                FogType type = camera.getFluidInCamera();
+//
+//                double f = (camera.getPosition().y() - 64) * 0.03125F;
+//                if (f < 1.0 && type != FogType.LAVA && type != FogType.POWDER_SNOW) {
+//                    if (f < 0.0F) {
+//                        f = 0.0F;
 //                    }
-//                    d0 *= d0;
-//                    if (d0 != 0.0) {
-//                        red /= (float) d0;
-//                        green /= (float) d0;
-//                        blue /= (float) d0;
-//                    }
+//                    f *= f;
+//                    red *= (float) Math.clamp(f, 0.2F, 1.0F);
+//                    green *= (float) Math.clamp(f, 0.2F, 1.0F);
+//                    blue *= (float) Math.clamp(f * 1.25F, 0.2F * 1.25F, 1.0F);
 //                }
-
-                return Triple.of(red, green, blue);
-            }
-        }
+//
+////                double d0 = (camera.getPosition().y() - (double) clientLevel.getMinY()) * 0.03125F; //todo what was this used for?
+////                if (d0 < 1.0 && type != FogType.LAVA && type != FogType.POWDER_SNOW) {
+////                    if (d0 < 0.0) {
+////                        d0 = 0.0;
+////                    }
+////                    d0 *= d0;
+////                    if (d0 != 0.0) {
+////                        red /= (float) d0;
+////                        green /= (float) d0;
+////                        blue /= (float) d0;
+////                    }
+////                }
+//
+//                return Triple.of(red, green, blue);
+//            }
+//        }
         return null;
     }
 
     @Nullable
     public static Triple<Float, Float, Float> adjustWeatherFogColors(Camera camera, float red, float green, float blue) {
-        if (camera.getEntity().level() instanceof ClientLevel clientLevel) {
-            if (clientLevel.effects() instanceof HolyIslesSpecialEffects) {
-                FogType fluidState = camera.getFluidInCamera();
-                if (fluidState == FogType.NONE) {
-                    Vec3 defaultSky = Vec3.fromRGB24(clientLevel.getBiome(camera.getBlockPosition()).value().getModifiedSpecialEffects().getFogColor());
-                    if (clientLevel.rainLevel > 0.0) { // Check for rain.
-                        float f14 = 1.0F + clientLevel.rainLevel * 0.8F;
-                        float f17 = 1.0F + clientLevel.rainLevel * 0.56F;
-                        red *= f14;
-                        green *= f14;
-                        blue *= f17;
-                    }
-                    if (clientLevel.thunderLevel > 0.0) { // Check for thunder.
-                        float f18 = 1.0F + clientLevel.thunderLevel * 0.66F;
-                        float f19 = 1.0F + clientLevel.thunderLevel * 0.76F;
-                        red *= f18;
-                        green *= f18;
-                        blue *= f19;
-                    }
-                    red = (float) Math.min(red, defaultSky.x());
-                    green = (float) Math.min(green, defaultSky.y());
-                    blue = (float) Math.min(blue, defaultSky.z());
-                    return Triple.of(red, green, blue);
-                }
-            }
-        }
+//        if (camera.getEntity().level() instanceof ClientLevel clientLevel) { //TODO
+//            if (clientLevel.effects() instanceof HolyIslesSpecialEffects) {
+//                FogType fluidState = camera.getFluidInCamera();
+//                if (fluidState == FogType.NONE) {
+//                    Vec3 defaultSky = Vec3.fromRGB24(clientLevel.getBiome(camera.getBlockPosition()).value().getModifiedSpecialEffects().getFogColor());
+//                    if (clientLevel.rainLevel > 0.0) { // Check for rain.
+//                        float f14 = 1.0F + clientLevel.rainLevel * 0.8F;
+//                        float f17 = 1.0F + clientLevel.rainLevel * 0.56F;
+//                        red *= f14;
+//                        green *= f14;
+//                        blue *= f17;
+//                    }
+//                    if (clientLevel.thunderLevel > 0.0) { // Check for thunder.
+//                        float f18 = 1.0F + clientLevel.thunderLevel * 0.66F;
+//                        float f19 = 1.0F + clientLevel.thunderLevel * 0.76F;
+//                        red *= f18;
+//                        green *= f18;
+//                        blue *= f19;
+//                    }
+//                    red = (float) Math.min(red, defaultSky.x());
+//                    green = (float) Math.min(green, defaultSky.y());
+//                    blue = (float) Math.min(blue, defaultSky.z());
+//                    return Triple.of(red, green, blue);
+//                }
+//            }
+//        }
         return null;
     }
 

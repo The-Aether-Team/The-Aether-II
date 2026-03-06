@@ -17,8 +17,10 @@ import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3f;
+import org.joml.Vector3fc;
 
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class AlkahestPurifierSpecialRenderer implements NoDataSpecialModelRenderer {
     private final AlkahestPurifierModel model;
@@ -41,12 +43,12 @@ public class AlkahestPurifierSpecialRenderer implements NoDataSpecialModelRender
     }
 
     @Override
-    public void getExtents(Set<Vector3f> set) {
+    public void getExtents(Consumer<Vector3fc> consumer) {
         PoseStack poseStack = new PoseStack();
         poseStack.translate(0.5F, 1.5F, 0.5F);
         poseStack.mulPose(Axis.XP.rotationDegrees(180));
         this.model.setupAnim(this.openness);
-        this.model.root().getExtentsForGui(poseStack, set);
+        this.model.root().getExtentsForGui(poseStack, consumer);
     }
 
     public record Unbaked(float openness) implements SpecialModelRenderer.Unbaked {
@@ -68,8 +70,8 @@ public class AlkahestPurifierSpecialRenderer implements NoDataSpecialModelRender
         }
 
         @Override
-        public SpecialModelRenderer<?> bake(EntityModelSet entityModelSet) {
-            AlkahestPurifierModel model = new AlkahestPurifierModel(entityModelSet.bakeLayer(AetherIIModelLayers.ALKAHEST_PURIFIER));
+        public SpecialModelRenderer<?> bake(BakingContext context) {
+            AlkahestPurifierModel model = new AlkahestPurifierModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.ALKAHEST_PURIFIER));
             return new AlkahestPurifierSpecialRenderer(model, this.openness);
         }
     }

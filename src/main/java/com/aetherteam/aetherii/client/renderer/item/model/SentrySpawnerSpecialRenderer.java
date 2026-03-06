@@ -16,8 +16,10 @@ import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3f;
+import org.joml.Vector3fc;
 
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class SentrySpawnerSpecialRenderer implements NoDataSpecialModelRenderer {
     private final SentrySpawnerModel model;
@@ -46,12 +48,12 @@ public class SentrySpawnerSpecialRenderer implements NoDataSpecialModelRenderer 
     }
 
     @Override
-    public void getExtents(Set<Vector3f> set) {
+    public void getExtents(Consumer<Vector3fc> consumer) {
         PoseStack poseStack = new PoseStack();
         poseStack.translate(0.5F, 1.5F, 0.5F);
         poseStack.mulPose(Axis.XP.rotationDegrees(180));
-        this.model.root().getExtentsForGui(poseStack, set);
-        this.pistonModel.root().getExtentsForGui(poseStack, set);
+        this.model.root().getExtentsForGui(poseStack, consumer);
+        this.pistonModel.root().getExtentsForGui(poseStack, consumer);
     }
 
     public record Unbaked() implements SpecialModelRenderer.Unbaked {
@@ -66,9 +68,9 @@ public class SentrySpawnerSpecialRenderer implements NoDataSpecialModelRenderer 
         }
 
         @Override
-        public SpecialModelRenderer<?> bake(EntityModelSet entityModelSet) {
-            SentrySpawnerModel model = new SentrySpawnerModel(entityModelSet.bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER));
-            SentrySpawnerPistonModel pistonModel = new SentrySpawnerPistonModel(entityModelSet.bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER_PISTON));
+        public SpecialModelRenderer<?> bake(BakingContext context) {
+            SentrySpawnerModel model = new SentrySpawnerModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER));
+            SentrySpawnerPistonModel pistonModel = new SentrySpawnerPistonModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER_PISTON));
 
             return new SentrySpawnerSpecialRenderer(model, pistonModel);
         }

@@ -22,7 +22,7 @@ public class FastModel extends DelegateBlockStateModel {
     public void collectParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockModelPart> parts) {
         for (BlockModelPart part : this.delegate.collectParts(level, pos, state, random)) {
             if (part instanceof SimpleModelWrapper simpleModelWrapper) {
-                parts.add(new SimpleModelWrapper(simpleModelWrapper.quads(), simpleModelWrapper.useAmbientOcclusion(), simpleModelWrapper.particleIcon(), Minecraft.useFancyGraphics() ? ChunkSectionLayer.CUTOUT_MIPPED : ChunkSectionLayer.SOLID));
+                parts.add(new SimpleModelWrapper(simpleModelWrapper.quads(), simpleModelWrapper.useAmbientOcclusion(), simpleModelWrapper.particleIcon(), Minecraft.getInstance().options.cutoutLeaves().get() ? ChunkSectionLayer.CUTOUT : ChunkSectionLayer.SOLID));
             }
         }
     }

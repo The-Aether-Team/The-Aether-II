@@ -16,8 +16,10 @@ import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3f;
+import org.joml.Vector3fc;
 
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class SentryCrateSpecialRenderer implements NoDataSpecialModelRenderer {
     private final SentryCrateModel model;
@@ -35,9 +37,9 @@ public class SentryCrateSpecialRenderer implements NoDataSpecialModelRenderer {
     }
 
     @Override
-    public void getExtents(Set<Vector3f> set) {
+    public void getExtents(Consumer<Vector3fc> consumer) {
         PoseStack posestack = new PoseStack();
-        this.model.root().getExtentsForGui(posestack, set);
+        this.model.root().getExtentsForGui(posestack, consumer);
     }
 
     public record Unbaked(Identifier texture) implements SpecialModelRenderer.Unbaked {
@@ -49,8 +51,8 @@ public class SentryCrateSpecialRenderer implements NoDataSpecialModelRenderer {
             return MAP_CODEC;
         }
 
-        public SpecialModelRenderer<?> bake(EntityModelSet entityModelSet) {
-            SentryCrateModel model = new SentryCrateModel(entityModelSet.bakeLayer(AetherIIModelLayers.SENTRY_CRATE));
+        public SpecialModelRenderer<?> bake(BakingContext context) {
+            SentryCrateModel model = new SentryCrateModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.SENTRY_CRATE));
             Material material = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(this.texture);
             return new SentryCrateSpecialRenderer(model, material);
         }

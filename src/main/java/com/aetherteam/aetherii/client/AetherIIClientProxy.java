@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client;
 
-import com.aetherteam.aetherii.client.renderer.level.HolyIslesSpecialEffects;
 import com.aetherteam.aetherii.client.sound.instance.MusicPlayerSoundInstance;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.SoundEngineAccessor;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.SoundManagerAccessor;
@@ -28,7 +27,7 @@ public class AetherIIClientProxy {
     public static boolean isPlayingSoundEvent(SoundEvent soundEvent) {
         SoundEngine soundEngine = ((SoundManagerAccessor) Minecraft.getInstance().getSoundManager()).aether_ii$getSoundEngine();
         Map<SoundInstance, ChannelAccess.ChannelHandle> soundInstances = ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel();
-        List<Identifier> sounds = soundInstances.keySet().stream().filter((soundInstance) -> soundInstance instanceof MusicPlayerSoundInstance).map(SoundInstance::getLocation).toList();
+        List<Identifier> sounds = soundInstances.keySet().stream().filter((soundInstance) -> soundInstance instanceof MusicPlayerSoundInstance).map(SoundInstance::getIdentifier).toList();
         return sounds.contains(soundEvent.location());
     }
 
@@ -43,12 +42,12 @@ public class AetherIIClientProxy {
     public static void stopOtherMusicPlayerSound(SoundSource source) {
         SoundEngine soundEngine = ((SoundManagerAccessor) Minecraft.getInstance().getSoundManager()).aether_ii$getSoundEngine();
         Map<SoundInstance, ChannelAccess.ChannelHandle> soundInstances = ((SoundEngineAccessor) soundEngine).aether_ii$getInstanceToChannel();
-        soundInstances.keySet().stream().filter((soundInstance) -> soundInstance instanceof MusicPlayerSoundInstance).map(SoundInstance::getLocation).forEach(location -> Minecraft.getInstance().getSoundManager().stop(location, source));
+        soundInstances.keySet().stream().filter((soundInstance) -> soundInstance instanceof MusicPlayerSoundInstance).map(SoundInstance::getIdentifier).forEach(location -> Minecraft.getInstance().getSoundManager().stop(location, source));
     }
 
-    public static boolean isHolyIslesSpecialEffects(Level level) {
-        return level instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HolyIslesSpecialEffects;
-    }
+//    public static boolean isHolyIslesSpecialEffects(Level level) { //TODO
+//        return level instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HolyIslesSpecialEffects;
+//    }
 
     public static boolean isAerbunnyInteractable() {
         return AetherIIKeyMappings.ALLOW_DISMOUNTING_PASSENGER.isDown();

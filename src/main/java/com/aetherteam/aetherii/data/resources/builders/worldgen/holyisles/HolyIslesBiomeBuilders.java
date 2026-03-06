@@ -36,7 +36,7 @@ public class HolyIslesBiomeBuilders {
             .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false))
             .build();
     private static final BiomeSpecialEffects ARCTIC_EFFECTS = new BiomeSpecialEffects.Builder()
-            .fogColor(0xf3f0ff)
+//            .fogColor(0xf3f0ff)
             .skyColor(0xe7e3fc)
             .waterColor(0x637aa8)
             .waterFogColor(0x3e5082)

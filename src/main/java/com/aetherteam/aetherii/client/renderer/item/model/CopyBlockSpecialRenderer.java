@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -26,8 +27,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
+import org.joml.Vector3fc;
 
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState> {
     private final Holder<Block> block;
@@ -39,18 +42,18 @@ public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState
     }
 
     @Override
-    public void render(@Nullable BlockState blockState, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay, boolean partialTick) {
+    public void submit(@Nullable BlockState blockState, ItemDisplayContext itemDisplayContext, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, int packedOverlay, boolean b, int i2) {
         BlockAndTintGetter world = Minecraft.getInstance().level;
         if (blockState != null && world != null) {
             poseStack.pushPose();
-            ModelBlockRenderer.renderModel(poseStack.last(), multiBufferSource, Minecraft.getInstance().getBlockRenderer().getBlockModel(blockState), 1.0F, 1.0F, 1.0F, packedLight, packedOverlay, EmptyBlockAndTintGetter.INSTANCE, BlockPos.ZERO, this.block.value().defaultBlockState());
-            this.drawSurfaces(multiBufferSource, poseStack.last(), -0.001F, -0.001F, 1.001F, 1.001F, -0.001F, 1.001F);
+            ModelBlockRenderer.renderModel(poseStack.last(), submitNodeCollector, Minecraft.getInstance().getBlockRenderer().getBlockModel(blockState), 1.0F, 1.0F, 1.0F, packedLight, packedOverlay, EmptyBlockAndTintGetter.INSTANCE, BlockPos.ZERO, this.block.value().defaultBlockState());
+            this.drawSurfaces(submitNodeCollector, poseStack.last(), -0.001F, -0.001F, 1.001F, 1.001F, -0.001F, 1.001F);
             poseStack.popPose();
         }
     }
 
     @Override
-    public void getExtents(Set<Vector3f> set) {
+    public void getExtents(Consumer<Vector3fc> consumer) {
         PoseStack posestack = new PoseStack();
         Vector3f[] cubeVectors = {
                 new Vector3f(16, 0, 16),
@@ -68,7 +71,7 @@ public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState
             float f1 = vertex.y() / 16.0F;
             float f2 = vertex.z() / 16.0F;
             Vector3f vector3f = posestack.last().pose().transformPosition(f, f1, f2, new Vector3f());
-            set.add(vector3f);
+            consumer.accept(vector3f);
         }
     }
 
@@ -135,7 +138,7 @@ public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState
         }
 
         @Override
-        public SpecialModelRenderer<?> bake(EntityModelSet entityModelSet) {
+        public SpecialModelRenderer<?> bake(BakingContext context) {
             return new CopyBlockSpecialRenderer(this.block(), this.overlay());
         }
     }
