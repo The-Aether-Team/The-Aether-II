@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.MaterialSet;
 import net.minecraft.core.Direction;
@@ -50,11 +51,11 @@ public class AlkahestPurifierRenderer implements BlockEntityRenderer<AlkahestPur
         float openNess = state.open;
         openNess = 1.0F - openNess;
         openNess = 1.0F - openNess * openNess * openNess;
-        this.render(poseStack, submitNodeCollector, state, -1, yRot, alkahestLevel, openNess);
+        this.render(poseStack, submitNodeCollector, state, state.lightCoords, yRot, alkahestLevel, openNess);
     }
 
 
-    public void render(PoseStack poseStack, SubmitNodeCollector collector, AlkahestPurifierRenderState state, int packedOverlay, float yRot, int alkahestLevel, float openness) {
+    public void render(PoseStack poseStack, SubmitNodeCollector collector, AlkahestPurifierRenderState state, int packedLight, float yRot, int alkahestLevel, float openness) {
         poseStack.pushPose();
         poseStack.translate(0.5F, 1.5F, 0.5F);
         poseStack.mulPose(Axis.XP.rotationDegrees(180));
@@ -63,7 +64,7 @@ public class AlkahestPurifierRenderer implements BlockEntityRenderer<AlkahestPur
         Material material = getTextureForLevel(state.level);
         this.model.setupAnim(openness);
         collector.submitModel(
-                this.model, state, poseStack, material.renderType(this.model::renderType), packedOverlay, state.lightCoords, -1, this.materialSet.get(material), 0, null
+                this.model, openness, poseStack, material.renderType(this.model::renderType), packedLight, OverlayTexture.NO_OVERLAY, -1, this.materialSet.get(material), 0, state.breakProgress
         );
 
         poseStack.popPose();

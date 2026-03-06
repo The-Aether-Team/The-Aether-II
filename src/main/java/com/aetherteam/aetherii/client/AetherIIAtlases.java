@@ -22,13 +22,13 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AetherIIAtlases {
-    public static final Identifier MOA_FEATHER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_feather.png");
-    public static final Identifier MOA_EYES_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_eyes.png");
-    public static final Identifier MOA_KERATIN_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_keratin.png");
-    public static final Identifier ARMOR_STYLES_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "armor_styles.png");
-    public static final Identifier ALKAHEST_PURIFIER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier.png");
-    public static final Identifier SENTRY_CRATE_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_crate.png");
-    public static final Identifier SENTRY_SPAWNER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner.png");
+    public static final Identifier MOA_FEATHER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_feather");
+    public static final Identifier MOA_EYES_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_eyes");
+    public static final Identifier MOA_KERATIN_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_keratin");
+    public static final Identifier ARMOR_STYLES_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "armor_styles");
+    public static final Identifier ALKAHEST_PURIFIER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier");
+    public static final Identifier SENTRY_CRATE_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_crate");
+    public static final Identifier SENTRY_SPAWNER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner");
 
     public static final Identifier MOA_FEATHER_SHEET = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/moa_feather.png");
     public static final Identifier MOA_EYES_SHEET = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/moa_eyes.png");

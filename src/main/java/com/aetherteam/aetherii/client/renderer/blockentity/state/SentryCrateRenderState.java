@@ -6,7 +6,6 @@ import net.minecraft.world.level.block.state.properties.ChestType;
 
 public class SentryCrateRenderState extends BlockEntityRenderState {
     public float open;
-    public float angle;
-    public Direction facing;
+    public Direction facing = Direction.NORTH;
     public ChestType type;
 }

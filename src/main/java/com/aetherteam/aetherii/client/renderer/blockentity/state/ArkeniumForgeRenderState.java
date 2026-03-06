@@ -6,6 +6,6 @@ import net.minecraft.core.Direction;
 
 public class ArkeniumForgeRenderState extends BlockEntityRenderState {
     public ItemStackRenderState item = new ItemStackRenderState();
-    public Direction facing;
+    public Direction facing = Direction.NORTH;
 
 }
