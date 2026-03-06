@@ -1088,38 +1088,38 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS, "Engraved Disc");
 
         // Spawn Eggs
-        this.addSpawnEggItem(AetherIIItems.AERBUNNY_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.FLYING_COW_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.SHEEPUFF_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.PHYG_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.AERWHALE_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG, "Taegore Spawn Egg");
-        this.addSpawnEggItem(AetherIIItems.MAGNETIC_TAEGORE_SPAWN_EGG, "Taegore Spawn Egg");
-        this.addSpawnEggItem(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG, "Taegore Spawn Egg");
-        this.addSpawnEggItem(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG, "Burrukai Spawn Egg");
-        this.addSpawnEggItem(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG, "Burrukai Spawn Egg");
-        this.addSpawnEggItem(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG, "Burrukai Spawn Egg");
-        this.addSpawnEggItem(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
-        this.addSpawnEggItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
-        this.addSpawnEggItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
-        this.addSpawnEggItem(AetherIIItems.MOA_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.CARRION_SPROUT_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.GLITTERWING_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.SHROUDWING_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.ZEPHYR_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.TEMPEST_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.COCKATRICE_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.BLUE_SWET_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.GOLDEN_SWET_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.SKEPHID_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.DETONATION_SENTRY_SPAWN_EGG);
-        this.addSpawnEggItem(AetherIIItems.SENTRY_GOLEM_SPAWN_EGG);
-        this.addItem(AetherIIItems.SENTRY_CRATE_MIMIC_SPAWN_EGG, "Sentry Crate Mimic Spawn Egg");
-        this.addSpawnEggItem(AetherIIItems.SLIDER_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.AERBUNNY_SPAWN_EGG); //todo
+//        this.addSpawnEggItem(AetherIIItems.FLYING_COW_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.SHEEPUFF_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.PHYG_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.AERWHALE_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG, "Taegore Spawn Egg");
+//        this.addSpawnEggItem(AetherIIItems.MAGNETIC_TAEGORE_SPAWN_EGG, "Taegore Spawn Egg");
+//        this.addSpawnEggItem(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG, "Taegore Spawn Egg");
+//        this.addSpawnEggItem(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG, "Burrukai Spawn Egg");
+//        this.addSpawnEggItem(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG, "Burrukai Spawn Egg");
+//        this.addSpawnEggItem(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG, "Burrukai Spawn Egg");
+//        this.addSpawnEggItem(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
+//        this.addSpawnEggItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
+//        this.addSpawnEggItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
+//        this.addSpawnEggItem(AetherIIItems.MOA_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.CARRION_SPROUT_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.GLITTERWING_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.SHROUDWING_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.ZEPHYR_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.TEMPEST_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.COCKATRICE_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.BLUE_SWET_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.GOLDEN_SWET_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.SKEPHID_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.DETONATION_SENTRY_SPAWN_EGG);
+//        this.addSpawnEggItem(AetherIIItems.SENTRY_GOLEM_SPAWN_EGG);
+//        this.addItem(AetherIIItems.SENTRY_CRATE_MIMIC_SPAWN_EGG, "Sentry Crate Mimic Spawn Egg");
+//        this.addSpawnEggItem(AetherIIItems.SLIDER_SPAWN_EGG);
 
         // Misc
         this.addItem(AetherIIItems.BEAST_PELT_BUNDLE, "Beast Pelt Bundle");
@@ -2235,11 +2235,11 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
         this.addItem(key, name);
     }
 
-    public void addSpawnEggItem(DeferredItem<? extends SpawnEggItem> key) {
-        SpawnEggItem item = key.get();
-        EntityType<?> entitytype = item.getType(ItemStack.EMPTY);
-        this.add(item, entityTypes.get(entitytype.getDescriptionId()).concat(" Spawn Egg"));
-    }
+//    public void addSpawnEggItem(DeferredItem<? extends SpawnEggItem> key) {
+//        SpawnEggItem item = key.get();
+//        EntityType<?> entitytype = item.getType(ItemStack.EMPTY);
+//        this.add(item, entityTypes.get(entitytype.getDescriptionId()).concat(" Spawn Egg"));
+//    }
 
     public void addMuralTitle(DeferredHolder<Mural, Mural> key, String title) {
         this.add(key.getKey().identifier().toLanguageKey("mural", "title"), title);
