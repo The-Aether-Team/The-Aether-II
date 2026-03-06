@@ -1,0 +1,19 @@
+darksonic300
+- Initial Tempest implementation.
+
+GizmoTheMoonPig
+- JEI compatibility.
+- Better compatibility for shearing checks.
+
+hikoma0000
+- Fixes to Aether Grass Block breaking particles.
+
+UltraSquid9
+- Allow candles to trigger Hestveil.
+- Add Wisproot and Greatroot Doors and Trapdoors.
+
+Zepalesque
+- Data Map biome tinting system.
+- Fixes to the world seed not being used correctly in some world generation.
+- Initial Cloudbed implementation
+- Add Small Amberoot tree.
