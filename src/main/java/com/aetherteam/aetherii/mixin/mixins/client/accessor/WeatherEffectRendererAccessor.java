@@ -18,8 +18,8 @@ public interface WeatherEffectRendererAccessor {
     @Accessor("rainSoundTime")
     void aether_ii$setRainSoundTime(int rainSoundTime);
 
-    @Invoker
-    void callCollectColumnInstances(Level level, int ticks, float partialTick, Vec3 cameraPosition, int radius, List<WeatherEffectRenderer.ColumnInstance> rainColumnInstances, List<WeatherEffectRenderer.ColumnInstance> snowColumnInstances);
+//    @Invoker
+//    void callCollectColumnInstances(Level level, int ticks, float partialTick, Vec3 cameraPosition, int radius, List<WeatherEffectRenderer.ColumnInstance> rainColumnInstances, List<WeatherEffectRenderer.ColumnInstance> snowColumnInstances);
 
     @Invoker
     void callRenderInstances(VertexConsumer buffer, List<WeatherEffectRenderer.ColumnInstance> columnInstances, Vec3 cameraPosition, float amount, int radius, float rainLevel);

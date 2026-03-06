@@ -22,7 +22,7 @@ public class MoaFeathersLayer extends RenderLayer<MoaRenderState, EntityModel<Mo
 
     public MoaFeathersLayer(RenderLayerParent<MoaRenderState, EntityModel<MoaRenderState>> renderer, EntityRendererProvider.@UnknownNullability Context context) {
         super(renderer);
-        this.moaFeathersAtlas = context.getAtlas(AetherIIAtlases.MOA_FEATHER_SHEET);
+        this.moaFeathersAtlas = context.getAtlas(AetherIIAtlases.MOA_FEATHER_ID);
     }
 
     @Override

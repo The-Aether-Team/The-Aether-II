@@ -22,7 +22,7 @@ public class MoaKeratinLayer extends RenderLayer<MoaRenderState, EntityModel<Moa
 
     public MoaKeratinLayer(RenderLayerParent<MoaRenderState, EntityModel<MoaRenderState>> renderer, EntityRendererProvider.@UnknownNullability Context context) {
         super(renderer);
-        this.moaKeratinAtlas = context.getAtlas(AetherIIAtlases.MOA_KERATIN_SHEET);
+        this.moaKeratinAtlas = context.getAtlas(AetherIIAtlases.MOA_KERATIN_ID);
     }
 
     @Override

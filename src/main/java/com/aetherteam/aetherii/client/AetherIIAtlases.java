@@ -22,6 +22,14 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AetherIIAtlases {
+    public static final Identifier MOA_FEATHER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_feather.png");
+    public static final Identifier MOA_EYES_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_eyes.png");
+    public static final Identifier MOA_KERATIN_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_keratin.png");
+    public static final Identifier ARMOR_STYLES_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "armor_styles.png");
+    public static final Identifier ALKAHEST_PURIFIER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier.png");
+    public static final Identifier SENTRY_CRATE_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_crate.png");
+    public static final Identifier SENTRY_SPAWNER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner.png");
+
     public static final Identifier MOA_FEATHER_SHEET = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/moa_feather.png");
     public static final Identifier MOA_EYES_SHEET = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/moa_eyes.png");
     public static final Identifier MOA_KERATIN_SHEET = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/moa_keratin.png");
@@ -54,12 +62,12 @@ public class AetherIIAtlases {
     public static final Map<Integer, Material> SENTRY_SPAWNER_MATERIALS = SentrySpawnerRenderer.getFrames();
 
     public static void registerAtlases(RegisterTextureAtlasesEvent event) {
-        event.register(new AtlasManager.AtlasConfig(MOA_FEATHER_SHEET, Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_feather"), false));
-        event.register(new AtlasManager.AtlasConfig(MOA_EYES_SHEET, Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_eyes"), false));
-        event.register(new AtlasManager.AtlasConfig(MOA_KERATIN_SHEET, Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_keratin"), false));
-        event.register(new AtlasManager.AtlasConfig(ARMOR_STYLES_SHEET, Identifier.fromNamespaceAndPath(AetherII.MODID, "armor_styles"), false));
-        event.register(new AtlasManager.AtlasConfig(ALKAHEST_PURIFIER_SHEET, Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier"), false));
-        event.register(new AtlasManager.AtlasConfig(SENTRY_CRATE_SHEET, Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_crate"), false));
-        event.register(new AtlasManager.AtlasConfig(SENTRY_SPAWNER_SHEET, Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner"), false));
+        event.register(new AtlasManager.AtlasConfig(MOA_FEATHER_SHEET, MOA_FEATHER_ID, false));
+        event.register(new AtlasManager.AtlasConfig(MOA_EYES_SHEET, MOA_EYES_ID, false));
+        event.register(new AtlasManager.AtlasConfig(MOA_KERATIN_SHEET, MOA_KERATIN_ID, false));
+        event.register(new AtlasManager.AtlasConfig(ARMOR_STYLES_SHEET, ARMOR_STYLES_ID, false));
+        event.register(new AtlasManager.AtlasConfig(ALKAHEST_PURIFIER_SHEET, ALKAHEST_PURIFIER_ID, false));
+        event.register(new AtlasManager.AtlasConfig(SENTRY_CRATE_SHEET, SENTRY_CRATE_ID, false));
+        event.register(new AtlasManager.AtlasConfig(SENTRY_SPAWNER_SHEET, SENTRY_SPAWNER_ID, false));
     }
 }

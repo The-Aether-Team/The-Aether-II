@@ -84,10 +84,10 @@ public class PointedDripstoneBlockMixin {
         }
     }
 
-    @WrapMethod(method = "spawnDripParticle(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/material/Fluid;)V")
-    private static void spawnDripParticle(Level level, BlockPos pos, BlockState state, Fluid p_fluid, Operation<Void> original) {
-        if (!(state.getBlock() instanceof AbstractPointedStoneBlock) || !p_fluid.isSame(Fluids.EMPTY)) {
-            original.call(level, pos, state, p_fluid);
+    @WrapMethod(method = "spawnDripParticle(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/BlockPos;)V")
+    private static void spawnDripParticle(Level level, BlockPos pos, BlockState state, Fluid fluid, BlockPos p_457661_, Operation<Void> original) {
+        if (!(state.getBlock() instanceof AbstractPointedStoneBlock) || !fluid.isSame(Fluids.EMPTY)) {
+            original.call(level, pos, state, fluid, p_457661_);
         }
     }
 }

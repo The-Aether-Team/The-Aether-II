@@ -8,7 +8,10 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TimelineTags;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.attribute.EnvironmentAttribute;
+import net.minecraft.world.attribute.EnvironmentAttributeMap;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
@@ -16,6 +19,7 @@ import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
+import net.minecraft.world.timeline.Timelines;
 
 import java.util.Optional;
 import java.util.OptionalLong;
@@ -31,23 +35,38 @@ public class AetherIIDimensions {
     public static final ResourceKey<LevelStem> AETHER_HOLY_ISLES_LEVEL_STEM = ResourceKey.create(Registries.LEVEL_STEM, AETHER_HOLY_ISLES_LEVEL_ID);
 
     public static void bootstrapDimensionType(BootstrapContext<DimensionType> context) {
-        context.register(AETHER_HOLY_ISLES_DIMENSION_TYPE, new DimensionType(
-                OptionalLong.empty(),
+//        context.register(AETHER_HOLY_ISLES_DIMENSION_TYPE, new DimensionType(
+//                OptionalLong.empty(),
+//                true,
+//                false,
+//                false,
+//                true,
+//                1.0D,
+//                true,
+//                false,
+//                -32,
+//                416,
+//                416,
+//                BlockTags.INFINIBURN_OVERWORLD,
+//                AETHER_HOLY_ISLES_LEVEL_ID,
+//                0.0F,
+//                Optional.of(256),
+//                new DimensionType.MonsterSettings(false, false, UniformInt.of(0, 7), 0)));
+        context.register(AETHER_HOLY_ISLES_DIMENSION_TYPE, new DimensionType( //todo
+                false,
                 true,
                 false,
-                false,
-                true,
                 1.0D,
-                true,
-                false,
                 -32,
                 416,
                 416,
                 BlockTags.INFINIBURN_OVERWORLD,
-                AETHER_HOLY_ISLES_LEVEL_ID,
                 0.0F,
-                Optional.of(256),
-                new DimensionType.MonsterSettings(false, false, UniformInt.of(0, 7), 0)));
+                new DimensionType.MonsterSettings(UniformInt.of(0, 7), 0),
+                DimensionType.Skybox.OVERWORLD,
+                DimensionType.CardinalLightType.DEFAULT,
+                EnvironmentAttributeMap.EMPTY,
+                context.lookup(Registries.TIMELINE).getOrThrow(TimelineTags.IN_OVERWORLD)));
     }
 
     public static void bootstrapLevelStem(BootstrapContext<LevelStem> context) {

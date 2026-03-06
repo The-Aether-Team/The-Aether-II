@@ -22,7 +22,7 @@ public class MoaEyesLayer extends RenderLayer<MoaRenderState, EntityModel<MoaRen
 
     public MoaEyesLayer(RenderLayerParent<MoaRenderState, EntityModel<MoaRenderState>> renderer, EntityRendererProvider.@UnknownNullability Context context) {
         super(renderer);
-        this.moaEyesAtlas = context.getAtlas(AetherIIAtlases.MOA_EYES_SHEET);
+        this.moaEyesAtlas = context.getAtlas(AetherIIAtlases.MOA_EYES_ID);
     }
 
     @Override

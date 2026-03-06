@@ -22,12 +22,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class LevelRendererMixin {
 	@Shadow @Final private RenderBuffers renderBuffers;
 
-	// Injects after buffersource.endBatch(Sheets.chestSheet()), and before this.renderBuffers.crumblingBufferSource().endBatch()
-	// If you have MinecraftModDev IJ plugin, it will link you to the wrong invocation of crumblingBufferSource()
-	@Inject(method = "lambda$addMainPass$3", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/RenderBuffers;crumblingBufferSource()Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;", shift = At.Shift.BEFORE))
-	private void endRedFoilBatch(GpuBufferSlice shaderFog, DeltaTracker deltaTracker, Camera camera, ProfilerFiller profiler, Matrix4f frustumMatrix, Frustum frustum, ResourceHandle resourcehandle2, ResourceHandle resourcehandle3, boolean renderBlockOutline, ResourceHandle resourcehandle1, ResourceHandle resourcehandle, CallbackInfo ci) {
-		MultiBufferSource.BufferSource bufferSource = this.renderBuffers.bufferSource();
-
-		bufferSource.endBatch(AetherIIRenderTypes.irradiatedGlint());
-	}
+//	// Injects after buffersource.endBatch(Sheets.chestSheet()), and before this.renderBuffers.crumblingBufferSource().endBatch() //todo
+//	// If you have MinecraftModDev IJ plugin, it will link you to the wrong invocation of crumblingBufferSource()
+//	@Inject(method = "lambda$addMainPass$3", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/RenderBuffers;crumblingBufferSource()Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;", shift = At.Shift.BEFORE))
+//	private void endRedFoilBatch(GpuBufferSlice shaderFog, DeltaTracker deltaTracker, Camera camera, ProfilerFiller profiler, Matrix4f frustumMatrix, Frustum frustum, ResourceHandle resourcehandle2, ResourceHandle resourcehandle3, boolean renderBlockOutline, ResourceHandle resourcehandle1, ResourceHandle resourcehandle, CallbackInfo ci) {
+//		MultiBufferSource.BufferSource bufferSource = this.renderBuffers.bufferSource();
+//
+//		bufferSource.endBatch(AetherIIRenderTypes.irradiatedGlint());
+//	}
 }

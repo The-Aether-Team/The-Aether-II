@@ -31,17 +31,17 @@ import java.util.function.Function;
 @Mixin(EquipmentLayerRenderer.class)
 public class EquipmentLayerRendererMixin {
     @Unique
-    private final Function<ArmorStyle.SpriteKey, TextureAtlasSprite> armorStyleSpriteLookup = Util.memoize((key) -> Minecraft.getInstance().getModelManager().getAtlas(AetherIIAtlases.ARMOR_STYLES_SHEET).getSprite(key.textureId()));
-
-    @Inject(method = "renderLayers(Lnet/minecraft/client/resources/model/EquipmentClientInfo$LayerType;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/client/model/Model;Lnet/minecraft/world/item/ItemStack;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/resources/Identifier;)V", at = @At(value = "TAIL"))
-    public void renderLayers(EquipmentClientInfo.LayerType layerType, ResourceKey<EquipmentAsset> equipmentAsset, Model armorModel, ItemStack stack, PoseStack poseStack, MultiBufferSource buffer, int light, Identifier texture, CallbackInfo ci, @Local List<EquipmentClientInfo.Layer> list) {
-        if (!list.isEmpty()) {
-            ArmorStyle style = stack.get(AetherIIDataComponents.ARMOR_STYLE);
-            if (style != null && Minecraft.getInstance().level != null) {
-                TextureAtlasSprite sprite = this.armorStyleSpriteLookup.apply(new ArmorStyle.SpriteKey(Minecraft.getInstance().level.registryAccess(), style, layerType.getSerializedName()));
-                VertexConsumer consumer = sprite.wrap(buffer.getBuffer(RenderTypes.armorCutoutNoCull(AetherIIAtlases.ARMOR_STYLES_SHEET)));
-                armorModel.renderToBuffer(poseStack, consumer, light, OverlayTexture.NO_OVERLAY);
-            }
-        }
-    }
+    private final Function<ArmorStyle.SpriteKey, TextureAtlasSprite> armorStyleSpriteLookup = Util.memoize((key) -> Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AetherIIAtlases.ARMOR_STYLES_ID).getSprite(key.textureId()));
+//TODO
+//    @Inject(method = "renderLayers(Lnet/minecraft/client/resources/model/EquipmentClientInfo$LayerType;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/client/model/Model;Ljava/lang/Object;Lnet/minecraft/world/item/ItemStack;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/resources/Identifier;II)V", at = @At(value = "TAIL"))
+//    public void renderLayers(EquipmentClientInfo.LayerType layerType, ResourceKey<EquipmentAsset> equipmentAsset, Model armorModel, ItemStack stack, PoseStack poseStack, MultiBufferSource buffer, int light, Identifier texture, CallbackInfo ci, @Local List<EquipmentClientInfo.Layer> list) {
+//        if (!list.isEmpty()) {
+//            ArmorStyle style = stack.get(AetherIIDataComponents.ARMOR_STYLE);
+//            if (style != null && Minecraft.getInstance().level != null) {
+//                TextureAtlasSprite sprite = this.armorStyleSpriteLookup.apply(new ArmorStyle.SpriteKey(Minecraft.getInstance().level.registryAccess(), style, layerType.getSerializedName()));
+//                VertexConsumer consumer = sprite.wrap(buffer.getBuffer(RenderTypes.armorCutoutNoCull(AetherIIAtlases.ARMOR_STYLES_SHEET)));
+//                armorModel.renderToBuffer(poseStack, consumer, light, OverlayTexture.NO_OVERLAY);
+//            }
+//        }
+//    }
 }

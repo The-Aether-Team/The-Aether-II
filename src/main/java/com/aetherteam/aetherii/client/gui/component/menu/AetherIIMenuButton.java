@@ -31,7 +31,7 @@ public class AetherIIMenuButton extends Button {
     }
 
     public AetherIIMenuButton(AetherIITitleScreen screen, Button oldButton) { //todo onPress
-        this(screen, new Builder(oldButton.getMessage(), oldButton.onPress).bounds(oldButton.getX(), oldButton.getY(), oldButton.getWidth(), oldButton.getHeight()).createNarration((button) -> ((ButtonAccessor) oldButton).callCreateNarrationMessage()));
+        this(screen, new Builder(oldButton.getMessage(), null).bounds(oldButton.getX(), oldButton.getY(), oldButton.getWidth(), oldButton.getHeight()).createNarration((button) -> ((ButtonAccessor) oldButton).callCreateNarrationMessage()));
         oldButton.visible = false;
         oldButton.active = false;
     }

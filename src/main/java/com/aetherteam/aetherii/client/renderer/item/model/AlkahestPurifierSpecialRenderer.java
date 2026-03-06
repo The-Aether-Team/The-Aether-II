@@ -11,6 +11,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
@@ -32,15 +33,20 @@ public class AlkahestPurifierSpecialRenderer implements NoDataSpecialModelRender
     }
 
     @Override
-    public void render(ItemDisplayContext context, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, boolean partialTick) {
-        VertexConsumer vertexconsumer = AlkahestPurifierRenderer.ALKAHEST_PURIFIER_0.buffer(buffer, RenderTypes::entitySolid);
-        poseStack.pushPose();
-        poseStack.translate(0.5F, 1.5F, 0.5F);
-        poseStack.mulPose(Axis.XP.rotationDegrees(180));
-        this.model.setupAnim(this.openness);
-        this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, packedOverlay);
-        poseStack.popPose();
+    public void submit(ItemDisplayContext itemDisplayContext, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int i1, boolean b, int i2) {
+
     }
+
+    //    @Override //TODO
+//    public void render(ItemDisplayContext context, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, boolean partialTick) {
+//        VertexConsumer vertexconsumer = AlkahestPurifierRenderer.ALKAHEST_PURIFIER_0.buffer(buffer, RenderTypes::entitySolid);
+//        poseStack.pushPose();
+//        poseStack.translate(0.5F, 1.5F, 0.5F);
+//        poseStack.mulPose(Axis.XP.rotationDegrees(180));
+//        this.model.setupAnim(this.openness);
+//        this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, packedOverlay);
+//        poseStack.popPose();
+//    }
 
     @Override
     public void getExtents(Consumer<Vector3fc> consumer) {

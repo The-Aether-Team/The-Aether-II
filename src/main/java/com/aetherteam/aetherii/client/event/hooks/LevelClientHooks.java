@@ -12,6 +12,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderBuffers;
 import net.minecraft.client.renderer.culling.Frustum;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -124,63 +125,63 @@ public class LevelClientHooks {
     }
 
     private static void drawSurfaces(MultiBufferSource buffer, PoseStack.Pose pose, BlockPos blockPos, Camera camera, float startX, float startZ, float endX, float endZ, float botY, float topY, int type) {
-        VertexConsumer builder = buffer.getBuffer(RenderType.cutout());
-        TextureAtlasSprite sprite = spriteForId(type);
-
-        if (sprite != null) {
-            float minU = sprite.getU1();
-            float maxU = sprite.getU0();
-            float minV = sprite.getV1();
-            float maxV = sprite.getV0();
-
-            // Renders an overlay on the bottom face of a block if the camera is below it, i.e. the camera can see the block face.
-            if (camera.position().y() < blockPos.getY() + botY) {
-                buildVertex(builder, pose, startX, botY, startZ, minU, minV, 0, -1, 0);
-                buildVertex(builder, pose, endX, botY, startZ, maxU, minV, 0, -1, 0);
-                buildVertex(builder, pose, endX, botY, endZ, maxU, maxV, 0, -1, 0);
-                buildVertex(builder, pose, startX, botY, endZ, minU, maxV, 0, -1, 0);
-            }
-
-            // Renders an overlay on the top face of a block if the camera is above it, i.e. the camera can see the block face.
-            if (camera.position().y() > blockPos.getY() + topY) {
-                buildVertex(builder, pose, endX, topY, startZ, minU, minV, 0, 1, 0);
-                buildVertex(builder, pose, startX, topY, startZ, maxU, minV, 0, 1, 0);
-                buildVertex(builder, pose, startX, topY, endZ, maxU, maxV, 0, 1, 0);
-                buildVertex(builder, pose, endX, topY, endZ, minU, maxV, 0, 1, 0);
-            }
-
-            // Renders an overlay on the north face of a block if the camera's z-coordinate is less than the block's z-coordinate, i.e. the camera can see the block face.
-            if (camera.position().z() < blockPos.getZ() + startZ) {
-                buildVertex(builder, pose, startX, botY, startZ, minU, minV, 0, 0, -1);
-                buildVertex(builder, pose, startX, topY, startZ, minU, maxV, 0, 0, -1);
-                buildVertex(builder, pose, endX, topY, startZ, maxU, maxV, 0, 0, -1);
-                buildVertex(builder, pose, endX, botY, startZ, maxU, minV, 0, 0, -1);
-            }
-
-            // Renders an overlay on the south face of a block if the camera's z-coordinate is greater than the block's z-coordinate, i.e. the camera can see the block face.
-            if (camera.position().z() > blockPos.getZ() + endZ) {
-                buildVertex(builder, pose, endX, botY, endZ, minU, minV, 0, 0, 1);
-                buildVertex(builder, pose, endX, topY, endZ, minU, maxV, 0, 0, 1);
-                buildVertex(builder, pose, startX, topY, endZ, maxU, maxV, 0, 0, 1);
-                buildVertex(builder, pose, startX, botY, endZ, maxU, minV, 0, 0, 1);
-            }
-
-            // Renders an overlay on the west face of a block if the camera's x-coordinate is less than the block's x-coordinate, i.e. the camera can see the block face.
-            if (camera.position().x() < blockPos.getX() + startX) {
-                buildVertex(builder, pose, startX, botY, endZ, minU, minV, -1, 0, 0);
-                buildVertex(builder, pose, startX, topY, endZ, minU, maxV, -1, 0, 0);
-                buildVertex(builder, pose, startX, topY, startZ, maxU, maxV, -1, 0, 0);
-                buildVertex(builder, pose, startX, botY, startZ, maxU, minV, -1, 0, 0);
-            }
-
-            // Renders an overlay on the east face of a block if the camera's x-coordinate is greater than the block's x-coordinate, i.e. the camera can see the block face.
-            if (camera.position().x() > blockPos.getX() + endX) {
-                buildVertex(builder, pose, endX, botY, startZ, minU, minV, 1, 0, 0);
-                buildVertex(builder, pose, endX, topY, startZ, minU, maxV, 1, 0, 0);
-                buildVertex(builder, pose, endX, topY, endZ, maxU, maxV, 1, 0, 0);
-                buildVertex(builder, pose, endX, botY, endZ, maxU, minV, 1, 0, 0);
-            }
-        }
+//        VertexConsumer builder = buffer.getBuffer(RenderTypes.cutout()); //TODO
+//        TextureAtlasSprite sprite = spriteForId(type);
+//
+//        if (sprite != null) {
+//            float minU = sprite.getU1();
+//            float maxU = sprite.getU0();
+//            float minV = sprite.getV1();
+//            float maxV = sprite.getV0();
+//
+//            // Renders an overlay on the bottom face of a block if the camera is below it, i.e. the camera can see the block face.
+//            if (camera.position().y() < blockPos.getY() + botY) {
+//                buildVertex(builder, pose, startX, botY, startZ, minU, minV, 0, -1, 0);
+//                buildVertex(builder, pose, endX, botY, startZ, maxU, minV, 0, -1, 0);
+//                buildVertex(builder, pose, endX, botY, endZ, maxU, maxV, 0, -1, 0);
+//                buildVertex(builder, pose, startX, botY, endZ, minU, maxV, 0, -1, 0);
+//            }
+//
+//            // Renders an overlay on the top face of a block if the camera is above it, i.e. the camera can see the block face.
+//            if (camera.position().y() > blockPos.getY() + topY) {
+//                buildVertex(builder, pose, endX, topY, startZ, minU, minV, 0, 1, 0);
+//                buildVertex(builder, pose, startX, topY, startZ, maxU, minV, 0, 1, 0);
+//                buildVertex(builder, pose, startX, topY, endZ, maxU, maxV, 0, 1, 0);
+//                buildVertex(builder, pose, endX, topY, endZ, minU, maxV, 0, 1, 0);
+//            }
+//
+//            // Renders an overlay on the north face of a block if the camera's z-coordinate is less than the block's z-coordinate, i.e. the camera can see the block face.
+//            if (camera.position().z() < blockPos.getZ() + startZ) {
+//                buildVertex(builder, pose, startX, botY, startZ, minU, minV, 0, 0, -1);
+//                buildVertex(builder, pose, startX, topY, startZ, minU, maxV, 0, 0, -1);
+//                buildVertex(builder, pose, endX, topY, startZ, maxU, maxV, 0, 0, -1);
+//                buildVertex(builder, pose, endX, botY, startZ, maxU, minV, 0, 0, -1);
+//            }
+//
+//            // Renders an overlay on the south face of a block if the camera's z-coordinate is greater than the block's z-coordinate, i.e. the camera can see the block face.
+//            if (camera.position().z() > blockPos.getZ() + endZ) {
+//                buildVertex(builder, pose, endX, botY, endZ, minU, minV, 0, 0, 1);
+//                buildVertex(builder, pose, endX, topY, endZ, minU, maxV, 0, 0, 1);
+//                buildVertex(builder, pose, startX, topY, endZ, maxU, maxV, 0, 0, 1);
+//                buildVertex(builder, pose, startX, botY, endZ, maxU, minV, 0, 0, 1);
+//            }
+//
+//            // Renders an overlay on the west face of a block if the camera's x-coordinate is less than the block's x-coordinate, i.e. the camera can see the block face.
+//            if (camera.position().x() < blockPos.getX() + startX) {
+//                buildVertex(builder, pose, startX, botY, endZ, minU, minV, -1, 0, 0);
+//                buildVertex(builder, pose, startX, topY, endZ, minU, maxV, -1, 0, 0);
+//                buildVertex(builder, pose, startX, topY, startZ, maxU, maxV, -1, 0, 0);
+//                buildVertex(builder, pose, startX, botY, startZ, maxU, minV, -1, 0, 0);
+//            }
+//
+//            // Renders an overlay on the east face of a block if the camera's x-coordinate is greater than the block's x-coordinate, i.e. the camera can see the block face.
+//            if (camera.position().x() > blockPos.getX() + endX) {
+//                buildVertex(builder, pose, endX, botY, startZ, minU, minV, 1, 0, 0);
+//                buildVertex(builder, pose, endX, topY, startZ, minU, maxV, 1, 0, 0);
+//                buildVertex(builder, pose, endX, topY, endZ, maxU, maxV, 1, 0, 0);
+//                buildVertex(builder, pose, endX, botY, endZ, maxU, minV, 1, 0, 0);
+//            }
+//        }
     }
 
     private static void buildVertex(VertexConsumer builder, PoseStack.Pose pose, float x, float y, float z, float u, float v, float normalX, float normalY, float normalZ) {

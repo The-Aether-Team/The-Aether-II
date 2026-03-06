@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.client.renderer.item.model;
 
 import com.aetherteam.aetherii.blockentity.MuralSection;
 import com.aetherteam.aetherii.client.AetherIIClientCaches;
-import com.aetherteam.aetherii.client.renderer.block.model.blockstate.MuralModel;
+//import com.aetherteam.aetherii.client.renderer.block.model.blockstate.MuralModel;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.BlockModelWrapperAccessor;
 import com.google.common.base.Suppliers;
@@ -45,9 +45,9 @@ public class MuralItemModel extends BlockModelWrapper {
             if (quads == null) {
                 quads = new ArrayList<>(accessor.aether_ii$getQuads());
                 quads.replaceAll((originalQuad) -> {
-                    if (originalQuad.direction() == Direction.NORTH) {
-                        return MuralModel.rebakeQuad(section, originalQuad);
-                    }
+//                    if (originalQuad.direction() == Direction.NORTH) { //todo
+//                        return MuralModel.rebakeQuad(section, originalQuad);
+//                    }
                     return originalQuad;
                 });
                 AetherIIClientCaches.CACHED_MURAL_ITEM_PARTS.put(section, quads);

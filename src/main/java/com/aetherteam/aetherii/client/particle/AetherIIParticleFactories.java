@@ -46,7 +46,7 @@ public class AetherIIParticleFactories {
                     return Layer.TRANSLUCENT;
                 }
             };
-            splashParticle.getSprite(spriteSet);
+//            splashParticle.getSprite(spriteSet);
             return splashParticle;
         });
         event.registerSpriteSet(AetherIIParticleTypes.AMBROSIUM.get(), AmbrosiumParticle.Provider::new);
@@ -92,7 +92,7 @@ public class AetherIIParticleFactories {
                     return Layer.TRANSLUCENT;
                 }
             };
-            rainParticle.pickSprite(spriteSet);
+//            rainParticle.pickSprite(spriteSet);
             return rainParticle;
         });
         event.registerSpriteSet(AetherIIParticleTypes.IRRADIATION.get(), IrradiationParticle.Factory::new);

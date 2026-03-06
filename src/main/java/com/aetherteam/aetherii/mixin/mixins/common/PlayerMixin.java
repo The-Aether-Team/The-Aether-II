@@ -48,14 +48,14 @@ public abstract class PlayerMixin { //todo sounds
         itemCooldowns = ((ItemCooldownsWrapper) itemCooldowns).aether_ii$setPlayer(player);
         this.cooldowns = itemCooldowns;
     }
-
-    @ModifyExpressionValue(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;getItemInHand(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;"), method = "attack(Lnet/minecraft/world/entity/Entity;)V")
-    private ItemStack getItemInHand(ItemStack original, @Share("canShortswordSlash") LocalBooleanRef canShortswordSlash, @Share("canHammerShock") LocalBooleanRef canHammerShock, @Share("canSpearStab") LocalBooleanRef canSpearStab) {
-        canShortswordSlash.set(original.canPerformAction(AetherIINeoItemAbilities.SHORTSWORD_SLASH));
-        canHammerShock.set(original.canPerformAction(AetherIINeoItemAbilities.HAMMER_SHOCK));
-        canSpearStab.set(original.canPerformAction(AetherIINeoItemAbilities.SPEAR_STAB));
-        return original;
-    }
+// todo
+//    @ModifyExpressionValue(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;getItemInHand(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;"), method = "attack(Lnet/minecraft/world/entity/Entity;)V")
+//    private ItemStack getItemInHand(ItemStack original, @Share("canShortswordSlash") LocalBooleanRef canShortswordSlash, @Share("canHammerShock") LocalBooleanRef canHammerShock, @Share("canSpearStab") LocalBooleanRef canSpearStab) {
+//        canShortswordSlash.set(original.canPerformAction(AetherIINeoItemAbilities.SHORTSWORD_SLASH));
+//        canHammerShock.set(original.canPerformAction(AetherIINeoItemAbilities.HAMMER_SHOCK));
+//        canSpearStab.set(original.canPerformAction(AetherIINeoItemAbilities.SPEAR_STAB));
+//        return original;
+//    }
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;setLastHurtMob(Lnet/minecraft/world/entity/Entity;)V", shift = At.Shift.BEFORE), method = "attack(Lnet/minecraft/world/entity/Entity;)V")
     private void attack(Entity target, CallbackInfo ci, @Share("canShortswordSlash") LocalBooleanRef canShortswordSlash, @Share("canHammerShock") LocalBooleanRef canHammerShock, @Share("canSpearStab") LocalBooleanRef canSpearStab) {
@@ -64,14 +64,14 @@ public abstract class PlayerMixin { //todo sounds
         MixinHooks.hammerShockBehavior(player, target, canHammerShock.get());
         MixinHooks.spearStabBehavior(player, target, canSpearStab.get());
     }
-
-    @WrapOperation(method = "attack(Lnet/minecraft/world/entity/Entity;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurtServer(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
-    private static boolean wrapHurtServer(LivingEntity instance, ServerLevel serverLevel, DamageSource damageSource, float damage, Operation<Boolean> original, @Local LivingEntity livingEntity) {
-        if (livingEntity instanceof PlantMob) {
-            return false;
-        }
-        return original.call(instance, serverLevel, damageSource, damage);
-    }
+// todo
+//    @WrapOperation(method = "attack(Lnet/minecraft/world/entity/Entity;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurtServer(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
+//    private static boolean wrapHurtServer(LivingEntity instance, ServerLevel serverLevel, DamageSource damageSource, float damage, Operation<Boolean> original, @Local LivingEntity livingEntity) {
+//        if (livingEntity instanceof PlantMob) {
+//            return false;
+//        }
+//        return original.call(instance, serverLevel, damageSource, damage);
+//    }
 
     /**
      * Used to set whether the player tried to crouch for {@link MountableAnimal}, before crouching is cancelled for mounts by the {@link Player} class.

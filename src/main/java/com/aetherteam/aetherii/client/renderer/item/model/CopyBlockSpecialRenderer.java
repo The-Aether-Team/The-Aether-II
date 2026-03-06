@@ -8,7 +8,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
@@ -43,13 +42,13 @@ public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState
 
     @Override
     public void submit(@Nullable BlockState blockState, ItemDisplayContext itemDisplayContext, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, int packedOverlay, boolean b, int i2) {
-        BlockAndTintGetter world = Minecraft.getInstance().level;
-        if (blockState != null && world != null) {
-            poseStack.pushPose();
-            ModelBlockRenderer.renderModel(poseStack.last(), submitNodeCollector, Minecraft.getInstance().getBlockRenderer().getBlockModel(blockState), 1.0F, 1.0F, 1.0F, packedLight, packedOverlay, EmptyBlockAndTintGetter.INSTANCE, BlockPos.ZERO, this.block.value().defaultBlockState());
-            this.drawSurfaces(submitNodeCollector, poseStack.last(), -0.001F, -0.001F, 1.001F, 1.001F, -0.001F, 1.001F);
-            poseStack.popPose();
-        }
+//        BlockAndTintGetter world = Minecraft.getInstance().level; //TODO
+//        if (blockState != null && world != null) {
+//            poseStack.pushPose();
+//            ModelBlockRenderer.renderModel(poseStack.last(), submitNodeCollector, Minecraft.getInstance().getBlockRenderer().getBlockModel(blockState), 1.0F, 1.0F, 1.0F, packedLight, packedOverlay, EmptyBlockAndTintGetter.INSTANCE, BlockPos.ZERO, this.block.value().defaultBlockState());
+//            this.drawSurfaces(submitNodeCollector, poseStack.last(), -0.001F, -0.001F, 1.001F, 1.001F, -0.001F, 1.001F);
+//            poseStack.popPose();
+//        }
     }
 
     @Override
@@ -75,47 +74,47 @@ public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState
         }
     }
 
-    private void drawSurfaces(MultiBufferSource buffer, PoseStack.Pose pose, float startX, float startZ, float endX, float endZ, float botY, float topY) {
-        VertexConsumer builder = buffer.getBuffer(RenderType.cutout());
-        TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(this.overlay);
-
-        if (sprite != null) {
-            float minU = sprite.getU1();
-            float maxU = sprite.getU0();
-            float minV = sprite.getV1();
-            float maxV = sprite.getV0();
-
-            buildVertex(builder, pose, startX, botY, startZ, minU, minV, 0, -1, 0);
-            buildVertex(builder, pose, endX, botY, startZ, maxU, minV, 0, -1, 0);
-            buildVertex(builder, pose, endX, botY, endZ, maxU, maxV, 0, -1, 0);
-            buildVertex(builder, pose, startX, botY, endZ, minU, maxV, 0, -1, 0);
-
-            buildVertex(builder, pose, endX, topY, startZ, minU, minV, 0, 1, 0);
-            buildVertex(builder, pose, startX, topY, startZ, maxU, minV, 0, 1, 0);
-            buildVertex(builder, pose, startX, topY, endZ, maxU, maxV, 0, 1, 0);
-            buildVertex(builder, pose, endX, topY, endZ, minU, maxV, 0, 1, 0);
-
-            buildVertex(builder, pose, startX, botY, startZ, minU, minV, 0, 0, -1);
-            buildVertex(builder, pose, startX, topY, startZ, minU, maxV, 0, 0, -1);
-            buildVertex(builder, pose, endX, topY, startZ, maxU, maxV, 0, 0, -1);
-            buildVertex(builder, pose, endX, botY, startZ, maxU, minV, 0, 0, -1);
-
-            buildVertex(builder, pose, endX, botY, endZ, minU, minV, 0, 0, 1);
-            buildVertex(builder, pose, endX, topY, endZ, minU, maxV, 0, 0, 1);
-            buildVertex(builder, pose, startX, topY, endZ, maxU, maxV, 0, 0, 1);
-            buildVertex(builder, pose, startX, botY, endZ, maxU, minV, 0, 0, 1);
-
-            buildVertex(builder, pose, startX, botY, endZ, minU, minV, -1, 0, 0);
-            buildVertex(builder, pose, startX, topY, endZ, minU, maxV, -1, 0, 0);
-            buildVertex(builder, pose, startX, topY, startZ, maxU, maxV, -1, 0, 0);
-            buildVertex(builder, pose, startX, botY, startZ, maxU, minV, -1, 0, 0);
-
-            buildVertex(builder, pose, endX, botY, startZ, minU, minV, 1, 0, 0);
-            buildVertex(builder, pose, endX, topY, startZ, minU, maxV, 1, 0, 0);
-            buildVertex(builder, pose, endX, topY, endZ, maxU, maxV, 1, 0, 0);
-            buildVertex(builder, pose, endX, botY, endZ, maxU, minV, 1, 0, 0);
-        }
-    }
+//    private void drawSurfaces(MultiBufferSource buffer, PoseStack.Pose pose, float startX, float startZ, float endX, float endZ, float botY, float topY) { //TODO
+//        VertexConsumer builder = buffer.getBuffer(RenderType.cutout());
+//        TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(this.overlay);
+//
+//        if (sprite != null) {
+//            float minU = sprite.getU1();
+//            float maxU = sprite.getU0();
+//            float minV = sprite.getV1();
+//            float maxV = sprite.getV0();
+//
+//            buildVertex(builder, pose, startX, botY, startZ, minU, minV, 0, -1, 0);
+//            buildVertex(builder, pose, endX, botY, startZ, maxU, minV, 0, -1, 0);
+//            buildVertex(builder, pose, endX, botY, endZ, maxU, maxV, 0, -1, 0);
+//            buildVertex(builder, pose, startX, botY, endZ, minU, maxV, 0, -1, 0);
+//
+//            buildVertex(builder, pose, endX, topY, startZ, minU, minV, 0, 1, 0);
+//            buildVertex(builder, pose, startX, topY, startZ, maxU, minV, 0, 1, 0);
+//            buildVertex(builder, pose, startX, topY, endZ, maxU, maxV, 0, 1, 0);
+//            buildVertex(builder, pose, endX, topY, endZ, minU, maxV, 0, 1, 0);
+//
+//            buildVertex(builder, pose, startX, botY, startZ, minU, minV, 0, 0, -1);
+//            buildVertex(builder, pose, startX, topY, startZ, minU, maxV, 0, 0, -1);
+//            buildVertex(builder, pose, endX, topY, startZ, maxU, maxV, 0, 0, -1);
+//            buildVertex(builder, pose, endX, botY, startZ, maxU, minV, 0, 0, -1);
+//
+//            buildVertex(builder, pose, endX, botY, endZ, minU, minV, 0, 0, 1);
+//            buildVertex(builder, pose, endX, topY, endZ, minU, maxV, 0, 0, 1);
+//            buildVertex(builder, pose, startX, topY, endZ, maxU, maxV, 0, 0, 1);
+//            buildVertex(builder, pose, startX, botY, endZ, maxU, minV, 0, 0, 1);
+//
+//            buildVertex(builder, pose, startX, botY, endZ, minU, minV, -1, 0, 0);
+//            buildVertex(builder, pose, startX, topY, endZ, minU, maxV, -1, 0, 0);
+//            buildVertex(builder, pose, startX, topY, startZ, maxU, maxV, -1, 0, 0);
+//            buildVertex(builder, pose, startX, botY, startZ, maxU, minV, -1, 0, 0);
+//
+//            buildVertex(builder, pose, endX, botY, startZ, minU, minV, 1, 0, 0);
+//            buildVertex(builder, pose, endX, topY, startZ, minU, maxV, 1, 0, 0);
+//            buildVertex(builder, pose, endX, topY, endZ, maxU, maxV, 1, 0, 0);
+//            buildVertex(builder, pose, endX, botY, endZ, maxU, minV, 1, 0, 0);
+//        }
+//    }
 
     private static void buildVertex(VertexConsumer builder, PoseStack.Pose pose, float x, float y, float z, float u, float v, float normalX, float normalY, float normalZ) {
         builder.addVertex(pose, x, y, z).setColor(0xFF, 0xFF, 0xFF, 0xAA).setUv(u, v).setOverlay(OverlayTexture.NO_OVERLAY).setLight(240).setNormal(pose, normalX, normalY, normalZ);

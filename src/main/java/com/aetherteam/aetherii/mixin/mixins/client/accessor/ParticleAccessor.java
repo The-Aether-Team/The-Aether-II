@@ -6,6 +6,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(Particle.class)
 public interface ParticleAccessor {
-    @Accessor("alpha")
-    void aether_ii$setAlpha(float alpha);
+//    @Accessor("alpha") //todo
+//    void aether_ii$setAlpha(float alpha);
 }

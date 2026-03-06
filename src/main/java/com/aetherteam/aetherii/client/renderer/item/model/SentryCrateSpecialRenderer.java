@@ -9,6 +9,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
@@ -31,10 +32,15 @@ public class SentryCrateSpecialRenderer implements NoDataSpecialModelRenderer {
     }
 
     @Override
-    public void render(ItemDisplayContext context, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, boolean partialTick) {
-        VertexConsumer vertexConsumer = this.material.buffer(buffer, RenderTypes::entitySolid);
-        this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay);
+    public void submit(ItemDisplayContext itemDisplayContext, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int i1, boolean b, int i2) {
+
     }
+
+    //    @Override //TODO
+//    public void render(ItemDisplayContext context, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, boolean partialTick) {
+//        VertexConsumer vertexConsumer = this.material.buffer(buffer, RenderTypes::entitySolid);
+//        this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay);
+//    }
 
     @Override
     public void getExtents(Consumer<Vector3fc> consumer) {

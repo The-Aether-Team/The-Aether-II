@@ -83,19 +83,19 @@ public abstract class AvatarRendererMixin extends LivingEntityRenderer<AbstractC
 
     @Inject(method = "getArmPose(Lnet/minecraft/world/entity/Avatar;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/client/model/HumanoidModel$ArmPose;", at = @At(value = "HEAD"), cancellable = true)
     private static void getArmPose(Avatar player, ItemStack stack, InteractionHand hand, CallbackInfoReturnable<HumanoidModel.ArmPose> cir) {
-        IClientItemExtensions extensions = IClientItemExtensions.of(stack);
-        HumanoidModel.ArmPose armPose = extensions.getArmPose(player, hand, stack);
-        if (armPose == null) {
-            if (player.getVehicle() instanceof CloudSkiff && !player.swinging && !(player.getUsedItemHand() == hand && player.getUseItemRemainingTicks() > 0)) {
-                cir.setReturnValue(AetherIIArmPoses.SKIFF_SAILING);
-            }
-            if (!stack.isEmpty()) {
-                if (player.getUsedItemHand() != hand || player.getUseItemRemainingTicks() <= 0) {
-                    if (!player.swinging && stack.is(Tags.Items.TOOLS_CROSSBOW) && stack.getItem() instanceof TieredCrossbowItem && TieredCrossbowItem.isCharged(stack)) {
-                        cir.setReturnValue(HumanoidModel.ArmPose.CROSSBOW_HOLD);
-                    }
-                }
-            }
-        }
+//        IClientItemExtensions extensions = IClientItemExtensions.of(stack); //todo
+//        HumanoidModel.ArmPose armPose = extensions.getArmPose(player, hand, stack);
+//        if (armPose == null) {
+//            if (player.getVehicle() instanceof CloudSkiff && !player.swinging && !(player.getUsedItemHand() == hand && player.getUseItemRemainingTicks() > 0)) {
+//                cir.setReturnValue(AetherIIArmPoses.SKIFF_SAILING);
+//            }
+//            if (!stack.isEmpty()) {
+//                if (player.getUsedItemHand() != hand || player.getUseItemRemainingTicks() <= 0) {
+//                    if (!player.swinging && stack.is(Tags.Items.TOOLS_CROSSBOW) && stack.getItem() instanceof TieredCrossbowItem && TieredCrossbowItem.isCharged(stack)) {
+//                        cir.setReturnValue(HumanoidModel.ArmPose.CROSSBOW_HOLD);
+//                    }
+//                }
+//            }
+//        }
     }
 }

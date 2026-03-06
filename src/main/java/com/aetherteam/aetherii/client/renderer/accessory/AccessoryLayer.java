@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
@@ -25,18 +26,23 @@ public class AccessoryLayer<S extends HumanoidRenderState, M extends HumanoidMod
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, S state, float netHeadYaw, float headPitch) {
-        if (Minecraft.getInstance().player != null) {
-            AccessoryUtil.getFirst(Minecraft.getInstance().player, AccessoryContainer.SlotType.ACCESSORY).ifPresent((stack) -> {
-                HumanoidModel<S> model = this.accessoryModel;
-                this.getParentModel().copyPropertiesTo(model);
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, S s, float v, float v1) {
 
-                Identifier itemLocation = BuiltInRegistries.ITEM.getKey(stack.getItem());
-                Identifier texture = Identifier.fromNamespaceAndPath(itemLocation.getNamespace(), "textures/entity/equipment/accessory/" + itemLocation.getPath() + ".png");
-                VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(texture), stack.hasFoil());
-
-                model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
-            });
-        }
     }
+
+//    @Override //todo
+//    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, S state, float netHeadYaw, float headPitch) {
+//        if (Minecraft.getInstance().player != null) {
+//            AccessoryUtil.getFirst(Minecraft.getInstance().player, AccessoryContainer.SlotType.ACCESSORY).ifPresent((stack) -> {
+//                HumanoidModel<S> model = this.accessoryModel;
+//                this.getParentModel().copyPropertiesTo(model);
+//
+//                Identifier itemLocation = BuiltInRegistries.ITEM.getKey(stack.getItem());
+//                Identifier texture = Identifier.fromNamespaceAndPath(itemLocation.getNamespace(), "textures/entity/equipment/accessory/" + itemLocation.getPath() + ".png");
+//                VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(texture), stack.hasFoil());
+//
+//                model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
+//            });
+//        }
+//    }
 }

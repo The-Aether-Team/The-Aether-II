@@ -34,9 +34,9 @@ public class MoaEggRenderer implements BlockEntityRenderer<MoaEggBlockEntity, Mo
 
     public MoaEggRenderer(BlockEntityRendererProvider.Context pContext) {
         this.moaEggModel = new MoaEggModel(pContext.entityModelSet().bakeLayer(AetherIIModelLayers.MOA_EGG));
-        this.moaFeathersAtlas = Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AetherIIAtlases.MOA_FEATHER_SHEET);
-        this.moaKeratinAtlas = Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AetherIIAtlases.MOA_KERATIN_SHEET);
-        this.moaEyesAtlas = Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AetherIIAtlases.MOA_EYES_SHEET);
+        this.moaFeathersAtlas = Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AetherIIAtlases.MOA_FEATHER_ID);
+        this.moaKeratinAtlas = Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AetherIIAtlases.MOA_KERATIN_ID);
+        this.moaEyesAtlas = Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AetherIIAtlases.MOA_EYES_ID);
     }
 
 

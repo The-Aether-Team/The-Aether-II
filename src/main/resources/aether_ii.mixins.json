@@ -39,7 +39,6 @@
     "common.accessor.SaplingBlockAccessor",
     "common.accessor.ServerGamePacketListenerImplAccessor",
     "common.accessor.SlotAccessor",
-    "debug.DebugPacketsMixin",
     "debug.PathFinderMixin",
     "debug.accessor.PathAccessor"
   ],
@@ -54,7 +53,6 @@
     "client.HumanoidMobRendererMixin",
     "client.HumanoidModelMixin",
     "client.ItemInHandRendererMixin",
-    "client.LayerRenderStateMixin",
     "client.LevelRendererMixin",
     "client.LiquidBlockRendererMixin",
     "client.LivingEntityRendererMixin",
@@ -63,7 +61,6 @@
     "client.MultiPlayerGameModeMixin",
     "client.MusicManagerMixin",
     "client.PlayerItemInHandLayerMixin",
-    "client.PlayerRendererMixin",
     "client.TitleScreenMixin",
     "client.ToastManagerMixin",
     "client.accessor.AbstractWidgetAccessor",
