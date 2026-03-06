@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.item.equipment.AetherIINeoItemAbilities;
 import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.LivingEntityAccessor;
 import com.aetherteam.aetherii.mixin.wrappers.common.ItemCooldownsWrapper;
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -32,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Player.class)
-public abstract class PlayerMixin { //todo sounds
+public abstract class PlayerMixin {
     @Mutable
     @Final
     @Shadow
@@ -48,30 +47,22 @@ public abstract class PlayerMixin { //todo sounds
         itemCooldowns = ((ItemCooldownsWrapper) itemCooldowns).aether_ii$setPlayer(player);
         this.cooldowns = itemCooldowns;
     }
-// todo
-//    @ModifyExpressionValue(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;getItemInHand(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;"), method = "attack(Lnet/minecraft/world/entity/Entity;)V")
-//    private ItemStack getItemInHand(ItemStack original, @Share("canShortswordSlash") LocalBooleanRef canShortswordSlash, @Share("canHammerShock") LocalBooleanRef canHammerShock, @Share("canSpearStab") LocalBooleanRef canSpearStab) {
-//        canShortswordSlash.set(original.canPerformAction(AetherIINeoItemAbilities.SHORTSWORD_SLASH));
-//        canHammerShock.set(original.canPerformAction(AetherIINeoItemAbilities.HAMMER_SHOCK));
-//        canSpearStab.set(original.canPerformAction(AetherIINeoItemAbilities.SPEAR_STAB));
-//        return original;
-//    }
 
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;setLastHurtMob(Lnet/minecraft/world/entity/Entity;)V", shift = At.Shift.BEFORE), method = "attack(Lnet/minecraft/world/entity/Entity;)V")
-    private void attack(Entity target, CallbackInfo ci, @Share("canShortswordSlash") LocalBooleanRef canShortswordSlash, @Share("canHammerShock") LocalBooleanRef canHammerShock, @Share("canSpearStab") LocalBooleanRef canSpearStab) {
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;causeExtraKnockback(Lnet/minecraft/world/entity/Entity;FLnet/minecraft/world/phys/Vec3;)V"), method = "attack(Lnet/minecraft/world/entity/Entity;)V")
+    private void attack(Entity target, CallbackInfo ci, @Local ItemStack weapon, @Share("canShortswordSlash") LocalBooleanRef canShortswordSlash, @Share("canHammerShock") LocalBooleanRef canHammerShock, @Share("canSpearStab") LocalBooleanRef canSpearStab) {
         Player player = (Player) (Object) this;
-        MixinHooks.shortswordSlashBehavior(player, target, canShortswordSlash.get());
-        MixinHooks.hammerShockBehavior(player, target, canHammerShock.get());
-        MixinHooks.spearStabBehavior(player, target, canSpearStab.get());
+        MixinHooks.shortswordSlashBehavior(player, target, weapon.canPerformAction(AetherIINeoItemAbilities.SHORTSWORD_SLASH));
+        MixinHooks.hammerShockBehavior(player, target, weapon.canPerformAction(AetherIINeoItemAbilities.HAMMER_SHOCK));
+        MixinHooks.spearStabBehavior(player, target, weapon.canPerformAction(AetherIINeoItemAbilities.SPEAR_STAB));
     }
-// todo
-//    @WrapOperation(method = "attack(Lnet/minecraft/world/entity/Entity;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurtServer(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
-//    private static boolean wrapHurtServer(LivingEntity instance, ServerLevel serverLevel, DamageSource damageSource, float damage, Operation<Boolean> original, @Local LivingEntity livingEntity) {
-//        if (livingEntity instanceof PlantMob) {
-//            return false;
-//        }
-//        return original.call(instance, serverLevel, damageSource, damage);
-//    }
+
+    @WrapOperation(method = "doSweepAttack(Lnet/minecraft/world/entity/Entity;FLnet/minecraft/world/damagesource/DamageSource;FLnet/minecraft/world/phys/AABB;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurtServer(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
+    private static boolean wrapHurtServer(LivingEntity instance, ServerLevel serverLevel, DamageSource damageSource, float damage, Operation<Boolean> original, @Local LivingEntity livingEntity) {
+        if (livingEntity instanceof PlantMob) {
+            return false;
+        }
+        return original.call(instance, serverLevel, damageSource, damage);
+    }
 
     /**
      * Used to set whether the player tried to crouch for {@link MountableAnimal}, before crouching is cancelled for mounts by the {@link Player} class.
