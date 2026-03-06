@@ -38,9 +38,7 @@
     "common.accessor.RecipeManagerAccessor",
     "common.accessor.SaplingBlockAccessor",
     "common.accessor.ServerGamePacketListenerImplAccessor",
-    "common.accessor.SlotAccessor",
-    "debug.PathFinderMixin",
-    "debug.accessor.PathAccessor"
+    "common.accessor.SlotAccessor"
   ],
   "client": [
     "client.AdvancementMixin",
@@ -89,8 +87,7 @@
     "client.accessor.SoundManagerAccessor",
     "client.accessor.TitleScreenAccessor",
     "client.accessor.WeatherEffectRendererAccessor",
-    "client.accessor.WeighedSoundEventsAccessor",
-    "debug.DebugRendererMixin"
+    "client.accessor.WeighedSoundEventsAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
