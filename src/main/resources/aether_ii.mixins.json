@@ -45,6 +45,7 @@
   ],
   "client": [
     "client.AdvancementMixin",
+    "client.AvatarRendererMixin",
     "client.BlockModelWrapperMixin",
     "client.BlockRenderDispatcherMixin",
     "client.BossHealthOverlayMixin",

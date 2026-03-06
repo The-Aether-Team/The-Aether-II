@@ -52,9 +52,9 @@ public record Subtractive(List<Identifier> textures, Map<String, Identifier> ove
         return CODEC;
     }
 
-    public record SubtractiveSpriteSupplier(LazyLoadedImage baseImage, LazyLoadedImage overlayImage, Identifier outputLocation) implements SpriteSource.SpriteSupplier {
+    public record SubtractiveSpriteSupplier(LazyLoadedImage baseImage, LazyLoadedImage overlayImage, Identifier outputLocation) implements SpriteSource.DiscardableLoader {
         @Nullable
-        public SpriteContents apply(SpriteResourceLoader p_295023_) {
+        public SpriteContents get(SpriteResourceLoader p_295023_) {
             try {
                 NativeImage nativeBaseImage = this.baseImage.get();
                 NativeImage nativeOverlayImage = this.overlayImage.get();
@@ -67,7 +67,7 @@ public record Subtractive(List<Identifier> textures, Map<String, Identifier> ove
                         }
                     }
                 }
-                return new SpriteContents(this.outputLocation(), new FrameSize(nativeImage.getWidth(), nativeImage.getHeight()), nativeImage, ResourceMetadata.EMPTY);
+                return new SpriteContents(this.outputLocation(), new FrameSize(nativeImage.getWidth(), nativeImage.getHeight()), nativeImage);
             } catch (IOException | IllegalArgumentException ioexception) {
                 AetherII.LOGGER.error("unable to create subtractive sprite at {}", this.outputLocation(), ioexception);
             } finally {

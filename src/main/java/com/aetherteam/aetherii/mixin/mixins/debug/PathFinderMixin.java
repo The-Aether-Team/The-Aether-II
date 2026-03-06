@@ -22,13 +22,13 @@ public class PathFinderMixin {
     @Final
     @Shadow
     private BinaryHeap openSet;
-
-    @Inject(method = "findPath(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;Ljava/util/Set;FIF)Lnet/minecraft/world/level/pathfinder/Path;", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/pathfinder/NodeEvaluator;done()V"))
-    private void setPathDebugs(PathNavigationRegion region, Mob mob, Set<BlockPos> targetPositions, float maxRange, int accuracy, float searchDepthMultiplier, CallbackInfoReturnable<Path> info, @Local Node start, @Local Map<Target, BlockPos> map, @Local Path path) {
-        if (AetherII.DEBUG_MODE) {
-            if (path != null) {
-                ((PathAccessor) path).aether$setDebug(this.openSet.getHeap(), new Node[0], map.keySet());
-            }
-        }
-    }
+// TODO
+//    @Inject(method = "findPath(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;Ljava/util/Set;FIF)Lnet/minecraft/world/level/pathfinder/Path;", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/pathfinder/NodeEvaluator;done()V"))
+//    private void setPathDebugs(PathNavigationRegion region, Mob mob, Set<BlockPos> targetPositions, float maxRange, int accuracy, float searchDepthMultiplier, CallbackInfoReturnable<Path> info, @Local Node start, @Local Map<Target, BlockPos> map, @Local Path path) {
+//        if (AetherII.DEBUG_MODE) {
+//            if (path != null) {
+//                ((PathAccessor) path).aether$setDebug(this.openSet.getHeap(), new Node[0], map.keySet());
+//            }
+//        }
+//    }
 }

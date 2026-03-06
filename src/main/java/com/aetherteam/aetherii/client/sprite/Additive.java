@@ -53,9 +53,9 @@ public record Additive( List<Identifier> textures, Map<String, Identifier> overl
         return CODEC;
     }
 
-    public record AdditiveSpriteSupplier(LazyLoadedImage baseImage, LazyLoadedImage overlayImage, Identifier outputLocation) implements SpriteSource.SpriteSupplier {
+    public record AdditiveSpriteSupplier(LazyLoadedImage baseImage, LazyLoadedImage overlayImage, Identifier outputLocation) implements SpriteSource.DiscardableLoader {
         @Nullable
-        public SpriteContents apply(SpriteResourceLoader p_295023_) {
+        public SpriteContents get(SpriteResourceLoader p_295023_) {
             try {
                 NativeImage nativeBaseImage = this.baseImage().get();
                 NativeImage nativeOverlayImage = this.overlayImage().get();
@@ -67,7 +67,7 @@ public record Additive( List<Identifier> textures, Map<String, Identifier> overl
                         nativeImage.setPixel(i, j, color);
                     }
                 }
-                return new SpriteContents(this.outputLocation(), new FrameSize(nativeImage.getWidth(), nativeImage.getHeight()), nativeImage, ResourceMetadata.EMPTY);
+                return new SpriteContents(this.outputLocation(), new FrameSize(nativeImage.getWidth(), nativeImage.getHeight()), nativeImage);
             } catch (IOException | IllegalArgumentException ioexception) {
                 AetherII.LOGGER.error("unable to create additive sprite at {}", this.outputLocation(), ioexception);
             } finally {

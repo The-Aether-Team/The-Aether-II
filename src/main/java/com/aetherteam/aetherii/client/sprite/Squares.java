@@ -49,9 +49,9 @@ public record Squares(List<Identifier> textures, int width, int height) implemen
         return CODEC;
     }
 
-    public record SquaresSpriteSupplier(LazyLoadedImage baseImage, int xOffset, int yOffset, Identifier outputLocation) implements SpriteSource.SpriteSupplier {
+    public record SquaresSpriteSupplier(LazyLoadedImage baseImage, int xOffset, int yOffset, Identifier outputLocation) implements SpriteSource.DiscardableLoader {
         @Nullable
-        public SpriteContents apply(SpriteResourceLoader p_295023_) {
+        public SpriteContents get(SpriteResourceLoader p_295023_) {
             try {
                 NativeImage nativeBaseImage = this.baseImage().get();
                 NativeImage nativeImage = new NativeImage(16, 16, false);
@@ -62,7 +62,7 @@ public record Squares(List<Identifier> textures, int width, int height) implemen
                         nativeImage.setPixel(i, j, color);
                     }
                 }
-                return new SpriteContents(this.outputLocation(), new FrameSize(nativeImage.getWidth(), nativeImage.getHeight()), nativeImage, ResourceMetadata.EMPTY);
+                return new SpriteContents(this.outputLocation(), new FrameSize(nativeImage.getWidth(), nativeImage.getHeight()), nativeImage);
             } catch (IOException | IllegalArgumentException ioexception) {
                 AetherII.LOGGER.error("unable to create square sprite at {}", this.outputLocation(), ioexception);
             } finally {

@@ -11,12 +11,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(DebugRenderer.class)
-public class DebugRendererMixin {
-    @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/culling/Frustum;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;DDD)V", at = @At("HEAD"))
-    private void render(PoseStack poseStack, Frustum frustum, MultiBufferSource.BufferSource bufferSource, double camX, double camY, double camZ, CallbackInfo ci) {
-        DebugRenderer debugRenderer = (DebugRenderer) (Object) this;
-        if (AetherII.DEBUG_MODE) {
-            debugRenderer.pathfindingRenderer.render(poseStack, bufferSource, camX, camY, camZ);
-        }
-    }
+public class DebugRendererMixin { //TODO
+//    @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/culling/Frustum;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;DDD)V", at = @At("HEAD"))
+//    private void render(PoseStack poseStack, Frustum frustum, MultiBufferSource.BufferSource bufferSource, double camX, double camY, double camZ, CallbackInfo ci) {
+//        DebugRenderer debugRenderer = (DebugRenderer) (Object) this;
+//        if (AetherII.DEBUG_MODE) {
+//            debugRenderer.pathfindingRenderer.render(poseStack, bufferSource, camX, camY, camZ);
+//        }
+//    }
 }
