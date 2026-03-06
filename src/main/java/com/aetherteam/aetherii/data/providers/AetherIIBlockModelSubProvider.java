@@ -1155,13 +1155,13 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createCopyBlock(Holder<Block> block, String overlay) {
-         icon = Identifier.fromNamespaceAndPath(AetherII.MODID, overlay);
+        Identifier icon = Identifier.fromNamespaceAndPath(AetherII.MODID, overlay);
         MultiVariant multivariant = plainVariant(ModelTemplates.PARTICLE_ONLY.create(block.value(), TextureMapping.particle(icon), this.modelOutput));
         this.blockStateOutput.accept(createSimpleBlock(block.value(), multivariant));
 
         CopyBlockSpecialRenderer.Unbaked unbaked = new CopyBlockSpecialRenderer.Unbaked(block, icon);
-         base = ModelTemplates.CHEST_INVENTORY.create(block.value().asItem(), TextureMapping.particle(icon), this.modelOutput);
-         baseFlat = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(block.value().asItem(), "_flat"), TextureMapping.layer0(icon), this.modelOutput);
+        Identifier base = ModelTemplates.CHEST_INVENTORY.create(block.value().asItem(), TextureMapping.particle(icon), this.modelOutput);
+        Identifier baseFlat = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(block.value().asItem(), "_flat"), TextureMapping.layer0(icon), this.modelOutput);
         this.itemModelOutput.accept(block.value().asItem(), ItemModelUtils.conditional(new HasBlockState(), ItemModelUtils.specialModel(base, unbaked), ItemModelUtils.plainModel(baseFlat)));
     }
 
@@ -1188,7 +1188,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant bed = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("skyroot_bed"));
         this.blockStateOutput.accept( createSimpleBlock(block, bed));
         Item item = block.asItem();
-         inventoryLocation = ModelTemplates.BED_INVENTORY.create(ModelLocationUtils.getModelLocation(item), TextureMapping.particle(particle), this.modelOutput);
+        Identifier inventoryLocation = ModelTemplates.BED_INVENTORY.create(ModelLocationUtils.getModelLocation(item), TextureMapping.particle(particle), this.modelOutput);
         this.itemModelOutput.accept(item, ItemModelUtils.specialModel(inventoryLocation, new SkyrootBedSpecialRenderer.Unbaked(location)));
     }
 

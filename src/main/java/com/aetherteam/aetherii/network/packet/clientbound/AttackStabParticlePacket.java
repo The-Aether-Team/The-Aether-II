@@ -11,9 +11,9 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import org.joml.Vector3f;
+import org.joml.Vector3fc;
 
-public record AttackStabParticlePacket(Vector3f playerPos, Vector3f targetPos) implements CustomPacketPayload {
+public record AttackStabParticlePacket(Vector3fc playerPos, Vector3fc targetPos) implements CustomPacketPayload {
     public static final Type<AttackStabParticlePacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "attack_stab_particles"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, AttackStabParticlePacket> STREAM_CODEC = StreamCodec.composite(

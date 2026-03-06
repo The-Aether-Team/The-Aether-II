@@ -39,8 +39,8 @@ public class AltarRecipeBookComponent extends RecipeBookComponent<AltarMenu> {
     }
 
     @Override
-    protected void initFilterButtonTextures() {
-        this.filterButton.initTextureValues(FILTER_SPRITES);
+    protected WidgetSprites getFilterButtonTextures() {
+        return FILTER_SPRITES;
     }
 
     @Override

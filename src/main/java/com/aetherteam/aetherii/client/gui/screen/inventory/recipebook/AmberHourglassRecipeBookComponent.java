@@ -35,8 +35,8 @@ public class AmberHourglassRecipeBookComponent extends RecipeBookComponent<Amber
     }
 
     @Override
-    protected void initFilterButtonTextures() {
-        this.filterButton.initTextureValues(FILTER_SPRITES);
+    protected WidgetSprites getFilterButtonTextures() {
+        return FILTER_SPRITES;
     }
 
     @Override

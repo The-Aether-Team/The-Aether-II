@@ -56,7 +56,6 @@ public class AetherIIData {
         // pack.mcmeta
         generator.addProvider(true, new PackMetadataGenerator(packOutput).add(PackMetadataSection.CLIENT_TYPE, new PackMetadataSection(
                 Component.translatable("pack.aether_ii.mod.description"),
-                DetectedVersion.BUILT_IN.packVersion(PackType.CLIENT_RESOURCES),
-                Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
+                new InclusiveRange<>(DetectedVersion.BUILT_IN.packVersion(PackType.CLIENT_RESOURCES)))));
     }
 }

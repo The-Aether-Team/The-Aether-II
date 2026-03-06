@@ -12,9 +12,9 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import org.joml.Vector3f;
+import org.joml.Vector3fc;
 
-public record AttackShockParticlePacket(Vector3f targetPos, float playerRot) implements CustomPacketPayload {
+public record AttackShockParticlePacket(Vector3fc targetPos, float playerRot) implements CustomPacketPayload {
     public static final Type<AttackShockParticlePacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(AetherII.MODID, "attack_shock_particles"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, AttackShockParticlePacket> STREAM_CODEC = StreamCodec.composite(

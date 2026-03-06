@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.entity.CooldownEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperty;
+import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -13,10 +14,10 @@ public record BetterCooldown() implements RangeSelectItemModelProperty {
     public static final MapCodec<BetterCooldown> MAP_CODEC = MapCodec.unit(new BetterCooldown());
 
     @Override
-    public float get(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
-        if (livingEntity instanceof Player player) {
+    public float get(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable ItemOwner owner, int i) {
+        if (owner instanceof Player player) {
             return player.getCooldowns().getCooldownPercent(itemStack, 0.0F);
-        } else if (livingEntity instanceof CooldownEntity entity) {
+        } else if (owner instanceof CooldownEntity entity) {
             return entity.getCooldowns().getCooldownPercent(itemStack, 0.0F);
         }
         return 0.0F;
