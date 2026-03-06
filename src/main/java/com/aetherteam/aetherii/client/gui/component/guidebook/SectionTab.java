@@ -31,7 +31,7 @@ public class SectionTab extends ImageButton {
     }
 
     @Override
-    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.icon, this.getX() + 10, this.getY() + 2, 22, 16);
         if (this.section.areAnyUnchecked()) {

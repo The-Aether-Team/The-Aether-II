@@ -30,14 +30,14 @@ public class AetherIIMenuButton extends Button {
         this.hoverOffset = 0;
     }
 
-    public AetherIIMenuButton(AetherIITitleScreen screen, Button oldButton) {
-        this(screen, new Builder(oldButton.getMessage(), (button) -> oldButton.onPress()).bounds(oldButton.getX(), oldButton.getY(), oldButton.getWidth(), oldButton.getHeight()).createNarration((button) -> ((ButtonAccessor) oldButton).callCreateNarrationMessage()));
+    public AetherIIMenuButton(AetherIITitleScreen screen, Button oldButton) { //todo onPress
+        this(screen, new Builder(oldButton.getMessage(), oldButton.onPress).bounds(oldButton.getX(), oldButton.getY(), oldButton.getWidth(), oldButton.getHeight()).createNarration((button) -> ((ButtonAccessor) oldButton).callCreateNarrationMessage()));
         oldButton.visible = false;
         oldButton.active = false;
     }
 
     @Override
-    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         Matrix3x2fStack poseStack = guiGraphics.pose();
         Minecraft minecraft = Minecraft.getInstance();
         Font font = minecraft.font;
