@@ -22,6 +22,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.MaterialSet;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Unit;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 import org.jspecify.annotations.Nullable;
@@ -83,7 +84,7 @@ public class SentrySpawnerRenderer implements BlockEntityRenderer<SentrySpawnerB
         }
 
         RenderType renderType = baseMaterial.renderType(RenderTypes::entityCutout);
-        submitNodeCollector.submitModel(this.sentrySpawnerModel, sentrySpawnerRenderState, poseStack, renderType, sentrySpawnerRenderState.lightCoords,
+        submitNodeCollector.submitModel(this.sentrySpawnerModel, Unit.INSTANCE, poseStack, renderType, sentrySpawnerRenderState.lightCoords,
                 OverlayTexture.NO_OVERLAY,
                 -1,
                 materials.get(baseMaterial),
@@ -96,17 +97,18 @@ public class SentrySpawnerRenderer implements BlockEntityRenderer<SentrySpawnerB
         this.sentrySpawnerPistonModel.root().offsetPos(new Vector3f(0, -(frame), 0));
 
         RenderType pistonRenderType = RenderTypes.entityCutoutNoCull(pistonLocation);
-        submitNodeCollector.submitModel(this.sentrySpawnerPistonModel, sentrySpawnerRenderState, poseStack, pistonRenderType, sentrySpawnerRenderState.lightCoords,
+        submitNodeCollector.submitModel(this.sentrySpawnerPistonModel, Unit.INSTANCE, poseStack, pistonRenderType, sentrySpawnerRenderState.lightCoords,
                 OverlayTexture.NO_OVERLAY,
-                -1,
+                0,
                 null);
 
-        RenderType pistonEmissiveRenderType = RenderTypes.entityTranslucentEmissive(pistonLocation);
 
         if (emissiveLocation != null) {
-            submitNodeCollector.submitModel(this.sentrySpawnerPistonModel, sentrySpawnerRenderState, poseStack, pistonEmissiveRenderType, sentrySpawnerRenderState.lightCoords,
+            RenderType pistonEmissiveRenderType = RenderTypes.entityTranslucentEmissive(emissiveLocation);
+
+            submitNodeCollector.submitModel(this.sentrySpawnerPistonModel, Unit.INSTANCE, poseStack, pistonEmissiveRenderType, sentrySpawnerRenderState.lightCoords,
                     OverlayTexture.NO_OVERLAY,
-                    -1,
+                    0,
                     null);
         }
     }

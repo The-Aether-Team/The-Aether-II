@@ -1,13 +1,12 @@
 package com.aetherteam.aetherii.client.renderer.blockentity.model;
 
-import com.aetherteam.aetherii.client.renderer.blockentity.state.AlkahestPurifierRenderState;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 
-public class AlkahestPurifierModel extends Model<AlkahestPurifierRenderState> {
+public class AlkahestPurifierModel extends Model<Float> {
     private final ModelPart main;
     private final ModelPart lid;
 
@@ -39,7 +38,9 @@ public class AlkahestPurifierModel extends Model<AlkahestPurifierRenderState> {
         return LayerDefinition.create(meshDefinition, 128, 64);
     }
 
-    public void setupAnim(float openness) {
+    @Override
+    public void setupAnim(Float openness) {
+        super.setupAnim(openness);
         this.lid.xRot = -(openness * ((float) Math.PI / 2F));
     }
 }

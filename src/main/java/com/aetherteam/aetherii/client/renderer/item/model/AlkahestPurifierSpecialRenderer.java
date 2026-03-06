@@ -4,48 +4,46 @@ import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.blockentity.AlkahestPurifierRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
-import net.minecraft.core.Direction;
+import net.minecraft.client.resources.model.MaterialSet;
 import net.minecraft.world.item.ItemDisplayContext;
-import org.joml.Vector3f;
 import org.joml.Vector3fc;
 
-import java.util.Set;
 import java.util.function.Consumer;
 
 public class AlkahestPurifierSpecialRenderer implements NoDataSpecialModelRenderer {
     private final AlkahestPurifierModel model;
     private final float openness;
+    private final MaterialSet materialSet;
 
-    public AlkahestPurifierSpecialRenderer(AlkahestPurifierModel model, float openness) {
+    public AlkahestPurifierSpecialRenderer(MaterialSet context, AlkahestPurifierModel model, float openness) {
+        this.materialSet = context;
         this.model = model;
         this.openness = openness;
     }
 
     @Override
     public void submit(ItemDisplayContext itemDisplayContext, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int i1, boolean b, int i2) {
-
+        RenderType renderType = AlkahestPurifierRenderer.ALKAHEST_PURIFIER_0.renderType(RenderTypes::entitySolid);
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 1.5F, 0.5F);
+        poseStack.mulPose(Axis.XP.rotationDegrees(180));
+        this.model.setupAnim(this.openness);
+        submitNodeCollector.submitModel(this.model, this.openness, poseStack, renderType, i, i1, -1, this.materialSet.get(AlkahestPurifierRenderer.ALKAHEST_PURIFIER_0), i2, null);
+        poseStack.popPose();
     }
 
     //    @Override //TODO
 //    public void render(ItemDisplayContext context, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, boolean partialTick) {
-//        VertexConsumer vertexconsumer = AlkahestPurifierRenderer.ALKAHEST_PURIFIER_0.buffer(buffer, RenderTypes::entitySolid);
-//        poseStack.pushPose();
-//        poseStack.translate(0.5F, 1.5F, 0.5F);
-//        poseStack.mulPose(Axis.XP.rotationDegrees(180));
-//        this.model.setupAnim(this.openness);
-//        this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, packedOverlay);
-//        poseStack.popPose();
+
 //    }
 
     @Override
@@ -78,7 +76,7 @@ public class AlkahestPurifierSpecialRenderer implements NoDataSpecialModelRender
         @Override
         public SpecialModelRenderer<?> bake(BakingContext context) {
             AlkahestPurifierModel model = new AlkahestPurifierModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.ALKAHEST_PURIFIER));
-            return new AlkahestPurifierSpecialRenderer(model, this.openness);
+            return new AlkahestPurifierSpecialRenderer(context.materials(), model, this.openness);
         }
     }
 }

@@ -1,13 +1,13 @@
 package com.aetherteam.aetherii.client.renderer.blockentity.model;
 
-import com.aetherteam.aetherii.client.renderer.blockentity.state.SentrySpawnerRenderState;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.util.Unit;
 
-public class SentrySpawnerPistonModel extends Model<SentrySpawnerRenderState> {
+public class SentrySpawnerPistonModel extends Model<Unit> {
     private final ModelPart piston;
 
     public SentrySpawnerPistonModel(ModelPart root) {

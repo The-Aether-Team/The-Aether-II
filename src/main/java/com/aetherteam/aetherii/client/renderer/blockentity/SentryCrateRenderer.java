@@ -22,6 +22,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.MaterialSet;
 import net.minecraft.core.Direction;
+import net.minecraft.util.Unit;
 import net.minecraft.world.level.block.DoubleBlockCombiner;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.ChestType;
@@ -78,14 +79,14 @@ public class SentryCrateRenderer implements BlockEntityRenderer<SentryCrateBlock
         RenderType emissiveRenderType = emissive.renderType(RenderTypes::entityCutout);
 
 
-        submitNodeCollector.submitModel(model, state, poseStack, renderType, i, OverlayTexture.NO_OVERLAY,
+        submitNodeCollector.submitModel(model, Unit.INSTANCE, poseStack, renderType, i, OverlayTexture.NO_OVERLAY,
                 -1,
                 materials.get(normalMaterial),
                 0,
                 state.breakProgress);
 
         if (state.open > 0) {
-            submitNodeCollector.submitModel(model, state, poseStack, emissiveRenderType, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY,
+            submitNodeCollector.submitModel(model, Unit.INSTANCE, poseStack, emissiveRenderType, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY,
                     -1,
                     materials.get(emissive),
                     0,
@@ -111,7 +112,7 @@ public class SentryCrateRenderer implements BlockEntityRenderer<SentryCrateBlock
         BlockEntityRenderer.super.extractRenderState(blockEntity, state, p_446851_, p_445788_, p_446944_);
         boolean flag = blockEntity.getLevel() != null;
         BlockState blockstate = flag ? blockEntity.getBlockState() : AetherIIBlocks.SENTRY_CRATE.get().defaultBlockState().setValue(SentryCrateBlock.FACING, Direction.SOUTH);
-        state.angle = blockstate.getValue(SentryCrateBlock.FACING).toYRot();
+        state.facing = blockstate.getValue(SentryCrateBlock.FACING);
         ChestType type = blockstate.hasProperty(SentryCrateBlock.TYPE) ? blockstate.getValue(SentryCrateBlock.TYPE) : ChestType.SINGLE;
         state.type = type;
 

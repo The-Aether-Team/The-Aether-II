@@ -6,52 +6,46 @@ import com.aetherteam.aetherii.client.renderer.blockentity.SentrySpawnerRenderer
 import com.aetherteam.aetherii.client.renderer.blockentity.model.SentrySpawnerModel;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.SentrySpawnerPistonModel;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
+import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.util.Unit;
 import net.minecraft.world.item.ItemDisplayContext;
-import org.joml.Vector3f;
 import org.joml.Vector3fc;
 
-import java.util.Set;
 import java.util.function.Consumer;
 
 public class SentrySpawnerSpecialRenderer implements NoDataSpecialModelRenderer {
     private final SentrySpawnerModel model;
     private final SentrySpawnerPistonModel pistonModel;
+    private final MaterialSet materialSet;
 
-    public SentrySpawnerSpecialRenderer(SentrySpawnerModel model, SentrySpawnerPistonModel pistonModel) {
+    public SentrySpawnerSpecialRenderer(MaterialSet materials, SentrySpawnerModel model, SentrySpawnerPistonModel pistonModel) {
+        this.materialSet = materials;
         this.model = model;
         this.pistonModel = pistonModel;
     }
 
     @Override
     public void submit(ItemDisplayContext itemDisplayContext, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int i1, boolean b, int i2) {
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 1.5F, 0.5F);
+        poseStack.mulPose(Axis.XP.rotationDegrees(180));
+        submitNodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, AetherIIAtlases.SENTRY_SPAWNER_MATERIALS.get(0).renderType(RenderTypes::entitySolid), i, i1, -1, this.materialSet.get(AetherIIAtlases.SENTRY_SPAWNER_MATERIALS.get(0)), i2, null);
+
+        poseStack.popPose();
+
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 1.5F, 0.5F);
+        poseStack.mulPose(Axis.XP.rotationDegrees(180));
+        submitNodeCollector.submitModel(this.pistonModel, Unit.INSTANCE, poseStack, RenderTypes.entitySolid(SentrySpawnerRenderer.PISTON_OFF), i, i1, i2, null);
+        poseStack.popPose();
 
     }
-
-    //    @Override //TODO
-//    public void render(ItemDisplayContext context, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, boolean partialTick) {
-//        VertexConsumer vertexconsumer = AetherIIAtlases.SENTRY_SPAWNER_MATERIALS.get(0).buffer(buffer, RenderTypes::entitySolid);
-//        poseStack.pushPose();
-//        poseStack.translate(0.5F, 1.5F, 0.5F);
-//        poseStack.mulPose(Axis.XP.rotationDegrees(180));
-//        this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, packedOverlay);
-//        poseStack.popPose();
-//
-//        VertexConsumer vertexconsumer2 = buffer.getBuffer(RenderTypes.entitySolid(SentrySpawnerRenderer.PISTON_OFF));
-//        poseStack.pushPose();
-//        poseStack.translate(0.5F, 1.5F, 0.5F);
-//        poseStack.mulPose(Axis.XP.rotationDegrees(180));
-//        this.pistonModel.renderToBuffer(poseStack, vertexconsumer2, packedLight, packedOverlay);
-//        poseStack.popPose();
-//    }
 
     @Override
     public void getExtents(Consumer<Vector3fc> consumer) {
@@ -78,7 +72,7 @@ public class SentrySpawnerSpecialRenderer implements NoDataSpecialModelRenderer 
             SentrySpawnerModel model = new SentrySpawnerModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER));
             SentrySpawnerPistonModel pistonModel = new SentrySpawnerPistonModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER_PISTON));
 
-            return new SentrySpawnerSpecialRenderer(model, pistonModel);
+            return new SentrySpawnerSpecialRenderer(context.materials(), model, pistonModel);
         }
     }
 }

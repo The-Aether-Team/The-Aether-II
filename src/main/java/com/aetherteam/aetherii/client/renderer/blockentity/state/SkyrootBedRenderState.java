@@ -6,7 +6,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.state.properties.BedPart;
 
 public class SkyrootBedRenderState extends BlockEntityRenderState {
-    public Direction angle;
+    public Direction angle = Direction.NORTH;
     public Identifier bedTexture;
     public BedPart bedPart;
 }

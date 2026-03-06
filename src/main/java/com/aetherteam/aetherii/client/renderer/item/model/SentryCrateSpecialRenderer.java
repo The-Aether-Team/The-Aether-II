@@ -4,36 +4,35 @@ import com.aetherteam.aetherii.client.AetherIIAtlases;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.SentryCrateModel;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.MaterialSet;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Unit;
 import net.minecraft.world.item.ItemDisplayContext;
-import org.joml.Vector3f;
 import org.joml.Vector3fc;
 
-import java.util.Set;
 import java.util.function.Consumer;
 
 public class SentryCrateSpecialRenderer implements NoDataSpecialModelRenderer {
     private final SentryCrateModel model;
     private final Material material;
+    private final MaterialSet materialSet;
 
-    public SentryCrateSpecialRenderer(SentryCrateModel model, Material material) {
+    public SentryCrateSpecialRenderer(MaterialSet context, SentryCrateModel model, Material material) {
+        this.materialSet = context;
         this.model = model;
         this.material = material;
     }
 
     @Override
     public void submit(ItemDisplayContext itemDisplayContext, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int i1, boolean b, int i2) {
-
+        submitNodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, this.material.renderType(RenderTypes::entitySolid), i, i1, -1, this.materialSet.get(material), i2, null);
     }
 
     //    @Override //TODO
@@ -60,7 +59,7 @@ public class SentryCrateSpecialRenderer implements NoDataSpecialModelRenderer {
         public SpecialModelRenderer<?> bake(BakingContext context) {
             SentryCrateModel model = new SentryCrateModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.SENTRY_CRATE));
             Material material = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(this.texture);
-            return new SentryCrateSpecialRenderer(model, material);
+            return new SentryCrateSpecialRenderer(context.materials(), model, material);
         }
     }
 }
