@@ -19,6 +19,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
@@ -123,15 +124,15 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
         this.name.setEditable(this.menu.getSlot(0).hasItem());
     }
 
-    protected void reinit(Minecraft minecraft, int width, int height) {
+    protected void reinit(int width, int height) {
         String s = this.name.getValue();
-        this.init(minecraft, width, height);
+        this.init(width, height);
         this.name.setValue(s);
     }
 
     @Override
-    public void resize(Minecraft minecraft, int width, int height) {
-        this.reinit(minecraft, width, height);
+    public void resize(int width, int height) {
+        this.reinit(width, height);
     }
 
     @Override
@@ -159,7 +160,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
         }
 
         if (!ItemStack.matches(this.menu.getInput(), this.lastInput)) {
-            this.reinit(this.minecraft, this.width, this.height);
+            this.reinit(this.width, this.height);
         }
 
         super.render(guiGraphics, mouseX, mouseY, partialTick);
@@ -267,8 +268,8 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     }
 
     @Override
-    protected void renderSlot(GuiGraphics guiGraphics, Slot slot) {
-        super.renderSlot(guiGraphics, slot);
+    protected void renderSlot(GuiGraphics guiGraphics, Slot slot, int p_470717_, int p_470566_) {
+        super.renderSlot(guiGraphics, slot, p_470717_, p_470566_);
         if (slot instanceof ForgeCharmSlot charmSlot) {
             if (charmSlot.isActive() && charmSlot.isLocked(this.menu.getInput())) {
                 guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SLOT_LOCKED, charmSlot.x, charmSlot.y, 16, 16);
@@ -277,11 +278,11 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (keyCode == 256) {
+    public boolean keyPressed(KeyEvent event) {
+        if (event.key() == 256) {
             this.minecraft.player.closeContainer();
         }
-        return this.name.keyPressed(keyCode, scanCode, modifiers) || this.name.canConsumeInput() || super.keyPressed(keyCode, scanCode, modifiers);
+        return this.name.keyPressed(event) || this.name.canConsumeInput() || super.keyPressed(event);
     }
 
     public boolean canForge() {

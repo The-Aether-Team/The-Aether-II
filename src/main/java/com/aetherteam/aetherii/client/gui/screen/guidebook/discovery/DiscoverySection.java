@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScr
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
@@ -87,15 +88,15 @@ public abstract class DiscoverySection<S extends GuidebookEntry, T extends Mutab
         }
     }
 
-    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY, boolean original) {
+    public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY, boolean original) {
         if (this.isScrollActive()) {
             int leftPos = (this.screen.width / 2) - Guidebook.PAGE_WIDTH;
             int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
-            if (button == 0) {
+            if (event.button() == 0) {
                 float scrollbarGutterLeft = leftPos + 139.0F;
                 float scrollbarGutterTop = topPos + 59.0F;
-                double mouseXDiff = mouseX - scrollbarGutterLeft;
-                double mouseYDiff = mouseY - scrollbarGutterTop;
+                double mouseXDiff = event.x() - scrollbarGutterLeft;
+                double mouseYDiff = event.y() - scrollbarGutterTop;
                 if (mouseYDiff <= 108 && mouseYDiff >= 0 && ((mouseXDiff <= 6 && mouseXDiff >= 0) || this.scrolling)) {
                     this.scrolling = true; // Set the scrollbar as currently scrolling.
                     this.scrollY = Math.max(0, Math.min((float) mouseYDiff - (this.scrollbarHeight() / 2.0F), this.scrollbarGutterHeight())); // Set the offset for where to render the scrollbar.
@@ -123,11 +124,11 @@ public abstract class DiscoverySection<S extends GuidebookEntry, T extends Mutab
         return original;
     }
 
-    public boolean mouseClicked(double mouseX, double mouseY, int button, boolean original) {
+    public boolean mouseClicked(MouseButtonEvent event, boolean held, boolean original) {
         return original;
     }
 
-    public boolean mouseReleased(double mouseX, double mouseY, int button, boolean original) {
+    public boolean mouseReleased(MouseButtonEvent event, boolean original) {
         this.scrolling = false;
         return original;
     }

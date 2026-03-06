@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.inventory.menu.ArtisansBenchMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
@@ -113,7 +114,9 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+    public boolean mouseClicked(MouseButtonEvent event, boolean held) {
+        double mouseX = event.x();
+        double mouseY = event.y();
         this.scrolling = false;
         if (this.displayRecipes) {
             int i = this.leftPos + 52;
@@ -138,11 +141,13 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
             }
         }
 
-        return super.mouseClicked(mouseX, mouseY, button);
+        return super.mouseClicked(event, held);
     }
 
     @Override
-    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+    public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
+        double mouseX = event.x();
+        double mouseY = event.y();
         if (this.scrolling && this.isScrollBarActive()) {
             int i = this.topPos + 14;
             int j = i + 54;
@@ -151,7 +156,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
             this.startIndex = (int) ((double) (this.scrollOffs * (float) this.getOffscreenRows()) + 0.5) * 4;
             return true;
         } else {
-            return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
+            return super.mouseDragged(event, dragX, dragY);
         }
     }
 

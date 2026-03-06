@@ -13,10 +13,9 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
 import com.aetherteam.aetherii.network.packet.serverbound.CheckEffectsEntryPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.components.MultiLineLabel;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
@@ -186,19 +185,20 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
         int y = 71;
         int lineHeight = 9;
         int color = 0xffffffff;
+        ActiveTextCollector textCollector = guiGraphics.textRenderer();
         MultiLineLabel label = MultiLineLabel.create(font, 135, 8, component);
-        label.renderLeftAligned(guiGraphics, x, y, lineHeight, color);
+        label.visitLines(TextAlignment.LEFT, x, y, lineHeight, textCollector);
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button, boolean original) {
-        EffectsEntry.Mutable entry = this.getEntryFromSlot(mouseX, mouseY);
+    public boolean mouseClicked(MouseButtonEvent event, boolean held, boolean original) {
+        EffectsEntry.Mutable entry = this.getEntryFromSlot(event.x(), event.y());
         if (entry != null && (this.getSelectedEntry() == null || (entry.getEffect().value() != this.getSelectedEntry().getEffect().value())) && this.areAnyUnlocked(entry)) {
             this.selectedEntry = entry;
             this.updateViewed(entry);
             return true;
         }
-        return super.mouseClicked(mouseX, mouseY, button, original);
+        return super.mouseClicked(event, held, original);
     }
 
     @Override

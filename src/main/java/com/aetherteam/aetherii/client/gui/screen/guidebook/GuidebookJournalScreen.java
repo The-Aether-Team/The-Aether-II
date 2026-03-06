@@ -9,6 +9,7 @@ import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
@@ -58,16 +59,16 @@ public class GuidebookJournalScreen extends Screen implements Guidebook {
     protected void renderMenuBackground(GuiGraphics partialTick) { }
 
     @Override
-    protected void renderBlurredBackground(GuiGraphics guiGraphics) {
-    }
+    protected void renderBlurredBackground(GuiGraphics guiGraphics) { }
+
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
+    public boolean keyPressed(KeyEvent event) {
+        InputConstants.Key mouseKey = InputConstants.getKey(event);
         if (Minecraft.getInstance().options.keyInventory.isActiveAndMatches(mouseKey)) {
             this.onClose();
             return true;
         }
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        return super.keyPressed(event);
     }
 
     @Override

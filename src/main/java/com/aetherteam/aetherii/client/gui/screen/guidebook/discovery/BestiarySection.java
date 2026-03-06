@@ -15,16 +15,16 @@ import com.aetherteam.aetherii.network.packet.serverbound.CheckBestiaryEntryPack
 import com.google.common.collect.ImmutableList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.components.MultiLineLabel;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
@@ -182,12 +182,12 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
 
         List<BestiaryEntry.Mutable> visibleEntries = this.getOrderedEntries().size() > this.maxSlots() ? this.getOrderedEntries().subList(Math.max(0, this.getSlotOffset()), Math.min(this.getSlotOffset() + this.maxSlots(), this.getOrderedEntries().size())) : this.getOrderedEntries();
         for (BestiaryEntry.Mutable entry : visibleEntries) {
-            GuiSpriteManager guiSpriteManager = Minecraft.getInstance().getGuiSprites();
+            TextureManager manager = Minecraft.getInstance().getTextureManager();
 
             Identifier sprite;
             if (this.isUnlocked(entry, BestiaryEntry.ICON.id())) {
                 sprite = entry.getIcon();
-                if (guiSpriteManager.getSprite(sprite).equals(guiSpriteManager.getSprite(MissingTextureAtlasSprite.getLocation()))) {
+                if (manager.getTexture(sprite).equals(manager.getTexture(MissingTextureAtlasSprite.getLocation()))) {
                     sprite = DISCOVERED_ENTRY_FALLBACK_SPRITE;
                 }
             } else {
@@ -409,21 +409,22 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         int x = 21;
         int y = 103;
         int lineHeight = 9;
-        int color = 0xffffffff;
+        int color = 0xffffffff; //todo?
+        ActiveTextCollector textCollector = guiGraphics.textRenderer();
         MultiLineLabel label = MultiLineLabel.create(font, 135, 5, component);
-        label.render(guiGraphics, x, y, lineHeight, color);
+        label.visitLines(TextAlignment.LEFT, x, y, lineHeight, textCollector);
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button, boolean original) {
-        BestiaryEntry.Mutable entry = this.getEntryFromSlot(mouseX, mouseY);
+    public boolean mouseClicked(MouseButtonEvent event, boolean held, boolean original) {
+        BestiaryEntry.Mutable entry = this.getEntryFromSlot(event.x(), event.y());
         if (entry != null && (this.getSelectedEntry() == null || (entry.getEntityType().value() != this.getSelectedEntry().getEntityType().value())) && this.areAnyUnlocked(entry)) {
             this.selectedEntry = entry;
             this.updateViewed(entry);
             this.currentFoods.clear();
             return true;
         }
-        return super.mouseClicked(mouseX, mouseY, button, original);
+        return super.mouseClicked(event, held, original);
     }
 
     @Override

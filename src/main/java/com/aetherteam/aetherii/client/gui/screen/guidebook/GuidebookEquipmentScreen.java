@@ -134,7 +134,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     @Override
-    protected void renderSlot(GuiGraphics guiGraphics, Slot slot) {
+    protected void renderSlot(GuiGraphics guiGraphics, Slot slot, int p_470717_, int p_470566_) {
         if (slot == this.currencySlot) {
             if (Minecraft.getInstance().player != null) {
                 var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
@@ -148,7 +148,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                 guiGraphics.pose().popMatrix();
             }
         }
-        super.renderSlot(guiGraphics, slot);
+        super.renderSlot(guiGraphics, slot, p_470717_, p_470566_);
     }
 
     @Override
@@ -280,7 +280,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
             moaRenderState.opacity = 1.0F;
         }
         net.neoforged.neoforge.client.renderstate.RenderStateExtensions.onUpdateEntityRenderState(entityrenderer, entity, entityrenderstate);
-        entityrenderstate.hitboxesRenderState = null;
+//        entityrenderstate.hitboxesRenderState = null; //todo
         guiGraphics.submitEntityRenderState(entityrenderstate, scale, translation, rotation, overrideCameraAngle, x1, y1, x2, y2);
     }
 
@@ -364,7 +364,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     @Override
-    protected boolean hasClickedOutside(double mouseX, double mouseY, int guiLeft, int guiTop, int mouseButton) {
+    protected boolean hasClickedOutside(double mouseX, double mouseY, int guiLeft, int guiTop) {
         for (Renderable renderable : this.renderables) {
             if (renderable instanceof GuidebookTab guidebookTab) {
                 if (guidebookTab.isMouseOver(mouseX, mouseY)) {
@@ -372,7 +372,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                 }
             }
         }
-        return super.hasClickedOutside(mouseX, mouseY, guiLeft, guiTop, mouseButton);
+        return super.hasClickedOutside(mouseX, mouseY, guiLeft, guiTop);
     }
 
     @Override
