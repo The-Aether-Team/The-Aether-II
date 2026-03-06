@@ -5,7 +5,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
-public class GuidebookButton extends Button {
+public class GuidebookButton extends Button.Plain {
     private final ItemLike renderItem;
 
     public GuidebookButton(ItemLike renderItem, Builder builder) {
@@ -15,6 +15,7 @@ public class GuidebookButton extends Button {
 
     @Override
     protected void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.renderContents(guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.renderItem(new ItemStack(this.renderItem), this.getX() + 3, this.getY() + 3);
     }
 }
