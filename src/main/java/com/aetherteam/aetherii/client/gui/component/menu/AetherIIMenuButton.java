@@ -30,8 +30,8 @@ public class AetherIIMenuButton extends Button {
         this.hoverOffset = 0;
     }
 
-    public AetherIIMenuButton(AetherIITitleScreen screen, Button oldButton) { //todo onPress
-        this(screen, new Builder(oldButton.getMessage(), null).bounds(oldButton.getX(), oldButton.getY(), oldButton.getWidth(), oldButton.getHeight()).createNarration((button) -> ((ButtonAccessor) oldButton).callCreateNarrationMessage()));
+    public AetherIIMenuButton(AetherIITitleScreen screen, Button oldButton) {
+        this(screen, new Builder(oldButton.getMessage(), ((ButtonAccessor) oldButton).aether_ii$getOnPress()).bounds(oldButton.getX(), oldButton.getY(), oldButton.getWidth(), oldButton.getHeight()).createNarration((button) -> ((ButtonAccessor) oldButton).callCreateNarrationMessage()));
         oldButton.visible = false;
         oldButton.active = false;
     }
@@ -43,11 +43,7 @@ public class AetherIIMenuButton extends Button {
         Font font = minecraft.font;
 
         Identifier location = this.getWidth() < 100 ? AETHER_WIDGETS_SMALL.get(this.isActive(), this.isHoveredOrFocused()) : AETHER_WIDGETS.get(this.isActive(), this.isHoveredOrFocused());
-
-       // RenderSystem.enableBlend();
-       // guiGraphics.setColor(1.0F, 1.0F, 1.0F, this.alpha);
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, 200, 20, 0, 0, this.getX() + this.hoverOffset, this.getY(), 200, 20, ARGB.white(this.alpha));
-       // RenderSystem.disableBlend();
 
         poseStack.pushMatrix();
         float textX = this.getX() + 35 + this.hoverOffset;
