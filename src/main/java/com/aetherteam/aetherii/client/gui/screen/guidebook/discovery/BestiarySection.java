@@ -409,7 +409,6 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         int x = 21;
         int y = 103;
         int lineHeight = 9;
-        int color = 0xffffffff; //todo?
         ActiveTextCollector textCollector = guiGraphics.textRenderer();
         MultiLineLabel label = MultiLineLabel.create(font, 135, 5, component);
         label.visitLines(TextAlignment.LEFT, x, y, lineHeight, textCollector);
