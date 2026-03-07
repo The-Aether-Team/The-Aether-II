@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.client.event.listeners.DimensionClientListener;
 import com.aetherteam.aetherii.client.event.listeners.LevelClientListener;
 import com.aetherteam.aetherii.client.gui.screen.HolyIslesReceivingLevelScreen;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleFactories;
+import com.aetherteam.aetherii.client.renderer.AetherIIDimensionRenderers;
 import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
@@ -57,6 +58,7 @@ public class AetherIIClient {
 
         bus.addListener(DimensionClientListener::onRenderFog);
         bus.addListener(LevelClientListener::onRenderLevelLast);
+        bus.addListener(AetherIIDimensionRenderers::extractDimensionEffect);
 
         neoBus.addListener(AetherIIClient::registerMenuTextures);
         neoBus.addListener(AetherIIMenuTypes::registerMenuScreens);
@@ -72,6 +74,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIRenderers::registerBakedModels);
         neoBus.addListener(AetherIIRenderers::registerRenderStateModifier);
         neoBus.addListener(AetherIIRenderers::registerSpecialModelRenderers);
+        neoBus.addListener(AetherIIDimensionRenderers::registerDimensionEffect);
 //        neoBus.addListener(AetherIIRenderEffects::registerRenderEffects); //TODO
         neoBus.addListener(AetherIIRenderPipelines::registerShaders);
         neoBus.addListener(AetherIIItemDecorators::registerItemDecorators);
