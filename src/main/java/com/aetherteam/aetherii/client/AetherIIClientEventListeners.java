@@ -79,8 +79,6 @@ public class AetherIIClientEventListeners {
         // Datapacks
         bus.addListener(AetherIIClientEventListeners::onDatapackSync);
         bus.addListener(AetherIIClientEventListeners::onReceiveRecipes);
-
-        //bus.addListener(LevelClientListener::onKeyPress); todo: remove after port to 1.21.9+
     }
 
     public static void onGuiOpen(ScreenEvent.Opening event) {

@@ -41,11 +41,6 @@ public class AlkahestPurifierSpecialRenderer implements NoDataSpecialModelRender
         poseStack.popPose();
     }
 
-    //    @Override //TODO
-//    public void render(ItemDisplayContext context, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, boolean partialTick) {
-
-//    }
-
     @Override
     public void getExtents(Consumer<Vector3fc> consumer) {
         PoseStack poseStack = new PoseStack();

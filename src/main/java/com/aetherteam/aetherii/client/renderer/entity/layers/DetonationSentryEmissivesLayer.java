@@ -11,9 +11,11 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
@@ -32,38 +34,34 @@ public class DetonationSentryEmissivesLayer extends EyesLayer<DetonationSentryRe
     }
 
     @Override
-    public void submit(PoseStack p_433452_, SubmitNodeCollector p_433171_, int p_434650_, DetonationSentryRenderState p_435883_, float p_433542_, float p_435619_) {
-        super.submit(p_433452_, p_433171_, p_434650_, p_435883_, p_433542_, p_435619_);
-    }
+    public void submit(PoseStack poseStack, SubmitNodeCollector collector, int light, DetonationSentryRenderState renderState, float netHeadYaw, float headPitch) {
+        RenderType eye;
+        RenderType rune = RUNE;
+        RenderType timer;
 
-//    @Override //TODO
-//    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, DetonationSentryRenderState sentry, float netHeadYaw, float headPitch) {
-//        RenderType eye;
-//        RenderType rune = RUNE;
-//        RenderType timer;
-//
-//        float sentryTimer = sentry.timer;
-//        float flickerInterval = Mth.sin(Mth.square(sentryTimer) / 50.0F);
-//        if (flickerInterval >= 0) {
-//            eye = EYE;
-//        } else {
-//            eye = EYE_RED;
-//        }
-//        float timerIncreaseInterval = DetonationSentry.MAX_TIMER / 4.0F;
-//        if (sentryTimer < timerIncreaseInterval) {
-//            timer = TIMER_0;
-//        } else if (sentryTimer < timerIncreaseInterval * 2) {
-//            timer = TIMER_1;
-//        } else if (sentryTimer <  timerIncreaseInterval * 3) {
-//            timer = TIMER_2;
-//        } else {
-//            timer = TIMER_3;
-//            rune = RUNE_RED;
-//        }
-//        this.getParentModel().renderToBuffer(poseStack, buffer.getBuffer(eye), packedLight, OverlayTexture.NO_OVERLAY);
-//        this.getParentModel().renderToBuffer(poseStack, buffer.getBuffer(rune), packedLight, OverlayTexture.NO_OVERLAY);
-//        this.getParentModel().renderToBuffer(poseStack, buffer.getBuffer(timer), packedLight, OverlayTexture.NO_OVERLAY);
-//    }
+        float sentryTimer = renderState.timer;
+        float flickerInterval = Mth.sin(Mth.square(sentryTimer) / 50.0F);
+        if (flickerInterval >= 0) {
+            eye = EYE;
+        } else {
+            eye = EYE_RED;
+        }
+        float timerIncreaseInterval = DetonationSentry.MAX_TIMER / 4.0F;
+        if (sentryTimer < timerIncreaseInterval) {
+            timer = TIMER_0;
+        } else if (sentryTimer < timerIncreaseInterval * 2) {
+            timer = TIMER_1;
+        } else if (sentryTimer <  timerIncreaseInterval * 3) {
+            timer = TIMER_2;
+        } else {
+            timer = TIMER_3;
+            rune = RUNE_RED;
+        }
+
+        collector.order(1).submitModel(this.getParentModel(), renderState, poseStack, eye, light, OverlayTexture.NO_OVERLAY, -1, null, renderState.outlineColor, null);
+        collector.order(1).submitModel(this.getParentModel(), renderState, poseStack, rune, light, OverlayTexture.NO_OVERLAY, -1, null, renderState.outlineColor, null);
+        collector.order(1).submitModel(this.getParentModel(), renderState, poseStack, timer, light, OverlayTexture.NO_OVERLAY, -1, null, renderState.outlineColor, null);
+    }
 
     @Override
     public RenderType renderType() {

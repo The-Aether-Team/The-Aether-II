@@ -35,12 +35,6 @@ public class SentryCrateSpecialRenderer implements NoDataSpecialModelRenderer {
         submitNodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, this.material.renderType(RenderTypes::entitySolid), i, i1, -1, this.materialSet.get(material), i2, null);
     }
 
-    //    @Override //TODO
-//    public void render(ItemDisplayContext context, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, boolean partialTick) {
-//        VertexConsumer vertexConsumer = this.material.buffer(buffer, RenderTypes::entitySolid);
-//        this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay);
-//    }
-
     @Override
     public void getExtents(Consumer<Vector3fc> consumer) {
         PoseStack posestack = new PoseStack();
