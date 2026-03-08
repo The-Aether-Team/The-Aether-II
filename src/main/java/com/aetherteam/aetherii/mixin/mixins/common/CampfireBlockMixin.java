@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.mixin.mixins.block;
+package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.world.level.block.CampfireBlock;
