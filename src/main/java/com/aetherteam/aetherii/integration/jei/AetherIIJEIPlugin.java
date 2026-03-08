@@ -60,6 +60,7 @@ public class AetherIIJEIPlugin implements IModPlugin {
         registration.addCraftingStation(RecipeTypes.CRAFTING, AetherIIBlocks.SKYROOT_CRAFTING_TABLE);
         registration.addCraftingStation(RecipeTypes.SMELTING, AetherIIBlocks.HOLYSTONE_FURNACE);
         registration.addCraftingStation(RecipeTypes.SMELTING_FUEL, AetherIIBlocks.HOLYSTONE_FURNACE);
+        registration.addCraftingStation(RecipeTypes.STONECUTTING, AetherIIBlocks.ARTISANS_BENCH);
     }
 
     @Override
