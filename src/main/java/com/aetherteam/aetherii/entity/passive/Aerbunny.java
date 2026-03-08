@@ -610,7 +610,7 @@ public class Aerbunny extends AetherTamableAnimal {
 
     @Override
     public boolean canRiderInteract() {
-        if (this.getVehicle() instanceof Player vehicle) {
+        if (this.getVehicle() instanceof Player player && player.level().isClientSide()) {
             return AetherIIClientProxy.isAerbunnyInteractable();
         }
         return true;
@@ -622,7 +622,7 @@ public class Aerbunny extends AetherTamableAnimal {
      */
     @Override
     public boolean isPickable() {
-        if (this.getVehicle() instanceof Player player) {
+        if (this.getVehicle() instanceof Player player && player.level().isClientSide()) {
             if (!AetherIIClientProxy.isAerbunnyInteractable()) {
                 return false;
             } else {
