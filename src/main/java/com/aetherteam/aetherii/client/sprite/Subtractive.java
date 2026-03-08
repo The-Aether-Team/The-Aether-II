@@ -62,9 +62,8 @@ public record Subtractive(List<ResourceLocation> textures, Map<String, ResourceL
 
                 for (int i = 0; i < nativeImage.getHeight(); i++) {
                     for (int j = 0; j < nativeImage.getWidth(); j++) {
-                        if (nativeOverlayImage.getLuminanceOrAlpha(i, j) == 0) {
-                            nativeImage.setPixel(i, j, nativeBaseImage.getPixel(i, j));
-                        }
+                        int color = nativeOverlayImage.getLuminanceOrAlpha(i, j) == 0 ? nativeBaseImage.getPixel(i, j) : 0x000000;
+                        nativeImage.setPixel(i, j, color);
                     }
                 }
                 return new SpriteContents(this.outputLocation(), new FrameSize(nativeImage.getWidth(), nativeImage.getHeight()), nativeImage, ResourceMetadata.EMPTY);
