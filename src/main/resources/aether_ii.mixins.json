@@ -6,9 +6,9 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "aether_ii.refmap.json",
   "mixins": [
-    "block.CampfireBlockMixin",
     "common.AttributeUtilMixin",
     "common.BoneMealItemMixin",
+    "common.CampfireBlockMixin",
     "common.CrossbowItemMixin",
     "common.EntityMixin",
     "common.HeightmapTypesMixin",
