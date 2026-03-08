@@ -102,19 +102,20 @@ public class SkyrootBedRenderer implements BlockEntityRenderer<SkyrootBedBlockEn
 
     @Override
     public void submit(SkyrootBedRenderState skyRootBedRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
-        this.renderPiece(poseStack, submitNodeCollector, skyRootBedRenderState.bedPart == BedPart.HEAD ? this.headModel : this.footModel, skyRootBedRenderState.angle, skyRootBedRenderState.bedTexture, skyRootBedRenderState.lightCoords, OverlayTexture.NO_OVERLAY, false);
-
+        this.renderPiece(poseStack, submitNodeCollector, skyRootBedRenderState.bedPart == BedPart.HEAD ? this.headModel : this.footModel, skyRootBedRenderState.angle, skyRootBedRenderState.bedTexture, skyRootBedRenderState.lightCoords, OverlayTexture.NO_OVERLAY, false, skyRootBedRenderState.breakProgress, 0);
     }
 
     public void renderInHand(PoseStack poseStack, SubmitNodeCollector bufferSource, int packedLight, int packedOverlay, Identifier location) {
-        this.renderPiece(poseStack, bufferSource, this.headModel, Direction.SOUTH, location, packedLight, packedOverlay, false);
-        this.renderPiece(poseStack, bufferSource, this.footModel, Direction.SOUTH, location, packedLight, packedOverlay, true);
+        this.renderPiece(poseStack, bufferSource, this.headModel, Direction.SOUTH, location, packedLight, packedOverlay, false, null, 0);
+        this.renderPiece(poseStack, bufferSource, this.footModel, Direction.SOUTH, location, packedLight, packedOverlay, true, null, 0);
     }
 
-    private void renderPiece(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, Model model, Direction direction, Identifier location, int packedLight, int packedOverlay, boolean isFeet) {
+    private void renderPiece(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, Model model, Direction direction, Identifier location, int packedLight, int packedOverlay, boolean isFeet,
+                             ModelFeatureRenderer.@Nullable CrumblingOverlay crumblingOverlay,
+                             int p_451666_) {
         poseStack.pushPose();
         preparePose(poseStack, isFeet, direction);
-        submitNodeCollector.submitModel(model, Unit.INSTANCE, poseStack, RenderTypes.entityCutout(location), packedLight, packedOverlay, -1, null);
+        submitNodeCollector.submitModel(model, Unit.INSTANCE, poseStack, RenderTypes.entityCutout(location), packedLight, packedOverlay, -1, null, p_451666_, crumblingOverlay);
         poseStack.popPose();
     }
 
