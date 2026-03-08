@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.data.resources.builders.worldgen.holyisles;
 
-import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIICarvers;
 import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesPlacedFeatures;
@@ -9,23 +9,26 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.Music;
+import net.minecraft.world.attribute.AmbientParticle;
+import net.minecraft.world.attribute.BackgroundMusic;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.biome.*;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
+import java.util.List;
 import java.util.Optional;
 
 // NOTE: Tweaks to biome colors should be done in AetherIIDataMapData
 public class HolyIslesBiomeBuilders { //TODO
     private static final BiomeSpecialEffects HIGHFIELDS_EFFECTS = new BiomeSpecialEffects.Builder()
-//            .fogColor(0xecebfc)
-//            .skyColor(0xc9d1ff)
             .waterColor(0xa2d5f2)
-//            .waterFogColor(0x55708a)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
-//            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false))
             .build();
     private static final BiomeSpecialEffects MAGNETIC_EFFECTS = new BiomeSpecialEffects.Builder()
 //            .fogColor(0xedeef5)
@@ -210,7 +213,7 @@ public class HolyIslesBiomeBuilders { //TODO
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.LOWER_GREEN_AERCLOUD)
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.LOWER_PURPLE_AERCLOUD);
         if (tree.isPresent()) builder = builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, tree.get());
-        return fullDefinition(
+        return highfieldDefinition(
                 true,
                 temperature,
                 downfall,
@@ -382,7 +385,7 @@ public class HolyIslesBiomeBuilders { //TODO
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.LOWER_GREEN_AERCLOUD)
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.LOWER_PURPLE_AERCLOUD);
         if (tree.isPresent()) builder = builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, tree.get());
-        return fullDefinition(
+        return magneticDefinition(
                 true,
                 temperature,
                 downfall,
@@ -537,7 +540,7 @@ public class HolyIslesBiomeBuilders { //TODO
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.LOWER_GREEN_AERCLOUD)
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.LOWER_PURPLE_AERCLOUD);
         if (tree.isPresent()) builder = builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, tree.get());
-        return fullDefinition(
+        return arcticDefinition(
                 precipitation,
                 temperature,
                 downfall,
@@ -627,7 +630,7 @@ public class HolyIslesBiomeBuilders { //TODO
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.LOWER_GREEN_AERCLOUD)
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.LOWER_PURPLE_AERCLOUD);
         if (tree.isPresent()) builder = builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, tree.get());
-        return fullDefinition(
+        return irradiateDefinition(
                 true,
                 temperature,
                 downfall,
@@ -649,7 +652,7 @@ public class HolyIslesBiomeBuilders { //TODO
     public static Biome makeAercloudSeaBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
-        return fullDefinition(
+        return highfieldDefinition(
                 false,
                 temperature,
                 downfall,
@@ -691,7 +694,7 @@ public class HolyIslesBiomeBuilders { //TODO
     public static Biome makeHeastveilCavernsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
-        return fullDefinition(
+        return highfieldDefinition(
                 false,
                 temperature,
                 downfall,
@@ -747,8 +750,61 @@ public class HolyIslesBiomeBuilders { //TODO
         );
     }
 
-    public static Biome fullDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
+    public static Biome highfieldDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xecebfc)
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xc9d1ff)
+                .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x55708a)
+                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
+                .hasPrecipitation(precipitation)
+                .temperature(temperature)
+                .downfall(downfall)
+                .specialEffects(effects)
+                .mobSpawnSettings(spawnSettings)
+                .generationSettings(generationSettings)
+                .temperatureAdjustment(temperatureModifier)
+                .build();
+    }
+
+    public static Biome magneticDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
+        return new Biome.BiomeBuilder()
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xedeef5)
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xc5cbeb)
+                .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x607496)
+                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
+                .hasPrecipitation(precipitation)
+                .temperature(temperature)
+                .downfall(downfall)
+                .specialEffects(effects)
+                .mobSpawnSettings(spawnSettings)
+                .generationSettings(generationSettings)
+                .temperatureAdjustment(temperatureModifier)
+                .build();
+    }
+
+    public static Biome arcticDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
+        return new Biome.BiomeBuilder()
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xf3f0ff)
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xe7e3fc)
+                .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0x3e5082)
+                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
+                .hasPrecipitation(precipitation)
+                .temperature(temperature)
+                .downfall(downfall)
+                .specialEffects(effects)
+                .mobSpawnSettings(spawnSettings)
+                .generationSettings(generationSettings)
+                .temperatureAdjustment(temperatureModifier)
+                .build();
+    }
+
+    public static Biome irradiateDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
+        return new Biome.BiomeBuilder()
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xF0E8BE)
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xfcebc5)
+                .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0xbccc81)
+                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
+                .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, List.of(new AmbientParticle(AetherIIParticleTypes.AMBROSIUM.get(), 0.00625F)))
                 .hasPrecipitation(precipitation)
                 .temperature(temperature)
                 .downfall(downfall)

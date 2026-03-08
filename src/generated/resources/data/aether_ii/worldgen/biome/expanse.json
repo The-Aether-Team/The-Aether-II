@@ -1,4 +1,16 @@
 {
+  "attributes": {
+    "minecraft:audio/background_music": {
+      "default": {
+        "max_delay": 10800,
+        "min_delay": 3600,
+        "sound": "aether_ii:music.aether"
+      }
+    },
+    "minecraft:visual/fog_color": "#ecebfc",
+    "minecraft:visual/sky_color": "#c9d1ff",
+    "minecraft:visual/water_fog_color": "#55708a"
+  },
   "carvers": [],
   "downfall": 0.5,
   "effects": {
