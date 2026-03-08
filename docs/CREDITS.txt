@@ -7,6 +7,7 @@ GizmoTheMoonPig
 
 hikoma0000
 - Fixes to Aether Grass Block breaking particles.
+- Fixes to Brettl Grass Bundles not boosting campfire smoke.
 
 UltraSquid9
 - Allow candles to trigger Hestveil.
