@@ -60,7 +60,7 @@ public class OverlaidLeavesModel extends DelegateBlockStateModel {
                 QuadCollection baseQuads = baseBuilder.build();
                 QuadCollection overlayQuads = overlayBuilder.build();
                 if (!baseQuads.getAll().isEmpty()) {
-                    parts.add(new SimpleModelWrapper(baseBuilder.build(), simpleModelWrapper.useAmbientOcclusion(), simpleModelWrapper.particleIcon(), Minecraft.useShaderTransparency() ? ChunkSectionLayer.CUTOUT : ChunkSectionLayer.SOLID));
+                    parts.add(new SimpleModelWrapper(baseBuilder.build(), simpleModelWrapper.useAmbientOcclusion(), simpleModelWrapper.particleIcon(), Minecraft.getInstance().options.cutoutLeaves().get() ? ChunkSectionLayer.CUTOUT : ChunkSectionLayer.SOLID));
                 }
                 if (!overlayQuads.getAll().isEmpty()) {
                     parts.add(new SimpleModelWrapper(overlayBuilder.build(), simpleModelWrapper.useAmbientOcclusion(), simpleModelWrapper.particleIcon(), ChunkSectionLayer.CUTOUT));
