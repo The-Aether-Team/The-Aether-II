@@ -9,7 +9,9 @@
     },
     "minecraft:visual/fog_color": "#f3f0ff",
     "minecraft:visual/sky_color": "#e7e3fc",
-    "minecraft:visual/water_fog_color": "#3e5082"
+    "minecraft:visual/water_fog_color": "#3e5082",
+    "neoforge:custom_skybox": "aether_ii:aether_sky",
+    "neoforge:custom_weather_effects": "aether_ii:aether_weather"
   },
   "carvers": "aether_ii:holy_isles_cave",
   "creature_spawn_probability": 0.218,
@@ -90,7 +92,7 @@
       "aether_ii:lower_purple_aercloud"
     ]
   ],
-  "has_precipitation": false,
+  "has_precipitation": true,
   "spawn_costs": {
     "aether_ii:aerwhale": {
       "charge": 0.5,

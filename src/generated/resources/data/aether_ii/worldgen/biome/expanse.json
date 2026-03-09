@@ -9,7 +9,9 @@
     },
     "minecraft:visual/fog_color": "#ecebfc",
     "minecraft:visual/sky_color": "#c9d1ff",
-    "minecraft:visual/water_fog_color": "#55708a"
+    "minecraft:visual/water_fog_color": "#55708a",
+    "neoforge:custom_skybox": "aether_ii:aether_sky",
+    "neoforge:custom_weather_effects": "aether_ii:aether_weather"
   },
   "carvers": [],
   "downfall": 0.5,
@@ -46,7 +48,7 @@
       "aether_ii:lower_purple_aercloud"
     ]
   ],
-  "has_precipitation": false,
+  "has_precipitation": true,
   "spawn_costs": {
     "aether_ii:aerwhale": {
       "charge": 0.5,
