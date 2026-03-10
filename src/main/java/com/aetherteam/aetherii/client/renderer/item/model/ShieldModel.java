@@ -66,7 +66,7 @@ public class ShieldModel implements ItemModel {
 
     public TextureAtlasSprite sprite(Identifier location) {
         var sprites = this.bakingContext.blockModelBaker().sprites();
-        return sprites.get(ClientHooks.getBlockMaterial(location), DEBUG_NAME);
+        return sprites.get(ClientHooks.getItemMaterial(location), DEBUG_NAME);
     }
 
     public List<BakedQuad> faceElement(TextureAtlasSprite sprite, float xOffset, float yOffset, boolean front) {
