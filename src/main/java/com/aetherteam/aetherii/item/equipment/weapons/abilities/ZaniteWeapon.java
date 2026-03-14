@@ -14,7 +14,6 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 
 public interface ZaniteWeapon extends ZaniteBuff {
     ResourceLocation DAMAGE_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_attack_damage");
@@ -30,12 +29,11 @@ public interface ZaniteWeapon extends ZaniteBuff {
 
     static void updateWeaponAttributes(ItemAttributeModifierEvent event) {
         ItemStack stack = event.getItemStack();
-        ItemAttributeModifiers defaultModifiers = event.getDefaultModifiers();
         List<ItemAttributeModifiers.Entry> modifiers = event.getModifiers();
 
         if (stack.getItem() instanceof ZaniteWeapon zaniteWeapon) {
             Set<ItemAttributeModifiers.Entry> updatedEntries = new HashSet<>();
-            Set<ItemAttributeModifiers.Entry> newEntries = new HashSet<>(zaniteWeapon.increaseDamage(zaniteWeapon.getDamageType(), defaultModifiers, stack));
+            Set<ItemAttributeModifiers.Entry> newEntries = new HashSet<>(zaniteWeapon.increaseDamage(zaniteWeapon.getDamageType(), stack));
             for (ItemAttributeModifiers.Entry newEntry : newEntries) {
                 boolean flag = true;
                 for (ItemAttributeModifiers.Entry oldEntry : modifiers) {
@@ -58,32 +56,13 @@ public interface ZaniteWeapon extends ZaniteBuff {
         }
     }
 
-    default List<ItemAttributeModifiers.Entry> increaseDamage(Holder<Attribute> typeAttribute, ItemAttributeModifiers modifiers, ItemStack stack) {
+    default List<ItemAttributeModifiers.Entry> increaseDamage(Holder<Attribute> typeAttribute, ItemStack stack) {
         List<ItemAttributeModifiers.Entry> modifierEntryList = new ArrayList<>();
 
-        modifierEntryList.add(new ItemAttributeModifiers.Entry(typeAttribute, new AttributeModifier(DAMAGE_TYPES.get(typeAttribute), this.calculateDamageIncrease(typeAttribute, DAMAGE_TYPES.get(typeAttribute), modifiers, stack), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND));
-        modifierEntryList.add(new ItemAttributeModifiers.Entry(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_MODIFIER_ID, this.calculateDamageIncrease(Attributes.ATTACK_DAMAGE, DAMAGE_MODIFIER_ID, modifiers, stack), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND));
+        modifierEntryList.add(new ItemAttributeModifiers.Entry(typeAttribute, new AttributeModifier(DAMAGE_TYPES.get(typeAttribute), this.calculateZaniteBuff(stack), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), EquipmentSlotGroup.MAINHAND));
+        modifierEntryList.add(new ItemAttributeModifiers.Entry(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_MODIFIER_ID, this.calculateZaniteBuff(stack), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), EquipmentSlotGroup.MAINHAND));
 
         return modifierEntryList;
-    }
-
-     default int calculateDamageIncrease(Holder<Attribute> base, ResourceLocation bonusModifier, ItemAttributeModifiers modifiers, ItemStack stack) {
-        AtomicReference<Double> baseStat = new AtomicReference<>(0.0);
-        modifiers.forEach(EquipmentSlotGroup.MAINHAND, (attribute, modifier) -> {
-            if (attribute.value() == base.value() && !modifier.id().equals(bonusModifier)) {
-                baseStat.updateAndGet(v -> v + modifier.amount());
-            }
-        });
-        return this.calculateDamageIncrease(stack, baseStat.get());
-    }
-
-    default int calculateDamageIncrease(ItemStack stack, double baseDamage) {
-        double boostedDamage = this.calculateZaniteBuff(stack, baseDamage);
-        boostedDamage -= baseDamage;
-        if (boostedDamage < 0.0) {
-            boostedDamage = 0.0;
-        }
-        return (int) Math.round(boostedDamage);
     }
 
     Holder<Attribute> getDamageType();

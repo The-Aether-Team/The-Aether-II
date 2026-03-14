@@ -2,10 +2,8 @@ package com.aetherteam.aetherii.item.equipment.tools.abilities;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.item.equipment.ZaniteBuff;
-import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlotGroup;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
@@ -13,19 +11,17 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 public interface ZaniteTool extends ZaniteBuff {
     ResourceLocation MINING_EFFICIENCY_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_mining_efficiency");
 
     static void updateToolAttributes(ItemAttributeModifierEvent event) {
         ItemStack stack = event.getItemStack();
-        ItemAttributeModifiers defaultModifiers = event.getDefaultModifiers();
         List<ItemAttributeModifiers.Entry> modifiers = event.getModifiers();
 
         if (stack.getItem() instanceof ZaniteTool zaniteTool) {
             ItemAttributeModifiers.Entry updatedEntry = null;
-            ItemAttributeModifiers.Entry newEntry = zaniteTool.increaseSpeed(defaultModifiers, stack, 6.0F);
+            ItemAttributeModifiers.Entry newEntry = zaniteTool.increaseSpeed(stack);
             double newAmount = newEntry.modifier().amount();
             boolean flag = true;
             for (ItemAttributeModifiers.Entry oldEntry : modifiers) {
@@ -46,17 +42,7 @@ public interface ZaniteTool extends ZaniteBuff {
         }
     }
 
-    default ItemAttributeModifiers.Entry increaseSpeed(ItemAttributeModifiers modifiers, ItemStack stack, double baseValue) {
-        return new ItemAttributeModifiers.Entry(Attributes.MINING_EFFICIENCY, new AttributeModifier(MINING_EFFICIENCY_MODIFIER_ID, this.calculateSpeedIncrease(Attributes.MINING_EFFICIENCY, baseValue, MINING_EFFICIENCY_MODIFIER_ID, modifiers, stack), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
-    }
-
-    default double calculateSpeedIncrease(Holder<Attribute> base, double baseValue, ResourceLocation bonusModifier, ItemAttributeModifiers modifiers, ItemStack stack) {
-        AtomicReference<Double> baseStat = new AtomicReference<>(baseValue);
-        modifiers.forEach(EquipmentSlotGroup.MAINHAND, (attribute, modifier) -> {
-            if (attribute.value() == base.value() && !modifier.id().equals(bonusModifier)) {
-                baseStat.updateAndGet(v -> v + modifier.amount());
-            }
-        });
-        return this.calculateZaniteBuff(stack, baseStat.get()) - baseStat.get();
+    default ItemAttributeModifiers.Entry increaseSpeed(ItemStack stack) {
+        return new ItemAttributeModifiers.Entry(Attributes.BLOCK_BREAK_SPEED, new AttributeModifier(MINING_EFFICIENCY_MODIFIER_ID, this.calculateZaniteBuff(stack), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), EquipmentSlotGroup.MAINHAND);
     }
 }
