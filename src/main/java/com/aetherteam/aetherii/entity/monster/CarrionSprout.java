@@ -22,7 +22,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
@@ -140,7 +139,7 @@ public class CarrionSprout extends PlantMob implements PlantCuttingMob {
      */
     public static boolean checkCarrionSproutSpawnRules(EntityType<? extends CarrionSprout> carrionSprout, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.CARRION_SPROUT_SPAWNABLE_ON)
-                && level.getRawBrightness(pos, 0) > 8
+                && level.getRawBrightness(pos, 0) > 8 && level.canSeeSky(pos.below())
                 && level.getDifficulty() != Difficulty.PEACEFUL;
     }
 
