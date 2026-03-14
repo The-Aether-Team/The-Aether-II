@@ -31,7 +31,7 @@ public class ZanitePendantItem extends AccessoryItem {
     @Override
     public Set<ConditionalAttribute> gatherAttributes(Set<ConditionalAttribute> attributes) {
         attributes = super.gatherAttributes(attributes);
-        attributes.add(new ConditionalAttribute(Attributes.MINING_EFFICIENCY, new ConditionalModifier(MINING_EFFICIENCY, (stack) -> 0.25 + (1.75 * stack.getDamageValue() / (stack.getMaxDamage() + 0.5)), AttributeModifier.Operation.ADD_VALUE), (stack, wearer) -> true));
+        attributes.add(new ConditionalAttribute(Attributes.BLOCK_BREAK_SPEED, new ConditionalModifier(MINING_EFFICIENCY, (stack) -> 0.25 + (1.75 * stack.getDamageValue() / (stack.getMaxDamage() + 0.5)), AttributeModifier.Operation.ADD_VALUE), (stack, wearer) -> true));
         return attributes;
     }
 
