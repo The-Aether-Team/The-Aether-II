@@ -577,6 +577,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.AMBEROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
+                output.accept(AetherIIBlocks.SKYROOT_SHELF.get());
+                output.accept(AetherIIBlocks.GREATROOT_SHELF.get());
+                output.accept(AetherIIBlocks.WISPROOT_SHELF.get());
+                output.accept(AetherIIBlocks.AMBEROOT_SHELF.get());
                 output.accept(AetherIIBlocks.SKYROOT_CHEST.get());
                 output.accept(AetherIIBlocks.SENTRY_CRATE.get());
                 output.accept(AetherIIBlocks.SENTRY_SPAWNER.get());

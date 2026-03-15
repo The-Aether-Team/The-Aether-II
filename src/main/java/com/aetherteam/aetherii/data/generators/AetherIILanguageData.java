@@ -353,6 +353,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_TRAPDOOR, "Skyroot Trapdoor");
         this.addBlock(AetherIIBlocks.SKYROOT_BUTTON, "Skyroot Button");
         this.addBlock(AetherIIBlocks.SKYROOT_PRESSURE_PLATE, "Skyroot Pressure Plate");
+        this.addBlock(AetherIIBlocks.SKYROOT_SHELF, "Skyroot Shelf");
 
         // Skyroot Decorative Blocks
         this.addBlock(AetherIIBlocks.SKYROOT_FLOORBOARDS, "Skyroot Floorboards");
@@ -377,6 +378,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATROOT_TRAPDOOR, "Greatroot Trapdoor");
         this.addBlock(AetherIIBlocks.GREATROOT_BUTTON, "Greatroot Button");
         this.addBlock(AetherIIBlocks.GREATROOT_PRESSURE_PLATE, "Greatroot Pressure Plate");
+        this.addBlock(AetherIIBlocks.GREATROOT_SHELF, "Greatroot Shelf");
 
         // Greatroot Decorative Blocks
         this.addBlock(AetherIIBlocks.GREATROOT_FLOORBOARDS, "Greatroot Floorboards");
@@ -401,6 +403,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.WISPROOT_TRAPDOOR, "Wisproot Trapdoor");
         this.addBlock(AetherIIBlocks.WISPROOT_BUTTON, "Wisproot Button");
         this.addBlock(AetherIIBlocks.WISPROOT_PRESSURE_PLATE, "Wisproot Pressure Plate");
+        this.addBlock(AetherIIBlocks.WISPROOT_SHELF, "Wisproot Shelf");
 
         // Wisproot Decorative Blocks
         this.addBlock(AetherIIBlocks.WISPROOT_FLOORBOARDS, "Wisproot Floorboards");
@@ -425,6 +428,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBEROOT_TRAPDOOR, "Amberoot Trapdoor");
         this.addBlock(AetherIIBlocks.AMBEROOT_BUTTON, "Amberoot Button");
         this.addBlock(AetherIIBlocks.AMBEROOT_PRESSURE_PLATE, "Amberoot Pressure Plate");
+        this.addBlock(AetherIIBlocks.AMBEROOT_SHELF, "Amberoot Shelf");
 
         // Amberoot Decorative Blocks
         this.addBlock(AetherIIBlocks.AMBEROOT_FLOORBOARDS, "Amberoot Floorboards");

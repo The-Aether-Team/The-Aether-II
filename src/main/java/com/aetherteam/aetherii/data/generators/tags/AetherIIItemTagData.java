@@ -535,6 +535,12 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.WISPROOT_PRESSURE_PLATE.asItem(),
                 AetherIIBlocks.AMBEROOT_PRESSURE_PLATE.asItem()
         );
+        this.tag(ItemTags.WOODEN_SHELVES).add(
+                AetherIIBlocks.SKYROOT_SHELF.asItem(),
+                AetherIIBlocks.GREATROOT_SHELF.asItem(),
+                AetherIIBlocks.WISPROOT_SHELF.asItem(),
+                AetherIIBlocks.AMBEROOT_SHELF.asItem()
+        );
         this.tag(ItemTags.WOOL_CARPETS).add(
                 AetherIIBlocks.CLOUDWOOL_CARPET.asItem(),
                 AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.asItem(),

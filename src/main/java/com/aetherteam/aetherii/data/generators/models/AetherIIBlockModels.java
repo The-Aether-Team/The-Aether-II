@@ -10,6 +10,7 @@ import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerato
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -522,6 +523,11 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createHangingSign(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get());
         this.createHangingSign(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get());
         this.createHangingSign(AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get(), AetherIIBlocks.AMBEROOT_HANGING_SIGN.get(), AetherIIBlocks.AMBEROOT_WALL_HANGING_SIGN.get());
+
+        this.createShelf(AetherIIBlocks.SKYROOT_SHELF.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
+        this.createShelf(AetherIIBlocks.GREATROOT_SHELF.get(), AetherIIBlocks.STRIPPED_GREATROOT_LOG.get());
+        this.createShelf(AetherIIBlocks.WISPROOT_SHELF.get(), AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
+        this.createShelf(AetherIIBlocks.AMBEROOT_SHELF.get(), AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get());
 
         this.createLever(AetherIIBlocks.HOLYSTONE_LEVER.get());
 

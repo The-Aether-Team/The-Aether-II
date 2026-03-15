@@ -499,6 +499,12 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get(),
                 AetherIIBlocks.UNDERSHALE_BRICK_PRESSURE_PLATE.get()
         );
+        this.tag(BlockTags.WOODEN_SHELVES).add(
+                AetherIIBlocks.SKYROOT_SHELF.get(),
+                AetherIIBlocks.GREATROOT_SHELF.get(),
+                AetherIIBlocks.WISPROOT_SHELF.get(),
+                AetherIIBlocks.AMBEROOT_SHELF.get()
+        );
         this.tag(BlockTags.WOOL_CARPETS).add(
                 AetherIIBlocks.CLOUDWOOL_CARPET.get(),
                 AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get(),

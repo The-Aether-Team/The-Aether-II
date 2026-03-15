@@ -411,6 +411,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<TrapDoorBlock> AMBEROOT_TRAPDOOR = register("amberoot_trapdoor", (properties) -> new TrapDoorBlock(AetherIIWoodTypes.AMBEROOT_BLOCK_SET, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR));
     public static final DeferredBlock<ButtonBlock> AMBEROOT_BUTTON = register("amberoot_button", (properties) -> new ButtonBlock(AetherIIWoodTypes.AMBEROOT_BLOCK_SET, 30, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_BUTTON));
     public static final DeferredBlock<PressurePlateBlock> AMBEROOT_PRESSURE_PLATE = register("amberoot_pressure_plate", (properties) -> new PressurePlateBlock(AetherIIWoodTypes.AMBEROOT_BLOCK_SET, properties), () -> Block.Properties.ofFullCopy(Blocks.OAK_PRESSURE_PLATE));
+    public static final DeferredBlock<ShelfBlock> AMBEROOT_SHELF = register("amberoot_shelf", ShelfBlock::new, () -> Block.Properties.ofFullCopy(Blocks.OAK_SHELF));
 
     // Amberoot Decorative Blocks
     public static final DeferredBlock<Block> AMBEROOT_FLOORBOARDS = register("amberoot_floorboards", () -> Block.Properties.ofFullCopy(AMBEROOT_PLANKS.get()));
@@ -1060,6 +1061,10 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.GREATROOT_BOOKSHELF.get(), 30, 20);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.WISPROOT_BOOKSHELF.get(), 30, 20);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_BOOKSHELF.get(), 30, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.SKYROOT_SHELF.get(), 30, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.GREATROOT_SHELF.get(), 30, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.WISPROOT_SHELF.get(), 30, 20);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.AMBEROOT_SHELF.get(), 30, 20);
     }
 
     public static void registerWoodTypes() {
