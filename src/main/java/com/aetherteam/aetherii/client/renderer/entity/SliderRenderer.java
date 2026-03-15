@@ -71,7 +71,7 @@ public class SliderRenderer extends MobRenderer<Slider, SliderRenderState, Slide
     private static void submitRays(PoseStack poseStack, float p_435333_, SubmitNodeCollector submitNodeCollector, RenderType renderType) {
         submitNodeCollector.submitCustomGeometry(poseStack, renderType, (p_434141_, p_434217_) -> {
             float f = Math.min(p_435333_ > 0.8F ? (p_435333_ - 0.8F) / 0.2F : 0.0F, 1.0F);
-            int i = ARGB.colorFromFloat(1.0F - f, 1.0F, 1.0F, 1.0F);
+            int i = ARGB.colorFromFloat(1.0F - f, 1.0F, 0.5F, 0.5F);
             RandomSource randomsource = RandomSource.create(432L);
             Vector3f vector3f = new Vector3f();
             Vector3f vector3f1 = new Vector3f();
