@@ -28,7 +28,6 @@ public class TempestThunderballRenderer extends EntityRenderer<TempestThunderbal
         poseStack.pushPose();
         poseStack.mulPose(cameraRenderState.orientation);
         submitNodeCollector.submitCustomGeometry(poseStack, RENDER_TYPE, (pose, vertexConsumer) -> {
-            poseStack.pushPose();
             poseStack.translate(0.0F, 1.0F, 0.0F);
 
             vertex(vertexConsumer, pose, thunderball.lightCoords, 0.0F, 0, 0, 1);

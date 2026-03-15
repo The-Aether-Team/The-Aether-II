@@ -333,7 +333,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     }
 
     @Override
-    protected NonNullList<ItemStack> getItems() {
+    public NonNullList<ItemStack> getItems() {
         return this.items;
     }
 
