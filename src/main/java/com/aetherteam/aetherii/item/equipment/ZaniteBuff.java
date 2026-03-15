@@ -7,6 +7,6 @@ public interface ZaniteBuff {
     double buff = 1.0;
 
     default double calculateZaniteBuff(ItemStack stack) {
-        return buff * stack.getDamageValue() / (double) stack.getMaxDamage();
+        return 1.0e-10 + buff * stack.getDamageValue() / (double) stack.getMaxDamage();
     }
 }
