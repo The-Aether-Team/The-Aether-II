@@ -44,7 +44,7 @@ public class AetherSkyboxRenderer implements CustomSkyboxRenderer {
                 skyRenderState.moonPhase,
                 skyRenderState.rainBrightness,
                 skyRenderState.starBrightness);
-        this.renderCloudCoverDisc(levelRenderState, skyRenderState, poseStack, multiBufferSource, skyRenderState.sunAngle, skyRenderState.skyColor, sunColor);
+        this.renderCloudCoverDisc(levelRenderState, skyRenderState, poseStack, multiBufferSource, levelRenderState.gameTime, skyRenderState.skyColor, sunColor);
         multiBufferSource.endBatch();
         return true;
     }
@@ -97,5 +97,12 @@ public class AetherSkyboxRenderer implements CustomSkyboxRenderer {
         }
 
         poseStack.popPose();
+    }
+
+    public int getSunriseOrSunsetColor(float timeOfDay) {
+        float f = Mth.cos(timeOfDay * Mth.TWO_PI);
+        float f1 = f / 0.4F * 0.5F + 0.5F;
+        float f2 = Mth.square(1.0F - (1.0F - Mth.sin(f1 * Mth.PI)) * 0.99F);
+        return ARGB.colorFromFloat(f2, f1 * 0.3F + 0.65F, f1 * f1 * 0.7F + 0.25F, 0.4F);
     }
 }
