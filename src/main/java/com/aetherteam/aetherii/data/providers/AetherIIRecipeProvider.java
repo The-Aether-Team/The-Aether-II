@@ -208,11 +208,11 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .unlockedBy(has, has(material));
     }
 
-    protected ShapedRecipeBuilder makeSpearWithTag(Supplier<? extends Item> spear, TagKey<Item> material, String has) {
-        return this.makeSpearWithTag(spear, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)), has);
+    protected ShapedRecipeBuilder makePikeWithTag(Supplier<? extends Item> spear, TagKey<Item> material, String has) {
+        return this.makePikeWithTag(spear, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)), has);
     }
 
-    protected ShapedRecipeBuilder makeSpearWithTag(Supplier<? extends Item> spear, TagKey<Item> material, Ingredient sticks, String has) {
+    protected ShapedRecipeBuilder makePikeWithTag(Supplier<? extends Item> spear, TagKey<Item> material, Ingredient sticks, String has) {
         return ShapedRecipeBuilder.shaped(this.getter, RecipeCategory.COMBAT, spear.get())
                 .define('#', material)
                 .define('/', sticks)

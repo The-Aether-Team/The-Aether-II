@@ -18,23 +18,23 @@ import java.util.List;
 public class AetherIIStats {
     public static final List<ItemAttributeModifiers.Entry> SKYROOT_SHORTSWORD = List.of(slashDamageModifer(3.0));
     public static final List<ItemAttributeModifiers.Entry> SKYROOT_HAMMER = List.of(impactDamageModifer(3.0));
-    public static final List<ItemAttributeModifiers.Entry> SKYROOT_SPEAR = List.of(pierceDamageModifer(3.0));
+    public static final List<ItemAttributeModifiers.Entry> SKYROOT_PIKE = List.of(pierceDamageModifer(3.0));
     public static final List<ItemAttributeModifiers.Entry> SKYROOT_CROSSBOW = List.of(rangedPierceDamageModifer(2.0));
     public static final List<ItemAttributeModifiers.Entry> HOLYSTONE_SHORTSWORD = List.of(slashDamageModifer(4.0));
     public static final List<ItemAttributeModifiers.Entry> HOLYSTONE_HAMMER = List.of(impactDamageModifer(4.0));
-    public static final List<ItemAttributeModifiers.Entry> HOLYSTONE_SPEAR = List.of(pierceDamageModifer(4.0));
+    public static final List<ItemAttributeModifiers.Entry> HOLYSTONE_PIKE = List.of(pierceDamageModifer(4.0));
     public static final List<ItemAttributeModifiers.Entry> HOLYSTONE_CROSSBOW = List.of(rangedPierceDamageModifer(3.0));
     public static final List<ItemAttributeModifiers.Entry> ZANITE_SHORTSWORD = List.of(slashDamageModifer(5.0));
     public static final List<ItemAttributeModifiers.Entry> ZANITE_HAMMER = List.of(impactDamageModifer(5.0));
-    public static final List<ItemAttributeModifiers.Entry> ZANITE_SPEAR = List.of(pierceDamageModifer(5.0));
+    public static final List<ItemAttributeModifiers.Entry> ZANITE_PIKE = List.of(pierceDamageModifer(5.0));
     public static final List<ItemAttributeModifiers.Entry> ZANITE_CROSSBOW = List.of(rangedPierceDamageModifer(4.0));
     public static final List<ItemAttributeModifiers.Entry> ARKENIUM_SHORTSWORD = List.of(slashDamageModifer(5.0));
     public static final List<ItemAttributeModifiers.Entry> ARKENIUM_HAMMER = List.of(impactDamageModifer(5.0));
-    public static final List<ItemAttributeModifiers.Entry> ARKENIUM_SPEAR = List.of(pierceDamageModifer(5.0));
+    public static final List<ItemAttributeModifiers.Entry> ARKENIUM_PIKE = List.of(pierceDamageModifer(5.0));
     public static final List<ItemAttributeModifiers.Entry> ARKENIUM_CROSSBOW = List.of(pierceDamageModifer(2.0), rangedPierceDamageModifer(4.0));
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_SHORTSWORD = List.of(slashDamageModifer(6.0));
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_HAMMER = List.of(impactDamageModifer(6.0));
-    public static final List<ItemAttributeModifiers.Entry> GRAVITITE_SPEAR = List.of(pierceDamageModifer(6.0));
+    public static final List<ItemAttributeModifiers.Entry> GRAVITITE_PIKE = List.of(pierceDamageModifer(6.0));
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_CROSSBOW = List.of(rangedPierceDamageModifer(5.0));
     public static final List<ItemAttributeModifiers.Entry> HAMMER_OF_DEMOLITION = List.of(impactDamageModifer(5.0));
 

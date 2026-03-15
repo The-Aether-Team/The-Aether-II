@@ -307,6 +307,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.SKYROOT_FENCE_GATE.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_BUTTON.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get());
+        this.dropSelf(AetherIIBlocks.SKYROOT_SHELF.get());
 
         // Skyroot Decorative Blocks
         this.dropSelf(AetherIIBlocks.SKYROOT_FLOORBOARDS.get());
@@ -331,6 +332,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.GREATROOT_FENCE_GATE.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_BUTTON.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get());
+        this.dropSelf(AetherIIBlocks.GREATROOT_SHELF.get());
 
         // Greatroot Decorative Blocks
         this.dropSelf(AetherIIBlocks.GREATROOT_FLOORBOARDS.get());
@@ -355,6 +357,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.WISPROOT_FENCE_GATE.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_BUTTON.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
+        this.dropSelf(AetherIIBlocks.WISPROOT_SHELF.get());
 
         // Wisproot Decorative Blocks
         this.dropSelf(AetherIIBlocks.WISPROOT_FLOORBOARDS.get());
@@ -379,6 +382,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.AMBEROOT_FENCE_GATE.get());
         this.dropSelf(AetherIIBlocks.AMBEROOT_BUTTON.get());
         this.dropSelf(AetherIIBlocks.AMBEROOT_PRESSURE_PLATE.get());
+        this.dropSelf(AetherIIBlocks.AMBEROOT_SHELF.get());
 
         // Amberoot Decorative Blocks
         this.dropSelf(AetherIIBlocks.AMBEROOT_FLOORBOARDS.get());

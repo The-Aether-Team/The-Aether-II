@@ -94,5 +94,10 @@ public class AetherIIBlockEntityTypes {
                 AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get(),
                 AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get(),
                 AetherIIBlocks.AMBEROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.AMBEROOT_HANGING_SIGN.get());
+        event.modify(BlockEntityType.SHELF,
+                AetherIIBlocks.SKYROOT_SHELF.get(),
+                AetherIIBlocks.GREATROOT_SHELF.get(),
+                AetherIIBlocks.WISPROOT_SHELF.get(),
+                AetherIIBlocks.AMBEROOT_SHELF.get());
     }
 }

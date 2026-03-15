@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.entity.attributes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShortswordItem;
-import com.aetherteam.aetherii.item.equipment.weapons.TieredSpearItem;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredPikeItem;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import org.jetbrains.annotations.Nullable;
@@ -32,9 +32,9 @@ public class BaseRangedAttribute extends RangedAttribute {
         } else if (this == AetherIIAttributes.SHOCK_RANGE.get()) {
             return TieredHammerItem.BASE_SHOCK_RANGE_ID;
         } else if (this == AetherIIAttributes.STAB_RADIUS.get()) {
-            return TieredSpearItem.BASE_STAB_RADIUS_ID;
+            return TieredPikeItem.BASE_STAB_RADIUS_ID;
         } else if (this == AetherIIAttributes.STAB_DISTANCE.get()) {
-            return TieredSpearItem.BASE_STAB_DISTANCE_ID;
+            return TieredPikeItem.BASE_STAB_DISTANCE_ID;
         } else {
             return super.getBaseId();
         }

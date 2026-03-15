@@ -14,7 +14,6 @@ import net.minecraft.client.renderer.state.LevelRenderState;
 import net.minecraft.client.renderer.state.SkyRenderState;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
-import net.minecraft.world.level.MoonPhase;
 import net.neoforged.neoforge.client.CustomSkyboxRenderer;
 import org.joml.Matrix4f;
 
@@ -28,10 +27,7 @@ public class AetherSkyboxRenderer implements CustomSkyboxRenderer {
         setupFog.run();
         PoseStack poseStack = new PoseStack();
         float sunAngle = skyRenderState.sunAngle;
-        float rainLevel = skyRenderState.rainBrightness;
-        float starBrightness = skyRenderState.starBrightness;
         int sunColor = skyRenderState.sunriseAndSunsetColor;
-        MoonPhase moonPhase = skyRenderState.moonPhase;
         skyRenderer.renderSkyDisc(skyRenderState.skyColor);
         MultiBufferSource.BufferSource multiBufferSource = renderBuffers.bufferSource();
         float f = skyRenderState.sunAngle;
@@ -44,7 +40,7 @@ public class AetherSkyboxRenderer implements CustomSkyboxRenderer {
                 skyRenderState.moonPhase,
                 skyRenderState.rainBrightness,
                 skyRenderState.starBrightness);
-        this.renderCloudCoverDisc(levelRenderState, skyRenderState, poseStack, multiBufferSource, skyRenderState.sunAngle, skyRenderState.skyColor, sunColor);
+        this.renderCloudCoverDisc(levelRenderState, skyRenderState, poseStack, multiBufferSource, levelRenderState.gameTime, skyRenderState.skyColor, sunColor);
         multiBufferSource.endBatch();
         return true;
     }

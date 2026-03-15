@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "#aether_ii:crafts_holystone_tools",
+    "/": "#aether_ii:rods/skyroot"
+  },
+  "pattern": [
+    "#",
+    "/",
+    "#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:holystone_pike"
+  }
+}

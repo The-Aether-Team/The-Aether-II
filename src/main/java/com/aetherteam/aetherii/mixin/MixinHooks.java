@@ -121,8 +121,8 @@ public class MixinHooks {
         }
     }
 
-    public static void spearStabBehavior(Player player, Entity target, boolean canSpearStab) {
-        if (canSpearStab) {
+    public static void spearPikeBehavior(Player player, Entity target, boolean canPikeStab) {
+        if (canPikeStab) {
             float stabRadius = (float) player.getAttributeValue(AetherIIAttributes.STAB_RADIUS);
             float stabDistance = (float) player.getAttributeValue(AetherIIAttributes.STAB_DISTANCE);
             if (stabRadius > 0 || stabDistance > 0) {

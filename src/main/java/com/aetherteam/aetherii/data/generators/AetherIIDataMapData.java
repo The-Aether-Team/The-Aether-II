@@ -106,7 +106,7 @@ public class AetherIIDataMapData extends DataMapProvider {
         fuels.add(AetherIIBlocks.AMBEROOT_BOOKSHELF.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
         fuels.add(AetherIIItems.SKYROOT_SHORTSWORD, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_HAMMER, new FurnaceFuel(200), false);
-        fuels.add(AetherIIItems.SKYROOT_SPEAR, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_PIKE, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_CROSSBOW, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_PICKAXE, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_AXE, new FurnaceFuel(200), false);

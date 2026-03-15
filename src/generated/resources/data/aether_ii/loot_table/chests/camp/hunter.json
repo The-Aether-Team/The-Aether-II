@@ -118,12 +118,12 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:skyroot_spear",
+          "name": "aether_ii:skyroot_pike",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:holystone_spear",
+          "name": "aether_ii:holystone_pike",
           "weight": 2
         }
       ],

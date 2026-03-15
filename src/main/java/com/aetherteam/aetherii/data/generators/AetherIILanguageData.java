@@ -353,6 +353,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_TRAPDOOR, "Skyroot Trapdoor");
         this.addBlock(AetherIIBlocks.SKYROOT_BUTTON, "Skyroot Button");
         this.addBlock(AetherIIBlocks.SKYROOT_PRESSURE_PLATE, "Skyroot Pressure Plate");
+        this.addBlock(AetherIIBlocks.SKYROOT_SHELF, "Skyroot Shelf");
 
         // Skyroot Decorative Blocks
         this.addBlock(AetherIIBlocks.SKYROOT_FLOORBOARDS, "Skyroot Floorboards");
@@ -377,6 +378,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATROOT_TRAPDOOR, "Greatroot Trapdoor");
         this.addBlock(AetherIIBlocks.GREATROOT_BUTTON, "Greatroot Button");
         this.addBlock(AetherIIBlocks.GREATROOT_PRESSURE_PLATE, "Greatroot Pressure Plate");
+        this.addBlock(AetherIIBlocks.GREATROOT_SHELF, "Greatroot Shelf");
 
         // Greatroot Decorative Blocks
         this.addBlock(AetherIIBlocks.GREATROOT_FLOORBOARDS, "Greatroot Floorboards");
@@ -401,6 +403,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.WISPROOT_TRAPDOOR, "Wisproot Trapdoor");
         this.addBlock(AetherIIBlocks.WISPROOT_BUTTON, "Wisproot Button");
         this.addBlock(AetherIIBlocks.WISPROOT_PRESSURE_PLATE, "Wisproot Pressure Plate");
+        this.addBlock(AetherIIBlocks.WISPROOT_SHELF, "Wisproot Shelf");
 
         // Wisproot Decorative Blocks
         this.addBlock(AetherIIBlocks.WISPROOT_FLOORBOARDS, "Wisproot Floorboards");
@@ -425,6 +428,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBEROOT_TRAPDOOR, "Amberoot Trapdoor");
         this.addBlock(AetherIIBlocks.AMBEROOT_BUTTON, "Amberoot Button");
         this.addBlock(AetherIIBlocks.AMBEROOT_PRESSURE_PLATE, "Amberoot Pressure Plate");
+        this.addBlock(AetherIIBlocks.AMBEROOT_SHELF, "Amberoot Shelf");
 
         // Amberoot Decorative Blocks
         this.addBlock(AetherIIBlocks.AMBEROOT_FLOORBOARDS, "Amberoot Floorboards");
@@ -867,27 +871,27 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Combat
         this.addItem(AetherIIItems.SKYROOT_SHORTSWORD, "Skyroot Shortsword");
         this.addItem(AetherIIItems.SKYROOT_HAMMER, "Skyroot Hammer");
-        this.addItem(AetherIIItems.SKYROOT_SPEAR, "Skyroot Spear");
+        this.addItem(AetherIIItems.SKYROOT_PIKE, "Skyroot Pike");
         this.addItem(AetherIIItems.SKYROOT_CROSSBOW, "Skyroot Crossbow");
 
         this.addItem(AetherIIItems.HOLYSTONE_SHORTSWORD, "Holystone Shortsword");
         this.addItem(AetherIIItems.HOLYSTONE_HAMMER, "Holystone Hammer");
-        this.addItem(AetherIIItems.HOLYSTONE_SPEAR, "Holystone Spear");
+        this.addItem(AetherIIItems.HOLYSTONE_PIKE, "Holystone Pike");
         this.addItem(AetherIIItems.HOLYSTONE_CROSSBOW, "Holystone Crossbow");
 
         this.addItem(AetherIIItems.ZANITE_SHORTSWORD, "Zanite Shortsword");
         this.addItem(AetherIIItems.ZANITE_HAMMER, "Zanite Hammer");
-        this.addItem(AetherIIItems.ZANITE_SPEAR, "Zanite Spear");
+        this.addItem(AetherIIItems.ZANITE_PIKE, "Zanite Pike");
         this.addItem(AetherIIItems.ZANITE_CROSSBOW, "Zanite Crossbow");
 
         this.addItem(AetherIIItems.ARKENIUM_SHORTSWORD, "Arkenium Shortsword");
         this.addItem(AetherIIItems.ARKENIUM_HAMMER, "Arkenium Hammer");
-        this.addItem(AetherIIItems.ARKENIUM_SPEAR, "Arkenium Spear");
+        this.addItem(AetherIIItems.ARKENIUM_PIKE, "Arkenium Pike");
         this.addItem(AetherIIItems.ARKENIUM_CROSSBOW, "Arkenium Crossbow");
 
         this.addItem(AetherIIItems.GRAVITITE_SHORTSWORD, "Gravitite Shortsword");
         this.addItem(AetherIIItems.GRAVITITE_HAMMER, "Gravitite Hammer");
-        this.addItem(AetherIIItems.GRAVITITE_SPEAR, "Gravitite Spear");
+        this.addItem(AetherIIItems.GRAVITITE_PIKE, "Gravitite Pike");
         this.addItem(AetherIIItems.GRAVITITE_CROSSBOW, "Gravitite Crossbow");
 
         this.addItem(AetherIIItems.SKYROOT_SHIELD, "Skyroot Shield");
@@ -1148,7 +1152,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_TROWEL.get(), 1, "§9Ability:§r Increases Yield");
         this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_SHORTSWORD.get(), 1, "§9Ability:§r Increases Yield");
         this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_HAMMER.get(), 1, "§9Ability:§r Increases Yield");
-        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_SPEAR.get(), 1, "§9Ability:§r Increases Yield");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_PIKE.get(), 1, "§9Ability:§r Increases Yield");
         this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_CROSSBOW.get(), 1, "§9Ability:§r Double Shot");
         this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_CROSSBOW.get(), 2, "§3Use:§r Crouch-Use");
 
@@ -1158,7 +1162,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_TROWEL.get(), 1, "§9Ability:§r Sheds Ambrosium");
         this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_SHORTSWORD.get(), 1, "§9Ability:§r Sheds Ambrosium");
         this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_HAMMER.get(), 1, "§9Ability:§r Sheds Ambrosium");
-        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_SPEAR.get(), 1, "§9Ability:§r Sheds Ambrosium");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_PIKE.get(), 1, "§9Ability:§r Sheds Ambrosium");
         this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_CROSSBOW.get(), 1, "§9Ability:§r Spread Shot");
         this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_CROSSBOW.get(), 2, "§3Use:§r Crouch-Use");
 
@@ -1168,7 +1172,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_TROWEL.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SHORTSWORD.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_HAMMER.get(), 1, "§9Ability:§r Grows Stronger");
-        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SPEAR.get(), 1, "§9Ability:§r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_PIKE.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_CROSSBOW.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_CROSSBOW.get(), 2, "§3Use:§r Crouch-Use");
 
@@ -1180,7 +1184,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_TROWEL.get(), 1, "§9Ability:§r Upgrades Further");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_SHORTSWORD.get(), 1, "§9Ability:§r Upgrades Further");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_HAMMER.get(), 1, "§9Ability:§r Upgrades Further");
-        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_SPEAR.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_PIKE.get(), 1, "§9Ability:§r Upgrades Further");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_CROSSBOW.get(), 1, "§9Ability:§r Upgrades Further");
 
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_PICKAXE.get(), 1, "§9Ability:§r Levitates Block");
@@ -1193,7 +1197,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_TROWEL.get(), 2, "§3Use:§r Crouch-Interact");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SHORTSWORD.get(), 1, "§9Ability:§r Increases Gravity");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_HAMMER.get(), 1, "§9Ability:§r Increases Gravity");
-        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SPEAR.get(), 1, "§9Ability:§r Increases Gravity");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_PIKE.get(), 1, "§9Ability:§r Increases Gravity");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 1, "§9Ability:§r Straight Shot");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 2, "§3Use:§r Crouch-Use");
 
