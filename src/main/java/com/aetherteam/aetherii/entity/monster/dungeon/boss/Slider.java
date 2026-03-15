@@ -413,7 +413,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
         this.sliderDeathTime++;
 
         //use to slider usable goal while death animation
-        if (this.level() instanceof ServerLevel serverLevel) {
+        if (this.level() instanceof ServerLevel) {
             ProfilerFiller profilerfiller = Profiler.get();
             int i = this.tickCount + this.getId();
             if (i % 2 != 0 && this.tickCount > 1) {
@@ -512,7 +512,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     /**
      * Called on every block in the boss room when the boss is defeated.
      *
-     * @param state The {@link BlockState} to try to convert.
+     * @param oldState The {@link BlockState} to try to convert.
      * @return The converted {@link BlockState}.
      */
     @Nullable
