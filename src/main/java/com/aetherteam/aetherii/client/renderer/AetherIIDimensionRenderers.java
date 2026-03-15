@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.context.ContextKey;
-import net.neoforged.neoforge.client.CustomEnvironmentEffectsRendererManager;
 import net.neoforged.neoforge.client.event.ExtractLevelRenderStateEvent;
 import net.neoforged.neoforge.client.event.RegisterCustomEnvironmentEffectRendererEvent;
 
@@ -25,8 +24,6 @@ public class AetherIIDimensionRenderers {
 
     public static void extractDimensionEffect(ExtractLevelRenderStateEvent event) {
         if (event.getLevel().dimensionTypeRegistration().is(AetherIIDimensions.AETHER_HOLY_ISLES_DIMENSION_TYPE)) {
-            event.getRenderState().customSkyboxRenderer = CustomEnvironmentEffectsRendererManager.getCustomSkyboxRenderer(AETHER_SKY_ID);
-            event.getRenderState().customWeatherEffectRenderer = CustomEnvironmentEffectsRendererManager.getCustomWeatherEffectRenderer(AETHER_WEATHER_ID);
             event.getRenderState().setRenderData(DATA_THUNDER_KEY, event.getLevel().getThunderLevel(Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false)));
         }
     }
