@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class HolystonePikeItem extends TieredPikeItem implements HolystoneWeapon {
     public HolystonePikeItem(Properties properties) {
-        super(applyWeaponProperties(properties, AetherIIItemTiers.HOLYSTONE, 3, -2.4F, AetherIIStats.HOLYSTONE_SPEAR));
+        super(applyWeaponProperties(properties, AetherIIItemTiers.HOLYSTONE, 3, -2.4F, AetherIIStats.HOLYSTONE_PIKE));
     }
 
     @Override

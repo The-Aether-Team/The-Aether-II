@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class GravititePikeItem extends TieredPikeItem {
     public GravititePikeItem(Properties properties) {
-        super(applyWeaponProperties(properties, AetherIIItemTiers.GRAVITITE, 3, -2.4F, AetherIIStats.GRAVITITE_SPEAR));
+        super(applyWeaponProperties(properties, AetherIIItemTiers.GRAVITITE, 3, -2.4F, AetherIIStats.GRAVITITE_PIKE));
     }
 
     @Override

@@ -85,14 +85,14 @@ These blocks and mobs can all be interacted with using Trowel tools
 
 - New Damage System
 
-The Aether II's weapons carry specialised damage types, Slash, Impact, and Pierce. 
+The Aether II's weapons carry specialised damage types, Slash, Impact, and Pierce.
 Mobs in the dimension have differing defense values that can be checked in the Bestiary, using the correct damage type on a mob will deal bonus damage and special audiovisual feedback effects
 Stronger mobs, such as those found exclusively underground or in dungeons, may also be resistant to certain damage types.
 Using a damage type a mob is strong against will reduce the damage taken, cause a small amount of knockback to the player, and play a blocking sound effect
 The player is able to craft melee weapons with each of the three damage types which also carry special attacks based on the vanilla sweep attack
 Shortswords deal Slash Damage and carry a Slash attack similar to the vanilla sweep
 Hammers deal Impact Damage and carry a Smash attack that deals heavy knockback in a small area around a target
-Spears (name will be changed soon to account for vanilla Spears) and Crossbows deal Pierce Damage, Spears carry a Stab attack that heavily damages enemies directly behind a target
+Pikes and Crossbows deal Pierce Damage, Pikes carry a Stab attack that heavily damages enemies directly behind a target
 In the future there will be special loot items that carry the attack characteristics of craftable weapons while dealing differing damage types (like a spiked hammer that deals pierce damage while still doing the hammer shock attack)
 
    

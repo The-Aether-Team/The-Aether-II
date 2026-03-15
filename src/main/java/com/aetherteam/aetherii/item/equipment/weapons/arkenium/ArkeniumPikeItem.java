@@ -6,6 +6,6 @@ import com.aetherteam.aetherii.item.equipment.weapons.TieredPikeItem;
 
 public class ArkeniumPikeItem extends TieredPikeItem {
     public ArkeniumPikeItem(Properties properties) {
-        super(applyWeaponProperties(properties, AetherIIItemTiers.ARKENIUM, 3, -2.4F, AetherIIStats.ARKENIUM_SPEAR));
+        super(applyWeaponProperties(properties, AetherIIItemTiers.ARKENIUM, 3, -2.4F, AetherIIStats.ARKENIUM_PIKE));
     }
 }

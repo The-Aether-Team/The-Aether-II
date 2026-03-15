@@ -8,6 +8,6 @@ import com.aetherteam.aetherii.item.equipment.weapons.abilities.SkyrootWeapon;
 
 public class SkyrootPikeItem extends TieredPikeItem implements SkyrootWeapon {
     public SkyrootPikeItem(Properties properties) {
-        super(applyWeaponProperties(properties, AetherIIItemTiers.SKYROOT, 3, -2.4F, AetherIIStats.SKYROOT_SPEAR));
+        super(applyWeaponProperties(properties, AetherIIItemTiers.SKYROOT, 3, -2.4F, AetherIIStats.SKYROOT_PIKE));
     }
 }

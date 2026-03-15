@@ -10,7 +10,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 
 public class ZanitePikeItem extends TieredPikeItem implements ZaniteWeapon {
     public ZanitePikeItem(Properties properties) {
-        super(applyWeaponProperties(properties, AetherIIItemTiers.ZANITE, 3, -2.4F, AetherIIStats.ZANITE_SPEAR));
+        super(applyWeaponProperties(properties, AetherIIItemTiers.ZANITE, 3, -2.4F, AetherIIStats.ZANITE_PIKE));
     }
 
     @Override
