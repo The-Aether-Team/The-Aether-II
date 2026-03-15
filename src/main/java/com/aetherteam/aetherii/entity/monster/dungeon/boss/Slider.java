@@ -398,7 +398,10 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
                 //Move TearDown method calling to tickDeath method
             }
         }
-        this.setAwake(true);
+        if (this.isDeadOrDying()) {
+
+            this.setAwake(true);
+        }
         super.die(source);
     }
 
