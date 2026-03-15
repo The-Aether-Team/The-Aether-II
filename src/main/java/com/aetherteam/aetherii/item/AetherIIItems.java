@@ -460,6 +460,11 @@ public class AetherIIItems {
         // Accessories
         bus.addListener(ZanitePendantItem::onBlockBreak);
 
+        // Music Player
+        bus.addListener(MusicPlayerItem::onItemDropped);
+        bus.addListener(MusicPlayerItem::onPlayerDeath);
+        bus.addListener(MusicPlayerItem::onContainerClose);
+
         // Other
         bus.addListener(CompanionItem::entityPostTick);
         bus.addListener(CompanionItem::entityLeaveLevel);

@@ -14,6 +14,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.SlotAccess;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
@@ -21,6 +23,9 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.event.entity.item.ItemTossEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerContainerEvent;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -109,5 +114,43 @@ public class MusicPlayerItem extends Item {
                 song.addToTooltip(context, tooltipAdder, flag, stack);
             }
         }
+    }
+
+    public static void onItemDropped(ItemTossEvent event) {
+        ItemStack stack = event.getEntity().getItem();
+        if (stack.getItem() instanceof MusicPlayerItem)
+            stopMusic(stack);
+    }
+
+    public static void onContainerClose(PlayerContainerEvent.Close event) {
+        for (Slot slot : event.getContainer().slots) {
+            if (slot.container instanceof Inventory)
+                continue; // Skip slots in player inventory
+
+            ItemStack stack = slot.getItem();
+
+            if (stack.getItem() instanceof MusicPlayerItem)
+                stopMusic(stack);
+        }
+    }
+
+    public static void onPlayerDeath(LivingDropsEvent event) {
+        for (ItemEntity itemEntity : event.getDrops()) {
+            ItemStack stack = itemEntity.getItem();
+
+            if (stack.getItem() instanceof MusicPlayerItem)
+                stopMusic(stack);
+        }
+    }
+
+    public static void stopMusic(ItemStack stack){
+        StoredMusic music = stack.get(AetherIIDataComponents.STORED_MUSIC);
+
+        if (music == null || !AetherIIClientProxy.isPlayingSoundEvent(music.sound().value())) {
+            return;
+        }
+
+        Holder<SoundEvent> sound = Holder.direct(SoundEvent.createVariableRangeEvent(music.sound().value().location()));
+        AetherIIClientProxy.stopSoundEvent(sound.value(), SoundSource.RECORDS);
     }
 }
