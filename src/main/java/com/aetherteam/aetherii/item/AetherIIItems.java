@@ -46,25 +46,25 @@ import com.aetherteam.aetherii.item.equipment.weapons.*;
 import com.aetherteam.aetherii.item.equipment.weapons.abilities.ZaniteWeapon;
 import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumCrossbowItem;
 import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumHammerItem;
+import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumPikeItem;
 import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumShortswordItem;
-import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumSpearItem;
 import com.aetherteam.aetherii.item.equipment.weapons.gravitite.GravititeCrossbowItem;
 import com.aetherteam.aetherii.item.equipment.weapons.gravitite.GravititeHammerItem;
+import com.aetherteam.aetherii.item.equipment.weapons.gravitite.GravititePikeItem;
 import com.aetherteam.aetherii.item.equipment.weapons.gravitite.GravititeShortswordItem;
-import com.aetherteam.aetherii.item.equipment.weapons.gravitite.GravititeSpearItem;
 import com.aetherteam.aetherii.item.equipment.weapons.holystone.HolystoneCrossbowItem;
 import com.aetherteam.aetherii.item.equipment.weapons.holystone.HolystoneHammerItem;
+import com.aetherteam.aetherii.item.equipment.weapons.holystone.HolystonePikeItem;
 import com.aetherteam.aetherii.item.equipment.weapons.holystone.HolystoneShortswordItem;
-import com.aetherteam.aetherii.item.equipment.weapons.holystone.HolystoneSpearItem;
 import com.aetherteam.aetherii.item.equipment.weapons.loot.HammerOfDemolitionItem;
 import com.aetherteam.aetherii.item.equipment.weapons.skyroot.SkyrootCrossbowItem;
 import com.aetherteam.aetherii.item.equipment.weapons.skyroot.SkyrootHammerItem;
+import com.aetherteam.aetherii.item.equipment.weapons.skyroot.SkyrootPikeItem;
 import com.aetherteam.aetherii.item.equipment.weapons.skyroot.SkyrootShortswordItem;
-import com.aetherteam.aetherii.item.equipment.weapons.skyroot.SkyrootSpearItem;
 import com.aetherteam.aetherii.item.equipment.weapons.zanite.ZaniteCrossbowItem;
 import com.aetherteam.aetherii.item.equipment.weapons.zanite.ZaniteHammerItem;
+import com.aetherteam.aetherii.item.equipment.weapons.zanite.ZanitePikeItem;
 import com.aetherteam.aetherii.item.equipment.weapons.zanite.ZaniteShortswordItem;
-import com.aetherteam.aetherii.item.equipment.weapons.zanite.ZaniteSpearItem;
 import com.aetherteam.aetherii.item.materials.*;
 import com.aetherteam.aetherii.item.miscellaneous.*;
 import com.aetherteam.aetherii.item.miscellaneous.bucket.*;
@@ -146,27 +146,27 @@ public class AetherIIItems {
     // Combat
     public static final DeferredItem<Item> SKYROOT_SHORTSWORD = register("skyroot_shortsword", SkyrootShortswordItem::new);
     public static final DeferredItem<TieredHammerItem> SKYROOT_HAMMER = register("skyroot_hammer", SkyrootHammerItem::new);
-    public static final DeferredItem<TieredSpearItem> SKYROOT_SPEAR = register("skyroot_spear", SkyrootSpearItem::new);
+    public static final DeferredItem<TieredPikeItem> SKYROOT_PIKE = register("skyroot_pike", SkyrootPikeItem::new);
     public static final DeferredItem<CrossbowItem> SKYROOT_CROSSBOW = register("skyroot_crossbow", SkyrootCrossbowItem::new, () -> new Item.Properties().enchantable(1));
 
     public static final DeferredItem<Item> HOLYSTONE_SHORTSWORD = register("holystone_shortsword", HolystoneShortswordItem::new);
     public static final DeferredItem<TieredHammerItem> HOLYSTONE_HAMMER = register("holystone_hammer", HolystoneHammerItem::new);
-    public static final DeferredItem<TieredSpearItem> HOLYSTONE_SPEAR = register("holystone_spear", HolystoneSpearItem::new);
+    public static final DeferredItem<TieredPikeItem> HOLYSTONE_PIKE = register("holystone_pike", HolystonePikeItem::new);
     public static final DeferredItem<CrossbowItem> HOLYSTONE_CROSSBOW = register("holystone_crossbow", HolystoneCrossbowItem::new, () -> new Item.Properties().enchantable(1));
 
     public static final DeferredItem<Item> ZANITE_SHORTSWORD = register("zanite_shortsword", ZaniteShortswordItem::new);
     public static final DeferredItem<TieredHammerItem> ZANITE_HAMMER = register("zanite_hammer", ZaniteHammerItem::new);
-    public static final DeferredItem<TieredSpearItem> ZANITE_SPEAR = register("zanite_spear", ZaniteSpearItem::new);
+    public static final DeferredItem<TieredPikeItem> ZANITE_PIKE = register("zanite_pike", ZanitePikeItem::new);
     public static final DeferredItem<CrossbowItem> ZANITE_CROSSBOW = register("zanite_crossbow", ZaniteCrossbowItem::new, () -> new Item.Properties().enchantable(1));
 
     public static final DeferredItem<Item> ARKENIUM_SHORTSWORD = register("arkenium_shortsword", ArkeniumShortswordItem::new);
     public static final DeferredItem<TieredHammerItem> ARKENIUM_HAMMER = register("arkenium_hammer", ArkeniumHammerItem::new);
-    public static final DeferredItem<TieredSpearItem> ARKENIUM_SPEAR = register("arkenium_spear", ArkeniumSpearItem::new);
+    public static final DeferredItem<TieredPikeItem> ARKENIUM_PIKE = register("arkenium_pike", ArkeniumPikeItem::new);
     public static final DeferredItem<CrossbowItem> ARKENIUM_CROSSBOW = register("arkenium_crossbow", ArkeniumCrossbowItem::new, () -> new Item.Properties().enchantable(1));
 
     public static final DeferredItem<Item> GRAVITITE_SHORTSWORD = register("gravitite_shortsword", GravititeShortswordItem::new);
     public static final DeferredItem<TieredHammerItem> GRAVITITE_HAMMER = register("gravitite_hammer", GravititeHammerItem::new);
-    public static final DeferredItem<TieredSpearItem> GRAVITITE_SPEAR = register("gravitite_spear", GravititeSpearItem::new);
+    public static final DeferredItem<TieredPikeItem> GRAVITITE_PIKE = register("gravitite_pike", GravititePikeItem::new);
     public static final DeferredItem<CrossbowItem> GRAVITITE_CROSSBOW = register("gravitite_crossbow", GravititeCrossbowItem::new, () -> new Item.Properties().enchantable(1));
 
     public static final DeferredItem<ShieldItem> SKYROOT_SHIELD = register("skyroot_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.SKYROOT, 0.05F, properties));

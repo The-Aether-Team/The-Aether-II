@@ -98,7 +98,7 @@
           "type": "item",
           "value": {
             "count": 1,
-            "id": "aether_ii:skyroot_spear"
+            "id": "aether_ii:skyroot_pike"
           }
         },
         "weight": 1
@@ -108,7 +108,7 @@
           "type": "item",
           "value": {
             "count": 1,
-            "id": "aether_ii:holystone_spear"
+            "id": "aether_ii:holystone_pike"
           }
         },
         "weight": 1
@@ -118,7 +118,7 @@
           "type": "item",
           "value": {
             "count": 1,
-            "id": "aether_ii:zanite_spear"
+            "id": "aether_ii:zanite_pike"
           }
         },
         "weight": 1
@@ -128,7 +128,7 @@
           "type": "item",
           "value": {
             "count": 1,
-            "id": "aether_ii:arkenium_spear"
+            "id": "aether_ii:arkenium_pike"
           }
         },
         "weight": 1
@@ -138,7 +138,7 @@
           "type": "item",
           "value": {
             "count": 1,
-            "id": "aether_ii:gravitite_spear"
+            "id": "aether_ii:gravitite_pike"
           }
         },
         "weight": 1

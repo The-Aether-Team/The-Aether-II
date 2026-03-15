@@ -72,12 +72,12 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.GRAVITITE_HAMMER.get(),
                 AetherIIItems.HAMMER_OF_DEMOLITION.get()
         );
-        this.tag(AetherIITags.Items.TOOLS_SPEARS).add(
-                AetherIIItems.SKYROOT_SPEAR.get(),
-                AetherIIItems.HOLYSTONE_SPEAR.get(),
-                AetherIIItems.ZANITE_SPEAR.get(),
-                AetherIIItems.ARKENIUM_SPEAR.get(),
-                AetherIIItems.GRAVITITE_SPEAR.get()
+        this.tag(AetherIITags.Items.TOOLS_PIKES).add(
+                AetherIIItems.SKYROOT_PIKE.get(),
+                AetherIIItems.HOLYSTONE_PIKE.get(),
+                AetherIIItems.ZANITE_PIKE.get(),
+                AetherIIItems.ARKENIUM_PIKE.get(),
+                AetherIIItems.GRAVITITE_PIKE.get()
         );
         this.tag(AetherIITags.Items.TOOLS_GLIDERS).add(
                 AetherIIItems.COLD_AERCLOUD_GLIDER.get(),
@@ -108,7 +108,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.ACCEPTS_CHARMS_WEAPONS).addTags(
                 AetherIITags.Items.TOOLS_SHORTSWORDS,
                 AetherIITags.Items.TOOLS_HAMMERS,
-                AetherIITags.Items.TOOLS_SPEARS,
+                AetherIITags.Items.TOOLS_PIKES,
                 ItemTags.SWORDS);
         this.tag(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR).addTags(
                 AetherIITags.Items.EQUIPMENT_HANDWEAR,
@@ -157,7 +157,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.SKYROOT_SHOVEL.get(),
                 AetherIIItems.SKYROOT_TROWEL.get(),
                 AetherIIItems.SKYROOT_SHORTSWORD.get(),
-                AetherIIItems.SKYROOT_SPEAR.get(),
+                AetherIIItems.SKYROOT_PIKE.get(),
                 AetherIIItems.SKYROOT_HAMMER.get());
         this.tag(AetherIITags.Items.HOLYSTONE_TOOL).add(
                 AetherIIItems.HOLYSTONE_PICKAXE.get(),
@@ -165,7 +165,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.HOLYSTONE_SHOVEL.get(),
                 AetherIIItems.HOLYSTONE_TROWEL.get(),
                 AetherIIItems.HOLYSTONE_SHORTSWORD.get(),
-                AetherIIItems.HOLYSTONE_SPEAR.get(),
+                AetherIIItems.HOLYSTONE_PIKE.get(),
                 AetherIIItems.HOLYSTONE_HAMMER.get());
         this.tag(AetherIITags.Items.ZANITE_TOOL).add(
                 AetherIIItems.ZANITE_PICKAXE.get(),
@@ -173,7 +173,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ZANITE_SHOVEL.get(),
                 AetherIIItems.ZANITE_TROWEL.get(),
                 AetherIIItems.ZANITE_SHORTSWORD.get(),
-                AetherIIItems.ZANITE_SPEAR.get(),
+                AetherIIItems.ZANITE_PIKE.get(),
                 AetherIIItems.ZANITE_HAMMER.get());
         this.tag(AetherIITags.Items.ARKENIUM_TOOL).add(
                 AetherIIItems.ARKENIUM_PICKAXE.get(),
@@ -181,7 +181,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_SHOVEL.get(),
                 AetherIIItems.ARKENIUM_TROWEL.get(),
                 AetherIIItems.ARKENIUM_SHORTSWORD.get(),
-                AetherIIItems.ARKENIUM_SPEAR.get(),
+                AetherIIItems.ARKENIUM_PIKE.get(),
                 AetherIIItems.ARKENIUM_HAMMER.get());
         this.tag(AetherIITags.Items.GRAVITITE_TOOL).add(
                 AetherIIItems.GRAVITITE_PICKAXE.get(),
@@ -189,7 +189,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.GRAVITITE_SHOVEL.get(),
                 AetherIIItems.GRAVITITE_TROWEL.get(),
                 AetherIIItems.GRAVITITE_SHORTSWORD.get(),
-                AetherIIItems.GRAVITITE_SPEAR.get(),
+                AetherIIItems.GRAVITITE_PIKE.get(),
                 AetherIIItems.GRAVITITE_HAMMER.get());
         this.tag(AetherIITags.Items.UNBREAKABLE_LOOT).add(
                 AetherIIItems.HAMMER_OF_DEMOLITION.get(),
@@ -202,23 +202,23 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.UNIQUE_TOOLTIP_COLOR).add(
                 AetherIIItems.SKYROOT_SHORTSWORD.get(),
                 AetherIIItems.SKYROOT_HAMMER.get(),
-                AetherIIItems.SKYROOT_SPEAR.get(),
+                AetherIIItems.SKYROOT_PIKE.get(),
                 AetherIIItems.SKYROOT_CROSSBOW.get(),
                 AetherIIItems.HOLYSTONE_SHORTSWORD.get(),
                 AetherIIItems.HOLYSTONE_HAMMER.get(),
-                AetherIIItems.HOLYSTONE_SPEAR.get(),
+                AetherIIItems.HOLYSTONE_PIKE.get(),
                 AetherIIItems.HOLYSTONE_CROSSBOW.get(),
                 AetherIIItems.ZANITE_SHORTSWORD.get(),
                 AetherIIItems.ZANITE_HAMMER.get(),
-                AetherIIItems.ZANITE_SPEAR.get(),
+                AetherIIItems.ZANITE_PIKE.get(),
                 AetherIIItems.ZANITE_CROSSBOW.get(),
                 AetherIIItems.ARKENIUM_SHORTSWORD.get(),
                 AetherIIItems.ARKENIUM_HAMMER.get(),
-                AetherIIItems.ARKENIUM_SPEAR.get(),
+                AetherIIItems.ARKENIUM_PIKE.get(),
                 AetherIIItems.ARKENIUM_CROSSBOW.get(),
                 AetherIIItems.GRAVITITE_SHORTSWORD.get(),
                 AetherIIItems.GRAVITITE_HAMMER.get(),
-                AetherIIItems.GRAVITITE_SPEAR.get(),
+                AetherIIItems.GRAVITITE_PIKE.get(),
                 AetherIIItems.GRAVITITE_CROSSBOW.get(),
                 AetherIIItems.SKYROOT_SHIELD.get(),
                 AetherIIItems.BURRUKAI_PLATE_SHIELD.get(),
@@ -429,7 +429,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.ARKENIUM_DOOR.asItem(),
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.asItem(),
                 AetherIIItems.ARKENIUM_SHORTSWORD.get(),
-                AetherIIItems.ARKENIUM_SPEAR.get(),
+                AetherIIItems.ARKENIUM_PIKE.get(),
                 AetherIIItems.ARKENIUM_HAMMER.get(),
                 AetherIIItems.ARKENIUM_PICKAXE.get(),
                 AetherIIItems.ARKENIUM_AXE.get(),
@@ -885,7 +885,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(Tags.Items.MELEE_WEAPON_TOOLS).addTags(
                 AetherIITags.Items.TOOLS_SHORTSWORDS,
                 AetherIITags.Items.TOOLS_HAMMERS,
-                AetherIITags.Items.TOOLS_SPEARS
+                AetherIITags.Items.TOOLS_PIKES
         );
         this.tag(Tags.Items.RANGED_WEAPON_TOOLS).add(
                 AetherIIItems.SKYROOT_CROSSBOW.get(),

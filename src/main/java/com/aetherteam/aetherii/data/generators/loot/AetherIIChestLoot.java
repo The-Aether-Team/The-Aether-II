@@ -75,8 +75,8 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_SPEAR).setWeight(3))
-                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_SPEAR).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_PIKE).setWeight(3))
+                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_PIKE).setWeight(2))
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
