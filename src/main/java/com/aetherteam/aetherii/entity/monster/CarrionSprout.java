@@ -139,7 +139,8 @@ public class CarrionSprout extends PlantMob implements PlantCuttingMob {
      */
     public static boolean checkCarrionSproutSpawnRules(EntityType<? extends CarrionSprout> carrionSprout, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.CARRION_SPROUT_SPAWNABLE_ON)
-                && level.getRawBrightness(pos, 0) > 8 && level.canSeeSky(pos.below())
+                && level.getRawBrightness(pos, 0) > 8
+                && level.canSeeSky(pos)
                 && level.getDifficulty() != Difficulty.PEACEFUL;
     }
 
