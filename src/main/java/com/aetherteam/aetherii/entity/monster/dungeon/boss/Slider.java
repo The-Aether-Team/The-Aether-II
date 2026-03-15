@@ -95,7 +95,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     private int attackCooldown = 0;
     public int sliderDeathTime = 0;
     public float lastHealthStage = 0.0F;
-    private boolean breakTresureVault;
+    private boolean breakTreasureVault;
 
     public Slider(EntityType<? extends Slider> type, Level level) {
         super(type, level);
@@ -403,8 +403,8 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     }
 
 
-    public void setBreakTresureVault() {
-        this.breakTresureVault = true;
+    public void setBreakTreasureVault() {
+        this.breakTreasureVault = true;
 
     }
 
@@ -438,7 +438,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
                 --this.attackCooldown;
             }
         }
-        if (this.breakTresureVault && this.getMoveDelay() < 2) {
+        if (this.breakTreasureVault && this.getMoveDelay() < 2) {
             this.level().broadcastEntityEvent(this, (byte) 60);
             this.playSound(SoundEvents.GENERIC_EXPLODE.value(), 2.5F, 1.0F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
 

@@ -83,7 +83,7 @@ public class SliderDeathWithBreakDoorGoal extends Goal {
         this.slider.setDeltaMovement(Vec3.ZERO);
 
         if (this.startMakeBreak) {
-            this.slider.setBreakTresureVault();
+            this.slider.setBreakTreasureVault();
         }
     }
 
