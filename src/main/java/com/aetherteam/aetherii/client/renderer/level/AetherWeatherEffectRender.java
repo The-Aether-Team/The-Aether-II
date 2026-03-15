@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.state.LevelRenderState;
 import net.minecraft.client.renderer.state.WeatherRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.SectionPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.Identifier;
@@ -26,6 +27,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
@@ -36,7 +38,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.client.CustomWeatherEffectRenderer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AetherWeatherEffectRender implements CustomWeatherEffectRenderer {
@@ -51,16 +52,12 @@ public class AetherWeatherEffectRender implements CustomWeatherEffectRenderer {
         LevelRendererAccessor levelRenderer = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer);
         WeatherEffectRendererAccessor weatherEffectRenderer = ((WeatherEffectRendererAccessor) levelRenderer.aether_ii$getWeatherEffectRenderer());
         Vec3 cameraPosition = camPos;
-        float rain = levelRenderState.weatherRenderState.intensity;
+        float rain = weatherRenderState.intensity;
         float thunder = levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_THUNDER_KEY, 0.0F);
 
         if (!(rain <= 0.0F)) {
             int i = Minecraft.useShaderTransparency() ? 10 : 5;
-            java.util.List<WeatherEffectRenderer.ColumnInstance> list = new ArrayList<>();
-            List<WeatherEffectRenderer.ColumnInstance> list1 = new ArrayList<>();
-            if (!list.isEmpty() || !list1.isEmpty()) {
-                this.renderWeather(levelRenderState, weatherRenderState, weatherEffectRenderer, bufferSource, cameraPosition, i, rain, thunder, list, list1);
-            }
+            this.renderWeather(levelRenderState, weatherRenderState, weatherEffectRenderer, bufferSource, cameraPosition, i, rain, thunder, weatherRenderState.rainColumns, weatherRenderState.snowColumns);
         }
         return true;
     }
@@ -99,7 +96,7 @@ public class AetherWeatherEffectRender implements CustomWeatherEffectRenderer {
                 BlockPos blockpos2 = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, blockpos.offset(k, 0, l));
                 if (blockpos2.getY() > level.getMinY() && blockpos2.getY() <= blockpos.getY() + 10 && blockpos2.getY() >= blockpos.getY() - 10) {
                     Biome biome = level.getBiome(blockpos2).value();
-                    if (biome.getPrecipitationAt(blockpos2, level.getSeaLevel()) == Biome.Precipitation.RAIN) {
+                    if (getPrecipitationAt(level, blockpos2) == Biome.Precipitation.RAIN) {
                         blockpos1 = blockpos2.below();
                         if (Minecraft.getInstance().options.particles().get() == ParticleStatus.MINIMAL) {
                             break;
@@ -135,4 +132,14 @@ public class AetherWeatherEffectRender implements CustomWeatherEffectRenderer {
         }
         return true;
     }
+
+    private Biome.Precipitation getPrecipitationAt(Level p_362885_, BlockPos p_362817_) {
+        if (!p_362885_.getChunkSource().hasChunk(SectionPos.blockToSectionCoord(p_362817_.getX()), SectionPos.blockToSectionCoord(p_362817_.getZ()))) {
+            return Biome.Precipitation.NONE;
+        } else {
+            Biome biome = p_362885_.getBiome(p_362817_).value();
+            return biome.getPrecipitationAt(p_362817_, p_362885_.getSeaLevel());
+        }
+    }
+
 }

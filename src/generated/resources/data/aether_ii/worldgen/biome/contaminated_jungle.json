@@ -17,7 +17,9 @@
     ],
     "minecraft:visual/fog_color": "#f0e8be",
     "minecraft:visual/sky_color": "#fcebc5",
-    "minecraft:visual/water_fog_color": "#bccc81"
+    "minecraft:visual/water_fog_color": "#bccc81",
+    "neoforge:custom_skybox": "aether_ii:aether_sky",
+    "neoforge:custom_weather_effects": "aether_ii:aether_weather"
   },
   "carvers": "aether_ii:holy_isles_cave",
   "downfall": 0.3,

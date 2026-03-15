@@ -3,129 +3,144 @@ package com.aetherteam.aetherii.client.renderer.blockentity;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.utility.AltarBlock;
 import com.aetherteam.aetherii.blockentity.AltarBlockEntity;
+import com.aetherteam.aetherii.client.renderer.blockentity.state.AlterRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.SubmitNodeCollector;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraft.client.renderer.entity.state.ItemClusterRenderState;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity, BlockEntityRenderState> { //TODO
-    private final ItemClusterRenderState renderState = new ItemClusterRenderState();
-//    private final BlockEntityRenderDispatcher blockEntityRenderDispatcher;
-//    private final ItemModelResolver itemModelResolver;
+public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity, AlterRenderState> { //TODO
+
+    private final ItemModelResolver itemModelResolver;
+    private final RandomSource random = RandomSource.create();
+    private EntityRenderDispatcher blockEntityRenderDispatcher;
 
     public AltarRenderer(BlockEntityRendererProvider.Context context) {
-//        this.blockEntityRenderDispatcher = context.getBlockEntityRenderDispatcher();
-//        this.itemModelResolver = context.getItemModelResolver();
+        this.itemModelResolver = context.itemModelResolver();
+        this.blockEntityRenderDispatcher = context.entityRenderer();
     }
 
     @Override
-    public BlockEntityRenderState createRenderState() {
-        return new BlockEntityRenderState();
+    public AlterRenderState createRenderState() {
+        return new AlterRenderState();
+    }
+
+    public void extractRenderState(
+            AltarBlockEntity altarBlockEntity,
+            AlterRenderState renderState,
+            float partialTick,
+            Vec3 p_445382_,
+            ModelFeatureRenderer.@Nullable CrumblingOverlay p_446369_
+    ) {
+        BlockEntityRenderer.super.extractRenderState(altarBlockEntity, renderState, partialTick, p_445382_, p_446369_);
+        ItemStack outputStack = altarBlockEntity.getItem(9);
+
+        renderState.facing = altarBlockEntity.getBlockState().getValue(AltarBlock.FACING);
+        renderState.displayItem = new ItemClusterRenderState();
+        this.itemModelResolver.updateForTopItem(renderState.displayItem.item, outputStack, ItemDisplayContext.GROUND, altarBlockEntity.getLevel(), null, 0);
+        renderState.displayItem.count = ItemClusterRenderState.getRenderedAmount(outputStack.getCount());
+        renderState.displayItem.seed = ItemClusterRenderState.getSeedForItemStack(outputStack);
+
+        int i = (int) altarBlockEntity.getBlockPos().asLong();
+        this.itemModelResolver
+                .updateForTopItem(renderState.itemInput, altarBlockEntity.getItems().get(0), ItemDisplayContext.FIXED, altarBlockEntity.getLevel(), null, i);
+        renderState.fuelItems = new ArrayList<>();
+
+        for (int i2 = 1; i2 <= 8; i2++) {
+            ItemStack fuelStack = altarBlockEntity.getItems().get(i2);
+            ItemStackRenderState itemstackrenderstate = new ItemStackRenderState();
+            if (fuelStack.is(AetherIITags.Items.ALTAR_FUEL)) {
+                this.itemModelResolver
+                        .updateForTopItem(itemstackrenderstate, fuelStack, ItemDisplayContext.FIXED, altarBlockEntity.getLevel(), null, i + i2);
+                renderState.fuelItems.add(itemstackrenderstate);
+            }
+        }
+        renderState.progress = altarBlockEntity.getProcessingProgress();
+        if (renderState.bobOff < 0) {
+            renderState.bobOff = altarBlockEntity.getLevel().getRandom().nextFloat() * Mth.TWO_PI;
+        }
+        altarBlockEntity.setInputItemRotation(altarBlockEntity.getInputItemRotation() + ((1.0F + partialTick) / 10.0F));
+        altarBlockEntity.setAmbSpinningSpeed(Math.clamp(Mth.lerp(0.025F, altarBlockEntity.getAmbSpinningSpeed(), altarBlockEntity.getProcessingProgress() * 0.01F), 0.25F, 1.0F));
+        altarBlockEntity.setAmbrosiumFinalRotation(altarBlockEntity.getAmbrosiumFinalRotation() + (altarBlockEntity.getAmbSpinningSpeed() / 15.0F));
+
+
+        renderState.inputItemRotation = altarBlockEntity.getInputItemRotation();
+        renderState.ambSpinningSpeed = altarBlockEntity.getAmbSpinningSpeed();
+        renderState.ambFinalSpeed = altarBlockEntity.getAmbrosiumFinalRotation();
+
     }
 
     @Override
-    public void submit(BlockEntityRenderState blockEntityRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
+    public void submit(AlterRenderState alterRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
+        ItemStackRenderState inputStack = alterRenderState.itemInput;
+
+        if (!inputStack.isEmpty()) {
+            poseStack.pushPose();
+            poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
+            poseStack.translate(0.5F, 0.5F, -1.01725F);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(alterRenderState.facing.toYRot() - 180));
+
+            if (!inputStack.isEmpty()) {
+                poseStack.scale(0.5F, 0.5F, 0.5F);
+                inputStack.submit(poseStack, submitNodeCollector, alterRenderState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+            }
+            poseStack.popPose();
+        }
+        if (!alterRenderState.displayItem.item.isEmpty()) {
+            poseStack.pushPose();
+//
+            poseStack.translate(0.5, 1.0, 0.5);
+            AABB aabb = alterRenderState.displayItem.item.getModelBoundingBox();
+            float f = -((float) aabb.minY) + 0.0625F;
+            float f1 = Mth.sin(alterRenderState.inputItemRotation / 10.0F + alterRenderState.bobOff) * 0.05F + 0.05F;
+            poseStack.translate(0.0F, f1 + f, 0.0F);
+            float f2 = ItemEntity.getSpin(alterRenderState.inputItemRotation, alterRenderState.bobOff);
+            poseStack.mulPose(Axis.YP.rotation(f2));
+            ItemEntityRenderer.renderMultipleFromCount(poseStack, submitNodeCollector, alterRenderState.lightCoords, alterRenderState.displayItem, this.random);
+
+            poseStack.popPose();
+        }
+        for (int i = 0; i < alterRenderState.fuelItems.size(); i++) {
+            ItemStackRenderState fuelStack = alterRenderState.fuelItems.get(i);
+            poseStack.pushPose();
+            float radius = 1.25F;
+            float theta = 5.0F;
+
+            float dist = Mth.PI * i / alterRenderState.fuelItems.size() * 2.0F;
+            float x = radius * Mth.cos(theta + dist);
+            float y = 0.0F;
+            float z = radius * Mth.sin(theta + dist);
+            float deltaX = z * Mth.cos(alterRenderState.ambFinalSpeed) - x * Mth.sin(alterRenderState.ambFinalSpeed);
+            float deltaZ = x * Mth.cos(alterRenderState.ambFinalSpeed) + z * Mth.sin(alterRenderState.ambFinalSpeed);
+            poseStack.translate(0.5, 1.25, 0.5);
+            poseStack.scale(0.3F, 0.3F, 0.3F);
+            poseStack.translate(deltaX, y, deltaZ);
+            poseStack.mulPose(Axis.YN.rotationDegrees(this.blockEntityRenderDispatcher.camera.yRot()));
+            fuelStack.submit(poseStack, submitNodeCollector, alterRenderState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+
+            poseStack.popPose();
+        }
+
 
     }
 
-    //    @Override
-//    public void render(AltarBlockEntity altarBlockEntity, float partialTick, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay, Vec3 pos) {
-//        Level level = altarBlockEntity.getLevel();
-//        BlockState blockState = altarBlockEntity.getBlockState();
-//        Direction direction = blockState.getValue(AltarBlock.FACING);
-//        if (level != null) {
-//            ItemStack inputStack = altarBlockEntity.getItem(0);
-//            ItemStack outputStack = altarBlockEntity.getItem(9);
-//
-//            if (altarBlockEntity.getBobOffs() < 0) {
-//                altarBlockEntity.setBobOffs(level.getRandom().nextFloat() * Mth.TWO_PI);
-//            }
-//            if (!inputStack.isEmpty()) {
-//                poseStack.pushPose();
-//                poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
-//                poseStack.translate(0.5F, 0.5F, -1.01725F);
-//                poseStack.mulPose(Axis.ZP.rotationDegrees(direction.toYRot() - 180));
-//
-//                if (!inputStack.isEmpty()) {
-//                    poseStack.scale(0.5F, 0.5F, 0.5F);
-//                    Minecraft.getInstance().getItemRenderer().renderStatic(inputStack, ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY, poseStack, multiBufferSource, level, 0);
-//                }
-//                poseStack.popPose();
-//            }
-//            if (!outputStack.isEmpty()) {
-//                this.itemModelResolver.updateForTopItem(this.renderState.item, outputStack, ItemDisplayContext.GROUND, level, null, 0);
-//                this.renderState.count = ItemClusterRenderState.getRenderedAmount(outputStack.getCount());
-//                this.renderState.seed = ItemClusterRenderState.getSeedForItemStack(outputStack);
-//
-//                poseStack.pushPose();
-//
-//                poseStack.translate(0.5, 1.0, 0.5);
-//                AABB aabb = this.renderState.item.getModelBoundingBox();
-//                float f = -((float) aabb.minY) + 0.0625F;
-//                float f1 = Mth.sin(altarBlockEntity.getInputItemRotation() / 10.0F + altarBlockEntity.getBobOffs()) * 0.05F + 0.05F;
-//                poseStack.translate(0.0F, f1 + f, 0.0F);
-//                float f2 = ItemEntity.getSpin(altarBlockEntity.getInputItemRotation(), altarBlockEntity.getBobOffs());
-//                poseStack.mulPose(Axis.YP.rotation(f2));
-//                ItemEntityRenderer.renderMultipleFromCount(poseStack, multiBufferSource, packedLight, this.renderState, level.getRandom());
-//                altarBlockEntity.setInputItemRotation(altarBlockEntity.getInputItemRotation() + ((1.0F + partialTick) / 10.0F));
-//
-//                poseStack.popPose();
-//            }
-//
-//            altarBlockEntity.setAmbSpinningSpeed(Math.clamp(Mth.lerp(0.025F, altarBlockEntity.getAmbSpinningSpeed(), altarBlockEntity.getProcessingProgress() * 0.01F) , 0.25F, 1.0F));
-//
-//            List<ItemStack> fuelStacks = new ArrayList<>();
-//            for (int i = 1; i <= 8; i++) {
-//                ItemStack fuelStack = altarBlockEntity.getItem(i);
-//                if (fuelStack.is(AetherIITags.Items.ALTAR_FUEL)) {
-//                    fuelStacks.add(fuelStack);
-//                }
-//            }
-//            for (int i = 0; i < fuelStacks.size(); i++) {
-//                ItemStack fuelStack = fuelStacks.get(i);
-//                poseStack.pushPose();
-//                float radius = 1.25F;
-//                float theta = 5.0F;
-//
-//                float dist = Mth.PI * i / fuelStacks.size() * 2.0F;
-//                float x = radius * Mth.cos(theta + dist);
-//                float y = 0.0F;
-//                float z = radius * Mth.sin(theta + dist);
-//                float deltaX = z * Mth.cos(altarBlockEntity.getAmbrosiumFinalRotation()) - x * Mth.sin(altarBlockEntity.getAmbrosiumFinalRotation());
-//                float deltaZ = x * Mth.cos(altarBlockEntity.getAmbrosiumFinalRotation()) + z * Mth.sin(altarBlockEntity.getAmbrosiumFinalRotation());
-//                poseStack.translate(0.5, 1.25, 0.5);
-//                poseStack.scale(0.3F, 0.3F, 0.3F);
-//                poseStack.translate(deltaX, y, deltaZ);
-//                poseStack.mulPose(Axis.YN.rotationDegrees(this.blockEntityRenderDispatcher.camera.getYRot()));
-//
-//                Minecraft.getInstance().getItemRenderer().renderStatic(fuelStack, ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY, poseStack, multiBufferSource, altarBlockEntity.getLevel(), 0);
-//
-//                poseStack.popPose();
-//            }
-//
-//            altarBlockEntity.setAmbrosiumFinalRotation(altarBlockEntity.getAmbrosiumFinalRotation() + (altarBlockEntity.getAmbSpinningSpeed() / 15.0F));
-//        }
-//    }
 }
