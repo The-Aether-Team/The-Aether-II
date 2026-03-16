@@ -7,12 +7,12 @@ import com.aetherteam.aetherii.client.renderer.entity.model.SliderModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.SliderRenderState;
 import com.aetherteam.aetherii.entity.monster.dungeon.boss.Slider;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.resources.Identifier;
@@ -59,63 +59,47 @@ public class SliderRenderer extends MobRenderer<Slider, SliderRenderState, Slide
             float f2 = sliderRenderState.deathTime / 300.0F;
             poseStack.pushPose();
             poseStack.translate(0.0F, 1.0F, 0.0F);
-            submitNodeCollector.submitCustomGeometry(poseStack, RenderTypes.dragonRays(), (pose, vertexConsumer) -> {
-                renderRays(poseStack, f2, vertexConsumer);
+            submitRays(poseStack, f2, submitNodeCollector, RenderTypes.dragonRays());
+            submitRays(poseStack, f2, submitNodeCollector, RenderTypes.dragonRaysDepth());
 
-            });
-            submitNodeCollector.submitCustomGeometry(poseStack, RenderTypes.dragonRaysDepth(), (pose, vertexConsumer) -> {
-                renderRays(poseStack, f2, vertexConsumer);
-
-            });
             poseStack.popPose();
         }
 
         super.submit(sliderRenderState, poseStack, submitNodeCollector, cameraRenderState);
     }
 
-    private static void renderRays(PoseStack poseStack, float deathCompletion, VertexConsumer buffer) {
-        poseStack.pushPose();
-        float f = Math.min(deathCompletion > 0.8F ? (deathCompletion - 0.8F) / 0.2F : 0.0F, 1.0F);
-        int i = ARGB.colorFromFloat(1.0F - f, 1.0F, 0.5F, 0.5F);
-        int j = 16711680;
-        RandomSource randomsource = RandomSource.create(432L);
-        Vector3f vector3f = new Vector3f();
-        Vector3f vector3f1 = new Vector3f();
-        Vector3f vector3f2 = new Vector3f();
-        Vector3f vector3f3 = new Vector3f();
-        Quaternionf quaternionf = new Quaternionf();
-        int k = Mth.floor((deathCompletion + deathCompletion * deathCompletion) / 2.0F * 60.0F);
+    private static void submitRays(PoseStack poseStack, float p_435333_, SubmitNodeCollector submitNodeCollector, RenderType renderType) {
+        submitNodeCollector.submitCustomGeometry(poseStack, renderType, (p_434141_, p_434217_) -> {
+            float f = Math.min(p_435333_ > 0.8F ? (p_435333_ - 0.8F) / 0.2F : 0.0F, 1.0F);
+            int i = ARGB.colorFromFloat(1.0F - f, 1.0F, 0.5F, 0.5F);
+            RandomSource randomsource = RandomSource.create(432L);
+            Vector3f vector3f = new Vector3f();
+            Vector3f vector3f1 = new Vector3f();
+            Vector3f vector3f2 = new Vector3f();
+            Vector3f vector3f3 = new Vector3f();
+            Quaternionf quaternionf = new Quaternionf();
+            int k = Mth.floor((p_435333_ + p_435333_ * p_435333_) / 2.0F * 60.0F);
+            int color = 16711680;
+            for (int l = 0; l < k; ++l) {
+                quaternionf.rotationXYZ(randomsource.nextFloat() * ((float) Math.PI * 2F), randomsource.nextFloat() * ((float) Math.PI * 2F), randomsource.nextFloat() * ((float) Math.PI * 2F)).rotateXYZ(randomsource.nextFloat() * ((float) Math.PI * 2F), randomsource.nextFloat() * ((float) Math.PI * 2F), randomsource.nextFloat() * ((float) Math.PI * 2F) + p_435333_ * ((float) Math.PI / 2F));
+                p_434141_.rotate(quaternionf);
+                float f1 = randomsource.nextFloat() * 20.0F + 5.0F + f * 10.0F;
+                float f2 = randomsource.nextFloat() * 2.0F + 1.0F + f * 2.0F;
+                vector3f1.set(-HALF_SQRT_3 * f2, f1, -0.5F * f2);
+                vector3f2.set(HALF_SQRT_3 * f2, f1, -0.5F * f2);
+                vector3f3.set(0.0F, f1, f2);
+                p_434217_.addVertex(p_434141_, vector3f).setColor(i);
+                p_434217_.addVertex(p_434141_, vector3f1).setColor(color);
+                p_434217_.addVertex(p_434141_, vector3f2).setColor(color);
+                p_434217_.addVertex(p_434141_, vector3f).setColor(i);
+                p_434217_.addVertex(p_434141_, vector3f2).setColor(color);
+                p_434217_.addVertex(p_434141_, vector3f3).setColor(color);
+                p_434217_.addVertex(p_434141_, vector3f).setColor(i);
+                p_434217_.addVertex(p_434141_, vector3f3).setColor(color);
+                p_434217_.addVertex(p_434141_, vector3f1).setColor(color);
+            }
 
-        for (int l = 0; l < k; l++) {
-            quaternionf.rotationXYZ(
-                            randomsource.nextFloat() * (float) (Math.PI * 2),
-                            randomsource.nextFloat() * (float) (Math.PI * 2),
-                            randomsource.nextFloat() * (float) (Math.PI * 2)
-                    )
-                    .rotateXYZ(
-                            randomsource.nextFloat() * (float) (Math.PI * 2),
-                            randomsource.nextFloat() * (float) (Math.PI * 2),
-                            randomsource.nextFloat() * (float) (Math.PI * 2) + deathCompletion * (float) (Math.PI / 2)
-                    );
-            poseStack.mulPose(quaternionf);
-            float f1 = randomsource.nextFloat() * 20.0F + 5.0F + f * 10.0F;
-            float f2 = randomsource.nextFloat() * 2.0F + 1.0F + f * 2.0F;
-            vector3f1.set(-HALF_SQRT_3 * f2, f1, -0.5F * f2);
-            vector3f2.set(HALF_SQRT_3 * f2, f1, -0.5F * f2);
-            vector3f3.set(0.0F, f1, f2);
-            PoseStack.Pose posestack$pose = poseStack.last();
-            buffer.addVertex(posestack$pose, vector3f).setColor(i);
-            buffer.addVertex(posestack$pose, vector3f1).setColor(j);
-            buffer.addVertex(posestack$pose, vector3f2).setColor(j);
-            buffer.addVertex(posestack$pose, vector3f).setColor(i);
-            buffer.addVertex(posestack$pose, vector3f2).setColor(j);
-            buffer.addVertex(posestack$pose, vector3f3).setColor(j);
-            buffer.addVertex(posestack$pose, vector3f).setColor(i);
-            buffer.addVertex(posestack$pose, vector3f3).setColor(j);
-            buffer.addVertex(posestack$pose, vector3f1).setColor(j);
-        }
-
-        poseStack.popPose();
+        });
     }
 
     @Override

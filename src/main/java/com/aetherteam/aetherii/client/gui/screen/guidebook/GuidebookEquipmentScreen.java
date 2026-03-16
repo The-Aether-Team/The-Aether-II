@@ -273,8 +273,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         EntityRenderDispatcher entityrenderdispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
         EntityRenderer entityrenderer = entityrenderdispatcher.getRenderer(entity);
         // Neo: use fresh render state to support multiple entities of the same type within a single frame
-        EntityRenderState entityrenderstate = entityrenderer.createRenderState();
-        entityrenderer.extractRenderState(entity, entityrenderstate, 1.0F);
+        EntityRenderState entityrenderstate = extractRenderState(entity);
         //don't make invisible moa in gui
         if (entityrenderstate instanceof MoaRenderState moaRenderState) {
             moaRenderState.opacity = 1.0F;
@@ -282,6 +281,16 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         net.neoforged.neoforge.client.renderstate.RenderStateExtensions.onUpdateEntityRenderState(entityrenderer, entity, entityrenderstate);
 //        entityrenderstate.hitboxesRenderState = null; //todo
         guiGraphics.submitEntityRenderState(entityrenderstate, scale, translation, rotation, overrideCameraAngle, x1, y1, x2, y2);
+    }
+
+    private static EntityRenderState extractRenderState(LivingEntity p_461127_) {
+        EntityRenderDispatcher entityrenderdispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
+        EntityRenderer<? super LivingEntity, ?> entityrenderer = entityrenderdispatcher.getRenderer(p_461127_);
+        EntityRenderState entityrenderstate = entityrenderer.createRenderState(p_461127_, 1.0F);
+        entityrenderstate.lightCoords = 15728880;
+        entityrenderstate.shadowPieces.clear();
+        entityrenderstate.outlineColor = 0;
+        return entityrenderstate;
     }
 
     @Override
