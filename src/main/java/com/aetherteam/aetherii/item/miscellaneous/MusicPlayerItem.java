@@ -20,6 +20,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -118,8 +119,7 @@ public class MusicPlayerItem extends Item {
 
     public static void onItemDropped(ItemTossEvent event) {
         ItemStack stack = event.getEntity().getItem();
-        if (stack.getItem() instanceof MusicPlayerItem)
-            stopMusic(stack);
+        tryStopMusic(stack);
     }
 
     public static void onContainerClose(PlayerContainerEvent.Close event) {
@@ -128,22 +128,33 @@ public class MusicPlayerItem extends Item {
                 continue; // Skip slots in player inventory
 
             ItemStack stack = slot.getItem();
-
-            if (stack.getItem() instanceof MusicPlayerItem)
-                stopMusic(stack);
+            tryStopMusic(stack);
         }
     }
 
     public static void onPlayerDeath(LivingDropsEvent event) {
         for (ItemEntity itemEntity : event.getDrops()) {
             ItemStack stack = itemEntity.getItem();
-
-            if (stack.getItem() instanceof MusicPlayerItem)
-                stopMusic(stack);
+            tryStopMusic(stack);
         }
     }
 
-    public static void stopMusic(ItemStack stack){
+    private static void tryStopMusic(ItemStack stack){
+        // Check if bundle and read through its contents for a music player
+        BundleContents contents = stack.get(DataComponents.BUNDLE_CONTENTS);
+        if (contents != null) {
+            // Music player only stacks to one, so just check the first item
+            if(contents.isEmpty())
+                return;
+
+            ItemStack item = contents.getItemUnsafe(0);
+            if(item.getItem() instanceof MusicPlayerItem)
+                stack = item;
+        }
+        else if(!(stack.getItem() instanceof MusicPlayerItem)) {
+            return;
+        }
+
         StoredMusic music = stack.get(AetherIIDataComponents.STORED_MUSIC);
 
         if (music == null || !AetherIIClientProxy.isPlayingSoundEvent(music.sound().value())) {
