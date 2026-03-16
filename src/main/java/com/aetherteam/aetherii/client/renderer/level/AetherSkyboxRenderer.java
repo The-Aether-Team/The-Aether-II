@@ -40,7 +40,7 @@ public class AetherSkyboxRenderer implements CustomSkyboxRenderer {
                 skyRenderState.moonPhase,
                 skyRenderState.rainBrightness,
                 skyRenderState.starBrightness);
-        this.renderCloudCoverDisc(levelRenderState, skyRenderState, poseStack, multiBufferSource, levelRenderState.gameTime, skyRenderState.skyColor, sunColor);
+        this.renderCloudCoverDisc(levelRenderState, skyRenderState, poseStack, multiBufferSource, levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_TIME_OF_DAY_KEY, 0.0F), skyRenderState.skyColor, skyRenderState.sunriseAndSunsetColor);
         multiBufferSource.endBatch();
         return true;
     }
@@ -57,7 +57,7 @@ public class AetherSkyboxRenderer implements CustomSkyboxRenderer {
         float g = ARGB.greenFloat(skyColor);
         float b = ARGB.blueFloat(skyColor);
         Color color = new Color((int) (r * 255), (int) (g * 255), (int) (b * 255)).brighter();
-        float weatherMultiplier = Math.max((((levelRenderState.skyRenderState.rainBrightness + levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_THUNDER_KEY, 0.0F)) * 0.5F) * 0.275F), 0.175F);
+        float weatherMultiplier = Math.max(1.0F - (((levelRenderState.skyRenderState.rainBrightness + levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_THUNDER_KEY, 0.0F)) * 0.5F) * 0.275F), 0.175F);
         float bluePower = Math.min(0.5F / weatherMultiplier, 0.85F);
         r = (Math.min(color.getRed() + 20, 255.0F) / 255.0F) * weatherMultiplier;
         g = (Math.min(color.getGreen() + 20, 255.0F) / 255.0F) * weatherMultiplier;
@@ -94,4 +94,6 @@ public class AetherSkyboxRenderer implements CustomSkyboxRenderer {
 
         poseStack.popPose();
     }
+
+
 }
