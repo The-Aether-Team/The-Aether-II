@@ -94,6 +94,7 @@
     "client.accessor.WeatherEffectRendererAccessor",
     "client.accessor.WeighedSoundEventsAccessor",
     "client.sodium.ChunkBuilderMeshingTaskMixin",
+    "client.sodium.DefaultFluidRendererMixin",
     "debug.DebugRendererMixin"
   ],
   "injectors": {

@@ -32,7 +32,8 @@ public class AetherIIMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.equals("com.aetherteam.aetherii.mixin.mixins.client.sodium.ChunkBuilderMeshingTaskMixin")) {
+        if (mixinClassName.equals("com.aetherteam.aetherii.mixin.mixins.client.sodium.ChunkBuilderMeshingTaskMixin")
+                || mixinClassName.equals("com.aetherteam.aetherii.mixin.mixins.client.sodium.DefaultFluidRendererMixin")) {
             return isSodiumInstalled;
         }
 
