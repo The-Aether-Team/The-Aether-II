@@ -93,6 +93,7 @@
     "client.accessor.TitleScreenAccessor",
     "client.accessor.WeatherEffectRendererAccessor",
     "client.accessor.WeighedSoundEventsAccessor",
+    "client.sodium.ChunkBuilderMeshingTaskMixin",
     "debug.DebugRendererMixin"
   ],
   "injectors": {
