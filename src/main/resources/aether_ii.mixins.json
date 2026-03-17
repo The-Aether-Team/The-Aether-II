@@ -95,6 +95,7 @@
     "client.accessor.WeighedSoundEventsAccessor",
     "client.sodium.ChunkBuilderMeshingTaskMixin",
     "client.sodium.DefaultFluidRendererMixin",
+    "client.sodium.LevelBiomeSliceMixin",
     "debug.DebugRendererMixin"
   ],
   "injectors": {
