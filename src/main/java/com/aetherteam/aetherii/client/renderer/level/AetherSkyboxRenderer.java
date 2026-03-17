@@ -30,8 +30,8 @@ public class AetherSkyboxRenderer implements CustomSkyboxRenderer {
         int sunColor = skyRenderState.sunriseAndSunsetColor;
         skyRenderer.renderSkyDisc(skyRenderState.skyColor);
         MultiBufferSource.BufferSource multiBufferSource = renderBuffers.bufferSource();
-        float f = skyRenderState.sunAngle;
-        if (!(f <= 0.001F)) {
+        float timeOfDay = levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_TIME_OF_DAY_KEY, 0.0F);
+        if (this.isSunriseOrSunset(timeOfDay)) {
             skyRenderer.renderSunriseAndSunset(poseStack, sunAngle, sunColor);
         }
         skyRenderer.renderSunMoonAndStars(poseStack, skyRenderState.sunAngle,
@@ -40,7 +40,7 @@ public class AetherSkyboxRenderer implements CustomSkyboxRenderer {
                 skyRenderState.moonPhase,
                 skyRenderState.rainBrightness,
                 skyRenderState.starBrightness);
-        this.renderCloudCoverDisc(levelRenderState, skyRenderState, poseStack, multiBufferSource, levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_TIME_OF_DAY_KEY, 0.0F), skyRenderState.skyColor, skyRenderState.sunriseAndSunsetColor);
+        this.renderCloudCoverDisc(levelRenderState, skyRenderState, poseStack, multiBufferSource, timeOfDay, skyRenderState.skyColor, skyRenderState.sunriseAndSunsetColor);
         multiBufferSource.endBatch();
         return true;
     }
@@ -63,7 +63,7 @@ public class AetherSkyboxRenderer implements CustomSkyboxRenderer {
         g = (Math.min(color.getGreen() + 20, 255.0F) / 255.0F) * weatherMultiplier;
         b = (Math.min(color.getBlue() + 35, 255.0F) / 255.0F) * (float) Math.pow(weatherMultiplier, bluePower);
 
-        if (!(timeOfDay <= 0.001F)) {
+        if (this.isSunriseOrSunset(timeOfDay)) {
             float cosTime = Mth.cos(timeOfDay * Mth.TWO_PI);
             float alpha;
             if (cosTime > 0) {
@@ -95,5 +95,9 @@ public class AetherSkyboxRenderer implements CustomSkyboxRenderer {
         poseStack.popPose();
     }
 
+    public boolean isSunriseOrSunset(float timeOfDay) {
+        float f = Mth.cos(timeOfDay * Mth.TWO_PI);
+        return f >= -0.4F && f <= 0.4F;
+    }
 
 }
