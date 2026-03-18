@@ -262,4 +262,9 @@ public class AetherIITextureMappings {
                 .put(TextureSlot.INSIDE, TextureMapping.getBlockTexture(block, "_inside"))
                 .put(AetherIITextureSlots.SAW, TextureMapping.getBlockTexture(block, "_saw"));
     }
+
+    public static TextureMapping vase(Block vase) {
+        return new TextureMapping()
+                .put(AetherIITextureSlots.VASE, TextureMapping.getBlockTexture(vase));
+    }
 }

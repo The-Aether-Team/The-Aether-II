@@ -99,5 +99,7 @@ public class AetherIIBlockEntityTypes {
                 AetherIIBlocks.GREATROOT_SHELF.get(),
                 AetherIIBlocks.WISPROOT_SHELF.get(),
                 AetherIIBlocks.AMBEROOT_SHELF.get());
+        event.modify(BlockEntityType.DECORATED_POT,
+                AetherIIBlocks.VERADEXIAN_VASE.get());
     }
 }
