@@ -14,17 +14,22 @@ import java.util.function.BiFunction;
 public class AetherIIRenderTypes {
     public static final ResourceLocation IRRADIATED_GLINT_ITEM = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/misc/irradiated_glint_item.png");
 
-    public static final BiFunction<ResourceLocation, Boolean, RenderType> ENTITY_DITHER_NO_CULL = Util.memoize((location, outline) -> RenderType.create(
-            "aether:entity_dither_no_cull",
-            1536,
-            true,
-            false,
-            AetherIIRenderPipelines.getEntityDitherNoCull(),
-            RenderType.CompositeState.builder()
-                    .setTextureState(new RenderStateShard.TextureStateShard(location, false))
-                    .setLightmapState(RenderType.LIGHTMAP)
-                    .setOverlayState(RenderType.OVERLAY)
-                    .createCompositeState(outline)));
+    public static final BiFunction<ResourceLocation, Boolean, RenderType> ENTITY_DITHER_NO_CULL = Util.memoize((location, outline) -> {
+        if (ShaderCompatibility.areShadersActive()) {
+            return RenderType.entityTranslucent(location, outline);
+        }
+        return RenderType.create(
+                "aether:entity_dither_no_cull",
+                1536,
+                true,
+                false,
+                AetherIIRenderPipelines.getEntityDitherNoCull(),
+                RenderType.CompositeState.builder()
+                        .setTextureState(new RenderStateShard.TextureStateShard(location, false))
+                        .setLightmapState(RenderType.LIGHTMAP)
+                        .setOverlayState(RenderType.OVERLAY)
+                        .createCompositeState(outline));
+    });
 
     private static final RenderType CLOUD_COVER = RenderType.create(
             "aether:cloud_cover",
