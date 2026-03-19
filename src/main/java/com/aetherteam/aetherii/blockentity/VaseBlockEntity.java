@@ -144,13 +144,13 @@ public class VaseBlockEntity extends BlockEntity implements RandomizableContaine
         }
     }
 
-    public static enum WobbleStyle {
+    public enum WobbleStyle {
         POSITIVE(7),
         NEGATIVE(10);
 
         public final int duration;
 
-        private WobbleStyle(int duration) {
+        WobbleStyle(int duration) {
             this.duration = duration;
         }
     }

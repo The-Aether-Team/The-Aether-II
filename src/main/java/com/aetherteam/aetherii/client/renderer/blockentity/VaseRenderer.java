@@ -26,14 +26,11 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Vector3fc;
 import org.jspecify.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-@OnlyIn(Dist.CLIENT)
 public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRenderState> {
     private final TextureAtlas vaseAtlas;
     private final ModelPart vaseModel;
@@ -63,7 +60,7 @@ public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRe
         } else {
             renderState.wobbleProgress = 0.0F;
         }
-        renderState.vaseTexture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/vase/veradexian_vase.png"); //todo
+        renderState.vaseTexture = Identifier.fromNamespaceAndPath("", "textures/entity/vase/veradexian_vase.png"); //todo
     }
 
     public void submit(VaseRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, CameraRenderState camera) {
@@ -86,7 +83,7 @@ public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRe
                 poseStack.rotateAround(Axis.YP.rotation(f4 * f5), 0.5F, 0.0F, 0.5F);
             }
         }
-        TextureAtlasSprite vaseSprite = this.vaseAtlas.getSprite(Identifier.fromNamespaceAndPath(AetherII.MODID, renderState.vaseTexture.toString()));
+        TextureAtlasSprite vaseSprite = this.vaseAtlas.getSprite(renderState.vaseTexture);
         nodeCollector.submitModelPart(this.vaseModel, poseStack, RenderTypes.entityCutoutNoCull(AetherIIAtlases.VASE_SHEET), renderState.lightCoords, OverlayTexture.NO_OVERLAY, vaseSprite, false, false, -1, null, 0);
         poseStack.popPose();
     }

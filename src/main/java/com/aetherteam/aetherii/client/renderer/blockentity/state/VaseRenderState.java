@@ -9,11 +9,8 @@ import com.aetherteam.aetherii.blockentity.VaseBlockEntity;
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.jspecify.annotations.Nullable;
 
-@OnlyIn(Dist.CLIENT)
 public class VaseRenderState extends BlockEntityRenderState {
     public float yRot;
     public VaseBlockEntity.@Nullable WobbleStyle wobbleStyle;

@@ -9,10 +9,7 @@ import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.*;
 import com.aetherteam.aetherii.client.renderer.blockentity.*;
-import com.aetherteam.aetherii.client.renderer.blockentity.model.AlkahestPurifierModel;
-import com.aetherteam.aetherii.client.renderer.blockentity.model.SentryCrateModel;
-import com.aetherteam.aetherii.client.renderer.blockentity.model.SentrySpawnerModel;
-import com.aetherteam.aetherii.client.renderer.blockentity.model.SentrySpawnerPistonModel;
+import com.aetherteam.aetherii.client.renderer.blockentity.model.*;
 import com.aetherteam.aetherii.client.renderer.entity.*;
 import com.aetherteam.aetherii.client.renderer.entity.layers.ProjectilesStuckLayer;
 import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLatchLayer;
@@ -194,6 +191,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_BED_HEAD, SkyrootBedRenderer::createHeadLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA_EGG, MoaEggModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.ALKAHEST_PURIFIER, AlkahestPurifierModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.VASE, VaseModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SENTRY_CRATE, SentryCrateModel::createSingleBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SENTRY_SPAWNER, SentrySpawnerModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SENTRY_SPAWNER_PISTON, SentrySpawnerPistonModel::createBodyLayer);
@@ -368,6 +366,7 @@ public class AetherIIRenderers {
     public static void registerSpecialModelRenderers(RegisterSpecialModelRendererEvent event) {
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "skyroot_bed"), SkyrootBedSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier"), AlkahestPurifierSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "vase"), VaseSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_crate"), SentryCrateSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner"), SentrySpawnerSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "copy_block"), CopyBlockSpecialRenderer.Unbaked.MAP_CODEC);

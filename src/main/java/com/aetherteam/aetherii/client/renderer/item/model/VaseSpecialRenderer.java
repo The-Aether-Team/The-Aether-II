@@ -12,13 +12,10 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Vector3fc;
 
 import java.util.function.Consumer;
 
-@OnlyIn(Dist.CLIENT)
 public class VaseSpecialRenderer implements NoDataSpecialModelRenderer {
     private final VaseRenderer vaseRenderer;
 
@@ -36,7 +33,6 @@ public class VaseSpecialRenderer implements NoDataSpecialModelRenderer {
     }
 
 
-    @OnlyIn(Dist.CLIENT)
     public static record Unbaked() implements NoDataSpecialModelRenderer.Unbaked {
         public static final MapCodec<Unbaked> MAP_CODEC = MapCodec.unit(new Unbaked());
 

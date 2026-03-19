@@ -2,8 +2,8 @@
   "sources": [
     {
       "type": "directory",
-      "source": "entity/vase",
-      "prefix": "entity/vase/"
+      "source": "entity/vases",
+      "prefix": "entity/vases/"
     }
   ]
 }
