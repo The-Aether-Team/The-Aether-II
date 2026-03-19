@@ -60,7 +60,7 @@ public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRe
         } else {
             renderState.wobbleProgress = 0.0F;
         }
-        renderState.vaseTexture = Identifier.fromNamespaceAndPath("", "textures/entity/vase/veradexian_vase.png"); //todo
+        renderState.vaseTexture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/vases/veradexian_vase.png"); //todo
     }
 
     public void submit(VaseRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, CameraRenderState camera) {
