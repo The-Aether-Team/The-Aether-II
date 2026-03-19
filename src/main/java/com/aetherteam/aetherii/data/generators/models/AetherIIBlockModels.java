@@ -2,12 +2,14 @@ package com.aetherteam.aetherii.data.generators.models;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.client.renderer.item.model.VaseSpecialRenderer;
 import com.aetherteam.aetherii.data.providers.AetherIIBlockModelSubProvider;
 import com.aetherteam.aetherii.data.resources.builders.models.*;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
 import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.special.DecoratedPotSpecialRenderer;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Blocks;
@@ -511,7 +513,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createBed(AetherIIBlocks.RED_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "red");
         this.createBed(AetherIIBlocks.BLACK_SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "black");
 
-        this.createVase(AetherIIBlocks.VERADEXIAN_VASE.get(), AetherIIBlocks.ICHORITE_BRICKS.get());
+        this.createParticleOnlyBlock(AetherIIBlocks.VERADEXIAN_VASE.get(), AetherIIBlocks.ICHORITE_BRICKS.get());
+        this.generateSimpleSpecialItemModel(AetherIIBlocks.VERADEXIAN_VASE.get(), new VaseSpecialRenderer.Unbaked());
 
         this.createSentryCrate(AetherIIBlocks.SENTRY_CRATE.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());
         this.createSentrySpawner(AetherIIBlocks.SENTRY_SPAWNER.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());

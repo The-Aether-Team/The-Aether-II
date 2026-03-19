@@ -11,6 +11,7 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation ALKAHEST_PURIFIER = register("alkahest_purifier");
     public static final ModelLayerLocation SENTRY_CRATE = register("sentry_crate");
     public static final ModelLayerLocation SENTRY_SPAWNER = register("sentry_spawner");
+    public static final ModelLayerLocation VASE = register("vase");
     
     public static final ModelLayerLocation SENTRY_SPAWNER_PISTON = register("sentry_spawner_piston");
     public static final ModelLayerLocation DOUBLE_SENTRY_CRATE_LEFT = register("double_sentry_crate_left");
