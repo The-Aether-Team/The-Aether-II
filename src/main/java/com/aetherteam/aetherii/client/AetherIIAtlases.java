@@ -27,7 +27,6 @@ public class AetherIIAtlases {
     public static final Identifier MOA_KERATIN_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "moa_keratin");
     public static final Identifier ARMOR_STYLES_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "armor_styles");
     public static final Identifier ALKAHEST_PURIFIER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier");
-    public static final Identifier VASE_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "vase");
     public static final Identifier SENTRY_CRATE_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_crate");
     public static final Identifier SENTRY_SPAWNER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner");
 
@@ -36,12 +35,10 @@ public class AetherIIAtlases {
     public static final Identifier MOA_KERATIN_SHEET = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/moa_keratin.png");
     public static final Identifier ARMOR_STYLES_SHEET = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/armor_styles.png");
     public static final Identifier ALKAHEST_PURIFIER_SHEET = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/alkahest_purifier.png");
-    public static final Identifier VASE_SHEET = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/vase.png");
     public static final Identifier SENTRY_CRATE_SHEET = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/sentry_crate.png");
     public static final Identifier SENTRY_SPAWNER_SHEET = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/sentry_spawner.png");
 
     public static final MaterialMapper ALKAHEST_PURIFIER_MAPPER = new MaterialMapper(ALKAHEST_PURIFIER_SHEET, "entity/alkahest_purifier");
-    public static final MaterialMapper VASE_MAPPER = new MaterialMapper(VASE_SHEET, "entity/vase");
     public static final MaterialMapper SENTRY_CRATE_MAPPER = new MaterialMapper(SENTRY_CRATE_SHEET, "entity/sentry_crate");
     public static final MaterialMapper SENTRY_SPAWNER_MAPPER = new MaterialMapper(SENTRY_SPAWNER_SHEET, "entity/sentry_spawner");
     public static final MaterialMapper MURAL_MAPPER = new MaterialMapper(TextureAtlas.LOCATION_BLOCKS, "entity/mural");
@@ -70,7 +67,6 @@ public class AetherIIAtlases {
         event.register(new AtlasManager.AtlasConfig(MOA_KERATIN_SHEET, MOA_KERATIN_ID, false));
         event.register(new AtlasManager.AtlasConfig(ARMOR_STYLES_SHEET, ARMOR_STYLES_ID, false));
         event.register(new AtlasManager.AtlasConfig(ALKAHEST_PURIFIER_SHEET, ALKAHEST_PURIFIER_ID, false));
-        event.register(new AtlasManager.AtlasConfig(VASE_SHEET, VASE_ID, false));
         event.register(new AtlasManager.AtlasConfig(SENTRY_CRATE_SHEET, SENTRY_CRATE_ID, false));
         event.register(new AtlasManager.AtlasConfig(SENTRY_SPAWNER_SHEET, SENTRY_SPAWNER_ID, false));
     }

@@ -314,7 +314,7 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate ARILUM_LANTERN = create("template_arilum_lantern", TextureSlot.TEXTURE, TextureSlot.INSIDE);
     public static final ModelTemplate CAMPFIRE = create("template_campfire", TextureSlot.FIRE, TextureSlot.LIT_LOG, AetherIITextureSlots.LOG, TextureSlot.PARTICLE).extend().renderType(Identifier.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate CAMPFIRE_OFF = create("template_campfire_off", "_off", TextureSlot.FIRE, AetherIITextureSlots.LOG, TextureSlot.PARTICLE).extend().renderType(Identifier.withDefaultNamespace("cutout")).build();
-    public static final ModelTemplate VASE = create("template_vase", AetherIITextureSlots.VASE, TextureSlot.PARTICLE).extend().renderType(Identifier.withDefaultNamespace("cutout")).build();
+
     public static final ModelTemplate SENTRY_TRAP =  AetherIIModelTemplates.create("template_sentry_trap", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE, AetherIITextureSlots.EMISSIVE_TOP).extend().renderType(Identifier.withDefaultNamespace("cutout")).build();
 
     public static final ModelTemplate DART_SHOOTER = createItem("handheld_dart_shooter", TextureSlot.LAYER0);

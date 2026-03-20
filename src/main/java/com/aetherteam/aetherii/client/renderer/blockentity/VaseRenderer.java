@@ -2,13 +2,11 @@ package com.aetherteam.aetherii.client.renderer.blockentity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.blockentity.VaseBlockEntity;
-import com.aetherteam.aetherii.client.AetherIIAtlases;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.blockentity.model.VaseModel;
 import com.aetherteam.aetherii.client.renderer.blockentity.state.VaseRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -18,7 +16,6 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
@@ -28,17 +25,15 @@ import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
 public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRenderState> {
-    private final TextureAtlas vaseAtlas;
+    private static final Identifier VERADEXIAN_VASE_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/vases/veradexian_vase.png");
     private final ModelPart vaseModel;
     private static final float WOBBLE_AMPLITUDE = 0.1F;
 
     public VaseRenderer(BlockEntityRendererProvider.Context context) {
-        this.vaseAtlas = Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AetherIIAtlases.VASE_ID);
         this.vaseModel = new VaseModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.VASE)).root();
     }
 
     public VaseRenderer(SpecialModelRenderer.BakingContext context) {
-        this.vaseAtlas = Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AetherIIAtlases.VASE_ID);
         this.vaseModel = new VaseModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.VASE)).root();
     }
 
@@ -56,7 +51,6 @@ public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRe
         } else {
             renderState.wobbleProgress = 0.0F;
         }
-        renderState.vaseTexture = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/vases/veradexian_vase.png"); //todo
     }
 
     public void submit(VaseRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, CameraRenderState camera) {
@@ -79,8 +73,7 @@ public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRe
                 poseStack.rotateAround(Axis.YP.rotation(f4 * f5), 0.5F, 0.0F, 0.5F);
             }
         }
-        Identifier location = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/vases/veradexian_vase.png"); //todo
-        nodeCollector.submitModelPart(this.vaseModel, poseStack, RenderTypes.entityCutout(location), renderState.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, 0);
+        nodeCollector.submitModelPart(this.vaseModel, poseStack, RenderTypes.entityCutout(VERADEXIAN_VASE_LOCATION), renderState.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, 0);
         poseStack.popPose();
     }
 
