@@ -83,8 +83,9 @@ public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRe
                 poseStack.rotateAround(Axis.YP.rotation(f4 * f5), 0.5F, 0.0F, 0.5F);
             }
         }
-        TextureAtlasSprite vaseSprite = this.vaseAtlas.getSprite(renderState.vaseTexture);
-        nodeCollector.submitModelPart(this.vaseModel, poseStack, RenderTypes.entityCutoutNoCull(AetherIIAtlases.VASE_SHEET), renderState.lightCoords, OverlayTexture.NO_OVERLAY, vaseSprite, false, false, -1, null, 0);
+        Identifier location = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/vases/veradexian_vase.png"); //todo
+        //TextureAtlasSprite vaseSprite = this.vaseAtlas.getSprite(renderState.vaseTexture);
+        nodeCollector.submitModelPart(this.vaseModel, poseStack, RenderTypes.entityCutout(location), renderState.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, 0);
         poseStack.popPose();
     }
 

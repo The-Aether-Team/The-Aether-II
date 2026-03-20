@@ -41,6 +41,7 @@ public class AetherIIAtlases {
     public static final Identifier SENTRY_SPAWNER_SHEET = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/sentry_spawner.png");
 
     public static final MaterialMapper ALKAHEST_PURIFIER_MAPPER = new MaterialMapper(ALKAHEST_PURIFIER_SHEET, "entity/alkahest_purifier");
+    public static final MaterialMapper VASE_MAPPER = new MaterialMapper(VASE_SHEET, "entity/vase");
     public static final MaterialMapper SENTRY_CRATE_MAPPER = new MaterialMapper(SENTRY_CRATE_SHEET, "entity/sentry_crate");
     public static final MaterialMapper SENTRY_SPAWNER_MAPPER = new MaterialMapper(SENTRY_SPAWNER_SHEET, "entity/sentry_spawner");
     public static final MaterialMapper MURAL_MAPPER = new MaterialMapper(TextureAtlas.LOCATION_BLOCKS, "entity/mural");
