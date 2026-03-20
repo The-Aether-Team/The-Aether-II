@@ -10,6 +10,8 @@ import com.aetherteam.aetherii.loot.AetherIILoot;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -27,6 +29,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
     public AetherIIChestLoot(HolderLookup.Provider registries) {
         this.registries = registries;
     }
+
     @Override
     public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> builder) {
 
@@ -173,6 +176,26 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.BRETTL_ROPE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.CLOUDTWINE).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                )
+        );
+
+        builder.accept(AetherIILoot.VASES_VERADEXIAN_RUINS, LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(25).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.SCATTERGLASS_SHARD).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(15).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.ICESTONE).setWeight(15).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(Items.QUARTZ).setWeight(15))
+                        .add(LootItem.lootTableItem(AetherIIItems.SWET_GEL).setWeight(15))
+                        .add(LootItem.lootTableItem(AetherIIItems.SWET_SUGAR).setWeight(10))
+                        .add(LootItem.lootTableItem(AetherIIItems.CLOUDTWINE).setWeight(12))
+                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE).setWeight(12))
+                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_CROSSBOW).setWeight(10))
+                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE_SHIELD).setWeight(10))
+                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_BUCKET).setWeight(10))
+                        .add(LootItem.lootTableItem(AetherIIItems.FOSSILIZED_ZANITE).setWeight(5))
+                        .add(LootItem.lootTableItem(AetherIIItems.GLINT_COIN).setWeight(5))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_MUSIC_DISCS))
                 )
         );
 

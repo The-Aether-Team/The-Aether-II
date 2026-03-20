@@ -1,0 +1,130 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:ambrosium_shard",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:scatterglass_shard",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:golden_amber",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:icestone",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:quartz",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:swet_gel",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:swet_sugar",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:cloudtwine",
+          "weight": 12
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:burrukai_plate",
+          "weight": 12
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:holystone_crossbow",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:burrukai_plate_shield",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:skyroot_bucket",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:fossilized_zanite",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:glint_coin",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "aether_ii:chests/dungeons/music_discs"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "aether_ii:vases/veradexian_ruins/common"
+}
