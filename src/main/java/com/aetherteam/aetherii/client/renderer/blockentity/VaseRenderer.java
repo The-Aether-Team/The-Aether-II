@@ -19,17 +19,13 @@ import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Vector3fc;
 import org.jspecify.annotations.Nullable;
-
-import java.util.function.Consumer;
 
 public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRenderState> {
     private final TextureAtlas vaseAtlas;
@@ -84,7 +80,6 @@ public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRe
             }
         }
         Identifier location = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/vases/veradexian_vase.png"); //todo
-        //TextureAtlasSprite vaseSprite = this.vaseAtlas.getSprite(renderState.vaseTexture);
         nodeCollector.submitModelPart(this.vaseModel, poseStack, RenderTypes.entityCutout(location), renderState.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, 0);
         poseStack.popPose();
     }
@@ -93,10 +88,5 @@ public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRe
     public AABB getRenderBoundingBox(VaseBlockEntity blockEntity) {
         BlockPos pos = blockEntity.getBlockPos();
         return new AABB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1.0, pos.getY() + 1.3, pos.getZ() + 1.0);
-    }
-
-    public void getExtents(Consumer<Vector3fc> output) {
-        PoseStack poseStack = new PoseStack();
-        this.vaseModel.getExtentsForGui(poseStack, output);
     }
 }

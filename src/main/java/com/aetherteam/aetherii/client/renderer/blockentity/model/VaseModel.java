@@ -5,8 +5,9 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.util.Unit;
 
-public class VaseModel extends Model<Float> {
+public class VaseModel extends Model<Unit> {
     private final ModelPart vase;
 
     public VaseModel(ModelPart root) {
@@ -18,7 +19,7 @@ public class VaseModel extends Model<Float> {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition vase = partdefinition.addOrReplaceChild("vase", CubeListBuilder.create().texOffs(0, 20).addBox(-4.0F, -1.0F, -4.0F, 8.0F, 1.0F, 8.0F, new CubeDeformation(0.0F))
+        partdefinition.addOrReplaceChild("vase", CubeListBuilder.create().texOffs(0, 20).addBox(-4.0F, -1.0F, -4.0F, 8.0F, 1.0F, 8.0F, new CubeDeformation(0.0F))
                 .texOffs(0, 0).addBox(-5.0F, -11.0F, -5.0F, 10.0F, 10.0F, 10.0F, new CubeDeformation(0.0F))
                 .texOffs(32, 27).addBox(5.0F, -13.0F, 0.0F, 5.0F, 13.0F, 0.0F, new CubeDeformation(0.0F))
                 .texOffs(0, 38).addBox(-10.0F, -13.0F, 0.0F, 5.0F, 13.0F, 0.0F, new CubeDeformation(0.0F))
