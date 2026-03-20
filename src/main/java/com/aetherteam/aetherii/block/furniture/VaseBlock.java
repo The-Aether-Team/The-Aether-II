@@ -47,10 +47,10 @@ import java.util.List;
 
 public class VaseBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
     public static final MapCodec<VaseBlock> CODEC = simpleCodec(VaseBlock::new);
-    public static final EnumProperty<Direction> HORIZONTAL_FACING;
-    public static final BooleanProperty CRACKED;
-    public static final BooleanProperty WATERLOGGED;
-    private static final VoxelShape SHAPE;
+    public static final EnumProperty<Direction> HORIZONTAL_FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final BooleanProperty CRACKED = BlockStateProperties.CRACKED;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    private static final VoxelShape SHAPE = Block.column(10.0, 0.0, 11.0);
 
     public MapCodec<VaseBlock> codec() {
         return CODEC;
@@ -61,32 +61,32 @@ public class VaseBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
         this.registerDefaultState(this.stateDefinition.any().setValue(HORIZONTAL_FACING, Direction.NORTH).setValue(WATERLOGGED, false).setValue(CRACKED, false));
     }
 
-    protected BlockState updateShape(BlockState state, LevelReader p_374037_, ScheduledTickAccess p_374267_, BlockPos p_276270_, Direction p_276322_, BlockPos p_276312_, BlockState p_276280_, RandomSource p_374464_) {
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess p_374267_, BlockPos pos, Direction p_276322_, BlockPos p_276312_, BlockState p_276280_, RandomSource p_374464_) {
         if (state.getValue(WATERLOGGED)) {
-            p_374267_.scheduleTick(p_276270_, Fluids.WATER, Fluids.WATER.getTickDelay(p_374037_));
+            p_374267_.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return super.updateShape(state, p_374037_, p_374267_, p_276270_, p_276322_, p_276312_, p_276280_, p_374464_);
+        return super.updateShape(state, level, p_374267_, pos, p_276322_, p_276312_, p_276280_, p_374464_);
     }
 
-    public BlockState getStateForPlacement(BlockPlaceContext p_272711_) {
-        FluidState fluidstate = p_272711_.getLevel().getFluidState(p_272711_.getClickedPos());
-        return this.defaultBlockState().setValue(HORIZONTAL_FACING, p_272711_.getHorizontalDirection()).setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER).setValue(CRACKED, false);
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
+        return this.defaultBlockState().setValue(HORIZONTAL_FACING, context.getHorizontalDirection()).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER).setValue(CRACKED, false);
     }
 
-    protected InteractionResult useItemOn(ItemStack p_316569_, BlockState p_316562_, Level p_316177_, BlockPos p_316898_, Player p_316632_, InteractionHand p_316424_, BlockHitResult p_316345_) {
+    protected InteractionResult useItemOn(ItemStack item, BlockState state, Level p_316177_, BlockPos p_316898_, Player p_316632_, InteractionHand p_316424_, BlockHitResult p_316345_) {
         BlockEntity var9 = p_316177_.getBlockEntity(p_316898_);
         if (var9 instanceof VaseBlockEntity blockEntity) {
             if (p_316177_.isClientSide()) {
                 return InteractionResult.SUCCESS;
             } else {
                 ItemStack itemstack1 = blockEntity.getTheItem();
-                if (p_316569_.isEmpty() || !itemstack1.isEmpty() && (!ItemStack.isSameItemSameComponents(itemstack1, p_316569_) || itemstack1.getCount() >= itemstack1.getMaxStackSize())) {
+                if (item.isEmpty() || !itemstack1.isEmpty() && (!ItemStack.isSameItemSameComponents(itemstack1, item) || itemstack1.getCount() >= itemstack1.getMaxStackSize())) {
                     return InteractionResult.TRY_WITH_EMPTY_HAND;
                 } else {
                     blockEntity.wobble(VaseBlockEntity.WobbleStyle.POSITIVE);
-                    p_316632_.awardStat(Stats.ITEM_USED.get(p_316569_.getItem()));
-                    ItemStack itemstack = p_316569_.consumeAndReturn(1, p_316632_);
+                    p_316632_.awardStat(Stats.ITEM_USED.get(item.getItem()));
+                    ItemStack itemstack = item.consumeAndReturn(1, p_316632_);
                     float f;
                     if (blockEntity.isEmpty()) {
                         blockEntity.setTheItem(itemstack);
@@ -98,8 +98,8 @@ public class VaseBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 
                     p_316177_.playSound(null, p_316898_, SoundEvents.DECORATED_POT_INSERT, SoundSource.BLOCKS, 1.0F, 0.7F + 0.5F * f);
                     if (p_316177_ instanceof ServerLevel) {
-                        ServerLevel serverlevel = (ServerLevel)p_316177_;
-                        serverlevel.sendParticles(ParticleTypes.DUST_PLUME, (double)p_316898_.getX() + 0.5, (double)p_316898_.getY() + 1.2, (double)p_316898_.getZ() + 0.5, 7, 0.0, 0.0, 0.0, 0.0);
+                        ServerLevel serverLevel = (ServerLevel)p_316177_;
+                        serverLevel.sendParticles(ParticleTypes.DUST_PLUME, (double)p_316898_.getX() + 0.5, (double)p_316898_.getY() + 1.2, (double)p_316898_.getZ() + 0.5, 7, 0.0, 0.0, 0.0, 0.0);
                     }
 
                     blockEntity.setChanged();
@@ -112,7 +112,7 @@ public class VaseBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
         }
     }
 
-    protected InteractionResult useWithoutItem(BlockState p_316866_, Level p_316544_, BlockPos p_316541_, Player p_316732_, BlockHitResult p_316860_) {
+    protected InteractionResult useWithoutItem(BlockState state, Level p_316544_, BlockPos p_316541_, Player p_316732_, BlockHitResult p_316860_) {
         BlockEntity var7 = p_316544_.getBlockEntity(p_316541_);
         if (var7 instanceof VaseBlockEntity blockEntity) {
             p_316544_.playSound(null, p_316541_, SoundEvents.DECORATED_POT_INSERT_FAIL, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -124,11 +124,11 @@ public class VaseBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
         }
     }
 
-    protected boolean isPathfindable(BlockState p_276295_, PathComputationType p_276303_) {
+    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
         return false;
     }
 
-    protected VoxelShape getShape(BlockState p_273112_, BlockGetter p_273055_, BlockPos p_273137_, CollisionContext p_273151_) {
+    protected VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
@@ -140,23 +140,23 @@ public class VaseBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
         return new VaseBlockEntity(pos, state);
     }
 
-    protected void affectNeighborsAfterRemoval(BlockState p_394575_, ServerLevel p_393957_, BlockPos p_393972_, boolean p_393685_) {
-        Containers.updateNeighboursAfterDestroy(p_394575_, p_393957_, p_393972_);
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean p_393685_) {
+        Containers.updateNeighboursAfterDestroy(state, level, pos);
     }
 
     protected List<ItemStack> getDrops(BlockState state, LootParams.Builder lootParams) {
         return super.getDrops(state, lootParams);
     }
 
-    public BlockState playerWillDestroy(Level p_273590_, BlockPos p_273343_, BlockState p_272869_, Player p_273002_) {
-        ItemStack itemstack = p_273002_.getMainHandItem();
+    public BlockState playerWillDestroy(Level p_273590_, BlockPos p_273343_, BlockState p_272869_, Player player) {
+        ItemStack itemstack = player.getMainHandItem();
         BlockState blockstate = p_272869_;
         if (itemstack.is(ItemTags.BREAKS_DECORATED_POTS) && !EnchantmentHelper.hasTag(itemstack, EnchantmentTags.PREVENTS_DECORATED_POT_SHATTERING)) {
             blockstate = p_272869_.setValue(CRACKED, true);
             p_273590_.setBlock(p_273343_, blockstate, 260);
         }
 
-        return super.playerWillDestroy(p_273590_, p_273343_, blockstate, p_273002_);
+        return super.playerWillDestroy(p_273590_, p_273343_, blockstate, player);
     }
 
     protected FluidState getFluidState(BlockState state) {
@@ -196,12 +196,5 @@ public class VaseBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 
     protected BlockState mirror(BlockState state, Mirror mirror) {
         return state.rotate(mirror.getRotation(state.getValue(HORIZONTAL_FACING)));
-    }
-
-    static {
-        HORIZONTAL_FACING = BlockStateProperties.HORIZONTAL_FACING;
-        CRACKED = BlockStateProperties.CRACKED;
-        WATERLOGGED = BlockStateProperties.WATERLOGGED;
-        SHAPE = Block.column(14.0, 0.0, 16.0);
     }
 }

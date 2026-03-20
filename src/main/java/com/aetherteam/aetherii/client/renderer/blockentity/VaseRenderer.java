@@ -34,7 +34,7 @@ import java.util.function.Consumer;
 public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRenderState> {
     private final TextureAtlas vaseAtlas;
     private final ModelPart vaseModel;
-    private static final float WOBBLE_AMPLITUDE = 0.125F;
+    private static final float WOBBLE_AMPLITUDE = 0.1F;
 
     public VaseRenderer(BlockEntityRendererProvider.Context context) {
         this.vaseAtlas = Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AetherIIAtlases.VASE_ID);
@@ -65,20 +65,20 @@ public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRe
 
     public void submit(VaseRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, CameraRenderState camera) {
         poseStack.pushPose();
+        poseStack.translate(0.5F, 1.5F, 0.5F);
         Direction direction = renderState.direction;
-        poseStack.translate(0.5, 0.0, 0.5);
         poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - direction.toYRot()));
-        poseStack.translate(-0.5, 0.0, -0.5);
+        poseStack.mulPose(Axis.XP.rotationDegrees(180));
         if (renderState.wobbleProgress >= 0.0F && renderState.wobbleProgress <= 1.0F) {
             if (renderState.wobbleStyle == VaseBlockEntity.WobbleStyle.POSITIVE) {
                 float f = 0.015625F;
                 float f1 = renderState.wobbleProgress * (float) (Math.PI * 2);
                 float f2 = -1.5F * (Mth.cos(f1) + 0.5F) * Mth.sin(f1 / 2.0F);
-                poseStack.rotateAround(Axis.XP.rotation(f2 * 0.015625F), 0.5F, 0.0F, 0.5F);
+                poseStack.rotateAround(Axis.XP.rotation(f2 * f), 0.5F, 0.0F, 0.5F);
                 float f3 = Mth.sin(f1);
-                poseStack.rotateAround(Axis.ZP.rotation(f3 * 0.015625F), 0.5F, 0.0F, 0.5F);
+                poseStack.rotateAround(Axis.ZP.rotation(f3 * f), 0.5F, 0.0F, 0.5F);
             } else {
-                float f4 = Mth.sin(-renderState.wobbleProgress * 3.0F * (float) Math.PI) * 0.125F;
+                float f4 = Mth.sin(-renderState.wobbleProgress * 3.0F * (float) Math.PI) * WOBBLE_AMPLITUDE;
                 float f5 = 1.0F - renderState.wobbleProgress;
                 poseStack.rotateAround(Axis.YP.rotation(f4 * f5), 0.5F, 0.0F, 0.5F);
             }
