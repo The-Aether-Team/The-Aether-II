@@ -1,0 +1,6 @@
+{
+  "parent": "aether_ii:item/template_vase",
+  "textures": {
+    "particle": "aether_ii:block/ichorite_bricks"
+  }
+}

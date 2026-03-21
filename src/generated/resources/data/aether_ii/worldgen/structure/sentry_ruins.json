@@ -10,5 +10,6 @@
     "staircase_processors": "aether_ii:sentry_ruins_staircase"
   },
   "spawn_overrides": {},
-  "step": "underground_structures"
+  "step": "underground_structures",
+  "surface_ruin_offset": -6
 }
