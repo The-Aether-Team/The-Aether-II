@@ -59,13 +59,13 @@ public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRe
                 float f = 0.015625F;
                 float f1 = renderState.wobbleProgress * (float) (Math.PI * 2);
                 float f2 = -1.5F * (Mth.cos(f1) + 0.5F) * Mth.sin(f1 / 2.0F);
-                poseStack.rotateAround(Axis.XP.rotation(f2 * f), 0.5F, 0.0F, 0.5F);
+                poseStack.rotateAround(Axis.XP.rotation(f2 * f), 0.0F, 0.0F, 0.0F);
                 float f3 = Mth.sin(f1);
-                poseStack.rotateAround(Axis.ZP.rotation(f3 * f), 0.5F, 0.0F, 0.5F);
+                poseStack.rotateAround(Axis.ZP.rotation(f3 * f), 0.0F, 0.0F, 0.0F);
             } else {
                 float f4 = Mth.sin(-renderState.wobbleProgress * 3.0F * (float) Math.PI) * WOBBLE_AMPLITUDE;
                 float f5 = 1.0F - renderState.wobbleProgress;
-                poseStack.rotateAround(Axis.YP.rotation(f4 * f5), 0.5F, 0.0F, 0.5F);
+                poseStack.rotateAround(Axis.YP.rotation(f4 * f5), 0.0F, 0.0F, 0.0F);
             }
         }
         nodeCollector.submitModelPart(this.vaseModel, poseStack, RenderTypes.entityCutout(VERADEXIAN_VASE_LOCATION), renderState.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, 0);
