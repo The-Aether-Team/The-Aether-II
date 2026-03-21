@@ -35,6 +35,7 @@ public class AetherIIStructureSets {
         HolderGetter<Structure> structures = context.lookup(Registries.STRUCTURE);
 
         Holder.Reference<StructureSet> outposts = context.register(OUTPOSTS, new StructureSet(structures.getOrThrow(AetherIIStructures.OUTPOST),
+
                 new RandomSpreadStructurePlacement(28, 18, RandomSpreadType.LINEAR, 2738116)));
 
         context.register(AETHER_SURFACE_STRUCTURES, new StructureSet(List.of(
@@ -47,10 +48,10 @@ public class AetherIIStructureSets {
 
         context.register(AETHER_SURFACE_RUINS, new StructureSet(List.of(
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS))),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_2, 0.65F, 2038911, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 14, 6, RandomSpreadType.LINEAR))
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_2, 0.65F, 2038911, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 16, 8, RandomSpreadType.LINEAR))
         );
 
         context.register(SENTRY_RUINS, new StructureSet(structures.getOrThrow(AetherIIStructures.SENTRY_RUINS),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 1.0F, 32146754, Optional.empty(), 14, 7, RandomSpreadType.TRIANGULAR)));
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 1.0F, 32146754, Optional.empty(), 16, 8, RandomSpreadType.TRIANGULAR)));
     }
 }
