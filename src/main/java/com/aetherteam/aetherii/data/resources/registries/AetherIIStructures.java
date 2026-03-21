@@ -73,7 +73,7 @@ public class AetherIIStructures {
                 biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_SENTRY_RUINS),
                 GenerationStep.Decoration.UNDERGROUND_STRUCTURES,
                 TerrainAdjustment.NONE),
-                6, 64, 24,
+                6, 64, 24, -6,
                 new SentryRuinsProcessorSettings(
                         processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_ROOM),
                         processors.getOrThrow(AetherIIProcessorLists.SENTRY_RUINS_STAIRCASE),
