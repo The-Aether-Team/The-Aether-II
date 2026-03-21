@@ -99,7 +99,7 @@ public class VaseBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
                     p_316177_.playSound(null, p_316898_, SoundEvents.DECORATED_POT_INSERT, SoundSource.BLOCKS, 1.0F, 0.7F + 0.5F * f);
                     if (p_316177_ instanceof ServerLevel) {
                         ServerLevel serverLevel = (ServerLevel)p_316177_;
-                        serverLevel.sendParticles(ParticleTypes.DUST_PLUME, (double)p_316898_.getX() + 0.5, (double)p_316898_.getY() + 1.2, (double)p_316898_.getZ() + 0.5, 7, 0.0, 0.0, 0.0, 0.0);
+                        serverLevel.sendParticles(ParticleTypes.DUST_PLUME, (double)p_316898_.getX() + 0.5, (double)p_316898_.getY() + 0.85, (double)p_316898_.getZ() + 0.5, 7, 0.0, 0.0, 0.0, 0.0);
                     }
 
                     blockEntity.setChanged();

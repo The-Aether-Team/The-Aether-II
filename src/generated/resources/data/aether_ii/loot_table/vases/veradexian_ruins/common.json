@@ -18,7 +18,7 @@
             }
           ],
           "name": "aether_ii:ambrosium_shard",
-          "weight": 25
+          "weight": 20
         },
         {
           "type": "minecraft:item",
@@ -49,7 +49,12 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:golden_amber",
+          "name": "aether_ii:icestone",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:quartz",
           "weight": 15
         },
         {
@@ -65,23 +70,18 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "aether_ii:icestone",
-          "weight": 15
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:quartz",
-          "weight": 15
+          "name": "aether_ii:golden_amber",
+          "weight": 12
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:swet_gel",
-          "weight": 15
+          "weight": 12
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:swet_sugar",
-          "weight": 10
+          "weight": 8
         },
         {
           "type": "minecraft:item",
@@ -90,8 +90,13 @@
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:burrukai_plate",
+          "name": "aether_ii:beast_pelt",
           "weight": 12
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:burrukai_plate",
+          "weight": 10
         },
         {
           "type": "minecraft:item",
@@ -106,12 +111,17 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:skyroot_bucket",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:guidebook_page",
           "weight": 10
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:fossilized_zanite",
-          "weight": 5
+          "weight": 6
         },
         {
           "type": "minecraft:item",
@@ -120,7 +130,8 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "aether_ii:chests/dungeons/music_discs"
+          "value": "aether_ii:chests/dungeons/music_discs",
+          "weight": 2
         }
       ],
       "rolls": 1.0
