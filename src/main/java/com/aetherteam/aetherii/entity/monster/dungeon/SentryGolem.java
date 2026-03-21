@@ -443,13 +443,13 @@ public class SentryGolem extends PathfinderMob implements RangedAttackMob, Coold
         }
     }
 
-    private class SentryGolemStrollGoal extends WaterAvoidingRandomStrollGoal {
+    private static class SentryGolemStrollGoal extends WaterAvoidingRandomStrollGoal {
         public SentryGolemStrollGoal(SentryGolem sentryGolem, double speed) {
             super(sentryGolem, speed);
         }
 
         @Override
-        protected @org.jetbrains.annotations.Nullable Vec3 getPosition() {
+        protected @Nullable Vec3 getPosition() {
             //should not do the Moving When Target Found
             if (this.mob.getTarget() != null) {
                 return LandRandomPos.getPosAway(this.mob, 10, 7, this.mob.getTarget().position());
