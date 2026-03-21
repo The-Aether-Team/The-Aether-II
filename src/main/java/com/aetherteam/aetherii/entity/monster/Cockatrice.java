@@ -144,7 +144,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
     public boolean doHurtTarget(ServerLevel serverLevel, Entity entity) {
         if (super.doHurtTarget(serverLevel, entity)) {
             if (entity instanceof LivingEntity livingEntity) {
-                livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, this, this, EffectBuildupPresets.VENOM, 275);
+                livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, this, this, EffectBuildupPresets.VENOM, 250);
             }
             return true;
         } else {
