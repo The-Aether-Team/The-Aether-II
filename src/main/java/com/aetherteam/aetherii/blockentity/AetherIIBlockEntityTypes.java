@@ -102,5 +102,7 @@ public class AetherIIBlockEntityTypes {
                 AetherIIBlocks.GREATROOT_SHELF.get(),
                 AetherIIBlocks.WISPROOT_SHELF.get(),
                 AetherIIBlocks.AMBEROOT_SHELF.get());
+        event.modify(BlockEntityType.BARREL,
+                AetherIIBlocks.SKYROOT_BARREL.get());
     }
 }

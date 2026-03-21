@@ -1266,6 +1266,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .unlockedBy(getHasName(AetherIIBlocks.SKYROOT_CHEST.get()), has(AetherIITags.Items.PLANKS_CRAFTING))
                 .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_BARREL.get())
+                .define('#', AetherIITags.Items.PLANKS_CRAFTING)
+                .define('/', ItemTags.WOODEN_SLABS)
+                .pattern("#/#")
+                .pattern("# #")
+                .pattern("#/#")
+                .unlockedBy(getHasName(AetherIIBlocks.SKYROOT_BARREL.get()), has(AetherIITags.Items.PLANKS_CRAFTING))
+                .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SENTRY_CRATE.get())
                 .define('#', AetherIIBlocks.SENTRY_BRICKS)
                 .define('A', AetherIITags.Items.PLATES_ARKENIUM)

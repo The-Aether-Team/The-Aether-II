@@ -784,6 +784,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ALKAHEST_PURIFIER, "Alkahest Purifier");
         this.addBlock(AetherIIBlocks.AMBROSIUM_CAMPFIRE, "Ambrosium Campfire");
         this.addBlock(AetherIIBlocks.SKYROOT_CHEST, "Skyroot Chest");
+        this.addBlock(AetherIIBlocks.SKYROOT_BARREL, "Skyroot Barrel");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
         this.addBlock(AetherIIBlocks.CLOUDWOOL_BEDROLL, "Cloudwool Bedroll");
 

@@ -1008,6 +1008,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBEROOT_SLAB.get(),
                 AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(),
                 AetherIIBlocks.SKYROOT_CHEST.get(),
+                AetherIIBlocks.SKYROOT_BARREL.get(),
                 AetherIIBlocks.AMBER_HOURGLASS.get(),
                 AetherIIBlocks.SKYROOT_BOOKSHELF.get(),
                 AetherIIBlocks.GREATROOT_BOOKSHELF.get(),

@@ -582,6 +582,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_SHELF.get());
                 output.accept(AetherIIBlocks.AMBEROOT_SHELF.get());
                 output.accept(AetherIIBlocks.SKYROOT_CHEST.get());
+                output.accept(AetherIIBlocks.SKYROOT_BARREL.get());
                 output.accept(AetherIIBlocks.SENTRY_CRATE.get());
                 output.accept(AetherIIBlocks.SENTRY_SPAWNER.get());
                 output.accept(AetherIIBlocks.SENTRY_TRAP.get());

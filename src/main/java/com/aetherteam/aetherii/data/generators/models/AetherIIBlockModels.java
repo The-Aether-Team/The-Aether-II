@@ -496,6 +496,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createAlkahestPurifier(AetherIIBlocks.ALKAHEST_PURIFIER.get(), AetherIIBlocks.ARKENIUM_BLOCK.get());
         this.createCampfire(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get());
         this.createChest(AetherIIBlocks.SKYROOT_CHEST.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), Identifier.fromNamespaceAndPath(AetherII.MODID, "skyroot_chest"), true);
+        this.createBarrel(AetherIIBlocks.SKYROOT_BARREL.get());
         this.createLadder(AetherIIBlocks.SKYROOT_LADDER.get());
         this.createBedroll(AetherIIBlocks.CLOUDWOOL_BEDROLL.get());
 

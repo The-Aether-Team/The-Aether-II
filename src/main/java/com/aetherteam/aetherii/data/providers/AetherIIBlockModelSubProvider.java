@@ -32,10 +32,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.MossyCarpetBlock;
-import net.minecraft.world.level.block.MultifaceBlock;
-import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.neoforged.neoforge.client.model.generators.loaders.CompositeModelBuilder;
 import org.apache.commons.lang3.ArrayUtils;
@@ -1124,6 +1121,18 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         Identifier resourceLocation = AetherIIModelTemplates.VASE_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
         ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourceLocation, new VaseSpecialRenderer.Unbaked());
         this.itemModelOutput.accept(item, unbaked);
+    }
+
+    public void createBarrel(Block block) {
+        Identifier identifier = TextureMapping.getBlockTexture(block, "_top_open");
+        MultiVariant barrel = plainVariant(TexturedModel.CUBE_TOP_BOTTOM.create(block, this.modelOutput));
+        MultiVariant barrelOpen = plainVariant(
+                TexturedModel.CUBE_TOP_BOTTOM
+                        .get(block)
+                        .updateTextures(mapping -> mapping.put(TextureSlot.TOP, identifier))
+                        .createWithSuffix(block, "_open", this.modelOutput)
+        );
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(BlockStateProperties.OPEN).select(false, barrel).select(true, barrelOpen)).with(ROTATIONS_COLUMN_WITH_FACING));
     }
 
     public void createSentryCrate(Block block, Block particle) {
