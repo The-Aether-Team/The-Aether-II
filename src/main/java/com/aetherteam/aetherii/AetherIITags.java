@@ -314,7 +314,10 @@ public class AetherIITags {
     }
 
     public static class Structures {
+        public static final TagKey<Structure> OUTPOSTS = tag("outposts");
         public static final TagKey<Structure> CAMPS = tag("camps");
+        public static final TagKey<Structure> WATCHTOWERS = tag("watchtowers");
+        public static final TagKey<Structure> SURFACE_RUINS = tag("surface_ruins");
         public static final TagKey<Structure> DUNGEONS = tag("dungeons");
 
         public static final TagKey<Structure> TREE_BLACKLIST_FILTER = tag("tree_blacklist_filter");
