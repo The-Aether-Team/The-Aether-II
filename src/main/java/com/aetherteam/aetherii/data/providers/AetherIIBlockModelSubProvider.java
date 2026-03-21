@@ -1118,6 +1118,14 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(createBooleanModelDispatch(BlockStateProperties.LIT, campfire, campfireOff)).with(ROTATION_HORIZONTAL_FACING_ALT));
     }
 
+    public void createVase(Block block, Block particle) {
+        this.createParticleOnlyBlock(block, particle);
+        Item item = block.asItem();
+        Identifier resourceLocation = AetherIIModelTemplates.VASE_INVENTORY.create(item, TextureMapping.particle(particle), this.modelOutput);
+        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourceLocation, new VaseSpecialRenderer.Unbaked());
+        this.itemModelOutput.accept(item, unbaked);
+    }
+
     public void createSentryCrate(Block block, Block particle) {
         this.createParticleOnlyBlock(block, particle);
         Item item = block.asItem();

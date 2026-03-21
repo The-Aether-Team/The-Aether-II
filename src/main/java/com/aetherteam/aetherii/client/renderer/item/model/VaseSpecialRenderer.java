@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
-import net.minecraft.client.resources.model.MaterialSet;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -21,10 +20,8 @@ import java.util.function.Consumer;
 
 public class VaseSpecialRenderer implements NoDataSpecialModelRenderer {
     private final VaseModel vaseModel;
-    private final MaterialSet materialSet;
 
-    public VaseSpecialRenderer(MaterialSet context, VaseModel vaseModel) {
-        this.materialSet = context;
+    public VaseSpecialRenderer(VaseModel vaseModel) {
         this.vaseModel = vaseModel;
     }
 
@@ -62,7 +59,7 @@ public class VaseSpecialRenderer implements NoDataSpecialModelRenderer {
         @Override
         public SpecialModelRenderer<?> bake(BakingContext context) {
             VaseModel model = new VaseModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.VASE));
-            return new VaseSpecialRenderer(context.materials(), model);
+            return new VaseSpecialRenderer(model);
         }
     }
 }

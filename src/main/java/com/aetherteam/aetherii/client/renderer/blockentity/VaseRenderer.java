@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
@@ -30,10 +29,6 @@ public class VaseRenderer implements BlockEntityRenderer<VaseBlockEntity, VaseRe
     private static final float WOBBLE_AMPLITUDE = 0.1F;
 
     public VaseRenderer(BlockEntityRendererProvider.Context context) {
-        this.vaseModel = new VaseModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.VASE)).root();
-    }
-
-    public VaseRenderer(SpecialModelRenderer.BakingContext context) {
         this.vaseModel = new VaseModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.VASE)).root();
     }
 
