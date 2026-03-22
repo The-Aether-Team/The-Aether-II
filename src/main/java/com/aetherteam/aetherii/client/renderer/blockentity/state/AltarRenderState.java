@@ -8,7 +8,7 @@ import net.minecraft.core.Direction;
 import java.util.Collections;
 import java.util.List;
 
-public class AlterRenderState extends BlockEntityRenderState {
+public class AltarRenderState extends BlockEntityRenderState {
     public float inputItemRotation;
     public ItemClusterRenderState displayItem;
     public float bobOff;

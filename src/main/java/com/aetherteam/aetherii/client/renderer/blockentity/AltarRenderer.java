@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.client.renderer.blockentity;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.utility.AltarBlock;
 import com.aetherteam.aetherii.blockentity.AltarBlockEntity;
-import com.aetherteam.aetherii.client.renderer.blockentity.state.AlterRenderState;
+import com.aetherteam.aetherii.client.renderer.blockentity.state.AltarRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.SubmitNodeCollector;
@@ -28,7 +28,7 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 
-public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity, AlterRenderState> { //TODO
+public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity, AltarRenderState> { //TODO
 
     private final ItemModelResolver itemModelResolver;
     private final RandomSource random = RandomSource.create();
@@ -40,13 +40,13 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity, Alte
     }
 
     @Override
-    public AlterRenderState createRenderState() {
-        return new AlterRenderState();
+    public AltarRenderState createRenderState() {
+        return new AltarRenderState();
     }
 
     public void extractRenderState(
             AltarBlockEntity altarBlockEntity,
-            AlterRenderState renderState,
+            AltarRenderState renderState,
             float partialTick,
             Vec3 p_445382_,
             ModelFeatureRenderer.@Nullable CrumblingOverlay p_446369_
@@ -90,7 +90,7 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity, Alte
     }
 
     @Override
-    public void submit(AlterRenderState alterRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
+    public void submit(AltarRenderState alterRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
         ItemStackRenderState inputStack = alterRenderState.itemInput;
 
         if (!inputStack.isEmpty()) {

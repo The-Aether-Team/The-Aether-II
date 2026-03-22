@@ -17,6 +17,9 @@ public class AetherIIStructureTagData extends StructureTagsProvider {
     @SuppressWarnings("unchecked")
     @Override
     public void addTags(HolderLookup.Provider provider) {
+        this.tag(AetherIITags.Structures.OUTPOSTS).add(
+                AetherIIStructures.OUTPOST
+        );
         this.tag(AetherIITags.Structures.CAMPS).add(
                 AetherIIStructures.CAMP_HIGHFIELDS,
                 AetherIIStructures.CAMP_MAGNETIC,
@@ -26,12 +29,26 @@ public class AetherIIStructureTagData extends StructureTagsProvider {
                 AetherIIStructures.SENTRY_RUINS,
                 AetherIIStructures.INFECTED_GUARDIAN_TREE
         );
+        this.tag(AetherIITags.Structures.WATCHTOWERS).add(
+                AetherIIStructures.WATCHTOWER
+        );
+        this.tag(AetherIITags.Structures.SURFACE_RUINS).add(
+                AetherIIStructures.VERADEXIAN_RUINS
+        );
 
         this.tag(AetherIITags.Structures.TREE_BLACKLIST_FILTER).addTag(AetherIITags.Structures.CAMPS);
         this.tag(AetherIITags.Structures.ALKAHEST_POOL_BLACKLIST_FILTER).addTag(AetherIITags.Structures.DUNGEONS);
         this.tag(AetherIITags.Structures.COAST_BLACKLIST_FILTER).add(AetherIIStructures.SENTRY_RUINS);
-        this.tag(AetherIITags.Structures.FERROSITE_SPIKE_BLACKLIST_FILTER).addTag(AetherIITags.Structures.CAMPS);
-        this.tag(AetherIITags.Structures.ARCTIC_ICE_SPIKE_BLACKLIST_FILTER).addTag(AetherIITags.Structures.CAMPS);
+        this.tag(AetherIITags.Structures.FERROSITE_SPIKE_BLACKLIST_FILTER).addTags(
+                AetherIITags.Structures.OUTPOSTS,
+                AetherIITags.Structures.CAMPS,
+                AetherIITags.Structures.WATCHTOWERS
+        );
+        this.tag(AetherIITags.Structures.ARCTIC_ICE_SPIKE_BLACKLIST_FILTER).addTags(
+                AetherIITags.Structures.OUTPOSTS,
+                AetherIITags.Structures.CAMPS,
+                AetherIITags.Structures.WATCHTOWERS
+        );
         this.tag(AetherIITags.Structures.AERCLOUD_BLACKLIST_FILTER).addTag(AetherIITags.Structures.DUNGEONS);
     }
 }

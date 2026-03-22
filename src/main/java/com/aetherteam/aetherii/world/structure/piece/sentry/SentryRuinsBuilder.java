@@ -92,7 +92,7 @@ public class SentryRuinsBuilder {
         this.maxSize = Math.max(3, maxSize);
     }
 
-    public void initializeDungeon(BlockPos startPos, Rotation rotation, Structure.GenerationContext genContext, StructurePiecesBuilder builder) {
+    public void initializeDungeon(BlockPos startPos, Rotation rotation, Structure.GenerationContext genContext, StructurePiecesBuilder builder, int surfaceRuinOffset) {
         ROOM_OPTIONS = ROOM_OPTIONS_BUILDER.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, (e) -> e.getValue().build()));
 
         SentryRuinsPiece bossRoom = this.chooseRoom("boss_room", startPos, rotation, this.processors.bossSettings());
@@ -114,7 +114,7 @@ public class SentryRuinsBuilder {
             }
 
             if (this.propagateRooms(defaultRoom, chunkPos, true, 0)) {
-                this.buildSurfaceStaircase(genContext.heightAccessor(), genContext.chunkGenerator(), genContext.randomState(), 6);
+                this.buildSurfaceStaircase(genContext.heightAccessor(), genContext.chunkGenerator(), genContext.randomState(), surfaceRuinOffset);
             }
 
             this.populatePiecesBuilder(builder);
@@ -186,7 +186,7 @@ public class SentryRuinsBuilder {
         return null;
     }
 
-    private void buildSurfaceStaircase(LevelHeightAccessor level, ChunkGenerator chunkGenerator, RandomState randomState, int stopBeforeSurface) {
+    private void buildSurfaceStaircase(LevelHeightAccessor level, ChunkGenerator chunkGenerator, RandomState randomState, int surfaceRuinOffset) {
         final int shrink = 3;
         StructurePiece lobby = this.seekLastRoomNode(shrink * 2);
         if (lobby == null) return; // Not likely to happen ever, but just in case for wackiness
@@ -196,14 +196,14 @@ public class SentryRuinsBuilder {
         Rotation lobbyRotation = lobby.getRotation();
         int topSurfaceY = chunkGenerator.getFirstOccupiedHeight(lobbyCenter.getX(), lobbyCenter.getZ(), Heightmap.Types.OCEAN_FLOOR_WG, level, randomState);
 
-        for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY() - stopBeforeSurface) / 6; i++) {
+        for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY() + surfaceRuinOffset) / 6; i++) {
             SentryRuinsPiece staircase = this.chooseRoom("staircase", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6, 0), lobbyRotation, this.processors.staircaseSettings());
             this.nodes.add(staircase);
 
 
         }
-        for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY() - stopBeforeSurface) / 6; i++) {
-            if (i++ >= (topSurfaceY - lobbyBounds.maxY() - stopBeforeSurface - 6) / 6) {
+        for (int i = 0; i <= (topSurfaceY - lobbyBounds.maxY() + surfaceRuinOffset) / 6; i++) {
+            if (i++ >= (topSurfaceY - lobbyBounds.maxY() + surfaceRuinOffset - 6) / 6) {
                 SentryRuinsPiece surfaceRuin = this.chooseRoom("surface_ruin", staircasePos(lobbyBounds, lobbyRotation, lobbyBounds.maxY() + 1 + i * 6, 1), lobbyRotation, this.processors.bossSettings());
                 this.nodes.add(surfaceRuin);
             }

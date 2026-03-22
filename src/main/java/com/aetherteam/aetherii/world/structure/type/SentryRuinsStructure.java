@@ -37,19 +37,22 @@ public class SentryRuinsStructure extends Structure {
             Codec.INT.fieldOf("max_rooms").forGetter(o -> o.maxRooms),
             Codec.INT.fieldOf("above_bottom").forGetter(o -> o.aboveBottom),
             Codec.INT.fieldOf("below_top").forGetter(o -> o.belowTop),
+            Codec.INT.fieldOf("surface_ruin_offset").forGetter(o -> o.surfaceRuinOffset),
             SentryRuinsProcessorSettings.CODEC.fieldOf("processor_settings").forGetter(o -> o.processors)
     ).apply(builder, SentryRuinsStructure::new));
 
     private final int maxRooms;
     private final int aboveBottom;
     private final int belowTop;
+    private final int surfaceRuinOffset;
     private final SentryRuinsProcessorSettings processors;
 
-    public SentryRuinsStructure(StructureSettings settings, int maxRooms, int aboveBottom, int belowTop, SentryRuinsProcessorSettings processors) {
+    public SentryRuinsStructure(StructureSettings settings, int maxRooms, int aboveBottom, int belowTop, int surfaceRuinOffset, SentryRuinsProcessorSettings processors) {
         super(settings);
         this.maxRooms = maxRooms;
         this.aboveBottom = aboveBottom;
         this.belowTop = belowTop;
+        this.surfaceRuinOffset = surfaceRuinOffset;
         this.processors = processors;
     }
 
@@ -71,7 +74,7 @@ public class SentryRuinsStructure extends Structure {
 
     private void generatePieces(StructurePiecesBuilder builder, GenerationContext context, BlockPos startPos, Rotation rotation) {
         SentryRuinsBuilder graph = new SentryRuinsBuilder(context, this.maxRooms, this.processors);
-        graph.initializeDungeon(startPos, rotation, context, builder);
+        graph.initializeDungeon(startPos, rotation, context, builder, surfaceRuinOffset);
     }
 
     /**

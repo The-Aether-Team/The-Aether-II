@@ -20,6 +20,7 @@ import java.util.Optional;
 public class AetherIIStructureSets {
     public static final ResourceKey<StructureSet> OUTPOSTS = createKey("outposts");
     public static final ResourceKey<StructureSet> AETHER_SURFACE_STRUCTURES = createKey("aether_surface_structures");
+    public static final ResourceKey<StructureSet> AETHER_SURFACE_RUINS = createKey("aether_surface_ruins");
     public static final ResourceKey<StructureSet> SENTRY_RUINS = createKey("sentry_ruins");
 
     private static ResourceKey<StructureSet> createKey(String name) {
@@ -34,6 +35,7 @@ public class AetherIIStructureSets {
         HolderGetter<Structure> structures = context.lookup(Registries.STRUCTURE);
 
         Holder.Reference<StructureSet> outposts = context.register(OUTPOSTS, new StructureSet(structures.getOrThrow(AetherIIStructures.OUTPOST),
+
                 new RandomSpreadStructurePlacement(28, 18, RandomSpreadType.LINEAR, 2738116)));
 
         context.register(AETHER_SURFACE_STRUCTURES, new StructureSet(List.of(
@@ -44,7 +46,12 @@ public class AetherIIStructureSets {
                 new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 18, 8, RandomSpreadType.LINEAR))
         );
 
+        context.register(AETHER_SURFACE_RUINS, new StructureSet(List.of(
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS))),
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_2, 0.65F, 2038911, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 16, 8, RandomSpreadType.LINEAR))
+        );
+
         context.register(SENTRY_RUINS, new StructureSet(structures.getOrThrow(AetherIIStructures.SENTRY_RUINS),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 1.0F, 32146754, Optional.empty(), 14, 7, RandomSpreadType.TRIANGULAR)));
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 1.0F, 32146754, Optional.empty(), 16, 8, RandomSpreadType.TRIANGULAR)));
     }
 }

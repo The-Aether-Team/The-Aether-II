@@ -295,6 +295,7 @@ public class AetherIITags {
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_MAGNETIC = tag("has_structure/camp_magnetic");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_ARCTIC = tag("has_structure/camp_arctic");
         public static final TagKey<Biome> HAS_STRUCTURE_WATCHTOWER = tag("has_structure/watchtower");
+        public static final TagKey<Biome> HAS_STRUCTURE_VERADEXIAN_RUINS = tag("has_structure/veradexian_ruins");
         public static final TagKey<Biome> HAS_STRUCTURE_SENTRY_RUINS = tag("has_structure/sentry_ruins");
         public static final TagKey<Biome> HAS_STRUCTURE_INFECTED_GUARDIAN_TREE = tag("has_structure/infected_guardian_tree");
 
@@ -313,7 +314,10 @@ public class AetherIITags {
     }
 
     public static class Structures {
+        public static final TagKey<Structure> OUTPOSTS = tag("outposts");
         public static final TagKey<Structure> CAMPS = tag("camps");
+        public static final TagKey<Structure> WATCHTOWERS = tag("watchtowers");
+        public static final TagKey<Structure> SURFACE_RUINS = tag("surface_ruins");
         public static final TagKey<Structure> DUNGEONS = tag("dungeons");
 
         public static final TagKey<Structure> TREE_BLACKLIST_FILTER = tag("tree_blacklist_filter");

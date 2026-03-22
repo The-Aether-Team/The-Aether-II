@@ -91,6 +91,7 @@ public class AechorPlant extends PlantMob implements RangedAttackMob, PlantCutti
     public static boolean checkAechorPlantSpawnRules(EntityType<? extends AechorPlant> aechorPlant, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.AECHOR_PLANT_SPAWNABLE_ON)
                 && level.getRawBrightness(pos, 0) > 8
+                && level.canSeeSky(pos)
                 && level.getDifficulty() != Difficulty.PEACEFUL;
     }
 
