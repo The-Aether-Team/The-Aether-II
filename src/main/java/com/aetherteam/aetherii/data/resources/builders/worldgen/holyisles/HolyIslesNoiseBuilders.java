@@ -35,6 +35,7 @@ public class HolyIslesNoiseBuilders extends AetherIIDensityFunctionBuilders {
     private static NoiseRouter createNoiseRouter(HolderGetter<DensityFunction> function, DensityFunction finalDensity) {
         DensityFunction temperature = getFunction(function, AetherIIDensityFunctions.TEMPERATURE);
         DensityFunction vegetation = getFunction(function, AetherIIDensityFunctions.VEGETATION_RARITY_MAPPER);
+        DensityFunction continentalness = getFunction(function, AetherIIDensityFunctions.CONTINENTS);
         DensityFunction erosion = getFunction(function, AetherIIDensityFunctions.EROSION);
         DensityFunction depth = getFunction(function, AetherIIDensityFunctions.CAVE_BIOMES_RARITY_MAPPER);
         DensityFunction ridges = getFunction(function, AetherIIDensityFunctions.LAKES_NOISE);
@@ -45,7 +46,7 @@ public class HolyIslesNoiseBuilders extends AetherIIDensityFunctionBuilders {
                 DensityFunctions.zero(), // lava
                 temperature, // temperature
                 vegetation, // vegetation
-                DensityFunctions.zero(), // continentalness
+                continentalness , // continentalness
                 erosion, // erosion
                 depth, // depth
                 ridges, // ridges

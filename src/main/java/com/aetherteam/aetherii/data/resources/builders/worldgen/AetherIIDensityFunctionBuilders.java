@@ -5,11 +5,10 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunction
 import com.aetherteam.aetherii.data.resources.registries.AetherIINoises;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.BoundedFloatFunction;
 import net.minecraft.util.CubicSpline;
-import net.minecraft.util.ToFloatFunction;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.DensityFunctions;
@@ -22,6 +21,8 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> VEGETATION = createKey("holy_isles/vegetation");
     public static final ResourceKey<DensityFunction> VEGETATION_RARE = createKey("holy_isles/vegetation_rare");
     public static final ResourceKey<DensityFunction> VEGETATION_RARITY_MAPPER = createKey("holy_isles/vegetation_rarity_mapper");
+    public static final ResourceKey<DensityFunction> CONTINENTS_HEIGHTMAP = createKey("holy_isles/continents_heightmap");
+    public static final ResourceKey<DensityFunction> CONTINENTS = createKey("holy_isles/continents");
     public static final ResourceKey<DensityFunction> EROSION = createKey("holy_isles/erosion");
     public static final ResourceKey<DensityFunction> DEPTH = createKey("holy_isles/depth");
     public static final ResourceKey<DensityFunction> CAVE_BIOMES = createKey("holy_isles/cave_biomes");
@@ -31,6 +32,7 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("holy_isles/base_3d_noise");
 
     public static final ResourceKey<DensityFunction> SHATTERED_ISLANDS = createKey("holy_isles/terrain/shattered_islands");
+    public static final ResourceKey<DensityFunction> BASE_ISLANDS = createKey("holy_isles/terrain/base_islands");
     public static final ResourceKey<DensityFunction> FINAL_ISLANDS = createKey("holy_isles/terrain/final_islands");
 
     public static final ResourceKey<DensityFunction> FACTOR = createKey("holy_isles/terrain/base/factor");
@@ -106,6 +108,28 @@ public class AetherIIDensityFunctionBuilders {
         return density;
     }
 
+    public static DensityFunction buildContinentsHeightmap(HolderGetter<DensityFunction> function) {
+        DensityFunction density = getFunction(function, BASE_ISLANDS);
+        density = DensityFunctions.blendDensity(density);
+        density = DensityFunctions.interpolated(density);
+        density = density.squeeze();
+        density = DensityFunctions.add(density, DensityFunctions.constant(0.125));
+        density = DensityFunctions.findTopSurface(density, DensityFunctions.constant(160), 96, 16);
+        return density;
+    }
+
+    public static DensityFunction buildContinents(HolderGetter<DensityFunction> function) {
+        DensityFunctions.Spline.Coordinate heightmap = new DensityFunctions.Spline.Coordinate(function.getOrThrow(CONTINENTS_HEIGHTMAP));
+        return DensityFunctions.spline(continents(heightmap));
+    }
+
+    public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> continents(I heightmap) {
+        return CubicSpline.builder(heightmap)
+                .addPoint(96, 0.0F)
+                .addPoint(160, 1.0F)
+                .build();
+    }
+
     public static DensityFunction buildElevationMapper(HolderGetter<DensityFunction> function) {
         return DensityFunctions.rangeChoice(getFunction(function, EROSION), -1.5, MAGNETIC_START_VALUE, getFunction(function, ELEVATION), getFunction(function, ELEVATION_MAGNETIC));
     }
@@ -123,7 +147,7 @@ public class AetherIIDensityFunctionBuilders {
         return density;
     }
 
-    public static DensityFunction buildFinalIslands(HolderGetter<DensityFunction> function) {
+    public static DensityFunction buildBaseIslands(HolderGetter<DensityFunction> function) {
         DensityFunction density = getFunction(function, BASE_3D_NOISE);
         density = DensityFunctions.add(density, DensityFunctions.constant(-0.03));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
@@ -132,6 +156,11 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
         density = DensityFunctions.mul(density, getFunction(function, BOTTOM_SLIDE));
         density = DensityFunctions.add(density, factorize(function, -0.19));
+        return density;
+    }
+
+    public static DensityFunction buildFinalIslands(HolderGetter<DensityFunction> function) {
+        DensityFunction density = getFunction(function, BASE_ISLANDS);
         density = DensityFunctions.min(density, getFunction(function, NOISE_CAVES));
         density = DensityFunctions.max(density, DensityFunctions.rangeChoice(getFunction(function, Y), DimensionType.MIN_Y * 2, 130, DensityFunctions.constant(-1), getFunction(function, AetherIIDensityFunctions.SHATTERED_ISLANDS)));
         density = DensityFunctions.blendDensity(density);
