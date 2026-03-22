@@ -41,8 +41,8 @@ public class DimensionClientListener {
                     nearDistanceGoal = farDistance / 80.0F;
                     farDistanceGoal = farDistance / 5.0F;
                 } else if (biome.is(AetherIITags.Biomes.IRRADIATED)) {
-                    nearDistanceGoal = farDistance / 80.0F;
-                    farDistanceGoal = farDistance / 10.0F;
+                    nearDistanceGoal = farDistance / 60.0F;
+                    farDistanceGoal = farDistance / 7.5F;
                 }
 
                 if (clientLevel.isRaining()) {
