@@ -19,12 +19,12 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
 
         context.register(TEMPERATURE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375, noise.getOrThrow(AetherIINoises.TEMPERATURE)));
         context.register(VEGETATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5, noise.getOrThrow(AetherIINoises.VEGETATION)));
-        context.register(VEGETATION_RARITY_MAPPER, makeVegetationRarityMapper(function));
+        context.register(VEGETATION_RARITY_MAPPER, buildVegetationRarityMapper(function));
         context.register(VEGETATION_RARE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25, noise.getOrThrow(AetherIINoises.VEGETATION_RARE)).abs());
         context.register(EROSION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.31, noise.getOrThrow(AetherIINoises.EROSION)).abs());
         context.register(DEPTH, DensityFunctions.yClampedGradient(0, 384, -0.75, 1.5));
         context.register(CAVE_BIOMES, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375, noise.getOrThrow(AetherIINoises.CAVE_BIOMES)).abs());
-        context.register(CAVE_BIOMES_RARITY_MAPPER, makeCaveBiomesRarityMapper(function));
+        context.register(CAVE_BIOMES_RARITY_MAPPER, buildCaveBiomesRarityMapper(function));
         context.register(AMPLIFICATION, DensityFunctions.weirdScaledSampler(getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.AMPLIFICATION), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE1));
         context.register(RIDGES, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.85, noise.getOrThrow(AetherIINoises.RIDGES)).abs());
         context.register(BASE_3D_NOISE, BlendedNoise.createUnseeded(
@@ -40,6 +40,8 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
 
         context.register(FACTOR, buildFactor(function));
         context.register(ELEVATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5, noise.getOrThrow(AetherIINoises.ELEVATION)).abs());
+        context.register(ELEVATION_MAGNETIC, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.675, noise.getOrThrow(AetherIINoises.ELEVATION)).abs());
+        context.register(ELEVATION_MAPPER, buildElevationMapper(function));
         context.register(TOP_SLIDE, buildTopSlide(function));
         context.register(BOTTOM_SLIDE, buildBottomSlide(function));
         context.register(SLOPER, buildSloper(function));
