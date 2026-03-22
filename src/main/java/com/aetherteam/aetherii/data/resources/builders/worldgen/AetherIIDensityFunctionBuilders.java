@@ -266,7 +266,7 @@ public class AetherIIDensityFunctionBuilders {
         DensityFunction base = getFunction(function, BASE_TERRAIN_SHAPER);
         DensityFunction density = base;
         density = DensityFunctions.rangeChoice(getFunction(function, Y), DimensionType.MIN_Y * 2, 128, density, DensityFunctions.mul(density, getFunction(function, LAKES_FACTOR)));
-        density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -1.5, 0.65, density, base);
+        density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -1.5, IRRADIATED_START_VALUE, density, base);
         return density;
     }
 
@@ -440,8 +440,8 @@ public class AetherIIDensityFunctionBuilders {
                 .build();
 
         return CubicSpline.builder(temperature)
-                .addPoint(0.575F, lakeSpline)
-                .addPoint(0.65F, 1.0F)
+                .addPoint(IRRADIATED_START_VALUE - 0.075F, lakeSpline)
+                .addPoint(IRRADIATED_START_VALUE, 1.0F)
                 .build();
     }
 

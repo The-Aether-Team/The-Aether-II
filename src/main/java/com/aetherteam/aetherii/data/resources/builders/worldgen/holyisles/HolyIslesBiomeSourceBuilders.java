@@ -12,8 +12,8 @@ import java.util.List;
 
 public class HolyIslesBiomeSourceBuilders {
     public static float ARCTIC_START_VALUE = -0.4F;
-    public static float IRRADIATED_START_VALUE = 0.6F;
-    public static float MAGNETIC_START_VALUE = 0.5F;
+    public static float IRRADIATED_START_VALUE = 0.65F;
+    public static float MAGNETIC_START_VALUE = 0.485F;
 
     public static BiomeSource buildHolyIslesBiomeSource(HolderGetter<Biome> biomes) {
         Climate.Parameter fullRange = Climate.Parameter.span(-1.5F, 1.5F);

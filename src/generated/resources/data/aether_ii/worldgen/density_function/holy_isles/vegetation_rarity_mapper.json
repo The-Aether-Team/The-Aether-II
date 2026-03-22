@@ -1,7 +1,7 @@
 {
   "type": "minecraft:range_choice",
   "input": "aether_ii:holy_isles/erosion",
-  "max_exclusive": 0.5,
+  "max_exclusive": 0.48500001430511475,
   "min_inclusive": 0.0,
   "when_in_range": {
     "type": "minecraft:range_choice",
