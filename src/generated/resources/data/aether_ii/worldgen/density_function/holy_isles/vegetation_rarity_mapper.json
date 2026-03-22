@@ -1,13 +1,13 @@
 {
   "type": "minecraft:range_choice",
   "input": "aether_ii:holy_isles/erosion",
-  "max_exclusive": 0.55,
+  "max_exclusive": 0.5,
   "min_inclusive": 0.0,
   "when_in_range": {
     "type": "minecraft:range_choice",
     "input": "aether_ii:holy_isles/temperature",
     "max_exclusive": 0.3,
-    "min_inclusive": -0.4,
+    "min_inclusive": -0.4000000059604645,
     "when_in_range": {
       "type": "minecraft:range_choice",
       "input": "aether_ii:holy_isles/vegetation_rare",

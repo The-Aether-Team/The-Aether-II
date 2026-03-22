@@ -15,6 +15,8 @@ import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.DensityFunctions;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
+import static com.aetherteam.aetherii.data.resources.builders.worldgen.holyisles.HolyIslesBiomeSourceBuilders.*;
+
 public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> TEMPERATURE = createKey("holy_isles/temperature");
     public static final ResourceKey<DensityFunction> VEGETATION = createKey("holy_isles/vegetation");
@@ -88,8 +90,8 @@ public class AetherIIDensityFunctionBuilders {
         DensityFunction vegetation = getFunction(function, VEGETATION);
         DensityFunction density = vegetation;
         density = DensityFunctions.rangeChoice(getFunction(function, VEGETATION_RARE), -1.5, 0.45, density, DensityFunctions.constant(2.0));
-        density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -0.4, 0.3, density, vegetation);
-        density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, 0.55, density, vegetation);
+        density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), ARCTIC_START_VALUE, 0.3, density, vegetation);
+        density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, MAGNETIC_START_VALUE, density, vegetation);
         return density;
     }
 
@@ -142,19 +144,19 @@ public class AetherIIDensityFunctionBuilders {
 
     public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> factor(I temperature, I erosion, I ridges) {
         CubicSpline<C, I> temperatureSpline = CubicSpline.builder(temperature)
-                .addPoint(-0.525F, 1.0F)
-                .addPoint(-0.45F, 1.5F)
-                .addPoint(-0.4F, 7.5F)
-                .addPoint(-0.325F, 1.0F)
-                .addPoint(0.525F, 1.0F)
-                .addPoint(0.6F, 7.5F)
-                .addPoint(0.675F, 1.0F)
+                .addPoint(ARCTIC_START_VALUE - 0.06F, 1.0F)
+                .addPoint(ARCTIC_START_VALUE - 0.03F, 1.5F)
+                .addPoint(ARCTIC_START_VALUE, 7.5F)
+                .addPoint(ARCTIC_START_VALUE + 0.075F , 1.0F)
+                .addPoint(IRRADIATED_START_VALUE - 0.075F, 1.0F)
+                .addPoint(IRRADIATED_START_VALUE, 7.5F)
+                .addPoint(IRRADIATED_START_VALUE + 0.06F, 1.0F)
                 .build();
 
         CubicSpline<C, I> erosionSpline = CubicSpline.builder(erosion)
-                .addPoint(0.475F, temperatureSpline)
-                .addPoint(0.55F, 7.5F)
-                .addPoint(0.625F, 1.0F)
+                .addPoint(MAGNETIC_START_VALUE - 0.075F, temperatureSpline)
+                .addPoint(MAGNETIC_START_VALUE, 7.5F)
+                .addPoint(MAGNETIC_START_VALUE + 0.06F, 1.0F)
                 .build();
 
         return CubicSpline.builder(ridges)
@@ -230,8 +232,8 @@ public class AetherIIDensityFunctionBuilders {
 
     public static DensityFunction selectSlide(HolderGetter<DensityFunction> function) {
         DensityFunction density = getFunction(function, TEMPERATURE);
-        density = DensityFunctions.rangeChoice(density, -0.4, 1.5, getFunction(function, TOP_SLIDE), getFunction(function, TOP_SLIDE_ARCTIC));
-        density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, 0.55, density, getFunction(function, TOP_SLIDE));
+        density = DensityFunctions.rangeChoice(density, ARCTIC_START_VALUE, 1.5, getFunction(function, TOP_SLIDE), getFunction(function, TOP_SLIDE_ARCTIC));
+        density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, MAGNETIC_START_VALUE, density, getFunction(function, TOP_SLIDE));
         density = DensityFunctions.cacheOnce(density);
         return density;
     }
@@ -245,8 +247,8 @@ public class AetherIIDensityFunctionBuilders {
 
     public static DensityFunction selectSloper(HolderGetter<DensityFunction> function) {
         DensityFunction density = getFunction(function, TEMPERATURE);
-        density = DensityFunctions.rangeChoice(density, -0.4, 1.5, getFunction(function, SLOPER), getFunction(function, SLOPER_ARCTIC));
-        density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, 0.55, density, getFunction(function, SLOPER));
+        density = DensityFunctions.rangeChoice(density, ARCTIC_START_VALUE, 1.5, getFunction(function, SLOPER), getFunction(function, SLOPER_ARCTIC));
+        density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, MAGNETIC_START_VALUE, density, getFunction(function, SLOPER));
         density = DensityFunctions.mul(density, getFunction(function, UNDERGROUND_SHAPER));
         density = DensityFunctions.cacheOnce(density);
         return density;
@@ -310,17 +312,19 @@ public class AetherIIDensityFunctionBuilders {
 
     public static <C, I extends BoundedFloatFunction<C>> CubicSpline<C, I> factorShattered(I temperature, I erosion, I ridges) {
         CubicSpline<C, I> temperatureSpline = CubicSpline.builder(temperature)
-                .addPoint(-0.475F, 1.0F)
-                .addPoint(-0.4F, 7.5F)
-                .addPoint(-0.325F, 1.0F)
-                .addPoint(0.575F, 1.0F)
-                .addPoint(0.65F, 7.5F)
+                .addPoint(ARCTIC_START_VALUE - 0.06F, 1.0F)
+                .addPoint(ARCTIC_START_VALUE - 0.03F, 1.5F)
+                .addPoint(ARCTIC_START_VALUE, 7.5F)
+                .addPoint(ARCTIC_START_VALUE + 0.075F , 1.0F)
+                .addPoint(IRRADIATED_START_VALUE - 0.075F, 1.0F)
+                .addPoint(IRRADIATED_START_VALUE, 7.5F)
+                .addPoint(IRRADIATED_START_VALUE + 0.06F, 1.0F)
                 .build();
 
-        CubicSpline<C, I> erosionSpline =  CubicSpline.builder(erosion)
-                .addPoint(0.475F, temperatureSpline)
-                .addPoint(0.55F, 7.5F)
-                .addPoint(0.625F, 1.0F)
+        CubicSpline<C, I> erosionSpline = CubicSpline.builder(erosion)
+                .addPoint(MAGNETIC_START_VALUE - 0.075F, temperatureSpline)
+                .addPoint(MAGNETIC_START_VALUE, 7.5F)
+                .addPoint(MAGNETIC_START_VALUE + 0.06F, 1.0F)
                 .build();
 
         return CubicSpline.builder(ridges)
