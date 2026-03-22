@@ -58,10 +58,10 @@ public class HolyIslesBiomes {
         context.register(GLISTENING_SWAMP, HolyIslesBiomeBuilders.glisteningSwampBiome(placedFeatures, vanillaConfiguredCarvers, 0.8F, 0.9F));
         context.register(VIOLET_HIGHWOODS, HolyIslesBiomeBuilders.violetHighwoodsBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
 
-        context.register(FRIGID_SIERRA, HolyIslesBiomeBuilders.frigidSierraBiome(placedFeatures, vanillaConfiguredCarvers, -0.3F, 0.9F));
-        context.register(ENDURING_WOODLAND, HolyIslesBiomeBuilders.enduringWoodlandBiome(placedFeatures, vanillaConfiguredCarvers, -0.5F, 0.4F));
-        context.register(FROZEN_LAKES, HolyIslesBiomeBuilders.frozenLakesBiome(placedFeatures, vanillaConfiguredCarvers, 0.0F, 0.5F));
-        context.register(SHEER_TUNDRA, HolyIslesBiomeBuilders.sheerTundraBiome(placedFeatures, vanillaConfiguredCarvers, 0.35F, 0.5F));
+        context.register(FRIGID_SIERRA, HolyIslesBiomeBuilders.frigidSierraBiome(placedFeatures, vanillaConfiguredCarvers, -0.5F, 0.9F));
+        context.register(ENDURING_WOODLAND, HolyIslesBiomeBuilders.enduringWoodlandBiome(placedFeatures, vanillaConfiguredCarvers, -0.3F, 0.4F));
+        context.register(FROZEN_LAKES, HolyIslesBiomeBuilders.frozenLakesBiome(placedFeatures, vanillaConfiguredCarvers, -0.2F, 0.5F));
+        context.register(SHEER_TUNDRA, HolyIslesBiomeBuilders.sheerTundraBiome(placedFeatures, vanillaConfiguredCarvers, -0.4F, 0.5F));
 
         context.register(CONTAMINATED_JUNGLE, HolyIslesBiomeBuilders.contaminatedJungleBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
         context.register(BATTLEGROUND_WASTES, HolyIslesBiomeBuilders.battlegroundWastesBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));

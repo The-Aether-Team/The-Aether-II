@@ -1422,6 +1422,8 @@
   "structure.aether_ii.infected_guardian_tree": "Infected Guardian Tree",
   "structure.aether_ii.outpost": "Outpost",
   "structure.aether_ii.sentry_ruins": "Sentry Ruins",
+  "structure.aether_ii.veradexian_ruins_arctic": "Arctic Veradexian Ruins",
+  "structure.aether_ii.veradexian_ruins_temperate": "Temperate Veradexian Ruins",
   "structure.aether_ii.watchtower": "Watchtower",
   "subtitles.aether_ii.block.aercloud.blue_aercloud_bounce": "Blue Aercloud bounces",
   "subtitles.aether_ii.block.aether_portal.ambient": "Aether Portal whooshes",

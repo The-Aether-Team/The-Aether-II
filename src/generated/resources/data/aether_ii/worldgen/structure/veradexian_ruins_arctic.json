@@ -1,6 +1,6 @@
 {
   "type": "aether_ii:aether_jigsaw",
-  "biomes": "#aether_ii:has_structure/veradexian_ruins",
+  "biomes": "#aether_ii:has_structure/veradexian_ruins_arctic",
   "discard_above_y": 256,
   "discard_below_y": 128,
   "liquid_settings": "ignore_waterlogging",
@@ -11,7 +11,7 @@
   "start_height": {
     "absolute": 0
   },
-  "start_pool": "aether_ii:veradexian_ruins/ruins",
+  "start_pool": "aether_ii:veradexian_ruins/ruins_arctic",
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin"
 }
