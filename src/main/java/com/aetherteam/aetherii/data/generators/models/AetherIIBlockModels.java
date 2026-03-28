@@ -17,6 +17,7 @@ import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -489,6 +490,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createAxisAlignedPillarBlockCustomModel(AetherIIBlocks.ARKENIUM_CHAIN.get(), plainVariant(ModelLocationUtils.getModelLocation(AetherIIBlocks.ARKENIUM_CHAIN.get())));
         this.createCraftingTableLike(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), TextureMapping::craftingTable);
         this.createFurnace(AetherIIBlocks.HOLYSTONE_FURNACE.get(), TexturedModel.ORIENTABLE_ONLY_TOP);
+        this.createFurnace(AetherIIBlocks.HOLYSTONE_SMOKER.get(), TexturedModel.ORIENTABLE);
         this.createAmberHourglass(AetherIIBlocks.AMBER_HOURGLASS.get());
         this.createAltar(AetherIIBlocks.ALTAR.get(), AetherIIBlocks.HOLYSTONE.get());
         this.createArtisansBench(AetherIIBlocks.ARTISANS_BENCH.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get());

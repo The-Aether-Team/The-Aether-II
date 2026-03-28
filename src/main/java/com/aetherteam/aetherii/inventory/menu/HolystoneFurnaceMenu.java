@@ -14,6 +14,6 @@ public class HolystoneFurnaceMenu extends AbstractFurnaceMenu {
     }
 
     public HolystoneFurnaceMenu(int containerId, Inventory playerInventory, Container furnaceContainer, ContainerData data) {
-        super(AetherIIMenuTypes.HOLYSTONE_FURNACE.get(), RecipeType.SMELTING,RecipePropertySet.FURNACE_INPUT,  RecipeBookType.FURNACE, containerId, playerInventory, furnaceContainer, data);
+        super(AetherIIMenuTypes.HOLYSTONE_FURNACE.get(), RecipeType.SMELTING, RecipePropertySet.FURNACE_INPUT,  RecipeBookType.FURNACE, containerId, playerInventory, furnaceContainer, data);
     }
 }
