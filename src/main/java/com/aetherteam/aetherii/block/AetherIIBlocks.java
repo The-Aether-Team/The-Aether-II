@@ -6,9 +6,7 @@ import com.aetherteam.aetherii.block.construction.*;
 import com.aetherteam.aetherii.block.dungeon.*;
 import com.aetherteam.aetherii.block.furniture.OutpostCampfireBlock;
 import com.aetherteam.aetherii.block.furniture.VaseBlock;
-import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
-import com.aetherteam.aetherii.block.miscellaneous.MoaEggBlock;
-import com.aetherteam.aetherii.block.miscellaneous.PlayerPressurePlateBlock;
+import com.aetherteam.aetherii.block.miscellaneous.*;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.portal.AetherPortalBlock;
 import com.aetherteam.aetherii.block.utility.*;
@@ -852,6 +850,11 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     // Furniture
     public static final DeferredBlock<OutpostCampfireBlock> OUTPOST_CAMPFIRE = register("outpost_campfire", OutpostCampfireBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(15.0F, 1200.0F).noOcclusion().pushReaction(PushReaction.BLOCK));
     public static final DeferredBlock<Block> MURAL = register("mural", MuralBlock::new, () -> Block.Properties.ofFullCopy(Blocks.STONE), (block, properties) -> new BlockItem(block, properties.component(AetherIIDataComponents.MURAL_SECTION, MuralSection.DEFAULT)));
+
+    // Melting Blocks
+    public static final DeferredBlock<Block> FROSTED_ICE = registerWithoutItem("frosted_ice", AetherFrostedIceBlock::new, () ->  BlockBehaviour.Properties.of().mapColor(MapColor.ICE).friction(0.98F).randomTicks().strength(0.5F).sound(SoundType.GLASS).noOcclusion().isValidSpawn((state, level, pos, entityType) -> entityType.is(AetherIITags.Entities.SPAWNING_ICE)).isRedstoneConductor(AetherIIBlockBuilders::never).noLootTable());
+    public static final DeferredBlock<Block> FROSTED_ARCTIC_ICE = registerWithoutItem("frosted_arctic_ice", AetherFrostedIceBlock::new, () ->  BlockBehaviour.Properties.of().mapColor(MapColor.ICE).friction(0.98F).randomTicks().strength(0.5F).sound(SoundType.GLASS).noOcclusion().isValidSpawn((state, level, pos, entityType) -> entityType.is(AetherIITags.Entities.SPAWNING_ICE)).isRedstoneConductor(AetherIIBlockBuilders::never).noLootTable());
+    public static final DeferredBlock<Block> UNSTABLE_OBSIDIAN = registerWithoutItem("unstable_obsidian", UnstableObsidianBlock::new, () ->  BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.BASEDRUM).randomTicks().requiresCorrectToolForDrops().strength(50.0F, 1200.0F).noLootTable());
 
     private static DeferredBlock<Block> registerWithoutItem(String name, Supplier<Block.Properties> properties) {
         return registerWithoutItem(name, Block::new, properties);

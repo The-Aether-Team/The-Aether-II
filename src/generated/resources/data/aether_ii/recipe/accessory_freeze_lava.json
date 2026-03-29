@@ -4,6 +4,6 @@
     "block": "minecraft:lava"
   },
   "result": {
-    "block": "minecraft:obsidian"
+    "block": "aether_ii:unstable_obsidian"
   }
 }

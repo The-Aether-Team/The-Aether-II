@@ -32,10 +32,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.MossyCarpetBlock;
-import net.minecraft.world.level.block.MultifaceBlock;
-import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.neoforged.neoforge.client.model.generators.loaders.CompositeModelBuilder;
 import org.apache.commons.lang3.ArrayUtils;
@@ -268,7 +265,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                     .select(Direction.EAST, Half.BOTTOM, StairsShape.INNER_RIGHT, lit, inner)
                     .select(Direction.WEST, Half.BOTTOM, StairsShape.INNER_RIGHT, lit, inner.with(Y_ROT_180).with(UV_LOCK))
                     .select(Direction.SOUTH, Half.BOTTOM, StairsShape.INNER_RIGHT, lit, inner.with(Y_ROT_90).with(UV_LOCK))
-                    .select(Direction.NORTH, Half.BOTTOM, StairsShape.INNER_RIGHT,lit,  inner.with(Y_ROT_270).with(UV_LOCK))
+                    .select(Direction.NORTH, Half.BOTTOM, StairsShape.INNER_RIGHT, lit, inner.with(Y_ROT_270).with(UV_LOCK))
                     .select(Direction.EAST, Half.BOTTOM, StairsShape.INNER_LEFT, lit, inner.with(Y_ROT_270).with(UV_LOCK))
                     .select(Direction.WEST, Half.BOTTOM, StairsShape.INNER_LEFT, lit, inner.with(Y_ROT_90).with(UV_LOCK))
                     .select(Direction.SOUTH, Half.BOTTOM, StairsShape.INNER_LEFT, lit, inner)
@@ -615,14 +612,14 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant left = plainVariant(AetherIIModelTemplates.TRANSLUCENT_INNER_FACES.create(ModelLocationUtils.getModelLocation(block, "_left"), leftMapping, this.modelOutput));
         MultiVariant right = plainVariant(AetherIIModelTemplates.TRANSLUCENT_INNER_FACES.create(ModelLocationUtils.getModelLocation(block, "_right"), rightMapping, this.modelOutput));
 
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(PurpleAercloudBlock.FACING).generate((direction) -> 
-            switch(direction) {
-                case NORTH -> left.with(X_ROT_90);
-                case SOUTH -> right.with(X_ROT_270);
-                case WEST -> left.with(X_ROT_270).with(Y_ROT_90);
-                case EAST -> right.with(X_ROT_90).with(Y_ROT_90);
-                default -> left;
-            }
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(PurpleAercloudBlock.FACING).generate((direction) ->
+                switch (direction) {
+                    case NORTH -> left.with(X_ROT_90);
+                    case SOUTH -> right.with(X_ROT_270);
+                    case WEST -> left.with(X_ROT_270).with(Y_ROT_90);
+                    case EAST -> right.with(X_ROT_90).with(Y_ROT_90);
+                    default -> left;
+                }
         )));
         this.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(AetherIIModelTemplates.TEMPLATE_TRANSLUCENT_CUBE.create(block.asItem(), rightMapping, this.modelOutput)));
     }
@@ -652,7 +649,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant shayelinn = plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(sticks, "_shayelinn"), AetherIITextureMappings.mossyTopped(sticks, AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), "shayelinn"), this.modelOutput));
         MultiVariant ambrelinn = plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(sticks, "_ambrelinn"), AetherIITextureMappings.mossyTopped(sticks, AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(), "ambrelinn"), this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(sticks).with(PropertyDispatch.initial(AetherLeavesBlock.MOSSY).generate((mossy) -> {
-            switch(mossy) {
+            switch (mossy) {
                 case BRYALINN -> {
                     return bryalinn;
                 }
@@ -680,7 +677,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                     if (snowyState) {
                         return snowy;
                     } else {
-                        switch(mossyState) {
+                        switch (mossyState) {
                             case BRYALINN -> {
                                 return bryalinn;
                             }
@@ -887,7 +884,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
             Identifier location = this.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + age, AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS, TextureMapping::cross);
             return plainVariant(location);
         });
-        this.registerSimpleFlatItemModel(AetherIIBlocks.VALKYRIE_SPROUT.get(),"_stage0");
+        this.registerSimpleFlatItemModel(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage0");
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.VALKYRIE_SPROUT.get()).with(propertyDispatch));
     }
 
@@ -1194,7 +1191,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public void createBed(Block block, Block particle, String name) {
         Identifier location = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/bed/skyroot/" + name + ".png");
         MultiVariant bed = plainVariant(AetherIIModelTemplates.decorateBlockModelLocation("skyroot_bed"));
-        this.blockStateOutput.accept( createSimpleBlock(block, bed));
+        this.blockStateOutput.accept(createSimpleBlock(block, bed));
         Item item = block.asItem();
         Identifier inventoryLocation = ModelTemplates.BED_INVENTORY.create(ModelLocationUtils.getModelLocation(item), TextureMapping.particle(particle), this.modelOutput);
         this.itemModelOutput.accept(item, ItemModelUtils.specialModel(inventoryLocation, new SkyrootBedSpecialRenderer.Unbaked(location)));
@@ -1236,10 +1233,10 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
             Identifier model = AetherIIModelTemplates.create("template_outpost_campfire_" + facing.name().toLowerCase(Locale.ROOT), "_" + facing.name().toLowerCase(Locale.ROOT), textureSlots)
                     .extend().renderType(Identifier.withDefaultNamespace("cutout")).build()
                     .create(AetherIIBlocks.OUTPOST_CAMPFIRE.get(), new TextureMapping()
-                            .put(AetherIITextureSlots.LOGS, TextureMapping.getBlockTexture(AetherIIBlocks.OUTPOST_CAMPFIRE.get(), "_logs"))
-                            .put(AetherIITextureSlots.BRICKS, Identifier.fromNamespaceAndPath(AetherII.MODID, "block/large_holystone_bricks"))
-                            .put(AetherIITextureSlots.ASH, TextureMapping.getBlockTexture(AetherIIBlocks.OUTPOST_CAMPFIRE.get(), "_ash"))
-                            .putForced(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(AetherIIBlocks.HOLYSTONE_BRICKS.get())),
+                                    .put(AetherIITextureSlots.LOGS, TextureMapping.getBlockTexture(AetherIIBlocks.OUTPOST_CAMPFIRE.get(), "_logs"))
+                                    .put(AetherIITextureSlots.BRICKS, Identifier.fromNamespaceAndPath(AetherII.MODID, "block/large_holystone_bricks"))
+                                    .put(AetherIITextureSlots.ASH, TextureMapping.getBlockTexture(AetherIIBlocks.OUTPOST_CAMPFIRE.get(), "_ash"))
+                                    .putForced(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(AetherIIBlocks.HOLYSTONE_BRICKS.get())),
                             this.modelOutput);
             return plainVariant(model);
         })));
@@ -1251,5 +1248,16 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant mural = plainVariant(modelLocation);
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.MURAL.get(), mural).with(ROTATION_HORIZONTAL_FACING));
         this.itemModelOutput.accept(AetherIIBlocks.MURAL.get().asItem(), new MuralItemModel.Unbaked(modelLocation));
+    }
+
+    public void createMeltingBlock(Block block, Block textureBlock, ModelTemplate modelTemplate) {
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+                .with(PropertyDispatch.initial(BlockStateProperties.AGE_3)
+                        .select(0, plainVariant(this.createSuffixedVariant(textureBlock, "_0", modelTemplate, TextureMapping::cube)))
+                        .select(1, plainVariant(this.createSuffixedVariant(textureBlock, "_1", modelTemplate, TextureMapping::cube)))
+                        .select(2, plainVariant(this.createSuffixedVariant(textureBlock, "_2", modelTemplate, TextureMapping::cube)))
+                        .select(3, plainVariant(this.createSuffixedVariant(textureBlock, "_3", modelTemplate, TextureMapping::cube)))
+                )
+        );
     }
 }

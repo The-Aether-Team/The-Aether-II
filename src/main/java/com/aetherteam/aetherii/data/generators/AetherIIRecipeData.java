@@ -2607,8 +2607,10 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.icestoneFreezableTag(AetherIIBlocks.ARCTIC_ICE.get(), Blocks.WATER, AetherIITags.Biomes.ARCTIC_ICE).save(this.output, this.name("icestone_freeze_water_to_arctic_ice"));
         this.icestoneFreezable(Blocks.OBSIDIAN, Blocks.LAVA).save(this.output, this.name("icestone_freeze_lava"));
 
-        this.accessoryFreezable(AetherIIBlocks.ARCTIC_ICE.get(), Blocks.WATER).save(this.output, this.name("accessory_freeze_water"));
-        this.accessoryFreezable(Blocks.OBSIDIAN, Blocks.LAVA).save(this.output, this.name("accessory_freeze_lava"));
+        //this.accessoryFreezable(AetherIIBlocks.FROSTED_ICE.get(), Blocks.WATER).save(this.output, this.name("accessory_freeze_water"));
+        //this.accessoryFreezableTag(AetherIIBlocks.FROSTED_ARCTIC_ICE.get(), Blocks.WATER, AetherIITags.Biomes.ARCTIC_ICE).save(this.output, this.name("accessory_freeze_water_to_arctic_ice")); //TODO
+        this.accessoryFreezable(AetherIIBlocks.FROSTED_ARCTIC_ICE.get(), Blocks.WATER).save(this.output, this.name("accessory_freeze_water"));
+        this.accessoryFreezable(AetherIIBlocks.UNSTABLE_OBSIDIAN.get(), Blocks.LAVA).save(this.output, this.name("accessory_freeze_lava"));
     }
 
     public static class Runner extends RecipeProvider.Runner {

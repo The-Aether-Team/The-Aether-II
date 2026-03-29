@@ -839,6 +839,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Furniture
         this.addBlock(AetherIIBlocks.OUTPOST_CAMPFIRE, "Outpost Campfire");
         this.addBlock(AetherIIBlocks.MURAL, "Mural");
+
+        // Melting Blocks
+        this.addBlock(AetherIIBlocks.FROSTED_ICE, "Frosted Ice");
+        this.addBlock(AetherIIBlocks.FROSTED_ARCTIC_ICE, "Frosted Arctic Ice");
+        this.addBlock(AetherIIBlocks.UNSTABLE_OBSIDIAN, "Unstable Obsidian");
     }
 
     private void addItems() {
