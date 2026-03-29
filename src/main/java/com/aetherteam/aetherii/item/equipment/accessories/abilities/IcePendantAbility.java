@@ -25,7 +25,7 @@ import java.util.Optional;
 
 public interface IcePendantAbility extends FreezingBehavior<ItemStack> {
     /**
-     * Freezes blocks around the wearer in a radius of 1.9 as long as they aren't flying or in spectator. This also damages the Ice accessory for every 3 blocks frozen.
+     * Freezes blocks around the wearer in a radius of 1.9 as long as they aren't flying or in spectator. This also damages the Ice accessory for every 4 blocks frozen.
      *
      * @param wearer The {@link LivingEntity wearer} of the accessory.
      * @param stack  The accessory {@link ItemStack}.
@@ -35,10 +35,10 @@ public interface IcePendantAbility extends FreezingBehavior<ItemStack> {
             int damage = this.freezeBlocks(wearer.level(), wearer.blockPosition(), stack, 1.9F);
             if (wearer.level() instanceof ServerLevel serverLevel) {
                 if (stack.is(AetherIIItems.ICE_PENDANT)) {
-                    stack.hurtAndBreak(damage / 3, serverLevel, wearer, (item) -> {
-                        assert wearer instanceof ServerPlayer;
-                        AccessoryUtil.breakAccessory(item, stack, (ServerPlayer) wearer);
-                    });
+                    if (wearer instanceof ServerPlayer serverPlayer) {
+                        ItemStack copyStack = stack.copy();
+                        stack.hurtAndBreak(damage / 4, serverLevel, wearer, item -> AccessoryUtil.breakAccessory(item, copyStack, serverPlayer));
+                    }
                 }
             }
         }
