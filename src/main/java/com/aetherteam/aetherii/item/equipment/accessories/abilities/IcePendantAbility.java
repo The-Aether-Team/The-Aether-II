@@ -37,7 +37,7 @@ public interface IcePendantAbility extends FreezingBehavior<ItemStack> {
                 if (stack.is(AetherIIItems.ICE_PENDANT)) {
                     if (wearer instanceof ServerPlayer serverPlayer) {
                         ItemStack copyStack = stack.copy();
-                        stack.hurtAndBreak(damage / 4, serverLevel, wearer, item -> AccessoryUtil.breakAccessory(item, copyStack, serverPlayer));
+                        stack.hurtAndBreak(damage / 3, serverLevel, wearer, item -> AccessoryUtil.breakAccessory(item, copyStack, serverPlayer));
                     }
                 }
             }
