@@ -79,7 +79,8 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.SHEER_TUNDRA,
                 HolyIslesBiomes.CONTAMINATED_JUNGLE,
                 HolyIslesBiomes.BATTLEGROUND_WASTES,
-                HolyIslesBiomes.EXPANSE
+                HolyIslesBiomes.EXPANSE,
+                HolyIslesBiomes.HESTVEIL_CAVERNS
         );
 
         this.tag(AetherIITags.Biomes.AETHER_MUSIC).add(
