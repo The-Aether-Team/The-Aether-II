@@ -16,7 +16,7 @@ public class AetherCloudsRenderer implements CustomCloudsRenderer {
     @Override
     public boolean renderClouds(LevelRenderState levelRenderState, Vec3 camPos, CloudStatus cloudStatus, int cloudColor, float cloudHeight, Matrix4f modelViewMatrix) {
         if (levelRenderState.customCloudsRenderer != null) {
-            Minecraft.getInstance().levelRenderer.getCloudRenderer().render(this.getCloudColor(levelRenderState), cloudStatus, cloudHeight, camPos, levelRenderState.gameTime, DeltaTracker.ONE.getGameTimeDeltaPartialTick(false));
+            Minecraft.getInstance().levelRenderer.getCloudRenderer().render(cloudColor, cloudStatus, cloudHeight, camPos, levelRenderState.gameTime, DeltaTracker.ONE.getGameTimeDeltaPartialTick(false));
         }
         return true;
     }
@@ -26,7 +26,7 @@ public class AetherCloudsRenderer implements CustomCloudsRenderer {
         float f = levelRenderState.skyRenderState.rainBrightness;
         if (f > 0.0F) {
             int j = ARGB.scaleRGB(ARGB.greyscale(i), 0.6F);
-            i = ARGB.linearLerp(f * 0.5F, i, j); //reduced darkening
+            i = ARGB.srgbLerp(f * 0.5F, i, j); //reduced darkening
         }
 
         float f3 = levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_TIME_OF_DAY_KEY, 0.0F);
@@ -36,7 +36,7 @@ public class AetherCloudsRenderer implements CustomCloudsRenderer {
         float f2 = levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_THUNDER_KEY, 0.0F);
         if (f2 > 0.0F) {
             int k = ARGB.scaleRGB(ARGB.greyscale(i), 0.2F);
-            i = ARGB.linearLerp(f2 * 0.5F, i, k); //reduced darkening
+            i = ARGB.srgbLerp(f2 * 0.5F, i, k); //reduced darkening
         }
 
         return i;
