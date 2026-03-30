@@ -30,19 +30,22 @@ public class AccessoryLayer<S extends HumanoidRenderState, M extends HumanoidMod
 
     }
 
-//    @Override //todo
-//    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, S state, float netHeadYaw, float headPitch) {
-//        if (Minecraft.getInstance().player != null) {
-//            AccessoryUtil.getFirst(Minecraft.getInstance().player, AccessoryContainer.SlotType.ACCESSORY).ifPresent((stack) -> {
-//                HumanoidModel<S> model = this.accessoryModel;
-//                this.getParentModel().copyPropertiesTo(model);
-//
-//                Identifier itemLocation = BuiltInRegistries.ITEM.getKey(stack.getItem());
-//                Identifier texture = Identifier.fromNamespaceAndPath(itemLocation.getNamespace(), "textures/entity/equipment/accessory/" + itemLocation.getPath() + ".png");
-//                VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(texture), stack.hasFoil());
-//
-//                model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
-//            });
-//        }
-//    }
+    /*
+    @Override //todo
+    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, S state, float netHeadYaw, float headPitch) {
+        if (Minecraft.getInstance().player != null) {
+            AccessoryUtil.getFirst(Minecraft.getInstance().player, AccessoryContainer.SlotType.ACCESSORY).ifPresent((stack) -> {
+                HumanoidModel<S> model = this.accessoryModel;
+                this.getParentModel().copyPropertiesTo(model);
+
+                Identifier itemLocation = BuiltInRegistries.ITEM.getKey(stack.getItem());
+                Identifier texture = Identifier.fromNamespaceAndPath(itemLocation.getNamespace(), "textures/entity/equipment/accessory/" + itemLocation.getPath() + ".png");
+                VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(texture), stack.hasFoil());
+
+                model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
+            });
+        }
+    }
+
+     */
 }
