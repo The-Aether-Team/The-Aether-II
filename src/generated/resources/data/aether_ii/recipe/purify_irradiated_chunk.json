@@ -48,6 +48,26 @@
           "type": "item",
           "value": {
             "count": 1,
+            "id": "aether_ii:zanite_pendant"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
+            "id": "aether_ii:ice_pendant"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
             "id": "aether_ii:charm_of_efficiency_1"
           }
         },
