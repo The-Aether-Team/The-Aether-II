@@ -57,6 +57,7 @@ public class AetherIIClient {
         AetherIIClientEventListeners.listen(bus);
 
         bus.addListener(DimensionClientListener::onRenderFog);
+        bus.addListener(DimensionClientListener::onFogColorComputed);
         bus.addListener(LevelClientListener::onRenderLevelLast);
         bus.addListener(AetherIIDimensionRenderers::extractDimensionEffect);
 
