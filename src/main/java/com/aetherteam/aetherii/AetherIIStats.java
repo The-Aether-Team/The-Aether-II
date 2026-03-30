@@ -49,7 +49,7 @@ public class AetherIIStats {
             EquipmentSlotGroup.MAINHAND);
     public static final ItemAttributeModifiers.Entry CHARM_ATTACK_SPEED_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.ATTACK_SPEED,
-            new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "charm.attack_speed"), 0.25, AttributeModifier.Operation.ADD_VALUE),
+            new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "charm.attack_speed"), 0.15, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.MAINHAND);
     public static final ItemAttributeModifiers.Entry CHARM_ATTACK_KNOCKBACK_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.ATTACK_KNOCKBACK,
@@ -70,7 +70,7 @@ public class AetherIIStats {
             EquipmentSlotGroup.ARMOR);
     public static final ItemAttributeModifiers.Entry CHARM_KNOCKBACK_RESISTANCE_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.KNOCKBACK_RESISTANCE,
-            new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "charm.knockback_resistance"), 0.25, AttributeModifier.Operation.ADD_VALUE),
+            new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "charm.knockback_resistance"), 0.1, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.ARMOR);
     public static final ItemAttributeModifiers.Entry CHARM_MOVEMENT_SPEED_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.MOVEMENT_SPEED,
