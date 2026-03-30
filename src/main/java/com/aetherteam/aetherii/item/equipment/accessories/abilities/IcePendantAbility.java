@@ -31,17 +31,24 @@ public interface IcePendantAbility extends FreezingBehavior<ItemStack> {
      * @param stack  The accessory {@link ItemStack}.
      */
     default void freezeTick(LivingEntity wearer, ItemStack stack) {
-        if (!(wearer instanceof Player player) || (!player.getAbilities().flying && !player.isSpectator())) {
-            int damage = this.freezeBlocks(wearer.level(), wearer.blockPosition(), stack, 1.9F);
-            if (wearer.level() instanceof ServerLevel serverLevel) {
-                if (stack.is(AetherIIItems.ICE_PENDANT)) {
-                    if (wearer instanceof ServerPlayer serverPlayer) {
-                        ItemStack copyStack = stack.copy();
-                        stack.hurtAndBreak(damage / 3, serverLevel, wearer, item -> AccessoryUtil.breakAccessory(item, copyStack, serverPlayer));
-                    }
-                }
-            }
+        if (wearer instanceof Player player && (player.getAbilities().flying || player.isSpectator())) {
+            return;
         }
+
+        int damage = this.freezeBlocks(wearer.level(), wearer.blockPosition(), stack, 1.9F);
+
+        if (!(wearer.level() instanceof ServerLevel serverLevel)) {
+            return;
+        }
+        if (!stack.is(AetherIIItems.ICE_PENDANT)) {
+            return;
+        }
+        if (!(wearer instanceof ServerPlayer serverPlayer)) {
+            return;
+        }
+
+        ItemStack copyStack = stack.copy();
+        stack.hurtAndBreak(damage / 3, serverLevel, wearer, item -> AccessoryUtil.breakAccessory(item, copyStack, serverPlayer));
     }
 
     /**
@@ -56,27 +63,30 @@ public interface IcePendantAbility extends FreezingBehavior<ItemStack> {
      */
     @Override
     default int freezeFromRecipe(Level level, BlockPos pos, BlockPos origin, ItemStack source, int flag) {
-        if (!level.isClientSide()) {
-            BlockState oldBlockState = level.getBlockState(pos);
-            FluidState fluidState = level.getFluidState(pos);
-            if (level instanceof ServerLevel serverLevel) {
-                for (RecipeHolder<AccessoryFreezableRecipe> recipe : serverLevel.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.ACCESSORY_FREEZABLE.get())) {
-                    AccessoryFreezableRecipe freezableRecipe = recipe.value();
-                    if (fluidState.isEmpty() || oldBlockState.is(fluidState.createLegacyBlock().getBlock())) { // Default freezing behavior.
-                        if (freezableRecipe.matches(level, pos, oldBlockState)) {
-                            BlockState newBlockState = freezableRecipe.getResultState(oldBlockState);
-                            Optional<CacheableFunction> function = freezableRecipe.getFunction();
-                            return this.freezeBlockAt(level, pos, origin, oldBlockState, newBlockState, function, source, flag);
-                        }
-                    } else if (!oldBlockState.hasProperty(BlockStateProperties.WATERLOGGED)) { // Breaks a block before freezing if it has a FluidState attached by default (this is different from waterlogging for blocks like Kelp and Seagrass).
-                        oldBlockState = fluidState.createLegacyBlock();
-                        if (freezableRecipe.matches(level, pos, oldBlockState)) {
-                            level.destroyBlock(pos, true);
-                            BlockState newBlockState = freezableRecipe.getResultState(oldBlockState);
-                            Optional<CacheableFunction> function = freezableRecipe.getFunction();
-                            return this.freezeBlockAt(level, pos, origin, oldBlockState, newBlockState, function, source, flag);
-                        }
-                    }
+        if (level.isClientSide()) {
+            return 0;
+        }
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return 0;
+        }
+        BlockState oldBlockState = level.getBlockState(pos);
+        FluidState fluidState = level.getFluidState(pos);
+
+        for (RecipeHolder<AccessoryFreezableRecipe> recipe : serverLevel.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.ACCESSORY_FREEZABLE.get())) {
+            AccessoryFreezableRecipe freezableRecipe = recipe.value();
+            if (fluidState.isEmpty() || oldBlockState.is(fluidState.createLegacyBlock().getBlock())) { // Default freezing behavior.
+                if (freezableRecipe.matches(level, pos, oldBlockState)) {
+                    BlockState newBlockState = freezableRecipe.getResultState(oldBlockState);
+                    Optional<CacheableFunction> function = freezableRecipe.getFunction();
+                    return this.freezeBlockAt(level, pos, origin, oldBlockState, newBlockState, function, source, flag);
+                }
+            } else if (!oldBlockState.hasProperty(BlockStateProperties.WATERLOGGED)) { // Breaks a block before freezing if it has a FluidState attached by default (this is different from waterlogging for blocks like Kelp and Seagrass).
+                oldBlockState = fluidState.createLegacyBlock();
+                if (freezableRecipe.matches(level, pos, oldBlockState)) {
+                    level.destroyBlock(pos, true);
+                    BlockState newBlockState = freezableRecipe.getResultState(oldBlockState);
+                    Optional<CacheableFunction> function = freezableRecipe.getFunction();
+                    return this.freezeBlockAt(level, pos, origin, oldBlockState, newBlockState, function, source, flag);
                 }
             }
         }
