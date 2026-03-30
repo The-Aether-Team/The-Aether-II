@@ -763,6 +763,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> ARKENIUM_CHAIN = register("arkenium_chain", ChainBlock::new, () -> Block.Properties.ofFullCopy(Blocks.IRON_CHAIN));
     public static final DeferredBlock<Block> SKYROOT_CRAFTING_TABLE = register("skyroot_crafting_table", SkyrootCraftingTableBlock::new, () -> Block.Properties.ofFullCopy(Blocks.CRAFTING_TABLE));
     public static final DeferredBlock<Block> HOLYSTONE_FURNACE = register("holystone_furnace", HolystoneFurnaceBlock::new, () -> Block.Properties.ofFullCopy(Blocks.FURNACE));
+    public static final DeferredBlock<Block> HOLYSTONE_SMOKER = register("holystone_smoker", HolystoneSmokerBlock::new, () -> Block.Properties.ofFullCopy(Blocks.SMOKER));
     public static final DeferredBlock<Block> AMBER_HOURGLASS = register("amber_hourglass", AmberHourglassBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.SKYROOT_PLANKS.get()).noOcclusion());
     public static final DeferredBlock<Block> ALTAR = register("altar", AltarBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE.get()).noOcclusion());
     public static final DeferredBlock<Block> ARTISANS_BENCH = register("artisans_bench", ArtisansBenchBlock::new, () -> Block.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion());
@@ -770,6 +771,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> ALKAHEST_PURIFIER = register("alkahest_purifier", AlkahestPurifierBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ARKENIUM_BLOCK.get()).noOcclusion());
     public static final DeferredBlock<CampfireBlock> AMBROSIUM_CAMPFIRE = register("ambrosium_campfire", (properties) -> new AmbrosiumCampfireBlock(false, 1, properties), () -> Block.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).lightLevel((state) -> state.getValue(BlockStateProperties.LIT) ? 15 : 0).noOcclusion().ignitedByLava());
     public static final DeferredBlock<Block> SKYROOT_CHEST = register("skyroot_chest", (properties) -> new SkyrootChestBlock(properties, AetherIIBlockEntityTypes.SKYROOT_CHEST::get), () -> Block.Properties.ofFullCopy(Blocks.CHEST));
+    public static final DeferredBlock<Block> SKYROOT_BARREL = register("skyroot_barrel", BarrelBlock::new, () -> Block.Properties.ofFullCopy(Blocks.BARREL));
     public static final DeferredBlock<LadderBlock> SKYROOT_LADDER = register("skyroot_ladder", LadderBlock::new, () -> Block.Properties.ofFullCopy(Blocks.LADDER).strength(0.4F).sound(SoundType.LADDER).noOcclusion());
     public static final DeferredBlock<BedrollBlock> CLOUDWOOL_BEDROLL = register("cloudwool_bedroll", BedrollBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).sound(SoundType.WOOL).strength(0.2F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY), AetherIIBlocks.bedrollBlockItem());
 
