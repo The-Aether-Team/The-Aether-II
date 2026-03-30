@@ -113,8 +113,8 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.blendDensity(density);
         density = DensityFunctions.interpolated(density);
         density = density.squeeze();
-        density = DensityFunctions.add(density, DensityFunctions.constant(0.125));
-        density = DensityFunctions.findTopSurface(density, DensityFunctions.constant(160), 96, 16);
+        density = DensityFunctions.add(density, DensityFunctions.constant(0.165));
+        density = DensityFunctions.findTopSurface(density, DensityFunctions.constant(160), 96, 24);
         return density;
     }
 
