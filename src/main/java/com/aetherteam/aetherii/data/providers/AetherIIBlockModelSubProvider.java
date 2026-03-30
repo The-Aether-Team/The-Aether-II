@@ -1123,6 +1123,18 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.itemModelOutput.accept(item, unbaked);
     }
 
+    public void createBarrel(Block block) {
+        Identifier identifier = TextureMapping.getBlockTexture(block, "_top_open");
+        MultiVariant barrel = plainVariant(TexturedModel.CUBE_TOP_BOTTOM.create(block, this.modelOutput));
+        MultiVariant barrelOpen = plainVariant(
+                TexturedModel.CUBE_TOP_BOTTOM
+                        .get(block)
+                        .updateTextures(mapping -> mapping.put(TextureSlot.TOP, identifier))
+                        .createWithSuffix(block, "_open", this.modelOutput)
+        );
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(BlockStateProperties.OPEN).select(false, barrel).select(true, barrelOpen)).with(ROTATIONS_COLUMN_WITH_FACING));
+    }
+
     public void createSentryCrate(Block block, Block particle) {
         this.createParticleOnlyBlock(block, particle);
         Item item = block.asItem();
