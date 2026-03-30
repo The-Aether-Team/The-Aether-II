@@ -37,11 +37,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -375,6 +377,10 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
 
     protected BiomeParameterRecipeBuilder icestoneFreezableTag(Block result, Block ingredient, TagKey<Biome> tagKey) {
         return BiomeParameterRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, tagKey, IcestoneFreezableRecipe::new);
+    }
+
+    protected BlockStateRecipeBuilder accessoryFreezable(Block result, Block ingredient) { //TODO: Biome specific results
+        return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, AccessoryFreezableRecipe::new);
     }
 
     protected BlockStateRecipeBuilder alkahestCorrosion(Block result, Block ingredient) {

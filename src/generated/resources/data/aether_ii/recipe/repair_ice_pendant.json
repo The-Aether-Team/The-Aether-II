@@ -1,0 +1,12 @@
+{
+  "type": "aether_ii:altar_enchanting",
+  "category": "repairing",
+  "experience": 0.0,
+  "fuel_count": 3,
+  "ingredient": "aether_ii:ice_pendant",
+  "processing_time": 200,
+  "result": {
+    "count": 1,
+    "id": "aether_ii:ice_pendant"
+  }
+}

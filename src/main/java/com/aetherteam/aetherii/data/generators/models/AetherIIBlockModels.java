@@ -11,10 +11,7 @@ import com.aetherteam.aetherii.data.resources.builders.models.AetherIITexturedMo
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
-import net.minecraft.client.data.models.model.ModelInstance;
-import net.minecraft.client.data.models.model.ModelLocationUtils;
-import net.minecraft.client.data.models.model.TextureMapping;
-import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.client.data.models.model.*;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Blocks;
@@ -555,5 +552,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Furniture
         this.createOutpostCampfire();
         this.createMural();
+
+        this.createMeltingBlock(AetherIIBlocks.FROSTED_ICE.get(), Blocks.FROSTED_ICE, AetherIIModelTemplates.TEMPLATE_TRANSLUCENT_CUBE_ALL);
+        this.createMeltingBlock(AetherIIBlocks.FROSTED_ARCTIC_ICE.get(), AetherIIBlocks.FROSTED_ARCTIC_ICE.get(), AetherIIModelTemplates.TEMPLATE_TRANSLUCENT_CUBE_ALL);
+        this.createMeltingBlock(AetherIIBlocks.UNSTABLE_OBSIDIAN.get(), AetherIIBlocks.UNSTABLE_OBSIDIAN.get(), ModelTemplates.CUBE_ALL);
     }
 }

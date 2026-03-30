@@ -16,6 +16,7 @@ import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.BrokenItem;
 import com.aetherteam.aetherii.item.equipment.accessories.GlovesItem;
+import com.aetherteam.aetherii.item.equipment.accessories.IcePendantItem;
 import com.aetherteam.aetherii.item.equipment.accessories.KineticThrustersItem;
 import com.aetherteam.aetherii.item.equipment.accessories.ZanitePendantItem;
 import com.aetherteam.aetherii.item.equipment.accessories.companions.CompanionItem;
@@ -226,6 +227,7 @@ public class AetherIIItems {
 
     // Accessories
     public static final DeferredItem<Item> ZANITE_PENDANT = register("zanite_pendant", ZanitePendantItem::new);
+    public static final DeferredItem<Item> ICE_PENDANT = register("ice_pendant", IcePendantItem::new);
 
     // Charms
     public static final DeferredItem<Item> CHARM_OF_EFFICIENCY_I = register("charm_of_efficiency_1", (properties) -> new CharmItem(properties, Charms.Type.TOOL, Charms.Tier.ONE, AetherIIStats.CHARM_MINING_EFFICIENCY_BONUS), () -> new Item.Properties().rarity(Rarity.UNCOMMON));

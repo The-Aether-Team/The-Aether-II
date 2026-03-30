@@ -19,6 +19,7 @@ public class AetherIIRecipeTypes {
     public static final DeferredHolder<RecipeType<?>, RecipeType<AlkahestCorrosionRecipe>> ALKAHEST_CORROSION = RECIPE_TYPES.register("alkahest_corrosion", () -> RecipeType.simple(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_corrosion")));
     public static final DeferredHolder<RecipeType<?>, RecipeType<SwetGelRecipe>> SWET_GEL_CONVERSION = RECIPE_TYPES.register("swet_gel_conversion", () -> RecipeType.simple(Identifier.fromNamespaceAndPath(AetherII.MODID, "swet_gel_conversion")));
     public static final DeferredHolder<RecipeType<?>, RecipeType<IcestoneFreezableRecipe>> ICESTONE_FREEZABLE = RECIPE_TYPES.register("icestone_freezable", () -> RecipeType.simple(Identifier.fromNamespaceAndPath(AetherII.MODID, "icestone_freezable")));
+    public static final DeferredHolder<RecipeType<?>, RecipeType<AccessoryFreezableRecipe>> ACCESSORY_FREEZABLE = RECIPE_TYPES.register("accessory_freezable", () -> RecipeType.simple(Identifier.fromNamespaceAndPath(AetherII.MODID, "accessory_freezable")));
 
     public static final DeferredHolder<RecipeType<?>, RecipeType<HourglassRestoringRecipe>> HOURGLASS_RESTORING = RECIPE_TYPES.register("hourglass_restoring", () -> RecipeType.simple(Identifier.fromNamespaceAndPath(AetherII.MODID, "hourglass_restoring")));
     public static final DeferredHolder<RecipeType<?>, RecipeType<AltarEnchantingRecipe>> ALTAR_ENCHANTING = RECIPE_TYPES.register("altar_enchanting", () -> RecipeType.simple(Identifier.fromNamespaceAndPath(AetherII.MODID, "altar_enchanting")));
