@@ -26,11 +26,11 @@ public class AetherSkyboxRenderer implements CustomSkyboxRenderer {
         SkyRenderer skyRenderer = ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).aether_ii$getSkyRenderer();
         setupFog.run();
         PoseStack poseStack = new PoseStack();
+        float timeOfDay = levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_TIME_OF_DAY_KEY, 0.0F);
         float sunAngle = skyRenderState.sunAngle;
-        int sunColor = skyRenderState.sunriseAndSunsetColor;
+        int sunColor = getSunriseOrSunsetColor(timeOfDay);
         skyRenderer.renderSkyDisc(skyRenderState.skyColor);
         MultiBufferSource.BufferSource multiBufferSource = renderBuffers.bufferSource();
-        float timeOfDay = levelRenderState.getRenderDataOrDefault(AetherIIDimensionRenderers.DATA_TIME_OF_DAY_KEY, 0.0F);
         if (this.isSunriseOrSunset(timeOfDay)) {
             skyRenderer.renderSunriseAndSunset(poseStack, sunAngle, sunColor);
         }
@@ -40,12 +40,12 @@ public class AetherSkyboxRenderer implements CustomSkyboxRenderer {
                 skyRenderState.moonPhase,
                 skyRenderState.rainBrightness,
                 skyRenderState.starBrightness);
-        this.renderCloudCoverDisc(levelRenderState, skyRenderState, poseStack, multiBufferSource, timeOfDay, skyRenderState.skyColor, skyRenderState.sunriseAndSunsetColor);
+        this.renderCloudCoverDisc(levelRenderState, poseStack, multiBufferSource, timeOfDay, skyRenderState.skyColor, skyRenderState.sunriseAndSunsetColor);
         multiBufferSource.endBatch();
         return true;
     }
 
-    public void renderCloudCoverDisc(LevelRenderState levelRenderState, SkyRenderState skyRenderState, PoseStack poseStack, MultiBufferSource.BufferSource multiBufferSource, float timeOfDay, int skyColor, int sunColor) {
+    public void renderCloudCoverDisc(LevelRenderState levelRenderState, PoseStack poseStack, MultiBufferSource.BufferSource multiBufferSource, float timeOfDay, int skyColor, int sunColor) {
         poseStack.pushPose();
         poseStack.mulPose(Axis.XP.rotationDegrees(0.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
@@ -100,4 +100,10 @@ public class AetherSkyboxRenderer implements CustomSkyboxRenderer {
         return f >= -0.4F && f <= 0.4F;
     }
 
+    public int getSunriseOrSunsetColor(float timeOfDay) {
+        float f = Mth.cos(timeOfDay * Mth.TWO_PI);
+        float f1 = f / 0.4F * 0.5F + 0.5F;
+        float f2 = Mth.square(1.0F - (1.0F - Mth.sin(f1 * Mth.PI)) * 0.99F);
+        return ARGB.colorFromFloat(f2, f1 * 0.3F + 0.65F, f1 * f1 * 0.7F + 0.25F, 0.4F);
+    }
 }

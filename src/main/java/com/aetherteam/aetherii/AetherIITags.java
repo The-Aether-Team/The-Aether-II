@@ -309,6 +309,8 @@ public class AetherIITags {
 
         public static final TagKey<Biome> AETHER_MUSIC = tag("aether_music");
 
+        public static final TagKey<Biome> MODIFIED_SUNRISE_SUNSET_COLORS = tag("modified_sunrise_sunrise_colors");
+
         private static TagKey<Biome> tag(String name) {
             return TagKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(AetherII.MODID, name));
         }
