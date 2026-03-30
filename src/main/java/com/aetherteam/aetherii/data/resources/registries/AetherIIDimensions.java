@@ -51,7 +51,7 @@ public class AetherIIDimensions {
                 DimensionType.CardinalLightType.DEFAULT,
                 EnvironmentAttributeMap.builder()
                 .set(EnvironmentAttributes.CLOUD_COLOR, -1)
-                .set(EnvironmentAttributes.CLOUD_HEIGHT, 256.33F)
+                .set(EnvironmentAttributes.CLOUD_HEIGHT, 320.33F)
                 .set(EnvironmentAttributes.BED_RULE, BedRule.CAN_SLEEP_WHEN_DARK)
                 .set(EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, false)
                 .set(EnvironmentAttributes.NETHER_PORTAL_SPAWNS_PIGLINS, true)

@@ -11,7 +11,7 @@
     "minecraft:gameplay/nether_portal_spawns_piglin": true,
     "minecraft:gameplay/respawn_anchor_works": false,
     "minecraft:visual/cloud_color": "#ffffffff",
-    "minecraft:visual/cloud_height": 256.33
+    "minecraft:visual/cloud_height": 320.33
   },
   "coordinate_scale": 1.0,
   "has_ceiling": false,
