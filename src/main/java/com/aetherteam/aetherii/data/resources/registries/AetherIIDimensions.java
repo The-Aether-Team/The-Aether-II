@@ -5,13 +5,14 @@ import com.aetherteam.aetherii.data.resources.builders.worldgen.holyisles.HolyIs
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.biome.OverworldBiomes;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TimelineTags;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.attribute.EnvironmentAttribute;
-import net.minecraft.world.attribute.EnvironmentAttributeMap;
+import net.minecraft.world.attribute.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
@@ -35,24 +36,7 @@ public class AetherIIDimensions {
     public static final ResourceKey<LevelStem> AETHER_HOLY_ISLES_LEVEL_STEM = ResourceKey.create(Registries.LEVEL_STEM, AETHER_HOLY_ISLES_LEVEL_ID);
 
     public static void bootstrapDimensionType(BootstrapContext<DimensionType> context) {
-//        context.register(AETHER_HOLY_ISLES_DIMENSION_TYPE, new DimensionType(
-//                OptionalLong.empty(),
-//                true,
-//                false,
-//                false,
-//                true,
-//                1.0D,
-//                true,
-//                false,
-//                -32,
-//                416,
-//                416,
-//                BlockTags.INFINIBURN_OVERWORLD,
-//                AETHER_HOLY_ISLES_LEVEL_ID,
-//                0.0F,
-//                Optional.of(256),
-//                new DimensionType.MonsterSettings(false, false, UniformInt.of(0, 7), 0)));
-        context.register(AETHER_HOLY_ISLES_DIMENSION_TYPE, new DimensionType( //todo
+        context.register(AETHER_HOLY_ISLES_DIMENSION_TYPE, new DimensionType(
                 false,
                 true,
                 false,
@@ -65,7 +49,13 @@ public class AetherIIDimensions {
                 new DimensionType.MonsterSettings(UniformInt.of(0, 7), 0),
                 DimensionType.Skybox.OVERWORLD,
                 DimensionType.CardinalLightType.DEFAULT,
-                EnvironmentAttributeMap.EMPTY,
+                EnvironmentAttributeMap.builder()
+                .set(EnvironmentAttributes.CLOUD_COLOR, -1)
+                .set(EnvironmentAttributes.CLOUD_HEIGHT, 256.33F)
+                .set(EnvironmentAttributes.BED_RULE, BedRule.CAN_SLEEP_WHEN_DARK)
+                .set(EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, false)
+                .set(EnvironmentAttributes.NETHER_PORTAL_SPAWNS_PIGLINS, true)
+                .build(),
                 context.lookup(Registries.TIMELINE).getOrThrow(TimelineTags.IN_OVERWORLD)));
     }
 

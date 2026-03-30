@@ -1,8 +1,9 @@
 package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.renderer.level.AetherCloudsRenderer;
 import com.aetherteam.aetherii.client.renderer.level.AetherSkyboxRenderer;
-import com.aetherteam.aetherii.client.renderer.level.AetherWeatherEffectRender;
+import com.aetherteam.aetherii.client.renderer.level.AetherWeatherEffectRenderer;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
@@ -19,10 +20,12 @@ public class AetherIIDimensionRenderers {
 
     public static final Identifier AETHER_SKY_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "aether_sky");
     public static final Identifier AETHER_WEATHER_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "aether_weather");
+    public static final Identifier AETHER_CLOUDS_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "aether_clouds");
 
     public static void registerDimensionEffect(RegisterCustomEnvironmentEffectRendererEvent event) {
         event.registerSkyboxRenderer(AETHER_SKY_ID, new AetherSkyboxRenderer());
-        event.registerWeatherEffectRenderer(AETHER_WEATHER_ID, new AetherWeatherEffectRender());
+        event.registerWeatherEffectRenderer(AETHER_WEATHER_ID, new AetherWeatherEffectRenderer());
+        event.registerCloudRenderer(AETHER_CLOUDS_ID, new AetherCloudsRenderer());
     }
 
     public static void extractDimensionEffect(ExtractLevelRenderStateEvent event) {

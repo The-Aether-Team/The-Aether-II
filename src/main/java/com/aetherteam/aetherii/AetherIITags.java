@@ -211,7 +211,6 @@ public class AetherIITags {
         public static final TagKey<Item> ZANITE_REPAIRING = tag("zanite_repairing");
         public static final TagKey<Item> ARKENIUM_REPAIRING = tag("arkenium_repairing");
         public static final TagKey<Item> GRAVITITE_REPAIRING = tag("gravitite_repairing");
-        public static final TagKey<Item> ICE_REPAIRING = tag("ice_repairing");
         public static final TagKey<Item> SENTRY_BOOTS_REPAIRING = tag("sentry_boots_repairing");
         public static final TagKey<Item> HAMMER_OF_DEMOLITION_REPAIRING = tag("hammer_of_demolition_repairing");
         public static final TagKey<Item> NEPTUNE_REPAIRING = tag("neptune_repairing");
@@ -308,8 +307,6 @@ public class AetherIITags {
         public static final TagKey<Biome> ARCTIC_ICE = tag("arctic_ice");
 
         public static final TagKey<Biome> AETHER_MUSIC = tag("aether_music");
-
-        public static final TagKey<Biome> MODIFIED_SUNRISE_SUNSET_COLORS = tag("modified_sunrise_sunrise_colors");
 
         private static TagKey<Biome> tag(String name) {
             return TagKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(AetherII.MODID, name));

@@ -215,7 +215,7 @@ public class HolyIslesBiomeBuilders { //TODO
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.LOWER_GREEN_AERCLOUD)
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.LOWER_PURPLE_AERCLOUD);
         if (tree.isPresent()) builder = builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, tree.get());
-        return highfieldDefinition(
+        return highfieldsDefinition(
                 true,
                 temperature,
                 downfall,
@@ -632,7 +632,7 @@ public class HolyIslesBiomeBuilders { //TODO
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.LOWER_GREEN_AERCLOUD)
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HolyIslesPlacedFeatures.LOWER_PURPLE_AERCLOUD);
         if (tree.isPresent()) builder = builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, tree.get());
-        return irradiateDefinition(
+        return irradiatedDefinition(
                 true,
                 temperature,
                 downfall,
@@ -654,7 +654,7 @@ public class HolyIslesBiomeBuilders { //TODO
     public static Biome makeAercloudSeaBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
-        return highfieldDefinition(
+        return highfieldsDefinition(
                 true,
                 temperature,
                 downfall,
@@ -696,7 +696,7 @@ public class HolyIslesBiomeBuilders { //TODO
     public static Biome makeHeastveilCavernsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
-        return highfieldDefinition(
+        return highfieldsDefinition(
                 true,
                 temperature,
                 downfall,
@@ -752,7 +752,7 @@ public class HolyIslesBiomeBuilders { //TODO
         );
     }
 
-    public static Biome highfieldDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
+    public static Biome highfieldsDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xecebfc)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xc9d1ff)
@@ -760,6 +760,7 @@ public class HolyIslesBiomeBuilders { //TODO
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
                 .setAttribute(NeoForgeEnvironmentAttributes.CUSTOM_SKYBOX, AetherIIDimensionRenderers.AETHER_SKY_ID)
                 .setAttribute(NeoForgeEnvironmentAttributes.CUSTOM_WEATHER_EFFECTS, AetherIIDimensionRenderers.AETHER_WEATHER_ID)
+                .setAttribute(NeoForgeEnvironmentAttributes.CUSTOM_CLOUDS, AetherIIDimensionRenderers.AETHER_CLOUDS_ID)
                 .hasPrecipitation(precipitation)
                 .temperature(temperature)
                 .downfall(downfall)
@@ -778,6 +779,7 @@ public class HolyIslesBiomeBuilders { //TODO
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
                 .setAttribute(NeoForgeEnvironmentAttributes.CUSTOM_SKYBOX, AetherIIDimensionRenderers.AETHER_SKY_ID)
                 .setAttribute(NeoForgeEnvironmentAttributes.CUSTOM_WEATHER_EFFECTS, AetherIIDimensionRenderers.AETHER_WEATHER_ID)
+                .setAttribute(NeoForgeEnvironmentAttributes.CUSTOM_CLOUDS, AetherIIDimensionRenderers.AETHER_CLOUDS_ID)
                 .hasPrecipitation(precipitation)
                 .temperature(temperature)
                 .downfall(downfall)
@@ -796,6 +798,7 @@ public class HolyIslesBiomeBuilders { //TODO
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false)))
                 .setAttribute(NeoForgeEnvironmentAttributes.CUSTOM_SKYBOX, AetherIIDimensionRenderers.AETHER_SKY_ID)
                 .setAttribute(NeoForgeEnvironmentAttributes.CUSTOM_WEATHER_EFFECTS, AetherIIDimensionRenderers.AETHER_WEATHER_ID)
+                .setAttribute(NeoForgeEnvironmentAttributes.CUSTOM_CLOUDS, AetherIIDimensionRenderers.AETHER_CLOUDS_ID)
                 .hasPrecipitation(precipitation)
                 .temperature(temperature)
                 .downfall(downfall)
@@ -806,7 +809,7 @@ public class HolyIslesBiomeBuilders { //TODO
                 .build();
     }
 
-    public static Biome irradiateDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
+    public static Biome irradiatedDefinition(boolean precipitation, float temperature, float downfall, BiomeSpecialEffects effects, MobSpawnSettings spawnSettings, BiomeGenerationSettings generationSettings, Biome.TemperatureModifier temperatureModifier) {
         return new Biome.BiomeBuilder()
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xF0E8BE)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xfcebc5)
@@ -815,6 +818,7 @@ public class HolyIslesBiomeBuilders { //TODO
                 .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, List.of(new AmbientParticle(AetherIIParticleTypes.AMBROSIUM.get(), 0.00625F)))
                 .setAttribute(NeoForgeEnvironmentAttributes.CUSTOM_SKYBOX, AetherIIDimensionRenderers.AETHER_SKY_ID)
                 .setAttribute(NeoForgeEnvironmentAttributes.CUSTOM_WEATHER_EFFECTS, AetherIIDimensionRenderers.AETHER_WEATHER_ID)
+                .setAttribute(NeoForgeEnvironmentAttributes.CUSTOM_CLOUDS, AetherIIDimensionRenderers.AETHER_CLOUDS_ID)
                 .hasPrecipitation(precipitation)
                 .temperature(temperature)
                 .downfall(downfall)

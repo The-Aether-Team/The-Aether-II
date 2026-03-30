@@ -18,6 +18,7 @@
     "minecraft:visual/fog_color": "#f0e8be",
     "minecraft:visual/sky_color": "#fcebc5",
     "minecraft:visual/water_fog_color": "#bccc81",
+    "neoforge:custom_clouds": "aether_ii:aether_clouds",
     "neoforge:custom_skybox": "aether_ii:aether_sky",
     "neoforge:custom_weather_effects": "aether_ii:aether_weather"
   },
