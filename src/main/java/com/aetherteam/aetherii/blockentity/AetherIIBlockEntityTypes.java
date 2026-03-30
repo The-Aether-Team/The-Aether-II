@@ -17,6 +17,9 @@ public class AetherIIBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HolystoneFurnaceBlockEntity>> HOLYSTONE_FURNACE = BLOCK_ENTITY_TYPES.register("holystone_furnace", () ->
             new BlockEntityType<>(HolystoneFurnaceBlockEntity::new, AetherIIBlocks.HOLYSTONE_FURNACE.get()));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HolystoneSmokerBlockEntity>> HOLYSTONE_SMOKER = BLOCK_ENTITY_TYPES.register("holystone_smoker", () ->
+            new BlockEntityType<>(HolystoneSmokerBlockEntity::new, AetherIIBlocks.HOLYSTONE_SMOKER.get()));
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SkyrootChestBlockEntity>> SKYROOT_CHEST = BLOCK_ENTITY_TYPES.register("skyroot_chest", () ->
             new BlockEntityType<>(SkyrootChestBlockEntity::new, AetherIIBlocks.SKYROOT_CHEST.get()));
 
@@ -102,5 +105,7 @@ public class AetherIIBlockEntityTypes {
                 AetherIIBlocks.GREATROOT_SHELF.get(),
                 AetherIIBlocks.WISPROOT_SHELF.get(),
                 AetherIIBlocks.AMBEROOT_SHELF.get());
+        event.modify(BlockEntityType.BARREL,
+                AetherIIBlocks.SKYROOT_BARREL.get());
     }
 }

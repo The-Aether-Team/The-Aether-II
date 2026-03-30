@@ -5,6 +5,9 @@ import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.command.AetherIICommands;
 import com.aetherteam.aetherii.loot.conditions.AetherIILootConditions;
 import com.aetherteam.aetherii.recipe.display.slot.AetherIISlotDisplays;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.neoforged.neoforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 
 import com.aetherteam.aetherii.advancement.predicate.AetherIIEntitySubPredicates;
@@ -199,6 +202,7 @@ public class AetherII {
 
         bus.addListener(AetherIICommands::registerCommands);
         bus.addListener(ReloadListeners::registerReloadListeners);
+        neoBus.addListener(AetherII::addAliases);
         neoBus.addListener(AetherIIBlockEntityTypes::registerValidBlockEntityTypes);
         neoBus.addListener(AetherIIAttributes::registerEntityAttributes);
         neoBus.addListener(AetherIIEntityTypes::registerSpawnPlacements);
@@ -276,5 +280,15 @@ public class AetherII {
         CauldronInteraction.POWDER_SNOW.map().put(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get(), AetherIICauldronInteractions.FILL_POWDER_SNOW);
         CauldronInteraction.WATER.map().put(AetherIIItems.SKYROOT_BUCKET.get(), AetherIICauldronInteractions.EMPTY_WATER);
         CauldronInteraction.POWDER_SNOW.map().put(AetherIIItems.SKYROOT_BUCKET.get(), AetherIICauldronInteractions.EMPTY_POWDER_SNOW);
+    }
+
+    public static void addAliases(RegisterEvent event) {
+        if (event.getRegistryKey() == Registries.ITEM) {
+            event.getRegistry().addAlias(Identifier.fromNamespaceAndPath(AetherII.MODID, "skyroot_spear"), Identifier.fromNamespaceAndPath(AetherII.MODID, "skyroot_pike"));
+            event.getRegistry().addAlias(Identifier.fromNamespaceAndPath(AetherII.MODID, "holystone_spear"), Identifier.fromNamespaceAndPath(AetherII.MODID, "holystone_pike"));
+            event.getRegistry().addAlias(Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite_spear"), Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite_pike"));
+            event.getRegistry().addAlias(Identifier.fromNamespaceAndPath(AetherII.MODID, "arkenium_spear"), Identifier.fromNamespaceAndPath(AetherII.MODID, "arkenium_pike"));
+            event.getRegistry().addAlias(Identifier.fromNamespaceAndPath(AetherII.MODID, "gravitite_spear"), Identifier.fromNamespaceAndPath(AetherII.MODID, "gravitite_pike"));
+        }
     }
 }
