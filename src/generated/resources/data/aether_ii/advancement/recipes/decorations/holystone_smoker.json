@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:smoker_from_holystone_furnace"
+        "recipe": "aether_ii:holystone_smoker"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:smoker_from_holystone_furnace"
+      "aether_ii:holystone_smoker"
     ]
   }
 }
