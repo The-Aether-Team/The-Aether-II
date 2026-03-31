@@ -150,53 +150,47 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
         ModelPart gloveArm = arm == HumanoidArm.RIGHT ? model2.rightArm : model2.leftArm;
         ModelPart playerArm = arm == HumanoidArm.RIGHT ? model.rightArm : model.leftArm;
         gloveArm.resetPose();
-      //  gloveArm.offsetPos(new Vector3f(playerArm.x, playerArm.y, playerArm.z));
         gloveArm.offsetRotation(new Vector3f(playerArm.xRot, playerArm.yRot, playerArm.zRot));
 
-       // for (ModelPart modelPart : glovesModel.root().getAllParts()) {
-          //  if (modelPart == gloveArm) {
+        collector
+                .submitModelPart(
+                        gloveArm,
+                        poseStack,
+                        RenderTypes.armorCutoutNoCull(texture),
+                        packedLight,
+                        OverlayTexture.NO_OVERLAY,
+                        null
+                );
 
-                collector
-                        .submitModelPart(
-                                gloveArm,
-                                poseStack,
-                                RenderTypes.armorCutoutNoCull(texture),
-                                packedLight,
-                                OverlayTexture.NO_OVERLAY,
-                                null
-                        );
+        if (stack.is(ItemTags.DYEABLE)) {
+            IClientItemExtensions extensions = IClientItemExtensions.of(stack);
+            int color = ARGB.opaque(extensions.getDefaultDyeColor(stack));
+            collector
+                    .submitModelPart(
+                            gloveArm,
+                            poseStack,
+                            RenderTypes.armorCutoutNoCull(texture),
+                            packedLight,
+                            OverlayTexture.NO_OVERLAY,
+                            null,
+                            color,
+                            null
+                    );
 
-                if (stack.is(ItemTags.DYEABLE)) {
-                    IClientItemExtensions extensions = IClientItemExtensions.of(stack);
-                    int color = ARGB.opaque(extensions.getDefaultDyeColor(stack));
-                    collector
-                            .submitModelPart(
-                                    gloveArm,
-                                    poseStack,
-                                    RenderTypes.armorCutoutNoCull(texture),
-                                    packedLight,
-                                    OverlayTexture.NO_OVERLAY,
-                                    null,
-                                    color,
-                                    null
-                            );
+        }
 
-                }
-
-                ArmorStyle style = stack.get(AetherIIDataComponents.ARMOR_STYLE);
-                if (style != null && Minecraft.getInstance().level != null) {
-                    TextureAtlasSprite sprite = ARMOR_STYLE_SPRITE_LOOKUP.apply(new ArmorStyle.SpriteKey(Minecraft.getInstance().level.registryAccess(), style, "humanoid_gloves"));
-                    collector
-                            .submitModelPart(
-                                    gloveArm,
-                                    poseStack,
-                                    RenderTypes.armorCutoutNoCull(texture),
-                                    packedLight,
-                                    OverlayTexture.NO_OVERLAY,
-                                    sprite
-                            );
-              //  }
-           // }
+        ArmorStyle style = stack.get(AetherIIDataComponents.ARMOR_STYLE);
+        if (style != null && Minecraft.getInstance().level != null) {
+            TextureAtlasSprite sprite = ARMOR_STYLE_SPRITE_LOOKUP.apply(new ArmorStyle.SpriteKey(Minecraft.getInstance().level.registryAccess(), style, "humanoid_gloves"));
+            collector
+                    .submitModelPart(
+                            gloveArm,
+                            poseStack,
+                            RenderTypes.armorCutoutNoCull(AetherIIAtlases.ARMOR_STYLES_SHEET),
+                            packedLight,
+                            OverlayTexture.NO_OVERLAY,
+                            sprite
+                    );
         }
     }
 }
