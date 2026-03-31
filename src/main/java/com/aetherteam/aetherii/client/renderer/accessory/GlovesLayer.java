@@ -176,7 +176,6 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
                             color,
                             null
                     );
-
         }
 
         ArmorStyle style = stack.get(AetherIIDataComponents.ARMOR_STYLE);

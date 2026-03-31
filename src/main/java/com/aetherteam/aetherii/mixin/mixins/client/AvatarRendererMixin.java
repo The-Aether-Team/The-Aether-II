@@ -65,7 +65,7 @@ public abstract class AvatarRendererMixin extends LivingEntityRenderer<AbstractC
                 original.call(poseStack, collector, packedLight, skinTexture, arm, isSleeveVisible);
             }
             if (currentArm != null) {
-                AccessoryUtil.getFirst(Minecraft.getInstance().player, AccessoryContainer.SlotType.HANDWEAR).ifPresent((stack) -> { //todo
+                AccessoryUtil.getFirst(Minecraft.getInstance().player, AccessoryContainer.SlotType.HANDWEAR).ifPresent((stack) -> {
                     if (((AccessoryItem) stack.getItem()).rendersInFirstPerson(stack)) {
                         for (RenderLayer<AvatarRenderState, PlayerModel> renderlayer : this.layers) {
                             if (renderlayer instanceof FirstPersonRendering firstPersonRendering) {
