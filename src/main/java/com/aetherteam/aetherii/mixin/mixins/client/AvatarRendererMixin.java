@@ -16,7 +16,6 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -59,24 +58,25 @@ public abstract class AvatarRendererMixin extends LivingEntityRenderer<AbstractC
 
     @WrapMethod(method = "renderHand(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/resources/Identifier;Lnet/minecraft/client/model/geom/ModelPart;Z)V")
     private void renderHand(PoseStack poseStack, SubmitNodeCollector collector, int packedLight, Identifier skinTexture, ModelPart arm, boolean isSleeveVisible, Operation<Void> original) {
-//        Player player = Minecraft.getInstance().player;
-//        AvatarRenderer playerRenderer = (AvatarRenderer) (Object) this;
-//        PlayerModel playerModel = playerRenderer.getModel();
-        if (!MixinHooks.RENDERING_ACCESSORY) {
-            original.call(poseStack, collector, packedLight, skinTexture, arm, isSleeveVisible);
-        }
-        if (currentArm != null) {
-//            AccessoryUtil.getFirst(Minecraft.getInstance().player, AccessoryContainer.SlotType.HANDWEAR).ifPresent((stack) -> { //todo
-//                if (((AccessoryItem) stack.getItem()).rendersInFirstPerson(stack)) {
-//                    for (RenderLayer<AvatarRenderState, PlayerModel> renderlayer : this.layers) {
-//                        if (renderlayer instanceof FirstPersonRendering firstPersonRendering) {
-//                            poseStack.pushPose();
-//                            firstPersonRendering.renderOnFirstPerson(currentArm, stack, player, poseStack, playerModel, collector, packedLight);
-//                            poseStack.popPose();
-//                        }
-//                    }
-//                }
-//            });
+        Player player = Minecraft.getInstance().player;
+        AvatarRenderer playerRenderer = (AvatarRenderer) (Object) this;
+        if (playerRenderer.getModel() instanceof PlayerModel playerModel) {
+            if (!MixinHooks.RENDERING_ACCESSORY) {
+                original.call(poseStack, collector, packedLight, skinTexture, arm, isSleeveVisible);
+            }
+            if (currentArm != null) {
+                AccessoryUtil.getFirst(Minecraft.getInstance().player, AccessoryContainer.SlotType.HANDWEAR).ifPresent((stack) -> { //todo
+                    if (((AccessoryItem) stack.getItem()).rendersInFirstPerson(stack)) {
+                        for (RenderLayer<AvatarRenderState, PlayerModel> renderlayer : this.layers) {
+                            if (renderlayer instanceof FirstPersonRendering firstPersonRendering) {
+                                poseStack.pushPose();
+                                firstPersonRendering.renderOnFirstPerson(currentArm, stack, player, poseStack, playerModel, collector, packedLight);
+                                poseStack.popPose();
+                            }
+                        }
+                    }
+                });
+            }
         }
         currentArm = null;
     }
