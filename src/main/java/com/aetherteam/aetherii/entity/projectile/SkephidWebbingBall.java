@@ -61,7 +61,7 @@ public class SkephidWebbingBall extends ThrowableProjectile implements ItemSuppl
                     }
                 }
             } else {
-                livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, this, this.getOwner(), EffectBuildupPresets.WEBBED, 350);
+                livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(livingEntity, this, this.getOwner(), EffectBuildupPresets.WEBBED, 475);
             }
         }
     }
