@@ -89,7 +89,7 @@ public class Zephyr extends Mob implements Enemy {
         return level.getDifficulty() != Difficulty.PEACEFUL
                 && (reason != EntitySpawnReason.NATURAL || random.nextInt(11) == 0)
                 && level.canSeeSky(pos)
-                && !inRadiusOfCampfire(level, pos, 16, 32);
+                && !inRadiusOfCampfire(level, pos, 24, 48);
     }
 
     /**
