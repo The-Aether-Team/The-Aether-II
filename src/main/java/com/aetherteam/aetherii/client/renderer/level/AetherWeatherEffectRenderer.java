@@ -40,7 +40,7 @@ import net.neoforged.neoforge.client.CustomWeatherEffectRenderer;
 
 import java.util.List;
 
-public class AetherWeatherEffectRender implements CustomWeatherEffectRenderer {
+public class AetherWeatherEffectRenderer implements CustomWeatherEffectRenderer {
 
     private static final Identifier RAIN_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/environment/rain.png");
     private static final Identifier RAIN_STORMY_LOCATION = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/environment/rain_stormy.png");
