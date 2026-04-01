@@ -1293,6 +1293,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.SWET_GEL.get(), 1, "§9Ability:§r Grows Nature");
         this.addPerItemAbilityTooltip(AetherIIItems.AMBROSIUM_SHARD.get(), 1, "§9Ability:§r Enchants Nature");
         this.addPerItemAbilityTooltip(AetherIIItems.IRRADIATED_DUST.get(), 1, "§9Ability:§r Irradiates Nature");
+
+        this.addPerItemAbilityTooltip(AetherIIBlocks.AMBROSIUM_CAMPFIRE.asItem(), 1, "§9Ability:§r Deters Zephyrs");
+        this.addPerItemAbilityTooltip(AetherIIBlocks.OUTPOST_CAMPFIRE.asItem(), 1, "§9Ability:§r Deters Zephyrs");
     }
 
     private void addItemTooltips() {
