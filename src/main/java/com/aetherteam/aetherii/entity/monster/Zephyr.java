@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
@@ -23,8 +24,14 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.status.ChunkStatus;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
@@ -81,7 +88,46 @@ public class Zephyr extends Mob implements Enemy {
     public static boolean checkZephyrSpawnRules(EntityType<? extends Zephyr> zephyr, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
         return level.getDifficulty() != Difficulty.PEACEFUL
                 && (reason != EntitySpawnReason.NATURAL || random.nextInt(11) == 0)
-                && level.canSeeSky(pos);
+                && level.canSeeSky(pos)
+                && !inRadiusOfCampfire(level, pos, 16, 32);
+    }
+
+    /**
+     * Checks whether a Zephyr has a campfire, a campfire with a signal fire or an outpost campfire within its radius.
+     *
+     * @param level The {@link LevelAccessor} to check in.
+     * @param pos The starting {@link BlockPos}.
+     * @param radius The {@link Integer} radius around the position.
+     * @return Whether the blocks were found in the radius, as a {@link Boolean}.
+     */
+    public static boolean inRadiusOfCampfire(LevelAccessor level, BlockPos pos, int radius, int radiusExtended) {
+        for (ChunkPos chunk : ChunkPos.rangeClosed(new ChunkPos(pos), radiusExtended).toList()) {
+            ChunkAccess chunkAccess = level.getChunk(chunk.x, chunk.z, ChunkStatus.FULL, false);
+            if (chunkAccess != null) {
+                for (BlockPos blockEntityPos : chunkAccess.getBlockEntitiesPos()) {
+                    if (blockEntityPos.distSqr(pos) <= radius * radius) {
+                        BlockEntity blockEntity = level.getBlockEntity(blockEntityPos);
+                        if (blockEntity != null) {
+                            BlockState state = blockEntity.getBlockState();
+                            if (state.is(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get()) && state.getValue(BlockStateProperties.LIT)) {
+                                return true;
+                            }
+                        }
+                    } else if (blockEntityPos.distSqr(pos) <= radiusExtended * radiusExtended) {
+                        BlockEntity blockEntity = level.getBlockEntity(blockEntityPos);
+                        if (blockEntity != null) {
+                            BlockState state = blockEntity.getBlockState();
+                            if ((state.is(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get()) && level.getBlockState(blockEntityPos.below()).is(AetherIIBlocks.BRETTL_GRASS_BUNDLE)) || state.is(AetherIIBlocks.OUTPOST_CAMPFIRE.get())) {
+                                if (state.getValue(BlockStateProperties.LIT)) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     @Override
