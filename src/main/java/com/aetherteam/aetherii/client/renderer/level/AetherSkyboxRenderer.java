@@ -40,7 +40,7 @@ public class AetherSkyboxRenderer implements CustomSkyboxRenderer {
                 skyRenderState.moonPhase,
                 skyRenderState.rainBrightness,
                 skyRenderState.starBrightness);
-        this.renderCloudCoverDisc(levelRenderState, poseStack, multiBufferSource, timeOfDay, skyRenderState.skyColor, skyRenderState.sunriseAndSunsetColor);
+        this.renderCloudCoverDisc(levelRenderState, poseStack, multiBufferSource, timeOfDay, skyRenderState.skyColor, sunColor);
         multiBufferSource.endBatch();
         return true;
     }

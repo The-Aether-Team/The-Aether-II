@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:spline",
+  "spline": {
+    "coordinate": "aether_ii:holy_isles/continents_heightmap",
+    "points": [
+      {
+        "derivative": 0.0,
+        "location": 96.0,
+        "value": 0.0
+      },
+      {
+        "derivative": 0.0,
+        "location": 160.0,
+        "value": 1.0
+      }
+    ]
+  }
+}

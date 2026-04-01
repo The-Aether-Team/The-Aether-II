@@ -23,14 +23,14 @@ public class EffectBuildupPresets {
     public static Preset STUN = register(new Preset(AetherIIEffects.STUN, 250, 0, false, true, false, 2));
     public static Preset AMBROSIUM_POISONING = register(new Preset(AetherIIEffects.AMBROSIUM_POISONING, 3600, 0, false, true, false, 2));
     public static Preset FRACTURE = register(new Preset(AetherIIEffects.FRACTURE, 500, 0, false, true, false, 1));
-    public static Preset TOXIN = register(new Preset(AetherIIEffects.TOXIN, 1000, 0, false, true, false, 2));
-    public static Preset VENOM = register(new Preset(AetherIIEffects.VENOM, 600, 0, false, true, false, 2));
+    public static Preset TOXIN = register(new Preset(AetherIIEffects.TOXIN, 600, 0, false, true, false, 2));
+    public static Preset VENOM = register(new Preset(AetherIIEffects.VENOM, 400, 0, false, true, false, 2));
     public static Preset CHARGED = register(new Preset(AetherIIEffects.CHARGED, 1000, 0, false, true, false, 2));
-    public static Preset WEBBED = register(new Preset(AetherIIEffects.WEBBED, 500, 0, false, true, false, 2));
+    public static Preset WEBBED = register(new Preset(AetherIIEffects.WEBBED, 400, 0, false, true, false, 2));
     public static Preset IMMOLATION = register(new Preset(AetherIIEffects.IMMOLATION, 100, 0, false, true, false, 2));
-    public static Preset FROSTBITE = register(new Preset(AetherIIEffects.FROSTBITE, 1000, 0, false, true, false, 2));
-    public static Preset FUNGAL_ROT = register(new Preset(AetherIIEffects.FUNGAL_ROT, 1000, 0, false, true, false, 2));
-    public static Preset CRYSTALLIZED = register(new Preset(AetherIIEffects.CRYSTALLIZED, 1000, 0, false, true, false, 2));
+    public static Preset FROSTBITE = register(new Preset(AetherIIEffects.FROSTBITE, 600, 0, false, true, false, 2));
+    public static Preset FUNGAL_ROT = register(new Preset(AetherIIEffects.FUNGAL_ROT, 600, 0, false, true, false, 2));
+    public static Preset CRYSTALLIZED = register(new Preset(AetherIIEffects.CRYSTALLIZED, 600, 0, false, true, false, 2));
 
     private static Preset register(Preset preset) {
         PRESETS.add(preset);

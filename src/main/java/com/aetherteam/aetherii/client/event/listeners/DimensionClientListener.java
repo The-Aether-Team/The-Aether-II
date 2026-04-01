@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.event.listeners;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.renderer.level.AetherSkyboxRenderer;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -48,8 +49,8 @@ public class DimensionClientListener {
                     nearDistanceGoal = farDistance / 80.0F;
                     farDistanceGoal = farDistance / 5.0F;
                 } else if (biome.is(AetherIITags.Biomes.IRRADIATED)) {
-                    nearDistanceGoal = farDistance / 80.0F;
-                    farDistanceGoal = farDistance / 10.0F;
+                    nearDistanceGoal = farDistance / 60.0F;
+                    farDistanceGoal = farDistance / 7.5F;
                 }
 
                 if (clientLevel.isRaining()) {
@@ -77,8 +78,7 @@ public class DimensionClientListener {
         float f = deltaTracker.getGameTimeDeltaPartialTick(false);
 
         if (camera.entity().level() instanceof ClientLevel clientLevel) {
-            Holder<Biome> biome = clientLevel.getBiome(camera.blockPosition());
-            if (biome.is(AetherIITags.Biomes.MODIFIED_SUNRISE_SUNSET_COLORS)) {
+            if (clientLevel.dimensionTypeRegistration().is(AetherIIDimensions.AETHER_HOLY_ISLES_DIMENSION_TYPE)) {
                 int i = getBaseFogColor(clientLevel, camera, event.getRenderer().getMinecraft().options.getEffectiveRenderDistance(), f);
                 event.setRed(ARGB.redFloat(i));
                 event.setGreen(ARGB.greenFloat(i));

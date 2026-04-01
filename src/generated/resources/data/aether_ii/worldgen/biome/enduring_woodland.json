@@ -10,6 +10,7 @@
     "minecraft:visual/fog_color": "#f3f0ff",
     "minecraft:visual/sky_color": "#e7e3fc",
     "minecraft:visual/water_fog_color": "#3e5082",
+    "neoforge:custom_clouds": "aether_ii:aether_clouds",
     "neoforge:custom_skybox": "aether_ii:aether_sky",
     "neoforge:custom_weather_effects": "aether_ii:aether_weather"
   },
@@ -257,5 +258,6 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": -0.5
+  "temperature": -0.3,
+  "temperature_modifier": "frozen"
 }

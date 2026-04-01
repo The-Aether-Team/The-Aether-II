@@ -1,7 +1,7 @@
 {
   "type": "minecraft:range_choice",
   "input": "aether_ii:holy_isles/temperature",
-  "max_exclusive": 0.65,
+  "max_exclusive": 0.6499999761581421,
   "min_inclusive": -1.5,
   "when_in_range": {
     "type": "minecraft:range_choice",

@@ -102,25 +102,6 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.HESTVEIL_CAVERNS
         );
 
-        this.tag(AetherIITags.Biomes.MODIFIED_SUNRISE_SUNSET_COLORS).add(
-                HolyIslesBiomes.FLOURISHING_FIELD,
-                HolyIslesBiomes.VERDANT_WOODS,
-                HolyIslesBiomes.SHROUDED_FOREST,
-                HolyIslesBiomes.SHIMMERING_BASIN,
-                HolyIslesBiomes.MAGNETIC_SCAR,
-                HolyIslesBiomes.TURQUOISE_FOREST,
-                HolyIslesBiomes.GLISTENING_SWAMP,
-                HolyIslesBiomes.VIOLET_HIGHWOODS,
-                HolyIslesBiomes.FRIGID_SIERRA,
-                HolyIslesBiomes.ENDURING_WOODLAND,
-                HolyIslesBiomes.FROZEN_LAKES,
-                HolyIslesBiomes.SHEER_TUNDRA,
-                HolyIslesBiomes.CONTAMINATED_JUNGLE,
-                HolyIslesBiomes.BATTLEGROUND_WASTES,
-                HolyIslesBiomes.EXPANSE,
-                HolyIslesBiomes.HESTVEIL_CAVERNS
-        );
-
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_OUTPOST).add(
                 HolyIslesBiomes.FLOURISHING_FIELD,
                 HolyIslesBiomes.VERDANT_WOODS,
@@ -159,14 +140,16 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.ENDURING_WOODLAND,
                 HolyIslesBiomes.SHEER_TUNDRA
         );
-        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS).add(
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_TEMPERATE).add(
                 HolyIslesBiomes.FLOURISHING_FIELD,
                 HolyIslesBiomes.VERDANT_WOODS,
                 HolyIslesBiomes.SHROUDED_FOREST,
                 HolyIslesBiomes.MAGNETIC_SCAR,
                 HolyIslesBiomes.TURQUOISE_FOREST,
                 HolyIslesBiomes.GLISTENING_SWAMP,
-                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.VIOLET_HIGHWOODS
+        );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_ARCTIC).add(
                 HolyIslesBiomes.FRIGID_SIERRA,
                 HolyIslesBiomes.ENDURING_WOODLAND,
                 HolyIslesBiomes.SHEER_TUNDRA

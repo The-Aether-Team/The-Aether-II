@@ -47,7 +47,8 @@ public class AetherIIStructureSets {
         );
 
         context.register(AETHER_SURFACE_RUINS, new StructureSet(List.of(
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS))),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE)),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC))),
                 new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_2, 0.65F, 2038911, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 16, 8, RandomSpreadType.LINEAR))
         );
 
