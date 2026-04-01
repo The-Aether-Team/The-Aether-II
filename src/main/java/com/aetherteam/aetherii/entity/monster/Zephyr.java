@@ -109,7 +109,7 @@ public class Zephyr extends Mob implements Enemy {
                         BlockEntity blockEntity = level.getBlockEntity(blockEntityPos);
                         if (blockEntity != null) {
                             BlockState state = blockEntity.getBlockState();
-                            if (state.is(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get()) && state.getValue(BlockStateProperties.LIT)) {
+                            if (state.is(AetherIITags.Blocks.WEAK_ZEPHYR_SPAWNABLE_DETERRENT) && state.getValue(BlockStateProperties.LIT)) {
                                 return true;
                             }
                         }
@@ -117,7 +117,7 @@ public class Zephyr extends Mob implements Enemy {
                         BlockEntity blockEntity = level.getBlockEntity(blockEntityPos);
                         if (blockEntity != null) {
                             BlockState state = blockEntity.getBlockState();
-                            if ((state.is(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get()) && level.getBlockState(blockEntityPos.below()).is(AetherIIBlocks.BRETTL_GRASS_BUNDLE)) || state.is(AetherIIBlocks.OUTPOST_CAMPFIRE.get())) {
+                            if ((state.is(AetherIITags.Blocks.WEAK_ZEPHYR_SPAWNABLE_DETERRENT) && level.getBlockState(blockEntityPos.below()).is(AetherIIBlocks.BRETTL_GRASS_BUNDLE)) || state.is(AetherIITags.Blocks.STRONG_ZEPHYR_SPAWNABLE_DETERRENT)) {
                                 if (state.getValue(BlockStateProperties.LIT)) {
                                     return true;
                                 }
