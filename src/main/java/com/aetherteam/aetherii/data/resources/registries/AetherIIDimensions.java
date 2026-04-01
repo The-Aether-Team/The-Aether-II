@@ -5,14 +5,14 @@ import com.aetherteam.aetherii.data.resources.builders.worldgen.holyisles.HolyIs
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.data.worldgen.biome.OverworldBiomes;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TimelineTags;
-import net.minecraft.util.ARGB;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.attribute.*;
+import net.minecraft.world.attribute.BedRule;
+import net.minecraft.world.attribute.EnvironmentAttributeMap;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
@@ -20,10 +20,6 @@ import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
-import net.minecraft.world.timeline.Timelines;
-
-import java.util.Optional;
-import java.util.OptionalLong;
 
 public class AetherIIDimensions {
     private final static Identifier AETHER_HOLY_ISLES_LEVEL_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "aether_holy_isles");
@@ -50,11 +46,11 @@ public class AetherIIDimensions {
                 DimensionType.Skybox.OVERWORLD,
                 DimensionType.CardinalLightType.DEFAULT,
                 EnvironmentAttributeMap.builder()
-                .set(EnvironmentAttributes.CLOUD_COLOR, -1)
-                .set(EnvironmentAttributes.CLOUD_HEIGHT, 320.33F)
-                .set(EnvironmentAttributes.BED_RULE, BedRule.CAN_SLEEP_WHEN_DARK)
-                .set(EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, false)
-                .set(EnvironmentAttributes.NETHER_PORTAL_SPAWNS_PIGLINS, true)
+                        .set(EnvironmentAttributes.CLOUD_COLOR, -1)
+                        .set(EnvironmentAttributes.CLOUD_HEIGHT, 320.33F)
+                        .set(EnvironmentAttributes.BED_RULE, BedRule.CAN_SLEEP_WHEN_DARK)
+                        .set(EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, false)
+                        .set(EnvironmentAttributes.NETHER_PORTAL_SPAWNS_PIGLINS, true)
                 .build(),
                 context.lookup(Registries.TIMELINE).getOrThrow(TimelineTags.IN_OVERWORLD)));
     }
