@@ -211,7 +211,6 @@ public class AetherIITags {
         public static final TagKey<Item> ZANITE_REPAIRING = tag("zanite_repairing");
         public static final TagKey<Item> ARKENIUM_REPAIRING = tag("arkenium_repairing");
         public static final TagKey<Item> GRAVITITE_REPAIRING = tag("gravitite_repairing");
-        public static final TagKey<Item> ICE_REPAIRING = tag("ice_repairing");
         public static final TagKey<Item> SENTRY_BOOTS_REPAIRING = tag("sentry_boots_repairing");
         public static final TagKey<Item> HAMMER_OF_DEMOLITION_REPAIRING = tag("hammer_of_demolition_repairing");
         public static final TagKey<Item> NEPTUNE_REPAIRING = tag("neptune_repairing");
