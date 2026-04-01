@@ -19,7 +19,7 @@
   },
   "noise_router": {
     "barrier": 0.0,
-    "continents": 0.0,
+    "continents": "aether_ii:holy_isles/continents",
     "depth": "aether_ii:holy_isles/cave_biomes_rarity_mapper",
     "erosion": "aether_ii:holy_isles/erosion",
     "final_density": "aether_ii:holy_isles/terrain/final_islands",

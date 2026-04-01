@@ -27,43 +27,26 @@ import java.util.List;
 import java.util.Optional;
 
 // NOTE: Tweaks to biome colors should be done in AetherIIDataMapData
-public class HolyIslesBiomeBuilders { //TODO
+public class HolyIslesBiomeBuilders {
     private static final BiomeSpecialEffects HIGHFIELDS_EFFECTS = new BiomeSpecialEffects.Builder()
             .waterColor(0xa2d5f2)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
             .build();
     private static final BiomeSpecialEffects MAGNETIC_EFFECTS = new BiomeSpecialEffects.Builder()
-//            .fogColor(0xedeef5)
-//            .skyColor(0xc5cbeb)
             .waterColor(0xabbdd9)
-//            .waterFogColor(0x607496)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
-//            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false))
             .build();
     private static final BiomeSpecialEffects ARCTIC_EFFECTS = new BiomeSpecialEffects.Builder()
-//            .fogColor(0xf3f0ff)
-//            .skyColor(0xe7e3fc)
             .waterColor(0x637aa8)
-//            .waterFogColor(0x3e5082)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
-//            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false))
             .build();
     private static final BiomeSpecialEffects IRRADIATED_EFFECTS = new BiomeSpecialEffects.Builder()
-//            .fogColor(0xF0E8BE)
-//            .skyColor(0xfcebc5)
             .waterColor(0xaed4bf)
-//            .waterFogColor(0xbccc81)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
-//            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false))
-//            .ambientParticle(new AmbientParticleSettings(AetherIIParticleTypes.AMBROSIUM.get(), 0.00625F))
             .build();
     private static final BiomeSpecialEffects AERCLOUD_SEA_EFFECTS = new BiomeSpecialEffects.Builder()
-//            .fogColor(0xecebfc)
-//            .skyColor(0xc9d1ff)
             .waterColor(0xa2d5f2)
-//            .waterFogColor(0x55708a)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
-//            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false))
             .build();
 
     public static Biome flourishingFieldBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
@@ -567,7 +550,7 @@ public class HolyIslesBiomeBuilders { //TODO
                         .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, 4, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), 1, 1))
                         .build(),
                 builder.build(),
-                Biome.TemperatureModifier.NONE
+                Biome.TemperatureModifier.FROZEN
         );
     }
 

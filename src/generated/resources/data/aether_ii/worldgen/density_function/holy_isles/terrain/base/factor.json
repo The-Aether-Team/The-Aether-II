@@ -16,18 +16,18 @@
           "points": [
             {
               "derivative": 0.0,
-              "location": 0.475,
+              "location": 0.41000003,
               "value": {
                 "coordinate": "aether_ii:holy_isles/temperature",
                 "points": [
                   {
                     "derivative": 0.0,
-                    "location": -0.525,
+                    "location": -0.46,
                     "value": 1.0
                   },
                   {
                     "derivative": 0.0,
-                    "location": -0.45,
+                    "location": -0.43,
                     "value": 1.5
                   },
                   {
@@ -42,17 +42,17 @@
                   },
                   {
                     "derivative": 0.0,
-                    "location": 0.525,
+                    "location": 0.575,
                     "value": 1.0
                   },
                   {
                     "derivative": 0.0,
-                    "location": 0.6,
+                    "location": 0.65,
                     "value": 7.5
                   },
                   {
                     "derivative": 0.0,
-                    "location": 0.675,
+                    "location": 0.71,
                     "value": 1.0
                   }
                 ]
@@ -60,12 +60,12 @@
             },
             {
               "derivative": 0.0,
-              "location": 0.55,
+              "location": 0.485,
               "value": 7.5
             },
             {
               "derivative": 0.0,
-              "location": 0.625,
+              "location": 0.545,
               "value": 1.0
             }
           ]

@@ -11,21 +11,25 @@ import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
 import java.util.List;
 
 public class HolyIslesBiomeSourceBuilders {
+    public static float ARCTIC_START_VALUE = -0.4F;
+    public static float IRRADIATED_START_VALUE = 0.65F;
+    public static float MAGNETIC_START_VALUE = 0.485F;
+
     public static BiomeSource buildHolyIslesBiomeSource(HolderGetter<Biome> biomes) {
         Climate.Parameter fullRange = Climate.Parameter.span(-1.5F, 1.5F);
 
-        Climate.Parameter tempArctic = Climate.Parameter.span(-1.5F, -0.4F);
-        Climate.Parameter tempHighfields = Climate.Parameter.span(-0.4F, 0.65F);
-        Climate.Parameter tempHighfields1 = Climate.Parameter.span(-0.4F, -0.1F);
+        Climate.Parameter tempArctic = Climate.Parameter.span(-1.5F, ARCTIC_START_VALUE);
+        Climate.Parameter tempHighfields = Climate.Parameter.span(ARCTIC_START_VALUE, IRRADIATED_START_VALUE);
+        Climate.Parameter tempHighfields1 = Climate.Parameter.span(ARCTIC_START_VALUE, -0.1F);
         Climate.Parameter tempHighfields2 = Climate.Parameter.span(-0.1F, 0.3F);
         Climate.Parameter tempHighfields3 = Climate.Parameter.span(0.3F, 0.6F);
         Climate.Parameter tempMagnetic1 = Climate.Parameter.span(-1.5F, -0.25F);
         Climate.Parameter tempMagnetic2 = Climate.Parameter.span(-0.25F, 0.25F);
-        Climate.Parameter tempMagnetic3 = Climate.Parameter.span(0.25F, 0.6F);
-        Climate.Parameter tempIrradiated = Climate.Parameter.span(0.6F, 1.5F);
+        Climate.Parameter tempMagnetic3 = Climate.Parameter.span(0.25F, IRRADIATED_START_VALUE);
+        Climate.Parameter tempIrradiated = Climate.Parameter.span(IRRADIATED_START_VALUE, 1.5F);
 
-        Climate.Parameter erosionDefault = Climate.Parameter.span(0.0F, 0.55F);
-        Climate.Parameter erosionMagnetic = Climate.Parameter.span(0.55F, 1.5F);
+        Climate.Parameter erosionDefault = Climate.Parameter.span(0.0F, MAGNETIC_START_VALUE);
+        Climate.Parameter erosionMagnetic = Climate.Parameter.span(MAGNETIC_START_VALUE, 1.5F);
 
         Climate.Parameter depthHestveilCaverns = Climate.Parameter.span(-2.0F, -1.0F);
         Climate.Parameter depthDefault = Climate.Parameter.span(-1.0F, 1.5F);
