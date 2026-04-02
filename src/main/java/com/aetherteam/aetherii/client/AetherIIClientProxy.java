@@ -45,10 +45,6 @@ public class AetherIIClientProxy {
         soundInstances.keySet().stream().filter((soundInstance) -> soundInstance instanceof MusicPlayerSoundInstance).map(SoundInstance::getIdentifier).forEach(location -> Minecraft.getInstance().getSoundManager().stop(location, source));
     }
 
-//    public static boolean isHolyIslesSpecialEffects(Level level) { //TODO
-//        return level instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HolyIslesSpecialEffects;
-//    }
-
     public static boolean isAerbunnyInteractable() {
         return AetherIIKeyMappings.ALLOW_DISMOUNTING_PASSENGER.isDown();
     }

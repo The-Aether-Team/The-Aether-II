@@ -76,7 +76,6 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIRenderers::registerRenderStateModifier);
         neoBus.addListener(AetherIIRenderers::registerSpecialModelRenderers);
         neoBus.addListener(AetherIIDimensionRenderers::registerDimensionEffect);
-//        neoBus.addListener(AetherIIRenderEffects::registerRenderEffects); //TODO
         neoBus.addListener(AetherIIRenderPipelines::registerShaders);
         neoBus.addListener(AetherIIItemDecorators::registerItemDecorators);
         neoBus.addListener(AetherIIClientTooltips::registerClientTooltipComponents);

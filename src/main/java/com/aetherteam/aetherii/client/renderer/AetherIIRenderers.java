@@ -64,19 +64,24 @@ public class AetherIIRenderers {
 
     public static void registerAddLayer(EntityRenderersEvent.AddLayers event) {
         event.getSkins().forEach(model -> {
+            if (event.getPlayerRenderer(model) instanceof LivingEntityRenderer livingEntityRenderer) {
+                registerLivingEntityLayers(event.getContext(), livingEntityRenderer);
+                livingEntityRenderer.addLayer(new AccessoryLayer(livingEntityRenderer));
+                AvatarRenderer playerRenderer = (AvatarRenderer) livingEntityRenderer;
+                playerRenderer.addLayer(new ProjectilesStuckLayer<>(playerRenderer, event.getContext()));
+            }
             if (event.getMannequinRenderer(model) instanceof LivingEntityRenderer livingEntityRenderer) {
                 registerLivingEntityLayers(event.getContext(), livingEntityRenderer);
                 livingEntityRenderer.addLayer(new AccessoryLayer(livingEntityRenderer));
-                if (livingEntityRenderer instanceof AvatarRenderer playerRenderer) {
-                    playerRenderer.addLayer(new ProjectilesStuckLayer<>(playerRenderer, event.getContext()));
-                }
+                AvatarRenderer playerRenderer = (AvatarRenderer) livingEntityRenderer;
+                playerRenderer.addLayer(new ProjectilesStuckLayer<>(playerRenderer, event.getContext()));
             }
         });
     }
 
     private static <T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>> void registerLivingEntityLayers(EntityRendererProvider.Context context, LivingEntityRenderer<T, S, M> livingEntityRenderer) {
-        livingEntityRenderer.addLayer(new SwetLatchLayer<S, M>(livingEntityRenderer));
-        livingEntityRenderer.addLayer(new GlovesLayer<S, M>(livingEntityRenderer));
+        livingEntityRenderer.addLayer(new SwetLatchLayer<>(livingEntityRenderer));
+        livingEntityRenderer.addLayer(new GlovesLayer<>(livingEntityRenderer));
     }
 
     public static void registerRenderStateModifier(RegisterRenderStateModifiersEvent event) {
