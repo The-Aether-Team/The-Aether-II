@@ -9,9 +9,9 @@ import com.aetherteam.aetherii.client.renderer.entity.state.AerbunnyRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.SubmitNodeCollector;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 
@@ -24,15 +24,13 @@ public class AerbunnyCollarLayer extends RenderLayer<AerbunnyRenderState, Aerbun
         this.model = new AerbunnyModel(modelSet.bakeLayer(AetherIIModelLayers.AERBUNNY_COLLAR));
     }
 
-    @Override
-    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, AerbunnyRenderState renderState, float v, float v1) {
-        if (renderState.tame) {
-            int color = this.getColor(renderState);
-            if (!renderState.isInvisible) {
-                this.model.setupAnim(renderState);
-                submitNodeCollector.submitModel(this.model, renderState, poseStack, AetherIIRenderTypes.entityDitherNoCull(COLLAR_LOCATION), packedLight, LivingEntityRenderer.getOverlayCoords(renderState, 0.0F), color, null);
-            }
+    public void submit(PoseStack poseStack, SubmitNodeCollector collector, int lightCoords, AerbunnyRenderState renderState, float yRot, float xRot_) {
+        int color = getColor(renderState);
+        if (!renderState.isInvisible && renderState.tame) {
+            this.model.setupAnim(renderState);
+            collector.order(1).submitModel(this.getParentModel(), renderState, poseStack, AetherIIRenderTypes.entityDitherNoCull(COLLAR_LOCATION), lightCoords, OverlayTexture.NO_OVERLAY, color, null, renderState.outlineColor, null);
         }
+
     }
 
     protected int getColor(AerbunnyRenderState renderState) {
@@ -43,5 +41,4 @@ public class AerbunnyCollarLayer extends RenderLayer<AerbunnyRenderState, Aerbun
         }
         return color;
     }
-
 }
