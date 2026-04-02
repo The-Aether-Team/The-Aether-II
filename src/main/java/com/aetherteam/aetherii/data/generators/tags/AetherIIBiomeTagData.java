@@ -154,6 +154,10 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.ENDURING_WOODLAND,
                 HolyIslesBiomes.SHEER_TUNDRA
         );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_IRRADIATED_REMNANTS).add(
+                HolyIslesBiomes.CONTAMINATED_JUNGLE,
+                HolyIslesBiomes.BATTLEGROUND_WASTES
+        );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_SENTRY_RUINS).add(
                 HolyIslesBiomes.FLOURISHING_FIELD,
                 HolyIslesBiomes.VERDANT_WOODS,

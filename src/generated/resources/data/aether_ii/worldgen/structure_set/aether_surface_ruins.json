@@ -19,6 +19,10 @@
     {
       "structure": "aether_ii:veradexian_ruins_arctic",
       "weight": 1
+    },
+    {
+      "structure": "aether_ii:irradiated_remnants",
+      "weight": 1
     }
   ]
 }
