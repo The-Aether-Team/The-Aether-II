@@ -8,9 +8,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -43,11 +41,13 @@ public class AnimalStashBlock extends BaseEntityBlock implements SimpleWaterlogg
 
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (level instanceof ServerLevel) {
+            if(!state.getValue(OPEN)) {
+                level.setBlock(pos, state.setValue(OPEN, true), 2);
+            }
             if (level.getBlockEntity(pos) instanceof AnimalStashBlockEntity blockEntity) {
                 player.openMenu(blockEntity);
             }
         }
-        state.setValue(OPEN, true);
         return InteractionResult.SUCCESS;
     }
 
