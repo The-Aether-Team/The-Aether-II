@@ -189,7 +189,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         // Irradiated
         this.carpet(AetherIIBlocks.AMBRELINN_MOSS_CARPET, AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get());
 
-        // Moa Nest
+        // Nest Blocks
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.WOVEN_SKYROOT_STICKS, 2)
                 .define('#', AetherIIItems.SKYROOT_STICK)
                 .pattern("##")
@@ -199,6 +199,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.SKYROOT_STICK.get(), 2)
                 .requires(AetherIIBlocks.WOVEN_SKYROOT_STICKS)
                 .unlockedBy("has_woven_skyroot_sticks", has(AetherIIBlocks.WOVEN_SKYROOT_STICKS))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.ANIMAL_STASH)
+                .define('#', AetherIIBlocks.WOVEN_SKYROOT_STICKS)
+                .define('M', AetherIIBlocks.BRYALINN_MOSS_BLOCK)
+                .pattern("M#M")
+                .pattern("# #")
+                .pattern("###")
+                .unlockedBy(getHasName(AetherIIBlocks.WOVEN_SKYROOT_STICKS), has(AetherIIBlocks.WOVEN_SKYROOT_STICKS))
                 .save(this.output);
 
         // Logs
