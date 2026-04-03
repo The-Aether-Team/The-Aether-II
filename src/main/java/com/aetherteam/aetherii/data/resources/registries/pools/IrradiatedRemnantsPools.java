@@ -9,6 +9,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.Pools;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
@@ -46,11 +47,12 @@ public class IrradiatedRemnantsPools {
         context.register(BUNKER_DECORATIONS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration_01", processorBunker), 1),
-                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration_02", processorBunker), 1),
-                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration_03", processorBunker), 1),
-                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration_04", processorBunker), 1),
-                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration_05", processorBunker), 1)
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration_01", processorBunker), 2),
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration_02", processorBunker), 2),
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration_03", processorBunker), 2),
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration_04", processorBunker), 2),
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration_05", processorBunker), 2),
+                        Pair.of(StructurePoolElement.empty(), 3)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

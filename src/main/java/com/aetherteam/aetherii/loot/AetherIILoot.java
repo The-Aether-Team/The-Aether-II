@@ -56,6 +56,8 @@ public class AetherIILoot {
 
     public static final ResourceKey<LootTable> VASES_VERADEXIAN_RUINS = register("vases/veradexian_ruins/common");
 
+    public static final ResourceKey<LootTable> CHESTS_IRRADIATED_REMNANTS = register("chests/irradiated_remnants");
+
     public static final ResourceKey<LootTable> CHESTS_DUNGEONS_IRRADIATED_ITEMS = register("chests/dungeons/irradiated_items");
     public static final ResourceKey<LootTable> CHESTS_DUNGEONS_MUSIC_DISCS = register("chests/dungeons/music_discs");
 
