@@ -180,8 +180,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.PURPLE_AERCLOUD, "Purple Aercloud");
         this.addBlock(AetherIIBlocks.STORM_AERCLOUD, "Storm Aercloud");
 
-        // Moa Nest
+        // Nest Blocks
         this.addBlock(AetherIIBlocks.WOVEN_SKYROOT_STICKS, "Woven Skyroot Sticks");
+        this.addBlock(AetherIIBlocks.ANIMAL_STASH, "Animal Stash");
+        this.addBlock(AetherIIBlocks.MOA_EGG, "Moa Egg");
 
         // Logs
         this.addBlock(AetherIIBlocks.SKYROOT_LOG, "Skyroot Log");
@@ -1550,6 +1552,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addContainerType(AetherIIMenuTypes.ARKENIUM_FORGE, "Arkenium Forge");
         this.addContainerType(AetherIIMenuTypes.ALKAHEST_PURIFIER, "Alkahest Purifier");
         this.addGeneric("container.sentry_crate", "Sentry Crate");
+        this.addGeneric("container.animal_stash", "Animal Stash");
     }
 
     private void addGuiText() {
