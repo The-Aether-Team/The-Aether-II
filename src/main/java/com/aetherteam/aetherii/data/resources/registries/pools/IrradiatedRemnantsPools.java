@@ -47,10 +47,10 @@ public class IrradiatedRemnantsPools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration_01", processorBunker), 1),
-                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration__02", processorBunker), 1),
-                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration__03", processorBunker), 1),
-                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration__04", processorBunker), 1),
-                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration__05", processorBunker), 1)
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration_02", processorBunker), 1),
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration_03", processorBunker), 1),
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration_04", processorBunker), 1),
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations/decoration_05", processorBunker), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
