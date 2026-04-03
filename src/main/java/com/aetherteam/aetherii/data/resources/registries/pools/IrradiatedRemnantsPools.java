@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.data.resources.registries.pools;
 
+import com.aetherteam.aetherii.data.resources.registries.AetherIIProcessorLists;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
@@ -13,21 +14,44 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 
 public class IrradiatedRemnantsPools {
     public static final ResourceKey<StructureTemplatePool> IRRADIATED_REMNANTS = AetherIIPools.createKey("irradiated_remnants/remnants");
+    public static final ResourceKey<StructureTemplatePool> BUNKERS = AetherIIPools.createKey("irradiated_remnants/bunkers");
+    public static final ResourceKey<StructureTemplatePool> BUNKER_DECORATIONS = AetherIIPools.createKey("irradiated_remnants/bunker_decorations");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
         Holder<StructureTemplatePool> fallback = templatePools.getOrThrow(Pools.EMPTY);
 
         HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
-        // Holder<StructureProcessorList> processorRuins = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_RUINS);
+        Holder<StructureProcessorList> processorBunker = processors.getOrThrow(AetherIIProcessorLists.IRRADIATED_BUNKER_EXTERIOR);
 
         context.register(IRRADIATED_REMNANTS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunker"), 1),
-                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/research_bunker"), 1),
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/bunker_start_01"), 1),
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/bunker_start_02"), 1),
                         Pair.of(AetherIIPools.aetherPool("irradiated_remnants/outpost"), 1),
                         Pair.of(AetherIIPools.aetherPool("irradiated_remnants/village"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
+        context.register(BUNKERS, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("irradiated_remnants/bunkers/bunker_01"), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("irradiated_remnants/bunkers/research_bunker_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
+        context.register(BUNKER_DECORATIONS, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations_01", processorBunker), 1),
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations_02", processorBunker), 1),
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations_03", processorBunker), 1),
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations_04", processorBunker), 1),
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/decorations_05", processorBunker), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

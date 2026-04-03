@@ -20,6 +20,7 @@ import java.util.List;
 public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> CAMP = createKey("camp");
     public static final ResourceKey<StructureProcessorList> VERADEXIAN_RUINS = createKey("veradexian_ruins");
+    public static final ResourceKey<StructureProcessorList> IRRADIATED_BUNKER_EXTERIOR = createKey("irradiated_bunker_exterior");
     public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_ROOM = createKey("sentry_ruins_room");
     public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_STAIRCASE = createKey("sentry_ruins_staircase");
     public static final ResourceKey<StructureProcessorList> SENTRY_RUINS_BOSS_ROOM = createKey("sentry_ruins_boss_room");
@@ -42,6 +43,12 @@ public class AetherIIProcessorLists {
         register(context, VERADEXIAN_RUINS, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VERADEXIAN_VASE.get(), 0.65F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                ))
+        ));
+
+        register(context, IRRADIATED_BUNKER_EXTERIOR, ImmutableList.of(
+                new RuleProcessor(ImmutableList.of(
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get(), 0.25F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get().defaultBlockState())
                 ))
         ));
 
