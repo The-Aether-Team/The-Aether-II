@@ -179,6 +179,29 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
         );
 
+        builder.accept(AetherIILoot.CHESTS_ANIMAL_DEN, LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.BLUEBERRY).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 4.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.ORANGE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_PINECONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.RAW_TAEGORE_MEAT).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_RIB_CUT).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.KIRRID_LOIN).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+
+                )
+
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_STICK).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.CLOUDWOOL).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+
+                )
+        );
+
         builder.accept(AetherIILoot.VASES_VERADEXIAN_RUINS, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
