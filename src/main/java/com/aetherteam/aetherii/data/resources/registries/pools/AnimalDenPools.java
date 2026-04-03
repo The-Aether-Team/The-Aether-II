@@ -20,7 +20,7 @@ public class AnimalDenPools {
         context.register(ANIMAL_DEN_HIGHFIELDS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("animal_den/highfields/den_01"), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("animal_den/highfields/den_01"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

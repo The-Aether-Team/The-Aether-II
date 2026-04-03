@@ -53,6 +53,10 @@ public class AetherIIPools {
     }
 
     // Does not automatically replace air blocks, primarily used for buried structures
+    public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolBuried(String id) {
+        return pool -> new AetherPoolElement(Either.left(Identifier.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), 96, 384, false);
+    }
+
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolBuried(String id, Holder<StructureProcessorList> processor) {
         return pool -> new AetherPoolElement(Either.left(Identifier.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), 96, 384, false);
     }
