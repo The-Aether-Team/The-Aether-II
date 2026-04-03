@@ -19,6 +19,7 @@ import java.util.Optional;
 
 public class AetherIIStructureSets {
     public static final ResourceKey<StructureSet> OUTPOSTS = createKey("outposts");
+    public static final ResourceKey<StructureSet> COMMON_AETHER_SURFACE_STRUCTURES = createKey("common_aether_surface_structures");
     public static final ResourceKey<StructureSet> AETHER_SURFACE_STRUCTURES = createKey("aether_surface_structures");
     public static final ResourceKey<StructureSet> AETHER_SURFACE_RUINS = createKey("aether_surface_ruins");
     public static final ResourceKey<StructureSet> SENTRY_RUINS = createKey("sentry_ruins");
@@ -35,8 +36,13 @@ public class AetherIIStructureSets {
         HolderGetter<Structure> structures = context.lookup(Registries.STRUCTURE);
 
         Holder.Reference<StructureSet> outposts = context.register(OUTPOSTS, new StructureSet(structures.getOrThrow(AetherIIStructures.OUTPOST),
-
                 new RandomSpreadStructurePlacement(28, 18, RandomSpreadType.LINEAR, 2738116)));
+
+        context.register(COMMON_AETHER_SURFACE_STRUCTURES, new StructureSet(List.of(
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.ANIMAL_DEN)),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.IRRADIATED_REMNANTS))),
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 4027017, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 12, 6, RandomSpreadType.LINEAR))
+        );
 
         context.register(AETHER_SURFACE_STRUCTURES, new StructureSet(List.of(
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.CAMP_HIGHFIELDS), 3),
@@ -48,8 +54,7 @@ public class AetherIIStructureSets {
 
         context.register(AETHER_SURFACE_RUINS, new StructureSet(List.of(
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE)),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC)),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.IRRADIATED_REMNANTS))),
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC))),
                 new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_2, 0.75F, 2038911, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 14, 8, RandomSpreadType.LINEAR))
         );
 

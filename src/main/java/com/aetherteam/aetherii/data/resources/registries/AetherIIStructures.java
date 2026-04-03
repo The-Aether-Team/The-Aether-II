@@ -34,6 +34,7 @@ public class AetherIIStructures {
     public static final ResourceKey<Structure> CAMP_MAGNETIC = createKey("camp_magnetic");
     public static final ResourceKey<Structure> CAMP_ARCTIC = createKey("camp_arctic");
     public static final ResourceKey<Structure> WATCHTOWER = createKey("watchtower");
+    public static final ResourceKey<Structure> ANIMAL_DEN = createKey("animal_den");
     public static final ResourceKey<Structure> VERADEXIAN_RUINS_TEMPERATE = createKey("veradexian_ruins_temperate");
     public static final ResourceKey<Structure> VERADEXIAN_RUINS_ARCTIC = createKey("veradexian_ruins_arctic");
     public static final ResourceKey<Structure> IRRADIATED_REMNANTS = createKey("irradiated_remnants");
@@ -66,6 +67,10 @@ public class AetherIIStructures {
         context.register(WATCHTOWER, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_WATCHTOWER), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
                 templatePools.getOrThrow(WatchtowerPools.WATCHTOWER), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+
+        context.register(ANIMAL_DEN, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_ANIMAL_DEN), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
+                templatePools.getOrThrow(AnimalDenPools.ANIMAL_DEN_HIGHFIELDS), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(-2)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(10), 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
         context.register(VERADEXIAN_RUINS_TEMPERATE, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_TEMPERATE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),

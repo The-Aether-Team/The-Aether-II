@@ -6,18 +6,18 @@
       "other_set": "aether_ii:outposts"
     },
     "frequency": 0.75,
-    "frequency_reduction_method": "legacy_type_2",
-    "salt": 2038911,
-    "separation": 8,
-    "spacing": 14
+    "frequency_reduction_method": "legacy_type_1",
+    "salt": 4027017,
+    "separation": 6,
+    "spacing": 12
   },
   "structures": [
     {
-      "structure": "aether_ii:veradexian_ruins_temperate",
+      "structure": "aether_ii:animal_den",
       "weight": 1
     },
     {
-      "structure": "aether_ii:veradexian_ruins_arctic",
+      "structure": "aether_ii:irradiated_remnants",
       "weight": 1
     }
   ]
