@@ -29,7 +29,7 @@ public class IrradiatedRemnantsPools {
         context.register(IRRADIATED_BUNKER_REMNANTS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/bunker_start_01", processorBunker), 1),
+                        Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/bunker_start_01", processorBunker), 2),
                         Pair.of(AetherIIPools.aetherPool("irradiated_remnants/bunkers/bunker_start_02", processorBunker), 1)
                 ),
                 StructureTemplatePool.Projection.TERRAIN_MATCHING)
