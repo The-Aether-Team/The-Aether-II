@@ -5,10 +5,10 @@
         "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:veradexian_ruins/temperate/ruin_small",
+        "location": "aether_ii:veradexian_ruins/temperate/center/center_01",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:veradexian_ruins",
-        "projection": "rigid",
+        "projection": "terrain_matching",
         "replace_air": true
       },
       "weight": 1
@@ -18,10 +18,10 @@
         "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:veradexian_ruins/temperate/ruin_medium",
+        "location": "aether_ii:veradexian_ruins/temperate/center/center_02",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:veradexian_ruins",
-        "projection": "rigid",
+        "projection": "terrain_matching",
         "replace_air": true
       },
       "weight": 1
@@ -31,10 +31,23 @@
         "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:veradexian_ruins/temperate/ruin_large",
+        "location": "aether_ii:veradexian_ruins/temperate/center/center_03",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:veradexian_ruins",
-        "projection": "rigid",
+        "projection": "terrain_matching",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:veradexian_ruins/temperate/center/center_04",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:veradexian_ruins",
+        "projection": "terrain_matching",
         "replace_air": true
       },
       "weight": 1

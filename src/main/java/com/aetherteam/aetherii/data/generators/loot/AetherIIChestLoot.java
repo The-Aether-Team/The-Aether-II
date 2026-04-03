@@ -236,7 +236,8 @@ public class AetherIIChestLoot implements LootTableSubProvider {
 
                 )
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.FOSSILIZED_ZANITE).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                 )
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_SHORTSWORD))
