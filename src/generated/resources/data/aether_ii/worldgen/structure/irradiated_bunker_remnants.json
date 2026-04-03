@@ -11,7 +11,7 @@
   "start_height": {
     "absolute": 0
   },
-  "start_pool": "aether_ii:irradiated_remnants/remnants",
+  "start_pool": "aether_ii:irradiated_remnants/bunker_remnants",
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin"
 }

@@ -40,8 +40,9 @@ public class AetherIIStructureSets {
 
         context.register(COMMON_AETHER_SURFACE_STRUCTURES, new StructureSet(List.of(
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.ANIMAL_DEN)),
-                StructureSet.entry(structures.getOrThrow(AetherIIStructures.IRRADIATED_REMNANTS))),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 4027017, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 12, 6, RandomSpreadType.LINEAR))
+                StructureSet.entry(structures.getOrThrow(AetherIIStructures.IRRADIATED_BUNKER_REMNANTS)),
+                        StructureSet.entry(structures.getOrThrow(AetherIIStructures.IRRADIATED_SETTLEMENT_REMNANTS))),
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 4027017, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 10, 5, RandomSpreadType.LINEAR))
         );
 
         context.register(AETHER_SURFACE_STRUCTURES, new StructureSet(List.of(

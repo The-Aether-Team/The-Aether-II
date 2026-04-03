@@ -5,11 +5,11 @@
         "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:irradiated_remnants/bunkers/decorations_01",
+        "location": "aether_ii:irradiated_remnants/bunkers/decorations/decoration_01",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:irradiated_bunker_exterior",
         "projection": "rigid",
-        "replace_air": false
+        "replace_air": true
       },
       "weight": 1
     },
@@ -18,11 +18,11 @@
         "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:irradiated_remnants/bunkers/decorations_02",
+        "location": "aether_ii:irradiated_remnants/bunkers/decorations/decoration__02",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:irradiated_bunker_exterior",
         "projection": "rigid",
-        "replace_air": false
+        "replace_air": true
       },
       "weight": 1
     },
@@ -31,11 +31,11 @@
         "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:irradiated_remnants/bunkers/decorations_03",
+        "location": "aether_ii:irradiated_remnants/bunkers/decorations/decoration__03",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:irradiated_bunker_exterior",
         "projection": "rigid",
-        "replace_air": false
+        "replace_air": true
       },
       "weight": 1
     },
@@ -44,11 +44,11 @@
         "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:irradiated_remnants/bunkers/decorations_04",
+        "location": "aether_ii:irradiated_remnants/bunkers/decorations/decoration__04",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:irradiated_bunker_exterior",
         "projection": "rigid",
-        "replace_air": false
+        "replace_air": true
       },
       "weight": 1
     },
@@ -57,11 +57,11 @@
         "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:irradiated_remnants/bunkers/decorations_05",
+        "location": "aether_ii:irradiated_remnants/bunkers/decorations/decoration__05",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:irradiated_bunker_exterior",
         "projection": "rigid",
-        "replace_air": false
+        "replace_air": true
       },
       "weight": 1
     }
