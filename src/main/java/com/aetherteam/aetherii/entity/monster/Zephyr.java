@@ -164,7 +164,7 @@ public class Zephyr extends PathfinderMob implements Enemy {
     }
 
     public Optional<BlockPos> findNearestRepellent(ServerLevel serverLevel, Zephyr zephyr) {
-        return BlockPos.findClosestMatch(zephyr.blockPosition(), 16, 12, pos -> serverLevel.getBlockState(pos).is(AetherIITags.Blocks.ZEPHYR_REPELLENT));
+        return BlockPos.findClosestMatch(zephyr.blockPosition(), 16, 12, pos -> serverLevel.getBlockState(pos).is(AetherIITags.Blocks.ZEPHYR_REPELLENT) && serverLevel.getBlockState(pos).getValue(BlockStateProperties.LIT));
     }
 
     /**
