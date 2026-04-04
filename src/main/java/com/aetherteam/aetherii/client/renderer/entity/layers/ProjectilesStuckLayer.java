@@ -35,6 +35,7 @@ public class ProjectilesStuckLayer<M extends PlayerModel> extends RenderLayer<Av
 
     @Override
     public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, AvatarRenderState renderState, float v, float v1) {
+      /*
         List<EntityType<?>> list = renderState.getRenderData(AetherIIRenderers.STUCK_PROJECTILES_KEY);
         if (list != null && !list.isEmpty()) {
             RandomSource random = RandomSource.create(renderState.id);
@@ -65,7 +66,9 @@ public class ProjectilesStuckLayer<M extends PlayerModel> extends RenderLayer<Av
                 this.renderStuckItem(poseStack, submitNodeCollector, renderState, i, -(f * 2.0F - 1.0F), -(f1 * 2.0F - 1.0F), -(f2 * 2.0F - 1.0F), texture, emissive);
                 poseStack.popPose();
             }
-        }
+
+       */
+        //}
     }
 
     private void renderStuckItem(PoseStack poseStack, @UnknownNullability SubmitNodeCollector submitNodeCollector, AvatarRenderState renderState, int packedLight, float x, float y, float z, Identifier texture, Identifier emissive) {
