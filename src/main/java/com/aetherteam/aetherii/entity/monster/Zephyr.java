@@ -24,15 +24,11 @@ import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
-import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Enemy;
-import net.minecraft.world.entity.monster.hoglin.Hoglin;
-import net.minecraft.world.entity.monster.hoglin.HoglinAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -164,7 +160,10 @@ public class Zephyr extends PathfinderMob implements Enemy {
     }
 
     public Optional<BlockPos> findNearestRepellent(ServerLevel serverLevel, Zephyr zephyr) {
-        return BlockPos.findClosestMatch(zephyr.blockPosition(), 16, 12, pos -> serverLevel.getBlockState(pos).is(AetherIITags.Blocks.ZEPHYR_REPELLENT) && serverLevel.getBlockState(pos).getValue(BlockStateProperties.LIT));
+        return BlockPos.findClosestMatch(zephyr.blockPosition(), 16, 12, pos ->
+                serverLevel.getBlockState(pos).is(AetherIITags.Blocks.ZEPHYR_REPELLENT)
+                && serverLevel.getBlockState(pos).getValue(BlockStateProperties.LIT) != null
+                && serverLevel.getBlockState(pos).getValue(BlockStateProperties.LIT));
     }
 
     /**
