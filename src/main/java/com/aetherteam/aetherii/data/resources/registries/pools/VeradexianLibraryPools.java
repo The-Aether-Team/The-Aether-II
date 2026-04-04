@@ -15,6 +15,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 public class VeradexianLibraryPools {
     public static final ResourceKey<StructureTemplatePool> ENTRANCE_TEMPERATE = AetherIIPools.createKey("veradexian_library/temperate/entrances");
     public static final ResourceKey<StructureTemplatePool> LIBRARY = AetherIIPools.createKey("veradexian_library/common/libraries");
+    public static final ResourceKey<StructureTemplatePool> SECRET_ROOM = AetherIIPools.createKey("veradexian_library/common/secret_rooms");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
@@ -36,6 +37,18 @@ public class VeradexianLibraryPools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/library_01", processorLibrary), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(SECRET_ROOM, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/secret_room_01"), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/secret_room_02"), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/secret_room_03"), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/secret_room_04"), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/secret_room_05"), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/secret_room_06"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

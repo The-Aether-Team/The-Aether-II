@@ -222,6 +222,55 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_MUSIC_DISCS).setWeight(2))
                 )
         );
+        builder.accept(AetherIILoot.CHESTS_VERADEXIAN_LIBRARY, LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(3.0F, 4.0F))
+                        .add(LootItem.lootTableItem(Items.BOOK).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(Items.PAPER).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 5.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.GUIDEBOOK_PAGE))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 5.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.SKYROOT_BOOKSHELF))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN))
+                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_BUCKET))
+                )
+
+        );
+        builder.accept(AetherIILoot.CHESTS_VERADEXIAN_LIBRARY_VAULTS, LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(3.0F, 4.0F))
+                        .add(LootItem.lootTableItem(Items.BOOK).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(Items.PAPER).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 4.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.GUIDEBOOK_PAGE).setWeight(2))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 5.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.FOSSILIZED_ZANITE))
+                        .add(LootItem.lootTableItem(AetherIIItems.GLINT_COIN))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.WYNDBERRY).setWeight(3))
+                        .add(LootItem.lootTableItem(AetherIIItems.ENCHANTED_SWET_JELLY).setWeight(2))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.HOLYSTONE_BOOKSHELF).setWeight(4))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN).setWeight(3))
+                        .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AERCLOUD_GLIDER))
+                        .add(LootItem.lootTableItem(AetherIIItems.ZANITE_PENDANT))
+                        .add(LootItem.lootTableItem(AetherIIItems.ICE_PENDANT))
+                )
+
+        );
 
         builder.accept(AetherIILoot.CHESTS_IRRADIATED_REMNANTS, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
