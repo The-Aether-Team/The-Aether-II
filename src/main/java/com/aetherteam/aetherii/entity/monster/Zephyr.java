@@ -280,7 +280,7 @@ public class Zephyr extends PathfinderMob implements Enemy {
 
         @Override
         public boolean canContinueToUse() {
-            return this.trackedTarget != null && this.zephyr.getProjectileChargeTime() == -40;
+            return this.trackedTarget != null && this.zephyr.getProjectileChargeTime() == -40 && !this.zephyr.isPosNearNearestRepellent(zephyr, zephyr.blockPosition());
         }
 
         @Override
@@ -351,7 +351,7 @@ public class Zephyr extends PathfinderMob implements Enemy {
 
         @Override
         public boolean canContinueToUse() {
-            return this.trackedTarget != null && this.zephyr.getBlowChargeTime() == -40;
+            return this.trackedTarget != null && this.zephyr.getBlowChargeTime() == -40 && !this.zephyr.isPosNearNearestRepellent(zephyr, zephyr.blockPosition());
         }
 
         @Override
