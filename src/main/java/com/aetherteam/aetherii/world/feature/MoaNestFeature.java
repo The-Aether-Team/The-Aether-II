@@ -44,7 +44,7 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
         Moa.FeatherShape featherShape = Moa.FeatherShape.getRandom(random, false);
         this.setBlock(level, pos, AetherIIBlocks.MOA_EGG.get().defaultBlockState().setValue(MoaEggBlock.KERATIN, keratinColor).setValue(MoaEggBlock.EYES, eyeColor).setValue(MoaEggBlock.FEATHERS, featherColor).setValue(MoaEggBlock.FEATHER_SHAPE, featherShape).setValue(MoaEggBlock.WILD, true));
         if (config.spawnMoas()) {
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 1; i++) {
                 Moa moa = AetherIIEntityTypes.MOA.get().create(level.getLevel(), EntitySpawnReason.CHUNK_GENERATION);
                 assert moa != null;
                 moa.setPos(pos.getCenter().add(i, 0, i));
