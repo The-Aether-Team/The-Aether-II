@@ -142,7 +142,9 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_ANIMAL_DEN).add(
                 HolyIslesBiomes.VERDANT_WOODS,
-                HolyIslesBiomes.SHROUDED_FOREST
+                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.ENDURING_WOODLAND
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_TEMPERATE).add(
                 HolyIslesBiomes.FLOURISHING_FIELD,
@@ -165,9 +167,7 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.VIOLET_HIGHWOODS
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_LIBRARY_ARCTIC).add(
-                HolyIslesBiomes.FRIGID_SIERRA,
-                HolyIslesBiomes.ENDURING_WOODLAND,
-                HolyIslesBiomes.SHEER_TUNDRA
+                HolyIslesBiomes.ENDURING_WOODLAND
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_IRRADIATED_REMNANTS).add(
                 HolyIslesBiomes.CONTAMINATED_JUNGLE,

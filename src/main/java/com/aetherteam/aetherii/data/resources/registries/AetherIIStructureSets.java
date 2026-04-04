@@ -41,7 +41,7 @@ public class AetherIIStructureSets {
 
         context.register(ANIMAL_DENS, new StructureSet(List.of(
                 StructureSet.entry(structures.getOrThrow(AetherIIStructures.ANIMAL_DEN))),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 4027017, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 10, 5, RandomSpreadType.LINEAR))
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 4027017, Optional.of(new StructurePlacement.ExclusionZone(outposts, 6)), 8, 5, RandomSpreadType.LINEAR))
         );
 
         context.register(AETHER_SURFACE_STRUCTURES, new StructureSet(List.of(

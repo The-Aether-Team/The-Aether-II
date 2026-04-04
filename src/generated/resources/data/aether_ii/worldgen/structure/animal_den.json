@@ -11,6 +11,6 @@
   "start_height": {
     "absolute": -2
   },
-  "start_pool": "aether_ii:animal_den/highfields",
+  "start_pool": "aether_ii:animal_den/dens",
   "step": "surface_structures"
 }
