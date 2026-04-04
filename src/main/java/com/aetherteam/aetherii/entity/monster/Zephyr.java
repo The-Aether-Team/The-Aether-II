@@ -447,22 +447,34 @@ public class Zephyr extends PathfinderMob implements Enemy {
             LivingEntity target = this.zephyr.getTarget();
             RandomSource random = this.zephyr.getRandom();
             if (target == null) {
-                double d0 = this.zephyr.getX() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
-                double d1 = this.zephyr.getY() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
-                double d2 = this.zephyr.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
-                this.zephyr.getMoveControl().setWantedPosition(d0, d1, d2, 1.0);
+                aimlessWandering(random);
             } else if ((this.zephyr.getProjectileChargeTime() == -40 && this.zephyr.getRandom().nextInt(6) != 0) || target.hasEffect(AetherIIEffects.WEBBED)) {
                 Vec3 goal = target.position().offsetRandom(random, 12.0F);
-                this.zephyr.getMoveControl().setWantedPosition(goal.x(), target.getY() + (random.nextFloat() * 2.0F - 1.0F), goal.z(), 1.0);
+
+                 if (this.zephyr.isPosNearNearestRepellent(this.zephyr, zephyr.blockPosition())) {
+                     aimlessWandering(random);
+                 }
+                 else this.zephyr.getMoveControl().setWantedPosition(goal.x(), target.getY() + (random.nextFloat() * 2.0F - 1.0F), goal.z(), 1.0);
+
             } else if (this.zephyr.getBlowChargeTime() == -40 && !target.hasEffect(AetherIIEffects.WEBBED)) {
                 Vec3 goal = target.position().offsetRandom(random, 24.0F);
-                this.zephyr.getMoveControl().setWantedPosition(goal.x(), target.getY() + (random.nextFloat() * 2.0F - 1.0F) * 6.0F, goal.z(), 1.5);
+                if (this.zephyr.isPosNearNearestRepellent(this.zephyr, zephyr.blockPosition())) {
+                    aimlessWandering(random);
+                }
+                else this.zephyr.getMoveControl().setWantedPosition(goal.x(), target.getY() + (random.nextFloat() * 2.0F - 1.0F) * 6.0F, goal.z(), 1.5);
             }
         }
 
         @Override
         public boolean requiresUpdateEveryTick() {
             return true;
+        }
+
+        public void aimlessWandering(RandomSource random) {
+            double d0 = this.zephyr.getX() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
+            double d1 = this.zephyr.getY() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
+            double d2 = this.zephyr.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
+            this.zephyr.getMoveControl().setWantedPosition(d0, d1, d2, 1.0);
         }
     }
 }
