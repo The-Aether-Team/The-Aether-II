@@ -1460,6 +1460,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE, "Temperate Veradexian Ruins");
         this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC, "Arctic Veradexian Ruins");
         this.addStructure(AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE, "Temperate Veradexian Library");
+        this.addStructure(AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC, "Arctic Veradexian Library");
         this.addStructure(AetherIIStructures.IRRADIATED_BUNKER_REMNANTS, "Irradiated Bunker Remnants");
         this.addStructure(AetherIIStructures.IRRADIATED_SETTLEMENT_REMNANTS, "Irradiated Settlement Remnants");
         this.addStructure(AetherIIStructures.SENTRY_RUINS, "Sentry Ruins");

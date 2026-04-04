@@ -23,6 +23,10 @@
     {
       "structure": "aether_ii:veradexian_library_temperate",
       "weight": 5
+    },
+    {
+      "structure": "aether_ii:veradexian_library_arctic",
+      "weight": 5
     }
   ]
 }

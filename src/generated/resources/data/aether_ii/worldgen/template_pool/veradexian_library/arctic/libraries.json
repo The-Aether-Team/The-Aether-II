@@ -7,7 +7,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:veradexian_library/common/library_01",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:veradexian_library",
+        "processors": "aether_ii:veradexian_library_arctic",
         "projection": "rigid",
         "replace_air": false
       },

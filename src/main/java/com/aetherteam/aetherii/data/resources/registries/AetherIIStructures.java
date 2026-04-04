@@ -38,6 +38,7 @@ public class AetherIIStructures {
     public static final ResourceKey<Structure> VERADEXIAN_RUINS_TEMPERATE = createKey("veradexian_ruins_temperate");
     public static final ResourceKey<Structure> VERADEXIAN_RUINS_ARCTIC = createKey("veradexian_ruins_arctic");
     public static final ResourceKey<Structure> VERADEXIAN_LIBRARY_TEMPERATE = createKey("veradexian_library_temperate");
+    public static final ResourceKey<Structure> VERADEXIAN_LIBRARY_ARCTIC = createKey("veradexian_library_arctic");
     public static final ResourceKey<Structure> IRRADIATED_BUNKER_REMNANTS = createKey("irradiated_bunker_remnants");
     public static final ResourceKey<Structure> IRRADIATED_SETTLEMENT_REMNANTS = createKey("irradiated_settlement_remnants");
     public static final ResourceKey<Structure> SENTRY_RUINS = createKey("sentry_ruins");
@@ -83,6 +84,9 @@ public class AetherIIStructures {
         context.register(VERADEXIAN_LIBRARY_TEMPERATE, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_LIBRARY_TEMPERATE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
                 templatePools.getOrThrow(VeradexianLibraryPools.ENTRANCE_TEMPERATE), Optional.empty(), 5, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+        context.register(VERADEXIAN_LIBRARY_ARCTIC, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_LIBRARY_ARCTIC), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
+                templatePools.getOrThrow(VeradexianLibraryPools.ENTRANCE_ARCTIC), Optional.empty(), 5, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
         context.register(IRRADIATED_BUNKER_REMNANTS, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_IRRADIATED_REMNANTS), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),

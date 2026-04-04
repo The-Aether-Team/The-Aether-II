@@ -14,7 +14,9 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 
 public class VeradexianLibraryPools {
     public static final ResourceKey<StructureTemplatePool> ENTRANCE_TEMPERATE = AetherIIPools.createKey("veradexian_library/temperate/entrances");
-    public static final ResourceKey<StructureTemplatePool> LIBRARY = AetherIIPools.createKey("veradexian_library/common/libraries");
+    public static final ResourceKey<StructureTemplatePool> ENTRANCE_ARCTIC = AetherIIPools.createKey("veradexian_library/arctic/entrances");
+    public static final ResourceKey<StructureTemplatePool> LIBRARY_TEMPERATE = AetherIIPools.createKey("veradexian_library/temperate/libraries");
+    public static final ResourceKey<StructureTemplatePool> LIBRARY_ARCTIC = AetherIIPools.createKey("veradexian_library/arctic/libraries");
     public static final ResourceKey<StructureTemplatePool> SECRET_ROOM = AetherIIPools.createKey("veradexian_library/common/secret_rooms");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
@@ -22,21 +24,38 @@ public class VeradexianLibraryPools {
         Holder<StructureTemplatePool> fallback = templatePools.getOrThrow(Pools.EMPTY);
 
         HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
-        Holder<StructureProcessorList> processorRuins = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_RUINS);
-        Holder<StructureProcessorList> processorLibrary = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_LIBRARY);
+        Holder<StructureProcessorList> processorRuinsTemperate = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_RUINS_TEMPERATE);
+        Holder<StructureProcessorList> processorRuinsArctic = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_RUINS_ARCTIC);
+        Holder<StructureProcessorList> processorLibraryTemperate = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_LIBRARY_TEMPERATE);
+        Holder<StructureProcessorList> processorLibraryArctic = processors.getOrThrow(AetherIIProcessorLists.VERADEXIAN_LIBRARY_ARCTIC);
 
         context.register(ENTRANCE_TEMPERATE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/entrance_01", processorRuins), 1),
-                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/entrance_02", processorRuins), 1)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/entrance_01", processorRuinsTemperate), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_library/temperate/entrance_02", processorRuinsTemperate), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
-        context.register(LIBRARY, new StructureTemplatePool(
+        context.register(ENTRANCE_ARCTIC, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/library_01", processorLibrary), 1)
+                        Pair.of(AetherIIPools.aetherPool("veradexian_library/arctic/entrance_01", processorRuinsArctic), 1),
+                        Pair.of(AetherIIPools.aetherPool("veradexian_library/arctic/entrance_02", processorRuinsArctic), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(LIBRARY_TEMPERATE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/library_01", processorLibraryTemperate), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(LIBRARY_ARCTIC, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("veradexian_library/common/library_01", processorLibraryArctic), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
