@@ -40,7 +40,7 @@
         }
       },
       {
-        "chance": 0.0025,
+        "chance": 0.00375,
         "feature": {
           "feature": "aether_ii:trees_amberoot_snowy",
           "placement": [

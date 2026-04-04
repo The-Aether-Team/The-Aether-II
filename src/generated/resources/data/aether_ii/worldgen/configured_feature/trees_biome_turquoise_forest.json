@@ -60,7 +60,7 @@
         }
       },
       {
-        "chance": 0.005,
+        "chance": 0.0075,
         "feature": {
           "feature": "aether_ii:trees_amberoot_dense",
           "placement": [
