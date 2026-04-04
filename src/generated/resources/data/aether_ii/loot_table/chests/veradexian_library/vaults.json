@@ -54,8 +54,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:guidebook_page",
-          "weight": 2
+          "name": "aether_ii:guidebook_page"
         }
       ],
       "rolls": {

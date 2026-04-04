@@ -247,7 +247,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(Items.BOOK).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                         .add(LootItem.lootTableItem(Items.PAPER).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 4.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.GUIDEBOOK_PAGE).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.GUIDEBOOK_PAGE))
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
