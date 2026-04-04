@@ -23,7 +23,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.util.DefaultRandomPos;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.hoglin.Hoglin;
+import net.minecraft.world.entity.monster.hoglin.HoglinAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
@@ -149,14 +153,6 @@ public class Zephyr extends PathfinderMob implements Enemy {
     @Override
     public void travel(Vec3 p_415638_) {
         this.travelFlying(p_415638_, 0.02F);
-    }
-
-    @Override
-    public float getWalkTargetValue(BlockPos pos, LevelReader levelReader) {
-        if (isPosNearNearestRepellent(this, pos)) {
-            return -1.0F;
-        }
-        return 0.0F;
     }
 
     public boolean isPosNearNearestRepellent(Zephyr zephyr, BlockPos pos) {
@@ -439,24 +435,38 @@ public class Zephyr extends PathfinderMob implements Enemy {
 
         @Override
         public void start() {
-            LivingEntity target = this.zephyr.getTarget();
-            RandomSource random = this.zephyr.getRandom();
-            if (target == null) {
-                aimlessWandering(random);
-            } else if ((this.zephyr.getProjectileChargeTime() == -40 && this.zephyr.getRandom().nextInt(6) != 0) || target.hasEffect(AetherIIEffects.WEBBED)) {
-                Vec3 goal = target.position().offsetRandom(random, 12.0F);
+            if (this.zephyr.isPosNearNearestRepellent(this.zephyr, this.zephyr.blockPosition())) {
+                if (this.zephyr.level() instanceof ServerLevel serverLevel) {
+                    Optional<BlockPos> optional = this.zephyr.findNearestRepellent(serverLevel, this.zephyr);
+                    if (optional.isPresent()) {
+                        Vec3 avoidPos = new Vec3(optional.get().getX(), optional.get().getY(), optional.get().getZ());
 
-                 if (this.zephyr.isPosNearNearestRepellent(this.zephyr, zephyr.blockPosition())) {
-                     aimlessWandering(random);
-                 }
-                 else this.zephyr.getMoveControl().setWantedPosition(goal.x(), target.getY() + (random.nextFloat() * 2.0F - 1.0F), goal.z(), 1.0);
-
-            } else if (this.zephyr.getBlowChargeTime() == -40 && !target.hasEffect(AetherIIEffects.WEBBED)) {
-                Vec3 goal = target.position().offsetRandom(random, 24.0F);
-                if (this.zephyr.isPosNearNearestRepellent(this.zephyr, zephyr.blockPosition())) {
-                    aimlessWandering(random);
+                        Vec3 vec3 = DefaultRandomPos.getPosAway(this.zephyr, 16, 7, avoidPos);
+                        if ((vec3 != null) && !(avoidPos.distanceToSqr(vec3.x, vec3.y, vec3.z) < avoidPos.distanceToSqr(this.zephyr.position()))) {
+                            this.zephyr.getNavigation().createPath(vec3.x, vec3.y, vec3.z, 0);
+                        }
+                    }
                 }
-                else this.zephyr.getMoveControl().setWantedPosition(goal.x(), target.getY() + (random.nextFloat() * 2.0F - 1.0F) * 6.0F, goal.z(), 1.5);
+            } else {
+                LivingEntity target = this.zephyr.getTarget();
+                RandomSource random = this.zephyr.getRandom();
+                if (target == null) {
+                    aimlessWandering(random);
+                } else if ((this.zephyr.getProjectileChargeTime() == -40 && this.zephyr.getRandom().nextInt(6) != 0) || target.hasEffect(AetherIIEffects.WEBBED)) {
+                    Vec3 goal = target.position().offsetRandom(random, 12.0F);
+
+                    if (this.zephyr.isPosNearNearestRepellent(this.zephyr, zephyr.blockPosition())) {
+                        aimlessWandering(random);
+                    } else
+                        this.zephyr.getMoveControl().setWantedPosition(goal.x(), target.getY() + (random.nextFloat() * 2.0F - 1.0F), goal.z(), 1.0);
+
+                } else if (this.zephyr.getBlowChargeTime() == -40 && !target.hasEffect(AetherIIEffects.WEBBED)) {
+                    Vec3 goal = target.position().offsetRandom(random, 24.0F);
+                    if (this.zephyr.isPosNearNearestRepellent(this.zephyr, zephyr.blockPosition())) {
+                        aimlessWandering(random);
+                    } else
+                        this.zephyr.getMoveControl().setWantedPosition(goal.x(), target.getY() + (random.nextFloat() * 2.0F - 1.0F) * 6.0F, goal.z(), 1.5);
+                }
             }
         }
 
