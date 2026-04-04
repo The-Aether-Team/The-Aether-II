@@ -102,8 +102,8 @@ public class Zephyr extends PathfinderMob implements Enemy {
     /**
      * Checks whether a Zephyr has a campfire, a campfire with a signal fire or an outpost campfire within its radius.
      *
-     * @param level The {@link LevelAccessor} to check in.
-     * @param pos The starting {@link BlockPos}.
+     * @param level  The {@link LevelAccessor} to check in.
+     * @param pos    The starting {@link BlockPos}.
      * @param radius The {@link Integer} radius around the position.
      * @return Whether the blocks were found in the radius, as a {@link Boolean}.
      */
@@ -158,7 +158,7 @@ public class Zephyr extends PathfinderMob implements Enemy {
     public boolean isPosNearNearestRepellent(Zephyr zephyr, BlockPos pos) {
         if (level() instanceof ServerLevel serverLevel) {
             Optional<BlockPos> optional = findNearestRepellent(serverLevel, zephyr);
-            return optional.isPresent() && optional.get().closerThan(pos, 8.0);
+            return optional.isPresent() && optional.get().closerThan(pos, 16.0);
         }
         return false;
     }
@@ -271,7 +271,11 @@ public class Zephyr extends PathfinderMob implements Enemy {
 
         @Override
         public boolean canUse() {
-            return this.zephyr.getTarget() != null && this.zephyr.getTarget().isAlive() && this.zephyr.distanceToSqr(this.zephyr.getTarget()) < this.attackThresholdSqr && this.zephyr.getProjectileChargeTime() == -40;
+            return this.zephyr.getTarget() != null
+                    && this.zephyr.getTarget().isAlive()
+                    && this.zephyr.distanceToSqr(this.zephyr.getTarget()) < this.attackThresholdSqr
+                    && this.zephyr.getProjectileChargeTime() == -40
+                    && !this.zephyr.isPosNearNearestRepellent(zephyr, zephyr.blockPosition());
         }
 
         @Override
@@ -293,31 +297,29 @@ public class Zephyr extends PathfinderMob implements Enemy {
 
         @Override
         public void tick() {
-            if (!this.zephyr.isPosNearNearestRepellent(zephyr, zephyr.blockPosition())) {
-                if (this.trackedTarget != null) {
-                    boolean canSee = this.zephyr.hasLineOfSight(this.trackedTarget);
+            if (this.trackedTarget != null) {
+                boolean canSee = this.zephyr.hasLineOfSight(this.trackedTarget);
 
-                    this.zephyr.setBlowChargeTime(this.zephyr.getBlowChargeTime() + 1);
+                this.zephyr.setBlowChargeTime(this.zephyr.getBlowChargeTime() + 1);
 
-                    if (this.zephyr.distanceTo(this.trackedTarget) < this.attackThreshold) {
-                        double d0 = this.zephyr.getX() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 4.0F;
-                        double d2 = this.zephyr.getZ() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 4.0F;
-                        this.zephyr.getMoveControl().setWantedPosition(d0, this.trackedTarget.getY(), d2, 0.1);
+                if (this.zephyr.distanceTo(this.trackedTarget) < this.attackThreshold) {
+                    double d0 = this.zephyr.getX() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 4.0F;
+                    double d2 = this.zephyr.getZ() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 4.0F;
+                    this.zephyr.getMoveControl().setWantedPosition(d0, this.trackedTarget.getY(), d2, 0.1);
+                }
+
+                if (this.zephyr.getBlowChargeTime() == 1) {
+                    this.zephyr.level().broadcastEntityEvent(this.zephyr, (byte) BLOW_ATTACK_EVENT);
+
+                } else if (this.zephyr.getBlowChargeTime() == 10) {
+                    if (this.zephyr.getAmbientSound() != null) {
+                        this.zephyr.playSound(this.zephyr.getAmbientSound(), this.zephyr.getSoundVolume(), (this.zephyr.getRandom().nextFloat() - this.zephyr.getRandom().nextFloat()) * 0.2F + 1.0F);
                     }
+                } else if (this.zephyr.getBlowChargeTime() == 60) {
+                    this.zephyr.setBlowChargeTime(-40);
 
-                    if (this.zephyr.getBlowChargeTime() == 1) {
-                        this.zephyr.level().broadcastEntityEvent(this.zephyr, (byte) BLOW_ATTACK_EVENT);
-
-                    } else if (this.zephyr.getBlowChargeTime() == 10) {
-                        if (this.zephyr.getAmbientSound() != null) {
-                            this.zephyr.playSound(this.zephyr.getAmbientSound(), this.zephyr.getSoundVolume(), (this.zephyr.getRandom().nextFloat() - this.zephyr.getRandom().nextFloat()) * 0.2F + 1.0F);
-                        }
-                    } else if (this.zephyr.getBlowChargeTime() == 60) {
-                        this.zephyr.setBlowChargeTime(-40);
-
-                        if (!canSee || this.zephyr.getTarget() == null || !this.zephyr.getTarget().isAlive() || this.zephyr.distanceToSqr(this.trackedTarget) >= this.attackThresholdSqr) {
-                            this.trackedTarget = null;
-                        }
+                    if (!canSee || this.zephyr.getTarget() == null || !this.zephyr.getTarget().isAlive() || this.zephyr.distanceToSqr(this.trackedTarget) >= this.attackThresholdSqr) {
+                        this.trackedTarget = null;
                     }
                 }
             }
@@ -338,7 +340,13 @@ public class Zephyr extends PathfinderMob implements Enemy {
 
         @Override
         public boolean canUse() {
-            return this.zephyr.getTarget() != null && this.zephyr.getTarget().isAlive() && this.zephyr.distanceToSqr(this.zephyr.getTarget()) >= this.attackThresholdSqr && this.zephyr.distanceToSqr(this.zephyr.getTarget()) < this.attackFarLimitSqr && this.zephyr.getBlowChargeTime() == -40 && !this.zephyr.getTarget().hasEffect(AetherIIEffects.WEBBED);
+            return this.zephyr.getTarget() != null
+                    && this.zephyr.getTarget().isAlive()
+                    && this.zephyr.distanceToSqr(this.zephyr.getTarget()) >= this.attackThresholdSqr
+                    && this.zephyr.distanceToSqr(this.zephyr.getTarget()) < this.attackFarLimitSqr
+                    && this.zephyr.getBlowChargeTime() == -40
+                    && !this.zephyr.getTarget().hasEffect(AetherIIEffects.WEBBED)
+                    && !this.zephyr.isPosNearNearestRepellent(zephyr, zephyr.blockPosition());
         }
 
         @Override
@@ -360,43 +368,41 @@ public class Zephyr extends PathfinderMob implements Enemy {
 
         @Override
         public void tick() {
-            if (!this.zephyr.isPosNearNearestRepellent(zephyr, zephyr.blockPosition())) {
-                if (this.trackedTarget != null) {
-                    this.zephyr.setProjectileChargeTime(this.zephyr.getProjectileChargeTime() + 1);
+            if (this.trackedTarget != null) {
+                this.zephyr.setProjectileChargeTime(this.zephyr.getProjectileChargeTime() + 1);
 
-                    if (this.zephyr.distanceToSqr(this.trackedTarget) < this.attackThresholdSqr) {
-                        double d0 = this.zephyr.getX() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
-                        double d1 = this.zephyr.getY() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
-                        double d2 = this.zephyr.getZ() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
-                        this.zephyr.getMoveControl().setWantedPosition(d0, d1, d2, 1.0);
+                if (this.zephyr.distanceToSqr(this.trackedTarget) < this.attackThresholdSqr) {
+                    double d0 = this.zephyr.getX() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
+                    double d1 = this.zephyr.getY() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
+                    double d2 = this.zephyr.getZ() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
+                    this.zephyr.getMoveControl().setWantedPosition(d0, d1, d2, 1.0);
+                }
+
+                if (this.zephyr.getProjectileChargeTime() == 10) {
+                    if (this.zephyr.getAmbientSound() != null) {
+                        this.zephyr.playSound(this.zephyr.getAmbientSound(), this.zephyr.getSoundVolume(), (this.zephyr.getRandom().nextFloat() - this.zephyr.getRandom().nextFloat()) * 0.2F + 1.0F);
                     }
+                } else if (this.zephyr.getProjectileChargeTime() == 13) {
+                    this.zephyr.level().broadcastEntityEvent(this.zephyr, (byte) SHOOT_ATTACK_EVENT);
 
-                    if (this.zephyr.getProjectileChargeTime() == 10) {
-                        if (this.zephyr.getAmbientSound() != null) {
-                            this.zephyr.playSound(this.zephyr.getAmbientSound(), this.zephyr.getSoundVolume(), (this.zephyr.getRandom().nextFloat() - this.zephyr.getRandom().nextFloat()) * 0.2F + 1.0F);
-                        }
-                    } else if (this.zephyr.getProjectileChargeTime() == 13) {
-                        this.zephyr.level().broadcastEntityEvent(this.zephyr, (byte) SHOOT_ATTACK_EVENT);
+                } else if (this.zephyr.getProjectileChargeTime() == 20) {
+                    Vec3 look = this.zephyr.getViewVector(1.0F);
+                    double accelX = this.trackedTarget.getX() - (this.zephyr.getX() + look.x() * 1.5);
+                    double accelY = this.trackedTarget.getY() - (this.zephyr.getY() + 0.35);
+                    double accelZ = this.trackedTarget.getZ() - (this.zephyr.getZ() + look.z() * 1.5);
+                    this.zephyr.playSound(AetherIISoundEvents.ENTITY_ZEPHYR_SHOOT.get(), this.zephyr.getSoundVolume(), (this.zephyr.getRandom().nextFloat() - this.zephyr.getRandom().nextFloat()) * 0.2F + 1.0F);
+                    ZephyrWebbingBall snowball = new ZephyrWebbingBall(this.zephyr.level(), this.zephyr, accelX, accelY, accelZ);
+                    snowball.setPos(this.zephyr.getX() + look.x() * 1.55, this.zephyr.getY() + 0.35, this.zephyr.getZ() + look.z() * 1.55);
+                    this.zephyr.level().addFreshEntity(snowball);
+                    this.zephyr.setProjectileChargeTime(-40);
 
-                    } else if (this.zephyr.getProjectileChargeTime() == 20) {
-                        Vec3 look = this.zephyr.getViewVector(1.0F);
-                        double accelX = this.trackedTarget.getX() - (this.zephyr.getX() + look.x() * 1.5);
-                        double accelY = this.trackedTarget.getY() - (this.zephyr.getY() + 0.35);
-                        double accelZ = this.trackedTarget.getZ() - (this.zephyr.getZ() + look.z() * 1.5);
-                        this.zephyr.playSound(AetherIISoundEvents.ENTITY_ZEPHYR_SHOOT.get(), this.zephyr.getSoundVolume(), (this.zephyr.getRandom().nextFloat() - this.zephyr.getRandom().nextFloat()) * 0.2F + 1.0F);
-                        ZephyrWebbingBall snowball = new ZephyrWebbingBall(this.zephyr.level(), this.zephyr, accelX, accelY, accelZ);
-                        snowball.setPos(this.zephyr.getX() + look.x() * 1.55, this.zephyr.getY() + 0.35, this.zephyr.getZ() + look.z() * 1.55);
-                        this.zephyr.level().addFreshEntity(snowball);
-                        this.zephyr.setProjectileChargeTime(-40);
-
-                        if (!this.zephyr.hasLineOfSight(this.trackedTarget)
-                                || this.zephyr.getTarget() == null
-                                || !this.zephyr.getTarget().isAlive()
-                                || this.zephyr.distanceToSqr(this.trackedTarget) < this.attackThresholdSqr
-                                || this.zephyr.distanceToSqr(this.zephyr.getTarget()) >= this.attackFarLimitSqr
-                                || this.zephyr.getTarget().hasEffect(AetherIIEffects.WEBBED)) {
-                            this.trackedTarget = null;
-                        }
+                    if (!this.zephyr.hasLineOfSight(this.trackedTarget)
+                            || this.zephyr.getTarget() == null
+                            || !this.zephyr.getTarget().isAlive()
+                            || this.zephyr.distanceToSqr(this.trackedTarget) < this.attackThresholdSqr
+                            || this.zephyr.distanceToSqr(this.zephyr.getTarget()) >= this.attackFarLimitSqr
+                            || this.zephyr.getTarget().hasEffect(AetherIIEffects.WEBBED)) {
+                        this.trackedTarget = null;
                     }
                 }
             }
@@ -443,7 +449,7 @@ public class Zephyr extends PathfinderMob implements Enemy {
 
                         Vec3 vec3 = DefaultRandomPos.getPosAway(this.zephyr, 16, 7, avoidPos);
                         if ((vec3 != null) && !(avoidPos.distanceToSqr(vec3.x, vec3.y, vec3.z) < avoidPos.distanceToSqr(this.zephyr.position()))) {
-                            this.zephyr.getNavigation().createPath(vec3.x, vec3.y, vec3.z, 0);
+                            this.zephyr.getMoveControl().setWantedPosition(vec3.x, vec3.y, vec3.z, 2.0);
                         }
                     }
                 }
