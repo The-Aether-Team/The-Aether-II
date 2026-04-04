@@ -25,7 +25,7 @@ import org.jetbrains.annotations.UnknownNullability;
 
 import java.util.List;
 
-public class ProjectilesStuckLayer<M extends PlayerModel> extends RenderLayer<AvatarRenderState, M> {
+public class ProjectilesStuckLayer<M extends PlayerModel, S> extends RenderLayer<AvatarRenderState, M> {
     private final Model model;
 
     public ProjectilesStuckLayer(LivingEntityRenderer<?, AvatarRenderState, M> renderer, EntityRendererProvider.Context context) {
@@ -35,7 +35,7 @@ public class ProjectilesStuckLayer<M extends PlayerModel> extends RenderLayer<Av
 
     @Override
     public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, AvatarRenderState renderState, float v, float v1) {
-      /*
+
         List<EntityType<?>> list = renderState.getRenderData(AetherIIRenderers.STUCK_PROJECTILES_KEY);
         if (list != null && !list.isEmpty()) {
             RandomSource random = RandomSource.create(renderState.id);
@@ -67,8 +67,8 @@ public class ProjectilesStuckLayer<M extends PlayerModel> extends RenderLayer<Av
                 poseStack.popPose();
             }
 
-       */
-        //}
+
+        }
     }
 
     private void renderStuckItem(PoseStack poseStack, @UnknownNullability SubmitNodeCollector submitNodeCollector, AvatarRenderState renderState, int packedLight, float x, float y, float z, Identifier texture, Identifier emissive) {
@@ -77,9 +77,9 @@ public class ProjectilesStuckLayer<M extends PlayerModel> extends RenderLayer<Av
         float f2 = (float) (Math.atan2(y, f) * 180.0F / Math.PI);
         poseStack.mulPose(Axis.YP.rotationDegrees(f1 - 90.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(f2));
-        submitNodeCollector.submitModel(this.model, renderState, poseStack, this.model.renderType(texture), packedLight, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
+     //   submitNodeCollector.submitModel(this.model, renderState, poseStack, this.model.renderType(texture), packedLight, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
         if (emissive != null) {
-            submitNodeCollector.submitModel(this.model, renderState, poseStack, RenderTypes.eyes(emissive), packedLight, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
+      //      submitNodeCollector.submitModel(this.model, renderState, poseStack, RenderTypes.eyes(emissive), packedLight, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
         }
     }
 
