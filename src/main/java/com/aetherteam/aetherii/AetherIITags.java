@@ -105,6 +105,7 @@ public class AetherIITags {
 
         public static final TagKey<Block> WEAK_ZEPHYR_SPAWNABLE_DETERRENT = tag("weak_zephyr_spawnable_deterrent");
         public static final TagKey<Block> STRONG_ZEPHYR_SPAWNABLE_DETERRENT = tag("strong_zephyr_spawnable_deterrent");
+        public static final TagKey<Block> ZEPHYR_REPELLENT = tag("zephyr_repellent");
 
         public static final TagKey<Block> TAEGORE_DIGGABLE_BLOCK = tag("taegore_diggable_block");
         public static final TagKey<Block> MOA_HATCH_BLOCK = tag("moa_hatch_block");

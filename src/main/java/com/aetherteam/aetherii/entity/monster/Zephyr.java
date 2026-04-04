@@ -12,7 +12,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
@@ -22,11 +24,16 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.hoglin.Hoglin;
+import net.minecraft.world.entity.monster.hoglin.HoglinAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -36,8 +43,9 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Optional;
 
-public class Zephyr extends Mob implements Enemy {
+public class Zephyr extends PathfinderMob implements Enemy {
     public static int BLOW_ATTACK_EVENT = 100;
     public static int SHOOT_ATTACK_EVENT = 101;
 
@@ -146,6 +154,26 @@ public class Zephyr extends Mob implements Enemy {
     @Override
     public void travel(Vec3 p_415638_) {
         this.travelFlying(p_415638_, 0.02F);
+    }
+
+    @Override
+    public float getWalkTargetValue(BlockPos pos, LevelReader levelReader) {
+        if (isPosNearNearestRepellent(this, pos)) {
+            return -1.0F;
+        }
+        return 0.0F;
+    }
+
+    public boolean isPosNearNearestRepellent(Zephyr zephyr, BlockPos pos) {
+        if (level() instanceof ServerLevel serverLevel) {
+            Optional<BlockPos> optional = findNearestRepellent(serverLevel, zephyr);
+            return optional.isPresent() && optional.get().closerThan(pos, 8.0);
+        }
+        return false;
+    }
+
+    public Optional<BlockPos> findNearestRepellent(ServerLevel serverLevel, Zephyr zephyr) {
+        return BlockPos.findClosestMatch(zephyr.blockPosition(), 16, 12, pos -> serverLevel.getBlockState(pos).is(AetherIITags.Blocks.ZEPHYR_REPELLENT));
     }
 
     /**
@@ -274,29 +302,31 @@ public class Zephyr extends Mob implements Enemy {
 
         @Override
         public void tick() {
-            if (this.trackedTarget != null) {
-                boolean canSee = this.zephyr.hasLineOfSight(this.trackedTarget);
+            if (!this.zephyr.isPosNearNearestRepellent(zephyr, zephyr.blockPosition())) {
+                if (this.trackedTarget != null) {
+                    boolean canSee = this.zephyr.hasLineOfSight(this.trackedTarget);
 
-                this.zephyr.setBlowChargeTime(this.zephyr.getBlowChargeTime() + 1);
+                    this.zephyr.setBlowChargeTime(this.zephyr.getBlowChargeTime() + 1);
 
-                if (this.zephyr.distanceTo(this.trackedTarget) < this.attackThreshold) {
-                    double d0 = this.zephyr.getX() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 4.0F;
-                    double d2 = this.zephyr.getZ() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 4.0F;
-                    this.zephyr.getMoveControl().setWantedPosition(d0, this.trackedTarget.getY(), d2, 0.1);
-                }
-
-                if (this.zephyr.getBlowChargeTime() == 1) {
-                    this.zephyr.level().broadcastEntityEvent(this.zephyr, (byte) BLOW_ATTACK_EVENT);
-
-                } else if (this.zephyr.getBlowChargeTime() == 10) {
-                    if (this.zephyr.getAmbientSound() != null) {
-                        this.zephyr.playSound(this.zephyr.getAmbientSound(), this.zephyr.getSoundVolume(), (this.zephyr.getRandom().nextFloat() - this.zephyr.getRandom().nextFloat()) * 0.2F + 1.0F);
+                    if (this.zephyr.distanceTo(this.trackedTarget) < this.attackThreshold) {
+                        double d0 = this.zephyr.getX() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 4.0F;
+                        double d2 = this.zephyr.getZ() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 4.0F;
+                        this.zephyr.getMoveControl().setWantedPosition(d0, this.trackedTarget.getY(), d2, 0.1);
                     }
-                }  else if (this.zephyr.getBlowChargeTime() == 60) {
-                    this.zephyr.setBlowChargeTime(-40);
 
-                    if (!canSee || this.zephyr.getTarget() == null || !this.zephyr.getTarget().isAlive() || this.zephyr.distanceToSqr(this.trackedTarget) >= this.attackThresholdSqr) {
-                        this.trackedTarget = null;
+                    if (this.zephyr.getBlowChargeTime() == 1) {
+                        this.zephyr.level().broadcastEntityEvent(this.zephyr, (byte) BLOW_ATTACK_EVENT);
+
+                    } else if (this.zephyr.getBlowChargeTime() == 10) {
+                        if (this.zephyr.getAmbientSound() != null) {
+                            this.zephyr.playSound(this.zephyr.getAmbientSound(), this.zephyr.getSoundVolume(), (this.zephyr.getRandom().nextFloat() - this.zephyr.getRandom().nextFloat()) * 0.2F + 1.0F);
+                        }
+                    } else if (this.zephyr.getBlowChargeTime() == 60) {
+                        this.zephyr.setBlowChargeTime(-40);
+
+                        if (!canSee || this.zephyr.getTarget() == null || !this.zephyr.getTarget().isAlive() || this.zephyr.distanceToSqr(this.trackedTarget) >= this.attackThresholdSqr) {
+                            this.trackedTarget = null;
+                        }
                     }
                 }
             }
@@ -339,41 +369,43 @@ public class Zephyr extends Mob implements Enemy {
 
         @Override
         public void tick() {
-            if (this.trackedTarget != null) {
-                this.zephyr.setProjectileChargeTime(this.zephyr.getProjectileChargeTime() + 1);
+            if (!this.zephyr.isPosNearNearestRepellent(zephyr, zephyr.blockPosition())) {
+                if (this.trackedTarget != null) {
+                    this.zephyr.setProjectileChargeTime(this.zephyr.getProjectileChargeTime() + 1);
 
-                if (this.zephyr.distanceToSqr(this.trackedTarget) < this.attackThresholdSqr) {
-                    double d0 = this.zephyr.getX() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
-                    double d1 = this.zephyr.getY() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
-                    double d2 = this.zephyr.getZ() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
-                    this.zephyr.getMoveControl().setWantedPosition(d0, d1, d2, 1.0);
-                }
-
-                if (this.zephyr.getProjectileChargeTime() == 10) {
-                    if (this.zephyr.getAmbientSound() != null) {
-                        this.zephyr.playSound(this.zephyr.getAmbientSound(), this.zephyr.getSoundVolume(), (this.zephyr.getRandom().nextFloat() - this.zephyr.getRandom().nextFloat()) * 0.2F + 1.0F);
+                    if (this.zephyr.distanceToSqr(this.trackedTarget) < this.attackThresholdSqr) {
+                        double d0 = this.zephyr.getX() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
+                        double d1 = this.zephyr.getY() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
+                        double d2 = this.zephyr.getZ() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 16.0F;
+                        this.zephyr.getMoveControl().setWantedPosition(d0, d1, d2, 1.0);
                     }
-                } else if (this.zephyr.getProjectileChargeTime() == 13) {
-                    this.zephyr.level().broadcastEntityEvent(this.zephyr, (byte) SHOOT_ATTACK_EVENT);
 
-                } else if (this.zephyr.getProjectileChargeTime() == 20) {
-                    Vec3 look = this.zephyr.getViewVector(1.0F);
-                    double accelX = this.trackedTarget.getX() - (this.zephyr.getX() + look.x() * 1.5);
-                    double accelY = this.trackedTarget.getY() - (this.zephyr.getY() + 0.35);
-                    double accelZ = this.trackedTarget.getZ() - (this.zephyr.getZ() + look.z() * 1.5);
-                    this.zephyr.playSound(AetherIISoundEvents.ENTITY_ZEPHYR_SHOOT.get(), this.zephyr.getSoundVolume(), (this.zephyr.getRandom().nextFloat() - this.zephyr.getRandom().nextFloat()) * 0.2F + 1.0F);
-                    ZephyrWebbingBall snowball = new ZephyrWebbingBall(this.zephyr.level(), this.zephyr, accelX, accelY, accelZ);
-                    snowball.setPos(this.zephyr.getX() + look.x() * 1.55, this.zephyr.getY() + 0.35, this.zephyr.getZ() + look.z() * 1.55);
-                    this.zephyr.level().addFreshEntity(snowball);
-                    this.zephyr.setProjectileChargeTime(-40);
+                    if (this.zephyr.getProjectileChargeTime() == 10) {
+                        if (this.zephyr.getAmbientSound() != null) {
+                            this.zephyr.playSound(this.zephyr.getAmbientSound(), this.zephyr.getSoundVolume(), (this.zephyr.getRandom().nextFloat() - this.zephyr.getRandom().nextFloat()) * 0.2F + 1.0F);
+                        }
+                    } else if (this.zephyr.getProjectileChargeTime() == 13) {
+                        this.zephyr.level().broadcastEntityEvent(this.zephyr, (byte) SHOOT_ATTACK_EVENT);
 
-                    if (!this.zephyr.hasLineOfSight(this.trackedTarget)
-                            || this.zephyr.getTarget() == null
-                            || !this.zephyr.getTarget().isAlive()
-                            || this.zephyr.distanceToSqr(this.trackedTarget) < this.attackThresholdSqr
-                            || this.zephyr.distanceToSqr(this.zephyr.getTarget()) >= this.attackFarLimitSqr
-                            || this.zephyr.getTarget().hasEffect(AetherIIEffects.WEBBED)) {
-                        this.trackedTarget = null;
+                    } else if (this.zephyr.getProjectileChargeTime() == 20) {
+                        Vec3 look = this.zephyr.getViewVector(1.0F);
+                        double accelX = this.trackedTarget.getX() - (this.zephyr.getX() + look.x() * 1.5);
+                        double accelY = this.trackedTarget.getY() - (this.zephyr.getY() + 0.35);
+                        double accelZ = this.trackedTarget.getZ() - (this.zephyr.getZ() + look.z() * 1.5);
+                        this.zephyr.playSound(AetherIISoundEvents.ENTITY_ZEPHYR_SHOOT.get(), this.zephyr.getSoundVolume(), (this.zephyr.getRandom().nextFloat() - this.zephyr.getRandom().nextFloat()) * 0.2F + 1.0F);
+                        ZephyrWebbingBall snowball = new ZephyrWebbingBall(this.zephyr.level(), this.zephyr, accelX, accelY, accelZ);
+                        snowball.setPos(this.zephyr.getX() + look.x() * 1.55, this.zephyr.getY() + 0.35, this.zephyr.getZ() + look.z() * 1.55);
+                        this.zephyr.level().addFreshEntity(snowball);
+                        this.zephyr.setProjectileChargeTime(-40);
+
+                        if (!this.zephyr.hasLineOfSight(this.trackedTarget)
+                                || this.zephyr.getTarget() == null
+                                || !this.zephyr.getTarget().isAlive()
+                                || this.zephyr.distanceToSqr(this.trackedTarget) < this.attackThresholdSqr
+                                || this.zephyr.distanceToSqr(this.zephyr.getTarget()) >= this.attackFarLimitSqr
+                                || this.zephyr.getTarget().hasEffect(AetherIIEffects.WEBBED)) {
+                            this.trackedTarget = null;
+                        }
                     }
                 }
             }

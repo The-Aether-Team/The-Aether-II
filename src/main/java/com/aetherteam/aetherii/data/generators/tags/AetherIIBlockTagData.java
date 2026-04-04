@@ -316,6 +316,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ICHORITE.get());
         this.tag(AetherIITags.Blocks.WEAK_ZEPHYR_SPAWNABLE_DETERRENT).add(AetherIIBlocks.AMBROSIUM_CAMPFIRE.get());
         this.tag(AetherIITags.Blocks.STRONG_ZEPHYR_SPAWNABLE_DETERRENT).add(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
+        this.tag(AetherIITags.Blocks.ZEPHYR_REPELLENT).addTags(
+                AetherIITags.Blocks.WEAK_ZEPHYR_SPAWNABLE_DETERRENT,
+                AetherIITags.Blocks.STRONG_ZEPHYR_SPAWNABLE_DETERRENT);
         this.tag(AetherIITags.Blocks.TAEGORE_DIGGABLE_BLOCK).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.AETHER_DIRT.get(),
