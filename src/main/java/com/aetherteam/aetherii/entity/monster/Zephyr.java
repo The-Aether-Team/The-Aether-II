@@ -447,7 +447,7 @@ public class Zephyr extends PathfinderMob implements Enemy {
                     if (optional.isPresent()) {
                         Vec3 avoidPos = new Vec3(optional.get().getX(), optional.get().getY(), optional.get().getZ());
 
-                        Vec3 vec3 = DefaultRandomPos.getPosAway(this.zephyr, 16, 7, avoidPos);
+                        Vec3 vec3 = DefaultRandomPos.getPosAway(this.zephyr, 24, 12, avoidPos);
                         if ((vec3 != null) && !(avoidPos.distanceToSqr(vec3.x, vec3.y, vec3.z) < avoidPos.distanceToSqr(this.zephyr.position()))) {
                             this.zephyr.getMoveControl().setWantedPosition(vec3.x, vec3.y, vec3.z, 2.0);
                         }
