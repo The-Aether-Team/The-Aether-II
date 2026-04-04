@@ -224,9 +224,9 @@ public class AetherIIChestLoot implements LootTableSubProvider {
         );
         builder.accept(AetherIILoot.CHESTS_VERADEXIAN_LIBRARY, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(3.0F, 4.0F))
-                        .add(LootItem.lootTableItem(Items.BOOK).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
-                        .add(LootItem.lootTableItem(Items.PAPER).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 5.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(Items.BOOK).setWeight(10).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(Items.PAPER).setWeight(10).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 5.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.GUIDEBOOK_PAGE))
                 )
 
@@ -244,9 +244,9 @@ public class AetherIIChestLoot implements LootTableSubProvider {
         );
         builder.accept(AetherIILoot.CHESTS_VERADEXIAN_LIBRARY_VAULTS, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(3.0F, 4.0F))
-                        .add(LootItem.lootTableItem(Items.BOOK).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
-                        .add(LootItem.lootTableItem(Items.PAPER).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 4.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(Items.BOOK).setWeight(10).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(Items.PAPER).setWeight(10).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 4.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BEAST_PELT).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIItems.GUIDEBOOK_PAGE))
                 )
 

@@ -18,7 +18,7 @@
             }
           ],
           "name": "minecraft:book",
-          "weight": 5
+          "weight": 10
         },
         {
           "type": "minecraft:item",
@@ -34,7 +34,7 @@
             }
           ],
           "name": "minecraft:paper",
-          "weight": 5
+          "weight": 10
         },
         {
           "type": "minecraft:item",
@@ -50,7 +50,7 @@
             }
           ],
           "name": "aether_ii:beast_pelt",
-          "weight": 3
+          "weight": 6
         },
         {
           "type": "minecraft:item",
