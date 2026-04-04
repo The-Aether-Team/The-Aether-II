@@ -11,7 +11,7 @@
   "start_height": {
     "absolute": 0
   },
-  "start_pool": "aether_ii:veradexian_ruins/ruins_temperate",
+  "start_pool": "aether_ii:veradexian_ruins/temperate/ruin_centers",
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin"
 }

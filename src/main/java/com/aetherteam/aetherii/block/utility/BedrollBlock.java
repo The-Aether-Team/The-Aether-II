@@ -66,7 +66,7 @@ public class BedrollBlock extends HorizontalDirectionalBlock {
                 }
             }
 
-            BedRule bedrule = (BedRule) level.environmentAttributes().getValue(EnvironmentAttributes.BED_RULE, pos);
+            BedRule bedrule = level.environmentAttributes().getValue(EnvironmentAttributes.BED_RULE, pos);
 
             if (!bedrule.canSleep().test(level)) {
                 level.removeBlock(pos, false);

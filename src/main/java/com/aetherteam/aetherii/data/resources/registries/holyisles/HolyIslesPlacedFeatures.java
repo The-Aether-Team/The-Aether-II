@@ -510,7 +510,7 @@ public class HolyIslesPlacedFeatures {
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))),
                 BiomeFilter.biome());
 
-        register(context, TREE_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREE_MOSS_COVER));
+        register(context, TREE_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.TREE_MOSS_COVER), BiomeFilter.biome());
 
         register(context, AETHER_GRASS_BONEMEAL, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AETHER_GRASS_BONEMEAL), PlacementUtils.isEmpty());
         register(context, ARILUM_BONEMEAL, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ARILUM_BONEMEAL), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)));

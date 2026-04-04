@@ -125,8 +125,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.PURPLE_AERCLOUD.get());
         this.dropSelf(AetherIIBlocks.STORM_AERCLOUD.get());
 
-        // Moa Nest
+        // Nest Blocks
         this.dropSelf(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
+        this.dropSelf(AetherIIBlocks.ANIMAL_STASH.get());
         this.add(AetherIIBlocks.MOA_EGG.get(), this::droppingMoaEgg);
 
         // Logs

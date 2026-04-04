@@ -5,20 +5,28 @@
       "chunk_count": 6,
       "other_set": "aether_ii:outposts"
     },
-    "frequency": 0.65,
+    "frequency": 0.75,
     "frequency_reduction_method": "legacy_type_2",
     "salt": 2038911,
     "separation": 8,
-    "spacing": 16
+    "spacing": 14
   },
   "structures": [
     {
       "structure": "aether_ii:veradexian_ruins_temperate",
-      "weight": 1
+      "weight": 3
     },
     {
       "structure": "aether_ii:veradexian_ruins_arctic",
-      "weight": 1
+      "weight": 3
+    },
+    {
+      "structure": "aether_ii:veradexian_library_temperate",
+      "weight": 2
+    },
+    {
+      "structure": "aether_ii:veradexian_library_arctic",
+      "weight": 2
     }
   ]
 }

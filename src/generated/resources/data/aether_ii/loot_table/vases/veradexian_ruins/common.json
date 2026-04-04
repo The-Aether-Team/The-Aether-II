@@ -34,7 +34,7 @@
             }
           ],
           "name": "aether_ii:scatterglass_shard",
-          "weight": 20
+          "weight": 16
         },
         {
           "type": "minecraft:item",
@@ -75,16 +75,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:swet_gel",
-          "weight": 12
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:swet_sugar",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:item",
           "name": "aether_ii:cloudtwine",
           "weight": 12
         },
@@ -100,33 +90,38 @@
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:holystone_crossbow",
-          "weight": 10
+          "name": "aether_ii:guidebook_page",
+          "weight": 9
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:burrukai_plate_shield",
-          "weight": 10
-        },
-        {
-          "type": "minecraft:item",
-          "name": "aether_ii:skyroot_bucket",
+          "name": "aether_ii:golden_aercloud",
           "weight": 8
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:guidebook_page",
-          "weight": 10
+          "name": "aether_ii:glint_coin",
+          "weight": 8
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:fossilized_zanite",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:holystone_crossbow",
           "weight": 6
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:glint_coin",
-          "weight": 5
+          "name": "aether_ii:burrukai_plate_shield",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:skyroot_bucket",
+          "weight": 6
         },
         {
           "type": "minecraft:loot_table",

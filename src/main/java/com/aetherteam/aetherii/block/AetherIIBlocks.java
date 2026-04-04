@@ -154,8 +154,10 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> PURPLE_AERCLOUD = register("purple_aercloud", PurpleAercloudBlock::new, specialAercloudProperties(MapColor.COLOR_MAGENTA));
     public static final DeferredBlock<Block> STORM_AERCLOUD = register("storm_aercloud", AercloudBlock::new, specialAercloudProperties(MapColor.DEEPSLATE));
 
-    // Moa Nest
+    // Nest Blocks
     public static final DeferredBlock<Block> WOVEN_SKYROOT_STICKS = register("woven_skyroot_sticks", WovenSticksBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(0.75F).sound(SoundType.GRASS));
+    public static final DeferredBlock<Block> ANIMAL_STASH = register("animal_stash", AnimalStashBlock::new, () -> Block.Properties.ofFullCopy(WOVEN_SKYROOT_STICKS.get()));
+    public static final DeferredBlock<Block> MOA_EGG = registerWithoutItem("moa_egg", MoaEggBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BLUE).strength(0.5F).sound(SoundType.METAL).noOcclusion());
 
     // Logs
     public static final DeferredBlock<RotatedPillarBlock> SKYROOT_LOG = register("skyroot_log", RotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
@@ -838,9 +840,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> LOCKED_BLOCK = register("locked_block", LockedBlock::new, () -> BlockBehaviour.Properties.of().strength(-1.0F, 3600000.8F).noLootTable().dynamicShape().isValidSpawn(Blocks::always).pushReaction(PushReaction.BLOCK), CopyBlockItem::new);
     public static final DeferredBlock<Block> BOSS_DOORWAY_BLOCK = register("boss_doorway_block", BossDoorwayBlock::new, () -> BlockBehaviour.Properties.of().strength(-1.0F, 3600000.8F).noLootTable().dynamicShape().isValidSpawn(Blocks::always).pushReaction(PushReaction.BLOCK), CopyBlockItem::new);
     public static final DeferredBlock<Block> TREASURE_DOORWAY_BLOCK = register("treasure_doorway_block", TreasureDoorwayBlock::new, () -> BlockBehaviour.Properties.of().strength(-1.0F, 3600000.8F).noLootTable().dynamicShape().isValidSpawn(Blocks::always).pushReaction(PushReaction.BLOCK), CopyBlockItem::new);
-
-    // Moa Egg
-    public static final DeferredBlock<Block> MOA_EGG = registerWithoutItem("moa_egg", MoaEggBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BLUE).strength(0.5F).sound(SoundType.METAL).noOcclusion());
 
     // Bookshelves
     public static final DeferredBlock<Block> SKYROOT_BOOKSHELF = register("skyroot_bookshelf", BookshelfBlock::new, () -> Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));

@@ -31,7 +31,10 @@ public class AetherIIPools {
         OutpostPools.bootstrap(context);
         CampPools.bootstrap(context);
         WatchtowerPools.bootstrap(context);
+        AnimalDenPools.bootstrap(context);
         VeradexianRuinPools.bootstrap(context);
+        VeradexianLibraryPools.bootstrap(context);
+        IrradiatedRemnantsPools.bootstrap(context);
         InfectedGuardianTreePools.bootstrap(context);
     }
 
@@ -51,6 +54,9 @@ public class AetherIIPools {
     }
 
     // Does not automatically replace air blocks, primarily used for buried structures
+    public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolBuried(String id) {
+        return pool -> new AetherPoolElement(Either.left(Identifier.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), 96, 384, false);
+    }
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolBuried(String id, Holder<StructureProcessorList> processor) {
         return pool -> new AetherPoolElement(Either.left(Identifier.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), 96, 384, false);
     }
@@ -59,7 +65,6 @@ public class AetherIIPools {
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolUnderground(String id) {
         return pool -> new AetherPoolElement(Either.left(Identifier.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), -64, 384, false);
     }
-
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolUnderground(String id, Holder<StructureProcessorList> processor) {
         return pool -> new AetherPoolElement(Either.left(Identifier.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), -64, 384, false);
     }

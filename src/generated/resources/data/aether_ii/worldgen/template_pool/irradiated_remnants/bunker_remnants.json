@@ -1,0 +1,31 @@
+{
+  "elements": [
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:irradiated_remnants/bunkers/bunker_start_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:irradiated_bunker_exterior",
+        "projection": "terrain_matching",
+        "replace_air": true
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:irradiated_remnants/bunkers/bunker_start_02",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:irradiated_bunker_exterior",
+        "projection": "terrain_matching",
+        "replace_air": true
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

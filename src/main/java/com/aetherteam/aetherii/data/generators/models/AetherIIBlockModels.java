@@ -118,8 +118,10 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createPurpleAercloud(AetherIIBlocks.PURPLE_AERCLOUD.get());
         this.createAercloud(AetherIIBlocks.STORM_AERCLOUD.get());
 
-        // Moa Nest
+        // Nest Blocks
         this.createWovenSticks(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
+        this.createAnimalStash(AetherIIBlocks.ANIMAL_STASH.get(), AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
+        this.createMoaEgg(AetherIIBlocks.MOA_EGG.get());
 
         // Logs
         this.woodProvider(AetherIIBlocks.SKYROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.SKYROOT_LOG.get()).wood(AetherIIBlocks.SKYROOT_WOOD.get());
@@ -538,9 +540,6 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createShelf(AetherIIBlocks.AMBEROOT_SHELF.get(), AetherIIBlocks.STRIPPED_AMBEROOT_LOG.get());
 
         this.createLever(AetherIIBlocks.HOLYSTONE_LEVER.get());
-
-        // Moa Egg
-        this.createMoaEgg(AetherIIBlocks.MOA_EGG.get());
 
         // Bookshelves
         this.createCubeColumn(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), AetherIIBlocks.SKYROOT_PLANKS.get());

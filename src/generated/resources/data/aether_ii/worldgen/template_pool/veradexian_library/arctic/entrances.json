@@ -1,0 +1,31 @@
+{
+  "elements": [
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:veradexian_library/arctic/entrance_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:veradexian_ruins_arctic",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 96,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:veradexian_library/arctic/entrance_02",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:veradexian_ruins_arctic",
+        "projection": "rigid",
+        "replace_air": true
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

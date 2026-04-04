@@ -34,8 +34,13 @@ public class AetherIIStructures {
     public static final ResourceKey<Structure> CAMP_MAGNETIC = createKey("camp_magnetic");
     public static final ResourceKey<Structure> CAMP_ARCTIC = createKey("camp_arctic");
     public static final ResourceKey<Structure> WATCHTOWER = createKey("watchtower");
+    public static final ResourceKey<Structure> ANIMAL_DEN = createKey("animal_den");
     public static final ResourceKey<Structure> VERADEXIAN_RUINS_TEMPERATE = createKey("veradexian_ruins_temperate");
     public static final ResourceKey<Structure> VERADEXIAN_RUINS_ARCTIC = createKey("veradexian_ruins_arctic");
+    public static final ResourceKey<Structure> VERADEXIAN_LIBRARY_TEMPERATE = createKey("veradexian_library_temperate");
+    public static final ResourceKey<Structure> VERADEXIAN_LIBRARY_ARCTIC = createKey("veradexian_library_arctic");
+    public static final ResourceKey<Structure> IRRADIATED_BUNKER_REMNANTS = createKey("irradiated_bunker_remnants");
+    public static final ResourceKey<Structure> IRRADIATED_SETTLEMENT_REMNANTS = createKey("irradiated_settlement_remnants");
     public static final ResourceKey<Structure> SENTRY_RUINS = createKey("sentry_ruins");
     public static final ResourceKey<Structure> INFECTED_GUARDIAN_TREE = createKey("infected_guardian_tree");
 
@@ -66,12 +71,29 @@ public class AetherIIStructures {
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_WATCHTOWER), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
                 templatePools.getOrThrow(WatchtowerPools.WATCHTOWER), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
+        context.register(ANIMAL_DEN, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_ANIMAL_DEN), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
+                templatePools.getOrThrow(AnimalDenPools.ANIMAL_DEN), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(-2)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(10), 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+
         context.register(VERADEXIAN_RUINS_TEMPERATE, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_TEMPERATE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
-                templatePools.getOrThrow(VeradexianRuinPools.RUINS_TEMPERATE), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+                templatePools.getOrThrow(VeradexianRuinPools.RUIN_CENTERS_TEMPERATE), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
         context.register(VERADEXIAN_RUINS_ARCTIC, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_ARCTIC), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
-                templatePools.getOrThrow(VeradexianRuinPools.RUINS_ARCTIC), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+                templatePools.getOrThrow(VeradexianRuinPools.RUIN_CENTERS_ARCTIC), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+        context.register(VERADEXIAN_LIBRARY_TEMPERATE, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_LIBRARY_TEMPERATE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
+                templatePools.getOrThrow(VeradexianLibraryPools.ENTRANCE_TEMPERATE), Optional.empty(), 5, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+        context.register(VERADEXIAN_LIBRARY_ARCTIC, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_LIBRARY_ARCTIC), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
+                templatePools.getOrThrow(VeradexianLibraryPools.ENTRANCE_ARCTIC), Optional.empty(), 5, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+
+        context.register(IRRADIATED_BUNKER_REMNANTS, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_IRRADIATED_REMNANTS), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
+                templatePools.getOrThrow(IrradiatedRemnantsPools.IRRADIATED_BUNKER_REMNANTS), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+        context.register(IRRADIATED_SETTLEMENT_REMNANTS, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_IRRADIATED_REMNANTS), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
+                templatePools.getOrThrow(IrradiatedRemnantsPools.IRRADIATED_SETTLEMENT_REMNANTS), Optional.empty(), 3, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), new JigsawStructure.MaxDistance(32), 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
         context.register(SENTRY_RUINS, new SentryRuinsStructure(AetherIIStructureBuilders.structure(
                 biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_SENTRY_RUINS),
