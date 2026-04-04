@@ -520,6 +520,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_EFFICIENCY_I))
+                        .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_REACH_I))
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_DAMAGE_I))
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_DEXTERITY_I))
                         .add(LootItem.lootTableItem(AetherIIItems.CHARM_OF_KNOCKBACK_I))

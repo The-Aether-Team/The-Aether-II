@@ -2549,6 +2549,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_PENDANT.toStack()), 1)
                 .add(new OutputEntry.ItemEntry(AetherIIItems.ICE_PENDANT.toStack()), 1)
                 .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_EFFICIENCY_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_REACH_I.toStack()), 1)
                 .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_DAMAGE_I.toStack()), 1)
                 .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_DEXTERITY_I.toStack()), 1)
                 .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_KNOCKBACK_I.toStack()), 1)

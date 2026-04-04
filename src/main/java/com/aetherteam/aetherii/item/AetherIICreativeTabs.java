@@ -788,6 +788,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.CHARM_OF_RESISTANCE_I.get());
                 output.accept(AetherIIItems.CHARM_OF_AGILITY_I.get());
                 output.accept(AetherIIItems.CHARM_OF_EFFICIENCY_I.get());
+                output.accept(AetherIIItems.CHARM_OF_REACH_I.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_CONSUMABLES = CREATIVE_MODE_TABS.register("consumables", () -> CreativeModeTab.builder()
