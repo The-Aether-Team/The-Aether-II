@@ -24,6 +24,8 @@ import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
+import net.minecraft.world.entity.ai.util.HoverRandomPos;
+import net.minecraft.world.entity.animal.bee.Bee;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
@@ -446,7 +448,7 @@ public class Zephyr extends PathfinderMob implements Enemy {
                     if (optional.isPresent()) {
                         Vec3 avoidPos = new Vec3(optional.get().getX(), optional.get().getY(), optional.get().getZ());
 
-                        Vec3 vec3 = DefaultRandomPos.getPosAway(this.zephyr, 24, 12, avoidPos);
+                        Vec3 vec3 = HoverRandomPos.getPos(this.zephyr, 16, 14, avoidPos.x, avoidPos.z, (float) (Math.PI / 2), 3, 1);
                         if ((vec3 != null) && !(avoidPos.distanceToSqr(vec3.x, vec3.y, vec3.z) < avoidPos.distanceToSqr(this.zephyr.position()))) {
                             this.zephyr.getMoveControl().setWantedPosition(vec3.x, vec3.y, vec3.z, 2.0);
                         }
