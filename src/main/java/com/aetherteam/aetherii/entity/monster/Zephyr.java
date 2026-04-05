@@ -173,6 +173,21 @@ public class Zephyr extends PathfinderMob implements Enemy {
                 && serverLevel.getBlockState(pos).getValue(BlockStateProperties.LIT));
     }
 
+
+    public void repellingBehavior(Zephyr zephyr) {
+        if (zephyr.level() instanceof ServerLevel serverLevel) {
+            Optional<BlockPos> optional = zephyr.findNearestRepellent(serverLevel, zephyr);
+            if (optional.isPresent()) {
+                Vec3 avoidPos = new Vec3(optional.get().getX(), optional.get().getY(), optional.get().getZ());
+
+                Vec3 vec3 = HoverRandomPos.getPos(zephyr, 24, 20, avoidPos.x, avoidPos.z, (float) (Math.PI / 2), 3, 1);
+                if ((vec3 != null) && !(avoidPos.distanceToSqr(vec3.x, vec3.y, vec3.z) < avoidPos.distanceToSqr(zephyr.position()))) {
+                    zephyr.getMoveControl().setWantedPosition(vec3.x, vec3.y, vec3.z, 2.0);
+                }
+            }
+        }
+    }
+
     /**
      * Handles values used for the Zephyr's animation and removing the Zephyr if it goes below or above the build height.
      */
@@ -310,17 +325,7 @@ public class Zephyr extends PathfinderMob implements Enemy {
 
                 if (this.zephyr.distanceTo(this.trackedTarget) < this.attackThreshold) {
                     if (this.zephyr.isPosNearNearestRepellent(this.zephyr, this.zephyr.blockPosition())) {
-                        if (this.zephyr.level() instanceof ServerLevel serverLevel) {
-                            Optional<BlockPos> optional = this.zephyr.findNearestRepellent(serverLevel, this.zephyr);
-                            if (optional.isPresent()) {
-                                Vec3 avoidPos = new Vec3(optional.get().getX(), optional.get().getY(), optional.get().getZ());
-
-                                Vec3 vec3 = HoverRandomPos.getPos(this.zephyr, 24, 20, avoidPos.x, avoidPos.z, (float) (Math.PI / 2), 3, 1);
-                                if ((vec3 != null) && !(avoidPos.distanceToSqr(vec3.x, vec3.y, vec3.z) < avoidPos.distanceToSqr(this.zephyr.position()))) {
-                                    this.zephyr.getMoveControl().setWantedPosition(vec3.x, vec3.y, vec3.z, 2.0);
-                                }
-                            }
-                        }
+                        this.zephyr.repellingBehavior(zephyr);
                     } else {
                         double d0 = this.zephyr.getX() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 4.0F;
                         double d2 = this.zephyr.getZ() + (this.zephyr.getRandom().nextFloat() * 2.0F - 1.0F) * 4.0F;
@@ -462,17 +467,7 @@ public class Zephyr extends PathfinderMob implements Enemy {
         @Override
         public void start() {
             if (this.zephyr.isPosNearNearestRepellent(this.zephyr, this.zephyr.blockPosition())) {
-                if (this.zephyr.level() instanceof ServerLevel serverLevel) {
-                    Optional<BlockPos> optional = this.zephyr.findNearestRepellent(serverLevel, this.zephyr);
-                    if (optional.isPresent()) {
-                        Vec3 avoidPos = new Vec3(optional.get().getX(), optional.get().getY(), optional.get().getZ());
-
-                        Vec3 vec3 = HoverRandomPos.getPos(this.zephyr, 24, 20, avoidPos.x, avoidPos.z, (float) (Math.PI / 2), 3, 1);
-                        if ((vec3 != null) && !(avoidPos.distanceToSqr(vec3.x, vec3.y, vec3.z) < avoidPos.distanceToSqr(this.zephyr.position()))) {
-                            this.zephyr.getMoveControl().setWantedPosition(vec3.x, vec3.y, vec3.z, 2.0);
-                        }
-                    }
-                }
+                this.zephyr.repellingBehavior(zephyr);
             } else {
                 LivingEntity target = this.zephyr.getTarget();
                 RandomSource random = this.zephyr.getRandom();
@@ -501,17 +496,7 @@ public class Zephyr extends PathfinderMob implements Enemy {
 
         public void aimlessWandering(RandomSource random) {
             if (this.zephyr.isPosNearNearestRepellent(this.zephyr, this.zephyr.blockPosition())) {
-                if (this.zephyr.level() instanceof ServerLevel serverLevel) {
-                    Optional<BlockPos> optional = this.zephyr.findNearestRepellent(serverLevel, this.zephyr);
-                    if (optional.isPresent()) {
-                        Vec3 avoidPos = new Vec3(optional.get().getX(), optional.get().getY(), optional.get().getZ());
-
-                        Vec3 vec3 = HoverRandomPos.getPos(this.zephyr, 24, 20, avoidPos.x, avoidPos.z, (float) (Math.PI / 2), 3, 1);
-                        if ((vec3 != null) && !(avoidPos.distanceToSqr(vec3.x, vec3.y, vec3.z) < avoidPos.distanceToSqr(this.zephyr.position()))) {
-                            this.zephyr.getMoveControl().setWantedPosition(vec3.x, vec3.y, vec3.z, 3.0);
-                        }
-                    }
-                }
+                this.zephyr.repellingBehavior(zephyr);
             } else {
                 double d0 = this.zephyr.getX() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
                 double d1 = this.zephyr.getY() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
@@ -528,16 +513,8 @@ public class Zephyr extends PathfinderMob implements Enemy {
         protected @Nullable LivingEntity target;
         protected TargetingConditions targetConditions;
 
-        public ZephyrNearestAttackableTargetGoal(Zephyr zephyr, Class<T> p_26061_, boolean p_26062_) {
-            this(zephyr, p_26061_, 10, p_26062_, false, null);
-        }
-
-        public ZephyrNearestAttackableTargetGoal(Zephyr zephyr, Class<T> p_199892_, boolean p_199893_, TargetingConditions.Selector p_376872_) {
-            this(zephyr, p_199892_, 10, p_199893_, false, p_376872_);
-        }
-
         public ZephyrNearestAttackableTargetGoal(Zephyr zephyr, Class<T> p_26065_, boolean p_26066_, boolean p_26067_) {
-            this(zephyr, p_26065_, 10, p_26066_, p_26067_, null);
+            this(zephyr, p_26065_, DEFAULT_RANDOM_INTERVAL, p_26066_, p_26067_, null);
         }
 
         public ZephyrNearestAttackableTargetGoal(Zephyr zephyr, Class<T> p_26054_, int p_26055_, boolean p_26056_, boolean p_26057_, TargetingConditions.@Nullable Selector p_376600_) {
