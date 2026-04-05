@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.object.projectile.ArrowModel;
@@ -13,6 +12,7 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.entity.state.ArrowRenderState;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -25,20 +25,22 @@ import org.jetbrains.annotations.UnknownNullability;
 
 import java.util.List;
 
-public class ProjectilesStuckLayer<M extends PlayerModel, S> extends RenderLayer<AvatarRenderState, M> {
-    private final Model model;
+public class ProjectilesStuckLayer<M extends PlayerModel> extends RenderLayer<AvatarRenderState, M> {
+    private final ArrowModel model;
+    private final ArrowRenderState modelState;
 
     public ProjectilesStuckLayer(LivingEntityRenderer<?, AvatarRenderState, M> renderer, EntityRendererProvider.Context context) {
         super(renderer);
         this.model = new ArrowModel(context.bakeLayer(ModelLayers.ARROW));
+        this.modelState = new ArrowRenderState();
     }
 
     @Override
-    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, AvatarRenderState renderState, float v, float v1) {
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, AvatarRenderState avatarRenderState, float v, float v1) {
 
-        List<EntityType<?>> list = renderState.getRenderData(AetherIIRenderers.STUCK_PROJECTILES_KEY);
+        List<EntityType<?>> list = avatarRenderState.getRenderData(AetherIIRenderers.STUCK_PROJECTILES_KEY);
         if (list != null && !list.isEmpty()) {
-            RandomSource random = RandomSource.create(renderState.id);
+            RandomSource random = RandomSource.create(avatarRenderState.id);
             for (EntityType<?> type : list) {
                 Identifier key = BuiltInRegistries.ENTITY_TYPE.getKey(type);
                 Identifier texture = Identifier.fromNamespaceAndPath(key.getNamespace(), "textures/entity/projectile/" + key.getPath() + ".png");
@@ -63,7 +65,7 @@ public class ProjectilesStuckLayer<M extends PlayerModel, S> extends RenderLayer
                 }
 
                 poseStack.translate(Mth.lerp(f, cube.minX, cube.maxX) / 16.0F, Mth.lerp(f1, cube.minY, cube.maxY) / 16.0F, Mth.lerp(f2, cube.minZ, cube.maxZ) / 16.0F);
-                this.renderStuckItem(poseStack, submitNodeCollector, renderState, i, -(f * 2.0F - 1.0F), -(f1 * 2.0F - 1.0F), -(f2 * 2.0F - 1.0F), texture, emissive);
+                this.renderStuckItem(poseStack, submitNodeCollector, avatarRenderState, i, -(f * 2.0F - 1.0F), -(f1 * 2.0F - 1.0F), -(f2 * 2.0F - 1.0F), texture, emissive);
                 poseStack.popPose();
             }
 
@@ -71,15 +73,15 @@ public class ProjectilesStuckLayer<M extends PlayerModel, S> extends RenderLayer
         }
     }
 
-    private void renderStuckItem(PoseStack poseStack, @UnknownNullability SubmitNodeCollector submitNodeCollector, AvatarRenderState renderState, int packedLight, float x, float y, float z, Identifier texture, Identifier emissive) {
+    private void renderStuckItem(PoseStack poseStack, @UnknownNullability SubmitNodeCollector submitNodeCollector, AvatarRenderState avatarRenderState, int packedLight, float x, float y, float z, Identifier texture, Identifier emissive) {
         float f = Mth.sqrt(x * x + z * z);
         float f1 = (float) (Math.atan2(x, z) * 180.0F / Math.PI);
         float f2 = (float) (Math.atan2(y, f) * 180.0F / Math.PI);
         poseStack.mulPose(Axis.YP.rotationDegrees(f1 - 90.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(f2));
-        //   submitNodeCollector.submitModel(this.model, renderState, poseStack, this.model.renderType(texture), packedLight, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
+        submitNodeCollector.submitModel(this.model, this.modelState, poseStack, this.model.renderType(texture), packedLight, OverlayTexture.NO_OVERLAY, avatarRenderState.outlineColor, null);
         if (emissive != null) {
-            //      submitNodeCollector.submitModel(this.model, renderState, poseStack, RenderTypes.eyes(emissive), packedLight, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
+            submitNodeCollector.submitModel(this.model, this.modelState, poseStack, RenderTypes.eyes(emissive), packedLight, OverlayTexture.NO_OVERLAY, avatarRenderState.outlineColor, null);
         }
     }
 
