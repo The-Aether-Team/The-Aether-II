@@ -23,7 +23,7 @@ public class LevelClientListener {
 
     public static void onKeyPress(InputEvent.Key event) {
         Minecraft minecraft = Minecraft.getInstance();
-        if (event.getKey() == 297) {
+        if (event.getKey() == 297) { //F8
             minecraft.grabPanoramixScreenshot(minecraft.gameDirectory);
         }
     }

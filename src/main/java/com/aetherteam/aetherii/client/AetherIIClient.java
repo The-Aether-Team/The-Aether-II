@@ -59,6 +59,7 @@ public class AetherIIClient {
         bus.addListener(DimensionClientListener::onRenderFog);
         bus.addListener(DimensionClientListener::onFogColorComputed);
         bus.addListener(LevelClientListener::onRenderLevelLast);
+        //bus.addListener(LevelClientListener::onKeyPress);
         bus.addListener(AetherIIDimensionRenderers::extractDimensionEffect);
 
         neoBus.addListener(AetherIIClient::registerMenuTextures);

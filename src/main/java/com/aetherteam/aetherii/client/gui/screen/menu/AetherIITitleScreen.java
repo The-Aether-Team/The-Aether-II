@@ -85,7 +85,7 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
         TitleScreenBehavior.super.handleImageButtons(this, xOffset);
         TitleScreenBehavior.super.handleEssentialButtonsForLeftMenu(this);
 
-        guiGraphics.drawString(this.font, "The Aether II 1.21.11-ALPHA.1", 2, this.height - 10, 0xFFFF7575);
+        guiGraphics.drawString(this.font, "The Aether II 1.21.11-ALPHA.2", 2, this.height - 10, 0xFFFF7575);
     }
 
     @Override

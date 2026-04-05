@@ -1104,7 +1104,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS, "Engraved Disc");
 
         // Spawn Eggs
-        this.addSpawnEggItem(AetherIIItems.AERBUNNY_SPAWN_EGG); //todo
+        this.addSpawnEggItem(AetherIIItems.AERBUNNY_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.FLYING_COW_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.SHEEPUFF_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.PHYG_SPAWN_EGG);
