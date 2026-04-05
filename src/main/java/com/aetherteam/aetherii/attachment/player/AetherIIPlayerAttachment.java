@@ -31,6 +31,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import java.net.URI;
+import java.time.Month;
+import java.time.MonthDay;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +42,7 @@ public class AetherIIPlayerAttachment {
     private static final FontDescription.Resource LOGOMARKS = new FontDescription.Resource(Identifier.fromNamespaceAndPath(AetherII.MODID, "logomarks"));
     private static final Style INFO = Style.EMPTY.withColor(0x56C1EF).withUnderlined(true).withClickEvent(new ClickEvent.ShowDialog(Holder.direct(getDialog()))).withHoverEvent(new HoverEvent.ShowText(Component.literal("Open Info Screen")));
     private static final Style PATREON = Style.EMPTY.withColor(16728653).withUnderlined(true).withClickEvent(new ClickEvent.OpenUrl(URI.create("https://www.patreon.com/TheAetherTeam"))).withHoverEvent(new HoverEvent.ShowText(Component.literal("https://www.patreon.com/TheAetherTeam")));
+    private static final Style MAKESHIP = Style.EMPTY.withColor(0x506AB9).withUnderlined(true).withClickEvent(new ClickEvent.OpenUrl(URI.create("https://www.makeship.com/products/aerwhale-jumbo-plushie"))).withHoverEvent(new HoverEvent.ShowText(Component.literal("https://www.makeship.com/products/aerwhale-jumbo-plushie")));
 
     private boolean isMoving;
     private boolean isJumping;
@@ -128,6 +132,14 @@ public class AetherIIPlayerAttachment {
                 linkMessage = linkMessage.append(Component.literal(", ").setStyle(PATREON.withFont(LOGOMARKS))).append(Component.literal("Patreon").setStyle(PATREON));
                 linkMessage = linkMessage.append(Component.literal(".").withColor(0xE5E5FF));
                 serverPlayer.sendSystemMessage(linkMessage);
+
+                if (ZonedDateTime.now().getMonth() == Month.APRIL && ZonedDateTime.now().getDayOfMonth() < MonthDay.of(Month.APRIL, 18).getDayOfMonth()) {
+                    serverPlayer.sendSystemMessage(linkMessage.append(CommonComponents.NEW_LINE));
+                    MutableComponent makeshipMessage = Component.literal("We are currently running a campaign to produce a limited edition Aerwhale plush with ").withColor(0xE5E5FF);
+                    makeshipMessage = makeshipMessage.append(Component.literal("Purchase one ").setStyle(MAKESHIP.withFont(LOGOMARKS))).append(Component.literal("Makeship").setStyle(MAKESHIP));
+                    makeshipMessage = makeshipMessage.append(Component.literal(" to help support The Aether II's development and adopt a cuddly Aerwhale into your home!").withColor(0xE5E5FF));
+                    serverPlayer.sendSystemMessage(makeshipMessage);
+                }
 
                 AetherIIConfig.COMMON.show_alpha_message.set(false);
             }
