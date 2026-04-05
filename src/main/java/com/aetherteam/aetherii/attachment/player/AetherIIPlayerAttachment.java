@@ -131,12 +131,11 @@ public class AetherIIPlayerAttachment {
                 MutableComponent linkMessage = Component.literal("You can support our ongoing development on ").withColor(0xE5E5FF);
                 linkMessage = linkMessage.append(Component.literal(", ").setStyle(PATREON.withFont(LOGOMARKS))).append(Component.literal("Patreon").setStyle(PATREON));
                 linkMessage = linkMessage.append(Component.literal(".").withColor(0xE5E5FF));
-                serverPlayer.sendSystemMessage(linkMessage);
+                serverPlayer.sendSystemMessage(linkMessage.append(CommonComponents.NEW_LINE));
 
                 if (ZonedDateTime.now().getMonth() == Month.APRIL && ZonedDateTime.now().getDayOfMonth() < MonthDay.of(Month.APRIL, 18).getDayOfMonth()) {
-                    serverPlayer.sendSystemMessage(linkMessage.append(CommonComponents.NEW_LINE));
-                    MutableComponent makeshipMessage = Component.literal("We are currently running a campaign to produce a limited edition Aerwhale plush with ").withColor(0xE5E5FF);
-                    makeshipMessage = makeshipMessage.append(Component.literal("Purchase one ").setStyle(MAKESHIP.withFont(LOGOMARKS))).append(Component.literal("Makeship").setStyle(MAKESHIP));
+                    MutableComponent makeshipMessage = Component.literal("We are currently running a campaign to produce a limited edition Aerwhale plush with Makeship. ").withColor(0xE5E5FF);
+                    makeshipMessage = makeshipMessage.append(Component.literal("Purchase one").setStyle(MAKESHIP));
                     makeshipMessage = makeshipMessage.append(Component.literal(" to help support The Aether II's development and adopt a cuddly Aerwhale into your home!").withColor(0xE5E5FF));
                     serverPlayer.sendSystemMessage(makeshipMessage);
                 }
