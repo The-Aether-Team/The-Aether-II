@@ -8,11 +8,17 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.WidgetSprites;
+import net.minecraft.client.input.InputWithModifiers;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.network.chat.ClickEvent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import org.joml.Matrix3x2fStack;
+
+import java.net.URI;
 
 public class MakeshipMenuButton extends Button {
     private static final WidgetSprites MAKESHIP_WIDGET = new WidgetSprites(Identifier.fromNamespaceAndPath(AetherII.MODID, "title/makeship_button"), Identifier.fromNamespaceAndPath(AetherII.MODID, "title/makeship_button_highlighted"));
@@ -40,5 +46,10 @@ public class MakeshipMenuButton extends Button {
 
         Identifier location = MAKESHIP_WIDGET.get(this.isActive(), this.isHoveredOrFocused());
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, 900, 524, 0, 0, buttonX, buttonY, 900, 524, ARGB.white(this.alpha));
+    }
+
+    public void onPress(InputWithModifiers p_446034_) {
+        this.onPress.onPress(this);
+        new ClickEvent.OpenUrl(URI.create("https://www.makeship.com/products/aerwhale-jumbo-plushie"));
     }
 }

@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.gui.screen.menu;
 
 import com.aetherteam.aetherii.client.gui.component.menu.AetherIIMenuButton;
+import com.aetherteam.aetherii.client.gui.component.menu.MakeshipMenuButton;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.TitleScreenAccessor;
 import com.aetherteam.cumulus.CumulusConfig;
