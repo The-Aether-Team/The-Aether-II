@@ -167,7 +167,7 @@ public class Zephyr extends PathfinderMob implements Enemy {
     }
 
     public Optional<BlockPos> findNearestRepellent(ServerLevel serverLevel, Zephyr zephyr) {
-        return BlockPos.findClosestMatch(zephyr.blockPosition(), 16, 12, pos ->
+        return BlockPos.findClosestMatch(zephyr.blockPosition(), 32, 32, pos ->
                 serverLevel.getBlockState(pos).is(AetherIITags.Blocks.ZEPHYR_REPELLENT)
                 && serverLevel.getBlockState(pos).getValue(BlockStateProperties.LIT) != null
                 && serverLevel.getBlockState(pos).getValue(BlockStateProperties.LIT));
@@ -560,7 +560,9 @@ public class Zephyr extends PathfinderMob implements Enemy {
         }
 
         public void setTarget(@Nullable LivingEntity entity) {
-            this.target = entity;
+            if (this.mob instanceof Zephyr zephyr && !(zephyr.isPosNearNearestRepellent(zephyr, zephyr.blockPosition()))) {
+                this.target = entity;
+            }
         }
 
         private TargetingConditions getTargetConditions() {
