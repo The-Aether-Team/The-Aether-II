@@ -506,23 +506,25 @@ public class Zephyr extends PathfinderMob implements Enemy {
         }
     }
 
+    /**
+     * [CODE COPY] - {@link net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal}.
+     */
     public static class ZephyrNearestAttackableTargetGoal<T extends LivingEntity> extends TargetGoal {
-        private static final int DEFAULT_RANDOM_INTERVAL = 10;
         protected final Class<T> targetType;
         protected final int randomInterval;
         protected @Nullable LivingEntity target;
         protected TargetingConditions targetConditions;
 
-        public ZephyrNearestAttackableTargetGoal(Zephyr zephyr, Class<T> p_26065_, boolean p_26066_, boolean p_26067_) {
-            this(zephyr, p_26065_, DEFAULT_RANDOM_INTERVAL, p_26066_, p_26067_, null);
+        public ZephyrNearestAttackableTargetGoal(Zephyr zephyr, Class<T> targetType, boolean mustSee, boolean mustReach) {
+            this(zephyr, targetType, 10, mustSee, mustReach, null);
         }
 
-        public ZephyrNearestAttackableTargetGoal(Zephyr zephyr, Class<T> p_26054_, int p_26055_, boolean p_26056_, boolean p_26057_, TargetingConditions.@Nullable Selector p_376600_) {
-            super(zephyr, p_26056_, p_26057_);
-            this.targetType = p_26054_;
-            this.randomInterval = reducedTickDelay(p_26055_);
+        public ZephyrNearestAttackableTargetGoal(Zephyr zephyr, Class<T> targetType, int randomInterval, boolean mustSee, boolean mustReach, TargetingConditions.@Nullable Selector selector) {
+            super(zephyr, mustSee, mustReach);
+            this.targetType = targetType;
+            this.randomInterval = reducedTickDelay(randomInterval);
             this.setFlags(EnumSet.of(Flag.TARGET));
-            this.targetConditions = TargetingConditions.forCombat().range(this.getFollowDistance()).selector(p_376600_);
+            this.targetConditions = TargetingConditions.forCombat().range(this.getFollowDistance()).selector(selector);
         }
 
         public boolean canUse() {
@@ -537,8 +539,8 @@ public class Zephyr extends PathfinderMob implements Enemy {
             return this.target != null;
         }
 
-        protected AABB getTargetSearchArea(double p_26069_) {
-            return this.mob.getBoundingBox().inflate(p_26069_, p_26069_, p_26069_);
+        protected AABB getTargetSearchArea(double d) {
+            return this.mob.getBoundingBox().inflate(d, d, d);
         }
 
         protected void findTarget() {
@@ -557,8 +559,8 @@ public class Zephyr extends PathfinderMob implements Enemy {
             }
         }
 
-        public void setTarget(@Nullable LivingEntity p_26071_) {
-            this.target = p_26071_;
+        public void setTarget(@Nullable LivingEntity entity) {
+            this.target = entity;
         }
 
         private TargetingConditions getTargetConditions() {
