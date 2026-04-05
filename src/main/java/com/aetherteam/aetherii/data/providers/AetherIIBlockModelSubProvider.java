@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.block.furniture.OutpostCampfireBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.utility.AmberHourglassBlock;
+import com.aetherteam.aetherii.block.utility.AnimalStashBlock;
 import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
 import com.aetherteam.aetherii.block.utility.BedrollBlock;
 import com.aetherteam.aetherii.client.AetherIIColorResolvers;
@@ -1233,6 +1234,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public void createArilumLantern(Block block) {
         MultiVariant lantern = plainVariant(AetherIIModelTemplates.ARILUM_LANTERN.create(block, TextureMapping.cube(block).put(TextureSlot.INSIDE, TextureMapping.getBlockTexture(block, "_inside")), this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, lantern));
+    }
+
+    public void createAnimalStash(Block block, Block particle) {
+        MultiVariant normal = plainVariant(AetherIIModelTemplates.ANIMAL_STASH.create(block, TextureMapping.defaultTexture(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
+        MultiVariant open = plainVariant(AetherIIModelTemplates.ANIMAL_STASH_OPEN.createWithSuffix(block, "_open", TextureMapping.defaultTexture(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(BlockModelGenerators.createBooleanModelDispatch(AnimalStashBlock.OPEN, open, normal)));
     }
 
     public void createMoaEgg(Block block) {

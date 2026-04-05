@@ -180,8 +180,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.PURPLE_AERCLOUD, "Purple Aercloud");
         this.addBlock(AetherIIBlocks.STORM_AERCLOUD, "Storm Aercloud");
 
-        // Moa Nest
+        // Nest Blocks
         this.addBlock(AetherIIBlocks.WOVEN_SKYROOT_STICKS, "Woven Skyroot Sticks");
+        this.addBlock(AetherIIBlocks.ANIMAL_STASH, "Animal Stash");
+        this.addBlock(AetherIIBlocks.MOA_EGG, "Moa Egg");
 
         // Logs
         this.addBlock(AetherIIBlocks.SKYROOT_LOG, "Skyroot Log");
@@ -977,6 +979,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Charms
         this.addItem(AetherIIItems.CHARM_OF_EFFICIENCY_I, "Charm of Efficiency I");
+        this.addItem(AetherIIItems.CHARM_OF_REACH_I, "Charm of Reach I");
 
         this.addItem(AetherIIItems.CHARM_OF_DAMAGE_I, "Charm of Damage I");
         this.addItem(AetherIIItems.CHARM_OF_DEXTERITY_I, "Charm of Dexterity I");
@@ -1457,6 +1460,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addStructure(AetherIIStructures.WATCHTOWER, "Watchtower");
         this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE, "Temperate Veradexian Ruins");
         this.addStructure(AetherIIStructures.VERADEXIAN_RUINS_ARCTIC, "Arctic Veradexian Ruins");
+        this.addStructure(AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE, "Temperate Veradexian Library");
+        this.addStructure(AetherIIStructures.VERADEXIAN_LIBRARY_ARCTIC, "Arctic Veradexian Library");
+        this.addStructure(AetherIIStructures.IRRADIATED_BUNKER_REMNANTS, "Irradiated Bunker Remnants");
+        this.addStructure(AetherIIStructures.IRRADIATED_SETTLEMENT_REMNANTS, "Irradiated Settlement Remnants");
         this.addStructure(AetherIIStructures.SENTRY_RUINS, "Sentry Ruins");
         this.addStructure(AetherIIStructures.INFECTED_GUARDIAN_TREE, "Infected Guardian Tree");
     }
@@ -1549,6 +1556,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addContainerType(AetherIIMenuTypes.ARKENIUM_FORGE, "Arkenium Forge");
         this.addContainerType(AetherIIMenuTypes.ALKAHEST_PURIFIER, "Alkahest Purifier");
         this.addGeneric("container.sentry_crate", "Sentry Crate");
+        this.addGeneric("container.animal_stash", "Animal Stash");
     }
 
     private void addGuiText() {

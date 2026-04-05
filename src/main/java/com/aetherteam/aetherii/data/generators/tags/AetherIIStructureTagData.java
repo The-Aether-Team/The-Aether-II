@@ -34,7 +34,8 @@ public class AetherIIStructureTagData extends StructureTagsProvider {
         );
         this.tag(AetherIITags.Structures.SURFACE_RUINS).add(
                 AetherIIStructures.VERADEXIAN_RUINS_TEMPERATE,
-                AetherIIStructures.VERADEXIAN_RUINS_ARCTIC
+                AetherIIStructures.VERADEXIAN_RUINS_ARCTIC,
+                AetherIIStructures.VERADEXIAN_LIBRARY_TEMPERATE
         );
 
         this.tag(AetherIITags.Structures.TREE_BLACKLIST_FILTER).addTag(AetherIITags.Structures.CAMPS);

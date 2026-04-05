@@ -23,9 +23,6 @@ public class AetherIIBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SkyrootChestBlockEntity>> SKYROOT_CHEST = BLOCK_ENTITY_TYPES.register("skyroot_chest", () ->
             new BlockEntityType<>(SkyrootChestBlockEntity::new, AetherIIBlocks.SKYROOT_CHEST.get()));
 
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MoaEggBlockEntity>> MOA_EGG = BLOCK_ENTITY_TYPES.register("moa_egg", () ->
-            new BlockEntityType<>(MoaEggBlockEntity::new, AetherIIBlocks.MOA_EGG.get()));
-
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AmberHourglassBlockEntity>> AMBER_HOURGLASS = BLOCK_ENTITY_TYPES.register("amber_hourglass", () ->
             new BlockEntityType<>(AmberHourglassBlockEntity::new, AetherIIBlocks.AMBER_HOURGLASS.get()));
 
@@ -61,6 +58,12 @@ public class AetherIIBlockEntityTypes {
                     AetherIIBlocks.RED_SKYROOT_BED.get(),
                     AetherIIBlocks.BLACK_SKYROOT_BED.get()
             ));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AnimalStashBlockEntity>> ANIMAL_STASH = BLOCK_ENTITY_TYPES.register("animal_stash", () ->
+            new BlockEntityType<>(AnimalStashBlockEntity::new, AetherIIBlocks.ANIMAL_STASH.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MoaEggBlockEntity>> MOA_EGG = BLOCK_ENTITY_TYPES.register("moa_egg", () ->
+            new BlockEntityType<>(MoaEggBlockEntity::new, AetherIIBlocks.MOA_EGG.get()));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<OutpostCampfireBlockEntity>> OUTPOST_CAMPFIRE = BLOCK_ENTITY_TYPES.register("outpost_campfire", () ->
             new BlockEntityType<>(OutpostCampfireBlockEntity::new, AetherIIBlocks.OUTPOST_CAMPFIRE.get()));

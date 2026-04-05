@@ -78,6 +78,16 @@
           "type": "item",
           "value": {
             "count": 1,
+            "id": "aether_ii:charm_of_reach_1"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "type": "item",
+          "value": {
+            "count": 1,
             "id": "aether_ii:charm_of_damage_1"
           }
         },

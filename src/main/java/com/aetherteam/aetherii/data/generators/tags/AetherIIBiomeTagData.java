@@ -140,6 +140,12 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.ENDURING_WOODLAND,
                 HolyIslesBiomes.SHEER_TUNDRA
         );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_ANIMAL_DEN).add(
+                HolyIslesBiomes.VERDANT_WOODS,
+                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.VIOLET_HIGHWOODS,
+                HolyIslesBiomes.ENDURING_WOODLAND
+        );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_RUINS_TEMPERATE).add(
                 HolyIslesBiomes.FLOURISHING_FIELD,
                 HolyIslesBiomes.VERDANT_WOODS,
@@ -153,6 +159,19 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HolyIslesBiomes.FRIGID_SIERRA,
                 HolyIslesBiomes.ENDURING_WOODLAND,
                 HolyIslesBiomes.SHEER_TUNDRA
+        );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_LIBRARY_TEMPERATE).add(
+                HolyIslesBiomes.VERDANT_WOODS,
+                HolyIslesBiomes.SHROUDED_FOREST,
+                HolyIslesBiomes.GLISTENING_SWAMP,
+                HolyIslesBiomes.VIOLET_HIGHWOODS
+        );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_VERADEXIAN_LIBRARY_ARCTIC).add(
+                HolyIslesBiomes.ENDURING_WOODLAND
+        );
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_IRRADIATED_REMNANTS).add(
+                HolyIslesBiomes.CONTAMINATED_JUNGLE,
+                HolyIslesBiomes.BATTLEGROUND_WASTES
         );
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_SENTRY_RUINS).add(
                 HolyIslesBiomes.FLOURISHING_FIELD,

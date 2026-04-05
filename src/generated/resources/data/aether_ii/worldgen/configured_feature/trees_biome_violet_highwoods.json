@@ -80,7 +80,7 @@
         }
       },
       {
-        "chance": 0.001,
+        "chance": 0.0025,
         "feature": {
           "feature": "aether_ii:trees_amberoot_sparse",
           "placement": [

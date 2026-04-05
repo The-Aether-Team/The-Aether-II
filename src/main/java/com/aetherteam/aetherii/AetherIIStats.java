@@ -42,6 +42,10 @@ public class AetherIIStats {
             Attributes.MINING_EFFICIENCY,
             new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "charm.mining_efficiency"), 2.0, AttributeModifier.Operation.ADD_VALUE),
             EquipmentSlotGroup.MAINHAND);
+    public static final ItemAttributeModifiers.Entry CHARM_BLOCK_INTERACTION_RANGE_BONUS = new ItemAttributeModifiers.Entry(
+            Attributes.BLOCK_INTERACTION_RANGE,
+            new AttributeModifier(Identifier.fromNamespaceAndPath(AetherII.MODID, "charm.block_interaction_range"), 1.0, AttributeModifier.Operation.ADD_VALUE),
+            EquipmentSlotGroup.MAINHAND);
 
     public static final ItemAttributeModifiers.Entry CHARM_DAMAGE_BONUS = new ItemAttributeModifiers.Entry(
             Attributes.ATTACK_DAMAGE,
