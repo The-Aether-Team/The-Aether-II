@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.gui.screen.menu;
 
-import com.aetherteam.aetherii.client.gui.component.menu.MakeshipMenuButton;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.AbstractWidgetAccessor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
@@ -29,9 +28,6 @@ public interface TitleScreenBehavior {
                 } else if (buttonText.equals(Component.translatable("options.language"))) {
                     button.setX(titleScreen.width - 24 + xOffset);
                     button.setY(4);
-                } else if (buttonText.equals(Component.literal("Makeship"))) {
-                    button.setX(titleScreen.width / 2 + (218 / 2));
-                    button.setY(16);
                 }
                 if (TitleScreenBehavior.isImageButton(buttonText) && ((AbstractWidgetAccessor) button).aether$getAlpha() > 0.01) { // Alpha check fixes button offset bug when menu first opens.
                     button.visible = true;
@@ -106,7 +102,8 @@ public interface TitleScreenBehavior {
                 || buttonText.equals(Component.literal("Create Test World"))
                 || buttonText.equals(Component.translatable("fml.menu.mods"))
                 || buttonText.equals(Component.translatable("menu.options"))
-                || buttonText.equals(Component.translatable("menu.quit"));
+                || buttonText.equals(Component.translatable("menu.quit"))
+                || buttonText.equals(Component.literal("Makeship"));
     }
 
     static boolean isHiddenButton(Component buttonText) {

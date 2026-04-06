@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.client.gui.screen.menu;
 
+import com.aetherteam.aetherii.client.AetherIIClient;
 import com.aetherteam.aetherii.client.gui.component.menu.AetherIIMenuButton;
-import com.aetherteam.aetherii.client.gui.component.menu.MakeshipMenuButton;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.TitleScreenAccessor;
 import com.aetherteam.cumulus.CumulusConfig;
@@ -10,13 +10,16 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.Music;
 import net.neoforged.neoforge.internal.BrandingControl;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -51,6 +54,22 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
     }
 
     public void setupButtons() {
+        if (AetherIIClient.activePlushyCampaign()) {
+            Component component = ((TitleScreenAccessor) this).callGetMultiplayerDisabledReason();
+            boolean flag = component == null;
+            Tooltip tooltip = component != null ? Tooltip.create(component) : null;
+            Button makeshipButton = this.addRenderableWidget(Button.builder(Component.literal("Makeship"), (button) -> {
+                new ClickEvent.OpenUrl(URI.create("https://www.makeship.com/products/aerwhale-jumbo-plushie"));
+            }).bounds(this.width / 2 - 100, (this.height / 4 + 48) + 24 * 3, 200, 20).tooltip(tooltip).build());
+            makeshipButton.active = flag;
+            /*
+            Predicate<AbstractWidget> predicate = (abstractWidget) -> (abstractWidget.getMessage().equals(Component.translatable("menu.multiplayer")) || abstractWidget.getMessage().equals(Component.translatable("menu.online")));
+            this.children().removeIf(button -> button instanceof AbstractWidget abstractWidget && predicate.test(abstractWidget));
+            this.renderables.removeIf(button -> button instanceof AbstractWidget abstractWidget && predicate.test(abstractWidget));
+
+
+             */
+        }
         for (Renderable renderable : this.renderables) {
             if (renderable instanceof AbstractWidget abstractWidget) {
                 Component buttonText = abstractWidget.getMessage();
@@ -118,8 +137,19 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
         if (renderable instanceof Button button) {
             if (TitleScreenBehavior.isMainButton(button.getMessage())) {
                 AetherIIMenuButton aetherIIButton = new AetherIIMenuButton(this, button);
-                // Sets button values that determine their positioning on the screen.
+                Component buttonText = aetherIIButton.getMessage();
+
                 this.buttonRows++;
+
+                if (buttonText.equals(Component.literal("Makeship"))) {
+                aetherIIButton.makeshipButton = true;
+                aetherIIButton.buttonCountOffset = 2;
+            } else {
+                aetherIIButton.buttonCountOffset = this.buttonRows;
+            }
+
+                // Sets button values that determine their positioning on the screen.
+                //this.buttonRows++;
                 aetherIIButton.buttonCountOffset = this.buttonRows;
                 aetherIIButton.setX(16);
                 aetherIIButton.setY(50 + aetherIIButton.buttonCountOffset * 25);
