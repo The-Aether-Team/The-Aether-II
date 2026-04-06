@@ -14,9 +14,7 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.TitleScreen;
-import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.dialog.action.StaticAction;
 import net.minecraft.sounds.Music;
 import net.minecraft.util.Util;
 import net.neoforged.neoforge.internal.BrandingControl;
@@ -62,7 +60,7 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
             Tooltip tooltip = component != null ? Tooltip.create(component) : null;
             Button makeshipButton = this.addRenderableWidget(Button.builder(Component.literal("Makeship"), (button) -> {
                 Util.getPlatform().openUri(URI.create("https://www.makeship.com/products/aerwhale-jumbo-plushie"));
-            }).bounds(this.width / 2 - 100, (this.height / 4 + 48) + 24 * 3, 200, 20).tooltip(tooltip).build());
+            }).bounds(this.width / 2 - 100, (this.height / 4 + 48) + 24 * 3, 900 / 7, 524 / 7).tooltip(tooltip).build());
             makeshipButton.active = flag;
         }
         for (Renderable renderable : this.renderables) {
@@ -146,9 +144,15 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
                 // Sets button values that determine their positioning on the screen.
                 //this.buttonRows++;
                 aetherIIButton.buttonCountOffset = this.buttonRows;
-                aetherIIButton.setX(16);
-                aetherIIButton.setY(50 + aetherIIButton.buttonCountOffset * 25);
-                aetherIIButton.setWidth(200);
+                if (!aetherIIButton.makeshipButton) {
+                    aetherIIButton.setX(16);
+                    aetherIIButton.setY(50 + aetherIIButton.buttonCountOffset * 25);
+                    aetherIIButton.setWidth(200);
+                } else {
+                    aetherIIButton.setX((int) ((this.width / 2.0F + (220.0F / 2.0F))));
+                    aetherIIButton.setY(32);
+                    aetherIIButton.setWidth(900 / 7);
+                }
                 return (T) super.addRenderableWidget(aetherIIButton);
             } else if (TitleScreenBehavior.isHiddenButton(button.getMessage())) {
                 button.active = false;

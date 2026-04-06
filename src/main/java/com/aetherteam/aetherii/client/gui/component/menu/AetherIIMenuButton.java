@@ -48,7 +48,7 @@ public class AetherIIMenuButton extends Button {
         if (!this.makeshipButton) {
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, 200, 20, 0, 0, this.getX() + this.hoverOffset, this.getY(), 200, 20, ARGB.white(this.alpha));
         } else {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, 900, 524, 0, 0, this.getX() + this.hoverOffset, this.getY(), 900, 524, ARGB.white(this.alpha));
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, 900 / 7, 524 / 7, 0, 0, this.getX(), this.getY(), 900 / 7, 524 / 7, ARGB.white(this.alpha));
         }
 
 
@@ -56,7 +56,9 @@ public class AetherIIMenuButton extends Button {
         float textX = this.getX() + 35 + this.hoverOffset;
         float textY = this.getY() + (this.height - 8) / 2.0F;
         poseStack.translate(textX, textY);
-        guiGraphics.drawString(font, this.getMessage(), 0, 0, this.getTextColor(mouseX, mouseY) | Mth.ceil(this.alpha * 255.0F) << 24);
+        if (!this.makeshipButton) {
+            guiGraphics.drawString(font, this.getMessage(), 0, 0, this.getTextColor(mouseX, mouseY) | Mth.ceil(this.alpha * 255.0F) << 24);
+        }
         poseStack.popMatrix();
     }
 
