@@ -135,11 +135,8 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
                 this.buttonRows++;
 
                 if (buttonText.equals(Component.literal("Makeship"))) {
-                aetherIIButton.makeshipButton = true;
-                aetherIIButton.buttonCountOffset = 2;
-            } else {
-                aetherIIButton.buttonCountOffset = this.buttonRows;
-            }
+                    aetherIIButton.makeshipButton = true;
+                }
 
                 // Sets button values that determine their positioning on the screen.
                 //this.buttonRows++;
