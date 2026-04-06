@@ -124,6 +124,7 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
         return true;
     }
 
+    // Fixes realm icons rendering in the aether menu
     @Override
     public void tick() {
     }
