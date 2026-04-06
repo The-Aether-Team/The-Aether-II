@@ -8,28 +8,36 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class AetherIIConfig {
     public static class Server {
+        public final ConfigValue<Boolean> experimentalDungeonContent;
         public final ConfigValue<Boolean> spawn_in_aether;
         public final ConfigValue<Boolean> disable_aether_portal;
         public final ConfigValue<String> portal_destination_dimension_ID;
         public final ConfigValue<String> portal_return_dimension_ID;
 
         public Server(ModConfigSpec.Builder builder) {
+            builder.push("Gameplay");
+            experimentalDungeonContent = builder
+                    .comment("Enables currently disabled Infected Guardian Tree content. At the moment this only includes enabling the dungeon's blocks in the creative inventory")
+                    .translation("config.aether_ii.gameplay.experimental_dungeon_content")
+                    .define("Enables experimental dungeon content", false);
+            builder.pop();
+
             builder.push("Modpack");
             spawn_in_aether = builder
                     .comment("Spawns the player in the Aether dimension; this is best enabled alongside other modpack configuration to avoid issues")
-                    .translation("config.aether.server.modpack.spawn_in_aether")
+                    .translation("config.aether_ii.server.modpack.spawn_in_aether")
                     .define("Spawns the player in the Aether", false);
             disable_aether_portal = builder
                     .comment("Prevents the Aether Portal from being created normally in the mod")
-                    .translation("config.aether.server.modpack.disable_aether_portal")
+                    .translation("config.aether_ii.server.modpack.disable_aether_portal")
                     .define("Disables Aether Portal creation", false);
             portal_destination_dimension_ID = builder
                     .comment("Sets the ID of the dimension that the Aether Portal will send the player to")
-                    .translation("config.aether.server.modpack.portal_destination_dimension_ID")
+                    .translation("config.aether_ii.server.modpack.portal_destination_dimension_ID")
                     .define("Sets portal destination dimension", AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL.identifier().toString());
             portal_return_dimension_ID = builder
                     .comment("Sets the ID of the dimension that the Aether Portal will return the player to")
-                    .translation("config.aether.server.modpack.portal_return_dimension_ID")
+                    .translation("config.aether_ii.server.modpack.portal_return_dimension_ID")
                     .define("Sets portal return dimension", Level.OVERWORLD.identifier().toString());
             builder.pop();
         }
@@ -44,7 +52,7 @@ public class AetherIIConfig {
             builder.push("Gameplay");
             start_with_portal = builder
                     .comment("On world creation, the player is given an Aether Portal Frame item to automatically go to the Aether with")
-                    .translation("config.aether.common.gameplay.start_with_portal")
+                    .translation("config.aether_ii.common.gameplay.start_with_portal")
                     .define("Gives player Aether Portal Frame item", false);
             show_alpha_message = builder
                     .define("Alpha Message", true);

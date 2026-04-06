@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.item;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEntities;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
@@ -605,52 +606,55 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.AETHER_PORTAL_FRAME.get());
             }).build());
 
-//    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_DUNGEON_BLOCKS = CREATIVE_MODE_TABS.register("dungeon_blocks", () -> CreativeModeTab.builder()
-//            .withTabsBefore(Identifier.fromNamespaceAndPath(AetherII.MODID, "functional_blocks"))
-//            .withTabsAfter(Identifier.fromNamespaceAndPath(AetherII.MODID, "equipment_and_utilities"))
-//            .icon(() -> new ItemStack(AetherIIBlocks.GUARDIAN_LAMP.get()))
-//            .title(Component.translatable("itemGroup." + AetherII.MODID + ".dungeon_blocks"))
-//            .displayItems((features, output) -> {
-//                output.accept(AetherIIBlocks.GUARDIAN_LOG.get());
-//                output.accept(AetherIIBlocks.GUARDIAN_LOG_SLAB.get());
-//                output.accept(AetherIIBlocks.GUARDIAN_WOOD.get());
-//                output.accept(AetherIIBlocks.GUARDIAN_WOOD_SLAB.get());
-//                output.accept(AetherIIBlocks.GUARDIAN_TRUNK.get());
-//                output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get());
-//                output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB.get());
-//                output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get());
-//                output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD_SLAB.get());
-//                output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK.get());
-//                output.accept(AetherIIBlocks.INFECTED_LOG.get());
-//                output.accept(AetherIIBlocks.INFECTED_LOG_SLAB.get());
-//                output.accept(AetherIIBlocks.INFECTED_WOOD.get());
-//                output.accept(AetherIIBlocks.INFECTED_WOOD_SLAB.get());
-//                output.accept(AetherIIBlocks.INFECTED_TRUNK.get());
-//                output.accept(AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
-//                output.accept(AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB.get());
-//                output.accept(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
-//                output.accept(AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB.get());
-//                output.accept(AetherIIBlocks.STRIPPED_INFECTED_TRUNK.get());
-//                output.accept(AetherIIBlocks.GUARDIAN_ROOTS.get());
-//                output.accept(AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS.get());
-//                output.accept(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get());
-//                output.accept(AetherIIBlocks.GUARDIAN_LAMP.get());
-//                output.accept(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
-//                output.accept(AetherIIBlocks.UNDERGROWTH_VINES.get());
-//                output.accept(AetherIIBlocks.HANGING_UNDERGROWTH.get());
-//                output.accept(AetherIIBlocks.ROTSHROOM_BLOCK.get());
-//                output.accept(AetherIIBlocks.ROTSHROOM_SLAB.get());
-//                output.accept(AetherIIBlocks.ROTSHROOM_STEM.get());
-//                output.accept(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get());
-//                output.accept(AetherIIBlocks.ROTSHROOM.get());
-//                output.accept(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
-//                output.accept(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
-//                output.accept(AetherIIBlocks.SHELF_ROTSHROOM.get());
-//                output.accept(AetherIIBlocks.ROTGROWTH_VINES.get());
-//                output.accept(AetherIIBlocks.LOCKED_BLOCK.get());
-//                output.accept(AetherIIBlocks.BOSS_DOORWAY_BLOCK.get());
-//                output.accept(AetherIIBlocks.TREASURE_DOORWAY_BLOCK.get());
-//            }).build());
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_DUNGEON_BLOCKS =
+            CREATIVE_MODE_TABS.register("dungeon_blocks", () -> CreativeModeTab.builder()
+            .withTabsBefore(Identifier.fromNamespaceAndPath(AetherII.MODID, "functional_blocks"))
+            .withTabsAfter(Identifier.fromNamespaceAndPath(AetherII.MODID, "equipment_and_utilities"))
+            .icon(() -> new ItemStack(AetherIIBlocks.GUARDIAN_LAMP.get()))
+            .title(Component.translatable("itemGroup." + AetherII.MODID + ".dungeon_blocks"))
+            .displayItems((features, output) -> {
+                if (AetherIIConfig.SERVER.experimentalDungeonContent.get()) {
+                    output.accept(AetherIIBlocks.GUARDIAN_LOG.get());
+                    output.accept(AetherIIBlocks.GUARDIAN_LOG_SLAB.get());
+                    output.accept(AetherIIBlocks.GUARDIAN_WOOD.get());
+                    output.accept(AetherIIBlocks.GUARDIAN_WOOD_SLAB.get());
+                    output.accept(AetherIIBlocks.GUARDIAN_TRUNK.get());
+                    output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get());
+                    output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_LOG_SLAB.get());
+                    output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get());
+                    output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD_SLAB.get());
+                    output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK.get());
+                    output.accept(AetherIIBlocks.INFECTED_LOG.get());
+                    output.accept(AetherIIBlocks.INFECTED_LOG_SLAB.get());
+                    output.accept(AetherIIBlocks.INFECTED_WOOD.get());
+                    output.accept(AetherIIBlocks.INFECTED_WOOD_SLAB.get());
+                    output.accept(AetherIIBlocks.INFECTED_TRUNK.get());
+                    output.accept(AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
+                    output.accept(AetherIIBlocks.STRIPPED_INFECTED_LOG_SLAB.get());
+                    output.accept(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
+                    output.accept(AetherIIBlocks.STRIPPED_INFECTED_WOOD_SLAB.get());
+                    output.accept(AetherIIBlocks.STRIPPED_INFECTED_TRUNK.get());
+                    output.accept(AetherIIBlocks.GUARDIAN_ROOTS.get());
+                    output.accept(AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS.get());
+                    output.accept(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get());
+                    output.accept(AetherIIBlocks.GUARDIAN_LAMP.get());
+                    output.accept(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
+                    output.accept(AetherIIBlocks.UNDERGROWTH_VINES.get());
+                    output.accept(AetherIIBlocks.HANGING_UNDERGROWTH.get());
+                    output.accept(AetherIIBlocks.ROTSHROOM_BLOCK.get());
+                    output.accept(AetherIIBlocks.ROTSHROOM_SLAB.get());
+                    output.accept(AetherIIBlocks.ROTSHROOM_STEM.get());
+                    output.accept(AetherIIBlocks.SHELF_ROTSHROOM_SLAB.get());
+                    output.accept(AetherIIBlocks.ROTSHROOM.get());
+                    output.accept(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
+                    output.accept(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
+                    output.accept(AetherIIBlocks.SHELF_ROTSHROOM.get());
+                    output.accept(AetherIIBlocks.ROTGROWTH_VINES.get());
+                    output.accept(AetherIIBlocks.LOCKED_BLOCK.get());
+                    output.accept(AetherIIBlocks.BOSS_DOORWAY_BLOCK.get());
+                    output.accept(AetherIIBlocks.TREASURE_DOORWAY_BLOCK.get());
+                }
+            }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_TOOLS_AND_UTILITIES = CREATIVE_MODE_TABS.register("tools_and_utilities", () -> CreativeModeTab.builder()
             .withTabsBefore(Identifier.fromNamespaceAndPath(AetherII.MODID, "functional_blocks"))

@@ -1538,7 +1538,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_COLORED_BLOCKS.get(), "Aether II Colored Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_NATURAL_BLOCKS.get(), "Aether II Natural Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_FUNCTIONAL_BLOCKS.get(), "Aether II Functional Blocks");
-//        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_TOOLS_AND_UTILITIES.get(), "Aether II Tools & Utilities");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_COMBAT_AND_EQUIPMENT.get(), "Aether II Combat & Equipment");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_CONSUMABLES.get(), "Aether II Consumables");
