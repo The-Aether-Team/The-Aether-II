@@ -65,7 +65,7 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
                         Util.getPlatform().openUri(URI.create("https://www.makeship.com/products/aerwhale-jumbo-plushie"));
                     }
 
-                    minecraft.setScreen(minecraft.screen);
+                    minecraft.setScreen(this);
                 }, URI.create("https://www.makeship.com/products/aerwhale-jumbo-plushie").toString(), true));
             }).bounds(this.width / 2 - 100, (this.height / 4 + 48) + 24 * 3, 900 / 7, 524 / 7).tooltip(tooltip).build());
             makeshipButton.active = flag;
