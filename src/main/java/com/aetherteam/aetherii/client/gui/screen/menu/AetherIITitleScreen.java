@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.gui.screen.menu;
 
+import com.aetherteam.aetherii.client.AetherIIClient;
 import com.aetherteam.aetherii.client.gui.component.menu.AetherIIMenuButton;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.TitleScreenAccessor;
@@ -9,13 +10,17 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
+import net.minecraft.client.gui.screens.ConfirmLinkScreen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.Music;
+import net.minecraft.util.Util;
 import net.neoforged.neoforge.internal.BrandingControl;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -50,6 +55,21 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
     }
 
     public void setupButtons() {
+        if (AetherIIClient.activePlushyCampaign()) {
+            Component component = ((TitleScreenAccessor) this).callGetMultiplayerDisabledReason();
+            boolean flag = component == null;
+            Tooltip tooltip = component != null ? Tooltip.create(component) : null;
+            Button makeshipButton = this.addRenderableWidget(Button.builder(Component.literal("Makeship"), (button) -> {
+                minecraft.setScreen(new ConfirmLinkScreen((p_465495_) -> {
+                    if (p_465495_) {
+                        Util.getPlatform().openUri(URI.create("https://www.makeship.com/products/aerwhale-jumbo-plushie"));
+                    }
+
+                    minecraft.setScreen(this);
+                }, URI.create("https://www.makeship.com/products/aerwhale-jumbo-plushie").toString(), true));
+            }).bounds(this.width / 2 - 100, (this.height / 4 + 48) + 24 * 3, 900 / 7, 524 / 7).tooltip(tooltip).build());
+            makeshipButton.active = flag;
+        }
         for (Renderable renderable : this.renderables) {
             if (renderable instanceof AbstractWidget abstractWidget) {
                 Component buttonText = abstractWidget.getMessage();
@@ -85,7 +105,7 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
         TitleScreenBehavior.super.handleImageButtons(this, xOffset);
         TitleScreenBehavior.super.handleEssentialButtonsForLeftMenu(this);
 
-        guiGraphics.drawString(this.font, "The Aether II 1.21.11-ALPHA.1", 2, this.height - 10, 0xFFFF7575);
+        guiGraphics.drawString(this.font, "The Aether II 1.21.11-ALPHA.2", 2, this.height - 10, 0xFFFF7575);
     }
 
     @Override
@@ -117,12 +137,26 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
         if (renderable instanceof Button button) {
             if (TitleScreenBehavior.isMainButton(button.getMessage())) {
                 AetherIIMenuButton aetherIIButton = new AetherIIMenuButton(this, button);
-                // Sets button values that determine their positioning on the screen.
+                Component buttonText = aetherIIButton.getMessage();
+
                 this.buttonRows++;
+
+                if (buttonText.equals(Component.literal("Makeship"))) {
+                    aetherIIButton.makeshipButton = true;
+                }
+
+                // Sets button values that determine their positioning on the screen.
+                //this.buttonRows++;
                 aetherIIButton.buttonCountOffset = this.buttonRows;
-                aetherIIButton.setX(16);
-                aetherIIButton.setY(50 + aetherIIButton.buttonCountOffset * 25);
-                aetherIIButton.setWidth(200);
+                if (!aetherIIButton.makeshipButton) {
+                    aetherIIButton.setX(16);
+                    aetherIIButton.setY(50 + aetherIIButton.buttonCountOffset * 25);
+                    aetherIIButton.setWidth(200);
+                } else {
+                    aetherIIButton.setX((int) ((this.width / 2.0F + (220.0F / 2.0F))));
+                    aetherIIButton.setY(32);
+                    aetherIIButton.setWidth(900 / 7);
+                }
                 return (T) super.addRenderableWidget(aetherIIButton);
             } else if (TitleScreenBehavior.isHiddenButton(button.getMessage())) {
                 button.active = false;

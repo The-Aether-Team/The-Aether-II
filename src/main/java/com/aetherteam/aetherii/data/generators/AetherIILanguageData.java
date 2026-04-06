@@ -1104,7 +1104,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS, "Engraved Disc");
 
         // Spawn Eggs
-        this.addSpawnEggItem(AetherIIItems.AERBUNNY_SPAWN_EGG); //todo
+        this.addSpawnEggItem(AetherIIItems.AERBUNNY_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.FLYING_COW_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.SHEEPUFF_SPAWN_EGG);
         this.addSpawnEggItem(AetherIIItems.PHYG_SPAWN_EGG);
@@ -1538,7 +1538,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_COLORED_BLOCKS.get(), "Aether II Colored Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_NATURAL_BLOCKS.get(), "Aether II Natural Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_FUNCTIONAL_BLOCKS.get(), "Aether II Functional Blocks");
-//        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_TOOLS_AND_UTILITIES.get(), "Aether II Tools & Utilities");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_COMBAT_AND_EQUIPMENT.get(), "Aether II Combat & Equipment");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_CONSUMABLES.get(), "Aether II Consumables");

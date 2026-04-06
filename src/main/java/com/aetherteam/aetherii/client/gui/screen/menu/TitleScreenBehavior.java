@@ -102,7 +102,8 @@ public interface TitleScreenBehavior {
                 || buttonText.equals(Component.literal("Create Test World"))
                 || buttonText.equals(Component.translatable("fml.menu.mods"))
                 || buttonText.equals(Component.translatable("menu.options"))
-                || buttonText.equals(Component.translatable("menu.quit"));
+                || buttonText.equals(Component.translatable("menu.quit"))
+                || buttonText.equals(Component.literal("Makeship"));
     }
 
     static boolean isHiddenButton(Component buttonText) {
