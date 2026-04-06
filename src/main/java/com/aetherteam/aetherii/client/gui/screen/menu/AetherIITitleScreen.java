@@ -124,6 +124,10 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
         return true;
     }
 
+    @Override
+    public void tick() {
+    }
+
     /**
      * Changes main menu buttons into Aether-styled main menu buttons.<br><br>
      * Warning for "unchecked" is suppressed because the buttons should always be able to be cast.
