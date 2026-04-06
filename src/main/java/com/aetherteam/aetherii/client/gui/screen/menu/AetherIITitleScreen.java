@@ -13,6 +13,7 @@ import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
+import net.minecraft.client.gui.screens.ConfirmLinkScreen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.Music;
@@ -59,7 +60,13 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
             boolean flag = component == null;
             Tooltip tooltip = component != null ? Tooltip.create(component) : null;
             Button makeshipButton = this.addRenderableWidget(Button.builder(Component.literal("Makeship"), (button) -> {
-                Util.getPlatform().openUri(URI.create("https://www.makeship.com/products/aerwhale-jumbo-plushie"));
+                minecraft.setScreen(new ConfirmLinkScreen((p_465495_) -> {
+                    if (p_465495_) {
+                        Util.getPlatform().openUri(URI.create("https://www.makeship.com/products/aerwhale-jumbo-plushie"));
+                    }
+
+                    minecraft.setScreen(minecraft.screen);
+                }, URI.create("https://www.makeship.com/products/aerwhale-jumbo-plushie").toString(), true));
             }).bounds(this.width / 2 - 100, (this.height / 4 + 48) + 24 * 3, 900 / 7, 524 / 7).tooltip(tooltip).build());
             makeshipButton.active = flag;
         }
