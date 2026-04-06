@@ -44,7 +44,13 @@ public class AetherIIMenuButton extends Button {
         Font font = minecraft.font;
 
         Identifier location = !this.makeshipButton ? AETHER_WIDGETS.get(this.isActive(), this.isHoveredOrFocused()) : MAKESHIP_WIDGETS.get(this.isActive(), this.isHoveredOrFocused());
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, 200, 20, 0, 0, this.getX() + this.hoverOffset, this.getY(), 200, 20, ARGB.white(this.alpha));
+
+        if (!this.makeshipButton) {
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, 200, 20, 0, 0, this.getX() + this.hoverOffset, this.getY(), 200, 20, ARGB.white(this.alpha));
+        } else {
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, location, 900, 524, 0, 0, this.getX() + this.hoverOffset, this.getY(), 900, 524, ARGB.white(this.alpha));
+        }
+
 
         poseStack.pushMatrix();
         float textX = this.getX() + 35 + this.hoverOffset;

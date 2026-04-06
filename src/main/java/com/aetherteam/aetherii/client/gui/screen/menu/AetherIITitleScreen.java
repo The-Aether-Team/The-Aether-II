@@ -16,7 +16,9 @@ import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.dialog.action.StaticAction;
 import net.minecraft.sounds.Music;
+import net.minecraft.util.Util;
 import net.neoforged.neoforge.internal.BrandingControl;
 
 import java.net.URI;
@@ -59,16 +61,9 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
             boolean flag = component == null;
             Tooltip tooltip = component != null ? Tooltip.create(component) : null;
             Button makeshipButton = this.addRenderableWidget(Button.builder(Component.literal("Makeship"), (button) -> {
-                new ClickEvent.OpenUrl(URI.create("https://www.makeship.com/products/aerwhale-jumbo-plushie"));
+                Util.getPlatform().openUri(URI.create("https://www.makeship.com/products/aerwhale-jumbo-plushie"));
             }).bounds(this.width / 2 - 100, (this.height / 4 + 48) + 24 * 3, 200, 20).tooltip(tooltip).build());
             makeshipButton.active = flag;
-            /*
-            Predicate<AbstractWidget> predicate = (abstractWidget) -> (abstractWidget.getMessage().equals(Component.translatable("menu.multiplayer")) || abstractWidget.getMessage().equals(Component.translatable("menu.online")));
-            this.children().removeIf(button -> button instanceof AbstractWidget abstractWidget && predicate.test(abstractWidget));
-            this.renderables.removeIf(button -> button instanceof AbstractWidget abstractWidget && predicate.test(abstractWidget));
-
-
-             */
         }
         for (Renderable renderable : this.renderables) {
             if (renderable instanceof AbstractWidget abstractWidget) {
