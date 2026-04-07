@@ -62,8 +62,15 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 Blocks.PODZOL,
                 Blocks.COARSE_DIRT,
                 Blocks.SNOW,
+                Blocks.SNOW_BLOCK,
+                Blocks.SHORT_GRASS,
+                Blocks.SHORT_DRY_GRASS,
+                Blocks.TALL_DRY_GRASS,
+                Blocks.FERN,
+                Blocks.BUSH,
+                Blocks.DEAD_BUSH,
                 Blocks.SNOW_BLOCK
-        ).addTag(BlockTags.FLOWERS);
+        ).addTags(BlockTags.FLOWERS, BlockTags.TERRACOTTA);
         this.tag(AetherIITags.Blocks.UNDERSHALE).add(AetherIIBlocks.UNDERSHALE.get());
         this.tag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS).add(
                 AetherIIBlocks.HOLYSTONE.get(),
