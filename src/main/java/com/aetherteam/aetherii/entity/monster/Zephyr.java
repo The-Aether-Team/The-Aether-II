@@ -57,7 +57,7 @@ public class Zephyr extends Mob implements Enemy {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.FOLLOW_RANGE, 35.0);
+                .add(Attributes.FOLLOW_RANGE, 30.0);
     }
 
     @Override

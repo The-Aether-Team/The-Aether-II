@@ -24,7 +24,7 @@ public class FlyingMoveControl extends MoveControl {
                 double d0 = vec3d.length();
                 vec3d = vec3d.normalize();
                 if (this.canReach(vec3d, Mth.ceil(d0))) {
-                    this.mob.setDeltaMovement(this.mob.getDeltaMovement().add(vec3d.scale(0.1)));
+                    this.mob.setDeltaMovement(this.mob.getDeltaMovement().add(vec3d.scale(0.07)));
                 } else {
                     this.operation = Operation.WAIT;
                 }
