@@ -223,7 +223,7 @@ modrinth {
     gameVersions = ["${minecraft_version}"]
     loaders = ["neoforge"]
     dependencies {
-        embedded.version "cumulus", "${project.cumulus_version}"
+      //  embedded.version "cumulus", "${project.cumulus_version}"
     }
 }
 
