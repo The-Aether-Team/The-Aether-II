@@ -45,7 +45,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.AETHER_DIRT.get(),
-                AetherIIBlocks.QUICKSOIL.get(),
                 AetherIIBlocks.FERROSITE_SAND.get(),
                 AetherIIBlocks.FERROSITE_MUD.get(),
                 AetherIIBlocks.ARCTIC_SNOW.get(),
@@ -57,8 +56,21 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_BUSH.get(),
                 AetherIIBlocks.HOLYSTONE_ROCK.get(),
                 AetherIIBlocks.SKYROOT_TWIG.get(),
-                AetherIIBlocks.VALKYRIE_SPROUT.get()
-        ).addTag(BlockTags.FLOWERS);
+                AetherIIBlocks.VALKYRIE_SPROUT.get(),
+                Blocks.GRASS_BLOCK,
+                Blocks.SAND,
+                Blocks.PODZOL,
+                Blocks.COARSE_DIRT,
+                Blocks.SNOW,
+                Blocks.SNOW_BLOCK,
+                Blocks.SHORT_GRASS,
+                Blocks.SHORT_DRY_GRASS,
+                Blocks.TALL_DRY_GRASS,
+                Blocks.FERN,
+                Blocks.BUSH,
+                Blocks.DEAD_BUSH,
+                Blocks.SNOW_BLOCK
+        ).addTags(BlockTags.FLOWERS, BlockTags.TERRACOTTA);
         this.tag(AetherIITags.Blocks.UNDERSHALE).add(AetherIIBlocks.UNDERSHALE.get());
         this.tag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS).add(
                 AetherIIBlocks.HOLYSTONE.get(),

@@ -3,7 +3,6 @@
     "aether_ii:aether_grass_block",
     "aether_ii:enchanted_aether_grass_block",
     "aether_ii:aether_dirt",
-    "aether_ii:quicksoil",
     "aether_ii:ferrosite_sand",
     "aether_ii:ferrosite_mud",
     "aether_ii:arctic_snow",
@@ -16,6 +15,20 @@
     "aether_ii:holystone_rock",
     "aether_ii:skyroot_twig",
     "aether_ii:valkyrie_sprout",
-    "#minecraft:flowers"
+    "minecraft:grass_block",
+    "minecraft:sand",
+    "minecraft:podzol",
+    "minecraft:coarse_dirt",
+    "minecraft:snow",
+    "minecraft:snow_block",
+    "minecraft:short_grass",
+    "minecraft:short_dry_grass",
+    "minecraft:tall_dry_grass",
+    "minecraft:fern",
+    "minecraft:bush",
+    "minecraft:dead_bush",
+    "minecraft:snow_block",
+    "#minecraft:flowers",
+    "#minecraft:terracotta"
   ]
 }
