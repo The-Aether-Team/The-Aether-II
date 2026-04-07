@@ -204,7 +204,7 @@ public class HolyIslesBiomeBuilders {
                 downfall,
                 HIGHFIELDS_EFFECTS,
                 spawnSettingsBuilder
-                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
+                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.8, 0.14)
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.65, 0.13)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addMobCharge(AetherIIEntityTypes.AERWHALE.get(), 0.5, 0.11)
@@ -376,7 +376,7 @@ public class HolyIslesBiomeBuilders {
                 downfall,
                 MAGNETIC_EFFECTS,
                 spawnSettingsBuilder
-                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
+                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.8, 0.14)
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.65, 0.13)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addMobCharge(AetherIIEntityTypes.AERWHALE.get(), 0.5, 0.11)
@@ -531,7 +531,7 @@ public class HolyIslesBiomeBuilders {
                 downfall,
                 ARCTIC_EFFECTS,
                 spawnSettingsBuilder
-                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
+                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.8, 0.14)
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.65, 0.13)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addMobCharge(AetherIIEntityTypes.AERWHALE.get(), 0.5, 0.11)
@@ -621,7 +621,7 @@ public class HolyIslesBiomeBuilders {
                 downfall,
                 IRRADIATED_EFFECTS,
                 spawnSettingsBuilder
-                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
+                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.8, 0.14)
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.65, 0.13)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 2))
@@ -643,7 +643,7 @@ public class HolyIslesBiomeBuilders {
                 downfall,
                 AERCLOUD_SEA_EFFECTS,
                 spawnSettingsBuilder
-                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
+                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.8, 0.14)
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.65, 0.13)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addMobCharge(AetherIIEntityTypes.AERWHALE.get(), 0.5, 0.11)
@@ -685,7 +685,7 @@ public class HolyIslesBiomeBuilders {
                 downfall,
                 AERCLOUD_SEA_EFFECTS,
                 spawnSettingsBuilder
-                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.7, 0.14)
+                        .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.8, 0.14)
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.65, 0.13)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.6, 0.12)
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_HAZARD, 1, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 1, 1))
