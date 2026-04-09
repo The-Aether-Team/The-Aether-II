@@ -1272,6 +1272,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_GLOVES.get(), 1, "§9Ability:§r Double Jump");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
+        this.addPerItemAbilityTooltip(AetherIIItems.SENTRY_BOOTS.get(), 1, "§9Ability:§r Zephyr Protection");
+
         this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_BOOTS.get(), 1, "§9Ability:§r Walk in Water");
         this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_BOOTS.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_LEGGINGS.get(), 1, "§9Ability:§r Walk in Water");
