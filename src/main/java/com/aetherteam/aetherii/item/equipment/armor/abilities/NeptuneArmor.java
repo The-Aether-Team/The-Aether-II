@@ -22,10 +22,10 @@ public interface NeptuneArmor {
 
         if (EquipmentUtil.hasArmorAbility(player, AetherIITags.Items.NEPTUNE_ARMOR)) {
             if (fallDamageMultiplierAttribute != null && !fallDamageMultiplierAttribute.hasModifier(NEPTUNE_SWIM_SPEED_BOOST)) {
-                fallDamageMultiplierAttribute.addTransientModifier(new AttributeModifier(NEPTUNE_SWIM_SPEED_BOOST, 1.0, AttributeModifier.Operation.ADD_VALUE));
+                fallDamageMultiplierAttribute.addTransientModifier(new AttributeModifier(NEPTUNE_SWIM_SPEED_BOOST, 2.0, AttributeModifier.Operation.ADD_VALUE));
             }
             if (oxygenBonusAttribute != null && !oxygenBonusAttribute.hasModifier(NEPTUNE_OXYGEN_BONUS)) {
-                oxygenBonusAttribute.addTransientModifier(new AttributeModifier(NEPTUNE_OXYGEN_BONUS, 1.0, AttributeModifier.Operation.ADD_VALUE));
+                oxygenBonusAttribute.addTransientModifier(new AttributeModifier(NEPTUNE_OXYGEN_BONUS, 1.5, AttributeModifier.Operation.ADD_VALUE));
             }
         } else {
             if (fallDamageMultiplierAttribute != null && fallDamageMultiplierAttribute.hasModifier(NEPTUNE_SWIM_SPEED_BOOST)) {
