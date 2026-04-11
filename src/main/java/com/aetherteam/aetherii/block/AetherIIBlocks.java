@@ -721,6 +721,10 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     // Arkenium Blocks
     public static final DeferredBlock<DoorBlock> ARKENIUM_DOOR = register("arkenium_door", (properties) -> new DoorBlock(BlockSetType.IRON, properties), () -> Block.Properties.ofFullCopy(Blocks.IRON_DOOR));
     public static final DeferredBlock<TrapDoorBlock> ARKENIUM_TRAPDOOR = register("arkenium_trapdoor", (properties) -> new TrapDoorBlock(BlockSetType.IRON, properties), () -> Block.Properties.ofFullCopy(Blocks.IRON_TRAPDOOR));
+    public static final DeferredBlock<IronBarsBlock> ARKENIUM_BARS = register("arkenium_bars", IronBarsBlock::new, () -> Block.Properties.ofFullCopy(Blocks.IRON_BARS));
+    public static final DeferredBlock<IronBarsBlock> FLORAL_ARKENIUM_BARS = register("floral_arkenium_bars", IronBarsBlock::new, () -> Block.Properties.ofFullCopy(Blocks.IRON_BARS));
+    public static final DeferredBlock<IronBarsBlock> PATTERNED_ARKENIUM_BARS = register("patterned_arkenium_bars", IronBarsBlock::new, () -> Block.Properties.ofFullCopy(Blocks.IRON_BARS));
+    public static final DeferredBlock<IronBarsBlock> CURVED_ARKENIUM_BARS = register("curved_arkenium_bars", IronBarsBlock::new, () -> Block.Properties.ofFullCopy(Blocks.IRON_BARS));
 
     // Inert Mineral Blocks
     public static final DeferredBlock<Block> INERT_ARKENIUM_BLOCK = register("inert_arkenium_block", () -> Block.Properties.of().mapColor(MapColor.COLOR_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(5.0F, 6.0F).requiresCorrectToolForDrops());
