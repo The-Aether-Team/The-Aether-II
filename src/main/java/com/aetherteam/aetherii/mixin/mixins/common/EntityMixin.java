@@ -24,6 +24,7 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -68,7 +69,7 @@ public class EntityMixin {
         if (level instanceof ServerLevel serverLevel) {
             if (serverLevel.dimension() == AetherIIDimensions.AETHER_HOLY_ISLES_LEVEL) {
                 if (entity.getY() <= serverLevel.getMinY() && !entity.isPassenger()) {
-                    if (entity instanceof Player || entity.isVehicle() || (entity instanceof LivingEntity) && !((LivingEntity) entity).getItemBySlot(EquipmentSlot.SADDLE).isEmpty()) { // Checks if an entity is a player or a vehicle of a player.
+                    if (entity instanceof Player || entity.isVehicle() || (entity instanceof LivingEntity) && !((LivingEntity) entity).getItemBySlot(EquipmentSlot.SADDLE).isEmpty() || ((entity instanceof TamableAnimal) && ((TamableAnimal) entity).isTame())) { // Checks if an entity is a player, a vehicle of a player or a pet.
                         entityFell(entity);
                     } else if (entity instanceof Projectile projectile && projectile.getOwner() instanceof Player) {
                         entityFell(projectile);
