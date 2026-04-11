@@ -68,7 +68,7 @@ public class BedrollBlock extends HorizontalDirectionalBlock {
 
             BedRule bedrule = level.environmentAttributes().getValue(EnvironmentAttributes.BED_RULE, pos);
 
-            if (!bedrule.canSleep().test(level)) {
+            if (bedrule.explodes()) {
                 level.removeBlock(pos, false);
                 BlockPos relativePos = pos.relative(state.getValue(FACING).getOpposite());
                 if (level.getBlockState(relativePos).is(this)) {
@@ -142,7 +142,7 @@ public class BedrollBlock extends HorizontalDirectionalBlock {
         BlockPos clickedPos = context.getClickedPos();
         BlockPos relativePos = clickedPos.relative(direction);
         Level level = context.getLevel();
-        return level.getBlockState(relativePos).canBeReplaced(context) && level.getWorldBorder().isWithinBounds(relativePos) ? (BlockState)this.defaultBlockState().setValue(FACING, direction) : null;
+        return level.getBlockState(relativePos).canBeReplaced(context) && level.getWorldBorder().isWithinBounds(relativePos) ? this.defaultBlockState().setValue(FACING, direction) : null;
     }
 
     @Override
