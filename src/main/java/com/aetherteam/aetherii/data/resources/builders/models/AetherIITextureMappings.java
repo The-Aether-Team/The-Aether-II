@@ -198,6 +198,12 @@ public class AetherIITextureMappings {
                 .put(AetherIITextureSlots.OVERLAY, Identifier.fromNamespaceAndPath(AetherII.MODID, "block/dungeon_lock"));
     }
 
+    public static TextureMapping barsWithDifferentEdge(Block block, Block edgeBlock, String suffix) {
+        return new TextureMapping()
+                .put(TextureSlot.BARS, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.EDGE, TextureMapping.getBlockTexture(edgeBlock, suffix));
+    }
+
     public static TextureMapping campfire(Block block) {
         return new TextureMapping()
                 .put(AetherIITextureSlots.LOG, TextureMapping.getBlockTexture(block, "_log"))

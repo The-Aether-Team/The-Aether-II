@@ -126,9 +126,8 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.registerSimpleItemModel(block, locationBottom);
     }
 
-    @Override
-    public void createBarsAndItem(Block block) {
-        TextureMapping mapping = TextureMapping.bars(block);
+    public void createBarsWithDifferentEdge(Block block, Block edgeBlock, String suffix) {
+        TextureMapping mapping = AetherIITextureMappings.barsWithDifferentEdge(block, edgeBlock, suffix);
         this.createBars(block,
                 ModelTemplates.BARS_POST_ENDS.extend().renderType("cutout").build().create(block, mapping, this.modelOutput),
                 ModelTemplates.BARS_POST.extend().renderType("cutout").build().create(block, mapping, this.modelOutput),
