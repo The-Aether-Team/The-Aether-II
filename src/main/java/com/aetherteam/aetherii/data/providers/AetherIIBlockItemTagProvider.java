@@ -253,6 +253,11 @@ public abstract class AetherIIBlockItemTagProvider {
                 AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE.get(),
                 AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get()
         );
+        this.tag(AetherIITags.Blocks.ARKENIUM_BARS_DECORATIVE_BLOCKS, AetherIITags.Items.ARKENIUM_BARS_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.FLORAL_ARKENIUM_BARS.get(),
+                AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get(),
+                AetherIIBlocks.CURVED_ARKENIUM_BARS.get()
+        );
         this.tag(AetherIITags.Blocks.ARILUM_LANTERN, AetherIITags.Items.ARILUM_LANTERN).add(
                 AetherIIBlocks.WHITE_ARILUM_LANTERN.get(),
                 AetherIIBlocks.ORANGE_ARILUM_LANTERN.get(),
