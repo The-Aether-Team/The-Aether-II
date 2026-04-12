@@ -109,7 +109,7 @@
       "element": {
         "element_type": "minecraft:empty_pool_element"
       },
-      "weight": 4
+      "weight": 8
     }
   ],
   "fallback": "minecraft:empty"
