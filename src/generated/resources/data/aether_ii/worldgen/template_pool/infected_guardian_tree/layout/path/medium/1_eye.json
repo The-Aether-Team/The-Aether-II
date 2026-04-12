@@ -7,9 +7,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_01_a",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },
@@ -22,9 +20,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_01_b",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },
@@ -37,9 +33,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_01_c",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },
@@ -52,9 +46,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_01_d",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },
@@ -67,9 +59,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_01_e",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },
@@ -82,9 +72,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_02_a",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },
@@ -97,9 +85,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_02_b",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },
@@ -112,9 +98,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_02_c",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },
@@ -127,9 +111,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_02_d",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },
@@ -142,9 +124,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/paths/medium/1_eye/path_02_e",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },

@@ -7,9 +7,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/room_d-b",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },
@@ -22,9 +20,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/room_d-d",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },
@@ -37,9 +33,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/room_d-e",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },
@@ -52,9 +46,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/challenge_room_d-b",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },
@@ -67,9 +59,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/challenge_room_d-c",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },
@@ -82,9 +72,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/challenge_room_d-d",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },
@@ -97,9 +85,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/layouts/additional_rooms/challenge_room_d-e",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_debug",
         "projection": "rigid",
         "replace_air": false
       },
