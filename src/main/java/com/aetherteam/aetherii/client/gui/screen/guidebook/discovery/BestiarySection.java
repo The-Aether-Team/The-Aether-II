@@ -140,18 +140,13 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         float yBodyRot = livingEntity.yBodyRot;
         float yRot = livingEntity.getYRot();
         float xRot = livingEntity.getXRot();
-        livingEntity.setYBodyRot(180.0F + angleXComponent);
-        livingEntity.setYRot(180.0F + angleXComponent);
-        livingEntity.setXRot(-angleYComponent);
-        livingEntity.setYHeadRot(livingEntity.getYRot());
-        livingEntity.yHeadRotO = livingEntity.getYRot();
         livingEntity.tickCount = -2;
 
         EntityRenderState entityrenderstate = extractRenderState(livingEntity);
         if (entityrenderstate instanceof LivingEntityRenderState livingentityrenderstate) {
-            livingentityrenderstate.bodyRot = livingentityrenderstate.bodyRot;
-            livingentityrenderstate.yRot = livingEntity.getYRot();
-            livingentityrenderstate.xRot = livingEntity.getXRot();
+            livingentityrenderstate.bodyRot = 180.0F + angleXComponent;
+            livingentityrenderstate.yRot = 0.0F;
+            livingentityrenderstate.xRot = -angleYComponent;
 
             livingentityrenderstate.boundingBoxWidth = livingentityrenderstate.boundingBoxWidth / livingentityrenderstate.scale;
             livingentityrenderstate.boundingBoxHeight = livingentityrenderstate.boundingBoxHeight / livingentityrenderstate.scale;
