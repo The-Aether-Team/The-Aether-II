@@ -9,10 +9,7 @@
     },
     "minecraft:visual/fog_color": "#f3f0ff",
     "minecraft:visual/sky_color": "#e7e3fc",
-    "minecraft:visual/water_fog_color": "#3e5082",
-    "neoforge:custom_clouds": "aether_ii:aether_clouds",
-    "neoforge:custom_skybox": "aether_ii:aether_sky",
-    "neoforge:custom_weather_effects": "aether_ii:aether_weather"
+    "minecraft:visual/water_fog_color": "#3e5082"
   },
   "carvers": [],
   "creature_spawn_probability": 0.212,

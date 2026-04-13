@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.renderer.AetherIIDimensionRenderers;
 import com.aetherteam.aetherii.data.resources.builders.worldgen.holyisles.HolyIslesBiomeSourceBuilders;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
+import net.neoforged.neoforge.common.world.NeoForgeEnvironmentAttributes;
 
 public class AetherIIDimensions {
     private final static Identifier AETHER_HOLY_ISLES_LEVEL_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "aether_holy_isles");
@@ -51,7 +53,10 @@ public class AetherIIDimensions {
                         .set(EnvironmentAttributes.BED_RULE, BedRule.CAN_SLEEP_WHEN_DARK)
                         .set(EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, false)
                         .set(EnvironmentAttributes.NETHER_PORTAL_SPAWNS_PIGLINS, true)
-                .build(),
+                        .set(NeoForgeEnvironmentAttributes.CUSTOM_SKYBOX, AetherIIDimensionRenderers.AETHER_SKY_ID)
+                        .set(NeoForgeEnvironmentAttributes.CUSTOM_WEATHER_EFFECTS, AetherIIDimensionRenderers.AETHER_WEATHER_ID)
+                        .set(NeoForgeEnvironmentAttributes.CUSTOM_CLOUDS, AetherIIDimensionRenderers.AETHER_CLOUDS_ID)
+                        .build(),
                 context.lookup(Registries.TIMELINE).getOrThrow(TimelineTags.IN_OVERWORLD)));
     }
 
