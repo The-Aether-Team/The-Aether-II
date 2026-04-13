@@ -9,10 +9,7 @@
     },
     "minecraft:visual/fog_color": "#ecebfc",
     "minecraft:visual/sky_color": "#c9d1ff",
-    "minecraft:visual/water_fog_color": "#55708a",
-    "neoforge:custom_clouds": "aether_ii:aether_clouds",
-    "neoforge:custom_skybox": "aether_ii:aether_sky",
-    "neoforge:custom_weather_effects": "aether_ii:aether_weather"
+    "minecraft:visual/water_fog_color": "#55708a"
   },
   "carvers": "aether_ii:holy_isles_cave",
   "creature_spawn_probability": 0.218,
