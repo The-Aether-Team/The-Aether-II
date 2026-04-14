@@ -1308,6 +1308,7 @@
   "item.aether_ii.scatterglass_shard": "Scatterglass Shard",
   "item.aether_ii.scatterglass_vial": "Scatterglass Vial",
   "item.aether_ii.sentry_boots": "Sentry Boots",
+  "item.aether_ii.sentry_boots.nitrogen_internals.ability.tooltip.1": "§9Ability:§r Zephyr Protection",
   "item.aether_ii.sentry_crate_mimic_spawn_egg": "Sentry Crate Mimic Spawn Egg",
   "item.aether_ii.sentry_golem_spawn_egg": "Sentry Golem Spawn Egg",
   "item.aether_ii.sentry_servo": "Sentry Servo",

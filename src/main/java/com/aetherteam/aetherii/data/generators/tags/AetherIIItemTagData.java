@@ -113,6 +113,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 ItemTags.SWORDS);
         this.tag(AetherIITags.Items.ACCEPTS_CHARMS_ARMOR).addTags(
                 AetherIITags.Items.EQUIPMENT_HANDWEAR,
+                AetherIITags.Items.EQUIPMENT_ACCESSORIES,
                 Tags.Items.ARMORS);
         this.tag(AetherIITags.Items.BEAST_PELT_ARMOR).add(
                 AetherIIItems.BEAST_PELT_HELMET.get(),
@@ -192,14 +193,17 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.GRAVITITE_SHORTSWORD.get(),
                 AetherIIItems.GRAVITITE_PIKE.get(),
                 AetherIIItems.GRAVITITE_HAMMER.get());
-        this.tag(AetherIITags.Items.UNBREAKABLE_LOOT).add(
-                AetherIIItems.HAMMER_OF_DEMOLITION.get(),
-                AetherIIItems.SENTRY_BOOTS.get(),
-                AetherIIItems.NEPTUNE_HELMET.get(),
-                AetherIIItems.NEPTUNE_CHESTPLATE.get(),
-                AetherIIItems.NEPTUNE_LEGGINGS.get(),
-                AetherIIItems.NEPTUNE_BOOTS.get(),
-                AetherIIItems.NEPTUNE_GLOVES.get());
+        this.tag(AetherIITags.Items.GRAVITITE_TOOL).add(
+                AetherIIItems.GRAVITITE_PICKAXE.get(),
+                AetherIIItems.GRAVITITE_AXE.get(),
+                AetherIIItems.GRAVITITE_SHOVEL.get(),
+                AetherIIItems.GRAVITITE_TROWEL.get(),
+                AetherIIItems.GRAVITITE_SHORTSWORD.get(),
+                AetherIIItems.GRAVITITE_PIKE.get(),
+                AetherIIItems.GRAVITITE_HAMMER.get());
+        this.tag(AetherIITags.Items.PENDANT_ACCESSORY).add(
+                AetherIIItems.ZANITE_PENDANT.get(),
+                AetherIIItems.ICE_PENDANT.get());
         this.tag(AetherIITags.Items.UNIQUE_TOOLTIP_COLOR).add(
                 AetherIIItems.SKYROOT_SHORTSWORD.get(),
                 AetherIIItems.SKYROOT_HAMMER.get(),

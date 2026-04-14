@@ -250,8 +250,11 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                 Map.entry(AetherIIItems.GRAVITITE_BOOTS, () -> Items.NETHERITE_BOOTS.getDefaultInstance()),
                 Map.entry(AetherIIItems.GRAVITITE_LEGGINGS, () -> Items.NETHERITE_LEGGINGS.getDefaultInstance()),
                 Map.entry(AetherIIItems.GRAVITITE_CHESTPLATE, () -> Items.NETHERITE_CHESTPLATE.getDefaultInstance()),
-                Map.entry(AetherIIItems.GRAVITITE_HELMET, () -> Items.NETHERITE_HELMET.getDefaultInstance())
-//                Map.entry(AetherIIItems.GRAVITITE_GLOVES, () -> AetherIIItems.GRAVITITE_GLOVES.get().getDefaultInstance()) //todo
+                Map.entry(AetherIIItems.GRAVITITE_HELMET, () -> Items.NETHERITE_HELMET.getDefaultInstance()),
+                Map.entry(AetherIIItems.GRAVITITE_GLOVES, () -> AetherIIItems.ZANITE_PENDANT.get().getDefaultInstance()),
+
+                Map.entry(AetherIIItems.ZANITE_PENDANT, () -> AetherIIItems.ICE_PENDANT.get().getDefaultInstance())
+                //Map.entry(AetherIIItems.ICE_PENDANT, () -> AetherIIItems.ICE_PENDANT.get().getDefaultInstance()),  //todo
         );
 
         public static final Set<Stats> TIER_1 = Set.of(
@@ -538,6 +541,7 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
         public static final Predicate<ItemStack> ZANITE = isTier(AetherIITags.Items.ZANITE_TOOL).or(isTier(AetherIITags.Items.ZANITE_ARMOR));
         public static final Predicate<ItemStack> ARKENIUM = isTier(AetherIITags.Items.ARKENIUM_TOOL).or(isTier(AetherIITags.Items.ARKENIUM_ARMOR));
         public static final Predicate<ItemStack> GRAVITITE = isTier(AetherIITags.Items.GRAVITITE_TOOL).or(isTier(AetherIITags.Items.GRAVITITE_ARMOR));
+        public static final Predicate<ItemStack> PENDANT = isTier(AetherIITags.Items.PENDANT_ACCESSORY);
 
         public static final Set<Cost> TIER_1 = Set.of(
                 new Cost(BEAST_PELT, AetherIIItems.ARKENIUM_PLATE, 1, Items.AIR, 0),
@@ -546,7 +550,8 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                 new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATE, 1, Items.AIR, 0),
                 new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATE, 2, Items.AIR, 0),
                 new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATE, 2, Items.AIR, 0),
-                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATE, 3, Items.AIR, 0)
+                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATE, 3, Items.AIR, 0),
+                new Cost(PENDANT, AetherIIItems.ARKENIUM_PLATE, 2, Items.AIR, 0)
         );
         public static final Set<Cost> TIER_2 = Set.of(
                 new Cost(BEAST_PELT, AetherIIItems.ARKENIUM_PLATE, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
@@ -555,7 +560,8 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                 new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATE, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
                 new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATE, 3, AetherIIItems.CORROBONITE_CRYSTAL, 1),
                 new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATE, 3, AetherIIItems.CORROBONITE_CRYSTAL, 1),
-                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATE, 4, AetherIIItems.CORROBONITE_CRYSTAL, 1)
+                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATE, 4, AetherIIItems.CORROBONITE_CRYSTAL, 1),
+                new Cost(PENDANT, AetherIIItems.ARKENIUM_PLATE, 3, AetherIIItems.CORROBONITE_CRYSTAL, 1)
         );
         public static final Set<Cost> TIER_3 = Set.of(
                 new Cost(BEAST_PELT, AetherIIItems.ARKENIUM_PLATE, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
@@ -564,7 +570,8 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                 new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATE, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
                 new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATE, 5, AetherIIItems.CORROBONITE_CRYSTAL, 3),
                 new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATE, 5, AetherIIItems.CORROBONITE_CRYSTAL, 3),
-                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATE, 6, AetherIIItems.CORROBONITE_CRYSTAL, 3)
+                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATE, 6, AetherIIItems.CORROBONITE_CRYSTAL, 3),
+                new Cost(PENDANT, AetherIIItems.ARKENIUM_PLATE, 5, AetherIIItems.CORROBONITE_CRYSTAL, 3)
         );
         public static final Set<Cost> TIER_4 = Set.of(
                 new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATE, 6, AetherIIItems.CORROBONITE_CRYSTAL, 4)
