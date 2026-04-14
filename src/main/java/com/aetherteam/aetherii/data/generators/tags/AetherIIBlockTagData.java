@@ -194,7 +194,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.MARBLED_BRICKS.get(),
                 AetherIIBlocks.ARKENIUM_BLOCK.get(),
                 AetherIIBlocks.ARKENIUM_DOOR.get(),
-                AetherIIBlocks.ARKENIUM_TRAPDOOR.get()
+                AetherIIBlocks.ARKENIUM_TRAPDOOR.get(),
+                AetherIIBlocks.ARKENIUM_BARS.get(),
+                AetherIIBlocks.FLORAL_ARKENIUM_BARS.get(),
+                AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get(),
+                AetherIIBlocks.CURVED_ARKENIUM_BARS.get()
         ).addTags(
                 AetherIITags.Blocks.ICHORITE_DECORATIVE_BLOCKS,
                 AetherIITags.Blocks.MARBLED_ICHORITE_DECORATIVE_BLOCKS,
@@ -734,6 +738,12 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(),
                 AetherIIBlocks.AMBEROOT_WALL_SIGN.get()
         );
+        this.tag(BlockTags.BARS).add(
+                AetherIIBlocks.ARKENIUM_BARS.get(),
+                AetherIIBlocks.FLORAL_ARKENIUM_BARS.get(),
+                AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get(),
+                AetherIIBlocks.CURVED_ARKENIUM_BARS.get()
+        );
         this.tag(BlockTags.PORTALS).add(AetherIIBlocks.AETHER_PORTAL.get());
         this.tag(BlockTags.BEACON_BASE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
@@ -953,6 +963,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(),
                 AetherIIBlocks.ARKENIUM_DOOR.get(),
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.get(),
+                AetherIIBlocks.ARKENIUM_BARS.get(),
+                AetherIIBlocks.FLORAL_ARKENIUM_BARS.get(),
+                AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get(),
+                AetherIIBlocks.CURVED_ARKENIUM_BARS.get(),
                 AetherIIBlocks.MURAL.get(),
                 AetherIIBlocks.SENTRY_CRATE.get(),
                 AetherIIBlocks.SENTRY_SPAWNER.get(),

@@ -52,6 +52,7 @@ public class AetherIITags {
         public static final TagKey<Block> CRUDE_SCATTERGLASS_PANE_DECORATIVE_BLOCKS = tag("crude_scatterglass_pane_decorative_blocks");
         public static final TagKey<Block> SCATTERGLASS_DECORATIVE_BLOCKS = tag("scatterglass_decorative_blocks");
         public static final TagKey<Block> SCATTERGLASS_PANE_DECORATIVE_BLOCKS = tag("scatterglass_pane_decorative_blocks");
+        public static final TagKey<Block> ARKENIUM_BARS_DECORATIVE_BLOCKS = tag("arkenium_bars_decorative_blocks");
         public static final TagKey<Block> SENTRY_BLOCKS = tag("sentry_blocks");
         public static final TagKey<Block> QUICKSOIL_GLASS = tag("quicksoil_glass");
         public static final TagKey<Block> CRUDE_SCATTERGLASS = tag("crude_scatterglass");
@@ -150,6 +151,7 @@ public class AetherIITags {
         public static final TagKey<Item> CRUDE_SCATTERGLASS_PANE_DECORATIVE_BLOCKS = tag("crude_scatterglass_pane_decorative_blocks");
         public static final TagKey<Item> SCATTERGLASS_DECORATIVE_BLOCKS = tag("scatterglass_decorative_blocks");
         public static final TagKey<Item> SCATTERGLASS_PANE_DECORATIVE_BLOCKS = tag("scatterglass_pane_decorative_blocks");
+        public static final TagKey<Item> ARKENIUM_BARS_DECORATIVE_BLOCKS = tag("arkenium_bars_decorative_blocks");
         public static final TagKey<Item> ARILUM_LANTERN = tag("arilum_lantern");
 
         public static final TagKey<Item> GUARDIAN_LOGS = tag("guardian_logs");

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "aether_ii:curved_arkenium_bars",
+  "result": {
+    "count": 1,
+    "id": "aether_ii:arkenium_bars"
+  }
+}

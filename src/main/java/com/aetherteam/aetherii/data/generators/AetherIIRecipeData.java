@@ -1122,6 +1122,23 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         // Arkenium Blocks
         this.doorBuilder(AetherIIBlocks.ARKENIUM_DOOR, Ingredient.of(AetherIIItems.ARKENIUM_PLATE.get())).unlockedBy(getHasName(AetherIIItems.ARKENIUM_PLATE.get()), has(AetherIIItems.ARKENIUM_PLATE.get())).save(this.output);
         this.twoByTwoPacker(RecipeCategory.REDSTONE, AetherIIBlocks.ARKENIUM_TRAPDOOR, AetherIIItems.ARKENIUM_PLATE);
+        this.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_BARS, 16)
+                .define('#', AetherIIItems.ARKENIUM_PLATE.get())
+                .pattern("###")
+                .pattern("###")
+                .unlockedBy("has_arkenium_plate", this.has(AetherIIItems.ARKENIUM_PLATE.get()))
+                .save(this.output);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.FLORAL_ARKENIUM_BARS.get(), AetherIIBlocks.ARKENIUM_BARS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get(), AetherIIBlocks.ARKENIUM_BARS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.CURVED_ARKENIUM_BARS.get(), AetherIIBlocks.ARKENIUM_BARS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_BARS.get(), AetherIIBlocks.FLORAL_ARKENIUM_BARS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_BARS.get(), AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get());
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_BARS.get(), AetherIIBlocks.CURVED_ARKENIUM_BARS.get());
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.ARKENIUM_BARS.get())
+                .group("bars_from_artisanry")
+                .requires(AetherIITags.Items.ARKENIUM_BARS_DECORATIVE_BLOCKS)
+                .unlockedBy("has_artisanry_blocks", has(AetherIITags.Items.ARKENIUM_BARS_DECORATIVE_BLOCKS))
+                .save(this.output, name("arkenium_bars_from_artisanry"));
 
         // Inert Mineral Blocks
         this.oreBlockStorageRecipesRecipesWithCustomUnpacking(getter, this.output, RecipeCategory.MISC, AetherIIItems.INERT_ARKENIUM.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.INERT_ARKENIUM_BLOCK, "inert_arkenium_from_inert_arkenium_block", "inert_arkenium");

@@ -450,6 +450,10 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Arkenium Blocks
         this.createDoor(AetherIIBlocks.ARKENIUM_DOOR.get());
         this.createOrientableTrapdoor(AetherIIBlocks.ARKENIUM_TRAPDOOR.get());
+        this.createBarsWithDifferentEdge(AetherIIBlocks.ARKENIUM_BARS.get(), AetherIIBlocks.ARKENIUM_BARS.get(), "");
+        this.createBarsWithDifferentEdge(AetherIIBlocks.FLORAL_ARKENIUM_BARS.get(), AetherIIBlocks.ARKENIUM_BARS.get(), "_edge");
+        this.createBarsWithDifferentEdge(AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get(), AetherIIBlocks.ARKENIUM_BARS.get(), "_edge");
+        this.createBarsWithDifferentEdge(AetherIIBlocks.CURVED_ARKENIUM_BARS.get(), AetherIIBlocks.ARKENIUM_BARS.get(), "_edge");
 
         // Inert Mineral Blocks
         this.createTrivialCube(AetherIIBlocks.INERT_ARKENIUM_BLOCK.get());

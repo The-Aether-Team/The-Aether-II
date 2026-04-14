@@ -126,6 +126,18 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.registerSimpleItemModel(block, locationBottom);
     }
 
+    public void createBarsWithDifferentEdge(Block block, Block edgeBlock, String suffix) {
+        TextureMapping mapping = AetherIITextureMappings.barsWithDifferentEdge(block, edgeBlock, suffix);
+        this.createBars(block,
+                ModelTemplates.BARS_POST_ENDS.extend().renderType("cutout").build().create(block, mapping, this.modelOutput),
+                ModelTemplates.BARS_POST.extend().renderType("cutout").build().create(block, mapping, this.modelOutput),
+                ModelTemplates.BARS_CAP.extend().renderType("cutout").build().create(block, mapping, this.modelOutput),
+                ModelTemplates.BARS_CAP_ALT.extend().renderType("cutout").build().create(block, mapping, this.modelOutput),
+                ModelTemplates.BARS_POST_SIDE.extend().renderType("cutout").build().create(block, mapping, this.modelOutput),
+                ModelTemplates.BARS_POST_SIDE_ALT.extend().renderType("cutout").build().create(block, mapping, this.modelOutput));
+        this.registerSimpleFlatItemModel(block);
+    }
+
     public void createCutoutMippedCube(Block block) {
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, plainVariant(AetherIIModelTemplates.TEMPLATE_CUTOUT_MIPPED_CUBE_ALL.create(block, TextureMapping.cube(block), this.modelOutput))));
     }
