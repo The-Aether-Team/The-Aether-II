@@ -159,7 +159,7 @@ public class AetherIIClient {
     public static boolean activePlushyCampaign() {
         return ((ZonedDateTime.now().getDayOfMonth() > MonthDay.of(Month.MARCH, 25).getDayOfMonth()
                         && ZonedDateTime.now().getMonth() == Month.MARCH)
-                || (ZonedDateTime.now().getDayOfMonth() < MonthDay.of(Month.APRIL, 18).getDayOfMonth()
+                || (ZonedDateTime.now().getDayOfMonth() < MonthDay.of(Month.APRIL, 25).getDayOfMonth()
                         && ZonedDateTime.now().getMonth() == Month.APRIL))
                         && ZonedDateTime.now().getYear() == 2026;
     }

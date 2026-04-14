@@ -1,3 +1,27 @@
+# The Aether II - NeoForge - 1.21.11-alpha.2.1
+Additions
+- Added Arkenium Bars; these come in one regular and 3 Artisan's Bench variants
+
+Changes
+- Charms can now be applied to pendants
+- Buffed Neptune Armor set-bonus
+- The Sentry Boots zephyr protection ability is now mentioned in the item's tooltip
+- Tamed animals will no longer die when falling out of The Aether
+
+Fixes
+- Fixed Bedrolls exploding when used
+- Fixed head rotation of bestiary entity renders being wrong
+- Fixed guidebook health display sometimes being inaccurate
+- Fixed Skybirch Saplings not growing
+
+Experimental Dungeon Content
+
+*[Note: Infected Guardian Tree structure must be spawned in using commands]*
+- Fixed some Infected Guardian Tree room connection issues
+- Reduced average amount of Guardian Tree rooms
+- The Guardian Tree is no longer made-up of placeholder blocks
+
+
 # The Aether II - NeoForge - 1.21.11-alpha.2
 
 Ported the mod to 1.21.11
