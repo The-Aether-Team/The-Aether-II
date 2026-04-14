@@ -738,6 +738,12 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(),
                 AetherIIBlocks.AMBEROOT_WALL_SIGN.get()
         );
+        this.tag(BlockTags.BARS).add(
+                AetherIIBlocks.ARKENIUM_BARS.get(),
+                AetherIIBlocks.FLORAL_ARKENIUM_BARS.get(),
+                AetherIIBlocks.PATTERNED_ARKENIUM_BARS.get(),
+                AetherIIBlocks.CURVED_ARKENIUM_BARS.get()
+        );
         this.tag(BlockTags.PORTALS).add(AetherIIBlocks.AETHER_PORTAL.get());
         this.tag(BlockTags.BEACON_BASE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),

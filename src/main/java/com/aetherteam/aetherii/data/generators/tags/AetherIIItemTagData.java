@@ -9,6 +9,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagAppender;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagEntry;
 import net.minecraft.tags.TagKey;
@@ -694,6 +695,12 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GREATROOT_HANGING_SIGN.asItem(),
                 AetherIIBlocks.WISPROOT_HANGING_SIGN.asItem(),
                 AetherIIBlocks.AMBEROOT_HANGING_SIGN.asItem()
+        );
+        this.tag(ItemTags.BARS).add(
+                AetherIIBlocks.ARKENIUM_BARS.asItem(),
+                AetherIIBlocks.FLORAL_ARKENIUM_BARS.asItem(),
+                AetherIIBlocks.PATTERNED_ARKENIUM_BARS.asItem(),
+                AetherIIBlocks.CURVED_ARKENIUM_BARS.asItem()
         );
         this.tag(ItemTags.BEACON_PAYMENT_ITEMS).add(
                 AetherIIItems.ZANITE_GEMSTONE.get(),
