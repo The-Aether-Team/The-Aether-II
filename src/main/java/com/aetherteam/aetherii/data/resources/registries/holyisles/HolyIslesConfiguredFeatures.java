@@ -1460,6 +1460,25 @@ public class HolyIslesConfiguredFeatures {
                                 new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState()), 0.2F, 0.2F)
                         )).build());
 
+        register(context, SKYBIRCH_SAPLING, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(8, 3, 0), BlockStateProvider.simple(AetherIIBlocks.SKYBIRCH_LEAVES.get().defaultBlockState()),
+                        new SkybirchFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
+                        new ThreeLayersFeatureSize(1, 1, 0, 1, 0, OptionalInt.empty()))
+                        .ignoreVines().decorators(List.of(new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState()), 0.1F, 0.25F))).build());
+        register(context, SKYBIRCH_IRRADIATED_SAPLING, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(8, 3, 0), BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get().defaultBlockState()),
+                        new SkybirchFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
+                        new ThreeLayersFeatureSize(1, 1, 0, 1, 0, OptionalInt.empty()))
+                        .ignoreVines().decorators(ImmutableList.of(
+                                new IrradiationTreeDecorator(),
+                                new MossDecorator(AetherIIBlockStateProperties.Mossy.AMBRELINN, SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get()), SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_VINES.get()), Optional.of(new WeightedStateProvider(tarahespFlowers))),
+                                new SimpleTrunkTreeDecorator(BlockStateProvider.simple(AetherIIBlocks.SKYROOT_TRUNK.get().defaultBlockState()), 0.1F, 0.25F)
+                        )).build());
+
         register(context, SKYPINE_SAPLING, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
