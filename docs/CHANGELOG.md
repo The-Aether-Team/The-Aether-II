@@ -12,6 +12,7 @@ Fixes
 - Fixed Bedrolls exploding when used
 - Fixed head rotation of bestiary entity renders being wrong
 - Fixed guidebook health display sometimes being inaccurate
+- Fixed Skybirch Saplings not growing
 
 Experimental Dungeon Content
 
