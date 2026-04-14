@@ -205,7 +205,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
             int y = 94;
 
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
-            guiGraphics.drawString(this.font, Component.literal((int) (this.getMenu().getMoa().getHealth()) + "/" + (int) (this.getMenu().getMoa().getMaxHealth())), x + 18, y + 4, 0xffffffff, true);
+            guiGraphics.drawString(this.font, Component.literal(Mth.ceil(this.getMenu().getMoa().getHealth()) + "/" + Mth.ceil(this.getMenu().getMoa().getMaxHealth())), x + 18, y + 4, 0xffffffff, true);
 
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
             guiGraphics.drawString(this.font, Component.literal(this.getMenu().getMoa().getArmorValue() + "/20"), x + 72, y + 4, 0xffffffff, true);
@@ -215,7 +215,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
             int y = 112;
 
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
-            guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x + 18, y + 4, 0xffffffff, true);
+            guiGraphics.drawString(this.font, Component.literal(Mth.ceil(player.getHealth()) + "/" + Mth.ceil(player.getMaxHealth())), x + 18, y + 4, 0xffffffff, true);
 
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
             guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 72, y + 4, 0xffffffff, true);
