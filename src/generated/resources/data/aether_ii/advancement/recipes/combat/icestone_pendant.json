@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:ice_pendant"
+        "recipe": "aether_ii:icestone_pendant"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:ice_pendant"
+      "aether_ii:icestone_pendant"
     ]
   }
 }

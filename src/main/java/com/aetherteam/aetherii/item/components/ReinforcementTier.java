@@ -253,8 +253,8 @@ public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
                 Map.entry(AetherIIItems.GRAVITITE_HELMET, () -> Items.NETHERITE_HELMET.getDefaultInstance()),
                 Map.entry(AetherIIItems.GRAVITITE_GLOVES, () -> AetherIIItems.ZANITE_PENDANT.get().getDefaultInstance()),
 
-                Map.entry(AetherIIItems.ZANITE_PENDANT, () -> AetherIIItems.ICE_PENDANT.get().getDefaultInstance())
-                //Map.entry(AetherIIItems.ICE_PENDANT, () -> AetherIIItems.ICE_PENDANT.get().getDefaultInstance()),  //todo
+                Map.entry(AetherIIItems.ZANITE_PENDANT, () -> AetherIIItems.ICESTONE_PENDANT.get().getDefaultInstance())
+                //Map.entry(AetherIIItems.ICESTONE_PENDANT, () -> AetherIIItems.ICESTONE_PENDANT.get().getDefaultInstance()),  //todo
         );
 
         public static final Set<Stats> TIER_1 = Set.of(

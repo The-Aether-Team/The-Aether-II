@@ -137,7 +137,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
 
         // Accessories
         this.generateReinforcedItem(AetherIIItems.ZANITE_PENDANT.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
-        this.generateReinforcedItem(AetherIIItems.ICE_PENDANT.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
+        this.generateReinforcedItem(AetherIIItems.ICESTONE_PENDANT.get(), ModelTemplates.FLAT_HANDHELD_ITEM, ReinforcementTier.THIRD);
 
         // Charms
         this.generateCharmItem(AetherIIItems.CHARM_OF_EFFICIENCY_I.get(), "tool", "1", "efficiency");

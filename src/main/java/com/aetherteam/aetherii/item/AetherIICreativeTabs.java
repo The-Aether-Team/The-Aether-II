@@ -786,7 +786,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SENTRY_BOOTS.get());
                 output.accept(AetherIIItems.KINETIC_THRUSTERS.get());
                 output.accept(AetherIIItems.ZANITE_PENDANT.get());
-                output.accept(AetherIIItems.ICE_PENDANT.get());
+                output.accept(AetherIIItems.ICESTONE_PENDANT.get());
                 output.accept(AetherIIItems.CHARM_OF_DAMAGE_I.get());
                 output.accept(AetherIIItems.CHARM_OF_DEXTERITY_I.get());
                 output.accept(AetherIIItems.CHARM_OF_KNOCKBACK_I.get());

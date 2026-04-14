@@ -3,10 +3,10 @@
   "category": "repairing",
   "experience": 0.0,
   "fuel_count": 3,
-  "ingredient": "aether_ii:ice_pendant",
+  "ingredient": "aether_ii:icestone_pendant",
   "processing_time": 200,
   "result": {
     "count": 1,
-    "id": "aether_ii:ice_pendant"
+    "id": "aether_ii:icestone_pendant"
   }
 }
