@@ -34,10 +34,6 @@ import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterDimensionTransitionScreenEvent;
 import net.neoforged.neoforge.common.NeoForge;
 
-import java.time.Month;
-import java.time.MonthDay;
-import java.time.ZonedDateTime;
-
 public class AetherIIClient {
     public static void clientInit(IEventBus bus) {
         bus.addListener(AetherIIClient::clientSetup);
@@ -154,13 +150,5 @@ public class AetherIIClient {
         TooltipListeners.PREDICATES.put(AetherIIItems.NEPTUNE_LEGGINGS, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.NEPTUNE_BOOTS, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.NEPTUNE_GLOVES, setBonusPredicate);
-    }
-
-    public static boolean activePlushyCampaign() {
-        return ((ZonedDateTime.now().getDayOfMonth() > MonthDay.of(Month.MARCH, 25).getDayOfMonth()
-                        && ZonedDateTime.now().getMonth() == Month.MARCH)
-                || (ZonedDateTime.now().getDayOfMonth() < MonthDay.of(Month.APRIL, 25).getDayOfMonth()
-                        && ZonedDateTime.now().getMonth() == Month.APRIL))
-                        && ZonedDateTime.now().getYear() == 2026;
     }
 }

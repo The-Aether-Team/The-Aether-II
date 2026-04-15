@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.portal.PortalClientUtil;
-import com.aetherteam.aetherii.client.AetherIIClient;
+import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.miscellaneous.ToggleItem;
@@ -32,9 +32,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import java.net.URI;
-import java.time.Month;
-import java.time.MonthDay;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -134,7 +131,7 @@ public class AetherIIPlayerAttachment {
                 linkMessage.append(Component.literal(".").withColor(0xE5E5FF));
                 serverPlayer.sendSystemMessage(linkMessage.append(CommonComponents.NEW_LINE));
 
-                if (AetherIIClient.activePlushyCampaign()) {
+                if (AetherII.activePlushyCampaign()) {
                     MutableComponent makeshipMessage = Component.literal("We are currently running a campaign to produce a limited edition Aerwhale plush with Makeship. ").withColor(0xE5E5FF);
                     makeshipMessage.append(Component.literal("Purchase one").setStyle(MAKESHIP));
                     makeshipMessage.append(Component.literal(" to help support The Aether II's development and adopt a cuddly Aerwhale into your home!").withColor(0xE5E5FF));

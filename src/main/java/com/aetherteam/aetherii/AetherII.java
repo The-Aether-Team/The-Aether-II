@@ -89,6 +89,10 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.time.Month;
+import java.time.MonthDay;
+import java.time.ZonedDateTime;
+
 @Mod(AetherII.MODID)
 public class AetherII {
     public static final String MODID = "aether_ii";
@@ -290,5 +294,13 @@ public class AetherII {
             event.getRegistry().addAlias(Identifier.fromNamespaceAndPath(AetherII.MODID, "arkenium_spear"), Identifier.fromNamespaceAndPath(AetherII.MODID, "arkenium_pike"));
             event.getRegistry().addAlias(Identifier.fromNamespaceAndPath(AetherII.MODID, "gravitite_spear"), Identifier.fromNamespaceAndPath(AetherII.MODID, "gravitite_pike"));
         }
+    }
+
+    public static boolean activePlushyCampaign() {
+        return ((ZonedDateTime.now().getDayOfMonth() > MonthDay.of(Month.MARCH, 25).getDayOfMonth()
+                && ZonedDateTime.now().getMonth() == Month.MARCH)
+                || (ZonedDateTime.now().getDayOfMonth() < MonthDay.of(Month.APRIL, 25).getDayOfMonth()
+                && ZonedDateTime.now().getMonth() == Month.APRIL))
+                && ZonedDateTime.now().getYear() == 2026;
     }
 }
