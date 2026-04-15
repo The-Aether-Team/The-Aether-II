@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.block.AccessoryFreezableRecipe;
-import com.aetherteam.aetherii.recipe.recipes.block.IcestoneFreezableRecipe;
 import net.minecraft.commands.CacheableFunction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
