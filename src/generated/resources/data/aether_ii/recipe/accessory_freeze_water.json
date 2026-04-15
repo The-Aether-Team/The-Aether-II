@@ -4,6 +4,6 @@
     "block": "minecraft:water"
   },
   "result": {
-    "block": "minecraft:frosted_ice"
+    "block": "aether_ii:frosted_ice"
   }
 }
