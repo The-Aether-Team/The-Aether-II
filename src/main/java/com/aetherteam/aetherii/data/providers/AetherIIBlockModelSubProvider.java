@@ -325,7 +325,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
             dispatch = dispatch
                     .select(SlabType.BOTTOM, lit, bottom)
                     .select(SlabType.TOP, lit, top)
-                    .select(SlabType.DOUBLE, lit, plainVariant(ModelLocationUtils.getModelLocation(block)));
+                    .select(SlabType.DOUBLE, lit, plainVariant(ModelLocationUtils.getModelLocation(base)));
         }
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(dispatch));
         this.registerSimpleItemModel(block, bottomLocation);
