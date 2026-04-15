@@ -5,21 +5,21 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "aether_ii:item/ice_pendant_reinforced_1"
+          "model": "aether_ii:item/icestone_pendant_reinforced_1"
         },
         "threshold": 0.1
       },
       {
         "model": {
           "type": "minecraft:model",
-          "model": "aether_ii:item/ice_pendant_reinforced_2"
+          "model": "aether_ii:item/icestone_pendant_reinforced_2"
         },
         "threshold": 0.3
       }
     ],
     "fallback": {
       "type": "minecraft:model",
-      "model": "aether_ii:item/ice_pendant"
+      "model": "aether_ii:item/icestone_pendant"
     },
     "property": "aether_ii:reinforcement_tier"
   }

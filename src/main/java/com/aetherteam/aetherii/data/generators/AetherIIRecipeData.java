@@ -1573,7 +1573,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         // Accessories
         this.makePendantWithTag(getter, AetherIIItems.ZANITE_PENDANT, AetherIITags.Items.GEMS_ZANITE, Ingredient.of(AetherIIItems.CLOUDTWINE), "zanite").save(this.output);
-        this.makePendant(getter, AetherIIItems.ICE_PENDANT, AetherIIBlocks.ICESTONE.asItem(), Ingredient.of(AetherIIItems.CLOUDTWINE)).save(this.output);
+        this.makePendant(getter, AetherIIItems.ICESTONE_PENDANT, AetherIIBlocks.ICESTONE.asItem(), Ingredient.of(AetherIIItems.CLOUDTWINE)).save(this.output);
 
         // Foods
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ENCHANTED_BLUEBERRY, AetherIIItems.BLUEBERRY, 1, 0.0F).save(this.output);
@@ -1915,7 +1915,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 AetherIIItems.CLOUDTWINE, List.of(this.hourglass(1, 50), this.hourglass(2, 50)),
                 AetherIIBlocks.ICESTONE, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
-                AetherIIItems.ICE_PENDANT, 0.0F).save(this.output, this.name("uncraft_ice_pendant"));
+                AetherIIItems.ICESTONE_PENDANT, 0.0F).save(this.output, this.name("uncraft_icestone_pendant"));
 
         this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
@@ -2467,7 +2467,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_GLOVES, 8).group("repair_gravitite").save(this.output, this.name("repair_gravitite_gloves"));
 
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ZANITE_PENDANT, 4).group("repair_zanite").save(this.output, this.name("repair_zanite_pendant"));
-        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ICE_PENDANT, 3).save(this.output, this.name("repair_ice_pendant"));
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ICESTONE_PENDANT, 3).save(this.output, this.name("repair_icestone_pendant"));
 
         this.alkahestCorrosion(AetherIIBlocks.ICHORITE.get(), AetherIIBlocks.UNDERSHALE.get()).save(this.output, this.name("corrode_undershale_to_ichorite"));
 
@@ -2564,7 +2564,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .build()), AetherIIItems.IRRADIATED_TOOL, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 1, this.output);
         this.alkahestPurification(RecipeCategory.COMBAT, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder() //todo
                 .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_PENDANT.toStack()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ICE_PENDANT.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ICESTONE_PENDANT.toStack()), 1)
                 .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_EFFICIENCY_I.toStack()), 1)
                 .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_REACH_I.toStack()), 1)
                 .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_DAMAGE_I.toStack()), 1)
@@ -2646,9 +2646,8 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.icestoneFreezableTag(AetherIIBlocks.ARCTIC_ICE.get(), Blocks.WATER, AetherIITags.Biomes.ARCTIC_ICE).save(this.output, this.name("icestone_freeze_water_to_arctic_ice"));
         this.icestoneFreezable(Blocks.OBSIDIAN, Blocks.LAVA).save(this.output, this.name("icestone_freeze_lava"));
 
-        //this.accessoryFreezable(AetherIIBlocks.FROSTED_ICE.get(), Blocks.WATER).save(this.output, this.name("accessory_freeze_water"));
-        //this.accessoryFreezableTag(AetherIIBlocks.FROSTED_ARCTIC_ICE.get(), Blocks.WATER, AetherIITags.Biomes.ARCTIC_ICE).save(this.output, this.name("accessory_freeze_water_to_arctic_ice")); //TODO
-        this.accessoryFreezable(AetherIIBlocks.FROSTED_ARCTIC_ICE.get(), Blocks.WATER).save(this.output, this.name("accessory_freeze_water"));
+        this.accessoryFreezable(AetherIIBlocks.FROSTED_ICE.get(), Blocks.WATER).save(this.output, this.name("accessory_freeze_water"));
+        this.accessoryFreezableTag(AetherIIBlocks.FROSTED_ARCTIC_ICE.get(), Blocks.WATER, AetherIITags.Biomes.ARCTIC_ICE).save(this.output, this.name("accessory_freeze_water_to_arctic_ice"));
         this.accessoryFreezable(AetherIIBlocks.UNSTABLE_OBSIDIAN.get(), Blocks.LAVA).save(this.output, this.name("accessory_freeze_lava"));
     }
 

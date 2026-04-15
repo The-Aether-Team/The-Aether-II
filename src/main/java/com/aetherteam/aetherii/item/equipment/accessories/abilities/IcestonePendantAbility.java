@@ -23,7 +23,7 @@ import net.minecraft.world.level.material.FluidState;
 
 import java.util.Optional;
 
-public interface IcePendantAbility extends FreezingBehavior<ItemStack> {
+public interface IcestonePendantAbility extends FreezingBehavior<ItemStack> {
     /**
      * Freezes blocks around the wearer in a radius of 1.9 as long as they aren't flying or in spectator. This also damages the Ice accessory for every 4 blocks frozen.
      *
@@ -40,7 +40,7 @@ public interface IcePendantAbility extends FreezingBehavior<ItemStack> {
         if (!(wearer.level() instanceof ServerLevel serverLevel)) {
             return;
         }
-        if (!stack.is(AetherIIItems.ICE_PENDANT)) {
+        if (!stack.is(AetherIIItems.ICESTONE_PENDANT)) {
             return;
         }
         if (!(wearer instanceof ServerPlayer serverPlayer)) {

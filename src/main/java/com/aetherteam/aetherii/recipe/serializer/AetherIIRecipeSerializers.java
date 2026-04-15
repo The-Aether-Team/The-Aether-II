@@ -21,7 +21,7 @@ public class AetherIIRecipeSerializers {
     public static final DeferredHolder<RecipeSerializer<?>, BlockStateRecipeSerializer<AlkahestCorrosionRecipe>> ALKAHEST_CORROSION = RECIPE_SERIALIZERS.register("alkahest_corrosion", AlkahestCorrosionRecipe.Serializer::new);
     public static final DeferredHolder<RecipeSerializer<?>, BiomeParameterRecipeSerializer<SwetGelRecipe>> SWET_GEL_CONVERSION = RECIPE_SERIALIZERS.register("swet_gel_conversion", SwetGelRecipe.Serializer::new);
     public static final DeferredHolder<RecipeSerializer<?>, BiomeParameterRecipeSerializer<IcestoneFreezableRecipe>> ICESTONE_FREEZABLE = RECIPE_SERIALIZERS.register("icestone_freezable", IcestoneFreezableRecipe.Serializer::new);
-    public static final DeferredHolder<RecipeSerializer<?>, BlockStateRecipeSerializer<AccessoryFreezableRecipe>> ACCESSORY_FREEZABLE = RECIPE_SERIALIZERS.register("accessory_freezable", AccessoryFreezableRecipe.Serializer::new);
+    public static final DeferredHolder<RecipeSerializer<?>, BiomeParameterRecipeSerializer<AccessoryFreezableRecipe>> ACCESSORY_FREEZABLE = RECIPE_SERIALIZERS.register("accessory_freezable", AccessoryFreezableRecipe.Serializer::new);
 
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<HourglassRestoringRecipe>> HOURGLASS_RESTORING = RECIPE_SERIALIZERS.register("hourglass_restoring", HourglassRestoringRecipe.Serializer::new);
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<AltarEnchantingRecipe>> ALTAR_ENCHANTING = RECIPE_SERIALIZERS.register("altar_enchanting", AltarEnchantingRecipe.Serializer::new);

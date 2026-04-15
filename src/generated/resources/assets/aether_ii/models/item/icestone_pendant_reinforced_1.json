@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:item/zanite_pendant_reinforced_1"
+    "layer0": "aether_ii:item/icestone_pendant_reinforced_1"
   }
 }

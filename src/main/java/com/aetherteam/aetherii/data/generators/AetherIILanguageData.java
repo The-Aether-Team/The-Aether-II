@@ -979,7 +979,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Accessories
         this.addItem(AetherIIItems.ZANITE_PENDANT, "Zanite Pendant");
-        this.addItem(AetherIIItems.ICE_PENDANT, "Ice Pendant");
+        this.addItem(AetherIIItems.ICESTONE_PENDANT, "Icestone Pendant");
 
         // Charms
         this.addItem(AetherIIItems.CHARM_OF_EFFICIENCY_I, "Charm of Efficiency I");
@@ -1290,7 +1290,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.NEPTUNE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_PENDANT.get(), 1, "§9Ability:§r Grows Stronger");
-        this.addPerItemAbilityTooltip(AetherIIItems.ICE_PENDANT.get(), 1, "§9Ability:§r Freezes Liquids");
+        this.addPerItemAbilityTooltip(AetherIIItems.ICESTONE_PENDANT.get(), 1, "§9Ability:§r Freezes Liquids");
 
         this.addPerItemAbilityTooltip(AetherIIItems.COLD_AERCLOUD_GLIDER.get(), 1, "§3Use:§r Click-Use");
         this.addPerItemAbilityTooltip(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get(), 1, "§3Use:§r Click-Use");

@@ -9,7 +9,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagAppender;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagEntry;
 import net.minecraft.tags.TagKey;
@@ -97,7 +96,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.NEPTUNE_GLOVES.get());
         this.tag(AetherIITags.Items.EQUIPMENT_ACCESSORIES).add(
                 AetherIIItems.ZANITE_PENDANT.get(),
-                AetherIIItems.ICE_PENDANT.get());
+                AetherIIItems.ICESTONE_PENDANT.get());
         this.tag(AetherIITags.Items.EQUIPABLE).addTags(
                 AetherIITags.Items.EQUIPMENT_RELICS,
                 AetherIITags.Items.EQUIPMENT_HANDWEAR,
@@ -204,7 +203,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.GRAVITITE_HAMMER.get());
         this.tag(AetherIITags.Items.PENDANT_ACCESSORY).add(
                 AetherIIItems.ZANITE_PENDANT.get(),
-                AetherIIItems.ICE_PENDANT.get());
+                AetherIIItems.ICESTONE_PENDANT.get());
         this.tag(AetherIITags.Items.UNIQUE_TOOLTIP_COLOR).add(
                 AetherIIItems.SKYROOT_SHORTSWORD.get(),
                 AetherIIItems.SKYROOT_HAMMER.get(),

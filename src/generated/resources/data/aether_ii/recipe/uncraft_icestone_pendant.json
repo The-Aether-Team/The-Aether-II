@@ -2,7 +2,7 @@
   "type": "aether_ii:hourglass_restoring",
   "category": "uncrafting",
   "experience": 0.0,
-  "ingredient": "aether_ii:ice_pendant",
+  "ingredient": "aether_ii:icestone_pendant",
   "processing_time": 200,
   "results": {
     "output_1": {

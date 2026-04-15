@@ -289,6 +289,7 @@ public class AetherII {
             event.getRegistry().addAlias(Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite_spear"), Identifier.fromNamespaceAndPath(AetherII.MODID, "zanite_pike"));
             event.getRegistry().addAlias(Identifier.fromNamespaceAndPath(AetherII.MODID, "arkenium_spear"), Identifier.fromNamespaceAndPath(AetherII.MODID, "arkenium_pike"));
             event.getRegistry().addAlias(Identifier.fromNamespaceAndPath(AetherII.MODID, "gravitite_spear"), Identifier.fromNamespaceAndPath(AetherII.MODID, "gravitite_pike"));
+            event.getRegistry().addAlias(Identifier.fromNamespaceAndPath(AetherII.MODID, "ice_pendant"), Identifier.fromNamespaceAndPath(AetherII.MODID, "icestone_pendant"));
         }
     }
 }

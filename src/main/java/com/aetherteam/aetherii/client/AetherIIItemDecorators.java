@@ -77,7 +77,9 @@ public class AetherIIItemDecorators {
             AetherIIItems.BURRUKAI_PLATE_GLOVES,
             AetherIIItems.ZANITE_GLOVES,
             AetherIIItems.ARKENIUM_GLOVES,
-            AetherIIItems.GRAVITITE_GLOVES);
+            AetherIIItems.GRAVITITE_GLOVES,
+            AetherIIItems.ZANITE_PENDANT,
+            AetherIIItems.ICESTONE_PENDANT);
 
     private static final IItemDecorator REINFORCED_DURABILITY = (guiGraphics, font, stack, xOffset, yOffset) -> { //todo improve visuals
         guiGraphics.pose().pushMatrix();

@@ -379,8 +379,12 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         return BiomeParameterRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, tagKey, IcestoneFreezableRecipe::new);
     }
 
-    protected BlockStateRecipeBuilder accessoryFreezable(Block result, Block ingredient) { //TODO: Biome specific results
+    protected BlockStateRecipeBuilder accessoryFreezable(Block result, Block ingredient) {
         return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, AccessoryFreezableRecipe::new);
+    }
+
+    protected BiomeParameterRecipeBuilder accessoryFreezableTag(Block result, Block ingredient, TagKey<Biome> tagKey) {
+        return BiomeParameterRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, tagKey, AccessoryFreezableRecipe::new);
     }
 
     protected BlockStateRecipeBuilder alkahestCorrosion(Block result, Block ingredient) {

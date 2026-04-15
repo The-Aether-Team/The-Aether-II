@@ -11,7 +11,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -267,7 +266,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN).setWeight(3))
                         .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AERCLOUD_GLIDER))
                         .add(LootItem.lootTableItem(AetherIIItems.ZANITE_PENDANT))
-                        .add(LootItem.lootTableItem(AetherIIItems.ICE_PENDANT))
+                        .add(LootItem.lootTableItem(AetherIIItems.ICESTONE_PENDANT))
                 )
 
         );

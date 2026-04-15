@@ -95,7 +95,7 @@ public interface FreezingBlock extends FreezingBehavior<BlockState> {
      *
      * @param level The {@link Level} that the recipe occurs in.
      */
-    static void cacheRecipes(ServerLevel level) {
+    static void cacheRecipes(ServerLevel level) { //todo the cache needs to be rewritten into smth more clean with its own data structures in its own class
         if (FreezingBlock.cachedBlocks.isEmpty()) {
             for (RecipeHolder<IcestoneFreezableRecipe> recipe : level.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.ICESTONE_FREEZABLE.get())) {
                 IcestoneFreezableRecipe freezableRecipe = recipe.value();
