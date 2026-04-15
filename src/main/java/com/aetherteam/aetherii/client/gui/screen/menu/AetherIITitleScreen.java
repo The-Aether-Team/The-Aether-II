@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.gui.screen.menu;
 
-import com.aetherteam.aetherii.client.AetherIIClient;
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.client.gui.component.menu.AetherIIMenuButton;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.TitleScreenAccessor;
@@ -55,7 +56,7 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
     }
 
     public void setupButtons() {
-        if (AetherIIClient.activePlushyCampaign()) {
+        if (AetherII.activePlushyCampaign()) {
             Component component = ((TitleScreenAccessor) this).callGetMultiplayerDisabledReason();
             boolean flag = component == null;
             Tooltip tooltip = component != null ? Tooltip.create(component) : null;
