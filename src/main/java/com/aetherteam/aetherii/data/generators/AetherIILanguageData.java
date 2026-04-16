@@ -2031,7 +2031,7 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
 
         this.addSubtitle("block", "holystone_furnace.fire_crackle", "Holystone Furnace crackles");
 
-        this.addSubtitle("block", "holystone_smoker.fire_crackle", "Holystone Smoker crackles");
+        this.addSubtitle("block", "holystone_smoker.smoke", "Holystone Smoker smokes");
 
         this.addSubtitle("block", "arkenium_forge.use", "Arkenium Forge used");
 
