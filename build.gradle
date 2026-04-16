@@ -19,7 +19,7 @@ base {
     archivesName = mod_id
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
 neoForge {
     version = project.neo_version
@@ -81,10 +81,7 @@ neoForge {
 
 sourceSets.main.resources {
     srcDir 'src/generated/resources'
-}
-
-processResources {
-    exclude '.cache/'
+    exclude("src/generated/**/.cache") // datagen cache files
 }
 
 configurations {
@@ -176,10 +173,8 @@ compileJava {
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
-            artifactId project.archivesBaseName
-            artifact project.tasks.jar
-            artifact project.sourceJar
+        register('mavenJava', MavenPublication) {
+            from components.java
         }
     }
     repositories {
