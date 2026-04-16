@@ -125,12 +125,12 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
         this.add(AetherIISoundEvents.BLOCK_HOLYSTONE_SMOKER_SMOKE,
                 definition().with(
-                        sound("minecraft:block/smoker/fire_crackle1"),
-                        sound("minecraft:block/smoker/fire_crackle2"),
-                        sound("minecraft:block/smoker/fire_crackle3"),
-                        sound("minecraft:block/smoker/fire_crackle4"),
-                        sound("minecraft:block/smoker/fire_crackle5")
-                ).subtitle("subtitles.aether_ii.block.holystone_smoker.fire_crackle")
+                        sound("minecraft:block/smoker/smoker1"),
+                        sound("minecraft:block/smoker/smoker2"),
+                        sound("minecraft:block/smoker/smoker3"),
+                        sound("minecraft:block/smoker/smoker4"),
+                        sound("minecraft:block/smoker/smoker5")
+                ).subtitle("subtitles.aether_ii.block.holystone_smoker.smoke")
         );
 
         this.add(AetherIISoundEvents.BLOCK_ARKENIUM_FORGE_USE,
