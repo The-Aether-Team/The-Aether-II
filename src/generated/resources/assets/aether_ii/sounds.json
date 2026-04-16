@@ -132,13 +132,13 @@
   },
   "block.holystone_smoker.smoke": {
     "sounds": [
-      "block/smoker/fire_crackle1",
-      "block/smoker/fire_crackle2",
-      "block/smoker/fire_crackle3",
-      "block/smoker/fire_crackle4",
-      "block/smoker/fire_crackle5"
+      "block/smoker/smoker1",
+      "block/smoker/smoker2",
+      "block/smoker/smoker3",
+      "block/smoker/smoker4",
+      "block/smoker/smoker5"
     ],
-    "subtitle": "subtitles.aether_ii.block.holystone_smoker.fire_crackle"
+    "subtitle": "subtitles.aether_ii.block.holystone_smoker.smoke"
   },
   "block.moa_egg.crack": {
     "sounds": [
