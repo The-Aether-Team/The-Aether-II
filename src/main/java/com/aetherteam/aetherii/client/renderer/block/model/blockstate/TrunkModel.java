@@ -12,6 +12,8 @@ import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.SimpleModelWrapper;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
@@ -26,7 +28,7 @@ import java.util.Map;
 
 public record TrunkModel(Map<Holder, BlockStateModelPart> connections, TextureAtlasSprite particleIcon) implements DynamicBlockStateModel {
     @Override
-    public void collectParts(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos, BlockState blockState, RandomSource randomSource, List<BlockModelPart> list) {
+    public void collectParts(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos, BlockState blockState, RandomSource randomSource, List<BlockStateModelPart> list) {
         Map<String, WallSide> properties = TrunkBlock.getCornerProperties(blockAndTintGetter, blockPos);
         for (var entry : properties.entrySet()) {
             for (var connection : this.connections.entrySet()) {

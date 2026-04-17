@@ -8,6 +8,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.Validatable;
+import net.minecraft.world.level.storage.loot.ValidationContextSource;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 import java.util.Optional;
 
@@ -46,9 +49,9 @@ public class FeedMoaTrigger extends SimpleCriterionTrigger<FeedMoaTrigger.Instan
         }
 
         @Override
-        public void validate(CriterionValidator validator) {
+        public void validate(ValidationContextSource validator) {
             SimpleCriterionTrigger.SimpleInstance.super.validate(validator);
-            validator.validateEntity(this.entity, "entity");
+            Validatable.validate(validator.entityContext(), "entity", this.entity);
         }
     }
 }
