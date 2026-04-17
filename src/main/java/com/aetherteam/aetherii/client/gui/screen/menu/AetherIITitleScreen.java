@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.mixin.mixins.client.accessor.TitleScreenAccessor;
 import com.aetherteam.cumulus.CumulusConfig;
 import com.aetherteam.cumulus.client.gui.screen.DynamicMenuButton;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Renderable;
@@ -82,7 +83,7 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+    public void render(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
         int xOffset = CumulusConfig.CLIENT.enable_menu_api.get() && CumulusConfig.CLIENT.enable_menu_list_button.get() ? -62 : 0;
         for (GuiEventListener child : this.children()) {

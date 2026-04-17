@@ -14,7 +14,7 @@ import com.aetherteam.aetherii.network.packet.serverbound.ClearItemPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.CurrencyAmountPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.HeldCurrencyPacket;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
@@ -89,7 +89,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void render(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
 
         if (this.getMinecraft().player != null) {

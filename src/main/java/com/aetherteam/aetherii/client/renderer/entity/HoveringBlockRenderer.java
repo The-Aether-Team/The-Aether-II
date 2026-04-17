@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -26,12 +26,12 @@ public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity, H
     }
 
     @Override
-    public void submit(HoveringBlockEntityRenderState floatingBlock, PoseStack poseStack, SubmitNodeCollector p_433775_, CameraRenderState p_451076_) {
+    public void submit(HoveringBlockEntityRenderState floatingBlock, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
 
             poseStack.pushPose();
             poseStack.translate(-0.5, 0.0, -0.5);
 
-        p_433775_.submitMovingBlock(poseStack, floatingBlock.movingBlockRenderState);
+        submitNodeCollector.submitMovingBlock(poseStack, floatingBlock.movingBlockRenderState);
         poseStack.popPose();
         if (floatingBlock.blockEntityDummy != null) {
             BlockEntityRenderer<BlockEntity, BlockEntityRenderState> renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher().getRenderer(floatingBlock.blockEntityDummy);
@@ -40,11 +40,11 @@ public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity, H
                 poseStack.translate(-0.5, 0.0, -0.5);
                 BlockEntityRenderState blockEntityRenderState = renderer.createRenderState();
                 renderer.extractRenderState(floatingBlock.blockEntityDummy, blockEntityRenderState, floatingBlock.partialTick, Vec3.ZERO, null);
-                renderer.submit(blockEntityRenderState, poseStack, p_433775_, p_451076_);
+                renderer.submit(blockEntityRenderState, poseStack, submitNodeCollector, cameraRenderState);
                 poseStack.popPose();
             }
         }
-        super.submit(floatingBlock, poseStack, p_433775_, p_451076_);
+        super.submit(floatingBlock, poseStack, submitNodeCollector, cameraRenderState);
 
     }
 

@@ -16,7 +16,7 @@ import com.aetherteam.aetherii.network.packet.serverbound.ForgeUpgradePacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.input.KeyEvent;
@@ -141,7 +141,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void render(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         String nameValue = this.menu.getInput().getHoverName().getString();
         boolean editable = !this.menu.getInput().isEmpty();
         if (!ItemStack.matches(this.menu.getInput(), this.lastInput) && !this.name.getValue().equals(nameValue)) {

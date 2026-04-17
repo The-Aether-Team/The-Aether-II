@@ -3,9 +3,8 @@ package com.aetherteam.aetherii.client.gui.screen.inventory;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.gui.screen.inventory.recipebook.HolystoneFurnaceRecipeBookComponent;
 import com.aetherteam.aetherii.inventory.menu.HolystoneFurnaceMenu;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.navigation.ScreenPosition;
-import net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen;
 import net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.SearchRecipeBookCategory;
@@ -14,7 +13,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.AbstractFurnaceMenu;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeBookCategories;
 
@@ -40,7 +38,7 @@ public class HolystoneFurnaceScreen extends AbstractRecipeBookScreen<HolystoneFu
         return new ScreenPosition(this.leftPos + 20, this.height / 2 - 49);
     }
 
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphicsExtractor guiGraphics, float partialTick, int mouseX, int mouseY) {
         int i = this.leftPos;
         int j = this.topPos;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/holystone_furnace.png"), i, j, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);

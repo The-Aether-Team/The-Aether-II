@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.client.gui.screen.guidebook;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.gui.component.guidebook.GuidebookTab;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.WidgetSprites;

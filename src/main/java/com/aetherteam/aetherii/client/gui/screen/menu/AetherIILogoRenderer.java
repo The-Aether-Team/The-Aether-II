@@ -1,8 +1,7 @@
 package com.aetherteam.aetherii.client.gui.screen.menu;
 
 import com.aetherteam.aetherii.AetherII;
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
@@ -17,11 +16,11 @@ public class AetherIILogoRenderer extends LogoRenderer {
         this.keepLogoThroughFade = keepLogoThroughFade;
     }
 
-    public void renderLogo(GuiGraphics guiGraphics, int screenWidth, float transparency) {
+    public void renderLogo(GuiGraphicsExtractor guiGraphics, int screenWidth, float transparency) {
         this.renderLogo(guiGraphics, screenWidth, transparency, 30);
     }
 
-    public void renderLogo(GuiGraphics guiGraphics, int screenWidth, float transparency, int height) {
+    public void renderLogo(GuiGraphicsExtractor guiGraphics, int screenWidth, float transparency, int height) {
         float f = this.keepLogoThroughFade ? 1.0F : transparency;
         int i = ARGB.white(f);
         int logoX = (int) ((screenWidth / 2.0F - (218.0F / 2.0F)));

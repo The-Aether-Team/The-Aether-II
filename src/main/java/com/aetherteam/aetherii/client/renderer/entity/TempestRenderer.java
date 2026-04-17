@@ -13,7 +13,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
 /**
- * [CODE COPY] - {@link com.aetherteam.aether.client.renderer.entity.ZephyrRenderer}.
+ * [CODE COPY] - {@link com.aetherteam.aetherii.client.renderer.entity.ZephyrRenderer}.
  */
 public class TempestRenderer extends MobRenderer<Tempest, TempestRenderState, TempestModel> {
     private static final Identifier TEMPEST_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/tempest/tempest.png");

@@ -6,7 +6,7 @@ import com.aetherteam.aetherii.client.gui.screen.inventory.recipebook.AltarRecip
 import com.aetherteam.aetherii.inventory.menu.AltarMenu;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.navigation.ScreenPosition;
 import net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
@@ -54,7 +54,7 @@ public class AltarScreen extends AbstractRecipeBookScreen<AltarMenu> implements 
     }
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphicsExtractor guiGraphics, float partialTick, int mouseX, int mouseY) {
         int i = this.leftPos;
         int j = this.topPos;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, ALTAR_TEXTURE, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);

@@ -13,13 +13,13 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 
 public class DemolitionProjectileRenderer extends EntityRenderer<DemolitionProjectile, DemolitionProjectileRenderState> {
-    private static final RenderType DEMOLITION_PROJECTILE = RenderTypes.entityCutoutNoCull(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/demolition_projectile.png"));
+    private static final RenderType DEMOLITION_PROJECTILE = RenderTypes.entityCutout(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/demolition_projectile.png"));
     private static final RenderType DEMOLITION_PROJECTILE_EMISSIVE = RenderTypes.eyes(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/demolition_projectile_emissive.png"));
     private final DemolitionProjectileModel projectile;
 
