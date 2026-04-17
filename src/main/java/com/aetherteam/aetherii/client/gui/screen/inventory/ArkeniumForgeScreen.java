@@ -171,7 +171,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     }
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphicsExtractor guiGraphics, float partialTick, int mouseX, int mouseY) {
         ItemStack input = this.menu.getInput();
         int i = this.leftPos;
         int j = (this.height - this.imageHeight) / 2;
@@ -259,7 +259,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
         }
     }
 
-    private void renderItemTooltipForSpace(Font font, GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, int xSize, int ySize, ItemStack stack) {
+    private void renderItemTooltipForSpace(Font font, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, int x, int y, int xSize, int ySize, ItemStack stack) {
         int mouseXDiff = mouseX - x;
         int mouseYDiff = mouseY - y;
         if (mouseXDiff >= 0 && mouseXDiff <= xSize && mouseYDiff >= 0 && mouseYDiff <= ySize) {
@@ -268,7 +268,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     }
 
     @Override
-    protected void renderSlot(GuiGraphics guiGraphics, Slot slot, int p_470717_, int p_470566_) {
+    protected void renderSlot(GuiGraphicsExtractor guiGraphics, Slot slot, int p_470717_, int p_470566_) {
         super.renderSlot(guiGraphics, slot, p_470717_, p_470566_);
         if (slot instanceof ForgeCharmSlot charmSlot) {
             if (charmSlot.isActive() && charmSlot.isLocked(this.menu.getInput())) {

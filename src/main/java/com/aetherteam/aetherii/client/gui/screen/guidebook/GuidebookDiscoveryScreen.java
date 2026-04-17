@@ -80,35 +80,35 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     }
 
     @Override
-    public void renderGuidebookBacking(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderGuidebookBacking(Screen screen, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         Guidebook.super.renderGuidebookBacking(screen, guiGraphics, mouseX, mouseY, partialTick);
         this.currentSection.renderBg(guiGraphics, mouseX, mouseY, partialTick);
     }
 
     @Override
-    public void renderGuidebookFowardPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderGuidebookFowardPage(Screen screen, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         Guidebook.super.renderGuidebookFowardPage(screen, guiGraphics, mouseX, mouseY, partialTick);
         this.currentSection.renderFoward(guiGraphics, mouseX, mouseY, partialTick);
     }
 
     @Override
-    public void renderGuidebookLeftPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderGuidebookLeftPage(Screen screen, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xffffffff);
+        guiGraphics.centeredText(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xffffffff);
         this.currentSection.renderEntries(guiGraphics, mouseX, mouseY, partialTick);
     }
 
     @Override
-    public void renderGuidebookRightPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderGuidebookRightPage(Screen screen, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         Guidebook.super.renderGuidebookRightPage(screen, guiGraphics, mouseX, mouseY, partialTick);
         this.currentSection.renderInformation(guiGraphics, mouseX, mouseY, partialTick);
     }
 
     @Override
-    protected void renderMenuBackground(GuiGraphics partialTick) { }
+    protected void renderMenuBackground(GuiGraphicsExtractor partialTick) { }
 
     @Override
-    protected void renderBlurredBackground(GuiGraphics guiGraphics) { }
+    protected void renderBlurredBackground(GuiGraphicsExtractor guiGraphics) { }
 
     @Override
     public boolean keyPressed(KeyEvent event) {

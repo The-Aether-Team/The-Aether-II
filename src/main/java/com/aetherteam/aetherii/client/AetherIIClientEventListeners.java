@@ -13,7 +13,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.client.gui.components.SpriteIconButton;
@@ -130,7 +130,7 @@ public class AetherIIClientEventListeners {
     }
 
     public static void onRenderBossBar(CustomizeGuiOverlayEvent.BossEventProgress event) {
-        GuiGraphics guiGraphics = event.getGuiGraphics();
+        GuiGraphicsExtractor guiGraphics = event.getGuiGraphics();
         LerpingBossEvent bossEvent = event.getBossEvent();
         UUID bossUUID = bossEvent.getId();
         if (RenderHooks.isAetherBossBar(bossUUID)) {

@@ -27,6 +27,6 @@ public class AetherDirtPathBlock extends DirtPathBlock {
      */
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        AetherFarmBlock.turnToDirt(state, level, pos);
+        AetherFarmlandBlock.turnToDirt(state, level, pos);
     }
 }

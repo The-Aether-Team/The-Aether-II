@@ -37,7 +37,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
     }
 
     @Override
-    public void render(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         this.renderTooltip(guiGraphics, mouseX, mouseY);
     }
@@ -58,7 +58,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
     }
 
     @Override
-    protected void renderTooltip(GuiGraphics guiGraphics, int x, int y) {
+    protected void renderTooltip(GuiGraphicsExtractor guiGraphics, int x, int y) {
         super.renderTooltip(guiGraphics, x, y);
         if (this.displayRecipes) {
             int i = this.leftPos + 52;
@@ -80,7 +80,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
         }
     }
 
-    private void renderButtons(GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, int lastVisibleElementIndex) {
+    private void renderButtons(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, int x, int y, int lastVisibleElementIndex) {
         for(int i = this.startIndex; i < lastVisibleElementIndex && i < this.menu.getNumberOfVisibleRecipes(); ++i) {
             int j = i - this.startIndex;
             int k = x + j % 4 * 16;
@@ -99,7 +99,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
         }
     }
 
-    private void renderRecipes(GuiGraphics guiGraphics, int x, int y, int startIndex) {
+    private void renderRecipes(GuiGraphicsExtractor guiGraphics, int x, int y, int startIndex) {
         SelectableRecipe.SingleInputSet<StonecutterRecipe> singleInputSet = this.menu.getVisibleRecipes();
         ContextMap contextMap = SlotDisplayContext.fromLevel(this.minecraft.level);
 
@@ -109,7 +109,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
             int l = j / 4;
             int i1 = y + l * 18 + 2;
             SlotDisplay slotDisplay = singleInputSet.entries().get(i).recipe().optionDisplay();
-            guiGraphics.renderItem(slotDisplay.resolveForFirstStack(contextMap), k, i1);
+            guiGraphics.item(slotDisplay.resolveForFirstStack(contextMap), k, i1);
         }
     }
 

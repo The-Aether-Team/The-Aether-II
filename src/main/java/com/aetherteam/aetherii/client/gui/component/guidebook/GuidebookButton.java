@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.client.gui.component.guidebook;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
@@ -14,8 +14,8 @@ public class GuidebookButton extends Button.Plain {
     }
 
     @Override
-    protected void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    protected void renderContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.renderContents(guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.renderItem(new ItemStack(this.renderItem), this.getX() + 3, this.getY() + 3);
+        guiGraphics.item(new ItemStack(this.renderItem), this.getX() + 3, this.getY() + 3);
     }
 }

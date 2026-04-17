@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.google.common.collect.Lists;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.WidgetSprites;
@@ -288,14 +288,14 @@ This is a list of some major features that have not yet been implemented but are
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         this.renderTransparentBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.drawCenteredString(this.font, TITLE.withStyle(ChatFormatting.UNDERLINE), this.width / 2, 10, 0xffffffff);
+        guiGraphics.centeredText(this.font, TITLE.withStyle(ChatFormatting.UNDERLINE), this.width / 2, 10, 0xffffffff);
 
         this.createText(guiGraphics, this.pages.get(this.currentPageNumber), this.textPosition, 30);
 
-        guiGraphics.drawCenteredString(this.font, Component.literal(String.valueOf(this.currentPageNumber + 1)).append("/").append(String.valueOf(this.pages.size())), this.width / 2, this.height - 20, 0xffffffff);
+        guiGraphics.centeredText(this.font, Component.literal(String.valueOf(this.currentPageNumber + 1)).append("/").append(String.valueOf(this.pages.size())), this.width / 2, this.height - 20, 0xffffffff);
 
         this.previousButton.active = this.currentPageNumber > 0;
         this.nextButton.active = this.currentPageNumber < this.pages.size() - 1;
@@ -321,16 +321,16 @@ This is a list of some major features that have not yet been implemented but are
         }
     }
 
-    private void createText(GuiGraphics guiGraphics, List<FormattedCharSequence> reorderingProcessors, int x, int y) {
+    private void createText(GuiGraphicsExtractor guiGraphics, List<FormattedCharSequence> reorderingProcessors, int x, int y) {
         int length = 0;
         for (FormattedCharSequence line : reorderingProcessors) {
-            guiGraphics.drawString(this.font, line,  x, y + (length * 10), 0xffffffff, false);
+            guiGraphics.text(this.font, line,  x, y + (length * 10), 0xffffffff, false);
             length++;
         }
     }
 
     @Override
-    protected void renderBlurredBackground(GuiGraphics guiGraphics) { }
+    protected void renderBlurredBackground(GuiGraphicsExtractor guiGraphics) { }
 
     @Override
     public boolean isPauseScreen() {

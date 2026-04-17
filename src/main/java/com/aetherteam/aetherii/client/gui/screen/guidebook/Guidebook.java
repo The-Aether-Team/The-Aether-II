@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client.gui.screen.guidebook;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.gui.component.guidebook.GuidebookTab;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.WidgetSprites;
@@ -53,7 +54,7 @@ public interface Guidebook {
         }
     }
 
-    default void renderGuidebookSpread(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    default void renderGuidebookSpread(Screen screen, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         int leftPagePos = ((screen.width + 2) / 2) - PAGE_WIDTH;
         int rightPagePos = (screen.width / 2);
         int topPos = (screen.height - PAGE_HEIGHT) / 2;
@@ -72,11 +73,11 @@ public interface Guidebook {
         this.renderGuidebookFowardPage(screen, guiGraphics, mouseX, mouseY, partialTick);
     }
 
-    default void renderGuidebookFowardPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    default void renderGuidebookFowardPage(Screen screen, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
 
     }
 
-    default void renderGuidebookBacking(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    default void renderGuidebookBacking(Screen screen, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         int leftPagePos = ((screen.width + 2) / 2) - PAGE_WIDTH;
         int rightPagePos = (screen.width / 2);
         int topPos = (screen.height - PAGE_HEIGHT) / 2;
@@ -84,11 +85,11 @@ public interface Guidebook {
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, GUIDEBOOK_RIGHT_BACKING_LOCATION, rightPagePos, topPos, 0, 0, PAGE_WIDTH, PAGE_HEIGHT, 256, 256);
     }
 
-    default void renderGuidebookLeftPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    default void renderGuidebookLeftPage(Screen screen, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, this.getLeftPageTexture(), 0, 0, 0, 0, PAGE_WIDTH, PAGE_HEIGHT, 256, 256);
     }
 
-    default void renderGuidebookRightPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    default void renderGuidebookRightPage(Screen screen, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, this.getRightPageTexture(), 0, 0, 0, 0, PAGE_WIDTH, PAGE_HEIGHT, 256, 256);
     }
 

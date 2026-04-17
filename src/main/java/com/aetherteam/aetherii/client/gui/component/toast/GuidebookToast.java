@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -48,12 +48,12 @@ public class GuidebookToast implements Toast {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, Font font, long l) {
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, Font font, long l) {
 
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_SPRITE, 0, 0, this.width(), this.height());
         this.type.render(guiGraphics, this.width(), this.height());
         this.icon.render(guiGraphics, 6, 8);
-        guiGraphics.drawString(font, Component.translatable("gui.aether_ii.toast.guidebook.description"), 32, 18, -724497, false);
+        guiGraphics.text(font, Component.translatable("gui.aether_ii.toast.guidebook.description"), 32, 18, -724497, false);
 
     }
 
@@ -73,7 +73,7 @@ public class GuidebookToast implements Toast {
             this.sprite = sprite;
         }
 
-        public void render(GuiGraphics guiGraphics, int width, int height) {
+        public void render(GuiGraphicsExtractor guiGraphics, int width, int height) {
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.sprite, 0, 0, width, height);
         }
 
@@ -105,9 +105,9 @@ public class GuidebookToast implements Toast {
             this.title = title;
         }
 
-        public void render(GuiGraphics guiGraphics, int x, int y) {
+        public void render(GuiGraphicsExtractor guiGraphics, int x, int y) {
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.sprite, x, y, 22, 16);
-            guiGraphics.drawString(Minecraft.getInstance().font, Component.translatable(this.title), 32, 7, -13423317, false);
+            guiGraphics.text(Minecraft.getInstance().font, Component.translatable(this.title), 32, 7, -13423317, false);
         }
 
         public int id() {

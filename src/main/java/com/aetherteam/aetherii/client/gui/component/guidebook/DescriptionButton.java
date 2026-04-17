@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.client.gui.component.guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.DiscoveryDescriptionScreen;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.WidgetSprites;
@@ -30,7 +30,7 @@ public class DescriptionButton extends ImageButton {
     }
 
     @Override
-    public void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         if (!(this.currentScreen instanceof GuidebookDiscoveryScreen screen) || screen.getCurrentSection().getSelectedEntry() != null) {
             super.renderContents(guiGraphics, mouseX, mouseY, partialTick);
         }

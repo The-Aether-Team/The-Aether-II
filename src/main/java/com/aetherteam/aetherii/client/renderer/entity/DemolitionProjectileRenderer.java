@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.client.renderer.entity.state.DemolitionProjectile
 import com.aetherteam.aetherii.entity.projectile.DemolitionProjectile;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -17,6 +16,7 @@ import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.LightCoordsUtil;
 
 public class DemolitionProjectileRenderer extends EntityRenderer<DemolitionProjectile, DemolitionProjectileRenderState> {
     private static final RenderType DEMOLITION_PROJECTILE = RenderTypes.entityCutout(Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/demolition_projectile.png"));
@@ -53,7 +53,7 @@ public class DemolitionProjectileRenderer extends EntityRenderer<DemolitionProje
         poseStack.translate(0.0F, -1.1F, 0.0F);
         this.projectile.setupAnim(renderState);
         submitNodeCollector.submitModel(this.projectile, renderState, poseStack, DEMOLITION_PROJECTILE, renderState.lightCoords, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
-        submitNodeCollector.submitModel(this.projectile, renderState, poseStack, DEMOLITION_PROJECTILE_EMISSIVE, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
+        submitNodeCollector.submitModel(this.projectile, renderState, poseStack, DEMOLITION_PROJECTILE_EMISSIVE, LightCoordsUtil.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
         poseStack.popPose();
 
 

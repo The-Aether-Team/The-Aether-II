@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
 import com.aetherteam.aetherii.api.registries.AetherIIRegistries;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -17,17 +17,17 @@ public class ExplorationSection extends DiscoverySection<ExplorationEntry, Explo
     }
 
     @Override
-    public void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderBg(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
 
     }
 
     @Override
-    public void renderFoward(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderFoward(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
 
     }
 
     @Override
-    public void renderInformation(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderInformation(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
 
     }
 

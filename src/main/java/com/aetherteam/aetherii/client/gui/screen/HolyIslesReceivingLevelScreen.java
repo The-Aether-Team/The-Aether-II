@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.client.gui.screen;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.LevelLoadingScreen;
 import net.minecraft.client.multiplayer.LevelLoadTracker;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -24,7 +24,7 @@ public class HolyIslesReceivingLevelScreen extends LevelLoadingScreen {
     }
 
     @Override
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         if (this.isInAetherPortal) {
             guiGraphics.blitSprite(RenderPipelines.GUI_OPAQUE_TEXTURED_BACKGROUND, Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getParticleIcon(AetherIIBlocks.AETHER_PORTAL.get().defaultBlockState()), 0, 0, guiGraphics.guiWidth(), guiGraphics.guiHeight());
         }

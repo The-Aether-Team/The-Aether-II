@@ -17,7 +17,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -56,15 +56,15 @@ public class MoaEggRenderer implements BlockEntityRenderer<MoaEggBlockEntity, Mo
         TextureAtlasSprite keratinSprite = this.moaKeratinAtlas.getSprite(Identifier.fromNamespaceAndPath(AetherII.MODID, "entity/moa_egg/moa_egg_keratin_" + moaEggRenderState.keratinColor.getSerializedName()));
 
         submitNodeCollector.submitModel(
-                this.moaEggModel, moaEggRenderState, poseStack, RenderTypes.entityCutoutNoCull(AetherIIAtlases.MOA_FEATHER_SHEET), moaEggRenderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, feathersSprite, 0, moaEggRenderState.breakProgress
+                this.moaEggModel, moaEggRenderState, poseStack, RenderTypes.entityCutout(AetherIIAtlases.MOA_FEATHER_SHEET), moaEggRenderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, feathersSprite, 0, moaEggRenderState.breakProgress
         );
 
         submitNodeCollector.submitModel(
-                this.moaEggModel, moaEggRenderState, poseStack, RenderTypes.entityCutoutNoCull(AetherIIAtlases.MOA_EYES_SHEET), moaEggRenderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, eyesSprite, 0, moaEggRenderState.breakProgress
+                this.moaEggModel, moaEggRenderState, poseStack, RenderTypes.entityCutout(AetherIIAtlases.MOA_EYES_SHEET), moaEggRenderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, eyesSprite, 0, moaEggRenderState.breakProgress
         );
 
         submitNodeCollector.submitModel(
-                this.moaEggModel, moaEggRenderState, poseStack, RenderTypes.entityCutoutNoCull(AetherIIAtlases.MOA_KERATIN_SHEET), moaEggRenderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, keratinSprite, 0, moaEggRenderState.breakProgress
+                this.moaEggModel, moaEggRenderState, poseStack, RenderTypes.entityCutout(AetherIIAtlases.MOA_KERATIN_SHEET), moaEggRenderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, keratinSprite, 0, moaEggRenderState.breakProgress
         );
 
     }
