@@ -84,7 +84,12 @@ public class HourglassRestoringRecipe implements Recipe<SingleRecipeInputWithRan
     }
 
     @Override
-    public ItemStack assemble(SingleRecipeInputWithRandom input, HolderLookup.Provider provider) {
+    public boolean showNotification() {
+        return false;
+    }
+
+    @Override
+    public ItemStack assemble(SingleRecipeInputWithRandom input) {
         return this.results.output1().process(input.randomSource());
     }
 
