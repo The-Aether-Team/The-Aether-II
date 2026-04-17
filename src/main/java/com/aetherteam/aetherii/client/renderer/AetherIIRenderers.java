@@ -281,7 +281,7 @@ public class AetherIIRenderers {
     }
 
     public static void registerBlockStateModels(RegisterBlockStateModels event) {
-        event.registerModel(TrunkModel.Unbaked.ID , TrunkModel.Unbaked.CODEC);
+        event.registerModel(TrunkModel.Unbaked.ID, TrunkModel.Unbaked.CODEC);
     }
 
     public static void registerBakedModels(ModelEvent.ModifyBakingResult event) {
@@ -299,7 +299,9 @@ public class AetherIIRenderers {
                 AetherIIBlocks.AETHER_BUSH,
                 AetherIIBlocks.BLUEBERRY_BUSH,
                 AetherIIBlocks.POTTED_AETHER_BUSH,
-                AetherIIBlocks.POTTED_BLUEBERRY_BUSH);
+                AetherIIBlocks.POTTED_BLUEBERRY_BUSH,
+                AetherIIBlocks.TANGLED_BRANCHES,
+                AetherIIBlocks.UNDERGROWTH_LEAVES);
         List<DeferredBlock<? extends Block>> overlaidLeafBlocks = List.of(
                 AetherIIBlocks.SKYROOT_LEAVES,
                 AetherIIBlocks.SKYPLANE_LEAVES,

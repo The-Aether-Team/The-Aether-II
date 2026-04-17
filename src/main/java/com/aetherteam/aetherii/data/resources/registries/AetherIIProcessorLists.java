@@ -5,16 +5,15 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
 import com.aetherteam.aetherii.world.structure.piece.sentry.SentryRuinsPiece;
-import com.aetherteam.aetherii.world.structure.processor.BossRoomProcessor;
-import com.aetherteam.aetherii.world.structure.processor.CopyRuleProcessor;
-import com.aetherteam.aetherii.world.structure.processor.MimicContainerProcessor;
-import com.aetherteam.aetherii.world.structure.processor.ShayelinnMossProcessor;
+import com.aetherteam.aetherii.world.structure.processor.*;
 import com.google.common.collect.ImmutableList;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
 
 import java.util.List;
@@ -33,6 +32,8 @@ public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> INFECTED_GUARDIAN_TREE_DEBUG = createKey("infected_guardian_tree_debug");
 
     public static void bootstrap(BootstrapContext<StructureProcessorList> context) {
+        HolderGetter<DensityFunction> density = context.lookup(Registries.DENSITY_FUNCTION);
+
         register(context, CAMP, ImmutableList.of(
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.COARSE_AETHER_DIRT.get(), 0.2F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState()),
@@ -101,6 +102,7 @@ public class AetherIIProcessorLists {
 
 
         register(context, INFECTED_GUARDIAN_TREE, ImmutableList.of(
+                new DensityFunctionProcessor(AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.INFECTED_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(density, AetherIIDensityFunctions.DUNGEONS_INFECTED_BLOCKS), true),
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.GUARDIAN_ROOTS.get(), 0.025F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.GUARDIAN_ROOTS.get(), 0.01F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.GUARDIAN_LAMP.get().defaultBlockState())
