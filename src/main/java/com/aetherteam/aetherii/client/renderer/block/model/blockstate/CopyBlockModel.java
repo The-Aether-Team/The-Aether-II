@@ -22,7 +22,7 @@ public class CopyBlockModel extends DelegateBlockStateModel {
     }
 
     @Override
-    public void collectParts(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos, BlockState blockState, RandomSource randomSource, List<BlockModelPart> list) {
+    public void collectParts(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos, BlockState blockState, RandomSource randomSource, List<BlockStateModelPart> list) {
         LockedBlockEntity.CopyData data = blockAndTintGetter.getModelData(blockPos).get(LockedBlockEntity.CopyData.PROPERTY);
         if (data == null) {
             return;
@@ -46,6 +46,6 @@ public class CopyBlockModel extends DelegateBlockStateModel {
             return super.particleMaterial(level, pos, state);
         }
         BlockState mimicState = data.state();
-        return Minecraft.getInstance().getModelManager().getBlockModelShaper().getBlockModel(mimicState).particleMaterial(level, pos, mimicState);
+        return Minecraft.getInstance().getModelManager().getBlocksModelShaper().getBlockModel(mimicState).particleMaterial(level, pos, mimicState);
     }
 }

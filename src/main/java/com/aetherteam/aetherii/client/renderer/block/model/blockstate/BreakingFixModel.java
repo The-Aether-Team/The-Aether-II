@@ -22,7 +22,7 @@ public class BreakingFixModel extends DelegateBlockStateModel {
         super(delegate);
     }
 
-    public void collectBreakingParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockModelPart> parts) {
+    public void collectBreakingParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockStateModel> parts) {
         for (BlockStateModelPart modelPart : this.delegate.collectParts(level, pos, state, random)) {
             if (modelPart instanceof SimpleModelWrapper wrapper) {
                 QuadCollection.Builder builder = new QuadCollection.Builder();

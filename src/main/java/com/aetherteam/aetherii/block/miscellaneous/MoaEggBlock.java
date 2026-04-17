@@ -117,7 +117,7 @@ public class MoaEggBlock extends BaseEntityBlock {
                 moa.setFeatherShape(state.getValue(FEATHER_SHAPE));
 
                 //moa.setMoaTypeByKey(this.moaType);
-                moa.snapTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(level.random.nextFloat() * 360.0F), 0.0F);
+                moa.snapTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(level.getRandom().nextFloat() * 360.0F), 0.0F);
                 level.addFreshEntity(moa);
                 Player player = level.getNearestPlayer(pos.getX(), pos.getY(), pos.getZ(), 24, false);
                 if (player instanceof ServerPlayer serverPlayer) {
@@ -136,7 +136,7 @@ public class MoaEggBlock extends BaseEntityBlock {
             int i = 12000;
             int j = i / 3;
             level.gameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Context.of(state));
-            level.scheduleTick(pos, this, j + level.random.nextInt(300));
+            level.scheduleTick(pos, this, j + level.getRandom().nextInt(300));
         }
     }
 

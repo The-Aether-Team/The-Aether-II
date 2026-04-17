@@ -127,7 +127,7 @@ public class BottomedVineBlock extends VineBlock {
         int age = state.getValue(AGE);
         if (age < 25) {
             if (level.getGameRules().get(GameRules.SPREAD_VINES)) {
-                if (level.random.nextInt(4) == 0 && level.isAreaLoaded(pos, 4)) { // Forge: check area to prevent loading unloaded chunks
+                if (level.getRandom().nextInt(4) == 0 && level.isAreaLoaded(pos, 4)) { // Forge: check area to prevent loading unloaded chunks
                     Direction randomDirection = Direction.getRandom(random);
                     BlockPos abovePos = pos.above();
                     if (randomDirection.getAxis().isHorizontal() && !state.getValue(getPropertyForFace(randomDirection))) {
