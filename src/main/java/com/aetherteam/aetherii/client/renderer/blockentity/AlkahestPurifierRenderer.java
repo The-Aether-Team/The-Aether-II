@@ -15,10 +15,10 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.sprite.SpriteGetter;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,20 +26,20 @@ import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
 public class AlkahestPurifierRenderer implements BlockEntityRenderer<AlkahestPurifierBlockEntity, AlkahestPurifierRenderState> {
-    public static final Material ALKAHEST_PURIFIER_0 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_0"));
-    public static final Material ALKAHEST_PURIFIER_1 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_1"));
-    public static final Material ALKAHEST_PURIFIER_2 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_2"));
-    public static final Material ALKAHEST_PURIFIER_3 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_3"));
-    public static final Material ALKAHEST_PURIFIER_4 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_4"));
+    public static final SpriteId ALKAHEST_PURIFIER_0 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_0"));
+    public static final SpriteId ALKAHEST_PURIFIER_1 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_1"));
+    public static final SpriteId ALKAHEST_PURIFIER_2 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_2"));
+    public static final SpriteId ALKAHEST_PURIFIER_3 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_3"));
+    public static final SpriteId ALKAHEST_PURIFIER_4 = AetherIIAtlases.ALKAHEST_PURIFIER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "alkahest_purifier_4"));
     private final AlkahestPurifierModel model;
-    private final MaterialSet materialSet;
+    private final SpriteGetter sprites;
 
     public AlkahestPurifierRenderer(BlockEntityRendererProvider.Context context) {
-        this(context.entityModelSet(), context.materials());
+        this(context.entityModelSet(), context.sprites());
     }
 
-    public AlkahestPurifierRenderer(EntityModelSet modelSet, MaterialSet materials) {
-        this.materialSet = materials;
+    public AlkahestPurifierRenderer(EntityModelSet modelSet, SpriteGetter sprites) {
+        this.sprites = sprites;
         this.model = new AlkahestPurifierModel(modelSet.bakeLayer(AetherIIModelLayers.ALKAHEST_PURIFIER));
     }
 
@@ -61,16 +61,16 @@ public class AlkahestPurifierRenderer implements BlockEntityRenderer<AlkahestPur
         poseStack.mulPose(Axis.XP.rotationDegrees(180));
         poseStack.mulPose(Axis.YP.rotationDegrees(yRot));
 
-        Material material = getTextureForLevel(state.level);
+        SpriteId spriteId = getTextureForLevel(state.level);
         this.model.setupAnim(openness);
         collector.submitModel(
-                this.model, openness, poseStack, material.renderType(this.model::renderType), packedLight, OverlayTexture.NO_OVERLAY, -1, this.materialSet.get(material), 0, state.breakProgress
+                this.model, openness, poseStack, spriteId.renderType(this.model::renderType), packedLight, OverlayTexture.NO_OVERLAY, -1, this.materialSet.get(material), 0, state.breakProgress
         );
 
         poseStack.popPose();
     }
 
-    public Material getTextureForLevel(int alkahestLevel) {
+    public SpriteId getTextureForLevel(int alkahestLevel) {
         return switch(alkahestLevel) {
             case 1 -> ALKAHEST_PURIFIER_1;
             case 2 -> ALKAHEST_PURIFIER_2;
