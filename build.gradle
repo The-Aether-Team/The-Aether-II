@@ -108,7 +108,7 @@ dependencies {
 
 //    runtimeOnly "curse.maven:worldedit-225608:7479288"
 //
-//    implementation "mezz.jei:jei-${project.minecraft_version}-neoforge:${project.jei_version}"
+    implementation "mezz.jei:jei-${project.minecraft_version}-neoforge:${project.jei_version}"
 
 //    runtimeOnly "io.github.flemmli97:debugutils:1.21-${project.debugutils_version}-neoforge"
 
