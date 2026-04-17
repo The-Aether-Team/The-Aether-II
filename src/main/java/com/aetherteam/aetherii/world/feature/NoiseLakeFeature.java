@@ -79,7 +79,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         double density = lakeNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
         double floor = lakeFloorNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
         double barrier = lakeBarrierNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
-        int thickness = calculateThickness(barrier, pos.getY(), config.height().getValue());
+        int thickness = calculateThickness(barrier, pos.getY(), config.height().value());
 
         // Determines the block to place at specific noise values
         WorldGenLevel level = context.level();
@@ -94,11 +94,11 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                             && !level.isEmptyBlock(pos.below(2))
                             && (!level.getBlockState(pos.above()).isSolid() || level.getBlockState(pos.above()).is(AetherIIBlocks.ARCTIC_ICE) || level.getBlockState(pos.above()).is(AetherIIBlocks.FRAGILE_ARCTIC_ICE))
                     ) {
-                        if (pos.getY() == config.height().getValue() - 1 && config.frozen()) {
-                            this.setBlock(level, pos, config.iceBlock().getState(context.random(), pos));
+                        if (pos.getY() == config.height().value() - 1 && config.frozen()) {
+                            this.setBlock(level, pos, config.iceBlock().getState(level, context.random(), pos));
                         }
                         else this.setBlock(level, pos, Blocks.WATER.defaultBlockState());
-                        this.setBlock(level, pos.below(), config.underwaterBlock().getState(context.random(), pos.below()));
+                        this.setBlock(level, pos.below(), config.underwaterBlock().getState(level, context.random(), pos.below()));
                         if (level.isEmptyBlock(pos.below(2))) {
                             this.setBlock(level, pos.below(2), AetherIIBlocks.HOLYSTONE.get().defaultBlockState());
                         }
@@ -128,7 +128,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         double floor = lakeFloorNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
         double barrier = lakeBarrierNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
         double waterfalls = lakeWaterfallNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
-        int thickness = config.frozen() ? calculateThickness(barrier, pos.getY(), config.height().getValue()) : calculateShoreThickness(barrier, waterfalls, pos.getY(), config.height().getValue());
+        int thickness = config.frozen() ? calculateThickness(barrier, pos.getY(), config.height().value()) : calculateShoreThickness(barrier, waterfalls, pos.getY(), config.height().value());
 
         // Determines the block to place at specific noise values
         WorldGenLevel level = context.level();
@@ -145,7 +145,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                     ) {
                         this.setBlock(level, pos, Blocks.AIR.defaultBlockState());
                         if (thickness > 1) {
-                            this.setBlock(level, pos.below(), config.shoreBlock().getState(context.random(), pos.below()));
+                            this.setBlock(level, pos.below(), config.shoreBlock().getState(level, context.random(), pos.below()));
                         } else {
                             this.setBlock(level, pos, Blocks.AIR.defaultBlockState());
                             level.setBlock(pos.below(), Fluids.WATER.defaultFluidState().createLegacyBlock(), 2);
@@ -181,7 +181,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         WorldGenLevel level = context.level();
         if (density > config.shoreStartValue() + shore) {
             if (level.getBlockState(pos.below()).is(AetherIITags.Blocks.AETHER_DIRT) && level.getBlockState(pos.above()).is(AetherIITags.Blocks.AETHER_DIRT)) {
-                this.setBlock(level, pos.below(), config.shoreBlock().getState(context.random(), pos.below()));
+                this.setBlock(level, pos.below(), config.shoreBlock().getState(level, context.random(), pos.below()));
                 for (int i = 0; i < 4; i++) {
                     this.setBlock(level, new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), Blocks.AIR.defaultBlockState());
                 }

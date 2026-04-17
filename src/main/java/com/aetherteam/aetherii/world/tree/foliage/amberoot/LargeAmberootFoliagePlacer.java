@@ -9,7 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
@@ -27,7 +27,7 @@ public class LargeAmberootFoliagePlacer extends AbstractBranchedFoliagePlacer {
     /**
      * Places a sphere of leaves.
      *
-     * @param level             The {@link LevelSimulatedReader}.
+     * @param level             The {@link WorldGenLevel}.
      * @param foliageSetter     The {@link BiConsumer} of a {@link BlockPos} and {@link BlockState} used for block placement.
      * @param random            The {@link RandomSource}.
      * @param config            The {@link TreeConfiguration}.
@@ -38,7 +38,7 @@ public class LargeAmberootFoliagePlacer extends AbstractBranchedFoliagePlacer {
      * @param offset            The {@link Integer} for the foliage offset.
      */
     @Override
-    protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
+    protected void createFoliage(WorldGenLevel level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         BlockPos pos = attachment.pos();
         int x = pos.getX();
         int y = pos.getY();
@@ -65,7 +65,7 @@ public class LargeAmberootFoliagePlacer extends AbstractBranchedFoliagePlacer {
     }
 
     //Places half of the tree top and changes the offset and rotation using the factor parameters
-    public void placeTreeHalf(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, FoliageAttachment attachment, int factorX, int factorZ, int i, Direction.Axis axis) {
+    public void placeTreeHalf(WorldGenLevel level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, FoliageAttachment attachment, int factorX, int factorZ, int i, Direction.Axis axis) {
         BlockPos pos = attachment.pos();
         int x = pos.getX();
         int y = pos.getY();

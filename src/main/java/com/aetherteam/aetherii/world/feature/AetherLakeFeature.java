@@ -62,7 +62,7 @@ public class AetherLakeFeature extends Feature<AetherLakeConfiguration> {
                 }
             }
 
-            BlockState fluidBlockState = aetherLakeConfiguration.fluid().getState(random, blockPos);
+            BlockState fluidBlockState = aetherLakeConfiguration.fluid().getState(level, random, blockPos);
 
             for (int k1 = 0; k1 < 16; ++k1) {
                 for (int k = 0; k < 16; ++k) {
@@ -106,14 +106,14 @@ public class AetherLakeFeature extends Feature<AetherLakeConfiguration> {
                             BlockPos offsetPos = blockPos.offset(i2, j4 - 1, j3);
                             BlockState offsetState = level.getBlockState(offsetPos);
                             if (offsetState.is(AetherIITags.Blocks.AETHER_DIRT)) {
-                                level.setBlock(offsetPos, aetherLakeConfiguration.top().getState(random, offsetPos), 2);
+                                level.setBlock(offsetPos, aetherLakeConfiguration.top().getState(level, random, offsetPos), 2);
                             }
                             if (random.nextBoolean()) {
                                 for (Direction direction : Direction.Plane.HORIZONTAL.stream().toList()) {
                                     BlockPos offsetPos2 = offsetPos.relative(direction);
                                     if ((level.getBlockState(offsetPos2).is(AetherIITags.Blocks.AETHER_DIRT) || level.getBlockState(offsetPos2).is(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS))) {
                                         if ((!level.getBlockState(offsetPos2.above()).liquid() && !level.getBlockState(offsetPos2).is(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS)) || random.nextInt(3) != 0) {
-                                            level.setBlock(offsetPos2, aetherLakeConfiguration.top().getState(random, offsetPos2), 2);
+                                            level.setBlock(offsetPos2, aetherLakeConfiguration.top().getState(level, random, offsetPos2), 2);
                                         }
                                     }
                                 }

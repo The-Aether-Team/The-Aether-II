@@ -92,7 +92,7 @@ public class SentryRuinsStructure extends Structure {
         for (int x = -1; x <= 1; x++) {
             for (int z = -1; z <= 1; z++) {
                 if (x != 0 || z != 0) {
-                    ChunkPos offset = new ChunkPos(chunkPos.x + x, chunkPos.z + z);
+                    ChunkPos offset = new ChunkPos(chunkPos.x() + x, chunkPos.z() + z);
                     RuinsOriginInfo info = findStartingOrigin(generator, heightAccessor, offset, randomState, random, templateManager, aboveBottom, belowTop);
                     if (info.pos() != null && info.pos().getY() > heightAccessor.getMinY()) {
                         return info;

@@ -74,7 +74,7 @@ public class GroundFeatureDecorator extends TreeDecorator {
     private void placeBlockAt(TreeDecorator.Context context, BlockPos pos) {
         BlockPos blockpos = pos.above();
         if (Feature.isGrassOrDirt(context.level(), blockpos.below()) && context.isAir(blockpos)) {
-            context.setBlock(blockpos, this.blockProvider.getState(context.random(), pos));
+            context.setBlock(blockpos, this.blockProvider.getState(context.level(), context.random(), pos));
         }
     }
 

@@ -64,15 +64,15 @@ public class MossDecorator extends TreeDecorator {
                         if (context.isAir(relativePos)) {
                             context.setBlock(leafPos, referenceState.get().setValue(AetherLeavesBlock.MOSSY, this.mossProperty));
                             if (this.flowerProvider.isEmpty() || random.nextBoolean()) {
-                                context.setBlock(relativePos, this.carpetProvider.getState(random, relativePos));
+                                context.setBlock(relativePos, this.carpetProvider.getState(context.level(), random, relativePos));
                             } else {
-                                context.setBlock(relativePos, this.flowerProvider.get().getState(random, relativePos));
+                                context.setBlock(relativePos, this.flowerProvider.get().getState(context.level(), random, relativePos));
                             }
                         }
                     }
                     if (random.nextInt(5) == 0) {
                         context.setBlock(leafPos, referenceState.get().setValue(AetherLeavesBlock.MOSSY, this.mossProperty));
-                        context.setBlock(relativePos, this.carpetProvider.getState(random, relativePos));
+                        context.setBlock(relativePos, this.carpetProvider.getState(context.level(), random, relativePos));
                     }
                     if (random.nextInt(3) == 0) {
                         if (context.isAir(relativePos)) {
@@ -84,11 +84,11 @@ public class MossDecorator extends TreeDecorator {
                         if (context.isAir(newPos)) {
                             Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
                             if (context.level().isStateAtPosition(newPos.relative(direction), BlockBehaviour.BlockStateBase::isSolid)) {
-                                BlockState blockState = this.vinesProvider.getState(random, newPos.relative(direction));
+                                BlockState blockState = this.vinesProvider.getState(context.level(), random, newPos.relative(direction));
                                 blockState = blockState.setValue(VineBlock.getPropertyForFace(direction), true);
                                 if ((context.level().isStateAtPosition(newPos.relative(direction), (state) -> state.getValueOrElse(AetherIIBlockStateProperties.MOSSY, AetherIIBlockStateProperties.Mossy.NONE) == this.mossProperty)
                                         || context.level().isStateAtPosition(newPos.above().relative(direction), (state) -> state.getValueOrElse(AetherIIBlockStateProperties.MOSSY, AetherIIBlockStateProperties.Mossy.NONE) == this.mossProperty)
-                                        || context.level().isStateAtPosition(newPos.above().relative(direction), (state) -> state.is(this.carpetProvider.getState(random, newPos.above().relative(direction)).getBlock())))
+                                        || context.level().isStateAtPosition(newPos.above().relative(direction), (state) -> state.is(this.carpetProvider.getState(context.level(), random, newPos.above().relative(direction)).getBlock())))
                                         && random.nextInt(4) == 0) {
                                     blockState = blockState.setValue(BottomedVineBlock.AGE, 25);
                                 } else {

@@ -34,7 +34,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
 
         for (int x = pos.getX(); x < pos.getX() + 16; ++x) {
             for (int z = pos.getZ(); z < pos.getZ() + 16; ++z) {
-                for (int y = config.yRange().getMinValue(); y < config.yRange().getMaxValue(); ++y) {
+                for (int y = config.yRange().minInclusive(); y < config.yRange().maxInclusive(); ++y) {
                     BlockPos placementPos = new BlockPos(x, y, z);
                     int distance = (int) config.distanceNoise().compute(new DensityFunction.SinglePointContext(x, y, z));
 
@@ -77,7 +77,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                 || level.getBlockState(pos.south(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
                 || level.getBlockState(pos.west(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
         )) {
-            BlockState state = provider.getState(random, pos);
+            BlockState state = provider.getState(level, random, pos);
             if (level.setBlock(pos, state, 2)) {
                 set.add(pos);
                 return true;

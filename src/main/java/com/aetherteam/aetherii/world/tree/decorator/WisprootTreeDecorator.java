@@ -41,15 +41,15 @@ public class WisprootTreeDecorator extends TreeDecorator {
                 }
             }
             if (underwater) {
-                context.setBlock(pos, this.mossyFullState.getState(context.random(), pos));
+                context.setBlock(pos, this.mossyFullState.getState(context.level(), context.random(), pos));
                 if (context.random().nextBoolean()) {
                     up++;
                 }
             } else {
                 for (int i = 0; i < up; i++) {
-                    context.setBlock(pos.above(i), this.mossyFullState.getState(context.random(), pos.above(i)));
+                    context.setBlock(pos.above(i), this.mossyFullState.getState(context.level(), context.random(), pos.above(i)));
                 }
-                context.setBlock(pos.above(up), this.mossyTransitionState.getState(context.random(), pos.above(up)));
+                context.setBlock(pos.above(up), this.mossyTransitionState.getState(context.level(), context.random(), pos.above(up)));
                 break;
             }
         }

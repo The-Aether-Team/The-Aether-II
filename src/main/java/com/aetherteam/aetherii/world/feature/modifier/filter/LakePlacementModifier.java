@@ -27,7 +27,7 @@ public class LakePlacementModifier extends PlacementModifier {
 
         int chunkX = blockPos.getX() - (blockPos.getX() % 16);
         int chunkZ = blockPos.getZ() - (blockPos.getZ() % 16);
-        int height =  ConstantInt.of(124).getMinValue();
+        int height =  ConstantInt.of(124).minInclusive();
         double noiseStartValue = 0.3;
 
         for (int x = 0; x < 16; x++) {
@@ -69,7 +69,7 @@ public class LakePlacementModifier extends PlacementModifier {
         double density = lakeNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
         double floor = lakeFloorNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
         double barrier = lakeBarrierNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
-        int thickness = calculateThickness(barrier, pos.getY(), ConstantInt.of(124).getValue());
+        int thickness = calculateThickness(barrier, pos.getY(), ConstantInt.of(124).value());
 
         // Determines the block to place at specific noise values
         if (density > noiseValue && density < 1.5) {

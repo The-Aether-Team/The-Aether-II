@@ -59,8 +59,8 @@ public final class BlockLogicUtil {
     public static boolean isOutOfBounds(BlockPos pos, ChunkPos centerChunk) {
         int x = SectionPos.blockToSectionCoord(pos.getX());
         int z = SectionPos.blockToSectionCoord(pos.getZ());
-        int xDistance = Math.abs(x - centerChunk.x);
-        int zDistance = Math.abs(z - centerChunk.z);
+        int xDistance = Math.abs(x - centerChunk.x());
+        int zDistance = Math.abs(z - centerChunk.z());
         return xDistance > 1 || zDistance > 1;
     }
 }

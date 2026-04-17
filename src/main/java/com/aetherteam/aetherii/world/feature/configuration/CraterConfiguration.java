@@ -9,7 +9,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 
 public record CraterConfiguration(UniformInt radius, DensityFunction noise, BlockStateProvider exteriorBlock, BlockStateProvider interiorBlock, BlockStateProvider craterBlock) implements FeatureConfiguration {
     public static final Codec<CraterConfiguration> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-            UniformInt.CODEC.fieldOf("radius").forGetter(CraterConfiguration::radius),
+            UniformInt.MAP_CODEC.fieldOf("radius").forGetter(CraterConfiguration::radius),
             DensityFunction.HOLDER_HELPER_CODEC.fieldOf("noise").forGetter(CraterConfiguration::noise),
             BlockStateProvider.CODEC.fieldOf("exterior_block").forGetter(CraterConfiguration::exteriorBlock),
             BlockStateProvider.CODEC.fieldOf("interior_block").forGetter(CraterConfiguration::interiorBlock),

@@ -41,17 +41,17 @@ public class CraterFeature extends Feature<CraterConfiguration> {
                         BlockPos offsetPos = pos.offset(x, y, z);
                         if (y < 0) {
                             if (volume >= radiusSquared) {
-                                if (!level.getBlockState(offsetPos).is(config.interiorBlock().getState(random, offsetPos).getBlock())) {
-                                    level.setBlock(offsetPos, config.exteriorBlock().getState(random, offsetPos), 3);
+                                if (!level.getBlockState(offsetPos).is(config.interiorBlock().getState(level, random, offsetPos).getBlock())) {
+                                    level.setBlock(offsetPos, config.exteriorBlock().getState(level, random, offsetPos), 3);
                                 }
                             } else {
-                                level.setBlock(offsetPos, config.interiorBlock().getState(random, offsetPos), 3);
+                                level.setBlock(offsetPos, config.interiorBlock().getState(level, random, offsetPos), 3);
                             }
                         } else {
                             level.setBlock(offsetPos, Blocks.AIR.defaultBlockState(), 3);
                         }
                         if (x == 0 && z == 0 && y == -radius + 2) {
-                            level.setBlock(offsetPos, config.craterBlock().getState(random, offsetPos), 3);
+                            level.setBlock(offsetPos, config.craterBlock().getState(level, random, offsetPos), 3);
                         }
                     }
                 }

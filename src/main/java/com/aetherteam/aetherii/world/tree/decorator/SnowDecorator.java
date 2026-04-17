@@ -23,7 +23,7 @@ public class SnowDecorator extends TreeDecorator {
             BlockPos heightmapPos = context.level().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, leafPos);
             BlockPos relativePos = leafPos.above();
             if (heightmapPos.getY() == relativePos.getY()) {
-                context.setBlock(relativePos, BlockStateProvider.simple(AetherIIBlocks.ARCTIC_SNOW.get()).getState(random, relativePos));
+                context.setBlock(relativePos, BlockStateProvider.simple(AetherIIBlocks.ARCTIC_SNOW.get()).getState(context.level(), random, relativePos));
                 BlockPos belowPos = relativePos.below();
                 context.level().isStateAtPosition(belowPos, (blockState) -> {
                     if (blockState.getBlock() instanceof AetherLeavesBlock) {

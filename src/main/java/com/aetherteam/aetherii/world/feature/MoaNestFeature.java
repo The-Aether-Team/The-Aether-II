@@ -76,7 +76,7 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
 
     @SuppressWarnings("UnusedReturnValue")
     public static boolean placeNestBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random) {
-        BlockState state = provider.getState(random, pos);
+        BlockState state = provider.getState(level, random, pos);
         if (!level.getBlockState(pos).is(BlockTags.LOGS_THAT_BURN)) {
             if (state.isAir() || !level.getBlockState(pos).is(BlockTags.LOGS)) {
                 return level.setBlock(pos, state, 2);

@@ -21,24 +21,24 @@ public class AetherFlowerFeature extends Feature<SimpleBlockConfiguration> {
     @Override
     public boolean place(FeaturePlaceContext<SimpleBlockConfiguration> context) {
         SimpleBlockConfiguration simpleblockconfiguration = context.config();
-        WorldGenLevel worldgenlevel = context.level();
+        WorldGenLevel level = context.level();
         BlockPos blockpos = context.origin();
-        BlockState blockstate = simpleblockconfiguration.toPlace().getState(context.random(), blockpos);
-        BlockState atstate = worldgenlevel.getBlockState(blockpos);
-        BlockState belowstate = worldgenlevel.getBlockState(blockpos.below());
+        BlockState blockstate = simpleblockconfiguration.toPlace().getState(level, context.random(), blockpos);
+        BlockState atstate = level.getBlockState(blockpos);
+        BlockState belowstate = level.getBlockState(blockpos.below());
         if (blockstate.getBlock() instanceof Snowable && blockstate.hasProperty(BlockStateProperties.SNOWY)
                 && (atstate.getBlock() == AetherIIBlocks.ARCTIC_SNOW.get() || (belowstate.getBlock() == AetherIIBlocks.AETHER_GRASS_BLOCK.get() && belowstate.getValue(GrassBlock.SNOWY)))) {
             blockstate = blockstate.setValue(BlockStateProperties.SNOWY, true);
         }
-        if (blockstate.canSurvive(worldgenlevel, blockpos)) {
+        if (blockstate.canSurvive(level, blockpos)) {
             if (blockstate.getBlock() instanceof DoublePlantBlock) {
-                if (!worldgenlevel.isEmptyBlock(blockpos.above())) {
+                if (!level.isEmptyBlock(blockpos.above())) {
                     return false;
                 }
 
-                DoublePlantBlock.placeAt(worldgenlevel, blockstate, blockpos, 2);
+                DoublePlantBlock.placeAt(level, blockstate, blockpos, 2);
             } else {
-                worldgenlevel.setBlock(blockpos, blockstate, 2);
+                level.setBlock(blockpos, blockstate, 2);
             }
 
             return true;

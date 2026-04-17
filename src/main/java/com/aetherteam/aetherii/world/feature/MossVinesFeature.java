@@ -21,25 +21,25 @@ public class MossVinesFeature extends Feature<MossVinesConfiguration> {
 
     @Override
     public boolean place(FeaturePlaceContext<MossVinesConfiguration> context) {
-        WorldGenLevel worldgenlevel = context.level();
+        WorldGenLevel level = context.level();
         BlockPos blockpos = context.origin();
         RandomSource random = context.random();
-        if (worldgenlevel.isEmptyBlock(blockpos)) {
+        if (level.isEmptyBlock(blockpos)) {
             Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
-            if (BottomedVineBlock.isAcceptableNeighbour(worldgenlevel, blockpos.relative(direction), direction) && !worldgenlevel.getBlockState(blockpos.relative(direction)).is(Blocks.STRUCTURE_BLOCK)) {
-                BlockState aboveState = worldgenlevel.getBlockState(blockpos.above());
-                BlockState blockState = context.config().blockStateProvider().getState(random, blockpos);
+            if (BottomedVineBlock.isAcceptableNeighbour(level, blockpos.relative(direction), direction) && !level.getBlockState(blockpos.relative(direction)).is(Blocks.STRUCTURE_BLOCK)) {
+                BlockState aboveState = level.getBlockState(blockpos.above());
+                BlockState blockState = context.config().blockStateProvider().getState(level, random, blockpos);
                 blockState = blockState.setValue(VineBlock.getPropertyForFace(direction), true);
-                if ((worldgenlevel.getBlockState(blockpos.relative(direction)).is(AetherIIBlocks.BRYALINN_MOSS_BLOCK)
-                        || worldgenlevel.getBlockState(blockpos.above().relative(direction)).is(AetherIIBlocks.BRYALINN_MOSS_BLOCK)
-                        || worldgenlevel.getBlockState(blockpos.above().relative(direction)).is(AetherIIBlocks.BRYALINN_MOSS_CARPET))
+                if ((level.getBlockState(blockpos.relative(direction)).is(AetherIIBlocks.BRYALINN_MOSS_BLOCK)
+                        || level.getBlockState(blockpos.above().relative(direction)).is(AetherIIBlocks.BRYALINN_MOSS_BLOCK)
+                        || level.getBlockState(blockpos.above().relative(direction)).is(AetherIIBlocks.BRYALINN_MOSS_CARPET))
                         && random.nextInt(4) == 0) {
                     blockState = blockState.setValue(BottomedVineBlock.AGE, 25);
                 } else {
                     blockState = blockState.setValue(BottomedVineBlock.AGE, 20 + random.nextInt(5));
                 }
                 if (!aboveState.is(blockState.getBlock()) || (aboveState.hasProperty(BottomedVineBlock.AGE) && aboveState.getValue(BottomedVineBlock.AGE) < 25)) {
-                    addHangingVine(blockpos, blockState, worldgenlevel);
+                    addHangingVine(blockpos, blockState, level);
                     return true;
                 }
             }

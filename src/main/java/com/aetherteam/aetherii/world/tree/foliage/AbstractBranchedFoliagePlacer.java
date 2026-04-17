@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
@@ -17,11 +17,11 @@ public abstract class AbstractBranchedFoliagePlacer extends FoliagePlacer {
         super(pRadius, pOffset);
     }
 
-    protected static boolean tryPlaceLog(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration treeConfiguration, BlockPos pos, Direction.Axis axis) {
+    protected static boolean tryPlaceLog(WorldGenLevel level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration treeConfiguration, BlockPos pos, Direction.Axis axis) {
         if (!TreeFeature.validTreePos(level, pos)) {
             return false;
         } else {
-            BlockState state = treeConfiguration.trunkProvider.getState(random, pos);
+            BlockState state = treeConfiguration.trunkProvider.getState(level, random, pos);
             if (state.hasProperty(RotatedPillarBlock.AXIS)) {
                 state = state.setValue(RotatedPillarBlock.AXIS, axis);
             }
@@ -31,7 +31,7 @@ public abstract class AbstractBranchedFoliagePlacer extends FoliagePlacer {
     }
 
     // Used for Greatroot Trees
-    protected void placeCornerLogs(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, BlockPos pos, int verticalOffset, int horizontalOffset) {
+    protected void placeCornerLogs(WorldGenLevel level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, BlockPos pos, int verticalOffset, int horizontalOffset) {
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();

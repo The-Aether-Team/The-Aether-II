@@ -7,7 +7,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.util.valueproviders.IntProviders;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,7 +29,7 @@ public class MultiTreeTrunkPlacer extends TrunkPlacer {
             Codec.intRange(0, 32).fieldOf("base_height").forGetter((trunkPlacer) -> trunkPlacer.baseHeight),
             Codec.intRange(0, 24).fieldOf("height_rand_a").forGetter((trunkPlacer) -> trunkPlacer.heightRandA),
             Codec.intRange(0, 24).fieldOf("height_rand_b").forGetter((trunkPlacer) -> trunkPlacer.heightRandB),
-            IntProvider.CODEC.fieldOf("radius").forGetter((trunkPlacer) -> trunkPlacer.radius),
+            IntProviders.CODEC.fieldOf("radius").forGetter((trunkPlacer) -> trunkPlacer.radius),
             Codec.intRange(2, 10).fieldOf("amount").forGetter((trunkPlacer) -> trunkPlacer.amount)
     ).apply(instance, MultiTreeTrunkPlacer::new));
 
@@ -42,7 +43,7 @@ public class MultiTreeTrunkPlacer extends TrunkPlacer {
     }
 
     @Override
-    public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int freeTreeHeight, BlockPos pos, TreeConfiguration config) {
+    public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int freeTreeHeight, BlockPos pos, TreeConfiguration config) {
         List<FoliagePlacer.FoliageAttachment> foliageAttachments = new ArrayList<>();
         int radius = this.radius.sample(random);
         BlockPos min = pos.offset(-radius, -radius, -radius);
@@ -56,7 +57,7 @@ public class MultiTreeTrunkPlacer extends TrunkPlacer {
 
             if (this.isFree(level, heightmapPos) && noAdjacentTrees) {
                 if (level.isStateAtPosition(heightmapPos.below(), (state) -> Feature.isDirt(state) && !state.is(Blocks.GRASS_BLOCK) && !state.is(Blocks.MYCELIUM))) {
-                    setDirtAt(level, blockSetter, random, heightmapPos.below(), config);
+                    placeBelowTrunkBlock(level, blockSetter, random, heightmapPos.below(), config);
 
                     for (int i = 0; i < freeTreeHeight; ++i) {
                         this.placeLog(level, blockSetter, random, heightmapPos.above(i), config);
@@ -70,7 +71,7 @@ public class MultiTreeTrunkPlacer extends TrunkPlacer {
     }
 
     @Override
-    protected boolean validTreePos(LevelSimulatedReader level, BlockPos pos) {
+    protected boolean validTreePos(WorldGenLevel level, BlockPos pos) {
         return super.validTreePos(level, pos) || level.isStateAtPosition(pos, BlockBehaviour.BlockStateBase::canBeReplaced);
     }
 

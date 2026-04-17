@@ -12,6 +12,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.IntProviders;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -30,9 +31,9 @@ public class ShroudedCanopyDecorator extends TreeDecorator {
             BlockStateProvider.CODEC.fieldOf("canopy_branch_state").forGetter((decorator) -> decorator.canopyBranchState),
             BlockStateProvider.CODEC.fieldOf("moss_carpet_state").forGetter((decorator) -> decorator.mossCarpetState),
             BlockStateProvider.CODEC.fieldOf("moss_vine_state").forGetter((decorator) -> decorator.mossVineState),
-            IntProvider.CODEC.fieldOf("canopy_radius").forGetter((decorator) -> decorator.canopyRadius),
-            IntProvider.CODEC.fieldOf("branch_amount").forGetter((decorator) -> decorator.branchAmount),
-            IntProvider.CODEC.fieldOf("branch_height").forGetter((decorator) -> decorator.branchHeight),
+            IntProviders.CODEC.fieldOf("canopy_radius").forGetter((decorator) -> decorator.canopyRadius),
+            IntProviders.CODEC.fieldOf("branch_amount").forGetter((decorator) -> decorator.branchAmount),
+            IntProviders.CODEC.fieldOf("branch_height").forGetter((decorator) -> decorator.branchHeight),
             Codec.doubleRange(0.0, 1.0).fieldOf("nest_chance").forGetter((decorator) -> decorator.nestChance)
     ).apply(instance, ShroudedCanopyDecorator::new));
 
@@ -88,12 +89,12 @@ public class ShroudedCanopyDecorator extends TreeDecorator {
 
             int radius = this.canopyRadius.sample(context.random());
 
-            this.createCircle(context, center, radius + 1, this.canopyTopState.getState(context.random(), center), false);
+            this.createCircle(context, center, radius + 1, this.canopyTopState.getState(context.level(), context.random(), center), false);
 
-            this.createBranches(context, center.below(), List.copyOf(topPoints.keySet()), radius - 1, this.branchAmount.sample(context.random()), this.canopyBranchState.getState(context.random(), center.below()));
+            this.createBranches(context, center.below(), List.copyOf(topPoints.keySet()), radius - 1, this.branchAmount.sample(context.random()), this.canopyBranchState.getState(context.level(), context.random(), center.below()));
 
-            this.createCircle(context, center.below(), radius, this.canopyTopState.getState(context.random(), center.below()), false);
-            this.createCircle(context, center.below(2), radius - 1, this.canopyTopState.getState(context.random(), center.below(2)), true);
+            this.createCircle(context, center.below(), radius, this.canopyTopState.getState(context.level(), context.random(), center.below()), false);
+            this.createCircle(context, center.below(2), radius - 1, this.canopyTopState.getState(context.level(), context.random(), center.below(2)), true);
 
             if (context.level() instanceof WorldGenLevel worldGenLevel && context.random().nextDouble() <= this.nestChance) {
                 ChunkGenerator chunk = worldGenLevel.getLevel().getChunkSource().getGenerator();
@@ -198,13 +199,13 @@ public class ShroudedCanopyDecorator extends TreeDecorator {
                 for (BlockPos pos : branchPositions) {
                     if (context.random().nextBoolean()) {
                         if (context.isAir(pos.above())) {
-                            context.setBlock(pos.above(), this.mossCarpetState.getState(context.random(), pos.above()));
+                            context.setBlock(pos.above(), this.mossCarpetState.getState(context.level(), context.random(), pos.above()));
                         }
                     }
 
                     if (context.random().nextInt(3) == 0) {
                         if (context.isAir(pos.above())) {
-                            context.setBlock(pos.above(), this.mossCarpetState.getState(context.random(), pos.above()));
+                            context.setBlock(pos.above(), this.mossCarpetState.getState(context.level(), context.random(), pos.above()));
                         }
                         this.createVines(context, pos);
                     }
@@ -223,7 +224,7 @@ public class ShroudedCanopyDecorator extends TreeDecorator {
             if (context.isAir(newPos)) {
                 Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(context.random());
                 if (context.level().isStateAtPosition(newPos.relative(direction), BlockBehaviour.BlockStateBase::isSolid)) {
-                    BlockState vineState = this.mossVineState.getState(context.random(), newPos);
+                    BlockState vineState = this.mossVineState.getState(context.level(), context.random(), newPos);
                     vineState = vineState.setValue(VineBlock.getPropertyForFace(direction), true);
                     if (context.random().nextInt(4) == 0) {
                         vineState = vineState.setValue(BottomedVineBlock.AGE, 25);

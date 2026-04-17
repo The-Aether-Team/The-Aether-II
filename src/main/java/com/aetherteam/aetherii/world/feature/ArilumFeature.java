@@ -25,8 +25,8 @@ public class ArilumFeature extends Feature<ArilumConfiguration> {
         int height = context.config().height().sample(random);
         int depth = context.config().depth().sample(random);
         if (level.getBlockState(pos).is(Blocks.WATER) && level.getBlockState(pos.above(depth)).is(Blocks.WATER)) {
-            BlockState endState = context.config().grassProvider().getState(random, pos);
-            BlockState bodyState = context.config().plantProvider().getState(random, pos);
+            BlockState endState = context.config().grassProvider().getState(level, random, pos);
+            BlockState bodyState = context.config().plantProvider().getState(level, random, pos);
             for (int l = 0; l <= height; l++) {
                 if (level.getBlockState(pos).is(Blocks.WATER) && bodyState.canSurvive(level, pos)) {
                     if (l == height) {

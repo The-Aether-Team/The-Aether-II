@@ -53,7 +53,7 @@ public class CloudbedFeature extends Feature<CloudbedConfiguration> {
                     // Calculate how many blocks down from the main y offset plane should be generated
                     float blocksDown = Mth.lerp(realCloud, 0F, (float) config.cloudRadius() - 1F) - realOffset;
                     // Floor these values and then place the blocks
-                    BlockState state = config.block().getState(context.random(), new BlockPos(xCoord, config.yLevel(), zCoord));
+                    BlockState state = config.block().getState(level, context.random(), new BlockPos(xCoord, config.yLevel(), zCoord));
                     for (int i = Mth.floor(-blocksDown); i <= Mth.floor(blocksUp); i++) {
                         int y = Mth.clamp(config.yLevel() + i, context.level().getMinY(), context.level().getMaxY());
                         BlockPos pos = new BlockPos(xCoord, y, zCoord);

@@ -28,7 +28,7 @@ public class FallenLogFeature extends Feature<FallenLogConfiguration> {
 
         for (int i = 0; i < length; i++) {
             BlockPos placementPos = pos.relative(direction, i);
-            BlockState blockState = config.block().getState(random, placementPos);
+            BlockState blockState = config.block().getState(level, random, placementPos);
             if ((level.getBlockState(placementPos).canBeReplaced() || level.getBlockState(placementPos).liquid()) && level.getBlockState(placementPos.below()).is(config.validBlocks())) {
                 if (blockState.getOptionalValue(BlockStateProperties.AXIS).isPresent()) {
                     blockState = blockState.setValue(BlockStateProperties.AXIS, direction.getAxis());

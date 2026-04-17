@@ -37,7 +37,7 @@ public abstract class AbstractMagneticShroomFeature extends Feature<BigMagneticS
     public void generateStem(WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos pos, BigMagneticShroomConfiguration config, Direction direction, IntProvider length) {
         int max = length.sample(random);
         for (int i = 1; i <= max; i++) {
-            this.setBlock(level, pos, config.stemProvider().getState(random, pos));
+            this.setBlock(level, pos, config.stemProvider().getState(level, random, pos));
             pos.setWithOffset(pos, direction);
         }
     }
@@ -45,13 +45,13 @@ public abstract class AbstractMagneticShroomFeature extends Feature<BigMagneticS
     public void generateSmallCap(WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos pos, BigMagneticShroomConfiguration config) {
         this.placeSquare(level, random, pos, config.bottomCapProvider(), 1, false);
         pos.setWithOffset(pos, Direction.UP);
-        this.setBlock(level, pos, config.capProvider().getState(random, pos));
+        this.setBlock(level, pos, config.capProvider().getState(level, random, pos));
     }
 
     public void generateMediumCap(WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos pos, BigMagneticShroomConfiguration config) {
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             BlockPos offsetPos = pos.relative(direction);
-            this.setBlock(level, offsetPos, config.stemProvider().getState(random, offsetPos));
+            this.setBlock(level, offsetPos, config.stemProvider().getState(level, random, offsetPos));
         }
         pos.setWithOffset(pos, Direction.UP);
         this.placeSquare(level, random, pos, config.capProvider(), 2, true);
@@ -66,7 +66,7 @@ public abstract class AbstractMagneticShroomFeature extends Feature<BigMagneticS
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             for (int j = 1; j <= 2; j++) {
                 BlockPos offsetPos = pos.relative(direction, j);
-                this.setBlock(level, offsetPos, config.stemProvider().getState(random, offsetPos));
+                this.setBlock(level, offsetPos, config.stemProvider().getState(level, random, offsetPos));
             }
         }
         pos.setWithOffset(pos, Direction.UP);
@@ -85,7 +85,7 @@ public abstract class AbstractMagneticShroomFeature extends Feature<BigMagneticS
             for (int z = -radius; z <= radius; z++) {
                 BlockPos offsetPos = pos.offset(x, 0, z);
                 if (!rounded || (Math.abs(x) != radius || Math.abs(z) != radius)) {
-                    this.setBlock(level, offsetPos, state.getState(random, offsetPos));
+                    this.setBlock(level, offsetPos, state.getState(level, random, offsetPos));
                 }
             }
         }
@@ -120,7 +120,7 @@ public abstract class AbstractMagneticShroomFeature extends Feature<BigMagneticS
         for (int i = 2; i >= -3; --i) {
             BlockPos blockpos = pos.above(i);
             if (Feature.isGrassOrDirt(level, blockpos)) {
-                this.setBlock(level, blockpos, provider.getState(random, pos));
+                this.setBlock(level, blockpos, provider.getState(level, random, pos));
                 break;
             }
             if (!level.getBlockState(blockpos).isAir() && i < 0) {

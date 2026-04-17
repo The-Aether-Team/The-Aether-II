@@ -9,7 +9,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
@@ -23,7 +23,7 @@ public class AmberootFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxHeight, FoliageAttachment attachment, int height, int radius, int offset) {
+    protected void createFoliage(WorldGenLevel level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxHeight, FoliageAttachment attachment, int height, int radius, int offset) {
         Direction.Axis axis = Direction.Plane.HORIZONTAL.getRandomAxis(random);
         Direction.Axis oppositeAxis = axis == Direction.Axis.X ? Direction.Axis.Z : Direction.Axis.X;
         BlockPos origin = attachment.pos();
@@ -101,7 +101,7 @@ public class AmberootFoliagePlacer extends FoliagePlacer {
     }
 
     // Override vanilla behavior of using the 'large' boolean value to actually affect the size, this is unwanted behavior in this case
-    protected void placeLeavesRow(LevelSimulatedReader level, FoliageSetter setter, RandomSource random, TreeConfiguration config, BlockPos pos, int radius, int y, boolean large) {
+    protected void placeLeavesRow(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeConfiguration config, BlockPos pos, int radius, int y, boolean large) {
         // Also avoid creating a new mutable block pos if the radius is 0 anyway
         if (radius <= 0) {
             if (!this.shouldSkipLocationSigned(random, 0, y, 0, radius, large)) {

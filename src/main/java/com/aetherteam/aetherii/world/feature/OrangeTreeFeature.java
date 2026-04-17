@@ -18,7 +18,7 @@ public class OrangeTreeFeature extends Feature<SimpleBlockConfiguration> {
         SimpleBlockConfiguration config = context.config();
         WorldGenLevel level = context.level();
         BlockPos pos = context.origin();
-        BlockState state = config.toPlace().getState(context.random(), pos);
+        BlockState state = config.toPlace().getState(level, context.random(), pos);
 
         if (state.canSurvive(level, pos) && level.isEmptyBlock(pos.above())) {
             OrangeTreeBlock.placeAt(level, state, pos, 2);
