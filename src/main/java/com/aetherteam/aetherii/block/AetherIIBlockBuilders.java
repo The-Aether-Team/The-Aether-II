@@ -105,12 +105,16 @@ public class AetherIIBlockBuilders {
                 .lightLevel((state) -> 8);
     }
 
+    public static boolean always(BlockState state, BlockGetter getter, BlockPos pos) {
+        return true;
+    }
+
     public static boolean never(BlockState state, BlockGetter getter, BlockPos pos) {
         return false;
     }
 
-    public static boolean always(BlockState state, BlockGetter getter, BlockPos pos) {
-        return true;
+    public static BlockPos postProcessSelf(BlockState state, BlockGetter blockGetter, BlockPos blockPos) {
+        return blockPos;
     }
 
     public static <A> boolean never(BlockState state, BlockGetter getter, BlockPos pos, A block) {

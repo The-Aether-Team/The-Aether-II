@@ -162,7 +162,7 @@ public class Aerbunny extends AetherTamableAnimal {
             }
         }
 
-        if (this.getVehicle() != null && (this.getVehicle().onGround() || this.getVehicle().isInFluidType() || blockIntersection)) { // Reset the last tracked fall position if the Aerbunny touches a surface.
+        if (this.getVehicle() != null && (this.getVehicle().onGround() || this.getVehicle().isInLiquid() || blockIntersection)) { // Reset the last tracked fall position if the Aerbunny touches a surface.
             this.lastPos = null;
         }
 
