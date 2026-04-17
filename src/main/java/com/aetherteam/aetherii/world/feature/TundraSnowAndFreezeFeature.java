@@ -12,7 +12,7 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.SnowyDirtBlock;
+import net.minecraft.world.level.block.SnowyBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -60,8 +60,8 @@ public class TundraSnowAndFreezeFeature extends Feature<NoneFeatureConfiguration
                     } else {
                         level.setBlock(posAbove, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 2);
                     }
-                    if (ground.hasProperty(SnowyDirtBlock.SNOWY)) {
-                        level.setBlock(posBelow, ground.setValue(SnowyDirtBlock.SNOWY, Boolean.TRUE), 2);
+                    if (ground.hasProperty(SnowyBlock.SNOWY)) {
+                        level.setBlock(posBelow, ground.setValue(SnowyBlock.SNOWY, Boolean.TRUE), 2);
                     }
                 }
                 if (biome.shouldFreeze(level, posBelow, false)) {

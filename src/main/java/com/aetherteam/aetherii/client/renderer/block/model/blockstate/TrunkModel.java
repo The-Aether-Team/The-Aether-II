@@ -5,16 +5,16 @@ import com.aetherteam.aetherii.block.natural.TrunkBlock;
 import com.mojang.math.OctahedralGroup;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.client.renderer.block.model.BlockModelPart;
-import net.minecraft.client.renderer.block.model.BlockStateModel;
-import net.minecraft.client.renderer.block.model.SimpleModelWrapper;
+import net.minecraft.client.renderer.block.BlockAndTintGetter;
+import net.minecraft.client.renderer.block.dispatch.BlockModelRotation;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.BlockModelRotation;
 import net.minecraft.client.resources.model.ModelBaker;
+import net.minecraft.client.resources.model.SimpleModelWrapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WallSide;
 import net.neoforged.neoforge.client.model.DynamicBlockStateModel;
@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public record TrunkModel(Map<Holder, BlockModelPart> connections, TextureAtlasSprite particleIcon) implements DynamicBlockStateModel {
+public record TrunkModel(Map<Holder, BlockStateModelPart> connections, TextureAtlasSprite particleIcon) implements DynamicBlockStateModel {
     @Override
     public void collectParts(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos, BlockState blockState, RandomSource randomSource, List<BlockModelPart> list) {
         Map<String, WallSide> properties = TrunkBlock.getCornerProperties(blockAndTintGetter, blockPos);
@@ -52,12 +52,12 @@ public record TrunkModel(Map<Holder, BlockModelPart> connections, TextureAtlasSp
 
         @Override
         public BlockStateModel bake(ModelBaker modelBaker) {
-            Map<Holder, BlockModelPart> connections = new HashMap<>();
+            Map<Holder, BlockStateModelPart> connections = new HashMap<>();
             for (Map.Entry<String, BlockModelRotation> entry : CORNER_ROTATIONS.entrySet()) {
                 connections.put(new Holder(entry.getKey(), WallSide.LOW), SimpleModelWrapper.bake(modelBaker, this.corner(), entry.getValue().withUvLock()));
                 connections.put(new Holder(entry.getKey(), WallSide.TALL), SimpleModelWrapper.bake(modelBaker, this.cornerTall(), entry.getValue().withUvLock()));
             }
-            return new TrunkModel(connections, List.copyOf(connections.values()).getFirst().particleIcon());
+            return new TrunkModel(connections, List.copyOf(connections.values()).getFirst().particleMaterial());
         }
 
         @Override

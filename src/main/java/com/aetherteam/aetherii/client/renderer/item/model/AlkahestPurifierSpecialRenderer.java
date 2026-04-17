@@ -13,9 +13,7 @@ import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
-import net.minecraft.client.resources.model.MaterialSet;
 import net.minecraft.client.resources.model.sprite.SpriteGetter;
-import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3fc;
 
 import java.util.function.Consumer;

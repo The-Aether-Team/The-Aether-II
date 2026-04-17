@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.client.renderer.block.model.builder;
 
 import com.aetherteam.aetherii.client.renderer.block.model.blockstate.TrunkModel;
-import net.minecraft.client.renderer.block.model.VariantMutator;
+import net.minecraft.client.renderer.block.dispatch.VariantMutator;
 import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
 import net.neoforged.neoforge.client.model.generators.blockstate.CustomBlockStateModelBuilder;

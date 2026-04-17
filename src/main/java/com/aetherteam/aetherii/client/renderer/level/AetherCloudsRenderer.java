@@ -7,11 +7,12 @@ import net.minecraft.client.renderer.state.level.LevelRenderState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.CustomCloudsRenderer;
 import org.joml.Matrix4f;
+import org.joml.Matrix4fc;
 
 public class AetherCloudsRenderer implements CustomCloudsRenderer {
 
     @Override
-    public boolean renderClouds(LevelRenderState levelRenderState, Vec3 camPos, CloudStatus cloudStatus, int cloudColor, float cloudHeight, Matrix4f modelViewMatrix) {
+    public boolean renderClouds(LevelRenderState levelRenderState, Vec3 camPos, CloudStatus cloudStatus, int cloudColor, float cloudHeight, int cloudRange, Matrix4fc modelViewMatrix) {
         if (levelRenderState.customCloudsRenderer != null) {
             Minecraft.getInstance().levelRenderer.getCloudRenderer().render(cloudColor, cloudStatus, cloudHeight, camPos, levelRenderState.gameTime, DeltaTracker.ONE.getGameTimeDeltaPartialTick(false));
         }
