@@ -7,7 +7,7 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.PanoramicScreenshotParameters;
+import net.minecraft.client.renderer.Panorama;
 import net.minecraft.core.Holder;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
@@ -98,7 +98,7 @@ public class DimensionClientListener {
             if (effectiveRenderDistance >= 4) {
                 float f = camera.attributeProbe().getValue(EnvironmentAttributes.SUN_ANGLE, partialTick) * 0.017453292F;
                 f4 = Mth.sin(f) > 0.0F ? -1.0F : 1.0F;
-                PanoramicScreenshotParameters panorama = Minecraft.getInstance().gameRenderer.getPanoramicScreenshotParameters();
+                Panorama panorama = Minecraft.getInstance().gameRenderer.getPanorama();
                 Vector3fc vector3fc = panorama != null ? panorama.forwardVector() : camera.forwardVector();
                 float f2 = vector3fc.dot(f4, 0.0F, 0.0F);
                 if (f2 > 0.0F) {

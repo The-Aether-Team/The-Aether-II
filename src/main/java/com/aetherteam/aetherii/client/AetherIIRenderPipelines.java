@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.AetherII;
 import com.mojang.blaze3d.pipeline.BlendFunction;
+import com.mojang.blaze3d.pipeline.ColorTargetState;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
@@ -15,7 +16,7 @@ public class AetherIIRenderPipelines {
             .withFragmentShader(Identifier.fromNamespaceAndPath(AetherII.MODID, "core/entity_dither"))
             .withSampler("Sampler0")
             .withSampler("Sampler2")
-            .withVertexFormat(DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS)
+            .withVertexFormat(DefaultVertexFormat.ENTITY, VertexFormat.Mode.QUADS)
             .buildSnippet();
 
     private static final RenderPipeline ENTITY_DITHER_NO_CULL = RenderPipeline.builder(ENTITY_DITHER_SNIPPET)
@@ -28,8 +29,7 @@ public class AetherIIRenderPipelines {
             .withLocation(Identifier.fromNamespaceAndPath(AetherII.MODID, "pipeline/cloud_cover"))
             .withVertexShader("core/position_color")
             .withFragmentShader(Identifier.fromNamespaceAndPath(AetherII.MODID, "core/cloud_cover"))
-            .withBlend(BlendFunction.TRANSLUCENT)
-            .withDepthWrite(false)
+            .withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT))
             .withVertexFormat(DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.TRIANGLE_FAN)
             .build();
 

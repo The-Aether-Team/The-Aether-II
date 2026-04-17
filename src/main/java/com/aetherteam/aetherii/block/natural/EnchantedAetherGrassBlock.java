@@ -59,7 +59,7 @@ public class EnchantedAetherGrassBlock extends GrassBlock {
         } else if (aboveState.getFluidState().getAmount() == 8) {
             return false;
         } else {
-            int i = LightEngine.getLightBlockInto(state, aboveState, Direction.UP, aboveState.getLightBlock());
+            int i = LightEngine.getLightBlockInto(state, aboveState, Direction.UP, aboveState.getLightDampening());
             return i < 15;
         }
     }

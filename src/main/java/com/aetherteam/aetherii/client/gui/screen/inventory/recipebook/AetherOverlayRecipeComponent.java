@@ -6,7 +6,6 @@ import com.aetherteam.aetherii.recipe.display.AlkahestPurifierRecipeDisplay;
 import com.aetherteam.aetherii.recipe.display.AltarRecipeDisplay;
 import com.aetherteam.aetherii.recipe.display.AmberHourglassRecipeDisplay;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
