@@ -12,7 +12,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.lighting.LightEngine;
@@ -33,7 +32,7 @@ public class EnchantedAetherGrassBlock extends GrassBlock {
     }
 
     /**
-     * Based on part of {@link net.minecraft.world.level.block.SpreadingSnowyDirtBlock#randomTick(BlockState, ServerLevel, BlockPos, RandomSource)}.<br><br>
+     * Based on part of {@link net.minecraft.world.level.block.SpreadingSnowyBlock#randomTick(BlockState, ServerLevel, BlockPos, RandomSource)}.<br><br>
      * Warning for "deprecation" is suppressed due to being copied from what Forge does.
      */
     @Override
@@ -59,7 +58,7 @@ public class EnchantedAetherGrassBlock extends GrassBlock {
         } else if (aboveState.getFluidState().getAmount() == 8) {
             return false;
         } else {
-            int i = LightEngine.getLightBlockInto(state, aboveState, Direction.UP, aboveState.getLightBlock());
+            int i = LightEngine.getLightBlockInto(state, aboveState, Direction.UP, aboveState.getLightDampening());
             return i < 15;
         }
     }

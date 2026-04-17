@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
@@ -40,7 +40,7 @@ public class GuidebookRewardsScreen extends Screen implements Guidebook {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void render(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         this.renderTransparentBackground(guiGraphics);
         this.renderGuidebookSpread(this, guiGraphics, mouseX, mouseY, partialTick);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
@@ -50,16 +50,16 @@ public class GuidebookRewardsScreen extends Screen implements Guidebook {
     }
 
     @Override
-    public void renderGuidebookLeftPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderGuidebookLeftPage(Screen screen, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xffffffff);
     }
 
     @Override
-    protected void renderMenuBackground(GuiGraphics partialTick) { }
+    protected void renderMenuBackground(GuiGraphicsExtractor partialTick) { }
 
     @Override
-    protected void renderBlurredBackground(GuiGraphics guiGraphics) { }
+    protected void renderBlurredBackground(GuiGraphicsExtractor guiGraphics) { }
 
     @Override
     public boolean keyPressed(KeyEvent event) {

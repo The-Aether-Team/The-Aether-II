@@ -11,6 +11,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.Validatable;
+import net.minecraft.world.level.storage.loot.ValidationContextSource;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
@@ -54,9 +56,9 @@ public class ItemBreakBlockTrigger extends SimpleCriterionTrigger<ItemBreakBlock
         }
 
         @Override
-        public void validate(CriterionValidator validator) {
-            SimpleInstance.super.validate(validator);
-            this.location.ifPresent((predicate) -> validator.validate(predicate, LootContextParamSets.ADVANCEMENT_LOCATION, "location"));
+        public void validate(ValidationContextSource validator) {
+            SimpleCriterionTrigger.SimpleInstance.super.validate(validator);
+            Validatable.validate(validator.context(LootContextParamSets.ADVANCEMENT_LOCATION), "location", this.location);
         }
     }
 }

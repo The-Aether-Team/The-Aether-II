@@ -14,7 +14,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.AbstractRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponentPatch;
@@ -42,7 +42,7 @@ public class AlkahestPurifierRecipeCategory extends AbstractRecipeCategory<Alkah
     }
 
     @Override
-    public void draw(AlkahestPurificationRecipe recipe, IRecipeSlotsView view, GuiGraphics graphics, double mouseX, double mouseY) {
+    public void draw(AlkahestPurificationRecipe recipe, IRecipeSlotsView view, GuiGraphicsExtractor graphics, double mouseX, double mouseY) {
         this.background.draw(graphics, 4, 2);
         this.arrow.draw(graphics, 108, 34);
         this.bubbles.draw(graphics, 108, 23);

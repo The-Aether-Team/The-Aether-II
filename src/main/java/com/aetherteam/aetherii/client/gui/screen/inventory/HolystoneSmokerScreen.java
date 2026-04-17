@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.client.gui.screen.inventory;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.gui.screen.inventory.recipebook.HolystoneSmokerRecipeBookComponent;
 import com.aetherteam.aetherii.inventory.menu.HolystoneSmokerMenu;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.navigation.ScreenPosition;
 import net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
@@ -36,7 +36,7 @@ public class HolystoneSmokerScreen extends AbstractRecipeBookScreen<HolystoneSmo
         return new ScreenPosition(this.leftPos + 20, this.height / 2 - 49);
     }
 
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphicsExtractor guiGraphics, float partialTick, int mouseX, int mouseY) {
         int i = this.leftPos;
         int j = this.topPos;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/holystone_furnace.png"), i, j, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);

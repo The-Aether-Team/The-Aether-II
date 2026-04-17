@@ -26,7 +26,7 @@ public class VaseSpecialRenderer implements NoDataSpecialModelRenderer {
     }
 
     @Override
-    public void submit(ItemDisplayContext itemDisplayContext, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int i1, boolean b, int i2) {
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int i1, boolean b, int i2) {
         Identifier location = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/vases/veradexian_vase.png");
         RenderType renderType = RenderTypes.entityCutout(location);
         poseStack.pushPose();

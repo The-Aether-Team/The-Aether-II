@@ -4,11 +4,11 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.item.BlockModelWrapper;
+import net.minecraft.client.renderer.item.CuboidItemModelWrapper;
 import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.item.ModelRenderProperties;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -21,8 +21,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-@Mixin(BlockModelWrapper.class)
-public class BlockModelWrapperMixin {
+@Mixin(CuboidItemModelWrapper.class)
+public class CuboidItemModelWrapperMixin {
     @Shadow
     @Final
     private ModelRenderProperties properties;

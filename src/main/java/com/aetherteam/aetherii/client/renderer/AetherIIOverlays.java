@@ -19,7 +19,7 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.player.LocalPlayer;
@@ -103,7 +103,7 @@ public class AetherIIOverlays {
         });
     }
 
-    private static void renderMoaJumps(GuiGraphics guiGraphics, LocalPlayer player) {
+    private static void renderMoaJumps(GuiGraphicsExtractor guiGraphics, LocalPlayer player) {
         if (player.getVehicle() instanceof Moa moa && !Minecraft.getInstance().options.hideGui) {
             for (int jumpCount = 0; jumpCount < moa.getMaxStamina(); jumpCount++) {
                 int xPos = ((guiGraphics.guiWidth() / 2) + (jumpCount * 8)) - (moa.getMaxStamina() * 8) / 2;
@@ -144,7 +144,7 @@ public class AetherIIOverlays {
         } else return location;
     }
 
-    private static void renderAetherPortalOverlay(GuiGraphics guiGraphics, Minecraft minecraft, AetherIIPlayerAttachment handler, DeltaTracker partialTicks) {
+    private static void renderAetherPortalOverlay(GuiGraphicsExtractor guiGraphics, Minecraft minecraft, AetherIIPlayerAttachment handler, DeltaTracker partialTicks) {
         float timeInPortal = Mth.lerp(partialTicks.getGameTimeDeltaPartialTick(false), handler.getOldPortalIntensity(), handler.getPortalIntensity());
         if (timeInPortal > 0.0F) {
             if (timeInPortal < 1.0F) {
@@ -159,7 +159,7 @@ public class AetherIIOverlays {
         }
     }
 
-    private static void renderEffects(Minecraft minecraft, LocalPlayer player, GuiGraphics guiGraphics) {
+    private static void renderEffects(Minecraft minecraft, LocalPlayer player, GuiGraphicsExtractor guiGraphics) {
         Collection<EffectBuildupInstance> collection = minecraft.player.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).getActiveBuildups().values();
         if (!collection.isEmpty()) {
             Screen $$4 = minecraft.screen;
@@ -229,7 +229,7 @@ public class AetherIIOverlays {
         }
     }
 
-    private static void renderBlockIndicator(Minecraft minecraft, GuiGraphics guiGraphics, LocalPlayer player, DeltaTracker partialTicks) {
+    private static void renderBlockIndicator(Minecraft minecraft, GuiGraphicsExtractor guiGraphics, LocalPlayer player, DeltaTracker partialTicks) {
         Options options = minecraft.options;
         if (minecraft.gameMode.getPlayerMode() != GameType.SPECTATOR) {
             DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
@@ -280,7 +280,7 @@ public class AetherIIOverlays {
         }
     }
 
-    private static void renderSwetOverlay(GuiGraphics guiGraphics, LocalPlayer player) {
+    private static void renderSwetOverlay(GuiGraphicsExtractor guiGraphics, LocalPlayer player) {
         SwetLatchAttachment attachment = player.getData(AetherIIDataAttachments.SWET_LATCH);
         List<Swet> swets = attachment.getLatchedSwets();
         if (!swets.isEmpty()) {
@@ -297,7 +297,7 @@ public class AetherIIOverlays {
         }
     }
 
-    private static void drawCorner(GuiGraphics guiGraphics, Identifier sprite, Identifier sprite2, int x, int y) {
+    private static void drawCorner(GuiGraphicsExtractor guiGraphics, Identifier sprite, Identifier sprite2, int x, int y) {
         final float startRange = 0.1F;
         final float endRange = 0.7F;
 
@@ -308,7 +308,7 @@ public class AetherIIOverlays {
         drawSingle(guiGraphics, sprite2, x, y, oscilationOffset + (float) Math.sin((System.currentTimeMillis() / 200.0) + 60.0) * oscilationRange);
     }
 
-    private static void drawSingle(GuiGraphics guiGraphics, Identifier sprite, int x, int y, float alpha) {
+    private static void drawSingle(GuiGraphicsExtractor guiGraphics, Identifier sprite, int x, int y, float alpha) {
         //RenderSystem.enableBlend();
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, 128, 128, ARGB.colorFromFloat(alpha, 1.0F, 1.0F, 1.0F));
         //RenderSystem.disableBlend();

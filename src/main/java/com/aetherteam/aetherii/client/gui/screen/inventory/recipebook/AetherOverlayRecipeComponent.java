@@ -6,7 +6,7 @@ import com.aetherteam.aetherii.recipe.display.AlkahestPurifierRecipeDisplay;
 import com.aetherteam.aetherii.recipe.display.AltarRecipeDisplay;
 import com.aetherteam.aetherii.recipe.display.AmberHourglassRecipeDisplay;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeCollection;
@@ -75,7 +75,7 @@ public class AetherOverlayRecipeComponent extends OverlayRecipeComponent {
         }
 
         @Override
-        public void renderWidget(GuiGraphics guiGraphics, int p_283483_, int p_282919_, float p_282165_) {
+        public void renderWidget(GuiGraphicsExtractor guiGraphics, int p_283483_, int p_282919_, float p_282165_) {
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.getSprite(this.isCraftable), this.getX(), this.getY(), this.width, this.height);
             float x = (float) (this.getX() + 2);
             float y = (float) (this.getY() + 2);
@@ -85,8 +85,8 @@ public class AetherOverlayRecipeComponent extends OverlayRecipeComponent {
                 guiGraphics.pose().pushMatrix();
                 guiGraphics.pose().translate(x + (float) pos.x(), y + (float) pos.y());
                 guiGraphics.pose().translate(-8.0F, -8.0F);
-                guiGraphics.renderItem(stack, 0, 0);
-                guiGraphics.renderItemDecorations(Minecraft.getInstance().font, stack, 0, 0);
+                guiGraphics.item(stack, 0, 0);
+                guiGraphics.itemDecorations(Minecraft.getInstance().font, stack, 0, 0);
                 guiGraphics.pose().popMatrix();
             }
         }

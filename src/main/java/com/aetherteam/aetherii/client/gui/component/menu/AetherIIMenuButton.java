@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.client.gui.screen.menu.AetherIITitleScreen;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.ButtonAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -38,7 +38,7 @@ public class AetherIIMenuButton extends Button {
     }
 
     @Override
-    public void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         Matrix3x2fStack poseStack = guiGraphics.pose();
         Minecraft minecraft = Minecraft.getInstance();
         Font font = minecraft.font;

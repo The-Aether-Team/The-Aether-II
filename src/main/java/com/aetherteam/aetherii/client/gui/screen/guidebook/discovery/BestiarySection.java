@@ -108,7 +108,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     }
 
     @Override
-    public void renderFoward(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderFoward(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         int rightPagePos = (this.screen.width / 2);
         int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
         if (this.getSelectedEntry() != null && this.isUnlocked(this.getSelectedEntry(), BestiaryEntry.ENTITY_TYPE.id())) {
@@ -129,11 +129,11 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     }
 
     @Override
-    public void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderBg(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
 
     }
 
-    public void renderRotatingEntity(GuiGraphics guiGraphics, int startX, int startY, int endX, int endY, int scale, float yOffset, float angleXComponent, float angleYComponent, LivingEntity livingEntity) {
+    public void renderRotatingEntity(GuiGraphicsExtractor guiGraphics, int startX, int startY, int endX, int endY, int scale, float yOffset, float angleXComponent, float angleYComponent, LivingEntity livingEntity) {
         Quaternionf xQuaternion = new Quaternionf().rotateZ(Mth.PI);
         Quaternionf zQuaternion = new Quaternionf().rotateX(angleYComponent * Mth.DEG_TO_RAD);
         xQuaternion.mul(zQuaternion);
@@ -168,7 +168,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     }
 
     @Override
-    public void renderEntries(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderEntries(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.renderEntries(guiGraphics, mouseX, mouseY, partialTick);
         BestiaryEntry.Mutable hoveredEntry = this.getEntryFromSlot(mouseX, mouseY);
         int leftPos = 43;
@@ -212,7 +212,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         this.renderSlotTooltips(guiGraphics, mouseX, mouseY);
     }
 
-    private void renderSlotTooltips(GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    private void renderSlotTooltips(GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
         BestiaryEntry.Mutable entry = this.getEntryFromSlot(mouseX, mouseY);
         if (entry != null) {
             Component name = Component.translatable("gui.aether_ii.guidebook.discovery.entry.unknown");
@@ -228,7 +228,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     }
 
     @Override
-    public void renderInformation(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderInformation(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         BestiaryEntry.Mutable entry = this.getSelectedEntry();
         if (entry != null) {
             Level level = Minecraft.getInstance().level;
@@ -237,7 +237,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                 Entity entity = entry.getEntityType().value().create(level, EntitySpawnReason.COMMAND);
                 if (entity instanceof LivingEntity livingEntity) {
                     if (this.isUnlocked(entry, BestiaryEntry.NAME.id())) {
-                        guiGraphics.drawCenteredString(font, Component.translatable(entry.getName()), 88, 13, 0xffffffff);
+                        guiGraphics.centeredText(font, Component.translatable(entry.getName()), 88, 13, 0xffffffff);
                     }
 
                     int x = 27;
@@ -312,7 +312,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                                 this.currentFoods.addAll(tag);
                             }
                             if (!this.currentFoods.isEmpty()) {
-                                guiGraphics.drawString(font, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.info.eats"), 17, 156, -1);
+                                guiGraphics.text(font, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.info.eats"), 17, 156, -1);
                                 ItemStack itemStack = this.currentFoods.getFirst().value().getDefaultInstance();
                                 this.renderFakeSlot(guiGraphics, font, List.of(itemStack.getHoverName()), itemStack, mouseX, mouseY, 44, 151);
 
@@ -348,7 +348,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                         }
                         if (renderTitle) {
                             Component drops = Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.info.drops");
-                            guiGraphics.drawString(font, drops, dropsTextX - (font.width(drops) + 3) + (10 * (3 - loot.size())), dropsTextY, -1);
+                            guiGraphics.text(font, drops, dropsTextX - (font.width(drops) + 3) + (10 * (3 - loot.size())), dropsTextY, -1);
                         }
                     }
 
@@ -360,7 +360,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         }
     }
 
-    private void renderDefenseIconValue(GuiGraphics guiGraphics, int x, int y, double value) {
+    private void renderDefenseIconValue(GuiGraphicsExtractor guiGraphics, int x, int y, double value) {
         Font font = Minecraft.getInstance().font;
         String name = String.valueOf(Math.abs((int) value));
         if (value > 0) {
@@ -368,13 +368,13 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         } else if (value < 0) {
             name = "₋" + name;
         }
-        guiGraphics.drawString(font, name, x + 19 - 2 - font.width(name), y + 6 + 3, 0xffffffff, true);
+        guiGraphics.text(font, name, x + 19 - 2 - font.width(name), y + 6 + 3, 0xffffffff, true);
     }
 
-    private void renderIconValue(GuiGraphics guiGraphics, int x, int y, double value) {
+    private void renderIconValue(GuiGraphicsExtractor guiGraphics, int x, int y, double value) {
         Font font = Minecraft.getInstance().font;
         String name = String.valueOf(Math.abs((int) value));
-        guiGraphics.drawString(font, name, x + 19 - 2 - font.width(name), y + 6 + 3, 0xffffffff, true);
+        guiGraphics.text(font, name, x + 19 - 2 - font.width(name), y + 6 + 3, 0xffffffff, true);
     }
 
     private Component getDamageTypeComponent(int value, String type) {
@@ -390,7 +390,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         return component;
     }
 
-    private void renderTooltipOverIcon(Font font, GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, Component component) {
+    private void renderTooltipOverIcon(Font font, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, int x, int y, Component component) {
         int rightPagePos = (this.screen.width / 2);
         int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
         double mouseXDiff = (mouseX - rightPagePos) - x;
@@ -400,7 +400,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         }
     }
 
-    private void drawDescriptionString(GuiGraphics guiGraphics, Font font, Component component) {
+    private void drawDescriptionString(GuiGraphicsExtractor guiGraphics, Font font, Component component) {
         int x = 21;
         int y = 103;
         int lineHeight = 9;

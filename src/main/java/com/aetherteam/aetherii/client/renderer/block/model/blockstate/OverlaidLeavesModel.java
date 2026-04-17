@@ -2,16 +2,16 @@ package com.aetherteam.aetherii.client.renderer.block.model.blockstate;
 
 import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.BlockModelPart;
-import net.minecraft.client.renderer.block.model.BlockStateModel;
-import net.minecraft.client.renderer.block.model.SimpleModelWrapper;
+import net.minecraft.client.renderer.block.BlockAndTintGetter;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
-import net.minecraft.client.resources.model.QuadCollection;
+import net.minecraft.client.resources.model.SimpleModelWrapper;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.client.resources.model.geometry.QuadCollection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.DelegateBlockStateModel;
 
@@ -23,12 +23,12 @@ public class OverlaidLeavesModel extends DelegateBlockStateModel {
     }
 
     @Override
-    public void collectParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockModelPart> parts) {
-        List<BlockModelPart> delegateParts = this.delegate.collectParts(level, pos, state, random);
+    public void collectParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockStateModelPart> parts) {
+        List<BlockState> delegateParts = this.delegate.collectParts(level, pos, state, random);
         int regularIndex = 2;
         int baseIndex = 1;
         int overlayIndex = 0;
-        for (BlockModelPart part : delegateParts) {
+        for (BlockStateModelPart part : delegateParts) {
             if (part instanceof SimpleModelWrapper simpleModelWrapper) {
                 QuadCollection.Builder baseBuilder = new QuadCollection.Builder();
                 QuadCollection.Builder overlayBuilder = new QuadCollection.Builder();
@@ -60,10 +60,10 @@ public class OverlaidLeavesModel extends DelegateBlockStateModel {
                 QuadCollection baseQuads = baseBuilder.build();
                 QuadCollection overlayQuads = overlayBuilder.build();
                 if (!baseQuads.getAll().isEmpty()) {
-                    parts.add(new SimpleModelWrapper(baseBuilder.build(), simpleModelWrapper.useAmbientOcclusion(), simpleModelWrapper.particleIcon(), Minecraft.getInstance().options.cutoutLeaves().get() ? ChunkSectionLayer.CUTOUT : ChunkSectionLayer.SOLID));
+                    parts.add(new SimpleModelWrapper(baseBuilder.build(), simpleModelWrapper.useAmbientOcclusion(), simpleModelWrapper.particleMaterial(), Minecraft.getInstance().options.cutoutLeaves().get() ? ChunkSectionLayer.CUTOUT : ChunkSectionLayer.SOLID));
                 }
                 if (!overlayQuads.getAll().isEmpty()) {
-                    parts.add(new SimpleModelWrapper(overlayBuilder.build(), simpleModelWrapper.useAmbientOcclusion(), simpleModelWrapper.particleIcon(), ChunkSectionLayer.CUTOUT));
+                    parts.add(new SimpleModelWrapper(overlayBuilder.build(), simpleModelWrapper.useAmbientOcclusion(), simpleModelWrapper.particleMaterial(), ChunkSectionLayer.CUTOUT));
                 }
             }
         }

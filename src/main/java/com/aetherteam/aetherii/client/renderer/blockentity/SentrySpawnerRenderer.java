@@ -17,10 +17,10 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.sprite.SpriteGetter;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Unit;
 import net.minecraft.world.phys.Vec3;
@@ -38,20 +38,20 @@ public class SentrySpawnerRenderer implements BlockEntityRenderer<SentrySpawnerB
     public static final Identifier PISTON_SPAWNING = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/sentry_spawner/piston_spawning.png");
     public static final Identifier PISTON_SPAWNING_EMISSIVE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/sentry_spawner/piston_spawning_emissive.png");
 
-    private final MaterialSet materials;
+    private final SpriteGetter sprites;
 
     private final SentrySpawnerModel sentrySpawnerModel;
     private final SentrySpawnerPistonModel sentrySpawnerPistonModel;
 
     public SentrySpawnerRenderer(BlockEntityRendererProvider.Context context) {
-        this.materials = context.materials();
+        this.sprites = context.sprites();
 
         this.sentrySpawnerModel = new SentrySpawnerModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER));
         this.sentrySpawnerPistonModel = new SentrySpawnerPistonModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER_PISTON));
     }
 
-    public static Map<Integer, Material> getFrames() {
-        Map<Integer, Material> pieces = new HashMap<>();
+    public static Map<Integer, SpriteId> getFrames() {
+        Map<Integer, SpriteId> pieces = new HashMap<>();
         for (int i = 0; i <= SENTRY_SPAWNER_FRAMES - 1; i++) {
             pieces.put(i, AetherIIAtlases.SENTRY_SPAWNER_MAPPER.apply(Identifier.fromNamespaceAndPath(AetherII.MODID, "sentry_spawner_base_" + (i % SENTRY_SPAWNER_FRAMES))));
         }
@@ -68,7 +68,7 @@ public class SentrySpawnerRenderer implements BlockEntityRenderer<SentrySpawnerB
 
         int frame = sentrySpawnerRenderState.open;
 
-        Material baseMaterial = AetherIIAtlases.SENTRY_SPAWNER_MATERIALS.get(frame);
+        SpriteId baseSpriteId = AetherIIAtlases.SENTRY_SPAWNER_MATERIALS.get(frame);
         Identifier pistonLocation = PISTON_OFF;
         Identifier emissiveLocation = null;
 
@@ -83,11 +83,11 @@ public class SentrySpawnerRenderer implements BlockEntityRenderer<SentrySpawnerB
             }
         }
 
-        RenderType renderType = baseMaterial.renderType(RenderTypes::entityCutout);
+        RenderType renderType = baseSpriteId.renderType(RenderTypes::entityCutout);
         submitNodeCollector.submitModel(this.sentrySpawnerModel, Unit.INSTANCE, poseStack, renderType, sentrySpawnerRenderState.lightCoords,
                 OverlayTexture.NO_OVERLAY,
                 -1,
-                materials.get(baseMaterial),
+                sprites.get(baseSpriteId),
                 0,
                 sentrySpawnerRenderState.breakProgress);
 
@@ -96,7 +96,7 @@ public class SentrySpawnerRenderer implements BlockEntityRenderer<SentrySpawnerB
         this.sentrySpawnerPistonModel.root().resetPose();
         this.sentrySpawnerPistonModel.root().offsetPos(new Vector3f(0, -(frame), 0));
 
-        RenderType pistonRenderType = RenderTypes.entityCutoutNoCull(pistonLocation);
+        RenderType pistonRenderType = RenderTypes.entityCutout(pistonLocation);
         submitNodeCollector.submitModel(this.sentrySpawnerPistonModel, Unit.INSTANCE, poseStack, pistonRenderType, sentrySpawnerRenderState.lightCoords,
                 OverlayTexture.NO_OVERLAY,
                 0,
@@ -119,8 +119,8 @@ public class SentrySpawnerRenderer implements BlockEntityRenderer<SentrySpawnerB
     }
 
     @Override
-    public void extractRenderState(SentrySpawnerBlockEntity sentrySpawnerBlockEntity, SentrySpawnerRenderState sentrySpawnerRenderState, float partialTick, Vec3 p_445788_, ModelFeatureRenderer.@Nullable CrumblingOverlay p_446944_) {
-        BlockEntityRenderer.super.extractRenderState(sentrySpawnerBlockEntity, sentrySpawnerRenderState, partialTick, p_445788_, p_446944_);
+    public void extractRenderState(SentrySpawnerBlockEntity sentrySpawnerBlockEntity, SentrySpawnerRenderState sentrySpawnerRenderState, float partialTick, Vec3 vec3, ModelFeatureRenderer.@Nullable CrumblingOverlay p_446944_) {
+        BlockEntityRenderer.super.extractRenderState(sentrySpawnerBlockEntity, sentrySpawnerRenderState, partialTick, vec3, p_446944_);
         int frame = Math.max(0, (int) Math.ceil(sentrySpawnerBlockEntity.getPistonAnimationScale(partialTick) * 10));
         sentrySpawnerRenderState.open = frame;
         sentrySpawnerRenderState.sentrySpawnerState = sentrySpawnerBlockEntity.getBlockState().getValue(SentrySpawnerBlock.SENTRY_SPAWNER_STATE);

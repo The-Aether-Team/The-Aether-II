@@ -44,10 +44,10 @@
   "client": [
     "client.AdvancementMixin",
     "client.AvatarRendererMixin",
-    "client.BlockModelWrapperMixin",
     "client.BlockRenderDispatcherMixin",
     "client.BossHealthOverlayMixin",
     "client.ClientLevelMixin",
+    "client.CuboidItemModelWrapperMixin",
     "client.EquipmentLayerRendererMixin",
     "client.HumanoidMobRendererMixin",
     "client.HumanoidModelMixin",

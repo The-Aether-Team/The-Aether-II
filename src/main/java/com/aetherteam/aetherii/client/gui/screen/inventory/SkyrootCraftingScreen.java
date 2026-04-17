@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.client.gui.screen.inventory;
 
 import com.aetherteam.aetherii.client.gui.screen.inventory.recipebook.SkyrootCraftingTableRecipeBookComponent;
 import com.aetherteam.aetherii.inventory.menu.SkyrootCraftingMenu;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.navigation.ScreenPosition;
 import net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -26,7 +26,7 @@ public class SkyrootCraftingScreen extends AbstractRecipeBookScreen<SkyrootCraft
         return new ScreenPosition(this.leftPos + 5, this.height / 2 - 49);
     }
 
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphicsExtractor guiGraphics, float partialTick, int mouseX, int mouseY) {
         int i = this.leftPos;
         int j = (this.height - this.imageHeight) / 2;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, CRAFTING_TABLE_LOCATION, i, j, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);

@@ -10,13 +10,13 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 
 public class ZephyrWebbingBallRenderer extends EntityRenderer<ZephyrWebbingBall, EntityRenderState> {
     private static final Identifier ZEPHYR_PROJECTILE_TEXTURE = Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/zephyr_webbing_ball.png");
-    private static final RenderType RENDER_TYPE;
+    private static final RenderType RENDER_TYPE = RenderTypes.entityCutout(ZEPHYR_PROJECTILE_TEXTURE);
 
     public ZephyrWebbingBallRenderer(EntityRendererProvider.Context context) {
         super(context);
@@ -48,9 +48,5 @@ public class ZephyrWebbingBallRenderer extends EntityRenderer<ZephyrWebbingBall,
                 .setOverlay(OverlayTexture.NO_OVERLAY)
                 .setLight(packedLight)
                 .setNormal(pose, 0.0F, 1.0F, 0.0F);
-    }
-
-    static {
-        RENDER_TYPE = RenderTypes.entityCutoutNoCull(ZEPHYR_PROJECTILE_TEXTURE);
     }
 }

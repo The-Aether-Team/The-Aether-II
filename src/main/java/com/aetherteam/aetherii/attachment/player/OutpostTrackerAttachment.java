@@ -77,7 +77,7 @@ public class OutpostTrackerAttachment {
                         }
                     }
                 }
-                player.displayClientMessage(Component.translatable("aether_ii.message.campfire_respawn_failed"), false);
+                player.sendOverlayMessage(Component.translatable("aether_ii.message.campfire_respawn_failed"));
             }
         }
         return null;

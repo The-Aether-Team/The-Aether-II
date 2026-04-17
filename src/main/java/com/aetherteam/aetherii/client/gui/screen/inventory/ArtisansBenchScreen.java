@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.client.gui.screen.inventory;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.inventory.menu.ArtisansBenchMenu;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -37,13 +37,13 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         this.renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphicsExtractor guiGraphics, float partialTick, int mouseX, int mouseY) {
         int i = this.leftPos;
         int j = this.topPos;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, BG_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
@@ -58,7 +58,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
     }
 
     @Override
-    protected void renderTooltip(GuiGraphics guiGraphics, int x, int y) {
+    protected void renderTooltip(GuiGraphicsExtractor guiGraphics, int x, int y) {
         super.renderTooltip(guiGraphics, x, y);
         if (this.displayRecipes) {
             int i = this.leftPos + 52;
@@ -80,7 +80,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
         }
     }
 
-    private void renderButtons(GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, int lastVisibleElementIndex) {
+    private void renderButtons(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, int x, int y, int lastVisibleElementIndex) {
         for(int i = this.startIndex; i < lastVisibleElementIndex && i < this.menu.getNumberOfVisibleRecipes(); ++i) {
             int j = i - this.startIndex;
             int k = x + j % 4 * 16;
@@ -99,7 +99,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
         }
     }
 
-    private void renderRecipes(GuiGraphics guiGraphics, int x, int y, int startIndex) {
+    private void renderRecipes(GuiGraphicsExtractor guiGraphics, int x, int y, int startIndex) {
         SelectableRecipe.SingleInputSet<StonecutterRecipe> singleInputSet = this.menu.getVisibleRecipes();
         ContextMap contextMap = SlotDisplayContext.fromLevel(this.minecraft.level);
 
@@ -109,7 +109,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
             int l = j / 4;
             int i1 = y + l * 18 + 2;
             SlotDisplay slotDisplay = singleInputSet.entries().get(i).recipe().optionDisplay();
-            guiGraphics.renderItem(slotDisplay.resolveForFirstStack(contextMap), k, i1);
+            guiGraphics.item(slotDisplay.resolveForFirstStack(contextMap), k, i1);
         }
     }
 

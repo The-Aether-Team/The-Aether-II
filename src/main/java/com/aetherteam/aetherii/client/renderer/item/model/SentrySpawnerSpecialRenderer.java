@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.sprite.SpriteGetter;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3fc;
@@ -22,20 +22,20 @@ import java.util.function.Consumer;
 public class SentrySpawnerSpecialRenderer implements NoDataSpecialModelRenderer {
     private final SentrySpawnerModel model;
     private final SentrySpawnerPistonModel pistonModel;
-    private final MaterialSet materialSet;
+    private final SpriteGetter sprites;
 
-    public SentrySpawnerSpecialRenderer(MaterialSet materials, SentrySpawnerModel model, SentrySpawnerPistonModel pistonModel) {
-        this.materialSet = materials;
+    public SentrySpawnerSpecialRenderer(SpriteGetter sprites, SentrySpawnerModel model, SentrySpawnerPistonModel pistonModel) {
+        this.sprites = sprites;
         this.model = model;
         this.pistonModel = pistonModel;
     }
 
     @Override
-    public void submit(ItemDisplayContext itemDisplayContext, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int i1, boolean b, int i2) {
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int i1, boolean b, int i2) {
         poseStack.pushPose();
         poseStack.translate(0.5F, 1.5F, 0.5F);
         poseStack.mulPose(Axis.XP.rotationDegrees(180));
-        submitNodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, AetherIIAtlases.SENTRY_SPAWNER_MATERIALS.get(0).renderType(RenderTypes::entitySolid), i, i1, -1, this.materialSet.get(AetherIIAtlases.SENTRY_SPAWNER_MATERIALS.get(0)), i2, null);
+        submitNodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, AetherIIAtlases.SENTRY_SPAWNER_MATERIALS.get(0).renderType(RenderTypes::entitySolid), i, i1, -1, this.sprites.get(AetherIIAtlases.SENTRY_SPAWNER_MATERIALS.get(0)), i2, null);
 
         poseStack.popPose();
 
@@ -72,7 +72,7 @@ public class SentrySpawnerSpecialRenderer implements NoDataSpecialModelRenderer 
             SentrySpawnerModel model = new SentrySpawnerModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER));
             SentrySpawnerPistonModel pistonModel = new SentrySpawnerPistonModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER_PISTON));
 
-            return new SentrySpawnerSpecialRenderer(context.materials(), model, pistonModel);
+            return new SentrySpawnerSpecialRenderer(context.sprites(), model, pistonModel);
         }
     }
 }

@@ -99,9 +99,9 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock implements Simple
             if (this.canGrowInto(level.getBlockState(blockpos))) {
                 FluidState fluidstate = level.getFluidState(blockpos);
                 if (state.getValue(AGE) == 1) {
-                    level.setBlockAndUpdate(blockpos, this.getGrowIntoState(state.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER).setValue(GROWN, true), level.random));
+                    level.setBlockAndUpdate(blockpos, this.getGrowIntoState(state.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER).setValue(GROWN, true), level.getRandom()));
                 } else {
-                    level.setBlockAndUpdate(blockpos, this.getGrowIntoState(state.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER), level.random));
+                    level.setBlockAndUpdate(blockpos, this.getGrowIntoState(state.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER), level.getRandom()));
                 }
                 CommonHooks.fireCropGrowPost(level, blockpos, level.getBlockState(blockpos));
             }

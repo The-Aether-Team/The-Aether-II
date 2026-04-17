@@ -79,12 +79,12 @@ public class BedrollBlock extends HorizontalDirectionalBlock {
                 return InteractionResult.SUCCESS_SERVER;
             } else if (state.getValue(OCCUPIED)) {
                 if (!this.kickVillagerOutOfBed(level, pos)) {
-                    player.displayClientMessage(Component.translatable("block.minecraft.bed.occupied"), true);
+                    player.sendOverlayMessage(Component.translatable("block.minecraft.bed.occupied"));
                 }
             } else {
                 player.startSleepInBed(pos).ifLeft((problem) -> {
                     if (problem.message() != null) {
-                        player.displayClientMessage(problem.message(), true);
+                        player.sendOverlayMessage(problem.message());
                     }
                 }).ifRight((unit) -> {
                     if (player instanceof ServerPlayer serverPlayer) {

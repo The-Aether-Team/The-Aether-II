@@ -14,7 +14,7 @@ import com.aetherteam.aetherii.network.packet.serverbound.ClearItemPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.CurrencyAmountPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.HeldCurrencyPacket;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
@@ -89,7 +89,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void render(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
 
         if (this.getMinecraft().player != null) {
@@ -134,7 +134,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     @Override
-    protected void renderSlot(GuiGraphics guiGraphics, Slot slot, int p_470717_, int p_470566_) {
+    protected void renderSlot(GuiGraphicsExtractor guiGraphics, Slot slot, int p_470717_, int p_470566_) {
         if (slot == this.currencySlot) {
             if (Minecraft.getInstance().player != null) {
                 var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
@@ -143,8 +143,8 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                 int y = slot.y;
                 guiGraphics.pose().pushMatrix();
                 guiGraphics.pose().translate(0.0F, 0.0F);
-                guiGraphics.renderFakeItem(AetherIIItems.GLINT_COIN.toStack(), x, y);
-                guiGraphics.renderItemDecorations(this.font, AetherIIItems.GLINT_COIN.toStack(), x, y, text);
+                guiGraphics.fakeItem(AetherIIItems.GLINT_COIN.toStack(), x, y);
+                guiGraphics.itemDecorations(this.font, AetherIIItems.GLINT_COIN.toStack(), x, y, text);
                 guiGraphics.pose().popMatrix();
             }
         }
@@ -152,7 +152,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphicsExtractor guiGraphics, float partialTick, int mouseX, int mouseY) {
         this.renderGuidebookSpread(this, guiGraphics, mouseX, mouseY, partialTick);
         int leftPos = this.leftPos;
         int topPos = this.topPos;
@@ -186,43 +186,43 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     @Override
-    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+    protected void renderLabels(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY) {
         int xOffset = Minecraft.getInstance().player != null && Minecraft.getInstance().player.isCreative() ? 19 : 0;
-        guiGraphics.drawString(this.font, this.craftingTitle, this.craftingTitleLabelX + xOffset, this.craftingTitleLabelY, 4210752, false);
-        guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 4210752, false);
+        guiGraphics.text(this.font, this.craftingTitle, this.craftingTitleLabelX + xOffset, this.craftingTitleLabelY, 4210752, false);
+        guiGraphics.text(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 4210752, false);
     }
 
     @Override
-    public void renderGuidebookLeftPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderGuidebookLeftPage(Screen screen, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
         this.renderStats(guiGraphics);
-        guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xffffffff);
+        guiGraphics.centeredText(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xffffffff);
     }
 
-    private void renderStats(GuiGraphics guiGraphics) {
+    private void renderStats(GuiGraphicsExtractor guiGraphics) {
         if (this.getMenu().getMoa() != null) {
             int x = 49;
             int y = 94;
 
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
-            guiGraphics.drawString(this.font, Component.literal(Mth.ceil(this.getMenu().getMoa().getHealth()) + "/" + Mth.ceil(this.getMenu().getMoa().getMaxHealth())), x + 18, y + 4, 0xffffffff, true);
+            guiGraphics.text(this.font, Component.literal(Mth.ceil(this.getMenu().getMoa().getHealth()) + "/" + Mth.ceil(this.getMenu().getMoa().getMaxHealth())), x + 18, y + 4, 0xffffffff, true);
 
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
-            guiGraphics.drawString(this.font, Component.literal(this.getMenu().getMoa().getArmorValue() + "/20"), x + 72, y + 4, 0xffffffff, true);
+            guiGraphics.text(this.font, Component.literal(this.getMenu().getMoa().getArmorValue() + "/20"), x + 72, y + 4, 0xffffffff, true);
         } else {
             Player player = Minecraft.getInstance().player;
             int x = 49;
             int y = 112;
 
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
-            guiGraphics.drawString(this.font, Component.literal(Mth.ceil(player.getHealth()) + "/" + Mth.ceil(player.getMaxHealth())), x + 18, y + 4, 0xffffffff, true);
+            guiGraphics.text(this.font, Component.literal(Mth.ceil(player.getHealth()) + "/" + Mth.ceil(player.getMaxHealth())), x + 18, y + 4, 0xffffffff, true);
 
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
-            guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 72, y + 4, 0xffffffff, true);
+            guiGraphics.text(this.font, Component.literal(player.getArmorValue() + "/20"), x + 72, y + 4, 0xffffffff, true);
         }
     }
 
-    private void renderEntityInInventoryFollowingMouseRotated(GuiGraphics guiGraphics, Vector2i pos, Vector2i size, Vector2i scissorStart, Vector2i scissorEnd, float mouseX, float mouseY, float rotation) {
+    private void renderEntityInInventoryFollowingMouseRotated(GuiGraphicsExtractor guiGraphics, Vector2i pos, Vector2i size, Vector2i scissorStart, Vector2i scissorEnd, float mouseX, float mouseY, float rotation) {
         int scale = 30;
         float yOffset = 0.0625F;
         LivingEntity entity = this.minecraft.player;
@@ -259,7 +259,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
 
     //remade to fix opacity make invisible moa
     public static void renderMoaInInventory(
-            GuiGraphics guiGraphics,
+            GuiGraphicsExtractor guiGraphics,
             int x1,
             int y1,
             int x2,

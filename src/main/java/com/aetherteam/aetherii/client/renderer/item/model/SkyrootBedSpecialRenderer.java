@@ -29,7 +29,7 @@ public class SkyrootBedSpecialRenderer implements NoDataSpecialModelRenderer {
     }
 
     @Override
-    public void submit(ItemDisplayContext itemDisplayContext, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int i1, boolean b, int i2) {
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int i1, boolean b, int i2) {
         this.skyrootBedRenderer.renderInHand(poseStack, submitNodeCollector, i, i1, this.location);
     }
 

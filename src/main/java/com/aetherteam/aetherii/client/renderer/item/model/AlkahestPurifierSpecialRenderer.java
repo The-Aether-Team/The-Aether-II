@@ -13,8 +13,7 @@ import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
-import net.minecraft.client.resources.model.MaterialSet;
-import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.client.resources.model.sprite.SpriteGetter;
 import org.joml.Vector3fc;
 
 import java.util.function.Consumer;
@@ -22,22 +21,22 @@ import java.util.function.Consumer;
 public class AlkahestPurifierSpecialRenderer implements NoDataSpecialModelRenderer {
     private final AlkahestPurifierModel model;
     private final float openness;
-    private final MaterialSet materialSet;
+    private final SpriteGetter sprites;
 
-    public AlkahestPurifierSpecialRenderer(MaterialSet context, AlkahestPurifierModel model, float openness) {
-        this.materialSet = context;
+    public AlkahestPurifierSpecialRenderer(SpriteGetter context, AlkahestPurifierModel model, float openness) {
+        this.sprites = context;
         this.model = model;
         this.openness = openness;
     }
 
     @Override
-    public void submit(ItemDisplayContext itemDisplayContext, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int i1, boolean b, int i2) {
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int i1, boolean b, int i2) {
         RenderType renderType = AlkahestPurifierRenderer.ALKAHEST_PURIFIER_0.renderType(RenderTypes::entitySolid);
         poseStack.pushPose();
         poseStack.translate(0.5F, 1.5F, 0.5F);
         poseStack.mulPose(Axis.XP.rotationDegrees(180));
         this.model.setupAnim(this.openness);
-        submitNodeCollector.submitModel(this.model, this.openness, poseStack, renderType, i, i1, -1, this.materialSet.get(AlkahestPurifierRenderer.ALKAHEST_PURIFIER_0), i2, null);
+        submitNodeCollector.submitModel(this.model, this.openness, poseStack, renderType, i, i1, -1, this.sprites.get(AlkahestPurifierRenderer.ALKAHEST_PURIFIER_0), i2, null);
         poseStack.popPose();
     }
 
@@ -71,7 +70,7 @@ public class AlkahestPurifierSpecialRenderer implements NoDataSpecialModelRender
         @Override
         public SpecialModelRenderer<?> bake(BakingContext context) {
             AlkahestPurifierModel model = new AlkahestPurifierModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.ALKAHEST_PURIFIER));
-            return new AlkahestPurifierSpecialRenderer(context.materials(), model, this.openness);
+            return new AlkahestPurifierSpecialRenderer(context.sprites(), model, this.openness);
         }
     }
 }

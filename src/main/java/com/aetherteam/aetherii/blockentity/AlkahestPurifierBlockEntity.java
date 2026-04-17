@@ -112,11 +112,11 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
         super(type, pos, state);
         this.openersCounter = new ContainerOpenersCounter() {
             protected void onOpen(Level level, BlockPos pos, BlockState state) {
-                level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), AetherIISoundEvents.BLOCK_ALKAHEST_PURIFIER_OPEN, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
+                level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), AetherIISoundEvents.BLOCK_ALKAHEST_PURIFIER_OPEN, SoundSource.BLOCKS, 0.5F, level.getRandom().nextFloat() * 0.1F + 0.9F);
             }
 
             protected void onClose(Level level, BlockPos pos, BlockState state) {
-                level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), AetherIISoundEvents.BLOCK_ALKAHEST_PURIFIER_CLOSE, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
+                level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), AetherIISoundEvents.BLOCK_ALKAHEST_PURIFIER_CLOSE, SoundSource.BLOCKS, 0.5F, level.getRandom().nextFloat() * 0.1F + 0.9F);
             }
 
             protected void openerCountChanged(Level level, BlockPos pos, BlockState state, int p_155364_, int p_155365_) {

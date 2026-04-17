@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.gui.screen.inventory.ArkeniumForgeScreen;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.ReinforcementTier;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -27,7 +27,7 @@ public class ReinforcementTierButton extends ImageButton {
     }
 
     @Override
-    public void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.renderContents(guiGraphics, mouseX, mouseY, partialTick);
         Identifier tierSprite = ArkeniumForgeScreen.TIER_LOCATIONS.get(this.getTier().getTierNumber() - 1);
 

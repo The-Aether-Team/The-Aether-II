@@ -3,8 +3,8 @@ package com.aetherteam.aetherii.client;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.blockentity.MuralBlockEntity;
 import com.aetherteam.aetherii.blockentity.MuralSection;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.BlockModelPart;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.world.item.crafting.RecipeMap;
@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class AetherIIClientCaches {
-    public static final Map<MuralBlockEntity.MuralData, List<BlockModelPart>> CACHED_MURAL_BLOCK_PARTS = new ConcurrentHashMap<>();
+    public static final Map<MuralBlockEntity.MuralData, List<BlockStateModelPart>> CACHED_MURAL_BLOCK_PARTS = new ConcurrentHashMap<>();
     public static final Map<MuralSection, List<BakedQuad>> CACHED_MURAL_ITEM_PARTS = new ConcurrentHashMap<>();
     public static RecipeMap CLIENT_CACHES = RecipeMap.EMPTY;
 

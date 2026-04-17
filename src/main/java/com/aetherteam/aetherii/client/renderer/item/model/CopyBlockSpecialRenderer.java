@@ -41,7 +41,7 @@ public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState
     }
 
     @Override
-    public void submit(@Nullable BlockState blockState, ItemDisplayContext itemDisplayContext, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, int packedOverlay, boolean b, int i2) {
+    public void submit(@Nullable BlockState blockState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, int packedOverlay, boolean b, int i2) {
 //        BlockAndTintGetter world = Minecraft.getInstance().level; //TODO
 //        if (blockState != null && world != null) {
 //            poseStack.pushPose();

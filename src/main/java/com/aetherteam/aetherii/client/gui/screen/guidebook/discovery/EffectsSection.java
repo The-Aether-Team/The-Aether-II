@@ -80,17 +80,17 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
     }
 
     @Override
-    public void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderBg(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
 
     }
 
     @Override
-    public void renderFoward(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderFoward(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
 
     }
 
     @Override
-    public void renderEntries(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderEntries(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.renderEntries(guiGraphics, mouseX, mouseY, partialTick);
         EffectsEntry.Mutable hoveredEntry = this.getEntryFromSlot(mouseX, mouseY);
         int leftPos = 43;
@@ -129,7 +129,7 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
         this.renderSlotTooltips(guiGraphics, mouseX, mouseY);
     }
 
-    private void renderSlotTooltips(GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    private void renderSlotTooltips(GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
         EffectsEntry.Mutable entry = this.getEntryFromSlot(mouseX, mouseY);
         if (entry != null) {
             int leftPagePos = ((this.screen.width + 2) / 2) - Guidebook.PAGE_WIDTH;
@@ -147,12 +147,12 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
     }
 
     @Override
-    public void renderInformation(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderInformation(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         EffectsEntry.Mutable entry = this.getSelectedEntry();
         if (entry != null) {
             Font font = Minecraft.getInstance().font;
             if (this.isUnlocked(entry, EffectsEntry.NAME.id())) {
-                guiGraphics.drawCenteredString(font, Component.translatable(entry.getName()), 88, 13, 0xffffffff);
+                guiGraphics.centeredText(font, Component.translatable(entry.getName()), 88, 13, 0xffffffff);
             }
 
             if (this.isUnlocked(this.getSelectedEntry(), EffectsEntry.EFFECT.id())) {
@@ -180,7 +180,7 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
         }
     }
 
-    private void drawDescriptionString(GuiGraphics guiGraphics, Font font, Component component) {
+    private void drawDescriptionString(GuiGraphicsExtractor guiGraphics, Font font, Component component) {
         int x = 21;
         int y = 71;
         int lineHeight = 9;

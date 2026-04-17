@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
@@ -61,6 +61,6 @@ public class TempestThunderballRenderer extends EntityRenderer<TempestThunderbal
     }
 
     static {
-        RENDER_TYPE = RenderTypes.entityCutoutNoCull(TEMPEST_PROJECTILE_TEXTURE);
+        RENDER_TYPE = RenderTypes.entityCutout(TEMPEST_PROJECTILE_TEXTURE);
     }
 }

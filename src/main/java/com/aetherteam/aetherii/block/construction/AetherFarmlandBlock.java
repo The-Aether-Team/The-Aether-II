@@ -13,18 +13,20 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FarmlandBlock;
+import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.FarmlandWaterManager;
 
-public class AetherFarmBlock extends FarmBlock {
-    public AetherFarmBlock(Properties properties) {
+public class AetherFarmlandBlock extends FarmlandBlock {
+    public AetherFarmlandBlock(Properties properties) {
         super(properties);
     }
 
     /**
-     * [CODE COPY] - {@link FarmBlock#getStateForPlacement(BlockPlaceContext)}.
+     * [CODE COPY] - {@link FarmlandBlock#getStateForPlacement(BlockPlaceContext)}.
      */
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
@@ -32,7 +34,7 @@ public class AetherFarmBlock extends FarmBlock {
     }
 
     /**
-     * [CODE COPY] - {@link FarmBlock#tick(BlockState, ServerLevel, BlockPos, RandomSource)}.
+     * [CODE COPY] - {@link FarmlandBlock#tick(BlockState, ServerLevel, BlockPos, RandomSource)}.
      */
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
@@ -42,7 +44,7 @@ public class AetherFarmBlock extends FarmBlock {
     }
 
     /**
-     * [CODE COPY] - {@link FarmBlock#randomTick(BlockState, ServerLevel, BlockPos, RandomSource)}.
+     * [CODE COPY] - {@link FarmlandBlock#randomTick(BlockState, ServerLevel, BlockPos, RandomSource)}.
      */
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
@@ -59,7 +61,7 @@ public class AetherFarmBlock extends FarmBlock {
     }
 
     /**
-     * [CODE COPY] - {@link FarmBlock#fallOn(Level, BlockState, BlockPos, Entity, double)}.
+     * [CODE COPY] - {@link FarmlandBlock#fallOn(Level, BlockState, BlockPos, Entity, double)}.
      */
     @Override
     public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
@@ -70,7 +72,7 @@ public class AetherFarmBlock extends FarmBlock {
     }
 
     /**
-     * [CODE COPY] - {@link FarmBlock#turnToDirt(Entity, BlockState, Level, BlockPos)}.
+     * [CODE COPY] - {@link FarmlandBlock#turnToDirt(Entity, BlockState, Level, BlockPos)}.
      */
     public static void turnToDirt(BlockState state, Level level, BlockPos pos) {
         level.setBlockAndUpdate(pos, pushEntitiesUp(state, AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(), level, pos));
@@ -104,6 +106,6 @@ public class AetherFarmBlock extends FarmBlock {
      */
     @Override
     public boolean isFertile(BlockState state, BlockGetter level, BlockPos pos) {
-        return state.getValue(FarmBlock.MOISTURE) > 0;
+        return state.getValue(FarmlandBlock.MOISTURE) > 0;
     }
 }

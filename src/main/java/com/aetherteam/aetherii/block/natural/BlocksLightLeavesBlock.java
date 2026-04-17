@@ -16,7 +16,7 @@ public class BlocksLightLeavesBlock extends AetherLeavesBlock {
     }
 
     @Override
-    public int getLightBlock(BlockState state) {
+    public int getLightDampening(BlockState state) {
         return 15;
     }
 }

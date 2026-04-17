@@ -66,7 +66,7 @@ public class FragileIceBlock extends IceBlock {
 
     @Override
     protected void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
-        if (projectile.getType().is(EntityTypeTags.IMPACT_PROJECTILES)) {
+        if (projectile.is(EntityTypeTags.IMPACT_PROJECTILES)) {
             BlockPos pos = hit.getBlockPos();
             level.levelEvent(2001, pos, Block.getId(state));
             level.scheduleTick(pos, this, 2);

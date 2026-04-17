@@ -4,8 +4,8 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.IrradiatedLeavesBlock;
 import com.aetherteam.aetherii.client.event.hooks.BiomeHooks;
+import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.ColorResolver;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
