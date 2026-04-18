@@ -1529,31 +1529,6 @@ public class HolyIslesConfiguredFeatures {
                         ))));
         register(context, GRASS_BLOCKS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState())));
         register(context, ENCHANTED_GRASS_BLOCKS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get().defaultBlockState())));
-//todo
-        register(context,
-                GRASS_BLOCKS,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        20,
-                        4,
-                        4,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                                BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState())
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(AetherIITags.Blocks.GRASS_AND_DIRT_REPLACEABLE), BlockPredicate.matchesBlocks(Vec3i.ZERO.above(), Blocks.AIR)))
-                )
-        );
-        register(context,
-                ENCHANTED_GRASS_BLOCKS,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        20,
-                        4,
-                        4,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                                BlockStateProvider.simple(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get().defaultBlockState())
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(AetherIITags.Blocks.GRASS_AND_DIRT_REPLACEABLE), BlockPredicate.matchesBlocks(Vec3i.ZERO.above(), Blocks.AIR)))
-                )
-        );
         register(
                 context,
                 GRASS_AND_DIRT_FLOOR,
@@ -1562,7 +1537,12 @@ public class HolyIslesConfiguredFeatures {
                         AetherIITags.Blocks.GRASS_AND_DIRT_REPLACEABLE,
                         BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
-                                List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GRASS_BLOCKS)), 0.25F)),
+                                List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GRASS_BLOCKS),
+                                        (PlacementModifier) Util.copyAndAdd(
+                                                VegetationPlacements.worldSurfaceSquaredWithCount(20),
+                                                RandomOffsetPlacement.ofTriangle(4, 4),
+                                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+                                ), 0.25F)),
                                 PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_GRASS_PATCH)))),
                         CaveSurface.FLOOR,
                         ConstantInt.of(1),
@@ -1581,7 +1561,12 @@ public class HolyIslesConfiguredFeatures {
                         AetherIITags.Blocks.GRASS_AND_DIRT_REPLACEABLE,
                         BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
-                                List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ENCHANTED_GRASS_BLOCKS)), 0.25F)),
+                                List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ENCHANTED_GRASS_BLOCKS),
+                                        (PlacementModifier) Util.copyAndAdd(
+                                                VegetationPlacements.worldSurfaceSquaredWithCount(20),
+                                                RandomOffsetPlacement.ofTriangle(4, 4),
+                                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+                                ), 0.25F)),
                                 PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(IRRADIATED_GRASS_PATCH)))),
                         CaveSurface.FLOOR,
                         ConstantInt.of(1),
@@ -1715,6 +1700,8 @@ public class HolyIslesConfiguredFeatures {
                         0.75F
                 )
         );
+        register(context, BRYALINN_MOSS_CARPET, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_CARPET.get().defaultBlockState())));
+        register(context, BRYALINN_MOSS_FLOWERS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(bryalinnFlowers)));
         register(context,
                 BRYALINN_MOSS_CARPET,
                 Feature.RANDOM_PATCH,

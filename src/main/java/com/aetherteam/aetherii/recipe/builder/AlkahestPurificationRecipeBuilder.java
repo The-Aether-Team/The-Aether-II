@@ -12,6 +12,7 @@ import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -65,11 +66,6 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public Item getResult() {
-        return Items.AIR;
-    } //todo?
-
-    @Override
     public void save(RecipeOutput output, ResourceKey<Recipe<?>> id) {
         this.ensureValid(id);
         Advancement.Builder builder = output.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(AdvancementRequirements.Strategy.OR);
@@ -90,5 +86,10 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
         if (this.criteria.isEmpty()) {
             throw new IllegalStateException("No way of obtaining recipe " + id);
         }
+    }
+
+    @Override
+    public ResourceKey<Recipe<?>> defaultId() { //TODO: not sure if this is correctly coded
+        return RecipeBuilder.getDefaultRecipeId(this.results.process(RandomSource.create()));
     }
 }

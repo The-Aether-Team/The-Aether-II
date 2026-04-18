@@ -34,6 +34,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ChargedProjectiles;
+import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
@@ -44,6 +45,7 @@ import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -280,10 +282,10 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
 
     protected void loadDartShooter(Holder<Item> dartShooter, Holder<Item> darts, EffectBuildupPresets.Preset preset) {
         String effect = BuiltInRegistries.MOB_EFFECT.getKey(preset.type().value()).toString().replace(':', '_');
-        ItemStack effectDarts = new ItemStackTemplate(darts, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(preset)).build());
+        ItemStack effectDarts = new ItemStack(darts, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(preset)).build());
 
         DataComponentPatch dartShooterData = DataComponentPatch.builder()
-                .set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.of(effectDarts))
+                .set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.of(Objects.requireNonNull(effectDarts.getCraftingRemainder())))
                 .set(AetherIIDataComponents.DARTS_LOADED.get(), AmberDartsItem.FULL_AMOUNT)
                 .set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(preset))
                 .build();
@@ -307,7 +309,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     }
 
     protected final void foodCooking(Supplier<? extends ItemLike> material, Supplier<? extends ItemLike> result, float xp, RecipeOutput consumer) {
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 200).unlockedBy("has_item", has(material.get())).save(consumer, this.name("smelting_" + getHasName(result.get())));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(material.get()), RecipeCategory.FOOD, CookingBookCategory.FOOD, result.get(), xp, 200).unlockedBy("has_item", has(material.get())).save(consumer, this.name("smelting_" + getHasName(result.get())));
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 100).unlockedBy("has_item", has(material.get())).save(consumer, this.name("smoking_" + getHasName(result.get())));
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 600).unlockedBy("has_item", has(material.get())).save(consumer, this.name("campfire_cooking_" + getHasName(result.get())));
     }
@@ -323,7 +325,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     protected HourglassRestoringRecipeBuilder hourglassRestoring(RecipeCategory category, ItemLike resultItem, List<HourglassDataEntry> resultInfo, ItemLike ingredient, float experience) {
         WeightedList.Builder<OutputEntry.BaseEntry> builder = WeightedList.builder();
         for (HourglassDataEntry entry : resultInfo) {
-            builder.add(new OutputEntry.ItemEntry(new ItemStack(resultItem, entry.count())), entry.weight());
+            builder.add(new OutputEntry.ItemEntry(new ItemStack(resultItem, entry.count()).getCraftingRemainder()), entry.weight());
         }
         return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.ItemEntry(ItemStack.EMPTY.getCraftingRemainder()), new OutputEntry.ListEntry(builder.build()), new OutputEntry.ItemEntry(ItemStack.EMPTY.getCraftingRemainder())), experience, 200, false).unlockedBy("has_item", has(ingredient));
     }
@@ -335,15 +337,15 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     protected HourglassRestoringRecipeBuilder hourglassUncraftingIngredient(RecipeCategory category, ItemLike resultItem1, List<HourglassDataEntry> resultInfo1, ItemLike resultItem2, List<HourglassDataEntry> resultInfo2, ItemLike resultItem3, List<HourglassDataEntry> resultInfo3, Ingredient ingredient, float experience, Criterion<?> has) {
         WeightedList.Builder<OutputEntry.BaseEntry> builder1 = WeightedList.builder();
         for (HourglassDataEntry entry : resultInfo1) {
-            builder1.add(new OutputEntry.ItemEntry(new ItemStack(resultItem1, entry.count())), entry.weight());
+            builder1.add(new OutputEntry.ItemEntry(new ItemStack(resultItem1, entry.count()).getCraftingRemainder()), entry.weight());
         }
         WeightedList.Builder<OutputEntry.BaseEntry> builder2 = WeightedList.builder();
         for (HourglassDataEntry entry : resultInfo2) {
-            builder2.add(new OutputEntry.ItemEntry(new ItemStack(resultItem2, entry.count())), entry.weight());
+            builder2.add(new OutputEntry.ItemEntry(new ItemStack(resultItem2, entry.count()).getCraftingRemainder()), entry.weight());
         }
         WeightedList.Builder<OutputEntry.BaseEntry> builder3 = WeightedList.builder();
         for (HourglassDataEntry entry : resultInfo3) {
-            builder3.add(new OutputEntry.ItemEntry(new ItemStack(resultItem3, entry.count())), entry.weight());
+            builder3.add(new OutputEntry.ItemEntry(new ItemStack(resultItem3, entry.count()).getCraftingRemainder()), entry.weight());
         }
         return HourglassRestoringRecipeBuilder.restoring(ingredient, category, new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.ListEntry(builder1.build()), new OutputEntry.ListEntry(builder2.build()), new OutputEntry.ListEntry(builder3.build())), experience, 200, true).unlockedBy("has_item", has);
     }
