@@ -62,11 +62,6 @@ public class AltarEnchantingRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public Item getResult() {
-        return this.result.getItem();
-    }
-
-    @Override
     public void save(RecipeOutput recipeOutput, String id) {
         RecipeBuilder.super.save(recipeOutput, id);
     }
@@ -96,5 +91,10 @@ public class AltarEnchantingRecipeBuilder implements RecipeBuilder {
         if (this.criteria.isEmpty()) {
             throw new IllegalStateException("No way of obtaining recipe " + id);
         }
+    }
+
+    @Override
+    public ResourceKey<Recipe<?>> defaultId() {
+        return RecipeBuilder.getDefaultRecipeId(this.result);
     }
 }

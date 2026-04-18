@@ -20,7 +20,7 @@ public class AmbientOcclusionLightModel extends DelegateBlockStateModel {
 
     @Override
     public void collectParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockStateModelPart> parts) {
-        for (BlockStateModelPart part : this.delegate.collectParts(level, pos, state, random)) {
+        for (BlockStateModelPart part : this.delegate.collectParts(level, pos, state, random, parts)) {
             if (part instanceof SimpleModelWrapper simpleModelWrapper) {
                 parts.add(new AOModelPart(simpleModelWrapper.quads(), TriState.TRUE, simpleModelWrapper.particleMaterial(), simpleModelWrapper.getRenderType(state)));
             }
