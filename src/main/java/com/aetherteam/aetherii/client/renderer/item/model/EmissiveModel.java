@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.renderer.item.model;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.client.color.item.ItemTintSource;
 import net.minecraft.client.renderer.block.dispatch.BlockModelRotation;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayerGroup;
@@ -11,18 +12,20 @@ import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.ResolvableModel;
 import net.minecraft.client.resources.model.ResolvedModel;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.client.resources.model.geometry.QuadCollection;
 import net.minecraft.client.resources.model.sprite.TextureSlots;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.model.NeoForgeModelProperties;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Matrix4fc;
 
 import java.util.List;
 import java.util.function.Function;
 
 public class EmissiveModel extends CuboidItemModelWrapper {
-    public EmissiveModel(List<BakedQuad> quads, ModelRenderProperties properties, @Nullable Function<ItemStack, ChunkSectionLayer> chunkSectionLayer) {
-        super(List.of(), quads, properties, chunkSectionLayer);
+    public EmissiveModel(List<ItemTintSource> tints, QuadCollection quads, ModelRenderProperties properties, Matrix4fc transformation) {
+        super(List.of(), quads, properties, transformation);
     }
 
     public record Unbaked(Identifier model) implements ItemModel.Unbaked {
@@ -34,7 +37,7 @@ public class EmissiveModel extends CuboidItemModelWrapper {
             resolver.markDependency(this.model);
         }
 
-        public ItemModel bake(ItemModel.BakingContext context) {
+        public ItemModel bake(ItemModel.BakingContext context, Matrix4fc matrix4f) {
             ModelBaker modelbaker = context.blockModelBaker();
             ResolvedModel resolvedmodel = modelbaker.getModel(this.model);
             TextureSlots textureslots = resolvedmodel.getTopTextureSlots();

@@ -1204,9 +1204,14 @@ public class HolyIslesPlacedFeatures {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         register(context, LARGE_SHELF_ROTSHROOM, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.LARGE_SHELF_ROTSHROOM));
         register(context, LARGE_SHELF_ROTSHROOM_UNDERGROUND, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.LARGE_SHELF_ROTSHROOM_UNDERGROUND));
-        register(context, ROTSHROOM_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ROTSHROOM_PATCH));
+        register(context, ROTSHROOM_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ROTSHROOM_PATCH),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(32),
+                        RandomOffsetPlacement.ofTriangle(3, 4),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                )
+        );
         register(context, COARSE_AETHER_DIRT_DUNGEON, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COARSE_AETHER_DIRT_DUNGEON));
-        register(context, INFECTED_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.INFECTED_PATCH));
         register(context, UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.UNDERGROWTH_PATCH));
     }
 

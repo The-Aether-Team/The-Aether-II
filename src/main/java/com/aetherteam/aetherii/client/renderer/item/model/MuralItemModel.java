@@ -11,12 +11,14 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.color.item.ItemTintSource;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.dispatch.BlockModelRotation;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayerGroup;
 import net.minecraft.client.renderer.item.*;
-import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.ResolvableModel;
 import net.minecraft.client.resources.model.ResolvedModel;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.client.resources.model.geometry.QuadCollection;
 import net.minecraft.client.resources.model.sprite.TextureSlots;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ItemOwner;
@@ -24,14 +26,14 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.model.NeoForgeModelProperties;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Matrix4fc;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 public class MuralItemModel extends CuboidItemModelWrapper {
-    public MuralItemModel(List<ItemTintSource> tints, List<BakedQuad> quads, ModelRenderProperties properties, @Nullable Function<ItemStack, RenderType> renderType) {
-        super(tints, quads, properties, renderType);
+    public MuralItemModel(List<ItemTintSource> tints, QuadCollection quads, ModelRenderProperties properties, Matrix4fc transformation) {
+        super(tints, quads, properties, transformation);
     }
 
     @Override
@@ -67,15 +69,15 @@ public class MuralItemModel extends CuboidItemModelWrapper {
             resolver.markDependency(this.model);
         }
 
-        public ItemModel bake(ItemModel.BakingContext context) {
+        public ItemModel bake(ItemModel.BakingContext context, Matrix4fc matrix4f) {
             ModelBaker modelbaker = context.blockModelBaker();
             ResolvedModel resolvedmodel = modelbaker.getModel(this.model);
             TextureSlots textureslots = resolvedmodel.getTopTextureSlots();
             List<BakedQuad> list = resolvedmodel.bakeTopGeometry(textureslots, modelbaker, BlockModelRotation.IDENTITY).getAll();
             ModelRenderProperties modelrenderproperties = ModelRenderProperties.fromResolvedModel(modelbaker, resolvedmodel, textureslots);
-            RenderTypeGroup renderTypeGroup = resolvedmodel.getTopAdditionalProperties().getOptional(NeoForgeModelProperties.RENDER_TYPE);
-            RenderType renderType = renderTypeGroup == null ? null : renderTypeGroup.entityItem();
-            return new MuralItemModel(List.of(), list, modelrenderproperties, (stack) -> renderType);
+            ChunkSectionLayerGroup chunkSectionLayerGroup = resolvedmodel.getTopAdditionalProperties().getOptional(NeoForgeModelProperties.TRANSFORM);
+            ChunkSectionLayer chunkSectionLayer = chunkSectionLayerGroup == null ? null : chunkSectionLayerGroup.entityItem();
+            return new MuralItemModel(List.of(), list, modelrenderproperties, (stack) -> chunkSectionLayer);
         }
 
         public MapCodec<Unbaked> type() {
