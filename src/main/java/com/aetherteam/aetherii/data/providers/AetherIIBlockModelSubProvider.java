@@ -27,6 +27,7 @@ import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.block.dispatch.Variant;
 import net.minecraft.client.renderer.block.dispatch.VariantMutator;
 import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
@@ -52,7 +53,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 
     @Override
     public void createCrossBlock(Block block, PlantType type, TextureMapping mapping) {
-        MultiVariant crossBlock = plainVariant(type.getCross().extend().renderType(Identifier.withDefaultNamespace("cutout")).build().create(block, mapping, this.modelOutput));
+        MultiVariant crossBlock = plainVariant(type.getCross().create(block, mapping, this.modelOutput));
         this.blockStateOutput.accept(createSimpleBlock(block, crossBlock));
     }
 
@@ -60,7 +61,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public void createPlant(Block plant, Block pot, PlantType type) {
         this.createCrossBlock(plant, type);
         TextureMapping textureMapping = type.getPlantTextureMapping(plant);
-        MultiVariant crossPlant = plainVariant(type.getCrossPot().extend().renderType(Identifier.withDefaultNamespace("cutout")).build().create(pot, textureMapping, this.modelOutput));
+        MultiVariant crossPlant = plainVariant(type.getCrossPot().create(pot, textureMapping, this.modelOutput));
         this.blockStateOutput.accept(createSimpleBlock(pot, crossPlant));
     }
 
@@ -115,9 +116,9 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     @Override
     public void createOrientableTrapdoor(Block block) {
         TextureMapping mapping = TextureMapping.defaultTexture(block);
-        Identifier location = ModelTemplates.TRAPDOOR_TOP.extend().renderType("cutout").build().create(block, mapping, this.modelOutput);
-        Identifier locationBottom = ModelTemplates.TRAPDOOR_BOTTOM.extend().renderType("cutout").build().create(block, mapping, this.modelOutput);
-        Identifier locationOpen = ModelTemplates.TRAPDOOR_OPEN.extend().renderType("cutout").build().create(block, mapping, this.modelOutput);
+        Identifier location = ModelTemplates.TRAPDOOR_TOP.create(block, mapping, this.modelOutput);
+        Identifier locationBottom = ModelTemplates.TRAPDOOR_BOTTOM.create(block, mapping, this.modelOutput);
+        Identifier locationOpen = ModelTemplates.TRAPDOOR_OPEN.create(block, mapping, this.modelOutput);
         this.blockStateOutput.accept(createOrientableTrapdoor(block, plainVariant(location), plainVariant(locationBottom), plainVariant(locationOpen)));
         this.registerSimpleItemModel(block, locationBottom);
     }
@@ -125,12 +126,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public void createBarsWithDifferentEdge(Block block, Block edgeBlock, String suffix) {
         TextureMapping mapping = AetherIITextureMappings.barsWithDifferentEdge(block, edgeBlock, suffix);
         this.createBars(block,
-                ModelTemplates.BARS_POST_ENDS.extend().renderType("cutout").build().create(block, mapping, this.modelOutput),
-                ModelTemplates.BARS_POST.extend().renderType("cutout").build().create(block, mapping, this.modelOutput),
-                ModelTemplates.BARS_CAP.extend().renderType("cutout").build().create(block, mapping, this.modelOutput),
-                ModelTemplates.BARS_CAP_ALT.extend().renderType("cutout").build().create(block, mapping, this.modelOutput),
-                ModelTemplates.BARS_POST_SIDE.extend().renderType("cutout").build().create(block, mapping, this.modelOutput),
-                ModelTemplates.BARS_POST_SIDE_ALT.extend().renderType("cutout").build().create(block, mapping, this.modelOutput));
+                ModelTemplates.BARS_POST_ENDS.create(block, mapping, this.modelOutput),
+                ModelTemplates.BARS_POST.create(block, mapping, this.modelOutput),
+                ModelTemplates.BARS_CAP.create(block, mapping, this.modelOutput),
+                ModelTemplates.BARS_CAP_ALT.create(block, mapping, this.modelOutput),
+                ModelTemplates.BARS_POST_SIDE.create(block, mapping, this.modelOutput),
+                ModelTemplates.BARS_POST_SIDE_ALT.create(block, mapping, this.modelOutput));
         this.registerSimpleFlatItemModel(block);
     }
 
@@ -234,7 +235,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createLitBlock(Block block) {
-        Identifier location = TextureMapping.getBlockTexture(block);
+        Material location = TextureMapping.getBlockTexture(block);
         MultiVariant on = plainVariant(AetherIIModelTemplates.TEMPLATE_EMISSIVE_CUBE_ALL.create(block, AetherIITextureMappings.cubeEmissive(location), this.modelOutput));
         MultiVariant off = plainVariant(ModelTemplates.CUBE_ALL.createWithSuffix(block, "_off", TextureMapping.cube(location), this.modelOutput));
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(createBooleanModelDispatch(BlockStateProperties.LIT, on, off)));
@@ -242,7 +243,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createLitStairs(Block block, Block base) {
-        Identifier baseLocation = TextureMapping.getBlockTexture(base);
+        Material baseLocation = TextureMapping.getBlockTexture(base);
 
         Identifier straightLocation = AetherIIModelTemplates.TEMPLATE_EMISSIVE_STAIRS_STRAIGHT.create(block, AetherIITextureMappings.cubeEmissive(baseLocation), this.modelOutput);
         Identifier straightOffLocation = ModelTemplates.STAIRS_STRAIGHT.createWithSuffix(block, "_off", TextureMapping.cube(baseLocation), this.modelOutput);
@@ -305,7 +306,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createLitSlab(Block block, Block base) {
-        Identifier baseLocation = TextureMapping.getBlockTexture(base);
+        Material baseLocation = TextureMapping.getBlockTexture(base);
 
         Identifier bottomLocation = AetherIIModelTemplates.TEMPLATE_EMISSIVE_SLAB_BOTTOM.create(block, AetherIITextureMappings.cubeEmissive(baseLocation), this.modelOutput);
         Identifier bottomOffLocation = ModelTemplates.SLAB_BOTTOM.createWithSuffix(block, "_off", TextureMapping.cube(baseLocation), this.modelOutput);
@@ -328,9 +329,9 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createLitWall(Block block, Block base, Block blank) {
-        Identifier blockLocation = TextureMapping.getBlockTexture(block);
-        Identifier baseLocation = TextureMapping.getBlockTexture(base);
-        Identifier blankLocation = TextureMapping.getBlockTexture(blank);
+        Material blockLocation = TextureMapping.getBlockTexture(block);
+        Material baseLocation = TextureMapping.getBlockTexture(base);
+        Material blankLocation = TextureMapping.getBlockTexture(blank);
 
         MultiVariant post = BlockModelGenerators.plainVariant(AetherIIModelTemplates.EMISSIVE_COLUMN_WALL_POST.create(block, AetherIITextureMappings.cubeColumnEmissive(blockLocation, blankLocation), this.modelOutput));
         MultiVariant low = BlockModelGenerators.plainVariant(AetherIIModelTemplates.EMISSIVE_COLUMN_WALL_LOW_SIDE.create(block, AetherIITextureMappings.cubeColumnEmissive(baseLocation, blankLocation), this.modelOutput));
@@ -369,8 +370,8 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createLitCubeColumn(Block side, Block top) {
-        Identifier sideLocation = TextureMapping.getBlockTexture(side);
-        Identifier topLocation = TextureMapping.getBlockTexture(top);
+        Material sideLocation = TextureMapping.getBlockTexture(side);
+        Material topLocation = TextureMapping.getBlockTexture(top);
         TextureMapping mapping = AetherIITextureMappings.cubeColumnEmissive(sideLocation, TextureMapping.getBlockTexture(top));
         TextureMapping mappingOff = TextureMapping.column(sideLocation, topLocation);
         Identifier on = AetherIIModelTemplates.TEMPLATE_EMISSIVE_CUBE_COLUMN.create(side, mapping, this.modelOutput);
@@ -380,8 +381,8 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createLitFacingColumnWithHorizontalVariant(Block side, Block top) {
-        Identifier sideLocation = TextureMapping.getBlockTexture(side);
-        Identifier topLocation = TextureMapping.getBlockTexture(top);
+        Material sideLocation = TextureMapping.getBlockTexture(side);
+        Material topLocation = TextureMapping.getBlockTexture(top);
 
         TextureMapping mapping = AetherIITextureMappings.cubeColumnEmissive(sideLocation, topLocation);
         TextureMapping mappingOff = TextureMapping.column(sideLocation, topLocation);
@@ -482,11 +483,11 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public void createGlassBlocks(Block glass, Block pane) {
         this.createTranslucentCube(glass);
         TextureMapping mapping = TextureMapping.pane(glass, pane);
-        MultiVariant post = plainVariant(ModelTemplates.STAINED_GLASS_PANE_POST.extend().renderType("translucent").build().create(pane, mapping, this.modelOutput));
-        MultiVariant side = plainVariant(ModelTemplates.STAINED_GLASS_PANE_SIDE.extend().renderType("translucent").build().create(pane, mapping, this.modelOutput));
-        MultiVariant sideAlt = plainVariant(ModelTemplates.STAINED_GLASS_PANE_SIDE_ALT.extend().renderType("translucent").build().create(pane, mapping, this.modelOutput));
-        MultiVariant noSide = plainVariant(ModelTemplates.STAINED_GLASS_PANE_NOSIDE.extend().renderType("translucent").build().create(pane, mapping, this.modelOutput));
-        MultiVariant noSideAlt = plainVariant(ModelTemplates.STAINED_GLASS_PANE_NOSIDE_ALT.extend().renderType("translucent").build().create(pane, mapping, this.modelOutput));
+        MultiVariant post = plainVariant(ModelTemplates.STAINED_GLASS_PANE_POST.create(pane, mapping, this.modelOutput));
+        MultiVariant side = plainVariant(ModelTemplates.STAINED_GLASS_PANE_SIDE.create(pane, mapping, this.modelOutput));
+        MultiVariant sideAlt = plainVariant(ModelTemplates.STAINED_GLASS_PANE_SIDE_ALT.create(pane, mapping, this.modelOutput));
+        MultiVariant noSide = plainVariant(ModelTemplates.STAINED_GLASS_PANE_NOSIDE.create(pane, mapping, this.modelOutput));
+        MultiVariant noSideAlt = plainVariant(ModelTemplates.STAINED_GLASS_PANE_NOSIDE_ALT.create(pane, mapping, this.modelOutput));
         Item item = pane.asItem();
         this.registerSimpleItemModel(item, this.createTranslucentItemModelWithBlockTexture(item, glass));
         this.blockStateOutput.accept(MultiPartGenerator.multiPart(pane)
@@ -743,7 +744,6 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 location = ModelLocationUtils.getModelLocation(piles, "_height" + layers);
                 AetherIIModelTemplates.THIN.extend()
                         .ambientOcclusion(layers == 1)
-                        .renderType(Identifier.withDefaultNamespace("cutout_mipped"))
                         .element(elementBuilder -> elementBuilder.from(0.0F, 0.0F, 0.0F).to(16.0F, (float) layers, 16.0F)
                                 .face(Direction.DOWN, faceBuilder -> faceBuilder.texture(TextureSlot.ALL))
                                 .face(Direction.UP, faceBuilder -> faceBuilder.texture(TextureSlot.ALL))
@@ -769,7 +769,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.createSnowyCross(plant);
 
         TextureMapping plantMapping = TextureMapping.plant(plant);
-        MultiVariant crossPot = plainVariant(ModelTemplates.FLOWER_POT_CROSS.extend().renderType(Identifier.withDefaultNamespace("cutout")).build().create(pot, plantMapping, this.modelOutput));
+        MultiVariant crossPot = plainVariant(ModelTemplates.FLOWER_POT_CROSS.create(pot, plantMapping, this.modelOutput));
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pot, crossPot));
     }
 
@@ -881,7 +881,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         });
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(propertyDispatch));
 
-        MultiVariant crossPot = plainVariant(ModelTemplates.FLOWER_POT_CROSS.extend().renderType(Identifier.withDefaultNamespace("cutout")).build()
+        MultiVariant crossPot = plainVariant(ModelTemplates.FLOWER_POT_CROSS
                 .create(pot, TextureMapping.plant(TextureMapping.getBlockTexture(block, "_bottom_0")), this.modelOutput));
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pot, crossPot));
 
@@ -1258,7 +1258,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         final TextureSlot[] textureSlots = {AetherIITextureSlots.LOGS, AetherIITextureSlots.BRICKS, AetherIITextureSlots.ASH};
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.OUTPOST_CAMPFIRE.get()).with(PropertyDispatch.initial(OutpostCampfireBlock.PART_FACING).generate(facing -> {
             Identifier model = AetherIIModelTemplates.create("template_outpost_campfire_" + facing.name().toLowerCase(Locale.ROOT), "_" + facing.name().toLowerCase(Locale.ROOT), textureSlots)
-                    .extend().renderType(Identifier.withDefaultNamespace("cutout")).build()
+                    
                     .create(AetherIIBlocks.OUTPOST_CAMPFIRE.get(), new TextureMapping()
                                     .put(AetherIITextureSlots.LOGS, TextureMapping.getBlockTexture(AetherIIBlocks.OUTPOST_CAMPFIRE.get(), "_logs"))
                                     .put(AetherIITextureSlots.BRICKS, Identifier.fromNamespaceAndPath(AetherII.MODID, "block/large_holystone_bricks"))

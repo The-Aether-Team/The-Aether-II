@@ -4,17 +4,18 @@ import com.aetherteam.aetherii.AetherII;
 
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 
 public class AetherIITextureMappings {
-    public static TextureMapping emissive(Identifier texture) {
+    public static TextureMapping emissive(Material texture) {
         return new TextureMapping()
                 .put(TextureSlot.TEXTURE, texture)
                 .put(AetherIITextureSlots.EMISSIVE, texture.withSuffix("_emissive"));
     }
 
-    public static TextureMapping cubeEmissive(Identifier texture) {
+    public static TextureMapping cubeEmissive(Material texture) {
         return new TextureMapping()
                 .put(TextureSlot.ALL, texture)
                 .put(AetherIITextureSlots.EMISSIVE, texture.withSuffix("_emissive"));
