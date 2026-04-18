@@ -90,21 +90,21 @@ configurations {
 
 dependencies {
     implementation "com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}"
-//    implementation "com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}"
-//
+    implementation "com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}"
+
     jarJar("com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}") {
         version {
             strictly "[${project.nitrogen_version},)"
             prefer "${project.nitrogen_version}"
         }
     }
-//
-//    jarJar("com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}") {
-//        version {
-//            strictly "[${project.cumulus_version},)"
-//            prefer "${project.cumulus_version}"
-//        }
-//    }
+
+    jarJar("com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}") {
+        version {
+            strictly "[${project.cumulus_version},)"
+            prefer "${project.cumulus_version}"
+        }
+    }
 
     runtimeOnly "curse.maven:worldedit-225608:7903183"
     implementation "mezz.jei:jei-${project.minecraft_version}-neoforge:${project.jei_version}"
