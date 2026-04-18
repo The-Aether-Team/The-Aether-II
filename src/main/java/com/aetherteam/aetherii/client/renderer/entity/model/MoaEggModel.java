@@ -11,7 +11,7 @@ public class MoaEggModel extends Model<MoaEggRenderState> {
     private final ModelPart moa_egg;
 
     public MoaEggModel(ModelPart root) {
-        super(root, RenderTypes::entityCutoutNoCull);
+        super(root, RenderTypes::entityCutout);
         this.moa_egg = root.getChild("moa_egg");
     }
 

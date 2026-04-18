@@ -28,9 +28,11 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.InclusiveRange;
+import net.minecraft.util.Util;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.*;
 import net.minecraft.world.level.block.Block;
@@ -1484,60 +1486,19 @@ public class HolyIslesConfiguredFeatures {
             }
         }
 
-        register(
-                context,
-                SKY_ROOTS,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        20,
-                        4,
-                        4,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                                BlockStateProvider.simple(AetherIIBlocks.SKY_ROOTS.get().defaultBlockState())
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+        register(context, SKY_ROOTS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.SKY_ROOTS.get().defaultBlockState())));
+        register(context, FROSTED_SKY_ROOTS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.SKY_ROOTS.get().defaultBlockState().setValue(AetherHangingRootsBlock.SNOWY, true))));
+        register(context, ICE, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState())));
+        register(context, ICE_CRYSTALS, Feature.SIMPLE_BLOCK, (
+                new SimpleBlockConfiguration(
+                        new WeightedStateProvider(WeightedList.<BlockState>builder()
+                        .add(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 1)
+                        .add(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 1)
+                        .add(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 1)
+                        .build())
                 )
-        );
-        register(
-                context,
-                FROSTED_SKY_ROOTS,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        20,
-                        4,
-                        4,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                                BlockStateProvider.simple(AetherIIBlocks.SKY_ROOTS.get().defaultBlockState().setValue(AetherHangingRootsBlock.SNOWY, true))
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
-                )
-        );
-        register(context,
-                ICE,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        20,
-                        4,
-                        4,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                                BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState())
-                        ), BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.above(), AetherIIBlocks.ARCTIC_PACKED_ICE.get()), BlockPredicate.ONLY_IN_AIR_PREDICATE))
-                )
-        );
-        register(
-                context,
-                ICE_CRYSTALS,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        20,
-                        4,
-                        4,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
-                                .add(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 1)
-                                .add(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 1)
-                                .add(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 1)
-                                .build())
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
-                )
-        );
+        ));
+
         register(context, POINTED_HOLYSTONE, Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(
                 HolderSet.direct(
                         PlacementUtils.inlinePlaced(
@@ -1566,7 +1527,9 @@ public class HolyIslesConfiguredFeatures {
                                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12),
                                 RandomOffsetPlacement.vertical(ConstantInt.of(-1))
                         ))));
-
+        register(context, GRASS_BLOCKS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState())));
+        register(context, ENCHANTED_GRASS_BLOCKS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get().defaultBlockState())));
+//todo
         register(context,
                 GRASS_BLOCKS,
                 Feature.RANDOM_PATCH,
@@ -1676,7 +1639,7 @@ public class HolyIslesConfiguredFeatures {
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.COARSE_AETHER_DIRT_REPLACEABLE,
                         BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
-                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HOLYSTONE_ROCKS)),
+                        placedFeatures.getOrThrow(HolyIslesPlacedFeatures.HOLYSTONE_ROCKS),
                         CaveSurface.FLOOR,
                         UniformInt.of(1, 2),
                         0.1F,
@@ -1693,7 +1656,12 @@ public class HolyIslesConfiguredFeatures {
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.COARSE_AETHER_DIRT_REPLACEABLE,
                         BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
-                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKY_ROOTS)),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKY_ROOTS),
+                                (PlacementModifier) Util.copyAndAdd(
+                                        VegetationPlacements.worldSurfaceSquaredWithCount(20),
+                                        RandomOffsetPlacement.ofTriangle(4, 4),
+                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+                        ),
                         CaveSurface.CEILING,
                         UniformInt.of(1, 2),
                         0.1F,
@@ -1710,7 +1678,12 @@ public class HolyIslesConfiguredFeatures {
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.COARSE_AETHER_DIRT_REPLACEABLE,
                         BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
-                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(FROSTED_SKY_ROOTS)),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(FROSTED_SKY_ROOTS),
+                                (PlacementModifier) Util.copyAndAdd(
+                                        VegetationPlacements.worldSurfaceSquaredWithCount(20),
+                                        RandomOffsetPlacement.ofTriangle(4, 4),
+                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+                        ),
                         CaveSurface.CEILING,
                         UniformInt.of(1, 2),
                         0.1F,
@@ -1727,7 +1700,12 @@ public class HolyIslesConfiguredFeatures {
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.ARCTIC_ICE_REPLACEABLE,
                         BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
-                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE_CRYSTALS)),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE_CRYSTALS),
+                                (PlacementModifier) Util.copyAndAdd(
+                                        VegetationPlacements.worldSurfaceSquaredWithCount(20),
+                                        RandomOffsetPlacement.ofTriangle(4, 4),
+                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+                        ),
                         CaveSurface.CEILING,
                         UniformInt.of(1, 2),
                         0.35F,
@@ -2030,8 +2008,18 @@ public class HolyIslesConfiguredFeatures {
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_ARCTIC),
                 UniformInt.of(120, 180),
                 Optional.of(PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
-                        List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE_CRYSTALS)), 0.35F)),
-                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE))))),
+                        List.of(new WeightedPlacedFeature( PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE_CRYSTALS),
+                                (PlacementModifier) Util.copyAndAdd(
+                                        VegetationPlacements.worldSurfaceSquaredWithCount(20),
+                                        RandomOffsetPlacement.ofTriangle(4, 4),
+                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+                        ), 0.35F)),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE),
+                                (PlacementModifier) Util.copyAndAdd(
+                                        VegetationPlacements.worldSurfaceSquaredWithCount(20),
+                                        RandomOffsetPlacement.ofTriangle(4, 4),
+                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.above(), AetherIIBlocks.ARCTIC_PACKED_ICE.get()), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+                        )))),
                 0.25F,
                 AetherIITags.Blocks.ARCTIC_COAST_GENERATES_ON
         ));

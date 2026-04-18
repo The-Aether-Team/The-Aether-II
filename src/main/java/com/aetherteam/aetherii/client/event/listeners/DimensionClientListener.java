@@ -31,7 +31,7 @@ public class DimensionClientListener {
         if (camera.entity().level() instanceof ClientLevel clientLevel) {
             Holder<Biome> biome = clientLevel.getBiome(camera.blockPosition());
             FogType fluidState = camera.getFluidInCamera();
-            if (fogMode == FogType.ATMOSPHERIC && fluidState == FogType.NONE && (camera.entity().getEyeInFluidType() == NeoForgeMod.EMPTY_TYPE.value())) {
+            if (fogMode == FogType.ATMOSPHERIC && fluidState == FogType.NONE && (camera.entity().isEyeInFluid() == NeoForgeMod.EMPTY_TYPE.value())) {
                 if (modifiedNearDistance == null) {
                     modifiedNearDistance = nearDistance;
                 }
@@ -98,8 +98,7 @@ public class DimensionClientListener {
             if (effectiveRenderDistance >= 4) {
                 float f = camera.attributeProbe().getValue(EnvironmentAttributes.SUN_ANGLE, partialTick) * 0.017453292F;
                 f4 = Mth.sin(f) > 0.0F ? -1.0F : 1.0F;
-                Panorama panorama = Minecraft.getInstance().gameRenderer.getPanorama();
-                Vector3fc vector3fc = panorama != null ? panorama.forwardVector() : camera.forwardVector();
+                Vector3fc vector3fc = camera.isPanoramicMode() ? camera.panoramicForwards() : camera.forwardVector();
                 float f2 = vector3fc.dot(f4, 0.0F, 0.0F);
                 if (f2 > 0.0F) {
                     int j = new AetherSkyboxRenderer().getSunriseOrSunsetColor(timeOfDay); //Modifies the sunrise/sunset fog colors to use the Aether's sunrise/sunset fog colors
