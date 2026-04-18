@@ -12,21 +12,21 @@ public class AetherIITextureMappings {
     public static TextureMapping emissive(Material texture) {
         return new TextureMapping()
                 .put(TextureSlot.TEXTURE, texture)
-                .put(AetherIITextureSlots.EMISSIVE, texture.withSuffix("_emissive"));
+                .put(AetherIITextureSlots.EMISSIVE, new Material(texture.sprite().withSuffix("_emissive")));
     }
 
     public static TextureMapping cubeEmissive(Material texture) {
         return new TextureMapping()
                 .put(TextureSlot.ALL, texture)
-                .put(AetherIITextureSlots.EMISSIVE, texture.withSuffix("_emissive"));
+                .put(AetherIITextureSlots.EMISSIVE, new Material(texture.sprite().withSuffix("_emissive")));
     }
 
     public static TextureMapping cubeColumnEmissive(Identifier side, Identifier end) {
         return new TextureMapping()
-                .put(TextureSlot.SIDE, side)
-                .put(TextureSlot.END, end)
-                .put(AetherIITextureSlots.EMISSIVE_SIDE, side.withSuffix("_emissive"))
-                .put(AetherIITextureSlots.EMISSIVE_END, Identifier.fromNamespaceAndPath(AetherII.MODID, "block/blank")); //todo
+                .put(TextureSlot.SIDE, new Material(side))
+                .put(TextureSlot.END, new Material(end))
+                .put(AetherIITextureSlots.EMISSIVE_SIDE, new Material(side.withSuffix("_emissive")))
+                .put(AetherIITextureSlots.EMISSIVE_END, new Material(Identifier.fromNamespaceAndPath(AetherII.MODID, "block/blank"))); //todo
     }
 
     public static TextureMapping block(Block block) {

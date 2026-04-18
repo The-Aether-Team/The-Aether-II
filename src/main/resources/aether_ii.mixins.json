@@ -73,6 +73,7 @@
     "client.accessor.GhostSlotsAccessor",
     "client.accessor.GuiAccessor",
     "client.accessor.InventoryScreenAccessor",
+    "client.accessor.ItemFeatureRendererAccessor",
     "client.accessor.ItemRendererAccessor",
     "client.accessor.LevelRendererAccessor",
     "client.accessor.MouseHandlerAccessor",

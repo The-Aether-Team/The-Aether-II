@@ -15,7 +15,7 @@ public class SkyrootChestRenderer<T extends BlockEntity & LidBlockEntity> extend
 	}
 
 	@Override
-	protected @Nullable SpriteId getCustomMaterial(T blockEntity, ChestRenderState renderState) {
+	protected @Nullable SpriteId getCustomSprite(T blockEntity, ChestRenderState renderState) {
 		return switch (renderState.type) {
 			case LEFT -> AetherIIAtlases.SKYROOT_CHEST_LEFT_MATERIAL;
 			case RIGHT -> AetherIIAtlases.SKYROOT_CHEST_RIGHT_MATERIAL;

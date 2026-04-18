@@ -26,7 +26,7 @@ import java.util.function.Function;
 @Mixin(BlockRenderDispatcher.class)
 public class BlockRenderDispatcherMixin {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/block/ModelBlockRenderer;tesselateBlock(Lnet/minecraft/world/level/BlockAndTintGetter;Ljava/util/List;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/function/Function;ZI)V", shift = At.Shift.BEFORE), method = "renderBatched(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/BlockAndTintGetter;Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/function/Function;ZLjava/util/List;)V")
-    private void tesselateWithAO(BlockState state, BlockPos pos, BlockAndTintGetter level, PoseStack poseStack, Function<ChunkSectionLayer, VertexConsumer> vertexConsumer, boolean checkSides, List<BlockModelPart> parts, CallbackInfo ci) {
+    private void tesselateWithAO(BlockState state, BlockPos pos, BlockAndTintGetter level, PoseStack poseStack, Function<ChunkSectionLayer, VertexConsumer> vertexConsumer, boolean checkSides, List<BlockStateModelPart> parts, CallbackInfo ci) {
         BlockRenderDispatcher renderer = (BlockRenderDispatcher) (Object) this;
         if (AetherGrassBlock.plantIsSnowed(state)) {
             BlockState snow = AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState();

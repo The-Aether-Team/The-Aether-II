@@ -12,7 +12,7 @@ public class IcestonePendantItem extends AccessoryItem implements IcestonePendan
 
     @Override
     public void tick(ItemStack stack, LivingEntity wearer, int slot) {
-        if (!wearer.isInFluidType()) {
+        if (!wearer.isInLiquid()) {
             this.freezeTick(wearer, stack);
         }
     }
