@@ -51,7 +51,7 @@ public class AlkahestPurifierRecipeCategory extends AbstractRecipeCategory<Alkah
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, AlkahestPurificationRecipe recipe, IFocusGroup focuses) {
-        SlotDisplay resultDisplay = new SlotDisplay.Composite(recipe.results().list().stream().map(SlotDisplay.ItemStackSlotDisplay::new).collect(Collectors.toUnmodifiableList()));
+        SlotDisplay resultDisplay = new SlotDisplay.Composite(recipe.results().list().stream().map((ItemStack stack) -> new SlotDisplay.ItemStackSlotDisplay(ItemStackTemplate.fromNonEmptyStack(stack))).collect(Collectors.toUnmodifiableList()));
         HolderSet<Item> ingredients = recipe.ingredient().getValues();
         Holder<Item> item = ingredients.get(0);
         if (item.is(AetherIITags.Items.IRRADIATED_ITEM)) {
@@ -68,6 +68,6 @@ public class AlkahestPurifierRecipeCategory extends AbstractRecipeCategory<Alkah
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 27, 61).add(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER);
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 5, 61).add(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER);
         builder.addSlot(RecipeIngredientRole.OUTPUT, 137, 32).add(resultDisplay).setOutputSlotBackground();
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 137, 60).add(new SlotDisplay.Composite(recipe.byproducts().list().stream().map(SlotDisplay.ItemStackSlotDisplay::new).collect(Collectors.toUnmodifiableList()))).setStandardSlotBackground();
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 137, 60).add(new SlotDisplay.Composite(recipe.byproducts().list().stream().map((ItemStack stack) -> new SlotDisplay.ItemStackSlotDisplay(ItemStackTemplate.fromNonEmptyStack(stack))).collect(Collectors.toUnmodifiableList()))).setStandardSlotBackground();
     }
 }

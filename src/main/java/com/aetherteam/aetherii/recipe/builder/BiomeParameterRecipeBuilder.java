@@ -11,14 +11,13 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.Property;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
 import java.util.Optional;
 
 public class BiomeParameterRecipeBuilder implements RecipeBuilder {
@@ -43,7 +42,7 @@ public class BiomeParameterRecipeBuilder implements RecipeBuilder {
         return recipe(BlockPropertyPair.of(resultPair.block(), resultPair.properties()), ingredient, Optional.of(Either.left(biomeKey)), factory);
     }
 
-    public static BiomeParameterRecipeBuilder recipe(BlockStateIngredient ingredient, Block resultBlock, Reference2ObjectArrayMap<Property<?>, Comparable<?>> resultProperties, ResourceKey<Biome> biomeKey, AbstractBiomeParameterRecipe.Factory<?> factory) {
+    public static BiomeParameterRecipeBuilder recipe(BlockStateIngredient ingredient, Block resultBlock, HashSet<Property.Value<?>> resultProperties, ResourceKey<Biome> biomeKey, AbstractBiomeParameterRecipe.Factory<?> factory) {
         return recipe(BlockPropertyPair.of(resultBlock, Optional.ofNullable(resultProperties)), ingredient, Optional.of(Either.left(biomeKey)), factory);
     }
 
@@ -55,7 +54,7 @@ public class BiomeParameterRecipeBuilder implements RecipeBuilder {
         return recipe(BlockPropertyPair.of(resultPair.block(), resultPair.properties()), ingredient, Optional.of(Either.right(biomeTag)), factory);
     }
 
-    public static BiomeParameterRecipeBuilder recipe(BlockStateIngredient ingredient, Block resultBlock, Reference2ObjectArrayMap<Property<?>, Comparable<?>> resultProperties, TagKey<Biome> biomeTag, AbstractBiomeParameterRecipe.Factory<?> factory) {
+    public static BiomeParameterRecipeBuilder recipe(BlockStateIngredient ingredient, Block resultBlock, HashSet<Property.Value<?>> resultProperties, TagKey<Biome> biomeTag, AbstractBiomeParameterRecipe.Factory<?> factory) {
         return recipe(BlockPropertyPair.of(resultBlock, Optional.of(resultProperties)), ingredient, Optional.of(Either.right(biomeTag)), factory);
     }
 

@@ -282,7 +282,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
 
     protected void loadDartShooter(Holder<Item> dartShooter, Holder<Item> darts, EffectBuildupPresets.Preset preset) {
         String effect = BuiltInRegistries.MOB_EFFECT.getKey(preset.type().value()).toString().replace(':', '_');
-        ItemStack effectDarts = new ItemStack(darts, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(preset)).build());
+        ItemStackTemplate effectDarts = new ItemStackTemplate(darts, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(preset)).build());
 
         DataComponentPatch dartShooterData = DataComponentPatch.builder()
                 .set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.of(Objects.requireNonNull(effectDarts)))
@@ -327,7 +327,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         for (HourglassDataEntry entry : resultInfo) {
             builder.add(new OutputEntry.ItemEntry(new ItemStack(resultItem, entry.count())), entry.weight());
         }
-        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.ItemEntry(null), new OutputEntry.ListEntry(builder.build()), new OutputEntry.ItemEntry(null)), experience, 200, false).unlockedBy("has_item", has(ingredient));
+        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.ItemEntry(ItemStack.EMPTY), new OutputEntry.ListEntry(builder.build()), new OutputEntry.ItemEntry(ItemStack.EMPTY)), experience, 200, false).unlockedBy("has_item", has(ingredient));
     }
 
     protected HourglassRestoringRecipeBuilder hourglassUncraftingItem(RecipeCategory category, ItemLike resultItem1, List<HourglassDataEntry> resultInfo1, ItemLike resultItem2, List<HourglassDataEntry> resultInfo2, ItemLike resultItem3, List<HourglassDataEntry> resultInfo3, ItemLike ingredient, float experience) {
@@ -351,15 +351,15 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     }
 
     protected AltarEnchantingRecipeBuilder altarEnchanting(RecipeCategory category, ItemLike result, ItemLike ingredient, int fuelCount, float experience) {
-        return AltarEnchantingRecipeBuilder.enchanting(Ingredient.of(ingredient), category, new ItemStack(result), experience, fuelCount, 200).unlockedBy("has_item", has(ingredient));
+        return AltarEnchantingRecipeBuilder.enchanting(Ingredient.of(ingredient), category, new ItemStackTemplate(result.asItem()), experience, fuelCount, 200).unlockedBy("has_item", has(ingredient));
     }
 
-    protected AltarEnchantingRecipeBuilder altarEnchanting(RecipeCategory category, ItemStack result, ItemStack ingredient, int fuelCount, float experience) {
-        return AltarEnchantingRecipeBuilder.enchanting(DataComponentIngredient.of(false, ingredient), category, result, experience, fuelCount, 200).unlockedBy("has_item", has(ingredient.getItem()));
+    protected AltarEnchantingRecipeBuilder altarEnchanting(RecipeCategory category, ItemStackTemplate result, ItemStackTemplate ingredient, int fuelCount, float experience) {
+        return AltarEnchantingRecipeBuilder.enchanting(DataComponentIngredient.of(false, ingredient), category, result, experience, fuelCount, 200).unlockedBy("has_item", has(ingredient.item().value()));
     }
 
     protected AltarEnchantingRecipeBuilder altarRepairing(RecipeCategory category, ItemLike item, int fuelCount) {
-        return AltarEnchantingRecipeBuilder.enchanting(Ingredient.of(item), category, new ItemStack(item), 0.0F, fuelCount, 200).unlockedBy("has_item", has(item));
+        return AltarEnchantingRecipeBuilder.enchanting(Ingredient.of(item), category, new ItemStackTemplate(item.asItem()), 0.0F, fuelCount, 200).unlockedBy("has_item", has(item));
     }
 
     protected BlockStateRecipeBuilder ambrosiumEnchanting(Block result, Block ingredient) {

@@ -14,9 +14,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 
@@ -50,7 +48,7 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
     }
 
     public static AlkahestPurificationRecipeBuilder recipe(Ingredient ingredient, RecipeCategory category, OutputEntry.BaseEntry results, OutputEntry.BaseEntry byproducts, float experience, int alkahestUsage, int processingTime) {
-        return new AlkahestPurificationRecipeBuilder(category, determineRecipeCategory(new ItemStack(results.list().getFirst().item())), results, byproducts, ingredient, experience, alkahestUsage, processingTime);
+        return new AlkahestPurificationRecipeBuilder(category, determineRecipeCategory(ItemStackTemplate.fromNonEmptyStack(results.list().getFirst())), results, byproducts, ingredient, experience, alkahestUsage, processingTime);
     }
 
     @Override
@@ -70,12 +68,12 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
         this.ensureValid(id);
         Advancement.Builder builder = output.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(builder::addCriterion);
-        AlkahestPurificationRecipe recipe = new AlkahestPurificationRecipe(Objects.requireNonNullElse(this.group, ""), this.bookCategory, this.ingredient, this.results, this.byproducts, this.experience, this.alkahestUsage, this.processingTime);
+        AlkahestPurificationRecipe recipe = new AlkahestPurificationRecipe(RecipeBuilder.createCraftingCommonInfo(true), new AlkahestPurificationRecipe.AlkahestPurifierBookInfo(this.bookCategory, Objects.requireNonNullElse(this.group, "")), this.ingredient, this.results, this.byproducts, this.experience, this.alkahestUsage, this.processingTime);
         output.accept(id, recipe, builder.build(id.identifier().withPrefix("recipes/" + this.category.getFolderName() + "/")));
     }
 
-    private static AlkahestPurifierBookCategory determineRecipeCategory(ItemStack result) {
-        if (result.getItem() instanceof BlockItem) {
+    private static AlkahestPurifierBookCategory determineRecipeCategory(ItemStackTemplate result) {
+        if (result.item() instanceof BlockItem) {
             return AlkahestPurifierBookCategory.BLOCKS;
         } else {
             return AlkahestPurifierBookCategory.ITEMS;

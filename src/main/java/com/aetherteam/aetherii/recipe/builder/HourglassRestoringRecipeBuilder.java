@@ -12,8 +12,6 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 
@@ -68,7 +66,7 @@ public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
         this.ensureValid(id);
         Advancement.Builder builder = output.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(builder::addCriterion);
-        HourglassRestoringRecipe recipe = new HourglassRestoringRecipe(Objects.requireNonNullElse(this.group, ""), this.bookCategory, this.ingredient, this.results, this.experience, this.processingTime);
+        HourglassRestoringRecipe recipe = new HourglassRestoringRecipe(RecipeBuilder.createCraftingCommonInfo(true), new HourglassRestoringRecipe.AmberHourglassBookInfo(this.bookCategory, Objects.requireNonNullElse(this.group, "")), this.ingredient, this.results, this.experience, this.processingTime);
         output.accept(id, recipe, builder.build(id.identifier().withPrefix("recipes/" + this.category.getFolderName() + "/")));
     }
 

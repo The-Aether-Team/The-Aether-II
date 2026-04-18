@@ -16,7 +16,6 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
@@ -132,9 +131,9 @@ public class HourglassRestoringRecipe implements Recipe<SingleRecipeInputWithRan
 
     @Override
     public List<RecipeDisplay> display() {
-        List<SlotDisplay> results1 = this.results().output1().list().stream().map(ItemStackTemplate::item).distinct().filter((item) -> item != Items.AIR).map(SlotDisplay.ItemSlotDisplay::new).collect(Collectors.toUnmodifiableList());
-        List<SlotDisplay> results2 = this.results().output2().list().stream().map(ItemStackTemplate::item).distinct().filter((item) -> item != Items.AIR).map(SlotDisplay.ItemSlotDisplay::new).collect(Collectors.toUnmodifiableList());
-        List<SlotDisplay> results3 = this.results().output3().list().stream().map(ItemStackTemplate::item).distinct().filter((item) -> item != Items.AIR).map(SlotDisplay.ItemSlotDisplay::new).collect(Collectors.toUnmodifiableList());
+        List<SlotDisplay> results1 = this.results().output1().list().stream().map(ItemStackTemplate::fromNonEmptyStack).map(ItemStackTemplate::item).distinct().map(SlotDisplay.ItemSlotDisplay::new).collect(Collectors.toUnmodifiableList());
+        List<SlotDisplay> results2 = this.results().output2().list().stream().map(ItemStackTemplate::fromNonEmptyStack).map(ItemStackTemplate::item).distinct().map(SlotDisplay.ItemSlotDisplay::new).collect(Collectors.toUnmodifiableList());
+        List<SlotDisplay> results3 = this.results().output3().list().stream().map(ItemStackTemplate::fromNonEmptyStack).map(ItemStackTemplate::item).distinct().map(SlotDisplay.ItemSlotDisplay::new).collect(Collectors.toUnmodifiableList());
         return List.of(new AmberHourglassRecipeDisplay(
                 this.ingredient().display(),
                 AmberFuel.INSTANCE,

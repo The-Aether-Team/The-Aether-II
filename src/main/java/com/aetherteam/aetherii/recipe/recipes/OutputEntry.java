@@ -9,7 +9,6 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.random.Weighted;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemStackTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +23,8 @@ public class OutputEntry {
         public static StreamCodec<RegistryFriendlyByteBuf, ListEntry> STREAM_CODEC = ByteBufCodecs.fromCodecWithRegistries(CODEC);
 
         @Override
-        public List<ItemStackTemplate> list() {
-            List<ItemStackTemplate> stacks = new ArrayList<>();
+        public List<ItemStack> list() {
+            List<ItemStack> stacks = new ArrayList<>();
             this.entries().unwrap().stream().map(Weighted::value).forEach((baseEntry) -> stacks.addAll(baseEntry.list()));
             return stacks;
         }
@@ -45,17 +44,17 @@ public class OutputEntry {
         }
     }
 
-    public record ItemEntry(ItemStackTemplate stack) implements BaseEntry {
-        public static Codec<ItemEntry> CODEC = ItemStackTemplate.CODEC.xmap(ItemEntry::new, ItemEntry::stack);
-        public static StreamCodec<RegistryFriendlyByteBuf, ItemEntry> STREAM_CODEC = ItemStackTemplate.STREAM_CODEC.map(ItemEntry::new, ItemEntry::stack);
+    public record ItemEntry(ItemStack stack) implements BaseEntry {
+        public static Codec<ItemEntry> CODEC = ItemStack.CODEC.xmap(ItemEntry::new, ItemEntry::stack);
+        public static StreamCodec<RegistryFriendlyByteBuf, ItemEntry> STREAM_CODEC = ItemStack.STREAM_CODEC.map(ItemEntry::new, ItemEntry::stack);
 
         @Override
-        public List<ItemStackTemplate> list() {
+        public List<ItemStack> list() {
             return List.of(this.stack());
         }
 
         public ItemStack process(RandomSource random) {
-            return this.stack().create();
+            return this.stack();
         }
 
         @Override
@@ -65,7 +64,7 @@ public class OutputEntry {
     }
 
     public interface BaseEntry {
-        List<ItemStackTemplate> list();
+        List<ItemStack> list();
 
         ItemStack process(RandomSource random);
 
