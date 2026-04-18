@@ -509,78 +509,21 @@ public class HolyIslesConfiguredFeatures {
                                 .build())
                 )
         ));
-        register(
-                context,
-                IRRADIATED_GRASS_PATCH,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        64,
-                        8,
-                        4,
-                        PlacementUtils.filtered(AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(
-                                new WeightedStateProvider(new WeightedList.Builder<BlockState>()
-                                        .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 1)
-                                        .add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(), 2)
-                                        .add(AetherIIBlocks.TALL_AETHER_GRASS.get().defaultBlockState(), 1)
-                                        .add(AetherIIBlocks.AETHER_FERN.get().defaultBlockState(), 1)
-                                        .add(AetherIIBlocks.SHIELD_FERN.get().defaultBlockState(), 2)
-                                        .add(AetherIIBlocks.BLADE_POA.get().defaultBlockState(), 2)
-                                        .build())
-                        ), BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+        register(context, IRRADIATED_GRASS_PATCH, AetherIIFeatures.AETHER_GRASS.get(), (
+                new SimpleBlockConfiguration(
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>()
+                                .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 1)
+                                .add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(), 2)
+                                .add(AetherIIBlocks.TALL_AETHER_GRASS.get().defaultBlockState(), 1)
+                                .add(AetherIIBlocks.AETHER_FERN.get().defaultBlockState(), 1)
+                                .add(AetherIIBlocks.SHIELD_FERN.get().defaultBlockState(), 2)
+                                .add(AetherIIBlocks.BLADE_POA.get().defaultBlockState(), 2)
+                                .build())
                 )
-        );
-        register(
-                context,
-                VALKYRIE_SPROUT_PATCH,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        160,
-                        4,
-                        3,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                                BlockStateProvider.simple(AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 2))
-                        ), BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
-                )
-        );
-        register(
-                context,
-                AETHER_BUSH,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        100,
-                        2,
-                        3,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                                BlockStateProvider.simple(AetherIIBlocks.AETHER_BUSH.get().defaultBlockState())
-                        ), BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
-                )
-        );
-        register(
-                context,
-                BLUEBERRY_BUSH,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        55,
-                        2,
-                        3,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                                BlockStateProvider.simple(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState())
-                        ), BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
-                )
-        );
-        register(
-                context,
-                BLUEBERRY_BUSH_RARE,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        32,
-                        2,
-                        3,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                                BlockStateProvider.simple(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState())
-                        ), BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
-                )
-        );
+        ));
+        register(context, VALKYRIE_SPROUT_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 2))));
+        register(context, AETHER_BUSH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AETHER_BUSH.get().defaultBlockState())));
+        register(context, BLUEBERRY_BUSH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState())));
         register(context, ORANGE_TREE, AetherIIFeatures.ORANGE_TREE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ORANGE_TREE.get().defaultBlockState().setValue(OrangeTreeBlock.AGE, 4))));
         register(context, BRETTL_PLANT, AetherIIFeatures.BRETTL_PLANT.get(), new NoneFeatureConfiguration());
 
