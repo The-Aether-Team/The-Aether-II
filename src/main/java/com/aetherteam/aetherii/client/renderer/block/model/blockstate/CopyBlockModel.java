@@ -43,7 +43,7 @@ public class CopyBlockModel extends DelegateBlockStateModel {
     public TextureAtlasSprite particleMaterial(BlockAndTintGetter level, BlockPos pos, BlockState state) {
         LockedBlockEntity.CopyData data = level.getModelData(pos).get(LockedBlockEntity.CopyData.PROPERTY);
         if (data == null) {
-            return super.particleMaterial(level, pos, state);
+            return super.particleMaterial(level, pos, state).sprite();
         }
         BlockState mimicState = data.state();
         return Minecraft.getInstance().getModelManager().getBlocksModelShaper().getBlockModel(mimicState).particleMaterial(level, pos, mimicState);

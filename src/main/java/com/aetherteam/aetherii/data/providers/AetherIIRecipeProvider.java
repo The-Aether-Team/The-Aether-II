@@ -31,6 +31,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ChargedProjectiles;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -269,7 +270,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
 
     protected void makeDartsWithEffect(Holder<Item> darts, Supplier<? extends Item> ingredient, EffectBuildupPresets.Preset preset) {
         String effect = BuiltInRegistries.MOB_EFFECT.getKey(preset.type().value()).toString().replace(':', '_');
-        ShapelessRecipeBuilder.shapeless(this.getter, RecipeCategory.MISC, new ItemStack(darts, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(preset)).build()))
+        ShapelessRecipeBuilder.shapeless(this.getter, RecipeCategory.MISC, new ItemStackTemplate(darts, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(preset)).build()))
                 .group("amber_darts")
                 .requires(Ingredient.of(darts.value()))
                 .requires(Ingredient.of(ingredient.get()))
@@ -279,14 +280,14 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
 
     protected void loadDartShooter(Holder<Item> dartShooter, Holder<Item> darts, EffectBuildupPresets.Preset preset) {
         String effect = BuiltInRegistries.MOB_EFFECT.getKey(preset.type().value()).toString().replace(':', '_');
-        ItemStack effectDarts = new ItemStack(darts, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(preset)).build());
+        ItemStack effectDarts = new ItemStackTemplate(darts, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(preset)).build());
 
         DataComponentPatch dartShooterData = DataComponentPatch.builder()
                 .set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.of(effectDarts))
                 .set(AetherIIDataComponents.DARTS_LOADED.get(), AmberDartsItem.FULL_AMOUNT)
                 .set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(preset))
                 .build();
-        ShapelessRecipeBuilder.shapeless(this.getter, RecipeCategory.MISC, new ItemStack(dartShooter, 1, dartShooterData))
+        ShapelessRecipeBuilder.shapeless(this.getter, RecipeCategory.MISC, new ItemStackTemplate(dartShooter, 1, dartShooterData))
                 .group("load_dart_shooter")
                 .requires(Ingredient.of(dartShooter.value()))
                 .requires(DataComponentIngredient.of(false, effectDarts))
@@ -324,7 +325,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         for (HourglassDataEntry entry : resultInfo) {
             builder.add(new OutputEntry.ItemEntry(new ItemStack(resultItem, entry.count())), entry.weight());
         }
-        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.ItemEntry(ItemStack.EMPTY), new OutputEntry.ListEntry(builder.build()), new OutputEntry.ItemEntry(ItemStack.EMPTY)), experience, 200, false).unlockedBy("has_item", has(ingredient));
+        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.ItemEntry(ItemStack.EMPTY.getCraftingRemainder()), new OutputEntry.ListEntry(builder.build()), new OutputEntry.ItemEntry(ItemStack.EMPTY.getCraftingRemainder())), experience, 200, false).unlockedBy("has_item", has(ingredient));
     }
 
     protected HourglassRestoringRecipeBuilder hourglassUncraftingItem(RecipeCategory category, ItemLike resultItem1, List<HourglassDataEntry> resultInfo1, ItemLike resultItem2, List<HourglassDataEntry> resultInfo2, ItemLike resultItem3, List<HourglassDataEntry> resultInfo3, ItemLike ingredient, float experience) {
