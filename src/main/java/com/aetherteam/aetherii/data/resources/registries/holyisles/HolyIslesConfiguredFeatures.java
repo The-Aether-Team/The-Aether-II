@@ -375,30 +375,10 @@ public class HolyIslesConfiguredFeatures {
             }
         }
 
-        register(
-                context,
-                SKYROOT_TWIGS,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        2,
-                        1,
-                        1,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(twigs)),
-                                BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SKYROOT_TWIG_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
-                )
-        );
-        register(
-                context,
-                HOLYSTONE_ROCKS,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        4,
-                        2,
-                        2,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(rocks)),
-                                BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
-                )
-        );
+        register(context, SKYROOT_TWIGS, Feature.SIMPLE_BLOCK, (new SimpleBlockConfiguration(new WeightedStateProvider(twigs))));
+        register(context, HOLYSTONE_ROCKS, Feature.SIMPLE_BLOCK, (new SimpleBlockConfiguration(new WeightedStateProvider(rocks))));
+        register(context, UNDERWATER_HOLYSTONE_ROCKS, Feature.SIMPLE_BLOCK, (new SimpleBlockConfiguration(new WeightedStateProvider(underwaterRocks))));
+        /*
         register(
                 context,
                 UNDERWATER_HOLYSTONE_ROCKS,
@@ -408,9 +388,11 @@ public class HolyIslesConfiguredFeatures {
                         2,
                         2,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(underwaterRocks)),
-                                BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER)))
+                                BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))) //todo
                 )
         );
+
+         */
         register(context, MOSSY_HOLYSTONE_BOULDER, AetherIIFeatures.BOULDER.get(), new BoulderConfiguration(
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                         .add(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), 4)
@@ -500,57 +482,33 @@ public class HolyIslesConfiguredFeatures {
                                 )
                         )
         ));
-        register(
-                context,
-                SMALL_GRASS_PATCH,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        80,
-                        4,
-                        3,
-                        PlacementUtils.filtered(AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(
-                                new WeightedStateProvider(new WeightedList.Builder<BlockState>()
-                                        .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 2)
-                                        .add(AetherIIBlocks.AETHER_FERN.get().defaultBlockState(), 1)
-                                        .build())
-                        ), BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+        register(context, SMALL_GRASS_PATCH, AetherIIFeatures.AETHER_GRASS.get(), (
+                new SimpleBlockConfiguration(
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>()
+                                .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 2)
+                                .add(AetherIIBlocks.AETHER_FERN.get().defaultBlockState(), 1)
+                                .build())
                 )
-        );
-        register(
-                context,
-                MEDIUM_GRASS_PATCH,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        64,
-                        6,
-                        3,
-                        PlacementUtils.filtered(AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(
-                                new WeightedStateProvider(new WeightedList.Builder<BlockState>()
-                                        .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 2)
-                                        .add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(), 3)
-                                        .add(AetherIIBlocks.AETHER_FERN.get().defaultBlockState(), 1)
-                                        .build())
-                        ), BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+        ));
+        register(context, MEDIUM_GRASS_PATCH, AetherIIFeatures.AETHER_GRASS.get(), (
+                new SimpleBlockConfiguration(
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>()
+                                .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 2)
+                                .add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(), 3)
+                                .add(AetherIIBlocks.AETHER_FERN.get().defaultBlockState(), 1)
+                                .build())
                 )
-        );
-        register(
-                context,
-                LARGE_GRASS_PATCH,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        48,
-                        8,
-                        3,
-                        PlacementUtils.filtered(AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(
-                                new WeightedStateProvider(new WeightedList.Builder<BlockState>()
-                                        .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 2)
-                                        .add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(), 3)
-                                        .add(AetherIIBlocks.TALL_AETHER_GRASS.get().defaultBlockState(), 4)
-                                        .add(AetherIIBlocks.AETHER_FERN.get().defaultBlockState(), 1)
-                                        .build())
-                        ), BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+        ));
+        register(context, LARGE_GRASS_PATCH, AetherIIFeatures.AETHER_GRASS.get(), (
+                new SimpleBlockConfiguration(
+                        new WeightedStateProvider(new WeightedList.Builder<BlockState>()
+                                .add(AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(), 2)
+                                .add(AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(), 3)
+                                .add(AetherIIBlocks.TALL_AETHER_GRASS.get().defaultBlockState(), 4)
+                                .add(AetherIIBlocks.AETHER_FERN.get().defaultBlockState(), 1)
+                                .build())
                 )
-        );
+        ));
         register(
                 context,
                 IRRADIATED_GRASS_PATCH,
