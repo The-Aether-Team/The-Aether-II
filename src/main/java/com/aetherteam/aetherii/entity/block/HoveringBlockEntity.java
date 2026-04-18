@@ -124,14 +124,14 @@ public class HoveringBlockEntity extends Entity {
     }
 
     @Override
-    public InteractionResult interact(Player pPlayer, InteractionHand pHand) {
+    public InteractionResult interact(Player player, InteractionHand hand, Vec3 location) {
         Entity holdingPlayer = this.getHoldingPlayer();
         if (holdingPlayer != null) {
             this.held = false;
             this.markShouldSettle();
             this.settleBlock();
         }
-        return super.interact(pPlayer, pHand);
+        return super.interact(player, hand, location);
     }
 
     @Override

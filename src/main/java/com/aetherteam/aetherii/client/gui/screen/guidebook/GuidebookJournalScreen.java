@@ -52,14 +52,14 @@ public class GuidebookJournalScreen extends Screen implements Guidebook {
     @Override
     public void renderGuidebookLeftPage(Screen screen, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xffffffff);
+        guiGraphics.centeredText(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xffffffff);
     }
 
     @Override
-    protected void renderMenuBackground(GuiGraphicsExtractor partialTick) { }
+    protected void extractMenuBackground(GuiGraphicsExtractor partialTick) { }
 
     @Override
-    protected void renderBlurredBackground(GuiGraphicsExtractor guiGraphics) { }
+    protected void extractBlurredBackground(GuiGraphicsExtractor guiGraphics) { }
 
     @Override
     public boolean keyPressed(KeyEvent event) {

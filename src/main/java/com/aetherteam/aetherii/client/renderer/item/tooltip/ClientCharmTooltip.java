@@ -15,7 +15,7 @@ import java.util.Locale;
 
 public record ClientCharmTooltip(ItemStack base, List<Charms.CharmHolder> charmHolders) implements ClientTooltipComponent {
     @Override
-    public void renderImage(Font font, int x, int y, int p_368529_, int p_368584_, GuiGraphicsExtractor guiGraphics) {
+    public void extractImage(Font font, int x, int y, int p_368529_, int p_368584_, GuiGraphicsExtractor guiGraphics) {
         int index = 0;
         for (int j = 0; j < 2; j++) {
             for (int i = 0; i < 4; i++) {

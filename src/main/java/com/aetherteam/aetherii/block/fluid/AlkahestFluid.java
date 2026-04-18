@@ -179,7 +179,7 @@ public abstract class AlkahestFluid extends BaseFlowingFluid implements Canister
                                 SingleRecipeInputWithRandom input = new SingleRecipeInputWithRandom(itemStack, level.getRandom());
                                 if (recipe.value().matches(input, level)) {
                                     itemEntity.discard();
-                                    ItemStack result = recipe.value().assemble(input, level.registryAccess());
+                                    ItemStack result = recipe.value().assemble(input);
                                     result.setDamageValue((result.getMaxDamage() / 3) + (random.nextInt(8) * (random.nextBoolean() ? 1 : -1)));
                                     ItemEntity cleansedItemEntity = new ItemEntity(level, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), result);
                                     level.addFreshEntity(cleansedItemEntity);

@@ -10,7 +10,6 @@ import com.aetherteam.aetherii.entity.monster.PlantMob;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.BrokenStack;
-import com.aetherteam.aetherii.mixin.mixins.client.accessor.ItemRendererAccessor;
 import com.aetherteam.aetherii.network.packet.clientbound.AttackShockParticlePacket;
 import com.aetherteam.aetherii.network.packet.clientbound.AttackStabParticlePacket;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -201,7 +200,7 @@ public class MixinHooks {
 
     public static void renderIrradiated(PoseStack poseStack, MultiBufferSource bufferSource, int i, int j, int[] tints, List<BakedQuad> model, RenderType renderType) {
         VertexConsumer vertexconsumer = VertexMultiConsumer.create(VertexMultiConsumer.create(bufferSource.getBuffer(AetherIIRenderTypes.irradiatedGlint())), bufferSource.getBuffer(renderType));
-        ItemRendererAccessor.callRenderModelLists(poseStack, vertexconsumer, model, tints, i, j);
+        //ItemFeatureRendererAccessor.callRenderModelLists(poseStack, vertexconsumer, model, tints, i, j); //todo [is this method even used or can it be deleted?]
     }
 
     public static <T extends HumanoidRenderState> void positionMoaRider(T renderState, ModelPart head, ModelPart body, ModelPart rightArm, ModelPart leftArm, ModelPart rightLeg, ModelPart leftLeg) { //todo

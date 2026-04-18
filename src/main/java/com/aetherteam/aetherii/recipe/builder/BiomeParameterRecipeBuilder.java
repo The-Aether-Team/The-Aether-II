@@ -79,13 +79,13 @@ public class BiomeParameterRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public Item getResult() {
-        return Items.AIR;
-    }
-
-    @Override
     public void save(RecipeOutput recipeOutput, ResourceKey<Recipe<?>> id) {
         AbstractBiomeParameterRecipe recipe = (AbstractBiomeParameterRecipe) this.factory.create(this.biome, this.ingredient, this.result, this.function);
         recipeOutput.accept(id, recipe, null);
+    }
+
+    @Override
+    public ResourceKey<Recipe<?>> defaultId() {
+        return RecipeBuilder.getDefaultRecipeId(this.result.block().asItem().getDefaultInstance());
     }
 }

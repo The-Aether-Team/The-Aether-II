@@ -75,7 +75,7 @@ public class CopyBlockItem extends BlockItem {
     public Component getName(ItemStack stack) {
         BlockState state = stack.get(AetherIIDataComponents.BLOCK_STATE);
         if (state != null) {
-            return state.getBlock().asItem().getName();
+            return state.getBlock().asItem().getName(stack);
         }
         return super.getName(stack);
     }

@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.world.feature.configuration.BigMagneticShroomConf
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -119,7 +120,7 @@ public abstract class AbstractMagneticShroomFeature extends Feature<BigMagneticS
     public void placeGroundBlockAt(WorldGenLevel level, RandomSource random, BlockPos pos,  BlockStateProvider provider) {
         for (int i = 2; i >= -3; --i) {
             BlockPos blockpos = pos.above(i);
-            if (Feature.isGrassOrDirt(level, blockpos)) {
+            if (level.isStateAtPosition(blockpos, (state) -> state.is(BlockTags.DIRT))) {
                 this.setBlock(level, blockpos, provider.getState(level, random, pos));
                 break;
             }

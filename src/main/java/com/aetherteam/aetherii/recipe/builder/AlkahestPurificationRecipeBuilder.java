@@ -12,6 +12,7 @@ import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -49,7 +50,7 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
     }
 
     public static AlkahestPurificationRecipeBuilder recipe(Ingredient ingredient, RecipeCategory category, OutputEntry.BaseEntry results, OutputEntry.BaseEntry byproducts, float experience, int alkahestUsage, int processingTime) {
-        return new AlkahestPurificationRecipeBuilder(category, determineRecipeCategory(new ItemStack(results.list().getFirst().getItem())), results, byproducts, ingredient, experience, alkahestUsage, processingTime);
+        return new AlkahestPurificationRecipeBuilder(category, determineRecipeCategory(new ItemStack(results.list().getFirst().item())), results, byproducts, ingredient, experience, alkahestUsage, processingTime);
     }
 
     @Override
@@ -63,11 +64,6 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
         this.group = group;
         return this;
     }
-
-    @Override
-    public Item getResult() {
-        return Items.AIR;
-    } //todo?
 
     @Override
     public void save(RecipeOutput output, ResourceKey<Recipe<?>> id) {
@@ -90,5 +86,10 @@ public class AlkahestPurificationRecipeBuilder implements RecipeBuilder {
         if (this.criteria.isEmpty()) {
             throw new IllegalStateException("No way of obtaining recipe " + id);
         }
+    }
+
+    @Override
+    public ResourceKey<Recipe<?>> defaultId() { //TODO: not sure if this is correctly coded
+        return RecipeBuilder.getDefaultRecipeId(this.results.process(RandomSource.create()));
     }
 }

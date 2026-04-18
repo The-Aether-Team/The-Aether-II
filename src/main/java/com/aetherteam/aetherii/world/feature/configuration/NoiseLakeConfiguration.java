@@ -14,7 +14,7 @@ public record NoiseLakeConfiguration(DensityFunction lakeNoise, DensityFunction 
             DensityFunction.HOLDER_HELPER_CODEC.fieldOf("lake_barrier_noise").forGetter(NoiseLakeConfiguration::lakeBarrierNoise),
             DensityFunction.HOLDER_HELPER_CODEC.fieldOf("lake_waterfall_noise").forGetter(NoiseLakeConfiguration::lakeWaterfallNoise),
             Codec.DOUBLE.fieldOf("noise_start_value").forGetter(NoiseLakeConfiguration::noiseStartValue),
-            ConstantInt.CODEC.fieldOf("height").forGetter(NoiseLakeConfiguration::height),
+            ConstantInt.MAP_CODEC.fieldOf("height").forGetter(NoiseLakeConfiguration::height),
             BlockStateProvider.CODEC.fieldOf("underwater_block").forGetter(NoiseLakeConfiguration::underwaterBlock),
             Codec.DOUBLE.fieldOf("shore_start_value").forGetter(NoiseLakeConfiguration::shoreStartValue),
             BlockStateProvider.CODEC.fieldOf("shore_block").forGetter(NoiseLakeConfiguration::shoreBlock),

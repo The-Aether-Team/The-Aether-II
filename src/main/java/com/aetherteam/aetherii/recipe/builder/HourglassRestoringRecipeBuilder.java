@@ -11,6 +11,7 @@ import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -58,11 +59,6 @@ public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public Item getResult() {
-        return Items.AIR; //todo?
-    }
-
-    @Override
     public void save(RecipeOutput recipeOutput, String id) {
         RecipeBuilder.super.save(recipeOutput, id);
     }
@@ -80,5 +76,10 @@ public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
         if (this.criteria.isEmpty()) {
             throw new IllegalStateException("No way of obtaining recipe " + id);
         }
+    }
+
+    @Override
+    public ResourceKey<Recipe<?>> defaultId() { //TODO: not sure if this is correctly coded
+        return RecipeBuilder.getDefaultRecipeId(this.results.output1().process(RandomSource.create()));
     }
 }

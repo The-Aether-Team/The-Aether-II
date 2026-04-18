@@ -14,6 +14,9 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.attribute.BedRule;
 import net.minecraft.world.attribute.EnvironmentAttributeMap;
 import net.minecraft.world.attribute.EnvironmentAttributes;
+import net.minecraft.world.clock.WorldClock;
+import net.minecraft.world.clock.WorldClocks;
+import net.minecraft.world.level.CardinalLighting;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
@@ -21,7 +24,10 @@ import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
+import net.minecraft.world.timeline.Timeline;
 import net.neoforged.neoforge.common.world.NeoForgeEnvironmentAttributes;
+
+import java.util.Optional;
 
 public class AetherIIDimensions {
     private final static Identifier AETHER_HOLY_ISLES_LEVEL_ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "aether_holy_isles");
@@ -34,11 +40,15 @@ public class AetherIIDimensions {
     public static final ResourceKey<LevelStem> AETHER_HOLY_ISLES_LEVEL_STEM = ResourceKey.create(Registries.LEVEL_STEM, AETHER_HOLY_ISLES_LEVEL_ID);
 
     public static void bootstrapDimensionType(BootstrapContext<DimensionType> context) {
+        HolderGetter<Timeline> timelines = context.lookup(Registries.TIMELINE);
+        HolderGetter<WorldClock> clocks = context.lookup(Registries.WORLD_CLOCK);
+
         context.register(AETHER_HOLY_ISLES_DIMENSION_TYPE, new DimensionType(
                 false,
                 true,
                 false,
-                1.0D,
+                false,
+                1.0,
                 -32,
                 416,
                 416,
@@ -46,7 +56,7 @@ public class AetherIIDimensions {
                 0.0F,
                 new DimensionType.MonsterSettings(UniformInt.of(0, 7), 0),
                 DimensionType.Skybox.OVERWORLD,
-                DimensionType.CardinalLightType.DEFAULT,
+                CardinalLighting.Type.DEFAULT,
                 EnvironmentAttributeMap.builder()
                         .set(EnvironmentAttributes.CLOUD_COLOR, -1)
                         .set(EnvironmentAttributes.CLOUD_HEIGHT, 320.33F)
@@ -57,7 +67,8 @@ public class AetherIIDimensions {
                         .set(NeoForgeEnvironmentAttributes.CUSTOM_WEATHER_EFFECTS, AetherIIDimensionRenderers.AETHER_WEATHER_ID)
                         .set(NeoForgeEnvironmentAttributes.CUSTOM_CLOUDS, AetherIIDimensionRenderers.AETHER_CLOUDS_ID)
                         .build(),
-                context.lookup(Registries.TIMELINE).getOrThrow(TimelineTags.IN_OVERWORLD)));
+                timelines.getOrThrow(TimelineTags.IN_OVERWORLD),
+                Optional.of(clocks.getOrThrow(WorldClocks.OVERWORLD))));
     }
 
     public static void bootstrapLevelStem(BootstrapContext<LevelStem> context) {

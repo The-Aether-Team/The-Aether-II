@@ -27,9 +27,9 @@ public class AltarGhostSlots extends GhostSlots {
             }
 
             ItemStack stack = ghostSlot.getItem(this.slotSelectTime.currentIndex());
-            guiGraphics.renderFakeItem(stack, x, y);
+            guiGraphics.fakeItem(stack, x, y);
             guiGraphics.fill(x, y, x + 16, y + 16, 822083583);
-            guiGraphics.renderItemDecorations(minecraft.font, stack, x, y);
+            guiGraphics.itemDecorations(minecraft.font, stack, x, y);
         });
     }
 }

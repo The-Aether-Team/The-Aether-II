@@ -59,14 +59,14 @@ public class ShieldModel implements ItemModel {
         combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().back().get(2)), -7.998F, -7.998F, false));
         combinedQuads.addAll(this.faceElement(this.sprite(this.unbakedModel.textures().back().get(3)), 7.998F, -7.998F, false));
 
-        combinedQuads.addAll(UnbakedElementsHelper.bakeElements(UnbakedElementsHelper.createUnbakedItemElements(0, this.sprite(this.unbakedModel.textures().handle())), $ -> this.sprite(this.unbakedModel.textures().handle()),
+        combinedQuads.addAll(UnbakedElementsHelper.bakeElements(UnbakedElementsHelper.bakeItemMaskQuads(0, this.sprite(this.unbakedModel.textures().handle())), $ -> this.sprite(this.unbakedModel.textures().handle()),
                 new ComposedModelState(BlockModelRotation.get(Quadrant.fromXYAngles(Quadrant.R180, Quadrant.R90)), new Transformation(new Vector3f(0, px(0.5F), px(3.0F)), new Quaternionf(), new Vector3f(1, 1, 2), new Quaternionf()))));
 
         return new CompositeModel(List.of(new BlockStateModelWrapper(List.of(), combinedQuads, new ModelRenderProperties(true, this.sprite(this.unbakedModel.textures().particle()), this.itemTransforms), (stack) -> displayContext == ItemDisplayContext.GUI ? NeoForgeRenderTypes.ITEM_UNSORTED_UNLIT_TRANSLUCENT.get() : NeoForgeRenderTypes.ITEM_UNSORTED_TRANSLUCENT.get())));
     }
 
     public TextureAtlasSprite sprite(Identifier location) {
-        var sprites = this.bakingContext.blockModelBaker().sprites();
+        var sprites = this.bakingContext.blockModelBaker().materials();
         return sprites.get(ClientHooks.getItemMaterial(location), DEBUG_NAME);
     }
 

@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.block.natural;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesPlacedFeatures;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -9,34 +10,42 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.Util;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.GrassBlock;
-import net.minecraft.world.level.block.SnowLayerBlock;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.lighting.LightEngine;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.BiConsumer;
 
-public class AetherGrassBlock extends GrassBlock {
-    public AetherGrassBlock(Properties properties) {
-        super(properties);
+/**
+ * Based on {@link net.minecraft.world.level.block.GrassBlock}.
+ */
+public class AetherGrassBlock extends SpreadingSnowyBlock implements BonemealableBlock {
+    public static final MapCodec<AetherGrassBlock> CODEC = simpleCodec(AetherGrassBlock::new);
+
+    public MapCodec<AetherGrassBlock> codec() {
+        return CODEC;
     }
 
-    @Override
-    public boolean onTreeGrow(BlockState state, LevelReader level, BiConsumer<BlockPos, BlockState> placeFunction, RandomSource random, BlockPos pos, TreeConfiguration config) {
-        placeFunction.accept(pos, AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
+    public AetherGrassBlock(BlockBehaviour.Properties properties) {
+        super(properties, AetherIIBlocks.AETHER_DIRT.get().builtInRegistryHolder().key());
+    }
+
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+        return level.getBlockState(pos.above()).isAir() && level.isInsideBuildHeight(pos.above());
+    }
+
+    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
         return true;
     }
 
@@ -90,47 +99,48 @@ public class AetherGrassBlock extends GrassBlock {
 
     @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        BlockPos abovePos = pos.above();
-        Block grass = AetherIIBlocks.AETHER_GRASS_BLOCK.get();
-        Optional<Holder.Reference<PlacedFeature>> grassFeatureOptional = level.registryAccess().lookupOrThrow(Registries.PLACED_FEATURE).get(HolyIslesPlacedFeatures.AETHER_GRASS_BONEMEAL);
+        BlockPos above = pos.above();
+        BlockState grass = AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState();
+        Optional<Holder.Reference<PlacedFeature>> grassFeature = level.registryAccess().lookupOrThrow(Registries.PLACED_FEATURE).get(HolyIslesPlacedFeatures.AETHER_GRASS_BONEMEAL);
 
-        start:
-        for (int i = 0; i < 128; ++i) {
-            BlockPos blockPos = abovePos;
+        label47:
+        for (int j = 0; j < 128; ++j) {
+            BlockPos testPos = above;
 
-            for (int j = 0; j < i / 16; ++j) {
-                blockPos = blockPos.offset(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
-                if (!level.getBlockState(blockPos.below()).is(this) || level.getBlockState(blockPos).isCollisionShapeFullBlock(level, blockPos)) {
-                    continue start;
+            for (int i = 0; i < j / 16; ++i) {
+                testPos = testPos.offset(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
+                if (!level.getBlockState(testPos.below()).is(this) || level.getBlockState(testPos).isCollisionShapeFullBlock(level, testPos)) {
+                    continue label47;
                 }
             }
 
-            BlockState blockState = level.getBlockState(blockPos);
-            if (blockState.is(grass) && random.nextInt(10) == 0) {
-                ((BonemealableBlock) grass).performBonemeal(level, random, blockPos, blockState);
+            BlockState testState = level.getBlockState(testPos);
+            if (testState.is(grass.getBlock()) && random.nextInt(10) == 0) {
+                BonemealableBlock bonemealableBlock = (BonemealableBlock) grass.getBlock();
+                if (bonemealableBlock.isValidBonemealTarget(level, testPos, testState)) {
+                    bonemealableBlock.performBonemeal(level, random, testPos, testState);
+                }
             }
 
-            if (blockState.isAir()) {
-                Holder<PlacedFeature> featureHolder;
+            if (testState.isAir() && !level.isOutsideBuildHeight(testPos)) {
                 if (random.nextInt(8) == 0) {
-                    List<ConfiguredFeature<?, ?>> list = level.getBiome(blockPos).value().getGenerationSettings().getFlowerFeatures();
-                    if (list.isEmpty()) {
-                        continue;
+                    List<ConfiguredFeature<?, ?>> features = level.getBiome(testPos).value().getGenerationSettings().getBoneMealFeatures();
+                    if (!features.isEmpty()) {
+                        ConfiguredFeature<?, ?> placementFeature = Util.getRandom(features, random);
+                        placementFeature.place(level, level.getChunkSource().getGenerator(), random, testPos);
                     }
-                    featureHolder = ((RandomPatchConfiguration) list.get(random.nextInt(list.size())).config()).feature();
-                } else {
-                    if (grassFeatureOptional.isEmpty()) {
-                        continue;
-                    }
-                    featureHolder = grassFeatureOptional.get();
+                } else if (grassFeature.isPresent()) {
+                    ((PlacedFeature) ((Holder.Reference<?>) grassFeature.get()).value()).place(level, level.getChunkSource().getGenerator(), random, testPos);
                 }
-                featureHolder.value().place(level, level.getChunkSource().getGenerator(), random, blockPos);
             }
         }
     }
 
+    public BonemealableBlock.Type getType() {
+        return Type.NEIGHBOR_SPREADER;
+    }
 
-    @Override
+        @Override
     protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource randomSource) {
         return direction == Direction.UP ? state.setValue(SNOWY, isSnowySetting(neighborState)) : super.updateShape(state, levelReader, scheduledTickAccess, pos, direction, neighborPos, neighborState, randomSource);
     }

@@ -13,6 +13,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagEntry;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ItemTagsProvider;
@@ -748,19 +749,6 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ZANITE_TROWEL.get(),
                 AetherIIItems.ARKENIUM_TROWEL.get(),
                 AetherIIItems.GRAVITITE_TROWEL.get()
-        );
-        this.tag(ItemTags.DYEABLE).add(
-                AetherIIItems.BEAST_PELT_HELMET.get(),
-                AetherIIItems.BEAST_PELT_CHESTPLATE.get(),
-                AetherIIItems.BEAST_PELT_LEGGINGS.get(),
-                AetherIIItems.BEAST_PELT_BOOTS.get(),
-                AetherIIItems.BEAST_PELT_GLOVES.get(),
-                AetherIIItems.BURRUKAI_PLATE_HELMET.get(),
-                AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(),
-                AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(),
-                AetherIIItems.BURRUKAI_PLATE_BOOTS.get(),
-                AetherIIItems.BURRUKAI_PLATE_GLOVES.get(),
-                AetherIIItems.MOA_SADDLE.get()
         );
         this.tag(ItemTags.PILLAGER_PREFERRED_WEAPONS).add(
                 AetherIIItems.SKYROOT_CROSSBOW.get(),

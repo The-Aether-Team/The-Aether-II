@@ -16,8 +16,10 @@ import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Util;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -25,6 +27,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.blockpredicates.HasSturdyFacePredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.heightproviders.TrapezoidHeight;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
@@ -37,6 +40,7 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> SKYROOT_TWIGS = createKey("skyroot_twigs");
     public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS = createKey("holystone_rocks");
     public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS_TUNDRA = createKey("holystone_rocks_tundra");
+    public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS_UNDERWATER = createKey("holystone_rocks_underwater");
     public static final ResourceKey<PlacedFeature> MOSSY_HOLYSTONE_BOULDER = createKey("mossy_holystone_boulder");
     public static final ResourceKey<PlacedFeature> MOSSY_HOLYSTONE_BOULDER_TUNDRA = createKey("mossy_holystone_boulder_tundra");
     public static final ResourceKey<PlacedFeature> UNDERWATER_MOSSY_HOLYSTONE_BOULDER = createKey("underwater_mossy_holystone_boulder");
@@ -71,6 +75,7 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ARCTIC_FLOWER_PATCH = createKey("arctic_flower_patch");
     public static final ResourceKey<PlacedFeature> MAGNETIC_SHROOM_PATCH = createKey("magnetic_shroom_patch");
     public static final ResourceKey<PlacedFeature> BONUS_MAGNETIC_SHROOM_PATCH = createKey("bonus_magnetic_shroom_patch");
+    public static final ResourceKey<PlacedFeature> MYCELIAL_MAGNETIC_SHROOM_PATCH = createKey("mycelial_magnetic_shroom_patch");
     public static final ResourceKey<PlacedFeature> BRYALINN_FLOWER_PATCH = createKey("bryalinn_flower_patch");
 
     public static final ResourceKey<PlacedFeature> SHORT_ARILUM = createKey("short_arilum");
@@ -123,6 +128,10 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ICE_OVERHANG = createKey("ice_overhang");
     public static final ResourceKey<PlacedFeature> POINTED_HOLYSTONE = createKey("pointed_holystone");
     public static final ResourceKey<PlacedFeature> POINTED_ICHORITE = createKey("pointed_ichorite");
+    public static final ResourceKey<PlacedFeature> BRYALINN_MOSS_CARPET_PATCH = createKey("bryalinn_moss_carpet_patch");
+    public static final ResourceKey<PlacedFeature> BRYALINN_MOSS_FLOWER_PATCH = createKey("bryalinn_moss_flower_patch");
+    public static final ResourceKey<PlacedFeature> SHAYELINN_MOSS_CARPET_PATCH = createKey("shayelinn_moss_carpet_patch");
+    public static final ResourceKey<PlacedFeature> AMBRELINN_MOSS_CARPET_PATCH = createKey("ambrelinn_moss_carpet_patch");
     public static final ResourceKey<PlacedFeature> EXPOSED_BRYALINN_MOSS_COVER = createKey("exposed_bryalinn_moss_cover");
     public static final ResourceKey<PlacedFeature> SWAMP_BRYALINN_MOSS_COVER = createKey("swamp_bryalinn_moss_cover");
     public static final ResourceKey<PlacedFeature> EXPOSED_SHAYELINN_MOSS_COVER = createKey("exposed_shayelinn_moss_cover");
@@ -229,31 +238,52 @@ public class HolyIslesPlacedFeatures {
     public static void bootstrapSurface(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        register(
-                context,
-                SKYROOT_TWIGS,
+        register(context, SKYROOT_TWIGS,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SKYROOT_TWIGS),
-                NoiseThresholdCountPlacement.of(0.4, 1, 0),
-                InSquarePlacement.spread(),
-                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
-                BiomeFilter.biome());
-        register(
-                context,
-                HOLYSTONE_ROCKS,
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(2),
+                        RandomOffsetPlacement.ofTriangle(1, 1),
+                        NoiseThresholdCountPlacement.of(0.4, 1, 0),
+                        InSquarePlacement.spread(),
+                        HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SKYROOT_TWIG_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+        );
+        register(context, HOLYSTONE_ROCKS,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.HOLYSTONE_ROCKS),
-                NoiseThresholdCountPlacement.of(0.1, 0, 1),
-                InSquarePlacement.spread(),
-                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
-                BiomeFilter.biome());
-        register(
-                context,
-                HOLYSTONE_ROCKS_TUNDRA,
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(4),
+                        RandomOffsetPlacement.ofTriangle(2, 2),
+                        NoiseThresholdCountPlacement.of(0.1, 0, 1),
+                        InSquarePlacement.spread(),
+                        HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+        );
+        register(context, HOLYSTONE_ROCKS_TUNDRA,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.HOLYSTONE_ROCKS),
-                NoiseThresholdCountPlacement.of(0.1, 1, 2),
-                RarityFilter.onAverageOnceEvery(2),
-                InSquarePlacement.spread(),
-                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
-                BiomeFilter.biome());
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(4),
+                        RandomOffsetPlacement.ofTriangle(2, 2),
+                        NoiseThresholdCountPlacement.of(0.1, 1, 0),
+                        RarityFilter.onAverageOnceEvery(2),
+                        InSquarePlacement.spread(),
+                        BiomeFilter.biome(),
+                        HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+        );
+        register(context, HOLYSTONE_ROCKS_UNDERWATER,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.UNDERWATER_HOLYSTONE_ROCKS),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(4),
+                        RandomOffsetPlacement.ofTriangle(2, 2),
+                        NoiseThresholdCountPlacement.of(0.1, 1, 0),
+                        CountPlacement.of(UniformInt.of(1, 4)),
+                        InSquarePlacement.spread(),
+                        BiomeFilter.biome(),
+                        HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))))
+        );
         register(
                 context,
                 MOSSY_HOLYSTONE_BOULDER,
@@ -343,79 +373,128 @@ public class HolyIslesPlacedFeatures {
     public static void bootstrapVegetation(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        register(
-                context,
-                GRASS_FIELD,
+        register(context, GRASS_FIELD,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.GRASS_FIELD),
-                CountPlacement.of(24),
-                ImprovedLayerPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, UniformInt.of(0, 1), 4),
-                BiomeFilter.biome()
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(80),
+                        RandomOffsetPlacement.ofTriangle(4, 12),
+                        CountPlacement.of(24),
+                        ImprovedLayerPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, UniformInt.of(0, 1), 4),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
         );
-        register(
-                context,
-                SMALL_GRASS_PATCH,
+        register(context, SMALL_GRASS_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SMALL_GRASS_PATCH),
-                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(3, 6), 4),
-                BiomeFilter.biome()
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(80),
+                        RandomOffsetPlacement.ofTriangle(3, 4),
+                        ImprovedLayerPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, UniformInt.of(3, 6), 4),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
         );
-        register(
-                context,
-                MEDIUM_GRASS_PATCH,
+        register(context, MEDIUM_GRASS_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MEDIUM_GRASS_PATCH),
-                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(2, 4), 4),
-                BiomeFilter.biome()
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(64),
+                        RandomOffsetPlacement.ofTriangle(3, 6),
+                        ImprovedLayerPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, UniformInt.of(2, 4), 4),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
         );
-        register(
-                context,
-                LARGE_GRASS_PATCH,
+        register(context, LARGE_GRASS_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.LARGE_GRASS_PATCH),
-                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 3), 4),
-                BiomeFilter.biome()
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(48),
+                        RandomOffsetPlacement.ofTriangle(3, 8),
+                        ImprovedLayerPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, UniformInt.of(0, 3), 4),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
         );
-        register(
-                context,
-                IRRADIATED_GRASS_PATCH,
+        register(context, IRRADIATED_GRASS_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.IRRADIATED_GRASS_PATCH),
-                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(2, 6), 4),
-                BiomeFilter.biome()
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(64),
+                        RandomOffsetPlacement.ofTriangle(4, 8),
+                        ImprovedLayerPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, UniformInt.of(2, 6), 4),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
         );
-        register(
-                context,
-                VALKYRIE_SPROUT_PATCH,
+        register(context, VALKYRIE_SPROUT_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.VALKYRIE_SPROUT_PATCH),
-                NoiseThresholdCountPlacement.of(0.5, 0, 4),
-                RarityFilter.onAverageOnceEvery(6),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
-                BiomeFilter.biome());
-        register(context, AETHER_BUSH_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AETHER_BUSH),
-                NoiseThresholdCountPlacement.of(-0.1, 2, 0),
-                RarityFilter.onAverageOnceEvery(2),
-                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 1), 4),
-                BiomeFilter.biome());
-        register(context, AETHER_BUSH_PATCH_FIELD, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AETHER_BUSH),
-                NoiseThresholdCountPlacement.of(-0.1, 2, 0),
-                RarityFilter.onAverageOnceEvery(20),
-                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 1), 4),
-                BiomeFilter.biome());
-        register(context, BLUEBERRY_BUSH_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BLUEBERRY_BUSH),
-                NoiseThresholdCountPlacement.of(0.1, 1, 0),
-                RarityFilter.onAverageOnceEvery(10),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
-                BiomeFilter.biome());
-        register(context, BLUEBERRY_BUSH_PATCH_RARE, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BLUEBERRY_BUSH_RARE),
-                RarityFilter.onAverageOnceEvery(20),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
-                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
-                BiomeFilter.biome());
-        register(context, BLUEBERRY_BUSH_PATCH_IRRADIATED, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BLUEBERRY_BUSH_RARE),
-                RarityFilter.onAverageOnceEvery(24),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
-                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
-                BiomeFilter.biome());
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(160),
+                        RandomOffsetPlacement.ofTriangle(3, 4),
+                        NoiseThresholdCountPlacement.of(0.5, 0, 4),
+                        RarityFilter.onAverageOnceEvery(6),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
+        register(context, AETHER_BUSH_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AETHER_BUSH),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(100),
+                        RandomOffsetPlacement.ofTriangle(2, 3),
+                        NoiseThresholdCountPlacement.of(-0.1, 2, 0),
+                        RarityFilter.onAverageOnceEvery(2),
+                        ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 1), 4),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
+        register(context, AETHER_BUSH_PATCH_FIELD,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AETHER_BUSH),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(100),
+                        RandomOffsetPlacement.ofTriangle(2, 3),
+                        NoiseThresholdCountPlacement.of(-0.1, 2, 0),
+                        RarityFilter.onAverageOnceEvery(20),
+                        ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 1), 4),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
+        register(context, BLUEBERRY_BUSH_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BLUEBERRY_BUSH),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(55),
+                        RandomOffsetPlacement.ofTriangle(2, 3),
+                        NoiseThresholdCountPlacement.of(-0.1, 2, 0),
+                        RarityFilter.onAverageOnceEvery(10),
+                        ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 1), 4),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
+        register(context, BLUEBERRY_BUSH_PATCH_RARE,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BLUEBERRY_BUSH),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(32),
+                        RandomOffsetPlacement.ofTriangle(2, 3),
+                        RarityFilter.onAverageOnceEvery(20),
+                        ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 1), 4),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
+        register(context, BLUEBERRY_BUSH_PATCH_IRRADIATED,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BLUEBERRY_BUSH),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(32),
+                        RandomOffsetPlacement.ofTriangle(2, 3),
+                        RarityFilter.onAverageOnceEvery(24),
+                        ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 1), 4),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
         register(context, ORANGE_TREE_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ORANGE_TREE),
                 NoiseBasedCountPlacement.of(3, 10, 0),
                 InSquarePlacement.spread(),
@@ -447,41 +526,102 @@ public class HolyIslesPlacedFeatures {
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.BRETTL_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
                 BiomeFilter.biome());
 
-        register(context, HOLY_ISLES_FLOWER_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.HOLY_ISLES_FLOWER_PATCH),
-                RarityFilter.onAverageOnceEvery(2),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
-                BiomeFilter.biome());
-        register(context, HIGHFIELDS_FLOWER_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.HIGHFIELDS_FLOWER_PATCH),
-                NoiseThresholdCountPlacement.of(0.8, 1, 3),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
-                BiomeFilter.biome());
-        register(context, MAGNETIC_FLOWER_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MAGNETIC_FLOWER_PATCH),
-                NoiseThresholdCountPlacement.of(0.8, 1, 3),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
-                BiomeFilter.biome());
-        register(context, ARCTIC_FLOWER_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ARCTIC_FLOWER_PATCH),
-                NoiseThresholdCountPlacement.of(0.8, 1, 3),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
-                BiomeFilter.biome());
-        register(context, MAGNETIC_SHROOM_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MAGNETIC_SHROOM_PATCH),
-                CountPlacement.of(UniformInt.of(0, 12)),
-                InSquarePlacement.spread(),
-                PlacementUtils.FULL_RANGE,
-                BiomeFilter.biome());
-        register(context, BONUS_MAGNETIC_SHROOM_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MAGNETIC_SHROOM_PATCH),
-                CountPlacement.of(2),
-                InSquarePlacement.spread(),
-                PlacementUtils.FULL_RANGE,
-                BiomeFilter.biome());
-        register(context, BRYALINN_FLOWER_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_FLOWER_PATCH),
-                CountPlacement.of(2),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
-                BiomeFilter.biome());
+        register(context, HOLY_ISLES_FLOWER_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.HOLY_ISLES_FLOWER_PATCH),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(16),
+                        RandomOffsetPlacement.ofTriangle(3, 8),
+                        RarityFilter.onAverageOnceEvery(2),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
+        register(context, HIGHFIELDS_FLOWER_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.HIGHFIELDS_FLOWER_PATCH),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(40),
+                        RandomOffsetPlacement.ofTriangle(3, 8),
+                        NoiseThresholdCountPlacement.of(0.8, 1, 3),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
+        register(context, MAGNETIC_FLOWER_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MAGNETIC_FLOWER_PATCH),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(40),
+                        RandomOffsetPlacement.ofTriangle(3, 8),
+                        NoiseThresholdCountPlacement.of(0.8, 1, 3),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
+        register(context, ARCTIC_FLOWER_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ARCTIC_FLOWER_PATCH),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(40),
+                        RandomOffsetPlacement.ofTriangle(3, 8),
+                        NoiseThresholdCountPlacement.of(0.8, 1, 3),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
+
+        register(context, MAGNETIC_SHROOM_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MAGNETIC_SHROOM_PATCH),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(18),
+                        RandomOffsetPlacement.ofTriangle(1, 6),
+                        CountPlacement.of(UniformInt.of(0, 12)),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.FULL_RANGE,
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.MAGNETIC_SHROOM_SURVIVES_ON), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
+                )
+        );
+        register(context, BONUS_MAGNETIC_SHROOM_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MAGNETIC_SHROOM_PATCH),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(18),
+                        RandomOffsetPlacement.ofTriangle(1, 6),
+                        CountPlacement.of(2),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.FULL_RANGE,
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.MAGNETIC_SHROOM_SURVIVES_ON), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
+                )
+        );
+        register(context, MYCELIAL_MAGNETIC_SHROOM_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MAGNETIC_SHROOM_PATCH),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(4),
+                        RandomOffsetPlacement.ofTriangle(1, 4),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.FULL_RANGE,
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.below(), AetherIIBlocks.MYCELIAL_AETHER_DIRT.get()), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
+                )
+        );
+        register(context, BRYALINN_FLOWER_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_FLOWER_PATCH),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(96),
+                        RandomOffsetPlacement.ofTriangle(3, 7),
+                        CountPlacement.of(2),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(new MossyPredicate(Vec3i.ZERO.below()), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
+                )
+        );
 
         register(context, SHORT_ARILUM, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHORT_ARILUM),
                 new LakePlacementModifier(),
@@ -671,6 +811,50 @@ public class HolyIslesPlacedFeatures {
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(64))),
                 RandomOffsetPlacement.of(ClampedNormalInt.of(0.0F, 3.0F, -10, 10), ClampedNormalInt.of(0.0F, 0.6F, -2, 2)),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
+                BiomeFilter.biome()
+        );
+        register(context, BRYALINN_MOSS_CARPET_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_CARPET),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(3),
+                        RandomOffsetPlacement.ofTriangle(2, 2),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
+                )
+        );
+        register(context, BRYALINN_MOSS_FLOWER_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOWERS),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(3),
+                        RandomOffsetPlacement.ofTriangle(2, 2),
+                        BiomeFilter.biome()
+                )
+        );
+        register(context, SHAYELINN_MOSS_CARPET_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_CARPET),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(3),
+                        RandomOffsetPlacement.ofTriangle(2, 2),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
+                )
+        );
+        register(context, AMBRELINN_MOSS_CARPET_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AMBRELINN_MOSS_CARPET),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(3),
+                        RandomOffsetPlacement.ofTriangle(2, 2),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
+                )
+        );
+        register(context, EXPOSED_BRYALINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOOR),
+                NoiseBasedCountPlacement.of(35, 50, 0.0),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.belowTop(276)),
                 BiomeFilter.biome()
         );
         register(context, EXPOSED_BRYALINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOOR),
@@ -1020,9 +1204,14 @@ public class HolyIslesPlacedFeatures {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         register(context, LARGE_SHELF_ROTSHROOM, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.LARGE_SHELF_ROTSHROOM));
         register(context, LARGE_SHELF_ROTSHROOM_UNDERGROUND, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.LARGE_SHELF_ROTSHROOM_UNDERGROUND));
-        register(context, ROTSHROOM_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ROTSHROOM_PATCH));
+        register(context, ROTSHROOM_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.ROTSHROOM_PATCH),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(32),
+                        RandomOffsetPlacement.ofTriangle(3, 4),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                )
+        );
         register(context, COARSE_AETHER_DIRT_DUNGEON, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.COARSE_AETHER_DIRT_DUNGEON));
-        register(context, INFECTED_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.INFECTED_PATCH));
         register(context, UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.UNDERGROWTH_PATCH));
     }
 

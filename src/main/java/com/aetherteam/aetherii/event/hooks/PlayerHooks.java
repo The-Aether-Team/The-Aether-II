@@ -82,11 +82,11 @@ public class PlayerHooks {
                         if (!player.isCreative()) {
                             if (stack.getCount() > 1) {
                                 stack.shrink(1);
-                                player.addItem(stack.getCraftingRemainder());
+                                player.addItem(stack);
                             } else if (stack.isDamageableItem()) {
                                 stack.hurtAndBreak(1, player, hand);
                             } else {
-                                player.setItemInHand(hand, stack.getCraftingRemainder());
+                                player.setItemInHand(hand, stack);
                             }
                         }
                         return true;
@@ -260,7 +260,7 @@ public class PlayerHooks {
     public static Player.BedSleepingProblem handleBedrollSleeping(ServerPlayer player, Level level, BlockPos pos, BlockState state, Player.BedSleepingProblem vanillaProblem) {
         if (state.is(AetherIIBlocks.CLOUDWOOL_BEDROLL)) {
             if (vanillaProblem == null && level.getLightEngine().getRawBrightness(pos, 15) < 10) {
-                player.displayClientMessage(Component.translatable("aether_ii.bedroll.too_dark"), true);
+                player.sendOverlayMessage(Component.translatable("aether_ii.bedroll.too_dark"));
                 return Player.BedSleepingProblem.OTHER_PROBLEM;
             }
         }
@@ -289,7 +289,7 @@ public class PlayerHooks {
 
     public static boolean dismountPrevention(Entity rider, Entity mount, boolean dismounting) {
         if (dismounting && rider.isShiftKeyDown()) {
-            return (mount instanceof MountableAnimal && !mount.onGround() && !mount.isInFluidType() && !mount.isPassenger());
+            return (mount instanceof MountableAnimal && !mount.onGround() && !mount.isInLiquid() && !mount.isPassenger());
         }
         return false;
     }

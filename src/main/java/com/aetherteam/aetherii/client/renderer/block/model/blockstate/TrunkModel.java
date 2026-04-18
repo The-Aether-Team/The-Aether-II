@@ -39,6 +39,16 @@ public record TrunkModel(Map<Holder, BlockStateModelPart> connections, TextureAt
         }
     }
 
+    @Override
+    public Material.Baked particleMaterial() { //TODO
+        return null;
+    }
+
+    @Override
+    public @BakedQuad.MaterialFlags int materialFlags() { //TODO
+        return 0;
+    }
+
     public record Unbaked(Identifier corner, Identifier cornerTall) implements CustomUnbakedBlockStateModel {
         public static final Identifier ID = Identifier.fromNamespaceAndPath(AetherII.MODID, "trunk_corners");
         public static final MapCodec<Unbaked> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(
@@ -59,7 +69,7 @@ public record TrunkModel(Map<Holder, BlockStateModelPart> connections, TextureAt
                 connections.put(new Holder(entry.getKey(), WallSide.LOW), SimpleModelWrapper.bake(modelBaker, this.corner(), entry.getValue().withUvLock()));
                 connections.put(new Holder(entry.getKey(), WallSide.TALL), SimpleModelWrapper.bake(modelBaker, this.cornerTall(), entry.getValue().withUvLock()));
             }
-            return new TrunkModel(connections, List.copyOf(connections.values()).getFirst().particleMaterial());
+            return new TrunkModel(connections, List.copyOf(connections.values()).getFirst().particleMaterial().sprite());
         }
 
         @Override

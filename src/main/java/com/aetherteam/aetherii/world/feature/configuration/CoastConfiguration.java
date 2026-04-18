@@ -19,7 +19,7 @@ public record CoastConfiguration(BlockStateProvider block, float size, DensityFu
             BlockStateProvider.CODEC.fieldOf("block").forGetter(CoastConfiguration::block),
             Codec.FLOAT.fieldOf("size").forGetter(CoastConfiguration::size),
             DensityFunction.HOLDER_HELPER_CODEC.fieldOf("distance_noise").forGetter(CoastConfiguration::distanceNoise),
-            UniformInt.CODEC.fieldOf("y_range").forGetter(CoastConfiguration::yRange),
+            UniformInt.MAP_CODEC.fieldOf("y_range").forGetter(CoastConfiguration::yRange),
             PlacedFeature.CODEC.optionalFieldOf("vegetation_feature").forGetter(CoastConfiguration::vegetationFeature),
             Codec.floatRange(0.0F, 1.0F).fieldOf("vegetation_chance").forGetter(CoastConfiguration::vegetationChance),
             TagKey.codec(Registries.BLOCK).fieldOf("valid_blocks").forGetter(CoastConfiguration::validBlocks)

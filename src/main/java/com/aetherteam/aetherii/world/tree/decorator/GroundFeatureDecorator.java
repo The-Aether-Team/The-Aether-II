@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
@@ -73,7 +74,7 @@ public class GroundFeatureDecorator extends TreeDecorator {
 
     private void placeBlockAt(TreeDecorator.Context context, BlockPos pos) {
         BlockPos blockpos = pos.above();
-        if (Feature.isGrassOrDirt(context.level(), blockpos.below()) && context.isAir(blockpos)) {
+        if (context.level().getBlockState(pos).is(BlockTags.DIRT) && context.isAir(blockpos)) {
             context.setBlock(blockpos, this.blockProvider.getState(context.level(), context.random(), pos));
         }
     }

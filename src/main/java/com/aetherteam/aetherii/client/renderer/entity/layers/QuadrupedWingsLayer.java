@@ -41,7 +41,7 @@ public class QuadrupedWingsLayer<T extends WingEntityRenderState, M extends Quad
             }
             this.wings.setupAnim(entity);
 
-            submitNodeCollector.submitModel(this.wings, entity, poseStack, RenderTypes.entityCutoutNoCull(this.resourceLocation), packedLight, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), -1, null);
+            submitNodeCollector.submitModel(this.wings, entity, poseStack, RenderTypes.entityCutout(this.resourceLocation), packedLight, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), -1, null);
         }
     }
 }

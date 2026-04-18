@@ -33,7 +33,7 @@ public class MusicPlayerItem extends Item {
     @Override
     public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction action, Player player, SlotAccess access) {
         if (!stack.has(AetherIIDataComponents.STORED_MUSIC) && other.has(DataComponents.JUKEBOX_PLAYABLE) && other.is(AetherIITags.Items.ENGRAVED_DISCS)) {
-            Optional<Holder<JukeboxSong>> optional = JukeboxSong.fromStack(player.registryAccess(), other);
+            Optional<Holder<JukeboxSong>> optional = JukeboxSong.fromStack(other);
             if (optional.isPresent()) {
                 stack.set(AetherIIDataComponents.STORED_MUSIC, new StoredMusic(other.typeHolder(), optional.get().value().soundEvent()));
                 other.shrink(1);

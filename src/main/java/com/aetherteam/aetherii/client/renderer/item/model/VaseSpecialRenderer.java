@@ -44,7 +44,7 @@ public class VaseSpecialRenderer implements NoDataSpecialModelRenderer {
         this.vaseModel.root().getExtentsForGui(poseStack, consumer);
     }
 
-    public record Unbaked() implements SpecialModelRenderer.Unbaked {
+    public record Unbaked() implements NoDataSpecialModelRenderer.Unbaked {
 
         public static final MapCodec<VaseSpecialRenderer.Unbaked> MAP_CODEC = MapCodec.unit(new VaseSpecialRenderer.Unbaked());
 
@@ -57,7 +57,7 @@ public class VaseSpecialRenderer implements NoDataSpecialModelRenderer {
         }
 
         @Override
-        public SpecialModelRenderer<?> bake(BakingContext context) {
+        public NoDataSpecialModelRenderer bake(BakingContext context) {
             VaseModel model = new VaseModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.VASE));
             return new VaseSpecialRenderer(model);
         }

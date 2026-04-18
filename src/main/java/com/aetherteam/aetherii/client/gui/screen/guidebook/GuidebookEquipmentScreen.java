@@ -31,6 +31,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
@@ -279,7 +280,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         }
         net.neoforged.neoforge.client.renderstate.RenderStateExtensions.onUpdateEntityRenderState(entityrenderer, entity, entityrenderstate);
 //        entityrenderstate.hitboxesRenderState = null; //todo
-        guiGraphics.submitEntityRenderState(entityrenderstate, scale, translation, rotation, overrideCameraAngle, x1, y1, x2, y2);
+        guiGraphics.entity(entityrenderstate, scale, translation, rotation, overrideCameraAngle, x1, y1, x2, y2);
     }
 
     private static EntityRenderState extractRenderState(LivingEntity p_461127_) {
@@ -293,10 +294,10 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     @Override
-    protected void slotClicked(@Nullable Slot slot, int slotId, int mouseButton, ClickType type) {
+    protected void slotClicked(@Nullable Slot slot, int slotId, int mouseButton, ContainerInput type) {
         if (this.getMinecraft().player != null && this.getMinecraft().gameMode != null) {
-            boolean flag = type == ClickType.QUICK_MOVE;
-            if (slot != null || type == ClickType.QUICK_CRAFT) {
+            boolean flag = type == ContainerInput.QUICK_MOVE;
+            if (slot != null || type == ContainerInput.QUICK_CRAFT) {
                 if (slot == null || slot.mayPickup(this.getMinecraft().player)) {
                     if (slot == this.destroyItemSlot && this.destroyItemSlot != null && flag) {
                         for (int j = 0; j < this.getMinecraft().player.inventoryMenu.getItems().size(); ++j) {
@@ -319,8 +320,8 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
             if (slot != null) {
                 if (slot == this.currencySlot) {
                     var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
-                    if (type == ClickType.PICKUP || type == ClickType.QUICK_CRAFT) {
-                        if (type == ClickType.QUICK_CRAFT) {
+                    if (type == ContainerInput.PICKUP || type == ContainerInput.QUICK_CRAFT) {
+                        if (type == ContainerInput.QUICK_CRAFT) {
                             if (mouseButton == 5) {
                                 mouseButton = 1;
                             } else if (mouseButton == 1) {
