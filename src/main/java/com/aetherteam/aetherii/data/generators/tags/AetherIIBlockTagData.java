@@ -713,7 +713,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS.get(),
                 AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS.get()
         );
-        this.tag(BlockTags.BAMBOO_PLANTABLE_ON).addTag(AetherIITags.Blocks.AETHER_DIRT);
+        this.tag(BlockTags.SUPPORTS_BAMBOO).addTag(AetherIITags.Blocks.AETHER_DIRT);
         this.tag(BlockTags.STANDING_SIGNS).add(
                 AetherIIBlocks.SKYROOT_SIGN.get(),
                 AetherIIBlocks.GREATROOT_SIGN.get(),
@@ -1309,7 +1309,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get()
         );
-        this.tag(BlockTags.SNOW_LAYER_CANNOT_SURVIVE_ON).addTags(AetherIITags.Blocks.AERCLOUDS).add(
+        this.tag(BlockTags.CANNOT_SUPPORT_SNOW_LAYER).addTags(AetherIITags.Blocks.AERCLOUDS).add(
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
                 AetherIIBlocks.ICESTONE.get(),
                 AetherIIBlocks.ARCTIC_ICE.get(),
