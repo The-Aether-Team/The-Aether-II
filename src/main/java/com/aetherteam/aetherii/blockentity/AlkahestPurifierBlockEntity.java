@@ -250,7 +250,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
     private boolean canProcess(RegistryAccess registryAccess, @Nullable RecipeHolder<AlkahestPurificationRecipe> recipeHolder, NonNullList<ItemStack> stacks, int maxStackSize) {
         ItemStack input = stacks.get(0);
         if (!input.isEmpty() && recipeHolder != null) {
-            ItemStack result = recipeHolder.value().assemble(new SingleRecipeInputWithRandom(this.getItem(0), this.getLevel().getRandom()), registryAccess);
+            ItemStack result = recipeHolder.value().assemble(new SingleRecipeInputWithRandom(this.getItem(0), this.getLevel().getRandom()));
             if (result.isEmpty()) {
                 return false;
             } else {
@@ -271,7 +271,7 @@ public class AlkahestPurifierBlockEntity extends BaseContainerBlockEntity implem
     private boolean process(RegistryAccess registryAccess, @Nullable RecipeHolder<AlkahestPurificationRecipe> recipeHolder, NonNullList<ItemStack> stacks, int maxStackSize) {
         if (recipeHolder != null && this.canProcess(registryAccess, recipeHolder, stacks, maxStackSize)) {
             ItemStack inputSlot = stacks.get(0);
-            ItemStack result = recipeHolder.value().assemble(new SingleRecipeInputWithRandom(this.getItem(0), this.getLevel().getRandom()), registryAccess);
+            ItemStack result = recipeHolder.value().assemble(new SingleRecipeInputWithRandom(this.getItem(0), this.getLevel().getRandom()));
             ItemStack outputSlot = stacks.get(5);
             if (outputSlot.isEmpty()) {
                 stacks.set(5, result.copy());

@@ -258,7 +258,7 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
 
     private static boolean canProcess(RegistryAccess registryAccess, @Nullable RecipeHolder<HourglassRestoringRecipe> recipe, SingleRecipeInputWithRandom recipeInput, NonNullList<ItemStack> items, int maxStackSize) {
         if (recipe != null) {
-            List<ItemStack> results = recipe.value().assembleOutputs(recipeInput, registryAccess);
+            List<ItemStack> results = recipe.value().assembleOutputs(recipeInput);
             int emptySpots = Collections.frequency(results, ItemStack.EMPTY);
             int outputs = results.size() - emptySpots;
             int availableSlots = Collections.frequency(canProcessResults(registryAccess, recipe, recipeInput, items, maxStackSize), true);
@@ -271,7 +271,7 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
         NonNullList<Boolean> checks = NonNullList.withSize(3, false);
 
         if (!items.get(0).isEmpty() && recipe != null) {
-            List<ItemStack> results = recipe.value().assembleOutputs(recipeInput, registryAccess);
+            List<ItemStack> results = recipe.value().assembleOutputs(recipeInput);
             if (!results.isEmpty()) {
                 for (int resultIndex = 0; resultIndex < 3; resultIndex++) {
                     ItemStack result = results.get(resultIndex);
@@ -302,7 +302,7 @@ public class AmberHourglassBlockEntity extends BaseContainerBlockEntity implemen
 
         if (recipe != null && validSpots.contains(true)) {
             ItemStack input = items.get(0);
-            List<ItemStack> recipeResults = recipe.value().assembleOutputs(recipeInput, registryAccess);
+            List<ItemStack> recipeResults = recipe.value().assembleOutputs(recipeInput);
 
             for (int resultIndex = 0; resultIndex < 3; resultIndex++) {
                 ItemStack result = recipeResults.get(resultIndex);

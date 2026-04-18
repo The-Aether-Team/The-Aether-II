@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.block;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.core.cauldron.CauldronInteractions;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -27,11 +28,11 @@ public class AetherIICauldronInteractions {
             emptySkyrootBucket(level, pos, player, hand, stack, Blocks.POWDER_SNOW_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 3), SoundEvents.BUCKET_EMPTY_POWDER_SNOW);
 
     public static final CauldronInteraction EMPTY_WATER = (state, level, pos, player, hand, stack) ->
-            CauldronInteraction.fillBucket(state, level, pos, player, hand, stack, new ItemStack(AetherIIItems.SKYROOT_WATER_BUCKET.get()), (blockState) ->
+            CauldronInteractions.fillBucket(state, level, pos, player, hand, stack, new ItemStack(AetherIIItems.SKYROOT_WATER_BUCKET.get()), (blockState) ->
                     blockState.getValue(LayeredCauldronBlock.LEVEL) == 3, SoundEvents.BUCKET_FILL);
 
     public static final CauldronInteraction EMPTY_POWDER_SNOW = (state, level, pos, player, hand, stack) ->
-            CauldronInteraction.fillBucket(state, level, pos, player, hand, stack, new ItemStack(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get()), (blockState) ->
+            CauldronInteractions.fillBucket(state, level, pos, player, hand, stack, new ItemStack(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get()), (blockState) ->
                     blockState.getValue(LayeredCauldronBlock.LEVEL) == 3, SoundEvents.BUCKET_FILL);
 
     private static InteractionResult emptySkyrootBucket(Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stack, BlockState state, SoundEvent sound) {

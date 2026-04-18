@@ -187,8 +187,8 @@ public class AetherIIClientExtensions {
         }
 
         @Override
-        public Vector4f modifyFogColor(Camera camera, float partialTick, ClientLevel level, int renderDistance, float darkenWorldAmount, Vector4f fluidFogColor) {
-            return new Vector4f(170 / 255.0F, 226 / 255.0F, 149 / 255.0F, 1F);
+        public void modifyFogColor(Camera camera, float partialTick, ClientLevel level, int renderDistance, float darkenWorldAmount, Vector4f fluidFogColor) {
+            new Vector4f(170 / 255.0F, 226 / 255.0F, 149 / 255.0F, 1F);
         }
 
         @Override
