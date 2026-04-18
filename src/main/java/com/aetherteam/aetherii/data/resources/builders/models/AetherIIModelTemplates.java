@@ -14,7 +14,6 @@ import java.util.Optional;
 public class AetherIIModelTemplates {
     public static final ModelTemplate EMPTY = ModelTemplates.create("block", TextureSlot.PARTICLE);
     public static final ModelTemplate TINTED_GRASS = ModelTemplates.create("block", TextureSlot.BOTTOM, TextureSlot.PARTICLE, TextureSlot.TOP, AetherIITextureSlots.TOP_1, AetherIITextureSlots.TOP_2, AetherIITextureSlots.TOP_3, TextureSlot.SIDE, AetherIITextureSlots.SIDE_OVERLAY_1, AetherIITextureSlots.SIDE_OVERLAY_2, AetherIITextureSlots.SIDE_OVERLAY_3).extend()
-            
             .element((builder) -> builder
                     .from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F)
                     .face(Direction.DOWN, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.BOTTOM).cullface(Direction.DOWN))
