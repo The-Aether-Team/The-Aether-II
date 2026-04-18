@@ -9,22 +9,22 @@ import com.aetherteam.aetherii.recipe.display.AlkahestPurifierRecipeDisplay;
 import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.OutputEntry;
-import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
@@ -35,8 +35,31 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithRandom> {
-    protected final String group;
-    protected final AlkahestPurifierBookCategory category;
+    public static final MapCodec<AlkahestPurificationRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
+            CommonInfo.MAP_CODEC.forGetter(r -> r.commonInfo),
+            AlkahestPurifierBookInfo.MAP_CODEC.forGetter(r -> r.bookInfo),
+            Ingredient.CODEC.fieldOf("ingredient").forGetter(AlkahestPurificationRecipe::ingredient),
+            OutputEntry.ENTRY_CODEC.fieldOf("results").forGetter(AlkahestPurificationRecipe::results),
+            OutputEntry.ENTRY_CODEC.fieldOf("byproducts").forGetter(AlkahestPurificationRecipe::byproducts),
+            Codec.FLOAT.fieldOf("experience").orElse(0.0F).forGetter(AlkahestPurificationRecipe::experience),
+            Codec.INT.fieldOf("alkahest_usage").orElse(1).forGetter(AlkahestPurificationRecipe::alkahestUsage),
+            Codec.INT.fieldOf("processing_time").orElse(200).forGetter(AlkahestPurificationRecipe::processingTime)
+    ).apply(i, AlkahestPurificationRecipe::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, AlkahestPurificationRecipe> STREAM_CODEC = StreamCodec.composite(
+            CommonInfo.STREAM_CODEC, r -> r.commonInfo,
+            AlkahestPurifierBookInfo.STREAM_CODEC, r -> r.bookInfo,
+            Ingredient.CONTENTS_STREAM_CODEC, AlkahestPurificationRecipe::ingredient,
+            OutputEntry.ENTRY_STREAM_CODEC, AlkahestPurificationRecipe::results,
+            OutputEntry.ENTRY_STREAM_CODEC, AlkahestPurificationRecipe::byproducts,
+            ByteBufCodecs.FLOAT, AlkahestPurificationRecipe::experience,
+            ByteBufCodecs.INT, AlkahestPurificationRecipe::alkahestUsage,
+            ByteBufCodecs.INT, AlkahestPurificationRecipe::processingTime,
+            AlkahestPurificationRecipe::new
+    );
+    public static final RecipeSerializer<AlkahestPurificationRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
+
+    protected final Recipe.CommonInfo commonInfo;
+    protected final AlkahestPurifierBookInfo bookInfo;
     protected final Ingredient ingredient;
     protected final OutputEntry.BaseEntry results;
     protected final OutputEntry.BaseEntry byproducts;
@@ -46,9 +69,9 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
     @Nullable
     private PlacementInfo placementInfo;
 
-    public AlkahestPurificationRecipe(String group, AlkahestPurifierBookCategory category, Ingredient ingredient, OutputEntry.BaseEntry results, OutputEntry.BaseEntry byproducts, float experience, int alkahestUsage, int processingTime) {
-        this.group = group;
-        this.category = category;
+    public AlkahestPurificationRecipe(Recipe.CommonInfo commonInfo, AlkahestPurifierBookInfo bookInfo, Ingredient ingredient, OutputEntry.BaseEntry results, OutputEntry.BaseEntry byproducts, float experience, int alkahestUsage, int processingTime) {
+        this.commonInfo = commonInfo;
+        this.bookInfo = bookInfo;
         this.ingredient = ingredient;
         this.results = results;
         this.byproducts = byproducts;
@@ -57,9 +80,17 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
         this.processingTime = processingTime;
     }
 
+    public boolean showNotification() {
+        return this.commonInfo.showNotification();
+    }
+
     @Override
     public String group() {
-        return this.group;
+        return this.bookInfo.group;
+    }
+
+    public AlkahestPurifierBookCategory category() {
+        return this.bookInfo.category;
     }
 
     public Ingredient ingredient() {
@@ -86,10 +117,6 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
         return this.processingTime;
     }
 
-    public AlkahestPurifierBookCategory category() {
-        return this.category;
-    }
-
     public PlacementInfo placementInfo() {
         if (this.placementInfo == null) {
             this.placementInfo = PlacementInfo.create(this.ingredient);
@@ -103,7 +130,7 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
     }
 
     @Override
-    public ItemStack assemble(SingleRecipeInputWithRandom singleRecipeInput, HolderLookup.Provider provider) {
+    public ItemStack assemble(SingleRecipeInputWithRandom singleRecipeInput) {
         return this.results().process(singleRecipeInput.randomSource());
     }
 
@@ -114,7 +141,7 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
 
     @Override
     public RecipeSerializer<AlkahestPurificationRecipe> getSerializer() {
-        return AetherIIRecipeSerializers.ALKAHEST_PURIFICATION.get();
+        return SERIALIZER;
     }
 
     @Override
@@ -124,7 +151,7 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
         Holder<Item> item = ingredients.get(0);
         if (item.is(AetherIITags.Items.IRRADIATED_ITEM)) {
             Identifier location = item.getKey().identifier().withSuffix("_result");
-            resultDisplay = new SlotDisplay.ItemStackSlotDisplay(new ItemStack(item, 1, DataComponentPatch.builder()
+            resultDisplay = new SlotDisplay.ItemStackSlotDisplay(new ItemStackTemplate(item, 1, DataComponentPatch.builder()
                     .set(DataComponents.ITEM_MODEL, location)
                     .set(DataComponents.ITEM_NAME, Component.translatable(Util.makeDescriptionId("item", location)))
                     .build()
@@ -150,56 +177,8 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
         };
     }
 
-    public static class Serializer implements RecipeSerializer<AlkahestPurificationRecipe> {
-        private final MapCodec<AlkahestPurificationRecipe> codec;
-        private final StreamCodec<RegistryFriendlyByteBuf, AlkahestPurificationRecipe> streamCodec;
-
-        public Serializer() {
-            this.codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                    Codec.STRING.optionalFieldOf("group", "").forGetter(AlkahestPurificationRecipe::group),
-                    AlkahestPurifierBookCategory.CODEC.fieldOf("category").orElse(AlkahestPurifierBookCategory.ITEMS).forGetter(AlkahestPurificationRecipe::category),
-                    Ingredient.CODEC.fieldOf("ingredient").forGetter(AlkahestPurificationRecipe::ingredient),
-                    OutputEntry.ENTRY_CODEC.fieldOf("results").forGetter(AlkahestPurificationRecipe::results),
-                    OutputEntry.ENTRY_CODEC.fieldOf("byproducts").forGetter(AlkahestPurificationRecipe::byproducts),
-                    Codec.FLOAT.fieldOf("experience").orElse(0.0F).forGetter(AlkahestPurificationRecipe::experience),
-                    Codec.INT.fieldOf("alkahest_usage").orElse(1).forGetter(AlkahestPurificationRecipe::alkahestUsage),
-                    Codec.INT.fieldOf("processing_time").orElse(200).forGetter(AlkahestPurificationRecipe::processingTime)
-            ).apply(instance, AlkahestPurificationRecipe::new));
-            this.streamCodec = StreamCodec.of(this::toNetwork, this::fromNetwork);
-        }
-
-        @Override
-        public MapCodec<AlkahestPurificationRecipe> codec() {
-            return this.codec;
-        }
-
-        @Override
-        public StreamCodec<RegistryFriendlyByteBuf, AlkahestPurificationRecipe> streamCodec() {
-            return this.streamCodec;
-        }
-
-        public AlkahestPurificationRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
-            String group = buffer.readUtf();
-            AlkahestPurifierBookCategory category = buffer.readEnum(AlkahestPurifierBookCategory.class);
-            Ingredient ingredient = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            OutputEntry.BaseEntry results = OutputEntry.ENTRY_STREAM_CODEC.decode(buffer);
-            OutputEntry.BaseEntry byproducts = OutputEntry.ENTRY_STREAM_CODEC.decode(buffer);
-            float experience = buffer.readFloat();
-            int alkahestUsage = buffer.readVarInt();
-            int processingTime = buffer.readVarInt();
-            return new AlkahestPurificationRecipe(group, category, ingredient, results, byproducts, experience, alkahestUsage, processingTime);
-        }
-
-        public void toNetwork(RegistryFriendlyByteBuf buffer, AlkahestPurificationRecipe recipe) {
-            buffer.writeUtf(recipe.group);
-            buffer.writeEnum(recipe.category());
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.ingredient);
-            OutputEntry.ENTRY_STREAM_CODEC.encode(buffer, recipe.results);
-            OutputEntry.ENTRY_STREAM_CODEC.encode(buffer, recipe.byproducts);
-            buffer.writeFloat(recipe.experience());
-            buffer.writeVarInt(recipe.alkahestUsage());
-            buffer.writeVarInt(recipe.processingTime());
-        }
+    public record AlkahestPurifierBookInfo(AlkahestPurifierBookCategory category, String group) implements Recipe.BookInfo<AlkahestPurifierBookCategory> {
+        public static final MapCodec<AlkahestPurifierBookInfo> MAP_CODEC = BookInfo.mapCodec(AlkahestPurifierBookCategory.CODEC, AlkahestPurifierBookCategory.ITEMS, AlkahestPurifierBookInfo::new);
+        public static final StreamCodec<RegistryFriendlyByteBuf, AlkahestPurifierBookInfo> STREAM_CODEC = BookInfo.streamCodec(AlkahestPurifierBookCategory.STREAM_CODEC, AlkahestPurifierBookInfo::new);
     }
-
 }

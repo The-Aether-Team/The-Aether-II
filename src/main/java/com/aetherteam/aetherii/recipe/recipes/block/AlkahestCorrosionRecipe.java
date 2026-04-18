@@ -1,12 +1,15 @@
 package com.aetherteam.aetherii.recipe.recipes.block;
 
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
-import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.aetherteam.nitrogen.recipe.BlockPropertyPair;
 import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
 import com.aetherteam.nitrogen.recipe.recipes.AbstractBlockStateRecipe;
-import com.aetherteam.nitrogen.recipe.serializer.BlockStateRecipeSerializer;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -19,6 +22,10 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class AlkahestCorrosionRecipe extends AbstractBlockStateRecipe implements MatchEventRecipe {
+    public static final MapCodec<AlkahestCorrosionRecipe> MAP_CODEC = AbstractBlockStateRecipe.codec(AlkahestCorrosionRecipe::new);
+    public static final StreamCodec<RegistryFriendlyByteBuf, AlkahestCorrosionRecipe> STREAM_CODEC = AbstractBlockStateRecipe.streamCodec(AlkahestCorrosionRecipe::new);
+    public static final RecipeSerializer<AlkahestCorrosionRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
+
     public AlkahestCorrosionRecipe(BlockStateIngredient ingredient, BlockPropertyPair result, Optional<Identifier> function) {
         super(AetherIIRecipeTypes.ALKAHEST_CORROSION.get(), ingredient, result, function);
     }
@@ -30,12 +37,6 @@ public class AlkahestCorrosionRecipe extends AbstractBlockStateRecipe implements
 
     @Override
     public RecipeSerializer<AlkahestCorrosionRecipe> getSerializer() {
-        return AetherIIRecipeSerializers.ALKAHEST_CORROSION.get();
-    }
-
-    public static class Serializer extends BlockStateRecipeSerializer<AlkahestCorrosionRecipe> {
-        public Serializer() {
-            super(AlkahestCorrosionRecipe::new);
-        }
+        return SERIALIZER;
     }
 }

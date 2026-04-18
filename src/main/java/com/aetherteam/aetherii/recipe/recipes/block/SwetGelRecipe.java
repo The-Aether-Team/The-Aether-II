@@ -1,14 +1,18 @@
 package com.aetherteam.aetherii.recipe.recipes.block;
 
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
-import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
-import com.aetherteam.aetherii.recipe.serializer.BiomeParameterRecipeSerializer;
 import com.aetherteam.nitrogen.recipe.BlockPropertyPair;
 import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
+import com.aetherteam.nitrogen.recipe.BlockStateRecipeUtil;
 import com.mojang.datafixers.util.Either;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -22,6 +26,10 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class SwetGelRecipe extends AbstractBiomeParameterRecipe implements MatchEventRecipe {
+    public static final MapCodec<SwetGelRecipe> MAP_CODEC = AbstractBiomeParameterRecipe.biomeCodec(SwetGelRecipe::new);
+    public static final StreamCodec<RegistryFriendlyByteBuf, SwetGelRecipe> STREAM_CODEC = AbstractBiomeParameterRecipe.biomeStreamCodec(SwetGelRecipe::new);
+    public static final RecipeSerializer<SwetGelRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
+
     public SwetGelRecipe(Optional<Either<ResourceKey<Biome>, TagKey<Biome>>> biome, BlockStateIngredient ingredient, BlockPropertyPair result, Optional<Identifier> function) {
         super(AetherIIRecipeTypes.SWET_GEL_CONVERSION.get(), biome, ingredient, result, function);
     }
@@ -37,12 +45,6 @@ public class SwetGelRecipe extends AbstractBiomeParameterRecipe implements Match
 
     @Override
     public RecipeSerializer<SwetGelRecipe> getSerializer() {
-        return AetherIIRecipeSerializers.SWET_GEL_CONVERSION.get();
-    }
-
-    public static class Serializer extends BiomeParameterRecipeSerializer<SwetGelRecipe> {
-        public Serializer() {
-            super(SwetGelRecipe::new, SwetGelRecipe::new);
-        }
+        return SERIALIZER;
     }
 }

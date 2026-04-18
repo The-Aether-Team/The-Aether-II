@@ -3,8 +3,9 @@ package com.aetherteam.aetherii.recipe.recipes.item.special;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.BrokenStack;
-import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
-import net.minecraft.core.HolderLookup;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -14,6 +15,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LootRepairRecipe extends CustomRecipe {
+    public static final LootRepairRecipe INSTANCE = new LootRepairRecipe();
+    public static final MapCodec<LootRepairRecipe> MAP_CODEC = MapCodec.unit(INSTANCE);
+    public static final StreamCodec<RegistryFriendlyByteBuf, LootRepairRecipe> STREAM_CODEC = StreamCodec.unit(INSTANCE);
+    public static final RecipeSerializer<LootRepairRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
+
     private final Map<Item, Item> materials = new HashMap<>(Map.of(
             AetherIIItems.HAMMER_OF_DEMOLITION.get(), AetherIIItems.SENTRY_SERVO.get(),
             AetherIIItems.SENTRY_BOOTS.get(), AetherIIItems.SENTRY_SERVO.get(),
@@ -23,10 +29,6 @@ public class LootRepairRecipe extends CustomRecipe {
             AetherIIItems.NEPTUNE_HELMET.get(), AetherIIItems.NEPTUNE_SCALE.get(),
             AetherIIItems.NEPTUNE_GLOVES.get(), AetherIIItems.NEPTUNE_SCALE.get()
     ));
-
-    public LootRepairRecipe(CraftingBookCategory category) {
-        super(category);
-    }
 
     @Override
     public boolean matches(CraftingInput craftingInput, Level level) {
@@ -53,7 +55,7 @@ public class LootRepairRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingInput craftingInput, HolderLookup.Provider provider) {
+    public ItemStack assemble(CraftingInput craftingInput) {
         ItemStack result = ItemStack.EMPTY;
         for (int i = 0; i < craftingInput.size(); ++i) {
             ItemStack item = craftingInput.getItem(i);
@@ -70,6 +72,6 @@ public class LootRepairRecipe extends CustomRecipe {
 
     @Override
     public RecipeSerializer<LootRepairRecipe> getSerializer() {
-        return AetherIIRecipeSerializers.LOOT_REPAIR.get();
+        return SERIALIZER;
     }
 }

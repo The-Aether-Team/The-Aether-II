@@ -1,12 +1,15 @@
 package com.aetherteam.aetherii.recipe.recipes.block;
 
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
-import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.aetherteam.nitrogen.recipe.BlockPropertyPair;
 import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
 import com.aetherteam.nitrogen.recipe.recipes.AbstractBlockStateRecipe;
-import com.aetherteam.nitrogen.recipe.serializer.BlockStateRecipeSerializer;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -19,6 +22,10 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class IrradiationRecipe extends AbstractBlockStateRecipe implements MatchEventRecipe {
+    public static final MapCodec<IrradiationRecipe> MAP_CODEC = AbstractBlockStateRecipe.codec(IrradiationRecipe::new);
+    public static final StreamCodec<RegistryFriendlyByteBuf, IrradiationRecipe> STREAM_CODEC = AbstractBlockStateRecipe.streamCodec(IrradiationRecipe::new);
+    public static final RecipeSerializer<IrradiationRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
+
     public IrradiationRecipe(BlockStateIngredient ingredient, BlockPropertyPair result, Optional<Identifier> function) {
         super(AetherIIRecipeTypes.DUST_IRRADIATION.get(), ingredient, result, function);
     }
@@ -30,12 +37,6 @@ public class IrradiationRecipe extends AbstractBlockStateRecipe implements Match
 
     @Override
     public RecipeSerializer<IrradiationRecipe> getSerializer() {
-        return AetherIIRecipeSerializers.DUST_IRRADIATION.get();
-    }
-
-    public static class Serializer extends BlockStateRecipeSerializer<IrradiationRecipe> {
-        public Serializer() {
-            super(IrradiationRecipe::new);
-        }
+        return SERIALIZER;
     }
 }

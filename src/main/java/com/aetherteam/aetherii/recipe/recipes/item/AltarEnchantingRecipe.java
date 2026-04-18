@@ -6,13 +6,15 @@ import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
 import com.aetherteam.aetherii.recipe.book.AltarBookCategory;
 import com.aetherteam.aetherii.recipe.display.AltarRecipeDisplay;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
-import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
@@ -20,14 +22,35 @@ import net.minecraft.world.item.crafting.display.SlotDisplay;
 import java.util.List;
 
 public class AltarEnchantingRecipe extends SingleItemRecipe {
-    protected final AltarBookCategory category;
+    public static final MapCodec<AltarEnchantingRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
+            CommonInfo.MAP_CODEC.forGetter(r -> r.commonInfo),
+            AltarBookInfo.MAP_CODEC.forGetter(r -> r.bookInfo),
+            Ingredient.CODEC.fieldOf("ingredient").forGetter(AltarEnchantingRecipe::input),
+            ItemStackTemplate.CODEC.fieldOf("result").forGetter(AltarEnchantingRecipe::result),
+            Codec.FLOAT.fieldOf("experience").orElse(0.0F).forGetter(AltarEnchantingRecipe::experience),
+            Codec.INT.fieldOf("fuel_count").orElse(1).forGetter(AltarEnchantingRecipe::fuelCount),
+            Codec.INT.fieldOf("processing_time").orElse(200).forGetter(AltarEnchantingRecipe::processingTime)
+    ).apply(i, AltarEnchantingRecipe::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, AltarEnchantingRecipe> STREAM_CODEC = StreamCodec.composite(
+            CommonInfo.STREAM_CODEC, r -> r.commonInfo,
+            AltarBookInfo.STREAM_CODEC, r -> r.bookInfo,
+            Ingredient.CONTENTS_STREAM_CODEC, AltarEnchantingRecipe::input,
+            ItemStackTemplate.STREAM_CODEC, AltarEnchantingRecipe::result,
+            ByteBufCodecs.FLOAT, AltarEnchantingRecipe::experience,
+            ByteBufCodecs.INT, AltarEnchantingRecipe::fuelCount,
+            ByteBufCodecs.INT, AltarEnchantingRecipe::processingTime,
+            AltarEnchantingRecipe::new
+    );
+    public static final RecipeSerializer<AltarEnchantingRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
+
+    protected final AltarBookInfo bookInfo;
     protected final float experience;
     protected final int fuelCount;
     protected final int processingTime;
 
-    public AltarEnchantingRecipe(String group, AltarBookCategory category, Ingredient ingredient, ItemStack result, float experience, int fuelCount, int processingTime) {
-        super(group, ingredient, result);
-        this.category = category;
+    public AltarEnchantingRecipe(Recipe.CommonInfo commonInfo, AltarBookInfo bookInfo, Ingredient ingredient, ItemStackTemplate result, float experience, int fuelCount, int processingTime) {
+        super(commonInfo, ingredient, result);
+        this.bookInfo = bookInfo;
         this.experience = experience;
         this.fuelCount = fuelCount;
         this.processingTime = processingTime;
@@ -45,13 +68,18 @@ public class AltarEnchantingRecipe extends SingleItemRecipe {
         return this.processingTime;
     }
 
+    @Override
+    public String group() {
+        return this.bookInfo.group;
+    }
+
     public AltarBookCategory category() {
-        return this.category;
+        return this.bookInfo.category;
     }
 
     //making public
     @Override
-    public ItemStack result() {
+    public ItemStackTemplate result() {
         return super.result();
     }
 
@@ -62,18 +90,18 @@ public class AltarEnchantingRecipe extends SingleItemRecipe {
 
     @Override
     public RecipeSerializer<AltarEnchantingRecipe> getSerializer() {
-        return AetherIIRecipeSerializers.ALTAR_ENCHANTING.get();
+        return SERIALIZER;
     }
 
     @Override
     public List<RecipeDisplay> display() {
         if (this.input().getCustomIngredient() == null && this.input().getValues().contains(this.result().typeHolder())) {
-            ItemStack input = this.result().copy();
-            input.setDamageValue(input.getMaxDamage());
+//            ItemStackTemplate input = this.result().apply(DataComponentPatch.builder().set(DataComponents.DAMAGE, this.result().create().getMaxDamage()).build()); //TODO
+            ItemStackTemplate input = this.result();
             return List.of(new AltarRecipeDisplay(
                     new SlotDisplay.ItemStackSlotDisplay(input),
                     new SlotDisplay.TagSlotDisplay(AetherIITags.Items.ALTAR_FUEL),
-                    new SlotDisplay.ItemStackSlotDisplay(this.result().copy()),
+                    new SlotDisplay.ItemStackSlotDisplay(this.result()),
                     new SlotDisplay.ItemSlotDisplay(AetherIIBlocks.ALTAR.asItem()),
                     this.fuelCount,
                     this.processingTime,
@@ -102,52 +130,8 @@ public class AltarEnchantingRecipe extends SingleItemRecipe {
         };
     }
 
-    public static class Serializer implements RecipeSerializer<AltarEnchantingRecipe> {
-        private final MapCodec<AltarEnchantingRecipe> codec;
-        private final StreamCodec<RegistryFriendlyByteBuf, AltarEnchantingRecipe> streamCodec;
-
-        public Serializer() {
-            this.codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                    Codec.STRING.optionalFieldOf("group", "").forGetter(SingleItemRecipe::group),
-                    AltarBookCategory.CODEC.fieldOf("category").orElse(AltarBookCategory.MISC).forGetter(AltarEnchantingRecipe::category),
-                    Ingredient.CODEC.fieldOf("ingredient").forGetter(SingleItemRecipe::input),
-                    ItemStack.CODEC.fieldOf("result").forGetter(AltarEnchantingRecipe::result),
-                    Codec.FLOAT.fieldOf("experience").orElse(0.0F).forGetter(AltarEnchantingRecipe::experience),
-                    Codec.INT.fieldOf("fuel_count").orElse(1).forGetter(AltarEnchantingRecipe::fuelCount),
-                    Codec.INT.fieldOf("processing_time").orElse(200).forGetter(AltarEnchantingRecipe::processingTime)
-            ).apply(instance, AltarEnchantingRecipe::new));
-            this.streamCodec = StreamCodec.of(this::toNetwork, this::fromNetwork);
-        }
-
-        @Override
-        public MapCodec<AltarEnchantingRecipe> codec() {
-            return this.codec;
-        }
-
-        @Override
-        public StreamCodec<RegistryFriendlyByteBuf, AltarEnchantingRecipe> streamCodec() {
-            return this.streamCodec;
-        }
-
-        public AltarEnchantingRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
-            String group = buffer.readUtf();
-            AltarBookCategory category = buffer.readEnum(AltarBookCategory.class);
-            Ingredient ingredient = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            ItemStack result = ItemStack.STREAM_CODEC.decode(buffer);
-            float experience = buffer.readFloat();
-            int fuelCount = buffer.readVarInt();
-            int processingTime = buffer.readVarInt();
-            return new AltarEnchantingRecipe(group, category, ingredient, result, experience, fuelCount, processingTime);
-        }
-
-        public void toNetwork(RegistryFriendlyByteBuf buffer, AltarEnchantingRecipe recipe) {
-            buffer.writeUtf(recipe.group());
-            buffer.writeEnum(recipe.category());
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.input());
-            ItemStack.STREAM_CODEC.encode(buffer, recipe.result());
-            buffer.writeFloat(recipe.experience);
-            buffer.writeVarInt(recipe.fuelCount);
-            buffer.writeVarInt(recipe.processingTime);
-        }
+    public record AltarBookInfo(AltarBookCategory category, String group) implements Recipe.BookInfo<AltarBookCategory> {
+        public static final MapCodec<AltarBookInfo> MAP_CODEC = BookInfo.mapCodec(AltarBookCategory.CODEC, AltarBookCategory.MISC, AltarBookInfo::new);
+        public static final StreamCodec<RegistryFriendlyByteBuf, AltarBookInfo> STREAM_CODEC = BookInfo.streamCodec(AltarBookCategory.STREAM_CODEC, AltarBookInfo::new);
     }
 }

@@ -57,7 +57,6 @@ import com.aetherteam.aetherii.network.packet.serverbound.*;
 import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
 import com.aetherteam.aetherii.recipe.display.AetherIIRecipeDisplays;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
-import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.aetherteam.aetherii.recipe.set.AetherIIRecipePropertySets;
 import com.aetherteam.aetherii.world.AetherIIPoi;
 import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
@@ -128,7 +127,6 @@ public class AetherII {
                 AetherIIParticleTypes.PARTICLES,
                 AetherIISoundEvents.SOUNDS,
                 AetherIIRecipeTypes.RECIPE_TYPES,
-                AetherIIRecipeSerializers.RECIPE_SERIALIZERS,
                 AetherIIRecipeDisplays.RECIPE_DISPLAYS,
                 AetherIISlotDisplays.SLOT_DISPLAYS,
                 AetherIIRecipeBookCategories.RECIPE_BOOK_CATEGORIES,
