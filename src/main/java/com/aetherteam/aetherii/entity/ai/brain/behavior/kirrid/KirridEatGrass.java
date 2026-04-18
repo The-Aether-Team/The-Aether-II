@@ -54,7 +54,7 @@ public class KirridEatGrass extends Behavior<Kirrid> {
     protected void finishEat(ServerLevel serverLevel, Kirrid owner) {
         serverLevel.levelEvent(2001, owner.blockPosition().below(), Block.getId(AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState()));
         serverLevel.setBlock(owner.blockPosition().below(), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(), 3);
-        owner.getBrain().setMemory(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get(), KirridAi.TIME_BETWEEN_EAT.sample(serverLevel.random));
+        owner.getBrain().setMemory(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get(), KirridAi.TIME_BETWEEN_EAT.sample(serverLevel.getRandom()));
         owner.ate();
     }
 }

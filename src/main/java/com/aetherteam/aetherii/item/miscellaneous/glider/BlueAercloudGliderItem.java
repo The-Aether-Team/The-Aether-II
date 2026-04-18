@@ -13,9 +13,9 @@ public class BlueAercloudGliderItem extends AercloudGliderItem {
 
     @Override
     protected void onParachuteOpen(Level level, Player player, InteractionHand hand, ItemStack stack) {
-        if (player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().containsKey(stack.getItemHolder()) && player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().get(stack.getItemHolder())) {
+        if (player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().containsKey(stack.typeHolder()) && player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().get(stack.typeHolder())) {
             player.setDeltaMovement(player.getDeltaMovement().add(0.0, 2.0, 0.0));
-            player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().put(stack.getItemHolder(), false);
+            player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().put(stack.typeHolder(), false);
         }
     }
 }

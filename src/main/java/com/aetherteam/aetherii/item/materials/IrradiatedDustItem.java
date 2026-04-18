@@ -56,7 +56,7 @@ public class IrradiatedDustItem extends Item implements ItemUseConversion<Irradi
         if (block instanceof BonemealableBlock bonemealableblock) {
             if (bonemealableblock.isValidBonemealTarget(level, pos, blockState)) {
                 if (level instanceof ServerLevel serverLevel) {
-                    if (bonemealableblock.isBonemealSuccess(level, level.random, pos, blockState)) {
+                    if (bonemealableblock.isBonemealSuccess(level, level.getRandom(), pos, blockState)) {
                         if (block instanceof SaplingBlock saplingBlock) {
                             if (blockState.getValue(SaplingBlock.STAGE) == 0) {
                                 level.setBlock(pos, blockState.cycle(SaplingBlock.STAGE), 4);

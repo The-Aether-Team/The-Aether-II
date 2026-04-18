@@ -67,7 +67,7 @@ public class AltarEnchantingRecipe extends SingleItemRecipe {
 
     @Override
     public List<RecipeDisplay> display() {
-        if (this.input().getCustomIngredient() == null && this.input().getValues().contains(this.result().getItemHolder())) {
+        if (this.input().getCustomIngredient() == null && this.input().getValues().contains(this.result().typeHolder())) {
             ItemStack input = this.result().copy();
             input.setDamageValue(input.getMaxDamage());
             return List.of(new AltarRecipeDisplay(

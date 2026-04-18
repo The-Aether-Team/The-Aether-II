@@ -176,7 +176,7 @@ public class AmberHourglassMenu extends RecipeBookMenu {
             }
 
             public boolean recipeMatches(RecipeHolder<HourglassRestoringRecipe> holder) {
-                return holder.value().matches(new SingleRecipeInputWithRandom(AmberHourglassMenu.this.container.getItem(0), level.random), level);
+                return holder.value().matches(new SingleRecipeInputWithRandom(AmberHourglassMenu.this.container.getItem(0), level.getRandom()), level);
             }
         }, 1, 1, List.of(this.getSlot(0)), list, container, (RecipeHolder<HourglassRestoringRecipe>) recipeHolder, useMaxItems, isCreative);
     }

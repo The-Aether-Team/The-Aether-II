@@ -22,8 +22,6 @@ import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
 import com.aetherteam.nitrogen.event.listeners.TooltipListeners;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.texture.CubeMapTexture;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
@@ -45,9 +43,6 @@ public class AetherIIClient {
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             registerTooltipOverrides();
-
-            ItemBlockRenderTypes.setRenderLayer(AetherIIFluids.FLOWING_ALKAHEST.get(), ChunkSectionLayer.TRANSLUCENT);
-            ItemBlockRenderTypes.setRenderLayer(AetherIIFluids.ALKAHEST.get(), ChunkSectionLayer.TRANSLUCENT);
         });
     }
 

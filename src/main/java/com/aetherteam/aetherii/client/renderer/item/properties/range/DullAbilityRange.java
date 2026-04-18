@@ -14,7 +14,7 @@ public class DullAbilityRange implements RangeSelectItemModelProperty {
 
     @Override
     public float get(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable ItemOwner owner, int i) {
-        return owner == null ? 0.0F : owner instanceof Player player && !player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().get(itemStack.getItemHolder()) ? 1.0F : 0.0F;
+        return owner == null ? 0.0F : owner instanceof Player player && !player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).getCanRefuelAbilities().get(itemStack.typeHolder()) ? 1.0F : 0.0F;
     }
 
     @Override

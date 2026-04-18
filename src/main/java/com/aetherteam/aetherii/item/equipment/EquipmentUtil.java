@@ -50,6 +50,6 @@ public final class EquipmentUtil {
     }
 
     public static Identifier getSlotModifierId(Identifier base, ItemStack itemStack, int number, String slotName) {
-        return Identifier.parse(itemStack.getItemHolder().getRegisteredName() + "_" + base.getPath() + "_" + number + "_" + slotName.toLowerCase(Locale.ROOT));
+        return Identifier.parse(itemStack.typeHolder().getRegisteredName() + "_" + base.getPath() + "_" + number + "_" + slotName.toLowerCase(Locale.ROOT));
     }
 }

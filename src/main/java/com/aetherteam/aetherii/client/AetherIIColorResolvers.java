@@ -21,7 +21,7 @@ public class AetherIIColorResolvers {
         event.register(GRASS_COLORS);
     }
 
-    public static void registerBlockColor(RegisterColorHandlersEvent.Block event) {
+    public static void registerBlockColor(RegisterColorHandlersEvent.BlockTintSources event) {
         event.register((state, level, pos, tintIndex) -> {
             float shade = state.getValue(IrradiatedLeavesBlock.SHADE);
             float shadeMax = 7.0F;
