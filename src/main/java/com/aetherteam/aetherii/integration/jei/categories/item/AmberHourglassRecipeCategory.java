@@ -26,6 +26,7 @@ import net.minecraft.world.item.crafting.display.SlotDisplay;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class AmberHourglassRecipeCategory extends AbstractRecipeCategory<HourglassRestoringRecipe> {
@@ -71,7 +72,7 @@ public class AmberHourglassRecipeCategory extends AbstractRecipeCategory<Hourgla
     }
 
     private static SlotDisplay processOutput(OutputEntry.BaseEntry entry) {
-        List<SlotDisplay> result = entry.list().stream().distinct().filter((stack) -> !(stack == ItemStack.EMPTY.getCraftingRemainder())).map(SlotDisplay.ItemStackSlotDisplay::new).collect(Collectors.toUnmodifiableList());
+        List<SlotDisplay> result = entry.list().stream().distinct().filter(Objects::nonNull).map(SlotDisplay.ItemStackSlotDisplay::new).collect(Collectors.toUnmodifiableList());
         return new SlotDisplay.Composite(result);
     }
 }

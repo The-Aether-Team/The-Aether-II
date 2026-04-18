@@ -20,9 +20,11 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.random.WeightedList;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.BundleContents;
-import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
@@ -115,7 +117,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         // Special
         SpecialRecipeBuilder.special(LootRepairRecipe::new).save(this.output, this.name("loot_repairing"));
-        
+
         // Blocks
         // Dirt
         this.ambrosiumEnchanting(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_GRASS_BLOCK.get()).save(this.output, this.name("ambrosium_enchant_aether_grass_to_enchanted_aether_grass"));
@@ -335,7 +337,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_PLANKS.get(), AetherIIBlocks.SKYROOT_BEAM.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_DOOR.get(), AetherIIBlocks.SECRET_SKYROOT_DOOR.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_TRAPDOOR.get(), AetherIIBlocks.SECRET_SKYROOT_TRAPDOOR.get());
-        
+
         // Greatroot Planks
         this.planksFromLog(AetherIIBlocks.GREATROOT_PLANKS.get(), AetherIITags.Items.GREATROOT_LOGS, 4);
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GREATROOT_PLANKS.get())
@@ -559,7 +561,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.HOLYSTONE_BRICKS.get(), AetherIIBlocks.HOLYSTONE_PILLAR.get());
 
         // Faded Holystone Bricks
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.HOLYSTONE_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS, CookingBookCategory.BLOCKS, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get(), 0.1F, 200).unlockedBy(getHasName(AetherIIBlocks.HOLYSTONE_BRICKS.get()), has(AetherIIBlocks.HOLYSTONE_BRICKS.get())).save(this.output);
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.HOLYSTONE_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get(), 0.1F, 200).unlockedBy(getHasName(AetherIIBlocks.HOLYSTONE_BRICKS.get()), has(AetherIIBlocks.HOLYSTONE_BRICKS.get())).save(this.output);
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get())
                 .group("bricks_from_artisanry")
                 .requires(AetherIITags.Items.FADED_HOLYSTONE_DECORATIVE_BLOCKS)
@@ -747,7 +749,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.ICHORITE_WALL.get(), AetherIIBlocks.ICHORITE.get());
 
         // Smooth Ichorite
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.ICHORITE.get()), RecipeCategory.BUILDING_BLOCKS, CookingBookCategory.BLOCKS, AetherIIBlocks.SMOOTH_ICHORITE.get(), 0.1F, 200).unlockedBy(getHasName(AetherIIBlocks.ICHORITE.get()), has(AetherIIBlocks.ICHORITE.get())).save(this.output);
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.ICHORITE.get()), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SMOOTH_ICHORITE.get(), 0.1F, 200).unlockedBy(getHasName(AetherIIBlocks.ICHORITE.get()), has(AetherIIBlocks.ICHORITE.get())).save(this.output);
         this.stairs(AetherIIBlocks.SMOOTH_ICHORITE_STAIRS, AetherIIBlocks.SMOOTH_ICHORITE).save(this.output);
         this.slab(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SMOOTH_ICHORITE_SLAB.get(), AetherIIBlocks.SMOOTH_ICHORITE.get());
         this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.SMOOTH_ICHORITE_WALL.get(), AetherIIBlocks.SMOOTH_ICHORITE.get());
@@ -944,7 +946,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         // Glass
         this.altarEnchanting(RecipeCategory.MISC, AetherIIBlocks.QUICKSOIL_GLASS, AetherIIBlocks.QUICKSOIL, 1, 0.0F).save(this.output);
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.CRUDE_SCATTERGLASS.get()), RecipeCategory.BUILDING_BLOCKS, CookingBookCategory.BLOCKS, AetherIIBlocks.SCATTERGLASS.get(), 0.1F, 200).unlockedBy("has_crude_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS.get())).save(this.output);
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.CRUDE_SCATTERGLASS.get()), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SCATTERGLASS.get(), 0.1F, 200).unlockedBy("has_crude_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS.get())).save(this.output);
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.QUICKSOIL_GLASS.get())
                 .group("glass_from_artisanry")
                 .requires(AetherIITags.Items.QUICKSOIL_GLASS_DECORATIVE_BLOCKS)
@@ -977,7 +979,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.QUICKSOIL_GLASS_PANE.get(), 16).define('#', AetherIIBlocks.QUICKSOIL_GLASS.get()).pattern("###").pattern("###").unlockedBy("has_quicksoil_glass", has(AetherIIBlocks.QUICKSOIL_GLASS.get())).save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get(), 16).define('#', AetherIIBlocks.CRUDE_SCATTERGLASS.get()).pattern("###").pattern("###").unlockedBy("has_crude_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS.get())).save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SCATTERGLASS_PANE.get(), 16).define('#', AetherIIBlocks.SCATTERGLASS.get()).pattern("###").pattern("###").unlockedBy("has_scatterglass", has(AetherIIBlocks.SCATTERGLASS.get())).save(this.output);
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get()), RecipeCategory.BUILDING_BLOCKS, CookingBookCategory.BLOCKS, AetherIIBlocks.SCATTERGLASS_PANE.get(), 0.1F, 200).unlockedBy("has_crude_scatterglass_pane", has(AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get())).save(this.output, name("scatterglass_pane_from_smelting"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get()), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SCATTERGLASS_PANE.get(), 0.1F, 200).unlockedBy("has_crude_scatterglass_pane", has(AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get())).save(this.output, name("scatterglass_pane_from_smelting"));
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.QUICKSOIL_GLASS_PANE.get())
                 .group("glass_pane_from_artisanry")
                 .requires(AetherIITags.Items.QUICKSOIL_GLASS_PANE_DECORATIVE_BLOCKS)
@@ -1066,7 +1068,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .save(this.output, this.name(getSimpleRecipeName(AetherIIBlocks.CLOUDWOOL)));
         this.colorBlockWithDye(dyes, wool, AetherIIBlocks.CLOUDWOOL.asItem(), "wool");
         this.washDyedBlock(wool, AetherIIBlocks.CLOUDWOOL.asItem(), "wool");
-        
+
         // Carpet
         this.colorBlockWithDye(dyes, carpet, AetherIIBlocks.CLOUDWOOL_CARPET.asItem(), "carpet");
         this.washDyedBlock(carpet, AetherIIBlocks.CLOUDWOOL_CARPET.asItem(), "carpet");
@@ -2089,7 +2091,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 AetherIIItems.CLOUDTWINE, List.of(this.hourglass(0, 50), this.hourglass(1, 50)),
                 AetherIIItems.BEAST_PELT, List.of(this.hourglass(1, 100)),
                 Items.AIR, List.of(),
-                DataComponentIngredient.of(false, DataComponentExactPredicate.expect(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY).asPatch(), AetherIIItems.BEAST_PELT_BUNDLE.get()), 0.0F, this.has(AetherIIItems.BEAST_PELT_BUNDLE)).group("misc_tools").save(this.output, this.name("uncraft_beast_pelt_bundle"));
+                DataComponentIngredient.of(false, DataComponentExactPredicate.expect(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY), AetherIIItems.BEAST_PELT_BUNDLE.get()), 0.0F, this.has(AetherIIItems.BEAST_PELT_BUNDLE)).group("misc_tools").save(this.output, this.name("uncraft_beast_pelt_bundle"));
         this.hourglassUncraftingItem(RecipeCategory.MISC,
                 Items.AIR, List.of(),
                 AetherIIBlocks.SKYROOT_PLANKS, List.of(this.hourglass(1, 50), this.hourglass(2, 50)),
@@ -2254,18 +2256,18 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.oneToOneConversionRecipe(Items.PURPLE_DYE, AetherIIBlocks.AECHOR_CUTTING, "purple_dye");
         this.oneToOneConversionRecipe(Items.LIGHT_BLUE_DYE, AetherIIBlocks.CARRION_CUTTING, "light_blue_dye");
 
-        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.SWET_JELLY.get())
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.SWET_JELLY.get(), 1)
                 .requires(AetherIIItems.SWET_GEL)
                 .requires(AetherIIItems.SWET_SUGAR)
                 .unlockedBy("has_gel", has(AetherIIItems.SWET_GEL))
                 .save(this.output);
 
-        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.BLUEBERRY_MOA_FEED.get())
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.BLUEBERRY_MOA_FEED.get(), 1)
                 .requires(AetherIIItems.MOA_FEED)
                 .requires(AetherIIItems.BLUEBERRY)
                 .unlockedBy("has_feed", has(AetherIIItems.MOA_FEED))
                 .save(this.output);
-        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.ENCHANTED_MOA_FEED.get())
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.ENCHANTED_MOA_FEED.get(), 1)
                 .requires(AetherIIItems.MOA_FEED)
                 .requires(AetherIIItems.ENCHANTED_BLUEBERRY)
                 .unlockedBy("has_feed", has(AetherIIItems.MOA_FEED))
@@ -2319,37 +2321,37 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .save(this.output);
 
 
-        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.SPLINT.get())
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, new ItemStack(AetherIIItems.SPLINT.get()))
                 .requires(AetherIIItems.SKYROOT_STICK.get())
                 .requires(AetherIITags.Items.CLOUDWOOL)
                 .unlockedBy("has_cloudwool", has(AetherIITags.Items.CLOUDWOOL))
                 .save(this.output);
-        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.BANDAGE.get())
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, new ItemStack(AetherIIItems.BANDAGE.get()))
                 .requires(AetherIIItems.CLOUDTWINE.get())
                 .requires(AetherIITags.Items.CLOUDWOOL)
                 .unlockedBy("has_cloudwool", has(AetherIITags.Items.CLOUDWOOL))
                 .save(this.output);
-        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.ANTIVENOM_VIAL.get())
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, new ItemStack(AetherIIItems.ANTIVENOM_VIAL.get()))
                 .requires(AetherIIItems.WATER_VIAL.get())
                 .requires(AetherIIItems.COCKATRICE_FEATHER.get())
                 .requires(AetherIIBlocks.HESPEROSE.get())
                 .unlockedBy("has_water_vial", has(AetherIIItems.WATER_VIAL.get()))
                 .save(this.output);
-        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.ANTITOXIN_VIAL.get())
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, new ItemStack(AetherIIItems.ANTITOXIN_VIAL.get()))
                 .requires(AetherIIItems.WATER_VIAL.get())
                 .requires(AetherIIItems.AECHOR_PETAL.get())
                 .requires(AetherIIBlocks.TARABLOOM.get())
                 .unlockedBy("has_water_vial", has(AetherIIItems.WATER_VIAL.get()))
                 .save(this.output);
 
-        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.VALKYRIE_TEA.get())
+        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, new ItemStack(AetherIIItems.VALKYRIE_TEA.get()))
                 .requires(AetherIIItems.WATER_VIAL.get())
                 .requires(AetherIIItems.VALKYRIE_WINGS.get())
                 .requires(AetherIIItems.AMBROSIUM_SHARD.get())
                 .unlockedBy("has_water_vial", has(AetherIIItems.WATER_VIAL.get()))
                 .save(this.output);
 
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, new ItemStackTemplate(AetherIIItems.HEALING_STONE, 1, DataComponentPatch.builder().set(AetherIIDataComponents.HEALING_STONE_CHARGES.get(), 1).build()))
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, new ItemStack(AetherIIItems.HEALING_STONE, 1, DataComponentPatch.builder().set(AetherIIDataComponents.HEALING_STONE_CHARGES.get(), 1).build()))
                 .define('A', AetherIIItems.AMBROSIUM_SHARD.get())
                 .define('H', AetherIITags.Items.STONE_CRAFTING)
                 .pattern("HAH")
@@ -2469,117 +2471,117 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         this.alkahestCorrosion(AetherIIBlocks.ICHORITE.get(), AetherIIBlocks.UNDERSHALE.get()).save(this.output, this.name("corrode_undershale_to_ichorite"));
 
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.HOLYSTONE.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_HOLYSTONE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.HOLYSTONE_STAIRS.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.HOLYSTONE_SLAB.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_HOLYSTONE_SLAB, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.HOLYSTONE_WALL.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_HOLYSTONE_WALL, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.HOLYSTONE.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.HOLYSTONE_STAIRS.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.HOLYSTONE_SLAB.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE_SLAB, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.HOLYSTONE_WALL.toStack()), AetherIIBlocks.IRRADIATED_HOLYSTONE_WALL, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, this.output);
 
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYROOT_LEAF_PILE.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYPLANE_LEAF_PILE.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYBIRCH_LEAF_PILE.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYPINE_LEAF_PILE.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.WISPROOT_LEAF_PILE.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.WISPTOP_LEAF_PILE.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATROOT_LEAF_PILE.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATOAK_LEAF_PILE.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATBOA_LEAF_PILE.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYROOT_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYPLANE_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYBIRCH_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYPINE_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.WISPROOT_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.WISPTOP_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATROOT_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATOAK_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATBOA_LEAF_PILE.toStack()), AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaf_pile", this.output);
 
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYROOT_LEAVES.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYPLANE_LEAVES.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYBIRCH_LEAVES.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYPINE_LEAVES.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.WISPROOT_LEAVES.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.WISPTOP_LEAVES.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATROOT_LEAVES.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATOAK_LEAVES.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
-        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATBOA_LEAVES.toStack().getCraftingRemainder()), AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYROOT_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYPLANE_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYBIRCH_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.SKYPINE_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.WISPROOT_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.WISPTOP_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATROOT_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATOAK_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
+        this.alkahestPurification(RecipeCategory.BUILDING_BLOCKS, new OutputEntry.ItemEntry(AetherIIBlocks.GREATBOA_LEAVES.toStack()), AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES, this.byproducts(AetherIIItems.IRRADIATED_DUST, 1), 1, "irradiated_leaves", this.output);
 
         this.alkahestPurification(RecipeCategory.COMBAT, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                .add(new OutputEntry.ItemEntry(AetherIIItems.BEAST_PELT_HELMET.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.BURRUKAI_PLATE_HELMET.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_HELMET.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_HELMET.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_HELMET.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.BEAST_PELT_CHESTPLATE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_CHESTPLATE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_CHESTPLATE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_CHESTPLATE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.BEAST_PELT_LEGGINGS.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.BURRUKAI_PLATE_LEGGINGS.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_LEGGINGS.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_LEGGINGS.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_LEGGINGS.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.BEAST_PELT_BOOTS.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.BURRUKAI_PLATE_BOOTS.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_BOOTS.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_BOOTS.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_BOOTS.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.BEAST_PELT_GLOVES.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.BURRUKAI_PLATE_GLOVES.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_GLOVES.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_GLOVES.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_GLOVES.toStack().getCraftingRemainder()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BEAST_PELT_HELMET.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BURRUKAI_PLATE_HELMET.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_HELMET.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_HELMET.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_HELMET.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BEAST_PELT_CHESTPLATE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_CHESTPLATE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_CHESTPLATE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_CHESTPLATE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BEAST_PELT_LEGGINGS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BURRUKAI_PLATE_LEGGINGS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_LEGGINGS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_LEGGINGS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_LEGGINGS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BEAST_PELT_BOOTS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BURRUKAI_PLATE_BOOTS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_BOOTS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_BOOTS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_BOOTS.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BEAST_PELT_GLOVES.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.BURRUKAI_PLATE_GLOVES.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_GLOVES.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_GLOVES.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_GLOVES.toStack()), 1)
                 .build()), AetherIIItems.IRRADIATED_ARMOR, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 1, this.output);
         this.alkahestPurification(RecipeCategory.COMBAT, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_SHORTSWORD.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_SHORTSWORD.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_SHORTSWORD.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_SHORTSWORD.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_SHORTSWORD.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_PIKE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_PIKE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_PIKE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_PIKE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_PIKE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_HAMMER.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_HAMMER.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_HAMMER.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_HAMMER.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_HAMMER.toStack().getCraftingRemainder()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_SHORTSWORD.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_SHORTSWORD.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_SHORTSWORD.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_SHORTSWORD.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_SHORTSWORD.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_PIKE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_PIKE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_PIKE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_PIKE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_PIKE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_HAMMER.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_HAMMER.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_HAMMER.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_HAMMER.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_HAMMER.toStack()), 1)
                 .build()), AetherIIItems.IRRADIATED_WEAPON, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 1, this.output);
         this.alkahestPurification(RecipeCategory.COMBAT, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder()
-                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_AXE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_AXE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_AXE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_AXE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_AXE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_PICKAXE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_PICKAXE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_PICKAXE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_PICKAXE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_PICKAXE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_SHOVEL.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_SHOVEL.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_SHOVEL.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_SHOVEL.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_SHOVEL.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_TROWEL.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_TROWEL.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_TROWEL.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_TROWEL.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_TROWEL.toStack().getCraftingRemainder()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_AXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_AXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_AXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_AXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_AXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_PICKAXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_PICKAXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_PICKAXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_PICKAXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_PICKAXE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_SHOVEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_SHOVEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_SHOVEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_SHOVEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_SHOVEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.SKYROOT_TROWEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.HOLYSTONE_TROWEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_TROWEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ARKENIUM_TROWEL.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.GRAVITITE_TROWEL.toStack()), 1)
                 .build()), AetherIIItems.IRRADIATED_TOOL, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 1, this.output);
         this.alkahestPurification(RecipeCategory.COMBAT, new OutputEntry.ListEntry(WeightedList.<OutputEntry.BaseEntry>builder() //todo
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_PENDANT.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ICESTONE_PENDANT.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_EFFICIENCY_I.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_REACH_I.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_DAMAGE_I.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_DEXTERITY_I.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_KNOCKBACK_I.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_HEALTH_I.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_DEFENSE_I.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_TOUGHNESS_I.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_RESISTANCE_I.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_AGILITY_I.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_AERWHALE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_APPROACHES.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_DEMISE.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_CHINCHILLA.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_HIGH.toStack().getCraftingRemainder()), 1)
-                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS.toStack().getCraftingRemainder()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ZANITE_PENDANT.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ICESTONE_PENDANT.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_EFFICIENCY_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_REACH_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_DAMAGE_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_DEXTERITY_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_KNOCKBACK_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_HEALTH_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_DEFENSE_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_TOUGHNESS_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_RESISTANCE_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.CHARM_OF_AGILITY_I.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_ASCENDING_DAWN.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_AERWHALE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_APPROACHES.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_DEMISE.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_CHINCHILLA.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_HIGH.toStack()), 1)
+                .add(new OutputEntry.ItemEntry(AetherIIItems.ENGRAVED_DISC_REVOLUTIONS.toStack()), 1)
                 .build()), AetherIIItems.IRRADIATED_CHUNK, this.byproducts(AetherIIItems.IRRADIATED_DUST, 3), 1, this.output);
 
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE, 1).requires(AetherIIBlocks.SKYROOT_LEAF_PILE.get()).requires(AetherIIItems.IRRADIATED_DUST.get())

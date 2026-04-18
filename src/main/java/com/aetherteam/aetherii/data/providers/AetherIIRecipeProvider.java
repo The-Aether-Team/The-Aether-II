@@ -285,7 +285,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         ItemStack effectDarts = new ItemStack(darts, 1, DataComponentPatch.builder().set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(preset)).build());
 
         DataComponentPatch dartShooterData = DataComponentPatch.builder()
-                .set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.of(Objects.requireNonNull(effectDarts.getCraftingRemainder())))
+                .set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.of(Objects.requireNonNull(effectDarts)))
                 .set(AetherIIDataComponents.DARTS_LOADED.get(), AmberDartsItem.FULL_AMOUNT)
                 .set(AetherIIDataComponents.BUILDUP_CONTENTS.get(), new BuildupContents(preset))
                 .build();
@@ -325,9 +325,9 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     protected HourglassRestoringRecipeBuilder hourglassRestoring(RecipeCategory category, ItemLike resultItem, List<HourglassDataEntry> resultInfo, ItemLike ingredient, float experience) {
         WeightedList.Builder<OutputEntry.BaseEntry> builder = WeightedList.builder();
         for (HourglassDataEntry entry : resultInfo) {
-            builder.add(new OutputEntry.ItemEntry(new ItemStack(resultItem, entry.count()).getCraftingRemainder()), entry.weight());
+            builder.add(new OutputEntry.ItemEntry(new ItemStack(resultItem, entry.count())), entry.weight());
         }
-        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.ItemEntry(ItemStack.EMPTY.getCraftingRemainder()), new OutputEntry.ListEntry(builder.build()), new OutputEntry.ItemEntry(ItemStack.EMPTY.getCraftingRemainder())), experience, 200, false).unlockedBy("has_item", has(ingredient));
+        return HourglassRestoringRecipeBuilder.restoring(Ingredient.of(ingredient), category, new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.ItemEntry(null), new OutputEntry.ListEntry(builder.build()), new OutputEntry.ItemEntry(null)), experience, 200, false).unlockedBy("has_item", has(ingredient));
     }
 
     protected HourglassRestoringRecipeBuilder hourglassUncraftingItem(RecipeCategory category, ItemLike resultItem1, List<HourglassDataEntry> resultInfo1, ItemLike resultItem2, List<HourglassDataEntry> resultInfo2, ItemLike resultItem3, List<HourglassDataEntry> resultInfo3, ItemLike ingredient, float experience) {
@@ -337,15 +337,15 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     protected HourglassRestoringRecipeBuilder hourglassUncraftingIngredient(RecipeCategory category, ItemLike resultItem1, List<HourglassDataEntry> resultInfo1, ItemLike resultItem2, List<HourglassDataEntry> resultInfo2, ItemLike resultItem3, List<HourglassDataEntry> resultInfo3, Ingredient ingredient, float experience, Criterion<?> has) {
         WeightedList.Builder<OutputEntry.BaseEntry> builder1 = WeightedList.builder();
         for (HourglassDataEntry entry : resultInfo1) {
-            builder1.add(new OutputEntry.ItemEntry(new ItemStack(resultItem1, entry.count()).getCraftingRemainder()), entry.weight());
+            builder1.add(new OutputEntry.ItemEntry(new ItemStack(resultItem1, entry.count())), entry.weight());
         }
         WeightedList.Builder<OutputEntry.BaseEntry> builder2 = WeightedList.builder();
         for (HourglassDataEntry entry : resultInfo2) {
-            builder2.add(new OutputEntry.ItemEntry(new ItemStack(resultItem2, entry.count()).getCraftingRemainder()), entry.weight());
+            builder2.add(new OutputEntry.ItemEntry(new ItemStack(resultItem2, entry.count())), entry.weight());
         }
         WeightedList.Builder<OutputEntry.BaseEntry> builder3 = WeightedList.builder();
         for (HourglassDataEntry entry : resultInfo3) {
-            builder3.add(new OutputEntry.ItemEntry(new ItemStack(resultItem3, entry.count()).getCraftingRemainder()), entry.weight());
+            builder3.add(new OutputEntry.ItemEntry(new ItemStack(resultItem3, entry.count())), entry.weight());
         }
         return HourglassRestoringRecipeBuilder.restoring(ingredient, category, new HourglassRestoringRecipe.HourglassOutput(new OutputEntry.ListEntry(builder1.build()), new OutputEntry.ListEntry(builder2.build()), new OutputEntry.ListEntry(builder3.build())), experience, 200, true).unlockedBy("has_item", has);
     }
@@ -413,7 +413,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     protected OutputEntry.BaseEntry byproducts(ItemLike item, int max) {
         WeightedList.Builder<OutputEntry.BaseEntry> builder = WeightedList.builder();
         for (int i = 1; i <= max; i++) {
-            builder.add(new OutputEntry.ItemEntry(new ItemStack(item, i).getCraftingRemainder()), (max + 1) - i);
+            builder.add(new OutputEntry.ItemEntry(new ItemStack(item, i)), (max + 1) - i);
         }
         return new OutputEntry.ListEntry(builder.build());
     }
