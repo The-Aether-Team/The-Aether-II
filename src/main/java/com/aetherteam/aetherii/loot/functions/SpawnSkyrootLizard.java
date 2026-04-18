@@ -1,9 +1,9 @@
 package com.aetherteam.aetherii.loot.functions;
 
-import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
 import com.aetherteam.aetherii.data.resources.registries.AetherIISkyrootLizardVariants;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.SkyrootLizard;
+import com.aetherteam.aetherii.entity.variant.SkyrootLizardVariant;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
@@ -14,7 +14,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.phys.Vec3;
@@ -64,7 +63,8 @@ public class SpawnSkyrootLizard extends LootItemConditionalFunction {
     }
 
     @Override
-    public LootItemFunctionType<SpawnSkyrootLizard> getType() {
-        return AetherIILootFunctions.SPAWN_SKYROOT_LIZARD.get();
+    public MapCodec<? extends LootItemConditionalFunction> codec() {
+        return CODEC;
     }
+
 }

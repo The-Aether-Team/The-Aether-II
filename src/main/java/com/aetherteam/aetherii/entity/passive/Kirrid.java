@@ -10,7 +10,6 @@ import com.aetherteam.aetherii.entity.ai.navigator.KirridPathNavigation;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import com.google.common.collect.Maps;
-import com.mojang.serialization.Dynamic;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -47,8 +46,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -125,13 +122,8 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    protected Brain.Provider<Kirrid> brainProvider() {
-        return Brain.provider(KirridAi.MEMORY_TYPES, KirridAi.SENSOR_TYPES);
-    }
-
-    @Override
-    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
-        return KirridAi.makeBrain(this.variantType, this.brainProvider().makeBrain(dynamic));
+    protected Brain<Kirrid> makeBrain(Brain.Packed packedBrain) {
+        return KirridAi.BRAIN_PROVIDER.makeBrain(this, packedBrain);
     }
 
     @Override
@@ -249,8 +241,8 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
         ItemStack itemStack = player.getItemInHand(hand);
         PotionContents potionContents = itemStack.get(DataComponents.POTION_CONTENTS);
 
-        if (itemStack.getItem() instanceof DyeItem dyeItem) {
-            DyeColor dyeColor = dyeItem.getDyeColor();
+        if (itemStack.has(DataComponents.DYE)) {
+            DyeColor dyeColor = itemStack.get(DataComponents.DYE);
             KirridColor kirridColor = KirridColor.KIRRID_COLOR_BY_DYE.get(dyeColor);
             if (this.getColor().isEmpty() || this.getColor().get() != kirridColor) {
                 player.swing(hand);
@@ -339,7 +331,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     @Override
     public void setJumping(boolean jumping) {
         super.setJumping(jumping);
-        if (jumping && this.getJumpSound() != null && !this.isInFluidType()) {
+        if (jumping && this.getJumpSound() != null /*&& !this.isInFluidType()*/) {
             this.playSound(this.getJumpSound(), this.getSoundVolume(), ((this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F) * 0.8F);
         }
     }
@@ -564,37 +556,19 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
         Kirrid baby = variant.create(level, EntitySpawnReason.BREEDING);
         if (baby != null) {
             KirridAi.initMemories(baby, this.getRandom());
-            baby.setColor(this.getOffspringColor(level, this, (Kirrid) otherParent));
+            Optional<KirridColor> parent1DyeColor = this.getColor();
+            Optional<KirridColor> parent2DyeColor = ((Kirrid) otherParent).getColor();
+            if (parent1DyeColor.isEmpty() && parent2DyeColor.isEmpty()) {
+                baby.setColor(Optional.empty());
+            } else if (parent1DyeColor.isPresent() && parent2DyeColor.isEmpty()) {
+                baby.setColor(parent1DyeColor);
+            } else if (parent1DyeColor.isEmpty() && parent2DyeColor.isPresent()) {
+                baby.setColor(parent2DyeColor);
+            } else {
+                baby.setColor(Optional.of(KirridColor.KIRRID_COLOR_BY_DYE.get(DyeColor.getMixedColor(level, parent1DyeColor.get().getDyeColor(), parent2DyeColor.get().getDyeColor()))));
+            }
         }
         return baby;
-    }
-
-    private Optional<KirridColor> getOffspringColor(ServerLevel serverlevel, Animal parent1, Animal parent2) {
-        Optional<KirridColor> color1 = ((Kirrid) parent1).getColor();
-        Optional<KirridColor> color2 = ((Kirrid) parent2).getColor();
-        if (color1.isEmpty() && color2.isEmpty()) {
-            return Optional.empty();
-        } else if (color1.isPresent() && color2.isEmpty()) {
-            return color1;
-        } else if (color1.isEmpty() && color2.isPresent()) {
-            return color2;
-        } else {
-            CraftingInput craftinginput = makeCraftInput(color1.get().getDyeColor(), color2.get().getDyeColor());
-            return Optional.of(serverlevel
-                    .recipeAccess()
-                    .getRecipeFor(RecipeType.CRAFTING, craftinginput, this.level())
-                    .map(p_352802_ -> p_352802_.value().assemble(craftinginput, this.level().registryAccess()))
-                    .map(ItemStack::getItem)
-                    .filter(DyeItem.class::isInstance)
-                    .map(DyeItem.class::cast)
-                    .map(DyeItem::getDyeColor)
-                    .map(KirridColor.KIRRID_COLOR_BY_DYE::get)
-                    .orElseGet(() -> this.level().getRandom().nextBoolean() ? color1.get(): color2.get()));
-        }
-    }
-
-    private static CraftingInput makeCraftInput(DyeColor pColor1, DyeColor pColor2) {
-        return CraftingInput.of(2, 1, List.of(new ItemStack(DyeItem.byColor(pColor1)), new ItemStack(DyeItem.byColor(pColor2))));
     }
 
     @Override

@@ -154,7 +154,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         }
 
         Vector3f vector3f = new Vector3f(0.0F, entityrenderstate.boundingBoxHeight / 2.0F + yOffset, 0.0F);
-        guiGraphics.submitEntityRenderState(entityrenderstate, scale, vector3f, xQuaternion, zQuaternion, startX, startY, endX, endY);
+        guiGraphics.entity(entityrenderstate, scale, vector3f, xQuaternion, zQuaternion, startX, startY, endX, endY);
     }
 
     private static EntityRenderState extractRenderState(LivingEntity p_461127_) {

@@ -31,11 +31,11 @@ public class SectionTab extends ImageButton {
     }
 
     @Override
-    public void renderContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
-        super.renderContents(guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.icon, this.getX() + 10, this.getY() + 2, 22, 16);
+    public void extractContents(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+        super.extractContents(graphics, mouseX, mouseY, a);
+        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.icon, this.getX() + 10, this.getY() + 2, 22, 16);
         if (this.section.areAnyUnchecked()) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.EXCLAMATION, this.getX() + 5, this.getY() + 3, 3, 8);
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.EXCLAMATION, this.getX() + 5, this.getY() + 3, 3, 8);
         }
     }
 

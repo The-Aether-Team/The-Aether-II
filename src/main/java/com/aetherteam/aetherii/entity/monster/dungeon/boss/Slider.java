@@ -100,7 +100,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     public Slider(EntityType<? extends Slider> type, Level level) {
         super(type, level);
         this.moveControl = new BlankMoveControl(this);
-        this.bossFight = (ServerBossEvent) new ServerBossEvent(this.getBossName(), BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.PROGRESS).setPlayBossMusic(true);
+        this.bossFight = (ServerBossEvent) new ServerBossEvent(this.getUUID(), this.getBossName(), BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.PROGRESS).setPlayBossMusic(true);
         this.setBossFight(false);
         this.xpReward = XP_REWARD_BOSS;
         this.setRot(0, 0);
@@ -306,7 +306,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
             } else if (source.getDirectEntity() instanceof Projectile projectile) {
                 if (projectile.getOwner() instanceof LivingEntity attacker) {
                     if (this.getDungeon() == null || this.getDungeon().isPlayerWithinRoomInterior(this, attacker)) { // Only allow damage within the boss room.
-                        if (projectile.getType().is(AetherIITags.Entities.SLIDER_DAMAGING_PROJECTILES)) {
+                        if (projectile.getType().builtInRegistryHolder().is(AetherIITags.Entities.SLIDER_DAMAGING_PROJECTILES)) {
                             return Optional.of(attacker);
                         } else {
                             projectile.setDeltaMovement(projectile.getDeltaMovement().scale(-1));
@@ -330,7 +330,7 @@ public class Slider extends PathfinderMob implements AetherBossMob<Slider>, Enem
     private Optional<LivingEntity> sendInvalidToolMessage(LivingEntity attacker) {
         if (!this.level().isClientSide() && attacker instanceof Player player && !this.isAwake()) {
             if (this.getChatCooldown() <= 0) {
-                player.displayClientMessage(Component.translatable("gui.aether_ii.slider.message.attack.invalid"), true); // Invalid tool.
+                player.sendOverlayMessage(Component.translatable("gui.aether_ii.slider.message.attack.invalid")); // Invalid tool.
                 this.setChatCooldown(15);
             }
         }

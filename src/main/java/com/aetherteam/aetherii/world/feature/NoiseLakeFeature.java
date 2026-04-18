@@ -2,17 +2,12 @@ package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.natural.RockBlock;
-import com.aetherteam.aetherii.block.natural.TwigBlock;
-import com.aetherteam.aetherii.data.generators.tags.AetherIIBlockTagData;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.NoiseLakeConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -30,7 +25,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
 
         int chunkX = pos.getX() - (pos.getX() % 16);
         int chunkZ = pos.getZ() - (pos.getZ() % 16);
-        int height = config.height().getMinValue();
+        int height = config.height().minInclusive();
         double noiseStartValue = config.noiseStartValue();
 
         // Generates this feature chunk-wise

@@ -9,15 +9,12 @@ import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.ArmorStyle;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.PlayerModelAccessor;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.player.PlayerModel;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.SubmitNodeCollector;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
@@ -68,7 +65,7 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
                     }
                     copyPropertiesTo(glovesModel, humanoidModel);
                 }
-                glovesModel.setAllVisible(false);
+                glovesModel.root().getAllParts().forEach(part -> part.visible = false);
                 glovesModel.leftArm.visible = true;
                 glovesModel.rightArm.visible = true;
 
@@ -89,6 +86,7 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
                 if (stack.is(ItemTags.DYEABLE)) {
                     IClientItemExtensions extensions = IClientItemExtensions.of(stack);
                     int color = ARGB.opaque(extensions.getDefaultDyeColor(stack));
+
                     submitNodeCollector
                             .submitModel(
                                     glovesModel,

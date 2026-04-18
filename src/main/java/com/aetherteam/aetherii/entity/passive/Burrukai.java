@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.entity.passive;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.ai.brain.BurrukaiAi;
-import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -51,14 +50,10 @@ public class Burrukai extends AetherAnimal {
     }
 
     @Override
-    protected Brain.Provider<Burrukai> brainProvider() {
-        return Brain.provider(BurrukaiAi.MEMORY_TYPES, BurrukaiAi.SENSOR_TYPES);
+    protected Brain<Burrukai> makeBrain(Brain.Packed packedBrain) {
+        return BurrukaiAi.BRAIN_PROVIDER.makeBrain(this, packedBrain);
     }
 
-    @Override
-    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
-        return BurrukaiAi.makeBrain(this.variantType, this, this.brainProvider().makeBrain(dynamic));
-    }
 
     @Override
     public Brain<Burrukai> getBrain() {

@@ -31,7 +31,6 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
@@ -89,8 +88,8 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     @Override
-    public void render(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
 
         if (this.getMinecraft().player != null) {
             if (this.getMinecraft().player.isCreative() && this.destroyItemSlot == null) {
@@ -127,14 +126,14 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
             }
         }
 
-        this.renderTooltip(guiGraphics, mouseX, mouseY);
+        this.extractTooltip(guiGraphics, mouseX, mouseY);
 
         this.xMouse = (float) mouseX;
         this.yMouse = (float) mouseY;
     }
 
     @Override
-    protected void renderSlot(GuiGraphicsExtractor guiGraphics, Slot slot, int p_470717_, int p_470566_) {
+    protected void extractSlot(GuiGraphicsExtractor guiGraphics, Slot slot, int p_470717_, int p_470566_) {
         if (slot == this.currencySlot) {
             if (Minecraft.getInstance().player != null) {
                 var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
@@ -148,11 +147,11 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                 guiGraphics.pose().popMatrix();
             }
         }
-        super.renderSlot(guiGraphics, slot, p_470717_, p_470566_);
+        super.extractSlot(guiGraphics, slot, p_470717_, p_470566_);
     }
 
     @Override
-    protected void renderBg(GuiGraphicsExtractor guiGraphics, float partialTick, int mouseX, int mouseY) {
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         this.renderGuidebookSpread(this, guiGraphics, mouseX, mouseY, partialTick);
         int leftPos = this.leftPos;
         int topPos = this.topPos;
@@ -186,7 +185,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     @Override
-    protected void renderLabels(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY) {
+    protected void extractLabels(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY) {
         int xOffset = Minecraft.getInstance().player != null && Minecraft.getInstance().player.isCreative() ? 19 : 0;
         guiGraphics.text(this.font, this.craftingTitle, this.craftingTitleLabelX + xOffset, this.craftingTitleLabelY, 4210752, false);
         guiGraphics.text(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 4210752, false);

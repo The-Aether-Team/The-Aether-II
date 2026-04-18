@@ -6,7 +6,6 @@ import com.aetherteam.aetherii.entity.ai.brain.behavior.FallRandomStroll;
 import com.aetherteam.aetherii.entity.ai.brain.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.server.level.ServerLevel;
@@ -14,6 +13,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.ActivityData;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
@@ -25,6 +25,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.level.gamerules.GameRules;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -57,26 +58,25 @@ public class MoaAi {
             MemoryModuleType.HURT_BY_ENTITY,
             MemoryModuleType.HOME
     );
+
+    public static final Brain.Provider<Moa> BRAIN_PROVIDER = Brain.provider(
+            MEMORY_TYPES,
+            SENSOR_TYPES,
+            var0 -> getActivities()
+    );
     private static final UniformInt ADULT_FOLLOW_RANGE = UniformInt.of(5, 16);
+
+    public static List<ActivityData<Moa>> getActivities() {
+        return List.of(initCoreActivity(), initIdleActivity(), initFightActivity());
+    }
 
     public static void initMoaHomeMemories(Moa owner, RandomSource random) {
         owner.getBrain().setMemory(MemoryModuleType.HOME, GlobalPos.of(owner.level().dimension(), owner.blockPosition()));
     }
 
-    public static Brain<?> makeBrain(Moa owner, Brain<Moa> brain) {
-        initCoreActivity(brain);
-        initIdleActivity(brain);
-        initFightActivity(owner, brain);
 
-        brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
-        brain.setDefaultActivity(Activity.IDLE);
-        brain.useDefaultActivity();
-
-        return brain;
-    }
-
-    private static void initCoreActivity(Brain<Moa> brain) {
-        brain.addActivity(Activity.CORE, 0, ImmutableList.of(
+    private static ActivityData<Moa> initCoreActivity() {
+        return ActivityData.create(Activity.CORE, 0, ImmutableList.of(
                 new Swim<>(0.8F),
                 new BabyOnlyAnimalPanic<>(0.14F),
                 new LookAtTargetSink(45, 90),
@@ -88,8 +88,8 @@ public class MoaAi {
         ));
     }
 
-    private static void initIdleActivity(Brain<Moa> brain) {
-        brain.addActivity(Activity.IDLE, ImmutableList.of(
+    private static ActivityData<Moa> initIdleActivity() {
+        return ActivityData.create(Activity.IDLE, ImmutableList.of(
                 Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0F, UniformInt.of(30, 60))),
                 Pair.of(2, BehaviorBuilder.triggerIf(Predicate.not(Moa::isPlayerGrown), BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), BabyFollowAdult.create(ADULT_FOLLOW_RANGE, 0.12F)))),
                 Pair.of(3, StartAttacking.create(MoaAi::findNearestValidAttackTarget)),
@@ -103,8 +103,8 @@ public class MoaAi {
         ));
     }
 
-    private static void initFightActivity(Moa owner, Brain<Moa> brain) {
-        brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
+    private static ActivityData<Moa> initFightActivity() {
+        return ActivityData.create(Activity.FIGHT, 10, ImmutableList.of(
                 StopAttackingIfTargetInvalid.create(),
                 SetWalkTargetFromAttackTargetIfTargetOutOfReach.create(0.14F),
                 MeleeAttack.create(5)

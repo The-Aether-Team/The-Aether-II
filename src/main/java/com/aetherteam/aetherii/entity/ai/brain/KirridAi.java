@@ -9,11 +9,11 @@ import com.aetherteam.aetherii.entity.ai.brain.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.ai.brain.sensor.AetherIISensorTypes;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.ActivityData;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -22,6 +22,7 @@ import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 public class KirridAi {
@@ -50,28 +51,28 @@ public class KirridAi {
             AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get(),
             MemoryModuleType.IS_PANICKING
     );
+
+    public static final Brain.Provider<Kirrid> BRAIN_PROVIDER = Brain.provider(
+            MEMORY_TYPES,
+            SENSOR_TYPES,
+            var0 -> getActivities((EntityType<? extends Kirrid>) var0.typeHolder().value())
+    );
     public static final UniformInt ADULT_FOLLOW_RANGE = UniformInt.of(5, 16);
     public static final UniformInt TIME_BETWEEN_RAMS = UniformInt.of(600, 2400);
     public static final UniformInt TIME_BETWEEN_EAT = UniformInt.of(600, 1200);
+
+    public static List<ActivityData<Kirrid>> getActivities(EntityType<? extends Kirrid> entityType) {
+        return List.of(initCoreActivity(), initIdleActivity(entityType));
+    }
 
     public static void initMemories(Kirrid kirrid, RandomSource random) {
         kirrid.getBrain().setMemory(MemoryModuleType.RAM_COOLDOWN_TICKS, TIME_BETWEEN_RAMS.sample(random));
         kirrid.getBrain().setMemory(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get(), TIME_BETWEEN_EAT.sample(random));
     }
 
-    public static Brain<?> makeBrain(EntityType<? extends Kirrid> entityType, Brain<Kirrid> brain) {
-        initCoreActivity(brain);
-        initIdleActivity(entityType, brain);
 
-        brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
-        brain.setDefaultActivity(Activity.IDLE);
-        brain.useDefaultActivity();
-
-        return brain;
-    }
-
-    private static void initCoreActivity(Brain<Kirrid> brain) {
-        brain.addActivity(Activity.CORE, 0, ImmutableList.of(
+    private static ActivityData<Kirrid> initCoreActivity() {
+        return ActivityData.create(Activity.CORE, 0, ImmutableList.of(
                 new Swim<>(0.8F),
                 new KirridPanic(2.0F),
                 new LookAtTargetSink(45, 90),
@@ -82,8 +83,8 @@ public class KirridAi {
         ));
     }
 
-    private static void initIdleActivity(EntityType<? extends Kirrid> entityType, Brain<Kirrid> brain) {
-        brain.addActivity(Activity.IDLE, ImmutableList.of(
+    private static ActivityData<Kirrid> initIdleActivity(EntityType<? extends Kirrid> entityType) {
+        return ActivityData.create(Activity.IDLE, ImmutableList.of(
                 Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0F, UniformInt.of(30, 60))),
                 Pair.of(0, new AnimalMakeLove(entityType)),
                 Pair.of(1, new FollowTemptation(livingEntity -> 1.25F)),

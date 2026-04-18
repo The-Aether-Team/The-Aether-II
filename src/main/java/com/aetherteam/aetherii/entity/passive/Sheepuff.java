@@ -14,6 +14,7 @@ import com.google.common.collect.Maps;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -40,10 +41,7 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -196,8 +194,8 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
-        if (itemStack.getItem() instanceof DyeItem dyeItem) {
-            DyeColor dyeColor = dyeItem.getDyeColor();
+        if (itemStack.has(DataComponents.DYE)) {
+            DyeColor dyeColor = itemStack.get(DataComponents.DYE);
             SheepuffColor sheepuffColor = SheepuffColor.SHEEPUFF_COLOR_BY_DYE.get(dyeColor);
             if (this.getColor() != sheepuffColor) {
                 player.swing(hand);
@@ -392,29 +390,12 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
         Sheepuff parent = (Sheepuff) entity;
         Sheepuff baby = AetherIIEntityTypes.SHEEPUFF.get().create(level, EntitySpawnReason.BREEDING);
         if (baby != null) {
-            baby.setColor(this.getOffspringColor(level, this, parent));
+            SheepuffColor parent1DyeColor = this.getColor();
+            SheepuffColor parent2DyeColor = ((Sheepuff) entity).getColor();
+
+            baby.setColor(SheepuffColor.SHEEPUFF_COLOR_BY_DYE.get(DyeColor.getMixedColor(level, parent1DyeColor.getDyeColor(), parent2DyeColor.getDyeColor())));
         }
         return baby;
-    }
-
-    private SheepuffColor getOffspringColor(ServerLevel serverLevel, Animal parent1, Animal parent2) {
-        SheepuffColor color1 = ((Sheepuff) parent1).getColor();
-        SheepuffColor color2 = ((Sheepuff) parent2).getColor();
-        CraftingInput craftinginput = makeCraftInput(color1.getDyeColor(), color2.getDyeColor());
-        return serverLevel
-                .recipeAccess()
-                .getRecipeFor(RecipeType.CRAFTING, craftinginput, this.level())
-                .map(p_352802_ -> p_352802_.value().assemble(craftinginput, this.level().registryAccess()))
-                .map(ItemStack::getItem)
-                .filter(DyeItem.class::isInstance)
-                .map(DyeItem.class::cast)
-                .map(DyeItem::getDyeColor)
-                .map(SheepuffColor.SHEEPUFF_COLOR_BY_DYE::get)
-                .orElseGet(() -> this.level().random.nextBoolean() ? color1: color2);
-    }
-
-    private static CraftingInput makeCraftInput(DyeColor pColor1, DyeColor pColor2) {
-        return CraftingInput.of(2, 1, List.of(new ItemStack(DyeItem.byColor(pColor1)), new ItemStack(DyeItem.byColor(pColor2))));
     }
 
     public float getHeadEatPositionScale(float pos) {

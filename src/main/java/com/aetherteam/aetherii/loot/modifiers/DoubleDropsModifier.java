@@ -13,6 +13,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -39,20 +40,26 @@ public class DoubleDropsModifier extends LootModifier {
         // Tools
         BlockState targetState = context.getOptionalParameter(LootContextParams.BLOCK_STATE);
         Vec3 targetPos = context.getOptionalParameter(LootContextParams.ORIGIN);
-        ItemStack tool = context.getOptionalParameter(LootContextParams.TOOL);
+        ItemInstance tool = context.getOptionalParameter(LootContextParams.TOOL);
 
         // Weapons
         Entity targetEntity = context.getOptionalParameter(LootContextParams.THIS_ENTITY);
         Entity attacker = context.getOptionalParameter(LootContextParams.DIRECT_ATTACKING_ENTITY);
 
         if (targetState != null && targetPos != null) {
-            if (tool != null && tool.getItem() instanceof SkyrootTool) {
-                if ((targetState.getDestroySpeed(context.getLevel(), BlockPos.containing(targetPos)) > 0 && tool.isCorrectToolForDrops(targetState))) {
-                    this.increaseDrops(lootStacks, newStacks, context.getRandom());
+
+            if (tool != null) {
+                Item toolItem = tool.typeHolder().value();
+
+                if (toolItem instanceof SkyrootTool skyrootTool) {
+
+                    if ((targetState.getDestroySpeed(context.getLevel(), BlockPos.containing(targetPos)) > 0 && toolItem.isCorrectToolForDrops(toolItem.getDefaultInstance(), targetState))) {
+                        this.increaseDrops(lootStacks, newStacks, context.getRandom());
+                    }
                 }
             }
         } else if (targetEntity != null) {
-            if (attacker instanceof LivingEntity livingEntity && EquipmentUtil.isFullStrength(livingEntity) && livingEntity.getMainHandItem().getItem() instanceof SkyrootWeapon && !targetEntity.getType().is(AetherIITags.Entities.NO_DOUBLE_DROPS)) {
+            if (attacker instanceof LivingEntity livingEntity && EquipmentUtil.isFullStrength(livingEntity) && livingEntity.getMainHandItem().getItem() instanceof SkyrootWeapon && !targetEntity.getType().builtInRegistryHolder().is(AetherIITags.Entities.NO_DOUBLE_DROPS)) {
                 this.increaseDrops(lootStacks, newStacks, context.getRandom());
             }
         }

@@ -27,8 +27,8 @@ public class ReinforcementTierButton extends ImageButton {
     }
 
     @Override
-    public void renderContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
-        super.renderContents(guiGraphics, mouseX, mouseY, partialTick);
+    public void extractContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractContents(guiGraphics, mouseX, mouseY, partialTick);
         Identifier tierSprite = ArkeniumForgeScreen.TIER_LOCATIONS.get(this.getTier().getTierNumber() - 1);
 
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, tierSprite, this.getX() + 2, this.getY() + 2, 16, 16);

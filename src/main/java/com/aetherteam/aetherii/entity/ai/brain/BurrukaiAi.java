@@ -6,13 +6,13 @@ import com.aetherteam.aetherii.entity.ai.brain.behavior.burrukai.BurrukaiRamAtta
 import com.aetherteam.aetherii.entity.ai.brain.sensor.AetherIISensorTypes;
 import com.aetherteam.aetherii.entity.passive.Burrukai;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.ActivityData;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -23,6 +23,7 @@ import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.gamerules.GameRules;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -60,24 +61,23 @@ public class BurrukaiAi {
     public static final UniformInt ADULT_FOLLOW_RANGE = UniformInt.of(5, 16);
     public static final UniformInt TIME_BETWEEN_RAMS = UniformInt.of(600, 2400);
 
+    public static final Brain.Provider<Burrukai> BRAIN_PROVIDER = Brain.provider(
+            MEMORY_TYPES,
+            SENSOR_TYPES,
+            var0 -> getActivities((EntityType<? extends Burrukai>) var0.typeHolder().value())
+    );
+
+    public static List<ActivityData<Burrukai>> getActivities(EntityType<? extends Burrukai> entityType) {
+        return List.of(initCoreActivity(), initIdleActivity(entityType), initFightActivity());
+    }
+
     public static void initMemories(Burrukai burrukai, RandomSource random) {
         burrukai.getBrain().setMemory(MemoryModuleType.RAM_COOLDOWN_TICKS, TIME_BETWEEN_RAMS.sample(random));
     }
 
-    public static Brain<?> makeBrain(EntityType<? extends Burrukai> entityType, Burrukai burrukai, Brain<Burrukai> brain) {
-        initCoreActivity(brain);
-        initIdleActivity(entityType, brain);
-        initFightActivity(burrukai, brain);
 
-        brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
-        brain.setDefaultActivity(Activity.IDLE);
-        brain.useDefaultActivity();
-
-        return brain;
-    }
-
-    private static void initCoreActivity(Brain<Burrukai> brain) {
-        brain.addActivity(Activity.CORE, 0, ImmutableList.of(
+    private static ActivityData<Burrukai> initCoreActivity() {
+        return ActivityData.create(Activity.CORE, 0, ImmutableList.of(
                 new Swim<>(0.8F),
                 new NeutralAnimalPanic<>(1.25F),
                 new LookAtTargetSink(45, 90),
@@ -86,8 +86,8 @@ public class BurrukaiAi {
         ));
     }
 
-    private static void initIdleActivity(EntityType<? extends Burrukai> entityType, Brain<Burrukai> brain) {
-        brain.addActivity(Activity.IDLE, ImmutableList.of(
+    private static ActivityData<Burrukai> initIdleActivity(EntityType<? extends Burrukai> entityType) {
+        return ActivityData.create(Activity.IDLE, ImmutableList.of(
                 Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0F, UniformInt.of(30, 60))),
                 Pair.of(0, StartAttacking.create(BurrukaiAi::findNearestValidAttackTarget)),
                 Pair.of(1, new AnimalMakeLove(entityType)),
@@ -101,8 +101,8 @@ public class BurrukaiAi {
         ));
     }
 
-    private static void initFightActivity(Burrukai burrukai, Brain<Burrukai> brain) {
-        brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
+    private static ActivityData<Burrukai> initFightActivity() {
+        return ActivityData.create(Activity.FIGHT, 10, ImmutableList.of(
                 StopAttackingIfTargetInvalid.create(),
                 new BurrukaiRamAttack(2.25F)
         ), MemoryModuleType.ATTACK_TARGET);

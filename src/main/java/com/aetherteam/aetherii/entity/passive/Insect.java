@@ -40,8 +40,8 @@ public class Insect extends PathfinderMob {
     public Insect(EntityType<? extends Insect> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new InsectMoveControl(this);
-        this.setPathfindingMalus(PathType.DANGER_FIRE, -1.0F);
-        this.setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0F);
+        this.setPathfindingMalus(PathType.FIRE_IN_NEIGHBOR, -1.0F);
+        this.setPathfindingMalus(PathType.FIRE_IN_NEIGHBOR, -1.0F);
         this.setPathfindingMalus(PathType.WATER, -1.0F);
         this.makeActionCooldown();
     }

@@ -15,6 +15,7 @@ import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Matrix4fc;
 
 public class MusicPlayerDiscModel implements ItemModel {
     static final ItemModel INSTANCE = new MusicPlayerDiscModel();
@@ -48,7 +49,7 @@ public class MusicPlayerDiscModel implements ItemModel {
         }
 
         @Override
-        public ItemModel bake(ItemModel.BakingContext context) {
+        public ItemModel bake(BakingContext bakingContext, Matrix4fc matrix4fc) {
             return MusicPlayerDiscModel.INSTANCE;
         }
 

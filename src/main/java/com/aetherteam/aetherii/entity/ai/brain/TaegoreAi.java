@@ -7,11 +7,11 @@ import com.aetherteam.aetherii.entity.ai.brain.sensor.AetherIISensorTypes;
 import com.aetherteam.aetherii.entity.passive.Taegore;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.ActivityData;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -22,6 +22,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -55,23 +56,22 @@ public class TaegoreAi {
             AetherIIMemoryModuleTypes.TAEGORE_SEARCH_COOLDOWN.get(),
             AetherIIMemoryModuleTypes.TAEGORE_EXPLORED_POSITIONS.get()
     );
-    public static final UniformInt ADULT_FOLLOW_RANGE = UniformInt.of(5, 16);
 
-    public static Brain<?> makeBrain(EntityType<? extends Taegore> entityType, Brain<Taegore> brain) {
-        initCoreActivity(brain);
-        initDigActivity(brain);
-        initSniffingActivity(brain);
-        initIdleActivity(entityType, brain);
+    public static final Brain.Provider<Taegore> BRAIN_PROVIDER = Brain.provider(
+            MEMORY_TYPES,
+            SENSOR_TYPES,
+            var0 -> getActivities((EntityType<? extends Taegore>) var0.typeHolder().value())
+    );
 
-        brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
-        brain.setDefaultActivity(Activity.IDLE);
-        brain.useDefaultActivity();
-
-        return brain;
+    public static List<ActivityData<Taegore>> getActivities(EntityType<? extends Taegore> entityType) {
+        return List.of(initCoreActivity(), initIdleActivity(entityType), initSniffingActivity(), initDigActivity());
     }
 
-    private static void initCoreActivity(Brain<Taegore> brain) {
-        brain.addActivity(Activity.CORE, 0, ImmutableList.of(
+    public static final UniformInt ADULT_FOLLOW_RANGE = UniformInt.of(5, 16);
+
+
+    private static ActivityData<Taegore> initCoreActivity() {
+        return ActivityData.create(Activity.CORE, 0, ImmutableList.of(
                 new Swim<>(0.8F),
                 new TaegorePanic(1.25F),
                 new LookAtTargetSink(45, 90),
@@ -80,8 +80,8 @@ public class TaegoreAi {
         ));
     }
 
-    private static void initDigActivity(Brain<Taegore> brain) {
-        brain.addActivityWithConditions(
+    private static ActivityData<Taegore> initDigActivity() {
+        return ActivityData.create(
                 Activity.DIG,
                 ImmutableList.of(Pair.of(0, new TaegoreDigging(240)), Pair.of(0, new TaegoreFinishedDigging(50))),
                 Set.of(
@@ -92,8 +92,8 @@ public class TaegoreAi {
         );
     }
 
-    private static void initSniffingActivity(Brain<Taegore> brain) {
-        brain.addActivityWithConditions(
+    private static ActivityData<Taegore> initSniffingActivity() {
+        return ActivityData.create(
                 Activity.SNIFF,
                 ImmutableList.of(Pair.of(0, new TaegoreSearching())),
                 Set.of(
@@ -104,8 +104,8 @@ public class TaegoreAi {
         );
     }
 
-    private static void initIdleActivity(EntityType<? extends Taegore> entityType, Brain<Taegore> brain) {
-        brain.addActivity(Activity.IDLE, ImmutableList.of(
+    private static ActivityData<Taegore> initIdleActivity(EntityType<? extends Taegore> entityType) {
+        return ActivityData.create(Activity.IDLE, ImmutableList.of(
                 Pair.of(0, SetWalkTargetAwayFrom.entity(MemoryModuleType.AVOID_TARGET, 1.7F, 24, true)),
                 Pair.of(1, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0F, UniformInt.of(30, 60))),
                 Pair.of(2, new AnimalMakeLove(entityType)),

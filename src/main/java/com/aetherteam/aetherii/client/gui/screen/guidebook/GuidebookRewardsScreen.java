@@ -40,10 +40,10 @@ public class GuidebookRewardsScreen extends Screen implements Guidebook {
     }
 
     @Override
-    public void render(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
-        this.renderTransparentBackground(guiGraphics);
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        this.extractBlurredBackground(guiGraphics);
         this.renderGuidebookSpread(this, guiGraphics, mouseX, mouseY, partialTick);
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
 
         this.xMouse = (float) mouseX;
         this.yMouse = (float) mouseY;
@@ -52,14 +52,16 @@ public class GuidebookRewardsScreen extends Screen implements Guidebook {
     @Override
     public void renderGuidebookLeftPage(Screen screen, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xffffffff);
+        guiGraphics.centeredText(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xffffffff);
     }
 
     @Override
-    protected void renderMenuBackground(GuiGraphicsExtractor partialTick) { }
+    protected void extractMenuBackground(GuiGraphicsExtractor graphics) {
+    }
 
     @Override
-    protected void renderBlurredBackground(GuiGraphicsExtractor guiGraphics) { }
+    protected void extractBlurredBackground(GuiGraphicsExtractor graphics) {
+    }
 
     @Override
     public boolean keyPressed(KeyEvent event) {

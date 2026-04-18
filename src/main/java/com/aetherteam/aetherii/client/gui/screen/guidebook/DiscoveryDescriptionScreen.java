@@ -69,17 +69,17 @@ public class DiscoveryDescriptionScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
-        this.renderTransparentBackground(guiGraphics);
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.drawCenteredString(this.font, Component.translatable(this.entry.getName()).withStyle(ChatFormatting.UNDERLINE), this.width / 2, 10, 0xffffffff);
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        this.extractBlurredBackground(guiGraphics);
+        super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
+        guiGraphics.centeredText(this.font, Component.translatable(this.entry.getName()).withStyle(ChatFormatting.UNDERLINE), this.width / 2, 10, 0xffffffff);
 
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.DESCRIPTION_BORDER_LEFT_SPRITE, this.textPosition - 50, 30, 10, 120);
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Guidebook.DESCRIPTION_BORDER_RIGHT_SPRITE, this.textPosition + this.textWidth + 50, 30, 10, 120);
 
         this.createText(guiGraphics, this.pages.get(this.currentPageNumber), this.textPosition, 30);
 
-        guiGraphics.drawCenteredString(this.font, Component.literal(String.valueOf(this.currentPageNumber + 1)).append("/").append(String.valueOf(this.pages.size())), this.width / 2, this.height - 20, 0xffffffff);
+        guiGraphics.centeredText(this.font, Component.literal(String.valueOf(this.currentPageNumber + 1)).append("/").append(String.valueOf(this.pages.size())), this.width / 2, this.height - 20, 0xffffffff);
 
         this.previousButton.active = this.currentPageNumber > 0;
         this.nextButton.active = this.currentPageNumber < this.pages.size() - 1;
@@ -108,13 +108,14 @@ public class DiscoveryDescriptionScreen extends Screen {
     private void createText(GuiGraphicsExtractor guiGraphics, List<FormattedCharSequence> reorderingProcessors, int x, int y) {
         int length = 0;
         for (FormattedCharSequence line : reorderingProcessors) {
-            guiGraphics.drawString(this.font, line,  x, y + (length * 10), 0xffffffff, false);
+            guiGraphics.text(this.font, line, x, y + (length * 10), 0xffffffff, false);
             length++;
         }
     }
 
     @Override
-    protected void renderBlurredBackground(GuiGraphicsExtractor guiGraphics) { }
+    protected void extractBlurredBackground(GuiGraphicsExtractor graphics) {
+    }
 
     @Override
     public boolean isPauseScreen() {

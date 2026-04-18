@@ -289,8 +289,8 @@ This is a list of some major features that have not yet been implemented but are
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
-        this.renderTransparentBackground(guiGraphics);
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        this.extractBlurredBackground(guiGraphics);
+        super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.centeredText(this.font, TITLE.withStyle(ChatFormatting.UNDERLINE), this.width / 2, 10, 0xffffffff);
 
         this.createText(guiGraphics, this.pages.get(this.currentPageNumber), this.textPosition, 30);
@@ -330,7 +330,8 @@ This is a list of some major features that have not yet been implemented but are
     }
 
     @Override
-    protected void renderBlurredBackground(GuiGraphicsExtractor guiGraphics) { }
+    protected void extractBlurredBackground(GuiGraphicsExtractor graphics) {
+    }
 
     @Override
     public boolean isPauseScreen() {

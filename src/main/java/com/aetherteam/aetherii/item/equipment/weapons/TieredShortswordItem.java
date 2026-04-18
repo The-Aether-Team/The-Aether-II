@@ -13,6 +13,7 @@ import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
@@ -62,8 +63,8 @@ public class TieredShortswordItem extends Item {
     }
 
     @Override
-    public boolean canPerformAction(ItemStack stack, ItemAbility toolAction) {
-        return AetherIINeoItemAbilities.DEFAULT_SHORTSWORD_ACTIONS.contains(toolAction);
+    public boolean canPerformAction(ItemInstance stack, ItemAbility itemAbility) {
+        return AetherIINeoItemAbilities.DEFAULT_SHORTSWORD_ACTIONS.contains(itemAbility);
     }
 
     @Override

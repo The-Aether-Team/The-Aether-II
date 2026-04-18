@@ -51,8 +51,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.FogType;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import org.apache.commons.lang3.tuple.Triple;
@@ -281,7 +279,7 @@ public class RenderHooks {
             int nameLength = Minecraft.getInstance().font.width(component);
             int nameX = Minecraft.getInstance().getWindow().getGuiScaledWidth() / 2 - nameLength / 2;
             int nameY = y - 9;
-            guiGraphics.drawString(Minecraft.getInstance().font, component, nameX, nameY, -1);
+            guiGraphics.text(Minecraft.getInstance().font, component, nameX, nameY, -1);
         }
     }
 
