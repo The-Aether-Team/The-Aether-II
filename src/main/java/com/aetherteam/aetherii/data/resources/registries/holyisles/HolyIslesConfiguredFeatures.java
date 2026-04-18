@@ -484,12 +484,7 @@ public class HolyIslesConfiguredFeatures {
             }
         }
 
-        register(context, GRASS_FIELD, Feature.RANDOM_PATCH, new RandomPatchConfiguration(
-                80,
-                12,
-                4,
-                PlacementUtils.filtered(
-                        AetherIIFeatures.AETHER_GRASS.get(),
+        register(context, GRASS_FIELD, AetherIIFeatures.AETHER_GRASS.get(), (
                         new SimpleBlockConfiguration(
                                 new NoiseProvider(
                                         2345L,
@@ -503,8 +498,7 @@ public class HolyIslesConfiguredFeatures {
                                                 AetherIIBlocks.TALL_AETHER_GRASS.get().defaultBlockState()
                                         )
                                 )
-                        ), BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.ONLY_IN_AIR_PREDICATE)
-                )
+                        )
         ));
         register(
                 context,
@@ -1108,7 +1102,7 @@ public class HolyIslesConfiguredFeatures {
                         new GreatrootFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(1, 0, 2))
                         .ignoreVines().belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()))
-                        .decorators(ImmutableList.of(new MossDecorator(AetherIIBlockStateProperties.Mossy.BRYALINN, SimpleStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_CARPET.get()), SimpleStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_VINES.get()), Optional.of(new WeightedStateProvider(bryallinMossFlowers))))).dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState())).build());
+                        .decorators(ImmutableList.of(new MossDecorator(AetherIIBlockStateProperties.Mossy.BRYALINN, SimpleStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_CARPET.get()), SimpleStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_VINES.get()), Optional.of(new WeightedStateProvider(bryallinMossFlowers))))).belowTrunkProvider(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState())).build());
 
         register(context, SMALL_MAGNETIC_SHROOM, AetherIIFeatures.SMALL_MAGNETIC_SHROOM.get(), new BigMagneticShroomConfiguration(
                 new NoiseThresholdProvider(
