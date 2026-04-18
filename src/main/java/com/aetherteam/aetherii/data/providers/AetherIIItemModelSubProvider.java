@@ -334,7 +334,7 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
         Identifier location = ModelLocationUtils.getModelLocation(item);
         Identifier texture = TextureMapping.getItemTexture(item).sprite();
         Identifier overlay = TextureMapping.getItemTexture(item, "_overlay").sprite();
-        ModelTemplates.TWO_LAYERED_ITEM.create(location, TextureMapping.layered(texture, overlay), this.modelOutput);
+        ModelTemplates.TWO_LAYERED_ITEM.create(location, TextureMapping.layered(new Material(texture), new Material(overlay)), this.modelOutput);
         ItemModel.Unbaked model = ItemModelUtils.tintedModel(location, new Dye(0xFF7D8BA3));
         this.itemModelOutput.accept(AetherIIItems.MOA_SADDLE.asItem(), model);
     }

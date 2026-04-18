@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.blockpredicates.HasSturdyFacePredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.heightproviders.TrapezoidHeight;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
@@ -127,6 +128,10 @@ public class HolyIslesPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ICE_OVERHANG = createKey("ice_overhang");
     public static final ResourceKey<PlacedFeature> POINTED_HOLYSTONE = createKey("pointed_holystone");
     public static final ResourceKey<PlacedFeature> POINTED_ICHORITE = createKey("pointed_ichorite");
+    public static final ResourceKey<PlacedFeature> BRYALINN_MOSS_CARPET_PATCH = createKey("bryalinn_moss_carpet_patch");
+    public static final ResourceKey<PlacedFeature> BRYALINN_MOSS_FLOWER_PATCH = createKey("bryalinn_moss_flower_patch");
+    public static final ResourceKey<PlacedFeature> SHAYELINN_MOSS_CARPET_PATCH = createKey("shayelinn_moss_carpet_patch");
+    public static final ResourceKey<PlacedFeature> AMBRELINN_MOSS_CARPET_PATCH = createKey("ambrelinn_moss_carpet_patch");
     public static final ResourceKey<PlacedFeature> EXPOSED_BRYALINN_MOSS_COVER = createKey("exposed_bryalinn_moss_cover");
     public static final ResourceKey<PlacedFeature> SWAMP_BRYALINN_MOSS_COVER = createKey("swamp_bryalinn_moss_cover");
     public static final ResourceKey<PlacedFeature> EXPOSED_SHAYELINN_MOSS_COVER = createKey("exposed_shayelinn_moss_cover");
@@ -806,6 +811,50 @@ public class HolyIslesPlacedFeatures {
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(64))),
                 RandomOffsetPlacement.of(ClampedNormalInt.of(0.0F, 3.0F, -10, 10), ClampedNormalInt.of(0.0F, 0.6F, -2, 2)),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
+                BiomeFilter.biome()
+        );
+        register(context, BRYALINN_MOSS_CARPET_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_CARPET),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(3),
+                        RandomOffsetPlacement.ofTriangle(2, 2),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
+                )
+        );
+        register(context, BRYALINN_MOSS_FLOWER_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOWERS),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(3),
+                        RandomOffsetPlacement.ofTriangle(2, 2),
+                        BiomeFilter.biome()
+                )
+        );
+        register(context, SHAYELINN_MOSS_CARPET_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_CARPET),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(3),
+                        RandomOffsetPlacement.ofTriangle(2, 2),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
+                )
+        );
+        register(context, AMBRELINN_MOSS_CARPET_PATCH,
+                configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AMBRELINN_MOSS_CARPET),
+                Util.copyAndAdd(
+                        VegetationPlacements.worldSurfaceSquaredWithCount(3),
+                        RandomOffsetPlacement.ofTriangle(2, 2),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
+                )
+        );
+        register(context, EXPOSED_BRYALINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOOR),
+                NoiseBasedCountPlacement.of(35, 50, 0.0),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.belowTop(276)),
                 BiomeFilter.biome()
         );
         register(context, EXPOSED_BRYALINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOOR),
