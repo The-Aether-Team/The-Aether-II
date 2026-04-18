@@ -49,7 +49,7 @@ public abstract class PlantMob extends PathfinderMob {
                 }
             } else if (source.getDirectEntity() instanceof Projectile projectile) {
                 if (projectile.getOwner() instanceof LivingEntity attacker) {
-                    if (projectile.getType().is(AetherIITags.Entities.PLANT_DAMAGING_PROJECTILES)) {
+                    if (projectile.getType().builtInRegistryHolder().is(AetherIITags.Entities.PLANT_DAMAGING_PROJECTILES)) {
                         return Optional.of(attacker);
                     } else {
                         projectile.setDeltaMovement(projectile.getDeltaMovement().scale(-1));
@@ -64,7 +64,7 @@ public abstract class PlantMob extends PathfinderMob {
     private Optional<LivingEntity> sendInvalidToolMessage(LivingEntity attacker) {
         if (!this.level().isClientSide() && attacker instanceof Player player) {
             if (this.getChatCooldown() <= 0) {
-                player.displayClientMessage(Component.translatable("gui.aether_ii.plant.message.attack.invalid"), true); // Invalid tool.
+                player.sendOverlayMessage(Component.translatable("gui.aether_ii.plant.message.attack.invalid")); // Invalid tool.
                 this.setChatCooldown(15);
             }
         }

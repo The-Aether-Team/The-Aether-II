@@ -70,10 +70,10 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     }
 
     @Override
-    public void render(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
-        this.renderTransparentBackground(guiGraphics);
-        this.renderGuidebookSpread(this, guiGraphics, mouseX, mouseY, partialTick);
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(graphics, mouseX, mouseY, partialTick);
+        this.renderGuidebookSpread(this, graphics, mouseX, mouseY, partialTick);
+        super.extractRenderState(graphics, mouseX, mouseY, partialTick);
 
         this.xMouse = (float) mouseX;
         this.yMouse = (float) mouseY;
@@ -105,10 +105,12 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     }
 
     @Override
-    protected void renderMenuBackground(GuiGraphicsExtractor partialTick) { }
+    protected void extractMenuBackground(GuiGraphicsExtractor graphics) {
+    }
 
     @Override
-    protected void renderBlurredBackground(GuiGraphicsExtractor guiGraphics) { }
+    protected void extractBlurredBackground(GuiGraphicsExtractor graphics) {
+    }
 
     @Override
     public boolean keyPressed(KeyEvent event) {

@@ -110,7 +110,7 @@ public class Zephyr extends Mob implements Enemy {
         super.aiStep();
         if (this.getBlowChargeTime() >= 25 && this.getBlowChargeTime() < 50) {
             Vec3 look = this.getViewVector(1.0F);
-            List<Entity> list = this.level().getEntities(this, this.getBoundingBox().inflate(5, 0, 5).expandTowards(0, -2, 0).move(look.scale(10.5F)), entity -> entity != this && !entity.getType().is(AetherIITags.Entities.ZEPHYR_BLOW_BLACKLIST));
+            List<Entity> list = this.level().getEntities(this, this.getBoundingBox().inflate(5, 0, 5).expandTowards(0, -2, 0).move(look.scale(10.5F)), entity -> entity != this && !entity.getType().builtInRegistryHolder().is(AetherIITags.Entities.ZEPHYR_BLOW_BLACKLIST));
             list.forEach(entity -> {
                 if (entity instanceof LivingEntity livingEntity) {
                     if (livingEntity.getItemBySlot(EquipmentSlot.FEET).is(AetherIITags.Items.SENTRY_ARMOR)) {

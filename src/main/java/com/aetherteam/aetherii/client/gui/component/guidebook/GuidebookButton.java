@@ -14,8 +14,9 @@ public class GuidebookButton extends Button.Plain {
     }
 
     @Override
-    protected void renderContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
-        super.renderContents(guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.item(new ItemStack(this.renderItem), this.getX() + 3, this.getY() + 3);
+    protected void extractContents(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+        super.extractContents(graphics, mouseX, mouseY, a);
+        graphics.item(new ItemStack(this.renderItem), this.getX() + 3, this.getY() + 3);
     }
+
 }

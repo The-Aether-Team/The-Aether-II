@@ -17,7 +17,9 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.components.*;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -141,7 +143,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     }
 
     @Override
-    public void render(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
         String nameValue = this.menu.getInput().getHoverName().getString();
         boolean editable = !this.menu.getInput().isEmpty();
         if (!ItemStack.matches(this.menu.getInput(), this.lastInput) && !this.name.getValue().equals(nameValue)) {
@@ -163,16 +165,17 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             this.reinit(this.width, this.height);
         }
 
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
-        this.name.render(guiGraphics, mouseX, mouseY, partialTick);
-        this.renderTooltip(guiGraphics, mouseX, mouseY);
+        super.extractRenderState(graphics, mouseX, mouseY, partialTick);
+        this.name.extractRenderState(graphics, mouseX, mouseY, partialTick);
+        this.extractTooltip(graphics, mouseX, mouseY);
 
         this.lastInput = this.menu.getInput().copy();
     }
 
     @Override
-    protected void renderBg(GuiGraphicsExtractor guiGraphics, float partialTick, int mouseX, int mouseY) {
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         ItemStack input = this.menu.getInput();
+        super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
         int i = this.leftPos;
         int j = (this.height - this.imageHeight) / 2;
 
@@ -214,7 +217,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             poseStack.pushMatrix();
             poseStack.scale(2, 2);
             poseStack.translate(itemX, itemY);
-            guiGraphics.renderItem(displayStack, 0, 0);
+            guiGraphics.item(displayStack, 0, 0);
             this.renderItemTooltipForSpace(this.font, guiGraphics, mouseX, mouseY, (int) (itemX - 1) * 2, (int) (itemY - 1) * 2, 35, 35, displayStack);
             poseStack.popMatrix();
 
@@ -233,14 +236,14 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                             int secondX = secondary.isEmpty() ? button.getWidth() / 2 : 0;
                             int x = secondX + button.getX() - 8;
                             int y = button.getY() + button.getHeight() + 2;
-                            guiGraphics.renderFakeItem(primary, x, y);
-                            guiGraphics.renderItemDecorations(this.font, primary, x, y);
+                            guiGraphics.fakeItem(primary, x, y);
+                            guiGraphics.itemDecorations(this.font, primary, x, y);
                         }
                         if (!secondary.isEmpty()) {
                             int x = button.getX() + 8;
                             int y = button.getY() + button.getHeight() + 2;
-                            guiGraphics.renderFakeItem(secondary, x, y);
-                            guiGraphics.renderItemDecorations(this.font, secondary, x, y);
+                            guiGraphics.fakeItem(secondary, x, y);
+                            guiGraphics.itemDecorations(this.font, secondary, x, y);
                         }
                     }
                 }
@@ -268,8 +271,8 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     }
 
     @Override
-    protected void renderSlot(GuiGraphicsExtractor guiGraphics, Slot slot, int p_470717_, int p_470566_) {
-        super.renderSlot(guiGraphics, slot, p_470717_, p_470566_);
+    protected void extractSlot(GuiGraphicsExtractor guiGraphics, Slot slot, int p_470717_, int p_470566_) {
+        super.extractSlot(guiGraphics, slot, p_470717_, p_470566_);
         if (slot instanceof ForgeCharmSlot charmSlot) {
             if (charmSlot.isActive() && charmSlot.isLocked(this.menu.getInput())) {
                 guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SLOT_LOCKED, charmSlot.x, charmSlot.y, 16, 16);

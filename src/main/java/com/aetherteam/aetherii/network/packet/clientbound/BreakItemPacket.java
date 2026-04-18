@@ -43,7 +43,7 @@ public record BreakItemPacket(int entityId, ItemStack stack) implements CustomPa
                                 holder.value(),
                                 livingEntity.getSoundSource(),
                                 0.8F,
-                                0.8F + livingEntity.level().random.nextFloat() * 0.4F,
+                                0.8F + livingEntity.level().getRandom().nextFloat() * 0.4F,
                                 false);
                     }
                     livingEntity.spawnItemParticles(itemStack, 5);

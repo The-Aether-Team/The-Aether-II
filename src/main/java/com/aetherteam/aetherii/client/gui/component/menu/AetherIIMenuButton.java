@@ -38,7 +38,7 @@ public class AetherIIMenuButton extends Button {
     }
 
     @Override
-    public void renderContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void extractContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         Matrix3x2fStack poseStack = guiGraphics.pose();
         Minecraft minecraft = Minecraft.getInstance();
         Font font = minecraft.font;
@@ -57,7 +57,7 @@ public class AetherIIMenuButton extends Button {
         float textY = this.getY() + (this.height - 8) / 2.0F;
         poseStack.translate(textX, textY);
         if (!this.makeshipButton) {
-            guiGraphics.drawString(font, this.getMessage(), 0, 0, this.getTextColor(mouseX, mouseY) | Mth.ceil(this.alpha * 255.0F) << 24);
+            guiGraphics.text(font, this.getMessage(), 0, 0, this.getTextColor(mouseX, mouseY) | Mth.ceil(this.alpha * 255.0F) << 24);
         }
         poseStack.popMatrix();
     }

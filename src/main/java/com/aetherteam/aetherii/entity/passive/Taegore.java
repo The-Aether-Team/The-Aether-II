@@ -6,7 +6,6 @@ import com.aetherteam.aetherii.client.sound.ClientSoundHooks;
 import com.aetherteam.aetherii.entity.DiggingMob;
 import com.aetherteam.aetherii.entity.ai.brain.TaegoreAi;
 import com.aetherteam.aetherii.entity.ai.brain.memory.AetherIIMemoryModuleTypes;
-import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -62,13 +61,8 @@ public class Taegore extends AetherAnimal implements DiggingMob {
     }
 
     @Override
-    protected Brain.Provider<Taegore> brainProvider() {
-        return Brain.provider(TaegoreAi.MEMORY_TYPES, TaegoreAi.SENSOR_TYPES);
-    }
-
-    @Override
-    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
-        return TaegoreAi.makeBrain(this.variantType, this.brainProvider().makeBrain(dynamic));
+    protected Brain<Taegore> makeBrain(Brain.Packed packedBrain) {
+        return TaegoreAi.BRAIN_PROVIDER.makeBrain(this, packedBrain);
     }
 
     @Override

@@ -210,7 +210,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     private boolean canProcess(RegistryAccess registryAccess, @Nullable RecipeHolder<AltarEnchantingRecipe> recipeHolder, NonNullList<ItemStack> stacks, int maxStackSize) {
         ItemStack input = stacks.get(0);
         if (!input.isEmpty() && recipeHolder != null) {
-            ItemStack result = recipeHolder.value().assemble(new SingleRecipeInput(this.getItem(0)), registryAccess);
+            ItemStack result = recipeHolder.value().assemble(new SingleRecipeInput(this.getItem(0)));
             if (result.isEmpty()) {
                 return false;
             } else {
@@ -237,7 +237,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     private boolean process(RegistryAccess registryAccess, @Nullable RecipeHolder<AltarEnchantingRecipe> recipeHolder, NonNullList<ItemStack> stacks, int maxStackSize) {
         if (recipeHolder != null && this.canProcess(registryAccess, recipeHolder, stacks, maxStackSize)) {
             ItemStack input = stacks.get(0);
-            ItemStack result = recipeHolder.value().assemble(new SingleRecipeInput(this.getItem(0)), registryAccess);
+            ItemStack result = recipeHolder.value().assemble(new SingleRecipeInput(this.getItem(0)));
             ItemStack output = stacks.get(9);
             if (output.isEmpty()) {
                 if (ItemStack.isSameItem(input, result) && input.has(DataComponents.MAX_DAMAGE) && input.getDamageValue() > 0) {

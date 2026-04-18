@@ -24,9 +24,9 @@ public class HolyIslesReceivingLevelScreen extends LevelLoadingScreen {
     }
 
     @Override
-    public void renderBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         if (this.isInAetherPortal) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_OPAQUE_TEXTURED_BACKGROUND, Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getParticleIcon(AetherIIBlocks.AETHER_PORTAL.get().defaultBlockState()), 0, 0, guiGraphics.guiWidth(), guiGraphics.guiHeight());
+            guiGraphics.blitSprite(RenderPipelines.GUI_OPAQUE_TEXTURED_BACKGROUND, Minecraft.getInstance().getModelManager().getBlockStateModelSet().getParticleMaterial(AetherIIBlocks.AETHER_PORTAL.get().defaultBlockState()).sprite(), 0, 0, guiGraphics.guiWidth(), guiGraphics.guiHeight());
         }
     }
 

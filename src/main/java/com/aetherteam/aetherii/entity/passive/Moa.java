@@ -22,7 +22,6 @@ import com.aetherteam.aetherii.item.components.MoaVariant;
 import com.aetherteam.aetherii.item.miscellaneous.MoaFeedItem;
 import com.aetherteam.aetherii.item.miscellaneous.MoaSaddlebagItem;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.Dynamic;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -58,6 +57,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerListener;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
@@ -212,13 +213,8 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
     }
 
     @Override
-    protected Brain.Provider<Moa> brainProvider() {
-        return Brain.provider(MoaAi.MEMORY_TYPES, MoaAi.SENSOR_TYPES);
-    }
-
-    @Override
-    protected Brain<?> makeBrain(Dynamic<?> pDynamic) {
-        return MoaAi.makeBrain(this, this.brainProvider().makeBrain(pDynamic));
+    protected Brain<Moa> makeBrain(Brain.Packed packedBrain) {
+        return MoaAi.BRAIN_PROVIDER.makeBrain(this, packedBrain);
     }
 
     @SuppressWarnings("unchecked")
@@ -236,7 +232,6 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         SimpleContainer simplecontainer = this.inventory;
         this.inventory = new SimpleContainer(this.getInventorySize());
         if (simplecontainer != null) {
-            simplecontainer.removeListener(this);
             int i = Math.min(simplecontainer.getContainerSize(), this.inventory.getContainerSize());
 
             for (int j = 0; j < i; ++j) {
@@ -247,13 +242,17 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
             }
         }
 
-        this.inventory.addListener(this);
+        this.syncToClients();
+    }
+
+
+    @Override
+    public void slotChanged(AbstractContainerMenu abstractContainerMenu, int i, ItemStack itemStack) {
         this.syncToClients();
     }
 
     @Override
-    public void containerChanged(Container container) {
-        boolean isSaddled = this.isSaddled();
+    public void dataChanged(AbstractContainerMenu abstractContainerMenu, int i, int i1) {
         this.syncToClients();
     }
 
@@ -1530,6 +1529,7 @@ public class Moa extends MountableAnimal implements ContainerListener, HasCustom
         }
         this.setShearingTime(input.getIntOr("ShearingTime", 0));
     }
+
 
     public enum KeratinColor implements StringRepresentable {
         GRAY("gray", 0, false),

@@ -75,19 +75,19 @@ public class AetherOverlayRecipeComponent extends OverlayRecipeComponent {
         }
 
         @Override
-        public void renderWidget(GuiGraphicsExtractor guiGraphics, int p_283483_, int p_282919_, float p_282165_) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.getSprite(this.isCraftable), this.getX(), this.getY(), this.width, this.height);
+        public void extractWidgetRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.getSprite(this.isCraftable), this.getX(), this.getY(), this.width, this.height);
             float x = (float) (this.getX() + 2);
             float y = (float) (this.getY() + 2);
 
             for (Pos pos : this.slots) {
                 ItemStack stack = pos.selectIngredient(AetherOverlayRecipeComponent.this.slotSelectTime.currentIndex());
-                guiGraphics.pose().pushMatrix();
-                guiGraphics.pose().translate(x + (float) pos.x(), y + (float) pos.y());
-                guiGraphics.pose().translate(-8.0F, -8.0F);
-                guiGraphics.item(stack, 0, 0);
-                guiGraphics.itemDecorations(Minecraft.getInstance().font, stack, 0, 0);
-                guiGraphics.pose().popMatrix();
+                graphics.pose().pushMatrix();
+                graphics.pose().translate(x + (float) pos.x(), y + (float) pos.y());
+                graphics.pose().translate(-8.0F, -8.0F);
+                graphics.item(stack, 0, 0);
+                graphics.itemDecorations(Minecraft.getInstance().font, stack, 0, 0);
+                graphics.pose().popMatrix();
             }
         }
 

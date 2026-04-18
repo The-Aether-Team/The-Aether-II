@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.client.gui.screen.menu;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.AetherIIClientProxy;
 import com.aetherteam.aetherii.client.gui.component.menu.AetherIIMenuButton;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.TitleScreenAccessor;
@@ -82,8 +81,8 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
     }
 
     @Override
-    public void render(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        super.render(guiGraphics, mouseX, mouseY, partialTicks);
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
+        super.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
         int xOffset = CumulusConfig.CLIENT.enable_menu_api.get() && CumulusConfig.CLIENT.enable_menu_list_button.get() ? -62 : 0;
         for (GuiEventListener child : this.children()) {
             if (child instanceof AetherIIMenuButton aetherButton) { // Smoothly shifts the Aether-styled buttons to the right slightly when hovered over.
@@ -106,13 +105,13 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
         TitleScreenBehavior.super.handleImageButtons(this, xOffset);
         TitleScreenBehavior.super.handleEssentialButtonsForLeftMenu(this);
 
-        guiGraphics.drawString(this.font, "The Aether II 1.21.11-ALPHA.2.1", 2, this.height - 10, 0xFFFF7575);
+        guiGraphics.text(this.font, "The Aether II 1.21.11-ALPHA.2.1", 2, this.height - 10, 0xFFFF7575);
     }
 
     @Override
     public boolean forEachLineBranding(boolean includeMC, boolean reverse, BiConsumer<Integer, String> lineConsumer, GuiGraphicsExtractor guiGraphics, int i) {
         BrandingControl.forEachLine(true, true, (brandingLine, branding) ->
-                guiGraphics.drawString(font, branding, this.width - font.width(branding) - 1, this.height - (10 + (brandingLine + 1) * (font.lineHeight + 1)), 16777215 | i)
+                guiGraphics.text(font, branding, this.width - font.width(branding) - 1, this.height - (10 + (brandingLine + 1) * (font.lineHeight + 1)), 16777215 | i)
         );
         return true;
     }
@@ -120,7 +119,7 @@ public class AetherIITitleScreen extends TitleScreen implements TitleScreenBehav
     @Override
     public boolean forEachAboveCopyrightLineBranding(BiConsumer<Integer, String> lineConsumer, GuiGraphicsExtractor guiGraphics, int i) {
         BrandingControl.forEachAboveCopyrightLine((brandingLine, branding) ->
-                guiGraphics.drawString(font, branding, 1, this.height - (brandingLine + 1) * (font.lineHeight + 1), 16777215 | i)
+                guiGraphics.text(font, branding, 1, this.height - (brandingLine + 1) * (font.lineHeight + 1), 16777215 | i)
         );
         return true;
     }

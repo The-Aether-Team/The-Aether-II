@@ -29,10 +29,11 @@ public class DescriptionButton extends ImageButton {
         this.currentScreen = currentScreen;
     }
 
+
     @Override
-    public void renderContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void extractContents(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         if (!(this.currentScreen instanceof GuidebookDiscoveryScreen screen) || screen.getCurrentSection().getSelectedEntry() != null) {
-            super.renderContents(guiGraphics, mouseX, mouseY, partialTick);
+            super.extractContents(graphics, mouseX, mouseY, a);
         }
     }
 }

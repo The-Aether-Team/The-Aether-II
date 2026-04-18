@@ -112,7 +112,7 @@ public class BossDoorwayBlock extends CopyBlock {
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        if (!state.getValue(CopyBlock.EMPTY) && context instanceof EntityCollisionContext entity && entity.getEntity() != null && entity.getEntity().getType().is(Tags.EntityTypes.BOSSES)) {
+        if (!state.getValue(CopyBlock.EMPTY) && context instanceof EntityCollisionContext entity && entity.getEntity() != null && entity.getEntity().getType().builtInRegistryHolder().is(Tags.EntityTypes.BOSSES)) {
             return Shapes.block();
         } else {
             return state.getValue(INVISIBLE) ? Shapes.empty() : super.getCollisionShape(state, level, pos, context);
@@ -196,7 +196,7 @@ public class BossDoorwayBlock extends CopyBlock {
 
     @Override
     public @Nullable PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
-        if (mob != null && mob.getType().is(Tags.EntityTypes.BOSSES)) {
+        if (mob != null && mob.getType().builtInRegistryHolder().is(Tags.EntityTypes.BOSSES)) {
             return PathType.BLOCKED;
         }
         return super.getBlockPathType(state, level, pos, mob);
