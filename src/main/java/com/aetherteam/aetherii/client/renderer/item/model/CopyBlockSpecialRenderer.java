@@ -136,7 +136,7 @@ public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState
         }
 
         @Override
-        public NoDataSpecialModelRenderer bake(BakingContext context) {
+        public CopyBlockSpecialRenderer bake(BakingContext context) {
             return new CopyBlockSpecialRenderer(this.block(), this.overlay());
         }
     }

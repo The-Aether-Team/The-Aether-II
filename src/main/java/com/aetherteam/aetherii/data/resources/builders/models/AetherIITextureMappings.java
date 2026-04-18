@@ -30,11 +30,11 @@ public class AetherIITextureMappings {
     }
 
     public static TextureMapping block(Block block) {
-        return block(TextureMapping.getBlockTexture(block));
+        return block(TextureMapping.getBlockTexture(block).sprite());
     }
 
     public static TextureMapping block(Block block, String suffix) {
-        return block(TextureMapping.getBlockTexture(block), suffix);
+        return block(TextureMapping.getBlockTexture(block).sprite(), suffix);
     }
 
     public static TextureMapping block(Identifier texture) {
@@ -43,12 +43,12 @@ public class AetherIITextureMappings {
 
     public static TextureMapping block(Identifier texture, String suffix) {
         return new TextureMapping()
-            .put(TextureSlot.NORTH, texture.withSuffix("_front" + suffix))
-            .put(TextureSlot.SOUTH, texture.withSuffix("_back" + suffix))
-            .put(TextureSlot.EAST, texture.withSuffix("_right" + suffix))
-            .put(TextureSlot.WEST, texture.withSuffix("_left" + suffix))
-            .put(TextureSlot.UP, texture.withSuffix("_top" + suffix))
-            .put(TextureSlot.DOWN, texture.withSuffix("_bottom" + suffix));
+            .put(TextureSlot.NORTH, new Material(texture.withSuffix("_front" + suffix)))
+            .put(TextureSlot.SOUTH, new Material(texture.withSuffix("_back" + suffix)))
+            .put(TextureSlot.EAST, new Material(texture.withSuffix("_right" + suffix)))
+            .put(TextureSlot.WEST, new Material(texture.withSuffix("_left" + suffix)))
+            .put(TextureSlot.UP, new Material(texture.withSuffix("_top" + suffix)))
+            .put(TextureSlot.DOWN, new Material(texture.withSuffix("_bottom" + suffix)));
     }
 
     public static TextureMapping portal(Block portal) {
@@ -67,7 +67,7 @@ public class AetherIITextureMappings {
 
     public static TextureMapping vine(Identifier vine) {
         return new TextureMapping()
-                .put(AetherIITextureSlots.VINE, vine)
+                .put(AetherIITextureSlots.VINE, new Material(vine))
                 .copySlot(AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
     }
 
@@ -77,7 +77,7 @@ public class AetherIITextureMappings {
                 .copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
                 .put(TextureSlot.TOP, TextureMapping.getBlockTexture(moss))
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(top, "_" + suffix))
-                .put(AetherIITextureSlots.OVERLAY, Identifier.fromNamespaceAndPath(AetherII.MODID, "block/" + suffix + "_overlay"));
+                .put(AetherIITextureSlots.OVERLAY, new Material(Identifier.fromNamespaceAndPath(AetherII.MODID, "block/" + suffix + "_overlay")));
     }
 
     public static TextureMapping tintedGrass(Block grass, Block dirt) {
@@ -196,7 +196,7 @@ public class AetherIITextureMappings {
     public static TextureMapping lockedBlockInventory(Block block) {
         return new TextureMapping()
                 .put(AetherIITextureSlots.FACE, TextureMapping.getBlockTexture(block))
-                .put(AetherIITextureSlots.OVERLAY, Identifier.fromNamespaceAndPath(AetherII.MODID, "block/dungeon_lock"));
+                .put(AetherIITextureSlots.OVERLAY, new Material(Identifier.fromNamespaceAndPath(AetherII.MODID, "block/dungeon_lock")));
     }
 
     public static TextureMapping barsWithDifferentEdge(Block block, Block edgeBlock, String suffix) {

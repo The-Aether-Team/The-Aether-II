@@ -24,6 +24,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 
 import java.util.stream.Collectors;
@@ -55,7 +56,7 @@ public class AlkahestPurifierRecipeCategory extends AbstractRecipeCategory<Alkah
         Holder<Item> item = ingredients.get(0);
         if (item.is(AetherIITags.Items.IRRADIATED_ITEM)) {
             Identifier location = item.getKey().identifier().withSuffix("_result");
-            resultDisplay = new SlotDisplay.ItemStackSlotDisplay(new ItemStack(item, 1, DataComponentPatch.builder()
+            resultDisplay = new SlotDisplay.ItemStackSlotDisplay(new ItemStackTemplate(item, 1, DataComponentPatch.builder()
                     .set(DataComponents.ITEM_MODEL, location)
                     .set(DataComponents.ITEM_NAME, Component.translatable(Util.makeDescriptionId("item", location)))
                     .build()

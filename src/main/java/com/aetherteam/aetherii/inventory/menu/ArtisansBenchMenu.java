@@ -152,7 +152,7 @@ public class ArtisansBenchMenu extends AbstractContainerMenu {
         }
         optional.ifPresentOrElse((recipeHolder) -> {
             this.resultContainer.setRecipeUsed(recipeHolder);
-            this.resultSlot.set(recipeHolder.value().assemble(new SingleRecipeInput(this.container.getItem(0)), this.level.registryAccess()));
+            this.resultSlot.set(recipeHolder.value().assemble(new SingleRecipeInput(this.container.getItem(0))));
         }, () -> {
             this.resultSlot.set(ItemStack.EMPTY);
             this.resultContainer.setRecipeUsed(null);

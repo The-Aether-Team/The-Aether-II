@@ -59,7 +59,7 @@ public class YellowAttackShockParticle extends SingleQuadParticle {
     }
 
     @Override
-    public int getLightColor(float partialTick) {
+    public int getLightCoords(float partialTick) {
         return 15728880;
     }
 
