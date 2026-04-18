@@ -59,7 +59,7 @@ public record TrunkModel(Map<Holder, BlockStateModelPart> connections, TextureAt
                 connections.put(new Holder(entry.getKey(), WallSide.LOW), SimpleModelWrapper.bake(modelBaker, this.corner(), entry.getValue().withUvLock()));
                 connections.put(new Holder(entry.getKey(), WallSide.TALL), SimpleModelWrapper.bake(modelBaker, this.cornerTall(), entry.getValue().withUvLock()));
             }
-            return new TrunkModel(connections, List.copyOf(connections.values()).getFirst().particleMaterial());
+            return new TrunkModel(connections, List.copyOf(connections.values()).getFirst().particleMaterial().sprite());
         }
 
         @Override
