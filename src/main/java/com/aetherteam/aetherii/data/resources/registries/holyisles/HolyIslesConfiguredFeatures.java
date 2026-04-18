@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.dungeon.RotshroomClusterBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIPlacedFeatures;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.feature.configuration.*;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.MossyPredicate;
@@ -87,7 +88,6 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> VALKYRIE_SPROUT_PATCH = createKey("valkyrie_sprout_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_BUSH = createKey("aether_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH = createKey("blueberry_bush");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH_RARE = createKey("blueberry_bush_rare");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORANGE_TREE = createKey("orange_tree_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRETTL_PLANT = createKey("brettl_plant");
 
@@ -96,7 +96,6 @@ public class HolyIslesConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_FLOWER_PATCH = createKey("magnetic_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_FLOWER_PATCH = createKey("arctic_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_SHROOM_PATCH = createKey("magnetic_shroom_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> MYCELIUM_MAGNETIC_SHROOM_PATCH = createKey("mycelium_magnetic_shroom_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_FLOWER_PATCH = createKey("bryalinn_flower_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHORT_ARILUM = createKey("short_arilum");
@@ -353,6 +352,7 @@ public class HolyIslesConfiguredFeatures {
 
     private static void bootstrapSurface(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+        HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
 
         WeightedList.Builder<BlockState> twigs = new WeightedList.Builder<>();
         for (Direction facing : TwigBlock.FACING.getPossibleValues()) {
@@ -378,21 +378,6 @@ public class HolyIslesConfiguredFeatures {
         register(context, SKYROOT_TWIGS, Feature.SIMPLE_BLOCK, (new SimpleBlockConfiguration(new WeightedStateProvider(twigs))));
         register(context, HOLYSTONE_ROCKS, Feature.SIMPLE_BLOCK, (new SimpleBlockConfiguration(new WeightedStateProvider(rocks))));
         register(context, UNDERWATER_HOLYSTONE_ROCKS, Feature.SIMPLE_BLOCK, (new SimpleBlockConfiguration(new WeightedStateProvider(underwaterRocks))));
-        /*
-        register(
-                context,
-                UNDERWATER_HOLYSTONE_ROCKS,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        4,
-                        2,
-                        2,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(underwaterRocks)),
-                                BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))) //todo
-                )
-        );
-
-         */
         register(context, MOSSY_HOLYSTONE_BOULDER, AetherIIFeatures.BOULDER.get(), new BoulderConfiguration(
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                         .add(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), 4)
@@ -411,7 +396,7 @@ public class HolyIslesConfiguredFeatures {
                 UniformFloat.of(0.0F, 1.25F),
                 Optional.of(PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                         List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(DISK_BRYALINN_MOSS)), 0.6F)),
-                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(UNDERWATER_HOLYSTONE_ROCKS), CountPlacement.of(UniformInt.of(1, 4)))
+                        placedFeatures.getOrThrow(HolyIslesPlacedFeatures.HOLYSTONE_ROCKS_UNDERWATER)
                 ), CountPlacement.of(UniformInt.of(1, 3)))),
                 1.0F));
         register(context, ICESTONE_BOULDER, AetherIIFeatures.BOULDER.get(), new BoulderConfiguration(
@@ -527,151 +512,83 @@ public class HolyIslesConfiguredFeatures {
         register(context, ORANGE_TREE, AetherIIFeatures.ORANGE_TREE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ORANGE_TREE.get().defaultBlockState().setValue(OrangeTreeBlock.AGE, 4))));
         register(context, BRETTL_PLANT, AetherIIFeatures.BRETTL_PLANT.get(), new NoneFeatureConfiguration());
 
-        register(
-                context,
-                HOLY_ISLES_FLOWER_PATCH,
-                Feature.FLOWER,
-                new RandomPatchConfiguration(
-                        16,
-                        8,
-                        3,
-                        PlacementUtils.filtered(AetherIIFeatures.AETHER_FLOWER.get(), new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
-                                        .add(AetherIIBlocks.AECHOR_CUTTING.get().defaultBlockState(), 2)
-                                        .add(AetherIIBlocks.CARRION_CUTTING.get().defaultBlockState(), 1)
-                                        .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 4)
-                                        .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 4)
-                                        .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 4)
-                                        .add(AetherIIBlocks.LILICHIME.get().defaultBlockState(), 5)
-                                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.NORTH), 1)
-                                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.EAST), 1)
-                                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.SOUTH), 1)
-                                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.WEST), 1)
-                                        .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 4))),
-                                BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
-                ));
-        register(
-                context,
-                HIGHFIELDS_FLOWER_PATCH,
-                Feature.FLOWER,
-                new RandomPatchConfiguration(
-                        40,
-                        8,
-                        3,
-                        PlacementUtils.filtered(
-                                AetherIIFeatures.AETHER_FLOWER.get(),
-                                new SimpleBlockConfiguration(
-                                        new DualNoiseProvider(
-                                                new InclusiveRange<>(1, 3),
-                                                new NormalNoise.NoiseParameters(-5, 1.0),
-                                                1.0F,
-                                                2345L,
-                                                new NormalNoise.NoiseParameters(-1, 1.0),
-                                                1.0F,
-                                                List.of(
-                                                        AetherIIBlocks.HESPEROSE.get().defaultBlockState(),
-                                                        AetherIIBlocks.TARABLOOM.get().defaultBlockState()
-                                                )
-                                        )
-                                ), BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())
+        register(context, HOLY_ISLES_FLOWER_PATCH, AetherIIFeatures.AETHER_FLOWER.get(), (
+                new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
+                        .add(AetherIIBlocks.AECHOR_CUTTING.get().defaultBlockState(), 2)
+                        .add(AetherIIBlocks.CARRION_CUTTING.get().defaultBlockState(), 1)
+                        .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 4)
+                        .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 4)
+                        .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 4)
+                        .add(AetherIIBlocks.LILICHIME.get().defaultBlockState(), 5)
+                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.NORTH), 1)
+                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.EAST), 1)
+                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.SOUTH), 1)
+                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.WEST), 1)
+                        .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 4)
+                        .build()
+                ))
+        ));
+        register(context, HIGHFIELDS_FLOWER_PATCH, AetherIIFeatures.AETHER_FLOWER.get(), (
+                new SimpleBlockConfiguration(
+                        new DualNoiseProvider(
+                                new InclusiveRange<>(1, 3),
+                                new NormalNoise.NoiseParameters(-5, 1.0),
+                                1.0F,
+                                2345L,
+                                new NormalNoise.NoiseParameters(-1, 1.0),
+                                1.0F,
+                                List.of(
+                                        AetherIIBlocks.HESPEROSE.get().defaultBlockState(),
+                                        AetherIIBlocks.TARABLOOM.get().defaultBlockState()
+                                )
                         )
                 )
-        );
-        register(
-                context,
-                MAGNETIC_FLOWER_PATCH,
-                Feature.FLOWER,
-                new RandomPatchConfiguration(
-                        40,
-                        8,
-                        3,
-                        PlacementUtils.filtered(
-                                AetherIIFeatures.AETHER_FLOWER.get(),
-                                new SimpleBlockConfiguration(
-                                        new DualNoiseProvider(
-                                                new InclusiveRange<>(1, 3),
-                                                new NormalNoise.NoiseParameters(-5, 1.0),
-                                                1.0F,
-                                                2345L,
-                                                new NormalNoise.NoiseParameters(-1, 1.0),
-                                                1.0F,
-                                                List.of(
-                                                        AetherIIBlocks.POASPROUT.get().defaultBlockState(),
-                                                        AetherIIBlocks.LILICHIME.get().defaultBlockState(),
-                                                        AetherIIBlocks.PLURACIAN.get().defaultBlockState()
-                                                )
-                                        )
-                                ), BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())
+        ));
+        register(context, MAGNETIC_FLOWER_PATCH, AetherIIFeatures.AETHER_FLOWER.get(), (
+                new SimpleBlockConfiguration(
+                        new DualNoiseProvider(
+                                new InclusiveRange<>(1, 3),
+                                new NormalNoise.NoiseParameters(-5, 1.0),
+                                1.0F,
+                                2345L,
+                                new NormalNoise.NoiseParameters(-1, 1.0),
+                                1.0F,
+                                List.of(
+                                        AetherIIBlocks.POASPROUT.get().defaultBlockState(),
+                                        AetherIIBlocks.LILICHIME.get().defaultBlockState(),
+                                        AetherIIBlocks.PLURACIAN.get().defaultBlockState()
+                                )
                         )
                 )
-        );
-
+        ));
         register(context,
                 ARCTIC_FLOWER_PATCH,
                 Feature.RANDOM_SELECTOR,
                 new RandomFeatureConfiguration(List.of(
-                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(Feature.FLOWER,
-                                new RandomPatchConfiguration(
-                                        40,
-                                        8,
-                                        3,
-                                        PlacementUtils.filtered(
-                                                AetherIIFeatures.AETHER_FLOWER.get(),
-                                                new SimpleBlockConfiguration(new WeightedStateProvider(holpupea)),
-                                                BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())
+                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced( AetherIIFeatures.AETHER_FLOWER.get(),
+                                new SimpleBlockConfiguration(new WeightedStateProvider(holpupea)),
+                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(
+                                                BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON),
+                                                new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid()))), 0.5F)
+
+                ), PlacementUtils.inlinePlaced(AetherIIFeatures.AETHER_FLOWER.get(),
+                        new SimpleBlockConfiguration(
+                                new DualNoiseProvider(
+                                        new InclusiveRange<>(1, 3),
+                                        new NormalNoise.NoiseParameters(-5, 1.0),
+                                        1.0F,
+                                        2345L,
+                                        new NormalNoise.NoiseParameters(-1, 1.0),
+                                        1.0F,
+                                        List.of(
+                                                AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState()
                                         )
-                                )), 0.5F)
-                ), PlacementUtils.inlinePlaced(Feature.FLOWER,
-                        new RandomPatchConfiguration(
-                                40,
-                                8,
-                                3,
-                                PlacementUtils.filtered(
-                                        AetherIIFeatures.AETHER_FLOWER.get(),
-                                        new SimpleBlockConfiguration(
-                                                new DualNoiseProvider(
-                                                        new InclusiveRange<>(1, 3),
-                                                        new NormalNoise.NoiseParameters(-5, 1.0),
-                                                        1.0F,
-                                                        2345L,
-                                                        new NormalNoise.NoiseParameters(-1, 1.0),
-                                                        1.0F,
-                                                        List.of(
-                                                                AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState()
-                                                        )
-                                                )
-                                        ), BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())
                                 )
-                        ))
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())))
                 )
         );
-        register(context,
-                MAGNETIC_SHROOM_PATCH,
-                Feature.RANDOM_PATCH, new RandomPatchConfiguration(
-                        18,
-                        6,
-                        1,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM.get())), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.MAGNETIC_SHROOM_SURVIVES_ON), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
-                )
-        );
-        register(context,
-                MYCELIUM_MAGNETIC_SHROOM_PATCH,
-                Feature.RANDOM_PATCH, new RandomPatchConfiguration(
-                        4,
-                        4,
-                        1,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM.get())), BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.below(), AetherIIBlocks.MYCELIAL_AETHER_DIRT.get()), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
-                )
-        );
-        register(context,
-                BRYALINN_FLOWER_PATCH,
-                Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        96,
-                        7,
-                        3,
-                        PlacementUtils.filtered(AetherIIFeatures.AETHER_FLOWER.get(), new SimpleBlockConfiguration(new WeightedStateProvider(bryallinMossFlowers)), BlockPredicate.allOf(new MossyPredicate(Vec3i.ZERO.below()), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
-                )
-        );
+        register(context, MAGNETIC_SHROOM_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM.get().defaultBlockState())));
+        register(context, BRYALINN_FLOWER_PATCH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(bryallinMossFlowers)));
 
         register(context, SHORT_ARILUM, AetherIIFeatures.ARILUM.get(), new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.ARILUM_PLANT.get()), UniformInt.of(0, 2), ConstantInt.of(0)));
         register(context, ARILUM, AetherIIFeatures.ARILUM.get(), new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.ARILUM_PLANT.get()), UniformInt.of(1, 8), ConstantInt.of(0)));
@@ -1541,6 +1458,7 @@ public class HolyIslesConfiguredFeatures {
 
     private static void bootstrapUnderground(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+        HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         List<OreConfiguration.TargetBlockState> quartz = List.of(
                 OreConfiguration.target(HOLYSTONE_TEST, AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get().defaultBlockState()));
         List<OreConfiguration.TargetBlockState> ambrosium = List.of(
@@ -1720,7 +1638,7 @@ public class HolyIslesConfiguredFeatures {
                         new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(), 10).add(AetherIIBlocks.MYCELIAL_AETHER_DIRT.get().defaultBlockState(), 15).build()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SMALL_MAGNETIC_SHROOM)), 0.2F)),
-                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MYCELIUM_MAGNETIC_SHROOM_PATCH)))),
+                                placedFeatures.getOrThrow(HolyIslesPlacedFeatures.MYCELIAL_MAGNETIC_SHROOM_PATCH))),
                         CaveSurface.FLOOR,
                         UniformInt.of(1, 3),
                         0.25F,
@@ -1741,7 +1659,7 @@ public class HolyIslesConfiguredFeatures {
                                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SMALL_MAGNETIC_SHROOM)), 0.2F),
                                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_MAGNETIC_SHROOM)), 0.15F),
                                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HUGE_MAGNETIC_SHROOM)), 0.1F)),
-                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MYCELIUM_MAGNETIC_SHROOM_PATCH)))),
+                                placedFeatures.getOrThrow(HolyIslesPlacedFeatures.MYCELIAL_MAGNETIC_SHROOM_PATCH))),
                         CaveSurface.FLOOR,
                         UniformInt.of(1, 3),
                         0.25F,
@@ -2045,10 +1963,10 @@ public class HolyIslesConfiguredFeatures {
                 )
         );
         register(context, DISK_BRYALINN_MOSS, Feature.DISK, new DiskConfiguration(
-                RuleBasedBlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()), BlockPredicate.matchesTag(AetherIITags.Blocks.BRYALINN_MOSS_REPLACEABLE), UniformInt.of(1, 2), 1
+                BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()), BlockPredicate.matchesTag(AetherIITags.Blocks.BRYALINN_MOSS_REPLACEABLE), UniformInt.of(1, 2), 1
         ));
         register(context, DISK_SHAYELINN_MOSS, Feature.DISK, new DiskConfiguration(
-                RuleBasedBlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get()), BlockPredicate.matchesTag(AetherIITags.Blocks.SHAYELINN_MOSS_REPLACEABLE), UniformInt.of(1, 2), 1
+                BlockStateProvider.simple(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get()), BlockPredicate.matchesTag(AetherIITags.Blocks.SHAYELINN_MOSS_REPLACEABLE), UniformInt.of(1, 2), 1
         ));
 
         register(context, COAST_QUICKSOIL, AetherIIFeatures.COAST.get(), new CoastConfiguration(
