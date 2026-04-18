@@ -56,7 +56,7 @@ public class MultiTreeTrunkPlacer extends TrunkPlacer {
                     .toList().stream().noneMatch((offset) -> level.isStateAtPosition(heightmapPos.offset(offset), state -> state.is(BlockTags.LOGS)));
 
             if (this.isFree(level, heightmapPos) && noAdjacentTrees) {
-                if (level.isStateAtPosition(heightmapPos.below(), (state) -> Feature.isDirt(state) && !state.is(Blocks.GRASS_BLOCK) && !state.is(Blocks.MYCELIUM))) {
+                if (level.isStateAtPosition(heightmapPos.below(), (state) -> state.is(BlockTags.DIRT) && !state.is(Blocks.GRASS_BLOCK) && !state.is(Blocks.MYCELIUM))) {
                     placeBelowTrunkBlock(level, blockSetter, random, heightmapPos.below(), config);
 
                     for (int i = 0; i < freeTreeHeight; ++i) {

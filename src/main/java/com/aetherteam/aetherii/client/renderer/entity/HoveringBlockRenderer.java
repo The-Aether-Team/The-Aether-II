@@ -78,6 +78,5 @@ public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity, H
         renderState.movingBlockRenderState.blockPos = blockpos;
         renderState.movingBlockRenderState.blockState = floatingBlock.getBlockState();
         renderState.movingBlockRenderState.biome = floatingBlock.level().getBiome(blockpos);
-        renderState.movingBlockRenderState.level = floatingBlock.level();
     }
 }
