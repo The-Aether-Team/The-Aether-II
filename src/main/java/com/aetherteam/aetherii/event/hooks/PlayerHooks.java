@@ -281,7 +281,7 @@ public class PlayerHooks {
     public static void resetAetherDayAndWeather(LevelAccessor level, long newTime) {
         if (level instanceof ServerLevel serverLevel) {
             if (serverLevel.dimension().identifier().getNamespace().equals(AetherII.MODID)) {
-                serverLevel.getServer().overworld().setWeatherParameters(0, 0, false, false);
+                serverLevel.getServer().overworld().getServer().setWeatherParameters(0, 0, false, false);
                 serverLevel.getServer().overworld().setDayTime(newTime);
             }
         }

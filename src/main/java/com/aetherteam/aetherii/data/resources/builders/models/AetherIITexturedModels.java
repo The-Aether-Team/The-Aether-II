@@ -1,11 +1,12 @@
 package com.aetherteam.aetherii.data.resources.builders.models;
 
 import net.minecraft.client.data.models.model.ModelTemplate;
+import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TexturedModel;
 
 public class AetherIITexturedModels extends TexturedModel {
-    public static final Provider LEAVES = createDefault(TextureMapping::cube, AetherIIModelTemplates.TEMPLATE_CUTOUT_MIPPED_CUBE_ALL);
+    public static final Provider LEAVES = createDefault(TextureMapping::cube, ModelTemplates.CUBE_ALL);
     public static final Provider TINTED_LEAVES = createDefault(TextureMapping::cube, AetherIIModelTemplates.LEAVES);
     public static final Provider ASYMMETRICAL_CROSS_EVEN = createDefault(AetherIITextureMappings::asymmetricalCross, AetherIIModelTemplates.ASYMMETRICAL_CROSS_EVEN);
     public static final Provider ASYMMETRICAL_CROSS_EVEN_MIRRORED = createDefault(AetherIITextureMappings::asymmetricalCross, AetherIIModelTemplates.ASYMMETRICAL_CROSS_EVEN_MIRRORED);

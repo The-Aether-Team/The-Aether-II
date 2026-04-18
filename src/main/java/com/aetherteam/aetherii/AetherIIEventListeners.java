@@ -304,7 +304,7 @@ public class AetherIIEventListeners {
         StructureManager structureManager = serverLevel.structureManager();
         Registry<Structure> structureRegistry = serverLevel.registryAccess().lookupOrThrow(Registries.STRUCTURE);
 
-        if (!type.is(AetherIITags.Entities.DUNGEON_MOBS)) {
+        if (!type.builtInRegistryHolder().is(AetherIITags.Entities.DUNGEON_MOBS)) {
             for (Holder<Structure> structure : structureRegistry.getTagOrEmpty(AetherIITags.Structures.DUNGEONS)) {
                 StructureStart structureStart = structureManager.getStructureAt(pos, structure.value());
                 if (structureStart.isValid() && structureManager.structureHasPieceAt(pos, structureStart)) {

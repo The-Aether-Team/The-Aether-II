@@ -17,6 +17,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.fog.FogData;
 import net.minecraft.client.renderer.fog.environment.FogEnvironment;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
@@ -37,19 +38,19 @@ public class AetherIIClientExtensions {
     public static final IClientItemExtensions BEAST_PELT = new IClientItemExtensions() {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
-            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0xFFCFEEF9) : -1;
+            return stack.has(DataComponents.DYED_COLOR) ? DyedItemColor.getOrDefault(stack, 0xFFCFEEF9) : -1;
         }
     };
     public static final IClientItemExtensions BURRUKAI_PLATE = new IClientItemExtensions() {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
-            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0xFF619CC0) : -1;
+            return stack.has(DataComponents.DYED_COLOR) ? DyedItemColor.getOrDefault(stack, 0xFF619CC0) : -1;
         }
     };
     public static final IClientItemExtensions MOA_SADDLE = new IClientItemExtensions() {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
-            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0xFF7D8BA3) : -1;
+            return stack.has(DataComponents.DYED_COLOR) ? DyedItemColor.getOrDefault(stack, 0xFF7D8BA3) : -1;
         }
     };
 
@@ -166,20 +167,20 @@ public class AetherIIClientExtensions {
     };
 
     public static final IClientFluidTypeExtensions ALKAHEST_FLUID = new IClientFluidTypeExtensions() {
-        @Override
-        public Identifier getStillTexture() {
-            return Identifier.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_still");
-        }
-
-        @Override
-        public Identifier getFlowingTexture() {
-            return Identifier.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_flow");
-        }
-
-        @Override
-        public Identifier getOverlayTexture() {
-            return Identifier.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_overlay");
-        }
+//        @Override //TODO
+//        public Identifier getStillTexture() {
+//            return Identifier.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_still");
+//        }
+//
+//        @Override
+//        public Identifier getFlowingTexture() {
+//            return Identifier.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_flow");
+//        }
+//
+//        @Override
+//        public Identifier getOverlayTexture() {
+//            return Identifier.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_overlay");
+//        }
 
         @Override
         public Identifier getRenderOverlayTexture(Minecraft mc) {
@@ -197,10 +198,10 @@ public class AetherIIClientExtensions {
             fogData.environmentalEnd = 12.0F;
         }
 
-        @Override
-        public int getTintColor() {
-            return 0xFFFFFFFF;
-        }
+//        @Override
+//        public int getTintColor() {
+//            return 0xFFFFFFFF;
+//        }
     };
 
     public static final IClientMobEffectExtensions HIDE_EFFECT = new IClientMobEffectExtensions() {

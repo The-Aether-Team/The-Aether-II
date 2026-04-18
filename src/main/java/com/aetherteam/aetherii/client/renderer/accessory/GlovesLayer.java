@@ -22,6 +22,7 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
@@ -83,7 +84,7 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
                                 null
                         );
 
-                if (stack.is(ItemTags.DYEABLE)) {
+                if (stack.has(DataComponents.DYED_COLOR)) {
                     IClientItemExtensions extensions = IClientItemExtensions.of(stack);
                     int color = ARGB.opaque(extensions.getDefaultDyeColor(stack));
 
@@ -160,7 +161,7 @@ public class GlovesLayer<S extends LivingEntityRenderState, M extends EntityMode
                         null
                 );
 
-        if (stack.is(ItemTags.DYEABLE)) {
+        if (stack.has(DataComponents.DYED_COLOR)) {
             IClientItemExtensions extensions = IClientItemExtensions.of(stack);
             int color = ARGB.opaque(extensions.getDefaultDyeColor(stack));
             collector

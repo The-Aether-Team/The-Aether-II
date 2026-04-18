@@ -31,7 +31,7 @@ public class AetherIIDimensionRenderers {
     public static void extractDimensionEffect(ExtractLevelRenderStateEvent event) {
         if (event.getLevel().dimensionTypeRegistration().is(AetherIIDimensions.AETHER_HOLY_ISLES_DIMENSION_TYPE)) {
             event.getRenderState().setRenderData(DATA_THUNDER_KEY, event.getLevel().getThunderLevel(Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false)));
-            event.getRenderState().setRenderData(DATA_TIME_OF_DAY_KEY, timeOfDay(event.getLevel().getDayTime()));
+            event.getRenderState().setRenderData(DATA_TIME_OF_DAY_KEY, timeOfDay(event.getLevel().getGameTime()));
         }
     }
 

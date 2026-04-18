@@ -154,7 +154,7 @@ public class AetherIIOverlays {
             }
 
             int i = ARGB.white(timeInPortal);
-            TextureAtlasSprite textureatlassprite = minecraft.getBlockRenderer().getBlockModelShaper().getParticleIcon(AetherIIBlocks.AETHER_PORTAL.get().defaultBlockState());
+            TextureAtlasSprite textureatlassprite = minecraft.getModelManager().getBlockStateModelSet().getParticleMaterial(AetherIIBlocks.AETHER_PORTAL.get().defaultBlockState()).sprite();
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, textureatlassprite, 0, 0, guiGraphics.guiWidth(), guiGraphics.guiHeight(), i);
         }
     }
