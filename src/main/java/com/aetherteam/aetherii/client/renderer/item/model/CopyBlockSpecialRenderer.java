@@ -10,6 +10,7 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;
+import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
@@ -20,8 +21,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.EmptyBlockAndTintGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -125,7 +124,7 @@ public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState
         return itemStack.get(AetherIIDataComponents.BLOCK_STATE);
     }
 
-    public record Unbaked(Holder<Block> block, Identifier overlay) implements SpecialModelRenderer.Unbaked {
+    public record Unbaked(Holder<Block> block, Identifier overlay) implements NoDataSpecialModelRenderer.Unbaked {
         public static final MapCodec<CopyBlockSpecialRenderer.Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
                 BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("block").forGetter(CopyBlockSpecialRenderer.Unbaked::block),
                 Identifier.CODEC.fieldOf("overlay").forGetter(CopyBlockSpecialRenderer.Unbaked::overlay)
@@ -137,7 +136,7 @@ public class CopyBlockSpecialRenderer implements SpecialModelRenderer<BlockState
         }
 
         @Override
-        public SpecialModelRenderer<?> bake(BakingContext context) {
+        public NoDataSpecialModelRenderer bake(BakingContext context) {
             return new CopyBlockSpecialRenderer(this.block(), this.overlay());
         }
     }

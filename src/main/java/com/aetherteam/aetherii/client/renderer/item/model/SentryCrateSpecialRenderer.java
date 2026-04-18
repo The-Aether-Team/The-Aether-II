@@ -40,7 +40,7 @@ public class SentryCrateSpecialRenderer implements NoDataSpecialModelRenderer {
         this.model.root().getExtentsForGui(posestack, consumer);
     }
 
-    public record Unbaked(Identifier texture) implements SpecialModelRenderer.Unbaked {
+    public record Unbaked(Identifier texture) implements NoDataSpecialModelRenderer.Unbaked {
         public static final MapCodec<SentryCrateSpecialRenderer.Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
                 Identifier.CODEC.fieldOf("texture").forGetter(SentryCrateSpecialRenderer.Unbaked::texture)
         ).apply(instance, SentryCrateSpecialRenderer.Unbaked::new));
@@ -49,7 +49,7 @@ public class SentryCrateSpecialRenderer implements NoDataSpecialModelRenderer {
             return MAP_CODEC;
         }
 
-        public SpecialModelRenderer<?> bake(BakingContext context) {
+        public NoDataSpecialModelRenderer bake(BakingContext context) {
             SentryCrateModel model = new SentryCrateModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.SENTRY_CRATE));
             SpriteId spriteId = AetherIIAtlases.SENTRY_CRATE_MAPPER.apply(this.texture);
             return new SentryCrateSpecialRenderer(context.sprites(), model,spriteId);

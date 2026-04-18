@@ -33,13 +33,13 @@ public class SkyrootBedSpecialRenderer implements NoDataSpecialModelRenderer {
         this.skyrootBedRenderer.renderInHand(poseStack, submitNodeCollector, i, i1, this.location);
     }
 
-    public record Unbaked(Identifier texture) implements SpecialModelRenderer.Unbaked {
+    public record Unbaked(Identifier texture) implements NoDataSpecialModelRenderer.Unbaked {
         public static final MapCodec<SkyrootBedSpecialRenderer.Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
                 Identifier.CODEC.fieldOf("texture").forGetter(SkyrootBedSpecialRenderer.Unbaked::texture)
         ).apply(instance, SkyrootBedSpecialRenderer.Unbaked::new));
 
         @Override
-        public @Nullable SpecialModelRenderer<?> bake(BakingContext bakingContext) {
+        public @Nullable NoDataSpecialModelRenderer bake(BakingContext bakingContext) {
             return new SkyrootBedSpecialRenderer(new SkyrootBedRenderer(bakingContext.entityModelSet()), this.texture());
         }
 

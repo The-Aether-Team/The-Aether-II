@@ -49,7 +49,7 @@ public class AlkahestPurifierSpecialRenderer implements NoDataSpecialModelRender
         this.model.root().getExtentsForGui(poseStack, consumer);
     }
 
-    public record Unbaked(float openness) implements SpecialModelRenderer.Unbaked {
+    public record Unbaked(float openness) implements NoDataSpecialModelRenderer.Unbaked {
         public static final MapCodec<AlkahestPurifierSpecialRenderer.Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
                 Codec.FLOAT.optionalFieldOf("openness", 0.0F).forGetter(AlkahestPurifierSpecialRenderer.Unbaked::openness)
         ).apply(instance, AlkahestPurifierSpecialRenderer.Unbaked::new));
@@ -68,7 +68,7 @@ public class AlkahestPurifierSpecialRenderer implements NoDataSpecialModelRender
         }
 
         @Override
-        public SpecialModelRenderer<?> bake(BakingContext context) {
+        public NoDataSpecialModelRenderer bake(BakingContext context) {
             AlkahestPurifierModel model = new AlkahestPurifierModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.ALKAHEST_PURIFIER));
             return new AlkahestPurifierSpecialRenderer(context.sprites(), model, this.openness);
         }

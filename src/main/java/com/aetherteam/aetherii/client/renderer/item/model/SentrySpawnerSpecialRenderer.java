@@ -56,7 +56,7 @@ public class SentrySpawnerSpecialRenderer implements NoDataSpecialModelRenderer 
         this.pistonModel.root().getExtentsForGui(poseStack, consumer);
     }
 
-    public record Unbaked() implements SpecialModelRenderer.Unbaked {
+    public record Unbaked() implements NoDataSpecialModelRenderer.Unbaked {
         public static final MapCodec<SentrySpawnerSpecialRenderer.Unbaked> MAP_CODEC = MapCodec.unit(new SentrySpawnerSpecialRenderer.Unbaked());
 
         public Unbaked() {
@@ -68,7 +68,7 @@ public class SentrySpawnerSpecialRenderer implements NoDataSpecialModelRenderer 
         }
 
         @Override
-        public SpecialModelRenderer<?> bake(BakingContext context) {
+        public NoDataSpecialModelRenderer bake(BakingContext context) {
             SentrySpawnerModel model = new SentrySpawnerModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER));
             SentrySpawnerPistonModel pistonModel = new SentrySpawnerPistonModel(context.entityModelSet().bakeLayer(AetherIIModelLayers.SENTRY_SPAWNER_PISTON));
 

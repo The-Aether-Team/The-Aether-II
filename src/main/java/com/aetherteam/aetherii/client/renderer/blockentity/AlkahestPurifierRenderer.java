@@ -64,7 +64,7 @@ public class AlkahestPurifierRenderer implements BlockEntityRenderer<AlkahestPur
         SpriteId spriteId = getTextureForLevel(state.level);
         this.model.setupAnim(openness);
         collector.submitModel(
-                this.model, openness, poseStack, spriteId.renderType(this.model::renderType), packedLight, OverlayTexture.NO_OVERLAY, -1, this.materialSet.get(material), 0, state.breakProgress
+                this.model, openness, poseStack, spriteId.renderType(this.model::renderType), packedLight, OverlayTexture.NO_OVERLAY, -1, this.sprites.get(spriteId), 0, state.breakProgress
         );
 
         poseStack.popPose();
