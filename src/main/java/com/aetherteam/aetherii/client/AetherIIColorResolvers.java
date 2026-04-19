@@ -57,10 +57,7 @@ public class AetherIIColorResolvers {
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
 
  */
-
-        event.register(List.of(BlockTintSources.constant(0), createTriTintGrassColor(0, AETHER_GRASS_COLOR, 5.0F, 6.0F)), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
-        event.register(List.of(BlockTintSources.constant(1), createTriTintGrassColor(1, AETHER_GRASS_COLOR, 5.0F, 6.0F)), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
-        event.register(List.of(BlockTintSources.constant(2), createTriTintGrassColor(2, AETHER_GRASS_COLOR, 5.0F, 6.0F)), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        event.register(List.of(createTriTintGrassColor(0, AETHER_GRASS_COLOR, 5.0F, 6.0F)), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         //event.register(List.of(createTriTintGrassColor(1, AETHER_GRASS_COLOR, 5.0F, 6.0F)), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         //event.register(List.of(createTriTintGrassColor(2, AETHER_GRASS_COLOR, 5.0F, 6.0F)), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
 
@@ -90,6 +87,7 @@ public class AetherIIColorResolvers {
 
                 Color darkColor = Color.getHSBColor(hue, saturation + (darkSaturationOffset / 100.0F), brightness);
                 Color lightColor = Color.getHSBColor(hue, saturation - (lightSaturationOffset / 100.0F), brightness);
+
 
                 switch (tintIndex) {
                     case 0 -> {
