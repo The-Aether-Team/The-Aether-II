@@ -5,7 +5,6 @@
   "experience": 0.1,
   "ingredient": "aether_ii:crude_scatterglass",
   "result": {
-    "count": 1,
     "id": "aether_ii:scatterglass"
   }
 }

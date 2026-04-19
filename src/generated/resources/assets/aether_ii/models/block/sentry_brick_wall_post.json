@@ -1,6 +1,5 @@
 {
   "parent": "aether_ii:block/template_emissive_column_wall_post",
-  "render_type": "minecraft:cutout",
   "textures": {
     "emissive_end": "aether_ii:block/blank",
     "emissive_side": "aether_ii:block/sentry_brick_wall_emissive",

@@ -857,15 +857,6 @@ public class HolyIslesPlacedFeatures {
                 new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.belowTop(276)),
                 BiomeFilter.biome()
         );
-        register(context, EXPOSED_BRYALINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOOR),
-                NoiseBasedCountPlacement.of(35, 50, 0.0),
-                InSquarePlacement.spread(),
-                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
-                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
-                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
-                new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.belowTop(276)),
-                BiomeFilter.biome()
-        );
         register(context, SWAMP_BRYALINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOOR_SWAMP),
                 RarityFilter.onAverageOnceEvery(2),
                 InSquarePlacement.spread(),

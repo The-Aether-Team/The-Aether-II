@@ -1,6 +1,6 @@
 {
   "model": {
-    "type": "aether_ii:mural",
+    "type": "minecraft:model",
     "model": "aether_ii:block/mural"
   }
 }

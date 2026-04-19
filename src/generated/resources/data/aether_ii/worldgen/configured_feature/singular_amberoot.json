@@ -1,6 +1,12 @@
 {
   "type": "minecraft:tree",
   "config": {
+    "below_trunk_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:aether_dirt"
+      }
+    },
     "decorators": [
       {
         "type": "aether_ii:simple_trunk",
@@ -22,12 +28,6 @@
         }
       }
     ],
-    "dirt_provider": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "aether_ii:aether_dirt"
-      }
-    },
     "foliage_placer": {
       "type": "aether_ii:singular_amberoot_foliage_placer",
       "offset": 0,
@@ -46,7 +46,6 @@
         }
       }
     },
-    "force_dirt": false,
     "ignore_vines": true,
     "minimum_size": {
       "type": "minecraft:two_layers_feature_size",

@@ -1,6 +1,5 @@
 {
   "parent": "aether_ii:block/door_bottom_left",
-  "render_type": "minecraft:cutout",
   "textures": {
     "end": "aether_ii:block/arkenium_door_end",
     "front": "aether_ii:block/arkenium_door_bottom",

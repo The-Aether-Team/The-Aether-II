@@ -64,14 +64,14 @@ public class AetherWeatherEffectRenderer implements CustomWeatherEffectRenderer 
 
     private void renderWeather(LevelRenderState levelRenderState, WeatherRenderState weatherRenderState, WeatherEffectRendererAccessor weatherEffectRenderer, MultiBufferSource bufferSource, Vec3 cameraPosition, int radius, float rainLevel, float thunderLevel, List<WeatherEffectRenderer.ColumnInstance> rainColumnInstances, List<WeatherEffectRenderer.ColumnInstance> snowColumnInstances) {
         boolean isThundering = thunderLevel > 0.0F;
-        if (!rainColumnInstances.isEmpty()) {
-            RenderType rainType = RenderTypes.weather(isThundering ? RAIN_STORMY_LOCATION : RAIN_LOCATION, Minecraft.useShaderTransparency());
-            weatherEffectRenderer.callRenderInstances(bufferSource.getBuffer(rainType), rainColumnInstances, cameraPosition, 0.75F, radius, rainLevel);
-        }
-        if (!snowColumnInstances.isEmpty()) {
-            RenderType snowType = RenderTypes.weather(isThundering ? SNOW_STORMY_LOCATION : SNOW_LOCATION, Minecraft.useShaderTransparency());
-            weatherEffectRenderer.callRenderInstances(bufferSource.getBuffer(snowType), snowColumnInstances, cameraPosition, 0.8F, radius, rainLevel);
-        }
+//        if (!rainColumnInstances.isEmpty()) { //todo
+//            RenderType rainType = RenderTypes.weather(isThundering ? RAIN_STORMY_LOCATION : RAIN_LOCATION, Minecraft.useShaderTransparency());
+//            weatherEffectRenderer.callRenderInstances(bufferSource.getBuffer(rainType), rainColumnInstances, cameraPosition, 0.75F, radius, rainLevel);
+//        }
+//        if (!snowColumnInstances.isEmpty()) {
+//            RenderType snowType = RenderTypes.weather(isThundering ? SNOW_STORMY_LOCATION : SNOW_LOCATION, Minecraft.useShaderTransparency());
+//            weatherEffectRenderer.callRenderInstances(bufferSource.getBuffer(snowType), snowColumnInstances, cameraPosition, 0.8F, radius, rainLevel);
+//        }
     }
 
     @Override

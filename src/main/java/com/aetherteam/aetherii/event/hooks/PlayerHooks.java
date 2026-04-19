@@ -279,12 +279,12 @@ public class PlayerHooks {
     }
 
     public static void resetAetherDayAndWeather(LevelAccessor level, long newTime) {
-        if (level instanceof ServerLevel serverLevel) {
-            if (serverLevel.dimension().identifier().getNamespace().equals(AetherII.MODID)) {
-                serverLevel.getServer().overworld().getServer().setWeatherParameters(0, 0, false, false);
-                serverLevel.getServer().overworld().setDayTime(newTime);
-            }
-        }
+//        if (level instanceof ServerLevel serverLevel) { //todo
+//            if (serverLevel.dimension().identifier().getNamespace().equals(AetherII.MODID)) {
+//                serverLevel.getServer().overworld().getServer().setWeatherParameters(0, 0, false, false);
+//                serverLevel.getServer().overworld().setDayTime(newTime);
+//            }
+//        }
     }
 
     public static boolean dismountPrevention(Entity rider, Entity mount, boolean dismounting) {

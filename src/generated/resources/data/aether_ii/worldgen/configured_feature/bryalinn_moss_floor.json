@@ -42,24 +42,15 @@
           "features": [
             {
               "chance": 0.2,
-              "feature": {
-                "feature": "aether_ii:bryalinn_moss_carpet",
-                "placement": []
-              }
+              "feature": "aether_ii:bryalinn_moss_carpet_patch"
             },
             {
               "chance": 0.3,
-              "feature": {
-                "feature": "aether_ii:bryalinn_moss_flowers",
-                "placement": []
-              }
+              "feature": "aether_ii:bryalinn_flower_patch"
             },
             {
               "chance": 0.1,
-              "feature": {
-                "feature": "aether_ii:medium_grass_patch",
-                "placement": []
-              }
+              "feature": "aether_ii:medium_grass_patch"
             }
           ]
         }

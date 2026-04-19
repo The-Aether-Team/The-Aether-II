@@ -17,7 +17,9 @@
     "neoforge:custom_weather_effects": "aether_ii:aether_weather"
   },
   "coordinate_scale": 1.0,
+  "default_clock": "minecraft:overworld",
   "has_ceiling": false,
+  "has_ender_dragon_fight": false,
   "has_skylight": true,
   "height": 416,
   "infiniburn": "#minecraft:infiniburn_overworld",

@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "aether_ii:amberoot_highlight",
   "result": {
-    "count": 1,
     "id": "aether_ii:amberoot_planks"
   }
 }

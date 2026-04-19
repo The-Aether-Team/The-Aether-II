@@ -1,6 +1,5 @@
 {
   "parent": "aether_ii:block/template_pluracian",
-  "render_type": "minecraft:cutout",
   "textures": {
     "leaves1": "aether_ii:block/pluracian_leaves_1",
     "leaves2": "aether_ii:block/pluracian_leaves_2",

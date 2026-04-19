@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "aether_ii:quicksoil_glass_pane",
   "result": {
-    "count": 1,
     "id": "aether_ii:gridded_quicksoil_glass_pane"
   }
 }

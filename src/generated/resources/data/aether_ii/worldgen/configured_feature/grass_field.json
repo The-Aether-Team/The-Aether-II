@@ -1,94 +1,48 @@
 {
-  "type": "minecraft:random_patch",
+  "type": "aether_ii:aether_grass",
   "config": {
-    "feature": {
-      "feature": {
-        "type": "aether_ii:aether_grass",
-        "config": {
-          "to_place": {
-            "type": "minecraft:noise_provider",
-            "noise": {
-              "amplitudes": [
-                1.0
-              ],
-              "firstOctave": 0
-            },
-            "scale": 0.02,
-            "seed": 2345,
-            "states": [
-              {
-                "Name": "aether_ii:tall_aether_grass",
-                "Properties": {
-                  "grass_type": "default"
-                }
-              },
-              {
-                "Name": "aether_ii:medium_aether_grass",
-                "Properties": {
-                  "grass_type": "default"
-                }
-              },
-              {
-                "Name": "aether_ii:short_aether_grass",
-                "Properties": {
-                  "grass_type": "default"
-                }
-              },
-              {
-                "Name": "aether_ii:medium_aether_grass",
-                "Properties": {
-                  "grass_type": "default"
-                }
-              },
-              {
-                "Name": "aether_ii:tall_aether_grass",
-                "Properties": {
-                  "grass_type": "default"
-                }
-              }
-            ]
-          }
-        }
+    "to_place": {
+      "type": "minecraft:noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": 0
       },
-      "placement": [
+      "scale": 0.02,
+      "seed": 2345,
+      "states": [
         {
-          "type": "minecraft:block_predicate_filter",
-          "predicate": {
-            "type": "minecraft:all_of",
-            "predicates": [
-              {
-                "type": "minecraft:any_of",
-                "predicates": [
-                  {
-                    "type": "minecraft:matching_block_tag",
-                    "offset": [
-                      0,
-                      -1,
-                      0
-                    ],
-                    "tag": "aether_ii:aether_plant_survives_on"
-                  },
-                  {
-                    "type": "aether_ii:mossy",
-                    "offset": [
-                      0,
-                      -1,
-                      0
-                    ]
-                  }
-                ]
-              },
-              {
-                "type": "minecraft:matching_blocks",
-                "blocks": "minecraft:air"
-              }
-            ]
+          "Name": "aether_ii:tall_aether_grass",
+          "Properties": {
+            "grass_type": "default"
+          }
+        },
+        {
+          "Name": "aether_ii:medium_aether_grass",
+          "Properties": {
+            "grass_type": "default"
+          }
+        },
+        {
+          "Name": "aether_ii:short_aether_grass",
+          "Properties": {
+            "grass_type": "default"
+          }
+        },
+        {
+          "Name": "aether_ii:medium_aether_grass",
+          "Properties": {
+            "grass_type": "default"
+          }
+        },
+        {
+          "Name": "aether_ii:tall_aether_grass",
+          "Properties": {
+            "grass_type": "default"
           }
         }
       ]
-    },
-    "tries": 80,
-    "xz_spread": 12,
-    "y_spread": 4
+    }
   }
 }

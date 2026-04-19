@@ -7,12 +7,10 @@ import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -44,8 +42,8 @@ public class AltarEnchantingRecipeBuilder implements RecipeBuilder {
         this.processingTime = processingTime;
     }
 
-    public static AltarEnchantingRecipeBuilder enchanting(Ingredient ingredient, RecipeCategory category, ItemStackTemplate result, float experience, int fuelCount, int processingTime) {
-        return new AltarEnchantingRecipeBuilder(category, determineRecipeCategory(new ItemStackTemplate(ingredient.items().toList().getFirst().value()), result), result, ingredient, experience, fuelCount, processingTime);
+    public static AltarEnchantingRecipeBuilder enchanting(Ingredient ingredient, RecipeCategory category, AltarBookCategory bookCategory, ItemStackTemplate result, float experience, int fuelCount, int processingTime) {
+        return new AltarEnchantingRecipeBuilder(category, bookCategory, result, ingredient, experience, fuelCount, processingTime);
     }
 
     @Override
@@ -72,18 +70,6 @@ public class AltarEnchantingRecipeBuilder implements RecipeBuilder {
         this.criteria.forEach(builder::addCriterion);
         AltarEnchantingRecipe recipe = new AltarEnchantingRecipe(RecipeBuilder.createCraftingCommonInfo(true), new AltarEnchantingRecipe.AltarBookInfo(this.bookCategory, Objects.requireNonNullElse(this.group, "")), this.ingredient, this.result, this.experience, this.fuelCount, this.processingTime);
         output.accept(id, recipe, builder.build(id.identifier().withPrefix("recipes/" + this.category.getFolderName() + "/")));
-    }
-
-    private static AltarBookCategory determineRecipeCategory(ItemStackTemplate ingredient, ItemStackTemplate result) {
-        if (result.item().components().has(DataComponents.FOOD)) {
-            return AltarBookCategory.FOOD;
-        } else if (result.item() instanceof BlockItem) {
-            return AltarBookCategory.BLOCKS;
-        } else if (ingredient.item() == result.item()) {
-            return AltarBookCategory.REPAIRING;
-        } else {
-            return AltarBookCategory.MISC;
-        }
     }
 
     private void ensureValid(ResourceKey<Recipe<?>> id) {

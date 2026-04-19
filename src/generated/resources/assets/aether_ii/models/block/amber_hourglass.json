@@ -1,6 +1,5 @@
 {
   "parent": "aether_ii:block/template_amber_hourglass",
-  "render_type": "minecraft:cutout",
   "textures": {
     "bottom": "aether_ii:block/amber_hourglass_bottom",
     "cross": "aether_ii:block/amber_hourglass_cross",

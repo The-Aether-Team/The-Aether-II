@@ -1,6 +1,5 @@
 {
   "parent": "minecraft:block/template_bars_post",
-  "render_type": "minecraft:cutout",
   "textures": {
     "bars": "aether_ii:block/curved_arkenium_bars",
     "edge": "aether_ii:block/arkenium_bars_edge"

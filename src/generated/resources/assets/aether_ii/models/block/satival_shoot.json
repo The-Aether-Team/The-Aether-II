@@ -1,6 +1,5 @@
 {
   "parent": "aether_ii:block/asymmetrical_cross_even",
-  "render_type": "minecraft:cutout",
   "textures": {
     "cross": "aether_ii:block/satival_shoot",
     "cross_other": "aether_ii:block/satival_shoot_other",

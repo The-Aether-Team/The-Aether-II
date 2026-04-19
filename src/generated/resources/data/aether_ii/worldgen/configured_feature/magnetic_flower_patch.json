@@ -1,97 +1,48 @@
 {
-  "type": "minecraft:flower",
+  "type": "aether_ii:aether_flower",
   "config": {
-    "feature": {
-      "feature": {
-        "type": "aether_ii:aether_flower",
-        "config": {
-          "to_place": {
-            "type": "minecraft:dual_noise_provider",
-            "noise": {
-              "amplitudes": [
-                1.0
-              ],
-              "firstOctave": -1
-            },
-            "scale": 1.0,
-            "seed": 2345,
-            "slow_noise": {
-              "amplitudes": [
-                1.0
-              ],
-              "firstOctave": -5
-            },
-            "slow_scale": 1.0,
-            "states": [
-              {
-                "Name": "aether_ii:poasprout",
-                "Properties": {
-                  "snowy": "false"
-                }
-              },
-              {
-                "Name": "aether_ii:lilichime",
-                "Properties": {
-                  "snowy": "false"
-                }
-              },
-              {
-                "Name": "aether_ii:pluracian",
-                "Properties": {
-                  "facing": "north",
-                  "snowy": "false"
-                }
-              }
-            ],
-            "variety": [
-              1,
-              3
-            ]
-          }
-        }
+    "to_place": {
+      "type": "minecraft:dual_noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": -1
       },
-      "placement": [
+      "scale": 1.0,
+      "seed": 2345,
+      "slow_noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": -5
+      },
+      "slow_scale": 1.0,
+      "states": [
         {
-          "type": "minecraft:block_predicate_filter",
-          "predicate": {
-            "type": "minecraft:all_of",
-            "predicates": [
-              {
-                "type": "minecraft:any_of",
-                "predicates": [
-                  {
-                    "type": "minecraft:matching_block_tag",
-                    "offset": [
-                      0,
-                      -1,
-                      0
-                    ],
-                    "tag": "aether_ii:aether_plant_survives_on"
-                  },
-                  {
-                    "type": "aether_ii:mossy",
-                    "offset": [
-                      0,
-                      -1,
-                      0
-                    ]
-                  }
-                ]
-              },
-              {
-                "type": "minecraft:replaceable"
-              },
-              {
-                "type": "minecraft:matching_fluids",
-                "fluids": "minecraft:empty"
-              }
-            ]
+          "Name": "aether_ii:poasprout",
+          "Properties": {
+            "snowy": "false"
+          }
+        },
+        {
+          "Name": "aether_ii:lilichime",
+          "Properties": {
+            "snowy": "false"
+          }
+        },
+        {
+          "Name": "aether_ii:pluracian",
+          "Properties": {
+            "facing": "north",
+            "snowy": "false"
           }
         }
+      ],
+      "variety": [
+        1,
+        3
       ]
-    },
-    "tries": 40,
-    "xz_spread": 8,
-    "y_spread": 3
+    }
   }
 }

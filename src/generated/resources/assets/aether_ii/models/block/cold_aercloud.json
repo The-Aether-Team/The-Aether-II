@@ -170,7 +170,6 @@
       ]
     }
   ],
-  "render_type": "minecraft:translucent",
   "textures": {
     "down": "aether_ii:block/cold_aercloud",
     "east": "aether_ii:block/cold_aercloud",

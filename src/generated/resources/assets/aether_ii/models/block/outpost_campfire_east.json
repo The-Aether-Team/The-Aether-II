@@ -1,6 +1,5 @@
 {
   "parent": "aether_ii:block/template_outpost_campfire_east",
-  "render_type": "minecraft:cutout",
   "textures": {
     "ash": "aether_ii:block/outpost_campfire_ash",
     "bricks": "aether_ii:block/large_holystone_bricks",

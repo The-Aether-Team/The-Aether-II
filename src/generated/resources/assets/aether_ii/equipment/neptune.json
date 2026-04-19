@@ -5,6 +5,11 @@
         "texture": "aether_ii:neptune"
       }
     ],
+    "humanoid_baby": [
+      {
+        "texture": "aether_ii:neptune"
+      }
+    ],
     "humanoid_leggings": [
       {
         "texture": "aether_ii:neptune"

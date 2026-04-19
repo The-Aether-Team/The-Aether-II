@@ -2270,9 +2270,9 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
     }
 
     public void addSpawnEggItem(DeferredItem<? extends SpawnEggItem> key) {
-        SpawnEggItem item = key.get();
-        EntityType<?> entitytype = item.getType(item.getDefaultInstance());
-        this.add(item, entityTypes.get(entitytype.getDescriptionId()).concat(" Spawn Egg"));
+//        SpawnEggItem item = key.get(); //todo
+//        EntityType<?> entitytype = item.getType(item.getDefaultInstance());
+//        this.add(item, entityTypes.get(entitytype.getDescriptionId()).concat(" Spawn Egg"));
     }
 
     public void addMuralTitle(DeferredHolder<Mural, Mural> key, String title) {

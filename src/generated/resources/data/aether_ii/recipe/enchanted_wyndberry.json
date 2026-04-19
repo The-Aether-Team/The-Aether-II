@@ -6,7 +6,6 @@
   "ingredient": "aether_ii:wyndberry",
   "processing_time": 200,
   "result": {
-    "count": 1,
     "id": "aether_ii:enchanted_wyndberry"
   }
 }

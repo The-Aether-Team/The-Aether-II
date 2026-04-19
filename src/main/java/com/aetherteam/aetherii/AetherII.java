@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.advancement.AetherIIAdvancementSoundOverrides;
 import com.aetherteam.aetherii.advancement.trigger.AetherIIAdvancementTriggers;
 import com.aetherteam.aetherii.command.AetherIICommands;
 import com.aetherteam.aetherii.loot.conditions.AetherIILootConditions;
+import com.aetherteam.aetherii.recipe.AetherIIRecipeSerializers;
 import com.aetherteam.aetherii.recipe.display.slot.AetherIISlotDisplays;
 import net.minecraft.core.cauldron.CauldronInteractions;
 import net.minecraft.core.registries.Registries;
@@ -128,6 +129,7 @@ public class AetherII {
                 AetherIIParticleTypes.PARTICLES,
                 AetherIISoundEvents.SOUNDS,
                 AetherIIRecipeTypes.RECIPE_TYPES,
+                AetherIIRecipeSerializers.RECIPE_SERIALIZERS,
                 AetherIIRecipeDisplays.RECIPE_DISPLAYS,
                 AetherIISlotDisplays.SLOT_DISPLAYS,
                 AetherIIRecipeBookCategories.RECIPE_BOOK_CATEGORIES,

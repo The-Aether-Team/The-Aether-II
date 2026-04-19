@@ -120,7 +120,6 @@
       ]
     }
   ],
-  "render_type": "minecraft:cutout_mipped",
   "textures": {
     "cross": "aether_ii:block/aether_bush_stem",
     "particle": "aether_ii:block/aether_bush",

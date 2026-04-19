@@ -34,8 +34,8 @@
                 "tag": "aether_ii:brettl_plant_survives_on"
               },
               {
-                "type": "minecraft:matching_blocks",
-                "blocks": "minecraft:air"
+                "type": "minecraft:matching_block_tag",
+                "tag": "minecraft:air"
               }
             ]
           }

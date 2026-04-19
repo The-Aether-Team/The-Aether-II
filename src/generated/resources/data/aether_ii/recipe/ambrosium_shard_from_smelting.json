@@ -6,7 +6,6 @@
   "group": "ambrosium",
   "ingredient": "aether_ii:ambrosium_ore",
   "result": {
-    "count": 1,
     "id": "aether_ii:ambrosium_shard"
   }
 }

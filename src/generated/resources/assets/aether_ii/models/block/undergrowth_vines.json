@@ -1,6 +1,5 @@
 {
   "parent": "aether_ii:block/moss_vine",
-  "render_type": "minecraft:cutout",
   "textures": {
     "particle": "aether_ii:block/undergrowth_vines",
     "vine": "aether_ii:block/undergrowth_vines"

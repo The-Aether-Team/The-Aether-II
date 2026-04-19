@@ -259,10 +259,10 @@ public class AetherIIEventListeners {
     }
 
     public static void onPlayersFinishSleeping(SleepFinishedTimeEvent event) {
-        LevelAccessor level = event.getLevel();
-        long newTime = event.getNewTime();
-
-        PlayerHooks.resetAetherDayAndWeather(level, newTime);
+//        LevelAccessor level = event.getLevel();
+//        long newTime = event.getNewTime(); //todo
+//
+//        PlayerHooks.resetAetherDayAndWeather(level, newTime);
     }
 
     public static void onArmorDamaged(ArmorHurtEvent event) {

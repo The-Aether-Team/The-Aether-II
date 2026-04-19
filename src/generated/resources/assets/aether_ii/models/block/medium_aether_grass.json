@@ -272,7 +272,6 @@
       ]
     }
   ],
-  "render_type": "minecraft:cutout",
   "textures": {
     "cross": "aether_ii:block/medium_aether_grass",
     "overlay_1": "aether_ii:block/medium_aether_grass_1",

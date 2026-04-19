@@ -2,17 +2,80 @@
   "feature": "aether_ii:medium_grass_patch",
   "placement": [
     {
+      "type": "minecraft:count",
+      "count": 64
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "minecraft:trapezoid",
+        "max": 3,
+        "min": -3,
+        "plateau": 0
+      },
+      "y_spread": {
+        "type": "minecraft:trapezoid",
+        "max": 6,
+        "min": -6,
+        "plateau": 0
+      }
+    },
+    {
       "type": "aether_ii:improved_layer_placement",
       "count": {
         "type": "minecraft:uniform",
         "max_inclusive": 4,
         "min_inclusive": 2
       },
-      "heightmap": "MOTION_BLOCKING",
+      "heightmap": "WORLD_SURFACE_WG",
       "verticalBounds": 4
     },
     {
       "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:any_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "aether_ii:aether_plant_survives_on"
+              },
+              {
+                "type": "aether_ii:mossy",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "type": "minecraft:matching_block_tag",
+            "tag": "minecraft:air"
+          }
+        ]
+      }
     }
   ]
 }

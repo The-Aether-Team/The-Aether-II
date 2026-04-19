@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.block.AetherIIBlockIds;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesPlacedFeatures;
 import com.mojang.serialization.MapCodec;
@@ -38,7 +39,7 @@ public class AetherGrassBlock extends SpreadingSnowyBlock implements Bonemealabl
     }
 
     public AetherGrassBlock(BlockBehaviour.Properties properties) {
-        super(properties, AetherIIBlocks.AETHER_DIRT.get().builtInRegistryHolder().key());
+        super(properties, AetherIIBlockIds.AETHER_DIRT);
     }
 
     public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {

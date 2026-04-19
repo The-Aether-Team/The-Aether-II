@@ -1,6 +1,12 @@
 {
   "type": "minecraft:tree",
   "config": {
+    "below_trunk_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:aether_dirt"
+      }
+    },
     "decorators": [
       {
         "type": "aether_ii:ground_feature",
@@ -74,12 +80,6 @@
         "nest_chance": 0.025
       }
     ],
-    "dirt_provider": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "aether_ii:aether_dirt"
-      }
-    },
     "foliage_placer": {
       "type": "aether_ii:skyplane_foliage_placer",
       "offset": 2,
@@ -98,7 +98,6 @@
         }
       }
     },
-    "force_dirt": false,
     "ignore_vines": true,
     "minimum_size": {
       "type": "minecraft:three_layers_feature_size",

@@ -1,6 +1,5 @@
 {
   "parent": "minecraft:block/cube_all",
-  "render_type": "minecraft:translucent",
   "textures": {
     "all": "minecraft:block/frosted_ice_1"
   }

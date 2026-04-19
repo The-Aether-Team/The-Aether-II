@@ -1,6 +1,5 @@
 {
   "parent": "aether_ii:block/emissive_cube_column",
-  "render_type": "minecraft:cutout",
   "textures": {
     "emissive_end": "aether_ii:block/blank",
     "emissive_side": "aether_ii:block/sentry_base_pillar_emissive",

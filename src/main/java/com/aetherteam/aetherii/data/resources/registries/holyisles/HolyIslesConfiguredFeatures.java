@@ -1532,10 +1532,11 @@ public class HolyIslesConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GRASS_BLOCKS),
-                                        (PlacementModifier) Util.copyAndAdd(
+                                        Util.copyAndAdd(
                                                 VegetationPlacements.worldSurfaceSquaredWithCount(20),
                                                 RandomOffsetPlacement.ofTriangle(4, 4),
-                                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+                                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                                        ).toArray(new PlacementModifier[]{})
                                 ), 0.25F)),
                                 PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_GRASS_PATCH)))),
                         CaveSurface.FLOOR,
@@ -1556,10 +1557,11 @@ public class HolyIslesConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ENCHANTED_GRASS_BLOCKS),
-                                        (PlacementModifier) Util.copyAndAdd(
+                                        Util.copyAndAdd(
                                                 VegetationPlacements.worldSurfaceSquaredWithCount(20),
                                                 RandomOffsetPlacement.ofTriangle(4, 4),
-                                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+                                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                                        ).toArray(new PlacementModifier[]{})
                                 ), 0.25F)),
                                 PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(IRRADIATED_GRASS_PATCH)))),
                         CaveSurface.FLOOR,
@@ -1636,10 +1638,11 @@ public class HolyIslesConfiguredFeatures {
                         AetherIITags.Blocks.COARSE_AETHER_DIRT_REPLACEABLE,
                         BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKY_ROOTS),
-                                (PlacementModifier) Util.copyAndAdd(
+                                Util.copyAndAdd(
                                         VegetationPlacements.worldSurfaceSquaredWithCount(20),
                                         RandomOffsetPlacement.ofTriangle(4, 4),
-                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                                ).toArray(new PlacementModifier[]{})
                         ),
                         CaveSurface.CEILING,
                         UniformInt.of(1, 2),
@@ -1658,10 +1661,11 @@ public class HolyIslesConfiguredFeatures {
                         AetherIITags.Blocks.COARSE_AETHER_DIRT_REPLACEABLE,
                         BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(FROSTED_SKY_ROOTS),
-                                (PlacementModifier) Util.copyAndAdd(
+                                Util.copyAndAdd(
                                         VegetationPlacements.worldSurfaceSquaredWithCount(20),
                                         RandomOffsetPlacement.ofTriangle(4, 4),
-                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                                ).toArray(new PlacementModifier[]{})
                         ),
                         CaveSurface.CEILING,
                         UniformInt.of(1, 2),
@@ -1680,10 +1684,11 @@ public class HolyIslesConfiguredFeatures {
                         AetherIITags.Blocks.ARCTIC_ICE_REPLACEABLE,
                         BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE_CRYSTALS),
-                                (PlacementModifier) Util.copyAndAdd(
+                                Util.copyAndAdd(
                                         VegetationPlacements.worldSurfaceSquaredWithCount(20),
                                         RandomOffsetPlacement.ofTriangle(4, 4),
-                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                                ).toArray(new PlacementModifier[]{})
                         ),
                         CaveSurface.CEILING,
                         UniformInt.of(1, 2),
@@ -1952,16 +1957,18 @@ public class HolyIslesConfiguredFeatures {
                 UniformInt.of(120, 180),
                 Optional.of(PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                         List.of(new WeightedPlacedFeature( PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE_CRYSTALS),
-                                (PlacementModifier) Util.copyAndAdd(
+                                Util.copyAndAdd(
                                         VegetationPlacements.worldSurfaceSquaredWithCount(20),
                                         RandomOffsetPlacement.ofTriangle(4, 4),
-                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                                ).toArray(new PlacementModifier[]{})
                         ), 0.35F)),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE),
-                                (PlacementModifier) Util.copyAndAdd(
+                                Util.copyAndAdd(
                                         VegetationPlacements.worldSurfaceSquaredWithCount(20),
                                         RandomOffsetPlacement.ofTriangle(4, 4),
-                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.above(), AetherIIBlocks.ARCTIC_PACKED_ICE.get()), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
+                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.above(), AetherIIBlocks.ARCTIC_PACKED_ICE.get()), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                                ).toArray(new PlacementModifier[]{})
                         )))),
                 0.25F,
                 AetherIITags.Blocks.ARCTIC_COAST_GENERATES_ON

@@ -23,25 +23,25 @@ import java.util.List;
 
 @Mixin(CuboidItemModelWrapper.class)
 public class CuboidItemModelWrapperMixin {
-    @Shadow
-    @Final
-    private ModelRenderProperties properties;
-    @Shadow
-    @Final
-    private List<BakedQuad> quads;
-
-    @Inject(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/item/ItemStackRenderState$LayerRenderState;setExtents(Ljava/util/function/Supplier;)V"))
-    public void update(ItemStackRenderState itemStackRenderState, ItemStack stack, ItemModelResolver p_388726_, ItemDisplayContext context, ClientLevel p_387522_, ItemOwner p_434975_, int p_388300_, CallbackInfo ci, @Local ItemStackRenderState.LayerRenderState layerRenderState) {
-
-        //Is it should be not *direct* put?
-        if (!stack.hasFoil() && stack.is(AetherIITags.Items.IRRADIATED_ITEM)) {
-            ItemStackRenderState.LayerRenderState itemstackrenderstate$layerrenderstate = itemStackRenderState.newLayer();
-            itemStackRenderState.setAnimated();
-            itemstackrenderstate$layerrenderstate.setRenderType(AetherIIRenderTypes.irradiatedGlint());
-            properties.applyToLayer(itemstackrenderstate$layerrenderstate, context);
-            itemstackrenderstate$layerrenderstate.prepareQuadList().addAll(this.quads);
-        }
-    }
+//    @Shadow
+//    @Final
+//    private ModelRenderProperties properties;
+//    @Shadow
+//    @Final
+//    private List<BakedQuad> quads;
+//todo
+//    @Inject(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/item/ItemStackRenderState$LayerRenderState;setExtents(Ljava/util/function/Supplier;)V"))
+//    public void update(ItemStackRenderState itemStackRenderState, ItemStack stack, ItemModelResolver p_388726_, ItemDisplayContext context, ClientLevel p_387522_, ItemOwner p_434975_, int p_388300_, CallbackInfo ci, @Local ItemStackRenderState.LayerRenderState layerRenderState) {
+//
+//        //Is it should be not *direct* put?
+//        if (!stack.hasFoil() && stack.is(AetherIITags.Items.IRRADIATED_ITEM)) {
+//            ItemStackRenderState.LayerRenderState itemstackrenderstate$layerrenderstate = itemStackRenderState.newLayer();
+//            itemStackRenderState.setAnimated();
+//            itemstackrenderstate$layerrenderstate.setRenderType(AetherIIRenderTypes.irradiatedGlint());
+//            properties.applyToLayer(itemstackrenderstate$layerrenderstate, context);
+//            itemstackrenderstate$layerrenderstate.prepareQuadList().addAll(this.quads);
+//        }
+//    }
 
     /*
       @Inject(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/item/ItemStackRenderState$LayerRenderState;setExtents(Ljava/util/function/Supplier;)V"))

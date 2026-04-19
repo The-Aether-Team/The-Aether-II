@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "aether_ii:icestone",
   "result": {
-    "count": 1,
     "id": "aether_ii:icestone_wall"
   }
 }

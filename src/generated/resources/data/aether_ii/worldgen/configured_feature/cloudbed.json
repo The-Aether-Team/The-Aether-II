@@ -71,8 +71,8 @@
     "offset_max": 15.0,
     "offset_noise": "aether_ii:holy_isles/cloudbed/y_offset",
     "predicate": {
-      "type": "minecraft:matching_blocks",
-      "blocks": "minecraft:air"
+      "type": "minecraft:matching_block_tag",
+      "tag": "minecraft:air"
     },
     "y_level": 96
   }

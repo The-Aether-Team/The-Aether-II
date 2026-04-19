@@ -555,6 +555,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Furniture
         this.createOutpostCampfire();
         this.createMural();
+        this.createTrivialCube(AetherIIBlocks.MURAL.get());
 
         this.createMeltingBlock(AetherIIBlocks.FROSTED_ICE.get(), Blocks.FROSTED_ICE, ModelTemplates.CUBE_ALL);
         this.createMeltingBlock(AetherIIBlocks.FROSTED_ARCTIC_ICE.get(), AetherIIBlocks.FROSTED_ARCTIC_ICE.get(), ModelTemplates.CUBE_ALL);

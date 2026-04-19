@@ -22,34 +22,34 @@ public class AetherIIColorResolvers {
     }
 
     public static void registerBlockColor(RegisterColorHandlersEvent.BlockTintSources event) {
-        event.register((state, level, pos, tintIndex) -> {
-            float shade = state.getValue(IrradiatedLeavesBlock.SHADE);
-            float shadeMax = 7.0F;
-
-            Color bottom = new Color(0xFFF68D);
-            Color top = new Color(0xFFFFFF);
-
-            int resultRed = bottom.getRed() + (int) ((shade / shadeMax) * (top.getRed() - bottom.getRed()));
-            int resultGreen = bottom.getGreen() + (int) ((shade / shadeMax) * (top.getGreen() - bottom.getGreen()));
-            int resultBlue = bottom.getBlue() + (int) ((shade / shadeMax) * (top.getBlue() - bottom.getBlue()));
-
-            return new Color(resultRed, resultGreen, resultBlue).getRGB();
-        },
-                AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
-        event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(tintIndex, level != null && pos != null ? getAverageColor(level, pos, GRASS_COLORS) : AETHER_GRASS_COLOR, 5.0F, 6.0F)),
-                AetherIIBlocks.AETHER_GRASS_BLOCK.get());
-        event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(tintIndex, level != null && pos != null ? getAverageColor(level, pos, GRASS_COLORS) : AETHER_TALL_GRASS_COLOR, 2.0F, 10.0F)),
-                AetherIIBlocks.SHORT_AETHER_GRASS.get(), AetherIIBlocks.MEDIUM_AETHER_GRASS.get(), AetherIIBlocks.TALL_AETHER_GRASS.get());
-        event.register(((state, level, pos, tintIndex) ->  level != null && pos != null ? getAverageColor(level, pos, GRASS_COLORS) : AETHER_TALL_GRASS_COLOR),
-                AetherIIBlocks.AETHER_FERN.get(), AetherIIBlocks.POTTED_AETHER_FERN.get());
+//        event.register((state, level, pos, tintIndex) -> { //todo
+//            float shade = state.getValue(IrradiatedLeavesBlock.SHADE);
+//            float shadeMax = 7.0F;
+//
+//            Color bottom = new Color(0xFFF68D);
+//            Color top = new Color(0xFFFFFF);
+//
+//            int resultRed = bottom.getRed() + (int) ((shade / shadeMax) * (top.getRed() - bottom.getRed()));
+//            int resultGreen = bottom.getGreen() + (int) ((shade / shadeMax) * (top.getGreen() - bottom.getGreen()));
+//            int resultBlue = bottom.getBlue() + (int) ((shade / shadeMax) * (top.getBlue() - bottom.getBlue()));
+//
+//            return new Color(resultRed, resultGreen, resultBlue).getRGB();
+//        },
+//                AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get(),
+//                AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get(),
+//                AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get(),
+//                AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get(),
+//                AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get(),
+//                AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get(),
+//                AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(),
+//                AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
+//                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
+//        event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(tintIndex, level != null && pos != null ? getAverageColor(level, pos, GRASS_COLORS) : AETHER_GRASS_COLOR, 5.0F, 6.0F)),
+//                AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+//        event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(tintIndex, level != null && pos != null ? getAverageColor(level, pos, GRASS_COLORS) : AETHER_TALL_GRASS_COLOR, 2.0F, 10.0F)),
+//                AetherIIBlocks.SHORT_AETHER_GRASS.get(), AetherIIBlocks.MEDIUM_AETHER_GRASS.get(), AetherIIBlocks.TALL_AETHER_GRASS.get());
+//        event.register(((state, level, pos, tintIndex) ->  level != null && pos != null ? getAverageColor(level, pos, GRASS_COLORS) : AETHER_TALL_GRASS_COLOR),
+//                AetherIIBlocks.AETHER_FERN.get(), AetherIIBlocks.POTTED_AETHER_FERN.get());
     }
 
     public static int createTriTintGrassColor(int tintIndex, int defaultColor, float darkSaturationOffset, float lightSaturationOffset) {

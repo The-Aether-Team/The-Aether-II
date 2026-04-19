@@ -1,6 +1,5 @@
 {
   "parent": "minecraft:block/cube",
-  "render_type": "minecraft:translucent",
   "textures": {
     "down": "aether_ii:block/purple_aercloud_back",
     "east": "aether_ii:block/purple_aercloud_right",

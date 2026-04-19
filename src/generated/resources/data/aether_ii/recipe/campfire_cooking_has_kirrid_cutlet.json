@@ -5,7 +5,6 @@
   "experience": 0.35,
   "ingredient": "aether_ii:kirrid_loin",
   "result": {
-    "count": 1,
     "id": "aether_ii:kirrid_cutlet"
   }
 }

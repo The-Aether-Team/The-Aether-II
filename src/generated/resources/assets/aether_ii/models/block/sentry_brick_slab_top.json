@@ -1,6 +1,5 @@
 {
   "parent": "aether_ii:block/emissive_slab_top",
-  "render_type": "minecraft:cutout",
   "textures": {
     "all": "aether_ii:block/sentry_bricks",
     "emissive": "aether_ii:block/sentry_bricks_emissive"

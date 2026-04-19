@@ -1,162 +1,113 @@
 {
-  "type": "minecraft:flower",
+  "type": "aether_ii:aether_flower",
   "config": {
-    "feature": {
-      "feature": {
-        "type": "aether_ii:aether_flower",
-        "config": {
-          "to_place": {
-            "type": "minecraft:weighted_state_provider",
-            "entries": [
-              {
-                "data": {
-                  "Name": "aether_ii:aechor_cutting",
-                  "Properties": {
-                    "snowy": "false"
-                  }
-                },
-                "weight": 2
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:carrion_cutting",
-                  "Properties": {
-                    "snowy": "false"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:hesperose",
-                  "Properties": {
-                    "snowy": "false"
-                  }
-                },
-                "weight": 4
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:tarabloom",
-                  "Properties": {
-                    "snowy": "false"
-                  }
-                },
-                "weight": 4
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:poasprout",
-                  "Properties": {
-                    "snowy": "false"
-                  }
-                },
-                "weight": 4
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:lilichime",
-                  "Properties": {
-                    "snowy": "false"
-                  }
-                },
-                "weight": 5
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:pluracian",
-                  "Properties": {
-                    "facing": "north",
-                    "snowy": "false"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:pluracian",
-                  "Properties": {
-                    "facing": "east",
-                    "snowy": "false"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:pluracian",
-                  "Properties": {
-                    "facing": "south",
-                    "snowy": "false"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:pluracian",
-                  "Properties": {
-                    "facing": "west",
-                    "snowy": "false"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:satival_shoot",
-                  "Properties": {
-                    "snowy": "false"
-                  }
-                },
-                "weight": 4
-              }
-            ]
-          }
-        }
-      },
-      "placement": [
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
         {
-          "type": "minecraft:block_predicate_filter",
-          "predicate": {
-            "type": "minecraft:all_of",
-            "predicates": [
-              {
-                "type": "minecraft:any_of",
-                "predicates": [
-                  {
-                    "type": "minecraft:matching_block_tag",
-                    "offset": [
-                      0,
-                      -1,
-                      0
-                    ],
-                    "tag": "aether_ii:aether_plant_survives_on"
-                  },
-                  {
-                    "type": "aether_ii:mossy",
-                    "offset": [
-                      0,
-                      -1,
-                      0
-                    ]
-                  }
-                ]
-              },
-              {
-                "type": "minecraft:replaceable"
-              },
-              {
-                "type": "minecraft:matching_fluids",
-                "fluids": "minecraft:empty"
-              }
-            ]
-          }
+          "data": {
+            "Name": "aether_ii:aechor_cutting",
+            "Properties": {
+              "snowy": "false"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "aether_ii:carrion_cutting",
+            "Properties": {
+              "snowy": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:hesperose",
+            "Properties": {
+              "snowy": "false"
+            }
+          },
+          "weight": 4
+        },
+        {
+          "data": {
+            "Name": "aether_ii:tarabloom",
+            "Properties": {
+              "snowy": "false"
+            }
+          },
+          "weight": 4
+        },
+        {
+          "data": {
+            "Name": "aether_ii:poasprout",
+            "Properties": {
+              "snowy": "false"
+            }
+          },
+          "weight": 4
+        },
+        {
+          "data": {
+            "Name": "aether_ii:lilichime",
+            "Properties": {
+              "snowy": "false"
+            }
+          },
+          "weight": 5
+        },
+        {
+          "data": {
+            "Name": "aether_ii:pluracian",
+            "Properties": {
+              "facing": "north",
+              "snowy": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:pluracian",
+            "Properties": {
+              "facing": "east",
+              "snowy": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:pluracian",
+            "Properties": {
+              "facing": "south",
+              "snowy": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:pluracian",
+            "Properties": {
+              "facing": "west",
+              "snowy": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "aether_ii:satival_shoot",
+            "Properties": {
+              "snowy": "false"
+            }
+          },
+          "weight": 4
         }
       ]
-    },
-    "tries": 16,
-    "xz_spread": 8,
-    "y_spread": 3
+    }
   }
 }

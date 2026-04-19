@@ -32,10 +32,7 @@
       "feature": {
         "type": "minecraft:random_selector",
         "config": {
-          "default": {
-            "feature": "aether_ii:mycelium_magnetic_shroom_patch",
-            "placement": []
-          },
+          "default": "aether_ii:mycelial_magnetic_shroom_patch",
           "features": [
             {
               "chance": 0.2,

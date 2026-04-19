@@ -1191,10 +1191,10 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         MultiVariant multivariant = plainVariant(ModelTemplates.PARTICLE_ONLY.create(block.value(), TextureMapping.particle(new Material(icon)), this.modelOutput));
         this.blockStateOutput.accept(createSimpleBlock(block.value(), multivariant));
 
-        CopyBlockSpecialRenderer.Unbaked unbaked = new CopyBlockSpecialRenderer.Unbaked(block, icon);
-        Identifier base = ModelTemplates.CHEST_INVENTORY.create(block.value().asItem(), TextureMapping.particle(new Material(icon)), this.modelOutput);
-        Identifier baseFlat = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(block.value().asItem(), "_flat"), TextureMapping.layer0(new Material(icon)), this.modelOutput);
-        this.itemModelOutput.accept(block.value().asItem(), ItemModelUtils.conditional(new HasBlockState(), ItemModelUtils.specialModel(base, unbaked), ItemModelUtils.plainModel(baseFlat)));
+//        CopyBlockSpecialRenderer.Unbaked unbaked = new CopyBlockSpecialRenderer.Unbaked(block, icon);
+//        Identifier base = ModelTemplates.CHEST_INVENTORY.create(block.value().asItem(), TextureMapping.particle(new Material(icon)), this.modelOutput);
+//        Identifier baseFlat = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(block.value().asItem(), "_flat"), TextureMapping.layer0(new Material(icon)), this.modelOutput);
+//        this.itemModelOutput.accept(block.value().asItem(), ItemModelUtils.conditional(new HasBlockState(), ItemModelUtils.specialModel(base, unbaked), ItemModelUtils.plainModel(baseFlat)));
     }
 
     public void createLadder(Block block) {
@@ -1277,10 +1277,10 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createMural() {
-        Identifier modelLocation = ModelLocationUtils.getModelLocation(AetherIIBlocks.MURAL.get());
-        MultiVariant mural = plainVariant(modelLocation);
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.MURAL.get(), mural).with(ROTATION_HORIZONTAL_FACING));
-        this.itemModelOutput.accept(AetherIIBlocks.MURAL.get().asItem(), new MuralItemModel.Unbaked(modelLocation));
+//        Identifier modelLocation = ModelLocationUtils.getModelLocation(AetherIIBlocks.MURAL.get());
+//        MultiVariant mural = plainVariant(modelLocation);
+//        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(AetherIIBlocks.MURAL.get(), mural).with(ROTATION_HORIZONTAL_FACING));
+//        this.itemModelOutput.accept(AetherIIBlocks.MURAL.get().asItem(), new MuralItemModel.Unbaked(modelLocation));
     }
 
     public void createMeltingBlock(Block block, Block textureBlock, ModelTemplate modelTemplate) {

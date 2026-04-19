@@ -13,17 +13,17 @@ import net.neoforged.neoforge.client.model.DelegateBlockStateModel;
 
 import java.util.List;
 
-public class FastModel extends DelegateBlockStateModel {
-    public FastModel(BlockStateModel originalModel) {
-        super(originalModel);
-    }
-
-    @Override
-    public void collectParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockStateModelPart> parts) {
-        for (BlockStateModelPart part : this.delegate.collectParts(level, pos, state, random)) {
-            if (part instanceof SimpleModelWrapper simpleModelWrapper) {
-                parts.add(new SimpleModelWrapper(simpleModelWrapper.quads(), simpleModelWrapper.useAmbientOcclusion(), simpleModelWrapper.particleMaterial(), Minecraft.getInstance().options.cutoutLeaves().get() ? ChunkSectionLayer.CUTOUT : ChunkSectionLayer.SOLID));
-            }
-        }
-    }
-}
+//public class FastModel extends DelegateBlockStateModel {
+//    public FastModel(BlockStateModel originalModel) {
+//        super(originalModel);
+//    }
+//
+//    @Override
+//    public void collectParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockStateModelPart> parts) {
+//        for (BlockStateModelPart part : this.delegate.collectParts(level, pos, state, random)) {
+//            if (part instanceof SimpleModelWrapper simpleModelWrapper) {
+//                parts.add(new SimpleModelWrapper(simpleModelWrapper.quads(), simpleModelWrapper.useAmbientOcclusion(), simpleModelWrapper.particleMaterial(), Minecraft.getInstance().options.cutoutLeaves().get() ? ChunkSectionLayer.CUTOUT : ChunkSectionLayer.SOLID));
+//            }
+//        }
+//    }
+//}

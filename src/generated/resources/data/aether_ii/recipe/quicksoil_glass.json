@@ -6,7 +6,6 @@
   "ingredient": "aether_ii:quicksoil",
   "processing_time": 200,
   "result": {
-    "count": 1,
     "id": "aether_ii:quicksoil_glass"
   }
 }

@@ -17,10 +17,7 @@
     "replaceable": "#aether_ii:coarse_aether_dirt_replaceable",
     "surface": "floor",
     "vegetation_chance": 0.035,
-    "vegetation_feature": {
-      "feature": "aether_ii:holystone_rocks",
-      "placement": []
-    },
+    "vegetation_feature": "aether_ii:holystone_rocks",
     "vertical_range": 3,
     "xz_radius": {
       "type": "minecraft:uniform",

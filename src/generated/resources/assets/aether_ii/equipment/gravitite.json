@@ -5,6 +5,11 @@
         "texture": "aether_ii:gravitite"
       }
     ],
+    "humanoid_baby": [
+      {
+        "texture": "aether_ii:gravitite"
+      }
+    ],
     "humanoid_leggings": [
       {
         "texture": "aether_ii:gravitite"

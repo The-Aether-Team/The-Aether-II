@@ -112,10 +112,10 @@ public class AetherIIClientExtensions {
     };
 
     public static final IClientBlockExtensions AETHER_GRASS = new IClientBlockExtensions() {
-        @Override
-        public boolean areBreakingParticlesTinted(BlockState state, ClientLevel level, BlockPos pos) {
-            return false;
-        }
+//        @Override //todo
+//        public boolean areBreakingParticlesTinted(BlockState state, ClientLevel level, BlockPos pos) {
+//            return false;
+//        }
     };
 
     public static final IClientItemExtensions GLIDER = new IClientItemExtensions() {

@@ -1,6 +1,5 @@
 {
   "parent": "aether_ii:block/template_arkenium_forge",
-  "render_type": "minecraft:cutout",
   "textures": {
     "anvil_bottom": "aether_ii:block/arkenium_forge_anvil_bottom",
     "anvil_front": "aether_ii:block/arkenium_forge_anvil_front",

@@ -158,7 +158,6 @@
       ]
     }
   ],
-  "render_type": "minecraft:cutout",
   "textures": {
     "bottom": "aether_ii:block/aether_dirt",
     "particle": "aether_ii:block/aether_dirt",

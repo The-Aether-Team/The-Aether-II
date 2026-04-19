@@ -1,6 +1,5 @@
 {
   "parent": "aether_ii:block/template_artisans_bench",
-  "render_type": "minecraft:cutout",
   "textures": {
     "down": "aether_ii:block/artisans_bench_bottom",
     "east": "aether_ii:block/artisans_bench_right",

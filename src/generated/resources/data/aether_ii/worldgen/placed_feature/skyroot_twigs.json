@@ -2,6 +2,35 @@
   "feature": "aether_ii:skyroot_twigs",
   "placement": [
     {
+      "type": "minecraft:count",
+      "count": 2
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "minecraft:trapezoid",
+        "max": 1,
+        "min": -1,
+        "plateau": 0
+      },
+      "y_spread": {
+        "type": "minecraft:trapezoid",
+        "max": 1,
+        "min": -1,
+        "plateau": 0
+      }
+    },
+    {
       "type": "minecraft:noise_threshold_count",
       "above_noise": 0,
       "below_noise": 1,
@@ -16,6 +45,27 @@
     },
     {
       "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              0,
+              -1,
+              0
+            ],
+            "tag": "aether_ii:skyroot_twig_survives_on"
+          },
+          {
+            "type": "minecraft:matching_block_tag",
+            "tag": "minecraft:air"
+          }
+        ]
+      }
     }
   ]
 }

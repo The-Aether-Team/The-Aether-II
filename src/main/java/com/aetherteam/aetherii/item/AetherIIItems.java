@@ -407,7 +407,7 @@ public class AetherIIItems {
 
     public static final DeferredItem<Item> MUSIC_PLAYER = register("music_player", MusicPlayerItem::new, () -> new Item.Properties().stacksTo(1));
 
-    public static final DeferredItem<Item> BROKEN_ITEM = register("broken_item", BrokenItem::new, () -> new Item.Properties().stacksTo(1).component(AetherIIDataComponents.BROKEN_STACK, new BrokenStack(Items.WOODEN_PICKAXE.getDefaultInstance())));
+    public static final DeferredItem<Item> BROKEN_ITEM = register("broken_item", BrokenItem::new, () -> new Item.Properties().stacksTo(1).delayedComponent(AetherIIDataComponents.BROKEN_STACK.get(), (context) -> new BrokenStack(Items.WOODEN_PICKAXE.getDefaultInstance())));
 
     private static <T extends Item> DeferredItem<Item> register(String name) {
         return register(name, Item::new);
@@ -469,6 +469,6 @@ public class AetherIIItems {
     }
 
     public static void modifyDefaultComponents(ModifyDefaultComponentsEvent event) {
-        event.modifyMatching((item, data) -> item.getDescriptionId().contains(AetherII.MODID), builder -> builder.remove(DataComponents.ENCHANTABLE));
+//        event.modifyMatching((item, data) -> item.getDescriptionId().contains(AetherII.MODID), builder -> builder.remove(DataComponents.ENCHANTABLE)); //tod
     }
 }

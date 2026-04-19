@@ -17,36 +17,36 @@ import net.neoforged.neoforge.client.model.DelegateBlockStateModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CopyBlockModel extends DelegateBlockStateModel {
-    public CopyBlockModel(BlockStateModel delegate) {
-        super(delegate);
-    }
-
-    @Override
-    public void collectParts(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos, BlockState blockState, RandomSource randomSource, List<BlockStateModelPart> list) {
-        LockedBlockEntity.CopyData data = blockAndTintGetter.getModelData(blockPos).get(LockedBlockEntity.CopyData.PROPERTY);
-        if (data == null) {
-            return;
-        }
-        BlockState state = data.state();
-        List<BlockStateModelPart> newParts = new ArrayList<>();
-        Minecraft.getInstance().getModelManager().getBlockModelShaper().getBlockModel(state).collectParts(blockAndTintGetter, blockPos, state, randomSource, newParts);
-        for (BlockStateModelPart part : newParts) {
-            if (part instanceof SimpleModelWrapper simpleModelWrapper && simpleModelWrapper.getRenderType(state) != ChunkSectionLayer.SOLID) {
-                list.add(new SimpleModelWrapper(simpleModelWrapper.quads(), simpleModelWrapper.useAmbientOcclusion(), this.particleMaterial(blockAndTintGetter, blockPos, blockState), ChunkSectionLayer.SOLID));
-            } else {
-                list.add(part);
-            }
-        }
-    }
-
-    @Override
-    public Material.Baked particleMaterial(BlockAndTintGetter level, BlockPos pos, BlockState state) {
-        LockedBlockEntity.CopyData data = level.getModelData(pos).get(LockedBlockEntity.CopyData.PROPERTY);
-        if (data == null) {
-            return super.particleMaterial(level, pos, state);
-        }
-        BlockState mimicState = data.state();
-        return Minecraft.getInstance().getModelManager().getBlocksModelShaper().getBlockModel(mimicState).particleMaterial(level, pos, mimicState);
-    }
-}
+//public class CopyBlockModel extends DelegateBlockStateModel {
+//    public CopyBlockModel(BlockStateModel delegate) {
+//        super(delegate);
+//    }
+//
+//    @Override
+//    public void collectParts(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos, BlockState blockState, RandomSource randomSource, List<BlockStateModelPart> list) {
+//        LockedBlockEntity.CopyData data = blockAndTintGetter.getModelData(blockPos).get(LockedBlockEntity.CopyData.PROPERTY);
+//        if (data == null) {
+//            return;
+//        }
+//        BlockState state = data.state();
+//        List<BlockStateModelPart> newParts = new ArrayList<>();
+//        Minecraft.getInstance().getModelManager().getBlockModelShaper().getBlockModel(state).collectParts(blockAndTintGetter, blockPos, state, randomSource, newParts);
+//        for (BlockStateModelPart part : newParts) {
+//            if (part instanceof SimpleModelWrapper simpleModelWrapper && simpleModelWrapper.getRenderType(state) != ChunkSectionLayer.SOLID) {
+//                list.add(new SimpleModelWrapper(simpleModelWrapper.quads(), simpleModelWrapper.useAmbientOcclusion(), this.particleMaterial(blockAndTintGetter, blockPos, blockState), ChunkSectionLayer.SOLID));
+//            } else {
+//                list.add(part);
+//            }
+//        }
+//    }
+//
+//    @Override
+//    public Material.Baked particleMaterial(BlockAndTintGetter level, BlockPos pos, BlockState state) {
+//        LockedBlockEntity.CopyData data = level.getModelData(pos).get(LockedBlockEntity.CopyData.PROPERTY);
+//        if (data == null) {
+//            return super.particleMaterial(level, pos, state);
+//        }
+//        BlockState mimicState = data.state();
+//        return Minecraft.getInstance().getModelManager().getBlocksModelShaper().getBlockModel(mimicState).particleMaterial(level, pos, mimicState);
+//    }
+//}
