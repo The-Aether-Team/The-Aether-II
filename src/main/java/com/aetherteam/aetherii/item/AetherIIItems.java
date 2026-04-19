@@ -255,6 +255,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ZANITE_GEMSTONE = register("zanite_gemstone");
     public static final DeferredItem<Item> INERT_ARKENIUM = register("inert_arkenium");
     public static final DeferredItem<Item> ARKENIUM_PLATE = register("arkenium_plate");
+    public static final DeferredItem<Item> ARKENIUM_CHIP = register("arkenium_chip");
     public static final DeferredItem<Item> INERT_GRAVITITE = register("inert_gravitite");
     public static final DeferredItem<Item> GRAVITITE_PLATE = register("gravitite_plate");
     public static final DeferredItem<Item> FOSSILIZED_CORROBONITE = register("fossilized_corrobonite");

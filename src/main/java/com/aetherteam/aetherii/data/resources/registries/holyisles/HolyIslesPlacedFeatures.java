@@ -254,7 +254,6 @@ public class HolyIslesPlacedFeatures {
                         VegetationPlacements.worldSurfaceSquaredWithCount(4),
                         RandomOffsetPlacement.ofTriangle(2, 2),
                         NoiseThresholdCountPlacement.of(0.1, 0, 1),
-                        InSquarePlacement.spread(),
                         HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                         BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
         );
@@ -265,20 +264,16 @@ public class HolyIslesPlacedFeatures {
                         RandomOffsetPlacement.ofTriangle(2, 2),
                         NoiseThresholdCountPlacement.of(0.1, 1, 0),
                         RarityFilter.onAverageOnceEvery(2),
-                        InSquarePlacement.spread(),
                         HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                         BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))
         );
         register(context, HOLYSTONE_ROCKS_UNDERWATER,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.UNDERWATER_HOLYSTONE_ROCKS),
-                Util.copyAndAdd(
-                        VegetationPlacements.worldSurfaceSquaredWithCount(4),
                         RandomOffsetPlacement.ofTriangle(2, 2),
                         NoiseThresholdCountPlacement.of(0.1, 1, 0),
                         CountPlacement.of(UniformInt.of(1, 4)),
-                        InSquarePlacement.spread(),
                         HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
-                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))))
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER)))
         );
         register(
                 context,
@@ -792,34 +787,26 @@ public class HolyIslesPlacedFeatures {
         );
         register(context, BRYALINN_MOSS_CARPET_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_CARPET),
-                Util.copyAndAdd(
-                        VegetationPlacements.worldSurfaceSquaredWithCount(3),
-                        RandomOffsetPlacement.ofTriangle(2, 2),
-                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
-                )
+                CountPlacement.of(3),
+                RandomOffsetPlacement.ofTriangle(2, 2),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
         );
         register(context, BRYALINN_MOSS_FLOWER_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOWERS),
-                Util.copyAndAdd(
-                        VegetationPlacements.worldSurfaceSquaredWithCount(3),
-                        RandomOffsetPlacement.ofTriangle(2, 2)
-                )
+                CountPlacement.of(3),
+                RandomOffsetPlacement.ofTriangle(2, 2)
         );
         register(context, SHAYELINN_MOSS_CARPET_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.SHAYELINN_MOSS_CARPET),
-                Util.copyAndAdd(
-                        VegetationPlacements.worldSurfaceSquaredWithCount(3),
-                        RandomOffsetPlacement.ofTriangle(2, 2),
-                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
-                )
+                CountPlacement.of(3),
+                RandomOffsetPlacement.ofTriangle(2, 2),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
         );
         register(context, AMBRELINN_MOSS_CARPET_PATCH,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.AMBRELINN_MOSS_CARPET),
-                Util.copyAndAdd(
-                        VegetationPlacements.worldSurfaceSquaredWithCount(3),
-                        RandomOffsetPlacement.ofTriangle(2, 2),
-                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
-                )
+                CountPlacement.of(3),
+                RandomOffsetPlacement.ofTriangle(2, 2),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, new HasSturdyFacePredicate(BlockPos.ZERO.below(), Direction.UP)))
         );
         register(context, EXPOSED_BRYALINN_MOSS_COVER, configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.BRYALINN_MOSS_FLOOR),
                 NoiseBasedCountPlacement.of(35, 50, 0.0),

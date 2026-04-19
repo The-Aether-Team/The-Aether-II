@@ -1182,20 +1182,22 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("/")
                 .unlockedBy(getHasName(AetherIIItems.AMBROSIUM_SHARD.get()), has(AetherIIItems.AMBROSIUM_SHARD.get()))
                 .save(this.output);
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_LANTERN.get(), 2)
-                .define('#', AetherIIItems.ARKENIUM_PLATE.get())
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_LANTERN.get())
+                .define('#', AetherIIItems.ARKENIUM_CHIP.get())
                 .define('/', AetherIIBlocks.AMBROSIUM_TORCH)
-                .pattern("#")
-                .pattern("/")
-                .pattern("#")
+                .pattern("###")
+                .pattern("#/#")
+                .pattern("###")
                 .unlockedBy(getHasName(AetherIIItems.ARKENIUM_PLATE.get()), has(AetherIIItems.ARKENIUM_PLATE.get()))
                 .save(this.output);
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get(), AetherIIBlocks.ARKENIUM_LANTERN.get());
         this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_LANTERN.get(), AetherIIBlocks.RUSTIC_ARKENIUM_LANTERN.get());
-        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_CHAIN.get(), 2)
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_CHAIN.get(), 3)
                 .define('#', AetherIIItems.ARKENIUM_PLATE.get())
+                .define('/', AetherIIItems.ARKENIUM_CHIP.get())
+                .pattern("/")
                 .pattern("#")
-                .pattern("#")
+                .pattern("/")
                 .unlockedBy(getHasName(AetherIIItems.ARKENIUM_PLATE.get()), has(AetherIIItems.ARKENIUM_PLATE.get()))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get())
@@ -1604,6 +1606,9 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIBlocks.SKYROOT_TWIG)
                 .unlockedBy("has_twig", has(AetherIIBlocks.SKYROOT_TWIG))
                 .save(this.output, this.name("skyroot_stick_from_twig"));
+        this.nineBlockStorageRecipesWithCustomPacking(
+                RecipeCategory.MISC, AetherIIItems.ARKENIUM_CHIP, RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATE, "arkenium_plate_from_chips", "arkenium_plate"
+        );
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.MOA_FEED.get(), 3)
                 .requires(AetherIIItems.SKYROOT_PINECONE)
                 .requires(AetherIIItems.AECHOR_PETAL)

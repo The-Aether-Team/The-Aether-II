@@ -846,6 +846,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.FOSSILIZED_CORROBONITE.get());
                 output.accept(AetherIIItems.GOLDEN_AMBER.get());
                 output.accept(AetherIIItems.ZANITE_GEMSTONE.get());
+                output.accept(AetherIIItems.ARKENIUM_CHIP.get());
                 output.accept(AetherIIItems.ARKENIUM_PLATE.get());
                 output.accept(AetherIIItems.GRAVITITE_PLATE.get());
                 output.accept(AetherIIItems.GLINT_GEMSTONE.get());

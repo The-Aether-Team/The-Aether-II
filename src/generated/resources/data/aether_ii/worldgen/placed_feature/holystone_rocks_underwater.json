@@ -2,20 +2,6 @@
   "feature": "aether_ii:underwater_holystone_rocks",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 4
-    },
-    {
-      "type": "minecraft:in_square"
-    },
-    {
-      "type": "minecraft:heightmap",
-      "heightmap": "WORLD_SURFACE_WG"
-    },
-    {
-      "type": "minecraft:biome"
-    },
-    {
       "type": "minecraft:random_offset",
       "xz_spread": {
         "type": "minecraft:trapezoid",
@@ -43,9 +29,6 @@
         "max_inclusive": 4,
         "min_inclusive": 1
       }
-    },
-    {
-      "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:heightmap",
