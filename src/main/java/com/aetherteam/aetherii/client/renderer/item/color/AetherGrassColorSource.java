@@ -23,7 +23,7 @@ public record AetherGrassColorSource(int tintIndex, int defaultColor, float dark
 
     @Override
     public int calculate(ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity livingEntity) {
-        return AetherIIColorResolvers.createTriTintGrassColor(Minecraft.getInstance().getBlockColors(), this.defaultColor(), this.darkSaturationOffset(), this.lightSaturationOffset()).color(AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState());
+        return AetherIIColorResolvers.createTriTintGrassColor(this.tintIndex, this.defaultColor(), this.darkSaturationOffset(), this.lightSaturationOffset()).color(AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState());
     }
 
     @Override

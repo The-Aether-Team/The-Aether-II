@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.IrradiatedLeavesBlock;
 import com.aetherteam.aetherii.client.event.hooks.BiomeHooks;
-import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.block.BlockTintSource;
 import net.minecraft.client.color.block.BlockTintSources;
 import net.minecraft.client.renderer.BiomeColors;
@@ -59,7 +58,9 @@ public class AetherIIColorResolvers {
 
  */
 
-        event.register(List.of(BlockTintSources.constant(0), BlockTintSources.constant(1), BlockTintSources.constant(2), createTriTintGrassColor(event.getBlockColors(), AETHER_GRASS_COLOR, 5.0F, 6.0F)), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        event.register(List.of(BlockTintSources.constant(0), createTriTintGrassColor(0, AETHER_GRASS_COLOR, 5.0F, 6.0F)), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        event.register(List.of(BlockTintSources.constant(1), createTriTintGrassColor(1, AETHER_GRASS_COLOR, 5.0F, 6.0F)), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        event.register(List.of(BlockTintSources.constant(2), createTriTintGrassColor(2, AETHER_GRASS_COLOR, 5.0F, 6.0F)), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         //event.register(List.of(createTriTintGrassColor(1, AETHER_GRASS_COLOR, 5.0F, 6.0F)), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         //event.register(List.of(createTriTintGrassColor(2, AETHER_GRASS_COLOR, 5.0F, 6.0F)), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
 
@@ -77,7 +78,7 @@ public class AetherIIColorResolvers {
 
 
 
-    public static BlockTintSource createTriTintGrassColor(BlockColors blockColors, int defaultColor, float darkSaturationOffset, float lightSaturationOffset) {
+    public static BlockTintSource createTriTintGrassColor(int tintIndex, int defaultColor, float darkSaturationOffset, float lightSaturationOffset) {
         return new BlockTintSource() {
             public int color(BlockState state) {
                 Color midColor = new Color(defaultColor);
@@ -90,17 +91,6 @@ public class AetherIIColorResolvers {
                 Color darkColor = Color.getHSBColor(hue, saturation + (darkSaturationOffset / 100.0F), brightness);
                 Color lightColor = Color.getHSBColor(hue, saturation - (lightSaturationOffset / 100.0F), brightness);
 
-                if (blockColors.getColoringProperties(AetherIIBlocks.AETHER_GRASS_BLOCK.get()) == BlockTintSources.constant(0)) {
-                    return darkColor.getRGB();
-                }
-                if (blockColors.getColoringProperties(AetherIIBlocks.AETHER_GRASS_BLOCK.get()) == BlockTintSources.constant(1)) {
-                    return midColor.getRGB();
-                }
-                if (blockColors.getColoringProperties(AetherIIBlocks.AETHER_GRASS_BLOCK.get()) == BlockTintSources.constant(2)) {
-                    return lightColor.getRGB();
-                }
-
-                /*
                 switch (tintIndex) {
                     case 0 -> {
                         return darkColor.getRGB();
@@ -115,9 +105,6 @@ public class AetherIIColorResolvers {
                         return defaultColor;
                     }
                 }
-
-                 */
-                return defaultColor;
             }
 
             public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
