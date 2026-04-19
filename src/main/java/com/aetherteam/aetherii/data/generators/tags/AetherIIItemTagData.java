@@ -771,6 +771,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_CROSSBOW.get(),
                 AetherIIItems.GRAVITITE_CROSSBOW.get()
         );
+        this.tag(ItemTags.METAL_NUGGETS).add(
+                AetherIIItems.ARKENIUM_CHIP.get()
+        );
 
         // NeoForge
         this.tag(Tags.Items.BOOKSHELVES).add(

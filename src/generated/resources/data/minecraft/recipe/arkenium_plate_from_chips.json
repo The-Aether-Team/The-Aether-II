@@ -1,17 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
+  "group": "arkenium_plate",
   "key": {
-    "#": "aether_ii:arkenium_chip",
-    "/": "aether_ii:ambrosium_torch"
+    "#": "aether_ii:arkenium_chip"
   },
   "pattern": [
     "###",
-    "#/#",
+    "###",
     "###"
   ],
   "result": {
-    "count": 2,
-    "id": "aether_ii:arkenium_lantern"
+    "id": "aether_ii:arkenium_plate"
   }
 }
