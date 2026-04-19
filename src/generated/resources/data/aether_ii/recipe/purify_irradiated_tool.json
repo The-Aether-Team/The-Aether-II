@@ -8,7 +8,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:irradiated_dust"
           }
         },
@@ -47,7 +46,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:skyroot_axe"
           }
         },
@@ -57,7 +55,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:holystone_axe"
           }
         },
@@ -67,7 +64,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:zanite_axe"
           }
         },
@@ -77,7 +73,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:arkenium_axe"
           }
         },
@@ -87,7 +82,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:gravitite_axe"
           }
         },
@@ -97,7 +91,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:skyroot_pickaxe"
           }
         },
@@ -107,7 +100,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:holystone_pickaxe"
           }
         },
@@ -117,7 +109,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:zanite_pickaxe"
           }
         },
@@ -127,7 +118,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:arkenium_pickaxe"
           }
         },
@@ -137,7 +127,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:gravitite_pickaxe"
           }
         },
@@ -147,7 +136,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:skyroot_shovel"
           }
         },
@@ -157,7 +145,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:holystone_shovel"
           }
         },
@@ -167,7 +154,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:zanite_shovel"
           }
         },
@@ -177,7 +163,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:arkenium_shovel"
           }
         },
@@ -187,7 +172,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:gravitite_shovel"
           }
         },
@@ -197,7 +181,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:skyroot_trowel"
           }
         },
@@ -207,7 +190,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:holystone_trowel"
           }
         },
@@ -217,7 +199,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:zanite_trowel"
           }
         },
@@ -227,7 +208,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:arkenium_trowel"
           }
         },
@@ -237,7 +217,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:gravitite_trowel"
           }
         },

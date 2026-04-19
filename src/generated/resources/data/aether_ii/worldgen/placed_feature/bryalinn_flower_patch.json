@@ -42,9 +42,6 @@
       "heightmap": "MOTION_BLOCKING"
     },
     {
-      "type": "minecraft:biome"
-    },
-    {
       "type": "minecraft:block_predicate_filter",
       "predicate": {
         "type": "minecraft:all_of",

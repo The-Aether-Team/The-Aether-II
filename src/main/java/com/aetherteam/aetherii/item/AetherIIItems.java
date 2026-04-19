@@ -407,7 +407,7 @@ public class AetherIIItems {
 
     public static final DeferredItem<Item> MUSIC_PLAYER = register("music_player", MusicPlayerItem::new, () -> new Item.Properties().stacksTo(1));
 
-    public static final DeferredItem<Item> BROKEN_ITEM = register("broken_item", BrokenItem::new, () -> new Item.Properties().stacksTo(1).delayedComponent(AetherIIDataComponents.BROKEN_STACK.get(), (context) -> new BrokenStack(Items.WOODEN_PICKAXE.getDefaultInstance())));
+    public static final DeferredItem<Item> BROKEN_ITEM = register("broken_item", BrokenItem::new, () -> new Item.Properties().stacksTo(1).component(AetherIIDataComponents.BROKEN_STACK, new BrokenStack(ItemStack.EMPTY)));
 
     private static <T extends Item> DeferredItem<Item> register(String name) {
         return register(name, Item::new);

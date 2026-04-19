@@ -29,9 +29,6 @@
         "min": -2,
         "plateau": 0
       }
-    },
-    {
-      "type": "minecraft:biome"
     }
   ]
 }

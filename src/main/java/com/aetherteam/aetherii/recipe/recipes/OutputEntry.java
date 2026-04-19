@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.recipe.recipes;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -9,6 +10,8 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.random.Weighted;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,19 +26,15 @@ public class OutputEntry {
         public static StreamCodec<RegistryFriendlyByteBuf, ListEntry> STREAM_CODEC = ByteBufCodecs.fromCodecWithRegistries(CODEC);
 
         @Override
-        public List<ItemStack> list() {
-            List<ItemStack> stacks = new ArrayList<>();
+        public List<ItemStackTemplate> list() {
+            List<ItemStackTemplate> stacks = new ArrayList<>();
             this.entries().unwrap().stream().map(Weighted::value).forEach((baseEntry) -> stacks.addAll(baseEntry.list()));
             return stacks;
         }
 
         @Override
         public ItemStack process(RandomSource random) {
-            if (!this.entries().isEmpty()) {
-                return this.entries().getRandomOrThrow(random).process(random);
-            } else {
-                return ItemStack.EMPTY;
-            }
+            return this.entries().getRandomOrThrow(random).process(random);
         }
 
         @Override
@@ -44,17 +43,21 @@ public class OutputEntry {
         }
     }
 
-    public record ItemEntry(ItemStack stack) implements BaseEntry {
-        public static Codec<ItemEntry> CODEC = ItemStack.CODEC.xmap(ItemEntry::new, ItemEntry::stack);
-        public static StreamCodec<RegistryFriendlyByteBuf, ItemEntry> STREAM_CODEC = ItemStack.STREAM_CODEC.map(ItemEntry::new, ItemEntry::stack);
+    public record ItemEntry(ItemStackTemplate stack) implements BaseEntry {
+        public static Codec<ItemEntry> CODEC = ItemStackTemplate.CODEC.xmap(ItemEntry::new, ItemEntry::stack);
+        public static StreamCodec<RegistryFriendlyByteBuf, ItemEntry> STREAM_CODEC = ItemStackTemplate.STREAM_CODEC.map(ItemEntry::new, ItemEntry::stack);
+
+        public ItemEntry(ItemLike itemLike) {
+            this(new ItemStackTemplate(itemLike.asItem()));
+        }
 
         @Override
-        public List<ItemStack> list() {
+        public List<ItemStackTemplate> list() {
             return List.of(this.stack());
         }
 
         public ItemStack process(RandomSource random) {
-            return this.stack();
+            return this.stack().create();
         }
 
         @Override
@@ -63,8 +66,27 @@ public class OutputEntry {
         }
     }
 
+    public record EmptyEntry() implements BaseEntry {
+        public static Codec<EmptyEntry> CODEC = MapCodec.unitCodec(new EmptyEntry());
+        public static StreamCodec<RegistryFriendlyByteBuf, EmptyEntry> STREAM_CODEC = StreamCodec.unit(new EmptyEntry());
+
+        @Override
+        public List<ItemStackTemplate> list() {
+            return List.of();
+        }
+
+        public ItemStack process(RandomSource random) {
+            return ItemStack.EMPTY;
+        }
+
+        @Override
+        public EntryType type() {
+            return EntryType.EMPTY;
+        }
+    }
+
     public interface BaseEntry {
-        List<ItemStack> list();
+        List<ItemStackTemplate> list();
 
         ItemStack process(RandomSource random);
 
@@ -73,7 +95,8 @@ public class OutputEntry {
 
     public enum EntryType implements StringRepresentable {
         LIST(ListEntry.CODEC, ListEntry.STREAM_CODEC),
-        ITEM(ItemEntry.CODEC, ItemEntry.STREAM_CODEC);
+        ITEM(ItemEntry.CODEC, ItemEntry.STREAM_CODEC),
+        EMPTY(EmptyEntry.CODEC, EmptyEntry.STREAM_CODEC);
 
         public static final StringRepresentable.EnumCodec<EntryType> CODEC = StringRepresentable.fromEnum(EntryType::values);
         public static final StreamCodec<RegistryFriendlyByteBuf, EntryType> STREAM_CODEC = ByteBufCodecs.fromCodecWithRegistries(CODEC);

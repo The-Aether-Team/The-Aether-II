@@ -131,9 +131,9 @@ public class HourglassRestoringRecipe implements Recipe<SingleRecipeInputWithRan
 
     @Override
     public List<RecipeDisplay> display() {
-        List<SlotDisplay> results1 = this.results().output1().list().stream().map(ItemStackTemplate::fromNonEmptyStack).map(ItemStackTemplate::item).distinct().map(SlotDisplay.ItemSlotDisplay::new).collect(Collectors.toUnmodifiableList());
-        List<SlotDisplay> results2 = this.results().output2().list().stream().map(ItemStackTemplate::fromNonEmptyStack).map(ItemStackTemplate::item).distinct().map(SlotDisplay.ItemSlotDisplay::new).collect(Collectors.toUnmodifiableList());
-        List<SlotDisplay> results3 = this.results().output3().list().stream().map(ItemStackTemplate::fromNonEmptyStack).map(ItemStackTemplate::item).distinct().map(SlotDisplay.ItemSlotDisplay::new).collect(Collectors.toUnmodifiableList());
+        List<SlotDisplay> results1 = this.results().output1().list().stream().map(ItemStackTemplate::item).distinct().map(SlotDisplay.ItemSlotDisplay::new).collect(Collectors.toUnmodifiableList());
+        List<SlotDisplay> results2 = this.results().output2().list().stream().map(ItemStackTemplate::item).distinct().map(SlotDisplay.ItemSlotDisplay::new).collect(Collectors.toUnmodifiableList());
+        List<SlotDisplay> results3 = this.results().output3().list().stream().map(ItemStackTemplate::item).distinct().map(SlotDisplay.ItemSlotDisplay::new).collect(Collectors.toUnmodifiableList());
         return List.of(new AmberHourglassRecipeDisplay(
                 this.ingredient().display(),
                 AmberFuel.INSTANCE,

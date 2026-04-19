@@ -8,7 +8,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:irradiated_dust"
           }
         },
@@ -24,7 +23,6 @@
   "results": {
     "type": "item",
     "value": {
-      "count": 1,
       "id": "aether_ii:greatoak_leaves"
     }
   }

@@ -15,7 +15,6 @@
       "translate": "advancement.aether_ii.the_holy_isles.desc"
     },
     "icon": {
-      "count": 1,
       "id": "aether_ii:aether_portal_frame"
     },
     "show_toast": false,

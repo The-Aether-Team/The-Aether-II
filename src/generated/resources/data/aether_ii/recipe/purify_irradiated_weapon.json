@@ -8,7 +8,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:irradiated_dust"
           }
         },
@@ -47,7 +46,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:skyroot_shortsword"
           }
         },
@@ -57,7 +55,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:holystone_shortsword"
           }
         },
@@ -67,7 +64,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:zanite_shortsword"
           }
         },
@@ -77,7 +73,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:arkenium_shortsword"
           }
         },
@@ -87,7 +82,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:gravitite_shortsword"
           }
         },
@@ -97,7 +91,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:skyroot_pike"
           }
         },
@@ -107,7 +100,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:holystone_pike"
           }
         },
@@ -117,7 +109,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:zanite_pike"
           }
         },
@@ -127,7 +118,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:arkenium_pike"
           }
         },
@@ -137,7 +127,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:gravitite_pike"
           }
         },
@@ -147,7 +136,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:skyroot_hammer"
           }
         },
@@ -157,7 +145,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:holystone_hammer"
           }
         },
@@ -167,7 +154,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:zanite_hammer"
           }
         },
@@ -177,7 +163,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:arkenium_hammer"
           }
         },
@@ -187,7 +172,6 @@
         "data": {
           "type": "item",
           "value": {
-            "count": 1,
             "id": "aether_ii:gravitite_hammer"
           }
         },

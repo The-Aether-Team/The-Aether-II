@@ -829,7 +829,7 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.ROTSHROOM_PATCH)), 3),
-                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.INFECTED_PATCH)), 1),
+//                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.INFECTED_PATCH)), 1),
                         Pair.of(StructurePoolElement.empty(), 9)
                 ),
                 StructureTemplatePool.Projection.RIGID)

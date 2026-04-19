@@ -13,7 +13,6 @@
           "data": {
             "type": "item",
             "value": {
-              "count": 1,
               "id": "aether_ii:holystone"
             }
           },
@@ -38,7 +37,6 @@
           "data": {
             "type": "item",
             "value": {
-              "count": 1,
               "id": "aether_ii:inert_arkenium"
             }
           },
@@ -63,7 +61,6 @@
           "data": {
             "type": "item",
             "value": {
-              "count": 1,
               "id": "aether_ii:skyroot_planks"
             }
           },

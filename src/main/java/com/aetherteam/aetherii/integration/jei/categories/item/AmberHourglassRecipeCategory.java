@@ -73,7 +73,7 @@ public class AmberHourglassRecipeCategory extends AbstractRecipeCategory<Hourgla
     }
 
     private static SlotDisplay processOutput(OutputEntry.BaseEntry entry) {
-        List<SlotDisplay> result = entry.list().stream().distinct().filter(Objects::nonNull).map((ItemStack stack) -> new SlotDisplay.ItemStackSlotDisplay(ItemStackTemplate.fromNonEmptyStack(stack))).collect(Collectors.toUnmodifiableList());
+        List<SlotDisplay> result = entry.list().stream().distinct().filter(Objects::nonNull).map(SlotDisplay.ItemStackSlotDisplay::new).collect(Collectors.toUnmodifiableList());
         return new SlotDisplay.Composite(result);
     }
 }

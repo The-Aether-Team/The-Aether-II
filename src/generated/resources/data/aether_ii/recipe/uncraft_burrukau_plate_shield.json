@@ -11,7 +11,7 @@
       "value": [
         {
           "data": {
-            "type": "item",
+            "type": "empty",
             "value": {}
           },
           "weight": 25
@@ -20,7 +20,6 @@
           "data": {
             "type": "item",
             "value": {
-              "count": 1,
               "id": "aether_ii:skyroot_stick"
             }
           },

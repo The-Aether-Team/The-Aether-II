@@ -146,7 +146,7 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
 
     @Override
     public List<RecipeDisplay> display() {
-        SlotDisplay resultDisplay = new SlotDisplay.Composite(this.results().list().stream().map((ItemStack stack) -> new SlotDisplay.ItemStackSlotDisplay(ItemStackTemplate.fromNonEmptyStack(stack))).collect(Collectors.toUnmodifiableList()));
+        SlotDisplay resultDisplay = new SlotDisplay.Composite(this.results().list().stream().map(SlotDisplay.ItemStackSlotDisplay::new).collect(Collectors.toUnmodifiableList()));
         HolderSet<Item> ingredients = this.ingredient().getValues();
         Holder<Item> item = ingredients.get(0);
         if (item.is(AetherIITags.Items.IRRADIATED_ITEM)) {
@@ -161,7 +161,7 @@ public class AlkahestPurificationRecipe implements Recipe<SingleRecipeInputWithR
                 this.ingredient().display(),
                 new SlotDisplay.ItemSlotDisplay(AetherIIItems.ARKENIUM_ALKAHEST_CANISTER),
                 resultDisplay,
-                new SlotDisplay.Composite(this.byproducts().list().stream().map((ItemStack stack) -> new SlotDisplay.ItemStackSlotDisplay(ItemStackTemplate.fromNonEmptyStack(stack))).collect(Collectors.toUnmodifiableList())),
+                new SlotDisplay.Composite(this.byproducts().list().stream().map(SlotDisplay.ItemStackSlotDisplay::new).collect(Collectors.toUnmodifiableList())),
                 new SlotDisplay.ItemSlotDisplay(AetherIIBlocks.ALKAHEST_PURIFIER.asItem()),
                 this.alkahestUsage,
                 this.processingTime,

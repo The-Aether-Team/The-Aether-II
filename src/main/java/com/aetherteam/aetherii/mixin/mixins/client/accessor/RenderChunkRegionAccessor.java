@@ -7,6 +7,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(RenderSectionRegion.class)
 public interface RenderChunkRegionAccessor {
-    @Accessor("level")
-    Level aether_ii$getLevel();
+//    @Accessor("level")
+//    Level aether_ii$getLevel();
 }

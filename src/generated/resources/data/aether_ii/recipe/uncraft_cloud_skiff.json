@@ -13,7 +13,6 @@
           "data": {
             "type": "item",
             "value": {
-              "count": 1,
               "id": "aether_ii:skyroot_planks"
             }
           },
@@ -38,7 +37,6 @@
           "data": {
             "type": "item",
             "value": {
-              "count": 1,
               "id": "aether_ii:cold_aercloud"
             }
           },

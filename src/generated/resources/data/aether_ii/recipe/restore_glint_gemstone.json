@@ -7,7 +7,7 @@
   "processing_time": 200,
   "results": {
     "output_1": {
-      "type": "item",
+      "type": "empty",
       "value": {}
     },
     "output_2": {
@@ -17,7 +17,6 @@
           "data": {
             "type": "item",
             "value": {
-              "count": 1,
               "id": "aether_ii:glint_gemstone"
             }
           },
@@ -46,7 +45,7 @@
       ]
     },
     "output_3": {
-      "type": "item",
+      "type": "empty",
       "value": {}
     }
   }
