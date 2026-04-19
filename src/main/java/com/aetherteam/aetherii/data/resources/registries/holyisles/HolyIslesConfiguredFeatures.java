@@ -2284,7 +2284,7 @@ public class HolyIslesConfiguredFeatures {
                                 List.of(
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_CARPET_PATCH), 0.2F),
                                         new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.BRYALINN_MOSS_FLOWER_PATCH), 0.3F),
-                                        new WeightedPlacedFeature(placedFeatures.getOrThrow(HolyIslesPlacedFeatures.MEDIUM_GRASS_PATCH), 0.1F)
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_GRASS_PATCH)), 0.1F) //TODO
                                 ),
                                 PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_VINES), CountPlacement.of(16), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))))),
                         CaveSurface.FLOOR,
@@ -2306,7 +2306,7 @@ public class HolyIslesConfiguredFeatures {
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
                                         new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SHAYELINN_MOSS_CARPET)), 0.4F),
-                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_GRASS_PATCH)), 0.2F)
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_GRASS_PATCH)), 0.2F) //TODO
                                 ),
                                 PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SHAYELINN_MOSS_VINES), CountPlacement.of(16), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))))),
                         CaveSurface.FLOOR,
@@ -2328,7 +2328,7 @@ public class HolyIslesConfiguredFeatures {
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
                                         new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AMBRELINN_MOSS_CARPET)), 0.4F),
-                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_GRASS_PATCH)), 0.2F)
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_GRASS_PATCH)), 0.2F) //TODO
                                 ),
                                 PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AMBRELINN_MOSS_VINES), CountPlacement.of(16), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))))),
                         CaveSurface.FLOOR,
