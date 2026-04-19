@@ -1,9 +1,11 @@
 package com.aetherteam.aetherii.client.renderer.item.color;
 
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIIColorResolvers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.item.ItemTintSource;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,7 +23,7 @@ public record AetherGrassColorSource(int tintIndex, int defaultColor, float dark
 
     @Override
     public int calculate(ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity livingEntity) {
-        return AetherIIColorResolvers.createTriTintGrassColor(this.tintIndex(), this.defaultColor(), this.darkSaturationOffset(), this.lightSaturationOffset());
+        return AetherIIColorResolvers.createTriTintGrassColor(Minecraft.getInstance().getBlockColors(), this.defaultColor(), this.darkSaturationOffset(), this.lightSaturationOffset()).color(AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState());
     }
 
     @Override
