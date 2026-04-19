@@ -6,43 +6,18 @@
       "count": 4
     },
     {
-      "type": "minecraft:in_square"
-    },
-    {
-      "type": "minecraft:heightmap",
-      "heightmap": "WORLD_SURFACE_WG"
-    },
-    {
-      "type": "minecraft:biome"
-    },
-    {
       "type": "minecraft:random_offset",
       "xz_spread": {
-        "type": "minecraft:trapezoid",
-        "max": 1,
-        "min": -1,
-        "plateau": 0
-      },
-      "y_spread": {
         "type": "minecraft:trapezoid",
         "max": 4,
         "min": -4,
         "plateau": 0
-      }
-    },
-    {
-      "type": "minecraft:in_square"
-    },
-    {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "minecraft:uniform",
-        "max_inclusive": {
-          "below_top": 0
-        },
-        "min_inclusive": {
-          "above_bottom": 0
-        }
+      },
+      "y_spread": {
+        "type": "minecraft:trapezoid",
+        "max": 1,
+        "min": -1,
+        "plateau": 0
       }
     },
     {

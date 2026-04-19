@@ -2,18 +2,28 @@
   "feature": "aether_ii:blueberry_bush",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 55
+      "type": "minecraft:noise_threshold_count",
+      "above_noise": 0,
+      "below_noise": 1,
+      "noise_level": 0.1
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 10
     },
     {
       "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:heightmap",
-      "heightmap": "WORLD_SURFACE_WG"
+      "heightmap": "MOTION_BLOCKING"
     },
     {
       "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:count",
+      "count": 55
     },
     {
       "type": "minecraft:random_offset",
@@ -29,26 +39,6 @@
         "min": -3,
         "plateau": 0
       }
-    },
-    {
-      "type": "minecraft:noise_threshold_count",
-      "above_noise": 0,
-      "below_noise": 2,
-      "noise_level": -0.1
-    },
-    {
-      "type": "minecraft:rarity_filter",
-      "chance": 10
-    },
-    {
-      "type": "aether_ii:improved_layer_placement",
-      "count": {
-        "type": "minecraft:uniform",
-        "max_inclusive": 1,
-        "min_inclusive": 0
-      },
-      "heightmap": "MOTION_BLOCKING",
-      "verticalBounds": 4
     },
     {
       "type": "minecraft:block_predicate_filter",
@@ -78,8 +68,11 @@
             ]
           },
           {
-            "type": "minecraft:matching_block_tag",
-            "tag": "minecraft:air"
+            "type": "minecraft:replaceable"
+          },
+          {
+            "type": "minecraft:matching_fluids",
+            "fluids": "minecraft:empty"
           }
         ]
       }

@@ -2,18 +2,28 @@
   "feature": "aether_ii:holystone_rocks",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 4
+      "type": "minecraft:noise_threshold_count",
+      "above_noise": 2,
+      "below_noise": 1,
+      "noise_level": 0.1
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 2
     },
     {
       "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:heightmap",
-      "heightmap": "WORLD_SURFACE_WG"
+      "heightmap": "MOTION_BLOCKING_NO_LEAVES"
     },
     {
       "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:count",
+      "count": 4
     },
     {
       "type": "minecraft:random_offset",
@@ -29,20 +39,6 @@
         "min": -2,
         "plateau": 0
       }
-    },
-    {
-      "type": "minecraft:noise_threshold_count",
-      "above_noise": 0,
-      "below_noise": 1,
-      "noise_level": 0.1
-    },
-    {
-      "type": "minecraft:rarity_filter",
-      "chance": 2
-    },
-    {
-      "type": "minecraft:heightmap",
-      "heightmap": "MOTION_BLOCKING_NO_LEAVES"
     },
     {
       "type": "minecraft:block_predicate_filter",

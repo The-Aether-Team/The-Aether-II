@@ -25,11 +25,9 @@ import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
-import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.InclusiveRange;
-import net.minecraft.util.Util;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.*;
 import net.minecraft.world.level.block.Block;
@@ -448,20 +446,20 @@ public class HolyIslesConfiguredFeatures {
         }
 
         register(context, GRASS_FIELD, AetherIIFeatures.AETHER_GRASS.get(), (
-                        new SimpleBlockConfiguration(
-                                new NoiseProvider(
-                                        2345L,
-                                        new NormalNoise.NoiseParameters(0, 1.0),
-                                        0.02F,
-                                        List.of(
-                                                AetherIIBlocks.TALL_AETHER_GRASS.get().defaultBlockState(),
-                                                AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(),
-                                                AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(),
-                                                AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(),
-                                                AetherIIBlocks.TALL_AETHER_GRASS.get().defaultBlockState()
-                                        )
+                new SimpleBlockConfiguration(
+                        new NoiseProvider(
+                                2345L,
+                                new NormalNoise.NoiseParameters(0, 1.0),
+                                0.02F,
+                                List.of(
+                                        AetherIIBlocks.TALL_AETHER_GRASS.get().defaultBlockState(),
+                                        AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(),
+                                        AetherIIBlocks.SHORT_AETHER_GRASS.get().defaultBlockState(),
+                                        AetherIIBlocks.MEDIUM_AETHER_GRASS.get().defaultBlockState(),
+                                        AetherIIBlocks.TALL_AETHER_GRASS.get().defaultBlockState()
                                 )
                         )
+                )
         ));
         register(context, SMALL_GRASS_PATCH, AetherIIFeatures.AETHER_GRASS.get(), (
                 new SimpleBlockConfiguration(
@@ -1947,18 +1945,14 @@ public class HolyIslesConfiguredFeatures {
                 UniformInt.of(120, 180),
                 Optional.of(PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                         List.of(new WeightedPlacedFeature( PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE_CRYSTALS),
-                                Util.copyAndAdd(
-                                        VegetationPlacements.worldSurfaceSquaredWithCount(20),
-                                        RandomOffsetPlacement.ofTriangle(4, 4),
-                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
-                                ).toArray(new PlacementModifier[]{})
+                                CountPlacement.of(20),
+                                RandomOffsetPlacement.ofTriangle(4, 4),
+                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                         ), 0.35F)),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE),
-                                Util.copyAndAdd(
-                                        VegetationPlacements.worldSurfaceSquaredWithCount(20),
-                                        RandomOffsetPlacement.ofTriangle(4, 4),
-                                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.above(), AetherIIBlocks.ARCTIC_PACKED_ICE.get()), BlockPredicate.ONLY_IN_AIR_PREDICATE))
-                                ).toArray(new PlacementModifier[]{})
+                                CountPlacement.of(20),
+                                RandomOffsetPlacement.ofTriangle(4, 4),
+                                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.above(), AetherIIBlocks.ARCTIC_PACKED_ICE.get()), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                         )))),
                 0.25F,
                 AetherIITags.Blocks.ARCTIC_COAST_GENERATES_ON

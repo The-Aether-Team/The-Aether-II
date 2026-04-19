@@ -23,16 +23,6 @@
                 "count": 20
               },
               {
-                "type": "minecraft:in_square"
-              },
-              {
-                "type": "minecraft:heightmap",
-                "heightmap": "WORLD_SURFACE_WG"
-              },
-              {
-                "type": "minecraft:biome"
-              },
-              {
                 "type": "minecraft:random_offset",
                 "xz_spread": {
                   "type": "minecraft:trapezoid",
@@ -79,16 +69,6 @@
                   {
                     "type": "minecraft:count",
                     "count": 20
-                  },
-                  {
-                    "type": "minecraft:in_square"
-                  },
-                  {
-                    "type": "minecraft:heightmap",
-                    "heightmap": "WORLD_SURFACE_WG"
-                  },
-                  {
-                    "type": "minecraft:biome"
                   },
                   {
                     "type": "minecraft:random_offset",
