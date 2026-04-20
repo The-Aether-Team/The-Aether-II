@@ -1576,7 +1576,7 @@ public class HolyIslesConfiguredFeatures {
                         new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(), 10).add(AetherIIBlocks.MYCELIAL_AETHER_DIRT.get().defaultBlockState(), 15).build()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SMALL_MAGNETIC_SHROOM)), 0.2F)),
-                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MAGNETIC_SHROOM_PATCH)))), //TODO MYCELIAL_MAGNETIC_SHROOM_PATCH
+                                placedFeatures.getOrThrow(HolyIslesPlacedFeatures.MYCELIAL_MAGNETIC_SHROOM_PATCH))),
                         CaveSurface.FLOOR,
                         UniformInt.of(1, 3),
                         0.25F,
@@ -1597,7 +1597,7 @@ public class HolyIslesConfiguredFeatures {
                                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SMALL_MAGNETIC_SHROOM)), 0.2F),
                                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_MAGNETIC_SHROOM)), 0.15F),
                                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HUGE_MAGNETIC_SHROOM)), 0.1F)),
-                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.MAGNETIC_SHROOM_PATCH)))), //TODO MYCELIAL_MAGNETIC_SHROOM_PATCH
+                                placedFeatures.getOrThrow(HolyIslesPlacedFeatures.MYCELIAL_MAGNETIC_SHROOM_PATCH))),
                         CaveSurface.FLOOR,
                         UniformInt.of(1, 3),
                         0.25F,

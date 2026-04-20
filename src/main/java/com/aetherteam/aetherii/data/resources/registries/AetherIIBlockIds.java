@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.block;
+package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
 import net.minecraft.core.registries.Registries;

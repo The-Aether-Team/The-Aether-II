@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.item;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIEntities;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIEntityIds;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
@@ -925,7 +925,7 @@ public class AetherIICreativeTabs {
             }).build());
 
     public static ItemStack getMoaBook() {
-        final String selector = "entity @e[type=" + AetherIIEntities.MOA.identifier() + ",limit=1,sort=nearest] ";
+        final String selector = "entity @e[type=" + AetherIIEntityIds.MOA.identifier() + ",limit=1,sort=nearest] ";
         final String dataMerge = "data merge " + selector;
         final String dataRemove = "data remove " + selector;
 

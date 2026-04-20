@@ -6,8 +6,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 
-//TODO: figure out proper naming for the class or we should merge it with AetherIIEntityTypes
-public class AetherIIEntities {
+public class AetherIIEntityIds {
     //Passive
     public static final ResourceKey<EntityType<?>> PHYG = createKey("phyg");
     public static final ResourceKey<EntityType<?>> FLYING_COW = createKey("flying_cow");

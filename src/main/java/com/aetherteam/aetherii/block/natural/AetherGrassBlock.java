@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.block.natural;
 
-import com.aetherteam.aetherii.block.AetherIIBlockIds;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIBlockIds;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.holyisles.HolyIslesPlacedFeatures;
 import com.mojang.serialization.MapCodec;
