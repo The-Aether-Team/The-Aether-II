@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.event.hooks;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
@@ -29,10 +28,12 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
@@ -210,6 +211,15 @@ public class PlayerHooks {
                 player.swing(hand);
                 player.setItemInHand(hand, filledBucket);
             }
+        }
+    }
+
+    public static void useGoldenWyndberry(Entity target, Player player, InteractionHand hand) {
+        ItemStack itemInHand = player.getItemInHand(hand);
+        if (target instanceof AgeableMob ageableMob)
+
+            if (itemInHand.getItem() == AetherIIItems.GOLDEN_WYNDBERRY.get() && ageableMob.isBaby() && ageableMob.ageLockParticleTimer == 0 && !target.is(EntityTypeTags.CANNOT_BE_AGE_LOCKED)) {
+                AgeableMob.setAgeLocked(ageableMob, ageableMob::isAgeLocked, player, itemInHand, mob -> ageableMob.setAgeLockedData());
         }
     }
 
