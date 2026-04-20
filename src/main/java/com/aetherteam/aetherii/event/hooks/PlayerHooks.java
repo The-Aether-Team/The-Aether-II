@@ -22,6 +22,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -227,6 +228,7 @@ public class PlayerHooks {
                 level.addFreshEntity(itemEntity);
                 player.swing(hand);
                 target.level().playSound(null, target.blockPosition(), SoundEvents.PLAYER_BURP, SoundSource.HOSTILE, 1.0F, 1.0F);
+                ParticleUtils.spawnParticleOnFace(level, target.blockPosition(), Direction.UP, new DustParticleOptions(0xFFD84D, 0.5F), Vec3.ZERO, 0.5F);
             }
         }
     }

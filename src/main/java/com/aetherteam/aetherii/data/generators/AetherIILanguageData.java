@@ -1305,7 +1305,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.AMBROSIUM_SHARD.get(), 1, "§9Ability:§r Enchants Nature");
         this.addPerItemAbilityTooltip(AetherIIItems.IRRADIATED_DUST.get(), 1, "§9Ability:§r Irradiates Nature");
 
-        this.addPerItemAbilityTooltip(AetherIIItems.GOLDEN_WYNDBERRY.get(), 1, "§9Ability:§r Prevents animal aging");
+        this.addPerItemAbilityTooltip(AetherIIItems.GOLDEN_WYNDBERRY.get(), 1, "§9Ability:§r Prevents Baby Animal Aging");
     }
 
     private void addItemTooltips() {
