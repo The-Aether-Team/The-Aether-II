@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.client.renderer.item.color.EffectBuildupColorSour
 import com.aetherteam.aetherii.client.renderer.item.model.EmissiveModel;
 import com.aetherteam.aetherii.client.renderer.item.model.MusicPlayerDiscModel;
 //import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
+import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.BetterIsUsingItem;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.HoldingShift;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.LassoThrow;
@@ -65,21 +66,21 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
                 ItemModelUtils.when(CrossbowItem.ChargeType.ARROW, arrow)));
     }
 
-    public void generateModeledShield(Item item, Identifier particle, String type) {
-//        ShieldModel.Textures textures = new ShieldModel.Textures(
-//                List.of(TextureMapping.getItemTexture(item, "_front_0").sprite(),
-//                        TextureMapping.getItemTexture(item, "_front_1").sprite(),
-//                        TextureMapping.getItemTexture(item, "_front_2").sprite(),
-//                        TextureMapping.getItemTexture(item, "_front_3").sprite()),
-//                List.of(TextureMapping.getItemTexture(item, "_back_0").sprite(),
-//                        TextureMapping.getItemTexture(item, "_back_1").sprite(),
-//                        TextureMapping.getItemTexture(item, "_back_2").sprite(),
-//                        TextureMapping.getItemTexture(item, "_back_3").sprite()),
-//                TextureMapping.getItemTexture(item, "_handle").sprite(),
-//                particle);
-//        ItemModel.Unbaked normal = new ShieldModel.Unbaked(Identifier.fromNamespaceAndPath(AetherII.MODID, "item/" + type), textures);
-//        ItemModel.Unbaked blocking = new ShieldModel.Unbaked(Identifier.fromNamespaceAndPath(AetherII.MODID, "item/shield_blocking"), textures);
-//        this.generateBooleanDispatch(item, ItemModelUtils.isUsingItem(), blocking, normal);
+    public void generateModeledShield(Item item, Material particle, String type) {
+        ShieldModel.Textures textures = new ShieldModel.Textures(
+                List.of(TextureMapping.getItemTexture(item, "_front_0"),
+                        TextureMapping.getItemTexture(item, "_front_1"),
+                        TextureMapping.getItemTexture(item, "_front_2"),
+                        TextureMapping.getItemTexture(item, "_front_3")),
+                List.of(TextureMapping.getItemTexture(item, "_back_0"),
+                        TextureMapping.getItemTexture(item, "_back_1"),
+                        TextureMapping.getItemTexture(item, "_back_2"),
+                        TextureMapping.getItemTexture(item, "_back_3")),
+                TextureMapping.getItemTexture(item, "_handle"),
+                particle);
+        ItemModel.Unbaked normal = new ShieldModel.Unbaked(Identifier.fromNamespaceAndPath(AetherII.MODID, "item/" + type), textures);
+        ItemModel.Unbaked blocking = new ShieldModel.Unbaked(Identifier.fromNamespaceAndPath(AetherII.MODID, "item/shield_blocking"), textures);
+        this.generateBooleanDispatch(item, ItemModelUtils.isUsingItem(), blocking, normal);
     }
 
     public void generateDartShooter(Item item) {

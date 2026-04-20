@@ -30,10 +30,10 @@ import java.util.List;
 //        }
 //        BlockState state = data.state();
 //        List<BlockStateModelPart> newParts = new ArrayList<>();
-//        Minecraft.getInstance().getModelManager().getBlockModelShaper().getBlockModel(state).collectParts(blockAndTintGetter, blockPos, state, randomSource, newParts);
+//        Minecraft.getInstance().getModelManager().getBlockStateModelSet().get(state).collectParts(blockAndTintGetter, blockPos, state, randomSource, newParts);
 //        for (BlockStateModelPart part : newParts) {
-//            if (part instanceof SimpleModelWrapper simpleModelWrapper && simpleModelWrapper.getRenderType(state) != ChunkSectionLayer.SOLID) {
-//                list.add(new SimpleModelWrapper(simpleModelWrapper.quads(), simpleModelWrapper.useAmbientOcclusion(), this.particleMaterial(blockAndTintGetter, blockPos, blockState), ChunkSectionLayer.SOLID));
+//            if (part instanceof SimpleModelWrapper simpleModelWrapper) { // && simpleModelWrapper.getRenderType(state) != ChunkSectionLayer.SOLID
+//                list.add(new SimpleModelWrapper(simpleModelWrapper.quads(), simpleModelWrapper.useAmbientOcclusion(), this.particleMaterial(blockAndTintGetter, blockPos, blockState)));
 //            } else {
 //                list.add(part);
 //            }
@@ -47,6 +47,6 @@ import java.util.List;
 //            return super.particleMaterial(level, pos, state);
 //        }
 //        BlockState mimicState = data.state();
-//        return Minecraft.getInstance().getModelManager().getBlocksModelShaper().getBlockModel(mimicState).particleMaterial(level, pos, mimicState);
+//        return Minecraft.getInstance().getModelManager().getBlockStateModelSet().get(mimicState).particleMaterial(level, pos, mimicState);
 //    }
 //}

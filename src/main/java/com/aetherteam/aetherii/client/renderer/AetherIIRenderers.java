@@ -275,7 +275,7 @@ public class AetherIIRenderers {
 
     public static void registerItemModels(RegisterItemModelsEvent event) {
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "emissive"), EmissiveModel.Unbaked.MAP_CODEC);
-//        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "shield"), ShieldModel.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "shield"), ShieldModel.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "music_player_disc"), MusicPlayerDiscModel.Unbaked.MAP_CODEC);
 //        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "mural"), MuralItemModel.Unbaked.MAP_CODEC);
     }
@@ -333,7 +333,7 @@ public class AetherIIRenderers {
                 AetherIIBlocks.BOSS_DOORWAY_BLOCK,
                 AetherIIBlocks.TREASURE_DOORWAY_BLOCK);
 
-        getModels(event.getBakingResult().blockStateModels(), overlaidLeafBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new OverlaidLeavesModel(entry.getValue())));
+//        getModels(event.getBakingResult().blockStateModels(), overlaidLeafBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new OverlaidLeavesModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), breakingFixBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new BreakingFixModel(entry.getValue())));
 //        getModels(event.getBakingResult().blockStateModels(), List.of(AetherIIBlocks.MURAL)).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new MuralModel(entry.getValue()))); //todo
