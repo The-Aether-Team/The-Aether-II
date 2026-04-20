@@ -1,5 +1,5 @@
 {
-  "parent": "aether_ii:enchanted_aether_grass",
+  "parent": "aether_ii:trowel",
   "criteria": {
     "aechor_cutting": {
       "conditions": {

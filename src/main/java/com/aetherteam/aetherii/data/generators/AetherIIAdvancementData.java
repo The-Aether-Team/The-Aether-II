@@ -120,7 +120,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "enchanted_aether_grass"));
 
             AdvancementHolder plantCutting = Advancement.Builder.advancement()
-                    .parent(enchantedAetherGrass)
+                    .parent(trowel)
                     .display(AetherIIBlocks.CARRION_CUTTING.get(),
                             Component.translatable("advancement.aether_ii.plant_cutting"),
                             Component.translatable("advancement.aether_ii.plant_cutting.desc").withStyle(ChatFormatting.AQUA),
@@ -130,6 +130,16 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                     .addCriterion("aechor_cutting", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.AECHOR_CUTTING.get()))
                     .addCriterion("carrion_cutting", InventoryChangeTrigger.TriggerInstance.hasItems(AetherIIBlocks.CARRION_CUTTING.get()))
                     .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "plant_cutting"));
+
+            AdvancementHolder goldenWyndberry = Advancement.Builder.advancement()
+                    .parent(plantCutting)
+                    .display(AetherIIItems.GOLDEN_WYNDBERRY.get(),
+                            Component.translatable("advancement.aether_ii.golden_wyndberry"),
+                            Component.translatable("advancement.aether_ii.golden_wyndberry.desc").withStyle(ChatFormatting.AQUA),
+                            null,
+                            AdvancementType.TASK, true, true, false)
+                    .addCriterion("golden_wyndberry", itemUsedOnSpecificEntity(ItemPredicate.Builder.item().of(items, AetherIIItems.GOLDEN_AMBER.get()), EntityPredicate.Builder.entity().of(entityTypes, AetherIIEntityTypes.CARRION_SPROUT.get())))
+                    .save(consumer, Identifier.fromNamespaceAndPath(AetherII.MODID, "golden_wyndberry"));
 
 
             AdvancementHolder ambrosium = Advancement.Builder.advancement()

@@ -229,6 +229,9 @@ public class PlayerHooks {
                 player.swing(hand);
                 target.level().playSound(null, target.blockPosition(), SoundEvents.PLAYER_BURP, SoundSource.HOSTILE, 1.0F, 1.0F);
                 ParticleUtils.spawnParticleOnFace(level, target.blockPosition(), Direction.UP, new DustParticleOptions(0xFFD84D, 0.5F), Vec3.ZERO, 0.5F);
+                if (player instanceof ServerPlayer serverPlayer) {
+                    CriteriaTriggers.PLAYER_INTERACTED_WITH_ENTITY.trigger(serverPlayer, itemInHand, target);
+                }
             }
         }
     }
