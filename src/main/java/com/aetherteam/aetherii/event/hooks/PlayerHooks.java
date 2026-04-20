@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.block.natural.Snowable;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.monster.CarrionSprout;
 import com.aetherteam.aetherii.entity.passive.FlyingCow;
 import com.aetherteam.aetherii.entity.passive.MountableAnimal;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -40,6 +41,7 @@ import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.cow.Cow;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
@@ -214,12 +216,28 @@ public class PlayerHooks {
         }
     }
 
+    public static void feedCarrionSprout(Level level, Entity target, Player player, InteractionHand hand) {
+        ItemStack itemInHand = player.getItemInHand(hand);
+        if (target instanceof CarrionSprout) {
+            ItemStack heldStack = player.getItemInHand(hand);
+            if (itemInHand.getItem() == AetherIIItems.GOLDEN_AMBER.get()) {
+                heldStack.consume(1, player);
+                ItemEntity itemEntity = new ItemEntity(level, target.getX(), target.getY(), target.getZ(), AetherIIItems.GOLDEN_WYNDBERRY.toStack());
+                itemEntity.setDefaultPickUpDelay();
+                level.addFreshEntity(itemEntity);
+                player.swing(hand);
+                target.level().playSound(null, target.blockPosition(), SoundEvents.PLAYER_BURP, SoundSource.HOSTILE, 1.0F, 1.0F);
+            }
+        }
+    }
+
     public static void useGoldenWyndberry(Entity target, Player player, InteractionHand hand) {
         ItemStack itemInHand = player.getItemInHand(hand);
-        if (target instanceof AgeableMob ageableMob)
-
+        if (target instanceof AgeableMob ageableMob) {
             if (itemInHand.getItem() == AetherIIItems.GOLDEN_WYNDBERRY.get() && ageableMob.isBaby() && ageableMob.ageLockParticleTimer == 0 && !target.is(EntityTypeTags.CANNOT_BE_AGE_LOCKED)) {
                 AgeableMob.setAgeLocked(ageableMob, ageableMob::isAgeLocked, player, itemInHand, mob -> ageableMob.setAgeLockedData());
+                player.swing(hand);
+            }
         }
     }
 
