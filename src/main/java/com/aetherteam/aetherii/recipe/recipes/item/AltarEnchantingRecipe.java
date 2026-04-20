@@ -96,8 +96,7 @@ public class AltarEnchantingRecipe extends SingleItemRecipe {
     @Override
     public List<RecipeDisplay> display() {
         if (this.input().getCustomIngredient() == null && this.input().getValues().contains(this.result().typeHolder())) {
-//            ItemStackTemplate input = this.result().apply(DataComponentPatch.builder().set(DataComponents.DAMAGE, this.result().create().getMaxDamage()).build()); //TODO
-            ItemStackTemplate input = this.result();
+            ItemStackTemplate input = new ItemStackTemplate(this.result().item(), this.result().count(), DataComponentPatch.builder().set(DataComponents.DAMAGE, this.result().create().getMaxDamage()).build());
             return List.of(new AltarRecipeDisplay(
                     new SlotDisplay.ItemStackSlotDisplay(input),
                     new SlotDisplay.TagSlotDisplay(AetherIITags.Items.ALTAR_FUEL),

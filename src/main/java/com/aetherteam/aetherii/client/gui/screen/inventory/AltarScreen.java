@@ -56,6 +56,7 @@ public class AltarScreen extends AbstractRecipeBookScreen<AltarMenu> implements 
 
     @Override
     public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
         int i = this.leftPos;
         int j = this.topPos;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, ALTAR_TEXTURE, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);

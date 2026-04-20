@@ -50,6 +50,7 @@ public class AmberHourglassScreen extends AbstractRecipeBookScreen<AmberHourglas
 
     @Override
     public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
         int i = this.leftPos;
         int j = this.topPos;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, AMBER_HOURGLASS_TEXTURE, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);

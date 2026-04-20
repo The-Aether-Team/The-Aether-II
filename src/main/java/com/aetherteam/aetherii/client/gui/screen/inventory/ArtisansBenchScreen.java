@@ -44,6 +44,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
 
     @Override
     public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
         int i = this.leftPos;
         int j = this.topPos;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, BG_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);

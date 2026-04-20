@@ -38,7 +38,9 @@ public class HolystoneFurnaceScreen extends AbstractRecipeBookScreen<HolystoneFu
         return new ScreenPosition(this.leftPos + 20, this.height / 2 - 49);
     }
 
-    protected void renderBg(GuiGraphicsExtractor guiGraphics, float partialTick, int mouseX, int mouseY) {
+    @Override
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
         int i = this.leftPos;
         int j = this.topPos;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/holystone_furnace.png"), i, j, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);
@@ -46,7 +48,6 @@ public class HolystoneFurnaceScreen extends AbstractRecipeBookScreen<HolystoneFu
             int l = Mth.ceil(this.menu.getLitProgress() * 13.0F) + 1;
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Identifier.withDefaultNamespace("container/furnace/lit_progress"), 14, 14, 0, 14 - l, i + 56, j + 36 + 14 - l, 14, l);
         }
-
         int j1 = Mth.ceil(this.menu.getBurnProgress() * 24.0F);
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Identifier.withDefaultNamespace("container/furnace/burn_progress"), 24, 16, 0, 0, i + 79, j + 34, j1, 16);
     }

@@ -77,7 +77,7 @@ public class HourglassRestoringRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public ResourceKey<Recipe<?>> defaultId() { //TODO: not sure if this is correctly coded
+    public ResourceKey<Recipe<?>> defaultId() {
         return RecipeBuilder.getDefaultRecipeId(this.results.output1().process(RandomSource.create()));
     }
 }
