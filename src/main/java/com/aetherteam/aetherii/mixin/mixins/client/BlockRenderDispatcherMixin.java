@@ -34,13 +34,5 @@ import java.util.function.Function;
 //            renderer.getModelRenderer().tesselateBlock(level, snowParts, snow, pos, poseStack, vertexConsumer, checkSides, OverlayTexture.NO_OVERLAY);
 //        }
 //    }
-//
-//    @WrapOperation(method = "renderBreakingTexture(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/BlockAndTintGetter;Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/block/model/BlockStateModel;collectParts(Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/util/RandomSource;Ljava/util/List;)V"))
-//    private static void renderBreakingTexture(BlockStateModel instance, BlockAndTintGetter blockAndTintGetter, BlockPos pos, BlockState state, RandomSource randomSource, List<BlockStateModelPart> list, Operation<Void> original) {
-//        if (instance instanceof BreakingFixModel breakingFixModel) {
-//            breakingFixModel.collectBreakingParts(blockAndTintGetter, pos, state, randomSource, list);
-//        } else {
-//            original.call(instance, blockAndTintGetter, pos, state, randomSource, list);
-//        }
-//    }
+
 //}

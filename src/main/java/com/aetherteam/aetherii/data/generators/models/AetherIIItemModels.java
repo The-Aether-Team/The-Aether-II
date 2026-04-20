@@ -89,9 +89,8 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
 
         this.generateFlatItem(AetherIIItems.SCATTERGLASS_BOLT.get(), ModelTemplates.FLAT_ITEM);
 
-//        this.generateHammerOfDemolition(AetherIIItems.HAMMER_OF_DEMOLITION.get());
-//        this.generateBrokenItem(AetherIIItems.HAMMER_OF_DEMOLITION.get());
-        this.generateFlatItem(AetherIIItems.HAMMER_OF_DEMOLITION.get(), ModelTemplates.FLAT_ITEM);
+        this.generateHammerOfDemolition(AetherIIItems.HAMMER_OF_DEMOLITION.get());
+        this.generateBrokenItem(AetherIIItems.HAMMER_OF_DEMOLITION.get());
 
         // Armor
         this.generateDyedArmorItem(AetherIIItems.BEAST_PELT_HELMET.get(), 0xFFCFEEF9);

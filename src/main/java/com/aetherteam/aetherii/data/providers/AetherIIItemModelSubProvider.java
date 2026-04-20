@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.item.color.EffectBuildupColorSource;
-//import com.aetherteam.aetherii.client.renderer.item.model.EmissiveModel;
+import com.aetherteam.aetherii.client.renderer.item.model.EmissiveModel;
 import com.aetherteam.aetherii.client.renderer.item.model.MusicPlayerDiscModel;
 //import com.aetherteam.aetherii.client.renderer.item.model.ShieldModel;
 import com.aetherteam.aetherii.client.renderer.item.properties.conditional.BetterIsUsingItem;
@@ -106,31 +106,31 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
     }
 
     public void generateHammerOfDemolition(Item item) {
-//        Identifier inventorySprite = ModelTemplates.FLAT_HANDHELD_ITEM.create(item, TextureMapping.layer0(item), this.modelOutput); //todo
-//        List<SelectItemModel.SwitchCase<ItemDisplayContext>> normalList = List.of(
-//                ItemModelUtils.when(ItemDisplayContext.GUI, ItemModelUtils.plainModel(inventorySprite)),
-//                ItemModelUtils.when(ItemDisplayContext.GROUND, ItemModelUtils.plainModel(inventorySprite)),
-//                ItemModelUtils.when(ItemDisplayContext.FIXED, ItemModelUtils.plainModel(inventorySprite))
-//        );
-//
-//        Identifier melee = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.create(ModelLocationUtils.getModelLocation(item, "_held"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held")), this.modelOutput);
-//        Identifier meleeEmissive = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.create(ModelLocationUtils.getModelLocation(item, "_held_emissive"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held_emissive")), this.modelOutput);
-//        Identifier ranged = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.create(ModelLocationUtils.getModelLocation(item, "_held_ranged"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held_ranged")), this.modelOutput);
-//        Identifier rangedEmissive = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.create(ModelLocationUtils.getModelLocation(item, "_held_ranged_emissive"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held_ranged_emissive")), this.modelOutput);
-//
-//        Identifier head = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HEAD.create(item, AetherIITextureMappings.emissive(TextureMapping.getItemTexture(item, "_head")), this.modelOutput);
-//        Identifier headReady = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HEAD_READY.create(item, AetherIITextureMappings.emissive(TextureMapping.getItemTexture(item, "_head_ranged")), this.modelOutput);
-//        Identifier headDeployed = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HEAD_DEPLOYED.create(item, AetherIITextureMappings.emissive(TextureMapping.getItemTexture(item, "_head_ranged")), this.modelOutput);
-//
-//        ItemModel.Unbaked model = ItemModelUtils.composite(ItemModelUtils.plainModel(melee), ItemModelUtils.plainModel(head), new EmissiveModel.Unbaked(meleeEmissive));
-//        ItemModel.Unbaked readyModel = ItemModelUtils.composite(ItemModelUtils.plainModel(ranged), ItemModelUtils.plainModel(headReady), new EmissiveModel.Unbaked(rangedEmissive));
-//        ItemModel.Unbaked deployedModel = ItemModelUtils.composite(ItemModelUtils.plainModel(ranged), ItemModelUtils.plainModel(headDeployed), new EmissiveModel.Unbaked(rangedEmissive));
-//
-//        ItemModel.Unbaked finalModel = ItemModelUtils.select(new DisplayContext(),
-//                ItemModelUtils.rangeSelect(new BetterCooldown(), ItemModelUtils.conditional(new HoldingShift(), readyModel, model), ItemModelUtils.override(deployedModel, 0.01F)),
-//                normalList
-//        );
-//        this.itemModelOutput.accept(item, finalModel);
+        Identifier inventorySprite = ModelTemplates.FLAT_HANDHELD_ITEM.create(item, TextureMapping.layer0(item), this.modelOutput); //todo
+        List<SelectItemModel.SwitchCase<ItemDisplayContext>> normalList = List.of(
+                ItemModelUtils.when(ItemDisplayContext.GUI, ItemModelUtils.plainModel(inventorySprite)),
+                ItemModelUtils.when(ItemDisplayContext.GROUND, ItemModelUtils.plainModel(inventorySprite)),
+                ItemModelUtils.when(ItemDisplayContext.FIXED, ItemModelUtils.plainModel(inventorySprite))
+        );
+
+        Identifier melee = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.create(ModelLocationUtils.getModelLocation(item, "_held"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held")), this.modelOutput);
+        Identifier meleeEmissive = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.create(ModelLocationUtils.getModelLocation(item, "_held_emissive"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held_emissive")), this.modelOutput);
+        Identifier ranged = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.create(ModelLocationUtils.getModelLocation(item, "_held_ranged"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held_ranged")), this.modelOutput);
+        Identifier rangedEmissive = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HANDLE.create(ModelLocationUtils.getModelLocation(item, "_held_ranged_emissive"), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_held_ranged_emissive")), this.modelOutput);
+
+        Identifier head = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HEAD.create(item, AetherIITextureMappings.emissive(TextureMapping.getItemTexture(item, "_head")), this.modelOutput);
+        Identifier headReady = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HEAD_READY.create(item, AetherIITextureMappings.emissive(TextureMapping.getItemTexture(item, "_head_ranged")), this.modelOutput);
+        Identifier headDeployed = AetherIIModelTemplates.HAMMER_OF_DEMOLITION_HEAD_DEPLOYED.create(item, AetherIITextureMappings.emissive(TextureMapping.getItemTexture(item, "_head_ranged")), this.modelOutput);
+
+        ItemModel.Unbaked model = ItemModelUtils.composite(ItemModelUtils.plainModel(melee), ItemModelUtils.plainModel(head), new EmissiveModel.Unbaked(meleeEmissive));
+        ItemModel.Unbaked readyModel = ItemModelUtils.composite(ItemModelUtils.plainModel(ranged), ItemModelUtils.plainModel(headReady), new EmissiveModel.Unbaked(rangedEmissive));
+        ItemModel.Unbaked deployedModel = ItemModelUtils.composite(ItemModelUtils.plainModel(ranged), ItemModelUtils.plainModel(headDeployed), new EmissiveModel.Unbaked(rangedEmissive));
+
+        ItemModel.Unbaked finalModel = ItemModelUtils.select(new DisplayContext(),
+                ItemModelUtils.rangeSelect(new BetterCooldown(), ItemModelUtils.conditional(new HoldingShift(), readyModel, model), ItemModelUtils.override(deployedModel, 0.01F)),
+                normalList
+        );
+        this.itemModelOutput.accept(item, finalModel);
     }
 
     public void generateDyedArmorItem(Item item, int defaultColor) {
