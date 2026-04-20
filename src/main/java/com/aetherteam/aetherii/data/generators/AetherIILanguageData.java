@@ -2263,7 +2263,7 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
     @Override
     public void add(EntityType<?> key, String name) {
         super.add(key, name);
-        entityTypes.put(key.getDescriptionId(), name);
+        this.entityTypes.put(key.getDescriptionId().replace("entity.aether_ii.", ""), name);
     }
 
     public void addSpawnEggItem(DeferredItem<? extends SpawnEggItem> key, String name) {
@@ -2271,9 +2271,8 @@ Movement faster than sneaking will alert Crystaline type mobs.""");
     }
 
     public void addSpawnEggItem(DeferredItem<? extends SpawnEggItem> key) {
-//        SpawnEggItem item = key.get(); //todo
-//        EntityType<?> entitytype = item.getType(item.getDefaultInstance());
-//        this.add(item, entityTypes.get(entitytype.getDescriptionId()).concat(" Spawn Egg"));
+        String id = key.getId().getPath().replace("_spawn_egg", "");
+        this.add(key.asItem(), this.entityTypes.get(id).concat(" Spawn Egg"));
     }
 
     public void addMuralTitle(DeferredHolder<Mural, Mural> key, String title) {
