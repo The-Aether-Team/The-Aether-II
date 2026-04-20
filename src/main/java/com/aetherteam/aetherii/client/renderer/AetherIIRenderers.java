@@ -285,23 +285,6 @@ public class AetherIIRenderers {
     }
 
     public static void registerBakedModels(ModelEvent.ModifyBakingResult event) {
-        List<DeferredBlock<? extends Block>> fastBlocks = List.of(
-                AetherIIBlocks.SKYROOT_LEAF_PILE,
-                AetherIIBlocks.SKYPLANE_LEAF_PILE,
-                AetherIIBlocks.SKYBIRCH_LEAF_PILE,
-                AetherIIBlocks.SKYPINE_LEAF_PILE,
-                AetherIIBlocks.WISPROOT_LEAF_PILE,
-                AetherIIBlocks.WISPTOP_LEAF_PILE,
-                AetherIIBlocks.GREATROOT_LEAF_PILE,
-                AetherIIBlocks.GREATOAK_LEAF_PILE,
-                AetherIIBlocks.GREATBOA_LEAF_PILE,
-                AetherIIBlocks.AMBEROOT_LEAF_PILE,
-                AetherIIBlocks.AETHER_BUSH,
-                AetherIIBlocks.BLUEBERRY_BUSH,
-                AetherIIBlocks.POTTED_AETHER_BUSH,
-                AetherIIBlocks.POTTED_BLUEBERRY_BUSH,
-                AetherIIBlocks.TANGLED_BRANCHES,
-                AetherIIBlocks.UNDERGROWTH_LEAVES);
         List<DeferredBlock<? extends Block>> overlaidLeafBlocks = List.of(
                 AetherIIBlocks.SKYROOT_LEAVES,
                 AetherIIBlocks.SKYPLANE_LEAVES,
@@ -350,8 +333,7 @@ public class AetherIIRenderers {
                 AetherIIBlocks.BOSS_DOORWAY_BLOCK,
                 AetherIIBlocks.TREASURE_DOORWAY_BLOCK);
 
-//        getModels(event.getBakingResult().blockStateModels(), fastBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new FastModel(entry.getValue())));
-//        getModels(event.getBakingResult().blockStateModels(), overlaidLeafBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new OverlaidLeavesModel(entry.getValue())));
+        getModels(event.getBakingResult().blockStateModels(), overlaidLeafBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new OverlaidLeavesModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), breakingFixBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new BreakingFixModel(entry.getValue())));
 //        getModels(event.getBakingResult().blockStateModels(), List.of(AetherIIBlocks.MURAL)).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new MuralModel(entry.getValue()))); //todo
@@ -379,4 +361,24 @@ public class AetherIIRenderers {
 //        event.register(Identifier.fromNamespaceAndPath(AetherII.MODID, "copy_block"), CopyBlockSpecialRenderer.Unbaked.MAP_CODEC);
     }
 
+    public static boolean isFastBlock(BlockState state) {
+        List<Block> fastBlocks = List.of(
+                AetherIIBlocks.SKYROOT_LEAF_PILE.get(),
+                AetherIIBlocks.SKYPLANE_LEAF_PILE.get(),
+                AetherIIBlocks.SKYBIRCH_LEAF_PILE.get(),
+                AetherIIBlocks.SKYPINE_LEAF_PILE.get(),
+                AetherIIBlocks.WISPROOT_LEAF_PILE.get(),
+                AetherIIBlocks.WISPTOP_LEAF_PILE.get(),
+                AetherIIBlocks.GREATROOT_LEAF_PILE.get(),
+                AetherIIBlocks.GREATOAK_LEAF_PILE.get(),
+                AetherIIBlocks.GREATBOA_LEAF_PILE.get(),
+                AetherIIBlocks.AMBEROOT_LEAF_PILE.get(),
+                AetherIIBlocks.AETHER_BUSH.get(),
+                AetherIIBlocks.BLUEBERRY_BUSH.get(),
+                AetherIIBlocks.POTTED_AETHER_BUSH.get(),
+                AetherIIBlocks.POTTED_BLUEBERRY_BUSH.get(),
+                AetherIIBlocks.TANGLED_BRANCHES.get(),
+                AetherIIBlocks.UNDERGROWTH_LEAVES.get());
+        return fastBlocks.contains(state.getBlock());
+    }
 }
