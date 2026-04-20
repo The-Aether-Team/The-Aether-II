@@ -23,7 +23,7 @@ import net.minecraft.world.level.material.FluidState;
 
 import java.util.Optional;
 
-public interface IcestonePendantAbility extends FreezingBehavior<ItemStack> {
+public interface FreezingAccessory extends FreezingBehavior<ItemStack> {
     /**
      * Freezes blocks around the wearer in a radius of 1.9 as long as they aren't flying or in spectator. This also damages the Ice accessory for every 4 blocks frozen.
      *
@@ -63,31 +63,32 @@ public interface IcestonePendantAbility extends FreezingBehavior<ItemStack> {
      */
     @Override
     default int freezeFromRecipe(Level level, BlockPos pos, BlockPos origin, ItemStack source, int flag) {
-        if (level.isClientSide()) {
-            return 0;
-        }
-        if (!(level instanceof ServerLevel serverLevel)) {
-            return 0;
-        }
-        BlockState oldBlockState = level.getBlockState(pos);
-        FluidState fluidState = level.getFluidState(pos);
-
-        for (RecipeHolder<AccessoryFreezableRecipe> recipe : serverLevel.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.ACCESSORY_FREEZABLE.get())) {
-            AccessoryFreezableRecipe freezableRecipe = recipe.value();
-            if (fluidState.isEmpty() || oldBlockState.is(fluidState.createLegacyBlock().getBlock())) { // Default freezing behavior.
-                if (freezableRecipe.matches(level, pos, oldBlockState)) {
-                    BlockState newBlockState = freezableRecipe.getResultState(oldBlockState);
-                    Optional<CacheableFunction> function = freezableRecipe.getFunction();
-                    return this.freezeBlockAt(level, pos, origin, oldBlockState, newBlockState, function, source, flag);
-                }
-            } else if (!oldBlockState.hasProperty(BlockStateProperties.WATERLOGGED)) { // Breaks a block before freezing if it has a FluidState attached by default (this is different from waterlogging for blocks like Kelp and Seagrass).
+        if (level instanceof ServerLevel serverLevel) {
+            BlockState oldBlockState = level.getBlockState(pos);
+            FluidState fluidState = level.getFluidState(pos);
+            boolean shouldDestroy = false;
+            if (!fluidState.isEmpty() && !oldBlockState.is(fluidState.createLegacyBlock().getBlock()) && !oldBlockState.hasProperty(BlockStateProperties.WATERLOGGED)) { // Breaks a block before freezing if it has a FluidState attached by default (this is different from waterlogging for blocks like Kelp and Seagrass).
                 oldBlockState = fluidState.createLegacyBlock();
-                if (freezableRecipe.matches(level, pos, oldBlockState)) {
-                    level.destroyBlock(pos, true);
-                    BlockState newBlockState = freezableRecipe.getResultState(oldBlockState);
-                    Optional<CacheableFunction> function = freezableRecipe.getFunction();
-                    return this.freezeBlockAt(level, pos, origin, oldBlockState, newBlockState, function, source, flag);
+                shouldDestroy = true;
+            }
+            if (shouldDestroy) {
+                level.destroyBlock(pos, true);
+            }
+            BlockState finalOldBlockState = oldBlockState;
+
+            AccessoryFreezableRecipe freezableRecipe = null;
+
+            for (RecipeHolder<AccessoryFreezableRecipe> holder : serverLevel.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.ACCESSORY_FREEZABLE.get())) {
+                if (freezableRecipe == null || (freezableRecipe.getBiome().isEmpty() && holder.value().getBiome().isPresent())) {
+                    if (holder.value().matches(level, pos, finalOldBlockState)) {
+                        freezableRecipe = holder.value();
+                    }
                 }
+            }
+            if (freezableRecipe != null) {
+                BlockState newBlockState = freezableRecipe.getResultState(oldBlockState);
+                Optional<CacheableFunction> function = freezableRecipe.getFunction();
+                return this.freezeBlockAt(level, pos, origin, oldBlockState, newBlockState, function, source, flag);
             }
         }
         return 0;

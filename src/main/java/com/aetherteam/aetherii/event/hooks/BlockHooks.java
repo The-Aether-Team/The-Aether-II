@@ -45,8 +45,7 @@ public class BlockHooks {
     public static void sendIcestoneFreezableUpdateEvent(LevelAccessor accessor, BlockPos pos) {
         if (accessor instanceof ServerLevel level) {
             BlockState oldBlockState = level.getBlockState(pos);
-            FreezingBlock.cacheRecipes(level);
-            if (FreezingBlock.matchesCache(oldBlockState.getBlock(), oldBlockState, accessor.getBiome(pos)) != null) {
+            if (FreezingBlock.cachedBlocks.contains(oldBlockState.getBlock())) {
                 level.gameEvent(null, AetherIIGameEvents.ICESTONE_FREEZABLE_UPDATE, pos);
             }
         }
