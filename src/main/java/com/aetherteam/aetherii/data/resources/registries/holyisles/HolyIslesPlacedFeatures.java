@@ -364,8 +364,7 @@ public class HolyIslesPlacedFeatures {
 
         register(context, GRASS_FIELD,
                 configuredFeatures.getOrThrow(HolyIslesConfiguredFeatures.GRASS_FIELD),
-                CountPlacement.of(24),
-                ImprovedLayerPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, UniformInt.of(0, 1), 4),
+                ImprovedLayerPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, UniformInt.of(3, 6), 4),
                 BiomeFilter.biome(),
                 CountPlacement.of(80),
                 RandomOffsetPlacement.ofTriangle(12, 4),

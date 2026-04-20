@@ -2,15 +2,11 @@
   "feature": "aether_ii:grass_field",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 24
-    },
-    {
       "type": "aether_ii:improved_layer_placement",
       "count": {
         "type": "minecraft:uniform",
-        "max_inclusive": 1,
-        "min_inclusive": 0
+        "max_inclusive": 6,
+        "min_inclusive": 3
       },
       "heightmap": "WORLD_SURFACE_WG",
       "verticalBounds": 4
