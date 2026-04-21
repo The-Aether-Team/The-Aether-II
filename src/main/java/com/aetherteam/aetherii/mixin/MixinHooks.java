@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.mixin;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
-import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
@@ -12,15 +11,9 @@ import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.BrokenStack;
 import com.aetherteam.aetherii.network.packet.clientbound.AttackShockParticlePacket;
 import com.aetherteam.aetherii.network.packet.clientbound.AttackStabParticlePacket;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
-import net.minecraft.client.renderer.rendertype.RenderType;
-import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -41,8 +34,6 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.ApiStatus;
 import org.joml.Vector3f;
-
-import java.util.List;
 
 public class MixinHooks {
     @ApiStatus.Internal
@@ -199,11 +190,6 @@ public class MixinHooks {
             }
         }
         return particleOptions;
-    }
-
-    public static void renderIrradiated(PoseStack poseStack, MultiBufferSource bufferSource, int i, int j, int[] tints, List<BakedQuad> model, RenderType renderType) {
-        VertexConsumer vertexconsumer = VertexMultiConsumer.create(VertexMultiConsumer.create(bufferSource.getBuffer(AetherIIRenderTypes.irradiatedGlint())), bufferSource.getBuffer(renderType));
-        //ItemFeatureRendererAccessor.callRenderModelLists(poseStack, vertexconsumer, model, tints, i, j); //todo [is this method even used or can it be deleted?]
     }
 
     public static <T extends HumanoidRenderState> void positionMoaRider(T renderState, ModelPart head, ModelPart body, ModelPart rightArm, ModelPart leftArm, ModelPart rightLeg, ModelPart leftLeg) { //todo
