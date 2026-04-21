@@ -37,9 +37,9 @@ public class AetherIIColorResolvers {
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
 
         event.register(List.of(
-                grassColor(0, AETHER_GRASS_COLOR, 5.0F, 6.0F),
-                grassColor(1, AETHER_GRASS_COLOR, 5.0F, 6.0F),
-                grassColor(2, AETHER_GRASS_COLOR, 5.0F, 6.0F)
+                grassBlockColor(0, AETHER_GRASS_COLOR, 5.0F, 6.0F),
+                grassBlockColor(1, AETHER_GRASS_COLOR, 5.0F, 6.0F),
+                grassBlockColor(2, AETHER_GRASS_COLOR, 5.0F, 6.0F)
         ), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
 
         event.register(List.of(
@@ -78,14 +78,19 @@ public class AetherIIColorResolvers {
         };
     }
 
-    public static BlockTintSource fernColor(int defaultColor) {
+    public static BlockTintSource grassBlockColor(int tintIndex, int defaultColor, float darkSaturationOffset, float lightSaturationOffset) {
         return new BlockTintSource() {
             public int color(BlockState state) {
-                return defaultColor;
+                return createTriTintGrassColor(tintIndex, defaultColor, darkSaturationOffset, lightSaturationOffset);
             }
 
             public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
-                return getAverageColor(level, pos, GRASS_COLORS, defaultColor);
+                return createTriTintGrassColor(tintIndex, getAverageColor(level, pos, GRASS_COLORS, defaultColor), darkSaturationOffset, lightSaturationOffset);
+            }
+
+            @Override
+            public int colorAsTerrainParticle(BlockState state, BlockAndTintGetter level, BlockPos pos) {
+                return -1;
             }
         };
     }
@@ -98,6 +103,23 @@ public class AetherIIColorResolvers {
 
             public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
                 return createTriTintGrassColor(tintIndex, getAverageColor(level, pos, GRASS_COLORS, defaultColor), darkSaturationOffset, lightSaturationOffset);
+            }
+
+            @Override
+            public int colorAsTerrainParticle(BlockState state, BlockAndTintGetter level, BlockPos pos) {
+                return BlockTintSource.super.colorAsTerrainParticle(state, level, pos);
+            }
+        };
+    }
+
+    public static BlockTintSource fernColor(int defaultColor) {
+        return new BlockTintSource() {
+            public int color(BlockState state) {
+                return defaultColor;
+            }
+
+            public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
+                return getAverageColor(level, pos, GRASS_COLORS, defaultColor);
             }
         };
     }

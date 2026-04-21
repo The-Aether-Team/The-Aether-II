@@ -110,13 +110,6 @@ public class AetherIIClientExtensions {
         }
     };
 
-    public static final IClientBlockExtensions AETHER_GRASS = new IClientBlockExtensions() {
-//        @Override //todo
-//        public boolean areBreakingParticlesTinted(BlockState state, ClientLevel level, BlockPos pos) {
-//            return false;
-//        }
-    };
-
     public static final IClientItemExtensions GLIDER = new IClientItemExtensions() {
         @Nullable
         @Override
@@ -204,7 +197,6 @@ public class AetherIIClientExtensions {
         event.registerItem(MOA_SADDLE, AetherIIItems.MOA_SADDLE);
 
         event.registerBlock(UNSTABLE_BLOCK, AetherIIBlocks.UNSTABLE_HOLYSTONE.get(), AetherIIBlocks.UNSTABLE_UNDERSHALE.get(), AetherIIBlocks.FRAGILE_ARCTIC_ICE.get(), AetherIIBlocks.UNSTABLE_GUARDIAN_ROOTS.get());
-        event.registerBlock(AETHER_GRASS, AetherIIBlocks.AETHER_GRASS_BLOCK.get());
 
         event.registerFluidType(ALKAHEST_FLUID, AetherIIFluidTypes.ALKAHEST_TYPE.get());
 
