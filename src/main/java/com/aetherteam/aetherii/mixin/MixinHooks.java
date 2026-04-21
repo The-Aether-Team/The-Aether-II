@@ -192,7 +192,7 @@ public class MixinHooks {
         return brokenItem;
     }
 
-    public static ParticleOptions replaceSplashParticles(Entity entity, BlockPos pos, ParticleOptions particleOptions) { //TODO
+    public static ParticleOptions replaceSplashParticles(Entity entity, BlockPos pos, ParticleOptions particleOptions) {
         if (entity.level() instanceof ClientLevel clientLevel && clientLevel.getBiome(pos).is(AetherIITags.Biomes.THE_AETHER)) {
             if (particleOptions == ParticleTypes.SPLASH) {
                 return AetherIIParticleTypes.SPLASH.get();

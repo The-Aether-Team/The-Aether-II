@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.attachment.player;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
@@ -34,12 +33,6 @@ public class AbilityBehaviorAttachment {
 
     private boolean gravititeHoldingFloatingBlock = false;
     private boolean gravititeJumpUsed = true;
-
-//    private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
-//            Map.entry("setGlidingTimer", Triple.of(Type.INT, (object) -> this.setGlidingTimer((int) object), this::getGlidingTimer)),
-//            Map.entry("setGravititeJumpUsed", Triple.of(Type.BOOLEAN, (object) -> this.setGravititeJumpUsed((boolean) object), this::isGravititeJumpUsed)),
-//            Map.entry("setShouldSyncBetweenClients", Triple.of(Type.BOOLEAN, (object) -> this.setShouldSyncBetweenClients((boolean) object), this::shouldSyncBetweenClients)) //todo ?
-//    );
 
     public static final MapCodec<AbilityBehaviorAttachment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Codec.BOOL.fieldOf("can_refuel_glide").forGetter(AbilityBehaviorAttachment::getCanRefuelGlide),
