@@ -60,6 +60,7 @@
     "client.MultiPlayerGameModeMixin",
     "client.MusicManagerMixin",
     "client.PlayerItemInHandLayerMixin",
+    "client.SectionCompilerMixin",
     "client.TitleScreenMixin",
     "client.ToastManagerMixin",
     "client.accessor.AbstractWidgetAccessor",
