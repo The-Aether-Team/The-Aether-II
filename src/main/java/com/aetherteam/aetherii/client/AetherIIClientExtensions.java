@@ -19,7 +19,6 @@ import net.minecraft.client.renderer.fog.environment.FogEnvironment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -167,21 +166,6 @@ public class AetherIIClientExtensions {
     };
 
     public static final IClientFluidTypeExtensions ALKAHEST_FLUID = new IClientFluidTypeExtensions() {
-//        @Override //TODO
-//        public Identifier getStillTexture() {
-//            return Identifier.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_still");
-//        }
-//
-//        @Override
-//        public Identifier getFlowingTexture() {
-//            return Identifier.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_flow");
-//        }
-//
-//        @Override
-//        public Identifier getOverlayTexture() {
-//            return Identifier.fromNamespaceAndPath(AetherII.MODID, "fluid/alkahest_overlay");
-//        }
-
         @Override
         public Identifier getRenderOverlayTexture(Minecraft mc) {
             return Identifier.fromNamespaceAndPath(AetherII.MODID, "textures/misc/alkahest.png");
@@ -197,11 +181,6 @@ public class AetherIIClientExtensions {
             fogData.environmentalStart = 0F;
             fogData.environmentalEnd = 12.0F;
         }
-
-//        @Override
-//        public int getTintColor() {
-//            return 0xFFFFFFFF;
-//        }
     };
 
     public static final IClientMobEffectExtensions HIDE_EFFECT = new IClientMobEffectExtensions() {

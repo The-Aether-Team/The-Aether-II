@@ -68,6 +68,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIRenderers::registerLayerDefinition);
         neoBus.addListener(AetherIIRenderers::registerItemModels);
         neoBus.addListener(AetherIIRenderers::registerBlockStateModels);
+        neoBus.addListener(AetherIIRenderers::registerFluidModels);
         neoBus.addListener(AetherIIRenderers::registerBakedModels);
         neoBus.addListener(AetherIIRenderers::registerRenderStateModifier);
         neoBus.addListener(AetherIIRenderers::registerSpecialModelRenderers);
