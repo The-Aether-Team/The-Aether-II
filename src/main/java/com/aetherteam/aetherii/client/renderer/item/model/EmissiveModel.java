@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class EmissiveModel extends CuboidItemModelWrapper {
-    public static final Transformation TRANSFORMATION = new Transformation(new Vector3f(0.0F, 0.0F, 0.0F), null, new Vector3f(1.0F, 1.0F, 1.0F), null); //todo
+    public static final Transformation TRANSFORMATION = new Transformation(new Vector3f(0.0F, 0.0F, 0.0F), null, new Vector3f(1.0F, 1.0F, 1.0F), null);
 
     public EmissiveModel(QuadCollection quads, ModelRenderProperties properties, Matrix4fc transformation) {
         super(List.of(), quads, properties, transformation);

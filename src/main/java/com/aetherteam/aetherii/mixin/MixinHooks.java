@@ -16,13 +16,16 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
@@ -189,12 +192,12 @@ public class MixinHooks {
         return brokenItem;
     }
 
-    public static ParticleOptions replaceSplashParticles(Entity entity, ParticleOptions particleOptions) { //TODO
-//        if (entity.level() instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HolyIslesSpecialEffects) {
-//            if (particleOptions == ParticleTypes.SPLASH) {
-//                return AetherIIParticleTypes.SPLASH.get();
-//            }
-//        }
+    public static ParticleOptions replaceSplashParticles(Entity entity, BlockPos pos, ParticleOptions particleOptions) { //TODO
+        if (entity.level() instanceof ClientLevel clientLevel && clientLevel.getBiome(pos).is(AetherIITags.Biomes.THE_AETHER)) {
+            if (particleOptions == ParticleTypes.SPLASH) {
+                return AetherIIParticleTypes.SPLASH.get();
+            }
+        }
         return particleOptions;
     }
 

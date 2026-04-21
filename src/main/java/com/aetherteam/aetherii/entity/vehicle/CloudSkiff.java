@@ -2,8 +2,10 @@ package com.aetherteam.aetherii.entity.vehicle;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.natural.AercloudBlock;
+import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractBoatAccessor;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
@@ -112,9 +114,9 @@ public class CloudSkiff extends AbstractBoat implements RiderSitContext {
 
         if (this.isInWater()) {
             ParticleOptions splashParticle = ParticleTypes.SPLASH;
-//            if (this.level() instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HolyIslesSpecialEffects) { //TODO
-//                splashParticle = AetherIIParticleTypes.SPLASH.get();
-//            }
+            if (this.level() instanceof ClientLevel clientLevel && clientLevel.getBiome(this.blockPosition()).is(AetherIITags.Biomes.THE_AETHER)) {
+                splashParticle = AetherIIParticleTypes.SPLASH.get();
+            }
             for (int i = 0; i < 20; i++) {
                 this.level().addParticle(splashParticle, this.position().x() + particleOffset.x(), this.position().y(), this.position().z() + particleOffset.z(), vec3.x * -4.0, 1.5, vec3.z * -4.0);
             }

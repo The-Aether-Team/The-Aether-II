@@ -107,7 +107,7 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
     }
 
     public void generateHammerOfDemolition(Item item) {
-        Identifier inventorySprite = ModelTemplates.FLAT_HANDHELD_ITEM.create(item, TextureMapping.layer0(item), this.modelOutput); //todo
+        Identifier inventorySprite = ModelTemplates.FLAT_HANDHELD_ITEM.create(item, TextureMapping.layer0(item), this.modelOutput);
         List<SelectItemModel.SwitchCase<ItemDisplayContext>> normalList = List.of(
                 ItemModelUtils.when(ItemDisplayContext.GUI, ItemModelUtils.plainModel(inventorySprite)),
                 ItemModelUtils.when(ItemDisplayContext.GROUND, ItemModelUtils.plainModel(inventorySprite)),
