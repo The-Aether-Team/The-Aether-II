@@ -35,6 +35,7 @@
     "common.accessor.FireBlockAccessor",
     "common.accessor.LivingEntityAccessor",
     "common.accessor.MobEffectInstanceAccessor",
+    "common.accessor.NearestAttackableTargetGoalAccessor",
     "common.accessor.PerlinNoiseAccessor",
     "common.accessor.RecipeManagerAccessor",
     "common.accessor.SaplingBlockAccessor",

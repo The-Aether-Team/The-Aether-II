@@ -26,7 +26,7 @@ public class AetherIITextureMappings {
                 .put(TextureSlot.SIDE, new Material(side))
                 .put(TextureSlot.END, new Material(end))
                 .put(AetherIITextureSlots.EMISSIVE_SIDE, new Material(side.withSuffix("_emissive")))
-                .put(AetherIITextureSlots.EMISSIVE_END, new Material(Identifier.fromNamespaceAndPath(AetherII.MODID, "block/blank"))); //todo
+                .put(AetherIITextureSlots.EMISSIVE_END, new Material(Identifier.fromNamespaceAndPath(AetherII.MODID, "block/blank")));
     }
 
     public static TextureMapping block(Block block) {
