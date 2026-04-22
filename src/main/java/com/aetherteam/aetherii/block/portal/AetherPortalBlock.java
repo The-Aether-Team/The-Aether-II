@@ -104,7 +104,7 @@ public class AetherPortalBlock extends Block implements Portal {
             dimensiontransition$postdimensiontransition = AetherPortalForcer.PLAY_PORTAL_SOUND.then(p_351967_ -> p_351967_.placePortalTicket(blockpos));
         } else {
             Direction.Axis direction$axis = pEntity.level().getBlockState(pPos).getOptionalValue(AXIS).orElse(Direction.Axis.X);
-            Optional<BlockUtil.FoundRectangle> optional1 = portalForcer.createPortal(pExitPos, direction$axis);
+            Optional<BlockUtil.FoundRectangle> optional1 = portalForcer.createPortal(pExitPos, direction$axis, true);
             if (optional1.isEmpty()) {
                 AetherII.LOGGER.error("Unable to create a portal, likely target out of worldborder");
                 return null;
