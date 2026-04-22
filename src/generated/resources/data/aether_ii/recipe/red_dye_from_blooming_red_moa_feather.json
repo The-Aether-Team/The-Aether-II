@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "red_dye",
+  "ingredients": [
+    {
+      "neoforge:ingredient_type": "neoforge:components",
+      "components": {
+        "aether_ii:feather_color": "blooming_red"
+      },
+      "items": "aether_ii:moa_feather"
+    }
+  ],
+  "result": {
+    "id": "minecraft:red_dye"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "lime_dye",
+  "ingredients": [
+    {
+      "neoforge:ingredient_type": "neoforge:components",
+      "components": {
+        "aether_ii:feather_color": "lime"
+      },
+      "items": "aether_ii:moa_feather"
+    }
+  ],
+  "result": {
+    "id": "minecraft:lime_dye"
+  }
+}

@@ -31,6 +31,7 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class AetherIIRecipeData extends AetherIIRecipeProvider {
@@ -113,6 +114,24 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 AetherIIBlocks.RED_SKYROOT_BED.asItem(),
                 AetherIIBlocks.YELLOW_SKYROOT_BED.asItem(),
                 AetherIIBlocks.WHITE_SKYROOT_BED.asItem()
+        );
+        Map<DyeColor, Item> dyeMap = Map.ofEntries(
+                Map.entry(DyeColor.BLACK, Items.BLACK_DYE),
+                Map.entry(DyeColor.BLUE, Items.BLUE_DYE),
+                Map.entry(DyeColor.BROWN, Items.BROWN_DYE),
+                Map.entry(DyeColor.CYAN, Items.CYAN_DYE),
+                Map.entry(DyeColor.GRAY, Items.GRAY_DYE),
+                Map.entry(DyeColor.GREEN, Items.GREEN_DYE),
+                Map.entry(DyeColor.LIGHT_BLUE, Items.LIGHT_BLUE_DYE),
+                Map.entry(DyeColor.LIGHT_GRAY, Items.LIGHT_GRAY_DYE),
+                Map.entry(DyeColor.LIME, Items.LIME_DYE),
+                Map.entry(DyeColor.MAGENTA, Items.MAGENTA_DYE),
+                Map.entry(DyeColor.ORANGE, Items.ORANGE_DYE),
+                Map.entry(DyeColor.PINK, Items.PINK_DYE),
+                Map.entry(DyeColor.PURPLE, Items.PURPLE_DYE),
+                Map.entry(DyeColor.RED, Items.RED_DYE),
+                Map.entry(DyeColor.YELLOW, Items.YELLOW_DYE),
+                Map.entry(DyeColor.WHITE, Items.WHITE_DYE)
         );
 
         // Special
@@ -2234,14 +2253,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarEnchanting(RecipeCategory.MISC, AltarBookCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIBlocks.GRAVITITE_ORE, 4, 0.0F).group("gravitite").save(this.output, this.name("gravitite_plates_from_gravitite_ore"));
         this.altarEnchanting(RecipeCategory.MISC, AltarBookCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE, 4, 0.0F).group("gravitite").save(this.output, this.name("gravitite_plates_from_undershale_gravitite_ore"));
 
-//        for (var featherColor : Moa.FeatherColor.values()) { //todo
-//            var featherDye = DyeItem.byId(featherColor.dyeColor.getId());
-//            ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, featherDye, 1)
-//                    .requires(DataComponentIngredient.of(false, AetherIIDataComponents.FEATHER_COLOR, featherColor, AetherIIItems.MOA_FEATHER))
-//                    .group(getItemName(featherDye))
-//                    .unlockedBy(getHasName(AetherIIItems.MOA_FEATHER), has(AetherIIItems.MOA_FEATHER))
-//                    .save(this.output, this.name(getItemName(featherDye) + "_from_" + featherColor.getSerializedName() + "_moa_feather"));
-//        }
+        for (Moa.FeatherColor featherColor : Moa.FeatherColor.values()) {
+            Item featherDye = dyeMap.get(featherColor.dyeColor);
+            ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, featherDye, 1)
+                    .requires(DataComponentIngredient.of(false, AetherIIDataComponents.FEATHER_COLOR, featherColor, AetherIIItems.MOA_FEATHER))
+                    .group(getItemName(featherDye))
+                    .unlockedBy(getHasName(AetherIIItems.MOA_FEATHER), has(AetherIIItems.MOA_FEATHER))
+                    .save(this.output, this.name(getItemName(featherDye) + "_from_" + featherColor.getSerializedName() + "_moa_feather"));
+        }
 
         this.oneToOneConversionRecipe(Items.PURPLE_DYE, AetherIIItems.COCKATRICE_FEATHER.get(), "purple_dye");
 

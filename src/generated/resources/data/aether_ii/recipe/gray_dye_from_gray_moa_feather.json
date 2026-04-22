@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "gray_dye",
+  "ingredients": [
+    {
+      "neoforge:ingredient_type": "neoforge:components",
+      "components": {
+        "aether_ii:feather_color": "gray"
+      },
+      "items": "aether_ii:moa_feather"
+    }
+  ],
+  "result": {
+    "id": "minecraft:gray_dye"
+  }
+}
