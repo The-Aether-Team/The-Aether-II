@@ -78,7 +78,6 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onPlayerSetSpawn);
         bus.addListener(AetherIIEventListeners::canPlayerSleep);
         bus.addListener(AetherIIEventListeners::onPlayerWakeUp);
-        bus.addListener(AetherIIEventListeners::onPlayersFinishSleeping);
         bus.addListener(AetherIIEventListeners::onArmorDamaged);
         bus.addListener(AetherIIEventListeners::onPlayerMount);
 
@@ -116,7 +115,7 @@ public class AetherIIEventListeners {
         player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).login(player);
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).login(player);
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).login(player);
-        player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).login(player); //todo verify
+        player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).login(player);
         BiomeHooks.sendColors(player);
     }
 
@@ -256,13 +255,6 @@ public class AetherIIEventListeners {
         Player player = event.getEntity();
 
         PlayerHooks.breakBedrollAfterSleeping(player);
-    }
-
-    public static void onPlayersFinishSleeping(SleepFinishedTimeEvent event) {
-//        LevelAccessor level = event.getLevel();
-//        long newTime = event.getNewTime(); //todo
-//
-//        PlayerHooks.resetAetherDayAndWeather(level, newTime);
     }
 
     public static void onArmorDamaged(ArmorHurtEvent event) {
