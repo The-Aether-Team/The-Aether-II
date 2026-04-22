@@ -36,7 +36,7 @@ public class StructureCoverFeature extends Feature<StructureCoverConfiguration> 
             for (BlockPos position : positions) {
                 double density = noise.compute(new DensityFunction.SinglePointContext(position.getX(), position.getY(), position.getZ()));
                 if (position.getY() == pos.getY() + i) {
-                    double densitySmoothed = density - Mth.clamp(position.distToCenterSqr(pos.getX(), pos.getY() + i, pos.getZ()) * 0.025D - config.radius() * 0.075D, 0, 10);
+                    double densitySmoothed = density - Mth.clamp(position.distToCenterSqr(pos.getX(), pos.getY() + i, pos.getZ()) * config.inclineFactor() - config.radius() * config.scatterFactor(), 0, 10);
                     if (densitySmoothed > 0) {
                         level.setBlock(position, config.block().getState(level, context.random(), position), 2);
                     }
