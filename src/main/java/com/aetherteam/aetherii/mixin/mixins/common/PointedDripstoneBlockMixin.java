@@ -6,6 +6,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.TypedInstance;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -56,11 +57,11 @@ public class PointedDripstoneBlockMixin {
 //            return original.call(instance, block);
 //        }
 //    }
-
-//    @WrapOperation(method = "isTip(Lnet/minecraft/world/level/block/state/BlockState;Z)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
-//    private static boolean isTip(BlockState instance, Block block, Operation<Boolean> original) {
+//
+//    @WrapOperation(method = "isTip(Lnet/minecraft/world/level/block/state/BlockState;Z)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/TypedInstance;is(Ljava/lang/Object;)Z"))
+//    private static <T> boolean isTip(TypedInstance<T> instance, T block, Operation<Boolean> original) {
 //        if (block == Blocks.POINTED_DRIPSTONE) {
-//            return original.call(instance, block) || instance.getBlock() instanceof AbstractPointedStoneBlock;
+//            return original.call(instance, block) || (instance instanceof BlockState state && state.getBlock() instanceof AbstractPointedStoneBlock);
 //        } else {
 //            return original.call(instance, block);
 //        }
