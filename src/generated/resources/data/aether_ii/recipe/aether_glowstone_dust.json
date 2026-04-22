@@ -2,8 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "aether_ii:ambrosium_shard",
-    "@": "minecraft:quartz"
+    "#": "#aether_ii:gems/ambrosium",
+    "@": "#c:gems/quartz"
   },
   "pattern": [
     "#@",

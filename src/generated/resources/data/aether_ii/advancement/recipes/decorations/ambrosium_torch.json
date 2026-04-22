@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:ambrosium_shard"
+            "items": "#aether_ii:gems/ambrosium"
           }
         ]
       },

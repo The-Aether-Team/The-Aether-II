@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "#": "#aether_ii:guardian_logs",
-    "A": "aether_ii:ambrosium_shard"
+    "A": "#aether_ii:gems/ambrosium"
   },
   "pattern": [
     "#",

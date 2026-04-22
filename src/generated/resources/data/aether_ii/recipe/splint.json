@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "aether_ii:skyroot_stick",
+    "#aether_ii:rods/skyroot",
     "#aether_ii:cloudwool"
   ],
   "result": {

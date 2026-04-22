@@ -2,9 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "aether_ii:ambrosium_shard",
+    "#": "#aether_ii:gems/ambrosium",
     "L": "#minecraft:logs",
-    "S": "aether_ii:skyroot_stick"
+    "S": "#aether_ii:rods/skyroot"
   },
   "pattern": [
     " S ",

@@ -4,7 +4,7 @@
   "ingredients": [
     "aether_ii:water_vial",
     "aether_ii:valkyrie_wings",
-    "aether_ii:ambrosium_shard"
+    "#aether_ii:gems/ambrosium"
   ],
   "result": {
     "id": "aether_ii:valkyrie_tea"

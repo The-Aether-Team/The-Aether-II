@@ -1036,7 +1036,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.LUCENT_GUARDIAN_ROOTS, 4)
                 .define('#', AetherIIBlocks.GUARDIAN_ROOTS)
-                .define('A', AetherIIItems.AMBROSIUM_SHARD)
+                .define('A', AetherIITags.Items.GEMS_AMBROSIUM)
                 .pattern("#A")
                 .pattern("A#")
                 .unlockedBy(getHasName(AetherIIBlocks.GUARDIAN_ROOTS), has(AetherIIBlocks.GUARDIAN_ROOTS))
@@ -1044,7 +1044,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GUARDIAN_LAMP)
                 .define('#', AetherIITags.Items.GUARDIAN_LOGS)
-                .define('A', AetherIIItems.AMBROSIUM_SHARD)
+                .define('A', AetherIITags.Items.GEMS_AMBROSIUM)
                 .pattern("#")
                 .pattern("A")
                 .pattern("#")
@@ -1176,11 +1176,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         // Utility
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBROSIUM_TORCH.get(), 4)
-                .define('A', AetherIIItems.AMBROSIUM_SHARD.get())
+                .define('A', AetherIITags.Items.GEMS_AMBROSIUM)
                 .define('/', AetherIITags.Items.RODS_SKYROOT)
                 .pattern("A")
                 .pattern("/")
-                .unlockedBy(getHasName(AetherIIItems.AMBROSIUM_SHARD.get()), has(AetherIIItems.AMBROSIUM_SHARD.get()))
+                .unlockedBy("has_ambrosium_shard", has(AetherIITags.Items.GEMS_AMBROSIUM))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_LANTERN.get())
                 .define('#', AetherIIItems.ARKENIUM_CHIP.get())
@@ -1274,13 +1274,13 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBROSIUM_CAMPFIRE.get())
                 .define('L', ItemTags.LOGS)
-                .define('S', AetherIIItems.SKYROOT_STICK) //TODO TAG
-                .define('#', AetherIIItems.AMBROSIUM_SHARD) //TODO TAG
+                .define('S', AetherIITags.Items.RODS_SKYROOT)
+                .define('#', AetherIITags.Items.GEMS_AMBROSIUM)
                 .pattern(" S ")
                 .pattern("S#S")
                 .pattern("LLL")
-                .unlockedBy("has_stick", has(AetherIIItems.SKYROOT_STICK))
-                .unlockedBy("has_ambrosium", has(AetherIIItems.AMBROSIUM_SHARD))
+                .unlockedBy("has_stick", has(AetherIITags.Items.RODS_SKYROOT))
+                .unlockedBy("has_ambrosium_shard", has(AetherIITags.Items.GEMS_AMBROSIUM))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_CHEST.get())
                 .define('#', AetherIITags.Items.PLANKS_CRAFTING)
@@ -1656,12 +1656,12 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_scatterglass", has(AetherIIBlocks.SCATTERGLASS.get()))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter,RecipeCategory.MISC, Items.GLOWSTONE_DUST, 4)
-                .define('#', AetherIIItems.AMBROSIUM_SHARD)
-                .define('@', Items.QUARTZ)
+                .define('#', AetherIITags.Items.GEMS_AMBROSIUM)
+                .define('@', Tags.Items.GEMS_QUARTZ)
                 .pattern("#@")
                 .pattern("@#")
-                .unlockedBy("has_ambrosium_shard", has(AetherIIItems.AMBROSIUM_SHARD.get()))
-                .unlockedBy("has_quartz", has(Items.QUARTZ))
+                .unlockedBy("has_ambrosium_shard", has(AetherIITags.Items.GEMS_AMBROSIUM))
+                .unlockedBy("has_quartz", has(Tags.Items.GEMS_QUARTZ))
                 .save(this.output, this.name("aether_glowstone_dust"));
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.MUSIC_PLAYER.get())
                 .define('A', AetherIIItems.GOLDEN_AMBER)
@@ -2327,7 +2327,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
 
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, new ItemStackTemplate(AetherIIItems.SPLINT.get()))
-                .requires(AetherIIItems.SKYROOT_STICK.get())
+                .requires(AetherIITags.Items.RODS_SKYROOT)
                 .requires(AetherIITags.Items.CLOUDWOOL)
                 .unlockedBy("has_cloudwool", has(AetherIITags.Items.CLOUDWOOL))
                 .save(this.output);
@@ -2352,17 +2352,17 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, new ItemStackTemplate(AetherIIItems.VALKYRIE_TEA.get()))
                 .requires(AetherIIItems.WATER_VIAL.get())
                 .requires(AetherIIItems.VALKYRIE_WINGS.get())
-                .requires(AetherIIItems.AMBROSIUM_SHARD.get())
+                .requires(AetherIITags.Items.GEMS_AMBROSIUM)
                 .unlockedBy("has_water_vial", has(AetherIIItems.WATER_VIAL.get()))
                 .save(this.output);
 
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, new ItemStackTemplate(AetherIIItems.HEALING_STONE, 1, DataComponentPatch.builder().set(AetherIIDataComponents.HEALING_STONE_CHARGES.get(), 1).build()))
-                .define('A', AetherIIItems.AMBROSIUM_SHARD.get())
+                .define('A', AetherIITags.Items.GEMS_AMBROSIUM)
                 .define('H', AetherIITags.Items.STONE_CRAFTING)
                 .pattern("HAH")
                 .pattern("AAA")
                 .pattern("HAH")
-                .unlockedBy("has_ambrosium_shard", has(AetherIIItems.AMBROSIUM_SHARD.get()))
+                .unlockedBy("has_ambrosium_shard", has(AetherIITags.Items.GEMS_AMBROSIUM))
                 .save(this.output);
 
         this.altarEnchanting(RecipeCategory.MISC, AltarBookCategory.MISC,

@@ -160,6 +160,7 @@ public class AetherIITags {
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
         public static final TagKey<Item> GEMS_AMBER = tag("gems/amber");
+        public static final TagKey<Item> GEMS_AMBROSIUM = tag("gems/ambrosium");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");
         public static final TagKey<Item> PLATES_ARKENIUM = tag("plates/arkenium");
         public static final TagKey<Item> PLATES_GRAVITITE = tag("plates/gravitite");
